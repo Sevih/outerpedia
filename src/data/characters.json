@@ -1,0 +1,191 @@
+[
+  {
+    "id": "2000001",
+    "name": "K",
+    "rarity": 2,
+    "element": "Fire",
+    "class": "Defender",
+    "subclass": "Sweeper",
+    "portrait": "/images/characters/portrait/CT_2000001.png",
+    "fullArt": "/images/characters/full/IMG_2000001.png",
+    "imageOffsetX": 9,
+    "imageOffsetY": -22,
+    "imageZoom": 3,
+    "buffs": [
+      {
+        "key": "Dual Attack",
+        "label": "Dual Attack",
+        "icon": "dualattack.png"
+      },
+      {
+        "key": "Double Dual Attack",
+        "label": "Double Dual Attack",
+        "icon": "doubledualattack.png"
+      },
+      {
+        "key": "Barrier",
+        "label": "Barrier",
+        "icon": "barrier.png"
+      },
+      {
+        "key": "Reduces Allies Skill Cooldowns",
+        "label": "Reduces Allies Skill Cooldowns",
+        "icon": "reducesalliesskillcooldowns.png"
+      }
+    ],
+    "debuffs": [
+      {
+        "key": "Buff Removal",
+        "label": "Buff Removal",
+        "icon": "buffremoval.png"
+      },
+      {
+        "key": "Taunted",
+        "label": "Taunted",
+        "icon": "taunted.png"
+      },
+      {
+        "key": "Reduced Accuracy",
+        "label": "Reduced Accuracy",
+        "icon": "reducedaccuracy.png"
+      }
+    ]
+  },
+  {
+    "id": "2000002",
+    "name": "Vera",
+    "rarity": 2,
+    "element": "Dark",
+    "class": "Striker",
+    "subclass": "Attacker",
+    "portrait": "/images/characters/portrait/CT_2000002.png",
+    "fullArt": "/images/characters/full/IMG_2000002.png",
+    "imageOffsetX": -7,
+    "imageOffsetY": -12,
+    "imageZoom": 2.5,
+    "buffs": [
+      {
+        "key": "Critical Hit Chance",
+        "label": "Critical Hit Chance",
+        "icon": "criticalhitchance.png"
+      }
+    ],
+    "debuffs": []
+  },
+  {
+    "id": "2000003",
+    "name": "Snow",
+    "rarity": 2,
+    "element": "Water",
+    "class": "Ranger",
+    "subclass": "Tactician",
+    "portrait": "/images/characters/portrait/CT_2000003.png",
+    "fullArt": "/images/characters/full/IMG_2000003.png",
+    "imageOffsetX": 0,
+    "imageOffsetY": -28,
+    "imageZoom": 2.5,
+    "buffs": [
+      {
+        "key": "Critical Hit Chance",
+        "label": "Critical Hit Chance",
+        "icon": "criticalhitchance.png"
+      },
+      {
+        "key": "Generate Chain Points",
+        "label": "Generate Chain Points",
+        "icon": "generatechainpoints.png"
+      }
+    ],
+    "debuffs": [
+      {
+        "key": "Frozen",
+        "label": "Frozen",
+        "icon": "frozen.png"
+      }
+    ]
+  },
+  {
+    "id": "2000011",
+    "name": "Lily",
+    "rarity": 1,
+    "element": "Water",
+    "class": "Ranger",
+    "subclass": "Tactician",
+    "portrait": "/images/characters/portrait/CT_2000011.png",
+    "fullArt": "/images/characters/full/IMG_2000011.png",
+    "imageOffsetX": 0,
+    "imageOffsetY": 0,
+    "imageZoom": 2,
+    "buffs": [
+      {
+        "key": "Dual Attack",
+        "label": "Dual Attack",
+        "icon": "dualattack.png"
+      },
+      {
+        "key": "Increase Priority",
+        "label": "Increase Priority",
+        "icon": "increasepriority.png"
+      }
+    ],
+    "debuffs": [
+      {
+        "key": "Marked",
+        "label": "Marked",
+        "icon": "marked.png"
+      },
+      {
+        "key": "Reduced Attack",
+        "label": "Reduced Attack",
+        "icon": "reducedattack.png"
+      }
+    ]
+  },
+  {
+    "id": "2000042",
+    "name": "Leo",
+    "rarity": 3,
+    "element": "Light",
+    "class": "Defender",
+    "subclass": "Phalanx",
+    "portrait": "/images/characters/portrait/CT_2000042.png",
+    "fullArt": "/images/characters/full/IMG_2000042.png",
+    "imageOffsetX": 13,
+    "imageOffsetY": -33,
+    "imageZoom": 4,
+    "buffs": [
+      {
+        "key": "Barrier",
+        "label": "Barrier",
+        "icon": "barrier.png"
+      },
+      {
+        "key": "Increased Evasion",
+        "label": "Increased Evasion",
+        "icon": "increasedevasion.png"
+      },
+      {
+        "key": "Invulnerability",
+        "label": "Invulnerability",
+        "icon": "invulnerability.png"
+      },
+      {
+        "key": "Increased Resilience",
+        "label": "Increased Resilience",
+        "icon": "increasedresilience.png"
+      },
+      {
+        "key": "Reduces Allies Skill Cooldowns",
+        "label": "Reduces Allies Skill Cooldowns",
+        "icon": "reducesalliesskillcooldowns.png"
+      }
+    ],
+    "debuffs": [
+      {
+        "key": "Taunted",
+        "label": "Taunted",
+        "icon": "taunted.png"
+      }
+    ]
+  }
+]
