@@ -32,6 +32,7 @@ export default function Header() {
                 alt={item.label}
                 width={18}
                 height={18}
+                style={{ width: 18, height: 18 }}
               />
               <span>{item.label}</span>
             </Link>

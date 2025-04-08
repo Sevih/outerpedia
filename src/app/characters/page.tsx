@@ -11,7 +11,9 @@ function ElementIcon({ element }: { element: string }) {
       <Image
         src={`/images/ui/elem/${element.toLowerCase()}.png`}
         alt={element}
-        fill
+        width={24}
+        height={24}
+        style={{ width: 24, height: 24 }}
         className="object-contain"
       />
     </div>
@@ -25,6 +27,7 @@ function ClassIcon({ className }: { className: string }) {
       alt={className}
       width={24}
       height={24}
+      style={{ width: 24, height: 24 }}
       className="inline-block"
     />
   )
@@ -199,6 +202,7 @@ export default function CharactersPage() {
                   alt={cl.name}
                   width={24}
                   height={24}
+                  style={{ width: 24, height: 24 }}
                 />
               ) : (
                 <span className="text-white text-sm font-bold">All</span>
@@ -257,6 +261,7 @@ export default function CharactersPage() {
                 src={char.portrait}
                 alt={char.name}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
               />
               <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1 ">
@@ -267,6 +272,7 @@ export default function CharactersPage() {
                     alt="star"
                     width={20}
                     height={20}
+                    style={{ width: 20, height: 20 }}
                   />
                 ))}
               </div>

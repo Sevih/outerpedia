@@ -3,8 +3,8 @@ import characters from '@/data/characters.json'
 import Image from 'next/image'
 import type { Metadata } from 'next'
 
-export default async function CharacterDetailPage(params: { params: { name: string } }) {
-  const name = params.params.name.toLowerCase()
+export default async function CharacterDetailPage(params: { params: Promise<{ name: string }> }) {
+  const name = (await params.params).name.toLowerCase()
   const character = characters.find((c) => c.name.toLowerCase() === name)
 
   if (!character) return notFound()
@@ -19,6 +19,8 @@ export default async function CharacterDetailPage(params: { params: { name: stri
             alt={character.name}
             width={400}
             height={600}
+            priority={true}
+            style={{ width: 400, height: 600 }}
             className="object-contain"
           />
         </div>
@@ -30,20 +32,25 @@ export default async function CharacterDetailPage(params: { params: { name: stri
               alt={character.element}
               width={24}
               height={24}
+              style={{ width: 24, height: 24 }}
             />
+            <span className="text-lg">{character.element}</span>
             <Image
               src={`/images/ui/class/${character.class.toLowerCase()}.png`}
               alt={character.class}
               width={24}
               height={24}
+              style={{ width: 24, height: 24 }}
             />
+            <span className="text-lg">{character.class}</span>
             <Image
               src={`/images/ui/class/${character.subclass.toLowerCase()}.png`}
               alt={character.subclass}
               width={24}
               height={24}
+              style={{ width: 24, height: 24 }}
             />
-            <span className="text-lg">{character.element} • {character.class} • {character.subclass}</span>
+            <span className="text-lg">{character.class}</span>
           </div>
 
           <div>
@@ -55,6 +62,7 @@ export default async function CharacterDetailPage(params: { params: { name: stri
                 alt="star"
                 width={20}
                 height={20}
+                style={{ width: 20, height: 20 }}
                 className="inline-block -ml-1 first:ml-0"
               />
             ))}
@@ -87,18 +95,17 @@ export default async function CharacterDetailPage(params: { params: { name: stri
   )
 }
 
-export async function generateMetadata(
-    { params }: { params: { name: string } }
-  ): Promise<Metadata> {
-    const name = params.name.toLowerCase()
-    const character = characters.find((c) => c.name.toLowerCase() === name)
-  
-    if (!character) {
-      return { title: 'Outerpedia' }
-    }
-  
-    return {
-      title: `Outerpedia : ${character.name}`
-    }
+export async function generateMetadata(props: { params: Promise<{ name: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const name = params.name.toLowerCase()
+  const character = characters.find((c) => c.name.toLowerCase() === name)
+
+  if (!character) {
+    return { title: 'Outerpedia' }
   }
+
+  return {
+    title: `Outerpedia : ${character.name}`
+  }
+}
   
