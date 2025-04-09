@@ -4,7 +4,11 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Mets ici tes <link> vers Google Fonts ou autres polices */}
+        {/* Exemple de chargement Google Font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />
