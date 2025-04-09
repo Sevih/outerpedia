@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import weapons from "@/data/weapon.json";
 import equipmentTypes from "@/data/equipment_types.json";
+import Image from 'next/image';
 
 interface Weapon {
   name: string;
@@ -19,7 +20,6 @@ interface Weapon {
 }
 
 const WeaponCard = ({ weapon }: { weapon: Weapon }) => {
-  const secondStats = equipmentTypes.weapon.mainStats.secondOptions;
   const subStatCount = equipmentTypes.weapon.subStatNumber;
 
   const hoverRef = useRef<HTMLDivElement>(null);
@@ -106,16 +106,41 @@ const WeaponCard = ({ weapon }: { weapon: Weapon }) => {
     <p className="text-red-300 mb-2 text-sm">{weapon.rarity} Weapon</p>
 
     <div className="flex items-center gap-2">
-      <img src="/images/ui/effect/CM_Stat_Icon_ATK.png" alt="ATK" className="w-4 h-4" />
-      <p>ATK</p>
-      <span className="ml-auto">1 200</span>
-    </div>
-    <div className="flex items-center gap-2 mt-2">
-      <img src="/images/ui/effect/CM_Stat_Icon_ATK.png" alt="ATK%" className="w-4 h-4" />
-      <img src="/images/ui/effect/CM_Stat_Icon_DEF.png" alt="DEF%" className="w-4 h-4" />
-      <img src="/images/ui/effect/CM_Stat_Icon_HP.png" alt="HP%" className="w-4 h-4" />
-      <p>At Random</p>
-    </div>
+  <Image
+    src="/images/ui/effect/CM_Stat_Icon_ATK.png"
+    alt="ATK"
+    width={16}
+    height={16}
+    className="w-4 h-4"
+  />
+  <p>ATK</p>
+  <span className="ml-auto">1 200</span>
+</div>
+
+<div className="flex items-center gap-2 mt-2">
+  <Image
+    src="/images/ui/effect/CM_Stat_Icon_ATK.png"
+    alt="ATK%"
+    width={16}
+    height={16}
+    className="w-4 h-4"
+  />
+  <Image
+    src="/images/ui/effect/CM_Stat_Icon_DEF.png"
+    alt="DEF%"
+    width={16}
+    height={16}
+    className="w-4 h-4"
+  />
+  <Image
+    src="/images/ui/effect/CM_Stat_Icon_HP.png"
+    alt="HP%"
+    width={16}
+    height={16}
+    className="w-4 h-4"
+  />
+  <p>At Random</p>
+</div>
 
     <p className="text-center mt-2 font-semibold text-sm">Apply {subStatCount} random substat(s)</p>
 
