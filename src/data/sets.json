@@ -1,0 +1,17 @@
+[
+    {
+      "name": "Critical Hit",
+      "icon" : "",
+      "effect_2":"Crit Chance +12%",
+      "effect_4":"Crit Chance +10%",
+      "class" : null
+      
+    },
+    {
+       "name": "Critical Strike",
+       "icon" : "",
+       "effect_2":null,
+       "effect_4":"Crit Dmg +50%",   
+       "class" : null
+    }
+]

@@ -1,0 +1,27 @@
+[
+    {
+      "name": "Death's Hold",
+      "type": "amulet",
+      "rarity": "Legendary",
+      "image": "regular_amulet.png",
+      "effect" : "Increases Penetration by 2% when hit (max 10 stacks)",
+      "mainStats" : ["EFF","CHD","PEN","HP%"],
+      "effect_icon" : "",
+      "class" : "Striker",
+      "source": "Special Request",
+      "boss" : "Blazing Knight Meteos"
+      
+    },
+    {
+        "name": "Gorgon's Vanity [Mage]",
+        "type": "amulet",
+        "rarity": "Legendary",
+        "image": "irregular_amulet1.png",
+        "effect" : "Increases Speed proportional to missing Health (Max 25%)",
+        "mainStats" : ["EFF","CHD","PEN","HP%","LS","EVA"],
+        "effect_icon" : "",
+        "class" : "Striker",
+        "source": "Irregular Extermination",
+        "boss" : "Infiltration Operation"        
+      }
+  ]

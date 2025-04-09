@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import Header from './components/Header'
+import Footer from "./components/Footer";
 
 // 👇 Import de la police via next/font
 import { Inter } from 'next/font/google'
@@ -22,13 +23,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* 👇 On applique la classe générée automatiquement par la police */}
       <body className={`${inter.className} text-white`}>
-        <Header />
-        <main className="container mx-auto p-4">
-          {children}
-        </main>
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <main className="flex-1 container mx-auto p-4">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
-  )
+  );  
 }
