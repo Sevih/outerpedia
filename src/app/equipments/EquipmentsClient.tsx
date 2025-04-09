@@ -69,116 +69,120 @@ const WeaponCard = ({ weapon }: { weapon: Weapon }) => {
       onMouseLeave={handleMouseLeave}
       ref={hoverRef}
     >
-      <img
+      <Image
         src="/images/ui/bg_item_leg.png"
         alt="Background"
+        width={110}
+        height={110}
         className="absolute inset-0 w-full h-full object-cover z-0 rounded"
       />
       <div className="absolute top-1 right-1 z-30 flex flex-col items-end gap-1">
         {weapon.effect_icon && (
-          <img
+          <Image
             src={`/images/ui/effect/${weapon.effect_icon}`}
             alt="Effect Icon"
+            width={24}
+            height={24}
             className="w-6 h-6"
           />
         )}
         {weapon.class && (
-          <img
+          <Image
             src={`/images/ui/class/${weapon.class.toLowerCase()}.png`}
             alt={weapon.class}
+            width={24}
+            height={24}
             className="w-6 h-6"
           />
         )}
       </div>
       <div className="absolute inset-0 z-10">
-        <img
+        <Image
           src={`/images/equipment/${weapon.image}`}
           alt={weapon.name}
+          width={110}
+          height={110}
           className="w-full h-full object-contain rounded"
         />
       </div>
       {isHovering && (
-  <div
-    className="z-50 w-[320px] min-h-[200px] bg-gray-900 text-white rounded p-4 text-xs flex flex-col shadow-lg transition-opacity duration-150 ease-in-out opacity-100"
-    style={getHoverStyle()}
-  >
-    <p className="text-red-400 font-bold text-sm leading-tight mb-2">{weapon.name}</p>
-    <p className="text-red-300 mb-2 text-sm">{weapon.rarity} Weapon</p>
+        <div
+          className="z-50 w-[320px] min-h-[200px] bg-gray-900 text-white rounded p-4 text-xs flex flex-col shadow-lg transition-opacity duration-150 ease-in-out opacity-100"
+          style={getHoverStyle()}
+        >
+          <p className="text-red-400 font-bold text-sm leading-tight mb-2">{weapon.name}</p>
+          <p className="text-red-300 mb-2 text-sm">{weapon.rarity} Weapon</p>
 
-    <div className="flex items-center gap-2">
-  <Image
-    src="/images/ui/effect/CM_Stat_Icon_ATK.png"
-    alt="ATK"
-    width={16}
-    height={16}
-    className="w-4 h-4"
-  />
-  <p>ATK</p>
-  <span className="ml-auto">1 200</span>
-</div>
+          <div className="flex items-center gap-2">
+            <Image
+              src="/images/ui/effect/CM_Stat_Icon_ATK.png"
+              alt="ATK"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
+            <p>ATK</p>
+            <span className="ml-auto">1 200</span>
+          </div>
 
-<div className="flex items-center gap-2 mt-2">
-  <Image
-    src="/images/ui/effect/CM_Stat_Icon_ATK.png"
-    alt="ATK%"
-    width={16}
-    height={16}
-    className="w-4 h-4"
-  />
-  <Image
-    src="/images/ui/effect/CM_Stat_Icon_DEF.png"
-    alt="DEF%"
-    width={16}
-    height={16}
-    className="w-4 h-4"
-  />
-  <Image
-    src="/images/ui/effect/CM_Stat_Icon_HP.png"
-    alt="HP%"
-    width={16}
-    height={16}
-    className="w-4 h-4"
-  />
-  <p>At Random</p>
-</div>
+          <div className="flex items-center gap-2 mt-2">
+            <Image
+              src="/images/ui/effect/CM_Stat_Icon_ATK.png"
+              alt="ATK%"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
+            <Image
+              src="/images/ui/effect/CM_Stat_Icon_DEF.png"
+              alt="DEF%"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
+            <Image
+              src="/images/ui/effect/CM_Stat_Icon_HP.png"
+              alt="HP%"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
+            <p>At Random</p>
+          </div>
 
-    <p className="text-center mt-2 font-semibold text-sm">Apply {subStatCount} random substat(s)</p>
+          <p className="text-center mt-2 font-semibold text-sm">Apply {subStatCount} random substat(s)</p>
 
-    <div className="mt-3 bg-gray-700 rounded p-2">
-      <div className="flex items-center gap-2 font-semibold">
-        {weapon.effect_icon && (
-          <img
-            src={`/images/ui/effect/${weapon.effect_icon}`}
-            alt="Effect Icon"
-            className="w-6 h-6"
-          />
-        )}
-        <p>{weapon.effect_name}</p>
-      </div>
-      <p className="mt-2 text-sm">{weapon.effect_desc}</p>
-    </div>
+          <div className="mt-3 bg-gray-700 rounded p-2">
+            <div className="flex items-center gap-2 font-semibold">
+              {weapon.effect_icon && (
+                <Image
+                  src={`/images/ui/effect/${weapon.effect_icon}`}
+                  alt="Effect Icon"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6"
+                />
+              )}
+              <p>{weapon.effect_name}</p>
+            </div>
+            <p className="mt-2 text-sm">{weapon.effect_desc}</p>
+          </div>
 
-    {/* NEW: Source and Boss info */}
-    {(weapon.source || weapon.boss || weapon.mode) && (
-    <div className="mt-3 border-t border-gray-600 pt-2 text-[11px] text-gray-300">
-        {weapon.source && (
-            <p><span className="text-gray-400 font-semibold">Source:</span> {weapon.source}</p>
-        )}
-        {weapon.boss && (
-            <p>
-                <span className="text-gray-400 font-semibold">Boss:</span> {weapon.boss}
-            </p>
-        )}
-        {!weapon.boss && weapon.mode && (
-            <p>
-                <span className="text-gray-400 font-semibold">Mode:</span> {weapon.mode}
-            </p>
-        )}
-    </div>
-    )}
-    </div>
-)}
-
+          {(weapon.source || weapon.boss || weapon.mode) && (
+            <div className="mt-3 border-t border-gray-600 pt-2 text-[11px] text-gray-300">
+              {weapon.source && (
+                <p><span className="text-gray-400 font-semibold">Source:</span> {weapon.source}</p>
+              )}
+              {weapon.boss && (
+                <p><span className="text-gray-400 font-semibold">Boss:</span> {weapon.boss}</p>
+              )}
+              {!weapon.boss && weapon.mode && (
+                <p><span className="text-gray-400 font-semibold">Mode:</span> {weapon.mode}</p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
