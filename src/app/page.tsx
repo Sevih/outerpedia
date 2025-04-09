@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image' // 👈 Ajout de l'import
 
 const categories = [
   { name: 'Characters', path: '/characters' },
@@ -35,8 +36,20 @@ export default function Home() {
       <section>
         <h2 className="text-2xl font-semibold mb-4">Current Banners</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <img src="/images/banners/ryu_lion.jpg" alt="Ryu Lion" className="rounded-xl shadow-lg" />
-          <img src="/images/banners/bell_cranel.jpg" alt="Bell Cranel" className="rounded-xl shadow-lg" />
+          <Image
+            src="/images/banners/ryu_lion.jpg"
+            alt="Ryu Lion"
+            width={600}
+            height={300}
+            className="rounded-xl shadow-lg object-cover w-full h-auto"
+          />
+          <Image
+            src="/images/banners/bell_cranel.jpg"
+            alt="Bell Cranel"
+            width={600}
+            height={300}
+            className="rounded-xl shadow-lg object-cover w-full h-auto"
+          />
         </div>
       </section>
     </div>
