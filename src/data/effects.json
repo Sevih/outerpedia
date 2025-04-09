@@ -1,0 +1,86 @@
+{
+  "buffs": {
+    "Dual Attack": {
+      "label": "Dual Attack",
+      "icon": "dualattack.png"
+    },
+    "Double Dual Attack": {
+      "label": "Double Dual Attack",
+      "icon": "doubledualattack.png"
+    },
+    "Barrier": {
+      "label": "Barrier",
+      "icon": "barrier.png"
+    },
+    "Reduces Allies Skill Cooldowns": {
+      "label": "Reduces Allies Skill Cooldowns",
+      "icon": "reducesalliesskillcooldowns.png"
+    },
+    "Critical Hit Chance": {
+      "label": "Critical Hit Chance",
+      "icon": "criticalhitchance.png"
+    },
+    "Generate Chain Points": {
+      "label": "Generate Chain Points",
+      "icon": "generatechainpoints.png"
+    },
+    "Increase Priority": {
+      "label": "Increase Priority",
+      "icon": "increasepriority.png"
+    },
+    "Increased Evasion": {
+      "label": "Increased Evasion",
+      "icon": "increasedevasion.png"
+    },
+    "Invulnerability": {
+      "label": "Invulnerability",
+      "icon": "invulnerability.png"
+    },
+    "Increased Resilience": {
+      "label": "Increased Resilience",
+      "icon": "increasedresilience.png"
+    },
+    "Increase Attack": {
+      "label": "Increase Attack",
+      "icon": "reducedattack.png"
+    },
+    "Increased Speed": {
+      "label": "Increased Speed",
+      "icon": "Increased Speed.png"
+    },
+    "Stealth": {
+      "label": "Stealth",
+      "icon": "Stealth.png"
+    },
+    "Extra Turn": {
+      "label": "Extra Turn",
+      "icon": "Extra Turn.png"
+    }
+  },
+  "debuffs": {
+    "Buff Removal": {
+      "label": "Buff Removal",
+      "icon": "buffremoval.png"
+    },
+    "Taunted": {
+      "label": "Taunted",
+      "icon": "taunted.png"
+    },
+    "Reduced Accuracy": {
+      "label": "Reduced Accuracy",
+      "icon": "reducedaccuracy.png"
+    },
+    "Frozen": {
+      "label": "Frozen",
+      "icon": "frozen.png"
+    },
+    "Marked": {
+      "label": "Marked",
+      "icon": "marked.png"
+    },
+    "Reduced Attack": {
+      "label": "Reduced Attack",
+      "icon": "reducedattack.png"
+    }
+  }
+}

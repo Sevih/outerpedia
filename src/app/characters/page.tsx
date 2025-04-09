@@ -1,6 +1,7 @@
 'use client'
 
 import characters from '@/data/characters.json'
+import effects from '@/data/effects.json'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -66,12 +67,8 @@ export default function CharactersPage() {
   const [selectedDebuffs, setSelectedDebuffs] = useState<string[]>([])
   const [effectLogic, setEffectLogic] = useState<'AND' | 'OR'>('OR')
 
-  const allBuffs = Array.from(
-    new Map(characters.flatMap((c) => c.buffs || []).map((b) => [b.key, b])).values()
-  )
-  const allDebuffs = Array.from(
-    new Map(characters.flatMap((c) => c.debuffs || []).map((d) => [d.key, d])).values()
-  )
+  const allBuffs = Object.entries(effects.buffs).map(([key, data]) => ({ key, ...data }))
+  const allDebuffs = Object.entries(effects.debuffs).map(([key, data]) => ({ key, ...data }))
 
   const toggleEffect = (
     key: string,
@@ -90,19 +87,31 @@ export default function CharactersPage() {
     const classMatch = !classFilter || char.class === classFilter
     const rarityMatch = rarityFilter === null || char.rarity === rarityFilter
 
-    const hasBuffs =
-      selectedBuffs.length === 0 ||
-      (effectLogic === 'AND'
-        ? selectedBuffs.every((b) => char.buffs?.some((e: any) => e.key === b))
-        : selectedBuffs.some((b) => char.buffs?.some((e: any) => e.key === b)))
+    const hasBuffs = selectedBuffs.length > 0
+  ? (effectLogic === 'AND'
+    ? selectedBuffs.every((b) => char.buffs?.includes(b))
+    : selectedBuffs.some((b) => char.buffs?.includes(b)))
+  : false
 
-    const hasDebuffs =
-      selectedDebuffs.length === 0 ||
-      (effectLogic === 'AND'
-        ? selectedDebuffs.every((d) => char.debuffs?.some((e: any) => e.key === d))
-        : selectedDebuffs.some((d) => char.debuffs?.some((e: any) => e.key === d)))
+    const hasDebuffs = selectedDebuffs.length > 0
+      ? (effectLogic === 'AND'
+        ? selectedDebuffs.every((d) => (char.debuffs as string[])?.includes(d))
+        : selectedDebuffs.some((d) => (char.debuffs as string[])?.includes(d))      )
+      : false
 
-    return elementMatch && classMatch && rarityMatch && hasBuffs && hasDebuffs
+    let effectMatch = true
+    if (selectedBuffs.length > 0 && selectedDebuffs.length > 0) {
+      effectMatch = effectLogic === 'AND'
+        ? hasBuffs && hasDebuffs
+        : hasBuffs || hasDebuffs
+    } else if (selectedBuffs.length > 0) {
+      effectMatch = hasBuffs
+    } else if (selectedDebuffs.length > 0) {
+      effectMatch = hasDebuffs
+    }
+
+
+    return elementMatch && classMatch && rarityMatch && effectMatch
   })
 
   const elements = [
@@ -211,7 +220,7 @@ export default function CharactersPage() {
           ))}
         </div>
       </div>
-      
+
       <div className="text-center space-y-2">
         <p className="text-sm text-gray-300">Filter by buffs</p>
         <div className="flex flex-wrap justify-center gap-1">

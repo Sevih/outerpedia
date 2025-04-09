@@ -8,47 +8,16 @@
     "subclass": "Sweeper",
     "portrait": "/images/characters/portrait/CT_2000001.png",
     "fullArt": "/images/characters/full/IMG_2000001.png",
-    "imageOffsetX": 9,
-    "imageOffsetY": -22,
-    "imageZoom": 3,
     "buffs": [
-      {
-        "key": "Dual Attack",
-        "label": "Dual Attack",
-        "icon": "dualattack.png"
-      },
-      {
-        "key": "Double Dual Attack",
-        "label": "Double Dual Attack",
-        "icon": "doubledualattack.png"
-      },
-      {
-        "key": "Barrier",
-        "label": "Barrier",
-        "icon": "barrier.png"
-      },
-      {
-        "key": "Reduces Allies Skill Cooldowns",
-        "label": "Reduces Allies Skill Cooldowns",
-        "icon": "reducesalliesskillcooldowns.png"
-      }
+      "Dual Attack",
+      "Double Dual Attack",
+      "Barrier",
+      "Reduces Allies Skill Cooldowns"
     ],
     "debuffs": [
-      {
-        "key": "Buff Removal",
-        "label": "Buff Removal",
-        "icon": "buffremoval.png"
-      },
-      {
-        "key": "Taunted",
-        "label": "Taunted",
-        "icon": "taunted.png"
-      },
-      {
-        "key": "Reduced Accuracy",
-        "label": "Reduced Accuracy",
-        "icon": "reducedaccuracy.png"
-      }
+      "Buff Removal",
+      "Taunted",
+      "Reduced Accuracy"
     ]
   },
   {
@@ -60,15 +29,8 @@
     "subclass": "Attacker",
     "portrait": "/images/characters/portrait/CT_2000002.png",
     "fullArt": "/images/characters/full/IMG_2000002.png",
-    "imageOffsetX": -7,
-    "imageOffsetY": -12,
-    "imageZoom": 2.5,
     "buffs": [
-      {
-        "key": "Critical Hit Chance",
-        "label": "Critical Hit Chance",
-        "icon": "criticalhitchance.png"
-      }
+      "Critical Hit Chance"
     ],
     "debuffs": []
   },
@@ -81,27 +43,13 @@
     "subclass": "Tactician",
     "portrait": "/images/characters/portrait/CT_2000003.png",
     "fullArt": "/images/characters/full/IMG_2000003.png",
-    "imageOffsetX": 0,
-    "imageOffsetY": -28,
-    "imageZoom": 2.5,
     "buffs": [
-      {
-        "key": "Critical Hit Chance",
-        "label": "Critical Hit Chance",
-        "icon": "criticalhitchance.png"
-      },
-      {
-        "key": "Generate Chain Points",
-        "label": "Generate Chain Points",
-        "icon": "generatechainpoints.png"
-      }
+      "Critical Hit Chance",
+      "Generate Chain Points"
     ],
     "debuffs": [
-      {
-        "key": "Frozen",
-        "label": "Frozen",
-        "icon": "frozen.png"
-      }
+      "Frozen",
+      "Burned"
     ]
   },
   {
@@ -113,32 +61,13 @@
     "subclass": "Tactician",
     "portrait": "/images/characters/portrait/CT_2000011.png",
     "fullArt": "/images/characters/full/IMG_2000011.png",
-    "imageOffsetX": 0,
-    "imageOffsetY": 0,
-    "imageZoom": 2,
     "buffs": [
-      {
-        "key": "Dual Attack",
-        "label": "Dual Attack",
-        "icon": "dualattack.png"
-      },
-      {
-        "key": "Increase Priority",
-        "label": "Increase Priority",
-        "icon": "increasepriority.png"
-      }
+      "Dual Attack",
+      "Increase Priority"
     ],
     "debuffs": [
-      {
-        "key": "Marked",
-        "label": "Marked",
-        "icon": "marked.png"
-      },
-      {
-        "key": "Reduced Attack",
-        "label": "Reduced Attack",
-        "icon": "reducedattack.png"
-      }
+      "Marked",
+      "Reduced Attack"
     ]
   },
   {
@@ -150,41 +79,79 @@
     "subclass": "Phalanx",
     "portrait": "/images/characters/portrait/CT_2000042.png",
     "fullArt": "/images/characters/full/IMG_2000042.png",
-    "imageOffsetX": 13,
-    "imageOffsetY": -33,
-    "imageZoom": 4,
     "buffs": [
-      {
-        "key": "Barrier",
-        "label": "Barrier",
-        "icon": "barrier.png"
-      },
-      {
-        "key": "Increased Evasion",
-        "label": "Increased Evasion",
-        "icon": "increasedevasion.png"
-      },
-      {
-        "key": "Invulnerability",
-        "label": "Invulnerability",
-        "icon": "invulnerability.png"
-      },
-      {
-        "key": "Increased Resilience",
-        "label": "Increased Resilience",
-        "icon": "increasedresilience.png"
-      },
-      {
-        "key": "Reduces Allies Skill Cooldowns",
-        "label": "Reduces Allies Skill Cooldowns",
-        "icon": "reducesalliesskillcooldowns.png"
-      }
+      "Barrier",
+      "Increased Evasion",
+      "Invulnerability",
+      "Increased Resilience",
+      "Reduces Allies Skill Cooldowns"
     ],
     "debuffs": [
+      "Taunted"
+    ]
+  },
+  {
+    "id": "2000078",
+    "name": "Fatal",
+    "rarity": 3,
+    "element": "Water",
+    "class": "Ranger",
+    "subclass": "Vanguard",
+    "portrait": "/images/characters/portrait/CT_2000078.png",
+    "fullArt": "/images/characters/full/IMG_2000078.png",
+    "video": "qAnXxxixtfs",
+    "dual_effect": "After attacking, has 40% chance to grant increased Attack to the caster for 2 turn(s).",
+    "dual_wgr": 3,
+    "type_chain": "Finish",
+    "chain_wgr": 6,
+    "chain_effect": "After attacking, has 100% chance to grant increased Attack to all allies for 2 turn(s).",
+    "buffs": [
+      "Increase Attack",
+      "Increased Speed",
+      "Stealth",
+      "Extra Turn"
+    ],
+    "debuffs": [],
+    "skills": [
       {
-        "key": "Taunted",
-        "label": "Taunted",
-        "icon": "taunted.png"
+        "name": "Deathly Acrobatics",
+        "icon": "/images/characters/skills/Skill_First_2000078.png",
+        "description": "Attacks an enemy, and has 40% chance to grant increased Attack to the caster for 2 turns. Damage dealt increases when granted Stealth",
+        "cooldown": "",
+        "wgr": 2,
+        "burnEffect": []
+      },
+      {
+        "name": "Curtain of Darkness",
+        "icon": "/images/characters/skills/Skill_Second_2000078.png",
+        "description": "Removes all debuffs from the caster and grant increased Speed for 2 turns, then attacks an enemy. Grants Stealth to the caster for 1 turn",
+        "cooldown": 3,
+        "wgr": 2,
+        "burnEffect": [
+          {
+            "level": 1,
+            "cost": "80",
+            "effect": "Increases damage"
+          },
+          {
+            "level": 2,
+            "cost": "120",
+            "effect": "+1 turn Stealth duration"
+          },
+          {
+            "level": 3,
+            "cost": "160",
+            "effect": "Increases Penetration by 30%"
+          }
+        ]
+      },
+      {
+        "name": "Requiem Serket",
+        "icon": "/images/characters/skills/Skill_Ultimate_2000078.png",
+        "description": "Attacks an enemy, and when the enemy is killed, grants an extra turn. When attacking a Boss, ignores 100% of the target's defense. When granted Stealth, enemies killed by this skill cannot be Resurrected or Revived",
+        "cooldown": 5,
+        "wgr": 3,
+        "burnEffect": []
       }
     ]
   }
