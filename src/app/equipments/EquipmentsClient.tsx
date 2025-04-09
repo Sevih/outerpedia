@@ -14,8 +14,8 @@ interface Weapon {
   effect_icon: string;
   class: string;
   source: string;
-  boss: string;
-  mode: string;
+  boss: string | null;
+  mode?: string;
 }
 
 const WeaponCard = ({ weapon }: { weapon: Weapon }) => {
