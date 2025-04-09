@@ -34,6 +34,7 @@ function ClassIcon({ className }: { className: string }) {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function EffectIcon({ effect, type }: { effect: any; type: 'buff' | 'debuff' }) {
   const style =
     type === 'buff' ? 'bg-gray-700 hover:bg-blue-800/70' : 'bg-gray-700 hover:bg-red-800/70'
