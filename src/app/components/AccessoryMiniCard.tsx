@@ -41,8 +41,8 @@ const AccessoryMiniCard = ({ accessory }: { accessory: AmuletMini }) => {
           <Image
             src={`/images/ui/effect/TI_Icon_UO_Weapon_${accessory.effect_icon}.png`}
             alt="Effect"
-            width={20}
-            height={20}
+            width={16}
+            height={16}
             className="absolute top-1 right-1 z-10"
             unoptimized
           />
@@ -52,8 +52,8 @@ const AccessoryMiniCard = ({ accessory }: { accessory: AmuletMini }) => {
           <Image
             src={`/images/ui/class/${accessory.class.toLowerCase()}.png`}
             alt={accessory.class}
-            width={20}
-            height={20}
+            width={16}
+            height={16}
             className="absolute bottom-1 right-1 z-10"
             unoptimized
           />

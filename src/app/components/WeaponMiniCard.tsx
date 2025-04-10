@@ -42,8 +42,8 @@ const WeaponMiniCard = ({ weapon }: { weapon: WeaponMini }) => {
           <Image
             src={`/images/ui/effect/TI_Icon_UO_Weapon_${weapon.effect_icon}.png`}
             alt="Effect"
-            width={20}
-            height={20}
+            width={16}
+            height={16}
             className="absolute top-1 right-1 z-10"
             unoptimized
           />
@@ -53,8 +53,8 @@ const WeaponMiniCard = ({ weapon }: { weapon: WeaponMini }) => {
           <Image
             src={`/images/ui/class/${weapon.class.toLowerCase()}.png`}
             alt={weapon.class}
-            width={20}
-            height={20}
+            width={16}
+            height={16}
             className="absolute bottom-1 right-1 z-10"
             unoptimized
           />
