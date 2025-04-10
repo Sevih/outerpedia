@@ -4,23 +4,19 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import classDataRaw from '@/data/class.json'
 import type { ClassDataMap } from '@/types/types'
-import { highlightKeywordsAndNumbers } from '@/utils/textHighlighter';
+import { highlightKeywordsAndNumbers } from '@/utils/textHighlighter'
 import WeaponMiniCard from "@/app/components/WeaponMiniCard"
 import AccessoryMiniCard from "@/app/components/AccessoryMiniCard"
 import rawWeapons from "@/data/weapon.json"
 import rawAmulets from "@/data/amulet.json"
 import SetMiniCard from "@/app/components/SetMiniCard"
-import type { WeaponMini, AmuletMini, EquipmentBase } from "@/types/equipment"
+import type { EquipmentBase } from "@/types/equipment"
 import RecommendedGearTabs from "@/app/components/RecommendedGearTabs"
-
 
 const weapons = rawWeapons as unknown as EquipmentBase[]
 const amulets = rawAmulets as unknown as EquipmentBase[]
 const classData = classDataRaw as ClassDataMap
 
-type GearReference = { name: string; mainStat: string; usage?: string }
-
-// Page de détails d'un personnage
 export default async function CharacterDetailPage(params: { params: Promise<{ name: string }> }) {
   const name = (await params.params).name.toLowerCase()
   const character = characters.find((c) => c.name.toLowerCase() === name)
@@ -30,74 +26,6 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
   const classInfo = classData[character.class as keyof typeof classData]
   const subclassInfo = classInfo?.subclasses?.[character.subclass as keyof typeof classInfo.subclasses]
   const statLabels = ["Health","Defense","Evasion", "Accuracy","Speed","Attack"]
-
-
-
-  type GearReference = { name: string; mainStat: string; usage?: string }
-
-function buildRecommendedMini<T extends EquipmentBase>(
-  refs: GearReference[] | undefined,
-  fullList: T[]
-): T[] {
-  return (
-    refs
-      ?.map(ref => {
-        const item = fullList.find(i => i.name === ref.name)
-        if (!item) return null
-
-        return {
-          ...item,
-          forcedMainStat: ref.mainStat,
-          ...(ref.usage ? { usage: ref.usage } : {}),
-        } as T
-      })
-      .filter((x): x is T => x !== null) ?? []
-  )
-}
-
-  
-function renderRecommendedGearBlock(mode: 'PVE' | 'PVP') {
-  if (!character) return null; // sécurité typescript
-  const gear = mode === 'PVE' ? character.recommendedGearPVE : character.recommendedGearPVP
-
-  const recommendedWeapons = buildRecommendedMini<WeaponMini>(gear?.Weapon, weapons)
-  const recommendedAmulets = buildRecommendedMini<AmuletMini>(gear?.Amulet, amulets)
-
-  return (
-    <div className="mt-6">
-      <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Gear {mode}</h2>
-      <div className="flex flex-col md:flex-row justify-center gap-10 text-center">
-        
-        {/* Armes */}
-        <div className="flex flex-col items-center gap-2">
-          <h3 className="text-lg font-semibold text-white mb-1">Weapons</h3>
-          {recommendedWeapons.map((weapon, idx) => (
-            <WeaponMiniCard key={`weapon-${mode}-${idx}`} weapon={weapon} />
-          ))}
-        </div>
-
-        {/* Accessoires */}
-        <div className="flex flex-col items-center gap-2">
-          <h3 className="text-lg font-semibold text-white mb-1">Accessories</h3>
-          {recommendedAmulets.map((amulet, idx) => (
-            <AccessoryMiniCard key={`amulet-${mode}-${idx}`} accessory={amulet} />
-          ))}
-        </div>
-
-        {/* Sets */}
-        <div className="flex flex-col items-center">
-          <h3 className="text-lg font-semibold text-white mb-1">Sets</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {gear?.Set?.map((sets, idx) => (
-              <SetMiniCard key={`set-${mode}-${idx}`} sets={sets} />
-            ))}
-          </div>
-        </div>
-
-      </div>
-    </div>
-  )
-}
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -204,7 +132,6 @@ function renderRecommendedGearBlock(mode: 'PVE' | 'PVP') {
         {character.skills?.slice(0, 3).map((skill, index) => (
           <div key={index} className="p-4 rounded text-white">            
             <div className="flex items-start gap-2 mb-2">
-              {/* Icône de skill avec éventuel badge B */}
               <div className="relative w-12 h-12">
                 <Image
                   src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.id}.png`} 
@@ -220,8 +147,6 @@ function renderRecommendedGearBlock(mode: 'PVE' | 'PVP') {
                   </div>
                 )}
               </div>
-
-              {/* Nom du skill + WGR + cooldown */}
               <div>
                 <p className="text-lg font-semibold">{skill.name}</p>
                 <p className="text-sm text-gray-400 italic mb-1">
@@ -230,14 +155,12 @@ function renderRecommendedGearBlock(mode: 'PVE' | 'PVP') {
                 </p>
               </div>
             </div>
-            {/* Description avec colorisation */}
             <p className="text-sm text-gray-200 whitespace-pre-line">
               {highlightKeywordsAndNumbers(skill.description)}
             </p>
           </div>
         ))}
 
-        {/* Blocs vides s'il y a moins de 3 skills */}
         {Array.from({ length: 3 - (character.skills?.length || 0) }).map((_, i) => (
           <div key={`empty-${i}`} className="bg-gray-800 p-4 rounded text-center text-gray-500">
             No Skill
@@ -247,7 +170,6 @@ function renderRecommendedGearBlock(mode: 'PVE' | 'PVP') {
 
       {/* Section burn + chain/dual attack */}
       <div className="flex flex-col lg:flex-row gap-6 mt-6">
-        {/* Affichage des effets de burn sous forme de cartes */}
         <div className="flex-1 p-2 rounded text-white">
           {(() => {
             const skillWithBurn = character.skills?.find(s => s.burnEffect && s.burnEffect.length > 0);
@@ -263,15 +185,12 @@ function renderRecommendedGearBlock(mode: 'PVE' | 'PVP') {
                     className="relative w-[185px] h-[262px] bg-cover bg-center rounded overflow-hidden text-white transform transition-transform duration-200 hover:scale-105 hover:shadow-lg hover:ring-[1px] hover:ring-yellow-400 hover:ring-offset-[0.2px] cursor-pointer"
                     style={{ backgroundImage: `url(/images/ui/Burst${burn.level}.png)` }}
                   >
-                    {/* Coût en haut à droite */}
                     <div
                       className="absolute top-2.5 right-2.5 text-[15px] font-bold rounded-full flex items-center justify-center"
                       style={{ width: '26px', height: '26px' }}
                     >
                       {burn.cost}
                     </div>
-
-                    {/* Texte d'effet centré dans la zone noire */}
                     <div
                       className="absolute text-center text-[11px] leading-snug text-white drop-shadow-md"
                       style={{
@@ -295,9 +214,8 @@ function renderRecommendedGearBlock(mode: 'PVE' | 'PVP') {
             );
           })()}
         </div>
-        {/* Section chain/dual attack */}
+
         <div className="flex-1 p-4 rounded text-white flex flex-col gap-6">
-          {/* Bloc Chain Attack */}
           <div className="flex gap-4 items-start">
             <div className="w-16 h-16 shrink-0">
               <Image
@@ -317,44 +235,31 @@ function renderRecommendedGearBlock(mode: 'PVE' | 'PVP') {
             </div>
           </div>
 
-            {/* Bloc Dual Attack */}
-            <div className="flex gap-4 items-start">
-              <div className="w-16 h-16 shrink-0">
-                <Image
-                  src={`/images/characters/chain/Skill_ChainPassive_${character.element}_Join.png`}
-                  alt={`Dual icon for ${character.element}`}
-                  width={64}
-                  height={64}
-                  className="object-contain"
-                />
-              </div>
-              <div>
-                <p className="font-semibold mb-1">Dual Attack Effect</p>
-                <p className="text-sm text-gray-400 italic mb-1">Weakness Gauge Reduction : {character.dual_wgr || '—'}</p>
-                <p className="text-sm text-gray-200">
-                  {highlightKeywordsAndNumbers(character.dual_effect ?? '') || '—'}
-                </p>
-              </div>
+          <div className="flex gap-4 items-start">
+            <div className="w-16 h-16 shrink-0">
+              <Image
+                src={`/images/characters/chain/Skill_ChainPassive_${character.element}_Join.png`}
+                alt={`Dual icon for ${character.element}`}
+                width={64}
+                height={64}
+                className="object-contain"
+              />
+            </div>
+            <div>
+              <p className="font-semibold mb-1">Dual Attack Effect</p>
+              <p className="text-sm text-gray-400 italic mb-1">Weakness Gauge Reduction : {character.dual_wgr || '—'}</p>
+              <p className="text-sm text-gray-200">
+                {highlightKeywordsAndNumbers(character.dual_effect ?? '') || '—'}
+              </p>
             </div>
           </div>
-          </div>
-      
-          <RecommendedGearTabs
-  character={character}
-  weapons={weapons}
-  amulets={amulets}
-/>
+        </div>
+      </div>
 
+      {/* Gear */}
+      <RecommendedGearTabs character={character} weapons={weapons} amulets={amulets} />
 
-
-
-
-
-
-
-
-
-      {/* Section vidéo */}
+      {/* Vidéo */}
       <div className="w-full rounded overflow-hidden mt-6" style={{ height: '450px' }}>
         <iframe
           className="w-full h-full"
