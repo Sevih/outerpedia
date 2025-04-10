@@ -6,9 +6,20 @@ import Image from "next/image"
 import WeaponMiniCard from "@/app/components/WeaponMiniCard"
 import AccessoryMiniCard from "@/app/components/AccessoryMiniCard"
 import SetMiniCard from "@/app/components/SetMiniCard"
-import type { WeaponMini, AmuletMini, EquipmentBase } from "@/types/equipment"
+import type { WeaponMini, AmuletMini, EquipmentBase, MiniSet } from "@/types/equipment"
 
 type GearReference = { name: string; mainStat: string; usage?: string }
+
+type RecommendedGearSet = {
+  Weapon?: GearReference[]
+  Amulet?: GearReference[]
+  Set?: MiniSet[][]
+}
+
+type CharacterGearData = {
+  recommendedGearPVE?: RecommendedGearSet
+  recommendedGearPVP?: RecommendedGearSet
+}
 
 function buildRecommendedMini<T extends EquipmentBase>(
   refs: GearReference[] | undefined,
@@ -34,7 +45,7 @@ export default function RecommendedGearTabs({
   weapons,
   amulets,
 }: {
-  character: any
+  character: CharacterGearData
   weapons: EquipmentBase[]
   amulets: EquipmentBase[]
 }) {
@@ -131,8 +142,8 @@ export default function RecommendedGearTabs({
             <div className="flex flex-col items-center">
               <h3 className="text-lg font-semibold text-white mb-1">Sets</h3>
               <div className="flex flex-wrap justify-center gap-4">
-                {gear?.Set?.map((sets: any, idx: number) => (
-                  <SetMiniCard key={`set-${gearTab}-${idx}`} sets={sets} />
+                {gear?.Set?.map((setCombo, idx) => (
+                  <SetMiniCard key={`set-${gearTab}-${idx}`} sets={setCombo} />
                 ))}
               </div>
             </div>

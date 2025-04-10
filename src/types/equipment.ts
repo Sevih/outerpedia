@@ -13,5 +13,11 @@ export interface EquipmentBase {
   effect_desc4: string
 }
 
+export type MiniSet = {
+  name: string
+  count: number
+}
+
+
 export type WeaponMini = EquipmentBase
 export type AmuletMini = EquipmentBase
