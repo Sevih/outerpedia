@@ -268,7 +268,7 @@ export default function CharactersPage() {
           >
             <div className="relative w-[120px] h-[231px]">
               <Image
-                src={char.portrait}
+                src={`/images/characters/portrait/CT_${char.id}.png`} 
                 alt={char.name}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

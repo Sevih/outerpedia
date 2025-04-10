@@ -92,8 +92,9 @@ const WeaponCard = ({ weapon }: { weapon: Weapon }) => {
 
       <div className="tooltip absolute top-full z-50 w-[320px] min-h-[200px] bg-gray-900 text-white rounded p-4 text-xs flex flex-col shadow-lg
         opacity-0 scale-95 translate-y-1 invisible
-        transition-all duration-200 ease-out delay-100
-        group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 group-hover:visible group-hover:delay-0">
+        transition-all duration-100 ease-out delay-0
+        group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 group-hover:visible group-hover:delay-100">
+
         <p className="text-red-400 font-bold text-sm leading-tight mb-2">{weapon.name}</p>
         <p className="text-red-300 mb-2 text-sm">{weapon.rarity} Weapon</p>
 

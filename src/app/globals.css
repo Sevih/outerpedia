@@ -75,3 +75,13 @@ img.debuff {
   right: auto !important;
   top : 70px;
 }
+
+button:hover,
+[role="button"]:hover,
+[onclick]:hover {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}

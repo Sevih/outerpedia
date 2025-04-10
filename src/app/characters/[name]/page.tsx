@@ -5,9 +5,20 @@ import type { Metadata } from 'next'
 import classDataRaw from '@/data/class.json'
 import type { ClassDataMap } from '@/types/types'
 import { highlightKeywordsAndNumbers } from '@/utils/textHighlighter';
+import WeaponMiniCard from "@/app/components/WeaponMiniCard"
+import AccessoryMiniCard from "@/app/components/AccessoryMiniCard"
+import rawWeapons from "@/data/weapon.json"
+import rawAmulets from "@/data/amulet.json"
+import SetMiniCard from "@/app/components/SetMiniCard"
+import type { WeaponMini, AmuletMini, EquipmentBase } from "@/types/equipment"
+import RecommendedGearTabs from "@/app/components/RecommendedGearTabs"
 
 
+const weapons = rawWeapons as unknown as EquipmentBase[]
+const amulets = rawAmulets as unknown as EquipmentBase[]
 const classData = classDataRaw as ClassDataMap
+
+type GearReference = { name: string; mainStat: string; usage?: string }
 
 // Page de détails d'un personnage
 export default async function CharacterDetailPage(params: { params: Promise<{ name: string }> }) {
@@ -20,6 +31,74 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
   const subclassInfo = classInfo?.subclasses?.[character.subclass as keyof typeof classInfo.subclasses]
   const statLabels = ["Health","Defense","Evasion", "Accuracy","Speed","Attack"]
 
+
+
+  type GearReference = { name: string; mainStat: string; usage?: string }
+
+function buildRecommendedMini<T extends EquipmentBase>(
+  refs: GearReference[] | undefined,
+  fullList: T[]
+): T[] {
+  return (
+    refs
+      ?.map(ref => {
+        const item = fullList.find(i => i.name === ref.name)
+        if (!item) return null
+
+        return {
+          ...item,
+          forcedMainStat: ref.mainStat,
+          ...(ref.usage ? { usage: ref.usage } : {}),
+        } as T
+      })
+      .filter((x): x is T => x !== null) ?? []
+  )
+}
+
+  
+function renderRecommendedGearBlock(mode: 'PVE' | 'PVP') {
+  if (!character) return null; // sécurité typescript
+  const gear = mode === 'PVE' ? character.recommendedGearPVE : character.recommendedGearPVP
+
+  const recommendedWeapons = buildRecommendedMini<WeaponMini>(gear?.Weapon, weapons)
+  const recommendedAmulets = buildRecommendedMini<AmuletMini>(gear?.Amulet, amulets)
+
+  return (
+    <div className="mt-6">
+      <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Gear {mode}</h2>
+      <div className="flex flex-col md:flex-row justify-center gap-10 text-center">
+        
+        {/* Armes */}
+        <div className="flex flex-col items-center gap-2">
+          <h3 className="text-lg font-semibold text-white mb-1">Weapons</h3>
+          {recommendedWeapons.map((weapon, idx) => (
+            <WeaponMiniCard key={`weapon-${mode}-${idx}`} weapon={weapon} />
+          ))}
+        </div>
+
+        {/* Accessoires */}
+        <div className="flex flex-col items-center gap-2">
+          <h3 className="text-lg font-semibold text-white mb-1">Accessories</h3>
+          {recommendedAmulets.map((amulet, idx) => (
+            <AccessoryMiniCard key={`amulet-${mode}-${idx}`} accessory={amulet} />
+          ))}
+        </div>
+
+        {/* Sets */}
+        <div className="flex flex-col items-center">
+          <h3 className="text-lg font-semibold text-white mb-1">Sets</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {gear?.Set?.map((sets, idx) => (
+              <SetMiniCard key={`set-${mode}-${idx}`} sets={sets} />
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
   return (
     <div className="max-w-5xl mx-auto p-6">
       {/* Partie haute : illustration + infos principales */}
@@ -27,7 +106,7 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
         {/* Illustration du personnage */}
         <div className="relative rounded overflow-hidden shadow">
           <Image
-            src={character.fullArt}
+            src={`/images/characters/full/IMG_${character.id}.png`} 
             alt={character.name}
             width={360}
             height={400}
@@ -73,7 +152,6 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
 
           {/* Statistiques (diagramme) + descriptions de classe */}
           <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">
-            {/* Diagramme circulaire avec labels */}
             <div className="relative p-2 rounded text-sm w-fit h-fit">
               {subclassInfo?.image ? (
                 <div className="relative mx-auto">
@@ -107,7 +185,6 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
               )}
             </div>
 
-            {/* Descriptions de classe et sous-classe */}
             <div className="flex flex-col gap-4">
               <div className="p-2 rounded text-sm">
                 <p className="font-semibold">Class Effects : {character.class} </p>
@@ -125,16 +202,16 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
       {/* Section des 3 skills */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
         {character.skills?.slice(0, 3).map((skill, index) => (
-          <div key={index} className="p-4 rounded text-white">
+          <div key={index} className="p-4 rounded text-white">            
             <div className="flex items-start gap-2 mb-2">
               {/* Icône de skill avec éventuel badge B */}
               <div className="relative w-12 h-12">
                 <Image
-                  src={skill.icon}
+                  src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.id}.png`} 
                   alt={skill.name}
                   width={48} 
-                    height={48} 
-                    style={{ width: 48, height: 48 }}
+                  height={48} 
+                  style={{ width: 48, height: 48 }}
                   className="rounded object-contain"
                 />
                 {skill.burnEffect && skill.burnEffect.length > 0 && (
@@ -169,13 +246,13 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
       </div>
 
       {/* Section burn + chain/dual attack */}
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 mt-6">
+      <div className="flex flex-col lg:flex-row gap-6 mt-6">
         {/* Affichage des effets de burn sous forme de cartes */}
-        <div className="p-2 rounded text-white">
+        <div className="flex-1 p-2 rounded text-white">
           {(() => {
             const skillWithBurn = character.skills?.find(s => s.burnEffect && s.burnEffect.length > 0);
             if (!skillWithBurn) {
-              return <p className="text-gray-400">Aucun effet de burn disponible pour ce personnage.</p>;
+              return <p className="text-gray-400">Burn effect placeholder.</p>;
             }
 
             return (
@@ -219,13 +296,13 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
           })()}
         </div>
         {/* Section chain/dual attack */}
-        <div className="p-4 rounded text-white flex flex-col gap-6">
+        <div className="flex-1 p-4 rounded text-white flex flex-col gap-6">
           {/* Bloc Chain Attack */}
           <div className="flex gap-4 items-start">
             <div className="w-16 h-16 shrink-0">
               <Image
-                src={`/images/ui/chain_dual_${character.element.toLowerCase()}.png`}
-                alt={`Chain icon for ${character.element}`}
+                src={`/images/characters/chain/Skill_ChainPassive_${character.element}_${character.type_chain}.png`}
+                alt={`Chain icon for ${character.element} ${character.type_chain}`}
                 width={64}
                 height={64}
                 className="object-contain"
@@ -244,7 +321,7 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
             <div className="flex gap-4 items-start">
               <div className="w-16 h-16 shrink-0">
                 <Image
-                  src={`/images/ui/chain_dual_${character.element.toLowerCase()}.png`}
+                  src={`/images/characters/chain/Skill_ChainPassive_${character.element}_Join.png`}
                   alt={`Dual icon for ${character.element}`}
                   width={64}
                   height={64}
@@ -262,7 +339,22 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
           </div>
           </div>
       
-      {/* Section vidéo déplacée en bas */}
+          <RecommendedGearTabs
+  character={character}
+  weapons={weapons}
+  amulets={amulets}
+/>
+
+
+
+
+
+
+
+
+
+
+      {/* Section vidéo */}
       <div className="w-full rounded overflow-hidden mt-6" style={{ height: '450px' }}>
         <iframe
           className="w-full h-full"
@@ -277,7 +369,6 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
   )
 }
 
-// Métadonnées dynamiques pour chaque personnage
 export async function generateMetadata(props: { params: Promise<{ name: string }> }): Promise<Metadata> {
   const params = await props.params;
   const name = params.name.toLowerCase();
@@ -318,3 +409,6 @@ export async function generateMetadata(props: { params: Promise<{ name: string }
   };
 }
 
+function getSkillLabel(index: number): string {
+  return ["First", "Second", "Ultimate"][index] || `Skill ${index + 1}`;
+}
