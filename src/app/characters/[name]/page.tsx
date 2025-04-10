@@ -5,11 +5,8 @@ import type { Metadata } from 'next'
 import classDataRaw from '@/data/class.json'
 import type { ClassDataMap } from '@/types/types'
 import { highlightKeywordsAndNumbers } from '@/utils/textHighlighter'
-import WeaponMiniCard from "@/app/components/WeaponMiniCard"
-import AccessoryMiniCard from "@/app/components/AccessoryMiniCard"
 import rawWeapons from "@/data/weapon.json"
 import rawAmulets from "@/data/amulet.json"
-import SetMiniCard from "@/app/components/SetMiniCard"
 import type { EquipmentBase } from "@/types/equipment"
 import RecommendedGearTabs from "@/app/components/RecommendedGearTabs"
 
