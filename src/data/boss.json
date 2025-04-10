@@ -1,0 +1,39 @@
+[{
+    "Special Request":[{
+        "Masterless Guardian":[{
+            "id":"4076006"
+        }],
+        "Tyrant Toddler":[{
+            "id":"4076005"
+        }],
+        "Unidentified Chimera":[{
+            "id":"4034002"
+        }],
+        "Sacreed Guardian":[{
+            "id":"4044003"
+        }],
+        "Grand Calamari":[{
+            "id":"4034003"
+        }],
+        "Dek'Ril & Mek'Ril":[{
+            "id":"4076004"
+        }],
+        "Glicys":[{
+            "id":"4076001"
+        }],
+        "Blazing Knight Meteos":[{
+            "id":"4076002"
+        }],        
+        "Ars Nova":[{
+            "id":"4076008"
+        }],
+        "Amadeus":[{
+            "id":"4076009"
+        }]
+    }],
+    "Irregular Extermination":[{
+        "Infiltration Operation":[{
+            "id":"CM_Irregular_Infiltrate"
+        }]
+    }]
+}]

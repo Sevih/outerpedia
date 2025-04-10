@@ -1,201 +1,332 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState,useEffect, useRef } from "react";
+import Image from "next/image";
 import weapons from "@/data/weapon.json";
-import equipmentTypes from "@/data/equipment_types.json";
-import Image from 'next/image';
-
-interface Weapon {
-  name: string;
-  type: string;
-  rarity: string;
-  image: string;
-  effect_name: string;
-  effect_desc: string;
-  effect_icon: string;
-  class: string;
-  source: string;
-  boss: string | null;
-  mode?: string;
-}
-
-const WeaponCard = ({ weapon }: { weapon: Weapon }) => {
-  const subStatCount = equipmentTypes.weapon.subStatNumber;
-
-  const hoverRef = useRef<HTMLDivElement>(null);
-  const posRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    posRef.current = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    };
-    setIsHovering(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-  };
-
-  const getHoverStyle = () => {
-    const hoverWidth = 320;
-    const hoverHeight = 200;
-    let left = posRef.current.x + 10;
-    let top = posRef.current.y + 10;
-
-    const container = hoverRef.current?.getBoundingClientRect();
-    if (container) {
-      if (container.left + left + hoverWidth > window.innerWidth) {
-        left = posRef.current.x - hoverWidth - 10;
-      }
-      if (container.top + top + hoverHeight > window.innerHeight) {
-        top = posRef.current.y - hoverHeight - 10;
-      }
-    }
-
-    return {
-      top,
-      left,
-      position: "absolute" as const,
-    };
-  };
-
-  return (
-    <div
-      className="relative group w-[110px] h-[110px]"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      ref={hoverRef}
-    >
-      <Image
-        src="/images/ui/bg_item_leg.png"
-        alt="Background"
-        width={110}
-        height={110}
-        className="absolute inset-0 w-full h-full object-cover z-0 rounded"
-      />
-      <div className="absolute top-1 right-1 z-30 flex flex-col items-end gap-1">
-        {weapon.effect_icon && (
-          <Image
-            src={`/images/ui/effect/${weapon.effect_icon}`}
-            alt="Effect Icon"
-            width={24}
-            height={24}
-            className="w-6 h-6"
-          />
-        )}
-        {weapon.class && (
-          <Image
-            src={`/images/ui/class/${weapon.class.toLowerCase()}.png`}
-            alt={weapon.class}
-            width={24}
-            height={24}
-            className="w-6 h-6"
-          />
-        )}
-      </div>
-      <div className="absolute inset-0 z-10">
-        <Image
-          src={`/images/equipment/${weapon.image}`}
-          alt={weapon.name}
-          width={110}
-          height={110}
-          className="w-full h-full object-contain rounded"
-        />
-      </div>
-      {isHovering && (
-        <div
-          className="z-50 w-[320px] min-h-[200px] bg-gray-900 text-white rounded p-4 text-xs flex flex-col shadow-lg transition-opacity duration-150 ease-in-out opacity-100"
-          style={getHoverStyle()}
-        >
-          <p className="text-red-400 font-bold text-sm leading-tight mb-2">{weapon.name}</p>
-          <p className="text-red-300 mb-2 text-sm">{weapon.rarity} Weapon</p>
-
-          <div className="flex items-center gap-2">
-            <Image
-              src="/images/ui/effect/CM_Stat_Icon_ATK.png"
-              alt="ATK"
-              width={16}
-              height={16}
-              className="w-4 h-4"
-            />
-            <p>ATK</p>
-            <span className="ml-auto">1 200</span>
-          </div>
-
-          <div className="flex items-center gap-2 mt-2">
-            <Image
-              src="/images/ui/effect/CM_Stat_Icon_ATK.png"
-              alt="ATK%"
-              width={16}
-              height={16}
-              className="w-4 h-4"
-            />
-            <Image
-              src="/images/ui/effect/CM_Stat_Icon_DEF.png"
-              alt="DEF%"
-              width={16}
-              height={16}
-              className="w-4 h-4"
-            />
-            <Image
-              src="/images/ui/effect/CM_Stat_Icon_HP.png"
-              alt="HP%"
-              width={16}
-              height={16}
-              className="w-4 h-4"
-            />
-            <p>At Random</p>
-          </div>
-
-          <p className="text-center mt-2 font-semibold text-sm">Apply {subStatCount} random substat(s)</p>
-
-          <div className="mt-3 bg-gray-700 rounded p-2">
-            <div className="flex items-center gap-2 font-semibold">
-              {weapon.effect_icon && (
-                <Image
-                  src={`/images/ui/effect/${weapon.effect_icon}`}
-                  alt="Effect Icon"
-                  width={24}
-                  height={24}
-                  className="w-6 h-6"
-                />
-              )}
-              <p>{weapon.effect_name}</p>
-            </div>
-            <p className="mt-2 text-sm">{weapon.effect_desc}</p>
-          </div>
-
-          {(weapon.source || weapon.boss || weapon.mode) && (
-            <div className="mt-3 border-t border-gray-600 pt-2 text-[11px] text-gray-300">
-              {weapon.source && (
-                <p><span className="text-gray-400 font-semibold">Source:</span> {weapon.source}</p>
-              )}
-              {weapon.boss && (
-                <p><span className="text-gray-400 font-semibold">Boss:</span> {weapon.boss}</p>
-              )}
-              {!weapon.boss && weapon.mode && (
-                <p><span className="text-gray-400 font-semibold">Mode:</span> {weapon.mode}</p>
-              )}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
+import WeaponCard from "@/app/components/WeaponCard";
+import AccessoryCard from "@/app/components/AccessoryCard";
+import accessories from "@/data/amulet.json";
+import sets from "@/data/sets.json";
+import SetCard from "@/app/components/SetCard";
+import bossData from "@/data/boss.json";
+import statsData from "@/data/stats.json";
 
 export default function EquipmentsClient() {
+  const tabList = [
+    { key: "weapon", label: "Weapons", icon: "weapon.png" },
+    { key: "accessory", label: "Accessories", icon: "accessory.png" },
+    { key: "armor", label: "Armor Set", icon: "armor.png" }
+  ];
+  
+  const [activeTabRef, setActiveTabRef] = useState<HTMLButtonElement | null>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    if (activeTabRef && indicatorRef.current) {
+      const { offsetLeft, offsetWidth } = activeTabRef;
+      indicatorRef.current.style.transform = `translateX(${offsetLeft}px)`;
+      indicatorRef.current.style.width = `${offsetWidth}px`;
+    }
+  }, [activeTabRef]);
+  const [tab, setTab] = useState<"weapon" | "accessory" | "armor">("weapon");
+
+  const [weaponClassFilter, setWeaponClassFilter] = useState<string | null>(null);
+  const [weaponBossFilter, setWeaponBossFilter] = useState<string | null>(null);
+
+  const [accessoryClassFilter, setAccessoryClassFilter] = useState<string | null>(null);
+  const [accessoryBossFilter, setAccessoryBossFilter] = useState<string | null>(null);
+  const [accessoryMainStatFilter, setAccessoryMainStatFilter] = useState<string | null>(null);
+
+  const weaponClasses = Array.from(new Set(weapons.map(w => w.class).filter(Boolean)));
+  const weaponBossesOrModes = Array.from(new Set(weapons.map(w => w.boss || w.mode).filter((v): v is string => Boolean(v))));
+
+  const accessoryClasses = Array.from(new Set(accessories.map(a => a.class).filter(Boolean)));
+  const accessoryBossesOrModes = Array.from(new Set(accessories.map(a => a.boss || a.mode).filter((v): v is string => Boolean(v))));
+  const allAccessoryMainStats = Array.from(new Set(accessories.flatMap(a => a.mainStats || [])));
+
+  const [armorBossFilter, setArmorBossFilter] = useState<string | null>(null);
+  const armorBossesOrModes = Array.from(new Set(sets.map(s => s.boss || s.mode).filter((v): v is string => Boolean(v))));
+
+
+  const filteredWeapons = weapons.filter(w =>
+    (!weaponClassFilter || w.class === weaponClassFilter) &&
+    ((weaponBossFilter === null || (w.boss || w.mode) === weaponBossFilter))
+  );
+
+  const filteredAccessories = accessories.filter(a =>
+    (!accessoryClassFilter || a.class === accessoryClassFilter) &&
+    (!accessoryBossFilter || (a.boss || a.mode) === accessoryBossFilter) &&
+    (!accessoryMainStatFilter || a.mainStats.includes(accessoryMainStatFilter))
+  );
+
+  const bossMap: Record<string, string> = {};
+  bossData.forEach(group => {
+    if (group["Special Request"]) {
+      group["Special Request"].forEach(entry => {
+        Object.entries(entry).forEach(([name, data]) => {
+          const id = data?.[0]?.id;
+          if (id) bossMap[name] = `/images/characters/boss/mini/IG_Turn_${id}.png`;
+        });
+      });
+    }
+    if (group["Irregular Extermination"]) {
+      group["Irregular Extermination"].forEach(entry => {
+        Object.entries(entry).forEach(([name, data]) => {
+          const fileName = data?.[0]?.id;
+          if (fileName) bossMap[name] = `/images/characters/boss/mini/${fileName}.png`;
+        });
+      });
+    }
+  });
+
   return (
     <main className="p-3">
-      <h1 className="text-xl font-bold mb-4">Basic Weapons</h1>
-      <div className="flex flex-wrap gap-2">
-        {weapons.map((weapon) => (
-          <WeaponCard key={weapon.name} weapon={weapon} />
+<div className="relative flex justify-center mb-6">
+  <div className="relative bg-gray-100 dark:bg-gray-800 rounded-full p-1 flex gap-1 min-w-[300px]">
+    {/* Barre animée */}
+    <div
+      ref={indicatorRef}
+      className="absolute top-1 left-0 h-[calc(100%-0.5rem)] bg-cyan-500 rounded-full transition-all duration-300 z-0"
+    ></div>
+
+    {tabList.map(({ key, label, icon }) => (
+      <button
+        key={key}
+        onClick={() => setTab(key as typeof tab)}
+        ref={el => {
+          if (tab === key) setActiveTabRef(el);
+        }}
+        className={`relative z-10 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors duration-300 ${
+          tab === key
+            ? "text-white"
+            : "text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700"
+        }`}
+      >
+        <Image
+          src={`/images/ui/nav/${icon}`}
+          alt={label}
+          width={18}
+          height={18}
+          style={{ width: 24, height: 24 }}
+          className="w-[18px] h-[18px]"
+          unoptimized
+        />
+        {label}
+      </button>
+    ))}
+  </div>
+</div>
+
+
+
+
+      {tab === "weapon" && (
+        <>
+          <div className="mb-4 flex flex-col items-center gap-4">
+            <div className="flex gap-2 flex-wrap justify-center">
+              <button
+                onClick={() => setWeaponClassFilter(null)}
+                className={`border p-1 rounded ${!weaponClassFilter ? "bg-cyan-500" : "bg-gray-100"}`}
+              >
+                <span className={`px-2 text-sm font-semibold ${!weaponClassFilter ? "text-white" : "text-black"}`}>All</span>
+              </button>
+              {weaponClasses.map((cls) => (
+                <button
+                  key={cls}
+                  onClick={() => setWeaponClassFilter(cls)}
+                  className={`border p-1 rounded ${weaponClassFilter === cls ? "bg-cyan-500" : "bg-transparent"}`}
+                >
+                  <Image
+                    src={`/images/ui/class/${cls.toLowerCase()}.png`}
+                    alt={cls}
+                    width={24}
+                    height={24}
+                    className="w-6 h-6"
+                    unoptimized
+                  />
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-2 flex-wrap justify-center">
+              <button
+                onClick={() => setWeaponBossFilter(null)}
+                className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${weaponBossFilter === null ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
+              >
+                All
+              </button>
+              {weaponBossesOrModes.map((src) => (
+                <button
+                  key={src}
+                  onClick={() => setWeaponBossFilter(src)}
+                  className={`border rounded transition-colors duration-200 ${weaponBossFilter === src ? "bg-cyan-500" : "bg-transparent hover:bg-gray-100"}`}
+                  title={src}
+                >
+                  {bossMap[src] ? (
+                    <Image
+                      src={bossMap[src]}
+                      alt={src || "boss"}
+                      width={60}
+                      height={60}
+                      className="w-15 h-15"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-xs px-2 truncate max-w-[100px] inline-block">{src}</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 justify-center">
+            {filteredWeapons.map((weapon) => (
+              <WeaponCard key={weapon.name} weapon={weapon} />
+            ))}
+          </div>
+        </>
+      )}
+
+      {tab === "accessory" && (
+        <>
+          <div className="mb-4 flex flex-col items-center gap-4">
+            <div className="flex gap-2 flex-wrap justify-center">
+              <button
+                onClick={() => setAccessoryClassFilter(null)}
+                className={`border p-1 rounded ${!accessoryClassFilter ? "bg-cyan-500" : "bg-gray-100"}`}
+              >
+                <span className={`px-2 text-sm font-semibold ${!accessoryClassFilter ? "text-white" : "text-black"}`}>All</span>
+              </button>
+              {accessoryClasses.map((cls) => (
+                <button
+                  key={cls}
+                  onClick={() => setAccessoryClassFilter(cls)}
+                  className={`border p-1 rounded ${accessoryClassFilter === cls ? "bg-cyan-500" : "bg-transparent"}`}
+                >
+                  <Image
+                    src={`/images/ui/class/${cls.toLowerCase()}.png`}
+                    alt={cls}
+                    width={24}
+                    height={24}
+                    className="w-6 h-6"
+                    unoptimized
+                  />
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-2 flex-wrap justify-center">
+              <button
+                onClick={() => setAccessoryBossFilter(null)}
+                className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${accessoryBossFilter === null ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
+              >
+                All
+              </button>
+              {accessoryBossesOrModes.map((src) => (
+                <button
+                  key={src}
+                  onClick={() => setAccessoryBossFilter(src)}
+                  className={`border rounded transition-colors duration-200 ${accessoryBossFilter === src ? "bg-cyan-500" : "bg-transparent hover:bg-gray-100"}`}
+                  title={src}
+                >
+                  {bossMap[src] ? (
+                    <Image
+                      src={bossMap[src]}
+                      alt={src || "boss"}
+                      width={60}
+                      height={60}
+                      className="w-15 h-15"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-xs px-2 truncate max-w-[100px] inline-block">{src}</span>
+                  )}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-2 flex-wrap justify-center">
+              <button
+                onClick={() => setAccessoryMainStatFilter(null)}
+                className={`border px-3 py-1 rounded text-sm font-semibold ${!accessoryMainStatFilter ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
+              >
+                All Stats
+              </button>
+              {allAccessoryMainStats.map(stat => {
+                const data = statsData[stat as keyof typeof statsData];
+                return (
+                  <button
+                    key={stat}
+                    onClick={() => setAccessoryMainStatFilter(stat)}
+                    className={`border p-1 rounded ${accessoryMainStatFilter === stat ? "bg-cyan-500" : "bg-transparent hover:bg-gray-100"}`}
+                    title={data?.label || stat}
+                  >
+                    <Image
+                      src={`/images/ui/effect/${data?.icon || "CM_Stat_Icon_ATK.png"}`}
+                      alt={stat}
+                      width={24}
+                      height={24}
+                      className="w-6 h-6"
+                      unoptimized
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 justify-center">
+            {filteredAccessories.map((accessory) => (
+              <AccessoryCard key={accessory.name} accessory={accessory} />
+            ))}
+          </div>
+        </>
+      )}
+
+{tab === "armor" && (
+  <>
+    {/* Filtres boss/mode pour les armors */}
+    <div className="mb-4 flex flex-wrap justify-center gap-2">
+      <button
+        onClick={() => setArmorBossFilter(null)}
+        className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${armorBossFilter === null ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
+      >
+        All
+      </button>
+      {armorBossesOrModes.map((src) => (
+        <button
+          key={src}
+          onClick={() => setArmorBossFilter(src)}
+          className={`border rounded transition-colors duration-200 ${armorBossFilter === src ? "bg-cyan-500" : "bg-transparent hover:bg-gray-100"}`}
+          title={src}
+        >
+          {bossMap[src] ? (
+            <Image
+              src={bossMap[src]}
+              alt={src || "boss"}
+              width={60}
+              height={60}
+              className="w-15 h-15"
+              unoptimized
+            />
+          ) : (
+            <span className="text-xs px-2 truncate max-w-[100px] inline-block">{src}</span>
+          )}
+        </button>
+      ))}
+    </div>
+
+    {/* Sets filtrés */}
+    <div className="flex flex-wrap gap-2 justify-center">
+      {sets
+        .filter(set => !armorBossFilter || (set.boss || set.mode) === armorBossFilter)
+        .map(set => (
+          <SetCard key={set.name} set={set} />
         ))}
-      </div>
+    </div>
+  </>
+)}
+
     </main>
   );
 }

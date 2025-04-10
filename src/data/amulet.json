@@ -3,25 +3,29 @@
       "name": "Death's Hold",
       "type": "amulet",
       "rarity": "Legendary",
-      "image": "regular_amulet.png",
-      "effect" : "Increases Penetration by 2% when hit (max 10 stacks)",
+      "image": "regular_accessary.png",
       "mainStats" : ["EFF","CHD","PEN","HP%"],
-      "effect_icon" : "",
+      "effect_name":"Revenge",
+      "effect_desc1" : "Increases Penetration by 1% when hit (max 10 stacks)",
+      "effect_desc4" : "Increases Penetration by 2% when hit (max 10 stacks)",      
+      "effect_icon" : "01",
       "class" : "Striker",
       "source": "Special Request",
-      "boss" : "Blazing Knight Meteos"
-      
+      "boss" : "Blazing Knight Meteos"      
     },
     {
         "name": "Gorgon's Vanity [Mage]",
         "type": "amulet",
         "rarity": "Legendary",
-        "image": "irregular_amulet1.png",
-        "effect" : "Increases Speed proportional to missing Health (Max 25%)",
-        "mainStats" : ["EFF","CHD","PEN","HP%","LS","EVA"],
-        "effect_icon" : "",
-        "class" : "Striker",
+        "image": "irregular_accessary_02.png",
+        "mainStats" : ["HP%","EVA","EFF","CHD","HH","PEN"],
+        "effect_name":"Vanity : Mystery",
+        "effect_desc1" : "Increases Speed proportional to missing Health (Max 25%)",
+        "effect_desc4" : "Increases Speed proportional to missing Health (Max 25%)",      
+        "effect_icon" : "01",        
+        "class" : "Mage",
         "source": "Irregular Extermination",
-        "boss" : "Infiltration Operation"        
+        "boss" : null,
+        "mode" :"Infiltration Operation"              
       }
   ]

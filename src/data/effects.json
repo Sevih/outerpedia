@@ -2,85 +2,85 @@
   "buffs": {
     "Dual Attack": {
       "label": "Dual Attack",
-      "icon": "dualattack.png"
+      "icon": "Effect_Dual_Attack"
     },
     "Double Dual Attack": {
       "label": "Double Dual Attack",
-      "icon": "doubledualattack.png"
+      "icon": "Effect_Double_Dual_Attack"
     },
     "Barrier": {
       "label": "Barrier",
-      "icon": "barrier.png"
+      "icon": "Effect_Shield"
     },
     "Reduces Allies Skill Cooldowns": {
       "label": "Reduces Allies Skill Cooldowns",
-      "icon": "reducesalliesskillcooldowns.png"
+      "icon": "Cool_Charge"
     },
     "Critical Hit Chance": {
       "label": "Critical Hit Chance",
-      "icon": "criticalhitchance.png"
+      "icon": "Stat_CriRate"
     },
     "Generate Chain Points": {
       "label": "Generate Chain Points",
-      "icon": "generatechainpoints.png"
+      "icon": "Effect_CP"
     },
     "Increase Priority": {
       "label": "Increase Priority",
-      "icon": "increasepriority.png"
+      "icon": "Effect_Increase_Priority"
     },
     "Increased Evasion": {
       "label": "Increased Evasion",
-      "icon": "increasedevasion.png"
+      "icon": "Stat_Avoid"
     },
     "Invulnerability": {
       "label": "Invulnerability",
-      "icon": "invulnerability.png"
+      "icon": "Effect_Invincible"
     },
     "Increased Resilience": {
       "label": "Increased Resilience",
-      "icon": "increasedresilience.png"
+      "icon": "Stat_BuffResist"
     },
     "Increase Attack": {
       "label": "Increase Attack",
-      "icon": "reducedattack.png"
+      "icon": "Stat_Atk"
     },
     "Increased Speed": {
       "label": "Increased Speed",
-      "icon": "Increased Speed.png"
+      "icon": "Stat_Speed"
     },
     "Stealth": {
       "label": "Stealth",
-      "icon": "Stealth.png"
+      "icon": "Effect_Stealthed"
     },
     "Extra Turn": {
       "label": "Extra Turn",
-      "icon": "Extra Turn.png"
+      "icon": "Effect_Extra_Turn"
     }
   },
   "debuffs": {
     "Buff Removal": {
       "label": "Buff Removal",
-      "icon": "buffremoval.png"
+      "icon": "Effect_Remove_Buff"
     },
     "Taunted": {
       "label": "Taunted",
-      "icon": "taunted.png"
+      "icon": "Effect_Taunted"
     },
     "Reduced Accuracy": {
       "label": "Reduced Accuracy",
-      "icon": "reducedaccuracy.png"
+      "icon": "Stat_Accuracy"
     },
     "Frozen": {
       "label": "Frozen",
-      "icon": "frozen.png"
+      "icon": "Effect_Frozen"
     },
     "Marked": {
       "label": "Marked",
-      "icon": "marked.png"
+      "icon": "Effect_Marking"
     },
     "Reduced Attack": {
       "label": "Reduced Attack",
-      "icon": "reducedattack.png"
+      "icon": "Stat_Atk"
     }
   }
 }

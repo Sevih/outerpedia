@@ -4,25 +4,10 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import classDataRaw from '@/data/class.json'
 import type { ClassDataMap } from '@/types/types'
+import { highlightKeywordsAndNumbers } from '@/utils/textHighlighter';
+
 
 const classData = classDataRaw as ClassDataMap
-
-// Fonction pour mettre en valeur certains mots-clés et les chiffres dans les descriptions
-function highlightKeywordsAndNumbers(text: string) {
-  const keywords = ['Speed', 'Stealth', 'Attack', 'Defense', 'turn', 'debuff', 'buff', 'Revived', 'Resurrected', 'Penetration']
-  const regex = new RegExp(`(\\b(?:${keywords.join('|')})\\b|\\d+)`, 'gi')
-
-  return text.split(regex).map((part, i) => {
-    if (!part) return null
-    if (keywords.includes(part.replace(/s$/i, ''))) {
-      return <span key={i} className="text-cyan-400 font-medium">{part}</span>
-    } else if (/^\d+$/.test(part)) {
-      return <span key={i} className="text-yellow-400 font-semibold">{part}</span>
-    } else {
-      return part
-    }
-  })
-}
 
 // Page de détails d'un personnage
 export default async function CharacterDetailPage(params: { params: Promise<{ name: string }> }) {

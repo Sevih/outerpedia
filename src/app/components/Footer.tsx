@@ -4,7 +4,7 @@ import { FaGithub, FaDiscord } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="w-full mt-10 border-t pt-6 pb-4 text-center text-sm text-muted-foreground">
+    <footer className="w-full mt-2 border-t pt-2 pb-2 text-center text-sm text-muted-foreground">
       <div className="flex flex-col md:flex-row justify-center items-center gap-4">
         <p>© {new Date().getFullYear()} Outerpedia. All rights reserved.</p>
         <div className="flex gap-4">

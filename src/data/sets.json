@@ -1,17 +1,45 @@
 [
-    {
-      "name": "Critical Hit",
-      "icon" : "",
-      "effect_2":"Crit Chance +12%",
-      "effect_4":"Crit Chance +10%",
-      "class" : null
-      
-    },
-    {
-       "name": "Critical Strike",
-       "icon" : "",
-       "effect_2":null,
-       "effect_4":"Crit Dmg +50%",   
-       "class" : null
-    }
+  {
+    "name": "Speed",
+    "type": [],
+    "rarity": "Legendary",
+    "set_icon": "15",
+    "effect_2_1": null,
+    "effect_4_1": "Speed +25%",
+    "effect_2_4": "Speed +12%",
+    "effect_4_4": "Speed +13%",
+    "class": null,
+    "source": "Special Request",
+    "boss": "Unidentified Chimera",
+    "image_prefix": "06"
+  },
+  {
+    "name": "Counterattack",
+    "type": [],
+    "rarity": "Legendary",
+    "set_icon": "07",
+    "effect_2_1": "Counterattack Chance +12%",
+    "effect_4_1": "Counterattack Chance +8%",
+    "effect_2_4": "Counterattack Chance +15%",
+    "effect_4_4": "Counterattack Chance +10%",
+    "class": null,
+    "source": "Special Request",
+    "boss": "Unidentified Chimera",
+    "image_prefix": "06"
+  },
+  {
+    "name": "Critical Strike",
+    "type": [],
+    "rarity": "Legendary",
+    "set_icon": "04",
+    "effect_2_1": null,
+    "effect_4_1": "Crit Dmg +30%",
+    "effect_2_4": null,
+    "effect_4_4": "Crit Dmg +50%",
+    "class": null,
+    "source": "Special Request",
+    "mode":null,
+    "boss": "Unidentified Chimera",
+    "image_prefix": "06"
+  }  
 ]

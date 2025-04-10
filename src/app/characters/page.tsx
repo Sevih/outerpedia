@@ -46,7 +46,7 @@ function EffectIcon({ effect, type }: { effect: any; type: 'buff' | 'debuff' }) 
       {effect.icon ? (
         <div className="w-6 h-6 bg-black p-0.5 rounded flex items-center justify-center">
           <Image
-            src={`/images/ui/effect/${effect.icon}`}
+            src={`/images/ui/effect/SC_Buff_${effect.icon}.png`}
             alt={effect.label}
             width={30}
             height={30}
