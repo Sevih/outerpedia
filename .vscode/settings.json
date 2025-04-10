@@ -1,0 +1,60 @@
+{
+  "todo-tree.general.tags": [
+    "TODO [Characters][P1]", "TODO [Characters][P2]", "TODO [Characters][P3]",
+    "TODO [UI][P1]", "TODO [UI][P2]", "TODO [UI][P3]",
+    "TODO [UX][P1]", "TODO [UX][P2]", "TODO [UX][P3]",
+    "TODO [Builds][P1]", "TODO [Builds][P2]", "TODO [Builds][P3]",
+    "TODO [Guide][P1]", "TODO [Guide][P2]", "TODO [Guide][P3]",
+    "TODO [Equipment][P1]", "TODO [Equipment][P2]", "TODO [Equipment][P3]",
+    "TODO [TierList][P1]", "TODO [TierList][P2]", "TODO [TierList][P3]",
+    "DONE", "FIXME", "NOTE", "TODO"
+  ],
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^)\\s*($TAGS)",
+  "todo-tree.highlights.defaultHighlight": {
+    "icon": "$(circle-large-outline)",
+    "type": "line",
+    "foreground": "#ffffff",
+    "opacity": 50,
+    "iconColour": "#ffffff"
+  },
+  "todo-tree.highlights.customHighlight": {
+    // Généré dynamiquement pour 21 tags personnalisés
+    "TODO [Characters][P1]": { "icon": "$(person)", "type": "line", "foreground": "#FFD700", "iconColour": "#FFD700" },
+    "TODO [Characters][P2]": { "icon": "$(person)", "type": "line", "foreground": "#DAA520", "iconColour": "#DAA520" },
+    "TODO [Characters][P3]": { "icon": "$(person)", "type": "line", "foreground": "#999999", "iconColour": "#999999" },
+
+    "TODO [UI][P1]": { "icon": "$(device-desktop)", "type": "line", "foreground": "#00BFFF", "iconColour": "#00BFFF" },
+    "TODO [UI][P2]": { "icon": "$(device-desktop)", "type": "line", "foreground": "#87CEFA", "iconColour": "#87CEFA" },
+    "TODO [UI][P3]": { "icon": "$(device-desktop)", "type": "line", "foreground": "#B0C4DE", "iconColour": "#B0C4DE" },
+
+    "TODO [UX][P1]": { "icon": "$(star-full)", "type": "line", "foreground": "#9370DB", "iconColour": "#9370DB" },
+    "TODO [UX][P2]": { "icon": "$(star-full)", "type": "line", "foreground": "#BA55D3", "iconColour": "#BA55D3" },
+    "TODO [UX][P3]": { "icon": "$(star-full)", "type": "line", "foreground": "#D8BFD8", "iconColour": "#D8BFD8" },
+
+    "TODO [Builds][P1]": { "icon": "$(wrench)", "type": "line", "foreground": "#FFA500", "iconColour": "#FFA500" },
+    "TODO [Builds][P2]": { "icon": "$(wrench)", "type": "line", "foreground": "#FFB347", "iconColour": "#FFB347" },
+    "TODO [Builds][P3]": { "icon": "$(wrench)", "type": "line", "foreground": "#FFDAB9", "iconColour": "#FFDAB9" },
+
+    "TODO [Guide][P1]": { "icon": "$(book)", "type": "line", "foreground": "#228B22", "iconColour": "#228B22" },
+    "TODO [Guide][P2]": { "icon": "$(book)", "type": "line", "foreground": "#6B8E23", "iconColour": "#6B8E23" },
+    "TODO [Guide][P3]": { "icon": "$(book)", "type": "line", "foreground": "#98FB98", "iconColour": "#98FB98" },
+
+    "TODO [Equipment][P1]": { "icon": "$(shield)", "type": "line", "foreground": "#DC143C", "iconColour": "#DC143C" },
+    "TODO [Equipment][P2]": { "icon": "$(shield)", "type": "line", "foreground": "#F08080", "iconColour": "#F08080" },
+    "TODO [Equipment][P3]": { "icon": "$(shield)", "type": "line", "foreground": "#FA8072", "iconColour": "#FA8072" },
+
+    "TODO [TierList][P1]": { "icon": "$(list-ordered)", "type": "line", "foreground": "#00FF7F", "iconColour": "#00FF7F" },
+    "TODO [TierList][P2]": { "icon": "$(list-ordered)", "type": "line", "foreground": "#32CD32", "iconColour": "#32CD32" },
+    "TODO [TierList][P3]": { "icon": "$(list-ordered)", "type": "line", "foreground": "#90EE90", "iconColour": "#90EE90" },
+
+    "DONE": {"hideFromTree": true, "icon": "$(check-all)", "type": "line", "foreground": "#888888", "iconColour": "#888888" },
+    "FIXME": { "icon": "$(flame)", "type": "line", "foreground": "#FF0000", "iconColour": "#FF0000" },
+    "NOTE": { "icon": "$(pencil)", "type": "line", "foreground": "#FFD700", "iconColour": "#FFD700" }
+  },
+  "todo-tree.tree.scanMarkdownFiles": true,
+  "todo-tree.tree.includeGlobs": [
+    "**/TODO.md"
+  ],
+  "todo-tree.tree.groupBy": "tag",
+  "todo-tree.tree.showScanModeButton": true
+}
