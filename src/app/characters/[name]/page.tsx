@@ -494,7 +494,7 @@ export async function generateMetadata(props: { params: Promise<{ name: string }
 
   const title = `${character.name} - Outerpedia`;
   const description = `View chracter details for ${character.name}, a ${character.class} (${character.subclass}) in Outerplane.`;
-  const image = `https://outerpedia.com/images/characters/thumbs/IG_Turn_${character.id}.png`;
+  const image = `https://outerpedia.com/images/characters/thumbs/IG_Turn_${character.id}.jpg`;
   const url = `https://outerpedia.com/characters/${character.name.toLowerCase()}`;
 
   return {
