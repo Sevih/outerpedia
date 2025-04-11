@@ -39,45 +39,46 @@ export default async function CharacterDetailPage(params: { params: Promise<{ na
   const transcendData = character.transcend?.[0];
   
   // Fonction utilitaire à placer au-dessus du return :
-function renderMainStat(stat: string) {
-  const [baseStat, elementPart] = stat.split('(').map(s => s.trim())
-  const statCode = baseStat.split(' ')[0] // ex: "ACC"
-  const statInfo = stats[statCode.toUpperCase() as keyof typeof stats] // contient label + icon
-
-  const elementMatch = elementPart?.match(/To:\s*(\w+)/i)
-  const element = elementMatch?.[1]
-
-  return (
-    <div className="flex items-center gap-1 text-sm italic text-gray-400">
-      {statInfo && (
-        <Image
-          src={`/images/ui/effect/${statInfo.icon}`}
-          alt={statInfo.label}
-          width={18}
-          height={18}
-          style={{ width: 18, height: 18 }}
-          className="object-contain"
-        />
-      )}
-      <span>Main Stat:</span>
-      <span>{statInfo.label}</span>
-      {element && (
-        <span className="flex items-center gap-1 ml-1">
-          (
+  function renderMainStat(stat: string) {
+    const [baseStat, elementPart] = stat.split('(').map((s: string) => s.trim())
+    const statCode: string = baseStat.split(' ')[0]
+    const statInfo = stats[statCode.toUpperCase() as keyof typeof stats]
+  
+    const elementMatch: RegExpMatchArray | null = elementPart?.match(/To:\s*(\w+)/i) ?? null
+    const element: string | undefined = elementMatch?.[1]
+  
+    return (
+      <div className="flex items-center gap-1 text-sm italic text-gray-400">
+        {statInfo && (
           <Image
-            src={`/images/ui/elem/${element.toLowerCase()}.png`}
-            alt={element}
-            width={16}
-            height={16}
-            style={{ width: 16, height: 16 }}
+            src={`/images/ui/effect/${statInfo.icon}`}
+            alt={statInfo.label}
+            width={18}
+            height={18}
+            style={{ width: 18, height: 18 }}
             className="object-contain"
           />
-          To: {element})
-        </span>
-      )}
-    </div>
-  )
-}
+        )}
+        <span>Main Stat:</span>
+        <span>{statInfo?.label ?? '—'}</span>
+        {element && (
+          <span className="flex items-center gap-1 ml-1">
+            (
+            <Image
+              src={`/images/ui/elem/${element.toLowerCase()}.png`}
+              alt={element}
+              width={16}
+              height={16}
+              style={{ width: 16, height: 16 }}
+              className="object-contain"
+            />
+            To: {element})
+          </span>
+        )}
+      </div>
+    )
+  }
+  
 
   return (
     <div className="max-w-5xl mx-auto p-6">
