@@ -62,7 +62,7 @@ function EffectIcon({ effect, type }: { effect: EffectData; type: 'buff' | 'debu
 }
 
 function getAllEffects(char: CharacterLite, type: 'buffs' | 'debuffs'): string[] {
-  const skillEffects = char.skills?.flatMap((s: any) => s[type] || []) || []
+  const skillEffects = char.skills?.flatMap((s: SkillLite) => s[type] || []) || []
   const chain = char[`chain_${type}`] || []
   const dual = char[`dual_${type}`] || []
   return [...new Set([...skillEffects, ...chain, ...dual])]

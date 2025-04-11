@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Image from 'next/image'
 
 type Props = {
   transcendData: Record<string, string | null>;
@@ -38,12 +39,11 @@ function TranscendenceStars({ levelLabel }: { levelLabel: string }) {
     return (
       <div className="flex gap-[1px]">
         {stars.map((src, idx) => (
-          <img
-            key={idx}
-            src={src}
-            alt="star"
-            className="w-[18px] h-[18px]"
-          />
+          <Image key={idx} src={src} alt="star" 
+          width={18} 
+          height={18} 
+          style={{ width: 18, height: 18 }}
+          className="object-contain" />
         ))}
       </div>
     );
@@ -165,9 +165,10 @@ export default function TranscendenceSlider({ transcendData }: Props) {
               key={idx}
               className="text-xs text-white flex items-center gap-1"
             >
-              <img src="/images/ui/effect/CM_Stat_Icon_ATK.png" alt="ATK" className="w-4 h-4" />
-              <img src="/images/ui/effect/CM_Stat_Icon_DEF.png" alt="DEF" className="w-4 h-4" />
-              <img src="/images/ui/effect/CM_Stat_Icon_HP.png" alt="HP" className="w-4 h-4" />
+              <Image src="/images/ui/effect/CM_Stat_Icon_ATK.png" alt="ATK" width={16} height={16} style={{ width: 16, height: 16 }} className="object-contain" />
+              <Image src="/images/ui/effect/CM_Stat_Icon_DEF.png" alt="DEF" width={16} height={16} style={{ width: 16, height: 16 }} className="object-contain" />
+              <Image src="/images/ui/effect/CM_Stat_Icon_HP.png"  alt="HP"  width={16} height={16} style={{ width: 16, height: 16 }} className="object-contain" />
+
               <span className="ml-1">+{value}%</span>
             </div>
           );
