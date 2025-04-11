@@ -1,0 +1,41 @@
+[
+    {
+      "name":"Rogue's Charm",  
+      "type":"CP",
+      "icon":"03",
+      "icon_item":"03",
+      "effect_name": "Critical Attack",
+      "effect":"Generates 10 Chain Points when an attack scores a critical hit",
+      "effect10":"Increases damage dealt against targets inflictedd with break",
+      "icon_effect":"07",
+      "source": null,
+      "boss" : null,
+      "mode" :null     
+    },
+    {
+        "name":"Sage's Charm",  
+        "type":"CP",
+        "icon":"04",
+        "icon_item":"04",
+        "effect_name": "Element Advantage",
+        "effect":"Generates 10 Chain Points when attacking with an advantageous element",
+        "effect10":"Increases Weakness Gauge damage of attacks that target all ennemies by 1 (excluding Skill Chains)",
+        "icon_effect":"07" ,
+        "source": null,
+        "boss" : null,
+        "mode" :null            
+      },
+      {
+          "name":"Executionner's Charm",  
+          "type":"CP",
+          "icon":"01",
+          "icon_item":"01",
+          "effect_name": "Element Advantage",
+          "effect":"Generates 12 Chain Points when attacking a target that has Enraged",
+          "effect10":"Recovers 50 Action Points when attacking an Enraged target",
+          "icon_effect":"07"   ,
+          "source": null,
+          "boss" : null,
+          "mode" :null       
+        }
+]

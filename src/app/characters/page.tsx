@@ -34,7 +34,6 @@ function ClassIcon({ className }: { className: string }) {
   )
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function EffectIcon({ effect, type }: { effect: any; type: 'buff' | 'debuff' }) {
   const style =
     type === 'buff' ? 'bg-gray-700 hover:bg-blue-800/70' : 'bg-gray-700 hover:bg-red-800/70'
@@ -60,6 +59,13 @@ function EffectIcon({ effect, type }: { effect: any; type: 'buff' | 'debuff' }) 
   )
 }
 
+function getAllEffects(char: any, type: 'buffs' | 'debuffs'): string[] {
+  const skillEffects = char.skills?.flatMap((s: any) => s[type] || []) || []
+  const chain = char[`chain_${type}`] || []
+  const dual = char[`dual_${type}`] || []
+  return [...new Set([...skillEffects, ...chain, ...dual])]
+}
+
 export default function CharactersPage() {
   const [filter, setFilter] = useState<string | null>(null)
   const [classFilter, setClassFilter] = useState<string | null>(null)
@@ -68,8 +74,8 @@ export default function CharactersPage() {
   const [selectedDebuffs, setSelectedDebuffs] = useState<string[]>([])
   const [effectLogic, setEffectLogic] = useState<'AND' | 'OR'>('OR')
 
-  const allBuffs = Object.entries(effects.buffs).map(([key, data]) => ({ key, ...data }))
-  const allDebuffs = Object.entries(effects.debuffs).map(([key, data]) => ({ key, ...data }))
+  const allBuffs = effects.filter((e) => e.type === 'buff')
+  const allDebuffs = effects.filter((e) => e.type === 'debuff')
 
   const toggleEffect = (
     key: string,
@@ -89,16 +95,16 @@ export default function CharactersPage() {
     const rarityMatch = rarityFilter === null || char.rarity === rarityFilter
 
     const hasBuffs = selectedBuffs.length > 0
-  ? (effectLogic === 'AND'
-    ? selectedBuffs.every((b) => char.buffs?.includes(b))
-    : selectedBuffs.some((b) => char.buffs?.includes(b)))
-  : false
+      ? (effectLogic === 'AND'
+        ? selectedBuffs.every((b) => getAllEffects(char, 'buffs').includes(b))
+        : selectedBuffs.some((b) => getAllEffects(char, 'buffs').includes(b)))
+      : true
 
     const hasDebuffs = selectedDebuffs.length > 0
       ? (effectLogic === 'AND'
-        ? selectedDebuffs.every((d) => (char.debuffs as string[])?.includes(d))
-        : selectedDebuffs.some((d) => (char.debuffs as string[])?.includes(d))      )
-      : false
+        ? selectedDebuffs.every((d) => getAllEffects(char, 'debuffs').includes(d))
+        : selectedDebuffs.some((d) => getAllEffects(char, 'debuffs').includes(d)))
+      : true
 
     let effectMatch = true
     if (selectedBuffs.length > 0 && selectedDebuffs.length > 0) {
@@ -110,7 +116,6 @@ export default function CharactersPage() {
     } else if (selectedDebuffs.length > 0) {
       effectMatch = hasDebuffs
     }
-
 
     return elementMatch && classMatch && rarityMatch && effectMatch
   })
@@ -225,27 +230,29 @@ export default function CharactersPage() {
       <div className="text-center space-y-2">
         <p className="text-sm text-gray-300">Filter by buffs</p>
         <div className="flex flex-wrap justify-center gap-1">
-          {allBuffs.map((buff) => (
-            <div
-              key={buff.key}
-              onClick={() => toggleEffect(buff.key, selectedBuffs, setSelectedBuffs)}
-              className={selectedBuffs.includes(buff.key) ? 'ring-2 ring-cyan-400 rounded' : ''}
-            >
-              <EffectIcon effect={buff} type="buff" />
-            </div>
-          ))}
+        {allBuffs.map((buff) => (
+  <div
+    key={buff.name}
+    onClick={() => toggleEffect(buff.name, selectedBuffs, setSelectedBuffs)}
+    className={selectedBuffs.includes(buff.name) ? 'ring-2 ring-cyan-400 rounded' : ''}
+  >
+    <EffectIcon effect={buff} type="buff" />
+  </div>
+))}
+
         </div>
         <p className="text-sm text-gray-300 mt-4">Filter by debuffs</p>
         <div className="flex flex-wrap justify-center gap-1">
-          {allDebuffs.map((debuff) => (
-            <div
-              key={debuff.key}
-              onClick={() => toggleEffect(debuff.key, selectedDebuffs, setSelectedDebuffs)}
-              className={selectedDebuffs.includes(debuff.key) ? 'ring-2 ring-cyan-400 rounded' : ''}
-            >
-              <EffectIcon effect={debuff} type="debuff" />
-            </div>
-          ))}
+        {allDebuffs.map((debuff) => (
+  <div
+    key={debuff.name}
+    onClick={() => toggleEffect(debuff.name, selectedDebuffs, setSelectedDebuffs)}
+    className={selectedDebuffs.includes(debuff.name) ? 'ring-2 ring-red-800 rounded' : ''}
+  >
+    <EffectIcon effect={debuff} type="debuff" />
+  </div>
+))}
+
         </div>
         <div className="mt-4">
           <button

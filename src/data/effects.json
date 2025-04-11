@@ -1,86 +1,142 @@
-{
-  "buffs": {
-    "Dual Attack": {
-      "label": "Dual Attack",
-      "icon": "Effect_Dual_Attack"
-    },
-    "Double Dual Attack": {
-      "label": "Double Dual Attack",
-      "icon": "Effect_Double_Dual_Attack"
-    },
-    "Barrier": {
-      "label": "Barrier",
-      "icon": "Effect_Shield"
-    },
-    "Reduces Allies Skill Cooldowns": {
-      "label": "Reduces Allies Skill Cooldowns",
-      "icon": "Cool_Charge"
-    },
-    "Critical Hit Chance": {
-      "label": "Critical Hit Chance",
-      "icon": "Stat_CriRate"
-    },
-    "Generate Chain Points": {
-      "label": "Generate Chain Points",
-      "icon": "Effect_CP"
-    },
-    "Increase Priority": {
-      "label": "Increase Priority",
-      "icon": "Effect_Increase_Priority"
-    },
-    "Increased Evasion": {
-      "label": "Increased Evasion",
-      "icon": "Stat_Avoid"
-    },
-    "Invulnerability": {
-      "label": "Invulnerability",
-      "icon": "Effect_Invincible"
-    },
-    "Increased Resilience": {
-      "label": "Increased Resilience",
-      "icon": "Stat_BuffResist"
-    },
-    "Increase Attack": {
-      "label": "Increase Attack",
-      "icon": "Stat_Atk"
-    },
-    "Increased Speed": {
-      "label": "Increased Speed",
-      "icon": "Stat_Speed"
-    },
-    "Stealth": {
-      "label": "Stealth",
-      "icon": "Effect_Stealthed"
-    },
-    "Extra Turn": {
-      "label": "Extra Turn",
-      "icon": "Effect_Extra_Turn"
-    }
+[
+  {
+    "name": "Dual Attack",
+    "type": "buff",
+    "label": "Dual Attack",
+    "icon": "Effect_Dual_Attack",
+    "description": "Triggers an additional attack by an ally."
   },
-  "debuffs": {
-    "Buff Removal": {
-      "label": "Buff Removal",
-      "icon": "Effect_Remove_Buff"
-    },
-    "Taunted": {
-      "label": "Taunted",
-      "icon": "Effect_Taunted"
-    },
-    "Reduced Accuracy": {
-      "label": "Reduced Accuracy",
-      "icon": "Stat_Accuracy"
-    },
-    "Frozen": {
-      "label": "Frozen",
-      "icon": "Effect_Frozen"
-    },
-    "Marked": {
-      "label": "Marked",
-      "icon": "Effect_Marking"
-    },
-    "Reduced Attack": {
-      "label": "Reduced Attack",
-      "icon": "Stat_Atk"
-    }
+  {
+    "name": "Double Dual Attack",
+    "type": "buff",
+    "label": "Double Dual Attack",
+    "icon": "Effect_Double_Dual_Attack",
+    "description": "Triggers two additional attacks by allies."
+  },
+  {
+    "name": "Barrier",
+    "type": "buff",
+    "label": "Barrier",
+    "icon": "Effect_Shield",
+    "description": "Creates a protective shield that absorbs damage."
+  },
+  {
+    "name": "Reduces Allies Skill Cooldowns",
+    "type": "buff",
+    "label": "Reduces Allies Skill Cooldowns",
+    "icon": "Cool_Charge",
+    "description": "Decreases the cooldown time of allies\u2019 skills."
+  },
+  {
+    "name": "Critical Hit Chance",
+    "type": "buff",
+    "label": "Critical Hit Chance",
+    "icon": "Stat_CriRate",
+    "description": "Increases the chance to land a critical hit."
+  },
+  {
+    "name": "Generate Chain Points",
+    "type": "buff",
+    "label": "Generate Chain Points",
+    "icon": "Effect_CP",
+    "description": "Generates Chain Points used for Chain Skills."
+  },
+  {
+    "name": "Increase Priority",
+    "type": "buff",
+    "label": "Increase Priority",
+    "icon": "Effect_Increase_Priority",
+    "description": "Increases the skill's priority in turn order."
+  },
+  {
+    "name": "Increased Evasion",
+    "type": "buff",
+    "label": "Increased Evasion",
+    "icon": "Stat_Avoid",
+    "description": "Raises the chance to evade incoming attacks."
+  },
+  {
+    "name": "Invulnerability",
+    "type": "buff",
+    "label": "Invulnerability",
+    "icon": "Effect_Invincible",
+    "description": "Grants immunity to all damage and debuffs."
+  },
+  {
+    "name": "Increased Resilience",
+    "type": "buff",
+    "label": "Increased Resilience",
+    "icon": "Stat_BuffResist",
+    "description": "Increases resistance to debuffs."
+  },
+  {
+    "name": "Increase Attack",
+    "type": "buff",
+    "label": "Increase Attack",
+    "icon": "Stat_Atk",
+    "description": "Increases the unit's Attack."
+  },
+  {
+    "name": "Increased Speed",
+    "type": "buff",
+    "label": "Increased Speed",
+    "icon": "Stat_Speed",
+    "description": "Increases the unit's Speed."
+  },
+  {
+    "name": "Stealth",
+    "type": "buff",
+    "label": "Stealth",
+    "icon": "Effect_Stealthed",
+    "description": "Makes the unit untargetable by enemies."
+  },
+  {
+    "name": "Extra Turn",
+    "type": "buff",
+    "label": "Extra Turn",
+    "icon": "Effect_Extra_Turn",
+    "description": "Grants an immediate additional turn."
+  },
+  {
+    "name": "Buff Removal",
+    "type": "debuff",
+    "label": "Buff Removal",
+    "icon": "Effect_Remove_Buff",
+    "description": "Removes active buffs from the target."
+  },
+  {
+    "name": "Taunted",
+    "type": "debuff",
+    "label": "Taunted",
+    "icon": "Effect_Taunted",
+    "description": "Forces the target to attack the caster."
+  },
+  {
+    "name": "Reduced Accuracy",
+    "type": "debuff",
+    "label": "Reduced Accuracy",
+    "icon": "Stat_Accuracy",
+    "description": "Decreases the unit\u2019s chance to hit."
+  },
+  {
+    "name": "Frozen",
+    "type": "debuff",
+    "label": "Frozen",
+    "icon": "Effect_Frozen",
+    "description": "Prevents the unit from taking action."
+  },
+  {
+    "name": "Marked",
+    "type": "debuff",
+    "label": "Marked",
+    "icon": "Effect_Marking",
+    "description": "Increases damage taken by the unit."
+  },
+  {
+    "name": "Reduced Attack",
+    "type": "debuff",
+    "label": "Reduced Attack",
+    "icon": "Stat_Atk",
+    "description": "Decreases the unit\u2019s Attack."
   }
-}
+]

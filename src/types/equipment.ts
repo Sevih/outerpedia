@@ -1,3 +1,17 @@
+export type GearReference = {
+  name: string
+  mainStat: string
+  usage?: string
+}
+
+export type RecommendedGearSet = {
+  Weapon?: GearReference[]
+  Amulet?: GearReference[]
+  Set?: MiniSet[][]
+  SubstatPrio?: string
+  Note?: string
+}
+
 export interface EquipmentBase {
   name: string
   image: string
@@ -16,6 +30,20 @@ export interface EquipmentBase {
 export type MiniSet = {
   name: string
   count: number
+}
+
+export type Talisman = {
+  name: string
+  type: string
+  icon: string
+  icon_item: string
+  effect_name: string
+  effect: string
+  effect10?: string
+  icon_effect?: string
+  source?: string | null // ← autoriser null
+  boss?: string | null
+  mode?: string | null
 }
 
 

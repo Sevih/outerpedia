@@ -16,4 +16,12 @@ export type SubclassData = {
     [className: string]: ClassData
   }
   
+  export interface ExclusiveEquipment {
+    name: string
+    mainStat: string
+    effect: string
+    effect10?: string
+    icon_effect: string // icône de l'effet, pas de l'équipement
+    rank?: string
+  }
   

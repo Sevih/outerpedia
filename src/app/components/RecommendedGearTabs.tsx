@@ -6,7 +6,90 @@ import Image from "next/image"
 import WeaponMiniCard from "@/app/components/WeaponMiniCard"
 import AccessoryMiniCard from "@/app/components/AccessoryMiniCard"
 import SetMiniCard from "@/app/components/SetMiniCard"
-import type { WeaponMini, AmuletMini, EquipmentBase, MiniSet } from "@/types/equipment"
+import TalismanMiniCard from "@/app/components/TalismanMiniCard"
+import type { WeaponMini, AmuletMini, EquipmentBase, MiniSet,Talisman} from "@/types/equipment"
+import rawStats from '@/data/stats.json' assert { type: 'json' }
+
+const stats = rawStats as Record<string, { label: string; icon: string }>
+type SubstatPriority = {
+  code: string
+  label: string
+  icon: string
+  weight: number // 1 à 5
+}
+
+function parseSubstatPrio(str: string): SubstatPriority[] {
+  const groups = str.split('>').map(group => group.trim().split('=').map(s => s.trim().toUpperCase()))
+  const maxWeight = groups.length
+  const result: SubstatPriority[] = []
+
+  groups.forEach((group, index) => {
+    const weight = maxWeight - index
+    group.forEach(code => {
+      const data = stats[code]
+      if (data) {
+        result.push({
+          code,
+          label: data.label,
+          icon: data.icon,
+          weight
+        })
+      }
+    })
+  })
+
+  return result
+}
+
+function SubstatPriorityBar({ priorities }: { priorities: SubstatPriority[] }) {
+  return (
+    <div className="flex flex-col items-center gap-4 mt-6">
+      <p className="text-white font-semibold text-base flex items-center gap-2">
+            <Image
+        src="/images/ui/stats.png"
+        alt="Substat icon"
+        width={32}
+        height={32}
+        style={{ width: 32, height: 32 }}
+      />
+        Substat Priority
+      </p>
+
+      <div className="flex flex-col gap-4 w-full max-w-md">
+        {priorities.map((stat, i) => (
+          <div key={i} className="flex flex-col items-start">
+            {/* Nom + icône au-dessus */}
+            <div className="flex items-center gap-2 mb-1">
+              <Image
+                src={`/images/ui/effect/${stat.icon}`}
+                alt={stat.label}
+                width={18}
+                height={18}
+                style={{ width: 18, height: 18 }}
+              />
+              <span className="text-sm text-white font-medium">{stat.label}</span>
+            </div>
+
+            {/* Barre de segments (all yellow if active) */}
+            <div className="flex gap-1">
+              {Array.from({ length: 5 }).map((_, j) => (
+                <div
+                  key={j}
+                  className={`h-2 rounded-sm ${
+                    j < stat.weight ? 'bg-yellow-400' : 'bg-gray-700'
+                  }`}
+                  style={{ width: '50px' }} // ajustable selon ton feeling
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+
 
 type GearReference = { name: string; mainStat: string; usage?: string }
 
@@ -14,6 +97,9 @@ type RecommendedGearSet = {
   Weapon?: GearReference[]
   Amulet?: GearReference[]
   Set?: MiniSet[][]
+  Talisman?: string[]  
+  SubstatPrio?: string
+  Note?: string
 }
 
 type CharacterGearData = {
@@ -44,11 +130,14 @@ export default function RecommendedGearTabs({
   character,
   weapons,
   amulets,
+  talismans,
 }: {
   character: CharacterGearData
   weapons: EquipmentBase[]
   amulets: EquipmentBase[]
+  talismans: Talisman[] //
 }) {
+
   const [gearTab, setGearTab] = useState<"PVE" | "PVP">("PVE")
   const tabList = [
     { key: "PVE", label: "PVE", icon: "pve.png" },
@@ -71,6 +160,13 @@ export default function RecommendedGearTabs({
   const gear = isPVE ? character.recommendedGearPVE : character.recommendedGearPVP
   const recommendedWeapons = buildRecommendedMini<WeaponMini>(gear?.Weapon, weapons)
   const recommendedAmulets = buildRecommendedMini<AmuletMini>(gear?.Amulet, amulets)
+  
+
+  const recommendedTalismanNames = gear?.Talisman
+  const recommendedTalismans = recommendedTalismanNames
+  ?.map(name => talismans.find(t => t.name === name))
+  .filter((x): x is Talisman => x !== undefined) ?? []
+
 
   return (
     <div className="mt-6">
@@ -148,6 +244,60 @@ export default function RecommendedGearTabs({
               </div>
             </div>
           </div>
+           {/* Substats */}
+           {(gear?.SubstatPrio || gear?.Note) && (
+  <div className="flex flex-col md:flex-row justify-center gap-8 mt-6 items-start w-full max-w-4xl mx-auto">
+    {/* Substat Priority (à gauche) */}
+    {gear?.SubstatPrio && (
+      <div className="flex-1 flex justify-center">
+        <SubstatPriorityBar priorities={parseSubstatPrio(gear.SubstatPrio)} />
+      </div>
+    )}
+
+    {/* Note (à droite) */}
+    <div className="flex-1 flex flex-col gap-4 items-center">
+
+    <div className="w-full bg-black/30 border border-white/10 rounded-lg p-4 flex flex-wrap justify-center gap-3 overflow-visible">
+
+  {recommendedTalismans.length > 0 ? (
+    recommendedTalismans.map((talisman, idx) => (
+      <TalismanMiniCard key={`talisman-${gearTab}-${idx}`} talisman={talisman} />
+    ))
+  ) : (
+    <div className="w-full max-w-[220px] min-h-[130px] flex items-center justify-center text-gray-400 italic">
+      No talisman recommended
+    </div>
+  )}
+</div>
+
+
+  {/* Notes */}
+  {gear?.Note && (
+    <div className="w-full max-w-[220px] text-sm text-white bg-black/30 border border-white/10 rounded-lg p-4">
+      <p className="font-bold mb-2 flex items-center gap-2">
+        <Image
+          src="/images/ui/note.png"
+          alt="Note icon"
+          width={20}
+          height={20}
+          className="object-contain"
+        />
+        Notes
+      </p>
+      <p className="text-gray-300 italic whitespace-pre-line">{gear.Note}</p>
+    </div>
+  )}
+</div>
+
+
+
+
+
+  </div>
+)}
+
+
+
         </motion.div>
       </AnimatePresence>
     </div>
