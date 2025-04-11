@@ -17,7 +17,6 @@ type Talisman = {
 }
 
 export default function TalismanMiniCard({ talisman }: { talisman: Talisman }) {
-  const showTooltip = talisman.source || talisman.boss || talisman.mode
 
   return (
     <div className="flex flex-col items-center group w-[100px]">
