@@ -498,29 +498,30 @@ export async function generateMetadata(props: { params: Promise<{ name: string }
   const url = `https://outerpedia.com/characters/${character.name.toLowerCase()}`;
 
   return {
-    title,
-    description,
+    title: `${character.name} - Outerpedia`,
+    description: `View character details for ${character.name}, a ${character.class} (${character.subclass}) in Outerplane.`,
     openGraph: {
-      title,
-      description,
+      title: `${character.name} - Outerpedia`,
+      description: `View character details for ${character.name}, a ${character.class} (${character.subclass}) in Outerplane.`,
       url,
       type: 'website',
       images: [
         {
           url: image,
-          width: 360,
-          height: 400,
+          width: 100,
+          height: 100,
           alt: character.name,
         },
       ],
     },
     twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
+      card: 'summary', // 👈 miniature à droite comme Epic7x
+      title: `${character.name} - Outerpedia`,
+      description: `View character details for ${character.name}, a ${character.class} (${character.subclass}) in Outerplane.`,
       images: [image],
     },
-  };
+  }
+  ;
 }
 
 function getSkillLabel(index: number): string {
