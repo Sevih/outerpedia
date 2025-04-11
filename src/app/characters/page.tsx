@@ -5,6 +5,8 @@ import effects from '@/data/effects.json'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import type { EffectData, CharacterLite, SkillLite } from '@/types/types'
+
 
 function ElementIcon({ element }: { element: string }) {
   return (
@@ -34,7 +36,7 @@ function ClassIcon({ className }: { className: string }) {
   )
 }
 
-function EffectIcon({ effect, type }: { effect: any; type: 'buff' | 'debuff' }) {
+function EffectIcon({ effect, type }: { effect: EffectData; type: 'buff' | 'debuff' }) {
   const style =
     type === 'buff' ? 'bg-gray-700 hover:bg-blue-800/70' : 'bg-gray-700 hover:bg-red-800/70'
   return (
@@ -59,7 +61,7 @@ function EffectIcon({ effect, type }: { effect: any; type: 'buff' | 'debuff' }) 
   )
 }
 
-function getAllEffects(char: any, type: 'buffs' | 'debuffs'): string[] {
+function getAllEffects(char: CharacterLite, type: 'buffs' | 'debuffs'): string[] {
   const skillEffects = char.skills?.flatMap((s: any) => s[type] || []) || []
   const chain = char[`chain_${type}`] || []
   const dual = char[`dual_${type}`] || []

@@ -25,3 +25,34 @@ export type SubclassData = {
     rank?: string
   }
   
+
+  type EffectType = 'buff' | 'debuff'
+
+  export type EffectData = {
+    name: string
+    label: string
+    icon?: string
+    type: EffectType | string
+    description?: string
+  }
+  
+  
+  
+  export type SkillLite = {
+    buffs?: string[]
+    debuffs?: string[]
+  }
+  
+  export type CharacterLite = {
+    id: string
+    name: string
+    element: string
+    class: string
+    rarity: number
+    skills?: SkillLite[]
+    chain_buffs?: string[]
+    chain_debuffs?: string[]
+    dual_buffs?: string[]
+    dual_debuffs?: string[]
+  }
+  
