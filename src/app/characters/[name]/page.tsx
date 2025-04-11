@@ -494,34 +494,34 @@ export async function generateMetadata(props: { params: Promise<{ name: string }
 
   const title = `${character.name} - Outerpedia`;
   const description = `View chracter details for ${character.name}, a ${character.class} (${character.subclass}) in Outerplane.`;
-  const image = `https://outerpedia.com/images/characters/thumbs/IG_Turn_${character.id}.jpg`;
+  const image = `https://outerpedia.com/images/characters/atb/IG_Turn_${character.id}.png`;
   const url = `https://outerpedia.com/characters/${character.name.toLowerCase()}`;
 
   return {
+  title: title,
+  description: description,
+  openGraph: {
     title: `${character.name} - Outerpedia`,
-    description: `View character details for ${character.name}, a ${character.class} (${character.subclass}) in Outerplane.`,
-    openGraph: {
-      title: `${character.name} - Outerpedia`,
-      description: `View character details for ${character.name}, a ${character.class} (${character.subclass}) in Outerplane.`,
-      url,
-      type: 'website',
-      images: [
-        {
-          url: image,
-          width: 100,
-          height: 100,
-          alt: character.name,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary', // 👈 miniature à droite comme Epic7x
-      title: `${character.name} - Outerpedia`,
-      description: `View character details for ${character.name}, a ${character.class} (${character.subclass}) in Outerplane.`,
-      images: [image],
-    },
-  }
-  ;
+    description: description,
+    url,
+    type: 'website',
+    images: [
+      {
+        url: image,
+        width: 100,
+        height: 100,
+        alt: character.name,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary', // 👈 miniature à droite comme Epic7x
+    title: `${character.name} - Outerpedia`,
+    description: description,
+    images: [image],
+  },
+}
+;
 }
 
 function getSkillLabel(index: number): string {
