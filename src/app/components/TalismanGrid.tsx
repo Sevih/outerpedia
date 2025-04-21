@@ -1,8 +1,23 @@
 import TalismanCard from "./TalismanCard";
 
-type Props = {
-  talismans: any[];
+type Talisman = {
+  name: string;
+  type: string;
+  icon: string;
+  icon_item: string;
+  effect_name: string;
+  effect: string;
+  effect10: string;
+  icon_effect: string;
+  source: string | null;
+  boss: string | null;
+  mode: string | null;
 };
+
+type Props = {
+  talismans: Talisman[];
+};
+
 
 export default function TalismanGrid({ talismans }: Props) {
   return (

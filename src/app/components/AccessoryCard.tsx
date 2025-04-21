@@ -21,13 +21,14 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
           alt="background"
           fill
           className="absolute inset-0 z-0"
+          sizes="100px"
         />
         <Image
           src={`/images/equipment/${accessory.image}`}
           alt={accessory.name}
           fill
           className="relative z-10 object-contain"
-          unoptimized
+          sizes="100px"
         />
         {accessory.effect_icon && (
           <div className="absolute top-0 right-0 z-20 translate-x-1/3 -translate-y-1/3">
@@ -36,7 +37,7 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
               alt="Effect"
               width={28}
               height={28}
-              unoptimized
+              style={{ width: 28, height: 28 }}
             />
           </div>
         )}
@@ -47,7 +48,7 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
               alt="Class"
               width={24}
               height={24}
-              unoptimized
+              style={{ width: 24, height: 24 }}
             />
           </div>
         )}
@@ -68,14 +69,14 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
 
       {/* Badge effet */}
       <div className="inline-flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-full text-xs text-white font-medium mt-1 max-w-[180px] mx-auto whitespace-nowrap justify-center">
-        <Image
-          src="/images/ui/effect/SC_Buff_Effect_Freeze.png"
-          alt={accessory.effect_name}
-          width={16}
-          height={16}
-          className="w-4 h-4"
-          unoptimized
-        />
+      <Image
+  src="/images/ui/effect/SC_Buff_Effect_Freeze.png"
+  alt={accessory.effect_name}
+  width={16}
+  height={16}
+  unoptimized
+/>
+
         <span>{accessory.effect_name}</span>
       </div>
 

@@ -54,6 +54,7 @@ export default function ExclusiveEquipmentList() {
                 src="/images/ui/bg_item_leg.png"
                 alt="background"
                 fill
+                sizes="80px"
                 className="absolute inset-0 z-0"
               />
               <Image

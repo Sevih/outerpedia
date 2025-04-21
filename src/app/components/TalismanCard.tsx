@@ -29,6 +29,7 @@ export default function TalismanCard({
           src="/images/ui/bg_item_leg.png"
           alt="background"
           fill
+          sizes="80px"
           className="absolute inset-0 z-0"
         />
         {/* Icône du talisman */}
@@ -36,6 +37,7 @@ export default function TalismanCard({
           src={`/images/equipment/TI_Equipment_Talisman_${icon}.png`}
           alt={name}
           fill
+          sizes="80px"
           className="relative z-10 object-contain"
         />
         {/* Icône d'effet en haut à droite */}
@@ -45,9 +47,6 @@ export default function TalismanCard({
             alt={effect_name}
             width={32}
             height={32}
-            onError={(e) => {
-              console.error("❌ Image introuvable :", `/images/ui/effect/TI_Icon_UO_Talisman_${icon_item}.png`);
-            }}
           />
         </div>
       </div>
@@ -60,6 +59,7 @@ export default function TalismanCard({
           alt={effect_name}
           width={24}
           height={24}
+          style={{ width: 24, height: 24 }}
         />
         <span className="text-sm">{effect_name}</span>
       </div>

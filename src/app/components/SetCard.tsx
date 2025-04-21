@@ -33,6 +33,7 @@ export default function SetCard({ set }: { set: ArmorSet }) {
               alt="bg"
               fill
               className="absolute inset-0 z-0"
+              sizes="80px"
             />
             <Image
               src={`/images/equipment/TI_Equipment_${part}_${set.image_prefix}.png`}

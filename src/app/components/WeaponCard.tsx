@@ -19,14 +19,15 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
           src="/images/ui/bg_item_leg.png"
           alt="background"
           fill
+          sizes="100px"
           className="absolute inset-0 z-0"
         />
         <Image
           src={`/images/equipment/${weapon.image}`}
           alt={weapon.name}
           fill
-          className="relative z-10 object-contain"
-          unoptimized
+          sizes="100px"
+          className="relative z-10 object-contain"          
         />
         {weapon.effect_icon && (
           <div className="absolute top-0 right-0 z-20 translate-x-1/3 -translate-y-1/3">
@@ -35,7 +36,7 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
               alt="Effect"
               width={28}
               height={28}
-              unoptimized
+              style={{ width: 28, height: 28 }}
             />
           </div>
         )}
@@ -46,7 +47,8 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
               alt="Class"
               width={24}
               height={24}
-              unoptimized
+              style={{ width: 24, height: 24 }}
+              
             />
           </div>
         )}
@@ -72,7 +74,7 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
           alt={weapon.effect_name}
           width={16}
           height={16}
-          className="w-4 h-4"
+          style={{ width: 16, height: 16 }}
           unoptimized
         />
         <span>{weapon.effect_name}</span>

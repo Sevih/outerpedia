@@ -20,7 +20,7 @@ export default function StatIconsRow({ statsList }: { statsList: string[] }) {
                 alt={data.label}
                 width={28}
                 height={28}
-                unoptimized
+                style={{ width: 28, height: 28 }}
               />
             </div>
           );
