@@ -1,17 +1,16 @@
 {
-"2000011":{
-      "name":"Eclipse",
-      "mainStat":"ACC (To: Fire)",
-      "effect":"Increases damage proportional to the wearer and the target's Speed",
-      "effect10":"+30% Critical Damage",
+"k":{
+      "name":"Monomolecular Blade",
+      "mainStat":"Reduces Earth Damage Taken",
+      "effect":"When using Slinding Uppercut, has a 100% chance to remove 1 buff(s) from the target",
+      "effect10":"When using Slinding Uppercut, has a 100% chance to remove 2 buff(s) from the target",
       "icon_effect":"TI_Icon_UO_Accessary_07"
     },
-"2000002":{
-      "name":"Eclipse",
-      "mainStat":"ACC (To: Fire)",
-      "effect":"Increases damage proportional to the wearer and the target's Speed",
-      "effect10":"+30% Critical Damage",
-      "icon_effect":"TI_Icon_UO_Accessary_07",
-      "rank":"B"
+"vera":{
+      "name":"Blade of Destiny",
+      "mainStat":"Accuracy to Light",
+      "effect":"Increases Critical Damage by 3% after killing an enemy (max 5 stacks)",
+      "effect10":"Increases Critical Damage by 5% after killing an enemy (max 5 stacks)",
+      "icon_effect":"TI_Icon_UO_Accessary_07"
     }
 }

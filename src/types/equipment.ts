@@ -73,5 +73,20 @@ export interface Accessory {
   mode?: string | null;
 }
 
+export interface Weapon {
+  name: string;
+  type: string;
+  rarity: string;
+  image: string;
+  effect_name: string;
+  effect_desc1: string;
+  effect_desc4: string;
+  effect_icon: string;
+  class: string | null;
+  source: string;
+  boss: string | null;
+  mode?: string | null;
+}
+
 export type WeaponMini = EquipmentBase
 export type AmuletMini = EquipmentBase

@@ -11,12 +11,18 @@ import SetCard from "@/app/components/SetCard";
 import bossData from "@/data/boss.json";
 import statsData from "@/data/stats.json";
 import { cleanAccessory } from '@/lib/cleaner';
+import talismans from "@/data/talisman.json";
+import TalismanGrid from "@/app/components/TalismanGrid";
+import ExclusiveEquipmentList from "@/app/components/ExclusiveEquipmentCard";
+
 
 export default function EquipmentsClient() {
   const tabList = [
     { key: "weapon", label: "Weapons", icon: "weapon.png" },
     { key: "accessory", label: "Accessories", icon: "accessory.png" },
-    { key: "armor", label: "Armor Set", icon: "armor.png" }
+    { key: "armor", label: "Armor Set", icon: "armor.png" },
+    { key: "talisman", label: "Talismans", icon: "talisman.png" },
+    { key: "exclusive", label: "Exclusive", icon: "exclusive.png" }
   ];
   
   const [activeTabRef, setActiveTabRef] = useState<HTMLButtonElement | null>(null);
@@ -29,7 +35,7 @@ export default function EquipmentsClient() {
       indicatorRef.current.style.width = `${offsetWidth}px`;
     }
   }, [activeTabRef]);
-  const [tab, setTab] = useState<"weapon" | "accessory" | "armor">("weapon");
+  const [tab, setTab] = useState<"weapon" | "accessory" | "armor" | "talisman" | "exclusive">("weapon");
 
   const [weaponClassFilter, setWeaponClassFilter] = useState<string | null>(null);
   const [weaponBossFilter, setWeaponBossFilter] = useState<string | null>(null);
@@ -356,6 +362,17 @@ export default function EquipmentsClient() {
     </div>
   </>
 )}
+{tab === "talisman" && (
+  <TalismanGrid talismans={talismans} />
+)}
+
+{tab === "exclusive" && (
+  <ExclusiveEquipmentList />
+)}
+
+
+
+
 
     </main>
   );

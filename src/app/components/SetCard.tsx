@@ -1,151 +1,111 @@
-import React from "react";
 import Image from "next/image";
+import { useState } from "react";
 
 interface ArmorSet {
   name: string;
-  rarity: string;
-  set_icon: string;
-  effect_2_1: string | null;
-  effect_4_1: string | null;
-  effect_2_4: string | null;
-  effect_4_4: string | null;
-  source: string;
-  boss?: string | null;
-  mode?: string | null;
   image_prefix: string;
+  set_icon: string;
   class?: string | null;
+  effect_2_1?: string | null;
+  effect_4_1?: string | null;
+  effect_2_4?: string | null;
+  effect_4_4?: string | null;
 }
 
-const SetCard = ({ set }: { set: ArmorSet }) => {
-  const armorImages = ["Helmet", "Armor", "Gloves", "Shoes"].map(
-    (part) => `/images/equipment/TI_Equipment_${part}_${set.image_prefix}.png`
-  );
+export default function SetCard({ set }: { set: ArmorSet }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const parts = ["Helmet", "Armor", "Gloves", "Shoes"];
 
   return (
-    <div className="relative group w-[230px] h-[230px] bg-gray-800 rounded-lg p-2">
+    <div
+      onClick={() => setExpanded(!expanded)}
+      className={`relative bg-white/5 p-1 rounded-2xl shadow flex flex-col items-center text-center transition-all duration-300 ${
+        expanded ? "w-[260px]" : "w-[220px]"
+      } cursor-pointer`}
+    >
+      {/* Miniatures avec logo d’effet set */}
       <div className="grid grid-cols-2 gap-1">
-        {armorImages.map((img, i) => (
-          <div key={i} className="relative w-full h-[100px]">
-            {/* Background */}
+        {parts.map((part, i) => (
+          <div key={i} className="relative w-[80px] h-[80px]">
             <Image
               src="/images/ui/bg_item_leg.png"
-              alt="Background"
-              width={100}
-              height={100}
-              style={{ width: 100, height: 100 }}
-              className="absolute inset-0 w-full h-full object-cover z-0 rounded"
-              unoptimized
+              alt="bg"
+              fill
+              className="absolute inset-0 z-0"
             />
-
-            {/* Armor Image */}
             <Image
-              src={img}
-              alt={`Armor ${i + 1}`}
-              width={100}
-              height={100}
-              style={{ width: 100, height: 100 }}
-              className="w-full h-full object-contain relative z-10 rounded"
+              src={`/images/equipment/TI_Equipment_${part}_${set.image_prefix}.png`}
+              alt={part}
+              fill
+              className="relative z-10 object-contain"
               unoptimized
             />
-
-            {/* Set Icon */}
-            <div className="absolute top-1 right-1 z-30">
+            {/* Logo effet set */}
+            <div className="absolute top-1.5 right-1.5 z-20 translate-x-1/4 -translate-y-1/4">
               <Image
                 src={`/images/ui/effect/TI_Icon_Set_Enchant_${set.set_icon}.png`}
                 alt="Set Icon"
                 width={20}
                 height={20}
-                className="w-5 h-5"
                 unoptimized
               />
             </div>
-
-            {/* Class Icon (optional) */}
-            {set.class && (
-              <div className="absolute top-1 left-1 z-30">
-                <Image
-                  src={`/images/ui/class/${set.class.toLowerCase()}.png`}
-                  alt={set.class}
-                  width={20}
-                  height={20}
-                  className="w-5 h-5"
-                  unoptimized
-                />
-              </div>
-            )}
           </div>
         ))}
       </div>
 
-      {/* Set Name (sous la carte) */}
-      <p className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 text-center text-[11px] text-white bg-black/60 px-3 py-1 rounded font-medium max-w-[90%] truncate">
-        {set.name} Set
-      </p>
-
-      {/* Hover Tooltip */}
-      <div className="absolute z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 p-3 text-white text-xs opacity-0 group-hover:opacity-100 transition duration-200 rounded flex flex-col shadow-lg w-max min-w-[240px] max-w-[300px]">
-        {/* Titre avec icône + nom */}
-        <div className="flex items-center gap-2 mb-2">
+      {/* Classe éventuelle */}
+      {set.class && (
+        <div className="absolute top-0 left-0 z-20 -translate-x-1/3 -translate-y-1/3">
           <Image
-            src={`/images/ui/effect/TI_Icon_Set_Enchant_${set.set_icon}.png`}
-            alt="Set Icon"
-            width={20}
-            height={20}
-            className="w-5 h-5"
+            src={`/images/ui/class/${set.class.toLowerCase()}.png`}
+            alt="Class"
+            width={24}
+            height={24}
             unoptimized
           />
-          <p className="font-bold text-red-400 text-sm leading-tight">
-            {set.name} Set
-          </p>
         </div>
+      )}
 
-        {/* Tier 1 Effects */}
-        <div className="bg-gray-700 rounded p-2 mb-2 w-full">
-          <p className="text-xs font-bold text-yellow-300 mb-1">Tier 0 Effects</p>
-          {set.effect_2_1 && (
-            <p className="text-sm whitespace-normal break-words">
-              <span className="text-cyan-400 font-semibold">2 pieces:</span> {set.effect_2_1}
-            </p>
-          )}
-          {set.effect_4_1 && (
-            <p className="text-sm whitespace-normal break-words">
-              <span className="text-cyan-400 font-semibold">4 pieces:</span> {set.effect_4_1}
-            </p>
-          )}
-        </div>
-
-        {/* Tier 4 Effects */}
-        <div className="bg-gray-700 rounded p-2 w-full">
-          <p className="text-xs font-bold text-yellow-300 mb-1">Tier 4 Effects</p>
-          {set.effect_2_4 && (
-            <p className="text-sm whitespace-normal break-words">
-              <span className="text-cyan-400 font-semibold">2 pieces:</span> {set.effect_2_4}
-            </p>
-          )}
-          {set.effect_4_4 && (
-            <p className="text-sm whitespace-normal break-words">
-              <span className="text-cyan-400 font-semibold">4 pieces:</span> {set.effect_4_4}
-            </p>
-          )}
-        </div>
-
-        {/* Source / Boss */}
-        {(set.source || set.boss || set.mode) && (
-          <div className="mt-3 border-t border-gray-600 pt-2 text-[11px] text-gray-300">
-            {set.source && (
-              <p><span className="text-gray-400 font-semibold">Source:</span> {set.source}</p>
-            )}
-            {set.boss && (
-              <p><span className="text-gray-400 font-semibold">Boss:</span> {set.boss}</p>
-            )}
-            {!set.boss && set.mode && (
-              <p><span className="text-gray-400 font-semibold">Mode:</span> {set.mode}</p>
-            )}
-          </div>
+      {/* Nom */}
+      <h3 className="text-sm font-bold text-red-400 mt-2 leading-tight">
+        {set.name.includes("[") ? (
+          <>
+            {set.name.split("[")[0].trim()}
+            <br />
+            [{set.name.split("[")[1]}
+          </>
+        ) : (
+          set.name
         )}
-      </div>
+      </h3>
+
+      {/* Flèche ▼▲ */}
+      <div className="text-white/40 text-lg mt-1">{expanded ? "▲" : "▼"}</div>
+
+      {/* Effets */}
+      {expanded && (
+        <div className="bg-gray-800/90 rounded-xl px-4 py-3 text-xs text-white/90 w-full mt-2 flex flex-col gap-2">
+          <p className="text-yellow-300 font-semibold text-sm">Set Effects</p>
+
+          {(set.effect_2_1 || set.effect_4_1) && (
+            <div>
+              <p className="text-cyan-400 font-semibold text-sm">Tier 0</p>
+              {set.effect_2_1 && <p>{set.effect_2_1}</p>}
+              {set.effect_4_1 && <p>{set.effect_4_1}</p>}
+            </div>
+          )}
+
+          {(set.effect_2_4 || set.effect_4_4) && (
+            <div>
+              <p className="text-yellow-300 font-semibold text-sm">Tier 4</p>
+              {set.effect_2_4 && <p>{set.effect_2_4}</p>}
+              {set.effect_4_4 && <p>{set.effect_4_4}</p>}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
-};
-
-export default SetCard;
+}

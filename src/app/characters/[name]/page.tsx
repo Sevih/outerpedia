@@ -8,7 +8,6 @@ import type { Metadata } from 'next';
 
 import Image from 'next/image';
 import classDataRaw from '@/data/class.json';
-import stats from '@/data/stats.json';
 import rawWeapons from '@/data/weapon.json';
 import rawAmulets from '@/data/amulet.json';
 import rawTalismans from '@/data/talisman.json';
@@ -24,6 +23,14 @@ import YoutubeEmbed from '@/app/components/YoutubeEmbed';
 import formatEffectText from '@/utils/formatText';
 import eeDataRaw from '@/data/ee.json';
 
+function toKebabCase(str: string): string {
+  return str
+    .toLowerCase()
+    .normalize("NFD") // enlever accents
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
 
 function getSkillLabel(index: number): string {
   return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`;
@@ -98,59 +105,30 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
   let recoData = null
   
 
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const res = await fetch(`${baseUrl}/api/reco/${recoFile}`)
-    if (res.ok) {
-      recoData = await res.json()
+  if (character.Rarity === 3) {
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+      const res = await fetch(`${baseUrl}/api/reco/${recoFile}`);
+      if (res.ok) {
+        recoData = await res.json();
+      }
+    } catch {
+      recoData = null;
     }
-  } catch{
-    recoData = null
   }
   console.timeEnd(label);
   // Fonction utilitaire à placer au-dessus du return :
-    function renderMainStat(stat: string) {
-    const [baseStat, elementPart] = stat.split('(').map((s: string) => s.trim())
-    const statCode: string = baseStat.split(' ')[0]
-    const statInfo = stats[statCode.toUpperCase() as keyof typeof stats]
-  
-    const elementMatch: RegExpMatchArray | null = elementPart?.match(/To:\s*(\w+)/i) ?? null
-    const element: string | undefined = elementMatch?.[1]
-    
-    
+  function renderMainStat(stat: string) {
     return (
-      <div className="flex items-center gap-1 text-sm italic text-gray-400">
-        {statInfo && (
-          <Image
-            src={`/images/ui/effect/${statInfo.icon}`}
-            alt={statInfo.label}
-            width={18}
-            height={18}
-            style={{ width: 18, height: 18 }}
-            className="object-contain"
-          />
-        )}
-        <span>Main Stat:</span>
-        <span>{statInfo?.label ?? '—'}</span>
-        {element && (
-          <span className="flex items-center gap-1 ml-1">
-            (
-            <Image
-              src={`/images/ui/elem/${element.toLowerCase()}.png`}
-              alt={element}
-              width={16}
-              height={16}
-              style={{ width: 16, height: 16 }}
-              className="object-contain"
-            />
-            To: {element})
-          </span>
-        )}
+      <div className="text-sm italic text-gray-300 flex items-center gap-2">
+        <span className="font-semibold text-white">Main Stat:</span>
+        <span>{stat}</span>
       </div>
-    )
+    );
   }
   
-  const ee = eeData[character.ID];
+  
+  const ee = eeData[toKebabCase(character.Fullname)];
   return (
     <div className="max-w-5xl mx-auto p-6">
       {/* Partie haute : illustration + infos principales */}
@@ -271,7 +249,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             }}
           >
             <Image
-              src={`/images/characters/ex/TI_Equipment_EX_${character.ID}.png`}
+              src={`/images/characters/ex/${toKebabCase(character.Fullname)}.png`}
               alt={`${character.Fullname} Exclusive Equipment`}
               fill
               sizes="120px"
@@ -592,8 +570,8 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
 </div>
 
 
-      {/* Gear */}
-      {recoData ? (
+{/* Gear */}
+{recoData ? (
   <RecommendedGearTabs
     character={{
       recommendedGearPVE: recoData.recommendedGearPVE,
@@ -605,9 +583,12 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
   />
 ) : (
   <div className="text-white text-center text-sm italic mt-4">
-    Recommended gear coming soon...
+    {character.Rarity === 3
+      ? "Recommended gear coming soon..."
+      : ""}
   </div>
 )}
+
 
 
 

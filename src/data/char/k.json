@@ -149,7 +149,7 @@
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, reduces all allies' skill cooldowns by <color=#28d9ed>0.1% turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to remove <color=#28d9ed>1</color> <color=#28d9ed>buff(s)</color> from the target.",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, reduces all allies' skill cooldowns by <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to remove <color=#28d9ed>1</color> <color=#28d9ed>buff(s)</color> from the target.",
       "DescID": "SKILL_DESC_2000001_Skill04_LV1,SKILL_DESC_2000001_Skill04_LV1,SKILL_DESC_2000001_Skill04_LV1,SKILL_DESC_2000001_Skill04_LV1,SKILL_DESC_2000001_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Fire_Finish",
       "NameIDSymbol": "104",
