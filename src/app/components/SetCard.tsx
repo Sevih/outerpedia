@@ -101,7 +101,7 @@ const SetCard = ({ set }: { set: ArmorSet }) => {
 
         {/* Tier 1 Effects */}
         <div className="bg-gray-700 rounded p-2 mb-2 w-full">
-          <p className="text-xs font-bold text-yellow-300 mb-1">Tier 1 Effects</p>
+          <p className="text-xs font-bold text-yellow-300 mb-1">Tier 0 Effects</p>
           {set.effect_2_1 && (
             <p className="text-sm whitespace-normal break-words">
               <span className="text-cyan-400 font-semibold">2 pieces:</span> {set.effect_2_1}

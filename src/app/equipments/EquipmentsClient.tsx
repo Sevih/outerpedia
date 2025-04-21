@@ -38,7 +38,10 @@ export default function EquipmentsClient() {
   const [accessoryBossFilter, setAccessoryBossFilter] = useState<string | null>(null);
   const [accessoryMainStatFilter, setAccessoryMainStatFilter] = useState<string | null>(null);
 
-  const weaponClasses = Array.from(new Set(weapons.map(w => w.class).filter(Boolean)));
+  const weaponClasses = Array.from(
+    new Set(weapons.map(w => w.class).filter((cls): cls is string => cls !== null))
+  );
+  
   const weaponBossesOrModes = Array.from(new Set(weapons.map(w => w.boss || w.mode).filter((v): v is string => Boolean(v))));
 
   const accessoryClasses = Array.from(new Set(accessories.map(a => a.class).filter(Boolean)));
@@ -60,32 +63,50 @@ export default function EquipmentsClient() {
     (!accessoryMainStatFilter || a.mainStats.includes(accessoryMainStatFilter))
   );
 
+  type BossEntry = {
+    [bossName: string]: { id: string }[];
+  };
+  
+  type BossGroup = {
+    [category: string]: BossEntry[];
+  };
+  
+  
+
   const bossMap: Record<string, string> = {};
-  bossData.forEach(group => {
-    if (group["Special Request"]) {
-      group["Special Request"].forEach(entry => {
+
+  (bossData as BossGroup[]).forEach(group => {
+    // Cas spécial : Special Request avec nom d'image particulier
+    const specialRequest = group["Special Request"];
+    if (specialRequest) {
+      specialRequest.forEach(entry => {
         Object.entries(entry).forEach(([name, data]) => {
           const id = data?.[0]?.id;
-          if (id) bossMap[name] = `/images/characters/boss/mini/IG_Turn_${id}.png`;
+          if (id) {
+            bossMap[name] = `/images/characters/boss/mini/IG_Turn_${id}.png`;
+          }
         });
       });
     }
-    if (group["Irregular Extermination"] || group["Adventure License"]) {
-      group["Irregular Extermination"].forEach(entry => {
-        Object.entries(entry).forEach(([name, data]) => {
-          const fileName = data?.[0]?.id;
-          if (fileName) bossMap[name] = `/images/characters/boss/mini/${fileName}.png`;
+  
+    // Cas classiques : Irregular Extermination + Adventure License (image directe)
+    ["Irregular Extermination", "Adventure License"].forEach(key => {
+      const entries = group[key];
+      if (entries) {
+        entries.forEach(entry => {
+          Object.entries(entry).forEach(([name, data]) => {
+            const fileName = data?.[0]?.id;
+            if (fileName) {
+              bossMap[name] = `/images/characters/boss/mini/${fileName}.png`;
+            }
+          });
         });
-      });
-      group["Adventure License"].forEach(entry => {
-        Object.entries(entry).forEach(([name, data]) => {
-          const fileName = data?.[0]?.id;
-          if (fileName) bossMap[name] = `/images/characters/boss/mini/${fileName}.png`;
-        });
-      });
-    }
-    
+      }
+    });
   });
+  
+  
+
 
   return (
     <main className="p-3">

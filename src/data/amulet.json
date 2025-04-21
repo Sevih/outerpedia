@@ -141,8 +141,8 @@
     "image": "regular_accessary.png",
     "mainStats": ["RES","CHC","SPD","DEF%"],
     "effect_name": "Reincarnation",
-    "effect_desc1": "Has a 50% chance toi resurrect and heal for 15% of Max Health when killed (activated once per battle)",
-    "effect_desc4": "Has a 100% chance toi resurrect and heal for 30% of Max Health when killed (activated once per battle)",
+    "effect_desc1": "Has a 50% chance to resurrect and heal for 15% of Max Health when killed (activated once per battle)",
+    "effect_desc4": "Has a 100% chance to resurrect and heal for 30% of Max Health when killed (activated once per battle)",
     "effect_icon": "10",
     "class": "Healer",
     "source": "Special Request",
@@ -397,12 +397,12 @@
     "mainStats": ["HP%","EVA","EFF","CHD","PEN","HH"],
     "effect_name": "Ambition : Aggression",
     "effect_desc1": "Increases damage dealt to enemies with lower Accuracy than the wearer by 25%",
-    "effect_desc4": "??",
+    "effect_desc4": "Increases damage dealt to enemies with lower Accuracy than the wearer by 50%",
     "effect_icon": "01",
     "class": "Striker",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   },
   {
     "name": "Briareos's Ambition [Defender]",
@@ -412,12 +412,12 @@
     "mainStats": ["HP%","EVA","EFF","CHD","PEN","HH"],
     "effect_name": "Ambition : Determination",
     "effect_desc1": "Increases Priority of the wearer by 5% after an ally uses an attack that targets all enemies (Activated only once every 2 turn)",
-    "effect_desc4": "??",
+    "effect_desc4": "Increases Priority of the wearer by 10% after an ally uses an attack that targets all enemies (Activated only once every 2 turn)",
     "effect_icon": "01",
     "class": "Defender",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   },
   {
     "name": "Briareos's Ambition [Ranger]",
@@ -427,12 +427,12 @@
     "mainStats": ["DEF%","ACC","RES","CHC","SPD","ATK%"],
     "effect_name": "Ambition : Precision",
     "effect_desc1": "Increases damage by 1% for every 7 Effectiveness (Max 100%)",
-    "effect_desc4": "??",
+    "effect_desc4": "Increases damage by 1% for every 3 Effectiveness (Max 100%)",
     "effect_icon": "01",
     "class": "Ranger",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   },
   {
     "name": "Briareos's Ambition [Mage]",
@@ -442,12 +442,12 @@
     "mainStats": ["HP%","EVA","EFF","CHD","PEN","HH"],
     "effect_name": "Ambition : Mystery",
     "effect_desc1": "Increases Priority of the wearer by 7.5% when scoring a critical hit (Activated only once per turn)",
-    "effect_desc4": "??",
+    "effect_desc4": "Increases Priority of the wearer by 15% when scoring a critical hit (Activated only once per turn)",
     "effect_icon": "01",
     "class": "Mage",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   },
   {
     "name": "Briareos's Ambition [Healer]",
@@ -457,12 +457,12 @@
     "mainStats": ["HP%","EVA","EFF","CHD","PEN","HH"],
     "effect_name": "Ambition : Blessing",
     "effect_desc1": "Increases Resilience of the wearer by 15%",
-    "effect_desc4": "??",
+    "effect_desc4": "Increases Resilience of the wearer by 30%",
     "effect_icon": "01",
     "class": "Healer",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   },
   {
     "name": "Gorgon's Vanity [Striker]",
@@ -477,7 +477,7 @@
     "class": "Striker",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   },
   {
     "name": "Gorgon's Vanity [Defender]",
@@ -492,7 +492,7 @@
     "class": "Defender",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   },
   {
     "name": "Gorgon's Vanity [Ranger]",
@@ -502,12 +502,12 @@
     "mainStats": ["HP%","EFF","RES","CHC","SPD","ATK%"],
     "effect_name": "Vanity : Precision",
     "effect_desc1": "Increases damage by 10% proportional to the number of buffs granted",
-    "effect_desc4": "??",
+    "effect_desc4": "Increases damage by 20% proportional to the number of buffs granted",
     "effect_icon": "01",
     "class": "Ranger",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   },
   {
     "name": "Gorgon's Vanity [Mage]",
@@ -517,12 +517,12 @@
     "mainStats": ["HP%","EVA","EFF","CHD","PEN","HH"],
     "effect_name": "Vanity : Mystery",
     "effect_desc1": "Increases Speed proportional to missing Health (Max 25%)",
-    "effect_desc4": "??",
+    "effect_desc4": "Increases Speed proportional to missing Health (Max 50%)",
     "effect_icon": "01",
     "class": "Mage",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   },
   {
     "name": "Gorgon's Vanity [Healer]",
@@ -532,11 +532,11 @@
     "mainStats": ["HP%","EFF","RES","CHC","SPD","ATK%"],
     "effect_name": "Vanity : Blessing",
     "effect_desc1": "Has a 50% chance to grant increased Effectiveness to all allies for 1 turn after using a Burst Skill",
-    "effect_desc4": "??",
+    "effect_desc4": "Has a 100% chance to grant increased Effectiveness to all allies for 1 turn after using a Burst Skill",
     "effect_icon": "01",
     "class": "Healer",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation"
+    "mode": "Infiltration Operation / Pursuit Operation"
   }
  ]

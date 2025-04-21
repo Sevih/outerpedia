@@ -8,7 +8,7 @@ export function highlightNumbersOnly(text: string) {
     return text.split(regex).map((part, i) => {
       if (!part) return null;
       if (regex.test(part)) {
-        return <span key={i} className="text-yellow-400 font-semibold">{part}</span>;
+        return <span key={i} className="text-cyan-400 font-semibold">{part}</span>;
       } else {
         return part;
       }
@@ -29,7 +29,7 @@ export  function highlightKeywordsAndNumbers(text: string) {
       if (keywordMatch) {
         return <span key={i} className="text-cyan-400 font-medium">{part}</span>;
       } else if (numberMatch) {
-        return <span key={i} className="text-yellow-400 font-semibold">{part}</span>;
+        return <span key={i} className="text-cyan-400 font-semibold">{part}</span>;
       } else {
         return part;
       }
