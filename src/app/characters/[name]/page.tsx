@@ -1,0 +1,629 @@
+// 🔒 Forcer la génération statique uniquement
+export const dynamic = 'force-static';
+
+import { notFound } from 'next/navigation';
+import { promises as fs } from 'fs';
+import path from 'path';
+import type { Metadata } from 'next';
+
+import Image from 'next/image';
+import classDataRaw from '@/data/class.json';
+import stats from '@/data/stats.json';
+import rawWeapons from '@/data/weapon.json';
+import rawAmulets from '@/data/amulet.json';
+import rawTalismans from '@/data/talisman.json';
+
+import type { ClassDataMap } from '@/types/types';
+import type { EquipmentBase, Talisman,ExclusiveEquipment } from '@/types/equipment';
+import type { Character, Skill } from '@/types/character';
+
+import RecommendedGearTabs from '@/app/components/RecommendedGearTabs';
+import BuffDebuffDisplay from '@/app/components/BuffDebuffDisplay';
+import TranscendenceSlider from '@/app/components/TranscendenceSlider';
+import YoutubeEmbed from '@/app/components/YoutubeEmbed';
+import formatEffectText from '@/utils/formatText';
+import eeDataRaw from '@/data/ee.json';
+
+
+function getSkillLabel(index: number): string {
+  return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`;
+}
+
+export async function generateStaticParams() {
+  const dirPath = path.join(process.cwd(), 'src/data/char');
+  const files = await fs.readdir(dirPath);
+
+  return files
+    .filter((file) => file.endsWith('.json'))
+    .map((file) => ({ name: file.replace('.json', '').toLowerCase() }));
+}
+
+// ✅ SEO dynamique
+export async function generateMetadata(context: { params: Promise<{ name: string }> }): Promise<Metadata> {
+  const { name } = await context.params;
+  const filePath = path.join(process.cwd(), 'src/data/char', `${name}.json`);
+
+  try {
+    const raw = await fs.readFile(filePath, 'utf-8');
+    const character: Character = JSON.parse(raw);
+
+    const title = `${character.Fullname} - Outerpedia`;
+    const description = `View character details for ${character.Fullname}, a ${character.Class} (${character.SubClass}) in Outerplane.`;
+    const image = `https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.png`;
+    const url = `https://outerpedia.com/characters/${name}`;
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        url,
+        type: 'website',
+        images: [{ url: image, width: 100, height: 100, alt: character.Fullname }],
+      },
+      twitter: {
+        card: 'summary',
+        title,
+        description,
+        images: [image],
+      },
+    };
+  } catch {
+    return { title: 'Outerpedia' };
+  }
+}
+
+// ✅ Page personnage (Next.js 15+ : params est une Promise)
+export default async function CharacterDetailPage(context: { params: Promise<{ name: string }> }) {
+  const { name } = await context.params;
+  const label = `⏱️ Character page: ${name} - ${Date.now()}`;
+  console.time(label);
+  const filePath = path.join(process.cwd(), 'src/data/char', `${name}.json`);
+
+  try {
+    const raw = await fs.readFile(filePath, 'utf-8');
+    const character: Character = JSON.parse(raw);
+    if (!character) return notFound();
+
+  const weapons = rawWeapons as unknown as EquipmentBase[];
+  const amulets = rawAmulets as unknown as EquipmentBase[];
+  const classData = classDataRaw as ClassDataMap;
+  const talismans = rawTalismans as Talisman[];
+  const eeData = eeDataRaw as Record<string, ExclusiveEquipment>
+  const classInfo = classData[character.Class as keyof typeof classData]
+  const subclassInfo = classInfo?.subclasses?.[character.SubClass as keyof typeof classInfo.subclasses]
+  const statLabels = ["Health","Defense","Evasion", "Accuracy","Speed","Attack"]
+  const recoFile = character.Fullname.toLowerCase()
+  let recoData = null
+  
+
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    const res = await fetch(`${baseUrl}/api/reco/${recoFile}`)
+    if (res.ok) {
+      recoData = await res.json()
+    }
+  } catch{
+    recoData = null
+  }
+  console.timeEnd(label);
+  // Fonction utilitaire à placer au-dessus du return :
+    function renderMainStat(stat: string) {
+    const [baseStat, elementPart] = stat.split('(').map((s: string) => s.trim())
+    const statCode: string = baseStat.split(' ')[0]
+    const statInfo = stats[statCode.toUpperCase() as keyof typeof stats]
+  
+    const elementMatch: RegExpMatchArray | null = elementPart?.match(/To:\s*(\w+)/i) ?? null
+    const element: string | undefined = elementMatch?.[1]
+    
+    
+    return (
+      <div className="flex items-center gap-1 text-sm italic text-gray-400">
+        {statInfo && (
+          <Image
+            src={`/images/ui/effect/${statInfo.icon}`}
+            alt={statInfo.label}
+            width={18}
+            height={18}
+            style={{ width: 18, height: 18 }}
+            className="object-contain"
+          />
+        )}
+        <span>Main Stat:</span>
+        <span>{statInfo?.label ?? '—'}</span>
+        {element && (
+          <span className="flex items-center gap-1 ml-1">
+            (
+            <Image
+              src={`/images/ui/elem/${element.toLowerCase()}.png`}
+              alt={element}
+              width={16}
+              height={16}
+              style={{ width: 16, height: 16 }}
+              className="object-contain"
+            />
+            To: {element})
+          </span>
+        )}
+      </div>
+    )
+  }
+  
+  const ee = eeData[character.ID];
+  return (
+    <div className="max-w-5xl mx-auto p-6">
+      {/* Partie haute : illustration + infos principales */}
+      <div className="grid grid-cols-1 md:grid-cols-[400px_1fr] gap-6">
+        {/* Illustration du personnage */}
+        <div className="relative rounded overflow-hidden shadow">
+          <Image
+            src={`/images/characters/full/IMG_${character.ID}.png`} 
+            alt={character.Fullname}
+            width={360}
+            height={400}
+            priority
+            style={{ width: 360, height: 400 , maxHeight:400,maxWidth:360}}
+            className="object-contain"
+          />
+        </div>
+
+        {/* Détails à droite : nom, rareté, classe, etc. */}
+        <div className="space-y-4">
+  <div className="flex items-center gap-2 mb-2">
+    <h1 className="text-4xl font-bold text-white">{character.Fullname}</h1>
+  </div>
+
+
+          {/* Rareté sous forme d'étoiles */}
+          <div className="flex items-center gap-2">
+            {[...Array(character.Rarity)].map((_, i) => (
+              <Image
+                key={i}
+                src="/images/ui/star.png"
+                alt="star"
+                width={20}
+                height={20}
+                style={{ width: 20, height: 20 }}
+              />
+            ))}
+          </div>
+
+          {/* Élément, Classe, Sous-classe */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <Image src={`/images/ui/elem/${character.Element.toLowerCase()}.png`} alt={character.Element} width={24} height={24} style={{ width: 24, height: 24 }} />
+              <span className="text-base">{character.Element}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Image src={`/images/ui/class/${character.Class.toLowerCase()}.png`} alt={character.Class} width={24} height={24} style={{ width: 24, height: 24 }} />
+              <span className="text-base">{character.SubClass}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Image src={`/images/ui/class/${character.SubClass.toLowerCase()}.png`} alt={character.SubClass} width={24} height={24} style={{ width: 24, height: 24 }} />
+              <span className="text-base">{character.SubClass}</span>
+            </div>
+          </div>
+
+          {/* Statistiques (diagramme) + descriptions de classe */}
+          <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">
+            <div className="relative p-2 rounded text-sm w-fit h-fit">
+              {subclassInfo?.image ? (
+                <div className="relative mx-auto">
+                  <Image
+                    src={subclassInfo.image}
+                    alt={character.SubClass}
+                    width={200} 
+                    height={200} 
+                    style={{ width: 200, height: 200 }}
+                    className="object-contain"
+                  />
+                  {statLabels.map((label, index) => {
+                    const angle = (index / statLabels.length) * 2 * Math.PI - Math.PI / 2
+                    let labelRadius = 120
+                    if (label === "Health" || label === "Accuracy") labelRadius = 110
+                    const x = 100 + Math.cos(angle) * labelRadius
+                    const y = 100 + Math.sin(angle) * labelRadius
+                    return (
+                      <div
+                        key={index}
+                        className="absolute text-[12px] text-center text-white whitespace-nowrap"
+                        style={{ left: `${x}px`, top: `${y}px`, transform: 'translate(-50%, -50%)' }}
+                      >
+                        {label}
+                      </div>
+                    )
+                  })}
+                </div>
+              ) : (
+                <p>No subclass image found.</p>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <div className="p-2 rounded text-sm">
+                <p className="font-semibold">Class Effects : {character.Class} </p>
+                <p className="whitespace-pre-line">{classInfo?.description || 'No class description found.'}</p>
+              </div>
+              <div className="p-2 rounded text-sm">
+                <p className="font-semibold">Subclass description : {character.SubClass}</p>
+                <p>{subclassInfo?.description || 'No subclass description found.'}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {(ee || character.transcend) && (
+  <div className="mt-8 text-white flex flex-col gap-4 items-start">
+    {/* Ligne : EE à gauche + Colonne à droite */}
+    <div className="flex flex-wrap md:flex-nowrap gap-4 w-full items-start">
+      {/* EE à gauche */}
+      {ee && (
+        <div className="flex flex-col md:flex-row rounded p-4 shadow hover:shadow-lg transition relative w-full md:w-[500px] min-w-[320px]">
+          <div
+            className="w-[120px] h-[120px] relative shrink-0 mr-4 rounded overflow-hidden"
+            style={{
+              backgroundImage: "url(/images/ui/bg_item_leg.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <Image
+              src={`/images/characters/ex/TI_Equipment_EX_${character.ID}.png`}
+              alt={`${character.Fullname} Exclusive Equipment`}
+              fill
+              sizes="120px"
+              className="object-contain p-2"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <p className="text-lg font-semibold">{ee.name}</p>
+            {renderMainStat(ee.mainStat)}
+
+            <div className="text-sm text-gray-300 flex flex-col gap-2">
+              {ee.icon_effect && (
+                <div className="bg-gray-500/80 rounded-full px-3 py-1 flex items-center gap-2 w-fit">
+                  <Image
+                    src={`/images/ui/effect/${ee.icon_effect}.png`}
+                    alt={ee.icon_effect}
+                    width={20}
+                    height={20}
+                    style={{ width: 20, height: 20 }}
+                    className="object-contain"
+                  />
+                  <span className="text-sm font-semibold text-white">
+                    {character.Fullname}&apos;s Exclusive Equipment
+                  </span>
+                </div>
+              )}
+              <p>
+                <span className="font-semibold text-white">Effect:</span> {ee.effect}
+              </p>
+              {ee.effect10 && (
+                <p>
+                  <span className="font-semibold text-white">[LV 10]:</span> {ee.effect10}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Colonne à droite : Tier + Priority + Transcend */}
+      <div className="flex flex-col gap-4 w-full md:w-auto">
+        {/* Tier + EE Priority côte à côte */}
+        <div className="flex gap-4">
+          {/* Character Tier */}
+          <div className="border border-gray-600 rounded-md p-4 w-[180px] h-[100px] flex flex-col justify-center items-center">
+            <p className="font-semibold text-white mb-2">Character Tier</p>
+            {character.rank ? (
+              <Image
+                src={`/images/ui/IG_Event_Rank_${character.rank}.png`}
+                alt={`Rank ${character.rank}`}
+                width={32}
+                height={32}
+                style={{ width: 32, height: 32 }}
+                className="object-contain"
+              />
+            ) : (
+              <p className="text-gray-400 italic">Coming soon...</p>
+            )}
+          </div>
+
+          {/* EE Priority */}
+          <div className="border border-gray-600 rounded-md p-4 w-[180px] h-[100px] flex flex-col justify-center items-center">
+            <p className="font-semibold text-white mb-2">Exclusive Equipment Priority</p>
+            {ee?.rank ? (
+              <Image
+                src={`/images/ui/IG_Event_Rank_${ee.rank}.png`}
+                alt={`EE Rank ${ee.rank}`}
+                width={32}
+                height={32}
+                style={{ width: 32, height: 32 }}
+                className="object-contain"
+              />
+            ) : (
+              <p className="text-gray-400 italic">Coming soon...</p>
+            )}
+          </div>
+        </div>
+
+        {/* Transcendence Slider en-dessous */}
+        {character.transcend && (
+          <div className="w-full md:w-[400px] min-w-[320px]">
+            <TranscendenceSlider transcendData={character.transcend} />
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
+
+
+
+
+
+<div className="mt-6 px-4 py-2 bg-yellow-800/50 border-l-4 border-yellow-400 rounded text-yellow-300 text-sm italic">
+  Skills are displayed here with minimum enhancements applied.
+</div>
+
+
+      {/* Section des 3 skills */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+  {[character.skills.SKT_FIRST, character.skills.SKT_SECOND, character.skills.SKT_ULTIMATE].filter((s): s is Skill => Boolean(s))
+  .map((skill, index) => (
+    <div key={index} className="p-4 rounded text-white">
+      {/* Header avec icône + nom + WGR + CD */}
+      <div className="flex items-start gap-2 mb-2">
+        <div className="relative w-12 h-12">
+          <Image
+            src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.png`}
+            alt={skill.name}
+            width={48}
+            height={48}
+            style={{ width: 48, height: 48 }}
+            className="rounded object-contain"
+          />
+          {skill.burnEffect && skill.burnEffect.length > 0 && (
+            <div className="absolute top-0 left-0 bg-black text-white text-xs font-bold px-1 rounded-full border border-white">
+              B
+            </div>
+          )}
+        </div>
+        <div>
+          <p className="text-lg font-semibold">{skill.name}</p>
+          <p className="text-sm text-gray-400 italic mb-1">
+            Weakness Gauge Reduction: {skill.wgr ?? '—'}<br />
+            Cooldown: {skill.cd ? `${skill.cd} turn(s)` : '—'}
+          </p>
+
+          <BuffDebuffDisplay buffs={skill.buff} debuffs={skill.debuff} />
+        </div>
+      </div>
+
+      {/* Description */}
+      <div className="text-sm text-gray-200 whitespace-pre-line">
+        {formatEffectText(skill.true_desc ?? '—')}
+      </div>
+
+      {/* Enhancement */}
+      {skill.enhancement && (
+  <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
+    <p className="font-bold mb-1">Enhancements:</p>
+    <div className="space-y-2">
+    {Object.entries(skill.enhancement).map(([level, value]) => (
+  <div key={level} className="flex">
+    <div className="w-10 font-bold text-white flex-shrink-0">+{parseInt(level)}:</div>
+    <div className="text-gray-300 whitespace-pre-wrap ml-10">
+      {Array.isArray(value)
+        ? value.map((line, i) => <div key={i}>{formatEffectText(line)}</div>)
+        : typeof value === 'string'
+          ? formatEffectText(value)
+          : null}
+    </div>
+  </div>
+))}
+
+    </div>
+  </div>
+)}
+
+    </div>
+  ))}
+
+
+  {/* Placeholder si skill manquant */}
+  {Array.from({ length: 3 - Object.values(character.skills || {}).length }).map((_, i) => (
+    <div key={`empty-${i}`} className="bg-gray-800 p-4 rounded text-center text-gray-500">
+      No Skill
+    </div>
+  ))}
+</div>
+
+
+{/* Section burn + chain/dual attack */}
+<div className="flex flex-col gap-6 mt-6">
+  {/* Burn cards centrées */}
+  <div className="flex justify-center">
+    <div className="flex flex-wrap justify-center gap-2">
+      {(() => {
+        const skillWithBurn = Object.values(character.skills || {}).find(
+          (s): s is Skill & {
+            burnEffect: Record<string, { level: number; cost: number; effect: string }>;
+          } => !!s.burnEffect && Object.keys(s.burnEffect).length > 0
+        );
+
+        if (!skillWithBurn) return null;
+
+        const burns = Object.values(skillWithBurn.burnEffect);
+
+        return burns.map((burn) => (
+          <div
+            key={burn.level}
+            className="relative w-[185px] h-[262px] bg-cover bg-center rounded overflow-hidden text-white transform transition-transform duration-200 hover:scale-105 hover:shadow-lg hover:ring-[1px] hover:ring-yellow-400 hover:ring-offset-[0.2px] cursor-pointer"
+            style={{ backgroundImage: `url(/images/ui/Burst${burn.level}.png)` }}
+          >
+            <div
+              className="absolute top-2.5 right-2.5 text-[15px] font-bold rounded-full flex items-center justify-center"
+              style={{ width: '26px', height: '26px' }}
+            >
+              {burn.cost}
+            </div>
+            <div
+              className="absolute text-center text-[11px] leading-snug text-white drop-shadow-md"
+              style={{
+                top: '135px',
+                left: '12.5px',
+                width: '160px',
+                height: '90px',
+                overflow: 'hidden',
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 3,
+              }}
+            >
+              <div className="flex items-center justify-center w-full h-full px-2 text-center">
+                {formatEffectText(burn.effect)}
+              </div>
+            </div>
+          </div>
+        ));
+      })()}
+    </div>
+  </div>
+
+
+
+
+  {/* Chain & Dual en-dessous */}
+  {character.skills?.SKT_CHAIN_PASSIVE && (
+  <div className="flex flex-col gap-6 text-white">
+    {/* Chain */}
+    <div className="flex gap-4 items-start">
+      <div className="w-16 h-16 shrink-0">
+        <Image
+          src={`/images/characters/chain/Skill_ChainPassive_${character.Element}_${character.Chain_Type}.png`}
+          alt={`Chain icon for ${character.Element} ${character.Chain_Type}`}
+          width={64}
+          height={64}
+          className="object-contain"
+        />
+      </div>
+      <div>
+        <p className="font-semibold mb-1">Chain {character.Chain_Type || '—'} Effect</p>
+        <p className="text-sm text-gray-400 italic mb-1">
+          Weakness Gauge Reduction : {character.skills.SKT_CHAIN_PASSIVE.wgr ?? '—'}
+        </p>
+        <BuffDebuffDisplay
+          buffs={character.skills.SKT_CHAIN_PASSIVE.buff}
+          debuffs={character.skills.SKT_CHAIN_PASSIVE.debuff}
+        />
+        <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
+          {formatEffectText(
+            (character.skills.SKT_CHAIN_PASSIVE.true_desc?.split('<color=#ffd732>Dual Attack Effect</color>:')[0] ?? '—').trim()
+          )}
+        </div>
+      </div>
+    </div>
+
+    {/* Dual */}
+    <div className="flex gap-4 items-start">
+      <div className="w-16 h-16 shrink-0">
+        <Image
+          src={`/images/characters/chain/Skill_ChainPassive_${character.Element}_Join.png`}
+          alt={`Dual icon for ${character.Element}`}
+          width={64}
+          height={64}
+          className="object-contain"
+        />
+      </div>
+      <div>
+        <p className="font-semibold mb-1">Dual Attack Effect</p>
+        <p className="text-sm text-gray-400 italic mb-1">
+          Weakness Gauge Reduction : {character.skills.SKT_CHAIN_PASSIVE.wgr_dual ?? '—'}
+        </p>
+        <BuffDebuffDisplay
+          buffs={
+            Array.isArray(character.skills.SKT_CHAIN_PASSIVE.dual_buff)
+              ? character.skills.SKT_CHAIN_PASSIVE.dual_buff
+              : character.skills.SKT_CHAIN_PASSIVE.dual_buff
+                ? [character.skills.SKT_CHAIN_PASSIVE.dual_buff]
+                : []
+          }
+          debuffs={
+            Array.isArray(character.skills.SKT_CHAIN_PASSIVE.dual_debuff)
+              ? character.skills.SKT_CHAIN_PASSIVE.dual_debuff
+              : character.skills.SKT_CHAIN_PASSIVE.dual_debuff
+                ? [character.skills.SKT_CHAIN_PASSIVE.dual_debuff]
+                : []
+          }
+        />
+        <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
+          {formatEffectText(
+            (character.skills.SKT_CHAIN_PASSIVE.true_desc?.split('<color=#ffd732>Dual Attack Effect</color>:')[1] ?? '—').trim()
+          )}
+        </div>
+
+        {character.skills.SKT_CHAIN_PASSIVE.enhancement && (
+            <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
+              <p className="font-bold mb-1">Enhancements:</p>
+              <div className="space-y-2">
+                {Object.entries(character.skills.SKT_CHAIN_PASSIVE.enhancement).map(([level, lines]) => (
+                  <div key={level} className="flex">
+                    <div className="w-10 font-bold text-white flex-shrink-0">+{parseInt(level)}:</div>
+                    <div className="text-gray-300 whitespace-pre-wrap">
+                      {(lines as string[]).map((line, i) => (
+                        <div key={i}>{formatEffectText(line)}</div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+      </div>
+    </div>
+  </div>
+)}
+</div>
+
+
+      {/* Gear */}
+      {recoData ? (
+  <RecommendedGearTabs
+    character={{
+      recommendedGearPVE: recoData.recommendedGearPVE,
+      recommendedGearPVP: recoData.recommendedGearPVP
+    }}
+    weapons={weapons}
+    amulets={amulets}
+    talismans={talismans}
+  />
+) : (
+  <div className="text-white text-center text-sm italic mt-4">
+    Recommended gear coming soon...
+  </div>
+)}
+
+
+
+      {/* Vidéo */}
+      {character.video && (
+  <YoutubeEmbed videoId={character.video} title={`Skill video of ${character.Fullname}`} />
+)}
+
+
+
+    </div>
+  )
+
+
+  } catch {
+    console.timeEnd(label);
+    return notFound();
+  }
+}

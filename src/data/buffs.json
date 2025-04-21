@@ -1,0 +1,15 @@
+[
+    {
+      "name": "BT_COOL_CHARGE",
+      "label": "Cooldown Reduction",
+      "description": "Reduces skill cooldowns.",
+      "icon": "reducesalliesskillcooldowns"
+    },
+    {
+        "name": "BT_STAT|ST_CRITICAL_RATE",
+        "label": "Increased Crit",
+        "description": "Increased Critical Hit Chance by 50%.",
+        "icon": "criticalhitchance"
+      }
+  ]
+  

@@ -1,0 +1,21 @@
+[
+    {
+      "name": "BT_REMOVE_BUFF",
+      "label": "Buff Removal",
+      "description": "Removes buffs from the target.",
+      "icon": "SC_Buff_Effect_Remove_Buff"
+    },
+    {
+        "name": "BT_AGGRO",
+        "label": "Taunted",
+        "description": "Uses a basic attack on the caster that inflicted Taunted. Removed when the caster dies.",
+        "icon": "SC_Buff_Effect_Aggro"
+      },
+      {
+          "name": "BT_STAT|ST_ACCURACY",
+          "label": "Reduced Accuracy",
+          "description": "Reduces Accuracy by 50%",
+          "icon": "SC_Buff_Stat_Accuracy"
+        }
+  ]
+  

@@ -1,0 +1,181 @@
+[
+  {
+    "id": "2000078",
+    "name": "Fatal",
+    "rarity": 3,
+    "element": "Water",
+    "class": "Ranger",
+    "subclass": "Vanguard",
+    "video": "qAnXxxixtfs",
+    "type_chain": "Finish",
+    "chain_wgr": 6,
+    "chain_effect": "After attacking, has 100% chance to grant increased Attack to all allies for 2 turn(s).",
+    "chain_buffs": ["Increase Attack"],
+    "chain_debuffs": [],
+    "dual_wgr": 3,
+    "dual_effect": "After attacking, has 40% chance to grant increased Attack to the caster for 2 turn(s).",
+    "dual_buffs": ["Increase Attack"],
+    "dual_debuffs": [],
+    "dual_enhancement": [
+          {
+            "0": "+5% Dual Attack and Skill Chain damage\n+1 Weakness Gauge Damage",
+            "1": "+5% Dual Attack and Skill Chain damage",
+            "2": "+5% Dual Attack and Skill Chain damage",
+            "3": "+5% Dual Attack and Skill Chain damage\n+1 Weakness Gauge Damage"
+          }
+        ],
+    "skills": [
+      {
+        "name": "Deathly Acrobatics",
+        "description": "Attacks an enemy, and has 40% chance to grant increased Attack to the caster for 2 turns. Damage dealt increases when granted Stealth.",
+        "cooldown": "",
+        "wgr": 2,
+        "burnEffect": [],
+        "enhancement": [
+          {
+            "0": "+10% damage\n+1 Weakness Gauge damage",
+            "1": "+10% damage",
+            "2": "+20% damage",
+            "3": "+15% effect chance"
+          }
+        ],
+        "buffs": ["Increase Attack"],
+        "debuffs": []
+      },
+      {
+        "name": "Curtain of Darkness",
+        "description": "Removes all debuffs from the caster and grants increased Speed for 2 turns, then attacks an enemy. Grants Stealth to the caster for 1 turn.",
+        "cooldown": 3,
+        "wgr": 2,
+        "burnEffect": [
+          {
+            "level": 1,
+            "cost": "80",
+            "effect": "Increases damage"
+          },
+          {
+            "level": 2,
+            "cost": "120",
+            "effect": "+1 turn Stealth duration"
+          },
+          {
+            "level": 3,
+            "cost": "160",
+            "effect": "Increases Penetration by 30%"
+          }
+        ],
+        "enhancement": [
+          {
+            "0": "+10% damage\n+1 Weakness Gauge damage",
+            "1": "-1 turn Skill Cooldown",
+            "2": "+20% damage",
+            "3": "Removes all debuffs from the caster"
+          }
+        ],
+        "buffs": ["Increased Speed", "Stealth"],
+        "debuffs": []
+      },
+      {
+        "name": "Requiem Serket",
+        "description": "Attacks an enemy, and when the enemy is killed, grants an extra turn. When attacking a Boss, ignores 100% of the target's defense. When granted Stealth, enemies killed by this skill cannot be Resurrected or Revived.",
+        "cooldown": 5,
+        "wgr": 3,
+        "burnEffect": [],
+        "enhancement": [
+          {
+            "0": "+10% damage\n+1 Weakness Gauge damage",
+            "1": "+25% ignored Defense",
+            "2": "-1 turn Skill Cooldown",
+            "3": "+20% damage\n+25% ignored Defense"
+          }
+        ],
+        "buffs": ["Extra Turn"],
+        "debuffs": ["Reduced Attack"]
+      }
+    ],
+    "transcend": [
+      {
+        "1": null,
+        "2": null,
+        "3": "ATK DEF HP +10%",        
+        "4_1": "ATK DEF HP +16%\n+5% Ally Team Attack\n+1 Chain Passive Weakness Gauge Damage",
+        "4_2": "ATK DEF HP +19%",
+        "5_1": "ATK DEF HP +22%",
+        "5_2": "ATK DEF HP +25%",
+        "5_3": "ATK DEF HP +28%",
+        "6": "ATK DEF HP +30%\n+5% Ally Team Attack\n+25 Action Points at Battle start."
+      }
+    ],
+    "recommendedGearPVE": {
+      "Weapon": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": "ATK%"
+        },
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": "HP%"
+        }
+      ],
+      "Amulet": [
+        {
+          "name": "Death's Hold",
+          "mainStat": "HP%"
+        }
+      ],
+      "Set": [
+        [
+          { "name": "Speed", "count": 4 }
+        ],
+        [
+          { "name": "Speed", "count": 2 },
+          { "name": "Critical Strike", "count": 2 }
+        ]
+      ],
+      "SubstatPrio": "SPD>ATK>CHC>CHD>EFF",
+      "Note": "",      
+      "Talisman":["Rogue's Charm","Sage's Charm"]
+    },
+    "recommendedGearPVP": {
+      "Weapon": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": "ATK%"
+        },
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": "HP%"
+        }
+      ],
+      "Amulet": [
+        {
+          "name": "Death's Hold",
+          "mainStat": "HP%"
+        }
+      ],
+      "Set": [
+        [
+          { "name": "Speed", "count": 4 }
+        ],
+        [
+          { "name": "Speed", "count": 2 },
+          { "name": "Critical Strike", "count": 2 }
+        ]
+      ],
+      "SubstatPrio": "SPD>CHC=ATK",
+      "Note": "",      
+      "Talisman":["Rogue's Charm","Sage's Charm","Executionner's Charm"]
+    },
+
+    "exclusifEquip":[{
+      "name":"Eclipse",
+      "mainStat":"ACC (To: Fire)",
+      "effect":"Increases damage proportional to the wearer and the target's Speed",
+      "effect10":"+30% Critical Damage",
+      "icon_effect":"TI_Icon_UO_Accessary_07",
+      "rank":"B"
+    }],
+    "rank":"C",
+    "peferedGift":""
+  } 
+]

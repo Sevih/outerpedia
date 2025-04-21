@@ -1,0 +1,17 @@
+{
+"2000011":{
+      "name":"Eclipse",
+      "mainStat":"ACC (To: Fire)",
+      "effect":"Increases damage proportional to the wearer and the target's Speed",
+      "effect10":"+30% Critical Damage",
+      "icon_effect":"TI_Icon_UO_Accessary_07"
+    },
+"2000002":{
+      "name":"Eclipse",
+      "mainStat":"ACC (To: Fire)",
+      "effect":"Increases damage proportional to the wearer and the target's Speed",
+      "effect10":"+30% Critical Damage",
+      "icon_effect":"TI_Icon_UO_Accessary_07",
+      "rank":"B"
+    }
+}

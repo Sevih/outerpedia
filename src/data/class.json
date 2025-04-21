@@ -1,0 +1,72 @@
+{
+    "Defender": {
+      "description": "Generates 5 Action Points at the start of turn\nGenerates 35 Action Points when hit\nIncreases Defense by 15%",
+      "image": "/images/ui/classgraph/defender.png",
+      "subclasses": {
+        "Sweeper": {
+          "description": "A combat specialist who waits patiently for an opening.",
+          "image": "/images/ui/classgraph/sweeper.png"
+        },
+        "Phalanx": {
+          "description": "A defensive specialist who stands their ground to protect their allies.",
+          "image": "/images/ui/classgraph/phalanx.png"
+        }
+      }
+    },
+    "Striker": {
+      "description": "Generates 5 Action Points on critical hit\nGenerates 20 Action Points when attacking\nIncreases Critical Hit Chance by 5%",
+      "image": "/images/ui/classgraph/striker.png",
+      "subclasses": {
+        "Attacker": {
+          "description": "A brave warrior who crushes enemies with high attack.",
+          "image": "/images/ui/classgraph/attacker.png"
+        },
+        "Bruiser": {
+          "description": "A brawler who specializes in prolonged battles with balanced offensive and defensive skills.",
+          "image": "/images/ui/classgraph/bruiser.png"
+        }
+      }
+    },
+    "Ranger": {
+      "description": "Generates 20 Action Points at the start of turn",
+      "image": "/images/ui/classgraph/ranger.png",
+      "subclasses": {
+        "Tactician": {
+          "description": "A master strategist who gets the upper hand in battles by granting buffs to allies.",
+          "image": "/images/ui/classgraph/tactician.png"
+        },
+        "Vanguard": {
+          "description": "A leader who dominates the enemy with high Speed.",
+          "image": "/images/ui/classgraph/vanguard.png"
+        }
+      }
+    },
+    "Healer": {
+      "description": "Generates 5 Action Points at the start of turn\nGenerates 25 Action Points when an ally is hit\nIncreases Health by 10%",
+      "image": "/images/ui/classgraph/healer.png",
+      "subclasses": {
+        "Sage": {
+          "description": "A support specialist who thwarts the enemy's attempts to hamper their allies by granting them various effects.",
+          "image": "/images/ui/classgraph/sage.png"
+        },
+        "Reliever": {
+          "description": "A savior who heals allies in moments of peril.",
+          "image": "/images/ui/classgraph/reliever.png"
+        }
+      }
+    },
+    "Mage": {
+      "description": "Generates 5 Action Points at the start of turn\nGenerates Action Points when using skills\nIncreases Attack by 10%",
+      "image": "/images/ui/classgraph/mage.png",
+      "subclasses": {
+        "Wizard": {
+          "description": "A master of magic who wreaks havoc on the battlefield with powerful spells.",
+          "image": "/images/ui/classgraph/wizard.png"
+        },
+        "Enchanter": {
+          "description": "A mastermind in battles who weakens ennemies with a variety of additional effects.",
+          "image": "/images/ui/classgraph/enchanter.png"
+        }
+      }
+    }
+}

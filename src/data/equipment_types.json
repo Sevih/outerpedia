@@ -1,0 +1,40 @@
+{
+    "weapon": {
+      "mainStats": {
+        "fixed": "ATK",
+        "secondOptions": ["ATK%", "DEF%", "HP%"]
+      },
+      "subStatNumber": 4
+    },
+    "amulet": {
+      "mainStats": {
+        "options": ["ACC","EVA","LS","ATK%","RES","CC","SPD","DEF%","EFF","CHD","PEN","HP%"]
+      },
+      "subStatNumber": 4
+    },
+    "helmet": {
+      "mainStats": {
+        "fixed": ["HP%"]
+      },
+      "subStatNumber": 4
+    },
+    "chest": {
+      "mainStats": {
+        "fixed": ["DEF"]
+      },
+      "subStatNumber": 4
+    },
+    "gloves": {
+      "mainStats": {
+        "fixed": ["ACC", "DEF"]
+      },
+      "subStatNumber": 4
+    },
+    "boots": {
+      "mainStats": {
+        "fixed": ["EVA", "HP%"]
+      },
+      "subStatNumber": 4
+    }
+  }
+  

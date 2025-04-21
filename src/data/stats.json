@@ -1,0 +1,19 @@
+{
+    "ATK": { "label": "Attack", "icon": "CM_Stat_Icon_ATK.png" },
+    "DEF": { "label": "Defense", "icon": "CM_Stat_Icon_DEF.png" },
+    "HP":  { "label": "Health", "icon": "CM_Stat_Icon_HP.png" },
+    "ATK%": { "label": "Attack %", "icon": "CM_Stat_Icon_ATK.png" },
+    "DEF%": { "label": "Defense %", "icon": "CM_Stat_Icon_DEF.png" },
+    "HP%": { "label": "Health %", "icon": "CM_Stat_Icon_HP.png" },
+    "EFF": { "label": "Effectiveness", "icon": "CM_Stat_Icon_CHANCE.png" },
+    "RES": { "label": "Effect Resistance", "icon": "CM_Stat_Icon_RESIST.png" },
+    "SPD": { "label": "Speed", "icon": "CM_Stat_Icon_SPEED.png" },
+    "CHC": { "label": "Crit Chance", "icon": "CM_Stat_Icon_CRITICAL.png" },
+    "CHD": { "label": "Crit Damage", "icon": "CM_Stat_Icon_CRITICAL_DMG.png" },
+    "PEN": { "label": "Penetration", "icon": "CM_Stat_Icon_PIERCE_POWER.png" },
+    "LS":  { "label": "Lifesteal", "icon": "CM_Stat_Icon_VAMPIRIC.png" },
+    "HH":  { "label": "Heals when Hit", "icon": "CM_Stat_Icon_HitRecovery.png" },
+    "EVA": { "label": "Evasion", "icon": "CM_Stat_Icon_AVOID.png" },
+    "ACC": { "label": "Accuracy", "icon": "CM_Stat_Icon_ACCURACY.png" }
+  }
+  
