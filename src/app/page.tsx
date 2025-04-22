@@ -1,5 +1,8 @@
 // src/app/page.tsx
 import HomeClient from './HomeClient'
+import CurrentlyPullable from './components/CurrentlyPullable'
+import WarningBanner from "@/app/components/WarningBanner"
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Outerpedia – Outerplane Wiki & Guide',
@@ -29,7 +32,29 @@ export const metadata = {
     images: ['https://outerpedia.com/images/ui/og_home.jpg'],
   },
 };
-
 export default function Home() {
-  return <HomeClient />
+  return (
+    <>
+      <WarningBanner />
+
+      <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-12 px-4 md:px-16">
+        {/* OG Image à gauche */}
+        <div className="h-[340px] w-auto max-w-full rounded-xl overflow-hidden">
+          <Image
+            src="/images/ui/og_home_long.jpg"
+            alt="Outerpedia OG"
+            width={600}
+            height={340}
+            className="h-full object-contain"
+            priority
+          />
+        </div>
+
+        {/* Cartes Currently Pullable à droite, alignées à droite */}
+          <CurrentlyPullable />
+        </div>
+
+      <HomeClient />
+    </>
+  )
 }

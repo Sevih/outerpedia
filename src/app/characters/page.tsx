@@ -6,6 +6,7 @@ import debuffs from '@/data/debuffs.json'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { EffectData, CharacterLite, SkillLite} from '@/types/types'
+import { toKebabCase } from '@/utils/formatText'
 
 const allEffectsRef: Record<string, EffectData & { type: 'buff' | 'debuff' }> = {}
 
@@ -17,15 +18,6 @@ for (const b of buffs) {
 for (const d of debuffs) {
   const key = `debuff:${d.name}`
   allEffectsRef[key] = { ...d, type: 'debuff' }
-}
-
-function toKebabCase(str: string): string {
-  return str
-    .toLowerCase()
-    .normalize("NFD") // enlever accents
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
 }
 
 function ElementIcon({ element }: { element: string }) {

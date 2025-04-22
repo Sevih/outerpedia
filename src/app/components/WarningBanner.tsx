@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function WarningBanner() {
   return (
     <>
-      <div className="bg-yellow-600 text-white px-4 py-3 rounded-lg shadow-md text-center border border-yellow-400">
+      <div className="bg-yellow-400 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-400">
         ⚠️ Character data has been parsed automatically using a custom tool. Errors may exist!
         If you spot something wrong, please report it via our{' '}
         <Link
@@ -15,7 +15,7 @@ export default function WarningBanner() {
           Discord
         </Link>.
       </div>
-      <div className="bg-yellow-600 text-white px-4 py-3 rounded-lg shadow-md text-center border border-yellow-400 mt-4">
+      <div className="bg-yellow-400 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-400 mt-4">
         ⚠️ All gear recommendations and tier lists (characters and exclusive equipment priority) come from the{' '}
         <Link
           href="https://discord.gg/6bNysAVY6e"

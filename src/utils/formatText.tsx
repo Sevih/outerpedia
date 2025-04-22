@@ -9,3 +9,13 @@ export default function formatEffectText(text: string): React.ReactElement {
 
   return <span dangerouslySetInnerHTML={{ __html: withLineBreaks }} />;
 }
+
+
+export function toKebabCase(str: string): string {
+  return str
+    .toLowerCase()
+    .normalize("NFD") // enlever accents
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
