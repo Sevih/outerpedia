@@ -7,6 +7,18 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2025-04-22",
+    title: "Cleanup & UI Polish for Changelog and Updates",
+    type: "update",
+    content: `
+  - Unified visual style between homepage and /changelog for update entries.
+  - Styled changelog cards with badge colors for each update type (FEATURE, FIX, UPDATE...).
+  - Markdown rendering enabled for changelog entries to support lists, links and formatting.
+  - Homepage "Recent Updates" section uses a timeline-style vertical layout with animated section titles.
+  - Removed all STOVE news integration attempts for maintainability reasons.
+  `
+  },
+  {
     date: '2025-04-22',
     title: 'Homepage & SEO improvements, gear note rework',
     type: 'update',
