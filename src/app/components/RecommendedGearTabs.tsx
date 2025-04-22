@@ -311,7 +311,7 @@ export default function RecommendedGearTabs({
                     className="object-contain"
                   />
                   ))}
-                </div>
+                </div> 
               </li>
             );
           })}
