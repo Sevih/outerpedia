@@ -7,11 +7,26 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { EffectData, CharacterLite, SkillLite} from '@/types/types'
 
-const allEffectsRef: Record<string, EffectData> = {}
+const allEffectsRef: Record<string, EffectData & { type: 'buff' | 'debuff' }> = {}
 
-for (const b of buffs) allEffectsRef[b.name] = { ...b, type: 'buff' }
-for (const d of debuffs) allEffectsRef[d.name] = { ...d, type: 'debuff' }
+for (const b of buffs) {
+  const key = `buff:${b.name}`
+  allEffectsRef[key] = { ...b, type: 'buff' }
+}
 
+for (const d of debuffs) {
+  const key = `debuff:${d.name}`
+  allEffectsRef[key] = { ...d, type: 'debuff' }
+}
+
+function toKebabCase(str: string): string {
+  return str
+    .toLowerCase()
+    .normalize("NFD") // enlever accents
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
 
 function ElementIcon({ element }: { element: string }) {
   return (
@@ -42,7 +57,7 @@ function ClassIcon({ className }: { className: string }) {
 }
 
 function EffectIconRaw({ name, type }: { name: string; type: 'buff' | 'debuff' }) {
-  const effect = allEffectsRef[name]
+  const effect = allEffectsRef[`${type}:${name}`]
   const label = effect?.label || name
   const icon = effect?.icon || name
   const style =
@@ -69,6 +84,7 @@ function EffectIconRaw({ name, type }: { name: string; type: 'buff' | 'debuff' }
     </div>
   )
 }
+
 
 
 function extractAllEffects(characters: CharacterLite[], type: 'buff' | 'debuff'): string[] {
@@ -205,8 +221,27 @@ export default function CharactersPage() {
     return <div className="text-center mt-8 text-white">Loading characters...</div>
   }
 
-  return (
+  return (    
     <div className="space-y-6">
+      <script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Characters – Outerpedia",
+  "url": "https://outerpedia.com/characters",
+  "description": "Browse all characters in Outerplane with builds, skills, stats and exclusive equipment.",  
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": characters.map((char, index) => ({
+      "@type": "VideoGameCharacter",
+      "name": char.Fullname,
+      "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`, // ou kebab-case
+      "image": `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.png`,
+      "position": index + 1,
+    }))
+  }
+})}
+</script>
       <h1 className="text-3xl font-bold">Characters</h1>
 
       <div className="flex justify-center gap-2 mb-4">
@@ -231,6 +266,8 @@ export default function CharactersPage() {
                       alt="star"
                       width={14}
                       height={14}
+                      style={{ width: 14, height: 14 }}
+                      className="object-contain"
                     />
                   ))}
               </div>

@@ -1,0 +1,81 @@
+{
+    "Speedy Rhona": {
+      "Weapon": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": "ATK%"
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": "ATK%"
+        }
+      ],
+      "Amulet": [
+        {
+          "name": "Glorious Radiance Orb",
+          "mainStat": "PEN"
+        }
+      ],
+      "Set": [
+        [
+          { "name": "Speed", "count": 4 }
+        ]
+      ],
+      "SubstatPrio": "ATK>SPD>HP",
+      "Note": "",      
+      "Talisman":["Rogue's Charm","Sage's Charm"]
+    },
+    "Counter Rhona": {
+      "Weapon": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": "ATK%"
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": "ATK%"
+        }
+      ],
+      "Amulet": [
+        {
+          "name": "Glorious Radiance Orb",
+          "mainStat": "PEN"
+        }
+      ],
+      "Set": [
+        [
+          { "name": "Counterattack", "count": 4 }
+        ]
+      ],
+      "SubstatPrio": "ATK>SPD>HP",
+      "Note": "",      
+      "Talisman":["Rogue's Charm","Sage's Charm"]
+    },
+    "Scaling Rhona": {
+      "Weapon": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": "ATK%"
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": "ATK%"
+        }
+      ],
+      "Amulet": [
+        {
+          "name": "Glorious Radiance Orb",
+          "mainStat": "PEN"
+        }
+      ],
+      "Set": [
+        [
+            { "name": "Swiftness", "count": 2 },
+            { "name": "Counterattack", "count": 2 }
+        ]
+      ],
+      "SubstatPrio": "ATK>SPD>HP",
+      "Note": "",      
+      "Talisman":["Rogue's Charm","Sage's Charm","Executionner's Charm"]
+    }
+}

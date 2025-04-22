@@ -66,7 +66,6 @@ const WeaponMiniCard = ({ weapon }: { weapon: WeaponMini }) => {
     {(weapon.source || weapon.boss || weapon.mode || weapon.effect_name || weapon.effect_desc4) && (
       <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-max max-w-[250px] bg-gray-900 text-white text-[12px] rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow-lg pointer-events-none">
         <p className="text-red-400 font-bold text-sm leading-tight mb-2">{weapon.name}</p>
-        <p className="text-red-300">{weapon.rarity ? `Rarity: ${weapon.rarity}` : ""}</p>
 
         <div className="flex justify-between items-center gap-1 mb-1">
           <div className="flex items-center gap-1">

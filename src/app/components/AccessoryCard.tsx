@@ -4,6 +4,7 @@ import { highlightNumbersOnly } from "@/utils/textHighlighter";
 import type { Accessory } from "@/types/equipment";
 import StatIconsRow from "@/app/components/StatIconsRow";
 
+
 export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -74,7 +75,8 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
   alt={accessory.effect_name}
   width={16}
   height={16}
-  unoptimized
+  style={{ width: 16, height: 16 }}
+                      className="object-contain"
 />
 
         <span>{accessory.effect_name}</span>

@@ -1,21 +1,56 @@
 [
-    {
-      "name": "BT_REMOVE_BUFF",
-      "label": "Buff Removal",
-      "description": "Removes buffs from the target.",
-      "icon": "SC_Buff_Effect_Remove_Buff"
-    },
-    {
-        "name": "BT_AGGRO",
-        "label": "Taunted",
-        "description": "Uses a basic attack on the caster that inflicted Taunted. Removed when the caster dies.",
-        "icon": "SC_Buff_Effect_Aggro"
-      },
-      {
-          "name": "BT_STAT|ST_ACCURACY",
-          "label": "Reduced Accuracy",
-          "description": "Reduces Accuracy by 50%",
-          "icon": "SC_Buff_Stat_Accuracy"
-        }
-  ]
-  
+{
+"name": "BT_REMOVE_BUFF",
+"label": "Buff Removal",
+"description": "Removes buffs from the target.",
+"icon": "SC_Buff_Effect_Remove_Buff"
+},
+{
+"name": "BT_AGGRO",
+"label": "Taunted",
+"description": "Uses a basic attack on the caster that inflicted Taunted. Removed when the caster dies.",
+"icon": "SC_Buff_Effect_Aggro"
+},
+{
+"name": "BT_STAT|ST_ACCURACY",
+"label": "Reduced Accuracy",
+"description": "Reduces Accuracy by 50%",
+"icon": "SC_Buff_Stat_Accuracy"
+},
+{
+"name": "BT_FREEZE",
+"label": "Frozen",
+"description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",
+"icon": "SC_Buff_Effect_Freeze"
+},
+{
+"name": "BT_ACTION_GAUGE",
+"label": "Reduces Priority of enemies",
+"description": "Reduces ennemie(s) priority",
+"icon": "SC_Buff_Effect_Increase_Priority"
+},
+{
+"name": "BT_DOT_BURN",
+"label": "Burned",
+"description": "Takes damage proportional to the caster's Attack at the start of the turn.\n Ignore Defense.\n Removed when the caster dies.",
+"icon": "SC_Buff_Dot_Burn"
+},
+{
+"name": "BT_STAT|ST_AVOID",
+"label": "Reduced Evasion",
+"description": "Reduces Evasion by 50%",
+"icon": "SC_Buff_Stat_Avoid"
+},
+{
+"name": "BT_STAT|ST_DEF",
+"label": "Reduced Defense",
+"description": "Reduces Defense by 50%",
+"icon": "SC_Buff_Stat_Def"
+},
+{
+"name": "BT_STUN",
+"label": "Stunned",
+"description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",
+"icon": "SC_Buff_Effect_Stun"
+}
+]

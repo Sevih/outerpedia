@@ -15,7 +15,22 @@ const recentChanges = changelog.slice(0, 10);
 
 export default function Home() {
   return (
+    
     <div className="space-y-12">
+      <script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Outerpedia",
+  "url": "https://outerpedia.com",
+  "description": "Outerpedia is a complete database for the mobile RPG Outerplane. Discover characters, gear builds, exclusive equipment, sets and more.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://outerpedia.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+})}
+</script>
       <WarningBanner />
 
       <section className="text-center">

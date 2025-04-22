@@ -36,7 +36,18 @@ export interface EquipmentBase {
   effect_name: string
   effect_desc1: string
   effect_desc4: string
+  mainStats?: string[];
 }
+
+export type ArmorSet = {
+  name: string
+  piece_count: number
+  effect_2_4?: string
+  effect_4_4?: string
+  image_prefix: string
+  icon_effect?: string
+}
+
 
 export type MiniSet = {
   name: string

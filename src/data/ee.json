@@ -1,16 +1,66 @@
 {
 "k":{
-      "name":"Monomolecular Blade",
-      "mainStat":"Reduces Earth Damage Taken",
-      "effect":"When using Slinding Uppercut, has a 100% chance to remove 1 buff(s) from the target",
-      "effect10":"When using Slinding Uppercut, has a 100% chance to remove 2 buff(s) from the target",
-      "icon_effect":"TI_Icon_UO_Accessary_07"
-    },
+"name":"Monomolecular Blade",
+"mainStat":"Reduces Earth Damage Taken",
+"effect":"When using Slinding Uppercut, has a 100% chance to remove 1 buff(s) from the target",
+"effect10":"When using Slinding Uppercut, has a 100% chance to remove 2 buff(s) from the target",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"C"
+},
 "vera":{
-      "name":"Blade of Destiny",
-      "mainStat":"Accuracy to Light",
-      "effect":"Increases Critical Damage by 3% after killing an enemy (max 5 stacks)",
-      "effect10":"Increases Critical Damage by 5% after killing an enemy (max 5 stacks)",
-      "icon_effect":"TI_Icon_UO_Accessary_07"
-    }
+"name":"Blade of Destiny",
+"mainStat":"Accuracy to Light",
+"effect":"Increases Critical Damage by 3% after killing an enemy (max 5 stacks)",
+"effect10":"Increases Critical Damage by 5% after killing an enemy (max 5 stacks)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"D"
+},
+"snow":{
+"name":"Glacial Bow",
+"mainStat":"Effectiveness to Fire",
+"effect":"Frostblow has 40% chance to inflict Frozen on all targets",
+"effect10":"Frostblow has 70% chance to inflict Frozen on all targets",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
+},
+"iris":{
+"name":"Reptilia Z-Power",
+"mainStat":"Effectiveness to Earth",
+"effect":"Increases Attack and Defense for 1 turn(s) when attacking an enemy inflicted with Burned",
+"effect10":"Element Burst has 80% chance to increase Attack and Defense for 1 turn(s) when attacking an enemy inflicted with Burned",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"C"
+},
+"lisha":{
+"name":"Cleaning Brush",
+"mainStat":"Accuracy to Earth",
+"effect":"When using Meowteor Shower, increases damage dealt inversely proportionnal to the number of targets",
+"effect10":"When using Meowteor Shower, increases Penetration by 30% when there is only one target",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
+},
+"sofia":{
+"name":"Tempest",
+"mainStat":"Accuracy to Fire",
+"effect":"Increases the Dual Attack damage of all allies (excluding skill chains)",
+"effect10":"Increases Priority recovery efficiency of the wearer by 30%",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
+},
+"alpha":{
+"name":"Nostalgic Music Box",
+"mainStat":"Effectiveness to Fire",
+"effect":"At the start of the battle, increases Effectiveness for 1 turn(s)",
+"effect10":"When defeating an enemy, increases Effectiveness for 1 turn(s)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"C"
+},
+"rhona":{
+"name":"Sword of Sorrows",
+"mainStat":"Reduces Water Damage Taken",
+"effect":"(Excluding critical hits) Speed increases by 40",
+"effect10":"Damage dealt increases proportional to Critical Damage (Max 100%)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"A"
+}
 }

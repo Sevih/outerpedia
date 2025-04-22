@@ -5,10 +5,13 @@ import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import WeaponMiniCard from "@/app/components/WeaponMiniCard"
 import AccessoryMiniCard from "@/app/components/AccessoryMiniCard"
-import SetMiniCard from "@/app/components/SetMiniCard"
 import TalismanMiniCard from "@/app/components/TalismanMiniCard"
-import type { WeaponMini, AmuletMini, EquipmentBase, MiniSet,Talisman} from "@/types/equipment"
+import type { WeaponMini, AmuletMini, EquipmentBase, MiniSet, Talisman } from "@/types/equipment"
+import fullSets from "@/data/sets.json"
 import rawStats from '@/data/stats.json' assert { type: 'json' }
+import SetVisual from "./SetVisual"
+import allTalismans from "@/data/talisman.json"
+import MiniTalismanCard from "@/app/components/MiniTalismanCard"
 
 const stats = rawStats as Record<string, { label: string; icon: string }>
 type SubstatPriority = {
@@ -45,20 +48,18 @@ function SubstatPriorityBar({ priorities }: { priorities: SubstatPriority[] }) {
   return (
     <div className="flex flex-col items-center gap-4 mt-6">
       <p className="text-white font-semibold text-base flex items-center gap-2">
-            <Image
-        src="/images/ui/stats.png"
-        alt="Substat icon"
-        width={32}
-        height={32}
-        style={{ width: 32, height: 32 }}
-      />
+        <Image
+          src="/images/ui/stats.png"
+          alt="Substat icon"
+          width={32}
+          height={32}
+          style={{ width: 32, height: 32 }}
+        />
         Substat Priority
       </p>
-
       <div className="flex flex-col gap-4 w-full max-w-md">
         {priorities.map((stat, i) => (
           <div key={i} className="flex flex-col items-start">
-            {/* Nom + icône au-dessus */}
             <div className="flex items-center gap-2 mb-1">
               <Image
                 src={`/images/ui/effect/${stat.icon}`}
@@ -69,16 +70,12 @@ function SubstatPriorityBar({ priorities }: { priorities: SubstatPriority[] }) {
               />
               <span className="text-sm text-white font-medium">{stat.label}</span>
             </div>
-
-            {/* Barre de segments (all yellow if active) */}
             <div className="flex gap-1">
               {Array.from({ length: 5 }).map((_, j) => (
                 <div
                   key={j}
-                  className={`h-2 rounded-sm ${
-                    j < stat.weight ? 'bg-yellow-400' : 'bg-gray-700'
-                  }`}
-                  style={{ width: '50px' }} // ajustable selon ton feeling
+                  className={`h-2 rounded-sm ${j < stat.weight ? 'bg-yellow-400' : 'bg-gray-700'}`}
+                  style={{ width: '50px' }}
                 />
               ))}
             </div>
@@ -89,22 +86,19 @@ function SubstatPriorityBar({ priorities }: { priorities: SubstatPriority[] }) {
   )
 }
 
-
-
 type GearReference = { name: string; mainStat: string; usage?: string }
 
 type RecommendedGearSet = {
   Weapon?: GearReference[]
   Amulet?: GearReference[]
   Set?: MiniSet[][]
-  Talisman?: string[]  
+  Talisman?: string[]
   SubstatPrio?: string
   Note?: string
 }
 
 type CharacterGearData = {
-  recommendedGearPVE?: RecommendedGearSet
-  recommendedGearPVP?: RecommendedGearSet
+  builds: Record<string, RecommendedGearSet>
 }
 
 function buildRecommendedMini<T extends EquipmentBase>(
@@ -112,17 +106,15 @@ function buildRecommendedMini<T extends EquipmentBase>(
   fullList: T[]
 ): T[] {
   return (
-    refs
-      ?.map(ref => {
-        const item = fullList.find(i => i.name === ref.name)
-        if (!item) return null
-        return {
-          ...item,
-          forcedMainStat: ref.mainStat,
-          ...(ref.usage ? { usage: ref.usage } : {}),
-        } as T
-      })
-      .filter((x): x is T => x !== null) ?? []
+    refs?.map(ref => {
+      const item = fullList.find(i => i.name === ref.name)
+      if (!item) return null
+      return {
+        ...item,
+        forcedMainStat: ref.mainStat,
+        ...(ref.usage ? { usage: ref.usage } : {}),
+      } as T
+    }).filter((x): x is T => x !== null) ?? []
   )
 }
 
@@ -135,17 +127,10 @@ export default function RecommendedGearTabs({
   character: CharacterGearData
   weapons: EquipmentBase[]
   amulets: EquipmentBase[]
-  talismans: Talisman[] //
+  talismans: Talisman[]
 }) {
-
-  const [gearTab, setGearTab] = useState<"PVE" | "PVP">("PVE")
-  const tabList = [
-    { key: "PVE", label: "PVE", icon: "pve.png" },
-    { key: "PVP", label: "PVP", icon: "pvp.png" },
-  ]
-
-  const isPVE = gearTab === "PVE"
-  const activeColor = isPVE ? "bg-cyan-500" : "bg-red-500"
+  const buildNames = Object.keys(character.builds)
+  const [gearTab, setGearTab] = useState(buildNames[0])
   const [activeTabRef, setActiveTabRef] = useState<HTMLButtonElement | null>(null)
   const indicatorRef = useRef<HTMLDivElement>(null)
 
@@ -155,60 +140,38 @@ export default function RecommendedGearTabs({
       indicatorRef.current.style.transform = `translateX(${offsetLeft}px)`
       indicatorRef.current.style.width = `${offsetWidth}px`
     }
-  }, [activeTabRef])
+  }, [activeTabRef, gearTab])
 
-  const gear = isPVE ? character.recommendedGearPVE : character.recommendedGearPVP
+  const gear = character.builds[gearTab]
   const recommendedWeapons = buildRecommendedMini<WeaponMini>(gear?.Weapon, weapons)
   const recommendedAmulets = buildRecommendedMini<AmuletMini>(gear?.Amulet, amulets)
-  
-
   const recommendedTalismanNames = gear?.Talisman
-  const recommendedTalismans = recommendedTalismanNames
-  ?.map(name => talismans.find(t => t.name === name))
-  .filter((x): x is Talisman => x !== undefined) ?? []
-
-
+  const recommendedTalismans = recommendedTalismanNames?.map(name => talismans.find(t => t.name === name)).filter((x): x is Talisman => x !== undefined) ?? []
   return (
     <div className="mt-6">
       <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Gear</h2>
 
-      {/* Onglets animés */}
       <div className="flex justify-center mb-6">
         <div className="relative bg-gray-800 rounded-full p-1 flex gap-1 w-fit">
-          {/* Slider animé */}
           <div
             ref={indicatorRef}
-            className={`absolute top-1 left-0 h-[calc(100%-0.5rem)] ${activeColor} rounded-full transition-all duration-300 z-0`}
+            className={`absolute top-1 left-0 h-[calc(100%-0.5rem)] bg-cyan-500 rounded-full transition-all duration-300 z-0`}
           ></div>
-
-          {tabList.map(({ key, label, icon }) => (
+          {buildNames.map(name => (
             <button
-              key={key}
-              onClick={() => setGearTab(key as "PVE" | "PVP")}
+              key={name}
+              onClick={() => setGearTab(name)}
               ref={el => {
-                if (gearTab === key) setActiveTabRef(el)
+                if (gearTab === name) setActiveTabRef(el)
               }}
-              className={`relative z-10 w-[100px] justify-center px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors duration-300 ${
-                gearTab === key
-                  ? "text-white"
-                  : `text-gray-300 hover:${isPVE ? "bg-cyan-700" : "bg-red-700"}`
-              }`}
+              className={`relative z-10 w-[140px] justify-center px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors duration-300 ${gearTab === name ? 'text-white' : 'text-gray-300 hover:bg-cyan-700'}`}
             >
-              <Image
-                src={`/images/ui/nav/${icon}`}
-                alt={label}
-                width={18}
-                height={18}
-                className="w-[18px] h-[18px]"
-                unoptimized
-              />
-              {label}
+              {name}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Contenu animé */}
       <AnimatePresence mode="wait">
         <motion.div
           key={gearTab}
@@ -218,86 +181,116 @@ export default function RecommendedGearTabs({
           transition={{ duration: 0.3 }}
         >
           <div className="flex flex-col md:flex-row justify-center gap-10 text-center">
-            {/* Armes */}
             <div className="flex flex-col items-center gap-2">
               <h3 className="text-lg font-semibold text-white mb-1">Weapons</h3>
               {recommendedWeapons.map((weapon, idx) => (
                 <WeaponMiniCard key={`weapon-${gearTab}-${idx}`} weapon={weapon} />
               ))}
             </div>
-
-            {/* Accessoires */}
             <div className="flex flex-col items-center gap-2">
               <h3 className="text-lg font-semibold text-white mb-1">Accessories</h3>
               {recommendedAmulets.map((amulet, idx) => (
-                <AccessoryMiniCard key={`amulet-${gearTab}-${idx}`} accessory={amulet} />
+                <AccessoryMiniCard key={`amulet-${gearTab}-${idx}`} amulet={amulet} />
               ))}
             </div>
-
-            {/* Sets */}
             <div className="flex flex-col items-center">
               <h3 className="text-lg font-semibold text-white mb-1">Sets</h3>
               <div className="flex flex-wrap justify-center gap-4">
-                {gear?.Set?.map((setCombo, idx) => (
-                  <SetMiniCard key={`set-${gearTab}-${idx}`} sets={setCombo} />
-                ))}
+              {gear?.Set?.map((combo, comboIdx) => {
+    if (combo.length === 1 && combo[0].count === 4) {
+      const full = fullSets.find((s) => s.name === combo[0].name)
+      if (!full) return null
+  
+      return (
+        <div key={`set-4p-${comboIdx}`} className="flex justify-center mb-2">
+          <SetVisual
+  name={full.name}
+  image_prefix={full.image_prefix}
+  set_icon={full.set_icon}
+  part="full"
+  effect_2_4={full.effect_2_4}
+  effect_4_4={full.effect_4_4}
+/>
+
+        </div>
+      )
+    }
+  
+    if (combo.length === 2 && combo[0].count === 2 && combo[1].count === 2) {
+      const setA = fullSets.find((s) => s.name === combo[0].name)
+      const setB = fullSets.find((s) => s.name === combo[1].name)
+      if (!setA || !setB) return null
+  
+      return (
+        <div key={`set-2p-${comboIdx}`} className="flex gap-2 justify-center mb-2">
+          <SetVisual
+  name={setA.name}
+  image_prefix={setA.image_prefix}
+  set_icon={setA.set_icon}
+  part="head_chest"
+  effect_2_4={setA.effect_2_4}
+/>
+<SetVisual
+  name={setB.name}
+  image_prefix={setB.image_prefix}
+  set_icon={setB.set_icon}
+  part="gloves_boots"
+  effect_2_4={setB.effect_2_4}
+/>
+        </div>
+      )
+    }
+  
+    return null // fallback si mauvais format
+  })}
+
               </div>
             </div>
           </div>
-           {/* Substats */}
-           {(gear?.SubstatPrio || gear?.Note) && (
-  <div className="flex flex-col md:flex-row justify-center gap-8 mt-6 items-start w-full max-w-4xl mx-auto">
-    {/* Substat Priority (à gauche) */}
-    {gear?.SubstatPrio && (
-      <div className="flex-1 flex justify-center">
-        <SubstatPriorityBar priorities={parseSubstatPrio(gear.SubstatPrio)} />
-      </div>
-    )}
 
-    {/* Note (à droite) */}
-    <div className="flex-1 flex flex-col gap-4 items-center">
-
-    <div className="w-full bg-black/30 border border-white/10 rounded-lg p-4 flex flex-wrap justify-center gap-3 overflow-visible">
-
-  {recommendedTalismans.length > 0 ? (
-    recommendedTalismans.map((talisman, idx) => (
-      <TalismanMiniCard key={`talisman-${gearTab}-${idx}`} talisman={talisman} />
-    ))
-  ) : (
-    <div className="w-full max-w-[220px] min-h-[130px] flex items-center justify-center text-gray-400 italic">
-      No talisman recommended
+          {(gear?.SubstatPrio || gear?.Note) && (
+            <div className="flex flex-col md:flex-row justify-center gap-8 mt-6 items-start w-full max-w-4xl mx-auto">
+              {gear?.SubstatPrio && (
+                <div className="flex-1 flex justify-center">
+                  <SubstatPriorityBar priorities={parseSubstatPrio(gear.SubstatPrio)} />
+                </div>
+              )}
+              <div className="flex-1 flex flex-col gap-4 items-center">
+              <div className="flex-1 flex flex-col gap-4 items-center">
+  <div className="w-full">
+    <h4 className="text-sm text-white font-bold mb-1 text-center">Talisman</h4>
+    <div className="w-full rounded-lg p-4 flex flex-wrap justify-center gap-3 overflow-visible">
+      {recommendedTalismans.length > 0 ? (
+        recommendedTalismans.map((talisman, idx) => (
+          <MiniTalismanCard key={`talisman-${gearTab}-${idx}`} talisman={talisman} />
+        ))
+      ) : (
+        <div className="w-full max-w-[220px] min-h-[130px] flex items-center justify-center text-gray-400 italic">
+          No talisman recommended
+        </div>
+      )}
     </div>
-  )}
-</div>
-
-
-  {/* Notes */}
-  {gear?.Note && (
-    <div className="w-full max-w-[220px] text-sm text-white bg-black/30 border border-white/10 rounded-lg p-4">
-      <p className="font-bold mb-2 flex items-center gap-2">
-        <Image
-          src="/images/ui/note.png"
-          alt="Note icon"
-          width={20}
-          height={20}
-          className="object-contain"
-        />
-        Notes
-      </p>
-      <p className="text-gray-300 italic whitespace-pre-line">{gear.Note}</p>
-    </div>
-  )}
-</div>
-
-
-
-
-
   </div>
-)}
+</div>
 
-
-
+                {gear?.Note && (
+                  <div className="w-full max-w-[220px] text-sm text-white bg-black/30 border border-white/10 rounded-lg p-4">
+                    <p className="font-bold mb-2 flex items-center gap-2">
+                      <Image
+                        src="/images/ui/note.png"
+                        alt="Note icon"
+                        width={20}
+                        height={20}
+                        className="object-contain"
+                      />
+                      Notes
+                    </p>
+                    <p className="text-gray-300 italic whitespace-pre-line">{gear.Note}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </motion.div>
       </AnimatePresence>
     </div>

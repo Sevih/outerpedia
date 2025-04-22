@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/generate-sitemap.cjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sitemap": "node scripts/generate-sitemap.cjs",
+    "seo-check": "node scripts/seo-check.cjs"
   },
   "dependencies": {
     "@radix-ui/react-tooltip": "^1.2.3",

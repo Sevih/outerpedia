@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { promises as fs } from 'fs';
 import path from 'path';
 import type { Metadata } from 'next';
+import CharacterJsonLd from '@/app/components/seo/CharacterJsonLd';
 
 import Image from 'next/image';
 import classDataRaw from '@/data/class.json';
@@ -62,22 +63,32 @@ export async function generateMetadata(context: { params: Promise<{ name: string
     return {
       title,
       description,
+      keywords: ['Outerplane', character.Fullname, character.Class, character.SubClass, 'Outerpedia'],
+      alternates: {
+        canonical: url,
+      },
       openGraph: {
         title,
         description,
         url,
         type: 'website',
-        images: [{ url: image, width: 100, height: 100, alt: character.Fullname }],
+        images: [{ url: image, width: 1200, height: 630, alt: character.Fullname }],
       },
       twitter: {
-        card: 'summary',
+        card: 'summary_large_image',
         title,
         description,
         images: [image],
       },
     };
   } catch {
-    return { title: 'Outerpedia' };
+    return {
+      title: 'Outerpedia – Outerplane Character Guide',
+      description: 'Discover all characters, builds, and gear in Outerplane.',
+      alternates: {
+        canonical: 'https://outerpedia.com/characters',
+      },
+    };
   }
 }
 
@@ -129,7 +140,16 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
   
   
   const ee = eeData[toKebabCase(character.Fullname)];
+  
   return (
+    <>
+    <CharacterJsonLd
+      name={character.Fullname}
+      description={`A ${character.Element} ${character.Class} (${character.SubClass}) from the mobile game Outerplane.`}
+      image={`https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.png`}
+      url={`https://outerpedia.com/characters/${name}`}
+    />
+
     <div className="max-w-5xl mx-auto p-6">
       {/* Partie haute : illustration + infos principales */}
       <div className="grid grid-cols-1 md:grid-cols-[400px_1fr] gap-6">
@@ -239,7 +259,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
       {/* EE à gauche */}
       {ee && (
         <div className="flex flex-col md:flex-row rounded p-4 shadow hover:shadow-lg transition relative w-full md:w-[500px] min-w-[320px]">
-          <div
+          <div id="ee"
             className="w-[120px] h-[120px] relative shrink-0 mr-4 rounded overflow-hidden"
             style={{
               backgroundImage: "url(/images/ui/bg_item_leg.png)",
@@ -294,26 +314,9 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
       <div className="flex flex-col gap-4 w-full md:w-auto">
         {/* Tier + EE Priority côte à côte */}
         <div className="flex gap-4">
-          {/* Character Tier */}
-          <div className="border border-gray-600 rounded-md p-4 w-[180px] h-[100px] flex flex-col justify-center items-center">
-            <p className="font-semibold text-white mb-2">Character Tier</p>
-            {character.rank ? (
-              <Image
-                src={`/images/ui/IG_Event_Rank_${character.rank}.png`}
-                alt={`Rank ${character.rank}`}
-                width={32}
-                height={32}
-                style={{ width: 32, height: 32 }}
-                className="object-contain"
-              />
-            ) : (
-              <p className="text-gray-400 italic">Coming soon...</p>
-            )}
-          </div>
-
           {/* EE Priority */}
           <div className="border border-gray-600 rounded-md p-4 w-[180px] h-[100px] flex flex-col justify-center items-center">
-            <p className="font-semibold text-white mb-2">Exclusive Equipment Priority</p>
+            <p className="font-semibold text-white mb-2">EE Priority</p>
             {ee?.rank ? (
               <Image
                 src={`/images/ui/IG_Event_Rank_${ee.rank}.png`}
@@ -327,6 +330,24 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               <p className="text-gray-400 italic">Coming soon...</p>
             )}
           </div>
+          {/* Character Tier */}
+          <div className="border border-gray-600 rounded-md p-4 w-[180px] h-[100px] flex flex-col justify-center items-center">
+            <p className="font-semibold text-white mb-2">Character Tier</p>
+            {character.rank ? (
+              <Image
+                src={`/images/ui/IG_Event_Rank_${character.rank}.png`}
+                alt={`Rank ${character.rank}`}
+                width={32}
+                height={32}
+                style={{ width: 32, height: 32 }}
+                className="object-contain"
+              />
+            ) : (
+              <p className="text-gray-400 italic">Not Available</p>
+            )}
+          </div>
+
+          
         </div>
 
         {/* Transcendence Slider en-dessous */}
@@ -363,8 +384,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             alt={skill.name}
             width={48}
             height={48}
-            style={{ width: 48, height: 48 }}
-            className="rounded object-contain"
+            className="object-contain"
           />
           {skill.burnEffect && skill.burnEffect.length > 0 && (
             <div className="absolute top-0 left-0 bg-black text-white text-xs font-bold px-1 rounded-full border border-white">
@@ -492,7 +512,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
         />
       </div>
       <div>
-        <p className="font-semibold mb-1">Chain {character.Chain_Type || '—'} Effect</p>
+        <p className="font-semibold mb-1">Chain & Dual Attack</p>
         <p className="text-sm text-gray-400 italic mb-1">
           Weakness Gauge Reduction : {character.skills.SKT_CHAIN_PASSIVE.wgr ?? '—'}
         </p>
@@ -504,23 +524,9 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
           {formatEffectText(
             (character.skills.SKT_CHAIN_PASSIVE.true_desc?.split('<color=#ffd732>Dual Attack Effect</color>:')[0] ?? '—').trim()
           )}
-        </div>
-      </div>
-    </div>
-
-    {/* Dual */}
+        {/* Dual */}
     <div className="flex gap-4 items-start">
-      <div className="w-16 h-16 shrink-0">
-        <Image
-          src={`/images/characters/chain/Skill_ChainPassive_${character.Element}_Join.png`}
-          alt={`Dual icon for ${character.Element}`}
-          width={64}
-          height={64}
-          className="object-contain"
-        />
-      </div>
       <div>
-        <p className="font-semibold mb-1">Dual Attack Effect</p>
         <p className="text-sm text-gray-400 italic mb-1">
           Weakness Gauge Reduction : {character.skills.SKT_CHAIN_PASSIVE.wgr_dual ?? '—'}
         </p>
@@ -539,12 +545,14 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                 ? [character.skills.SKT_CHAIN_PASSIVE.dual_debuff]
                 : []
           }
-        />
+        />        
         <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
-          {formatEffectText(
-            (character.skills.SKT_CHAIN_PASSIVE.true_desc?.split('<color=#ffd732>Dual Attack Effect</color>:')[1] ?? '—').trim()
-          )}
-        </div>
+  <span style={{ color: '#ffd732' }}>Dual Attack Effect:</span>{' '}
+  {formatEffectText(
+    (character.skills.SKT_CHAIN_PASSIVE.true_desc?.split('<color=#ffd732>Dual Attack Effect</color>:')[1] ?? '—').trim()
+  )}
+</div>
+
 
         {character.skills.SKT_CHAIN_PASSIVE.enhancement && (
             <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
@@ -565,6 +573,9 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
           )}
       </div>
     </div>
+        </div>
+      </div>
+    </div>
   </div>
 )}
 </div>
@@ -573,14 +584,11 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
 {/* Gear */}
 {recoData ? (
   <RecommendedGearTabs
-    character={{
-      recommendedGearPVE: recoData.recommendedGearPVE,
-      recommendedGearPVP: recoData.recommendedGearPVP
-    }}
-    weapons={weapons}
-    amulets={amulets}
-    talismans={talismans}
-  />
+  character={{ builds: recoData }}
+  weapons={weapons}
+  amulets={amulets}
+  talismans={talismans}
+/>
 ) : (
   <div className="text-white text-center text-sm italic mt-4">
     {character.Rarity === 3
@@ -600,6 +608,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
 
 
     </div>
+    </>
   )
 
 

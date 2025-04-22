@@ -1,15 +1,50 @@
 [
-    {
-      "name": "BT_COOL_CHARGE",
-      "label": "Cooldown Reduction",
-      "description": "Reduces skill cooldowns.",
-      "icon": "reducesalliesskillcooldowns"
-    },
-    {
-        "name": "BT_STAT|ST_CRITICAL_RATE",
-        "label": "Increased Crit",
-        "description": "Increased Critical Hit Chance by 50%.",
-        "icon": "criticalhitchance"
-      }
-  ]
-  
+{
+"name": "BT_COOL_CHARGE",
+"label": "Cooldown Reduction",
+"description": "Reduces skill cooldowns.",
+"icon": "reducesalliesskillcooldowns"
+},
+{
+  "name": "BT_ACTION_GAUGE",
+  "label": "Increase Priority",
+  "description": "Increase self/allies priority",
+  "icon": "SC_Buff_Effect_Increase_Priority"
+  },
+{
+"name": "BT_STAT|ST_CRITICAL_RATE",
+"label": "Increased Critical Hit Chance",
+"description": "Increased Critical Hit Chance by 50%.",
+"icon": "criticalhitchance"
+},
+{
+"name": "BT_STAT|ST_ATK",
+"label": "Increased Attack",
+"description": "Increased Attack by 30%.",
+"icon": "SC_Buff_Stat_Atk"
+},
+{
+  "name": "BT_STAT|ST_SPEED",
+  "label": "Increased Speed",
+  "description": "Increased Speed by 30%.",
+  "icon": "SC_Buff_Stat_Speed"
+  },
+{
+"name": "BT_CP_CHARGE",
+"label": "Charge CP",
+"description": "Generates Chain Points",
+"icon": "SC_Buff_Effect_CP"
+},
+{
+"name": "BT_STAT|ST_ACCURACY",
+"label": "Increased Accuracy",
+"description": "Increased Accuracy by 50%",
+"icon": "SC_Buff_Stat_Accuracy"
+},
+{
+"name": "Heavy Strike",
+"label": "Heavy Strike",
+"description": "This attack cannot trigger a critical hit, but damage dealt is increased.",
+"icon": "SC_Buff_Effect_Heavy_bk"
+}
+]

@@ -14,6 +14,7 @@ import { cleanAccessory } from '@/lib/cleaner';
 import talismans from "@/data/talisman.json";
 import TalismanGrid from "@/app/components/TalismanGrid";
 import ExclusiveEquipmentList from "@/app/components/ExclusiveEquipmentCard";
+import eeData from "@/data/ee.json";
 
 
 export default function EquipmentsClient() {
@@ -27,6 +28,10 @@ export default function EquipmentsClient() {
   
   const [activeTabRef, setActiveTabRef] = useState<HTMLButtonElement | null>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
+  const eeItems = Object.entries(eeData).map(([key, ee]) => ({
+    name: ee.name,
+    slug: `characters/${key}#ee` // tu peux ajuster si l’URL finale est différente
+  }));
   
   useEffect(() => {
     if (activeTabRef && indicatorRef.current) {
@@ -111,11 +116,60 @@ export default function EquipmentsClient() {
     });
   });
   
+  const items = [
+    ...weapons.map((w, i) => ({
+      name: w.name,
+      url: null, // pas de page dédiée
+      position: i + 1
+    })),
+    ...accessories.map((a, i) => ({
+      name: a.name,
+      url: null,
+      position: i + 1 + weapons.length
+    })),
+    ...sets.map((s, i) => ({
+      name: s.name,
+      url: null,
+      position: i + 1 + weapons.length + accessories.length
+    })),
+    ...talismans.map((t, i) => ({
+      name: t.name,
+      url: null,
+      position: i + 1 + weapons.length + accessories.length + sets.length
+    })),
+    ...Object.entries(eeData).map(([charKey, ee], i) => ({
+      name: ee.name,
+      url: `https://outerpedia.com/characters/${charKey}#ee`,
+      position: i + 1 + weapons.length + accessories.length + sets.length + talismans.length
+    }))
+  ];
+  
   
 
 
   return (
     <main className="p-3">
+      <script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Equipments – Outerpedia",
+  "url": "https://outerpedia.com/equipments",
+  "description": "View all basic and exclusive equipment, sets, amulets, talismans and more for Outerplane.",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": items
+  .filter(item => item.url !== null)
+  .map(({ name, url, position }) => ({
+    "@type": "Product",
+    name,
+    url,
+    position
+  }))
+  }
+})}
+</script>
+
 <div className="relative flex justify-center mb-6">
   <div className="relative bg-gray-100 dark:bg-gray-800 rounded-full p-1 flex gap-1 min-w-[300px]">
     {/* Barre animée */}
