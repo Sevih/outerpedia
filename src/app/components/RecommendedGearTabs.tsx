@@ -272,18 +272,54 @@ export default function RecommendedGearTabs({
 </div>
 
                 {gear?.Note && (
-                  <div className="w-full max-w-[220px] text-sm text-white bg-black/30 border border-white/10 rounded-lg p-4">
+                  <div className="w-full max-w-[280px] text-sm text-white bg-black/30 border border-white/10 rounded-lg p-4">
                     <p className="font-bold mb-2 flex items-center gap-2">
                       <Image
-                        src="/images/ui/note.png"
+                        src="/images/ui/nav/TI_Item_Growth_Book_01.png"
                         alt="Note icon"
                         width={20}
                         height={20}
-                        className="object-contain"
+                        className="w-6 h-6 object-contain"
+                        unoptimized
                       />
                       Notes
                     </p>
-                    <p className="text-gray-300 italic whitespace-pre-line">{gear.Note}</p>
+                    <div className="text-gray-300 text-base space-y-3">
+  {gear.Note.split('\n').map((line, i) => {
+    const [label, rest] = line.split(':');
+    const matches = rest.match(/([\w\s'\-]+?Charm)(\d)/g) || [];
+
+    return (
+      <div key={i}>
+        <p className="font-semibold text-white text-base">{label.trim()}:</p>
+        <ul className="ml-4 space-y-1">
+          {matches.map((entry, j) => {
+            const name = entry.slice(0, -1).trim(); // ex: "Assassin Charm"
+            const rating = parseInt(entry.slice(-1), 10); // ex: 3
+
+            return (
+              <li key={j} className="flex items-center gap-2">
+                <span className="text-white">{name}</span>
+                <div className="flex gap-[2px]">
+                  {[...Array(3)].map((_, idx) => (
+                    <img
+                      key={idx}
+                      src={`/images/ui/${idx < rating ? 'CM_icon_star_y.png' : 'CM_icon_star_w.png'}`}
+                      alt={idx < rating ? '★' : '☆'}
+                      className="w-[16px] h-[16px] object-contain"
+                    />
+                  ))}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  })}
+</div>
+
+
                   </div>
                 )}
               </div>

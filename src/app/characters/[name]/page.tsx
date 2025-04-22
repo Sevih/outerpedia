@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { promises as fs } from 'fs';
 import path from 'path';
 import type { Metadata } from 'next';
-import CharacterJsonLd from '@/app/components/seo/CharacterJsonLd';
+import { CharacterJsonLd } from '@/app/components/seo';
 
 import Image from 'next/image';
 import classDataRaw from '@/data/class.json';
@@ -33,6 +33,11 @@ function toKebabCase(str: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
+function stripHtmlTags(text: string): string {
+  return text.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+}
+
+
 function getSkillLabel(index: number): string {
   return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`;
 }
@@ -50,15 +55,22 @@ export async function generateStaticParams() {
 export async function generateMetadata(context: { params: Promise<{ name: string }> }): Promise<Metadata> {
   const { name } = await context.params;
   const filePath = path.join(process.cwd(), 'src/data/char', `${name}.json`);
+  
 
   try {
     const raw = await fs.readFile(filePath, 'utf-8');
     const character: Character = JSON.parse(raw);
 
     const title = `${character.Fullname} - Outerpedia`;
-    const description = `View character details for ${character.Fullname}, a ${character.Class} (${character.SubClass}) in Outerplane.`;
     const image = `https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.png`;
     const url = `https://outerpedia.com/characters/${name}`;
+
+    const classData = classDataRaw as ClassDataMap;
+    const subclassDescription =
+      classData?.[character.Class]?.subclasses?.[character.SubClass]?.description ??
+      'Discover detailed stats, skills, and recommended gear.';
+
+    const description = `${character.Fullname} is a ${character.Element} ${character.Class}. ${subclassDescription}`;
 
     return {
       title,
@@ -144,11 +156,14 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
   return (
     <>
     <CharacterJsonLd
-      name={character.Fullname}
-      description={`A ${character.Element} ${character.Class} (${character.SubClass}) from the mobile game Outerplane.`}
-      image={`https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.png`}
-      url={`https://outerpedia.com/characters/${name}`}
-    />
+  name={character.Fullname}
+  description={`${character.Fullname} is a ${character.Element} ${character.Class}. ${subclassInfo?.description || ''}`}
+  image={`https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.png`}
+  url={`https://outerpedia.com/characters/${name}`}
+  element={character.Element}
+  charClass={character.Class}
+  subClass={character.SubClass}
+/>
 
     <div className="max-w-5xl mx-auto p-6">
       {/* Partie haute : illustration + infos principales */}

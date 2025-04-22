@@ -7,6 +7,18 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: '2025-04-22',
+    title: 'Homepage & SEO improvements, gear note rework',
+    type: 'update',
+    content: `
+  - Improved homepage SEO and added Open Graph banner for social previews.
+  - Added JSON-LD metadata to character and equipment pages.
+  - Simplified gear notes format and now shows icons instead of star text.
+  - Fixed issues with special characters in charm names.
+  - Added sitemap, robots.txt, and SEO check scripts.
+  `
+  },  
+  {
     date: "2025-04-20",
     title: "Major Data Pipeline Update",
     type: "feature",
