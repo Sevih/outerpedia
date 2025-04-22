@@ -28,10 +28,6 @@ export default function EquipmentsClient() {
   
   const [activeTabRef, setActiveTabRef] = useState<HTMLButtonElement | null>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
-  const eeItems = Object.entries(eeData).map(([key, ee]) => ({
-    name: ee.name,
-    slug: `characters/${key}#ee` // tu peux ajuster si l’URL finale est différente
-  }));
   
   useEffect(() => {
     if (activeTabRef && indicatorRef.current) {

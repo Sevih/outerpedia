@@ -5,12 +5,10 @@ import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import WeaponMiniCard from "@/app/components/WeaponMiniCard"
 import AccessoryMiniCard from "@/app/components/AccessoryMiniCard"
-import TalismanMiniCard from "@/app/components/TalismanMiniCard"
 import type { WeaponMini, AmuletMini, EquipmentBase, MiniSet, Talisman } from "@/types/equipment"
 import fullSets from "@/data/sets.json"
 import rawStats from '@/data/stats.json' assert { type: 'json' }
 import SetVisual from "./SetVisual"
-import allTalismans from "@/data/talisman.json"
 import MiniTalismanCard from "@/app/components/MiniTalismanCard"
 
 const stats = rawStats as Record<string, { label: string; icon: string }>
