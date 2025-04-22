@@ -33,10 +33,6 @@ function toKebabCase(str: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-function stripHtmlTags(text: string): string {
-  return text.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
-}
-
 
 function getSkillLabel(index: number): string {
   return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`;

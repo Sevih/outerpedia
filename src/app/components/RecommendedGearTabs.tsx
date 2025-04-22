@@ -302,12 +302,14 @@ export default function RecommendedGearTabs({
                 <span className="text-white">{name}</span>
                 <div className="flex gap-[2px]">
                   {[...Array(3)].map((_, idx) => (
-                    <img
-                      key={idx}
-                      src={`/images/ui/${idx < rating ? 'CM_icon_star_y.png' : 'CM_icon_star_w.png'}`}
-                      alt={idx < rating ? '★' : '☆'}
-                      className="w-[16px] h-[16px] object-contain"
-                    />
+                    <Image
+                    key={idx}
+                    src={`/images/ui/${idx < rating ? 'CM_icon_star_y.png' : 'CM_icon_star_w.png'}`}
+                    alt={idx < rating ? '★' : '☆'}
+                    width={16}
+                    height={16}
+                    className="object-contain"
+                  />
                   ))}
                 </div>
               </li>
