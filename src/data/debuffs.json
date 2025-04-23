@@ -39,7 +39,7 @@
 "name": "BT_STAT|ST_BUFF_CHANCE",
 "label": "Reduced Effectiveness",
 "description": "Reduces Effectiveness by 100%",
-"icon": "SC_Buff_Stat_BuffResist"
+"icon": "SC_Buff_Stat_BuffChance"
 },
 {
 "name": "BT_FREEZE",

@@ -174,5 +174,13 @@
 "effect10":"+20% Defense",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"B"
+},
+"charlotte":{
+"name":"Detective's Emblem",
+"mainStat":"Effectiveness to Water",
+"effect":"Increases Priority of the wearer by 30% when Thinking Time activates",
+"effect10":"Increases Action Points of Mage allies by 20 when using Thinking Time",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"A"
 }
 }

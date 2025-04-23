@@ -459,18 +459,48 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
   {/* Burn cards centrées */}
   <div className="flex justify-center">
     <div className="flex flex-wrap justify-center gap-2">
-      {(() => {
-        const skillWithBurn = Object.values(character.skills || {}).find(
-          (s): s is Skill & {
-            burnEffect: Record<string, { level: number; cost: number; effect: string }>;
-          } => !!s.burnEffect && Object.keys(s.burnEffect).length > 0
-        );
+    {(() => {
+  const entries = Object.entries(character.skills || {});
+  const skillWithBurnEntry = entries.find(
+    ([, skill]) => !!skill?.burnEffect && Object.keys(skill.burnEffect).length > 0
+  );
 
-        if (!skillWithBurn) return null;
+  if (!skillWithBurnEntry) return null;
 
-        const burns = Object.values(skillWithBurn.burnEffect);
+  const [skillKey, skillWithBurn] = skillWithBurnEntry as [string, Skill & {
+    burnEffect: Record<string, { level: number; cost: number; effect: string }>;
+  }];
 
-        return burns.map((burn) => (
+  const index = ['SKT_FIRST', 'SKT_SECOND', 'SKT_ULTIMATE'].indexOf(skillKey);
+  const burns = Object.values(skillWithBurn.burnEffect);
+
+  return (
+    <div className="flex justify-center gap-6 items-center">
+      {/* Colonne gauche : icône + nom du skill */}
+      <div className="flex flex-col items-center gap-2 relative w-12 h-12">
+  <Image
+    src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.png`}
+    alt={skillWithBurn.name}
+    width={48}
+    height={48}
+    className="object-contain"
+  />
+  <Image
+    src="/images/ui/CM_Skill_Icon_Burst.png"
+    alt="Burn icon"
+    width={20}
+    height={20}
+    className="absolute top-0 left-0 w-5 h-5 z-10 pointer-events-none"
+  />
+  <span className="text-sm font-semibold text-white text-center mt-1">
+    {skillWithBurn.name}
+  </span>
+</div>
+
+
+      {/* Cartes burn */}
+      <div className="flex flex-wrap justify-center gap-2">
+        {burns.map((burn) => (
           <div
             key={burn.level}
             className="relative w-[185px] h-[262px] bg-cover bg-center rounded overflow-hidden text-white transform transition-transform duration-200 hover:scale-105 hover:shadow-lg hover:ring-[1px] hover:ring-yellow-400 hover:ring-offset-[0.2px] cursor-pointer"
@@ -500,8 +530,11 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               </div>
             </div>
           </div>
-        ));
-      })()}
+        ))}
+      </div>
+    </div>
+  );
+})()}
     </div>
   </div>
 
