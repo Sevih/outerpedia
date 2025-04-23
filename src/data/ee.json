@@ -86,5 +86,85 @@
 "effect10":"When using Aye Aye Captain! increases Penetration by 30% when there is only one target.",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"B"
+},
+"aer":{
+"name":"Super Board",
+"mainStat":"Accuracy to Earth",
+"effect":"Increases Accuracy for 2 turn(s) when using To the Beach?",
+"effect10":"Increases Accuracy for 3 turn(s) when using To the Beach?",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
+},
+"ais-wallenstein":{
+"name":"Desperate",
+"mainStat":"Accuracy to Earth",
+"effect":"When hit, increases Priority by 25% (Activated only once every 2 turn)",
+"effect10":"When hit, increases Priority by 50% (Activated only once every 2 turn)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":""
+},
+"akari":{
+"name":"Juzumaru Tsunetsugu",
+"mainStat":"Effectiveness to Dark",
+"effect":"Increases the duration of debuffs on the enemy team by 1 turn(s) when using Juzumaru Tsunetsugu",
+"effect10":"+30 Effectiveness",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"S"
+},
+"alice":{
+"name":"The Book of Folk and Tall Tales",
+"mainStat":"Effectiveness to Water",
+"effect":"At the start of the battle, has a 100% chance to increases Speed for 1 turn(s)",
+"effect10":"+30 Effectiveness",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"S"
+},
+"ame":{
+"name":"Secret Sword, Teru Teru Bouzu",
+"mainStat":"Accuracy to Water",
+"effect":"Increases damage dealt to Water enemies by 50% (Does not have any effect on elemental advantage",
+"effect10":"Increases Penetration by 20% when using Mikazuki 3rd Art : Flower Charm",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"S"
+},
+"astei":{
+"name":"Divine Warmth",
+"mainStat":"Reduces Earth Damage Taken",
+"effect":"Increases Priority by 5% when ally team hit",
+"effect10":"Increases Priority by 8% when ally team hit",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
+},
+"bell-cranel":{
+"name":"Hestia Knife",
+"mainStat":"Accuracy to Earth",
+"effect":"When using Argo Vesta, ignores the target's Resilience",
+"effect10":"When using Swift Chain, ignores the target's Resilience",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":""
+},
+"beth":{
+"name":"Demonic Twin",
+"mainStat":"Accuracy to Fire",
+"effect":"When an enemy is inflicted with Bleeding at the end of their turn, increases the priority of the wearer by 70%",
+"effect10":"+30 Effectiveness",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"S"
+},
+"bleu":{
+"name":"Magnolia Student ID",
+"mainStat":"Accuracy to Fire",
+"effect":"If Water Ball defeats an enemy, has a 70% chance to gain an extra turn",
+"effect10":"If Water Ball defeats an enemy, has a 100% chance to gain an extra turn",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"D"
+},
+"bryn":{
+"name":"Exeptional Aura",
+"mainStat":"Accuracy to Water",
+"effect":"Increases damage of allies with a barrier",
+"effect10":"Greatly increases damage of allies with a barrier",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
 }
 }

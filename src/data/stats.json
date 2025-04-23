@@ -11,6 +11,7 @@
     "CHC": { "label": "Crit Chance", "icon": "CM_Stat_Icon_CRITICAL.png" },
     "CHD": { "label": "Crit Damage", "icon": "CM_Stat_Icon_CRITICAL_DMG.png" },
     "PEN": { "label": "Penetration", "icon": "CM_Stat_Icon_PIERCE_POWER.png" },
+    "PEN%": { "label": "Penetration %", "icon": "CM_Stat_Icon_PIERCE_POWER.png" },
     "LS":  { "label": "Lifesteal", "icon": "CM_Stat_Icon_VAMPIRIC.png" },
     "HH":  { "label": "Heals when Hit", "icon": "CM_Stat_Icon_HitRecovery.png" },
     "EVA": { "label": "Evasion", "icon": "CM_Stat_Icon_AVOID.png" },

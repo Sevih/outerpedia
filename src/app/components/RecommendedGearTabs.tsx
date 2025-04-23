@@ -285,43 +285,45 @@ export default function RecommendedGearTabs({
                       Notes
                     </p>
                     <div className="text-gray-300 text-base space-y-3">
-  {gear.Note.split('\n').map((line, i) => {
-    const [label, rest] = line.split(':');
-    const matches = rest.match(/([\w\s'\-]+?Charm)(\d)/g) || [];
+                      {gear.Note.split('\n').map((line, i) => {
+                        const [label, rest] = line.split(':');
+                        const matches = rest?.match(/([\w\s'\-]+?Charm)(\d)/g) || [];
 
-    return (
-      <div key={i}>
-        <p className="font-semibold text-white text-base">{label.trim()}:</p>
-        <ul className="ml-4 space-y-1">
-          {matches.map((entry, j) => {
-            const name = entry.slice(0, -1).trim(); // ex: "Assassin Charm"
-            const rating = parseInt(entry.slice(-1), 10); // ex: 3
+                        if (!rest || matches.length === 0) {
+                          return <p key={i}>{line}</p>; // 🔁 Rendu brut si aucun match
+                        }
 
-            return (
-              <li key={j} className="flex items-center gap-2">
-                <span className="text-white">{name}</span>
-                <div className="flex gap-[2px]">
-                  {[...Array(3)].map((_, idx) => (
-                    <Image
-                    key={idx}
-                    src={`/images/ui/${idx < rating ? 'CM_icon_star_y.png' : 'CM_icon_star_w.png'}`}
-                    alt={idx < rating ? '★' : '☆'}
-                    width={16}
-                    height={16}
-                    className="object-contain"
-                  />
-                  ))}
-                </div> 
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  })}
-</div>
+                        return (
+                          <div key={i}>
+                            <p className="font-semibold text-white text-base">{label.trim()}:</p>
+                            <ul className="ml-4 space-y-1">
+                              {matches.map((entry, j) => {
+                                const name = entry.slice(0, -1).trim();
+                                const rating = parseInt(entry.slice(-1), 10);
 
-
+                                return (
+                                  <li key={j} className="flex items-center gap-2">
+                                    <span className="text-white">{name}</span>
+                                    <div className="flex gap-[2px]">
+                                      {[...Array(3)].map((_, idx) => (
+                                        <Image
+                                          key={idx}
+                                          src={`/images/ui/${idx < rating ? 'CM_icon_star_y.png' : 'CM_icon_star_w.png'}`}
+                                          alt={idx < rating ? '★' : '☆'}
+                                          width={16}
+                                          height={16}
+                                          className="object-contain"
+                                        />
+                                      ))}
+                                    </div>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
               </div>

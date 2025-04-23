@@ -1,5 +1,5 @@
 {
-"Speedy Rhona": {
+"Speed": {
 "Weapon": [
 {
 "name": "Surefire Javelin",
@@ -25,7 +25,7 @@
 "Note": "PvP:Assassin's Charm3Tactician's Charm2\nPvE:Gladiator's Charm3Executioner's Charm2", 
 "Talisman":["Assassin's Charm","Tactician's Charm","Executionner's Charm","Gladiator's Charm"]
 },
-"Counter Rhona": {
+"Counter": {
 "Weapon": [
 {
 "name": "Surefire Javelin",
@@ -51,7 +51,7 @@
 "Note": "PvP:Assassin's Charm3Tactician's Charm2\nPvE:Gladiator's Charm3Executioner's Charm2",  
 "Talisman":["Assassin's Charm","Tactician's Charm","Executionner's Charm","Gladiator's Charm"]
 },
-"Scaling Rhona": {
+"Scaling": {
 "Weapon": [
 {
 "name": "Surefire Javelin",

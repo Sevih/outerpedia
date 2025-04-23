@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import path from 'path'
 import fs from 'fs/promises'
+import { toKebabCase } from '@/utils/formatText'
 
 export async function GET(req: NextRequest) {
   const name = req.nextUrl.pathname.split('/').pop()?.toLowerCase()
@@ -11,7 +12,7 @@ export async function GET(req: NextRequest) {
       headers: { 'Content-Type': 'application/json' }
     })
   }
-
+  const name_good = toKebabCase(name)
   const filePath = path.join(process.cwd(), 'src/data/reco', `${name}.json`)
 
   try {

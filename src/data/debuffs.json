@@ -12,10 +12,34 @@
 "icon": "SC_Buff_Effect_Aggro"
 },
 {
+"name": "BT_SEAL_COUNTER",
+"label": "Uncounterrable",
+"description": "Negates enemy reactive strikes: Counterattack, Revenge, or Agile Response.",
+"icon": "IG_Buff_Seal_Counter_Interruption"
+},
+{
 "name": "BT_STAT|ST_ACCURACY",
 "label": "Reduced Accuracy",
 "description": "Reduces Accuracy by 50%",
 "icon": "SC_Buff_Stat_Accuracy"
+},
+{
+"name": "BT_STAT|ST_ATK",
+"label": "Reduced Attack",
+"description": "Reduces Attack by 30%",
+"icon": "SC_Buff_Stat_Atk"
+},
+{
+"name": "BT_STAT|ST_BUFF_RESIST",
+"label": "Reduced Resilience",
+"description": "Reduces Resilience by 100%",
+"icon": "SC_Buff_Stat_BuffResist"
+},
+{
+"name": "BT_STAT|ST_BUFF_CHANCE",
+"label": "Reduced Effectiveness",
+"description": "Reduces Effectiveness by 100%",
+"icon": "SC_Buff_Stat_BuffResist"
 },
 {
 "name": "BT_FREEZE",
@@ -24,11 +48,11 @@
 "icon": "SC_Buff_Effect_Freeze"
 },
 {
-    "name": "BT_STONE",
-    "label": "Petrified",
-    "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",
-    "icon": "SC_Buff_Effect_Stone"
-    },
+"name": "BT_STONE",
+"label": "Petrified",
+"description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",
+"icon": "SC_Buff_Effect_Stone"
+},
 {
 "name": "BT_ACTION_GAUGE",
 "label": "Reduces Priority of enemies",
@@ -54,6 +78,12 @@
 "icon": "SC_Buff_Stat_Def"
 },
 {
+"name": "BT_STAT|ST_CRITICAL_RATE",
+"label": "Reduced Crit Hit Chance",
+"description": "Reduces Critical Hit Chance by 50%",
+"icon": "SC_Buff_Stat_CriRate"
+},
+{
 "name": "BT_STUN",
 "label": "Stunned",
 "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",
@@ -64,5 +94,17 @@
 "label": "Unbuffable",
 "description": "Cannot gain buffs. (Excluding certain effects)",
 "icon": "SC_Buff_Effect_Sealed"
+},
+{
+"name": "BT_DOT_CURSE",
+"label": "Cursed",
+"description": "Takes damage proportional to Health at the start of the turn.\nRemoved when the caster dies",
+"icon": "SC_Buff_Dot_Curse"
+},
+{
+"name": "BT_DOT_BLEED",
+"label": "Bleeding",
+"description": "Reduces healing received. \nTakes damage proportional to the caster's Attack at the start of the turn.\nRemoved when the caster dies.",
+"icon": "CM_Stat_Icon_VAMPIRIC"
 }
 ]

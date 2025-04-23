@@ -41,12 +41,11 @@
     background-color: #06b6d4;
   }
   
-  img.buff {
+  img.buff:not([src*="Interruption"]) {
     filter: brightness(0) saturate(100%) invert(53%) sepia(97%) saturate(932%) hue-rotate(180deg) brightness(1.2);
   }
   
-  
-  img.debuff {
+  img.debuff:not([src*="Interruption"]) {
     filter: brightness(0) saturate(100%) invert(19%) sepia(100%) saturate(2345%) hue-rotate(-10deg) brightness(102%) contrast(105%);
   }
   

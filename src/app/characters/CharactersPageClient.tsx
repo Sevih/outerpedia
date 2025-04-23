@@ -59,7 +59,7 @@ function EffectIconRaw({ name, type }: { name: string; type: 'buff' | 'debuff' }
   return (
     <div
       className={`w-8 h-8 rounded flex items-center justify-center cursor-pointer ${style}`}
-      title={effect?.description || label}
+      title={label +" : "+ effect?.description || label}
     >
       <div className="w-6 h-6 bg-black p-0.5 rounded flex items-center justify-center">
         <Image
@@ -367,7 +367,7 @@ export default function CharactersPage() {
       <div className="flex flex-wrap justify-center gap-6">
         {filteredCharacters.map((char,index) => (
           <Link
-            href={`/characters/${char.Fullname.toLowerCase()}`}
+            href={`/characters/${toKebabCase(char.Fullname.toLowerCase())}`}
             key={char.ID}
             className="w-[120px] text-center shadow hover:shadow-lg transition relative overflow-hidden"
           >

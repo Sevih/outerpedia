@@ -120,7 +120,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
   const classInfo = classData[character.Class as keyof typeof classData]
   const subclassInfo = classInfo?.subclasses?.[character.SubClass as keyof typeof classInfo.subclasses]
   const statLabels = ["Health","Defense","Evasion", "Accuracy","Speed","Attack"]
-  const recoFile = character.Fullname.toLowerCase()
+  const recoFile = toKebabCase(character.Fullname.toLowerCase())
   let recoData = null
   
 

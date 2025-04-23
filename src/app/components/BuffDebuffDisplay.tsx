@@ -38,7 +38,7 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
 
   const renderEffect = (effect: Effect) => {
     const iconPath = `/images/ui/effect/${effect.icon}.png`
-    const baseColor = effect.type === 'buff' ? 'bg-[#2196f3]' : 'bg-[#e53935]'
+    const baseColor = effect.type === 'buff' ? 'bg-[#1a69a7]' : 'bg-[#a72a27]'
     const showEffectColor = !effect.description.toLowerCase().includes('cannot be removed')
     const imageClass = showEffectColor ? effect.type : ''
   
