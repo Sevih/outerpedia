@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
       headers: { 'Content-Type': 'application/json' }
     })
   }
-  const name_good = toKebabCase(name)
+  
   const filePath = path.join(process.cwd(), 'src/data/reco', `${name}.json`)
 
   try {
