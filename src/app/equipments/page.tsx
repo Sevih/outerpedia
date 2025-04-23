@@ -3,14 +3,14 @@ import EquipmentsClient from "./EquipmentsClient";
 
 export const metadata: Metadata = {
   title: "Equipments – Outerpedia",
-  description: "Browse all equipment in Outerplane. Filter by type, stats, and recommended builds.",
+  description: "Browse all equipment in Outerplane.",
   keywords: ["Outerplane", "Equipments", "Gear", "Stats", "Builds", "Outerpedia"],
   alternates: {
     canonical: "https://outerpedia.com/equipments",
   },
   openGraph: {
     title: "Equipments – Outerpedia",
-    description: "Browse all equipment in Outerplane. Filter by type, stats, and recommended builds.",
+    description: "Browse all equipment in Outerplane.",
     url: "https://outerpedia.com/equipments",
     type: "website",
     images: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Equipments – Outerpedia",
-    description: "Browse all equipment in Outerplane. Filter by type, stats, and recommended builds.",
+    description: "Browse all equipment in Outerplane.",
     images: ["https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Inventory.png"],
   },
 };
