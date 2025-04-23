@@ -80,7 +80,7 @@ export async function generateMetadata(context: { params: Promise<{ name: string
         description,
         url,
         type: 'website',
-        images: [{ url: image, width: 1200, height: 630, alt: character.Fullname }],
+        images: [{ url: image, width: 150, height: 150, alt: character.Fullname }],
       },
       twitter: {
         card: 'summary_large_image',
