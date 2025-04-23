@@ -1,5 +1,5 @@
 ![Next.js](https://img.shields.io/badge/Next.js-15-blue?logo=nextdotjs)
-![License](https://img.shields.io/github/license/Sevih/outerpedia)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Last Commit](https://img.shields.io/github/last-commit/Sevih/outerpedia)
 ![Stars](https://img.shields.io/github/stars/Sevih/outerpedia?style=social)
 
@@ -28,7 +28,7 @@ Outerpedia is a companion site for **Outerplane**, a mobile turn-based RPG. It p
 Clone and install dependencies:
 
 ```bash
-git clone https://github.com/<your-username>/outerpedia.git
+git clone https://github.com/Sevih/outerpedia.git
 cd outerpedia
 npm install
 ```
