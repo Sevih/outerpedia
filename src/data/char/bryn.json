@@ -90,10 +90,6 @@
       ],
       "cd": "4",
       "debuff": [
-        "IG_Buff_Effect_2000076_Interruption",
-        "IG_Buff_Effect_2000076_Interruption",
-        "IG_Buff_Effect_2000076_Interruption",
-        "IG_Buff_Effect_2000076_Interruption"
       ],
       "description": [
         "(Passive Effect) At the start of battle, grants <color=#28d9ed>Charisma</color> to all allies and enemies except for Bryn for <color=#28d9ed>[Buff_T_2000076_2_3] turn(s)</color>.\\n\\n(Active Effect) Grants <color=#28d9ed>Charisma</color> to all allies except for Bryn for <color=#28d9ed>[Buff_T_2000076_2_3] turn(s)</color>. Then, grants all allies a barrier proportional to the caster's Attack for <color=#28d9ed>[Buff_T_2000076_2_5] turn(s)</color>."
