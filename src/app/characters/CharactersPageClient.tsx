@@ -5,7 +5,6 @@ import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
 import Image from 'next/image'
 import Link from 'next/link'
-import type { Metadata } from 'next';
 import type { EffectData, CharacterLite, SkillLite} from '@/types/types'
 import { toKebabCase } from '@/utils/formatText'
 
