@@ -126,9 +126,7 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000076_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_STAT|ST_AVOID_SUBTRACT_CAP"
-      ],
+      "buff": [],
       "cd": null,
       "debuff": [
         "BT_REMOVE_BUFF"

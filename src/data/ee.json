@@ -166,5 +166,13 @@
 "effect10":"Greatly increases damage of allies with a barrier",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"B"
+},
+"caren":{
+"name":"Logos",
+"mainStat":"Reduces Fire Damage Taken",
+"effect":"Ignore 30% of the target's Defense when activating Disassembly Analysis",
+"effect10":"+20% Defense",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
 }
 }

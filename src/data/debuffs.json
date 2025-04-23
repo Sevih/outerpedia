@@ -96,6 +96,12 @@
 "icon": "SC_Buff_Effect_Sealed"
 },
 {
+    "name": "BT_STEAL_BUFF",
+    "label": "Buff Stealing",
+    "description": "Steal buff from the target.",
+    "icon": "SC_Buff_Steal"
+    },
+{
 "name": "BT_DOT_CURSE",
 "label": "Cursed",
 "description": "Takes damage proportional to Health at the start of the turn.\nRemoved when the caster dies",
