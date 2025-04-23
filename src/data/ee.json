@@ -62,5 +62,29 @@
 "effect10":"Damage dealt increases proportional to Critical Damage (Max 100%)",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"A"
+},
+"luna":{
+"name":"Machiavelli",
+"mainStat":"Reduces Fire Damage Taken",
+"effect":"Water allies' Dual Attack Weakness Gauge damage +70%",
+"effect10":"Water allies's Max Health +30%",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":""
+},
+"hilde":{
+"name":"Hound",
+"mainStat":"Effectiveness to Light",
+"effect":"Increases Health of the wearer by 35%",
+"effect10":"Increases Damage dealt by For Pandemonium! by 50%",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":""
+},
+"adelie":{
+"name":"Titanic Anchor",
+"mainStat":"Accuracy to Fire",
+"effect":"When using Aye Aye Captain!, increases damage dealt inversely proportional to the number of targets",
+"effect10":"When using Aye Aye Captain! increases Penetration by 30% when there is only one target.",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
 }
 }

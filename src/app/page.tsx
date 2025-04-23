@@ -39,9 +39,9 @@ export default function Home() {
 
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-12 px-4 md:px-16">
         {/* OG Image à gauche */}
-        <div className="h-[340px] w-auto max-w-full rounded-xl overflow-hidden">
+        <div className="h-[340px] w-auto max-w-full rounded-xl overflow-hidden banner-og">
           <Image
-            src="/images/ui/og_home_long.jpg"
+            src="/images/ui/og_home.jpg"
             alt="Outerpedia OG"
             width={600}
             height={340}

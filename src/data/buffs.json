@@ -29,12 +29,24 @@
   "description": "Increased Speed by 30%.",
   "icon": "SC_Buff_Stat_Speed"
   },
+  {
+    "name": "BT_STAT|ST_BUFF_CHANCE",
+    "label": "Increased Effectiveness",
+    "description": "Increased Effectiveness by 100%.",
+    "icon": "SC_Buff_Stat_BuffChance"
+    },
 {
 "name": "BT_CP_CHARGE",
 "label": "Charge CP",
 "description": "Generates Chain Points",
 "icon": "SC_Buff_Effect_CP"
 },
+{
+  "name": "BT_AP_CHARGE",
+  "label": "Charge AP",
+  "description": "Generates Action Points",
+  "icon": "SC_Buff_Effect_AP"
+  },
 {
 "name": "BT_STAT|ST_ACCURACY",
 "label": "Increased Accuracy",
@@ -46,5 +58,23 @@
 "label": "Heavy Strike",
 "description": "This attack cannot trigger a critical hit, but damage dealt is increased.",
 "icon": "SC_Buff_Effect_Heavy_bk"
+},
+{
+"name": "BT_CALL_BACKUP",
+"label": "Dual Attack",
+"description": "Trigger a basic attack from the ally with the highest Attack.",
+"icon": "SC_Buff_Effect_Dual_Attack"
+},
+{
+"name": "BT_REMOVE_DEBUFF",
+"label": "Debuff Removal",
+"description": "Remove weakening effect.",
+"icon": "SC_Buff_Effect_Cleanse"
+},
+{
+"name": "BT_SHIELD_BASED_CASTER",
+"label": "Barrier",
+"description": "Barriers absorb damage, taking damage in place of Health",
+"icon": "CM_Stat_Icon_SHIELD"
 }
 ]

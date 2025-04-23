@@ -7,6 +7,16 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2025-04-23",
+    title: "New Characters & Visual Enhancements",
+    type: "feature",
+    content: `
+    - Added **Luna**, **Hilde** and **Adelie** to the character database, including full portraits, stats, and skill data.
+    - Updated the homepage banner with a new visual and smooth CSS masking.
+    - Refined the style of the "Currently Pullable" section for a cleaner layout.
+    `
+  },  
+  {
     date: "2025-04-22",
     title: "Cleanup & UI Polish for Changelog and Updates",
     type: "update",
