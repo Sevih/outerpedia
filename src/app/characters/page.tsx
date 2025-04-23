@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://outerpedia.com/images/ui/nav/IG_Turn_CM_Lobby_Button_Character.png',
+        url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Character.png',
         width: 150,
         height: 150,
         alt: 'Outerpedia Character Collection',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary',
     title: 'Heroes Collection – Outerpedia',
     description: 'Browse all characters in Outerplane.',
-    images: ['https://outerpedia.com/images/ui/nav/IG_Turn_CM_Lobby_Button_Character.png'],
+    images: ['https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Character.png'],
   },
 }
 
