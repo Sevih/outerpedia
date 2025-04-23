@@ -1,3 +1,8 @@
+![Next.js](https://img.shields.io/badge/Next.js-15-blue?logo=nextdotjs)
+![License](https://img.shields.io/github/license/Sevih/outerpedia)
+![Last Commit](https://img.shields.io/github/last-commit/Sevih/outerpedia)
+![Stars](https://img.shields.io/github/stars/Sevih/outerpedia?style=social)
+
 # 🌌 Outerpedia
 
 Outerpedia is a companion site for **Outerplane**, a mobile turn-based RPG. It provides a clean and structured UI to browse characters, gear, builds, and tier lists.
