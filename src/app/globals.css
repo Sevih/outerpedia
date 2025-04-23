@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 @font-face {
     font-family: 'H2HDRM';
     src: url('/fonts/H2HDRM.ttf') format('truetype');

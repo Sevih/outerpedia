@@ -83,7 +83,7 @@ export async function generateMetadata(context: { params: Promise<{ name: string
         images: [{ url: image, width: 150, height: 150, alt: character.Fullname }],
       },
       twitter: {
-        card: 'summary_large_image',
+        card: 'summary',
         title,
         description,
         images: [image],

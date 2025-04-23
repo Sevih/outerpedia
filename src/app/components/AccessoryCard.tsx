@@ -12,7 +12,7 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
     <div
       onClick={() => setExpanded(!expanded)}
       className={`relative bg-white/5 p-1 rounded-2xl shadow flex flex-col items-center text-center transition-all duration-300 ${
-        expanded ? "w-[260px]" : "w-[220px]"
+        expanded ? "w-[180px]" : "w-[160px]"
       } cursor-pointer`}
     >
       {/* Image centrale */}
@@ -83,11 +83,11 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
       </div>
 
       {/* Indicateur ▼ ▲ */}
-      <div className="text-white/40 text-lg mt-1">{expanded ? "▲" : "▼"}</div>
+      <div className="text-white/40 text-xs mt-1">{expanded ? "▲" : "▼"}</div>
 
       {/* Bloc étendu */}
       {expanded && (
-        <div className="bg-gray-800/90 rounded-xl px-4 py-3 text-xs text-white/90 w-full mt-2 flex flex-col gap-2">
+        <div className=" rounded-xl text-xs text-white/90 w-full flex flex-col gap-1">
           {/* Substats */}
           {accessory.mainStats && accessory.mainStats.length > 0 && (
   <StatIconsRow statsList={accessory.mainStats} />
