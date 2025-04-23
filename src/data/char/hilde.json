@@ -9,12 +9,12 @@
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
-    "4_1": "ATK DEF HP +16%\\n+2% Ally Team Evasion\\n+1 Chain Passive Weakness Gauge damage",
+    "4_1": "ATK DEF HP +16%\n+2% Ally Team Evasion\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\\nBurst Level 3 Unlocked",
+    "5_1": "ATK DEF HP +22%",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\\n+2% Ally Team Evasion\\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+2% Ally Team Evasion\n+25 Action Points at battle start"
   },
   "Chain_Type": "Finish",
   "skills": {
