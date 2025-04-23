@@ -10,27 +10,28 @@ const elementColors: Record<string, string> = {
   earth: 'bg-emerald-600 text-white'
 }
 
+// ✅ Déplacée en-dehors du composant
+function getTimeLeft(endDate: string) {
+  const total = Date.parse(endDate) - Date.now()
+  if (total <= 0) return 'Banner ended'
+
+  const minutes = Math.floor((total / 1000 / 60) % 60)
+  const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
+  const days = Math.floor(total / (1000 * 60 * 60 * 24))
+
+  return `${days}d ${hours}h${days === 0 ? ` ${minutes}m` : ''}`
+}
+
 export default function Countdown({ endDate, element }: { endDate: string, element: string }) {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft())
-
-  function getTimeLeft() {
-    const total = Date.parse(endDate) - Date.now()
-    if (total <= 0) return 'Banner ended'
-
-    const minutes = Math.floor((total / 1000 / 60) % 60)
-    const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
-    const days = Math.floor(total / (1000 * 60 * 60 * 24))
-
-    return `${days}d ${hours}h${days === 0 ? ` ${minutes}m` : ''}`
-  }
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft(endDate))
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft())
+      setTimeLeft(getTimeLeft(endDate))
     }, 60 * 1000)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [endDate]) // ✅ Ajout de endDate en dépendance
 
   const badgeClass = elementColors[element] || 'bg-cyan-900 text-cyan-300'
 

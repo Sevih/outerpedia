@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import Countdown from './Countdown'
 
 type Character = {
@@ -23,23 +24,34 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
       <div className="flex gap-10 justify-end">
         {characters.map(({ name, id, slug, endDate, element, class: charClass }) => (
           <Link key={name} href={`/characters/${slug}`}>
-            <div className="bg-gray-800 hover:bg-gray-700 rounded-xl overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-105">
-              <img
-                src={`/images/characters/portrait/CT_${id}.png`}
-                alt={name}
-                className="w-full h-48 object-cover"
-              />
+            <div className="bg-gray-800 hover:bg-gray-700 rounded-xl overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-105 w-[120px]">
+              <div className="relative w-full h-48">
+                <Image
+                  src={`/images/characters/portrait/CT_${id}.png`}
+                  alt={name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority
+                />
+              </div>
               <div className="flex items-center justify-center gap-2 py-2 font-medium text-white">
-                <img
+                <Image
                   src={`/images/ui/elem/${element}.png`}
                   alt={element}
-                  className="w-5 h-5"
+                  width={20}
+                  height={20}
+                  style={{ width: '20px', height: '20px', objectFit: 'contain' }}
+                  unoptimized
                 />
                 <span>{name}</span>
-                <img
+                <Image
                   src={`/images/ui/class/${charClass}.png`}
                   alt={charClass}
-                  className="w-5 h-5"
+                  width={20}
+                  height={20}
+                  style={{ width: '20px', height: '20px', objectFit: 'contain' }}
+                  unoptimized
                 />
               </div>
               <div className="text-center pb-2">

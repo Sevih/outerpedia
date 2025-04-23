@@ -37,7 +37,7 @@
       ],
       "Set": [
         [
-          { "name": "Health", "count": 2 },
+          { "name": "Life", "count": 2 },
           { "name": "Immunity", "count": 2 }
         ]
       ],
@@ -61,7 +61,7 @@
            "Set": [
              [
                { "name": "Swiftness", "count": 2 },
-               { "name": "Health", "count": 2 }
+               { "name": "Life", "count": 2 }
              ]
            ],
            "SubstatPrio": "HP>DEF>SPD>CHC>CHD",

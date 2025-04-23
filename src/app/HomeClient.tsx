@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { changelog } from "@/data/changelog"
 import { renderMarkdown } from "@/utils/markdown"
+import Image from 'next/image'
 
 const categories = [
   { name: 'Characters', path: '/characters' },
@@ -53,8 +54,10 @@ export default function HomeClient() {
               <li key={cat.path} className="w-full max-w-[180px]">
                 <Link href={cat.path}>
                   <div className="flex flex-col items-center bg-gray-800 hover:bg-gray-700 p-4 rounded-xl shadow-lg transition-transform transform hover:scale-105 cursor-pointer">
-                    <img
+                    <Image
                       src={`/images/ui/nav/${icon}`}
+                      height={340}
+                      width={600}
                       alt={cat.name}
                       className="w-18 h-18 object-contain mb-2"
                     />
