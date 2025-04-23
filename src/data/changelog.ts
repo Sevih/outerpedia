@@ -7,11 +7,23 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2025-04-24",
+    title: "Character Additions & Burn Visuals",
+    type: "feature",
+    content: `
+    - Added **Charlotte**, **Caren**, and all characters from A to B to the character database.
+    - Added the skill icon (top-left corner) on burn cards to match in-game visuals.
+    - Fixed misalignment in **Luna** and **Hilde** awakening displays.
+    - Corrected **Charisma Bryn**'s skill placement.
+    - Added Open Graph metadata for the Equipment page and icons to the Characters list.
+    `
+  },  
+  {
     date: "2025-04-23",
     title: "New Characters & Visual Enhancements",
     type: "feature",
     content: `
-    - Added **Luna**, **Hilde** and **Adelie** to the character database, including full portraits, stats, and skill data.
+    - Added **Luna**, **Hilde** and **Adelie** to the character database.
     - Updated the homepage banner with a new visual and smooth CSS masking.
     - Refined the style of the "Currently Pullable" section for a cleaner layout.
     `

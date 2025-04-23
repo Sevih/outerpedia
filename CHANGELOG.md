@@ -1,3 +1,20 @@
+
+## 🔥 Character Additions & Burn Visuals (2025-04-24)
+
+### ✅ Added
+- All characters from **A to B**, including **Charlotte** and **Caren**, are now fully integrated with portraits, skills, stats and gear.
+- New skill icon (`CM_Skill_Icon_Burst.png`) displayed in the **top-left corner** of burn cards.
+- Icons for **class** and **element** are now shown on the global character list.
+
+### 🛠 Fixed
+- Corrected **Charisma Bryn**'s build assignment (was misplaced).
+- Adjusted **Luna** and **Hilde**'s **awakening alignment** on their character pages.
+
+### 🧪 Verified
+- Burn card visuals match in-game styling.
+- All new characters load without errors and are SEO-ready.
+- Character detail pages include complete structured metadata.
+
 ## 🎨 Homepage & Gear UI Enhancements (2025-04-22)
 
 ### ✅ Added
