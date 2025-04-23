@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌌 Outerpedia
 
-## Getting Started
+Outerpedia is a companion site for **Outerplane**, a mobile turn-based RPG. It provides a clean and structured UI to browse characters, gear, builds, and tier lists.
 
-First, run the development server:
+> Built with [Next.js 15](https://nextjs.org), TypeScript and Tailwind CSS.
+
+---
+
+## 🚀 Features
+
+- 🧙‍♀️ **Character Database** with portraits, skills, passives, chain/dual effects and full JSON export.
+- 🛡️ **Equipment Page** supporting filters for type, stats and gear notes.
+- 🧪 **Recommended Builds** per character, including exclusive equipment and talismans.
+- 🔎 **Buff/Debuff Filters** with AND/OR logic and icon-based UI.
+- 📦 Full static export compatible (`force-static`, `dynamicParams = false`).
+- 📈 Integrated **SEO metadata** and Open Graph preview (`og_home.jpg`).
+- 🎨 Custom UI & homepage design (OG banner, pullable section, categories).
+
+---
+
+## 🧰 Getting Started
+
+Clone and install dependencies:
+
+```bash
+git clone https://github.com/<your-username>/outerpedia.git
+cd outerpedia
+npm install
+```
+
+Run the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Project Structure
 
-## Learn More
+- `src/data/` – JSON data (characters, equipment, buffs, etc.)
+- `src/app/` – Next.js App Router (pages, routes, API)
+- `src/app/components/` – UI and logic components
+- `scripts/` – Utilities (e.g. sitemap, SEO check, scraping scripts)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Build & Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For production build:
 
-## Deploy on Vercel
+```bash
+npm run build
+npm run start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Deployment is handled via **Vercel** or can be self-hosted on any static-compatible platform.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📜 License
+
+Outerpedia is a fan project. All in-game assets belong to Smilegate Megaport.  
+Code is MIT licensed.
+
+---
+
+## 💬 Community
+
+Join our Discord to report bugs, request features or suggest improvements:  
+**[https://discord.gg/ESkqR8ta7y](https://discord.gg/ESkqR8ta7y)**
