@@ -278,5 +278,13 @@
 "effect10":"When using Still Drowsy, increases the Evasion of the wearer for 2 turn",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"B"
+},
+"drakhan":{
+"name":"Royal Fang",
+"mainStat":"Accuracy to Dark",
+"effect":"Increases Priority by 35% when attacking a target that has a debuff",
+"effect10":"Before using Conquering Dragon Meteor, inflicts Cursed on the target for 2 turn(s)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"S"
 }
 }
