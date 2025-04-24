@@ -6,11 +6,11 @@
 "icon": "reducesalliesskillcooldowns"
 },
 {
-  "name": "BT_ACTION_GAUGE",
-  "label": "Increase Priority",
-  "description": "Increase self/allies priority",
-  "icon": "SC_Buff_Effect_Increase_Priority"
-  },
+"name": "BT_ACTION_GAUGE",
+"label": "Increase Priority",
+"description": "Increase self/allies priority",
+"icon": "SC_Buff_Effect_Increase_Priority"
+},
 {
 "name": "BT_STAT|ST_CRITICAL_RATE",
 "label": "Increased Critical Hit Chance",
@@ -18,11 +18,11 @@
 "icon": "criticalhitchance"
 },
 {
-  "name": "BT_STAT|ST_AVOID",
-  "label": "Increased Evasion",
-  "description": "Increased Evasion by 50%.",
-  "icon": "SC_Buff_Stat_Avoid"
-  },
+"name": "BT_STAT|ST_AVOID",
+"label": "Increased Evasion",
+"description": "Increased Evasion by 50%.",
+"icon": "SC_Buff_Stat_Avoid"
+},
 {
 "name": "BT_STAT|ST_ATK",
 "label": "Increased Attack",
@@ -30,17 +30,17 @@
 "icon": "SC_Buff_Stat_Atk"
 },
 {
-  "name": "BT_STAT|ST_SPEED",
-  "label": "Increased Speed",
-  "description": "Increased Speed by 30%.",
-  "icon": "SC_Buff_Stat_Speed"
-  },
-  {
-    "name": "BT_STAT|ST_BUFF_CHANCE",
-    "label": "Increased Effectiveness",
-    "description": "Increased Effectiveness by 100%.",
-    "icon": "SC_Buff_Stat_BuffChance"
-    },
+"name": "BT_STAT|ST_SPEED",
+"label": "Increased Speed",
+"description": "Increased Speed by 30%.",
+"icon": "SC_Buff_Stat_Speed"
+},
+{
+"name": "BT_STAT|ST_BUFF_CHANCE",
+"label": "Increased Effectiveness",
+"description": "Increased Effectiveness by 100%.",
+"icon": "SC_Buff_Stat_BuffChance"
+},
 {
 "name": "BT_CP_CHARGE",
 "label": "Charge CP",
@@ -48,11 +48,11 @@
 "icon": "SC_Buff_Effect_CP"
 },
 {
-  "name": "BT_AP_CHARGE",
-  "label": "Charge AP",
-  "description": "Generates Action Points",
-  "icon": "SC_Buff_Effect_AP"
-  },
+"name": "BT_AP_CHARGE",
+"label": "Charge AP",
+"description": "Generates Action Points",
+"icon": "SC_Buff_Effect_AP"
+},
 {
 "name": "BT_STAT|ST_ACCURACY",
 "label": "Increased Accuracy",
@@ -60,17 +60,17 @@
 "icon": "SC_Buff_Stat_Accuracy"
 },
 {
-  "name": "BT_STAT|ST_COUNTER_RATE",
-  "label": "Counterattack",
-  "description": "Counterattack when attacked",
-  "icon": "SC_Buff_Counter"
-  },
+"name": "BT_STAT|ST_COUNTER_RATE",
+"label": "Counterattack",
+"description": "Counterattack when attacked",
+"icon": "SC_Buff_Counter"
+},
 {
-  "name": "BT_STAT|ST_PIERCE_POWER_RATE",
-  "label": "Increased Penetration",
-  "description": "Penetrates the target's Defense by 30% when dealing damage.",
-  "icon": "CM_Stat_Icon_PIERCE_POWER"
-  },
+"name": "BT_STAT|ST_PIERCE_POWER_RATE",
+"label": "Increased Penetration",
+"description": "Penetrates the target's Defense by 30% when dealing damage.",
+"icon": "CM_Stat_Icon_PIERCE_POWER"
+},
 {
 "name": "Heavy Strike",
 "label": "Heavy Strike",
@@ -78,22 +78,22 @@
 "icon": "SC_Buff_Effect_Heavy_bk"
 },
 {
-  "name":"SYS_CONTINU_HEAL",
-  "label":"Sustained Recovery",
-  "description":"Recovers 15% of Max Health each turn",
-  "icon":"SC_Buff_Effect_Heal"
+"name":"SYS_CONTINU_HEAL",
+"label":"Sustained Recovery",
+"description":"Recovers 15% of Max Health each turn",
+"icon":"SC_Buff_Effect_Heal"
 },
 {
-  "name":"SYS_BUFF_REVENGE",
-  "label":"Revenge",
-  "description":"Counterattack when a debuff is inflicted on an ally during an enemy's turn",
-  "icon":"SC_Buff_Revenge"
+"name":"SYS_BUFF_REVENGE",
+"label":"Revenge",
+"description":"Counterattack when a debuff is inflicted on an ally during an enemy's turn",
+"icon":"SC_Buff_Revenge"
 },
 {
-  "name":"SYS_BUFF_BREAK_DMG",
-  "label":"Find Weakness",
-  "description":"Increases damage dealt to targets inflicted with Break",
-  "icon":"SC_Buff_Dmg_Target_Break"
+"name":"SYS_BUFF_BREAK_DMG",
+"label":"Find Weakness",
+"description":"Increases damage dealt to targets inflicted with Break",
+"icon":"SC_Buff_Dmg_Target_Break"
 },
 {
 "name": "BT_CALL_BACKUP",
@@ -108,17 +108,17 @@
 "icon": "SC_Buff_Effect_Cleanse"
 },
 {
-  "name": "BT_IMMUNE",
-  "label": "Immunity",
-  "description": "Ignores all incoming Debuffs",
-  "icon": "SC_Buff_Effect_Immune"
-  },
-  {
-    "name": "BT_REVIVAL",
-    "label": "Revival",
-    "description": "Revives after Health reaches zero",
-    "icon": "SC_Buff_Revival"
-    },
+"name": "BT_IMMUNE",
+"label": "Immunity",
+"description": "Ignores all incoming Debuffs",
+"icon": "SC_Buff_Effect_Immune"
+},
+{
+"name": "BT_REVIVAL",
+"label": "Revival",
+"description": "Revives after Health reaches zero",
+"icon": "SC_Buff_Revival"
+},
 {
 "name": "BT_SHIELD_BASED_CASTER",
 "label": "Barrier",
@@ -126,11 +126,11 @@
 "icon": "CM_Stat_Icon_SHIELD"
 },
 {
-  "name": "BT_DMG_ELEMENT_SUPERIORITY",
-  "label": "Elemental Advantage",
-  "description": "Deals increased damage to enemies with a weaker element",
-  "icon": "SC_Buff_Effect_Element_Superiority"
-  },
+"name": "BT_DMG_ELEMENT_SUPERIORITY",
+"label": "Elemental Advantage",
+"description": "Deals increased damage to enemies with a weaker element",
+"icon": "SC_Buff_Effect_Element_Superiority"
+},
 {
 "name": "BT_ADDITIVE_TURN",
 "label": "Extra Turn",
@@ -184,5 +184,11 @@
 "label": "Ether Boost",
 "description": "When using a Burst Skill, reduces required Action Points by 100% (Irremovable)",
 "icon": "IG_Buff_Effect_2000100_Interruption"
+},
+{
+"name": "UNIQUE_DESTROYER_PUNISHMENT",
+"label": "Destroyer's Punishment",
+"description": "Increases damage dealt to the enemy and enhances the effect of Heavy Metal Raptor. (Irremovable)\nAdditional effects granted when using Heavy Metal Raptor:\nReduces Destruction Blade cooldown by 1 turn\nRight after using Heavy Metal Raptor, does not trigger an enemy's Couterattack, Revenge or Agile Response.",
+"icon": "IG_Buff_2000075_Interruption"
 }
 ]

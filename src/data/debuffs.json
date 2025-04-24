@@ -133,11 +133,24 @@
 }
 ,
 {
+"name": "BT_COOL_CHARGE",
+"label": "Cooldown Increase",
+"description": "Increase target enemy skill cooldown",
+"icon": "SC_Buff_Cool_Charge"
+}
+,
+{
 "name": "BT_SEALED_RESURRECTION",
 "label": "Extinction",
 "description": "Enemies killed by this skill cannot be Resurected or Revived",
 "icon": "IG_Buff_Seal_Ressurection"
 },
+{
+    "name": "BT_SEALED_RECEIVE_HEAL",
+    "label": "Unhealable",
+    "description": "Cannot be applied with Health recovery effects",
+    "icon": "SC_Buff_Sealed_Receive_Heal"
+    },
 {
 "name": "UNIQUE_MARTYRDOM",
 "label": "Martyrdom",

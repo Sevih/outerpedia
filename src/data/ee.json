@@ -254,5 +254,13 @@
 "effect10":"When using Unforgiving God, increases Action Points by 20",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"C"
+},
+"demiurge-vlada":{
+"name":"Adaptable Twin Blades",
+"mainStat":"Effectiveness to Light",
+"effect":"Increases all attack damage (Proportional to target's Max Health)",
+"effect10":"When using a Burst Skill, increases Effectiveness of the wearer by 50%",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
 }
 }
