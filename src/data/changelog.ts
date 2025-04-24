@@ -8,6 +8,14 @@ export type ChangelogEntry = {
 export const changelog: ChangelogEntry[] = [
   {
     date: "2025-04-24",
+    title: "Character Additions",
+    type: "update",
+    content: `
+    - Added character from Christina to Ember (39 / 101).
+    `
+  },
+  {
+    date: "2025-04-24",
     title: "Character Additions & Burn Visuals",
     type: "feature",
     content: `
