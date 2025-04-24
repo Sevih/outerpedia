@@ -96,11 +96,11 @@
 "icon": "SC_Buff_Effect_Stun"
 },
 {
-    "name": "IG_Buff_Effect_WG_Dmg",
-    "label": "Weakness Guage Damage",
-    "description": "Deal additional Weakness Gauge damage",
-    "icon": "SC_Buff_Effect_WG_Dmg"
-    },
+"name": "IG_Buff_Effect_WG_Dmg",
+"label": "Weakness Guage Damage",
+"description": "Deal additional Weakness Gauge damage",
+"icon": "SC_Buff_Effect_WG_Dmg"
+},
 {
 "name": "BT_SEALED",
 "label": "Unbuffable",
@@ -108,11 +108,11 @@
 "icon": "SC_Buff_Effect_Sealed"
 },
 {
-    "name": "BT_STEAL_BUFF",
-    "label": "Buff Stealing",
-    "description": "Steal buff from the target.",
-    "icon": "SC_Buff_Steal"
-    },
+"name": "BT_STEAL_BUFF",
+"label": "Buff Stealing",
+"description": "Steal buff from the target.",
+"icon": "SC_Buff_Steal"
+},
 {
 "name": "BT_DOT_CURSE",
 "label": "Cursed",
@@ -126,17 +126,23 @@
 "icon": "CM_Stat_Icon_VAMPIRIC"
 },
 {
-    "name": "BT_FIXED_DAMAGE",
-    "label": "Fixed Damage",
-    "description": "Deals a set amount of damage based on the target's max HP.",
-    "icon": "SC_Buff_Effect_True_Dmg"
-  }
-  ,
+"name": "BT_FIXED_DAMAGE",
+"label": "Fixed Damage",
+"description": "Deals a set amount of damage based on the target's max HP.",
+"icon": "SC_Buff_Effect_True_Dmg"
+}
+,
+{
+"name": "BT_SEALED_RESURRECTION",
+"label": "Extinction",
+"description": "Enemies killed by this skill cannot be Resurected or Revived",
+"icon": "IG_Buff_Seal_Ressurection"
+},
 {
 "name": "UNIQUE_MARTYRDOM",
 "label": "Martyrdom",
 "description": "Dies instantly if no enemy is killed before the duration ends",
 "icon": "IG_Buff_Death_Timer_Interruption_D"
 }
-  
+
 ]

@@ -126,6 +126,12 @@
 "icon": "CM_Stat_Icon_SHIELD"
 },
 {
+  "name": "BT_DMG_ELEMENT_SUPERIORITY",
+  "label": "Elemental Advantage",
+  "description": "Deals increased damage to enemies with a weaker element",
+  "icon": "SC_Buff_Effect_Element_Superiority"
+  },
+{
 "name": "BT_ADDITIVE_TURN",
 "label": "Extra Turn",
 "description": "Character immediately takes another turn after the current one.",

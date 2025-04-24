@@ -238,5 +238,13 @@
 "effect10":"When using Code: Reverse, grants increased Resilience to all allies for 2 turn(s)",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":""
+},
+"demiurge-drakhan":{
+"name":"Ancestral Spirit",
+"mainStat":"Reduces Dark Damage Taken",
+"effect":"When Dragon Ruler's Breath defeats an enemy, Health of all allies increases by 15%",
+"effect10":"When using Doom Heralding Cry, grants increased Defense to the wearer for 2 turn(s)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
 }
 }
