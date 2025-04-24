@@ -286,5 +286,13 @@
 "effect10":"Before using Conquering Dragon Meteor, inflicts Cursed on the target for 2 turn(s)",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"S"
+},
+"edelweiss":{
+"name":"Ninja Scroll",
+"mainStat":"Effectiveness to Fire",
+"effect":"Increases the wearer Health by 35%",
+"effect10":"When using Ninjutsu, Waterspout Technique, grants Stealth for 1 turn(s)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"A"
 }
 }
