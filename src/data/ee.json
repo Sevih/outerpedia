@@ -262,5 +262,13 @@
 "effect10":"When using a Burst Skill, increases Effectiveness of the wearer by 50%",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"B"
+},
+"dianne":{
+"name":"Innocent Love",
+"mainStat":"Accuracy to Dark",
+"effect":"When an attack hit, increases Priority of all allies by 5% (Only once per turn)",
+"effect10":"When an attack hit, increases Priority of all allies by 8% (Only once per turn)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
 }
 }
