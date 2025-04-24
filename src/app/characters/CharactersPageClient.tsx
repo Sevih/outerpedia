@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { EffectData, CharacterLite, SkillLite} from '@/types/types'
 import { toKebabCase } from '@/utils/formatText'
+import BuffDebuffDisplayMini from '@/app/components/BuffDebuffDisplayMini';
 
 const allEffectsRef: Record<string, EffectData & { type: 'buff' | 'debuff' }> = {}
 
@@ -46,35 +47,6 @@ function ClassIcon({ className }: { className: string }) {
       style={{ width: 24, height: 24 }}
       className="inline-block"
     />
-  )
-}
-
-function EffectIconRaw({ name, type }: { name: string; type: 'buff' | 'debuff' }) {
-  const effect = allEffectsRef[`${type}:${name}`]
-  const label = effect?.label || name
-  const icon = effect?.icon || name
-  const style =
-    type === 'buff' ? 'bg-gray-700 hover:bg-blue-800/70' : 'bg-gray-700 hover:bg-red-800/70'
-
-  return (
-    <div
-      className={`w-8 h-8 rounded flex items-center justify-center cursor-pointer ${style}`}
-      title={label +" : "+ effect?.description || label}
-    >
-      <div className="w-6 h-6 bg-black p-0.5 rounded flex items-center justify-center">
-        <Image
-          src={`/images/ui/effect/${icon}.png`}
-          alt={label}
-          width={30}
-          height={30}
-          className={`object-contain ${type}`}
-          onError={(e) => {
-            const el = e.target as HTMLImageElement
-            el.style.display = 'none'
-          }}
-        />
-      </div>
-    </div>
   )
 }
 
@@ -324,7 +296,7 @@ export default function CharactersPage() {
               onClick={() => toggleEffect(buff, selectedBuffs, setSelectedBuffs)}
               className={selectedBuffs.includes(buff) ? 'ring-2 ring-cyan-400 rounded' : ''}
             >
-              <EffectIconRaw name={buff} type="buff" />
+              <BuffDebuffDisplayMini buffs={[buff]} />
             </div>
           ))}
         </div>
@@ -336,7 +308,7 @@ export default function CharactersPage() {
             onClick={() => toggleEffect(debuff, selectedDebuffs, setSelectedDebuffs)}
             className={selectedDebuffs.includes(debuff) ? 'ring-2 ring-red-800 rounded' : ''}
           >
-            <EffectIconRaw name={debuff} type="debuff" />
+            <BuffDebuffDisplayMini debuffs={[debuff]} />
           </div>
         ))}
         </div>

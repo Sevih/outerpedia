@@ -112,5 +112,12 @@
 "label": "Bleeding",
 "description": "Reduces healing received. \nTakes damage proportional to the caster's Attack at the start of the turn.\nRemoved when the caster dies.",
 "icon": "CM_Stat_Icon_VAMPIRIC"
-}
+},
+{
+    "name": "BT_FIXED_DAMAGE",
+    "label": "Fixed Damage",
+    "description": "Deals a set amount of damage based on the target's max HP.",
+    "icon": "SC_Buff_Effect_True_Dmg"
+  }
+  
 ]
