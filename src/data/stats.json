@@ -14,6 +14,7 @@
     "PEN%": { "label": "Penetration %", "icon": "CM_Stat_Icon_PIERCE_POWER.png" },
     "LS":  { "label": "Lifesteal", "icon": "CM_Stat_Icon_VAMPIRIC.png" },
     "HH":  { "label": "Heals when Hit", "icon": "CM_Stat_Icon_HitRecovery.png" },
+    "HH%":  { "label": "Heals when Hit %", "icon": "CM_Stat_Icon_HitRecovery.png" },
     "EVA": { "label": "Evasion", "icon": "CM_Stat_Icon_AVOID.png" },
     "ACC": { "label": "Accuracy", "icon": "CM_Stat_Icon_ACCURACY.png" }
   }

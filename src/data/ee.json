@@ -182,5 +182,13 @@
 "effect10":"Increases Action Points of Mage allies by 20 when using Thinking Time",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"A"
+},
+"christina":{
+"name":"Love is War",
+"mainStat":"Effectiveness to Earth",
+"effect":"Reduces the duration of buffs on the enemy team by 1 turn(s) when Bursting Patriotism activates",
+"effect10":"+30 Effectiveness",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"S"
 }
 }
