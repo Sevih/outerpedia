@@ -230,5 +230,13 @@
 "effect10":"After using The People on Earth, grants increases Accuracy for 1 turn(s)",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"C"
+},
+"demiurge-delta":{
+"name":"Wax Wings",
+"mainStat":"Reduces Light Damage Taken",
+"effect":"When using Code: Reverse, removes 2 debuffs from all allies",
+"effect10":"When using Code: Reverse, grants increased Resilience to all allies for 2 turn(s)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":""
 }
 }
