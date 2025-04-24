@@ -190,5 +190,13 @@
 "effect10":"+30 Effectiveness",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"S"
+},
+"cindy":{
+"name":"Receptionist's Essentials",
+"mainStat":"Reduces Fire Damage Taken",
+"effect":"When using Storm Crystal, increases the Priority of the wearer by 15%",
+"effect10":"When using Storm Crystal,damage dealt increases proportional to the caster Speed (Max 100%",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"C"
 }
 }

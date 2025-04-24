@@ -164,7 +164,7 @@
       "description": [
         "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>[Buff_V_2000065_chain_1_1]</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Generates <color=#28d9ed>[Buff_V_2000065_backup_1_1]</color> Action Points for the caster."
       ],
-      "dual_buff": "SYS_BUFF_CHARGE_BP",
+      "dual_buff": "BT_AP_CHARGE",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",
