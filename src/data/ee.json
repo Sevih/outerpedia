@@ -206,5 +206,13 @@
 "effect10":"When using Quo Vadis, grants increased Critical Hit Chance to the wearer for 1 turn(s)",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"A"
+},
+"dahlia":{
+"name":"Full Strength",
+"mainStat":"Effectiveness to Fire",
+"effect":"Has a 100% chance to increase Speed for 1 turn(s) at the start of battle",
+"effect10":"When attacking a target inflicted with Frozen with Icicle Lance, increases damage dealt",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"S"
 }
 }

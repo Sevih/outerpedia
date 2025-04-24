@@ -78,6 +78,12 @@
   "icon":"SC_Buff_Effect_Heal"
 },
 {
+  "name":"SYS_BUFF_BREAK_DMG",
+  "label":"Find Weakness",
+  "description":"Increases damage dealt to targets inflicted with Break",
+  "icon":"SC_Buff_Dmg_Target_Break"
+},
+{
 "name": "BT_CALL_BACKUP",
 "label": "Dual Attack",
 "description": "Trigger a basic attack from the ally with the highest Attack.",

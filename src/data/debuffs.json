@@ -30,6 +30,12 @@
 "icon": "SC_Buff_Stat_Atk"
 },
 {
+"name": "BT_STAT|ST_SPEED",
+"label": "Reduced Speed",
+"description": "Reduces Speed by 30%",
+"icon": "SC_Buff_Stat_Speed"
+},
+{
 "name": "BT_STAT|ST_BUFF_RESIST",
 "label": "Reduced Resilience",
 "description": "Reduces Resilience by 100%",
