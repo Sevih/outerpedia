@@ -195,8 +195,16 @@
 "name":"Receptionist's Essentials",
 "mainStat":"Reduces Fire Damage Taken",
 "effect":"When using Storm Crystal, increases the Priority of the wearer by 15%",
-"effect10":"When using Storm Crystal,damage dealt increases proportional to the caster Speed (Max 100%",
+"effect10":"When using Storm Crystal,damage dealt increases proportional to the caster Speed (Max 100%)",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"C"
+},
+"claire":{
+"name":"Baptismal Icon",
+"mainStat":"Accuracy to Earth",
+"effect":"Reduces the cooldown of all skills by 1 turn(s) when scoring a critical hit",
+"effect10":"When using Quo Vadis, grants increased Critical Hit Chance to the wearer for 1 turn(s)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"A"
 }
 }

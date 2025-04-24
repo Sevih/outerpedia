@@ -61,7 +61,7 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
           <>
             {accessory.name.split("[")[0].trim()}
             <br />
-            {accessory.name.split("[")[1]}
+            [{accessory.name.split("[")[1]}
           </>
         ) : (
           accessory.name
@@ -69,7 +69,7 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
       </h3>
 
       {/* Badge effet */}
-      <div className="inline-flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-full text-xs text-white font-medium mt-1 max-w-[180px] mx-auto whitespace-nowrap justify-center">
+      <div className="inline-flex items-center bg-white/10 px-1.5 py-1 rounded-full text-xs text-white mt-1 max-w-[180px] mx-auto whitespace-nowrap justify-center">
       <Image
   src="/images/ui/effect/SC_Buff_Effect_Freeze.png"
   alt={accessory.effect_name}

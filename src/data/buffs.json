@@ -72,6 +72,12 @@
 "icon": "SC_Buff_Effect_Heavy_bk"
 },
 {
+  "name":"SYS_CONTINU_HEAL",
+  "label":"Sustained Recovery",
+  "description":"Recovers 15% of Max Health each turn",
+  "icon":"SC_Buff_Effect_Heal"
+},
+{
 "name": "BT_CALL_BACKUP",
 "label": "Dual Attack",
 "description": "Trigger a basic attack from the ally with the highest Attack.",
