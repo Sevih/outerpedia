@@ -270,5 +270,13 @@
 "effect10":"When an attack hit, increases Priority of all allies by 8% (Only once per turn)",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"B"
+},
+"dolly":{
+"name":"Bedtime Snuggle Buddy",
+"mainStat":"Effectiveness to Water",
+"effect":"When using Still Drowsy, increases the Evasion of the wearer for 1 turn",
+"effect10":"When using Still Drowsy, increases the Evasion of the wearer for 2 turn",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"B"
 }
 }

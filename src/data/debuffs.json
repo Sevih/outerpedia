@@ -108,6 +108,12 @@
 "icon": "SC_Buff_Effect_Sealed"
 },
 {
+    "name": "BT_SILENCE",
+    "label": "Silenced",
+    "description": "Cannot only use skill chain and basic attack while this effect is applied",
+    "icon": "SC_Buff_Effect_Silence"
+    },
+{
 "name": "BT_STEAL_BUFF",
 "label": "Buff Stealing",
 "description": "Steal buff from the target.",
