@@ -15,7 +15,7 @@
 "name": "BT_SEAL_COUNTER",
 "label": "Uncounterrable",
 "description": "Negates enemy reactive strikes: Counterattack, Revenge, or Agile Response.",
-"icon": "IG_Buff_Seal_Counter_Interruption"
+"icon": "IG_Buff_Seal_Counter"
 },
 {
 "name": "BT_STAT|ST_ACCURACY",
@@ -108,10 +108,16 @@
 "icon": "SC_Buff_Effect_Sealed"
 },
 {
-    "name": "BT_SILENCE",
-    "label": "Silenced",
-    "description": "Cannot only use skill chain and basic attack while this effect is applied",
-    "icon": "SC_Buff_Effect_Silence"
+"name": "BT_SILENCE",
+"label": "Silenced",
+"description": "Cannot only use skill chain and basic attack while this effect is applied",
+"icon": "SC_Buff_Effect_Silence"
+},
+{
+    "name": "BT_MARKING",
+    "label": "Marked",
+    "description": "Automatically becomes a target for attacks and takes increased damage\nCan only apply to one member of a team and another Marked cannot be applied until the existing Marked is gone",
+    "icon": "marked"
     },
 {
 "name": "BT_STEAL_BUFF",
@@ -152,11 +158,11 @@
 "icon": "IG_Buff_Seal_Ressurection"
 },
 {
-    "name": "BT_SEALED_RECEIVE_HEAL",
-    "label": "Unhealable",
-    "description": "Cannot be applied with Health recovery effects",
-    "icon": "SC_Buff_Sealed_Receive_Heal"
-    },
+"name": "BT_SEALED_RECEIVE_HEAL",
+"label": "Unhealable",
+"description": "Cannot be applied with Health recovery effects",
+"icon": "SC_Buff_Sealed_Receive_Heal"
+},
 {
 "name": "UNIQUE_MARTYRDOM",
 "label": "Martyrdom",

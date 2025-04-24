@@ -302,5 +302,13 @@
 "effect10":"When using an attack that targets all enemies, inflicts Bleeding on the target for 2 turn(s) (Ignores Immunity, Irremovable)",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"B"
+},
+"ember":{
+"name":"Rocinante",
+"mainStat":"Accuracy to Earth",
+"effect":"Increases Effectiveness of the wearer by 100%",
+"effect10":"After using Blaze Like a Flame! grants increased Attack to all allies for 2 turn(s)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":""
 }
 }

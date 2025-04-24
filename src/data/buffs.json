@@ -196,5 +196,11 @@
 "label": "Pureblood's Dominion",
 "description": "When an enemy inflicted with Bleeding performs an action, increases Priority of an ally by 10%\n Cannot be removed until Eliza is defeated",
 "icon": "IG_Buff_2000035_Interruption"
+},
+{
+"name": "UNIQUE_RADIANT_WILL",
+"label": "Radiant Will",
+"description": "Increases Burned damage dealt by allies by 50% and changes certain skills. (Irremovable)",
+"icon": "IG_Buff_Effect_2000094_Interruption"
 }
 ]
