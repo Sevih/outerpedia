@@ -1,0 +1,87 @@
+'use client'
+
+import React from 'react'
+
+type Props = {
+  fullname: string
+}
+
+const PREFIX_STYLES: Record<string, string> = {
+  'Gnosis': 'text-xs',
+  'Demiurge': 'text-[10px]',
+  'Monad': 'text-xs',
+  'Holy Night': 'text-sm',
+  'Kitsune of Eternity': 'text-[10px]',
+  'Ais': 'text-[18px]',
+
+}
+
+const NAME_STYLES: Record<string, string> = {
+    'Wallenstein': 'text-[15px] pb-1',
+    'Bell Cranel': 'text-[16px] pb-1',
+}
+
+const PREFIX_STYLES_BIG: Record<string, string> = {
+    'Gnosis': 'text-sm',      
+    'Demiurge': 'text-[21px]',         
+    'Monad': 'text-sm',                 
+    'Holy Night': 'text-sm',             
+    'Kitsune of Eternity': 'text-xs',   
+  }
+  
+  const NAME_STYLES_BIG: Record<string, string> = {
+  
+  }
+  
+
+export function CharacterNameDisplay({ fullname }: Props) {
+  const matchedPrefix = Object.keys(PREFIX_STYLES).find((prefix) => fullname.startsWith(`${prefix} `))
+  let prefix = ''
+  let name = fullname
+
+  if (matchedPrefix) {
+    prefix = matchedPrefix
+    name = fullname.replace(`${prefix} `, '')
+  }
+
+  const prefixSize = matchedPrefix ? PREFIX_STYLES[matchedPrefix] : ''
+  const nameSize = NAME_STYLES[name] || 'text-lg'
+  return (
+    <div style={{ position: 'absolute', bottom: '1.25rem', left: '0.625rem', zIndex: 30 }} className="text-white custom-text-shadow text-left leading-tight">
+      {prefix && (
+        <div className={`${prefixSize} text-white custom-text-shadow  mb-[-2px]`}>{prefix}</div>
+      )}
+      <div className={`${nameSize}`}>{name}</div>
+    </div>
+  )
+}
+
+export function CharacterNameDisplayBig({ fullname }: Props) {
+    const matchedPrefix = Object.keys(PREFIX_STYLES_BIG).find((prefix) =>
+      fullname.startsWith(`${prefix} `)
+    )
+    let prefix = ''
+    let name = fullname
+  
+    if (matchedPrefix) {
+      prefix = matchedPrefix
+      name = fullname.replace(`${prefix} `, '')
+    }
+  
+    const prefixSize = matchedPrefix ? PREFIX_STYLES_BIG[matchedPrefix] : ''
+    const nameSize = NAME_STYLES_BIG[name] || 'text-4xl'
+  
+    return (
+      <div className="flex flex-col text-white leading-tight mb-2">
+        {prefix && (
+          <div className={`${prefixSize} custom-text-shadow mb-[-2px]`}>
+            {prefix}
+          </div>
+        )}
+        <div className={`${nameSize} font-bold custom-text-shadow`}>
+          {name}
+        </div>
+      </div>
+    )
+  }
+  

@@ -8,6 +8,7 @@ import Link from 'next/link'
 import type { EffectData, CharacterLite, SkillLite} from '@/types/types'
 import { toKebabCase } from '@/utils/formatText'
 import BuffDebuffDisplayMini from '@/app/components/BuffDebuffDisplayMini';
+import {CharacterNameDisplay} from '@/app/components/CharacterNameDisplay'
 
 const allEffectsRef: Record<string, EffectData & { type: 'buff' | 'debuff' }> = {}
 
@@ -370,9 +371,7 @@ export default function CharactersPage() {
               <div className="absolute bottom-5.5 right-1.5 z-30">
                 <ElementIcon element={char.Element} />
               </div>
-              <div className="absolute bottom-5 left-2.5 z-30 text-white text-lg custom-text-shadow">
-                {char.Fullname}
-              </div>
+              <CharacterNameDisplay fullname={char.Fullname} />
             </div>
           </Link>
         ))}

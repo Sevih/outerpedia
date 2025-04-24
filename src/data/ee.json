@@ -222,5 +222,13 @@
 "effect10":"Increases damage of Counterattack by 50%",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"S"
+},
+"demiurge-astei":{
+"name":"Blind Devotion",
+"mainStat":"Accuracy to Light",
+"effect":"When using Sanctuary for All, increases the duration of Doll Garden's Caretaker by 1 turn(s)",
+"effect10":"After using The People on Earth, grants increases Accuracy for 1 turn(s)",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"C"
 }
 }

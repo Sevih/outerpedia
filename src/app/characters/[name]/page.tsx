@@ -16,6 +16,7 @@ import rawTalismans from '@/data/talisman.json';
 import type { ClassDataMap } from '@/types/types';
 import type { EquipmentBase, Talisman,ExclusiveEquipment } from '@/types/equipment';
 import type { Character, Skill } from '@/types/character';
+import {CharacterNameDisplayBig} from '@/app/components/CharacterNameDisplay'
 
 import RecommendedGearTabs from '@/app/components/RecommendedGearTabs';
 import BuffDebuffDisplay from '@/app/components/BuffDebuffDisplay';
@@ -178,11 +179,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
         </div>
 
         {/* Détails à droite : nom, rareté, classe, etc. */}
-        <div className="space-y-4">
-  <div className="flex items-center gap-2 mb-2">
-    <h1 className="text-4xl font-bold text-white">{character.Fullname}</h1>
-  </div>
-
+        <div className="space-y-4"><CharacterNameDisplayBig fullname={character.Fullname} />
 
           {/* Rareté sous forme d'étoiles */}
           <div className="flex items-center gap-2">

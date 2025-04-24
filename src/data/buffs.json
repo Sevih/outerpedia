@@ -160,5 +160,11 @@
 "label": "Charisma",
 "description": "When the bearer gains a turn, increases Bryn's Showmanship (Unique Ressource) by 1.\nThen grants Bryn a barrier proportional to Attack for 1 turn, and increases Priority by 15% (Irremovable)",
 "icon": "IG_Buff_Effect_2000076_Interruption"
+},
+{
+"name": "UNIQUE_DOLL_GARDEN_CARETAKER",
+"label": "Doll Garden's Caretaker",
+"description": "Increases damage dealt to enemies and enhances certain skill effect.\nConnot be removed before Demiurge Astei is slain",
+"icon": "IG_Buff_2000059_Interruption"
 }
 ]

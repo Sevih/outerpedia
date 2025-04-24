@@ -96,6 +96,12 @@
 "icon": "SC_Buff_Effect_Stun"
 },
 {
+    "name": "IG_Buff_Effect_WG_Dmg",
+    "label": "Weakness Guage Damage",
+    "description": "Deal additional Weakness Gauge damage",
+    "icon": "SC_Buff_Effect_WG_Dmg"
+    },
+{
 "name": "BT_SEALED",
 "label": "Unbuffable",
 "description": "Cannot gain buffs. (Excluding certain effects)",
@@ -125,5 +131,12 @@
     "description": "Deals a set amount of damage based on the target's max HP.",
     "icon": "SC_Buff_Effect_True_Dmg"
   }
+  ,
+{
+"name": "UNIQUE_MARTYRDOM",
+"label": "Martyrdom",
+"description": "Dies instantly if no enemy is killed before the duration ends",
+"icon": "IG_Buff_Death_Timer_Interruption_D"
+}
   
 ]
