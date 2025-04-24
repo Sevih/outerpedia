@@ -214,5 +214,13 @@
 "effect10":"When attacking a target inflicted with Frozen with Icicle Lance, increases damage dealt",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"S"
+},
+"delta":{
+"name":"Gleipnir",
+"mainStat":"Reduces Water Damage Taken",
+"effect":"Increases Weakness Gauge damage of Counterattack by 50%",
+"effect10":"Increases damage of Counterattack by 50%",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"S"
 }
 }

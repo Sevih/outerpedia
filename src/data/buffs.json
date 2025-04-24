@@ -60,6 +60,12 @@
 "icon": "SC_Buff_Stat_Accuracy"
 },
 {
+  "name": "BT_STAT|ST_COUNTER_RATE",
+  "label": "Counterattack",
+  "description": "Counterattack when attacked",
+  "icon": "SC_Buff_Counter"
+  },
+{
   "name": "BT_STAT|ST_PIERCE_POWER_RATE",
   "label": "Increased Penetration",
   "description": "Penetrates the target's Defense by 30% when dealing damage.",
@@ -76,6 +82,12 @@
   "label":"Sustained Recovery",
   "description":"Recovers 15% of Max Health each turn",
   "icon":"SC_Buff_Effect_Heal"
+},
+{
+  "name":"SYS_BUFF_REVENGE",
+  "label":"Revenge",
+  "description":"Counterattack when a debuff is inflicted on an ally during an enemy's turn",
+  "icon":"SC_Buff_Revenge"
 },
 {
   "name":"SYS_BUFF_BREAK_DMG",
