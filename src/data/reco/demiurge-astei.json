@@ -30,7 +30,7 @@
   "High Crit": {
     "Weapon": [
       {
-        "name": "Thumping Knuckleduster",
+        "name": "Thumping Knuckle Dusters",
         "mainStat": "ATK%"
       }
     ],
@@ -58,7 +58,7 @@
   "Penetration": {
     "Weapon": [
       {
-        "name": "Thumping Knuckleduster",
+        "name": "Thumping Knuckle Dusters",
         "mainStat": "ATK%"
       }
     ],
