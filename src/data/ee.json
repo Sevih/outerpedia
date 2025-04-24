@@ -246,5 +246,13 @@
 "effect10":"When using Doom Heralding Cry, grants increased Defense to the wearer for 2 turn(s)",
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"B"
+},
+"demiurge-stella":{
+"name":"Ksai's Core",
+"mainStat":"Reduces Dark Damage Taken",
+"effect":"When using Flight of Abraxas, grant 20 Action Points",
+"effect10":"When using Unforgiving God, increases Action Points by 20",
+"icon_effect":"TI_Icon_UO_Accessary_07",
+"rank":"C"
 }
 }
