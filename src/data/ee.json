@@ -695,7 +695,123 @@
   "effect10": "When using Gaze Upon Us, increases the Priority of all allies by 20%",
   "icon_effect": "TI_Icon_UO_Accessary_07",
   "rank": "B"
+},
+"shu": {
+  "name": "Love and Peace",
+  "mainStat": "Reduces Fire Damage Taken",
+  "effect": "When using Dropping the Beat!, increases Weakness Gauge damage by 1",
+  "effect10": "When using Dropping the Beat!, has a 30% chance to gain an extra turn",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "C"
+},
+"sigma": {
+  "name": "Modded Assault Weapon",
+  "mainStat": "Accuracy to Light",
+  "effect": "Upon using Add-on: Strike Launcher, has a 75% chance to inflict Stunned on the target for 1 turn(s) if the target is Shocked",
+  "effect10": "+30 Effectiveness",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "D"
+},
+"skadi": {
+  "name": "Damage and Loss",
+  "mainStat": "Reduces Dark Damage Taken",
+  "effect": "When using Voltaic Arrowstorm, increases Action Points by 35",
+  "effect10": "When using Voltaic Arrowstorm, increases Action Points by 50",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": ""
+},
+"stella": {
+  "name": "Sidewinder",
+  "mainStat": "Accuracy to Dark",
+  "effect": "When using Unforgivable Sinner, decreases the Priority of the target by 30%",
+  "effect10": "When using Unforgivable Sinner, increases Penetration by 30%",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "A"
+},
+"sterope": {
+  "name": "Thunderer",
+  "mainStat": "Reduces Light Damage Taken",
+  "effect": "Increases Attack proportional to missing Health",
+  "effect10": "+30 Effectiveness",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "D"
+},
+"tamamo-no-mae": {
+  "name": "Lycoris and Butterfly",
+  "mainStat": "Accuracy to Earth",
+  "effect": "Increases Boss damage of fire element heroes",
+  "effect10": "After activating a Dual Attack, has a 50% chance to inflict reduced Defense on the target for 1 turn(s)",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "B"
+},
+"tamara": {
+  "name": "No.62's Punishment",
+  "mainStat": "Critical Hit Chance Against Fire",
+  "effect": "Increases Action Points by 60 at the start of battle",
+  "effect10": "+20 Accuracy",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "A"
+},
+"tanya": {
+  "name": "Knight's Special Great Sword",
+  "mainStat": "Reduces Water Damage Taken",
+  "effect": "When using Terminate Protection, gains Immunity for 2 turn(s)",
+  "effect10": "+30 Effectiveness",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "C"
+},
+"tio": {
+  "name": "Perfect Medical Bag",
+  "mainStat": "Reduces Earth Damage Taken",
+  "effect": "When using Basic First Aid, increases the Priority of all allies by 20%",
+  "effect10": "When using a Burst Skill, recovers Health of the wearer by 15%",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "A"
+},
+"valentine": {
+  "name": "Jackpot",
+  "mainStat": "Effectiveness to Earth",
+  "effect": "When using Trigger Happy, has a 30% chance to activate a Dual Attack",
+  "effect10": "When using Trigger Happy, has a 60% chance to activate a Dual Attack",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": ""
+},
+"veronica": {
+  "name": "Elysion",
+  "mainStat": "Reduces Fire Damage Taken",
+  "effect": "Increases damage proportional to Max Health",
+  "effect10": "+20% Max Health",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "D"
+},
+"vlada": {
+  "name": "Adaptable Gatling",
+  "mainStat": "Accuracy to Earth",
+  "effect": "When using Paths of Glory, inflicts Burned for 1 turn(s)",
+  "effect10": "+20% Attack",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "B"
+},
+"yuri": {
+  "name": "Shieldwall",
+  "mainStat": "Reduces Water Damage Taken",
+  "effect": "When using I Can't Do It..., has a 80% chance to inflict Taunted on the target for 1 turn(s)",
+  "effect10": "When using I Can't Do It..., has a 100% chance to inflict Taunted on the target for 1 turn(s)",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "C"
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
