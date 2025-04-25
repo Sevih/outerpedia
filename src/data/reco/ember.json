@@ -3,7 +3,7 @@
     "Weapon": [
       {
         "name": "Force Field Generator",
-        "mainStat": "ATK%"
+        "mainStat": "ATK%/HP%"
       },
       {
         "name": "Talisman of Animosities",
@@ -17,11 +17,11 @@
     "Amulet": [
       {
         "name": "Gorgon's Vanity [Defender]",
-        "mainStat": "ATK%"
+        "mainStat": "ATK%/SPD"
       },
       {
         "name": "Coward's Treasure",
-        "mainStat": "EFF"
+        "mainStat": "EFF/HP%"
       },
       {
         "name": "Blue-Gems White Ring",
@@ -52,17 +52,17 @@
       },
       {
         "name": "Briareos's Recklessness [Defender]",
-        "mainStat": "ATK%/SPD"
+        "mainStat": "ATK%"
       }
     ],
     "Amulet": [
       {
         "name": "Gorgon's Vanity [Defender]",
-        "mainStat": "ATK%"
+        "mainStat": "ATK%/SPD"
       },
       {
         "name": "Coward's Treasure",
-        "mainStat": "HP%"
+        "mainStat": "EFF/HP%"
       },
       {
         "name": "Blue-Gems White Ring",
@@ -100,11 +100,11 @@
     "Amulet": [
       {
         "name": "Gorgon's Vanity [Defender]",
-        "mainStat": "ATK%"
+        "mainStat": "ATK%/SPD"
       },
       {
         "name": "Coward's Treasure",
-        "mainStat": "EFF"
+        "mainStat": "EFF/HP%"
       },
       {
         "name": "Blue-Gems White Ring",
@@ -141,11 +141,11 @@
     "Amulet": [
       {
         "name": "Gorgon's Vanity [Defender]",
-        "mainStat": "SPD"
+        "mainStat": "ATK%/SPD"
       },
       {
         "name": "Coward's Treasure",
-        "mainStat": "HP%"
+        "mainStat": "EFF/HP%"
       },
       {
         "name": "Blue-Gems White Ring",
