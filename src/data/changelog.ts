@@ -7,6 +7,25 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2025-04-26",
+    title: "Exclusive Equipment Data Complete",
+    type: "update",
+    content: `
+  - Added all exclusive equipment **data and images** for all characters.
+  - Each EE includes full metadata (name, main stat, +0/+10 effects).
+  - Added **dual-stat support** for weapons and amulets (forcedMainStat with \`/\` separator).
+  - Displayed **both icons and stat values** properly in tooltips and summary cards.
+  - Improved **WeaponMiniCard** and **AmuletMiniCard** components to support multiple main stats with fallback icons.
+  - Implemented full **VideoGame + CreativeWork** **schema.org JSON-LD** structure on /equipments.
+  - Included images for all **weapons**, **amulets**, **armor sets**, **talismans**, and **exclusive equipment** in JSON-LD.
+  - Varied set images dynamically (**Helmet**, **Armor**, **Gloves**, **Shoes**) for realistic representation.
+  - Added **automatic URL linking** for Exclusive Equipment to character pages in structured data.
+  - Unified code structure between **weapon** and **amulet** components for easier maintenance.
+  - Resolved Search Console critical errors by switching to proper **VideoGame** schema.
+  - Internal tools: added a **JSON-LD preview button** for development validation.
+  `
+  },  
+  {
     date: "2025-04-24",
     title: "Character Additions",
     type: "update",

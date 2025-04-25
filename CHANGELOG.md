@@ -1,3 +1,20 @@
+🛡 Exclusive Equipment Data Complete (2025-04-26)
+✅ Added
+
+Added all exclusive equipment data and images for all characters.
+Added dual-stat support for weapons and amulets (forcedMainStat with /).
+Displayed both icons and stat values properly in tooltips and summary cards.
+Improved WeaponMiniCard and AmuletMiniCard components to support multiple main stats with fallback icons.
+Implemented full VideoGame + CreativeWork schema.org JSON-LD structure on /equipments, including images for all weapons, accessories, sets, talismans, and exclusive equipment.
+Varied set images dynamically (Helmet, Armor, Gloves, Shoes) for a more realistic representation.
+Added automatic URL linking for Exclusive Equipment to character pages in structured data.
+
+🧠 Improved
+
+Code structure unified across weapon and amulet components for easier maintenance.
+Search Console critical errors for Product schema resolved by switching to proper VideoGame structure.
+Internal tools improved: added JSON-LD preview button for development validation.
+
 
 ## 🔥 Character Additions & Burn Visuals (2025-04-24)
 
