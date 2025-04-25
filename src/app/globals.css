@@ -107,3 +107,10 @@
     mask-size: cover;
   }
   
+  .exclusive-equipment-text {
+    display: inline-block;
+    max-width: 30ch;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+  

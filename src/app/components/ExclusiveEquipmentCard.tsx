@@ -88,7 +88,9 @@ export default function ExclusiveEquipmentList() {
     className="w-4 h-4"
     unoptimized
   />
-  <span>{slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}’s Exclusive Equipment</span>
+  <span className="exclusive-equipment-text">
+  {slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}’s Exclusive Equipment
+</span>
 </div>
 
             {/* Main stat avec icônes */}
