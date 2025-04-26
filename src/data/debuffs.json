@@ -108,11 +108,11 @@
 "icon": "SC_Buff_Effect_Sealed"
 },
 {
-    "name": "BT_SEALED_IR",
-    "label": "Unbuffable",
-    "description": "Cannot gain buffs. (Excluding certain effects, Cannot be removed)",
-    "icon": "IG_Buff_Effect_Sealed_Interruption_D"
-    },
+"name": "BT_SEALED_IR",
+"label": "Unbuffable",
+"description": "Cannot gain buffs. (Excluding certain effects, Cannot be removed)",
+"icon": "IG_Buff_Effect_Sealed_Interruption_D"
+},
 {
 "name": "BT_SILENCE",
 "label": "Silenced",
@@ -120,11 +120,11 @@
 "icon": "SC_Buff_Effect_Silence"
 },
 {
-    "name": "BT_MARKING",
-    "label": "Marked",
-    "description": "Automatically becomes a target for attacks and takes increased damage\nCan only apply to one member of a team and another Marked cannot be applied until the existing Marked is gone",
-    "icon": "marked"
-    },
+"name": "BT_MARKING",
+"label": "Marked",
+"description": "Automatically becomes a target for attacks and takes increased damage\nCan only apply to one member of a team and another Marked cannot be applied until the existing Marked is gone",
+"icon": "marked"
+},
 {
 "name": "BT_STEAL_BUFF",
 "label": "Buff Stealing",
@@ -176,11 +176,11 @@
 "icon": "SC_Buff_detonate"
 },
 {
-    "name": "BT_DOT_ETERNAL_BLEED",
-    "label": "Eternal Bleeding",
-    "description": "At the start of the turn, takes damage proportional to the caster's Effectiveness, and increases Priority of all enemies by 5%.\nRemoved when the caster dies",
-    "icon": "SC_Buff_2100092"
-    },
+"name": "BT_DOT_ETERNAL_BLEED",
+"label": "Eternal Bleeding",
+"description": "At the start of the turn, takes damage proportional to the caster's Effectiveness, and increases Priority of all enemies by 5%.\nRemoved when the caster dies",
+"icon": "SC_Buff_2100092"
+},
 {
 "name": "UNIQUE_MARTYRDOM",
 "label": "Martyrdom",

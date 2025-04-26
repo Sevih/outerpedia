@@ -5,10 +5,10 @@ import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
 import Image from 'next/image'
 import Link from 'next/link'
-import type { EffectData, CharacterLite, SkillLite} from '@/types/types'
+import type { EffectData, CharacterLite, SkillLite } from '@/types/types'
 import { toKebabCase } from '@/utils/formatText'
-import BuffDebuffDisplayMini from '@/app/components/BuffDebuffDisplayMini';
-import {CharacterNameDisplay} from '@/app/components/CharacterNameDisplay'
+import BuffDebuffDisplayMini from '@/app/components/BuffDebuffDisplayMini'
+import { CharacterNameDisplay } from '@/app/components/CharacterNameDisplay'
 
 const allEffectsRef: Record<string, EffectData & { type: 'buff' | 'debuff' }> = {}
 
@@ -21,7 +21,6 @@ for (const d of debuffs) {
   const key = `debuff:${d.name}`
   allEffectsRef[key] = { ...d, type: 'debuff' }
 }
-
 
 function ElementIcon({ element }: { element: string }) {
   return (
@@ -51,8 +50,6 @@ function ClassIcon({ className }: { className: string }) {
   )
 }
 
-
-
 function extractAllEffects(characters: CharacterLite[], type: 'buff' | 'debuff'): string[] {
   const all = characters.flatMap((char) => getAllEffects(char, type))
   return [...new Set(all)].sort()
@@ -61,7 +58,6 @@ function extractAllEffects(characters: CharacterLite[], type: 'buff' | 'debuff')
 function normalizeEffectField(raw: unknown): string[] {
   if (Array.isArray(raw)) return raw
   if (typeof raw === 'string') {
-    // Cas où c’est un effet unique bien formaté
     if (raw.startsWith('BT_')) return [raw]
     return []
   }
@@ -70,20 +66,14 @@ function normalizeEffectField(raw: unknown): string[] {
 
 function getAllEffects(char: CharacterLite, type: 'buff' | 'debuff'): string[] {
   const skills = Object.values(char.skills || {}) as SkillLite[]
-
   const skillEffects = skills.flatMap((s) => normalizeEffectField(s[type]))
-
   const chainPassive = char.skills?.SKT_CHAIN_PASSIVE
   const chainDualEffects = [
     ...normalizeEffectField(chainPassive?.[type]),
     ...normalizeEffectField(chainPassive?.[`dual_${type}`])
   ]
-
   return [...new Set([...skillEffects, ...chainDualEffects])]
 }
-
-
-
 
 export default function CharactersPage() {
   const [characters, setCharacters] = useState<CharacterLite[]>([])
@@ -95,6 +85,7 @@ export default function CharactersPage() {
   const [selectedBuffs, setSelectedBuffs] = useState<string[]>([])
   const [selectedDebuffs, setSelectedDebuffs] = useState<string[]>([])
   const [effectLogic, setEffectLogic] = useState<'AND' | 'OR'>('OR')
+  const [showUniqueEffects, setShowUniqueEffects] = useState(false)
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -108,10 +99,6 @@ export default function CharactersPage() {
 
   const allBuffs = extractAllEffects(characters, 'buff')
   const allDebuffs = extractAllEffects(characters, 'debuff')
-  
-  //console.log('BUFFS:', allBuffs)
-  //console.log('DEBUFFS:', allDebuffs)
-
 
   const toggleEffect = (
     key: string,
@@ -187,27 +174,28 @@ export default function CharactersPage() {
     return <div className="text-center mt-8 text-white">Loading characters...</div>
   }
 
-  return (    
+  return (
     <div className="space-y-6">
       <script type="application/ld+json">
-{JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Characters – Outerpedia",
-  "url": "https://outerpedia.com/characters",
-  "description": "Browse all characters in Outerplane with builds, skills, stats and exclusive equipment.",  
-  "mainEntity": {
-    "@type": "ItemList",
-    "itemListElement": characters.map((char, index) => ({
-      "@type": "VideoGameCharacter",
-      "name": char.Fullname,
-      "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`, // ou kebab-case
-      "image": `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.png`,
-      "position": index + 1,
-    }))
-  }
-})}
-</script>
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Characters – Outerpedia",
+          "url": "https://outerpedia.com/characters",
+          "description": "Browse all characters in Outerplane with builds, skills, stats and exclusive equipment.",
+          "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": characters.map((char, index) => ({
+              "@type": "VideoGameCharacter",
+              "name": char.Fullname,
+              "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
+              "image": `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.png`,
+              "position": index + 1,
+            }))
+          }
+        })}
+      </script>
+
       <h1 className="text-3xl font-bold">Characters</h1>
 
       <div className="flex justify-center gap-2 mb-4">
@@ -291,54 +279,71 @@ export default function CharactersPage() {
       <div className="text-center space-y-2">
         <p className="text-sm text-gray-300">Filter by buffs</p>
         <div className="flex flex-wrap justify-center gap-1">
-        {allBuffs.map((buff) => (
-            <div
-              key={buff}
-              onClick={() => toggleEffect(buff, selectedBuffs, setSelectedBuffs)}
-              className={selectedBuffs.includes(buff) ? 'ring-2 ring-cyan-400 rounded' : ''}
-            >
-              <BuffDebuffDisplayMini buffs={[buff]} />
-            </div>
-          ))}
+          {allBuffs
+            .filter((buff) => showUniqueEffects || !buff.startsWith('UNIQUE_'))
+            .map((buff) => (
+              <div
+                key={buff}
+                onClick={() => toggleEffect(buff, selectedBuffs, setSelectedBuffs)}
+                className={selectedBuffs.includes(buff) ? 'ring-2 ring-cyan-400 rounded' : ''}
+              >
+                <BuffDebuffDisplayMini buffs={[buff]} />
+              </div>
+            ))}
         </div>
+
         <p className="text-sm text-gray-300 mt-4">Filter by debuffs</p>
         <div className="flex flex-wrap justify-center gap-1">
-        {allDebuffs.map((debuff) => (
-          <div
-            key={debuff}
-            onClick={() => toggleEffect(debuff, selectedDebuffs, setSelectedDebuffs)}
-            className={selectedDebuffs.includes(debuff) ? 'ring-2 ring-red-800 rounded' : ''}
-          >
-            <BuffDebuffDisplayMini debuffs={[debuff]} />
-          </div>
-        ))}
+          {allDebuffs
+            .filter((debuff) => showUniqueEffects || !debuff.startsWith('UNIQUE_'))
+            .map((debuff) => (
+              <div
+                key={debuff}
+                onClick={() => toggleEffect(debuff, selectedDebuffs, setSelectedDebuffs)}
+                className={selectedDebuffs.includes(debuff) ? 'ring-2 ring-red-800 rounded' : ''}
+              >
+                <BuffDebuffDisplayMini debuffs={[debuff]} />
+              </div>
+            ))}
         </div>
-        <div className="mt-4 flex justify-center gap-4">
-  <button
-    onClick={() => setEffectLogic(effectLogic === 'AND' ? 'OR' : 'AND')}
-    className="bg-gray-700 hover:bg-cyan-600 px-4 py-1 rounded text-sm"
-  >
-    Filter logic: {effectLogic}
-  </button>
-  <button
-    onClick={() => {
-      setFilter(null)
-      setClassFilter(null)
-      setRarityFilter(null)
-      setSelectedBuffs([])
-      setSelectedDebuffs([])
-      setEffectLogic('OR')
-    }}
-    className="bg-gray-700 hover:bg-red-700 px-4 py-1 rounded text-sm"
-  >
-    Reset filters
-  </button>
-</div>
 
+        <div className="mt-4 flex flex-wrap justify-center gap-4">
+          <button
+            onClick={() => setEffectLogic(effectLogic === 'AND' ? 'OR' : 'AND')}
+            className="bg-gray-700 hover:bg-cyan-600 px-4 py-1 rounded text-sm"
+          >
+            Filter logic: {effectLogic}
+          </button>
+          <button
+            onClick={() => {
+              setFilter(null)
+              setClassFilter(null)
+              setRarityFilter(null)
+              setSelectedBuffs([])
+              setSelectedDebuffs([])
+              setEffectLogic('OR')
+            }}
+            className="bg-gray-700 hover:bg-red-700 px-4 py-1 rounded text-sm"
+          >
+            Reset filters
+          </button>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="show-unique-effects"
+              checked={showUniqueEffects}
+              onChange={() => setShowUniqueEffects(!showUniqueEffects)}
+              className="accent-cyan-500"
+            />
+            <label htmlFor="show-unique-effects" className="text-sm text-white">
+              Show Unique Effects
+            </label>
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-wrap justify-center gap-6">
-        {filteredCharacters.map((char,index) => (
+        {filteredCharacters.map((char, index) => (
           <Link
             href={`/characters/${toKebabCase(char.Fullname.toLowerCase())}`}
             key={char.ID}
@@ -351,7 +356,7 @@ export default function CharactersPage() {
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
-                priority={index === 0} //
+                priority={index === 0}
               />
               <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1 ">
                 {rarityToStars(char.Rarity).map((_, i) => (
