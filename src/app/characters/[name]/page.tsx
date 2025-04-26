@@ -53,7 +53,6 @@ export async function generateMetadata(context: { params: Promise<{ name: string
   const { name } = await context.params;
   const filePath = path.join(process.cwd(), 'src/data/char', `${name}.json`);
   
-
   try {
     const raw = await fs.readFile(filePath, 'utf-8');
     const character: Character = JSON.parse(raw);
@@ -64,7 +63,7 @@ export async function generateMetadata(context: { params: Promise<{ name: string
 
     const classData = classDataRaw as ClassDataMap;
     const subclassDescription =
-      classData?.[character.Class]?.subclasses?.[character.SubClass]?.description ??
+      classData?.[character.Class]?.subclasses?.[character.SubClass]?.description ?? 
       'Discover detailed stats, skills, and recommended gear.';
 
     const description = `${character.Fullname} is a ${character.Element} ${character.Class}. ${subclassDescription}`;
@@ -82,9 +81,11 @@ export async function generateMetadata(context: { params: Promise<{ name: string
         url,
         type: 'website',
         images: [{ url: image, width: 150, height: 150, alt: character.Fullname }],
+        locale: 'en_US',
+        siteName: 'Outerpedia'
       },
       twitter: {
-        card: 'summary',
+        card: 'summary_large_image',
         title,
         description,
         images: [image],
@@ -100,6 +101,7 @@ export async function generateMetadata(context: { params: Promise<{ name: string
     };
   }
 }
+
 
 // ✅ Page personnage (Next.js 15+ : params est une Promise)
 export default async function CharacterDetailPage(context: { params: Promise<{ name: string }> }) {

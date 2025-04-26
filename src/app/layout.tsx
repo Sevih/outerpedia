@@ -7,16 +7,19 @@ import UpdateToast from './components/UpdateToast';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
+// SEO fallback (servira si aucune page ne définit son propre <head>)
 export const metadata: Metadata = {
   title: 'Outerpedia',
   description: 'Outerplane Wiki & Guide',
   icons: {
     icon: '/favicon.ico',
     apple: '/images/icons/icon-192x192.png',
+    shortcut: '/images/icons/icon-512x512.png',
   },
   manifest: '/manifest.json',
 };
 
+// Mobile viewport + couleur de barre
 export const viewport: Viewport = {
   themeColor: '#0891b2',
 };
@@ -28,6 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head suppressHydrationWarning />
       <body className={`${inter.className} text-white`}>
         <div className="flex flex-col min-h-screen">
           <Header />

@@ -11,35 +11,6 @@ const categories = [
   { name: 'Guides', path: '/guides' },
 ]
 
-export const metadata = {
-  title: 'Outerpedia – Outerplane Wiki & Guide',
-  description: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
-  alternates: {
-    canonical: 'https://outerpedia.com/',
-  },
-  openGraph: {
-    title: 'Outerpedia – Outerplane Wiki & Guide',
-    description: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
-    url: 'https://outerpedia.com/',
-    type: 'website',
-    siteName: 'Outerpedia',
-    images: [
-      {
-        url: 'https://outerpedia.com/images/ui/og_home.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Outerpedia homepage preview',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Outerpedia – Outerplane Wiki & Guide',
-    description: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
-    images: ['https://outerpedia.com/images/ui/og_home.jpg'],
-  },
-};
-
 export default function Home() {
   return (
     <>
@@ -111,8 +82,6 @@ export default function Home() {
 
 {/* Et ensuite tu continues avec ton HomeClient() */}
 <HomeClient />
-
-      <HomeClient />
     </>
   )
 }

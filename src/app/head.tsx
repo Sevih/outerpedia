@@ -1,25 +1,32 @@
-import fs from 'fs/promises'
-import path from 'path'
-import { notFound } from 'next/navigation'
+export default function Head() {
+  const siteUrl = 'https://outerpedia.com';
+  const title = 'Outerpedia – Outerplane Wiki & Guide';
+  const description = 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!';
 
-export default async function Head({ params }: { params: { name: string } }) {
-  const name = decodeURIComponent(params.name).toLowerCase()
-  const filePath = path.join(process.cwd(), 'src/data/char', `${name}.json`)
+  return (
+    <>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      
+      {/* Canonical */}
+      <link rel="canonical" href={siteUrl} />
 
-  try {
-    const raw = await fs.readFile(filePath, 'utf-8')
-    const character = JSON.parse(raw)
+      {/* Open Graph */}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={siteUrl} />
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:site_name" content="Outerpedia" />
+      <meta property="og:image" content="https://outerpedia.com/images/ui/og_home.jpg" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
 
-    return (
-      <>
-        <title>{character.Fullname} - Outerpedia</title>
-        <meta name="description" content={`Discover ${character.Fullname}, a ${character.Class} in Outerplane.`} />
-        <meta property="og:title" content={`${character.Fullname} - Outerpedia`} />
-        <meta property="og:description" content={`Learn more about ${character.Fullname} in Outerplane.`} />
-        <meta property="og:image" content={`https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.png`} />
-      </>
-    )
-  } catch {
-    return notFound()
-  }
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content="https://outerpedia.com/images/ui/og_home.jpg" />
+    </>
+  );
 }
