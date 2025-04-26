@@ -327,7 +327,7 @@
 "icon_effect":"TI_Icon_UO_Accessary_07",
 "rank":"A"
 },
-"Eva":{
+"eva":{
 "name":"Prism Lens",
 "mainStat":"Reduces Dark Damage Taken",
 "effect":"When using Generating Boundary, reduces the cooldown of Healing by 1 turn(s)",
@@ -378,7 +378,7 @@
 "gnosis-beth": {
   "name": "Everlasting Grudge",
   "mainStat": "Reduces Dark Damage Taken",
-  "effect": "Increases damage dealt by Eternal Bleeding on Bosses",
+  "effect": "Increases damage dealt by Eternal Bleeding on Bosses by 50%",
   "effect10": "After using Pure Blood's Punishment, does not trigger an enemy's Counterattack, Revenge, or Agile Response",
   "icon_effect": "TI_Icon_UO_Accessary_07",
   "rank": "S"

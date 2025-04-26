@@ -1,0 +1,60 @@
+{
+  "PvP": {
+    "Weapon": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Thumping Knuckledusters",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Dies Irae",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Swiftness", "count": 2 },
+        { "name": "Immunity", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "ACC>EFF>SPD>ATK",
+    "Note": "",
+    "Talisman": []
+  },
+  "PvE": {
+    "Weapon": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Thumping Knuckledusters",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Dies Irae",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Swiftness", "count": 2 },
+        { "name": "Accuracy", "count": 2 }
+      ],
+      [
+        { "name": "Swiftness", "count": 2 },
+        { "name": "Effectiveness", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "ACC>EFF>SPD>ATK",
+    "Note": "",
+    "Talisman": []
+  }
+}

@@ -108,6 +108,12 @@
 "icon": "SC_Buff_Effect_Sealed"
 },
 {
+    "name": "BT_SEALED_IR",
+    "label": "Unbuffable",
+    "description": "Cannot gain buffs. (Excluding certain effects, Cannot be removed)",
+    "icon": "IG_Buff_Effect_Sealed_Interruption_D"
+    },
+{
 "name": "BT_SILENCE",
 "label": "Silenced",
 "description": "Cannot only use skill chain and basic attack while this effect is applied",
@@ -163,6 +169,18 @@
 "description": "Cannot be applied with Health recovery effects",
 "icon": "SC_Buff_Sealed_Receive_Heal"
 },
+{
+"name": "BT_DETONATE",
+"label": "Detonate",
+"description": "Activates certain debuffs immediatly. Magnitude determined by the number of turns remaining and stacks applied.",
+"icon": "SC_Buff_detonate"
+},
+{
+    "name": "BT_DOT_ETERNAL_BLEED",
+    "label": "Eternal Bleeding",
+    "description": "At the start of the turn, takes damage proportional to the caster's Effectiveness, and increases Priority of all enemies by 5%.\nRemoved when the caster dies",
+    "icon": "SC_Buff_2100092"
+    },
 {
 "name": "UNIQUE_MARTYRDOM",
 "label": "Martyrdom",

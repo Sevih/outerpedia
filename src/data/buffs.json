@@ -138,6 +138,18 @@
 "icon": "SC_Buff_Effect_Extra_Turn"
 },
 {
+"name": "BT_STEALTHED",
+"label": "Stealth",
+"description": "When there are allies not granted Stealth, cannot be select as a target for attack. Decreases damage taken from Area of Effect Attacks.",
+"icon": "SC_Buff_Effect_Stealthed"
+},
+{
+    "name": "BT_RANDOM_STAT",
+    "label": "Random Increased Stat Effect",
+    "description": "Grants Random increased stat effect(s) to the bearer for 2 turn(s). Attack, Critical Damage, Accuracy, Speed",
+    "icon": "IG_Buff_Effect_Random_Buff"
+    },
+{
 "name": "UNIQUE_ARIEL",
 "label": "Ariel",
 "description": "After attacking an enemy, increases Priority of the caster by 15%",
@@ -202,5 +214,23 @@
 "label": "Radiant Will",
 "description": "Increases Burned damage dealt by allies by 50% and changes certain skills. (Irremovable)",
 "icon": "IG_Buff_Effect_2000094_Interruption"
+},
+{
+"name": "UNIQUE_RETRIBUTION_DOMINION",
+"label": "Retribution's Dominion",
+"description": "When hit by a single attack, inflicts Eternal Bleeding on all enemies for 1 turn.\nRetribution's Dominion cannot be removed",
+"icon": "IG_Buff_2000092_Interruption"
+},
+{
+"name": "UNIQUE_HUBRIS_DOMINION",
+"label": "Hubris's Dominion",
+"description": "Increases damage dealt to enemies and enhances certain skill effects. (Irremovable)",
+"icon": "IG_Buff_2000090_Interruption"
+},
+{
+"name": "UNIQUE_GIFT_OF_BUFF",
+"label": "Gift of Buffs",
+"description": "Grants removable buff(s) granted to the caster to the specific target. \nBuffs available for gifting :\n\nAttack\nDefense\nSpeed\nCritical Hit Chance\nCritical Hit Damage\nAccuracy\nEvasion\nEffectiveness\nResilience\nPenetration",
+"icon": "IG_Buff_2000093_Interruption"
 }
 ]

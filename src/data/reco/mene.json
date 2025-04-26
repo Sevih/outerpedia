@@ -1,0 +1,55 @@
+{
+  "Swift Immu": {
+    "Weapon": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Swiftness", "count": 2 },
+        { "name": "Immunity", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "SPD>HP>DEF>EVA=RES",
+    "Note": "PvP:Vanguard's Charm3\nPvE:Executionner's Charm3Sage's Charm2",
+    "Talisman": [
+      "Vanguard's Charm",
+      "Executionner's Charm",
+      "Sage's Charm"
+    ]
+  },
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Speed", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "SPD>HP>DEF>EVA=RES",
+    "Note": "PvP:Vanguard's Charm3\nPvE:Executionner's Charm3Sage's Charm2",
+    "Talisman": [
+      "Vanguard's Charm",
+      "Executionner's Charm",
+      "Sage's Charm"
+    ]
+  }
+}
