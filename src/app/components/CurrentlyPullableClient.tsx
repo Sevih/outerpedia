@@ -39,26 +39,29 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
                 />
               </div>
               <div className="flex items-center justify-center gap-2 py-2 font-medium text-white">
-                <Image
-                  src={`/images/ui/elem/${element}.png`}
-                  alt={element}
-                  width={20}
-                  height={20}
-                  style={{ width: '20px', height: '20px', objectFit: 'contain' }}
-                  unoptimized
-                />
+                <div className="relative w-[20px] h-[20px]">
+                  <Image
+                    src={`/images/ui/elem/${element}.png`}
+                    alt={element}
+                    fill
+                    className="object-contain"
+                    unoptimized
+                  />
+                </div>
+                
                 {/* Protection du nom */}
                 <div className="max-w-[60px] overflow-hidden text-ellipsis whitespace-nowrap text-sm text-center">
                   {name}
                 </div>
-                <Image
-                  src={`/images/ui/class/${charClass}.png`}
-                  alt={charClass}
-                  width={20}
-                  height={20}
-                  style={{ width: '20px', height: '20px', objectFit: 'contain' }}
-                  unoptimized
-                />
+                <div className="relative w-[20px] h-[20px]">
+                  <Image
+                    src={`/images/ui/class/${charClass}.png`}
+                    alt={charClass}
+                    fill
+                    className="object-contain"
+                    unoptimized
+                  />
+                </div>
               </div>
               <div className="text-center pb-2">
                 <Countdown endDate={endDate} element={element} />

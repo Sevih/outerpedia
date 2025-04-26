@@ -70,14 +70,15 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
 
       {/* Badge effet */}
       <div className="inline-flex items-center bg-white/10 px-1.5 py-1 rounded-full text-xs text-white mt-1 max-w-[180px] mx-auto whitespace-nowrap justify-center">
-      <Image
-  src="/images/ui/effect/SC_Buff_Effect_Freeze.png"
+<div className="relative w-[16px] h-[16px]">
+<Image
+  src={`/images/ui/effect/SC_Buff_Effect_Freeze.png`}
   alt={accessory.effect_name}
-  width={16}
-  height={16}
-  style={{ width: 16, height: 16 }}
-                      className="object-contain"
+  fill
+  className="object-contain"
+  unoptimized
 />
+</div>
 
         <span>{accessory.effect_name}</span>
       </div>

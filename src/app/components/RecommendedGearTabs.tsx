@@ -150,7 +150,7 @@ export default function RecommendedGearTabs({
       <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Gear</h2>
 
       <div className="flex justify-center mb-6">
-        <div className="relative bg-gray-800 rounded-full p-1 flex gap-1 w-fit">
+      <div className="relative bg-gray-800 rounded-full p-1 flex gap-1 w-fit overflow-x-auto flex-nowrap">
           <div
             ref={indicatorRef}
             className={`absolute top-1 left-0 h-[calc(100%-0.5rem)] bg-cyan-500 rounded-full transition-all duration-300 z-0`}

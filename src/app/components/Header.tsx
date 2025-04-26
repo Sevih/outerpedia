@@ -52,7 +52,16 @@ export default function Header() {
               className="flex items-center gap-2 text-white hover:text-cyan-300 transition"
               onClick={() => setMenuOpen(false)}
             >
-              <Image src={`/images/ui/nav/${item.icon}.png`} alt={item.label} width={18} height={18} />
+              
+              <div className="relative w-[18px] h-[18px]">
+                                          <Image
+                                            src={`/images/ui/nav/${item.icon}.png`}
+                                            alt={item.label}
+                                            fill
+                                            className="object-contain"
+                                            unoptimized
+                                          />
+                                        </div>
               <span>{item.label}</span>
             </Link>
           ))}
@@ -66,7 +75,15 @@ export default function Header() {
               href={item.href}
               className="flex items-center gap-2 hover:text-cyan-300 transition"
             >
-              <Image src={`/images/ui/nav/${item.icon}.png`} alt={item.label} width={18} height={18} />
+                      <div className="relative w-[18px] h-[18px]">
+                                          <Image
+                                            src={`/images/ui/nav/${item.icon}.png`}
+                                            alt={item.label}
+                                            fill
+                                            className="object-contain"
+                                            unoptimized
+                                          />
+                                        </div>
               <span>{item.label}</span>
             </Link>
           ))}

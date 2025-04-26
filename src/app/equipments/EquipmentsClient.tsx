@@ -219,28 +219,29 @@ export default function EquipmentsClient() {
 
     {tabList.map(({ key, label, icon }) => (
       <button
-        key={key}
-        onClick={() => setTab(key as typeof tab)}
-        ref={el => {
-          if (tab === key) setActiveTabRef(el);
-        }}
-        className={`relative z-10 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors duration-300 ${
-          tab === key
-            ? "text-white"
-            : "text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700"
-        }`}
-      >
-        <Image
-          src={`/images/ui/nav/${icon}`}
-          alt={label}
-          width={18}
-          height={18}
-          style={{ width: 24, height: 24 }}
-          className="w-[18px] h-[18px]"
-          unoptimized
-        />
-        {label}
-      </button>
+      key={key}
+      onClick={() => setTab(key as typeof tab)}
+      ref={el => {
+        if (tab === key) setActiveTabRef(el);
+      }}
+      className={`relative z-10 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors duration-300 ${
+        tab === key
+          ? "text-white"
+          : "text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700"
+      }`}
+    >
+      <Image
+        src={`/images/ui/nav/${icon}`}
+        alt={label}
+        width={18}
+        height={18}
+        style={{ width: 24, height: 24 }}
+        className="w-[18px] h-[18px]"
+        unoptimized
+      />
+      <span className="hidden md:inline">{label}</span>
+    </button>
+    
     ))}
   </div>
 </div>

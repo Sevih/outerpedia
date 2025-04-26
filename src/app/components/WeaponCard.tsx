@@ -69,14 +69,15 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
 
       {/* Label effet */}
       <div className="inline-flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-full text-xs text-white font-medium mt-1">
-        <Image
-          src="/images/ui/effect/SC_Buff_Effect_Freeze.png"
-          alt={weapon.effect_name}
-          width={16}
-          height={16}
-          style={{ width: 16, height: 16 }}
-          unoptimized
-        />
+        <div className="relative w-[16px] h-[16px]">
+                            <Image
+                              src={`/images/ui/effect/SC_Buff_Effect_Freeze.png`}
+                              alt={weapon.effect_name}
+                              fill
+                              className="object-contain"
+                              unoptimized
+                            />
+                          </div>
         <span>{weapon.effect_name}</span>
       </div>
 
