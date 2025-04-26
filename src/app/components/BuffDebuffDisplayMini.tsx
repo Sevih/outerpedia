@@ -36,17 +36,17 @@ export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: Buff
   const buffList = getEffects(normalizedBuffs, 'buff');
   const debuffList = getEffects(normalizedDebuffs, 'debuff');
 
-  const renderEffect = (effect: Effect) => {
-    const iconPath = `/images/ui/effect/${effect.icon}.png`
+  const renderEffect = (effect: Effect, idx: number) => {
+    const iconPath = `/images/ui/effect/${effect.icon}.webp`
     const baseColor = effect.type === 'buff' ? 'bg-[#1a69a7]' : 'bg-[#a72a27]'
     const showEffectColor = !effect.description.toLowerCase().includes('cannot be removed')
     const imageClass = showEffectColor ? effect.type : ''
-  
+
     return (
-      <Tooltip.Provider delayDuration={1} key={`${effect.type}-${effect.name}`}>
+      <Tooltip.Provider delayDuration={1} skipDelayDuration={0} disableHoverableContent={false} key={`${effect.type}-${effect.name}-${idx}`}>
         <Tooltip.Root>
           <Tooltip.Trigger asChild>
-            <div className={`flex items-center pt-0 pb-0 pl-0 pr-0 rounded cursor-help`}>
+            <div className="flex items-center p-0 rounded cursor-help">
               <div className="bg-black p-0.5 rounded shrink-0">
                 <Image
                   src={iconPath}
@@ -62,7 +62,7 @@ export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: Buff
               </div>
             </div>
           </Tooltip.Trigger>
-  
+
           <Tooltip.Portal>
             <Tooltip.Content
               side="top"
@@ -90,11 +90,11 @@ export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: Buff
       </Tooltip.Provider>
     )
   }
-  
+
   return (
     <div className="flex flex-wrap">
-      {buffList.map(renderEffect)}
-      {debuffList.map(renderEffect)}
+      {buffList.map((effect, idx) => renderEffect(effect, idx))}
+      {debuffList.map((effect, idx) => renderEffect(effect, idx))}
     </div>
   )
 }

@@ -47,7 +47,7 @@ function SubstatPriorityBar({ priorities }: { priorities: SubstatPriority[] }) {
     <div className="flex flex-col items-center gap-4 mt-6">
       <p className="text-white font-semibold text-base flex items-center gap-2">
         <Image
-          src="/images/ui/stats.png"
+          src="/images/ui/stats.webp"
           alt="Substat icon"
           width={32}
           height={32}
@@ -150,7 +150,7 @@ export default function RecommendedGearTabs({
       <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Gear</h2>
 
       <div className="flex justify-center mb-6">
-      <div className="relative bg-gray-800 rounded-full p-1 flex gap-1 w-fit overflow-x-auto flex-nowrap">
+        <div className="relative bg-gray-800 rounded-full p-1 flex gap-1 w-fit overflow-x-auto flex-nowrap">
           <div
             ref={indicatorRef}
             className={`absolute top-1 left-0 h-[calc(100%-0.5rem)] bg-cyan-500 rounded-full transition-all duration-300 z-0`}
@@ -194,53 +194,53 @@ export default function RecommendedGearTabs({
             <div className="flex flex-col items-center">
               <h3 className="text-lg font-semibold text-white mb-1">Sets</h3>
               <div className="flex flex-wrap justify-center gap-4">
-              {gear?.Set?.map((combo, comboIdx) => {
-    if (combo.length === 1 && combo[0].count === 4) {
-      const full = fullSets.find((s) => s.name === combo[0].name)
-      if (!full) return null
-  
-      return (
-        <div key={`set-4p-${comboIdx}`} className="flex justify-center mb-2">
-          <SetVisual
-  name={full.name}
-  image_prefix={full.image_prefix}
-  set_icon={full.set_icon}
-  part="full"
-  effect_2_4={full.effect_2_4}
-  effect_4_4={full.effect_4_4}
-/>
+                {gear?.Set?.map((combo, comboIdx) => {
+                  if (combo.length === 1 && combo[0].count === 4) {
+                    const full = fullSets.find((s) => s.name === combo[0].name)
+                    if (!full) return null
 
-        </div>
-      )
-    }
-  
-    if (combo.length === 2 && combo[0].count === 2 && combo[1].count === 2) {
-      const setA = fullSets.find((s) => s.name === combo[0].name)
-      const setB = fullSets.find((s) => s.name === combo[1].name)
-      if (!setA || !setB) return null
-  
-      return (
-        <div key={`set-2p-${comboIdx}`} className="flex gap-2 justify-center mb-2">
-          <SetVisual
-  name={setA.name}
-  image_prefix={setA.image_prefix}
-  set_icon={setA.set_icon}
-  part="head_chest"
-  effect_2_4={setA.effect_2_4}
-/>
-<SetVisual
-  name={setB.name}
-  image_prefix={setB.image_prefix}
-  set_icon={setB.set_icon}
-  part="gloves_boots"
-  effect_2_4={setB.effect_2_4}
-/>
-        </div>
-      )
-    }
-  
-    return null // fallback si mauvais format
-  })}
+                    return (
+                      <div key={`set-4p-${comboIdx}`} className="flex justify-center mb-2">
+                        <SetVisual
+                          name={full.name}
+                          image_prefix={full.image_prefix}
+                          set_icon={full.set_icon}
+                          part="full"
+                          effect_2_4={full.effect_2_4}
+                          effect_4_4={full.effect_4_4}
+                        />
+
+                      </div>
+                    )
+                  }
+
+                  if (combo.length === 2 && combo[0].count === 2 && combo[1].count === 2) {
+                    const setA = fullSets.find((s) => s.name === combo[0].name)
+                    const setB = fullSets.find((s) => s.name === combo[1].name)
+                    if (!setA || !setB) return null
+
+                    return (
+                      <div key={`set-2p-${comboIdx}`} className="flex gap-2 justify-center mb-2">
+                        <SetVisual
+                          name={setA.name}
+                          image_prefix={setA.image_prefix}
+                          set_icon={setA.set_icon}
+                          part="head_chest"
+                          effect_2_4={setA.effect_2_4}
+                        />
+                        <SetVisual
+                          name={setB.name}
+                          image_prefix={setB.image_prefix}
+                          set_icon={setB.set_icon}
+                          part="gloves_boots"
+                          effect_2_4={setB.effect_2_4}
+                        />
+                      </div>
+                    )
+                  }
+
+                  return null // fallback si mauvais format
+                })}
 
               </div>
             </div>
@@ -254,36 +254,41 @@ export default function RecommendedGearTabs({
                 </div>
               )}
               <div className="flex-1 flex flex-col gap-4 items-center">
-              <div className="flex-1 flex flex-col gap-4 items-center">
-  <div className="w-full">
-    <h4 className="text-sm text-white font-bold mb-1 text-center">Talisman</h4>
-    <div className="w-full rounded-lg p-4 flex flex-wrap justify-center gap-3 overflow-visible">
-      {recommendedTalismans.length > 0 ? (
-        recommendedTalismans.map((talisman, idx) => (
-          <MiniTalismanCard key={`talisman-${gearTab}-${idx}`} talisman={talisman} />
-        ))
-      ) : (
-        <div className="w-full max-w-[220px] min-h-[130px] flex items-center justify-center text-gray-400 italic">
-          No talisman recommended
-        </div>
-      )}
-    </div>
-  </div>
-</div>
+                <div className="flex-1 flex flex-col gap-4 items-center">
+                  <div className="w-full">
+                    <h4 className="text-sm text-white font-bold mb-1 text-center">Talisman</h4>
+                    <div className="w-full rounded-lg p-4 flex flex-wrap justify-center gap-3 overflow-visible">
+                      {recommendedTalismans.length > 0 ? (
+                        recommendedTalismans.map((talisman, idx) => (
+                          <MiniTalismanCard key={`talisman-${gearTab}-${idx}`} talisman={talisman} />
+                        ))
+                      ) : (
+                        <div className="w-full max-w-[220px] min-h-[130px] flex items-center justify-center text-gray-400 italic">
+                          No talisman recommended
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
 
                 {gear?.Note && (
                   <div className="w-full max-w-[280px] text-sm text-white bg-black/30 border border-white/10 rounded-lg p-4">
-                    <p className="font-bold mb-2 flex items-center gap-2">
-                      <Image
-                        src="/images/ui/nav/TI_Item_Growth_Book_01.png"
-                        alt="Note icon"
-                        width={20}
-                        height={20}
-                        className="w-6 h-6 object-contain"
-                        unoptimized
-                      />
-                      Notes
-                    </p>
+
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="relative w-[20px] h-[20px]">
+                        <Image
+                          src="/images/ui/nav/TI_Item_Growth_Book_01.webp"
+                          alt="Note icon"
+                          fill
+                          className="object-contain"
+                          sizes="20px"
+                        />
+                      </div>
+                      <p className="font-bold">
+                        Notes
+                      </p>
+                    </div>
+
                     <div className="text-gray-300 text-base space-y-3">
                       {gear.Note.split('\n').map((line, i) => {
                         const [label, rest] = line.split(':');
@@ -308,7 +313,7 @@ export default function RecommendedGearTabs({
                                       {[...Array(3)].map((_, idx) => (
                                         <Image
                                           key={idx}
-                                          src={`/images/ui/${idx < rating ? 'CM_icon_star_y.png' : 'CM_icon_star_w.png'}`}
+                                          src={`/images/ui/${idx < rating ? 'CM_icon_star_y.webp' : 'CM_icon_star_w.webp'}`}
                                           alt={idx < rating ? '★' : '☆'}
                                           width={16}
                                           height={16}

@@ -157,7 +157,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
     <CharacterJsonLd
   name={character.Fullname}
   description={`${character.Fullname} is a ${character.Element} ${character.Class}. ${subclassInfo?.description || ''}`}
-  image={`https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.png`}
+  image={`https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.webp`}
   url={`https://outerpedia.com/characters/${name}`}
   element={character.Element}
   charClass={character.Class}
@@ -170,7 +170,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
         {/* Illustration du personnage */}
         <div className="relative rounded overflow-hidden shadow">
           <Image
-            src={`/images/characters/full/IMG_${character.ID}.png`} 
+            src={`/images/characters/full/IMG_${character.ID}.webp`} 
             alt={character.Fullname}
             width={360}
             height={400}
@@ -188,7 +188,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             {[...Array(character.Rarity)].map((_, i) => (
               <Image
                 key={i}
-                src="/images/ui/star.png"
+                src="/images/ui/star.webp"
                 alt="star"
                 width={20}
                 height={20}
@@ -200,15 +200,15 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
           {/* Élément, Classe, Sous-classe */}
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <Image src={`/images/ui/elem/${character.Element.toLowerCase()}.png`} alt={character.Element} width={24} height={24} style={{ width: 24, height: 24 }} />
+              <Image src={`/images/ui/elem/${character.Element.toLowerCase()}.webp`} alt={character.Element} width={24} height={24} style={{ width: 24, height: 24 }} />
               <span className="text-base">{character.Element}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Image src={`/images/ui/class/${character.Class.toLowerCase()}.png`} alt={character.Class} width={24} height={24} style={{ width: 24, height: 24 }} />
+              <Image src={`/images/ui/class/${character.Class.toLowerCase()}.webp`} alt={character.Class} width={24} height={24} style={{ width: 24, height: 24 }} />
               <span className="text-base">{character.SubClass}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Image src={`/images/ui/class/${character.SubClass.toLowerCase()}.png`} alt={character.SubClass} width={24} height={24} style={{ width: 24, height: 24 }} />
+              <Image src={`/images/ui/class/${character.SubClass.toLowerCase()}.webp`} alt={character.SubClass} width={24} height={24} style={{ width: 24, height: 24 }} />
               <span className="text-base">{character.SubClass}</span>
             </div>
           </div>
@@ -272,14 +272,14 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
           <div id="ee"
             className="w-[120px] h-[120px] relative shrink-0 mr-4 rounded overflow-hidden"
             style={{
-              backgroundImage: "url(/images/ui/bg_item_leg.png)",
+              backgroundImage: "url(/images/ui/bg_item_leg.webp)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
             }}
           >
             <Image
-              src={`/images/characters/ex/${toKebabCase(character.Fullname)}.png`}
+              src={`/images/characters/ex/${toKebabCase(character.Fullname)}.webp`}
               alt={`${character.Fullname} Exclusive Equipment`}
               fill
               sizes="120px"
@@ -295,7 +295,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               {ee.icon_effect && (
                 <div className="bg-gray-500/80 rounded-full px-3 py-1 flex items-center gap-2 w-fit">
                   <Image
-                    src={`/images/ui/effect/${ee.icon_effect}.png`}
+                    src={`/images/ui/effect/${ee.icon_effect}.webp`}
                     alt={ee.icon_effect}
                     width={20}
                     height={20}
@@ -329,7 +329,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             <p className="font-semibold text-white mb-2">EE Priority</p>
             {ee?.rank ? (
               <Image
-                src={`/images/ui/IG_Event_Rank_${ee.rank}.png`}
+                src={`/images/ui/IG_Event_Rank_${ee.rank}.webp`}
                 alt={`EE Rank ${ee.rank}`}
                 width={32}
                 height={32}
@@ -345,7 +345,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             <p className="font-semibold text-white mb-2">Character Tier</p>
             {character.rank ? (
               <Image
-                src={`/images/ui/IG_Event_Rank_${character.rank}.png`}
+                src={`/images/ui/IG_Event_Rank_${character.rank}.webp`}
                 alt={`Rank ${character.rank}`}
                 width={32}
                 height={32}
@@ -390,7 +390,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
       <div className="flex items-start gap-2 mb-2">
         <div className="relative w-12 h-12">
           <Image
-            src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.png`}
+            src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
             alt={skill.name}
             width={48}
             height={48}
@@ -478,14 +478,14 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
       {/* Colonne gauche : icône + nom du skill */}
       <div className="flex flex-col items-center gap-2 relative w-12 h-12">
   <Image
-    src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.png`}
+    src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
     alt={skillWithBurn.name}
     width={48}
     height={48}
     className="object-contain"
   />
   <Image
-    src="/images/ui/CM_Skill_Icon_Burst.png"
+    src="/images/ui/CM_Skill_Icon_Burst.webp"
     alt="Burn icon"
     width={20}
     height={20}
@@ -503,7 +503,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
           <div
             key={burn.level}
             className="relative w-[185px] h-[262px] bg-cover bg-center rounded overflow-hidden text-white transform transition-transform duration-200 hover:scale-105 hover:shadow-lg hover:ring-[1px] hover:ring-yellow-400 hover:ring-offset-[0.2px] cursor-pointer"
-            style={{ backgroundImage: `url(/images/ui/Burst${burn.level}.png)` }}
+            style={{ backgroundImage: `url(/images/ui/Burst${burn.level}.webp)` }}
           >
             <div
               className="absolute top-2.5 right-2.5 text-[15px] font-bold rounded-full flex items-center justify-center"
@@ -547,7 +547,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
     <div className="flex gap-4 items-start">
       <div className="w-16 h-16 shrink-0">
         <Image
-          src={`/images/characters/chain/Skill_ChainPassive_${character.Element}_${character.Chain_Type}.png`}
+          src={`/images/characters/chain/Skill_ChainPassive_${character.Element}_${character.Chain_Type}.webp`}
           alt={`Chain icon for ${character.Element} ${character.Chain_Type}`}
           width={64}
           height={64}

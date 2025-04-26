@@ -1,4 +1,34 @@
-🛡 Exclusive Equipment Data Complete (2025-04-26)
+## 🚀 Updates (2025-04-26)
+
+### 🛡 Exclusive Equipment Integration
+- Generated dedicated WebP images for optimized display.
+
+### 🖼️ SEO & Structured Data Enhancements
+- Improved JSON-LD generation with automatic linking to character profiles.
+- Complete OpenGraph and metadata integration for all pages (Home, Characters, etc.).
+- Custom head.tsx implemented where needed.
+- Added manifest.json and robots.txt clean setup.
+- Sitemap.xml auto-generation on deployment.
+- Fixed missing canonical links and meta consistency.
+
+### 📱 PWA (Progressive Web App) Setup
+- Created installable app manifest (manifest.json).
+- Added mobile icons (maskable and standard).
+- Set theme-color and viewport properties.
+- Light PWA compatibility (without service worker).
+
+### 📱 Mobile & Responsive Improvements
+- Improved responsive layout for Home page (Currently Pullable, Discord, Categories).
+- Fixed header navigation behavior on mobile.
+
+### 🛠 Internal Improvements
+- Standardized weapon and amulet card components for better consistency.
+- Moved sitemap generation to `postbuild` hook.
+- Added SEO-check script for local verifications.
+- Brotli compression active on Apache server.
+- Resolved critical SEO warnings related to structured data validation.
+
+🛡 Exclusive Equipment Data Complete (2025-04-25)
 ✅ Added
 
 Added all exclusive equipment data and images for all characters.

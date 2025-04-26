@@ -26,7 +26,7 @@ export default function TalismanCard({
       <div className="relative w-20 h-20">
         {/* Fond rouge */}
         <Image
-          src="/images/ui/bg_item_leg.png"
+          src="/images/ui/bg_item_leg.webp"
           alt="background"
           fill
           sizes="80px"
@@ -34,7 +34,7 @@ export default function TalismanCard({
         />
         {/* Icône du talisman */}
         <Image
-          src={`/images/equipment/TI_Equipment_Talisman_${icon}.png`}
+          src={`/images/equipment/TI_Equipment_Talisman_${icon}.webp`}
           alt={name}
           fill
           sizes="80px"
@@ -43,7 +43,7 @@ export default function TalismanCard({
         {/* Icône d'effet en haut à droite */}
         <div className="absolute top-0 right-0 z-20 transform translate-x-1/3 -translate-y-1/3">
           <Image
-            src={`/images/ui/effect/TI_Icon_UO_Talisman_${icon_item}.png`}
+            src={`/images/ui/effect/TI_Icon_UO_Talisman_${icon_item}.webp`}
             alt={effect_name}
             width={32}
             height={32}
@@ -55,7 +55,7 @@ export default function TalismanCard({
       <h3 className="text-lg font-semibold mt-2">{name}</h3>
       <div className="flex items-center gap-2">
         <Image
-          src={`/images/ui/effect/Talisman_${icon_effect}.png`}
+          src={`/images/ui/effect/Talisman_${icon_effect}.webp`}
           alt={effect_name}
           width={24}
           height={24}

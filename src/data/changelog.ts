@@ -8,6 +8,18 @@ export type ChangelogEntry = {
 export const changelog: ChangelogEntry[] = [
   {
     date: "2025-04-26",
+    title: "SEO, Mobile & PWA Improvements",
+    type: "update",
+    content: `
+  - Improved SEO and OpenGraph metadata across all pages.
+  - Generated sitemap.xml automatically at each deployment.
+  - Added manifest.json and mobile icons for PWA support.
+  - Optimized mobile layouts for Home and Navigation.
+  - Fixed structured data validation warnings (Search Console OK).
+  `
+  },  
+  {
+    date: "2025-04-25",
     title: "Exclusive Equipment Data Complete",
     type: "update",
     content: `

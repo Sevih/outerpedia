@@ -36,14 +36,14 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
   const buffList = getEffects(normalizedBuffs, 'buff');
   const debuffList = getEffects(normalizedDebuffs, 'debuff');
 
-  const renderEffect = (effect: Effect) => {
-    const iconPath = `/images/ui/effect/${effect.icon}.png`
+  const renderEffect = (effect: Effect, idx: number) => {
+    const iconPath = `/images/ui/effect/${effect.icon}.webp`
     const baseColor = effect.type === 'buff' ? 'bg-[#1a69a7]' : 'bg-[#a72a27]'
     const showEffectColor = !effect.description.toLowerCase().includes('cannot be removed')
     const imageClass = showEffectColor ? effect.type : ''
   
     return (
-      <Tooltip.Provider delayDuration={1} key={`${effect.type}-${effect.name}`}>
+      <Tooltip.Provider delayDuration={1} skipDelayDuration={0} disableHoverableContent={false} key={`${effect.type}-${effect.name}-${idx}`}>
         <Tooltip.Root>
           <Tooltip.Trigger asChild>
             <div className={`flex items-center gap-1 ${baseColor} px-1 py-0.5 rounded text-xs cursor-help text-white`}>
@@ -89,8 +89,9 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
           </Tooltip.Portal>
         </Tooltip.Root>
       </Tooltip.Provider>
-    )  
+    )
   }
+  
 
   return (
     <div className="flex flex-wrap gap-1 mt-1">

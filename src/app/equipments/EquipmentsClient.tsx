@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState,useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import weapons from "@/data/weapon.json";
 import WeaponCard from "@/app/components/WeaponCard";
@@ -19,16 +19,16 @@ import eeData from "@/data/ee.json";
 
 export default function EquipmentsClient() {
   const tabList = [
-    { key: "weapon", label: "Weapons", icon: "weapon.png" },
-    { key: "accessory", label: "Accessories", icon: "accessory.png" },
-    { key: "armor", label: "Armor Set", icon: "armor.png" },
-    { key: "talisman", label: "Talismans", icon: "talisman.png" },
-    { key: "exclusive", label: "Exclusive", icon: "exclusive.png" }
+    { key: "weapon", label: "Weapons", icon: "weapon.webp" },
+    { key: "accessory", label: "Accessories", icon: "accessory.webp" },
+    { key: "armor", label: "Armor Set", icon: "armor.webp" },
+    { key: "talisman", label: "Talismans", icon: "talisman.webp" },
+    { key: "exclusive", label: "Exclusive", icon: "exclusive.webp" }
   ];
-  
+
   const [activeTabRef, setActiveTabRef] = useState<HTMLButtonElement | null>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     if (activeTabRef && indicatorRef.current) {
       const { offsetLeft, offsetWidth } = activeTabRef;
@@ -48,7 +48,7 @@ export default function EquipmentsClient() {
   const weaponClasses = Array.from(
     new Set(weapons.map(w => w.class).filter((cls): cls is string => cls !== null))
   );
-  
+
   const weaponBossesOrModes = Array.from(new Set(weapons.map(w => w.boss || w.mode).filter((v): v is string => Boolean(v))));
 
   const accessoryClasses = Array.from(new Set(accessories.map(a => a.class).filter(Boolean)));
@@ -73,12 +73,12 @@ export default function EquipmentsClient() {
   type BossEntry = {
     [bossName: string]: { id: string }[];
   };
-  
+
   type BossGroup = {
     [category: string]: BossEntry[];
   };
-  
-  
+
+
 
   const bossMap: Record<string, string> = {};
 
@@ -90,12 +90,12 @@ export default function EquipmentsClient() {
         Object.entries(entry).forEach(([name, data]) => {
           const id = data?.[0]?.id;
           if (id) {
-            bossMap[name] = `/images/characters/boss/mini/IG_Turn_${id}.png`;
+            bossMap[name] = `/images/characters/boss/mini/IG_Turn_${id}.webp`;
           }
         });
       });
     }
-  
+
     // Cas classiques : Irregular Extermination + Adventure License (image directe)
     ["Irregular Extermination", "Adventure License"].forEach(key => {
       const entries = group[key];
@@ -104,14 +104,14 @@ export default function EquipmentsClient() {
           Object.entries(entry).forEach(([name, data]) => {
             const fileName = data?.[0]?.id;
             if (fileName) {
-              bossMap[name] = `/images/characters/boss/mini/${fileName}.png`;
+              bossMap[name] = `/images/characters/boss/mini/${fileName}.webp`;
             }
           });
         });
       }
     });
   });
-  
+
 
   return (
     <main className="p-3">
@@ -126,12 +126,12 @@ export default function EquipmentsClient() {
     ...weapons.map(w => ({
       "@type": "CreativeWork",
       "name": w.name,
-      "image": `https://outerpedia.com/images/equipments/${w.image}`
+      "image": `https://outerpedia.com/images/equipment/${w.image}`
     })),
     ...accessories.map(a => ({
       "@type": "CreativeWork",
       "name": a.name,
-      "image": `https://outerpedia.com/images/equipments/${a.image}`
+      "image": `https://outerpedia.com/images/equipment/${a.image}`
     })),
     ...sets.map((s, i) => {
       const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
@@ -139,112 +139,113 @@ export default function EquipmentsClient() {
       return {
         "@type": "CreativeWork",
         "name": s.name,
-        "image": `https://outerpedia.com/images/equipments/TI_Equipment_${variant}_06.png`
+        "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.webp`
       };
     }),
     ...talismans.map(t => ({
       "@type": "CreativeWork",
       "name": t.name,
-      "image": `https://outerpedia.com/images/equipments/TI_Equipment_Talisman_${t.icon}.png`
+      "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.webp`
     })),
     ...Object.entries(eeData).map(([charKey, ee]) => ({
       "@type": "CreativeWork",
       "name": ee.name,
-      "image": `https://outerpedia.com/images/characters/${charKey}.png`
+      "image": `https://outerpedia.com/images/characters/ex/${charKey}.webp`
     }))
   ]
 })}
 </script>
-{process.env.NODE_ENV === "development" && (
-  <div className="fixed bottom-4 right-4 z-50">
-    <button
-      className="bg-cyan-600 text-white px-4 py-2 rounded shadow-lg hover:bg-cyan-700"
-      onClick={() => {
-        const data = {
-          "@context": "https://schema.org",
-          "@type": "VideoGame",
-          "name": "Outerplane",
-          "url": "https://outerpedia.com/",
-          "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse equipments, characters, sets and more.",
-          "hasPart": [
-            ...weapons.map(w => ({
-              "@type": "CreativeWork",
-              "name": w.name,
-              "image": `https://outerpedia.com/images/equipment/${w.image}`
-            })),
-            ...accessories.map(a => ({
-              "@type": "CreativeWork",
-              "name": a.name,
-              "image": `https://outerpedia.com/images/equipment/${a.image}`
-            })),
-            ...sets.map((s, i) => {
-              const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
-              const variant = variants[i % variants.length];
-              return {
-                "@type": "CreativeWork",
-                "name": s.name,
-                "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.png`
+
+      {process.env.NODE_ENV === "development" && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <button
+            className="bg-cyan-600 text-white px-4 py-2 rounded shadow-lg hover:bg-cyan-700"
+            onClick={() => {
+              const data = {
+                "@context": "https://schema.org",
+                "@type": "VideoGame",
+                "name": "Outerplane",
+                "url": "https://outerpedia.com/",
+                "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse equipments, characters, sets and more.",
+                "hasPart": [
+                  ...weapons.map(w => ({
+                    "@type": "CreativeWork",
+                    "name": w.name,
+                    "image": `https://outerpedia.com/images/equipment/${w.image}`
+                  })),
+                  ...accessories.map(a => ({
+                    "@type": "CreativeWork",
+                    "name": a.name,
+                    "image": `https://outerpedia.com/images/equipment/${a.image}`
+                  })),
+                  ...sets.map((s, i) => {
+                    const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
+                    const variant = variants[i % variants.length];
+                    return {
+                      "@type": "CreativeWork",
+                      "name": s.name,
+                      "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.webp`
+                    };
+                  }),
+                  ...talismans.map(t => ({
+                    "@type": "CreativeWork",
+                    "name": t.name,
+                    "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.webp`
+                  })),
+                  ...Object.entries(eeData).map(([charKey, ee]) => ({
+                    "@type": "CreativeWork",
+                    "name": ee.name,
+                    "image": `https://outerpedia.com/images/characters/ex/${charKey}.webp`,
+                    "url": `https://outerpedia.com/characters/${charKey}`
+                  }))
+                ]
               };
-            }),
-            ...talismans.map(t => ({
-              "@type": "CreativeWork",
-              "name": t.name,
-              "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.png`
-            })),
-            ...Object.entries(eeData).map(([charKey, ee]) => ({
-              "@type": "CreativeWork",
-              "name": ee.name,
-              "image": `https://outerpedia.com/images/characters/ex/${charKey}.png`,
-              "url": `https://outerpedia.com/characters/${charKey}`
-            }))            
-          ]
-        };
-        console.log("Generated JSON-LD:", data);
-        alert("JSON-LD logged in console ✅");
-      }}
-    >
-      Show JSON-LD
-    </button>
-  </div>
-)}
+              console.log("Generated JSON-LD:", data);
+              alert("JSON-LD logged in console ✅");
+            }}
+          >
+            Show JSON-LD
+          </button>
+        </div>
+      )}
 
 
-<div className="relative flex justify-center mb-6">
-  <div className="relative bg-gray-100 dark:bg-gray-800 rounded-full p-1 flex gap-1 min-w-[300px]">
-    {/* Barre animée */}
-    <div
-      ref={indicatorRef}
-      className="absolute top-1 left-0 h-[calc(100%-0.5rem)] bg-cyan-500 rounded-full transition-all duration-300 z-0"
-    ></div>
+      <div className="relative flex justify-center mb-6">
+        <div className="relative bg-gray-100 dark:bg-gray-800 rounded-full p-1 flex gap-1 min-w-[300px]">
+          {/* Barre animée */}
+          <div
+            ref={indicatorRef}
+            className="absolute top-1 left-0 h-[calc(100%-0.5rem)] bg-cyan-500 rounded-full transition-all duration-300 z-0"
+          ></div>
 
-    {tabList.map(({ key, label, icon }) => (
-      <button
-      key={key}
-      onClick={() => setTab(key as typeof tab)}
-      ref={el => {
-        if (tab === key) setActiveTabRef(el);
-      }}
-      className={`relative z-10 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors duration-300 ${
-        tab === key
-          ? "text-white"
-          : "text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700"
-      }`}
-    >
-      <Image
-        src={`/images/ui/nav/${icon}`}
-        alt={label}
-        width={18}
-        height={18}
-        style={{ width: 24, height: 24 }}
-        className="w-[18px] h-[18px]"
-        unoptimized
-      />
-      <span className="hidden md:inline">{label}</span>
-    </button>
-    
-    ))}
-  </div>
-</div>
+          {tabList.map(({ key, label, icon }) => (
+            <button
+              key={key}
+              onClick={() => setTab(key as typeof tab)}
+              ref={el => {
+                if (tab === key) setActiveTabRef(el);
+              }}
+              className={`relative z-10 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors duration-300 ${tab === key
+                ? "text-white"
+                : "text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700"
+                }`}
+            >
+              <div className="relative w-[24px] h-[24px]">
+                <Image
+                  src={`/images/ui/nav/${icon}`}
+                  alt={label}
+                  fill
+                  className="object-contain"
+                  sizes="24px"
+                />
+              </div>
+
+              <span className="hidden md:inline">{label}</span>
+            </button>
+
+          ))}
+        </div>
+      </div>
 
 
 
@@ -265,14 +266,16 @@ export default function EquipmentsClient() {
                   onClick={() => setWeaponClassFilter(cls)}
                   className={`border p-1 rounded ${weaponClassFilter === cls ? "bg-cyan-500" : "bg-transparent"}`}
                 >
-                  <Image
-                    src={`/images/ui/class/${cls.toLowerCase()}.png`}
-                    alt={cls}
-                    width={24}
-                    height={24}
-                    className="w-6 h-6"
-                    unoptimized
-                  />
+                  <div className="relative w-[24px] h-[24px]">
+                    <Image
+                      src={`/images/ui/class/${cls.toLowerCase()}.webp`}
+                      alt={cls}
+                      fill
+                      className="object-contain"
+                      sizes="24px"
+                    />
+                  </div>
+
                 </button>
               ))}
             </div>
@@ -292,14 +295,16 @@ export default function EquipmentsClient() {
                   title={src}
                 >
                   {bossMap[src] ? (
-                    <Image
-                      src={bossMap[src]}
-                      alt={src || "boss"}
-                      width={60}
-                      height={60}
-                      className="w-15 h-15"
-                      unoptimized
-                    />
+                    <div className="relative w-[60px] h-[60px]">
+                      <Image
+                        src={bossMap[src]}
+                        alt={src || "boss"}
+                        fill
+                        className="object-contain"
+                        sizes="60px"
+                      />
+                    </div>
+
                   ) : (
                     <span className="text-xs px-2 truncate max-w-[100px] inline-block">{src}</span>
                   )}
@@ -327,21 +332,23 @@ export default function EquipmentsClient() {
                 <span className={`px-2 text-sm font-semibold ${!accessoryClassFilter ? "text-white" : "text-black"}`}>All</span>
               </button>
               {accessoryClasses.filter((cls): cls is string => cls !== null).map((cls) => (
-                  <button
-                    key={cls}
-                    onClick={() => setAccessoryClassFilter(cls)}
-                    className={`border p-1 rounded ${accessoryClassFilter === cls ? "bg-cyan-500" : "bg-transparent"}`}
-                  >
+                <button
+                  key={cls}
+                  onClick={() => setAccessoryClassFilter(cls)}
+                  className={`border p-1 rounded ${accessoryClassFilter === cls ? "bg-cyan-500" : "bg-transparent"}`}
+                >
+
+                  <div className="relative w-[24px] h-[24px]">
                     <Image
-                      src={`/images/ui/class/${cls.toLowerCase()}.png`}
+                      src={`/images/ui/class/${cls.toLowerCase()}.webp`}
                       alt={cls}
-                      width={24}
-                      height={24}
-                      className="w-6 h-6"
-                      unoptimized
+                      fill
+                      className="object-contain"
+                      sizes="24px"
                     />
-                  </button>
-                ))}
+                  </div>
+                </button>
+              ))}
 
             </div>
 
@@ -360,14 +367,15 @@ export default function EquipmentsClient() {
                   title={src}
                 >
                   {bossMap[src] ? (
-                    <Image
-                      src={bossMap[src]}
-                      alt={src || "boss"}
-                      width={60}
-                      height={60}
-                      className="w-15 h-15"
-                      unoptimized
-                    />
+                    <div className="relative w-[60px] h-[60px]">
+                      <Image
+                        src={bossMap[src]}
+                        alt={src || "boss"}
+                        fill
+                        className="object-contain"
+                        sizes="60px"
+                      />
+                    </div>
                   ) : (
                     <span className="text-xs px-2 truncate max-w-[100px] inline-block">{src}</span>
                   )}
@@ -391,14 +399,15 @@ export default function EquipmentsClient() {
                     className={`border p-1 rounded ${accessoryMainStatFilter === stat ? "bg-cyan-500" : "bg-transparent hover:bg-gray-100"}`}
                     title={data?.label || stat}
                   >
-                    <Image
-                      src={`/images/ui/effect/${data?.icon || "CM_Stat_Icon_ATK.png"}`}
-                      alt={stat}
-                      width={24}
-                      height={24}
-                      className="w-6 h-6"
-                      unoptimized
-                    />
+                    <div className="relative w-[24px] h-[24px]">
+                      <Image
+                        src={`/images/ui/effect/${data?.icon || "CM_Stat_Icon_ATK.webp"}`}
+                        alt={stat}
+                        fill
+                        className="object-contain"
+                        sizes="24px"
+                      />
+                    </div>
                   </button>
                 );
               })}
@@ -413,56 +422,57 @@ export default function EquipmentsClient() {
         </>
       )}
 
-{tab === "armor" && (
-  <>
-    {/* Filtres boss/mode pour les armors */}
-    <div className="mb-4 flex flex-wrap justify-center gap-2">
-      <button
-        onClick={() => setArmorBossFilter(null)}
-        className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${armorBossFilter === null ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
-      >
-        All
-      </button>
-      {armorBossesOrModes.map((src) => (
-        <button
-          key={src}
-          onClick={() => setArmorBossFilter(src)}
-          className={`border rounded transition-colors duration-200 ${armorBossFilter === src ? "bg-cyan-500" : "bg-transparent hover:bg-gray-100"}`}
-          title={src}
-        >
-          {bossMap[src] ? (
-            <Image
-              src={bossMap[src]}
-              alt={src || "boss"}
-              width={60}
-              height={60}
-              className="w-15 h-15"
-              unoptimized
-            />
-          ) : (
-            <span className="text-xs px-2 truncate max-w-[100px] inline-block">{src}</span>
-          )}
-        </button>
-      ))}
-    </div>
+      {tab === "armor" && (
+        <>
+          {/* Filtres boss/mode pour les armors */}
+          <div className="mb-4 flex flex-wrap justify-center gap-2">
+            <button
+              onClick={() => setArmorBossFilter(null)}
+              className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${armorBossFilter === null ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
+            >
+              All
+            </button>
+            {armorBossesOrModes.map((src) => (
+              <button
+                key={src}
+                onClick={() => setArmorBossFilter(src)}
+                className={`border rounded transition-colors duration-200 ${armorBossFilter === src ? "bg-cyan-500" : "bg-transparent hover:bg-gray-100"}`}
+                title={src}
+              >
+                {bossMap[src] ? (
+                  <div className="relative w-[60px] h-[60px]">
+                    <Image
+                      src={bossMap[src]}
+                      alt={src || "boss"}
+                      fill
+                      className="object-contain"
+                      sizes="60px"
+                    />
+                  </div>
+                ) : (
+                  <span className="text-xs px-2 truncate max-w-[100px] inline-block">{src}</span>
+                )}
+              </button>
+            ))}
+          </div>
 
-    {/* Sets filtrés */}
-    <div className="flex flex-wrap gap-2 justify-center">
-      {sets
-        .filter(set => !armorBossFilter || (set.boss || set.mode) === armorBossFilter)
-        .map(set => (
-          <SetCard key={set.name} set={set} />
-        ))}
-    </div>
-  </>
-)}
-{tab === "talisman" && (
-  <TalismanGrid talismans={talismans} />
-)}
+          {/* Sets filtrés */}
+          <div className="flex flex-wrap gap-2 justify-center">
+            {sets
+              .filter(set => !armorBossFilter || (set.boss || set.mode) === armorBossFilter)
+              .map(set => (
+                <SetCard key={set.name} set={set} />
+              ))}
+          </div>
+        </>
+      )}
+      {tab === "talisman" && (
+        <TalismanGrid talismans={talismans} />
+      )}
 
-{tab === "exclusive" && (
-  <ExclusiveEquipmentList />
-)}
+      {tab === "exclusive" && (
+        <ExclusiveEquipmentList />
+      )}
 
 
 

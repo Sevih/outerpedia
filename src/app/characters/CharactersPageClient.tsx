@@ -26,7 +26,7 @@ function ElementIcon({ element }: { element: string }) {
   return (
     <div className="w-6 h-6 relative">
       <Image
-        src={`/images/ui/elem/${element.toLowerCase()}.png`}
+        src={`/images/ui/elem/${element.toLowerCase()}.webp`}
         alt={element}
         width={24}
         height={24}
@@ -40,7 +40,7 @@ function ElementIcon({ element }: { element: string }) {
 function ClassIcon({ className }: { className: string }) {
   return (
     <Image
-      src={`/images/ui/class/${className.toLowerCase()}.png`}
+      src={`/images/ui/class/${className.toLowerCase()}.webp`}
       alt={className}
       width={24}
       height={24}
@@ -189,7 +189,7 @@ export default function CharactersPage() {
               "@type": "VideoGameCharacter",
               "name": char.Fullname,
               "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
-              "image": `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.png`,
+              "image": `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.webp`,
               "position": index + 1,
             }))
           }
@@ -216,7 +216,7 @@ export default function CharactersPage() {
                   .map((_, i) => (
                     <Image
                       key={i}
-                      src="/images/ui/star.png"
+                      src="/images/ui/star.webp"
                       alt="star"
                       width={14}
                       height={14}
@@ -262,7 +262,7 @@ export default function CharactersPage() {
             >
               {cl.value ? (
                 <Image
-                  src={`/images/ui/class/${cl.value.toLowerCase()}.png`}
+                  src={`/images/ui/class/${cl.value.toLowerCase()}.webp`}
                   alt={cl.name}
                   width={24}
                   height={24}
@@ -351,7 +351,7 @@ export default function CharactersPage() {
           >
             <div className="relative w-[120px] h-[231px]">
               <Image
-                src={`/images/characters/portrait/CT_${char.ID}.png`}
+                src={`/images/characters/portrait/CT_${char.ID}.webp`}
                 alt={char.Fullname}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -362,7 +362,7 @@ export default function CharactersPage() {
                 {rarityToStars(char.Rarity).map((_, i) => (
                   <Image
                     key={i}
-                    src="/images/ui/star.png"
+                    src="/images/ui/star.webp"
                     alt="star"
                     width={20}
                     height={20}

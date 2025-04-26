@@ -9,14 +9,13 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
   return (
     <div
       onClick={() => setExpanded(!expanded)}
-      className={`relative bg-white/5 p-1 rounded-2xl shadow flex flex-col items-center text-center transition-all duration-300 ${
-        expanded ? "w-[180px]" : "w-[160px]"
-      } cursor-pointer`}
+      className={`relative bg-white/5 p-1 rounded-2xl shadow flex flex-col items-center text-center transition-all duration-300 ${expanded ? "w-[180px]" : "w-[160px]"
+        } cursor-pointer`}
     >
       {/* Image centrale */}
       <div className="relative w-[100px] h-[100px]">
         <Image
-          src="/images/ui/bg_item_leg.png"
+          src="/images/ui/bg_item_leg.webp"
           alt="background"
           fill
           sizes="100px"
@@ -27,12 +26,12 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
           alt={weapon.name}
           fill
           sizes="100px"
-          className="relative z-10 object-contain"          
+          className="relative z-10 object-contain"
         />
         {weapon.effect_icon && (
           <div className="absolute top-0 right-0 z-20 translate-x-1/3 -translate-y-1/3">
             <Image
-              src={`/images/ui/effect/TI_Icon_UO_Weapon_${weapon.effect_icon}.png`}
+              src={`/images/ui/effect/TI_Icon_UO_Weapon_${weapon.effect_icon}.webp`}
               alt="Effect"
               width={28}
               height={28}
@@ -43,12 +42,12 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
         {weapon.class && (
           <div className="absolute right-0 top-1/2 -translate-y-1/2 z-20 translate-x-1/3">
             <Image
-              src={`/images/ui/class/${weapon.class.toLowerCase()}.png`}
+              src={`/images/ui/class/${weapon.class.toLowerCase()}.webp`}
               alt="Class"
               width={24}
               height={24}
               style={{ width: 24, height: 24 }}
-              
+
             />
           </div>
         )}
@@ -56,28 +55,28 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
 
       {/* Nom de l’arme */}
       <h3 className="text-sm font-bold text-red-400 mt-2 leading-tight">
-  {weapon.name.includes("[") ? (
-    <>
-      {weapon.name.split("[")[0].trim()}
-      <br />
-      [{weapon.name.split("[")[1]}
-    </>
-  ) : (
-    weapon.name
-  )}
-</h3>
+        {weapon.name.includes("[") ? (
+          <>
+            {weapon.name.split("[")[0].trim()}
+            <br />
+            [{weapon.name.split("[")[1]}
+          </>
+        ) : (
+          weapon.name
+        )}
+      </h3>
 
       {/* Label effet */}
       <div className="inline-flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-full text-xs text-white font-medium mt-1">
         <div className="relative w-[16px] h-[16px]">
-                            <Image
-                              src={`/images/ui/effect/SC_Buff_Effect_Freeze.png`}
-                              alt={weapon.effect_name}
-                              fill
-                              className="object-contain"
-                              unoptimized
-                            />
-                          </div>
+          <Image
+            src={`/images/ui/effect/SC_Buff_Effect_Freeze.webp`}
+            alt={weapon.effect_name}
+            fill
+            className="object-contain"
+            sizes="16px"
+          />
+        </div>
         <span>{weapon.effect_name}</span>
       </div>
 

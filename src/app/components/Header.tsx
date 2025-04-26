@@ -19,7 +19,7 @@ export default function Header() {
       <nav className="container mx-auto flex items-center justify-between p-4 relative z-50">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-xl font-bold hover:text-cyan-300 transition text-white">
-          <Image src="/images/logo.png" alt="Outerpedia Logo" width={40} height={40} priority />
+          <Image src="/images/logo.webp" alt="Outerpedia Logo" width={40} height={40} priority />
           Outerpedia
         </Link>
 
@@ -52,16 +52,17 @@ export default function Header() {
               className="flex items-center gap-2 text-white hover:text-cyan-300 transition"
               onClick={() => setMenuOpen(false)}
             >
-              
+
               <div className="relative w-[18px] h-[18px]">
-                                          <Image
-                                            src={`/images/ui/nav/${item.icon}.png`}
-                                            alt={item.label}
-                                            fill
-                                            className="object-contain"
-                                            unoptimized
-                                          />
-                                        </div>
+                <Image
+                  src={`/images/ui/nav/${item.icon}.webp`}
+                  alt={item.label}
+                  fill
+                  className="object-contain"
+                  sizes="18px"
+
+                />
+              </div>
               <span>{item.label}</span>
             </Link>
           ))}
@@ -75,15 +76,15 @@ export default function Header() {
               href={item.href}
               className="flex items-center gap-2 hover:text-cyan-300 transition"
             >
-                      <div className="relative w-[18px] h-[18px]">
-                                          <Image
-                                            src={`/images/ui/nav/${item.icon}.png`}
-                                            alt={item.label}
-                                            fill
-                                            className="object-contain"
-                                            unoptimized
-                                          />
-                                        </div>
+              <div className="relative w-[18px] h-[18px]">
+                <Image
+                  src={`/images/ui/nav/${item.icon}.webp`}
+                  alt={item.label}
+                  fill
+                  className="object-contain"
+                  sizes="18px"
+                />
+              </div>
               <span>{item.label}</span>
             </Link>
           ))}

@@ -13,11 +13,11 @@ type Step = {
 };
 
 const starIcons = {
-  gray: "/images/ui/CM_icon_star_w.png",
-  yellow: "/images/ui/CM_icon_star_y.png",
-  orange: "/images/ui/CM_icon_star_o.png",
-  red: "/images/ui/CM_icon_star_r.png",
-  purple: "/images/ui/CM_icon_star_v.png",
+  gray: "/images/ui/CM_icon_star_w.webp",
+  yellow: "/images/ui/CM_icon_star_y.webp",
+  orange: "/images/ui/CM_icon_star_o.webp",
+  red: "/images/ui/CM_icon_star_r.webp",
+  purple: "/images/ui/CM_icon_star_v.webp",
 };
 
 const replaceablePatterns: RegExp[] = [
@@ -189,9 +189,9 @@ export default function TranscendenceSlider({ transcendData }: Props) {
             const value = match[1];
             return (
               <div key={idx} className="text-xs text-white flex items-center gap-1">
-                <Image src="/images/ui/effect/CM_Stat_Icon_ATK.png" alt="ATK" width={16} height={16} style={{ width: 16, height: 16 }} className="object-contain" />
-                <Image src="/images/ui/effect/CM_Stat_Icon_DEF.png" alt="DEF" width={16} height={16} style={{ width: 16, height: 16 }} className="object-contain" />
-                <Image src="/images/ui/effect/CM_Stat_Icon_HP.png" alt="HP" width={16} height={16} style={{ width: 16, height: 16 }} className="object-contain" />
+                <Image src="/images/ui/effect/CM_Stat_Icon_ATK.webp" alt="ATK" width={16} height={16} style={{ width: 16, height: 16 }} className="object-contain" />
+                <Image src="/images/ui/effect/CM_Stat_Icon_DEF.webp" alt="DEF" width={16} height={16} style={{ width: 16, height: 16 }} className="object-contain" />
+                <Image src="/images/ui/effect/CM_Stat_Icon_HP.webp" alt="HP" width={16} height={16} style={{ width: 16, height: 16 }} className="object-contain" />
                 <span className="ml-1">+{value}%</span>
               </div>
             );

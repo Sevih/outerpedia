@@ -32,30 +32,34 @@ const SetVisual = ({
       <div className="grid grid-cols-2 gap-0.5 p-1 rounded">
         {imageMap[part].map((piece) => (
           <div
-          key={piece}
-          className="relative w-[48px] h-[48px] rounded shadow-md"
-          style={{
-            backgroundImage: "url(/images/ui/bg_item_leg.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-        
-            <Image
-              src={`/images/equipment/TI_Equipment_${piece}_${image_prefix}.png`}
-              alt={piece}
-              fill
-              className="object-contain"
-              unoptimized
-            />
-            <Image
-              src={`/images/ui/effect/TI_Icon_Set_Enchant_${set_icon}.png`}
-              alt="Set Icon"
-              width={16}
-              height={16}
-              className="absolute top-0 right-0 z-10"
-              unoptimized
-            />
+            key={piece}
+            className="relative w-[48px] h-[48px] rounded shadow-md"
+            style={{
+              backgroundImage: "url(/images/ui/bg_item_leg.webp)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+
+            <div className="relative w-[48px] h-[48px]">
+              <Image
+                src={`/images/equipment/TI_Equipment_${piece}_${image_prefix}.webp`}
+                alt={piece}
+                fill
+                className="object-contain"
+                sizes="48px"
+              />
+            </div>
+
+            <div className="absolute top-0 right-0 z-10 w-[16px] h-[16px]">
+              <Image
+                src={`/images/ui/effect/TI_Icon_Set_Enchant_${set_icon}.webp`}
+                alt="Set Icon"
+                fill
+                className="object-contain"
+                sizes="16px"
+              />
+            </div>
           </div>
         ))}
       </div>

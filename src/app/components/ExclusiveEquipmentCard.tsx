@@ -44,91 +44,96 @@ export default function ExclusiveEquipmentList() {
         )}
         {filtered.map(([slug, data]: [string, EEEntry]) => (
           <Link
-          href={`/characters/${slug}`}
-          key={slug}
-          className="relative bg-white/5 p-4 rounded-2xl shadow flex flex-col items-center text-center gap-2 w-[260px] hover:bg-white/10 transition"
-        >
+            href={`/characters/${slug}`}
+            key={slug}
+            className="relative bg-white/5 p-4 rounded-2xl shadow flex flex-col items-center text-center gap-2 w-[260px] hover:bg-white/10 transition"
+          >
             {/* Image EE */}
             <div className="relative w-[80px] h-[80px]">
               <Image
-                src="/images/ui/bg_item_leg.png"
+                src="/images/ui/bg_item_leg.webp"
                 alt="background"
                 fill
                 sizes="80px"
                 className="absolute inset-0 z-0"
               />
-              <Image
-                src={`/images/characters/ex/${slug}.png`}
-                alt={data.name}
-                fill
-                className="relative z-10 object-contain"
-                unoptimized
-              />
-              <div className="absolute top-1.5 right-1.5 z-20 translate-x-1/4 -translate-y-1/4">
+              <div className="relative w-[80px] h-[80px]">
                 <Image
-                  src={`/images/ui/effect/CM_UO_EXCLUSIVE.png`}
+                  src={`/images/characters/ex/${slug}.webp`}
+                  alt={data.name}
+                  fill
+                  className="object-contain"
+                  sizes="80px"
+                />
+              </div>
+
+              <div className="absolute top-1.5 right-1.5 z-20 translate-x-1/4 -translate-y-1/4 w-[24px] h-[24px]">
+                <Image
+                  src={`/images/ui/effect/CM_UO_EXCLUSIVE.webp`}
                   alt="Effect"
-                  width={24}
-                  height={24}
-                  unoptimized
+                  fill
+                  className="object-contain"
+                  sizes="24px"
                 />
               </div>
             </div>
 
             <h3 className="text-red-400 text-base font-semibold leading-tight text-center">
-  {data.name}
-</h3>
+              {data.name}
+            </h3>
 
-<div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm text-white font-medium whitespace-nowrap mx-auto justify-center">
-  <Image
-    src={`/images/ui/effect/${data.icon_effect}.png`}
-    alt="icon"
-    width={18}
-    height={18}
-    className="w-4 h-4"
-    unoptimized
-  />
-  <span className="exclusive-equipment-text">
-  {slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}’s Exclusive Equipment
-</span>
-</div>
+            <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm text-white font-medium whitespace-nowrap mx-auto justify-center">
+              <div className="relative w-[18px] h-[18px]">
+                <Image
+                  src={`/images/ui/effect/${data.icon_effect}.webp`}
+                  alt="icon"
+                  fill
+                  className="object-contain"
+                  sizes="18px"
+                />
+              </div>
+              <span className="exclusive-equipment-text">
+                {slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}’s Exclusive Equipment
+              </span>
+            </div>
 
             {/* Main stat avec icônes */}
             <div className="text-white/80 text-sm italic mt-1 text-center">
-  <div className="flex items-center justify-center gap-1">
-    {(() => {
-      const [statPart] = data.mainStat.split("(To:");
-      const statKey = statPart.trim().split(" ")[0];
-      const stat = statKey.replace(/[^A-Z%]/gi, "");
-      const statInfo = statsData[stat as keyof typeof statsData];
-      const icon = stat && stat in statsData ? statInfo.icon : null;
-      const label = stat && stat in statsData ? statInfo.label : statPart.trim();
+              <div className="flex items-center justify-center gap-1">
+                {(() => {
+                  const [statPart] = data.mainStat.split("(To:");
+                  const statKey = statPart.trim().split(" ")[0];
+                  const stat = statKey.replace(/[^A-Z%]/gi, "");
+                  const statInfo = statsData[stat as keyof typeof statsData];
+                  const icon = stat && stat in statsData ? statInfo.icon : null;
+                  const label = stat && stat in statsData ? statInfo.label : statPart.trim();
 
-      return (
-        <>
-          {icon && (
-            <Image
-              src={`/images/ui/effect/${icon}`}
-              alt={stat}
-              width={16}
-              height={16}
-              className="inline-block"
-              unoptimized
-            />
-          )}
-          <span>{label}</span>
-        </>
-      );
-    })()}
-  </div>
+                  return (
+                    <>
+                      {icon && (
+                        <div className="relative w-[16px] h-[16px] inline-block">
+                          <Image
+                            src={`/images/ui/effect/${icon}`}
+                            alt={stat}
+                            fill
+                            className="object-contain"
+                            sizes="16px"
+                          />
+                        </div>
+                      )}
+                      <span>{label}</span>
+                    </>
+                  );
+                })()}
+              </div>
 
-  {/* Ligne (To: X) en dessous */}
-  {data.mainStat.includes("(To:") && (
-    <div className="text-white/50 text-xs mt-0.5">
-      {data.mainStat.match(/\(To: ([^)]+)\)/)?.[0]}
-    </div>
-  )}
-</div>
+              {/* Ligne (To: X) en dessous */}
+              {data.mainStat.includes("(To:") && (
+                <div className="text-white/50 text-xs mt-0.5">
+                  {data.mainStat.match(/\(To: ([^)]+)\)/)?.[0]}
+                </div>
+              )}
+            </div>
 
 
 

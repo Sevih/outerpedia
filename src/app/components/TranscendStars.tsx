@@ -4,11 +4,11 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 
 const starPaths: Record<string, string> = {
-  yellow: "/images/ui/CM_icon_star_y.png",
-  orange: "/images/ui/CM_icon_star_o.png",
-  red: "/images/ui/CM_icon_star_r.png",
-  purple: "/images/ui/CM_icon_star_v.png",
-  white: "/images/ui/CM_icon_star_w.png",
+  yellow: "/images/ui/CM_icon_star_y.webp",
+  orange: "/images/ui/CM_icon_star_o.webp",
+  red: "/images/ui/CM_icon_star_r.webp",
+  purple: "/images/ui/CM_icon_star_v.webp",
+  white: "/images/ui/CM_icon_star_w.webp",
 }
 
 export default function Star({

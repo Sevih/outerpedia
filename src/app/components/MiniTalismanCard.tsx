@@ -15,29 +15,33 @@ const MiniTalismanCard = ({ talisman }: { talisman: Talisman }) => {
       <div
         className="w-[48px] h-[48px] rounded shadow-md"
         style={{
-          backgroundImage: "url(/images/ui/bg_item_leg.png)",
+          backgroundImage: "url(/images/ui/bg_item_leg.webp)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <Image
-          src={`/images/equipment/TI_Equipment_Talisman_${talisman.icon}.png`}
-          alt={talisman.name}
-          width={48}
-          height={48}
-          className="w-full h-full object-contain"
-          unoptimized
-        />
+
+        <div className="relative [48px] h-[48px] ">
+          <Image
+            src={`/images/equipment/TI_Equipment_Talisman_${talisman.icon}.webp`}
+            alt={talisman.name}
+            fill
+            className="object-contain"
+            sizes="48px"
+          />
+        </div>
 
         {talisman.icon_effect && (
-          <Image
-            src={`/images/ui/effect/TI_Icon_UO_Talisman_${talisman.icon_item}.png`}
-            alt="Effect"
-            width={16}
-            height={16}
-            className="absolute top-1 right-1 z-10"
-            unoptimized
-          />
+
+          <div className="absolute top-1 right-1 z-10 w-[16px] h-[16px]">
+            <Image
+              src={`/images/ui/effect/TI_Icon_UO_Talisman_${talisman.icon_item}.webp`}
+              alt="Effect"
+              fill
+              className="object-contain"
+              sizes="16px"
+            />
+          </div>
         )}
       </div>
 

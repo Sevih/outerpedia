@@ -20,37 +20,42 @@ export default function SetCard({ set }: { set: ArmorSet }) {
   return (
     <div
       onClick={() => setExpanded(!expanded)}
-      className={`relative bg-white/5 p-1 rounded-2xl shadow flex flex-col items-center text-center transition-all duration-300 ${
-        expanded ? "w-[260px]" : "w-[220px]"
-      } cursor-pointer`}
+      className={`relative bg-white/5 p-1 rounded-2xl shadow flex flex-col items-center text-center transition-all duration-300 ${expanded ? "w-[260px]" : "w-[220px]"
+        } cursor-pointer`}
     >
       {/* Miniatures avec logo d’effet set */}
       <div className="grid grid-cols-2 gap-1">
         {parts.map((part, i) => (
           <div key={i} className="relative w-[80px] h-[80px]">
             <Image
-              src="/images/ui/bg_item_leg.png"
+              src="/images/ui/bg_item_leg.webp"
               alt="bg"
               fill
               className="absolute inset-0 z-0"
               sizes="80px"
             />
-            <Image
-              src={`/images/equipment/TI_Equipment_${part}_${set.image_prefix}.png`}
-              alt={part}
-              fill
-              className="relative z-10 object-contain"
-              unoptimized
-            />
+            <div className="relative w-[80px] h-[80px]">
+              <Image
+                src={`/images/equipment/TI_Equipment_${part}_${set.image_prefix}.webp`}
+                alt={part}
+                fill
+                className="relative z-10 object-contain"
+                sizes="80px"
+              />
+            </div>
+
             {/* Logo effet set */}
             <div className="absolute top-1.5 right-1.5 z-20 translate-x-1/4 -translate-y-1/4">
-              <Image
-                src={`/images/ui/effect/TI_Icon_Set_Enchant_${set.set_icon}.png`}
-                alt="Set Icon"
-                width={20}
-                height={20}
-                unoptimized
-              />
+              <div className="relative w-[20px] h-[20px]">
+                <Image
+                  src={`/images/ui/effect/TI_Icon_Set_Enchant_${set.set_icon}.webp`}
+                  alt="Set Icon"
+                  fill
+                  className="relative z-10 object-contain"
+                  sizes="20px"
+                />
+              </div>
+
             </div>
           </div>
         ))}
@@ -58,13 +63,13 @@ export default function SetCard({ set }: { set: ArmorSet }) {
 
       {/* Classe éventuelle */}
       {set.class && (
-        <div className="absolute top-0 left-0 z-20 -translate-x-1/3 -translate-y-1/3">
+        <div className="absolute top-0 left-0 z-20 -translate-x-1/3 -translate-y-1/3 w-[24px] h-[24px]">
           <Image
-            src={`/images/ui/class/${set.class.toLowerCase()}.png`}
+            src={`/images/ui/class/${set.class.toLowerCase()}.webp`}
             alt="Class"
-            width={24}
-            height={24}
-            unoptimized
+            fill
+            className="object-contain"
+            sizes="24px"
           />
         </div>
       )}

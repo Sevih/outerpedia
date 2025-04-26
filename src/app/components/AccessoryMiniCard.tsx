@@ -22,19 +22,21 @@ const amuletMiniCard = ({ amulet }: { amulet: AmuletMini }) => {
   const renderStatIcons = () => (
     <div className="flex items-center gap-1">
       {mainStats.map((stat, index) => {
-        const icon = stats[stat.trim()]?.icon ?? "stat/default.png"
+        const icon = stats[stat.trim()]?.icon ?? "stat/default.webp"
         return (
           <React.Fragment key={index}>
             {index > 0 && <span className="text-white">/</span>}
-            <Image
-              src={`/images/ui/effect/${icon}`}
-              alt={`${stat} Icon`}
-              width={14}
-              height={14}
-              style={{ width: 14, height: 14 }}
-              className="inline"
-              unoptimized
-            />
+
+            <div className="relative w-[14px] h-[14px]">
+              <Image
+                src={`/images/ui/effect/${icon}`}
+                alt={`${stat} Icon`}
+                fill
+                className="object-contain inline"
+                sizes="14px"
+              />
+            </div>
+
             <span>{stat.trim()}</span>
           </React.Fragment>
         )
@@ -49,40 +51,45 @@ const amuletMiniCard = ({ amulet }: { amulet: AmuletMini }) => {
         <div
           className="w-[48px] h-[48px] rounded shadow-md"
           style={{
-            backgroundImage: "url(/images/ui/bg_item_leg.png)",
+            backgroundImage: "url(/images/ui/bg_item_leg.webp)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <Image
-            src={`/images/equipment/${amulet.image}`}
-            alt={amulet.name}
-            width={48}
-            height={48}
-            className="w-full h-full object-contain"
-            unoptimized
-          />
+          <div className="relative w-[48px] h-[48px]">
+            <Image
+              src={`/images/equipment/${amulet.image}`}
+              alt={amulet.name}
+              fill
+              className="w-full h-full object-contain"
+              sizes="48px"
+            />
+          </div>
 
           {amulet.effect_icon && (
-            <Image
-              src={`/images/ui/effect/TI_Icon_UO_Accessary_${amulet.effect_icon}.png`}
-              alt="Effect"
-              width={16}
-              height={16}
-              className="absolute top-1 right-1 z-10"
-              unoptimized
-            />
+            <div className="absolute top-1 right-1 z-10 w-[16px] h-[16px]">
+              <Image
+                src={`/images/ui/effect/TI_Icon_UO_Accessary_${amulet.effect_icon}.webp`}
+                alt="Effect"
+                fill
+                className="object-contain"
+                sizes="16px"
+              />
+            </div>
           )}
 
           {amulet.class && (
-            <Image
-              src={`/images/ui/class/${amulet.class.toLowerCase()}.png`}
-              alt={amulet.class}
-              width={16}
-              height={16}
-              className="absolute bottom-1 right-1 z-10"
-              unoptimized
-            />
+            <div className="absolute bottom-1 right-1 z-10 w-[16px] h-[16px]">
+              <Image
+                src={`/images/ui/class/${amulet.class.toLowerCase()}.webp`}
+                alt={amulet.class}
+                fill
+                className="object-contain"
+                sizes="16px"
+              />
+            </div>
+
+
           )}
         </div>
 
@@ -93,7 +100,7 @@ const amuletMiniCard = ({ amulet }: { amulet: AmuletMini }) => {
 
             <div className="flex justify-between items-center gap-1 mt-1 mb-1">
               {renderStatIcons()}
-              
+
             </div>
 
             <p className="mt-1 text-gray-300">Apply 4 random substat(s)</p>
@@ -103,13 +110,14 @@ const amuletMiniCard = ({ amulet }: { amulet: AmuletMini }) => {
                 <div className="bg-gray-500/80 rounded-full px-3 py-1 flex items-center gap-2 w-full justify-center mb-1">
                   <div className="relative w-[14px] h-[14px]">
                     <Image
-                      src={`/images/ui/effect/SC_Buff_Effect_Freeze.png`}
+                      src={`/images/ui/effect/SC_Buff_Effect_Freeze.webp`}
                       alt={amulet.effect_name}
                       fill
                       className="object-contain"
-                      unoptimized
+                      sizes="14px"
                     />
                   </div>
+
                   <span>Lv. 5 {amulet.effect_name}</span>
                 </div>
               )}

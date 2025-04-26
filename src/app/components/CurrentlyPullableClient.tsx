@@ -30,7 +30,7 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
             <div className="bg-gray-800 hover:bg-gray-700 rounded-xl overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-105 w-[120px]">
               <div className="relative w-full h-48">
                 <Image
-                  src={`/images/characters/portrait/CT_${id}.png`}
+                  src={`/images/characters/portrait/CT_${id}.webp`}
                   alt={name}
                   fill
                   className="object-cover"
@@ -41,25 +41,25 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
               <div className="flex items-center justify-center gap-2 py-2 font-medium text-white">
                 <div className="relative w-[20px] h-[20px]">
                   <Image
-                    src={`/images/ui/elem/${element}.png`}
+                    src={`/images/ui/elem/${element}.webp`}
                     alt={element}
                     fill
+                    sizes="20px"
                     className="object-contain"
-                    unoptimized
                   />
                 </div>
-                
+
                 {/* Protection du nom */}
                 <div className="max-w-[60px] overflow-hidden text-ellipsis whitespace-nowrap text-sm text-center">
                   {name}
                 </div>
                 <div className="relative w-[20px] h-[20px]">
                   <Image
-                    src={`/images/ui/class/${charClass}.png`}
+                    src={`/images/ui/class/${charClass}.webp`}
                     alt={charClass}
                     fill
                     className="object-contain"
-                    unoptimized
+                    sizes="20px"
                   />
                 </div>
               </div>
@@ -73,17 +73,17 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
         {/* Carte spéciale Discord toujours présente */}
         <Link key="discord" href="https://discord.gg/keGhVQWsHv" target="_blank" rel="noopener noreferrer">
           <div className="flex flex-col items-center gap-2">
-            
+
             <div className="bg-[#5865F2] hover:bg-[#4752c4] transition-all duration-300 transform hover:scale-105 rounded-xl overflow-hidden shadow-md w-[120px] h-[260px] flex flex-col items-center p-2 group">
-            <div className="text-sm font-semibold text-white">Join Us!</div>
+              <div className="text-sm font-semibold text-white">Join Us!</div>
               <div className="relative w-full h-48 flex flex-col items-center justify-center">
-                <div className="relative">
+                <div className="relative w-[72px] h-[72px]">
                   <Image
-                    src="https://cdn.discordapp.com/icons/1264787916660670605/a_11616731e482ae93422c8761ab9a3169.gif"
+                    src="/images/discord_icon.webp"
                     alt="EvaMains Discord Icon"
-                    width={72}
-                    height={72}
-                    className="rounded-full shadow-md transition-all duration-300 group-hover:shadow-[0_0_10px_4px_rgba(255,255,255,0.5)]"
+                    fill
+                    className="object-contain rounded-full shadow-md transition-all duration-300 group-hover:shadow-[0_0_10px_4px_rgba(255,255,255,0.5)]"
+                    sizes="72px"
                     unoptimized
                   />
                 </div>

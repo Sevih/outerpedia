@@ -11,14 +11,13 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
   return (
     <div
       onClick={() => setExpanded(!expanded)}
-      className={`relative bg-white/5 p-1 rounded-2xl shadow flex flex-col items-center text-center transition-all duration-300 ${
-        expanded ? "w-[180px]" : "w-[160px]"
-      } cursor-pointer`}
+      className={`relative bg-white/5 p-1 rounded-2xl shadow flex flex-col items-center text-center transition-all duration-300 ${expanded ? "w-[180px]" : "w-[160px]"
+        } cursor-pointer`}
     >
       {/* Image centrale */}
       <div className="relative w-[100px] h-[100px]">
         <Image
-          src="/images/ui/bg_item_leg.png"
+          src="/images/ui/bg_item_leg.webp"
           alt="background"
           fill
           className="absolute inset-0 z-0"
@@ -34,7 +33,7 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
         {accessory.effect_icon && (
           <div className="absolute top-0 right-0 z-20 translate-x-1/3 -translate-y-1/3">
             <Image
-              src={`/images/ui/effect/TI_Icon_UO_Accessary_${accessory.effect_icon}.png`}
+              src={`/images/ui/effect/TI_Icon_UO_Accessary_${accessory.effect_icon}.webp`}
               alt="Effect"
               width={28}
               height={28}
@@ -45,7 +44,7 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
         {accessory.class && (
           <div className="absolute right-0 top-1/2 -translate-y-1/2 z-20 translate-x-1/3">
             <Image
-              src={`/images/ui/class/${accessory.class.toLowerCase()}.png`}
+              src={`/images/ui/class/${accessory.class.toLowerCase()}.webp`}
               alt="Class"
               width={24}
               height={24}
@@ -70,15 +69,15 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
 
       {/* Badge effet */}
       <div className="inline-flex items-center bg-white/10 px-1.5 py-1 rounded-full text-xs text-white mt-1 max-w-[180px] mx-auto whitespace-nowrap justify-center">
-<div className="relative w-[16px] h-[16px]">
-<Image
-  src={`/images/ui/effect/SC_Buff_Effect_Freeze.png`}
-  alt={accessory.effect_name}
-  fill
-  className="object-contain"
-  unoptimized
-/>
-</div>
+        <div className="relative w-[16px] h-[16px]">
+          <Image
+            src={`/images/ui/effect/SC_Buff_Effect_Freeze.webp`}
+            alt={accessory.effect_name}
+            fill
+            className="object-contain"
+            sizes="16px"
+          />
+        </div>
 
         <span>{accessory.effect_name}</span>
       </div>
@@ -91,8 +90,8 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
         <div className=" rounded-xl text-xs text-white/90 w-full flex flex-col gap-1">
           {/* Substats */}
           {accessory.mainStats && accessory.mainStats.length > 0 && (
-  <StatIconsRow statsList={accessory.mainStats} />
-)}
+            <StatIconsRow statsList={accessory.mainStats} />
+          )}
 
           {/* Effets */}
           <div>
