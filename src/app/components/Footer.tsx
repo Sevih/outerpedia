@@ -14,7 +14,7 @@ export default function Footer() {
           <Link href="https://discord.com/invite/outerplaneglobal" target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-1">
             <FaDiscord /> Outerplane Official Discord
           </Link>
-          <Link href="https://discord.com/invite/ESkqR8ta7y" target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-1">
+          <Link href="https://discord.gg/keGhVQWsHv" target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-1">
             <FaDiscord /> EvaMains Discord
           </Link>
           <Link href="/changelog" className="text-sm text-muted-foreground hover:underline">

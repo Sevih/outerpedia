@@ -8,7 +8,7 @@ export default function WarningBanner() {
         ⚠️ Character data has been parsed automatically using a custom tool. Errors may exist!
         If you spot something wrong, please report it via our{' '}
         <Link
-          href="https://discord.com/invite/ESkqR8ta7y"
+          href="https://discord.gg/keGhVQWsHv"
           target="_blank"
           className="underline font-semibold hover:text-yellow-200"
         >
