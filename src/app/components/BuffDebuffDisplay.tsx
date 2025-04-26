@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import * as HoverCard from '@radix-ui/react-hover-card'
+import { useState, useEffect } from 'react'
 import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
 
@@ -10,7 +11,7 @@ const effectsData: Effect[] = [
   ...debuffs.map((e) => ({ ...e, type: 'debuff' as const }))
 ]
 
-type BuffDebuffDisplayProps = {
+export type BuffDebuffDisplayProps = {
   buffs?: string[] | string;
   debuffs?: string[] | string;
 };
@@ -27,6 +28,15 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
   const normalizedBuffs = Array.isArray(buffs) ? buffs : buffs ? [buffs] : [];
   const normalizedDebuffs = Array.isArray(debuffs) ? debuffs : debuffs ? [debuffs] : [];
 
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    checkTouch();
+  }, []);
+
   const getEffects = (names: string[], type: 'buff' | 'debuff') =>
     names
       .map((name) => effectsData.find((e: Effect) => e.name === name && e.type === type))
@@ -40,11 +50,20 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
     const baseColor = effect.type === 'buff' ? 'bg-[#1a69a7]' : 'bg-[#a72a27]'
     const showEffectColor = !effect.description.toLowerCase().includes('cannot be removed')
     const imageClass = showEffectColor ? effect.type : ''
-
+  
     return (
-      <HoverCard.Root key={`${effect.type}-${effect.name}-${idx}`} openDelay={0} closeDelay={200}>
+      <HoverCard.Root key={`${effect.type}-${effect.name}-${idx}`} openDelay={isTouchDevice ? 0 : 0} closeDelay={isTouchDevice ? 0 : 0}>
         <HoverCard.Trigger asChild>
-          <div className={`flex items-center gap-1 ${baseColor} px-1 py-0.5 rounded text-xs cursor-help text-white`}>
+          <div
+            className={`flex items-center gap-1 ${baseColor} px-1 py-0.5 rounded text-xs cursor-pointer text-white`}
+            {...(isTouchDevice && {
+              onPointerDown: (e) => {
+                if (e.pointerType === 'touch') {
+                  e.stopPropagation();
+                }
+              }
+            })}
+          >
             <div className="bg-black p-0.5 rounded shrink-0">
               <Image
                 src={iconPath}
@@ -61,7 +80,7 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
             <span>{effect.label}</span>
           </div>
         </HoverCard.Trigger>
-
+  
         <HoverCard.Portal>
           <HoverCard.Content
             side="top"
@@ -88,7 +107,7 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
       </HoverCard.Root>
     )
   }
-
+  
   return (
     <div className="flex flex-wrap gap-1 mt-1">
       {buffList.map(renderEffect)}

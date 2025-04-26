@@ -19,7 +19,8 @@ import type { Character, Skill } from '@/types/character';
 import {CharacterNameDisplayBig} from '@/app/components/CharacterNameDisplay'
 
 import RecommendedGearTabs from '@/app/components/RecommendedGearTabs';
-import BuffDebuffDisplay from '@/app/components/BuffDebuffDisplay';
+import BuffDebuffDisplay from '@/app/components/BuffDebuffDisplayClient';
+
 import TranscendenceSlider from '@/app/components/TranscendenceSlider';
 import YoutubeEmbed from '@/app/components/YoutubeEmbed';
 import formatEffectText from '@/utils/formatText';
