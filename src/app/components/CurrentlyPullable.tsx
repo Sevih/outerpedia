@@ -14,9 +14,9 @@ function getEndDateAtUkReset(dateStr: string): string {
   return baseDate.toISOString()
 }
 
-// 👇 Voici ton composant exporté
 export default function CurrentlyPullable() {
   const characters = pullableCharacters.map(({ name, endDate }) => {
+
     const slug = toKebabCase(name)
     const filePath = path.resolve(process.cwd(), 'src/data/char', `${slug}.json`)
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'))
@@ -27,7 +27,8 @@ export default function CurrentlyPullable() {
       slug,
       endDate,
       element: data.Element.toLowerCase(),
-      class: data.Class.toLowerCase() // 👈 ajoute ça
+      class: data.Class.toLowerCase(),
+      special: false,
     }
   })
 

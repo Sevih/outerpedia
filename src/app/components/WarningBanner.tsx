@@ -15,16 +15,6 @@ export default function WarningBanner() {
           Discord
         </Link>.
       </div>
-      <div className="bg-yellow-400 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-400 mt-4">
-        ⚠️ All gear recommendations and tier lists (characters and exclusive equipment priority) come from the{' '}
-        <Link
-          href="https://discord.gg/6bNysAVY6e"
-          target="_blank"
-          className="underline font-semibold hover:text-yellow-200"
-        >
-          EvaMains Discord
-        </Link>. Consider joining if you have further questions.
-      </div>
     </>
   )
 }

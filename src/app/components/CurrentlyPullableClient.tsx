@@ -15,13 +15,16 @@ type Character = {
 
 export default function CurrentlyPullableClient({ characters }: { characters: Character[] }) {
   return (
-    <section className="flex flex-col items-end space-y-4">
-      <h2 className="text-2xl font-extrabold tracking-wide text-white relative">
+    <section className="flex flex-col items-center space-y-4">
+      {/* Titre centré */}
+      <h2 className="text-2xl font-extrabold tracking-wide text-white relative text-center">
         <span className="z-10 relative">Currently Pullable</span>
-        <span className="absolute left-0 -bottom-1 w-3/4 h-1 bg-cyan-600 opacity-70 rounded" />
+        <span className="absolute left-1/2 transform -translate-x-1/2 -bottom-1 w-3/4 h-1 bg-cyan-600 opacity-70 rounded" />
       </h2>
 
-      <div className="flex gap-10 justify-end">
+      {/* Cartes */}
+      <div className="flex gap-5 justify-center flex-wrap">
+        {/* Cartes personnages */}
         {characters.map(({ name, id, slug, endDate, element, class: charClass }) => (
           <Link key={name} href={`/characters/${slug}`}>
             <div className="bg-gray-800 hover:bg-gray-700 rounded-xl overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-105 w-[120px]">
@@ -44,7 +47,10 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
                   style={{ width: '20px', height: '20px', objectFit: 'contain' }}
                   unoptimized
                 />
-                <span>{name}</span>
+                {/* Protection du nom */}
+                <div className="max-w-[60px] overflow-hidden text-ellipsis whitespace-nowrap text-sm text-center">
+                  {name}
+                </div>
                 <Image
                   src={`/images/ui/class/${charClass}.png`}
                   alt={charClass}
@@ -60,6 +66,31 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
             </div>
           </Link>
         ))}
+
+        {/* Carte spéciale Discord toujours présente */}
+        <Link key="discord" href="https://discord.gg/keGhVQWsHv" target="_blank" rel="noopener noreferrer">
+          <div className="flex flex-col items-center gap-2">
+            
+            <div className="bg-[#5865F2] hover:bg-[#4752c4] transition-all duration-300 transform hover:scale-105 rounded-xl overflow-hidden shadow-md w-[120px] h-[260px] flex flex-col items-center p-2 group">
+            <div className="text-sm font-semibold text-white">Join Us!</div>
+              <div className="relative w-full h-48 flex flex-col items-center justify-center">
+                <div className="relative">
+                  <Image
+                    src="https://cdn.discordapp.com/icons/1264787916660670605/a_11616731e482ae93422c8761ab9a3169.gif"
+                    alt="EvaMains Discord Icon"
+                    width={72}
+                    height={72}
+                    className="rounded-full shadow-md transition-all duration-300 group-hover:shadow-[0_0_10px_4px_rgba(255,255,255,0.5)]"
+                    unoptimized
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col items-center justify-center py-2 font-bold text-white text-sm">
+                EvaMains <br /> Discord
+              </div>
+            </div>
+          </div>
+        </Link>
       </div>
     </section>
   )

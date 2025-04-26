@@ -1,25 +1,30 @@
-import './globals.css'; 
-import type { Metadata } from 'next'
-import Header from './components/Header'
-import Footer from "./components/Footer";
+import './globals.css';
+import type { Metadata, Viewport } from 'next';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import { Inter } from 'next/font/google';
+import UpdateToast from './components/UpdateToast';
 
-// 👇 Import de la police via next/font
-import { Inter } from 'next/font/google'
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export const metadata: Metadata = {
   title: 'Outerpedia',
   description: 'Outerplane Wiki & Guide',
-}
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/images/icons/icon-192x192.png',
+  },
+  manifest: '/manifest.json',
+};
+
+export const viewport: Viewport = {
+  themeColor: '#0891b2',
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -31,7 +36,8 @@ export default function RootLayout({
           </main>
           <Footer />
         </div>
+        <UpdateToast />
       </body>
     </html>
-  );  
+  );
 }
