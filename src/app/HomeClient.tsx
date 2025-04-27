@@ -16,11 +16,6 @@ export default function HomeClient() {
           "name": "Outerpedia",
           "url": "https://outerpedia.com",
           "description": "Outerpedia is a complete database for the mobile RPG Outerplane. Discover characters, gear builds, exclusive equipment, sets and more.",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://outerpedia.com/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
         })}
       </script>
 
