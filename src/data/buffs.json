@@ -24,6 +24,12 @@
 "icon": "SC_Buff_Stat_Avoid"
 },
 {
+    "name": "BT_STAT|ST_DEF",
+    "label": "Increased Defense",
+    "description": "Increased Defense by 50%.",
+    "icon": "CM_Stat_Icon_DEF"
+    },
+{
 "name": "BT_STAT|ST_ATK",
 "label": "Increased Attack",
 "description": "Increased Attack by 30%.",
@@ -101,6 +107,12 @@
 "description": "Trigger a basic attack from the ally with the highest Attack.",
 "icon": "SC_Buff_Effect_Dual_Attack"
 },
+{
+    "name": "BT_UNDEAD",
+    "label": "Immortality",
+    "description": "Health cannot be reduced below 1.",
+    "icon": "IG_Buff_Undead"
+    },
 {
 "name": "BT_REMOVE_DEBUFF",
 "label": "Debuff Removal",

@@ -28,7 +28,6 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
   const normalizedBuffs = Array.isArray(buffs) ? buffs : buffs ? [buffs] : [];
   const normalizedDebuffs = Array.isArray(debuffs) ? debuffs : debuffs ? [debuffs] : [];
 
-  const [openPopoverIndex, setOpenPopoverIndex] = useState<number | null>(null);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
@@ -48,29 +47,32 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
     const baseColor = effect.type === 'buff' ? 'bg-[#1a69a7]' : 'bg-[#a72a27]';
     const showEffectColor = !effect.description.toLowerCase().includes('cannot be removed');
     const imageClass = showEffectColor ? effect.type : '';
-
+  
+    const [open, setOpen] = useState(false);
+  
+    const handleOpenChange = (newOpen: boolean) => {
+      setOpen(newOpen);
+    };
+  
     return (
-      <Popover.Root key={`${effect.type}-${effect.name}-${idx}`} open={openPopoverIndex === idx} onOpenChange={(open) => {
-        if (!open) {
-          setOpenPopoverIndex(null);
-        }
-      }}>
+      <Popover.Root key={`${effect.type}-${effect.name}-${idx}`} open={open} onOpenChange={handleOpenChange}>
         <Popover.Trigger asChild>
-          <div
-            className={`flex items-center gap-1 ${baseColor} px-1 py-0.5 rounded text-xs cursor-pointer text-white`}
+          <button
+            type="button"
+            className={`flex items-center gap-1 ${baseColor} px-1 py-0.5 rounded text-xs cursor-pointer text-white focus:outline-none`}
             onClick={() => {
               if (isTouchDevice) {
-                setOpenPopoverIndex(openPopoverIndex === idx ? null : idx);
+                setOpen((prev) => !prev);
               }
             }}
             onMouseEnter={() => {
               if (!isTouchDevice) {
-                setOpenPopoverIndex(idx);
+                setOpen(true);
               }
             }}
             onMouseLeave={() => {
               if (!isTouchDevice) {
-                setOpenPopoverIndex(null);
+                setOpen(false);
               }
             }}
           >
@@ -88,15 +90,15 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
               />
             </div>
             <span>{effect.label}</span>
-          </div>
+          </button>
         </Popover.Trigger>
-
+  
         <Popover.Portal>
           <Popover.Content
             side="top"
             align="center"
             sideOffset={8}
-            className={`z-50 px-3 py-2 rounded shadow-lg max-w-[260px] flex items-start gap-2 ${baseColor}`}
+            className={`z-50 px-3 py-2 rounded shadow-lg max-w-[265px] flex items-start gap-2 ${baseColor} outline-none focus:outline-none`}
           >
             <div className="bg-black p-1 rounded shrink-0">
               <Image
@@ -112,12 +114,24 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
               <span className="font-bold text-white text-sm leading-tight">{effect.label}</span>
               <span className="text-white text-xs leading-snug whitespace-pre-line">{effect.description}</span>
             </div>
-            <Popover.Arrow className={effect.type === 'buff' ? 'fill-[#2196f3]' : 'fill-[#e53935]'} />
+            <Popover.Arrow
+  className={`w-3 h-2 ${
+    effect.type === 'buff'
+      ? 'fill-[#2196f3] stroke-none shadow-none'
+      : 'fill-[#e53935] stroke-none shadow-none'
+  }`}
+  style={{
+    boxShadow: 'none',
+    stroke: 'none'
+  }}
+/>
+
           </Popover.Content>
         </Popover.Portal>
       </Popover.Root>
     );
   };
+  
 
   return (
     <div className="flex flex-wrap gap-1 mt-1">

@@ -24,7 +24,11 @@
     ],
     "SubstatPrio": "ACC>EFF>SPD>ATK",
     "Note": "",
-    "Talisman": []
+    "Talisman": [
+      "Executionner's Charm",
+      "Sage's Charm"
+      
+    ]
   },
   "PvE": {
     "Weapon": [
@@ -55,6 +59,10 @@
     ],
     "SubstatPrio": "ACC>EFF>SPD>ATK",
     "Note": "",
-    "Talisman": []
+    "Talisman": [
+      "Executionner's Charm",
+      "Sage's Charm"
+      
+    ]
   }
 }

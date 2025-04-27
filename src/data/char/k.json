@@ -10,9 +10,9 @@
     "1": null,
     "2": "ATK DEF HP +5%",
     "3": "ATK DEF HP +10%",
-    "4": "ATK DEF HP +16%",
+    "4": "ATK DEF HP +16%\n+2% Evasion\n+1 Chain Passive Weakness Gauge damage",
     "5": "ATK DEF HP +22%",
-    "6": "ATK DEF HP +30%"
+    "6": "ATK DEF HP +30%\n+2% Evasion\n+25 Action Points at battle start"
   },
   "Chain_Type": "Finish",
   "skills": {

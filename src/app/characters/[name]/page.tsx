@@ -515,17 +515,17 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             <div
               className="absolute text-center text-[11px] leading-snug text-white drop-shadow-md"
               style={{
-                top: '135px',
-                left: '12.5px',
-                width: '160px',
-                height: '90px',
+                top: '125px',
+                left: '20.5px',
+                width: '139px',
+                height: '109px',
                 overflow: 'hidden',
                 display: '-webkit-box',
                 WebkitBoxOrient: 'vertical',
                 WebkitLineClamp: 3,
               }}
             >
-              <div className="flex items-center justify-center w-full h-full px-2 text-center">
+              <div className="flex items-center justify-center w-full h-full text-center">
                 {formatEffectText(burn.effect)}
               </div>
             </div>
