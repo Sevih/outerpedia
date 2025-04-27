@@ -18,10 +18,9 @@
       ]
     ],
     "SubstatPrio": "SPD>HP>DEF",
-    "Note": "PvP:Vanguard's Charm3\nPvE:Vanguard's Charm3Executionner's Charm3",
+    "Note": "PvP:Vanguard's Charm3\nPvE:Vanguard's Charm3Sage's Charm3",
     "Talisman": [
       "Vanguard's Charm",
-      "Executionner's Charm",
       "Sage's Charm"
     ]
   },
@@ -45,10 +44,9 @@
       ]
     ],
     "SubstatPrio": "SPD>HP>DEF",
-    "Note": "PvP:Vanguard's Charm3\nPvE:Vanguard's Charm3Executionner's Charm3",
+    "Note": "PvP:Vanguard's Charm3\nPvE:Vanguard's Charm3Sage's Charm3",
     "Talisman": [
       "Vanguard's Charm",
-      "Executionner's Charm",
       "Sage's Charm"
     ]
   }

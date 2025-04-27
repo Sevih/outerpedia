@@ -18,6 +18,12 @@
 "icon": "IG_Buff_Seal_Counter"
 },
 {
+    "name": "BT_SEAL_ADDITIVE_ATTACK",
+    "label": "Seal Extra Skill",
+    "description": "The target cannot activate extra skills.",
+    "icon": "IG_Buff_Effect_Seal_AddAttack"
+    },
+{
 "name": "BT_STAT|ST_ACCURACY",
 "label": "Reduced Accuracy",
 "description": "Reduces Accuracy by 50%",
@@ -138,16 +144,22 @@
 "icon": "SC_Buff_Dot_Curse"
 },
 {
-    "name": "BT_DOT_CURSE_IR",
-    "label": "Cursed",
-    "description": "Takes damage proportional to Health at the start of the turn.\nRemoved when the caster dies (Irremovable)",
-    "icon": "IG_Buff_Dot_Curse_Interruption_D"
-    },
+"name": "BT_DOT_CURSE_IR",
+"label": "Cursed",
+"description": "Takes damage proportional to Health at the start of the turn.\nRemoved when the caster dies (Irremovable)",
+"icon": "IG_Buff_Dot_Curse_Interruption_D"
+},
 {
 "name": "BT_DOT_BLEED",
 "label": "Bleeding",
 "description": "Reduces healing received. \nTakes damage proportional to the caster's Attack at the start of the turn.\nRemoved when the caster dies.",
 "icon": "CM_Stat_Icon_VAMPIRIC"
+},
+{
+"name": "BT_DOT_POISON",
+"label": "Poisoned",
+"description": "Reduces all Priority increases by 20%. Takes damage proportional to the caster's Attack at the start of a turn.\nRemoved when the caster dies",
+"icon": "SC_Buff_Dot_Poison"
 },
 {
 "name": "BT_FIXED_DAMAGE",
@@ -157,12 +169,12 @@
 }
 ,
 {
-    "name": "BT_STATBUFF_CONVERT_TO_STATDEBUFF",
-    "label": "Buff Reversal",
-    "description": "Increased stat effect granted to the target become reduced stat effect.\n\nIncreased stat effects :\nAttack, Defense, Speed, Critical Hit Chance, Critical Damage, Accuracy, Evasion, Effectiveness, Resilience",
-    "icon": "IG_Buff_Effect_Remove_Buff"
-    }
-    ,
+"name": "BT_STATBUFF_CONVERT_TO_STATDEBUFF",
+"label": "Buff Reversal",
+"description": "Increased stat effect granted to the target become reduced stat effect.\n\nIncreased stat effects :\nAttack, Defense, Speed, Critical Hit Chance, Critical Damage, Accuracy, Evasion, Effectiveness, Resilience",
+"icon": "IG_Buff_Effect_Remove_Buff"
+}
+,
 {
 "name": "BT_COOL_CHARGE",
 "label": "Cooldown Increase",
@@ -195,11 +207,11 @@
 "icon": "SC_Buff_2100092"
 },
 {
-    "name": "BT_AP_CHARGE",
-    "label": "Charge AP",
-    "description": "Reduces enemy Action Points",
-    "icon": "SC_Buff_Effect_AP"
-    },
+"name": "BT_AP_CHARGE",
+"label": "Charge AP",
+"description": "Reduces enemy Action Points",
+"icon": "SC_Buff_Effect_AP"
+},
 {
 "name": "UNIQUE_MARTYRDOM",
 "label": "Martyrdom",

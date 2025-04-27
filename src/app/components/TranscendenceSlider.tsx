@@ -21,11 +21,11 @@ const starIcons = {
 };
 
 const replaceablePatterns: RegExp[] = [
-  
+
 ];
 
 const cumulablePatterns: RegExp[] = [
-  
+
 ];
 
 const mergeablePatterns: { regex: RegExp; prefix: string; suffix: string }[] = [
@@ -102,6 +102,15 @@ export default function TranscendenceSlider({ transcendData }: Props) {
           bonusMap[label] = (bonusMap[label] || 0) + amount;
           continue;
         }
+
+        const matchFlat = trimmed.match(/^\+(\d+) (.+)$/);
+        if (matchFlat) {
+          const amount = parseInt(matchFlat[1]);
+          const label = matchFlat[2];
+          bonusMap[label] = (bonusMap[label] || 0) + amount;
+          continue;
+        }
+
 
         let handled = false;
 

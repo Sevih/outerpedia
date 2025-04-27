@@ -3,7 +3,7 @@
     "Weapon": [
       {
         "name": "Emblem of Dominance",
-        "mainStat": "ATK%"
+        "mainStat": "HP%"
       }
     ],
     "Amulet": [
@@ -19,7 +19,7 @@
       ]
     ],
     "SubstatPrio": "SPD>HP>DEF>EVA=RES",
-    "Note": "PvP:Vanguard's Charm3\nPvE:Executionner's Charm3Sage's Charm2",
+    "Note": "",
     "Talisman": [
       "Vanguard's Charm",
       "Executionner's Charm",
@@ -30,7 +30,7 @@
     "Weapon": [
       {
         "name": "Emblem of Dominance",
-        "mainStat": "ATK%"
+        "mainStat": "HP%"
       }
     ],
     "Amulet": [
@@ -45,7 +45,7 @@
       ]
     ],
     "SubstatPrio": "SPD>HP>DEF>EVA=RES",
-    "Note": "PvP:Vanguard's Charm3\nPvE:Executionner's Charm3Sage's Charm2",
+    "Note": "",
     "Talisman": [
       "Vanguard's Charm",
       "Executionner's Charm",
