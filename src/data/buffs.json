@@ -18,6 +18,12 @@
         "icon": "criticalhitchance"
     },
     {
+        "name": "BT_STAT|ST_CRITICAL_DMG_RATE",
+        "label": "Increased Critical Damage",
+        "description": "Increased Critical Damage by 50%.",
+        "icon": "SC_Buff_Stat_CriDmgRate"
+    },
+    {
         "name": "BT_STAT|ST_AVOID",
         "label": "Increased Evasion",
         "description": "Increased Evasion by 50%.",

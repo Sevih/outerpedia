@@ -67,7 +67,7 @@
     },
     {
         "name": "BT_ACTION_GAUGE",
-        "label": "Reduces Priority of enemies",
+        "label": "Reduces Priority",
         "description": "Reduces enemie(s) priority",
         "icon": "SC_Buff_Effect_Increase_Priority"
     },
