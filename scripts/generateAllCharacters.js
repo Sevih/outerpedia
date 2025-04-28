@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
 const charactersDir = path.join(process.cwd(), 'src/data/char');
 const outputFile = path.join(process.cwd(), 'src/data/_allCharacters.json');
