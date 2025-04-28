@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Inventory.png',
+        url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png',
         width: 150,
         height: 150,
         alt: 'Outerpedia Tier List',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: 'summary',
     title: 'Outerplane Tier List – April 2025 | Outerpedia',
     description: 'Best Outerplane characters ranked – April 2025 update curated by EvaMains Discord.',
-    images: ['https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Inventory.png'],
+    images: ['https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png'],
   },
 }
 
