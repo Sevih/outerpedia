@@ -89,7 +89,7 @@ export async function generateMetadata(context: { params: Promise<{ name: string
         siteName: 'Outerpedia',
       },
       twitter: {
-        card: 'summary_large_image',
+        card: 'summary',
         title,
         description,
         images: [image],
