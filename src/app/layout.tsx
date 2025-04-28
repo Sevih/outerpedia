@@ -54,7 +54,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head suppressHydrationWarning />
+      <head suppressHydrationWarning>
+        <meta property="fb:app_id" content="0" />
+      </head>
       <body className={`${inter.className} text-white`}>
         <div className="flex flex-col min-h-screen">
           <Header />
@@ -68,3 +70,4 @@ export default function RootLayout({
     </html>
   );
 }
+
