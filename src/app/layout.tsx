@@ -9,15 +9,38 @@ const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 // SEO fallback (servira si aucune page ne définit son propre <head>)
 export const metadata: Metadata = {
-  title: 'Outerpedia',
-  description: 'Outerplane Wiki & Guide',
+  title: 'Outerpedia – Outerplane Wiki & Guide',
+  description: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
   icons: {
     icon: '/favicon.ico',
     apple: '/images/icons/icon-192x192.png',
     shortcut: '/images/icons/icon-512x512.png',
   },
   manifest: '/manifest.json',
+  openGraph: {
+    title: 'Outerpedia – Outerplane Wiki & Guide',
+    description: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
+    url: 'https://outerpedia.com/',
+    type: 'website',
+    siteName: 'Outerpedia',
+    images: [
+      {
+        url: 'https://outerpedia.com/images/ui/og_home.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Outerpedia Home Banner',
+      },
+    ],
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Outerpedia – Outerplane Wiki & Guide',
+    description: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
+    images: ['https://outerpedia.com/images/ui/og_home.jpg'],
+  },
 };
+
 
 // Mobile viewport + couleur de barre
 export const viewport: Viewport = {
