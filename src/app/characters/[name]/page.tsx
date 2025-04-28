@@ -133,7 +133,12 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
       const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
       const res = await fetch(`${baseUrl}/api/reco/${recoFile}`);
       if (res.ok) {
-        recoData = await res.json();
+        const data = await res.json();
+        if (data && data.status !== 'empty') {
+          recoData = data;
+        } else {
+          recoData = null;
+        }
       }
     } catch {
       recoData = null;
@@ -206,7 +211,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             </div>
             <div className="flex items-center gap-1">
               <Image src={`/images/ui/class/${character.Class.toLowerCase()}.webp`} alt={character.Class} width={24} height={24} style={{ width: 24, height: 24 }} />
-              <span className="text-base">{character.SubClass}</span>
+              <span className="text-base">{character.Class}</span>
             </div>
             <div className="flex items-center gap-1">
               <Image src={`/images/ui/class/${character.SubClass.toLowerCase()}.webp`} alt={character.SubClass} width={24} height={24} style={{ width: 24, height: 24 }} />
@@ -477,7 +482,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
   return (
     <div className="flex justify-center gap-6 items-center">
       {/* Colonne gauche : icône + nom du skill */}
-      <div className="flex flex-col items-center gap-2 relative w-12 h-12">
+      <div className="flex flex-col items-center gap-2 relative w-16 h-16">
   <Image
     src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
     alt={skillWithBurn.name}

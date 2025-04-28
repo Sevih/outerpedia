@@ -43,8 +43,8 @@ export default function Home() {
                 const iconMap: Record<string, string> = {
                   Characters: 'CM_Lobby_Button_Character.webp',
                   Equipments: 'CM_Lobby_Button_Inventory.webp',
-                  'Tier List': 'CM_Lobby_Button_Misson.webp',
-                  Guides: 'CM_Lobby_Button_Organization.webp',
+                  'Tier List': 'CM_Lobby_Button_Agit.webp',
+                  Guides: 'CM_Guild_Management.webp',
                 }
 
                 const icon = iconMap[cat.name] || ''

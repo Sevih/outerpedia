@@ -627,7 +627,7 @@
 "philia": {
   "name": "Lie Detector",
   "mainStat": "Effectiveness to Light",
-  "effect": "Shocked for 1 turn(s) (ignores the target's Resilience)",
+  "effect": "After using Out of My Way, inflicts Shocked for 1 turn(s) (ignores the target's Resilience)",
   "effect10": "After attacking, has a 30% chance to inflict Stunned on the target for 1 turn(s)",
   "icon_effect": "TI_Icon_UO_Accessary_07",
   "rank": "D"
@@ -663,6 +663,14 @@
   "effect10": "+30 Effectiveness",
   "icon_effect": "TI_Icon_UO_Accessary_07",
   "rank": "B"
+},
+"rin": {
+  "name": "Automatic Bowgun",
+  "mainStat": "Accuracy to Fire",
+  "effect": "Increases damage dealt to Fire enemies by 50% (Does not have any effect on elemental advantage)",
+  "effect10": "Increases damage dealt to Boss by 50%",
+  "icon_effect": "TI_Icon_UO_Accessary_07",
+  "rank": "A"
 },
 "ritri": {
   "name": "Paw-er Smasher",

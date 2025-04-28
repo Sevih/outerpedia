@@ -20,9 +20,13 @@ export async function GET(req: NextRequest) {
       headers: { 'Content-Type': 'application/json' }
     })
   } catch {
-    return new Response(JSON.stringify({ error: 'Not found' }), {
-      status: 404,
-      headers: { 'Content-Type': 'application/json' }
-    })
+    // Répondre 200 avec un placeholder JSON au lieu de 404
+    return new Response(
+      JSON.stringify({ status: 'empty', message: 'No data available for this character.' }),
+      {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
   }
 }
