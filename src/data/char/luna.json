@@ -89,8 +89,7 @@
       "TargetTeamType": "TEAM",
       "buff": [
         "BT_REMOVE_DEBUFF",
-        "BT_SHIELD_BASED_CASTER",
-        "BT_ACTION_GAUGE"
+        "BT_SHIELD_BASED_CASTER"
       ],
       "cd": "3",
       "debuff": [],
@@ -189,5 +188,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank":"A"
 }
