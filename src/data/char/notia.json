@@ -3,6 +3,7 @@
   "Fullname": "Notia",
   "Rarity": 3,
   "Element": "Earth",
+  "role":"dps",
   "Class": "Ranger",
   "SubClass": "Vanguard",
   "transcend": {
@@ -189,5 +190,6 @@
       "wgr": 3,
       "wgr_dual": 1
     }
-  }
+  },
+  "rank":"A"
 }

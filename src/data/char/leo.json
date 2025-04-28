@@ -3,6 +3,7 @@
   "Fullname": "Leo",
   "Rarity": 3,
   "Element": "Light",
+  "role":"sustain",
   "Class": "Defender",
   "SubClass": "Phalanx",
   "transcend": {

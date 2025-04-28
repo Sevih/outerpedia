@@ -3,6 +3,7 @@
   "Fullname": "Nella",
   "Rarity": 3,
   "Element": "Dark",
+  "role":"sustain",
   "Class": "Healer",
   "SubClass": "Reliever",
   "transcend": {
@@ -182,5 +183,6 @@
       "wgr": 3,
       "wgr_dual": 1
     }
-  }
+  },
+  "rank":"A"
 }

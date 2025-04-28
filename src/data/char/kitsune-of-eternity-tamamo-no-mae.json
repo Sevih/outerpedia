@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Earth",
   "Class": "Mage",
+  "role":"dps",
   "SubClass": "Wizard",
   "transcend": {
     "1": null,

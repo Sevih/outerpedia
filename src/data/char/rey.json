@@ -3,6 +3,7 @@
   "Fullname": "Rey",
   "Rarity": 3,
   "Element": "Earth",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",
   "transcend": {

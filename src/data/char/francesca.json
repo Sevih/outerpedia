@@ -3,6 +3,7 @@
   "Fullname": "Francesca",
   "Rarity": 3,
   "Element": "Dark",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",
   "transcend": {

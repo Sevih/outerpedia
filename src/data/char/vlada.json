@@ -3,6 +3,7 @@
   "Fullname": "Vlada",
   "Rarity": 3,
   "Element": "Fire",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",
   "transcend": {

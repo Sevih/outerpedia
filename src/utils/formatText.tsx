@@ -11,11 +11,16 @@ export default function formatEffectText(text: string): React.ReactElement {
 }
 
 
-export function toKebabCase(str: string): string {
-  return str
+export function toKebabCase(input: unknown): string {
+  if (typeof input !== 'string') {
+    console.warn('toKebabCase: input not a string:', input);
+    return '';
+  }
+
+  return input
     .toLowerCase()
-    .normalize("NFD") // enlever accents
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
 }

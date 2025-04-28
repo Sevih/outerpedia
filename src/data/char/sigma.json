@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Dark",
   "Class": "Ranger",
+  "role":"support",
   "SubClass": "Vanguard",
   "transcend": {
     "1": null,

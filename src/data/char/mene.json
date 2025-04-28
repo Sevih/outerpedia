@@ -3,6 +3,7 @@
   "Fullname": "Mene",
   "Rarity": 3,
   "Element": "Water",
+  "role":"sustain",
   "Class": "Healer",
   "SubClass": "Sage",
   "transcend": {

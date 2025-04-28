@@ -341,7 +341,7 @@ export default function CharactersPage() {
           </div>
         </div>
       </div>
-
+            {/* Carte personnage*/}
       <div className="flex flex-wrap justify-center gap-6">
         {filteredCharacters.map((char, index) => (
           <Link

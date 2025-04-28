@@ -3,6 +3,7 @@
   "Fullname": "Demiurge Stella",
   "Rarity": 3,
   "Element": "Light",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser",
   "transcend": {

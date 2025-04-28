@@ -3,6 +3,7 @@
   "Fullname": "Sterope",
   "Rarity": 3,
   "Element": "Dark",
+  "role":"support",
   "Class": "Defender",
   "SubClass": "Sweeper",
   "transcend": {

@@ -3,6 +3,7 @@
   "Fullname": "Kanon",
   "Rarity": 3,
   "Element": "Fire",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser",
   "transcend": {

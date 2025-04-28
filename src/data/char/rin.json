@@ -3,6 +3,7 @@
   "Fullname": "Rin",
   "Rarity": 3,
   "Element": "Water",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",
   "transcend": {

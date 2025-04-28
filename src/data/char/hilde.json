@@ -3,6 +3,7 @@
   "Fullname": "Hilde",
   "Rarity": 3,
   "Element": "Dark",
+  "role":"sustain",
   "Class": "Defender",
   "SubClass": "Phalanx",
   "transcend": {
@@ -184,5 +185,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"s"
+  "rank":"S"
 }

@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "postbuild": "node scripts/generate-sitemap.cjs",
+    "build": "npm run generate:allchar && next build",
+    "postbuild": "npm run sitemap",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "node scripts/generate-sitemap.cjs",
-    "seo-check": "node scripts/seo-check.cjs"
+    "seo-check": "node scripts/seo-check.cjs",
+    "generate:allchar": "node scripts/generateAllCharacters.js"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",

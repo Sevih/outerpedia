@@ -3,6 +3,7 @@
   "Fullname": "Ember",
   "Rarity": 3,
   "Element": "Fire",
+  "role":"support",
   "Class": "Defender",
   "SubClass": "Sweeper",
   "transcend": {

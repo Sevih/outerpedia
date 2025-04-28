@@ -54,5 +54,6 @@ export interface ExclusiveEquipment {
     recommendedGearPVP?: RecommendedGearSet
     transcend?: Record<string, string | null>
     rank?: string
+    role?: string
   }
   

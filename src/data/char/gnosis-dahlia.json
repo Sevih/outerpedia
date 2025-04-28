@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Dark",
   "Class": "Striker",
+  "role":"dps",
   "SubClass": "Attacker",
   "transcend": {
     "1": null,

@@ -3,6 +3,7 @@
   "Fullname": "Monad Eva",
   "Rarity": 3,
   "Element": "Light",
+  "role":"sustain",
   "Class": "Healer",
   "SubClass": "Sage",
   "transcend": {

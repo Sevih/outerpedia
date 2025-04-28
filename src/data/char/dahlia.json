@@ -3,6 +3,7 @@
   "Fullname": "Dahlia",
   "Rarity": 3,
   "Element": "Water",
+  "role":"support",
   "Class": "Mage",
   "SubClass": "Enchanter",
   "transcend": {
@@ -191,5 +192,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank":"C"
 }

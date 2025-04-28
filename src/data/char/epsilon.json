@@ -3,6 +3,7 @@
   "Fullname": "Epsilon",
   "Rarity": 3,
   "Element": "Dark",
+  "role":"support",
   "Class": "Striker",
   "SubClass": "Bruiser",
   "transcend": {
@@ -186,5 +187,6 @@
       "wgr": 3,
       "wgr_dual": 1
     }
-  }
+  },
+  "rank":"B"
 }

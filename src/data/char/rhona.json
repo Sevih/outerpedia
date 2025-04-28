@@ -3,6 +3,7 @@
   "Fullname": "Rhona",
   "Rarity": 3,
   "Element": "Earth",
+  "role":"support",
   "Class": "Striker",
   "SubClass": "Bruiser",
   "transcend": {
@@ -181,5 +182,6 @@
       "wgr": 3,
       "wgr_dual": 1
     }
-  }
+  },
+  "rank":"C"
 }

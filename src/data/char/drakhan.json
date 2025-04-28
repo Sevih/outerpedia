@@ -3,6 +3,7 @@
   "Fullname": "Drakhan",
   "Rarity": 3,
   "Element": "Light",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",
   "transcend": {

@@ -3,6 +3,7 @@
   "Fullname": "Eternal",
   "Rarity": 3,
   "Element": "Fire",
+  "role":"support",
   "Class": "Mage",
   "SubClass": "Enchanter",
   "transcend": {

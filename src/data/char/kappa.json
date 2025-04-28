@@ -3,6 +3,7 @@
   "Fullname": "Kappa",
   "Rarity": 3,
   "Element": "Earth",
+  "role":"support",
   "Class": "Defender",
   "SubClass": "Sweeper",
   "transcend": {

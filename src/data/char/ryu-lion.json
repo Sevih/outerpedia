@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Earth",
   "Class": "Ranger",
+  "role":"dps",
   "SubClass": "Vanguard",
   "transcend": {
     "1": null,

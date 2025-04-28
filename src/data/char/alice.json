@@ -3,6 +3,7 @@
   "Fullname": "Alice",
   "Rarity": 3,
   "Element": "Earth",
+  "role":"support",
   "Class": "Mage",
   "SubClass": "Enchanter",
   "transcend": {

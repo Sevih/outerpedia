@@ -3,6 +3,7 @@
   "Fullname": "Mero",
   "Rarity": 3,
   "Element": "Fire",
+  "role":"support",
   "Class": "Ranger",
   "SubClass": "Tactician",
   "transcend": {

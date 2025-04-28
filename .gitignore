@@ -25,6 +25,10 @@
 /public/sitemap.xml
 TODO.md
 
+
+# Ignore auto-generated files
+
+
 # misc
 .DS_Store
 *.pem

@@ -3,6 +3,7 @@
   "Fullname": "Hanbyul Lee",
   "Rarity": 3,
   "Element": "Earth",
+  "role":"support",
   "Class": "Defender",
   "SubClass": "Phalanx",
   "transcend": {
@@ -187,5 +188,6 @@
       "wgr": 3,
       "wgr_dual": 1
     }
-  }
+  },
+  "rank":"C"
 }

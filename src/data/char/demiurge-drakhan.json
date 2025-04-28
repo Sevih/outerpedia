@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Light",
   "Class": "Defender",
+  "role":"sustain",
   "SubClass": "Sweeper",
   "transcend": {
     "1": null,
@@ -183,5 +184,6 @@
       "wgr": 3,
       "wgr_dual": 1
     }
-  }
+  },
+  "rank":"A"
 }

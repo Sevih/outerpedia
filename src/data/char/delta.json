@@ -3,6 +3,7 @@
   "Fullname": "Delta",
   "Rarity": 3,
   "Element": "Earth",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser",
   "transcend": {

@@ -3,6 +3,8 @@
   "Fullname": "Astei",
   "Rarity": 3,
   "Element": "Fire",
+  
+  "role":"sustain",
   "Class": "Healer",
   "SubClass": "Reliever",
   "transcend": {

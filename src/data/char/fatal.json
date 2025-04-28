@@ -3,6 +3,7 @@
   "Fullname": "Fatal",
   "Rarity": 3,
   "Element": "Water",
+  "role": "dps",
   "Class": "Ranger",
   "SubClass": "Vanguard",
   "transcend": {
@@ -189,5 +190,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"C"
+  "rank": "C"
 }

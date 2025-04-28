@@ -3,6 +3,7 @@
   "Fullname": "Dianne",
   "Rarity": 3,
   "Element": "Light",
+  "role":"sustain",
   "Class": "Healer",
   "SubClass": "Sage",
   "transcend": {

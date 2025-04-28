@@ -3,6 +3,7 @@
   "Fullname": "Edelweiss",
   "Rarity": 3,
   "Element": "Water",
+  "role":"sustain",
   "Class": "Ranger",
   "SubClass": "Tactician",
   "transcend": {

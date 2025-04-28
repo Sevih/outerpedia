@@ -3,6 +3,7 @@
   "Fullname": "Stella",
   "Rarity": 3,
   "Element": "Light",
+  "role":"support",
   "Class": "Ranger",
   "SubClass": "Vanguard",
   "transcend": {
