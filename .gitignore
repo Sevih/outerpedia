@@ -24,7 +24,8 @@
 /build
 /public/sitemap.xml
 TODO.md
-
+/src/data/_allCharacters.json
+convert_to_webp.bat
 
 # Ignore auto-generated files
 

@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
-import TierListPage from './tierlistClient'
-import characters from '@/data/_allCharacters.json' // fichier statique rassemblant tous les persos
+import TierListPage from '../tierlistClient'
+import characters from '@/data/_allCharacters.json'
 import type { Character } from '@/types/character'
+
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: 'Outerplane Tier List – April 2025 Update | Outerpedia',
@@ -32,6 +34,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function TierListPageWrapper() {
-  return <TierListPage characters={characters as Character[]} />
+export default async function TierListTabPage({ params }: { params: Promise<{ tab: string }> }) {
+  const { tab } = await params;
+  return <TierListPage characters={characters as Character[]} initialTab={tab} />
 }

@@ -11,6 +11,9 @@ const staticPages = [
   '/equipments',
   '/guides',
   '/tierlist',
+  '/tierlist/dps',
+  '/tierlist/support',
+  '/tierlist/sustain',
   '/changelog',
   '/about'
 ];

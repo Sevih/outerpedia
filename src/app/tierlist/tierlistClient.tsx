@@ -58,8 +58,10 @@ function ClassIcon({ className }: { className: string }) {
   )
 }
 
-export default function TierListPage({ characters }: { characters: Character[] }) {
-  const [activeTab, setActiveTab] = useState<TabValue>('dps')
+export default function TierListPage({ characters, initialTab }: { characters: Character[], initialTab?: string }) {
+  const [activeTab, setActiveTab] = useState<TabValue>(
+    (initialTab as TabValue) || 'dps'
+  );
   const [searchTerm, setSearchTerm] = useState('')
   const [indicatorRef, setIndicatorRef] = useState<HTMLDivElement | null>(null)
   const tabContainerRef = useRef<HTMLDivElement>(null)
@@ -98,7 +100,10 @@ export default function TierListPage({ characters }: { characters: Character[] }
 
   return (
     <div className="w-full max-w-screen-xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-8 text-center">Tier List</h1>
+      <h1 className="text-5xl font-extrabold text-center mb-8 bg-gradient-to-b from-yellow-300 via-orange-400 to-red-500 text-transparent bg-clip-text drop-shadow-md">
+        Tier List
+      </h1>
+
 
       {/* Barre de recherche */}
       <div className="flex justify-center mb-6">
@@ -142,9 +147,8 @@ export default function TierListPage({ characters }: { characters: Character[] }
                 backgroundColor: activeTab === tab.value ? tabColors[tab.value] : 'transparent',
                 transition: 'background-color 0.3s ease',
               }}
-              className={`relative z-10 w-[140px] justify-center px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${
-                activeTab === tab.value ? 'text-white' : 'text-gray-800'
-              }`}
+              className={`relative z-10 w-[140px] justify-center px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${activeTab === tab.value ? 'text-white' : 'text-gray-800'
+                }`}
             >
               <div className="relative w-[40px] h-[40px]">
                 <Image
@@ -171,55 +175,74 @@ export default function TierListPage({ characters }: { characters: Character[] }
           transition={{ duration: 0.3 }}
         >
           {RANK_ORDER.map(rank => {
-  const chars = currentRoleList[rank];
-  if (!chars || chars.length === 0) return null;
+            const chars = currentRoleList[rank];
+            if (!chars || chars.length === 0) return null;
 
-  return (
-    <div key={rank} className="mb-10">
-      <h2 className="text-2xl font-bold text-center mb-4">Rank {rank}</h2>
+            return (
+              <div key={rank} className="mb-10">
+                <div className="flex items-center justify-center">
+                  <div className="relative w-[100px] h-[80px]">
+                    <Image
+                      src={`/images/ui/text_rank_${rank}.png`}
+                      alt={`Rank ${rank}`}
+                      fill
+                      className="object-contain"
+                      sizes="100px"
+                    />
+                  </div>
+                  <div className={`relative w-[30px] h-[80px] ${rank === 'A' ? 'mb-1' : rank === 'D' ? 'mb-0' : ''}`}>
+                    <Image
+                      src={`/images/ui/IG_Event_Rank_${rank}.png`}
+                      alt={`Letter ${rank}`}
+                      fill
+                      className="object-contain"
+                      sizes="30px"
+                    />
+                  </div>
+                </div>
 
-      <div className="flex flex-wrap justify-center gap-6">
-        {chars.map((char,index) => (
-          <Link
-            key={char.ID}
-            href={`/characters/${toKebabCase(char.Fullname)}`}
-            className={`w-[120px] text-center shadow hover:shadow-lg transition relative overflow-hidden ${
-              char.Fullname.toLowerCase().includes(searchTerm.toLowerCase())
-                ? 'ring-2 ring-yellow-400'
-                : 'opacity-40'
-            }`}
-          >
-            <div className="relative w-[120px] h-[231px]">
-              <Image
-                src={`/images/characters/portrait/CT_${char.ID}.webp`}
-                alt={char.Fullname}
-                fill
-                sizes="120px"
-                className="object-cover"
-                priority={activeTab === 'dps' && index <= 7}
-              />
-              <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
-                {Array(char.Rarity).fill(0).map((_, i) => (
-                  <Image
-                    key={i}
-                    src="/images/ui/star.webp"
-                    alt="star"
-                    width={20}
-                    height={20}
-                    style={{ width: 20, height: 20 }}
-                  />
-                ))}
+
+                <div className="flex flex-wrap justify-center gap-6">
+                  {chars.map((char, index) => (
+                    <Link
+                      key={char.ID}
+                      href={`/characters/${toKebabCase(char.Fullname)}`}
+                      className={`w-[120px] text-center shadow hover:shadow-lg transition relative overflow-hidden ${char.Fullname.toLowerCase().includes(searchTerm.toLowerCase())
+                        ? 'ring-2 ring-yellow-400'
+                        : 'opacity-40'
+                        }`}
+                    >
+                      <div className="relative w-[120px] h-[231px]">
+                        <Image
+                          src={`/images/characters/portrait/CT_${char.ID}.webp`}
+                          alt={char.Fullname}
+                          fill
+                          sizes="120px"
+                          className="object-cover"
+                          priority={activeTab === 'dps' && index <= 7}
+                        />
+                        <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
+                          {Array(char.Rarity).fill(0).map((_, i) => (
+                            <Image
+                              key={i}
+                              src="/images/ui/star.webp"
+                              alt="star"
+                              width={20}
+                              height={20}
+                              style={{ width: 20, height: 20 }}
+                            />
+                          ))}
+                        </div>
+                        <ClassIcon className={char.Class} />
+                        <ElementIcon element={char.Element} />
+                        <CharacterNameDisplay fullname={char.Fullname} />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
-              <ClassIcon className={char.Class} />
-              <ElementIcon element={char.Element} />
-              <CharacterNameDisplay fullname={char.Fullname} />
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-})}
+            );
+          })}
 
         </motion.div>
       </AnimatePresence>

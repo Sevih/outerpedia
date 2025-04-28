@@ -76,17 +76,17 @@ export function CharacterNameDisplay({ fullname, layout = 'absolute' }: Props) {
 export function CharacterNameDisplayBig({ fullname }: Props) {
   const matchedPrefix = Object.keys(PREFIX_STYLES_BIG).find((prefix) =>
     fullname.startsWith(`${prefix} `)
-  )
-  let prefix = ''
-  let name = fullname
+  );
+  let prefix = '';
+  let name = fullname;
 
   if (matchedPrefix) {
-    prefix = matchedPrefix
-    name = fullname.replace(`${prefix} `, '')
+    prefix = matchedPrefix;
+    name = fullname.replace(`${prefix} `, '');
   }
 
-  const prefixSize = matchedPrefix ? PREFIX_STYLES_BIG[matchedPrefix] : ''
-  const nameSize = NAME_STYLES_BIG[name] || 'text-4xl'
+  const prefixSize = matchedPrefix ? PREFIX_STYLES_BIG[matchedPrefix] : '';
+  const nameSize = NAME_STYLES_BIG[name] || 'text-4xl';
 
   return (
     <div className="flex flex-col text-white leading-tight mb-2">
@@ -95,9 +95,10 @@ export function CharacterNameDisplayBig({ fullname }: Props) {
           {prefix}
         </div>
       )}
-      <div className={`${nameSize} font-bold custom-text-shadow`}>
+      {/* ICI on utilise un vrai h1 pour le nom principal */}
+      <h1 className={`${nameSize} font-bold custom-text-shadow`}>
         {name}
-      </div>
+      </h1>
     </div>
-  )
+  );
 }

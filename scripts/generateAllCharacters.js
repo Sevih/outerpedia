@@ -21,8 +21,8 @@ async function generateAllCharacters() {
           role: character.role,
           rank: character.rank,
           Class: character.Class,
+          SubClass: character.SubClass,
           Element: character.Element,
-          // tu peux ajouter d'autres champs utiles ici
         });
       }
     }

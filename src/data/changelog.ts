@@ -7,6 +7,37 @@ export type ChangelogEntry = {
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: "2025-04-28",
+    title: "Website Officially Release",
+    type: "update",
+    content: `
+  - 🎉 Outerpedia is now officially live!
+  - Includes **complete Tier List**, **full character database**, and **exclusive equipment** data.
+  - Optimized for **desktop and mobile** with full **PWA** support (installable as an app).
+  - Fast static generation with optimized SEO, structured data, and dynamic Open Graph images.
+  - Modern responsive UI powered by **Next.js 15** and **TailwindCSS**.
+  - Dynamic routing for character pages, tier list tabs, and equipment listings.
+  - Full CDN support for images (characters, equipment, icons) ensuring fast load times.
+  - Built-in changelog page and homepage recent updates feed to track improvements.
+  `
+  }  
+,  
+    {
+      date: "2025-04-28",
+      title: "All character data, Tier List & SEO Improvements",
+      type: "feature",
+      content: `
+  - Refactored Tier List page to support dynamic tabs (DPS, Support, Sustain) via URL routing (/tierlist/[tab]).
+  - Implemented static _allCharacters.json generated at each build to avoid API fetch in production.
+  - Improved Tier List SEO metadata dynamically per tab and globally.
+  - Added dynamic OpenGraph and Twitter Card images for all character pages based on character ID.
+  - Enhanced structured description on character pages combining element, class, and subclass information.
+  - Added dynamic meta keywords per character for better indexing.
+  - Improved SEO script (seo-check.cjs) to validate JSON integrity and image presence, executed only in development mode.
+  - Improved loading and priority hints for critical images (Tier List portraits, character icons).
+  `
+    },  
+  {
     date: "2025-04-26",
     title: "SEO, Mobile & PWA Improvements",
     type: "update",
