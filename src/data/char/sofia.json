@@ -66,7 +66,7 @@
       "SkipNameID": "SKILL_NAME_2000006_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_STAT|ST_SPEED"
+        "BT_STAT|ST_SPEED","BT_CALL_BACKUP"
       ],
       "burnEffect": {
         "SKT_BURST_1": {

@@ -100,7 +100,7 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000041_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_STAT|ST_AVOID"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,

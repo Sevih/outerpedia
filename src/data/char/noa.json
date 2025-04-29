@@ -162,7 +162,7 @@
       "description": [
         "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>[Buff_V_2000022_chain_1_1]</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: The damage increases proportional to the target's <color=#28d9ed>Max Health</color>."
       ],
-      "dual_buff": "BT_DMG_TARGET_STAT",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

@@ -89,7 +89,7 @@
       },
       "cd": "4",
       "debuff": [
-        "BT_STAT|ST_BUFF_RESIST"
+        "BT_STAT|ST_BUFF_RESIST","BT_STAT|ST_CRITICAL_RATE","BT_SEALED"
       ],
       "description": [
         "Attacks all enemies. After attacking, has a <color=#28d9ed>[Buff_C_2000064_2_1]</color> chance to increase the duration of debuffs on the enemy by <color=#28d9ed>[Buff_V_2000064_2_1] turn(s)</color>, then inflicts reduced <color=#28d9ed>Resilience</color> on targets without debuffs for <color=#28d9ed>[Buff_T_2000064_2_2] turn(s)</color>."

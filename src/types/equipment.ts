@@ -11,6 +11,8 @@ export type ExclusiveEquipment = {
   effect10?: string;
   icon_effect?: string;
   rank?: string;
+  buff?: string[];   // Liste des buffs apportés par l'EE
+  debuff?: string[]; // Liste des debuffs apportés par l'EE
 };
 
 

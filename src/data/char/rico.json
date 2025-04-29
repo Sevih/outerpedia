@@ -27,7 +27,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000046_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_STAT|ST_BUFF_CHANCE"],
       "cd": null,
       "debuff": ["BT_COOL_CHARGE"],
       "description": [
@@ -61,7 +61,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000046_Skill02",
       "TargetTeamType": "ME",
-      "buff": [
+      "buff": ["BT_STAT|ST_ACCURACY"
       ],
       "cd": "4",
       "debuff": [],

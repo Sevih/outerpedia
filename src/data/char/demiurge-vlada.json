@@ -50,7 +50,7 @@
         }
       },
       "cd": null,
-      "debuff": ["BT_COOL_CHARGE"],
+      "debuff": ["BT_COOL_CHARGE","BT_STAT|ST_DEF"],
       "description": [
         "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000075_1_1]</color> chance to increase the Ultimate Skill cooldowns of the target by <color=#28d9ed>1 turn</color>.\\nIncreases damage dealt to bosses."
       ],

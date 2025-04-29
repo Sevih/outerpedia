@@ -88,12 +88,12 @@
       "SkipNameID": "SKILL_NAME_2000079_Skill02",
       "TargetTeamType": "TEAM",
       "buff": [
-        "BT_SEAL_COUNTER",
-        "BT_STAT|ST_AVOID_SUBTRACT_CAP"
+        
       ],
       "cd": "9",
       "debuff": [
-        "BT_ACTION_GAUGE"
+        "BT_ACTION_GAUGE",
+        "BT_SEAL_COUNTER"
       ],
       "description": [
         "(Passive Effect) When attacking a target inflicted with a debuff, increases damage of all allies by <color=#28d9ed>[Buff_V_2000079_2_1]</color> (Max 5 stacks).\\n\\n(Triggered Effect) Upon death, immediately <color=#28d9ed>resurrects</color> with <color=#28d9ed>[Buff_V_2000079_2_2]</color> Health. Has a <color=#28d9ed>[Buff_C_2000079_2_3]</color> chance to reduce Priority of all enemies by <color=#28d9ed>[Buff_V_2000079_2_3]</color>. Right after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response."

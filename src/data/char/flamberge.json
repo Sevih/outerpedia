@@ -97,7 +97,7 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000050_Skill03",
       "TargetTeamType": "TEAM",
-      "buff": [],
+      "buff": ["BT_AP_CHARGE"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,

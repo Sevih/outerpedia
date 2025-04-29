@@ -122,7 +122,7 @@
       },
       "cd": "4",
       "debuff": [
-        "BT_SILENCE"
+        "BT_SILENCE","BT_REMOVE_BUFF"
       ],
       "description": [
         "Attacks all enemies and has a <color=#28d9ed>[Buff_C_2000013_3_1]</color> chance to inflict <color=#28d9ed>Silenced</color> on the target for <color=#28d9ed>[Buff_T_2000013_3_1] turn(s)</color>."

@@ -69,7 +69,7 @@
       "SkipNameID": "SKILL_NAME_2000074_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE"
+        "BT_ACTION_GAUGE","BT_AP_CHARGE","SYS_CONTINU_HEAL"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -89,7 +89,7 @@
         }
       },
       "cd": "5",
-      "debuff": [],
+      "debuff": ["BT_WG_DMG"],
       "description": [
         "Attacks all enemies, and recovers Health of all allies by <color=#28d9ed>[Buff_V_2000074_2_1]</color>. For each target damaged, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000074_2_3]</color>."
       ],

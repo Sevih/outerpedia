@@ -32,7 +32,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000057_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_STAT|ST_SPEED"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
@@ -51,7 +51,7 @@
         }
       },
       "cd": null,
-      "debuff": [],
+      "debuff": ["BT_WG_DMG"],
       "description": [
         "Attacks an enemy. If Sterope had a buff before attacking, activates an additional attack on the same target and grants <color=#28d9ed>Divine Retribution</color>.\\n\\n<color=#28d9ed>Divine Retribution</color>: Increases damage dealt by all allies by <color=#28d9ed>[Buff_V_2000057_1_2]</color>. (Max 15 stacks)"
       ],
@@ -121,7 +121,8 @@
       "TargetTeamType": "ME",
       "buff": [
         "BT_STAT|ST_ACCURACY",
-        "BT_STAT|ST_BUFF_CHANCE"
+        "BT_STAT|ST_BUFF_CHANCE",
+        "BT_COOL_CHARGE"
       ],
       "cd": "5",
       "debuff": [
@@ -163,7 +164,7 @@
       "description": [
         "<color=#ffd732>Chain Starter Effect</color>: After attacking, reduces the skill cooldowns of all allies by <color=#28d9ed>[Buff_V_2000057_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Health</color>."
       ],
-      "dual_buff": "BT_DMG_OWNER_STAT",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

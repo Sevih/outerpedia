@@ -84,7 +84,6 @@
       "SkipNameID": "SKILL_NAME_2000063_Skill02",
       "TargetTeamType": "ME",
       "buff": [
-        "BT_SHARE_DMG_MULTI",
         "BT_SHIELD_BASED_CASTER",
         "BT_STAT|ST_PIERCE_POWER_RATE",
         "BT_ADDITIVE_TURN"

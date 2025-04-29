@@ -162,7 +162,7 @@
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000016_chain_1_1]</color> chance to increase Defense for <color=#28d9ed>[Buff_T_2000016_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Defense</color>."
       ],
-      "dual_buff": "BT_DMG_OWNER_STAT",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

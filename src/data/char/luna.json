@@ -52,7 +52,7 @@
         }
       },
       "cd": null,
-      "debuff": [],
+      "debuff": ["BT_WG_DMG"],
       "description": [
         "Attacks an enemy, and if the caster has a Barrier, deals an Additional Attack.\\nAfter attacking, there is a <color=#28d9ed>[Buff_V_2000103_1_2]</color> chance to trigger a Dual Attack from the ally with the highest Attack. If an Additional Attack occurs, the Dual Attack chance increases by <color=#28d9ed>30%</color>."
       ],
@@ -89,7 +89,8 @@
       "TargetTeamType": "TEAM",
       "buff": [
         "BT_REMOVE_DEBUFF",
-        "BT_SHIELD_BASED_CASTER"
+        "BT_SHIELD_BASED_CASTER",
+        "BT_ACTION_GAUGE"
       ],
       "cd": "3",
       "debuff": [],

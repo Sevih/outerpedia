@@ -7,6 +7,8 @@ export interface ExclusiveEquipment {
     effect10?: string
     icon_effect: string // icône de l'effet, pas de l'équipement
     rank?: string
+    buff?: string[];   // Liste des buffs apportés par l'EE
+    debuff?: string[]; // Liste des debuffs apportés par l'EE
   }
   
   export interface Skill {

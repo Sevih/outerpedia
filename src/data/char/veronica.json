@@ -130,6 +130,7 @@
       ],
       "cd": "5",
       "debuff": [
+        "BT_REMOVE_BUFF"
       ],
       "description": [
         "Attacks all enemies and increases the <color=#28d9ed>Defense</color> of all allies for <color=#28d9ed>[Buff_T_2000037_3_1] turn(s)</color>."

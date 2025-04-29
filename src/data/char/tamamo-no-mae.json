@@ -86,8 +86,6 @@
       "SkipNameID": "SKILL_NAME_2000080_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "SYS_BUFF_COUNTER",
-        "BT_STAT|ST_AVOID_SUBTRACT_CAP"
       ],
       "cd": "3",
       "debuff": [

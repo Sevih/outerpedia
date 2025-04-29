@@ -64,7 +64,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000017_Skill02",
       "TargetTeamType": "ME",
-      "buff": ["SYS_CONTINU_HEAL"],
+      "buff": ["SYS_CONTINU_HEAL","BT_AP_CHARGE","BT_REMOVE_DEBUFF"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 120,

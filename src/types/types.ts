@@ -54,8 +54,7 @@ export type SubclassData = {
     Class: string
     SubClass:string
     Rarity: number
-    skills: {
-      [key: string]: SkillLite
-    }
+    buff: string[]
+    debuff: string[]
   }
   

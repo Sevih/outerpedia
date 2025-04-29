@@ -69,7 +69,7 @@
       "SkipNameID": "SKILL_NAME_2000023_Skill02",
       "TargetTeamType": "TEAM",
       "buff": [
-        "BT_AP_CHARGE"
+        "BT_AP_CHARGE","BT_REMOVE_DEBUFF","BT_REVIVAL"
       ],
       "burnEffect": {
         "SKT_BURST_1": {

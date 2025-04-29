@@ -50,7 +50,7 @@
         }
       },
       "cd": null,
-      "debuff": [],
+      "debuff": ["BT_STAT|ST_CRITICAL_DMG_RATE","BT_SEAL_COUNTER"],
       "description": [
         "Attacks 2 enemies. When an enemy is defeated, recovers Health of the caster by <color=#28d9ed>[Buff_V_2000089_1]</color>. This skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack."
       ],

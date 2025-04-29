@@ -71,7 +71,7 @@
       "SkipNameID": "SKILL_NAME_2000040_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_STAT|ST_VAMPIRIC"
+        "BT_STAT|ST_VAMPIRIC","BT_ACTION_GAUGE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -91,7 +91,7 @@
         }
       },
       "cd": "4",
-      "debuff": [],
+      "debuff": ["BT_STAT|ST_AVOID"],
       "description": [
         "(Passive Effect) When Mero's Health is healed, reduces the cooldown of <color=#28d9ed>Chainsaw Girl</color> by <color=#28d9ed>[Buff_V_2000040_2_1] turn(s)</color>. (Activated at the end of an ally's turn)\\n\\n(Active Effect) Attacks all enemies and grants <color=#28d9ed>Lifesteal</color> to all allies for <color=#28d9ed>[Buff_T_2000040_2_3] turn(s)</color>."
       ],

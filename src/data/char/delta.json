@@ -31,7 +31,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000099_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_REMOVE_DEBUFF"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
@@ -50,7 +50,7 @@
         }
       },
       "cd": null,
-      "debuff": [],
+      "debuff": ["BT_WG_DMG"],
       "description": [
         "Attacks an enemy. When the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
       ],

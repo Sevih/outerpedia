@@ -66,7 +66,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000001_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_CALL_BACKUP","BT_SHIELD_BASED_CASTER"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,

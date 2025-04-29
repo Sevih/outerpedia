@@ -158,7 +158,7 @@
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers the caster's Action Points by <color=#28d9ed>[Buff_V_2000045_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases if the caster has a <color=#28d9ed>barrier</color>."
       ],
-      "dual_buff": "DMG_IF_BARRER",
+      "dual_buff":"",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

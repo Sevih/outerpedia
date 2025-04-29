@@ -32,7 +32,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000059_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["UNIQUE_DOLL_GARDEN_CARETAKER"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -84,7 +84,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000059_Skill02",
       "TargetTeamType": "ME",
-      "buff": ["UNIQUE_DOLL_GARDEN_CARETAKER"],
+      "buff": ["UNIQUE_DOLL_GARDEN_CARETAKER","BT_ACTION_GAUGE"],
       "cd": "9",
       "debuff": ["UNIQUE_MARTYRDOM"],
       "description": [
@@ -158,7 +158,7 @@
       "TargetTeamType": "NONE",
       "buff": [],
       "cd": null,
-      "debuff": "IG_Buff_Effect_WG_Dmg",
+      "debuff": "BT_WG_DMG",
       "description": [
         "<color=#ffd732>Chain Starter Effect</color>: After attacking, deals <color=#28d9ed>[Buff_V_2000059_chain_1_1]</color> additional Weakness Gauge damage. \\n\\n<color=#ffd732>Dual Attack Effect</color>: Grants increased <color=#28d9ed>Speed</color> to the caster for <color=#28d9ed>[Buff_T_2000059_backup_1_1] turn</color>."
       ],

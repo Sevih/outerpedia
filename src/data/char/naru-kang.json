@@ -121,7 +121,7 @@
       "SkipNameID": "SKILL_NAME_2000024_Skill03",
       "TargetTeamType": "ME",
       "buff": [
-        "BT_INVINCIBLE"
+        "BT_INVINCIBLE","BT_IMMUNE"
       ],
       "cd": "7",
       "debuff": [],

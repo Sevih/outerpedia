@@ -27,7 +27,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000051_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_STAT|ST_BUFF_RESIST"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -158,7 +158,7 @@
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster by <color=#28d9ed>[Buff_V_2000051_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt is proportional to the caster's <color=#28d9ed>Health</color>."
       ],
-      "dual_buff": "BT_DMG_OWNER_STAT",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

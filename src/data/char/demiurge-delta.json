@@ -32,7 +32,7 @@
       "SkipNameID": "SKILL_NAME_2000100_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE"
+        "BT_ACTION_GAUGE","BT_REMOVE_DEBUFF","BT_STAT|ST_BUFF_RESIST","BT_AP_CHARGE","BT_COOL_CHARGE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -130,7 +130,6 @@
       ],
       "cd": "5",
       "debuff": [
-        "IG_Buff_Effect_2000100_Interruption"
       ],
       "description": [
         "Recovers Health of all allies by <color=#28d9ed>[Buff_V_2000100_3_1]</color> of Delta's Max Health, and grants <color=#28d9ed>Revival</color> for <color=#28d9ed>[Buff_T_2000100_3_2] turn(s)</color>. Then, grants <color=#28d9ed>Ether Boost</color> to the ally with the highest Attack for <color=#28d9ed>[Buff_T_2000100_3_3] turn(s)</color>. <color=#28d9ed>Ether Boost</COLOR> cannot be granted to Healers."
@@ -164,11 +163,11 @@
       "TargetTeamType": "NONE",
       "buff": [],
       "cd": null,
-      "debuff": "IG_Buff_Effect_WG_Dmg",
+      "debuff": "BT_WG_DMG",
       "description": [
         "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000100_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers Health of the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000100_backup_1_1]</color> of Delta's Max Health."
       ],
-      "dual_buff": "MY_TEAM_LOWEST_HP_RATE",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

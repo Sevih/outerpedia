@@ -98,7 +98,7 @@
       "SkipNameID": "SKILL_NAME_2000048_Skill03",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_SHIELD_BASED_CASTER"
+        "BT_SHIELD_BASED_CASTER","BT_ACTION_GAUGE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {

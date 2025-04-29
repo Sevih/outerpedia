@@ -69,7 +69,7 @@
       "SkipNameID": "SKILL_NAME_2000044_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_SHIELD_BASED_CASTER"
+        "BT_SHIELD_BASED_CASTER","BT_REMOVE_DEBUFF"
       ],
       "burnEffect": {
         "SKT_BURST_1": {

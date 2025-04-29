@@ -69,7 +69,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000043_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_STAT|ST_BUFF_CHANCE"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -90,7 +90,7 @@
       "cd": "4",
       "debuff": [
         "BT_REMOVE_BUFF",
-        "BT_STAT|ST_AVOID"
+        "BT_STAT|ST_AVOID","BT_STEAL_BUFF"
       ],
       "description": [
         "Attacks 2 enemies and has a <color=#28d9ed>[Buff_C_2000043_2_1]</color> chance to remove <color=#28d9ed>[Buff_V_2000043_2_1]</color> <color=#28d9ed>buff(s)</color> from the target. If the target is Earth element inflicts reduced <color=#28d9ed>Evasion</color> for <color=#28d9ed>[Buff_T_2000043_2_2] turn(s)</color>."

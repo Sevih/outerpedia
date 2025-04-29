@@ -69,16 +69,17 @@ export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: Buff
               align="center"
               className={`z-50 px-3 py-2 rounded shadow-lg max-w-[260px] flex items-start gap-2 ${baseColor}`}
             >
-              <div className="bg-black p-1 rounded shrink-0">
-                <Image
-                  src={iconPath}
-                  alt={effect.name}
-                  width={28}
-                  height={28}
-                  style={{ width: 28, height: 28 }}
-                  className={`object-fill ${imageClass}`}
-                />
-              </div>
+
+              <div className="relative w-[28px] h-[28px] bg-black p-1 rounded shrink-0">
+                    <Image
+                      src={iconPath}
+                      alt={effect.name}
+                      fill
+                      sizes="28px"
+                      className={`object-contain ${imageClass}`}
+                    />
+                  </div>
+
               <div className="flex flex-col">
                 <span className="font-bold text-white text-sm leading-tight">{effect.label}</span>
                 <span className="text-white text-xs leading-snug whitespace-pre-line">{effect.description}</span>

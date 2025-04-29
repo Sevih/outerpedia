@@ -86,13 +86,10 @@
       "SkipNameID": "SKILL_NAME_2000072_Skill02",
       "TargetTeamType": "TEAM",
       "buff": [
-        "SYS_BUFF_REVENGE_HEAL",
-        "BT_REMOVE_DEBUFF",
-        "BT_STAT|ST_AVOID_SUBTRACT_CAP"
+        "BT_REMOVE_DEBUFF"
       ],
       "cd": "4",
       "debuff": [
-        "IG_Buff_Effect_2000072_Interruption",
         "BT_SEALED_RECEIVE_HEAL"
       ],
       "description": [

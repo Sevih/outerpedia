@@ -32,7 +32,7 @@
       "SkipNameID": "SKILL_NAME_2000101_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_STAT|ST_ATK"
+        "BT_STAT|ST_ATK","BT_CALL_BACKUP"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -52,7 +52,7 @@
         }
       },
       "cd": null,
-      "debuff": [],
+      "debuff": ["BT_MARKING","BT_WG_DMG"],
       "description": [
         "Attacks an enemy. After attacking, has a <color=#28d9ed>[Buff_C_2000101_1_1]</color> chance to grant increased Attack to the ally with the highest Attack for <color=#28d9ed>[Buff_T_2000101_1_1] turn(s)</color>."
       ],

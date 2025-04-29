@@ -52,7 +52,7 @@
         }
       },
       "cd": null,
-      "debuff": [],
+      "debuff": ["BT_DOT_BURN"],
       "description": [
         "Attacks an enemy, and increases Priority of the caster by <color=#28d9ed>[Buff_V_2000081_1_1]</color>."
       ],

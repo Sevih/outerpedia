@@ -86,7 +86,7 @@
         }
       },
       "cd": "4",
-      "debuff": [],
+      "debuff": ["BT_WG_DMG"],
       "description": [
         "Attacks an enemy, and when it is the caster's turn, obtains <color=#28d9ed>[Buff_V_2000087_2_1]</color> <color=#28d9ed>Natural Talent (Unique Resource)</color>.\\n\\nThis skill ignores the Defense of <color=#28d9ed>Water</color> or <color=#28d9ed>Healer</color> enemies by <color=#28d9ed>30%</color>."
       ],

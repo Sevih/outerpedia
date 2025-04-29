@@ -1,10 +1,4 @@
 @import "tailwindcss";
-@font-face {
-    font-family: 'H2HDRM';
-    src: url('/fonts/H2HDRM.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
   
   /* Séparation du body et html pour éviter les blocages de couleurs */
   html {
@@ -16,7 +10,6 @@
   
   body {
     background-image: url('/images/background_compressed.webp');
-    font-family: 'H2HDRM', sans-serif;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

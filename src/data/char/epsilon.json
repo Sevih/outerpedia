@@ -89,7 +89,7 @@
       },
       "cd": "4",
       "debuff": [
-        "BT_AP_CHARGE"
+        "BT_AP_CHARGE","BT_REMOVE_BUFF"
       ],
       "description": [
         "Attacks all enemies and reduces the <color=#28d9ed>Action Points</color> of all enemies by <color=#28d9ed>20</color>.\\n\\nIf the target has a <color=#28d9ed>barrier</color>, damage dealt increases."

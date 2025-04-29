@@ -151,7 +151,7 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": "MY_TEAM_LOWEST_HP_RATE",
+      "buff": "",
       "cd": null,
       "debuff": [],
       "description": [

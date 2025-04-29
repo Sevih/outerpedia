@@ -71,7 +71,8 @@
       "TargetTeamType": "ME",
       "buff": [
         "BT_STAT|ST_DEF",
-        "BT_STAT|ST_COUNTER_RATE"
+        "BT_STAT|ST_COUNTER_RATE",
+        "BT_ADDITIVE_TURN"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -124,6 +125,7 @@
       "SkipNameID": "SKILL_NAME_2000021_Skill03",
       "TargetTeamType": "ENEMY",
       "buff": [
+        "BT_IMMUNE"
       ],
       "cd": "5",
       "debuff": [
@@ -168,7 +170,7 @@
       "description": [
         "<color=#ffd732>Chain Finish Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>[Buff_T_2000021_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Has a <color=#28d9ed>[Buff_C_2000021_backup_1_1]</color> chance to <color=#28d9ed>heal</color> the caster. The amount healed is proportional to the caster's Defense."
       ],
-      "dual_buff": "MY_TEAM_LOWEST_HP_RATE",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

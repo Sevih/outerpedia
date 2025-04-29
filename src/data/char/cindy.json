@@ -102,7 +102,7 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000031_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_STAT|ST_SPEED"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
@@ -160,7 +160,7 @@
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>[Buff_V_2000031_chain_1_1]</color> Action Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Speed</color>."
       ],
-      "dual_buff": "BT_DMG_OWNER_STAT",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

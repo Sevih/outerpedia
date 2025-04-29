@@ -66,7 +66,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000008_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["Heavy Strike"],
+      "buff": ["Heavy Strike","BT_STAT|ST_DEF"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -85,7 +85,7 @@
         }
       },
       "cd": "3",
-      "debuff": [],
+      "debuff": ["BT_WG_DMG","BT_STAT|ST_DEF"],
       "description": [
         "Attacks all enemies with Heavy Strike and recovers Health of the caster by <color=#28d9ed>[Buff_V_2000008_2_2]</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and additionally increases inversely proportional to the number of targets."
       ],

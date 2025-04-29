@@ -62,7 +62,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000026_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_CALL_BACKUP"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -152,13 +152,13 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": "SYS_BUFF_CHARGE_BP",
+      "buff": "BT_AP_CHARGE",
       "cd": null,
       "debuff": [],
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>[Buff_V_2000026_chain_1_1]</color> Action Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Health</color>."
       ],
-      "dual_buff": "BT_DMG_OWNER_STAT",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

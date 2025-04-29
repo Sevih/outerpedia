@@ -89,7 +89,9 @@
       "cd": "4",
       "debuff": [
         "BT_SEALED_IR",
-        "BT_COOL_CHARGE"
+        "BT_COOL_CHARGE",
+        "BT_STAT|ST_DEF",
+        "BT_STUN"
       ],
       "description": [
         "Attacks all enemies with <color=#28d9ed>Heavy Strike</color>. Has a <color=#28d9ed>[Buff_C_2000091_2_1]</color> chance to inflict irremovable <color=#28d9ed>Unbuffable</color> on all enemies for <color=#28d9ed>[Buff_T_2000091_2_1] turn(s)</color>, and a <color=#28d9ed>[Buff_C_2000091_2_2]</color> chance to increase <color=#28d9ed>skill cooldowns</color> of all targets by <color=#28d9ed>2 turns</color>. This skill's damage dealt increases proportional to Max Health instead of Attack."

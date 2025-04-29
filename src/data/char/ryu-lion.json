@@ -31,7 +31,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000097_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [
+      "buff": ["BT_ACTION_GAUGE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -51,7 +51,7 @@
         }
       },
       "cd": null,
-      "debuff": [],
+      "debuff": ["BT_SEALED"],
       "description": [
         "Attacks an enemy. After attacking, has a <color=#28d9ed>[Buff_C_2000097_1_4]</color> chance toÂ reduce cooldown of <color=#28d9ed>Luminous Wind</color> by <color=#28d9ed>1 turn</color>. When the target is a Boss or when the target is defeated, the effect chance is doubled. This skill ignores 30% of the target's Defense."
       ],

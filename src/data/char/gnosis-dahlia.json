@@ -33,7 +33,7 @@
       "SkipNameID": "SKILL_NAME_2000090_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE"
+        "BT_ACTION_GAUGE","BT_ADDITIVE_TURN"
       ],
       "burnEffect": {
         "SKT_BURST_1": {

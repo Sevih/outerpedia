@@ -31,7 +31,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000084_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_CALL_BACKUP"],
+      "buff": ["BT_CALL_BACKUP","BT_REMOVE_DEBUFF","BT_REVIVAL","BT_AP_CHARGE"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 70,
@@ -160,11 +160,11 @@
       "TargetTeamType_fallback1": "NONE",
       "buff": [],
       "cd": null,
-      "debuff": "IG_Buff_Effect_WG_Dmg",
+      "debuff": "BT_WG_DMG",
       "description": [
         "<color=#ffd732>Chain Starter Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000084_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers the <color=#28d9ed>Health</color> of the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000084_backup_1_1]</color> of Eva's Max Health."
       ],
-      "dual_buff": "MY_TEAM_LOWEST_HP_RATE",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

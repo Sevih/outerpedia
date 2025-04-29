@@ -84,7 +84,7 @@
       },
       "cd": "3",
       "debuff": [
-        "BT_STAT|ST_DEF"
+        "BT_STAT|ST_DEF","BT_DOT_CURSE"
       ],
       "description": [
         "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000014_2_1]</color> chance to reduce the target's <color=#28d9ed>Defense</color> for <color=#28d9ed>[Buff_T_2000014_2_1] turn(s)</color>."

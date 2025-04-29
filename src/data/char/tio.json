@@ -65,7 +65,6 @@
       "SkipNameID": "SKILL_NAME_2000036_Skill02",
       "TargetTeamType": "TEAM",
       "buff": [
-        "SYS_BUFF_REVENGE_HEAL",
         "BT_REMOVE_DEBUFF"
       ],
       "cd": "4",
@@ -104,7 +103,7 @@
       "SkipNameID": "SKILL_NAME_2000036_Skill03",
       "TargetTeamType": "TEAM",
       "buff": [
-        "BT_STAT|ST_DEF"
+        "BT_STAT|ST_DEF","BT_AP_CHARGE","BT_IMMUNE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -156,7 +155,7 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": "MY_TEAM_LOWEST_HP_RATE",
+      "buff": "",
       "cd": null,
       "debuff": [],
       "description": [

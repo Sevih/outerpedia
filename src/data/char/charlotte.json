@@ -31,7 +31,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000066_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,

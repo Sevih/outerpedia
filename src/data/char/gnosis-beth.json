@@ -31,7 +31,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000092_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_COOL_CHARGE"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
@@ -51,7 +51,7 @@
       },
       "cd": null,
       "debuff": [
-        "BT_DOT_ETERNAL_BLEED"
+        "BT_DOT_ETERNAL_BLEED","BT_DETONATE"
       ],
       "description": [
         "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000092_1_1]</color> chance to inflict <color=#28d9ed>Eternal Bleeding</color> on the target for <color=#28d9ed>[Buff_T_2000092_1_1] turn(s)</color>.\\nAfter attacking, if only one target survives, inflicts the same effect on the enemy again."

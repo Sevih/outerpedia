@@ -27,7 +27,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000038_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_AP_CHARGE"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 100,
@@ -150,13 +150,13 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": "MY_TEAM_LOWEST_HP_RATE",
+      "buff": "",
       "cd": null,
       "debuff": [],
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: After attacking, heals the ally with the lowest Health. The amount of healing is proportional to the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health. The amount of healing is proportional to the caster's Max Health."
       ],
-      "dual_buff": "MY_TEAM_LOWEST_HP_RATE",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

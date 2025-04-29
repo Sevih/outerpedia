@@ -78,6 +78,12 @@
         "icon": "SC_Buff_Dot_Burn"
     },
     {
+        "name": "BT_DOT_BURN_IR",
+        "label": "Burned",
+        "description": "Takes damage proportional to the caster's Attack at the start of the turn.\n Ignore Defense.\n Removed when the caster dies. (Cannot be removed)",
+        "icon": "IG_Buff_Dot_Burn_Interruption_D"
+    },
+    {
         "name": "BT_STAT|ST_AVOID",
         "label": "Reduced Evasion",
         "description": "Reduces Evasion by 50%",
@@ -96,13 +102,19 @@
         "icon": "SC_Buff_Stat_CriRate"
     },
     {
+        "name": "BT_STAT|ST_CRITICAL_DMG_RATE",
+        "label": "Reduced Critical Damage",
+        "description": "Reduces Critical Damage by 50%",
+        "icon": "SC_Buff_Stat_CriDmgRate"
+    },
+    {
         "name": "BT_STUN",
         "label": "Stunned",
         "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",
         "icon": "SC_Buff_Effect_Stun"
     },
     {
-        "name": "IG_Buff_Effect_WG_Dmg",
+        "name": "BT_WG_DMG",
         "label": "Weakness Guage Damage",
         "description": "Deal additional Weakness Gauge damage",
         "icon": "SC_Buff_Effect_WG_Dmg"
@@ -154,6 +166,12 @@
         "label": "Bleeding",
         "description": "Reduces healing received. \nTakes damage proportional to the caster's Attack at the start of the turn.\nRemoved when the caster dies.",
         "icon": "CM_Stat_Icon_VAMPIRIC"
+    },
+    {
+        "name": "BT_DOT_BLEED_IR",
+        "label": "Bleeding",
+        "description": "Reduces healing received. \nTakes damage proportional to the caster's Attack at the start of the turn.\nRemoved when the caster dies. (Irremovable)",
+        "icon": "IG_Buff_Dot_Bleed_Interruption_D"
     },
     {
         "name": "BT_DOT_POISON",
@@ -211,9 +229,9 @@
     },
     {
         "name": "BT_AP_CHARGE",
-        "label": "Charge AP",
+        "label": "Discharge AP",
         "description": "Reduces enemy Action Points",
-        "icon": "SC_Buff_Effect_AP"
+        "icon": "SC_Debuff_Effect_AP"
     },
     {
         "name": "UNIQUE_MARTYRDOM",

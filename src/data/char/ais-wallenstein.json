@@ -31,7 +31,7 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000096_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["UNIQUE_ARIEL","BT_ADDITIVE_TURN"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -84,7 +84,7 @@
       "SkipNameID": "SKILL_NAME_2000096_Skill02",
       "TargetTeamType": "NONE",
       "buff": [
-        "BT_ACTION_GAUGE"
+        
       ],
       "cd": 0,
       "debuff": [],

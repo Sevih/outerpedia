@@ -70,7 +70,9 @@
       "SkipNameID": "SKILL_NAME_2000060_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_STAT|ST_CRITICAL_RATE"
+        "BT_STAT|ST_CRITICAL_RATE",
+        "BT_STAT|ST_CRITICAL_DMG_RATE",
+        "BT_ADDITIVE_TURN"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -170,7 +172,7 @@
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000060_chain_1_1]</color> chance to inflict <color=#28d9ed>Marked</color> on the target for <color=#28d9ed>[Buff_T_2000060_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to the caster's <color=#28d9ed>Speed</color>."
       ],
-      "dual_buff": "BT_DMG_OWNER_STAT",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

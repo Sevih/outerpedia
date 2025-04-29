@@ -68,7 +68,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000069_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": [],
+      "buff": ["BT_UNDEAD","BT_STAT|ST_SPEED"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 100,
@@ -153,7 +153,7 @@
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals fixed damage equal to <color=#28d9ed>8%</color> of the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to reduce <color=#28d9ed>Priority</color> of the target by <color=#28d9ed>-200</color>. ",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals fixed damage equal to <color=#28d9ed>8%</color> of the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to reduce <color=#28d9ed>Priority</color> of the target by <color=#28d9ed>20%</color>. ",
       "DescID": "SKILL_DESC_2000069_Skill04_LV1,SKILL_DESC_2000069_Skill04_LV1,SKILL_DESC_2000069_Skill04_LV1,SKILL_DESC_2000069_Skill04_LV1,SKILL_DESC_2000069_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Dark_Finish",
       "NameIDSymbol": "6904",

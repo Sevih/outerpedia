@@ -68,7 +68,8 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000093_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_RANDOM_STAT"],
+      "buff": ["BT_RANDOM_STAT",
+      "BT_ADDITIVE_TURN","UNIQUE_GIFT_OF_BUFF","BT_STAT|ST_PIERCE_POWER_RATE"],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,

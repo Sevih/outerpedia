@@ -32,7 +32,7 @@
       "SkipNameID": "SKILL_NAME_2000056_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE"
+        "BT_ACTION_GAUGE","UNIQUE_FIERCE_OFFENSIVE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -52,7 +52,7 @@
         }
       },
       "cd": null,
-      "debuff": [],
+      "debuff": ["BT_DOT_POISON"],
       "description": [
         "Attacks an enemy and increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000056_1_1]</color>.\\nIf the caster has <color=#28d9ed>Fierce Offensive</color>, the effect is applied to <color=#28d9ed>all allies</color>."
       ],

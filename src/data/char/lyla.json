@@ -101,12 +101,12 @@
       "SkipNameID": "SKILL_NAME_2000047_Skill03",
       "TargetTeamType": "TEAM",
       "buff": [
-        "BT_STAT|ST_BUFF_RESIST","SYS_CONTINU_HEAL"
+        "BT_STAT|ST_BUFF_RESIST","SYS_CONTINU_HEAL","BT_ACTION_GAUGE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
-          "effect": "Adds a barrier (Proportional to targetâs Health)",
+          "effect": "Adds a barrier (Proportional to target's Health)",
           "level": 1
         },
         "SKT_BURST_2": {
@@ -158,7 +158,7 @@
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: After attacking, grants <color=#28d9ed>Sustained Recovery</color> to the ally with the lowest Health for <color=#28d9ed>[Buff_T_2000047_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health for <color=#28d9ed>[Buff_V_2000047_backup_1_1]</color> of Lylaâs Max Health."
       ],
-      "dual_buff": "MY_TEAM_LOWEST_HP_RATE",
+      "dual_buff": "",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

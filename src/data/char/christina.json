@@ -32,7 +32,7 @@
       "SkipNameID": "SKILL_NAME_2000061_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE"
+        "BT_ACTION_GAUGE","BT_STAT|ST_BUFF_CHANCE","BT_COOL_CHARGE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -53,7 +53,7 @@
       },
       "cd": null,
       "debuff": [
-        "BT_REMOVE_BUFF"
+        "BT_REMOVE_BUFF","BT_WG_DMG"
       ],
       "description": [
         "Attacks an enemy. After attacking, if the enemy has no <color=#28d9ed>buffs</color>, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000061_1_2]</color>. If the enemy has a <color=#28d9ed>buff</color>, has a <color=#28d9ed>[Buff_C_2000061_1_1]</color> chance to remove <color=#28d9ed>[Buff_V_2000061_1_1]</color> <color=#28d9ed>buff(s)</color> from the target."
@@ -89,7 +89,6 @@
       "SkipNameID": "SKILL_NAME_2000061_Skill02",
       "TargetTeamType": "TEAM",
       "buff": [
-        "SYS_BUFF_REVENGE_HEAL",
         "BT_STAT|ST_ATK",
         "BT_ACTION_GAUGE"
       ],

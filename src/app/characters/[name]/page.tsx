@@ -72,7 +72,7 @@ export async function generateMetadata(context: { params: Promise<{ name: string
       title,
       description,
       keywords: [
-        'Outerplane', 'Outerpedia', character.Fullname, 
+        'Outerplane', 'Outerpedia', character.Fullname,
         `${character.Fullname} Outerplane`, `${character.Fullname} Build`, `${character.Fullname} Guide`,
         `${character.Class} Class`, `${character.SubClass} Subclass`, `${character.Element} Element`
       ],
@@ -337,14 +337,24 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                             </span>
                           </div>
                         )}
+
                         <p>
                           <span className="font-semibold text-white">Effect:</span> {ee.effect}
                         </p>
+
                         {ee.effect10 && (
                           <p>
                             <span className="font-semibold text-white">[LV 10]:</span> {ee.effect10}
                           </p>
                         )}
+
+                        {/* Affichage des buffs/debuffs de l'EE */}
+                        {(ee.buff || ee.debuff) && (
+                          <div className="mt-2">
+                            <BuffDebuffDisplay buffs={ee.buff} debuffs={ee.debuff} />
+                          </div>
+                        )}
+
                       </div>
                     </div>
                   </div>
@@ -407,7 +417,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
 
 
           <div className="mt-6 px-4 py-2 bg-yellow-800/50 border-l-4 border-yellow-400 rounded text-yellow-300 text-sm italic">
-            Skills are displayed here with minimum enhancements applied.
+            Skills are displayed here with minimum enhancements applied. However, buffs and debuffs from Burst skills are still included in the display.
           </div>
 
 
@@ -418,7 +428,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                 <div key={index} className="p-4 rounded text-white">
                   {/* Header avec icône + nom + WGR + CD */}
                   <div className="flex items-start gap-2 mb-2">
-                    <div className="relative w-12 h-12">
+                    <div className="relative w-12 h-12 contents">
                       <Image
                         src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
                         alt={skill.name}

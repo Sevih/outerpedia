@@ -32,7 +32,8 @@
       "SkipNameID": "SKILL_NAME_2000088_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_CALL_BACKUP"
+        "BT_CALL_BACKUP",
+        "BT_STAT|ST_BUFF_CHANCE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
