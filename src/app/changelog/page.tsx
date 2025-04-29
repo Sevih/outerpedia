@@ -1,6 +1,6 @@
-import { changelog } from "@/data/changelog"
-import { Card, CardContent } from "@/app/components/ui/card"
-import { renderMarkdown } from "@/utils/markdown"
+import { changelog } from "@/data/changelog";
+import { Card, CardContent } from "@/app/components/ui/card";
+import { renderMarkdown } from "@/utils/markdown";
 
 export default function ChangelogPage() {
   return (
@@ -34,12 +34,12 @@ export default function ChangelogPage() {
               <h2 className="text-lg font-semibold text-white">{entry.title}</h2>
               <div
                 className="text-sm text-gray-400 markdown"
-                dangerouslySetInnerHTML={{ __html: renderMarkdown(entry.content) }}
+                dangerouslySetInnerHTML={{ __html: renderMarkdown(entry.content.join('\n')) }}
               />
             </CardContent>
           </Card>
         ))}
       </div>
     </div>
-  )
+  );
 }

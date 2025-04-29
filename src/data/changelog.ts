@@ -2,10 +2,37 @@ export type ChangelogEntry = {
   date: string;
   title: string;
   type: 'feature' | 'fix' | 'update' | 'balance';
-  content: string;
+  content: string[];
 };
 
-export const changelog: ChangelogEntry[] = [
+// Fonction de migration avec typage strict
+function migrateChangelogEntries(
+  entries: readonly {
+    date: string;
+    title: string;
+    type: 'feature' | 'fix' | 'update' | 'balance';
+    content: string | string[];
+  }[]
+): ChangelogEntry[] {
+  return entries.map(entry => ({
+    ...entry,
+    content: Array.isArray(entry.content)
+      ? entry.content
+      : entry.content.trim().split(/\r?\n/).map(line => line.trim()).filter(line => line.length > 0),
+  }));
+}
+
+// Ancienne version brute avec type explicite (const + types littéraux)
+export const oldChangelog = [
+  {
+    date: "2025-04-29",
+    title: "Filter debuff logic and 1-2 star tier list",
+    type: "feature",
+    content: `
+  - added 1 and 2 star heroes in tier list
+  - Add EE and Burst skill buff and debuff in logic when filtering heroes on https://outerpedia.com/characters page
+  `
+  },
   {
     date: "2025-04-28",
     title: "Website Officially Release",
@@ -20,13 +47,12 @@ export const changelog: ChangelogEntry[] = [
   - Full CDN support for images (characters, equipment, icons) ensuring fast load times.
   - Built-in changelog page and homepage recent updates feed to track improvements.
   `
-  }  
-,  
-    {
-      date: "2025-04-28",
-      title: "All character data, Tier List & SEO Improvements",
-      type: "feature",
-      content: `
+  },
+  {
+    date: "2025-04-28",
+    title: "All character data, Tier List & SEO Improvements",
+    type: "feature",
+    content: `
   - Refactored Tier List page to support dynamic tabs (DPS, Support, Sustain) via URL routing (/tierlist/[tab]).
   - Implemented static _allCharacters.json generated at each build to avoid API fetch in production.
   - Improved Tier List SEO metadata dynamically per tab and globally.
@@ -36,7 +62,7 @@ export const changelog: ChangelogEntry[] = [
   - Improved SEO script (seo-check.cjs) to validate JSON integrity and image presence, executed only in development mode.
   - Improved loading and priority hints for critical images (Tier List portraits, character icons).
   `
-    },  
+  },
   {
     date: "2025-04-26",
     title: "SEO, Mobile & PWA Improvements",
@@ -48,7 +74,7 @@ export const changelog: ChangelogEntry[] = [
   - Optimized mobile layouts for Home and Navigation.
   - Fixed structured data validation warnings (Search Console OK).
   `
-  },  
+  },
   {
     date: "2025-04-25",
     title: "Exclusive Equipment Data Complete",
@@ -67,37 +93,37 @@ export const changelog: ChangelogEntry[] = [
   - Resolved Search Console critical errors by switching to proper **VideoGame** schema.
   - Internal tools: added a **JSON-LD preview button** for development validation.
   `
-  },  
+  },
   {
     date: "2025-04-24",
     title: "Character Additions",
     type: "update",
     content: `
-    - Added character from Christina to Ember (39 / 101).
-    `
+  - Added character from Christina to Ember (39 / 101).
+  `
   },
   {
     date: "2025-04-24",
     title: "Character Additions & Burn Visuals",
     type: "feature",
     content: `
-    - Added **Charlotte**, **Caren**, and all characters from A to B to the character database.
-    - Added the skill icon (top-left corner) on burn cards to match in-game visuals.
-    - Fixed misalignment in **Luna** and **Hilde** awakening displays.
-    - Corrected **Charisma Bryn**'s skill placement.
-    - Added Open Graph metadata for the Equipment page and icons to the Characters list.
-    `
-  },  
+  - Added **Charlotte**, **Caren**, and all characters from A to B to the character database.
+  - Added the skill icon (top-left corner) on burn cards to match in-game visuals.
+  - Fixed misalignment in **Luna** and **Hilde** awakening displays.
+  - Corrected **Charisma Bryn**'s skill placement.
+  - Added Open Graph metadata for the Equipment page and icons to the Characters list.
+  `
+  },
   {
     date: "2025-04-23",
     title: "New Characters & Visual Enhancements",
     type: "feature",
     content: `
-    - Added **Luna**, **Hilde** and **Adelie** to the character database.
-    - Updated the homepage banner with a new visual and smooth CSS masking.
-    - Refined the style of the "Currently Pullable" section for a cleaner layout.
-    `
-  },  
+  - Added **Luna**, **Hilde** and **Adelie** to the character database.
+  - Updated the homepage banner with a new visual and smooth CSS masking.
+  - Refined the style of the "Currently Pullable" section for a cleaner layout.
+  `
+  },
   {
     date: "2025-04-22",
     title: "Cleanup & UI Polish for Changelog and Updates",
@@ -111,9 +137,9 @@ export const changelog: ChangelogEntry[] = [
   `
   },
   {
-    date: '2025-04-22',
-    title: 'Homepage & SEO improvements, gear note rework',
-    type: 'update',
+    date: "2025-04-22",
+    title: "Homepage & SEO improvements, gear note rework",
+    type: "update",
     content: `
   - Improved homepage SEO and added Open Graph banner for social previews.
   - Added JSON-LD metadata to character and equipment pages.
@@ -121,7 +147,7 @@ export const changelog: ChangelogEntry[] = [
   - Fixed issues with special characters in charm names.
   - Added sitemap, robots.txt, and SEO check scripts.
   `
-  },  
+  },
   {
     date: "2025-04-20",
     title: "Major Data Pipeline Update",
@@ -182,4 +208,12 @@ export const changelog: ChangelogEntry[] = [
     type: "feature",
     content: "Introduced visual cards for armor sets with hover effects and custom backgrounds."
   }
-];
+] as const satisfies readonly {
+  date: string;
+  title: string;
+  type: 'feature' | 'fix' | 'update' | 'balance';
+  content: string | string[];
+}[];
+
+// Changelog migré, typé, prêt à utiliser
+export const changelog: ChangelogEntry[] = migrateChangelogEntries(oldChangelog);

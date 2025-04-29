@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { changelog } from "@/data/changelog"
 import { renderMarkdown } from "@/utils/markdown"
 
-const recentChanges = changelog.slice(0, 10)
+const recentChanges = changelog.slice(0, 5)
 
 export default function HomeClient() {
   return (
@@ -18,7 +18,6 @@ export default function HomeClient() {
           "description": "Outerpedia is a complete database for the mobile RPG Outerplane. Discover characters, gear builds, exclusive equipment, sets and more.",
         })}
       </script>
-
 
       {/* SECTION RECENT UPDATES */}
       <section className="mt-12">
@@ -52,7 +51,7 @@ export default function HomeClient() {
               <div className="text-white font-semibold text-lg mb-1">{entry.title}</div>
               <div
                 className="text-sm text-gray-300 markdown leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: renderMarkdown(entry.content) }}
+                dangerouslySetInnerHTML={{ __html: renderMarkdown(entry.content.join('\n')) }}
               />
             </div>
           ))}
