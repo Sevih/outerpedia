@@ -181,25 +181,29 @@ export default function CharactersPage() {
   return (
     <div className="space-y-6">
       {/* JSON-LD SEO */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          "name": "Characters – Outerpedia",
-          "url": "https://outerpedia.com/characters",
-          "description": "Browse all characters in Outerplane with builds, skills, stats and exclusive equipment.",
-          "mainEntity": {
-            "@type": "ItemList",
-            "itemListElement": characters.map((char, index) => ({
-              "@type": "VideoGameCharacter",
-              "name": char.Fullname,
-              "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
-              "image": `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.webp`,
-              "position": index + 1,
-            }))
-          }
-        })}
-      </script>
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Characters – Outerpedia",
+      "url": "https://outerpedia.com/characters",
+      "description": "Browse all characters in Outerplane with builds, skills, stats and exclusive equipment.",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": characters.map((char, index) => ({
+          "@type": "VideoGameCharacter",
+          "name": char.Fullname,
+          "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
+          "image": `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.webp`,
+          "position": index + 1,
+        })),
+      },
+    }),
+  }}
+/>
+
 
       <h1 className="text-3xl font-bold">Characters</h1>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />

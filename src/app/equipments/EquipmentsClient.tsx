@@ -115,46 +115,50 @@ export default function EquipmentsClient() {
 
   return (
     <main className="p-3">
-      <script type="application/ld+json">
-{JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "VideoGame",
-  "name": "Outerplane",
-  "url": "https://outerpedia.com/",
-  "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse equipments, characters, sets and more.",
-  "hasPart": [
-    ...weapons.map(w => ({
-      "@type": "CreativeWork",
-      "name": w.name,
-      "image": `https://outerpedia.com/images/equipment/${w.image}`
-    })),
-    ...accessories.map(a => ({
-      "@type": "CreativeWork",
-      "name": a.name,
-      "image": `https://outerpedia.com/images/equipment/${a.image}`
-    })),
-    ...sets.map((s, i) => {
-      const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
-      const variant = variants[i % variants.length];
-      return {
-        "@type": "CreativeWork",
-        "name": s.name,
-        "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.webp`
-      };
-    }),
-    ...talismans.map(t => ({
-      "@type": "CreativeWork",
-      "name": t.name,
-      "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.webp`
-    })),
-    ...Object.entries(eeData).map(([charKey, ee]) => ({
-      "@type": "CreativeWork",
-      "name": ee.name,
-      "image": `https://outerpedia.com/images/characters/ex/${charKey}.webp`
-    }))
-  ]
-})}
-</script>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Outerplane",
+      "url": "https://outerpedia.com/",
+      "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse equipments, characters, sets and more.",
+      "hasPart": [
+        ...weapons.map(w => ({
+          "@type": "CreativeWork",
+          "name": w.name,
+          "image": `https://outerpedia.com/images/equipment/${w.image}`
+        })),
+        ...accessories.map(a => ({
+          "@type": "CreativeWork",
+          "name": a.name,
+          "image": `https://outerpedia.com/images/equipment/${a.image}`
+        })),
+        ...sets.map((s, i) => {
+          const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
+          const variant = variants[i % variants.length];
+          return {
+            "@type": "CreativeWork",
+            "name": s.name,
+            "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.webp`
+          };
+        }),
+        ...talismans.map(t => ({
+          "@type": "CreativeWork",
+          "name": t.name,
+          "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.webp`
+        })),
+        ...Object.entries(eeData).map(([charKey, ee]) => ({
+          "@type": "CreativeWork",
+          "name": ee.name,
+          "image": `https://outerpedia.com/images/characters/ex/${charKey}.webp`
+        }))
+      ]
+    })
+  }}
+/>
+
 
       {process.env.NODE_ENV === "development" && (
         <div className="fixed bottom-4 right-4 z-50">

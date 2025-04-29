@@ -38,23 +38,27 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main className="p-3">
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "VideoGame",
-          "name": "Outerplane",
-          "url": "https://outerpedia.com/",
-          "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse all characters, detailed stats, skills, gear recommendations and more.",
-          "character": (characters as Character[]).map((char) => ({
-            "@type": "VideoGameCharacter",
-            "name": char.Fullname,
-            "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
-            "image": `https://outerpedia.com/images/characters/full/IMG_${char.ID}.webp`,
-            "description": `Element: ${char.Element} | Class: ${char.Class} | Subclass: ${char.SubClass}`,
-          }))
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Outerplane",
+      "url": "https://outerpedia.com/",
+      "description":
+        "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse all characters, detailed stats, skills, gear recommendations and more.",
+      "character": (characters as Character[]).map((char) => ({
+        "@type": "VideoGameCharacter",
+        "name": char.Fullname,
+        "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
+        "image": `https://outerpedia.com/images/characters/full/IMG_${char.ID}.webp`,
+        "description": `Element: ${char.Element} | Class: ${char.Class} | Subclass: ${char.SubClass}`,
+      })),
+    }),
+  }}
+/>
 
-        })}
-      </script>
       <CharactersPage />
     </main>
   )

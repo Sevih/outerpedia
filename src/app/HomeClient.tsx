@@ -9,15 +9,18 @@ const recentChanges = changelog.slice(0, 5)
 export default function HomeClient() {
   return (
     <div className="space-y-16 px-4 md:px-16">
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "name": "Outerpedia",
-          "url": "https://outerpedia.com",
-          "description": "Outerpedia is a complete database for the mobile RPG Outerplane. Discover characters, gear builds, exclusive equipment, sets and more.",
-        })}
-      </script>
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Outerpedia",
+      "url": "https://outerpedia.com",
+      "description": "Outerpedia is a complete database for the mobile RPG Outerplane. Discover characters, gear builds, exclusive equipment, sets and more.",
+    }),
+  }}
+/>
 
       {/* SECTION RECENT UPDATES */}
       <section className="mt-12">
