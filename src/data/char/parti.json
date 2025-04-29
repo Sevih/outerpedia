@@ -3,6 +3,8 @@
   "Fullname": "Parti",
   "Rarity": 2,
   "Element": "Fire",
+  "rank":"B",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",
   "transcend": {

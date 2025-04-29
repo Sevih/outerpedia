@@ -4,6 +4,8 @@
   "Rarity": 2,
   "Element": "Fire",
   "Class": "Defender",
+  "rank":"A",
+  "role":"support",
   "SubClass": "Sweeper",
   "video": "dcT52onhzrg",
   "transcend": {

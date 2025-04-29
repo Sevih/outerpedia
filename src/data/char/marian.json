@@ -3,6 +3,8 @@
   "Fullname": "Marian",
   "Rarity": 2,
   "Element": "Water",
+  "rank":"S",
+  "role":"dps",
   "Class": "Mage",
   "SubClass": "Enchanter",
   "transcend": {

@@ -78,7 +78,7 @@ export default function TierListPage({ characters, initialTab }: { characters: C
   }, [activeTab, indicatorRef])
 
 
-  const filteredCharacters = characters.filter(c => c.Rarity === 3)
+  const filteredCharacters = characters.filter(c => c.Rarity <= 3)
 
   const roleGroups: Record<TabValue, Character[]> = {
     dps: filteredCharacters.filter(c => c.role?.toLowerCase() === 'dps'),

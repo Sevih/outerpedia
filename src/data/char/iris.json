@@ -3,6 +3,8 @@
   "Fullname": "Iris",
   "Rarity": 2,
   "Element": "Fire",
+  "rank":"B",
+  "role":"dps",
   "Class": "Mage",
   "SubClass": "Enchanter",
   "transcend": {

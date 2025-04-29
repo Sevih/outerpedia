@@ -3,6 +3,8 @@
   "Fullname": "Tio",
   "Rarity": 2,
   "Element": "Fire",
+  "rank":"S",
+  "role":"sustain",
   "Class": "Healer",
   "SubClass": "Reliever",
   "transcend": {

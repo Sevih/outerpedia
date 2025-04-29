@@ -3,6 +3,8 @@
   "Fullname": "Idith",
   "Rarity": 2,
   "Element": "Earth",
+  "rank":"C",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser",
   "transcend": {

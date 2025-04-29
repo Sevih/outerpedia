@@ -3,6 +3,8 @@
   "Fullname": "Pesketh",
   "Rarity": 2,
   "Element": "Earth",
+  "rank":"B",
+  "role":"support",
   "Class": "Ranger",
   "SubClass": "Vanguard",
   "transcend": {

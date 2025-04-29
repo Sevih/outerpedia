@@ -4,6 +4,8 @@
   "Rarity": 2,
   "Element": "Fire",
   "Class": "Striker",
+  "rank":"D",
+  "role":"dps",
   "SubClass": "Bruiser",
   "transcend": {
     "1": null,

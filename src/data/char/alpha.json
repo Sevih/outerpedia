@@ -3,6 +3,8 @@
   "Fullname": "Alpha",
   "Rarity": 2,
   "Element": "Water",
+  "rank":"D",
+  "role":"support",
   "Class": "Mage",
   "SubClass": "Enchanter",
   "transcend": {

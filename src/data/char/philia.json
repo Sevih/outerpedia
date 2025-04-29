@@ -4,6 +4,8 @@
   "Rarity": 2,
   "Element": "Dark",
   "Class": "Mage",
+  "rank":"D",
+  "role":"support",
   "SubClass": "Wizard",
   "transcend": {
     "1": null,

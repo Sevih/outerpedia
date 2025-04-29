@@ -3,6 +3,8 @@
   "Fullname": "Snow",
   "Rarity": 2,
   "Element": "Water",
+  "rank":"D",
+  "role":"support",
   "Class": "Ranger",
   "SubClass": "Tactician",
   "transcend": {

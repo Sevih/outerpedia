@@ -4,6 +4,8 @@
   "Rarity": 2,
   "Element": "Light",
   "Class": "Healer",
+  "rank":"A",
+  "role":"sustain",
   "SubClass": "Sage",
   "transcend": {
     "1": null,

@@ -3,6 +3,8 @@
   "Fullname": "Lyla",
   "Rarity": 2,
   "Element": "Water",
+  "rank":"A",
+  "role":"sustain",
   "Class": "Healer",
   "SubClass": "Reliever",
   "transcend": {

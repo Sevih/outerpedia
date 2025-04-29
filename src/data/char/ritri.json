@@ -3,6 +3,8 @@
   "Fullname": "Ritri",
   "Rarity": 2,
   "Element": "Water",
+  "rank":"A",
+  "role":"sustain",
   "Class": "Defender",
   "SubClass": "Phalanx",
   "transcend": {

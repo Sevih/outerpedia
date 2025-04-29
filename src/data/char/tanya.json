@@ -3,6 +3,8 @@
   "Fullname": "Tanya",
   "Rarity": 2,
   "Element": "Earth",
+  "rank":"D",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser",
   "transcend": {

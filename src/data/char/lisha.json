@@ -3,6 +3,8 @@
   "Fullname": "Lisha",
   "Rarity": 2,
   "Element": "Fire",
+  "rank":"B",
+  "role":"dps",
   "Class": "Mage",
   "SubClass": "Wizard",
   "transcend": {

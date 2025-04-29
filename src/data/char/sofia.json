@@ -3,6 +3,8 @@
   "Fullname": "Sofia",
   "Rarity": 2,
   "Element": "Water",
+  "rank":"B",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",
   "transcend": {

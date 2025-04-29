@@ -3,6 +3,8 @@
   "Fullname": "Cindy",
   "Rarity": 2,
   "Element": "Water",
+  "rank":"B",
+  "role":"support",
   "Class": "Ranger",
   "SubClass": "Tactician",
   "transcend": {

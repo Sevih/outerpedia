@@ -3,6 +3,8 @@
   "Fullname": "Dolly",
   "Rarity": 2,
   "Element": "Earth",
+  "rank":"A",
+  "role":"support",
   "Class": "Mage",
   "SubClass": "Enchanter",
   "transcend": {

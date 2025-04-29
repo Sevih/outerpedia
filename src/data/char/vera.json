@@ -3,7 +3,9 @@
   "Fullname": "Vera",
   "Rarity": 2,
   "Element": "Dark",
-  "Class": "Striker",
+  "Class": "Striker",  
+  "rank":"B",
+  "role":"dps",
   "SubClass": "Attacker",
   "transcend": {
     "1": null,

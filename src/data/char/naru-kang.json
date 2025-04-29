@@ -3,6 +3,8 @@
   "Fullname": "Naru Kang",
   "Rarity": 2,
   "Element": "Fire",
+  "rank":"B",
+  "role":"support",
   "Class": "Defender",
   "SubClass": "Sweeper",
   "transcend": {

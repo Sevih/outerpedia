@@ -4,6 +4,8 @@
   "Rarity": 2,
   "Element": "Earth",
   "Class": "Ranger",
+  "rank":"D",
+  "role":"support",
   "SubClass": "Tactician",
   "transcend": {
     "1": null,
