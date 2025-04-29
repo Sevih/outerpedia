@@ -199,12 +199,6 @@
         "icon": "IG_Buff_2000096_Interruption"
     },
     {
-        "name": "UNIQUE_ARIEL",
-        "label": "Ariel",
-        "description": "After attacking an enemy, increases Priority of the caster by 15%",
-        "icon": "IG_Buff_2000096_Interruption"
-    },
-    {
         "name": "UNIQUE_SAKURA_CHIRU",
         "label": "Sakura, Chiru",
         "description": "Activates an additional attack after Mikazuki 1st Art: Blooming (Irremovable)",
