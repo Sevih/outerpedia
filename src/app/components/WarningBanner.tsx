@@ -1,19 +1,13 @@
 'use client'
-import Link from 'next/link'
 
 export default function WarningBanner() {
   return (
     <>
       <div className="bg-yellow-400 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-400">
-        ⚠️ Character data has been parsed automatically using a custom tool. Errors may exist!
-        If you spot something wrong, please report it via our{' '}
-        <Link
-          href="https://discord.gg/keGhVQWsHv"
-          target="_blank"
-          className="underline font-semibold hover:text-yellow-200"
-        >
-          Discord
-        </Link>.
+        ⚠️ Outerpedia is an unofficial fan-made website for the game Outerplane.
+        All images, names, and other assets used in this site are property of Smilegate Megaport or their respective owners.
+        This site is not affiliated with or endorsed by Smilegate.
+        All content is used for informational and educational purposes only.
       </div>
     </>
   )

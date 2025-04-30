@@ -24,15 +24,7 @@ function migrateChangelogEntries(
 
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
-  {
-    date: "2025-04-30",
-    title: "Assets downloader",
-    type: "update",
-    content: `
-  - Add Assets downloader and move Tier List inside Tools
-  - Add limited notice on seasonal/limited character on character main page
-`
-  },
+
   {
     date: "2025-04-29",
     title: "Filter debuff logic and 1-2 star tier list",
