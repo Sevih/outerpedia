@@ -6,16 +6,16 @@ export const metadata: Metadata = {
   description: 'Browse and download all Outerplane asset images: characters, skills, full art, UI and effects. Powered by Outerpedia.',
   keywords: ['Outerplane', 'Assets', 'Download', 'Characters', 'Skills', 'UI', 'Effects', 'Images', 'Outerpedia'],
   alternates: {
-    canonical: 'https://outerpedia.com/tools/assets-dl',
+    canonical: 'https://outerpedia.com/assets-dl',
   },
   openGraph: {
     title: 'Assets Download – Outerplane | Outerpedia',
     description: 'Access and download visual assets from Outerplane including skills, portraits, effects and more.',
-    url: 'https://outerpedia.com/tools/assets-dl',
+    url: 'https://outerpedia.com/assets-dl',
     type: 'website',
     images: [
       {
-        url: 'https://outerpedia.com/images/ui/CM_Guild_NoticeBoard.png',
+        url: 'https://outerpedia.com/images/ui/nav/CM_Guild_NoticeBoard.png',
         width: 120,
         height: 40,
         alt: 'Outerplane Assets',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: 'summary',
     title: 'Assets Download – Outerplane',
     description: 'Download all assets from Outerplane: characters, skills, effects, UI and more.',
-    images: ['https://outerpedia.com/images/ui/CM_Guild_NoticeBoard.png'],
+    images: ['https://outerpedia.com/images/ui/nav/CM_Guild_NoticeBoard.png'],
   },
 }
 
