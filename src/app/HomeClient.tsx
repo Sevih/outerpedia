@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { changelog } from "@/data/changelog"
 import { renderMarkdown } from "@/utils/markdown"
@@ -7,20 +8,32 @@ import { renderMarkdown } from "@/utils/markdown"
 const recentChanges = changelog.slice(0, 5)
 
 export default function HomeClient() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (const registration of registrations) {
+          registration.unregister().then(() => {
+            console.log('🧹 Service Worker unregistered automatically')
+          })
+        }
+      })
+    }
+  }, [])
+
   return (
     <div className="space-y-16 px-4 md:px-16">
       <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Outerpedia",
-      "url": "https://outerpedia.com",
-      "description": "Outerpedia is a complete database for the mobile RPG Outerplane. Discover characters, gear builds, exclusive equipment, sets and more.",
-    }),
-  }}
-/>
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Outerpedia",
+            "url": "https://outerpedia.com",
+            "description": "Outerpedia is a complete database for the mobile RPG Outerplane. Discover characters, gear builds, exclusive equipment, sets and more.",
+          }),
+        }}
+      />
 
       {/* SECTION RECENT UPDATES */}
       <section className="mt-12">

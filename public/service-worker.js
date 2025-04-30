@@ -1,6 +1,6 @@
 // /public/service-worker.js
 
-const CACHE_NAME = 'outerpedia-cache-v1';
+const CACHE_NAME = 'outerpedia-cache-v0.1.1';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -29,9 +29,10 @@ self.addEventListener('activate', (event) => {
           }
         })
       )
-    )
+    ).then(() => self.clients.claim()) // 👈 ICI
   );
 });
+
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(

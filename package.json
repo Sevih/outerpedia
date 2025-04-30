@@ -1,10 +1,12 @@
 {
   "name": "outerpedia-clean",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run generate:allchar && next build",
+    "set-version": "echo \"NEXT_PUBLIC_APP_VERSION=$(node -p \"require('./package.json').version\")\" > .env.version",
+    "build": "npm run set-version && npm run inject-sw-version && npm run generate:allchar && next build",
+    "inject-sw-version": "node scripts/inject-sw-version.js",
     "postbuild": "npm run sitemap",
     "start": "next start",
     "lint": "next lint",
