@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import Script from 'next/script'
-import { APP_VERSION } from '@/utils/version';
 
 export default function UpdateToast() {
   const [newVersionAvailable, setNewVersionAvailable] = useState(false)
@@ -27,7 +26,7 @@ export default function UpdateToast() {
   const reloadPage = () => {
     window.location.reload()
   }
-
+  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || 'dev';
   return (
     <>
       {newVersionAvailable && (
@@ -36,7 +35,7 @@ export default function UpdateToast() {
           onClick={reloadPage}
         >
           <div className="text-xs text-center mt-1 text-gray-300">
-            App version: v{APP_VERSION}
+            App version: v{appVersion}
           </div>
           🔥 New version available – Refreshing...
         </div>

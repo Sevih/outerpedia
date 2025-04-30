@@ -1,13 +1,13 @@
 // components/Footer.tsx
 import Link from "next/link";
 import { FaGithub, FaDiscord } from "react-icons/fa";
-import { APP_VERSION } from '@/utils/version';
 
 export default function Footer() {
+  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || 'dev';
   return (
     <footer className="w-full mt-2 border-t pt-2 pb-2 text-center text-sm text-muted-foreground">
       <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-        <p>© {new Date().getFullYear()} Outerpedia v{APP_VERSION} – Fanmade Database for Outerplane. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Outerpedia v{appVersion} – Fanmade Database for Outerplane. All rights reserved.</p>
         <div className="flex gap-4">
           <Link href="https://github.com/Sevih/outerpedia" target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-1">
             <FaGithub /> GitHub
