@@ -9,10 +9,7 @@ const nextConfig = {
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
-  },
-  env: {
-    NEXT_PUBLIC_APP_VERSION: process.env.NEXT_PUBLIC_APP_VERSION,
-  },
+  }
 };
 
 export default nextConfig;
