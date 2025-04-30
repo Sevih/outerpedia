@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Shop.webp',
-        width: 1200,
-        height: 630,
+        width: 150,
+        height: 150,
         alt: 'Exclusive Equipment Priority – Outerpedia',
       },
     ],
