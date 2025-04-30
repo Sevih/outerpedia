@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-01",
+    title: "Multi Select",
+    type: "feature",
+    content: [
+      "- Add the option to select multple element, class, rarity on tier list, ee priority and character page",
+    ],
+  },
+  {
     date: "2025-04-30",
     title: "Exclusive Equipment Priority",
     type: "feature",

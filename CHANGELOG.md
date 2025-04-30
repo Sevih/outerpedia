@@ -1,3 +1,7 @@
+## 🚀 Multi Select (2025-05-01)
+- Add the option to select multple element, class, rarity on tier list, ee priority and character page
+
+
 ## 🚀 Exclusive Equipment Priority (2025-04-30)
 - Add Exclusive Equipment Priority Tier List
 - Add filter by Element and Class on Tier list

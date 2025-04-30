@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import characters from '@/data/_allCharacters.json'
@@ -14,6 +14,29 @@ import { ElementIcon } from '@/app/components/ElementIcon'
 import { ClassIcon } from '@/app/components/ClassIcon'
 
 const RANK_ORDER = ['S', 'A', 'B', 'C', 'D'] as const
+const classes = [
+    { name: 'All', value: null },
+    { name: 'Striker', value: 'Striker' },
+    { name: 'Defender', value: 'Defender' },
+    { name: 'Ranger', value: 'Ranger' },
+    { name: 'Healer', value: 'Healer' },
+    { name: 'Mage', value: 'Mage' },
+]
+
+const elements = [
+    { name: 'All', value: null },
+    { name: 'Fire', value: 'Fire' },
+    { name: 'Water', value: 'Water' },
+    { name: 'Earth', value: 'Earth' },
+    { name: 'Light', value: 'Light' },
+    { name: 'Dark', value: 'Dark' },
+]
+const rarities = [
+    { label: 'All', value: null },
+    { label: 1, value: 1 },
+    { label: 2, value: 2 },
+    { label: 3, value: 3 },
+]
 
 type Equipment = {
     name: string
@@ -46,8 +69,11 @@ function StarDisplay({ rarity }: { rarity: number }) {
 
 export default function EeTierClient({ equipments }: { equipments: Record<string, Equipment> }) {
     const [search, setSearch] = useState('')
-    const [classFilter, setClassFilter] = useState<string | null>(null)
-    const [elementFilter, setElementFilter] = useState<string | null>(null)
+    const [classFilter, setClassFilter] = useState<string[]>([])
+    const [elementFilter, setElementFilter] = useState<string[]>([])
+
+    const [rarityFilter, setRarityFilter] = useState<number[]>([])
+
 
     const grouped = RANK_ORDER.reduce((acc, rank) => {
         acc[rank] = Object.entries(equipments)
@@ -56,23 +82,22 @@ export default function EeTierClient({ equipments }: { equipments: Record<string
         return acc
     }, {} as Record<string, [string, Equipment][]>)
 
-    const classes = [
-        { name: 'All', value: null },
-        { name: 'Striker', value: 'Striker' },
-        { name: 'Defender', value: 'Defender' },
-        { name: 'Ranger', value: 'Ranger' },
-        { name: 'Healer', value: 'Healer' },
-        { name: 'Mage', value: 'Mage' },
-    ]
+    
 
-    const elements = [
-        { name: 'All', value: null },
-        { name: 'Fire', value: 'Fire' },
-        { name: 'Water', value: 'Water' },
-        { name: 'Earth', value: 'Earth' },
-        { name: 'Light', value: 'Light' },
-        { name: 'Dark', value: 'Dark' },
-    ]
+    // Auto-reset si tous cochés (élément / classe)
+    useEffect(() => {
+        if (elementFilter.length === elements.slice(1).length) setElementFilter([])
+    }, [elementFilter])
+
+    useEffect(() => {
+        if (classFilter.length === classes.slice(1).length) setClassFilter([])
+    }, [classFilter])
+
+    useEffect(() => {
+        if (rarityFilter.length === rarities.slice(1).length) setRarityFilter([])
+    }, [rarityFilter])
+
+
 
     const allCharacters = Object.entries(equipments)
         .map(([slug, ee]) => {
@@ -120,14 +145,66 @@ export default function EeTierClient({ equipments }: { equipments: Record<string
                     className="p-2 rounded-lg border border-gray-600 bg-gray-800 text-white placeholder-gray-400 w-full max-w-md"
                 />
             </div>
+            <div className="flex justify-center gap-2 mb-4">
+                {rarities.map((r) => (
+                    <button
+                        key={r.label}
+                        onClick={() => {
+                            if (r.value === null) {
+                                setRarityFilter([])
+                            } else {
+                                const stringified = rarityFilter.map(String)
+                                if (stringified.includes(String(r.value))) {
+                                    setRarityFilter(rarityFilter.filter((val) => val !== r.value))
+                                } else {
+                                    setRarityFilter([...rarityFilter, r.value])
+                                }
+                            }
+                        }}
+                        className={`flex items-center justify-center ${(
+                            (r.value === null && rarityFilter.length === 0) ||
+                            (r.value !== null && rarityFilter.includes(r.value))
+                        ) ? 'bg-cyan-500' : 'bg-gray-700'
+                            } hover:bg-cyan-600 px-2 py-1 rounded border`}
+                    >
+                        {r.value === null ? (
+                            <span className="text-white text-sm font-bold">All</span>
+                        ) : (
+                            <div className="flex items-center -space-x-1">
+                                {Array(r.label)
+                                    .fill(0)
+                                    .map((_, i) => (
+                                        <Image
+                                            key={i}
+                                            src="/images/ui/star.webp"
+                                            alt="star"
+                                            width={14}
+                                            height={14}
+                                            style={{ width: 14, height: 14 }}
+                                        />
+                                    ))}
+                            </div>
+                        )}
+                    </button>
+                ))}
+            </div>
 
             <div className="flex justify-center gap-8 mb-6 flex-wrap">
                 <div className="flex gap-2">
                     {elements.map((el) => (
                         <button
                             key={el.name}
-                            onClick={() => setElementFilter(el.value === elementFilter ? null : el.value)}
-                            className={`flex items-center justify-center w-7 h-7 rounded border transition ${elementFilter === el.value ? 'bg-cyan-500' : 'bg-gray-700'} hover:bg-cyan-600`}
+                            onClick={() =>
+                                el.value
+                                    ? setElementFilter((prev) =>
+                                        prev.includes(el.value!) ? prev.filter((v) => v !== el.value) : [...prev, el.value!]
+                                    )
+                                    : setElementFilter([])
+                            }
+
+                            className={`flex items-center justify-center w-7 h-7 rounded border transition ${((el.value === null && elementFilter.length === 0) ||
+                                (el.value !== null && elementFilter.includes(el.value)))
+                                ? 'bg-cyan-500' : 'bg-gray-700'} hover:bg-cyan-600`}
                             title={el.name}
                         >
                             {el.value ? (
@@ -143,8 +220,17 @@ export default function EeTierClient({ equipments }: { equipments: Record<string
                     {classes.map((cl) => (
                         <button
                             key={cl.name}
-                            onClick={() => setClassFilter(cl.value === classFilter ? null : cl.value)}
-                            className={`flex items-center justify-center w-7 h-7 rounded border transition ${classFilter === cl.value ? 'bg-cyan-500' : 'bg-gray-700'} hover:bg-cyan-600`}
+                            onClick={() =>
+                                cl.value
+                                    ? setClassFilter((prev) =>
+                                        prev.includes(cl.value!) ? prev.filter((v) => v !== cl.value) : [...prev, cl.value!]
+                                    )
+                                    : setClassFilter([])
+                            }
+
+                            className={`flex items-center justify-center w-7 h-7 rounded border transition ${((cl.value === null && classFilter.length === 0) ||
+                                (cl.value !== null && classFilter.includes(cl.value)))
+                                ? 'bg-cyan-500' : 'bg-gray-700'} hover:bg-cyan-600`}
                             title={cl.name}
                         >
                             {cl.value ? (
@@ -156,6 +242,21 @@ export default function EeTierClient({ equipments }: { equipments: Record<string
                     ))}
                 </div>
             </div>
+            <div className="flex justify-center mt-4">
+                <button
+                    onClick={() => {
+                        setSearch('')
+                        setClassFilter([])
+                        setElementFilter([])
+                        setRarityFilter([])
+                    }}
+
+                    className="bg-gray-700 hover:bg-red-700 px-4 py-1 rounded text-sm"
+                >
+                    Reset filters
+                </button>
+            </div>
+
 
             {RANK_ORDER.map((rank) => {
                 const entries = grouped[rank].filter(([slug, ee]) => {
@@ -166,10 +267,13 @@ export default function EeTierClient({ equipments }: { equipments: Record<string
                         ee.name.toLowerCase().includes(search.toLowerCase()) ||
                         slug.toLowerCase().includes(search.toLowerCase())
 
-                    const matchesElement = !elementFilter || char.Element === elementFilter
-                    const matchesClass = !classFilter || char.Class === classFilter
+                    const matchesElement = elementFilter.length === 0 || elementFilter.includes(char.Element)
+                    const matchesClass = classFilter.length === 0 || classFilter.includes(char.Class)
 
-                    return matchesSearch && matchesElement && matchesClass
+                    const matchesRarity = rarityFilter.length === 0 || rarityFilter.includes(char.Rarity)
+
+
+                    return matchesSearch && matchesElement && matchesClass && matchesRarity
                 })
 
                 if (entries.length === 0) return null

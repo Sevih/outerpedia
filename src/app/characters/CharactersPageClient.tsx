@@ -90,7 +90,30 @@ const orderedDebuffGroups = [
     ]
   }
 ]
+const elements = [
+  { name: 'All', value: null },
+  { name: 'Fire', value: 'Fire' },
+  { name: 'Water', value: 'Water' },
+  { name: 'Earth', value: 'Earth' },
+  { name: 'Light', value: 'Light' },
+  { name: 'Dark', value: 'Dark' },
+]
 
+const classes = [
+  { name: 'All', value: null },
+  { name: 'Striker', value: 'Striker' },
+  { name: 'Defender', value: 'Defender' },
+  { name: 'Ranger', value: 'Ranger' },
+  { name: 'Healer', value: 'Healer' },
+  { name: 'Mage', value: 'Mage' },
+]
+
+const rarities = [
+  { label: 'All', value: null },
+  { label: 1, value: 1 },
+  { label: 2, value: 2 },
+  { label: 3, value: 3 },
+]
 
 // Buffs/Debuffs d'un personnage
 // Récupère tous les buffs ou debuffs d'un personnage
@@ -107,12 +130,15 @@ function extractAllEffects(characters: CharacterLite[], type: 'buff' | 'debuff')
 
 
 export default function CharactersPage() {
+  
 
   const [characters, setCharacters] = useState<CharacterLite[]>([])
   const [loading, setLoading] = useState(true)
-  const [filter, setFilter] = useState<string | null>(null)
-  const [classFilter, setClassFilter] = useState<string | null>(null)
-  const [rarityFilter, setRarityFilter] = useState<number | null>(null)
+  const [filter, setFilter] = useState<string[]>([])
+  const [classFilter, setClassFilter] = useState<string[]>([])
+
+  const [rarityFilter, setRarityFilter] = useState<number[]>([])
+
   const [selectedBuffs, setSelectedBuffs] = useState<string[]>([])
   const [selectedDebuffs, setSelectedDebuffs] = useState<string[]>([])
   const [allBuffs, setAllBuffs] = useState<string[]>([])
@@ -134,6 +160,39 @@ export default function CharactersPage() {
     fetchCharacters()
   }, [])
 
+  // Si tous les éléments sont sélectionnés, on considère que All est activé
+  useEffect(() => {
+    const allElements = elements.slice(1).map((el) => el.value!) // sans null
+    if (filter.length === allElements.length) {
+      setFilter([]) // Reset to All
+    }
+  }, [filter])
+
+  useEffect(() => {
+    const allClasses = classes.slice(1).map((cl) => cl.value!)
+    if (classFilter.length === allClasses.length) {
+      setClassFilter([]) // Reset to All
+    }
+  }, [classFilter])
+
+  useEffect(() => {
+    const allRarities = rarities.slice(1).map((r) => r.value!)
+    if (rarityFilter.length === allRarities.length) {
+      setRarityFilter([]) // Reset to All
+    }
+  }, [rarityFilter])
+
+
+
+
+  const toggleMultiSelect = (value: string, list: string[], setList: (v: string[]) => void) => {
+    if (list.includes(value)) {
+      setList(list.filter((v) => v !== value))
+    } else {
+      setList([...list, value])
+    }
+  }
+
 
   const toggleEffect = (
     key: string,
@@ -151,32 +210,14 @@ export default function CharactersPage() {
     return <div className="text-center mt-8 text-white">Loading characters...</div>
   }
 
-  const elements = [
-    { name: 'All', value: null },
-    { name: 'Fire', value: 'Fire' },
-    { name: 'Water', value: 'Water' },
-    { name: 'Earth', value: 'Earth' },
-    { name: 'Light', value: 'Light' },
-    { name: 'Dark', value: 'Dark' },
-  ]
 
-  const classes = [
-    { name: 'All', value: null },
-    { name: 'Striker', value: 'Striker' },
-    { name: 'Defender', value: 'Defender' },
-    { name: 'Ranger', value: 'Ranger' },
-    { name: 'Healer', value: 'Healer' },
-    { name: 'Mage', value: 'Mage' },
-  ]
 
-  const rarities = [
-    { label: 'All', value: null },
-    { label: 1, value: 1 },
-    { label: 2, value: 2 },
-    { label: 3, value: 3 },
-  ]
+
 
   const rarityToStars = (rarity: number) => Array(rarity).fill(0)
+
+
+
 
   return (
     <div className="space-y-6">
@@ -212,9 +253,17 @@ export default function CharactersPage() {
         {rarities.map((r) => (
           <button
             key={r.label}
-            onClick={() => setRarityFilter(r.value === rarityFilter ? null : r.value)}
-            className={`flex items-center justify-center ${rarityFilter === r.value ? 'bg-cyan-500' : 'bg-gray-700'
-              } hover:bg-cyan-600 px-2 py-1 rounded border`}
+            onClick={() => {
+              if (r.value === null) {
+                setRarityFilter([]) // reset si "All"
+              } else {
+                toggleMultiSelect(String(r.value), rarityFilter.map(String), (v) => setRarityFilter(v.map(Number)))
+              }
+            }}
+            className={`flex items-center justify-center ${(
+              (r.value === null && rarityFilter.length === 0) ||
+              (r.value !== null && rarityFilter.includes(r.value))
+            ) ? 'bg-cyan-500' : 'bg-gray-700'} hover:bg-cyan-600 px-2 py-1 rounded border`}
           >
             {r.value === null ? (
               <span className="text-white text-sm font-bold">All</span>
@@ -239,16 +288,27 @@ export default function CharactersPage() {
         ))}
       </div>
 
+
       <div className="flex justify-center gap-8 mb-4 flex-wrap">
         <div className="flex gap-2">
           {elements.map((el) => (
             <button
               key={el.name}
-              onClick={() => setFilter(el.value === filter ? null : el.value)}
-              className={`flex items-center justify-center w-7 h-7 rounded border transition ${filter === el.value ? 'bg-cyan-500' : 'bg-gray-700'} hover:bg-cyan-600`}
+              onClick={() =>
+                el.value
+                  ? toggleMultiSelect(el.value, filter, setFilter)
+                  : setFilter([])
+              }
+              className={`flex items-center justify-center w-7 h-7 rounded border transition ${(el.value === null && filter.length === 0) ||
+                  (el.value === null && filter.length === elements.slice(1).length) ||
+                  (el.value !== null && filter.includes(el.value))
+                  ? 'bg-cyan-500'
+                  : 'bg-gray-700'
+                } hover:bg-cyan-600`}
 
               title={el.name}
             >
+
               {el.value ? (
                 <ElementIcon element={el.value as ElementType} />
               ) : (
@@ -262,11 +322,21 @@ export default function CharactersPage() {
           {classes.map((cl) => (
             <button
               key={cl.name}
-              onClick={() => setClassFilter(cl.value === classFilter ? null : cl.value)}
-              className={`flex items-center justify-center w-7 h-7 rounded border transition ${classFilter === cl.value ? 'bg-cyan-500' : 'bg-gray-700'} hover:bg-cyan-600`}
+              onClick={() =>
+                cl.value
+                  ? toggleMultiSelect(cl.value, classFilter, setClassFilter)
+                  : setClassFilter([])
+              }
+              className={`flex items-center justify-center w-7 h-7 rounded border transition ${(cl.value === null && classFilter.length === 0) ||
+                  (cl.value === null && classFilter.length === classes.slice(1).length) ||
+                  (cl.value !== null && classFilter.includes(cl.value))
+                  ? 'bg-cyan-500'
+                  : 'bg-gray-700'
+                } hover:bg-cyan-600`}
 
               title={cl.name}
             >
+
               {cl.value ? (
                 <ClassIcon className={cl.name as ClassType} />
               ) : (
@@ -372,17 +442,19 @@ export default function CharactersPage() {
 
           <button
             onClick={() => {
-              setFilter(null)
-              setClassFilter(null)
-              setRarityFilter(null)
+              setFilter([])
+              setClassFilter([])
+              setRarityFilter([])
               setSelectedBuffs([])
               setSelectedDebuffs([])
               setEffectLogic('OR')
+              setSearchTerm('') // 👈 Ajout ici
             }}
             className="bg-gray-700 hover:bg-red-700 px-4 py-1 rounded text-sm"
           >
             Reset filters
           </button>
+
 
           {/* Checkbox mieux intégrée */}
           <label
@@ -406,9 +478,11 @@ export default function CharactersPage() {
               char.Fullname.toLowerCase().includes(searchTerm.toLowerCase())
             )
             .map((char, index) => {
-              const elementMatch = !filter || char.Element === filter
-              const classMatch = !classFilter || char.Class === classFilter
-              const rarityMatch = rarityFilter === null || char.Rarity === rarityFilter
+              const elementMatch = filter.length === 0 || filter.includes(char.Element)
+              const classMatch = classFilter.length === 0 || classFilter.includes(char.Class)
+
+              const rarityMatch = rarityFilter.length === 0 || rarityFilter.includes(char.Rarity)
+
 
               const hasBuffs = selectedBuffs.length > 0
                 ? (effectLogic === 'AND'
@@ -443,15 +517,15 @@ export default function CharactersPage() {
                   className={`relative w-[120px] h-[231px] text-center shadow hover:shadow-lg transition overflow-hidden rounded ${isVisible ? '' : 'hidden'}`}
                 >
                   {char.limited && (
-  <Image
-    src="/images/ui/CM_Shop_Tag_Limited.webp"
-    alt="Limited"
-    width={75}
-    height={30}
-    className="absolute top-1 left-1 z-30 object-contain"
-    style={{ width: 75, height: 30 }}
-  />
-)}
+                    <Image
+                      src="/images/ui/CM_Shop_Tag_Limited.webp"
+                      alt="Limited"
+                      width={75}
+                      height={30}
+                      className="absolute top-1 left-1 z-30 object-contain"
+                      style={{ width: 75, height: 30 }}
+                    />
+                  )}
 
                   <Image
                     src={`/images/characters/portrait/CT_${char.ID}.webp`}
