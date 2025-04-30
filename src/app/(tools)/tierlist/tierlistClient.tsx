@@ -99,7 +99,31 @@ export default function TierListPage({ characters, initialTab }: { characters: C
   const currentRoleList = groupByRank(roleGroups[activeTab])
 
   return (
+    
     <div className="w-full max-w-screen-xl mx-auto p-6">
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Outerplane Tier List",
+      "url": "https://outerpedia.com/tools/tierlist",
+      "description": "Discover the best characters in Outerplane sorted by DPS, Support, and Sustain roles. Tier list curated by the EvaMains community.",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": characters.map((char, index) => ({
+          "@type": "VideoGameCharacter",
+          "name": char.Fullname,
+          "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
+          "image": `https://outerpedia.com/images/characters/portrait/CT_${char.ID}.webp`,
+          "position": index + 1,
+        })),
+      }
+    }),
+  }}
+/>
+
       <h1 className="text-5xl font-extrabold text-center mb-8 bg-gradient-to-b from-yellow-300 via-orange-400 to-red-500 text-transparent bg-clip-text drop-shadow-md">
         Tier List
       </h1>

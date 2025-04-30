@@ -36,9 +36,9 @@ const orderedBuffGroups = [
   },
   {
     title: 'Utility', items: [
-      "BT_COOL_CHARGE", "BT_ACTION_GAUGE", "BT_AP_CHARGE","BT_STAT|ST_COUNTER_RATE", "BT_CP_CHARGE", "Heavy Strike",
+      "BT_COOL_CHARGE", "BT_ACTION_GAUGE", "BT_AP_CHARGE", "BT_STAT|ST_COUNTER_RATE", "BT_CP_CHARGE", "Heavy Strike",
       "BT_DMG_ELEMENT_SUPERIORITY", "BT_ADDITIVE_TURN",
-      "SYS_BUFF_REVENGE", "SYS_BUFF_BREAK_DMG", "BT_CALL_BACKUP", 
+      "SYS_BUFF_REVENGE", "SYS_BUFF_BREAK_DMG", "BT_CALL_BACKUP",
     ]
   },
   {
@@ -57,8 +57,8 @@ const orderedBuffGroups = [
 const orderedDebuffGroups = [
   {
     title: 'Stat Reduction', items: [
-      "BT_STAT|ST_ATK", "BT_STAT|ST_DEF", "BT_STAT|ST_SPEED", 
-      "BT_STAT|ST_CRITICAL_RATE","BT_STAT|ST_CRITICAL_DMG_RATE"
+      "BT_STAT|ST_ATK", "BT_STAT|ST_DEF", "BT_STAT|ST_SPEED",
+      "BT_STAT|ST_CRITICAL_RATE", "BT_STAT|ST_CRITICAL_DMG_RATE"
       , "BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_BUFF_RESIST"
       , "BT_STAT|ST_AVOID", "BT_STAT|ST_ACCURACY"
     ]
@@ -70,16 +70,16 @@ const orderedDebuffGroups = [
   },
   {
     title: 'Damage Over Time (DoT)', items: [
-      "BT_DOT_BURN", "BT_DOT_BURN_IR","BT_DOT_CURSE", "BT_DOT_CURSE_IR",
-      "BT_DOT_BLEED","BT_DOT_BLEED_IR" ,"BT_DOT_POISON", "BT_DOT_LIGHTNING",
+      "BT_DOT_BURN", "BT_DOT_BURN_IR", "BT_DOT_CURSE", "BT_DOT_CURSE_IR",
+      "BT_DOT_BLEED", "BT_DOT_BLEED_IR", "BT_DOT_POISON", "BT_DOT_LIGHTNING",
       "BT_FIXED_DAMAGE", "BT_DOT_ETERNAL_BLEED", "BT_DETONATE"
     ]
   },
   {
     title: 'Utility Debuffs', items: [
-      "BT_COOL_CHARGE","BT_ACTION_GAUGE", "BT_AP_CHARGE", "BT_SEAL_COUNTER","BT_REMOVE_BUFF", "BT_SEALED", "BT_SEALED_IR",
+      "BT_COOL_CHARGE", "BT_ACTION_GAUGE", "BT_AP_CHARGE", "BT_SEAL_COUNTER", "BT_REMOVE_BUFF", "BT_SEALED", "BT_SEALED_IR",
       "BT_SEALED_RESURRECTION", "BT_SEAL_ADDITIVE_ATTACK",
-       
+
       "BT_STATBUFF_CONVERT_TO_STATDEBUFF", "BT_STEAL_BUFF",
       "BT_SEALED_RECEIVE_HEAL", "BT_WG_DMG"
     ]
@@ -182,27 +182,27 @@ export default function CharactersPage() {
     <div className="space-y-6">
       {/* JSON-LD SEO */}
       <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "Characters – Outerpedia",
-      "url": "https://outerpedia.com/characters",
-      "description": "Browse all characters in Outerplane with builds, skills, stats and exclusive equipment.",
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": characters.map((char, index) => ({
-          "@type": "VideoGameCharacter",
-          "name": char.Fullname,
-          "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
-          "image": `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.webp`,
-          "position": index + 1,
-        })),
-      },
-    }),
-  }}
-/>
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Characters – Outerpedia",
+            "url": "https://outerpedia.com/characters",
+            "description": "Browse all characters in Outerplane with builds, skills, stats and exclusive equipment.",
+            "mainEntity": {
+              "@type": "ItemList",
+              "itemListElement": characters.map((char, index) => ({
+                "@type": "VideoGameCharacter",
+                "name": char.Fullname,
+                "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
+                "image": `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.webp`,
+                "position": index + 1,
+              })),
+            },
+          }),
+        }}
+      />
 
 
       <h1 className="text-3xl font-bold">Characters</h1>
@@ -442,6 +442,17 @@ export default function CharactersPage() {
                   key={char.ID}
                   className={`relative w-[120px] h-[231px] text-center shadow hover:shadow-lg transition overflow-hidden rounded ${isVisible ? '' : 'hidden'}`}
                 >
+                  {char.limited && (
+  <Image
+    src="/images/ui/CM_Shop_Tag_Limited.webp"
+    alt="Limited"
+    width={75}
+    height={30}
+    className="absolute top-1 left-1 z-30 object-contain"
+    style={{ width: 75, height: 30 }}
+  />
+)}
+
                   <Image
                     src={`/images/characters/portrait/CT_${char.ID}.webp`}
                     alt={char.Fullname}

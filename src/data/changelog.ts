@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-04-30",
+    title: "Assets downloader",
+    type: "update",
+    content: `
+  - Add Assets downloader and move Tier List Inside Tools[D[D[D[D[D[D[D[D[D[D[i[F[B[F[B[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+  - Add limited notice on seasonal/limited character on character main page
+`
+  },
+  {
     date: "2025-04-29",
     title: "Filter debuff logic and 1-2 star tier list",
     type: "feature",

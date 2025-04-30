@@ -26,6 +26,7 @@
 TODO.md
 /src/data/_allCharacters.json
 convert_to_webp.bat
+commit.sh
 
 # Ignore auto-generated files
 
@@ -44,6 +45,9 @@ yarn-error.log*
 .env*
 !.env.version
 buildouter.sh
+effect-manifest.js
+generateUiManifest.js
+generateBossManifest.js
 # vercel
 .vercel
 

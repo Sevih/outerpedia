@@ -23,6 +23,7 @@ async function generateAllCharacters() {
           Class: character.Class,
           SubClass: character.SubClass,
           Element: character.Element,
+          limited: character.limited ?? false,
         });
       }
     }

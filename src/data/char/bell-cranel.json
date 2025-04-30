@@ -5,6 +5,7 @@
   "Element": "Fire",
   "Class": "Mage",
   "SubClass": "Wizard",
+  "limited":true,
   "role":"dps",
   "transcend": {
     "1": null,

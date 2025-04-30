@@ -56,5 +56,6 @@ export type SubclassData = {
     Rarity: number
     buff: string[]
     debuff: string[]
+    limited?:string
   }
   

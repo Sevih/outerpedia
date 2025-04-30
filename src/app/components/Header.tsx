@@ -5,10 +5,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const navItems = [
-  { label: 'Characters', href: '/characters', icon: 'characters' },
-  { label: 'Equipment', href: '/equipments', icon: 'equipments' },
-  { label: 'Tier List', href: '/tierlist', icon: 'tierlist' },
-  { label: 'Guides', href: '/guides', icon: 'guides' },
+  { label: 'Characters', href: '/characters', icon: 'CM_EtcMenu_Colleague' },
+  { label: 'Equipment', href: '/equipments', icon: 'CM_EtcMenu_Inventory' },
+  { label: 'Tools', href: '/tools', icon: 'CM_EtcMenu_Setting' },
+  { label: 'Guides', href: '/guides', icon: 'CM_EtcMenu_Character_Book' },
 ]
 
 export default function Header() {

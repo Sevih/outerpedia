@@ -6,6 +6,7 @@
   "Class": "Ranger",
   "role":"dps",
   "SubClass": "Vanguard",
+  "limited":true,
   "transcend": {
     "1": null,
     "2": null,

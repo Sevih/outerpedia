@@ -7,7 +7,7 @@ import Link from 'next/link'
 const categories = [
   { name: 'Characters', path: '/characters' },
   { name: 'Equipments', path: '/equipments' },
-  { name: 'Tier List', path: '/tierlist' },
+  { name: 'Tools', path: '/tools' },
   { name: 'Guides', path: '/guides' },
 ]
 
@@ -43,7 +43,7 @@ export default function Home() {
                 const iconMap: Record<string, string> = {
                   Characters: 'CM_Lobby_Button_Character.webp',
                   Equipments: 'CM_Lobby_Button_Inventory.webp',
-                  'Tier List': 'CM_Lobby_Button_Agit.webp',
+                  Tools: 'CM_Agit_Facility.webp',
                   Guides: 'CM_Guild_Management.webp',
                 }
 

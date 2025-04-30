@@ -5,6 +5,7 @@
   "Element": "Dark",
   "Class": "Striker",
   "role":"dps",
+  "limited":true,
   "SubClass": "Attacker",
   "transcend": {
     "1": null,

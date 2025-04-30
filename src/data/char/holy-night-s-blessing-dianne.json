@@ -5,6 +5,7 @@
   "Element": "Fire",
   "Class": "Ranger",
   "role":"dps",
+  "limited":true,
   "SubClass": "Vanguard",
   "transcend": {
     "1": null,

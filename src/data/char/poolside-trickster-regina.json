@@ -5,6 +5,7 @@
   "Element": "Water",
   "role":"dps",
   "Class": "Striker",
+  "limited":true,
   "SubClass": "Attacker",
   "transcend": {
     "1": null,

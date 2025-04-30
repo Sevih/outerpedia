@@ -96,3 +96,8 @@ Internal tools improved: added JSON-LD preview button for development validation
 - Sitemap generated successfully at `public/sitemap.xml`.
 - All character JSONs passed SEO check.
 - `robots.txt` accessible publicly.
+## 🛠 Assets downloader (2025-04-30)
+- Add Assets downloader and move Tier List Inside Tools[D[D[D[D[D[D[D[D[D[D[i[F[B[F[B[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+- Add limited notice on seasonal/limited character on character main page
+
+

@@ -57,5 +57,6 @@ export interface ExclusiveEquipment {
     transcend?: Record<string, string | null>
     rank?: string
     role?: string
+    limited:boolean
   }
   

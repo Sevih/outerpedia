@@ -67,6 +67,7 @@ export async function GET() {
           Class: character.Class,
           Element: character.Element,
           Rarity: character.Rarity,
+          limited: character.limited ?? false,
           buff,
           debuff,
         }

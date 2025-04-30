@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap');
+
   
   /* Séparation du body et html pour éviter les blocages de couleurs */
   html {
@@ -114,3 +116,32 @@
       1px -1px 0 #000, 
       -1px -1px 0 #000;
   }
+
+  h1 {
+    position: relative;
+    font-family: 'Rajdhani';
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+  
+    background: url('/images/ui/CM_Desc_Bg.webp') center center / cover no-repeat;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 12px;
+    background: url('/images/ui/CM_Result_Victory_Bg.webp') center bottom no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+  
