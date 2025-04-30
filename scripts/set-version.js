@@ -1,7 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const version = require('../package.json').version;
+// 🔹 Lis la version en argument, sinon fallback à package.json
+const argVersion = process.argv[2];
+const version = argVersion || require('../package.json').version;
+
 const newVersionLine = `NEXT_PUBLIC_APP_VERSION=${version}`;
 
 // 🔹 Met à jour .env.version
@@ -25,3 +28,11 @@ filtered.push(newVersionLine);
 // Écrit le fichier final
 fs.writeFileSync(envProdPath, filtered.join('\n') + '\n');
 console.log(`✅ .env.production updated with: ${newVersionLine}`);
+
+if (argVersion) {
+  const pkgPath = path.resolve('package.json');
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+  pkg.version = argVersion;
+  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+  console.log(`✅ package.json mis à jour avec version: ${argVersion}`);
+}
