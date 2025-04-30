@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Exclusive Equipment Priority – Outerpedia',
     description: 'A ranking of exclusive equipment (EE) based on their usefulness and impact. Curated by the community.',
     images: ['https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Shop.webp'],
