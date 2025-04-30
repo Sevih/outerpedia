@@ -11,7 +11,7 @@ const TOOL_METADATA = {
     name: "Exclusive Equipment Priority",
     description: "A ranking of exclusive equipment (EE) based on their usefulness and impact.",
     icon: "nav/CM_Lobby_Button_Shop.webp",
-    order: 1,
+    order: 2,
   }
 };
 

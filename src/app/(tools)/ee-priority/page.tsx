@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://outerpedia.com/images/meta/CM_Lobby_Button_Shop.webp',
+        url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Shop.webp',
         width: 1200,
         height: 630,
         alt: 'Exclusive Equipment Priority – Outerpedia',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Exclusive Equipment Priority – Outerpedia',
     description: 'A ranking of exclusive equipment (EE) based on their usefulness and impact. Curated by the community.',
-    images: ['https://outerpedia.com/images/meta/CM_Lobby_Button_Shop.webp'],
+    images: ['https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Shop.webp'],
   },
 }
 
