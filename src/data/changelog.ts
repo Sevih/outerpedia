@@ -26,6 +26,15 @@ function migrateChangelogEntries(
 export const oldChangelog = [
   {
     date: "2025-04-30",
+    title: "Exclusive Equipment Priority",
+    type: "feature",
+    content: [
+      "- Add Exclusive Equipment Priority Tier List",
+      "- Add filter by Element and Class on Tier list",
+    ],
+  },
+  {
+    date: "2025-04-30",
     title: "Legal compliance update",
     type: "fix",
     content: [

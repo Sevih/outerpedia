@@ -1,3 +1,8 @@
+## 🚀 Exclusive Equipment Priority (2025-04-30)
+- Add Exclusive Equipment Priority Tier List
+- Add filter by Element and Class on Tier list
+
+
 ## 🐛 Legal compliance update (2025-04-30)
 - Added global disclaimer about intellectual property and unofficial status.
 - Created a dedicated `/legal` page with hosting information and takedown policy.

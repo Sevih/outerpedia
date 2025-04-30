@@ -7,12 +7,19 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CharacterNameDisplay } from '@/app/components/CharacterNameDisplay'
 import { toKebabCase } from '@/utils/formatText'
 import type { Character } from '@/types/character'
+import type { ClassType as classtipe, ElementType } from '@/types/enums'
+import { ElementIcon } from '@/app/components/ElementIcon'
+import { ClassIcon } from '@/app/components/ClassIcon'
 
 const TABS = [
   { label: 'DPS', value: 'dps', icon: '/images/ui/dps.webp' },
   { label: 'Support', value: 'support', icon: '/images/ui/support.webp' },
   { label: 'Sustain', value: 'sustain', icon: '/images/ui/sustain.webp' },
 ] as const
+
+const ELEMENTS: (ElementType | 'All')[] = ['All', 'Fire', 'Water', 'Earth', 'Light', 'Dark']
+const CLASSES: (classtipe | 'All')[] = ['All', 'Striker', 'Defender', 'Ranger', 'Healer', 'Mage']
+
 
 type TabValue = (typeof TABS)[number]['value']
 
@@ -30,33 +37,6 @@ const tabBackgroundColors = {
   sustain: '#14532d',
 } as const
 
-function ElementIcon({ element }: { element: string }) {
-  return (
-    <div className="absolute w-[24px] h-[24px] bottom-5.5 right-1.5 z-30">
-      <Image
-        src={`/images/ui/elem/${element.toLowerCase()}.webp`}
-        alt={element}
-        fill
-        sizes="24px"
-        className="object-contain"
-      />
-    </div>
-  )
-}
-
-function ClassIcon({ className }: { className: string }) {
-  return (
-    <div className="absolute w-[24px] h-[24px] bottom-12.5 right-1.5 z-30">
-      <Image
-        src={`/images/ui/class/${className.toLowerCase()}.webp`}
-        alt={className}
-        fill
-        sizes="24px"
-        className="object-contain"
-      />
-    </div>
-  )
-}
 
 export default function TierListPage({ characters, initialTab }: { characters: Character[], initialTab?: string }) {
   const [activeTab, setActiveTab] = useState<TabValue>(
@@ -65,6 +45,9 @@ export default function TierListPage({ characters, initialTab }: { characters: C
   const [searchTerm, setSearchTerm] = useState('')
   const [indicatorRef, setIndicatorRef] = useState<HTMLDivElement | null>(null)
   const tabContainerRef = useRef<HTMLDivElement>(null)
+  const [classFilter, setClassFilter] = useState<string | null>(null)
+  const [elementFilter, setElementFilter] = useState<string | null>(null)
+
 
 
   useEffect(() => {
@@ -99,30 +82,30 @@ export default function TierListPage({ characters, initialTab }: { characters: C
   const currentRoleList = groupByRank(roleGroups[activeTab])
 
   return (
-    
+
     <div className="w-full max-w-screen-xl mx-auto p-6">
       <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Outerplane Tier List",
-      "url": "https://outerpedia.com/tools/tierlist",
-      "description": "Discover the best characters in Outerplane sorted by DPS, Support, and Sustain roles. Tier list curated by the EvaMains community.",
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": characters.map((char, index) => ({
-          "@type": "VideoGameCharacter",
-          "name": char.Fullname,
-          "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
-          "image": `https://outerpedia.com/images/characters/portrait/CT_${char.ID}.webp`,
-          "position": index + 1,
-        })),
-      }
-    }),
-  }}
-/>
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Outerplane Tier List",
+            "url": "https://outerpedia.com/tools/tierlist",
+            "description": "Discover the best characters in Outerplane sorted by DPS, Support, and Sustain roles. Tier list curated by the EvaMains community.",
+            "mainEntity": {
+              "@type": "ItemList",
+              "itemListElement": characters.map((char, index) => ({
+                "@type": "VideoGameCharacter",
+                "name": char.Fullname,
+                "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
+                "image": `https://outerpedia.com/images/characters/portrait/CT_${char.ID}.webp`,
+                "position": index + 1,
+              })),
+            }
+          }),
+        }}
+      />
 
       <h1 className="text-5xl font-extrabold text-center mb-8 bg-gradient-to-b from-yellow-300 via-orange-400 to-red-500 text-transparent bg-clip-text drop-shadow-md">
         Tier List
@@ -139,6 +122,46 @@ export default function TierListPage({ characters, initialTab }: { characters: C
           className="p-2 rounded-lg border border-gray-600 bg-gray-800 text-white placeholder-gray-400 w-full max-w-md"
         />
       </div>
+      <div className="flex justify-center gap-8 mb-6 flex-wrap">
+        {/* Elements */}
+        <div className="flex gap-2">
+          {ELEMENTS.map((el) => (
+            <button
+              key={el}
+              onClick={() => setElementFilter(el === 'All' ? null : el)}
+              className={`flex items-center justify-center w-7 h-7 rounded border transition ${elementFilter === (el === 'All' ? null : el) ? 'bg-cyan-500' : 'bg-gray-700'
+                } hover:bg-cyan-600`}
+              title={el}
+            >
+              {el === 'All' ? (
+                <span className="text-white text-sm font-bold">All</span>
+              ) : (
+                <ElementIcon element={el as ElementType} />
+              )}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex gap-2">
+          {CLASSES.map((cl) => (
+            <button
+              key={cl}
+              onClick={() => setClassFilter(cl === 'All' ? null : cl)}
+              className={`flex items-center justify-center w-7 h-7 rounded border transition ${classFilter === (cl === 'All' ? null : cl) ? 'bg-cyan-500' : 'bg-gray-700'
+                } hover:bg-cyan-600`}
+              title={cl}
+            >
+              {cl === 'All' ? (
+                <span className="text-white text-sm font-bold">All</span>
+              ) : (
+                <ClassIcon className={cl as classtipe} />
+              )}
+            </button>
+          ))}
+        </div>
+
+      </div>
+
 
       {/* Slider */}
       <div className="flex justify-center mb-8">
@@ -227,42 +250,51 @@ export default function TierListPage({ characters, initialTab }: { characters: C
 
 
                 <div className="flex flex-wrap justify-center gap-6">
-                  {chars.map((char, index) => (
-                    <Link
-                      key={char.ID}
-                      href={`/characters/${toKebabCase(char.Fullname)}`}
-                      className={`w-[120px] text-center shadow hover:shadow-lg transition relative overflow-hidden ${char.Fullname.toLowerCase().includes(searchTerm.toLowerCase())
-                        ? 'ring-2 ring-yellow-400'
-                        : 'opacity-40'
-                        }`}
-                    >
-                      <div className="relative w-[120px] h-[231px]">
-                        <Image
-                          src={`/images/characters/portrait/CT_${char.ID}.webp`}
-                          alt={char.Fullname}
-                          fill
-                          sizes="120px"
-                          className="object-cover"
-                          priority={activeTab === 'dps' && index <= 7}
-                        />
-                        <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
-                          {Array(char.Rarity).fill(0).map((_, i) => (
-                            <Image
-                              key={i}
-                              src="/images/ui/star.webp"
-                              alt="star"
-                              width={20}
-                              height={20}
-                              style={{ width: 20, height: 20 }}
-                            />
-                          ))}
-                        </div>
-                        <ClassIcon className={char.Class} />
-                        <ElementIcon element={char.Element} />
-                        <CharacterNameDisplay fullname={char.Fullname} />
-                      </div>
-                    </Link>
-                  ))}
+                {chars
+  .filter((char) => {
+    const matchesSearch = char.Fullname.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesElement = !elementFilter || char.Element === elementFilter
+    const matchesClass = !classFilter || char.Class === classFilter
+    return matchesSearch && matchesElement && matchesClass
+  })
+  .map((char, index) => (
+    <Link
+      key={char.ID}
+      href={`/characters/${toKebabCase(char.Fullname)}`}
+      className="w-[120px] text-center shadow hover:shadow-lg transition relative overflow-hidden"
+    >
+      <div className="relative w-[120px] h-[231px]">
+        <Image
+          src={`/images/characters/portrait/CT_${char.ID}.webp`}
+          alt={char.Fullname}
+          fill
+          sizes="120px"
+          className="object-cover"
+          priority={activeTab === 'dps' && index <= 7}
+        />
+        <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
+          {Array(char.Rarity).fill(0).map((_, i) => (
+            <Image
+              key={i}
+              src="/images/ui/star.webp"
+              alt="star"
+              width={20}
+              height={20}
+              style={{ width: 20, height: 20 }}
+            />
+          ))}
+        </div>
+        <div className="absolute bottom-12.5 right-2 z-30">
+          <ClassIcon className={char.Class as classtipe} />
+        </div>
+        <div className="absolute bottom-5.5 right-1.5 z-30">
+          <ElementIcon element={char.Element as ElementType} />
+        </div>
+        <CharacterNameDisplay fullname={char.Fullname} />
+      </div>
+    </Link>
+  ))}
+
                 </div>
               </div>
             );
