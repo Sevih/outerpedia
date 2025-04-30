@@ -18,6 +18,10 @@ export default function Footer() {
           <Link href="https://discord.gg/keGhVQWsHv" target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-1">
             <FaDiscord /> EvaMains Discord
           </Link>
+          <Link href="/legal" className="text-sm hover:underline">
+            Legal Notice
+          </Link>
+
           <Link href="/changelog" className="text-sm text-muted-foreground hover:underline">
             Changelog
           </Link>
@@ -27,9 +31,9 @@ export default function Footer() {
 
       {/* Disclaimer */}
       <p className="mt-4 text-xs text-muted-foreground max-w-4xl mx-auto px-4 leading-snug">
-  Outerpedia is an unofficial fan-made project. All content related to <i>Outerplane</i>, including characters, images, and game assets, are the property of Smilegate Holdings, Inc., Megaport Branch.
-  This website is not affiliated with, endorsed, or sponsored by Smilegate in any way.
-</p>
+        Outerpedia is an unofficial fan-made project. All content related to <i>Outerplane</i>, including characters, images, and game assets, are the property of Smilegate Holdings, Inc., Megaport Branch.
+        This website is not affiliated with, endorsed, or sponsored by Smilegate in any way.
+      </p>
 
     </footer>
   );

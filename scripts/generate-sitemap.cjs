@@ -19,6 +19,7 @@ const staticPages = [
   '/changelog',
   '/tools',
   '/about',
+  '/legal',
 ];
 
 // 📄 Pages tierlist spécifiques

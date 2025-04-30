@@ -1,3 +1,9 @@
+## 🐛 Legal compliance update (2025-04-30)
+- Added global disclaimer about intellectual property and unofficial status.
+- Created a dedicated `/legal` page with hosting information and takedown policy.
+- Confirmed the site does not collect personal data or include monetization.
+
+
 ## 🚀 Updates (2025-04-26)
 
 ### 🛡 Exclusive Equipment Integration
