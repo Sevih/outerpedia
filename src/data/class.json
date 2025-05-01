@@ -14,7 +14,7 @@
       }
     },
     "Striker": {
-      "description": "Generates 5 Action Points on critical hit\nGenerates 20 Action Points when attacking\nIncreases Critical Hit Chance by 5%",
+      "description": "Generates 5 Action Points at the start of turn\nGenerates 20 Action Points when attacking\nIncreases Critical Hit Chance by 5%",
       "image": "/images/ui/classgraph/striker.webp",
       "subclasses": {
         "Attacker": {
