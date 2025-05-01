@@ -115,7 +115,7 @@
     },
     {
         "name": "BT_WG_DMG",
-        "label": "Weakness Guage Damage",
+        "label": "Weakness Gauge Damage",
         "description": "Deal additional Weakness Gauge damage",
         "icon": "SC_Buff_Effect_WG_Dmg"
     },
