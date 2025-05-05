@@ -1,0 +1,99 @@
+{
+    "dahlia": {
+      "category": "world-boss",
+      "title": "Dahlia",
+      "description": "Video guide",
+      "icon": "dahlia",
+      "last_updated": "2024-11-20",
+      "author": "Ducky"
+    },
+    "ragnakeus": {
+      "category": "world-boss",
+      "title": "Ragnakeus",
+      "description": "Video guide",
+      "icon": "ragnakeus",
+      "last_updated": "2024-10-28",
+      "author": "Ducky"
+    },
+    "harsha": {
+      "category": "world-boss",
+      "title": "Harsha",
+      "description": "Combat Footage",
+      "icon": "harsha",
+      "last_updated": "2025-01-15",
+      "author": "Ducky"
+    },
+    "drakhan": {
+      "category": "world-boss",
+      "title": "Drakhan",
+      "description": "Combat Footage",
+      "icon": "drakhan",
+      "last_updated": "2024-12-17",
+      "author": "Ducky"
+    },
+    "primordial_sentinel": {
+      "category": "world-boss",
+      "title": "Primordial Sentinel",
+      "description": "World Boss Guide! Full Run and Explanation",
+      "icon": "primordial_sentinel",
+      "last_updated": "2024-07-09",
+      "author": "Ducky"
+    },
+    "venion": {
+      "category": "world-boss",
+      "title": "Venion",
+      "description": "Video guide",
+      "icon": "venion",
+      "last_updated": "2025-02-11",
+      "author": "Adjen"
+    },
+    "glicys": {
+      "category": "special-request",
+      "title": "Glicys",
+      "description": "Boss strategy guide",
+      "icon": "glicys",
+      "last_updated": "2025-04-08",
+      "author": "Arabyss & Kilvanoshei"
+    },    
+    "beatles": {
+      "category": "special-request",
+      "title": "Dek'ril & Mek'ril",
+      "description": "Boss strategy guide",
+      "icon": "beatles",
+      "last_updated": "2025-04-08",
+      "author": "Arabyss & Kilvanoshei"
+    },
+    "meteos": {
+      "category": "special-request",
+      "title": "Blazing Knight Meteos",
+      "description": "Boss strategy guide",
+      "icon": "meteos",
+      "last_updated": "2025-04-08",
+      "author": "Arabyss & Kilvanoshei"
+    }   ,
+    "chimera": {
+      "category": "special-request",
+      "title": "Unidentified Chimera",
+      "description": "Boss strategy guide",
+      "icon": "chimera",
+      "last_updated": "2024-09-19",
+      "author": "Ducky"
+    },
+    "guardian": {
+      "category": "special-request",
+      "title": "Masterless Guardian",
+      "description": "Boss strategy guide",
+      "icon": "guardian",
+      "last_updated": "2024-09-19",
+      "author": "Ducky"
+    }   ,
+    "tyrant": {
+      "category": "special-request",
+      "title": "Tyrant Toddler",
+      "description": "Boss strategy guide",
+      "icon": "tyrant",
+      "last_updated": "2024-09-19",
+      "author": "Ducky"
+    }                
+  }
+  

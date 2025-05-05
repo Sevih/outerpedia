@@ -1,0 +1,51 @@
+{
+    "world-boss": {
+      "title": "World Boss Guides",
+      "description": "Form the best teams to defeat massive enemies.",
+      "icon": "/images/guides/CM_Adventure_WorldBoss",
+      "valid":true
+    },
+    "special-request": {
+      "title": "Gear Boss Tips",
+      "description": "Strategies for Special Request Ecology Study & Identification.",
+      "icon": "/images/guides/CM_Adventure_Challenge",
+      "valid":true
+    },
+    "skyward-tower": {
+      "title": "Skyward Tower Tips",
+      "description": "Strategies to help you climb the tower.",
+      "icon": "/images/guides/CT_Symbol_Automata",
+      "valid":false
+    },
+    "joint-boss": {
+      "title": "Joint Boss Tips",
+      "description": "Find synergy to grab the maximum point.",
+      "icon": "/images/guides/CM_Adventure_Cooperation",
+      "valid":false
+    },
+    "guild-raid": {
+      "title": "Guild Raid Tips",
+      "description": "Helps you to achieve high score in guild raids.",
+      "icon": "/images/guides/GD_Mark_07",
+      "valid":false
+    },
+    "adventure-license": {
+      "title": "Adventure Licence Tips",
+      "description": "Level up your licence.",
+      "icon": "/images/guides/T_Licence_Level_03",
+      "valid":false
+    },
+    "irregular-extermination": {
+      "title": "Irregular Extermination Tips",
+      "description": "Ease your way to kill the queen and her foes.",
+      "icon": "/images/guides/CM_Adventure_Irregular",
+      "valid":false
+    },
+    "general-guide": {
+      "title": "General Tips",
+      "description": "Anything that doesn't go in another category.",
+      "icon": "/images/guides/CM_Adventure_SideStory",
+      "valid":false
+    }
+  }
+  

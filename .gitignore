@@ -19,7 +19,7 @@
 # next.js
 /.next/
 /out/
-
+/datamine/
 # production
 /build
 /public/sitemap.xml

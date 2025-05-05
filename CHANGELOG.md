@@ -1,3 +1,7 @@
+## 🛠 Add guide (2025-05-05)
+- Some guide were add like world boss and RGB special request
+
+
 ## 🚀 Multi Select (2025-05-01)
 - Add the option to select multple element, class, rarity on tier list, ee priority and character page
 

@@ -1,0 +1,159 @@
+import rawGuides from '@/data/guides/guides-ref.json';
+import { notFound } from 'next/navigation';
+import GuideContentWrapper from './GuideContentWrapper';
+import Link from 'next/link';
+import Image from 'next/image';
+import type { Metadata } from 'next';
+
+type Guide = {
+  category: string;
+  title: string;
+  description: string;
+  icon: string;
+  last_updated: string;
+  author: string;
+};
+
+type Props = {
+  params: {
+    category: string;
+    slug: string;
+  };
+};
+
+const guides: Record<string, Guide> = rawGuides;
+
+// 📌 Génération des routes statiques
+export async function generateStaticParams() {
+  return Object.entries(guides).map(([slug, guide]) => ({
+    category: guide.category,
+    slug,
+  }));
+}
+
+// 📌 Métadonnées dynamiques pour SEO
+export async function generateMetadata({ params }: { params: Promise<Props["params"]> }): Promise<Metadata> {
+  const { category, slug } = await params;
+  const guide = guides[slug];
+
+
+  if (!guide || guide.category !== category) {
+    return {
+      title: 'Guide not found',
+      description: 'This guide does not exist.',
+    };
+  }
+
+  const url = `https://outerpedia.com/guides/${guide.category}/${slug}`;
+  const image = `https://outerpedia.com/images/guides/${guide.category}/${slug}_portrait.png`;
+
+  return {
+    title: `${guide.title} | Outerpedia`,
+    description: guide.description,
+    openGraph: {
+      title: `${guide.title} | Outerpedia`,
+      description: guide.description,
+      type: 'article',
+      url,
+      images: [
+        {
+          url: image,
+          width: 150,
+          height: 150,
+          alt: `${guide.title} portrait`,
+        },
+      ]
+    },
+    twitter: {
+      card: 'summary',
+      title: `${guide.title} | Outerpedia`,
+      description: guide.description,
+      images: [image],
+    },
+  };
+}
+
+
+// 📌 Rendu principal de la page
+export default async function GuidePage({ params }: { params: Promise<Props["params"]> }) {
+  const { category, slug } = await params;
+  const guide = guides[slug];
+
+  if (!guide || guide.category !== category) {
+    notFound();
+  }
+
+  return (
+    <div className="p-6">
+      <div className="relative w-full h-[150px] rounded-2xl overflow-hidden mb-6">
+        {/* Image centrée */}
+        <Image
+          src={`/images/guides/${guide.category}/${slug}_banner.webp`}
+          alt={`${guide.title} banner`}
+          fill
+          sizes="100vw"
+          className="object-contain z-0"
+          priority
+        />
+
+
+        {/* Flèche retour */}
+        <div className="absolute top-4 left-4 z-10 h-[32px] w-[32px]">
+          <Link href={`/guides/${category}`} className="relative block h-full w-full">
+            <Image
+              src="/images/ui/CM_TopMenu_Back.webp"
+              alt="Back"
+              fill
+              sizes='32px'
+              className="opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </Link>
+        </div>
+
+        {/* Texte positionné sur la zone rouge */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-13/10 -translate-y-1/3 z-10 text-center">
+          <h1 className="text-white text-xl sm:text-2xl font-bold drop-shadow-sm leading-tight text-left">
+            <div className="text-sm sm:text-base uppercase tracking-wide font-semibold">
+              {category.replace(/-/g, ' ')}
+            </div>
+            <div className="text-sm sm:text-base uppercase tracking-wide font-semibold">{guide.title}</div>
+          </h1>
+        </div>
+      </div>
+
+
+
+
+      <p className="text-neutral-300 mb-2">{guide.description}</p>
+
+      <div className="text-sm text-neutral-400 mb-6">
+        ✍️ {guide.author} · 🕒 {new Date(guide.last_updated).toLocaleDateString()}
+      </div>
+
+      <div className="mt-6">
+        <GuideContentWrapper category={category} slug={slug} />
+      </div>
+
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: guide.title,
+            description: guide.description,
+            author: {
+              '@type': 'Person',
+              name: guide.author,
+            },
+            datePublished: guide.last_updated,
+            url: `https://outerpedia.com/guides/${category}/${slug}`,
+          }),
+        }}
+      />
+    </div>
+  );
+
+
+}

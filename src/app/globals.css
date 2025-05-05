@@ -144,4 +144,107 @@
     background-size: contain;
     pointer-events: none;
   }
+
+  .guide-title {
+    font-family: 'Rajdhani';
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    padding: 1rem 2rem;
+    background: url('/images/ui/CM_Desc_Bg.webp') center center / cover no-repeat;
+    border-radius: 8px;
+    opacity: 0.92;
+    position: relative;
+  }
+  
+  .guide-title::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 12px;
+    background: url('/images/ui/CM_Result_Victory_Bg.webp') center bottom no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  
+  
+  .wrapper_carrousel {
+    width: 200px; /* ou plus, selon combien tu veux montrer */
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+  }
+  
+  
+
+  .scene {
+    width: 120px;
+    height: 231px;
+    perspective: 150px;
+    position: relative;
+  }
+  
+  .scene .carousel.keen-slider {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    position: absolute;
+    transform: translateZ(-260px);
+    transform-style: preserve-3d;
+  }
+  
+  .carousel__cell {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carousel__cell img {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    transition: filter 0.3s ease;
+  }
+  
+  .carousel__cell:not(.is-active) img,
+.carousel__cell:not(.is-active) .overlay-fade {
+  filter: grayscale(80%) blur(2px) brightness(0.8);
+  transition: filter 0.3s ease;
+}
+
+  
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.arrow-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.arrow-button:hover {
+  opacity: 1;
+}
+
   

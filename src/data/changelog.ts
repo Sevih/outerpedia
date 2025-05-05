@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-05",
+    title: "Add guide",
+    type: "update",
+    content: [
+      "- Some guide were add like world boss and RGB special request",
+    ],
+  },
+  {
     date: "2025-05-01",
     title: "Multi Select",
     type: "feature",

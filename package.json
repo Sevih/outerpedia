@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -20,6 +20,7 @@
     "@radix-ui/react-tooltip": "^1.2.3",
     "classnames": "^2.5.1",
     "framer-motion": "^12.7.4",
+    "keen-slider": "^6.8.6",
     "markdown-it": "^14.1.0",
     "marked": "^15.0.8",
     "next": "15.3.1",
@@ -40,6 +41,7 @@
     "eslint-config-next": "15.3.1",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
