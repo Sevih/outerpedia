@@ -25,6 +25,8 @@ export default function TyrantGuide() {
                 <li>Units with AoE cleansing are very important.</li>
                 <li><CharacterLinkCard name="Dianne" />&#39;s S3 completely trivializes this boss by cleansing the full duration of all debuffs.</li>
                 <li><CharacterLinkCard name="Saeran" />&#39;s Skill 2 Burst 2 is also viable, but you need to build enough AP in the first area to use it immediately.</li>
+                <li><CharacterLinkCard name="Shu" />&#39;s Skill 3 is viable but only cleanse 2 debuffs.</li>
+                <li><CharacterLinkCard name="Monad Eva" />&#39;s Skill 1 Burst 3 works too but you need her 5 star and AP.</li>
                 <li>Once cleansed, you must use <strong>Burst Skills</strong>, <strong>Dual Attacks</strong>, and <strong>Chain Skills</strong> to damage his WG.</li>
                 <li>Try to burst him down quickly since his damage increases rapidly over time.</li>
             </ul>
