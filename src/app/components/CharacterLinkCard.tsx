@@ -9,6 +9,7 @@ import { toKebabCase } from '@/utils/formatText';
 const characterNameMap: Record<string, string> = {
   Meva: 'Monad Eva',
   DStella: 'Demiurge Stella',
+  Dstella: 'Demiurge Stella',
   Val : "Valentine",
   // Ajoute d'autres alias ici si besoin
 };

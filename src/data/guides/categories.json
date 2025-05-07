@@ -21,7 +21,7 @@
       "title": "Joint Boss Tips",
       "description": "Find synergy to grab the maximum point.",
       "icon": "/images/guides/CM_Adventure_Cooperation",
-      "valid":false
+      "valid":true
     },
     "guild-raid": {
       "title": "Guild Raid Tips",

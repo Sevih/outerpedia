@@ -1,6 +1,7 @@
 'use client'
 
 import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teamSetup = [
   ['Veronica', 'Lyla', 'Ritri', 'Mene', 'Monad Eva'],
@@ -34,7 +35,7 @@ export default function MasterlessGuide() {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
         <p className="mb-2 text-neutral-300">
-          A sample video of the recommended team in action will be added here soon.
+        <YoutubeEmbed videoId="bAoBcUW9h7k" title='combat footage'/>
         </p>
       </div>
     </div>

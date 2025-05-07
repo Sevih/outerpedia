@@ -1151,5 +1151,15 @@
 		"debuff": [
 			"BT_AGGRO"
 		]
+	},
+	"nadja": {
+		"name": "Path of Endless Hunger",
+		"mainStat": "Reduces Light Damage Taken",
+		"effect": "Increases Caster's Effectiveness by 100%",
+		"effect10": "Increases Baster's Health by 35%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "",
+		"buff": [],
+		"debuff": []
 	}
 }

@@ -98,7 +98,7 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
 
 
         {/* Flèche retour */}
-        <div className="absolute top-4 left-4 z-10 h-[32px] w-[32px]">
+        <div className="absolute top-4 left-4 z-20 h-[32px] w-[32px]">
           <Link href={`/guides/${category}`} className="relative block h-full w-full">
             <Image
               src="/images/ui/CM_TopMenu_Back.webp"
@@ -111,15 +111,14 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
         </div>
 
         {/* Texte positionné sur la zone rouge */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-13/10 -translate-y-1/3 z-10 text-center">
-          <h1 className="text-white text-xl sm:text-2xl font-bold drop-shadow-sm leading-tight text-left">
-            <div className="text-sm sm:text-base uppercase tracking-wide font-semibold">
-              {category.replace(/-/g, ' ')}
-            </div>
-            <div className="text-sm sm:text-base uppercase tracking-wide font-semibold">{guide.title}</div>
-          </h1>
-        </div>
-      </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-white text-center px-4">
+          <div className="text-xs sm:text-sm uppercase tracking-wide font-semibold mb-3">
+            <span className="guide-title">{category.replace(/-/g, ' ')}</span>
+          </div>
+          <div className="text-base sm:text-lg md:text-xl font-bold leading-tight max-w-full break-words">
+            <span className="guide-title mt-4">{guide.title}</span>
+          </div>
+        </div></div>
 
 
 

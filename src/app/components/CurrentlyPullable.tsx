@@ -4,8 +4,7 @@ import path from 'path'
 import CurrentlyPullableClient from './CurrentlyPullableClient'
 
 const pullableCharacters = [
-  { name: 'Luna', endDate: getEndDateAtUkReset('2025-05-07') },
-  { name: 'Hilde', endDate: getEndDateAtUkReset('2025-05-07') },
+  { name: 'Nadja', endDate: getEndDateAtUkReset('2025-06-04') },
 ]
 
 function getEndDateAtUkReset(dateStr: string): string {

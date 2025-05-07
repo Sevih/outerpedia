@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-07",
+    title: "Nadja[D[D[D[D[DNew hero - Nadja",
+    type: "update",
+    content: [
+      "- Omega Nadja, who removes enemy Detonation damage and Priority increase effects, plays an important role in various boss battles and will be joining us.",
+    ],
+  },
+  {
     date: "2025-05-05",
     title: "Add guide",
     type: "update",

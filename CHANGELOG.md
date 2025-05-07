@@ -1,3 +1,7 @@
+## 🛠 Nadja[D[D[D[D[DNew hero - Nadja (2025-05-07)
+- Omega Nadja, who removes enemy Detonation damage and Priority increase effects, plays an important role in various boss battles and will be joining us.
+
+
 ## 🛠 Add guide (2025-05-05)
 - Some guide were add like world boss and RGB special request
 

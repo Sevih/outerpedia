@@ -94,6 +94,14 @@
       "icon": "tyrant",
       "last_updated": "2024-09-19",
       "author": "Ducky"
-    }                
+    },
+    "deep-sea-guardian": {
+      "category": "joint-boss",
+      "title": "Deep Sea Guardian",
+      "description": "Boss strategy guide",
+      "icon": "deep-sea-guardian",
+      "last_updated": "2025-03-06",
+      "author": "Arabyss"
+    }                  
   }
   
