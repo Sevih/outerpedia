@@ -168,9 +168,9 @@
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
       "TargetTeamType_fallback1": "NONE",
-      "buff": [],
+      "buff": ["BT_AP_CHARGE"],
       "cd": null,
-      "debuff": "SYS_BUFF_CHARGE_BP",
+      "debuff": [],
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: Increases caster Skill Chain Attack proportional to casterâs Max Health rather Attack and restores Action Point the caster and the next chain skill caster by <color=#28d9ed>[Buff_V_2000102_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Increases casterâs Skill Chain Attack proportional to casterâs Max Health rather Attack and after the attack, has a [Buff_C_2000102_backup_1_1] chance to reduce the targetâs Speed for <color=#28d9ed>[Buff_T_2000102_backup_1_1] turn(s)</color>."
       ],
