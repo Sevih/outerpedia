@@ -47,7 +47,7 @@
         },
         "SKT_BURST_3": {
           "cost": 160,
-          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases Skill Range (All)\\nGrants Barrier to all allies for 2 turns (Proportional to casterâs Health)",
+          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases Skill Range (All)\\nGrants Barrier to all allies for 2 turns (Proportional to caster's Health)",
           "level": 3
         }
       },
