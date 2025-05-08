@@ -204,6 +204,13 @@
         "icon": "SC_Buff_Cool_Charge"
     },
     {
+        "name": "IG_Buff_BuffdurationReduce",
+        "label": "Reduced Buff Duration",
+        "description": "Reduced duration of beneficial effects granted on target",
+        "icon": "IG_Buff_BuffdurationReduce"
+    },
+    
+    {
         "name": "BT_SEALED_RESURRECTION",
         "label": "Extinction",
         "description": "Enemies killed by this skill cannot be Resurected or Revived",

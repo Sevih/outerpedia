@@ -102,6 +102,15 @@
       "icon": "deep-sea-guardian",
       "last_updated": "2025-03-06",
       "author": "Arabyss"
-    }                  
+    },
+    "prom-dvlada": {
+      "category": "adventure-license",
+      "title": "Promotion : Demiurge Vlada",
+      "description": "Boss strategy guide",
+      "icon": "prom-dvlada",
+      "last_updated": "2025-03-12",
+      "author": "Shiraen",
+      "second_image":"prom-dvlada-hide"
+    }                     
   }
   

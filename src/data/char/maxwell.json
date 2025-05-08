@@ -88,7 +88,7 @@
         }
       },
       "cd": "5",
-      "debuff": [],
+      "debuff": ["IG_Buff_BuffdurationReduce"],
       "description": [
         "Attacks all enemies and reduces the duration of <color=#28d9ed>buffs</color> on each target that took damage by <color=#28d9ed>1 turn</color>. Obtains <color=#28d9ed>[Buff_V_2000028_2_1]</color> <color=#28d9ed>Revelation of Truth (Unique Resource)</color> if used during the caster's turn. The damage dealt is inversely proportional to the number of targets."
       ],

@@ -12,6 +12,7 @@ type Guide = {
   icon: string;
   last_updated: string;
   author: string;
+  second_image?: string;
 };
 
 type Props = {
@@ -87,14 +88,43 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
     <div className="p-6">
       <div className="relative w-full h-[150px] rounded-2xl overflow-hidden mb-6">
         {/* Image centrée */}
-        <Image
-          src={`/images/guides/${guide.category}/${slug}_banner.webp`}
-          alt={`${guide.title} banner`}
-          fill
-          sizes="100vw"
-          className="object-contain z-0"
-          priority
-        />
+
+        {
+          !guide.second_image ? (
+            // 🟦 Cas 1 : une seule bannière
+            <Image
+              src={`/images/guides/${guide.category}/${slug}_banner.webp`}
+              alt={`${guide.title} banner`}
+              fill
+              sizes="100vw"
+              className="object-contain z-0"
+              priority
+            />
+          ) : (
+            // 🟪 Cas 2 : deux images
+            <>
+              <Image
+                src={`/images/guides/${guide.category}/${slug}_banner.webp`}
+                alt={`${guide.title} banner`}
+                fill
+                sizes="100vw"
+                className="object-contain"
+                style={{ left: '20%' }}
+                priority
+              />
+              <Image
+                src={`/images/guides/${guide.category}/${guide.second_image}_banner.webp`}
+                alt={`${guide.title} second banner`}
+                fill
+                sizes="100vw"
+                className="object-contain"
+                style={{ left: '-20%' }}
+              />
+
+            </>
+          )
+        }
+
 
 
         {/* Flèche retour */}

@@ -102,6 +102,20 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
     </h1>
   </div>
 </div>
+<div className="mb-4 flex justify-end items-center gap-2">
+  <label className="text-sm text-white">Sort by:</label>
+  <select
+    id="sortSelector"
+    className="bg-neutral-800 text-white border border-neutral-700 rounded px-2 py-1 text-sm"
+  >
+    <option value="date-desc">Date ↓</option>
+    <option value="date-asc">Date ↑</option>
+    <option value="title-asc">Title A→Z</option>
+    <option value="title-desc">Title Z→A</option>
+    <option value="author-asc">Author A→Z</option>
+    <option value="author-desc">Author Z→A</option>
+  </select>
+</div>
 
 
       <GuideCardGrid items={filtered} />
@@ -129,6 +143,38 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
           }),
         }}
       />
+      <script
+  suppressHydrationWarning
+  dangerouslySetInnerHTML={{
+    __html: `
+      document.getElementById('sortSelector')?.addEventListener('change', (e) => {
+        const value = e.target.value;
+        const [key, order] = value.split('-');
+        const container = document.querySelector('[data-guide-grid]');
+        if (!container) return;
+
+        const cards = Array.from(container.children);
+        cards.sort((a, b) => {
+          const va = a.dataset[key];
+          const vb = b.dataset[key];
+          if (key === 'date') {
+            return order === 'asc' ? Number(va) - Number(vb) : Number(vb) - Number(va);
+          } else {
+            return order === 'asc'
+              ? va.localeCompare(vb)
+              : vb.localeCompare(va);
+          }
+        });
+
+        cards.forEach((el) => container.appendChild(el));
+      });
+    `,
+  }}
+/>
+
+
     </div>
+    
+    
   );
 }

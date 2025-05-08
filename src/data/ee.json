@@ -164,7 +164,7 @@
 		"icon_effect": "TI_Icon_UO_Accessary_07",
 		"rank": "S",
 		"buff": [],
-		"debuff": []
+		"debuff": ["IG_Buff_BuffdurationReduce"]
 	},
 	"cindy": {
 		"name": "Receptionist's Essentials",

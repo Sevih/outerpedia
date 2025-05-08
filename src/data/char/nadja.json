@@ -133,7 +133,8 @@
       "cd": "5",
       "debuff": [
         "BT_AGGRO",
-        "UNIQUE_IRREGULAR_INFECTION"
+        "UNIQUE_IRREGULAR_INFECTION",
+        "IG_Buff_BuffdurationReduce"
       ],
       "description": [
         "Attacks all enemies. With a <color=#28d9ed>[Buff_C_2000102_3_1]</color> chance, grants <color=#28d9ed>Taunted</color> to the target for <color=#28d9ed>[Buff_T_2000102_3_1] turn(s)</color>, and when attacking a boss, deals Fixed Damage equal to <color=#28d9ed>[Buff_V_2000102_3_4]</color> of the bossâ Max Health.\\n\\nThen grants a <color=#28d9ed>Barrier</color> to all heroes for <color=#28d9ed>[Buff_T_2000102_3_2] turns</color> and grants <color=#28d9ed>Irregular Infection</color> to the fastest enemy for <color=#28d9ed>[Buff_T_2000102_3_3] turns</color>. (Ignores Immunity, Irremovable)\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
