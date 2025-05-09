@@ -4,7 +4,7 @@ import path from 'path'
 import CurrentlyPullableClient from './CurrentlyPullableClient'
 
 const pullableCharacters = [
-  { name: 'Nadja', endDate: getEndDateAtUkReset('2025-06-04') },
+  { name: 'Omega Nadja', endDate: getEndDateAtUkReset('2025-06-04') },
 ]
 
 function getEndDateAtUkReset(dateStr: string): string {
@@ -23,6 +23,8 @@ export default function CurrentlyPullable() {
     return {
       name,
       id: data.ID,
+      rarity: data.Rarity,
+      limited: data.limited,
       slug,
       endDate,
       element: data.Element.toLowerCase(),

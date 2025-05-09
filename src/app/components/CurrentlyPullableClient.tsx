@@ -4,9 +4,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Countdown from './Countdown'
 
+import type { ElementType, ClassType } from '@/types/enums';
+import { CharacterNameDisplay } from '@/app/components/CharacterNameDisplay'
+import { ElementIcon } from '@/app/components/ElementIcon'
+import { ClassIcon } from '@/app/components/ClassIcon'
+
 type Character = {
   name: string
   id: string
+  rarity: number
+  limited: boolean
   slug: string
   endDate: string
   element: string
@@ -25,50 +32,69 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
       {/* Cartes */}
       <div className="flex gap-5 justify-center flex-wrap">
         {/* Cartes personnages */}
-        {characters.map(({ name, id, slug, endDate, element, class: charClass }) => (
-          <Link key={name} href={`/characters/${slug}`}>
-            <div className="bg-gray-800 hover:bg-gray-700 rounded-xl overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-105 w-[120px]">
-              <div className="relative w-full h-48">
+        {characters.map(({ name, id, limited, rarity, slug, endDate, element, class: charClass }) => (
+          <div key={id} className="flex flex-col items-center space-y-1">
+            <Link
+              href={`/characters/${slug}`}
+              prefetch={false}
+              className="relative w-[120px] h-[231px] text-center shadow hover:shadow-lg transition overflow-hidden rounded"
+            >
+              {limited && (
                 <Image
-                  src={`/images/characters/portrait/CT_${id}.webp`}
-                  alt={name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority
+                  src="/images/ui/CM_Shop_Tag_Limited.webp"
+                  alt="Limited"
+                  width={75}
+                  height={30}
+                  className="absolute top-1 left-1 z-30 object-contain"
+                  style={{ width: 75, height: 30 }}
                 />
-              </div>
-              <div className="flex items-center justify-center gap-2 py-2 font-medium text-white">
-                <div className="relative w-[20px] h-[20px]">
-                  <Image
-                    src={`/images/ui/elem/${element}.webp`}
-                    alt={element}
-                    fill
-                    sizes="20px"
-                    className="object-contain"
-                  />
-                </div>
+              )}
 
-                {/* Protection du nom */}
-                <div className="max-w-[60px] overflow-hidden text-ellipsis whitespace-nowrap text-sm text-center">
-                  {name}
-                </div>
-                <div className="relative w-[20px] h-[20px]">
+              {/* Image du personnage */}
+              <Image
+                src={`/images/characters/portrait/CT_${id}.webp`}
+                alt={name}
+                width={120}
+                height={231}
+                style={{ width: 120, height: 231 }}
+                className="object-cover rounded"
+                priority
+                unoptimized
+              />
+
+              {/* Étoiles fictives (remplace par ta logique réelle si tu veux) */}
+              <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
+                {[...Array(rarity)].map((_, i) => (
                   <Image
-                    src={`/images/ui/class/${charClass}.webp`}
-                    alt={charClass}
-                    fill
-                    className="object-contain"
-                    sizes="20px"
+                    key={i}
+                    src="/images/ui/star.webp"
+                    alt="star"
+                    width={20}
+                    height={20}
+                    style={{ width: 20, height: 20 }}
                   />
-                </div>
+                ))}
               </div>
-              <div className="text-center pb-2">
-                <Countdown endDate={endDate} element={element} />
+
+              {/* Icône de classe */}
+              <div className="absolute bottom-12.5 right-2 z-30">
+                <ClassIcon className={charClass as ClassType} />
               </div>
-            </div>
-          </Link>
+
+              <div className="absolute bottom-5.5 right-1.5 z-30">
+                <ElementIcon element={element as ElementType} />
+              </div>
+
+              {/* Nom du personnage en overlay bas */}
+              <CharacterNameDisplay fullname={name} />
+
+            </Link>
+
+            {/* Countdown en dessous de la carte */}
+            <Countdown endDate={endDate} element={element} />
+          </div>
         ))}
+
 
         {/* Carte spéciale Discord toujours présente */}
         <Link key="discord" href="https://discord.gg/keGhVQWsHv" target="_blank" rel="noopener noreferrer">

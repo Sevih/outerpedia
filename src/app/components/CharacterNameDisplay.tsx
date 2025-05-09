@@ -9,6 +9,7 @@ type Props = {
 
 const PREFIX_STYLES: Record<string, string> = {
   'Gnosis': 'text-xs',
+  'Omega': 'text-xs',
   'Demiurge': 'text-[10px]',
   'Monad': 'text-xs',
   "Holy Night's Blessing": 'text-[10px]',
@@ -31,6 +32,7 @@ const NAME_STYLES: Record<string, string> = {
 
 const PREFIX_STYLES_BIG: Record<string, string> = {
   'Gnosis': 'text-[21px]',
+  'Omega': 'text-[21px]',
   'Demiurge': 'text-[21px]',
   'Monad': 'text-[21px]',
   "Holy Night's Blessing": 'text-[21px]',
@@ -90,13 +92,13 @@ export function CharacterNameDisplayBig({ fullname }: Props) {
 
   return (
     <div className="flex flex-col text-white leading-tight mb-2">
-      {prefix && (
+      {/* ICI on utilise un vrai h1 pour le nom principal */}
+      <h1 className={`${nameSize} font-bold custom-text-shadow`}>
+        {prefix && (
         <div className={`${prefixSize} custom-text-shadow mb-[-2px]`}>
           {prefix}
         </div>
       )}
-      {/* ICI on utilise un vrai h1 pour le nom principal */}
-      <h1 className={`${nameSize} font-bold custom-text-shadow`}>
         {name}
       </h1>
     </div>
