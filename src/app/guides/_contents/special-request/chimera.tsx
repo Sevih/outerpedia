@@ -48,7 +48,7 @@ export default function ChimeraGuide() {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
         <p className="mb-2 text-neutral-300">
-        <YoutubeEmbed videoId="zzyPlG1vXq0" title='combat footage'/>
+        <YoutubeEmbed videoId="eHRErCHZmp4" title='combat footage'/>
         </p>
       </div>
     </div>

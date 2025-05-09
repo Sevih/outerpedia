@@ -35,7 +35,7 @@ export default function MasterlessGuide() {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
         <p className="mb-2 text-neutral-300">
-        <YoutubeEmbed videoId="bAoBcUW9h7k" title='combat footage'/>
+        <YoutubeEmbed videoId="jAJOiJgASCU" title='combat footage'/>
         </p>
       </div>
     </div>

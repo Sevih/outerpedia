@@ -54,7 +54,7 @@ export default function BeatlesGuide() {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
       
-          <YoutubeEmbed videoId="0kiU_DqcFjw" title='combat footage'/>
+          <YoutubeEmbed videoId="eQmB1Uw9qL8" title='combat footage'/>
         
       </div>
     </div>

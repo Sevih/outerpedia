@@ -49,7 +49,7 @@ export default function GlicysGuide() {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
         <p className="mb-2 text-neutral-300">
-        <YoutubeEmbed videoId="BsWCWzGmurw" title='combat footage'/>
+        <YoutubeEmbed videoId="NikwWwstygo" title='combat footage'/>
         </p>
       </div>
 
