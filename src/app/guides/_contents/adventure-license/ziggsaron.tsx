@@ -49,7 +49,7 @@ export default function RavenousWolfKingZiggsaronGuide() {
         <li className="text-neutral-400 text-sm italic">1 attempt. Verified up to stage 10.</li>
         <li><strong>Team 2:</strong> <CharacterLinkCard name="Ember" />, <CharacterLinkCard name="Fatal" />, <CharacterLinkCard name="Edelweiss" /> / <CharacterLinkCard name="Stella" />, <CharacterLinkCard name="Tamara" /></li>
         <li className="text-neutral-400 text-sm italic">
-          Ember's self-inflicted <EffectInlineTag name="BT_MARKING" type="debuff" /> keeps S1 focused on her. Tamara should prevent S3 usage – S2 is harmless.
+          Ember&apos;s self-inflicted <EffectInlineTag name="BT_MARKING" type="debuff" /> keeps S1 focused on her. Tamara should prevent S3 usage – S2 is harmless.
         </li>
       </ul>
 

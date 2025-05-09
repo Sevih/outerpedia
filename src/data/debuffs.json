@@ -141,7 +141,7 @@
         "name": "BT_SILENCE_IR",
         "label": "Silenced",
         "description": "Cannot only use skill chain and basic attack while this effect is applied (Irremovable",
-        "icon": ""
+        "icon": "IG_Buff_Effect_Silence_Interruption_D"
     },
     {
         "name": "BT_MARKING",

@@ -112,7 +112,7 @@
         "name": "BT_INVINCIBLE_IR",
         "label": "Invulnerability",
         "description": "Does not receive any damage.",
-        "icon": ""
+        "icon": "IG_Buff_Effect_Invincible_Interruption"
     },
     {
         "name": "SYS_CONTINU_HEAL",
