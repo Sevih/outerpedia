@@ -109,6 +109,12 @@
         "icon": "SC_Buff_Effect_Invincible"
     },
     {
+        "name": "BT_INVINCIBLE_IR",
+        "label": "Invulnerability",
+        "description": "Does not receive any damage.",
+        "icon": ""
+    },
+    {
         "name": "SYS_CONTINU_HEAL",
         "label": "Sustained Recovery",
         "description": "Recovers 15% of Max Health each turn",

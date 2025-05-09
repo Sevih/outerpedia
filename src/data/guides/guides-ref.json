@@ -111,6 +111,100 @@
       "last_updated": "2025-03-12",
       "author": "Shiraen",
       "second_image":"prom-dvlada-hide"
-    }                     
+    }   ,
+    "prom-ddrakhan": {
+      "category": "adventure-license",
+      "title": "Promotion : Demiurge Drakhan",
+      "description": "Boss strategy guide",
+      "icon": "prom-ddrakhan",
+      "last_updated": "2025-01-15",
+      "author": "Shiraen",
+      "second_image":"prom-ddrakhan-hide"
+    }    ,
+    "prom-dastei": {
+      "category": "adventure-license",
+      "title": "Promotion : Demiurge Astei",
+      "description": "Boss strategy guide",
+      "icon": "prom-dastei",
+      "last_updated": "2024-12-02",
+      "author": "Shiraen",
+      "second_image":"prom-dastei-hide"
+    },
+    "prom-dstella": {
+      "category": "adventure-license",
+      "title": "Promotion : Demiurge Stella",
+      "description": "Boss strategy guide",
+      "icon": "prom-dstella",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"prom-dstella-hide"
+    },
+    "anubis-g": {
+      "category": "adventure-license",
+      "title": "Anubis Guardian",
+      "description": "Boss strategy guide",
+      "icon": "anubis-g",
+      "last_updated": "2025-03-17",
+      "author": "Shiraen",
+      "second_image":"anubis2-g"
+    },
+    "heavy-fixed-vladi-max": {
+      "category": "adventure-license",
+      "title": "Heavy Fixed Vladi Max",
+      "description": "Boss strategy guide",
+      "icon": "heavy-fixed-vladi-max",
+      "last_updated": "2025-01-20",
+      "author": "Shiraen",
+      "second_image":"heavy-fixed-vladi-max2"
+    },
+    "amadeus-AL": {
+      "category": "adventure-license",
+      "title": "Amadeus",
+      "description": "Boss strategy guide",
+      "icon": "amadeus",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"amadeus2"
+    },
+    "meteos-AL": {
+      "category": "adventure-license",
+      "title": "Blazing Knight Meteos",
+      "description": "Boss strategy guide",
+      "icon": "meteos",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"meteos2"
+    },
+    "sacreed-AL": {
+      "category": "adventure-license",
+      "title": "Sacreed Guardian",
+      "description": "Boss strategy guide",
+      "icon": "sacreed",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"sacreed2"
+    },
+    "ziggsaron": {
+      "category": "adventure-license",
+      "title": "Ravenous Wolf King, Ziggsaron",
+      "description": "Boss strategy guide",
+      "icon": "ziggsaron",
+      "last_updated": "2024-12-03",
+      "author": "Shiraen",
+      "second_image":"ziggsaron2"
+    },
+    "fulmination": {
+      "category": "adventure-license",
+      "title": "Ful.Mi.NATION Assault Suit",
+      "description": "Boss strategy guide",
+      "icon": "fulmination",
+      "last_updated": "2025-01-20",
+      "author": "Shiraen",
+      "second_image":"fulmination2"
+    }
+                       
   }
+
+  
+
   

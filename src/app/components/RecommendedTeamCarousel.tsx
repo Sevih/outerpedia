@@ -15,9 +15,9 @@ export default function RecommendedTeamCarousel({ team }: Props) {
         Recommended Team
       </h3>
       <div
-        className="grid gap-6 justify-center"
+        className="inline-flex justify-center gap-12"
         style={{
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
         }}
       >
         {team.map((candidates, index) => (

@@ -108,8 +108,8 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
     id="sortSelector"
     className="bg-neutral-800 text-white border border-neutral-700 rounded px-2 py-1 text-sm"
   >
-    <option value="date-desc">Date ↓</option>
-    <option value="date-asc">Date ↑</option>
+    <option value="date-desc">Date (Newest)</option>
+    <option value="date-asc">Date (Oldest)</option>
     <option value="title-asc">Title A→Z</option>
     <option value="title-desc">Title Z→A</option>
     <option value="author-asc">Author A→Z</option>

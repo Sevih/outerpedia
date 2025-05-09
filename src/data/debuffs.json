@@ -138,6 +138,12 @@
         "icon": "SC_Buff_Effect_Silence"
     },
     {
+        "name": "BT_SILENCE_IR",
+        "label": "Silenced",
+        "description": "Cannot only use skill chain and basic attack while this effect is applied (Irremovable",
+        "icon": ""
+    },
+    {
         "name": "BT_MARKING",
         "label": "Marked",
         "description": "Automatically becomes a target for attacks and takes increased damage\nCan only apply to one member of a team and another Marked cannot be applied until the existing Marked is gone",

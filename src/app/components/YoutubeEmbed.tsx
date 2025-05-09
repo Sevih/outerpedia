@@ -18,8 +18,8 @@ export default function YoutubeEmbed({
   if (!videoId) return null
 
   const thumbnail = imgError
-    ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-    : `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    ? `https://img.youtube.com/vi_webp/${videoId}/hqdefault.webp`
+    : `https://img.youtube.com/vi_webp/${videoId}/maxresdefault.webp`
 
   return (
     <div className="w-full rounded overflow-hidden mt-6 aspect-video bg-black">
