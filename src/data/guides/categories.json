@@ -39,7 +39,7 @@
       "title": "Irregular Extermination Tips",
       "description": "Ease your way to kill the queen and her foes.",
       "icon": "/images/guides/CM_Adventure_Irregular",
-      "valid":false
+      "valid":true
     },
     "general-guide": {
       "title": "General Tips",
