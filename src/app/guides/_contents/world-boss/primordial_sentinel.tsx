@@ -73,7 +73,7 @@ export default function PrimordialSentinelGuide() {
         </p>
       </div>
 
-      <YoutubeEmbed videoId="Kd-dKroOXEo" title="Primordial Sentinel World Boss Guide by Ducky" />
+      <YoutubeEmbed videoId="Kd-dKroOXEo" title="Glorious Sentinel World Boss 23mil+ by Ducky" />
     </div>
   );
 }

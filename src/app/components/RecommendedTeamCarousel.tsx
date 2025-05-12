@@ -2,11 +2,17 @@
 
 import CarouselSlot from './CarouselSlot'
 
+type NoteEntry =
+  | { type: 'p'; string: string }
+  | { type: 'ul'; items: string[] }
+
 type Props = {
-  team: string[][] // 4 slots, chaque slot = [nom1, nom2, ...]
+  team: string[][]
+  note?: NoteEntry[]
 }
 
-export default function RecommendedTeamCarousel({ team }: Props) {
+
+export default function RecommendedTeamCarousel({ team, note }: Props) {
   if (!team || team.length === 0) return null
 
   return (
@@ -24,6 +30,27 @@ export default function RecommendedTeamCarousel({ team }: Props) {
           <CarouselSlot key={index} characters={candidates} />
         ))}
       </div>
+      {note && (
+        <div className="text-neutral-400 text-sm italic mb-4">
+          {note.map((entry, idx) => {
+            if (entry.type === 'p') {
+              return <p key={idx} className="mb-2">Note: {entry.string}</p>
+            }
+
+            if (entry.type === 'ul') {
+              return (
+                <ul key={idx} className="list-disc list-inside ml-4 space-y-1">
+                  {entry.items.map((item: string, i: number) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              )
+            }
+
+            return null
+          })}
+        </div>
+      )}
 
     </div>
   )

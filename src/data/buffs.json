@@ -36,10 +36,22 @@
         "icon": "CM_Stat_Icon_DEF"
     },
     {
+        "name": "BT_STAT|ST_DEF_IR",
+        "label": "Increased Defense",
+        "description": "Increased Defense by 50%. (Irremovable)",
+        "icon": "IG_Buff_Stat_Def_Interruption"
+    },
+    {
         "name": "BT_STAT|ST_ATK",
         "label": "Increased Attack",
         "description": "Increased Attack by 30%.",
         "icon": "SC_Buff_Stat_Atk"
+    },
+    {
+        "name": "BT_STAT|ST_ATK_IR",
+        "label": "Increased Attack",
+        "description": "Increased Attack by 30%. (Irremovable)",
+        "icon": "IG_Buff_Stat_Atk_Interruption"
     },
     {
         "name": "BT_STAT|ST_SPEED",
@@ -119,6 +131,12 @@
         "label": "Sustained Recovery",
         "description": "Recovers 15% of Max Health each turn",
         "icon": "SC_Buff_Effect_Heal"
+    },
+    {
+        "name": "BT_SYS_BUFF_ENHANCE_IR",
+        "label": "Enhancement",
+        "description": "Increases the efficiency of buff that increases stats by 100%. (Irremovable)",
+        "icon": "IG_Buff_Enhance_Interruption"
     },
     {
         "name": "SYS_BUFF_REVENGE",

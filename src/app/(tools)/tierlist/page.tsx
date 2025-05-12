@@ -4,14 +4,14 @@ import characters from '@/data/_allCharacters.json' // fichier statique rassembl
 import type { Character } from '@/types/character'
 
 export const metadata: Metadata = {
-  title: 'Outerplane Tier List – April 2025 Update | Outerpedia',
+  title: 'Outerplane PvE Tier List – April 2025 Update | Outerpedia',
   description: 'Discover the best characters ranked in Outerplane. Updated for April 2025, curated by the EvaMains Discord community.',
   keywords: ['Outerplane', 'Tier List', 'Best Characters', 'April 2025', 'EvaMains', 'Outerpedia'],
   alternates: {
     canonical: 'https://outerpedia.com/tierlist',
   },
   openGraph: {
-    title: 'Outerplane Tier List – April 2025 Update | Outerpedia',
+    title: 'Outerplane PvE Tier List – April 2025 Update | Outerpedia',
     description: 'Latest Outerplane character rankings as of April 2025, curated by the EvaMains Discord community.',
     url: 'https://outerpedia.com/tierlist',
     type: 'website',
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
         url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png',
         width: 150,
         height: 150,
-        alt: 'Outerpedia Tier List',
+        alt: 'Outerpedia PvE Tier List',
       },
     ],
   },
   twitter: {
     card: 'summary',
-    title: 'Outerplane Tier List – April 2025 | Outerpedia',
+    title: 'Outerplane PvE Tier List – April 2025 | Outerpedia',
     description: 'Best Outerplane characters ranked – April 2025 update curated by EvaMains Discord.',
     images: ['https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png'],
   },

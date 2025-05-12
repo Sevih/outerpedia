@@ -201,6 +201,164 @@
       "last_updated": "2025-01-20",
       "author": "Shiraen",
       "second_image":"fulmination2"
+    },
+    "ksai": {
+      "category": "adventure-license",
+      "title": "Ksai",
+      "description": "Boss strategy guide",
+      "icon": "ksai",
+      "last_updated": "2024-12-02",
+      "author": "Shiraen",
+      "second_image":"ksai2"
+    },
+    "shadowArch": {
+      "category": "adventure-license",
+      "title": "Shadow of the Archdemon",
+      "description": "Boss strategy guide",
+      "icon": "shadowArch",
+      "last_updated": "2024-12-02",
+      "author": "Shiraen",
+      "second_image":"shadowArch2"
+    },
+    "ars-novaAL": {
+      "category": "adventure-license",
+      "title": "Ars Nova",
+      "description": "Boss strategy guide",
+      "icon": "ars-novaAL",
+      "last_updated": "2024-11-20",
+      "author": "Shiraen",
+      "second_image":"ars-novaAL2"
+    },
+    "schattermeister-Schwartz": {
+      "category": "adventure-license",
+      "title": "Schattermeister Schwartz",
+      "description": "Boss strategy guide",
+      "icon": "schattermeister-Schwartz",
+      "last_updated": "2024-11-11",
+      "author": "Shiraen",
+      "second_image":"schattermeister-Schwartz"
+    },
+    "masterlessAL": {
+      "category": "adventure-license",
+      "title": "Masterless Guardian",
+      "description": "Boss strategy guide",
+      "icon": "masterless",
+      "last_updated": "2024-11-11",
+      "author": "Shiraen",
+      "second_image":"masterlessAL2"
+    },
+    "calamarisAL": {
+      "category": "adventure-license",
+      "title": "Grand Calamari",
+      "description": "Boss strategy guide",
+      "icon": "calamarisAL",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"calamarisAL2"
+    },
+    "toddlerAL": {
+      "category": "adventure-license",
+      "title": "Tyrant Toddler",
+      "description": "Boss strategy guide",
+      "icon": "toddlerAL",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"toddlerAL"
+    },
+    "glicysAL": {
+      "category": "adventure-license",
+      "title": "Glicys",
+      "description": "Boss strategy guide",
+      "icon": "glicysAL",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"glicysAL2"
+    },
+    "beatlesAL": {
+      "category": "adventure-license",
+      "title": "Dek'ril & Mek'ril",
+      "description": "Boss strategy guide",
+      "icon": "beatlesAL",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"beatlesAL2"
+    },
+    "chimeraAL": {
+      "category": "adventure-license",
+      "title": "Unidentified Chimera",
+      "description": "Boss strategy guide",
+      "icon": "chimeraAL",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"chimeraAL2"
+    },
+    "ppu-epsilon": {
+      "category": "adventure-license",
+      "title": "Planet Purification Unit Epsilon",
+      "description": "Boss strategy guide",
+      "icon": "ppu-epsilon",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"ppu-epsilon2"
+    },
+    "gustav": {
+      "category": "adventure-license",
+      "title": "Gustav",
+      "description": "Boss strategy guide",
+      "icon": "gustav",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"gustav2"
+    },
+    "forest-king": {
+      "category": "adventure-license",
+      "title": "Forest King",
+      "description": "Boss strategy guide",
+      "icon": "forest-king",
+      "last_updated": "2024-11-10",
+      "author": "Shiraen",
+      "second_image":"forest-king2"
+    },
+    "prototype-ex-78": {
+      "category": "joint-boss",
+      "title": "Prototype EX-78",
+      "description": "Combat Footage",
+      "icon": "prototype-ex-78",
+      "last_updated": "2024-12-10",
+      "author": "Ducky"
+    },
+    "schichifuja": {
+      "category": "joint-boss",
+      "title": "Schichifuja",
+      "description": "Combat Footage",
+      "icon": "schichifuja",
+      "last_updated": "2024-11-12",
+      "author": "Ducky"
+    },
+    "annihilator": {
+      "category": "joint-boss",
+      "title": "Annihilator",
+      "description": "Combat Footage",
+      "icon": "annihilator",
+      "last_updated": "2024-09-04",
+      "author": "Ducky"
+    },
+    "koh-meteos": {
+      "category": "joint-boss",
+      "title": "Knight of Hope Metos",
+      "description": "Combat Footage",
+      "icon": "koh-meteos",
+      "last_updated": "2024-09-04",
+      "author": "Ducky"
+    },
+    "pursuit-queen": {
+      "category": "irregular-extermination",
+      "title": "Pursuit : Irregular Queen",
+      "description": "Boss strategy guide",
+      "icon": "pursuit-queen",
+      "last_updated": "2025-05-12",
+      "author": "Sevih",
+      "second_image":"pursuit-queen2"
     }
                        
   }

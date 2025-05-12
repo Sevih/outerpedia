@@ -10,7 +10,7 @@ export default function HarshaGuide() {
         </p>
       </div>
 
-      <YoutubeEmbed videoId="32qJPmuJDyg" title="Dahlia World Boss Guide by Ducky" />
+      <YoutubeEmbed videoId="32qJPmuJDyg" title="Harsha World Boss 23mil. 1 Hour Long Fight by Ducky" />
     </div>
   );
 }

@@ -103,9 +103,9 @@ export default function TierListPage({ characters, initialTab }: { characters: C
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "Outerplane Tier List",
+            "name": "Outerplane PvE Tier List",
             "url": "https://outerpedia.com/tools/tierlist",
-            "description": "Discover the best characters in Outerplane sorted by DPS, Support, and Sustain roles. Tier list curated by the EvaMains community.",
+            "description": "Discover the best characters in Outerplane sorted by DPS, Support, and Sustain roles. PvE Tier list curated by the EvaMains community.",
             "mainEntity": {
               "@type": "ItemList",
               "itemListElement": characters.map((char, index) => ({
@@ -121,7 +121,7 @@ export default function TierListPage({ characters, initialTab }: { characters: C
       />
 
       <h1 className="text-5xl font-extrabold text-center mb-8 bg-gradient-to-b from-yellow-300 via-orange-400 to-red-500 text-transparent bg-clip-text drop-shadow-md">
-        Tier List
+        Tier List - PvE
       </h1>
 
 

@@ -31,7 +31,7 @@ export default function FulMiNationAssaultSuitGuide() {
         <li><strong>S3:</strong> <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> on boss while <EffectInlineTag name="BT_STAT|ST_SPEED" type="debuff" /> your team (3 turns), ignores immunity and resilience</li>
         <li><strong>Enrage:</strong> Inflicts <EffectInlineTag name="BT_SILENCE_IR" type="debuff" />, but usually too late to matter</li>
         <li>Low resilience; only immune to crowd control</li>
-      </ul>BT_SILENCE_IR
+      </ul>
 
       <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Team Suggestions</h3>
       <ul className="list-disc list-inside text-neutral-300 mb-4">

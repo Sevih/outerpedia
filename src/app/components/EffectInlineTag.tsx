@@ -46,7 +46,7 @@ export default function EffectInlineTag({ name, type }: Props) {
                 className={`object-contain ${imageClass}`}
               />
             </span>
-            <span className={`text-sm font-medium ${color}`}>{effect.label}</span>
+            <span className={`underline ${color}`}>{effect.label}</span>
           </span>
         </Tooltip.Trigger>
 

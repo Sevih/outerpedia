@@ -18,7 +18,7 @@ const teams = {
   },
   team2: {
     label: 'Team 2 – Aggro Control',
-    icon: 'marked.webp',
+    icon: 'SC_Buff_Effect_Taunted.webp',
     setup: [
       ['Ember'],
       ['Fatal'],

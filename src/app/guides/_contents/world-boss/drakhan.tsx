@@ -10,7 +10,7 @@ export default function DrakhanGuide() {
         </p>
       </div>
 
-      <YoutubeEmbed videoId="tX4Xhm4byAY" title="Dahlia World Boss Guide by Ducky" startTime={12794}/>
+      <YoutubeEmbed videoId="tX4Xhm4byAY" title="Holy Night Dianne Summons, Testing, and New World Boss by Ducky" startTime={12794}/>
     </div>
   );
 }

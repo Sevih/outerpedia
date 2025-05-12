@@ -78,6 +78,11 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
     return <UnderConstruction />;
   }
 
+  filtered.sort((a, b) =>
+  new Date(b.last_updated).getTime() - new Date(a.last_updated).getTime()
+);
+
+
   return (
     <div className="p-6">
       <div className="relative w-full h-[150px] rounded-2xl overflow-hidden mb-6">

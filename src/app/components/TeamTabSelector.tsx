@@ -4,11 +4,16 @@ import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import RecommendedTeam from './RecommendedTeamCarousel'
 
+type NoteEntry =
+  | { type: 'p'; string: string }
+  | { type: 'ul'; items: string[] }
+
 type TeamTabSelectorProps = {
   teams: Record<string, {
     label: string
     icon: string // chemin de l'icône dans `/public/images/ui/nav/`
     setup: string[][]
+    note?: NoteEntry[]
   }>
 }
 
@@ -67,7 +72,7 @@ export default function TeamTabSelector({ teams }: TeamTabSelectorProps) {
         </div>
       )}
 
-      <RecommendedTeam team={teams[selected].setup} />
+      <RecommendedTeam team={teams[selected].setup} note={teams[selected].note} />
     </div>
   )
 }

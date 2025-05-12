@@ -36,6 +36,12 @@
         "icon": "SC_Buff_Stat_Atk"
     },
     {
+        "name": "BT_STAT|ST_ATK_IR",
+        "label": "Reduced Attack",
+        "description": "Reduces Attack by 30% (Irremovable)",
+        "icon": "IG_Buff_Stat_Atk_Interruption_D"
+    },
+    {
         "name": "BT_STAT|ST_SPEED",
         "label": "Reduced Speed",
         "description": "Reduces Speed by 30%",
@@ -96,10 +102,22 @@
         "icon": "SC_Buff_Stat_Def"
     },
     {
+        "name": "BT_STAT|ST_DEF_IR",
+        "label": "Reduced Defense",
+        "description": "Reduces Defense by 50% (Irremovable)",
+        "icon": "IG_Buff_Stat_Def_Interruption_D"
+    },
+    {
         "name": "BT_STAT|ST_CRITICAL_RATE",
         "label": "Reduced Crit Hit Chance",
         "description": "Reduces Critical Hit Chance by 50%",
         "icon": "SC_Buff_Stat_CriRate"
+    },
+    {
+        "name": "BT_STAT|ST_CRITICAL_RATE_IR",
+        "label": "Reduced Crit Hit Chance",
+        "description": "Reduces Critical Hit Chance by 50% (Irremovable)",
+        "icon": "IG_Buff_Stat_CriRate_Interruption_D"
     },
     {
         "name": "BT_STAT|ST_CRITICAL_DMG_RATE",
@@ -118,6 +136,12 @@
         "label": "Weakness Gauge Damage",
         "description": "Deal additional Weakness Gauge damage",
         "icon": "SC_Buff_Effect_WG_Dmg"
+    },
+    {
+        "name": "BT_SYS_DEBUFF_ENHANCE_IR",
+        "label": "Enhancement",
+        "description": "Reduces the efficiency of buff that increases stats by 100%. (Irremovable)",
+        "icon": "IG_Buff_Enhance_Interruption_D"
     },
     {
         "name": "BT_SEALED",

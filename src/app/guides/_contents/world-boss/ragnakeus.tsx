@@ -10,7 +10,7 @@ export default function RagnakeusGuide() {
         </p>
       </div>
 
-      <YoutubeEmbed videoId="vR_FaPyptRk" title="Dahlia World Boss Guide by Ducky" />
+      <YoutubeEmbed videoId="vR_FaPyptRk" title="15mil Ragnakeus World Boss Guide by Ducky" />
     </div>
   );
 }
