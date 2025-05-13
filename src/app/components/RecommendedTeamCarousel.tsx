@@ -21,8 +21,9 @@ export default function RecommendedTeamCarousel({ team, note }: Props) {
         Recommended Team
       </h3>
       <div
-        className="inline-flex justify-center gap-12"
+        className="justify-center gap-12"
         style={{
+          display:'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
         }}
       >
