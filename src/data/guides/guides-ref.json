@@ -86,7 +86,15 @@
       "icon": "guardian",
       "last_updated": "2024-09-19",
       "author": "Ducky"
-    }   ,
+    },
+    "ars-nova": {
+      "category": "special-request",
+      "title": "Ars Nova",
+      "description": "Boss strategy guide",
+      "icon": "ars-nova",
+      "last_updated": "2025-05-13",
+      "author": "SADtherobot"
+    },
     "tyrant": {
       "category": "special-request",
       "title": "Tyrant Toddler",
