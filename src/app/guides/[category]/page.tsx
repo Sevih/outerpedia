@@ -101,11 +101,13 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
   </div>
 
   {/* Titre de la catégorie */}
-  <div className="absolute top-1/2 left-[32%] -translate-y-1/2 z-10">
-    <h1 className="text-white text-2xl font-bold drop-shadow-sm leading-tight text-left uppercase tracking-wide">
-      {meta.title}
-    </h1>
-  </div>
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 px-4 text-center w-full max-w-[90%]">
+  <h1 className="text-white font-bold drop-shadow-sm leading-tight uppercase tracking-wide text-balance text-[clamp(1.25rem,5vw,2.25rem)]">
+    {meta.title}
+  </h1>
+</div>
+
+
 </div>
 <div className="mb-4 flex justify-end items-center gap-2">
   <label className="text-sm text-white">Sort by:</label>
