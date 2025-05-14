@@ -79,50 +79,48 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
   }
 
   filtered.sort((a, b) =>
-  new Date(b.last_updated).getTime() - new Date(a.last_updated).getTime()
-);
+    new Date(b.last_updated).getTime() - new Date(a.last_updated).getTime()
+  );
 
 
   return (
     <div className="p-6">
       <div className="relative w-full h-[150px] rounded-2xl overflow-hidden mb-6">
 
-  {/* Flèche retour */}
-  <div className="absolute top-4 left-4 z-10 h-[32px] w-[32px]">
-    <Link href="/guides" className="relative block h-full w-full">
-      <Image
-        src="/images/ui/CM_TopMenu_Back.webp"
-        alt="Back"
-        fill
-        sizes="32px"
-        className="opacity-80 hover:opacity-100 transition-opacity"
-      />
-    </Link>
-  </div>
+        {/* Flèche retour */}
+        <div className="absolute top-4 left-4 z-10 h-[32px] w-[32px]">
+          <Link href="/guides" className="relative block h-full w-full">
+            <Image
+              src="/images/ui/CM_TopMenu_Back.webp"
+              alt="Back"
+              fill
+              sizes="32px"
+              className="opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </Link>
+        </div>
 
-  {/* Titre de la catégorie */}
-  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 px-4 text-center w-full max-w-[90%]">
-  <h1 className="text-white font-bold drop-shadow-sm leading-tight uppercase tracking-wide text-balance text-[clamp(1.25rem,5vw,2.25rem)]">
-    {meta.title}
-  </h1>
-</div>
-
-
-</div>
-<div className="mb-4 flex justify-end items-center gap-2">
-  <label className="text-sm text-white">Sort by:</label>
-  <select
-    id="sortSelector"
-    className="bg-neutral-800 text-white border border-neutral-700 rounded px-2 py-1 text-sm"
-  >
-    <option value="date-desc">Date (Newest)</option>
-    <option value="date-asc">Date (Oldest)</option>
-    <option value="title-asc">Title A→Z</option>
-    <option value="title-desc">Title Z→A</option>
-    <option value="author-asc">Author A→Z</option>
-    <option value="author-desc">Author Z→A</option>
-  </select>
-</div>
+        {/* Titre de la catégorie */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 px-4 text-center w-full max-w-[90%]">
+          <h1 className="text-white font-bold drop-shadow-sm leading-tight uppercase tracking-wide text-balance text-[clamp(1.25rem,5vw,2.25rem)]">
+            {meta.title}
+          </h1>
+        </div>
+      </div>
+      <div className="mb-4 flex justify-end items-center gap-2">
+        <label className="text-sm text-white">Sort by:</label>
+        <select
+          id="sortSelector"
+          className="bg-neutral-800 text-white border border-neutral-700 rounded px-2 py-1 text-sm"
+        >
+          <option value="date-desc">Date (Newest)</option>
+          <option value="date-asc">Date (Oldest)</option>
+          <option value="title-asc">Title A→Z</option>
+          <option value="title-desc">Title Z→A</option>
+          <option value="author-asc">Author A→Z</option>
+          <option value="author-desc">Author Z→A</option>
+        </select>
+      </div>
 
 
       <GuideCardGrid items={filtered} />
@@ -151,9 +149,9 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
         }}
       />
       <script
-  suppressHydrationWarning
-  dangerouslySetInnerHTML={{
-    __html: `
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: `
       document.getElementById('sortSelector')?.addEventListener('change', (e) => {
         const value = e.target.value;
         const [key, order] = value.split('-');
@@ -176,12 +174,8 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
         cards.forEach((el) => container.appendChild(el));
       });
     `,
-  }}
-/>
-
-
+        }}
+      />
     </div>
-    
-    
   );
 }

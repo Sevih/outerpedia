@@ -18,6 +18,12 @@
         "icon": "criticalhitchance"
     },
     {
+        "name": "BT_STAT|ST_CRITICAL_RATE_IR",
+        "label": "Increased Critical Hit Chance",
+        "description": "Increased Critical Hit Chance by 50%. (Irremovable)",
+        "icon": "IG_Buff_Stat_CriRate_Interruption"
+    },
+    {
         "name": "BT_STAT|ST_CRITICAL_DMG_RATE",
         "label": "Increased Critical Damage",
         "description": "Increased Critical Damage by 50%.",
@@ -167,6 +173,12 @@
         "label": "Debuff Removal",
         "description": "Remove weakening effect.",
         "icon": "SC_Buff_Effect_Cleanse"
+    },
+    {
+        "name": "SYS_REVENGE_HEAL",
+        "label": "Agile Respond",
+        "description": "Automatically triggers an effect when certain conditions are met.",
+        "icon": "IG_Buff_Effect_Revenge_Heal"
     },
     {
         "name": "BT_IMMUNE",

@@ -4,6 +4,9 @@ import EffectInlineTag from '@/app/components/EffectInlineTag'
 import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import EquipmentInlineTag from '@/app/components/EquipmentInlineTag'
+import ElementInlineTag from '@/app/components/ElementInline';
+import StatInlineTag from '@/app/components/StatInlineTag';
 
 const teamSetup = [
   ['Valentine'],
@@ -21,13 +24,13 @@ export default function ChimeraGuide() {
       </p>
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li>If you can&#39;t kill her before she enrages, you&#39;ll have a much harder time surviving.</li>
-        <li>Thankfully, the Fire element nowadays has soooo many good tools to deal with this boss.</li>
-        <li>Chimera has relatively low Health but significantly higher Defense. <strong>Defense break is pretty much required</strong>.</li>
-        <li>Having your DPS units on <strong>Penetration%</strong> accessories will greatly improve your damage.</li>
-        <li>Chimera&#39;s passive significantly reduces your team&#39;s crit damage but in return gives all units <strong>100% crit chance</strong>.</li>
-        <li>To take advantage of this, <strong>you DO NOT need to put any crit chance on your units</strong>. Focus purely on Attack and Crit Damage.</li>
-        <li>Abuse <strong>Rogue Charms</strong> on every unit since they will proc CP generation every time. <strong>Sage Charms</strong> on Fire units work as well.</li>
-        <li><strong>Speed is important</strong> due to the boss&#39;s ability to gain 10% priority whenever attacked. Ideally, you want your entire team to be above <strong>175 SPD</strong> for Stage 12.</li>        
+        <li>Thankfully, the <ElementInlineTag element="fire" /> element nowadays has so many good tools to deal with this boss.</li>
+        <li>Chimera has relatively low Health but significantly higher Defense. <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> is pretty much required.</li>
+        <li>Having your DPS units on <StatInlineTag name="PEN%" /> accessories will greatly improve your damage.</li>
+        <li>Chimera&#39;s passive significantly reduces your team&#39;s <StatInlineTag name="CHD" /> by 85% but in return gives all units <strong>100% <StatInlineTag name="CHC" /></strong>.</li>
+        <li>To take advantage of this, <strong>you DO NOT need to put any crit chance on your units</strong>. Focus purely on <StatInlineTag name="ATK" /> and <StatInlineTag name="CHD" />.</li>
+        <li>Abuse <EquipmentInlineTag name="Rogue's Charm" type="talisman" /> on every unit since they will proc CP generation every time. <EquipmentInlineTag name="Sage's Charm" type="talisman" /> on <ElementInlineTag element="fire" /> units work as well.</li>
+        <li><strong>Speed is important</strong> due to the boss&#39;s ability to gain 10% <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> whenever attacked. Ideally, you want your entire team to be above 175 <StatInlineTag name="SPD" /> for Stage 12 (185 for Stage 13).</li>        
       </ul>
       <CharacterLinkCard name="Valentine" /> needs to go first to <EffectInlineTag name="BT_STAT|ST_CRITICAL_DMG_RATE" type="buff" /> and use S1 to move up your DPS.<br />
       <CharacterLinkCard name="Eternal" /> goes second to land <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" />.
@@ -47,9 +50,7 @@ export default function ChimeraGuide() {
 
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="mb-2 text-neutral-300">
         <YoutubeEmbed videoId="eHRErCHZmp4" title='combat footage'/>
-        </p>
       </div>
     </div>
   )

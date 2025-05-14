@@ -98,7 +98,7 @@ export default function IrregularQueenGuide() {
                 <p className="mb-2 text-neutral-300">
                     A sample video of the 1 run public team.
                 </p>
-                <YoutubeEmbed videoId="bPwKu7gjGWg" title="Annihilator Joint Boss by Ducky" />
+                <YoutubeEmbed videoId="bPwKu7gjGWg" title="Irregular Queen - Pursuit Operation - 700K (1 run) by Sevih" />
             </div>
         </div>
     )

@@ -90,7 +90,8 @@
       "TargetTeamType": "TEAM",
       "buff": [
         "BT_STAT|ST_ATK",
-        "BT_ACTION_GAUGE"
+        "BT_ACTION_GAUGE",
+        "SYS_REVENGE_HEAL"
       ],
       "cd": "5",
       "debuff": [],

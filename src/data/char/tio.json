@@ -67,7 +67,7 @@
       "SkipNameID": "SKILL_NAME_2000036_Skill02",
       "TargetTeamType": "TEAM",
       "buff": [
-        "BT_REMOVE_DEBUFF"
+        "BT_REMOVE_DEBUFF","SYS_REVENGE_HEAL"
       ],
       "cd": "4",
       "debuff": [],

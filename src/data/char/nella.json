@@ -85,7 +85,8 @@
       "TargetTeamType": "TEAM",
       "buff": [
         "BT_ACTION_GAUGE",
-        "BT_AP_CHARGE"
+        "BT_AP_CHARGE",
+        "SYS_REVENGE_HEAL"
       ],
       "cd": "4",
       "debuff": [],

@@ -95,6 +95,30 @@
       "last_updated": "2025-05-13",
       "author": "SADtherobot"
     },
+    "amadeus": {
+      "category": "special-request",
+      "title": "Amadeus",
+      "description": "Boss strategy guide",
+      "icon": "amadeus",
+      "last_updated": "2025-04-11",
+      "author": "SADtherobot"
+    },
+    "sacreed": {
+      "category": "special-request",
+      "title": "Sacreed Guardian",
+      "description": "Boss strategy guide",
+      "icon": "sacreed",
+      "last_updated": "2025-05-01",
+      "author": "SADtherobot"
+    },
+    "grand-calamari": {
+      "category": "special-request",
+      "title": "Grand Calamari",
+      "description": "Boss strategy guide",
+      "icon": "calamari",
+      "last_updated": "2025-04-01",
+      "author": "SADtherobot"
+    },
     "tyrant": {
       "category": "special-request",
       "title": "Tyrant Toddler",
@@ -367,6 +391,33 @@
       "last_updated": "2025-05-12",
       "author": "Sevih / Shiraen",
       "second_image":"pursuit-queen2"
+    },
+    "pursuit-blockbuster": {
+      "category": "irregular-extermination",
+      "title": "Pursuit : Blockbuster",
+      "description": "Boss strategy guide",
+      "icon": "pursuit-blockbuster",
+      "last_updated": "2025-04-01",
+      "author": "Shiraen",
+      "second_image":"pursuit-blockbuster2"
+    },
+    "pursuit-iron-stretcher": {
+      "category": "irregular-extermination",
+      "title": "Pursuit : Iron Stretcher",
+      "description": "Boss strategy guide",
+      "icon": "pursuit-iron-stretcher",
+      "last_updated": "2025-04-01",
+      "author": "Shiraen",
+      "second_image":"pursuit-iron-stretcher2"
+    },
+    "pursuit-mutated-wyvre": {
+      "category": "irregular-extermination",
+      "title": "Pursuit : Mutated Wyvre",
+      "description": "Boss strategy guide",
+      "icon": "pursuit-mutated-wyvre",
+      "last_updated": "2025-04-01",
+      "author": "Shiraen",
+      "second_image":"pursuit-mutated-wyvre2"
     }
                        
   }

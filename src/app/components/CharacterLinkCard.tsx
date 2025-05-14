@@ -43,7 +43,7 @@ export default function CharacterInlineTag({ name }: Props) {
       </Link>
       <Link
         href={`/characters/${slug}`}
-        className="text-sm text-sky-400 hover:text-sky-300 underline-offset-2 hover:underline transition-colors"
+        className="text-sky-400 hover:text-sky-300 underline-offset-2 hover:underline transition-colors"
       >
         {char.Fullname}
       </Link>

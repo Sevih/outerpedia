@@ -1,4 +1,11 @@
-## 🛠 Nadja[D[D[D[D[DNew hero - Nadja (2025-05-07)
+## 🚀 All gear boss & Irregular Pursuit guide (2025-05-14)
+- All Gear Boss guides are now live
+- All Adventure License guides are now live
+- All Irregular Pursuit guides are now live
+- Agile Respond has been added to the filters on the Characters page
+
+
+## 🛠 New hero - Nadja (2025-05-07)
 - Omega Nadja, who removes enemy Detonation damage and Priority increase effects, plays an important role in various boss battles and will be joining us.
 
 

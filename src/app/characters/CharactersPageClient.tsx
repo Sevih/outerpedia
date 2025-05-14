@@ -38,7 +38,7 @@ const orderedBuffGroups = [
     title: 'Utility', items: [
       "BT_COOL_CHARGE", "BT_ACTION_GAUGE", "BT_AP_CHARGE", "BT_STAT|ST_COUNTER_RATE", "BT_CP_CHARGE", "Heavy Strike",
       "BT_DMG_ELEMENT_SUPERIORITY", "BT_ADDITIVE_TURN",
-      "SYS_BUFF_REVENGE", "SYS_BUFF_BREAK_DMG", "BT_CALL_BACKUP",
+      "SYS_BUFF_REVENGE","SYS_REVENGE_HEAL", "SYS_BUFF_BREAK_DMG", "BT_CALL_BACKUP",
     ]
   },
   {

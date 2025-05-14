@@ -29,16 +29,16 @@ export default function GlicysGuide() {
       <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Enrage Phase</h3>
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li>At <strong>50% HP</strong>, Glicys enters <em>Enrage</em>, summoning a <strong>bigger mob on the left</strong>.</li>
-        <li>Attacking the left mob without killing it will freeze your team. If you kill it while frozen, it prevents the freeze retaliation.</li>
-        <li>She gains an <strong>irremovable Invulnerability</strong> buff during Enrage. Plan your burst accordingly.</li>
+        <li>Attacking the left mob without killing it will <EffectInlineTag name="BT_FREEZE" type="debuff" /> your team unless it got oneshotted or died while our team get frozen</li>
+        <li>She gains <EffectInlineTag name="BT_INVINCIBLE_IR" type="buff" />  buff during Enrage. Plan your burst accordingly.</li>
         <li>Your team should ideally be <strong>slower</strong> than Glicys to avoid punishing speed interactions.</li>
-        <li>She will unleash a <strong>high-damage ultimate</strong> a few turns into Enrage. Prepare to mitigate or survive it.</li>
+        <li>She will unleash a <strong>high-damage ultimate</strong> a few turns into Enrage.</li>
       </ul>
 
       <hr className="my-6 border-neutral-700" />
       <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Stage 13 Mechanics</h3>
       <p className="text-neutral-300 mb-4">
-        On Stage 13, Glicys&apos; attacks <strong>cannot be countered</strong>, and do not trigger <em>Agile Response</em> or <em>Revenge</em> effects.
+        On Stage 13, Glicys&apos; attacks does not trigger <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" />.
       </p>
 
       <hr className="my-6 border-neutral-700" />

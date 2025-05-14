@@ -25,6 +25,17 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-14",
+    title: "Adventure License ,Gear Boss & Irregular Pursuit Guides",
+    type: "feature",
+    content: [
+      "- All Gear Boss guides are now live",
+      "- All Adventure License guides are now live",
+      "- All Irregular Pursuit guides are now live",
+      "- Agile Respond has been added to the filters on the Characters page",
+    ],
+  },
+  {
     date: "2025-05-07",
     title: "New hero - Nadja",
     type: "update",

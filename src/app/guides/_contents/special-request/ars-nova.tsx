@@ -10,10 +10,10 @@ const teams = {
         label: 'Suggested Core',
         icon: 'SC_Buff_Effect_Remove_Buff.webp',
         setup: [
-            ['Demiurge Vlada', 'Eliza', 'Gnosis Nella', 'Francesca', 'Aer', 'Dahlia', 'Alice'],
-            ['Stella', 'Caren'], // optional buff stealing
-            ['Demiurge Astei', 'Maxwell', 'Gnosis Dahlia', 'Omega Nadja'],
-            ['Nella', 'Demiurge Delta', 'Dianne', 'Astei', 'Monad Eva']
+            ['Demiurge Vlada', 'Eliza','Gnosis Nella', 'Francesca', 'Aer', 'Dahlia', 'Alice'],
+            ['Nella', 'Demiurge Delta','Dianne', 'Astei', 'Monad Eva'],
+            ['Maxwell', 'Gnosis Dahlia'],
+            ['Demiurge Astei',  'Omega Nadja','Demiurge Stella','Stella', 'Caren']
         ]
     }
 }
