@@ -3,6 +3,7 @@
   "Fullname": "Bryn",
   "Rarity": 3,
   "Element": "Fire",
+  "rank_pvp":"C",
   "Class": "Mage",
   "SubClass": "Wizard",
   "role":"dps",

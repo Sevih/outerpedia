@@ -6,14 +6,14 @@ import type { Character } from '@/types/character'
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: 'Outerplane Tier List – May 2025 Update | Outerpedia',
+  title: 'Outerplane PvE Tier List – May 2025 Update | Outerpedia',
   description: 'Discover the best characters ranked in Outerplane. Updated for May 2025, curated by the EvaMains Discord community.',
   keywords: ['Outerplane', 'Tier List', 'Best Characters', 'May 2025', 'EvaMains', 'Outerpedia'],
   alternates: {
     canonical: 'https://outerpedia.com/tierlist',
   },
   openGraph: {
-    title: 'Outerplane Tier List – May 2025 Update | Outerpedia',
+    title: 'Outerplane PvE Tier List – May 2025 Update | Outerpedia',
     description: 'Latest Outerplane character rankings as of May 2025, curated by the EvaMains Discord community.',
     url: 'https://outerpedia.com/tierlist',
     type: 'website',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Outerplane Tier List – May 2025 | Outerpedia',
+    title: 'Outerplane PvE Tier List – May 2025 | Outerpedia',
     description: 'Best Outerplane characters ranked – May 2025 update curated by EvaMains Discord.',
     images: ['https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png'],
   },

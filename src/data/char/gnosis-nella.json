@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Light",
   "role":"support",
+  "rank_pvp":"S",
   "Class": "Mage",
   "limited":true,
   "SubClass": "Enchanter",

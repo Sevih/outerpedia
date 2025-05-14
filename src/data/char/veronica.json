@@ -3,6 +3,7 @@
   "Fullname": "Veronica",
   "Rarity": 3,
   "Element": "Water",
+  "rank_pvp":"B",
   "role":"sustain",
   "Class": "Defender",
   "SubClass": "Sweeper",

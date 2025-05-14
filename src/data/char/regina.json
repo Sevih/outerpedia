@@ -3,6 +3,7 @@
   "Fullname": "Regina",
   "Rarity": 3,
   "Element": "Light",
+  "rank_pvp":"A",
   "role":"dps",
   "Class": "Mage",
   "SubClass": "Wizard",

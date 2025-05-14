@@ -3,7 +3,7 @@
   "Fullname": "Astei",
   "Rarity": 3,
   "Element": "Fire",
-  
+  "rank_pvp":"D",  
   "role":"sustain",
   "Class": "Healer",
   "SubClass": "Reliever",

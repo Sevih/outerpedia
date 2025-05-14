@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Light",
   "role":"sustain",
+  "rank_pvp":"S",
   "Class": "Healer",
   "SubClass": "Sage",
   "transcend": {

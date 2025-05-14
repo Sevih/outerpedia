@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Light",
   "role":"dps",
+  "rank_pvp":"S",
   "Class": "Ranger",
   "SubClass": "Tactician",
   "transcend": {

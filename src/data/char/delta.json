@@ -3,6 +3,7 @@
   "Fullname": "Delta",
   "Rarity": 3,
   "Element": "Earth",
+  "rank_pvp":"C",
   "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser",

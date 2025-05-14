@@ -3,6 +3,7 @@
   "Fullname": "Vlada",
   "Rarity": 3,
   "Element": "Fire",
+  "rank_pvp":"D",
   "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",

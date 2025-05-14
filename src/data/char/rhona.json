@@ -3,7 +3,8 @@
   "Fullname": "Rhona",
   "Rarity": 3,
   "Element": "Earth",
-  "role":"support",
+  "rank_pvp":"B",
+  "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser",
   "transcend": {

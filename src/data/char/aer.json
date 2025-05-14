@@ -3,6 +3,7 @@
   "Fullname": "Aer",
   "Rarity": 3,
   "Element": "Fire",
+  "rank_pvp":"C",
   "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",

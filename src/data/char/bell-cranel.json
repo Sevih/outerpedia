@@ -3,6 +3,7 @@
   "Fullname": "Bell Cranel",
   "Rarity": 3,
   "Element": "Fire",
+  "rank_pvp":"B",
   "Class": "Mage",
   "SubClass": "Wizard",
   "limited":true,

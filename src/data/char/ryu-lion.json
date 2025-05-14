@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Earth",
   "Class": "Ranger",
+  "rank_pvp":"S",
   "role":"dps",
   "SubClass": "Vanguard",
   "limited":true,

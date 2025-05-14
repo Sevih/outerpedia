@@ -5,6 +5,7 @@
   "Element": "Earth",
   "Class": "Mage",
   "role":"dps",
+  "rank_pvp":"B",
   "SubClass": "Wizard",
   "transcend": {
     "1": null,

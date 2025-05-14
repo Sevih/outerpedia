@@ -3,6 +3,7 @@
   "Fullname": "Valentine",
   "Rarity": 3,
   "Element": "Fire",
+  "rank_pvp":"A",
   "role":"support",
   "Class": "Ranger",
   "SubClass": "Tactician",

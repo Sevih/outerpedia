@@ -24,6 +24,7 @@ async function generateAllCharacters() {
           SubClass: character.SubClass,
           Element: character.Element,
           limited: character.limited ?? false,
+          rank_pvp: character.rank_pvp ?? false,
         });
       }
     }

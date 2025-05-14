@@ -26,6 +26,14 @@ function migrateChangelogEntries(
 export const oldChangelog = [
   {
     date: "2025-05-14",
+    title: "PvP Tier List",
+    type: "feature",
+    content: [
+      "- PvP tier list add updated with O. Nadja",
+    ],
+  },
+  {
+    date: "2025-05-14",
     title: "Adventure License ,Gear Boss & Irregular Pursuit Guides",
     type: "feature",
     content: [

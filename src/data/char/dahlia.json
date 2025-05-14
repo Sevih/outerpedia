@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Water",
   "role":"support",
+  "rank_pvp":"S",
   "Class": "Mage",
   "SubClass": "Enchanter",
   "transcend": {

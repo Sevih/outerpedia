@@ -3,6 +3,7 @@
   "Fullname": "Maxwell",
   "Rarity": 3,
   "Element": "Dark",
+  "rank_pvp":"C",
   "Class": "Mage",
   "role":"dps",
   "SubClass": "Wizard",

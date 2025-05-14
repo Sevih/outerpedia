@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Light",
   "role":"dps",
+  "rank_pvp":"C",
   "Class": "Striker",
   "SubClass": "Attacker",
   "transcend": {

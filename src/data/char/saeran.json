@@ -3,6 +3,7 @@
   "Fullname": "Saeran",
   "Rarity": 3,
   "Element": "Earth",
+  "rank_pvp":"C",
   "role":"sustain",
   "Class": "Healer",
   "SubClass": "Reliever",

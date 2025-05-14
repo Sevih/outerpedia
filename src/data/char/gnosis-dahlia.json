@@ -5,6 +5,7 @@
   "Element": "Dark",
   "Class": "Striker",
   "role":"dps",
+  "rank_pvp":"S",
   "limited":true,
   "SubClass": "Attacker",
   "transcend": {

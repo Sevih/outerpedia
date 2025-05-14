@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Fire",
   "role":"dps",
+  "rank_pvp":"B",
   "Class": "Ranger",
   "SubClass": "Vanguard",
   "transcend": {

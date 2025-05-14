@@ -3,6 +3,7 @@
   "Fullname": "Laplace",
   "Rarity": 3,
   "Element": "Water",
+  "rank_pvp":"D",
   "role":"dps",
   "Class": "Mage",
   "SubClass": "Wizard",

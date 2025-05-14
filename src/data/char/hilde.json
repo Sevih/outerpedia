@@ -5,6 +5,7 @@
   "Element": "Dark",
   "role":"sustain",
   "Class": "Defender",
+  "rank_pvp":"S",
   "SubClass": "Phalanx",
   "transcend": {
     "1": null,

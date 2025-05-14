@@ -1,3 +1,7 @@
+## 🚀 PvP Tier List (2025-05-14)
+- PvP tier list add updated with O. Nadja
+
+
 ## 🚀 All gear boss & Irregular Pursuit guide (2025-05-14)
 - All Gear Boss guides are now live
 - All Adventure License guides are now live

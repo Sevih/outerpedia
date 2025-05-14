@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Water",
   "role":"sustain",
+  "rank_pvp":"C",
   "Class": "Ranger",
   "SubClass": "Tactician",
   "transcend": {

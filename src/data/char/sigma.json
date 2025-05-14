@@ -3,6 +3,7 @@
   "Fullname": "Sigma",
   "Rarity": 3,
   "Element": "Dark",
+  "rank_pvp":"D",
   "Class": "Ranger",
   "role":"support",
   "SubClass": "Vanguard",

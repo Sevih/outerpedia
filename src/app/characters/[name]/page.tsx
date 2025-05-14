@@ -365,7 +365,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                   {/* Tier + EE Priority côte à côte */}
                   <div className="flex gap-4">
                     {/* EE Priority */}
-                    <div className="border border-gray-600 rounded-md p-4 w-[180px] h-[100px] flex flex-col justify-center items-center">
+                    <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
                       <p className="font-semibold text-white mb-2">EE Priority</p>
                       {ee?.rank ? (
                         <Image
@@ -377,12 +377,12 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                           className="object-contain"
                         />
                       ) : (
-                        <p className="text-gray-400 italic">Coming soon...</p>
+                        <p className="text-gray-400 italic text-center">Coming soon...</p>
                       )}
                     </div>
-                    {/* Character Tier */}
-                    <div className="border border-gray-600 rounded-md p-4 w-[180px] h-[100px] flex flex-col justify-center items-center">
-                      <p className="font-semibold text-white mb-2">Character Tier</p>
+                    {/* Character Tier PvE*/}
+                    <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
+                      <p className="font-semibold text-white mb-2">PvE Tier</p>
                       {character.rank ? (
                         <Image
                           src={`/images/ui/IG_Event_Rank_${character.rank}.webp`}
@@ -393,7 +393,23 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                           className="object-contain"
                         />
                       ) : (
-                        <p className="text-gray-400 italic">Not Available</p>
+                        <p className="text-gray-400 italic text-center">Not Available</p>
+                      )}
+                    </div>
+                    {/* Character Tier PvP*/}
+                    <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
+                      <p className="font-semibold text-white mb-2">PvP Tier</p>
+                      {character.rank_pvp ? (
+                        <Image
+                          src={`/images/ui/IG_Event_Rank_${character.rank_pvp}.webp`}
+                          alt={`Rank ${character.rank_pvp}`}
+                          width={32}
+                          height={32}
+                          style={{ width: 32, height: 32 }}
+                          className="object-contain"
+                        />
+                      ) : (
+                        <p className="text-gray-400 italic text-center">Not Available</p>
                       )}
                     </div>
 

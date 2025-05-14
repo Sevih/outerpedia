@@ -3,6 +3,7 @@
   "Fullname": "Fatal",
   "Rarity": 3,
   "Element": "Water",
+  "rank_pvp":"D",
   "role": "dps",
   "Class": "Ranger",
   "SubClass": "Vanguard",

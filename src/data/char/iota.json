@@ -3,6 +3,7 @@
   "Fullname": "Iota",
   "Rarity": 3,
   "Element": "Dark",
+  "rank_pvp":"A",
   "role":"support",
   "Class": "Mage",
   "SubClass": "Enchanter",

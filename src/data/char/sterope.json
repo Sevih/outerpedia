@@ -5,6 +5,7 @@
   "Element": "Dark",
   "role":"support",
   "Class": "Defender",
+  "rank_pvp":"B",
   "SubClass": "Sweeper",
   "transcend": {
     "1": null,

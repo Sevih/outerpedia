@@ -3,6 +3,7 @@
   "Fullname": "Alice",
   "Rarity": 3,
   "Element": "Earth",
+  "rank_pvp":"B",
   "role":"support",
   "Class": "Mage",
   "SubClass": "Enchanter",

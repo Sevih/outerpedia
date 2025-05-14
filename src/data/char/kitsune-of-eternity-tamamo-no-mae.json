@@ -3,6 +3,7 @@
   "Fullname": "Kitsune of Eternity Tamamo-no-Mae",
   "Rarity": 3,
   "Element": "Earth",
+  "rank_pvp":"B",
   "Class": "Mage",
   "role":"dps",
   "limited":true,

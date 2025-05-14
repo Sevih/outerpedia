@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Fire",
   "role":"support",
+  "rank_pvp":"B",
   "Class": "Ranger",
   "SubClass": "Tactician",
   "transcend": {
