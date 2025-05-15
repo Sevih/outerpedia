@@ -40,6 +40,7 @@ export default function EquipmentsClient() {
 
   const [weaponClassFilter, setWeaponClassFilter] = useState<string | null>(null);
   const [weaponBossFilter, setWeaponBossFilter] = useState<string | null>(null);
+  const [levelFilter, setLevelFilter] = useState<number | null>(null);
 
   const [accessoryClassFilter, setAccessoryClassFilter] = useState<string | null>(null);
   const [accessoryBossFilter, setAccessoryBossFilter] = useState<string | null>(null);
@@ -60,11 +61,13 @@ export default function EquipmentsClient() {
 
 
   const filteredWeapons = weapons.filter(w =>
+    (!levelFilter || w.level === levelFilter) &&
     (!weaponClassFilter || w.class === weaponClassFilter) &&
     ((weaponBossFilter === null || (w.boss || w.mode) === weaponBossFilter))
   );
 
   const filteredAccessories = accessories.filter(a =>
+    (!levelFilter || a.level === levelFilter) &&
     (!accessoryClassFilter || a.class === accessoryClassFilter) &&
     (!accessoryBossFilter || (a.boss || a.mode) === accessoryBossFilter) &&
     (!accessoryMainStatFilter || a.mainStats.includes(accessoryMainStatFilter))
@@ -97,7 +100,7 @@ export default function EquipmentsClient() {
     }
 
     // Cas classiques : Irregular Extermination + Adventure License (image directe)
-    ["Irregular Extermination", "Adventure License"].forEach(key => {
+    ["Irregular Extermination", "Adventure License","Event Shop"].forEach(key => {
       const entries = group[key];
       if (entries) {
         entries.forEach(entry => {
@@ -115,49 +118,49 @@ export default function EquipmentsClient() {
 
   return (
     <main className="p-3">
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "VideoGame",
-      "name": "Outerplane",
-      "url": "https://outerpedia.com/",
-      "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse equipments, characters, sets and more.",
-      "hasPart": [
-        ...weapons.map(w => ({
-          "@type": "CreativeWork",
-          "name": w.name,
-          "image": `https://outerpedia.com/images/equipment/${w.image}`
-        })),
-        ...accessories.map(a => ({
-          "@type": "CreativeWork",
-          "name": a.name,
-          "image": `https://outerpedia.com/images/equipment/${a.image}`
-        })),
-        ...sets.map((s, i) => {
-          const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
-          const variant = variants[i % variants.length];
-          return {
-            "@type": "CreativeWork",
-            "name": s.name,
-            "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.webp`
-          };
-        }),
-        ...talismans.map(t => ({
-          "@type": "CreativeWork",
-          "name": t.name,
-          "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.webp`
-        })),
-        ...Object.entries(eeData).map(([charKey, ee]) => ({
-          "@type": "CreativeWork",
-          "name": ee.name,
-          "image": `https://outerpedia.com/images/characters/ex/${charKey}.webp`
-        }))
-      ]
-    })
-  }}
-/>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "VideoGame",
+            "name": "Outerplane",
+            "url": "https://outerpedia.com/",
+            "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse equipments, characters, sets and more.",
+            "hasPart": [
+              ...weapons.map(w => ({
+                "@type": "CreativeWork",
+                "name": w.name,
+                "image": `https://outerpedia.com/images/equipment/${w.image}`
+              })),
+              ...accessories.map(a => ({
+                "@type": "CreativeWork",
+                "name": a.name,
+                "image": `https://outerpedia.com/images/equipment/${a.image}`
+              })),
+              ...sets.map((s, i) => {
+                const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
+                const variant = variants[i % variants.length];
+                return {
+                  "@type": "CreativeWork",
+                  "name": s.name,
+                  "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.webp`
+                };
+              }),
+              ...talismans.map(t => ({
+                "@type": "CreativeWork",
+                "name": t.name,
+                "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.webp`
+              })),
+              ...Object.entries(eeData).map(([charKey, ee]) => ({
+                "@type": "CreativeWork",
+                "name": ee.name,
+                "image": `https://outerpedia.com/images/characters/ex/${charKey}.webp`
+              }))
+            ]
+          })
+        }}
+      />
 
 
       {process.env.NODE_ENV === "development" && (
@@ -258,6 +261,21 @@ export default function EquipmentsClient() {
         <>
           <div className="mb-4 flex flex-col items-center gap-4">
             <div className="flex gap-2 flex-wrap justify-center">
+              {[null, 5, 6].map((lvl) => (
+                <button
+                  key={lvl ?? 'all'}
+                  onClick={() => setLevelFilter(lvl)}
+                  className={`border px-3 py-1 rounded text-sm font-semibold ${levelFilter === lvl || (lvl === null && levelFilter === null)
+                      ? "bg-cyan-500 text-white"
+                      : "text-white hover:bg-gray-200"
+                    }`}
+                >
+                  {lvl ? `${lvl}★` : "All"}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-2 flex-wrap justify-center">
               <button
                 onClick={() => setWeaponClassFilter(null)}
                 className={`border p-1 rounded ${!weaponClassFilter ? "bg-cyan-500" : "bg-gray-100"}`}
@@ -328,6 +346,20 @@ export default function EquipmentsClient() {
       {tab === "accessory" && (
         <>
           <div className="mb-4 flex flex-col items-center gap-4">
+            <div className="flex gap-2 flex-wrap justify-center">
+              {[null, 5, 6].map((lvl) => (
+                <button
+                  key={lvl ?? 'all'}
+                  onClick={() => setLevelFilter(lvl)}
+                  className={`border px-3 py-1 rounded text-sm font-semibold ${levelFilter === lvl || (lvl === null && levelFilter === null)
+                      ? "bg-cyan-500 text-white"
+                      : "text-white hover:bg-gray-200"
+                    }`}
+                >
+                  {lvl ? `${lvl}★` : "All"}
+                </button>
+              ))}
+            </div>
             <div className="flex gap-2 flex-wrap justify-center">
               <button
                 onClick={() => setAccessoryClassFilter(null)}

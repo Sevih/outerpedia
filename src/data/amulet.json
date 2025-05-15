@@ -12,7 +12,8 @@
     "class": "Striker",
     "source": "Special Request",
     "boss": "Blazing Knight Meteos",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Coward's Treasure",
@@ -27,7 +28,8 @@
     "class": "Defender",
     "source": "Special Request",
     "boss": "Blazing Knight Meteos",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Burning Soul",
@@ -42,7 +44,8 @@
     "class": "Ranger",
     "source": "Special Request",
     "boss": "Blazing Knight Meteos",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Spirit of Unification",
@@ -57,7 +60,8 @@
     "class": "Mage",
     "source": "Special Request",
     "boss": "Blazing Knight Meteos",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Overdrive",
@@ -72,7 +76,8 @@
     "class": "Healer",
     "source": "Special Request",
     "boss": "Blazing Knight Meteos",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Clock Up",
@@ -87,7 +92,8 @@
     "class": "Striker",
     "source": "Special Request",
     "boss": "Glicys",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Blue-Gems White Ring",
@@ -102,7 +108,8 @@
     "class": "Defender",
     "source": "Special Request",
     "boss": "Glicys",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Combination Simulator",
@@ -117,7 +124,8 @@
     "class": "Ranger",
     "source": "Special Request",
     "boss": "Glicys",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Search and Destroy",
@@ -132,7 +140,8 @@
     "class": "Mage",
     "source": "Special Request",
     "boss": "Glicys",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Resurrection Token",
@@ -147,7 +156,8 @@
     "class": "Healer",
     "source": "Special Request",
     "boss": "Glicys",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Dancer's Bracelet",
@@ -162,7 +172,8 @@
     "class": "Striker",
     "source": "Special Request",
     "boss": "Dek'Ril & Mek'Ril",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Charmer's Necklace",
@@ -177,7 +188,8 @@
     "class": "Defender",
     "source": "Special Request",
     "boss": "Dek'Ril & Mek'Ril",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Clear Mind",
@@ -192,7 +204,8 @@
     "class": "Ranger",
     "source": "Special Request",
     "boss": "Dek'Ril & Mek'Ril",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Memento Mori",
@@ -207,7 +220,8 @@
     "class": "Mage",
     "source": "Special Request",
     "boss": "Dek'Ril & Mek'Ril",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Saint's Ring",
@@ -222,7 +236,8 @@
     "class": "Healer",
     "source": "Special Request",
     "boss": "Dek'Ril & Mek'Ril",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Glorious Radiance Orb",
@@ -237,7 +252,8 @@
     "class": "Striker",
     "source": "Special Request",
     "boss": "Ars Nova",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Fool's Dawn",
@@ -252,7 +268,8 @@
     "class": "Defender",
     "source": "Special Request",
     "boss": "Ars Nova",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Starlight Road",
@@ -267,7 +284,8 @@
     "class": "Healer",
     "source": "Special Request",
     "boss": "Ars Nova",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Queen of Prism",
@@ -282,7 +300,8 @@
     "class": "Mage",
     "source": "Special Request",
     "boss": "Ars Nova",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Physical Exorcism",
@@ -297,7 +316,8 @@
     "class": "Ranger",
     "source": "Special Request",
     "boss": "Ars Nova",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "A Prima Vista",
@@ -312,7 +332,8 @@
     "class": "Striker",
     "source": "Special Request",
     "boss": "Amadeus",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Unholy Exsultet",
@@ -327,7 +348,8 @@
     "class": "Defender",
     "source": "Special Request",
     "boss": "Amadeus",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Obsidian Oath",
@@ -342,7 +364,8 @@
     "class": "Healer",
     "source": "Special Request",
     "boss": "Amadeus",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Dies Irae",
@@ -357,7 +380,8 @@
     "class": "Mage",
     "source": "Special Request",
     "boss": "Amadeus",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Absolute Music",
@@ -372,7 +396,8 @@
     "class": "Ranger",
     "source": "Special Request",
     "boss": "Amadeus",
-    "mode": null
+    "mode": null,
+    "level":6
   },
   {
     "name": "Adventurer's Necklace",
@@ -387,7 +412,8 @@
     "class": null,
     "source": "Adventure License",
     "boss": null,
-    "mode": "License Shop"
+    "mode": "License Shop",
+    "level":6
   },
   {
     "name": "Briareos's Ambition [Striker]",
@@ -402,7 +428,8 @@
     "class": "Striker",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   },
   {
     "name": "Briareos's Ambition [Defender]",
@@ -417,7 +444,8 @@
     "class": "Defender",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   },
   {
     "name": "Briareos's Ambition [Ranger]",
@@ -432,7 +460,8 @@
     "class": "Ranger",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   },
   {
     "name": "Briareos's Ambition [Mage]",
@@ -447,7 +476,8 @@
     "class": "Mage",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   },
   {
     "name": "Briareos's Ambition [Healer]",
@@ -462,7 +492,8 @@
     "class": "Healer",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   },
   {
     "name": "Gorgon's Vanity [Striker]",
@@ -477,7 +508,8 @@
     "class": "Striker",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   },
   {
     "name": "Gorgon's Vanity [Defender]",
@@ -492,7 +524,8 @@
     "class": "Defender",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   },
   {
     "name": "Gorgon's Vanity [Ranger]",
@@ -507,7 +540,8 @@
     "class": "Ranger",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   },
   {
     "name": "Gorgon's Vanity [Mage]",
@@ -522,7 +556,8 @@
     "class": "Mage",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   },
   {
     "name": "Gorgon's Vanity [Healer]",
@@ -537,6 +572,7 @@
     "class": "Healer",
     "source": "Irregular Extermination",
     "boss": null,
-    "mode": "Infiltration Operation / Pursuit Operation"
+    "mode": "Infiltration Operation / Pursuit Operation",
+    "level":6
   }
  ]

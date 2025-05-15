@@ -41,12 +41,12 @@ export default function TalismanCard({
           className="relative z-10 object-contain"
         />
         {/* Icône d'effet en haut à droite */}
-        <div className="absolute top-0 right-0 z-20 transform translate-x-1/3 -translate-y-1/3">
+        <div className="absolute top-2 right-2 z-20 translate-x-1/3 -translate-y-1/3">
           <Image
             src={`/images/ui/effect/TI_Icon_UO_Talisman_${icon_item}.webp`}
             alt={effect_name}
-            width={32}
-            height={32}
+            width={24}
+            height={24}
           />
         </div>
       </div>

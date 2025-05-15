@@ -38,7 +38,8 @@ export interface EquipmentBase {
   effect_name: string
   effect_desc1: string
   effect_desc4: string
-  mainStats?: string[];
+  mainStats?: string[]
+  level:number
 }
 
 export type ArmorSet = {
@@ -84,6 +85,7 @@ export interface Accessory {
   source: string;
   boss: string | null;
   mode?: string | null;
+  level:number;
 }
 
 export interface Weapon {
@@ -99,6 +101,7 @@ export interface Weapon {
   source: string;
   boss: string | null;
   mode?: string | null;
+  level:number;
 }
 
 export type WeaponMini = EquipmentBase
