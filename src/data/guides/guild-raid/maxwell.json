@@ -18,7 +18,7 @@
               "malus": {
                 "effect": "At the end of the Boss Monster's turn, reduces Chain Points of allies by -10",
                 "ratio": "+20%",
-                "image": "boss",
+                "image": "Boss",
                 "bg": "1"
               }
             },
@@ -32,7 +32,7 @@
               "malus": {
                 "effect": "+50% boss Defense",
                 "ratio": "+40%",
-                "image": "boss",
+                "image": "Boss",
                 "bg": "2"
               }
             },
@@ -54,7 +54,7 @@
               "bonus": {
                 "effect": "Increases damage against enemies inflicted with Poisoned",
                 "ratio": "-25%",
-                "image": "boss",
+                "image": "Boss",
                 "bg": "1"
               },
               "malus": {
@@ -74,7 +74,7 @@
               "malus": {
                 "effect": "Increases damage against Boss monsters proportional to the number of debuffs",
                 "ratio": "+65%",
-                "image": "boss",
+                "image": "Boss",
                 "bg": "3"
               }
             }
@@ -117,7 +117,7 @@
               "bonus": {
                 "effect": "Increases damage against enemies inflicted with Poisoned by 200%.",
                 "ratio": "-25%",
-                "image": "boss",
+                "image": "Boss",
                 "bg": "1"
               },
               "malus": {
