@@ -113,6 +113,18 @@ export default function TierListPage({ characters, initialTab }: { characters: C
         }}
       />
 
+{/* Flèche retour */}
+        <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
+          <Link href={`/tools`} className="relative block h-full w-full">
+            <Image
+              src="/images/ui/CM_TopMenu_Back.webp"
+              alt="Back"
+              fill
+              sizes='32px'
+              className="opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </Link>
+        </div>
       <h1 className="text-5xl font-extrabold text-center mb-8 bg-gradient-to-b from-yellow-300 via-orange-400 to-red-500 text-transparent bg-clip-text drop-shadow-md">
         Tier List - PvP
       </h1>

@@ -13,7 +13,7 @@ const teams = {
         icon: 'SC_Buff_Effect_Remove_Buff.webp',
         setup: [
             ['Iota','Notia','Gnosis Nella', 'Dahlia','Kuro', 'Stella'],
-            ['Demiurge Vlada','Eliza','Gnosis Nella', 'Dahlia','Alice','Aer'],
+            ['Demiurge Vlada','Omega Nadja','Eliza','Gnosis Nella', 'Dahlia','Alice','Aer'],
             ['Gnosis Dahlia','Francesca','Demiurge Astei', 'Maxwell'],
             ['Demiurge Astei', 'Maxwell','Demiurge Delta', 'Nella']
         ]
