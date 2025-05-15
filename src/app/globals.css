@@ -47,6 +47,18 @@
   .text-glow {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   }
+
+  img.geas-icon {
+  filter: brightness(0) saturate(100%);
+}
+
+img.geas-icon.blue {
+  filter: brightness(0) saturate(100%) invert(65%) sepia(85%) saturate(2080%) hue-rotate(175deg) brightness(0.80);
+}
+
+img.geas-icon.red {
+  filter: brightness(0) saturate(100%) invert(19%) sepia(100%) saturate(2345%) hue-rotate(-10deg) brightness(102%) contrast(105%);
+}
   
   
   .tooltip-left .tooltip {

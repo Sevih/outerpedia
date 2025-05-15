@@ -418,6 +418,14 @@
       "last_updated": "2025-04-01",
       "author": "Shiraen",
       "second_image":"pursuit-mutated-wyvre2"
+    },
+    "maxwell": {
+      "category": "guild-raid",
+      "title": "The Madman's Laboratory",
+      "description": "Boss strategy guide",
+      "icon": "maxwell",
+      "last_updated": "2025-04-01",
+      "author": "Sevih"
     }
                        
   }

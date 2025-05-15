@@ -40,5 +40,10 @@
         "License Shop":[{
             "id":"TI_Licence"
         }]
+    }],
+    "Event Shop":[{
+        "Event":[{
+            "id":"CM_Shop_Shortcuts_EventShop"
+        }]
     }]
 }]
