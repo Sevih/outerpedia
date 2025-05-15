@@ -6,6 +6,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import type { Metadata } from 'next';
 import { CharacterJsonLd } from '@/app/components/seo';
+import Link from 'next/link';
 
 import Image from 'next/image';
 import classDataRaw from '@/data/class.json';
@@ -193,6 +194,18 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
           charClass={character.Class}
           subClass={character.SubClass}
         />
+        {/* Flèche retour */}
+        <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
+          <Link href={`/characters`} className="relative block h-full w-full">
+            <Image
+              src="/images/ui/CM_TopMenu_Back.webp"
+              alt="Back"
+              fill
+              sizes='32px'
+              className="opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </Link>
+        </div>
 
         <div className="max-w-5xl mx-auto p-6">
           {/* Partie haute : illustration + infos principales */}
