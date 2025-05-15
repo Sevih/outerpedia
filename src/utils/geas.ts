@@ -15,7 +15,7 @@ export function resolveGeasRef(
   const match = ref.match(/^(\d+)-(\d+)([BM])$/i)
   if (!match) return null
 
-  const [bossIndexStr, levelStr, typeLetter] = match
+  const [, bossIndexStr, levelStr, typeLetter] = match
   const bossIndex = parseInt(bossIndexStr, 10) - 1
   const level = levelStr
   const type = typeLetter.toUpperCase() === 'B' ? 'bonus' : 'malus'
