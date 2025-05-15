@@ -65,7 +65,7 @@ export default function TeamTabSelector({ teams }: TeamTabSelectorProps) {
                     sizes="20px"
                   />
                 </div>
-                <span className="hidden sm:inline">{teams[key].label}</span>
+                <span className="text-xs sm:text-sm">{teams[key].label}</span>
               </button>
             ))}
           </div>

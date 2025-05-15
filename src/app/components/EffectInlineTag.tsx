@@ -36,7 +36,9 @@ export default function EffectInlineTag({ name, type }: Props) {
     <Tooltip.Provider delayDuration={0}>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
-          <span className="inline-flex items-end gap-1 align-bottom">
+          <button
+    type="button"
+    className="inline-flex items-end gap-1 align-bottom">
             <span className="inline-block w-[24px] h-[24px] relative align-bottom">
               <Image
                 src={iconPath}
@@ -47,7 +49,7 @@ export default function EffectInlineTag({ name, type }: Props) {
               />
             </span>
             <span className={`underline ${color}`}>{effect.label}</span>
-          </span>
+          </button>
         </Tooltip.Trigger>
 
         <Tooltip.Portal>

@@ -24,7 +24,10 @@ export default function GeasCard({ geas,type="bonus" }: Props) {
   return (
     <HoverCard.Root openDelay={0} closeDelay={0}>
       <HoverCard.Trigger asChild>
-        <div className="relative w-10 h-10 rounded overflow-hidden cursor-pointer shrink-0">
+        <button
+    type="button"
+    className="relative w-10 h-10 rounded overflow-hidden cursor-pointer shrink-0"
+  >
           {/* Image de fond */}
           {geas.bg && (
             <Image
@@ -54,7 +57,7 @@ export default function GeasCard({ geas,type="bonus" }: Props) {
               />
             </div>
           </div>
-        </div>
+        </button>
       </HoverCard.Trigger>
 
       <HoverCard.Portal>
