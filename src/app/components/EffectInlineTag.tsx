@@ -1,7 +1,7 @@
 'use client'
 
+import * as HoverCard from '@radix-ui/react-hover-card'
 import Image from 'next/image'
-import * as Tooltip from '@radix-ui/react-tooltip'
 import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
 
@@ -19,9 +19,8 @@ type Effect = {
 }
 
 export default function EffectInlineTag({ name, type }: Props) {
-    const effects: Effect[] = (type === 'buff' ? buffs : debuffs).map(e => ({ ...e, type }))
-    const effect = effects.find((e) => e.name === name)
-    
+  const effects: Effect[] = (type === 'buff' ? buffs : debuffs).map(e => ({ ...e, type }))
+  const effect = effects.find((e) => e.name === name)
 
   if (!effect) return <span className="text-red-500">{name}</span>
 
@@ -33,50 +32,49 @@ export default function EffectInlineTag({ name, type }: Props) {
   const imageClass = showEffectColor ? effect.type : ''
 
   return (
-    <Tooltip.Provider delayDuration={0}>
-      <Tooltip.Root>
-        <Tooltip.Trigger asChild>
-          <button
-    type="button"
-    className="inline-flex items-end gap-1 align-bottom">
-            <span className="inline-block w-[24px] h-[24px] relative align-bottom">
-              <Image
-                src={iconPath}
-                alt={effect.label}
-                fill
-                sizes="24px"
-                className={`object-contain ${imageClass}`}
-              />
-            </span>
-            <span className={`underline ${color}`}>{effect.label}</span>
-          </button>
-        </Tooltip.Trigger>
+    <HoverCard.Root openDelay={0} closeDelay={0}>
+      <HoverCard.Trigger asChild>
+        <button
+          type="button"
+          className="inline-flex items-end gap-1 align-bottom"
+        >
+          <span className="inline-block w-[24px] h-[24px] relative align-bottom">
+            <Image
+              src={iconPath}
+              alt={effect.label}
+              fill
+              sizes="24px"
+              className={`object-contain ${imageClass}`}
+            />
+          </span>
+          <span className={`underline ${color}`}>{effect.label}</span>
+        </button>
+      </HoverCard.Trigger>
 
-        <Tooltip.Portal>
-          <Tooltip.Content
-            side="top"
-            align="center"
-            className={`z-50 px-3 py-2 rounded shadow-lg max-w-[260px] flex items-start gap-2 ${tooltipBg}`}
-          >
-            <div className="relative w-[28px] h-[28px] bg-black p-1 rounded shrink-0">
-              <Image
-                src={iconPath}
-                alt={effect.label}
-                fill
-                sizes="28px"
-                className={`object-contain ${imageClass}`}
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-white text-sm leading-tight">{effect.label}</span>
-              <span className="text-white text-xs leading-snug whitespace-pre-line">
-                {effect.description}
-              </span>
-            </div>
-            <Tooltip.Arrow className={arrowFill} />
-          </Tooltip.Content>
-        </Tooltip.Portal>
-      </Tooltip.Root>
-    </Tooltip.Provider>
+      <HoverCard.Portal>
+        <HoverCard.Content
+          side="top"
+          align="center"
+          className={`z-50 px-3 py-2 rounded shadow-lg max-w-[260px] flex items-start gap-2 ${tooltipBg}`}
+        >
+          <div className="relative w-[28px] h-[28px] bg-black p-1 rounded shrink-0">
+            <Image
+              src={iconPath}
+              alt={effect.label}
+              fill
+              sizes="28px"
+              className={`object-contain ${imageClass}`}
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-white text-sm leading-tight">{effect.label}</span>
+            <span className="text-white text-xs leading-snug whitespace-pre-line">
+              {effect.description}
+            </span>
+          </div>
+          <HoverCard.Arrow className={arrowFill} />
+        </HoverCard.Content>
+      </HoverCard.Portal>
+    </HoverCard.Root>
   )
 }
