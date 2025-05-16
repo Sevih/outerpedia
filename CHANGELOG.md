@@ -1,3 +1,8 @@
+## 🚀 5★ item support (2025-05-16)
+- Add 5★ items from event shop from event shop
+- Name and Rarity filters has been added on the Equipments Page
+
+
 ## 🚀 PvP Tier List (2025-05-14)
 - PvP tier list add updated with O. Nadja
 

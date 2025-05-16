@@ -42,6 +42,9 @@ export default function EquipmentsClient() {
   const [weaponBossFilter, setWeaponBossFilter] = useState<string | null>(null);
   const [levelFilter, setLevelFilter] = useState<number | null>(null);
 
+  const [weaponSearch, setWeaponSearch] = useState("");
+  const [accessorySearch, setAccessorySearch] = useState("");
+
   const [accessoryClassFilter, setAccessoryClassFilter] = useState<string | null>(null);
   const [accessoryBossFilter, setAccessoryBossFilter] = useState<string | null>(null);
   const [accessoryMainStatFilter, setAccessoryMainStatFilter] = useState<string | null>(null);
@@ -61,17 +64,21 @@ export default function EquipmentsClient() {
 
 
   const filteredWeapons = weapons.filter(w =>
-    (!levelFilter || w.level === levelFilter) &&
-    (!weaponClassFilter || w.class === weaponClassFilter) &&
-    ((weaponBossFilter === null || (w.boss || w.mode) === weaponBossFilter))
-  );
+  (!levelFilter || w.level === levelFilter) &&
+  (!weaponClassFilter || w.class === weaponClassFilter) &&
+  (!weaponSearch || w.name.toLowerCase().includes(weaponSearch.toLowerCase())) &&
+  ((weaponBossFilter === null || (w.boss || w.mode) === weaponBossFilter))
+);
+
 
   const filteredAccessories = accessories.filter(a =>
-    (!levelFilter || a.level === levelFilter) &&
-    (!accessoryClassFilter || a.class === accessoryClassFilter) &&
-    (!accessoryBossFilter || (a.boss || a.mode) === accessoryBossFilter) &&
-    (!accessoryMainStatFilter || a.mainStats.includes(accessoryMainStatFilter))
-  );
+  (!levelFilter || a.level === levelFilter) &&
+  (!accessoryClassFilter || a.class === accessoryClassFilter) &&
+  (!accessorySearch || a.name.toLowerCase().includes(accessorySearch.toLowerCase())) &&
+  (!accessoryBossFilter || (a.boss || a.mode) === accessoryBossFilter) &&
+  (!accessoryMainStatFilter || a.mainStats.includes(accessoryMainStatFilter))
+);
+
 
   type BossEntry = {
     [bossName: string]: { id: string }[];
@@ -100,7 +107,7 @@ export default function EquipmentsClient() {
     }
 
     // Cas classiques : Irregular Extermination + Adventure License (image directe)
-    ["Irregular Extermination", "Adventure License","Event Shop"].forEach(key => {
+    ["Irregular Extermination", "Adventure License", "Event Shop"].forEach(key => {
       const entries = group[key];
       if (entries) {
         entries.forEach(entry => {
@@ -260,14 +267,22 @@ export default function EquipmentsClient() {
       {tab === "weapon" && (
         <>
           <div className="mb-4 flex flex-col items-center gap-4">
+            <input
+  type="text"
+  placeholder="Search weapons..."
+  value={weaponSearch}
+  onChange={(e) => setWeaponSearch(e.target.value)}
+  className="w-full max-w-sm px-4 py-2 border border-white/20 rounded-full bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring focus:border-cyan-400 transition"
+/>
+
             <div className="flex gap-2 flex-wrap justify-center">
               {[null, 5, 6].map((lvl) => (
                 <button
                   key={lvl ?? 'all'}
                   onClick={() => setLevelFilter(lvl)}
                   className={`border px-3 py-1 rounded text-sm font-semibold ${levelFilter === lvl || (lvl === null && levelFilter === null)
-                      ? "bg-cyan-500 text-white"
-                      : "text-white hover:bg-gray-200"
+                    ? "bg-cyan-500 text-white"
+                    : "text-white hover:bg-gray-200"
                     }`}
                 >
                   {lvl ? `${lvl}★` : "All"}
@@ -346,14 +361,22 @@ export default function EquipmentsClient() {
       {tab === "accessory" && (
         <>
           <div className="mb-4 flex flex-col items-center gap-4">
+            <input
+  type="text"
+  placeholder="Search accessories..."
+  value={accessorySearch}
+  onChange={(e) => setAccessorySearch(e.target.value)}
+  className="w-full max-w-sm px-4 py-2 border border-white/20 rounded-full bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring focus:border-cyan-400 transition"
+/>
+
             <div className="flex gap-2 flex-wrap justify-center">
               {[null, 5, 6].map((lvl) => (
                 <button
                   key={lvl ?? 'all'}
                   onClick={() => setLevelFilter(lvl)}
                   className={`border px-3 py-1 rounded text-sm font-semibold ${levelFilter === lvl || (lvl === null && levelFilter === null)
-                      ? "bg-cyan-500 text-white"
-                      : "text-white hover:bg-gray-200"
+                    ? "bg-cyan-500 text-white"
+                    : "text-white hover:bg-gray-200"
                     }`}
                 >
                   {lvl ? `${lvl}★` : "All"}

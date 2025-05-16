@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-16",
+    title: "5★ item support",
+    type: "feature",
+    content: [
+      "- Add 5★ items from event shop from event shop",
+      "- Name and Rarity filters has been added on the Equipments Page"
+    ],
+  },
+  {
     date: "2025-05-14",
     title: "PvP Tier List",
     type: "feature",
