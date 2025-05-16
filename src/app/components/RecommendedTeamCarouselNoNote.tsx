@@ -20,13 +20,17 @@ export default function RecommendedTeamCarousel({ team, note }: Props) {
       <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-4">
         Recommended Team
       </h3>
-      <div
-        className="justify-center gap-12"
-        style={{
-          display:'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-        }}
-      >
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 220px))',
+    justifyContent: 'center', // pour centrer les lignes incomplètes
+    gap: '1rem',              // ou utilise Tailwind `gap-8`
+    maxWidth: '100%',
+    margin: '0 auto'
+  }}
+>
+
         {team.map((candidates, index) => (
           <CarouselSlot key={index} characters={candidates} />
         ))}

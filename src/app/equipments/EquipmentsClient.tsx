@@ -64,20 +64,33 @@ export default function EquipmentsClient() {
 
 
   const filteredWeapons = weapons.filter(w =>
-  (!levelFilter || w.level === levelFilter) &&
-  (!weaponClassFilter || w.class === weaponClassFilter) &&
-  (!weaponSearch || w.name.toLowerCase().includes(weaponSearch.toLowerCase())) &&
-  ((weaponBossFilter === null || (w.boss || w.mode) === weaponBossFilter))
-);
+    (!levelFilter || w.level === levelFilter) &&
+    (!weaponClassFilter || w.class === weaponClassFilter) &&
+    (!weaponSearch || w.name.toLowerCase().includes(weaponSearch.toLowerCase())) &&
+    ((weaponBossFilter === null || (w.boss || w.mode) === weaponBossFilter))
+  );
 
 
   const filteredAccessories = accessories.filter(a =>
-  (!levelFilter || a.level === levelFilter) &&
-  (!accessoryClassFilter || a.class === accessoryClassFilter) &&
-  (!accessorySearch || a.name.toLowerCase().includes(accessorySearch.toLowerCase())) &&
-  (!accessoryBossFilter || (a.boss || a.mode) === accessoryBossFilter) &&
-  (!accessoryMainStatFilter || a.mainStats.includes(accessoryMainStatFilter))
-);
+    (!levelFilter || a.level === levelFilter) &&
+    (!accessoryClassFilter || a.class === accessoryClassFilter) &&
+    (!accessorySearch || a.name.toLowerCase().includes(accessorySearch.toLowerCase())) &&
+    (!accessoryBossFilter || (a.boss || a.mode) === accessoryBossFilter) &&
+    (!accessoryMainStatFilter || a.mainStats.includes(accessoryMainStatFilter))
+  );
+
+  useEffect(() => {
+    // Reset de tous les filtres quand on change d'onglet
+    setLevelFilter(null);
+    setWeaponClassFilter(null);
+    setWeaponBossFilter(null);
+    setAccessoryClassFilter(null);
+    setAccessoryBossFilter(null);
+    setAccessoryMainStatFilter(null);
+    setArmorBossFilter(null);
+    setWeaponSearch("");
+    setAccessorySearch("");
+  }, [tab]);
 
 
   type BossEntry = {
@@ -268,12 +281,12 @@ export default function EquipmentsClient() {
         <>
           <div className="mb-4 flex flex-col items-center gap-4">
             <input
-  type="text"
-  placeholder="Search weapons..."
-  value={weaponSearch}
-  onChange={(e) => setWeaponSearch(e.target.value)}
-  className="w-full max-w-sm px-4 py-2 border border-white/20 rounded-full bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring focus:border-cyan-400 transition"
-/>
+              type="text"
+              placeholder="Search weapons..."
+              value={weaponSearch}
+              onChange={(e) => setWeaponSearch(e.target.value)}
+              className="w-full max-w-sm px-4 py-2 border border-white/20 rounded-full bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring focus:border-cyan-400 transition"
+            />
 
             <div className="flex gap-2 flex-wrap justify-center">
               {[null, 5, 6].map((lvl) => (
@@ -293,9 +306,9 @@ export default function EquipmentsClient() {
             <div className="flex gap-2 flex-wrap justify-center">
               <button
                 onClick={() => setWeaponClassFilter(null)}
-                className={`border p-1 rounded ${!weaponClassFilter ? "bg-cyan-500" : "bg-gray-100"}`}
+                className={`border p-1 rounded ${!weaponClassFilter ? "bg-cyan-500" : "bg-transparent"}`}
               >
-                <span className={`px-2 text-sm font-semibold ${!weaponClassFilter ? "text-white" : "text-black"}`}>All</span>
+                <span className={`px-2 text-sm font-semibold ${!weaponClassFilter ? "text-white" : "text-white"}`}>All</span>
               </button>
               {weaponClasses.map((cls) => (
                 <button
@@ -320,7 +333,7 @@ export default function EquipmentsClient() {
             <div className="flex gap-2 flex-wrap justify-center">
               <button
                 onClick={() => setWeaponBossFilter(null)}
-                className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${weaponBossFilter === null ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
+                className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${weaponBossFilter === null ? "bg-cyan-500 text-white" : "bg-transparent text-white hover:bg-gray-200"}`}
               >
                 All
               </button>
@@ -362,12 +375,12 @@ export default function EquipmentsClient() {
         <>
           <div className="mb-4 flex flex-col items-center gap-4">
             <input
-  type="text"
-  placeholder="Search accessories..."
-  value={accessorySearch}
-  onChange={(e) => setAccessorySearch(e.target.value)}
-  className="w-full max-w-sm px-4 py-2 border border-white/20 rounded-full bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring focus:border-cyan-400 transition"
-/>
+              type="text"
+              placeholder="Search accessories..."
+              value={accessorySearch}
+              onChange={(e) => setAccessorySearch(e.target.value)}
+              className="w-full max-w-sm px-4 py-2 border border-white/20 rounded-full bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring focus:border-cyan-400 transition"
+            />
 
             <div className="flex gap-2 flex-wrap justify-center">
               {[null, 5, 6].map((lvl) => (
@@ -386,9 +399,9 @@ export default function EquipmentsClient() {
             <div className="flex gap-2 flex-wrap justify-center">
               <button
                 onClick={() => setAccessoryClassFilter(null)}
-                className={`border p-1 rounded ${!accessoryClassFilter ? "bg-cyan-500" : "bg-gray-100"}`}
+                className={`border p-1 rounded ${!accessoryClassFilter ? "bg-cyan-500" : "bg-transparent"}`}
               >
-                <span className={`px-2 text-sm font-semibold ${!accessoryClassFilter ? "text-white" : "text-black"}`}>All</span>
+                <span className={`px-2 text-sm font-semibold ${!accessoryClassFilter ? "text-white" : "text-white"}`}>All</span>
               </button>
               {accessoryClasses.filter((cls): cls is string => cls !== null).map((cls) => (
                 <button
@@ -414,7 +427,7 @@ export default function EquipmentsClient() {
             <div className="flex gap-2 flex-wrap justify-center">
               <button
                 onClick={() => setAccessoryBossFilter(null)}
-                className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${accessoryBossFilter === null ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
+                className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${accessoryBossFilter === null ? "bg-cyan-500 text-white" : "bg-transparent text-white hover:bg-gray-200"}`}
               >
                 All
               </button>
@@ -445,7 +458,7 @@ export default function EquipmentsClient() {
             <div className="flex gap-2 flex-wrap justify-center">
               <button
                 onClick={() => setAccessoryMainStatFilter(null)}
-                className={`border px-3 py-1 rounded text-sm font-semibold ${!accessoryMainStatFilter ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
+                className={`border px-3 py-1 rounded text-sm font-semibold ${!accessoryMainStatFilter ? "bg-cyan-500 text-white" : "bg-transparent text-white hover:bg-gray-200"}`}
               >
                 All Stats
               </button>
@@ -487,7 +500,7 @@ export default function EquipmentsClient() {
           <div className="mb-4 flex flex-wrap justify-center gap-2">
             <button
               onClick={() => setArmorBossFilter(null)}
-              className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${armorBossFilter === null ? "bg-cyan-500 text-white" : "bg-gray-100 text-black hover:bg-gray-200"}`}
+              className={`border px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 ${armorBossFilter === null ? "bg-cyan-500 text-white" : "bg-transparent text-white hover:bg-gray-200"}`}
             >
               All
             </button>

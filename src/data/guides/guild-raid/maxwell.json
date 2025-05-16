@@ -85,22 +85,34 @@
           ],
           "recommended": [
             {
-              "name": "Stella",
+              "name": "Ryu Lion",
               "comment": "Cleanse and Burn Resist"
             },
             {
               "name": "Ame",
               "comment": "High burst vs Fire"
+            },
+            {
+              "name":"Monad Eva",
+              "comment": "Dual attack"
             }
           ],
           "team": [
             [
-              "Stella",
+              "Ryu Lion",
               "Ame",
-              "Delta"
+              "Rey"
             ],
             [
-              "Hanbyul Lee",
+              "Monad Eva",
+              "Rey"
+            ],
+            [
+              "Monad Eva",
+              "Rey"
+            ],
+            [
+              "Monad Eva",
               "Rey"
             ]
           ],
