@@ -27,7 +27,7 @@ export default function BeginnerGuide() {
             <ul className="list-disc ml-6">
                 <li><CharacterLinkCard name="Valentine" /></li>
                 <li>
-                    <CharacterLinkCard name="Rin" /> only consider her if you already have <CharacterLinkCard name="Valentine" /> <CharacterLinkCard name="Tamara" /> or <CharacterLinkCard name="Skadi" />
+                    <CharacterLinkCard name="Rin" />, only consider her if you already have <CharacterLinkCard name="Valentine" /> <CharacterLinkCard name="Tamara" /> or <CharacterLinkCard name="Skadi" />
                 </li>
             </ul>
 
@@ -98,7 +98,7 @@ export default function BeginnerGuide() {
             <GuideHeading level={4}>Special Request events</GuideHeading>
             <div className="flex flex-col md:flex-row gap-6 items-start">
                 {/* Identification */}
-                <div className="flex-1 flex flex-col items-center space-y-3">
+                <div className="flex-1 flex flex-col items-start space-y-3">
                     <div className="w-[400px] h-[80px] relative">
                         <Image
                             src="/images/guides/general-guides/Challenge!-Special-Request-Identification.webp"
@@ -122,7 +122,7 @@ export default function BeginnerGuide() {
                 </div>
 
                 {/* Ecology Study */}
-                <div className="flex-1 flex flex-col items-center space-y-3">
+                <div className="flex-1 flex flex-col items-start space-y-3">
                     <div className="w-[400px] h-[80px] relative">
                         <Image
                             src="/images/guides/general-guides/Challenge!-Special-Request-Ecology-Study.webp"
@@ -156,6 +156,9 @@ export default function BeginnerGuide() {
             <p className="text-neutral-400 text-sm italic mb-4">
                 Note: Some heroes are not available in the custom banner yet, as they haven&apos;t been out long enough (like Skadi or Luna).
             </p>
+            <p className="text-neutral-400 text-sm italic mb-4">
+                Note: Characters whose names appear in <span className='text-red-400 underline italic'>red</span> can be obtained for free (see above).
+            </p>
             <p className="mt-2">Recommended picks order from the Custom Banner:</p>
             <div className="flex items-center gap-x-4">
                 <div className="flex flex-wrap items-start gap-2">
@@ -168,8 +171,8 @@ export default function BeginnerGuide() {
             {/* Immunity / Healing */}
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
-                    <CharacterInlineStacked name="Dianne" />
-                    <CharacterInlineStacked name="Nella" />
+                    <CharacterInlineStacked name="Dianne" deco='text-red-400 underline italic' />
+                    <CharacterInlineStacked name="Nella" deco='text-red-400 underline italic' />
                 </div>
                 <p className="text-sm">Pick based on your starter</p>
             </div>
@@ -178,8 +181,8 @@ export default function BeginnerGuide() {
             {/* PvP Utility */}
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
-                    <CharacterInlineStacked name="Dahlia" />
-                    <CharacterInlineStacked name="Iota" />
+                    <CharacterInlineStacked name="Dahlia" deco='text-red-400 underline italic' />
+                    <CharacterInlineStacked name="Iota" deco='text-red-400 underline italic' />
                     <CharacterInlineStacked name="Kanon" />
                 </div>
                 <p className="">Excellent PvP units.</p>
@@ -188,10 +191,10 @@ export default function BeginnerGuide() {
             {/* DPS */}
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
-                    <CharacterInlineStacked name="Ame" />
+                    <CharacterInlineStacked name="Ame" deco='text-red-400 underline italic' />
                     <CharacterInlineStacked name="Rey" />
                     <CharacterInlineStacked name="Roxie" />
-                    <CharacterInlineStacked name="Maxwell" />
+                    <CharacterInlineStacked name="Maxwell" deco='text-red-400 underline italic' />
                 </div>
                 <p className="">High damage dealers for general content</p>
             </div>
@@ -199,7 +202,7 @@ export default function BeginnerGuide() {
             {/* Debuffers */}
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
-                    <CharacterInlineStacked name="Akari" />
+                    <CharacterInlineStacked name="Akari" deco='text-red-400 underline italic' />
                     <CharacterInlineStacked name="Tamamo-no-Mae" />
                     <CharacterInlineStacked name="Kuro" />
                 </div>
@@ -217,7 +220,7 @@ export default function BeginnerGuide() {
             {/* DPS with special utility */}
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
-                    <CharacterInlineStacked name="Drakhan" />
+                    <CharacterInlineStacked name="Drakhan" deco='text-red-400 underline italic' />
                     <CharacterInlineStacked name="Regina" />
                     <CharacterInlineStacked name="Caren" />
                     <CharacterInlineStacked name="Maxie" />
@@ -230,7 +233,7 @@ export default function BeginnerGuide() {
                 <div className="flex flex-wrap items-start gap-2">
                     <CharacterInlineStacked name="Sterope" />
                     <CharacterInlineStacked name="Notia" />
-                    <CharacterInlineStacked name="Hilde" />
+                    <CharacterInlineStacked name="Hilde" deco='text-red-400 underline italic' />
                     <CharacterInlineStacked name="Charlotte" />
                     <CharacterInlineStacked name="Luna" />
                 </div>
@@ -240,7 +243,7 @@ export default function BeginnerGuide() {
             {/* Temporary DPS */}
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
-                    <CharacterInlineStacked name="Rin" />
+                    <CharacterInlineStacked name="Rin" deco='text-red-400 underline italic' />
                     <CharacterInlineStacked name="Epsilon" />
                 </div>
                 <p className="">Usable as DPS early on, but generally outscaled.</p>
@@ -249,12 +252,12 @@ export default function BeginnerGuide() {
             {/* Temporary DPS */}
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
-                    <CharacterInlineStacked name="Rhona" />
+                    <CharacterInlineStacked name="Rhona" deco='text-red-400 underline italic' />
                     <CharacterInlineStacked name="Hanbyul Lee" />
-                    <CharacterInlineStacked name="Alice" />
-                    <CharacterInlineStacked name="Saeran" />
+                    <CharacterInlineStacked name="Alice" deco='text-red-400 underline italic' />
+                    <CharacterInlineStacked name="Saeran" deco='text-red-400 underline italic' />
                     <CharacterInlineStacked name="Mero" />
-                    <CharacterInlineStacked name="Leo" />
+                    <CharacterInlineStacked name="Leo" deco='text-red-400 underline italic' />
                     <CharacterInlineStacked name="Christina" />
                     <CharacterInlineStacked name="Edelweiss" />
                     <CharacterInlineStacked name="Vlada" />
@@ -266,8 +269,8 @@ export default function BeginnerGuide() {
 
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
-                    <CharacterInlineStacked name="Francesca" />
-                    <CharacterInlineStacked name="Eliza" />
+                    <CharacterInlineStacked name="Francesca" deco='text-red-400 underline italic' />
+                    <CharacterInlineStacked name="Eliza" deco='text-red-400 underline italic' />
                 </div>
                 <p className="">For collection only.</p>
             </div>

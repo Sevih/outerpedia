@@ -17,12 +17,13 @@ const characterNameMap: Record<string, string> = {
 type Props = {
   name: string; // alias ou Fullname
   size?: number; // taille optionnelle (par défaut 50)
+  deco?:string
 };
 
-export default function CharacterInlineStacked({ name, size = 50 }: Props) {
+export default function CharacterInlineStacked({ name, size = 50, deco }: Props) {
   const fullName = characterNameMap[name] ?? name;
   const char = allCharacters.find(c => c.Fullname === fullName);
-
+  const italic = deco ? deco : ""
   if (!char) return <span className="text-red-500">{name}</span>;
 
   const slug = toKebabCase(char.Fullname);
@@ -45,7 +46,7 @@ export default function CharacterInlineStacked({ name, size = 50 }: Props) {
           className="object-contain"
         />
       </div>
-      <span className="text-xs leading-tight">{char.Fullname}</span>
+      <span className={`leading-tight ${italic}`}>{char.Fullname}</span>
     </Link>
   );
 }
