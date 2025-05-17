@@ -29,7 +29,7 @@ export const oldChangelog = [
     title: "New guide - Understanding Free Heroes & Starter Banners",
     type: "feature",
     content: [
-      "- Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start",
+      "- Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start. [Read the guide here](/guides/general-guides/free-heroes-start-banner)",
     ],
   },
   {
