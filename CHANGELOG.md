@@ -1,3 +1,7 @@
+## 🚀 New guide - Understanding Free Heroes & Starter Banners (2025-05-17)
+- Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start
+
+
 ## 🚀 5★ item support (2025-05-16)
 - Add 5★ items from event shop from event shop
 - Name and Rarity filters has been added on the Equipments Page

@@ -1,4 +1,11 @@
 {
+  
+    "general-guides": {
+      "title": "General Tips",
+      "description": "Anything that doesn't go in another category.",
+      "icon": "/images/guides/CM_Adventure_SideStory",
+      "valid":true
+    },
     "world-boss": {
       "title": "World Boss Guides",
       "description": "Form the best teams to defeat massive enemies.",
@@ -40,12 +47,6 @@
       "description": "Ease your way to kill the queen and her foes.",
       "icon": "/images/guides/CM_Adventure_Irregular",
       "valid":true
-    },
-    "general-guide": {
-      "title": "General Tips",
-      "description": "Anything that doesn't go in another category.",
-      "icon": "/images/guides/CM_Adventure_SideStory",
-      "valid":false
     }
   }
   

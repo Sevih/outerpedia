@@ -426,7 +426,16 @@
       "icon": "maxwell",
       "last_updated": "2025-04-01",
       "author": "Sevih"
-    }
+    },
+    "free-heroes-start-banner": {
+      "category": "general-guides",
+      "title": "Understanding Free Heroes & Starter Banners",
+      "description": "Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start",
+      "icon": "T_Chat_Emoticon_08",
+      "last_updated": "2025-05-17",
+      "author": "Arabyss/Birdmouth/Sevih/Shiraen",
+      "second_image":"T_Chat_Emoticon_05"
+    }   
                        
   }
 

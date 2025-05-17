@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-17",
+    title: "New guide - Understanding Free Heroes & Starter Banners",
+    type: "feature",
+    content: [
+      "- Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start",
+    ],
+  },
+  {
     date: "2025-05-16",
     title: "5★ item support",
     type: "feature",

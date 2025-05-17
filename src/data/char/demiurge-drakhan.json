@@ -51,7 +51,7 @@
         }
       },
       "cd": null,
-      "debuff": [],
+      "debuff": ["BT_FIXED_DAMAGE"],
       "description": [
         "Attacks an enemy and deals <color=#28d9ed>[Buff_V_2000063_1_2]</color> of the target's Max Health as fixed damage.\\nDamage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack. "
       ],
