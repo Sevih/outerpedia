@@ -94,7 +94,7 @@ export default function GearUsageStatsClients({ data }: { data: GearItem[] }) {
                                     sizes="24px"
                                 />
                             </div>
-                            <span className="hidden md:inline">{label}</span>
+                            <span className="inline">{label}</span>
                         </button>
                     ))}
                 </div>
