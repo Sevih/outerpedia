@@ -6,7 +6,7 @@
         "mainStat": "ATK%"
       },
       {
-        "name": "Thumping Knuckledusters",
+        "name": "Thumping Knuckle Dusters",
         "mainStat": "ATK%"
       }
     ],
@@ -30,14 +30,45 @@
       
     ]
   },
-  "PvE": {
+  "PvE - effi": {
     "Weapon": [
       {
         "name": "Noblewoman's Guile",
         "mainStat": "ATK%"
       },
       {
-        "name": "Thumping Knuckledusters",
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Dies Irae",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Swiftness", "count": 2 },
+        { "name": "Effectiveness", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "ACC>EFF>SPD>ATK",
+    "Note": "",
+    "Talisman": [
+      "Executionner's Charm",
+      "Sage's Charm"
+      
+    ]
+  },
+  "PvE - accu": {
+    "Weapon": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Thumping Knuckle Dusters",
         "mainStat": "ATK%"
       }
     ],
@@ -51,10 +82,6 @@
       [
         { "name": "Swiftness", "count": 2 },
         { "name": "Accuracy", "count": 2 }
-      ],
-      [
-        { "name": "Swiftness", "count": 2 },
-        { "name": "Effectiveness", "count": 2 }
       ]
     ],
     "SubstatPrio": "ACC>EFF>SPD>ATK",

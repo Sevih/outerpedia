@@ -1,0 +1,1289 @@
+[
+  {
+    "name": "Speed",
+    "type": "Set",
+    "class": null,
+    "count": 59,
+    "characters": [
+      "Aer",
+      "Ais Wallenstein",
+      "Akari",
+      "Alice",
+      "Ame",
+      "Astei",
+      "Bell Cranel",
+      "Beth",
+      "Bryn",
+      "Caren",
+      "Charlotte",
+      "Christina",
+      "Dahlia",
+      "Demiurge Astei",
+      "Demiurge Delta",
+      "Demiurge Drakhan",
+      "Demiurge Vlada",
+      "Dianne",
+      "Drakhan",
+      "Edelweiss",
+      "Eliza",
+      "Ember",
+      "Epsilon",
+      "Eternal",
+      "Fatal",
+      "Francesca",
+      "Gnosis Beth",
+      "Gnosis Dahlia",
+      "Gnosis Nella",
+      "Holy Night's Blessing Dianne",
+      "Kappa",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Kuro",
+      "Laplace",
+      "Leo",
+      "Luna",
+      "Maxie",
+      "Maxwell",
+      "Mene",
+      "Monad Eva",
+      "Nella",
+      "Noa",
+      "Notia",
+      "Poolside Trickster Regina",
+      "Regina",
+      "Rey",
+      "Rhona",
+      "Rin",
+      "Roxie",
+      "Ryu Lion",
+      "Saeran",
+      "Skadi",
+      "Stella",
+      "Sterope",
+      "Tamamo-no-Mae",
+      "Tamara",
+      "Valentine",
+      "Veronica",
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Immunity",
+    "type": "Set",
+    "class": null,
+    "count": 22,
+    "characters": [
+      "Astei",
+      "Bryn",
+      "Caren",
+      "Christina",
+      "Demiurge Delta",
+      "Demiurge Drakhan",
+      "Demiurge Vlada",
+      "Dianne",
+      "Epsilon",
+      "Gnosis Dahlia",
+      "Gnosis Nella",
+      "Hilde",
+      "Iota",
+      "Kanon",
+      "Leo",
+      "Mene",
+      "Nella",
+      "Notia",
+      "Omega Nadja",
+      "Roxie",
+      "Saeran",
+      "Sterope"
+    ]
+  },
+  {
+    "name": "Swiftness",
+    "type": "Set",
+    "class": null,
+    "count": 21,
+    "characters": [
+      "Astei",
+      "Christina",
+      "Delta",
+      "Demiurge Delta",
+      "Demiurge Drakhan",
+      "Dianne",
+      "Ember",
+      "Gnosis Dahlia",
+      "Hilde",
+      "Iota",
+      "Kanon",
+      "Kappa",
+      "Leo",
+      "Mene",
+      "Monad Eva",
+      "Nella",
+      "Omega Nadja",
+      "Rhona",
+      "Saeran",
+      "Sterope",
+      "Veronica"
+    ]
+  },
+  {
+    "name": "Critical Strike",
+    "type": "Set",
+    "class": null,
+    "count": 19,
+    "characters": [
+      "Aer",
+      "Ais Wallenstein",
+      "Ame",
+      "Beth",
+      "Bryn",
+      "Demiurge Astei",
+      "Edelweiss",
+      "Epsilon",
+      "Fatal",
+      "Francesca",
+      "Laplace",
+      "Maxwell",
+      "Noa",
+      "Notia",
+      "Poolside Trickster Regina",
+      "Regina",
+      "Rey",
+      "Rin",
+      "Roxie"
+    ]
+  },
+  {
+    "name": "Penetration",
+    "type": "Set",
+    "class": null,
+    "count": 17,
+    "characters": [
+      "Aer",
+      "Ais Wallenstein",
+      "Ame",
+      "Beth",
+      "Bryn",
+      "Demiurge Astei",
+      "Francesca",
+      "Holy Night's Blessing Dianne",
+      "Laplace",
+      "Maxwell",
+      "Noa",
+      "Notia",
+      "Poolside Trickster Regina",
+      "Regina",
+      "Rey",
+      "Rin",
+      "Ryu Lion"
+    ]
+  },
+  {
+    "name": "Death's Hold",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 14,
+    "characters": [
+      "Aer",
+      "Ais Wallenstein",
+      "Beth",
+      "Caren",
+      "Delta",
+      "Demiurge Stella",
+      "Epsilon",
+      "Francesca",
+      "Gnosis Dahlia",
+      "Kanon",
+      "Noa",
+      "Poolside Trickster Regina",
+      "Rey",
+      "Rin"
+    ]
+  },
+  {
+    "name": "Counterattack",
+    "type": "Set",
+    "class": null,
+    "count": 13,
+    "characters": [
+      "Astei",
+      "Christina",
+      "Demiurge Stella",
+      "Drakhan",
+      "Ember",
+      "Epsilon",
+      "Kanon",
+      "Kappa",
+      "Luna",
+      "Monad Eva",
+      "Omega Nadja",
+      "Rhona",
+      "Veronica"
+    ]
+  },
+  {
+    "name": "Rampaging Caracal",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 12,
+    "characters": [
+      "Akari",
+      "Charlotte",
+      "Edelweiss",
+      "Eliza",
+      "Fatal",
+      "Holy Night's Blessing Dianne",
+      "Maxie",
+      "Notia",
+      "Skadi",
+      "Stella",
+      "Tamara",
+      "Valentine"
+    ]
+  },
+  {
+    "name": "Thumping Knuckle Dusters",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 12,
+    "characters": [
+      "Ame",
+      "Bell Cranel",
+      "Bryn",
+      "Demiurge Astei",
+      "Gnosis Nella",
+      "Iota",
+      "Kuro",
+      "Laplace",
+      "Maxwell",
+      "Regina",
+      "Roxie",
+      "Tamamo-no-Mae"
+    ]
+  },
+  {
+    "name": "Surefire Javelin",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 11,
+    "characters": [
+      "Aer",
+      "Ais Wallenstein",
+      "Beth",
+      "Delta",
+      "Drakhan",
+      "Francesca",
+      "Noa",
+      "Poolside Trickster Regina",
+      "Rey",
+      "Rhona",
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Combination Simulator",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 11,
+    "characters": [
+      "Akari",
+      "Charlotte",
+      "Demiurge Vlada",
+      "Eliza",
+      "Fatal",
+      "Gnosis Beth",
+      "Ryu Lion",
+      "Skadi",
+      "Stella",
+      "Tamara",
+      "Valentine"
+    ]
+  },
+  {
+    "name": "Violent Sledgehammer",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 9,
+    "characters": [
+      "Ais Wallenstein",
+      "Caren",
+      "Delta",
+      "Demiurge Stella",
+      "Epsilon",
+      "Gnosis Dahlia",
+      "Kanon",
+      "Rhona",
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Dies Irae",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 9,
+    "characters": [
+      "Alice",
+      "Bell Cranel",
+      "Dahlia",
+      "Eternal",
+      "Gnosis Nella",
+      "Iota",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Kuro",
+      "Tamamo-no-Mae"
+    ]
+  },
+  {
+    "name": "Force Field Generator",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 9,
+    "characters": [
+      "Christina",
+      "Demiurge Drakhan",
+      "Ember",
+      "Hilde",
+      "Leo",
+      "Luna",
+      "Omega Nadja",
+      "Sterope",
+      "Veronica"
+    ]
+  },
+  {
+    "name": "Absolute Music",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 8,
+    "characters": [
+      "Akari",
+      "Edelweiss",
+      "Holy Night's Blessing Dianne",
+      "Maxie",
+      "Ryu Lion",
+      "Skadi",
+      "Stella",
+      "Valentine"
+    ]
+  },
+  {
+    "name": "Noblewoman's Guile",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 8,
+    "characters": [
+      "Alice",
+      "Dahlia",
+      "Eternal",
+      "Gnosis Nella",
+      "Iota",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Kuro",
+      "Tamamo-no-Mae"
+    ]
+  },
+  {
+    "name": "Spirit of Unification",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 8,
+    "characters": [
+      "Ame",
+      "Bell Cranel",
+      "Bryn",
+      "Demiurge Astei",
+      "Laplace",
+      "Maxwell",
+      "Regina",
+      "Roxie"
+    ]
+  },
+  {
+    "name": "Augmentation",
+    "type": "Set",
+    "class": null,
+    "count": 8,
+    "characters": [
+      "Bell Cranel",
+      "Bryn",
+      "Delta",
+      "Demiurge Vlada",
+      "Epsilon",
+      "Kanon",
+      "Notia",
+      "Roxie"
+    ]
+  },
+  {
+    "name": "Coward's Treasure",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 8,
+    "characters": [
+      "Demiurge Drakhan",
+      "Ember",
+      "Hilde",
+      "Kappa",
+      "Luna",
+      "Omega Nadja",
+      "Sterope",
+      "Veronica"
+    ]
+  },
+  {
+    "name": "Resurrection Token",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 7,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Dianne",
+      "Mene",
+      "Monad Eva",
+      "Nella",
+      "Saeran"
+    ]
+  },
+  {
+    "name": "Blue-Gems White Ring",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 7,
+    "characters": [
+      "Christina",
+      "Demiurge Drakhan",
+      "Ember",
+      "Leo",
+      "Luna",
+      "Sterope",
+      "Veronica"
+    ]
+  },
+  {
+    "name": "Clock Up",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 6,
+    "characters": [
+      "Beth",
+      "Caren",
+      "Drakhan",
+      "Francesca",
+      "Gnosis Dahlia",
+      "Kanon"
+    ]
+  },
+  {
+    "name": "Talisman of Animosities",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 6,
+    "characters": [
+      "Demiurge Drakhan",
+      "Ember",
+      "Leo",
+      "Luna",
+      "Sterope",
+      "Veronica"
+    ]
+  },
+  {
+    "name": "Revenge",
+    "type": "Set",
+    "class": null,
+    "count": 5,
+    "characters": [
+      "Ais Wallenstein",
+      "Demiurge Stella",
+      "Ember",
+      "Gnosis Dahlia",
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Snow-white Embrace",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 5,
+    "characters": [
+      "Caren",
+      "Noa",
+      "Poolside Trickster Regina",
+      "Rey",
+      "Rin"
+    ]
+  },
+  {
+    "name": "Life",
+    "type": "Set",
+    "class": null,
+    "count": 5,
+    "characters": [
+      "Christina",
+      "Delta",
+      "Hilde",
+      "Nella",
+      "Omega Nadja"
+    ]
+  },
+  {
+    "name": "Obsidian Oath",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 4,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Dianne",
+      "Saeran"
+    ]
+  },
+  {
+    "name": "Unholy Exsultet",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 4,
+    "characters": [
+      "Christina",
+      "Kappa",
+      "Leo",
+      "Luna"
+    ]
+  },
+  {
+    "name": "Emblem of Dominance",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 4,
+    "characters": [
+      "Dianne",
+      "Mene",
+      "Monad Eva",
+      "Saeran"
+    ]
+  },
+  {
+    "name": "Physical Exorcism",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 4,
+    "characters": [
+      "Edelweiss",
+      "Fatal",
+      "Holy Night's Blessing Dianne",
+      "Notia"
+    ]
+  },
+  {
+    "name": "Legacy of the Dream",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 3,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Nella"
+    ]
+  },
+  {
+    "name": "Immortal Pride",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 3,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Nella"
+    ]
+  },
+  {
+    "name": "Defense",
+    "type": "Set",
+    "class": null,
+    "count": 3,
+    "characters": [
+      "Caren",
+      "Kanon",
+      "Kappa"
+    ]
+  },
+  {
+    "name": "Exquisite Death",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 3,
+    "characters": [
+      "Christina",
+      "Kappa",
+      "Leo"
+    ]
+  },
+  {
+    "name": "A Prima Vista",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 3,
+    "characters": [
+      "Drakhan",
+      "Gnosis Dahlia",
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Barrage of Truth",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 3,
+    "characters": [
+      "Edelweiss",
+      "Holy Night's Blessing Dianne",
+      "Ryu Lion"
+    ]
+  },
+  {
+    "name": "Fire Fists",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 2,
+    "characters": [
+      "Bell Cranel",
+      "Regina"
+    ]
+  },
+  {
+    "name": "Memento Mori",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 2,
+    "characters": [
+      "Bell Cranel",
+      "Laplace"
+    ]
+  },
+  {
+    "name": "Attack",
+    "type": "Set",
+    "class": null,
+    "count": 2,
+    "characters": [
+      "Bell Cranel",
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Last Hope",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 2,
+    "characters": [
+      "Bryn",
+      "Regina"
+    ]
+  },
+  {
+    "name": "Charmer's Necklace",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 2,
+    "characters": [
+      "Christina",
+      "Omega Nadja"
+    ]
+  },
+  {
+    "name": "Gorgon's Wrath [Ranger]",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 2,
+    "characters": [
+      "Demiurge Vlada",
+      "Skadi"
+    ]
+  },
+  {
+    "name": "Briareos's Recklessness [Ranger]",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 2,
+    "characters": [
+      "Demiurge Vlada",
+      "Gnosis Beth"
+    ]
+  },
+  {
+    "name": "Search and Destroy",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 1,
+    "characters": [
+      "Alice"
+    ]
+  },
+  {
+    "name": "Gorgon's Wrath [Mage]",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 1,
+    "characters": [
+      "Bell Cranel"
+    ]
+  },
+  {
+    "name": "Queen of Prism",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 1,
+    "characters": [
+      "Bryn"
+    ]
+  },
+  {
+    "name": "Briareos's Ambition [Striker]",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 1,
+    "characters": [
+      "Delta"
+    ]
+  },
+  {
+    "name": "Gorgon's Wrath [Healer]",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 1,
+    "characters": [
+      "Demiurge Delta"
+    ]
+  },
+  {
+    "name": "Briareos's Ambition [Healer]",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 1,
+    "characters": [
+      "Demiurge Delta"
+    ]
+  },
+  {
+    "name": "Briareos's Recklessness [Defender]",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 1,
+    "characters": [
+      "Ember"
+    ]
+  },
+  {
+    "name": "Gorgon's Vanity [Defender]",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 1,
+    "characters": [
+      "Ember"
+    ]
+  },
+  {
+    "name": "Effectiveness",
+    "type": "Set",
+    "class": null,
+    "count": 1,
+    "characters": [
+      "Iota"
+    ]
+  },
+  {
+    "name": "Accuracy",
+    "type": "Set",
+    "class": null,
+    "count": 1,
+    "characters": [
+      "Iota"
+    ]
+  },
+  {
+    "name": "Heartunder's Blade",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 1,
+    "characters": [
+      "Maxie"
+    ]
+  },
+  {
+    "name": "Starlight Road",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 1,
+    "characters": [
+      "Nella"
+    ]
+  },
+  {
+    "name": "Fool's Dawn",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 1,
+    "characters": [
+      "Omega Nadja"
+    ]
+  },
+  {
+    "name": "Glorious Radiance Orb",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 1,
+    "characters": [
+      "Rhona"
+    ]
+  },
+  {
+    "name": "Burning Soul",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 1,
+    "characters": [
+      "Ryu Lion"
+    ]
+  },
+  {
+    "name": "Saint's Ring",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 1,
+    "characters": [
+      "Saeran"
+    ]
+  },
+  {
+    "name": "Gorgon's Vanity [Ranger]",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 1,
+    "characters": [
+      "Skadi"
+    ]
+  },
+  {
+    "name": "Briareos's Ambition [Ranger]",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 1,
+    "characters": [
+      "Skadi"
+    ]
+  },
+  {
+    "name": "Gorgon's Wrath [Striker]",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 1,
+    "characters": [
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Phantasm Necrosis",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 1,
+    "characters": [
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Gorgon's Vanity [Striker]",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 1,
+    "characters": [
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Dancer's Bracelet",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 1,
+    "characters": [
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Royal Stinger",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Twin B",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Token of the Supreme Witch",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Meteor Mashers",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Iron Messiah",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "God Hand Crush",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Sublime Melody",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Fierce Soloist",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Adventurer's Sword",
+    "type": "Weapon",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Briareos's Recklessness [Striker]",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Briareos's Recklessness [Mage]",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Briareos's Recklessness [Healer]",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Gorgon's Wrath [Defender]",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Necromancer's Amulet",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "High School Girl Invicibility",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Bloody Edge",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Sacreed Edge",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Ceremonial Blade",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "The Power of Science",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Kon-Chiki-Chin ♪",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Middle School Girl Invicibility",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Cradle's Key",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Turn Delicious",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Campus Guardian",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Radiant Spear of Dawn",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Winter of Hubris",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Masamune",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Ambush",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Overdrive",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Clear Mind",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Adventurer's Necklace",
+    "type": "Amulet",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Briareos's Ambition [Defender]",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Briareos's Ambition [Mage]",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Gorgon's Vanity [Mage]",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Gorgon's Vanity [Healer]",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Operating System",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Megaphone of encouragement",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Eternal Glacier",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Innocent Play",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Church of Nepos Scripture",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Princess's Resolve",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Hierarch's Resolve",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Killing Stone Fragment",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Flashy Golden Cards",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Kirisame",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Ikazuchi",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Critical Hit",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Resilience",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Evasion",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Lifesteal",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Patience",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Pulverization",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Weakness",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Bursting",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  }
+]

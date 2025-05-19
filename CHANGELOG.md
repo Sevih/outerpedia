@@ -1,3 +1,8 @@
+## 🚀 Gear Usage Statistics (2025-05-19)
+- Discover the most recommended weapons, amulets and sets in Outerplane builds.
+- [Learn more](/gear-usage-stats)
+
+
 ## 🚀 New guide - Understanding Free Heroes & Starter Banners (2025-05-17)
 - Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start
 

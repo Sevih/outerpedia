@@ -12,7 +12,7 @@
         "mainStat": "PEN%"
       },
       {
-        "name": " Clock Up",
+        "name": "Clock Up",
         "mainStat": "DEF%"
       }
     ],
@@ -44,7 +44,7 @@
         "mainStat": "PEN%"
       },
       {
-        "name": " Clock Up",
+        "name": "Clock Up",
         "mainStat": "DEF%"
       }
     ],
@@ -77,7 +77,7 @@
         "mainStat": "PEN%"
       },
       {
-        "name": " Clock Up",
+        "name": "Clock Up",
         "mainStat": "DEF%"
       }
     ],

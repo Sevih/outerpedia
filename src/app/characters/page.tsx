@@ -3,19 +3,22 @@ import CharactersPage from './CharactersPageClient'
 import characters from '@/data/_allCharacters.json'
 import type { Character } from '@/types/character'
 import { toKebabCase } from '@/utils/formatText'
+import { getMonthYear } from '@/utils/getMonthYear';
+
+const monthYear = getMonthYear();
 
 export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: 'Outerplane Characters – Full Database Updated May 2025 | Outerpedia',
-  description: 'Explore all characters in Outerplane with detailed stats, skills, gear recommendations and exclusive equipment data. Updated May 2025, curated by the EvaMains Discord community.',
-  keywords: ['Outerplane', 'Characters', 'Heroes', 'Character Database', 'Stats', 'Skills', 'Gear Recommendations', 'Exclusive Equipment', 'May 2025', 'EvaMains', 'Outerpedia'],
+  title: `Outerplane Characters – Full Database Updated ${monthYear} | Outerpedia`,
+  description: `Explore all characters in Outerplane with detailed stats, skills, gear recommendations and exclusive equipment data. Updated ${monthYear}, curated by the EvaMains Discord community.`,
+  keywords: ['Outerplane', 'Characters', 'Heroes', 'Character Database', 'Stats', 'Skills', 'Gear Recommendations', 'Exclusive Equipment', `${monthYear}`, 'EvaMains', 'Outerpedia'],
   alternates: {
     canonical: 'https://outerpedia.com/characters',
   },
   openGraph: {
-    title: 'Outerplane Characters – Full Database Updated May 2025 | Outerpedia',
-    description: 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated May 2025 by the EvaMains Discord community.',
+    title: `Outerplane Characters – Full Database Updated ${monthYear} | Outerpedia`,
+    description: `Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated ${monthYear} by the EvaMains Discord community.`,
     url: 'https://outerpedia.com/characters',
     type: 'website',
     images: [
@@ -29,8 +32,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Outerplane Characters – Updated May 2025 | Outerpedia',
-    description: 'Full character database for Outerplane: stats, skills, gear, exclusive equipment. Updated May 2025 by EvaMains Discord.',
+    title: `Outerplane Characters – Updated ${monthYear} | Outerpedia`,
+    description: `Full character database for Outerplane: stats, skills, gear, exclusive equipment. Updated ${monthYear} by EvaMains Discord.`,
     images: ['https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Character.png'],
   },
 }

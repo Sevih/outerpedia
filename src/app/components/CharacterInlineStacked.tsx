@@ -4,7 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import allCharacters from '@/data/_allCharacters.json';
 import { toKebabCase } from '@/utils/formatText';
+import abbrevData from '@/data/abbrev.json';
 
+const abbrev = abbrevData as Record<string, string>;
 // Alias possibles
 const characterNameMap: Record<string, string> = {
   Meva: 'Monad Eva',
@@ -17,7 +19,7 @@ const characterNameMap: Record<string, string> = {
 type Props = {
   name: string; // alias ou Fullname
   size?: number; // taille optionnelle (par défaut 50)
-  deco?:string
+  deco?: string
 };
 
 export default function CharacterInlineStacked({ name, size = 50, deco }: Props) {
@@ -31,9 +33,10 @@ export default function CharacterInlineStacked({ name, size = 50, deco }: Props)
 
   return (
     <Link
-      href={`/characters/${slug}`}
-      className="flex flex-col items-center text-center text-sky-400 hover:text-sky-300 transition-colors"
-    >
+  href={`/characters/${slug}`}
+  className="flex flex-col items-center text-center text-sky-400 hover:text-sky-300 transition-colors"
+>
+
       <div
         className="relative mb-1"
         style={{ width: `${size}px`, height: `${size}px` }}
@@ -46,7 +49,10 @@ export default function CharacterInlineStacked({ name, size = 50, deco }: Props)
           className="object-contain"
         />
       </div>
-      <span className={`leading-tight ${italic}`}>{char.Fullname}</span>
+      <span className={`truncate w-full leading-tight ${italic}`}>
+        {abbrev[char.Fullname] ?? char.Fullname}
+      </span>
+
     </Link>
   );
 }

@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-19",
+    title: "Gear Usage Statistics",
+    type: "feature",
+    content: [
+      "- Discover the most recommended weapons, amulets and sets in Outerplane builds.",
+      "- [Learn more](/gear-usage-stats)",
+    ],
+  },
+  {
     date: "2025-05-17",
     title: "New guide - Understanding Free Heroes & Starter Banners",
     type: "feature",

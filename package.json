@@ -1,18 +1,19 @@
 {
   "name": "outerpedia-clean",
-  "version": "1.14.5",
+  "version": "1.15.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "set-version": "node scripts/set-version.js",
-    "build": "npm run set-version && npm run inject-sw-version && npm run generate:allchar && next build",
+    "build": "npm run set-version && npm run inject-sw-version && npm run generate:allchar && npm run generate:gear-stats && next build",
     "inject-sw-version": "node scripts/inject-sw-version.js",
     "postbuild": "npm run sitemap",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "node scripts/generate-sitemap.cjs",
     "seo-check": "node scripts/seo-check.cjs",
-    "generate:allchar": "node scripts/generateAllCharacters.js"
+    "generate:allchar": "node scripts/generateAllCharacters.js",
+    "generate:gear-stats": "node scripts/generateGearUsageStats.js"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",
@@ -27,6 +28,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
+    "recharts": "^2.15.3",
     "sharp": "^0.34.1"
   },
   "devDependencies": {

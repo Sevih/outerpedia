@@ -42,7 +42,7 @@
     "Set": [
       [
         { "name": "Immunity", "count": 2 },
-        { "name": "Counter", "count": 2 }
+        { "name": "Counterattack", "count": 2 }
       ]
     ],
     "SubstatPrio": "ATK>CHC>CHD>SPD",

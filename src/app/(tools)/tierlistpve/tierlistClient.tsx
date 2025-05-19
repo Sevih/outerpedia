@@ -104,7 +104,7 @@ export default function TierListPage({ characters, initialTab }: { characters: C
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": "Outerplane PvE Tier List",
-            "url": "https://outerpedia.com/tools/tierlist",
+            "url": "https://outerpedia.com/tools/tierlistpve",
             "description": "Discover the best characters in Outerplane sorted by DPS, Support, and Sustain roles. PvE Tier list curated by the EvaMains community.",
             "mainEntity": {
               "@type": "ItemList",
