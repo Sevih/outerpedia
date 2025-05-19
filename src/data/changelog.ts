@@ -31,7 +31,7 @@ export const oldChangelog = [
     content: [
       "- Unsure which character can use your gear? This tool helps you find the best match based on equipment.",
       "- This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.",
-      "- [Learn more](/gear-solver]",
+      "- [Learn more](/gear-solver)",
     ],
   },
   {
