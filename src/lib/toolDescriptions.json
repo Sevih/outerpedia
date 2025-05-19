@@ -22,5 +22,11 @@
     "description": "Discover the most recommended weapons, amulets and sets in Outerplane builds.",
     "icon": "nav/CM_Lobby_Btn_StepUp.webp",
     "order": 4
+  },
+  "gear-solver": {
+    "name": "Gear Usage Finder",
+    "description": "Unsure which character can use your gear? This tool helps you find the best match based on equipment.",
+    "icon": "nav/gear-solver.webp",
+    "order": 5
   }
 }

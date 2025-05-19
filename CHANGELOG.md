@@ -1,3 +1,9 @@
+## 🚀 Gear Usage Finder (2025-05-19)
+- Unsure which character can use your gear? This tool helps you find the best match based on equipment.
+- This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.
+- [Learn more](/gear-solver]
+
+
 ## 🚀 Gear Usage Statistics (2025-05-19)
 - Discover the most recommended weapons, amulets and sets in Outerplane builds.
 - [Learn more](/gear-usage-stats)

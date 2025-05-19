@@ -26,6 +26,16 @@ function migrateChangelogEntries(
 export const oldChangelog = [
   {
     date: "2025-05-19",
+    title: "Gear Usage Finder",
+    type: "feature",
+    content: [
+      "- Unsure which character can use your gear? This tool helps you find the best match based on equipment.",
+      "- This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.",
+      "- [Learn more](/gear-solver]",
+    ],
+  },
+  {
+    date: "2025-05-19",
     title: "Gear Usage Statistics",
     type: "feature",
     content: [
