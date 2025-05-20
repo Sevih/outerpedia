@@ -1,3 +1,8 @@
+## 🛠 Demiurge Luna (2025-05-20)
+- Demiurge Luna, a versatile Hero who deals heavy single-target damage to enemies and excels at multi-target damage is now live.
+- Learn More [here](/characters/demiurge-luna)
+
+
 ## 🚀 Gear Usage Finder (2025-05-19)
 - Unsure which character can use your gear? This tool helps you find the best match based on equipment.
 - This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.

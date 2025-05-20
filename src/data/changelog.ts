@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-20",
+    title: "Demiurge Luna",
+    type: "update",
+    content: [
+      "- Demiurge Luna, a versatile Hero who deals heavy single-target damage to enemies and excels at multi-target damage is now live.",
+      "- Learn More [here](/characters/demiurge-luna)",
+    ],
+  },
+  {
     date: "2025-05-19",
     title: "Gear Usage Finder",
     type: "feature",
