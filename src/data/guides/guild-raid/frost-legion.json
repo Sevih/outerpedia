@@ -54,7 +54,7 @@
               "bonus": {
                 "effect": "Increases Weakness Gauge damage dealt to Bosses by 50%",
                 "ratio": "-45%",
-                "image": "WG_UP",
+                "image": "WG_Up",
                 "bg": "2"
               },
               "malus": {
