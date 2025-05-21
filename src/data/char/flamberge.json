@@ -13,7 +13,7 @@
     "5": "ATK DEF HP +22%",
     "6": "ATK DEF HP +30%\n+5% Health\n+25 Action Points at battle start"
   },
-  "Chain_Type": "Start",
+  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
       "name": "Like A Fierce Whirlwind",

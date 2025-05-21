@@ -18,7 +18,7 @@
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start"
   },
-  "Chain_Type": "Start",
+  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
       "name": "Whatever!",
