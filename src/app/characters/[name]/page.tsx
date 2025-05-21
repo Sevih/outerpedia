@@ -21,6 +21,7 @@ import { CharacterNameDisplayBig } from '@/app/components/CharacterNameDisplay'
 
 import RecommendedGearTabs from '@/app/components/RecommendedGearTabs';
 import BuffDebuffDisplay from '@/app/components/BuffDebuffDisplayClient';
+import SkillPriorityTabs from '@/app/components/SkillPriorityTabs'
 
 import TranscendenceSlider from '@/app/components/TranscendenceSlider';
 import YoutubeEmbed from '@/app/components/YoutubeEmbed';
@@ -513,6 +514,10 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               ))}
 
 
+
+
+
+
             {/* Placeholder si skill manquant */}
             {Array.from({ length: 3 - Object.values(character.skills || {}).length }).map((_, i) => (
               <div key={`empty-${i}`} className="bg-gray-800 p-4 rounded text-center text-gray-500">
@@ -520,8 +525,6 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               </div>
             ))}
           </div>
-
-
           {/* Section burn + chain/dual attack */}
           <div className="flex flex-col gap-6 mt-6">
             {/* Burn cards centrées */}
@@ -606,7 +609,18 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               </div>
             </div>
 
-
+{/* Skill Priority & Sweetspots */} 
+{character.skill_priority && (
+  <SkillPriorityTabs
+    priority={character.skill_priority}
+    characterId={character.ID}
+    skillNames={{
+      First: character.skills.SKT_FIRST?.name,
+      Second: character.skills.SKT_SECOND?.name,
+      Ultimate: character.skills.SKT_ULTIMATE?.name,
+    }}
+  />
+)}
 
 
             {/* Chain & Dual en-dessous */}

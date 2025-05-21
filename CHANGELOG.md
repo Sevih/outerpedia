@@ -1,3 +1,8 @@
+## 🚀 D.luna gear reco & guid[D[D[D[D[D[D[D[D[G[C[C[C[C[C[3~R[C[C[C (2025-05-21)
+- Add gear recommandation for Demiurge Luna
+- Add guide for current guild raid Frost Legion Phase 1
+
+
 ## 🛠 Demiurge Luna (2025-05-20)
 - Demiurge Luna, a versatile Hero who deals heavy single-target damage to enemies and excels at multi-target damage is now live.
 - Learn More [here](/characters/demiurge-luna)

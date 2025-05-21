@@ -3,7 +3,7 @@
     "name": "Speed",
     "type": "Set",
     "class": null,
-    "count": 59,
+    "count": 60,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -21,6 +21,7 @@
       "Demiurge Astei",
       "Demiurge Delta",
       "Demiurge Drakhan",
+      "Demiurge Luna",
       "Demiurge Vlada",
       "Dianne",
       "Drakhan",
@@ -129,7 +130,7 @@
     "name": "Critical Strike",
     "type": "Set",
     "class": null,
-    "count": 19,
+    "count": 20,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -137,6 +138,7 @@
       "Beth",
       "Bryn",
       "Demiurge Astei",
+      "Demiurge Luna",
       "Edelweiss",
       "Epsilon",
       "Fatal",
@@ -156,7 +158,7 @@
     "name": "Penetration",
     "type": "Set",
     "class": null,
-    "count": 17,
+    "count": 18,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -164,6 +166,7 @@
       "Beth",
       "Bryn",
       "Demiurge Astei",
+      "Demiurge Luna",
       "Francesca",
       "Holy Night's Blessing Dianne",
       "Laplace",
@@ -197,6 +200,27 @@
       "Poolside Trickster Regina",
       "Rey",
       "Rin"
+    ]
+  },
+  {
+    "name": "Thumping Knuckle Dusters",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 13,
+    "characters": [
+      "Ame",
+      "Bell Cranel",
+      "Bryn",
+      "Demiurge Astei",
+      "Demiurge Luna",
+      "Gnosis Nella",
+      "Iota",
+      "Kuro",
+      "Laplace",
+      "Maxwell",
+      "Regina",
+      "Roxie",
+      "Tamamo-no-Mae"
     ]
   },
   {
@@ -238,26 +262,6 @@
       "Stella",
       "Tamara",
       "Valentine"
-    ]
-  },
-  {
-    "name": "Thumping Knuckle Dusters",
-    "type": "Weapon",
-    "class": "Mage",
-    "count": 12,
-    "characters": [
-      "Ame",
-      "Bell Cranel",
-      "Bryn",
-      "Demiurge Astei",
-      "Gnosis Nella",
-      "Iota",
-      "Kuro",
-      "Laplace",
-      "Maxwell",
-      "Regina",
-      "Roxie",
-      "Tamamo-no-Mae"
     ]
   },
   {
@@ -333,6 +337,23 @@
     ]
   },
   {
+    "name": "Spirit of Unification",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 9,
+    "characters": [
+      "Ame",
+      "Bell Cranel",
+      "Bryn",
+      "Demiurge Astei",
+      "Demiurge Luna",
+      "Laplace",
+      "Maxwell",
+      "Regina",
+      "Roxie"
+    ]
+  },
+  {
     "name": "Force Field Generator",
     "type": "Weapon",
     "class": "Defender",
@@ -379,22 +400,6 @@
       "Kitsune of Eternity Tamamo-no-Mae",
       "Kuro",
       "Tamamo-no-Mae"
-    ]
-  },
-  {
-    "name": "Spirit of Unification",
-    "type": "Amulet",
-    "class": "Mage",
-    "count": 8,
-    "characters": [
-      "Ame",
-      "Bell Cranel",
-      "Bryn",
-      "Demiurge Astei",
-      "Laplace",
-      "Maxwell",
-      "Regina",
-      "Roxie"
     ]
   },
   {
@@ -597,6 +602,17 @@
     ]
   },
   {
+    "name": "Fire Fists",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 3,
+    "characters": [
+      "Bell Cranel",
+      "Demiurge Luna",
+      "Regina"
+    ]
+  },
+  {
     "name": "Defense",
     "type": "Set",
     "class": null,
@@ -641,13 +657,13 @@
     ]
   },
   {
-    "name": "Fire Fists",
+    "name": "Gorgon's Wrath [Mage]",
     "type": "Weapon",
     "class": "Mage",
     "count": 2,
     "characters": [
       "Bell Cranel",
-      "Regina"
+      "Demiurge Luna"
     ]
   },
   {
@@ -678,6 +694,16 @@
     "characters": [
       "Bryn",
       "Regina"
+    ]
+  },
+  {
+    "name": "Queen of Prism",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 2,
+    "characters": [
+      "Bryn",
+      "Demiurge Luna"
     ]
   },
   {
@@ -720,24 +746,6 @@
     ]
   },
   {
-    "name": "Gorgon's Wrath [Mage]",
-    "type": "Weapon",
-    "class": "Mage",
-    "count": 1,
-    "characters": [
-      "Bell Cranel"
-    ]
-  },
-  {
-    "name": "Queen of Prism",
-    "type": "Amulet",
-    "class": "Mage",
-    "count": 1,
-    "characters": [
-      "Bryn"
-    ]
-  },
-  {
     "name": "Briareos's Ambition [Striker]",
     "type": "Amulet",
     "class": "Striker",
@@ -762,6 +770,15 @@
     "count": 1,
     "characters": [
       "Demiurge Delta"
+    ]
+  },
+  {
+    "name": "Briareos's Ambition [Mage]",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 1,
+    "characters": [
+      "Demiurge Luna"
     ]
   },
   {
@@ -1129,13 +1146,6 @@
     "name": "Briareos's Ambition [Defender]",
     "type": "Amulet",
     "class": "Defender",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Briareos's Ambition [Mage]",
-    "type": "Amulet",
-    "class": "Mage",
     "count": 0,
     "characters": []
   },

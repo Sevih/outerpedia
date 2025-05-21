@@ -225,6 +225,7 @@
       ]
     },
     "phase2": {
+      "bossName":"Maxwell",
       "overview": [
         "Boss will strike with his enrage every 50K damage taken.",
         "Takes 300% {D/BT_WG_DMG} if {D/BT_DOT_POISON}",

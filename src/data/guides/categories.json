@@ -34,7 +34,7 @@
       "title": "Guild Raid Tips",
       "description": "Helps you to achieve high score in guild raids.",
       "icon": "/images/guides/GD_Mark_07",
-      "valid":false
+      "valid":true
     },
     "adventure-license": {
       "title": "Adventure License Tips",

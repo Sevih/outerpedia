@@ -44,6 +44,7 @@ export type GuildRaidGuideVersion = {
     bosses: Phase1Boss[]
   }
   phase2: {
+    bossName: string
     overview: string[]
     teams: Record<string, Phase2Team>
     video?: {
@@ -77,6 +78,7 @@ export default function GuildRaidGuide({ guideData }: Props) {
   }, [tab])
 
   const boss = version.phase1.bosses[activeBossIdx]
+  const boss2 = version.phase2.bossName
 
   return (
     <div>
@@ -105,7 +107,7 @@ export default function GuildRaidGuide({ guideData }: Props) {
               className={`relative z-10 px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200
               ${tab === key ? 'text-white' : 'text-white/70'}`}
             >
-              {key === 'phase1' ? 'Phase 1 : Geas Bosses' : 'Phase 2 : Maxwell'}
+              {key === 'phase1' ? 'Phase 1 : Geas Bosses' : `Phase 2 : ${boss2}`}
             </button>
           ))}
         </div>
@@ -180,10 +182,15 @@ export default function GuildRaidGuide({ guideData }: Props) {
                 {boss.recommended.map((char, i) => (
                   <li key={i}>
                     <CharacterLinkCard name={char.name} />
-                    {char.comment && `: ${char.comment}`}
+                    {char.comment && (
+                      <>
+                        &nbsp;: {parseText(char.comment)}
+                      </>
+                    )}
                   </li>
                 ))}
               </ul>
+
             </div>
 
             <RecommendedTeam team={boss.team} />

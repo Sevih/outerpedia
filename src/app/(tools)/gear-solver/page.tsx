@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 
 import GearSolverWrapper from './GearSolverWrapper';
+import Image from 'next/image'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
     title: `Gear Usage Finder | Outerpedia`,
@@ -35,11 +37,22 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <main className="p-6 max-w-5xl mx-auto">
+            <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
+                <Link href={`/tools`} className="relative block h-full w-full">
+                    <Image
+                        src="/images/ui/CM_TopMenu_Back.webp"
+                        alt="Back"
+                        fill
+                        sizes='32px'
+                        className="opacity-80 hover:opacity-100 transition-opacity"
+                    />
+                </Link>
+            </div>
             <h1>Gear Usage Finder</h1>
+            
             <p className="text-yellow-900 font-semibold bg-yellow-100 border border-yellow-300 rounded px-4 py-2 text-sm">
-  ⚠️ This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.
-</p>
-
+                ⚠️ This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.
+            </p>
             <GearSolverWrapper />
         </main>
     );

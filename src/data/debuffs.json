@@ -132,6 +132,18 @@
         "icon": "SC_Buff_Effect_Stun"
     },
     {
+        "name": "BT_STUN_IR",
+        "label": "Stunned",
+        "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time (Irremovable)",
+        "icon": "IG_Buff_Effect_Stun_Interruption_D"
+    },
+    {
+        "name": "BT_RANDOM",
+        "label": "Random Debuff",
+        "description": "Inflict one of the following debuff : Reduced Attack\nReduced Critical Hit Chance\nReduced Speed\nReduced Defense",
+        "icon": "IG_Buff_Effect_Random_Buff"
+    },
+    {
         "name": "BT_WG_DMG",
         "label": "Weakness Gauge Damage",
         "description": "Deal additional Weakness Gauge damage",
@@ -164,7 +176,7 @@
     {
         "name": "BT_SILENCE_IR",
         "label": "Silenced",
-        "description": "Cannot only use skill chain and basic attack while this effect is applied (Irremovable",
+        "description": "Cannot only use skill chain and basic attack while this effect is applied (Irremovable)",
         "icon": "IG_Buff_Effect_Silence_Interruption_D"
     },
     {

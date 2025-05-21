@@ -1797,6 +1797,217 @@
       ]
     }
   },
+  "demiurge-luna": {
+    "Penetration": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Critical Strike": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pen mix": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration",
+        "Speed"
+      ]
+    }
+  },
   "demiurge-stella": {
     "Counter": {
       "weaponSub": [

@@ -4,6 +4,7 @@ import Image from "next/image";
 import EquipmentInlineTag from '@/app/components/EquipmentInlineTag';
 import InlineBarList from '@/app/components/InlineBarList';
 import CharacterInlineStacked from '@/app/components/CharacterInlineStacked'
+import Link from 'next/link'
 
 type GearItem = {
     name: string;
@@ -53,12 +54,25 @@ export default function GearUsageStatsClients({ data }: { data: GearItem[] }) {
 
     return (
 
+        
         <div className="p-4 max-w-5xl mx-auto">
             <p className="text-red-500 font-semibold bg-red-100 border border-red-300 rounded px-4 py-2 text-center">
                 The statistics below are based on <strong>Evamains</strong> recommended builds only.  <br />
                 <strong> A 0 count doesn&apos;t mean the item is bad</strong>, just that it hasn&apos;t been included in current recommendations.
             </p>
 
+{/* Flèche retour */}
+        <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
+          <Link href={`/tools`} className="relative block h-full w-full">
+            <Image
+              src="/images/ui/CM_TopMenu_Back.webp"
+              alt="Back"
+              fill
+              sizes='32px'
+              className="opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </Link>
+        </div>
 
 
             {/* Onglets stylés */}

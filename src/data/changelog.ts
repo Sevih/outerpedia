@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-21",
+    title: "D.luna gear reco & Frost Legion Phase 1 guide",
+    type: "feature",
+    content: [
+      "- Add gear recommandation for Demiurge Luna",
+      "- Add guide for current guild raid Frost Legion Phase 1",
+    ],
+  },
+  {
     date: "2025-05-20",
     title: "Demiurge Luna",
     type: "update",
