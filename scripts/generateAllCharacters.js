@@ -23,6 +23,7 @@ async function generateAllCharacters() {
           Class: character.Class,
           SubClass: character.SubClass,
           Element: character.Element,
+          Chain_Type: character.Chain_Type,
           limited: character.limited ?? false,
           rank_pvp: character.rank_pvp ?? false,
         });

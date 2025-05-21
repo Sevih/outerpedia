@@ -25,6 +25,16 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-22",
+    title: "Skill Chain Filter & Fix",
+    type: "feature",
+    content: [
+      "- Add Skill Chain type Filter on Character page",
+      "- Add Notice on Tier List PvE & PvP",
+      "- Frost Legion P2 skills overview",
+    ],
+  },
+  {
     date: "2025-05-21",
     title: "Skill Upgrade Priority",
     type: "feature",

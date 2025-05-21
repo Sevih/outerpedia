@@ -1,8 +1,14 @@
+## 🚀 Skill Chain Filter & Fix (2025-05-22)
+- Add Skill Chain type Filter on Character page
+- Add Notice on Tier List PvE & PvP
+- Frost Legion P2 skills overview
+
+
 ## 🚀 Skill Upgrade Priority (2025-05-21)
 - Add Skill Upgrade Priority section in character's pages
 
 
-## 🚀 D.luna gear reco & guid[D[D[D[D[D[D[D[D[G[C[C[C[C[C[3~R[C[C[C (2025-05-21)
+## 🚀 D.luna gear reco & guide(2025-05-21)
 - Add gear recommandation for Demiurge Luna
 - Add guide for current guild raid Frost Legion Phase 1
 
@@ -15,7 +21,7 @@
 ## 🚀 Gear Usage Finder (2025-05-19)
 - Unsure which character can use your gear? This tool helps you find the best match based on equipment.
 - This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.
-- [Learn more](/gear-solver]
+- [Learn more](/gear-solver)
 
 
 ## 🚀 Gear Usage Statistics (2025-05-19)

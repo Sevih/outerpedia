@@ -38,7 +38,7 @@ const orderedBuffGroups = [
     title: 'Utility', items: [
       "BT_COOL_CHARGE", "BT_ACTION_GAUGE", "BT_AP_CHARGE", "BT_STAT|ST_COUNTER_RATE", "BT_CP_CHARGE", "Heavy Strike",
       "BT_DMG_ELEMENT_SUPERIORITY", "BT_ADDITIVE_TURN",
-      "SYS_BUFF_REVENGE","SYS_REVENGE_HEAL", "SYS_BUFF_BREAK_DMG", "BT_CALL_BACKUP",
+      "SYS_BUFF_REVENGE", "SYS_REVENGE_HEAL", "SYS_BUFF_BREAK_DMG", "BT_CALL_BACKUP",
     ]
   },
   {
@@ -72,21 +72,21 @@ const orderedDebuffGroups = [
     title: 'Damage Over Time (DoT)', items: [
       "BT_DOT_BURN", "BT_DOT_BURN_IR", "BT_DOT_CURSE", "BT_DOT_CURSE_IR",
       "BT_DOT_BLEED", "BT_DOT_BLEED_IR", "BT_DOT_POISON", "BT_DOT_LIGHTNING",
-       "BT_DOT_ETERNAL_BLEED", "BT_DETONATE"
+      "BT_DOT_ETERNAL_BLEED", "BT_DETONATE"
     ]
   },
   {
     title: 'Utility Debuffs', items: [
-      "BT_COOL_CHARGE", "BT_ACTION_GAUGE", "BT_AP_CHARGE", "BT_SEAL_COUNTER",  "BT_SEALED", "BT_SEALED_IR",
+      "BT_COOL_CHARGE", "BT_ACTION_GAUGE", "BT_AP_CHARGE", "BT_SEAL_COUNTER", "BT_SEALED", "BT_SEALED_IR",
       "BT_SEALED_RESURRECTION", "BT_SEAL_ADDITIVE_ATTACK",
 
-      "BT_STATBUFF_CONVERT_TO_STATDEBUFF", "BT_STEAL_BUFF","BT_REMOVE_BUFF","IG_Buff_BuffdurationReduce",
-      "BT_SEALED_RECEIVE_HEAL", "BT_WG_DMG","BT_FIXED_DAMAGE"
+      "BT_STATBUFF_CONVERT_TO_STATDEBUFF", "BT_STEAL_BUFF", "BT_REMOVE_BUFF", "IG_Buff_BuffdurationReduce",
+      "BT_SEALED_RECEIVE_HEAL", "BT_WG_DMG", "BT_FIXED_DAMAGE"
     ]
   },
   {
     title: 'Unique', items: [
-      "UNIQUE_MARTYRDOM","UNIQUE_IRREGULAR_INFECTION"
+      "UNIQUE_MARTYRDOM", "UNIQUE_IRREGULAR_INFECTION"
     ]
   }
 ]
@@ -115,6 +115,14 @@ const rarities = [
   { label: 3, value: 3 },
 ]
 
+const chainTypes = [
+  { name: 'All', value: null },
+  { name: 'Starter', value: 'Start' },
+  { name: 'Companion', value: 'Join' },
+  { name: 'Finisher', value: 'Finish' },
+]
+
+
 // Buffs/Debuffs d'un personnage
 // Récupère tous les buffs ou debuffs d'un personnage
 function getAllEffects(char: CharacterLite, type: 'buff' | 'debuff'): string[] {
@@ -130,7 +138,7 @@ function extractAllEffects(characters: CharacterLite[], type: 'buff' | 'debuff')
 
 
 export default function CharactersPage() {
-  
+
 
   const [characters, setCharacters] = useState<CharacterLite[]>([])
   const [loading, setLoading] = useState(true)
@@ -147,6 +155,8 @@ export default function CharactersPage() {
   const [effectLogic, setEffectLogic] = useState<'AND' | 'OR'>('OR')
   const [showUniqueEffects, setShowUniqueEffects] = useState(false)
   const [showFilters, setShowFilters] = useState(false) // toogle on/off par defaut
+  const [chainFilter, setChainFilter] = useState<string[]>([])
+
   useEffect(() => {
     const fetchCharacters = async () => {
       const res = await fetch('/api/characters-lite')
@@ -181,6 +191,14 @@ export default function CharactersPage() {
       setRarityFilter([]) // Reset to All
     }
   }, [rarityFilter])
+
+  useEffect(() => {
+    const allChains = chainTypes.slice(1).map((c) => c.value!)
+    if (chainFilter.length === allChains.length) {
+      setChainFilter([]) // Reset to All
+    }
+  }, [chainFilter])
+
 
 
 
@@ -300,10 +318,10 @@ export default function CharactersPage() {
                   : setFilter([])
               }
               className={`flex items-center justify-center w-7 h-7 rounded border transition ${(el.value === null && filter.length === 0) ||
-                  (el.value === null && filter.length === elements.slice(1).length) ||
-                  (el.value !== null && filter.includes(el.value))
-                  ? 'bg-cyan-500'
-                  : 'bg-gray-700'
+                (el.value === null && filter.length === elements.slice(1).length) ||
+                (el.value !== null && filter.includes(el.value))
+                ? 'bg-cyan-500'
+                : 'bg-gray-700'
                 } hover:bg-cyan-600`}
 
               title={el.name}
@@ -328,10 +346,10 @@ export default function CharactersPage() {
                   : setClassFilter([])
               }
               className={`flex items-center justify-center w-7 h-7 rounded border transition ${(cl.value === null && classFilter.length === 0) ||
-                  (cl.value === null && classFilter.length === classes.slice(1).length) ||
-                  (cl.value !== null && classFilter.includes(cl.value))
-                  ? 'bg-cyan-500'
-                  : 'bg-gray-700'
+                (cl.value === null && classFilter.length === classes.slice(1).length) ||
+                (cl.value !== null && classFilter.includes(cl.value))
+                ? 'bg-cyan-500'
+                : 'bg-gray-700'
                 } hover:bg-cyan-600`}
 
               title={cl.name}
@@ -346,6 +364,33 @@ export default function CharactersPage() {
           ))}
         </div>
       </div>
+
+      <div className="flex gap-2 justify-center">
+        {chainTypes.map((ct) => (
+          <button
+            key={ct.name}
+            onClick={() =>
+              ct.value
+                ? toggleMultiSelect(ct.value, chainFilter, setChainFilter)
+                : setChainFilter([])
+            }
+            className={`flex items-center justify-center px-2 h-7 rounded border text-xs font-semibold transition ${(ct.value === null && chainFilter.length === 0) ||
+              (ct.value === null && chainFilter.length === chainTypes.slice(1).length) ||
+              (ct.value !== null && chainFilter.includes(ct.value))
+              ? 'bg-cyan-500'
+              : 'bg-gray-700'
+              } hover:bg-cyan-600 text-white`}
+          >
+
+            {ct.value ? (
+              <span className="text-white text-sm font-bold">{ct.name}</span>
+              ) : (
+                <span className="text-white text-sm font-bold">All</span>
+              )}
+          </button>
+        ))}
+      </div>
+
 
       <div className="text-center space-y-6">
         {/* Bouton pour afficher/masquer toute la section de filtres */}
@@ -447,6 +492,7 @@ export default function CharactersPage() {
               setRarityFilter([])
               setSelectedBuffs([])
               setSelectedDebuffs([])
+              setChainFilter([])
               setEffectLogic('OR')
               setSearchTerm('') // 👈 Ajout ici
             }}
@@ -480,6 +526,7 @@ export default function CharactersPage() {
             .map((char, index) => {
               const elementMatch = filter.length === 0 || filter.includes(char.Element)
               const classMatch = classFilter.length === 0 || classFilter.includes(char.Class)
+              const chainMatch = chainFilter.length === 0 || chainFilter.includes(char.Chain_Type || '')
 
               const rarityMatch = rarityFilter.length === 0 || rarityFilter.includes(char.Rarity)
 
@@ -507,7 +554,7 @@ export default function CharactersPage() {
                 effectMatch = hasDebuffs
               }
 
-              const isVisible = elementMatch && classMatch && rarityMatch && effectMatch
+              const isVisible = elementMatch && classMatch && rarityMatch && chainMatch && effectMatch
               const isPriority = index <= 5;
               return (
                 <Link

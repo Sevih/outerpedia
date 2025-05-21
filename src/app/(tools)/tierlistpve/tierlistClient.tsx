@@ -136,10 +136,14 @@ export default function TierListPage({ characters, initialTab }: { characters: C
       <h1 className="text-5xl font-extrabold text-center mb-8 bg-gradient-to-b from-yellow-300 via-orange-400 to-red-500 text-transparent bg-clip-text drop-shadow-md">
         Tier List - PvE
       </h1>
+      <p className="bg-yellow-100 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100 w-3/5 mx-auto">
+        ⚠️ This tier list assumes <strong>6-star transcends</strong> and <strong>level 0 Exclusive Equipment effects</strong>. ⚠️<br />
+        Your experience may vary if these upgrades are not yet unlocked.
+      </p>
 
 
       {/* Barre de recherche */}
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mt-4 mb-6">
         <input
           type="text"
           placeholder="Search characters..."

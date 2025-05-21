@@ -249,7 +249,13 @@
     "phase2": {
       "bossName": "Vladi Max",
       "overview": [
-        "Coming Soon"
+        "S3 : AoE, grants {B/BT_STAT|ST_ATK} {B/BT_STAT|ST_CRITICAL_RATE}. If at least one target is {D/BT_DOT_BURN} grants {B/BT_STAT|ST_ACCURACY} too",
+        "S2 : AoE, bonus damage if target got a debuff. Inflicts {D/BT_DOT_BURN} when used on caster's turn",
+        "S1 : Single, prioritizes the leftmost unit.  If not a {C/Defender}, inflicts {D/BT_STUN} 1 turn else {D/BT_STUN} 3 turns",
+        "Greatly reduces damage taken from enemies with a lower Accuracy than the caster's",
+        "Greatly reduces damage dealt to enemies with a greater Accuracy than the caster's",
+        "Takes increased damage from {E/Dark} heroes",
+        "{D/BT_FIXED_DAMAGE} {D/BT_DOT_CURSE} cannot exceed 10 000"
       ],
       "teams": {
         "team1": {

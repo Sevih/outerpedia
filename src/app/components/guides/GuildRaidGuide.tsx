@@ -209,7 +209,7 @@ export default function GuildRaidGuide({ guideData }: Props) {
       {tab === 'phase2' && (
         <div>
           <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-3">
-            Phase 2 — Strategy
+            Phase 2 — Overview
           </h3>
 
           <ul className="list-disc list-inside text-neutral-300 mb-4">

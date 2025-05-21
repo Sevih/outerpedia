@@ -657,16 +657,6 @@
     ]
   },
   {
-    "name": "Gorgon's Wrath [Mage]",
-    "type": "Weapon",
-    "class": "Mage",
-    "count": 2,
-    "characters": [
-      "Bell Cranel",
-      "Demiurge Luna"
-    ]
-  },
-  {
     "name": "Memento Mori",
     "type": "Amulet",
     "class": "Mage",
@@ -746,6 +736,15 @@
     ]
   },
   {
+    "name": "Gorgon's Wrath [Mage]",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 1,
+    "characters": [
+      "Bell Cranel"
+    ]
+  },
+  {
     "name": "Briareos's Ambition [Striker]",
     "type": "Amulet",
     "class": "Striker",
@@ -770,6 +769,15 @@
     "count": 1,
     "characters": [
       "Demiurge Delta"
+    ]
+  },
+  {
+    "name": "Briareos's Recklessness [Mage]",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 1,
+    "characters": [
+      "Demiurge Luna"
     ]
   },
   {
@@ -992,13 +1000,6 @@
     "name": "Briareos's Recklessness [Striker]",
     "type": "Weapon",
     "class": "Striker",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Briareos's Recklessness [Mage]",
-    "type": "Weapon",
-    "class": "Mage",
     "count": 0,
     "characters": []
   },

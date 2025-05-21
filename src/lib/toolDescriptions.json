@@ -1,13 +1,13 @@
 {
   "tierlistpve": {
     "name": "Tier List - PvE",
-    "description": "Complete ranking of all characters in Outerplane.",
+    "description": "Complete ranking of all characters in Outerplane, based on evaluations with 6-star transcends and level 0 Exclusive Equipment effects.",
     "icon": "nav/CM_Lobby_Button_Misson.webp",
     "order": 1
   },
   "tierlistpvp": {
     "name": "Tier List - PvP",
-    "description": "Complete ranking of all characters in Outerplane.",
+    "description": "Complete ranking of all characters in Outerplane, based on evaluations with 6-star transcends and level 0 Exclusive Equipment effects.",
     "icon": "nav/CM_Lobby_Button_Misson.webp",
     "order": 2
   },
