@@ -7,7 +7,7 @@
   "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",
-  "limited":true,
+  "limited":true,"skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,
     "2": null,

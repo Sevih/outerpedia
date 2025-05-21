@@ -6,7 +6,7 @@
   "rank_pvp":"S",
   "role":"dps",
   "Class": "Striker",
-  "SubClass": "Bruiser",
+  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
   "transcend": {
     "1": null,
     "2": null,

@@ -1,3 +1,7 @@
+## 🚀 Skill Upgrade Priority (2025-05-21)
+- Add Skill Upgrade Priority section in character's pages
+
+
 ## 🚀 D.luna gear reco & guid[D[D[D[D[D[D[D[D[G[C[C[C[C[C[3~R[C[C[C (2025-05-21)
 - Add gear recommandation for Demiurge Luna
 - Add guide for current guild raid Frost Legion Phase 1

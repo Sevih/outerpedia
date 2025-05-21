@@ -6,7 +6,7 @@
   "rank_pvp":"C",
   "role":"support",
   "Class": "Defender",
-  "SubClass": "Phalanx",
+  "SubClass": "Phalanx","skill_priority":{"First":{"prio": 1}, "Second":{"prio": 2}, "Ultimate":{"prio": 3}},
   "transcend": {
     "1": null,
     "2": null,

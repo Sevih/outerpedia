@@ -6,7 +6,7 @@
   "rank":"B",
   "role":"support",
   "Class": "Defender",
-  "SubClass": "Phalanx",
+  "SubClass": "Phalanx","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",

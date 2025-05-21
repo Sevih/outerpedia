@@ -6,7 +6,7 @@
   "rank_pvp":"D",
   "Class": "Ranger",
   "role":"support",
-  "SubClass": "Vanguard",
+  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,
     "2": null,

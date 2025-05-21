@@ -4,9 +4,20 @@
   "Rarity": 3,
   "Element": "Earth",
   "Class": "Mage",
-  "role":"dps",
-  "rank_pvp":"B",
+  "role": "dps",
+  "rank_pvp": "B",
   "SubClass": "Wizard",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -187,6 +198,5 @@
       "wgr_dual": 1
     }
   },
-  "skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
-  "rank":"A"
+  "rank": "A"
 }

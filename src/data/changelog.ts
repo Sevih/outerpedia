@@ -26,6 +26,14 @@ function migrateChangelogEntries(
 export const oldChangelog = [
   {
     date: "2025-05-21",
+    title: "Skill Upgrade Priority",
+    type: "feature",
+    content: [
+      "- Add Skill Upgrade Priority section in character's pages",
+    ],
+  },
+  {
+    date: "2025-05-21",
     title: "D.luna gear reco & Frost Legion Phase 1 guide",
     type: "feature",
     content: [

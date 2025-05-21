@@ -1168,8 +1168,8 @@
 		"effect": "Increases Priority by 50% when hit (Activated once every 4 turns)",
 		"effect10": "Prevents counterattacks when using The Moonlight Heralding Dawn",
 		"icon_effect": "TI_Icon_UO_Accessary_07",
-		"rank": "",
-		"buff": [],
-		"debuff": []
+		"rank": "A",
+		"buff": ["BT_ACTION_GAUGE"],
+		"debuff": ["BT_SEAL_COUNTER"]
 	}
 }

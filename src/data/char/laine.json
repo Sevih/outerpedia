@@ -6,7 +6,7 @@
   "Class": "Ranger",
   "rank":"D",
   "role":"support",
-  "SubClass": "Tactician",
+  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",

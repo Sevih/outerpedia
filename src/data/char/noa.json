@@ -6,7 +6,7 @@
   "rank_pvp":"C",
   "role":"dps",
   "Class": "Striker",
-  "SubClass": "Attacker",
+  "SubClass": "Attacker","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
   "transcend": {
     "1": null,
     "2": null,

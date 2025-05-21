@@ -7,7 +7,7 @@
   "rank_pvp":"S",
   "Class": "Mage",
   "limited":true,
-  "SubClass": "Enchanter",
+  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,
     "2": null,

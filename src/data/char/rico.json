@@ -4,7 +4,7 @@
   "Rarity": 1,
   "Element": "Earth",
   "Class": "Ranger",
-  "SubClass": "Tactician",
+  "SubClass": "Tactician","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,
     "2":  "ATK DEF HP +5%",

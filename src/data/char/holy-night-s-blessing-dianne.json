@@ -7,7 +7,7 @@
   "Class": "Ranger",
   "role":"dps",
   "limited":true,
-  "SubClass": "Vanguard",
+  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
   "transcend": {
     "1": null,
     "2": null,
