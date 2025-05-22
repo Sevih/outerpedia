@@ -113,6 +113,14 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
               {highlightNumbersOnly(weapon.effect_desc4)}
             </p>
           </div>
+          {/* Source */}
+          <div className="mt-2">
+            <p className="text-gray-400 font-semibold text-xs">Obtained : </p>
+            <p className="text-gray-400 text-xs">
+              {weapon.source} <br />
+              {weapon.boss || weapon.mode}
+            </p>
+          </div>
         </div>
       )}
     </div>

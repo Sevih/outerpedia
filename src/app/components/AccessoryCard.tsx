@@ -120,6 +120,15 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
               {highlightNumbersOnly(accessory.effect_desc4)}
             </p>
           </div>
+
+          {/* Source */}
+          <div className="mt-2">
+            <p className="text-gray-400 font-semibold text-xs">Obtained : </p>
+            <p className="text-gray-400 text-xs">
+              {accessory.source} <br />
+              {accessory.boss || accessory.mode}
+            </p>
+          </div>
         </div>
       )}
     </div>

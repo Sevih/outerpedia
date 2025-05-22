@@ -10,6 +10,9 @@ interface ArmorSet {
   effect_4_1?: string | null;
   effect_2_4?: string | null;
   effect_4_4?: string | null;
+  source?: string | null // ← autoriser null
+  boss?: string | null
+  mode?: string | null
 }
 
 export default function SetCard({ set }: { set: ArmorSet }) {
@@ -110,6 +113,14 @@ export default function SetCard({ set }: { set: ArmorSet }) {
               {set.effect_4_4 && <p>{set.effect_4_4}</p>}
             </div>
           )}
+
+          <div className="mt-2">
+            <p className="text-gray-400 font-semibold text-xs">Obtained : </p>
+            <p className="text-gray-400 text-xs">
+              {set.source} <br />
+              {set.boss || set.mode}
+            </p>
+          </div>
         </div>
       )}
     </div>

@@ -199,7 +199,7 @@
                 "effect": "Team restriction (You can one use Striker heroes in your team)",
                 "ratio": "+40%",
                 "image": "Striker",
-                "bg": "3"
+                "bg": "2"
               }
             }
           },
@@ -259,25 +259,157 @@
       ],
       "teams": {
         "team1": {
-          "label": "Team 1",
-          "icon": "earth.webp",
-          "video": {
-            "id": "",
-            "title": ""
-          },
-          "geas-active": [],
-          "setup": []
-        },
-        "team2": {
-          "label": "Team 2",
+          "label": "Full Dark",
           "icon": "dark.webp",
           "video": {
             "id": "",
             "title": ""
           },
-          "geas-active": [],
-          "setup": [],
-          "note": []
+          "geas-active": [
+            "2-2B","2-2M","1-2M","1-4B","1-3B","1-5B","2-1B","1-5M","2-5M","1-4M","2-3M","1-1M","1-3M","2-1M"
+          ],
+          "setup": [
+            [
+              "Omega Nadja"
+            ],
+            [
+              "Maxwell"
+            ],
+            [
+              "Demiurge Astei"
+            ],
+            [
+              "Sterope"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Speed tune : Sterope > Maxwell > D.Astei > O.Nadja"
+            },
+            {
+              "type": "p",
+              "string": "Role :"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Sterope : S3 and Skill Chain with her first",
+                "O.Nadja : Only S1 burn for shield",
+                "Astei : S3 > S1",
+                "Maxwell : S3 > S2 Burn Lv 2 > S1"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Use Rogue's Charm / Sage's Charm depending of your critical chance"
+            }
+          ]
+        },
+        "team2": {
+          "label": "Classic G.Beth",
+          "icon": "light.webp",
+          "video": {
+            "id": "rUKAQnQmiZc",
+            "title": "The Frost Legion - Vladi Max Stage 7 - G.Beth Team by Sevih"
+          },
+          "geas-active": [
+            "2-4M","1-1M","1-3M","1-2B","1-2M","2-1M","2-3M","2-5M"
+          ],
+          "setup": [
+            [
+              "Monad Eva"
+            ],
+            [
+              "Gnosis Beth"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Nothing special just do S2-S3-S1B3 with G.Beth"
+            },
+            {
+              "type": "p",
+              "string": "Use Meva S1B3 before boss enrage skill (even if it won't kill you)"
+            }
+          ]
+        },
+        "team3": {
+          "label": "Burn Team",
+          "icon": "fire.webp",
+          "video": {
+            "id": "qITwAZAgWAU",
+            "title": "The Frost Legion - Vladi Max Stage 9 - Burn Team by Sevih"
+          },
+          "geas-active": [
+            "1-1M","1-3M","2-4M","1-2B","2-2M","1-2M","2-1M","2-3M"
+          ],
+          "setup": [
+            [
+              "Monad Eva"
+            ],
+            [
+              "Maxie"
+            ],
+            [
+              "Vlada",
+              "Parti"
+            ],
+            [
+              "Ember",
+              "Bell Cranel"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Speed tune : Meva > Roxie > Ember > Vlada"
+            },
+            {
+              "type": "p",
+              "string": "If you got Ember 5 star you want her with 20/30 more speed than Vlada in order to extend {D/BT_DOT_BURN} duration"
+            },
+            {
+              "type": "p",
+              "string": "Role :"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Meva : S1B2 to refill AP",
+                "Roxie : First turn S3 then only S1B3",
+                "Ember : S3 > S1B3",
+                "Vlada : S3 then only S1 until she got her last turn (ideally 19th turn) and S2B2"
+              ]
+            }
+          ]
+        },
+        "team4": {
+          "label": "Solo Ember",
+          "icon": "fire.webp",
+          "geas-active": [
+            "1-4M","2-2M","2-4M","1-1M","1-3M","1-2B","1-2M","2-1M","2-3M","2-5M"
+          ],
+          "setup": [
+            [
+              "Ember"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "You want : Revenge Set, Vanguard Charm, Token of the Supreme Witch weapon and an effectiveness Accessory"
+            },
+            {
+              "type": "p",
+              "string": "Stats needed : Eff > Atk > All and low speed (around 120-130)"
+            },
+            {
+              "type": "p",
+              "string": "Whenever you play just S1B3 to extend your {D/BT_DOT_BURN} duration"
+            }
+          ]
         }
       }
     }
