@@ -14,7 +14,7 @@ const teams = {
         setup: [
             ['Caren','Poolside Trickster Regina','Regina'],
             ['Tamara', 'Gnosis Nella', 'Akari','Edelweiss'],
-            ['Gnosis Dahlia', 'Demiurge Astei','Aer'],
+            ['Gnosis Dahlia', 'Demiurge Astei','Aer','Beth'],
             ['Monad Eva','Luna','Nella','Omega Nadja']
         ]
     }

@@ -6,13 +6,23 @@ import TeamTabSelector from '@/app/components/TeamTabSelector'
 
 const teams = {
   promo: {
-    label: 'Promotion Run',
-    icon: 'SC_Buff_Dark_Dmg.webp',
+    label: 'Curse Team',
+    icon: 'SC_Buff_Dot_Curse.webp',
     setup: [
       ['Akari'],
-      ['Stella'],
+      ['Stella','Monad Eva'],
       ['Drakhan'],
       ['Kitsune of Eternity Tamamo-no-Mae', 'Marian']
+    ]
+  },
+  prom2: {
+    label: 'Fix damage',
+    icon: 'SC_Buff_Effect_True_Dmg.webp',
+    setup: [
+      ['Akari'],
+      ['Monad Eva','Dianne','Nella',],
+      ['Gnosis Nella','Tamamo-no-Mae'],
+      ['Demiurge Stella','Ryu Lion']
     ]
   }
 }
@@ -36,8 +46,10 @@ export default function DemiurgeAsteiPromoGuide() {
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li><CharacterLinkCard name="Akari" /></li>
         <li><CharacterLinkCard name="Stella" /></li>
-        <li><CharacterLinkCard name="Drakhan" /></li>
-        <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> / <CharacterLinkCard name="Marian" /></li>
+        <li><CharacterLinkCard name="Monad Eva" /> / <CharacterLinkCard name="Dianne" /> / <CharacterLinkCard name="Nella" /> : if you need more damage mitigation for D.Astei. Use Saint&apos;s Ring or Obsidian Oath on M.Eva</li>
+        <li><CharacterLinkCard name="Drakhan" /> / <CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> / <CharacterLinkCard name="Marian" /> : for a curse team</li>
+        <li><CharacterLinkCard name="Gnosis Nella" /> / <CharacterLinkCard name="Tamamo-no-Mae" /> <CharacterLinkCard name="Demiurge Stella" /> / <CharacterLinkCard name="Ryu Lion" /> : for a fixed damage team</li>
+        
       </ul>
 
       <p className="text-neutral-400 text-sm italic mb-4">
