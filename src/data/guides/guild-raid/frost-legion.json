@@ -262,8 +262,8 @@
           "label": "Full Dark",
           "icon": "dark.webp",
           "video": {
-            "id": "",
-            "title": ""
+            "id": "zpnej0kGURA",
+            "title": "The Frost Legion - Vladi Max Stage 15 - Dark Team by Sevih"
           },
           "geas-active": [
             "2-2B","2-2M","1-2M","1-4B","1-3B","1-5B","2-1B","1-5M","2-5M","1-4M","2-3M","1-1M","1-3M","2-1M"
@@ -295,9 +295,9 @@
               "type": "ul",
               "items": [
                 "Sterope : S3 and Skill Chain with her first",
-                "O.Nadja : Only S1 burn for shield",
-                "Astei : S3 > S1",
-                "Maxwell : S3 > S2 Burn Lv 2 > S1"
+                "O.Nadja : S1B3 > S3 > S1 ",
+                "Astei : S1B2 > S3 > S1",
+                "Maxwell : S3 > S2B2 > S2 > S1"
               ]
             },
             {
@@ -339,8 +339,8 @@
           "label": "Burn Team",
           "icon": "fire.webp",
           "video": {
-            "id": "qITwAZAgWAU",
-            "title": "The Frost Legion - Vladi Max Stage 9 - Burn Team by Sevih"
+            "id": "zetrz8-fqZg",
+            "title": "The Frost Legion - Vladi Max Stage 13 - Burn Team by Sevih"
           },
           "geas-active": [
             "1-1M","1-3M","2-4M","1-2B","2-2M","1-2M","2-1M","2-3M"
@@ -364,7 +364,7 @@
           "note": [
             {
               "type": "p",
-              "string": "Speed tune : Meva > Roxie > Ember > Vlada"
+              "string": "Speed tune : Roxie > Meva > Ember > Vlada"
             },
             {
               "type": "p",
@@ -378,8 +378,8 @@
               "type": "ul",
               "items": [
                 "Meva : S1B2 to refill AP",
-                "Roxie : First turn S3 then only S1B3",
-                "Ember : S3 > S1B3",
+                "Roxie : Only S1B3 then S3 at her than turn",
+                "Ember : S1B3 > S3",
                 "Vlada : S3 then only S1 until she got her last turn (ideally 19th turn) and S2B2"
               ]
             }
