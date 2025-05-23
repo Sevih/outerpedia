@@ -10,7 +10,7 @@ const teams = {
     icon: 'SC_Buff_Dark_Dmg.webp',
     setup: [
       ['Akari'],
-      ['Demiurge Stella'],
+      ['Stella'],
       ['Drakhan'],
       ['Kitsune of Eternity Tamamo-no-Mae', 'Marian']
     ]
@@ -35,7 +35,7 @@ export default function DemiurgeAsteiPromoGuide() {
       <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Team Suggestions</h3>
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li><CharacterLinkCard name="Akari" /></li>
-        <li><CharacterLinkCard name="Demiurge Stella" /></li>
+        <li><CharacterLinkCard name="Stella" /></li>
         <li><CharacterLinkCard name="Drakhan" /></li>
         <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> / <CharacterLinkCard name="Marian" /></li>
       </ul>
