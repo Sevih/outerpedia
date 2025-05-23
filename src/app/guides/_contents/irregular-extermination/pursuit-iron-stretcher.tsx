@@ -13,7 +13,7 @@ const teams = {
         icon: 'SC_Buff_Stat_CriRate.webp',
         setup: [
             ['Caren','Poolside Trickster Regina','Regina'],
-            ['Tamara', 'Gnosis Nella', 'Akari','Edelweiss'],
+            ['Tamara','Skadi', 'Gnosis Nella', 'Akari','Edelweiss'],
             ['Gnosis Dahlia', 'Demiurge Astei','Aer','Beth'],
             ['Monad Eva','Luna','Nella','Omega Nadja']
         ]
