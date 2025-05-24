@@ -4,6 +4,7 @@ import EffectInlineTag from '@/app/components/EffectInlineTag'
 import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import ClassInlineTag from '@/app/components/ClassInlineTag';
 
 const teamSetup = [
     ['Dianne', 'Saeran', 'Shu','Monad Eva'],
@@ -30,6 +31,8 @@ export default function TyrantGuide() {
                 <li><CharacterLinkCard name="Monad Eva" />&#39;s Skill 1 Burst 3 works too but you need her 5 star and AP.</li>
                 <li>Once cleansed, you must use <strong>Burst Skills</strong>, <strong>Dual Attacks</strong>, and <strong>Chain Skills</strong> to damage his WG.</li>
                 <li>Try to burst him down quickly since his damage increases rapidly over time.</li>
+                <li>Stage 12: Increases the speed of <ClassInlineTag name="Healer" /> and <ClassInlineTag name="Defender" /> by 50%, and makes their damage scale with their defense. All other classes deal 95% less damage.</li>
+                <li>Stage 13: Reduces the damage of all classes except <ClassInlineTag name="Defender" /> by 95%.</li>
             </ul>
             <hr className="my-6 border-neutral-700" />
             <RecommendedTeam team={teamSetup} />

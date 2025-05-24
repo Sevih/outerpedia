@@ -23,7 +23,8 @@ export default function BeatlesGuide() {
         <li>If you use AoE skills that aren&#39;t chain skills, it will gain an evasion buff.</li>
         <li>If it evades an attack, it will counterattack and inflict a <EffectInlineTag name="BT_DOT_POISON" type="debuff" /> debuff.</li>
         <li>The main boss is on the right side of the screen and is the only one attacking. The other one is a buffer that constantly buffs evasion. If killed, it will grant the main boss <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
-        <li>Characters that can inflict <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" /> are recommended, along with single-target DPS.</li>
+        <li>Charactes that can inflict <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" /> are recommended, along with single-target DPS.</li>
+        <li>Stage 13 : When hit, has an up to 90% chance to miss.</li>
       </ul>
 
       <hr className="my-6 border-neutral-700" />

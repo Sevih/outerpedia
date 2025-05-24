@@ -438,12 +438,30 @@
     "free-heroes-start-banner": {
       "category": "general-guides",
       "title": "Free Heroes & Starter Banners",
-      "description": "Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start",
+      "description": "Learn which heroes you'll get for free in Outerplane and how to make the best choices from the Start",
       "icon": "T_Chat_Emoticon_08",
       "last_updated": "2025-05-17",
       "author": "Arabyss/Birdmouth/Sevih/Shiraen",
       "second_image":"T_Chat_Emoticon_05"
-    }   
+    },
+    "daily-stamina": {
+      "category": "general-guides",
+      "title": "Daily Stamina Burn",
+      "description": "Learn how to efficiently spend your stamina daily in Outerplane with this step-by-step guide.",
+      "icon": "T_Chat_Emoticon_04",
+      "last_updated": "2025-05-13",
+      "author": "SADtherobot",
+      "second_image":"T_Chat_Emoticon_04"
+    },
+    "banner-mileage": {
+      "category": "general-guides",
+      "title": "Banners & Mileage System",
+      "description": "Understand the banner types and the mileage system in Outerplane to optimize your summons.",
+      "icon": "myth",
+      "last_updated": "2025-05-25",
+      "author": "Sevih",
+      "second_image":"myth2"
+    }    
                        
   }
 

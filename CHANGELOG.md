@@ -1,3 +1,8 @@
+## 🚀 Guides updated: New entries in the General section (2025-05-25)
+- Banners & Mileage System guide : learn more [here](/guides/general-guides/banner-mileage)
+- Daily Stamina Burn guide : learn more [here](/guides/general-guides/daily-stamina)
+
+
 ## 🚀 Skill Chain Filter & Fix (2025-05-22)
 - Add Skill Chain type Filter on Character page
 - Add Notice on Tier List PvE & PvP

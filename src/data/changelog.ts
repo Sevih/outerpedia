@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-25",
+    title: "Guides updated: New entries in the General section",
+    type: "feature",
+    content: [
+      "- Banners & Mileage System guide : learn more [here](/guides/general-guides/banner-mileage)",
+      "- Daily Stamina Burn guide : learn more [here](/guides/general-guides/daily-stamina)",
+    ],
+  },
+  {
     date: "2025-05-22",
     title: "Skill Chain Filter & Fix",
     type: "feature",

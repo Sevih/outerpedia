@@ -150,11 +150,6 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
           </div>
         </div></div>
 
-
-
-
-      <p className="text-neutral-300 mb-2">{guide.description}</p>
-
       <div className="text-sm text-neutral-400 mb-6">
         ✍️ {guide.author} · 🕒 {new Date(guide.last_updated).toLocaleDateString()}
       </div>
