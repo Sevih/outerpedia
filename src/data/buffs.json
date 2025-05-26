@@ -36,6 +36,12 @@
         "icon": "SC_Buff_Stat_Avoid"
     },
     {
+        "name": "BT_STAT|ST_AVOID_IR",
+        "label": "Increased Evasion",
+        "description": "Increased Evasion by 50%. (Irremovable)",
+        "icon": "IG_Buff_Stat_Avoid_Interruption"
+    },
+    {
         "name": "BT_STAT|ST_DEF",
         "label": "Increased Defense",
         "description": "Increased Defense by 50%.",

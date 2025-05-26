@@ -8,7 +8,7 @@ export default function TyrantGuide() {
     return (
         <div>
             <div className="bg-yellow-100 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100">
-                ⚠️ This guide also applies to stage S2 Hard 8-10 & S2 Hard 9-10 ⚠️
+                ⚠️ This guide also applies to stage S2 Hard 8-10 ⚠️
             </div>
             <GuideHeading level={3}>Strategy Overview</GuideHeading>
             <GuideHeading level={4}>Vlada moveset</GuideHeading>

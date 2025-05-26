@@ -30,7 +30,7 @@ export default function TyrantGuide() {
                 <li>Avoid using <ElementInlineTag element='fire' /> heroes.</li>
                 <li>Bring a speedy hero to apply <EffectInlineTag name="BT_SEALED" type="debuff" /> on foes before Fatal moves (around 270 speed).</li>
                 <li>Bring a hero with either <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> or <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> to remove <EffectInlineTag name="BT_STEALTHED" type="buff" />.</li>
-                <li><CharacterLinkCard name="Caren" /> is the MPV here since her S2 will directly goes on Fatal</li>
+                <li><CharacterLinkCard name="Caren" /> is the MPV here since her S2 will still target Fatal while <EffectInlineTag name="BT_STEALTHED" type="buff" /></li>
             </ul>
             <GuideHeading level={4}>Recommanded Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">

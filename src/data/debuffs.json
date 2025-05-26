@@ -12,6 +12,12 @@
         "icon": "SC_Buff_Effect_Aggro"
     },
     {
+        "name": "BT_AGGRO_IR",
+        "label": "Taunted",
+        "description": "Uses a basic attack on the caster that inflicted Taunted. Removed when the caster dies. (Irremovable)",
+        "icon": "IG_Buff_Effect_Aggro_Interruption_D"
+    },
+    {
         "name": "BT_SEAL_COUNTER",
         "label": "Uncounterrable",
         "description": "Negates enemy reactive strikes: Counterattack, Revenge, or Agile Response.",
