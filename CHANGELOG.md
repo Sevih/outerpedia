@@ -1,3 +1,10 @@
+## 🛠 Adventure Guide Release (2025-05-26)
+- Guides are grouped by season (S1, S2, S3...) and follow the in-game progression
+- Spoiler-Free mode is enabled by default
+- You can reveal boss names and details by disabling Spoiler-Free mode
+- Explore now: [Adventure Guides](/guides/adventure)
+
+
 ## 🚀 Guides updated: New entries in the General section (2025-05-25)
 - Banners & Mileage System guide : learn more [here](/guides/general-guides/banner-mileage)
 - Daily Stamina Burn guide : learn more [here](/guides/general-guides/daily-stamina)

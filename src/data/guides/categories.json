@@ -10,7 +10,7 @@
       "title": "Adventure",
       "description": "Tips and strategies to progress through Adventure mode.",
       "icon": "/images/guides/CM_EtcMenu_Adventure",
-      "valid":false
+      "valid":true
     },
     "world-boss": {
       "title": "World Boss Guides",

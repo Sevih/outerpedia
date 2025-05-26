@@ -25,6 +25,17 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-26",
+    title: "Adventure Guide Release",
+    type: "update",
+    content: [
+      "- Guides are grouped by season (S1, S2, S3...) and follow the in-game progression",
+      "- Spoiler-Free mode is enabled by default",
+      "- You can reveal boss names and details by disabling Spoiler-Free mode",
+      "- Explore now: [Adventure Guides](/guides/adventure)",
+    ],
+  },
+  {
     date: "2025-05-25",
     title: "Guides updated: New entries in the General section",
     type: "feature",
