@@ -583,5 +583,14 @@
     "last_updated": "2025-05-26",
     "author": "Sevih",
     "second_image": "S3-6-10-2"
+  },
+  "S3-7-10": {
+    "category": "adventure",
+    "title": "S3 Hard 7-10 : Abyssal Calamity Apophis",
+    "description": "Boss strategy guide.",
+    "icon": "S3-7-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S3-7-10-2"
   }
 }

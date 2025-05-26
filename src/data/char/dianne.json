@@ -70,7 +70,7 @@
       "SkipNameID": "SKILL_NAME_2000074_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE","BT_AP_CHARGE","SYS_CONTINU_HEAL"
+        "BT_ACTION_GAUGE","BT_AP_CHARGE","SYS_CONTINU_HEAL","IG_Buff_BuffdurationIncrease"
       ],
       "burnEffect": {
         "SKT_BURST_1": {

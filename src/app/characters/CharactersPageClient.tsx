@@ -29,7 +29,7 @@ const orderedBuffGroups = [
   },
   {
     title: 'Supporting', items: [
-      "BT_INVINCIBLE", "BT_SHIELD_BASED_CASTER", "BT_IMMUNE",
+      "BT_INVINCIBLE", "BT_SHIELD_BASED_CASTER", "BT_IMMUNE","IG_Buff_BuffdurationIncrease",
       "BT_UNDEAD", "BT_STEALTHED", "BT_REMOVE_DEBUFF",
       "BT_REVIVAL", "BT_RESURRECTION_G", "SYS_CONTINU_HEAL", "BT_STAT|ST_VAMPIRIC"
     ]
