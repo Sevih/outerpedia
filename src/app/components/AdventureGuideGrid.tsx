@@ -54,7 +54,7 @@ export default function AdventureGuideGrid({ items }: Props) {
           onClick={() => setSpoilerFree((v) => !v)}
           className="px-3 py-1 text-sm border border-neutral-600 rounded bg-neutral-800 hover:bg-neutral-700 transition"
         >
-          {spoilerFree ? 'Show Guide Details' : 'Enable Spoiler-Free Mode'}
+          {spoilerFree ? 'Disable Spoiler-Free Mode' : 'Enable Spoiler-Free Mode'}
         </button>
       </div>
 
