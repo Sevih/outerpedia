@@ -88,7 +88,8 @@
       "TargetTeamType": "TEAM",
       "buff": [
         "BT_REMOVE_DEBUFF",
-        "SYS_REVENGE_HEAL"
+        "SYS_REVENGE_HEAL",
+        "UNIQUE_NINJA_AFTERIMAGE"
       ],
       "cd": "4",
       "debuff": [

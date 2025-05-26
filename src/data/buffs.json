@@ -353,5 +353,11 @@
         "label": "Polar Knight",
         "description": "The fewer allies present (excluding the bearer), the greater the damage the bearer deals. (Up to 150%, Irremovable)",
         "icon": "IG_Buff_Effect_2000120_Interruption"
+    },
+    {
+        "name": "UNIQUE_NINJA_AFTERIMAGE",
+        "label": "A Ninja's Afterimage",
+        "description": "25% of damage intended for allies is redirect to Edelweiss.\nOnly the highest value effect will be applied.\nCannot be remoçved until Edelweiss is defeated.",
+        "icon": "IG_Buff_Effect_2000072_Interruption"
     }
 ]

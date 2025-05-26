@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import SortSelector from '@/app/components/SortSelector';
+import AdventureGuideGrid from '@/app/components/AdventureGuideGrid';
 
 
 type Guide = {
@@ -80,10 +81,10 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
   }
 
   filtered.sort((a, b) => {
-  const dateDiff = new Date(b.last_updated).getTime() - new Date(a.last_updated).getTime();
-  if (dateDiff !== 0) return dateDiff;
-  return b.title.localeCompare(a.title); // Z → A
-});
+    const dateDiff = new Date(b.last_updated).getTime() - new Date(a.last_updated).getTime();
+    if (dateDiff !== 0) return dateDiff;
+    return b.title.localeCompare(a.title); // Z → A
+  });
 
 
 
@@ -111,14 +112,22 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
           </h1>
         </div>
       </div>
-      <div className="mb-4 flex justify-end items-center gap-2">
-        <label className="text-sm text-white">Sort by:</label>
-        <SortSelector />
-      </div>
+      {category !== 'adventure' && (
+        <div className="mb-4 flex justify-end items-center gap-2">
+          <label className="text-sm text-white">Sort by:</label>
+          <SortSelector />
+        </div>
+      )}
 
 
+      {/** if cat adventure regroup par saison et spoiler trigger*/}
 
-      <GuideCardGrid items={filtered} />
+      {category === 'adventure' ? (
+        <AdventureGuideGrid items={filtered} />
+      ) : (
+        <GuideCardGrid items={filtered} />
+      )}
+
 
       {/* Bloc JSON-LD pour la catégorie */}
       <script

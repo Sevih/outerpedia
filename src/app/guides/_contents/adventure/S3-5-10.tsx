@@ -27,13 +27,11 @@ export default function TyrantGuide() {
 
             <GuideHeading level={4}>Advice</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                <li>Bring <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" /> <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> to avoid getting <EffectInlineTag name="BT_AGGRO_IR" type="debuff" />.</li>
-                <li>Healers with healing on S1 can help if you end up getting <EffectInlineTag name="BT_AGGRO_IR" type="debuff" />.</li>
+                <li>Bring <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> to cunter <EffectInlineTag name="UNIQUE_REGINA_WORLD" type="buff" />.</li>
             </ul>
             <GuideHeading level={4}>Recommanded Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Maxwell" /> <CharacterLinkCard name="Demiurge Astei" /> : <ElementInlineTag element='dark' /> DPS with high penetration.</li>
-                <li><CharacterLinkCard name="Tamamo-no-Mae" /> <CharacterLinkCard name="Eternal" /> : for <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Charlotte" /> <CharacterLinkCard name="Skadi" /> <CharacterLinkCard name="Sterope" />: for <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" />.</li>
             </ul>
         </div>

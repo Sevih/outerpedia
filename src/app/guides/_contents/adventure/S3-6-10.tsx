@@ -27,7 +27,7 @@ export default function TyrantGuide() {
             <GuideHeading level={4}>Recommanded Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Demiurge Delta" /> <CharacterLinkCard name="Saeran" />: for <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" />.</li>
-                <li><CharacterLinkCard name="Akari" /> <CharacterLinkCard name="Luna" /> <CharacterLinkCard name="Gnosis Nella" /> : for <EffectInlineTag name="BT_SEALED" type="debuff" />.</li>
+                <li><CharacterLinkCard name="Akari" /> <CharacterLinkCard name="Luna" /> <CharacterLinkCard name="Gnosis Nella" /> <CharacterLinkCard name="Alice" /> : for <EffectInlineTag name="BT_SEALED" type="debuff" />.</li>
             </ul>
         </div>
     )

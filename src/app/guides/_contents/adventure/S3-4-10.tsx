@@ -14,7 +14,7 @@ export default function TyrantGuide() {
                 <li><strong>S2</strong>: Single, used after being hit on the enemy with the lowest health. Inflict <EffectInlineTag name="BT_STONE" type="debuff" /> 1 turn.</li>
                 <li><strong>S3</strong>: Single, <EffectInlineTag name="IG_Buff_BuffdurationReduce" type="debuff" /> by 1 turn.</li>
                 <li><strong>Passive</strong>: when alone at the start of turn, <EffectInlineTag name="BT_RESURRECTION_G" type="buff" /> all slain allies.</li>
-                <li><strong>Passive</strong>: when hit, if at least one ally hasn&apos;t a debuff, <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> of the boss by 100%.</li>
+                <li><strong>Passive</strong>: when hit,  if at least one ally isn&apos;t debuffed, <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> of the boss by 100%.</li>
                 <li><strong>Passive</strong>: when at least 1 ally evades, inflict <EffectInlineTag name="BT_AGGRO_IR" type="debuff" /> taunted 4 turns. Ignore immunity. Can be activated only once during the battle.</li>
                 <li><strong>Enrage</strong>: Every 4 turns. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />.</li>
                 <li><strong>Enrage Ultimate</strong>: AoE used when enrage ends also grants <EffectInlineTag name="BT_STAT|ST_AVOID_IR" type="buff" /> to all allies.</li>
@@ -39,8 +39,9 @@ export default function TyrantGuide() {
             <GuideHeading level={4}>Recommanded Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Gnosis Beth" /> <CharacterLinkCard name="Ember" /> : for landing debuff while getting hit.</li>
-                <li><CharacterLinkCard name="Tamamo-no-Mae" /> <CharacterLinkCard name="Eternal" /> : for <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" />.</li>
+                <li><CharacterLinkCard name="Tamamo-no-Mae" /> <CharacterLinkCard name="Ember" /> : for <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Charlotte" /> <CharacterLinkCard name="Skadi" /> <CharacterLinkCard name="Sterope" />: for <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" />.</li>
+                <li><CharacterLinkCard name="Hilde" /> <CharacterLinkCard name="Edelweiss" /> : for damage sharing.</li>
             </ul>
         </div>
     )
