@@ -565,5 +565,23 @@
     "last_updated": "2025-05-26",
     "author": "Sevih",
     "second_image": "S3-4-10-2"
+  },
+  "S3-5-10": {
+    "category": "adventure",
+    "title": "S3 Hard 5-10 : Regina & Hilde",
+    "description": "Boss strategy guide.",
+    "icon": "S3-5-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S3-5-10-2"
+  },
+  "S3-6-10": {
+    "category": "adventure",
+    "title": "S3 Hard 6-10 : Ancient Foe",
+    "description": "Boss strategy guide.",
+    "icon": "S3-6-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S3-6-10-2"
   }
 }
