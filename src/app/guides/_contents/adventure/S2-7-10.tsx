@@ -7,6 +7,9 @@ import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 export default function TyrantGuide() {
     return (
         <div>
+            <div className="bg-yellow-100 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100">
+                ⚠️ This guide also applies to stage S2 Hard 8-10 & S2 Hard 9-10 ⚠️
+            </div>
             <GuideHeading level={3}>Strategy Overview</GuideHeading>
             <GuideHeading level={4}>Vlada moveset</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
@@ -24,8 +27,8 @@ export default function TyrantGuide() {
             </ul>
             <GuideHeading level={4}>Recommanded Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Astei" />: for <EffectInlineTag name="BT_IMMUNE" type="buff" /></li>
-                <li><CharacterLinkCard name="Akari" /> <CharacterLinkCard name="Laplace" /> <CharacterLinkCard name="Notia" /> : <EffectInlineTag name="BT_STAT|ST_ATK" type="debuff" /></li>
+                <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Astei" /> <CharacterLinkCard name="Nella" />: for <EffectInlineTag name="BT_IMMUNE" type="buff" /></li>
+                <li><CharacterLinkCard name="Akari" /> <CharacterLinkCard name="Laplace" /> : <EffectInlineTag name="BT_STAT|ST_ATK" type="debuff" /></li>
             </ul>
         </div>
     )

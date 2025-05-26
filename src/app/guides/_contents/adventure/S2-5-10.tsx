@@ -25,9 +25,11 @@ export default function TyrantGuide() {
             </ul>
             <GuideHeading level={4}>Recommanded Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                <li><CharacterLinkCard name="Tio" /> <CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Faenan" /> <CharacterLinkCard name="Astei" />: choose any 2 for <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /></li>
+                <li><CharacterLinkCard name="Tio" /> <CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Faenan" /> <CharacterLinkCard name="Astei" /> <CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Monad Eva" />: choose any 2 for <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /></li>
                 <li><CharacterLinkCard name="Akari" /> : <EffectInlineTag name="BT_SEALED" type="debuff" /> and <EffectInlineTag name="BT_STAT|ST_ATK" type="debuff" /></li>
                 <li><CharacterLinkCard name="Edelweiss" /> <CharacterLinkCard name="Luna" /> : <EffectInlineTag name="BT_SEALED" type="debuff" /> and <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /></li>
+                <li><CharacterLinkCard name="Veronica" /> <CharacterLinkCard name="Luna" /> : <EffectInlineTag name="BT_CALL_BACKUP" type="buff" /> and <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /></li>
+                <li><CharacterLinkCard name="Stella" /> <CharacterLinkCard name="Demiurge Stella" /> : can&apos;t be <EffectInlineTag name="BT_STONE" type="debuff" /></li>
             </ul>
         </div>
     )

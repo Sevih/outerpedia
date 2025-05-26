@@ -532,7 +532,7 @@
   },
   "S2-10-10": {
     "category": "adventure",
-    "title": "S2 Hard 1-10 : Demiurge Drakhan & Demiurge Vlada",
+    "title": "S2 Hard 10-10 : Demiurge Drakhan & Demiurge Vlada",
     "description": "Boss strategy guide.",
     "icon": "S2-10-10",
     "last_updated": "2025-05-26",
@@ -546,7 +546,7 @@
     "icon": "S3-2-10",
     "last_updated": "2025-05-26",
     "author": "Sevih",
-    "second_image": "S3-3-10-2"
+    "second_image": "S3-2-10-2"
   },
   "S3-3-10": {
     "category": "adventure",

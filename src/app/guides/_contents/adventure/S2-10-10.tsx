@@ -27,10 +27,11 @@ export default function TyrantGuide() {
             <GuideHeading level={4}>Advice</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>Use characters with strong AoE healing skills.</li>
+                <li>Take out Demiurge Vlada quickly so the speed debuff doesn&apos;t stack too high.</li>
             </ul>
             <GuideHeading level={4}>Recommanded Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                <li><CharacterLinkCard name="Mene" /> <CharacterLinkCard name="Astei" /> <CharacterLinkCard name="Monad Eva" />: for healing</li>
+                <li><CharacterLinkCard name="Mene" /> <CharacterLinkCard name="Astei" /> <CharacterLinkCard name="Monad Eva" /> <CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Dianne" />: for healing</li>
             </ul>
         </div>
     )
