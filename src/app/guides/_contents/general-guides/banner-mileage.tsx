@@ -6,14 +6,16 @@ import Image from 'next/image';
 
 
 const decoration = "text-yellow-400 underline";
-const star = <div className={`relative align-middle inline-flex w-[15px] h-[15px]`}>
+const star = <span className={`relative align-middle inline-flex w-[15px] h-[15px]`}>
     <Image
         src={`/images/ui/CM_icon_star_y.webp`}
         alt="badge"
-        fill
+        width={15}
+        height={15}
+        style={{ width: 15, height: 15 }}
         className="object-contain"
     />
-</div>;
+</span>;
 
 
 const bannerTabs: BannerTab[] = [
@@ -31,29 +33,29 @@ const bannerTabs: BannerTab[] = [
                 <p>Drop rate of 1{star} : 78.5%</p>
                 <p className="mt-4"><span className={decoration}>Special feature</span>: Using Recruit x 10 recruit guarantees at least one 2{star} hero.</p>
                 <p className='mt-4'><span className={decoration}>1 free pull per day</span></p>
-                <p className='mt-4'>Pulling a hero you already own will gives you
-                    <ul>
-                        <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text='Wildcard pieces' /></span> : 1 for a 2{star} and 15 for a 3{star}</li>
-                        <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text='Hero pieces' /></span> : 5 for a 1{star}, 10 for a 2{star} and 150 for a 3{star}</li>
-                    </ul>
-                </p>
+                <p className='mt-4'>Pulling a hero you already own will gives you</p>
+                <ul>
+                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text='Wildcard pieces' /></span> : 1 for a 2{star} and 15 for a 3{star}</li>
+                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text='Hero pieces' /></span> : 5 for a 1{star}, 10 for a 2{star} and 150 for a 3{star}</li>
+                </ul>
+
                 <p className='mt-2'>
                     This banner is always available.<br /> You can choose up to 3 characters to force the drop rate of those. <br />For example if you select
                     <CharacterLinkCard name="Alice" />, <CharacterLinkCard name="Eliza" /> and <CharacterLinkCard name="Francesca" /> you can&apos;t drop another 3{star} exept for those 3.</p>
                 <p className='mt-4'>
-                    It uses 3 types of ressources :
-                    <ul>
-                        <li>
-                            <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text='Special Recruitement Ticket (Event)' /></span> : 1 for 1 unit, does not add to mileage count
-                        </li>
-                        <li>
-                            <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text='Special Recruitement Ticket' /></span> : 1 for 1 unit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='Custom Mileage' size={25} />
-                        </li>
-                        <li>
-                            <span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text='Ether' /></span> : 150 for 1 unit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='Custom Mileage' size={25} />
-                        </li>
-                    </ul>
-                </p>
+                    It uses 3 types of ressources :</p>
+                <ul>
+                    <li>
+                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text='Special Recruitement Ticket (Event)' /></span> : 1 for 1 unit, does not add to mileage count
+                    </li>
+                    <li>
+                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text='Special Recruitement Ticket' /></span> : 1 for 1 unit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='Custom Mileage' size={25} />
+                    </li>
+                    <li>
+                        <span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text='Ether' /></span> : 150 for 1 unit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='Custom Mileage' size={25} />
+                    </li>
+                </ul>
+
                 <p className='mt-4'>
                     It&apos;s not recommended to use <GuideIconInline name="TI_Item_Cristal_Cash" text='Ether' /> on this banner
                 </p>
@@ -82,23 +84,23 @@ const bannerTabs: BannerTab[] = [
                 <p>1{star} drop rate: 78.5%</p>
                 <p className="mt-4"><span className={decoration}>Special feature</span>: Using Recruit x 10 recruit guarantees at least one 2{star} hero.</p>
                 <p className="mt-4">
-                    Duplicates give:
-                    <ul>
-                        <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /></span>: 1 for a 2{star}, 15 for a 3{star}</li>
-                        <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="Hero pieces" /></span>: 5 for a 1{star}, 10 for a 2{star}, 50 for a 3{star} (150 if it&apos;s the banner unit)</li>
-                    </ul>
-                </p>
+                    Duplicates give:</p>
+                <ul>
+                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /></span>: 1 for a 2{star}, 15 for a 3{star}</li>
+                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="Hero pieces" /></span>: 5 for a 1{star}, 10 for a 2{star}, 50 for a 3{star} (150 if it&apos;s the banner unit)</li>
+                </ul>
+
                 <p className="mt-2">
                     This banner is temporary and usually lasts 2 weeks.
                 </p>
                 <p className="mt-4">
-                    It uses 3 types of resources:
-                    <ul>
-                        <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text="Special Recruitment Ticket (Event)" /></span>: 1 per recruit, does not add to mileage count</li>
-                        <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text="Special Recruitment Ticket" /></span>: 1 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage" text="Mileage" size={25} /></li>
-                        <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="Ether" /></span>: 150 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage" text="Mileage" size={25} /></li>
-                    </ul>
-                </p>
+                    It uses 3 types of resources:</p>
+                <ul>
+                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text="Special Recruitment Ticket (Event)" /></span>: 1 per recruit, does not add to mileage count</li>
+                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text="Special Recruitment Ticket" /></span>: 1 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage" text="Mileage" size={25} /></li>
+                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="Ether" /></span>: 150 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage" text="Mileage" size={25} /></li>
+                </ul>
+
                 <p className='mt-4'>
                     It&apos;s not recommended to use <GuideIconInline name="TI_Item_Cristal_Cash" text='Ether' /> on this banner
                 </p>
@@ -128,23 +130,25 @@ const bannerTabs: BannerTab[] = [
                 <p className="mt-4"><span className={decoration}>1 free pull per day</span></p>
                 <p className="mt-4">
                     Duplicates give:
-                    <ul>
-                        <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /></span>: 1 for a 2{star}, 15 for a 3{star}</li>
-                        <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="Hero pieces" /></span>: 5 for a 1{star}, 10 for a 2{star}, 50 for a 3{star} (150 if it&apos;s the banner unit)</li>
-                    </ul>
                 </p>
+                <ul>
+                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /></span>: 1 for a 2{star}, 15 for a 3{star}</li>
+                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="Hero pieces" /></span>: 5 for a 1{star}, 10 for a 2{star}, 50 for a 3{star} (150 if it&apos;s the banner unit)</li>
+                </ul>
+
                 <p className="mt-2">
                     This is a permanent banner, and the only regular way (besides events like Demiurge Contract) to get Demiurge Heroes.<br />
                     These heroes are extremely powerful but also very rare. Demiurge heroes benefit more from transcendence overall, but some are strong right from base 3{star}.
                 </p>
                 <p className="mt-4">
                     It uses 3 types of resources:
-                    <ul>
-                        <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001_NonMileage" text="Call of the Demiurge (Event)" /></span>: 10 per recruit, does not add to mileage count</li>
-                        <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001" text="Call of the Demiurge" /></span>: 10 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /></li>
-                        <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="Ether" /></span>: 225 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /></li>
-                    </ul>
                 </p>
+                <ul>
+                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001_NonMileage" text="Call of the Demiurge (Event)" /></span>: 10 per recruit, does not add to mileage count</li>
+                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001" text="Call of the Demiurge" /></span>: 10 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /></li>
+                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="Ether" /></span>: 225 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /></li>
+                </ul>
+
                 <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /> is kept until used.</p>
                 <p className="mt-4">
                     Use 200 <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /> to recruit the featured hero, or get 150 <GuideIconInline name="CM_Piece_Frame" text="Hero pieces" />.<br />
@@ -166,61 +170,64 @@ const bannerTabs: BannerTab[] = [
                 <p>3{star} non-focus drop rate: 1.25%</p>
                 <p>2{star} drop rate: 19%</p>
                 <p>1{star} drop rate: 78.5%</p>
-<p className="mt-4"><span className={decoration}>Special feature</span>: Using Recruit x 10 recruit guarantees at least one 2{star} hero.</p>
+                <p className="mt-4"><span className={decoration}>Special feature</span>: Using Recruit x 10 recruit guarantees at least one 2{star} hero.</p>
                 <p className="mt-4">
                     Duplicates give:
-                    <ul>
-                        <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /></span>: 1 for a 2{star}, 15 for a 3{star}</li>
-                        <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="Hero pieces" /></span>: 5 for a 1{star}, 10 for a 2{star}, 150 for a 3{star}</li>
-                    </ul>
                 </p>
+                <ul>
+                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /></span>: 1 for a 2{star}, 15 for a 3{star}</li>
+                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="Hero pieces" /></span>: 5 for a 1{star}, 10 for a 2{star}, 150 for a 3{star}</li>
+                </ul>
+
 
                 <p className="mt-2">
-                    This banner is temporary and the only way to obtain Limited Heroes. They are divided into 3 categories:
-                    <ul>
-                        <li><strong className='text-pink-400'>Limited</strong>: classic time-limited heroes</li>
-                        <li><strong className='text-green-400'>Seasonal</strong>: heroes tied to yearly events like Halloween or Christmas</li>
-                        <li><strong className='text-red-400'>Collab</strong>: heroes from crossovers with other licenses. they are the least likely to return</li>
-                    </ul>
+                    This banner is temporary and the only way to obtain Limited Heroes. They are divided into 3 categories:</p>
+                <ul>
+                    <li><strong className='text-pink-400'>Limited</strong>: classic time-limited heroes</li>
+                    <li><strong className='text-green-400'>Seasonal</strong>: heroes tied to yearly events like Halloween or Christmas</li>
+                    <li><strong className='text-red-400'>Collab</strong>: heroes from crossovers with other licenses. they are the least likely to return</li>
+                </ul>
+                <p className="mt-2">
                     This banner typically runs for 2 to 4 weeks.<br />
                     Like Demiurge heroes, Limited units are (usually) extremely powerful, with their strongest abilities unlocking at high transcendence levels.
                 </p>
 
                 <p className="mt-4">
-                    <strong className={decoration}>List of Limited Heroes and their release dates:</strong>
-                    <ul>
-                        <li><CharacterLinkCard name="Poolside Trickster Regina" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released July 15, 2023</li>
-                        <li><CharacterLinkCard name="Gnosis Dahlia" /> – <strong className='text-pink-400'>Limited</strong> Hero, released July 29, 2024 (last rerun: January 23, 2025)</li>
-                        <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released October 21, 2024</li>
-                        <li><CharacterLinkCard name="Gnosis Nella" /> – <strong className='text-pink-400'>Limited</strong> Hero, released November 4, 2024</li>
-                        <li><CharacterLinkCard name="Holy Night's Blessing Dianne" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released December 16, 2024</li>
-                        <li><CharacterLinkCard name="Ais Wallenstein" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
-                        <li><CharacterLinkCard name="Bell Cranel" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
-                        <li><CharacterLinkCard name="Ryu Lion" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
-                        <li><CharacterLinkCard name="Omega Nadja" /> – <strong className='text-pink-400'>Limited</strong> Hero, released May 7, 2025</li>
-                    </ul>
-                </p>
+                    <strong className={decoration}>List of Limited Heroes and their release dates:</strong></p>
+                <ul>
+                    <li><CharacterLinkCard name="Poolside Trickster Regina" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released July 15, 2023</li>
+                    <li><CharacterLinkCard name="Gnosis Dahlia" /> – <strong className='text-pink-400'>Limited</strong> Hero, released July 29, 2024 (last rerun: January 23, 2025)</li>
+                    <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released October 21, 2024</li>
+                    <li><CharacterLinkCard name="Gnosis Nella" /> – <strong className='text-pink-400'>Limited</strong> Hero, released November 4, 2024</li>
+                    <li><CharacterLinkCard name="Holy Night's Blessing Dianne" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released December 16, 2024</li>
+                    <li><CharacterLinkCard name="Ais Wallenstein" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
+                    <li><CharacterLinkCard name="Bell Cranel" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
+                    <li><CharacterLinkCard name="Ryu Lion" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
+                    <li><CharacterLinkCard name="Omega Nadja" /> – <strong className='text-pink-400'>Limited</strong> Hero, released May 7, 2025</li>
+                </ul>
+
 
                 <p className="mt-4">
                     It uses 3 types of resources:
-                    <ul>
-                        <li>
-                            <span className={decoration}>
-                                <GuideIconInline name="TI_Item_Ticket_Recruit_06" text="Limited Recruitment Ticket (event)" />
-                            </span>: 1 per recruit, does not add to mileage count (this item exist but hasn&apos;t been used yet)
-                        </li>
-                        <li>
-                            <span className={decoration}>
-                                <GuideIconInline name="TI_Item_Ticket_Recruit_05" text="Limited Recruitment Ticket" />
-                            </span>: 1 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} />
-                        </li>
-                        <li>
-                            <span className={decoration}>
-                                <GuideIconInline name="TI_Item_Cristal_Cash" text="Ether" />
-                            </span>: 150 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} />
-                        </li>
-                    </ul>
                 </p>
+                <ul>
+                    <li>
+                        <span className={decoration}>
+                            <GuideIconInline name="TI_Item_Ticket_Recruit_06" text="Limited Recruitment Ticket (event)" />
+                        </span>: 1 per recruit, does not add to mileage count (this item exist but hasn&apos;t been used yet)
+                    </li>
+                    <li>
+                        <span className={decoration}>
+                            <GuideIconInline name="TI_Item_Ticket_Recruit_05" text="Limited Recruitment Ticket" />
+                        </span>: 1 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} />
+                    </li>
+                    <li>
+                        <span className={decoration}>
+                            <GuideIconInline name="TI_Item_Cristal_Cash" text="Ether" />
+                        </span>: 150 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} />
+                    </li>
+                </ul>
+
 
                 <p className="bg-red-700 text-white px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100 flex items-center justify-center min-h-[30px] mt-4">
                     ⚠️ At the end of the banner, all unused&nbsp;<GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} />&nbsp;will be converted into&nbsp;<GuideIconInline name="CM_Goods_Memory_Of_Star" text="Star's Memory" />&nbsp;at a 1:5 ratio.

@@ -72,6 +72,12 @@
         "icon": "SC_Buff_Effect_Stone"
     },
     {
+        "name": "BT_STONE_IR",
+        "label": "Petrified",
+        "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time (Irremovable)",
+        "icon": "IG_Buff_Effect_Stone_Interruption_D"
+    },
+    {
         "name": "BT_ACTION_GAUGE",
         "label": "Reduces Priority",
         "description": "Reduces enemie(s) priority",
@@ -293,5 +299,12 @@
         "label": "Irregular Infection",
         "description": "At the start of the turn, the caster's Enhancement Effect duration are reduced by 1 turn, and debuff durations of all ennemies are reduced by 1 turn.\nApplies to only one unit per team. If the effect is applied to a new target, the previous target's effect is removed.\nRemoved upon caster's death (Irremovable)",
         "icon": "IG_Buff_Effect_2000102_Interruption_D"
+    }
+    ,
+    {
+        "name": "UNIQUE_KERAUNOS",
+        "label": "Keraunos",
+        "description": "Reduces healing received by 50%. (Irremovable)",
+        "icon": "IG_Buff_2000057_Interruption_D"
     }
 ]

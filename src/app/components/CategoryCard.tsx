@@ -16,15 +16,16 @@ export default function GuideCategoryList() {
       {items.map(({ slug, title, description, icon, valid }) => (
         <Link
           key={slug}
-          href={`/guides/${slug}`}
+          href={valid ? `/guides/${slug}` : `/UnderConstruction`}
           className="group bg-neutral-900/70 border border-neutral-700 rounded-2xl p-4 flex items-start gap-4 hover:border-sky-500 hover:shadow-lg transition-all"
-          >
+        >
           <Image
             src={icon}
             alt={`${title} icon`}
             width={48}
             height={48}
-            className="flex-shrink-0"
+            style={{ width: 48, height: 48 }}
+            className="flex-shrink-0 object-contain"
           />
           <div className="text-white">
             <h2 className="text-lg font-bold mb-1">{title}</h2>

@@ -105,7 +105,6 @@ export default function TeamTabSelectorWithGeas({ teams, bosses }: TeamTabSelect
 
               const isBonus = ref.endsWith('B')
               const type = isBonus ? 'bonus' : 'malus'
-              console.log(ref)
               return (
                 <GeasCard
                   key={`${ref}-${resolved.bg}-${resolved.image}`}

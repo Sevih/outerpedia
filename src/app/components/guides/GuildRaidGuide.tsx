@@ -139,6 +139,7 @@ export default function GuildRaidGuide({ guideData }: Props) {
                       alt={b.name}
                       width={130}
                       height={250}
+                      priority
                     />
                   </div>
                 </div>
@@ -152,7 +153,9 @@ export default function GuildRaidGuide({ guideData }: Props) {
                     <Image
                       src="/images/ui/geas/CM_Facility_Frame.webp"
                       alt={`Level ${level}`}
-                      fill
+                      width={60}
+                      height={28}
+                      style={{ width: 60, height: 28 }}
                       className="object-contain"
                     />
                     <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-xs">

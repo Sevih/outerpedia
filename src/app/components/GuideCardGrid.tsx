@@ -37,17 +37,32 @@ export default function GuideCardGrid({ items }: Props) {
                 alt={`${title} icon`}
                 width={48}
                 height={48}
-                className="flex-shrink-0"
+                style={{ width: 48, height: 48 }}
+                className="flex-shrink-0 object-contain"
               />
               <div>
                 <h2 className="text-white text-lg font-bold">{title}</h2>
                 <p className="text-sm text-neutral-300">{description}</p>
               </div>
             </div>
-            <div className="mt-auto text-sm text-neutral-400 flex justify-between items-center pt-2 border-t border-neutral-700">
-              <span>✍️ {author}</span>
-              <span>🕒 {new Date(last_updated).toLocaleDateString()}</span>
-            </div>
+            <div className="mt-auto text-sm text-neutral-400 flex flex-col sm:flex-row sm:justify-between sm:items-center pt-2 border-t border-neutral-700 gap-1">
+  <span className="flex items-start gap-1">
+    ✍️ <span className="overflow-wrap break-words">
+  {author.split('/').map((part, i) => (
+    <span key={i}>
+      {part}
+      {i < author.split('/').length - 1 && <span>/</span>}
+      <wbr />
+    </span>
+  ))}
+</span>
+
+  </span>
+  <span className="flex items-center gap-1">
+    🕒 {new Date(last_updated).toLocaleDateString()}
+  </span>
+</div>
+
           </Link>
         )
       )}

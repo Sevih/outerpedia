@@ -16,6 +16,7 @@ export function ElementIcon({ element, size = 24 }: Props) {
         alt={element}
         width={size}
         height={size}
+        style={{ width: size, height: size }}
         className="object-contain"
         loading="lazy"
       />

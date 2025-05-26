@@ -105,7 +105,9 @@ export default function BeginnerGuide() {
                         <Image
                             src="/images/guides/general-guides/Challenge!-Special-Request-Identification.webp"
                             alt="Challenge! Special Request: Identification"
-                            fill
+                            width={400}
+                            height={80}
+                            style={{ width: 400, height: 80 }}
                             className="object-contain"
                         />
                     </div>
@@ -129,7 +131,9 @@ export default function BeginnerGuide() {
                         <Image
                             src="/images/guides/general-guides/Challenge!-Special-Request-Ecology-Study.webp"
                             alt="Challenge! Special Request: Ecology Study"
-                            fill
+                            width={400}
+                            height={80}
+                            style={{ width: 400, height: 80 }}
                             className="object-contain"
                         />
                     </div>

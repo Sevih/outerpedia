@@ -165,6 +165,7 @@ export default function CarouselSlot({ characters }: Props) {
               alt="Previous"
               width={24}
               height={24}
+              style={{ width: 24, height: 24 }}
               className="rotate-180"
             />
           </button>
@@ -178,6 +179,7 @@ export default function CarouselSlot({ characters }: Props) {
               alt="Next"
               width={24}
               height={24}
+              style={{ width: 24, height: 24 }}
             />
           </button>
         </div>

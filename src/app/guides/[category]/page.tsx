@@ -5,6 +5,7 @@ import rawCategoryMeta from '@/data/guides/categories.json';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import SortSelector from '@/app/components/SortSelector';
 
 
 type Guide = {
@@ -78,9 +79,12 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
     return <UnderConstruction />;
   }
 
-  filtered.sort((a, b) =>
-    new Date(b.last_updated).getTime() - new Date(a.last_updated).getTime()
-  );
+  filtered.sort((a, b) => {
+  const dateDiff = new Date(b.last_updated).getTime() - new Date(a.last_updated).getTime();
+  if (dateDiff !== 0) return dateDiff;
+  return b.title.localeCompare(a.title); // Z → A
+});
+
 
 
   return (
@@ -109,18 +113,9 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
       </div>
       <div className="mb-4 flex justify-end items-center gap-2">
         <label className="text-sm text-white">Sort by:</label>
-        <select
-          id="sortSelector"
-          className="bg-neutral-800 text-white border border-neutral-700 rounded px-2 py-1 text-sm"
-        >
-          <option value="date-desc">Date (Newest)</option>
-          <option value="date-asc">Date (Oldest)</option>
-          <option value="title-asc">Title A→Z</option>
-          <option value="title-desc">Title Z→A</option>
-          <option value="author-asc">Author A→Z</option>
-          <option value="author-desc">Author Z→A</option>
-        </select>
+        <SortSelector />
       </div>
+
 
 
       <GuideCardGrid items={filtered} />
@@ -146,34 +141,6 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
               description: g.description,
             })),
           }),
-        }}
-      />
-      <script
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: `
-      document.getElementById('sortSelector')?.addEventListener('change', (e) => {
-        const value = e.target.value;
-        const [key, order] = value.split('-');
-        const container = document.querySelector('[data-guide-grid]');
-        if (!container) return;
-
-        const cards = Array.from(container.children);
-        cards.sort((a, b) => {
-          const va = a.dataset[key];
-          const vb = b.dataset[key];
-          if (key === 'date') {
-            return order === 'asc' ? Number(va) - Number(vb) : Number(vb) - Number(va);
-          } else {
-            return order === 'asc'
-              ? va.localeCompare(vb)
-              : vb.localeCompare(va);
-          }
-        });
-
-        cards.forEach((el) => container.appendChild(el));
-      });
-    `,
         }}
       />
     </div>

@@ -13,10 +13,10 @@ export type Geas = {
 
 type Props = {
   geas: Geas
-  type: "bonus"|"malus"
+  type: "bonus" | "malus"
 }
 
-export default function GeasCard({ geas,type="bonus" }: Props) {  
+export default function GeasCard({ geas, type = "bonus" }: Props) {
   const color = type === "bonus" ? "blue" : "red"
   const iconClass = `geas-icon ${color}`
   const level = geas.bg
@@ -25,15 +25,17 @@ export default function GeasCard({ geas,type="bonus" }: Props) {
     <HoverCard.Root openDelay={0} closeDelay={0}>
       <HoverCard.Trigger asChild>
         <button
-    type="button"
-    className="relative w-10 h-10 rounded overflow-hidden cursor-pointer shrink-0"
-  >
+          type="button"
+          className="relative w-10 h-10 rounded overflow-hidden cursor-pointer shrink-0"
+        >
           {/* Image de fond */}
           {geas.bg && (
             <Image
               src={`/images/ui/geas/GD_Slot_Bg_0${geas.bg}.webp`}
               alt=""
-              fill
+              width={40}
+              height={40}
+              style={{ width: 40, height: 40 }}
               className="object-cover"
             />
           )}
@@ -51,8 +53,9 @@ export default function GeasCard({ geas,type="bonus" }: Props) {
               <Image
                 src={`/images/ui/geas/GD_Geis_${geas.image}.webp`}
                 alt={geas.image}
-                fill
-                sizes='32px'
+                width={32}
+                height={32}
+                style={{ width: 32, height: 32 }}
                 className={`object-contain ${iconClass}`}
               />
             </div>
@@ -72,7 +75,9 @@ export default function GeasCard({ geas,type="bonus" }: Props) {
               <Image
                 src={`/images/ui/geas/GD_Slot_Bg_0${geas.bg}.webp`}
                 alt=""
-                fill
+                width={40}
+                height={40}
+                style={{ width: 40, height: 40 }}
                 className="object-cover"
               />
             )}
@@ -86,8 +91,9 @@ export default function GeasCard({ geas,type="bonus" }: Props) {
                 <Image
                   src={`/images/ui/geas/GD_Geis_${geas.image}.webp`}
                   alt={geas.image}
-                  fill
-                  sizes='32px'
+                  width={32}
+                  height={32}
+                  style={{ width: 32, height: 32 }}
                   className={`object-contain ${iconClass}`}
                 />
               </div>

@@ -66,6 +66,12 @@
         "icon": "SC_Buff_Stat_Speed"
     },
     {
+        "name": "BT_STAT|ST_SPEED_IR",
+        "label": "Increased Speed",
+        "description": "Increased Speed by 30%. (Irremovable)",
+        "icon": "IG_Buff_Stat_Speed_Interruption"
+    },
+    {
         "name": "BT_STAT|ST_BUFF_CHANCE",
         "label": "Increased Effectiveness",
         "description": "Increased Effectiveness by 100%.",
@@ -143,6 +149,12 @@
         "label": "Enhancement",
         "description": "Increases the efficiency of buff that increases stats by 100%. (Irremovable)",
         "icon": "IG_Buff_Enhance_Interruption"
+    },
+    {
+        "name": "IG_Buff_BuffdurationIncrease",
+        "label": "Increase Buff Duration",
+        "description": "Increased duration of beneficial effects granted on target",
+        "icon": "IG_Buff_BuffdurationIncrease"
     },
     {
         "name": "SYS_BUFF_REVENGE",
@@ -227,6 +239,12 @@
         "label": "Random Increased Stat Effect",
         "description": "Grants Random increased stat effect(s) to the bearer for 2 turn(s). Attack, Critical Damage, Accuracy, Speed",
         "icon": "IG_Buff_Effect_Random_Buff"
+    },
+    {
+        "name": "BT_DAMGE_TAKEN",
+        "label": "Reduce Damage Taken",
+        "description": "Reduces damage taken by a certain ratio",
+        "icon": "IG_Buff_Dmg_Reduce_Interruption"
     },
     {
         "name": "UNIQUE_ARIEL",
