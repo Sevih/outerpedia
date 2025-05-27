@@ -53,7 +53,7 @@
       "cd": null,
       "debuff": [
         "BT_MARKING",
-        "BT_AGGRO"
+        "BT_AGGRO","IG_Buff_DeBuffdurationIncrease"
       ],
       "description": [
         "Attacks an enemy, and inflicts <color=#28d9ed>Marked</color> on the caster for <color=#28d9ed>[Buff_T_2000094_1_1] turn(s)</color>.\\nWhen the caster is granted <color=#28d9ed>Radiant Will</color>, changes to <color=#ffd732>Help Me, Master!</color>.\\n\\n<color=#ffd732>Help Me, Master!</color>\\nAttacks an enemy and inflicts <color=#28d9ed>Taunted</color> on the target for <color=#28d9ed>[Buff_T_2000094_1_2] turn(s)</color>. Increases damage dealt."

@@ -52,7 +52,7 @@
       },
       "cd": null,
       "debuff": [
-        "BT_DOT_LIGHTNING"
+        "BT_DOT_LIGHTNING","IG_Buff_DeBuffdurationIncrease"
       ],
       "description": [
         "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000082_1_1]</color> chance to inflict <color=#28d9ed>Shocked</color> for <color=#28d9ed>[Buff_T_2000082_1_1] turn(s)</color>.\\nDamage dealt increases when the caster is granted a buff."

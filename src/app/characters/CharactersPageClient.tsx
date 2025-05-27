@@ -80,7 +80,7 @@ const orderedDebuffGroups = [
       "BT_COOL_CHARGE", "BT_ACTION_GAUGE", "BT_AP_CHARGE", "BT_SEAL_COUNTER", "BT_SEALED", "BT_SEALED_IR",
       "BT_SEALED_RESURRECTION", "BT_SEAL_ADDITIVE_ATTACK",
 
-      "BT_STATBUFF_CONVERT_TO_STATDEBUFF", "BT_STEAL_BUFF", "BT_REMOVE_BUFF", "IG_Buff_BuffdurationReduce",
+      "BT_STATBUFF_CONVERT_TO_STATDEBUFF", "BT_STEAL_BUFF", "BT_REMOVE_BUFF", "IG_Buff_BuffdurationReduce","IG_Buff_DeBuffdurationIncrease",
       "BT_SEALED_RECEIVE_HEAL", "BT_WG_DMG", "BT_FIXED_DAMAGE"
     ]
   },

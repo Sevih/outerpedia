@@ -269,7 +269,12 @@
         "description": "Reduced duration of beneficial effects granted on target",
         "icon": "IG_Buff_BuffdurationReduce"
     },
-    
+    {
+        "name": "IG_Buff_DeBuffdurationIncrease",
+        "label": "Increase Debuff Duration",
+        "description": "Increased duration of detrimental effects granted on target",
+        "icon": "IG_Buff_BuffdurationIncrease"
+    },    
     {
         "name": "BT_SEALED_RESURRECTION",
         "label": "Extinction",
