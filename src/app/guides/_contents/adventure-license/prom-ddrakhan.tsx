@@ -11,7 +11,7 @@ const teams = {
     icon: 'SC_Buff_Invincible.webp',
     setup: [
       ['Monad Eva', 'Leo'],
-      ['Gnosis Nella', 'Mene'],
+      ['Nella', 'Mene'],
       ['Gnosis Nella', 'Tamamo-no-Mae'],
       ['Iota', 'Laplace', 'Demiurge Stella']
     ]
