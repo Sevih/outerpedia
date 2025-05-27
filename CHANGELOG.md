@@ -1,3 +1,7 @@
+## 🛠 Knight of Hope Meteos guide (2025-05-27)
+- Learn More [here](/guides/joint-boss/koh-meteos)
+
+
 ## 🛠 Adventure Guide Release (2025-05-26)
 - Guides are grouped by season (S1, S2, S3...) and follow the in-game progression
 - Spoiler-Free mode is enabled by default

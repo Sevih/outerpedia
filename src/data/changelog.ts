@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-27",
+    title: "Knight of Hope Meteos guide",
+    type: "update",
+    content: [
+      "- Learn More [here](/guides/joint-boss/koh-meteos)",
+    ],
+  },
+  {
     date: "2025-05-26",
     title: "Adventure Guide Release",
     type: "update",

@@ -3,7 +3,7 @@
     "name": "Speed",
     "type": "Set",
     "class": null,
-    "count": 60,
+    "count": 61,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -58,6 +58,7 @@
       "Ryu Lion",
       "Saeran",
       "Skadi",
+      "Sofia",
       "Stella",
       "Sterope",
       "Tamamo-no-Mae",
@@ -245,6 +246,26 @@
     ]
   },
   {
+    "name": "Surefire Javelin",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 12,
+    "characters": [
+      "Aer",
+      "Ais Wallenstein",
+      "Beth",
+      "Delta",
+      "Drakhan",
+      "Francesca",
+      "Noa",
+      "Poolside Trickster Regina",
+      "Rey",
+      "Rhona",
+      "Sofia",
+      "Vlada"
+    ]
+  },
+  {
     "name": "Rampaging Caracal",
     "type": "Weapon",
     "class": "Ranger",
@@ -262,25 +283,6 @@
       "Stella",
       "Tamara",
       "Valentine"
-    ]
-  },
-  {
-    "name": "Surefire Javelin",
-    "type": "Weapon",
-    "class": "Striker",
-    "count": 11,
-    "characters": [
-      "Aer",
-      "Ais Wallenstein",
-      "Beth",
-      "Delta",
-      "Drakhan",
-      "Francesca",
-      "Noa",
-      "Poolside Trickster Regina",
-      "Rey",
-      "Rhona",
-      "Vlada"
     ]
   },
   {
@@ -306,7 +308,7 @@
     "name": "Violent Sledgehammer",
     "type": "Weapon",
     "class": "Striker",
-    "count": 9,
+    "count": 10,
     "characters": [
       "Ais Wallenstein",
       "Caren",
@@ -314,6 +316,7 @@
       "Demiurge Stella",
       "Epsilon",
       "Gnosis Dahlia",
+      "Idith",
       "Kanon",
       "Rhona",
       "Vlada"
@@ -450,6 +453,21 @@
     ]
   },
   {
+    "name": "Clock Up",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 7,
+    "characters": [
+      "Beth",
+      "Caren",
+      "Drakhan",
+      "Francesca",
+      "Gnosis Dahlia",
+      "Kanon",
+      "Sofia"
+    ]
+  },
+  {
     "name": "Blue-Gems White Ring",
     "type": "Amulet",
     "class": "Defender",
@@ -465,17 +483,17 @@
     ]
   },
   {
-    "name": "Clock Up",
-    "type": "Amulet",
-    "class": "Striker",
+    "name": "Revenge",
+    "type": "Set",
+    "class": null,
     "count": 6,
     "characters": [
-      "Beth",
-      "Caren",
-      "Drakhan",
-      "Francesca",
+      "Ais Wallenstein",
+      "Demiurge Stella",
+      "Ember",
       "Gnosis Dahlia",
-      "Kanon"
+      "Idith",
+      "Vlada"
     ]
   },
   {
@@ -490,19 +508,6 @@
       "Luna",
       "Sterope",
       "Veronica"
-    ]
-  },
-  {
-    "name": "Revenge",
-    "type": "Set",
-    "class": null,
-    "count": 5,
-    "characters": [
-      "Ais Wallenstein",
-      "Demiurge Stella",
-      "Ember",
-      "Gnosis Dahlia",
-      "Vlada"
     ]
   },
   {
@@ -565,6 +570,18 @@
       "Mene",
       "Monad Eva",
       "Saeran"
+    ]
+  },
+  {
+    "name": "A Prima Vista",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 4,
+    "characters": [
+      "Drakhan",
+      "Gnosis Dahlia",
+      "Idith",
+      "Vlada"
     ]
   },
   {
@@ -632,17 +649,6 @@
       "Christina",
       "Kappa",
       "Leo"
-    ]
-  },
-  {
-    "name": "A Prima Vista",
-    "type": "Amulet",
-    "class": "Striker",
-    "count": 3,
-    "characters": [
-      "Drakhan",
-      "Gnosis Dahlia",
-      "Vlada"
     ]
   },
   {
@@ -724,6 +730,16 @@
     "characters": [
       "Demiurge Vlada",
       "Gnosis Beth"
+    ]
+  },
+  {
+    "name": "Death Hold",
+    "type": "Amulet",
+    "class": null,
+    "count": 2,
+    "characters": [
+      "Idith",
+      "Sofia"
     ]
   },
   {

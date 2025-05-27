@@ -3280,6 +3280,44 @@
       ]
     }
   },
+  "idith": {
+    "Scaling": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death Hold",
+          "mainStat": [
+            "PEN%",
+            "CHD%"
+          ]
+        },
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "DEF%",
+            "RES"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "HP",
+        "DEF"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
+    }
+  },
   "iota": {
     "PvP": {
       "weaponSub": [
@@ -5557,6 +5595,42 @@
         "ACC",
         "ATK",
         "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "sofia": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death Hold",
+          "mainStat": [
+            "PEN%",
+            "CHD%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
       ],
       "armorSets": [
         "Speed"
