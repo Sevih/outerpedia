@@ -154,7 +154,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
     let recoData = null
 
 
-    if (character.Rarity === 3) {
+  
       try {
         const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
         const res = await fetch(`${baseUrl}/api/reco/${recoFile}`);
@@ -169,7 +169,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
       } catch {
         recoData = null;
       }
-    }
+    
     console.timeEnd(label);
     // Fonction utilitaire à placer au-dessus du return :
     function renderMainStat(stat: string) {
