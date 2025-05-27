@@ -103,7 +103,6 @@ export default function CarouselSlot({ characters }: Props) {
                 className={`carousel__cell ${isActive ? 'is-active' : ''}`}
               >
                 <div className="relative w-full h-full">
-                  {isActive && (
                     <Link
                       href={`/characters/${slug}`}
                       prefetch={false}
@@ -111,7 +110,6 @@ export default function CarouselSlot({ characters }: Props) {
                     >
                       <span className="sr-only">{data.Fullname}</span>
                     </Link>
-                  )}
 
                   <Image
                     src={`/images/characters/portrait/CT_${data.ID}.webp`}
