@@ -32,7 +32,7 @@ export default function DemiurgeDrakhanPromoGuide() {
       <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Team Suggestions</h3>
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li><CharacterLinkCard name="Monad Eva" /> / <CharacterLinkCard name="Leo" /></li>
-        <li><CharacterLinkCard name="Gnosis Nella" /> / <CharacterLinkCard name="Mene" /></li>
+        <li><CharacterLinkCard name="Nella" /> / <CharacterLinkCard name="Mene" /></li>
         <li><CharacterLinkCard name="Tamamo-no-Mae" /> / <CharacterLinkCard name="Gnosis Nella" /></li>
         <li><CharacterLinkCard name="Iota" />, <CharacterLinkCard name="Laplace" />, <CharacterLinkCard name="Demiurge Stella" /></li>
       </ul>
