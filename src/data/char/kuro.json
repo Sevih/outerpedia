@@ -130,7 +130,7 @@
       "buff": [],
       "cd": "5",
       "debuff": [
-        "BT_STATBUFF_CONVERT_TO_STATDEBUFF","BT_FIXED_DAMAGE"
+        "BT_STATBUFF_CONVERT_TO_STATDEBUFF","BT_FIXED_DAMAGE","IG_Buff_DeBuffdurationIncrease"
       ],
       "description": [
         "Attacks all enemies. Has a <color=#28d9ed>[Buff_C_2000079_3_1]</color> chance to inflict <color=#28d9ed>buff reversal</color> on the target, and ignores Immunity to increase debuff durations by <color=#28d9ed>[Buff_V_2000079_3_2] turn(s)</color>. After attacking, when the target is not inflicted with dispellable <color=#28d9ed>reduced stat effects</color>, deals <color=#28d9ed>[Buff_V_2000079_3_3]</color> of the target's Max Health as fixed damage."
