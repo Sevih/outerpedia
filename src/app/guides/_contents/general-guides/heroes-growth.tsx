@@ -262,9 +262,9 @@ export default function HeroGrowthGuide() {
 </p>
             <ul>
                 <li>Gear comes in 4 rarities and can be upgraded up to +10</li>
-                <li>Weapons and Amulets may have class restrictions (e.g., only usable by Mages)</li>
+                <li>Legendary  Weapons and Amulets have class restrictions (e.g., only usable by Mages)</li>
                 <li>Armors provide set bonuses when equipped together</li>
-                <li>Gear can be reforged to enhance substats</li>
+                <li>Gear can be reforged to add substats (up to 4 total) or enhance existing ones if already at 4</li>
                 <li>Breakthrough increases main stats and enhance passives</li>
                 <li>Main stats cannot be rerolled</li>
                 <li>Substats can be rerolled using Stat Change options</li>
