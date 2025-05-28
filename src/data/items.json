@@ -1,0 +1,303 @@
+[
+  {
+    "name": "Unlimited Restaurant Voucher",
+    "rarity": "legendary",
+    "description": "Upon usage, increase the selected hero's level to 100."
+  },
+  {
+    "name": "Book of Evolution",
+    "rarity": "legendary",
+    "description": "Upon usage, increase the selected hero's Upgrade Stage to 6"
+  },
+  {
+    "name": "Oath of Determination",
+    "rarity": "legendary",
+    "description": "Upon usage, increase the selected hero's Trust Level to 10"
+  },
+  {
+    "name": "Sandwich",
+    "rarity": "normal",
+    "description": "Increases experience by 250 when used to enhance a hero."
+  },
+  {
+    "name": "Cake Slice",
+    "rarity": "superior",
+    "description": "Increases experience by 600 when used to enhance a hero."
+  },
+  {
+    "name": "Prosciutto",
+    "rarity": "epic",
+    "description": "Increases experience by 2 500 when used to enhance a hero."
+  },
+  {
+    "name": "Steak Dish",
+    "rarity": "legendary",
+    "description": "Increases experience by 8 000 when used to enhance a hero."
+  }
+  ,
+  {
+    "name": "Light Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Light energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  }
+  ,
+  {
+    "name": "Light Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Light energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  }
+  ,
+  {
+    "name": "Light Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Light energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  }
+  ,
+  {
+    "name": "Refined Light Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Light Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "Dark Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Dark energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  }
+  ,
+  {
+    "name": "Dark Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Dark energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  }
+  ,
+  {
+    "name": "Dark Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Dark energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  }
+  ,
+  {
+    "name": "Refined Dark Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Dark Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "Fire Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Fire energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  }
+  ,
+  {
+    "name": "Fire Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Fire energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  }
+  ,
+  {
+    "name": "Fire Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Fire energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  }
+  ,
+  {
+    "name": "Refined Fire Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Fire Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "Earth Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Earth energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  }
+  ,
+  {
+    "name": "Earth Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Earth energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  }
+  ,
+  {
+    "name": "Earth Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Earth energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  }
+  ,
+  {
+    "name": "Refined Earth Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Earth Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "Water Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Water energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  }
+  ,
+  {
+    "name": "Water Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Water energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  }
+  ,
+  {
+    "name": "Water Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Water energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  }
+  ,
+  {
+    "name": "Refined Water Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Water Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "USB Drive",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Portable Gaming Device",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Smartphone",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Dungeon Core Fragment",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Collector's Coin",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Elegant Teacup",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Decorative Chest Armor",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Noble's Ceremonial Sword",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Mana Potion",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Fay Dust",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Witch's Cauldron",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Magic Textbook",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Paper Crane",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Crystal Orb",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Lion Statue",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Dreamcatcher",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Berry",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Wildflower",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Phantom Bird's Egg",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  }
+  ,
+  {
+    "name": "Leaf of World Tree",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Basic Skill Manual",
+    "rarity": "superior",
+    "description": "Contains basic knowledge on skill use. Can be used to enhance skills."
+  },
+  {
+    "name": "Intermediate Skill Manual",
+    "rarity": "epic",
+    "description": "Contains advanced knowledge on skill use. Can be used to enhance skills."
+  },
+  {
+    "name": "Professional Skill Manual",
+    "rarity": "legendary",
+    "description": "Contains the knowledge of masters who reached the pinnacle of skill use. Can be used to enhance skills."
+  },
+  {
+    "name": "Purple Stardust",
+    "rarity": "legendary",
+    "description": "A rare material used for enhancing Talisman."
+  },
+  {
+    "name": "Blue Stardust",
+    "rarity": "legendary",
+    "description": "A material used for enhancing Talisman."
+  },
+  {
+    "name": "Purple Memory Stone",
+    "rarity": "legendary",
+    "description": "A rare material used for enhancing Exclusive Equipment."
+  },
+  {
+    "name": "Blue Memory Stone",
+    "rarity": "legendary",
+    "description": "A material used for enhancing Exclusive Equipment."
+  }
+]

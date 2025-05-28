@@ -16,6 +16,7 @@ type Guide = {
   icon: string;
   last_updated: string;
   author: string;
+  hide?: boolean;
 };
 
 const categoryMeta: Record<string, {
@@ -64,9 +65,10 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
 
   const meta = categoryMeta[category];
   if (!meta) return <UnderConstruction />;
-  const filtered = Object.entries(guides)
-    .filter(([, g]) => g.category === category)
-    .map(([slug, g]: [string, Guide]) => ({
+  const isDev = process.env.NODE_ENV === 'development';
+  const filtered = Object.entries(guides as Record<string, Guide>)
+    .filter(([, g]) => g.category === category && (isDev || g.hide !== true))
+    .map(([slug, g]) => ({
       slug,
       title: g.title,
       description: g.description,
@@ -75,6 +77,7 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
       last_updated: g.last_updated,
       author: g.author,
     }));
+
 
   if (filtered.length === 0) {
     return <UnderConstruction />;

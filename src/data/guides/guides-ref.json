@@ -592,5 +592,35 @@
     "last_updated": "2025-05-26",
     "author": "Sevih",
     "second_image": "S3-7-10-2"
+  },
+  "heroes-growth": {
+    "category": "general-guides",
+    "title": "Hero Growth",
+    "description": "",
+    "icon": "heroes-growth",
+    "second_image": "heroes-growth-2",
+    "last_updated": "2025-05-28",
+    "author": "Sevih",
+    "hide": true
+  },
+  "equipment": {
+    "category": "general-guides",
+    "title": "Equipment",
+    "description": "",
+    "icon": "equipment",
+    "second_image": "equipment-2",
+    "last_updated": "2025-05-28",
+    "author": "Sevih",
+    "hide": true
+  },
+  "quirk": {
+    "category": "general-guides",
+    "title": "Quirk",
+    "description": "",
+    "icon": "quirk",
+    "second_image": "quirk-2",
+    "last_updated": "2025-05-28",
+    "author": "Kilvanoshei",
+    "hide": true
   }
 }
