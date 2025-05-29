@@ -19,15 +19,13 @@ const staticPages = [
   '/',
   '/characters',
   '/equipments',
+  '/tierlist',
   '/guides',
   '/changelog',
   '/tools',
-  '/about',
   '/legal',
 ];
 
-// 📄 Pages tierlist spécifiques
-const tierlistTabs = ['/tierlist/dps', '/tierlist/support', '/tierlist/sustain'];
 
 // 📄 Pages personnages
 const characterPages = charFiles.map((filename) => {
@@ -41,7 +39,6 @@ const toolPages = Object.keys(TOOL_METADATA).map((slug) => `/${slug}`);
 // 🧾 Construction du sitemap
 const urls = [
   ...staticPages.map((page) => ({ loc: `${domain}${page}` })),
-  ...tierlistTabs.map((page) => ({ loc: `${domain}${page}` })),
   ...toolPages.map((page) => ({ loc: `${domain}${page}` })),
   ...characterPages.map((page) => ({ loc: `${domain}${page}` })),
   ...Object.entries(guideRef).map(([slug, data]) => ({
