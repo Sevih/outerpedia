@@ -55,14 +55,14 @@ export default function TierListPageWrapper() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
         <TierListGlowCard
-          href="/tools/tierlistpve"
+          href="/tierlistpve"
           title="Tier List – PvE"
           description="PvE performance rankings across all content."
           image="/images/ui/nav/pve.png"
           type="pve"
         />
         <TierListGlowCard
-          href="/tools/tierlistpvp"
+          href="/tierlistpvp"
           title="Tier List – PvP"
           description="Performance-based Arena evaluation."
           image="/images/ui/nav/pvp.webp"
