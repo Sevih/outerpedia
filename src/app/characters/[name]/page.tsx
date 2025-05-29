@@ -60,15 +60,12 @@ export async function generateMetadata(context: { params: Promise<{ name: string
     const raw = await fs.readFile(filePath, 'utf-8');
     const character: Character = JSON.parse(raw);
 
-    const title = `${character.Fullname} - Outerpedia`;
+    const title = `Character Details : ${character.Fullname} - Outerpedia`;
     const image = `https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.png`;
     const url = `https://outerpedia.com/characters/${name}`;
 
-    const classData = classDataRaw as ClassDataMap;
-    const subclassDescription =
-      classData?.[character.Class]?.subclasses?.[character.SubClass]?.description ?? '';
+    const description = `${character.Element} ${character.Class} ${character.Fullname} overview — skill breakdown and upgrade priority, ranking, exclusive equipment, and recommended sets.`;
 
-    const description = `${character.Fullname} is a ${character.Element} ${character.Class}. ${subclassDescription}`;
 
     return {
       title,
@@ -76,7 +73,7 @@ export async function generateMetadata(context: { params: Promise<{ name: string
       keywords: [
         'Outerplane', 'Outerpedia', character.Fullname,
         `${character.Fullname} Outerplane`, `${character.Fullname} Build`, `${character.Fullname} Guide`,
-        `${character.Class} Class`, `${character.SubClass} Subclass`, `${character.Element} Element`
+        `${character.Class}`, `${character.SubClass}`, `${character.Element}`, `${character.Fullname} pve tier`, `${character.Fullname} pvp tier`
       ],
       alternates: {
         canonical: url,
@@ -154,22 +151,22 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
     let recoData = null
 
 
-  
-      try {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-        const res = await fetch(`${baseUrl}/api/reco/${recoFile}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.status !== 'empty') {
-            recoData = data;
-          } else {
-            recoData = null;
-          }
+
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+      const res = await fetch(`${baseUrl}/api/reco/${recoFile}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.status !== 'empty') {
+          recoData = data;
+        } else {
+          recoData = null;
         }
-      } catch {
-        recoData = null;
       }
-    
+    } catch {
+      recoData = null;
+    }
+
     console.timeEnd(label);
     // Fonction utilitaire à placer au-dessus du return :
     function renderMainStat(stat: string) {
@@ -188,7 +185,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
       <>
         <CharacterJsonLd
           name={character.Fullname}
-          description={`${character.Fullname} is a ${character.Element} ${character.Class}. ${subclassInfo?.description || ''}`}
+          description={`${character.Element} ${character.Class} ${character.Fullname} overview — skill breakdown and upgrade priority, ranking, exclusive equipment, and recommended sets.`}
           image={`https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.webp`}
           url={`https://outerpedia.com/characters/${name}`}
           element={character.Element}
@@ -225,6 +222,9 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             </div>
 
             {/* Détails à droite : nom, rareté, classe, etc. */}
+            <div className="sr-only">
+              <h1>Character Details : {character.Fullname} - Outerpedia</h1>
+            </div>
             <div className="space-y-4"><CharacterNameDisplayBig fullname={character.Fullname} />
 
               {/* Rareté sous forme d'étoiles */}
@@ -609,18 +609,18 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               </div>
             </div>
 
-{/* Skill Priority & Sweetspots */} 
-{character.skill_priority && (
-  <SkillPriorityTabs
-    priority={character.skill_priority}
-    characterId={character.ID}
-    skillNames={{
-      First: character.skills.SKT_FIRST?.name,
-      Second: character.skills.SKT_SECOND?.name,
-      Ultimate: character.skills.SKT_ULTIMATE?.name,
-    }}
-  />
-)}
+            {/* Skill Priority & Sweetspots */}
+            {character.skill_priority && (
+              <SkillPriorityTabs
+                priority={character.skill_priority}
+                characterId={character.ID}
+                skillNames={{
+                  First: character.skills.SKT_FIRST?.name,
+                  Second: character.skills.SKT_SECOND?.name,
+                  Ultimate: character.skills.SKT_ULTIMATE?.name,
+                }}
+              />
+            )}
 
 
             {/* Chain & Dual en-dessous */}

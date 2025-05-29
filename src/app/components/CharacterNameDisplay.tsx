@@ -93,14 +93,14 @@ export function CharacterNameDisplayBig({ fullname }: Props) {
   return (
     <div className="flex flex-col text-white leading-tight mb-2">
       {/* ICI on utilise un vrai h1 pour le nom principal */}
-      <h1 className={`${nameSize} font-bold custom-text-shadow`}>
+      <h2 className={`${nameSize} font-bold custom-text-shadow h1_custom`}>
         {prefix && (
         <div className={`${prefixSize} custom-text-shadow mb-[-2px]`}>
           {prefix}
         </div>
       )}
         {name}
-      </h1>
+      </h2>
     </div>
   );
 }
