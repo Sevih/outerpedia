@@ -9,17 +9,35 @@ const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 // SEO fallback (servira si aucune page ne définit son propre <head>)
 export const metadata: Metadata = {
-  title: 'Outerpedia – Outerplane Wiki & Guide',
-  description: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
+  title: 'Outerpedia – Outerplane Wiki, Guides, Tier List, Builds & Equipment Database',
+  description:
+    'Outerpedia is your go-to wiki for Outerplane: browse character builds, tier lists, tools, guides and strategy content.',
   icons: {
     icon: '/favicon.ico',
     apple: '/images/icons/icon-192x192.png',
     shortcut: '/images/icons/icon-512x512.png',
   },
   manifest: '/manifest.json',
+  keywords: [
+    'outerplane',
+    'outerpedia',
+    'outerplane wiki',
+    'outerplane guide',
+    'outerplane tier list',
+    'character builds',
+    'gear usage statistics',
+    'gear usage finder',
+    'mobile rpg database',
+    'turn-based rpg',
+    'outerplane builds',
+    'outerplane exclusive equipment',
+    'outerplane gear sets',
+  ],
+
   openGraph: {
-    title: 'Outerpedia – Outerplane Wiki & Guide',
-    description: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
+    title: 'Outerpedia – Outerplane Tier List, Builds & Equipment Database',
+    description:
+      'Discover characters, builds, tools and strategy guides for Outerplane. All data organized, searchable, and community-maintained.',
     url: 'https://outerpedia.com/',
     type: 'website',
     siteName: 'Outerpedia',
@@ -35,9 +53,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Outerpedia – Outerplane Wiki & Guide',
-    description: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
+    title: 'Outerpedia – Outerplane Wiki & Strategy Guide',
+    description:
+      'Browse character builds, tier lists, gear effects, tools and strategy guides for Outerplane. All in one clean and fast site.',
     images: ['https://outerpedia.com/images/ui/og_home.jpg'],
+  },
+  alternates: {
+    canonical: 'https://outerpedia.com/',
   },
 };
 
@@ -54,8 +76,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head suppressHydrationWarning>
-        <meta property="fb:app_id" content="0" />
+      <head suppressHydrationWarning>        
       </head>
       <body className={`${inter.className} text-white`}>
         <div className="flex flex-col min-h-screen">

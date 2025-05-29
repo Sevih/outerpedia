@@ -14,6 +14,24 @@ const categories = [
 export default function Home() {
   return (
     <>
+
+    {/* SEO H1 + intro text */}
+<div className="sr-only">
+  <h1>Outerpedia – Wiki, Guides, Builds and Tier List for Outerplane</h1>
+</div>
+
+<section className="sr-only max-w-3xl mx-auto mt-6 px-4 md:px-0 text-center text-sm text-gray-400 space-y-3">
+  <p>
+    Welcome to <strong>Outerpedia</strong>, a community-driven wiki and database for <strong>Outerplane</strong>, the strategic turn-based mobile RPG.
+  </p>
+  <p>
+    Browse detailed <strong>character builds</strong>, <strong>gear effects</strong>, <strong>tier lists</strong>, <strong>exclusive equipment</strong>, and <strong>adventure guides</strong> — all carefully organized and updated by passionate players.
+  </p>
+  <p>
+    Join our <Link href="https://discord.gg/outerplane" className="underline text-cyan-400">community Discord</Link> to share team comps, ask questions, or theorycraft together.
+  </p>
+</section>
+
       <WarningBanner />
 
       <div className="flex flex-col md:flex-row justify-between gap-8 mb-16 px-4 md:px-16">
