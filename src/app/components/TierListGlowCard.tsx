@@ -23,7 +23,7 @@ export function TierListGlowCard({ href, title, description, image, type }: Prop
         <div className="relative w-[130px] h-[180px]">
           <Image
             src="/images/ui/CLG_Ruins_Frame.png"
-            alt=""
+            alt="back Frame"
             fill
             priority
             className="object-contain z-0 pointer-events-none select-none"

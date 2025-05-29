@@ -143,7 +143,7 @@ img.geas-icon.red {
       -1px -1px 0 #000;
   }
 
-  .h1_custom {
+  h1:not(.sr-only),.h1_custom {
     position: relative;
     font-family: 'Rajdhani';
     font-size: 3rem;
@@ -157,7 +157,7 @@ img.geas-icon.red {
     overflow: hidden;
   }
   
-  .h1_custom::after {
+  h1:not(.sr-only)::after,.h1_custom::after {
     content: '';
     position: absolute;
     bottom: 0;
