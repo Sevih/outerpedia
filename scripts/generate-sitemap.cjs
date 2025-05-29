@@ -26,7 +26,6 @@ const staticPages = [
   '/legal',
 ];
 
-
 // 📄 Pages personnages
 const characterPages = charFiles.map((filename) => {
   const slug = filename.replace('.json', '');
