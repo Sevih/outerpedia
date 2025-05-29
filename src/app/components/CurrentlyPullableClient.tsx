@@ -97,12 +97,11 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
 
 
         {/* Carte spéciale Discord toujours présente */}
-        <Link key="discord" href="https://discord.gg/keGhVQWsHv" target="_blank" rel="noopener noreferrer">
-          <div className="flex flex-col items-center gap-2">
-
-            <div className="bg-[#5865F2] hover:bg-[#4752c4] transition-all duration-300 transform hover:scale-105 rounded-xl overflow-hidden shadow-md w-[120px] h-[260px] flex flex-col items-center p-2 group">
+        <div className="flex flex-col items-center space-y-1">
+          <Link key="discord" href="https://discord.gg/keGhVQWsHv" target="_blank" rel="noopener noreferrer">
+            <div className="bg-[#5865F2] hover:bg-[#4752c4] transition-all duration-300 transform hover:scale-105 rounded-xl overflow-hidden shadow-md w-[120px] h-[231px] flex flex-col items-center p-2 group">
               <div className="text-sm font-semibold text-white">Join Us!</div>
-              <div className="relative w-full h-48 flex flex-col items-center justify-center">
+              <div className="relative w-full flex-1 flex flex-col items-center justify-center">
                 <div className="relative w-[72px] h-[72px]">
                   <Image
                     src="/images/discord_icon.webp"
@@ -118,8 +117,9 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
                 EvaMains <br /> Discord
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
+
       </div>
     </section>
   )
