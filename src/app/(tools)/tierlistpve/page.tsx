@@ -8,14 +8,14 @@ const monthYear = getMonthYear();
 
 export const metadata: Metadata = {
   title: `Outerplane PvE Tier List – ${monthYear} Update | Outerpedia`,
-  description: `Discover the best characters ranked in Outerplane. Updated for ${monthYear} , curated by the EvaMains Discord community.`,
-  keywords: ['Outerplane', 'Tier List', 'Best Characters', `${monthYear} `, 'EvaMains', 'Outerpedia'],
+  description: `Discover the best characters ranked for PvE in Outerplane. Updated for ${monthYear} , curated by the EvaMains Discord community.`,
+  keywords: ['Outerplane', 'Tier List', 'Best Characters', `${monthYear} `, 'EvaMains', 'Outerpedia','PvE'],
   alternates: {
     canonical: 'https://outerpedia.com/tierlistpve',
   },
   openGraph: {
     title: `Outerplane PvE Tier List – ${monthYear} Update | Outerpedia`,
-    description: `Latest Outerplane character rankings as of ${monthYear} , curated by the EvaMains Discord community.`,
+    description: `Latest Outerplane character PvE rankings as of ${monthYear} , curated by the EvaMains Discord community.`,
     url: 'https://outerpedia.com/tierlistpve',
     type: 'website',
     images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     title: `Outerplane PvE Tier List – ${monthYear} | Outerpedia`,
-    description: `Best Outerplane characters ranked – ${monthYear} update curated by EvaMains Discord.`,
+    description: `Best Outerplane characters ranked for PvE – ${monthYear} update curated by EvaMains Discord.`,
     images: ['https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png'],
   },
 }
