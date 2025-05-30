@@ -9,7 +9,7 @@ const highlightable = [
     { key: 'upgrade', label: 'Upgrade Level: from 0 to +10' },
     { key: 'tier', label: 'Breakthrough: from T0 to T4' },
     { key: 'set', label: 'Set Effect or Unique Effect' },
-    { key: 'class', label: 'Class restriction (optional)' }
+    { key: 'class', label: 'Class restriction (Legendary weapons & accessories)' }
 ];
 
 function OverlayBox({ className = '' }: { className?: string }) {
