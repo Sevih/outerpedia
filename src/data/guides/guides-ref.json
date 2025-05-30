@@ -596,12 +596,11 @@
   "heroes-growth": {
     "category": "general-guides",
     "title": "Hero Growth",
-    "description": "A complete breakdown of how to power up your heroes efficiently — from leveling and upgrades to transcendence, gear, skills, and trust.",
+    "description": "A complete breakdown of how to power up your heroes efficiently, from leveling and upgrades to transcendence, gear, skills, and trust.",
     "icon": "heroes-growth",
     "second_image": "heroes-growth-2",
     "last_updated": "2025-05-28",
-    "author": "Sevih",
-    "hide": true
+    "author": "Sevih"
   },
   "gear": {
     "category": "general-guides",
@@ -610,8 +609,7 @@
     "icon": "gear",
     "second_image": "gear-2",
     "last_updated": "2025-05-28",
-    "author": "Sevih",
-    "hide": true
+    "author": "Sevih"
   },
   "quirk": {
     "category": "general-guides",

@@ -1,3 +1,8 @@
+## 🛠 Hero Growth & Gear guides (2025-05-30)
+- A complete breakdown of how to power up your heroes efficiently. Learn More [here](/guides/general-guides/heroes-growth)
+- A guide to gear types, upgrades, and how to make your equipment stronger. Learn More [here](guides/general-guides/gear)
+
+
 ## 🛠 Knight of Hope Meteos guide (2025-05-27)
 - Learn More [here](/guides/joint-boss/koh-meteos)
 

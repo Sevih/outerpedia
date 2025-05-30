@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-05-30",
+    title: "Hero Growth & Gear guides",
+    type: "update",
+    content: [
+      "- Hero Growth guide : A complete breakdown of how to power up your heroes efficiently. Learn More [here](/guides/general-guides/heroes-growth)",
+      "- Gear guide : A guide to gear types, upgrades, and how to make your equipment stronger. Learn More [here](guides/general-guides/gear)",
+    ],
+  },
+  {
     date: "2025-05-27",
     title: "Knight of Hope Meteos guide",
     type: "update",
