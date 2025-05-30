@@ -51,7 +51,7 @@ export default function BeginnerGuide() {
                     <div className="flex flex-col items-center">
                         <EquipmentCardInline
                             data={{
-                                type: 'weapon',
+                                type: 'Weapon',
                                 rarity: 'normal',
                                 star: 1,
                                 reforge: 0,
@@ -69,7 +69,7 @@ export default function BeginnerGuide() {
                     <div className="flex flex-col items-center">
                         <EquipmentCardInline
                             data={{
-                                type: 'weapon',
+                                type: 'Weapon',
                                 rarity: 'normal',
                                 star: 1,
                                 reforge: 0,
@@ -91,7 +91,7 @@ export default function BeginnerGuide() {
                     <div className="flex flex-col items-center">
                         <EquipmentCardInline
                             data={{
-                                type: 'weapon',
+                                type: 'Weapon',
                                 rarity: 'epic',
                                 star: 2,
                                 reforge: 0,
@@ -109,7 +109,7 @@ export default function BeginnerGuide() {
                     <div className="flex flex-col items-center">
                         <EquipmentCardInline
                             data={{
-                                type: 'weapon',
+                                type: 'Weapon',
                                 rarity: 'epic',
                                 star: 2,
                                 reforge: 0,
@@ -131,7 +131,7 @@ export default function BeginnerGuide() {
                     <div className="flex flex-col items-center">
                         <EquipmentCardInline
                             data={{
-                                type: 'weapon',
+                                type: 'Weapon',
                                 rarity: 'legendary',
                                 star: 1,
                                 reforge: 0,
@@ -149,7 +149,7 @@ export default function BeginnerGuide() {
                     <div className="flex flex-col items-center">
                         <EquipmentCardInline
                             data={{
-                                type: 'weapon',
+                                type: 'Weapon',
                                 rarity: 'legendary',
                                 star: 1,
                                 reforge: 0,
@@ -181,7 +181,7 @@ export default function BeginnerGuide() {
                 {/* Column: Normal (white) */}
                 <div className="flex flex-col items-center gap-4">
                     <div className="flex flex-col items-center">Surefire Javelin <EquipmentCardInline data={{
-                        type: 'weapon',
+                        type: 'Weapon',
                         rarity: 'legendary',
                         star: 6,
                         reforge: 0,
@@ -204,7 +204,7 @@ export default function BeginnerGuide() {
                     <div className="flex flex-col items-center">
                         <EquipmentCardInline
                             data={{
-                                type: 'weapon',
+                                type: 'Weapon',
                                 rarity: 'legendary',
                                 star: 6,
                                 reforge: 0,

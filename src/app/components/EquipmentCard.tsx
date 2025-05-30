@@ -3,7 +3,7 @@ import StarLevelItem from '@/app/components/StarLevelItem';
 
 type EquipmentCardProps = {
     data: {
-        type: 'weapon' | 'Accessary' | 'Helmet' | 'Gloves' | 'Armor' | 'Shoes';
+        type: 'Weapon' | 'Accessary' | 'Helmet' | 'Gloves' | 'Armor' | 'Shoes';
         rarity: 'normal' | 'superior' | 'epic' | 'legendary';
         star: number;
         reforge: number;
