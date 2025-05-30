@@ -75,127 +75,128 @@ export default function BeginnerGuide() {
                 Note:  You can convert hammers to a higher grade in your inventory with a 2:1 ratio. (e.g., 2 <ItemInlineDisplay names="Master's Hammer" /> for 1 <ItemInlineDisplay names="Artisan's Hammer" />). Converting hammers is only useful for enhancing Special Gear, there is no benefit to doing that for regular enhancing
             </p>
             <p>Example comparisons:</p>
-            <div className="flex gap-8">
-                {/* Column: Normal (white) */}
-                <div className="flex flex-col items-center gap-4">
-                    <div className="flex flex-col items-center">
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Weapon',
-                                rarity: 'normal',
-                                star: 1,
-                                reforge: 0,
-                                tier: null,
-                                level: null,
-                                class: null,
-                                effect: null
-                            }}
-                        />
-                        <div className="mt-1 flex items-center gap-1">
-                            <StatInlineTag name="ATK" color='text-white' />
-                            18
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Weapon',
-                                rarity: 'normal',
-                                star: 1,
-                                reforge: 0,
-                                tier: null,
-                                level: 10,
-                                class: null,
-                                effect: null
-                            }}
-                        />
-                        <div className="mt-1 flex items-center gap-1">
-                            <StatInlineTag name="ATK" color='text-white' />
-                            90
-                        </div>
-                    </div>
-                </div>
+<div className="flex flex-wrap justify-center gap-8">
+  {/* Column: Normal (white) */}
+  <div className="flex flex-col items-center gap-4 w-[160px] sm:w-[180px]">
+    <div className="flex flex-col items-center">
+      <EquipmentCardInline
+        data={{
+          type: 'Weapon',
+          rarity: 'normal',
+          star: 1,
+          reforge: 0,
+          tier: null,
+          level: null,
+          class: null,
+          effect: null,
+        }}
+      />
+      <div className="mt-1 flex items-center gap-1">
+        <StatInlineTag name="ATK" color="text-white" />
+        18
+      </div>
+    </div>
+    <div className="flex flex-col items-center">
+      <EquipmentCardInline
+        data={{
+          type: 'Weapon',
+          rarity: 'normal',
+          star: 1,
+          reforge: 0,
+          tier: null,
+          level: 10,
+          class: null,
+          effect: null,
+        }}
+      />
+      <div className="mt-1 flex items-center gap-1">
+        <StatInlineTag name="ATK" color="text-white" />
+        90
+      </div>
+    </div>
+  </div>
 
-                {/* Column: Epic (blue) */}
-                <div className="flex flex-col items-center gap-4">
-                    <div className="flex flex-col items-center">
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Weapon',
-                                rarity: 'epic',
-                                star: 2,
-                                reforge: 0,
-                                tier: null,
-                                level: null,
-                                class: null,
-                                effect: null
-                            }}
-                        />
-                        <div className="mt-1 flex items-center gap-1">
-                            <StatInlineTag name="ATK" color='text-white' />
-                            54
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Weapon',
-                                rarity: 'epic',
-                                star: 2,
-                                reforge: 0,
-                                tier: null,
-                                level: 10,
-                                class: null,
-                                effect: null
-                            }}
-                        />
-                        <div className="mt-1 flex items-center gap-1">
-                            <StatInlineTag name="ATK" color='text-white' />
-                            270
-                        </div>
-                    </div>
-                </div>
+  {/* Column: Epic (blue) */}
+  <div className="flex flex-col items-center gap-4 w-[160px] sm:w-[180px]">
+    <div className="flex flex-col items-center">
+      <EquipmentCardInline
+        data={{
+          type: 'Weapon',
+          rarity: 'epic',
+          star: 2,
+          reforge: 0,
+          tier: null,
+          level: null,
+          class: null,
+          effect: null,
+        }}
+      />
+      <div className="mt-1 flex items-center gap-1">
+        <StatInlineTag name="ATK" color="text-white" />
+        54
+      </div>
+    </div>
+    <div className="flex flex-col items-center">
+      <EquipmentCardInline
+        data={{
+          type: 'Weapon',
+          rarity: 'epic',
+          star: 2,
+          reforge: 0,
+          tier: null,
+          level: 10,
+          class: null,
+          effect: null,
+        }}
+      />
+      <div className="mt-1 flex items-center gap-1">
+        <StatInlineTag name="ATK" color="text-white" />
+        270
+      </div>
+    </div>
+  </div>
 
-                {/* Column: Legendary (red) */}
-                <div className="flex flex-col items-center gap-4">
-                    <div className="flex flex-col items-center">
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Weapon',
-                                rarity: 'legendary',
-                                star: 1,
-                                reforge: 0,
-                                tier: null,
-                                level: null,
-                                class: null,
-                                effect: null
-                            }}
-                        />
-                        <div className="mt-1 flex items-center gap-1">
-                            <StatInlineTag name="ATK" color='text-white' />
-                            30
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Weapon',
-                                rarity: 'legendary',
-                                star: 1,
-                                reforge: 0,
-                                tier: null,
-                                level: 10,
-                                class: null,
-                                effect: null
-                            }}
-                        />
-                        <div className="mt-1 flex items-center gap-1">
-                            <StatInlineTag name="ATK" color='text-white' />
-                            150
-                        </div>
-                    </div>
-                </div>
-            </div>
+  {/* Column: Legendary (red) */}
+  <div className="flex flex-col items-center gap-4 w-[160px] sm:w-[180px]">
+    <div className="flex flex-col items-center">
+      <EquipmentCardInline
+        data={{
+          type: 'Weapon',
+          rarity: 'legendary',
+          star: 1,
+          reforge: 0,
+          tier: null,
+          level: null,
+          class: null,
+          effect: null,
+        }}
+      />
+      <div className="mt-1 flex items-center gap-1">
+        <StatInlineTag name="ATK" color="text-white" />
+        30
+      </div>
+    </div>
+    <div className="flex flex-col items-center">
+      <EquipmentCardInline
+        data={{
+          type: 'Weapon',
+          rarity: 'legendary',
+          star: 1,
+          reforge: 0,
+          tier: null,
+          level: 10,
+          class: null,
+          effect: null,
+        }}
+      />
+      <div className="mt-1 flex items-center gap-1">
+        <StatInlineTag name="ATK" color="text-white" />
+        150
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
             <GuideHeading level={4}>Reforge</GuideHeading>
@@ -224,163 +225,147 @@ export default function BeginnerGuide() {
                 Note: You can use a duplicate item instead of Glunite (it must be the same grade, same effect, and same slot).
             </p>
             <p>Example comparisons:</p>
-            <div className="flex gap-8">
-                {/* Column: Normal (white) */}
-                <div className="flex flex-col items-center gap-4">
-                    <div className="flex flex-col items-center">Surefire Javelin <EquipmentCardInline data={{
-                        type: 'Weapon',
-                        rarity: 'legendary',
-                        star: 6,
-                        reforge: 0,
-                        tier: null,
-                        level: null,
-                        class: 'striker',
-                        effect: 11
-                    }}
-                    />
-                        <div className="mt-1 flex flex-col items-center gap-1 text-center">
-                            <div className="flex items-center gap-1">
-                                <StatInlineTag name="ATK" color='text-white' />
-                                200
-                            </div>
-                            <p>
-                                Effect: 1% of targets&apos;s Max HP
-                            </p>
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Weapon',
-                                rarity: 'legendary',
-                                star: 6,
-                                reforge: 0,
-                                tier: 4,
-                                level: null,
-                                class: 'striker',
-                                effect: 11
-                            }}
-                        />
-                        <div className="mt-1 flex flex-col items-center gap-1 text-center">
-                            <div className="flex items-center gap-1">
-                                <StatInlineTag name="ATK" color='text-white' />
-                                240
-                            </div>
-                            <p>
-                                Effect: 2% of target&apos;s Max HP
-                            </p>
-                        </div>
-                    </div>
-                </div>
+<div className="flex flex-wrap justify-center gap-8">
+  {/* Column: Surefire Javelin */}
+  <div className="flex flex-col items-center gap-4 min-w-[280px]">
+    <div className="flex flex-col items-center">
+      Surefire Javelin
+      <EquipmentCardInline data={{
+        type: 'Weapon',
+        rarity: 'legendary',
+        star: 6,
+        reforge: 0,
+        tier: null,
+        level: null,
+        class: 'striker',
+        effect: 11
+      }} />
+      <div className="mt-1 flex flex-col items-center gap-1 text-center">
+        <div className="flex items-center gap-1">
+          <StatInlineTag name="ATK" color='text-white' />
+          200
+        </div>
+        <p>Effect: 1% of target&apos;s Max HP</p>
+      </div>
+    </div>
+    <div className="flex flex-col items-center">
+      <EquipmentCardInline data={{
+        type: 'Weapon',
+        rarity: 'legendary',
+        star: 6,
+        reforge: 0,
+        tier: 4,
+        level: null,
+        class: 'striker',
+        effect: 11
+      }} />
+      <div className="mt-1 flex flex-col items-center gap-1 text-center">
+        <div className="flex items-center gap-1">
+          <StatInlineTag name="ATK" color='text-white' />
+          240
+        </div>
+        <p>Effect: 2% of target&apos;s Max HP</p>
+      </div>
+    </div>
+  </div>
 
-                {/* Column: Epic (blue) */}
-                <div className="flex flex-col items-center gap-4">
-                    <div className="flex flex-col items-center">
-                        Immunity Set
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Armor',
-                                rarity: 'legendary',
-                                star: 6,
-                                reforge: 0,
-                                tier: null,
-                                level: null,
-                                class: null,
-                                effect: 19
-                            }}
-                        />
-                        <div className="mt-1 flex flex-col items-center gap-1 text-center">
-                            <div className="flex items-center gap-1">
-                                <StatInlineTag name="DEF" color='text-white' />
-                                100
-                            </div>                            
-                            <div className="flex items-center gap-1">
-                                2p bonus : Immunity 1 turn at start
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <EquipmentCardInline data={{
-                            type: 'Armor',
-                            rarity: 'legendary',
-                            star: 6,
-                            reforge: 0,
-                            tier: 4,
-                            level: null,
-                            class: null,
-                            effect: 19
-                        }}
-                        />
-                        <div className="mt-1 flex flex-col items-center gap-1 text-center">
-                            <div className="flex items-center gap-1">
-                                <StatInlineTag name="DEF" color='text-white' />
-                                120
-                            </div>   
-                            <div className="flex items-center gap-1">
-                                2p bonus : Immunity 1 turn at start
-                            </div>
-                            <p>
-                                4p bonus : -30% damage taken
-                            </p>
-                        </div>
-                    </div>
-                </div>
+  {/* Column: Immunity Set */}
+  <div className="flex flex-col items-center gap-4 min-w-[280px]">
+    <div className="flex flex-col items-center">
+      Immunity Set
+      <EquipmentCardInline data={{
+        type: 'Armor',
+        rarity: 'legendary',
+        star: 6,
+        reforge: 0,
+        tier: null,
+        level: null,
+        class: null,
+        effect: 19
+      }} />
+      <div className="mt-1 flex flex-col items-center gap-1 text-center">
+        <div className="flex items-center gap-1">
+          <StatInlineTag name="DEF" color='text-white' />
+          100
+        </div>
+        <div className="flex items-center gap-1">
+          2p bonus: Immunity 1 turn at start
+        </div>
+      </div>
+    </div>
+    <div className="flex flex-col items-center">
+      <EquipmentCardInline data={{
+        type: 'Armor',
+        rarity: 'legendary',
+        star: 6,
+        reforge: 0,
+        tier: 4,
+        level: null,
+        class: null,
+        effect: 19
+      }} />
+      <div className="mt-1 flex flex-col items-center gap-1 text-center">
+        <div className="flex items-center gap-1">
+          <StatInlineTag name="DEF" color='text-white' />
+          120
+        </div>
+        <div className="flex items-center gap-1">
+          2p bonus: Immunity 1 turn at start
+        </div>
+        <p>4p bonus: -30% damage taken</p>
+      </div>
+    </div>
+  </div>
 
-                {/* Column: Legendary (red) */}
-                <div className="flex flex-col items-center gap-4">
-                    <div className="flex flex-col items-center">
-                        Penetration Set
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Armor',
-                                rarity: 'legendary',
-                                star: 6,
-                                reforge: 0,
-                                tier: null,
-                                level: null,
-                                class: null,
-                                effect: 11
-                            }}
-                        />
-                        <div className="mt-1 flex flex-col items-center gap-1 text-center">
-                            <div className="flex items-center gap-1">
-                                <StatInlineTag name="DEF" color='text-white' />
-                                100
-                            </div>   
-                            <div className="flex items-center gap-1">
-                                4p bonus : <StatInlineTag name="PEN" color='text-white' /> +20%
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <EquipmentCardInline
-                            data={{
-                                type: 'Armor',
-                                rarity: 'legendary',
-                                star: 6,
-                                reforge: 0,
-                                tier: 4,
-                                level: null,
-                                class: null,
-                                effect: 11
-                            }}
-                        />
-                        <div className="mt-1 flex flex-col items-center gap-1 text-center">
-                            <div className="flex items-center gap-1">
-                                <StatInlineTag name="DEF" color='text-white' />
-                                120
-                            </div>   
-                            <div className="flex items-center gap-1">
-                                2p bonus : <StatInlineTag name="PEN" color='text-white' /> +8%
-                            </div>
-                            <p>
-                                4p bonus : <StatInlineTag name="PEN" color='text-white' /> +12%
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+  {/* Column: Penetration Set */}
+  <div className="flex flex-col items-center gap-4 min-w-[280px]">
+    <div className="flex flex-col items-center">
+      Penetration Set
+      <EquipmentCardInline data={{
+        type: 'Armor',
+        rarity: 'legendary',
+        star: 6,
+        reforge: 0,
+        tier: null,
+        level: null,
+        class: null,
+        effect: 11
+      }} />
+      <div className="mt-1 flex flex-col items-center gap-1 text-center">
+        <div className="flex items-center gap-1">
+          <StatInlineTag name="DEF" color='text-white' />
+          100
+        </div>
+        <div className="flex items-center gap-1">
+          4p bonus: <StatInlineTag name="PEN" color='text-white' /> +20%
+        </div>
+      </div>
+    </div>
+    <div className="flex flex-col items-center">
+      <EquipmentCardInline data={{
+        type: 'Armor',
+        rarity: 'legendary',
+        star: 6,
+        reforge: 0,
+        tier: 4,
+        level: null,
+        class: null,
+        effect: 11
+      }} />
+      <div className="mt-1 flex flex-col items-center gap-1 text-center">
+        <div className="flex items-center gap-1">
+          <StatInlineTag name="DEF" color='text-white' />
+          120
+        </div>
+        <div className="flex items-center gap-1">
+          2p bonus: <StatInlineTag name="PEN" color='text-white' /> +8%
+        </div>
+        <p>4p bonus: <StatInlineTag name="PEN" color='text-white' /> +12%</p>
+      </div>
+    </div>
+  </div>
+</div>
+         
             <GuideHeading level={4}>Change Stats</GuideHeading>
             <p>
                 Available via the <strong>Change Stat</strong> menu. There are two modes available:
