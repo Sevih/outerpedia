@@ -5,11 +5,11 @@ import StarLevelItem from '@/app/components/StarLevelItem';
 const highlightable = [
     { key: 'stars', label: 'Star Level: from 1★ yellow star to 6★ yellow' },
     { key: 'reforge', label: 'Reforge Level: from 1★ orange to 6★ orange' },
-    { key: 'rarity', label: 'Rarity: Normal, Superior, Epic, Legendary' },
+    { key: 'rarity', label: 'Grade: Normal, Superior, Epic, Legendary' },
     { key: 'upgrade', label: 'Upgrade Level: from 0 to +10' },
-    { key: 'tier', label: 'Tier: from T0 to T4' },
-    { key: 'class', label: 'Class restriction (optional)' },
-    { key: 'set', label: 'Set Effect or Unique Effect (optional)' }
+    { key: 'tier', label: 'Breakthrough: from T0 to T4' },
+    { key: 'set', label: 'Set Effect or Unique Effect' },
+    { key: 'class', label: 'Class restriction (optional)' }
 ];
 
 function OverlayBox({ className = '' }: { className?: string }) {

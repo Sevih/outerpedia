@@ -11,7 +11,7 @@ import StarLevel from '@/app/components/StarLevel';
 export default function BeginnerGuide() {
     return (
         <div>
-            <GuideHeading level={3}>Equipment Basics</GuideHeading>
+            <GuideHeading level={3}>Gear Basics</GuideHeading>
             <p>
                 Gear plays a crucial role in a hero&apos;s power. Each hero can equip three different types of gear; Weapon, Accessory, and Armor,  each contributing to their overall stats and performance in battle.
             </p>
@@ -23,26 +23,56 @@ export default function BeginnerGuide() {
 
             <EquipmentIntro />
 
+            <GuideHeading level={4}>Quick note about Substats</GuideHeading>
+            <p>
+                Each stat can only appear once per item, regardless of whether it is a main stat or a substat (e.g: you cannot roll a speed substat on a speed mainstat Accessory).
+            </p>
+            <p>
+                Substat values are represented as a bar with 6 segments using the following color code:
+            </p>
+            <SubstatBar yellow={2} orange={3} />
+            <ul className="list-disc list-inside">
+                <li>Gray — Inactive</li>
+                <li>Yellow — Active</li>
+                <li>Orange — Active (gained through reforge)</li>
+            </ul>
+
+            <p className='mt-4 mb-4'>
+                The maximum number of yellow segments per substat is 3, except for some items in the event shop where you may see 4. Rico&apos;s Secret Shop can grant 4 bars on a single substat, but this requires the shop to be max level (and even then, the chance is rare).
+                <br />
+                A &quot;perfect&quot; gear example (excluding shop) might look like:
+            </p>
+            <ul className="space-y-2">
+                <li><SubstatBarWithValue stat="ATK%" yellow={3} orange={0} /></li>
+                <li><SubstatBarWithValue stat="CHC" yellow={3} orange={0} /></li>
+                <li><SubstatBarWithValue stat="CHD" yellow={3} orange={0} /></li>
+                <li><SubstatBarWithValue stat="SPD" yellow={3} orange={0} /></li>
+            </ul>
 
 
-            <GuideHeading level={3}>Improving Equipment</GuideHeading>
+
+
+
+
+
+            <GuideHeading level={3}>Improving Gear</GuideHeading>
             <p>
                 There are several ways to enhance your gear:
             </p>
             <ul className="list-disc list-inside">
-                <li><strong>Enhance</strong> — Increase upgrade level</li>
+                <li><strong>Enhance</strong> — Increase enhancement level</li>
                 <li><strong>Reforge</strong> — Add or enhance substats</li>
-                <li><strong>Breakthrough</strong> — Increase gear Tier</li>
+                <li><strong>Breakthrough</strong> — Increase gear breakthrough</li>
                 <li><strong>Change Stats</strong> — Reroll substats</li>
             </ul>
 
             <GuideHeading level={4}>Enhance</GuideHeading>
             <p>
                 Available via the <strong>Enhance</strong> menu, using hammers <ItemInlineDisplay names="Apprentice's Hammer" text={false} /><ItemInlineDisplay names="Expert's Hammer" text={false} /><ItemInlineDisplay names="Master's Hammer" text={false} /><ItemInlineDisplay names="Artisan's Hammer" text={false} /> to increase the item&apos;s enhancement level up to +10.
-                This improves the <strong>Main Stat only</strong>, based on the item&apos;s rarity and star level.
+                This improves the <strong>Main Stat only</strong>, based on the item&apos;s grade and star level.
             </p>
             <p className="text-neutral-400 text-sm italic mb-4">
-                Note:  You can convert hammers to a higher rarity in your inventory with a 2:1 ratio. (e.g., 2 <ItemInlineDisplay names="Master's Hammer" /> for 1 <ItemInlineDisplay names="Artisan's Hammer" />)
+                Note:  You can convert hammers to a higher grade in your inventory with a 2:1 ratio. (e.g., 2 <ItemInlineDisplay names="Master's Hammer" /> for 1 <ItemInlineDisplay names="Artisan's Hammer" />). Converting hammers is only useful for enhancing Special Gear, there is no benefit to doing that for regular enhancing
             </p>
             <p>Example comparisons:</p>
             <div className="flex gap-8">
@@ -168,13 +198,30 @@ export default function BeginnerGuide() {
             </div>
 
 
+            <GuideHeading level={4}>Reforge</GuideHeading>
+             <p>
+                Available via the <strong>Reforge</strong> tab in the Enhance menu. Reforging is done by using catalysts <ItemInlineDisplay names="Normal Reforge Catalyst" text={false} /><ItemInlineDisplay names="Superior Reforge Catalyst" text={false} /><ItemInlineDisplay names="Epic Reforge Catalyst" text={false} /><ItemInlineDisplay names="Legendary Reforge Catalyst" text={false} />. <br />
+                </p>
+                <p className="text-neutral-400 text-sm italic mb-4">
+                Note: Like hammers, you can convert catalyst to the upper grade in your inventory with a 6:1 (e.g : 6 <ItemInlineDisplay names="Normal Reforge Catalyst" /> for 1 <ItemInlineDisplay names="Superior Reforge Catalyst" />)
+            </p>
+                <p className="text-neutral-400 text-sm italic mb-4">
+                Note: You can reforge an item up to its star level (one time for <StarLevel levelLabel="1" size={14} /> gear and up to six times for <StarLevel levelLabel="6" size={14} />gear)
+            </p>
+            <p>
+                Here’s how reforging works:
+                </p>
+            <ul className="list-disc list-inside">
+                <li>If the item has less than 4 substats, it will add one (up to 4)</li>
+                <li>If the item has 4 substats, it will enhance one (adds an orange segment) up to a maximum of 6 active segments</li>
+            </ul>
 
             <GuideHeading level={4}>Breakthrough</GuideHeading>
             <p>
-                Available via the <strong>Breakthrough</strong> tab in the Enhance menu, using glunites <ItemInlineDisplay names="Glunite" text={false} /><ItemInlineDisplay names="Refined Glunite" text={false} /><ItemInlineDisplay names="Event Glunite" text={false} /><ItemInlineDisplay names="Armor Glunite" text={false} /> to increase the item’s tier up to T4. This improves the main stat and item&apos;s effect.
+                Available via the <strong>Breakthrough</strong> tab in the Enhance menu, using glunites <ItemInlineDisplay names="Glunite" text={false} /><ItemInlineDisplay names="Refined Glunite" text={false} /><ItemInlineDisplay names="Event Glunite" text={false} /><ItemInlineDisplay names="Armor Glunite" text={false} /> to increase the item’s breakthrough up to T4. This improves the main stat and item&apos;s effect.
             </p>
             <p className="text-neutral-400 text-sm italic mb-4">
-                Note: You can use a duplicate item instead of Glunite (it must be the same rarity, same effect, and same slot).
+                Note: You can use a duplicate item instead of Glunite (it must be the same grade, same effect, and same slot).
             </p>
             <p>Example comparisons:</p>
             <div className="flex gap-8">
@@ -244,6 +291,10 @@ export default function BeginnerGuide() {
                         />
                         <div className="mt-1 flex flex-col items-center gap-1 text-center">
                             <div className="flex items-center gap-1">
+                                <StatInlineTag name="DEF" color='text-white' />
+                                100
+                            </div>                            
+                            <div className="flex items-center gap-1">
                                 2p bonus : Immunity 1 turn at start
                             </div>
                         </div>
@@ -261,6 +312,10 @@ export default function BeginnerGuide() {
                         }}
                         />
                         <div className="mt-1 flex flex-col items-center gap-1 text-center">
+                            <div className="flex items-center gap-1">
+                                <StatInlineTag name="DEF" color='text-white' />
+                                120
+                            </div>   
                             <div className="flex items-center gap-1">
                                 2p bonus : Immunity 1 turn at start
                             </div>
@@ -289,6 +344,10 @@ export default function BeginnerGuide() {
                         />
                         <div className="mt-1 flex flex-col items-center gap-1 text-center">
                             <div className="flex items-center gap-1">
+                                <StatInlineTag name="DEF" color='text-white' />
+                                100
+                            </div>   
+                            <div className="flex items-center gap-1">
                                 4p bonus : <StatInlineTag name="PEN" color='text-white' /> +20%
                             </div>
                         </div>
@@ -308,6 +367,10 @@ export default function BeginnerGuide() {
                         />
                         <div className="mt-1 flex flex-col items-center gap-1 text-center">
                             <div className="flex items-center gap-1">
+                                <StatInlineTag name="DEF" color='text-white' />
+                                120
+                            </div>   
+                            <div className="flex items-center gap-1">
                                 2p bonus : <StatInlineTag name="PEN" color='text-white' /> +8%
                             </div>
                             <p>
@@ -317,53 +380,7 @@ export default function BeginnerGuide() {
                     </div>
                 </div>
             </div>
-
-            <GuideHeading level={4}>Quick note about Substats</GuideHeading>
-            <p>
-                Each stat can only appear once per item, regardless of whether it is a main stat or a substat (e.g: you cannot roll a speed substat on a speed mainstat Accessory).
-            </p>
-            <p>
-                Substat values are represented as a bar with 6 segments using the following color code:
-            </p>
-            <SubstatBar yellow={2} orange={3} />
-            <ul className="list-disc list-inside">
-                <li>Gray — Inactive</li>
-                <li>Yellow — Active</li>
-                <li>Orange — Active (gained through reforge)</li>
-            </ul>
-
-            <p className='mt-4 mb-4'>
-                The maximum number of yellow segments per substat is 3, except for some items in the event shop where you may see 4. Rico Shop items may also grant 4 on a single substat.
-                <br />
-                A &quot;perfect&quot; gear example (excluding shop) might look like:
-            </p>
-            <ul className="space-y-2">
-                <li><SubstatBarWithValue stat="ATK%" yellow={3} orange={0} /></li>
-                <li><SubstatBarWithValue stat="CHC" yellow={3} orange={0} /></li>
-                <li><SubstatBarWithValue stat="CHD" yellow={3} orange={0} /></li>
-                <li><SubstatBarWithValue stat="SPD" yellow={3} orange={0} /></li>
-            </ul>
-
-
-            <GuideHeading level={4}>Reforge</GuideHeading>
-             <p>
-                Available via the <strong>Reforge</strong> tab in the Enhance menu. Reforging is done by using catalysts <ItemInlineDisplay names="Normal Reforge Catalyst" text={false} /><ItemInlineDisplay names="Superior Reforge Catalyst" text={false} /><ItemInlineDisplay names="Epic Reforge Catalyst" text={false} /><ItemInlineDisplay names="Legendary Reforge Catalyst" text={false} />. <br />
-                </p>
-                <p className="text-neutral-400 text-sm italic mb-4">
-                Note: Like hammers, you can convert catalyst to the upper rarity in your inventory with a 6:1 (e.g : 6 <ItemInlineDisplay names="Normal Reforge Catalyst" /> for 1 <ItemInlineDisplay names="Superior Reforge Catalyst" />)
-            </p>
-                <p className="text-neutral-400 text-sm italic mb-4">
-                Note: You can reforge an item up to its star level (one time for <StarLevel levelLabel="1" size={14} /> gear and up to six times for <StarLevel levelLabel="6" size={14} />gear)
-            </p>
-            <p>
-                Here’s how reforging works:
-                </p>
-            <ul className="list-disc list-inside">
-                <li>If the item has less than 4 substats, it will add one (up to 4)</li>
-                <li>If the item has 4 substats, it will enhance one (adds an orange segment) up to a maximum of 6 active segments</li>
-            </ul>
-
-
+            
             <GuideHeading level={4}>Change Stats</GuideHeading>
             <p>
                 Available via the <strong>Change Stat</strong> menu. There are two modes available:

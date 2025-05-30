@@ -603,12 +603,12 @@
     "author": "Sevih",
     "hide": true
   },
-  "equipment": {
+  "gear": {
     "category": "general-guides",
-    "title": "Equipment",
+    "title": "Gear",
     "description": "A guide to gear types, upgrades, and how to make your equipment stronger.",
-    "icon": "equipment",
-    "second_image": "equipment-2",
+    "icon": "gear",
+    "second_image": "gear-2",
     "last_updated": "2025-05-28",
     "author": "Sevih",
     "hide": true
