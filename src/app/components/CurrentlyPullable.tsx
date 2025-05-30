@@ -1,21 +1,35 @@
-import { toKebabCase } from '@/utils/formatText'
 import fs from 'fs'
 import path from 'path'
+import { toKebabCase } from '@/utils/formatText'
 import CurrentlyPullableClient from './CurrentlyPullableClient'
 
-const pullableCharacters = [
-  { name: 'Omega Nadja', endDate: getEndDateAtUkReset('2025-06-04') },
-]
+type BannerEntry = {
+  name: string
+  start: string
+  end: string
+}
 
-function getEndDateAtUkReset(dateStr: string): string {
-  const baseDate = new Date(`${dateStr}T00:00:00Z`)
-  baseDate.setUTCDate(baseDate.getUTCDate() + 1)
-  return baseDate.toISOString()
+function toUkResetIso(dateStr: string): string {
+  // Date à 01:00 UTC, soit 2h heure de Paris en été
+  return new Date(`${dateStr}T01:00:00Z`).toISOString()
+}
+
+function isBannerActive(start: string, end: string): boolean {
+  const now = new Date()
+  const startDate = new Date(toUkResetIso(start))
+  const endDate = new Date(toUkResetIso(end))
+  return now >= startDate && now < endDate
 }
 
 export default function CurrentlyPullable() {
-  const characters = pullableCharacters.map(({ name, endDate }) => {
+  const bannerPath = path.resolve(process.cwd(), 'src/data/banner.json')
+  const bannerData: BannerEntry[] = JSON.parse(fs.readFileSync(bannerPath, 'utf8'))
 
+  const activeCharacters = bannerData.filter(entry =>
+    isBannerActive(entry.start, entry.end)
+  )
+
+  const characters = activeCharacters.map(({ name, end }) => {
     const slug = toKebabCase(name)
     const filePath = path.resolve(process.cwd(), 'src/data/char', `${slug}.json`)
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'))
@@ -26,7 +40,7 @@ export default function CurrentlyPullable() {
       rarity: data.Rarity,
       limited: data.limited,
       slug,
-      endDate,
+      endDate: toUkResetIso(end),
       element: data.Element.toLowerCase(),
       class: data.Class.toLowerCase(),
       special: false,

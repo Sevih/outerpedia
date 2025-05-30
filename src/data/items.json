@@ -299,5 +299,75 @@
     "name": "Blue Memory Stone",
     "rarity": "legendary",
     "description": "A material used for enhancing Exclusive Equipment."
+  },
+  {
+    "name": "Apprentice's Hammer",
+    "rarity": "normal",
+    "description": "Increases experience by 100 when used to enhance gear."
+  },
+  {
+    "name": "Expert's Hammer",
+    "rarity": "superior",
+    "description": "Increases experience by 250 when used to enhance gear."
+  },
+  {
+    "name": "Master's Hammer",
+    "rarity": "epic",
+    "description": "Increases experience by 500 when used to enhance gear."
+  },
+  {
+    "name": "Artisan's Hammer",
+    "rarity": "legendary",
+    "description": "Increases experience by 1000 when used to enhance gear."
+  },
+  {
+    "name": "Glunite",
+    "rarity": "epic",
+    "description": "A malleable mineral that can be processed to take on specific properties of a piece of gear. It can be used as a substite material for normal-epic gear breakthroughs."
+  },
+  {
+    "name": "Refined Glunite",
+    "rarity": "legendary",
+    "description": "A mineral that was created by refining Glunite, so that it could match even the rarest types of gear. It can be used as a substite material for legendary gear breakthroughs."
+  },
+  {
+    "name": "Event Glunite",
+    "rarity": "legendary",
+    "description": "Increases experience by 500 when used to enhance gear.Glunite that can be used as a material for breakthrough for gear purchased from event shop."
+  },
+  {
+    "name": "Armor Glunite",
+    "rarity": "legendary",
+    "description": "A mineral that was created by refining Glunite, so that it could match even the rarest types of gear. It can be used as a substite material for legendary armor breakthroughs."
+  },
+  {
+    "name": "Transistone (Total)",
+    "rarity": "legendary",
+    "description": "A stone that reacts to substats on gear? It will change all substats that are currently applied"
+  },
+  {
+    "name": "Transistone (Individual)",
+    "rarity": "legendary",
+    "description": "A stone that reacts to substats on gear. It will let you select and change 1 substat that is currently applied."
+  },
+  {
+    "name": "Normal Reforge Catalyst",
+    "rarity": "normal",
+    "description": "A material extracted from dismantling gear. Can be used to reforge gear of normal quality to unleash its potential."
+  },
+  {
+    "name": "Superior Reforge Catalyst",
+    "rarity": "superior",
+    "description": "A material extracted from dismantling gear. Can be used to reforge gear of superior quality to unleash its potential."
+  },
+  {
+    "name": "Epic Reforge Catalyst",
+    "rarity": "epic",
+    "description": "A material extracted from dismantling gear. Can be used to reforge gear of epic quality to unleash its potential."
+  },
+  {
+    "name": "Legendary Reforge Catalyst",
+    "rarity": "legendary",
+    "description": "A material extracted from dismantling gear. Can be used to reforge gear of legendary quality to unleash its potential."
   }
 ]

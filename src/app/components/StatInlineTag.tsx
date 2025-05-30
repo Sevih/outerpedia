@@ -4,16 +4,16 @@ import Image from 'next/image'
 import stats from '@/data/stats.json'
 
 type Props = {
-  name: keyof typeof stats
+  name: keyof typeof stats;
+  color?:string;
 }
 
-export default function StatInlineTag({ name }: Props) {
+export default function StatInlineTag({ name, color='text-amber-400' }: Props) {
   const stat = stats[name]
 
   if (!stat) return <span className="text-red-500">{name}</span>
 
   const iconPath = `/images/ui/effect/${stat.icon}`
-  const color = 'text-amber-400'
 
   return (
           <span className="inline-flex items-end gap-1 align-bottom">
