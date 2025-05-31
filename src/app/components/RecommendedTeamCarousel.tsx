@@ -24,7 +24,7 @@ export default function RecommendedTeamCarousel({ team, note }: Props) {
   style={{
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 200px))',
-    justifyContent: 'start', // pour centrer les lignes incomplètes
+    justifyContent: 'center', // pour centrer les lignes incomplètes
     gap: '13px',              // ou utilise Tailwind `gap-8`
     maxWidth: '100%',
     margin: '0 auto'

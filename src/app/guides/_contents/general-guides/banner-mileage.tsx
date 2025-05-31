@@ -195,7 +195,7 @@ const bannerTabs: BannerTab[] = [
                 <p className="mt-4">
                     <strong className={decoration}>List of Limited Heroes and their release dates:</strong></p>
                 <ul>
-                    <li><CharacterLinkCard name="Poolside Trickster Regina" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released July 15, 2023</li>
+                    <li><CharacterLinkCard name="Poolside Trickster Regina" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released July 16, 2023</li>
                     <li><CharacterLinkCard name="Gnosis Dahlia" /> – <strong className='text-pink-400'>Limited</strong> Hero, released July 29, 2024 (last rerun: January 23, 2025)</li>
                     <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released October 21, 2024</li>
                     <li><CharacterLinkCard name="Gnosis Nella" /> – <strong className='text-pink-400'>Limited</strong> Hero, released November 4, 2024</li>
