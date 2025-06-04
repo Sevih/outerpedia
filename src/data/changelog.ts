@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-06-04",
+    title: "Walking Fortress Venion update",
+    type: "update",
+    content: [
+      "- Guide is up to date for june 2025 version. Learn More [here](/guides/world-boss/venion)",
+    ],
+  },
+  {
     date: "2025-05-30",
     title: "Hero Growth & Gear guides",
     type: "update",

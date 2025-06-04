@@ -112,7 +112,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
           <li><CharacterLinkCard name="Monad Eva" />: strong as always. She can be put in first position if you don&apos;t have <CharacterLinkCard name="Gnosis Dahlia" /> or <CharacterLinkCard name="Regina" />.</li>
 
           <li><CharacterLinkCard name="Caren" />: Her S3 ignores 30% of boss defense.</li>
-          <li><CharacterLinkCard name="Veronica" />: Will give a <EffectInlineTag name="BT_STAT|ST_DEF" type="buff" /> to <CharacterLinkCard name="Caren" /> that’ll increase her damage..</li>
+          <li><CharacterLinkCard name="Veronica" />: Will give a <EffectInlineTag name="BT_STAT|ST_DEF" type="buff" /> to <CharacterLinkCard name="Caren" /> that&apos;ll increase her damage.</li>
           <li><CharacterLinkCard name="Kanon" />: alternative of <CharacterLinkCard name="Caren" />.</li>
           <li><CharacterLinkCard name="Tamara" />: Her chain bonus will give you more damage for 2 turns thanks to <EffectInlineTag name="BT_MARKING" type="debuff" />.</li>
           <li><CharacterLinkCard name="Laplace" /><CharacterLinkCard name="Tamamo-no-Mae" /><CharacterLinkCard name="Ryu Lion" />: A source of <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" />.</li>

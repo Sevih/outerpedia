@@ -1,3 +1,7 @@
+## 🛠 Walking Fortress Venion update (2025-06-04)
+- Guide is up to date for june 2025 version. Learn More [here](/guides/world-boss/venion)
+
+
 ## 🛠 Hero Growth & Gear guides (2025-05-30)
 - A complete breakdown of how to power up your heroes efficiently. Learn More [here](/guides/general-guides/heroes-growth)
 - A guide to gear types, upgrades, and how to make your equipment stronger. Learn More [here](guides/general-guides/gear)
