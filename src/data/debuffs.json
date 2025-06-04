@@ -26,8 +26,20 @@
     {
         "name": "BT_SEAL_ADDITIVE_ATTACK",
         "label": "Seal Extra Skill",
-        "description": "The target cannot activate extra skills.",
+        "description": "The target cannot activate additional attack and extra skills.",
         "icon": "IG_Buff_Effect_Seal_AddAttack"
+    },
+    {
+        "name": "BT_SEAL_ADDITIVE_ATTACK_IR",
+        "label": "Seal Extra Skill",
+        "description": "The target cannot activate additional attack and extra skills. (Irremovable)",
+        "icon": "IG_Buff_Effect_Seal_AddAttack_Interruption_D"
+    },
+    {
+        "name": "BT_SEAL_ADDITIVE_TURN_IR",
+        "label": "Seal Extra Turn",
+        "description": "The target cannot be granted an extra turn. (Irremovable)",
+        "icon": "IG_Buff_Effect_Seal_AddTurn_Interruption_D"
     },
     {
         "name": "BT_STAT|ST_ACCURACY",

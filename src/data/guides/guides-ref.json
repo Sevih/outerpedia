@@ -44,8 +44,9 @@
     "title": "Venion",
     "description": "Video guide",
     "icon": "venion",
-    "last_updated": "2025-02-11",
-    "author": "Adjen"
+    "last_updated": "2025-06-04",
+    "author": "Sevih",
+    "hide": true
   },
   "glicys": {
     "category": "special-request",
@@ -619,6 +620,17 @@
     "second_image": "quirk-2",
     "last_updated": "2025-05-28",
     "author": "Kilvanoshei",
+    "hide": true
+  }
+  ,
+  "stats": {
+    "category": "general-guides",
+    "title": "Statistics",
+    "description": "",
+    "icon": "stats",
+    "second_image": "stats-2",
+    "last_updated": "2025-05-28",
+    "author": "Sevih / Shiraen",
     "hide": true
   }
 }

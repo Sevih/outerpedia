@@ -359,5 +359,41 @@
         "label": "A Ninja's Afterimage",
         "description": "25% of damage intended for allies is redirect to Edelweiss.\nOnly the highest value effect will be applied.\nCannot be remoçved until Edelweiss is defeated.",
         "icon": "IG_Buff_Effect_2000072_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_A",
+        "label": "Environmental Change Response",
+        "description": "After using MG-102 Pionner Cannon, increases priority of Fire/Water/Earth enemies by only 80%.",
+        "icon": "IG_Buff_Effect_4086013_A_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_B",
+        "label": "Weather Variable Response",
+        "description": "After using MG-102 Pionner Cannon, increases priority of Light/Dark enemies by only 80%.",
+        "icon": "IG_Buff_Effect_4086013_A_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_C",
+        "label": "Courage against Despair",
+        "description": "For each mage ally, increases attack of all allies by 15% each. (Irremovable)",
+        "icon": "IG_Buff_4086001_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_D",
+        "label": "Exclude Unknown Variables",
+        "description": "At the strat of the turn, increases skill cooldown of Fire/Water/Earth enemies by 1. When using Emergency Protocal: Extermination, inflict instant death on Light/Dark enemies.",
+        "icon": "IG_Buff_Effect_4086014_A_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_E",
+        "label": "Remove Detection Interference",
+        "description": "At the strat of the turn, increases skill cooldown of Light/Dark enemies by 1. When using Emergency Protocal: Extermination, inflict instant death on Fire/Water/Earth enemies.",
+        "icon": "IG_Buff_Effect_4086014_A_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_F",
+        "label": "Courage against Despair",
+        "description": "For each mage ally, increases attack of all allies by 15% each. (Irremovable)",
+        "icon": "IG_Buff_4086001_Interruption"
     }
 ]
