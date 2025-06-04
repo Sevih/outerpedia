@@ -26,7 +26,7 @@ const teams = {
     icon: 'fire.webp',
     setup: [
       ['Tamara', 'Tamamo-no-Mae'],
-      ['Veronica'],
+      ['Veronica','Mene'],
       ['Caren', 'Kanon'],
       ['Lyla', 'Mene', 'Laplace'],
     ]
@@ -100,8 +100,9 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
 
         <p>You want your teams to have penetration  as much as possible. Venion&apos;s defense is high (3500 phase 1 and 5000 phase 2)</p>
         <p>Having counter set on support is really helpful since they&apos;ll activate their respective bonus gain from Venion</p>
-        <p>Keep an eye on Venions&apos;s buff and swap team if needed to avoid and instant death or an 80% push sin&apos;e it&apos;ll make you lose one turn.</p>
+        <p>Keep an eye on Venions&apos;s buff and swap team if needed to avoid and instant death or an 80% push since it&apos;ll make you lose one turn.</p>
         <p>Having fixed damage in your skill chain is okay as long as it results in more total damage.</p>
+        <p>Having multiple healers in your second team is also a viable option to deal more weakness gauge damage.</p>
 
         <ul className="list-disc list-inside text-neutral-300 mb-4">
           <li><CharacterLinkCard name="Gnosis Dahlia" /> : since the boss have 100% critical hit chance, place her leftmost position and she&apos;ll counter every time.</li>

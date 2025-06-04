@@ -42,11 +42,10 @@
   "venion": {
     "category": "world-boss",
     "title": "Venion",
-    "description": "Video guide",
+    "description": "Boss strategy guide",
     "icon": "venion",
     "last_updated": "2025-06-04",
-    "author": "Sevih",
-    "hide": true
+    "author": "Sevih"
   },
   "glicys": {
     "category": "special-request",
