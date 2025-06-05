@@ -290,7 +290,7 @@ function StatsContent() {
                                         Effectiveness increases the chance of successfully applying debuffs and is countered by <StatInlineTag name="RES" />.
                                     </p>
                                     <p>
-                                        If your Effectiveness is equal to or higher than the enemy&apos;s Resilience, the base chance to apply a debuff is 100% and the minimum success chance is <strong>25%</strong>, even with extreme differences.
+                                        If your Effectiveness is equal to or higher than the enemy&apos;s Resilience, the base chance to apply a debuff is 100%.
                                     </p>
                                     <p>
                                         Some skills can scale with Effectiveness, such as Gnosis Beth&apos;s <EffectInlineTag name="BT_DOT_ETERNAL_BLEED" type="debuff" />.
@@ -317,10 +317,11 @@ function StatsContent() {
                                     <p>
                                         When your RES is higher than the enemy’s EFF, the chance for them to successfully apply a debuff decreases.
                                     </p>
-                                    <ul className="list-disc list-inside">
-                                        <li>EFF 100 vs RES 100 → 100%</li>
-                                        <li>EFF 100 vs RES 200 → 50%</li>
-                                        <li>EFF 100 vs RES 300 → 25%</li>
+                                    <ul className="list-disc list-inside ml-4">
+                                        <li>RES − EFF = 0 → 100% chance</li>
+                                        <li>RES − EFF = 100 → 50%</li>
+                                        <li>RES − EFF = 300 → 25%</li>
+                                        <li>RES − EFF = 900 → 10%</li>
                                     </ul>
                                     <p>
                                         Note: Some skills bypass the resilience check like Drakhan S2.
@@ -429,40 +430,40 @@ function StatsContent() {
                                 title: 'Can Defense reduce fixed damage?',
                                 content: 'No. Fixed damage ignores DEF. Only shields or invincibility can prevent it.'
                             },
-{
-  key: 'dual-scaling',
-  title: 'Can skills scale with more than one stat?',
-  content: (
-    <>
-      <p>
-        Not exactly. Outerplane does not currently feature skills that use two stats evenly (e.g., 50% ATK + 50% HP).
-        What is often referred to as “dual-scaling” is actually <strong>secondary scaling</strong> — a main stat (usually ATK), with a minor bonus from another stat like HP, SPD, or EVA.
-      </p>
-      <p className="mt-2">
-        For example, some skills primarily scale with ATK but gain a bonus from the caster’s Max HP or Speed. Regina’s <strong>S3</strong> includes minor scaling with Evasion, and D. Stella has partial scaling from HP.
-      </p>
-      <p className="mt-2">
-        These secondary scalings are usually small and should not be the focus of gear building. There are also skills that use a stat other than ATK entirely — such as HP-based or DEF-based damage.
-      </p>
-    </>
-  )
-}
-,
-{
-key: 'stat-scaling',
-title: 'How do I know which stats are used for a skill?',
-content: (
-<>
-<p>If nothing is mentioned, the skill usually scales with ATK by default.</p>
-<p>If it uses a different stat, you&apos;ll see one of these:</p>
-<ul className="list-disc list-inside ml-4">
-<li>“Damage dealt increases proportional to Max Health <strong>instead of</strong> Attack.”</li>
-<li>“Damage dealt increases proportional to Max Health.” (in addition to ATK)</li>
-</ul>
-<p>The wording is important: “instead of” replaces ATK scaling, while without it means additional scaling.</p>
-</>
-)
-},
+                            {
+                                key: 'dual-scaling',
+                                title: 'Can skills scale with more than one stat?',
+                                content: (
+                                    <>
+                                        <p>
+                                            Not exactly. Outerplane does not currently feature skills that use two stats evenly (e.g., 50% ATK + 50% HP).
+                                            What is often referred to as “dual-scaling” is actually <strong>secondary scaling</strong> — a main stat (usually ATK), with a minor bonus from another stat like HP, SPD, or EVA.
+                                        </p>
+                                        <p className="mt-2">
+                                            For example, some skills primarily scale with ATK but gain a bonus from the caster’s Max HP or Speed. Regina’s <strong>S3</strong> includes minor scaling with Evasion, and D. Stella has partial scaling from HP.
+                                        </p>
+                                        <p className="mt-2">
+                                            These secondary scalings are usually small and should not be the focus of gear building. There are also skills that use a stat other than ATK entirely — such as HP-based or DEF-based damage.
+                                        </p>
+                                    </>
+                                )
+                            }
+                            ,
+                            {
+                                key: 'stat-scaling',
+                                title: 'How do I know which stats are used for a skill?',
+                                content: (
+                                    <>
+                                        <p>If nothing is mentioned, the skill usually scales with ATK by default.</p>
+                                        <p>If it uses a different stat, you&apos;ll see one of these:</p>
+                                        <ul className="list-disc list-inside ml-4">
+                                            <li>“Damage dealt increases proportional to Max Health <strong>instead of</strong> Attack.”</li>
+                                            <li>“Damage dealt increases proportional to Max Health.” (in addition to ATK)</li>
+                                        </ul>
+                                        <p>The wording is important: “instead of” replaces ATK scaling, while without it means additional scaling.</p>
+                                    </>
+                                )
+                            },
                             {
                                 key: 'formula',
                                 title: 'How calculations are done',
@@ -483,15 +484,10 @@ content: (
                                             </a>
                                         </p>
                                         <h4 className="font-semibold mt-4">🛡️ Defense Mitigation</h4>
-                                        <p>
-                                            <strong>Formula:</strong> <code>f(DEF) = 1000 / (1000 + DEF)</code>
+                                        <p><strong>Formula:</strong> <code>f(DEF) = 1000 / (1000 + DEF)</code></p>
+                                        <p>This formula determines how much damage is reduced by defense. As DEF increases, the effect of each additional point diminishes (diminishing returns).
                                         </p>
-                                        <p>
-                                            This formula determines how much damage is reduced by defense. As DEF increases, the effect of each additional point diminishes (diminishing returns).
-                                        </p>
-                                        <p>
-                                            Effective Health (EHP) can be derived from it:
-                                        </p>
+                                        <p>Effective Health (EHP) can be derived from it:</p>
                                         <p>
                                             <strong>Effective HP:</strong> <code>EHP = HP + (HP × DEF / 1000)</code>
                                         </p>
@@ -512,17 +508,15 @@ content: (
 
                                         <h4 className="font-semibold mt-4">🧪 Effectiveness vs Resilience</h4>
                                         <p>
-                                            If <code>EFF ≥ RES</code>, success chance = 100%.
+                                            If <code>EFF ≥ RES</code>, the debuff success chance is 100%.
                                         </p>
                                         <p>
-                                            Otherwise:
+                                            Otherwise, the chance to apply a debuff is calculated using:
                                         </p>
-                                        <p>
-                                            <strong>Formula:</strong> <code>Ratio = max(25%, 100 / (100 + (RES - EFF)))</code>
+                                        <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit">
+                                            Success Chance = 100 / (100 + (RES − EFF))
                                         </p>
-                                        <p>
-                                            This ensures a minimum 25% chance to apply debuffs even when Effectiveness is much lower than Resilience.
-                                        </p>
+
                                     </>
                                 )
 
