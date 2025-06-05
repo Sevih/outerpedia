@@ -265,9 +265,6 @@ function StatsContent() {
                                         which is reached when your Evasion stat is at least <strong>+40</strong> higher than the enemy&apos;s Accuracy.
                                     </p>
                                     <p>
-                                        Some skills can scale with Evasion, such as Regina&apos;s <strong>S3</strong>, making it a useful offensive stat in specific builds.
-                                    </p>
-                                    <p>
                                         Important notes :
                                     </p>
                                     <ul className="ml-5">
@@ -432,26 +429,40 @@ function StatsContent() {
                                 title: 'Can Defense reduce fixed damage?',
                                 content: 'No. Fixed damage ignores DEF. Only shields or invincibility can prevent it.'
                             },
-                            {
-                                key: 'dual-scaling',
-                                title: 'Can skills scale with more than one stat?',
-                                content: 'Yes. Some skills scale with combinations like HP + ATK or SPD + ATK.'
-                            },
-                            {
-                                key: 'stat-scaling',
-                                title: 'How do I know which stats are used for a skill?',
-                                content: (
-                                    <>
-                                        <p>If nothing is mentioned, the skill usually scales with ATK by default.</p>
-                                        <p>If it uses a different stat, you&apos;ll see one of these:</p>
-                                        <ul className="list-disc list-inside ml-4">
-                                            <li>“Damage dealt increases proportional to Max Health <strong>instead of</strong> Attack.”</li>
-                                            <li>“Damage dealt increases proportional to Max Health.” (in addition to ATK)</li>
-                                        </ul>
-                                        <p>The wording is important: “instead of” replaces ATK scaling, while without it means additional scaling.</p>
-                                    </>
-                                )
-                            },
+{
+  key: 'dual-scaling',
+  title: 'Can skills scale with more than one stat?',
+  content: (
+    <>
+      <p>
+        Not exactly. Outerplane does not currently feature skills that use two stats evenly (e.g., 50% ATK + 50% HP).
+        What is often referred to as “dual-scaling” is actually <strong>secondary scaling</strong> — a main stat (usually ATK), with a minor bonus from another stat like HP, SPD, or EVA.
+      </p>
+      <p className="mt-2">
+        For example, some skills primarily scale with ATK but gain a bonus from the caster’s Max HP or Speed. Regina’s <strong>S3</strong> includes minor scaling with Evasion, and D. Stella has partial scaling from HP.
+      </p>
+      <p className="mt-2">
+        These secondary scalings are usually small and should not be the focus of gear building. There are also skills that use a stat other than ATK entirely — such as HP-based or DEF-based damage.
+      </p>
+    </>
+  )
+}
+,
+{
+key: 'stat-scaling',
+title: 'How do I know which stats are used for a skill?',
+content: (
+<>
+<p>If nothing is mentioned, the skill usually scales with ATK by default.</p>
+<p>If it uses a different stat, you&apos;ll see one of these:</p>
+<ul className="list-disc list-inside ml-4">
+<li>“Damage dealt increases proportional to Max Health <strong>instead of</strong> Attack.”</li>
+<li>“Damage dealt increases proportional to Max Health.” (in addition to ATK)</li>
+</ul>
+<p>The wording is important: “instead of” replaces ATK scaling, while without it means additional scaling.</p>
+</>
+)
+},
                             {
                                 key: 'formula',
                                 title: 'How calculations are done',
