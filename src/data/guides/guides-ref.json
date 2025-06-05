@@ -624,11 +624,11 @@
   ,
   "stats": {
     "category": "general-guides",
-    "title": "Statistics",
+    "title": "Statistics & Combat Basics",
     "description": "",
     "icon": "stats",
-    "second_image": "stats-2",
-    "last_updated": "2025-05-28",
+    "second_image": "stats",
+    "last_updated": "2025-05-06",
     "author": "Sevih / Shiraen",
     "hide": true
   }
