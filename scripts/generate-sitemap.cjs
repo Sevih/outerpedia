@@ -1,8 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const isProd = process.env.NODE_ENV === 'production';
-const domain = isProd ? 'https://outerpedia.com' : 'http://localhost:3000';
+const domain = 'https://outerpedia.com';
 
 // 📁 Chemin vers les personnages
 const characterDir = path.join(__dirname, '../src/data/char');
