@@ -51,6 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
   return {
     title: `${guide.title} | Outerpedia`,
     description: guide.description,
+    keywords: generateGuideKeywords(guide, slug),
     openGraph: {
       title: `${guide.title} | Outerpedia`,
       description: guide.description,
@@ -180,4 +181,66 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
   );
 
 
+}
+
+function generateGuideKeywords(guide: Guide, slug: string): string[] {
+  const { category, title, description, last_updated } = guide;
+
+  const base = [
+    'outerplane',
+    'outerpedia',
+    'outerplane wiki',
+    'outerplane guide',
+    title,
+    `${title} guide`,
+    slug,
+    'turn-based rpg',
+    'mobile rpg',
+    'character builds'
+  ];
+
+  const extras: Record<string, string[]> = {
+    'adventure': ['spoiler-free', 'map strategy', 'chapter walkthrough', 'adventure mode', 'stage progression', 'pve'],
+    'world-boss': ['world boss', 'extreme league','boss strategy', 'team building', 'gear recommendation', 'pve'],
+    'joint-boss': ['joint boss', 'raid build', 'high score tips', 'damage optimization', 'pve'],
+    'adventure-license': ['promotion license', 'promotion battle', 'AL', 'stage','pve'],
+    'special-request': ['request', 'gear boss', 'identification', 'ecology study','special Request'],
+    'irregular-extermination': ['irregular extermination', 'limited time event', 'event build', 'pve'],
+    'guild-raid': ['guild raid', 'co-op boss', 'guild damage', 'weekly ranking', 'pve'],
+    'general-guides': ['beginner guide', 'resource management', 'daily tips', 'system overview', 'pve'],
+  };
+
+  const normalizedCat = category.toLowerCase();
+  let categoryKeywords: string[] = [];
+
+
+  for (const key in extras) {
+    if (normalizedCat.includes(key)) {
+      categoryKeywords = extras[key];
+      break;
+    }
+  }
+
+  // Analyse de la description
+  const desc = description?.toLowerCase() ?? '';
+  const descriptionKeywords = [];
+
+  if (desc.includes('video')) descriptionKeywords.push('video guide');
+  if (desc.includes('full run')) descriptionKeywords.push('full run');
+  if (desc.includes('combat')) descriptionKeywords.push('combat footage');
+  if (desc.includes('strategy')) descriptionKeywords.push('strategy');
+  if (desc.includes('boss')) descriptionKeywords.push('boss fight');
+
+  // Ajout des éléments temporels
+  const date = new Date(last_updated);
+  const year = date.getFullYear();
+  const monthName = date.toLocaleString('en-US', { month: 'long' });
+
+  const dateKeywords = [
+    `updated ${year}`,
+    `${monthName} ${year}`,
+    `guide ${year}`
+  ];
+
+  return [...base, ...categoryKeywords, ...descriptionKeywords, ...dateKeywords];
 }

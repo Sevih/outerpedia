@@ -44,6 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
 
   return {
     title: `${meta.title} | Outerpedia`,
+    keywords: generateKeywords(category, meta.title),
     description: meta.description,
     openGraph: {
       title: `${meta.title} | Outerpedia`,
@@ -157,4 +158,39 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
       />
     </div>
   );
+}
+
+function generateKeywords(category: string, metaTitle: string): string[] {
+  const base = [
+    'outerplane',
+    'outerpedia',
+    'outerplane wiki',
+    'outerplane guide',
+    metaTitle,
+    `${metaTitle} guide`,
+    metaTitle.toLowerCase().replace(/\s+/g, '-'),
+    'rpg guides',
+    'turn-based rpg',
+    'mobile rpg database'
+  ];
+
+  const extras: Record<string, string[]> = {
+    'adventure': ['spoiler-free', 'map strategy', 'chapter walkthrough', 'adventure mode', 'stage progression', 'pve'],
+    'world-boss': ['world boss', 'extreme league','boss strategy', 'team building', 'gear recommendation', 'pve'],
+    'joint-boss': ['joint boss', 'raid build', 'high score tips', 'damage optimization', 'pve'],
+    'adventure-license': ['promotion license', 'promotion battle', 'AL', 'stage','pve'],
+    'special-request': ['request', 'gear boss', 'identification', 'ecology study','special Request'],
+    'irregular-extermination': ['irregular extermination', 'limited time event', 'event build', 'pve'],
+    'guild-raid': ['guild raid', 'co-op boss', 'guild damage', 'weekly ranking', 'pve'],
+    'general-guides': ['beginner guide', 'resource management', 'daily tips', 'system overview', 'pve'],
+  };
+
+  const normalizedCat = category.toLowerCase();
+  for (const key in extras) {
+    if (normalizedCat.includes(key)) {
+      return [...base, ...extras[key]];
+    }
+  }
+
+  return base;
 }
