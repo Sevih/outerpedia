@@ -25,9 +25,9 @@
   },
   {
     "url": "https://outerpedia.com/guides",
-    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,outerplane tier list,character builds,gear usage statistics,gear usage finder,mobile rpg database,turn-based rpg,outerplane builds,outerplane exclusive equipment,outerplane gear sets",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "keywords": "outerplane guides,strategy guides,outerpedia,General Guides,general,Adventure,adventure,World Boss Guides,world boss,Gear Boss Tips,gear boss tips,Joint Boss Tips,joint boss tips,Guild Raid Tips,guild raid tips,Adventure License Tips,adventure license tips,Irregular Extermination Tips,irregular extermination tips,turn-based rpg,mobile rpg",
+    "canonical": "https://outerpedia.com/guides",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/changelog",
@@ -37,9 +37,9 @@
   },
   {
     "url": "https://outerpedia.com/tools",
-    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,outerplane tier list,character builds,gear usage statistics,gear usage finder,mobile rpg database,turn-based rpg,outerplane builds,outerplane exclusive equipment,outerplane gear sets",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "keywords": "outerpedia,outerplane tools,mobile rpg tools,exclusive equipment priority,gear usage finder,gear usage statistics,tier list pve,tier list pvp",
+    "canonical": "https://outerpedia.com/tools",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/legal",
@@ -698,439 +698,439 @@
   {
     "url": "https://outerpedia.com/guides/world-boss/dahlia",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Dahlia,Dahlia guide,dahlia,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,video guide,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/world-boss/dahlia",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/world-boss/ragnakeus",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ragnakeus,Ragnakeus guide,ragnakeus,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,video guide,updated 2024,October 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/world-boss/ragnakeus",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/world-boss/harsha",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Harsha,Harsha guide,harsha,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,combat footage,updated 2025,January 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/world-boss/harsha",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/world-boss/drakhan",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Drakhan,Drakhan guide,drakhan,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,combat footage,updated 2024,December 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/world-boss/drakhan",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/world-boss/primordial_sentinel",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Primordial Sentinel,Primordial Sentinel guide,primordial_sentinel,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,full run,boss fight,updated 2024,July 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/world-boss/primordial_sentinel",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/world-boss/venion",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Venion,Venion guide,venion,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,strategy,boss fight,updated 2025,June 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/world-boss/venion",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/glicys",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Glicys,Glicys guide,glicys,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/glicys",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/beatles",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Dek'ril & Mek'ril,Dek'ril & Mek'ril guide,beatles,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/beatles",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/meteos",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Blazing Knight Meteos,Blazing Knight Meteos guide,meteos,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/meteos",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/chimera",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Unidentified Chimera,Unidentified Chimera guide,chimera,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2024,September 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/chimera",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/guardian",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Masterless Guardian,Masterless Guardian guide,guardian,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2024,September 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/guardian",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/ars-nova",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ars Nova,Ars Nova guide,ars-nova,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/ars-nova",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/amadeus",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Amadeus,Amadeus guide,amadeus,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/amadeus",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/sacreed",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Sacreed Guardian,Sacreed Guardian guide,sacreed,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/sacreed",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/grand-calamari",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Grand Calamari,Grand Calamari guide,grand-calamari,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/grand-calamari",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/special-request/tyrant",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Tyrant Toddler,Tyrant Toddler guide,tyrant,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2024,September 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/special-request/tyrant",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/joint-boss/deep-sea-guardian",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Deep Sea Guardian,Deep Sea Guardian guide,deep-sea-guardian,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,strategy,boss fight,updated 2025,March 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/joint-boss/deep-sea-guardian",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/prom-dvlada",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Promotion : Demiurge Vlada,Promotion : Demiurge Vlada guide,prom-dvlada,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,March 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/prom-dvlada",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/prom-ddrakhan",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Promotion : Demiurge Drakhan,Promotion : Demiurge Drakhan guide,prom-ddrakhan,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,January 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/prom-ddrakhan",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/prom-dastei",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Promotion : Demiurge Astei,Promotion : Demiurge Astei guide,prom-dastei,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,December 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/prom-dastei",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/prom-dstella",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Promotion : Demiurge Stella,Promotion : Demiurge Stella guide,prom-dstella,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/prom-dstella",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/anubis-g",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Anubis Guardian,Anubis Guardian guide,anubis-g,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,March 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/anubis-g",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/heavy-fixed-vladi-max",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Heavy Fixed Vladi Max,Heavy Fixed Vladi Max guide,heavy-fixed-vladi-max,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,January 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/heavy-fixed-vladi-max",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/amadeus-AL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Amadeus,Amadeus guide,amadeus-AL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/amadeus-AL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/meteos-AL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Blazing Knight Meteos,Blazing Knight Meteos guide,meteos-AL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/meteos-AL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/sacreed-AL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Sacreed Guardian,Sacreed Guardian guide,sacreed-AL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/sacreed-AL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/ziggsaron",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ravenous Wolf King, Ziggsaron,Ravenous Wolf King, Ziggsaron guide,ziggsaron,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,December 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/ziggsaron",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/fulmination",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ful.Mi.NATION Assault Suit,Ful.Mi.NATION Assault Suit guide,fulmination,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,January 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/fulmination",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/ksai",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ksai,Ksai guide,ksai,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,December 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/ksai",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/shadowArch",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Shadow of the Archdemon,Shadow of the Archdemon guide,shadowArch,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,December 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/shadowArch",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/ars-novaAL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ars Nova,Ars Nova guide,ars-novaAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/ars-novaAL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/schattermeister-Schwartz",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Schattermeister Schwartz,Schattermeister Schwartz guide,schattermeister-Schwartz,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/schattermeister-Schwartz",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/masterlessAL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Masterless Guardian,Masterless Guardian guide,masterlessAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/masterlessAL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/calamarisAL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Grand Calamari,Grand Calamari guide,calamarisAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/calamarisAL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/toddlerAL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Tyrant Toddler,Tyrant Toddler guide,toddlerAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/toddlerAL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/glicysAL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Glicys,Glicys guide,glicysAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/glicysAL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/beatlesAL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Dek'ril & Mek'ril,Dek'ril & Mek'ril guide,beatlesAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/beatlesAL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/chimeraAL",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Unidentified Chimera,Unidentified Chimera guide,chimeraAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/chimeraAL",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/ppu-epsilon",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Planet Purification Unit Epsilon,Planet Purification Unit Epsilon guide,ppu-epsilon,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/ppu-epsilon",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/gustav",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Gustav,Gustav guide,gustav,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/gustav",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure-license/forest-king",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Forest King,Forest King guide,forest-king,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure-license/forest-king",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/joint-boss/prototype-ex-78",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Prototype EX-78,Prototype EX-78 guide,prototype-ex-78,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,combat footage,updated 2024,December 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/joint-boss/prototype-ex-78",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/joint-boss/schichifuja",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Schichifuja,Schichifuja guide,schichifuja,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,combat footage,updated 2024,November 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/joint-boss/schichifuja",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/joint-boss/annihilator",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Annihilator,Annihilator guide,annihilator,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,combat footage,updated 2024,September 2024,guide 2024",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/joint-boss/annihilator",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/joint-boss/koh-meteos",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Knight of Hope Meteos,Knight of Hope Meteos guide,koh-meteos,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/joint-boss/koh-meteos",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/irregular-extermination/pursuit-queen",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Pursuit : Irregular Queen,Pursuit : Irregular Queen guide,pursuit-queen,turn-based rpg,mobile rpg,character builds,irregular extermination,limited time event,event build,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/irregular-extermination/pursuit-queen",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/irregular-extermination/pursuit-blockbuster",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Pursuit : Blockbuster,Pursuit : Blockbuster guide,pursuit-blockbuster,turn-based rpg,mobile rpg,character builds,irregular extermination,limited time event,event build,pve,strategy,boss fight,updated 2025,April 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/irregular-extermination/pursuit-blockbuster",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/irregular-extermination/pursuit-iron-stretcher",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Pursuit : Iron Stretcher,Pursuit : Iron Stretcher guide,pursuit-iron-stretcher,turn-based rpg,mobile rpg,character builds,irregular extermination,limited time event,event build,pve,strategy,boss fight,updated 2025,April 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/irregular-extermination/pursuit-iron-stretcher",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/irregular-extermination/pursuit-mutated-wyvre",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Pursuit : Mutated Wyvre,Pursuit : Mutated Wyvre guide,pursuit-mutated-wyvre,turn-based rpg,mobile rpg,character builds,irregular extermination,limited time event,event build,pve,strategy,boss fight,updated 2025,April 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/irregular-extermination/pursuit-mutated-wyvre",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/guild-raid/maxwell",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,The Madman's Laboratory,The Madman's Laboratory guide,maxwell,turn-based rpg,mobile rpg,character builds,guild raid,co-op boss,guild damage,weekly ranking,pve,strategy,boss fight,updated 2025,April 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/guild-raid/maxwell",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/guild-raid/frost-legion",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,The Frost Legion,The Frost Legion guide,frost-legion,turn-based rpg,mobile rpg,character builds,guild raid,co-op boss,guild damage,weekly ranking,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/guild-raid/frost-legion",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/general-guides/free-heroes-start-banner",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Free Heroes & Starter Banners,Free Heroes & Starter Banners guide,free-heroes-start-banner,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/general-guides/free-heroes-start-banner",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/general-guides/daily-stamina",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Daily Stamina Burn,Daily Stamina Burn guide,daily-stamina,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/general-guides/daily-stamina",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/general-guides/banner-mileage",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Banners & Mileage System,Banners & Mileage System guide,banner-mileage,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/general-guides/banner-mileage",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S1-8-5",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S1 Normal 8-5 : Maxwell,S1 Normal 8-5 : Maxwell guide,S1-8-5,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S1-8-5",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S1-9-5",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S1 Hard 9-5 : Leo & Alpha,S1 Hard 9-5 : Leo & Alpha guide,S1-9-5,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S1-9-5",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S2-1-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 1-10 : Grand Calamri,S2 Hard 1-10 : Grand Calamri guide,S2-1-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S2-1-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S2-3-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 3-10 : Sacreed Guardian,S2 Hard 3-10 : Sacreed Guardian guide,S2-3-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S2-3-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S2-4-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 4-10 : Astei & Sterope,S2 Hard 4-10 : Astei & Sterope guide,S2-4-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S2-4-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S2-5-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 5-10 : Demiurge Astei,S2 Hard 5-10 : Demiurge Astei guide,S2-5-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S2-5-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S2-7-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 7-10 : Vlada,S2 Hard 7-10 : Vlada guide,S2-7-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S2-7-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S2-9-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 9-10 : Vladi Max,S2 Hard 9-10 : Vladi Max guide,S2-9-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S2-9-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S2-10-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 10-10 : Demiurge Drakhan & Demiurge Vlada,S2 Hard 10-10 : Demiurge Drakhan & Demiurge Vlada guide,S2-10-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S2-10-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S3-2-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 2-10 : Betrayed Deshret,S3 Hard 2-10 : Betrayed Deshret guide,S3-2-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S3-2-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S3-3-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 3-10 : Fatal,S3 Hard 3-10 : Fatal guide,S3-3-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S3-3-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S3-4-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 4-10 : Hilde & sisters,S3 Hard 4-10 : Hilde & sisters guide,S3-4-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S3-4-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S3-5-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 5-10 : Regina & Hilde,S3 Hard 5-10 : Regina & Hilde guide,S3-5-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S3-5-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S3-6-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 6-10 : Ancient Foe,S3 Hard 6-10 : Ancient Foe guide,S3-6-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S3-6-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/adventure/S3-7-10",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 7-10 : Abyssal Calamity Apophis,S3 Hard 7-10 : Abyssal Calamity Apophis guide,S3-7-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/adventure/S3-7-10",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/general-guides/heroes-growth",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Hero Growth,Hero Growth guide,heroes-growth,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/general-guides/heroes-growth",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/general-guides/gear",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Gear,Gear guide,gear,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/general-guides/gear",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/general-guides/quirk",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Quirk,Quirk guide,quirk,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/general-guides/quirk",
+    "canonicalIsValid": true
   },
   {
     "url": "https://outerpedia.com/guides/general-guides/stats",
     "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Statistics & Combat Basics,Statistics & Combat Basics guide,stats,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
-    "canonical": "https://outerpedia.com/",
-    "canonicalIsValid": false
+    "canonical": "https://outerpedia.com/guides/general-guides/stats",
+    "canonicalIsValid": true
   }
 ]

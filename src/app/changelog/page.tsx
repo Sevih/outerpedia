@@ -1,6 +1,25 @@
 import { changelog } from "@/data/changelog";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { renderMarkdown } from "@/utils/markdown";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: 'Changelog | Outerpedia',
+  description: 'Track all updates made to Outerpedia: guides, characters, tools, and more.',
+  keywords: [
+    'outerpedia changelog',
+    'outerpedia updates',
+    'patch notes',
+    'site update history',
+    'guide updates',
+    'tier list changes',
+    'new characters',
+    'tool improvements'
+  ],
+  alternates: {
+    canonical: 'https://outerpedia.com/changelog',
+  },
+};
+
 
 export default function ChangelogPage() {
   return (

@@ -1,7 +1,26 @@
-export const metadata = {
-    title: "Legal Notice – Outerpedia",
-    description: "Disclaimer and legal information about this unofficial Outerplane fan project.",
-  };
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Legal Notice | Outerpedia',
+  description: 'Legal disclaimer, copyright, and content usage information for Outerpedia, a non-commercial fan project dedicated to Outerplane.',
+  keywords: [
+    'outerpedia legal notice',
+    'terms of service',
+    'content usage policy',
+    'copyright',
+    'disclaimer',
+    'outerplane fan project',
+    'non-commercial site',
+    'ovh hosting',
+    'lcEN compliance',
+    'takedown request'
+  ],
+  alternates: {
+    canonical: 'https://outerpedia.com/legal',
+  },
+};
+
+
   
   export default function LegalNoticePage() {
     return (

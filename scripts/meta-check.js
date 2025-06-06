@@ -4,8 +4,7 @@ const { parseStringPromise } = require('xml2js');
 const fs = require('fs');
 
 // Choix base URL selon environnement
-const IS_PROD = process.env.NODE_ENV === 'production';
-const BASE_URL = IS_PROD ? 'https://outerpedia.com' : 'http://localhost:3000';
+const BASE_URL = 'https://outerpedia.com';
 
 const SITEMAP_URL = `${BASE_URL}/sitemap.xml`;
 
