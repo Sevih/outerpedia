@@ -264,7 +264,9 @@ export default function CharactersPage() {
       />
 
 
-      <h1 className="text-3xl font-bold">Characters</h1>
+      <div className="sr-only">
+        <h1>Outerplane Full Characters Database</h1>
+      </div>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       <div className="flex justify-center gap-2 mb-4">

@@ -235,7 +235,9 @@ export default function EquipmentsClient() {
           </button>
         </div>
       )}
-
+      <div className="sr-only">
+        <h1>Weapon, Set, Amulet, Exclusive Equipment, Talismans  Database</h1>
+      </div>
 
       <div className="relative flex justify-center mb-6">
         <div className="relative bg-gray-100 dark:bg-gray-800 rounded-full p-1 flex gap-1 min-w-[300px]">

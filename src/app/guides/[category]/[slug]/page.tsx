@@ -49,15 +49,15 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
   const image = `https://outerpedia.com/images/guides/${guide.category}/${slug}_portrait.png`;
 
   return {
-    title: `${guide.title} | Outerpedia`,
-    description: guide.description,
+    title: `${guide.title} | ${guide.category} | Outerpedia`,
+    description: `${guide.title} - ${guide.category} - ${guide.description} `,
     keywords: generateGuideKeywords(guide, slug),
     alternates: {
-    canonical: `https://outerpedia.com/guides/${guide.category}/${slug}`,
-  },
+      canonical: `https://outerpedia.com/guides/${guide.category}/${slug}`,
+    },
     openGraph: {
-      title: `${guide.title} | Outerpedia`,
-      description: guide.description,
+      title: `${guide.title} | ${guide.category} | Outerpedia`,
+      description: `${guide.title} - ${guide.category} - ${guide.description} `,
       type: 'article',
       url,
       images: [
@@ -71,8 +71,8 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
     },
     twitter: {
       card: 'summary',
-      title: `${guide.title} | Outerpedia`,
-      description: guide.description,
+      title: `${guide.title} | ${guide.category} | Outerpedia`,
+      description: `${guide.title} - ${guide.category} - ${guide.description} `,
       images: [image],
     },
   };
@@ -89,7 +89,11 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
   }
 
   return (
+
     <div className="p-6">
+      <div className="sr-only">
+        <h1>{`${guide.title} | ${guide.category}`}</h1>
+      </div>
       <div className="relative w-full h-[150px] rounded-2xl overflow-hidden mb-6">
         {/* Image centrée */}
 
@@ -204,10 +208,10 @@ function generateGuideKeywords(guide: Guide, slug: string): string[] {
 
   const extras: Record<string, string[]> = {
     'adventure': ['spoiler-free', 'map strategy', 'chapter walkthrough', 'adventure mode', 'stage progression', 'pve'],
-    'world-boss': ['world boss', 'extreme league','boss strategy', 'team building', 'gear recommendation', 'pve'],
+    'world-boss': ['world boss', 'extreme league', 'boss strategy', 'team building', 'gear recommendation', 'pve'],
     'joint-boss': ['joint boss', 'raid build', 'high score tips', 'damage optimization', 'pve'],
-    'adventure-license': ['promotion license', 'promotion battle', 'AL', 'stage','pve'],
-    'special-request': ['request', 'gear boss', 'identification', 'ecology study','special Request'],
+    'adventure-license': ['promotion license', 'promotion battle', 'AL', 'stage', 'pve'],
+    'special-request': ['request', 'gear boss', 'identification', 'ecology study', 'special Request'],
     'irregular-extermination': ['irregular extermination', 'limited time event', 'event build', 'pve'],
     'guild-raid': ['guild raid', 'co-op boss', 'guild damage', 'weekly ranking', 'pve'],
     'general-guides': ['beginner guide', 'resource management', 'daily tips', 'system overview', 'pve'],
