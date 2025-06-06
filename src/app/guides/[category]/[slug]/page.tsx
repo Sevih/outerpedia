@@ -52,6 +52,9 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
     title: `${guide.title} | Outerpedia`,
     description: guide.description,
     keywords: generateGuideKeywords(guide, slug),
+    alternates: {
+    canonical: `https://outerpedia.com/guides/${guide.category}/${slug}`,
+  },
     openGraph: {
       title: `${guide.title} | Outerpedia`,
       description: guide.description,

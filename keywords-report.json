@@ -1,0 +1,1136 @@
+[
+  {
+    "url": "https://outerpedia.com/",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,outerplane tier list,character builds,gear usage statistics,gear usage finder,mobile rpg database,turn-based rpg,outerplane builds,outerplane exclusive equipment,outerplane gear sets",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters",
+    "keywords": "Outerplane,Characters,Heroes,Character Database,Stats,Skills,Gear Recommendations,Exclusive Equipment,June 2025,EvaMains,Outerpedia",
+    "canonical": "https://outerpedia.com/characters",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/equipments",
+    "keywords": "Outerplane,Equipments,Gear,Stats,Builds,Outerpedia",
+    "canonical": "https://outerpedia.com/equipments",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/tierlist",
+    "keywords": "Outerplane,Tier List,Best Characters,June 2025,EvaMains,Outerpedia,PvE ranking,PvP ranking,character builds",
+    "canonical": "https://outerpedia.com/tierlist",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/guides",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,outerplane tier list,character builds,gear usage statistics,gear usage finder,mobile rpg database,turn-based rpg,outerplane builds,outerplane exclusive equipment,outerplane gear sets",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/changelog",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,outerplane tier list,character builds,gear usage statistics,gear usage finder,mobile rpg database,turn-based rpg,outerplane builds,outerplane exclusive equipment,outerplane gear sets",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/tools",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,outerplane tier list,character builds,gear usage statistics,gear usage finder,mobile rpg database,turn-based rpg,outerplane builds,outerplane exclusive equipment,outerplane gear sets",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/legal",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,outerplane tier list,character builds,gear usage statistics,gear usage finder,mobile rpg database,turn-based rpg,outerplane builds,outerplane exclusive equipment,outerplane gear sets",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/tierlistpve",
+    "keywords": "Outerplane,Tier List,Best Characters,June 2025 ,EvaMains,Outerpedia,PvE",
+    "canonical": "https://outerpedia.com/tierlistpve",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/tierlistpvp",
+    "keywords": "Outerplane,Tier List,Best Characters,June 2025,EvaMains,Outerpedia,PvP",
+    "canonical": "https://outerpedia.com/tierlistpvp",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/ee-priority",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,outerplane tier list,character builds,gear usage statistics,gear usage finder,mobile rpg database,turn-based rpg,outerplane builds,outerplane exclusive equipment,outerplane gear sets",
+    "canonical": "https://outerpedia.com/ee-priority",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/gear-usage-stats",
+    "keywords": "Outerplane,Gear Stats,Gear Usage,Weapons,Amulets,Sets,EvaMains,Outerpedia",
+    "canonical": "https://outerpedia.com/gear-usage-stats",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/gear-solver",
+    "keywords": "Outerplane,Gear Finder,Recommended Gear,Weapons,Amulets,Sets,EvaMains,Outerpedia",
+    "canonical": "https://outerpedia.com/gear-solver",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/adelie",
+    "keywords": "Outerplane,Outerpedia,Adelie,Adelie Outerplane,Adelie Build,Adelie Guide,Striker,Attacker,Water,Adelie pve tier,Adelie pvp tier",
+    "canonical": "https://outerpedia.com/characters/adelie",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/aer",
+    "keywords": "Outerplane,Outerpedia,Aer,Aer Outerplane,Aer Build,Aer Guide,Striker,Attacker,Fire,Aer pve tier,Aer pvp tier",
+    "canonical": "https://outerpedia.com/characters/aer",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/ais-wallenstein",
+    "keywords": "Outerplane,Outerpedia,Ais Wallenstein,Ais Wallenstein Outerplane,Ais Wallenstein Build,Ais Wallenstein Guide,Striker,Attacker,Light,Ais Wallenstein pve tier,Ais Wallenstein pvp tier",
+    "canonical": "https://outerpedia.com/characters/ais-wallenstein",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/akari",
+    "keywords": "Outerplane,Outerpedia,Akari,Akari Outerplane,Akari Build,Akari Guide,Ranger,Tactician,Light,Akari pve tier,Akari pvp tier",
+    "canonical": "https://outerpedia.com/characters/akari",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/alice",
+    "keywords": "Outerplane,Outerpedia,Alice,Alice Outerplane,Alice Build,Alice Guide,Mage,Enchanter,Earth,Alice pve tier,Alice pvp tier",
+    "canonical": "https://outerpedia.com/characters/alice",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/alpha",
+    "keywords": "Outerplane,Outerpedia,Alpha,Alpha Outerplane,Alpha Build,Alpha Guide,Mage,Enchanter,Water,Alpha pve tier,Alpha pvp tier",
+    "canonical": "https://outerpedia.com/characters/alpha",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/ame",
+    "keywords": "Outerplane,Outerpedia,Ame,Ame Outerplane,Ame Build,Ame Guide,Mage,Wizard,Earth,Ame pve tier,Ame pvp tier",
+    "canonical": "https://outerpedia.com/characters/ame",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/astei",
+    "keywords": "Outerplane,Outerpedia,Astei,Astei Outerplane,Astei Build,Astei Guide,Healer,Reliever,Fire,Astei pve tier,Astei pvp tier",
+    "canonical": "https://outerpedia.com/characters/astei",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/bell-cranel",
+    "keywords": "Outerplane,Outerpedia,Bell Cranel,Bell Cranel Outerplane,Bell Cranel Build,Bell Cranel Guide,Mage,Wizard,Fire,Bell Cranel pve tier,Bell Cranel pvp tier",
+    "canonical": "https://outerpedia.com/characters/bell-cranel",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/beth",
+    "keywords": "Outerplane,Outerpedia,Beth,Beth Outerplane,Beth Build,Beth Guide,Striker,Attacker,Water,Beth pve tier,Beth pvp tier",
+    "canonical": "https://outerpedia.com/characters/beth",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/bleu",
+    "keywords": "Outerplane,Outerpedia,Bleu,Bleu Outerplane,Bleu Build,Bleu Guide,Mage,Wizard,Water,Bleu pve tier,Bleu pvp tier",
+    "canonical": "https://outerpedia.com/characters/bleu",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/bryn",
+    "keywords": "Outerplane,Outerpedia,Bryn,Bryn Outerplane,Bryn Build,Bryn Guide,Mage,Wizard,Fire,Bryn pve tier,Bryn pvp tier",
+    "canonical": "https://outerpedia.com/characters/bryn",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/caren",
+    "keywords": "Outerplane,Outerpedia,Caren,Caren Outerplane,Caren Build,Caren Guide,Striker,Bruiser,Water,Caren pve tier,Caren pvp tier",
+    "canonical": "https://outerpedia.com/characters/caren",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/charlotte",
+    "keywords": "Outerplane,Outerpedia,Charlotte,Charlotte Outerplane,Charlotte Build,Charlotte Guide,Ranger,Tactician,Earth,Charlotte pve tier,Charlotte pvp tier",
+    "canonical": "https://outerpedia.com/characters/charlotte",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/christina",
+    "keywords": "Outerplane,Outerpedia,Christina,Christina Outerplane,Christina Build,Christina Guide,Defender,Phalanx,Fire,Christina pve tier,Christina pvp tier",
+    "canonical": "https://outerpedia.com/characters/christina",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/cindy",
+    "keywords": "Outerplane,Outerpedia,Cindy,Cindy Outerplane,Cindy Build,Cindy Guide,Ranger,Tactician,Water,Cindy pve tier,Cindy pvp tier",
+    "canonical": "https://outerpedia.com/characters/cindy",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/claire",
+    "keywords": "Outerplane,Outerpedia,Claire,Claire Outerplane,Claire Build,Claire Guide,Healer,Sage,Fire,Claire pve tier,Claire pvp tier",
+    "canonical": "https://outerpedia.com/characters/claire",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/dahlia",
+    "keywords": "Outerplane,Outerpedia,Dahlia,Dahlia Outerplane,Dahlia Build,Dahlia Guide,Mage,Enchanter,Water,Dahlia pve tier,Dahlia pvp tier",
+    "canonical": "https://outerpedia.com/characters/dahlia",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/delta",
+    "keywords": "Outerplane,Outerpedia,Delta,Delta Outerplane,Delta Build,Delta Guide,Striker,Bruiser,Earth,Delta pve tier,Delta pvp tier",
+    "canonical": "https://outerpedia.com/characters/delta",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/demiurge-astei",
+    "keywords": "Outerplane,Outerpedia,Demiurge Astei,Demiurge Astei Outerplane,Demiurge Astei Build,Demiurge Astei Guide,Mage,Wizard,Dark,Demiurge Astei pve tier,Demiurge Astei pvp tier",
+    "canonical": "https://outerpedia.com/characters/demiurge-astei",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/demiurge-delta",
+    "keywords": "Outerplane,Outerpedia,Demiurge Delta,Demiurge Delta Outerplane,Demiurge Delta Build,Demiurge Delta Guide,Healer,Reliever,Dark,Demiurge Delta pve tier,Demiurge Delta pvp tier",
+    "canonical": "https://outerpedia.com/characters/demiurge-delta",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/demiurge-drakhan",
+    "keywords": "Outerplane,Outerpedia,Demiurge Drakhan,Demiurge Drakhan Outerplane,Demiurge Drakhan Build,Demiurge Drakhan Guide,Defender,Sweeper,Light,Demiurge Drakhan pve tier,Demiurge Drakhan pvp tier",
+    "canonical": "https://outerpedia.com/characters/demiurge-drakhan",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/demiurge-luna",
+    "keywords": "Outerplane,Outerpedia,Demiurge Luna,Demiurge Luna Outerplane,Demiurge Luna Build,Demiurge Luna Guide,Mage,Wizard,Light,Demiurge Luna pve tier,Demiurge Luna pvp tier",
+    "canonical": "https://outerpedia.com/characters/demiurge-luna",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/demiurge-stella",
+    "keywords": "Outerplane,Outerpedia,Demiurge Stella,Demiurge Stella Outerplane,Demiurge Stella Build,Demiurge Stella Guide,Striker,Bruiser,Light,Demiurge Stella pve tier,Demiurge Stella pvp tier",
+    "canonical": "https://outerpedia.com/characters/demiurge-stella",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/demiurge-vlada",
+    "keywords": "Outerplane,Outerpedia,Demiurge Vlada,Demiurge Vlada Outerplane,Demiurge Vlada Build,Demiurge Vlada Guide,Ranger,Vanguard,Dark,Demiurge Vlada pve tier,Demiurge Vlada pvp tier",
+    "canonical": "https://outerpedia.com/characters/demiurge-vlada",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/dianne",
+    "keywords": "Outerplane,Outerpedia,Dianne,Dianne Outerplane,Dianne Build,Dianne Guide,Healer,Sage,Light,Dianne pve tier,Dianne pvp tier",
+    "canonical": "https://outerpedia.com/characters/dianne",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/dolly",
+    "keywords": "Outerplane,Outerpedia,Dolly,Dolly Outerplane,Dolly Build,Dolly Guide,Mage,Enchanter,Earth,Dolly pve tier,Dolly pvp tier",
+    "canonical": "https://outerpedia.com/characters/dolly",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/drakhan",
+    "keywords": "Outerplane,Outerpedia,Drakhan,Drakhan Outerplane,Drakhan Build,Drakhan Guide,Striker,Attacker,Light,Drakhan pve tier,Drakhan pvp tier",
+    "canonical": "https://outerpedia.com/characters/drakhan",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/edelweiss",
+    "keywords": "Outerplane,Outerpedia,Edelweiss,Edelweiss Outerplane,Edelweiss Build,Edelweiss Guide,Ranger,Tactician,Water,Edelweiss pve tier,Edelweiss pvp tier",
+    "canonical": "https://outerpedia.com/characters/edelweiss",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/eliza",
+    "keywords": "Outerplane,Outerpedia,Eliza,Eliza Outerplane,Eliza Build,Eliza Guide,Ranger,Tactician,Dark,Eliza pve tier,Eliza pvp tier",
+    "canonical": "https://outerpedia.com/characters/eliza",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/ember",
+    "keywords": "Outerplane,Outerpedia,Ember,Ember Outerplane,Ember Build,Ember Guide,Defender,Sweeper,Fire,Ember pve tier,Ember pvp tier",
+    "canonical": "https://outerpedia.com/characters/ember",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/epsilon",
+    "keywords": "Outerplane,Outerpedia,Epsilon,Epsilon Outerplane,Epsilon Build,Epsilon Guide,Striker,Bruiser,Dark,Epsilon pve tier,Epsilon pvp tier",
+    "canonical": "https://outerpedia.com/characters/epsilon",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/eternal",
+    "keywords": "Outerplane,Outerpedia,Eternal,Eternal Outerplane,Eternal Build,Eternal Guide,Mage,Enchanter,Fire,Eternal pve tier,Eternal pvp tier",
+    "canonical": "https://outerpedia.com/characters/eternal",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/eva",
+    "keywords": "Outerplane,Outerpedia,Eva,Eva Outerplane,Eva Build,Eva Guide,Healer,Reliever,Light,Eva pve tier,Eva pvp tier",
+    "canonical": "https://outerpedia.com/characters/eva",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/faenan",
+    "keywords": "Outerplane,Outerpedia,Faenan,Faenan Outerplane,Faenan Build,Faenan Guide,Healer,Sage,Light,Faenan pve tier,Faenan pvp tier",
+    "canonical": "https://outerpedia.com/characters/faenan",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/fatal",
+    "keywords": "Outerplane,Outerpedia,Fatal,Fatal Outerplane,Fatal Build,Fatal Guide,Ranger,Vanguard,Water,Fatal pve tier,Fatal pvp tier",
+    "canonical": "https://outerpedia.com/characters/fatal",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/fenrir",
+    "keywords": "Outerplane,Outerpedia,Fenrir,Fenrir Outerplane,Fenrir Build,Fenrir Guide,Striker,Bruiser,Fire,Fenrir pve tier,Fenrir pvp tier",
+    "canonical": "https://outerpedia.com/characters/fenrir",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/flamberge",
+    "keywords": "Outerplane,Outerpedia,Flamberge,Flamberge Outerplane,Flamberge Build,Flamberge Guide,Healer,Reliever,Earth,Flamberge pve tier,Flamberge pvp tier",
+    "canonical": "https://outerpedia.com/characters/flamberge",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/francesca",
+    "keywords": "Outerplane,Outerpedia,Francesca,Francesca Outerplane,Francesca Build,Francesca Guide,Striker,Attacker,Dark,Francesca pve tier,Francesca pvp tier",
+    "canonical": "https://outerpedia.com/characters/francesca",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/gnosis-beth",
+    "keywords": "Outerplane,Outerpedia,Gnosis Beth,Gnosis Beth Outerplane,Gnosis Beth Build,Gnosis Beth Guide,Ranger,Tactician,Light,Gnosis Beth pve tier,Gnosis Beth pvp tier",
+    "canonical": "https://outerpedia.com/characters/gnosis-beth",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/gnosis-dahlia",
+    "keywords": "Outerplane,Outerpedia,Gnosis Dahlia,Gnosis Dahlia Outerplane,Gnosis Dahlia Build,Gnosis Dahlia Guide,Striker,Attacker,Dark,Gnosis Dahlia pve tier,Gnosis Dahlia pvp tier",
+    "canonical": "https://outerpedia.com/characters/gnosis-dahlia",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/gnosis-nella",
+    "keywords": "Outerplane,Outerpedia,Gnosis Nella,Gnosis Nella Outerplane,Gnosis Nella Build,Gnosis Nella Guide,Mage,Enchanter,Light,Gnosis Nella pve tier,Gnosis Nella pvp tier",
+    "canonical": "https://outerpedia.com/characters/gnosis-nella",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/guizam",
+    "keywords": "Outerplane,Outerpedia,Guizam,Guizam Outerplane,Guizam Build,Guizam Guide,Striker,Attacker,Fire,Guizam pve tier,Guizam pvp tier",
+    "canonical": "https://outerpedia.com/characters/guizam",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/hanbyul-lee",
+    "keywords": "Outerplane,Outerpedia,Hanbyul Lee,Hanbyul Lee Outerplane,Hanbyul Lee Build,Hanbyul Lee Guide,Defender,Phalanx,Earth,Hanbyul Lee pve tier,Hanbyul Lee pvp tier",
+    "canonical": "https://outerpedia.com/characters/hanbyul-lee",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/hilde",
+    "keywords": "Outerplane,Outerpedia,Hilde,Hilde Outerplane,Hilde Build,Hilde Guide,Defender,Phalanx,Dark,Hilde pve tier,Hilde pvp tier",
+    "canonical": "https://outerpedia.com/characters/hilde",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/holy-night-s-blessing-dianne",
+    "keywords": "Outerplane,Outerpedia,Holy Night's Blessing Dianne,Holy Night's Blessing Dianne Outerplane,Holy Night's Blessing Dianne Build,Holy Night's Blessing Dianne Guide,Ranger,Vanguard,Fire,Holy Night's Blessing Dianne pve tier,Holy Night's Blessing Dianne pvp tier",
+    "canonical": "https://outerpedia.com/characters/holy-night-s-blessing-dianne",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/idith",
+    "keywords": "Outerplane,Outerpedia,Idith,Idith Outerplane,Idith Build,Idith Guide,Striker,Bruiser,Earth,Idith pve tier,Idith pvp tier",
+    "canonical": "https://outerpedia.com/characters/idith",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/iota",
+    "keywords": "Outerplane,Outerpedia,Iota,Iota Outerplane,Iota Build,Iota Guide,Mage,Enchanter,Dark,Iota pve tier,Iota pvp tier",
+    "canonical": "https://outerpedia.com/characters/iota",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/iris",
+    "keywords": "Outerplane,Outerpedia,Iris,Iris Outerplane,Iris Build,Iris Guide,Mage,Enchanter,Fire,Iris pve tier,Iris pvp tier",
+    "canonical": "https://outerpedia.com/characters/iris",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/k",
+    "keywords": "Outerplane,Outerpedia,K,K Outerplane,K Build,K Guide,Defender,Sweeper,Fire,K pve tier,K pvp tier",
+    "canonical": "https://outerpedia.com/characters/k",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/kanon",
+    "keywords": "Outerplane,Outerpedia,Kanon,Kanon Outerplane,Kanon Build,Kanon Guide,Striker,Bruiser,Fire,Kanon pve tier,Kanon pvp tier",
+    "canonical": "https://outerpedia.com/characters/kanon",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/kappa",
+    "keywords": "Outerplane,Outerpedia,Kappa,Kappa Outerplane,Kappa Build,Kappa Guide,Defender,Sweeper,Earth,Kappa pve tier,Kappa pvp tier",
+    "canonical": "https://outerpedia.com/characters/kappa",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/kate",
+    "keywords": "Outerplane,Outerpedia,Kate,Kate Outerplane,Kate Build,Kate Guide,Defender,Phalanx,Fire,Kate pve tier,Kate pvp tier",
+    "canonical": "https://outerpedia.com/characters/kate",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/kitsune-of-eternity-tamamo-no-mae",
+    "keywords": "Outerplane,Outerpedia,Kitsune of Eternity Tamamo-no-Mae,Kitsune of Eternity Tamamo-no-Mae Outerplane,Kitsune of Eternity Tamamo-no-Mae Build,Kitsune of Eternity Tamamo-no-Mae Guide,Mage,Wizard,Earth,Kitsune of Eternity Tamamo-no-Mae pve tier,Kitsune of Eternity Tamamo-no-Mae pvp tier",
+    "canonical": "https://outerpedia.com/characters/kitsune-of-eternity-tamamo-no-mae",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/kuro",
+    "keywords": "Outerplane,Outerpedia,Kuro,Kuro Outerplane,Kuro Build,Kuro Guide,Mage,Enchanter,Light,Kuro pve tier,Kuro pvp tier",
+    "canonical": "https://outerpedia.com/characters/kuro",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/laine",
+    "keywords": "Outerplane,Outerpedia,Laine,Laine Outerplane,Laine Build,Laine Guide,Ranger,Tactician,Earth,Laine pve tier,Laine pvp tier",
+    "canonical": "https://outerpedia.com/characters/laine",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/laplace",
+    "keywords": "Outerplane,Outerpedia,Laplace,Laplace Outerplane,Laplace Build,Laplace Guide,Mage,Wizard,Water,Laplace pve tier,Laplace pvp tier",
+    "canonical": "https://outerpedia.com/characters/laplace",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/leo",
+    "keywords": "Outerplane,Outerpedia,Leo,Leo Outerplane,Leo Build,Leo Guide,Defender,Phalanx,Light,Leo pve tier,Leo pvp tier",
+    "canonical": "https://outerpedia.com/characters/leo",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/lily",
+    "keywords": "Outerplane,Outerpedia,Lily,Lily Outerplane,Lily Build,Lily Guide,Ranger,Tactician,Water,Lily pve tier,Lily pvp tier",
+    "canonical": "https://outerpedia.com/characters/lily",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/lisha",
+    "keywords": "Outerplane,Outerpedia,Lisha,Lisha Outerplane,Lisha Build,Lisha Guide,Mage,Wizard,Fire,Lisha pve tier,Lisha pvp tier",
+    "canonical": "https://outerpedia.com/characters/lisha",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/luna",
+    "keywords": "Outerplane,Outerpedia,Luna,Luna Outerplane,Luna Build,Luna Guide,Defender,Phalanx,Water,Luna pve tier,Luna pvp tier",
+    "canonical": "https://outerpedia.com/characters/luna",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/lyla",
+    "keywords": "Outerplane,Outerpedia,Lyla,Lyla Outerplane,Lyla Build,Lyla Guide,Healer,Reliever,Water,Lyla pve tier,Lyla pvp tier",
+    "canonical": "https://outerpedia.com/characters/lyla",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/marian",
+    "keywords": "Outerplane,Outerpedia,Marian,Marian Outerplane,Marian Build,Marian Guide,Mage,Enchanter,Water,Marian pve tier,Marian pvp tier",
+    "canonical": "https://outerpedia.com/characters/marian",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/maxie",
+    "keywords": "Outerplane,Outerpedia,Maxie,Maxie Outerplane,Maxie Build,Maxie Guide,Ranger,Vanguard,Fire,Maxie pve tier,Maxie pvp tier",
+    "canonical": "https://outerpedia.com/characters/maxie",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/maxwell",
+    "keywords": "Outerplane,Outerpedia,Maxwell,Maxwell Outerplane,Maxwell Build,Maxwell Guide,Mage,Wizard,Dark,Maxwell pve tier,Maxwell pvp tier",
+    "canonical": "https://outerpedia.com/characters/maxwell",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/mene",
+    "keywords": "Outerplane,Outerpedia,Mene,Mene Outerplane,Mene Build,Mene Guide,Healer,Sage,Water,Mene pve tier,Mene pvp tier",
+    "canonical": "https://outerpedia.com/characters/mene",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/mero",
+    "keywords": "Outerplane,Outerpedia,Mero,Mero Outerplane,Mero Build,Mero Guide,Ranger,Tactician,Fire,Mero pve tier,Mero pvp tier",
+    "canonical": "https://outerpedia.com/characters/mero",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/monad-eva",
+    "keywords": "Outerplane,Outerpedia,Monad Eva,Monad Eva Outerplane,Monad Eva Build,Monad Eva Guide,Healer,Sage,Light,Monad Eva pve tier,Monad Eva pvp tier",
+    "canonical": "https://outerpedia.com/characters/monad-eva",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/naru-kang",
+    "keywords": "Outerplane,Outerpedia,Naru Kang,Naru Kang Outerplane,Naru Kang Build,Naru Kang Guide,Defender,Sweeper,Fire,Naru Kang pve tier,Naru Kang pvp tier",
+    "canonical": "https://outerpedia.com/characters/naru-kang",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/nella",
+    "keywords": "Outerplane,Outerpedia,Nella,Nella Outerplane,Nella Build,Nella Guide,Healer,Reliever,Dark,Nella pve tier,Nella pvp tier",
+    "canonical": "https://outerpedia.com/characters/nella",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/noa",
+    "keywords": "Outerplane,Outerpedia,Noa,Noa Outerplane,Noa Build,Noa Guide,Striker,Attacker,Earth,Noa pve tier,Noa pvp tier",
+    "canonical": "https://outerpedia.com/characters/noa",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/notia",
+    "keywords": "Outerplane,Outerpedia,Notia,Notia Outerplane,Notia Build,Notia Guide,Ranger,Vanguard,Earth,Notia pve tier,Notia pvp tier",
+    "canonical": "https://outerpedia.com/characters/notia",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/omega-nadja",
+    "keywords": "Outerplane,Outerpedia,Omega Nadja,Omega Nadja Outerplane,Omega Nadja Build,Omega Nadja Guide,Defender,Phalanx,Dark,Omega Nadja pve tier,Omega Nadja pvp tier",
+    "canonical": "https://outerpedia.com/characters/omega-nadja",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/orox",
+    "keywords": "Outerplane,Outerpedia,Orox,Orox Outerplane,Orox Build,Orox Guide,Striker,Bruiser,Earth,Orox pve tier,Orox pvp tier",
+    "canonical": "https://outerpedia.com/characters/orox",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/parti",
+    "keywords": "Outerplane,Outerpedia,Parti,Parti Outerplane,Parti Build,Parti Guide,Striker,Attacker,Fire,Parti pve tier,Parti pvp tier",
+    "canonical": "https://outerpedia.com/characters/parti",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/pesketh",
+    "keywords": "Outerplane,Outerpedia,Pesketh,Pesketh Outerplane,Pesketh Build,Pesketh Guide,Ranger,Vanguard,Earth,Pesketh pve tier,Pesketh pvp tier",
+    "canonical": "https://outerpedia.com/characters/pesketh",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/philia",
+    "keywords": "Outerplane,Outerpedia,Philia,Philia Outerplane,Philia Build,Philia Guide,Mage,Wizard,Dark,Philia pve tier,Philia pvp tier",
+    "canonical": "https://outerpedia.com/characters/philia",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/poolside-trickster-regina",
+    "keywords": "Outerplane,Outerpedia,Poolside Trickster Regina,Poolside Trickster Regina Outerplane,Poolside Trickster Regina Build,Poolside Trickster Regina Guide,Striker,Attacker,Water,Poolside Trickster Regina pve tier,Poolside Trickster Regina pvp tier",
+    "canonical": "https://outerpedia.com/characters/poolside-trickster-regina",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/regina",
+    "keywords": "Outerplane,Outerpedia,Regina,Regina Outerplane,Regina Build,Regina Guide,Mage,Wizard,Light,Regina pve tier,Regina pvp tier",
+    "canonical": "https://outerpedia.com/characters/regina",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/rey",
+    "keywords": "Outerplane,Outerpedia,Rey,Rey Outerplane,Rey Build,Rey Guide,Striker,Attacker,Earth,Rey pve tier,Rey pvp tier",
+    "canonical": "https://outerpedia.com/characters/rey",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/rhona",
+    "keywords": "Outerplane,Outerpedia,Rhona,Rhona Outerplane,Rhona Build,Rhona Guide,Striker,Bruiser,Earth,Rhona pve tier,Rhona pvp tier",
+    "canonical": "https://outerpedia.com/characters/rhona",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/rico",
+    "keywords": "Outerplane,Outerpedia,Rico,Rico Outerplane,Rico Build,Rico Guide,Ranger,Tactician,Earth,Rico pve tier,Rico pvp tier",
+    "canonical": "https://outerpedia.com/characters/rico",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/rin",
+    "keywords": "Outerplane,Outerpedia,Rin,Rin Outerplane,Rin Build,Rin Guide,Striker,Attacker,Water,Rin pve tier,Rin pvp tier",
+    "canonical": "https://outerpedia.com/characters/rin",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/ritri",
+    "keywords": "Outerplane,Outerpedia,Ritri,Ritri Outerplane,Ritri Build,Ritri Guide,Defender,Phalanx,Water,Ritri pve tier,Ritri pvp tier",
+    "canonical": "https://outerpedia.com/characters/ritri",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/roxie",
+    "keywords": "Outerplane,Outerpedia,Roxie,Roxie Outerplane,Roxie Build,Roxie Guide,Mage,Wizard,Water,Roxie pve tier,Roxie pvp tier",
+    "canonical": "https://outerpedia.com/characters/roxie",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/ryu-lion",
+    "keywords": "Outerplane,Outerpedia,Ryu Lion,Ryu Lion Outerplane,Ryu Lion Build,Ryu Lion Guide,Ranger,Vanguard,Earth,Ryu Lion pve tier,Ryu Lion pvp tier",
+    "canonical": "https://outerpedia.com/characters/ryu-lion",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/saeran",
+    "keywords": "Outerplane,Outerpedia,Saeran,Saeran Outerplane,Saeran Build,Saeran Guide,Healer,Reliever,Earth,Saeran pve tier,Saeran pvp tier",
+    "canonical": "https://outerpedia.com/characters/saeran",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/shu",
+    "keywords": "Outerplane,Outerpedia,Shu,Shu Outerplane,Shu Build,Shu Guide,Healer,Sage,Water,Shu pve tier,Shu pvp tier",
+    "canonical": "https://outerpedia.com/characters/shu",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/sigma",
+    "keywords": "Outerplane,Outerpedia,Sigma,Sigma Outerplane,Sigma Build,Sigma Guide,Ranger,Vanguard,Dark,Sigma pve tier,Sigma pvp tier",
+    "canonical": "https://outerpedia.com/characters/sigma",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/skadi",
+    "keywords": "Outerplane,Outerpedia,Skadi,Skadi Outerplane,Skadi Build,Skadi Guide,Ranger,Tactician,Light,Skadi pve tier,Skadi pvp tier",
+    "canonical": "https://outerpedia.com/characters/skadi",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/snow",
+    "keywords": "Outerplane,Outerpedia,Snow,Snow Outerplane,Snow Build,Snow Guide,Ranger,Tactician,Water,Snow pve tier,Snow pvp tier",
+    "canonical": "https://outerpedia.com/characters/snow",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/sofia",
+    "keywords": "Outerplane,Outerpedia,Sofia,Sofia Outerplane,Sofia Build,Sofia Guide,Striker,Attacker,Water,Sofia pve tier,Sofia pvp tier",
+    "canonical": "https://outerpedia.com/characters/sofia",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/stella",
+    "keywords": "Outerplane,Outerpedia,Stella,Stella Outerplane,Stella Build,Stella Guide,Ranger,Vanguard,Light,Stella pve tier,Stella pvp tier",
+    "canonical": "https://outerpedia.com/characters/stella",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/sterope",
+    "keywords": "Outerplane,Outerpedia,Sterope,Sterope Outerplane,Sterope Build,Sterope Guide,Defender,Sweeper,Dark,Sterope pve tier,Sterope pvp tier",
+    "canonical": "https://outerpedia.com/characters/sterope",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/tamamo-no-mae",
+    "keywords": "Outerplane,Outerpedia,Tamamo-no-Mae,Tamamo-no-Mae Outerplane,Tamamo-no-Mae Build,Tamamo-no-Mae Guide,Mage,Enchanter,Fire,Tamamo-no-Mae pve tier,Tamamo-no-Mae pvp tier",
+    "canonical": "https://outerpedia.com/characters/tamamo-no-mae",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/tamara",
+    "keywords": "Outerplane,Outerpedia,Tamara,Tamara Outerplane,Tamara Build,Tamara Guide,Ranger,Tactician,Water,Tamara pve tier,Tamara pvp tier",
+    "canonical": "https://outerpedia.com/characters/tamara",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/tanya",
+    "keywords": "Outerplane,Outerpedia,Tanya,Tanya Outerplane,Tanya Build,Tanya Guide,Striker,Bruiser,Earth,Tanya pve tier,Tanya pvp tier",
+    "canonical": "https://outerpedia.com/characters/tanya",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/tio",
+    "keywords": "Outerplane,Outerpedia,Tio,Tio Outerplane,Tio Build,Tio Guide,Healer,Reliever,Fire,Tio pve tier,Tio pvp tier",
+    "canonical": "https://outerpedia.com/characters/tio",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/valentine",
+    "keywords": "Outerplane,Outerpedia,Valentine,Valentine Outerplane,Valentine Build,Valentine Guide,Ranger,Tactician,Fire,Valentine pve tier,Valentine pvp tier",
+    "canonical": "https://outerpedia.com/characters/valentine",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/vera",
+    "keywords": "Outerplane,Outerpedia,Vera,Vera Outerplane,Vera Build,Vera Guide,Striker,Attacker,Dark,Vera pve tier,Vera pvp tier",
+    "canonical": "https://outerpedia.com/characters/vera",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/veronica",
+    "keywords": "Outerplane,Outerpedia,Veronica,Veronica Outerplane,Veronica Build,Veronica Guide,Defender,Sweeper,Water,Veronica pve tier,Veronica pvp tier",
+    "canonical": "https://outerpedia.com/characters/veronica",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/vlada",
+    "keywords": "Outerplane,Outerpedia,Vlada,Vlada Outerplane,Vlada Build,Vlada Guide,Striker,Attacker,Fire,Vlada pve tier,Vlada pvp tier",
+    "canonical": "https://outerpedia.com/characters/vlada",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/characters/yuri",
+    "keywords": "Outerplane,Outerpedia,Yuri,Yuri Outerplane,Yuri Build,Yuri Guide,Defender,Phalanx,Earth,Yuri pve tier,Yuri pvp tier",
+    "canonical": "https://outerpedia.com/characters/yuri",
+    "canonicalIsValid": true
+  },
+  {
+    "url": "https://outerpedia.com/guides/world-boss/dahlia",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Dahlia,Dahlia guide,dahlia,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,video guide,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/world-boss/ragnakeus",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ragnakeus,Ragnakeus guide,ragnakeus,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,video guide,updated 2024,October 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/world-boss/harsha",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Harsha,Harsha guide,harsha,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,combat footage,updated 2025,January 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/world-boss/drakhan",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Drakhan,Drakhan guide,drakhan,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,combat footage,updated 2024,December 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/world-boss/primordial_sentinel",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Primordial Sentinel,Primordial Sentinel guide,primordial_sentinel,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,full run,boss fight,updated 2024,July 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/world-boss/venion",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Venion,Venion guide,venion,turn-based rpg,mobile rpg,character builds,world boss,extreme league,boss strategy,team building,gear recommendation,pve,strategy,boss fight,updated 2025,June 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/glicys",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Glicys,Glicys guide,glicys,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/beatles",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Dek'ril & Mek'ril,Dek'ril & Mek'ril guide,beatles,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/meteos",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Blazing Knight Meteos,Blazing Knight Meteos guide,meteos,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/chimera",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Unidentified Chimera,Unidentified Chimera guide,chimera,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2024,September 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/guardian",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Masterless Guardian,Masterless Guardian guide,guardian,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2024,September 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/ars-nova",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ars Nova,Ars Nova guide,ars-nova,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/amadeus",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Amadeus,Amadeus guide,amadeus,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/sacreed",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Sacreed Guardian,Sacreed Guardian guide,sacreed,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/grand-calamari",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Grand Calamari,Grand Calamari guide,grand-calamari,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2025,April 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/special-request/tyrant",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Tyrant Toddler,Tyrant Toddler guide,tyrant,turn-based rpg,mobile rpg,character builds,request,gear boss,identification,ecology study,special Request,strategy,boss fight,updated 2024,September 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/joint-boss/deep-sea-guardian",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Deep Sea Guardian,Deep Sea Guardian guide,deep-sea-guardian,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,strategy,boss fight,updated 2025,March 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/prom-dvlada",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Promotion : Demiurge Vlada,Promotion : Demiurge Vlada guide,prom-dvlada,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,March 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/prom-ddrakhan",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Promotion : Demiurge Drakhan,Promotion : Demiurge Drakhan guide,prom-ddrakhan,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,January 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/prom-dastei",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Promotion : Demiurge Astei,Promotion : Demiurge Astei guide,prom-dastei,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,December 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/prom-dstella",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Promotion : Demiurge Stella,Promotion : Demiurge Stella guide,prom-dstella,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/anubis-g",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Anubis Guardian,Anubis Guardian guide,anubis-g,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,March 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/heavy-fixed-vladi-max",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Heavy Fixed Vladi Max,Heavy Fixed Vladi Max guide,heavy-fixed-vladi-max,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,January 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/amadeus-AL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Amadeus,Amadeus guide,amadeus-AL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/meteos-AL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Blazing Knight Meteos,Blazing Knight Meteos guide,meteos-AL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/sacreed-AL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Sacreed Guardian,Sacreed Guardian guide,sacreed-AL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/ziggsaron",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ravenous Wolf King, Ziggsaron,Ravenous Wolf King, Ziggsaron guide,ziggsaron,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,December 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/fulmination",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ful.Mi.NATION Assault Suit,Ful.Mi.NATION Assault Suit guide,fulmination,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,January 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/ksai",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ksai,Ksai guide,ksai,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,December 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/shadowArch",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Shadow of the Archdemon,Shadow of the Archdemon guide,shadowArch,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,December 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/ars-novaAL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Ars Nova,Ars Nova guide,ars-novaAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/schattermeister-Schwartz",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Schattermeister Schwartz,Schattermeister Schwartz guide,schattermeister-Schwartz,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/masterlessAL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Masterless Guardian,Masterless Guardian guide,masterlessAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/calamarisAL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Grand Calamari,Grand Calamari guide,calamarisAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/toddlerAL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Tyrant Toddler,Tyrant Toddler guide,toddlerAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/glicysAL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Glicys,Glicys guide,glicysAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/beatlesAL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Dek'ril & Mek'ril,Dek'ril & Mek'ril guide,beatlesAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/chimeraAL",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Unidentified Chimera,Unidentified Chimera guide,chimeraAL,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/ppu-epsilon",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Planet Purification Unit Epsilon,Planet Purification Unit Epsilon guide,ppu-epsilon,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/gustav",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Gustav,Gustav guide,gustav,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure-license/forest-king",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Forest King,Forest King guide,forest-king,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/joint-boss/prototype-ex-78",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Prototype EX-78,Prototype EX-78 guide,prototype-ex-78,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,combat footage,updated 2024,December 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/joint-boss/schichifuja",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Schichifuja,Schichifuja guide,schichifuja,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,combat footage,updated 2024,November 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/joint-boss/annihilator",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Annihilator,Annihilator guide,annihilator,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,combat footage,updated 2024,September 2024,guide 2024",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/joint-boss/koh-meteos",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Knight of Hope Meteos,Knight of Hope Meteos guide,koh-meteos,turn-based rpg,mobile rpg,character builds,joint boss,raid build,high score tips,damage optimization,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/irregular-extermination/pursuit-queen",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Pursuit : Irregular Queen,Pursuit : Irregular Queen guide,pursuit-queen,turn-based rpg,mobile rpg,character builds,irregular extermination,limited time event,event build,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/irregular-extermination/pursuit-blockbuster",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Pursuit : Blockbuster,Pursuit : Blockbuster guide,pursuit-blockbuster,turn-based rpg,mobile rpg,character builds,irregular extermination,limited time event,event build,pve,strategy,boss fight,updated 2025,April 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/irregular-extermination/pursuit-iron-stretcher",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Pursuit : Iron Stretcher,Pursuit : Iron Stretcher guide,pursuit-iron-stretcher,turn-based rpg,mobile rpg,character builds,irregular extermination,limited time event,event build,pve,strategy,boss fight,updated 2025,April 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/irregular-extermination/pursuit-mutated-wyvre",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Pursuit : Mutated Wyvre,Pursuit : Mutated Wyvre guide,pursuit-mutated-wyvre,turn-based rpg,mobile rpg,character builds,irregular extermination,limited time event,event build,pve,strategy,boss fight,updated 2025,April 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/guild-raid/maxwell",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,The Madman's Laboratory,The Madman's Laboratory guide,maxwell,turn-based rpg,mobile rpg,character builds,guild raid,co-op boss,guild damage,weekly ranking,pve,strategy,boss fight,updated 2025,April 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/guild-raid/frost-legion",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,The Frost Legion,The Frost Legion guide,frost-legion,turn-based rpg,mobile rpg,character builds,guild raid,co-op boss,guild damage,weekly ranking,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/general-guides/free-heroes-start-banner",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Free Heroes & Starter Banners,Free Heroes & Starter Banners guide,free-heroes-start-banner,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/general-guides/daily-stamina",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Daily Stamina Burn,Daily Stamina Burn guide,daily-stamina,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/general-guides/banner-mileage",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Banners & Mileage System,Banners & Mileage System guide,banner-mileage,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S1-8-5",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S1 Normal 8-5 : Maxwell,S1 Normal 8-5 : Maxwell guide,S1-8-5,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S1-9-5",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S1 Hard 9-5 : Leo & Alpha,S1 Hard 9-5 : Leo & Alpha guide,S1-9-5,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S2-1-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 1-10 : Grand Calamri,S2 Hard 1-10 : Grand Calamri guide,S2-1-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S2-3-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 3-10 : Sacreed Guardian,S2 Hard 3-10 : Sacreed Guardian guide,S2-3-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S2-4-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 4-10 : Astei & Sterope,S2 Hard 4-10 : Astei & Sterope guide,S2-4-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S2-5-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 5-10 : Demiurge Astei,S2 Hard 5-10 : Demiurge Astei guide,S2-5-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S2-7-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 7-10 : Vlada,S2 Hard 7-10 : Vlada guide,S2-7-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S2-9-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 9-10 : Vladi Max,S2 Hard 9-10 : Vladi Max guide,S2-9-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S2-10-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S2 Hard 10-10 : Demiurge Drakhan & Demiurge Vlada,S2 Hard 10-10 : Demiurge Drakhan & Demiurge Vlada guide,S2-10-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S3-2-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 2-10 : Betrayed Deshret,S3 Hard 2-10 : Betrayed Deshret guide,S3-2-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S3-3-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 3-10 : Fatal,S3 Hard 3-10 : Fatal guide,S3-3-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S3-4-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 4-10 : Hilde & sisters,S3 Hard 4-10 : Hilde & sisters guide,S3-4-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S3-5-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 5-10 : Regina & Hilde,S3 Hard 5-10 : Regina & Hilde guide,S3-5-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S3-6-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 6-10 : Ancient Foe,S3 Hard 6-10 : Ancient Foe guide,S3-6-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/adventure/S3-7-10",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,S3 Hard 7-10 : Abyssal Calamity Apophis,S3 Hard 7-10 : Abyssal Calamity Apophis guide,S3-7-10,turn-based rpg,mobile rpg,character builds,spoiler-free,map strategy,chapter walkthrough,adventure mode,stage progression,pve,strategy,boss fight,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/general-guides/heroes-growth",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Hero Growth,Hero Growth guide,heroes-growth,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/general-guides/gear",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Gear,Gear guide,gear,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/general-guides/quirk",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Quirk,Quirk guide,quirk,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  },
+  {
+    "url": "https://outerpedia.com/guides/general-guides/stats",
+    "keywords": "outerplane,outerpedia,outerplane wiki,outerplane guide,Statistics & Combat Basics,Statistics & Combat Basics guide,stats,turn-based rpg,mobile rpg,character builds,beginner guide,resource management,daily tips,system overview,pve,updated 2025,May 2025,guide 2025",
+    "canonical": "https://outerpedia.com/",
+    "canonicalIsValid": false
+  }
+]
