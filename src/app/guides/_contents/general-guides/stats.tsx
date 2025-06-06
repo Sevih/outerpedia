@@ -20,16 +20,127 @@ export default function BasicStatsGuide() {
                 {
                     key: 'combat',
                     label: 'Combat Basics',
-                    content: (
-                        <div className="prose text-gray-300">
-                            <p>Coming soon: detailed explanations of turn order, elemental advantage, and battle flow.</p>
-                        </div>
-                    )
+                    content: <CombatBasicsContent />
                 }
             ]}
         />
     )
 }
+
+function CombatBasicsContent() {
+
+    return (
+        <div className="flex flex-col md:flex-row gap-6 text-base leading-relaxed text-white">
+
+            <div className="flex-1 space-y-4">
+
+                <h3 className="text-xl font-bold">🌀 Tour par tour avec système de priorité – la course de relais sur une piste de 100m</h3>
+
+                <p>
+                    Imagine que chaque combat dans <strong>Outerplane</strong> se déroule sur une <strong>piste de course circulaire de 100 mètres</strong>.
+                    Chaque personnage — allié ou ennemi — court sur cette piste. Le premier à faire un tour complet (100%) atteint la ligne d’action…
+                    et c’est là qu’il peut <strong>jouer son tour</strong>.
+                </p>
+
+                <p>
+                    🧭 En jeu, cette progression est représentée par un <strong>pourcentage</strong> visible en cliquant sur l’icône de la file d’initiative :
+                    <br />
+                    <strong>0%</strong> = vous êtes sur la ligne de départ
+                    <br />
+                    <strong>100%</strong> = vous atteignez la ligne d’arrivée et vous agissez
+                </p>
+
+                <h4 className="font-semibold">⚡ Vitesse (SPD) = Vitesse de course</h4>
+
+                <p>
+                    La statistique <strong>SPD</strong> (Speed) détermine à quelle vitesse votre personnage avance sur la piste :
+                </p>
+                <ul className="list-disc list-inside">
+                    <li>Plus la SPD est élevée, plus vous atteignez 100% rapidement.</li>
+                    <li>Un personnage avec 200 SPD court deux fois plus vite qu’un autre avec 100 SPD.</li>
+                    <li>Il peut donc agir deux fois pendant que l’autre n’agit qu’une seule fois.</li>
+                </ul>
+
+                <p>
+                    Ce n’est donc pas un système "tour par tour fixe", mais un <strong>flux continu</strong> :
+                    les personnages prennent leur tour dès qu’ils atteignent la ligne d’action, en fonction de leur SPD.
+                </p>
+
+                <h4 className="font-semibold">🔁 Priorité = Téléportation sur la piste</h4>
+
+                <p>
+                    Certaines compétences ou effets modifient votre <strong>position actuelle</strong> sur la piste,
+                    indépendamment de votre SPD. C’est ce qu’on appelle un <strong>gain ou une perte de priorité</strong>.
+                </p>
+
+                <p>
+                    📈 <strong>Gain de priorité</strong> : vous êtes instantanément propulsé vers l’avant.
+                    <br />
+                    Par exemple : si vous êtes à 50% et gagnez +30%, vous passez à 80%.
+                </p>
+
+                <p>
+                    📉 <strong>Perte de priorité</strong> : vous êtes repoussé en arrière.
+                    <br />
+                    Par exemple : si vous êtes à 70% et perdez -40%, vous redescendez à 30%.
+                </p>
+
+                <p>
+                    🧷 <strong>Limites :</strong> la priorité ne peut jamais dépasser 100%, ni descendre en-dessous de 0%.
+                </p>
+
+                <p>
+                    Ce système ouvre des stratégies avancées, comme :
+                </p>
+                <ul className="list-disc list-inside">
+                    <li>Faire jouer un soigneur avant un gros burst ennemi.</li>
+                    <li>Retarder un boss pour interrompre une attaque critique.</li>
+                    <li>Créer un "combo chain" en rapprochant plusieurs alliés dans l’ordre d’action.</li>
+                </ul>
+
+                <h3 className="text-xl font-bold mt-8">🎮 Déroulement d’un tour</h3>
+
+                <p>Quand un personnage atteint 100%, le tour se déroule en plusieurs phases :</p>
+
+                <ul className="list-decimal list-inside space-y-1">
+                    <li>
+                        <strong>Starting Phase</strong>
+                        <ul className="list-disc list-inside ml-4">
+                            <li>Les effets de soin sur la durée (HoT) s’activent</li>
+                            <li>Les dégâts sur la durée (DoT) s’appliquent</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Action Grant Phase</strong>
+                        <ul className="list-disc list-inside ml-4">
+                            <li>Vérifie les effets bloquant l’action (stun, sleep, freeze...)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Choice Phase</strong>
+                        <ul className="list-disc list-inside ml-4">
+                            <li>Résout les effets forçant une action (ex: taunt)</li>
+                            <li>Choix manuel de l’action et de la cible</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Hit Phase</strong>
+                        <ul className="list-disc list-inside ml-4">
+                            <li>L’action est lancée</li>
+                            <li>Déclenchement des hits supplémentaires (ex: multi-hits)</li>
+                            <li>Réactions : suivis alliés, contres ennemis, etc.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+    )
+}
+
 
 function StatsContent() {
     const sections = [
