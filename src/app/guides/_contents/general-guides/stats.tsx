@@ -12,7 +12,7 @@ import GuideIconInline from '@/app/components/GuideIconInline';
 export default function BasicStatsGuide() {
     return (
         <GenericTabs
-            defaultKey="combatFR"
+            defaultKey="combat"
             tabs={[
                 {
                     key: 'stats',
@@ -23,165 +23,10 @@ export default function BasicStatsGuide() {
                     key: 'combat',
                     label: 'Combat Basics',
                     content: <CombatBasicsContent />
-                },
-                {
-                    key: 'combatFR',
-                    label: 'Combat BasicsFR',
-                    content: <CombatBasicsContentFR />
                 }
             ]}
         />
     )
-}
-
-function CombatBasicsContentFR() {
-    return (
-        <div className="flex flex-col md:flex-row gap-6 text-base leading-relaxed text-white">
-            <div className="flex-1 space-y-4">
-                <GuideHeading level={2}>Système de Priorité au Tour par Tour</GuideHeading>
-
-                <p>
-                    Imagine chaque combat dans <strong>Outerplane</strong> comme une piste de course circulaire de 100 mètres.<br />
-                    Chaque personnage — allié ou ennemi — court sur cette piste.<br />
-                    Le premier à faire un tour complet (100%) atteint la ligne d’action et peut <strong>jouer son tour</strong>.
-                </p>
-
-                <p>
-                    En jeu, cette progression est affichée en <strong>pourcentage</strong> lorsque vous cliquez sur l’icône de l’ordre d’action <GuideIconInline name="IG_Menu_Btn_Action" text="" /> :
-                    <br />
-                    <strong>0%</strong> = ligne de départ
-                    <br />
-                    <strong>100%</strong> = ligne d’action — le personnage joue
-                </p>
-
-                <Accordion
-                    items={[
-                        {
-                            key: 'speed',
-                            title: (
-                                <>
-                                    <StatInlineTag name='SPD' />
-                                </>
-                            ),
-                            content: (
-                                <>
-                                    <p>
-                                        On peut imaginer que la statistique <StatInlineTag name='SPD' /> représente la vitesse de course du personnage — c’est elle qui détermine la rapidité avec laquelle il progresse sur la piste.
-                                    </p>
-                                    <ul className="list-disc list-inside">
-                                        <li>Plus la <StatInlineTag name='SPD' /> est élevée, plus vous atteignez les 100% rapidement.</li>
-                                        <li>Un personnage avec 200 de <StatInlineTag name='SPD' /> se déplace deux fois plus vite qu’un autre avec 100.</li>
-                                        <li>Il pourra donc jouer deux fois pendant que l’autre n’agira qu’une seule fois.</li>
-                                    </ul>
-
-                                    <p>
-                                        Ce n’est pas un système à tour fixe — c’est un <strong>flux continu</strong> : les personnages agissent dès qu’ils atteignent 100%.
-                                    </p>
-                                </>
-                            )
-                        },
-                        {
-                            key: 'priority',
-                            title: (
-                                <>
-                                    <span className='text-amber-400'>Priorité</span>
-                                </>
-                            ),
-                            content: (
-                                <>
-                                    <p>
-                                        Certaines compétences ou effets modifient votre <strong>position actuelle</strong> sur la piste, indépendamment de votre vitesse.
-                                        Vous pouvez imaginer cela comme si le personnage se téléportait en avant ou en arrière.<br />
-                                        On appelle cela un <strong>gain ou une perte de <span className='text-amber-400'>priorité</span></strong>.<br />
-                                        D’autres jeux utilisent des systèmes similaires — comme la &quot;Combat Readiness&quot; dans *Epic Seven*, ou la jauge ATB dans *Summoner’s War*.
-                                    </p>
-                                    <p className="text-sm text-yellow-400">
-                                        Il n’existe pas d’icône officielle pour représenter la priorité. Toutefois, ce site utilise l’icône suivante :<span style={{
-                                            filter: 'grayscale(1)'
-                                        }}><GuideIconInline name="SC_Buff_Effect_Increase_Priority" text="" /></span>.
-                                    </p>
-                                    <p>Voici les effets directement liés à cette mécanique :</p>
-                                    <p>
-                                        <span className="text-sky-400">Effet bénéfique</span> : <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> — propulse le personnage vers l’avant.
-                                    </p>
-                                    <p>
-                                        <span className="text-red-400">Effet néfaste</span> : <EffectInlineTag name="BT_ACTION_GAUGE" type="debuff" /> — repousse le personnage en arrière.
-                                    </p>
-                                    <p className="text-sm text-yellow-400">
-                                        <strong>Note :</strong>
-                                        <span className="text-sm text-white">La priorité ne peut jamais dépasser 100%, ni descendre sous 0%.
-                                            Si deux personnages atteignent 100% lors de la même action, celui qui y parvient en premier jouera en premier.
-                                            Par exemple, si vous donnez +10% de priorité à un personnage à 98% et un autre à 95%, celui à 98% agira en premier.
-                                        </span>
-                                    </p>
-                                </>
-                            )
-                        },
-                        {
-                            key: 'turn-flow',
-                            title: (
-                                <>
-                                    <span className='text-amber-400'>Déroulement d’un Tour</span>
-                                </>
-                            ),
-                            content: (
-                                <>
-                                    <p>Lorsqu’un personnage atteint 100% de priorité, son tour se déroule en plusieurs phases. Chaque phase déclenche des événements spécifiques :</p>
-
-                                    <ul className="list-decimal list-inside space-y-1">
-                                        <li>
-                                            <strong>Phase de début</strong>
-                                            <ul className="list-disc list-inside ml-4">
-                                                <li>Les temps de recharge des compétences sont réduits de 1.</li>
-                                                <li>Les effets de soin périodique (HoT) sont appliqués, comme <EffectInlineTag name="SYS_CONTINU_HEAL" type="buff" />.</li>
-                                                <li>Les effets de dégâts sur la durée (DoT) sont appliqués, comme <EffectInlineTag name="BT_DOT_BLEED" type="debuff" />.</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <strong>Phase d’action</strong>
-                                            <ul className="list-disc list-inside ml-4">
-                                                <li>Si le personnage est sous un effet de contrôle comme <EffectInlineTag name="BT_STUN" type="debuff" />, cette phase est ignorée et le tour passe directement à la phase de fin.</li>
-                                                <li>
-                                                    <strong>2-1 : Phase de choix</strong>
-                                                    <ul className="list-disc list-inside ml-4">
-                                                        <li>Les actions forcées sont résolues en premier, comme <EffectInlineTag name="BT_AGGRO" type="debuff" />, ce qui lance immédiatement la phase d’impact.</li>
-                                                        <li>Ensuite, le joueur choisit une compétence et une cible.</li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <strong>2-2 : Phase d’impact</strong>
-                                                    <ul className="list-disc list-inside ml-4">
-                                                        <li>La compétence s’exécute en trois étapes :
-                                                            <ul className="list-disc list-inside ml-4">
-                                                                <li><strong>Pré-impact :</strong> Avant que la compétence ne touche. Par exemple, <SkillInline character="Drakhan" skill="S3" /> avec EE+10 applique une <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> avant l’impact — important, car les dégâts dépendent du nombre de malus.</li>
-                                                                <li><strong>Impact :</strong> La compétence touche — les dégâts ou soins sont appliqués.</li>
-                                                                <li><strong>Post-impact :</strong> Après la compétence. Par exemple, <SkillInline character="Demiurge Vlada" skill="S3" /> inflige <EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" /> après avoir touché.</li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>Les coups supplémentaires sont déclenchés, comme <SkillInline character="Ryu Lion" skill="S2" />.</li>
-                                                        <li>Réactions alliées possibles, comme <SkillInline character="Caren" skill="S2" />.</li>
-                                                        <li>Réactions ennemies comme <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> ou <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />.</li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <strong>Phase de fin</strong>
-                                            <ul className="list-disc list-inside ml-4">
-                                                <li>Les effets de résurrection sont déclenchés, comme <EffectInlineTag name="BT_REVIVAL" type="buff" /> ou <SkillInline character="Demiurge Astei" skill="S2" />.</li>
-                                                <li>Tous les buffs et debuffs restants perdent 1 tour de durée — sauf ceux déjà traités en phase de début.</li>
-                                                <li>Les gains ou pertes de priorité restants sont appliqués.</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </>
-                            )
-                        }
-                    ]}
-                />
-            </div>
-        </div>
-    );
 }
 
 function CombatBasicsContent() {
@@ -303,10 +148,10 @@ function CombatBasicsContent() {
                                                         <li>The skill executes in three stages:
                                                             <ul className="list-disc list-inside ml-4">
                                                                 <li><strong>Pre-Hit:</strong> Happens before the skill hits. For example, <SkillInline character="Drakhan" skill="S3" /> 
-                                                                with EE+10 applies a <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> before it hits — 
+                                                                with EE+10 applies a <span className='align-top'><EffectInlineTag name="BT_DOT_CURSE" type="debuff" /></span> before it hits — 
                                                                 important, as the skill’s damage scales with the number of debuffs.</li>
                                                                 <li><strong>Hit:</strong> The skill connects — direct damage and healing are applied.</li>
-                                                                <li><strong>Post-Hit:</strong> Triggers after the skill hits — for example, <SkillInline character="Demiurge Vlada" skill="S3" /> inflicts <EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" /> post-hit.</li>
+                                                                <li><strong>Post-Hit:</strong> Triggers after the skill hits — for example, <SkillInline character="Demiurge Vlada" skill="S3" /> inflicts <span className='align-top'><EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" /></span> post-hit.</li>
                                                             </ul>
                                                         </li>
                                                         <li>Extra hits are triggered, such as <SkillInline character="Ryu Lion" skill="S2" />.</li>
@@ -319,7 +164,7 @@ function CombatBasicsContent() {
                                         <li>
                                             <strong>Ending Phase</strong>
                                             <ul className="list-disc list-inside ml-4">
-                                                <li>Revive effects are resolved, such as <EffectInlineTag name="BT_REVIVAL" type="buff" /> or <SkillInline character="Demiurge Astei" skill="S2" />.</li>
+                                                <li>Revive effects are resolved, such as <span className='align-top'><EffectInlineTag name="BT_REVIVAL" type="buff" /></span> or <SkillInline character="Demiurge Astei" skill="S2" />.</li>
                                                 <li>All remaining buffs and debuffs decrease their duration by 1 turn — except those already processed during the Starting Phase.</li>
                                                 <li>Any remaining priority gains or losses are now applied.</li>
                                             </ul>
