@@ -384,13 +384,13 @@ function CombatBasicsContent() {
                                         <li>A unit with <strong>200 SPD</strong> starts at <strong>66%</strong> (200 × 100 / 300).</li>
                                         <li>A unit with <strong>150 SPD</strong> starts at <strong>50%</strong> (150 × 100 / 300).</li>
                                     </ul>
-                                    <p className="mt-2">However, the game includes a hidden random variation of <strong>±5%</strong> applied to each unit’s starting priority.. As a result, a slightly slower unit may still act first.</p>
+                                    <p className="mt-2">However, the game includes a hidden random variation of <strong>0-5%</strong> applied to each unit’s starting priority.. As a result, a slightly slower unit may still act first.</p>
                                     <p className="text-sm text-yellow-400">
                                         Example:
                                         <br />
-                                        Unit A: 300 SPD → 100% − 5% = 95%
+                                        Unit A: 300 SPD → 100% +0% = 101%
                                         <br />
-                                        Unit B: 290 SPD → 96% + 1% = 97%
+                                        Unit B: 290 SPD → 96% + 5% = 101%
                                         <br />
                                         → <strong>Unit B will act first.</strong>
                                     </p>
@@ -434,7 +434,7 @@ function CombatBasicsContent() {
                                             If a skill applies <EffectInlineTag name="BT_ADDITIVE_TURN" type="buff" />, the character will immediately take another full turn (including all phases) before resetting to 0% priority.
                                         </li>
                                         <li>
-                                            If a 5★ <CharacterLinkCard name="Demiurge Vlada" /> is in battle, all <strong>priority gain effects</strong> on the enemy team are reduced by <strong>30%</strong>.
+                                            If a 5★ <CharacterLinkCard name="Demiurge Vlada" /> is in battle, all <strong>priority gain effects</strong> on the enemy team are reduced by <strong>50%</strong>.
                                         </li>
                                         <li>
                                             In arena, two field skill are applied :
