@@ -484,12 +484,12 @@ function CombatBasicsContent() {
                                 <>
                                     <p>The formula used to calculate initial priority at the start of battle:</p>
                                     <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit">
-                                        Priority = (SPD + Aura SPD + (SPD × Buff %)) × 100 / (Top SPD + Top SPD team Aura + (Top SPD × Buff %))
+                                        Priority = (SPD + Ally Speed transcend bonus + (SPD × Buff %)) × 100 / (Top SPD + Top SPD team Ally Speed transcend bonus + (Top SPD × Buff %))
                                     </p>
                                     <ul className="list-disc list-inside mt-2">
                                         <li><strong>SPD:</strong> Total speed of the unit, as calculated above.</li>
                                         <li><strong>Top SPD:</strong> Highest SPD among all units (used as divisor).</li>
-                                        <li><strong>Aura SPD:</strong> Speed from transcendence.</li>
+                                        <li><strong>Ally Speed transcend bonus:</strong> Speed from transcendence.</li>
                                         <li><strong>Buff:</strong>
                                             <ul className="list-disc list-inside ml-4">
                                                 <li>0 if no buff speed</li>
@@ -503,7 +503,7 @@ function CombatBasicsContent() {
                         },
                         {
                             key: 'max-speed',
-                            title: 'Max therocical speed',
+                            title: 'Max theoretical speed',
                             content: (
                                 <>
                                     <p>The maximum theoretical speed is:</p>
@@ -511,7 +511,7 @@ function CombatBasicsContent() {
                                         <li><strong>Base speed:</strong> 154 hit by <ClassInlineTag name="Ranger" /></li>
                                         <li><strong>Gear SPD:</strong> 138 (18 per piece + 48 from Accessory)</li>
                                         <li><strong>Set SPD:</strong> 38 (on a 154 character)</li>
-                                        <li><strong>Aura SPD:</strong>30 (Dianne + Mene + Demiurge Delta)</li>
+                                        <li><strong>Ally Speed transcend bonus:</strong>30 (Dianne + Mene + Demiurge Delta)</li>
                                     </ul>
                                     <p>Leading to a grand total of : 360 (468 including the speed buff)</p>
                                     <p>Ryu Lion can go further with her 4 star transcend bonus : 370  (481 with speed buff) </p>                                    
