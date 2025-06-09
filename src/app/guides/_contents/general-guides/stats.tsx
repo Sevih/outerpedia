@@ -510,10 +510,11 @@ function CombatBasicsContent() {
                                     <ul className="list-disc list-inside mt-2">
                                         <li><strong>Base speed:</strong> 154 hit by <ClassInlineTag name="Ranger" /></li>
                                         <li><strong>Gear SPD:</strong> 138 (18 per piece + 48 from Accessory)</li>
-                                        <li><strong>Set SPD:</strong> 38.5 (on a 154 character)</li>
-                                        <li><strong>Aura SPD:</strong> 10</li>
+                                        <li><strong>Set SPD:</strong> 38 (on a 154 character)</li>
+                                        <li><strong>Aura SPD:</strong>30 (Dianne + Mene + Demiurge Delta)</li>
                                     </ul>
-                                    <p>Leading to a grand total of : 340.5</p>
+                                    <p>Leading to a grand total of : 360 (468 including the speed buff)</p>
+                                    <p>Ryu Lion can go further with her 4 star transcend bonus : 370  (481 with speed buff) </p>                                    
                                 </>
                             )
                         },
