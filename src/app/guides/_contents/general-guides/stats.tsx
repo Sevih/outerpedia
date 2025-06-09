@@ -907,7 +907,7 @@ function StatsContent() {
                             {
                                 key: 'eff-res-formula',
                                 title: 'Is there a minimum debuff success chance?',
-                                content: 'Yes. Even with high RES, the minimum success chance is around 25% if the attacker’s EFF is low. Conversely, if EFF > RES, the success chance is 100%.'
+                                content: 'No. The success chance depends on the difference between the attacker\'s Effectiveness (EFF) and the target\'s Resilience (RES). If EFF ≥ RES, the success chance is 100%. Otherwise, the chance decreases with a lower bound that depends on how much RES exceeds EFF. For example, a RES − EFF difference of 300 leads to a 25% chance, and a difference of 900 leads to only 10%.'
                             },
                             {
                                 key: 'pen-vs-high-def',
