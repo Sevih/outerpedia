@@ -8,11 +8,17 @@ import GenericTabs from '@/app/components/Tabs'
 import StatBlock from '@/app/components/guides/StatBlock'
 import SkillInline from '@/app/components/SkillInline'
 import GuideIconInline from '@/app/components/GuideIconInline';
+import CharacterLinkCard from '@/app/components/CharacterLinkCard'
+import ClassInlineTag from '@/app/components/ClassInlineTag';
+import buffscollection from '@/data/buffs.json'
+import debuffscollection from '@/data/debuffs.json'
+import Image from 'next/image'
+
 
 export default function BasicStatsGuide() {
     return (
         <GenericTabs
-            defaultKey="combat"
+            defaultKey="stats"
             tabs={[
                 {
                     key: 'stats',
@@ -23,9 +29,199 @@ export default function BasicStatsGuide() {
                     key: 'combat',
                     label: 'Combat Basics',
                     content: <CombatBasicsContent />
+                },
+                {
+                    key: 'buff',
+                    label: 'Buffs',
+                    content: <BuffBasics />
+                },
+                {
+                    key: 'debuff',
+                    label: 'Debuffs',
+                    content: <DeBuffBasics />
                 }
             ]}
         />
+    )
+}
+
+function DeBuffBasics() {
+
+    const customIconBuffs = new Set([
+        'Buff Stealing',
+        'Buff Removal',
+        'Buff Reversal',
+        'Detonate', 'Extinction',
+        'Increase Debuff Duration',
+        'Reduced Buff Duration', 'Uncounterrable'
+
+        // Ajoute ici d'autres noms sans icône officielle
+    ])
+
+    const ignoreBuffs = new Set([
+        'BT_AGGRO_IR',
+        'BT_SEAL_ADDITIVE_ATTACK_IR',
+        'BT_SEAL_ADDITIVE_TURN_IR',
+        'BT_STAT|ST_ATK_IR',
+        'BT_STONE_IR',
+        'BT_STAT|ST_DEF_IR',
+        'BT_STAT|ST_CRITICAL_RATE_IR',
+        'BT_STUN_IR', 'BT_SYS_DEBUFF_ENHANCE_IR',
+        'BT_SILENCE_IR',
+        'BT_DOT_POISON_IR'
+    ])
+
+    const filteredBuffs = debuffscollection
+        .filter(buff =>
+            !buff.name.startsWith('UNIQUE') &&
+            !ignoreBuffs.has(buff.name)
+        )
+        .sort((a, b) => a.label.localeCompare(b.label))
+
+    return (
+        <div className="flex flex-col md:flex-row gap-6 text-base leading-relaxed text-white">
+            <div className="flex-1 space-y-4">
+                <GuideHeading level={2}>Debuffs</GuideHeading>
+                <p>
+                    Debuffs are detrimental effects that are applied to characters.
+                </p>
+                <p className="text-orange-400 italic">
+                    Those whose names appear in orange italics do not have an in-game icon. The one displayed is the custom icon used on this website.
+                </p>
+                <p>
+                    Here is the list of those (excluding irremovable unique character mechanics):
+                </p>
+
+                <div className="overflow-x-auto mt-4">
+                    <table className="w-full table-auto border-separate border-spacing-y-2 text-sm">
+                        <thead>
+                            <tr className="text-left bg-white/5">
+                                <th className="p-2 rounded-l">Icon</th>
+                                <th className="p-2">Name</th>
+                                <th className="p-2 rounded-r">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredBuffs.map((buff) => {
+                                const iconPath = `/images/ui/effect/${buff.icon}.png`; // .png pour l’affichage
+                                const showEffectColor = !buff.description.toLowerCase().includes('cannot be removed');
+                                const imageClass = showEffectColor ? 'debuff' : '';
+
+                                return (
+                                    <tr key={buff.name} className="bg-white/5 hover:bg-white/10 rounded-lg">
+                                        <td className="p-2 rounded-l">
+                                            <Image
+                                                src={iconPath}
+                                                alt={buff.label}
+                                                width={32}
+                                                height={32}
+                                                className={`w-8 h-8 object-contain ${imageClass}`}
+                                            />
+                                        </td>
+                                        <td className="p-2 font-medium">
+                                            <span className={customIconBuffs.has(buff.label) ? 'text-orange-400 italic' : ''}>
+                                                {buff.label}
+                                            </span>
+                                        </td>
+                                        <td className="p-2 text-neutral-300 rounded-r">{buff.description}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function BuffBasics() {
+    const customIconBuffs = new Set([
+        'Heavy Strike',
+        'Extra Turn',
+        'Dual Attack',
+        'Agile Respond',
+        'Debuff Removal',
+        'Increase Buff Duration',
+        'Increase Priority',
+        'Resurrection (Greater)',
+        'Revenge'
+        // Ajoute ici d'autres noms sans icône officielle
+    ])
+
+    const ignoreBuffs = new Set([
+        'BT_STAT|ST_CRITICAL_RATE_IR',
+        'BT_STAT|ST_AVOID_IR',
+        'BT_STAT|ST_DEF_IR',
+        'BT_STAT|ST_ATK_IR',
+        'BT_STAT|ST_SPEED_IR',
+        'BT_INVINCIBLE_IR',
+        'BT_SYS_BUFF_ENHANCE_IR',
+        'BT_DAMGE_TAKEN'
+    ])
+
+    const filteredBuffs = buffscollection
+        .filter(buff =>
+            !buff.name.startsWith('UNIQUE') &&
+            !ignoreBuffs.has(buff.name)
+        )
+        .sort((a, b) => a.label.localeCompare(b.label))
+
+
+    return (
+        <div className="flex flex-col md:flex-row gap-6 text-base leading-relaxed text-white">
+            <div className="flex-1 space-y-4">
+                <GuideHeading level={2}>Buffs</GuideHeading>
+                <p>
+                    Buffs are beneficial effects that are applied to characters.
+                </p>
+                <p className="text-orange-400 italic">
+                    Those whose names appear in orange italics do not have an in-game icon. The one displayed is the custom icon used on this website.
+                </p>
+                <p>
+                    Here is the list of those (excluding irremovable unique character mechanics):
+                </p>
+
+                <div className="overflow-x-auto mt-4">
+                    <table className="w-full table-auto border-separate border-spacing-y-2 text-sm">
+                        <thead>
+                            <tr className="text-left bg-white/5">
+                                <th className="p-2 rounded-l">Icon</th>
+                                <th className="p-2">Name</th>
+                                <th className="p-2 rounded-r">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredBuffs.map((buff) => {
+                                const iconPath = `/images/ui/effect/${buff.icon}.png`; // .png pour l’affichage
+                                const showEffectColor = !buff.description.toLowerCase().includes('cannot be removed');
+                                const imageClass = showEffectColor ? 'buff' : '';
+
+                                return (
+                                    <tr key={buff.name} className="bg-white/5 hover:bg-white/10 rounded-lg">
+                                        <td className="p-2 rounded-l">
+                                            <Image
+                                                src={iconPath}
+                                                alt={buff.label}
+                                                width={32}
+                                                height={32}
+                                                className={`w-8 h-8 object-contain ${imageClass}`}
+                                            />
+                                        </td>
+                                        <td className="p-2 font-medium">
+                                            <span className={customIconBuffs.has(buff.label) ? 'text-orange-400 italic' : ''}>
+                                                {buff.label}
+                                            </span>
+                                        </td>
+                                        <td className="p-2 text-neutral-300 rounded-r">{buff.description}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     )
 }
 
@@ -88,7 +284,7 @@ function CombatBasicsContent() {
                                         In other games, similar systems exist — such as Combat Readiness in Epic Seven or the ATB gauge in Summoner’s War.
                                     </p>
                                     <p className="text-sm text-yellow-400">
-                                        Priority doesn’t have any official icon. However, this website uses the following icon to represent it:<span style={{
+                                        Priority has no official in-game icon. However, this website uses the following icon to represent it :<span style={{
                                             filter: 'grayscale(1)'
                                         }}><GuideIconInline name="SC_Buff_Effect_Increase_Priority" text="" /></span>.
                                     </p>
@@ -147,9 +343,9 @@ function CombatBasicsContent() {
                                                     <ul className="list-disc list-inside ml-4">
                                                         <li>The skill executes in three stages:
                                                             <ul className="list-disc list-inside ml-4">
-                                                                <li><strong>Pre-Hit:</strong> Happens before the skill hits. For example, <SkillInline character="Drakhan" skill="S3" /> 
-                                                                with EE+10 applies a <span className='align-top'><EffectInlineTag name="BT_DOT_CURSE" type="debuff" /></span> before it hits — 
-                                                                important, as the skill’s damage scales with the number of debuffs.</li>
+                                                                <li><strong>Pre-Hit:</strong> Happens before the skill hits. For example, <SkillInline character="Drakhan" skill="S3" />
+                                                                    with EE+10 applies a <span className='align-top'><EffectInlineTag name="BT_DOT_CURSE" type="debuff" /></span> before it hits —
+                                                                    important, as the skill’s damage scales with the number of debuffs.</li>
                                                                 <li><strong>Hit:</strong> The skill connects — direct damage and healing are applied.</li>
                                                                 <li><strong>Post-Hit:</strong> Triggers after the skill hits — for example, <SkillInline character="Demiurge Vlada" skill="S3" /> inflicts <span className='align-top'><EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" /></span> post-hit.</li>
                                                             </ul>
@@ -172,7 +368,151 @@ function CombatBasicsContent() {
                                     </ul>
                                 </>
                             )
-                        }]} />
+                        },
+                        {
+                            key: 'first-turn',
+                            title: (
+                                <>
+                                    <span className='text-amber-400'>First Turn Calculation</span>
+                                </>
+                            ),
+                            content: (
+                                <>
+                                    <p>At the start of battle, the unit with the highest <StatInlineTag name="SPD" /> will act first. All other units begin with a priority value proportional to their SPD compared to the fastest unit.</p>
+                                    <ul className="list-disc list-inside ml-4">
+                                        <li>If the fastest unit has <strong>300 SPD</strong>, she starts at <strong>100%</strong> priority.</li>
+                                        <li>A unit with <strong>200 SPD</strong> starts at <strong>66%</strong> (200 × 100 / 300).</li>
+                                        <li>A unit with <strong>150 SPD</strong> starts at <strong>50%</strong> (150 × 100 / 300).</li>
+                                    </ul>
+                                    <p className="mt-2">However, the game includes a hidden random variation of <strong>±5%</strong> applied to each unit’s starting priority.. As a result, a slightly slower unit may still act first.</p>
+                                    <p className="text-sm text-yellow-400">
+                                        Example:
+                                        <br />
+                                        Unit A: 300 SPD → 100% − 5% = 95%
+                                        <br />
+                                        Unit B: 290 SPD → 96% + 1% = 97%
+                                        <br />
+                                        → <strong>Unit B will act first.</strong>
+                                    </p>
+                                    <p className="mt-2">This mechanic is especially important in <strong>PvP</strong>, where the first turn can greatly influence the outcome of a match.</p>
+                                    <p className="mt-4">Some units may start the battle with a <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" />, significantly altering turn order.</p>
+                                    <p>Example:
+                                        <br />
+                                        Tamara: 300 SPD → 100% priority
+                                        <br />
+                                        Dahlia: 280 SPD → 93% (280 × 100 / 300)
+                                        <br />
+                                        Normally, Tamara would go first.
+                                        <br />
+                                        But if Dahlia starts with a <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> (e.g., from her EE), her effective SPD becomes:
+                                        <br />
+                                        280 × 1.3 = 364 → 100% priority
+                                        <br />
+                                        Tamara: 300 SPD → <strong>82%</strong> (300 × 100 / 364)
+                                        <br />
+                                        → <strong>Dahlia will act first.</strong>
+                                    </p>
+                                    <p className="mt-2">Some transcendence perks also grant <StatInlineTag name="SPD" /> bonuses  to the entire team, such as with <SkillInline character="Mene" skill="Passive" /> or <SkillInline character="Demiurge Delta" skill="Passive" />.</p>
+                                </>
+                            )
+
+                        },
+                        {
+                            key: 'exceptions',
+                            title: (
+                                <>
+                                    Exceptions
+                                </>
+                            ),
+                            content: (
+                                <>
+                                    <p>
+                                        In some cases, the previous rules don’t apply exactly. Here are a few known exceptions:
+                                    </p>
+                                    <ul className='list-disc list-inside mt-2'>
+                                        <li>
+                                            If a skill applies <EffectInlineTag name="BT_ADDITIVE_TURN" type="buff" />, the character will immediately take another full turn (including all phases) before resetting to 0% priority.
+                                        </li>
+                                        <li>
+                                            If a 5★ <CharacterLinkCard name="Demiurge Vlada" /> is in battle, all <strong>priority gain effects</strong> on the enemy team are reduced by <strong>30%</strong>.
+                                        </li>
+                                    </ul>
+                                </>
+                            )
+                        },
+
+                    ]} />
+                <GuideHeading level={2}>FAQ</GuideHeading>
+                <Accordion
+                    items={[
+                        {
+                            key: 'speed-formula',
+                            title: 'How is speed calculated?',
+                            content: (
+                                <>
+                                    <p>The base formula used to calculate speed in <strong>Outerplane</strong> is:</p>
+                                    <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit">
+                                        SPD = Base SPD + Gear SPD + (Base SPD × Set Effect %)
+                                    </p>
+                                    <ul className="list-disc list-inside mt-2">
+                                        <li><strong>Base SPD:</strong> The character&apos;s innate, unmodified speed.</li>
+                                        <li><strong>Gear SPD:</strong> Flat speed gained from equipped gear.</li>
+                                        <li>
+                                            <strong>Set Effect:</strong>
+                                            <ul className="list-disc list-inside ml-4">
+                                                <li>0 if no Speed set equipped</li>
+                                                <li>0.12 (12%) if 2-piece Speed set</li>
+                                                <li>0.25 (25%) if 4-piece Speed set</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </>
+                            )
+
+                        },
+                        {
+                            key: 'priority-formula',
+                            title: 'How is turn 1 priority calculated?',
+                            content: (
+                                <>
+                                    <p>The formula used to calculate initial priority at the start of battle:</p>
+                                    <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit">
+                                        Priority = (SPD + Aura SPD + (SPD × Buff %)) × 100 / (Top SPD + Top SPD team Aura + (Top SPD × Buff %))
+                                    </p>
+                                    <ul className="list-disc list-inside mt-2">
+                                        <li><strong>SPD:</strong> Total speed of the unit, as calculated above.</li>
+                                        <li><strong>Top SPD:</strong> Highest SPD among all units (used as divisor).</li>
+                                        <li><strong>Aura SPD:</strong> Speed from transcendence.</li>
+                                        <li><strong>Buff:</strong>
+                                            <ul className="list-disc list-inside ml-4">
+                                                <li>0 if no buff speed</li>
+                                                <li>0.3 (30%) if buff speed</li>
+                                                <li>-0.3 (-30%) if malus speed</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </>
+                            )
+                        },
+                        {
+                            key: 'max-speed',
+                            title: 'Max therocical speed',
+                            content: (
+                                <>
+                                    <p>The maximum theoretical speed is:</p>
+                                    <ul className="list-disc list-inside mt-2">
+                                        <li><strong>Base speed:</strong> 154 hit by <ClassInlineTag name="Ranger" /></li>
+                                        <li><strong>Gear SPD:</strong> 138 (18 per piece + 48 from Accessory)</li>
+                                        <li><strong>Set SPD:</strong> 38.5 (on a 154 character)</li>
+                                        <li><strong>Aura SPD:</strong> 10</li>
+                                    </ul>
+                                    <p>Leading to a grand total of : 340.5</p>
+                                </>
+                            )
+                        },
+                    ]
+                    }
+                />
             </div>
         </div>
     );

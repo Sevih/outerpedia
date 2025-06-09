@@ -12,10 +12,10 @@ const teams = {
         label: 'Suggested Core',
         icon: 'SC_Buff_Effect_Remove_Buff.webp',
         setup: [
-            ['Iota','Notia','Gnosis Nella', 'Dahlia','Kuro', 'Stella'],
-            ['Demiurge Vlada','Omega Nadja','Eliza','Gnosis Nella', 'Dahlia','Alice','Aer'],
-            ['Gnosis Dahlia','Francesca','Demiurge Astei', 'Maxwell'],
-            ['Demiurge Astei', 'Maxwell','Demiurge Delta', 'Nella']
+            ['Iota', 'Notia', 'Gnosis Nella', 'Dahlia', 'Kuro', 'Stella'],
+            ['Demiurge Vlada', 'Omega Nadja', 'Eliza', 'Gnosis Nella', 'Dahlia', 'Alice', 'Aer'],
+            ['Gnosis Dahlia', 'Francesca', 'Demiurge Astei', 'Maxwell'],
+            ['Demiurge Astei', 'Maxwell', 'Demiurge Delta', 'Nella']
         ]
     }
 }
@@ -39,7 +39,7 @@ export default function SacreedGuardian13Guide() {
                 <li>Use a fast unit to strip the boss&apos;s initial <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> at the start of the fight.</li>
                 <li>Apply AoE debuffs to disable the orb, which applies 3 buffs every turn to the boss.</li>
                 <li>Debuff the boss consistently to delay its AoE and S2 skills.</li>
-                
+
                 <li>Healing is optional, focus on lockdown and bursting the boss quickly before it gains buffs.</li>
                 <li>Stage 12: The boss heals when these effects are triggered: <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />, <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" />, and <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />.</li>
                 <li>Stage 13 : The boss negates <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> characters like <CharacterLinkCard name="Demiurge Stella" /> and <CharacterLinkCard name="Stella" /> are immune to stun but won&apos;t trigger their passives.</li>
@@ -51,11 +51,14 @@ export default function SacreedGuardian13Guide() {
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Iota" />  is excellent here for AoE <EffectInlineTag name="BT_STUN" type="debuff" /> and <EffectInlineTag name="BT_ACTION_GAUGE" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Francesca" /> can handle both DPS and buff removal but needs to pass effectiveness checks.</li>
+                <li><CharacterLinkCard name="Omega Nadja" /> is great at 4 stars (for stage 13) since her <EffectInlineTag name="UNIQUE_IRREGULAR_INFECTION" type="debuff" /> will remove the initial speed buff as a result removing the threat of being stunned from Sacreed Guardian&apos;s first attack.</li>
                 <li><CharacterLinkCard name="Aer" /> is reliable for <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> without relying on success rate checks.</li>
                 <li><CharacterLinkCard name="Kuro" /> is a great pick with <EffectInlineTag name="BT_STATBUFF_CONVERT_TO_STATDEBUFF" type="debuff" /></li>
                 <li><CharacterLinkCard name="Maxwell" /> and <CharacterLinkCard name="Demiurge Astei" /> are strong <ElementInlineTag element="dark" /> DPS picks for this fight.</li>
                 <li><CharacterLinkCard name="Dahlia" />, <CharacterLinkCard name="Notia" />, and <CharacterLinkCard name="Gnosis Nella" /> provide key debuffs or buff removal.</li>
-            </ul>
+            </ul>            
+            <span className="text-sm text-gray-400"><strong>Note: </strong><CharacterLinkCard name="Omega Nadja" /> and <CharacterLinkCard name="Iota" /> pair well if Iota is really fast and can prevent the boss from attacking. Just be mindful of the turn limit, and make sure both DPS units, along with Iota, are fast as well.
+            </span>
 
             <hr className="my-6 border-neutral-700" />
 

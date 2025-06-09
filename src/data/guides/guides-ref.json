@@ -140,9 +140,18 @@
     "title": "Promotion : Demiurge Vlada",
     "description": "Boss strategy guide",
     "icon": "prom-dvlada",
-    "last_updated": "2025-03-12",
+    "last_updated": "2025-06-09",
     "author": "Shiraen",
     "second_image": "prom-dvlada-hide"
+  },
+  "prom-meva": {
+    "category": "adventure-license",
+    "title": "Promotion : Monad Eva",
+    "description": "Boss strategy guide",
+    "icon": "prom-meva",
+    "last_updated": "2025-03-12",
+    "author": "XuRenChao",
+    "second_image": "prom-meva-hide"
   },
   "prom-ddrakhan": {
     "category": "adventure-license",
