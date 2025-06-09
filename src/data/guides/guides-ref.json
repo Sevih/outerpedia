@@ -634,11 +634,10 @@
   "stats": {
     "category": "general-guides",
     "title": "Statistics & Combat Basics",
-    "description": "",
+    "description": "A complete guide to Outerplane’s stats and combat flow — perfect for new and experienced players alike.",
     "icon": "stats",
     "second_image": "stats",
-    "last_updated": "2025-05-06",
-    "author": "Sevih / Shiraen",
-    "hide": true
+    "last_updated": "2025-06-09",
+    "author": "Sevih / Shiraen"
   }
 }

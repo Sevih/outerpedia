@@ -421,7 +421,7 @@ function CombatBasicsContent() {
                             key: 'exceptions',
                             title: (
                                 <>
-                                    Exceptions
+                                    <span className='text-amber-400'>Exceptions</span>
                                 </>
                             ),
                             content: (
@@ -435,6 +435,13 @@ function CombatBasicsContent() {
                                         </li>
                                         <li>
                                             If a 5★ <CharacterLinkCard name="Demiurge Vlada" /> is in battle, all <strong>priority gain effects</strong> on the enemy team are reduced by <strong>30%</strong>.
+                                        </li>
+                                        <li>
+                                            In arena, two field skill are applied :
+                                            <ul className='list-disc list-inside ml-5 mt-2'>
+                                                <li><GuideIconInline name="Skill_PVP_LeagueBuff_01" text="Pulse of the mighty" />Pulse of the mighty : increase all heroes <StatInlineTag name="RES" /> by 50 after Gold III</li>
+                                                <li><GuideIconInline name="Skill_PVP_Penalty" text="Duelist's Pledge" /> : decrease priority by 50% after resurrection. <br />Every 10 turn, deals 10% of max HP to all heroes as true damage (bypassing <EffectInlineTag name="BT_INVINCIBLE" type="buff" />, <EffectInlineTag name="BT_UNDEAD" type="buff" />) </li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </>

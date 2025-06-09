@@ -2,7 +2,7 @@
   
     "general-guides": {
       "title": "General Guides",
-      "description": "Anything that doesn't go in another category.",
+      "description": "Fundamental systems, mechanics, and beginner-friendly guides that apply to the entire game.",
       "icon": "/images/guides/CM_Adventure_SideStory",
       "valid":true
     },

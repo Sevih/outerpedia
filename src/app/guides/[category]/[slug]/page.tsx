@@ -1,4 +1,5 @@
 import rawGuides from '@/data/guides/guides-ref.json';
+import rawCategoryMeta from '@/data/guides/categories.json';
 import { notFound } from 'next/navigation';
 import GuideContentWrapper from './GuideContentWrapper';
 import Link from 'next/link';
@@ -21,6 +22,13 @@ type Props = {
     slug: string;
   };
 };
+
+const categoryMeta: Record<string, {
+  title: string;
+  description: string;
+  icon: string;
+  valid: boolean;
+}> = rawCategoryMeta;
 
 const guides: Record<string, Guide> = rawGuides;
 
@@ -45,19 +53,21 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
     };
   }
 
+  const meta = categoryMeta[category]; 
+
   const url = `https://outerpedia.com/guides/${guide.category}/${slug}`;
   const image = `https://outerpedia.com/images/guides/${guide.category}/${slug}_portrait.png`;
 
   return {
-    title: `${guide.title} | ${guide.category} | Outerpedia`,
-    description: `${guide.title} - ${guide.category} - ${guide.description} `,
+    title: `${guide.title} |  ${meta.title} | Outerpedia`,
+    description: `${guide.description} `,
     keywords: generateGuideKeywords(guide, slug),
     alternates: {
       canonical: `https://outerpedia.com/guides/${guide.category}/${slug}`,
     },
     openGraph: {
-      title: `${guide.title} | ${guide.category} | Outerpedia`,
-      description: `${guide.title} - ${guide.category} - ${guide.description} `,
+      title: `${guide.title} | ${meta.title} | Outerpedia`,
+      description: `${guide.description} `,
       type: 'article',
       url,
       images: [
@@ -71,8 +81,8 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
     },
     twitter: {
       card: 'summary',
-      title: `${guide.title} | ${guide.category} | Outerpedia`,
-      description: `${guide.title} - ${guide.category} - ${guide.description} `,
+      title: `${guide.title} |  ${meta.title} | Outerpedia`,
+      description: `${guide.description} `,
       images: [image],
     },
   };
