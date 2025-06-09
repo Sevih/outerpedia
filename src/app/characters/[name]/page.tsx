@@ -515,9 +515,6 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
 
 
 
-
-
-
             {/* Placeholder si skill manquant */}
             {Array.from({ length: 3 - Object.values(character.skills || {}).length }).map((_, i) => (
               <div key={`empty-${i}`} className="bg-gray-800 p-4 rounded text-center text-gray-500">

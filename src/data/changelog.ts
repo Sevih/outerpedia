@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-06-09",
+    title: "Statistics & Combat Basics and Promotion : Monad Eva guides now available",
+    type: "update",
+    content: [
+      "- Statistics & Combat Basics : Fundamental systems, mechanics, and beginner-friendly guides that apply to the entire game. Learn More [here](/guides/general-guides/stats)",
+      "- Promotion Monad Eva : Boss strategy guide. Learn More [here](/guides/adventure-license/prom-meva)",
+    ],
+  },
+  {
     date: "2025-06-04",
     title: "Walking Fortress Venion update",
     type: "update",
