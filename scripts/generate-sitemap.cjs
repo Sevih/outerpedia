@@ -24,6 +24,7 @@ const staticPages = [
   '/changelog',
   '/tools',
   '/legal',
+  '/coupons',
 ];
 
 // 📄 Pages personnages

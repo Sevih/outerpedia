@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "1.27.1",
+  "version": "1.27.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -25,6 +25,7 @@
     "classnames": "^2.5.1",
     "framer-motion": "^12.7.4",
     "keen-slider": "^6.8.6",
+    "lucide-react": "^0.513.0",
     "markdown-it": "^14.1.0",
     "marked": "^15.0.8",
     "next": "15.3.1",

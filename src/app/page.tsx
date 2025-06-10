@@ -3,6 +3,7 @@ import CurrentlyPullable from './components/CurrentlyPullable'
 import WarningBanner from "@/app/components/WarningBanner"
 import Image from 'next/image'
 import Link from 'next/link'
+import PromoCodes from './components/PromoCodes'
 
 const categories = [
   { name: 'Characters', path: '/characters' },
@@ -97,6 +98,7 @@ export default function Home() {
         {/* Colonne droite : Pullable + Discord */}
         <div className="flex flex-col gap-6 w-full md:w-2/5">
           <CurrentlyPullable />
+          <PromoCodes />
         </div>
       </div>
 

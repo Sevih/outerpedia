@@ -369,5 +369,23 @@
     "name": "Legendary Reforge Catalyst",
     "rarity": "legendary",
     "description": "A material extracted from dismantling gear. Can be used to reforge gear of legendary quality to unleash its potential."
+  },
+  {
+    "name": "Ether",
+    "rarity": "normal",
+    "description": "A rare ressource that can occasionally be found all over Mirsha. Can be used for special purposes."
+  },
+  {
+    "name": "Limited Recruitment Ticket",
+    "rarity": "epic",
+    "description": "A ticket used for limit recruitement. Each ticket will recruit one hero."
+  },
+  {
+    "name": "Special Recruitment Ticket (Event)",
+    "rarity": "superior",
+    "description": "A ticket used for special recruitement. Each ticket will recruit one hero. Using this ticket does not provide any mileage rewards."
   }
+
+
+  
 ]

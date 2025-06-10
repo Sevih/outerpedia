@@ -32,6 +32,8 @@ export const metadata: Metadata = {
     'outerplane builds',
     'outerplane exclusive equipment',
     'outerplane gear sets',
+    'outerplane coupon',
+    'outerplane code',
   ],
 
   openGraph: {
