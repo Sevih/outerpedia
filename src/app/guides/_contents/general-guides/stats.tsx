@@ -388,7 +388,7 @@ function CombatBasicsContent() {
                                     <p className="text-sm text-yellow-400">
                                         Example:
                                         <br />
-                                        Unit A: 300 SPD → 100% +0% = 101%
+                                        Unit A: 300 SPD → 100% +0% = 100%
                                         <br />
                                         Unit B: 290 SPD → 96% + 5% = 101%
                                         <br />
