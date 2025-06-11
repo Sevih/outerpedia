@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Fire",
   "rank_pvp":"D",
+  "gift": "Natural Object",
   "role":"support",
   "Class": "Mage",
   "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

@@ -3,6 +3,7 @@
   "Fullname": "Orox",
   "Rarity": 1,
   "Element": "Earth",
+  "gift": "Natural Object",
   "Class": "Striker",
   "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

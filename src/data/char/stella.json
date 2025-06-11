@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Light",
   "rank_pvp":"B",
+  "gift": "Luxury",
   "role":"support",
   "Class": "Ranger",
   "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},

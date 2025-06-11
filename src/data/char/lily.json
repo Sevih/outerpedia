@@ -3,6 +3,7 @@
   "Fullname": "Lily",
   "Rarity": 1,
   "Element": "Water",
+  "gift": "Craftwork",
   "Class": "Ranger",
   "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

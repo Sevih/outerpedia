@@ -29,7 +29,7 @@ const orderedBuffGroups = [
   },
   {
     title: 'Supporting', items: [
-      "BT_INVINCIBLE", "BT_SHIELD_BASED_CASTER", "BT_IMMUNE","IG_Buff_BuffdurationIncrease",
+      "BT_INVINCIBLE", "BT_SHIELD_BASED_CASTER", "BT_IMMUNE", "IG_Buff_BuffdurationIncrease",
       "BT_UNDEAD", "BT_STEALTHED", "BT_REMOVE_DEBUFF",
       "BT_REVIVAL", "BT_RESURRECTION_G", "SYS_CONTINU_HEAL", "BT_STAT|ST_VAMPIRIC"
     ]
@@ -49,7 +49,7 @@ const orderedBuffGroups = [
       "UNIQUE_DESTROYER_PUNISHMENT", "UNIQUE_PUREBLOOD_DOMINION",
       "UNIQUE_RADIANT_WILL", "UNIQUE_RETRIBUTION_DOMINION",
       "UNIQUE_HUBRIS_DOMINION", "UNIQUE_GIFT_OF_BUFF",
-      "UNIQUE_FIERCE_OFFENSIVE", "UNIQUE_REGINA_WORLD","UNIQUE_NINJA_AFTERIMAGE","UNIQUE_POLAR_KNIGHT","UNIQUE_WHITE_KNIGHT"
+      "UNIQUE_FIERCE_OFFENSIVE", "UNIQUE_REGINA_WORLD", "UNIQUE_NINJA_AFTERIMAGE", "UNIQUE_POLAR_KNIGHT", "UNIQUE_WHITE_KNIGHT"
     ]
   },
 ]
@@ -80,7 +80,7 @@ const orderedDebuffGroups = [
       "BT_COOL_CHARGE", "BT_ACTION_GAUGE", "BT_AP_CHARGE", "BT_SEAL_COUNTER", "BT_SEALED", "BT_SEALED_IR",
       "BT_SEALED_RESURRECTION", "BT_SEAL_ADDITIVE_ATTACK",
 
-      "BT_STATBUFF_CONVERT_TO_STATDEBUFF", "BT_STEAL_BUFF", "BT_REMOVE_BUFF", "IG_Buff_BuffdurationReduce","IG_Buff_DeBuffdurationIncrease",
+      "BT_STATBUFF_CONVERT_TO_STATDEBUFF", "BT_STEAL_BUFF", "BT_REMOVE_BUFF", "IG_Buff_BuffdurationReduce", "IG_Buff_DeBuffdurationIncrease",
       "BT_SEALED_RECEIVE_HEAL", "BT_WG_DMG", "BT_FIXED_DAMAGE"
     ]
   },
@@ -122,6 +122,17 @@ const chainTypes = [
   { name: 'Finisher', value: 'Finish' },
 ]
 
+const GiftTypes = [
+  { name: 'All', value: null },
+  { name: 'Science', value: 'science' },
+  { name: 'Luxury', value: 'luxury' },
+  { name: 'Magic Tool', value: 'magic tool' },
+  { name: 'Craftwork', value: 'craftwork' },
+  { name: 'Natural Object', value: 'natural object' }
+]
+
+
+
 
 // Buffs/Debuffs d'un personnage
 // Récupère tous les buffs ou debuffs d'un personnage
@@ -156,6 +167,7 @@ export default function CharactersPage() {
   const [showUniqueEffects, setShowUniqueEffects] = useState(false)
   const [showFilters, setShowFilters] = useState(false) // toogle on/off par defaut
   const [chainFilter, setChainFilter] = useState<string[]>([])
+  const [giftFilter, setgiftFilter] = useState<string[]>([])
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -198,6 +210,13 @@ export default function CharactersPage() {
       setChainFilter([]) // Reset to All
     }
   }, [chainFilter])
+
+  useEffect(() => {
+    const allGift = GiftTypes.slice(1).map((c) => c.value!)
+    if (giftFilter.length === allGift.length) {
+      setgiftFilter([]) // Reset to All
+    }
+  }, [giftFilter])
 
 
 
@@ -365,33 +384,54 @@ export default function CharactersPage() {
             </button>
           ))}
         </div>
-      </div>
 
+
+        <div className="flex gap-2 justify-center">
+          {chainTypes.map((ct) => (
+            <button
+              key={ct.name}
+              onClick={() =>
+                ct.value
+                  ? toggleMultiSelect(ct.value, chainFilter, setChainFilter)
+                  : setChainFilter([])
+              }
+              className={`flex items-center justify-center px-2 h-7 rounded border text-xs font-semibold transition ${(ct.value === null && chainFilter.length === 0) ||
+                (ct.value === null && chainFilter.length === chainTypes.slice(1).length) ||
+                (ct.value !== null && chainFilter.includes(ct.value))
+                ? 'bg-cyan-500'
+                : 'bg-gray-700'
+                } hover:bg-cyan-600 text-white`}
+            >
+
+              {ct.value ? (
+                <span className="text-white text-sm font-bold">{ct.name}</span>
+              ) : (
+                <span className="text-white text-sm font-bold">All</span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="flex gap-2 justify-center">
-        {chainTypes.map((ct) => (
+        {GiftTypes.map((ct) => (
           <button
             key={ct.name}
             onClick={() =>
               ct.value
-                ? toggleMultiSelect(ct.value, chainFilter, setChainFilter)
-                : setChainFilter([])
+                ? toggleMultiSelect(ct.value, giftFilter, setgiftFilter)
+                : setgiftFilter([])
             }
-            className={`flex items-center justify-center px-2 h-7 rounded border text-xs font-semibold transition ${(ct.value === null && chainFilter.length === 0) ||
-              (ct.value === null && chainFilter.length === chainTypes.slice(1).length) ||
-              (ct.value !== null && chainFilter.includes(ct.value))
+            className={`flex items-center justify-center px-2 h-7 rounded border text-xs font-semibold transition ${(ct.value === null && giftFilter.length === 0) ||
+              (ct.value !== null && giftFilter.includes(ct.value))
               ? 'bg-cyan-500'
               : 'bg-gray-700'
               } hover:bg-cyan-600 text-white`}
           >
-
-            {ct.value ? (
-              <span className="text-white text-sm font-bold">{ct.name}</span>
-              ) : (
-                <span className="text-white text-sm font-bold">All</span>
-              )}
+            <span className="text-white text-sm font-bold">{ct.name}</span>
           </button>
         ))}
       </div>
+
 
 
       <div className="text-center space-y-6">
@@ -495,6 +535,7 @@ export default function CharactersPage() {
               setSelectedBuffs([])
               setSelectedDebuffs([])
               setChainFilter([])
+              setgiftFilter([])
               setEffectLogic('OR')
               setSearchTerm('') // 👈 Ajout ici
             }}
@@ -530,6 +571,9 @@ export default function CharactersPage() {
               const classMatch = classFilter.length === 0 || classFilter.includes(char.Class)
               const chainMatch = chainFilter.length === 0 || chainFilter.includes(char.Chain_Type || '')
 
+              const giftMatch = giftFilter.length === 0 || giftFilter.includes((char.gift || '').trim().toLowerCase())
+
+
               const rarityMatch = rarityFilter.length === 0 || rarityFilter.includes(char.Rarity)
 
 
@@ -556,7 +600,7 @@ export default function CharactersPage() {
                 effectMatch = hasDebuffs
               }
 
-              const isVisible = elementMatch && classMatch && rarityMatch && chainMatch && effectMatch
+              const isVisible = elementMatch && classMatch && rarityMatch && chainMatch && effectMatch && giftMatch
               const isPriority = index <= 5;
               return (
                 <Link

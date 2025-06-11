@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Fire",
   "role":"dps",
+  "gift": "Magic Tool",
   "rank_pvp":"S",
   "Class": "Striker",
   "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},

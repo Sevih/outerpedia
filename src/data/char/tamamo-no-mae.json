@@ -5,6 +5,7 @@
   "Element": "Fire",
   "rank_pvp":"D",
   "role":"support",
+  "gift": "Magic Tool",
   "Class": "Mage",
   "SubClass": "Enchanter","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {

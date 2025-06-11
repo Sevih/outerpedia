@@ -4,6 +4,7 @@
   "Rarity": 2,
   "rank":"B",
   "role":"sustain",
+  "gift": "Science",
   "Element": "Light",
   "Class": "Healer",
   "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

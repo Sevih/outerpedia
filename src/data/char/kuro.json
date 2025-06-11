@@ -5,6 +5,7 @@
   "Element": "Light",
   "rank_pvp":"A",
   "role":"support",
+  "gift": "Natural Object",
   "Class": "Mage",
   "SubClass": "Enchanter","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {

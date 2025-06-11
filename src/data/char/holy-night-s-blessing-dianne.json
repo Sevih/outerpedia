@@ -5,6 +5,7 @@
   "Element": "Fire",
   "rank_pvp":"A",
   "Class": "Ranger",
+  "gift": "Luxury",
   "role":"dps",
   "limited":true,
   "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},

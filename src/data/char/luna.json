@@ -5,6 +5,7 @@
   "Element": "Water",
   "rank_pvp":"C",
   "role":"support",
+  "gift": "Luxury",
   "Class": "Defender",
   "SubClass": "Phalanx","skill_priority":{"First":{"prio": 1}, "Second":{"prio": 2}, "Ultimate":{"prio": 3}},
   "transcend": {

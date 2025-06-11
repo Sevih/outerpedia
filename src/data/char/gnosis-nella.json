@@ -5,6 +5,7 @@
   "Element": "Light",
   "role":"support",
   "rank_pvp":"S",
+  "gift": "Magic Tool",
   "Class": "Mage",
   "limited":true,
   "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

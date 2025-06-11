@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Earth",
   "rank_pvp":"A",
+  "gift": "Natural Object",
   "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

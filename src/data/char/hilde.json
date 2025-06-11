@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Dark",
   "role":"sustain",
+  "gift": "Craftwork",
   "Class": "Defender",
   "rank_pvp":"S",
   "SubClass": "Phalanx","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},

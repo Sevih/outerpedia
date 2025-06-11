@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Water",
   "rank_pvp":"A",
+  "gift": "Natural Object",
   "role":"dps",
   "Class": "Mage",
   "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

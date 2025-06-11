@@ -3,6 +3,7 @@
   "Fullname": "Bleu",
   "Rarity": 1,
   "Element": "Water",
+  "gift": "Magic Tool",
   "Class": "Mage",
   "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {

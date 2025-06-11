@@ -4,6 +4,7 @@
   "Rarity": 2,
   "Element": "Earth",
   "Class": "Ranger",
+  "gift": "Natural Object",
   "rank":"D",
   "role":"support",
   "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

@@ -68,6 +68,7 @@ export async function GET() {
           Element: character.Element,
           Rarity: character.Rarity,
           limited: character.limited ?? false,
+          gift: character.gift ?? false,
           Chain_Type: character.Chain_Type,
           buff,
           debuff,

@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Water",
   "rank_pvp":"D",
+  "gift": "Magic Tool",
   "role":"dps",
   "Class": "Mage",
   "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},

@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Earth",
   "rank_pvp":"B",
+  "gift": "Luxury",
   "Class": "Mage",
   "role":"dps",
   "limited":true,

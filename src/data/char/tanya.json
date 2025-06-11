@@ -4,6 +4,7 @@
   "Rarity": 2,
   "Element": "Earth",
   "rank":"D",
+  "gift": "Craftwork",
   "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser","skill_priority":{"First":{"prio": 1}, "Second":{"prio": 2}, "Ultimate":{"prio": 3}},

@@ -5,6 +5,7 @@
   "Element": "Water",
   "rank_pvp":"A",
   "role":"sustain",
+  "gift": "Natural Object",
   "Class": "Healer",
   "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

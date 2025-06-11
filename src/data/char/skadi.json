@@ -3,6 +3,7 @@
   "Fullname": "Skadi",
   "Rarity": 3,
   "Element": "Light",
+  "gift": "Craftwork",
   "rank_pvp":"B",
   "role":"support",
   "Class": "Ranger",

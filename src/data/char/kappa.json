@@ -3,6 +3,7 @@
   "Fullname": "Kappa",
   "Rarity": 3,
   "Element": "Earth",
+  "gift": "Science",
   "role":"support",
   "rank_pvp":"B",
   "Class": "Defender",

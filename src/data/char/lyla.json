@@ -4,6 +4,7 @@
   "Rarity": 2,
   "Element": "Water",
   "rank":"A",
+  "gift": "Natural Object",
   "role":"sustain",
   "Class": "Healer",
   "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},

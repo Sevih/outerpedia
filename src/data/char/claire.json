@@ -4,6 +4,7 @@
   "Rarity": 1,
   "Element": "Fire",
   "Class": "Healer",
+  "gift": "Magic Tool",
   "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,

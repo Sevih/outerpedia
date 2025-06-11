@@ -25,6 +25,7 @@ async function generateAllCharacters() {
           Element: character.Element,
           Chain_Type: character.Chain_Type,
           limited: character.limited ?? false,
+          gift: character.gift ?? false,
           rank_pvp: character.rank_pvp ?? false,
         });
       }

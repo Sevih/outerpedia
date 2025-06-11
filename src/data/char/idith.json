@@ -5,6 +5,7 @@
   "Element": "Earth",
   "rank":"C",
   "role":"dps",
+  "gift": "Craftwork",
   "Class": "Striker",
   "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

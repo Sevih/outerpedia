@@ -5,6 +5,7 @@
   "Element": "Fire",
   "role":"support",
   "rank_pvp":"B",
+  "gift": "Luxury",
   "Class": "Defender",
   "SubClass": "Phalanx","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {

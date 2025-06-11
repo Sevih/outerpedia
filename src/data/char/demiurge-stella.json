@@ -5,6 +5,7 @@
   "Element": "Light",
   "rank_pvp":"S",
   "role":"dps",
+  "gift": "Science",
   "Class": "Striker",
   "SubClass": "Bruiser","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
   "transcend": {

@@ -3,6 +3,7 @@
   "Fullname": "Guizam",
   "Rarity": 1,
   "Element": "Fire",
+  "gift": "Luxury",
   "Class": "Striker",
   "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

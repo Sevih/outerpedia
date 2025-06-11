@@ -4,6 +4,7 @@
   "Rarity": 2,
   "Element": "Fire",
   "rank":"S",
+  "gift": "Craftwork",
   "role":"sustain",
   "Class": "Healer",
   "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

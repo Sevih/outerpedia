@@ -5,6 +5,7 @@
   "Element": "Earth",
   "rank":"B",
   "role":"support",
+  "gift": "Magic Tool",
   "Class": "Ranger",
   "SubClass": "Vanguard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {

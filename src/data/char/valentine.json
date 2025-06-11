@@ -4,7 +4,8 @@
   "Rarity": 3,
   "Element": "Fire",
   "rank_pvp":"A",
-  "role":"support",
+  "role":"support",  
+  "gift": "Luxury",  
   "Class": "Ranger",
   "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
   "transcend": {

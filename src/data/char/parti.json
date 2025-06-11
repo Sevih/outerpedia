@@ -5,6 +5,7 @@
   "Element": "Fire",
   "rank":"B",
   "role":"dps",
+  "gift": "Natural Object",
   "Class": "Striker",
   "SubClass": "Attacker","skill_priority":{"First":{"prio": 1}, "Second":{"prio": 3}, "Ultimate":{"prio": 2}},
   "transcend": {

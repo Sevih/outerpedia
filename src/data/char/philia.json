@@ -5,6 +5,7 @@
   "Element": "Dark",
   "Class": "Mage",
   "rank":"D",
+  "gift": "Science",
   "role":"support",
   "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

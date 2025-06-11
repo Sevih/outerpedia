@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Light",
   "rank_pvp":"A",
+  "gift": "Magic Tool",
   "role":"support",
   "Class": "Ranger",
   "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

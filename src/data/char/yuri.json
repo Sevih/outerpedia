@@ -3,6 +3,7 @@
   "Fullname": "Yuri",
   "Rarity": 1,
   "Element": "Earth",
+  "gift": "Natural Object",
   "Class": "Defender",
   "SubClass": "Phalanx","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

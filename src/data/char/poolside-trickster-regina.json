@@ -6,6 +6,7 @@
   "rank_pvp":"A",
   "role":"dps",
   "Class": "Striker",
+  "gift": "Craftwork",
   "limited":true,
   "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
   "transcend": {

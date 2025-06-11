@@ -3,6 +3,7 @@
   "Fullname": "Flamberge",
   "Rarity": 1,
   "Element": "Earth",
+  "gift": "Magic Tool",
   "Class": "Healer",
   "SubClass": "Reliever","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {

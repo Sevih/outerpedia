@@ -4,6 +4,7 @@
   "Rarity": 2,
   "Element": "Water",
   "Class": "Striker",
+  "gift": "Luxury",
   "SubClass": "Attacker",
   "transcend": {
     "1": null,

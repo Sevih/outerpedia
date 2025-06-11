@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Water",
   "rank_pvp":"B",
+  "gift": "Craftwork",
   "role":"sustain",
   "Class": "Defender",
   "SubClass": "Sweeper","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

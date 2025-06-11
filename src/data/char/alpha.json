@@ -5,6 +5,7 @@
   "Element": "Water",
   "rank":"D",
   "role":"support",
+  "gift": "Science",
   "Class": "Mage",
   "SubClass": "Enchanter","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {

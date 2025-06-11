@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Dark",
   "role":"dps",
+  "gift": "Luxury",
   "rank_pvp":"B",
   "Class": "Striker",
   "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

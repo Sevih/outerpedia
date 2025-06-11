@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Fire",
   "role":"support",
+  "gift": "Science",
   "rank_pvp":"B",
   "Class": "Ranger",
   "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

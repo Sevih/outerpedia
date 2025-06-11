@@ -5,6 +5,7 @@
   "Element": "Fire",
   "rank":"B",
   "role":"support",
+  "gift": "Science",
   "Class": "Defender",
   "SubClass": "Phalanx","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {

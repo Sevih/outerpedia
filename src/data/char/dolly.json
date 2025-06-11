@@ -5,6 +5,7 @@
   "Element": "Earth",
   "rank":"A",
   "role":"support",
+  "gift": "Natural Object",
   "Class": "Mage",
   "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Dark",
   "role":"support",
+  "gift": "Science",
   "Class": "Defender",
   "rank_pvp":"B",
   "SubClass": "Sweeper","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

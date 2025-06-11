@@ -43,6 +43,7 @@ export interface Character {
   Class: string
   SubClass: string
   video?: string
+  gift:string
   Chain_Type: string
   dual_enhancement?: Record<string, string>[]
   skills: {

@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Earth",
   "rank_pvp":"C",
+  "gift": "Science",
   "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},

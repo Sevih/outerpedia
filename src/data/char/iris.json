@@ -4,6 +4,7 @@
   "Rarity": 2,
   "Element": "Fire",
   "rank":"B",
+  "gift": "Magic Tool",
   "role":"dps",
   "Class": "Mage",
   "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},

@@ -18,10 +18,15 @@ import type { ClassDataMap } from '@/types/types';
 import type { EquipmentBase, Talisman, ExclusiveEquipment } from '@/types/equipment';
 import type { Character, Skill } from '@/types/character';
 import { CharacterNameDisplayBig } from '@/app/components/CharacterNameDisplay'
+import type { StatKey } from '@/types/types'
+
 
 import RecommendedGearTabs from '@/app/components/RecommendedGearTabs';
 import BuffDebuffDisplay from '@/app/components/BuffDebuffDisplayClient';
 import SkillPriorityTabs from '@/app/components/SkillPriorityTabs'
+import StatInlineTag from '@/app/components/StatInlineTag';
+import GuideIconInline from '@/app/components/GuideIconInline';
+import GiftCard from '@/app/components/GiftCard';
 
 import TranscendenceSlider from '@/app/components/TranscendenceSlider';
 import YoutubeEmbed from '@/app/components/YoutubeEmbed';
@@ -149,6 +154,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
     const statLabels = ["Health", "Defense", "Evasion", "Accuracy", "Speed", "Attack"]
     const recoFile = toKebabCase(character.Fullname.toLowerCase())
     let recoData = null
+    const baseStats = subclassInfo?.[`stats${character.Rarity}`];
 
 
 
@@ -205,7 +211,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
           </Link>
         </div>
 
-        <div className="max-w-5xl mx-auto p-6">
+        <div className="max-w-6xl mx-auto p-6">
           {/* Partie haute : illustration + infos principales */}
           <div className="grid grid-cols-1 md:grid-cols-[400px_1fr] gap-6">
             {/* Illustration du personnage */}
@@ -261,7 +267,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                 {`${character.Fullname} is a ${character.Element} ${character.Class}. ${subclassInfo?.description || ''}`}
               </p>
 
-              {/* Statistiques (diagramme) + descriptions de classe */}
+              {/* Statistiques (diagramme) + descriptions de classe + base stats */}
               <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">
                 <div className="relative p-2 rounded text-sm w-fit h-fit">
                   {subclassInfo?.image ? (
@@ -306,6 +312,36 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             </div>
           </div>
 
+          {/* Base Stats */}
+          {baseStats && (() => {
+            const entries = Object.entries(baseStats);
+
+            return (
+              <div>
+                <div className="mt-6 px-4 py-2 bg-yellow-800/50 border-l-4 border-yellow-400 rounded text-yellow-300 text-sm italic">
+                  Base stats shown assume the character is upgraded <GuideIconInline name='CM_Evolution_05' text='Stage 6 (Lv. 100)' size={20} />.
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-sm text-white mt-5 m-auto">
+                  {entries.map(([key, value]) => {
+                    const upperKey = key.toUpperCase() as StatKey;
+                    return (
+                      <div
+                        key={key}
+                        className="flex items-center gap-2 px-2 py-1 bg-black/30 rounded"
+                      >
+                        <StatInlineTag name={upperKey} abbr={true} />
+                        <span className="text-white mt-1">
+                          {key === "chc" || key === "chd" ? `${value}%` : value}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
+
           {(ee || character.transcend) && (
             <div className="mt-8 text-white flex flex-col gap-4 items-start">
               {/* Ligne : EE à gauche + Colonne à droite */}
@@ -313,23 +349,42 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                 {/* EE à gauche */}
                 {ee && (
                   <div className="flex flex-col md:flex-row rounded p-4 shadow hover:shadow-lg transition relative w-full md:w-[500px] min-w-[320px]">
-                    <div id="ee"
-                      className="w-[120px] h-[120px] relative shrink-0 mr-4 rounded overflow-hidden"
-                      style={{
-                        backgroundImage: "url(/images/ui/bg_item_leg.webp)",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                    >
-                      <Image
-                        src={`/images/characters/ex/${toKebabCase(character.Fullname)}.webp`}
-                        alt={`${character.Fullname} Exclusive Equipment`}
-                        fill
-                        sizes="120px"
-                        className="object-contain p-2"
-                      />
+
+                    {/* EE à gauche */}
+                    <div className="flex flex-col items-center md:items-start w-full md:w-[140px] min-w-[140px] rounded shadow hover:shadow-lg transition relative">
+                      {/* Image EE */}
+                      <div
+                        id="ee"
+                        className="w-[120px] h-[120px] relative shrink-0 rounded overflow-hidden"
+                        style={{
+                          backgroundImage: "url(/images/ui/bg_item_leg.webp)",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                        }}
+                      >
+                        <Image
+                          src={`/images/characters/ex/${toKebabCase(character.Fullname)}.webp`}
+                          alt={`${character.Fullname} Exclusive Equipment`}
+                          fill
+                          sizes="120px"
+                          className="object-contain p-2"
+                        />
+                      </div>
+
+                      {/* GiftCard SOUS l’image EE, en ligne */}
+                      {character.gift && (
+                        <div className="mt-2 flex flex-col gap-1">
+                          <p className="text-sm font-semibold text-white text-center underline"><GuideIconInline name="CM_Goods_FriendPoint" text='Preferred Gift' /></p>
+                          <div className="mx-auto">
+                            <GiftCard category={character.gift} />
+                          </div>
+                        </div>
+                      )}
+
                     </div>
+
+
 
                     <div className="flex flex-col gap-2">
                       <p className="text-lg font-semibold">{ee.name}</p>

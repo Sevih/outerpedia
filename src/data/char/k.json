@@ -4,6 +4,7 @@
   "Rarity": 2,
   "Element": "Fire",
   "Class": "Defender",
+  "gift": "Science",
   "rank":"A",
   "role":"support",
   "SubClass": "Sweeper",

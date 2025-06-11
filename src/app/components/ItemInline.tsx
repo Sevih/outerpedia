@@ -13,6 +13,7 @@ const items = rawItems as {
 type Props = {
   names: string[] | string;
   text?: boolean
+  size?: number
 };
 
 function toKebabCase(str: string) {
@@ -23,9 +24,9 @@ function toKebabCase(str: string) {
     .toLowerCase();
 }
 
-export default function ItemInlineDisplay({ names, text = true }: Props) {
+export default function ItemInlineDisplay({ names, text = true, size = 25 }: Props) {
   const normalized = Array.isArray(names) ? names : names ? [names] : [];
-
+  const sizePixel = `${size}px`
   const itemList = normalized
     .map((name) => items.find((item) => item.name === name))
     .filter((item): item is typeof items[number] => !!item);
@@ -47,13 +48,13 @@ export default function ItemInlineDisplay({ names, text = true }: Props) {
               >
 
 
-                <span className="relative w-[24px] h-[24px] rounded shrink-0">
+                <span className={`relative rounded shrink-0`} style={{ width: size, height: size }} >
                   <Image
                     src={`/images/bg/CT_Slot_${item.rarity}.webp`}
                     alt="rarity background"
                     fill
                     className="absolute inset-0 z-0 object-cover rounded"
-                    sizes="24px"
+                    sizes={`${sizePixel}`}
                     onError={(e) => {
                       const img = e.currentTarget;
                       img.onerror = null;
@@ -65,7 +66,7 @@ export default function ItemInlineDisplay({ names, text = true }: Props) {
                     alt={item.name}
                     fill
                     className="relative z-10 object-contain"
-                    sizes="24px"
+                    sizes={`${sizePixel}`}
                     onError={(e) => {
                       const img = e.currentTarget;
                       img.onerror = null;

@@ -5,6 +5,7 @@
   "Element": "Fire",
   "rank":"B",
   "role":"support",
+  "gift": "Craftwork",
   "Class": "Defender",
   "SubClass": "Sweeper","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

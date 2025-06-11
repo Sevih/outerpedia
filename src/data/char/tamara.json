@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Water",
   "rank_pvp":"A",
+  "gift": "Craftwork",
   "role":"support",
   "Class": "Ranger",
   "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},

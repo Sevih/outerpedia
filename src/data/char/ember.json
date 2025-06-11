@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Fire",
   "rank_pvp":"C",
+  "gift": "Natural Object",
   "role":"support",
   "Class": "Defender",
   "SubClass": "Sweeper","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},

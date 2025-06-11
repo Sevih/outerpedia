@@ -4,6 +4,7 @@
   "Rarity": 2,
   "Element": "Fire",
   "Class": "Striker",
+  "gift": "Luxury",
   "rank":"D",
   "role":"dps",
   "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

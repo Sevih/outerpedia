@@ -1,8 +1,22 @@
 // src/types/types.ts
+export type StatBlock = {
+  atk: number
+  def: number
+  hp: number
+  spd: number
+  chc: number
+  chd: number
+  acc: number
+  eva: number
+  eff: number
+  res: number
+}
+
 export type SubclassData = {
-    description: string
-    image: string
-  }
+  description: string
+  image: string
+  [key: `stats${number}`]: StatBlock | undefined;
+}
   
   export type ClassData = {
     description: string
@@ -36,6 +50,13 @@ export type SubclassData = {
     description?: string
   }
   
+  // src/types/types.ts
+export type StatKey =
+  | 'ATK' | 'DEF' | 'HP' | 'SPD'
+  | 'CHC' | 'CHD' | 'ACC' | 'EVA'
+  | 'EFF' | 'RES'
+  | 'LS' | 'PEN' | 'PEN%' | 'ATK%' | 'DEF%' | 'HP%' | 'HH' | 'HH%';
+
   
   
   export interface SkillLite {
@@ -58,5 +79,5 @@ export type SubclassData = {
     debuff: string[]
     Chain_Type:string
     limited?:string
+    gift?:string
   }
-  

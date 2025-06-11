@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Water",
   "rank_pvp":"D",
+  "gift": "Craftwork",
   "role": "dps",
   "Class": "Ranger",
   "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

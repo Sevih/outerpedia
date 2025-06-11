@@ -5,6 +5,7 @@
   "Element": "Dark",
   "rank_pvp":"A",
   "role":"support",
+  "gift": "Science",
   "Class": "Mage",
   "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

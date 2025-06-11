@@ -4,6 +4,7 @@
   "Rarity": 3,
   "Element": "Light",
   "rank_pvp":"A",
+  "gift": "Craftwork",
   "role":"dps",
   "Class": "Mage",
   "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
