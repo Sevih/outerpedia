@@ -25,6 +25,16 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-06-11",
+    title: "Added base stats, gift preferences, and promo code display",
+    type: "feature",
+    content: [
+      "-Character pages now display base stats",
+      "-Gift preferences are now shown on character pages and can be used as a filter in the character list",
+      "-Promo codes are now visible on the homepage (only valid ones) and fully listed on the [/coupons](/coupons) page",
+    ],
+  },
+  {
     date: "2025-06-09",
     title: "Statistics & Combat Basics and Promotion : Monad Eva guides now available",
     type: "update",

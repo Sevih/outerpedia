@@ -1,3 +1,9 @@
+## 🚀 Added base stats, gift preferences, and promo code display (2025-06-11)
+-  Character pages now display base stats
+-  Gift preferences are now shown on character pages and can be used as a filter in the character list
+- Promo codes are now visible on the homepage and fully listed on the new /coupons page.
+
+
 ## 🛠 Statistics & Combat Basics and Promotion : Monad Eva guides now available (2025-06-09)
 - Statistics & Combat Basics : Fundamental systems, mechanics, and beginner-friendly guides that apply to the entire game. Learn More [here](/guides/general-guides/stats)
 - Promotion Monad Eva : Boss strategy guide. Learn More [here](/guides/adventure-license/prom-meva)

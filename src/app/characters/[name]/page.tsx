@@ -42,7 +42,6 @@ function toKebabCase(str: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-
 function getSkillLabel(index: number): string {
   return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`;
 }
