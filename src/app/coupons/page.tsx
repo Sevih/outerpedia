@@ -85,11 +85,14 @@ export default function CouponsPage() {
 
 
 
-  const sorted = [
-    ...allCodes.filter(c => c.status === 'active'),
-    ...allCodes.filter(c => c.status === 'upcoming'),
-    ...allCodes.filter(c => c.status === 'expired')
-  ]
+  const sortByStartDesc = (a: PromoCode, b: PromoCode) =>
+  new Date(b.start).getTime() - new Date(a.start).getTime()
+
+const sorted = [
+  ...allCodes.filter(c => c.status === 'active').sort(sortByStartDesc),
+  ...allCodes.filter(c => c.status === 'upcoming').sort(sortByStartDesc),
+  ...allCodes.filter(c => c.status === 'expired').sort(sortByStartDesc),
+]
 
   return (
     <div className="px-4 md:px-16 py-10 text-white">
