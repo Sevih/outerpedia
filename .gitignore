@@ -20,8 +20,7 @@
 /.next/
 /out/
 /datamine/
-/admin/*
-/admin/
+src/app/admin/
 # production
 /build
 /public/sitemap.xml
@@ -59,3 +58,4 @@ next-env.d.ts
 
 Procedure Ajout d_un perso _.txt
 outerpedia-clean.code-workspace
+
