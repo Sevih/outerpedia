@@ -255,7 +255,7 @@ export default function HeroGrowthGuide() {
             <GuideHeading level={3}>Gear</GuideHeading>
             <p>
   For detailed information, refer to the{' '}
-  <Link href="/guides/general-guides/equipment" className="underline text-blue-400 hover:text-blue-300">
+  <Link href="/guides/general-guides/gear" className="underline text-blue-400 hover:text-blue-300">
     Equipment Guide
   </Link>
   . In short:

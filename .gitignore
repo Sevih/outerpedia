@@ -20,7 +20,9 @@
 /.next/
 /out/
 /datamine/
+# Local admin interface – not included in repo
 src/app/admin/
+src/app/api/admin/
 # production
 /build
 /public/sitemap.xml
