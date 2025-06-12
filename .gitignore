@@ -20,6 +20,8 @@
 /.next/
 /out/
 /datamine/
+/admin/*
+/admin/
 # production
 /build
 /public/sitemap.xml
