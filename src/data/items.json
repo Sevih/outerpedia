@@ -351,6 +351,21 @@
     "description": "A stone that reacts to substats on gear. It will let you select and change 1 substat that is currently applied."
   },
   {
+    "name": "Potentium (Armor)",
+    "rarity": "legendary",
+    "description": "An extremely rare abrasive. You can use this when crafting armor to draw out the power you desire from the gear your craft."
+  },
+  {
+    "name": "Potentium (Weapon/Accessory)",
+    "rarity": "legendary",
+    "description": "An extremely rare abrasive. Using this to craft weapons or accessories will draw out the power you desire from the gear you intrend to craft."
+  },
+  {
+    "name": "Effectium",
+    "rarity": "normal",
+    "description": "Precious materials used for Precise Crafting. Obtainable through Terminus Isle Exploration."
+  },
+  {
     "name": "Normal Reforge Catalyst",
     "rarity": "normal",
     "description": "A material extracted from dismantling gear. Can be used to reforge gear of normal quality to unleash its potential."
