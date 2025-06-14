@@ -399,7 +399,23 @@
     "name": "Special Recruitment Ticket (Event)",
     "rarity": "superior",
     "description": "A ticket used for special recruitement. Each ticket will recruit one hero. Using this ticket does not provide any mileage rewards."
+  },
+  {
+    "name": "Proof of Destiny",
+    "rarity": "normal",
+    "description": "A normal resource used for Quirks to enhance heroes."
+  },
+  {
+    "name": "Token of Connection",
+    "rarity": "superior",
+    "description": "A superior resource used for Quirks to enhance heroes."
+  },
+  {
+    "name": "Proof of Worth",
+    "rarity": "epic",
+    "description": "A rare material used for Quirks to enhance heroes through the Adventure License category."
   }
+
 
 
   
