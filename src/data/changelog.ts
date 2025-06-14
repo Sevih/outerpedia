@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-06-14",
+    title: "Quirk guide",
+    type: "feature",
+    content: [
+      "- Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials. Learn More [here](/guides/general-guides/quirk)",
+    ],
+  },
+  {
     date: "2025-06-11",
     title: "Added base stats, gift preferences, and promo code display",
     type: "feature",

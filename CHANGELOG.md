@@ -1,3 +1,7 @@
+## 🚀 Quirk guide (2025-06-14)
+- Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials. Learn More [here](/guides/general-guides/quirk)
+
+
 ## 🚀 Added base stats, gift preferences, and promo code display (2025-06-11)
 -  Character pages now display base stats
 -  Gift preferences are now shown on character pages and can be used as a filter in the character list
