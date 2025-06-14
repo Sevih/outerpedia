@@ -69,8 +69,10 @@ export default function QuirkGuide() {
     <div>
       <GuideHeading level={2}>Quirk System</GuideHeading>
       <p>
+        After clearing any Stage 8 Special Request, you will unlock the Quirk system.<br />
         Quirks are a permanent, account-wide enhancement system available in the <strong>Base → Quirk</strong> menu. They provide additional stats for your heroes or utility effects for your account, and are unlocked using materials such as <ItemInlineDisplay names="Proof of Destiny" />, <ItemInlineDisplay names="Token of Connection" />, and <ItemInlineDisplay names="Proof of Worth" />.
       </p>
+
 
       <GuideHeading level={3}>Category Overview</GuideHeading>
       <ul className="list-inside ml-4 space-y-1">
@@ -95,7 +97,11 @@ export default function QuirkGuide() {
       </p>
       <p className="mt-2">
         Next, focus on <GuideIconInline name="CM_Gift_Menu_03" text="Class Enhancement" size={40} />, starting with the class of your main DPS. Then move on to <GuideIconInline name="CM_Gift_Menu_01" text="Element Enhancement" size={40} />, prioritizing the element your team relies on the most.
-        Finally, consider <GuideIconInline name="CM_Gift_Menu_04" text="Utility" size={40} /> quirks, which offer valuable account-wide benefits such as EXP gain, drop rate, and crafting discounts.
+        <p className="mt-2">
+          Finally, consider <GuideIconInline name="CM_Gift_Menu_04" text="Utility" size={40} /> quirks, which offer account-wide bonuses such as EXP gain, drop rate, crafting discounts — and most notably, an increase to your stamina cap.
+          While the stamina cap boost is the most impactful perk in this category, Utility quirks as a whole still remain a lower priority early on.
+        </p>
+
       </p>
       <p className="mt-2">
         As for the <GuideIconInline name="CM_Gift_Menu_06" text="Adventure License" size={40} /> tree: this is an endgame system and shouldn’t be your early focus. It’s also the only tree that requires <ItemInlineDisplay names="Proof of Worth" />, which is exclusively obtained from Adventure License mode.
@@ -107,8 +113,8 @@ export default function QuirkGuide() {
       </p>
       <ul className="list-disc list-inside ml-4 space-y-1">
         <li>After unlocking boss quirks, prioritize the <ClassInlineTag name="Striker" /> tree — especially the left path, which benefits <ClassInlineTag name="Striker" subclass='Attacker' />  like Aer and Drakhan.</li>
-        <li>Then, upgrade the <ElementInlineTag element='fire'/> tree (Valentine and Aer) — one of your early goals will be farming Chimera for Speed gear.</li>
-        <li>Then, invest in <ElementInlineTag element='light'/> quirks for Drakhan and Monad Eva.</li>
+        <li>Then, upgrade the <ElementInlineTag element='fire' /> tree (Valentine and Aer) — one of your early goals will be farming Chimera for Speed gear.</li>
+        <li>Then, invest in <ElementInlineTag element='light' /> quirks for Drakhan and Monad Eva.</li>
       </ul>
       <p className="mt-2">
         This is just one example — always adapt your quirk investments based on your team composition and progression goals.

@@ -622,15 +622,14 @@
   },
   "quirk": {
     "category": "general-guides",
-    "title": "Quirk",
-    "description": "",
+    "title": "Quirk System",
+    "description": "Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials.",
     "icon": "quirk",
     "second_image": "quirk-2",
     "last_updated": "2025-05-28",
     "author": "Kilvanoshei",
-    "hide": true
-  }
-  ,
+    "hide": false
+  },
   "stats": {
     "category": "general-guides",
     "title": "Statistics & Combat Basics",
