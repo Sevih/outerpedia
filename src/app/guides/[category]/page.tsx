@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SortSelector from '@/app/components/SortSelector';
 import AdventureGuideGrid from '@/app/components/AdventureGuideGrid';
+import { FaDiscord } from "react-icons/fa";
 
 
 type Guide = {
@@ -47,8 +48,8 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
     keywords: generateKeywords(category, meta.title),
     description: meta.description,
     alternates: {
-    canonical: 'https://outerpedia.com/guides/' + category,
-  },
+      canonical: 'https://outerpedia.com/guides/' + category,
+    },
     openGraph: {
       title: `${meta.title} | Outerpedia`,
       description: meta.description,
@@ -127,6 +128,36 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
       )}
 
 
+
+      {category === 'general-guides' ? (
+        <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
+          This section covers <strong>fundamental systems, mechanics, and beginner-friendly guides</strong> that apply across all game modes in Outerplane.
+          If you&apos;re missing a specific topic, feel free to suggest it on our&nbsp;
+          <Link
+            href="https://discord.gg/keGhVQWsHv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline inline-flex items-center gap-1 text-amber-300"
+          >
+            <FaDiscord /> EvaMains Discord
+          </Link>.
+        </p>
+      ) : (
+        <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
+          This section contains all available guides for the <strong>{meta.title}</strong> mode in Outerplane.
+          If a specific guide is missing, you can suggest it directly via our&nbsp;
+          <Link
+            href="https://discord.gg/keGhVQWsHv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline inline-flex items-center gap-1 text-amber-300"
+          >
+            <FaDiscord /> EvaMains Discord
+          </Link>.
+        </p>
+      )}
+
+
       {/** if cat adventure regroup par saison et spoiler trigger*/}
 
       {category === 'adventure' ? (
@@ -134,6 +165,7 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
       ) : (
         <GuideCardGrid items={filtered} />
       )}
+
 
 
       {/* Bloc JSON-LD pour la catégorie */}
@@ -179,10 +211,10 @@ function generateKeywords(category: string, metaTitle: string): string[] {
 
   const extras: Record<string, string[]> = {
     'adventure': ['spoiler-free', 'map strategy', 'chapter walkthrough', 'adventure mode', 'stage progression', 'pve'],
-    'world-boss': ['world boss', 'extreme league','boss strategy', 'team building', 'gear recommendation', 'pve'],
+    'world-boss': ['world boss', 'extreme league', 'boss strategy', 'team building', 'gear recommendation', 'pve'],
     'joint-boss': ['joint boss', 'raid build', 'high score', 'damage optimization', 'pve'],
-    'adventure-license': ['promotion license', 'promotion battle', 'AL', 'stage','pve'],
-    'special-request': ['request', 'gear boss', 'identification', 'ecology study','special Request'],
+    'adventure-license': ['promotion license', 'promotion battle', 'AL', 'stage', 'pve'],
+    'special-request': ['request', 'gear boss', 'identification', 'ecology study', 'special Request'],
     'irregular-extermination': ['irregular extermination', 'limited time event', 'event build', 'pve'],
     'guild-raid': ['guild raid', 'co-op boss', 'guild damage', 'weekly ranking', 'pve'],
     'general-guides': ['beginner guide', 'resource management', 'daily', 'system overview', 'pve'],

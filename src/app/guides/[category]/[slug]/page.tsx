@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
     };
   }
 
-  const meta = categoryMeta[category]; 
+  const meta = categoryMeta[category];
 
   const url = `https://outerpedia.com/guides/${guide.category}/${slug}`;
   const image = `https://outerpedia.com/images/guides/${guide.category}/${slug}_portrait.png`;
@@ -98,7 +98,7 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
     notFound();
   }
 
-  const meta = categoryMeta[category]; 
+  const meta = categoryMeta[category];
 
   return (
 
@@ -173,6 +173,35 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
       <div className="text-sm text-neutral-400 mb-6">
         ✍️ {guide.author} · 🕒 {new Date(guide.last_updated).toLocaleDateString()}
       </div>
+
+      {category === 'general-guides' ? (
+        <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
+          This guide provides information and advice about <strong>{guide.title}</strong> in Outerplane.<br />
+          If you have additional tips or notice any missing details, feel free to share them with us on&nbsp;
+          <Link
+            href="https://discord.gg/keGhVQWsHv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline inline-flex items-center gap-1 text-amber-300"
+          >
+            EvaMains Discord
+          </Link>.
+        </p>
+      ) : (
+        <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
+          This guide covers all currently available information and advice for <strong>{category.replace(/-/g, ' ')}</strong> – <strong>{guide.title}</strong> in Outerplane.<br />
+          If you know any additional strategies, tips, or missing details, feel free to share them with us on&nbsp;
+          <Link
+            href="https://discord.gg/keGhVQWsHv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline inline-flex items-center gap-1 text-amber-300"
+          >
+            EvaMains Discord
+          </Link>.
+        </p>
+      )}
+
 
       <div className="mt-6">
         <GuideContentWrapper category={category} slug={slug} />

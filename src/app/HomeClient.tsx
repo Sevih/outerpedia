@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { changelog } from "@/data/changelog"
 import { renderMarkdown } from "@/utils/markdown"
 
-const recentChanges = changelog.slice(0, 5)
+const recentChanges = changelog.slice(0, 10)
 
 export default function HomeClient() {
   useEffect(() => {
