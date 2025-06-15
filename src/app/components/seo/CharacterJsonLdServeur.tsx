@@ -10,7 +10,7 @@ type CharacterJsonLd = {
     description: string;
     image: string;
     url: string;
-    characterAttribute?: { "@type": "Thing"; name: string }[];
+    keywords: string | string[];
   };
   mainEntityOfPage: { "@type": "WebPage"; "@id": string };
 };

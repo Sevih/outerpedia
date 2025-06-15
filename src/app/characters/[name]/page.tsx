@@ -200,11 +200,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               description: `${character.Element} ${character.Class} ${character.Fullname} overview — skill breakdown and upgrade priority, ranking, exclusive equipment, and recommended sets.`,
               image: `https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.webp`,
               url: `https://outerpedia.com/characters/${name}`,
-              characterAttribute: [
-                { "@type": "Thing", name: character.Element },
-                { "@type": "Thing", name: character.Class },
-                { "@type": "Thing", name: character.SubClass }
-              ]
+              keywords: [character.Element, character.Class, character.SubClass].join(', ')
             },
             mainEntityOfPage: {
               "@type": "WebPage",
