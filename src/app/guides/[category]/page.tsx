@@ -180,12 +180,12 @@ function generateKeywords(category: string, metaTitle: string): string[] {
   const extras: Record<string, string[]> = {
     'adventure': ['spoiler-free', 'map strategy', 'chapter walkthrough', 'adventure mode', 'stage progression', 'pve'],
     'world-boss': ['world boss', 'extreme league','boss strategy', 'team building', 'gear recommendation', 'pve'],
-    'joint-boss': ['joint boss', 'raid build', 'high score tips', 'damage optimization', 'pve'],
+    'joint-boss': ['joint boss', 'raid build', 'high score', 'damage optimization', 'pve'],
     'adventure-license': ['promotion license', 'promotion battle', 'AL', 'stage','pve'],
     'special-request': ['request', 'gear boss', 'identification', 'ecology study','special Request'],
     'irregular-extermination': ['irregular extermination', 'limited time event', 'event build', 'pve'],
     'guild-raid': ['guild raid', 'co-op boss', 'guild damage', 'weekly ranking', 'pve'],
-    'general-guides': ['beginner guide', 'resource management', 'daily tips', 'system overview', 'pve'],
+    'general-guides': ['beginner guide', 'resource management', 'daily', 'system overview', 'pve'],
   };
 
   const normalizedCat = category.toLowerCase();

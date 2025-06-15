@@ -122,7 +122,7 @@ export function CharacterNameDisplayBigNoH({ fullname }: Props) {
   const nameSize = NAME_STYLES_BIG[name] || 'text-4xl'; // remplace par une logique si tu veux le rendre dynamique
 
   // Titre SEO complet
-  const seoTitle = `${fullname} – Outerplane Character Guide, Build & Equipment Tips`;
+  const seoTitle = `${fullname} – Outerplane Character Guide, Build & Equipment`;
 
   return (
     <>

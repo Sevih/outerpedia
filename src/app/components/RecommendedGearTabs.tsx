@@ -147,7 +147,7 @@ export default function RecommendedGearTabs({
   const recommendedTalismans = recommendedTalismanNames?.map(name => talismans.find(t => t.name === name)).filter((x): x is Talisman => x !== undefined) ?? []
   return (
     <div className="mt-6">
-      <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Gear</h2>
+      <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Build and Gear</h2>
 
       <div className="flex justify-center mb-6">
         <div className="relative bg-gray-800 rounded-full p-1 flex gap-1 w-fit overflow-x-auto flex-nowrap">

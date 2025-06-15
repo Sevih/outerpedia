@@ -8,7 +8,7 @@
     },
     "adventure": {
       "title": "Adventure",
-      "description": "Tips and strategies to progress through Adventure mode.",
+      "description": "Strategies to progress through Adventure mode.",
       "icon": "/images/guides/CM_EtcMenu_Adventure",
       "valid":true
     },
@@ -19,43 +19,43 @@
       "valid":true
     },
     "special-request": {
-      "title": "Gear Boss Tips",
+      "title": "Gear Boss",
       "description": "Strategies for Special Request Ecology Study & Identification.",
       "icon": "/images/guides/CM_Adventure_Challenge",
       "valid":true
     },
     "skyward-tower": {
-      "title": "Skyward Tower Tips",
+      "title": "Skyward Tower",
       "description": "Strategies to help you climb the tower.",
       "icon": "/images/guides/CT_Symbol_Automata",
       "valid":false
     },
     "joint-boss": {
-      "title": "Joint Boss Tips",
+      "title": "Joint Boss",
       "description": "Find synergy to grab the maximum point.",
       "icon": "/images/guides/CM_Adventure_Cooperation",
       "valid":true
     },
     "guild-raid": {
-      "title": "Guild Raid Tips",
+      "title": "Guild Raid",
       "description": "Helps you to achieve high score in guild raids.",
       "icon": "/images/guides/GD_Mark_07",
       "valid":true
     },
     "adventure-license": {
-      "title": "Adventure License Tips",
+      "title": "Adventure License",
       "description": "Level up your license.",
       "icon": "/images/guides/T_Licence_Level_03",
       "valid":true
     },
     "irregular-extermination": {
-      "title": "Irregular Extermination Tips",
+      "title": "Irregular Extermination",
       "description": "Ease your way to kill the queen and her foes.",
       "icon": "/images/guides/CM_Adventure_Irregular",
       "valid":true
     },
     "monad-gate": {
-      "title": "Monad Gate Tips",
+      "title": "Monad Gate",
       "description": "To help you find your way through this labyrinth and overcome its enemies.",
       "icon": "/images/guides/CM_Adventure_MonadGate",
       "valid":false
