@@ -60,14 +60,14 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
 
   return {
     title: `${guide.title} |  ${meta.title} | Outerpedia`,
-    description: `${guide.description} `,
+    description: `${meta.title} ${guide.title} ${guide.description}`,
     keywords: generateGuideKeywords(guide, slug),
     alternates: {
       canonical: `https://outerpedia.com/guides/${guide.category}/${slug}`,
     },
     openGraph: {
       title: `${guide.title} | ${meta.title} | Outerpedia`,
-      description: `${guide.description} `,
+      description: `${meta.title} ${guide.title} ${guide.description}`,
       type: 'article',
       url,
       images: [
@@ -82,7 +82,7 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
     twitter: {
       card: 'summary',
       title: `${guide.title} |  ${meta.title} | Outerpedia`,
-      description: `${guide.description} `,
+      description: `${meta.title} ${guide.title} ${guide.description}`,
       images: [image],
     },
   };
