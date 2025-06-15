@@ -28,6 +28,7 @@ import StatInlineTag from '@/app/components/StatInlineTag';
 import GuideIconInline from '@/app/components/GuideIconInline';
 import GiftCard from '@/app/components/GiftCard';
 import CharacterProfileDescription from '@/app/components/CharacterProfileDescription ';
+import rawProfiles from '@/data/character-profiles.json';
 
 import TranscendenceSlider from '@/app/components/TranscendenceSlider';
 import YoutubeEmbed from '@/app/components/YoutubeEmbed';
@@ -182,8 +183,16 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
       );
     }
 
+    type CharacterProfile = {
+      birthday?: string;
+      height?: string;
+      weight?: string;
+      story?: string;
+    };
 
     const ee = eeData[toKebabCase(character.Fullname)];
+    const characterProfiles = rawProfiles as Record<string, CharacterProfile>;
+    const profile = characterProfiles[character.Fullname];
 
     return (
       <>
@@ -200,7 +209,9 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               description: `${character.Element} ${character.Class} ${character.Fullname} overview — skill breakdown and upgrade priority, ranking, exclusive equipment, and recommended sets.`,
               image: `https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.webp`,
               url: `https://outerpedia.com/characters/${name}`,
-              keywords: [character.Element, character.Class, character.SubClass].join(', ')
+              birthDate: profile?.birthday,
+              height: profile?.height,
+              weight: profile?.weight
             },
             mainEntityOfPage: {
               "@type": "WebPage",
@@ -208,6 +219,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             }
           }}
         />
+
 
         {/* Flèche retour */}
         <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
