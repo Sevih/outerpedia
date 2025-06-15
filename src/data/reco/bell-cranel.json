@@ -25,11 +25,7 @@
       },
       {
         "name": "Dies Irae",
-        "mainStat": "ATK%"
-      },
-      {
-        "name": "Dies Irae",
-        "mainStat": "SPD"
+        "mainStat": "ATK%/SPD"
       }
     ],
     "Set": [
@@ -71,11 +67,7 @@
       },
       {
         "name": "Dies Irae",
-        "mainStat": "ATK%"
-      },
-      {
-        "name": "Dies Irae",
-        "mainStat": "SPD"
+        "mainStat": "ATK%/SPD"
       }
     ],
     "Set": [
@@ -117,11 +109,7 @@
       },
       {
         "name": "Dies Irae",
-        "mainStat": "ATK%"
-      },
-      {
-        "name": "Dies Irae",
-        "mainStat": "SPD"
+        "mainStat": "ATK%/SPD"
       }
     ],
     "Set": [

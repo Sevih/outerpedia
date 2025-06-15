@@ -558,12 +558,7 @@
         {
           "name": "Dies Irae",
           "mainStat": [
-            "ATK%"
-          ]
-        },
-        {
-          "name": "Dies Irae",
-          "mainStat": [
+            "ATK%",
             "SPD"
           ]
         }
@@ -617,12 +612,7 @@
         {
           "name": "Dies Irae",
           "mainStat": [
-            "ATK%"
-          ]
-        },
-        {
-          "name": "Dies Irae",
-          "mainStat": [
+            "ATK%",
             "SPD"
           ]
         }
@@ -676,12 +666,7 @@
         {
           "name": "Dies Irae",
           "mainStat": [
-            "ATK%"
-          ]
-        },
-        {
-          "name": "Dies Irae",
-          "mainStat": [
+            "ATK%",
             "SPD"
           ]
         }

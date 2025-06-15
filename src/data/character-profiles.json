@@ -51,7 +51,7 @@
     "birthday": "11/11",
     "height": "144 cm",
     "weight": "35 kg",
-    "story": "Hello, Master. I am your personal automaton, Eva. Automatons move using the power of a dungeon core and can decompose and analyze any organic matter. They are also capable of synthesizing and reconstructing any material... You want me to tell you about myself, instead of giving simple facts? I apologize. I failed to understand your question correctly. I was in a long cold sleep when your fervent desire for revenge woke me up. Then we made a contract. Your purpose is now my purpose. Your desire is my desire.  Howeverâ¦ I personally have an inclination to gain knowledge regarding the many things I do not understand... especially emotions. If I am ever to become a human, will an automaton like me be able to understand such things?"
+    "story": "Hello, Master. I am your personal automaton, Eva. Automatons move using the power of a dungeon core and can decompose and analyze any organic matter. They are also capable of synthesizing and reconstructing any material... You want me to tell you about myself, instead of giving simple facts? I apologize. I failed to understand your question correctly. I was in a long cold sleep when your fervent desire for revenge woke me up. Then we made a contract. Your purpose is now my purpose. Your desire is my desire.  However… I personally have an inclination to gain knowledge regarding the many things I do not understand... especially emotions. If I am ever to become a human, will an automaton like me be able to understand such things?"
   },
   "Idith": {
     "birthday": "06/06",
@@ -147,7 +147,7 @@
     "birthday": "09/26",
     "height": "153 cm",
     "weight": "36 kg",
-    "story": "She is a fiend, a member of a mysterious clan that absorbs the blood of living organisms to accumulate power and longevityâa vampire. Her youth and inexperience indicate that she is not an independent individual, but rather one that serves a master.  But no matter how young or inexperienced she may be, she is still a dangerous vampire. Be on your guard around her. If you get distracted by her loud and constant chattering, her way of mocking everyone regardless of their identity, and her mischievous and crude laughter, you will be surrounded by a cloud of blood-sucking bats in no time."
+    "story": "She is a fiend, a member of a mysterious clan that absorbs the blood of living organisms to accumulate power and longevity—a vampire. Her youth and inexperience indicate that she is not an independent individual, but rather one that serves a master.  But no matter how young or inexperienced she may be, she is still a dangerous vampire. Be on your guard around her. If you get distracted by her loud and constant chattering, her way of mocking everyone regardless of their identity, and her mischievous and crude laughter, you will be surrounded by a cloud of blood-sucking bats in no time."
   },
   "Yuri": {
     "birthday": "06/02",
@@ -273,7 +273,7 @@
     "birthday": "10/23",
     "height": "163 cm",
     "weight": "45 kg",
-    "story": "Rico is a jack of all trades, quick to solve any problem, and risks her life on a single coin or a single coupon. Though she is a forest elf, she jumps into whatever job gives her money, regardless of her background. If she could get rich by selling the entire forest for firewood, she would do it in a heartbeat.  Because of this, she is shunned by everyone around her. But she does not let that get in the way of accepting whatever request she gets so that she can earn money to buy medicine for her sick mother. If there is a request you are having trouble with, it might be a good idea to as Rico for help. She will complete the task at the risk of her own lifeâthat is, for a cost."
+    "story": "Rico is a jack of all trades, quick to solve any problem, and risks her life on a single coin or a single coupon. Though she is a forest elf, she jumps into whatever job gives her money, regardless of her background. If she could get rich by selling the entire forest for firewood, she would do it in a heartbeat.  Because of this, she is shunned by everyone around her. But she does not let that get in the way of accepting whatever request she gets so that she can earn money to buy medicine for her sick mother. If there is a request you are having trouble with, it might be a good idea to as Rico for help. She will complete the task at the risk of her own life—that is, for a cost."
   },
   "Lyla": {
     "birthday": "10/12",
@@ -315,13 +315,13 @@
     "birthday": "05/23",
     "height": "169 cm",
     "weight": "-1 kg",
-    "story": "Stella Vargo Rosinley Ivanez, the well-known princess of White Falcon... The evil Earthling soul that had haunted her reconfigured her body with a spell called <Color=#FFBF00>Transmogrification</Color>. Becoming more like an automaton than a human, she used fearsome Quirks and unfathomable power that belonged to her bodyâs master to corner us. But in the end, Master, you were victorious. Congratulations. I could not be more proud of what you have accomplished. Now, there are no shackles binding you... Please live your life for none other than yourself.  It was an honor to serve you."
+    "story": "Stella Vargo Rosinley Ivanez, the well-known princess of White Falcon... The evil Earthling soul that had haunted her reconfigured her body with a spell called <Color=#FFBF00>Transmogrification</Color>. Becoming more like an automaton than a human, she used fearsome Quirks and unfathomable power that belonged to her body’s master to corner us. But in the end, Master, you were victorious. Congratulations. I could not be more proud of what you have accomplished. Now, there are no shackles binding you... Please live your life for none other than yourself.  It was an honor to serve you."
   },
   "Mene": {
     "birthday": "11/20",
     "height": "145 cm",
     "weight": "35 kg",
-    "story": "Let me fill in for Eva and introduce her... This is Mene Satellight, one of Sacreedâs Twelve Disciples, and she holds the position of the <Color=#FFBF00>Disciple of the Stars</Color>.  She became a hierarch after losing both her parents in the war against the fiends, but judging by how she's always dozing off, it looks like her sense of responsibility is somewhat lacking.   Not only that, but the way she talks to that shark doll her dad left behind makes her look like the child she is rather than a solemn member of the clergy.  Is Sacreed that desperate for new recruits? Or does this child possess power so great that they took her in despite it all?"
+    "story": "Let me fill in for Eva and introduce her... This is Mene Satellight, one of Sacreed’s Twelve Disciples, and she holds the position of the <Color=#FFBF00>Disciple of the Stars</Color>.  She became a hierarch after losing both her parents in the war against the fiends, but judging by how she's always dozing off, it looks like her sense of responsibility is somewhat lacking.   Not only that, but the way she talks to that shark doll her dad left behind makes her look like the child she is rather than a solemn member of the clergy.  Is Sacreed that desperate for new recruits? Or does this child possess power so great that they took her in despite it all?"
   },
   "Aer": {
     "birthday": "05/31",
@@ -543,13 +543,13 @@
     "birthday": "09/23",
     "height": "177 cm",
     "weight": "55 kg",
-    "story": "Nella, who once lurked in the shadows of the Golden Desert, is now utterly lostâboth physically and mentally.  Her eyes, once bright with clear, ambitious goals, are now clouded by fury... The voice that was once raised for the future of Pandemonium is now demanding the sacrifice of her underlings. At this rate, she'll lead her army to a futile death instead of salvation. Master, now is the time to join forces with your heroes and confront her madness. Let's bring an end to this dreadful all-out war."
+    "story": "Nella, who once lurked in the shadows of the Golden Desert, is now utterly lost—both physically and mentally.  Her eyes, once bright with clear, ambitious goals, are now clouded by fury... The voice that was once raised for the future of Pandemonium is now demanding the sacrifice of her underlings. At this rate, she'll lead her army to a futile death instead of salvation. Master, now is the time to join forces with your heroes and confront her madness. Let's bring an end to this dreadful all-out war."
   },
   "Gnosis Beth": {
     "birthday": "09/26",
     "height": "163 cm",
     "weight": "46 kg",
-    "story": "Be careful, Master. The mischievous and playful Beth that you once knew is gone.  The one before us now is the 2nd Archdemon of Pure Bloodâa vengeful spirit consumed by hatred after losing her beloved ones to Nellaâs hands. But, perhaps that is why you can't abandon her. You know all too well that the path of vengeance only leads to deeper loss...and greater sorrow. Master, if you truly wish to save Beth, you must steel your resolve. Turning someone away from vengeance is never an easy task."
+    "story": "Be careful, Master. The mischievous and playful Beth that you once knew is gone.  The one before us now is the 2nd Archdemon of Pure Blood—a vengeful spirit consumed by hatred after losing her beloved ones to Nella’s hands. But, perhaps that is why you can't abandon her. You know all too well that the path of vengeance only leads to deeper loss...and greater sorrow. Master, if you truly wish to save Beth, you must steel your resolve. Turning someone away from vengeance is never an easy task."
   },
   "Holy Night's Blessing Dianne": {
     "birthday": "05/21",
@@ -567,13 +567,13 @@
     "birthday": "12/08",
     "height": "165 cm",
     "weight": "55 kg",
-    "story": "This is Bell Cranel, an adventurer from the Labyrinth City Orario, belonging to the <Color=#FFBF00>Hestia Familia</Color>. According to Lady Hestia, his astonishing growth stems from Liaris Freese, a rare skill that transforms love into power. With unparalleled speed and an appearance as striking as his talent, he has earned the title of âRecord Holder.â Additionally, due to his exceptional speed and rabbit-like features, he has been given the alias <Color=#FFBF00>âRabbit's Foot.â</Color> It is said that he possesses both an indomitable spirit that does not waver in the face of adversity and a kindness that compels him to aid the weak. Even with this brief introduction, one can already glimpse Bellâs extraordinary potential.  Master, how about making him your companion for the challenges that lie ahead?"
+    "story": "This is Bell Cranel, an adventurer from the Labyrinth City Orario, belonging to the <Color=#FFBF00>Hestia Familia</Color>. According to Lady Hestia, his astonishing growth stems from Liaris Freese, a rare skill that transforms love into power. With unparalleled speed and an appearance as striking as his talent, he has earned the title of Record Holder. Additionally, due to his exceptional speed and rabbit-like features, he has been given the alias <Color=#FFBF00>Rabbit's Foot.</Color> It is said that he possesses both an indomitable spirit that does not waver in the face of adversity and a kindness that compels him to aid the weak. Even with this brief introduction, one can already glimpse Bell’s extraordinary potential.  Master, how about making him your companion for the challenges that lie ahead?"
   },
   "Ais Wallenstein": {
     "birthday": "12/08",
     "height": "162 cm",
     "weight": "55 kg",
-    "story": "Meet Ais Wallenstein, an adventurer from the Labyrinth City Orario and a member of the Loki Familia. According to another transferee, Bell, the Loki Familia is Orarioâs most powerful faction, and Ais stands at its core as a first-class adventurer. With golden hair, golden eyes, and beauty rivaling even the gods, she is renowned for her unparalleled swordsmanship and is known by the alias <Color=#FFBF00>âSword Princess.â</Color> Interestingly, based on my observations, she occasionally mutters a term, <Color=#FFBF00>\"Potato Popper,\"</Color> with a happy smile... I'm still unsure why she does that yet.  With her astonishing swordsmanship and formidable battle instincts, she would be an invaluable ally on your journey. How about inviting her to join your team?"
+    "story": "Meet Ais Wallenstein, an adventurer from the Labyrinth City Orario and a member of the Loki Familia. According to another transferee, Bell, the Loki Familia is Orario’s most powerful faction, and Ais stands at its core as a first-class adventurer. With golden hair, golden eyes, and beauty rivaling even the gods, she is renowned for her unparalleled swordsmanship and is known by the alias <Color=#FFBF00>Sword Princess.</Color> Interestingly, based on my observations, she occasionally mutters a term, <Color=#FFBF00>\"Potato Popper,\"</Color> with a happy smile... I'm still unsure why she does that yet.  With her astonishing swordsmanship and formidable battle instincts, she would be an invaluable ally on your journey. How about inviting her to join your team?"
   },
   "Ryu Lion": {
     "birthday": "12/08",
@@ -585,7 +585,7 @@
     "birthday": "12/17",
     "height": "166 cm",
     "weight": "-1 kg",
-    "story": "Delta is a unique fiend who identifiesÂ as an automaton. She is the pinnacle of bioengineering, embodying both the traits of the Scientific Inheritance and fiend in one body. Her codename, Delta, and the core installed in her body are legacies inherited from her prototype.  After awakening from a deep slumber, she finds herself restricted and under the supervision of an add-on. However...with Master's help, Delta will surely become an extraordinary automaton."
+    "story": "Delta is a unique fiend who identifies as an automaton. She is the pinnacle of bioengineering, embodying both the traits of the Scientific Inheritance and fiend in one body. Her codename, Delta, and the core installed in her body are legacies inherited from her prototype.  After awakening from a deep slumber, she finds herself restricted and under the supervision of an add-on. However...with Master's help, Delta will surely become an extraordinary automaton."
   },
   "Demiurge Delta": {
     "birthday": "02/25",
@@ -603,18 +603,18 @@
     "birthday": "06/25",
     "height": "167 cm",
     "weight": "570 kg",
-    "story": "We stopped the Irregular that was devouring Ful.Mi.NATION... but at that moment, a new threat was born.  Omega, who defines itself as the ultimate evolved form, has taken on the face of Nadja and resumed the mission the automatons once abandoned. If we donât stop Omega here, it will be our endâand the beginning of something uncontrollable. Master, this may be our final battle. So please... promise me. Promise that youâll complete the mission safely and return with a smile."
+    "story": "We stopped the Irregular that was devouring Ful.Mi.NATION... but at that moment, a new threat was born.  Omega, who defines itself as the ultimate evolved form, has taken on the face of Nadja and resumed the mission the automatons once abandoned. If we don’t stop Omega here, it will be our end—and the beginning of something uncontrollable. Master, this may be our final battle. So please... promise me. Promise that you’ll complete the mission safely and return with a smile."
   },
   "Luna": {
     "birthday": "07/16",
     "height": "162 cm",
     "weight": "48 kg",
-    "story": "Luna suddenly appeared one day and began making a name for herself across all of Mirsha as a wandering knight. She shows the side of a knight who willingly wields her spear for the weak, and also the side of a rogue who gets into trouble chasing money and attractive men and women. Wherever she goes, Luna creates storiesâher nature matches the title of a hero, for better or worse.  Master, if by chance you end up traveling with Luna, be careful. If you're captivated by her brilliance, you might be devoured by the shadow that lurks behind her banner."
+    "story": "Luna suddenly appeared one day and began making a name for herself across all of Mirsha as a wandering knight. She shows the side of a knight who willingly wields her spear for the weak, and also the side of a rogue who gets into trouble chasing money and attractive men and women. Wherever she goes, Luna creates stories—her nature matches the title of a hero, for better or worse.  Master, if by chance you end up traveling with Luna, be careful. If you're captivated by her brilliance, you might be devoured by the shadow that lurks behind her banner."
   },
   "Demiurge Luna": {
     "birthday": "05/20",
     "height": "168 cm",
     "weight": "54 kg",
-    "story": "This is Lady Luna's true formâIbanez I, the founding monarch of a different Worldline.  By using the Core â Wisdom of the King, she reshaped her very existence and became the enemy of the stars, one who destroyed all life for the sake of humanityâs future. Lady Luna now bears that sin and aids me in order to save her own Worldline.   If you were to learn of our plan, you would surely try to stop us...  Even so, we will not stop. We will each save [our own world]."
+    "story": "This is Lady Luna's true form—Ibanez I, the founding monarch of a different Worldline.  By using the Core – Wisdom of the King, she reshaped her very existence and became the enemy of the stars, one who destroyed all life for the sake of humanity’s future. Lady Luna now bears that sin and aids me in order to save her own Worldline.   If you were to learn of our plan, you would surely try to stop us...  Even so, we will not stop. We will each save [our own world]."
   }
 }
