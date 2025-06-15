@@ -121,25 +121,32 @@ export function CharacterNameDisplayBigNoH({ fullname }: Props) {
   const prefixSize = matchedPrefix ? PREFIX_STYLES_BIG[matchedPrefix] : '';
   const nameSize = NAME_STYLES_BIG[name] || 'text-4xl'; // remplace par une logique si tu veux le rendre dynamique
 
+  // Titre SEO complet
+  const seoTitle = `${fullname} – Outerplane Character Guide, Build & Equipment Tips`;
+
   return (
-    <h1 className="flex flex-col text-white leading-tight mb-2">
-      {prefix && (
-        <span className={`${prefixSize} custom-text-shadow mb-[-2px]`}>
-          {prefix}
+    <>
+      {/* H1 caché pour SEO */}
+      <h1 className="sr-only">{seoTitle}</h1>
+
+      {/* Titre visible */}
+      <div className="flex flex-col text-white leading-tight mb-2 h1_custom">
+        {prefix && (
+          <span className={`${prefixSize} custom-text-shadow mb-[-2px]`}>
+            {prefix}
+          </span>
+        )}
+        <span
+          className={`${nameSize} font-bold custom-text-shadow`}
+          style={{
+            fontWeight: 600,
+            fontFamily: 'Rajdhani, sans-serif',
+            fontSize: '3rem',
+          }}
+        >
+          {name}
         </span>
-      )}
-      <span
-        className={`${nameSize} font-bold custom-text-shadow`}
-        style={{
-          fontWeight: 600,
-          fontFamily: 'Rajdhani, sans-serif',
-          fontSize: '3rem'
-        }}
-      >
-        {name}
-      </span>
-
-
-    </h1>
+      </div>
+    </>
   );
 }

@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 // SEO fallback (servira si aucune page ne définit son propre <head>)
 export const metadata: Metadata = {
-  title: 'Outerpedia – Outerplane Wiki, Guides, Tier List, Builds & Equipment Database',
+  title: 'Outerplane Tier List, Character Builds, Guides & Database – Outerpedia',
   description:
     'Outerpedia is your go-to wiki for Outerplane: browse character builds, tier lists, tools, guides and strategy content.',
   icons: {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Outerpedia – Outerplane Wiki & Strategy Guide',
+    title: 'Outerplane Tier List, Character Builds, Guides & Database – Outerpedia',
     description:
       'Browse character builds, tier lists, gear effects, tools and strategy guides for Outerplane. All in one clean and fast site.',
     images: ['https://outerpedia.com/images/ui/og_home.jpg'],

@@ -1,6 +1,6 @@
 export default function Head() {
   const siteUrl = 'https://outerpedia.com';
-  const title = 'Outerpedia – Outerplane Wiki & Guide';
+  const title = 'Outerplane Tier List, Character Builds, Guides & Database – Outerpedia';
   const description = 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!';
 
   return (

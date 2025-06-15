@@ -18,7 +18,7 @@ export default function Home() {
 
     {/* SEO H1 + intro text */}
 <div className="sr-only">
-  <h1>Outerpedia – Wiki, Guides, Builds and Tier List for Outerplane</h1>
+  <h1>Outerplane Tier List, Character Builds, Guides & Database – Outerpedia</h1>
 </div>
 
 <section className="sr-only max-w-3xl mx-auto mt-6 px-4 md:px-0 text-center text-sm text-gray-400 space-y-3">
