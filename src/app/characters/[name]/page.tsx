@@ -803,10 +803,11 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
               talismans={talismans}
             />
           ) : (
-            <div className="text-white text-center text-sm italic mt-4">
-              {character.Rarity === 3
-                ? "Recommended gear coming soon..."
-                : ""}
+            <div className="mt-6">
+              <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Build and Gear</h2>
+              <p className="text-sm text-gray-400 text-center italic">
+                No recommended gear information available for this character yet.
+              </p>
             </div>
           )}
 

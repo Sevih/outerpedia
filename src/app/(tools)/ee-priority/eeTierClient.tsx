@@ -82,7 +82,7 @@ export default function EeTierClient({ equipments }: { equipments: Record<string
         return acc
     }, {} as Record<string, [string, Equipment][]>)
 
-    
+
 
     // Auto-reset si tous cochés (élément / classe)
     useEffect(() => {
@@ -135,20 +135,23 @@ export default function EeTierClient({ equipments }: { equipments: Record<string
 
 
             {/* Flèche retour */}
-        <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
-          <Link href={`/tools`} className="relative block h-full w-full">
-            <Image
-              src="/images/ui/CM_TopMenu_Back.webp"
-              alt="Back"
-              fill
-              sizes='32px'
-              className="opacity-80 hover:opacity-100 transition-opacity"
-            />
-          </Link>
-        </div>
+            <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
+                <Link href={`/tools`} className="relative block h-full w-full">
+                    <Image
+                        src="/images/ui/CM_TopMenu_Back.webp"
+                        alt="Back"
+                        fill
+                        sizes='32px'
+                        className="opacity-80 hover:opacity-100 transition-opacity"
+                    />
+                </Link>
+            </div>
             <h1 className="text-5xl font-extrabold text-center mb-8 bg-gradient-to-b from-yellow-300 via-orange-400 to-red-500 text-transparent bg-clip-text drop-shadow-md">
                 Exclusive Equipment Priority
             </h1>
+            <p className="bg-yellow-100 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100 w-3/5 mx-auto mb-2">
+                ⚠️   This exclusive equipment ranking is designed to help you prioritize which <strong>Exclusive Equipment (EE)</strong> to unlock first in <strong>Outerplane</strong>. The list evaluates each EE based on its base effect at <strong>level 0</strong> only<br /><strong>+10 bonus effects are not taken into account</strong>. 
+            </p>
 
             <div className="flex justify-center mb-6">
                 <input

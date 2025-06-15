@@ -138,7 +138,8 @@ export default function TierListPage({ characters, initialTab }: { characters: C
       </h1>
       <p className="bg-yellow-100 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100 w-3/5 mx-auto">
         ⚠️ This tier list assumes <strong>6-star transcends</strong> and <strong>level 0 Exclusive Equipment effects</strong>. ⚠️<br />
-        Your experience may vary if these upgrades are not yet unlocked.
+        Your experience may vary if these upgrades are not yet unlocked. <br/>
+        This list is intended strictly for <strong>PvE content</strong> and should not be used as a reference for PvP content.
       </p>
 
 
