@@ -339,7 +339,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
 
                 <div className="flex flex-col gap-4 w-fit">
                   <div className="p-2 rounded text-sm">
-                    <p className="font-semibold">Class Effects : {character.Class} </p>
+                    <p className="font-semibold">Class Effects Details : {character.Class} </p>
                     <p className="whitespace-pre-line">{classInfo?.description || 'No class description found.'}</p>
                   </div>
                 </div>
