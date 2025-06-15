@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { promises as fs } from 'fs';
 import path from 'path';
 import type { Metadata } from 'next';
-import { CharacterJsonLd } from '@/app/components/seo';
+import {CharacterJsonLdServeur} from '@/app/components/seo';
 import Link from 'next/link';
 
 import Image from 'next/image';
@@ -187,15 +187,30 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
 
     return (
       <>
-        <CharacterJsonLd
-          name={character.Fullname}
-          description={`${character.Element} ${character.Class} ${character.Fullname} overview — skill breakdown and upgrade priority, ranking, exclusive equipment, and recommended sets.`}
-          image={`https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.webp`}
-          url={`https://outerpedia.com/characters/${name}`}
-          element={character.Element}
-          charClass={character.Class}
-          subClass={character.SubClass}
+        <CharacterJsonLdServeur
+          jsonLd={{
+            "@context": "https://schema.org",
+            "@type": "VideoGameCharacter",
+            name: character.Fullname,
+            image: `https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.webp`,
+            description: `${character.Element} ${character.Class} ${character.Fullname} overview — skill breakdown and upgrade priority, ranking, exclusive equipment, and recommended sets.`,
+            url: `https://outerpedia.com/characters/${name}`,
+            characterAttribute: [
+              { "@type": "Thing", name: character.Element },
+              { "@type": "Thing", name: character.Class },
+              { "@type": "Thing", name: character.SubClass },
+            ],
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `https://outerpedia.com/characters/${name}`,
+            },
+            game: {
+              "@type": "VideoGame",
+              name: "Outerplane",
+            },
+          }}
         />
+
         {/* Flèche retour */}
         <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
           <Link href={`/characters`} className="relative block h-full w-full">
@@ -229,7 +244,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             {/* Détails à droite : nom, rareté, classe, etc. */}
             <div className="space-y-4">
 
-              
+
 
               {/* Rareté sous forme d'étoiles */}
               <div className="flex items-center gap-2">
