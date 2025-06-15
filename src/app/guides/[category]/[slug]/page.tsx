@@ -98,11 +98,13 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
     notFound();
   }
 
+  const meta = categoryMeta[category]; 
+
   return (
 
     <div className="p-6">
       <div className="sr-only">
-        <h1>{`${guide.title} | ${guide.category}`}</h1>
+        <h1>{`${guide.title} | ${meta.title}`}</h1>
       </div>
       <div className="relative w-full h-[150px] rounded-2xl overflow-hidden mb-6">
         {/* Image centrée */}
