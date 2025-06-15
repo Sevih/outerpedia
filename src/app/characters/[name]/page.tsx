@@ -193,6 +193,13 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
     const ee = eeData[toKebabCase(character.Fullname)];
     const characterProfiles = rawProfiles as Record<string, CharacterProfile>;
     const profile = characterProfiles[character.Fullname];
+    const jobTitle = [character.Class, character.SubClass].filter(Boolean).join(' ');
+    const skills = [
+      character.skills.SKT_FIRST?.name,
+      character.skills.SKT_SECOND?.name,
+      character.skills.SKT_ULTIMATE?.name
+    ].filter((s): s is string => Boolean(s))
+
 
     return (
       <>
@@ -206,12 +213,14 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             character: {
               "@type": "Person",
               name: character.Fullname,
-              description: `${character.Element} ${character.Class} ${character.Fullname} overview — skill breakdown and upgrade priority, ranking, exclusive equipment, and recommended sets.`,
+              description: `${character.Element} ${character.Class} ${character.Fullname} overview — skill breakdown, ranking, exclusive equipment, and more.`,
               image: `https://outerpedia.com/images/characters/atb/IG_Turn_${character.ID}.webp`,
               url: `https://outerpedia.com/characters/${name}`,
               birthDate: profile?.birthday,
               height: profile?.height,
-              weight: profile?.weight
+              weight: profile?.weight,
+              jobTitle: jobTitle,
+              skills: skills
             },
             mainEntityOfPage: {
               "@type": "WebPage",
@@ -219,6 +228,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             }
           }}
         />
+
 
 
         {/* Flèche retour */}
