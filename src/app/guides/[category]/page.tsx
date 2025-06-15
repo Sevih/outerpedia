@@ -131,13 +131,13 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
 
       {category === 'general-guides' ? (
         <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
-          This section covers <strong>fundamental systems, mechanics, and beginner-friendly guides</strong> that apply across all game modes in Outerplane.
+          This section contains <strong>general guides</strong> covering fundamental systems, core mechanics, and beginner-friendly tips that apply across all game modes in Outerplane.
           If you&apos;re missing a specific topic, feel free to suggest it on our&nbsp;
           <Link
             href="https://discord.gg/keGhVQWsHv"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:underline inline-flex items-center gap-1 text-amber-300"
+            className="hover:underline inline-flex items-center gap-1 !text-amber-300"
           >
             <FaDiscord /> EvaMains Discord
           </Link>.

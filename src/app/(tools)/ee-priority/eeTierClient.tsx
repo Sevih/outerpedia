@@ -150,8 +150,10 @@ export default function EeTierClient({ equipments }: { equipments: Record<string
                 Exclusive Equipment Priority
             </h1>
             <p className="bg-yellow-100 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100 w-3/5 mx-auto mb-2">
-                ⚠️   This exclusive equipment ranking is designed to help you prioritize which <strong>Exclusive Equipment (EE)</strong> to unlock first in <strong>Outerplane</strong>. The list evaluates each EE based on its base effect at <strong>level 0</strong> only<br /><strong>+10 bonus effects are not taken into account</strong>. 
+                ⚠️ This <strong>Exclusive Equipment Priority</strong> ranking helps you decide which <strong>Exclusive Equipment (EE)</strong> to unlock first in <strong>Outerplane</strong>. It evaluates each EE based on its <strong>level 0 base effect</strong> only, to establish an optimal unlocking order.<br />
+                <strong>+10 bonus effects are not taken into account</strong>.
             </p>
+
 
             <div className="flex justify-center mb-6">
                 <input

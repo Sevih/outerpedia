@@ -187,10 +187,10 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
             EvaMains Discord
           </Link>.
         </p>
-      ) : (
+      ) : category === 'special-request' ? (
         <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
-          This guide covers all currently available information and advice for <strong>{category.replace(/-/g, ' ')}</strong> – <strong>{guide.title}</strong> in Outerplane.<br />
-          If you know any additional strategies, tips, or missing details, feel free to share them with us on&nbsp;
+          This guide provides strategies and tips for defeating the <strong>{guide.title}</strong> gear boss in Outerplane.<br />
+          If you know any additional tactics, team compositions, or optimizations, feel free to share them with us on&nbsp;
           <Link
             href="https://discord.gg/keGhVQWsHv"
             target="_blank"
@@ -199,8 +199,20 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
           >
             EvaMains Discord
           </Link>.
-        </p>
-      )}
+        </p>) : (
+          <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
+            This guide covers all currently available information and advice for <strong>{category.replace(/-/g, ' ')}</strong> – <strong>{guide.title}</strong> in Outerplane.<br />
+            If you know any additional strategies, tips, or missing details, feel free to share them with us on&nbsp;
+            <Link
+              href="https://discord.gg/keGhVQWsHv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline inline-flex items-center gap-1 text-amber-300"
+            >
+              EvaMains Discord
+            </Link>.
+          </p>
+        )}
 
 
       <div className="mt-6">

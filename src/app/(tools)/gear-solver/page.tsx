@@ -51,7 +51,7 @@ export default function Page() {
             <h1>Gear Usage Finder</h1>
             
             <p className="text-yellow-900 font-semibold bg-yellow-100 border border-yellow-300 rounded px-4 py-2 text-sm">
-                ⚠️ This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.
+                ⚠️ The Gear Usage Finder tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.
             </p>
             <GearSolverWrapper />
         </main>
