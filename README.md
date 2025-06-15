@@ -13,13 +13,16 @@ Outerpedia is a companion site for **Outerplane**, a mobile turn-based RPG. It p
 
 ## 🚀 Features
 
-- 🧙‍♀️ **Character Database** with portraits, skills, passives, chain/dual effects and full JSON export.
-- 🛡️ **Equipment Page** supporting filters for type, stats and gear notes.
-- 🧪 **Recommended Builds** per character, including exclusive equipment and talismans.
-- 🔎 **Buff/Debuff Filters** with AND/OR logic and icon-based UI.
-- 📦 Full static export compatible (`force-static`, `dynamicParams = false`).
-- 📈 Integrated **SEO metadata** and Open Graph preview (`og_home.jpg`).
-- 🎨 Custom UI & homepage design (OG banner, pullable section, categories).
+🔥 Tier List (updated monthly)
+🧙‍♀️ Character pages with skills, buffs/debuffs, EE, and builds
+🛡️ Equipment DB: weapons, armor sets, talismans, amulets
+🎯 Advanced filters (class, element, buffs, etc.)
+📘 Guides for PvE, PvP, raids, and more
+⚙️ Tools: EE priority viewer, Item Stats Usage, gear solver
+🚀 Lightning fast (static site, CDN, PWA support)
+The site is live here: [https://outerpedia.com/](https://outerpedia.com/)
+Want to suggest builds, contribute, or discuss strategies? Join the EvaMains Discord: https://discord.gg/keGhVQWsHv
+Current version 1.27 : Demiurge Luna patc
 
 ---
 
