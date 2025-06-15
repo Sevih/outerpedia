@@ -5,24 +5,26 @@
 
 # 🌌 Outerpedia
 
-Outerpedia is a companion site for **Outerplane**, a mobile turn-based RPG. It provides a clean and structured UI to browse characters, gear, builds, and tier lists.
+**Outerpedia** is a companion site for **Outerplane**, a mobile turn-based RPG.  
+It provides a clean and structured UI to browse characters, gear, builds, and tier lists.
 
-> Built with [Next.js 15](https://nextjs.org), TypeScript and Tailwind CSS.
+> Built with [Next.js 15](https://nextjs.org), TypeScript, and Tailwind CSS.
+
+🌐 Live: [https://outerpedia.com](https://outerpedia.com)  
+💬 Community: [Join the EvaMains Discord](https://discord.gg/keGhVQWsHv)  
+🛠️ Current version: **1.27 – Demiurge Luna patch**
 
 ---
 
 ## 🚀 Features
 
-🔥 Tier List (updated monthly)
-🧙‍♀️ Character pages with skills, buffs/debuffs, EE, and builds
-🛡️ Equipment DB: weapons, armor sets, talismans, amulets
-🎯 Advanced filters (class, element, buffs, etc.)
-📘 Guides for PvE, PvP, raids, and more
-⚙️ Tools: EE priority viewer, Item Stats Usage, gear solver
-🚀 Lightning fast (static site, CDN, PWA support)
-The site is live here: [https://outerpedia.com/](https://outerpedia.com/)
-Want to suggest builds, contribute, or discuss strategies? Join the EvaMains Discord: https://discord.gg/keGhVQWsHv
-Current version 1.27 : Demiurge Luna patc
+- 🔥 Tier List (updated monthly)  
+- 🧙‍♀️ Character pages with skills, buffs/debuffs, EE, and builds  
+- 🛡️ Equipment Database: weapons, armor sets, talismans, amulets  
+- 🎯 Advanced filters (class, element, buffs, etc.)  
+- 📘 Guides for PvE, PvP, raids, and more  
+- ⚙️ Tools: EE priority viewer, Item Stats Usage, gear solver  
+- 🚀 Lightning fast (static site, CDN, PWA support)
 
 ---
 
@@ -34,6 +36,7 @@ Clone and install dependencies:
 git clone https://github.com/Sevih/outerpedia.git
 cd outerpedia
 npm install
+npm run dev
 ```
 
 Run the dev server:
@@ -48,11 +51,17 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🛠 Project Structure
 
-- `src/data/` – JSON data (characters, equipment, buffs, etc.)
-- `src/app/` – Next.js App Router (pages, routes, API)
-- `src/app/components/` – UI and logic components
-- `scripts/` – Utilities (e.g. sitemap, SEO check, scraping scripts)
+```bash
+outerpedia/
+├── src/
+│   ├── app/                # Next.js App Router (routes, pages, API)
+│   ├── app/components/     # UI and logic components
+│   └── data/               # JSON game data (characters, equipment, buffs, etc.)
+├── public/                 # Static assets
+├── scripts/                # Utility scripts (sitemap, SEO, parsing)
+└── ...
 
+```
 ---
 
 ## 🔧 Build & Deploy
@@ -64,7 +73,7 @@ npm run build
 npm run start
 ```
 
-Deployment is handled via **Vercel** or can be self-hosted on any static-compatible platform.
+Deployment is handled via a custom Node.js server with automated GitHub-based deployment.
 
 ---
 
@@ -74,8 +83,3 @@ Outerpedia is a fan project. All in-game assets belong to Smilegate Megaport.
 Code is MIT licensed.
 
 ---
-
-## 💬 Community
-
-Join our Discord to report bugs, request features or suggest improvements:  
-**[https://discord.gg/ESkqR8ta7y](https://discord.gg/ESkqR8ta7y)**
