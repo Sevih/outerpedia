@@ -155,8 +155,6 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
     let recoData = null
     const baseStats = subclassInfo?.[`stats${character.Rarity}`];
 
-
-
     try {
       const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
       const res = await fetch(`${baseUrl}/api/reco/${recoFile}`);

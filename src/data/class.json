@@ -128,46 +128,46 @@
           "eff": 120,
           "res": 110
         }
-      }
-    },
-    "Bruiser": {
-      "description": "A brawler who specializes in prolonged battles with balanced offensive and defensive skills.",
-      "image": "/images/ui/classgraph/bruiser.webp",
-      "stats1": {
-        "atk": 755,
-        "def": 506,
-        "hp": 3776,
-        "spd": 90,
-        "chc": 10,
-        "chd": 150,
-        "acc": 160,
-        "eva": 200,
-        "eff": 120,
-        "res": 190
       },
-      "stats2": {
-        "atk": 869,
-        "def": 560,
-        "hp": 4364,
-        "spd": 93,
-        "chc": 10,
-        "chd": 150,
-        "acc": 160,
-        "eva": 200,
-        "eff": 120,
-        "res": 190
-      },
-      "stats3": {
-        "atk": 982,
-        "def": 613,
-        "hp": 4951,
-        "spd": 98,
-        "chc": 10,
-        "chd": 150,
-        "acc": 160,
-        "eva": 200,
-        "eff": 120,
-        "res": 190
+      "Bruiser": {
+        "description": "A brawler who specializes in prolonged battles with balanced offensive and defensive skills.",
+        "image": "/images/ui/classgraph/bruiser.webp",
+        "stats1": {
+          "atk": 755,
+          "def": 506,
+          "hp": 3776,
+          "spd": 90,
+          "chc": 10,
+          "chd": 150,
+          "acc": 160,
+          "eva": 200,
+          "eff": 120,
+          "res": 190
+        },
+        "stats2": {
+          "atk": 869,
+          "def": 560,
+          "hp": 4364,
+          "spd": 93,
+          "chc": 10,
+          "chd": 150,
+          "acc": 160,
+          "eva": 200,
+          "eff": 120,
+          "res": 190
+        },
+        "stats3": {
+          "atk": 982,
+          "def": 613,
+          "hp": 4951,
+          "spd": 98,
+          "chc": 10,
+          "chd": 150,
+          "acc": 160,
+          "eva": 200,
+          "eff": 120,
+          "res": 190
+        }
       }
     }
   },
