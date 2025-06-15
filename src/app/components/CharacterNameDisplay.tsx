@@ -95,12 +95,51 @@ export function CharacterNameDisplayBig({ fullname }: Props) {
       {/* ICI on utilise un vrai h1 pour le nom principal */}
       <h2 className={`${nameSize} font-bold custom-text-shadow h1_custom`}>
         {prefix && (
-        <div className={`${prefixSize} custom-text-shadow mb-[-2px]`}>
-          {prefix}
-        </div>
-      )}
+          <div className={`${prefixSize} custom-text-shadow mb-[-2px]`}>
+            {prefix}
+          </div>
+        )}
         {name}
       </h2>
     </div>
+  );
+}
+
+export function CharacterNameDisplayBigNoH({ fullname }: Props) {
+  const matchedPrefix = Object.keys(PREFIX_STYLES_BIG).find((prefix) =>
+    fullname.startsWith(`${prefix} `)
+  );
+
+  let prefix = '';
+  let name = fullname;
+
+  if (matchedPrefix) {
+    prefix = matchedPrefix;
+    name = fullname.replace(`${prefix} `, '');
+  }
+
+  const prefixSize = matchedPrefix ? PREFIX_STYLES_BIG[matchedPrefix] : '';
+  const nameSize = NAME_STYLES_BIG[name] || 'text-4xl'; // remplace par une logique si tu veux le rendre dynamique
+
+  return (
+    <h1 className="flex flex-col text-white leading-tight mb-2">
+      {prefix && (
+        <span className={`${prefixSize} custom-text-shadow mb-[-2px]`}>
+          {prefix}
+        </span>
+      )}
+      <span
+        className={`${nameSize} font-bold custom-text-shadow`}
+        style={{
+          fontWeight: 600,
+          fontFamily: 'Rajdhani, sans-serif',
+          fontSize: '3rem'
+        }}
+      >
+        {name}
+      </span>
+
+
+    </h1>
   );
 }

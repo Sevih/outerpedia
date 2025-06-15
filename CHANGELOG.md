@@ -1,3 +1,7 @@
+## 🚀 Character Profiles (2025-06-15)
+- Character pages now include detailed profile info: birthday, height, weight, and lore.
+
+
 ## 🚀 Quirk guide (2025-06-14)
 - Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials. Learn More [here](/guides/general-guides/quirk)
 

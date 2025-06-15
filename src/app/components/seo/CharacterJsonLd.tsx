@@ -37,6 +37,10 @@ const CharacterJsonLd: React.FC<CharacterJsonLdProps> = ({
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": url
+    },
+    "game": {
+      "@type": "VideoGame",
+      "name": "Outerplane"
     }
   };
 

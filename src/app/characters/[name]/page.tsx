@@ -17,7 +17,7 @@ import rawTalismans from '@/data/talisman.json';
 import type { ClassDataMap } from '@/types/types';
 import type { EquipmentBase, Talisman, ExclusiveEquipment } from '@/types/equipment';
 import type { Character, Skill } from '@/types/character';
-import { CharacterNameDisplayBig } from '@/app/components/CharacterNameDisplay'
+import { CharacterNameDisplayBigNoH } from '@/app/components/CharacterNameDisplay'
 import type { StatKey } from '@/types/types'
 
 
@@ -27,6 +27,7 @@ import SkillPriorityTabs from '@/app/components/SkillPriorityTabs'
 import StatInlineTag from '@/app/components/StatInlineTag';
 import GuideIconInline from '@/app/components/GuideIconInline';
 import GiftCard from '@/app/components/GiftCard';
+import CharacterProfileDescription from '@/app/components/CharacterProfileDescription ';
 
 import TranscendenceSlider from '@/app/components/TranscendenceSlider';
 import YoutubeEmbed from '@/app/components/YoutubeEmbed';
@@ -210,9 +211,10 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
 
         <div className="max-w-6xl mx-auto p-6">
           {/* Partie haute : illustration + infos principales */}
+          <CharacterNameDisplayBigNoH fullname={character.Fullname} />
           <div className="grid grid-cols-1 md:grid-cols-[400px_1fr] gap-6">
             {/* Illustration du personnage */}
-            <div className="relative rounded overflow-hidden shadow">
+            <div className="relative rounded overflow-hidden shadow mt-10">
               <Image
                 src={`/images/characters/full/IMG_${character.ID}.webp`}
                 alt={character.Fullname}
@@ -225,10 +227,9 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             </div>
 
             {/* Détails à droite : nom, rareté, classe, etc. */}
-            <div className="sr-only">
-              <h1>Character Details : {character.Fullname} - Outerpedia</h1>
-            </div>
-            <div className="space-y-4"><CharacterNameDisplayBig fullname={character.Fullname} />
+            <div className="space-y-4">
+
+              
 
               {/* Rareté sous forme d'étoiles */}
               <div className="flex items-center gap-2">
@@ -258,7 +259,9 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                   <Image src={`/images/ui/class/${character.SubClass.toLowerCase()}.webp`} alt={character.SubClass} width={24} height={24} style={{ width: 24, height: 24 }} />
                   <span className="text-base">{character.SubClass}</span>
                 </div>
-
+              </div>
+              <div className="mt-2 p-2 bg-black/30 rounded">
+                <CharacterProfileDescription fullname={character.Fullname} />
               </div>
               <p className="text-gray-300 text-sm max-w-2xl mx-auto">
                 {`${character.Fullname} is a ${character.Element} ${character.Class}. ${subclassInfo?.description || ''}`}
@@ -299,7 +302,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                   )}
                 </div>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 w-fit">
                   <div className="p-2 rounded text-sm">
                     <p className="font-semibold">Class Effects : {character.Class} </p>
                     <p className="whitespace-pre-line">{classInfo?.description || 'No class description found.'}</p>

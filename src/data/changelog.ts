@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-06-15",
+    title: "Character Profiles",
+    type: "feature",
+    content: [
+      "- Character pages now include detailed profile info: birthday, height, weight, and lore.",
+    ],
+  },
+  {
     date: "2025-06-14",
     title: "Quirk guide",
     type: "feature",
