@@ -73,7 +73,7 @@
     "name": "Immunity",
     "type": "Set",
     "class": null,
-    "count": 22,
+    "count": 23,
     "characters": [
       "Astei",
       "Bryn",
@@ -90,6 +90,7 @@
       "Iota",
       "Kanon",
       "Leo",
+      "Liselotte",
       "Mene",
       "Nella",
       "Notia",
@@ -103,7 +104,7 @@
     "name": "Swiftness",
     "type": "Set",
     "class": null,
-    "count": 21,
+    "count": 22,
     "characters": [
       "Astei",
       "Christina",
@@ -118,6 +119,7 @@
       "Kanon",
       "Kappa",
       "Leo",
+      "Liselotte",
       "Mene",
       "Monad Eva",
       "Nella",
@@ -499,6 +501,20 @@
     ]
   },
   {
+    "name": "Life",
+    "type": "Set",
+    "class": null,
+    "count": 6,
+    "characters": [
+      "Christina",
+      "Delta",
+      "Hilde",
+      "Liselotte",
+      "Nella",
+      "Omega Nadja"
+    ]
+  },
+  {
     "name": "Talisman of Animosities",
     "type": "Weapon",
     "class": "Defender",
@@ -510,6 +526,19 @@
       "Luna",
       "Sterope",
       "Veronica"
+    ]
+  },
+  {
+    "name": "Obsidian Oath",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 5,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Dianne",
+      "Liselotte",
+      "Saeran"
     ]
   },
   {
@@ -526,19 +555,6 @@
     ]
   },
   {
-    "name": "Life",
-    "type": "Set",
-    "class": null,
-    "count": 5,
-    "characters": [
-      "Christina",
-      "Delta",
-      "Hilde",
-      "Nella",
-      "Omega Nadja"
-    ]
-  },
-  {
     "name": "Emblem of Dominance",
     "type": "Weapon",
     "class": "Healer",
@@ -552,27 +568,15 @@
     ]
   },
   {
-    "name": "Legacy of the Dream",
-    "type": "Weapon",
-    "class": "Healer",
+    "name": "Defense",
+    "type": "Set",
+    "class": null,
     "count": 4,
     "characters": [
-      "Astei",
-      "Demiurge Delta",
-      "Liselotte",
-      "Nella"
-    ]
-  },
-  {
-    "name": "Obsidian Oath",
-    "type": "Amulet",
-    "class": "Healer",
-    "count": 4,
-    "characters": [
-      "Astei",
-      "Demiurge Delta",
-      "Dianne",
-      "Saeran"
+      "Caren",
+      "Kanon",
+      "Kappa",
+      "Liselotte"
     ]
   },
   {
@@ -612,6 +616,17 @@
     ]
   },
   {
+    "name": "Legacy of the Dream",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 3,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Nella"
+    ]
+  },
+  {
     "name": "Immortal Pride",
     "type": "Weapon",
     "class": "Healer",
@@ -631,17 +646,6 @@
       "Bell Cranel",
       "Demiurge Luna",
       "Regina"
-    ]
-  },
-  {
-    "name": "Defense",
-    "type": "Set",
-    "class": null,
-    "count": 3,
-    "characters": [
-      "Caren",
-      "Kanon",
-      "Kappa"
     ]
   },
   {
@@ -717,6 +721,16 @@
     ]
   },
   {
+    "name": "Gorgon's Wrath [Healer]",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 2,
+    "characters": [
+      "Demiurge Delta",
+      "Liselotte"
+    ]
+  },
+  {
     "name": "Gorgon's Wrath [Ranger]",
     "type": "Weapon",
     "class": "Ranger",
@@ -771,15 +785,6 @@
     "count": 1,
     "characters": [
       "Delta"
-    ]
-  },
-  {
-    "name": "Gorgon's Wrath [Healer]",
-    "type": "Weapon",
-    "class": "Healer",
-    "count": 1,
-    "characters": [
-      "Demiurge Delta"
     ]
   },
   {
@@ -843,6 +848,24 @@
     "count": 1,
     "characters": [
       "Iota"
+    ]
+  },
+  {
+    "name": "Royal Stinger",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 1,
+    "characters": [
+      "Liselotte"
+    ]
+  },
+  {
+    "name": "Briareos's Recklessness [Healer]",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 1,
+    "characters": [
+      "Liselotte"
     ]
   },
   {
@@ -954,13 +977,6 @@
     ]
   },
   {
-    "name": "Royal Stinger",
-    "type": "Weapon",
-    "class": "Healer",
-    "count": 0,
-    "characters": []
-  },
-  {
     "name": "Twin B",
     "type": "Weapon",
     "class": "Striker",
@@ -1020,13 +1036,6 @@
     "name": "Briareos's Recklessness [Striker]",
     "type": "Weapon",
     "class": "Striker",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Briareos's Recklessness [Healer]",
-    "type": "Weapon",
-    "class": "Healer",
     "count": 0,
     "characters": []
   },

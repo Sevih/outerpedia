@@ -3909,15 +3909,31 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Emblem of Dominance",
+          "name": "Royal Stinger",
           "mainStat": [
-            "HP%"
+            "HP%",
+            "DEF%"
           ]
         },
         {
-          "name": "Legacy of the Dream",
+          "name": "Emblem of Dominance",
           "mainStat": [
-            "HP%"
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
           ]
         }
       ],
@@ -3927,16 +3943,194 @@
           "mainStat": [
             "SPD"
           ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
         }
       ],
       "sub": [
         "SPD",
         "HP",
         "DEF",
+        "EVA",
         "RES"
       ],
       "armorSets": [
         "Speed"
+      ]
+    },
+    "Swift Immu": {
+      "weaponSub": [
+        {
+          "name": "Royal Stinger",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "Swift Speed": {
+      "weaponSub": [
+        {
+          "name": "Royal Stinger",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Speed"
+      ]
+    },
+    "Life Def": {
+      "weaponSub": [
+        {
+          "name": "Royal Stinger",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Life",
+        "Defense"
       ]
     }
   },
