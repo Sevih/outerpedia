@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-06-17",
+    title: "New Hero Liselotte",
+    type: "update",
+    content: [
+      "- Liselotte, a genius magician who increases barrier and defense when an ally uses an attack that targets all enemies and fights by removing debuffs and reducing cooldowns.",
+      "- Learn More [here](/characters/liselotte)",
+    ],
+  },
+  {
     date: "2025-06-15",
     title: "Character Profiles",
     type: "feature",

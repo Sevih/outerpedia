@@ -1,0 +1,29 @@
+{"Speed": {
+    "Weapon": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Speed", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "SPD>HP>DEF>RES",
+    "Note": "PvP:Vanguard's Charm3\nPvE:Vanguard's Charm3Sage's Charm3",
+    "Talisman": [
+      "Vanguard's Charm",
+      "Sage's Charm"
+    ]
+  }}

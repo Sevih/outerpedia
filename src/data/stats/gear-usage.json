@@ -3,7 +3,7 @@
     "name": "Speed",
     "type": "Set",
     "class": null,
-    "count": 61,
+    "count": 62,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -41,6 +41,7 @@
       "Kuro",
       "Laplace",
       "Leo",
+      "Liselotte",
       "Luna",
       "Maxie",
       "Maxwell",
@@ -406,6 +407,22 @@
     ]
   },
   {
+    "name": "Resurrection Token",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 8,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Dianne",
+      "Liselotte",
+      "Mene",
+      "Monad Eva",
+      "Nella",
+      "Saeran"
+    ]
+  },
+  {
     "name": "Augmentation",
     "type": "Set",
     "class": null,
@@ -435,21 +452,6 @@
       "Omega Nadja",
       "Sterope",
       "Veronica"
-    ]
-  },
-  {
-    "name": "Resurrection Token",
-    "type": "Amulet",
-    "class": "Healer",
-    "count": 7,
-    "characters": [
-      "Astei",
-      "Demiurge Delta",
-      "Dianne",
-      "Mene",
-      "Monad Eva",
-      "Nella",
-      "Saeran"
     ]
   },
   {
@@ -537,6 +539,31 @@
     ]
   },
   {
+    "name": "Emblem of Dominance",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 5,
+    "characters": [
+      "Dianne",
+      "Liselotte",
+      "Mene",
+      "Monad Eva",
+      "Saeran"
+    ]
+  },
+  {
+    "name": "Legacy of the Dream",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 4,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Liselotte",
+      "Nella"
+    ]
+  },
+  {
     "name": "Obsidian Oath",
     "type": "Amulet",
     "class": "Healer",
@@ -561,18 +588,6 @@
     ]
   },
   {
-    "name": "Emblem of Dominance",
-    "type": "Weapon",
-    "class": "Healer",
-    "count": 4,
-    "characters": [
-      "Dianne",
-      "Mene",
-      "Monad Eva",
-      "Saeran"
-    ]
-  },
-  {
     "name": "A Prima Vista",
     "type": "Amulet",
     "class": "Striker",
@@ -594,17 +609,6 @@
       "Fatal",
       "Holy Night's Blessing Dianne",
       "Notia"
-    ]
-  },
-  {
-    "name": "Legacy of the Dream",
-    "type": "Weapon",
-    "class": "Healer",
-    "count": 3,
-    "characters": [
-      "Astei",
-      "Demiurge Delta",
-      "Nella"
     ]
   },
   {

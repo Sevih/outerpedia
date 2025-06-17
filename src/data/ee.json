@@ -1171,5 +1171,15 @@
 		"rank": "A",
 		"buff": ["BT_ACTION_GAUGE"],
 		"debuff": ["BT_SEAL_COUNTER"]
+	},
+	"liselotte": {
+		"name": "Astra Soteria",
+		"mainStat": "Reduces Earth Damage Taken",
+		"effect": "Damage taken reduced for allies with barrier",
+		"effect10": "Increased damage dealt for allies with barrier",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "",
+		"buff": [],
+		"debuff": []
 	}
 }

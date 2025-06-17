@@ -1,3 +1,8 @@
+## 🛠 New Hero Liselotte (2025-06-17)
+- Liselotte, a genius magician who increases barrier and defense when an ally uses an attack that targets all enemies and fights by removing debuffs and reducing cooldowns.
+- Learn More [here](/characters/liselotte)
+
+
 ## 🚀 Character Profiles (2025-06-15)
 - Character pages now include detailed profile info: birthday, height, weight, and lore.
 
