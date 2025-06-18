@@ -444,6 +444,14 @@
     "last_updated": "2025-05-21",
     "author": "Sevih"
   },
+  "prevent-world-alteration": {
+    "category": "guild-raid",
+    "title": "Prevent World Alteration",
+    "description": "Boss strategy guide",
+    "icon": "prevent-world-alteration",
+    "last_updated": "2025-06-18",
+    "author": "Sevih"
+  },
   "free-heroes-start-banner": {
     "category": "general-guides",
     "title": "Free Heroes & Starter Banners",
