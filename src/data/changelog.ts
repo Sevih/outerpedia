@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-06-19",
+    title: "Prevent World Alteration Guild Raid",
+    type: "update",
+    content: [
+      "- Prevent World Alteration Guild Raid Guide release. learn more [here](/guides/guild-raid/prevent-world-alteration)",
+    ],
+  },
+  {
     date: "2025-06-17",
     title: "New Hero Liselotte",
     type: "update",

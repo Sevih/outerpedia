@@ -1,3 +1,7 @@
+## 🛠 Prevent World Alteration Guild Raid (2025-06-19)
+- Prevent World Alteration Guild Raid Guide release. learn more [here](/guides/guild-raid/prevent-world-alteration)
+
+
 ## 🛠 New Hero Liselotte (2025-06-17)
 - Liselotte, a genius magician who increases barrier and defense when an ally uses an attack that targets all enemies and fights by removing debuffs and reducing cooldowns.
 - Learn More [here](/characters/liselotte)
