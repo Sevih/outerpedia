@@ -118,17 +118,17 @@
               "Holy Night's Blessing Dianne",
               "Maxwell"
             ],
-             [
+            [
               "Monad Eva",
               "Mene"
             ],
-             [
+            [
               "Veronica",
               "Tamara",
               "Laplace",
               ""
             ],
-             [
+            [
               "Poolside Trickster Regina",
               "Roxie",
               "Demiurge Astei",
@@ -249,16 +249,16 @@
               "Holy Night's Blessing Dianne",
               "Regina"
             ],
-             [
+            [
               "Veronica",
               "Luna"
             ],
-             [
+            [
               "Tamara",
               "Laplace",
               "Caren"
             ],
-             [
+            [
               "Poolside Trickster Regina",
               "Demiurge Luna",
               "Roxie",
@@ -273,24 +273,88 @@
       ]
     },
     "phase2": {
-      "bossName": "",
+      "bossName": "Planet Purification Unit",
       "overview": [
-        
+        "S3 : Single, {D/BT_REMOVE_BUFF} prioritizes {C/Healer}. Deal increased damage if the target isn't a {C/Healer}",
+        "S2 : AoE, {D/BT_DOT_BURN} for 2 turns.",
+        "S1 : Single, prioritizes the leftmost unit. inflicts {D/BT_STUN} and {D/BT_DOT_BURN} 1 turn on the target if not a {C/Ranger}",
+        "Passive : does not take weakness gauge damage if an add is present.",
+        "Passive : grants {B/BT_SHIELD_BASED_CASTER} 3 turns when attacking a {D/BT_DOT_BURN} target.",
+        "Passive : Reduce damage dealt against {E/Water} heroes and takes increased damage from them.",
+        "Passive : Increase damage dealt against {E/Earth} heroes and takes reduced damage from them.",
+        "Passive : Takes increased damage from skill chain and {B/BT_CALL_BACKUP}.",
+        "Passive : {B/BT_RESURRECTION_G} adds at the start of the turn and {B/BT_ACTION_GAUGE} by 15% of surviving ones.",
+        "Passive : counter with S1 when an enemy uses a non attack skill",
+        "Enrage  :  Whenever health is reduced by 50 000. Gain {B/BT_DAMGE_TAKEN} {B/BT_STAT|ST_ATK_IR} 3 turns.",
+        "Enrage Ultimate : AoE, {D/BT_REMOVE_BUFF} ignore defense and resilience.",
+        "Add S1 : Single, {B/BT_CALL_BACKUP}.",
+        "{D/BT_FIXED_DAMAGE} {D/BT_DOT_CURSE} cannot exceed 10 000"
       ],
       "teams": {
         "team1": {
-          "label": "",
-          "icon": "",
+          "label": "Water Striker",
+          "icon": "water.webp",
           "video": {
             "id": "",
             "title": ""
           },
-          "geas-active": [
-          ],
+          "geas-active": [],
           "setup": [
+            [
+              "Tamara",
+              "Edelweiss",
+              "Fatal"
+            ],
+            [
+              "Caren",
+              "Beth",
+              "Rin",
+              "Poolside Trickster Regina"
+            ],
+            [
+              "Poolside Trickster Regina",
+              "Caren",
+              "Beth",
+              "Rin"
+              
+            ],
+            [
+              "Lyla",
+              "Monad Eva",
+              "Mene",
+              "Luna"
+            ]
           ],
-          "note": [
-          ]
+          "note": []
+        },
+        "team2": {
+          "label": "Water Mage",
+          "icon": "water.webp",
+          "video": {
+            "id": "",
+            "title": ""
+          },
+          "geas-active": [],
+          "setup": [
+            [
+              "Tamara",
+              "Edelweiss",
+              "Fatal"
+            ],
+            [
+              "Roxie"
+            ],
+            [
+              "Laplace"              
+            ],
+            [
+              "Lyla",
+              "Monad Eva",
+              "Mene",
+              "Luna"
+            ]
+          ],
+          "note": []
         }
       }
     }
