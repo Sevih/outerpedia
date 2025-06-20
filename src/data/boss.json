@@ -1,7 +1,8 @@
 [{
     "Special Request":[{
         "Masterless Guardian":[{
-            "id":"4076006"
+            "id":"4076006",
+            "guide":"guardian"
         }],
         "Tyrant Toddler":[{
             "id":"4076005"
@@ -22,7 +23,8 @@
             "id":"4076001"
         }],
         "Blazing Knight Meteos":[{
-            "id":"4076002"
+            "id":"4076002",
+            "guide":"meteos"
         }],        
         "Ars Nova":[{
             "id":"4076008"

@@ -51,6 +51,20 @@ export type ArmorSet = {
   icon_effect?: string
 }
 
+export type Set = {
+  name: string;
+  image_prefix: string;
+  set_icon: string;
+  class?: string | null;
+  effect_2_1?: string | null;
+  effect_4_1?: string | null;
+  effect_2_4?: string | null;
+  effect_4_4?: string | null;
+  source?: string | null // ← autoriser null
+  boss?: string | null
+  mode?: string | null
+}
+
 
 export type MiniSet = {
   name: string

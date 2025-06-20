@@ -1,4 +1,5 @@
 export {};
+import { JSX } from "react/jsx-runtime";
 
 // Fonction pour mettre en valeur certains mots-clés et les chiffres dans les descriptions
 export function highlightNumbersOnly(text: string) {
@@ -36,3 +37,19 @@ export  function highlightKeywordsAndNumbers(text: string) {
     });
   }
   
+  export function highlightDiff(base: string, mod: string): JSX.Element[] {
+  const baseWords = base.split(/\s+/)
+  const modWords = mod.split(/\s+/)
+
+  return modWords.map((word, i) => {
+    const same = baseWords[i] === word
+    return (
+      <span
+        key={i}
+        className={same ? '' : 'text-sky-400 font-semibold'}
+      >
+        {word + ' '}
+      </span>
+    )
+  })
+}
