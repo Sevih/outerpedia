@@ -33,10 +33,14 @@ const characterPages = charFiles.map((filename) => {
   return `/characters/${slug}`;
 });
 
-const categories = ['weapon', 'amulet', 'sets'];
+const categories = [
+  { file: 'weapon', url: 'weapon' },
+  { file: 'amulet', url: 'accessory' },
+  { file: 'sets', url: 'sets' }
+];
 
-const itemPages = categories.flatMap((category) => {
-  const filePath = path.join(__dirname, `../src/data/${category}.json`);
+const itemPages = categories.flatMap(({ file, url }) => {
+  const filePath = path.join(__dirname, `../src/data/${file}.json`);
   if (!fs.existsSync(filePath)) {
     console.warn(`❌ Fichier manquant : ${filePath}`);
     return [];
@@ -48,24 +52,17 @@ const itemPages = categories.flatMap((category) => {
   try {
     data = JSON.parse(raw);
   } catch (err) {
-    console.error(`❌ Erreur JSON dans ${category}.json :`, err.message);
+    console.error(`❌ Erreur JSON dans ${file}.json :`, err.message);
     return [];
   }
 
-  // Si data est un tableau
-  if (Array.isArray(data)) {
-    return data.map((entry) => {
-      const slug = toKebabCase(entry.name || entry.Name || '');
-      return `/item/${category}/${slug}`;
-    });
-  }
-
-  // Si data est un objet (ex: pour `ee.json`)
-  return Object.values(data).map((entry) => {
+  const entries = Array.isArray(data) ? data : Object.values(data);
+  return entries.map((entry) => {
     const slug = toKebabCase(entry.name || entry.Name || '');
-    return `/item/${category}/${slug}`;
+    return `/item/${url}/${slug}`;
   });
 });
+
 
 // utilitaire
 function toKebabCase(input) {
