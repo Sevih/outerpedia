@@ -36,7 +36,7 @@ const characterPages = charFiles.map((filename) => {
 const categories = [
   { file: 'weapon', url: 'weapon' },
   { file: 'amulet', url: 'accessory' },
-  { file: 'sets', url: 'sets' }
+  { file: 'sets', url: 'set' }
 ];
 
 const itemPages = categories.flatMap(({ file, url }) => {
