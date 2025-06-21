@@ -4,6 +4,7 @@ import StarLevelItem from './StarLevelItem'
 import ClassInlineTag from './ClassInlineTag'
 import { highlightDiff } from '@/utils/textHighlighter'
 import ItemSourceBox from './SourceBox'
+import ItemStatsBlock from './ItemStatsBlock'
 
 type Weapon = {
     name: string
@@ -26,6 +27,8 @@ export default function renderWeapon(entry: Weapon) {
         ? `https://outerpedia.com/images/ui/effect/TI_Icon_UO_Weapon_${entry.effect_icon}.webp`
         : null
     const url = `https://outerpedia.com/item/weapon/${toKebabCase(entry.name)}`
+
+    const rarity = isNaN(Number(entry.level)) ? 6 : Number(entry.level)
 
     return (
         <div className="flex flex-col gap-6 text-white items-center">
@@ -66,6 +69,9 @@ export default function renderWeapon(entry: Weapon) {
                 </div>
             </div>
 
+            {/* stats */}
+            <ItemStatsBlock stats={['ATK']} substats={['ATK%', 'DEF%', 'HP%']} type="weapons" rare={rarity} />
+
             {/* Effets */}
             {entry.effect_name && (
                 <div className="bg-black/30 border border-white/10 rounded-xl p-5 w-full max-w-3xl">
@@ -93,6 +99,7 @@ export default function renderWeapon(entry: Weapon) {
             )}
 
             <ItemSourceBox
+                itemname={entry.name}
                 source={entry.source}
                 boss={entry.boss}
                 mode={entry.mode}
@@ -105,12 +112,18 @@ export default function renderWeapon(entry: Weapon) {
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         '@context': 'https://schema.org',
-                        '@type': 'Product',
-                        name: entry.name,
-                        category: entry.class,
-                        image: imageUrl,
-                        url,
-                        description: entry.effect_desc4 ?? entry.effect_desc1,
+                        '@type': 'VideoGame',
+                        name: 'Outerplane',
+                        url, // <- ✅ la page actuelle de l'objet
+                        gameItem: {
+                            '@type': 'Thing',
+                            name: entry.name,
+                            image: imageUrl,
+                            url, // <- ✅ également ici
+                            description:
+                                entry.effect_desc4 ??
+                                entry.effect_desc1,
+                        }
                     }),
                 }}
             />

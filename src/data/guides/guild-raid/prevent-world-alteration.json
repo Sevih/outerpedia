@@ -355,6 +355,30 @@
             ]
           ],
           "note": []
+        },
+        "team3": {
+          "label": "GBeth",
+          "icon": "SC_Buff_2100092.webp",
+          "video": {
+            "id": "PBTKXTwFuBg",
+            "title": "Prevent World Alteration - Planet Purification Unit Stage 11 - G.Beth Team - By Sevih"
+          },
+          "geas-active": [],
+          "setup": [
+            [
+              "Gnosis Beth"
+            ],
+            [
+              "Maxie"
+            ],
+            [
+              "Monad Eva"              
+            ],
+            [
+              "Akari"
+            ]
+          ],
+          "note": []
         }
       }
     }

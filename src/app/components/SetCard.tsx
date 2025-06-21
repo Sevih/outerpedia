@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
+import { toKebabCase } from "@/utils/formatText";
 
 interface ArmorSet {
   name: string;
@@ -79,15 +81,19 @@ export default function SetCard({ set }: { set: ArmorSet }) {
 
       {/* Nom */}
       <h3 className="text-sm font-bold text-red-400 mt-2 leading-tight">
-        {set.name.includes("[") ? (
-          <>
-            {set.name.split("[")[0].trim()}
-            <br />
-            [{set.name.split("[")[1]}
-          </>
-        ) : (
-          set.name
-        )}
+        <Link href={`/item/set/${toKebabCase(set.name)}`}>
+          <span className="hover:underline cursor-pointer">
+            {set.name.includes('[') ? (
+              <>
+                {set.name.split('[')[0].trim()}
+                <br />
+                [{set.name.split('[')[1]}
+              </>
+            ) : (
+              set.name
+            )}
+          </span>
+        </Link>
       </h3>
 
       {/* Flèche ▼▲ */}

@@ -1,12 +1,12 @@
 import weaponData from '@/data/weapon.json'
 import accessoryData from '@/data/amulet.json'
 import setData from '@/data/sets.json'
-import talismanData from '@/data/talisman.json'
-import eeData from '@/data/ee.json'
+//import talismanData from '@/data/talisman.json'
+//import eeData from '@/data/ee.json'
 
 import renderWeapon from '@/app/components/renderWeapon'
-//import renderAccessory from '@/app/components/renderAccessory'
-//import renderSet from '@/app/components/renderSet'
+import renderAccessory from '@/app/components/renderAccessory'
+import renderSet from '@/app/components/renderSet'
 //import renderTalisman from '@/app/components/renderTalisman'
 //import renderEE from '@/app/components/renderEE'
 
@@ -16,14 +16,43 @@ import type { Metadata } from 'next'
 import { toKebabCase } from '@/utils/formatText'
 
 type Params = { category: string; slug: string }
-type GenericItem = { name: string; effect_name?: string; class?: string; effect_desc1?: string; effect?: string; icon_effect?: string; icon_item?: string; image?: string; set_icon?: string }
+type GenericItem = { 
+  name: string; 
+  effect_name?: string; 
+  class?: string; 
+  mainStats?: string[]; 
+  effect_desc1?: string; 
+  effect?: string; 
+  icon_effect?: string; 
+  icon_item?: string; 
+  image?: string; 
+  set_icon?: string
+ }
+
+type SetItem = {
+  name: string
+  rarity: number
+  class?: string
+  mainStats?: string[]
+  substats?: string[]
+  set_icon?: string
+  effect_2_1?: string
+  effect_2_4?: string
+  effect_4_1?: string
+  effect_4_4?: string
+  source?: string
+  boss?: string
+  mode?: string
+  image_prefix?: string
+}
+
 
 const datasets: Record<string, unknown[] | Record<string, unknown>> = {
   weapon: weaponData,
   accessory: accessoryData,
   set: setData,
-  talisman: talismanData,
-  ee: eeData,
+  //talisman: talismanData,
+  //ee: eeData,
 }
 
 function capitalize(str: string): string {
@@ -41,15 +70,15 @@ function findEntry(data: unknown[] | Record<string, unknown>, slug: string): Gen
 }
 
 function getItemImageUrl(entry: GenericItem, category: string): string {
-  if (category === 'ee') {
-    return `https://outerpedia.com/images/equipment/effect/${entry.icon_effect}.png`
-  }
+//  if (category === 'ee') {
+  //  return `https://outerpedia.com/images/equipment/effect/${entry.icon_effect}.png`
+  //}
   if (category === 'set') {
     return `https://outerpedia.com/images/equipment/set/${entry.set_icon}.png`
   }
-  if (category === 'talisman') {
-    return `https://outerpedia.com/images/equipment/talisman/${entry.icon_item}.png`
-  }
+  //if (category === 'talisman') {
+    //return `https://outerpedia.com/images/equipment/talisman/${entry.icon_item}.png`
+  //}
   if (category === 'weapon') {
     return `https://outerpedia.com/images/equipment/${entry.image?.replace('.webp', '.png') || 'default.png'}`
   }
@@ -145,21 +174,6 @@ export default async function ItemPage({ params }: { params: Promise<Params> }) 
   return (
     <div className="p-6 text-white">
       {renderItem(category, entry)}
-
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Product',
-            name: entry.name,
-            description: entry.effect_desc1 || entry.effect || 'Outerplane item details',
-            image: getItemImageUrl(entry, category),
-            url: `https://outerpedia.com/item/${category}/${slug}`,
-          }),
-        }}
-      />
     </div>
   )
 }
@@ -169,12 +183,12 @@ function renderItem(category: string, entry: GenericItem) {
     case 'weapon':
       return renderWeapon(entry)
     case 'accessory':
-      //return renderAccessory(entry)
+      return renderAccessory(entry)
     case 'set':
-      //return renderSet(entry)
-    case 'talisman':
+      return renderSet(entry as SetItem) 
+    //case 'talisman':
       //return renderTalisman(entry)
-    case 'ee':
+    //case 'ee':
       //return renderEE(entry)
     default:
       return <div>Unsupported item type: {category}</div>

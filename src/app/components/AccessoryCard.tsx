@@ -3,6 +3,8 @@ import { useState } from "react";
 import { highlightNumbersOnly } from "@/utils/textHighlighter";
 import type { Accessory } from "@/types/equipment";
 import StatIconsRow from "@/app/components/StatIconsRow";
+import Link from "next/link";
+import { toKebabCase } from "@/utils/formatText";
 
 
 export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
@@ -70,16 +72,22 @@ export default function AccessoryCard({ accessory }: { accessory: Accessory }) {
 
       {/* Nom avec retour à la ligne sur [ */}
       <h3 className="text-sm font-bold text-red-400 mt-2 leading-tight">
-        {accessory.name.includes("[") ? (
-          <>
-            {accessory.name.split("[")[0].trim()}
-            <br />
-            [{accessory.name.split("[")[1]}
-          </>
-        ) : (
-          accessory.name
-        )}
+        <Link href={`/item/accessory/${toKebabCase(accessory.name)}`}>
+          <span className="hover:underline cursor-pointer">
+            {accessory.name.includes('[') ? (
+              <>
+                {accessory.name.split('[')[0].trim()}
+                <br />
+                [{accessory.name.split('[')[1]}
+              </>
+            ) : (
+              accessory.name
+            )}
+          </span>
+        </Link>
       </h3>
+
+
 
       {/* Badge effet */}
       <div className="inline-flex items-center bg-white/10 px-1.5 py-1 rounded-full text-xs text-white mt-1 max-w-[180px] mx-auto whitespace-nowrap justify-center">

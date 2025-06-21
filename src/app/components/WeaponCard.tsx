@@ -2,6 +2,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { highlightNumbersOnly } from "@/utils/textHighlighter";
 import type { Weapon } from "@/types/equipment";
+import { toKebabCase } from "@/utils/formatText";
+import Link from "next/link";
 
 export default function WeaponCard({ weapon }: { weapon: Weapon }) {
   const [expanded, setExpanded] = useState(false);
@@ -29,19 +31,19 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
           className="relative z-10 object-contain"
         />
         {weapon.level && weapon.level > 0 && (
-                  <div className="absolute bottom-1 right-2 inline-flex items-center mt-1">
-                    {Array.from({ length: weapon.level }).map((_, i) => (
-                      <Image
-                        key={i}
-                        src="/images/ui/CM_icon_star_y.webp"
-                        alt="star"
-                        width={18}
-                        height={18}
-                        className={`object-contain ${i > 0 ? "-ml-1" : ""} z-11`}
-                      />
-                    ))}
-                  </div>
-                )}
+          <div className="absolute bottom-1 right-2 inline-flex items-center mt-1">
+            {Array.from({ length: weapon.level }).map((_, i) => (
+              <Image
+                key={i}
+                src="/images/ui/CM_icon_star_y.webp"
+                alt="star"
+                width={18}
+                height={18}
+                className={`object-contain ${i > 0 ? "-ml-1" : ""} z-11`}
+              />
+            ))}
+          </div>
+        )}
 
         {weapon.effect_icon && (
           <div className="absolute top-2 right-2 z-20 translate-x-1/3 -translate-y-1/3">
@@ -70,15 +72,21 @@ export default function WeaponCard({ weapon }: { weapon: Weapon }) {
 
       {/* Nom de l’arme */}
       <h3 className="text-sm font-bold text-red-400 mt-2 leading-tight">
-        {weapon.name.includes("[") ? (
-          <>
-            {weapon.name.split("[")[0].trim()}
-            <br />
-            [{weapon.name.split("[")[1]}
-          </>
-        ) : (
-          weapon.name
-        )}
+
+        <Link href={`/item/weapon/${toKebabCase(weapon.name)}`}>
+          <span className="hover:underline cursor-pointer">
+            {weapon.name.includes('[') ? (
+              <>
+                {weapon.name.split('[')[0].trim()}
+                <br />
+                [{weapon.name.split('[')[1]}
+              </>
+            ) : (
+              weapon.name
+            )}
+          </span>
+        </Link>
+
       </h3>
 
       {/* Label effet */}

@@ -33,6 +33,56 @@ const characterPages = charFiles.map((filename) => {
   return `/characters/${slug}`;
 });
 
+const categories = ['weapon', 'amulet', 'sets'];
+
+const itemPages = categories.flatMap((category) => {
+  const filePath = path.join(__dirname, `../src/data/${category}.json`);
+  if (!fs.existsSync(filePath)) {
+    console.warn(`❌ Fichier manquant : ${filePath}`);
+    return [];
+  }
+
+  const raw = fs.readFileSync(filePath, 'utf-8');
+  let data;
+
+  try {
+    data = JSON.parse(raw);
+  } catch (err) {
+    console.error(`❌ Erreur JSON dans ${category}.json :`, err.message);
+    return [];
+  }
+
+  // Si data est un tableau
+  if (Array.isArray(data)) {
+    return data.map((entry) => {
+      const slug = toKebabCase(entry.name || entry.Name || '');
+      return `/item/${category}/${slug}`;
+    });
+  }
+
+  // Si data est un objet (ex: pour `ee.json`)
+  return Object.values(data).map((entry) => {
+    const slug = toKebabCase(entry.name || entry.Name || '');
+    return `/item/${category}/${slug}`;
+  });
+});
+
+// utilitaire
+function toKebabCase(input) {
+  if (typeof input !== 'string') {
+    console.warn('toKebabCase: input not a string:', input);
+    return '';
+  }
+
+  return input
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+
 // 📄 Pages outils (URL publiques comme /tierlist, /assets-dl)
 const toolPages = Object.keys(TOOL_METADATA).map((slug) => `/${slug}`);
 
@@ -41,6 +91,7 @@ const urls = [
   ...staticPages.map((page) => ({ loc: `${domain}${page}` })),
   ...toolPages.map((page) => ({ loc: `${domain}${page}` })),
   ...characterPages.map((page) => ({ loc: `${domain}${page}` })),
+  ...itemPages.map((page) => ({ loc: `${domain}${page}` })),
   ...Object.entries(guideRef).map(([slug, data]) => ({
     loc: `${domain}/guides/${data.category}/${slug}`,
     lastmod: new Date(data.last_updated).toISOString().split('T')[0],

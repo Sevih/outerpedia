@@ -1,76 +1,72 @@
 import React from 'react'
-import bossData from '@/data/boss.json'
 import Link from 'next/link'
+import { resolveItemSource } from '@/lib/resolveItemSource'
+ import Image from 'next/image'
 
-type Props = {
-  source?: string
-  boss?: string
-  mode?: string
-}
+type Props = { itemname: string; source?: string; boss?: string; mode?: string }
 
-type BossEntry = {
-  id: string
-  guide?: string
-  category: string
-}
-
-const bossLookup: Record<string, BossEntry> = (() => {
-  const flat: Record<string, BossEntry> = {}
-
-  for (const section of bossData as Record<string, any[]>[]) {
-    for (const [category, entries] of Object.entries(section)) {
-      for (const group of entries as Record<string, { id: string; guide?: string }[]>[]) {
-        for (const [bossName, bossArray] of Object.entries(group)) {
-          const info = bossArray[0] as { id: string; guide?: string }
-          flat[bossName] = {
-            id: info.id,
-            guide: info.guide,
-            category,
-          }
-        }
-
-      }
-    }
-  }
-
-  return flat
-})()
-
-export default function ItemSourceBox({ source, boss, mode }: Props) {
+export default function ItemSourceBox({ itemname, source, boss, mode }: Props) {
   if (!source && !boss && !mode) return null
 
-  const bossInfo = boss && typeof bossLookup[boss] === 'object' ? bossLookup[boss] : undefined
+  const { trueSource, trueBosses } = resolveItemSource({ itemname, source, boss })
 
-  
   return (
-    <div className="bg-black/30 border border-white/10 rounded-xl p-5 w-full max-w-2xl text-sm text-neutral-300">
-      {source && (
+    <div className="bg-black/30 border border-white/10 rounded-xl p-5 w-full max-w-3xl text-sm text-neutral-300">
+      {trueSource && (
         <p className="mb-1">
-          <span className="font-semibold">Source:</span> {source}
+          <span className="font-semibold">Source:</span> {trueSource}
         </p>
       )}
-      {boss && (
-        <p className="mb-1">
-          <span className="font-semibold">Boss:</span> {boss}
-          {bossInfo?.guide && (
-            <>
-              {' '}
-              —{' '}
-              <Link
-                href={`/guides/special-request/${bossInfo.guide}`}
-                className="text-amber-300 hover:underline"
-              >
-                View Guide
-              </Link>
-            </>
-          )}
-        </p>
-      )}
+      {trueBosses.length > 0 && (
+        <div className="mb-1">
+          <div className="flex flex-wrap gap-3 mt-1">
+            {source !== 'Event Shop' && (
+              <p className="font-semibold">Boss:</p>
+            )}
+            {trueBosses.map(({ name, id, links }) => (
+              <div key={name} className="flex items-center gap-2">               
+                <Image
+                  src={
+                    (source === 'Special Request' || source === 'Irregular Extermination')
+                      ? `/images/characters/boss/mini/IG_Turn_${id}.webp`
+                      : `/images/characters/boss/mini/${id}.webp`
+                  }
+                  alt={name}
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                />
 
-      {mode && (
-        <p>
-          <span className="font-semibold">Mode:</span> {mode}
-        </p>
+                {links.map((link, i) => {
+                  if (!link) return <span key={`${name}-${i}`} className="text-neutral-400">{name}</span>
+
+                  let href = ''
+                  switch (source) {
+                    case 'Irregular Extermination':
+                      href = `/guides/irregular-extermination/${link}`
+                      break
+                    case 'Special Request':
+                      href = `/guides/special-request/${link}`
+                      break
+                    case 'Adventure License':
+                      href = `/guides/adventure-license/`
+                      break
+                    default:
+                      href = `/guides/${link}`
+                      break
+                  }
+
+                  return (
+                    <Link key={`${name}-${link}`} href={href} className="text-amber-300 hover:underline">
+                      {name}{links.length > 1 ? ` (${i + 1})` : ''}
+                    </Link>
+                  )
+                })}
+              </div>
+            ))}
+
+          </div>
+        </div>
       )}
     </div>
   )
