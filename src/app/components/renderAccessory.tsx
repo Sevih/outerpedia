@@ -73,7 +73,12 @@ export default function renderAccessory(entry: Accessory) {
       {/* stats */}
       {entry.mainStats && (
         <ItemStatsBlock
-          stats={entry.mainStats.map(stat => stat === 'PEN' ? 'PEN%' : stat)}
+          stats={entry.mainStats.map(stat =>
+            stat === 'PEN' ? 'PEN%' :
+              stat === 'HH' ? 'HH%' :
+                stat
+          )}
+
           substats={[]}
           type="accessories"
           rare={rarity}
