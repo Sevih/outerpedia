@@ -1,6 +1,6 @@
 // /public/service-worker.js
 
-const CACHE_NAME = 'outerpedia-cache-v1.32.7';
+const CACHE_NAME = 'outerpedia-cache-v1.32.11';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -35,12 +35,20 @@ self.addEventListener('activate', (event) => {
 
 
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+
+  // Ne pas interférer avec Next.js static files ou API
+  if (url.pathname.startsWith('/_next/') || url.pathname.startsWith('/api/')) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request);
     })
   );
 });
+
 
 // 🔥 Nouvelle écoute : message envoyé au client
 self.addEventListener('message', (event) => {

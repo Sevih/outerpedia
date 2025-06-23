@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
 import Link from 'next/link'
 import { changelog } from "@/data/changelog"
 import { renderMarkdown } from "@/utils/markdown"
@@ -8,18 +7,6 @@ import { renderMarkdown } from "@/utils/markdown"
 const recentChanges = changelog.slice(0, 10)
 
 export default function HomeClient() {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then((registrations) => {
-        for (const registration of registrations) {
-          registration.unregister().then(() => {
-            console.log('🧹 Service Worker unregistered automatically')
-          })
-        }
-      })
-    }
-  }, [])
-
   return (
     <div className="space-y-16 px-4 md:px-16">
       <script

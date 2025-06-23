@@ -1,11 +1,11 @@
 {
   "name": "outerpedia-clean",
-  "version": "1.32.7",
+  "version": "1.32.11",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "set-version": "node scripts/set-version.js",
-    "build": "npm run set-version && npm run inject-sw-version && npm run generate:allchar && npm run generate:gear-stats && npm run generate:gear-submap && next build",
+    "build": "rm -rf .next && npm run set-version && npm run inject-sw-version && npm run generate:allchar && npm run generate:gear-stats && npm run generate:gear-submap && next build",
     "inject-sw-version": "node scripts/inject-sw-version.js",
     "postbuild": "npm run sitemap",
     "start": "next start",

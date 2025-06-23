@@ -50,6 +50,7 @@ export default function UpdateToast() {
 
                 if (registration.waiting) {
                   console.log('🔄 New version ready (waiting)');
+                  registration.waiting.postMessage({ type: 'SKIP_WAITING' });
                   window.dispatchEvent(new Event('swUpdated'));
                   return;
                 }
@@ -62,6 +63,7 @@ export default function UpdateToast() {
                       navigator.serviceWorker.controller
                     ) {
                       console.log('🆕 New version installed via onupdatefound');
+                      registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
                       window.dispatchEvent(new Event('swUpdated'));
                     }
                   };

@@ -106,7 +106,8 @@ export default function CurrentlyPullableClient({ characters }: { characters: Ch
                   <Image
                     src="/images/discord_icon.webp"
                     alt="EvaMains Discord Icon"
-                    fill
+                    width={72}
+                    height={72}
                     className="object-contain rounded-full shadow-md transition-all duration-300 group-hover:shadow-[0_0_10px_4px_rgba(255,255,255,0.5)]"
                     sizes="72px"
                     unoptimized
