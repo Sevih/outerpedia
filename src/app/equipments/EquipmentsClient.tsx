@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import weapons from "@/data/weapon.json";
 import WeaponCard from "@/app/components/WeaponCard";
@@ -15,6 +15,8 @@ import talismans from "@/data/talisman.json";
 import TalismanGrid from "@/app/components/TalismanGrid";
 import ExclusiveEquipmentList from "@/app/components/ExclusiveEquipmentCard";
 import eeData from "@/data/ee.json";
+import { AnimatedTabs } from "@/app/components/AnimatedTabs"
+
 
 
 export default function EquipmentsClient() {
@@ -26,16 +28,7 @@ export default function EquipmentsClient() {
     { key: "exclusive", label: "Exclusive", icon: "exclusive.webp" }
   ];
 
-  const [activeTabRef, setActiveTabRef] = useState<HTMLButtonElement | null>(null);
-  const indicatorRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (activeTabRef && indicatorRef.current) {
-      const { offsetLeft, offsetWidth } = activeTabRef;
-      indicatorRef.current.style.transform = `translateX(${offsetLeft}px)`;
-      indicatorRef.current.style.width = `${offsetWidth}px`;
-    }
-  }, [activeTabRef]);
   const [tab, setTab] = useState<"weapon" | "accessory" | "armor" | "talisman" | "exclusive">("weapon");
 
   const [weaponClassFilter, setWeaponClassFilter] = useState<string | null>(null);
@@ -134,6 +127,12 @@ export default function EquipmentsClient() {
       }
     });
   });
+
+  const TruetabList = tabList.map(({ key, label, icon }) => ({
+    key,
+    label,
+    icon: `/images/ui/nav/${icon}`
+  }))
 
 
   return (
@@ -239,42 +238,17 @@ export default function EquipmentsClient() {
         <h1>Weapon, Set, Amulet, Exclusive Equipment, Talismans  Database</h1>
       </div>
 
-      <div className="relative flex justify-center mb-6">
-        <div className="relative bg-gray-100 dark:bg-gray-800 rounded-full p-1 flex gap-1 min-w-[300px]">
-          {/* Barre animée */}
-          <div
-            ref={indicatorRef}
-            className="absolute top-1 left-0 h-[calc(100%-0.5rem)] bg-cyan-500 rounded-full transition-all duration-300 z-0"
-          ></div>
+      <div className="flex justify-center mb-6">
+        <AnimatedTabs
+          tabs={TruetabList}
+          selected={tab}
+          onSelect={(key) => setTab(key as typeof tab)}
+          pillColor="#06b6d4" // cyan-500
+          compact
 
-          {tabList.map(({ key, label, icon }) => (
-            <button
-              key={key}
-              onClick={() => setTab(key as typeof tab)}
-              ref={el => {
-                if (tab === key) setActiveTabRef(el);
-              }}
-              className={`relative z-10 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors duration-300 ${tab === key
-                ? "text-white"
-                : "text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700"
-                }`}
-            >
-              <div className="relative w-[24px] h-[24px]">
-                <Image
-                  src={`/images/ui/nav/${icon}`}
-                  alt={label}
-                  fill
-                  className="object-contain"
-                  sizes="24px"
-                />
-              </div>
-
-              <span className="hidden md:inline">{label}</span>
-            </button>
-
-          ))}
-        </div>
+        />
       </div>
+
 
 
 

@@ -34,6 +34,7 @@ export default function ItemSourceBox({ itemname, source, boss, mode }: Props) {
                   alt={name}
                   width={24}
                   height={24}
+                  style={{ width: 24, height: 24 }}
                   className="rounded-full"
                 />
 

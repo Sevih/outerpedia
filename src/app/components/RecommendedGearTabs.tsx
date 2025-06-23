@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import WeaponMiniCard from "@/app/components/WeaponMiniCard"
@@ -10,6 +10,8 @@ import fullSets from "@/data/sets.json"
 import rawStats from '@/data/stats.json' assert { type: 'json' }
 import SetVisual from "./SetVisual"
 import MiniTalismanCard from "@/app/components/MiniTalismanCard"
+import { AnimatedTabs } from '@/app/components/AnimatedTabs'
+
 
 const stats = rawStats as Record<string, { label: string; icon: string }>
 type SubstatPriority = {
@@ -129,46 +131,32 @@ export default function RecommendedGearTabs({
 }) {
   const buildNames = Object.keys(character.builds)
   const [gearTab, setGearTab] = useState(buildNames[0])
-  const [activeTabRef, setActiveTabRef] = useState<HTMLButtonElement | null>(null)
-  const indicatorRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (activeTabRef && indicatorRef.current) {
-      const { offsetLeft, offsetWidth } = activeTabRef
-      indicatorRef.current.style.transform = `translateX(${offsetLeft}px)`
-      indicatorRef.current.style.width = `${offsetWidth}px`
-    }
-  }, [activeTabRef, gearTab])
 
   const gear = character.builds[gearTab]
   const recommendedWeapons = buildRecommendedMini<WeaponMini>(gear?.Weapon, weapons)
   const recommendedAmulets = buildRecommendedMini<AmuletMini>(gear?.Amulet, amulets)
   const recommendedTalismanNames = gear?.Talisman
   const recommendedTalismans = recommendedTalismanNames?.map(name => talismans.find(t => t.name === name)).filter((x): x is Talisman => x !== undefined) ?? []
+
+  const tabList = buildNames.map(name => ({
+    key: name,
+    label: name
+  }))
+
   return (
     <div className="mt-6">
       <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Build and Gear</h2>
 
       <div className="flex justify-center mb-6">
-        <div className="relative bg-gray-800 rounded-full p-1 flex gap-1 w-fit overflow-x-auto flex-nowrap">
-          <div
-            ref={indicatorRef}
-            className={`absolute top-1 left-0 h-[calc(100%-0.5rem)] bg-cyan-500 rounded-full transition-all duration-300 z-0`}
-          ></div>
-          {buildNames.map(name => (
-            <button
-              key={name}
-              onClick={() => setGearTab(name)}
-              ref={el => {
-                if (gearTab === name) setActiveTabRef(el)
-              }}
-              className={`relative z-10 w-[140px] justify-center px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors duration-300 ${gearTab === name ? 'text-white' : 'text-gray-300 hover:bg-cyan-700'}`}
-            >
-              {name}
-            </button>
-          ))}
-        </div>
+        <AnimatedTabs
+          tabs={tabList}
+          selected={gearTab}
+          onSelect={setGearTab}
+          pillColor="#06b6d4" // cyan-500
+          
+        />
       </div>
+
 
       <AnimatePresence mode="wait">
         <motion.div

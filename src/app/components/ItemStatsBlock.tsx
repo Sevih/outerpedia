@@ -56,6 +56,7 @@ export default function ItemStatsBlock({ stats, substats = [], type, rare }: Ite
                             alt={info.label}
                             width={20}
                             height={20}
+                            style={{ width: 20, height: 20 }}
                         />
                         <span className="text-xs">{info.label}</span>
                     </div>

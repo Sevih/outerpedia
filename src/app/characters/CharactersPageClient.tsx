@@ -326,9 +326,7 @@ export default function CharactersPage() {
           </button>
         ))}
       </div>
-
-
-      <div className="flex justify-center gap-8 mb-4 flex-wrap">
+      <div className="flex justify-center gap-4 mb-4 flex-wrap">
         <div className="flex gap-2">
           {elements.map((el) => (
             <button
@@ -356,7 +354,6 @@ export default function CharactersPage() {
             </button>
           ))}
         </div>
-
         <div className="flex gap-2">
           {classes.map((cl) => (
             <button
@@ -386,51 +383,56 @@ export default function CharactersPage() {
         </div>
 
 
-        <div className="flex gap-2 justify-center">
-          {chainTypes.map((ct) => (
+        <div className="overflow-x-auto -mx-2 px-2">
+          <div className="flex gap-2 w-max">
+            {chainTypes.map((ct) => (
+              <button
+                key={ct.name}
+                onClick={() =>
+                  ct.value
+                    ? toggleMultiSelect(ct.value, chainFilter, setChainFilter)
+                    : setChainFilter([])
+                }
+                className={`inline-flex items-center justify-center px-2 h-7 rounded border text-xs font-semibold transition
+          ${(ct.value === null && chainFilter.length === 0) ||
+                    (ct.value === null && chainFilter.length === chainTypes.slice(1).length) ||
+                    (ct.value !== null && chainFilter.includes(ct.value))
+                    ? 'bg-cyan-500'
+                    : 'bg-gray-700'
+                  } hover:bg-cyan-600 text-white`}
+              >
+                <span className="text-white text-sm font-bold">{ct.name}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+      </div>
+      <div className="w-full flex justify-center">
+        <div className="flex flex-wrap justify-center gap-2 sm:overflow-x-auto sm:flex-nowrap sm:w-max sm:-mx-2 sm:px-2">
+          {GiftTypes.map((ct) => (
             <button
               key={ct.name}
               onClick={() =>
                 ct.value
-                  ? toggleMultiSelect(ct.value, chainFilter, setChainFilter)
-                  : setChainFilter([])
+                  ? toggleMultiSelect(ct.value, giftFilter, setgiftFilter)
+                  : setgiftFilter([])
               }
-              className={`flex items-center justify-center px-2 h-7 rounded border text-xs font-semibold transition ${(ct.value === null && chainFilter.length === 0) ||
-                (ct.value === null && chainFilter.length === chainTypes.slice(1).length) ||
-                (ct.value !== null && chainFilter.includes(ct.value))
-                ? 'bg-cyan-500'
-                : 'bg-gray-700'
+              className={`inline-flex items-center justify-center px-2 h-7 rounded border text-xs font-semibold transition
+        ${(ct.value === null && giftFilter.length === 0) ||
+                  (ct.value !== null && giftFilter.includes(ct.value))
+                  ? 'bg-cyan-500'
+                  : 'bg-gray-700'
                 } hover:bg-cyan-600 text-white`}
             >
-
-              {ct.value ? (
-                <span className="text-white text-sm font-bold">{ct.name}</span>
-              ) : (
-                <span className="text-white text-sm font-bold">All</span>
-              )}
+              <span className="text-white text-sm font-bold">{ct.name}</span>
             </button>
           ))}
         </div>
       </div>
-      <div className="flex gap-2 justify-center">
-        {GiftTypes.map((ct) => (
-          <button
-            key={ct.name}
-            onClick={() =>
-              ct.value
-                ? toggleMultiSelect(ct.value, giftFilter, setgiftFilter)
-                : setgiftFilter([])
-            }
-            className={`flex items-center justify-center px-2 h-7 rounded border text-xs font-semibold transition ${(ct.value === null && giftFilter.length === 0) ||
-              (ct.value !== null && giftFilter.includes(ct.value))
-              ? 'bg-cyan-500'
-              : 'bg-gray-700'
-              } hover:bg-cyan-600 text-white`}
-          >
-            <span className="text-white text-sm font-bold">{ct.name}</span>
-          </button>
-        ))}
-      </div>
+
+
+
 
 
 

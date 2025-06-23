@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -10,6 +10,8 @@ import type { Character } from '@/types/character'
 import type { ClassType as classtipe, ElementType } from '@/types/enums'
 import { ElementIcon } from '@/app/components/ElementIcon'
 import { ClassIcon } from '@/app/components/ClassIcon'
+import { AnimatedTabs } from '@/app/components/AnimatedTabs'
+
 
 const TABS = [
   { label: 'DPS', value: 'dps', icon: '/images/ui/dps.webp' },
@@ -30,20 +32,12 @@ const tabColors = {
   sustain: '#22c55e',
 } as const
 
-const tabBackgroundColors = {
-  dps: '#991b1b',
-  support: '#1e3a8a',
-  sustain: '#14532d',
-} as const
-
 
 export default function TierListPage({ characters, initialTab }: { characters: Character[], initialTab?: string }) {
   const [activeTab, setActiveTab] = useState<TabValue>(
     (initialTab as TabValue) || 'dps'
   );
   const [searchTerm, setSearchTerm] = useState('')
-  const [indicatorRef, setIndicatorRef] = useState<HTMLDivElement | null>(null)
-  const tabContainerRef = useRef<HTMLDivElement>(null)
   const [classFilter, setClassFilter] = useState<string[]>([])
   const [elementFilter, setElementFilter] = useState<string[]>([])
 
@@ -55,16 +49,6 @@ export default function TierListPage({ characters, initialTab }: { characters: C
     if (classFilter.length === CLASSES.length - 1) setClassFilter([])
   }, [classFilter])
 
-
-  useEffect(() => {
-    if (indicatorRef && tabContainerRef.current) {
-      const activeButton = tabContainerRef.current.querySelector(`[data-tab="${activeTab}"]`) as HTMLButtonElement
-      if (activeButton) {
-        indicatorRef.style.transform = `translateX(${activeButton.offsetLeft}px)`
-        indicatorRef.style.width = `${activeButton.offsetWidth}px`
-      }
-    }
-  }, [activeTab, indicatorRef])
 
 
   const filteredCharacters = characters.filter(c => c.Rarity >= 3 && c.rank_pvp)
@@ -86,6 +70,13 @@ export default function TierListPage({ characters, initialTab }: { characters: C
   }
 
   const currentRoleList = groupByRank(roleGroups[activeTab])
+
+  const tabList = TABS.map(tab => ({
+    key: tab.value,
+    label: tab.label,
+    icon: tab.icon,
+  }))
+
 
   return (
 
@@ -225,52 +216,15 @@ export default function TierListPage({ characters, initialTab }: { characters: C
 
       {/* Slider */}
       <div className="flex justify-center mb-8">
-        <div
-          ref={tabContainerRef}
-          className="relative rounded-full p-1 flex gap-1 w-fit overflow-x-auto flex-nowrap transition-colors duration-300"
-          style={{ backgroundColor: tabBackgroundColors[activeTab] }}
-        >
-          <div
-            ref={setIndicatorRef}
-            className="absolute top-1 left-0 h-[calc(100%-0.5rem)] rounded-full transition-all duration-300 z-0"
-            style={{ backgroundColor: tabColors[activeTab] }}
-          />
-          {TABS.map(tab => (
-            <button
-              key={tab.value}
-              data-tab={tab.value}
-              onClick={() => setActiveTab(tab.value)}
-              onMouseEnter={(e) => {
-                if (tab.value !== activeTab) {
-                  e.currentTarget.style.backgroundColor = tabBackgroundColors[tab.value]
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (tab.value !== activeTab) {
-                  e.currentTarget.style.backgroundColor = 'transparent'
-                }
-              }}
-              style={{
-                backgroundColor: activeTab === tab.value ? tabColors[tab.value] : 'transparent',
-                transition: 'background-color 0.3s ease',
-              }}
-              className={`relative z-10 w-[140px] justify-center px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${activeTab === tab.value ? 'text-white' : 'text-gray-800'
-                }`}
-            >
-              <div className="relative w-[40px] h-[40px]">
-                <Image
-                  src={tab.icon}
-                  alt={`${tab.label} icon`}
-                  fill
-                  sizes="40px"
-                  className="object-cover"
-                />
-              </div>
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        <AnimatedTabs
+          tabs={tabList}
+          selected={activeTab}
+          onSelect={setActiveTab}
+          pillColor={tabColors[activeTab]}
+          
+        />
       </div>
+
 
       {/* Liste par Rank */}
       <AnimatePresence mode="wait">
