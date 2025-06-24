@@ -26,6 +26,16 @@ function migrateChangelogEntries(
 export const oldChangelog = [
   {
     date: "2025-06-24",
+    title: "Tier List major change",
+    type: "fix",
+    content: [
+      "- To avoid confusion and better reflect performance differences, all 1★ and 2★ units are now automatically demoted by one tier in the tier list.",
+      "- Example: A 2★ unit originally rated B will now appear as C",
+      "- This change helps distinguish between true 3★ performance and lower-rarity alternatives, especially in cases where direct comparisons created misleading expectations.",
+    ],
+  },
+  {
+    date: "2025-06-24",
     title: "Annihilator Update",
     type: "update",
     content: [

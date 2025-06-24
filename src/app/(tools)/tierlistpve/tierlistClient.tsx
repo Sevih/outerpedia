@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -24,7 +24,7 @@ const RARITIES = [1, 2, 3]
 
 type TabValue = (typeof TABS)[number]['value']
 
-const RANK_ORDER = ['S', 'A', 'B', 'C', 'D'] as const
+const RANK_ORDER = ['S', 'A', 'B', 'C', 'D', 'E'] as const
 
 const tabColors = {
   dps: '#ef4444',
@@ -67,14 +67,41 @@ export default function TierListPage({ characters, initialTab }: { characters: C
   }
 
   function groupByRank(chars: Character[]) {
-    const groups: Record<string, Character[]> = {}
-    for (const rank of RANK_ORDER) {
-      groups[rank] = chars
-        .filter(c => c.rank === rank)
-        .sort((a, b) => a.Fullname.localeCompare(b.Fullname))
+    const groups: Record<(typeof RANK_ORDER)[number], Character[]> = {
+      S: [],
+      A: [],
+      B: [],
+      C: [],
+      D: [],
+      E: [],
     }
+
+    for (const char of chars) {
+      let targetRank = char.rank as typeof RANK_ORDER[number] | undefined
+
+      // Si le rang est inconnu ou invalide, on skip
+      if (!targetRank || !RANK_ORDER.includes(targetRank)) continue
+
+      // Déclassement pour 1★ et 2★
+      if (char.Rarity < 3) {
+        const currentIndex = RANK_ORDER.indexOf(targetRank)
+        const downgradedIndex = Math.min(currentIndex + 1, RANK_ORDER.length - 1)
+        targetRank = RANK_ORDER[downgradedIndex]
+      }
+
+      groups[targetRank].push(char)
+    }
+
+    // Tri alphabétique par nom
+    for (const rank of RANK_ORDER) {
+      groups[rank].sort((a, b) => a.Fullname.localeCompare(b.Fullname))
+    }
+
     return groups
   }
+
+
+
 
   const currentRoleList = groupByRank(roleGroups[activeTab])
 
@@ -259,7 +286,7 @@ export default function TierListPage({ characters, initialTab }: { characters: C
             selected={activeTab}
             onSelect={setActiveTab}
             pillColor={tabColors[activeTab]}
-            
+
           />
         </div>
 

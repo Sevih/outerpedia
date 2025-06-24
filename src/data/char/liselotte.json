@@ -7,8 +7,8 @@
   "limited": null,
   "role": "sustain",
   "gift": "Magic Tool",
-  "rank": null,
-  "rank_pvp": null,
+  "rank": "A",  
+  "rank_pvp": "A",
   "Class": "Healer",
   "SubClass": "Sage",
   "transcend": {
