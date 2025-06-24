@@ -1178,7 +1178,7 @@
 		"effect": "Damage taken reduced for allies with barrier",
 		"effect10": "Increased damage dealt for allies with barrier",
 		"icon_effect": "TI_Icon_UO_Accessary_07",
-		"rank": "",
+		"rank": "B",
 		"buff": [],
 		"debuff": []
 	}
