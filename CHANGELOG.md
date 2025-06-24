@@ -1,3 +1,7 @@
+## 🛠 Annihilator Update (2025-06-24)
+- [Joint boss Annihilator](/guides/joint-boss/annihilator)  has been updated for June 2025 version.
+
+
 ## 🛠 Prevent World Alteration Guild Raid (2025-06-19)
 - Prevent World Alteration Guild Raid Guide release. learn more [here](/guides/guild-raid/prevent-world-alteration)
 

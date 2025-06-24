@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-06-24",
+    title: "Annihilator Update",
+    type: "update",
+    content: [
+      "- [Joint boss Annihilator](/guides/joint-boss/annihilator)  has been updated for June 2025 version.",
+    ],
+  },
+  {
     date: "2025-06-19",
     title: "Prevent World Alteration Guild Raid",
     type: "update",

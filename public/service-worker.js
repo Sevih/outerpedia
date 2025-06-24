@@ -1,6 +1,6 @@
 // /public/service-worker.js
 
-const CACHE_NAME = 'outerpedia-cache-v1.33.1';
+const CACHE_NAME = 'outerpedia-cache-v1.34.0';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -34,18 +34,32 @@ self.addEventListener('activate', (event) => {
 });
 
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // Ne pas interférer avec Next.js static files ou API
   if (url.pathname.startsWith('/_next/') || url.pathname.startsWith('/api/')) {
     return;
   }
 
+  // NE JAMAIS SERVIR DU HTML DU CACHE
+  if (event.request.mode === 'navigate') {
+    // Just fetch and update clients
+    event.respondWith(
+      fetch(event.request).then(response => {
+        // enregistre dans le cache pour offline si tu veux
+        const clone = response.clone();
+        event.waitUntil(
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone))
+        );
+        return response;
+      })
+    );
+    return;
+  }
+
+  // Cache-first pour les assets non HTML
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
+    caches.match(event.request).then(response => response || fetch(event.request))
   );
 });
 
