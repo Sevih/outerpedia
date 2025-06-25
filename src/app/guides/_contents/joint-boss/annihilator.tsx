@@ -59,7 +59,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
         <hr className="my-6 border-neutral-700" />
         <RecommendedTeam team={teamSetup0625} />
         <hr className="my-6 border-neutral-700" />
-        No video available. One will be add soon.
+        <YoutubeEmbed videoId="5r3gji7y6E0" title="Annihilator - Joint Challenge - Very Hard Mode by Sevih" />
       </>
     ),
   },
