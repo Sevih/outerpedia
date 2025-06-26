@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { changelog } from "@/data/changelog"
 import { renderMarkdown } from "@/utils/markdown"
 
-const recentChanges = changelog.slice(0, 10)
+const recentChanges = changelog.slice(0, 5)
 
 export default function HomeClient() {
   return (
@@ -12,20 +12,34 @@ export default function HomeClient() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Outerpedia",
-            "url": "https://outerpedia.com",
-            "description": "Outerpedia is a complete database for the mobile RPG Outerplane. Discover characters, gear builds, exclusive equipment, sets and more.",
-          }),
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Outerpedia",
+              "url": "https://outerpedia.com",
+              "description": "Outerpedia is a complete database for the mobile RPG Outerplane. Discover characters, gear builds, exclusive equipment, sets and more."
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Outerpedia",
+              "url": "https://outerpedia.com",
+              "logo": "https://outerpedia.com/images/icons/icon-192x192.png",
+              "sameAs": [
+                "https://discord.gg/keGhVQWsHv"
+              ],
+              "description": "Fan-made wiki for Outerplane: tier list, character builds, equipment database and more."
+            }
+          ])
         }}
       />
+
 
       {/* SECTION RECENT UPDATES */}
       <section className="mt-12">
         <h2 className="text-2xl font-bold mb-8 text-white text-center relative">
-          <span className="relative z-10">Recent Updates</span>
+          <span className="relative z-10">Latest Outerpedia Updates & Features</span>
           <span className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-24 h-1 bg-cyan-600 opacity-70 rounded" />
         </h2>
 
@@ -37,15 +51,14 @@ export default function HomeClient() {
               <div className="flex items-center justify-between text-sm text-gray-400 mb-1">
                 <span className="font-mono">{entry.date}</span>
                 <span
-                  className={`uppercase text-xs font-bold px-2 py-0.5 rounded bg-opacity-20 ${
-                    entry.type.toUpperCase() === 'FEATURE'
-                      ? 'bg-green-800 text-green-100'
-                      : entry.type.toUpperCase() === 'UPDATE'
+                  className={`uppercase text-xs font-bold px-2 py-0.5 rounded bg-opacity-20 ${entry.type.toUpperCase() === 'FEATURE'
+                    ? 'bg-green-800 text-green-100'
+                    : entry.type.toUpperCase() === 'UPDATE'
                       ? 'bg-blue-800 text-blue-100'
                       : entry.type.toUpperCase() === 'FIX'
-                      ? 'bg-red-800 text-red-100'
-                      : 'bg-gray-800 text-gray-100'
-                  }`}
+                        ? 'bg-red-800 text-red-100'
+                        : 'bg-gray-800 text-gray-100'
+                    }`}
                 >
                   {entry.type.toUpperCase()}
                 </span>
@@ -65,6 +78,7 @@ export default function HomeClient() {
             View full changelog →
           </Link>
         </div>
+        <h2 className="sr-only">Outerpedia Outerplane database changelog and feature log</h2>
       </section>
     </div>
   )

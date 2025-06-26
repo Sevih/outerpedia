@@ -120,7 +120,7 @@
     },
     "SKT_ULTIMATE": {
       "name": "Voltaic Arrowstorm",
-      "true_desc": "Has a <color=#28d9ed>70%</color> chance to grant increased Accuracy and Effectiveness to all allies for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies.\\nHas a <color=#28d9ed>100%</color> chance to reduce <color=#28d9ed>skill cooldowns</color> of all allies except for the caster by <color=#28d9ed>0.1% turn(s)</color>.",
+      "true_desc": "Has a <color=#28d9ed>70%</color> chance to grant increased Accuracy and Effectiveness to all allies for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies.\\nHas a <color=#28d9ed>100%</color> chance to reduce <color=#28d9ed>skill cooldowns</color> of all allies except for the caster by <color=#28d9ed>1 turn(s)</color>.",
       "DescID": "SKILL_DESC_2000101_Skill03_LV1,SKILL_DESC_2000101_Skill03_LV1,SKILL_DESC_2000101_Skill03_LV1,SKILL_DESC_2000101_Skill03_LV1,SKILL_DESC_2000101_Skill03_LV1",
       "IconName": "Skill_Ultimate_2000101",
       "NameIDSymbol": "10103",

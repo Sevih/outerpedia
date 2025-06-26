@@ -153,7 +153,7 @@
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>0.2%</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to inflict <color=#28d9ed>Bleeding</color> 2 times on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>2</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to inflict <color=#28d9ed>Bleeding</color> 2 times on the target for <color=#28d9ed>2 turn(s)</color>.",
       "DescID": "SKILL_DESC_2000015_Skill04_LV1,SKILL_DESC_2000015_Skill04_LV1,SKILL_DESC_2000015_Skill04_LV1,SKILL_DESC_2000015_Skill04_LV1,SKILL_DESC_2000015_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Dark_Finish",
       "NameIDSymbol": "1504",

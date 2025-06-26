@@ -288,3 +288,49 @@ h1:not(.sr-only)::after,
   scroll-margin-top: 6rem;
   /* ou adapte selon la hauteur de ton header sticky */
 }
+
+h1.homepage-title {
+  /* all: unset; ← à supprimer */
+  position: relative;
+  font-family: 'Rajdhani';
+  font-size: 2rem !important;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  background: url('/images/ui/CM_Desc_Bg.webp') center center / cover no-repeat;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10;
+  display: inline-block;
+  line-height: 1.2;
+  max-width: 90%;
+}
+
+
+h1.homepage-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 12px;
+  background: url('/images/ui/CM_Result_Victory_Bg.webp') center bottom no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+
+@media (max-width: 728px) {
+  h1.homepage-title.homepage-title-responsive {
+    font-size: 1.25rem !important;
+    padding: 0.75rem 1.25rem !important;
+  }
+
+  h1.homepage-title.homepage-title-responsive::after {
+    height: 8px !important;
+    background-size: 80% !important;
+  }
+}
