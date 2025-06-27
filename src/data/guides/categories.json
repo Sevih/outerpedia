@@ -58,7 +58,7 @@
       "title": "Monad Gate",
       "description": "To help you find your way through this labyrinth and overcome its enemies.",
       "icon": "/images/guides/CM_Adventure_MonadGate",
-      "valid":false
+      "valid":true
     }
   }
   

@@ -646,5 +646,14 @@
     "second_image": "stats",
     "last_updated": "2025-06-09",
     "author": "Sevih / Shiraen"
+  },
+  "deeps8-route1": {
+    "category": "monad-gate",
+    "title": "deeps8-route1",
+    "description": "",
+    "icon": "",
+    "second_image": "",
+    "last_updated": "2025-06-09",
+    "author": "Sevih / Shiraen"
   }
 }
