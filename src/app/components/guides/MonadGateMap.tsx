@@ -36,7 +36,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [showOnlyTruePath, setShowOnlyTruePath] = useState(false);
     const previousStartNodeId = useRef<string | null>(null);
-    
+
 
     const toggleFullscreen = () => {
         const el = fullscreenRef.current;
@@ -85,14 +85,6 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             updateDrag(touch.clientX, touch.clientY);
         }
     }, [updateDrag, isDragging]);
-
-    const handleWheel = (e: React.WheelEvent) => {
-        if (containerRef.current?.contains(e.target as Node)) {
-            e.preventDefault();
-            const delta = -e.deltaY * 0.001;
-            setScale(prev => Math.min(2, Math.max(0.5, prev + delta)));
-        }
-    };
     const initialRender = useRef(true);
 
     useEffect(() => {
@@ -197,6 +189,23 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             document.body.classList.remove('fullscreen-mode');
         }
     }, [isFullscreen]);
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const handleWheel = (e: WheelEvent) => {
+            e.preventDefault(); // maintenant autorisé
+            const delta = -e.deltaY * 0.001;
+            setScale(prev => Math.min(2, Math.max(0.5, prev + delta)));
+        };
+
+        container.addEventListener('wheel', handleWheel, { passive: false });
+
+        return () => {
+            container.removeEventListener('wheel', handleWheel);
+        };
+    }, []);
+
     return (
         <div
             ref={fullscreenRef}
@@ -235,7 +244,6 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                     } touch-auto select-none overscroll-none transition-all duration-300`}
                 onMouseDown={handleMouseDown}
                 onTouchStart={handleTouchStart}
-                onWheel={handleWheel}
             >
                 <div
                     ref={contentRef}
