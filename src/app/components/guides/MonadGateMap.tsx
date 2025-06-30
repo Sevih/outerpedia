@@ -36,6 +36,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [showOnlyTruePath, setShowOnlyTruePath] = useState(false);
     const previousStartNodeId = useRef<string | null>(null);
+    
 
     const toggleFullscreen = () => {
         const el = fullscreenRef.current;
@@ -231,7 +232,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                 ref={containerRef}
                 className={`relative w-full ${isFullscreen ? 'h-[100vh]' : 'h-[600px] md:h-[1200px]'
                     } overflow-x-auto overflow-y-hidden border bg-zinc-900 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'
-                    } touch-none select-none transition-all duration-300`}
+                    } touch-auto select-none transition-all duration-300`}
                 onMouseDown={handleMouseDown}
                 onTouchStart={handleTouchStart}
                 onWheel={handleWheel}
