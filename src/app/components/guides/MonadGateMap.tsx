@@ -35,7 +35,43 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
     const [selectedNode, setSelectedNode] = useState<MonadNode | null>(null);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [showOnlyTruePath, setShowOnlyTruePath] = useState(false);
-    const previousStartNodeId = useRef<string | null>(null);
+    const hasCenteredOnce = useRef(false);
+    const scaleRef = useRef(scale);
+
+    useEffect(() => {
+        scaleRef.current = scale;
+    }, [scale]);
+
+    const dragRef = useRef(drag);
+    useEffect(() => {
+        dragRef.current = drag;
+    }, [drag]);
+
+
+    const zoomAt = (zoomFactor: number, centerX: number, centerY: number) => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const rect = container.getBoundingClientRect();
+        const offsetX = centerX - rect.left;
+        const offsetY = centerY - rect.top;
+
+        const currentScale = scaleRef.current;
+        const currentDrag = dragRef.current;
+        const newScale = Math.min(2, Math.max(0.5, currentScale * zoomFactor));
+
+        const xRel = (offsetX - currentDrag.x) / currentScale;
+        const yRel = (offsetY - currentDrag.y) / currentScale;
+
+        const newX = offsetX - xRel * newScale;
+        const newY = offsetY - yRel * newScale;
+
+        setDrag({ x: newX, y: newY });
+        setScale(newScale);
+    };
+
+
+
 
 
     const toggleFullscreen = () => {
@@ -88,6 +124,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
     const initialRender = useRef(true);
 
     useEffect(() => {
+        if (hasCenteredOnce.current) return;
         if (initialRender.current) {
             initialRender.current = false;
             return; // skip first render
@@ -104,26 +141,31 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                 e.preventDefault();
             }
         };
-        let initialDistance = 0;
-        let initialScale = scale;
+
         const getDistance = (touches: TouchList) => {
             const dx = touches[0].clientX - touches[1].clientX;
             const dy = touches[0].clientY - touches[1].clientY;
             return Math.sqrt(dx * dx + dy * dy);
         };
+        let initialDistance = 0;
+
         const handleTouchStartPinch = (e: TouchEvent) => {
             if (e.touches.length === 2) {
                 e.preventDefault();
                 initialDistance = getDistance(e.touches);
-                initialScale = scale;
             }
         };
+
         const handleTouchMovePinch = (e: TouchEvent) => {
             if (e.touches.length === 2) {
                 e.preventDefault();
                 const newDistance = getDistance(e.touches);
                 const zoomFactor = newDistance / initialDistance;
-                setScale(Math.min(2, Math.max(0.5, initialScale * zoomFactor)));
+                const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+
+                zoomAt(zoomFactor, centerX, centerY);
+
             }
         };
         container.addEventListener("wheel", handleWheelCapture, { passive: false });
@@ -151,14 +193,14 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
         setDrag({ x: 0, y: 0 });
         setScale(1);
     };
+
     useEffect(() => {
+        if (hasCenteredOnce.current) return;
+
         const startNode = nodes.find(n => n.type === 'start');
         if (!startNode || !containerRef.current) return;
 
-        // 🛑 Ne recentre que si le start node a changé
-        if (startNode.id === previousStartNodeId.current) return;
-
-        previousStartNodeId.current = startNode.id;
+        hasCenteredOnce.current = true;
 
         const containerHeight = containerRef.current.clientHeight;
         const nodeCanvasX = startNode.x * (NODE_WIDTH + NODE_GAP) + NODE_GAP;
@@ -170,6 +212,8 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             y: offsetY - nodeCanvasY,
         });
     }, [nodes, maxY]);
+
+
 
     const [, setFullscreenHeight] = useState<number | null>(null);
     useEffect(() => {
@@ -194,10 +238,11 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
         if (!container) return;
 
         const handleWheel = (e: WheelEvent) => {
-            e.preventDefault(); // maintenant autorisé
-            const delta = -e.deltaY * 0.001;
-            setScale(prev => Math.min(2, Math.max(0.5, prev + delta)));
+            e.preventDefault();
+            const zoomFactor = 1 + (-e.deltaY * 0.001);
+            zoomAt(zoomFactor, e.clientX, e.clientY);
         };
+
 
         container.addEventListener('wheel', handleWheel, { passive: false });
 
@@ -205,6 +250,8 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             container.removeEventListener('wheel', handleWheel);
         };
     }, []);
+
+
 
     return (
         <div
@@ -220,7 +267,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                         onChange={(e) => setShowOnlyTruePath(e.target.checked)}
                         className="form-checkbox text-yellow-400"
                     />
-                    Spoiler
+                    True Ending Path
                 </label>
                 <div className="flex gap-2">
                     <button
