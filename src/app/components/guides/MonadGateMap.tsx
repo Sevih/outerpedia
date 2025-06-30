@@ -37,12 +37,13 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
     const [showOnlyTruePath, setShowOnlyTruePath] = useState(false);
     const hasCenteredOnce = useRef(false);
     const scaleRef = useRef(scale);
-
+    const initialDistanceRef = useRef(0);
+    const dragRef = useRef(drag);
     useEffect(() => {
         scaleRef.current = scale;
     }, [scale]);
 
-    const dragRef = useRef(drag);
+    
     useEffect(() => {
         dragRef.current = drag;
     }, [drag]);
@@ -147,12 +148,12 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             const dy = touches[0].clientY - touches[1].clientY;
             return Math.sqrt(dx * dx + dy * dy);
         };
-        let initialDistance = 0;
+        
 
         const handleTouchStartPinch = (e: TouchEvent) => {
             if (e.touches.length === 2) {
                 e.preventDefault();
-                initialDistance = getDistance(e.touches);
+                initialDistanceRef.current = getDistance(e.touches);
             }
         };
 
@@ -160,14 +161,15 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             if (e.touches.length === 2) {
                 e.preventDefault();
                 const newDistance = getDistance(e.touches);
-                const zoomFactor = newDistance / initialDistance;
+                const zoomFactor = newDistance / initialDistanceRef.current;
+
                 const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
                 const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
 
                 zoomAt(zoomFactor, centerX, centerY);
-
             }
         };
+
         container.addEventListener("wheel", handleWheelCapture, { passive: false });
         container.addEventListener("touchstart", handleTouchStartPinch, { passive: false });
         container.addEventListener("touchmove", handleTouchMovePinch, { passive: false });
