@@ -232,7 +232,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                 ref={containerRef}
                 className={`relative w-full ${isFullscreen ? 'h-[100vh]' : 'h-[600px] md:h-[1200px]'
                     } overflow-x-auto overflow-y-hidden border bg-zinc-900 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'
-                    } touch-auto select-none transition-all duration-300`}
+                    } touch-auto select-none overscroll-none transition-all duration-300`}
                 onMouseDown={handleMouseDown}
                 onTouchStart={handleTouchStart}
                 onWheel={handleWheel}
