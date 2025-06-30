@@ -7,6 +7,8 @@ import { NodeContextPopup, PathOptionsContent } from "@/app/components/guides/mo
 const NODE_WIDTH = 200;
 const NODE_HEIGHT = 100;
 const NODE_GAP = 60;
+const ZOOM_SENSITIVITY = 0.04; // ← de 0.02 (très doux) à 0.1 (rapide)
+
 interface MonadGateMapProps {
     nodes: MonadNode[];
     edges: MonadEdge[];
@@ -43,7 +45,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
         scaleRef.current = scale;
     }, [scale]);
 
-    
+
     useEffect(() => {
         dragRef.current = drag;
     }, [drag]);
@@ -148,7 +150,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             const dy = touches[0].clientY - touches[1].clientY;
             return Math.sqrt(dx * dx + dy * dy);
         };
-        
+
 
         const handleTouchStartPinch = (e: TouchEvent) => {
             if (e.touches.length === 2) {
@@ -161,14 +163,22 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             if (e.touches.length === 2) {
                 e.preventDefault();
                 const newDistance = getDistance(e.touches);
-                const zoomFactor = newDistance / initialDistanceRef.current;
+                let zoomFactor = newDistance / initialDistanceRef.current;
+
+                // Clamp et seuil
+                zoomFactor = Math.max(1 - ZOOM_SENSITIVITY, Math.min(1 + ZOOM_SENSITIVITY, zoomFactor));
+                if (Math.abs(zoomFactor - 1) < 0.01) return;
 
                 const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
                 const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
 
                 zoomAt(zoomFactor, centerX, centerY);
+
+                // Update la distance pour un zoom fluide
+                initialDistanceRef.current = newDistance;
             }
         };
+
 
         container.addEventListener("wheel", handleWheelCapture, { passive: false });
         container.addEventListener("touchstart", handleTouchStartPinch, { passive: false });
