@@ -107,7 +107,13 @@ const sorted = [
           <div key={code} className="py-4">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-1">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-lg font-semibold">{code}</span>
+                <span className={`font-mono text-lg font-semibold ${
+                status === 'active'
+                  ? 'bg-green-600'
+                  : status === 'expired'
+                  ? 'bg-red-400'
+                  : 'bg-yellow-300'
+              }`}>&nbsp;{code}&nbsp;</span>
                 <CopyButton code={code} />
               </div>
 

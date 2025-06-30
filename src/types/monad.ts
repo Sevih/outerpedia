@@ -8,10 +8,14 @@ export interface MonadNode {
   y: number;
   type: NodeType;
   label?: string;
+  popupText?: string;
+  truePath?:boolean
 }
 
 export interface MonadEdge {
   from: string;
   to: string;
   label?: string;
+  need?:string;
+  truePath?:boolean
 }

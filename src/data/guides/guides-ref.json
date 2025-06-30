@@ -647,13 +647,22 @@
     "last_updated": "2025-06-09",
     "author": "Sevih / Shiraen"
   },
-  "deeps8-route1": {
+  "depth8-route1": {
     "category": "monad-gate",
-    "title": "deeps8-route1",
-    "description": "",
-    "icon": "",
-    "second_image": "",
-    "last_updated": "2025-06-09",
-    "author": "Sevih / Shiraen"
+    "title": "Depth 8 : route 1",
+    "description": "Map of Depth 8 : route 1 and true ending path",
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-06-30",
+    "author": "Sevih"
+  },
+  "depth8-route2": {
+    "category": "monad-gate",
+    "title": "Depth 8 : route 2",
+    "description": "Map of Depth 8 : route 2 and true ending path",
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-06-30",
+    "author": "Sevih"
   }
 }

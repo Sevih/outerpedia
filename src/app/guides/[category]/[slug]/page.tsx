@@ -56,7 +56,17 @@ export async function generateMetadata({ params }: { params: Promise<Props["para
   const meta = categoryMeta[category];
 
   const url = `https://outerpedia.com/guides/${guide.category}/${slug}`;
-  const image = `https://outerpedia.com/images/guides/${guide.category}/${slug}_portrait.png`;
+  let image: string;
+
+  switch (guide.category) {
+    case 'monad-gate':
+      image = `https://outerpedia.com/images/guides/monad-gate/CM_Adventure_MonadGate.png`;
+      break;
+    default:
+      image = `https://outerpedia.com/images/guides/${guide.category}/${slug}_portrait.png`;
+      break;
+  }
+
 
   return {
     title: `${guide.title} |  ${meta.title} | Outerpedia`,
@@ -100,6 +110,23 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
 
   const meta = categoryMeta[category];
 
+  let image: string;
+  let secondeimage: string | undefined;
+
+  switch (guide.category) {
+    case 'monad-gate':
+      image = `/images/guides/monad-gate/CM_Adventure_MonadGate.webp`;
+      secondeimage = `/images/guides/monad-gate/CM_Adventure_MonadGate.webp`;
+      break;
+    default:
+      image = `/images/guides/${guide.category}/${slug}_banner.webp`;
+      secondeimage = guide.second_image
+        ? `/images/guides/${guide.category}/${guide.second_image}_banner.webp`
+        : undefined;
+      break;
+  }
+
+
   return (
 
     <div className="p-6">
@@ -110,10 +137,10 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
         {/* Image centrée */}
 
         {
-          !guide.second_image ? (
+          !secondeimage ? (
             // 🟦 Cas 1 : une seule bannière
             <Image
-              src={`/images/guides/${guide.category}/${slug}_banner.webp`}
+              src={image}
               alt={`${guide.title} banner`}
               fill
               sizes="100vw"
@@ -124,7 +151,7 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
             // 🟪 Cas 2 : deux images
             <>
               <Image
-                src={`/images/guides/${guide.category}/${slug}_banner.webp`}
+                src={image}
                 alt={`${guide.title} banner`}
                 fill
                 sizes="100vw"
@@ -133,17 +160,17 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
                 priority
               />
               <Image
-                src={`/images/guides/${guide.category}/${guide.second_image}_banner.webp`}
+                src={secondeimage}
                 alt={`${guide.title} second banner`}
                 fill
                 sizes="100vw"
                 className="object-contain"
                 style={{ left: '-20%' }}
               />
-
             </>
           )
         }
+
 
 
 
@@ -200,19 +227,19 @@ export default async function GuidePage({ params }: { params: Promise<Props["par
             EvaMains Discord
           </Link>.
         </p>) : (
-          <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
-            This guide covers all currently available information and advice for <strong>{category.replace(/-/g, ' ')}</strong> – <strong>{guide.title}</strong> in Outerplane.<br />
-            If you know any additional strategies, tips, or missing details, feel free to share them with us on&nbsp;
-            <Link
-              href="https://discord.gg/keGhVQWsHv"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline inline-flex items-center gap-1 text-amber-300"
-            >
-              EvaMains Discord
-            </Link>.
-          </p>
-        )}
+        <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
+          This guide covers all currently available information and advice for <strong>{category.replace(/-/g, ' ')}</strong> – <strong>{guide.title}</strong> in Outerplane.<br />
+          If you know any additional strategies, tips, or missing details, feel free to share them with us on&nbsp;
+          <Link
+            href="https://discord.gg/keGhVQWsHv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline inline-flex items-center gap-1 text-amber-300"
+          >
+            EvaMains Discord
+          </Link>.
+        </p>
+      )}
 
 
       <div className="mt-6">

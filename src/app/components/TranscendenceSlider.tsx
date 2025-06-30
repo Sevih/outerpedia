@@ -107,9 +107,17 @@ export default function TranscendenceSlider({ transcendData }: Props) {
         if (matchFlat) {
           const amount = parseInt(matchFlat[1]);
           const label = matchFlat[2];
-          bonusMap[label] = (bonusMap[label] || 0) + amount;
+
+          // ⛔ Ne pas ajouter le % à cette ligne précise
+          if (label === "Action Points at battle start") {
+            bonusMap[`flat|${label}`] = (bonusMap[`flat|${label}`] || 0) + amount;
+          } else {
+            bonusMap[label] = (bonusMap[label] || 0) + amount;
+          }
+
           continue;
         }
+
 
 
         let handled = false;
@@ -158,12 +166,15 @@ export default function TranscendenceSlider({ transcendData }: Props) {
     const result: string[] = [];
     if (lastAtkDefHpLine) result.push(lastAtkDefHpLine);
     for (const [label, value] of Object.entries(bonusMap)) {
-      if (label.includes("|")) {
+      if (label.startsWith("flat|")) {
+        result.push(`+${value} ${label.replace("flat|", "")}`);
+      } else if (label.includes("|")) {
         const [prefix, suffix] = label.split("|");
         result.push(`${prefix}${value}${suffix}`);
       } else {
         result.push(`+${value}% ${label}`);
       }
+
     }
     for (const effect of uniqueEffects.values()) {
       result.push(effect);

@@ -29,6 +29,16 @@ body {
 
 }
 
+body.fullscreen-mode {
+  height: 100%;
+  overflow: hidden;
+}
+
+body.fullscreen-mode #__next {
+  height: 100%;
+}
+
+
 body>* {
   position: relative;
   z-index: 1;

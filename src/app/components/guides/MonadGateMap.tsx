@@ -1,53 +1,69 @@
 'use client';
-
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import type { MonadNode, MonadEdge, NodeType } from "@/types/monad";
-import { nodeTypes as defaultNodeTypes } from "@/lib/monad/nodeTypes";
-
-const NODE_WIDTH = 100;
-const NODE_HEIGHT = 80;
-const NODE_GAP = 20;
-
+import type { MonadNode, MonadEdge } from "@/types/monad";
+import { nodeTypes as defaultNodeTypes, nodeColorFilters } from "@/lib/monad/nodeTypes";
+import { NodeContextPopup, PathOptionsContent } from "@/app/components/guides/monad-ui";
+const NODE_WIDTH = 200;
+const NODE_HEIGHT = 100;
+const NODE_GAP = 60;
 interface MonadGateMapProps {
     nodes: MonadNode[];
     edges: MonadEdge[];
     nodeTypes?: typeof defaultNodeTypes;
     title?: string;
+    onNodeClick?: (id: string) => void;
+    adminMode?: boolean; // ✅ AJOUT
+    onEdgeClick?: (id: string) => void;
 }
-
 const MonadGateMap: React.FC<MonadGateMapProps> = ({
     nodes,
     edges,
     nodeTypes = defaultNodeTypes,
     title,
+    onNodeClick,
+    adminMode = false, // ✅ valeur par défaut
+    onEdgeClick,
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const fullscreenRef = useRef<HTMLDivElement>(null);
     const [drag, setDrag] = useState({ x: 0, y: 0 });
     const [scale, setScale] = useState(1);
     const [isDragging, setIsDragging] = useState(false);
     const [startDrag, setStartDrag] = useState({ x: 0, y: 0 });
+    const [selectedNode, setSelectedNode] = useState<MonadNode | null>(null);
+    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [showOnlyTruePath, setShowOnlyTruePath] = useState(false);
+    const previousStartNodeId = useRef<string | null>(null);
 
-    const typeColors: Record<NodeType, string> = Object.fromEntries(
-        Object.entries(nodeTypes).map(([key, val]) => [key, val.color])
-    ) as Record<NodeType, string>;
-
+    const toggleFullscreen = () => {
+        const el = fullscreenRef.current;
+        if (!el) return;
+        if (!document.fullscreenElement) {
+            el.requestFullscreen?.();
+        } else {
+            document.exitFullscreen?.();
+        }
+    };
+    useEffect(() => {
+        const handleExit = () => setIsFullscreen(!!document.fullscreenElement);
+        document.addEventListener("fullscreenchange", handleExit);
+        return () => document.removeEventListener("fullscreenchange", handleExit);
+    }, []);
     const maxX = Math.max(...nodes.map(n => n.x));
     const minY = Math.min(...nodes.map(n => n.y));
     const maxY = Math.max(...nodes.map(n => n.y));
     const getNodeById = (id: string) => nodes.find((n) => n.id === id)!;
-
     const startDragging = (clientX: number, clientY: number) => {
         setIsDragging(true);
         setStartDrag({ x: clientX - drag.x, y: clientY - drag.y });
     };
-
-    const updateDrag = (clientX: number, clientY: number) => {
+    const updateDrag = useCallback((clientX: number, clientY: number) => {
         if (isDragging) {
             setDrag({ x: clientX - startDrag.x, y: clientY - startDrag.y });
         }
-    };
+    }, [isDragging, startDrag]);
 
     const stopDragging = () => setIsDragging(false);
     const handleMouseDown = (e: React.MouseEvent) => {
@@ -58,13 +74,16 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
         const touch = e.touches[0];
         startDragging(touch.clientX, touch.clientY);
     };
-    const handleTouchMove = (e: TouchEvent) => {
+    const handleMouseMove = useCallback((e: MouseEvent) => {
+        updateDrag(e.clientX, e.clientY);
+    }, [updateDrag]);
+
+    const handleTouchMove = useCallback((e: TouchEvent) => {
         if (isDragging) {
             const touch = e.touches[0];
             updateDrag(touch.clientX, touch.clientY);
         }
-    };
-    const handleMouseMove = (e: MouseEvent) => updateDrag(e.clientX, e.clientY);
+    }, [updateDrag, isDragging]);
 
     const handleWheel = (e: React.WheelEvent) => {
         if (containerRef.current?.contains(e.target as Node)) {
@@ -73,26 +92,32 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             setScale(prev => Math.min(2, Math.max(0.5, prev + delta)));
         }
     };
+    const initialRender = useRef(true);
+
+    useEffect(() => {
+        if (initialRender.current) {
+            initialRender.current = false;
+            return; // skip first render
+        }
+
+        // Ne pas reset le zoom ici
+    }, [nodes, edges]);
 
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
-
         const handleWheelCapture = (e: WheelEvent) => {
             if (container.contains(e.target as Node)) {
                 e.preventDefault();
             }
         };
-
         let initialDistance = 0;
         let initialScale = scale;
-
         const getDistance = (touches: TouchList) => {
             const dx = touches[0].clientX - touches[1].clientX;
             const dy = touches[0].clientY - touches[1].clientY;
             return Math.sqrt(dx * dx + dy * dy);
         };
-
         const handleTouchStartPinch = (e: TouchEvent) => {
             if (e.touches.length === 2) {
                 e.preventDefault();
@@ -100,7 +125,6 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                 initialScale = scale;
             }
         };
-
         const handleTouchMovePinch = (e: TouchEvent) => {
             if (e.touches.length === 2) {
                 e.preventDefault();
@@ -109,18 +133,15 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                 setScale(Math.min(2, Math.max(0.5, initialScale * zoomFactor)));
             }
         };
-
         container.addEventListener("wheel", handleWheelCapture, { passive: false });
         container.addEventListener("touchstart", handleTouchStartPinch, { passive: false });
         container.addEventListener("touchmove", handleTouchMovePinch, { passive: false });
-
         return () => {
             container.removeEventListener("wheel", handleWheelCapture);
             container.removeEventListener("touchstart", handleTouchStartPinch);
             container.removeEventListener("touchmove", handleTouchMovePinch);
         };
-    }, []);
-
+    }, [scale]);
     useEffect(() => {
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("mouseup", stopDragging);
@@ -132,27 +153,85 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             window.removeEventListener("touchmove", handleTouchMove);
             window.removeEventListener("touchend", stopDragging);
         };
-    }, [isDragging, startDrag]);
-
+    }, [isDragging, startDrag, handleMouseMove, handleTouchMove]);
     const resetView = () => {
         setDrag({ x: 0, y: 0 });
         setScale(1);
     };
+    useEffect(() => {
+        const startNode = nodes.find(n => n.type === 'start');
+        if (!startNode || !containerRef.current) return;
 
+        // 🛑 Ne recentre que si le start node a changé
+        if (startNode.id === previousStartNodeId.current) return;
+
+        previousStartNodeId.current = startNode.id;
+
+        const containerHeight = containerRef.current.clientHeight;
+        const nodeCanvasX = startNode.x * (NODE_WIDTH + NODE_GAP) + NODE_GAP;
+        const nodeCanvasY = (maxY - startNode.y) * (NODE_HEIGHT + NODE_GAP) + NODE_GAP;
+        const nodeHeight = NODE_HEIGHT - 20;
+        const offsetY = (containerHeight - nodeHeight) / 2;
+        setDrag({
+            x: -nodeCanvasX,
+            y: offsetY - nodeCanvasY,
+        });
+    }, [nodes, maxY]);
+
+    const [, setFullscreenHeight] = useState<number | null>(null);
+    useEffect(() => {
+        if (isFullscreen) {
+            const updateHeight = () => setFullscreenHeight(window.innerHeight);
+            updateHeight();
+            window.addEventListener("resize", updateHeight);
+            return () => window.removeEventListener("resize", updateHeight);
+        } else {
+            setFullscreenHeight(null);
+        }
+    }, [isFullscreen]);
+    useEffect(() => {
+        if (isFullscreen) {
+            document.body.classList.add('fullscreen-mode');
+        } else {
+            document.body.classList.remove('fullscreen-mode');
+        }
+    }, [isFullscreen]);
     return (
-        <div className="relative">
+        <div
+            ref={fullscreenRef}
+            className={`z-[9999] ${isFullscreen ? "fixed inset-0 bg-black" : "relative"}`}
+        >
             {title && <h2 className="text-lg font-bold mb-2">{title}</h2>}
-            <button
-                className="absolute right-4 top-4 z-20 px-3 py-1 bg-zinc-800 text-white border border-zinc-500 rounded shadow"
-                onClick={resetView}
-            >
-                Reset
-            </button>
-
+            <div className="absolute top-10 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-4">
+                <label className="inline-flex items-center gap-2 bg-zinc-800 px-3 py-1 rounded border border-zinc-500 shadow text-white text-sm">
+                    <input
+                        type="checkbox"
+                        checked={showOnlyTruePath}
+                        onChange={(e) => setShowOnlyTruePath(e.target.checked)}
+                        className="form-checkbox text-yellow-400"
+                    />
+                    Spoiler
+                </label>
+                <div className="flex gap-2">
+                    <button
+                        className="px-3 py-1 bg-zinc-800 text-white border border-zinc-500 rounded shadow"
+                        onClick={resetView}
+                    >
+                        Reset
+                    </button>
+                    <button
+                        className="px-3 py-1 bg-zinc-800 text-white border border-zinc-500 rounded shadow"
+                        onClick={toggleFullscreen}
+                    >
+                        Fullscreen
+                    </button>
+                </div>
+            </div>
             <div
                 ref={containerRef}
-                className={`relative w-full max-h-[70vh] md:h-[500px] overflow-x-auto overflow-y-hidden border bg-zinc-900 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'
-                    } touch-none select-none`}
+                className={`relative w-full ${isFullscreen ? 'h-[100vh]' : 'h-[600px] md:h-[1200px]'
+                    } overflow-x-auto overflow-y-hidden border bg-zinc-900 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'
+                    } touch-none select-none transition-all duration-300`}
                 onMouseDown={handleMouseDown}
                 onTouchStart={handleTouchStart}
                 onWheel={handleWheel}
@@ -170,7 +249,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                     }}
                 >
                     <svg
-                        className="absolute z-0 pointer-events-none"
+                        className="absolute z-0"
                         style={{
                             width: `${(maxX + 1) * (NODE_WIDTH + NODE_GAP)}px`,
                             height: `${(Math.abs(minY) + 1 + Math.max(...nodes.map(n => n.y))) * (NODE_HEIGHT + NODE_GAP)}px`,
@@ -182,89 +261,147 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                                 <path d="M0,0 L0,6 L6,3 z" fill="white" />
                             </marker>
                         </defs>
-                        {edges.map((edge, idx) => {
-                            const from = getNodeById(edge.from);
-                            const to = getNodeById(edge.to);
-                            const fromX = from.x * (NODE_WIDTH + NODE_GAP) + NODE_WIDTH - 10; // avant : -20
-                            const fromY = (maxY - from.y) * (NODE_HEIGHT + NODE_GAP) + (NODE_HEIGHT - 20) / 2 + NODE_GAP;
-
-                            const toX = to.x * (NODE_WIDTH + NODE_GAP) + NODE_GAP;
-                            const toY = (maxY - to.y) * (NODE_HEIGHT + NODE_GAP) + (NODE_HEIGHT - 20) / 2 + NODE_GAP;
-
-                            const midX = fromX + (toX - fromX) / 2;
-
-                            return (
-                                <g key={idx}>
-                                    <path
-                                        d={`M${fromX},${fromY} L${midX},${fromY} L${midX},${toY} L${toX},${toY}`}
-                                        fill="none"
-                                        stroke="white"
-                                        strokeWidth={2}
-                                        markerEnd="url(#arrowhead)"
+                        {edges
+                            .filter(edge => !showOnlyTruePath || edge.truePath)
+                            .map((edge, idx) => {
+                                const isTruePath = edge.truePath === true;
+                                const shouldDim = showOnlyTruePath && !isTruePath;
+                                const from = getNodeById(edge.from);
+                                const to = getNodeById(edge.to);
+                                const fromX = from.x * (NODE_WIDTH + NODE_GAP) + NODE_WIDTH + NODE_GAP + 10;
+                                const fromY = (maxY - from.y) * (NODE_HEIGHT + NODE_GAP) + NODE_HEIGHT / 2 + NODE_GAP;
+                                const toX = to.x * (NODE_WIDTH + NODE_GAP) + NODE_GAP + 27;
+                                const toY = (maxY - to.y) * (NODE_HEIGHT + NODE_GAP) + NODE_HEIGHT / 2 + NODE_GAP;
+                                const midX = fromX + (toX - fromX) / 2;
+                                return (
+                                    <g key={idx} onClick={() => onEdgeClick?.(`${edge.from}-${edge.to}`)} className="cursor-pointer">
+                                        <path
+                                            d={`M${fromX},${fromY} L${midX},${fromY} L${midX},${toY} L${toX},${toY}`}
+                                            fill="none"
+                                            stroke={
+                                                showOnlyTruePath
+                                                    ? isTruePath
+                                                        ? "#facc15" // jaune si vrai chemin ET case cochée
+                                                        : "white"
+                                                    : "white"
+                                            }
+                                            strokeWidth={shouldDim ? 1 : 2}
+                                            strokeOpacity={shouldDim ? 0.2 : 1}
+                                            markerEnd="url(#arrowhead)"
+                                            pointerEvents="stroke"
+                                        />
+                                        {edge.need && (
+                                            <>
+                                                <circle
+                                                    cx={(fromX + toX) / 2}
+                                                    cy={(fromY + toY) / 2}
+                                                    r="9"
+                                                    fill="#fde047" // yellow-300
+                                                    stroke="black"
+                                                    strokeWidth="1"
+                                                />
+                                                <text
+                                                    x={(fromX + toX) / 2}
+                                                    y={(fromY + toY) / 2 + 3}
+                                                    fontSize="12"
+                                                    textAnchor="middle"
+                                                    alignmentBaseline="middle"
+                                                    fill="black"
+                                                    fontWeight="bold"
+                                                >
+                                                    🔒
+                                                </text>
+                                            </>
+                                        )}
+                                    </g>
+                                );
+                            })}
+                    </svg>
+                    {nodes.map((node) => {
+                        const isDimmed = showOnlyTruePath && !node.truePath;
+                        return (
+                            <div
+                                key={node.id}
+                                onClick={() => {
+                                    setSelectedNode(node);
+                                    onNodeClick?.(node.id);
+                                }}
+                                title={node.label || nodeTypes[node.type]?.label}
+                                className={`absolute text-white text-xs shadow ${isDimmed ? "opacity-30 grayscale" : ""}`}
+                                style={{
+                                    left: node.x * (NODE_WIDTH + NODE_GAP) + NODE_GAP,
+                                    top: (maxY - node.y) * (NODE_HEIGHT + NODE_GAP) + NODE_GAP,
+                                    width: NODE_WIDTH + 40,
+                                    height: NODE_HEIGHT,
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    position: 'absolute',
+                                }}
+                            >
+                                <div className="relative w-full h-full flex items-center pl-10 overflow-hidden">
+                                    <Image
+                                        src="/images/guides/monad-gate/CM_Monad_Box_Line.webp"
+                                        alt="node box"
+                                        fill
+                                        className={`object-contain z-0 pointer-events-none`}
+                                        style={{ filter: nodeColorFilters[node.type] }}
                                     />
-                                    {edge.label && (
+                                    {adminMode ? (
+                                        <div className="absolute z-10 text-[18px] font-bold left-15 top-4">
+                                            {node.id}
+                                            <div className={`text-[14px] leading-tight text-left z-30 whitespace-pre-wrap break-words max-w-[100px] ${nodeTypes[node.type]?.textColor}`}>{nodeTypes[node.type]?.label}</div>
+                                        </div>
+                                    ) : (
                                         <>
-                                            <rect
-                                                x={(fromX + toX) / 2 - 30}
-                                                y={(fromY + toY) / 2 - 12}
-                                                width={60}
-                                                height={18}
-                                                fill="black"
-                                                fillOpacity={0.6}
-                                                rx={4}
-                                            />
-                                            <text
-                                                x={(fromX + toX) / 2}
-                                                y={(fromY + toY) / 2}
-                                                fill="white"
-                                                fontSize={11}
-                                                textAnchor="middle"
-                                                alignmentBaseline="middle"
-                                            >
-                                                {edge.label}
-                                            </text>
+                                            <div className="relative w-[48px] h-[48px] flex items-center justify-center z-20 overflow-hidden">
+                                                <Image
+                                                    src={`/images/guides/monad-gate/CM_Monad_Node_Circle.webp`}
+                                                    alt="circle"
+                                                    width={48}
+                                                    height={48}
+                                                    className="absolute"
+                                                    style={{ filter: nodeColorFilters[node.type] }}
+                                                />
+                                                <Image
+                                                    src={`/images/guides/monad-gate/${nodeTypes[node.type]?.icon}.webp`}
+                                                    alt={node.type}
+                                                    width={24}
+                                                    height={24}
+                                                    className="absolute"
+                                                    style={{ filter: nodeColorFilters[node.type] }}
+                                                />
+                                            </div>
+                                            <div className={`ml-3 text-[11px] leading-tight text-left z-30 whitespace-pre-wrap break-words max-w-[100px] ${nodeTypes[node.type]?.textColor}`}>
+                                                <div className="font-semibold">{nodeTypes[node.type]?.label}</div>
+                                                {node.label && (
+                                                    <div className="text-[10px] italic">{node.label}</div>
+                                                )}
+                                            </div>
                                         </>
                                     )}
-                                </g>
-                            );
-                        })}
-                    </svg>
-
-                    {nodes.map((node) => (
-                        <div
-                            key={node.id}
-                            title={node.label || nodeTypes[node.type]?.label}
-                            className={`absolute rounded px-2 py-1 text-xs text-white border border-white shadow ${typeColors[node.type]}`}
-                            style={{
-                                left: node.x * (NODE_WIDTH + NODE_GAP) + NODE_GAP,
-                                top: (maxY - node.y) * (NODE_HEIGHT + NODE_GAP) + NODE_GAP,
-                                width: NODE_WIDTH - 20,
-                                height: NODE_HEIGHT - 20,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                        >
-                            <Image
-                                src={`/images/guides/monad-gate/${nodeTypes[node.type]?.icon}.webp`}
-                                alt={node.type}
-                                width={25}
-                                height={25}
-                                className="mb-1 object-contain"
-                            />
-                            <div className="text-center text-xs">
-                                {nodeTypes[node.type]?.label || node.id}
+                                </div>
                             </div>
-                            {node.label && (
-                                <div className="text-[10px] italic text-center">{node.label}</div>
-                            )}
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
+            {selectedNode && (
+                <NodeContextPopup
+                    node={selectedNode}
+                    onClose={() => setSelectedNode(null)}
+                    position="bottom"
+                >
+                    <PathOptionsContent
+                        node={selectedNode}
+                        edges={edges}
+                        getNodeById={getNodeById}
+                        showTruePath={showOnlyTruePath}
+                    />
+                </NodeContextPopup>
+            )}
         </div>
     );
 };
-
 export default MonadGateMap;

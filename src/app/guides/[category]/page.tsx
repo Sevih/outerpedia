@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SortSelector from '@/app/components/SortSelector';
 import AdventureGuideGrid from '@/app/components/AdventureGuideGrid';
+import MonadGateGuideGrid from '@/app/components/MonadGateGuideGrid';
 import { FaDiscord } from "react-icons/fa";
 
 
@@ -162,9 +163,12 @@ export default async function CategoryPage({ params }: { params: Promise<Props["
 
       {category === 'adventure' ? (
         <AdventureGuideGrid items={filtered} />
+      ) : category === 'monad-gate' ? (
+        <MonadGateGuideGrid items={filtered} />
       ) : (
         <GuideCardGrid items={filtered} />
       )}
+
 
 
 
