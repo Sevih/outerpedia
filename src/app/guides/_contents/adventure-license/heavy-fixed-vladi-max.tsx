@@ -47,7 +47,7 @@ export default function HeavyFixedVladiMaxGuide() {
         </li>
         <li><strong>Team 2 (Rhona Chain):</strong> <CharacterLinkCard name="Rhona" /> + 3 of <CharacterLinkCard name="Noa" />, <CharacterLinkCard name="Ryu Lion" />, <CharacterLinkCard name="Ame" />, <CharacterLinkCard name="Rey" />, <CharacterLinkCard name="Kappa" /></li>
         <li className="text-neutral-400 text-sm italic">
-          Rhona must attack last before the boss’s turn. Use her as chain starter. (Credit: XuRenChao, Leonhard)
+          Note: Be sure to use the chain attack with the character that play just before the boss.
         </li>
       </ul>
 
