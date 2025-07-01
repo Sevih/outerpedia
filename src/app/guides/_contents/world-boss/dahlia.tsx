@@ -57,7 +57,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
           </ol>
           <li><strong>Passive</strong>: Damage taken increased based on the number of debuff she gets.</li>
           <li><strong>Passive</strong>: .<EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> other than Skill chain and damage from <ElementInlineTag element='dark' /> heroes does not exceed 1 000.</li>
-          <li><strong>Passive</strong>: Damage taken from <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> does not exceed 1 000.</li>
+          <li><strong>Passive</strong>: Damage taken from <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> does not exceed 10 000.</li>
           <li><strong>Passive</strong>: Greatly reduce damage taken and nullify weakness gauge damage from enemy with 100 or more Chain Points.</li>
           <li><strong>Passive</strong>: Completely reduce <StatInlineTag name='EFF' /> from non-<ElementInlineTag element='light' />/<ElementInlineTag element='earth' /> heroes.</li>
           <li><strong>Passive</strong>: Completely reduce <StatInlineTag name='CHC' /> from <ClassInlineTag name='Healer' /> <ClassInlineTag name='Defender' /> <ClassInlineTag name='Striker' /> heroes.</li>
@@ -81,7 +81,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
           </ol>
           <li><strong>Passive</strong>: Damage taken increased based on the number of debuff she gets.</li>
           <li><strong>Passive</strong>: .<EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> other than Skill chain and damage from <ElementInlineTag element='dark' /> heroes does not exceed 1 000.</li>
-          <li><strong>Passive</strong>: Damage taken from <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> does not exceed 1 000.</li>
+          <li><strong>Passive</strong>: Damage taken from <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> does not exceed 10 000.</li>
           <li><strong>Passive</strong>: Greatly reduce damage taken and nullify weakness gauge damage from enemy with 100 or more Chain Points.</li>
           <li><strong>Passive</strong>: Completely reduce <StatInlineTag name='EFF' /> from non-<ElementInlineTag element='light' />/<ElementInlineTag element='earth' /> heroes.</li>
           <li><strong>Passive</strong>: Completely reduce <StatInlineTag name='CHC' /> from <ClassInlineTag name='Healer' /> <ClassInlineTag name='Defender' /> <ClassInlineTag name='Striker' /> heroes.</li>
