@@ -4,6 +4,7 @@ import EffectInlineTag from '@/app/components/EffectInlineTag'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import GuideHeading from '@/app/components/GuideHeading'
 import TeamTabSelector from '@/app/components/TeamTabSelector'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teams = {
   team1: {
@@ -24,6 +25,16 @@ const teams = {
       ['Fatal'],
       ['Edelweiss', 'Stella'],
       ['Tamara']
+    ]
+  },
+  team3: {
+    label: 'Team 3 – Water warrior',
+    icon: 'water.webp',
+    setup: [
+      ['Veronica'],
+      ['Rin'],
+      ['Caren'],
+      ['Beth']
     ]
   }
 }
@@ -51,6 +62,10 @@ export default function RavenousWolfKingZiggsaronGuide() {
         <li className="text-neutral-400 text-sm italic">
           Ember&apos;s self-inflicted <EffectInlineTag name="BT_MARKING" type="debuff" /> keeps S1 focused on her. Tamara should prevent S3 usage – S2 is harmless.
         </li>
+        <li><strong>Team 3:</strong> <CharacterLinkCard name="Veronica" />, <CharacterLinkCard name="Rin" />, <CharacterLinkCard name="Caren" />, <CharacterLinkCard name="Beth" /></li>
+        <li className="text-neutral-400 text-sm italic">
+          Ember&apos;s self-inflicted <EffectInlineTag name="BT_MARKING" type="debuff" /> keeps S1 focused on her. Tamara should prevent S3 usage – S2 is harmless.
+        </li>
       </ul>
 
       <hr className="my-6 border-neutral-700" />
@@ -59,10 +74,8 @@ export default function RavenousWolfKingZiggsaronGuide() {
       <hr className="my-6 border-neutral-700" />
 
       <div className="mb-4">
-        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="mb-2 text-neutral-300">
-          A sample video of both team comps will be added here soon.
-        </p>
+        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage of Team 3 – Water warrior</h3>
+        <YoutubeEmbed videoId="r4k9l7k56cg" title="Ziggsaron - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
       </div>
     </div>
   )

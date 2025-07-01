@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-07-01",
+    title: "Archdemon of Hubris Dahlia update",
+    type: "update",
+    content: [
+      "- Guide is up to date for july 2025 version. Learn More [here](/guides/world-boss/dahlia)",
+    ],
+  },
+  {
     date: "2025-06-24",
     title: "Tier List major change",
     type: "fix",

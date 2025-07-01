@@ -205,6 +205,12 @@
         "icon": "SC_Buff_Effect_Immune"
     },
     {
+        "name": "BT_IMMUNE_IR",
+        "label": "Immunity",
+        "description": "Ignores all incoming Debuffs (Irremovable)",
+        "icon": "IG_Buff_Effect_Immune_Interruption"
+    },
+    {
         "name": "BT_REVIVAL",
         "label": "Revival",
         "description": "Revives after Health reaches zero",
@@ -394,6 +400,18 @@
         "name": "UNIQUE_VENION_F",
         "label": "Courage against Despair",
         "description": "For each mage ally, increases attack of all allies by 15% each. (Irremovable)",
+        "icon": "IG_Buff_4086001_Interruption"
+    },
+    {
+        "name": "UNIQUE_DAHLIA_A",
+        "label": "Courage against Despair",
+        "description": "Grants a special effect to the bearer based on their class.",
+        "icon": "IG_Buff_4086001_Interruption"
+    },
+    {
+        "name": "UNIQUE_DAHLIA_B",
+        "label": "Courage against Despair",
+        "description": "Grants a special effect to the bearer based on their class.",
         "icon": "IG_Buff_4086001_Interruption"
     }
 ]
