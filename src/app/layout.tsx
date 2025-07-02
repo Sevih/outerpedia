@@ -78,8 +78,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head suppressHydrationWarning>        
+      <head suppressHydrationWarning>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
       </head>
+
       <body className={`${inter.className} text-white`}>
         <div className="flex flex-col min-h-screen">
           <Header />
