@@ -58,7 +58,7 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
                     onError={(e) => {
                       const img = e.currentTarget;
                       img.onerror = null;
-                      img.src = `/images/bg/rarity/CT_Slot_${item.rarity}.png`;
+                      img.src = `/images/bg/CT_Slot_${item.rarity}.png`;
                     }}
                   />
                   <Image
