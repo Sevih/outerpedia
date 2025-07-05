@@ -28,7 +28,7 @@
       "title": "Skyward Tower",
       "description": "Strategies to help you climb the tower.",
       "icon": "/images/guides/CT_Symbol_Automata",
-      "valid":true
+      "valid":false
     },
     "joint-boss": {
       "title": "Joint Boss",

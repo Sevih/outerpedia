@@ -29,6 +29,16 @@ const teams = {
             }
         ] as NoteEntry[]
     },
+    team2: {
+        label: 'One run kill',
+        icon: 'SC_Buff_Effect_Element_Superiority.webp',
+        setup: [
+            ['Dianne'],
+            ['Skadi'],            
+            ['Demiurge Luna'],
+            ['Maxwell']
+        ]
+    },
 }
 
 export default function IrregularMutatedWyvreGuide() {
@@ -59,7 +69,7 @@ export default function IrregularMutatedWyvreGuide() {
 
             <div className="mb-4">
                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-                <YoutubeEmbed videoId="CJfwNAbwqFw" title="Mutated Wyvre - Pursuit Operation - 930K (1 run) by Ducky" />
+                <YoutubeEmbed videoId="PCgNRKFlRGI" title="Mutated Wyvre - Pursuit Operation - 1 run kill by Sevih" />
             </div>
         </div>
     )
