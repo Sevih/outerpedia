@@ -4,16 +4,27 @@ import EffectInlineTag from '@/app/components/EffectInlineTag'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import GuideHeading from '@/app/components/GuideHeading'
 import TeamTabSelector from '@/app/components/TeamTabSelector'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teams = {
   standard: {
     label: 'Recommended Team',
-    icon: 'SC_Buff_Water_Dmg.webp',
+    icon: 'SC_Buff_Dot_Curse.webp',
     setup: [
       ['Monad Eva'],
       ['Dianne'],
       ['Marian'],
       ['Kitsune of Eternity Tamamo-no-Mae', 'Drakhan']
+    ]
+  },
+  counter: {
+    label: 'Counter Team',
+    icon: 'SC_Buff_Counter.webp',
+    setup: [
+      ['Delta'],
+      ['Cindy'],
+      ['Rey'],
+      ['Ame']
     ]
   }
 }
@@ -53,8 +64,9 @@ export default function FulMiNationAssaultSuitGuide() {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
         <p className="mb-2 text-neutral-300">
-          A sample video of the recommended team in action will be added here soon.
+          A sample video of the One run kill team.
         </p>
+        <YoutubeEmbed videoId="g7rmQGPtaiQ" title="Ful.Mi.NATION Assault Suit - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
       </div>
     </div>
   )
