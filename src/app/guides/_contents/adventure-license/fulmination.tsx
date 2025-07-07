@@ -64,7 +64,7 @@ export default function FulMiNationAssaultSuitGuide() {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
         <p className="mb-2 text-neutral-300">
-          A sample video of the One run kill team.
+          A sample video of the Counter team.
         </p>
         <YoutubeEmbed videoId="g7rmQGPtaiQ" title="Ful.Mi.NATION Assault Suit - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
       </div>
