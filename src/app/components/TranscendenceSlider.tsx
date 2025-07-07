@@ -95,6 +95,15 @@ export default function TranscendenceSlider({ transcendData }: Props) {
           lastAtkDefHpLine = trimmed;
           continue;
         }
+        const matchFlat = trimmed.match(/^\+(\d+) (.+)$/);
+        if (matchFlat) {
+          const amount = parseInt(matchFlat[1]);
+          const label = matchFlat[2];
+          bonusMap[`flat|${label}`] = (bonusMap[`flat|${label}`] || 0) + amount;
+          continue;
+        }
+
+
         const match = trimmed.match(/^\+(\d+)% (.+)$/);
         if (match) {
           const amount = parseInt(match[1]);
@@ -103,20 +112,6 @@ export default function TranscendenceSlider({ transcendData }: Props) {
           continue;
         }
 
-        const matchFlat = trimmed.match(/^\+(\d+) (.+)$/);
-        if (matchFlat) {
-          const amount = parseInt(matchFlat[1]);
-          const label = matchFlat[2];
-
-          // ⛔ Ne pas ajouter le % à cette ligne précise
-          if (label === "Action Points at battle start") {
-            bonusMap[`flat|${label}`] = (bonusMap[`flat|${label}`] || 0) + amount;
-          } else {
-            bonusMap[label] = (bonusMap[label] || 0) + amount;
-          }
-
-          continue;
-        }
 
 
 

@@ -412,7 +412,7 @@ function CombatBasicsContent() {
                                         <br />
                                         → <strong>Dahlia will act first.</strong>
                                     </p>
-                                    <p className="mt-2">Some transcendence perks also grant <StatInlineTag name="SPD" /> bonuses  to the entire team, such as with <SkillInline character="Mene" skill="Passive" /> or <SkillInline character="Demiurge Delta" skill="Passive" />.</p>
+                                    <p className="mt-2">Some transcendence perks also grant <StatInlineTag name="SPD" /> bonuses  to the entire team, such as with <CharacterLinkCard name="Mene" /> or <CharacterLinkCard name="Demiurge Delta" />.</p>
                                 </>
                             )
 
