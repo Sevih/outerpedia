@@ -3,6 +3,7 @@
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import GuideHeading from '@/app/components/GuideHeading'
 import TeamTabSelector from '@/app/components/TeamTabSelector'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teams = {
   standard: {
@@ -26,7 +27,7 @@ export default function SacreedGuardianGuide() {
         <li><strong>HP:</strong> Significantly increased</li>
         <li><strong>Speed:</strong> Lower than usual</li>
       </ul>
-        <p className="text-neutral-400 text-sm italic mb-4">
+      <p className="text-neutral-400 text-sm italic mb-4">
         Orbs might be killable (likely unintended)
       </p>
       <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Team Suggestions</h3>
@@ -51,6 +52,7 @@ export default function SacreedGuardianGuide() {
         <p className="mb-2 text-neutral-300">
           A sample video of the recommended team in action will be added here soon.
         </p>
+        <YoutubeEmbed videoId="5i9U0aBtqyo" title="Sacreed Guardian - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
       </div>
     </div>
   )
