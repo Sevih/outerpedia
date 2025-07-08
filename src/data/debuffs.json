@@ -218,13 +218,13 @@
     {
         "name": "BT_DOT_CURSE",
         "label": "Cursed",
-        "description": "Takes damage proportional to Health at the start of the turn.\nRemoved when the caster dies",
+        "description": "Takes damage proportional to Health at the start of the turn (3% of max HP).\nRemoved when the caster dies",
         "icon": "SC_Buff_Dot_Curse"
     },
     {
         "name": "BT_DOT_CURSE_IR",
         "label": "Cursed",
-        "description": "Takes damage proportional to Health at the start of the turn.\nRemoved when the caster dies (Irremovable)",
+        "description": "Takes damage proportional to Health at the start of the turn (3% of max HP).\nRemoved when the caster dies (Irremovable)",
         "icon": "IG_Buff_Dot_Curse_Interruption_D"
     },
     {
