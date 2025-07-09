@@ -4,6 +4,7 @@ import EffectInlineTag from '@/app/components/EffectInlineTag'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import GuideHeading from '@/app/components/GuideHeading'
 import TeamTabSelector from '@/app/components/TeamTabSelector'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teams = {
   curse: {
@@ -13,7 +14,7 @@ const teams = {
       ['Sterope'],
       ['Monad Eva'],
       ['Kitsune of Eternity Tamamo-no-Mae', 'Marian', 'Drakhan'],
-      ['Marian','Drakhan', 'Kitsune of Eternity Tamamo-no-Mae']
+      ['Marian', 'Drakhan', 'Kitsune of Eternity Tamamo-no-Mae']
     ]
   },
   fixed: {
@@ -73,9 +74,10 @@ export default function DemiurgeVladaGuide() {
 
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="mb-2 text-neutral-300">
-          A sample video of the recommended team in action will be added here soon.
+        <p className="text-neutral-400 text-sm italic mt-2">
+          Run provided by <span className="text-white font-semibold">Sevih</span> (09/07/2025)
         </p>
+        <YoutubeEmbed videoId="JIx2mVtXufA" title="Demiurge Vlada - Adventure License : promotion challenge" />
       </div>
     </div>
   )
