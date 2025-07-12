@@ -38,6 +38,7 @@ export default function TyrantGuide() {
             </ul>
             <GuideHeading level={4}>Recommanded Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
+                <li><CharacterLinkCard name="Mero" />: for <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" /> and <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" />.</li>
                 <li><CharacterLinkCard name="Gnosis Beth" /> <CharacterLinkCard name="Ember" /> : for landing debuff while getting hit.</li>
                 <li><CharacterLinkCard name="Tamamo-no-Mae" /> <CharacterLinkCard name="Ember" /> : for <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Charlotte" /> <CharacterLinkCard name="Skadi" /> <CharacterLinkCard name="Sterope" />: for <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" />.</li>
