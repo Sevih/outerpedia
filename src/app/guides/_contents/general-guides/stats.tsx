@@ -300,16 +300,17 @@ function CombatBasicsContent() {
                                     <p className="text-sm text-yellow-400">
                                         <strong>Note: </strong>
                                         <span className="text-sm text-white">
-                                            Note: Priority can never exceed 100% or drop below 0%.<br />
-                                            If multiple characters reach 100% within the same action, the order in which they act is not based on who reaches it first,
-                                            but instead follows a fixed positional priority.<br />
-                                            <br />
-                                            The default order is:<br />
-                                            <strong>Front-right → Top → Bottom → Back-left</strong><br />
-                                            <br />
-                                            This applies most clearly in Arena, where character placement is consistent.<br />
-                                            For example, if two characters are both at 90% — one in the bottom position and the other in the front-right —
-                                            and both receive a +10% Priority boost, the one in the <strong>front-right position</strong> will act first.
+                                            Priority can never exceed 100% or drop below 0%.<br /><br />
+
+                                            When multiple characters reach 100% at different times, the one who gets there first will act first. This is the most common case.<br /><br />
+
+                                            However, if multiple characters reach 100% <strong>within the same action</strong> (e.g. due to a mass +Priority boost), then the acting order is based on a fixed positional priority:<br />
+                                            <strong>Front-right → Top → Bottom → Back-left</strong><br /><br />
+
+                                            This positional rule is only used when multiple characters are pushed to 100% at the exact same time.<br />
+                                            ⚠️ Additional Priority boosts applied <strong>after</strong> 100% are ignored and have no effect on the turn order.<br /><br />
+
+                                            In such cases, the acting team always goes first, followed by the enemy team — each resolving ties based on the positional rule above.
                                         </span>
                                     </p>
                                 </>
