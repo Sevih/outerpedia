@@ -299,9 +299,17 @@ function CombatBasicsContent() {
                                     </p>
                                     <p className="text-sm text-yellow-400">
                                         <strong>Note: </strong>
-                                        <span className="text-sm text-white">Priority can never exceed 100% or drop below 0%.
-                                            If two characters hit 100% within the same action, the one who reaches it first will act first.
-                                            For example, if you give +10% priority to one character at 98% and another at 95%, the one at 98% will go first.
+                                        <span className="text-sm text-white">
+                                            Note: Priority can never exceed 100% or drop below 0%.<br />
+                                            If multiple characters reach 100% within the same action, the order in which they act is not based on who reaches it first,
+                                            but instead follows a fixed positional priority.<br />
+                                            <br />
+                                            The default order is:<br />
+                                            <strong>Front-right → Top → Bottom → Back-left</strong><br />
+                                            <br />
+                                            This applies most clearly in Arena, where character placement is consistent.<br />
+                                            For example, if two characters are both at 90% — one in the bottom position and the other in the front-right —
+                                            and both receive a +10% Priority boost, the one in the <strong>front-right position</strong> will act first.
                                         </span>
                                     </p>
                                 </>
@@ -514,7 +522,7 @@ function CombatBasicsContent() {
                                         <li><strong>Ally Speed transcend bonus:</strong>30 (Dianne + Mene + Demiurge Delta)</li>
                                     </ul>
                                     <p>Leading to a grand total of : 360 (468 including the speed buff)</p>
-                                    <p>Ryu Lion can go further with her 4 star transcend bonus : 370  (481 with speed buff) </p>                                    
+                                    <p>Ryu Lion can go further with her 4 star transcend bonus : 370  (481 with speed buff) </p>
                                 </>
                             )
                         },
