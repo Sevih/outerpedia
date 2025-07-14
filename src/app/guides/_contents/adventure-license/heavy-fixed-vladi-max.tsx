@@ -4,6 +4,7 @@ import EffectInlineTag from '@/app/components/EffectInlineTag'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import GuideHeading from '@/app/components/GuideHeading'
 import TeamTabSelector from '@/app/components/TeamTabSelector'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teams = {
   etamamo: {
@@ -19,8 +20,8 @@ const teams = {
     icon: 'SC_Buff_Effect_Heavy_bk.webp',
     setup: [
       ['Rhona'],
-      ['Kappa','Noa', 'Ryu Lion', 'Ame', 'Rey', ],
-      ['Ryu Lion','Noa',  'Ame', 'Rey', 'Kappa'],
+      ['Kappa', 'Noa', 'Ryu Lion', 'Ame', 'Rey',],
+      ['Ryu Lion', 'Noa', 'Ame', 'Rey', 'Kappa'],
       ['Noa', 'Ryu Lion', 'Ame', 'Rey', 'Kappa']
     ]
   }
@@ -58,9 +59,10 @@ export default function HeavyFixedVladiMaxGuide() {
 
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="mb-2 text-neutral-300">
-          A sample video of both team comps will be added here soon.
+        <p className="text-neutral-400 text-sm italic mt-2">
+          Run provided by <span className="text-white font-semibold">XuRenChao</span> (14/07/2025)
         </p>
+        <YoutubeEmbed videoId="dJ13OvWJ44A" title="Heavy Fixed Vladi Max - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
       </div>
     </div>
   )
