@@ -4,10 +4,12 @@ import * as HoverCard from '@radix-ui/react-hover-card'
 import Image from 'next/image'
 import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
+import type { CSSProperties } from 'react'
 
 type Props = {
   name: string
   type: 'buff' | 'debuff'
+  triggerStyle?: CSSProperties // ← nouveau prop
 }
 
 type Effect = {
@@ -18,7 +20,7 @@ type Effect = {
   description: string
 }
 
-export default function EffectInlineTag({ name, type }: Props) {
+export default function EffectInlineTag({ name, type, triggerStyle }: Props) {
   const effects: Effect[] = (type === 'buff' ? buffs : debuffs).map(e => ({ ...e, type }))
   const effect = effects.find((e) => e.name === name)
 
@@ -30,15 +32,17 @@ export default function EffectInlineTag({ name, type }: Props) {
   const arrowFill = type === 'buff' ? 'fill-[#2196f3]' : 'fill-[#e53935]'
   const showEffectColor = !effect.description.toLowerCase().includes('cannot be removed')
   const imageClass = showEffectColor ? effect.type : ''
+  const defaultAlignClass = triggerStyle?.verticalAlign ? '' : 'align-bottom'
 
   return (
     <HoverCard.Root openDelay={0} closeDelay={0}>
       <HoverCard.Trigger asChild>
         <button
           type="button"
-          className="inline-flex items-end gap-1 align-bottom"
+          className={`inline-flex items-end gap-1 ${defaultAlignClass}`}
+          style={triggerStyle}
         >
-          <span className="inline-block w-[24px] h-[24px] relative align-bottom">
+          <span className="inline-block w-[24px] h-[24px] relative">
             <Image
               src={iconPath}
               alt={effect.label}

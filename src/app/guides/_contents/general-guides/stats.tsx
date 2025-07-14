@@ -353,15 +353,15 @@ function CombatBasicsContent() {
                                                         <li>The skill executes in three stages:
                                                             <ul className="list-disc list-inside ml-4">
                                                                 <li><strong>Pre-Hit:</strong> Happens before the skill hits. For example, <SkillInline character="Drakhan" skill="S3" />
-                                                                    with EE+10 applies a <span className='align-top'><EffectInlineTag name="BT_DOT_CURSE" type="debuff" /></span> before it hits —
+                                                                    with EE+10 applies a <EffectInlineTag name="BT_DOT_CURSE" type="debuff" triggerStyle={{ verticalAlign: 'middle', marginTop: '-6px' }} /> before it hits —
                                                                     important, as the skill’s damage scales with the number of debuffs.</li>
                                                                 <li><strong>Hit:</strong> The skill connects — direct damage and healing are applied.</li>
-                                                                <li><strong>Post-Hit:</strong> Triggers after the skill hits — for example, <SkillInline character="Demiurge Vlada" skill="S3" /> inflicts <span className='align-top'><EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" /></span> post-hit.</li>
+                                                                <li><strong>Post-Hit:</strong> Triggers after the skill hits — for example, <SkillInline character="Demiurge Vlada" skill="S3" /> inflicts <EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" triggerStyle={{ verticalAlign: 'middle', marginTop: '-6px' }}/> post-hit.</li>
                                                             </ul>
                                                         </li>
                                                         <li>Extra hits are triggered, such as <SkillInline character="Ryu Lion" skill="S2" />.</li>
-                                                        <li>Ally reactions, like <SkillInline character="Caren" skill="S2" />, may also trigger.</li>
-                                                        <li>Enemy reactions such as <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> or <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> may occur.</li>
+                                                        <li>Ally reactions, like <SkillInline character="Caren" skill="S2" />, may also trigger. These follow-up effects are resolved in positional order: <strong>Front-right → Top → Bottom → Back-left</strong>.</li>
+                                                        <li>Enemy reactions such as <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />, <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" /> or <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> may occur, and also follow this positional order.</li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -369,7 +369,7 @@ function CombatBasicsContent() {
                                         <li>
                                             <strong>Ending Phase</strong>
                                             <ul className="list-disc list-inside ml-4">
-                                                <li>Revive effects are resolved, such as <span className='align-top'><EffectInlineTag name="BT_REVIVAL" type="buff" /></span> or <SkillInline character="Demiurge Astei" skill="S2" />.</li>
+                                                <li>Revive effects are resolved, such as <EffectInlineTag name="BT_REVIVAL" type="buff" triggerStyle={{ verticalAlign: 'middle', marginTop: '-6px' }} /> or <SkillInline character="Demiurge Astei" skill="S2" />.</li>
                                                 <li>All remaining buffs and debuffs decrease their duration by 1 turn — except those already processed during the Starting Phase.</li>
                                                 <li>Any remaining priority gains or losses are now applied.</li>
                                             </ul>
@@ -693,7 +693,7 @@ function StatsContent() {
                                     <ul className="ml-5">
                                         <li>Crit Chance is capped at 100% — any excess is wasted.</li>
                                         <li>Healing and Shielding cannot crit.</li>
-                                        <li>Skills with <span className='align-top'><EffectInlineTag name="Heavy Strike" type="buff" /></span> effect cannot crit like <SkillInline character="Kitsune of Eternity Tamamo-no-Mae" skill="S1" />.</li>
+                                        <li>Skills with <EffectInlineTag name="Heavy Strike" type="buff" triggerStyle={{ verticalAlign: 'middle', marginTop: '-6px' }} /> effect cannot crit like <SkillInline character="Kitsune of Eternity Tamamo-no-Mae" skill="S1" />.</li>
                                         <li>Damage over Time effects cannot crit.</li>
                                     </ul>
                                 </>
