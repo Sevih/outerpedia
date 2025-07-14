@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "1.35.36",
+  "version": "1.35.37",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -2,6 +2,7 @@
 
 import GuideHeading from '@/app/components/GuideHeading'
 import TeamTabSelector from '@/app/components/TeamTabSelector'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teams = {
   team1: {
@@ -10,8 +11,8 @@ const teams = {
     setup: [
       ['Monad Eva'],
       ['Demiurge Stella'],
-      ['Demiurge Astei'],
-      ['Gnosis Nella', 'Tamara', 'Tamamo-no-Mae']
+      ['Demiurge Astei','Maxwell'],
+      ['Gnosis Nella', 'Tamara', 'Tamamo-no-Mae','Demiurge Luna']
     ]
   }
 }
@@ -35,10 +36,11 @@ export default function EpsilonGuide() {
 
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="mb-2 text-neutral-300">
-          A sample video of this team comp will be added here soon.
+        <p className="text-neutral-400 text-sm italic mt-2">
+          Run provided by <span className="text-white font-semibold">Sevih</span> (14/07/2025)
         </p>
+        <YoutubeEmbed videoId="XNHl5PJTJQc" title="Planet Purification Unit Epsilon - Adventure License - Stage 10 - 1 run clear" />
       </div>
-    </div>
+    </div >
   )
 }
