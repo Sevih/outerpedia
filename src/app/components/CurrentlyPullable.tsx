@@ -10,8 +10,7 @@ type BannerEntry = {
 }
 
 function toUkResetIso(dateStr: string): string {
-  // Date à 01:00 UTC, soit 2h heure de Paris en été
-  return new Date(`${dateStr}T01:00:00Z`).toISOString()
+  return new Date(`${dateStr}T00:00:00Z`).toISOString()
 }
 
 function isBannerActive(start: string, end: string): boolean {
