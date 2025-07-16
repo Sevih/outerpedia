@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-07-16",
+    title: "Dignity of the Golden Kingdom Guild Raid",
+    type: "update",
+    content: [
+      "- Dignity of the Golden Kingdom Guild Raid Guide release. learn more [here](/guides/guild-raid/dignity-of-the-golden-kingdom)",
+    ],
+  },
+  {
     date: "2025-07-01",
     title: "Archdemon of Hubris Dahlia update",
     type: "update",
