@@ -46,7 +46,7 @@
               "malus": {
                 "effect": "Ban Ally Priority Gauge Increase (Irremovable)",
                 "ratio": "+40%",
-                "image": "Special",
+                "image": "special",
                 "bg": "2"
               }
             },
@@ -54,7 +54,7 @@
               "bonus": {
                 "effect": "Increases Effectiveness of ally heroes by 75",
                 "ratio": "-25%",
-                "image": "Special",
+                "image": "special",
                 "bg": "1"
               },
               "malus": {
@@ -152,13 +152,13 @@
               "bonus": {
                 "effect": "Increases continuous damage taken by Boss monsters by 300%",
                 "ratio": "-45%",
-                "image": "Special",
+                "image": "special",
                 "bg": "2"
               },
               "malus": {
                 "effect": "Extra turn unavailable for ally heroes",
                 "ratio": "+40%",
-                "image": "Special",
+                "image": "special",
                 "bg": "2"
               }
             },
@@ -180,7 +180,7 @@
               "bonus": {
                 "effect": "Resets Skill Cooldown of Mage Hero Upon Using Mad Sun's Mirage",
                 "ratio": "-45%",
-                "image": "Special",
+                "image": "special",
                 "bg": "2"
               },
               "malus": {
