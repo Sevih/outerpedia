@@ -51,7 +51,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }>= {
           <p>You can prevent the boss from buffing himself with <EffectInlineTag name="BT_SEALED" type="debuff" /> but your unit must be around 290 Speed.</p>
           <p>If using a unit that will <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" />, you want it to be the first to play after the boss .</p>
           <p>You want at least one unit that can AoE buff your team to prevent the boss’s <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" />.</p>
-          <p>Revenge Set is good here exept on the unit that will <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> boss’s <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</p>
+          <p>Revenge Set is good here except on the unit that will <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> boss’s <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</p>
           <hr className="my-6 border-neutral-700" />
           <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Recommended Characters</h3>
           <ul className="list-disc list-inside text-neutral-300 mb-4">
