@@ -56,7 +56,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }>= {
           <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Recommended Characters</h3>
           <ul className="list-disc list-inside text-neutral-300 mb-4">
             <li><CharacterLinkCard name="Kanon" /> <CharacterLinkCard name="Poolside Trickster Regina" />: Essential pick because of the score bonus.</li>
-            <li><CharacterLinkCard name="Stella" /> <CharacterLinkCard name="Caren" /> <CharacterLinkCard name="Poolside Trickster Regina" />: <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> boss’s <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
+            <li><CharacterLinkCard name="Caren" /> <CharacterLinkCard name="Poolside Trickster Regina" />: <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> boss’s <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
             <li><CharacterLinkCard name="Aer" /> <CharacterLinkCard name="Kappa" /> <CharacterLinkCard name="Eliza" /> <CharacterLinkCard name="Regina" />: <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> boss’s <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
             <li><CharacterLinkCard name="Delta" /> : <ClassInlineTag name='Striker' /> with <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> (since the boss is fast).</li>
             <li><CharacterLinkCard name="Ryu Lion" /> : to buff your team with <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" />.</li>
