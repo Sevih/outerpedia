@@ -7,6 +7,15 @@ import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
+import GuideHeading from '@/app/components/GuideHeading'
+import ClassInlineTag from '@/app/components/ClassInlineTag'
+
+const teamSetup0725 = [
+  ['Monad Eva'],
+  ['Kanon','Caren','Aer'],
+  ['Poolside Trickster Regina','Francesca', 'Regina'],
+  ['Ryu Lion','Delta','Stella','Kappa', 'Eliza'],
+]
 
 const teamSetup0325 = [
   ['Demiurge Delta','Dianne'],
@@ -17,7 +26,52 @@ const teamSetup0325 = [
 
 const versions: Record<string, { label: string; content: React.ReactNode }>= {
   default: {
-    label: 'March 2025 Version',
+      label: 'July 2025 Version',
+      content: (
+        <>
+          <GuideHeading level={3}>Strategy Overview</GuideHeading>
+          <GuideHeading level={4}>Deep Sea Guardian moveset</GuideHeading>
+          <ul className="list-disc list-inside text-neutral-300 mb-4">
+            <li><strong>S1</strong>: AoE, <EffectInlineTag name="BT_DOT_BLEED" type="debuff" /> 3 turns. <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> if only 1 target.</li>
+            <li><strong>S2</strong>: AoE, 2 <EffectInlineTag name="BT_DOT_BLEED_IR" type="debuff" /> 3 turns (ignore immunity).</li>
+            <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> 9 turns. <EffectInlineTag name="BT_DETONATE" type="debuff" /> all <EffectInlineTag name="BT_DOT_BLEED" type="debuff" />.</li>
+            <li><strong>Passive</strong>: When any character with <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> gains a turn, their Ultimate Skill cooldown is reduced by 1 turn, regardless of whether they are an ally or enemy.</li>
+            <li><strong>Passive</strong>: Reduces enemies effectiveness by 90%.</li>
+            <li><strong>Passive</strong>: Increases caster’s<EffectInlineTag name="BT_DOT_BLEED" type="debuff" /> damage by 100%.</li>
+            <li><strong>Passive</strong>: At the end of the caster’s turn, deal 10% of target’s Max Health as Fixed damage to enemies without any buffs.</li>
+            <li><strong>Passive</strong>: Increases damage taken from <ClassInlineTag name='Striker' /> and reduces damage taken from attacks that target all enemies.</li>
+            <li><strong>Passive</strong>: <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> and <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> cannot exceed 10 000.</li>
+            <li><strong>Passive</strong>: Greatly increases damage dealt inversely proportional to the number of targets.</li>
+            <li><strong>Enrage</strong>:  Every 3 turns. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> and <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" /> and recovers weakness gauge by 10%.</li>
+            <li><strong>Enrage Ultimate</strong>: AoE, heavy damage.</li>
+          </ul>
+          <hr className="my-6 border-neutral-700" />
+          <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advices</h3>
+          <p>You want to remove <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> from the boss as soon as possible with <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> or <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" />.</p>
+          <p>You can prevent the boss from buffing himself with <EffectInlineTag name="BT_SEALED" type="debuff" /> but your unit must be around 290 Speed.</p>
+          <p>You want at least one unit that can AoE buff your team to prevent the boss’s <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" />.</p>
+          <hr className="my-6 border-neutral-700" />
+          <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Recommended Characters</h3>
+          <ul className="list-disc list-inside text-neutral-300 mb-4">
+            <li><CharacterLinkCard name="Kanon" /> <CharacterLinkCard name="Poolside Trickster Regina" />: Essential pick because of the score bonus.</li>
+            <li><CharacterLinkCard name="Stella" /> <CharacterLinkCard name="Caren" /> <CharacterLinkCard name="Poolside Trickster Regina" />: <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> boss’s <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
+            <li><CharacterLinkCard name="Aer" /> <CharacterLinkCard name="Francesca" /> <CharacterLinkCard name="Kappa" /> <CharacterLinkCard name="Eliza" /> <CharacterLinkCard name="Regina" />: <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> boss’s <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
+            <li><CharacterLinkCard name="Delta" /> : <ClassInlineTag name='Striker' /> with <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> (since the boss is fast).</li>
+            <li><CharacterLinkCard name="Ryu Lion" /> : to buff your team with <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" />.</li>
+            <li><CharacterLinkCard name="Monad Eva" /> : <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> and <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
+          </ul>
+          <hr className="my-6 border-neutral-700" />
+          <RecommendedTeam team={teamSetup0725} />
+          <hr className="my-6 border-neutral-700" />
+          <p className="text-neutral-400 text-sm italic mt-2">
+          Run provided by <span className="text-white font-semibold">Sevih</span> (23/07/2025)
+        </p>
+          <YoutubeEmbed videoId="ScFXrrOeVNk" title="Deep Sea Guardian - Joint Challenge - Very Hard Mode by Sevih" />
+        </>
+      ),
+    },
+  mars2025: {
+    label: 'Legacy (March 2025 Version)',
     content: (
       <>
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Strategy Overview</h3>
@@ -50,8 +104,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }>= {
         <RecommendedTeam team={teamSetup0325} />
       </>
     ),
-  },
-  
+  },  
   legacy2024: {
     label: 'Legacy (2024 Video)',
     content: (

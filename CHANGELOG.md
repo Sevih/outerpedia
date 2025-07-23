@@ -1,3 +1,7 @@
+## 🛠 Deep Sea Guardian Update (2025-07-23)
+- [Joint boss Deep Sea Guardian](/guides/joint-boss/deep-sea-guardian) has been updated for July 2025 version.
+
+
 ## 🐛 Tier List major change (2025-06-24)
 - To avoid confusion and better reflect performance differences, all 1★ and 2★ units are now automatically demoted by one tier in the tier list.
 - Example: A 2★ unit originally rated B will now appear as C

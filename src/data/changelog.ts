@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-07-23",
+    title: "Deep Sea Guardian Update",
+    type: "update",
+    content: [
+      "- [Joint boss Deep Sea Guardian](/guides/joint-boss/deep-sea-guardian) has been updated for July 2025 version.",
+    ],
+  },
+  {
     date: "2025-07-16",
     title: "Dignity of the Golden Kingdom Guild Raid",
     type: "update",
