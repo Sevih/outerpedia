@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import * as Tooltip from '@radix-ui/react-tooltip'
+import * as HoverCard from '@radix-ui/react-hover-card'; // ✅ On utilise HoverCard directement
 import React from 'react'
 
 import ee from '@/data/ee.json'
@@ -34,6 +34,9 @@ type BaseItem = {
   effect_desc1?: string
   effect_desc4?: string
   class?: string | null
+  source?: string | null
+  boss?: string | null
+  mode?: string | null
 }
 
 export default function EquipmentInlineTag({ name, type }: Props) {
@@ -89,7 +92,12 @@ export default function EquipmentInlineTag({ name, type }: Props) {
     case 'set': {
       const match = sets.find((s) => s.name === name)
       if (match) {
-        item = { name: match.name }
+        item = {
+          name: match.name,
+          source: match.source ?? null,
+          boss: match.boss ?? null,
+          mode: match.mode ?? null,
+        }
         iconPath = `/images/ui/effect/TI_Icon_Set_Enchant_${match.set_icon}.webp`
 
         const lines2 = []
@@ -133,55 +141,78 @@ export default function EquipmentInlineTag({ name, type }: Props) {
   if (!item) return <span className="text-red-500">{name}</span>
 
   return (
-    <Tooltip.Provider delayDuration={0}>
-      <Tooltip.Root>
-        <Tooltip.Trigger asChild>
-          <button type="button" className="inline-flex items-end gap-1 align-bottom">
-            <span className="inline-block w-[24px] h-[24px] relative align-bottom">
-              <Image
-                src={iconPath}
-                alt={item.name}
-                fill
-                sizes="24px"
-                className="object-contain relative z-10"
-              />
-            </span>
-            <span className="underline text-red-500">{item.name}</span>
-          </button>
-        </Tooltip.Trigger>
+    <HoverCard.Root openDelay={0} closeDelay={0}>
+      <HoverCard.Trigger asChild>
+        <button
+          type="button"
+          className="inline-flex items-end gap-1 align-bottom cursor-pointer underline text-red-500"
+        >
+          <span className="inline-block w-[24px] h-[24px] relative align-bottom">
+            <Image
+              src={iconPath}
+              alt={item.name}
+              fill
+              sizes="24px"
+              className="object-contain relative z-10"
+            />
+          </span>
+          <span>{item.name}</span>
+        </button>
+      </HoverCard.Trigger>
 
-        <Tooltip.Portal>
-          <Tooltip.Content
-            side="top"
-            align="center"
-            className="z-50 px-3 py-2 rounded shadow-lg max-w-[300px] flex items-start gap-2 bg-neutral-800"
-          >
-            <div className="flex flex-col">
-              <span className="font-bold text-red-500 text-sm leading-tight">{item.name}
-                {item.class && isValidClass(item.class) && (
-                  <span className="inline-block ml-1 align-middle">
-                    <ClassIcon className={item.class} />
-                  </span>
-                )}
-              </span>
-
-              {type === 'set' ? (
-                customSetTooltip
-              ) : (
-                <>
-                  {effectText && (
-                    <span className="text-white text-xs leading-snug whitespace-pre-line">{effectText}</span>
-                  )}
-                  {subEffect && (
-                    <span className="text-xs text-amber-300 italic mt-1">{subEffect}</span>
-                  )}
-                </>
+      <HoverCard.Portal>
+        <HoverCard.Content
+          side="top"
+          align="center"
+          sideOffset={8}
+          className="z-50 px-3 py-2 rounded shadow-lg max-w-[300px] flex items-start gap-2 bg-neutral-800 outline-none"
+        >
+          <div className="bg-black p-1 rounded shrink-0">
+            <Image
+              src={iconPath}
+              alt={item.name}
+              width={28}
+              height={28}
+              style={{ width: 28, height: 28 }}
+              className="object-contain"
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-white text-sm leading-tight">
+              {item.name}
+              {item.class && isValidClass(item.class) && (
+                <span className="inline-block ml-1 align-middle">
+                  <ClassIcon className={item.class} />
+                </span>
               )}
+            </span>
+
+            {type === 'set' ? (
+              customSetTooltip
+            ) : (
+              <>
+                {effectText && (
+                  <span className="text-white text-xs leading-snug whitespace-pre-line">{effectText}</span>
+                )}
+                {subEffect && (
+                  <span className="text-xs text-amber-300 italic mt-1">{subEffect}</span>
+                )}
+              </>
+            )}
+
+            {/* BLOC AJOUTÉ */}
+            <div className="mt-2">
+              <p className="text-gray-400 font-semibold text-xs">Obtained from : </p>
+              <p className="text-gray-400 text-xs">
+                {item.source} <br />
+                {item.boss || item.mode}
+              </p>
             </div>
-            <Tooltip.Arrow className="fill-neutral-700" />
-          </Tooltip.Content>
-        </Tooltip.Portal>
-      </Tooltip.Root>
-    </Tooltip.Provider>
+
+          </div>
+          <HoverCard.Arrow className="fill-neutral-700 w-3 h-2" />
+        </HoverCard.Content>
+      </HoverCard.Portal>
+    </HoverCard.Root>
   )
 }

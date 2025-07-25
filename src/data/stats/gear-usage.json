@@ -188,7 +188,7 @@
     "name": "Death's Hold",
     "type": "Amulet",
     "class": "Striker",
-    "count": 14,
+    "count": 16,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -199,11 +199,13 @@
       "Epsilon",
       "Francesca",
       "Gnosis Dahlia",
+      "Idith",
       "Kanon",
       "Noa",
       "Poolside Trickster Regina",
       "Rey",
-      "Rin"
+      "Rin",
+      "Sofia"
     ]
   },
   {
@@ -748,16 +750,6 @@
     "characters": [
       "Demiurge Vlada",
       "Gnosis Beth"
-    ]
-  },
-  {
-    "name": "Death Hold",
-    "type": "Amulet",
-    "class": null,
-    "count": 2,
-    "characters": [
-      "Idith",
-      "Sofia"
     ]
   },
   {
