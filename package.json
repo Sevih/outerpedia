@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "1.36.8",
+  "version": "1.36.9",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -48,7 +48,7 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
-    "knip": "^5.62.0",
+    "fast-glob": "^3.3.3",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
     "tree-kill": "^1.2.2",
