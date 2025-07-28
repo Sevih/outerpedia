@@ -23,7 +23,7 @@ export default function GlicysGuide() {
       <GuideHeading level={3}>Strategy Overview</GuideHeading>
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li>Same skills as Special Request Stage 12</li>
-        <li>Gains <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> for 3 turns at 60% HP</li>
+        <li>Gains <EffectInlineTag name="BT_INVINCIBLE_IR" type="buff" /> 1 turn and <EffectInlineTag name="BT_STAT|ST_BUFF_CHANCE_IR" type="buff" /> 3 turns at 60% HP</li>
       </ul>
 
       <hr className="my-6 border-neutral-700" />

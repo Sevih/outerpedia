@@ -84,6 +84,12 @@
         "icon": "SC_Buff_Stat_BuffChance"
     },
     {
+        "name": "BT_STAT|ST_BUFF_CHANCE_IR",
+        "label": "Increased Effectiveness",
+        "description": "Increased Effectiveness by 100%. (Irremovable)",
+        "icon": "IG_Buff_Stat_BuffChance_Interruption"
+    },
+    {
         "name": "BT_STAT|ST_BUFF_RESIST",
         "label": "Increased Resilience",
         "description": "Increased Resilience by 100%",
