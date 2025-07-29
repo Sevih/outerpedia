@@ -4,6 +4,10 @@
       {
         "name": "Rampaging Caracal",
         "mainStat": "ATK%"
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStat": "ATK%"
       }
     ],
     "Amulet": [
@@ -18,11 +22,11 @@
       ]
     ],
     "SubstatPrio": "SPD>>ATK>CHC>CHD",
-    "Note": "", 
+    "Note": "",
     "Talisman": [
-      "Sage's Charm",
       "Rogue's Charm",
-      "Executionner's Charm"
+      "Executionner's Charm",
+      "Sage's Charm"
     ]
   }
 }

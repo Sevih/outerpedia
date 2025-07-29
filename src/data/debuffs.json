@@ -84,6 +84,12 @@
         "icon": "SC_Buff_Effect_Freeze"
     },
     {
+        "name": "BT_FREEZE_IR",
+        "label": "Frozen",
+        "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time. (Irremovable)",
+        "icon": "IG_Buff_Effect_Freeze_Interruption_D"
+    },
+    {
         "name": "BT_STONE",
         "label": "Petrified",
         "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",

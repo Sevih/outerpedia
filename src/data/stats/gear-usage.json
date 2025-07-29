@@ -3,7 +3,7 @@
     "name": "Speed",
     "type": "Set",
     "class": null,
-    "count": 62,
+    "count": 63,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -31,6 +31,7 @@
       "Epsilon",
       "Eternal",
       "Fatal",
+      "Fran",
       "Francesca",
       "Gnosis Beth",
       "Gnosis Dahlia",
@@ -209,6 +210,27 @@
     ]
   },
   {
+    "name": "Rampaging Caracal",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 13,
+    "characters": [
+      "Akari",
+      "Charlotte",
+      "Edelweiss",
+      "Eliza",
+      "Fatal",
+      "Fran",
+      "Holy Night's Blessing Dianne",
+      "Maxie",
+      "Notia",
+      "Skadi",
+      "Stella",
+      "Tamara",
+      "Valentine"
+    ]
+  },
+  {
     "name": "Thumping Knuckle Dusters",
     "type": "Weapon",
     "class": "Mage",
@@ -271,45 +293,6 @@
     ]
   },
   {
-    "name": "Rampaging Caracal",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 12,
-    "characters": [
-      "Akari",
-      "Charlotte",
-      "Edelweiss",
-      "Eliza",
-      "Fatal",
-      "Holy Night's Blessing Dianne",
-      "Maxie",
-      "Notia",
-      "Skadi",
-      "Stella",
-      "Tamara",
-      "Valentine"
-    ]
-  },
-  {
-    "name": "Combination Simulator",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 11,
-    "characters": [
-      "Akari",
-      "Charlotte",
-      "Demiurge Vlada",
-      "Eliza",
-      "Fatal",
-      "Gnosis Beth",
-      "Ryu Lion",
-      "Skadi",
-      "Stella",
-      "Tamara",
-      "Valentine"
-    ]
-  },
-  {
     "name": "Violent Sledgehammer",
     "type": "Weapon",
     "class": "Striker",
@@ -325,6 +308,42 @@
       "Kanon",
       "Rhona",
       "Vlada"
+    ]
+  },
+  {
+    "name": "Absolute Music",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 10,
+    "characters": [
+      "Akari",
+      "Charlotte",
+      "Edelweiss",
+      "Fran",
+      "Holy Night's Blessing Dianne",
+      "Maxie",
+      "Ryu Lion",
+      "Skadi",
+      "Stella",
+      "Valentine"
+    ]
+  },
+  {
+    "name": "Combination Simulator",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 10,
+    "characters": [
+      "Akari",
+      "Demiurge Vlada",
+      "Eliza",
+      "Fatal",
+      "Gnosis Beth",
+      "Ryu Lion",
+      "Skadi",
+      "Stella",
+      "Tamara",
+      "Valentine"
     ]
   },
   {
@@ -376,22 +395,6 @@
       "Omega Nadja",
       "Sterope",
       "Veronica"
-    ]
-  },
-  {
-    "name": "Absolute Music",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 8,
-    "characters": [
-      "Akari",
-      "Edelweiss",
-      "Holy Night's Blessing Dianne",
-      "Maxie",
-      "Ryu Lion",
-      "Skadi",
-      "Stella",
-      "Valentine"
     ]
   },
   {
@@ -662,6 +665,17 @@
     ]
   },
   {
+    "name": "Gorgon's Wrath [Ranger]",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 3,
+    "characters": [
+      "Demiurge Vlada",
+      "Fran",
+      "Skadi"
+    ]
+  },
+  {
     "name": "Barrage of Truth",
     "type": "Weapon",
     "class": "Ranger",
@@ -730,16 +744,6 @@
     "characters": [
       "Demiurge Delta",
       "Liselotte"
-    ]
-  },
-  {
-    "name": "Gorgon's Wrath [Ranger]",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 2,
-    "characters": [
-      "Demiurge Vlada",
-      "Skadi"
     ]
   },
   {

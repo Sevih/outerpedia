@@ -22,8 +22,8 @@ const teams = {
     icon: 'SC_Buff_Counter.webp',
     setup: [
       ['Delta'],
-      ['Cindy'],
-      ['Rey'],
+      ['Fran'],
+      ['Rey','Rhona'],
       ['Ame']
     ]
   }
@@ -63,10 +63,10 @@ export default function FulMiNationAssaultSuitGuide() {
 
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="mb-2 text-neutral-300">
-          A sample video of the Counter team.
+        <p className="text-neutral-400 text-sm italic mt-2">
+          Run provided by <span className="text-white font-semibold">XuRenChao</span> (29/07/2025)
         </p>
-        <YoutubeEmbed videoId="g7rmQGPtaiQ" title="Ful.Mi.NATION Assault Suit - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
+        <YoutubeEmbed videoId="lt4osbmszzY" title="Ful.Mi.NATION Assault Suit - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
       </div>
     </div>
   )

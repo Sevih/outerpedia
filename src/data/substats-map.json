@@ -1066,7 +1066,7 @@
       ],
       "amuletSub": [
         {
-          "name": "Combination Simulator",
+          "name": "Absolute Music",
           "mainStat": [
             "SPD"
           ]
@@ -2783,6 +2783,41 @@
       ],
       "armorSets": [
         "Critical Strike"
+      ]
+    }
+  },
+  "fran": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
       ]
     }
   },

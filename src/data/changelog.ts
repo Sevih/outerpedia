@@ -26,6 +26,14 @@ function migrateChangelogEntries(
 export const oldChangelog = [
   {
     date: "2025-07-29",
+    title: "Revenant Dragon Harshna update",
+    type: "update",
+    content: [
+      "- Guide is up to date for july 2025 version. Learn More [here](/guides/world-boss/harsha)",
+    ],
+  },
+  {
+    date: "2025-07-29",
     title: "New Hero Fran",
     type: "update",
     content: [
