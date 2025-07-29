@@ -110,7 +110,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
         <hr className="my-6 border-neutral-700" />
         <TeamTabSelector teams={teams} />
         <hr className="my-6 border-neutral-700" />
-        <YoutubeEmbed videoId="13vcQM1kMEg " title="Harshna - World Boss - SSS - Extreme League by Sevih" />
+        <YoutubeEmbed videoId="13vcQM1kMEg" title="Harshna - World Boss - SSS - Extreme League by Sevih" />
 
       </>
     ),
