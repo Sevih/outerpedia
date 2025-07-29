@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-07-29",
+    title: "New Hero Fran",
+    type: "update",
+    content: [
+      "- Fran, a genius gamer who grants Counterattack to all allies and reduces all of the Unique Resource count on the target.",
+      "- Learn More [here](/characters/fran)",
+    ],
+  },
+  {
     date: "2025-07-23",
     title: "Deep Sea Guardian Update",
     type: "update",
