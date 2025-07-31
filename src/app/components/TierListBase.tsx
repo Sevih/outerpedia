@@ -175,59 +175,6 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
                 {mode === 'ee10' && 'Exclusive Equipment Priority (+10)'}
             </h1>
 
-            {/* JSON-LD SEO */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "ItemList",
-                        "name":
-                            mode === 'pve'
-                                ? "Outerplane PvE Tier List"
-                                : mode === 'pvp'
-                                    ? "Outerplane PvP Tier List"
-                                    : mode === 'ee0'
-                                        ? "Exclusive Equipment Priority (+0)"
-                                        : "Exclusive Equipment Priority (+10)",
-                        "url":
-                            mode === 'pve'
-                                ? "https://outerpedia.com/tools/tierlistpve"
-                                : mode === 'pvp'
-                                    ? "https://outerpedia.com/tools/tierlistpvp"
-                                    : mode === 'ee0'
-                                        ? "https://outerpedia.com/tools/ee-priority"
-                                        : "https://outerpedia.com/tools/ee-priority-10",
-                        "description":
-                            mode === 'pve'
-                                ? "Discover the best characters in Outerplane sorted by DPS, Support, and Sustain roles. PvE Tier list curated by the EvaMains community."
-                                : mode === 'pvp'
-                                    ? "Discover the best characters in Outerplane sorted by DPS, Support, and Sustain roles. PvP Tier list curated by the EvaMains community."
-                                    : mode === 'ee0'
-                                        ? "Exclusive Equipment Priority based on level 0 base effects only, for optimal unlock order."
-                                        : "Exclusive Equipment Priority based on full evaluation including +10 bonus effects.",
-                        "itemListElement":
-                            (mode === 'pve' || mode === 'pvp'
-                                ? characters.map((char, index) => ({
-                                    "@type": "ListItem",
-                                    "position": index + 1,
-                                    "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
-                                    "name": char.Fullname,
-                                    "image": `https://outerpedia.com/images/characters/portrait/CT_${char.ID}.webp`,
-                                }))
-                                : Object.entries(equipments).map(([slug, ee], index) => ({
-                                    "@type": "ListItem",
-                                    "position": index + 1,
-                                    "url": `https://outerpedia.com/characters/${slug}`,
-                                    "name": ee.name,
-                                    "image": `https://outerpedia.com/images/characters/portrait/CT_${slug}.webp`,
-                                    "description": ee.effect,
-                                })))
-                    }),
-                }}
-            />
-
-
             {/* Bloc de prévention */}
             <p className="bg-yellow-100 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100 w-3/5 mx-auto mb-4">
                 {mode === 'pve' && (
@@ -412,11 +359,20 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
                                                 )
                                             } else {
                                                 const [slug, ee] = item as [string, Equipment]
-                                                return (
+                                                const char = characterMap[slug] || characterMap[toKebabCase(slug)]
+                                                if (!char) return false
+
+                                                const matchesSearch =
                                                     ee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                                                     slug.toLowerCase().includes(searchTerm.toLowerCase())
-                                                )
+
+                                                const matchesElement = elementFilter.length === 0 || elementFilter.includes(char.Element)
+                                                const matchesClass = classFilter.length === 0 || classFilter.includes(char.Class)
+                                                const matchesRarity = rarityFilter.length === 0 || rarityFilter.includes(char.Rarity)
+
+                                                return matchesSearch && matchesElement && matchesClass && matchesRarity
                                             }
+
                                         })
                                         .map((item, index) => {
                                             let char: Character | undefined
