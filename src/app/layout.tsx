@@ -81,6 +81,8 @@ export default function RootLayout({
       <head suppressHydrationWarning>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
+        {/* ⚡ Preload Hero image pour LCP */}
+        <link rel="preload" as="image" href="/images/ui/og_home_no_text.webp" />
       </head>
 
       <body className={`${inter.className} text-white`}>

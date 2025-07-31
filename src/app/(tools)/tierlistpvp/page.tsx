@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import TierListPage from './tierlistClient'
-import characters from '@/data/_allCharacters.json' // fichier statique rassemblant tous les persos
-import type { Character } from '@/types/character'
+import type { CharacterLite } from '@/types/character'
+import charactersData from '@/data/_allCharacters.json'
 import { getMonthYear } from '@/utils/getMonthYear';
+import TierListBase from '@/app/components/TierListBase'
+import { Suspense } from 'react'
 
 const monthYear = getMonthYear();
 
@@ -35,6 +36,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default function TierListPageWrapper() {
-  return <TierListPage characters={characters as Character[]} />
+export default function PvPTierList() {
+  const characters = charactersData as CharacterLite[]
+
+  return (
+    <Suspense fallback={<div>Loading Tier List...</div>}>
+      <TierListBase characters={characters} mode="pvp" />
+    </Suspense>
+  )
 }
+

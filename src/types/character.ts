@@ -66,3 +66,5 @@ export interface Character {
     };
   };
 }
+
+export type CharacterLite = Omit<Character, 'skills'>

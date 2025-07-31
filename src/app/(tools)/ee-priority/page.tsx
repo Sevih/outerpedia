@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import eeData from '@/data/ee.json'
-import EeTierClient from './eeTierClient'
+import TierListBase from '@/app/components/TierListBase'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Exclusive Equipment Priority – Outerpedia',
@@ -32,5 +33,9 @@ export const metadata: Metadata = {
 }
 
 export default function EeTierPage() {
-  return <EeTierClient equipments={eeData} />
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TierListBase equipments={eeData} mode="ee0" />
+    </Suspense>
+  )
 }
