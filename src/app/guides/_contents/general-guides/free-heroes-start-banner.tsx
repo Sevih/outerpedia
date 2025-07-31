@@ -160,7 +160,7 @@ export default function BeginnerGuide() {
                 Like everythings previously : Focus on unlocking new characters — doppelgängers handle transcendence. New units join the custom pool ~3.5 months after release.
             </p>
             <p className="text-neutral-400 text-sm italic mb-4">
-                Note: Some heroes are not available in the custom banner yet, as they haven&apos;t been out long enough (like Skadi or Luna).
+                Note: Some heroes are not available in the custom banner yet, as they haven&apos;t been out long enough (like Fran).
             </p>
             <p className="text-neutral-400 text-sm italic mb-4">
                 Note: Characters whose names appear in <span className={decoration}>grey</span> can be obtained for free (see above).

@@ -699,5 +699,14 @@
     "second_image": "CM_Adventure_MonadGate",
     "last_updated": "2025-07-04",
     "author": "Sevih"
+  },
+  "timegate-resource": {
+    "category": "general-guides",
+    "title": "Timegated Resources Guide",
+    "description": "Complete guide to Outerplane’s timegated resources — skill books, transistones, special gear materials, and glunite sources.",
+    "icon": "timegate-resource",
+    "second_image": "timegate-resource2",
+    "last_updated": "2025-07-31",
+    "author": "Sevih / Shiraen"
   }
 }

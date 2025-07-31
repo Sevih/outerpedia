@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-07-31",
+    title: "Timegated Resources Guide",
+    type: "feature",
+    content: [
+      "- Complete guide to Outerplane’s timegated resources — skill books, transistones, special gear materials, and glunite sources. Learn More [here](/guides/general-guides/timegate-resource)",
+    ],
+  },
+  {
     date: "2025-07-29",
     title: "Revenant Dragon Harshna update",
     type: "update",
