@@ -37,7 +37,7 @@ export const oldChangelog = [
     title: "Revenant Dragon Harshna update",
     type: "update",
     content: [
-      "- Guide is up to date for july 2025 version. Learn More [here](/guides/world-boss/harsha)",
+      "- Guide is up to date for july 2025 version. Learn More [here](/guides/world-boss/harshna)",
     ],
   },
   {

@@ -40,7 +40,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
     content: (
       <>
         <GuideHeading level={3}>Strategy Overview</GuideHeading>
-        <GuideHeading level={4}>Phase 1 : Revenant Dragon Harsna moveset</GuideHeading>
+        <GuideHeading level={4}>Phase 1 : Revenant Dragon Harshna moveset</GuideHeading>
         <ul className="list-disc list-inside text-neutral-300 mb-4">
           <li><strong>S1</strong>: Single, <EffectInlineTag name="BT_DOT_POISON" type="debuff" />. Prioritize front lane.</li>
           <li><strong>S2</strong>: AoE, <EffectInlineTag name="BT_DOT_POISON_IR" type="debuff" /> 2 turns</li>
