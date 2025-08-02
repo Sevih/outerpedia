@@ -1188,7 +1188,7 @@
 		"effect": "Right after using Dopamine Boost, Counterattack, Revenge, or Agile Responde Cannot be triggered.",
 		"effect10": "When Using Hidden Event, increases Buff duration for all allies by +1 turn(s)",
 		"icon_effect": "TI_Icon_UO_Accessary_07",
-		"rank": "",
+		"rank": "D",
 		"buff": ["IG_Buff_BuffdurationIncrease"],
 		"debuff": ["BT_SEAL_COUNTER"]
 	}

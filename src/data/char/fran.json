@@ -11,8 +11,8 @@
   "limited": null,
   "role": "support",
   "gift": "Luxury",
-  "rank": null,
-  "rank_pvp": null,
+  "rank": "A",
+  "rank_pvp": "C",
   "Class": "Ranger",
   "SubClass": "Tactician",
   "transcend": {
