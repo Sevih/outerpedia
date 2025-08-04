@@ -288,14 +288,14 @@
     "author": "Shiraen",
     "second_image": "masterlessAL2"
   },
-  "calamarisAL": {
+  "calamariAL": {
     "category": "adventure-license",
     "title": "Grand Calamari",
     "description": "Boss strategy guide",
-    "icon": "calamarisAL",
+    "icon": "calamariAL",
     "last_updated": "2024-11-10",
     "author": "Shiraen",
-    "second_image": "calamarisAL2"
+    "second_image": "calamariAL2"
   },
   "toddlerAL": {
     "category": "adventure-license",
@@ -506,7 +506,7 @@
   },
   "S2-1-10": {
     "category": "adventure",
-    "title": "S2 Hard 1-10 : Grand Calamri",
+    "title": "S2 Hard 1-10 : Grand Calamari",
     "description": "Boss strategy guide.",
     "icon": "S2-1-10",
     "last_updated": "2025-05-25",
