@@ -25,7 +25,7 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
-    date: "2025-07-31",
+    date: "2025-08-09",
     title: "OUTERPLANE Service Transfer to VAGAMES",
     type: "update",
     content: [
