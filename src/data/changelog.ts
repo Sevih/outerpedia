@@ -26,6 +26,16 @@ function migrateChangelogEntries(
 export const oldChangelog = [
   {
     date: "2025-07-31",
+    title: "OUTERPLANE Service Transfer to VAGAMES",
+    type: "update",
+    content: [
+      "-  📢 <strong>Service Transfer Incoming:</strong> OUTERPLANE will transfer to <strong>VAGAMES</strong> on <strong>September 23, 2025</strong>.",  
+      "- Make sure to complete the transfer process to keep your account and data.",
+      "- [View Transfer Procedure](/guides/service-transfer)",
+    ],
+  },
+  {
+    date: "2025-07-31",
     title: "Timegated Resources Guide",
     type: "feature",
     content: [
