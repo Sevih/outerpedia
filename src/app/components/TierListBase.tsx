@@ -54,30 +54,51 @@ type TierListBaseProps = {
 }
 
 
+type TabItem = {
+    label: string
+    value: TabKey
+    icon: string
+    color?: string
+}
+
 const TABS = [
+    { label: 'All', value: 'all', icon: '/images/ui/all.webp', color: '#000000' },
     { label: 'DPS', value: 'dps', icon: '/images/ui/dps.webp' },
     { label: 'Support', value: 'support', icon: '/images/ui/support.webp' },
     { label: 'Sustain', value: 'sustain', icon: '/images/ui/sustain.webp' },
-] as const
+] satisfies readonly TabItem[];
+
+type TabKey = 'all' | 'dps' | 'support' | 'sustain'
 
 const ELEMENTS: (ElementType | 'All')[] = ['All', 'Fire', 'Water', 'Earth', 'Light', 'Dark']
 const CLASSES: (classtipe | 'All')[] = ['All', 'Striker', 'Defender', 'Ranger', 'Healer', 'Mage']
 const RARITIES = [1, 2, 3]
 
 const tabColors = {
+    all: '#facc15',     // violet par exemple
     dps: '#ef4444',
     support: '#3b82f6',
     sustain: '#22c55e',
 } as const
 
+
 const RANKS_PVE = ['S', 'A', 'B', 'C', 'D', 'E'] as const
 const RANKS_PVP = ['S', 'A', 'B', 'C', 'D'] as const
 const RANKS_EE = ['S', 'A', 'B', 'C', 'D'] as const
 
+const PVE_RANKS = ['S', 'A', 'B', 'C', 'D', 'E'] as const
+type PveRank = typeof PVE_RANKS[number]
+
+function demoteOnce(rank: string): PveRank {
+    const i = PVE_RANKS.indexOf((rank as PveRank) ?? 'E')
+    return PVE_RANKS[Math.min(i < 0 ? PVE_RANKS.length - 1 : i + 1, PVE_RANKS.length - 1)]
+}
+
 export default function TierListBase({ characters = [], equipments = {}, mode }: TierListBaseProps) {
     const searchParams = useSearchParams()
-    const tabParam = searchParams.get('tab') as 'dps' | 'support' | 'sustain' | null
-    const [activeTab, setActiveTab] = useState<'dps' | 'support' | 'sustain'>('dps')
+    const tabParam = searchParams.get('tab') as TabKey | null
+    const [activeTab, setActiveTab] = useState<TabKey>('all')
+
 
     const [searchTerm, setSearchTerm] = useState('')
     const [classFilter, setClassFilter] = useState<string[]>([])
@@ -88,20 +109,22 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
 
     // tab depuis l’URL
     useEffect(() => {
-        if (tabParam && ['dps', 'support', 'sustain'].includes(tabParam)) {
+        if (tabParam && ['all', 'dps', 'support', 'sustain'].includes(tabParam)) {
             setActiveTab(tabParam)
         }
     }, [tabParam])
 
+
     const handleTabChange = (key: typeof activeTab) => {
         setActiveTab(key)
         const params = new URLSearchParams(window.location.search)
-        if (key === 'dps') params.delete('tab')
+        if (key === 'all') params.delete('tab')   // ← au lieu de 'dps'
         else params.set('tab', key)
         const query = params.toString()
         const newUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname
         window.history.replaceState(null, '', newUrl)
     }
+
 
     useEffect(() => {
         if (elementFilter.length === ELEMENTS.length - 1) setElementFilter([])
@@ -126,20 +149,29 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
         )
 
         const roleGroups = {
+            all: filtered, // ← on prend tous les persos filtrés
             dps: filtered.filter(c => c.role?.toLowerCase() === 'dps'),
             support: filtered.filter(c => c.role?.toLowerCase() === 'support'),
             sustain: filtered.filter(c => c.role?.toLowerCase() === 'sustain'),
         }
         const current = roleGroups[activeTab]
 
+
         const rankKey = getRankKey(mode) as keyof CharacterDisplay
 
         grouped = rankOrder.reduce<Record<string, CharacterDisplay[]>>((acc, rank) => {
             acc[rank] = current
-                .filter(c => (c[rankKey] as string || 'E') === rank)
+                .filter(c => {
+                    const base = (c[rankKey] as string) || 'E'
+                    // En PvE, rétrograde d’un rang si 1★ ou 2★ ; sinon garde le rang
+                    const effective =
+                        mode === 'pve' && c.Rarity <= 2 ? demoteOnce(base) : (base as PveRank)
+                    return effective === rank
+                })
                 .sort((a, b) => a.Fullname.localeCompare(b.Fullname))
             return acc
         }, {})
+
 
 
 
@@ -303,11 +335,12 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
             {(mode === 'pve' || mode === 'pvp') && (
                 <div className="flex justify-center mb-8">
                     <AnimatedTabs
-                        tabs={TABS.map(t => ({ key: t.value, label: t.label, icon: t.icon }))}
+                        tabs={TABS.map(t => ({ key: t.value, label: t.label, icon: t.icon, color: t.color }))}
                         selected={activeTab}
                         onSelect={handleTabChange}
                         pillColor={tabColors[activeTab]}
                     />
+
                 </div>
             )}
 
@@ -408,7 +441,7 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
                                                                 width={120}
                                                                 height={231}
                                                                 className="object-cover rounded"
-                                                                priority={mode !== 'ee0' && activeTab === 'dps' && index <= 7}
+                                                                priority={mode !== 'ee0' && ['dps', 'all'].includes(activeTab) && index <= 7}
                                                             />
                                                         </div>
 
