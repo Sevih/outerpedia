@@ -45,9 +45,9 @@ export function AnimatedTabs<T extends string>({
 
   return (
     <div
-      className={`relative rounded-full bg-gray-100 dark:bg-gray-800 p-1 ${scrollable ? 'overflow-x-auto whitespace-nowrap' : 'flex-wrap justify-center'
-        }`}
-    >
+  className={`relative rounded-full bg-gray-800 p-1 ${scrollable ? 'overflow-x-auto whitespace-nowrap' : 'flex-wrap justify-center'}`}
+>
+
       <div className="relative overflow-hidden">
         {style && (
           <motion.div
