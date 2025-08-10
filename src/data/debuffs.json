@@ -19,7 +19,7 @@
     },
     {
         "name": "BT_SEAL_COUNTER",
-        "label": "Uncounterrable",
+        "label": "Uncounterable",
         "description": "Negates enemy reactive strikes: Counterattack, Revenge, or Agile Response.",
         "icon": "IG_Buff_Seal_Counter"
     },
@@ -296,7 +296,7 @@
     {
         "name": "BT_SEALED_RESURRECTION",
         "label": "Extinction",
-        "description": "Enemies killed by this skill cannot be Resurected or Revived",
+        "description": "Enemies killed by this skill cannot be Resurrected or Revived",
         "icon": "IG_Buff_Seal_Ressurection"
     },
     {
@@ -308,7 +308,7 @@
     {
         "name": "BT_DETONATE",
         "label": "Detonate",
-        "description": "Activates certain debuffs immediatly. Magnitude determined by the number of turns remaining and stacks applied.",
+        "description": "Activates certain debuffs immediately. Magnitude determined by the number of turns remaining and stacks applied.",
         "icon": "SC_Buff_detonate"
     },
     {
@@ -332,7 +332,7 @@
     {
         "name": "UNIQUE_IRREGULAR_INFECTION",
         "label": "Irregular Infection",
-        "description": "At the start of the turn, the caster's Enhancement Effect duration are reduced by 1 turn, and debuff durations of all ennemies are reduced by 1 turn.\nApplies to only one unit per team. If the effect is applied to a new target, the previous target's effect is removed.\nRemoved upon caster's death (Irremovable)",
+        "description": "At the start of the turn, the caster's Enhancement Effect duration are reduced by 1 turn, and debuff durations of all enemies are reduced by 1 turn.\nApplies to only one unit per team. If the effect is applied to a new target, the previous target's effect is removed.\nRemoved upon caster's death (Irremovable)",
         "icon": "IG_Buff_Effect_2000102_Interruption_D"
     }
     ,
