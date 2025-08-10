@@ -78,7 +78,7 @@ export function AnimatedTabs<T extends string>({
               className={`shrink-0 min-w-[80px] ${compact ? 'px-2 py-1 text-xs' : 'px-4 py-2 text-sm'
                 } rounded-full font-medium flex items-center gap-2 transition-colors ${selected === tab.key
                   ? 'text-white'
-                  : 'text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  : 'text-gray-300 hover:bg-gray-700'
                 }`}
             >
               {tab.icon && (
