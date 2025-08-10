@@ -68,18 +68,21 @@ export function AnimatedTabs<T extends string>({
           className={`relative z-10 flex items-center ${scrollable ? 'overflow-x-auto scrollbar-none whitespace-nowrap' : 'flex-wrap justify-center'
             }`}
         >
-        {tabs.map((tab) => {
+{tabs.map((tab) => {
   const isSelected = selected === tab.key
-  const textColor = isSelected ? (tab.color ?? 'white') : 'white'
 
-  // si texte noir → icône noire (suppose icône blanche à la base)
+  // couleur inline UNIQUEMENT si sélectionné + tab.color fourni
+  const styleColor = isSelected && tab.color ? { color: tab.color } : undefined
+
+  // classes texte selon état + thème
+  const textClass = isSelected
+    ? (tab.color ? '' : 'text-white')              // actif: blanc par défaut si pas de color
+    : 'text-gray-800 dark:text-white'              // inactif: noir en light, blanc en dark
+
+  // icône noire si texte noir sélectionné
   const wantsBlackIcon =
-    isSelected &&
-    !!tab.color &&
-    ['#000', '#000000', 'black'].includes(tab.color.toLowerCase())
-
+    isSelected && !!tab.color && ['#000','#000000','black'].includes(tab.color.toLowerCase())
   const iconStyle = wantsBlackIcon ? { filter: 'brightness(0)' } : undefined
-  // (brightness(0) rend l’icône noire; tu peux aussi faire: { filter: 'invert(1)' } si l’icône est noire à la base)
 
   return (
     <button
@@ -88,8 +91,8 @@ export function AnimatedTabs<T extends string>({
       onClick={() => onSelect(tab.key)}
       className={`shrink-0 min-w-[80px] ${compact ? 'px-2 py-1 text-xs' : 'px-4 py-2 text-sm'}
         rounded-full font-medium flex items-center gap-2 transition-colors
-        ${!isSelected ? 'hover:bg-gray-200 dark:hover:bg-gray-700' : ''}`}
-      style={{ color: textColor }}
+        ${textClass} ${!isSelected ? 'hover:bg-gray-200 dark:hover:bg-gray-700' : ''}`}
+      style={styleColor}
     >
       {tab.icon && (
         <Image
@@ -105,6 +108,7 @@ export function AnimatedTabs<T extends string>({
     </button>
   )
 })}
+
 
 
 
