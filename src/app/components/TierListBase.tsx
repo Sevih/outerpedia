@@ -62,7 +62,7 @@ type TabItem = {
 }
 
 const TABS = [
-    { label: 'All', value: 'all', icon: '/images/ui/all.webp', color: '#000000' },
+    { label: 'All', value: 'all', icon: '/images/ui/all.webp' },
     { label: 'DPS', value: 'dps', icon: '/images/ui/dps.webp' },
     { label: 'Support', value: 'support', icon: '/images/ui/support.webp' },
     { label: 'Sustain', value: 'sustain', icon: '/images/ui/sustain.webp' },
@@ -75,7 +75,7 @@ const CLASSES: (classtipe | 'All')[] = ['All', 'Striker', 'Defender', 'Ranger', 
 const RARITIES = [1, 2, 3]
 
 const tabColors = {
-    all: '#facc15',     // violet par exemple
+    all: '#ff8c00',     // violet par exemple
     dps: '#ef4444',
     support: '#3b82f6',
     sustain: '#22c55e',
@@ -335,7 +335,7 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
             {(mode === 'pve' || mode === 'pvp') && (
                 <div className="flex justify-center mb-8">
                     <AnimatedTabs
-                        tabs={TABS.map(t => ({ key: t.value, label: t.label, icon: t.icon, color: t.color }))}
+                        tabs={TABS.map(t => ({ key: t.value, label: t.label, icon: t.icon}))}
                         selected={activeTab}
                         onSelect={handleTabChange}
                         pillColor={tabColors[activeTab]}

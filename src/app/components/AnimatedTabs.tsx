@@ -68,42 +68,33 @@ export function AnimatedTabs<T extends string>({
           className={`relative z-10 flex items-center ${scrollable ? 'overflow-x-auto scrollbar-none whitespace-nowrap' : 'flex-wrap justify-center'
             }`}
         >
-          {tabs.map((tab) => {
-  const isSelected = selected === tab.key
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              ref={(el) => {
+                if (selected === tab.key) setActiveTabRef(el)
+              }}
+              onClick={() => onSelect(tab.key)}
+              className={`shrink-0 min-w-[80px] ${compact ? 'px-2 py-1 text-xs' : 'px-4 py-2 text-sm'
+                } rounded-full font-medium flex items-center gap-2 transition-colors ${selected === tab.key
+                  ? 'text-white'
+                  : 'text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+            >
+              {tab.icon && (
+                <Image
+                  src={tab.icon}
+                  alt={tab.label}
+                  width={16}
+                  height={16}
+                  style={{ width: 16, height: 16 }}
+                  className="object-contain"
+                />
 
-  const textColor = isSelected
-    ? (tab.color ?? 'white') // si actif → couleur custom ou blanc
-    : 'white'                // si inactif → toujours blanc
-
-  return (
-    <button
-      key={tab.key}
-      ref={(el) => {
-        if (isSelected) setActiveTabRef(el)
-      }}
-      onClick={() => onSelect(tab.key)}
-      className={`shrink-0 min-w-[80px] ${compact ? 'px-2 py-1 text-xs' : 'px-4 py-2 text-sm'}
-        rounded-full font-medium flex items-center gap-2 transition-colors
-        ${!isSelected ? 'hover:bg-gray-200 dark:hover:bg-gray-700' : ''}`}
-      style={{ color: textColor }}
-    >
-      {tab.icon && (
-        <Image
-          src={tab.icon}
-          alt={tab.label}
-          width={16}
-          height={16}
-          style={{ width: 16, height: 16 }}
-          className="object-contain"
-        />
-      )}
-      <span>{tab.label}</span>
-    </button>
-  )
-})}
-
-
-
+              )}
+              <span>{tab.label}</span>
+            </button>
+          ))}
         </div>
       </div>
     </div>
