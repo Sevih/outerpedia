@@ -68,31 +68,24 @@ export function AnimatedTabs<T extends string>({
           className={`relative z-10 flex items-center ${scrollable ? 'overflow-x-auto scrollbar-none whitespace-nowrap' : 'flex-wrap justify-center'
             }`}
         >
-{tabs.map((tab) => {
+          {tabs.map((tab) => {
   const isSelected = selected === tab.key
 
-  // couleur inline UNIQUEMENT si sélectionné + tab.color fourni
-  const styleColor = isSelected && tab.color ? { color: tab.color } : undefined
-
-  // classes texte selon état + thème
-  const textClass = isSelected
-    ? (tab.color ? '' : 'text-white')              // actif: blanc par défaut si pas de color
-    : 'text-gray-800 dark:text-white'              // inactif: noir en light, blanc en dark
-
-  // icône noire si texte noir sélectionné
-  const wantsBlackIcon =
-    isSelected && !!tab.color && ['#000','#000000','black'].includes(tab.color.toLowerCase())
-  const iconStyle = wantsBlackIcon ? { filter: 'brightness(0)' } : undefined
+  const textColor = isSelected
+    ? (tab.color ?? 'white') // si actif → couleur custom ou blanc
+    : 'white'                // si inactif → toujours blanc
 
   return (
     <button
       key={tab.key}
-      ref={(el) => { if (isSelected) setActiveTabRef(el) }}
+      ref={(el) => {
+        if (isSelected) setActiveTabRef(el)
+      }}
       onClick={() => onSelect(tab.key)}
       className={`shrink-0 min-w-[80px] ${compact ? 'px-2 py-1 text-xs' : 'px-4 py-2 text-sm'}
         rounded-full font-medium flex items-center gap-2 transition-colors
-        ${textClass} ${!isSelected ? 'hover:bg-gray-200 dark:hover:bg-gray-700' : ''}`}
-      style={styleColor}
+        ${!isSelected ? 'hover:bg-gray-200 dark:hover:bg-gray-700' : ''}`}
+      style={{ color: textColor }}
     >
       {tab.icon && (
         <Image
@@ -100,7 +93,7 @@ export function AnimatedTabs<T extends string>({
           alt={tab.label}
           width={16}
           height={16}
-          style={{ width: 16, height: 16, ...iconStyle }}
+          style={{ width: 16, height: 16 }}
           className="object-contain"
         />
       )}
@@ -108,8 +101,6 @@ export function AnimatedTabs<T extends string>({
     </button>
   )
 })}
-
-
 
 
 
