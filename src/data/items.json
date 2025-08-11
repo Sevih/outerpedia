@@ -414,6 +414,21 @@
     "name": "Proof of Worth",
     "rarity": "epic",
     "description": "A rare material used for Quirks to enhance heroes through the Adventure License category."
+  },
+  {
+    "name": "Demiurge Selection Ticket",
+    "rarity": "normal",
+    "description": "You can select and recruit one Demiurge Hero. Select 1 of Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, or Monad Eva."
+  },
+  {
+    "name": "“New Beginning” Title",
+    "rarity": "normal",
+    "description": "Consume 1 less Stamina when playing Adventure / Special Request / Skyward Tower."
+  },
+  {
+    "name": "“New Beginning” Profile Frame",
+    "rarity": "normal",
+    "description": "Service Transfer Completion Reward [New Beginning] Frame."
   }
 
 

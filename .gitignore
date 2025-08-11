@@ -26,6 +26,7 @@ src/app/api/admin/
 # production
 /build
 /public/sitemap.xml
+/public/sitemaps*
 TODO.md
 /src/data/_allCharacters.json
 convert_to_webp.bat

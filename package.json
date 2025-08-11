@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,7 +11,7 @@
     "postbuild": "npm run sitemap",
     "start": "next start",
     "lint": "next lint",
-    "sitemap": "node scripts/generate-sitemap.cjs",
+    "sitemap": "node scripts/generateSitemap.cjs",
     "seo-check": "node scripts/seo-check.cjs",
     "generate:allchar": "node scripts/generateAllCharacters.js",
     "generate:gear-stats": "node scripts/generateGearUsageStats.js",
@@ -42,7 +42,7 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.4",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^20",
+    "@types/node": "^20.19.10",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
@@ -53,6 +53,7 @@
     "tailwindcss": "^4.1.4",
     "tree-kill": "^1.2.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
   }
 }
