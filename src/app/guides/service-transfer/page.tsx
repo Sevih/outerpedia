@@ -3,12 +3,195 @@
 import Link from 'next/link'
 import GuideHeading from '@/app/components/GuideHeading'
 import ItemInlineDisplay from '@/app/components/ItemInline'
+import Accordion, { type AccordionItem } from '@/app/components/ui/Accordion'
 
 
 type Step = {
   title: string
   image?: string
   alt?: string
+}
+
+/* --- FAQ Section --- */
+const faqItems: AccordionItem[] = [
+  {
+    key: 'faq-1',
+    title: <>Will I be able to continue using my existing account after the service transfer?</>,
+    content: (
+      <>
+        Yes. Once you enter the transfer code and the data transfer completes, you can keep playing with your existing account.
+        <ul className="mt-2 list-disc pl-5">
+          <li>You need a separate transfer code for <strong>each account and each server</strong>.</li>
+          <li>Codes must be used on the corresponding server. Server changes are not allowed.</li>
+          <li>Ex: A Korea server code <strong>cannot</strong> be used on the Japan server.</li>
+          <li>Ex: A Korea server code <strong>can</strong> be used on the Global 2 server (post-merge).</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    key: 'faq-2',
+    title: <>How do I get the service transfer code?</>,
+    content: (
+      <>
+        <ol className="list-decimal pl-5 space-y-1">
+          <li>After the Aug 12 (Tue) maintenance, log in → tap <strong>Service Transfer</strong> notice → open transfer screen.</li>
+          <li>Review the notes and agree to the terms to apply.</li>
+          <li>Proceed to <strong>Service Transfer Code issuance</strong>.</li>
+        </ol>
+        <p className="mt-2 text-gray-300">
+          If an account has characters on multiple servers, issue a separate code <strong>for each server</strong>.
+        </p>
+      </>
+    ),
+  },
+  {
+    key: 'faq-3',
+    title: <>Can guest accounts also be transferred?</>,
+    content: (
+      <>
+        Transfer codes are <strong>not</strong> issued for guest IDs. Link your account first:
+        <div className="mt-1">Settings → Account → Manage Account → Link Account → then issue the code.</div>
+      </>
+    ),
+  },
+  {
+    key: 'faq-4',
+    title: <>What types of new accounts can be created after the transfer?</>,
+    content: <>You can create/link a VAGAMES account via <strong>Email / Google / Apple</strong>.</>,
+  },
+  {
+    key: 'faq-5',
+    title: <>If I have multiple characters, can all of them be transferred?</>,
+    content: (
+      <>
+        Yes. But if you have characters on multiple servers, you must issue a <strong>separate</strong> code for each server.
+        <div className="mt-1">Ex: Accounts on Korea and Global → get one code per server.</div>
+      </>
+    ),
+  },
+  {
+    key: 'faq-6',
+    title: <>I applied for the transfer. Can I change or cancel it?</>,
+    content: <>No. Once you agree to the Service Transfer, it <strong>cannot</strong> be reversed.</>,
+  },
+  {
+    key: 'faq-7',
+    title: <>If I withdraw my account during the application period, can I still play after transfer?</>,
+    content: (
+      <>
+        No. If you withdraw before transfer, the account is erased and transfer is impossible, even if you already have a code.
+      </>
+    ),
+  },
+  {
+    key: 'faq-8',
+    title: <>Will all game data, including guild info, be retained?</>,
+    content: (
+      <>
+        <p>Most data is retained. However:</p>
+        <ul className="list-disc pl-5 mt-1 space-y-1">
+          <li>
+            <strong>Names changed</strong> (Ether for rename sent after Sep 26 maintenance):
+            <div className="pl-4">
+              – Account nickname → <em>current nickname_number</em><br />
+              – Guild name → <em>OuterplaneGuild_number</em>
+            </div>
+          </li>
+          <li>
+            For Korea/ASIA/ASIA II servers, rankings will be <strong>merged and recalculated</strong>:
+            <div className="pl-4">
+              – Guild Raid Hall of Fame<br />
+              – Arena League Hall of Fame
+            </div>
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    key: 'faq-9',
+    title: <>Will the guild remain if the Guild Leader doesn’t complete the transfer?</>,
+    content: (
+      <>
+        Yes, the guild remains. Leader is reassigned based on:
+        <ol className="list-decimal pl-5 mt-1 space-y-1">
+          <li>Guild Officer with the highest contribution</li>
+          <li>Most recently active among top 10 contributors</li>
+          <li>Most recently active member otherwise</li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    key: 'faq-10',
+    title: <>What happens to items/products in my mailbox?</>,
+    content: (
+      <>
+        Items/products are retained, but claim history for mail <em>before</em> the transfer won’t be shown afterward.
+        <div className="mt-1">Mail with expired claim periods won’t be extended — claim before Sep 23.</div>
+      </>
+    ),
+  },
+  {
+    key: 'faq-11',
+    title: <>What will happen to Monthly Subscription products?</>,
+    content: (
+      <>
+        Remaining duration will be <strong>automatically extended</strong> by the maintenance period after Sep 23 (Tue).
+        <div className="mt-1">For a smooth transfer, claim them from your mailbox before Sep 23, 2025.</div>
+      </>
+    ),
+  },
+  {
+    key: 'faq-12',
+    title: <>If operation policy changes after transfer, are previous restrictions removed?</>,
+    content: (
+      <>
+        No. Accounts already under restriction remain inaccessible, won’t receive a code, and cannot be transferred.
+      </>
+    ),
+  },
+  {
+    key: 'faq-13',
+    title: <>Will I still be able to use the official STOVE community?</>,
+    content: (
+      <>
+        Available only for a limited time. All posts/content will be deleted on <strong>Oct 27, 2025 (Mon)</strong>.
+        <div className="mt-1">Back up anything you need per the schedule.</div>
+        <div className="mt-2">
+          <strong>Official Community Schedule</strong>
+          <ul className="list-disc pl-5 mt-1">
+            <li>Sep 22: Restriction on Posting/Commenting</li>
+            <li>Sep 23: Closure of all boards except Notices/Updates</li>
+            <li>Oct 27: Complete closure of the STOVE community</li>
+          </ul>
+          <div className="mt-1 text-gray-300">
+            Address for the official VAGAMES community will be announced later.
+          </div>
+        </div>
+      </>
+    ),
+  },
+  {
+    key: 'faq-14',
+    title: <>Will official social media channels remain after the transfer?</>,
+    content: (
+      <>
+        The official <strong>X</strong> and <strong>Discord</strong> will continue to operate.
+        <div className="mt-1">The <strong>Facebook</strong> page will be deleted on <strong>Sep 22</strong>. Save any content you want.</div>
+      </>
+    ),
+  },
+]
+
+function ServiceTransferFAQ() {
+  return (
+    <section id="faq" className="mt-8">
+      <h2 className="text-xl font-semibold mb-3">Service Transfer FAQ</h2>
+      <Accordion items={faqItems} multiple />
+    </section>
+  )
 }
 
 export default function ServiceTransferGuide() {
@@ -174,6 +357,8 @@ export default function ServiceTransferGuide() {
               Shop closed Sep 4 → Sep 26. One new hero + Battle Pass delayed. Event dungeon rerun during downtime.
             </p>
           </section>
+
+          <ServiceTransferFAQ />
         </div>
 
         {/* Sidebar */}
