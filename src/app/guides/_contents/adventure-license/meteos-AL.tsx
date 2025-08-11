@@ -3,6 +3,7 @@
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import GuideHeading from '@/app/components/GuideHeading'
 import TeamTabSelector from '@/app/components/TeamTabSelector'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teams = {
   standard: {
@@ -44,11 +45,12 @@ export default function BlazingKnightMeteosGuide() {
       <hr className="my-6 border-neutral-700" />
 
       <div className="mb-4">
-        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="mb-2 text-neutral-300">
-          A sample video of the recommended team in action will be added here soon.
-        </p>
-      </div>
+              <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
+              <p className="text-neutral-400 text-sm italic mt-2">
+                Run provided by <span className="text-white font-semibold">XuRenChao</span> (11/08/2025)
+              </p>
+              <YoutubeEmbed videoId="Do7Vyjz3odI" title="Blazing Knight Meteos - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
+            </div>
     </div>
   )
 }
