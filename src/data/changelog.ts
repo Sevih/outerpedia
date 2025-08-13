@@ -26,10 +26,10 @@ function migrateChangelogEntries(
 export const oldChangelog = [
   {
     date: "2025-08-13",
-    title: "Planetary Control Unit Guild Raid part 1",
+    title: "Planetary Control Unit Guild Raid",
     type: "update",
     content: [
-      "- Planetary Control Unit Guild Raid Guide part 1 release. learn more [here](/guides/guild-raid/planetary-control-unit)",
+      "- Planetary Control Unit Guild Raid Guide release. learn more [here](/guides/guild-raid/planetary-control-unit)",
     ],
   },
   {

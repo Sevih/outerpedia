@@ -121,13 +121,18 @@
               "Liselotte"
             ],
             [
-              "Maxwell", "Bryn","Francesca"
+              "Maxwell",
+              "Bryn",
+              "Francesca"
             ],
             [
-              "Demiurge Astei", "Demiurge Luna","Aer"
+              "Demiurge Astei",
+              "Demiurge Luna",
+              "Aer"
             ],
             [
-              "Luna","Ember"
+              "Luna",
+              "Ember"
             ]
           ],
           "video": {
@@ -223,7 +228,7 @@
               "name": "Monad Eva",
               "comment": "{B/BT_CALL_BACKUP} and {B/BT_REMOVE_DEBUFF}"
             },
-             {
+            {
               "name": "Dianne",
               "comment": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
             },
@@ -237,10 +242,12 @@
               "Luna"
             ],
             [
-              "Drakhan","Demiurge Stella"
+              "Drakhan",
+              "Demiurge Stella"
             ],
             [
-              "Regina","Demiurge Luna"
+              "Regina",
+              "Demiurge Luna"
             ],
             [
               "Monad Eva",
@@ -255,32 +262,44 @@
       ]
     },
     "phase2": {
-      "bossName": "",
+      "bossName": "Planetary Control Unit Epsilon",
       "overview": [
-        ""
-        
+        "S3: AoE, {B/BT_STAT|ST_ATK} 5 turns. {B/BT_ADDITIVE_TURN} if granted {B/BT_STAT|ST_DEF}.",
+        "S2: {B/BT_STAT|ST_DEF} 5 turns.  {B/IG_Buff_BuffdurationIncrease} 1 turn if granted {B/BT_STAT|ST_ATK}",
+        "S1: Single, prioritizes the leftmost unit. If the target isn't a {C/Defender}, AoE and {B/BT_STAT|ST_AVOID} 5 turn ",
+        "Does not take weakness gauge damage if granted {B/BT_STAT|ST_AVOID}.",
+        "Inflicts {B/BT_STAT|ST_ACCURACY} on {E/Water} and {E/Earth} heroes.",
+        "Reduces damage dealt against {E/Fire} heroes and takes increased damage from them.",
+        "Increases damage dealt against {E/Water} heroes and takes decreased damage from them.",
+        "Damage dealt increase everytime a unit dies.",
+        "Takes more damage if all heroes are from the same element.",
+        "Greatly reduces damage taken if granted {B/BT_STAT|ST_DEF}.",
+        "Everytime inflicted with a debuff, granted {B/BT_STAT|ST_DEF} 3 turns.",
+        "Enrage  :  Whenever health is reduced by 50 000. Gain {B/BT_DAMGE_TAKEN} {B/BT_STAT|ST_ATK_IR} 3 turns.",
+        "Enrage Ultimate : AoE with heavy damage.",
+        "{D/BT_FIXED_DAMAGE} {D/BT_DOT_CURSE} cannot exceed 10 000"
       ],
       "teams": {
         "team1": {
-          "label": "",
-          "icon": "",
+          "label": "Solo Ember",
+          "icon": "fire.webp",
           "video": {
             "id": "",
             "title": ""
           },
-          "geas-active": [],
+          "geas-active": [
+            "1-1M",
+            "1-2M",
+            "1-3M",
+            "1-4M",
+            "2-1M",
+            "2-2M",
+            "2-4M",
+            "1-4B"
+          ],
           "setup": [
             [
-              ""
-            ],
-            [
-              ""
-            ],
-            [
-              ""              
-            ],
-            [
-              ""
+              "Ember"
             ]
           ],
           "note": []
