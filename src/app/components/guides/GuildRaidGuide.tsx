@@ -97,7 +97,7 @@ export default function GuildRaidGuide({ guideData }: Props) {
             ref={indicatorRef}
             className="absolute top-0 left-0 h-full rounded-full bg-sky-500 transition-all duration-300 z-0"
           />
-          {(['phase1', 'phase2'] as const).map((key) => (
+          {(['phase1', ...(version.phase2?.bossName ? ['phase2'] as const : [])] as const).map((key) => (
             <button
               key={key}
               onClick={() => setTab(key)}
@@ -105,13 +105,14 @@ export default function GuildRaidGuide({ guideData }: Props) {
                 if (tab === key) tabRef.current = el
               }}
               className={`relative z-10 px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200
-              ${tab === key ? 'text-white' : 'text-white/70'}`}
+        ${tab === key ? 'text-white' : 'text-white/70'}`}
             >
               {key === 'phase1' ? 'Phase 1 : Geas Bosses' : `Phase 2 : ${boss2}`}
             </button>
           ))}
         </div>
       </div>
+
 
       {/* PHASE 1 */}
       {tab === 'phase1' && (

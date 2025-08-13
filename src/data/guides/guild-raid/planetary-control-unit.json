@@ -1,0 +1,291 @@
+{
+  "v1": {
+    "label": "August 2025 Version",
+    "date": "2025-08-13",
+    "phase1": {
+      "bosses": [
+        {
+          "id": "11",
+          "name": "Self-Styled Automaton",
+          "geas": {
+            "1": {
+              "bonus": {
+                "effect": "When a defender perform an action, inflicts Unbuffable on boss for 2 turns.",
+                "ratio": "-70%",
+                "image": "Boss",
+                "bg": "3"
+              },
+              "malus": {
+                "effect": "Increases the attack of boss by 30%",
+                "ratio": "+20%",
+                "image": "Atk",
+                "bg": "1"
+              }
+            },
+            "2": {
+              "bonus": {
+                "effect": "Increases damage inflicted by light heroes by 35%. Reduces damage taken by Light Heroes by 35%.",
+                "ratio": "-25%",
+                "image": "Light",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "+30% boss defense",
+                "ratio": "+40%",
+                "image": "Def",
+                "bg": "2"
+              }
+            },
+            "3": {
+              "bonus": {
+                "effect": "Increases Attack, Defense, and Health of Fire allies by 50%",
+                "ratio": "-45%",
+                "image": "Fire",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Deals fixed damage equals to 30% of the target's max health when using Event Horizon",
+                "ratio": "+40%",
+                "image": "special",
+                "bg": "2"
+              }
+            },
+            "4": {
+              "bonus": {
+                "effect": "Burn damage taken by boss +500%",
+                "ratio": "-25%",
+                "image": "special",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Team restriction (You cannot use Ranger heroes in your team)",
+                "ratio": "+40%",
+                "image": "Ranger",
+                "bg": "2"
+              }
+            },
+            "5": {
+              "bonus": {
+                "effect": "Increases Chain point by 15 at the start of an ally's turn",
+                "ratio": "-45%",
+                "image": "CP",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Increases the resilience of boss by 200",
+                "ratio": "+65%",
+                "image": "Def",
+                "bg": "3"
+              }
+            }
+          },
+          "notes": [
+            "S3: AoE, inflicts {D/BT_STUN} for 1 turns.",
+            "S2: (passive) Single {B/SYS_BUFF_REVENGE}, {D/BT_STAT|ST_DEF} 5 turns.",
+            "S1: Single, prioritizes the leftmost unit. {D/BT_STUN} 1 turn if not a {C/Defender}",
+            "Reduce damage dealt against {E/Fire} heroes and takes increased damage from them.",
+            "Reduce effectiveness and resilience of all heroes exept {E/Fire}.",
+            "Increases damage taken from {C/Mage}.",
+            "{D/BT_FIXED_DAMAGE} and {D/BT_DOT_CURSE}, cannot exceed 10,000."
+          ],
+          "recommended": [
+            {
+              "name": "Astei",
+              "comment": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+            },
+            {
+              "name": "Dianne",
+              "comment": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+            },
+            {
+              "name": "Maxwell",
+              "comment": "Standard {E/Dark} dps"
+            },
+            {
+              "name": "Demiurge Astei",
+              "comment": "Standard {E/Dark} dps"
+            },
+            {
+              "name": "Aer",
+              "comment": "Standard {E/Fire} dps"
+            },
+            {
+              "name": "Bryn",
+              "comment": "Standard {E/Fire} dps"
+            }
+          ],
+          "team": [
+            [
+              "Astei",
+              "Dianne",
+              "Liselotte"
+            ],
+            [
+              "Maxwell", "Bryn","Francesca"
+            ],
+            [
+              "Demiurge Astei", "Demiurge Luna","Aer"
+            ],
+            [
+              "Luna","Ember"
+            ]
+          ],
+          "video": {
+            "id": "-JAndQY3BUY",
+            "title": "Planetary Control Unit - Geas Boss Self-Styled Automaton (Stage 5)"
+          }
+        },
+        {
+          "id": "06",
+          "name": "Astral Guardian",
+          "geas": {
+            "1": {
+              "bonus": {
+                "effect": "Increases effectiveness of ally heroes by 150",
+                "ratio": "-45%",
+                "image": "special",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "At the end of boss monster's turn, reduce chain point of allies by 10",
+                "ratio": "+20%",
+                "image": "Boss",
+                "bg": "1"
+              }
+            },
+            "2": {
+              "bonus": {
+                "effect": "Increases cursed and fixed damage by 100%",
+                "ratio": "-70%",
+                "image": "Curse",
+                "bg": "3"
+              },
+              "malus": {
+                "effect": "Team restriction (You cannot use Striker heroes in your team)",
+                "ratio": "+40%",
+                "image": "Striker",
+                "bg": "2"
+              }
+            },
+            "3": {
+              "bonus": {
+                "effect": "Increases action points by 15 at the start of an ally's turn",
+                "ratio": "-25%",
+                "image": "AP",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Increases resilience of boss by 50",
+                "ratio": "+20%",
+                "image": "Def",
+                "bg": "1"
+              }
+            },
+            "4": {
+              "bonus": {
+                "effect": "Increases penetration of mage heroes by 40%",
+                "ratio": "-45%",
+                "image": "Mage",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Team restriction (You cannot use Mage heroes in your team)",
+                "ratio": "+40%",
+                "image": "Mage",
+                "bg": "2"
+              }
+            },
+            "5": {
+              "bonus": {
+                "effect": "Increases penetration of striker heroes by 40%",
+                "ratio": "-45%",
+                "image": "Striker",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Team restriction (Fire heroes only)",
+                "ratio": "+65%",
+                "image": "Fire",
+                "bg": "3"
+              }
+            }
+          },
+          "notes": [
+            "S3: AoE, {D/BT_DETONATE} {D/BT_DOT_BURN}.",
+            "S2: AoE, {D/BT_DOT_BURN} 3 turns.",
+            "S1: Single, prioritizes the leftmost unit. {D/BT_STUN} 1 turn if not a {C/Defender}",
+            "Reduce damage dealt against {E/Fire} heroes and takes increased damage from them.",
+            "Reduce effectiveness and resilience of all heroes exept {E/Fire}.",
+            "{D/BT_FIXED_DAMAGE} and {D/BT_DOT_CURSE}, cannot exceed 10,000."
+          ],
+          "recommended": [
+            {
+              "name": "Monad Eva",
+              "comment": "{B/BT_CALL_BACKUP} and {B/BT_REMOVE_DEBUFF}"
+            },
+             {
+              "name": "Dianne",
+              "comment": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+            },
+            {
+              "name": "Luna",
+              "comment": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}"
+            }
+          ],
+          "team": [
+            [
+              "Luna"
+            ],
+            [
+              "Drakhan","Demiurge Stella"
+            ],
+            [
+              "Regina","Demiurge Luna"
+            ],
+            [
+              "Monad Eva",
+              "Dianne"
+            ]
+          ],
+          "video": {
+            "id": "cfA5D0NQc5Y",
+            "title": "Planetary Control Unit - Geas Boss Astral Guardian (Stage 4)"
+          }
+        }
+      ]
+    },
+    "phase2": {
+      "bossName": "",
+      "overview": [
+        ""
+        
+      ],
+      "teams": {
+        "team1": {
+          "label": "",
+          "icon": "",
+          "video": {
+            "id": "",
+            "title": ""
+          },
+          "geas-active": [],
+          "setup": [
+            [
+              ""
+            ],
+            [
+              ""
+            ],
+            [
+              ""              
+            ],
+            [
+              ""
+            ]
+          ],
+          "note": []
+        }
+      }
+    }
+  }
+}

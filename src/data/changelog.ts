@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-08-13",
+    title: "Planetary Control Unit Guild Raid part 1",
+    type: "update",
+    content: [
+      "- Planetary Control Unit Guild Raid Guide part 1 release. learn more [here](/guides/guild-raid/planetary-control-unit)",
+    ],
+  },
+  {
     date: "2025-08-09",
     title: "OUTERPLANE Service Transfer to VAGAMES",
     type: "update",

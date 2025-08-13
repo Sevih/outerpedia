@@ -708,5 +708,13 @@
     "second_image": "timegate-resource2",
     "last_updated": "2025-07-31",
     "author": "Sevih / Shiraen"
+  },
+  "planetary-control-unit": {
+    "category": "guild-raid",
+    "title": "Planetary Control Unit",
+    "description": "Boss strategy guide",
+    "icon": "planetary-control-unit",
+    "last_updated": "2025-08-13",
+    "author": "Sevih"
   }
 }
