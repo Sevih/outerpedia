@@ -303,6 +303,40 @@
             ]
           ],
           "note": []
+        },
+        "team2": {
+          "label": "Burn",
+          "icon": "SC_Buff_detonate.webp",
+          "video": {
+            "id": "iN21r2W2Fu4",
+            "title": "Planetary Control Unit - Planetary Control Unit Epsilon Stage 19 - Burn Team"
+          },
+          "geas-active": [
+            "2-1B",
+            "1-5M",
+            "2-3B",
+            "2-3M",
+            "1-2M",
+            "1-3M",
+            "1-4B",
+            "2-1M",
+            "1-1M"
+          ],
+          "setup": [
+            [
+              "Maxie"
+            ],
+            [
+              "Roxie"
+            ],
+            [
+              "Akari"
+            ],
+            [
+              "Vlada"
+            ]
+          ],
+          "note": []
         }
       }
     }
