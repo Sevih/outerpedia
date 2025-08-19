@@ -15,7 +15,7 @@ const teamSetup0825 = [
   ['Monad Eva'],
   ['Tamamo-no-Mae'],
   ['Demiurge Stella','Ryu Lion','Iota','Laplace'],
-  ['Gnosis Nella','Kuro','Demiurge Drakhan'],
+  ['Gnosis Nella','Kuro','Demiurge Drakhan','Drakhan'],
 ]
 
 const versions: Record<string, { label: string; content: React.ReactNode }> = {
@@ -47,6 +47,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
           <li><CharacterLinkCard name="Tamamo-no-Mae" /> <CharacterLinkCard name="Gnosis Nella" />: Essential pick because of the score bonus.</li>
           <li><CharacterLinkCard name="Demiurge Stella" /> <CharacterLinkCard name="Ryu Lion" /> <CharacterLinkCard name="Iota" /> <CharacterLinkCard name="Laplace" />: <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> as chain attack finisher’s bonus.</li>
           <li><CharacterLinkCard name="Demiurge Drakhan" /> <CharacterLinkCard name="Kuro" /> : <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> source and <ElementInlineTag element='Light' />.</li>
+          <li><CharacterLinkCard name="Drakhan" /> : <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> source and <ElementInlineTag element='Light' />.</li>
           <li><CharacterLinkCard name="Monad Eva" /> : <EffectInlineTag name="BT_CALL_BACKUP" type="buff" /> and <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /> if 5 stars.</li>
         </ul>
         <hr className="my-6 border-neutral-700" />

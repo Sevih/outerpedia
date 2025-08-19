@@ -450,6 +450,16 @@
     "description": "A token obtained by defeating the World Boss."
   },
   {
+    "name": "License Point",
+    "rarity": "normal",
+    "description": "Points that can be obtained by completing Adventure License missions. You can exchange it for a variety of items in the Shop."
+  },
+  {
+    "name": "Automaton Coin",
+    "rarity": "normal",
+    "description": "This currency can be earned by clearing the Skyward Tower after receiving the first-time clear reward. It can be used to purchase items in the Skyward Tower Shop."
+  },
+  {
     "name": "[Guild] Upgrade Stone Chest",
     "rarity": "superior",
     "description": "An upgrade stone box purchased with guild contributions. Obtain one random upgrade stone of any quality."
@@ -493,6 +503,11 @@
     "name": "Stage 3 Gem Chest ",
     "rarity": "epic",
     "description": "Obtain one Stage 3 Gem."
+  },
+  {
+    "name": "Stage 4 Gem Chest",
+    "rarity": "epic",
+    "description": "Obtain one Stage 4 Gem."
   },
   {
     "name": "Stamina",
@@ -593,5 +608,100 @@
     "name": "Indomitable Dragon Drakhan",
     "rarity": "superior",
     "description": "This is a costume that can be worn by Demiurge Drakhan."
+  },
+  {
+    "name": "5★ Epic Helmet Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain one 5★ epic Helmet."
+  },
+  {
+    "name": "5★ Epic Gloves Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain one 5★ epic Gloves."
+  },
+  {
+    "name": "5★ Epic Armor Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain one 5★ epic Armor."
+  },
+  {
+    "name": "5★ Epic Boots Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain one 5★ epic Boots."
+  },
+  {
+    "name": "5★ Epic Weapon",
+    "rarity": "epic",
+    "description": "Obtain one 5★ epic Weapon."
+  },
+  {
+    "name": "5★ Epic Accessory",
+    "rarity": "epic",
+    "description": "Obtain one 5★ epic Accessory."
+  },
+  {
+    "name": "Gear Crafting Material Selection Chest (Normal)",
+    "rarity": "superior",
+    "description": "Select and obtain normal gear crafting material available from Special Requests."
+  },
+  {
+    "name": "Gear Crafting Material Selection Chest (Superior)",
+    "rarity": "legendary",
+    "description": "Select and obtain superior gear crafting material available from Special Requests."
+  },
+  {
+    "name": "10% Legendary Abrasive",
+    "rarity": "legendary",
+    "description": "Increases the chance of crafting gear of legendary quality by 10%."
+  },
+  {
+    "name": "Powerful Adventurer's Talisman",
+    "rarity": "legendary",
+    "description": "Recovers 30 Action Points when using an ultimate.\n Mainstats : Critical hit chance"
+  },
+  {
+    "name": "Sharp Adventurer's Talisman",
+    "rarity": "legendary",
+    "description": "Generates 10 Chain Points when an attack scores a critical hit.\n Mainstats : Attack %"
+  },
+  {
+    "name": "Adventurer's Sword",
+    "rarity": "legendary",
+    "description": "Has 15% chance to increase Penetration for 1 turn after taking an action.\n Mainstats : Health %"
+  },
+  {
+    "name": "Adventurer's Necklace",
+    "rarity": "legendary",
+    "description": "Has 15% chance to increase Penetration for 1 turn after being hit.\n Mainstats : Heals when hit %"
+  },
+  {
+    "name": "“Tycoon” Title",
+    "rarity": "normal",
+    "description": ""
+  },
+  {
+    "name": "Stage 5-6 Gem Chest",
+    "rarity": "epic",
+    "description": "Obtain 1 Stage 5-6 Gem."
+  },
+  {
+    "name": "6★ Legendary Helmet [Burst]",
+    "rarity": "legendary",
+    "description": "Gains AP at the start of battle +25."
+  },
+  {
+    "name": "6★ Legendary Gloves [Burst]",
+    "rarity": "legendary",
+    "description": "Gains AP at the start of battle +25."
+  },
+  {
+    "name": "6★ Legendary Armor [Burst]",
+    "rarity": "legendary",
+    "description": "Gains AP at the start of battle +25."
+  },
+  {
+    "name": "6★ Legendary Boots [Burst]",
+    "rarity": "legendary",
+    "description": "Gains AP at the start of battle +25."
   }
 ]

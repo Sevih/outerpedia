@@ -5,10 +5,12 @@ import { useSearchParams } from 'next/navigation'
 import GuideHeading from '@/app/components/GuideHeading'
 import ItemInlineDisplay from '@/app/components/ItemInline'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
+import type { ReactNode } from 'react'
 
 // ---- Types
 type Priority = 'S' | 'A' | 'B' | 'C'
 type Period = 'Daily' | 'Weekly' | 'Monthly' | 'One-time'
+
 
 type ShopKey =
     | 'guild'
@@ -24,6 +26,7 @@ type ShopKey =
     | 'skyward'
     | 'al'
     | 'survey'
+    | 'ressource'
 
 type Cost = {
     currency: string            // ex: "Guild Coins", "Arena Medals"
@@ -67,8 +70,66 @@ const tabs: { key: ShopKey; label: string; icon: string }[] = [
     { key: 'worldboss', label: 'World Boss', icon: '/images/ui/shop_worldboss.webp' },
     { key: 'skyward', label: 'Skyward Tower', icon: '/images/ui/shop_skyward.webp' },
     { key: 'al', label: 'Adventure License', icon: '/images/ui/shop_al.webp' },
-    { key: 'survey', label: 'Survey Hub', icon: '/images/ui/shop_survey.webp' }
+    { key: 'survey', label: 'Survey Hub', icon: '/images/ui/shop_survey.webp' },
+    { key: 'ressource', label: 'Ressources Shop', icon: '/images/ui/shop_ressource.webp' }
 ]
+
+// ---- Notes par shop (JSX accepté)
+const shopNotes: Record<ShopKey, ReactNode> = {
+    guild: (
+        ""
+    ),
+    supply: (
+        ""
+    ),
+    rico: (
+        ""
+    ),
+    event: (
+        ""
+    ),
+    joint: (
+        <>
+            <p>
+                Save <strong>monthly purchases</strong> until the Joint Challenge event starts.
+                The main concern is <em>not having enough purchases to clear the quests</em>.
+            </p>
+            <p>
+                Once you can consistently max out the Joint Challenge, the currency becomes very abundant,
+                so prioritize wisely at the start.
+            </p>
+        </>
+    ),
+
+    friend: (
+        ""
+    ),
+    arena: (
+        ""
+    ),
+    stars: (
+        ""
+    ),
+    arch: (
+        ""
+    ),
+    worldboss: (
+        ""
+    ),
+    skyward: (
+        ""
+    ),
+    al: (
+        ""
+    ),
+    survey: (
+        ""
+    ),
+    ressource: (
+        ""
+    ),
+}
+
 
 // ---- Helpers UI
 const PRIORITY_ORDER: Record<Priority, number> = { S: 0, A: 1, B: 2, C: 3 }
@@ -93,21 +154,42 @@ function PriorityBadge({ p }: { p: Priority }) {
 
 function renderCosts(costs?: Cost[]) {
     if (!costs || costs.length === 0) return '–'
+
     return (
         <div className="flex flex-col gap-0.5">
-            {costs.map((c, i) => (
-                <div key={i} className="whitespace-nowrap">
-                    {n(c.amount)} <ItemInlineDisplay names={[c.currency]} />{c.note ? ` (${c.note})` : ''}
-                </div>
-            ))}
+            {costs.map((c, i) => {
+                // Cas spécial : gratuit
+                if (c.amount === 0 || c.currency.toLowerCase() === 'free') {
+                    return (
+                        <div key={i} className="whitespace-nowrap">
+                            Free{c.note ? ` (${c.note})` : ''}
+                        </div>
+                    )
+                }
+
+                return (
+                    <div key={i} className="whitespace-nowrap">
+                        {n(c.amount)} <ItemInlineDisplay names={[c.currency]} />{c.note ? ` (${c.note})` : ''}
+                    </div>
+                )
+            })}
         </div>
     )
 }
 
 function renderLimit(limit?: Limit) {
     if (!limit) return '–'
-    return `${limit.count} / ${limit.period}`
+
+    const ABBR: Record<Period, string> = {
+        Daily: 'D',
+        Weekly: 'W',
+        Monthly: 'M',
+        'One-time': 'O',
+    }
+
+    return `${limit.count} / ${ABBR[limit.period]}`
 }
+
 
 function renderGives(g?: PerPurchase, name?: string) {
     if (!g) return '–'
@@ -117,9 +199,17 @@ function renderGives(g?: PerPurchase, name?: string) {
 
 function ShopTable({ items }: { items: ShopItem[] }) {
     const sorted = useMemo(
-        () => [...items].sort((a, b) => PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority]),
+        () =>
+            [...items].sort((a, b) => {
+                const prioDiff = PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority]
+                if (prioDiff !== 0) return prioDiff
+                return a.name.localeCompare(b.name)
+            }),
         [items]
     )
+
+    // 🔽 check si au moins un item a une note non vide
+    const hasNotes = sorted.some(it => it.notes && it.notes.trim() !== "")
 
     return (
         <div className="flex justify-center my-6">
@@ -129,10 +219,10 @@ function ShopTable({ items }: { items: ShopItem[] }) {
                         <tr>
                             <th className="border px-3 py-2 text-left">Priority</th>
                             <th className="border px-3 py-2 text-left">Item</th>
-                            <th className="border px-3 py-2 text-left">Gives (per purchase)</th>
+                            <th className="border px-3 py-2 text-left">Gives</th>
                             <th className="border px-3 py-2">Cost</th>
                             <th className="border px-3 py-2">Limit</th>
-                            <th className="border px-3 py-2 text-left">Notes</th>
+                            {hasNotes && <th className="border px-3 py-2 text-left">Notes</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -145,18 +235,29 @@ function ShopTable({ items }: { items: ShopItem[] }) {
                                 <td className="border px-3 py-2">{renderGives(it.gives, it.name)}</td>
                                 <td className="border px-3 py-2 text-center">{renderCosts(it.costs)}</td>
                                 <td className="border px-3 py-2 text-center">{renderLimit(it.limit)}</td>
-                                <td className="border px-3 py-2">{it.notes ?? '–'}</td>
+                                {hasNotes && (
+                                    <td className="border px-3 py-2">{it.notes ?? ''}</td>
+                                )}
                             </tr>
                         ))}
                     </tbody>
                 </table>
 
                 <p className="mt-3 text-xs text-zinc-400">
-                    Legend: <span className="font-semibold">S</span> = must-buy,{' '}
-                    <span className="font-semibold">A</span> = high value,{' '}
-                    <span className="font-semibold">B</span> = situational,{' '}
-                    <span className="font-semibold">C</span> = low priority.
+                    Legend:
+                    <span className="font-semibold"> S</span> = must-buy,
+                    <span className="font-semibold"> A</span> = high value,
+                    <span className="font-semibold"> B</span> = situational,
+                    <span className="font-semibold"> C</span> = low priority
                 </p>
+                <p className="mt-1 text-xs text-zinc-400">
+                    Periods:
+                    <span className="font-semibold"> D</span> = Daily,
+                    <span className="font-semibold"> W</span> = Weekly,
+                    <span className="font-semibold"> M</span> = Monthly,
+                    <span className="font-semibold"> O</span> = One-time
+                </p>
+
             </div>
         </div>
     )
@@ -289,14 +390,14 @@ const data: Record<ShopKey, ShopItem[]> = {
         },
         {
             name: 'Stage 5 Random Gem Chest',
-            priority: 'A',
+            priority: 'B',
             gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Joint Challenge Coin', amount: 2500 }],
             limit: { count: 1, period: 'Weekly' },
         },
         {
             name: 'Stage 3 Gem Chest ',
-            priority: 'A',
+            priority: 'B',
             gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Joint Challenge Coin', amount: 250 }],
             limit: { count: 1, period: 'Weekly' },
@@ -324,7 +425,7 @@ const data: Record<ShopKey, ShopItem[]> = {
         },
         {
             name: 'Armor Glunite',
-            priority: 'B',
+            priority: 'A',
             gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Joint Challenge Coin', amount: 3000 }],
             limit: { count: 1, period: 'Weekly' },
@@ -555,7 +656,7 @@ const data: Record<ShopKey, ShopItem[]> = {
         },
         {
             name: 'Time Rewinder',
-            priority: 'S',
+            priority: 'A',
             gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Star\'s Memory', amount: 100 }],
             limit: { count: 1, period: 'Monthly' },
@@ -727,15 +828,262 @@ const data: Record<ShopKey, ShopItem[]> = {
             limit: { count: 2, period: 'Monthly' },
         },
     ],
-
-
+    skyward: [
+        {
+            name: '5★ Epic Weapon',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 45 }],
+            limit: { count: 1, period: 'Monthly' },
+        },
+        {
+            name: '5★ Epic Accessory',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 45 }],
+            limit: { count: 1, period: 'Monthly' },
+        },
+        {
+            name: '5★ Epic Helmet Selection Chest',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 25 }],
+            limit: { count: 1, period: 'Monthly' },
+        },
+        {
+            name: '5★ Epic Gloves Selection Chest',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 25 }],
+            limit: { count: 1, period: 'Monthly' },
+        },
+        {
+            name: '5★ Epic Boots Selection Chest',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 25 }],
+            limit: { count: 1, period: 'Monthly' },
+        },
+        {
+            name: '5★ Epic Armor Selection Chest',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 25 }],
+            limit: { count: 1, period: 'Monthly' },
+        },
+        {
+            name: 'Basic Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 30 }],
+            limit: { count: 25, period: 'Monthly' },
+        },
+        {
+            name: 'Artisan\'s Hammer',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 20 }],
+            limit: { count: 50, period: 'Monthly' },
+        },
+        {
+            name: 'Stage 4 Gem Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 150 }],
+            limit: { count: 5, period: 'Monthly' },
+        },
+        {
+            name: 'Potentium (Armor)',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 150 }],
+            limit: { count: 10, period: 'Monthly' },
+        },
+        {
+            name: 'Potentium (Weapon/Accessory)',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 200 }],
+            limit: { count: 5, period: 'Monthly' },
+        },
+        {
+            name: '10% Legendary Abrasive',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 50 }],
+            limit: { count: 30, period: 'Monthly' },
+        },
+        {
+            name: 'Professional Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 250 }],
+            limit: { count: 5, period: 'Monthly' },
+        },
+        {
+            name: 'Steak Dish',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 50 }],
+            limit: { count: 20, period: 'Monthly' },
+        },
+        {
+            name: 'Time Rewinder',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 3000 }],
+            limit: { count: 1, period: 'Monthly' },
+        },
+        {
+            name: 'Special Recruitment Ticket (Event)',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 75 }],
+            limit: { count: 30, period: 'Monthly' },
+        },
+        {
+            name: 'Gear Crafting Material Selection Chest (Normal)',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 5 }],
+            limit: { count: 100, period: 'Monthly' },
+        },
+        {
+            name: 'Gear Crafting Material Selection Chest (Superior)',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 15 }],
+            limit: { count: 20, period: 'Monthly' },
+        },
+        {
+            name: 'Gold',
+            priority: 'A',
+            gives: { amount: 15000, unit: 'pc' },
+            costs: [{ currency: 'Free', amount: 0 }],
+            limit: { count: 20, period: 'Daily' },
+        },
+        {
+            name: 'Intermediate Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 70 }],
+            limit: { count: 20, period: 'Monthly' },
+        },
+        {
+            name: 'Transistone (Total)',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 1500 }],
+            limit: { count: 1, period: 'Monthly' },
+        },
+        {
+            name: 'Transistone (Individual)',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 1750 }],
+            limit: { count: 1, period: 'Monthly' },
+        },
+        {
+            name: 'Ether',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Automaton Coin', amount: 5 }],
+            limit: { count: 500, period: 'Monthly' },
+        }
+    ],
+    al: [
+        {
+            name: 'Powerful Adventurer\'s Talisman',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 3000 }],
+            limit: { count: 1, period: 'One-time' },
+        },
+        {
+            name: 'Sharp Adventurer\'s Talisman',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 3000 }],
+            limit: { count: 1, period: 'One-time' },
+        },
+        {
+            name: 'Adventurer\'s Sword',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 2500 }],
+            limit: { count: 1, period: 'One-time' },
+        },
+        {
+            name: 'Adventurer\'s Necklace',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 2500 }],
+            limit: { count: 1, period: 'One-time' },
+        },
+        {
+            name: 'Refined Glunite',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 2500 }],
+            limit: { count: 8, period: 'One-time' },
+        },
+        {
+            name: 'Stage 5-6 Gem Chest',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 250 }],
+            limit: { count: 2, period: 'Weekly' },
+        },
+        {
+            name: '“Tycoon” Title',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 250 }],
+            limit: { count: 1, period: 'One-time' },
+        },
+        {
+            name: 'Proof of Worth',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 125 }],
+            limit: { count: 25, period: 'Weekly' },
+            notes:"Only until you finish Adventure License Quirk then ignore it."
+        },
+        {
+            name: '6★ Legendary Boots [Burst]',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 1250 }],
+            limit: { count: 1, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Armor [Burst]',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 1250 }],
+            limit: { count: 1, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Gloves [Burst]',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 1250 }],
+            limit: { count: 1, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Helmet [Burst]',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'License Point', amount: 1250 }],
+            limit: { count: 1, period: 'One-time' }
+        }
+    ],
 
     event: [/* ... */],
     survey: [/* ... */],
-    skyward: [/* ... */],
+    ressource: [/* ... */],
     supply: [],
-    rico: [],
-    al: [],
+    rico: []
 }
 
 export default function ShopPurchasePrioritiesGuide() {
@@ -773,6 +1121,13 @@ export default function ShopPurchasePrioritiesGuide() {
                     pillColor="#10b981"
                 />
             </div>
+
+            {/* Bloc de note spécifique au shop sélectionné */}
+            {shopNotes[selected] && (
+                <div className="text-sm text-gray-400 px-2 text-center space-y-2">
+                    {shopNotes[selected]}
+                </div>
+            )}
 
             <ShopTable items={data[selected]} />
         </div>
