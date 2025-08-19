@@ -86,7 +86,11 @@ const shopNotes: Record<ShopKey, ReactNode> = {
         ""
     ),
     event: (
-        ""
+        <p>
+            Event shops vary a lot depending on the event. Adjust your priorities based on what’s available,
+            but generally focus on limited items first (cosmetics, 6★ event gear, rare manuals, transistones)
+            before spending on more common resources.
+        </p>
     ),
     joint: (
         <>
@@ -158,14 +162,24 @@ function renderCosts(costs?: Cost[]) {
     return (
         <div className="flex flex-col gap-0.5">
             {costs.map((c, i) => {
-                // Cas spécial : gratuit
-                if (c.amount === 0 || c.currency.toLowerCase() === 'free') {
-                    return (
-                        <div key={i} className="whitespace-nowrap">
-                            Free{c.note ? ` (${c.note})` : ''}
-                        </div>
-                    )
+                // Cas spécial
+                if (c.amount === 0) {
+                    if (c.currency.toLowerCase() === 'free') {
+                        return (
+                            <div key={i} className="whitespace-nowrap">
+                                Free{c.note ? ` (${c.note})` : ''}
+                            </div>
+                        )
+                    }
+                    if (c.currency.toLowerCase() === 'tbd') {
+                        return (
+                            <div key={i} className="whitespace-nowrap">
+                                TBD{c.note ? ` (${c.note})` : ''}
+                            </div>
+                        )
+                    }
                 }
+
 
                 return (
                     <div key={i} className="whitespace-nowrap">
@@ -1047,7 +1061,7 @@ const data: Record<ShopKey, ShopItem[]> = {
             gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'License Point', amount: 125 }],
             limit: { count: 25, period: 'Weekly' },
-            notes:"Only until you finish Adventure License Quirk then ignore it."
+            notes: "Only until you finish Adventure License Quirk then ignore it."
         },
         {
             name: '6★ Legendary Boots [Burst]',
@@ -1204,13 +1218,313 @@ const data: Record<ShopKey, ShopItem[]> = {
             gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Survey Contributions', amount: 150 }],
             limit: { count: 3, period: 'Weekly' }
+        },
+        {
+            name: 'Prosciutto',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 20 }],
+            limit: { count: 20, period: 'Weekly' }
+        },
+        {
+            name: 'Legendary Reforge Catalyst',
+            priority: 'C',
+            gives: { amount: 10, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 100 }],
+            limit: { count: 5, period: 'Weekly' }
+        },
+        {
+            name: 'Epic Quality Present Selection Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 75 }],
+            limit: { count: 3, period: 'Weekly' }
+        },
+        {
+            name: 'Artisan\'s Hammer',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 50 }],
+            limit: { count: 5, period: 'Weekly' }
+        },
+        {
+            name: '6★ Legendary Helmet Selection Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 750 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Armor Selection Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 750 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Gloves Selection Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 750 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Boots Selection Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 750 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Professional Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 500 }],
+            limit: { count: 1, period: 'Weekly' }
+        },
+        {
+            name: 'Refined Glunite',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 750 }],
+            limit: { count: 1, period: 'Weekly' }
+        },
+        {
+            name: 'Prosciutto',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 20 }],
+            limit: { count: 20, period: 'Weekly' }
+        },
+        {
+            name: 'Potentium (Weapon/Accessory)',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 3500 }],
+            limit: { count: 1, period: 'Monthly' }
+        },
+        {
+            name: 'Cake Slice',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 10 }],
+            limit: { count: 40, period: 'Weekly' }
+        },
+        {
+            name: 'Stage 2 Random Gem Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 150 }],
+            limit: { count: 3, period: 'Weekly' }
+        },
+        {
+            name: 'Potentium (Armor)',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 3000 }],
+            limit: { count: 1, period: 'Monthly' }
+        },
+        {
+            name: 'Gold',
+            priority: 'S',
+            gives: { amount: 30000, unit: 'pc' },
+            costs: [{ currency: 'free', amount: 0 }],
+            limit: { count: 1, period: 'Daily' }
+        },
+        {
+            name: '6★ Legendary Weapon Selection Chest',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 1350 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Accessory Selection Chest',
+            priority: 'A',
+            gives: { amount: 30000, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 1350 }],
+            limit: { count: 2, period: 'One-time' }
         }
     ],
+    event: [
+        {
+            name: 'Cosmetic',
+            priority: 'S',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: '6★ Equipment',
+            priority: 'S',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: 'Intermediate Skill Manual',
+            priority: 'S',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: 'Transistone (Individual)',
+            priority: 'S',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: 'Transistone (Total)',
+            priority: 'S',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: 'Hero Pieces',
+            priority: 'A',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: 'Refined Glunite',
+            priority: 'A',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: 'Gems',
+            priority: 'A',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: 'Potentium (Armor)',
+            priority: 'B',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: 'Potentium (Weapon/Accessory)',
+            priority: 'B',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: '5★ Equipment',
+            priority: 'B',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' },
+            notes:"You can ignore it if it doesn’t have a unique passive like Masamune weapon or Kirisame accessory"
 
-
-
-    event: [/* ... */],    
-    resource: [/* ... */],
+        },
+        {
+            name: 'Glunite (Event)',
+            priority: 'B',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' },
+            notes:"Ignore if you didn’t buy any equipment from the shop."
+        },
+        {
+            name: 'Food',
+            priority: 'C',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        },
+        {
+            name: 'Gold',
+            priority: 'C',
+            gives: { amount: 0, unit: 'pc' },
+            costs: [{ currency: 'TBD', amount: 0 }],
+            limit: { count: 0, period: 'One-time' }
+        }
+    ],
+    resource: [        
+        {
+            name: 'Gold',
+            priority: 'S',
+            gives: { amount: 10000, unit: 'pc' },
+            costs: [{ currency: 'free', amount: 0 }],
+            limit: { count: 1, period: 'Daily' }
+        },
+        {
+            name: 'Gold',
+            priority: 'S',
+            gives: { amount: 30000, unit: 'pc' },
+            costs: [{ currency: 'free', amount: 0 }],
+            limit: { count: 1, period: 'Weekly' }
+        },
+        {
+            name: 'Basic Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Gold', amount: 50000 }],
+            limit: { count: 5, period: 'Weekly' }
+        },
+        {
+            name: 'Intermediate Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Gold', amount: 150000 }],
+            limit: { count: 2, period: 'Weekly' }
+        },
+        {
+            name: 'Effectium',
+            priority: 'S',
+            gives: { amount: 100, unit: 'pc' },
+            costs: [{ currency: 'Gold', amount: 50000 }],
+            limit: { count: 1, period: 'Daily' }
+        },
+        {
+            name: 'Gold',
+            priority: 'C',
+            gives: { amount: 50000, unit: 'pc' },
+            costs: [{ currency: 'Ether', amount: 60 }]
+        },
+        {
+            name: 'Gold',
+            priority: 'C',
+            gives: { amount: 550000, unit: 'pc' },
+            costs: [{ currency: 'Ether', amount: 600 }]
+        },
+        {
+            name: 'Gold',
+            priority: 'C',
+            gives: { amount: 2000000, unit: 'pc' },
+            costs: [{ currency: 'Ether', amount: 1800 }]
+        },
+        {
+            name: 'Stamina',
+            priority: 'C',
+            gives: { amount: 60, unit: 'pc' },
+            costs: [{ currency: 'Ether', amount: 60 }],
+            limit: { count: 25, period: 'Daily' }
+        },
+        {
+            name: 'Effectium',
+            priority: 'C',
+            gives: { amount: 50, unit: 'pc' },
+            costs: [{ currency: 'Ether', amount: 50 }],
+            limit: { count: 10, period: 'Daily' }
+        },
+        {
+            name: 'Arena Ticket',
+            priority: 'C',
+            gives: { amount: 5, unit: 'pc' },
+            costs: [{ currency: 'Ether', amount: 50 }],
+        }
+    ],
+    
     supply: [],
     rico: []
 }

@@ -35,6 +35,11 @@
     "description": "Increases experience by 8 000 when used to enhance a hero."
   },
   {
+    "name": "Food",
+    "rarity": "legendary",
+    "description": "Steak Dish / Prosciutto / Cake Slice / Sandwich."
+  },
+  {
     "name": "Light Upgrade Stone Fragment",
     "rarity": "normal",
     "description": "A fragment of an Upgrade Stone containing Light energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
@@ -295,6 +300,11 @@
     "description": "A malleable mineral that can be processed to take on specific properties of a piece of gear. It can be used as a substite material for normal-epic gear breakthroughs."
   },
   {
+    "name": "Glunite (Event)",
+    "rarity": "legendary",
+    "description": "Glunite that can be used as a material for breakthrough for gear purchased from the event shop."
+  },
+  {
     "name": "Refined Glunite",
     "rarity": "legendary",
     "description": "A mineral that was created by refining Glunite, so that it could match even the rarest types of gear. It can be used as a substite material for legendary gear breakthroughs."
@@ -495,9 +505,29 @@
     "description": "Obtain each Stage 3 Gem x1."
   },
   {
+    "name": "Gems",
+    "rarity": "legendary",
+    "description": "Various gems."
+  },
+  {
+    "name": "Hero Pieces",
+    "rarity": "legendary",
+    "description": "Transcend a hero by collecting 150 of their Hero Pieces."
+  },
+  {
+    "name": "Cosmetic",
+    "rarity": "legendary",
+    "description": "Costume, Frame, Chibi."
+  },
+  {
     "name": "Stage 5 Random Gem Chest",
     "rarity": "epic",
     "description": "Obtain 1 random Stage 5 Gem."
+  },
+  {
+    "name": "Stage 2 Random Gem Chest",
+    "rarity": "epic",
+    "description": "Obtain 1 random Stage 2 Gem."
   },
   {
     "name": "[Guild] 3★ Hero Piece Selection Chest",
@@ -720,6 +750,16 @@
     "description": "Gains AP at the start of battle +25."
   },
   {
+    "name": "6★ Equipment",
+    "rarity": "legendary",
+    "description": "Various 6★ items."
+  },
+  {
+    "name": "5★ Equipment",
+    "rarity": "legendary",
+    "description": "Various 5★ items."
+  },
+  {
     "name": "5★ Legendary Weapon Selection Chest",
     "rarity": "legendary",
     "description": "Select and obtain one 5★ legendary Weapon."
@@ -728,6 +768,16 @@
     "name": "5★ Legendary Accessory Selection Chest",
     "rarity": "legendary",
     "description": "Select and obtain one 5★ legendary Accessory."
+  },
+   {
+    "name": "6★ Legendary Weapon Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ legendary Weapon."
+  },
+  {
+    "name": "6★ Legendary Accessory Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ legendary Accessory."
   },
   {
     "name": "Etheric Helmet of Attack",
@@ -768,5 +818,25 @@
     "name": "Etheric Armor of Critical Hit",
     "rarity": "legendary",
     "description": ""
+  },
+  {
+    "name": "6★ Legendary Helmet Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ Legendary Helmet. The equipment provided have fixed stats"
+  },
+  {
+    "name": "6★ Legendary Armor Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ Legendary Armor. The equipment provided have fixed stats"
+  },
+  {
+    "name": "6★ Legendary Gloves Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ Legendary Gloves. The equipment provided have fixed stats"
+  },
+  {
+    "name": "6★ Legendary Boots Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ Legendary Boots. The equipment provided have fixed stats"
   }
 ]
