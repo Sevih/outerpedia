@@ -475,6 +475,11 @@
     "description": "Select and obtain 3 epic quality presents."
   },
   {
+    "name": "Superior Quality Present Chest",
+    "rarity": "superior",
+    "description": "Obtain 3 of each superior quality presents."
+  },
+  {
     "name": "[Guild] Enhancement Toolbox",
     "rarity": "superior",
     "description": "An enhancement toolbox purchased with guild contributions. Obtain one random enhancement hammer of any quality."
@@ -660,6 +665,11 @@
     "description": "Increases the chance of crafting gear of legendary quality by 10%."
   },
   {
+    "name": "30% Epic Abrasive",
+    "rarity": "epic",
+    "description": "Increases the chance of crafting gear of epic quality by 30%."
+  },
+  {
     "name": "Powerful Adventurer's Talisman",
     "rarity": "legendary",
     "description": "Recovers 30 Action Points when using an ultimate.\n Mainstats : Critical hit chance"
@@ -708,5 +718,55 @@
     "name": "6★ Legendary Boots [Burst]",
     "rarity": "legendary",
     "description": "Gains AP at the start of battle +25."
+  },
+  {
+    "name": "5★ Legendary Weapon Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 5★ legendary Weapon."
+  },
+  {
+    "name": "5★ Legendary Accessory Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 5★ legendary Accessory."
+  },
+  {
+    "name": "Etheric Helmet of Attack",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Gloves of Attack",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Boots of Attack",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Armor of Attack",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Helmet of Critical Hit",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Gloves of Critical Hit",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Boots of Critical Hit",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Armor of Critical Hit",
+    "rarity": "legendary",
+    "description": ""
   }
 ]

@@ -71,8 +71,11 @@ export default function RavenousWolfKingZiggsaronGuide() {
       <hr className="my-6 border-neutral-700" />
 
       <div className="mb-4">
-        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage of Team 3 – Water warrior</h3>
-        <YoutubeEmbed videoId="r4k9l7k56cg" title="Ziggsaron - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
+        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
+        <p className="text-neutral-400 text-sm italic mt-2">
+          Run provided by <span className="text-white font-semibold">XuRenChao</span> (19/08/2025)
+        </p>
+        <YoutubeEmbed videoId="Nlt72xRKMpo" title="Ziggsaron - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
       </div>
     </div>
   )

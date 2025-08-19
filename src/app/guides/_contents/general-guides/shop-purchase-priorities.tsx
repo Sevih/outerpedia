@@ -1080,11 +1080,130 @@ const data: Record<ShopKey, ShopItem[]> = {
     ],
     survey: [
         {
-            name: '6★ Legendary Helmet [Burst]',
-            priority: 'A',
+            name: '5★ Legendary Weapon Selection Chest',
+            priority: 'C',
             gives: { amount: 1, unit: 'pc' },
-            costs: [{ currency: 'Survey Contributions', amount: 1250 }],
-            limit: { count: 1, period: 'One-time' }
+            costs: [{ currency: 'Survey Contributions', amount: 475 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: '5★ Legendary Accessory Selection Chest',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 475 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Etheric Helmet of Attack',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 240 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Etheric Gloves of Attack',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 240 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Etheric Armor of Attack',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 240 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Etheric Boots of Attack',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 240 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Etheric Helmet of Critical Hit',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 240 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Etheric Gloves of Critical Hit',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 240 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Etheric Armor of Critical Hit',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 240 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Etheric Boots of Critical Hit',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 240 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Epic Reforge Catalyst',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 20 }],
+            limit: { count: 5, period: 'Weekly' }
+        },
+        {
+            name: 'Superior Quality Present Chest',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 15 }],
+            limit: { count: 3, period: 'Weekly' }
+        },
+        {
+            name: 'Intermediate Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 250 }],
+            limit: { count: 2, period: 'Weekly' }
+        },
+        {
+            name: '10% Legendary Abrasive',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 300 }],
+            limit: { count: 1, period: 'Weekly' }
+        },
+        {
+            name: 'Master\'s Hammer',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 10 }],
+            limit: { count: 5, period: 'Weekly' }
+        },
+        {
+            name: 'Basic Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 150 }],
+            limit: { count: 3, period: 'Weekly' }
+        },
+        {
+            name: '30% Epic Abrasive',
+            priority: 'C',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 100 }],
+            limit: { count: 2, period: 'Weekly' }
+        },
+        {
+            name: 'Glunite',
+            priority: 'B',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 150 }],
+            limit: { count: 3, period: 'Weekly' }
         }
     ],
 
