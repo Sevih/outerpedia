@@ -570,42 +570,42 @@ const data: Record<ShopKey, ShopItem[]> = {
         {
             name: 'Ether Amulet',
             priority: 'B',
-            gives: { amount: 50, unit: 'pc' },
+            gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Arena Medal', amount: 200 }],
             limit: { count: 5, period: 'One-time' },
         },
         {
             name: 'Ether Blade',
             priority: 'B',
-            gives: { amount: 50, unit: 'pc' },
+            gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Arena Medal', amount: 200 }],
             limit: { count: 5, period: 'One-time' },
         },
         {
             name: 'Etheric Helmet of Speed',
             priority: 'C',
-            gives: { amount: 50, unit: 'pc' },
+            gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Arena Medal', amount: 300 }],
             limit: { count: 1, period: 'One-time' },
         },
         {
             name: 'Etheric Gloves of Speed',
             priority: 'C',
-            gives: { amount: 50, unit: 'pc' },
+            gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Arena Medal', amount: 300 }],
             limit: { count: 1, period: 'One-time' },
         },
         {
             name: 'Etheric Chest Armor of Speed',
             priority: 'C',
-            gives: { amount: 50, unit: 'pc' },
+            gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Arena Medal', amount: 300 }],
             limit: { count: 1, period: 'One-time' },
         },
         {
             name: 'Etheric Boots of Speed',
             priority: 'C',
-            gives: { amount: 50, unit: 'pc' },
+            gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Arena Medal', amount: 300 }],
             limit: { count: 1, period: 'One-time' },
         }
@@ -1423,7 +1423,7 @@ const data: Record<ShopKey, ShopItem[]> = {
             gives: { amount: 0, unit: 'pc' },
             costs: [{ currency: 'TBD', amount: 0 }],
             limit: { count: 0, period: 'One-time' },
-            notes:"You can ignore it if it doesn’t have a unique passive like Masamune weapon or Kirisame accessory"
+            notes:"You can ignore it if it doesn’t have a unique passive like Sacreed Edge weapon"
 
         },
         {
@@ -1524,7 +1524,7 @@ const data: Record<ShopKey, ShopItem[]> = {
             costs: [{ currency: 'Ether', amount: 50 }],
         }
     ],
-    
+
     supply: [],
     rico: []
 }
