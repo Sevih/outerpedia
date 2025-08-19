@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-08-19",
+    title: "Shichifuja Update",
+    type: "update",
+    content: [
+      "- [Joint boss Shichifuja](/guides/joint-boss/shichifuja) has been updated for August 2025 version.",
+    ],
+  },
+  {
     date: "2025-08-13",
     title: "Planetary Control Unit Guild Raid",
     type: "update",

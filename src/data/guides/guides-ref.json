@@ -368,13 +368,13 @@
     "last_updated": "2024-12-10",
     "author": "Ducky"
   },
-  "schichifuja": {
+  "shichifuja": {
     "category": "joint-boss",
-    "title": "Schichifuja",
-    "description": "Combat Footage",
-    "icon": "schichifuja",
-    "last_updated": "2024-11-12",
-    "author": "Ducky"
+    "title": "Shichifuja",
+    "description": "Boss strategy guide",
+    "icon": "shichifuja",
+    "last_updated": "2025-08-19",
+    "author": "Sevih"
   },
   "annihilator": {
     "category": "joint-boss",
@@ -716,5 +716,14 @@
     "icon": "planetary-control-unit",
     "last_updated": "2025-08-13",
     "author": "Sevih"
+  },
+  "shop-purchase-priorities": {
+    "category": "general-guides",
+    "title": "Shop Purchase Priorities",
+    "description": "Complete guide to Outerplane’s timegated resources — skill books, transistones, special gear materials, and glunite sources.",
+    "icon": "shop-purchase-priorities",
+    "second_image": "shop-purchase-priorities2",
+    "last_updated": "2025-08-18",
+    "author": "Sevih / Shiraen"
   }
 }
