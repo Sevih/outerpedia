@@ -357,7 +357,7 @@
   {
     "name": "Ether",
     "rarity": "normal",
-    "description": "A rare ressource that can occasionally be found all over Mirsha. Can be used for special purposes."
+    "description": "A rare resource that can occasionally be found all over Mirsha. Can be used for special purposes."
   },
   {
     "name": "Limited Recruitment Ticket",
@@ -453,6 +453,11 @@
     "name": "License Point",
     "rarity": "normal",
     "description": "Points that can be obtained by completing Adventure License missions. You can exchange it for a variety of items in the Shop."
+  },
+  {
+    "name": "Survey Contributions",
+    "rarity": "normal",
+    "description": "Points acquired for contributing information to areas that needed to be surveyed. Survey points can be exchanged for items at the Survey Hub."
   },
   {
     "name": "Automaton Coin",

@@ -26,7 +26,7 @@ type ShopKey =
     | 'skyward'
     | 'al'
     | 'survey'
-    | 'ressource'
+    | 'resource'
 
 type Cost = {
     currency: string            // ex: "Guild Coins", "Arena Medals"
@@ -71,7 +71,7 @@ const tabs: { key: ShopKey; label: string; icon: string }[] = [
     { key: 'skyward', label: 'Skyward Tower', icon: '/images/ui/shop_skyward.webp' },
     { key: 'al', label: 'Adventure License', icon: '/images/ui/shop_al.webp' },
     { key: 'survey', label: 'Survey Hub', icon: '/images/ui/shop_survey.webp' },
-    { key: 'ressource', label: 'Ressources Shop', icon: '/images/ui/shop_ressource.webp' }
+    { key: 'resource', label: 'Resources Shop', icon: '/images/ui/shop_resource.webp' }
 ]
 
 // ---- Notes par shop (JSX accepté)
@@ -125,7 +125,7 @@ const shopNotes: Record<ShopKey, ReactNode> = {
     survey: (
         ""
     ),
-    ressource: (
+    resource: (
         ""
     ),
 }
@@ -908,7 +908,7 @@ const data: Record<ShopKey, ShopItem[]> = {
         },
         {
             name: '10% Legendary Abrasive',
-            priority: 'A',
+            priority: 'C',
             gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'Automaton Coin', amount: 50 }],
             limit: { count: 30, period: 'Monthly' },
@@ -957,10 +957,10 @@ const data: Record<ShopKey, ShopItem[]> = {
         },
         {
             name: 'Gold',
-            priority: 'A',
+            priority: 'S',
             gives: { amount: 15000, unit: 'pc' },
             costs: [{ currency: 'Free', amount: 0 }],
-            limit: { count: 20, period: 'Daily' },
+            limit: { count: 1, period: 'Daily' },
         },
         {
             name: 'Intermediate Skill Manual',
@@ -1001,7 +1001,7 @@ const data: Record<ShopKey, ShopItem[]> = {
         },
         {
             name: 'Sharp Adventurer\'s Talisman',
-            priority: 'B',
+            priority: 'S',
             gives: { amount: 1, unit: 'pc' },
             costs: [{ currency: 'License Point', amount: 3000 }],
             limit: { count: 1, period: 'One-time' },
@@ -1078,10 +1078,20 @@ const data: Record<ShopKey, ShopItem[]> = {
             limit: { count: 1, period: 'One-time' }
         }
     ],
+    survey: [
+        {
+            name: '6★ Legendary Helmet [Burst]',
+            priority: 'A',
+            gives: { amount: 1, unit: 'pc' },
+            costs: [{ currency: 'Survey Contributions', amount: 1250 }],
+            limit: { count: 1, period: 'One-time' }
+        }
+    ],
 
-    event: [/* ... */],
-    survey: [/* ... */],
-    ressource: [/* ... */],
+
+
+    event: [/* ... */],    
+    resource: [/* ... */],
     supply: [],
     rico: []
 }
