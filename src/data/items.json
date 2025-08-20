@@ -445,6 +445,11 @@
     "description": "A type of currency used across Mirsha. Can be used in Arena shop."
   },
   {
+    "name": "Antimatter",
+    "rarity": "normal",
+    "description": "Antiparticle material that can be gained in small amounts through the Antiparticle Generator. Used to open and enhance facilities."
+  },
+  {
     "name": "Archdemon's Trace",
     "rarity": "normal",
     "description": "A type of currency used across Mirsha. Can be used in Archdemon's shop."

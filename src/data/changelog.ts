@@ -25,6 +25,24 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-08-20",
+    title: "Sharable Character Filters",
+    type: "feature",
+    content: [
+      "- Character page filters (element, class, rarity, buffs/debuffs, etc.) are now encoded in the URL.",
+      "- You can copy and share the link to directly show your filtered characters to others.",
+    ],
+  }, 
+  {
+    date: "2025-08-20",
+    title: "Shop Guide Release",
+    type: "feature",
+    content: [
+      "- Outerplane shop guide with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely. Learn more [here](/guides/general-guides/shops)",
+    ],
+  },
+
+  {
     date: "2025-08-19",
     title: "Shichifuja Update",
     type: "update",
@@ -45,7 +63,7 @@ export const oldChangelog = [
     title: "OUTERPLANE Service Transfer to VAGAMES",
     type: "update",
     content: [
-      "-  📢 <strong>Service Transfer Incoming:</strong> OUTERPLANE will transfer to <strong>VAGAMES</strong> on <strong>September 23, 2025</strong>.",  
+      "-  📢 <strong>Service Transfer Incoming:</strong> OUTERPLANE will transfer to <strong>VAGAMES</strong> on <strong>September 23, 2025</strong>.",
       "- Make sure to complete the transfer process to keep your account and data.",
       "- [View Transfer Procedure](/guides/service-transfer)",
     ],
