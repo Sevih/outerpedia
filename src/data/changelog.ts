@@ -38,7 +38,7 @@ export const oldChangelog = [
     title: "Shop Guide Release",
     type: "feature",
     content: [
-      "- Outerplane shop guide with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely. Learn more [here](/guides/general-guides/shops)",
+      "- Outerplane shop guide with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely. Learn more [here](/guides/general-guides/shop-purchase-priorities)",
     ],
   },
 
