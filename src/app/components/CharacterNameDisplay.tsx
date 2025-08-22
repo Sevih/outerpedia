@@ -20,6 +20,17 @@ const PREFIX_STYLES: Record<string, string> = {
 
 }
 
+const ABBR_STYLES: Record<string, string> = {
+  Gnosis: 'G.',
+  Omega: 'O.',
+  Demiurge: 'D.',
+  Monad: 'M.',
+  "Holy Night's Blessing": 'HNB ',
+  'Kitsune of Eternity': 'KoE ',
+  'Poolside Trickster': 'PT ',
+  "Tamamo-no-Mae": 'Tamamo',
+}
+
 const NAME_STYLES: Record<string, string> = {
   'Wallenstein': 'text-[15px] pb-1',
   'Bell Cranel': 'text-[16px] pb-1',
@@ -104,6 +115,56 @@ export function CharacterNameDisplayBig({ fullname }: Props) {
     </div>
   );
 }
+
+export function CharacterNameDisplayCompact({ fullname }: Props) {
+  const matchedPrefix = Object.keys(PREFIX_STYLES).find((prefix) =>
+    fullname.startsWith(`${prefix} `)
+  );
+
+  let prefix = '';
+  let name = fullname;
+
+  if (matchedPrefix) {
+    prefix = matchedPrefix;
+    name = fullname.replace(`${prefix} `, '');
+  }
+
+  // tailles réduites
+  const prefixSize = matchedPrefix ? 'text-[9px]' : 'text-[9px]';
+  const nameSize = NAME_STYLES[name] || 'text-[11px]';
+
+  return (
+    <div className="text-white custom-text-shadow leading-tight px-1 text-center truncate">
+      {prefix && (
+        <div className={`${prefixSize} mb-[-1px]`}>{prefix}</div>
+      )}
+      <div className={`${nameSize} font-medium`}>{name}</div>
+    </div>
+  );
+}
+
+//carousel compact
+function escapeRegExp(s: string) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+export function CharacterNameDisplayCompactCarousel({ fullname }: Props) {
+  // remplace toutes les occurrences, en priorisant les clés les plus longues
+  let displayName = fullname
+  for (const [key, abbr] of Object.entries(ABBR_STYLES).sort((a, b) => b[0].length - a[0].length)) {
+    const rx = new RegExp(`\\b${escapeRegExp(key)}\\b`, 'g')
+    displayName = displayName.replace(rx, abbr)
+  }
+  // nettoie les doubles espaces potentiels (ex: abbr avec espace final)
+  displayName = displayName.replace(/\s+/g, ' ').trim()
+
+  return (
+    <div className="text-white custom-text-shadow leading-tight px-1 text-left truncate">
+      <div className="text-[11px] font-medium">{displayName}</div>
+    </div>
+  )
+}
+
 
 export function CharacterNameDisplayBigNoH({ fullname }: Props) {
   const matchedPrefix = Object.keys(PREFIX_STYLES_BIG).find((prefix) =>

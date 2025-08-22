@@ -56,7 +56,7 @@ export default function SkywardTowerGuideGrid({ items }: Props) {
                     <Link
                         key={slug}
                         href={`/guides/${category}/${slug}`}
-                        className="group relative aspect-[7/2] rounded-2xl overflow-hidden border border-neutral-700 hover:border-sky-500 hover:shadow-xl transition-all bg-neutral-800"
+                        className="group relative rounded-2xl overflow-hidden border border-neutral-700 hover:border-sky-500 hover:shadow-xl transition-all bg-neutral-800 min-h-[160px]"
                     >
                         <Image
                             src={`/images/guides/skyward-tower/${bg}`}
@@ -64,18 +64,15 @@ export default function SkywardTowerGuideGrid({ items }: Props) {
                             fill
                             className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                         />
-                        <div className="absolute inset-0 bg-black/60 p-4 flex flex-col justify-between">
-                            <div>
-                                <h2 className="text-2xl font-extrabold text-white tracking-wide drop-shadow-md uppercase">
-                                    {title}
-                                </h2>
-                                <p className="mt-1 text-neutral-300 italic text-sm sm:text-base leading-snug">
-                                    {description}
-                                </p>
-                            </div>
+                        <div className="absolute inset-0 bg-black/60 p-4 flex flex-col justify-end">
+                            <h2 className="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-wide drop-shadow-md uppercase">
+                                {title}
+                            </h2>
+                            <p className="mt-1 text-neutral-300 italic text-xs sm:text-sm md:text-base leading-snug">
+                                {description}
+                            </p>
                         </div>
                     </Link>
-
                 );
             })}
         </div>
