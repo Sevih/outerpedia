@@ -8,6 +8,7 @@
   "role":"dps",
   "Class": "Striker",
   "SubClass": "Attacker",
+  "tags":["collab","ignore-defense"],
   "limited":true,"skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,

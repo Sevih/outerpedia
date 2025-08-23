@@ -6,6 +6,7 @@
   "Class": "Striker",
   "gift": "Luxury",
   "SubClass": "Attacker",
+  "tags":["ignore-defense"],
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",

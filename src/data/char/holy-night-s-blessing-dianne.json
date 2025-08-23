@@ -8,6 +8,7 @@
   "gift": "Luxury",
   "role":"dps",
   "limited":true,
+  "tags":["seasonal","ignore-defense"],
   "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
   "transcend": {
     "1": null,

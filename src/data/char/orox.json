@@ -5,6 +5,7 @@
   "Element": "Earth",
   "gift": "Natural Object",
   "Class": "Striker",
+  "tags":["ignore-defense"],
   "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,

@@ -28,32 +28,29 @@ export default function CompactTeamTabSelector({
   onSelect,
 }: CompactTeamTabSelectorProps) {
   const keys = useMemo(() => Object.keys(teams), [teams])
+  const firstKey = keys[0] ?? '' // fallback string vide si pas de clé
 
-  // si pas de team, on affiche un petit message et on sort
+  const [internal, setInternal] = useState(firstKey)
+
+  useEffect(() => {
+    if (selectedKey) return // contrôlé: ne rien toucher
+    if (!keys.includes(internal) && firstKey) {
+      setInternal(firstKey)
+    }
+  }, [keys, firstKey, selectedKey, internal])
+
+  // si pas de team -> afficher un message
   if (keys.length === 0) {
     return <div className="text-sm text-zinc-400">No teams available.</div>
   }
 
-  const firstKey = keys[0]
-
-  // non-contrôlé: état interne
-  const [internal, setInternal] = useState(firstKey)
-
-  // réaligner la sélection quand les clés changent (en non-contrôlé)
-  useEffect(() => {
-    if (selectedKey) return // contrôlé: ne rien toucher
-    if (!keys.includes(internal)) setInternal(firstKey)
-  }, [keys, firstKey, selectedKey, internal])
-
   const activeKey = selectedKey ?? internal
-
   const handleSelect = (k: string) => {
-    if (onSelect) onSelect(k)     // contrôlé
-    else setInternal(k)           // non-contrôlé
+    if (onSelect) onSelect(k)
+    else setInternal(k)
   }
 
   const showTabs = keys.length > 1
-
   const tabList = keys.map((key) => ({
     key,
     label: teams[key].label,
@@ -78,7 +75,6 @@ export default function CompactTeamTabSelector({
 
       <CompactRecommendedTeamCarousel
         team={activeTeam.setup}
-        note={activeTeam.note}
         scale={scale}
       />
     </div>

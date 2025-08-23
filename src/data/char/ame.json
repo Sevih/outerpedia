@@ -7,6 +7,7 @@
   "gift": "Natural Object",
   "role": "dps",
   "rank_pvp": "B",
+  "tags":["ignore-defense"],
   "SubClass": "Wizard",
   "skill_priority": {
     "First": {

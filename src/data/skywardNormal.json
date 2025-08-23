@@ -1,22 +1,21 @@
 [
   {
-    "floor": 10,
-    "boss": { "name": "Goblin King", "image": "4089001" },
+    "floor": 100,
+    "boss": { "name": "Sigma", "image": ["2000052_E"] },
     "note": [
-      { "type": "p", "string": "Bring a cleanser for poison debuff." },
-      { "type": "ul", "items": ["Focus boss first", "Avoid stalling"] }
+      { "type": "p", "string": "Need Immunity or Cleanse." }
     ],
     "teams": {
       "team1": {
         "label": "No Debuff Team",
         "icon": "SC_Buff_Effect_Cleanse.webp",
         "setup": [
-          ["Holy Night's Blessing Dianne", "Leo", "Kappa"],
-          ["Rey", "Ame", "Ryu Lion"],
-          ["Tamamo-no-Mae", "Fran", "Charlotte", "Dianne", "Nella", "Astei"],
-          ["Kitsune of Eternity Tamamo-no-Mae", "Maxwell", "Regina", "Demiurge Astei"]
-        ],
-        "conditions": ["No healer", "2 x 2★ units"]
+          ["Astei", "Nella", "Dianne","Tio","Monad Eva","Stella"],
+          ["Demiurge Stella"],
+          ["Valentine"],
+          ["Aer"]
+        ]
+       
       }
     }
   }

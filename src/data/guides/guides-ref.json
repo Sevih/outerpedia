@@ -677,28 +677,25 @@
     "category": "skyward-tower",
     "title": "Normal",
     "description": "Ascend the 100 floors of the Skyward Tower — an epic journey that will test your endurance and versatility.",
-    "icon": "CM_Adventure_MonadGate",
-    "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-07-04",
-    "author": "Sevih"
+    "icon": "normal",
+    "last_updated": "2025-08-23",
+    "author": "Various Author"
   },
   "hard": {
     "category": "skyward-tower",
     "title": "Hard",
     "description": "Face 30 relentless floors packed with tougher enemies and tactical challenges. Precision and strategy are key.",
-    "icon": "CM_Adventure_MonadGate",
-    "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-07-04",
-    "author": "Sevih"
+    "icon": "hard",
+    "last_updated": "2025-08-23",
+    "author": "Various Author"
   },
   "very-hard": {
     "category": "skyward-tower",
     "title": "Very Hard",
     "description": "Only the most elite teams will survive the top 20 brutal floors.",
-    "icon": "CM_Adventure_MonadGate",
-    "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-07-04",
-    "author": "Sevih"
+    "icon": "very-hard",
+    "last_updated": "2025-08-23",
+    "author": "Various Author"
   },
   "timegate-resource": {
     "category": "general-guides",

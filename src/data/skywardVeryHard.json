@@ -1,0 +1,132 @@
+[
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Valentine",
+      "image": [
+        "2000012_E",
+        "2000017_E",
+        "2000031_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Demiurge Drakhan",
+            "Omega Nadja"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Tamara",
+            "Gnosis Nella"
+          ],
+          [
+            "Caren",
+            "Demiurge Luna"
+          ]
+        ],
+        "conditions": [
+          "No healer"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Max speed Tamara to Silence Valentine and then increase the CD."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 5,
+    "boss": {
+      "name": "Demiurge Drakhan",
+      "image": [
+        "2000063_E",
+        "4151014",
+        "4151014"
+      ]
+    },
+    "note": [
+      {
+        "type": "ul",
+        "items": [
+          "Sterope is must have",
+          "High survivability units are recommended"
+        ]
+      }
+    ],
+    "teams": {
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Sterope"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Caren",
+            "Kanon",
+            "Gnosis Dahlia"
+          ],
+          [
+            "Monad Eva",
+            "Nella"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "floor": 20,
+    "boss": {
+      "name": "Iota",
+      "image": [
+        "2000069_E",
+        "2000077_E"
+      ]
+    },
+    "note": [
+      {
+        "type": "p",
+        "string": "You need to stun both and keep the stun up in order to prevent Iota from regaining her invulnerability."
+      }
+    ],
+    "teams": {
+      "team1": {
+        "label": "basic",
+        "icon": "a.webp",
+        "setup": [
+          [
+            "Tamara",
+            "Monad Eva"
+          ],
+          [
+            "Iota",
+            "Gnosis Nella"
+          ],
+          [
+            "Akari",
+            "Maxie",
+            "Roxie"
+          ],
+          [
+            "Demiurge Luna",
+            "Ame",
+            "Maxwell",
+            "Drakhan"
+          ]
+        ]
+      }
+    }
+  }
+]

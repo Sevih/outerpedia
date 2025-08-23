@@ -7,6 +7,7 @@
   "gift": "Science",
   "role":"dps",
   "Class": "Striker",
+  "tags":["ignore-defense"],
   "SubClass": "Attacker","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
   "transcend": {
     "1": null,

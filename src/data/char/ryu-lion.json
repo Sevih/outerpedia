@@ -7,6 +7,7 @@
   "gift": "Science",
   "rank_pvp":"S",
   "role":"dps",
+  "tags":["collab","ignore-defense"],
   "SubClass": "Vanguard",
   "limited":true,"skill_priority":{"First":{"prio": 1}, "Second":{"prio": 2}, "Ultimate":{"prio": 3}},
   "transcend": {

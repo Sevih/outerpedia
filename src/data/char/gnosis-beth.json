@@ -6,6 +6,7 @@
   "role":"dps",
   "rank_pvp":"S",
   "gift": "Craftwork",
+  "tags":["premium"],
   "Class": "Ranger",
   "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {

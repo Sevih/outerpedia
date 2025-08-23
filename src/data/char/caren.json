@@ -8,6 +8,7 @@
   "role":"dps",
   "Class": "Striker",
   "SubClass": "Bruiser",
+  "tags":["ignore-defense"],
   "skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,

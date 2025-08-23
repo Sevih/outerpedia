@@ -7,6 +7,7 @@
   "role":"dps",
   "Class": "Striker",
   "gift": "Craftwork",
+  "tags":["seasonal","ignore-defense"],
   "limited":true,
   "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
   "transcend": {
@@ -131,6 +132,7 @@
       ],
       "cd": "5",
       "debuff": [
+        "BT_RESOURCE_DOWN"
       ],
       "description": [
         "When the target is not granted a dispellable <color=#28d9ed>buff</color>, reduces cooldown of <color=#28d9ed>Surprise Sand Castle</color> by <color=#28d9ed>[Buff_V_2000085_3_2] turn(s)</color>, then attacks the enemy. This skill ignores <color=#28d9ed>30%</color> of the target's Defense.\\nAfter attacking, reduces all of the target's <color=#28d9ed>Unique Resource</color> count. (Ignores the target's Resilience and Immunity)"

@@ -25,6 +25,17 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-08-23",
+    title: "Skyward Tower Guide, Tags & Roles Filters",
+    type: "feature",
+    content: [
+      "Added the [Skyward Tower Guide](/guides/skyward-tower)",
+      "Introduced tag filters on the character list",
+      "Introduced role filters on the character list",
+      "Improved character sorting and browsing with the new filters"
+    ]
+  },
+  {
     date: "2025-08-20",
     title: "Sharable Character Filters",
     type: "feature",
@@ -32,7 +43,7 @@ export const oldChangelog = [
       "- Character page filters (element, class, rarity, buffs/debuffs, etc.) are now encoded in the URL.",
       "- You can copy and share the link to directly show your filtered characters to others.",
     ],
-  }, 
+  },
   {
     date: "2025-08-20",
     title: "Shop Guide Release",

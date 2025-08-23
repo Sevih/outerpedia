@@ -5,6 +5,7 @@
   "Element": "Dark",
   "rank_pvp":"S",
   "gift": "Magic Tool",
+  "tags":["premium"],
   "role":"support",
   "Class": "Ranger",
   "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},

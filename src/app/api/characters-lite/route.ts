@@ -35,6 +35,7 @@ function extractBuffsAndDebuffs(character: Character) {
   }
 
   const slug = character.Fullname?.toLowerCase().replace(/ /g, '-')
+
   const ee = eeData[slug]
   if (ee) {
     normalizeEffect(ee.buff).forEach(b => buffs.add(b))
@@ -47,7 +48,7 @@ function extractBuffsAndDebuffs(character: Character) {
   }
 }
 
-
+type RoleType = 'DPS' | 'Support' | 'Sustain'
 
 export async function GET() {
   try {
@@ -60,6 +61,11 @@ export async function GET() {
         const character = JSON.parse(content) as Character
 
         const { buff, debuff } = extractBuffsAndDebuffs(character)
+        const role = 'role' in character ? (character.role as RoleType) : undefined
+        const tags = Array.isArray((character as Character & { tags?: string[] }).tags)
+          ? (character as Character & { tags?: string[] }).tags!
+          : []
+
 
         return {
           ID: character.ID,
@@ -72,6 +78,8 @@ export async function GET() {
           Chain_Type: character.Chain_Type,
           buff,
           debuff,
+          role,
+          tags
         }
       })
     )

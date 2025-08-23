@@ -7,6 +7,7 @@
   "gift": "Natural Object",
   "role":"dps",
   "Class": "Striker",
+  "tags":["ignore-defense"],
   "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,

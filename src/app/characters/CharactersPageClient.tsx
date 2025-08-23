@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import type { CharacterLite } from '@/types/types'
+import type { CharacterLite, RoleType } from '@/types/types'
 import { toKebabCase } from '@/utils/formatText'
 import type { ElementType, ClassType } from '@/types/enums'
 import { groupEffects } from '@/utils/groupEffects'
@@ -13,6 +13,8 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import LZString from 'lz-string'
 import { EL, CL, CH, GF, EL_INV, CL_INV, CH_INV, GF_INV } from '@/data/filterCodes'
 import effectsIndex from '@/data/effectsIndex.json'
+import rawTAG_INDEX from '@/data/tags.json'
+import rawTAG_TYPES from '@/data/tagTypes.json'
 
 // ===== Helpers for effect lookup
 const buffToId: Record<string, number> = effectsIndex.buffs
@@ -23,8 +25,21 @@ const idToDebuff = Object.fromEntries(Object.entries(debuffToId).map(([k, v]) =>
 // ===== Dynamic components (keep client bundle small)
 const CharacterNameDisplay = dynamic(() => import('@/app/components/CharacterNameDisplay').then(m => m.CharacterNameDisplay))
 const BuffDebuffDisplayMini = dynamic(() => import('@/app/components/BuffDebuffDisplayMini').then(m => m.default))
+const TagDisplayMini = dynamic(() => import('@/app/components/TagDisplayMini').then(m => m.default))
 const ElementIcon = dynamic(() => import('@/app/components/ElementIcon').then(m => m.ElementIcon))
 const ClassIcon = dynamic(() => import('@/app/components/ClassIcon').then(m => m.ClassIcon))
+
+type TagMeta = {
+  label: string
+  image: string
+  desc: string
+  type: string
+}
+
+type TagTypeStyle = {
+  className: string
+}
+const typeLabel = (t: string) => t.slice(0, 1).toUpperCase() + t.slice(1)
 
 // ===== Types
 type Payload = {
@@ -38,6 +53,8 @@ type Payload = {
   logic?: 'AND' | 'OR'
   q?: string
   uniq?: boolean
+  role?: string[]
+  tags?: string[]
 }
 
 type ZPayload = {
@@ -51,6 +68,8 @@ type ZPayload = {
   lg?: 0 | 1
   q?: string
   u?: 0 | 1
+  rl?: string[]
+  tg?: string[]
 }
 
 // ===== Constants (could live in a shared "filterOptions.ts")
@@ -94,6 +113,49 @@ const GIFTS = [
   { name: 'Craftwork', value: 'craftwork' },
   { name: 'Natural Object', value: 'natural object' },
 ] as const
+
+const TAG_INDEX = rawTAG_INDEX as Record<string, TagMeta>
+const TAG_TYPES = rawTAG_TYPES as Record<string, TagTypeStyle>
+const TAG_KEYS = Object.keys(TAG_INDEX)
+const TAGS = TAG_KEYS.map(k => ({
+  key: k,
+  label: TAG_INDEX[k].label,
+  image: TAG_INDEX[k].image,
+  desc: TAG_INDEX[k].desc,
+  type: TAG_INDEX[k].type,
+}))
+
+// ——— Tag helpers: one-per-category
+const TAG_KEY_TO_TYPE: Record<string, string> = Object.fromEntries(
+  TAGS.map(t => [t.key, t.type])
+)
+
+/** Garde au plus 1 tag par catégorie, en conservant le premier rencontré */
+function keepOnePerType(keys: string[]): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const k of keys) {
+    const type = TAG_KEY_TO_TYPE[k] || TAG_INDEX[k]?.type
+    if (!type) continue
+    if (seen.has(type)) continue
+    seen.add(type)
+    out.push(k)
+  }
+  return out
+}
+
+const ROLES = [
+  { name: "All", value: null },
+  { name: "DPS", value: "dps" },
+  { name: "Support", value: "support" },
+  { name: "Sustain", value: "sustain" },
+] as const
+
+const isRole = (v: unknown): v is RoleType =>
+  v === 'DPS' || v === 'Support' || v === 'Sustain'
+
+
+
 
 const orderedBuffGroups = [
   {
@@ -163,7 +225,7 @@ const orderedDebuffGroups = [
       'BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_SEAL_COUNTER', 'BT_SEALED', 'BT_SEALED_IR',
       'BT_SEALED_RESURRECTION', 'BT_SEAL_ADDITIVE_ATTACK',
       'BT_STATBUFF_CONVERT_TO_STATDEBUFF', 'BT_STEAL_BUFF', 'BT_REMOVE_BUFF', 'IG_Buff_BuffdurationReduce', 'IG_Buff_DeBuffdurationIncrease',
-      'BT_SEALED_RECEIVE_HEAL', 'BT_WG_DMG', 'BT_FIXED_DAMAGE',
+      'BT_SEALED_RECEIVE_HEAL', 'BT_WG_DMG', 'BT_FIXED_DAMAGE', 'BT_RESOURCE_DOWN'
     ],
   },
   { title: 'Unique', items: ['UNIQUE_MARTYRDOM', 'UNIQUE_IRREGULAR_INFECTION'] },
@@ -185,6 +247,8 @@ function encodeStateToZ(p: Payload): string {
     g: isArr(p.gift) ? p.gift!.map(x => GF[x as keyof typeof GF]).filter(Boolean) : undefined,
     b: isArr(p.buffs) ? p.buffs!.map(b => buffToId[b]).filter(Boolean) : undefined,
     d: isArr(p.debuffs) ? p.debuffs!.map(d => debuffToId[d]).filter(Boolean) : undefined,
+    rl: isArr(p.role) ? p.role : undefined,
+    tg: isArr(p.tags) ? p.tags : undefined,
     lg: p.logic === 'AND' ? 1 : undefined,
     q: p.q || undefined,
     u: p.uniq ? 1 : undefined,
@@ -204,6 +268,8 @@ function decodeZToState(z?: string): Partial<Payload> | null {
       gift: raw.g?.map(id => GF_INV[id]).filter(Boolean) as string[] | undefined,
       buffs: raw.b?.map(id => idToBuff[id]).filter(Boolean),
       debuffs: raw.d?.map(id => idToDebuff[id]).filter(Boolean),
+      role: raw.rl ?? [],
+      tags: raw.tg ?? [],
       logic: raw.lg === 1 ? 'AND' : 'OR',
       q: raw.q,
       uniq: raw.u === 1,
@@ -253,12 +319,17 @@ function StarIcons({ count, size = 20 }: { count: number; size?: number }) {
 export default function CharactersPage() {
   const [characters, setCharacters] = useState<CharacterLite[]>([])
   const [loading, setLoading] = useState(true)
+  const [showTagsPanel, setShowTagsPanel] = useState(false)
 
   const [elementFilter, setElementFilter] = useState<string[]>([])
   const [classFilter, setClassFilter] = useState<string[]>([])
   const [rarityFilter, setRarityFilter] = useState<number[]>([])
   const [chainFilter, setChainFilter] = useState<string[]>([])
   const [giftFilter, setGiftFilter] = useState<string[]>([])
+  const [roleFilter, setRoleFilter] = useState<RoleType[]>([])
+  const [tagFilter, setTagFilter] = useState<string[]>([])
+
+
 
   const [selectedBuffs, setSelectedBuffs] = useState<string[]>([])
   const [selectedDebuffs, setSelectedDebuffs] = useState<string[]>([])
@@ -297,10 +368,11 @@ export default function CharactersPage() {
     logic: effectLogic !== 'OR' ? effectLogic : undefined,
     q: searchTerm.trim() || undefined,
     uniq: showUniqueEffects || undefined,
-  }), [
-    elementFilter, classFilter, rarityFilter, chainFilter, giftFilter,
-    selectedBuffs, selectedDebuffs, effectLogic, searchTerm, showUniqueEffects
-  ])
+    role: roleFilter.length ? roleFilter : undefined,
+    tags: tagFilter.length ? tagFilter : undefined,
+  }), [elementFilter, classFilter, rarityFilter, chainFilter, giftFilter,
+    selectedBuffs, selectedDebuffs, effectLogic, searchTerm, showUniqueEffects,
+    roleFilter, tagFilter])
 
   const applyPayload = (p: Partial<Payload>) => {
     setElementFilter(p.el ?? [])
@@ -313,7 +385,28 @@ export default function CharactersPage() {
     setSearchTerm(p.q ?? '')
     setEffectLogic(p.logic === 'AND' || p.logic === 'OR' ? p.logic : 'OR')
     setShowUniqueEffects(Boolean(p.uniq))
+    setRoleFilter((p.role ?? []).filter(isRole))
+    setTagFilter(keepOnePerType(p.tags ?? []))
   }
+
+  const TAG_GROUPS = useMemo(() => {
+    const byType: Record<string, TagMeta[]> = {}
+    for (const k of Object.keys(TAG_INDEX)) {
+      const meta = TAG_INDEX[k as keyof typeof TAG_INDEX] as TagMeta
+      if (!meta) continue
+        ; (byType[meta.type] ||= []).push(meta)
+    }
+    // on veut aussi la key (slug) → on reconstruit depuis TAGS (qui a key+meta)
+    const byTypeWithKeys: { title: string; items: { key: string; meta: TagMeta }[] }[] = []
+    const mapByType: Record<string, { key: string; meta: TagMeta }[]> = {}
+    for (const t of TAGS) {
+      (mapByType[t.type] ||= []).push({ key: t.key, meta: { label: t.label, image: t.image, desc: t.desc, type: t.type } })
+    }
+    for (const [t, items] of Object.entries(mapByType)) {
+      byTypeWithKeys.push({ title: typeLabel(t), items })
+    }
+    return byTypeWithKeys
+  }, [])
 
   // 1) Hydration from URL once
   useEffect(() => {
@@ -341,7 +434,15 @@ export default function CharactersPage() {
     fetchCharacters()
   }, [])
 
+
+
   // 3) Normalize "All" selections (if all chosen → reset)
+  useEffect(() => {
+    const all = ['DPS', 'Support', 'Sustain'] as RoleType[]
+    if (roleFilter.length === all.length) setRoleFilter([])
+  }, [roleFilter])
+
+
   useEffect(() => {
     const all = ELEMENTS.slice(1).map(e => e.value!)
     if (elementFilter.length === all.length) setElementFilter([])
@@ -367,12 +468,25 @@ export default function CharactersPage() {
     if (giftFilter.length === all.length) setGiftFilter([])
   }, [giftFilter])
 
+  useEffect(() => {
+    const groups = groupEffects(allDebuffs, orderedDebuffGroups, showUniqueEffects)
+    const other = groups.find(g => g.title?.toLowerCase() === 'other')
+    if (other) console.log('[DEBUG Other debuffs]', other.effects)
+  }, [allDebuffs, showUniqueEffects])
+
+  useEffect(() => {
+    setTagFilter(prev => keepOnePerType(prev))
+  }, [showTagsPanel]) // ou [] si tu veux le faire une fois après mount
+
+
+
   // 4) Sync filters → URL
   useEffect(() => {
     const isEmpty =
       !payload.el && !payload.cl && !payload.r &&
       !payload.chain && !payload.gift &&
       !payload.buffs && !payload.debuffs &&
+      !payload.role && !payload.tags &&
       !payload.logic && !payload.q && !payload.uniq
 
     const serialized = isEmpty ? pathname : `${pathname}?z=${encodeStateToZ(payload)}`
@@ -415,9 +529,18 @@ export default function CharactersPage() {
         ? (effectLogic === 'AND' ? hasBuffs && hasDebuffs : hasBuffs || hasDebuffs)
         : (selectedBuffs.length > 0 ? hasBuffs : selectedDebuffs.length > 0 ? hasDebuffs : true)
 
-      return elementMatch && classMatch && rarityMatch && chainMatch && effectMatch && giftMatch
+      // ✅ NOUVEAU — safe avec optional fields
+      const roleMatch = roleFilter.length === 0 || (char.role && roleFilter.includes(char.role))
+      const tagMatch = tagFilter.length === 0 || tagFilter.every(t => char.tags?.includes(t))
+
+      return elementMatch && classMatch && rarityMatch && chainMatch && effectMatch && giftMatch && roleMatch && tagMatch
     })
-  }, [characters, searchTerm, elementFilter, classFilter, chainFilter, giftFilter, rarityFilter, selectedBuffs, selectedDebuffs, effectLogic])
+  }, [
+    characters, searchTerm, elementFilter, classFilter, chainFilter, giftFilter, rarityFilter,
+    selectedBuffs, selectedDebuffs, effectLogic,
+    roleFilter, tagFilter
+  ])
+
 
   // ===== Render
   if (loading) return <div className="text-center mt-8 text-white">Loading characters...</div>
@@ -551,29 +674,70 @@ export default function CharactersPage() {
           ))}
         </div>
       </div>
+      {/* Roles */}
+      <div className="flex gap-2 justify-center mb-2">
+        {ROLES.map(r => (
+          <FilterPill
+            key={r.name}
+            title={r.name}
+            active={(r.value === null && roleFilter.length === 0) || (r.value !== null && roleFilter.includes(r.value as RoleType))}
+            onClick={() => {
+              if (!r.value) return setRoleFilter([])
+              setRoleFilter(prev =>
+                prev.includes(r.value as RoleType)
+                  ? prev.filter(v => v !== (r.value as RoleType))
+                  : [...prev, r.value as RoleType]
+              )
+            }}
+            className="px-2 py-1 text-sm font-semibold"
+          >
+            <span className="text-white">{r.name}</span>
+          </FilterPill>
+        ))}
+      </div>
 
       {/* Toggle filters */}
       <div className="text-center space-y-6">
-        <div>
+        <div className='flex gap-2 justify-center'>
           <button onClick={() => setShowFilters(s => !s)} className="bg-gray-700 hover:bg-cyan-600 px-4 py-2 rounded text-sm mb-4">
             {showFilters ? 'Hide Buffs/Debuffs Filters' : 'Show Buffs/Debuffs Filters'}
+          </button>
+          <button onClick={() => setEffectLogic(l => (l === 'AND' ? 'OR' : 'AND'))} className="bg-gray-700 hover:bg-cyan-600 px-4 py-2 rounded text-sm mb-4">
+            Buff Filter logic: {effectLogic}
           </button>
         </div>
 
         {showFilters && (
+
           <div className="flex flex-col items-center gap-8 w-full">
+            <label htmlFor="show-unique-effects" className="flex items-center gap-2 rounded px-3 py-1 text-sm text-white cursor-pointer select-none transition bg-gray-700 hover:bg-cyan-600">
+              <input type="checkbox" id="show-unique-effects" checked={showUniqueEffects} onChange={() => setShowUniqueEffects(v => !v)} className="accent-cyan-500 w-4 h-4" />
+              Show Unique Effects
+            </label>
             {/* Buffs */}
             <div className="w-full">
               <div className="flex justify-center">
                 <div className="flex flex-wrap justify-center gap-6 max-w-screen-lg">
                   {groupEffects(allBuffs, orderedBuffGroups, showUniqueEffects).map(group => {
-                    const visible = group.effects.filter(key => showUniqueEffects || !key.startsWith('UNIQUE_'))
+                    const visible = group.effects
+                      .map(k => k?.trim())
+                      .filter(Boolean)
+                      .filter(key => showUniqueEffects || !key.startsWith('UNIQUE_'))
+
+                    if (visible.length === 0) return null  // ⬅️ ne pas rendre "Other" vide
+
                     return (
                       <div key={group.title}>
-                        {group.title && visible.length > 0 && <p className="text-cyan-400 font-semibold mb-1 text-center">{group.title}</p>}
+                        {group.title && <p className="text-cyan-400 font-semibold mb-1 text-center">{group.title}</p>}
                         <div className="flex flex-wrap justify-center gap-1">
                           {visible.map(key => (
-                            <div key={key} onClick={() => setSelectedBuffs(prev => prev.includes(key) ? prev.filter(v => v !== key) : [...prev, key])} className={`cursor-pointer ${selectedBuffs.includes(key) ? 'ring-2 ring-cyan-400 rounded' : ''}`}>
+                            <div
+                              key={key}
+                              onClick={() =>
+                                setSelectedBuffs(prev => prev.includes(key) ? prev.filter(v => v !== key) : [...prev, key])
+                              }
+                              className={`cursor-pointer ${selectedBuffs.includes(key) ? 'ring-2 ring-cyan-400 rounded' : ''}`}
+                            >
                               <BuffDebuffDisplayMini buffs={[key]} />
                             </div>
                           ))}
@@ -581,6 +745,7 @@ export default function CharactersPage() {
                       </div>
                     )
                   })}
+
                 </div>
               </div>
             </div>
@@ -590,13 +755,25 @@ export default function CharactersPage() {
               <div className="flex justify-center">
                 <div className="flex flex-wrap justify-center gap-6 max-w-screen-lg">
                   {groupEffects(allDebuffs, orderedDebuffGroups, showUniqueEffects).map(group => {
-                    const visible = group.effects.filter(key => showUniqueEffects || !key.startsWith('UNIQUE_'))
+                    const visible = group.effects
+                      .map(k => k?.trim())
+                      .filter(Boolean)
+                      .filter(key => showUniqueEffects || !key.startsWith('UNIQUE_'))
+
+                    if (visible.length === 0) return null  // ⬅️ ne pas rendre "Other" vide
+
                     return (
                       <div key={group.title}>
-                        {group.title && visible.length > 0 && <p className="text-red-400 font-semibold mb-1 text-center">{group.title}</p>}
+                        {group.title && <p className="text-red-400 font-semibold mb-1 text-center">{group.title}</p>}
                         <div className="flex flex-wrap justify-center gap-1">
                           {visible.map(key => (
-                            <div key={key} onClick={() => setSelectedDebuffs(prev => prev.includes(key) ? prev.filter(v => v !== key) : [...prev, key])} className={`cursor-pointer ${selectedDebuffs.includes(key) ? 'ring-2 ring-red-800 rounded' : ''}`}>
+                            <div
+                              key={key}
+                              onClick={() =>
+                                setSelectedDebuffs(prev => prev.includes(key) ? prev.filter(v => v !== key) : [...prev, key])
+                              }
+                              className={`cursor-pointer ${selectedDebuffs.includes(key) ? 'ring-2 ring-red-800 rounded' : ''}`}
+                            >
                               <BuffDebuffDisplayMini debuffs={[key]} />
                             </div>
                           ))}
@@ -604,17 +781,72 @@ export default function CharactersPage() {
                       </div>
                     )
                   })}
+
                 </div>
               </div>
             </div>
           </div>
         )}
 
+        {/* NEW: toggle Tags */}
+        <div>
+          <button
+            onClick={() => setShowTagsPanel(s => !s)}
+            className="bg-gray-700 hover:bg-cyan-600 px-4 py-2 rounded text-sm"
+          >
+            {showTagsPanel ? 'Hide Tags' : 'Show Tags'}
+          </button>
+        </div>
+        {showTagsPanel && (
+          <div className="w-full">
+            <div className="flex justify-center">
+              <div className="flex flex-wrap justify-center gap-8 max-w-screen-lg">
+                {TAG_GROUPS.map(group => (
+                  <div key={group.title}>
+                    <p className="text-white-400 font-semibold mb-1 text-center">
+                      {group.title
+                        .split('-')
+                        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                        .join(' ')}
+                    </p>
+
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {group.items.map(({ key, meta }) => (
+                        <button
+                          key={key}
+                          title={meta.desc}
+                          onClick={() =>
+                            setTagFilter(prev => {
+                              const type = meta.type
+                              const isSelected = prev.includes(key)
+                              // retire tout tag de la même catégorie
+                              const withoutType = prev.filter(k => (TAG_KEY_TO_TYPE[k] || TAG_INDEX[k]?.type) !== type)
+                              // toggle: si déjà sélectionné → on retire (donc rien), sinon on ajoute
+                              return isSelected ? withoutType : [...withoutType, key]
+                            })
+                          }
+                          className={[
+                            "px-2 py-1 text-xs font-semibold border rounded inline-flex items-center gap-1 transition",
+                            TAG_TYPES[meta.type]?.className ?? "bg-gray-700 text-white border-gray-600",
+                            tagFilter.includes(key) ? "ring-2 ring-cyan-400" : ""
+                          ].join(' ')}
+                        >
+                          <span><TagDisplayMini tags={key} /></span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+
+
         {/* Options: logic / reset / share / unique */}
         <div className="mt-4 flex flex-wrap justify-center gap-4">
-          <button onClick={() => setEffectLogic(l => (l === 'AND' ? 'OR' : 'AND'))} className="bg-gray-700 hover:bg-cyan-600 px-4 py-1 rounded text-sm">
-            Filter logic: {effectLogic}
-          </button>
+
 
           <button
             onClick={() => {
@@ -627,6 +859,8 @@ export default function CharactersPage() {
               setGiftFilter([])
               setEffectLogic('OR')
               setSearchTerm('')
+              setRoleFilter([])
+              setTagFilter([])
               setShowUniqueEffects(false)
               lastSerializedRef.current = pathname
               router.replace(pathname, { scroll: false })
@@ -639,11 +873,6 @@ export default function CharactersPage() {
           <button onClick={copyShareUrl} className="bg-gray-700 hover:bg-cyan-600 px-4 py-1 rounded text-sm">
             {copied ? 'Copied!' : 'Copy share link'}
           </button>
-
-          <label htmlFor="show-unique-effects" className="flex items-center gap-2 rounded px-3 py-1 text-sm text-white cursor-pointer select-none transition bg-gray-700 hover:bg-cyan-600">
-            <input type="checkbox" id="show-unique-effects" checked={showUniqueEffects} onChange={() => setShowUniqueEffects(v => !v)} className="accent-cyan-500 w-4 h-4" />
-            Show Unique Effects
-          </label>
         </div>
 
         {/* Cards */}
@@ -672,6 +901,7 @@ export default function CharactersPage() {
                   loading={isPriority ? undefined : 'lazy'}
                   unoptimized
                 />
+
 
                 <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
                   <StarIcons count={char.Rarity} size={20} />

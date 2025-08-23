@@ -19,8 +19,8 @@ export type FloorTeam = {
 
 export type FloorData = {
   floor: number
-  boss: { name: string; image: string }
-  note?: NoteEntry[]         // ← note générale du floor (optionnel)
+  boss: { name: string; image: string | string[] }
+  note?: NoteEntry[]
   teams: Record<string, FloorTeam>
 }
 
@@ -30,50 +30,69 @@ export default function SkywardBossFight({
 }: { data: FloorData[]; scale?: number }) {
   return (
     <div className="grid gap-8">
-      {data.map(({ floor, boss, teams, note }) => (
-        <Card key={floor}>
-          <CardContent>
-            <h3 className="font-bold mb-4" style={{ fontSize: `20px` }}>
-              Floor {floor}
-            </h3>
+      {data.map(({ floor, boss, teams, note }) => {
+        // normalisation → toujours un tableau
+        const bossImages = Array.isArray(boss.image) ? boss.image : [boss.image]
 
-            <div className="flex items-start gap-6">
-              {/* Boss */}
-              <div className="flex flex-col items-center">
-                <Image
-                  src={`/images/characters/boss/mini/IG_Turn_${boss.image}.webp`}
-                  alt={boss.name}
-                  width={80}
-                  height={80}
-                  className="rounded-lg"
-                />
-                <p className="mt-2 font-semibold" style={{ fontSize: `14px` }}>
-                  {boss.name}
-                </p>
-              </div>
+        return (
+          <Card key={floor}>
+            <CardContent>
+              <h3 className="font-bold mb-4" style={{ fontSize: `20px` }}>
+                Floor {floor}
+              </h3>
 
-              {/* Note générale du floor (optionnelle) */}
-              {note && note.length > 0 && (
-                <div className="mt-4 space-y-2">
-                  {note.map((n, i) =>
-                    n.type === "p" ? (
-                      <p key={i} className="text-[13px]">{n.string}</p>
-                    ) : (
-                      <ul key={i} className="list-disc list-outside ml-5 text-[13px]">
-                        {n.items.map((it, j) => <li key={j}>{it}</li>)}
-                      </ul>
-                    )
+              <div className="flex items-start gap-6">
+                {/* Boss */}
+                <div className="flex flex-col items-center">
+                  {/* image principale */}
+                  <Image
+                    src={`/images/characters/boss/mini/IG_Turn_${bossImages[0]}.webp`}
+                    alt={boss.name}
+                    width={80}
+                    height={80}
+                    className="rounded-lg"
+                  />
+                  <p className="mt-2 font-semibold text-[14px]">{boss.name}</p>
+
+                  {/* images secondaires si existantes */}
+                  {bossImages.length > 1 && (
+                    <div className="flex gap-1 mt-1 flex-wrap justify-center">
+                      {bossImages.slice(1).map((img, i) => (
+                        <Image
+                          key={i}
+                          src={`/images/characters/boss/mini/IG_Turn_${img}.webp`}
+                          alt={`${boss.name} alt ${i + 1}`}
+                          width={32}
+                          height={32}
+                          className="rounded"
+                        />
+                      ))}
+                    </div>
                   )}
                 </div>
-              )}
-              {/* Teams + conditions liées au tab actif */}
-              <TeamBlock teams={teams} scale={scale} />
-            </div>
 
+                {/* Note générale du floor */}
+                {note && note.length > 0 && (
+                  <div className="mt-4 space-y-2 max-w-[200px] break-words">
+                    {note.map((n, i) =>
+                      n.type === "p" ? (
+                        <p key={i} className="text-[13px]">{n.string}</p>
+                      ) : (
+                        <ul key={i} className="list-disc list-outside ml-5 text-[13px]">
+                          {n.items.map((it, j) => <li key={j}>{it}</li>)}
+                        </ul>
+                      )
+                    )}
+                  </div>
+                )}
 
-          </CardContent>
-        </Card>
-      ))}
+                {/* Teams */}
+                <TeamBlock teams={teams} scale={scale} />
+              </div>
+            </CardContent>
+          </Card>
+        )
+      })}
     </div>
   )
 }
@@ -114,9 +133,9 @@ function TeamBlock({
       {selected?.conditions?.length ? (
         <div className="mt-4">
           <p className="font-semibold text-[14px]">
-            Conditions (for {selected.label}):
+            Conditions :
           </p>
-          <ol className="list-decimal list-outside ml-5 text-[13px]">
+          <ol className="list-outside ml-5 text-[13px]">
             {selected.conditions.map((cond, i) => (
               <li key={i}>{cond}</li>
             ))}

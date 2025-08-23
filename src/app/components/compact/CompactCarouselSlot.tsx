@@ -138,7 +138,7 @@ export default function CarouselSlotCompact(_props: Props) {
                   </div>
 
                   {/* Name Bar */}
-                  <div className="absolute bottom-1 left-4.5 w-full overlay-fade z-30">
+                  <div className="absolute bottom-2 left-5 w-full overlay-fade z-30">
                     <CharacterNameDisplayCompactCarousel fullname={data.Fullname} />
                   </div>
                 </div>
@@ -149,7 +149,7 @@ export default function CarouselSlotCompact(_props: Props) {
       </div>
 
       {characters.length > 1 && (
-        <div className="controls" style={{ gap: 2 }}>
+        <div className="controls" style={{ gap: 6 }}>
           <button onClick={() => slider.current?.prev()} aria-label="Previous slide" className="arrow-button">
             <Image src="/images/ui/CM_Icon_Arrow_Story.webp" alt="Previous" width={ARROW} height={ARROW} className="rotate-180" />
           </button>

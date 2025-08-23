@@ -6,6 +6,7 @@
   "gift": "Science",
   "role":"sustain",
   "rank_pvp":"S",
+  "tags":["premium"],
   "Class": "Healer",
   "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
   "transcend": {

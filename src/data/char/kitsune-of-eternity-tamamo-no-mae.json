@@ -8,6 +8,7 @@
   "Class": "Mage",
   "role":"dps",
   "limited":true,
+  "tags":["seasonal"],
   "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
   "transcend": {
     "1": null,

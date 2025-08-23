@@ -292,7 +292,7 @@
         "label": "Increase Debuff Duration",
         "description": "Increased duration of detrimental effects granted on target",
         "icon": "IG_Buff_BuffdurationIncrease"
-    },    
+    },
     {
         "name": "BT_SEALED_RESURRECTION",
         "label": "Extinction",
@@ -324,6 +324,12 @@
         "icon": "SC_Debuff_Effect_AP"
     },
     {
+        "name": "BT_RESOURCE_DOWN",
+        "label": "Unique Resource Down",
+        "description": "Reduces the target's Unique Resource.",
+        "icon": "SC_Buff_resource_down"
+    },
+    {
         "name": "UNIQUE_MARTYRDOM",
         "label": "Martyrdom",
         "description": "Dies instantly if no enemy is killed before the duration ends",
@@ -334,8 +340,7 @@
         "label": "Irregular Infection",
         "description": "At the start of the turn, the caster's Enhancement Effect duration are reduced by 1 turn, and debuff durations of all enemies are reduced by 1 turn.\nApplies to only one unit per team. If the effect is applied to a new target, the previous target's effect is removed.\nRemoved upon caster's death (Irremovable)",
         "icon": "IG_Buff_Effect_2000102_Interruption_D"
-    }
-    ,
+    },
     {
         "name": "UNIQUE_KERAUNOS",
         "label": "Keraunos",

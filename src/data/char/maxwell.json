@@ -7,6 +7,7 @@
   "Class": "Mage",
   "gift": "Magic Tool",
   "role":"dps",
+  "tags":["ignore-defense"],
   "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
   "transcend": {
     "1": null,

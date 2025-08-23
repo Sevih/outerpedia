@@ -53,7 +53,9 @@ function DeBuffBasics() {
         'Buff Reversal',
         'Detonate', 'Extinction',
         'Increase Debuff Duration',
-        'Reduced Buff Duration', 'Uncounterrable'
+        'Reduced Buff Duration', 
+        'Uncounterrable',
+        'Unique Resource Down'
 
         // Ajoute ici d'autres noms sans icône officielle
     ])

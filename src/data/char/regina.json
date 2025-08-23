@@ -7,6 +7,7 @@
   "gift": "Craftwork",
   "role":"dps",
   "Class": "Mage",
+  "tags":["ignore-defense"],
   "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
   "transcend": {
     "1": null,

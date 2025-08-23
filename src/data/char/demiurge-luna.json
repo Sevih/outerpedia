@@ -7,6 +7,7 @@
   "gift": "Science",
   "rank_pvp":"S",
   "rank":"S",
+  "tags":["premium","ignore-defense"],
   "role":"dps",
   "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
   "transcend": {

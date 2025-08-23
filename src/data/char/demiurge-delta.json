@@ -6,6 +6,7 @@
   "role":"sustain",
   "gift": "Science",
   "rank_pvp":"S",
+  "tags":["premium"],
   "Class": "Healer",
   "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
   "transcend": {
