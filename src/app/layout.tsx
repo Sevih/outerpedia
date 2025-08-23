@@ -88,7 +88,7 @@ export default function RootLayout({
       <body className={`${inter.className} text-white`}>
         <div className="flex flex-col min-h-screen">
           <Header />
-          <main className="flex-1 container mx-auto p-4">
+          <main className="flex-1 w-full max-w-none mx-auto p-3 md:p-4">
             {children}
           </main>
           <Footer />

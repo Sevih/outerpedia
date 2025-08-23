@@ -46,7 +46,7 @@ export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: Buff
       <Tooltip.Provider delayDuration={1} skipDelayDuration={0} disableHoverableContent={false} key={`${effect.type}-${effect.name}-${idx}`}>
         <Tooltip.Root>
           <Tooltip.Trigger asChild>
-            <div className="flex items-center p-0 rounded cursor-help">
+            <div className="flex items-center p-0 rounded cursor-pointer">
               <div className="bg-black p-0.5 rounded shrink-0">
                 <Image
                   src={iconPath}

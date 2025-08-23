@@ -31,10 +31,10 @@ export default function TagDisplayMini({ tags: input = [] }: TagDisplayMiniProps
       <Tooltip.Provider delayDuration={1} skipDelayDuration={0} disableHoverableContent={false} key={`${key}-${idx}`}>
         <Tooltip.Root>
           <Tooltip.Trigger asChild>
-            <div className="flex items-center p-0 rounded cursor-help mr-1 mb-1">
+            <div className="flex items-center p-0 rounded cursor-pointer mr-1 mb-1">
               <Image
                 src={def.image}
-                alt={def.label}
+                alt=""
                 width={24}
                 height={24}
                 style={{ width: 24, height: 24 }}
