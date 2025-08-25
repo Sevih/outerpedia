@@ -13,12 +13,12 @@
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
-    "4_1": "ATK DEF HP +16%\\n+10% Ally Team Defense\n+25 Action Points at battle start\n+1 Chain Passive Weakness Gauge damage",
+    "4_1": "ATK DEF HP +16%\n+10% Ally Team Defense\n+25 Action Points at battle start\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\n+25 Action Points at battle start",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+10% Ally Defense\n+1 turn ally barriers at battle start\n(Proportional to target's Health)"
+    "6": "ATK DEF HP +30%\n+10% Ally Defense\n+1 turn ally barriers at battle start (Proportional to target's Health)"
   },
   "Chain_Type": "Finish",
   "skills": {
