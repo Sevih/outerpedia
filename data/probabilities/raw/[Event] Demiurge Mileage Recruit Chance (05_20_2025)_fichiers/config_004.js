@@ -1,0 +1,4 @@
+$SEED.CORE_PLATFORM_CONFIG = {
+    'PLATFORM_TYPE': 'pc',
+    'X_DEVICE_TYPE': 'P01'
+};

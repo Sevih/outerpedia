@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "2.2.4",
+  "version": "3.0.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -26,6 +26,7 @@
     "cheerio": "^1.0.0",
     "classnames": "^2.5.1",
     "framer-motion": "^12.18.1",
+    "jsdom": "^26.1.0",
     "jsonc-parser": "^3.3.1",
     "keen-slider": "^6.8.6",
     "lucide-react": "^0.513.0",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.4",
+    "@types/jsdom": "^21.1.7",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^20.19.10",
     "@types/react": "^19",

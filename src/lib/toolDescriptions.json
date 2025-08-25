@@ -28,5 +28,12 @@
     "description": "Unsure which character can use your gear? This tool helps you find the best match based on equipment.",
     "icon": "nav/gear-solver.webp",
     "order": 5
-  }
+  },
+  "patch-history": {
+  "name": "Patch Notes & Dev Notes",
+  "description": "Browse all Outerplane patch notes, developer notes, hero compendium and more.",
+  "icon": "nav/CM_Lobby_Button_Agit.webp",
+  "order": 6
+}
+
 }

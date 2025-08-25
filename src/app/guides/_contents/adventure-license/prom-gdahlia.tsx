@@ -24,7 +24,7 @@ export default function GnosisDahliaGuide() {
   return (
     <div>
       <GuideHeading level={3}>Strategy Overview</GuideHeading>
-      <GuideHeading level={4}>Monad Eva Mechanics</GuideHeading>
+      <GuideHeading level={4}>Gnosis Dahlia Mechanics</GuideHeading>
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li><strong>S1</strong>: Single, when scoring a critical hit <EffectInlineTag name="BT_COOL_CHARGE" type="buff" /> of her S3 by 1 turn.</li>
         <li><strong>S2</strong>: Single, <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> by 20%.</li>
