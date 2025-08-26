@@ -1,8 +1,0 @@
-{
-  "title": ["h1", ".article_tit", ".board_title", "meta[property='og:title']"],
-  "date": [".date", ".article_info .date", "time[datetime]", "meta[property='article:published_time']"],
-  "content": [".fr-view", ".article_view", ".board_view", ".article_body"],
-  "author": [".author", ".writer", ".article_info .name"],
-  "coverImage": ["meta[property='og:image']"],
-  "fallbackBaseUrl": "https://page.onstove.com"
-}
