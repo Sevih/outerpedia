@@ -29,7 +29,7 @@ export const oldChangelog = [
     title: "Premium & Limited Guide",
     type: "feature",
     content: [
-      "Added the [Premium & Limited Guide Guide](/guides/general-guides/premium-limited) : Quick recommendations for Premium and Limited banners.",
+      "Added the [Premium & Limited Guide](/guides/general-guides/premium-limited) : Quick recommendations for Premium and Limited banners.",
     ]
   },
   {
