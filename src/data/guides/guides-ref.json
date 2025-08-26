@@ -731,5 +731,15 @@
     "second_image": "shop-purchase-priorities2",
     "last_updated": "2025-08-18",
     "author": "Sevih / Shiraen"
-  }
+  },
+  "premium-limited": {
+  "category": "general-guides",
+  "title": "Premium & Limited Guide",
+  "description": "Pull priorities, PvE/PvP recommendations, and key transcendence sweetspots (3★→6★) for Premium and Limited heroes in Outerplane.",
+  "icon": "premium-limited",
+  "second_image": "premium-limited2",
+  "last_updated": "2025-08-25",
+  "author": "Shiraen"
+}
+
 }
