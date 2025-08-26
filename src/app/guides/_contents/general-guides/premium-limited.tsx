@@ -13,7 +13,9 @@ import type { CharacterLite } from "@/types/types"
 import StarLevel from "@/app/components/StarLevel"
 import Link from "next/link"
 import type { ElementType, ClassType } from "@/types/enums"
+import TranscendInline from "@/app/components/TranscendInline"
 import Image from "next/image"
+import { RecoTrans } from "@/app/components/GlowCardTrans"
 
 /* ===================== Types ===================== */
 type Impact = { pve: string; pvp: string }
@@ -173,6 +175,51 @@ function PremiumPullingOrder({
     )
 }
 
+
+function Stars({ count }: { count: number }) {
+  return (
+    <span className="inline-flex gap-[1px] align-middle">
+      {Array.from({ length: count }).map((_, i) => (
+        <Image
+          key={i}
+          src="/images/ui/CM_icon_star_y.webp"
+          alt="★"
+          width={16}
+          height={16}
+          className="object-contain"
+        />
+      ))}
+    </span>
+  )
+}
+
+export function TargetDisplay({ value }: { value: string }) {
+  if (!value) return <span>—</span>
+
+  // On split par motifs "nombre + optionnel (…)" 
+  // ex: "5 (support) 6 (dps)" → ["5 (support)", "6 (dps)"]
+  const parts = value.match(/\d+(?:\s*\([^)]*\))?|[^\d]+/g) || []
+
+  return (
+    <div className="text-sm text-gray-200 space-y-1 text-center">
+      {parts.map((part, idx) => {
+        const num = parseInt(part, 10)
+        if (!isNaN(num)) {
+          // retire le nombre pour extraire la mention éventuelle
+          const extra = part.replace(/^\d+\s*/, '')
+          return (
+            <div key={idx}>
+              <Stars count={num} /> {extra}
+            </div>
+          )
+        }
+        return <div key={idx}>{part.trim()}</div>
+      })}
+    </div>
+  )
+}
+
+
 /* ===================== Hero Card ===================== */
 function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
     const element = (char?.Element as ElementType) || "—"
@@ -180,43 +227,66 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
     const sub = char?.SubClass || "—"
     const name = char?.Fullname || "—"
     const portraitSrc = char?.ID ? `/images/characters/atb/IG_Turn_${char.ID}.webp` : undefined
-    // 1) Déclare le type des tags autorisés
-    type AllowedTag = "limited" | "seasonal" | "collab"
 
-    // 2) Type guard pour convertir un string → AllowedTag si valide
+    type AllowedTag = "limited" | "seasonal" | "collab"
     const isAllowedTag = (t: string): t is AllowedTag =>
         t === "limited" || t === "seasonal" || t === "collab"
 
-    // ...dans HeroCard:
     const tags: string[] = Array.isArray(char?.tags)
         ? char!.tags
         : char?.tags
             ? [char.tags]
             : []
 
-    // 3) Trouver le tag spécial *avec* narrowing
     const specialTag = tags.find(isAllowedTag)
+    const slug = char ? toKebabCase(char.Fullname) : null
+    const href = slug ? `/characters/${slug}` : undefined
 
     return (
         <section className="rounded-md border border-gray-800 bg-black/30 p-5">
             <header className="flex flex-wrap items-center justify-between gap-3">
                 <h2 className="m-0 text-xl font-semibold flex items-center gap-3">
-                    {portraitSrc && (
-                        <Image
-                            src={portraitSrc}
-                            alt={name}
-                            width={40}
-                            height={40}
-                            className="h-10 w-10 rounded-lg object-contain"
-                            unoptimized
-                            priority={false}
-                        />
+                    {href && portraitSrc ? (
+                        <Link href={href} prefetch={false} aria-label={`Open ${name} page`}>
+                            <Image
+                                src={portraitSrc}
+                                alt={name}
+                                width={40}
+                                height={40}
+                                className="h-10 w-10 rounded-lg object-contain"
+                                unoptimized
+                            />
+                        </Link>
+                    ) : (
+                        portraitSrc && (
+                            <Image
+                                src={portraitSrc}
+                                alt={name}
+                                width={40}
+                                height={40}
+                                className="h-10 w-10 rounded-lg object-contain"
+                                unoptimized
+                            />
+                        )
                     )}
-                    <span>{name}</span>
+
+                    {href ? (
+                        <Link
+                            href={href}
+                            prefetch={false}
+                            className="underline underline-offset-4 decoration-blue-400 text-blue-400 hover:text-red-400 hover:decoration-red-400"
+                            title={`Open ${name} character page`}
+                        >
+                            {name}
+                        </Link>
+                    ) : (
+                        <span>{name}</span>
+                    )}
+
                     {char?.limited && specialTag && (
                         <Image
                             src={`/images/ui/tags/${specialTag}.webp`}
-                            alt={char?.Fullname ?? "Unknown"}
+                            alt={`${specialTag} tag`}
                             width={60}
                             height={60}
                             style={{ width: 60, height: 60 }}
@@ -225,32 +295,93 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
                         />
                     )}
                 </h2>
+
                 <div className="flex items-center gap-2 text-xs opacity-80">
                     <Badge><ElementInlineTag element={element} /></Badge>
                     <Badge><ClassInlineTag name={cls} /></Badge>
-                    {sub && sub !== "—" && <Badge><ClassInlineTag name={cls} subclass={sub} /></Badge>}
+                    {sub && sub !== "—" && (
+                        <Badge><ClassInlineTag name={cls} subclass={sub} /></Badge>
+                    )}
                 </div>
             </header>
 
             <p className="mt-3 mb-4 whitespace-pre-line text-sm text-gray-200">{h.review}</p>
 
-            <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-md border border-gray-800 p-3">
-                    <h3 className="m-0 text-sm opacity-80">Recommended targets</h3>
-                    <ul className="mt-2 text-sm">
-                        <li><strong>PvE:</strong> {h.recommended_pve || "—"}</li>
-                        <li><strong>PvP:</strong> {h.recommended_pvp || "—"}</li>
-                    </ul>
+            <div className="grid gap-4">
+                {/* Ligne 1 */}
+                <div className="grid gap-4 md:grid-cols-2">
+                    {/* Targets */}
+                    <div className="max-w-4xl w-full rounded border border-gray-800 p-4">
+                        <h3 className="m-0 text-sm opacity-80 text-center mb-4">Recommended targets</h3>
+
+                        <div className="
+      grid grid-cols-1 md:grid-cols-2 gap-8
+      items-stretch
+      divide-y md:divide-y-0 md:divide-x divide-gray-800
+    ">
+                            {/* PvE */}
+                            <div className="flex flex-col items-center justify-center px-4">
+                                <RecoTrans
+                                    title="PvE"
+                                    description={<TargetDisplay value={h.recommended_pve || "—"} />}
+                                    image="/images/ui/nav/pve.png"
+                                    type="pve"
+                                />
+                            </div>
+
+                            {/* PvP */}
+                            <div className="flex flex-col items-center justify-center px-4">
+                                <RecoTrans
+                                    title="PvP"
+                                    description={<TargetDisplay value={h.recommended_pvp || "—"} />}
+                                    image="/images/ui/nav/pvp.png"
+                                    type="pvp"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Impact */}
+                    <div className="rounded-md border border-gray-800 p-3">
+                        <h3 className="m-0 text-sm opacity-80">Transcendence impact</h3>
+                        <ImpactTable impact={h.impact} />
+                    </div>
                 </div>
 
-                <div className="rounded-md border border-gray-800 p-3">
-                    <h3 className="m-0 text-sm opacity-80">Transcendence impact</h3>
-                    <ImpactTable impact={h.impact} />
+
+                {/* Ligne 2 */}
+                <div className="grid gap-4 md:grid-cols-3">
+                    {/* Trans 4 */}
+                    <div className="rounded-md border border-gray-800 p-3">
+                        <TranscendInline
+                            character={char?.Fullname ?? h.name}
+                            levels={["4_1"]}
+                        />
+                    </div>
+
+                    {/* Trans 5 */}
+                    <div className="rounded-md border border-gray-800 p-3">
+                        <TranscendInline
+                            character={char?.Fullname ?? h.name}
+                            levels={["5_1"]}
+                        />
+                    </div>
+
+                    {/* Trans 6 */}
+                    <div className="rounded-md border border-gray-800 p-3">
+                        <TranscendInline
+                            character={char?.Fullname ?? h.name}
+                            levels={["6"]}
+                        />
+                    </div>
                 </div>
             </div>
+
+
         </section>
     )
 }
+
 
 /* ===================== Page ===================== */
 const Intro = () => (

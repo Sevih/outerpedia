@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import * as HoverCard from '@radix-ui/react-hover-card'
 import abbrev from '@/data/abbrev.json'
+import { toKebabCase } from "@/utils/formatText"
 
 type Props = {
     character: string
@@ -12,14 +13,6 @@ type Props = {
     skupDisplay?: boolean
 }
 
-function toKebabCase(str: string) {
-    return str
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .replace(/([a-z])([A-Z])/g, '$1-$2')
-        .replace(/\s+/g, '-')
-        .replace(/[^\w\-]/g, '')
-        .toLowerCase()
-}
 
 const skillMap: Record<Props['skill'], string> = {
     S1: 'SKT_FIRST',
@@ -38,6 +31,7 @@ function formatColorTags(input: string) {
 export default function SkillInline({ character, skill, text = true, skupDisplay = false }: Props) {
     const [data, setData] = useState<null | {
         name: string
+        displayName: string
         desc: string
         icon: string
         cd?: string | number
@@ -56,6 +50,7 @@ export default function SkillInline({ character, skill, text = true, skupDisplay
                 if (!rawSkill) return
 
                 const isChainOrPassive = skill === 'Chain' || skill === 'Passive'
+                const displayName = skill === 'Passive' ? 'Dual Attack' : rawSkill.name
 
                 const icon = isChainOrPassive
                     ? `/images/characters/chain/Skill_ChainPassive_${mod.Element}_${mod.Chain_Type}.webp`
@@ -73,6 +68,7 @@ export default function SkillInline({ character, skill, text = true, skupDisplay
 
                 setData({
                     name: rawSkill.name,
+                    displayName,
                     desc,
                     icon,
                     cd: rawSkill.cd ?? undefined,
@@ -113,7 +109,7 @@ export default function SkillInline({ character, skill, text = true, skupDisplay
                         />
                     </span>
                     {text && (
-                        <span className="leading-none align-middle mb-0.5 underline cursor-help">{data.name}</span>
+                        <span className="leading-none align-middle mb-0.5 underline cursor-help">{data.displayName}</span>
                     )}
                 </button>
             </HoverCard.Trigger>
@@ -151,7 +147,7 @@ export default function SkillInline({ character, skill, text = true, skupDisplay
 
                             {/* Texte central (nom + CD/WGR) */}
                             <div className="flex-1 px-2">
-                                <div className="font-bold text-sm">{data.name}</div>
+                                <div className="font-bold text-sm">{data.displayName}</div>
                                 {(data.cd || data.wgr !== undefined) && (
                                     <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-neutral-300">
                                         {data.cd && <span>⏱️ CD: {data.cd}</span>}
@@ -171,8 +167,8 @@ export default function SkillInline({ character, skill, text = true, skupDisplay
                             </span>
                         </div>
                         <div className="flex justify-end w-full text-neutral-300 font-semibold text-[11px] mt-1">
-  {abbr} {skill}
-</div>
+                            {abbr} {skill}
+                        </div>
 
                         {/* Description */}
                         <span

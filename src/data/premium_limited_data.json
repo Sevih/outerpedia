@@ -210,7 +210,7 @@
     "name": "Kitsune of Eternity Tamamo-no-Mae",
     "review": "Curse detonation removes the main threat to Curse teams, the boss needing to take enough turns. 4-star lets her stack up curses even faster. Tamamo's curses are irremovable, letting her fight a few bosses that wouldn't care about other debuffers. Her burst 3 is expensive and typically unnecessary. Her 6-star is for her exclusive lobby. It makes her skills uncounterable, which lets her fight Tyrant Toddler and Irregular Queen, but this is a luxury. She is not a big asset in arena, where this would be the most notable.",
     "recommended_pve": "4",
-    "recommended_pvp": "6 (if thou must)",
+    "recommended_pvp": "6",
     "impact": {
       "3": { "pve": "5", "pvp": "1" },
       "4": { "pve": "5", "pvp": "1" },
