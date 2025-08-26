@@ -20,6 +20,12 @@
 /.next/
 /out/
 /datamine/
+/data/compendium/
+/data/developer-notes/
+/data/official-4-cut-cartoon/
+/data/patchnotes/
+/data/probabilities/
+/data/world-introduction/
 # Local admin interface – not included in repo
 src/app/admin/
 src/app/api/admin/
@@ -64,3 +70,4 @@ outerpedia-clean.code-workspace
 
 outerpedia.code-workspace
 src/data/guides/guild-raid/empty.json
+
