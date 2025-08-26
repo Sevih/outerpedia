@@ -8,12 +8,22 @@ import TeamTabSelector from '@/app/components/TeamTabSelector'
 const teams = {
   standard: {
     label: 'Recommended Team',
-    icon: 'SC_Buff_Earth_Dmg.webp',
+    icon: 'fire.webp',
     setup: [
       ['Aer'],
       ['Eternal', 'Tamamo-no-Mae'],
       ['Holy Night\'s Blessing Dianne', 'Kanon'],
       ['Tio']
+    ]
+  },
+  burn: {
+    label: 'Burn Team',
+    icon: 'SC_Buff_Dot_Burn.webp',
+    setup: [
+      ['Ember'],
+      ['Vlada'],
+      ['Bell Cranel', 'Maxie'],
+      ['Astei','Tio']
     ]
   }
 }

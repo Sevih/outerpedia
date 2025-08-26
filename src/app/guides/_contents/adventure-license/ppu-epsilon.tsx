@@ -6,13 +6,23 @@ import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teams = {
   team1: {
-    label: 'Team 1 – Anti-Revive Squad',
-    icon: 'SC_Buff_Stat_CriRate.webp',
+    label: 'Anti-Revive Squad',
+    icon: 'IG_Buff_Seal_Ressurection.webp',
     setup: [
       ['Monad Eva'],
       ['Demiurge Stella'],
       ['Demiurge Astei','Maxwell'],
       ['Gnosis Nella', 'Tamara', 'Tamamo-no-Mae','Demiurge Luna']
+    ]
+  },
+  team2: {
+    label: 'GBeth',
+    icon: 'SC_Buff_2100092.webp',
+    setup: [
+      ['Gnosis Beth'],
+      ['Akari'],
+      ['Kuro'],
+      ['Sterope']
     ]
   }
 }
