@@ -83,7 +83,7 @@
           "pvp": "3"
         },
         "4": {
-          "pve": "3",
+          "pve": "2",
           "pvp": "1"
         },
         "5": {
@@ -221,25 +221,25 @@
   {
     "name": "Holy Night's Blessing Dianne",
     "review": "Offensive buff support with good damage potential. 5-star gives her access to a Penetration buff. 6-star puts her in the top row of Fire element's damage dealers.",
-    "recommended_pve": "4",
-    "recommended_pvp": "Any",
+    "recommended_pve": "5 (support) 6 (dps)",
+    "recommended_pvp": "6",
     "impact": {
-      "3": { "pve": "3", "pvp": "2" },
-      "4": { "pve": "3", "pvp": "2" },
-      "5": { "pve": "3", "pvp": "2" },
-      "6": { "pve": "4", "pvp": "3" }
+      "3": { "pve": "4", "pvp": "3" },
+      "4": { "pve": "3", "pvp": "3" },
+      "5": { "pve": "4", "pvp": "3" },
+      "6": { "pve": "5", "pvp": "4" }
     }
   },
   {
     "name": "Gnosis Dahlia",
     "review": "A damage dealer who mainly stands out when her gimmicks are needed. Counters when crit, gains a barrier when critting and limits the damage she takes while her Dominion is active. These 3 tools make her very strong in some bossfights, such as world boss Walking Fortress Vault Venion. 6-star makes her Dominion buff permanent, which makes her a threat in arena and lets her stand alone against a number of bosses. Recommended stopping point: any for pve, 6-star for pvp.",
-    "recommended_pve": "4",
-    "recommended_pvp": "Any",
+    "recommended_pve": "Any",
+    "recommended_pvp": "6",
     "impact": {
       "3": { "pve": "3", "pvp": "2" },
       "4": { "pve": "3", "pvp": "2" },
-      "5": { "pve": "3", "pvp": "2" },
-      "6": { "pve": "4", "pvp": "3" }
+      "5": { "pve": "3", "pvp": "1" },
+      "6": { "pve": "4", "pvp": "4" }
     }
   },
   {
@@ -248,56 +248,56 @@
     "recommended_pve": "4",
     "recommended_pvp": "Any",
     "impact": {
-      "3": { "pve": "3", "pvp": "2" },
-      "4": { "pve": "3", "pvp": "2" },
-      "5": { "pve": "3", "pvp": "2" },
-      "6": { "pve": "4", "pvp": "3" }
+      "3": { "pve": "4", "pvp": "5" },
+      "4": { "pve": "4", "pvp": "1" },
+      "5": { "pve": "3", "pvp": "1" },
+      "6": { "pve": "1", "pvp": "4" }
     }
   },
   {
     "name": "Omega Nadja",
     "review": "Her infection cleanses debuffs on her team when the infected target takes a turn. This makes her a counter to enemies that rely on debuffs, such as Gnosis Beth in arena. She also offers protection to heroes with barriers, along with speed down and priority reductions, greatly reducing incoming damage. Recommended stopping point: 4- or 5-star in pve, 4- or 6-star in arena.",
-    "recommended_pve": "4",
-    "recommended_pvp": "Any",
+    "recommended_pve": "4 to 5",
+    "recommended_pvp": "4 to 6",
     "impact": {
-      "3": { "pve": "3", "pvp": "2" },
-      "4": { "pve": "3", "pvp": "2" },
-      "5": { "pve": "3", "pvp": "2" },
-      "6": { "pve": "4", "pvp": "3" }
+      "3": { "pve": "3", "pvp": "3" },
+      "4": { "pve": "3", "pvp": "5" },
+      "5": { "pve": "4", "pvp": "4" },
+      "6": { "pve": "5", "pvp": "5" }
     }
   },
   {
     "name": "Ryu Lion",
     "review": "Excellent single target dps in both pve and pvp. Her burst 3 gives her 100% priority, allowing her to take multiple high value turns. At 6-star she gets a speed buff at battle start and extra accuracy, making her one of the fastest openers in arena with great damage potential.",
-    "recommended_pve": "4–5",
+    "recommended_pve": "Any",
     "recommended_pvp": "6",
     "impact": {
-      "3": { "pve": "3", "pvp": "2" },
-      "4": { "pve": "4", "pvp": "3" },
-      "5": { "pve": "4", "pvp": "3" },
-      "6": { "pve": "3", "pvp": "4" }
+      "3": { "pve": "5", "pvp": "3" },
+      "4": { "pve": "4", "pvp": "2" },
+      "5": { "pve": "4", "pvp": "2" },
+      "6": { "pve": "2", "pvp": "5" }
     }
   },
   {
     "name": "Bell Cranel",
     "review": "Strong burn hero with very high attack potential. 4-star increases damage dealt against burning targets, in late game these targets often have extremely high defense, so the difference may not be very noticable. Burst 3 gives Irremovable burns, this also means they can't be extended, so in a team focusing on Detonate damage this should be avoided. With an uninteresting 5-star effect his 6-star becomes a rather steep investment for an upgraded Attack buff.",
-    "recommended_pve": "4–5",
-    "recommended_pvp": "6 (situational)",
+    "recommended_pve": "4",
+    "recommended_pvp": "4",
     "impact": {
-      "3": { "pve": "4", "pvp": "2" },
-      "4": { "pve": "4", "pvp": "2" },
-      "5": { "pve": "3", "pvp": "2" },
-      "6": { "pve": "3", "pvp": "3" }
+      "3": { "pve": "4", "pvp": "1" },
+      "4": { "pve": "4", "pvp": "1" },
+      "5": { "pve": "1", "pvp": "1" },
+      "6": { "pve": "3", "pvp": "1" }
     }
   },
   {
     "name": "Ais Wallenstein",
     "review": "Free collab hero, was able to reach 6-star during the event. Has a kit more suited to a bruiser with a built in revenge effect. She can be competitive with other light dps when building a team around her (focus on dual attacks and little to no healing), but does not stand out.",
-    "recommended_pve": "4",
-    "recommended_pvp": "Any",
+    "recommended_pve": "6",
+    "recommended_pvp": "6",
     "impact": {
-      "3": { "pve": "3", "pvp": "2" },
-      "4": { "pve": "3", "pvp": "2" },
+      "3": { "pve": "1", "pvp": "1" },
+      "4": { "pve": "2", "pvp": "2" },
       "5": { "pve": "2", "pvp": "1" },
       "6": { "pve": "2", "pvp": "1" }
     }
