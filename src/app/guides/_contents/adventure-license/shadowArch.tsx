@@ -42,9 +42,9 @@ export default function ShadowArchdemonGuide() {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
         <p className="text-neutral-400 text-sm italic mt-2">
-          Run provided by <span className="text-white font-semibold">XuRenChao</span> (04/08/2025)
+          Run provided by <span className="text-white font-semibold">XuRenChao</span> (26/08/2025)
         </p>
-        <YoutubeEmbed videoId="KNMNgxo2Ndw" title="Shadow of the Archdemon - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
+        <YoutubeEmbed videoId="bRSHzurhoV0" title="Shadow of the Archdemon - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
       </div>
     </div>
   )
