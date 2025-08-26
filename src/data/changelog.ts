@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-08-26",
+    title: "Premium & Limited Guide",
+    type: "feature",
+    content: [
+      "Added the [Premium & Limited Guide Guide](/guides/general-guides/premium-limited) : Quick recommendations for Premium and Limited banners.",
+    ]
+  },
+  {
     date: "2025-08-23",
     title: "Skyward Tower Guide, Tags & Roles Filters",
     type: "feature",
