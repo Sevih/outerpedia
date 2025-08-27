@@ -34,6 +34,48 @@ import TranscendenceSlider from '@/app/components/TranscendenceSlider';
 import YoutubeEmbed from '@/app/components/YoutubeEmbed';
 import formatEffectText from '@/utils/formatText';
 import eeDataRaw from '@/data/ee.json';
+import TagDisplayMini from '@/app/components/TagDisplayInline';
+import rawTAGS from '@/data/tags.json'
+
+type TagDef = {
+  label: string
+  image: string
+  desc: string
+  type: string // "unit-type" | "mechanic" | ...
+}
+type TagsMap = Record<string, TagDef>
+
+const TAGS: TagsMap = rawTAGS as TagsMap
+
+const UNIT_TYPE_ORDER = ['premium', 'limited', 'seasonal', 'collab'] as const
+
+function UnitTypeBadge({ tags }: { tags?: string[] | string }) {
+  const all = Array.isArray(tags) ? tags : tags ? [tags] : []
+
+  // on garde uniquement les tags "unit-type"
+  const unitTypeKeys = all.filter((k) => TAGS[k]?.type === 'unit-type')
+  if (unitTypeKeys.length === 0) return null
+
+  // priorité : premium > limited > seasonal > collab
+  const picked = UNIT_TYPE_ORDER.find((k) => unitTypeKeys.includes(k)) ?? unitTypeKeys[0]
+
+  // Réutilisation du composant inline (ton import par défaut)
+  return <TagDisplayMini tags={[picked]} />
+}
+
+
+
+function getRoleBadge(role?: string) {
+  if (!role) return null;
+  const label: Record<string, string> = { dps: 'DPS', support: 'Support', sustain: 'Sustain' };
+  const color: Record<string, string> = {
+    dps: 'bg-rose-600/70',
+    support: 'bg-sky-600/70',
+    sustain: 'bg-emerald-600/70',
+  };
+  if (!label[role]) return null;
+  return { label: label[role], className: color[role] };
+}
 
 function toKebabCase(str: string): string {
   return str
@@ -199,6 +241,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
       character.skills.SKT_SECOND?.name,
       character.skills.SKT_ULTIMATE?.name
     ].filter((s): s is string => Boolean(s))
+    const roleBadge = getRoleBadge(character.role);
 
 
     return (
@@ -293,6 +336,17 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                 <div className="flex items-center gap-1">
                   <Image src={`/images/ui/class/${character.SubClass.toLowerCase()}.webp`} alt={character.SubClass} width={24} height={24} style={{ width: 24, height: 24 }} />
                   <span className="text-base">{character.SubClass}</span>
+                </div>
+                <div className="mt-2 mb-3 flex flex-wrap items-center gap-2">
+                   <span className=''><UnitTypeBadge tags={character.tags} /></span>
+
+                  {roleBadge && (
+                    <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm text-white ring-1 ring-white/10 ${roleBadge.className}`}>
+                      {/* Optionnel: si tu as des icônes de rôle, dé-commente et ajuste le chemin */}
+                      {/* <Image src={`/images/ui/roles/${character.role}.webp`} alt={roleBadge.label} width={16} height={16} /> */}
+                      <span>{roleBadge.label}</span>
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="mt-2 p-2 bg-black/30 rounded">
