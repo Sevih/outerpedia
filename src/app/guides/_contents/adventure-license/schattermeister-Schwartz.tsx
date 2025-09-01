@@ -42,7 +42,7 @@ export default function SchwartzGuide() {
         <p className="text-neutral-400 text-sm italic mt-2">
                   Run provided by <span className="text-white font-semibold">Sevih</span> (15/07/2025)
                 </p>
-                <YoutubeEmbed videoId="8Y7qczXV2wA" title="Schattermeister Schwartz - Adventure License - Stage 10 - 1 run clear" />
+                <YoutubeEmbed videoId="glWpGZRH4xc" title="Schattermeister Schwartz - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
       </div>
     </div>
   )
