@@ -44,6 +44,197 @@
     }
   },
   {
+    "floor": 1,
+    "boss": {
+      "name": "Mene",
+      "image": [
+        "2000054_E",
+        "2000074_E",
+        "2000009_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 ranger",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Tamara",
+            "Eliza"
+          ],
+          [
+            "Demiurge Luna"
+          ]
+        ],
+        "conditions": [
+          "1 ranger"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Just go nuclear on her and bring your strongest DPS units. If she manages to heal herself too much you can utilize Eliza for Bleed and Defense debuffs"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Ame",
+      "image": [
+        "2000065_E",
+        "2000064_E",
+        "2000019_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "No Water",
+        "icon": "water.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Iota",
+            "Gnosis Nella"
+          ],
+          [
+            "Akari",
+            "Kuro"
+          ],
+          [
+            "Maxwell",
+            "Demiurge Luna"
+          ]
+        ],
+        "conditions": [
+          "No water"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Either brute force or control since she lack of immunity towards any stun."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Alice",
+      "image": [
+        "2000020_E",
+        "2000071_E",
+        "2000066_E",
+        "2000056_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 ranger",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamamo-no-Mae",
+            "Delta",
+            "Christina"
+          ],
+          [
+            "Fran",
+            "Gnosis Beth"
+          ],
+          [
+            "Kanon",
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 ranger"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "High survivability units. Kanon fits the bill better than anyone."
+          },
+          {
+            "type": "p",
+            "string": "Delta can provide counterattack buff in the beginning after Alice's first attack, making your team inflict several attacks after Alice's second attack."
+          },
+          {
+            "type": "p",
+            "string": "Tamamo-no-Mae can provide chain points."
+          },
+          {
+            "type": "p",
+            "string": "Christina with Coward's treasure."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Eliza",
+      "image": [
+        "2000035_E",
+        "2000068_E",
+        "2000085_E",
+        "4151014"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Stella",
+            "Valentine"
+          ],          
+          [
+            "Iota",
+            "Dahlia",
+            "Gnosis Nella"
+          ],
+          [
+            "Maxwell",
+            "Ame",
+            "Demiurge Astei"
+          ]
+        ],
+        "conditions": [
+          "1 ranger"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Control and focus the core to prevent S.Regina to play. Both priority reductions and stun."
+          }
+        ]
+      }
+    }
+  },
+  {
     "floor": 5,
     "boss": {
       "name": "Demiurge Drakhan",
@@ -81,6 +272,54 @@
           [
             "Monad Eva",
             "Nella"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "floor": 5,
+    "boss": {
+      "name": "Demiurge Vlada",
+      "image": [
+        "2000075_E",
+        "4151015",
+        "4151015"
+      ]
+    },
+    "note": [
+      {
+        "type": "ul",
+        "items": [
+          "Support Unit to provide chain points, WG damage and healing.",
+          "High survivability damager.",
+          "Tank that can protect allies."
+        ]
+      }
+    ],
+    "teams": {
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Monad Eva","Astei"
+          ],
+          [
+            "Tamara",
+            "Fran"
+          ],
+          [
+            "Leo",
+            "Demiurge Drakhan",
+            "Hilde"
+          ],
+          [
+            "Demiurge Stella",
+            "Kanon",
+            "Caren",
+            "Epsilon",
+            "Demiurge Luna"
           ]
         ]
       }
