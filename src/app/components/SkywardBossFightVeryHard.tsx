@@ -47,7 +47,7 @@ export default function SkywardBossFightVeryHard({
     const tabs: { key: TabKey; label: string; count: number }[] = []
     if (normals.length) tabs.push({ key: "normal", label: "Normal fights", count: normals.length })
     if (f5_10_15.length) tabs.push({ key: "special_5_10_15", label: "Floors 5 / 10 / 15", count: f5_10_15.length })
-    if (f20.length) tabs.push({ key: "special_20", label: "Floor 20 (2 sets)", count: f20.length })
+    if (f20.length) tabs.push({ key: "special_20", label: "Floor 20", count: f20.length })
     return tabs
   }, [normals.length, f5_10_15.length, f20.length])
 

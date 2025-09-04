@@ -17,7 +17,8 @@
         "setup": [
           [
             "Demiurge Drakhan",
-            "Omega Nadja"
+            "Omega Nadja",
+            "Astei"
           ],
           [
             "Demiurge Stella"
@@ -28,7 +29,8 @@
           ],
           [
             "Caren",
-            "Demiurge Luna"
+            "Demiurge Luna",
+            "Drakhan"
           ]
         ],
         "conditions": [
@@ -38,9 +40,236 @@
           {
             "type": "p",
             "string": "Max speed Tamara to Silence Valentine and then increase the CD."
+          },
+          {
+            "type": "p",
+            "string": "Using Astei or Drakhan can assist if survival's an issue with the critical hit chance debuff."
           }
         ]
       }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Vlada",
+      "image": [
+        "2000073_E",
+        "2000032_E",
+        "2000004_E",
+        "4151011"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Maxwell",
+      "image": [
+        "2000028_E",
+        "2000028_E",
+        "2000028_E",
+        "2000028_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Beth",
+      "image": [
+        "2000025_E",
+        "2000035_E",
+        "2000049_E",
+        "4151013"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Dahlia",
+      "image": [
+        "2000068_E",
+        "2000067_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 Ranger",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Fran",
+            "Charlotte"
+          ],
+          [
+            "Demiurge Luna"
+          ],
+          [
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "1 ranger"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "An Accuracy buffer is recommended."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Rhona",
+      "image": [
+        "2000008_E",
+        "2000058_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Mero",
+      "image": [
+        "2000040_E",
+        "2000058_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Naru Kang",
+      "image": [
+        "2000024_E",
+        "2000074_E",
+        "2000031_E",
+        "4151011"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Fatal",
+      "image": [
+        "2000078_E",
+        "2000072_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Hilde"
+          ],
+          [
+            "Rey"
+          ],
+          [
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 defender"
+        ],
+        "note": [
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Laplace",
+      "image": [
+        "2000044_E",
+        "2000043_E",
+        "2000062_E",
+        "4151013"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 Healer",
+        "icon": "healer.webp",
+        "setup": [],
+        "conditions": [
+          "1 healer"
+        ],
+        "note": []
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Tamamo-no-Mae",
+      "image": [
+        "2000080_E",
+        "2000079_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Pesketh",
+      "image": [
+        "2000041_E",
+        "2000011_E",
+        "2000003_E",
+        "2000029_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
     }
   },
   {
@@ -152,11 +381,15 @@
           [
             "Tamamo-no-Mae",
             "Delta",
+            "Demiurge Drakhan",
+            "Hilde",
             "Christina"
           ],
           [
             "Fran",
-            "Gnosis Beth"
+            "Gnosis Beth",
+            "Demiurge Vlada",
+            "Notia"
           ],
           [
             "Kanon",
@@ -181,7 +414,15 @@
           },
           {
             "type": "p",
+            "string": "Demiurge Drakhan or Hilde to mitigate aoe damage."
+          },
+          {
+            "type": "p",
             "string": "Christina with Coward's treasure."
+          },
+          {
+            "type": "p",
+            "string": "Demiurge Vlada 4/5-star or Notia to decrease priority gain will slow down incoming damage a lot."
           }
         ]
       }
@@ -210,7 +451,7 @@
           [
             "Stella",
             "Valentine"
-          ],          
+          ],
           [
             "Iota",
             "Dahlia",
@@ -303,7 +544,8 @@
         "icon": "SC_Buff_Effect_Cleanse.webp",
         "setup": [
           [
-            "Monad Eva","Astei"
+            "Monad Eva",
+            "Astei"
           ],
           [
             "Tamara",
@@ -323,6 +565,20 @@
           ]
         ]
       }
+    }
+  },
+  {
+    "floor": 5,
+    "boss": {
+      "name": "Demiurge Stella",
+      "image": [
+        "2000053_E",
+        "2000059_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
     }
   },
   {
