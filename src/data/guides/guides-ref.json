@@ -682,6 +682,24 @@
     "last_updated": "2025-06-30",
     "author": "Sevih"
   },
+  "depth10-route1": {
+    "category": "monad-gate",
+    "title": "Depth 10 : route 1",
+    "description": "Map of Depth 10 : route 1 and true ending path",
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-09-05",
+    "author": "XuRenChao"
+  },
+  "depth10-route2": {
+    "category": "monad-gate",
+    "title": "Depth 10 : route 2",
+    "description": "Map of Depth 10 : route 2 and true ending path",
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-09-05",
+    "author": "XuRenChao"
+  },
   "normal": {
     "category": "skyward-tower",
     "title": "Normal",
