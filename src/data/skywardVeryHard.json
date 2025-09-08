@@ -62,7 +62,43 @@
     },
     "note": [],
     "teams": {
-      "team1": {}
+      "team1": {
+        "label": "No Mage",
+        "icon": "mage.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne",
+            "Astei",
+            "Nella"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Stella",
+            "Delta"
+          ],
+          [
+            "Tamara",
+            "Caren",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No mage"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Tamara for Cooldown increase."
+          },
+          {
+            "type": "p",
+            "string": "Immunity, Cleanse and revenge will do the job."
+          }
+        ]
+      }
     }
   },
   {
@@ -149,7 +185,46 @@
     },
     "note": [],
     "teams": {
-      "team1": {}
+      "team1": {
+        "label": "No Dark",
+        "icon": "dark.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Eternal",
+            "Demiurge Vlada",
+            "Sterope",
+            "Edelweiss"
+          ],
+          [
+            "Gnosis Nella",
+            "Rhona"
+          ],
+          [
+            "Gnosis Beth",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No Dark"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "No crit builds unless you can endure the passive and brute force it."
+          },
+          {
+            "type": "p",
+            "string": "Unhealable is your friend."
+          },
+          {
+            "type": "p",
+            "string": "G.Beth's Eternal Bleeding's damage is not affected by Rhona's passive."
+          }
+        ]
+      }
     }
   },
   {
@@ -215,8 +290,7 @@
         "conditions": [
           "1 defender"
         ],
-        "note": [
-        ]
+        "note": []
       }
     }
   },
@@ -271,7 +345,47 @@
     },
     "note": [],
     "teams": {
-      "team1": {}
+      "team1": {
+        "label": "1 Light",
+        "icon": "light.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne"
+          ],
+          [
+            "Stella",
+            "Fran",
+            "Cindy",
+            "Ember"
+          ],
+          [
+            "Demiurge Stella",
+            "Kanon"
+          ],
+          [
+            "Tamamo-no-Mae",
+            "Delta"
+          ]
+        ],
+        "conditions": [
+          "1 Light"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "One of the best ways to counter it is to utilize counterattack to accumulate chain points faster."
+          },
+          {
+            "type": "p",
+            "string": "Delta can go in tandem with Cindy, Dianne and/or Fran(EE+10)."
+          },
+          {
+            "type": "p",
+            "string": "Another way to counter it is by using Ember with enough effectiveness to inflict Burn."
+          }
+        ]
+      }
     }
   },
   {
@@ -578,9 +692,43 @@
         "2000059_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "ul",
+        "items": [
+          "Tamara to Silence D.Astei in order to disable her revival.",
+          "High survivability units, Barriers and Defense buffs."
+        ]
+      }
+    ],
     "teams": {
-      "team1": {}
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Veronica",
+            "Demiurge Drakhan",
+            "Kappa",
+            "Hilde",
+            "Omega Nadja",
+            "Luna"
+          ],
+          [
+            "Kanon",
+            "Caren",
+            "Gnosis Dahlia"
+          ]
+        ],
+        "conditions": [],
+        "note": []
+      }
     }
   },
   {
