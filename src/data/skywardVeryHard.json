@@ -98,6 +98,42 @@
             "string": "Immunity, Cleanse and revenge will do the job."
           }
         ]
+      },
+      "team2": {
+        "label": "No Fire",
+        "icon": "fire.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne",
+            "Nella"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Stella",
+            "Delta"
+          ],
+          [
+            "Tamara",
+            "Caren",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No fire"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Tamara for Cooldown increase."
+          },
+          {
+            "type": "p",
+            "string": "Immunity, Cleanse and revenge will do the job."
+          }
+        ]
       }
     }
   },
@@ -398,7 +434,12 @@
         "2000009_E"
       ]
     },
-    "note": [],
+    "note": [
+       {
+            "type": "p",
+            "string": "Just go nuclear on her and bring your strongest DPS units. If she manages to heal herself too much you can utilize Eliza for Bleed and Defense debuffs"
+          }
+    ],
     "teams": {
       "team1": {
         "label": "1 ranger",
@@ -415,6 +456,7 @@
             "Eliza"
           ],
           [
+            "Rey",
             "Demiurge Luna"
           ]
         ],
@@ -422,10 +464,31 @@
           "1 ranger"
         ],
         "note": [
-          {
-            "type": "p",
-            "string": "Just go nuclear on her and bring your strongest DPS units. If she manages to heal herself too much you can utilize Eliza for Bleed and Defense debuffs"
-          }
+        ]
+      },
+      "team2": {
+        "label": "No defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Tamara",
+            "Eliza"
+          ],
+          [
+            "Rey",
+            "Demiurge Luna"
+          ]
+        ],
+        "conditions": [
+          "No defender"
+        ],
+        "note": [
         ]
       }
     }
