@@ -15,6 +15,7 @@ type Patch = {
   html: string
   images: string[]
 }
+type PatchWithKey = Patch & { __key: string }
 
 const ITEMS_PER_PAGE = 10
 
@@ -29,6 +30,7 @@ const DATASETS = {
   'official-4-cut-cartoon': () => import('@/../data/official-4-cut-cartoon.bundled.json'),
   'probabilities': () => import('@/../data/probabilities.bundled.json'),
   'world-introduction': () => import('@/../data/world-introduction.bundled.json'),
+  'event': () => import('@/../data/event.bundled.json'),
 } satisfies Record<string, DatasetLoader>
 
 type SrcKey = keyof typeof DATASETS
@@ -40,6 +42,7 @@ const SOURCES: { value: SrcKey; label: string }[] = [
   { value: 'compendium', label: 'Hero Compendium' },
   { value: 'official-4-cut-cartoon', label: 'Official 4‑Cut Cartoon' },
   { value: 'probabilities', label: 'Probabilities' },
+  { value: 'event', label: 'Events' },
 ]
 
 /* ---------- Utils dates / texte ---------- */
@@ -159,6 +162,8 @@ export default function PatchNotesViewer() {
     return sorted.filter(p => (searchIndex.get(p.id) || '').includes(k))
   }, [sorted, searchIndex, q])
 
+
+
   useEffect(() => {
     setPage(1)
   }, [q, src])
@@ -167,6 +172,15 @@ export default function PatchNotesViewer() {
   const currentPage = Math.min(page, pageCount)
   const start = (currentPage - 1) * ITEMS_PER_PAGE
   const pageItems = filtered.slice(start, start + ITEMS_PER_PAGE)
+
+  const keyedPageItems: PatchWithKey[] = useMemo(() => {
+    const seen = new Map<string, number>()
+    return pageItems.map(p => {
+      const n = seen.get(p.id) ?? 0
+      seen.set(p.id, n + 1)
+      return { ...p, __key: n ? `${p.id}--${n}` : p.id }
+    })
+  }, [pageItems])
 
   const canPrev = currentPage > 1
   const canNext = currentPage < pageCount
@@ -218,8 +232,8 @@ export default function PatchNotesViewer() {
           </div>
 
           <div className="grid gap-6">
-            {pageItems.map(p => (
-              <article key={p.id} className="rounded-xl bg-neutral-900 p-4">
+            {keyedPageItems.map(p => (
+              <article key={p.__key} className="rounded-xl bg-neutral-900 p-4">
                 <h2 className="text-lg font-bold text-white">{p.title}</h2>
                 <div className="text-sm text-neutral-400 mb-2">
                   {labelDate(p)}

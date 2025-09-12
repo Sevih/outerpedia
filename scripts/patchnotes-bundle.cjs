@@ -12,6 +12,7 @@ const SECTIONS = [
   'official-4-cut-cartoon',
   'probabilities',
   'world-introduction',
+  'event'
 ];
 // Clé JSON: par défaut "items" ; pour patchnotes on garde "patches"
 const JSON_KEYS = { patchnotes: 'items' };
