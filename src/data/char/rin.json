@@ -1,0 +1,191 @@
+{
+  "ID": "2000019",
+  "Fullname": "Rin",
+  "Rarity": 3,
+  "Element": "Water",
+  "rank_pvp":"C",
+  "role":"dps",
+  "gift": "Craftwork",
+  "Class": "Striker",
+  "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+4% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Requiem",
+      "true_desc": "Attacks an enemy and increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>. Increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>30%</color> if the target was a Fire enemy.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000019_Skill01_LV1,SKILL_DESC_2000019_Skill01_LV1,SKILL_DESC_2000019_Skill01_LV1,SKILL_DESC_2000019_Skill01_LV1,SKILL_DESC_2000019_Skill01_LV1",
+      "IconName": "Skill_First_2000019",
+      "NameIDSymbol": "1901",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000019_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000019_1_1]</color>. Increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000019_1_3]</color> if the target was a Fire enemy."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Shura Slash",
+      "true_desc": "Attacks all enemies.\\nThis attack always deals <color=#28d9ed>advantageous damage</color>. Resets cooldown if the caster has a buff.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000019_Skill02_LV1,SKILL_DESC_2000019_Skill02_LV1,SKILL_DESC_2000019_Skill02_LV1,SKILL_DESC_2000019_Skill02_LV1,SKILL_DESC_2000019_Skill02_LV1",
+      "IconName": "Skill_Second_2000019",
+      "NameIDSymbol": "1902",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000019_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_DMG_ELEMENT_SUPERIORITY"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases damage\\nReduces Doujikiri Yasutsuna Cooldown by 1 turn",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\nIncreased damage (With additional increased damage against Fire enemies)",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies.\\nThis attack always deals <color=#28d9ed>advantageous damage</color>. Resets cooldown if the caster has a buff."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage",
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Doujikiri Yasutsuna",
+      "true_desc": "When using this skill, <color=#28d9ed>increases</color> the caster's <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies.\\nEach time <color=#28d9ed>Doujikiri Yasutsuna</color> is used increases <color=#28d9ed>Attack</color> by <color=#28d9ed>7%</color>. (Max 3 stacks)",
+      "DescID": "SKILL_DESC_2000019_Skill03_LV1,SKILL_DESC_2000019_Skill03_LV1,SKILL_DESC_2000019_Skill03_LV1,SKILL_DESC_2000019_Skill03_LV1,SKILL_DESC_2000019_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000019",
+      "NameIDSymbol": "1903",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000019_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_CRITICAL_RATE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "When using this skill, <color=#28d9ed>increases</color> the caster's <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>[Buff_T_2000019_3_1] turn(s)</color>, then attacks all enemies.\\nEach time <color=#28d9ed>Doujikiri Yasutsuna</color> is used increases <color=#28d9ed>Attack</color> by <color=#28d9ed>[Buff_V_2000019_3_2]</color>. (Max 3 stacks)"
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage",
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: The caster's Skill Chain attacks always have elemental advantage.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>20%</color>.",
+      "DescID": "SKILL_DESC_2000019_Skill04_LV1,SKILL_DESC_2000019_Skill04_LV1,SKILL_DESC_2000019_Skill04_LV1,SKILL_DESC_2000019_Skill04_LV1,SKILL_DESC_2000019_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Join",
+      "NameIDSymbol": "1904",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": ["BT_DMG_ELEMENT_SUPERIORITY"],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: The caster's Skill Chain attacks always have elemental advantage.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000019_backup_1_1]</color>."
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"C"
+}

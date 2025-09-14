@@ -1,0 +1,379 @@
+{
+  "v1": {
+    "label": "July 2025 Version",
+    "date": "2025-07-16",
+    "phase1": {
+      "bosses": [
+        {
+          "id": "09",
+          "name": "Android Sphinx",
+          "geas": {
+            "1": {
+              "bonus": {
+                "effect": "Increases Penetration of Mage heroes by 40%",
+                "ratio": "-45%",
+                "image": "Mage",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Increases the Speed of boss monster by 30%",
+                "ratio": "+20%",
+                "image": "Speed",
+                "bg": "1"
+              }
+            },
+            "2": {
+              "bonus": {
+                "effect": "Increases Attack, Defense, and Health of Light allies by 50%",
+                "ratio": "-45%",
+                "image": "Light",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "+50% boss Defense",
+                "ratio": "+40%",
+                "image": "Boss",
+                "bg": "2"
+              }
+            },
+            "3": {
+              "bonus": {
+                "effect": "Increases Chain Points by 15 at the start of an ally's turn",
+                "ratio": "-45%",
+                "image": "CP",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Ban Ally Priority Gauge Increase (Irremovable)",
+                "ratio": "+40%",
+                "image": "special",
+                "bg": "2"
+              }
+            },
+            "4": {
+              "bonus": {
+                "effect": "Increases Effectiveness of ally heroes by 75",
+                "ratio": "-25%",
+                "image": "special",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Not Allowed on Team (Rangers cannot be deployed)",
+                "ratio": "+40%",
+                "image": "Ranger",
+                "bg": "2"
+              }
+            },
+            "5": {
+              "bonus": {
+                "effect": "Increases Cursed and Fixed Damage limit by 100%",
+                "ratio": "-70%",
+                "image": "Curse",
+                "bg": "3"
+              },
+              "malus": {
+                "effect": "Not Allowed on Team (Only Light allies can be deployed)",
+                "ratio": "+65%",
+                "image": "Light",
+                "bg": "3"
+              }
+            }
+          },
+          "notes": [
+            "S3: AoE, {D/BT_REMOVE_BUFF} and inflicts {D/BT_SEALED} for 3 turns, can't be countered",
+            "S2: AoE, inflicts {D/BT_SILENCE} for 2 turns",
+            "S1: Reduces Chain Points by 30, can't be countered",
+            "Passive: Reduces damage taken, increases damage taken when in Break. Increases Weakness Gauge damage from {B/BT_CALL_BACKUP} and Skill Chains by 100%",
+            "(Stage 3+) {D/BT_FIXED_DAMAGE} {D/BT_DOT_CURSE} cannot exceed 10 000",
+            "Enrage: Every 4 turns, lasts 3 turns, deals lethal damage"
+          ],
+          "recommended": [
+            {
+              "name": "Monad Eva",
+              "comment": "{B/BT_CALL_BACKUP} and cleanses {D/BT_SILENCE}"
+            },
+            {
+              "name": "Maxwell",
+              "comment": "Standard {E/Dark} dps"
+            },
+            {
+              "name": "Demiurge Astei",
+              "comment": "Standard {E/Dark} dps"
+            },
+            {
+              "name": "Tamara",
+              "comment": "100% crit chance for consistent dual attacks"
+            }
+          ],
+          "team": [
+            [
+              "Monad Eva"
+            ],
+            [
+              "Tamara",
+              "Luna",
+              "Veronica",
+              "Mero"
+            ],
+            [
+              "Demiurge Astei",
+              "Demiurge Luna"
+            ],
+            [
+              "Maxwell",
+              "Gnosis Dahlia",
+              "Francesca"
+            ]
+          ],
+          "video": {
+            "id": "",
+            "title": ""
+          }
+        },
+        {
+          "id": "10",
+          "name": "Typhoon Summoning Traitor",
+          "geas": {
+            "1": {
+              "bonus": {
+                "effect": "Mage Hero Permanent Immunity (Irremovable)",
+                "ratio": "-70%",
+                "image": "Mage",
+                "bg": "3"
+              },
+              "malus": {
+                "effect": "Reduces the Max Health of ally heroes by 30%",
+                "ratio": "+20%",
+                "image": "Heal",
+                "bg": "1"
+              }
+            },
+            "2": {
+              "bonus": {
+                "effect": "Increases continuous damage taken by Boss monsters by 300%",
+                "ratio": "-45%",
+                "image": "special",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Extra turn unavailable for ally heroes",
+                "ratio": "+40%",
+                "image": "special",
+                "bg": "2"
+              }
+            },
+            "3": {
+              "bonus": {
+                "effect": "Increases Action Points by 15 at the start of an ally's turn",
+                "ratio": "-25%",
+                "image": "AP",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Reduces Weakness Gauge damage taken by Boss monsters by 50%",
+                "ratio": "+65%",
+                "image": "WG_Down",
+                "bg": "3"
+              }
+            },
+            "4": {
+              "bonus": {
+                "effect": "Resets Skill Cooldown of Mage Hero Upon Using Mad Sun's Mirage",
+                "ratio": "-45%",
+                "image": "special",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "When the Boss monster uses an ultimate skill, counterattacks for 2 turn(s)",
+                "ratio": "+40%",
+                "image": "Boss",
+                "bg": "2"
+              }
+            },
+            "5": {
+              "bonus": {
+                "effect": "Increases Damage to the target inflicted with Break by 500%",
+                "ratio": "-25%",
+                "image": "Atk",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Team Restriction (You cannot use striker heroes in your team)",
+                "ratio": "+40%",
+                "image": "Striker",
+                "bg": "2"
+              }
+            }
+          },
+          "notes": [
+            "S3: AoE, {D/BT_STUN_IR} for 3 turns",
+            "S2: If target has {D/BT_STUN_IR}, ignores defense",
+            "S1: {D/BT_STAT|ST_DEF} for 2 turns",
+            "Passive: On non-attack skill, reduces buff durations by 2 turns. On non-crit, recovers Weakness Gauge by 50%.",
+            "(Stage 3+) {D/BT_FIXED_DAMAGE} {D/BT_DOT_CURSE} cannot exceed 10 000",
+            "Enrage: Every 4 turns, lasts 3 turns, deals lethal damage"
+          ],
+          "recommended": [
+            {
+              "name": "Dianne",
+              "comment": "{B/BT_IMMUNE}, no non-attacks"
+            },
+            {
+              "name": "Skadi",
+              "comment": "{B/BT_STAT|ST_CRITICAL_RATE}, no non-attacks"
+            },
+            {
+              "name": "Demiurge Luna",
+              "comment": "{E/Light} dps"
+            }
+          ],
+          "team": [
+            [
+              "Dianne"
+            ],
+            [
+              "Skadi",
+              "Tamara"
+            ],
+            [
+              "Demiurge Luna",
+              "Drakhan"
+            ],
+            [
+              "Regina",
+              "Demiurge Stella"
+            ]
+          ],
+          "video": {
+            "id": "",
+            "title": ""
+          }
+        }
+      ]
+    },
+    "phase2": {
+      "bossName": "Guardian of the Golden Land",
+      "overview": [
+        "S3: AoE, inflicts {D/BT_STUN} on {C/Mage} for 9 turns. When there are no {C/Mage}, inflicts {D/BT_AGGRO} for 9 turns.",
+        "S2 Passive: Increases priority by 100% on kill.",
+        "S2 Triggered Effect: On non-attack skill, inflicts minor AoE damage. Inflicts heavy damage on targets with {D/BT_STUN}. After attacking, removes all debuffs from the target.",
+        "S1: Prioritizes left-most enemy, inflicts {D/BT_STUN} for 2 turns if it is not a {C/Defender}.",
+        "Passive: If all enemies have a different Battle Type, increases Weakness Gauge damage taken from Skill Chains by 100%. Reduces damage taken, increases damage taken when in Break. Reduces damage taken from non-{E/Light} enemies, and increases damage dealt to them.",
+        "(Stage 5+) {D/BT_FIXED_DAMAGE} {D/BT_DOT_CURSE} cannot exceed 10 000",
+        "Enrage: Whenever health is reduced by 50 000. Gain {B/BT_DAMGE_TAKEN} {B/BT_STAT|ST_ATK_IR} 3 turns.",
+        "Enrage Ultimate : AoE, Deals heavy damage."
+      ],
+      "teams": {
+        "team1": {
+          "label": "Light",
+          "icon": "light.webp",
+          "video": {
+            "id": "",
+            "title": ""
+          },
+          "geas-active": [
+            "1-1M",
+            "1-2B",
+            "1-2M",
+            "1-3B",
+            "1-3M",
+            "1-4M",
+            "1-5M",
+            "2-1M",
+            "2-2M",
+            "2-3M",
+            "2-5B"
+          ],
+          "setup": [
+            [
+              "Demiurge Drakhan"
+            ],
+            [
+              "Demiurge Luna",
+              "Regina"
+            ],
+            [
+              "Drakhan",
+              "Demiurge Stella"
+            ],
+            [
+              "Monad Eva"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Mind the No Extra Turn for DLuna S2"
+            }            
+          ]
+        },
+        "team2": {
+          "label": "Ember",
+          "icon": "fire.webp",
+          "video": {
+            "id": "",
+            "title": ""
+          },
+          "geas-active": [
+            "1-1M",
+            "1-2M",
+            "1-3M",
+            "1-4M",
+            "2-1M",
+            "2-2B",
+            "2-2M",
+            "2-3M",
+            "2-4M",
+            "2-5M"
+          ],
+          "setup": [
+            [
+              "Ember"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Ember is all you need."
+            }            
+          ]
+        },
+        "team3": {
+          "label": "GBeth",
+          "icon": "light.webp",
+          "video": {
+            "id": "",
+            "title": ""
+          },
+          "geas-active": [
+            "1-1M",
+            "1-2M",
+            "1-3M",
+            "1-5M",
+            "2-1B",
+            "2-1M",
+            "2-2B",
+            "2-2M",
+            "2-3M",
+            "2-5M"
+          ],
+          "setup": [
+            [
+              "Kuro"
+            ],
+            [
+              "Akari"
+            ],
+            [
+              "Gnosis Beth"
+            ],
+            [
+              "Monad Eva"
+            ]
+          ],
+          "note": []
+        }
+      }
+    }
+  }
+}

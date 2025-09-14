@@ -1,0 +1,197 @@
+{
+  "ID": "2000020",
+  "Fullname": "Alice",
+  "Rarity": 3,
+  "Element": "Earth",
+  "rank_pvp":"B",
+  "role":"support",
+  "gift": "Magic Tool",
+  "Class": "Mage",
+  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+3% Ally Team Effectiveness\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+3% Ally Team Effectiveness\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Dormouse Whiskers",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>70%</color> chance to increase <color=#28d9ed>Evasion</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000020_Skill01_LV1,SKILL_DESC_2000020_Skill01_LV1,SKILL_DESC_2000020_Skill01_LV1,SKILL_DESC_2000020_Skill01_LV1,SKILL_DESC_2000020_Skill01_LV1",
+      "IconName": "Skill_First_2000020",
+      "NameIDSymbol": "2001",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000020_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_AVOID"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000020_1_1]</color> chance to increase <color=#28d9ed>Evasion</color> for <color=#28d9ed>[Buff_T_2000020_1_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+15% effect chance"
+        ],
+        "5": [
+          "+10% damage",
+          "+1 turn effect duration"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Hatter's Teacup",
+      "true_desc": "When using this skill, has a <color=#28d9ed>70%</color> chance to remove <color=#28d9ed>1</color> <color=#28d9ed>buff(s)</color> from all enemies, then attacks them.\\nAfter attacking, inflicts reduced <color=#28d9ed>Effectiveness</color> for <color=#28d9ed>1 turn(s)</color> on all enemies and increases <color=#28d9ed>Priority</color> by <color=#28d9ed>25%</color> for every target that was inflicted damage.",
+      "ApproachTime": "CAST_DEBUFF",
+      "DescID": "SKILL_DESC_2000020_Skill02_LV1,SKILL_DESC_2000020_Skill02_LV1,SKILL_DESC_2000020_Skill02_LV1,SKILL_DESC_2000020_Skill02_LV1,SKILL_DESC_2000020_Skill02_LV1",
+      "IconName": "Skill_Second_2000020",
+      "NameIDSymbol": "2002",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000020_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases damage\\nReduces Alice in Wonderland Cooldown by 1 turn",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Enhances Buff Removal\\n(Ignores Resilience)",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\nResets Alice In Wonderland! Cooldown",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [
+        "BT_REMOVE_BUFF",
+        "BT_STAT|ST_BUFF_CHANCE"
+      ],
+      "description": [
+        "When using this skill, has a <color=#28d9ed>[Buff_C_2000020_2_3]</color> chance to remove <color=#28d9ed>[Buff_V_2000020_2_3]</color> <color=#28d9ed>buff(s)</color> from all enemies, then attacks them.\\nAfter attacking, inflicts reduced <color=#28d9ed>Effectiveness</color> for <color=#28d9ed>[Buff_T_2000020_2_4] turn(s)</color> on all enemies and increases <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000020_2_2]</color> for every target that was inflicted damage."
+      ],
+      "enhancement": {
+        "2": [
+          "+15% chance to remove buffs",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+15% damage",
+          "+15% chance to remove buffs"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Alice In Wonderland",
+      "true_desc": "Attacks all enemies and has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Unbuffable</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000020_Skill03_LV1,SKILL_DESC_2000020_Skill03_LV1,SKILL_DESC_2000020_Skill03_LV1,SKILL_DESC_2000020_Skill03_LV1,SKILL_DESC_2000020_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000020",
+      "NameIDSymbol": "2003",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000020_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_SEALED"
+      ],
+      "description": [
+        "Attacks all enemies and has a <color=#28d9ed>[Buff_C_2000020_3_1]</color> chance to inflict <color=#28d9ed>Unbuffable</color> for <color=#28d9ed>[Buff_T_2000020_3_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+15% damage",
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, removes <color=#28d9ed>1 buff(s)</color> from all enemies.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to increase <color=#28d9ed>Evasion</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000020_Skill04_LV1,SKILL_DESC_2000020_Skill04_LV1,SKILL_DESC_2000020_Skill04_LV1,SKILL_DESC_2000020_Skill04_LV1,SKILL_DESC_2000020_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Join",
+      "NameIDSymbol": "2004",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_REMOVE_BUFF",
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, removes <color=#28d9ed>[Buff_V_2000020_chain_1_1] buff(s)</color> from all enemies.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000020_backup_1_1]</color> chance to increase <color=#28d9ed>Evasion</color> for <color=#28d9ed>[Buff_T_2000020_backup_1_1] turn(s)</color>."
+      ],
+      "dual_buff": "BT_STAT|ST_AVOID",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"B"
+}

@@ -1,0 +1,189 @@
+{
+  "ID": "2000014",
+  "Fullname": "Marian",
+  "Rarity": 2,
+  "Element": "Water",
+  "rank":"S",
+  "role":"dps", 
+  "gift": "Craftwork",
+  "Class": "Mage",
+  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+5% Effectiveness\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n+5% Effectiveness\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Excuse Me!",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>40%</color> chance to inflict <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000014_Skill01_LV1,SKILL_DESC_2000014_Skill01_LV1,SKILL_DESC_2000014_Skill01_LV1,SKILL_DESC_2000014_Skill01_LV1,SKILL_DESC_2000014_Skill01_LV1",
+      "IconName": "Skill_First_2000014",
+      "NameIDSymbol": "1401",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000014_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [
+        "BT_DOT_CURSE"
+      ],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000014_1_1]</color> chance to inflict <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>[Buff_T_2000014_1_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% effect chance"
+        ],
+        "5": [
+          "+10% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Welcome!",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>50%</color> chance to reduce the target's <color=#28d9ed>Defense</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000014_Skill02_LV1,SKILL_DESC_2000014_Skill02_LV1,SKILL_DESC_2000014_Skill02_LV1,SKILL_DESC_2000014_Skill02_LV1,SKILL_DESC_2000014_Skill02_LV1",
+      "IconName": "Skill_Second_2000014",
+      "NameIDSymbol": "1402",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000014_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases Reduce Defense chance by 20%",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Inflicts 1 additional stack of Cursed",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Inflicts 1 additional stack of Cursed",
+          "level": 3
+        }
+      },
+      "cd": "3",
+      "debuff": [
+        "BT_STAT|ST_DEF","BT_DOT_CURSE"
+      ],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000014_2_1]</color> chance to reduce the target's <color=#28d9ed>Defense</color> for <color=#28d9ed>[Buff_T_2000014_2_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Let Me Serve You Tea!",
+      "true_desc": "Attacks all enemies and has a <color=#28d9ed>85%</color> chance to inflict <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000014_Skill03_LV1,SKILL_DESC_2000014_Skill03_LV1,SKILL_DESC_2000014_Skill03_LV1,SKILL_DESC_2000014_Skill03_LV1,SKILL_DESC_2000014_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000014",
+      "NameIDSymbol": "1403",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000014_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_DOT_CURSE"
+      ],
+      "description": [
+        "Attacks all enemies and has a <color=#28d9ed>[Buff_C_2000014_3_1]</color> chance to inflict <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>[Buff_T_2000014_3_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict Cursed on the target for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to inflict <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000014_Skill04_LV1,SKILL_DESC_2000014_Skill04_LV1,SKILL_DESC_2000014_Skill04_LV1,SKILL_DESC_2000014_Skill04_LV1,SKILL_DESC_2000014_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Join",
+      "NameIDSymbol": "1404",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_DOT_CURSE",
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000014_chain_1_1]</color> chance to inflict Cursed on the target for <color=#28d9ed>[Buff_T_2000014_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000014_backup_1_1]</color> chance to inflict <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>[Buff_T_2000014_backup_1_1] turn(s)</color>."
+      ],
+      "dual_debuff": "BT_DOT_CURSE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

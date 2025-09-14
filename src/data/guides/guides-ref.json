@@ -1,0 +1,763 @@
+{
+  "dahlia": {
+    "category": "world-boss",
+    "title": "Dahlia",
+    "description": "World Boss Guide! Full Run and Explanation",
+    "icon": "dahlia",
+    "last_updated": "2025-07-01",
+    "author": "Sevih"
+  },
+  "ragnakeus": {
+    "category": "world-boss",
+    "title": "Ragnakeus",
+    "description": "Video guide",
+    "icon": "ragnakeus",
+    "last_updated": "2024-10-28",
+    "author": "Ducky"
+  },
+  "harshna": {
+    "category": "world-boss",
+    "title": "Harshna",
+    "description": "World Boss Guide! Full Run and Explanation",
+    "icon": "harshna",
+    "last_updated": "2025-07-29",
+    "author": "Sevih"
+  },
+  "drakhan": {
+    "category": "world-boss",
+    "title": "Drakhan",
+    "description": "Combat Footage",
+    "icon": "drakhan",
+    "last_updated": "2024-12-17",
+    "author": "Ducky"
+  },
+  "primordial_sentinel": {
+    "category": "world-boss",
+    "title": "Primordial Sentinel",
+    "description": "World Boss Guide! Full Run and Explanation",
+    "icon": "primordial_sentinel",
+    "last_updated": "2024-07-09",
+    "author": "Ducky"
+  },
+  "venion": {
+    "category": "world-boss",
+    "title": "Venion",
+    "description": "Boss strategy guide",
+    "icon": "venion",
+    "last_updated": "2025-06-04",
+    "author": "Sevih"
+  },
+  "glicys": {
+    "category": "special-request",
+    "title": "Glicys",
+    "description": "Boss strategy guide",
+    "icon": "glicys",
+    "last_updated": "2025-04-08",
+    "author": "Arabyss & Kilvanoshei"
+  },
+  "beatles": {
+    "category": "special-request",
+    "title": "Dek'ril & Mek'ril",
+    "description": "Boss strategy guide",
+    "icon": "beatles",
+    "last_updated": "2025-04-08",
+    "author": "Arabyss & Kilvanoshei"
+  },
+  "meteos": {
+    "category": "special-request",
+    "title": "Blazing Knight Meteos",
+    "description": "Boss strategy guide",
+    "icon": "meteos",
+    "last_updated": "2025-04-08",
+    "author": "Arabyss & Kilvanoshei"
+  },
+  "chimera": {
+    "category": "special-request",
+    "title": "Unidentified Chimera",
+    "description": "Boss strategy guide",
+    "icon": "chimera",
+    "last_updated": "2024-09-19",
+    "author": "Ducky"
+  },
+  "guardian": {
+    "category": "special-request",
+    "title": "Masterless Guardian",
+    "description": "Boss strategy guide",
+    "icon": "guardian",
+    "last_updated": "2024-09-19",
+    "author": "Ducky"
+  },
+  "ars-nova": {
+    "category": "special-request",
+    "title": "Ars Nova",
+    "description": "Boss strategy guide",
+    "icon": "ars-nova",
+    "last_updated": "2025-05-13",
+    "author": "SADtherobot"
+  },
+  "amadeus": {
+    "category": "special-request",
+    "title": "Amadeus",
+    "description": "Boss strategy guide",
+    "icon": "amadeus",
+    "last_updated": "2025-04-11",
+    "author": "SADtherobot"
+  },
+  "sacreed": {
+    "category": "special-request",
+    "title": "Sacreed Guardian",
+    "description": "Boss strategy guide",
+    "icon": "sacreed",
+    "last_updated": "2025-05-01",
+    "author": "SADtherobot"
+  },
+  "grand-calamari": {
+    "category": "special-request",
+    "title": "Grand Calamari",
+    "description": "Boss strategy guide",
+    "icon": "calamari",
+    "last_updated": "2025-04-01",
+    "author": "SADtherobot"
+  },
+  "tyrant": {
+    "category": "special-request",
+    "title": "Tyrant Toddler",
+    "description": "Boss strategy guide",
+    "icon": "tyrant",
+    "last_updated": "2024-09-19",
+    "author": "Ducky"
+  },
+  "deep-sea-guardian": {
+    "category": "joint-boss",
+    "title": "Deep Sea Guardian",
+    "description": "Boss strategy guide",
+    "icon": "deep-sea-guardian",
+    "last_updated": "2025-07-23",
+    "author": "Sevih"
+  },
+  "prom-dvlada": {
+    "category": "adventure-license",
+    "title": "Promotion : Demiurge Vlada",
+    "description": "Boss strategy guide",
+    "icon": "prom-dvlada",
+    "last_updated": "2025-06-09",
+    "author": "Shiraen",
+    "second_image": "prom-dvlada-hide"
+  },
+  "prom-gdahlia": {
+    "category": "adventure-license",
+    "title": "Promotion : Gnosis Dahlia",
+    "description": "Boss strategy guide",
+    "icon": "prom-gdahlia",
+    "last_updated": "2025-08-25",
+    "author": "XuRenChao",
+    "second_image": "prom-gdahlia-hide"
+  },
+  "prom-meva": {
+    "category": "adventure-license",
+    "title": "Promotion : Monad Eva",
+    "description": "Boss strategy guide",
+    "icon": "prom-meva",
+    "last_updated": "2025-06-09",
+    "author": "XuRenChao",
+    "second_image": "prom-meva-hide"
+  },
+  "prom-ddrakhan": {
+    "category": "adventure-license",
+    "title": "Promotion : Demiurge Drakhan",
+    "description": "Boss strategy guide",
+    "icon": "prom-ddrakhan",
+    "last_updated": "2025-01-15",
+    "author": "Shiraen",
+    "second_image": "prom-ddrakhan-hide"
+  },
+  "prom-dastei": {
+    "category": "adventure-license",
+    "title": "Promotion : Demiurge Astei",
+    "description": "Boss strategy guide",
+    "icon": "prom-dastei",
+    "last_updated": "2024-12-02",
+    "author": "Shiraen",
+    "second_image": "prom-dastei-hide"
+  },
+  "prom-dstella": {
+    "category": "adventure-license",
+    "title": "Promotion : Demiurge Stella",
+    "description": "Boss strategy guide",
+    "icon": "prom-dstella",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "prom-dstella-hide"
+  },
+  "anubis-g": {
+    "category": "adventure-license",
+    "title": "Anubis Guardian",
+    "description": "Boss strategy guide",
+    "icon": "anubis-g",
+    "last_updated": "2025-03-17",
+    "author": "Shiraen",
+    "second_image": "anubis2-g"
+  },
+  "heavy-fixed-vladi-max": {
+    "category": "adventure-license",
+    "title": "Heavy Fixed Vladi Max",
+    "description": "Boss strategy guide",
+    "icon": "heavy-fixed-vladi-max",
+    "last_updated": "2025-01-20",
+    "author": "Shiraen",
+    "second_image": "heavy-fixed-vladi-max2"
+  },
+  "amadeus-AL": {
+    "category": "adventure-license",
+    "title": "Amadeus",
+    "description": "Boss strategy guide",
+    "icon": "amadeus",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "amadeus2"
+  },
+  "meteos-AL": {
+    "category": "adventure-license",
+    "title": "Blazing Knight Meteos",
+    "description": "Boss strategy guide",
+    "icon": "meteos",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "meteos2"
+  },
+  "sacreed-AL": {
+    "category": "adventure-license",
+    "title": "Sacreed Guardian",
+    "description": "Boss strategy guide",
+    "icon": "sacreed",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "sacreed2"
+  },
+  "ziggsaron": {
+    "category": "adventure-license",
+    "title": "Ravenous Wolf King, Ziggsaron",
+    "description": "Boss strategy guide",
+    "icon": "ziggsaron",
+    "last_updated": "2024-12-03",
+    "author": "Shiraen",
+    "second_image": "ziggsaron2"
+  },
+  "fulmination": {
+    "category": "adventure-license",
+    "title": "Ful.Mi.NATION Assault Suit",
+    "description": "Boss strategy guide",
+    "icon": "fulmination",
+    "last_updated": "2025-01-20",
+    "author": "Shiraen",
+    "second_image": "fulmination2"
+  },
+  "ksai": {
+    "category": "adventure-license",
+    "title": "Ksai",
+    "description": "Boss strategy guide",
+    "icon": "ksai",
+    "last_updated": "2024-12-02",
+    "author": "Shiraen",
+    "second_image": "ksai2"
+  },
+  "shadowArch": {
+    "category": "adventure-license",
+    "title": "Shadow of the Archdemon",
+    "description": "Boss strategy guide",
+    "icon": "shadowArch",
+    "last_updated": "2024-12-02",
+    "author": "Shiraen",
+    "second_image": "shadowArch2"
+  },
+  "ars-novaAL": {
+    "category": "adventure-license",
+    "title": "Ars Nova",
+    "description": "Boss strategy guide",
+    "icon": "ars-novaAL",
+    "last_updated": "2024-11-20",
+    "author": "Shiraen",
+    "second_image": "ars-novaAL2"
+  },
+  "schattermeister-Schwartz": {
+    "category": "adventure-license",
+    "title": "Schattermeister Schwartz",
+    "description": "Boss strategy guide",
+    "icon": "schattermeister-Schwartz",
+    "last_updated": "2024-11-11",
+    "author": "Shiraen",
+    "second_image": "schattermeister-Schwartz"
+  },
+  "masterlessAL": {
+    "category": "adventure-license",
+    "title": "Masterless Guardian",
+    "description": "Boss strategy guide",
+    "icon": "masterlessAL",
+    "last_updated": "2024-11-11",
+    "author": "Shiraen",
+    "second_image": "masterlessAL2"
+  },
+  "calamariAL": {
+    "category": "adventure-license",
+    "title": "Grand Calamari",
+    "description": "Boss strategy guide",
+    "icon": "calamariAL",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "calamariAL2"
+  },
+  "toddlerAL": {
+    "category": "adventure-license",
+    "title": "Tyrant Toddler",
+    "description": "Boss strategy guide",
+    "icon": "toddlerAL",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "toddlerAL"
+  },
+  "glicysAL": {
+    "category": "adventure-license",
+    "title": "Glicys",
+    "description": "Boss strategy guide",
+    "icon": "glicysAL",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "glicysAL2"
+  },
+  "beatlesAL": {
+    "category": "adventure-license",
+    "title": "Dek'ril & Mek'ril",
+    "description": "Boss strategy guide",
+    "icon": "beatlesAL",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "beatlesAL2"
+  },
+  "chimeraAL": {
+    "category": "adventure-license",
+    "title": "Unidentified Chimera",
+    "description": "Boss strategy guide",
+    "icon": "chimeraAL",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "chimeraAL2"
+  },
+  "ppu-epsilon": {
+    "category": "adventure-license",
+    "title": "Planet Purification Unit Epsilon",
+    "description": "Boss strategy guide",
+    "icon": "ppu-epsilon",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "ppu-epsilon2"
+  },
+  "gustav": {
+    "category": "adventure-license",
+    "title": "Gustav",
+    "description": "Boss strategy guide",
+    "icon": "gustav",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "gustav2"
+  },
+  "forest-king": {
+    "category": "adventure-license",
+    "title": "Forest King",
+    "description": "Boss strategy guide",
+    "icon": "forest-king",
+    "last_updated": "2024-11-10",
+    "author": "Shiraen",
+    "second_image": "forest-king2"
+  },
+  "prototype-ex-78": {
+    "category": "joint-boss",
+    "title": "Prototype EX-78",
+    "description": "Combat Footage",
+    "icon": "prototype-ex-78",
+    "last_updated": "2024-12-10",
+    "author": "Ducky"
+  },
+  "shichifuja": {
+    "category": "joint-boss",
+    "title": "Shichifuja",
+    "description": "Boss strategy guide",
+    "icon": "shichifuja",
+    "last_updated": "2025-08-19",
+    "author": "Sevih"
+  },
+  "annihilator": {
+    "category": "joint-boss",
+    "title": "Annihilator",
+    "description": "Boss strategy guide",
+    "icon": "annihilator",
+    "last_updated": "2025-06-24",
+    "author": "Sevih"
+  },
+  "koh-meteos": {
+    "category": "joint-boss",
+    "title": "Knight of Hope Meteos",
+    "description": "Boss strategy guide",
+    "icon": "koh-meteos",
+    "last_updated": "2025-05-27",
+    "author": "Arabyss / Sevih / Shiraen "
+  },
+  "pursuit-queen": {
+    "category": "irregular-extermination",
+    "title": "Pursuit : Irregular Queen",
+    "description": "Boss strategy guide",
+    "icon": "pursuit-queen",
+    "last_updated": "2025-05-12",
+    "author": "Sevih / Shiraen",
+    "second_image": "pursuit-queen2"
+  },
+  "pursuit-blockbuster": {
+    "category": "irregular-extermination",
+    "title": "Pursuit : Blockbuster",
+    "description": "Boss strategy guide",
+    "icon": "pursuit-blockbuster",
+    "last_updated": "2025-04-01",
+    "author": "Shiraen",
+    "second_image": "pursuit-blockbuster2"
+  },
+  "pursuit-iron-stretcher": {
+    "category": "irregular-extermination",
+    "title": "Pursuit : Iron Stretcher",
+    "description": "Boss strategy guide",
+    "icon": "pursuit-iron-stretcher",
+    "last_updated": "2025-04-01",
+    "author": "Shiraen",
+    "second_image": "pursuit-iron-stretcher2"
+  },
+  "pursuit-mutated-wyvre": {
+    "category": "irregular-extermination",
+    "title": "Pursuit : Mutated Wyvre",
+    "description": "Boss strategy guide",
+    "icon": "pursuit-mutated-wyvre",
+    "last_updated": "2025-04-01",
+    "author": "Shiraen",
+    "second_image": "pursuit-mutated-wyvre2"
+  },
+  "maxwell": {
+    "category": "guild-raid",
+    "title": "The Madman's Laboratory",
+    "description": "Boss strategy guide",
+    "icon": "maxwell",
+    "last_updated": "2025-04-01",
+    "author": "Sevih"
+  },
+  "frost-legion": {
+    "category": "guild-raid",
+    "title": "The Frost Legion",
+    "description": "Boss strategy guide",
+    "icon": "frost-legion",
+    "last_updated": "2025-05-21",
+    "author": "Sevih"
+  },
+  "prevent-world-alteration": {
+    "category": "guild-raid",
+    "title": "Prevent World Alteration",
+    "description": "Boss strategy guide",
+    "icon": "prevent-world-alteration",
+    "last_updated": "2025-06-18",
+    "author": "Sevih"
+  },
+  "dignity-of-the-golden-kingdom": {
+    "category": "guild-raid",
+    "title": "Dignity  of the Golden Kingdom",
+    "description": "Boss strategy guide",
+    "icon": "dignity-of-the-golden-kingdom",
+    "last_updated": "2025-07-16",
+    "author": "Shiraen"
+  },
+  "free-heroes-start-banner": {
+    "category": "general-guides",
+    "title": "Free Heroes & Starter Banners",
+    "description": "Learn which heroes you'll get for free in Outerplane and how to make the best choices from the Start",
+    "icon": "T_Chat_Emoticon_08",
+    "last_updated": "2025-05-17",
+    "author": "Arabyss/Birdmouth/Sevih/Shiraen",
+    "second_image": "T_Chat_Emoticon_05"
+  },
+  "daily-stamina": {
+    "category": "general-guides",
+    "title": "Daily Stamina Burn",
+    "description": "Learn how to efficiently spend your stamina daily in Outerplane with this step-by-step guide.",
+    "icon": "T_Chat_Emoticon_04",
+    "last_updated": "2025-05-13",
+    "author": "SADtherobot",
+    "second_image": "T_Chat_Emoticon_04"
+  },
+  "banner-mileage": {
+    "category": "general-guides",
+    "title": "Banners & Mileage System",
+    "description": "Understand the banner types and the mileage system in Outerplane to optimize your summons.",
+    "icon": "myth",
+    "last_updated": "2025-05-25",
+    "author": "Sevih",
+    "second_image": "myth2"
+  },
+  "S1-8-5": {
+    "category": "adventure",
+    "title": "S1 Normal 8-5 : Maxwell",
+    "description": "Boss strategy guide.",
+    "icon": "S1-8-5",
+    "last_updated": "2025-05-25",
+    "author": "Sevih"
+  },
+  "S1-9-5": {
+    "category": "adventure",
+    "title": "S1 Hard 9-5 : Leo & Alpha",
+    "description": "Boss strategy guide.",
+    "icon": "S1-9-5",
+    "last_updated": "2025-05-25",
+    "author": "Sevih",
+    "second_image": "S1-9-5-2"
+  },
+  "S2-1-10": {
+    "category": "adventure",
+    "title": "S2 Hard 1-10 : Grand Calamari",
+    "description": "Boss strategy guide.",
+    "icon": "S2-1-10",
+    "last_updated": "2025-05-25",
+    "author": "Sevih"
+  },
+  "S2-3-10": {
+    "category": "adventure",
+    "title": "S2 Hard 3-10 : Sacreed Guardian",
+    "description": "Boss strategy guide.",
+    "icon": "S2-3-10",
+    "last_updated": "2025-05-25",
+    "author": "Sevih"
+  },
+  "S2-4-10": {
+    "category": "adventure",
+    "title": "S2 Hard 4-10 : Astei & Sterope",
+    "description": "Boss strategy guide.",
+    "icon": "S2-4-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S2-4-10-2"
+  },
+  "S2-5-10": {
+    "category": "adventure",
+    "title": "S2 Hard 5-10 : Demiurge Astei",
+    "description": "Boss strategy guide.",
+    "icon": "S2-5-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S2-5-10-2"
+  },
+  "S2-7-10": {
+    "category": "adventure",
+    "title": "S2 Hard 7-10 : Vlada",
+    "description": "Boss strategy guide.",
+    "icon": "S2-7-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S2-7-10-2"
+  },
+  "S2-9-10": {
+    "category": "adventure",
+    "title": "S2 Hard 9-10 : Vladi Max",
+    "description": "Boss strategy guide.",
+    "icon": "S2-9-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih"
+  },
+  "S2-10-10": {
+    "category": "adventure",
+    "title": "S2 Hard 10-10 : Demiurge Drakhan & Demiurge Vlada",
+    "description": "Boss strategy guide.",
+    "icon": "S2-10-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S2-10-10-2"
+  },
+  "S3-2-10": {
+    "category": "adventure",
+    "title": "S3 Hard 2-10 : Betrayed Deshret",
+    "description": "Boss strategy guide.",
+    "icon": "S3-2-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S3-2-10-2"
+  },
+  "S3-3-10": {
+    "category": "adventure",
+    "title": "S3 Hard 3-10 : Fatal",
+    "description": "Boss strategy guide.",
+    "icon": "S3-3-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S3-3-10-2"
+  },
+  "S3-4-10": {
+    "category": "adventure",
+    "title": "S3 Hard 4-10 : Hilde & sisters",
+    "description": "Boss strategy guide.",
+    "icon": "S3-4-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S3-4-10-2"
+  },
+  "S3-5-10": {
+    "category": "adventure",
+    "title": "S3 Hard 5-10 : Regina & Hilde",
+    "description": "Boss strategy guide.",
+    "icon": "S3-5-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S3-5-10-2"
+  },
+  "S3-6-10": {
+    "category": "adventure",
+    "title": "S3 Hard 6-10 : Ancient Foe",
+    "description": "Boss strategy guide.",
+    "icon": "S3-6-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S3-6-10-2"
+  },
+  "S3-7-10": {
+    "category": "adventure",
+    "title": "S3 Hard 7-10 : Abyssal Calamity Apophis",
+    "description": "Boss strategy guide.",
+    "icon": "S3-7-10",
+    "last_updated": "2025-05-26",
+    "author": "Sevih",
+    "second_image": "S3-7-10-2"
+  },
+  "heroes-growth": {
+    "category": "general-guides",
+    "title": "Hero Growth",
+    "description": "A complete breakdown of how to power up your heroes efficiently, from leveling and upgrades to transcendence, gear, skills, and trust.",
+    "icon": "heroes-growth",
+    "second_image": "heroes-growth-2",
+    "last_updated": "2025-05-28",
+    "author": "Sevih"
+  },
+  "gear": {
+    "category": "general-guides",
+    "title": "Gear",
+    "description": "A guide to gear types, upgrades, and how to make your equipment stronger.",
+    "icon": "gear",
+    "second_image": "gear-2",
+    "last_updated": "2025-05-28",
+    "author": "Sevih"
+  },
+  "quirk": {
+    "category": "general-guides",
+    "title": "Quirk System",
+    "description": "Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials.",
+    "icon": "quirk",
+    "second_image": "quirk-2",
+    "last_updated": "2025-05-28",
+    "author": "Kilvanoshei",
+    "hide": false
+  },
+  "stats": {
+    "category": "general-guides",
+    "title": "Statistics & Combat Basics",
+    "description": "A complete guide to Outerplane’s stats and combat flow — perfect for new and experienced players alike.",
+    "icon": "stats",
+    "second_image": "stats",
+    "last_updated": "2025-06-09",
+    "author": "Sevih / Shiraen"
+  },
+  "depth8-route1": {
+    "category": "monad-gate",
+    "title": "Depth 8 : route 1",
+    "description": "Map of Depth 8 : route 1 and true ending path",
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-06-30",
+    "author": "Sevih"
+  },
+  "depth8-route2": {
+    "category": "monad-gate",
+    "title": "Depth 8 : route 2",
+    "description": "Map of Depth 8 : route 2 and true ending path",
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-06-30",
+    "author": "Sevih"
+  },
+  "depth10-route1": {
+    "category": "monad-gate",
+    "title": "Depth 10 : route 1",
+    "description": "Map of Depth 10 : route 1 and true ending path",
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-09-05",
+    "author": "XuRenChao"
+  },
+  "depth10-route2": {
+    "category": "monad-gate",
+    "title": "Depth 10 : route 2",
+    "description": "Map of Depth 10 : route 2 and true ending path",
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-09-05",
+    "author": "XuRenChao"
+  },
+  "normal": {
+    "category": "skyward-tower",
+    "title": "Normal",
+    "description": "Ascend the 100 floors of the Skyward Tower — an epic journey that will test your endurance and versatility.",
+    "icon": "normal",
+    "last_updated": "2025-08-23",
+    "author": "Various Author"
+  },
+  "hard": {
+    "category": "skyward-tower",
+    "title": "Hard",
+    "description": "Face 30 relentless floors packed with tougher enemies and tactical challenges. Precision and strategy are key.",
+    "icon": "hard",
+    "last_updated": "2025-08-23",
+    "author": "Various Author"
+  },
+  "very-hard": {
+    "category": "skyward-tower",
+    "title": "Very Hard",
+    "description": "Only the most elite teams will survive the top 20 brutal floors.",
+    "icon": "very-hard",
+    "last_updated": "2025-09-10",
+    "author": "Various Author"
+  },
+  "timegate-resource": {
+    "category": "general-guides",
+    "title": "Timegated Resources Guide",
+    "description": "Complete guide to Outerplane’s timegated resources — skill books, transistones, special gear materials, and glunite sources.",
+    "icon": "timegate-resource",
+    "second_image": "timegate-resource2",
+    "last_updated": "2025-07-31",
+    "author": "Sevih / Shiraen"
+  },
+  "planetary-control-unit": {
+    "category": "guild-raid",
+    "title": "Planetary Control Unit",
+    "description": "Boss strategy guide",
+    "icon": "planetary-control-unit",
+    "last_updated": "2025-08-13",
+    "author": "Sevih"
+  },
+  "shop-purchase-priorities": {
+    "category": "general-guides",
+    "title": "Shop Purchase Priorities",
+    "description": "Outerplane shop guide with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely.",
+    "icon": "shop-purchase-priorities",
+    "second_image": "shop-purchase-priorities2",
+    "last_updated": "2025-08-18",
+    "author": "Sevih / Shiraen"
+  },
+  "premium-limited": {
+  "category": "general-guides",
+  "title": "Premium & Limited Guide",
+  "description": "Pull priorities, PvE/PvP recommendations, and key transcendence sweetspots (3★→6★) for Premium and Limited heroes in Outerplane.",
+  "icon": "premium-limited",
+  "second_image": "premium-limited2",
+  "last_updated": "2025-08-25",
+  "author": "Shiraen"
+}
+
+}

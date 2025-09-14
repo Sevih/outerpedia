@@ -1,0 +1,423 @@
+[
+    {
+        "name": "BT_COOL_CHARGE",
+        "label": "Cooldown Reduction",
+        "description": "Reduces skill cooldowns.",
+        "icon": "reducesalliesskillcooldowns"
+    },
+    {
+        "name": "BT_ACTION_GAUGE",
+        "label": "Increase Priority",
+        "description": "Increase self/allies priority",
+        "icon": "SC_Buff_Effect_Increase_Priority"
+    },
+    {
+        "name": "BT_STAT|ST_CRITICAL_RATE",
+        "label": "Increased Critical Hit Chance",
+        "description": "Increased Critical Hit Chance by 50%.",
+        "icon": "criticalhitchance"
+    },
+    {
+        "name": "BT_STAT|ST_CRITICAL_RATE_IR",
+        "label": "Increased Critical Hit Chance",
+        "description": "Increased Critical Hit Chance by 50%. (Irremovable)",
+        "icon": "IG_Buff_Stat_CriRate_Interruption"
+    },
+    {
+        "name": "BT_STAT|ST_CRITICAL_DMG_RATE",
+        "label": "Increased Critical Damage",
+        "description": "Increased Critical Damage by 50%.",
+        "icon": "SC_Buff_Stat_CriDmgRate"
+    },
+    {
+        "name": "BT_STAT|ST_AVOID",
+        "label": "Increased Evasion",
+        "description": "Increased Evasion by 50%.",
+        "icon": "SC_Buff_Stat_Avoid"
+    },
+    {
+        "name": "BT_STAT|ST_AVOID_IR",
+        "label": "Increased Evasion",
+        "description": "Increased Evasion by 50%. (Irremovable)",
+        "icon": "IG_Buff_Stat_Avoid_Interruption"
+    },
+    {
+        "name": "BT_STAT|ST_DEF",
+        "label": "Increased Defense",
+        "description": "Increased Defense by 50%.",
+        "icon": "CM_Stat_Icon_DEF"
+    },
+    {
+        "name": "BT_STAT|ST_DEF_IR",
+        "label": "Increased Defense",
+        "description": "Increased Defense by 50%. (Irremovable)",
+        "icon": "IG_Buff_Stat_Def_Interruption"
+    },
+    {
+        "name": "BT_STAT|ST_ATK",
+        "label": "Increased Attack",
+        "description": "Increased Attack by 30%.",
+        "icon": "SC_Buff_Stat_Atk"
+    },
+    {
+        "name": "BT_STAT|ST_ATK_IR",
+        "label": "Increased Attack",
+        "description": "Increased Attack by 30%. (Irremovable)",
+        "icon": "IG_Buff_Stat_Atk_Interruption"
+    },
+    {
+        "name": "BT_STAT|ST_SPEED",
+        "label": "Increased Speed",
+        "description": "Increased Speed by 30%.",
+        "icon": "SC_Buff_Stat_Speed"
+    },
+    {
+        "name": "BT_STAT|ST_SPEED_IR",
+        "label": "Increased Speed",
+        "description": "Increased Speed by 30%. (Irremovable)",
+        "icon": "IG_Buff_Stat_Speed_Interruption"
+    },
+    {
+        "name": "BT_STAT|ST_BUFF_CHANCE",
+        "label": "Increased Effectiveness",
+        "description": "Increased Effectiveness by 100%.",
+        "icon": "SC_Buff_Stat_BuffChance"
+    },
+    {
+        "name": "BT_STAT|ST_BUFF_CHANCE_IR",
+        "label": "Increased Effectiveness",
+        "description": "Increased Effectiveness by 100%. (Irremovable)",
+        "icon": "IG_Buff_Stat_BuffChance_Interruption"
+    },
+    {
+        "name": "BT_STAT|ST_BUFF_RESIST",
+        "label": "Increased Resilience",
+        "description": "Increased Resilience by 100%",
+        "icon": "SC_Buff_Stat_BuffResist"
+    },
+    {
+        "name": "BT_CP_CHARGE",
+        "label": "Charge CP",
+        "description": "Generates Chain Points",
+        "icon": "SC_Buff_Effect_CP"
+    },
+    {
+        "name": "BT_AP_CHARGE",
+        "label": "Charge AP",
+        "description": "Generates Action Points",
+        "icon": "SC_Buff_Effect_AP"
+    },
+    {
+        "name": "BT_STAT|ST_ACCURACY",
+        "label": "Increased Accuracy",
+        "description": "Increased Accuracy by 50%",
+        "icon": "SC_Buff_Stat_Accuracy"
+    },
+    {
+        "name": "BT_STAT|ST_COUNTER_RATE",
+        "label": "Counterattack",
+        "description": "Counterattack when attacked",
+        "icon": "SC_Buff_Counter"
+    },
+    {
+        "name": "BT_STAT|ST_PIERCE_POWER_RATE",
+        "label": "Increased Penetration",
+        "description": "Penetrates the target's Defense by 30% when dealing damage.",
+        "icon": "CM_Stat_Icon_PIERCE_POWER"
+    },
+    {
+        "name": "BT_STAT|ST_VAMPIRIC",
+        "label": "Increases Lifesteal",
+        "description": "Heals 20% of the damage dealt",
+        "icon": "IG_Buff_HPdrain",
+        "cat":"test"
+    },
+    {
+        "name": "Heavy Strike",
+        "label": "Heavy Strike",
+        "description": "This attack cannot trigger a critical hit, but damage dealt is increased.",
+        "icon": "SC_Buff_Effect_Heavy_bk"
+    },
+    {
+        "name": "BT_INVINCIBLE",
+        "label": "Invulnerability",
+        "description": "Does not receive any damage.",
+        "icon": "SC_Buff_Effect_Invincible"
+    },
+    {
+        "name": "BT_INVINCIBLE_IR",
+        "label": "Invulnerability",
+        "description": "Does not receive any damage.",
+        "icon": "IG_Buff_Effect_Invincible_Interruption"
+    },
+    {
+        "name": "SYS_CONTINU_HEAL",
+        "label": "Sustained Recovery",
+        "description": "Recovers 15% of Max Health each turn",
+        "icon": "SC_Buff_Effect_Heal"
+    },
+    {
+        "name": "BT_SYS_BUFF_ENHANCE_IR",
+        "label": "Enhancement",
+        "description": "Increases the efficiency of buff that increases stats by 100%. (Irremovable)",
+        "icon": "IG_Buff_Enhance_Interruption"
+    },
+    {
+        "name": "IG_Buff_BuffdurationIncrease",
+        "label": "Increase Buff Duration",
+        "description": "Increased duration of beneficial effects granted on target",
+        "icon": "IG_Buff_BuffdurationIncrease"
+    },
+    {
+        "name": "SYS_BUFF_REVENGE",
+        "label": "Revenge",
+        "description": "Counterattack when a debuff is inflicted on an ally during an enemy's turn",
+        "icon": "SC_Buff_Revenge"
+    },
+    {
+        "name": "SYS_BUFF_BREAK_DMG",
+        "label": "Find Weakness",
+        "description": "Increases damage dealt to targets inflicted with Break",
+        "icon": "SC_Buff_Dmg_Target_Break"
+    },
+    {
+        "name": "BT_CALL_BACKUP",
+        "label": "Dual Attack",
+        "description": "Trigger a basic attack from the ally with the highest Attack.",
+        "icon": "SC_Buff_Effect_Dual_Attack"
+    },
+    {
+        "name": "BT_UNDEAD",
+        "label": "Immortality",
+        "description": "Health cannot be reduced below 1.",
+        "icon": "IG_Buff_Undead"
+    },
+    {
+        "name": "BT_REMOVE_DEBUFF",
+        "label": "Debuff Removal",
+        "description": "Remove weakening effect.",
+        "icon": "SC_Buff_Effect_Cleanse"
+    },
+    {
+        "name": "SYS_REVENGE_HEAL",
+        "label": "Agile Respond",
+        "description": "Automatically triggers an effect when certain conditions are met.",
+        "icon": "IG_Buff_Effect_Revenge_Heal"
+    },
+    {
+        "name": "BT_IMMUNE",
+        "label": "Immunity",
+        "description": "Ignores all incoming Debuffs",
+        "icon": "SC_Buff_Effect_Immune"
+    },
+    {
+        "name": "BT_IMMUNE_IR",
+        "label": "Immunity",
+        "description": "Ignores all incoming Debuffs (Irremovable)",
+        "icon": "IG_Buff_Effect_Immune_Interruption"
+    },
+    {
+        "name": "BT_REVIVAL",
+        "label": "Revival",
+        "description": "Revives after Health reaches zero",
+        "icon": "SC_Buff_Revival"
+    },
+    {
+        "name": "BT_RESURRECTION_G",
+        "label": "Resurrection (Greater)",
+        "description": "Revives a fallen ally. Revived allies will have their skill cooldown and stacking skill effect reset.",
+        "icon": "SC_Buff_Resurect_G"
+    },
+    {
+        "name": "BT_SHIELD_BASED_CASTER",
+        "label": "Barrier",
+        "description": "Barriers absorb damage, taking damage in place of Health",
+        "icon": "CM_Stat_Icon_SHIELD"
+    },
+    {
+        "name": "BT_DMG_ELEMENT_SUPERIORITY",
+        "label": "Elemental Advantage",
+        "description": "Deals increased damage to enemies with a weaker element",
+        "icon": "SC_Buff_Effect_Element_Superiority"
+    },
+    {
+        "name": "BT_ADDITIVE_TURN",
+        "label": "Extra Turn",
+        "description": "Character immediately takes another turn after the current one.",
+        "icon": "SC_Buff_Effect_Extra_Turn"
+    },
+    {
+        "name": "BT_STEALTHED",
+        "label": "Stealth",
+        "description": "When there are allies not granted Stealth, cannot be select as a target for attack. Decreases damage taken from Area of Effect Attacks.",
+        "icon": "SC_Buff_Effect_Stealthed"
+    },
+    {
+        "name": "BT_RANDOM_STAT",
+        "label": "Random Increased Stat Effect",
+        "description": "Grants Random increased stat effect(s) to the bearer for 2 turn(s). Attack, Critical Damage, Accuracy, Speed",
+        "icon": "IG_Buff_Effect_Random_Buff"
+    },
+    {
+        "name": "BT_DAMGE_TAKEN",
+        "label": "Reduce Damage Taken",
+        "description": "Reduces damage taken by a certain ratio",
+        "icon": "IG_Buff_Dmg_Reduce_Interruption"
+    },
+    {
+        "name": "UNIQUE_ARIEL",
+        "label": "Ariel",
+        "description": "After attacking an enemy, increases Priority of the caster by 15%",
+        "icon": "IG_Buff_2000096_Interruption"
+    },
+    {
+        "name": "UNIQUE_SAKURA_CHIRU",
+        "label": "Sakura, Chiru",
+        "description": "Activates an additional attack after Mikazuki 1st Art: Blooming (Irremovable)",
+        "icon": "IG_Buff_Effect_2000065_A_Interruption"
+    },
+    {
+        "name": "UNIQUE_UME_ICHIRIN",
+        "label": "Ume Ichirin",
+        "description": "Activates an additional attack after Mikazuki 1st Art: Blooming (Irremovable)",
+        "icon": "IG_Buff_Effect_2000065_B_Interruption"
+    },
+    {
+        "name": "UNIQUE_GRACE_OF_THE_VIRGIN_GODDESS",
+        "label": "Grace of the Virgin Goddess",
+        "description": "The caster obtains one of the following effects : \n\nIncreases Priority of the caster by 100%\n\n Resets cooldown of Argo Vesta\n\n Recovers Health of the caster by 100%",
+        "icon": "SC_Buff_2000095"
+    },
+    {
+        "name": "UNIQUE_CHARISMA",
+        "label": "Charisma",
+        "description": "When the bearer gains a turn, increases Bryn's Showmanship (Unique Ressource) by 1.\nThen grants Bryn a barrier proportional to Attack for 1 turn, and increases Priority by 15% (Irremovable)",
+        "icon": "IG_Buff_Effect_2000076_Interruption"
+    },
+    {
+        "name": "UNIQUE_DOLL_GARDEN_CARETAKER",
+        "label": "Doll Garden's Caretaker",
+        "description": "Increases damage dealt to enemies and enhances certain skill effect.\nConnot be removed before Demiurge Astei is slain",
+        "icon": "IG_Buff_2000059_Interruption"
+    },
+    {
+        "name": "UNIQUE_ETHER_BOOST",
+        "label": "Ether Boost",
+        "description": "When using a Burst Skill, reduces required Action Points by 100% (Irremovable)",
+        "icon": "IG_Buff_Effect_2000100_Interruption"
+    },
+    {
+        "name": "UNIQUE_DESTROYER_PUNISHMENT",
+        "label": "Destroyer's Punishment",
+        "description": "Increases damage dealt to the enemy and enhances the effect of Heavy Metal Raptor. (Irremovable)\nAdditional effects granted when using Heavy Metal Raptor:\nReduces Destruction Blade cooldown by 1 turn\nRight after using Heavy Metal Raptor, does not trigger an enemy's Couterattack, Revenge or Agile Response.",
+        "icon": "IG_Buff_2000075_Interruption"
+    },
+    {
+        "name": "UNIQUE_PUREBLOOD_DOMINION",
+        "label": "Pureblood's Dominion",
+        "description": "When an enemy inflicted with Bleeding performs an action, increases Priority of an ally by 10%\n Cannot be removed until Eliza is defeated",
+        "icon": "IG_Buff_2000035_Interruption"
+    },
+    {
+        "name": "UNIQUE_RADIANT_WILL",
+        "label": "Radiant Will",
+        "description": "Increases Burned damage dealt by allies by 50% and changes certain skills. (Irremovable)",
+        "icon": "IG_Buff_Effect_2000094_Interruption"
+    },
+    {
+        "name": "UNIQUE_RETRIBUTION_DOMINION",
+        "label": "Retribution's Dominion",
+        "description": "When hit by a single attack, inflicts Eternal Bleeding on all enemies for 1 turn.\nRetribution's Dominion cannot be removed",
+        "icon": "IG_Buff_2000092_Interruption"
+    },
+    {
+        "name": "UNIQUE_HUBRIS_DOMINION",
+        "label": "Hubris's Dominion",
+        "description": "Increases damage dealt to enemies and enhances certain skill effects. (Irremovable)",
+        "icon": "IG_Buff_2000090_Interruption"
+    },
+    {
+        "name": "UNIQUE_GIFT_OF_BUFF",
+        "label": "Gift of Buffs",
+        "description": "Grants removable buff(s) granted to the caster to the specific target. \nBuffs available for gifting :\n\nAttack\nDefense\nSpeed\nCritical Hit Chance\nCritical Hit Damage\nAccuracy\nEvasion\nEffectiveness\nResilience\nPenetration",
+        "icon": "IG_Buff_2000093_Interruption"
+    },
+    {
+        "name": "UNIQUE_FIERCE_OFFENSIVE",
+        "label": "Fierce Offensive",
+        "description": "Increases damage dealt to enemies and enhances certain skill effect.\nConnot be removed before Notia is slain",
+        "icon": "IG_Buff_2000056_Interruption"
+    },
+    {
+        "name": "UNIQUE_REGINA_WORLD",
+        "label": "Regina's World",
+        "description": "Greatly reduces damage taken from enemies that are not granted increased Accuracy. (Unstackable, Irremovable)",
+        "icon": "IG_Buff_Effect_2000067_Interruption"
+    },
+    {
+        "name": "UNIQUE_WHITE_KNIGHT",
+        "label": "White Knight",
+        "description": "Reduces final damage taken by 75%. (Only The highest value of final damage reduction is applied, Irremovable)",
+        "icon": "IG_Buff_Effect_2000119_Interruption"
+    },
+    {
+        "name": "UNIQUE_POLAR_KNIGHT",
+        "label": "Polar Knight",
+        "description": "The fewer allies present (excluding the bearer), the greater the damage the bearer deals. (Up to 150%, Irremovable)",
+        "icon": "IG_Buff_Effect_2000120_Interruption"
+    },
+    {
+        "name": "UNIQUE_NINJA_AFTERIMAGE",
+        "label": "A Ninja's Afterimage",
+        "description": "25% of damage intended for allies is redirect to Edelweiss.\nOnly the highest value effect will be applied.\nCannot be remoçved until Edelweiss is defeated.",
+        "icon": "IG_Buff_Effect_2000072_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_A",
+        "label": "Environmental Change Response",
+        "description": "After using MG-102 Pionner Cannon, increases priority of Fire/Water/Earth enemies by only 80%.",
+        "icon": "IG_Buff_Effect_4086013_A_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_B",
+        "label": "Weather Variable Response",
+        "description": "After using MG-102 Pionner Cannon, increases priority of Light/Dark enemies by only 80%.",
+        "icon": "IG_Buff_Effect_4086013_A_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_C",
+        "label": "Courage against Despair",
+        "description": "For each mage ally, increases attack of all allies by 15% each. (Irremovable)",
+        "icon": "IG_Buff_4086001_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_D",
+        "label": "Exclude Unknown Variables",
+        "description": "At the strat of the turn, increases skill cooldown of Fire/Water/Earth enemies by 1. When using Emergency Protocal: Extermination, inflict instant death on Light/Dark enemies.",
+        "icon": "IG_Buff_Effect_4086014_A_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_E",
+        "label": "Remove Detection Interference",
+        "description": "At the strat of the turn, increases skill cooldown of Light/Dark enemies by 1. When using Emergency Protocal: Extermination, inflict instant death on Fire/Water/Earth enemies.",
+        "icon": "IG_Buff_Effect_4086014_A_Interruption"
+    },
+    {
+        "name": "UNIQUE_VENION_F",
+        "label": "Courage against Despair",
+        "description": "For each mage ally, increases attack of all allies by 15% each. (Irremovable)",
+        "icon": "IG_Buff_4086001_Interruption"
+    },
+    {
+        "name": "UNIQUE_DAHLIA_A",
+        "label": "Courage against Despair",
+        "description": "Grants a special effect to the bearer based on their class.",
+        "icon": "IG_Buff_4086001_Interruption"
+    },
+    {
+        "name": "UNIQUE_DAHLIA_B",
+        "label": "Courage against Despair",
+        "description": "Grants a special effect to the bearer based on their class.",
+        "icon": "IG_Buff_4086001_Interruption"
+    }
+]

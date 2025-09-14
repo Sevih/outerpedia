@@ -1,0 +1,196 @@
+{
+  "ID": "2000061",
+  "Fullname": "Christina",
+  "Rarity": 3,
+  "Element": "Fire",
+  "role":"support",
+  "rank_pvp":"B",
+  "gift": "Luxury",
+  "Class": "Defender",
+  "SubClass": "Phalanx","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+3% Ally Team Resilience\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+3% Ally Team Resilience\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Voice of a Songbird",
+      "true_desc": "Attacks an enemy. After attacking, if the enemy has no <color=#28d9ed>buffs</color>, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>15%</color>. If the enemy has a <color=#28d9ed>buff</color>, has a <color=#28d9ed>30%</color> chance to remove <color=#28d9ed>1</color> <color=#28d9ed>buff(s)</color> from the target.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000061_Skill01_LV1,SKILL_DESC_2000061_Skill01_LV1,SKILL_DESC_2000061_Skill01_LV1,SKILL_DESC_2000061_Skill01_LV1,SKILL_DESC_2000061_Skill01_LV1",
+      "IconName": "Skill_First_2000061",
+      "NameIDSymbol": "6101",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000061_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE","BT_STAT|ST_BUFF_CHANCE","BT_COOL_CHARGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "+3 turns increased Effectiveness after attacking",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "+1 Weakness Gauge damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "-2 turns on all skill cooldowns",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [
+        "BT_REMOVE_BUFF","BT_WG_DMG"
+      ],
+      "description": [
+        "Attacks an enemy. After attacking, if the enemy has no <color=#28d9ed>buffs</color>, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000061_1_2]</color>. If the enemy has a <color=#28d9ed>buff</color>, has a <color=#28d9ed>[Buff_C_2000061_1_1]</color> chance to remove <color=#28d9ed>[Buff_V_2000061_1_1]</color> <color=#28d9ed>buff(s)</color> from the target."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% chance to remove buffs"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+15% chance to remove buffs"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Bursting Patriotism",
+      "true_desc": "(Triggered Effect) When an enemy uses a <color=#28d9ed>non-attack skill</color>, activates an <color=#28d9ed>Agile Response</color>.\\nGrants all allies increased <color=#28d9ed>Attack and Defense</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "ApproachTime": "CAST_BUFF",
+      "DescID": "SKILL_DESC_2000061_Skill02_LV1,SKILL_DESC_2000061_Skill02_LV1,SKILL_DESC_2000061_Skill02_LV1,SKILL_DESC_2000061_Skill02_LV1,SKILL_DESC_2000061_Skill02_LV5",
+      "IconName": "Skill_Second_2000061",
+      "NameIDSymbol": "6102",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000061_Skill02",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_STAT|ST_ATK",
+        "BT_ACTION_GAUGE",
+        "SYS_REVENGE_HEAL"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "(Triggered Effect) When an enemy uses a <color=#28d9ed>non-attack skill</color>, activates an <color=#28d9ed>Agile Response</color>.\\nGrants all allies increased <color=#28d9ed>Attack and Defense</color> for <color=#28d9ed>[Buff_T_2000061_2_2] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+1 turn effect duration"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+20% caster Priority"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Perforator",
+      "true_desc": "Attacks all enemies. Has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Unbuffable</color> on all targets for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000061_Skill03_LV1,SKILL_DESC_2000061_Skill03_LV1,SKILL_DESC_2000061_Skill03_LV1,SKILL_DESC_2000061_Skill03_LV1,SKILL_DESC_2000061_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000061",
+      "NameIDSymbol": "6103",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000061_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_SEALED"
+      ],
+      "description": [
+        "Attacks all enemies. Has a <color=#28d9ed>[Buff_C_2000061_3_1]</color> chance to inflict <color=#28d9ed>Unbuffable</color> on all targets for <color=#28d9ed>[Buff_T_2000061_3_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+20% damage",
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>25</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to remove <color=#28d9ed>1</color> <color=#28d9ed>buff(s)</color> from the target.",
+      "DescID": "SKILL_DESC_2000061_Skill04_LV1,SKILL_DESC_2000061_Skill04_LV1,SKILL_DESC_2000061_Skill04_LV1,SKILL_DESC_2000061_Skill04_LV1,SKILL_DESC_2000061_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Fire_Finish",
+      "NameIDSymbol": "6104",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_CP_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>[Buff_V_2000061_chain_1_1]</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000061_backup_1_1]</color> chance to remove <color=#28d9ed>[Buff_V_2000061_backup_1_1]</color> <color=#28d9ed>buff(s)</color> from the target."
+      ],
+      "dual_debuff": "BT_REMOVE_BUFF",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"B"
+}

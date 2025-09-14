@@ -1,0 +1,196 @@
+{
+  "ID": "2000085",
+  "Fullname": "Poolside Trickster Regina",
+  "Rarity": 3,
+  "Element": "Water",
+  "rank_pvp":"A",
+  "role":"dps",
+  "Class": "Striker",
+  "gift": "Craftwork",
+  "tags":["seasonal","ignore-defense"],
+  "limited":true,
+  "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+30 Accuracy\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\n+25 Action Points at battle start",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+65% Critical Hit Chance\n+20% Priority when the target is not granted a buff before attacking"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Sparkling Water Bomb",
+      "true_desc": "Attacks all enemies. When an enemy is killed on the caster's turn, has a <color=#28d9ed>60%</color> chance to grant an <color=#28d9ed>extra turn</color> to the caster.",
+      "ApproachTime": "ATTACK",
+      "ApproachZ": "-4.5",
+      "DescID": "SKILL_DESC_2000085_Skill01_LV1,SKILL_DESC_2000085_Skill01_LV1,SKILL_DESC_2000085_Skill01_LV1,SKILL_DESC_2000085_Skill01_LV1,SKILL_DESC_2000085_Skill01_LV1",
+      "IconName": "Skill_First_2000085",
+      "NameIDSymbol": "8501",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000085_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ADDITIVE_TURN"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks all enemies. When an enemy is killed on the caster's turn, has a <color=#28d9ed>[Buff_V_2000085_1]</color> chance to grant an <color=#28d9ed>extra turn</color> to the caster."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "+25% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Surprise Sand Castle",
+      "true_desc": "Attacks an enemy, then steals <color=#28d9ed>all</color> <color=#28d9ed>buffs</color> of the target.\\nWhen the target is a <color=#28d9ed>Boss</color> or is not granted a <color=#28d9ed>buff</color>, activates an additional attack.",
+      "ApproachType": "CAST_DEBUFF",
+      "DescID": "SKILL_DESC_2000085_Skill02_LV1,SKILL_DESC_2000085_Skill02_LV1,SKILL_DESC_2000085_Skill02_LV1,SKILL_DESC_2000085_Skill02_LV1,SKILL_DESC_2000085_Skill02_LV5",
+      "IconName": "Skill_Second_2000085",
+      "NameIDSymbol": "8502",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000085_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_STAT|ST_PIERCE_POWER_RATE","BT_ADDITIVE_TURN"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Changes to Enhanced Attack\\nIncreases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "+1 turn increased Penetration after attacking",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Gains an extra turn",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [
+        "BT_STEAL_BUFF"
+      ],
+      "description": [
+        "Attacks an enemy, then steals <color=#28d9ed>all</color> <color=#28d9ed>buffs</color> of the target.\\nWhen the target is a <color=#28d9ed>Boss</color> or is not granted a <color=#28d9ed>buff</color>, activates an additional attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "Enhances Steals Buff (Activates first)",
+          "Enhances Steals Buff (Ignores Resilience)"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Grand Summer Escape",
+      "true_desc": "When the target is not granted a dispellable <color=#28d9ed>buff</color>, reduces cooldown of <color=#28d9ed>Surprise Sand Castle</color> by <color=#28d9ed>1 turn(s)</color>, then attacks the enemy. This skill ignores <color=#28d9ed>30%</color> of the target's Defense.\\nAfter attacking, reduces all of the target's <color=#28d9ed>Unique Resource</color> count. (Ignores the target's Resilience and Immunity)",
+      "DescID": "SKILL_DESC_2000085_Skill03_LV1,SKILL_DESC_2000085_Skill03_LV1,SKILL_DESC_2000085_Skill03_LV1,SKILL_DESC_2000085_Skill03_LV1,SKILL_DESC_2000085_Skill03_LV5",
+      "IconName": "Skill_Ultimate_2000085",
+      "NameIDSymbol": "8503",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000085_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_RESOURCE_DOWN"
+      ],
+      "description": [
+        "When the target is not granted a dispellable <color=#28d9ed>buff</color>, reduces cooldown of <color=#28d9ed>Surprise Sand Castle</color> by <color=#28d9ed>[Buff_V_2000085_3_2] turn(s)</color>, then attacks the enemy. This skill ignores <color=#28d9ed>30%</color> of the target's Defense.\\nAfter attacking, reduces all of the target's <color=#28d9ed>Unique Resource</color> count. (Ignores the target's Resilience and Immunity)"
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "Resets Surprise Sand Castle Cooldown"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>5</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>20%</color>.",
+      "DescID": "SKILL_DESC_2000085_Skill04_LV1,SKILL_DESC_2000085_Skill04_LV1,SKILL_DESC_2000085_Skill04_LV1,SKILL_DESC_2000085_Skill04_LV1,SKILL_DESC_2000085_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Finish",
+      "NameIDSymbol": "8504",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_WG_DMG",
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000085_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000085_backup_1_1]</color>."
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"S"
+}

@@ -1,0 +1,197 @@
+{
+  "ID": "2000075",
+  "Fullname": "Demiurge Vlada",
+  "Rarity": 3,
+  "Element": "Dark",
+  "rank_pvp":"S",
+  "gift": "Magic Tool",
+  "tags":["premium"],
+  "role":"support",
+  "Class": "Ranger",
+  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\nAlly Team Attack +10%\nChain Passive Weakness Gauge reduction +1\nReduces efficiency of Priority increase effects of the enemy by 20%",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\nReduces efficiency of Priority increase effects of the enemy by 30%\n+50 Action Points at battle start",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\nAlly Team Attack +10%\nIncreases Speed of the caster for 1 turn at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Twin Mega Cannon",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>20%</color> chance to increase the Ultimate Skill cooldowns of the target by <color=#28d9ed>1 turn</color>.\\nIncreases damage dealt to bosses.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000075_Skill01_LV1,SKILL_DESC_2000075_Skill01_LV1,SKILL_DESC_2000075_Skill01_LV1,SKILL_DESC_2000075_Skill01_LV1,SKILL_DESC_2000075_Skill01_LV1",
+      "IconName": "Skill_First_2000075",
+      "NameIDSymbol": "7501",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000075_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 50,
+          "effect": "Increases damage\\nInflicts Reduced Defense on the target for 2 turns",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 75,
+          "effect": "Increases damage\\n+60% Cooldown Increase Chance",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 100,
+          "effect": "Changes to Enhanced Skill\\nTargets all enemies and increases damage dealt",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": ["BT_COOL_CHARGE","BT_STAT|ST_DEF"],
+      "description": [
+        "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000075_1_1]</color> chance to increase the Ultimate Skill cooldowns of the target by <color=#28d9ed>1 turn</color>.\\nIncreases damage dealt to bosses."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "+10% effect chance",
+          "+10% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Crush Gear",
+      "true_desc": "(Passive Effect)\\nWhen the caster removes buffs from an enemy, grants the caster <color=#28d9ed>Destroyer's Punishment</color> for <color=#28d9ed>2 turn(s)</color>.\\n(Triggered Effect) When the caster uses an attack that targets all enemies, uses <color=#ffd732>Heavy Metal Raptor</color>. (Excluding Skill Chains)\\n\\n<color=#ffd732>Heavy Metal Raptor</color>: Attacks all enemies. Increases damage dealt to bosses.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000075_Skill02_LV1,SKILL_DESC_2000075_Skill02_LV1,SKILL_DESC_2000075_Skill02_LV1,SKILL_DESC_2000075_Skill02_LV1,SKILL_DESC_2000075_Skill02_LV1",
+      "IconName": "Skill_Second_2000075",
+      "NameIDSymbol": "7502",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000075_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "UNIQUE_DESTROYER_PUNISHMENT"
+      ],
+      "cd": "3",
+      "debuff": [
+        "BT_SEAL_COUNTER"
+      ],
+      "description": [
+        "(Passive Effect)\\nWhen the caster removes buffs from an enemy, grants the caster <color=#28d9ed>Destroyer's Punishment</color> for <color=#28d9ed>[Buff_T_2000075_2_1] turn(s)</color>.\\n(Triggered Effect) When the caster uses an attack that targets all enemies, uses <color=#ffd732>Heavy Metal Raptor</color>. (Excluding Skill Chains)\\n\\n<color=#ffd732>Heavy Metal Raptor</color>: Attacks all enemies. Increases damage dealt to bosses."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+10% damage",
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": 3
+    },
+    "SKT_ULTIMATE": {
+      "name": "Destruction Blade",
+      "true_desc": "Has a <color=#28d9ed>70%</color> chance to remove <color=#28d9ed>all</color> <color=#28d9ed>buffs</color> from all enemies, and attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Unhealable</color> on all enemies for <color=#28d9ed>2 turn(s)</color>.\\nIncreases damage dealt to bosses.",
+      "DescID": "SKILL_DESC_2000075_Skill03_LV1,SKILL_DESC_2000075_Skill03_LV1,SKILL_DESC_2000075_Skill03_LV1,SKILL_DESC_2000075_Skill03_LV1,SKILL_DESC_2000075_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000075",
+      "NameIDSymbol": "7503",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000075_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_REMOVE_BUFF",
+        "BT_SEALED_RECEIVE_HEAL"
+      ],
+      "description": [
+        "Has a <color=#28d9ed>[Buff_C_2000075_3_1]</color> chance to remove <color=#28d9ed>all</color> <color=#28d9ed>buffs</color> from all enemies, and attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>[Buff_C_2000075_3_2]</color> chance to inflict <color=#28d9ed>Unhealable</color> on all enemies for <color=#28d9ed>[Buff_T_2000075_3_2] turn(s)</color>.\\nIncreases damage dealt to bosses."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance",
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "+15% damage",
+          "+20% effect chance"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Always has elemental advantage.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Has a <color=#28d9ed>40%</color> chance to increase the Ultimate Skill cooldowns of the target by <color=#28d9ed>1 turn</color>. ",
+      "DescID": "SKILL_DESC_2000075_Skill04_LV1,SKILL_DESC_2000075_Skill04_LV1,SKILL_DESC_2000075_Skill04_LV1,SKILL_DESC_2000075_Skill04_LV1,SKILL_DESC_2000075_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Dark_Join",
+      "NameIDSymbol": "7504",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_DMG_ELEMENT_SUPERIORITY",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: Always has elemental advantage.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Has a <color=#28d9ed>[Buff_C_2000075_backup_1_1]</color> chance to increase the Ultimate Skill cooldowns of the target by <color=#28d9ed>1 turn</color>. "
+      ],
+      "dual_debuff": "BT_COOL_CHARGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

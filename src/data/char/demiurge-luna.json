@@ -1,0 +1,202 @@
+{
+  "ID": "2000119",
+  "Fullname": "Demiurge Luna",
+  "Rarity": 3,
+  "Element": "Light",
+  "Class": "Mage",  
+  "gift": "Science",
+  "rank_pvp":"S",
+  "rank":"S",
+  "tags":["premium","ignore-defense"],
+  "role":"dps",
+  "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+6% Ally Team Critical Hit Chance\n+1 Chain Passive Weakness Gauge reduction\n+50% Critical Damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\n+25 Action Points at battle start",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n30% Penetration\n+100% The Moonlight Heralding Dawn's damage"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Heaven's Fall",
+      "true_desc": "(White Night)\\nAttacks an enemy and increases the caster’s Priority by <color=#28d9ed>20%</color>.\\n\\n(Polar Night)\\nAttacks an enemy and increases the caster’s Attack by <color=#28d9ed>1 turns</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000119_Skill01_LV1,SKILL_DESC_2000119_Skill01_LV1,SKILL_DESC_2000119_Skill01_LV1,SKILL_DESC_2000119_Skill01_LV1,SKILL_DESC_2000119_Skill01_LV1",
+      "IconName": "Skill_First_2000119",
+      "NameIDSymbol": "11901",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000119_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_STAT|ST_ATK",
+        "BT_STAT|ST_ACCURACY",
+        "BT_UNDEAD"
+
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 100,
+          "effect": "(White Night) After attacking, Attack +1 Turn\\n(Polar Night) After attacking, +20% Priority",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 150,
+          "effect": "(Common) Increases Damage\\n+2 Accuracy Turns before attacking",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 200,
+          "effect": "Changes to Enhanced Skill\\nIncreases Damage\\nAfter Attack, Immortality for 1 turn\\nAttacks all enemies",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "(White Night)\\nAttacks an enemy and increases the casterâs Priority by <color=#28d9ed>[Buff_V_2000119_1_1]</color>.\\n\\n(Polar Night)\\nAttacks an enemy and increases the casterâs Attack by <color=#28d9ed>[Buff_T_2000120_1_1] turns</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Abraxas",
+      "true_desc": "Changes the current state to <color=#28d9ed>White Night/Polar Night</color> and gains an extra turn.\\nEach form applies a unique persistent effect.",
+      "ApproachType": "CAST_BUFF",
+      "DescID": "SKILL_DESC_2000119_Skill02_LV1,SKILL_DESC_2000119_Skill02_LV1,SKILL_DESC_2000119_Skill02_LV3,SKILL_DESC_2000119_Skill02_LV3,SKILL_DESC_2000119_Skill02_LV5",
+      "IconName": "Skill_Second_2000119",
+      "NameIDSymbol": "11902",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000119_Skill02",
+      "TargetTeamType": "ME",
+      "buff": [
+        "BT_ADDITIVE_TURN",
+        "BT_CP_CHARGE",
+        "UNIQUE_WHITE_KNIGHT",
+        "UNIQUE_POLAR_KNIGHT"
+      ],
+      "cd": "5",
+      "debuff": [
+      ],
+      "description": [
+        "Changes the current state to <color=#28d9ed>White Night/Polar Night</color> and gains an extra turn.\\nEach form applies a unique persistent effect."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown"
+        ],
+        "3": [
+          "+25 Action Points to caster",
+          "+15 Chain Points Recovery"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+1 turn caster's buff duration"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "The Moonlight Heralding Dawn",
+      "true_desc": "(White Night)\\nAttacks an enemy. This skill ignores 30% of the target's Defense and deals increased damage. If attacking with an elemental advantage, grants <color=#28d9ed>Invulnerability</color> for <color=#28d9ed>1 turns</color>.\\n\\n(Polar Night)\\nAttacks all enemies. For each target, reduces skill cooldown by <color=#28d9ed>1 turns</color>, and increases Priority by <color=#28d9ed>25%</color>.",
+      "DescID": "SKILL_DESC_2000119_Skill03_LV1,SKILL_DESC_2000119_Skill03_LV1,SKILL_DESC_2000119_Skill03_LV1,SKILL_DESC_2000119_Skill03_LV1,SKILL_DESC_2000119_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000119",
+      "NameIDSymbol": "11903",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000119_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_INVINCIBLE",
+        "BT_ACTION_GAUGE",
+        "BT_COOL_CHARGE"
+      ],
+      "cd": "6",
+      "debuff": [],
+      "description": [
+        "(White Night)\\nAttacks an enemy. This skill ignores 30% of the target's Defense and deals increased damage. If attacking with an elemental advantage, grants <color=#28d9ed>Invulnerability</color> for <color=#28d9ed>[Buff_T_2000119_3_2] turns</color>.\\n\\n(Polar Night)\\nAttacks all enemies. For each target, reduces skill cooldown by <color=#28d9ed>[Buff_V_2000120_3_4] turns</color>, and increases Priority by <color=#28d9ed>[Buff_V_2000120_3_2]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers the caster's and the next Skill Chain caster's Action Points by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: (White Night) After attacking, increases the caster's Priority by <color=#28d9ed>20%</color>.\\n(Polar Night) After attacking, increases the caster's Attack by <color=#28d9ed>1 turns</color>.",
+      "DescID": "SKILL_DESC_2000119_Skill04_LV1,SKILL_DESC_2000119_Skill04_LV1,SKILL_DESC_2000119_Skill04_LV1,SKILL_DESC_2000119_Skill04_LV1,SKILL_DESC_2000119_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Join",
+      "NameIDSymbol": "11904",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_AP_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers the caster's and the next Skill Chain caster's Action Points by <color=#28d9ed>[Buff_V_2000119_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: (White Night) After attacking, increases the caster's Priority by <color=#28d9ed>[Buff_V_2000119_backup_1_1]</color>.\\n(Polar Night) After attacking, increases the caster's Attack by <color=#28d9ed>[Buff_T_2000120_backup_1_1] turns</color>."
+      ],
+      "dual_buff": ["BT_ACTION_GAUGE","BT_STAT|ST_ATK"],
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

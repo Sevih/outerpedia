@@ -1,0 +1,198 @@
+{
+  "ID": "2000079",
+  "Fullname": "Kuro",
+  "Rarity": 3,
+  "Element": "Light",
+  "rank_pvp":"A",
+  "role":"support",
+  "gift": "Natural Object",
+  "Class": "Mage",
+  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+3% Ally Team Effectiveness\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+3% Ally Team Effectiveness\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Be My Friend!",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>50%</color> chance to inflict <color=#28d9ed>Marked</color> for <color=#28d9ed>2 turn(s)</color>.\\nAfter attacking, when the target is inflicted with a debuff, deals <color=#28d9ed>2%</color> of the target's Max Health as fixed damage.",
+      "ApproachZ": "1.6",
+      "DescID": "SKILL_DESC_2000079_Skill01_LV1,SKILL_DESC_2000079_Skill01_LV1,SKILL_DESC_2000079_Skill01_LV1,SKILL_DESC_2000079_Skill01_LV1,SKILL_DESC_2000079_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000079",
+      "NameIDSymbol": "7901",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000079_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases damage\\nIncreases chance to inflict Marked by 25%",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Adds 2% of the target's Max Health as fixed damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Resets Soulslayer Role-Play! Cooldown",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [
+        "BT_MARKING","BT_FIXED_DAMAGE"
+      ],
+      "description": [
+        "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000079_1_1]</color> chance to inflict <color=#28d9ed>Marked</color> for <color=#28d9ed>[Buff_T_2000079_1_1] turn(s)</color>.\\nAfter attacking, when the target is inflicted with a debuff, deals <color=#28d9ed>[Buff_V_2000079_1_2]</color> of the target's Max Health as fixed damage."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "It's Not Bedtime Yet!",
+      "true_desc": "(Passive Effect) When attacking a target inflicted with a debuff, increases damage of all allies by <color=#28d9ed>2%</color> (Max 5 stacks).\\n\\n(Triggered Effect) Upon death, immediately <color=#28d9ed>resurrects</color> with <color=#28d9ed>10%</color> Health. Has a <color=#28d9ed>75%</color> chance to reduce Priority of all enemies by <color=#28d9ed>100%</color>. Right after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000079_Skill02_LV1,SKILL_DESC_2000079_Skill02_LV1,SKILL_DESC_2000079_Skill02_LV1,SKILL_DESC_2000079_Skill02_LV1,SKILL_DESC_2000079_Skill02_LV1",
+      "IconName": "Skill_Second_2000079",
+      "NameIDSymbol": "7902",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000079_Skill02",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        
+      ],
+      "cd": "9",
+      "debuff": [
+        "BT_ACTION_GAUGE",
+        "BT_SEAL_COUNTER"
+      ],
+      "description": [
+        "(Passive Effect) When attacking a target inflicted with a debuff, increases damage of all allies by <color=#28d9ed>[Buff_V_2000079_2_1]</color> (Max 5 stacks).\\n\\n(Triggered Effect) Upon death, immediately <color=#28d9ed>resurrects</color> with <color=#28d9ed>[Buff_V_2000079_2_2]</color> Health. Has a <color=#28d9ed>[Buff_C_2000079_2_3]</color> chance to reduce Priority of all enemies by <color=#28d9ed>[Buff_V_2000079_2_3]</color>. Right after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response."
+      ],
+      "enhancement": {
+        "2": [
+          "+1% Ally damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+1% Ally damage"
+        ],
+        "5": [
+          "+15% effect chance"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Soulslayer Role-Play!",
+      "true_desc": "Attacks all enemies. Has a <color=#28d9ed>75%</color> chance to inflict <color=#28d9ed>buff reversal</color> on the target, and ignores Immunity to increase debuff durations by <color=#28d9ed>1 turn(s)</color>. After attacking, when the target is not inflicted with dispellable <color=#28d9ed>reduced stat effects</color>, deals <color=#28d9ed>2%</color> of the target's Max Health as fixed damage.",
+      "DescID": "SKILL_DESC_2000079_Skill03_LV1,SKILL_DESC_2000079_Skill03_LV1,SKILL_DESC_2000079_Skill03_LV1,SKILL_DESC_2000079_Skill03_LV1,SKILL_DESC_2000079_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000079",
+      "NameIDSymbol": "7903",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000079_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_STATBUFF_CONVERT_TO_STATDEBUFF","BT_FIXED_DAMAGE","IG_Buff_DeBuffdurationIncrease"
+      ],
+      "description": [
+        "Attacks all enemies. Has a <color=#28d9ed>[Buff_C_2000079_3_1]</color> chance to inflict <color=#28d9ed>buff reversal</color> on the target, and ignores Immunity to increase debuff durations by <color=#28d9ed>[Buff_V_2000079_3_2] turn(s)</color>. After attacking, when the target is not inflicted with dispellable <color=#28d9ed>reduced stat effects</color>, deals <color=#28d9ed>[Buff_V_2000079_3_3]</color> of the target's Max Health as fixed damage."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+3% target's Max Health as fixed damage",
+          "+10% effect chance"
+        ],
+        "4": [
+          "+15% damage",
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+3% target's Max Health as fixed damage",
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>75%</color> chance to inflict Marked for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000079_Skill04_LV1,SKILL_DESC_2000079_Skill04_LV1,SKILL_DESC_2000079_Skill04_LV1,SKILL_DESC_2000079_Skill04_LV1,SKILL_DESC_2000079_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Finish",
+      "NameIDSymbol": "7904",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_CP_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>[Buff_V_2000079_chain_1_1]</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000079_backup_1_1]</color> chance to inflict Marked for <color=#28d9ed>[Buff_T_2000079_backup_1_1] turn(s)</color>."
+      ],
+      "dual_debuff": "BT_MARKING",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"B"
+}

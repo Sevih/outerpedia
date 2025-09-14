@@ -1,0 +1,194 @@
+{
+  "ID": "2000076",
+  "Fullname": "Bryn",
+  "Rarity": 3,
+  "Element": "Fire",
+  "rank_pvp":"C",
+  "gift": "Luxury",
+  "Class": "Mage",
+  "SubClass": "Wizard",
+  "tags":["ignore-defense"],
+  "role":"dps","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+3% Ally Team Critical Hit Chance\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+3% Ally Team Critical Hit Chance\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Get Your Cameras Ready!",
+      "true_desc": "Attacks the enemy. When the caster has a <color=#28d9ed>barrier</color>, activates a <color=#28d9ed>Dual Attack</color> from the ally with the highest Attack. When it is the caster's turn, gains <color=#28d9ed>1</color> <color=#28d9ed>Showmanship (Unique Resource)</color>.",
+      "DescID": "SKILL_DESC_2000076_Skill01_LV1,SKILL_DESC_2000076_Skill01_LV1,SKILL_DESC_2000076_Skill01_LV1,SKILL_DESC_2000076_Skill01_LV1,SKILL_DESC_2000076_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000076",
+      "NameIDSymbol": "7601",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000076_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_CALL_BACKUP",
+        "BT_STAT|ST_ATK"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 100,
+          "effect": "Guaranteed Dual Attack\\nIncreased damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 150,
+          "effect": "+2 turns increased Attack duration (Caster)",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 200,
+          "effect": "Changed to Enhanced Skill\\nIncreases Charisma duration of all allies and enemies except for Bryn by 1 turn",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks the enemy. When the caster has a <color=#28d9ed>barrier</color>, activates a <color=#28d9ed>Dual Attack</color> from the ally with the highest Attack. When it is the caster's turn, gains <color=#28d9ed>[Buff_V_2000076_1_2]</color> <color=#28d9ed>Showmanship (Unique Resource)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+1 Showmanship gain"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Lovely Choreography",
+      "true_desc": "(Passive Effect) At the start of battle, grants <color=#28d9ed>Charisma</color> to all allies and enemies except for Bryn for <color=#28d9ed>1 turn(s)</color>.\\n\\n(Active Effect) Grants <color=#28d9ed>Charisma</color> to all allies except for Bryn for <color=#28d9ed>1 turn(s)</color>. Then, grants all allies a barrier proportional to the caster's Attack for <color=#28d9ed>2 turn(s)</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000076_Skill02_LV1,SKILL_DESC_2000076_Skill02_LV1,SKILL_DESC_2000076_Skill02_LV1,SKILL_DESC_2000076_Skill02_LV1,SKILL_DESC_2000076_Skill02_LV5",
+      "IconName": "Skill_Second_2000076",
+      "NameIDSymbol": "7602",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000076_Skill02",
+      "TargetTeamType": "ME",
+      "buff": [
+        "BT_SHIELD_BASED_CASTER",
+        "UNIQUE_CHARISMA"
+      ],
+      "cd": "4",
+      "debuff": [
+      ],
+      "description": [
+        "(Passive Effect) At the start of battle, grants <color=#28d9ed>Charisma</color> to all allies and enemies except for Bryn for <color=#28d9ed>[Buff_T_2000076_2_3] turn(s)</color>.\\n\\n(Active Effect) Grants <color=#28d9ed>Charisma</color> to all allies except for Bryn for <color=#28d9ed>[Buff_T_2000076_2_3] turn(s)</color>. Then, grants all allies a barrier proportional to the caster's Attack for <color=#28d9ed>[Buff_T_2000076_2_5] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "Enhances barrier strength"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "Enhances barrier strength"
+        ],
+        "5": [
+          "Grants Charisma to all enemies"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Dreams Come True",
+      "true_desc": "<color=#28d9ed>Requires 5 Showmanship (Unique Resource) to use this skill.</color>\\nIgnores Resilience of all enemies and removes <color=#28d9ed>1</color> buff(s), then attacks all enemies. This skill ignores the target's Defense by <color=#28d9ed>30%</COLOR>, and does not miss.",
+      "DescID": "SKILL_DESC_2000076_Skill03_LV1,SKILL_DESC_2000076_Skill03_LV1,SKILL_DESC_2000076_Skill03_LV1,SKILL_DESC_2000076_Skill03_LV1,SKILL_DESC_2000076_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000076",
+      "NameIDSymbol": "7603",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000076_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [
+        "BT_REMOVE_BUFF"
+      ],
+      "description": [
+        "<color=#28d9ed>Requires [Buff_V_2000076_3_2] Showmanship (Unique Resource) to use this skill.</color>\\nIgnores Resilience of all enemies and removes <color=#28d9ed>[Buff_V_2000076_3_3]</color> buff(s), then attacks all enemies. This skill ignores the target's Defense by <color=#28d9ed>30%</COLOR>, and does not miss."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+1 buff removed"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: Increases <color=#28d9ed>Penetration</color> of all characters participating in the Skill Chain by <color=#28d9ed>30%</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, grants the caster a barrier proportional to the caster's Attack for 1 turn.",
+      "DescID": "SKILL_DESC_2000076_Skill04_LV1,SKILL_DESC_2000076_Skill04_LV1,SKILL_DESC_2000076_Skill04_LV1,SKILL_DESC_2000076_Skill04_LV1,SKILL_DESC_2000076_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Fire_Start",
+      "NameIDSymbol": "7604",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: Increases <color=#28d9ed>Penetration</color> of all characters participating in the Skill Chain by <color=#28d9ed>30%</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, grants the caster a barrier proportional to the caster's Attack for 1 turn."
+      ],
+      "dual_buff": "BT_SHIELD_BASED_CASTER",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"B"
+}

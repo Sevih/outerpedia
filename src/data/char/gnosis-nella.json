@@ -1,0 +1,205 @@
+{
+  "ID": "2000091",
+  "Fullname": "Gnosis Nella",
+  "Rarity": 3,
+  "Element": "Light",
+  "role":"support",
+  "rank_pvp":"S",
+  "gift": "Magic Tool",
+  "tags":["limited"],
+  "Class": "Mage",
+  "limited":true,
+  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+6% Ally Team Effectiveness\n+1 Chain Passive Weakness Gauge damage\nIncreases damage proportional to Effectiveness (Max 100%)",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\n+50 Action Points, +20 Chain Points at battle start\nIncreases damage proportional to Effectiveness (Max +100%)",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\nIncreases caster's Health by 35%\nIncreases Priority of the caster by 40% when hit by an attack that targets all enemies (Once per turn)"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "False Grace",
+      "true_desc": "Attacks 2 enemies with <color=#28d9ed>Heavy Strike</color>, and has a <color=#28d9ed>30%</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>2 turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack.",
+      "DescID": "SKILL_DESC_2000091_Skill01_LV1,SKILL_DESC_2000091_Skill01_LV1,SKILL_DESC_2000091_Skill01_LV1,SKILL_DESC_2000091_Skill01_LV1,SKILL_DESC_2000091_Skill01_LV1",
+      "IconName": "Skill_First_2000091",
+      "NameIDSymbol": "9101",
+      "RangeType": "DOUBLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000091_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_BUFF_CHANCE","Heavy Strike"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks 2 enemies with <color=#28d9ed>Heavy Strike</color>, and has a <color=#28d9ed>[Buff_C_2000091_1_2]</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>[Buff_T_2000091_1_2] turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Rules of Salvation",
+      "true_desc": "Attacks all enemies with <color=#28d9ed>Heavy Strike</color>. Has a <color=#28d9ed>75%</color> chance to inflict irremovable <color=#28d9ed>Unbuffable</color> on all enemies for <color=#28d9ed>1 turn(s)</color>, and a <color=#28d9ed>75%</color> chance to increase <color=#28d9ed>skill cooldowns</color> of all targets by <color=#28d9ed>2 turns</color>. This skill's damage dealt increases proportional to Max Health instead of Attack.",
+      "ApproachTime": "ATTACK",
+      "ApproachZ": "1",
+      "DescID": "SKILL_DESC_2000091_Skill02_LV1,SKILL_DESC_2000091_Skill02_LV1,SKILL_DESC_2000091_Skill02_LV1,SKILL_DESC_2000091_Skill02_LV1,SKILL_DESC_2000091_Skill02_LV1",
+      "IconName": "Skill_Second_2000091",
+      "NameIDSymbol": "9102",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000091_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": ["Heavy Strike"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Inflicts reduced Defense on the target for 2 turns",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Reduces buff duration of the target by 2 turns before attacking",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\nInflicts Stunned on the target for 1 turn",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [
+        "BT_SEALED_IR",
+        "BT_COOL_CHARGE",
+        "BT_STAT|ST_DEF",
+        "BT_STUN"
+      ],
+      "description": [
+        "Attacks all enemies with <color=#28d9ed>Heavy Strike</color>. Has a <color=#28d9ed>[Buff_C_2000091_2_1]</color> chance to inflict irremovable <color=#28d9ed>Unbuffable</color> on all enemies for <color=#28d9ed>[Buff_T_2000091_2_1] turn(s)</color>, and a <color=#28d9ed>[Buff_C_2000091_2_2]</color> chance to increase <color=#28d9ed>skill cooldowns</color> of all targets by <color=#28d9ed>2 turns</color>. This skill's damage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance",
+          "+1 Weakness Gauge damage"
+        ],
+        "4": [
+          "+1 turn effect duration",
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "+15% effect chance",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "I Am the Sole Perfection",
+      "true_desc": "Has a <color=#28d9ed>75%</color> chance to remove 1 <color=#28d9ed>buff</color> from all enemies, and attacks all enemies with <color=#28d9ed>Heavy Strike</color>. After attacking, has a <color=#28d9ed>75%</color> chance to inflict <color=#28d9ed>Stunned</color> on all enemies for <color=#28d9ed>1 turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and right after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response.",
+      "DescID": "SKILL_DESC_2000091_Skill03_LV1,SKILL_DESC_2000091_Skill03_LV1,SKILL_DESC_2000091_Skill03_LV1,SKILL_DESC_2000091_Skill03_LV1,SKILL_DESC_2000091_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000091",
+      "NameIDSymbol": "9103",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000091_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "Heavy Strike"
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_REMOVE_BUFF",
+        "BT_STUN"
+      ],
+      "description": [
+        "Has a <color=#28d9ed>[Buff_C_2000091_3_1]</color> chance to remove 1 <color=#28d9ed>buff</color> from all enemies, and attacks all enemies with <color=#28d9ed>Heavy Strike</color>. After attacking, has a <color=#28d9ed>[Buff_C_2000091_3_2]</color> chance to inflict <color=#28d9ed>Stunned</color> on all enemies for <color=#28d9ed>[Buff_T_2000091_3_2] turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and right after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance",
+          "+1 Weakness Gauge damage"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown",
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "+20% damage",
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and when attacking, deals <color=#28d9ed>8%</color> of the target's Max Health as fixed damage to the target. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>2 turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and applies <color=#28d9ed>Heavy Strike</color>.",
+      "DescID": "SKILL_DESC_2000091_Skill04_LV1,SKILL_DESC_2000091_Skill04_LV1,SKILL_DESC_2000091_Skill04_LV1,SKILL_DESC_2000091_Skill04_LV1,SKILL_DESC_2000091_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Start",
+      "NameIDSymbol": "9104",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": ["Heavy Strike"],
+      "cd": null,
+      "debuff": "BT_FIXED_DAMAGE",
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and when attacking, deals <color=#28d9ed>[Buff_V_2000091_chain_1_1]</color> of the target's Max Health as fixed damage to the target. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000091_backup_1_1]</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>[Buff_T_2000091_backup_1_1] turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and applies <color=#28d9ed>Heavy Strike</color>."
+      ],
+      "dual_buff": ["BT_STAT|ST_BUFF_CHANCE","Heavy Strike"],
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"S"
+}

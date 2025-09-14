@@ -1,0 +1,44 @@
+[
+  {
+    "floor": 1,
+    "boss": { "name": "Vera", "image": ["2000002_E","2000049_E","2000050_E"] },
+    "note": [
+      { "type": "p", "string": "Avoid non attack skills" },
+      { "type": "p", "string": "Don't attack Flamberge, he'll reduce his cooldown when taking a critical hit." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["K","Faenan"],
+          ["Tio","Eva"],
+          ["Drakhan"],
+          ["Caren"]
+        ],
+        "conditions": ["2 base 2★ units"]
+      }
+    }
+  },
+  {
+    "floor": 9,
+    "boss": { "name": "Gargantuan Beam-Blaster", "image": ["4013042","4151014","4151011"] },
+    "note": [
+      { "type": "p", "string": "Avoid non attack skills" },
+      { "type": "p", "string": "Don't attack Flamberge, he'll reduce his cooldown when taking a critical hit." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["K"],
+          ["Demiurge Stella"],
+          ["Caren"],
+          ["Dolly","Marian"]
+        ],
+        "conditions": ["2 base 2★ units","No healers"]
+      }
+    }
+  }
+]

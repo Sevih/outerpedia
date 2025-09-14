@@ -1,0 +1,197 @@
+{
+  "ID": "2000080",
+  "Fullname": "Tamamo-no-Mae",
+  "Rarity": 3,
+  "Element": "Fire",
+  "rank_pvp":"D",
+  "role":"support",
+  "gift": "Magic Tool",
+  "Class": "Mage",
+  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+3% Ally Team Effectiveness\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+3% Ally Team Effectiveness\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Reign of Terror",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>30%</color> chance to reduce the target's <color=#28d9ed>Defense</color> for <color=#28d9ed>1 turn(s)</color>.\\nDamage dealt increases proportional to Max Health instead of Attack.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000080_Skill01_LV1,SKILL_DESC_2000080_Skill01_LV1,SKILL_DESC_2000080_Skill01_LV1,SKILL_DESC_2000080_Skill01_LV1,SKILL_DESC_2000080_Skill01_LV1",
+      "IconName": "Skill_First_2000080",
+      "NameIDSymbol": "8001",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000080_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases Reduce Defense chance by 50%",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Enhances Reduced Defense\\n(Ignores Resilience)",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\nReduces Eternal Enlightenment cooldown by 2 turns",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [
+        "BT_STAT|ST_DEF"
+      ],
+      "description": [
+        "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000080_1_2]</color> chance to reduce the target's <color=#28d9ed>Defense</color> for <color=#28d9ed>[Buff_T_2000080_1_2] turn(s)</color>.\\nDamage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Nirvana's Inferno",
+      "true_desc": "(Triggered Effect) When an ally is hit, Counterattacks with <color=#28d9ed>Nirvana's Inferno</color>.\\nBefore attacking, removes <color=#28d9ed>2</color> buff(s) from the target, and reduces Evasion for <color=#28d9ed>1 turn(s)</color>. If the target is <color=#28d9ed>Earth element</color>, ignores their Resilience, and does not miss.\\nDamage dealt increases proportional to Max Health instead of Attack.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000080_Skill02_LV1,SKILL_DESC_2000080_Skill02_LV1,SKILL_DESC_2000080_Skill02_LV1,SKILL_DESC_2000080_Skill02_LV1,SKILL_DESC_2000080_Skill02_LV1",
+      "IconName": "Skill_Second_2000080",
+      "NameIDSymbol": "8002",
+      "RangeType": "SINGLE",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000080_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+      ],
+      "cd": "3",
+      "debuff": [
+        "BT_REMOVE_BUFF",
+        "BT_STAT|ST_AVOID"
+      ],
+      "description": [
+        "(Triggered Effect) When an ally is hit, Counterattacks with <color=#28d9ed>Nirvana's Inferno</color>.\\nBefore attacking, removes <color=#28d9ed>[Buff_V_2000080_2_2_1]</color> buff(s) from the target, and reduces Evasion for <color=#28d9ed>[Buff_T_2000080_2_4_1] turn(s)</color>. If the target is <color=#28d9ed>Earth element</color>, ignores their Resilience, and does not miss.\\nDamage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Eternal Enlightenment",
+      "true_desc": "Attacks all enemies. Grants <color=#28d9ed>Sustained Recovery</color> to all allies for <color=#28d9ed>1 turn(s)</color> and recovers Chain Points by <color=#28d9ed>10</color>. Increases the <color=#28d9ed>skill cooldowns</color> of boss monsters by <color=#28d9ed>1 turn</color>.\\nDamage dealt increases proportional to Max Health instead of Attack and ignores the target's Resilience.",
+      "DescID": "SKILL_DESC_2000080_Skill03_LV1,SKILL_DESC_2000080_Skill03_LV1,SKILL_DESC_2000080_Skill03_LV1,SKILL_DESC_2000080_Skill03_LV1,SKILL_DESC_2000080_Skill03_LV5",
+      "IconName": "Skill_Ultimate_2000080",
+      "NameIDSymbol": "8003",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000080_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_CP_CHARGE",
+        "SYS_CONTINU_HEAL"
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_COOL_CHARGE"
+      ],
+      "description": [
+        "Attacks all enemies. Grants <color=#28d9ed>Sustained Recovery</color> to all allies for <color=#28d9ed>[Buff_T_2000080_3_1] turn(s)</color> and recovers Chain Points by <color=#28d9ed>[Buff_V_2000080_3_2]</color>. Increases the <color=#28d9ed>skill cooldowns</color> of boss monsters by <color=#28d9ed>1 turn</color>.\\nDamage dealt increases proportional to Max Health instead of Attack and ignores the target's Resilience."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage",
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+5 Chain Points Recovery"
+        ],
+        "5": [
+          "+10% damage",
+          "+1 turn Skill Cooldowns"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and when attacking, deals <color=#28d9ed>8%</color> of the target's Max Health as fixed damage to the target.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.",
+      "DescID": "SKILL_DESC_2000080_Skill04_LV1,SKILL_DESC_2000080_Skill04_LV1,SKILL_DESC_2000080_Skill04_LV1,SKILL_DESC_2000080_Skill04_LV1,SKILL_DESC_2000080_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Fire_Start",
+      "NameIDSymbol": "8004",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_FIXED_DAMAGE",
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and when attacking, deals <color=#28d9ed>[Buff_V_2000080_chain_1_1]</color> of the target's Max Health as fixed damage to the target.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"S"
+}

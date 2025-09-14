@@ -1,0 +1,193 @@
+{
+  "ID": "2000015",
+  "Fullname": "Francesca",
+  "Rarity": 3,
+  "Element": "Dark",
+  "rank_pvp":"D",
+  "role":"dps",
+  "gift": "Natural Object",
+  "Class": "Striker",
+  "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+4% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Pretzel",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>35%</color> chance to inflict <color=#28d9ed>Bleeding</color> on the target for <color=#28d9ed>2 turn(s)</color>. (Applied 2 times)",
+      "ApproachFreezeTime_fallback1": "ATTACK",
+      "DescID": "SKILL_DESC_2000015_Skill01_LV1,SKILL_DESC_2000015_Skill01_LV1,SKILL_DESC_2000015_Skill01_LV1,SKILL_DESC_2000015_Skill01_LV1,SKILL_DESC_2000015_Skill01_LV1",
+      "IconName": "Skill_First_2000015",
+      "NameIDSymbol": "1501",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000015_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [
+        "BT_DOT_BLEED"
+      ],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000015_1_1]</color> chance to inflict <color=#28d9ed>Bleeding</color> on the target for <color=#28d9ed>[Buff_T_2000015_1_1] turn(s)</color>. (Applied 2 times)"
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Pilgrimage",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>100%</color> chance to inflict <color=#28d9ed>Bleeding</color> on the target for <color=#28d9ed>2 turn(s)</color>. Performs an <color=#28d9ed>additional attack</color> if the target is successfully inflicted with <color=#28d9ed>Bleeding</color>.",
+      "ApproachTime": "ATTACK",
+      "ApproachZ": "0.3,0.3",
+      "DescID": "SKILL_DESC_2000015_Skill02_LV1,SKILL_DESC_2000015_Skill02_LV1,SKILL_DESC_2000015_Skill02_LV1,SKILL_DESC_2000015_Skill02_LV1,SKILL_DESC_2000015_Skill02_LV1",
+      "IconName": "Skill_Second_2000015",
+      "NameIDSymbol": "1502",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000015_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_ACTION_GAUGE","BT_ADDITIVE_TURN"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 60,
+          "effect": "Activates an additional attack\\nIncreases Priority by 50%",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 90,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 120,
+          "effect": "Recovering Priority changes to gaining an extra turn",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [
+        "BT_DOT_BLEED"
+      ],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000015_2_1]</color> chance to inflict <color=#28d9ed>Bleeding</color> on the target for <color=#28d9ed>[Buff_T_2000015_2_1] turn(s)</color>. Performs an <color=#28d9ed>additional attack</color> if the target is successfully inflicted with <color=#28d9ed>Bleeding</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Nine Inch Nails",
+      "true_desc": "When using this skill, has a <color=#28d9ed>100%</color> chance to <color=#28d9ed>remove all</color> <color=#28d9ed>buffs</color> from a target, then attacks that target.\\nThe damage is increased if the target has been inflicted with <color=#28d9ed>Bleeding</color>.",
+      "DescID": "SKILL_DESC_2000015_Skill03_LV1,SKILL_DESC_2000015_Skill03_LV1,SKILL_DESC_2000015_Skill03_LV1,SKILL_DESC_2000015_Skill03_LV1,SKILL_DESC_2000015_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000015",
+      "NameIDSymbol": "1503",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "BLEED",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000015_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_REMOVE_BUFF"
+      ],
+      "description": [
+        "When using this skill, has a <color=#28d9ed>[Buff_C_2000015_3_1]</color> chance to <color=#28d9ed>remove all</color> <color=#28d9ed>buffs</color> from a target, then attacks that target.\\nThe damage is increased if the target has been inflicted with <color=#28d9ed>Bleeding</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>2</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to inflict <color=#28d9ed>Bleeding</color> 2 times on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000015_Skill04_LV1,SKILL_DESC_2000015_Skill04_LV1,SKILL_DESC_2000015_Skill04_LV1,SKILL_DESC_2000015_Skill04_LV1,SKILL_DESC_2000015_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Dark_Finish",
+      "NameIDSymbol": "1504",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_WG_DMG",
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000015_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000015_backup_1_1]</color> chance to inflict <color=#28d9ed>Bleeding</color> 2 times on the target for <color=#28d9ed>[Buff_T_2000015_backup_1_1] turn(s)</color>."
+      ],
+      "dual_debuff": "BT_DOT_BLEED",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"C"
+}

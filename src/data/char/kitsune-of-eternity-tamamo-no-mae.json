@@ -1,0 +1,206 @@
+{
+  "ID": "2000086",
+  "Fullname": "Kitsune of Eternity Tamamo-no-Mae",
+  "Rarity": 3,
+  "Element": "Earth",
+  "rank_pvp":"B",
+  "gift": "Luxury",
+  "Class": "Mage",
+  "role":"dps",
+  "limited":true,
+  "tags":["seasonal"],
+  "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\nAt the start of the turn, inflicts Cursed on two random enemies for 1 turn (Irremovable)\n+1 Chain Passive Weakness Gauge reduction",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\n+25 Action Points at battle start",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+100% Effectiveness\nRight after attacking, does not trigger an enemy's Counterattack, Revenge, or Agile Response"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Kitsunebi",
+      "true_desc": "Attacks an enemy with Heavy Strike.\nHas a <color=#28d9ed>50%</color> chance to inflict Cursed on the target for <color=#28d9ed>1 turn(s)</color>. (Irremovable)",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000086_Skill01_LV1,SKILL_DESC_2000086_Skill01_LV1,SKILL_DESC_2000086_Skill01_LV1,SKILL_DESC_2000086_Skill01_LV1,SKILL_DESC_2000086_Skill01_LV1",
+      "IconName": "Skill_First_2000086",
+      "NameIDSymbol": "8601",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000086_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["Heavy Strike","BT_ADDITIVE_TURN"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 120,
+          "effect": "Inflicts 1 additional Cursed (Irremovable)\\n+20% effect chance",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 180,
+          "effect": "Inflicts 1 additional Cursed (Irremovable)",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 300,
+          "effect": "Changes to Enhanced Skill\\nTargets all enemies\\nResets all skill cooldowns of the caster\\nExtra Turn",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [
+        "BT_DOT_CURSE_IR"
+      ],
+      "description": [
+        "Attacks an enemy with Heavy Strike.\nHas a <color=#28d9ed>[Buff_C_2000086_1_1]</color> chance to inflict Cursed on the target for <color=#28d9ed>[Buff_T_2000086_1_1] turn(s)</color>. (Irremovable)"
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "+15% effect chance",
+          "+1 turn effect duration"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Bite 'Em, Kitsu!",
+      "true_desc": "Attacks all enemies with Heavy Strike.\nFor each target damaged, increases Priority of the caster by <color=#28d9ed>25%</color>, and has a <color=#28d9ed>70%</color> chance to inflict Cursed on all targets for <color=#28d9ed>2 turn(s)</color>. (Irremovable)",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000086_Skill02_LV1,SKILL_DESC_2000086_Skill02_LV1,SKILL_DESC_2000086_Skill02_LV1,SKILL_DESC_2000086_Skill02_LV1,SKILL_DESC_2000086_Skill02_LV1",
+      "IconName": "Skill_Second_2000086",
+      "NameIDSymbol": "8602",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000086_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "Heavy Strike"
+      ],
+      "cd": "4",
+      "debuff": [
+        "BT_DOT_CURSE_IR"
+      ],
+      "description": [
+        "Attacks all enemies with Heavy Strike.\nFor each target damaged, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000086_2_2]</color>, and has a <color=#28d9ed>[Buff_C_2000086_2_3]</color> chance to inflict Cursed on all targets for <color=#28d9ed>[Buff_T_2000086_2_3] turn(s)</color>. (Irremovable)"
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% effect chance",
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "+15% effect chance",
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "All Ties Are But Dreams",
+      "true_desc": "Attacks all enemies with Heavy Strike and recovers Chain Points by <color=#28d9ed>15</color>.\nAfter attacking, detonates all Cursed stacks on the target and reduces Action Points by <color=#28d9ed>80</color>.",
+      "DescID": "SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000086",
+      "NameIDSymbol": "8603",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "CURSE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000086_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_CP_CHARGE",
+        "Heavy Strike"
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_AP_CHARGE",
+        "BT_DETONATE"
+      ],
+      "description": [
+        "Attacks all enemies with Heavy Strike and recovers Chain Points by <color=#28d9ed>[Buff_V_2000086_3_1]</color>.\nAfter attacking, detonates all Cursed stacks on the target and reduces Action Points by <color=#28d9ed>80</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "+20% damage",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>3 turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> for <color=#28d9ed>1 turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack.",
+      "DescID": "SKILL_DESC_2000086_Skill04_LV1,SKILL_DESC_2000086_Skill04_LV1,SKILL_DESC_2000086_Skill04_LV1,SKILL_DESC_2000086_Skill04_LV1,SKILL_DESC_2000086_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Start",
+      "NameIDSymbol": "8604",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": ["Heavy Strike"],
+      "cd": null,
+      "debuff": "BT_DOT_CURSE_IR",
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000086_chain_1_1]</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>[Buff_T_2000086_chain_1_1] turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000086_backup_1_1]</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> for <color=#28d9ed>[Buff_T_2000086_backup_1_1] turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack."
+      ],
+      "dual_debuff": ["BT_DOT_CURSE_IR"],
+      "dual_buff": ["Heavy Strike"],
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"S"
+}

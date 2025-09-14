@@ -1,0 +1,196 @@
+{
+  "ID": "2000055",
+  "Fullname": "Aer",
+  "Rarity": 3,
+  "Element": "Fire",
+  "rank_pvp":"C",
+  "role":"dps",
+  "gift": "Luxury",
+  "Class": "Striker",
+  "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+4% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Whatever!",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>30%</color> chance to grant the caster increased <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "ApproachFreezeTime_fallback1": "ATTACK",
+      "ApproachZ": "1.4",
+      "DescID": "SKILL_DESC_2000055_Skill01_LV1,SKILL_DESC_2000055_Skill01_LV1,SKILL_DESC_2000055_Skill01_LV1,SKILL_DESC_2000055_Skill01_LV1,SKILL_DESC_2000055_Skill01_LV1",
+      "IconName": "Skill_First_2000055",
+      "NameIDSymbol": "5501",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000055_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_CRITICAL_RATE"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000055_1]</color> chance to grant the caster increased <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>[Buff_T_2000055_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "To the Beach?",
+      "true_desc": "When using this skill, <color=#28d9ed>removes all</color> <color=#28d9ed>buffs</color> on the target and attacks the enemy. If the caster is granted increased <color=#28d9ed>Critical Hit Chance</color>, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>. This attack bypasses the target's Resilience.",
+      "ApproachType": "ATTACK",
+      "ApproachZ": "5",
+      "DescID": "SKILL_DESC_2000055_Skill02_LV1,SKILL_DESC_2000055_Skill02_LV1,SKILL_DESC_2000055_Skill02_LV1,SKILL_DESC_2000055_Skill02_LV1,SKILL_DESC_2000055_Skill02_LV1",
+      "IconName": "Skill_Second_2000055",
+      "NameIDSymbol": "5502",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000055_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases damage (Additional increase against Earth enemies)",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\nResets Gone Surfing! cooldown",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [
+        "BT_REMOVE_BUFF"
+      ],
+      "description": [
+        "When using this skill, <color=#28d9ed>removes all</color> <color=#28d9ed>buffs</color> on the target and attacks the enemy. If the caster is granted increased <color=#28d9ed>Critical Hit Chance</color>, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000055_2_1]</color>. This attack bypasses the target's Resilience."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% Priority",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+5% Priority",
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Gone Surfing!",
+      "true_desc": "Attacks an enemy. Increases damage dealt to enemies with <color=#28d9ed>buffs</color>.\\nWhen the enemy has no <color=#28d9ed>buffs</color> or is defeated after this skill is used, grants an <color=#28d9ed>extra turn</color>.\\nThis skill deals increased damage to Earth bosses.",
+      "DescID": "SKILL_DESC_2000055_Skill03_LV1,SKILL_DESC_2000055_Skill03_LV1,SKILL_DESC_2000055_Skill03_LV1,SKILL_DESC_2000055_Skill03_LV1,SKILL_DESC_2000055_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000055",
+      "NameIDSymbol": "5503",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000055_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ADDITIVE_TURN"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks an enemy. Increases damage dealt to enemies with <color=#28d9ed>buffs</color>.\\nWhen the enemy has no <color=#28d9ed>buffs</color> or is defeated after this skill is used, grants an <color=#28d9ed>extra turn</color>.\\nThis skill deals increased damage to Earth bosses."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Attacks an enemy and increases <color=#28d9ed>Attack</color> of the caster for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Attacks an enemy and has a <color=#28d9ed>40%</color> chance to increase <color=#28d9ed>Critical Hit Chance</color> of the caster for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000055_Skill04_LV1,SKILL_DESC_2000055_Skill04_LV1,SKILL_DESC_2000055_Skill04_LV1,SKILL_DESC_2000055_Skill04_LV1,SKILL_DESC_2000055_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Fire_Start",
+      "NameIDSymbol": "5504",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_STAT|ST_ATK",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: Attacks an enemy and increases <color=#28d9ed>Attack</color> of the caster for <color=#28d9ed>[Buff_T_2000055_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000055_backup_1_1]</color> chance to increase <color=#28d9ed>Critical Hit Chance</color> of the caster for <color=#28d9ed>[Buff_T_2000055_backup_1_1] turn(s)</color>."
+      ],
+      "dual_buff": "BT_STAT|ST_CRITICAL_RATE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"S"
+}

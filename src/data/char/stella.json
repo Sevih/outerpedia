@@ -1,0 +1,193 @@
+{
+  "ID": "2000039",
+  "Fullname": "Stella",
+  "Rarity": 3,
+  "Element": "Light",
+  "rank_pvp":"B",
+  "gift": "Luxury",
+  "role":"support",
+  "Class": "Ranger",
+  "tags":["ignore-defense"],
+  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+5% Ally Team Attack\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+5% Ally Team Attack\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Fair Condemnation",
+      "true_desc": "Attacks 2 enemies, the target and the <color=#28d9ed>enemy with the highest Speed</color>. Has a <color=#28d9ed>60%</color> chance to reduce the target's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Speed</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000039_Skill01_LV1,SKILL_DESC_2000039_Skill01_LV1,SKILL_DESC_2000039_Skill01_LV1,SKILL_DESC_2000039_Skill01_LV1,SKILL_DESC_2000039_Skill01_LV1",
+      "IconName": "Skill_First_2000039",
+      "NameIDSymbol": "3901",
+      "RangeType": "DOUBLE_SPEED",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000039_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Attacks all enemies\\nIncreases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\nPenetration increased.",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "description": [
+        "Attacks 2 enemies, the target and the <color=#28d9ed>enemy with the highest Speed</color>. Has a <color=#28d9ed>[Buff_C_2000039_1_2]</color> chance to reduce the target's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000039_1_2]</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Speed</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Steely Oath",
+      "true_desc": "(Passive Effect) Cannot be inflicted with <color=#28d9ed>Stunned</color>, <color=#28d9ed>Frozen</color>, or <color=#28d9ed>Petrified</color>.\\n(Triggered Effect) Prepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of the skill.\\nAttacks all enemies when <color=#28d9ed>Revenge</color> is activated.\\nThis skill deals damage proportional to the caster's <color=#28d9ed>Speed</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000039_Skill02_LV1,SKILL_DESC_2000039_Skill02_LV2,SKILL_DESC_2000039_Skill02_LV2,SKILL_DESC_2000039_Skill02_LV2,SKILL_DESC_2000039_Skill02_LV5",
+      "IconName": "Skill_Second_2000039",
+      "NameIDSymbol": "3902",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000039_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "SYS_BUFF_REVENGE"
+      ],
+      "cd": "2",
+      "debuff": [],
+      "description": [
+        "(Passive Effect) Cannot be inflicted with <color=#28d9ed>Stunned</color>, <color=#28d9ed>Frozen</color>, or <color=#28d9ed>Petrified</color>.\\n(Triggered Effect) Prepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of the skill.\\nAttacks all enemies when <color=#28d9ed>Revenge</color> is activated.\\nThis skill deals damage proportional to the caster's <color=#28d9ed>Speed</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn debuff durations",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+20% damage",
+          "-1 turn debuff durations"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Unforgivable Sinner",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>85%</color> chance to steal <color=#28d9ed>all</color> <color=#28d9ed>buffs</color> from the target.\\nIncreases damage dealt proportional to the caster's <color=#28d9ed>Speed</color>.",
+      "DescID": "SKILL_DESC_2000039_Skill03_LV1,SKILL_DESC_2000039_Skill03_LV1,SKILL_DESC_2000039_Skill03_LV1,SKILL_DESC_2000039_Skill03_LV1,SKILL_DESC_2000039_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000039",
+      "NameIDSymbol": "3903",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000039_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_STEAL_BUFF"
+      ],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000039_3_1]</color> chance to steal <color=#28d9ed>all</color> <color=#28d9ed>buffs</color> from the target.\\nIncreases damage dealt proportional to the caster's <color=#28d9ed>Speed</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+15% effect chance"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster and the next Skill Chain caster by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>80%</color> chance to reduce <color=#28d9ed>Priority</color> of the target by <color=#28d9ed>20%</color>.",
+      "DescID": "SKILL_DESC_2000039_Skill04_LV1,SKILL_DESC_2000039_Skill04_LV1,SKILL_DESC_2000039_Skill04_LV1,SKILL_DESC_2000039_Skill04_LV1,SKILL_DESC_2000039_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Join",
+      "NameIDSymbol": "3904",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": ["BT_AP_CHARGE"],
+      "cd": null,
+      "debuff": "",
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster and the next Skill Chain caster by <color=#28d9ed>[Buff_V_2000039_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000039_backup_1_1]</color> chance to reduce <color=#28d9ed>Priority</color> of the target by <color=#28d9ed>[Buff_V_2000039_backup_1_1]</color>."
+      ],
+      "dual_debuff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

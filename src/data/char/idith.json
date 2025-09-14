@@ -1,0 +1,185 @@
+{
+  "ID": "2000010",
+  "Fullname": "Idith",
+  "Rarity": 2,
+  "Element": "Earth",
+  "rank":"C",
+  "role":"dps",
+  "gift": "Craftwork",
+  "Class": "Striker",
+  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+5% Defense\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n+5% Defense\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Triple Slash",
+      "true_desc": "Attacks an enemy.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Defense</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000010_Skill01_LV1,SKILL_DESC_2000010_Skill01_LV1,SKILL_DESC_2000010_Skill01_LV1,SKILL_DESC_2000010_Skill01_LV1,SKILL_DESC_2000010_Skill01_LV1",
+      "IconName": "Skill_First_2000010",
+      "NameIDSymbol": "1001",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000010_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_CALL_BACKUP"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Activates Dual Attack with 1 ally",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Increases damage",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Defense</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Antipathy",
+      "true_desc": "(Triggered Effect) Has a <color=#28d9ed>40%</color> chance to <color=#28d9ed>Counterattack</color> when the caster is attacked.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000010_Skill02_LV1,SKILL_DESC_2000010_Skill02_LV1,SKILL_DESC_2000010_Skill02_LV3,SKILL_DESC_2000010_Skill02_LV3,SKILL_DESC_2000010_Skill02_LV5",
+      "IconName": "Skill_Second_2000010",
+      "NameIDSymbol": "1002",
+      "RangeType": "SINGLE",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000010_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "(Triggered Effect) Has a <color=#28d9ed>40%</color> chance to <color=#28d9ed>Counterattack</color> when the caster is attacked."
+      ],
+      "enhancement": {
+        "2": [
+          "+15% Counterattack damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% Counterattack chance"
+        ],
+        "4": [
+          "+15% Counterattack damage"
+        ],
+        "5": [
+          "+10% Counterattack chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Noble Swordcraft",
+      "true_desc": "Attacks an enemy and increases the <color=#28d9ed>Defense</color> of the caster for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000010_Skill03_LV1,SKILL_DESC_2000010_Skill03_LV1,SKILL_DESC_2000010_Skill03_LV1,SKILL_DESC_2000010_Skill03_LV1,SKILL_DESC_2000010_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000010",
+      "NameIDSymbol": "1003",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000010_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_DEF"
+      ],
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and increases the <color=#28d9ed>Defense</color> of the caster for <color=#28d9ed>[Buff_T_2000010_3_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+1 turn Increased Defense duration"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to increase Defense for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>70%</color> chance to increase <color=#28d9ed>Defense</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000010_Skill04_LV1,SKILL_DESC_2000010_Skill04_LV1,SKILL_DESC_2000010_Skill04_LV1,SKILL_DESC_2000010_Skill04_LV1,SKILL_DESC_2000010_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Join",
+      "NameIDSymbol": "1004",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_STAT|ST_DEF",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000010_chain_1_1]</color> chance to increase Defense for <color=#28d9ed>[Buff_T_2000010_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000010_backup_1_1]</color> chance to increase <color=#28d9ed>Defense</color> for <color=#28d9ed>[Buff_T_2000010_backup_1_1] turn(s)</color>."
+      ],
+      "dual_buff": "BT_STAT|ST_DEF",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

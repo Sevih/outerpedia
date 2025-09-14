@@ -1,0 +1,350 @@
+[
+    {
+        "name": "BT_REMOVE_BUFF",
+        "label": "Buff Removal",
+        "description": "Removes buffs from the target.",
+        "icon": "SC_Buff_Effect_Remove_Buff"
+    },
+    {
+        "name": "BT_AGGRO",
+        "label": "Taunted",
+        "description": "Uses a basic attack on the caster that inflicted Taunted. Removed when the caster dies.",
+        "icon": "SC_Buff_Effect_Aggro"
+    },
+    {
+        "name": "BT_AGGRO_IR",
+        "label": "Taunted",
+        "description": "Uses a basic attack on the caster that inflicted Taunted. Removed when the caster dies. (Irremovable)",
+        "icon": "IG_Buff_Effect_Aggro_Interruption_D"
+    },
+    {
+        "name": "BT_SEAL_COUNTER",
+        "label": "Uncounterable",
+        "description": "Negates enemy reactive strikes: Counterattack, Revenge, or Agile Response.",
+        "icon": "IG_Buff_Seal_Counter"
+    },
+    {
+        "name": "BT_SEAL_ADDITIVE_ATTACK",
+        "label": "Seal Extra Skill",
+        "description": "The target cannot activate additional attack and extra skills.",
+        "icon": "IG_Buff_Effect_Seal_AddAttack"
+    },
+    {
+        "name": "BT_SEAL_ADDITIVE_ATTACK_IR",
+        "label": "Seal Extra Skill",
+        "description": "The target cannot activate additional attack and extra skills. (Irremovable)",
+        "icon": "IG_Buff_Effect_Seal_AddAttack_Interruption_D"
+    },
+    {
+        "name": "BT_SEAL_ADDITIVE_TURN_IR",
+        "label": "Seal Extra Turn",
+        "description": "The target cannot be granted an extra turn. (Irremovable)",
+        "icon": "IG_Buff_Effect_Seal_AddTurn_Interruption_D"
+    },
+    {
+        "name": "BT_STAT|ST_ACCURACY",
+        "label": "Reduced Accuracy",
+        "description": "Reduces Accuracy by 50%",
+        "icon": "SC_Buff_Stat_Accuracy"
+    },
+    {
+        "name": "BT_STAT|ST_ATK",
+        "label": "Reduced Attack",
+        "description": "Reduces Attack by 30%",
+        "icon": "SC_Buff_Stat_Atk"
+    },
+    {
+        "name": "BT_STAT|ST_ATK_IR",
+        "label": "Reduced Attack",
+        "description": "Reduces Attack by 30% (Irremovable)",
+        "icon": "IG_Buff_Stat_Atk_Interruption_D"
+    },
+    {
+        "name": "BT_STAT|ST_SPEED",
+        "label": "Reduced Speed",
+        "description": "Reduces Speed by 30%",
+        "icon": "SC_Buff_Stat_Speed"
+    },
+    {
+        "name": "BT_STAT|ST_BUFF_RESIST",
+        "label": "Reduced Resilience",
+        "description": "Reduces Resilience by 100%",
+        "icon": "SC_Buff_Stat_BuffResist"
+    },
+    {
+        "name": "BT_STAT|ST_BUFF_CHANCE",
+        "label": "Reduced Effectiveness",
+        "description": "Reduces Effectiveness by 100%",
+        "icon": "SC_Buff_Stat_BuffChance"
+    },
+    {
+        "name": "BT_FREEZE",
+        "label": "Frozen",
+        "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",
+        "icon": "SC_Buff_Effect_Freeze"
+    },
+    {
+        "name": "BT_FREEZE_IR",
+        "label": "Frozen",
+        "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time. (Irremovable)",
+        "icon": "IG_Buff_Effect_Freeze_Interruption_D"
+    },
+    {
+        "name": "BT_STONE",
+        "label": "Petrified",
+        "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",
+        "icon": "SC_Buff_Effect_Stone"
+    },
+    {
+        "name": "BT_STONE_IR",
+        "label": "Petrified",
+        "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time (Irremovable)",
+        "icon": "IG_Buff_Effect_Stone_Interruption_D"
+    },
+    {
+        "name": "BT_ACTION_GAUGE",
+        "label": "Reduces Priority",
+        "description": "Reduces enemie(s) priority",
+        "icon": "SC_Buff_Effect_Increase_Priority"
+    },
+    {
+        "name": "BT_DOT_BURN",
+        "label": "Burned",
+        "description": "Takes damage proportional to the caster's Attack at the start of the turn.\n Ignore Defense.\n Removed when the caster dies.",
+        "icon": "SC_Buff_Dot_Burn"
+    },
+    {
+        "name": "BT_DOT_BURN_IR",
+        "label": "Burned",
+        "description": "Takes damage proportional to the caster's Attack at the start of the turn.\n Ignore Defense.\n Removed when the caster dies. (Cannot be removed)",
+        "icon": "IG_Buff_Dot_Burn_Interruption_D"
+    },
+    {
+        "name": "BT_STAT|ST_AVOID",
+        "label": "Reduced Evasion",
+        "description": "Reduces Evasion by 50%",
+        "icon": "SC_Buff_Stat_Avoid"
+    },
+    {
+        "name": "BT_STAT|ST_DEF",
+        "label": "Reduced Defense",
+        "description": "Reduces Defense by 50%",
+        "icon": "SC_Buff_Stat_Def"
+    },
+    {
+        "name": "BT_STAT|ST_DEF_IR",
+        "label": "Reduced Defense",
+        "description": "Reduces Defense by 50% (Irremovable)",
+        "icon": "IG_Buff_Stat_Def_Interruption_D"
+    },
+    {
+        "name": "BT_STAT|ST_CRITICAL_RATE",
+        "label": "Reduced Crit Hit Chance",
+        "description": "Reduces Critical Hit Chance by 50%",
+        "icon": "SC_Buff_Stat_CriRate"
+    },
+    {
+        "name": "BT_STAT|ST_CRITICAL_RATE_IR",
+        "label": "Reduced Crit Hit Chance",
+        "description": "Reduces Critical Hit Chance by 50% (Irremovable)",
+        "icon": "IG_Buff_Stat_CriRate_Interruption_D"
+    },
+    {
+        "name": "BT_STAT|ST_CRITICAL_DMG_RATE",
+        "label": "Reduced Critical Damage",
+        "description": "Reduces Critical Damage by 50%",
+        "icon": "SC_Buff_Stat_CriDmgRate"
+    },
+    {
+        "name": "BT_STUN",
+        "label": "Stunned",
+        "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",
+        "icon": "SC_Buff_Effect_Stun"
+    },
+    {
+        "name": "BT_STUN_IR",
+        "label": "Stunned",
+        "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time (Irremovable)",
+        "icon": "IG_Buff_Effect_Stun_Interruption_D"
+    },
+    {
+        "name": "BT_RANDOM",
+        "label": "Random Debuff",
+        "description": "Inflict one of the following debuff : Reduced Attack\nReduced Critical Hit Chance\nReduced Speed\nReduced Defense",
+        "icon": "IG_Buff_Effect_Random_Buff"
+    },
+    {
+        "name": "BT_WG_DMG",
+        "label": "Weakness Gauge Damage",
+        "description": "Deal additional Weakness Gauge damage",
+        "icon": "SC_Buff_Effect_WG_Dmg"
+    },
+    {
+        "name": "BT_SYS_DEBUFF_ENHANCE_IR",
+        "label": "Enhancement",
+        "description": "Reduces the efficiency of buff that increases stats by 100%. (Irremovable)",
+        "icon": "IG_Buff_Enhance_Interruption_D"
+    },
+    {
+        "name": "BT_SEALED",
+        "label": "Unbuffable",
+        "description": "Cannot gain buffs. (Excluding certain effects)",
+        "icon": "SC_Buff_Effect_Sealed"
+    },
+    {
+        "name": "BT_SEALED_IR",
+        "label": "Unbuffable",
+        "description": "Cannot gain buffs. (Excluding certain effects, Cannot be removed)",
+        "icon": "IG_Buff_Effect_Sealed_Interruption_D"
+    },
+    {
+        "name": "BT_SILENCE",
+        "label": "Silenced",
+        "description": "Cannot only use skill chain and basic attack while this effect is applied",
+        "icon": "SC_Buff_Effect_Silence"
+    },
+    {
+        "name": "BT_SILENCE_IR",
+        "label": "Silenced",
+        "description": "Cannot only use skill chain and basic attack while this effect is applied (Irremovable)",
+        "icon": "IG_Buff_Effect_Silence_Interruption_D"
+    },
+    {
+        "name": "BT_MARKING",
+        "label": "Marked",
+        "description": "Automatically becomes a target for attacks and takes increased damage\nCan only apply to one member of a team and another Marked cannot be applied until the existing Marked is gone",
+        "icon": "marked"
+    },
+    {
+        "name": "BT_STEAL_BUFF",
+        "label": "Buff Stealing",
+        "description": "Steal buff from the target.",
+        "icon": "SC_Buff_Steal"
+    },
+    {
+        "name": "BT_DOT_CURSE",
+        "label": "Cursed",
+        "description": "Takes damage proportional to Health at the start of the turn (3% of max HP).\nRemoved when the caster dies",
+        "icon": "SC_Buff_Dot_Curse"
+    },
+    {
+        "name": "BT_DOT_CURSE_IR",
+        "label": "Cursed",
+        "description": "Takes damage proportional to Health at the start of the turn (3% of max HP).\nRemoved when the caster dies (Irremovable)",
+        "icon": "IG_Buff_Dot_Curse_Interruption_D"
+    },
+    {
+        "name": "BT_DOT_BLEED",
+        "label": "Bleeding",
+        "description": "Reduces healing received. \nTakes damage proportional to the caster's Attack at the start of the turn.\nRemoved when the caster dies.",
+        "icon": "CM_Stat_Icon_VAMPIRIC"
+    },
+    {
+        "name": "BT_DOT_BLEED_IR",
+        "label": "Bleeding",
+        "description": "Reduces healing received. \nTakes damage proportional to the caster's Attack at the start of the turn.\nRemoved when the caster dies. (Irremovable)",
+        "icon": "IG_Buff_Dot_Bleed_Interruption_D"
+    },
+    {
+        "name": "BT_DOT_POISON",
+        "label": "Poisoned",
+        "description": "Reduces all Priority increases by 20%. Takes damage proportional to the caster's Attack at the start of a turn.\nRemoved when the caster dies",
+        "icon": "SC_Buff_Dot_Poison"
+    },
+    {
+        "name": "BT_DOT_POISON_IR",
+        "label": "Poisoned",
+        "description": "Reduces all Priority increases by 20%. Takes damage proportional to the caster's Attack at the start of a turn.\nRemoved when the caster dies. (Irremovable)",
+        "icon": "IG_Buff_Dot_Poison_Interruption_D"
+    },
+    {
+        "name": "BT_DOT_LIGHTNING",
+        "label": "Shocked",
+        "description": "Reduces Action Points generated by 50%. Takes damage to the caster's Attack at the start of the turn.\nRemoved when the caster dies.",
+        "icon": "SC_Buff_Dot_Lightning"
+    },
+    {
+        "name": "BT_FIXED_DAMAGE",
+        "label": "Fixed Damage",
+        "description": "Deals a set amount of damage based on the target's max HP.",
+        "icon": "SC_Buff_Effect_True_Dmg"
+    },
+    {
+        "name": "BT_STATBUFF_CONVERT_TO_STATDEBUFF",
+        "label": "Buff Reversal",
+        "description": "Increased stat effect granted to the target become reduced stat effect.\n\nIncreased stat effects :\nAttack, Defense, Speed, Critical Hit Chance, Critical Damage, Accuracy, Evasion, Effectiveness, Resilience",
+        "icon": "IG_Buff_Effect_Remove_Buff"
+    },
+    {
+        "name": "BT_COOL_CHARGE",
+        "label": "Cooldown Increase",
+        "description": "Increase target enemy skill cooldown",
+        "icon": "SC_Buff_Cool_Charge"
+    },
+    {
+        "name": "IG_Buff_BuffdurationReduce",
+        "label": "Reduced Buff Duration",
+        "description": "Reduced duration of beneficial effects granted on target",
+        "icon": "IG_Buff_BuffdurationReduce"
+    },
+    {
+        "name": "IG_Buff_DeBuffdurationIncrease",
+        "label": "Increase Debuff Duration",
+        "description": "Increased duration of detrimental effects granted on target",
+        "icon": "IG_Buff_BuffdurationIncrease"
+    },
+    {
+        "name": "BT_SEALED_RESURRECTION",
+        "label": "Extinction",
+        "description": "Enemies killed by this skill cannot be Resurrected or Revived",
+        "icon": "IG_Buff_Seal_Ressurection"
+    },
+    {
+        "name": "BT_SEALED_RECEIVE_HEAL",
+        "label": "Unhealable",
+        "description": "Cannot be applied with Health recovery effects",
+        "icon": "SC_Buff_Sealed_Receive_Heal"
+    },
+    {
+        "name": "BT_DETONATE",
+        "label": "Detonate",
+        "description": "Activates certain debuffs immediately. Magnitude determined by the number of turns remaining and stacks applied.",
+        "icon": "SC_Buff_detonate"
+    },
+    {
+        "name": "BT_DOT_ETERNAL_BLEED",
+        "label": "Eternal Bleeding",
+        "description": "At the start of the turn, takes damage proportional to the caster's Effectiveness, and increases Priority of all enemies by 5%.\nRemoved when the caster dies",
+        "icon": "SC_Buff_2100092"
+    },
+    {
+        "name": "BT_AP_CHARGE",
+        "label": "Discharge AP",
+        "description": "Reduces enemy Action Points",
+        "icon": "SC_Debuff_Effect_AP"
+    },
+    {
+        "name": "BT_RESOURCE_DOWN",
+        "label": "Unique Resource Down",
+        "description": "Reduces the target's Unique Resource.",
+        "icon": "SC_Buff_resource_down"
+    },
+    {
+        "name": "UNIQUE_MARTYRDOM",
+        "label": "Martyrdom",
+        "description": "Dies instantly if no enemy is killed before the duration ends",
+        "icon": "IG_Buff_Death_Timer_Interruption_D"
+    },
+    {
+        "name": "UNIQUE_IRREGULAR_INFECTION",
+        "label": "Irregular Infection",
+        "description": "At the start of the turn, the caster's Enhancement Effect duration are reduced by 1 turn, and debuff durations of all enemies are reduced by 1 turn.\nApplies to only one unit per team. If the effect is applied to a new target, the previous target's effect is removed.\nRemoved upon caster's death (Irremovable)",
+        "icon": "IG_Buff_Effect_2000102_Interruption_D"
+    },
+    {
+        "name": "UNIQUE_KERAUNOS",
+        "label": "Keraunos",
+        "description": "Reduces healing received by 50%. (Irremovable)",
+        "icon": "IG_Buff_2000057_Interruption_D"
+    }
+]

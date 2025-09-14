@@ -1,0 +1,6441 @@
+{
+  "aer": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "High Crit": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Penetration": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "ais-wallenstein": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "High Crit": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Penetration": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "Revenge Ais": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
+    }
+  },
+  "akari": {
+    "Speed PVE": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Speed PVP": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "alice": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Search and Destroy",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "ame": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "High Crit": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Penetration": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "astei": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Immortal Pride",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Immunity": {
+      "weaponSub": [
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Immortal Pride",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Immunity",
+        "Swiftness"
+      ]
+    },
+    "Counterattack": {
+      "weaponSub": [
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Immortal Pride",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    }
+  },
+  "bell-cranel": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "SPD",
+        "CHC",
+        "ACC",
+        "EFF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Attack": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "SPD",
+        "CHC",
+        "ACC",
+        "EFF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Attack"
+      ]
+    },
+    "Augm Attack": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "SPD",
+        "CHC",
+        "ACC",
+        "EFF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Attack",
+        "Augmentation"
+      ]
+    }
+  },
+  "beth": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "High Crit": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD",
+        "EFF"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Penetration": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD",
+        "EFF"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "bryn": {
+    "High Crit": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Last Hope",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "PvP": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Last Hope",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Augmentation",
+        "Immunity"
+      ]
+    },
+    "Penetration": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Last Hope",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Last Hope",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "caren": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Bruiser Speed": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed",
+        "Immunity"
+      ]
+    },
+    "Bruiser Slow": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Defense",
+        "Immunity"
+      ]
+    }
+  },
+  "charlotte": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "christina": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Exquisite Death",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "HH%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "DEF",
+        "SPD",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Scale Immune": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Exquisite Death",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "HH%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "DEF",
+        "SPD",
+        "EFF"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "Scale Life": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Exquisite Death",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "HH%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "DEF",
+        "SPD",
+        "EFF"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Life"
+      ]
+    },
+    "Counter": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Exquisite Death",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "HH%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "DEF",
+        "SPD",
+        "EFF"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    }
+  },
+  "dahlia": {
+    "Speed damage": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Speed Tanky": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "delta": {
+    "Life Swift": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "CHC",
+        "CHD",
+        "ACC",
+        "SPD"
+      ],
+      "armorSets": [
+        "Life",
+        "Swiftness"
+      ]
+    },
+    "Life Augment": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "CHC",
+        "CHD",
+        "ACC",
+        "SPD"
+      ],
+      "armorSets": [
+        "Life",
+        "Augmentation"
+      ]
+    },
+    "Swift Augment": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "CHC",
+        "CHD",
+        "ACC",
+        "SPD"
+      ],
+      "armorSets": [
+        "Augmentation",
+        "Swiftness"
+      ]
+    }
+  },
+  "demiurge-astei": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "High Crit": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Penetration": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "demiurge-delta": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Immortal Pride",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Healer]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "RES",
+        "DEF",
+        "EVA"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Speed Swift": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Immortal Pride",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Healer]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "RES",
+        "DEF",
+        "EVA"
+      ],
+      "armorSets": [
+        "Speed",
+        "Swiftness"
+      ]
+    },
+    "Immune Swift": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Immortal Pride",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Healer]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "RES",
+        "DEF",
+        "EVA"
+      ],
+      "armorSets": [
+        "Immunity",
+        "Swiftness"
+      ]
+    }
+  },
+  "demiurge-drakhan": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "CHC",
+        "SPD",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Immune": {
+      "weaponSub": [
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "CHC",
+        "SPD",
+        "CHD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    }
+  },
+  "demiurge-luna": {
+    "Penetration": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Critical Strike": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pen mix": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Mage]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration",
+        "Speed"
+      ]
+    }
+  },
+  "demiurge-stella": {
+    "Counter": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "HP"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    },
+    "Revenge": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "HP"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
+    }
+  },
+  "demiurge-vlada": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Augment Immune": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Augmentation",
+        "Immunity"
+      ]
+    }
+  },
+  "dianne": {
+    "PvE": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "PvP": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    }
+  },
+  "drakhan": {
+    "Counter": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "HP",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "HP",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "edelweiss": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Barrage of Truth",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "High Crit": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Barrage of Truth",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    }
+  },
+  "eliza": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "ember": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Defender]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Gorgon's Vanity [Defender]",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        },
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "EFF",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "EFF",
+        "ATK",
+        "HP",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Counter": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Defender]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Gorgon's Vanity [Defender]",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        },
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "EFF",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "EFF",
+        "ATK",
+        "HP",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Counterattack"
+      ]
+    },
+    "Counterattack": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Defender]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Gorgon's Vanity [Defender]",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        },
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "EFF",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "EFF",
+        "ATK",
+        "HP",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    },
+    "Revenge": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Defender]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Gorgon's Vanity [Defender]",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        },
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "EFF",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "EFF",
+        "ATK",
+        "HP",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
+    }
+  },
+  "epsilon": {
+    "Augment Immune": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Immunity",
+        "Augmentation"
+      ]
+    },
+    "Counter Immune": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Immunity",
+        "Counterattack"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "High Crit": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    }
+  },
+  "eternal": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "EFF",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "fatal": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "High Crit": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    }
+  },
+  "fran": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "francesca": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Penetration": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "Critical Strike": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    }
+  },
+  "gnosis-beth": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "EFF",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "gnosis-dahlia": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "SPD",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Revenge": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "SPD",
+        "CHD"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
+    },
+    "Swift Immune": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "SPD",
+        "CHD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    }
+  },
+  "gnosis-nella": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "EFF",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Speed Immune": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "EFF",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed",
+        "Immunity"
+      ]
+    }
+  },
+  "hilde": {
+    "Scaling": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "DEF",
+        "SPD",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "HP immune": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "DEF",
+        "SPD",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Life",
+        "Immunity"
+      ]
+    },
+    "HP scaling": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "DEF",
+        "SPD",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Life"
+      ]
+    }
+  },
+  "holy-night-s-blessing-dianne": {
+    "DPS": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Barrage of Truth",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "CHC",
+        "CHD",
+        "ATK"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "Support-DPS": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Barrage of Truth",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "CHC",
+        "CHD",
+        "ATK"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "idith": {
+    "Scaling": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%",
+            "CHD%"
+          ]
+        },
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "DEF%",
+            "RES"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "HP",
+        "DEF"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
+    }
+  },
+  "iota": {
+    "PvP": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ACC",
+        "EFF",
+        "SPD",
+        "ATK"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "PvE - effi": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ACC",
+        "EFF",
+        "SPD",
+        "ATK"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Effectiveness"
+      ]
+    },
+    "PvE - accu": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ACC",
+        "EFF",
+        "SPD",
+        "ATK"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Accuracy"
+      ]
+    }
+  },
+  "kanon": {
+    "Augment Swift": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Augmentation",
+        "Swiftness"
+      ]
+    },
+    "Augment Defense": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Augmentation",
+        "Defense"
+      ]
+    },
+    "Swift Immu": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "Counter": {
+      "weaponSub": [
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    }
+  },
+  "kappa": {
+    "Swift Defense": {
+      "weaponSub": [
+        {
+          "name": "Exquisite Death",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Defense"
+      ]
+    },
+    "Swift Counter": {
+      "weaponSub": [
+        {
+          "name": "Exquisite Death",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Counterattack"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Exquisite Death",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "kitsune-of-eternity-tamamo-no-mae": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "ATK%",
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "EFF",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "kuro": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "laplace": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "CritDmg": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pene": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "leo": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Exquisite Death",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Immu": {
+      "weaponSub": [
+        {
+          "name": "Exquisite Death",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    }
+  },
+  "liselotte": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Royal Stinger",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Immu": {
+      "weaponSub": [
+        {
+          "name": "Royal Stinger",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "Swift Speed": {
+      "weaponSub": [
+        {
+          "name": "Royal Stinger",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Speed"
+      ]
+    },
+    "Life Def": {
+      "weaponSub": [
+        {
+          "name": "Royal Stinger",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
+          "mainStat": [
+            "HP%",
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Life",
+        "Defense"
+      ]
+    }
+  },
+  "luna": {
+    "Speedy": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "CHC",
+        "ACC",
+        "ATK"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Counter": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "CHC",
+        "ACC",
+        "ATK"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    }
+  },
+  "maxie": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Heartunder's Blade",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD",
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "ACC",
+        "EFF",
+        "CHC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "maxwell": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "CritDmg": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pene": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "mene": {
+    "Swift Immu": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "monad-eva": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Counter": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Counterattack"
+      ]
+    }
+  },
+  "nella": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Immortal Pride",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Starlight Road",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Immu": {
+      "weaponSub": [
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Immortal Pride",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Starlight Road",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "Swift Life": {
+      "weaponSub": [
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Immortal Pride",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Starlight Road",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Life"
+      ]
+    }
+  },
+  "noa": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHD",
+        "CHC",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "CritDmg": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHD",
+        "CHC",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pene": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHD",
+        "CHC",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "notia": {
+    "CritDmg": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pene": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "Immu Aug": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Immunity",
+        "Augmentation"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "omega-nadja": {
+    "Scaling": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "EFF",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "HP immune": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "EFF",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Life",
+        "Immunity"
+      ]
+    },
+    "HP scaling": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "EFF",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Life"
+      ]
+    },
+    "HP Counter": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "EFF",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Counterattack",
+        "Life"
+      ]
+    },
+    "Counter": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%",
+            "EFF"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "EFF",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    }
+  },
+  "poolside-trickster-regina": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "CritDmg": {
+      "weaponSub": [
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pene": {
+      "weaponSub": [
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "regina": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Last Hope",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "EVA"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "CritDmg": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Last Hope",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "EVA"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pene": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Last Hope",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Fire Fists",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD",
+        "EVA"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "rey": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "CritDmg": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pene": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "rhona": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Glorious Radiance Orb",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "SPD",
+        "HP"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Counter": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Glorious Radiance Orb",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "SPD",
+        "HP"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    },
+    "Scaling": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Glorious Radiance Orb",
+          "mainStat": [
+            "PEN"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "SPD",
+        "HP"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Counterattack"
+      ]
+    }
+  },
+  "rin": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "CritDmg": {
+      "weaponSub": [
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Pene": {
+      "weaponSub": [
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "roxie": {
+    "Aug Immu": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Augmentation",
+        "Immunity"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "CritDmg": {
+      "weaponSub": [
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    }
+  },
+  "ryu-lion": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Barrage of Truth",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "CHC",
+        "ATK",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Pene": {
+      "weaponSub": [
+        {
+          "name": "Barrage of Truth",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "CHC",
+        "ATK",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
+  "saeran": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Saint's Ring",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Immu": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Saint's Ring",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    }
+  },
+  "skadi": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Gorgon's Vanity [Ranger]",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Ranger]",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "CHC",
+        "ACC",
+        "ATK",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "sofia": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%",
+            "CHD%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "stella": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "ACC",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "sterope": {
+    "Support Speed": {
+      "weaponSub": [
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Support Swift Immu": {
+      "weaponSub": [
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "EFF"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "SubDPS Speed": {
+      "weaponSub": [
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "SubDPS Swift Immu": {
+      "weaponSub": [
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "CHC",
+        "CHD",
+        "SPD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    }
+  },
+  "tamamo-no-mae": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "ACC",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "tamara": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "CHC",
+        "ACC",
+        "EFF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "valentine": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "ATK",
+        "CHC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
+  "veronica": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD",
+        "HP"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Counter": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ATK",
+        "CHC",
+        "CHD",
+        "HP"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Counterattack"
+      ]
+    }
+  },
+  "vlada": {
+    "Atk": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Striker]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Phantasm Necrosis",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Gorgon's Vanity [Striker]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Dancer's Bracelet",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "SPD",
+        "CHC",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Attack"
+      ]
+    },
+    "Revenge": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Striker]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Phantasm Necrosis",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Gorgon's Vanity [Striker]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Dancer's Bracelet",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "SPD",
+        "CHC",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Striker]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Phantasm Necrosis",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Gorgon's Vanity [Striker]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "A Prima Vista",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Dancer's Bracelet",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "ATK",
+        "SPD",
+        "CHC",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  }
+}

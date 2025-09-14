@@ -1,0 +1,207 @@
+{
+  "ID": "2000102",
+  "Fullname": "Omega Nadja",
+  "Rarity": 3,
+  "Element": "Dark",
+  "rank_pvp":"A",
+  "rank":"A",
+  "gift": "Natural Object",
+  "role":"support",
+  "limited":true,
+  "Class": "Defender",
+  "tags":["limited"],
+  "SubClass": "Phalanx",
+  "skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\nAt the start of battle, grants Irregular Infection for 1 turn to the enemy with the highest Speed. (Ignores Immunity, Irremovable)\nIncreases Effectiveness by 40",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\nGrants Action Point by 50 on entry\nIncreases Ally Resilience by 6%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\nWhen Irregular Infection effect triggers, buff / debuff durations are reduced by 2 turns\nIncreases allies' damage against the target inflicted with Irregular Infection by 50%"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Feeding Frenzy",
+      "true_desc": "Attacks an enemy and increases own Priority by <color=#28d9ed>10%</color>. With a <color=#28d9ed>30%</color> chance, reduces the target’s <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn(s)</color>.\\nThis skill’s damage dealt increases proportional to Max Health instead of Attack.",
+      "DescID": "SKILL_DESC_2000102_Skill01_LV1,SKILL_DESC_2000102_Skill01_LV1,SKILL_DESC_2000102_Skill01_LV1,SKILL_DESC_2000102_Skill01_LV1,SKILL_DESC_2000102_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK_UNIQUE_BUFF_2000102",
+      "IconName": "Skill_First_2000102",
+      "NameIDSymbol": "10201",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000102_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases Reduced Speed Chance by 50%",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Grants Irregular Infection to the enemy with the highest Speed for 1 turn (Ignores Immunity, Irremovable)",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases Skill Range (All)\\nGrants Barrier to all allies for 2 turns (Proportional to caster's Health)",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [
+        "BT_STAT|ST_SPEED"
+      ],
+      "description": [
+        "Attacks an enemy and increases own Priority by <color=#28d9ed>[Buff_V_2000102_1_1]</color>. With a <color=#28d9ed>[Buff_C_2000102_1_2]</color> chance, reduces the targetâs <color=#28d9ed>Speed</color> for <color=#28d9ed>[Buff_T_2000102_1_2] turn(s)</color>.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% Priority"
+        ],
+        "4": [
+          "+10% effect chance"
+        ],
+        "5": [
+          "+10% effect chance",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Species Extinction Protocol",
+      "true_desc": "(Passive Effect)\\nReduces Damage Taken by heroes with Barriers.\\n<color=#28d9ed>Reduces Damage Dealt by those inflicted with Irregular Infection</color>, and has an <color=#28d9ed>80%</color> chance to counterattack when hit.\\n\\n(Triggered Effect)\\nOn your turn, attacking a target with <color=#28d9ed>Irregular Infection</color> triggers an additional attack on all enemies. After the additional attack, reduces Priority of the infected target by <color=#28d9ed>50%</color>.\\nThis skill’s damage dealt increases proportional to Max Health instead of Attack.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000102_Skill02_LV1,SKILL_DESC_2000102_Skill02_LV1,SKILL_DESC_2000102_Skill02_LV1,SKILL_DESC_2000102_Skill02_LV4,SKILL_DESC_2000102_Skill02_LV4",
+      "IconName": "Skill_Second_2000102",
+      "NameIDSymbol": "10202",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000102_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "3",
+      "debuff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "description": [
+        "(Passive Effect)\\nReduces Damage Taken by heroes with Barriers.\\n<color=#28d9ed>Reduces Damage Dealt by those inflicted with Irregular Infection</color>, and has an <color=#28d9ed>80%</color> chance to counterattack when hit.\\n\\n(Triggered Effect)\\nOn your turn, attacking a target with <color=#28d9ed>Irregular Infection</color> triggers an additional attack on all enemies. After the additional attack, reduces Priority of the infected target by <color=#28d9ed>50%</color>.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "Increases Counterattack Chance by 20%"
+        ],
+        "5": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "End of Protoform",
+      "true_desc": "Attacks all enemies. With a <color=#28d9ed>100%</color> chance, grants <color=#28d9ed>Taunted</color> to the target for <color=#28d9ed>1 turn(s)</color>, and when attacking a boss, deals Fixed Damage equal to <color=#28d9ed>8%</color> of the boss’ Max Health.\\n\\nThen grants a <color=#28d9ed>Barrier</color> to all heroes for <color=#28d9ed>1 turns</color> and grants <color=#28d9ed>Irregular Infection</color> to the fastest enemy for <color=#28d9ed>1 turns</color>. (Ignores Immunity, Irremovable)\\nThis skill’s damage dealt increases proportional to Max Health instead of Attack.",
+      "DescID": "SKILL_DESC_2000102_Skill03_LV1,SKILL_DESC_2000102_Skill03_LV1,SKILL_DESC_2000102_Skill03_LV1,SKILL_DESC_2000102_Skill03_LV1,SKILL_DESC_2000102_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000102",
+      "NameIDSymbol": "10203",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000102_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_SHIELD_BASED_CASTER"
+        
+        
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_AGGRO",
+        "UNIQUE_IRREGULAR_INFECTION",
+        "IG_Buff_BuffdurationReduce",
+        "BT_FIXED_DAMAGE"
+      ],
+      "description": [
+        "Attacks all enemies. With a <color=#28d9ed>[Buff_C_2000102_3_1]</color> chance, grants <color=#28d9ed>Taunted</color> to the target for <color=#28d9ed>[Buff_T_2000102_3_1] turn(s)</color>, and when attacking a boss, deals Fixed Damage equal to <color=#28d9ed>[Buff_V_2000102_3_4]</color> of the bossâ Max Health.\\n\\nThen grants a <color=#28d9ed>Barrier</color> to all heroes for <color=#28d9ed>[Buff_T_2000102_3_2] turns</color> and grants <color=#28d9ed>Irregular Infection</color> to the fastest enemy for <color=#28d9ed>[Buff_T_2000102_3_3] turns</color>. (Ignores Immunity, Irremovable)\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "Grants Barrier Duration for 1 turn",
+          "+10% damage"
+        ],
+        "5": [
+          "Irregular Infection duration by 1 turn",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Increases caster’s Skill Chain Attack proportional to caster’s Max Health rather Attack and restores Action Point the caster and the next chain skill caster by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Increases caster’s Skill Chain Attack proportional to caster’s Max Health rather Attack and after the attack, has a 50% chance to reduce the target’s Speed for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000102_Skill04_LV1,SKILL_DESC_2000102_Skill04_LV1,SKILL_DESC_2000102_Skill04_LV1,SKILL_DESC_2000102_Skill04_LV1,SKILL_DESC_2000102_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Dark_Join",
+      "NameIDSymbol": "10204",
+      "RangeType": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "TargetTeamType_fallback1": "NONE",
+      "buff": ["BT_AP_CHARGE"],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: Increases caster Skill Chain Attack proportional to casterâs Max Health rather Attack and restores Action Point the caster and the next chain skill caster by <color=#28d9ed>[Buff_V_2000102_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Increases casterâs Skill Chain Attack proportional to casterâs Max Health rather Attack and after the attack, has a [Buff_C_2000102_backup_1_1] chance to reduce the targetâs Speed for <color=#28d9ed>[Buff_T_2000102_backup_1_1] turn(s)</color>."
+      ],
+      "dual_debuff": "BT_STAT|ST_SPEED",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

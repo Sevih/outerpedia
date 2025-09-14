@@ -1,0 +1,92 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Speed", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "ATK>CHC>CHD>SPD",
+    "Note": "PvP:Mage's Charm3\nPvE:Executionner's Charm3Rogue's Charm2",
+    "Talisman": [
+      "Mage's Charm",
+      "Executionner's Charm",
+      "Rogue's Charm"
+    ]
+  },
+  "CritDmg": {
+    "Weapon": [
+      {
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Critical Strike", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "ATK>CHC>CHD>SPD",
+    "Note": "PvP:Mage's Charm3\nPvE:Executionner's Charm3Rogue's Charm2",
+    "Talisman": [
+      "Mage's Charm",
+      "Executionner's Charm",
+      "Rogue's Charm"
+    ]
+  },
+  "Pene": {
+    "Weapon": [
+      {
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Penetration", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "ATK>CHC>CHD>SPD",
+    "Note": "PvP:Mage's Charm3\nPvE:Executionner's Charm3Rogue's Charm2",
+    "Talisman": [
+      "Mage's Charm",
+      "Executionner's Charm",
+      "Rogue's Charm"
+    ]
+  }
+}

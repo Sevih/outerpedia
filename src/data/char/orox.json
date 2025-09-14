@@ -1,0 +1,186 @@
+{
+  "ID": "2000051",
+  "Fullname": "Orox",
+  "Rarity": 1,
+  "Element": "Earth",
+  "gift": "Natural Object",
+  "Class": "Striker",
+  "tags":["ignore-defense"],
+  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+5% Defense\n+1 Chain Passive Weakness Gauge damage ",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n+5% Defense\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Shoulder Tackle",
+      "true_desc": "Attacks all enemies.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Health</color>.",
+      "DescID": "SKILL_DESC_2000051_Skill01_LV1,SKILL_DESC_2000051_Skill01_LV1,SKILL_DESC_2000051_Skill01_LV1,SKILL_DESC_2000051_Skill01_LV1,SKILL_DESC_2000051_Skill01_LV1",
+      "IconName": "Skill_First_2000051",
+      "NameIDSymbol": "5101",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000051_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_STAT|ST_BUFF_RESIST"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases Resilience for 1 turn",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Increases Penetration by 30%",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks all enemies.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Health</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Sturdy Body",
+      "true_desc": "(Passive Effect) When hit, has a <color=#28d9ed>30%</color> chance to reduce the cooldown of <color=#28d9ed>Pressure Festival</color> by <color=#28d9ed>1 turn(s)</color> and increases <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>.",
+      "ApproachTime": "NONE",
+      "DescID": "SKILL_DESC_2000051_Skill02_LV1,SKILL_DESC_2000051_Skill02_LV1,SKILL_DESC_2000051_Skill02_LV1,SKILL_DESC_2000051_Skill02_LV1,SKILL_DESC_2000051_Skill02_LV1",
+      "IconName": "Skill_Second_2000051",
+      "NameIDSymbol": "5102",
+      "RangeType": "NONE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000051_Skill02",
+      "TargetTeamType": "NONE",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": 0,
+      "debuff": [],
+      "description": [
+        "(Passive Effect) When hit, has a <color=#28d9ed>[Buff_C_2000051_2_1]</color> chance to reduce the cooldown of <color=#28d9ed>Pressure Festival</color> by <color=#28d9ed>[Buff_V_2000051_2_2] turn(s)</color> and increases <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000051_2_1]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% effect chance"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% effect chance"
+        ],
+        "5": [
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 0
+    },
+    "SKT_ULTIMATE": {
+      "name": "Pressure Festival",
+      "true_desc": "Attacks all enemies and has a <color=#28d9ed>85%</color> chance to increase the caster's <color=#28d9ed>Resilience</color> for <color=#28d9ed>1 turn(s)</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Health</color>.",
+      "ApproachZ": "CENTER",
+      "DescID": "SKILL_DESC_2000051_Skill03_LV1,SKILL_DESC_2000051_Skill03_LV1,SKILL_DESC_2000051_Skill03_LV1,SKILL_DESC_2000051_Skill03_LV1,SKILL_DESC_2000051_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000051",
+      "NameIDSymbol": "5103",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000051_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_BUFF_RESIST"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies and has a <color=#28d9ed>[Buff_C_2000051_3_1]</color> chance to increase the caster's <color=#28d9ed>Resilience</color> for <color=#28d9ed>[Buff_T_2000051_3_1] turn(s)</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Health</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+20% damage",
+          "+1 turn effect duration"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt is proportional to the caster's <color=#28d9ed>Health</color>.",
+      "DescID": "SKILL_DESC_2000051_Skill04_LV1,SKILL_DESC_2000051_Skill04_LV1,SKILL_DESC_2000051_Skill04_LV1,SKILL_DESC_2000051_Skill04_LV1,SKILL_DESC_2000051_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Join",
+      "NameIDSymbol": "5104",
+      "RangeType": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "TargetTeamType_fallback1": "NONE",
+      "buff": "BT_AP_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster by <color=#28d9ed>[Buff_V_2000051_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt is proportional to the caster's <color=#28d9ed>Health</color>."
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"D",
+  "role":"dps"
+}

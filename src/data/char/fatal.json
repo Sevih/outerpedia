@@ -1,0 +1,197 @@
+{
+  "ID": "2000078",
+  "Fullname": "Fatal",
+  "Rarity": 3,
+  "Element": "Water",
+  "rank_pvp":"D",
+  "gift": "Craftwork",
+  "role": "dps",
+  "Class": "Ranger",
+  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "tags":["ignore-defense"],
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+5% Ally Team Attack\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+5% Ally Team Attack\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Deathly Acrobatics",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>25%</color> chance to grant increased <color=#28d9ed>Attack</color> to the caster for <color=#28d9ed>2 turn(s)</color>.\\nDamage dealt increases when granted <color=#28d9ed>Stealth</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000078_Skill01_LV1,SKILL_DESC_2000078_Skill01_LV1,SKILL_DESC_2000078_Skill01_LV1,SKILL_DESC_2000078_Skill01_LV1,SKILL_DESC_2000078_Skill01_LV1",
+      "IconName": "Skill_First_2000078",
+      "NameIDSymbol": "7801",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000078_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_ATK"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000078_1_1]</color> chance to grant increased <color=#28d9ed>Attack</color> to the caster for <color=#28d9ed>[Buff_T_2000078_1_1] turn(s)</color>.\\nDamage dealt increases when granted <color=#28d9ed>Stealth</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Curtain of Darkness",
+      "true_desc": "Removes <color=#28d9ed>1</color> debuff(s) from the caster and grants increased <color=#28d9ed>Speed</color> for <color=#28d9ed>2 turn(s)</color>, then attacks an enemy. Grants <color=#28d9ed>Stealth</color> to the caster for <color=#28d9ed>1 turn(s)</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000078_Skill02_LV1,SKILL_DESC_2000078_Skill02_LV1,SKILL_DESC_2000078_Skill02_LV1,SKILL_DESC_2000078_Skill02_LV1,SKILL_DESC_2000078_Skill02_LV5",
+      "IconName": "Skill_Second_2000078",
+      "NameIDSymbol": "7802",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000078_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_REMOVE_DEBUFF",
+        "BT_STAT|ST_SPEED",
+        "BT_STEALTHED"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "+1 turn Stealth duration",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Increases Penetration by 30%",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "Removes <color=#28d9ed>[Buff_V_2000078_2_1]</color> debuff(s) from the caster and grants increased <color=#28d9ed>Speed</color> for <color=#28d9ed>[Buff_T_2000078_2_2] turn(s)</color>, then attacks an enemy. Grants <color=#28d9ed>Stealth</color> to the caster for <color=#28d9ed>[Buff_T_2000078_2_3] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "Removes all debuffs from the caster"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Requiem Serket",
+      "true_desc": "Attacks an enemy, and when the enemy is killed, grants an <color=#28d9ed>extra turn</color>. When attacking a Boss, ignores <color=#28d9ed>50%</color> of the target's Defense. When granted <color=#28d9ed>Stealth</color>, enemies killed by this skill cannot be Resurrected or Revived.",
+      "DescID": "SKILL_DESC_2000078_Skill03_LV1,SKILL_DESC_2000078_Skill03_LV1,SKILL_DESC_2000078_Skill03_LV3,SKILL_DESC_2000078_Skill03_LV3,SKILL_DESC_2000078_Skill03_LV5",
+      "IconName": "Skill_Ultimate_2000078",
+      "NameIDSymbol": "7803",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "CAST_DEBUFF",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000078_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ADDITIVE_TURN"
+      ],
+      "cd": "6",
+      "debuff": [
+        "BT_SEALED_RESURRECTION"
+      ],
+      "description": [
+        "Attacks an enemy, and when the enemy is killed, grants an <color=#28d9ed>extra turn</color>. When attacking a Boss, ignores <color=#28d9ed>50%</color> of the target's Defense. When granted <color=#28d9ed>Stealth</color>, enemies killed by this skill cannot be Resurrected or Revived."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+25% ignored Defense"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+20% damage",
+          "+25% ignored Defense"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to grant increased <color=#28d9ed>Attack</color> to all allies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>40%</color> chance to grant increased <color=#28d9ed>Attack</color> to the caster for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000078_Skill04_LV1,SKILL_DESC_2000078_Skill04_LV1,SKILL_DESC_2000078_Skill04_LV1,SKILL_DESC_2000078_Skill04_LV1,SKILL_DESC_2000078_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Finish",
+      "NameIDSymbol": "7804",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_STAT|ST_ATK",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000078_chain_1_1]</color> chance to grant increased <color=#28d9ed>Attack</color> to all allies for <color=#28d9ed>[Buff_T_2000078_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000078_backup_1_1]</color> chance to grant increased <color=#28d9ed>Attack</color> to the caster for <color=#28d9ed>[Buff_T_2000078_backup_1_1] turn(s)</color>."
+      ],
+      "dual_buff": "BT_STAT|ST_ATK",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank": "B"
+}

@@ -1,0 +1,189 @@
+{
+  "ID": "2000013",
+  "Fullname": "Dolly",
+  "Rarity": 2,
+  "Element": "Earth",
+  "rank":"A",
+  "role":"support",
+  "gift": "Natural Object",
+  "Class": "Mage",
+  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "I Sleepwalk",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>30%</color> chance to reduce the target's <color=#28d9ed>Attack</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000013_Skill01_LV1,SKILL_DESC_2000013_Skill01_LV1,SKILL_DESC_2000013_Skill01_LV1,SKILL_DESC_2000013_Skill01_LV1,SKILL_DESC_2000013_Skill01_LV1",
+      "IconName": "Skill_First_2000013",
+      "NameIDSymbol": "1301",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000013_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [
+        "BT_STAT|ST_ATK"
+      ],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000013_1_1]</color> chance to reduce the target's <color=#28d9ed>Attack</color> for <color=#28d9ed>[Buff_T_2000013_1_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+10% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Still Drowsy",
+      "true_desc": "Has a <color=#28d9ed>70%</color> chance to reduce all enemies' <color=#28d9ed>Speed</color> and <color=#28d9ed>Accuracy</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "ApproachFreezeTime_fallback1": "CAST_DEBUFF",
+      "DescID": "SKILL_DESC_2000013_Skill02_LV1,SKILL_DESC_2000013_Skill02_LV1,SKILL_DESC_2000013_Skill02_LV1,SKILL_DESC_2000013_Skill02_LV1,SKILL_DESC_2000013_Skill02_LV1",
+      "IconName": "Skill_Second_2000013",
+      "NameIDSymbol": "1302",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000013_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "4",
+      "debuff": [
+        "BT_STAT|ST_ACCURACY",
+        "BT_STAT|ST_SPEED"
+      ],
+      "description": [
+        "Has a <color=#28d9ed>[Buff_C_2000013_2_1]</color> chance to reduce all enemies' <color=#28d9ed>Speed</color> and <color=#28d9ed>Accuracy</color> for <color=#28d9ed>[Buff_T_2000013_2_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+15% effect chance"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% effect chance"
+        ],
+        "5": [
+          "+1 turn effect duration"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Sweet Dreams",
+      "true_desc": "Attacks all enemies and has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Silenced</color> on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000013_Skill03_LV1,SKILL_DESC_2000013_Skill03_LV1,SKILL_DESC_2000013_Skill03_LV1,SKILL_DESC_2000013_Skill03_LV1,SKILL_DESC_2000013_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000013",
+      "NameIDSymbol": "1303",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000013_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Removes 1 additional buff from the target",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Reduces Sweet Dreams Cooldown by 1 turn",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Removes 1 additional buff from the target",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [
+        "BT_SILENCE","BT_REMOVE_BUFF"
+      ],
+      "description": [
+        "Attacks all enemies and has a <color=#28d9ed>[Buff_C_2000013_3_1]</color> chance to inflict <color=#28d9ed>Silenced</color> on the target for <color=#28d9ed>[Buff_T_2000013_3_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to reduce Attack of the target for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>40%</color> chance to reduce <color=#28d9ed>Attack</color> of the target by <color=#28d9ed>30%</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000013_Skill04_LV1,SKILL_DESC_2000013_Skill04_LV1,SKILL_DESC_2000013_Skill04_LV1,SKILL_DESC_2000013_Skill04_LV1,SKILL_DESC_2000013_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Join",
+      "NameIDSymbol": "1304",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_STAT|ST_ATK",
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000013_chain_1_1]</color> chance to reduce Attack of the target for <color=#28d9ed>[Buff_T_2000013_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000013_backup_1_1]</color> chance to reduce <color=#28d9ed>Attack</color> of the target by <color=#28d9ed>[Buff_V_2000013_backup_1_1]</color> for <color=#28d9ed>[Buff_T_2000013_backup_1_1] turn(s)</color>."
+      ],
+      "dual_debuff": "BT_STAT|ST_ATK",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

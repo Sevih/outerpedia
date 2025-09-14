@@ -1,0 +1,191 @@
+{
+  "ID": "2000057",
+  "Fullname": "Sterope",
+  "Rarity": 3,
+  "Element": "Dark",
+  "role":"support",
+  "gift": "Science",
+  "Class": "Defender",
+  "rank_pvp":"B",
+  "SubClass": "Sweeper","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+2% Ally Team Evasion\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+2% Ally Team Evasion\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Shatter!",
+      "true_desc": "Attacks an enemy. If Sterope had a buff before attacking, activates an additional attack on the same target and grants <color=#28d9ed>Divine Retribution</color>.\\n\\n<color=#28d9ed>Divine Retribution</color>: Increases damage dealt by all allies by <color=#28d9ed>4%</color>. (Max 15 stacks)",
+      "ApproachZ": "0.4,0.4",
+      "DescID": "SKILL_DESC_2000057_Skill01_LV1,SKILL_DESC_2000057_Skill01_LV1,SKILL_DESC_2000057_Skill01_LV1,SKILL_DESC_2000057_Skill01_LV1,SKILL_DESC_2000057_Skill01_LV1",
+      "IconName": "Skill_First_2000057",
+      "NameIDSymbol": "5701",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000057_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_STAT|ST_SPEED"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 60,
+          "effect": "+1 WG damage with additional attacks\\nIncreases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 80,
+          "effect": "Increases Speed for 1 turn",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 120,
+          "effect": "Changes to Enhanced Skill\\n5 Stacks of Divine Retribution",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": ["BT_WG_DMG"],
+      "description": [
+        "Attacks an enemy. If Sterope had a buff before attacking, activates an additional attack on the same target and grants <color=#28d9ed>Divine Retribution</color>.\\n\\n<color=#28d9ed>Divine Retribution</color>: Increases damage dealt by all allies by <color=#28d9ed>[Buff_V_2000057_1_2]</color>. (Max 15 stacks)"
+      ],
+      "enhancement": {
+        "2": [
+          "+5% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Begin the Crusade",
+      "true_desc": "(Passive Effect) At the start of battle, inflicts <color=#28d9ed>Unhealable</color> on all enemies for <color=#28d9ed>3 turn(s)</color>.",
+      "ApproachType": "NONE",
+      "DescID": "SKILL_DESC_2000057_Skill02_LV1,SKILL_DESC_2000057_Skill02_LV2,SKILL_DESC_2000057_Skill02_LV3,SKILL_DESC_2000057_Skill02_LV3,SKILL_DESC_2000057_Skill02_LV3",
+      "IconName": "Skill_Second_2000057",
+      "NameIDSymbol": "5702",
+      "RangeType": "NONE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000057_Skill02",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": 0,
+      "debuff": [
+        "BT_SEALED_RECEIVE_HEAL"
+      ],
+      "description": [
+        "(Passive Effect) At the start of battle, inflicts <color=#28d9ed>Unhealable</color> on all enemies for <color=#28d9ed>[Buff_T_2000057_2_4] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn enemy buff duration"
+        ],
+        "3": [
+          "-10% counterattack damage taken by allies"
+        ],
+        "4": [
+          "-10% counterattack damage taken by allies"
+        ],
+        "5": [
+          "-10% counterattack damage taken by allies"
+        ]
+      },
+      "wgr": 0
+    },
+    "SKT_ULTIMATE": {
+      "name": "Fight Ferociously!",
+      "true_desc": "Grants increased <color=#28d9ed>Accuracy</color> and <color=#28d9ed>Effectiveness</color> to all allies for <color=#28d9ed>2 turn(s)</color> and inflicts <color=#28d9ed>Unhealable</color> on all enemies for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000057_Skill03_LV1,SKILL_DESC_2000057_Skill03_LV2,SKILL_DESC_2000057_Skill03_LV2,SKILL_DESC_2000057_Skill03_LV2,SKILL_DESC_2000057_Skill03_LV2",
+      "IconName": "Skill_Ultimate_2000057",
+      "NameIDSymbol": "5703",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "CAST_BUFF",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000057_Skill03",
+      "TargetTeamType": "ME",
+      "buff": [
+        "BT_STAT|ST_ACCURACY",
+        "BT_STAT|ST_BUFF_CHANCE",
+        "BT_COOL_CHARGE"
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_SEALED_RECEIVE_HEAL"
+      ],
+      "description": [
+        "Grants increased <color=#28d9ed>Accuracy</color> and <color=#28d9ed>Effectiveness</color> to all allies for <color=#28d9ed>[Buff_T_2000057_3_1] turn(s)</color> and inflicts <color=#28d9ed>Unhealable</color> on all enemies for <color=#28d9ed>[Buff_T_2000057_3_4] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn skill cooldowns on allies except caster"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "-1 turn skill cooldowns on allies except caster"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, reduces the skill cooldowns of all allies by <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Health</color>.",
+      "DescID": "SKILL_DESC_2000057_Skill04_LV1,SKILL_DESC_2000057_Skill04_LV1,SKILL_DESC_2000057_Skill04_LV1,SKILL_DESC_2000057_Skill04_LV1,SKILL_DESC_2000057_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Dark_Start",
+      "NameIDSymbol": "5704",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_COOL_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, reduces the skill cooldowns of all allies by <color=#28d9ed>[Buff_V_2000057_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Health</color>."
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"B"
+}

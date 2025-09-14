@@ -1,0 +1,192 @@
+{
+  "ID": "2000066",
+  "Fullname": "Charlotte",
+  "Rarity": 3,
+  "Element": "Earth",
+  "rank_pvp":"A",
+  "role":"support",
+  "gift": "Craftwork",
+  "Class": "Ranger",
+  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+2% Ally Team Accuracy\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Securing the Culprit",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>15%</color> chance to reduce the cooldown of <color=#28d9ed>The Culprit is You!</color> by <color=#28d9ed>1 turn(s)</color>. ",
+      "DescID": "SKILL_DESC_2000066_Skill01_LV1,SKILL_DESC_2000066_Skill01_LV1,SKILL_DESC_2000066_Skill01_LV1,SKILL_DESC_2000066_Skill01_LV1,SKILL_DESC_2000066_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000066",
+      "NameIDSymbol": "6601",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000066_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 60,
+          "effect": "Increases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 90,
+          "effect": "Increases the chance to reduce cooldown by 80%",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 120,
+          "effect": "+3 turns increased Critical Damage on allies",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000066_1_1]</color> chance to reduce the cooldown of <color=#28d9ed>The Culprit is You!</color> by <color=#28d9ed>[Buff_V_2000066_1_1] turn(s)</color>. "
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+5% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Thinking Time",
+      "true_desc": "(Triggered Effect) When an ally uses an attack that targets all enemies, grants increased Attack to all allies for <color=#28d9ed>1 turn(s)</color>, and increases Priority of ally Mages by <color=#28d9ed>10%</color>.",
+      "ApproachType": "NONE",
+      "DescID": "SKILL_DESC_2000066_Skill02_LV1,SKILL_DESC_2000066_Skill02_LV1,SKILL_DESC_2000066_Skill02_LV1,SKILL_DESC_2000066_Skill02_LV1,SKILL_DESC_2000066_Skill02_LV1",
+      "IconName": "Skill_Second_2000066",
+      "NameIDSymbol": "6602",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000066_Skill02",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_STAT|ST_ATK",
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "(Triggered Effect) When an ally uses an attack that targets all enemies, grants increased Attack to all allies for <color=#28d9ed>[Buff_T_2000066_2_2] turn(s)</color>, and increases Priority of ally Mages by <color=#28d9ed>[Buff_V_2000066_2_3]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% Priority"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "-1 turn Skill Cooldown",
+          "+10% Priority"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "The Culprit is You!",
+      "true_desc": "Attacks all enemies without <color=#28d9ed>missing</color>, and grants increased Accuracy to all allies for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000066_Skill03_LV1,SKILL_DESC_2000066_Skill03_LV1,SKILL_DESC_2000066_Skill03_LV3,SKILL_DESC_2000066_Skill03_LV3,SKILL_DESC_2000066_Skill03_LV3",
+      "IconName": "Skill_Ultimate_2000066",
+      "NameIDSymbol": "6603",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000066_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_ACCURACY",
+        "BT_STAT|ST_CRITICAL_RATE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies without <color=#28d9ed>missing</color>, and grants increased Accuracy to all allies for <color=#28d9ed>[Buff_T_2000066_3_2] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+2 turns Increased Critical Hit Chance to all allies"
+        ],
+        "4": [
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "+20% damage",
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to grant increased Attack to all allies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>30%</color>. ",
+      "DescID": "SKILL_DESC_2000066_Skill04_LV1,SKILL_DESC_2000066_Skill04_LV1,SKILL_DESC_2000066_Skill04_LV1,SKILL_DESC_2000066_Skill04_LV1,SKILL_DESC_2000066_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Finish",
+      "NameIDSymbol": "6604",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_STAT|ST_ATK",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000066_chain_1_1]</color> chance to grant increased Attack to all allies for <color=#28d9ed>[Buff_T_2000066_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000066_backup_1_1]</color>. "
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+  ,"rank":"A"
+}

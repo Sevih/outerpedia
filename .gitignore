@@ -1,0 +1,75 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+#vscode
+.vscode
+
+# next.js
+/.next/
+/out/
+/datamine/
+/data/compendium/
+/data/developer-notes/
+/data/official-4-cut-cartoon/
+/data/patchnotes/
+/data/probabilities/
+/data/world-introduction/
+/data/event/
+# Local admin interface – not included in repo
+src/app/admin/
+src/app/api/admin/
+# production
+/build
+/public/sitemap.xml
+/public/sitemaps*
+TODO.md
+/src/data/_allCharacters.json
+convert_to_webp.bat
+commit.sh
+
+# Ignore auto-generated files
+
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.version
+buildouter.sh
+effect-manifest.js
+generateUiManifest.js
+generateBossManifest.js
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+Procedure Ajout d_un perso _.txt
+outerpedia-clean.code-workspace
+
+outerpedia.code-workspace
+src/data/guides/guild-raid/empty.json
+
+scripts/backup-full-to-private.sh

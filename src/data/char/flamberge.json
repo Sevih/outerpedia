@@ -1,0 +1,180 @@
+{
+  "ID": "2000050",
+  "Fullname": "Flamberge",
+  "Rarity": 1,
+  "Element": "Earth",
+  "gift": "Magic Tool",
+  "Class": "Healer",
+  "SubClass": "Reliever","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+5% Health\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n+5% Health\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Like A Fierce Whirlwind",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>30%</color> chance to increase a random ally's <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000050_Skill01_LV1,SKILL_DESC_2000050_Skill01_LV1,SKILL_DESC_2000050_Skill01_LV1,SKILL_DESC_2000050_Skill01_LV1,SKILL_DESC_2000050_Skill01_LV1",
+      "IconName": "Skill_First_2000050",
+      "NameIDSymbol": "5001",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000050_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_SPEED"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000050_1_1]</color> chance to increase a random ally's <color=#28d9ed>Speed</color> for <color=#28d9ed>[Buff_T_2000050_1_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Like A Peaceful Forest",
+      "true_desc": "(Passive Effect) Has a <color=#28d9ed>50%</color> chance to reduce the skill cooldown of <color=#28d9ed>Like a Noble Mountain</color> by <color=#28d9ed>1 turn(s)</color> upon taking a critical hit.",
+      "ApproachTime": "NONE",
+      "DescID": "SKILL_DESC_2000050_Skill02_LV1,SKILL_DESC_2000050_Skill02_LV1,SKILL_DESC_2000050_Skill02_LV1,SKILL_DESC_2000050_Skill02_LV1,SKILL_DESC_2000050_Skill02_LV5",
+      "IconName": "Skill_Second_2000050",
+      "NameIDSymbol": "5002",
+      "RangeType": "ALL",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000050_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": 0,
+      "debuff": [],
+      "description": [
+        "(Passive Effect) Has a <color=#28d9ed>[Buff_C_2000050_2_1]</color> chance to reduce the skill cooldown of <color=#28d9ed>Like a Noble Mountain</color> by <color=#28d9ed>[Buff_V_2000050_2_1] turn(s)</color> upon taking a critical hit."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% effect chance"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+15% effect chance"
+        ],
+        "5": [
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 0
+    },
+    "SKT_ULTIMATE": {
+      "name": "Like A Noble Mountain",
+      "true_desc": "Heals all allies' Health equal to <color=#28d9ed>20%</color> of Flamberge's <color=#28d9ed>Max Health</color>.",
+      "DescID": "SKILL_DESC_2000050_Skill03_LV1,SKILL_DESC_2000050_Skill03_LV1,SKILL_DESC_2000050_Skill03_LV1,SKILL_DESC_2000050_Skill03_LV1,SKILL_DESC_2000050_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000050",
+      "NameIDSymbol": "5003",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "HEAL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000050_Skill03",
+      "TargetTeamType": "TEAM",
+      "buff": ["BT_AP_CHARGE"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases Speed Increase duration by 1 turn",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases Speed for 2 turns",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Target Action Points +50",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "Heals all allies' Health equal to <color=#28d9ed>[Buff_V_2000050_3_1]</color> of Flamberge's <color=#28d9ed>Max Health</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+3% healing"
+        ],
+        "3": [
+          "+3% healing"
+        ],
+        "4": [
+          "+4% healing"
+        ],
+        "5": [
+          "+5% healing"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, gains <color=#28d9ed>15</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Increases <color=#28d9ed>Speed</color> of a random ally for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000050_Skill04_LV1,SKILL_DESC_2000050_Skill04_LV1,SKILL_DESC_2000050_Skill04_LV1,SKILL_DESC_2000050_Skill04_LV1,SKILL_DESC_2000050_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Start",
+      "NameIDSymbol": "5004",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_CP_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, gains <color=#28d9ed>[Buff_V_2000050_chain_1_1]</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Increases <color=#28d9ed>Speed</color> of a random ally for <color=#28d9ed>[Buff_T_2000050_1_1] turn(s)</color>."
+      ],
+      "dual_buff": "BT_STAT|ST_SPEED",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"C",
+  "role":"sustain"
+}

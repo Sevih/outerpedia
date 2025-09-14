@@ -1,0 +1,10 @@
+{
+  "mechanic": {
+    "label":"",
+    "className": "bg-gray-700"
+  },
+  "unit-type": {
+    "label":"Unit Type",
+    "className": "bg-gray-700"
+  }
+}

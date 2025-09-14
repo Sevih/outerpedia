@@ -1,0 +1,193 @@
+{
+  "ID": "2000084",
+  "Fullname": "Monad Eva",
+  "Rarity": 3,
+  "Element": "Light",
+  "gift": "Science",
+  "role":"sustain",
+  "rank_pvp":"S",
+  "tags":["premium"],
+  "Class": "Healer",
+  "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+20% Ally Team Health\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\nWhen using Ticking Clockwork, Changes to Dual Attack with 2 allies",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\nAt the start of battle, seals extra skill of all enemies by 1 turn (Ignores Resilience)\n+25 Action Points at the start of battle"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Ticking Clockwork",
+      "true_desc": "Attacks an enemy. Heals the ally with the lowest Health by <color=#28d9ed>5%</color> of Eva’s Max Health.\\nActivates a <color=#28d9ed>Dual Attack</color> from the ally with the highest Attack.",
+      "DescID": "SKILL_DESC_2000084_Skill01_LV1,SKILL_DESC_2000084_Skill01_LV1,SKILL_DESC_2000084_Skill01_LV1,SKILL_DESC_2000084_Skill01_LV1,SKILL_DESC_2000084_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000084",
+      "NameIDSymbol": "8401",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000084_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_CALL_BACKUP","BT_REMOVE_DEBUFF","BT_REVIVAL","BT_AP_CHARGE"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 70,
+          "effect": "Effects are applied to all allies",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 105,
+          "effect": "+70 Action Points to Target (Excluding the caster)",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 140,
+          "effect": "Changes to Enhanced Skill\\nRemoves all debuffs\\nIncreases Revival duration by 2 turns",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy. Heals the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000084_1_1]</color> of Evaâs Max Health.\\nActivates a <color=#28d9ed>Dual Attack</color> from the ally with the highest Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+2% healing"
+        ],
+        "4": [
+          "+3% healing"
+        ],
+        "5": [
+          "+3% healing",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Time Dilation",
+      "true_desc": "(Passive Effect) Cannot be inflicted with Frozen or Silenced.\\n(Triggered Effect) When an ally is inflicted with a <color=#28d9ed>debuff</color>, activates an <color=#28d9ed>Agile Response</color>.\\nWhen Agile Response is activated, reduces the duration of all <color=#28d9ed>debuff(s)</color> inflicted on allies by <color=#28d9ed>1 turn</color> and inflicts <color=#28d9ed>Seal Extra Skill</color> on all enemies for <color=#28d9ed>1 turn(s)</color>. The enemy's Counterattack, Revenge, and Agile Response cannot activate immediately after using this skill.",
+      "ApproachType": "CAST_BUFF",
+      "DescID": "SKILL_DESC_2000084_Skill02_LV1,SKILL_DESC_2000084_Skill02_LV1,SKILL_DESC_2000084_Skill02_LV3,SKILL_DESC_2000084_Skill02_LV3,SKILL_DESC_2000084_Skill02_LV5",
+      "IconName": "Skill_Second_2000084",
+      "NameIDSymbol": "8402",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000084_Skill02",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "SYS_REVENGE_HEAL"
+      ],
+      "cd": "4",
+      "debuff": [
+        "BT_SEAL_ADDITIVE_ATTACK"
+      ],
+      "description": [
+        "(Passive Effect) Cannot be inflicted with Frozen or Silenced.\\n(Triggered Effect) When an ally is inflicted with a <color=#28d9ed>debuff</color>, activates an <color=#28d9ed>Agile Response</color>.\\nWhen Agile Response is activated, reduces the duration of all <color=#28d9ed>debuff(s)</color> inflicted on allies by <color=#28d9ed>1 turn</color> and inflicts <color=#28d9ed>Seal Extra Skill</color> on all enemies for <color=#28d9ed>[Buff_T_2000084_2_3] turn(s)</color>. The enemy's Counterattack, Revenge, and Agile Response cannot activate immediately after using this skill."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown"
+        ],
+        "3": [
+          "-1 turn debuff durations"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "Enhances Seal Extra Skill (Ignores Resilience)"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Dreaming of You",
+      "true_desc": "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>10%</color> of Eva's Max Health and increases <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000084_Skill03_LV1,SKILL_DESC_2000084_Skill03_LV1,SKILL_DESC_2000084_Skill03_LV1,SKILL_DESC_2000084_Skill03_LV1,SKILL_DESC_2000084_Skill03_LV5",
+      "IconName": "Skill_Ultimate_2000084",
+      "NameIDSymbol": "8403",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "HEAL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000084_Skill03",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_STAT|ST_SPEED",
+        "BT_INVINCIBLE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>[Buff_V_2000084_3_3]</color> of Eva's Max Health and increases <color=#28d9ed>Speed</color> for <color=#28d9ed>[Buff_T_2000084_3_2] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown"
+        ],
+        "3": [
+          "+10% healing"
+        ],
+        "4": [
+          "+10% healing"
+        ],
+        "5": [
+          "+1 turn Increased Speed duration",
+          "+1 turn Invulnerability on allies"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>5</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers the <color=#28d9ed>Health</color> of the ally with the lowest Health by <color=#28d9ed>13%</color> of Eva's Max Health.",
+      "DescID": "SKILL_DESC_2000084_Skill04_LV1,SKILL_DESC_2000084_Skill04_LV1,SKILL_DESC_2000084_Skill04_LV1,SKILL_DESC_2000084_Skill04_LV1,SKILL_DESC_2000084_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Start",
+      "NameIDSymbol": "8404",
+      "RangeType": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "TargetTeamType_fallback1": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_WG_DMG",
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000084_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers the <color=#28d9ed>Health</color> of the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000084_backup_1_1]</color> of Eva's Max Health."
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"S"
+}

@@ -1,0 +1,364 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap');
+
+
+/* Séparation du body et html pour éviter les blocages de couleurs */
+html {
+  padding: 0;
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  color: white;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  /* assombrit l'image */
+  z-index: 0;
+  pointer-events: none;
+}
+
+body {
+  background-image: url('/images/background_compressed.webp');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+}
+
+body.fullscreen-mode {
+  height: 100%;
+  overflow: hidden;
+}
+
+body.fullscreen-mode #__next {
+  height: 100%;
+}
+
+
+body>* {
+  position: relative;
+  z-index: 1;
+}
+
+/* Corriger certains rendus PNG transparents */
+img {
+  image-rendering: auto;
+  background-color: transparent !important;
+}
+
+/* Next.js injecte parfois le style dans des span autour des <img>, on force */
+:global(img) {
+  background-color: transparent !important;
+  image-rendering: auto;
+}
+
+/* Utilitaires perso si besoin */
+.bg-cyan-500-hover:hover {
+  background-color: #06b6d4;
+}
+
+img.buff:not([src*="Interruption"]) {
+  filter: brightness(0) saturate(100%) invert(53%) sepia(97%) saturate(932%) hue-rotate(180deg) brightness(1.2);
+}
+
+img.debuff:not([src*="Interruption"]) {
+  filter: brightness(0) saturate(100%) invert(19%) sepia(100%) saturate(2345%) hue-rotate(-10deg) brightness(102%) contrast(105%);
+}
+
+.text-glow {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+img.geas-icon {
+  filter: brightness(0) saturate(100%);
+}
+
+img.geas-icon.blue {
+  filter: brightness(0) saturate(100%) invert(65%) sepia(85%) saturate(2080%) hue-rotate(175deg) brightness(0.80);
+}
+
+img.geas-icon.red {
+  filter: brightness(0) saturate(100%) invert(19%) sepia(100%) saturate(2345%) hue-rotate(-10deg) brightness(102%) contrast(105%);
+}
+
+
+.tooltip-left .tooltip {
+  left: 0 !important;
+  right: auto !important;
+  transform: none !important;
+  top: 70px;
+}
+
+.tooltip-right .tooltip {
+  right: 0 !important;
+  left: auto !important;
+  transform: none !important;
+  top: 70px;
+}
+
+.tooltip-center .tooltip {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  right: auto !important;
+  top: 70px;
+}
+
+button:hover,
+[role="button"]:hover,
+[onclick]:hover {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.markdown a {
+  color: #f472b6;
+  /* c’est la valeur hex de pink-400 dans Tailwind */
+  text-decoration: none;
+}
+
+.markdown a:hover {
+  text-decoration: underline;
+}
+
+.banner-og {
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+}
+
+.exclusive-equipment-text {
+  display: inline-block;
+  max-width: 30ch;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.custom-text-shadow {
+  text-shadow:
+    1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000;
+}
+
+h1:not(.sr-only),
+.h1_custom {
+  position: relative;
+  font-family: 'Rajdhani';
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  background: url('/images/ui/CM_Desc_Bg.webp') center center / cover no-repeat;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+h1:not(.sr-only)::after,
+.h1_custom::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 12px;
+  background: url('/images/ui/CM_Result_Victory_Bg.webp') center bottom no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+.guide-title {
+  font-family: 'Rajdhani';
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  padding: 0.4rem 1rem;
+  background: url('/images/ui/CM_Desc_Bg.webp') center center / cover no-repeat;
+  border-radius: 8px;
+  opacity: 0.92;
+  position: relative
+}
+
+.guide-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 12px;
+  background: url('/images/ui/CM_Result_Victory_Bg.webp') center bottom no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+.wrapper_carrousel {
+  width: 200px;
+  /* ou plus, selon combien tu veux montrer */
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.wrapper_carrousel_compact {
+  width: 170px;
+  /* ou plus, selon combien tu veux montrer */
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+
+
+.scene {
+  width: 120px;
+  height: 231px;
+  perspective: 150px;
+  position: relative;
+}
+
+.scene .carousel.keen-slider {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  position: absolute;
+  transform: translateZ(-260px);
+  transform-style: preserve-3d;
+}
+
+.carousel__cell {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel__cell .compact{
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.carousel__cell img {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  transition: filter 0.3s ease;
+}
+
+.carousel__cell:not(.is-active) img,
+.carousel__cell:not(.is-active) .overlay-fade {
+  filter: grayscale(80%) blur(2px) brightness(0.8);
+  transition: filter 0.3s ease;
+}
+
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.arrow-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.arrow-button:hover {
+  opacity: 1;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll-offset {
+  scroll-margin-top: 6rem;
+  /* ou adapte selon la hauteur de ton header sticky */
+}
+
+h1.homepage-title {
+  /* all: unset; ← à supprimer */
+  position: relative;
+  font-family: 'Rajdhani';
+  font-size: 2rem !important;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  background: url('/images/ui/CM_Desc_Bg.webp') center center / cover no-repeat;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10;
+  display: inline-block;
+  line-height: 1.2;
+  max-width: 90%;
+}
+
+
+h1.homepage-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 12px;
+  background: url('/images/ui/CM_Result_Victory_Bg.webp') center bottom no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+
+@media (max-width: 728px) {
+  h1.homepage-title.homepage-title-responsive {
+    font-size: 1.25rem !important;
+    padding: 0.75rem 1.25rem !important;
+  }
+
+  h1.homepage-title.homepage-title-responsive::after {
+    height: 8px !important;
+    background-size: 80% !important;
+  }
+}

@@ -1,0 +1,32 @@
+{
+    "ignore-defense": {
+        "label": "Ignores Defense",
+        "image": "/images/ui/tags/ignore-defense.webp",
+        "desc": "These characters have an inherent effect that ignores part of the target's Defense. It can come from skills, Exclusive Equipment, or Transcendence upgrades.",
+        "type": "mechanic"
+    },
+    "premium": {
+        "label": "Premium Units",
+        "image": "/images/ui/tags/premium.webp",
+        "desc": "These characters can only be obtained through special events or Premium banners.",
+        "type": "unit-type"
+    },
+    "limited": {
+        "label": "Limited Units",
+        "image": "/images/ui/tags/limited.webp",
+        "desc": "These characters are time-limited and only available during specific banners.",
+        "type": "unit-type"
+    },
+    "seasonal": {
+        "label": "Seasonal Units",
+        "image": "/images/ui/tags/seasonal.webp",
+        "desc": "These characters are limited and tied to seasonal events like Halloween or Christmas.",
+        "type": "unit-type"
+    },
+    "collab": {
+        "label": "Collab Units",
+        "image": "/images/ui/tags/collab.webp",
+        "desc": "These characters are limited to crossovers events with other franchises. They are the least likely to return.",
+        "type": "unit-type"
+    }
+}

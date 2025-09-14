@@ -1,0 +1,195 @@
+{
+  "ID": "2000033",
+  "Fullname": "Adelie",
+  "Rarity": 2,
+  "Element": "Water",
+  "Class": "Striker",
+  "gift": "Luxury",
+  "SubClass": "Attacker",
+  "tags":["ignore-defense"],
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+4% Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n+4% Critical Damage\n+25 Action Points at battle start"
+  },
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Sardines for Dinner!",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>10%</color> chance to reduce the cooldown of <color=#28d9ed>Aye Aye, Captain!</color> by <color=#28d9ed>1 turn(s)</color>. ",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000033_Skill01_LV1,SKILL_DESC_2000033_Skill01_LV1,SKILL_DESC_2000033_Skill01_LV1,SKILL_DESC_2000033_Skill01_LV1,SKILL_DESC_2000033_Skill01_LV1",
+      "IconName": "Skill_First_2000033",
+      "NameIDSymbol": "3301",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000033_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000033_1_1]</color> chance to reduce the cooldown of <color=#28d9ed>Aye Aye, Captain!</color> by <color=#28d9ed>[Buff_V_2000033_1_1] turn(s)</color>. "
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Savory Squid!",
+      "true_desc": "Attacks all enemies.\\nIf this attack kills an enemy, this skill will not have a cooldown.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000033_Skill02_LV1,SKILL_DESC_2000033_Skill02_LV1,SKILL_DESC_2000033_Skill02_LV1,SKILL_DESC_2000033_Skill02_LV1,SKILL_DESC_2000033_Skill02_LV1",
+      "IconName": "Skill_Second_2000033",
+      "NameIDSymbol": "3302",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000033_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Increases Penetration by 30%",
+          "level": 3
+        }
+      },
+      "cd": "3",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies.\\nIf this attack kills an enemy, this skill will not have a cooldown."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Aye Aye, Captain!",
+      "true_desc": "Attacks all enemies. Increases the caster’s <color=#28d9ed>Attack</color> for <color=#28d9ed>2 turn(s)</color> after using the skill. ",
+      "DescID": "SKILL_DESC_2000033_Skill03_LV1,SKILL_DESC_2000033_Skill03_LV1,SKILL_DESC_2000033_Skill03_LV1,SKILL_DESC_2000033_Skill03_LV1,SKILL_DESC_2000033_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000033",
+      "NameIDSymbol": "3303",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000033_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_ATK"
+      ],
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies. Increases the casterâs <color=#28d9ed>Attack</color> for <color=#28d9ed>[Buff_T_2000033_3_1] turn(s)</color> after using the skill. "
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Action Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: When using a skill after attacking, has a <color=#28d9ed>10%</color> chance to reduce the cooldown of <color=#28d9ed>Aye Aye, Captain!</color> by <color=#28d9ed>1 turn(s)</color>. ",
+      "DescID": "SKILL_DESC_2000033_Skill04_LV1,SKILL_DESC_2000033_Skill04_LV1,SKILL_DESC_2000033_Skill04_LV1,SKILL_DESC_2000033_Skill04_LV1,SKILL_DESC_2000033_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Join",
+      "NameIDSymbol": "3304",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_AP_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>[Buff_V_2000033_chain_1_1]</color> Action Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: When using a skill after attacking, has a <color=#28d9ed>[Buff_C_2000033_backup_1_1]</color> chance to reduce the cooldown of <color=#28d9ed>Aye Aye, Captain!</color> by <color=#28d9ed>[Buff_V_2000033_backup_1_1] turn(s)</color>. "
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank": "C",
+  "role": "dps"
+}

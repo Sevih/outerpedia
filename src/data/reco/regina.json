@@ -1,0 +1,104 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Last Hope",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Fists",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Speed", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "ATK>CHC>CHD>SPD>EVA",
+    "Note": "PvP:Assassin's Charm3\nPvE:Executionner's Charm3Rogue's Charm2",
+    "Talisman": [
+      "Assassin's Charm",
+      "Executionner's Charm",
+      "Rogue's Charm"
+    ]
+  },
+  "CritDmg": {
+    "Weapon": [
+      {
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Last Hope",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Fists",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Critical Strike", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "ATK>CHC>CHD>SPD>EVA",
+    "Note": "PvP:Assassin's Charm3\nPvE:Executionner's Charm3Rogue's Charm2",
+    "Talisman": [
+      "Assassin's Charm",
+      "Executionner's Charm",
+      "Rogue's Charm"
+    ]
+  },
+  "Pene": {
+    "Weapon": [
+      {
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Last Hope",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Fists",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Penetration", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "ATK>CHC>CHD>SPD>EVA",
+    "Note": "PvP:Assassin's Charm3\nPvE:Executionner's Charm3Rogue's Charm2",
+    "Talisman": [
+      "Assassin's Charm",
+      "Executionner's Charm",
+      "Rogue's Charm"
+    ]
+  }
+}

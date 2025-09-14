@@ -1,0 +1,167 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%/HP%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "EFF/HP%"
+      },
+      {
+        "name": "Blue-Gems White Ring",
+        "mainStat": "SPD"
+      }
+    ], 
+    "Set": [
+      [
+        { "name": "Speed", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "EFF>ATK>HP>SPD>ACC",
+    "Note": "",
+    "Talisman": [
+      "Sage's Charm",
+      "Vanguard's Charm"
+    ]
+  },
+  "Swift Counter": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "EFF/HP%"
+      },
+      {
+        "name": "Blue-Gems White Ring",
+        "mainStat": "SPD"
+      }
+    ], 
+    "Set": [
+      [
+        { "name": "Swiftness", "count": 2 },
+        { "name": "Counterattack", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "EFF>ATK>HP>SPD>ACC",
+    "Note": "",
+    "Talisman": [
+      "Sage's Charm",
+      "Vanguard's Charm"
+    ]
+  },
+  "Counterattack": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "EFF/HP%"
+      },
+      {
+        "name": "Blue-Gems White Ring",
+        "mainStat": "SPD"
+      }
+    ], 
+    "Set": [
+      [
+        { "name": "Counterattack", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "EFF>ATK>HP>SPD>ACC",
+    "Note": "",
+    "Talisman": [
+      "Sage's Charm",
+      "Vanguard's Charm"
+    ]
+  },
+  "Revenge": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "EFF/HP%"
+      },
+      {
+        "name": "Blue-Gems White Ring",
+        "mainStat": "SPD"
+      }
+    ], 
+    "Set": [
+      [
+        { "name": "Revenge", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "EFF>ATK>HP>SPD>ACC",
+    "Note": "",
+    "Talisman": [
+      "Sage's Charm",
+      "Vanguard's Charm"
+    ]
+  }
+}

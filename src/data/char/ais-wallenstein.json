@@ -1,0 +1,194 @@
+{
+  "ID": "2000096",
+  "Fullname": "Ais Wallenstein",
+  "Rarity": 3,
+  "Element": "Light",
+  "rank_pvp":"B",
+  "gift": "Natural Object",
+  "role":"dps",
+  "Class": "Striker",
+  "SubClass": "Attacker",
+  "tags":["collab","ignore-defense"],
+  "limited":true,"skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\nAt the start of battle, grants Ariel for 1 turn\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\n+10% Ally Team Defense",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+50% damage dealt to Bosses\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Swift Strike",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>70%</color> chance to reduce skill cooldown of <color=#28d9ed>Gale of Sword Princess</color> by <color=#28d9ed>1 turn(s)</color>. ",
+      "DescID": "SKILL_DESC_2000096_Skill01_LV1,SKILL_DESC_2000096_Skill01_LV1,SKILL_DESC_2000096_Skill01_LV1,SKILL_DESC_2000096_Skill01_LV1,SKILL_DESC_2000096_Skill01_LV1",
+      "IconName": "Skill_First_2000096",
+      "NameIDSymbol": "9601",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000096_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["UNIQUE_ARIEL","BT_ADDITIVE_TURN"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Grants Ariel for 1 turn",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Resets Gale of Sword Princess cooldown",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changes to Enhanced Skill\\nIncreases damage\\nExtra turn",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000096_1_1]</color> chance to reduce skill cooldown of <color=#28d9ed>Gale of Sword Princess</color> by <color=#28d9ed>[Buff_V_2000096_1_1] turn(s)</color>. "
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+15% damage",
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Tempest",
+      "true_desc": "(Passive Effect) Attack and Critical Hit Chance increase proportional to missing Health. (Max <color=#28d9ed>50%</color>)\\nIncreases damage dealt to Bosses by <color=#28d9ed>30%</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000096_Skill02_LV1,SKILL_DESC_2000096_Skill02_LV1,SKILL_DESC_2000096_Skill02_LV1,SKILL_DESC_2000096_Skill02_LV1,SKILL_DESC_2000096_Skill02_LV1",
+      "IconName": "Skill_Second_2000096",
+      "NameIDSymbol": "9602",
+      "RangeType": "NONE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000096_Skill02",
+      "TargetTeamType": "NONE",
+      "buff": [
+        
+      ],
+      "cd": 0,
+      "debuff": [],
+      "description": [
+        "(Passive Effect) Attack and Critical Hit Chance increase proportional to missing Health. (Max <color=#28d9ed>[Buff_V_2000096_2_1]</color>)\\nIncreases damage dealt to Bosses by <color=#28d9ed>[Buff_V_2000096_2_3]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% effect proportional to missing Health"
+        ],
+        "3": [
+          "+10% effect proportional to missing Health"
+        ],
+        "4": [
+          "+15% effect proportional to missing Health"
+        ],
+        "5": [
+          "+15% effect proportional to missing Health",
+          "+20% damage to Bosses"
+        ]
+      },
+      "wgr": 0
+    },
+    "SKT_ULTIMATE": {
+      "name": "Gale of Sword Princess",
+      "true_desc": "Attacks an enemy, and grants <color=#28d9ed>Ariel</color> for <color=#28d9ed>1 turn(s)</color>.\\nBefore attacking, when already granted <color=#28d9ed>Ariel</color>, activates <color=#28d9ed>Lil Rafaga</color> instead.\\n\\n<color=#ffd732>Lil Rafaga</color>: Attacks all enemies. Ignores <color=#28d9ed>30%</color> of the target's Defense.",
+      "DescID": "SKILL_DESC_2000096_Skill03_LV1,SKILL_DESC_2000096_Skill03_LV1,SKILL_DESC_2000096_Skill03_LV1,SKILL_DESC_2000096_Skill03_LV1,SKILL_DESC_2000096_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000096",
+      "NameIDSymbol": "9603",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000096_Skill03",
+      "TargetTeamType": "ENEMY,ENEMY",
+      "buff": [
+        "UNIQUE_ARIEL"
+      ],
+      "cd": "5",
+      "debuff": [
+        
+      ],
+      "description": [
+        "Attacks an enemy, and grants <color=#28d9ed>Ariel</color> for <color=#28d9ed>[Buff_T_2000096_3_1] turn(s)</color>.\\nBefore attacking, when already granted <color=#28d9ed>Ariel</color>, activates <color=#28d9ed>Lil Rafaga</color> instead.\\n\\n<color=#ffd732>Lil Rafaga</color>: Attacks all enemies. Ignores <color=#28d9ed>30%</color> of the target's Defense."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "+20% damage",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Increases Critical Damage of the attack by <color=#28d9ed>30%</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, reduces skill cooldown of <color=#28d9ed>Gale of Sword Princess</color> by <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000096_Skill04_LV1,SKILL_DESC_2000096_Skill04_LV1,SKILL_DESC_2000096_Skill04_LV1,SKILL_DESC_2000096_Skill04_LV1,SKILL_DESC_2000096_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Join",
+      "NameIDSymbol": "9604",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: Increases Critical Damage of the attack by <color=#28d9ed>30%</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, reduces skill cooldown of <color=#28d9ed>Gale of Sword Princess</color> by <color=#28d9ed>[Buff_V_2000096_backup_1_1] turn(s)</color>."
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"C"  
+}

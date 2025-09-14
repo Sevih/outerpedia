@@ -1,0 +1,129 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Fists",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Gorgon's Wrath [Mage]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Dies Irae",
+        "mainStat": "ATK%/SPD"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Speed", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "ATK>SPD>CHC>ACC=EFF>CHD",
+    "Note": "Once his Exclusive Equipment is lv 10 you can ignore the Effecrtiveness",
+    "Talisman": [
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executionner's Charm"
+    ]
+  },
+  "Attack": {
+    "Weapon": [
+      {
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Fists",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Gorgon's Wrath [Mage]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Dies Irae",
+        "mainStat": "ATK%/SPD"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Attack", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "ATK>SPD>CHC>ACC=EFF>CHD",
+    "Note": "Once his Exclusive Equipment is lv 10 you can ignore the Effecrtiveness",
+    "Talisman": [
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executionner's Charm"
+    ]
+  },
+  "Augm Attack": {
+    "Weapon": [
+      {
+        "name": "Thumping Knuckle Dusters",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Fists",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Gorgon's Wrath [Mage]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Dies Irae",
+        "mainStat": "ATK%/SPD"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Attack", "count": 2 },
+        { "name": "Augmentation", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "ATK>SPD>CHC>ACC=EFF>CHD",
+    "Note": "Once his Exclusive Equipment is lv 10 you can ignore the Effecrtiveness",
+    "Talisman": [
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executionner's Charm"
+    ]
+  }
+}

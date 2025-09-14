@@ -1,0 +1,202 @@
+{
+  "ID": "2000105",
+  "Fullname": "Fran",
+  "Rarity": 3,
+  "Element": "Earth",
+  "skill_priority": {
+    "First": 3,
+    "Second": 2,
+    "Ultimate": 1
+  },
+  "limited": null,
+  "role": "support",
+  "gift": "Luxury",
+  "rank": "A",
+  "rank_pvp": "C",
+  "Class": "Ranger",
+  "SubClass": "Tactician",
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+2% Ally Team Accuracy\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Surefire Headshot",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>85%</color> chance to increase the Priority Gauge of the ally with the highest Max Health by <color=#28d9ed>10%</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000105_Skill01_LV1,SKILL_DESC_2000105_Skill01_LV1,SKILL_DESC_2000105_Skill01_LV1,SKILL_DESC_2000105_Skill01_LV1,SKILL_DESC_2000105_Skill01_LV1",
+      "IconName": "Skill_First_2000105",
+      "NameIDSymbol": "10501",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000105_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 60,
+          "effect": "Increases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 90,
+          "effect": "Inflicts reduced Defense on the target for 2 turns",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 120,
+          "effect": "Changes to Enhanced Skill\nEnhanced Reduced Defense\n(Ignores Resilience)",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": ["BT_STAT|ST_DEF"],
+      "description": [
+        "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000105_1_1]</color> chance to increase the Priority Gauge of the ally with the highest Max Health by <color=#28d9ed>[Buff_V_2000105_1_1]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% Priority"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Dopamine Boost",
+      "true_desc": "Attacks an enemy, and increases all allies' <color=#28d9ed>Accuracy</color> and <color=#28d9ed>Effectiveness</color> for <color=#28d9ed>2 turn(s)</color>.\nAfter attacking, increases the Priority Gauge of the ally with the highest Max Health by <color=#28d9ed>20%</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000105_Skill02_LV1,SKILL_DESC_2000105_Skill02_LV1,SKILL_DESC_2000105_Skill02_LV1,SKILL_DESC_2000105_Skill02_LV1,SKILL_DESC_2000105_Skill02_LV1",
+      "IconName": "Skill_Second_2000105",
+      "NameIDSymbol": "10502",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000105_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_ACCURACY",
+        "BT_STAT|ST_BUFF_CHANCE",
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "Attacks an enemy, and increases all allies' <color=#28d9ed>Accuracy</color> and <color=#28d9ed>Effectiveness</color> for <color=#28d9ed>[Buff_T_2000105_2_1] turn(s)</color>.\\nAfter attacking, increases the Priority Gauge of the ally with the highest Max Health by <color=#28d9ed>[Buff_V_2000105_2_3]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "+1 turn effect duration"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Hidden Event",
+      "true_desc": "Attacks an enemy, and grants all allies <color=#28d9ed>Counterattack</color> and <color=#28d9ed>Barrier</color> for <color=#28d9ed>1 turn(s)</color>. Barrier Strength increases based on the target's Max Health.\nAfter attacking, reduces all of the target’s <color=#28d9ed>Unique Resource</color>. (Ignores the target’s Resilience and Immunity)",
+      "DescID": "SKILL_DESC_2000105_Skill03_LV1,SKILL_DESC_2000105_Skill03_LV1,SKILL_DESC_2000105_Skill03_LV1,SKILL_DESC_2000105_Skill03_LV1,SKILL_DESC_2000105_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000105",
+      "NameIDSymbol": "10503",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000105_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_COUNTER_RATE","BT_SHIELD_BASED_CASTER"
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_RESOURCE_DOWN"
+      ],
+      "description": [
+        "Attacks an enemy, and grants all allies <color=#28d9ed>Counterattack</color> and <color=#28d9ed>Barrier</color> for <color=#28d9ed>[Buff_T_2000105_3_1] turn(s)</color>. Barrier Strength increases based on the target's Max Health.\\nAfter attacking, reduces all of the targetâs <color=#28d9ed>Unique Resource</color>. (Ignores the targetâs Resilience and Immunity)"
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "Enhances barrier strength",
+          "+1 turn effect duration"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, deals Fixed Damage equal to <color=#28d9ed>8%</color> of the target's Max Health.\n\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases the Priority Gauge of the ally with the highest Max Health by <color=#28d9ed>20%</color>.",
+      "DescID": "SKILL_DESC_2000105_Skill04_LV1,SKILL_DESC_2000105_Skill04_LV1,SKILL_DESC_2000105_Skill04_LV1,SKILL_DESC_2000105_Skill04_LV1,SKILL_DESC_2000105_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Start",
+      "NameIDSymbol": "10504",
+      "RangeType": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "TargetTeamType_fallback1": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_FIXED_DAMAGE",
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, deals Fixed Damage equal to <color=#28d9ed>[Buff_V_2000105_chain_1_1]</color> of the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases the Priority Gauge of the ally with the highest Max Health by <color=#28d9ed>[Buff_V_2000105_backup_1_1]</color>."
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

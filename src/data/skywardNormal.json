@@ -1,0 +1,22 @@
+[
+  {
+    "floor": 100,
+    "boss": { "name": "Sigma", "image": ["2000052_E"] },
+    "note": [
+      { "type": "p", "string": "Need Immunity or Cleanse." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "No Debuff Team",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          ["Astei", "Nella", "Dianne","Tio","Monad Eva","Stella"],
+          ["Demiurge Stella"],
+          ["Valentine"],
+          ["Aer"]
+        ]
+       
+      }
+    }
+  }
+]

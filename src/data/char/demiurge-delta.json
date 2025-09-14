@@ -1,0 +1,195 @@
+{
+  "ID": "2000100",
+  "Fullname": "Demiurge Delta",
+  "Rarity": 3,
+  "Element": "Dark",
+  "role":"sustain",
+  "gift": "Science",
+  "rank_pvp":"S",
+  "tags":["premium"],
+  "Class": "Healer",
+  "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+40% caster's Priority when an ally resists an effect (Effects applied at the start of battle excluded, only once per turn)\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\n+25 Action Points at battle start\n+10 Ally Speed",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\nWhen using Code: Reverse, grants Ether Boost to Dark heroes except Healers for 1 turn\nAt the start of battle, grants increased Resilience to all allies for 1 turn (Irremovable) "
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Code: Purifier",
+      "true_desc": "Attacks an enemy. Increases Priority of the ally with the lowest Health by <color=#28d9ed>10%</color>, and recovers Health by <color=#28d9ed>5%</color> of Delta's Max Health.",
+      "DescID": "SKILL_DESC_2000100_Skill01_LV1,SKILL_DESC_2000100_Skill01_LV1,SKILL_DESC_2000100_Skill01_LV1,SKILL_DESC_2000100_Skill01_LV1,SKILL_DESC_2000100_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000100",
+      "NameIDSymbol": "10001",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000100_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE","BT_REMOVE_DEBUFF","BT_STAT|ST_BUFF_RESIST","BT_AP_CHARGE","BT_COOL_CHARGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 60,
+          "effect": "Increases Action Points of ally healing target by 70",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 90,
+          "effect": "Grants increased Resilience to ally healing target for 2 turns",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 120,
+          "effect": "Resets cooldown of ally healing target",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy. Increases Priority of the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000100_1_1]</color>, and recovers Health by <color=#28d9ed>[Buff_V_2000100_1_2]</color> of Delta's Max Health."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% healing"
+        ],
+        "4": [
+          "+10% Priority"
+        ],
+        "5": [
+          "+5% healing",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Code: Icarus",
+      "true_desc": "Removes 2 debuffs from the ally target, and recovers the target's Health by <color=#28d9ed>40%</color> of Delta's Max Health. Then, increases Priority of the ally target by <color=#28d9ed>40%</color>.",
+      "ApproachType": "CAST_BUFF",
+      "DescID": "SKILL_DESC_2000100_Skill02_LV1,SKILL_DESC_2000100_Skill02_LV1,SKILL_DESC_2000100_Skill02_LV1,SKILL_DESC_2000100_Skill02_LV1,SKILL_DESC_2000100_Skill02_LV5",
+      "IconName": "Skill_Second_2000100",
+      "NameIDSymbol": "10002",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000100_Skill02",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_REMOVE_DEBUFF",
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": "3",
+      "debuff": [],
+      "description": [
+        "Removes 2 debuffs from the ally target, and recovers the target's Health by <color=#28d9ed>[Buff_V_2000100_2_2]</color> of Delta's Max Health. Then, increases Priority of the ally target by <color=#28d9ed>[Buff_V_2000100_2_3]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+15% Priority"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% Priority"
+        ],
+        "5": [
+          "Removes all debuffs"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Code: Reverse",
+      "true_desc": "Recovers Health of all allies by <color=#28d9ed>20%</color> of Delta's Max Health, and grants <color=#28d9ed>Revival</color> for <color=#28d9ed>1 turn(s)</color>. Then, grants <color=#28d9ed>Ether Boost</color> to the ally with the highest Attack for <color=#28d9ed>1 turn(s)</color>. <color=#28d9ed>Ether Boost</COLOR> cannot be granted to Healers.",
+      "DescID": "SKILL_DESC_2000100_Skill03_LV1,SKILL_DESC_2000100_Skill03_LV1,SKILL_DESC_2000100_Skill03_LV1,SKILL_DESC_2000100_Skill03_LV1,SKILL_DESC_2000100_Skill03_LV5",
+      "IconName": "Skill_Ultimate_2000100",
+      "NameIDSymbol": "10003",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "CAST_BUFF",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000100_Skill03",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_REVIVAL",
+        "BT_ADDITIVE_TURN",
+        "UNIQUE_ETHER_BOOST"
+      ],
+      "cd": "5",
+      "debuff": [
+      ],
+      "description": [
+        "Recovers Health of all allies by <color=#28d9ed>[Buff_V_2000100_3_1]</color> of Delta's Max Health, and grants <color=#28d9ed>Revival</color> for <color=#28d9ed>[Buff_T_2000100_3_2] turn(s)</color>. Then, grants <color=#28d9ed>Ether Boost</color> to the ally with the highest Attack for <color=#28d9ed>[Buff_T_2000100_3_3] turn(s)</color>. <color=#28d9ed>Ether Boost</COLOR> cannot be granted to Healers."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% healing"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% healing"
+        ],
+        "5": [
+          "Grants an extra turn"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>5</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers Health of the ally with the lowest Health by <color=#28d9ed>15%</color> of Delta's Max Health.",
+      "DescID": "SKILL_DESC_2000100_Skill04_LV1,SKILL_DESC_2000100_Skill04_LV1,SKILL_DESC_2000100_Skill04_LV1,SKILL_DESC_2000100_Skill04_LV1,SKILL_DESC_2000100_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Dark_Finish",
+      "NameIDSymbol": "10004",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_WG_DMG",
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000100_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers Health of the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000100_backup_1_1]</color> of Delta's Max Health."
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"B"
+}

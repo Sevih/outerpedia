@@ -1,0 +1,197 @@
+{
+  "ID": "2000077",
+  "Fullname": "Kappa",
+  "Rarity": 3,
+  "Element": "Earth",
+  "gift": "Science",
+  "role":"support",
+  "rank_pvp":"B",
+  "Class": "Defender",
+  "tags":["ignore-defense"],
+  "SubClass": "Sweeper","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+2% Ally Team Evasion\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+2% Ally Team Evasion\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Ruthless Onslaught",
+      "true_desc": "Attacks an enemy, and grants a <color=#28d9ed>barrier</color> to the caster for <color=#28d9ed>1 turn(s)</color> proportional to the caster's Defense.\\nDamage dealt increases proportional to Defense instead of Attack.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000077_Skill01_LV1,SKILL_DESC_2000077_Skill01_LV1,SKILL_DESC_2000077_Skill01_LV1,SKILL_DESC_2000077_Skill01_LV1,SKILL_DESC_2000077_Skill01_LV1",
+      "IconName": "Skill_First_2000077",
+      "NameIDSymbol": "7701",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000077_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_SHIELD_BASED_CASTER"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Grants barrier to all allies (proportional to Defense)",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "After attacking, activates Exile",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\nPenetration increased.",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy, and grants a <color=#28d9ed>barrier</color> to the caster for <color=#28d9ed>[Buff_T_2000077_1_1] turn(s)</color> proportional to the caster's Defense.\\nDamage dealt increases proportional to Defense instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "+10% damage",
+          "Enhances barrier strength"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Exile",
+      "true_desc": "(Triggered Effect) Grants increased Defense to all allies for <color=#28d9ed>1 turn(s)</color>, then attacks all enemies. <color=#28d9ed>Water</color> enemies take additional fixed damage equal to Kappa's Defense.\\nDamage dealt increases proportional to Defense instead of Attack.",
+      "ApproachType": "ATTACK",
+      "ApproachZ": "CENTER",
+      "DescID": "SKILL_DESC_2000077_Skill02_LV1,SKILL_DESC_2000077_Skill02_LV1,SKILL_DESC_2000077_Skill02_LV1,SKILL_DESC_2000077_Skill02_LV1,SKILL_DESC_2000077_Skill02_LV5",
+      "IconName": "Skill_Second_2000077",
+      "NameIDSymbol": "7702",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000077_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_DEF"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "(Triggered Effect) Grants increased Defense to all allies for <color=#28d9ed>[Buff_T_2000077_2_5] turn(s)</color>, then attacks all enemies. <color=#28d9ed>Water</color> enemies take additional fixed damage equal to Kappa's Defense.\\nDamage dealt increases proportional to Defense instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+1 turn effect duration"
+        ],
+        "4": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "Damage dealt increases proportional to target's missing Health"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Desert's Wrath",
+      "true_desc": "Removes <color=#28d9ed>all</color> buffs and debuffs from the caster and target, and attacks an enemy.\\nWhen the enemy is <color=#28d9ed>Water</color> element or <color=#28d9ed>killed</color>, activates <color=#28d9ed>Exile</color>.\\nDamage dealt greatly increases proportional to Defense instead of Attack.",
+      "DescID": "SKILL_DESC_2000077_Skill03_LV1,SKILL_DESC_2000077_Skill03_LV1,SKILL_DESC_2000077_Skill03_LV3,SKILL_DESC_2000077_Skill03_LV3,SKILL_DESC_2000077_Skill03_LV5",
+      "IconName": "Skill_Ultimate_2000077",
+      "NameIDSymbol": "7703",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000077_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_REMOVE_DEBUFF"
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_REMOVE_BUFF"
+      ],
+      "description": [
+        "Removes <color=#28d9ed>all</color> buffs and debuffs from the caster and target, and attacks an enemy.\\nWhen the enemy is <color=#28d9ed>Water</color> element or <color=#28d9ed>killed</color>, activates <color=#28d9ed>Exile</color>.\\nDamage dealt greatly increases proportional to Defense instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "Enhances Buff Removal (Ignores Resilience)"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "Damage dealt increases proportional to target's missing Health",
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Skill Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Defense</color> instead of Attack, and after attacking, grants increased <color=#28d9ed>Defense</color> for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
+      "DescID": "SKILL_DESC_2000077_Skill04_LV1,SKILL_DESC_2000077_Skill04_LV1,SKILL_DESC_2000077_Skill04_LV1,SKILL_DESC_2000077_Skill04_LV1,SKILL_DESC_2000077_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Join",
+      "NameIDSymbol": "7704",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_STAT|ST_DEF",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Skill Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Defense</color> instead of Attack, and after attacking, grants increased <color=#28d9ed>Defense</color> for <color=#28d9ed>[Buff_T_2000077_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

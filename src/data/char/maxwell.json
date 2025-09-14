@@ -1,0 +1,191 @@
+{
+  "ID": "2000028",
+  "Fullname": "Maxwell",
+  "Rarity": 3,
+  "Element": "Dark",
+  "rank_pvp":"C",
+  "Class": "Mage",
+  "gift": "Magic Tool",
+  "role":"dps",
+  "tags":["ignore-defense"],
+  "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+3% Ally Team Critical Hit Chance\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+3% Ally Team Critical Hit Chance\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Ray of Destruction",
+      "true_desc": "Attacks all enemies and increases <color=#28d9ed>Attack</color> for <color=#28d9ed>1 turn(s)</color>. The damage dealt is inversely proportional to the number of targets. If it is the caster's turn, obtains <color=#28d9ed>1</color> <color=#28d9ed>Revelation of Truth (Unique Resource)</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000028_Skill01_LV1,SKILL_DESC_2000028_Skill01_LV1,SKILL_DESC_2000028_Skill01_LV1,SKILL_DESC_2000028_Skill01_LV1,SKILL_DESC_2000028_Skill01_LV1",
+      "IconName": "Skill_First_2000028",
+      "NameIDSymbol": "2801",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000028_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_ATK"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks all enemies and increases <color=#28d9ed>Attack</color> for <color=#28d9ed>[Buff_T_2000028_1_2] turn(s)</color>. The damage dealt is inversely proportional to the number of targets. If it is the caster's turn, obtains <color=#28d9ed>[Buff_V_2000028_1_1]</color> <color=#28d9ed>Revelation of Truth (Unique Resource)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+1 Revelation of Truth",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+1 turn effect duration"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Mana Converter",
+      "true_desc": "Attacks all enemies and reduces the duration of <color=#28d9ed>buffs</color> on each target that took damage by <color=#28d9ed>1 turn</color>. Obtains <color=#28d9ed>2</color> <color=#28d9ed>Revelation of Truth (Unique Resource)</color> if used during the caster's turn. The damage dealt is inversely proportional to the number of targets.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000028_Skill02_LV1,SKILL_DESC_2000028_Skill02_LV1,SKILL_DESC_2000028_Skill02_LV1,SKILL_DESC_2000028_Skill02_LV1,SKILL_DESC_2000028_Skill02_LV1",
+      "IconName": "Skill_Second_2000028",
+      "NameIDSymbol": "2802",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000028_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_INVINCIBLE"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Gains 2 additional Revelation of Truth\\nIncreases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\nIncreases Invulnerability duration by 1 turn",
+          "level": 3
+        }
+      },
+      "cd": "5",
+      "debuff": ["IG_Buff_BuffdurationReduce"],
+      "description": [
+        "Attacks all enemies and reduces the duration of <color=#28d9ed>buffs</color> on each target that took damage by <color=#28d9ed>1 turn</color>. Obtains <color=#28d9ed>[Buff_V_2000028_2_1]</color> <color=#28d9ed>Revelation of Truth (Unique Resource)</color> if used during the caster's turn. The damage dealt is inversely proportional to the number of targets."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+1 Revelation of Truth",
+          "+15% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Bless All Mages",
+      "true_desc": "<color=#28d9ed>Requires 5 Revelations of Truth (Unique Resource) to be used.</color>\\nAttacks all enemies. Damage dealt is inversely proportional to the number of targets. This attack penetrates <color=#28d9ed>30%</color> of the target's Defense.",
+      "DescID": "SKILL_DESC_2000028_Skill03_LV1,SKILL_DESC_2000028_Skill03_LV1,SKILL_DESC_2000028_Skill03_LV1,SKILL_DESC_2000028_Skill03_LV1,SKILL_DESC_2000028_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000028",
+      "NameIDSymbol": "2803",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000028_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#28d9ed>Requires [Buff_V_2000028_3_1] Revelations of Truth (Unique Resource) to be used.</color>\\nAttacks all enemies. Damage dealt is inversely proportional to the number of targets. This attack penetrates <color=#28d9ed>30%</color> of the target's Defense."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster and the next Skill Chain caster by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, grants increased <color=#28d9ed>Attack</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000028_Skill04_LV1,SKILL_DESC_2000028_Skill04_LV1,SKILL_DESC_2000028_Skill04_LV1,SKILL_DESC_2000028_Skill04_LV1,SKILL_DESC_2000028_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Dark_Join",
+      "NameIDSymbol": "2804",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": ["BT_AP_CHARGE"],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster and the next Skill Chain caster by <color=#28d9ed>[Buff_V_2000028_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, grants increased <color=#28d9ed>Attack</color> for <color=#28d9ed>[Buff_T_2000028_backup_1_1] turn(s)</color>."
+      ],
+      "dual_buff": "BT_STAT|ST_ATK",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"S"
+}

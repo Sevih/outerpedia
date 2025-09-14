@@ -1,0 +1,189 @@
+{
+  "ID": "2000004",
+  "Fullname": "Iris",
+  "Rarity": 2,
+  "Element": "Fire",
+  "rank":"B",
+  "gift": "Magic Tool",
+  "role":"dps",
+  "Class": "Mage",
+  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n +3% Effectiveness\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n +3% Effectiveness\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Twin Fireball",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>50%</color> chance to inflict <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "ApproachFreezeTime_fallback1": "ATTACK",
+      "ApproachZ": "2.8",
+      "DescID": "SKILL_DESC_2000004_Skill01_LV1,SKILL_DESC_2000004_Skill01_LV1,SKILL_DESC_2000004_Skill01_LV1,SKILL_DESC_2000004_Skill01_LV1,SKILL_DESC_2000004_Skill01_LV1",
+      "IconName": "Skill_First_2000004",
+      "NameIDSymbol": "401",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000004_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [
+        "BT_DOT_BURN"
+      ],
+      "description": [
+        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000004_1_1]</color> chance to inflict <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>[Buff_T_2000004_1_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+10% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Flame Blast",
+      "true_desc": "Attacks all enemies. Has a <color=#28d9ed>35%</color> chance to inflict <color=#28d9ed>Burned</color> 2 times on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "ApproachTime": "ATTACK",
+      "ApproachZ": "0.1",
+      "DescID": "SKILL_DESC_2000004_Skill02_LV1,SKILL_DESC_2000004_Skill02_LV1,SKILL_DESC_2000004_Skill02_LV1,SKILL_DESC_2000004_Skill02_LV1,SKILL_DESC_2000004_Skill02_LV1",
+      "IconName": "Skill_Second_2000004",
+      "NameIDSymbol": "402",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000004_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_ADDITIVE_TURN"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 100,
+          "effect": "Gains an extra turn",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 150,
+          "effect": "Burned Chance +10%",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 200,
+          "effect": "Increases damage (Burned targets)",
+          "level": 3
+        }
+      },
+      "cd": "3",
+      "debuff": [
+        "BT_DOT_BURN"
+      ],
+      "description": [
+        "Attacks all enemies. Has a <color=#28d9ed>[Buff_C_2000004_2_1]</color> chance to inflict <color=#28d9ed>Burned</color> 2 times on the target for <color=#28d9ed>[Buff_T_2000004_2_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+10% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Elemental Burst",
+      "true_desc": "Attacks all enemies.\\nDeals increased damage if the target is inflicted with <color=#28d9ed>Burned</color>.",
+      "DescID": "SKILL_DESC_2000004_Skill03_LV1,SKILL_DESC_2000004_Skill03_LV1,SKILL_DESC_2000004_Skill03_LV1,SKILL_DESC_2000004_Skill03_LV1,SKILL_DESC_2000004_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000004",
+      "NameIDSymbol": "403",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "BURN",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000004_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "3",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies.\\nDeals increased damage if the target is inflicted with <color=#28d9ed>Burned</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict <color=#28d9ed>Burned</color> on all enemies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000004_Skill04_LV1,SKILL_DESC_2000004_Skill04_LV1,SKILL_DESC_2000004_Skill04_LV1,SKILL_DESC_2000004_Skill04_LV1,SKILL_DESC_2000004_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Fire_Join",
+      "NameIDSymbol": "404",
+      "RangeType": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "TargetTeamType_fallback1": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_DOT_BURN",
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000004_chain_1_1]</color> chance to inflict <color=#28d9ed>Burned</color> on all enemies for <color=#28d9ed>[Buff_T_2000004_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000004_backup_1_1]</color> chance to inflict <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>[Buff_T_2000004_backup_1_1] turn(s)</color>."
+      ],
+      "dual_debuff": "BT_DOT_BURN",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

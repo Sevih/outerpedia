@@ -1,0 +1,197 @@
+{
+  "ID": "2000056",
+  "Fullname": "Notia",
+  "Rarity": 3,
+  "Element": "Earth",
+  "rank_pvp":"A",
+  "gift": "Natural Object",
+  "role":"dps",
+  "Class": "Ranger",
+  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+5% Ally Team Attack\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+5% Ally Team Attack\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Nimble Dance",
+      "true_desc": "Attacks an enemy and increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>10%</color>.\\nIf the caster has <color=#28d9ed>Fierce Offensive</color>, the effect is applied to <color=#28d9ed>all allies</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000056_Skill01_LV1,SKILL_DESC_2000056_Skill01_LV1,SKILL_DESC_2000056_Skill01_LV1,SKILL_DESC_2000056_Skill01_LV1,SKILL_DESC_2000056_Skill01_LV1",
+      "IconName": "Skill_First_2000056",
+      "NameIDSymbol": "5601",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000056_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE","UNIQUE_FIERCE_OFFENSIVE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "+1 turn Fierce Offensive\\n+2 turns of Poisoned on target",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changes to Enhanced Skill\\nTargets all enemies and increases damage dealt",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": ["BT_DOT_POISON"],
+      "description": [
+        "Attacks an enemy and increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000056_1_1]</color>.\\nIf the caster has <color=#28d9ed>Fierce Offensive</color>, the effect is applied to <color=#28d9ed>all allies</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% Priority",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+5% Priority"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Swift Support",
+      "true_desc": "(Triggered Effect) Activates <color=#28d9ed>Crystal Storm</color> when an ally lands a debuff on their turn.\\n\\n<color=#28d9ed>Crystal Storm</color>: Attacks all enemies, and inflicts reduced <color=#28d9ed>Attack</color> on all targets for <color=#28d9ed>1 turn(s)</color>.\\nIf the caster has <color=#28d9ed>Fierce Offensive</color>, inflicts <color=#28d9ed>Poisoned</color> on all enemies for <color=#28d9ed>1 turn(s)</color>. If the target is a <color=#28d9ed>Healer</color>, additionally inflicts <color=#28d9ed>Silenced</color>.",
+      "ApproachTime": "ATTACK",
+      "ApproachZ": "1.4",
+      "DescID": "SKILL_DESC_2000056_Skill02_LV1,SKILL_DESC_2000056_Skill02_LV1,SKILL_DESC_2000056_Skill02_LV1,SKILL_DESC_2000056_Skill02_LV1,SKILL_DESC_2000056_Skill02_LV1",
+      "IconName": "Skill_Second_2000056",
+      "NameIDSymbol": "5602",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000056_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "4",
+      "debuff": [
+        "BT_SILENCE",
+        "BT_DOT_POISON",
+        "BT_STAT|ST_ATK"
+      ],
+      "description": [
+        "(Triggered Effect) Activates <color=#28d9ed>Crystal Storm</color> when an ally lands a debuff on their turn.\\n\\n<color=#28d9ed>Crystal Storm</color>: Attacks all enemies, and inflicts reduced <color=#28d9ed>Attack</color> on all targets for <color=#28d9ed>[Buff_T_2000056_2_2] turn(s)</color>.\\nIf the caster has <color=#28d9ed>Fierce Offensive</color>, inflicts <color=#28d9ed>Poisoned</color> on all enemies for <color=#28d9ed>[Buff_T_2000056_2_2] turn(s)</color>. If the target is a <color=#28d9ed>Healer</color>, additionally inflicts <color=#28d9ed>Silenced</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+1 turn effect duration"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "-1 turn Skill Cooldown",
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Crystalline Waltz",
+      "true_desc": "Attacks all enemies. After attacking, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>30%</color>, and grants <color=#28d9ed>Fierce Offensive</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000056_Skill03_LV1,SKILL_DESC_2000056_Skill03_LV1,SKILL_DESC_2000056_Skill03_LV1,SKILL_DESC_2000056_Skill03_LV1,SKILL_DESC_2000056_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000056",
+      "NameIDSymbol": "5603",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000056_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "UNIQUE_FIERCE_OFFENSIVE",
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies. After attacking, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000056_3_2]</color>, and grants <color=#28d9ed>Fierce Offensive</color> for <color=#28d9ed>[Buff_T_2000056_3_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+1 turn effect duration",
+          "+15% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster and the next Skill Chain caster by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>20%</color>.",
+      "DescID": "SKILL_DESC_2000056_Skill04_LV1,SKILL_DESC_2000056_Skill04_LV1,SKILL_DESC_2000056_Skill04_LV1,SKILL_DESC_2000056_Skill04_LV1,SKILL_DESC_2000056_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Join",
+      "NameIDSymbol": "5604",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": ["BT_AP_CHARGE"],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster and the next Skill Chain caster by <color=#28d9ed>[Buff_V_2000056_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000056_backup_1_1]</color>."
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"B"
+}

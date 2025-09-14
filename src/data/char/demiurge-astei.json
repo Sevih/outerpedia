@@ -1,0 +1,190 @@
+{
+  "ID": "2000059",
+  "Fullname": "Demiurge Astei",
+  "Rarity": 3,
+  "Element": "Dark",
+  "rank_pvp":"S",  
+  "gift": "Science",
+  "Class": "Mage",
+  "tags":["premium","ignore-defense"],
+  "role":"dps",
+  "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+6% Ally Critical Hit Chance\n+25 Action Points at the start of battle\n+1 Chain Passive Weakness Gauge reduction",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\n+25 Action Points at battle start",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\nIncreases all attack damage (Proportional to target's Max Health)"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "The Gods in Heaven",
+      "true_desc": "Attacks an enemy. \\nIf the caster has <color=#28d9ed>Doll Garden's Caretaker</color>, activates an <color=#28d9ed>enhanced attack</color>.",
+      "ApproachZ": "0,0",
+      "DescID": "SKILL_DESC_2000059_Skill01_LV1,SKILL_DESC_2000059_Skill01_LV1,SKILL_DESC_2000059_Skill01_LV1,SKILL_DESC_2000059_Skill01_LV1,SKILL_DESC_2000059_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000059",
+      "NameIDSymbol": "5901",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000059_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["UNIQUE_DOLL_GARDEN_CARETAKER"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "+1 turn Doll Garden's Caretaker\\nIncreases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Resets all skill cooldowns",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy. \\nIf the caster has <color=#28d9ed>Doll Garden's Caretaker</color>, activates an <color=#28d9ed>enhanced attack</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "The People on Earth",
+      "true_desc": "(Triggered Effect) <color=#28d9ed>Resurrects</color> and heals for <color=#28d9ed>20%</color> upon death. <color=#28d9ed>Dies</color> if no enemy is slain in <color=#28d9ed>1 turn</color>.\\nGrants the caster <color=#28d9ed>Doll Garden's Caretaker</color> for <color=#28d9ed>1 turn</color> upon resurrection.",
+      "ApproachType": "CAST_BUFF",
+      "DescID": "SKILL_DESC_2000059_Skill02_LV1,SKILL_DESC_2000059_Skill02_LV1,SKILL_DESC_2000059_Skill02_LV3,SKILL_DESC_2000059_Skill02_LV3,SKILL_DESC_2000059_Skill02_LV5",
+      "IconName": "Skill_Second_2000059",
+      "NameIDSymbol": "5902",
+      "RangeType": "SINGLE",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000059_Skill02",
+      "TargetTeamType": "ME",
+      "buff": ["UNIQUE_DOLL_GARDEN_CARETAKER","BT_ACTION_GAUGE"],
+      "cd": "9",
+      "debuff": ["UNIQUE_MARTYRDOM"],
+      "description": [
+        "(Triggered Effect) <color=#28d9ed>Resurrects</color> and heals for <color=#28d9ed>[Buff_V_2000059_2_1]</color> upon death. <color=#28d9ed>Dies</color> if no enemy is slain in <color=#28d9ed>[Buff_T_2000059_2_2] turn</color>.\\nGrants the caster <color=#28d9ed>Doll Garden's Caretaker</color> for <color=#28d9ed>[Buff_T_2000059_2_5] turn</color> upon resurrection."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown"
+        ],
+        "3": [
+          "+80% Priority"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown",
+          "+15% healing"
+        ],
+        "5": [
+          "+15% healing",
+          "Resets Sanctuary for All's cooldown"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Sanctuary for All",
+      "true_desc": "Attacks all enemies. This skill ignores <color=#28d9ed>30%</color> of the target's Defense and deals damage inversely proportional to the number of targets.\\nThe damage of the skill increases every time someone dies.",
+      "DescID": "SKILL_DESC_2000059_Skill03_LV1,SKILL_DESC_2000059_Skill03_LV1,SKILL_DESC_2000059_Skill03_LV1,SKILL_DESC_2000059_Skill03_LV1,SKILL_DESC_2000059_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000059",
+      "NameIDSymbol": "5903",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000059_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies. This skill ignores <color=#28d9ed>30%</color> of the target's Defense and deals damage inversely proportional to the number of targets.\\nThe damage of the skill increases every time someone dies."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, deals <color=#28d9ed>5</color> additional Weakness Gauge damage. \\n\\n<color=#ffd732>Dual Attack Effect</color>: Grants increased <color=#28d9ed>Speed</color> to the caster for <color=#28d9ed>1 turn</color>.",
+      "DescID": "SKILL_DESC_2000059_Skill04_LV1,SKILL_DESC_2000059_Skill04_LV1,SKILL_DESC_2000059_Skill04_LV1,SKILL_DESC_2000059_Skill04_LV1,SKILL_DESC_2000059_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Dark_Start",
+      "NameIDSymbol": "5904",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_WG_DMG",
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, deals <color=#28d9ed>[Buff_V_2000059_chain_1_1]</color> additional Weakness Gauge damage. \\n\\n<color=#ffd732>Dual Attack Effect</color>: Grants increased <color=#28d9ed>Speed</color> to the caster for <color=#28d9ed>[Buff_T_2000059_backup_1_1] turn</color>."
+      ],
+      "dual_buff": "BT_STAT|ST_SPEED",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

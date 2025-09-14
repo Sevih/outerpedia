@@ -1,0 +1,417 @@
+{
+  "v1": {
+    "label": "May 2025 Version",
+    "date": "2025-05-21",
+    "phase1": {
+      "bosses": [
+        {
+          "id": "07",
+          "name": "Prototype EX-78",
+          "geas": {
+            "1": {
+              "bonus": {
+                "effect": "Reduces Accurary of Boss monsters by 15%",
+                "ratio": "-25%",
+                "image": "Accuracy",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Increases Accurary of Boss monsters by 30%",
+                "ratio": "+20%",
+                "image": "Accuracy",
+                "bg": "1"
+              }
+            },
+            "2": {
+              "bonus": {
+                "effect": "Increases continuous damage taken by Boss monsters by 500%",
+                "ratio": "-70%",
+                "image": "special",
+                "bg": "3"
+              },
+              "malus": {
+                "effect": "Reduces Weakness Gauge damage taken by Boss monsters by 20%",
+                "ratio": "+20%",
+                "image": "WG_Down",
+                "bg": "1"
+              }
+            },
+            "3": {
+              "bonus": {
+                "effect": "Increases Chain Points by 15 at the start of an ally's turn",
+                "ratio": "-45%",
+                "image": "CP",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Increases Accurary of Boss monsters by 50%",
+                "ratio": "+40%",
+                "image": "Accuracy",
+                "bg": "2"
+              }
+            },
+            "4": {
+              "bonus": {
+                "effect": "Increases Weakness Gauge damage dealt to Bosses by 50%",
+                "ratio": "-45%",
+                "image": "WG_Up",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Team restriction (You cannot use Ranger heroes in your team)",
+                "ratio": "+40%",
+                "image": "Ranger",
+                "bg": "2"
+              }
+            },
+            "5": {
+              "bonus": {
+                "effect": "Increases Damage to the target inflicted with Break by 500%",
+                "ratio": "-25%",
+                "image": "Atk",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Team restriction (You cannot use Dark heroes in your team)",
+                "ratio": "+65%",
+                "image": "Dark",
+                "bg": "3"
+              }
+            }
+          },
+          "notes": [
+            "S3: AoE {D/BT_STUN_IR} for 5 turns if {D/BT_DOT_LIGHTNING}.",
+            "S2: AoE {D/BT_DOT_LIGHTNING} for 2 turns.",
+            "S1: Single, prioritizes the leftmost unit. If not a {C/Defender}, {D/BT_ACTION_GAUGE} of target by 60%, {D/BT_SILENCE_IR} for 4 turns and {B/BT_ACTION_GAUGE} of boss by 60%.",
+            "Gains {B/BT_STAT|ST_ACCURACY} at the start of the turn, and at the end of the turn, inflicts {D/BT_STUN} for 2 turns on targets affected by {D/BT_DOT_LIGHTNING}.",
+            "{D/BT_FIXED_DAMAGE} and {D/BT_DOT_CURSE}, cannot exceed 10,000.",
+            "If you can chain break him, replace the {C/Defender} with another DPS. In the footage, Kuro was chosen because she is a {E/Light} character, with decent damage, {B/BT_CP_CHARGE}, and {D/BT_MARKING}."
+          ],
+          "recommended": [
+            {
+              "name": "Dianne",
+              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
+            },
+            {
+              "name": "Monad Eva",
+              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
+            },
+            {
+              "name": "Luna",
+              "comment": "{B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP} and she is a {C/Defender}"
+            }
+          ],
+          "team": [
+            [
+              "Luna",
+              "Demiurge Drakhan",
+              "Omega Nadja",
+              "Kuro"
+            ],
+            [
+              "Dianne",
+              "Monad Eva"
+            ],
+            [
+              "Tamara",
+              "Ryu Lion",
+              "Akari"
+            ],
+            [
+              "Demiurge Luna",
+              "Ame",
+              "Drakhan"
+            ]
+          ],
+          "video": {
+            "id": "eQRbxgOoL9k",
+            "title": "The Frost Legion - Geas Boss Prototype EX-78 (Stage 5) by Sevih"
+          }
+        },
+        {
+          "id": "08",
+          "name": "Vlada Assault Suit",
+          "geas": {
+            "1": {
+              "bonus": {
+                "effect": "Per Dark Ally, reduces Boss DEF by 25%",
+                "ratio": "-70%",
+                "image": "Dark",
+                "bg": "3"
+              },
+              "malus": {
+                "effect": "Enhances reduced damage taken effect of Boss monsters from enemies with lower Accuracy",
+                "ratio": "+65%",
+                "image": "Def",
+                "bg": "3"
+              }
+            },
+            "2": {
+              "bonus": {
+                "effect": "Increases Attack, Defense, and Health of Dark allies by 50%",
+                "ratio": "-45%",
+                "image": "Dark",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Dual Attack Disabled for allies heroes",
+                "ratio": "+20%",
+                "image": "Ban",
+                "bg": "1"
+              }
+            },
+            "3": {
+              "bonus": {
+                "effect": "Increases Action Points by 15 at the start of an ally's turn",
+                "ratio": "-25%",
+                "image": "AP",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Upon the Boss taking a critical hit, uses Vladi Strike",
+                "ratio": "+40%",
+                "image": "Boss",
+                "bg": "2"
+              }
+            },
+            "4": {
+              "bonus": {
+                "effect": "Reduces Boss Monster Speed by 30%",
+                "ratio": "-45%",
+                "image": "Speed",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Team restriction (You cannot use Mage heroes in your team)",
+                "ratio": "+40%",
+                "image": "Mage",
+                "bg": "2"
+              }
+            },
+            "5": {
+              "bonus": {
+                "effect": "Increases Ally Critical Damage by 50%",
+                "ratio": "-45%",
+                "image": "special",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Team restriction (You can one use Striker heroes in your team)",
+                "ratio": "+40%",
+                "image": "Striker",
+                "bg": "2"
+              }
+            }
+          },
+          "notes": [
+            "S3 : AoE, if target got a debuff inflict {D/BT_STUN} 2 turns (bypass immunity and resilience).",
+            "S2 : Single, if target got a debuff ignore defense. If a unit is kill reset S2 cooldown and {B/BT_ADDITIVE_TURN} ",
+            "S1 : AoE, {D/BT_STAT|ST_BUFF_RESIST} 2 turn",
+            "At player turn, inflict {D/BT_RANDOM} to the current unit if a unit got a debuff",
+            "{D/BT_FIXED_DAMAGE} {D/BT_DOT_CURSE} cannot exceed 10 000"
+          ],
+          "recommended": [
+            {
+              "name": "Dianne",
+              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
+            },
+            {
+              "name": "Monad Eva",
+              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
+            }
+          ],
+          "team": [
+            [
+              "Tamara",
+              "Skadi"
+            ],
+            [
+              "Dianne",
+              "Monad Eva"
+            ],
+            [
+              "Demiurge Luna",
+              "Maxwell",
+              "Ryu Lion"
+            ],
+            [
+              "Demiurge Astei",
+              "Gnosis Dahlia"
+            ]
+          ],
+          "video": {
+            "id": "-z3VlH16dA4",
+            "title": "The Frost Legion - Geas Boss Vlada Assault Suit (Stage 4) by Sevih"
+          }
+        }
+      ]
+    },
+    "phase2": {
+      "bossName": "Vladi Max",
+      "overview": [
+        "S3 : AoE, grants {B/BT_STAT|ST_ATK} {B/BT_STAT|ST_CRITICAL_RATE}. If at least one target is {D/BT_DOT_BURN} grants {B/BT_STAT|ST_ACCURACY} too",
+        "S2 : AoE, bonus damage if target got a debuff. Inflicts {D/BT_DOT_BURN} when used on caster's turn",
+        "S1 : Single, prioritizes the leftmost unit.  If not a {C/Defender}, inflicts {D/BT_STUN} 1 turn else {D/BT_STUN} 3 turns",
+        "Greatly reduces damage taken from enemies with a lower Accuracy than the caster's",
+        "Greatly reduces damage dealt to enemies with a greater Accuracy than the caster's",
+        "Takes increased damage from {E/Dark} heroes",
+        "{D/BT_FIXED_DAMAGE} {D/BT_DOT_CURSE} cannot exceed 10 000"
+      ],
+      "teams": {
+        "team1": {
+          "label": "Full Dark",
+          "icon": "dark.webp",
+          "video": {
+            "id": "zpnej0kGURA",
+            "title": "The Frost Legion - Vladi Max Stage 15 - Dark Team by Sevih"
+          },
+          "geas-active": [
+            "2-2B","2-2M","1-2M","1-4B","1-3B","1-5B","2-1B","1-5M","2-5M","1-4M","2-3M","1-1M","1-3M","2-1M"
+          ],
+          "setup": [
+            [
+              "Omega Nadja"
+            ],
+            [
+              "Maxwell"
+            ],
+            [
+              "Demiurge Astei"
+            ],
+            [
+              "Sterope"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Speed tune : Sterope > Maxwell > D.Astei > O.Nadja"
+            },
+            {
+              "type": "p",
+              "string": "Role :"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Sterope : S3 and Skill Chain with her first",
+                "O.Nadja : S1B3 > S3 > S1 ",
+                "Astei : S1B2 > S3 > S1",
+                "Maxwell : S3 > S2B2 > S2 > S1"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Use Rogue's Charm / Sage's Charm depending of your critical chance"
+            }
+          ]
+        },
+        "team2": {
+          "label": "Classic G.Beth",
+          "icon": "light.webp",
+          "video": {
+            "id": "rUKAQnQmiZc",
+            "title": "The Frost Legion - Vladi Max Stage 7 - G.Beth Team by Sevih"
+          },
+          "geas-active": [
+            "2-4M","1-1M","1-3M","1-2B","1-2M","2-1M","2-3M","2-5M"
+          ],
+          "setup": [
+            [
+              "Monad Eva"
+            ],
+            [
+              "Gnosis Beth"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Nothing special just do S2-S3-S1B3 with G.Beth"
+            },
+            {
+              "type": "p",
+              "string": "Use Meva S1B3 before boss enrage skill (even if it won't kill you)"
+            }
+          ]
+        },
+        "team3": {
+          "label": "Burn Team",
+          "icon": "fire.webp",
+          "video": {
+            "id": "zetrz8-fqZg",
+            "title": "The Frost Legion - Vladi Max Stage 13 - Burn Team by Sevih"
+          },
+          "geas-active": [
+            "1-1M","1-3M","2-4M","1-2B","2-2M","1-2M","2-1M","2-3M"
+          ],
+          "setup": [
+            [
+              "Monad Eva"
+            ],
+            [
+              "Maxie"
+            ],
+            [
+              "Vlada",
+              "Parti"
+            ],
+            [
+              "Ember",
+              "Bell Cranel"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Speed tune : Roxie > Meva > Ember > Vlada"
+            },
+            {
+              "type": "p",
+              "string": "If you got Ember 5 star you want her with 20/30 more speed than Vlada in order to extend {D/BT_DOT_BURN} duration"
+            },
+            {
+              "type": "p",
+              "string": "Role :"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Meva : S1B2 to refill AP",
+                "Roxie : Only S1B3 then S3 at her than turn",
+                "Ember : S1B3 > S3",
+                "Vlada : S3 then only S1 until she got her last turn (ideally 19th turn) and S2B2"
+              ]
+            }
+          ]
+        },
+        "team4": {
+          "label": "Solo Ember",
+          "icon": "fire.webp",
+          "geas-active": [
+            "1-4M","2-2M","2-4M","1-1M","1-3M","1-2B","1-2M","2-1M","2-3M","2-5M"
+          ],
+          "setup": [
+            [
+              "Ember"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "You want : Revenge Set, Vanguard Charm, Token of the Supreme Witch weapon and an effectiveness Accessory"
+            },
+            {
+              "type": "p",
+              "string": "Stats needed : Eff > Atk > All and low speed (around 120-130)"
+            },
+            {
+              "type": "p",
+              "string": "Whenever you play just S1B3 to extend your {D/BT_DOT_BURN} duration"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

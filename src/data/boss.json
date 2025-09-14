@@ -1,0 +1,59 @@
+[{
+    "Special Request":[{
+        "Masterless Guardian":[{
+            "id":"4076006",
+            "guide":"guardian"
+        }],
+        "Tyrant Toddler":[{
+            "id":"4076005",
+            "guide":"tyrant"
+        }],
+        "Unidentified Chimera":[{
+            "id":"4034002",
+            "guide":"chimera"
+        }],
+        "Sacreed Guardian":[{
+            "id":"4044003",
+            "guide":"sacreed"
+        }],
+        "Grand Calamari":[{
+            "id":"4034003",
+            "guide":"grand-calamari"
+        }],
+        "Dek'Ril & Mek'Ril":[{
+            "id":"4076004",
+            "guide":"beatles"
+        }],
+        "Glicys":[{
+            "id":"4076001",
+            "guide":"glicys"
+        }],
+        "Blazing Knight Meteos":[{
+            "id":"4076002",
+            "guide":"meteos"
+        }],        
+        "Ars Nova":[{
+            "id":"4076008",
+            "guide":"ars-nova"
+        }],
+        "Amadeus":[{
+            "id":"4076009",
+            "guide":"amadeus"
+        }]
+    }],
+    "Irregular Extermination":[{
+        "Infiltration Operation / Pursuit Operation":[{
+            "id":"CM_Irregular_Infiltrate"
+        }]
+    }],
+    "Adventure License":[{
+        "License Shop":[{
+            "id":"TI_Licence"
+        }]
+    }],
+    "Event Shop":[{
+        "Event":[{
+            "id":"CM_Shop_Shortcuts_EventShop"
+        }]
+    }]
+}]

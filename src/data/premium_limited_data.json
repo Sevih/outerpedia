@@ -1,0 +1,307 @@
+{
+  "Premium": [
+    {
+      "name": "Demiurge Stella",
+      "review": "Sturdy aoe dps with a fixed damage chain finisher. She does everything she needs to at 3-star, so her transcends are mostly a stat bonus. Her burst 3 is very expensive, the barrier at 6-star will rarely show its worth in pve and may be a negative in arena against certain teams.",
+      "recommended_pve": "4",
+      "recommended_pvp": "5 to 6",
+      "impact": {
+        "3": {
+          "pve": "4",
+          "pvp": "3"
+        },
+        "4": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "2"
+        }
+      }
+    },
+    {
+      "name": "Demiurge Astei",
+      "review": "Dark dps who revives to get in another S3 before she falls. If she scores a kill she gets to live. This gimmick won't be useful very often in pve, but it makes her a strong option in pvp. Her burst 3 resets skill cooldowns, including the revive effect, allowing her to use her S3 more often. Every transcend increases her damage output, but doesn't really add more tools to work with.",
+      "recommended_pve": "Any",
+      "recommended_pvp": "5",
+      "impact": {
+        "3": {
+          "pve": "3",
+          "pvp": "4"
+        },
+        "4": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "3"
+        },
+        "6": {
+          "pve": "3",
+          "pvp": "2"
+        }
+      }
+    },
+    {
+      "name": "Demiurge Drakhan",
+      "review": "Aoe damage reduction, barrier and penetration buffs. She brings all the tools she needs to in pve out of the box. Her transcends let her become a threat in arena as she can prevent revivals when killing someone with her S3.",
+      "recommended_pve": "3",
+      "recommended_pvp": "6",
+      "impact": {
+        "3": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "1",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "1",
+          "pvp": "2"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "3"
+        }
+      }
+    },
+    {
+      "name": "Demiurge Vlada",
+      "review": "A debuffer mainly bringing a buff removal & unhealable. Her 4- and 5-star reduces enemy priority gains by up to 50%, which is important against world bosses. She needs to aoe using her S3 or burst 3 to be any good as a damage dealer, so her damage potential is locked behind her 5-star (and there are better options for damage). The speed bonus at 6-star is mainly for arena, it reduces gear requirements in pve, but is rarely needed.",
+      "recommended_pve": "5",
+      "recommended_pvp": "6",
+      "impact": {
+        "3": {
+          "pve": "3",
+          "pvp": "3"
+        },
+        "4": {
+          "pve": "2",
+          "pvp": "1"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "1"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "4"
+        }
+      }
+    },
+    {
+      "name": "Monad Eva",
+      "review": "Healer with dual attacks, the most versatile support in the game. 5-star gives her access to an unconditional dual attack with 2 heroes, a cleanse and revival buffs. 6-star's Seal debuff has its uses in arena and some of the world bosses, but has very little use when starting out in pve.",
+      "recommended_pve": "5",
+      "recommended_pvp": "5 to 6",
+      "impact": {
+        "3": {
+          "pve": "5",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "4",
+          "pvp": "3"
+        },
+        "5": {
+          "pve": "5",
+          "pvp": "4"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "4"
+        }
+      }
+    },
+    {
+      "name": "Gnosis Beth",
+      "review": "Effectiveness based DoT dps. A staple in several guild raids and consistently strong in many turn limited fights. 4-star increases her DoT damage by 50% and increases her survivability a lot, making it her most important transcend level when building her. 6-star applies 2 turns of Eternal Bleeding at the start of battle and makes her Dominion permanent, allowing her to open the fight with high burst damage.",
+      "recommended_pve": "4",
+      "recommended_pvp": "6",
+      "impact": {
+        "3": {
+          "pve": "3",
+          "pvp": "1"
+        },
+        "4": {
+          "pve": "5",
+          "pvp": "1"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "1"
+        },
+        "6": {
+          "pve": "4",
+          "pvp": "5"
+        }
+      }
+    },
+    {
+      "name": "Demiurge Delta",
+      "review": "Lots of cleansing and supports with priority boosts and free burst skills for the main dps (or all dark heroes except healers at 6-star). Doesn't gain a lot in pve outside of the 6-star effect, so transcending her isn't a priority here. Her resilience buff and priority boosts can make her a threat in arena, along with her teamwide +10 speed bonus.",
+      "recommended_pve": "3",
+      "recommended_pvp": "5 to 6",
+      "impact": {
+        "3": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "1",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "1",
+          "pvp": "3"
+        },
+        "6": {
+          "pve": "2",
+          "pvp": "3"
+        }
+      }
+    },
+    {
+      "name": "Demiurge Luna",
+      "review": "Very high damage potential while being very sturdy herself. Competitive at 3-star with each transcend giving her a bigger edge. When left on auto she casts her S2 at every opportunity, so she can waste a lot of turns in turn limited content.",
+      "recommended_pve": "Any",
+      "recommended_pvp": "Any",
+      "impact": {
+        "3": {
+          "pve": "4",
+          "pvp": "4"
+        },
+        "4": {
+          "pve": "4",
+          "pvp": "4"
+        },
+        "5": {
+          "pve": "4",
+          "pvp": "4"
+        },
+        "6": {
+          "pve": "4",
+          "pvp": "4"
+        }
+      }
+    }
+  ],
+  "Limited": [
+  {
+    "name": "Poolside Trickster Regina",
+    "review": "Great water dps with the rare buff steal and resource reduction effects. She gets a lot of free crit chance when fully transcended, but this isn't needed for her to be one of Water's best damage dealers.",
+    "recommended_pve": "4",
+    "recommended_pvp": "Any",
+    "impact": {
+      "3": { "pve": "4", "pvp": "3" },
+      "4": { "pve": "4", "pvp": "2" },
+      "5": { "pve": "3", "pvp": "2" },
+      "6": { "pve": "3", "pvp": "3" }
+    }
+  },
+  {
+    "name": "Kitsune of Eternity Tamamo-no-Mae",
+    "review": "Curse detonation removes the main threat to Curse teams, the boss needing to take enough turns. 4-star lets her stack up curses even faster. Tamamo's curses are irremovable, letting her fight a few bosses that wouldn't care about other debuffers. Her burst 3 is expensive and typically unnecessary. Her 6-star is for her exclusive lobby. It makes her skills uncounterable, which lets her fight Tyrant Toddler and Irregular Queen, but this is a luxury. She is not a big asset in arena, where this would be the most notable.",
+    "recommended_pve": "4",
+    "recommended_pvp": "6",
+    "impact": {
+      "3": { "pve": "5", "pvp": "1" },
+      "4": { "pve": "5", "pvp": "1" },
+      "5": { "pve": "1", "pvp": "1" },
+      "6": { "pve": "2", "pvp": "2" }
+    }
+  },
+  {
+    "name": "Holy Night's Blessing Dianne",
+    "review": "Offensive buff support with good damage potential. 5-star gives her access to a Penetration buff. 6-star puts her in the top row of Fire element's damage dealers.",
+    "recommended_pve": "5 (support) 6 (dps)",
+    "recommended_pvp": "6",
+    "impact": {
+      "3": { "pve": "4", "pvp": "3" },
+      "4": { "pve": "3", "pvp": "3" },
+      "5": { "pve": "4", "pvp": "3" },
+      "6": { "pve": "5", "pvp": "4" }
+    }
+  },
+  {
+    "name": "Gnosis Dahlia",
+    "review": "A damage dealer who mainly stands out when her gimmicks are needed. Counters when crit, gains a barrier when critting and limits the damage she takes while her Dominion is active. These 3 tools make her very strong in some bossfights, such as world boss Walking Fortress Vault Venion. 6-star makes her Dominion buff permanent, which makes her a threat in arena and lets her stand alone against a number of bosses.",
+    "recommended_pve": "Any",
+    "recommended_pvp": "6",
+    "impact": {
+      "3": { "pve": "3", "pvp": "2" },
+      "4": { "pve": "3", "pvp": "2" },
+      "5": { "pve": "3", "pvp": "1" },
+      "6": { "pve": "4", "pvp": "4" }
+    }
+  },
+  {
+    "name": "Gnosis Nella",
+    "review": "Control freak with all the tools to match. Stuns and Irremovable Unbuffable make her strong against Sacreed Guardian and Grand Calamari, along with many other bosses vulnerable to control. She also brings high WG damage and a fixed damage chain starter, making her useful outside of control too. Her personal damage is lacking, even if a lot of her transcends are meant to remedy that. The extra stun in her burst 3 at 5-star is a nice to have. 6-star's mainly for arena use, but even without it she can perform well.",
+    "recommended_pve": "4",
+    "recommended_pvp": "Any",
+    "impact": {
+      "3": { "pve": "4", "pvp": "5" },
+      "4": { "pve": "4", "pvp": "1" },
+      "5": { "pve": "3", "pvp": "1" },
+      "6": { "pve": "1", "pvp": "4" }
+    }
+  },
+  {
+    "name": "Omega Nadja",
+    "review": "Her infection cleanses debuffs on her team when the infected target takes a turn. This makes her a counter to enemies that rely on debuffs, such as Gnosis Beth in arena. She also offers protection to heroes with barriers, along with speed down and priority reductions, greatly reducing incoming damage.",
+    "recommended_pve": "4 to 5",
+    "recommended_pvp": "4 to 6",
+    "impact": {
+      "3": { "pve": "3", "pvp": "3" },
+      "4": { "pve": "3", "pvp": "5" },
+      "5": { "pve": "4", "pvp": "4" },
+      "6": { "pve": "5", "pvp": "5" }
+    }
+  },
+  {
+    "name": "Ryu Lion",
+    "review": "Excellent single target dps in both pve and pvp. Her burst 3 gives her 100% priority, allowing her to take multiple high value turns. At 6-star she gets a speed buff at battle start and extra accuracy, making her one of the fastest openers in arena with great damage potential.",
+    "recommended_pve": "Any",
+    "recommended_pvp": "6",
+    "impact": {
+      "3": { "pve": "5", "pvp": "3" },
+      "4": { "pve": "4", "pvp": "2" },
+      "5": { "pve": "4", "pvp": "2" },
+      "6": { "pve": "2", "pvp": "5" }
+    }
+  },
+  {
+    "name": "Bell Cranel",
+    "review": "Strong burn hero with very high attack potential. 4-star increases damage dealt against burning targets, in late game these targets often have extremely high defense, so the difference may not be very noticable. Burst 3 gives Irremovable burns, this also means they can't be extended, so in a team focusing on Detonate damage this should be avoided. With an uninteresting 5-star effect his 6-star becomes a rather steep investment for an upgraded Attack buff.",
+    "recommended_pve": "4",
+    "recommended_pvp": "4",
+    "impact": {
+      "3": { "pve": "4", "pvp": "1" },
+      "4": { "pve": "4", "pvp": "1" },
+      "5": { "pve": "1", "pvp": "1" },
+      "6": { "pve": "3", "pvp": "1" }
+    }
+  },
+  {
+    "name": "Ais Wallenstein",
+    "review": "Free collab hero, was able to reach 6-star during the event. Has a kit more suited to a bruiser with a built in revenge effect. She can be competitive with other light dps when building a team around her (focus on dual attacks and little to no healing), but does not stand out.",
+    "recommended_pve": "6",
+    "recommended_pvp": "6",
+    "impact": {
+      "3": { "pve": "1", "pvp": "1" },
+      "4": { "pve": "2", "pvp": "2" },
+      "5": { "pve": "2", "pvp": "1" },
+      "6": { "pve": "2", "pvp": "1" }
+    }
+  }
+]
+
+}

@@ -1,0 +1,194 @@
+{
+  "ID": "2000089",
+  "Fullname": "Caren",
+  "Rarity": 3,
+  "Element": "Water",
+  "rank_pvp":"A",
+  "gift": "Science",
+  "role":"dps",
+  "Class": "Striker",
+  "SubClass": "Bruiser",
+  "tags":["ignore-defense"],
+  "skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+5% Ally Team Defense\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+5% Ally Team Defense\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Theory Refutation",
+      "true_desc": "Attacks 2 enemies. When an enemy is defeated, recovers Health of the caster by <color=#28d9ed>20%</color>. This skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000089_Skill01_LV1,SKILL_DESC_2000089_Skill01_LV1,SKILL_DESC_2000089_Skill01_LV1,SKILL_DESC_2000089_Skill01_LV1,SKILL_DESC_2000089_Skill01_LV1",
+      "IconName": "Skill_First_2000089",
+      "NameIDSymbol": "8901",
+      "RangeType": "DOUBLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000089_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Inflicts reduced Critical Damage for 2 turns (Ignores the targets Resilience)\\nIncreases Damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases Penetration by 30%",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases Damage\\nRight after using this skill, does not trigger Counterattack, Revenge \\nor Agile Response",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": ["BT_STAT|ST_CRITICAL_DMG_RATE","BT_SEAL_COUNTER"],
+      "description": [
+        "Attacks 2 enemies. When an enemy is defeated, recovers Health of the caster by <color=#28d9ed>[Buff_V_2000089_1]</color>. This skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+20% damage",
+          "+10% healing"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Disassembly Analysis",
+      "true_desc": "(Passive Effect) After attacking an enemy, increases Priority of the caster by <color=#28d9ed>10%</color>, and after defeating an enemy, increases Priority by an additional <color=#28d9ed>20%</color>.\\n\\n(Triggered Effect) When an ally other than the caster performs an attack that targets all enemies, steals <color=#28d9ed>1</color> buff(s) from the enemy with the highest Max Health and then attacks the target. (Ignores the target’s Resilience.)\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
+      "AIType": "ATTACK",
+      "ApproachTime": "HIGHEST,ST_HP",
+      "DescID": "SKILL_DESC_2000089_Skill02_LV1,SKILL_DESC_2000089_Skill02_LV1,SKILL_DESC_2000089_Skill02_LV1,SKILL_DESC_2000089_Skill02_LV1,SKILL_DESC_2000089_Skill02_LV1",
+      "IconName": "Skill_Second_2000089",
+      "NameIDSymbol": "8902",
+      "RangeType": "SINGLE",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000089_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": "4",
+      "debuff": [
+        "BT_STEAL_BUFF"
+      ],
+      "description": [
+        "(Passive Effect) After attacking an enemy, increases Priority of the caster by <color=#28d9ed>10%</color>, and after defeating an enemy, increases Priority by an additional <color=#28d9ed>20%</color>.\\n\\n(Triggered Effect) When an ally other than the caster performs an attack that targets all enemies, steals <color=#28d9ed>[Buff_V_2000089_2_6]</color> buff(s) from the enemy with the highest Max Health and then attacks the target. (Ignores the targetâs Resilience.)\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+1 Buff Stolen"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Final Cleanup",
+      "true_desc": "Attacks all enemies.\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack and ignores <color=#28d9ed>30%</color> of the target's Defense.\\n\\nWhen attacking <color=#ffd732>Irregulars</color>, <color=#28d9ed>completely</color> ignores the target’s Defense and reduces all skill cooldowns of the caster by <color=#28d9ed>2 turns</color>.",
+      "DescID": "SKILL_DESC_2000089_Skill03_LV1,SKILL_DESC_2000089_Skill03_LV1,SKILL_DESC_2000089_Skill03_LV1,SKILL_DESC_2000089_Skill03_LV1,SKILL_DESC_2000089_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000089",
+      "NameIDSymbol": "8903",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000089_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies.\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack and ignores <color=#28d9ed>30%</color> of the target's Defense.\\n\\nWhen attacking <color=#ffd732>Irregulars</color>, <color=#28d9ed>completely</color> ignores the targetâs Defense and reduces all skill cooldowns of the caster by <color=#28d9ed>2 turns</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+20% damage",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Defense</color> instead of Attack, and after attacking, reduces skill cooldown of <color=#28d9ed>Final Cleanup</color> by <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
+      "DescID": "SKILL_DESC_2000089_Skill04_LV1,SKILL_DESC_2000089_Skill04_LV1,SKILL_DESC_2000089_Skill04_LV1,SKILL_DESC_2000089_Skill04_LV1,SKILL_DESC_2000089_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Join",
+      "NameIDSymbol": "8904",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Defense</color> instead of Attack, and after attacking, reduces skill cooldown of <color=#28d9ed>Final Cleanup</color> by <color=#28d9ed>[Buff_V_2000089_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

@@ -1,0 +1,1195 @@
+{
+	"adelie": {
+		"name": "Titanic Anchor",
+		"mainStat": "Accuracy to Fire",
+		"effect": "When using Aye Aye Captain!, increases damage dealt inversely proportional to the number of targets",
+		"effect10": "When using Aye Aye Captain! increases Penetration by 30% when there is only one target.",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": []
+	},
+	"aer": {
+		"name": "Super Board",
+		"mainStat": "Accuracy to Earth",
+		"effect": "Increases Accuracy for 2 turn(s) when using To the Beach?",
+		"effect10": "Increases Accuracy for 3 turn(s) when using To the Beach?",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [
+			"BT_STAT|ST_ACCURACY"
+		],
+		"debuff": []
+	},
+	"ais-wallenstein": {
+		"name": "Desperate",
+		"mainStat": "Accuracy to Earth",
+		"effect": "When hit, increases Priority by 25% (Activated only once every 2 turn)",
+		"effect10": "When hit, increases Priority by 50% (Activated only once every 2 turn)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"rank": "B",
+		"debuff": []
+	},
+	"akari": {
+		"name": "Juzumaru Tsunetsugu",
+		"mainStat": "Effectiveness to Dark",
+		"effect": "Increases the duration of debuffs on the enemy team by 1 turn(s) when using Juzumaru Tsunetsugu",
+		"effect10": "+30 Effectiveness",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "S",
+		"buff": [],
+		"debuff": []
+	},
+	"alice": {
+		"name": "The Book of Folk and Tall Tales",
+		"mainStat": "Effectiveness to Water",
+		"effect": "At the start of the battle, has a 100% chance to increases Speed for 1 turn(s)",
+		"effect10": "+30 Effectiveness",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_SPEED"
+		],
+		"rank": "S",
+		"debuff": []
+	},
+	"alpha": {
+		"name": "Nostalgic Music Box",
+		"mainStat": "Effectiveness to Fire",
+		"effect": "At the start of the battle, increases Effectiveness for 1 turn(s)",
+		"effect10": "When defeating an enemy, increases Effectiveness for 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_BUFF_CHANCE"
+		],
+		"rank": "C",
+		"debuff": []
+	},
+	"ame": {
+		"name": "Secret Sword, Teru Teru Bouzu",
+		"mainStat": "Accuracy to Water",
+		"effect": "Increases damage dealt to Water enemies by 50% (Does not have any effect on elemental advantage",
+		"effect10": "Increases Penetration by 20% when using Mikazuki 3rd Art : Flower Charm",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"astei": {
+		"name": "Divine Warmth",
+		"mainStat": "Reduces Earth Damage Taken",
+		"effect": "Increases Priority by 5% when ally team hit",
+		"effect10": "Increases Priority by 8% when ally team hit",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"rank": "B",
+		"debuff": []
+	},
+	"bell-cranel": {
+		"name": "Hestia Knife",
+		"mainStat": "Accuracy to Earth",
+		"effect": "When using Argo Vesta, ignores the target's Resilience",
+		"effect10": "When using Swift Chain, ignores the target's Resilience",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "S",
+		"buff": [],
+		"debuff": []
+	},
+	"beth": {
+		"name": "Demonic Twin",
+		"mainStat": "Accuracy to Fire",
+		"effect": "When an enemy is inflicted with Bleeding at the end of their turn, increases the priority of the wearer by 70%",
+		"effect10": "+30 Effectiveness",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"rank": "S",
+		"debuff": []
+	},
+	"bleu": {
+		"name": "Magnolia Student ID",
+		"mainStat": "Accuracy to Fire",
+		"effect": "If Water Ball defeats an enemy, has a 70% chance to gain an extra turn",
+		"effect10": "If Water Ball defeats an enemy, has a 100% chance to gain an extra turn",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ADDITIVE_TURN"
+		],
+		"rank": "D",
+		"debuff": []
+	},
+	"bryn": {
+		"name": "Exeptional Aura",
+		"mainStat": "Accuracy to Water",
+		"effect": "Increases damage of allies with a barrier",
+		"effect10": "Greatly increases damage of allies with a barrier",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": []
+	},
+	"caren": {
+		"name": "Logos",
+		"mainStat": "Reduces Fire Damage Taken",
+		"effect": "Ignore 30% of the target's Defense when activating Disassembly Analysis",
+		"effect10": "+20% Defense",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "S",
+		"buff": [],
+		"debuff": []
+	},
+	"charlotte": {
+		"name": "Detective's Emblem",
+		"mainStat": "Effectiveness to Water",
+		"effect": "Increases Priority of the wearer by 30% when Thinking Time activates",
+		"effect10": "Increases Action Points of Mage allies by 20 when using Thinking Time",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ACTION_GAUGE",
+			"BT_AP_CHARGE"
+		],
+		"rank": "A",
+		"debuff": []
+	},
+	"christina": {
+		"name": "Love is War",
+		"mainStat": "Effectiveness to Earth",
+		"effect": "Reduces the duration of buffs on the enemy team by 1 turn(s) when Bursting Patriotism activates",
+		"effect10": "+30 Effectiveness",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "S",
+		"buff": [],
+		"debuff": ["IG_Buff_BuffdurationReduce"]
+	},
+	"cindy": {
+		"name": "Receptionist's Essentials",
+		"mainStat": "Reduces Fire Damage Taken",
+		"effect": "When using Storm Crystal, increases the Priority of the wearer by 15%",
+		"effect10": "When using Storm Crystal,damage dealt increases proportional to the caster Speed (Max 100%)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"rank": "C",
+		"debuff": []
+	},
+	"claire": {
+		"name": "Baptismal Icon",
+		"mainStat": "Accuracy to Earth",
+		"effect": "Reduces the cooldown of all skills by 1 turn(s) when scoring a critical hit",
+		"effect10": "When using Quo Vadis, grants increased Critical Hit Chance to the wearer for 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_CRITICAL_RATE"
+		],
+		"rank": "A",
+		"debuff": []
+	},
+	"dahlia": {
+		"name": "Full Strength",
+		"mainStat": "Effectiveness to Fire",
+		"effect": "Has a 100% chance to increase Speed for 1 turn(s) at the start of battle",
+		"effect10": "When attacking a target inflicted with Frozen with Icicle Lance, increases damage dealt",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_SPEED"
+		],
+		"rank": "S",
+		"debuff": []
+	},
+	"delta": {
+		"name": "Gleipnir",
+		"mainStat": "Reduces Water Damage Taken",
+		"effect": "Increases Weakness Gauge damage of Counterattack by 50%",
+		"effect10": "Increases damage of Counterattack by 50%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_WG_DMG"
+		],
+		"rank": "C",
+		"buff": []
+	},
+	"demiurge-astei": {
+		"name": "Blind Devotion",
+		"mainStat": "Accuracy to Light",
+		"effect": "When using Sanctuary for All, increases the duration of Doll Garden's Caretaker by 1 turn(s)",
+		"effect10": "After using The People on Earth, grants increases Accuracy for 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_ACCURACY"
+		],
+		"rank": "C",
+		"debuff": []
+	},
+	"demiurge-delta": {
+		"name": "Wax Wings",
+		"mainStat": "Reduces Light Damage Taken",
+		"effect": "When using Code: Reverse, removes 2 debuffs from all allies",
+		"effect10": "When using Code: Reverse, grants increased Resilience to all allies for 2 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_REMOVE_DEBUFF",
+			"BT_STAT|ST_BUFF_RESIST"
+		],
+		"rank": "S",
+		"debuff": []
+	},
+	"demiurge-drakhan": {
+		"name": "Ancestral Spirit",
+		"mainStat": "Reduces Dark Damage Taken",
+		"effect": "When Dragon Ruler's Breath defeats an enemy, Health of all allies increases by 15%",
+		"effect10": "When using Doom Heralding Cry, grants increased Defense to the wearer for 2 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_DEF"
+		],
+		"rank": "B",
+		"debuff": []
+	},
+	"demiurge-stella": {
+		"name": "Ksai's Core",
+		"mainStat": "Reduces Dark Damage Taken",
+		"effect": "When using Flight of Abraxas, grant 20 Action Points",
+		"effect10": "When using Unforgiving God, increases Action Points by 20",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_AP_CHARGE"
+		],
+		"rank": "C",
+		"debuff": []
+	},
+	"demiurge-vlada": {
+		"name": "Adaptable Twin Blades",
+		"mainStat": "Effectiveness to Light",
+		"effect": "Increases all attack damage (Proportional to target's Max Health)",
+		"effect10": "When using a Burst Skill, increases Effectiveness of the wearer by 50%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"dianne": {
+		"name": "Innocent Love",
+		"mainStat": "Accuracy to Dark",
+		"effect": "When an attack hit, increases Priority of all allies by 5% (Only once per turn)",
+		"effect10": "When an attack hit, increases Priority of all allies by 8% (Only once per turn)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"rank": "B",
+		"debuff": []
+	},
+	"dolly": {
+		"name": "Bedtime Snuggle Buddy",
+		"mainStat": "Effectiveness to Water",
+		"effect": "When using Still Drowsy, increases the Evasion of the wearer for 1 turn",
+		"effect10": "When using Still Drowsy, increases the Evasion of the wearer for 2 turn",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_AVOID"
+		],
+		"rank": "C",
+		"debuff": []
+	},
+	"drakhan": {
+		"name": "Royal Fang",
+		"mainStat": "Accuracy to Dark",
+		"effect": "Increases Priority by 35% when attacking a target that has a debuff",
+		"effect10": "Before using Conquering Dragon Meteor, inflicts Cursed on the target for 2 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"debuff": [
+			"BT_DOT_CURSE"
+		],
+		"rank": "S"
+	},
+	"edelweiss": {
+		"name": "Ninja Scroll",
+		"mainStat": "Effectiveness to Fire",
+		"effect": "Increases the wearer Health by 35%",
+		"effect10": "When using Ninjutsu, Waterspout Technique, grants Stealth for 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STEALTHED"
+		],
+		"rank": "A",
+		"debuff": []
+	},
+	"eliza": {
+		"name": "Crimson Holy Grail",
+		"mainStat": "Effectiveness to Light",
+		"effect": "Increases damage dealt to enemies with Bleeding",
+		"effect10": "When using an attack that targets all enemies, inflicts Bleeding on the target for 2 turn(s) (Ignores Immunity, Irremovable)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_DOT_BLEED_IR"
+		],
+		"rank": "C",
+		"buff": []
+	},
+	"ember": {
+		"name": "Rocinante",
+		"mainStat": "Accuracy to Earth",
+		"effect": "Increases Effectiveness of the wearer by 100%",
+		"effect10": "After using Blaze Like a Flame! grants increased Attack to all allies for 2 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_ATK"
+		],
+		"rank": "A",
+		"debuff": []
+	},
+	"epsilon": {
+		"name": "Ksai's Core",
+		"mainStat": "Accuracy to Light",
+		"effect": "When hit by an attack that targets all enemies, increases Priority by 50% (Only once per turn)",
+		"effect10": "When using The World is Ours, reduces Action Points of all targets by 60",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"debuff": [
+			"BT_AP_CHARGE"
+		],
+		"rank": "S"
+	},
+	"eternal": {
+		"name": "Death's Note",
+		"mainStat": "Effectiveness to Earth",
+		"effect": "Gain an extra turn when using No One Lives Forever",
+		"effect10": "+20 Accuracy",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ADDITIVE_TURN"
+		],
+		"rank": "S",
+		"debuff": []
+	},
+	"eva": {
+		"name": "Prism Lens",
+		"mainStat": "Reduces Dark Damage Taken",
+		"effect": "When using Generating Boundary, reduces the cooldown of Healing by 1 turn(s)",
+		"effect10": "When using Generating Boundary, resets the cooldown of Healing",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "C",
+		"buff": [],
+		"debuff": []
+	},
+	"faenan": {
+		"name": "Saint's Staff",
+		"mainStat": "Reduces Dark Damage Taken",
+		"effect": "Increases Speed proportional to missing Health",
+		"effect10": "When using Lunar Protection, reduces the cooldown of Healing Prayer by 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"fatal": {
+		"name": "Eclipse",
+		"mainStat": "Accuracy to Fire",
+		"effect": "Increases damage proportional to the wearer and the target's Speed",
+		"effect10": "+30% Critical Damage",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": []
+	},
+	"fenrir": {
+		"name": "Haki",
+		"mainStat": "Reduces Earth Damage Taken",
+		"effect": "Increases Speed proportional to missing Health",
+		"effect10": "Increases Attack proportional to missing Health",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"flamberge": {
+		"name": "Iron Fan of Ferocity",
+		"mainStat": "Reduces Water Damage Taken",
+		"effect": "Heals by 20% upon taking a critical hit",
+		"effect10": "Grants 20 Action Points upon taking a critical hit",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_AP_CHARGE"
+		],
+		"rank": "C",
+		"debuff": []
+	},
+	"francesca": {
+		"name": "Iron Claws of Calamity",
+		"mainStat": "Effectiveness to Light",
+		"effect": "Has a 10% chance of gaining an extra turn after attacking",
+		"effect10": "After using Nine Inch Nails, detonates all Bleeding stacks on the target.",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ADDITIVE_TURN"
+		],
+		"debuff": [
+			"BT_DETONATE"
+		],
+		"rank": "A"
+	},
+	"gnosis-beth": {
+		"name": "Everlasting Grudge",
+		"mainStat": "Reduces Dark Damage Taken",
+		"effect": "Increases damage dealt by Eternal Bleeding on Bosses by 50%",
+		"effect10": "After using Pure Blood's Punishment, does not trigger an enemy's Counterattack, Revenge, or Agile Response",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_SEAL_COUNTER"
+		],
+		"rank": "S",
+		"buff": []
+	},
+	"gnosis-dahlia": {
+		"name": "Deadly Ice",
+		"mainStat": "Accuracy to Light",
+		"effect": "When scoring a critical hit, grants a barrier for 1 turn(s) (proportional to Attack)",
+		"effect10": "Increases damage dealt by Terminal Winter",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_SHIELD_BASED_CASTER"
+		],
+		"rank": "S",
+		"debuff": []
+	},
+	"gnosis-nella": {
+		"name": "True Salvation",
+		"mainStat": "Reduces Dark Damage Taken",
+		"effect": "Increases Effectiveness of the wearer and damage against Boss monsters",
+		"effect10": "When using Rules of Salvation against Boss, reduces all skill cooldowns by 1 turn",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "S",
+		"buff": [],
+		"debuff": []
+	},
+	"guizam": {
+		"name": "Master of Pursuit",
+		"mainStat": "Accuracy to Earth",
+		"effect": "When using Skill: Painful Demise, increases damage dealt to target's inflicted with Bleeding",
+		"effect10": "Increases damage dealt to bosses by 50%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": [],
+		"debuff": []
+	},
+	"hanbyul-lee": {
+		"name": "The \"Joy\" Bringer",
+		"mainStat": "Reduces Water Damage Taken",
+		"effect": "Increases Priority of the wearer by 10% when hit",
+		"effect10": "Increases Priority of the wearer by 15% when hit",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"rank": "A",
+		"debuff": []
+	},
+	"hilde": {
+		"name": "Hound",
+		"mainStat": "Effectiveness to Light",
+		"effect": "Increases Health of the wearer by 35%",
+		"effect10": "Increases Damage dealt by For Pandemonium! by 50%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"holy-night-s-blessing-dianne": {
+		"name": "Earnest Love",
+		"mainStat": "Accuracy to Earth",
+		"effect": "Increases Action Points by 60 at the start of battle",
+		"effect10": "Increases damage dealt to Boss by 100%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_AP_CHARGE"
+		],
+		"rank": "A",
+		"debuff": []
+	},
+	"idith": {
+		"name": "Trust",
+		"mainStat": "Reduces Water Damage Taken",
+		"effect": "When using Antipathy, has a 100% chance to remove 1 debuff(s) from the wearer",
+		"effect10": "When using Antipathy, has a 100% chance to remove 2 debuff(s) from the wearer",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_REMOVE_DEBUFF"
+		],
+		"rank": "D",
+		"debuff": []
+	},
+	"iota": {
+		"name": "Scepter of the Golden King",
+		"mainStat": "Effectiveness to Light",
+		"effect": "Grants Immortality for 1 turn(s) at the start of battle",
+		"effect10": "+30 Effectiveness",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_UNDEAD"
+		],
+		"rank": "A",
+		"debuff": []
+	},
+	"iris": {
+		"name": "Reptilia Z-Power",
+		"mainStat": "Effectiveness to Earth",
+		"effect": "Increases Attack and Defense for 1 turn(s) when attacking an enemy inflicted with Burned",
+		"effect10": "Element Burst has 80% chance to increase Attack and Defense for 1 turn(s) when attacking an enemy inflicted with Burned",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_ATK",
+			"BT_STAT|ST_DEF"
+		],
+		"rank": "C",
+		"debuff": []
+	},
+	"k": {
+		"name": "Monomolecular Blade",
+		"mainStat": "Reduces Earth Damage Taken",
+		"effect": "When using Slinding Uppercut, has a 100% chance to remove 1 buff(s) from the target",
+		"effect10": "When using Slinding Uppercut, has a 100% chance to remove 2 buff(s) from the target",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_REMOVE_BUFF"
+		],
+		"rank": "C",
+		"buff": []
+	},
+	"kanon": {
+		"name": "Burning Fighting Spirit",
+		"mainStat": "Accuracy to Earth",
+		"effect": "Reduces damage taken when granted Increased Defense",
+		"effect10": "When using a Burst Skill, increases Weakness Gauge damage by 1",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_WG_DMG"
+		],
+		"rank": "A",
+		"buff": []
+	},
+	"kappa": {
+		"name": "Guardian's Qualification",
+		"mainStat": "Critical Hit Chance to Water",
+		"effect": "Increases damage of ally Earth heroes",
+		"effect10": "+20% Defense",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": []
+	},
+	"kate": {
+		"name": "The Blacksmith's Devotion",
+		"mainStat": "Reduces Earth Damage Taken",
+		"effect": "When using Let the Forging Begin!, heals the caster by 10% of Max Health",
+		"effect10": "When using Let the Forging Begin!, heals the caster by 20% of Max Health",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": [],
+		"debuff": []
+	},
+	"kitsune-of-eternity-tamamo-no-mae": {
+		"name": "Withering Flower",
+		"mainStat": "Accuracy to Water",
+		"effect": "Damage dealt increases proportional to the caster's Effectiveness (Max 100%)",
+		"effect10": "When using Bite 'Em, Kitsu!, increases Action Points by 20",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_AP_CHARGE"
+		],
+		"rank": "B",
+		"debuff": []
+	},
+	"kuro": {
+		"name": "Onimaru Kunitsuna",
+		"mainStat": "Effectiveness to Dark",
+		"effect": "Increases Effectiveness of the wearer by 100%",
+		"effect10": "+20 Accuracy",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"laine": {
+		"name": "Bag of Rare Seeds",
+		"mainStat": "Effectiveness to Water",
+		"effect": "Increases damage proportional to the caster's Speed",
+		"effect10": "When using Destroy Civilization, if the target is inflicted with Poisoned, increases the duration of buffs granted to all allies by 1 turn",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": [],
+		"debuff": []
+	},
+	"laplace": {
+		"name": "Dean's Authority",
+		"mainStat": "Effectiveness to Fire",
+		"effect": "When using Grand Blue Punishment, increases Action Points by 35",
+		"effect10": "When using Grand Blue Punishment, increases Action Points by 50",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_AP_CHARGE"
+		],
+		"rank": "D",
+		"debuff": []
+	},
+	"leo": {
+		"name": "Song of Oblivion",
+		"mainStat": "Reduces Dark Damage Taken",
+		"effect": "Increases Defense proportional to missing Health",
+		"effect10": "When killed, Resurrects and recovers Max Health by 15% (Activated once per battle)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": [],
+		"debuff": []
+	},
+	"lily": {
+		"name": "Hand Ballista",
+		"mainStat": "Effectiveness to Fire",
+		"effect": "When using Bear Hunt, has a 40% chance to decrease the Evasion of all enemies for 1 turn(s)",
+		"effect10": "When using Bear Hunt, has a 70% chance to decrease the Evasion of all enemies for 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_STAT|ST_AVOID"
+		],
+		"rank": "D",
+		"buff": []
+	},
+	"lisha": {
+		"name": "Cleaning Brush",
+		"mainStat": "Accuracy to Earth",
+		"effect": "When using Meowteor Shower, increases damage dealt inversely proportionnal to the number of targets",
+		"effect10": "When using Meowteor Shower, increases Penetration by 30% when there is only one target",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": []
+	},
+	"luna": {
+		"name": "Machiavelli",
+		"mainStat": "Reduces Fire Damage Taken",
+		"effect": "Water allies' Dual Attack Weakness Gauge damage +70%",
+		"effect10": "Water allies's Max Health +30%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_WG_DMG"
+		],
+		"rank": "B",
+		"buff": []
+	},
+	"lyla": {
+		"name": "Victim Sanctuary",
+		"mainStat": "Reduces Fire Damage Taken",
+		"effect": "Upon activating Unified Hearts, grants a barrier to all allies for 2 turn(s) (proportional to target’s Health)",
+		"effect10": "Upon activating Unified Hearts, grants a barrier to all allies for 2 turn(s) (proportional to target’s Health)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_SHIELD_BASED_CASTER"
+		],
+		"rank": "A",
+		"debuff": []
+	},
+	"marian": {
+		"name": "Master's Gift",
+		"mainStat": "Effectiveness to Fire",
+		"effect": "When using Welcome!, inflicts Cursed 2 times on the target for 2 turn(s)",
+		"effect10": "When using Let Me Serve You Tea!, inflicts Cursed 2 times on the target for 2 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_DOT_CURSE"
+		],
+		"rank": "S",
+		"buff": []
+	},
+	"maxie": {
+		"name": "Scarlet Disaster",
+		"mainStat": "Effectiveness to Earth",
+		"effect": "When using Together as One, inflicts Burned for 2 turn(s)",
+		"effect10": "At the start of battle, grants increased Attack for 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_ATK"
+		],
+		"debuff": [
+			"BT_DOT_BURN"
+		],
+		"rank": "B"
+	},
+	"maxwell": {
+		"name": "Agateram",
+		"mainStat": "Accuracy to Light",
+		"effect": "Increases the Attack and Defense of ally Mages",
+		"effect10": "When attacking a single enemy, increases Penetration by 30% (Excluding Dual Attacks)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "S",
+		"buff": [],
+		"debuff": []
+	},
+	"mene": {
+		"name": "Finn the Shark",
+		"mainStat": "Reduces Fire Damage Taken",
+		"effect": "Increases Speed proportional to lost Health",
+		"effect10": "When using a Burst Skill, increases Weakness Gauge damage by 1",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_WG_DMG"
+		],
+		"rank": "A",
+		"buff": []
+	},
+	"mero": {
+		"name": "The Great Communicator",
+		"mainStat": "Accuracy to Earth",
+		"effect": "Increases damage dealt by all allies proportional to Mero's missing Health (Max 60%)",
+		"effect10": "Increases Dual Attack damage dealt by all allies",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"monad-eva": {
+		"name": "Partner's Will",
+		"mainStat": "Reduces Dark Damage Taken",
+		"effect": "Recovers Health of all allies by 15% of Monad Eva's Max Health when Time Dilation activates",
+		"effect10": "+20% Defense",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": []
+	},
+	"naru-kang": {
+		"name": "Cyclone Changer",
+		"mainStat": "Reduces Earth Damage Taken",
+		"effect": "If Typhoon Kick kills an enemy, the cooldown of Typhoon Kick is reset",
+		"effect10": "If Typhoon Kick kills an enemy, recovers Health of the wearer by 50%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "C",
+		"buff": [],
+		"debuff": []
+	},
+	"nella": {
+		"name": "Royal Lord",
+		"mainStat": "Reduces Light Damage Taken",
+		"effect": "Increases Action Points by 60 at the start of battle",
+		"effect10": "Increases Speed proportional to lost Health",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_AP_CHARGE"
+		],
+		"rank": "A",
+		"debuff": []
+	},
+	"noa": {
+		"name": "Super Genius's Toolkit",
+		"mainStat": "Accuracy to Water",
+		"effect": "When using Noa Kaizer X, increases damage dealt inversely proportional to the number of targets",
+		"effect10": "When using Noa Kaizer X, increases Penetration by 30% if there is only one target",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": [],
+		"debuff": []
+	},
+	"notia": {
+		"name": "Earth's Grace",
+		"mainStat": "Accuracy to Water",
+		"effect": "Grants Fierce Offensive for 1 turn(s) at the start of battle",
+		"effect10": "Increases Priority of the wearer by 20% after using Swift Support",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"UNIQUE_FIERCE_OFFENSIVE",
+			"BT_ACTION_GAUGE"
+		],
+		"rank": "S",
+		"debuff": []
+	},
+	"orox": {
+		"name": "O.P.B.",
+		"mainStat": "Reduces Water Damage Taken",
+		"effect": "Increases the chance to Counterattack proportional to missing Health (max 50.0%)",
+		"effect10": "+30 Resilience",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": []
+	},
+	"parti": {
+		"name": "Secret Cooking Utensils",
+		"mainStat": "Effectiveness (To: Earth)",
+		"effect": "When using Fine Dining, increases the Attack of the wearer for 1 turn(s)",
+		"effect10": "When using Fine Dining, increases the Attack of the wearer for 2 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"buff": [
+			"BT_STAT|ST_ATK"
+		],
+		"rank": "C",
+		"debuff": []
+	},
+	"pesketh": {
+		"name": "Hidden Glove",
+		"mainStat": "Accuracy to Water",
+		"effect": "When using Wire Blitz, steals 1 buff(s) from the target",
+		"effect10": "When using Wire Blitz, steals 2 buff(s) from the target",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_STEAL_BUFF"
+		],
+		"rank": "C",
+		"buff": []
+	},
+	"philia": {
+		"name": "Lie Detector",
+		"mainStat": "Effectiveness to Light",
+		"effect": "After using Out of My Way, inflicts Shocked for 1 turn(s) (ignores the target's Resilience)",
+		"effect10": "After attacking, has a 30% chance to inflict Stunned on the target for 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_DOT_LIGHTNING",
+			"BT_STUN"
+		],
+		"rank": "D",
+		"buff": []
+	},
+	"poolside-trickster-regina": {
+		"name": "Regina's All-Purpose Tube",
+		"mainStat": "Accuracy to Fire",
+		"effect": "Damage dealt increases proportional to the target's Attack (Max 100%)",
+		"effect10": "When defeating an enemy, increases Critical Damage by 5.0% (Max 3 stacks)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"regina": {
+		"name": "Harry Houdini",
+		"mainStat": "Critical Hit Chance to Dark",
+		"effect": "Removes 1 debuff(s) from the wearer when It's Checkmate! activates",
+		"effect10": "Increases Priority of the wearer by 20% when using It's Checkmate!",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"debuff": [
+			"BT_WG_DMG"
+		],
+		"rank": "A",
+		"buff": []
+	},
+	"rey": {
+		"name": "Sonic Blade",
+		"mainStat": "Accuracy to Water",
+		"effect": "Increases damage dealt to boss or Healer enemies",
+		"effect10": "When attacking Irregulars, increases Weakness Gauge damage by 100%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"rhona": {
+		"name": "Sword of Sorrows",
+		"mainStat": "Reduces Water Damage Taken",
+		"effect": "(Excluding critical hits) Speed increases by 40",
+		"effect10": "Damage dealt increases proportional to Critical Damage (Max 100%)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "S",
+		"buff": [],
+		"debuff": []
+	},
+	"rico": {
+		"name": "Automatic Bowgun",
+		"mainStat": "Effectiveness to Water",
+		"effect": "When using Financial Therapy, increases Priority by 50%",
+		"effect10": "+30 Effectiveness",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"debuff": []
+	},
+	"rin": {
+		"name": "Automatic Bowgun",
+		"mainStat": "Accuracy to Fire",
+		"effect": "Increases damage dealt to Fire enemies by 50% (Does not have any effect on elemental advantage)",
+		"effect10": "Increases damage dealt to Boss by 50%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"ritri": {
+		"name": "Paw-er Smasher",
+		"mainStat": "Critical Hit Chance Against Fire",
+		"effect": "Has a 50% chance to reduce the cooldown of Thump! Thump! Thump! Smash! by 1 turn(s) when hit",
+		"effect10": "Has a 80% chance to reduce the cooldown of Thump! Thump! Thump! Smash! by 1 turn(s) when hit",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "C",
+		"buff": [],
+		"debuff": []
+	},
+	"roxie": {
+		"name": "Sapphire Disaster",
+		"mainStat": "Critical Hit Chance Against Fire",
+		"effect": "When using Help Me, Sis!, increases buff duration of the wearer by 1 turn(s)",
+		"effect10": "When using Help Me, Sis!, reduces Priority of the target by 20%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "C",
+		"buff": [],
+		"debuff": [
+			"BT_ACTION_GAUGE"
+		]
+	},
+	"ryu-lion": {
+		"name": "Alf's Justitia",
+		"mainStat": "Accuracy to Water",
+		"effect": "Increases damage dealt of all attacks (Proportional to target's Max Health)",
+		"effect10": "When activating Rampaging Strike, ignores 30% of the target's Defense",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "S",
+		"buff": [],
+		"debuff": []
+	},
+	"saeran": {
+		"name": "Cloud Relic",
+		"mainStat": "Reduces Water Damage Taken",
+		"effect": "When using Gaze Upon Us, increases the Priority of all allies by 10%",
+		"effect10": "When using Gaze Upon Us, increases the Priority of all allies by 20%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"debuff": []
+	},
+	"shu": {
+		"name": "Love and Peace",
+		"mainStat": "Reduces Fire Damage Taken",
+		"effect": "When using Dropping the Beat!, increases Weakness Gauge damage by 1",
+		"effect10": "When using Dropping the Beat!, has a 30% chance to gain an extra turn",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "C",
+		"buff": [
+			"BT_ADDITIVE_TURN"
+		],
+		"debuff": [
+			"BT_WG_DMG"
+		]
+	},
+	"sigma": {
+		"name": "Modded Assault Weapon",
+		"mainStat": "Accuracy to Light",
+		"effect": "Upon using Add-on: Strike Launcher, has a 75% chance to inflict Stunned on the target for 1 turn(s) if the target is Shocked",
+		"effect10": "+30 Effectiveness",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": [],
+		"debuff": [
+			"BT_STUN"
+		]
+	},
+	"skadi": {
+		"name": "Damage and Loss",
+		"mainStat": "Reduces Dark Damage Taken",
+		"effect": "When using Voltaic Arrowstorm, increases Action Points by 35",
+		"effect10": "When using Voltaic Arrowstorm, increases Action Points by 50",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "C",
+		"buff": [
+			"BT_AP_CHARGE"
+		],
+		"debuff": []
+	},
+	"snow": {
+		"name": "Glacial Bow",
+		"mainStat": "Effectiveness to Fire",
+		"effect": "Frostblow has 40% chance to inflict Frozen on all targets",
+		"effect10": "Frostblow has 70% chance to inflict Frozen on all targets",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": [
+			"BT_FREEZE"
+		]
+	},
+	"sofia": {
+		"name": "Tempest",
+		"mainStat": "Accuracy to Fire",
+		"effect": "Increases the Dual Attack damage of all allies (excluding skill chains)",
+		"effect10": "Increases Priority recovery efficiency of the wearer by 30%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": []
+	},
+	"stella": {
+		"name": "Sidewinder",
+		"mainStat": "Accuracy to Dark",
+		"effect": "When using Unforgivable Sinner, decreases the Priority of the target by 30%",
+		"effect10": "When using Unforgivable Sinner, increases Penetration by 30%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": [
+			"BT_ACTION_GAUGE"
+		]
+	},
+	"sterope": {
+		"name": "Thunderer",
+		"mainStat": "Reduces Light Damage Taken",
+		"effect": "Increases Attack proportional to missing Health",
+		"effect10": "+30 Effectiveness",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": [],
+		"debuff": []
+	},
+	"tamamo-no-mae": {
+		"name": "Lycoris and Butterfly",
+		"mainStat": "Accuracy to Earth",
+		"effect": "Increases Boss damage of fire element heroes",
+		"effect10": "After activating a Dual Attack, has a 50% chance to inflict reduced Defense on the target for 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": [
+			"BT_STAT|ST_DEF"
+		]
+	},
+	"tamara": {
+		"name": "No.62's Punishment",
+		"mainStat": "Critical Hit Chance Against Fire",
+		"effect": "Increases Action Points by 60 at the start of battle",
+		"effect10": "+20 Accuracy",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [
+			"BT_AP_CHARGE"
+		],
+		"debuff": []
+	},
+	"tanya": {
+		"name": "Knight's Special Great Sword",
+		"mainStat": "Reduces Water Damage Taken",
+		"effect": "When using Terminate Protection, gains Immunity for 2 turn(s)",
+		"effect10": "+30 Effectiveness",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "C",
+		"buff": [
+			"BT_IMMUNE"
+		],
+		"debuff": []
+	},
+	"tio": {
+		"name": "Perfect Medical Bag",
+		"mainStat": "Reduces Earth Damage Taken",
+		"effect": "When using Basic First Aid, increases the Priority of all allies by 20%",
+		"effect10": "When using a Burst Skill, recovers Health of the wearer by 15%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [
+			"BT_ACTION_GAUGE"
+		],
+		"debuff": []
+	},
+	"valentine": {
+		"name": "Jackpot",
+		"mainStat": "Effectiveness to Earth",
+		"effect": "When using Trigger Happy, has a 30% chance to activate a Dual Attack",
+		"effect10": "When using Trigger Happy, has a 60% chance to activate a Dual Attack",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [
+			"BT_CALL_BACKUP"
+		],
+		"debuff": []
+	},
+	"vera": {
+		"name": "Blade of Destiny",
+		"mainStat": "Accuracy to Light",
+		"effect": "Increases Critical Damage by 3% after killing an enemy (max 5 stacks)",
+		"effect10": "Increases Critical Damage by 5% after killing an enemy (max 5 stacks)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": [],
+		"debuff": []
+	},
+	"veronica": {
+		"name": "Elysion",
+		"mainStat": "Reduces Fire Damage Taken",
+		"effect": "Increases damage proportional to Max Health",
+		"effect10": "+20% Max Health",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": [],
+		"debuff": []
+	},
+	"vlada": {
+		"name": "Adaptable Gatling",
+		"mainStat": "Accuracy to Earth",
+		"effect": "When using Paths of Glory, inflicts Burned for 1 turn(s)",
+		"effect10": "+20% Attack",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": [
+			"BT_DOT_BURN"
+		]
+	},
+	"yuri": {
+		"name": "Shieldwall",
+		"mainStat": "Reduces Water Damage Taken",
+		"effect": "When using I Can't Do It..., has a 80% chance to inflict Taunted on the target for 1 turn(s)",
+		"effect10": "When using I Can't Do It..., has a 100% chance to inflict Taunted on the target for 1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "C",
+		"buff": [],
+		"debuff": [
+			"BT_AGGRO"
+		]
+	},
+	"omega-nadja": {
+		"name": "Path of Endless Hunger",
+		"mainStat": "Reduces Light Damage Taken",
+		"effect": "Increases Caster's Effectiveness by 100%",
+		"effect10": "Increases Baster's Health by 35%",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": [],
+		"debuff": []
+	},
+	"demiurge-luna": {
+		"name": "King's Wisdom",
+		"mainStat": "Accuracy to Dark",
+		"effect": "Increases Priority by 50% when hit (Activated once every 4 turns)",
+		"effect10": "Prevents counterattacks when using The Moonlight Heralding Dawn",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "A",
+		"buff": ["BT_ACTION_GAUGE"],
+		"debuff": ["BT_SEAL_COUNTER"]
+	},
+	"liselotte": {
+		"name": "Astra Soteria",
+		"mainStat": "Reduces Earth Damage Taken",
+		"effect": "Damage taken reduced for allies with barrier",
+		"effect10": "Increased damage dealt for allies with barrier",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "B",
+		"buff": [],
+		"debuff": []
+	},
+	"fran": {
+		"name": "Miracle Machine",
+		"mainStat": "Accuracy to Water",
+		"effect": "Right after using Dopamine Boost, Counterattack, Revenge, or Agile Responde Cannot be triggered.",
+		"effect10": "When Using Hidden Event, increases Buff duration for all allies by +1 turn(s)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "D",
+		"buff": ["IG_Buff_BuffdurationIncrease"],
+		"debuff": ["BT_SEAL_COUNTER"]
+	}
+}

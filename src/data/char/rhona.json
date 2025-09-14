@@ -1,0 +1,189 @@
+{
+  "ID": "2000008",
+  "Fullname": "Rhona",
+  "Rarity": 3,
+  "Element": "Earth",
+  "rank_pvp":"B",
+  "gift": "Natural Object",
+  "role":"dps",
+  "Class": "Striker",
+  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\\n+5% Ally Team Defense\\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\\nBurst Level 3 Unlocked",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\\n+5% Ally Team Defense\\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Rose Slash",
+      "true_desc": "Attacks 2 enemies with Heavy Strike.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color>.",
+      "DescID": "SKILL_DESC_2000008_Skill01_LV1,SKILL_DESC_2000008_Skill01_LV1,SKILL_DESC_2000008_Skill01_LV1,SKILL_DESC_2000008_Skill01_LV1,SKILL_DESC_2000008_Skill01_LV1",
+      "IconName": "Skill_First_2000008",
+      "NameIDSymbol": "801",
+      "RangeType": "DOUBLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000008_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["Heavy Strike"],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks 2 enemies with Heavy Strike.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Tidal Wave",
+      "true_desc": "Attacks all enemies with Heavy Strike and recovers Health of the caster by <color=#28d9ed>10%</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and additionally increases inversely proportional to the number of targets.",
+      "ApproachTime": "ATTACK",
+      "ApproachZ": "0.3",
+      "DescID": "SKILL_DESC_2000008_Skill02_LV1,SKILL_DESC_2000008_Skill02_LV1,SKILL_DESC_2000008_Skill02_LV1,SKILL_DESC_2000008_Skill02_LV1,SKILL_DESC_2000008_Skill02_LV1",
+      "IconName": "Skill_Second_2000008",
+      "NameIDSymbol": "802",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000008_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": ["Heavy Strike","BT_STAT|ST_DEF"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increase Defense for 2 turns\\nRecovery +10%",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\n+2 turns Reduced Defense duration\\n+2 Weakness Gauge damage",
+          "level": 3
+        }
+      },
+      "cd": "3",
+      "debuff": ["BT_WG_DMG","BT_STAT|ST_DEF"],
+      "description": [
+        "Attacks all enemies with Heavy Strike and recovers Health of the caster by <color=#28d9ed>[Buff_V_2000008_2_2]</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and additionally increases inversely proportional to the number of targets."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% damage",
+          "+2% healing"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+3% healing"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "End of the World",
+      "true_desc": "Attacks all enemies with Heavy Strike and inflicts reduced <color=#28d9ed>Defense</color> on all targets for <color=#28d9ed>2 turn(s)</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and additionally increases inversely proportional to the number of targets.",
+      "DescID": "SKILL_DESC_2000008_Skill03_LV1,SKILL_DESC_2000008_Skill03_LV1,SKILL_DESC_2000008_Skill03_LV1,SKILL_DESC_2000008_Skill03_LV1,SKILL_DESC_2000008_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000008",
+      "NameIDSymbol": "803",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000008_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": ["Heavy Strike"],
+      "cd": "5",
+      "debuff": [
+        "BT_STAT|ST_DEF"
+      ],
+      "description": [
+        "Attacks all enemies with Heavy Strike and inflicts reduced <color=#28d9ed>Defense</color> on all targets for <color=#28d9ed>[Buff_T_2000008_3_3] turn(s)</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and additionally increases inversely proportional to the number of targets."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+10% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: Increases Skill Chain damage of all allies. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to the caster's <color=#28d9ed>Health</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack.",
+      "DescID": "SKILL_DESC_2000008_Skill04_LV1,SKILL_DESC_2000008_Skill04_LV1,SKILL_DESC_2000008_Skill04_LV1,SKILL_DESC_2000008_Skill04_LV1,SKILL_DESC_2000008_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Start",
+      "NameIDSymbol": "804",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "Heavy Strike",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: Increases Skill Chain damage of all allies. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to the caster's <color=#28d9ed>Health</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack."
+      ],
+      "dual_buff": "Heavy Strike",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"D"
+}

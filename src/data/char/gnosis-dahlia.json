@@ -1,0 +1,193 @@
+{
+  "ID": "2000090",
+  "Fullname": "Gnosis Dahlia",
+  "Rarity": 3,
+  "Element": "Dark",
+  "Class": "Striker",  
+  "gift": "Magic Tool",
+  "role":"dps",
+  "rank_pvp":"S",
+  "limited":true,
+  "tags":["limited","ignore-defense"],
+  "SubClass": "Attacker","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\nWhen Terminal Winter defeats an enemy, reduces the cooldown of Terminal Winter by 2 turns \n+8% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\n+50 Action Points at battle start",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\nAlways granted Hubris's Dominion\nWhen defeating an enemy, recovers Health by 10%"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Cold-Blooded Torture",
+      "true_desc": "Attacks an enemy.\\nHas a <color=#28d9ed>15%</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>20%</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack.",
+      "ApproachType": "ATTACK",
+      "ApproachZ": "1.5,1.5",
+      "DescID": "SKILL_DESC_2000090_Skill01_LV1,SKILL_DESC_2000090_Skill01_LV1,SKILL_DESC_2000090_Skill01_LV1,SKILL_DESC_2000090_Skill01_LV1,SKILL_DESC_2000090_Skill01_LV1",
+      "IconName": "Skill_First_2000090",
+      "NameIDSymbol": "9001",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000090_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE","BT_ADDITIVE_TURN"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Activates an enhanced attack\\nIncreases Penetration by 30%",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Gains an extra turn",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy.\\nHas a <color=#28d9ed>[Buff_V_2000090_1_1]</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>[Buff_V_2000090_1_3]</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "+10% effect chance",
+          "+10% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Untouchable One",
+      "true_desc": "(Passive Effect) When granted <color=#28d9ed>Hubris's Dominion</color>, damage suffered in one attack does not exceed <color=#28d9ed>95%</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks)\\n(Triggered Effect) Upon taking a critical hit, activates <color=#28d9ed>Cold-Blooded Torture</color> against the target.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000090_Skill02_LV1,SKILL_DESC_2000090_Skill02_LV1,SKILL_DESC_2000090_Skill02_LV1,SKILL_DESC_2000090_Skill02_LV1,SKILL_DESC_2000090_Skill02_LV1",
+      "IconName": "Skill_Second_2000090",
+      "NameIDSymbol": "9002",
+      "RangeType": "SINGLE",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000090_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": 0,
+      "debuff": [],
+      "description": [
+        "(Passive Effect) When granted <color=#28d9ed>Hubris's Dominion</color>, damage suffered in one attack does not exceed <color=#28d9ed>[Buff_V_2000090_2_1]</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks)\\n(Triggered Effect) Upon taking a critical hit, activates <color=#28d9ed>Cold-Blooded Torture</color> against the target."
+      ],
+      "enhancement": {
+        "2": [
+          "-5% Health Limit"
+        ],
+        "3": [
+          "-5% Health Limit"
+        ],
+        "4": [
+          "-5% Health Limit"
+        ],
+        "5": [
+          "-10% Health Limit"
+        ]
+      },
+      "wgr": 0
+    },
+    "SKT_ULTIMATE": {
+      "name": "Terminal Winter",
+      "true_desc": "Attacks all enemies. After attacking, grants <color=#28d9ed>Hubris's Dominion</color> to the caster for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000090_Skill03_LV1,SKILL_DESC_2000090_Skill03_LV1,SKILL_DESC_2000090_Skill03_LV1,SKILL_DESC_2000090_Skill03_LV1,SKILL_DESC_2000090_Skill03_LV5",
+      "IconName": "Skill_Ultimate_2000090",
+      "NameIDSymbol": "9003",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000090_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": ["UNIQUE_HUBRIS_DOMINION"],
+      "cd": "5",
+      "debuff": [        
+      ],
+      "description": [
+        "Attacks all enemies. After attacking, grants <color=#28d9ed>Hubris's Dominion</color> to the caster for <color=#28d9ed>[Buff_T_2000090_3_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage",
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "+10% damage",
+          "Ignores the Defense of the enemy with the highest Max Health"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>10%</color>.",
+      "DescID": "SKILL_DESC_2000090_Skill04_LV1,SKILL_DESC_2000090_Skill04_LV1,SKILL_DESC_2000090_Skill04_LV1,SKILL_DESC_2000090_Skill04_LV1,SKILL_DESC_2000090_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Dark_Finish",
+      "NameIDSymbol": "9004",
+      "RangeType": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "TargetTeamType_fallback1": "NONE",
+      "buff": "BT_CP_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>[Buff_V_2000090_chain_1_1]</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000090_backup_1_1]</color>."
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

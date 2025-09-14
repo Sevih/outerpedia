@@ -1,0 +1,432 @@
+{
+  "Defender": {
+    "description": "Generates 5 Action Points at the start of turn\nGenerates 35 Action Points when hit\nIncreases Defense by 15%",
+    "image": "/images/ui/classgraph/defender.webp",
+    "subclasses": {
+      "Sweeper": {
+        "description": "A combat specialist who waits patiently for an opening.",
+        "image": "/images/ui/classgraph/sweeper.webp",
+        "stats1": {
+          "atk": 0,
+          "def": 0,
+          "hp": 0,
+          "spd": 0,
+          "chc": 0,
+          "chd": 0,
+          "acc": 0,
+          "eva": 0,
+          "eff": 0,
+          "res": 0
+        },
+        "stats2": {
+          "atk": 729,
+          "def": 675,
+          "hp": 4368,
+          "spd": 99,
+          "chc": 5,
+          "chd": 150,
+          "acc": 150,
+          "eva": 160,
+          "eff": 80,
+          "res": 160
+        },
+        "stats3": {
+          "atk": 838,
+          "def": 730,
+          "hp": 4880,
+          "spd": 104,
+          "chc": 5,
+          "chd": 150,
+          "acc": 150,
+          "eva": 160,
+          "eff": 80,
+          "res": 160
+        }
+      },
+      "Phalanx": {
+        "description": "A defensive specialist who stands their ground to protect their allies.",
+        "image": "/images/ui/classgraph/phalanx.webp",
+        "stats1": {
+          "atk": 560,
+          "def": 556,
+          "hp": 4414,
+          "spd": 95,
+          "chc": 5,
+          "chd": 150,
+          "acc": 150,
+          "eva": 160,
+          "eff": 80,
+          "res": 160
+        },
+        "stats2": {
+          "atk": 659,
+          "def": 609,
+          "hp": 5025,
+          "spd": 98,
+          "chc": 5,
+          "chd": 150,
+          "acc": 150,
+          "eva": 160,
+          "eff": 80,
+          "res": 160
+        },
+        "stats3": {
+          "atk": 757,
+          "def": 661,
+          "hp": 5635,
+          "spd": 103,
+          "chc": 5,
+          "chd": 150,
+          "acc": 150,
+          "eva": 160,
+          "eff": 80,
+          "res": 160
+        }
+      }
+    }
+  },
+  "Striker": {
+    "description": "Generates 5 Action Points at the start of turn\nGenerates 20 Action Points when attacking\nIncreases Critical Hit Chance by 5%",
+    "image": "/images/ui/classgraph/striker.webp",
+    "subclasses": {
+      "Attacker": {
+        "description": "A brave warrior who crushes enemies with high attack.",
+        "image": "/images/ui/classgraph/attacker.webp",
+        "stats1": {
+          "atk": 856,
+          "def": 255,
+          "hp": 2975,
+          "spd": 126,
+          "chc": 10,
+          "chd": 150,
+          "acc": 140,
+          "eva": 170,
+          "eff": 120,
+          "res": 110
+        },
+        "stats2": {
+          "atk": 978,
+          "def": 288,
+          "hp": 3430,
+          "spd": 129,
+          "chc": 10,
+          "chd": 150,
+          "acc": 140,
+          "eva": 170,
+          "eff": 120,
+          "res": 110
+        },
+        "stats3": {
+          "atk": 1098,
+          "def": 319,
+          "hp": 3884,
+          "spd": 134,
+          "chc": 10,
+          "chd": 150,
+          "acc": 140,
+          "eva": 170,
+          "eff": 120,
+          "res": 110
+        }
+      },
+      "Bruiser": {
+        "description": "A brawler who specializes in prolonged battles with balanced offensive and defensive skills.",
+        "image": "/images/ui/classgraph/bruiser.webp",
+        "stats1": {
+          "atk": 755,
+          "def": 506,
+          "hp": 3776,
+          "spd": 90,
+          "chc": 10,
+          "chd": 150,
+          "acc": 160,
+          "eva": 200,
+          "eff": 120,
+          "res": 190
+        },
+        "stats2": {
+          "atk": 869,
+          "def": 560,
+          "hp": 4364,
+          "spd": 93,
+          "chc": 10,
+          "chd": 150,
+          "acc": 160,
+          "eva": 200,
+          "eff": 120,
+          "res": 190
+        },
+        "stats3": {
+          "atk": 982,
+          "def": 613,
+          "hp": 4951,
+          "spd": 98,
+          "chc": 10,
+          "chd": 150,
+          "acc": 160,
+          "eva": 200,
+          "eff": 120,
+          "res": 190
+        }
+      }
+    }
+  },
+  "Ranger": {
+    "description": "Generates 20 Action Points at the start of turn",
+    "image": "/images/ui/classgraph/ranger.webp",
+    "subclasses": {
+      "Tactician": {
+        "description": "A master strategist who gets the upper hand in battles by granting buffs to allies.",
+        "image": "/images/ui/classgraph/tactician.webp",
+        "stats1": {
+          "atk": 605,
+          "def": 357,
+          "hp": 3542,
+          "spd": 146,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 160,
+          "eff": 120,
+          "res": 110
+        },
+        "stats2": {
+          "atk": 704,
+          "def": 402,
+          "hp": 4003,
+          "spd": 149,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 160,
+          "eff": 120,
+          "res": 110
+        },
+        "stats3": {
+          "atk": 802,
+          "def": 446,
+          "hp": 4463,
+          "spd": 154,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 160,
+          "eff": 120,
+          "res": 110
+        }
+      },
+      "Vanguard": {
+        "description": "A leader who dominates the enemy with high Speed.",
+        "image": "/images/ui/classgraph/vanguard.webp",
+        "stats1": {
+          "atk": 0,
+          "def": 0,
+          "hp": 0,
+          "spd": 0,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 180,
+          "eff": 120,
+          "res": 110
+        },
+        "stats2": {
+          "atk": 743,
+          "def": 315,
+          "hp": 3221,
+          "spd": 149,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 180,
+          "eff": 120,
+          "res": 110
+        },
+        "stats3": {
+          "atk": 840,
+          "def": 351,
+          "hp": 3645,
+          "spd": 154,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 180,
+          "eff": 120,
+          "res": 110
+        }
+      }
+    }
+  },
+  "Healer": {
+    "description": "Generates 5 Action Points at the start of turn\nGenerates 25 Action Points when an ally is hit\nIncreases Health by 10%",
+    "image": "/images/ui/classgraph/healer.webp",
+    "subclasses": {
+      "Sage": {
+        "description": "A support specialist who thwarts the enemy's attempts to hamper their allies by granting them various effects.",
+        "image": "/images/ui/classgraph/sage.webp",
+        "stats1": {
+          "atk": 530,
+          "def": 621,
+          "hp": 3393,
+          "spd": 99,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 150,
+          "eff": 120,
+          "res": 175
+        },
+        "stats2": {
+          "atk": 624,
+          "def": 687,
+          "hp": 3907,
+          "spd": 102,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 150,
+          "eff": 120,
+          "res": 175
+        },
+        "stats3": {
+          "atk": 717,
+          "def": 754,
+          "hp": 4419,
+          "spd": 107,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 150,
+          "eff": 120,
+          "res": 175
+        }
+      },
+      "Reliever": {
+        "description": "A savior who heals allies in moments of peril.",
+        "image": "/images/ui/classgraph/reliever.webp",
+        "stats1": {
+          "atk": 530,
+          "def": 425,
+          "hp": 4019,
+          "spd": 101,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 150,
+          "eff": 120,
+          "res": 150
+        },
+        "stats2": {
+          "atk": 624,
+          "def": 478,
+          "hp": 4548,
+          "spd": 104,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 150,
+          "eff": 120,
+          "res": 150
+        },
+        "stats3": {
+          "atk": 717,
+          "def": 530,
+          "hp": 5076,
+          "spd": 109,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 150,
+          "eff": 120,
+          "res": 150
+        }
+      }
+    }
+  },
+  "Mage": {
+    "description": "Generates 5 Action Points at the start of turn\nGenerates Action Points when using skills\nIncreases Attack by 10%",
+    "image": "/images/ui/classgraph/mage.webp",
+    "subclasses": {
+      "Wizard": {
+        "description": "A master of magic who wreaks havoc on the battlefield with powerful spells.",
+        "image": "/images/ui/classgraph/wizard.webp",
+        "stats1": {
+          "atk": 858,
+          "def": 197,
+          "hp": 3300,
+          "spd": 116,
+          "chc": 5,
+          "chd": 150,
+          "acc": 135,
+          "eva": 160,
+          "eff": 120,
+          "res": 100
+        },
+        "stats2": {
+          "atk": 982,
+          "def": 219,
+          "hp": 3748,
+          "spd": 119,
+          "chc": 5,
+          "chd": 150,
+          "acc": 135,
+          "eva": 160,
+          "eff": 120,
+          "res": 100
+        },
+        "stats3": {
+          "atk": 1105,
+          "def": 240,
+          "hp": 4195,
+          "spd": 124,
+          "chc": 5,
+          "chd": 150,
+          "acc": 135,
+          "eva": 160,
+          "eff": 120,
+          "res": 100
+        }
+      },
+      "Enchanter": {
+        "description": "A mastermind in battles who weakens ennemies with a variety of additional effects.",
+        "image": "/images/ui/classgraph/enchanter.webp",
+        "stats1": {
+          "atk": 0,
+          "def": 0,
+          "hp": 0,
+          "spd": 0,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 160,
+          "eff": 120,
+          "res": 100
+        },
+        "stats2": {
+          "atk": 852,
+          "def": 342,
+          "hp": 3285,
+          "spd": 124,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 160,
+          "eff": 120,
+          "res": 100
+        },
+        "stats3": {
+          "atk": 960,
+          "def": 373,
+          "hp": 3710,
+          "spd": 129,
+          "chc": 5,
+          "chd": 150,
+          "acc": 120,
+          "eva": 160,
+          "eff": 120,
+          "res": 100
+        }
+      }
+    }
+  }
+}

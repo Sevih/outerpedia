@@ -1,0 +1,329 @@
+{
+  "v1": {
+    "label": "April 2025 Version - Poison",
+    "date": "2025-04-15",
+    "phase1": {
+      "bosses": [
+        {
+          "id": "01",
+          "name": "Chimera",
+          "geas": {
+            "1": {
+              "bonus": {
+                "effect": "Reduces damage taken from enemies inflicted with Poisoned by 300%.",
+                "ratio": "-25%",
+                "image": "special",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "At the end of the Boss Monster's turn, reduces Chain Points of allies by -10",
+                "ratio": "+20%",
+                "image": "Boss",
+                "bg": "1"
+              }
+            },
+            "2": {
+              "bonus": {
+                "effect": "Increases damage inflicted by Light Heroes by 35%. Reduces damage taken by Light Heroes by 35%.",
+                "ratio": "-25%",
+                "image": "Light",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "+50% boss Defense",
+                "ratio": "+40%",
+                "image": "Boss",
+                "bg": "2"
+              }
+            },
+            "3": {
+              "bonus": {
+                "effect": "Increases Attack, Defense and Health of Earth Heroes by 50%",
+                "ratio": "-45%",
+                "image": "Earth",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Increases the Speed of Boss monster by 50%",
+                "ratio": "+40%",
+                "image": "Speed",
+                "bg": "2"
+              }
+            },
+            "4": {
+              "bonus": {
+                "effect": "Increases damage against enemies inflicted with Poisoned",
+                "ratio": "-25%",
+                "image": "Boss",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Team restriction (You cannot use stricker heroes in your team)",
+                "ratio": "+40%",
+                "image": "Striker",
+                "bg": "2"
+              }
+            },
+            "5": {
+              "bonus": {
+                "effect": "Increases Chain Points by 15 at the start of an ally's turn",
+                "ratio": "-45%",
+                "image": "CP",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Increases damage against Boss monsters proportional to the number of debuffs",
+                "ratio": "+65%",
+                "image": "Boss",
+                "bg": "3"
+              }
+            }
+          },
+          "notes": [
+            "Opens with {D/BT_DOT_BURN} and {D/BT_STAT|ST_DEF}.",
+            "Immune to {D/BT_STUN}."
+          ],
+          "recommended": [
+            {
+              "name": "Ryu Lion",
+              "comment": "Cleanse and Burn Resist"
+            },
+            {
+              "name": "Ame",
+              "comment": "High burst vs Fire"
+            },
+            {
+              "name":"Monad Eva",
+              "comment": "Dual attack"
+            }
+          ],
+          "team": [
+            [
+              "Ryu Lion",
+              "Ame",
+              "Rey"
+            ],
+            [
+              "Monad Eva",
+              "Rey"
+            ],
+            [
+              "Monad Eva",
+              "Rey"
+            ],
+            [
+              "Monad Eva",
+              "Rey"
+            ]
+          ],
+          "video": {
+            "id": "abc123",
+            "title": "Molten Fang Full Auto"
+          }
+        },
+        {
+          "id": "02",
+          "name": "Tyrant Toddler",
+          "geas": {
+            "1": {
+              "bonus": {
+                "effect": "Increases damage against enemies inflicted with Poisoned by 200%.",
+                "ratio": "-25%",
+                "image": "Boss",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Increases the Attack of boss monsters by 30%",
+                "ratio": "+20%",
+                "image": "Atk",
+                "bg": "1"
+              }
+            },
+            "2": {
+              "bonus": {
+                "effect": "Increases damage dealt by cursed/fixed damage by 100%",
+                "ratio": "-65%",
+                "image": "Curse",
+                "bg": "3"
+              },
+              "malus": {
+                "effect": "Team restriction (You cannot use ranger heroes in your team)",
+                "ratio": "+40%",
+                "image": "Ranger",
+                "bg": "2"
+              }
+            },
+            "3": {
+              "bonus": {
+                "effect": "Increases damage dealt to targets inflicted with break by 1000%",
+                "ratio": "-25%",
+                "image": "Atk",
+                "bg": "1"
+              },
+              "malus": {
+                "effect": "Reduces Weakness Gauge damage taken by Boss monsters by 20%",
+                "ratio": "+20%",
+                "image": "WG_Down",
+                "bg": "1"
+              }
+            },
+            "4": {
+              "bonus": {
+                "effect": "Increases Penetration of Mage heroes by 40%",
+                "ratio": "-45%",
+                "image": "Mage",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Team restriction (You cannot use mage heroes in your team)",
+                "ratio": "+40%",
+                "image": "Mage",
+                "bg": "2"
+              }
+            },
+            "5": {
+              "bonus": {
+                "effect": "Increases Penetration of Ranger heroes by 40%",
+                "ratio": "-45%",
+                "image": "Ranger",
+                "bg": "2"
+              },
+              "malus": {
+                "effect": "Team restriction (You can one use earth heroes in your team)",
+                "ratio": "+65%",
+                "image": "Earth",
+                "bg": "3"
+              }
+            }
+          },
+          "notes": [
+            "Applies {D/BT_FREEZE} every 2 turns.",
+            "Reduces AP gain by 50%."
+          ],
+          "recommended": [
+            {
+              "name": "Notia",
+              "comment": "Cleanser and AP booster"
+            },
+            {
+              "name": "Delta",
+              "comment": "Good into slow fights"
+            }
+          ],
+          "team": [
+            [
+              "Notia",
+              "Delta"
+            ],
+            [
+              "Rey",
+              "Kappa",
+              "Demiurge Stella"
+            ]
+          ]
+        }
+      ]
+    },
+    "phase2": {
+      "bossName":"Maxwell",
+      "overview": [
+        "Boss will strike with his enrage every 50K damage taken.",
+        "Takes 300% {D/BT_WG_DMG} if {D/BT_DOT_POISON}",
+        "The best way to deal with him is to chain break"
+      ],
+      "teams": {
+        "team1": {
+          "label": "Full Earth Team",
+          "icon": "earth.webp",
+          "video": {
+            "id": "rfWf4ytqWW8",
+            "title": "Outerplane - The Madman's Laboratory - 11.4M Points by Sevih"
+          },
+          "geas-active": [
+            "1-3B",
+            "2-3B",
+            "2-1B",
+            "1-5M"
+          ],
+          "setup": [
+            [
+              "Ryu Lion"
+            ],
+            [
+              "Notia"
+            ],
+            [
+              "Charlotte"
+            ],
+            [
+              "Kappa",
+              "Hanbyul Lee"
+            ]
+          ]
+        },
+        "team2": {
+          "label": "Laine team",
+          "icon": "dark.webp",
+          "video": {
+            "id": "Szgkhaza1jI",
+            "title": "Maxell Guild Raid with Maxwell DPS by XITangoIX"
+          },
+          "geas-active": [
+            "1-3B",
+            "2-3B",
+            "2-1B",
+            "1-5M"
+          ],
+          "setup": [
+            [
+              "Maxwell",
+              "Demiurge Astei", "Ame"
+            ],
+            [
+              "Laine"
+            ],
+            [
+              "Eternal",
+              "Dahlia"
+            ],
+            [
+              "Skadi",
+              "Tamara"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Speed Tuning : Maxwell > Laine > Skadi > Eternal"
+            },
+            {
+              "type": "p",
+              "string": "Chain Order : Eternal > Laine > Maxwell > Skadi"
+            },
+            {
+              "type": "p",
+              "string": "Maxwell S1 + Laine S3 + Skadi S2 musn't exceed 50K damage (you don't want the boss to strike you with his enrage move)"
+            },
+            {
+              "type": "p",
+              "string": "Remove Eternal EE : you don't want her to get an extra turn"
+            },
+            {
+              "type": "p",
+              "string": "Break rotation"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Maxwell prio : S3 > S2 Burn Lv 2 > S1",
+                "Laine : Only S1 for getting priority",
+                "Skadi : Only S1 Burn Lv 1 exept for first break when she will use Chain attack",
+                "Eternal : Use S3 once to speed down the boss then use Chain attack on the other break"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

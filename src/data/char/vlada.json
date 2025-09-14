@@ -1,0 +1,193 @@
+{
+  "ID": "2000073",
+  "Fullname": "Vlada",
+  "Rarity": 3,
+  "Element": "Fire",
+  "rank_pvp":"D",
+  "gift": "Science",
+  "role":"dps",
+  "Class": "Striker",
+  "SubClass": "Attacker","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\\n+4% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\\n+4% Ally Team Critical Damage\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Ballad of a Soldier",
+      "true_desc": "Attacks an enemy. Has a <color=#28d9ed>50%</color> chance to inflict Burned on the target for <color=#28d9ed>2 turn(s)</color>. This effect ignores the target's Resilience.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000073_Skill01_LV1,SKILL_DESC_2000073_Skill01_LV1,SKILL_DESC_2000073_Skill01_LV1,SKILL_DESC_2000073_Skill01_LV1,SKILL_DESC_2000073_Skill01_LV1",
+      "IconName": "Skill_First_2000073",
+      "NameIDSymbol": "7301",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000073_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [
+        "BT_DOT_BURN"
+      ],
+      "description": [
+        "Attacks an enemy. Has a <color=#28d9ed>[Buff_C_2000073_1_1]</color> chance to inflict Burned on the target for <color=#28d9ed>[Buff_T_2000073_1_1] turn(s)</color>. This effect ignores the target's Resilience."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% damage",
+          "+10% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Paths of Glory",
+      "true_desc": "Attacks all enemies. Detonates all Burned stacks on the target, and increases damage dealt by detonation by <color=#28d9ed>50%</color>. Increases damage dealt to Earth targets by an additional <color=#28d9ed>20%</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000073_Skill02_LV1,SKILL_DESC_2000073_Skill02_LV1,SKILL_DESC_2000073_Skill02_LV1,SKILL_DESC_2000073_Skill02_LV1,SKILL_DESC_2000073_Skill02_LV1",
+      "IconName": "Skill_Second_2000073",
+      "NameIDSymbol": "7302",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000073_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases damage\\nEnhances Detonation on Earth targets",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases Burned duration by 2 turns when detonating",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changed to Enhanced Skill\\nReduces Apocalypse Now cooldown by 2 turns",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [
+        "BT_DETONATE"
+      ],
+      "description": [
+        "Attacks all enemies. Detonates all Burned stacks on the target, and increases damage dealt by detonation by <color=#28d9ed>50%</color>. Increases damage dealt to Earth targets by an additional <color=#28d9ed>20%</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Apocalypse Now",
+      "true_desc": "Attacks all enemies. Inflicts Burned on the target for <color=#28d9ed>1 turn(s)</color> (Applied 2 times). This effect ignores the target's Resilience, and resets cooldown when an enemy is defeated. ",
+      "DescID": "SKILL_DESC_2000073_Skill03_LV1,SKILL_DESC_2000073_Skill03_LV1,SKILL_DESC_2000073_Skill03_LV1,SKILL_DESC_2000073_Skill03_LV1,SKILL_DESC_2000073_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000073",
+      "NameIDSymbol": "7303",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000073_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_DOT_BURN"
+      ],
+      "description": [
+        "Attacks all enemies. Inflicts Burned on the target for <color=#28d9ed>[Buff_T_2000073_3_1] turn(s)</color> (Applied 2 times). This effect ignores the target's Resilience, and resets cooldown when an enemy is defeated. "
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% damage",
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict <color=#28d9ed>Burned</color> on all enemies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>70%</color> chance to inflict Burned on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000073_Skill04_LV1,SKILL_DESC_2000073_Skill04_LV1,SKILL_DESC_2000073_Skill04_LV1,SKILL_DESC_2000073_Skill04_LV1,SKILL_DESC_2000073_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Fire_Start",
+      "NameIDSymbol": "7304",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_DOT_BURN",
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000073_chain_1_1]</color> chance to inflict <color=#28d9ed>Burned</color> on all enemies for <color=#28d9ed>[Buff_T_2000073_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000073_backup_1_1]</color> chance to inflict Burned on the target for <color=#28d9ed>[Buff_T_2000073_backup_1_1] turn(s)</color>."
+      ],
+      "dual_debuff": "BT_DOT_BURN",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"C"
+}

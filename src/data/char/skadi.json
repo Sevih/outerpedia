@@ -1,0 +1,200 @@
+{
+  "ID": "2000101",
+  "Fullname": "Skadi",
+  "Rarity": 3,
+  "Element": "Light",
+  "gift": "Craftwork",
+  "rank_pvp":"B",
+  "role":"support",
+  "Class": "Ranger",
+  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+2% Ally Team Accuracy\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Close-Range Fire",
+      "true_desc": "Attacks an enemy. After attacking, has a <color=#28d9ed>50%</color> chance to grant increased Attack to the ally with the highest Attack for <color=#28d9ed>1 turn(s)</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000101_Skill01_LV1,SKILL_DESC_2000101_Skill01_LV1,SKILL_DESC_2000101_Skill01_LV1,SKILL_DESC_2000101_Skill01_LV1,SKILL_DESC_2000101_Skill01_LV1",
+      "IconName": "Skill_First_2000101",
+      "NameIDSymbol": "10101",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000101_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_ATK","BT_CALL_BACKUP"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 60,
+          "effect": "Activates Dual Attack with 1 ally",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 90,
+          "effect": "+1 Weakness Gauge damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 120,
+          "effect": "Inflicts Marked on the target before attacking for 2 turns",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": ["BT_MARKING","BT_WG_DMG"],
+      "description": [
+        "Attacks an enemy. After attacking, has a <color=#28d9ed>[Buff_C_2000101_1_1]</color> chance to grant increased Attack to the ally with the highest Attack for <color=#28d9ed>[Buff_T_2000101_1_1] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+10% damage",
+          "+15% effect chance"
+        ],
+        "5": [
+          "+10% damage",
+          "+20% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Mid-Range Acrobatic Shooting",
+      "true_desc": "Has a <color=#28d9ed>80%</color> chance to grant increased Critical Hit Chance and Critical Damage to all allies for <color=#28d9ed>2 turn(s)</color>, then attacks an enemy.\\n\\nWhen attacking an <color=#ffd732>Irregular</color>, inflicts reduced Defense on the target for <color=#28d9ed>2 turn(s)</color> before attacking. This effect ignores the target's Resilience and Immunity.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000101_Skill02_LV1,SKILL_DESC_2000101_Skill02_LV1,SKILL_DESC_2000101_Skill02_LV1,SKILL_DESC_2000101_Skill02_LV1,SKILL_DESC_2000101_Skill02_LV1",
+      "IconName": "Skill_Second_2000101",
+      "NameIDSymbol": "10102",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000101_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_CRITICAL_RATE",
+        "BT_STAT|ST_CRITICAL_DMG_RATE"
+      ],
+      "cd": "4",
+      "debuff": [
+        "BT_STAT|ST_DEF"
+      ],
+      "description": [
+        "Has a <color=#28d9ed>[Buff_C_2000101_2_1]</color> chance to grant increased Critical Hit Chance and Critical Damage to all allies for <color=#28d9ed>[Buff_T_2000101_2_1] turn(s)</color>, then attacks an enemy.\\n\\nWhen attacking an <color=#ffd732>Irregular</color>, inflicts reduced Defense on the target for <color=#28d9ed>[Buff_T_2000101_2_3] turn(s)</color> before attacking. This effect ignores the target's Resilience and Immunity."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+20% effect chance"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+1 turn effect duration",
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Voltaic Arrowstorm",
+      "true_desc": "Has a <color=#28d9ed>70%</color> chance to grant increased Accuracy and Effectiveness to all allies for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies.\\nHas a <color=#28d9ed>100%</color> chance to reduce <color=#28d9ed>skill cooldowns</color> of all allies except for the caster by <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000101_Skill03_LV1,SKILL_DESC_2000101_Skill03_LV1,SKILL_DESC_2000101_Skill03_LV1,SKILL_DESC_2000101_Skill03_LV1,SKILL_DESC_2000101_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000101",
+      "NameIDSymbol": "10103",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000101_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_ACCURACY",
+        "BT_STAT|ST_BUFF_CHANCE",
+        "BT_COOL_CHARGE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Has a <color=#28d9ed>[Buff_C_2000101_3_1]</color> chance to grant increased Accuracy and Effectiveness to all allies for <color=#28d9ed>[Buff_T_2000101_3_1] turn(s)</color>, then attacks all enemies.\\nHas a <color=#28d9ed>[Buff_C_2000101_3_3]</color> chance to reduce <color=#28d9ed>skill cooldowns</color> of all allies except for the caster by <color=#28d9ed>[Buff_V_2000101_3_3] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+15% effect chance",
+          "+20% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, reduces skill cooldowns of all allies by <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>20%</color>.",
+      "DescID": "SKILL_DESC_2000101_Skill04_LV1,SKILL_DESC_2000101_Skill04_LV1,SKILL_DESC_2000101_Skill04_LV1,SKILL_DESC_2000101_Skill04_LV1,SKILL_DESC_2000101_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Finish",
+      "NameIDSymbol": "10104",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_COOL_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: After attacking, reduces skill cooldowns of all allies by <color=#28d9ed>[Buff_V_2000101_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000101_backup_1_1]</color>."
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"S"
+}

@@ -1,0 +1,192 @@
+{
+  "ID": "2000053",
+  "Fullname": "Demiurge Stella",
+  "Rarity": 3,
+  "Element": "Light",
+  "rank_pvp":"S",
+  "role":"dps",
+  "gift": "Science",
+  "tags":["premium"],
+  "Class": "Striker",
+  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+10% Ally Team Defense\n+25 Action Points at battle start\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\n+25 Action Points at battle start",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+10% Ally Defense\n+1 turn ally barriers at battle start (Proportional to target's Health)"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Flight of Abraxas",
+      "true_desc": "Attacks all enemies.\\nIf it is the caster's turn, obtains <color=#28d9ed>1</color> <color=#28d9ed>Desire to Dominate (Unique Resource)</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals greater damage to boss monsters.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000053_Skill01_LV1,SKILL_DESC_2000053_Skill01_LV1,SKILL_DESC_2000053_Skill01_LV1,SKILL_DESC_2000053_Skill01_LV1,SKILL_DESC_2000053_Skill01_LV1",
+      "IconName": "Skill_First_2000053",
+      "NameIDSymbol": "5301",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000053_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_SHIELD_BASED_CASTER","BT_ADDITIVE_TURN"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 120,
+          "effect": "Adds barrier (Proportional to Health)\\nGains 1 additional Desire to Dominate",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 180,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 300,
+          "effect": "Extra Turn\\nGains 4 additional\\n Desire to Dominate",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks all enemies.\\nIf it is the caster's turn, obtains <color=#28d9ed>[Buff_V_2000053_1_1]</color> <color=#28d9ed>Desire to Dominate (Unique Resource)</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals greater damage to boss monsters."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Merciless God",
+      "true_desc": "(Passive Effect) Immune to <color=#28d9ed>Stunned</color>, <color=#28d9ed>Frozen</color>, <color=#28d9ed>Petrified</color>, and <color=#28d9ed>Priority Reduction</color>. Damage taken from single attacks is reduced by <color=#28d9ed>20%</color>.\\n(Triggered Effect) Prepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of the skill.\\nAttacks all enemies and increases the caster's Priority by <color=#28d9ed>25%</color> when <color=#28d9ed>Revenge</color> is activated. This skill deals damage proportional to the caster's <color=#28d9ed>Max Health</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000053_Skill02_LV1,SKILL_DESC_2000053_Skill02_LV1,SKILL_DESC_2000053_Skill02_LV1,SKILL_DESC_2000053_Skill02_LV1,SKILL_DESC_2000053_Skill02_LV1",
+      "IconName": "Skill_Second_2000053",
+      "NameIDSymbol": "5302",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000053_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "SYS_BUFF_REVENGE",
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": "1",
+      "debuff": [],
+      "description": [
+        "(Passive Effect) Immune to <color=#28d9ed>Stunned</color>, <color=#28d9ed>Frozen</color>, <color=#28d9ed>Petrified</color>, and <color=#28d9ed>Priority Reduction</color>. Damage taken from single attacks is reduced by <color=#28d9ed>[Buff_V_2000053_2_1]</color>.\\n(Triggered Effect) Prepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of the skill.\\nAttacks all enemies and increases the caster's Priority by <color=#28d9ed>[Buff_V_2000053_2_3]</color> when <color=#28d9ed>Revenge</color> is activated. This skill deals damage proportional to the caster's <color=#28d9ed>Max Health</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-10% damage taken"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "+20% damage",
+          "-20% damage taken"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_ULTIMATE": {
+      "name": "The World Is Mine",
+      "true_desc": "<color=#28d9ed>Requires 5 Desire to Dominate (Unique Resource) to use this skill.</color>\\nAttacks all enemies, and inflicts <color=#28d9ed>Petrified</color> for <color=#28d9ed>1 turn(s)</color>. The Petrified effect ignores Resilience.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals increased damage to boss monsters.",
+      "DescID": "SKILL_DESC_2000053_Skill03_LV1,SKILL_DESC_2000053_Skill03_LV1,SKILL_DESC_2000053_Skill03_LV1,SKILL_DESC_2000053_Skill03_LV1,SKILL_DESC_2000053_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000053",
+      "NameIDSymbol": "5303",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000053_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [
+        "BT_STONE"
+      ],
+      "description": [
+        "<color=#28d9ed>Requires [Buff_V_2000053_3_1] Desire to Dominate (Unique Resource) to use this skill.</color>\\nAttacks all enemies, and inflicts <color=#28d9ed>Petrified</color> for <color=#28d9ed>[Buff_T_2000053_3_3] turn(s)</color>. The Petrified effect ignores Resilience.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals increased damage to boss monsters."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% damage"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 4
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals <color=#28d9ed>10%</color> of the target's Max Health as fixed damage to the target. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>.",
+      "DescID": "SKILL_DESC_2000053_Skill04_LV1,SKILL_DESC_2000053_Skill04_LV1,SKILL_DESC_2000053_Skill04_LV1,SKILL_DESC_2000053_Skill04_LV1,SKILL_DESC_2000053_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Finish",
+      "NameIDSymbol": "5304",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_FIXED_DAMAGE",
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals <color=#28d9ed>[Buff_V_2000053_chain_1_1]</color> of the target's Max Health as fixed damage to the target. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000053_backup_1_1]</color>."
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"S"
+}

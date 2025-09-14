@@ -1,0 +1,193 @@
+{
+  "ID": "2000082",
+  "Fullname": "Roxie",
+  "Rarity": 3,
+  "Element": "Water",
+  "rank_pvp":"A",
+  "gift": "Natural Object",
+  "role":"dps",
+  "Class": "Mage",
+  "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+3% Ally Team Critical Hit Chance\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+3% Ally Team Critical Hit Chance\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Chilling, Isn't It?",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>30%</color> chance to inflict <color=#28d9ed>Shocked</color> for <color=#28d9ed>2 turn(s)</color>.\\nDamage dealt increases when the caster is granted a buff.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000082_Skill01_LV1,SKILL_DESC_2000082_Skill01_LV1,SKILL_DESC_2000082_Skill01_LV1,SKILL_DESC_2000082_Skill01_LV1,SKILL_DESC_2000082_Skill01_LV1",
+      "IconName": "Skill_First_2000082",
+      "NameIDSymbol": "8201",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000082_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 70,
+          "effect": "Shocked Chance +50%\\nInflicts an additional Shocked for 2 turns",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 105,
+          "effect": "+1 turn debuff duration",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 140,
+          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nResets all skill cooldowns\\nHelp Me, Sis guaranteed activation",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [
+        "BT_DOT_LIGHTNING","IG_Buff_DeBuffdurationIncrease"
+      ],
+      "description": [
+        "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000082_1_1]</color> chance to inflict <color=#28d9ed>Shocked</color> for <color=#28d9ed>[Buff_T_2000082_1_1] turn(s)</color>.\\nDamage dealt increases when the caster is granted a buff."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+20% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Help Me, Sis!",
+      "true_desc": "(Triggered Effect) When an ally <color=#28d9ed>Ranger</color> attacks, activates an additional attack on the enemy with the highest Speed. After attacking, increases Priority of the caster by <color=#28d9ed>25%</color>, and grants increased Effectiveness to ally <color=#28d9ed>Mages</color> and <color=#28d9ed>Rangers</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "AIType": "ATTACK",
+      "ApproachTime": "HIGHEST,ST_SPEED",
+      "DescID": "SKILL_DESC_2000082_Skill02_LV1,SKILL_DESC_2000082_Skill02_LV1,SKILL_DESC_2000082_Skill02_LV1,SKILL_DESC_2000082_Skill02_LV1,SKILL_DESC_2000082_Skill02_LV1",
+      "IconName": "Skill_Second_2000082",
+      "NameIDSymbol": "8202",
+      "RangeType": "SINGLE",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000082_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_STAT|ST_BUFF_CHANCE"
+      ],
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "(Triggered Effect) When an ally <color=#28d9ed>Ranger</color> attacks, activates an additional attack on the enemy with the highest Speed. After attacking, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000082_2_2]</color>, and grants increased Effectiveness to ally <color=#28d9ed>Mages</color> and <color=#28d9ed>Rangers</color> for <color=#28d9ed>[Buff_T_2000082_2_3] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% Priority"
+        ],
+        "5": [
+          "+15% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Twin Tornado!",
+      "true_desc": "Inflicts <color=#28d9ed>Shocked</color> once on all enemies for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies. Damage dealt increases proportionally to the number of debuffs inflicted on the target. This skill always has elemental advantage.",
+      "DescID": "SKILL_DESC_2000082_Skill03_LV1,SKILL_DESC_2000082_Skill03_LV1,SKILL_DESC_2000082_Skill03_LV1,SKILL_DESC_2000082_Skill03_LV1,SKILL_DESC_2000082_Skill03_LV5",
+      "IconName": "Skill_Ultimate_2000082",
+      "NameIDSymbol": "8203",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000082_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_DOT_LIGHTNING"
+      ],
+      "description": [
+        "Inflicts <color=#28d9ed>Shocked</color> once on all enemies for <color=#28d9ed>[Buff_T_2000082_3_1] turn(s)</color>, then attacks all enemies. Damage dealt increases proportionally to the number of debuffs inflicted on the target. This skill always has elemental advantage."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+20% damage"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+1 effect stack"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict Shocked on all enemies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to inflict Shocked for <color=#28d9ed>2 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000082_Skill04_LV1,SKILL_DESC_2000082_Skill04_LV1,SKILL_DESC_2000082_Skill04_LV1,SKILL_DESC_2000082_Skill04_LV1,SKILL_DESC_2000082_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Start",
+      "NameIDSymbol": "8204",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_DOT_LIGHTNING",
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000082_chain_1_1]</color> chance to inflict Shocked on all enemies for <color=#28d9ed>[Buff_T_2000082_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000082_backup_1_1]</color> chance to inflict Shocked for <color=#28d9ed>[Buff_T_2000082_backup_1_1] turn(s)</color>."
+      ],
+      "dual_debuff": "BT_DOT_LIGHTNING",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

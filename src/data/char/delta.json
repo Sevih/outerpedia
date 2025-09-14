@@ -1,0 +1,192 @@
+{
+  "ID": "2000099",
+  "Fullname": "Delta",
+  "Rarity": 3,
+  "Element": "Earth",
+  "rank_pvp":"C",
+  "gift": "Science",
+  "role":"dps",
+  "Class": "Striker",
+  "tags":["ignore-defense"],
+  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+5% Ally Team Defense\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+5% Ally Team Defense\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Delta Burst",
+      "true_desc": "Attacks an enemy. When the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skill’s damage dealt increases proportional to Max Health instead of Attack.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000099_Skill01_LV1,SKILL_DESC_2000099_Skill01_LV1,SKILL_DESC_2000099_Skill01_LV1,SKILL_DESC_2000099_Skill01_LV1,SKILL_DESC_2000099_Skill01_LV5",
+      "IconName": "Skill_First_2000099",
+      "NameIDSymbol": "9901",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000099_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_REMOVE_DEBUFF"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 60,
+          "effect": "Increases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 90,
+          "effect": "+1 Weakness Gauge damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 120,
+          "effect": "Changes to Enhanced Skill\\nRemoves all debuffs from the caster\\nIncreases damage",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": ["BT_WG_DMG"],
+      "description": [
+        "Attacks an enemy. When the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+30% Penetration against Bosses"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Code: Machine Gun Fist",
+      "true_desc": "(Triggered Effect)\\nPrepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of this skill.\\nWhen <color=#28d9ed>Revenge</color> is activated, attacks the target and has a <color=#28d9ed>70%</color> chance each to grant <color=#28d9ed>Counterattack</color> to all allies for <color=#28d9ed>1 turn(s)</color>.\\nThis skill’s damage dealt increases proportional to Max Health instead of Attack.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000099_Skill02_LV1,SKILL_DESC_2000099_Skill02_LV1,SKILL_DESC_2000099_Skill02_LV1,SKILL_DESC_2000099_Skill02_LV1,SKILL_DESC_2000099_Skill02_LV1",
+      "IconName": "Skill_Second_2000099",
+      "NameIDSymbol": "9902",
+      "RangeType": "SINGLE",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000099_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "SYS_BUFF_REVENGE",
+        "BT_STAT|ST_COUNTER_RATE"
+      ],
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "(Triggered Effect)\\nPrepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of this skill.\\nWhen <color=#28d9ed>Revenge</color> is activated, attacks the target and has a <color=#28d9ed>[Buff_C_2000099_2_2]</color> chance each to grant <color=#28d9ed>Counterattack</color> to all allies for <color=#28d9ed>[Buff_T_2000099_2_2] turn(s)</color>.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+20% damage"
+        ],
+        "5": [
+          "+15% effect chance",
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Delta's Forbidden Technique",
+      "true_desc": "Attacks an enemy, and grants <color=#28d9ed>Counterattack</color> for <color=#28d9ed>1 turn(s)</color>.\\nWhen the target is a Boss or the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skill’s damage dealt increases proportional to Max Health instead of Attack.",
+      "DescID": "SKILL_DESC_2000099_Skill03_LV1,SKILL_DESC_2000099_Skill03_LV1,SKILL_DESC_2000099_Skill03_LV1,SKILL_DESC_2000099_Skill03_LV1,SKILL_DESC_2000099_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000099",
+      "NameIDSymbol": "9903",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000099_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_COUNTER_RATE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks an enemy, and grants <color=#28d9ed>Counterattack</color> for <color=#28d9ed>[Buff_T_2000099_3_1] turn(s)</color>.\\nWhen the target is a Boss or the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "+20% damage",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and after attacking, grants Counterattack for <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.",
+      "DescID": "SKILL_DESC_2000099_Skill04_LV1,SKILL_DESC_2000099_Skill04_LV1,SKILL_DESC_2000099_Skill04_LV1,SKILL_DESC_2000099_Skill04_LV1,SKILL_DESC_2000099_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Join",
+      "NameIDSymbol": "9904",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_STAT|ST_COUNTER_RATE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and after attacking, grants Counterattack for <color=#28d9ed>[Buff_T_2000099_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"D"
+}

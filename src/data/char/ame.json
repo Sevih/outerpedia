@@ -1,0 +1,204 @@
+{
+  "ID": "2000065",
+  "Fullname": "Ame",
+  "Rarity": 3,
+  "Element": "Earth",
+  "Class": "Mage",
+  "gift": "Natural Object",
+  "role": "dps",
+  "rank_pvp": "B",
+  "tags":["ignore-defense"],
+  "SubClass": "Wizard",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+3% Ally Team Critical Hit Chance\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+3% Ally Team Critical Hit Chance\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Finish",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Mikazuki 1st Art: Blooming",
+      "true_desc": "Attacks an enemy.\\nDepending on the unique effect applied to the caster, activates one of the following effects:\\n\\nUme Ichirin: Attacks an enemy. Has a <color=#28d9ed>70%</color> chance to increase the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color> after attacking.\\n\\nSakura, Chiru: Attacks all enemies. Always attacks with <color=#28d9ed>elemental advantage</color>.",
+      "ApproachZ": "0,-1.8,0",
+      "DescID": "SKILL_DESC_2000065_Skill01_LV1,SKILL_DESC_2000065_Skill01_LV1,SKILL_DESC_2000065_Skill01_LV1,SKILL_DESC_2000065_Skill01_LV1,SKILL_DESC_2000065_Skill01_LV1",
+      "IconName": "Skill_First_2000065",
+      "NameIDSymbol": "6501",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000065_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "All Additional Attack effects apply",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Increases Penetration by 30%",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy.\\nDepending on the unique effect applied to the caster, activates one of the following effects:\\n\\nUme Ichirin: Attacks an enemy. Has a <color=#28d9ed>[Buff_C_2000065_1_1]</color> chance to increase the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000065_1_1]</color> after attacking.\\n\\nSakura, Chiru: Attacks all enemies. Always attacks with <color=#28d9ed>elemental advantage</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Mikazuki 2nd Art: Pruning",
+      "true_desc": "(Passive Effect) Increases <color=#28d9ed>Critical Hit Chance</color> by <color=#28d9ed>10%</color> and increases damage dealt against bosses.\\nIncreases Weakness Gauge damage dealt to enemies when using <color=#28d9ed>Mikazuki 1st Art: Blooming</color> by <color=#28d9ed>1</color>.",
+      "DescID": "SKILL_DESC_2000065_Skill02_LV1,SKILL_DESC_2000065_Skill02_LV1,SKILL_DESC_2000065_Skill02_LV1,SKILL_DESC_2000065_Skill02_LV1,SKILL_DESC_2000065_Skill02_LV1",
+      "IconName": "Skill_Second_2000065",
+      "NameIDSymbol": "6502",
+      "RangeType": "NONE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000065_Skill02",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": 0,
+      "debuff": [],
+      "description": [
+        "(Passive Effect) Increases <color=#28d9ed>Critical Hit Chance</color> by <color=#28d9ed>[Buff_V_2000065_2_3]</color> and increases damage dealt against bosses.\\nIncreases Weakness Gauge damage dealt to enemies when using <color=#28d9ed>Mikazuki 1st Art: Blooming</color> by <color=#28d9ed>[Buff_V_2000065_2_1]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage against bosses"
+        ],
+        "3": [
+          "+10% damage against bosses"
+        ],
+        "4": [
+          "+10% damage against bosses"
+        ],
+        "5": [
+          "+10% damage against bosses",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 0
+    },
+    "SKT_ULTIMATE": {
+      "name": "Mikazuki 3rd Art: Flower Charm",
+      "true_desc": "Attacks an enemy, then grants an extra turn.\\n\\nBefore attacking, if the target's Health is less than or equal to <color=#28d9ed>90%</color>, grants the <color=#28d9ed>Ume Ichirin</color> effect for <color=#28d9ed>1 turn(s)</color> and increases damage dealt.\\n\\nIf the target's Health is greater than <color=#28d9ed>90%</color>, grants the <color=#28d9ed>Sakura, Chiru</color> effect for <color=#28d9ed>1 turn(s)</color> and generates <color=#28d9ed>5</color> <color=#28d9ed>Chain Points</color>.",
+      "ApproachZ": "2,2,2",
+      "DescID": "SKILL_DESC_2000065_Skill03_LV1,SKILL_DESC_2000065_Skill03_LV1,SKILL_DESC_2000065_Skill03_LV1,SKILL_DESC_2000065_Skill03_LV1,SKILL_DESC_2000065_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000065",
+      "NameIDSymbol": "6503",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000065_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "UNIQUE_SAKURA_CHIRU",
+        "UNIQUE_UME_ICHIRIN",
+        "BT_ADDITIVE_TURN"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks an enemy, then grants an extra turn.\\n\\nBefore attacking, if the target's Health is less than or equal to <color=#28d9ed>90%</color>, grants the <color=#28d9ed>Ume Ichirin</color> effect for <color=#28d9ed>[Buff_T_2000065_3_1] turn(s)</color> and increases damage dealt.\\n\\nIf the target's Health is greater than <color=#28d9ed>90%</color>, grants the <color=#28d9ed>Sakura, Chiru</color> effect for <color=#28d9ed>[Buff_T_2000065_3_2] turn(s)</color> and generates <color=#28d9ed>[Buff_V_2000065_3_4]</color> <color=#28d9ed>Chain Points</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+1 turn effect duration"
+        ],
+        "4": [
+          "+15% damage"
+        ],
+        "5": [
+          "+1 turn effect duration",
+          "+10% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>25</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Generates <color=#28d9ed>15</color> Action Points for the caster.",
+      "DescID": "SKILL_DESC_2000065_Skill04_LV1,SKILL_DESC_2000065_Skill04_LV1,SKILL_DESC_2000065_Skill04_LV1,SKILL_DESC_2000065_Skill04_LV1,SKILL_DESC_2000065_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Earth_Finish",
+      "NameIDSymbol": "6504",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_CP_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>[Buff_V_2000065_chain_1_1]</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Generates <color=#28d9ed>[Buff_V_2000065_backup_1_1]</color> Action Points for the caster."
+      ],
+      "dual_buff": "BT_AP_CHARGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank": "A"
+}

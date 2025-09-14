@@ -1,0 +1,183 @@
+{
+  "ID": "2000038",
+  "Fullname": "Shu",
+  "Rarity": 1,
+  "Element": "Water",
+  "gift": "Luxury",
+  "Class": "Healer",
+  "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+5 Speed\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n+5 Speed\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Dropping the Beat!",
+      "true_desc": "Attacks an enemy and <color=#28d9ed>heals</color> the ally with the lowest current Health by <color=#28d9ed>5%</color> of the target's Max Health.",
+      "DescID": "SKILL_DESC_2000038_Skill01_LV1,SKILL_DESC_2000038_Skill01_LV1,SKILL_DESC_2000038_Skill01_LV1,SKILL_DESC_2000038_Skill01_LV1,SKILL_DESC_2000038_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000038",
+      "NameIDSymbol": "3801",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000038_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_AP_CHARGE"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 100,
+          "effect": "Effects are applied to all allies",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 150,
+          "effect": "Target Action Points +25",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 200,
+          "effect": "Enhances Heal (Amount)",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and <color=#28d9ed>heals</color> the ally with the lowest current Health by <color=#28d9ed>[Buff_V_2000038_1_1]</color> of the target's Max Health."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+2% healing"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+3% healing"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Let's Get the Party Started!",
+      "true_desc": "Removes <color=#28d9ed>1</color> <color=#28d9ed> buff(s)</color> from the target.",
+      "ApproachType": "CAST_DEBUFF",
+      "DescID": "SKILL_DESC_2000038_Skill02_LV1,SKILL_DESC_2000038_Skill02_LV1,SKILL_DESC_2000038_Skill02_LV1,SKILL_DESC_2000038_Skill02_LV1,SKILL_DESC_2000038_Skill02_LV5",
+      "IconName": "Skill_Second_2000038",
+      "NameIDSymbol": "3802",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000038_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": "5",
+      "debuff": [
+        "BT_REMOVE_BUFF"
+      ],
+      "description": [
+        "Removes <color=#28d9ed>[Buff_V_2000038_2_1]</color> <color=#28d9ed> buff(s)</color> from the target."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown"
+        ],
+        "3": [
+          "+1 buff removed"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "Removes all buffs"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "It's Party Time!",
+      "true_desc": "Heals all allies by <color=#28d9ed>5%</color> and removes <color=#28d9ed>1</color> <color=#28d9ed>debuff(s)</color>. The healing is increased by <color=#28d9ed>5%</color> on targets inflicted with a debuff.",
+      "DescID": "SKILL_DESC_2000038_Skill03_LV1,SKILL_DESC_2000038_Skill03_LV1,SKILL_DESC_2000038_Skill03_LV1,SKILL_DESC_2000038_Skill03_LV1,SKILL_DESC_2000038_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000038",
+      "NameIDSymbol": "3803",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "HEAL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000038_Skill03",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_REMOVE_DEBUFF"
+      ],
+      "cd": "6",
+      "debuff": [],
+      "description": [
+        "Heals all allies by <color=#28d9ed>[Buff_V_2000038_3_1]</color> and removes <color=#28d9ed>[Buff_V_2000038_3_3]</color> <color=#28d9ed>debuff(s)</color>. The healing is increased by <color=#28d9ed>[Buff_V_2000038_3_1]</color> on targets inflicted with a debuff."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown"
+        ],
+        "3": [
+          "+10% healing"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+1 debuff removed"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, heals the ally with the lowest Health. The amount of healing is proportional to the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health. The amount of healing is proportional to the caster's Max Health.",
+      "DescID": "SKILL_DESC_2000038_Skill04_LV1,SKILL_DESC_2000038_Skill04_LV1,SKILL_DESC_2000038_Skill04_LV1,SKILL_DESC_2000038_Skill04_LV1,SKILL_DESC_2000038_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Join",
+      "NameIDSymbol": "3804",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, heals the ally with the lowest Health. The amount of healing is proportional to the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health. The amount of healing is proportional to the caster's Max Health."
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"C",
+  "role":"sustain"
+}

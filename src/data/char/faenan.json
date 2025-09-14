@@ -1,0 +1,187 @@
+{
+  "ID": "2000027",
+  "Fullname": "Faenan",
+  "Rarity": 2,
+  "Element": "Light",
+  "Class": "Healer",
+  "rank":"A",
+  "gift": "Craftwork",
+  "role":"sustain",
+  "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+5 Speed\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n+5 Speed\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Luster Explosion",
+      "true_desc": "Attacks an enemy and <color=#28d9ed>heals</color> the ally with the lowest current Health by <color=#28d9ed>5%</color> of the target's Max Health.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000027_Skill01_LV1,SKILL_DESC_2000027_Skill01_LV1,SKILL_DESC_2000027_Skill01_LV1,SKILL_DESC_2000027_Skill01_LV1,SKILL_DESC_2000027_Skill01_LV1",
+      "IconName": "Skill_First_2000027",
+      "NameIDSymbol": "2701",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000027_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and <color=#28d9ed>heals</color> the ally with the lowest current Health by <color=#28d9ed>[Buff_V_2000027_1_1]</color> of the target's Max Health."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+2% healing"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+3% healing"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Healing Prayer",
+      "true_desc": "<color=#28d9ed>Heals</color> the caster and the selected ally by <color=#28d9ed>15%</color> of the target's Max Health and increases the selected ally's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>. ",
+      "ApproachTime": "HEAL",
+      "DescID": "SKILL_DESC_2000027_Skill02_LV1,SKILL_DESC_2000027_Skill02_LV1,SKILL_DESC_2000027_Skill02_LV1,SKILL_DESC_2000027_Skill02_LV1,SKILL_DESC_2000027_Skill02_LV1",
+      "IconName": "Skill_Second_2000027",
+      "NameIDSymbol": "2702",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000027_Skill02",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_AP_CHARGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 100,
+          "effect": "Effects are applied to all allies",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 150,
+          "effect": "Enhances Heal (Amount)",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 200,
+          "effect": "Target Action Points +50",
+          "level": 3
+        }
+      },
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "<color=#28d9ed>Heals</color> the caster and the selected ally by <color=#28d9ed>[Buff_V_2000027_2_1]</color> of the target's Max Health and increases the selected ally's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000027_2_2]</color>. "
+      ],
+      "enhancement": {
+        "2": [
+          "+5% healing"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+5% healing"
+        ],
+        "5": [
+          "-1 turn Skill Cooldown",
+          "+5% healing"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Lunar Protection",
+      "true_desc": "<color=#28d9ed>Heals</color> all allies by <color=#28d9ed>20%</color> of the target's Max Health and grants <color=#28d9ed>Immunity</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000027_Skill03_LV1,SKILL_DESC_2000027_Skill03_LV1,SKILL_DESC_2000027_Skill03_LV1,SKILL_DESC_2000027_Skill03_LV1,SKILL_DESC_2000027_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000027",
+      "NameIDSymbol": "2703",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "HEAL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000027_Skill03",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_IMMUNE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "<color=#28d9ed>Heals</color> all allies by <color=#28d9ed>[Buff_V_2000027_3_1]</color> of the target's Max Health and grants <color=#28d9ed>Immunity</color> for <color=#28d9ed>[Buff_T_2000027_3_2] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+3% healing"
+        ],
+        "3": [
+          "+3% healing",
+          "+1 turn Immunity duration"
+        ],
+        "4": [
+          "+4% healing"
+        ],
+        "5": [
+          "+5% healing",
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, heals the ally with the lowest Health. The amount of healing is proportional to the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, heals the ally with the lowest <color=#28d9ed>Health</color> by <color=#28d9ed>10%</color> of Max Health.",
+      "DescID": "SKILL_DESC_2000027_Skill04_LV1,SKILL_DESC_2000027_Skill04_LV1,SKILL_DESC_2000027_Skill04_LV1,SKILL_DESC_2000027_Skill04_LV1,SKILL_DESC_2000027_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Join",
+      "NameIDSymbol": "2704",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, heals the ally with the lowest Health. The amount of healing is proportional to the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, heals the ally with the lowest <color=#28d9ed>Health</color> by <color=#28d9ed>[Buff_V_2000027_backup_1_1]</color> of Max Health."
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

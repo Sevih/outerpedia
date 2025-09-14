@@ -1,0 +1,191 @@
+{
+  "ID": "2000083",
+  "Fullname": "Nella",
+  "Rarity": 3,
+  "Element": "Dark",
+  "role":"sustain",
+  "gift": "Magic Tool",
+  "rank_pvp":"S",
+  "Class": "Healer",
+  "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+5% Ally Team Health\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+5% Ally Team Health\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Fiend's Courtesy",
+      "true_desc": "Attacks an enemy.\\n\\nBefore attacking, if the caster's current Health is <color=#28d9ed>85%</color> or lower, recovers Health of the <color=#28d9ed>caster</color> by <color=#28d9ed>5%</color>.\\n\\nBefore attacking, if the caster's current Health is greater than <color=#28d9ed>85%</color>, recovers Health of the ally with the lowest Health by <color=#28d9ed>5%</color> of Nella's Max Health.",
+      "DescID": "SKILL_DESC_2000083_Skill01_LV1,SKILL_DESC_2000083_Skill01_LV1,SKILL_DESC_2000083_Skill01_LV1,SKILL_DESC_2000083_Skill01_LV1,SKILL_DESC_2000083_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000083",
+      "NameIDSymbol": "8301",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000083_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_AP_CHARGE","BT_IMMUNE"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Effects are applied to all allies",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Health Recovery +15%\\nTarget Action Points +50 (Excluding the caster)",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Changes to Enhanced Attack\\n+2 turns Immunity for all allies",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy.\\n\\nBefore attacking, if the caster's current Health is <color=#28d9ed>85%</color> or lower, recovers Health of the <color=#28d9ed>caster</color> by <color=#28d9ed>[Buff_V_2000083_1_1]</color>.\\n\\nBefore attacking, if the caster's current Health is greater than <color=#28d9ed>85%</color>, recovers Health of the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000083_1_2]</color> of Nella's Max Health."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% healing"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+5% healing"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Oath of Darkness",
+      "true_desc": "(Triggered Effect) When hit, activates <color=#28d9ed>Agile Response</color>.\\nIncreases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>50%</color>, and recovers <color=#28d9ed>Health</color> of all allies by <color=#28d9ed>10%</color> of Nella's Max Health. Then, increases Action Points of all allies except the caster by <color=#28d9ed>25</color>.",
+      "ApproachType": "CAST_BUFF",
+      "DescID": "SKILL_DESC_2000083_Skill02_LV1,SKILL_DESC_2000083_Skill02_LV1,SKILL_DESC_2000083_Skill02_LV1,SKILL_DESC_2000083_Skill02_LV1,SKILL_DESC_2000083_Skill02_LV1",
+      "IconName": "Skill_Second_2000083",
+      "NameIDSymbol": "8302",
+      "RangeType": "SINGLE",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000083_Skill02",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_AP_CHARGE",
+        "SYS_REVENGE_HEAL"
+      ],
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "(Triggered Effect) When hit, activates <color=#28d9ed>Agile Response</color>.\\nIncreases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000083_2_2]</color>, and recovers <color=#28d9ed>Health</color> of all allies by <color=#28d9ed>[Buff_V_2000083_2_3]</color> of Nella's Max Health. Then, increases Action Points of all allies except the caster by <color=#28d9ed>[Buff_V_2000083_2_4]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% Priority"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% Priority"
+        ],
+        "5": [
+          "+10% healing"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "The Coronation",
+      "true_desc": "Increases Priority of surviving allies by <color=#28d9ed>10%</color>, then <color=#28d9ed>Resurrects (Greater)</color> all dead allies. Afterward, recovers <color=#28d9ed>Health</color> of all allies by <color=#28d9ed>10%</color> of Nella's Max Health, and grants Immunity for <color=#28d9ed>1 turn(s)</color>.",
+      "DescID": "SKILL_DESC_2000083_Skill03_LV1,SKILL_DESC_2000083_Skill03_LV1,SKILL_DESC_2000083_Skill03_LV1,SKILL_DESC_2000083_Skill03_LV1,SKILL_DESC_2000083_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000083",
+      "NameIDSymbol": "8303",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "RESURRECTION",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000083_Skill03",
+      "TargetTeamType": "TEAM_WITH_DEAD",
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_RESURRECTION_G",
+        "BT_IMMUNE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Increases Priority of surviving allies by <color=#28d9ed>[Buff_V_2000083_3_1]</color>, then <color=#28d9ed>Resurrects (Greater)</color> all dead allies. Afterward, recovers <color=#28d9ed>Health</color> of all allies by <color=#28d9ed>[Buff_V_2000083_3_3]</color> of Nella's Max Health, and grants Immunity for <color=#28d9ed>[Buff_T_2000083_3_4] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% Priority"
+        ],
+        "3": [
+          "+10% healing"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+1 turn effect duration"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, grants <color=#28d9ed>Sustained Recovery</color> to all allies for <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers Health of the caster by <color=#28d9ed>15%</color>.",
+      "DescID": "SKILL_DESC_2000083_Skill04_LV1,SKILL_DESC_2000083_Skill04_LV1,SKILL_DESC_2000083_Skill04_LV1,SKILL_DESC_2000083_Skill04_LV1,SKILL_DESC_2000083_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Dark_Start",
+      "NameIDSymbol": "8304",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "SYS_CONTINU_HEAL",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, grants <color=#28d9ed>Sustained Recovery</color> to all allies for <color=#28d9ed>[Buff_T_2000083_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers Health of the caster by <color=#28d9ed>[Buff_V_2000083_backup_1_1]</color>."
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

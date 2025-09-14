@@ -1,0 +1,193 @@
+{
+  "ID": "2000074",
+  "Fullname": "Dianne",
+  "Rarity": 3,
+  "Element": "Light",
+  "rank_pvp":"A",
+  "gift": "Luxury",
+  "role":"sustain",
+  "Class": "Healer",
+  "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+5 Ally Team Speed\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+5 Ally Team Speed\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Hubby, Captured!",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>85%</color> chance to increase Priority of the ally with the highest Attack by <color=#28d9ed>10%</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000074_Skill01_LV1,SKILL_DESC_2000074_Skill01_LV1,SKILL_DESC_2000074_Skill01_LV1,SKILL_DESC_2000074_Skill01_LV1,SKILL_DESC_2000074_Skill01_LV1",
+      "IconName": "Skill_First_2000074",
+      "NameIDSymbol": "7401",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000074_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000074_1_1]</color> chance to increase Priority of the ally with the highest Attack by <color=#28d9ed>[Buff_V_2000074_1_1]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+10% Priority"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "I'm Not Letting You Go â¡",
+      "true_desc": "Attacks all enemies, and recovers Health of all allies by <color=#28d9ed>10%</color>. For each target damaged, increases Priority of the caster by <color=#28d9ed>10%</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000074_Skill02_LV1,SKILL_DESC_2000074_Skill02_LV1,SKILL_DESC_2000074_Skill02_LV3,SKILL_DESC_2000074_Skill02_LV3,SKILL_DESC_2000074_Skill02_LV3",
+      "IconName": "Skill_Second_2000074",
+      "NameIDSymbol": "7402",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000074_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE","BT_AP_CHARGE","SYS_CONTINU_HEAL","IG_Buff_BuffdurationIncrease"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 100,
+          "effect": "Increases Priority of all allies\\n+25 Action Points to the fastest ally",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 150,
+          "effect": "Increases Sustained Recovery duration by 1 turn",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 200,
+          "effect": "Changed to Enhanced Skill\\n+2 Weakness Gauge Damage\\n+50 Action Points to all allies",
+          "level": 3
+        }
+      },
+      "cd": "5",
+      "debuff": ["BT_WG_DMG"],
+      "description": [
+        "Attacks all enemies, and recovers Health of all allies by <color=#28d9ed>[Buff_V_2000074_2_1]</color>. For each target damaged, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000074_2_3]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+1 turn buff duration for all allies"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+10% healing"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Blessed Wedding Road",
+      "true_desc": "Attacks all enemies. Removes all debuffs from all allies and grants Immunity for <color=#28d9ed>2 turn(s)</color>. Recovers Health of all allies by <color=#28d9ed>15%</color>.",
+      "DescID": "SKILL_DESC_2000074_Skill03_LV1,SKILL_DESC_2000074_Skill03_LV1,SKILL_DESC_2000074_Skill03_LV1,SKILL_DESC_2000074_Skill03_LV1,SKILL_DESC_2000074_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000074",
+      "NameIDSymbol": "7403",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000074_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_REMOVE_DEBUFF",
+        "BT_IMMUNE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies. Removes all debuffs from all allies and grants Immunity for <color=#28d9ed>[Buff_T_2000074_3_2] turn(s)</color>. Recovers Health of all allies by <color=#28d9ed>[Buff_V_2000074_3_3]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% healing"
+        ],
+        "5": [
+          "+1 turn effect duration",
+          "+10% healing"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases Priority of the ally with the highest Attack by <color=#28d9ed>20%</color>.",
+      "DescID": "SKILL_DESC_2000074_Skill04_LV1,SKILL_DESC_2000074_Skill04_LV1,SKILL_DESC_2000074_Skill04_LV1,SKILL_DESC_2000074_Skill04_LV1,SKILL_DESC_2000074_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Light_Start",
+      "NameIDSymbol": "7404",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "SYS_BUFF_BREAK_DMG",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>[Buff_T_2000074_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases Priority of the ally with the highest Attack by <color=#28d9ed>[Buff_V_2000074_backup_1_1]</color>."
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

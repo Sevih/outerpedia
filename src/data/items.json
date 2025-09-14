@@ -1,0 +1,847 @@
+[
+  {
+    "name": "Unlimited Restaurant Voucher",
+    "rarity": "legendary",
+    "description": "Upon usage, increase the selected hero's level to 100."
+  },
+  {
+    "name": "Book of Evolution",
+    "rarity": "legendary",
+    "description": "Upon usage, increase the selected hero's Upgrade Stage to 6"
+  },
+  {
+    "name": "Oath of Determination",
+    "rarity": "legendary",
+    "description": "Upon usage, increase the selected hero's Trust Level to 10"
+  },
+  {
+    "name": "Sandwich",
+    "rarity": "normal",
+    "description": "Increases experience by 250 when used to enhance a hero."
+  },
+  {
+    "name": "Cake Slice",
+    "rarity": "superior",
+    "description": "Increases experience by 600 when used to enhance a hero."
+  },
+  {
+    "name": "Prosciutto",
+    "rarity": "epic",
+    "description": "Increases experience by 2 500 when used to enhance a hero."
+  },
+  {
+    "name": "Steak Dish",
+    "rarity": "legendary",
+    "description": "Increases experience by 8 000 when used to enhance a hero."
+  },
+  {
+    "name": "Food",
+    "rarity": "legendary",
+    "description": "Steak Dish / Prosciutto / Cake Slice / Sandwich."
+  },
+  {
+    "name": "Light Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Light energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  },
+  {
+    "name": "Light Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Light energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  },
+  {
+    "name": "Light Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Light energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  },
+  {
+    "name": "Refined Light Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Light Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "Dark Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Dark energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  },
+  {
+    "name": "Dark Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Dark energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  },
+  {
+    "name": "Dark Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Dark energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  },
+  {
+    "name": "Refined Dark Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Dark Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "Fire Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Fire energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  },
+  {
+    "name": "Fire Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Fire energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  },
+  {
+    "name": "Fire Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Fire energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  },
+  {
+    "name": "Refined Fire Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Fire Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "Earth Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Earth energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  },
+  {
+    "name": "Earth Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Earth energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  },
+  {
+    "name": "Earth Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Earth energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  },
+  {
+    "name": "Refined Earth Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Earth Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "Water Upgrade Stone Fragment",
+    "rarity": "normal",
+    "description": "A fragment of an Upgrade Stone containing Water energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 5."
+  },
+  {
+    "name": "Water Upgrade Stone Piece",
+    "rarity": "superior",
+    "description": "A piece of an Upgrade Stone containing Water energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 10."
+  },
+  {
+    "name": "Water Upgrade Stone",
+    "rarity": "epic",
+    "description": "An Upgrade Stone containing Water energy. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 25."
+  },
+  {
+    "name": "Refined Water Upgrade Stone",
+    "rarity": "legendary",
+    "description": "A refined Water Upgrade Stone with enhanced purity. Can be used to upgrade heroes. Can be given as a present to a hero of the same element to raise their Trust Level. Increases trust by 50."
+  },
+  {
+    "name": "USB Drive",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Portable Gaming Device",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Smartphone",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Dungeon Core Fragment",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Collector's Coin",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Elegant Teacup",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Decorative Chest Armor",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Noble's Ceremonial Sword",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Mana Potion",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Fay Dust",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Witch's Cauldron",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Magic Textbook",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Paper Crane",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Crystal Orb",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Lion Statue",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Dreamcatcher",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Berry",
+    "rarity": "normal",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 100. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Wildflower",
+    "rarity": "superior",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 200. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Phantom Bird's Egg",
+    "rarity": "epic",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 500. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Leaf of World Tree",
+    "rarity": "legendary",
+    "description": "Gift this item to a hero you want to build friendship with to increase their trust level by 1 000. If this is a present they like, you will gain a bonus increase to their trust level."
+  },
+  {
+    "name": "Basic Skill Manual",
+    "rarity": "superior",
+    "description": "Contains basic knowledge on skill use. Can be used to enhance skills."
+  },
+  {
+    "name": "Intermediate Skill Manual",
+    "rarity": "epic",
+    "description": "Contains advanced knowledge on skill use. Can be used to enhance skills."
+  },
+  {
+    "name": "Professional Skill Manual",
+    "rarity": "legendary",
+    "description": "Contains the knowledge of masters who reached the pinnacle of skill use. Can be used to enhance skills."
+  },
+  {
+    "name": "Purple Stardust",
+    "rarity": "legendary",
+    "description": "A rare material used for enhancing Talisman."
+  },
+  {
+    "name": "Blue Stardust",
+    "rarity": "legendary",
+    "description": "A material used for enhancing Talisman."
+  },
+  {
+    "name": "Purple Memory Stone",
+    "rarity": "legendary",
+    "description": "A rare material used for enhancing Exclusive Equipment."
+  },
+  {
+    "name": "Blue Memory Stone",
+    "rarity": "legendary",
+    "description": "A material used for enhancing Exclusive Equipment."
+  },
+  {
+    "name": "Apprentice's Hammer",
+    "rarity": "normal",
+    "description": "Increases experience by 100 when used to enhance gear."
+  },
+  {
+    "name": "Expert's Hammer",
+    "rarity": "superior",
+    "description": "Increases experience by 250 when used to enhance gear."
+  },
+  {
+    "name": "Master's Hammer",
+    "rarity": "epic",
+    "description": "Increases experience by 500 when used to enhance gear."
+  },
+  {
+    "name": "Artisan's Hammer",
+    "rarity": "legendary",
+    "description": "Increases experience by 1000 when used to enhance gear."
+  },
+  {
+    "name": "Glunite",
+    "rarity": "epic",
+    "description": "A malleable mineral that can be processed to take on specific properties of a piece of gear. It can be used as a substite material for normal-epic gear breakthroughs."
+  },
+  {
+    "name": "Glunite (Event)",
+    "rarity": "legendary",
+    "description": "Glunite that can be used as a material for breakthrough for gear purchased from the event shop."
+  },
+  {
+    "name": "Refined Glunite",
+    "rarity": "legendary",
+    "description": "A mineral that was created by refining Glunite, so that it could match even the rarest types of gear. It can be used as a substite material for legendary gear breakthroughs."
+  },
+  {
+    "name": "Event Glunite",
+    "rarity": "legendary",
+    "description": "Increases experience by 500 when used to enhance gear.Glunite that can be used as a material for breakthrough for gear purchased from event shop."
+  },
+  {
+    "name": "Armor Glunite",
+    "rarity": "legendary",
+    "description": "A mineral that was created by refining Glunite, so that it could match even the rarest types of gear. It can be used as a substite material for legendary armor breakthroughs."
+  },
+  {
+    "name": "Transistone (Total)",
+    "rarity": "legendary",
+    "description": "A stone that reacts to substats on gear? It will change all substats that are currently applied"
+  },
+  {
+    "name": "Transistone (Individual)",
+    "rarity": "legendary",
+    "description": "A stone that reacts to substats on gear. It will let you select and change 1 substat that is currently applied."
+  },
+  {
+    "name": "Potentium (Armor)",
+    "rarity": "legendary",
+    "description": "An extremely rare abrasive. You can use this when crafting armor to draw out the power you desire from the gear your craft."
+  },
+  {
+    "name": "Potentium (Weapon/Accessory)",
+    "rarity": "legendary",
+    "description": "An extremely rare abrasive. Using this to craft weapons or accessories will draw out the power you desire from the gear you intrend to craft."
+  },
+  {
+    "name": "Effectium",
+    "rarity": "normal",
+    "description": "Precious materials used for Precise Crafting. Obtainable through Terminus Isle Exploration."
+  },
+  {
+    "name": "Normal Reforge Catalyst",
+    "rarity": "normal",
+    "description": "A material extracted from dismantling gear. Can be used to reforge gear of normal quality to unleash its potential."
+  },
+  {
+    "name": "Superior Reforge Catalyst",
+    "rarity": "superior",
+    "description": "A material extracted from dismantling gear. Can be used to reforge gear of superior quality to unleash its potential."
+  },
+  {
+    "name": "Epic Reforge Catalyst",
+    "rarity": "epic",
+    "description": "A material extracted from dismantling gear. Can be used to reforge gear of epic quality to unleash its potential."
+  },
+  {
+    "name": "Legendary Reforge Catalyst",
+    "rarity": "legendary",
+    "description": "A material extracted from dismantling gear. Can be used to reforge gear of legendary quality to unleash its potential."
+  },
+  {
+    "name": "Ether",
+    "rarity": "normal",
+    "description": "A rare resource that can occasionally be found all over Mirsha. Can be used for special purposes."
+  },
+  {
+    "name": "Limited Recruitment Ticket",
+    "rarity": "epic",
+    "description": "A ticket used for limit recruitement. Each ticket will recruit one hero."
+  },
+  {
+    "name": "Special Recruitment Ticket",
+    "rarity": "epic",
+    "description": "A ticket used for special recruitement. Each ticket will recruit one hero."
+  },
+  {
+    "name": "Special Recruitment Ticket (Event)",
+    "rarity": "superior",
+    "description": "A ticket used for special recruitement. Each ticket will recruit one hero. Using this ticket does not provide any mileage rewards."
+  },
+  {
+    "name": "Proof of Destiny",
+    "rarity": "normal",
+    "description": "A normal resource used for Quirks to enhance heroes."
+  },
+  {
+    "name": "Token of Connection",
+    "rarity": "superior",
+    "description": "A superior resource used for Quirks to enhance heroes."
+  },
+  {
+    "name": "Proof of Worth",
+    "rarity": "epic",
+    "description": "A rare material used for Quirks to enhance heroes through the Adventure License category."
+  },
+  {
+    "name": "Demiurge Selection Ticket",
+    "rarity": "normal",
+    "description": "You can select and recruit one Demiurge Hero. Select 1 of Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, or Monad Eva."
+  },
+  {
+    "name": "“New Beginning” Title",
+    "rarity": "normal",
+    "description": "Consume 1 less Stamina when playing Adventure / Special Request / Skyward Tower."
+  },
+  {
+    "name": "“New Beginning” Profile Frame",
+    "rarity": "normal",
+    "description": "Service Transfer Completion Reward [New Beginning] Frame."
+  },
+  {
+    "name": "Gold",
+    "rarity": "normal",
+    "description": "A type of currency used across Mirsha. Can be used for many transactions."
+  },
+  {
+    "name": "Gold",
+    "rarity": "normal",
+    "description": "A type of currency used across Mirsha. Can be used for many transactions."
+  },
+  {
+    "name": "Guild Coin",
+    "rarity": "normal",
+    "description": "A type of currency used across Mirsha. Can be used in guild daily and weekly shop."
+  },
+  {
+    "name": "Joint Challenge Coin",
+    "rarity": "normal",
+    "description": "Coins issued based on the points achieved in the joint challenge. It can be exchanged for goods at the Joint Challenge Shop."
+  },
+  {
+    "name": "Friend Point",
+    "rarity": "normal",
+    "description": "A type of currency used across Mirsha. Can be used in Friendship shop."
+  },
+  {
+    "name": "Arena Medal",
+    "rarity": "normal",
+    "description": "A type of currency used across Mirsha. Can be used in Arena shop."
+  },
+  {
+    "name": "Antimatter",
+    "rarity": "normal",
+    "description": "Antiparticle material that can be gained in small amounts through the Antiparticle Generator. Used to open and enhance facilities."
+  },
+  {
+    "name": "Archdemon's Trace",
+    "rarity": "normal",
+    "description": "A type of currency used across Mirsha. Can be used in Archdemon's shop."
+  },
+  {
+    "name": "Star's Memory",
+    "rarity": "normal",
+    "description": "A crystal containung some of the memories of Mirsha. It can be exchanged for various items."
+  },
+  {
+    "name": "World Boss Token",
+    "rarity": "normal",
+    "description": "A token obtained by defeating the World Boss."
+  },
+  {
+    "name": "License Point",
+    "rarity": "normal",
+    "description": "Points that can be obtained by completing Adventure License missions. You can exchange it for a variety of items in the Shop."
+  },
+  {
+    "name": "Survey Contributions",
+    "rarity": "normal",
+    "description": "Points acquired for contributing information to areas that needed to be surveyed. Survey points can be exchanged for items at the Survey Hub."
+  },
+  {
+    "name": "Automaton Coin",
+    "rarity": "normal",
+    "description": "This currency can be earned by clearing the Skyward Tower after receiving the first-time clear reward. It can be used to purchase items in the Skyward Tower Shop."
+  },
+  {
+    "name": "[Guild] Upgrade Stone Chest",
+    "rarity": "superior",
+    "description": "An upgrade stone box purchased with guild contributions. Obtain one random upgrade stone of any quality."
+  },
+  {
+    "name": "Epic Quality Present Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain 3 epic quality presents."
+  },
+  {
+    "name": "Superior Quality Present Chest",
+    "rarity": "superior",
+    "description": "Obtain 3 of each superior quality presents."
+  },
+  {
+    "name": "[Guild] Enhancement Toolbox",
+    "rarity": "superior",
+    "description": "An enhancement toolbox purchased with guild contributions. Obtain one random enhancement hammer of any quality."
+  },
+  {
+    "name": "[Guild] Epic-Legendary Accessory Chest",
+    "rarity": "legendary",
+    "description": "An equipment chest purchased with guild contributions. Obtain one 4-6★ accessory of epic to legendary quality"
+  },
+  {
+    "name": "Stage 3 Gem Chest",
+    "rarity": "legendary",
+    "description": "Obtain each Stage 3 Gem x1."
+  },
+  {
+    "name": "Gems",
+    "rarity": "legendary",
+    "description": "Various gems."
+  },
+  {
+    "name": "Hero Pieces",
+    "rarity": "legendary",
+    "description": "Transcend a hero by collecting 150 of their Hero Pieces."
+  },
+  {
+    "name": "Cosmetic",
+    "rarity": "legendary",
+    "description": "Costume, Frame, Chibi."
+  },
+  {
+    "name": "Stage 5 Random Gem Chest",
+    "rarity": "epic",
+    "description": "Obtain 1 random Stage 5 Gem."
+  },
+  {
+    "name": "Stage 2 Random Gem Chest",
+    "rarity": "epic",
+    "description": "Obtain 1 random Stage 2 Gem."
+  },
+  {
+    "name": "[Guild] 3★ Hero Piece Selection Chest",
+    "rarity": "legendary",
+    "description": "You can select and obtain pieces of your desired heroes.\nObtainable hero piece :\n-Dahlia\n-Aer\n-Ame\n-Epsilon\n-Drakhan"
+  },
+  {
+    "name": "Legendary Quality Present Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one of the following:\n-Dungeon Core Fragment\n-Noble's Ceremonial Sword\n-Magic Textbook\n-Dreamcatcher\n-Leaf of World Tree"
+  },
+  {
+    "name": "Stage 3 Gem Chest ",
+    "rarity": "epic",
+    "description": "Obtain one Stage 3 Gem."
+  },
+  {
+    "name": "Stage 4 Gem Chest",
+    "rarity": "epic",
+    "description": "Obtain one Stage 4 Gem."
+  },
+  {
+    "name": "Stamina",
+    "rarity": "normal",
+    "description": "The energy needed for activities. Used in various battle content."
+  },
+  {
+    "name": "Upgrade Stone Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain one of the following:\n-Earth Upgrade Stone x5\n-Fire Upgrade Stone x5\n-Water Upgrade Stone x5\n-Light Upgrade Stone x5\n-Dark Upgrade Stone x5"
+  },
+  {
+    "name": "Upgrade Stone Piece Selection Chest",
+    "rarity": "superior",
+    "description": "Select and obtain one of the following:\n-Earth Upgrade Stone Piece x5\n-Fire Upgrade Stone Piece x5\n-Water Upgrade Stone Piece x5\n-Light Upgrade Stone Piece x5\n-Dark Upgrade Stone Piece x5"
+  },
+  {
+    "name": "Upgrade Stone Fragment Selection Chest",
+    "rarity": "normal",
+    "description": "Select and obtain one of the following:\n-Earth Upgrade Stone Fragment x10\n-Fire Upgrade Stone Fragment x10\n-Water Upgrade Stone Fragment x10\n-Light Upgrade Stone Fragment x10\n-Dark Upgrade Stone Fragment x10"
+  },
+  {
+    "name": "3★ Hero Piece Selective Exchange Ticket",
+    "rarity": "legendary",
+    "description": "Obtain 10 pieces of a 3★ hero of your choice."
+  },
+  {
+    "name": "1-2★ Hero Piece Random Exchange Ticket",
+    "rarity": "epic",
+    "description": "Obtain 1-2★ Hero Piece x1."
+  },
+  {
+    "name": "Arena Ticket",
+    "rarity": "normal",
+    "description": "A ticket needed to enter the Arena."
+  },
+  {
+    "name": "Apprentice's Hammer Chest",
+    "rarity": "normal",
+    "description": "Obtain a random number of Apprentice's Hammers. There is a low chance you will obtain Expert's Hammers."
+  },
+  {
+    "name": "Ether Amulet",
+    "rarity": "legendary",
+    "description": "Mainstat : PEN%"
+  },
+  {
+    "name": "Ether Blade",
+    "rarity": "legendary",
+    "description": "Mainstat : HP%"
+  },
+  {
+    "name": "Etheric Helmet of Speed",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Gloves of Speed",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Chest Armor of Speed",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Boots of Speed",
+    "rarity": "legendary",
+    "description": ""
+  },
+    {
+    "name": "Refined Upgrade Stone Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one of the following:\n-Refined Earth Upgrade Stone x1\n-Refined Fire Upgrade Stone x1\n-Refined Water Upgrade Stone x1\n-Refined Light Upgrade Stone x1\n-Refined Dark Upgrade Stone x1"
+  },
+  {
+    "name": "Time Rewinder",
+    "rarity": "legendary",
+    "description": "An item that can revert growth status of a hero. Used to reset growth."
+  },
+  {
+    "name": "6★ Talisman Selection Chest",
+    "rarity": "legendary",
+    "description": "Obtain one out of 11 different 6★ Talismans at random."
+  },
+  {
+    "name": "5★ Random Talisman Chest",
+    "rarity": "legendary",
+    "description": "Obtain one out of 11 different 5★ Talismans at random."
+  },
+  {
+    "name": "Undefeated Leader Nella",
+    "rarity": "superior",
+    "description": "This is a costume that can be worn by Gnosis Nella."
+  },
+  {
+    "name": "Indomitable Dragon Drakhan",
+    "rarity": "superior",
+    "description": "This is a costume that can be worn by Demiurge Drakhan."
+  },
+  {
+    "name": "5★ Epic Helmet Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain one 5★ epic Helmet."
+  },
+  {
+    "name": "5★ Epic Gloves Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain one 5★ epic Gloves."
+  },
+  {
+    "name": "5★ Epic Armor Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain one 5★ epic Armor."
+  },
+  {
+    "name": "5★ Epic Boots Selection Chest",
+    "rarity": "epic",
+    "description": "Select and obtain one 5★ epic Boots."
+  },
+  {
+    "name": "5★ Epic Weapon",
+    "rarity": "epic",
+    "description": "Obtain one 5★ epic Weapon."
+  },
+  {
+    "name": "5★ Epic Accessory",
+    "rarity": "epic",
+    "description": "Obtain one 5★ epic Accessory."
+  },
+  {
+    "name": "Gear Crafting Material Selection Chest (Normal)",
+    "rarity": "superior",
+    "description": "Select and obtain normal gear crafting material available from Special Requests."
+  },
+  {
+    "name": "Gear Crafting Material Selection Chest (Superior)",
+    "rarity": "legendary",
+    "description": "Select and obtain superior gear crafting material available from Special Requests."
+  },
+  {
+    "name": "10% Legendary Abrasive",
+    "rarity": "legendary",
+    "description": "Increases the chance of crafting gear of legendary quality by 10%."
+  },
+  {
+    "name": "30% Epic Abrasive",
+    "rarity": "epic",
+    "description": "Increases the chance of crafting gear of epic quality by 30%."
+  },
+  {
+    "name": "Powerful Adventurer's Talisman",
+    "rarity": "legendary",
+    "description": "Recovers 30 Action Points when using an ultimate.\n Mainstats : Critical hit chance"
+  },
+  {
+    "name": "Sharp Adventurer's Talisman",
+    "rarity": "legendary",
+    "description": "Generates 10 Chain Points when an attack scores a critical hit.\n Mainstats : Attack %"
+  },
+  {
+    "name": "Adventurer's Sword",
+    "rarity": "legendary",
+    "description": "Has 15% chance to increase Penetration for 1 turn after taking an action.\n Mainstats : Health %"
+  },
+  {
+    "name": "Adventurer's Necklace",
+    "rarity": "legendary",
+    "description": "Has 15% chance to increase Penetration for 1 turn after being hit.\n Mainstats : Heals when hit %"
+  },
+  {
+    "name": "“Tycoon” Title",
+    "rarity": "normal",
+    "description": ""
+  },
+  {
+    "name": "Stage 5-6 Gem Chest",
+    "rarity": "epic",
+    "description": "Obtain 1 Stage 5-6 Gem."
+  },
+  {
+    "name": "6★ Legendary Helmet [Burst]",
+    "rarity": "legendary",
+    "description": "Gains AP at the start of battle +25."
+  },
+  {
+    "name": "6★ Legendary Gloves [Burst]",
+    "rarity": "legendary",
+    "description": "Gains AP at the start of battle +25."
+  },
+  {
+    "name": "6★ Legendary Armor [Burst]",
+    "rarity": "legendary",
+    "description": "Gains AP at the start of battle +25."
+  },
+  {
+    "name": "6★ Legendary Boots [Burst]",
+    "rarity": "legendary",
+    "description": "Gains AP at the start of battle +25."
+  },
+  {
+    "name": "6★ Equipment",
+    "rarity": "legendary",
+    "description": "Various 6★ items."
+  },
+  {
+    "name": "5★ Equipment",
+    "rarity": "legendary",
+    "description": "Various 5★ items."
+  },
+  {
+    "name": "5★ Legendary Weapon Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 5★ legendary Weapon."
+  },
+  {
+    "name": "5★ Legendary Accessory Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 5★ legendary Accessory."
+  },
+   {
+    "name": "6★ Legendary Weapon Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ legendary Weapon."
+  },
+  {
+    "name": "6★ Legendary Accessory Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ legendary Accessory."
+  },
+  {
+    "name": "Etheric Helmet of Attack",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Gloves of Attack",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Boots of Attack",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Armor of Attack",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Helmet of Critical Hit",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Gloves of Critical Hit",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Boots of Critical Hit",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "Etheric Armor of Critical Hit",
+    "rarity": "legendary",
+    "description": ""
+  },
+  {
+    "name": "6★ Legendary Helmet Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ Legendary Helmet. The equipment provided have fixed stats"
+  },
+  {
+    "name": "6★ Legendary Armor Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ Legendary Armor. The equipment provided have fixed stats"
+  },
+  {
+    "name": "6★ Legendary Gloves Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ Legendary Gloves. The equipment provided have fixed stats"
+  },
+  {
+    "name": "6★ Legendary Boots Selection Chest",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ Legendary Boots. The equipment provided have fixed stats"
+  }
+]

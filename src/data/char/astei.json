@@ -1,0 +1,193 @@
+{
+  "ID": "2000058",
+  "Fullname": "Astei",
+  "Rarity": 3,
+  "Element": "Fire",
+  "rank_pvp":"D",
+  "gift": "Natural Object",
+  "role":"sustain",
+  "Class": "Healer",
+  "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+5% Ally Team Health\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+5% Ally Team Health\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "The Stars in Heaven",
+      "true_desc": "Attacks an enemy. Has a <color=#28d9ed>70%</color> chance to remove <color=#28d9ed>1</color> debuff from the caster after attacking.\\nWhen used on the caster's turn, has a <color=#28d9ed>30%</color> chance to activate <color=#28d9ed>The Flowers on Earth</color>. Increases the activation chance of <color=#28d9ed>The Flowers on Earth</color> by <color=#28d9ed>40%</color> if the caster has a buff.\\n\\nUnaffected by and has no effect on the cooldown of <color=#28d9ed>The Flowers on Earth</color>.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000058_Skill01_LV1,SKILL_DESC_2000058_Skill01_LV1,SKILL_DESC_2000058_Skill01_LV1,SKILL_DESC_2000058_Skill01_LV1,SKILL_DESC_2000058_Skill01_LV1",
+      "IconName": "Skill_First_2000058",
+      "NameIDSymbol": "5801",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000058_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_REMOVE_DEBUFF"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy. Has a <color=#28d9ed>[Buff_C_2000058_1_3]</color> chance to remove <color=#28d9ed>[Buff_V_2000058_1_3]</color> debuff from the caster after attacking.\\nWhen used on the caster's turn, has a <color=#28d9ed>[Buff_V_2000058_1_1]</color> chance to activate <color=#28d9ed>The Flowers on Earth</color>. Increases the activation chance of <color=#28d9ed>The Flowers on Earth</color> by <color=#28d9ed>40%</color> if the caster has a buff.\\n\\nUnaffected by and has no effect on the cooldown of <color=#28d9ed>The Flowers on Earth</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "The Flowers on Earth",
+      "true_desc": "<color=#28d9ed>Heals</color> all allies except the caster for <color=#28d9ed>15%</color> of Astei's Max Health and generates <color=#28d9ed>25</color> <color=#28d9ed>Action Points</color>.",
+      "ApproachType": "HEAL",
+      "DescID": "SKILL_DESC_2000058_Skill02_LV1,SKILL_DESC_2000058_Skill02_LV1,SKILL_DESC_2000058_Skill02_LV1,SKILL_DESC_2000058_Skill02_LV1,SKILL_DESC_2000058_Skill02_LV5",
+      "IconName": "Skill_Second_2000058",
+      "NameIDSymbol": "5802",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000058_Skill02",
+      "TargetTeamType": "ME",
+      "buff": [
+        "BT_AP_CHARGE",
+        "BT_IMMUNE",
+        "BT_REMOVE_DEBUFF"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Target Action Points +25",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Include the caster in healing targets",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "+2 turns Immunity for all allies\\nRemoves 1 debuff",
+          "level": 3
+        }
+      },
+      "cd": "3",
+      "debuff": [],
+      "description": [
+        "<color=#28d9ed>Heals</color> all allies except the caster for <color=#28d9ed>[Buff_V_2000058_2_1]</color> of Astei's Max Health and generates <color=#28d9ed>[Buff_V_2000058_2_2]</color> <color=#28d9ed>Action Points</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% healing"
+        ],
+        "3": [
+          "+5% healing"
+        ],
+        "4": [
+          "+10% healing"
+        ],
+        "5": [
+          "+10% Priority"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "The Love in Our Hearts",
+      "true_desc": "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>20%</color> of Astei's Max Health and grants <color=#28d9ed>Immunity</color> for <color=#28d9ed>2 turn(s)</color>.\\nInflicts reduced <color=#28d9ed>Critical Hit Chance</color> on all enemies for <color=#28d9ed>2 turn(s)</color>. This effect ignores the target's Resilience.",
+      "DescID": "SKILL_DESC_2000058_Skill03_LV1,SKILL_DESC_2000058_Skill03_LV1,SKILL_DESC_2000058_Skill03_LV1,SKILL_DESC_2000058_Skill03_LV1,SKILL_DESC_2000058_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000058",
+      "NameIDSymbol": "5803",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "HEAL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000058_Skill03",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_IMMUNE"
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_STAT|ST_CRITICAL_RATE"
+      ],
+      "description": [
+        "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>[Buff_V_2000058_3_1]</color> of Astei's Max Health and grants <color=#28d9ed>Immunity</color> for <color=#28d9ed>[Buff_T_2000058_3_2] turn(s)</color>.\\nInflicts reduced <color=#28d9ed>Critical Hit Chance</color> on all enemies for <color=#28d9ed>[Buff_T_2000058_3_3] turn(s)</color>. This effect ignores the target's Resilience."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% healing"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% healing"
+        ],
+        "5": [
+          "+1 turn effect duration"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, <color=#28d9ed>heals</color> the caster and the ally with the lowest Health by <color=#28d9ed>15%</color>. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Cursed</color> for <color=#28d9ed>2 turns</color>.",
+      "DescID": "SKILL_DESC_2000058_Skill04_LV1,SKILL_DESC_2000058_Skill04_LV1,SKILL_DESC_2000058_Skill04_LV1,SKILL_DESC_2000058_Skill04_LV1,SKILL_DESC_2000058_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Fire_Join",
+      "NameIDSymbol": "5804",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, <color=#28d9ed>heals</color> the caster and the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000054_chain_1_1]</color>. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000058_backup_1_1]</color> chance to inflict <color=#28d9ed>Cursed</color> for <color=#28d9ed>[Buff_T_2000058_backup_1_1] turns</color>."
+      ],
+      "dual_debuff": "BT_DOT_CURSE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"A"
+}

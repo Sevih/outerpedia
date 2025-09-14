@@ -1,0 +1,186 @@
+{
+  "ID": "2000047",
+  "Fullname": "Lyla",
+  "Rarity": 2,
+  "Element": "Water",
+  "rank":"A",
+  "gift": "Natural Object",
+  "role":"sustain",
+  "Class": "Healer",
+  "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+5% Health\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n+5% Health\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Stardust",
+      "true_desc": "Attacks an enemy. <color=#28d9ed>Heals</color> the ally with the lowest Health for <color=#28d9ed>1.5%</color> of Lyla’s Max Health.",
+      "DescID": "SKILL_DESC_2000047_Skill01_LV1,SKILL_DESC_2000047_Skill01_LV1,SKILL_DESC_2000047_Skill01_LV1,SKILL_DESC_2000047_Skill01_LV1,SKILL_DESC_2000047_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000047",
+      "NameIDSymbol": "4701",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000047_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy. <color=#28d9ed>Heals</color> the ally with the lowest Health for <color=#28d9ed>[Buff_V_2000047_1_1]</color> of Lylaâs Max Health."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+1% healing"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "5": [
+          "+1% healing",
+          "+10% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Unified Hearts",
+      "true_desc": "(Passive Effect) Reduces damage taken by allies from attacks that target all allies by <color=#28d9ed>5%</color>.\\n\\n(Triggered Effect) Upon taking damage from an attack that targets all allies, activates an <color=#28d9ed>Agile Response</color> effect.\\nGrants all allies <color=#28d9ed>Sustained Recovery</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "ApproachTime": "CAST_BUFF",
+      "DescID": "SKILL_DESC_2000047_Skill02_LV1,SKILL_DESC_2000047_Skill02_LV1,SKILL_DESC_2000047_Skill02_LV1,SKILL_DESC_2000047_Skill02_LV1,SKILL_DESC_2000047_Skill02_LV1",
+      "IconName": "Skill_Second_2000047",
+      "NameIDSymbol": "4702",
+      "RangeType": "ALL",
+      "SkillSubType": "PASSIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000047_Skill02",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "SYS_CONTINU_HEAL",
+        "SYS_REVENGE_HEAL"
+      ],
+      "cd": "3",
+      "debuff": [],
+      "description": [
+        "(Passive Effect) Reduces damage taken by allies from attacks that target all allies by <color=#28d9ed>[Buff_V_2000047_2_2]</color>.\\n\\n(Triggered Effect) Upon taking damage from an attack that targets all allies, activates an <color=#28d9ed>Agile Response</color> effect.\\nGrants all allies <color=#28d9ed>Sustained Recovery</color> for <color=#28d9ed>[Buff_T_2000047_2_3] turn(s)</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "-1 turn Skill Cooldown"
+        ],
+        "3": [
+          "-5% damage taken"
+        ],
+        "4": [
+          "Increases Sustained Recovery duration by 1 turn"
+        ],
+        "5": [
+          "-5% damage taken",
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_ULTIMATE": {
+      "name": "Road to the Light",
+      "true_desc": "Grants <color=#28d9ed>Sustained Recovery</color> to all allies for <color=#28d9ed>1 turn</color>. Has a <color=#28d9ed>70%</color> chance to grant <color=#28d9ed>Increased Resilience</color> to all allies for <color=#28d9ed>1 turn</color>.",
+      "DescID": "SKILL_DESC_2000047_Skill03_LV1,SKILL_DESC_2000047_Skill03_LV1,SKILL_DESC_2000047_Skill03_LV1,SKILL_DESC_2000047_Skill03_LV1,SKILL_DESC_2000047_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000047",
+      "NameIDSymbol": "4703",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "HEAL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000047_Skill03",
+      "TargetTeamType": "TEAM",
+      "buff": [
+        "BT_STAT|ST_BUFF_RESIST","SYS_CONTINU_HEAL","BT_ACTION_GAUGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Adds a barrier (Proportional to target's Health)",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Enhances barrier strength",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "Target Action Points +50",
+          "level": 3
+        }
+      },
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Grants <color=#28d9ed>Sustained Recovery</color> to all allies for <color=#28d9ed>[Buff_T_2000047_3_2] turn</color>. Has a <color=#28d9ed>[Buff_C_2000047_3_1]</color> chance to grant <color=#28d9ed>Increased Resilience</color> to all allies for <color=#28d9ed>[Buff_T_2000047_3_1] turn</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+15% Resilience effect activation chance"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+15% Resilience effect activation chance"
+        ],
+        "5": [
+          "-1 turn Skill Cooldown"
+        ]
+      },
+      "wgr": null
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, grants <color=#28d9ed>Sustained Recovery</color> to the ally with the lowest Health for <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health for <color=#28d9ed>3.5%</color> of Lyla’s Max Health.",
+      "DescID": "SKILL_DESC_2000047_Skill04_LV1,SKILL_DESC_2000047_Skill04_LV1,SKILL_DESC_2000047_Skill04_LV1,SKILL_DESC_2000047_Skill04_LV1,SKILL_DESC_2000047_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Join",
+      "NameIDSymbol": "4704",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "SYS_CONTINU_HEAL",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, grants <color=#28d9ed>Sustained Recovery</color> to the ally with the lowest Health for <color=#28d9ed>[Buff_T_2000047_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health for <color=#28d9ed>[Buff_V_2000047_backup_1_1]</color> of Lylaâs Max Health."
+      ],
+      "dual_buff": "",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

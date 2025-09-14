@@ -1,0 +1,184 @@
+{
+  "ID": "2000048",
+  "Fullname": "Ritri",
+  "Rarity": 2,
+  "Element": "Water",
+  "rank":"A",
+  "gift": "Craftwork",
+  "role":"sustain",
+  "Class": "Defender",
+  "SubClass": "Phalanx","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "transcend": {
+    "1": null,
+    "2": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+3% Resilience\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%",
+    "6": "ATK DEF HP +30%\n+3% Resilience\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Join",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Thump! Thump! Smash!",
+      "true_desc": "Attacks an enemy. Has a <color=#28d9ed>40%</color> chance to remove <color=#28d9ed>1</color> <color=#28d9ed>debuff</color> from the caster.",
+      "DescID": "SKILL_DESC_2000048_Skill01_LV1,SKILL_DESC_2000048_Skill01_LV1,SKILL_DESC_2000048_Skill01_LV1,SKILL_DESC_2000048_Skill01_LV1,SKILL_DESC_2000048_Skill01_LV1",
+      "IconName": "Skill_First_2000048",
+      "NameIDSymbol": "4801",
+      "RangeType": "SINGLE",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000048_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_REMOVE_DEBUFF"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy. Has a <color=#28d9ed>[Buff_C_2000048_1_1]</color> chance to remove <color=#28d9ed>[Buff_V_2000048_1_1]</color> <color=#28d9ed>debuff</color> from the caster."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+15% effect chance"
+        ],
+        "5": [
+          "+15% effect chance",
+          "+10% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Ritri Will Protect You!",
+      "true_desc": "(Passive Effect) Reduces the damage taken by all allies by <color=#28d9ed>2.5%</color>.",
+      "DescID": "SKILL_DESC_2000048_Skill02_LV1,SKILL_DESC_2000048_Skill02_LV2,SKILL_DESC_2000048_Skill02_LV2,SKILL_DESC_2000048_Skill02_LV2,SKILL_DESC_2000048_Skill02_LV2",
+      "IconName": "Skill_Second_2000048",
+      "NameIDSymbol": "4802",
+      "RangeType": "NONE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000048_Skill02",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": 0,
+      "debuff": [],
+      "description": [
+        "(Passive Effect) Reduces the damage taken by all allies by <color=#28d9ed>[Buff_V_2000048_2_1]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "Heals 10% of damage taken"
+        ],
+        "3": [
+          "-2.5% damage taken"
+        ],
+        "4": [
+          "-2.5% damage taken"
+        ],
+        "5": [
+          "-2.5% damage taken"
+        ]
+      },
+      "wgr": 0
+    },
+    "SKT_ULTIMATE": {
+      "name": "Thump! Thump! Thump! Smash!",
+      "true_desc": "Attacks all enemies. Grants a <color=#28d9ed>Barrier</color> to the ally with the lowest Health for <color=#28d9ed>2 turns</color>. The barrier strength is proportional to the caster’s <color=#28d9ed>Max Health</color>.",
+      "DescID": "SKILL_DESC_2000048_Skill03_LV1,SKILL_DESC_2000048_Skill03_LV1,SKILL_DESC_2000048_Skill03_LV1,SKILL_DESC_2000048_Skill03_LV1,SKILL_DESC_2000048_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000048",
+      "NameIDSymbol": "4803",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000048_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_SHIELD_BASED_CASTER","BT_ACTION_GAUGE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 80,
+          "effect": "Increases damage",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 120,
+          "effect": "Increases damage",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 160,
+          "effect": "+50% Priority",
+          "level": 3
+        }
+      },
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Attacks all enemies. Grants a <color=#28d9ed>Barrier</color> to the ally with the lowest Health for <color=#28d9ed>[Buff_T_2000048_3_1] turns</color>. The barrier strength is proportional to the casterâs <color=#28d9ed>Max Health</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "Enhances barrier strength"
+        ],
+        "5": [
+          "Enhances barrier strength",
+          "+15% damage"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Action Points of the caster.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to remove <color=#28d9ed>2</color> <color=#28d9ed>debuffs</color> from the caster.",
+      "DescID": "SKILL_DESC_2000048_Skill04_LV1,SKILL_DESC_2000048_Skill04_LV1,SKILL_DESC_2000048_Skill04_LV1,SKILL_DESC_2000048_Skill04_LV1,SKILL_DESC_2000048_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Join",
+      "NameIDSymbol": "4804",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "BT_AP_CHARGE",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>[Buff_V_2000048_chain_1_1]</color> Action Points of the caster.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000048_backup_1_1]</color> chance to remove <color=#28d9ed>[Buff_V_2000048_backup_1_1]</color> <color=#28d9ed>debuffs</color> from the caster."
+      ],
+      "dual_buff": "BT_REMOVE_DEBUFF",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

@@ -1,0 +1,840 @@
+[
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Valentine",
+      "image": [
+        "2000012_E",
+        "2000017_E",
+        "2000031_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Demiurge Drakhan",
+            "Omega Nadja",
+            "Astei"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Tamara",
+            "Gnosis Nella"
+          ],
+          [
+            "Caren",
+            "Demiurge Luna",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No healer"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Max speed Tamara to Silence Valentine and then increase the CD."
+          },
+          {
+            "type": "p",
+            "string": "Using Astei or Drakhan can assist if survival's an issue with the critical hit chance debuff."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Vlada",
+      "image": [
+        "2000073_E",
+        "2000032_E",
+        "2000004_E",
+        "4151011"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "No Mage",
+        "icon": "mage.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne",
+            "Astei",
+            "Nella"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Stella",
+            "Delta"
+          ],
+          [
+            "Tamara",
+            "Caren",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No mage"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Tamara for Cooldown increase."
+          },
+          {
+            "type": "p",
+            "string": "Immunity, Cleanse and revenge will do the job."
+          }
+        ]
+      },
+      "team2": {
+        "label": "No Fire",
+        "icon": "fire.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne",
+            "Nella"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Stella",
+            "Delta"
+          ],
+          [
+            "Tamara",
+            "Caren",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No fire"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Tamara for Cooldown increase."
+          },
+          {
+            "type": "p",
+            "string": "Immunity, Cleanse and revenge will do the job."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Maxwell",
+      "image": [
+        "2000028_E",
+        "2000028_E",
+        "2000028_E",
+        "2000028_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Beth",
+      "image": [
+        "2000025_E",
+        "2000035_E",
+        "2000049_E",
+        "4151013"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Dahlia",
+      "image": [
+        "2000068_E",
+        "2000067_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 Ranger",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Fran",
+            "Charlotte"
+          ],
+          [
+            "Demiurge Luna"
+          ],
+          [
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "1 ranger"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "An Accuracy buffer is recommended."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Rhona",
+      "image": [
+        "2000008_E",
+        "2000058_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "No Dark",
+        "icon": "dark.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Eternal",
+            "Demiurge Vlada",
+            "Sterope",
+            "Edelweiss"
+          ],
+          [
+            "Gnosis Nella",
+            "Rhona"
+          ],
+          [
+            "Gnosis Beth",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No Dark"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "No crit builds unless you can endure the passive and brute force it."
+          },
+          {
+            "type": "p",
+            "string": "Unhealable is your friend."
+          },
+          {
+            "type": "p",
+            "string": "G.Beth's Eternal Bleeding's damage is not affected by Rhona's passive."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Mero",
+      "image": [
+        "2000040_E",
+        "4078010",
+        "4078013",
+        "4078017"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Naru Kang",
+      "image": [
+        "2000024_E",
+        "2000074_E",
+        "2000031_E",
+        "4151011"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Fatal",
+      "image": [
+        "2000078_E",
+        "2000072_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Hilde"
+          ],
+          [
+            "Rey"
+          ],
+          [
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 defender"
+        ],
+        "note": []
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Laplace",
+      "image": [
+        "2000044_E",
+        "2000043_E",
+        "2000062_E",
+        "4151013"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 Healer",
+        "icon": "healer.webp",
+        "setup": [],
+        "conditions": [
+          "1 healer"
+        ],
+        "note": []
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Tamamo-no-Mae",
+      "image": [
+        "2000080_E",
+        "2000079_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {}
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Pesketh",
+      "image": [
+        "2000041_E",
+        "2000011_E",
+        "2000003_E",
+        "2000029_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 Light",
+        "icon": "light.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne"
+          ],
+          [
+            "Stella",
+            "Fran",
+            "Cindy",
+            "Ember"
+          ],
+          [
+            "Demiurge Stella",
+            "Kanon"
+          ],
+          [
+            "Tamamo-no-Mae",
+            "Delta"
+          ]
+        ],
+        "conditions": [
+          "1 Light"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "One of the best ways to counter it is to utilize counterattack to accumulate chain points faster."
+          },
+          {
+            "type": "p",
+            "string": "Delta can go in tandem with Cindy, Dianne and/or Fran(EE+10)."
+          },
+          {
+            "type": "p",
+            "string": "Another way to counter it is by using Ember with enough effectiveness to inflict Burn."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Mene",
+      "image": [
+        "2000054_E",
+        "2000074_E",
+        "2000009_E"
+      ]
+    },
+    "note": [
+       {
+            "type": "p",
+            "string": "Just go nuclear on her and bring your strongest DPS units. If she manages to heal herself too much you can utilize Eliza for Bleed and Defense debuffs"
+          }
+    ],
+    "teams": {
+      "team1": {
+        "label": "1 ranger",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Tamara",
+            "Eliza"
+          ],
+          [
+            "Rey",
+            "Demiurge Luna"
+          ]
+        ],
+        "conditions": [
+          "1 ranger"
+        ],
+        "note": [
+        ]
+      },
+      "team2": {
+        "label": "No defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Tamara",
+            "Eliza"
+          ],
+          [
+            "Rey",
+            "Demiurge Luna"
+          ]
+        ],
+        "conditions": [
+          "No defender"
+        ],
+        "note": [
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Ame",
+      "image": [
+        "2000065_E",
+        "2000064_E",
+        "2000019_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "No Water",
+        "icon": "water.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Iota",
+            "Gnosis Nella"
+          ],
+          [
+            "Akari",
+            "Kuro"
+          ],
+          [
+            "Maxwell",
+            "Demiurge Luna"
+          ]
+        ],
+        "conditions": [
+          "No water"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Either brute force or control since she lack of immunity towards any stun."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Alice",
+      "image": [
+        "2000020_E",
+        "2000071_E",
+        "2000066_E",
+        "2000056_E"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "1 ranger",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamamo-no-Mae",
+            "Delta",
+            "Demiurge Drakhan",
+            "Hilde",
+            "Christina"
+          ],
+          [
+            "Fran",
+            "Gnosis Beth",
+            "Demiurge Vlada",
+            "Notia"
+          ],
+          [
+            "Kanon",
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 ranger"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "High survivability units. Kanon fits the bill better than anyone."
+          },
+          {
+            "type": "p",
+            "string": "Delta can provide counterattack buff in the beginning after Alice's first attack, making your team inflict several attacks after Alice's second attack."
+          },
+          {
+            "type": "p",
+            "string": "Tamamo-no-Mae can provide chain points."
+          },
+          {
+            "type": "p",
+            "string": "Demiurge Drakhan or Hilde to mitigate aoe damage."
+          },
+          {
+            "type": "p",
+            "string": "Christina with Coward's treasure."
+          },
+          {
+            "type": "p",
+            "string": "Demiurge Vlada 4/5-star or Notia to decrease priority gain will slow down incoming damage a lot."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 1,
+    "boss": {
+      "name": "Eliza",
+      "image": [
+        "2000035_E",
+        "2000068_E",
+        "2000085_E",
+        "4151014"
+      ]
+    },
+    "note": [],
+    "teams": {
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Stella",
+            "Valentine"
+          ],
+          [
+            "Iota",
+            "Dahlia",
+            "Gnosis Nella"
+          ],
+          [
+            "Maxwell",
+            "Ame",
+            "Demiurge Astei"
+          ]
+        ],
+        "conditions": [
+          "1 ranger"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Control and focus the core to prevent S.Regina to play. Both priority reductions and stun."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "floor": 5,
+    "boss": {
+      "name": "Demiurge Drakhan",
+      "image": [
+        "2000063_E",
+        "4151014",
+        "4151014"
+      ]
+    },
+    "note": [
+      {
+        "type": "ul",
+        "items": [
+          "Sterope is recommended because Demiurge Drakhan's counter is triggered by critical hits, she will reduce counter damage by 30% and will reduce all enemies buff duration by 1 turn",
+          "High survivability units are recommended"
+        ]
+      }
+    ],
+    "teams": {
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Sterope"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Caren",
+            "Kanon",
+            "Gnosis Dahlia"
+          ],
+          [
+            "Monad Eva",
+            "Nella"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "floor": 5,
+    "boss": {
+      "name": "Demiurge Vlada",
+      "image": [
+        "2000075_E",
+        "4151015",
+        "4151015"
+      ]
+    },
+    "note": [
+      {
+        "type": "ul",
+        "items": [
+          "Support Unit to provide chain points, WG damage and healing.",
+          "High survivability damager.",
+          "Tank that can protect allies."
+        ]
+      }
+    ],
+    "teams": {
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Astei"
+          ],
+          [
+            "Tamara",
+            "Fran"
+          ],
+          [
+            "Leo",
+            "Demiurge Drakhan",
+            "Hilde"
+          ],
+          [
+            "Demiurge Stella",
+            "Kanon",
+            "Caren",
+            "Epsilon",
+            "Demiurge Luna"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "floor": 5,
+    "boss": {
+      "name": "Demiurge Stella",
+      "image": [
+        "2000053_E",
+        "2000059_E"
+      ]
+    },
+    "note": [
+      {
+        "type": "ul",
+        "items": [
+          "Tamara to Silence D.Astei in order to disable her revival.",
+          "High survivability units, Barriers and Defense buffs."
+        ]
+      }
+    ],
+    "teams": {
+      "team1": {
+        "label": "No Healer",
+        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Veronica",
+            "Demiurge Drakhan",
+            "Kappa",
+            "Hilde",
+            "Omega Nadja",
+            "Luna"
+          ],
+          [
+            "Kanon",
+            "Caren",
+            "Gnosis Dahlia"
+          ]
+        ],
+        "conditions": [],
+        "note": []
+      }
+    }
+  },
+  {
+    "floor": 20,
+    "boss": {
+      "name": "Iota",
+      "image": [
+        "2000069_E",
+        "2000077_E"
+      ]
+    },
+    "note": [
+      {
+        "type": "p",
+        "string": "You need to stun both and keep the stun up in order to prevent Iota from regaining her invulnerability."
+      }
+    ],
+    "teams": {
+      "team1": {
+        "label": "basic",
+        "icon": "a.webp",
+        "setup": [
+          [
+            "Tamara",
+            "Monad Eva"
+          ],
+          [
+            "Iota",
+            "Gnosis Nella"
+          ],
+          [
+            "Akari",
+            "Maxie",
+            "Roxie"
+          ],
+          [
+            "Demiurge Luna",
+            "Ame",
+            "Maxwell",
+            "Drakhan"
+          ]
+        ]
+      }
+    }
+  }
+]

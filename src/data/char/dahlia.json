@@ -1,0 +1,199 @@
+{
+  "ID": "2000068",
+  "Fullname": "Dahlia",
+  "Rarity": 3,
+  "Element": "Water",
+  "role":"support",
+  "gift": "Magic Tool",
+  "rank_pvp":"S",
+  "Class": "Mage",
+  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\n+3% Ally Team Effectiveness\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\n+3% Ally Team Effectiveness\n+25 Action Points at battle start"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Icicle Lance",
+      "true_desc": "Attacks an enemy and increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>20%</color>.",
+      "ApproachTime": "ATTACK",
+      "DescID": "SKILL_DESC_2000068_Skill01_LV1,SKILL_DESC_2000068_Skill01_LV1,SKILL_DESC_2000068_Skill01_LV1,SKILL_DESC_2000068_Skill01_LV1,SKILL_DESC_2000068_Skill01_LV1",
+      "IconName": "Skill_First_2000068",
+      "NameIDSymbol": "6801",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000068_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "Attacks an enemy and increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000068_1_1]</color>."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "4": [
+          "+10% Priority"
+        ],
+        "5": [
+          "+20% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Absolute Zero",
+      "true_desc": "Removes <color=#28d9ed>1</color> buff(s) from targets not inflicted with Frozen, then attacks all enemies.\nIncreases damage dealt to targets inflicted with Frozen.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000068_Skill02_LV1,SKILL_DESC_2000068_Skill02_LV1,SKILL_DESC_2000068_Skill02_LV1,SKILL_DESC_2000068_Skill02_LV1,SKILL_DESC_2000068_Skill02_LV1",
+      "IconName": "Skill_Second_2000068",
+      "NameIDSymbol": "6802",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000068_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": ["BT_SHIELD_BASED_CASTER"],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 60,
+          "effect": "Grants barrier to all allies (proportional to Attack)",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 90,
+          "effect": "Inflicts Frozen on all enemies for 1 turn\\nIncreases damage dealt to bosses",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 120,
+          "effect": "Changed to Enhanced Skill\\nActivates all effects of Absolute Zero",
+          "level": 3
+        }
+      },
+      "cd": "4",
+      "debuff": [
+        "BT_REMOVE_BUFF",
+        "BT_FREEZE"
+      ],
+      "description": [
+        "Removes <color=#28d9ed>[Buff_V_2000068_2_2]</color> buff(s) from targets not inflicted with Frozen, then attacks all enemies.\nIncreases damage dealt to targets inflicted with Frozen."
+      ],
+      "enhancement": {
+        "2": [
+          "+5% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "+1 buff removed",
+          "+15% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Diamond Dust",
+      "true_desc": "Attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Frozen</color> on all enemies for <color=#28d9ed>1 turn(s)</color> and has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Reduced Speed</color> for <color=#28d9ed>2 turn(s)</color>.\\nRight after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response, and increases damage dealt to bosses.",
+      "DescID": "SKILL_DESC_2000068_Skill03_LV1,SKILL_DESC_2000068_Skill03_LV1,SKILL_DESC_2000068_Skill03_LV1,SKILL_DESC_2000068_Skill03_LV1,SKILL_DESC_2000068_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000068",
+      "NameIDSymbol": "6803",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000068_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        
+      ],
+      "cd": "5",
+      "debuff": [
+        "BT_FREEZE",
+        "BT_STAT|ST_SPEED",
+        "BT_SEAL_COUNTER"
+      ],
+      "description": [
+        "Attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>[Buff_C_2000068_3_2]</color> chance to inflict <color=#28d9ed>Frozen</color> on all enemies for <color=#28d9ed>[Buff_T_2000068_3_2] turn(s)</color> and has a <color=#28d9ed>[Buff_C_2000068_3_3]</color> chance to inflict <color=#28d9ed>Reduced Speed</color> for <color=#28d9ed>[Buff_T_2000068_3_3] turn(s)</color>.\\nRight after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response, and increases damage dealt to bosses."
+      ],
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+15% effect chance"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5": [
+          "+10% damage",
+          "+15% effect chance"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>30%</color>.",
+      "DescID": "SKILL_DESC_2000068_Skill04_LV1,SKILL_DESC_2000068_Skill04_LV1,SKILL_DESC_2000068_Skill04_LV1,SKILL_DESC_2000068_Skill04_LV1,SKILL_DESC_2000068_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Start",
+      "NameIDSymbol": "6804",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": "SYS_BUFF_BREAK_DMG",
+      "cd": null,
+      "debuff": [],
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>[Buff_T_2000070_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000068_backup_1_1]</color>."
+      ],
+      "dual_buff": "BT_ACTION_GAUGE",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  },
+  "rank":"C"
+}
