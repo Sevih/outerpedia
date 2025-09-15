@@ -166,7 +166,36 @@
     },
     "note": [],
     "teams": {
-      "team1": {}
+      "team1": {
+        "label": "No Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne",
+            "Nella"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Stella",
+            "Rey"
+          ]
+        ],
+        "conditions": [
+          "1 ranger"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Cleanser and Immunity healers."
+          }
+        ]
+      }
     }
   },
   {
@@ -185,7 +214,8 @@
         "icon": "ranger.webp",
         "setup": [
           [
-            "Monad Eva"
+            "Monad Eva",
+            "Dianne"
           ],
           [
             "Fran",
@@ -200,6 +230,35 @@
         ],
         "conditions": [
           "1 ranger"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "An Accuracy buffer is recommended."
+          }
+        ]
+      },
+      "team2": {
+        "label": "1 x 1★",
+        "icon": "CM_icon_star_y.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Fran",
+            "Charlotte"
+          ],
+          [
+            "Demiurge Luna"
+          ],
+          [
+            "Shu",
+            "Claire"
+          ]
+        ],
+        "conditions": [
+          "1 x 1★"
         ],
         "note": [
           {
@@ -290,9 +349,38 @@
         "4151011"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Buff steal is the key here."
+      }
+    ],
     "teams": {
-      "team1": {}
+      "team1": {
+        "label": "No Ranger",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Luna",
+            "Demiurge Astei"
+
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Caren",
+            "Poolside Trickster Regina"
+          ]
+        ],
+        "conditions": [
+          "no ranger"
+        ],
+        "note": []
+      }
     }
   },
   {
@@ -363,9 +451,37 @@
         "2000079_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Silence or Exctinction Kuro in order to prevent her from reviving."
+      }
+    ],
     "teams": {
-      "team1": {}
+      "team1": {
+        "label": "1 Water",
+        "icon": "water.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamara",
+            "Gnosis Nella"
+          ],
+          [
+            "Demiurge Drakhan",
+            "Fatal"
+          ],
+          [
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 water"
+        ],
+        "note": []
+      }
     }
   },
   {
@@ -435,10 +551,10 @@
       ]
     },
     "note": [
-       {
-            "type": "p",
-            "string": "Just go nuclear on her and bring your strongest DPS units. If she manages to heal herself too much you can utilize Eliza for Bleed and Defense debuffs"
-          }
+      {
+        "type": "p",
+        "string": "Just go nuclear on her and bring your strongest DPS units. If she manages to heal herself too much you can utilize Eliza for Bleed and Defense debuffs"
+      }
     ],
     "teams": {
       "team1": {
@@ -463,8 +579,7 @@
         "conditions": [
           "1 ranger"
         ],
-        "note": [
-        ]
+        "note": []
       },
       "team2": {
         "label": "No defender",
@@ -488,8 +603,7 @@
         "conditions": [
           "No defender"
         ],
-        "note": [
-        ]
+        "note": []
       }
     }
   },
