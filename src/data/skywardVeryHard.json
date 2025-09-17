@@ -60,7 +60,12 @@
         "4151011"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Immunity, Cleanse and revenge will do the job."
+      }
+    ],
     "teams": {
       "team1": {
         "label": "No Mage",
@@ -92,10 +97,6 @@
           {
             "type": "p",
             "string": "Tamara for Cooldown increase."
-          },
-          {
-            "type": "p",
-            "string": "Immunity, Cleanse and revenge will do the job."
           }
         ]
       },
@@ -164,7 +165,12 @@
         "4151013"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Cleanse and Immunity."
+      }
+    ],
     "teams": {
       "team1": {
         "label": "No Defender",
@@ -189,12 +195,7 @@
         "conditions": [
           "1 ranger"
         ],
-        "note": [
-          {
-            "type": "p",
-            "string": "Cleanser and Immunity healers."
-          }
-        ]
+        "note": []
       }
     }
   },
@@ -207,7 +208,12 @@
         "2000067_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "An Accuracy buffer is recommended."
+      }
+    ],
     "teams": {
       "team1": {
         "label": "1 Ranger",
@@ -231,12 +237,7 @@
         "conditions": [
           "1 ranger"
         ],
-        "note": [
-          {
-            "type": "p",
-            "string": "An Accuracy buffer is recommended."
-          }
-        ]
+        "note": []
       },
       "team2": {
         "label": "1 x 1★",
@@ -260,12 +261,7 @@
         "conditions": [
           "1 x 1★"
         ],
-        "note": [
-          {
-            "type": "p",
-            "string": "An Accuracy buffer is recommended."
-          }
-        ]
+        "note": []
       }
     }
   },
@@ -278,7 +274,16 @@
         "2000058_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "No crit builds unless you can endure the passive and brute force it."
+      },
+      {
+        "type": "p",
+        "string": "Unhealable is your friend."
+      }
+    ],
     "teams": {
       "team1": {
         "label": "No Dark",
@@ -308,14 +313,6 @@
         "note": [
           {
             "type": "p",
-            "string": "No crit builds unless you can endure the passive and brute force it."
-          },
-          {
-            "type": "p",
-            "string": "Unhealable is your friend."
-          },
-          {
-            "type": "p",
             "string": "G.Beth's Eternal Bleeding's damage is not affected by Rhona's passive."
           }
         ]
@@ -335,7 +332,30 @@
     },
     "note": [],
     "teams": {
-      "team1": {}
+      "team1": {
+        "label": "1 Mage",
+        "icon": "mage.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Luna",
+            "Demiurge Astei"
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Fran",
+            "Poolside Trickster Regina"
+          ]
+        ],
+        "conditions": [
+          "1 Mage"
+        ],
+        "note": []
+      }
     }
   },
   {
@@ -366,7 +386,6 @@
           [
             "Demiurge Luna",
             "Demiurge Astei"
-
           ],
           [
             "Maxwell"
@@ -378,6 +397,30 @@
         ],
         "conditions": [
           "no ranger"
+        ],
+        "note": []
+      },
+      "team2": {
+        "label": "No Dark",
+        "icon": "dark.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Luna",
+            "Regina"
+          ],
+          [
+            "Drakhan"
+          ],
+          [
+            "Caren",
+            "Poolside Trickster Regina"
+          ]
+        ],
+        "conditions": [
+          "No Dark"
         ],
         "note": []
       }
@@ -495,7 +538,20 @@
         "2000029_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "One of the best ways to counter it is to utilize counterattack to accumulate chain points faster."
+      },
+      {
+        "type": "p",
+        "string": "Another way to counter it is by using Ember with enough effectiveness to inflict Burn."
+      },
+      {
+        "type": "p",
+        "string": "Delta can go in tandem with Cindy, Dianne and/or Fran(EE+10)."
+      }
+    ],
     "teams": {
       "team1": {
         "label": "1 Light",
@@ -523,20 +579,7 @@
         "conditions": [
           "1 Light"
         ],
-        "note": [
-          {
-            "type": "p",
-            "string": "One of the best ways to counter it is to utilize counterattack to accumulate chain points faster."
-          },
-          {
-            "type": "p",
-            "string": "Delta can go in tandem with Cindy, Dianne and/or Fran(EE+10)."
-          },
-          {
-            "type": "p",
-            "string": "Another way to counter it is by using Ember with enough effectiveness to inflict Burn."
-          }
-        ]
+        "note": []
       }
     }
   },
@@ -617,7 +660,12 @@
         "2000019_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Either brute force or control since she lack of immunity towards any stun."
+      }
+    ],
     "teams": {
       "team1": {
         "label": "No Water",
@@ -642,12 +690,7 @@
         "conditions": [
           "No water"
         ],
-        "note": [
-          {
-            "type": "p",
-            "string": "Either brute force or control since she lack of immunity towards any stun."
-          }
-        ]
+        "note": []
       }
     }
   },
@@ -662,7 +705,16 @@
         "2000056_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "High survivability units is recommended."
+      },
+      {
+        "type": "p",
+        "string": "Counterattacking units are very useful here."
+      }
+    ],
     "teams": {
       "team1": {
         "label": "1 ranger",
@@ -692,32 +744,33 @@
         "conditions": [
           "1 ranger"
         ],
-        "note": [
-          {
-            "type": "p",
-            "string": "High survivability units. Kanon fits the bill better than anyone."
-          },
-          {
-            "type": "p",
-            "string": "Delta can provide counterattack buff in the beginning after Alice's first attack, making your team inflict several attacks after Alice's second attack."
-          },
-          {
-            "type": "p",
-            "string": "Tamamo-no-Mae can provide chain points."
-          },
-          {
-            "type": "p",
-            "string": "Demiurge Drakhan or Hilde to mitigate aoe damage."
-          },
-          {
-            "type": "p",
-            "string": "Christina with Coward's treasure."
-          },
-          {
-            "type": "p",
-            "string": "Demiurge Vlada 4/5-star or Notia to decrease priority gain will slow down incoming damage a lot."
-          }
-        ]
+        "note": []
+      },
+      "team2": {
+        "label": "No Ranger",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Drakhan",
+            "Hilde",
+            "Christina"
+          ],
+          [
+            "Tamamo-no-Mae",
+            "Delta"
+          ],
+          [
+            "Kanon",
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "No Ranger"
+        ],
+        "note": []
       }
     }
   },
@@ -732,11 +785,16 @@
         "4151014"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Control and focus the core to prevent S.Regina to play. Both priority reductions and stun."
+      }
+    ],
     "teams": {
       "team1": {
-        "label": "No Healer",
-        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "label": "1 Ranger",
+        "icon": "ranger.webp",
         "setup": [
           [
             "Monad Eva"
@@ -757,14 +815,36 @@
           ]
         ],
         "conditions": [
-          "1 ranger"
+          "1 Ranger"
         ],
-        "note": [
-          {
-            "type": "p",
-            "string": "Control and focus the core to prevent S.Regina to play. Both priority reductions and stun."
-          }
-        ]
+        "note": []
+      },
+      "team2": {
+        "label": "1 Healer",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Stella",
+            "Valentine"
+          ],
+          [
+            "Iota",
+            "Dahlia",
+            "Gnosis Nella"
+          ],
+          [
+            "Maxwell",
+            "Ame",
+            "Demiurge Astei"
+          ]
+        ],
+        "conditions": [
+          "1 Healer"
+        ],
+        "note": []
       }
     }
   },

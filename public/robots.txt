@@ -4,6 +4,7 @@ User-agent: *
 Disallow: /api/
 Disallow: /images/tmp/
 Disallow: /webhooks/
+Disallow: /UnderConstruction/
 
 Allow: /_next/image
 Allow: /_next/static/css/
