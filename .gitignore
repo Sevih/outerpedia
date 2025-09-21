@@ -27,6 +27,7 @@
 /data/probabilities/
 /data/world-introduction/
 /data/event/
+/data/media-archives/
 # Local admin interface – not included in repo
 src/app/admin/
 src/app/api/admin/

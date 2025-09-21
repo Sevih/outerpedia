@@ -31,6 +31,7 @@ const DATASETS = {
   'probabilities': () => import('@/../data/probabilities.bundled.json'),
   'world-introduction': () => import('@/../data/world-introduction.bundled.json'),
   'event': () => import('@/../data/event.bundled.json'),
+  'media': () => import('@/../data/media-archives.bundled.json'),
 } satisfies Record<string, DatasetLoader>
 
 type SrcKey = keyof typeof DATASETS
@@ -43,6 +44,7 @@ const SOURCES: { value: SrcKey; label: string }[] = [
   { value: 'official-4-cut-cartoon', label: 'Official 4‑Cut Cartoon' },
   { value: 'probabilities', label: 'Probabilities' },
   { value: 'event', label: 'Events' },
+  { value: 'media', label: 'Media Archives' },
 ]
 
 /* ---------- Utils dates / texte ---------- */
