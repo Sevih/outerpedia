@@ -149,9 +149,37 @@
         "2000028_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Just focus main Maxwell with single target."
+      }
+    ],
     "teams": {
-      "team1": {}
+      "team1": {
+        "label": "No ranger",
+        "icon": "ranger.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Drakhan"
+          ],
+          [
+            "Ame",
+            "Demiurge Luna"
+          ],
+          [
+            "Rei",
+            "Regina"
+          ]
+        ],
+        "conditions": [
+          "No Ranger"
+        ],
+        "note": []
+      }
     }
   },
   {
@@ -330,7 +358,12 @@
         "4078017"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Just focus Mero."
+      }
+    ],
     "teams": {
       "team1": {
         "label": "1 Mage",
@@ -353,6 +386,30 @@
         ],
         "conditions": [
           "1 Mage"
+        ],
+        "note": []
+      },
+      "team2": {
+        "label": "No Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Luna",
+            "Demiurge Astei"
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Fran",
+            "Poolside Trickster Regina"
+          ]
+        ],
+        "conditions": [
+          "No Defender"
         ],
         "note": []
       }
@@ -435,27 +492,34 @@
         "2000072_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Single target Edelweiss then Fatal."
+      }
+    ],
     "teams": {
       "team1": {
-        "label": "1 Defender",
-        "icon": "defender.webp",
+        "label": "No ranger",
+        "icon": "ranger.webp",
         "setup": [
           [
             "Monad Eva"
           ],
           [
-            "Hilde"
-          ],
-          [
-            "Rey"
-          ],
-          [
             "Caren"
+          ],
+          [
+            "Ame",
+            "Demiurge Luna"
+          ],
+          [
+            "Rei",
+            "Regina"
           ]
         ],
         "conditions": [
-          "1 defender"
+          "No Ranger"
         ],
         "note": []
       }
@@ -472,14 +536,35 @@
         "4151013"
       ]
     },
-    "note": [],
+    "note": [
+      {
+        "type": "p",
+        "string": "Bring cleanses."
+      }
+    ],
     "teams": {
       "team1": {
-        "label": "1 Healer",
-        "icon": "healer.webp",
-        "setup": [],
+        "label": "1 Water",
+        "icon": "water.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Ame",
+            "Demiurge Luna"
+          ],
+          [
+            "Rei",
+            "Maxwell"
+          ]
+        ],
         "conditions": [
-          "1 healer"
+          "1 water"
         ],
         "note": []
       }
@@ -1019,6 +1104,49 @@
           [
             "Akari",
             "Maxie",
+            "Roxie"
+          ],
+          [
+            "Demiurge Luna",
+            "Ame",
+            "Maxwell",
+            "Drakhan"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "floor": 20,
+    "boss": {
+      "name": "Sigma",
+      "image": [
+        "2000052_E",
+        "2000070_E"
+      ]
+    },
+    "note": [
+      {
+        "type": "p",
+        "string": "Consistent shock in order to deal damage."
+      },
+      {
+        "type": "p",
+        "string": "She cleanse herself at start of her turn."
+      }
+    ],
+    "teams": {
+      "team1": {
+        "label": "basic",
+        "icon": "a.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamara"
+          ],
+          [
             "Roxie"
           ],
           [
