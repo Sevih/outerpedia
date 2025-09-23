@@ -9,7 +9,7 @@ export default function WarningBanner() {
       <div className="bg-yellow-400 text-black px-3 py-2 rounded-lg shadow-md text-sm text-center border border-yellow-400">
         ⚠️ <strong>Outerpedia</strong> is an unofficial fan-made website for the game <strong>OUTERPLANE</strong>.
         All images, names, and other game assets on this site are the property of <strong>VAGAMES</strong> and/or their respective owners.
-        This site is not affiliated with or endorsed by <strong>VAGAMES</strong> or the former publisher <strong>Smilegate Megaport</strong>.
+        This site is not affiliated with or endorsed by <strong>VAGAMES</strong>.
         All content is provided for informational and educational purposes only.
       </div>
 
