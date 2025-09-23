@@ -46,6 +46,42 @@
             "string": "Using Astei or Drakhan can assist if survival's an issue with the critical hit chance debuff."
           }
         ]
+      },
+      "team2": {
+        "label": "1 x 3★",
+        "icon": "CM_icon_star_y.webp",
+        "setup": [
+          [
+            "Demiurge Drakhan",
+            "Omega Nadja",
+            "Astei"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Tamara",
+            "Gnosis Nella"
+          ],
+          [
+            "Caren",
+            "Demiurge Luna",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "1 x 3★"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Max speed Tamara to Silence Valentine and then increase the CD."
+          },
+          {
+            "type": "p",
+            "string": "Using Astei or Drakhan can assist if survival's an issue with the critical hit chance debuff."
+          }
+        ]
       }
     }
   },
@@ -179,6 +215,31 @@
           "No Ranger"
         ],
         "note": []
+      },
+      "team2": {
+        "label": "1 Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Luna",
+            "Demiurge Drakhan"
+          ],
+          [
+            "Ame",
+            "Demiurge Luna"
+          ],
+          [
+            "Rey",
+            "Regina"
+          ]
+        ],
+        "conditions": [
+          "1 Defender"
+        ],
+        "note": []
       }
     }
   },
@@ -222,6 +283,31 @@
         ],
         "conditions": [
           "1 ranger"
+        ],
+        "note": []
+      },
+      "team2": {
+        "label": "1 Earth",
+        "icon": "earth.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne",
+            "Nella"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Ame",
+            "Rey"
+          ]
+        ],
+        "conditions": [
+          "1 Earth"
         ],
         "note": []
       }
@@ -663,6 +749,34 @@
         ],
         "conditions": [
           "1 Light"
+        ],
+        "note": []
+      },
+      "team2": {
+        "label": "No Healer",
+        "icon": "healer.webp",
+        "setup": [
+          [
+            "Dahlia"
+          ],
+          [
+            "Akari",
+            "Stella",
+            "Fran",
+            "Cindy",
+            "Ember"
+          ],
+          [
+            "Demiurge Stella",
+            "Kanon"
+          ],
+          [
+            "Tamamo-no-Mae",
+            "Delta"
+          ]
+        ],
+        "conditions": [
+          "No Healer"
         ],
         "note": []
       }
