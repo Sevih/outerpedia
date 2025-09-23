@@ -55,8 +55,8 @@ export default function Footer() {
 
       {/* Disclaimer */}
       <p className="mt-4 text-xs text-muted-foreground max-w-4xl mx-auto px-4 leading-snug">
-        Outerpedia is an unofficial fan-made project. All content related to <i>Outerplane</i>, including characters, images, and other game assets, is the property of Smilegate Holdings, Inc., Megaport Branch.
-        This website is not affiliated with, endorsed by, or sponsored by Smilegate in any way.
+        Outerpedia is an unofficial fan-made project. All content related to <i>Outerplane</i>, including characters, images, and other game assets, is the property of VAGAMES CORP.
+        This website is not affiliated with, endorsed by, or sponsored by VAGAMES CORP in any way.
       </p>
     </footer>
   );
