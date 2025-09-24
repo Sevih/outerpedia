@@ -758,6 +758,15 @@
   "second_image": "premium-limited2",
   "last_updated": "2025-08-25",
   "author": "Shiraen"
+},
+  "ether-income": {
+  "category": "general-guides",
+  "title": "Ether Income",
+  "description": "",
+  "icon": "ether-income",
+  "second_image": "ether-income2",
+  "last_updated": "2024-09-09",
+  "author": "Birdmouth"
 }
 
 }
