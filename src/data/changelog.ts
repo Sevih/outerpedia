@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-09-24",
+    title: "Ether Income Guide",
+    type: "feature",
+    content: [
+      "Added the [Ether Income Guide](/guides/general-guides/ether-income) : overview of all regular and variable sources of Ether in Outerplane, with daily, weekly, and monthly totals.",
+    ]
+  },
+  {
     date: "2025-08-26",
     title: "Premium & Limited Guide",
     type: "feature",
