@@ -247,8 +247,8 @@ export default function EtherIncomeGuide() {
                                 <Stat label="From Daily" value={fmt(projection.fromDaily)} />
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
-                                <Stat label="From Weekly income" value={fmt(projection.fromWeekly)} />
-                                <Stat label="From Monthly income" value={fmt(projection.fromMonthly)} />
+                                <Stat label="From Weekly" value={fmt(projection.fromWeekly)} />
+                                <Stat label="From Monthly" value={fmt(projection.fromMonthly)} />
                                 <Stat label="Projected Total" value={fmt(projection.total)} />
                             </div>
                             <p className="mt-2 text-xs text-gray-400">
