@@ -16,7 +16,8 @@
     "seo-check": "node scripts/seo-check.cjs",
     "generate:allchar": "node scripts/generateAllCharacters.js",
     "generate:gear-stats": "node scripts/generateGearUsageStats.js",
-    "generate:gear-submap": "node scripts/generateSubstatsMap.js"
+    "generate:gear-submap": "node scripts/generateSubstatsMap.js",
+    "validate:upgrade": "npx next info && npm run build && npm run start -- -p 0"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",
@@ -32,7 +33,7 @@
     "lz-string": "^1.5.0",
     "markdown-it": "^14.1.0",
     "marked": "^15.0.8",
-    "next": "15.3.1",
+    "next": "15.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
@@ -50,7 +51,7 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
-    "eslint-config-next": "15.3.1",
+    "eslint-config-next": "15.5.4",
     "fast-glob": "^3.3.3",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
