@@ -264,10 +264,11 @@ function CompactAdjustments({
     const wbTxt = `${worldBossLeague} ${pickLabel(WORLD_BOSS_REWARDS[worldBossLeague], overrides['monthly.worldBoss'])}`;
 
     return (
-        <details className="mx-auto max-w-fit rounded-xl border border-gray-700">
+        <details className="mx-auto max-w-3xl rounded-xl border border-gray-700">
             <summary className="cursor-pointer select-none px-3 py-2 text-xs text-gray-300">
                 <span className="font-medium">Advanced rank adjustments</span>
-                <span className="ml-2 text-[11px] text-gray-500 truncate inline-block align-middle max-w-[80%]">
+                <br />
+                <span className="ml-2 text-[11px] text-gray-500 truncate inline-block align-middle">
                     (Arena: {arenaTxt} · Guild: {guildTxt} · WB: {wbTxt})
                 </span>
             </summary>
@@ -323,7 +324,7 @@ function CompactAdjustments({
                             ))}
                         </select>
                         <select
-                            className="h-8 min-w-[9rem] w-[10rem] shrink-0 rounded-md bg-gray-900 border border-gray-700 px-2 text-xs"
+                            className="h-8 min-w-[5rem] w-[7rem] shrink-0 rounded-md bg-gray-900 border border-gray-700 px-2 text-xs"
                             value={worldBossRank}
                             onChange={(e) => {
                                 const val = Number(e.target.value);
