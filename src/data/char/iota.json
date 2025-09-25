@@ -3,11 +3,23 @@
   "Fullname": "Iota",
   "Rarity": 3,
   "Element": "Dark",
-  "rank_pvp":"A",
-  "role":"support",
+  "rank_pvp": "A",
+  "role": "support",
   "gift": "Science",
   "Class": "Mage",
-  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Enchanter",
+  "video": "YrJ06rEKPFY",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -70,7 +82,10 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000069_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_UNDEAD","BT_STAT|ST_SPEED"],
+      "buff": [
+        "BT_UNDEAD",
+        "BT_STAT|ST_SPEED"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 100,
@@ -191,5 +206,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

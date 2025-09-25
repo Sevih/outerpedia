@@ -3,12 +3,26 @@
   "Fullname": "Lisha",
   "Rarity": 2,
   "Element": "Fire",
-  "rank":"B",
-  "role":"dps",
+  "rank": "B",
+  "role": "dps",
   "gift": "Magic Tool",
   "Class": "Mage",
-  "tags":["ignore-defense"],
-  "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "tags": [
+    "ignore-defense"
+  ],
+  "SubClass": "Wizard",
+  "video": "iZGdQVbS-8k",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",

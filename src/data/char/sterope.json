@@ -3,11 +3,23 @@
   "Fullname": "Sterope",
   "Rarity": 3,
   "Element": "Dark",
-  "role":"support",
+  "role": "support",
   "gift": "Science",
   "Class": "Defender",
-  "rank_pvp":"B",
-  "SubClass": "Sweeper","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "rank_pvp": "B",
+  "SubClass": "Sweeper",
+  "video": "VRSsXgkMdJ8",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -34,7 +46,9 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000057_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_STAT|ST_SPEED"],
+      "buff": [
+        "BT_STAT|ST_SPEED"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
@@ -53,7 +67,9 @@
         }
       },
       "cd": null,
-      "debuff": ["BT_WG_DMG"],
+      "debuff": [
+        "BT_WG_DMG"
+      ],
       "description": [
         "Attacks an enemy. If Sterope had a buff before attacking, activates an additional attack on the same target and grants <color=#28d9ed>Divine Retribution</color>.\\n\\n<color=#28d9ed>Divine Retribution</color>: Increases damage dealt by all allies by <color=#28d9ed>[Buff_V_2000057_1_2]</color>. (Max 15 stacks)"
       ],
@@ -187,5 +203,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"B"
+  "rank": "B"
 }

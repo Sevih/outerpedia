@@ -3,12 +3,26 @@
   "Fullname": "Gnosis Beth",
   "Rarity": 3,
   "Element": "Light",
-  "role":"dps",
-  "rank_pvp":"S",
+  "role": "dps",
+  "rank_pvp": "S",
   "gift": "Craftwork",
-  "tags":["premium"],
+  "tags": [
+    "premium"
+  ],
   "Class": "Ranger",
-  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Tactician",
+  "video": "zHV45UmIrKc",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -34,7 +48,9 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000092_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_COOL_CHARGE"],
+      "buff": [
+        "BT_COOL_CHARGE"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
@@ -54,7 +70,8 @@
       },
       "cd": null,
       "debuff": [
-        "BT_DOT_ETERNAL_BLEED","BT_DETONATE"
+        "BT_DOT_ETERNAL_BLEED",
+        "BT_DETONATE"
       ],
       "description": [
         "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000092_1_1]</color> chance to inflict <color=#28d9ed>Eternal Bleeding</color> on the target for <color=#28d9ed>[Buff_T_2000092_1_1] turn(s)</color>.\\nAfter attacking, if only one target survives, inflicts the same effect on the enemy again."
@@ -129,7 +146,9 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000092_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": ["UNIQUE_RETRIBUTION_DOMINION"],
+      "buff": [
+        "UNIQUE_RETRIBUTION_DOMINION"
+      ],
       "cd": "5",
       "debuff": [
         "BT_DETONATE"
@@ -194,5 +213,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

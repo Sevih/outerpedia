@@ -3,11 +3,23 @@
   "Fullname": "Astei",
   "Rarity": 3,
   "Element": "Fire",
-  "rank_pvp":"D",
+  "rank_pvp": "D",
   "gift": "Natural Object",
-  "role":"sustain",
+  "role": "sustain",
   "Class": "Healer",
-  "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Reliever",
+  "video": "2bwlrUTxOHQ",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -189,5 +201,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

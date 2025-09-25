@@ -3,13 +3,28 @@
   "Fullname": "Demiurge Luna",
   "Rarity": 3,
   "Element": "Light",
-  "Class": "Mage",  
+  "Class": "Mage",
   "gift": "Science",
-  "rank_pvp":"S",
-  "rank":"S",
-  "tags":["premium","ignore-defense"],
-  "role":"dps",
-  "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "rank_pvp": "S",
+  "rank": "S",
+  "tags": [
+    "premium",
+    "ignore-defense"
+  ],
+  "role": "dps",
+  "SubClass": "Wizard",
+  "video": "zlmBL-U6xEI",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -40,7 +55,6 @@
         "BT_STAT|ST_ATK",
         "BT_STAT|ST_ACCURACY",
         "BT_UNDEAD"
-
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -100,8 +114,7 @@
         "UNIQUE_POLAR_KNIGHT"
       ],
       "cd": "5",
-      "debuff": [
-      ],
+      "debuff": [],
       "description": [
         "Changes the current state to <color=#28d9ed>White Night/Polar Night</color> and gains an extra turn.\\nEach form applies a unique persistent effect."
       ],
@@ -178,7 +191,10 @@
       "description": [
         "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers the caster's and the next Skill Chain caster's Action Points by <color=#28d9ed>[Buff_V_2000119_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: (White Night) After attacking, increases the caster's Priority by <color=#28d9ed>[Buff_V_2000119_backup_1_1]</color>.\\n(Polar Night) After attacking, increases the caster's Attack by <color=#28d9ed>[Buff_T_2000120_backup_1_1] turns</color>."
       ],
-      "dual_buff": ["BT_ACTION_GAUGE","BT_STAT|ST_ATK"],
+      "dual_buff": [
+        "BT_ACTION_GAUGE",
+        "BT_STAT|ST_ATK"
+      ],
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",

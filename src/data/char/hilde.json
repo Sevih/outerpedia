@@ -3,11 +3,23 @@
   "Fullname": "Hilde",
   "Rarity": 3,
   "Element": "Dark",
-  "role":"sustain",
+  "role": "sustain",
   "gift": "Craftwork",
   "Class": "Defender",
-  "rank_pvp":"S",
-  "SubClass": "Phalanx","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "rank_pvp": "S",
+  "SubClass": "Phalanx",
+  "video": "XzXM4OJev0I",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -129,7 +141,9 @@
       "TargetTeamType": "ENEMY",
       "buff": [],
       "cd": "5",
-      "debuff": ["IG_Buff_BuffdurationReduce"],
+      "debuff": [
+        "IG_Buff_BuffdurationReduce"
+      ],
       "description": [
         "Reduces the duration of <color=#28d9ed>buffs</color> granted to the target by <color=#28d9ed>1 turn</color>, then attacks the enemy.\\nThis skill's damage dealt increases proportional to Max Health instead of Attack."
       ],
@@ -188,5 +202,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

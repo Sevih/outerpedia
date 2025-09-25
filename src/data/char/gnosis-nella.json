@@ -3,13 +3,27 @@
   "Fullname": "Gnosis Nella",
   "Rarity": 3,
   "Element": "Light",
-  "role":"support",
-  "rank_pvp":"S",
+  "role": "support",
+  "rank_pvp": "S",
   "gift": "Magic Tool",
-  "tags":["limited"],
+  "tags": [
+    "limited"
+  ],
   "Class": "Mage",
-  "limited":true,
-  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "limited": true,
+  "SubClass": "Enchanter",
+  "video": "dwaGHaRFY98",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -35,7 +49,8 @@
       "SkipNameID": "SKILL_NAME_2000091_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_STAT|ST_BUFF_CHANCE","Heavy Strike"
+        "BT_STAT|ST_BUFF_CHANCE",
+        "Heavy Strike"
       ],
       "cd": null,
       "debuff": [],
@@ -72,7 +87,9 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000091_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["Heavy Strike"],
+      "buff": [
+        "Heavy Strike"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -174,13 +191,18 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": ["Heavy Strike"],
+      "buff": [
+        "Heavy Strike"
+      ],
       "cd": null,
       "debuff": "BT_FIXED_DAMAGE",
       "description": [
         "<color=#ffd732>Chain Starter Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and when attacking, deals <color=#28d9ed>[Buff_V_2000091_chain_1_1]</color> of the target's Max Health as fixed damage to the target. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000091_backup_1_1]</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>[Buff_T_2000091_backup_1_1] turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and applies <color=#28d9ed>Heavy Strike</color>."
       ],
-      "dual_buff": ["BT_STAT|ST_BUFF_CHANCE","Heavy Strike"],
+      "dual_buff": [
+        "BT_STAT|ST_BUFF_CHANCE",
+        "Heavy Strike"
+      ],
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage ",
@@ -201,5 +223,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

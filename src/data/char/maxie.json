@@ -3,11 +3,23 @@
   "Fullname": "Maxie",
   "Rarity": 3,
   "Element": "Fire",
-  "role":"dps",
+  "role": "dps",
   "gift": "Luxury",
-  "rank_pvp":"B",
+  "rank_pvp": "B",
   "Class": "Ranger",
-  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Vanguard",
+  "video": "BjBL3AKtwsA",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -54,7 +66,10 @@
         }
       },
       "cd": null,
-      "debuff": ["BT_DOT_BURN","IG_Buff_DeBuffdurationIncrease"],
+      "debuff": [
+        "BT_DOT_BURN",
+        "IG_Buff_DeBuffdurationIncrease"
+      ],
       "description": [
         "Attacks an enemy, and increases Priority of the caster by <color=#28d9ed>[Buff_V_2000081_1_1]</color>."
       ],
@@ -194,5 +209,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"B"
+  "rank": "B"
 }

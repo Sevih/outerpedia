@@ -3,13 +3,28 @@
   "Fullname": "Poolside Trickster Regina",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp":"A",
-  "role":"dps",
+  "rank_pvp": "A",
+  "role": "dps",
   "Class": "Striker",
   "gift": "Craftwork",
-  "tags":["seasonal","ignore-defense"],
-  "limited":true,
-  "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "tags": [
+    "seasonal",
+    "ignore-defense"
+  ],
+  "limited": true,
+  "SubClass": "Attacker",
+  "video": "7IzjF4jYNaU",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -73,7 +88,10 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000085_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_STAT|ST_PIERCE_POWER_RATE","BT_ADDITIVE_TURN"],
+      "buff": [
+        "BT_STAT|ST_PIERCE_POWER_RATE",
+        "BT_ADDITIVE_TURN"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -128,8 +146,7 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000085_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": [
-      ],
+      "buff": [],
       "cd": "5",
       "debuff": [
         "BT_RESOURCE_DOWN"
@@ -192,5 +209,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

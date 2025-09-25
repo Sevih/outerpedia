@@ -4,11 +4,25 @@
   "Rarity": 3,
   "Element": "Earth",
   "gift": "Science",
-  "role":"support",
-  "rank_pvp":"B",
+  "role": "support",
+  "rank_pvp": "B",
   "Class": "Defender",
-  "tags":["ignore-defense"],
-  "SubClass": "Sweeper","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "tags": [
+    "ignore-defense"
+  ],
+  "SubClass": "Sweeper",
+  "video": "XFySE1Ajg60",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -193,5 +207,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

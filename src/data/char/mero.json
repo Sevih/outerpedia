@@ -3,11 +3,23 @@
   "Fullname": "Mero",
   "Rarity": 3,
   "Element": "Fire",
-  "role":"support",
+  "role": "support",
   "gift": "Science",
-  "rank_pvp":"B",
+  "rank_pvp": "B",
   "Class": "Ranger",
-  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Tactician",
+  "video": "JOkL3JeB3iw",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -73,7 +85,8 @@
       "SkipNameID": "SKILL_NAME_2000040_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_STAT|ST_VAMPIRIC","BT_ACTION_GAUGE"
+        "BT_STAT|ST_VAMPIRIC",
+        "BT_ACTION_GAUGE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -93,7 +106,9 @@
         }
       },
       "cd": "4",
-      "debuff": ["BT_STAT|ST_AVOID"],
+      "debuff": [
+        "BT_STAT|ST_AVOID"
+      ],
       "description": [
         "(Passive Effect) When Mero's Health is healed, reduces the cooldown of <color=#28d9ed>Chainsaw Girl</color> by <color=#28d9ed>[Buff_V_2000040_2_1] turn(s)</color>. (Activated at the end of an ally's turn)\\n\\n(Active Effect) Attacks all enemies and grants <color=#28d9ed>Lifesteal</color> to all allies for <color=#28d9ed>[Buff_T_2000040_2_3] turn(s)</color>."
       ],
@@ -191,6 +206,6 @@
       "wgr": 3,
       "wgr_dual": 1
     }
-  }
-  ,"rank":"A"
+  },
+  "rank": "A"
 }

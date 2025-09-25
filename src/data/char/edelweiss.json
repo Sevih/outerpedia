@@ -3,12 +3,26 @@
   "Fullname": "Edelweiss",
   "Rarity": 3,
   "Element": "Water",
-  "role":"sustain",
+  "role": "sustain",
   "gift": "Craftwork",
-  "rank_pvp":"C",
+  "rank_pvp": "C",
   "Class": "Ranger",
-  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
-  "tags":["ignore-defense"],
+  "SubClass": "Tactician",
+  "video": "XFkW_wEwvUQ",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
+  "tags": [
+    "ignore-defense"
+  ],
   "transcend": {
     "1": null,
     "2": null,
@@ -128,11 +142,11 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000072_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": [
-        
-      ],
+      "buff": [],
       "cd": "5",
-      "debuff": ["BT_STEAL_BUFF"],
+      "debuff": [
+        "BT_STEAL_BUFF"
+      ],
       "description": [
         "Attacks all enemies. When there is more than one target, ignores 30% of the target's Defense. When there is only one target, ignores <color=#28d9ed>50%</color> of the target's Defense and steals <color=#28d9ed>all</color> <color=#28d9ed>buffs</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and additionally increases proportional to missing Health."
       ],
@@ -192,5 +206,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"B"
+  "rank": "B"
 }

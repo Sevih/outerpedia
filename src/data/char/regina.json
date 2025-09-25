@@ -3,12 +3,26 @@
   "Fullname": "Regina",
   "Rarity": 3,
   "Element": "Light",
-  "rank_pvp":"A",
+  "rank_pvp": "A",
   "gift": "Craftwork",
-  "role":"dps",
+  "role": "dps",
   "Class": "Mage",
-  "tags":["ignore-defense"],
-  "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "tags": [
+    "ignore-defense"
+  ],
+  "SubClass": "Wizard",
+  "video": "C_z5A8XMF60",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -90,11 +104,11 @@
       "SkipNameID": "SKILL_NAME_2000067_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_STAT|ST_AVOID","UNIQUE_REGINA_WORLD"
+        "BT_STAT|ST_AVOID",
+        "UNIQUE_REGINA_WORLD"
       ],
       "cd": "3",
-      "debuff": [
-      ],
+      "debuff": [],
       "description": [
         "(Passive Effect) Grants <color=#28d9ed>[Buff_T_2000067_2_5] stack(s)</color> of <color=#28d9ed>Reginaâs World</color> at the start of battle. Decreases the stack count of Regina's World when hit.\\n(Triggered Effect) When evading an enemy's attack, reduces the cooldown of <color=#28d9ed>The Show Must Go On</color> by <color=#28d9ed>[Buff_V_2000067_2_1] turn(s)</color>. Counterattacks when attacked.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Evasion</color>."
       ],
@@ -128,7 +142,8 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000067_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": ["UNIQUE_REGINA_WORLD"
+      "buff": [
+        "UNIQUE_REGINA_WORLD"
       ],
       "cd": "6",
       "debuff": [
@@ -193,5 +208,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

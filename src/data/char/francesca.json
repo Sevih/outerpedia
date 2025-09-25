@@ -3,11 +3,23 @@
   "Fullname": "Francesca",
   "Rarity": 3,
   "Element": "Dark",
-  "rank_pvp":"D",
-  "role":"dps",
+  "rank_pvp": "D",
+  "role": "dps",
   "gift": "Natural Object",
   "Class": "Striker",
-  "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "SubClass": "Attacker",
+  "video": "-QjB2wYAhpk",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -71,7 +83,10 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000015_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_ACTION_GAUGE","BT_ADDITIVE_TURN"],
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_ADDITIVE_TURN"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
@@ -189,5 +204,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"C"
+  "rank": "C"
 }

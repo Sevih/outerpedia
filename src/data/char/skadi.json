@@ -4,10 +4,22 @@
   "Rarity": 3,
   "Element": "Light",
   "gift": "Craftwork",
-  "rank_pvp":"B",
-  "role":"support",
+  "rank_pvp": "B",
+  "role": "support",
   "Class": "Ranger",
-  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "SubClass": "Tactician",
+  "video": "tMQOsjlpCRM",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -34,7 +46,8 @@
       "SkipNameID": "SKILL_NAME_2000101_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_STAT|ST_ATK","BT_CALL_BACKUP"
+        "BT_STAT|ST_ATK",
+        "BT_CALL_BACKUP"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -54,7 +67,10 @@
         }
       },
       "cd": null,
-      "debuff": ["BT_MARKING","BT_WG_DMG"],
+      "debuff": [
+        "BT_MARKING",
+        "BT_WG_DMG"
+      ],
       "description": [
         "Attacks an enemy. After attacking, has a <color=#28d9ed>[Buff_C_2000101_1_1]</color> chance to grant increased Attack to the ally with the highest Attack for <color=#28d9ed>[Buff_T_2000101_1_1] turn(s)</color>."
       ],
@@ -196,5 +212,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

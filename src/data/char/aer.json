@@ -3,11 +3,23 @@
   "Fullname": "Aer",
   "Rarity": 3,
   "Element": "Fire",
-  "rank_pvp":"C",
-  "role":"dps",
+  "rank_pvp": "C",
+  "role": "dps",
   "gift": "Luxury",
   "Class": "Striker",
-  "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Attacker",
+  "video": "X1IylquwEHY",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -192,5 +204,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

@@ -3,11 +3,23 @@
   "Fullname": "Eliza",
   "Rarity": 3,
   "Element": "Dark",
-  "rank_pvp":"D",
-  "role":"support",
+  "rank_pvp": "D",
+  "role": "support",
   "gift": "Luxury",
   "Class": "Ranger",
-  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Tactician",
+  "video": "QBBZaePTff4",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -71,7 +83,9 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000035_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["UNIQUE_PUREBLOOD_DOMINION"],
+      "buff": [
+        "UNIQUE_PUREBLOOD_DOMINION"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -191,5 +205,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"C"
+  "rank": "C"
 }

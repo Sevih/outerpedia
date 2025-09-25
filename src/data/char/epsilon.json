@@ -3,11 +3,23 @@
   "Fullname": "Epsilon",
   "Rarity": 3,
   "Element": "Dark",
-  "role":"dps",
+  "role": "dps",
   "gift": "Luxury",
-  "rank_pvp":"B",
+  "rank_pvp": "B",
   "Class": "Striker",
-  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Bruiser",
+  "video": "6ahyMvY4StE",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -91,7 +103,8 @@
       },
       "cd": "4",
       "debuff": [
-        "BT_AP_CHARGE","BT_REMOVE_BUFF"
+        "BT_AP_CHARGE",
+        "BT_REMOVE_BUFF"
       ],
       "description": [
         "Attacks all enemies and reduces the <color=#28d9ed>Action Points</color> of all enemies by <color=#28d9ed>20</color>.\\n\\nIf the target has a <color=#28d9ed>barrier</color>, damage dealt increases."
@@ -190,5 +203,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"D"
+  "rank": "D"
 }

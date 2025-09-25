@@ -3,12 +3,26 @@
   "Fullname": "Demiurge Vlada",
   "Rarity": 3,
   "Element": "Dark",
-  "rank_pvp":"S",
+  "rank_pvp": "S",
   "gift": "Magic Tool",
-  "tags":["premium"],
-  "role":"support",
+  "tags": [
+    "premium"
+  ],
+  "role": "support",
   "Class": "Ranger",
-  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Vanguard",
+  "video": "sh1x_uf-Cjo",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -53,7 +67,10 @@
         }
       },
       "cd": null,
-      "debuff": ["BT_COOL_CHARGE","BT_STAT|ST_DEF"],
+      "debuff": [
+        "BT_COOL_CHARGE",
+        "BT_STAT|ST_DEF"
+      ],
       "description": [
         "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000075_1_1]</color> chance to increase the Ultimate Skill cooldowns of the target by <color=#28d9ed>1 turn</color>.\\nIncreases damage dealt to bosses."
       ],
@@ -193,5 +210,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

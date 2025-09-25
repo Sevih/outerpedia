@@ -3,11 +3,23 @@
   "Fullname": "Vlada",
   "Rarity": 3,
   "Element": "Fire",
-  "rank_pvp":"D",
+  "rank_pvp": "D",
   "gift": "Science",
-  "role":"dps",
+  "role": "dps",
   "Class": "Striker",
-  "SubClass": "Attacker","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "SubClass": "Attacker",
+  "video": "xpFNW3RJKkE",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -189,5 +201,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"C"
+  "rank": "C"
 }

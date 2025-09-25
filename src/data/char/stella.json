@@ -3,12 +3,26 @@
   "Fullname": "Stella",
   "Rarity": 3,
   "Element": "Light",
-  "rank_pvp":"B",
+  "rank_pvp": "B",
   "gift": "Luxury",
-  "role":"support",
+  "role": "support",
   "Class": "Ranger",
-  "tags":["ignore-defense"],
-  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "tags": [
+    "ignore-defense"
+  ],
+  "SubClass": "Vanguard",
+  "video": "gpJqG0hrrKc",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -162,7 +176,9 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": ["BT_AP_CHARGE"],
+      "buff": [
+        "BT_AP_CHARGE"
+      ],
       "cd": null,
       "debuff": "",
       "description": [
@@ -189,5 +205,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

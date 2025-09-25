@@ -3,11 +3,23 @@
   "Fullname": "Tamara",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp":"A",
+  "rank_pvp": "A",
   "gift": "Craftwork",
-  "role":"support",
+  "role": "support",
   "Class": "Ranger",
-  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "SubClass": "Tactician",
+  "video": "gLI0SmnPCoQ",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -195,5 +207,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

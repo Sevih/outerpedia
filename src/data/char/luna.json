@@ -3,11 +3,23 @@
   "Fullname": "Luna",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp":"C",
-  "role":"support",
+  "rank_pvp": "C",
+  "role": "support",
   "gift": "Luxury",
   "Class": "Defender",
-  "SubClass": "Phalanx","skill_priority":{"First":{"prio": 1}, "Second":{"prio": 2}, "Ultimate":{"prio": 3}},
+  "SubClass": "Phalanx",
+  "video": "3S8Omrhap5k",
+  "skill_priority": {
+    "First": {
+      "prio": 1
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 3
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -34,7 +46,7 @@
       "SkipNameID": "SKILL_NAME_2000103_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_CALL_BACKUP"        
+        "BT_CALL_BACKUP"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -54,7 +66,9 @@
         }
       },
       "cd": null,
-      "debuff": ["BT_WG_DMG"],
+      "debuff": [
+        "BT_WG_DMG"
+      ],
       "description": [
         "Attacks an enemy, and if the caster has a Barrier, deals an Additional Attack.\\nAfter attacking, there is a <color=#28d9ed>[Buff_V_2000103_1_2]</color> chance to trigger a Dual Attack from the ally with the highest Attack. If an Additional Attack occurs, the Dual Attack chance increases by <color=#28d9ed>30%</color>."
       ],
@@ -191,5 +205,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

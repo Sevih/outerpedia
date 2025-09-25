@@ -3,13 +3,28 @@
   "Fullname": "Gnosis Dahlia",
   "Rarity": 3,
   "Element": "Dark",
-  "Class": "Striker",  
+  "Class": "Striker",
   "gift": "Magic Tool",
-  "role":"dps",
-  "rank_pvp":"S",
-  "limited":true,
-  "tags":["limited","ignore-defense"],
-  "SubClass": "Attacker","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "role": "dps",
+  "rank_pvp": "S",
+  "limited": true,
+  "tags": [
+    "limited",
+    "ignore-defense"
+  ],
+  "SubClass": "Attacker",
+  "video": "zwJUawe5X0g",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -37,7 +52,8 @@
       "SkipNameID": "SKILL_NAME_2000090_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE","BT_ADDITIVE_TURN"
+        "BT_ACTION_GAUGE",
+        "BT_ADDITIVE_TURN"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -125,10 +141,11 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000090_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": ["UNIQUE_HUBRIS_DOMINION"],
-      "cd": "5",
-      "debuff": [        
+      "buff": [
+        "UNIQUE_HUBRIS_DOMINION"
       ],
+      "cd": "5",
+      "debuff": [],
       "description": [
         "Attacks all enemies. After attacking, grants <color=#28d9ed>Hubris's Dominion</color> to the caster for <color=#28d9ed>[Buff_T_2000090_3_1] turn(s)</color>."
       ],
@@ -189,5 +206,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

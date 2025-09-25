@@ -7,6 +7,7 @@
   "gift": "Natural Object",
   "role":"support",
   "Class": "Defender",
+  "video": "3_azE5ZfgBo",
   "SubClass": "Sweeper","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
   "transcend": {
     "1": null,

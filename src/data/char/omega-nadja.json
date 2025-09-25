@@ -3,15 +3,28 @@
   "Fullname": "Omega Nadja",
   "Rarity": 3,
   "Element": "Dark",
-  "rank_pvp":"A",
-  "rank":"A",
+  "rank_pvp": "A",
+  "rank": "A",
   "gift": "Natural Object",
-  "role":"support",
-  "limited":true,
+  "role": "support",
+  "limited": true,
   "Class": "Defender",
-  "tags":["limited"],
+  "tags": [
+    "limited"
+  ],
   "SubClass": "Phalanx",
-  "skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "video": "rLmf9_q9ikc",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -134,8 +147,6 @@
       "TargetTeamType": "ENEMY",
       "buff": [
         "BT_SHIELD_BASED_CASTER"
-        
-        
       ],
       "cd": "5",
       "debuff": [
@@ -177,7 +188,9 @@
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
       "TargetTeamType_fallback1": "NONE",
-      "buff": ["BT_AP_CHARGE"],
+      "buff": [
+        "BT_AP_CHARGE"
+      ],
       "cd": null,
       "debuff": [],
       "description": [

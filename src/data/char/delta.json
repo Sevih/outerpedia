@@ -3,12 +3,26 @@
   "Fullname": "Delta",
   "Rarity": 3,
   "Element": "Earth",
-  "rank_pvp":"C",
+  "rank_pvp": "C",
   "gift": "Science",
-  "role":"dps",
+  "role": "dps",
   "Class": "Striker",
-  "tags":["ignore-defense"],
-  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "tags": [
+    "ignore-defense"
+  ],
+  "SubClass": "Bruiser",
+  "video": "A8eKlpmjKJI",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -34,7 +48,9 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000099_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_REMOVE_DEBUFF"],
+      "buff": [
+        "BT_REMOVE_DEBUFF"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
@@ -53,7 +69,9 @@
         }
       },
       "cd": null,
-      "debuff": ["BT_WG_DMG"],
+      "debuff": [
+        "BT_WG_DMG"
+      ],
       "description": [
         "Attacks an enemy. When the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
       ],
@@ -188,5 +206,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"D"
+  "rank": "D"
 }

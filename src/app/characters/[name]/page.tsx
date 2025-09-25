@@ -870,7 +870,11 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
 
           {/* Vidéo */}
           {character.video && (
-            <YoutubeEmbed videoId={character.video} title={`Skill video of ${character.Fullname}`} />
+            <div className="mt-6">
+              <h2 className="text-2xl font-bold text-white mb-4 text-center">Official video</h2>
+              <YoutubeEmbed videoId={character.video} title={`Skill video of ${character.Fullname}`} />
+            </div>
+            
           )}
 
 

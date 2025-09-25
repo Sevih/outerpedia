@@ -3,11 +3,23 @@
   "Fullname": "Rin",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp":"C",
-  "role":"dps",
+  "rank_pvp": "C",
+  "role": "dps",
   "gift": "Craftwork",
   "Class": "Striker",
-  "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Attacker",
+  "video": "FSHheOc6AkI",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -70,7 +82,9 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000019_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_DMG_ELEMENT_SUPERIORITY"],
+      "buff": [
+        "BT_DMG_ELEMENT_SUPERIORITY"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -160,7 +174,9 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": ["BT_DMG_ELEMENT_SUPERIORITY"],
+      "buff": [
+        "BT_DMG_ELEMENT_SUPERIORITY"
+      ],
       "cd": null,
       "debuff": [],
       "description": [
@@ -187,5 +203,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"C"
+  "rank": "C"
 }

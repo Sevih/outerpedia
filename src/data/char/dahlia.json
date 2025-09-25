@@ -3,11 +3,23 @@
   "Fullname": "Dahlia",
   "Rarity": 3,
   "Element": "Water",
-  "role":"support",
+  "role": "support",
   "gift": "Magic Tool",
-  "rank_pvp":"S",
+  "rank_pvp": "S",
   "Class": "Mage",
-  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Enchanter",
+  "video": "rfsYrJKYSRg",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -70,7 +82,9 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000068_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_SHIELD_BASED_CASTER"],
+      "buff": [
+        "BT_SHIELD_BASED_CASTER"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
@@ -127,9 +141,7 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000068_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": [
-        
-      ],
+      "buff": [],
       "cd": "5",
       "debuff": [
         "BT_FREEZE",
@@ -195,5 +207,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"C"
+  "rank": "C"
 }

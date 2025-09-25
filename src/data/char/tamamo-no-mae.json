@@ -3,11 +3,23 @@
   "Fullname": "Tamamo-no-Mae",
   "Rarity": 3,
   "Element": "Fire",
-  "rank_pvp":"D",
-  "role":"support",
+  "rank_pvp": "D",
+  "role": "support",
   "gift": "Magic Tool",
   "Class": "Mage",
-  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "SubClass": "Enchanter",
+  "video": "9z9o9U0oSsU",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -87,8 +99,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000080_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": [
-      ],
+      "buff": [],
       "cd": "3",
       "debuff": [
         "BT_REMOVE_BUFF",
@@ -193,5 +204,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

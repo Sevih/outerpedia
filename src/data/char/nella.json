@@ -3,11 +3,23 @@
   "Fullname": "Nella",
   "Rarity": 3,
   "Element": "Dark",
-  "role":"sustain",
+  "role": "sustain",
   "gift": "Magic Tool",
-  "rank_pvp":"S",
+  "rank_pvp": "S",
   "Class": "Healer",
-  "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "SubClass": "Reliever",
+  "video": "jmzEGK9lfS8",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -33,7 +45,10 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000083_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_AP_CHARGE","BT_IMMUNE"],
+      "buff": [
+        "BT_AP_CHARGE",
+        "BT_IMMUNE"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -187,5 +202,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

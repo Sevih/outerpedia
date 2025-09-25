@@ -1,3 +1,7 @@
+## 🚀 Official Video (2025-09-25)
+- Official character video are now available on character detail page if available
+
+
 ## 🛠 Deep Sea Guardian Update (2025-07-23)
 - [Joint boss Deep Sea Guardian](/guides/joint-boss/deep-sea-guardian) has been updated for July 2025 version.
 

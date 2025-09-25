@@ -25,6 +25,14 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-09-25",
+    title: "Official Video",
+    type: "feature",
+    content: [
+      "- Official YouTube videos are now embedded on character detail pages (when available).",
+    ],
+  },
+  {
     date: "2025-09-24",
     title: "Ether Income Guide",
     type: "feature",

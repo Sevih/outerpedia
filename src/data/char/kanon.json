@@ -3,11 +3,23 @@
   "Fullname": "Kanon",
   "Rarity": 3,
   "Element": "Fire",
-  "role":"dps",
+  "role": "dps",
   "gift": "Magic Tool",
-  "rank_pvp":"S",
+  "rank_pvp": "S",
   "Class": "Striker",
-  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "SubClass": "Bruiser",
+  "video": "Cc6PF35TP08",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -34,7 +46,9 @@
       "SkipNameID": "SKILL_NAME_2000071_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE","BT_STAT|ST_CRITICAL_RATE","BT_UNDEAD"
+        "BT_ACTION_GAUGE",
+        "BT_STAT|ST_CRITICAL_RATE",
+        "BT_UNDEAD"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -189,5 +203,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

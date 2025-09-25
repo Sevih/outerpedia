@@ -3,11 +3,23 @@
   "Fullname": "Dianne",
   "Rarity": 3,
   "Element": "Light",
-  "rank_pvp":"A",
+  "rank_pvp": "A",
   "gift": "Luxury",
-  "role":"sustain",
+  "role": "sustain",
   "Class": "Healer",
-  "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Sage",
+  "video": "iRbqK7agxug",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -71,7 +83,10 @@
       "SkipNameID": "SKILL_NAME_2000074_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE","BT_AP_CHARGE","SYS_CONTINU_HEAL","IG_Buff_BuffdurationIncrease"
+        "BT_ACTION_GAUGE",
+        "BT_AP_CHARGE",
+        "SYS_CONTINU_HEAL",
+        "IG_Buff_BuffdurationIncrease"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -91,7 +106,9 @@
         }
       },
       "cd": "5",
-      "debuff": ["BT_WG_DMG"],
+      "debuff": [
+        "BT_WG_DMG"
+      ],
       "description": [
         "Attacks all enemies, and recovers Health of all allies by <color=#28d9ed>[Buff_V_2000074_2_1]</color>. For each target damaged, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000074_2_3]</color>."
       ],
@@ -189,5 +206,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

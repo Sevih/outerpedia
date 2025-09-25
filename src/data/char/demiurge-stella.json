@@ -3,12 +3,26 @@
   "Fullname": "Demiurge Stella",
   "Rarity": 3,
   "Element": "Light",
-  "rank_pvp":"S",
-  "role":"dps",
+  "rank_pvp": "S",
+  "role": "dps",
   "gift": "Science",
-  "tags":["premium"],
+  "tags": [
+    "premium"
+  ],
   "Class": "Striker",
-  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 1}, "Ultimate":{"prio": 3}},
+  "SubClass": "Bruiser",
+  "video": "UBgH1dn4Z_g",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 3
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -34,7 +48,10 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000053_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_SHIELD_BASED_CASTER","BT_ADDITIVE_TURN"],
+      "buff": [
+        "BT_SHIELD_BASED_CASTER",
+        "BT_ADDITIVE_TURN"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 120,
@@ -188,5 +205,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

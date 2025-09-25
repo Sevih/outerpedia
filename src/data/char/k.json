@@ -5,10 +5,21 @@
   "Element": "Fire",
   "Class": "Defender",
   "gift": "Science",
-  "rank":"A",
-  "role":"support",
+  "rank": "A",
+  "role": "support",
   "SubClass": "Sweeper",
-  "video": "dcT52onhzrg","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "video": "PueXtFsRHI0",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",
@@ -69,7 +80,10 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000001_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_CALL_BACKUP","BT_SHIELD_BASED_CASTER"],
+      "buff": [
+        "BT_CALL_BACKUP",
+        "BT_SHIELD_BASED_CASTER"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,

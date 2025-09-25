@@ -3,12 +3,26 @@
   "Fullname": "Demiurge Delta",
   "Rarity": 3,
   "Element": "Dark",
-  "role":"sustain",
+  "role": "sustain",
   "gift": "Science",
-  "rank_pvp":"S",
-  "tags":["premium"],
+  "rank_pvp": "S",
+  "tags": [
+    "premium"
+  ],
   "Class": "Healer",
-  "SubClass": "Reliever","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Reliever",
+  "video": "uswwN1IKlFI",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -35,7 +49,11 @@
       "SkipNameID": "SKILL_NAME_2000100_Skill01",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_ACTION_GAUGE","BT_REMOVE_DEBUFF","BT_STAT|ST_BUFF_RESIST","BT_AP_CHARGE","BT_COOL_CHARGE"
+        "BT_ACTION_GAUGE",
+        "BT_REMOVE_DEBUFF",
+        "BT_STAT|ST_BUFF_RESIST",
+        "BT_AP_CHARGE",
+        "BT_COOL_CHARGE"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -132,8 +150,7 @@
         "UNIQUE_ETHER_BOOST"
       ],
       "cd": "5",
-      "debuff": [
-      ],
+      "debuff": [],
       "description": [
         "Recovers Health of all allies by <color=#28d9ed>[Buff_V_2000100_3_1]</color> of Delta's Max Health, and grants <color=#28d9ed>Revival</color> for <color=#28d9ed>[Buff_T_2000100_3_2] turn(s)</color>. Then, grants <color=#28d9ed>Ether Boost</color> to the ally with the highest Attack for <color=#28d9ed>[Buff_T_2000100_3_3] turn(s)</color>. <color=#28d9ed>Ether Boost</COLOR> cannot be granted to Healers."
       ],
@@ -191,5 +208,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"B"
+  "rank": "B"
 }

@@ -3,11 +3,23 @@
   "Fullname": "Kuro",
   "Rarity": 3,
   "Element": "Light",
-  "rank_pvp":"A",
-  "role":"support",
+  "rank_pvp": "A",
+  "role": "support",
   "gift": "Natural Object",
   "Class": "Mage",
-  "SubClass": "Enchanter","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "SubClass": "Enchanter",
+  "video": "OniW6CZHBXg",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -54,7 +66,8 @@
       },
       "cd": null,
       "debuff": [
-        "BT_MARKING","BT_FIXED_DAMAGE"
+        "BT_MARKING",
+        "BT_FIXED_DAMAGE"
       ],
       "description": [
         "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000079_1_1]</color> chance to inflict <color=#28d9ed>Marked</color> for <color=#28d9ed>[Buff_T_2000079_1_1] turn(s)</color>.\\nAfter attacking, when the target is inflicted with a debuff, deals <color=#28d9ed>[Buff_V_2000079_1_2]</color> of the target's Max Health as fixed damage."
@@ -89,9 +102,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000079_Skill02",
       "TargetTeamType": "TEAM",
-      "buff": [
-        
-      ],
+      "buff": [],
       "cd": "9",
       "debuff": [
         "BT_ACTION_GAUGE",
@@ -131,7 +142,9 @@
       "buff": [],
       "cd": "5",
       "debuff": [
-        "BT_STATBUFF_CONVERT_TO_STATDEBUFF","BT_FIXED_DAMAGE","IG_Buff_DeBuffdurationIncrease"
+        "BT_STATBUFF_CONVERT_TO_STATDEBUFF",
+        "BT_FIXED_DAMAGE",
+        "IG_Buff_DeBuffdurationIncrease"
       ],
       "description": [
         "Attacks all enemies. Has a <color=#28d9ed>[Buff_C_2000079_3_1]</color> chance to inflict <color=#28d9ed>buff reversal</color> on the target, and ignores Immunity to increase debuff durations by <color=#28d9ed>[Buff_V_2000079_3_2] turn(s)</color>. After attacking, when the target is not inflicted with dispellable <color=#28d9ed>reduced stat effects</color>, deals <color=#28d9ed>[Buff_V_2000079_3_3]</color> of the target's Max Health as fixed damage."
@@ -194,5 +207,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"B"
+  "rank": "B"
 }

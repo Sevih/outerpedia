@@ -4,11 +4,25 @@
   "Rarity": 3,
   "Element": "Light",
   "gift": "Science",
-  "role":"sustain",
-  "rank_pvp":"S",
-  "tags":["premium"],
+  "role": "sustain",
+  "rank_pvp": "S",
+  "tags": [
+    "premium"
+  ],
   "Class": "Healer",
-  "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "SubClass": "Sage",
+  "video": "xmzgtcPHmT4",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -34,7 +48,12 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000084_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_CALL_BACKUP","BT_REMOVE_DEBUFF","BT_REVIVAL","BT_AP_CHARGE"],
+      "buff": [
+        "BT_CALL_BACKUP",
+        "BT_REMOVE_DEBUFF",
+        "BT_REVIVAL",
+        "BT_AP_CHARGE"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 70,
@@ -189,5 +208,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

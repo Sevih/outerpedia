@@ -3,11 +3,23 @@
   "Fullname": "Mene",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp":"A",
-  "role":"sustain",
+  "rank_pvp": "A",
+  "role": "sustain",
   "gift": "Natural Object",
   "Class": "Healer",
-  "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Sage",
+  "video": "3WCXBVQRQls",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -33,7 +45,9 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000054_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_AP_CHARGE"],
+      "buff": [
+        "BT_AP_CHARGE"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -184,5 +198,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"B"
+  "rank": "B"
 }

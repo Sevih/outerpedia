@@ -3,11 +3,23 @@
   "Fullname": "Hanbyul Lee",
   "Rarity": 3,
   "Element": "Earth",
-  "rank_pvp":"C",
-  "role":"support",
+  "rank_pvp": "C",
+  "role": "support",
   "gift": "Natural Object",
   "Class": "Defender",
-  "SubClass": "Phalanx","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "SubClass": "Phalanx",
+  "video": "TAmYHXMoGJQ",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -193,5 +205,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"C"
+  "rank": "C"
 }

@@ -3,11 +3,23 @@
   "Fullname": "Snow",
   "Rarity": 2,
   "Element": "Water",
-  "rank":"D",
-  "role":"support",
+  "rank": "D",
+  "role": "support",
   "gift": "Luxury",
   "Class": "Ranger",
-  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "SubClass": "Tactician",
+  "video": "K6sQsTbvzZ0",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",

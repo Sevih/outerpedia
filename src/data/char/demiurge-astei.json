@@ -3,12 +3,27 @@
   "Fullname": "Demiurge Astei",
   "Rarity": 3,
   "Element": "Dark",
-  "rank_pvp":"S",  
+  "rank_pvp": "S",
   "gift": "Science",
   "Class": "Mage",
-  "tags":["premium","ignore-defense"],
-  "role":"dps",
-  "SubClass": "Wizard","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "tags": [
+    "premium",
+    "ignore-defense"
+  ],
+  "role": "dps",
+  "SubClass": "Wizard",
+  "video": "orOhHJzO9qA",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -35,7 +50,9 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000059_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["UNIQUE_DOLL_GARDEN_CARETAKER"],
+      "buff": [
+        "UNIQUE_DOLL_GARDEN_CARETAKER"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -87,9 +104,14 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000059_Skill02",
       "TargetTeamType": "ME",
-      "buff": ["UNIQUE_DOLL_GARDEN_CARETAKER","BT_ACTION_GAUGE"],
+      "buff": [
+        "UNIQUE_DOLL_GARDEN_CARETAKER",
+        "BT_ACTION_GAUGE"
+      ],
       "cd": "9",
-      "debuff": ["UNIQUE_MARTYRDOM"],
+      "debuff": [
+        "UNIQUE_MARTYRDOM"
+      ],
       "description": [
         "(Triggered Effect) <color=#28d9ed>Resurrects</color> and heals for <color=#28d9ed>[Buff_V_2000059_2_1]</color> upon death. <color=#28d9ed>Dies</color> if no enemy is slain in <color=#28d9ed>[Buff_T_2000059_2_2] turn</color>.\\nGrants the caster <color=#28d9ed>Doll Garden's Caretaker</color> for <color=#28d9ed>[Buff_T_2000059_2_5] turn</color> upon resurrection."
       ],
@@ -123,9 +145,7 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000059_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": [
-        
-      ],
+      "buff": [],
       "cd": "5",
       "debuff": [],
       "description": [
@@ -186,5 +206,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

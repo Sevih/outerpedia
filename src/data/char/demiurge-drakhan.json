@@ -3,12 +3,27 @@
   "Fullname": "Demiurge Drakhan",
   "Rarity": 3,
   "Element": "Light",
-  "rank_pvp":"S",
+  "rank_pvp": "S",
   "gift": "Science",
   "Class": "Defender",
-  "tags":["premium","ignore-defense"],
-  "role":"sustain",
-  "SubClass": "Sweeper","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "tags": [
+    "premium",
+    "ignore-defense"
+  ],
+  "role": "sustain",
+  "SubClass": "Sweeper",
+  "video": "zz0OHkP8y0I",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -53,7 +68,9 @@
         }
       },
       "cd": null,
-      "debuff": ["BT_FIXED_DAMAGE"],
+      "debuff": [
+        "BT_FIXED_DAMAGE"
+      ],
       "description": [
         "Attacks an enemy and deals <color=#28d9ed>[Buff_V_2000063_1_2]</color> of the target's Max Health as fixed damage.\\nDamage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack. "
       ],
@@ -187,5 +204,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

@@ -3,11 +3,23 @@
   "Fullname": "Roxie",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp":"A",
+  "rank_pvp": "A",
   "gift": "Natural Object",
-  "role":"dps",
+  "role": "dps",
   "Class": "Mage",
-  "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Wizard",
+  "video": "lyNQ73PBPZg",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -53,7 +65,8 @@
       },
       "cd": null,
       "debuff": [
-        "BT_DOT_LIGHTNING","IG_Buff_DeBuffdurationIncrease"
+        "BT_DOT_LIGHTNING",
+        "IG_Buff_DeBuffdurationIncrease"
       ],
       "description": [
         "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000082_1_1]</color> chance to inflict <color=#28d9ed>Shocked</color> for <color=#28d9ed>[Buff_T_2000082_1_1] turn(s)</color>.\\nDamage dealt increases when the caster is granted a buff."
@@ -189,5 +202,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

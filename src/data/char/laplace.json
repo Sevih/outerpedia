@@ -3,11 +3,23 @@
   "Fullname": "Laplace",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp":"D",
+  "rank_pvp": "D",
   "gift": "Magic Tool",
-  "role":"dps",
+  "role": "dps",
   "Class": "Mage",
-  "SubClass": "Wizard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "SubClass": "Wizard",
+  "video": "QCt2TCasjDA",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -71,7 +83,8 @@
       "SkipNameID": "SKILL_NAME_2000044_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_SHIELD_BASED_CASTER","BT_REMOVE_DEBUFF"
+        "BT_SHIELD_BASED_CASTER",
+        "BT_REMOVE_DEBUFF"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
@@ -191,5 +204,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"B"
+  "rank": "B"
 }

@@ -3,12 +3,26 @@
   "Fullname": "Rey",
   "Rarity": 3,
   "Element": "Earth",
-  "rank_pvp":"A",
+  "rank_pvp": "A",
   "gift": "Natural Object",
-  "role":"dps",
+  "role": "dps",
   "Class": "Striker",
-  "tags":["ignore-defense"],
-  "SubClass": "Attacker","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "tags": [
+    "ignore-defense"
+  ],
+  "SubClass": "Attacker",
+  "video": "NbkIux5uYro",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -69,8 +83,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000087_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": [
-      ],
+      "buff": [],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -89,7 +102,9 @@
         }
       },
       "cd": "4",
-      "debuff": ["BT_WG_DMG"],
+      "debuff": [
+        "BT_WG_DMG"
+      ],
       "description": [
         "Attacks an enemy, and when it is the caster's turn, obtains <color=#28d9ed>[Buff_V_2000087_2_1]</color> <color=#28d9ed>Natural Talent (Unique Resource)</color>.\\n\\nThis skill ignores the Defense of <color=#28d9ed>Water</color> or <color=#28d9ed>Healer</color> enemies by <color=#28d9ed>30%</color>."
       ],
@@ -188,5 +203,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"A"
+  "rank": "A"
 }

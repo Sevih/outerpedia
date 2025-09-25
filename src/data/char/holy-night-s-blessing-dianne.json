@@ -3,13 +3,28 @@
   "Fullname": "Holy Night's Blessing Dianne",
   "Rarity": 3,
   "Element": "Fire",
-  "rank_pvp":"A",
+  "rank_pvp": "A",
   "Class": "Ranger",
   "gift": "Luxury",
-  "role":"dps",
-  "limited":true,
-  "tags":["seasonal","ignore-defense"],
-  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "role": "dps",
+  "limited": true,
+  "tags": [
+    "seasonal",
+    "ignore-defense"
+  ],
+  "SubClass": "Vanguard",
+  "video": "zvgoCGKtIfo",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -72,8 +87,12 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000093_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_RANDOM_STAT",
-      "BT_ADDITIVE_TURN","UNIQUE_GIFT_OF_BUFF","BT_STAT|ST_PIERCE_POWER_RATE"],
+      "buff": [
+        "BT_RANDOM_STAT",
+        "BT_ADDITIVE_TURN",
+        "UNIQUE_GIFT_OF_BUFF",
+        "BT_STAT|ST_PIERCE_POWER_RATE"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
@@ -163,7 +182,9 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": ["BT_CP_CHARGE"],
+      "buff": [
+        "BT_CP_CHARGE"
+      ],
       "cd": null,
       "debuff": "",
       "description": [
@@ -190,5 +211,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }

@@ -3,12 +3,26 @@
   "Fullname": "Bryn",
   "Rarity": 3,
   "Element": "Fire",
-  "rank_pvp":"C",
+  "rank_pvp": "C",
   "gift": "Luxury",
   "Class": "Mage",
   "SubClass": "Wizard",
-  "tags":["ignore-defense"],
-  "role":"dps","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 1}, "Ultimate":{"prio": 2}},
+  "tags": [
+    "ignore-defense"
+  ],
+  "role": "dps",
+  "video": "xSs46l7wgQc",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -94,8 +108,7 @@
         "UNIQUE_CHARISMA"
       ],
       "cd": "4",
-      "debuff": [
-      ],
+      "debuff": [],
       "description": [
         "(Passive Effect) At the start of battle, grants <color=#28d9ed>Charisma</color> to all allies and enemies except for Bryn for <color=#28d9ed>[Buff_T_2000076_2_3] turn(s)</color>.\\n\\n(Active Effect) Grants <color=#28d9ed>Charisma</color> to all allies except for Bryn for <color=#28d9ed>[Buff_T_2000076_2_3] turn(s)</color>. Then, grants all allies a barrier proportional to the caster's Attack for <color=#28d9ed>[Buff_T_2000076_2_5] turn(s)</color>."
       ],
@@ -190,5 +203,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"B"
+  "rank": "B"
 }

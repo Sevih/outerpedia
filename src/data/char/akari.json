@@ -3,11 +3,23 @@
   "Fullname": "Akari",
   "Rarity": 3,
   "Element": "Light",
-  "rank_pvp":"A",
+  "rank_pvp": "A",
   "gift": "Magic Tool",
-  "role":"support",
+  "role": "support",
   "Class": "Ranger",
-  "SubClass": "Tactician","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Tactician",
+  "video": "obLIo0FuAIo",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -91,7 +103,10 @@
       },
       "cd": "4",
       "debuff": [
-        "BT_STAT|ST_BUFF_RESIST","BT_STAT|ST_CRITICAL_RATE","BT_SEALED","IG_Buff_DeBuffdurationIncrease"
+        "BT_STAT|ST_BUFF_RESIST",
+        "BT_STAT|ST_CRITICAL_RATE",
+        "BT_SEALED",
+        "IG_Buff_DeBuffdurationIncrease"
       ],
       "description": [
         "Attacks all enemies. After attacking, has a <color=#28d9ed>[Buff_C_2000064_2_1]</color> chance to increase the duration of debuffs on the enemy by <color=#28d9ed>[Buff_V_2000064_2_1] turn(s)</color>, then inflicts reduced <color=#28d9ed>Resilience</color> on targets without debuffs for <color=#28d9ed>[Buff_T_2000064_2_2] turn(s)</color>."
@@ -126,9 +141,7 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000064_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": [
-        
-      ],
+      "buff": [],
       "cd": "5",
       "debuff": [
         "BT_SEALED",
@@ -194,5 +207,5 @@
       "wgr_dual": 1
     }
   },
-  "rank":"S"
+  "rank": "S"
 }
