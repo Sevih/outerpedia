@@ -5,15 +5,35 @@ import GuideHeading from '@/app/components/GuideHeading'
 import ItemInlineDisplay from '@/app/components/ItemInline'
 import Accordion, { type AccordionItem } from '@/app/components/ui/Accordion'
 
-
 type Step = {
   title: string
   image?: string
   alt?: string
 }
 
-/* --- FAQ Section --- */
+/* --- FAQ Section (updated) --- */
 const faqItems: AccordionItem[] = [
+  {
+    key: 'faq-0',
+    title: <>I didn’t issue / lost my Service Transfer Code. Can I still recover my account?</>,
+    content: (
+      <>
+        Yes. First try checking/issuing your code on the official page:<br />
+        <Link
+          href="https://outerplane.game.onstove.com/transfer"
+          target="_blank"
+          className="underline"
+        >
+          STOVE Transfer Code Confirmation
+        </Link>.
+        <p className="mt-2">
+          If you can’t verify your STOVE account but you have <strong>purchase history</strong>, email support with as
+          much info as you can (see the “Recovery Help” section below). They will review your data and assist with
+          recovery.
+        </p>
+      </>
+    ),
+  },
   {
     key: 'faq-1',
     title: <>Will I be able to continue using my existing account after the service transfer?</>,
@@ -78,11 +98,7 @@ const faqItems: AccordionItem[] = [
   {
     key: 'faq-7',
     title: <>If I withdraw my account during the application period, can I still play after transfer?</>,
-    content: (
-      <>
-        No. If you withdraw before transfer, the account is erased and transfer is impossible, even if you already have a code.
-      </>
-    ),
+    content: <>No. If you withdraw before transfer, the account is erased and transfer is impossible, even if you already have a code.</>,
   },
   {
     key: 'faq-8',
@@ -146,11 +162,7 @@ const faqItems: AccordionItem[] = [
   {
     key: 'faq-12',
     title: <>If operation policy changes after transfer, are previous restrictions removed?</>,
-    content: (
-      <>
-        No. Accounts already under restriction remain inaccessible, won’t receive a code, and cannot be transferred.
-      </>
-    ),
+    content: <>No. Accounts already under restriction remain inaccessible, won’t receive a code, and cannot be transferred.</>,
   },
   {
     key: 'faq-13',
@@ -254,8 +266,11 @@ export default function ServiceTransferGuide() {
               <p>
                 OUTERPLANE will be transferred to <strong>VAGAMES</strong> on <strong>September 26, 2025</strong>.
                 Apply between <strong>August 12</strong> and <strong>September 23</strong> to receive your transfer code.
-                <strong> A separate code is required for each account on each server.</strong> Without completing the
-                process, you will lose access after September 23.
+                <strong> A separate code is required for each account on each server.</strong>
+              </p>
+              <p className="mt-2 text-amber-100">
+                Missed the window or lost your code? You can still recover your account. See{' '}
+                <a href="#recovery" className="underline">Recovery Help</a> below.
               </p>
             </div>
           </section>
@@ -285,7 +300,6 @@ export default function ServiceTransferGuide() {
                         />
                       </>
                     )}
-
                   </div>
                 </li>
               ))}
@@ -327,7 +341,6 @@ export default function ServiceTransferGuide() {
                   <span className="mt-0.5">✔️</span>
                   <span className="text-zinc-200">Guest accounts must be linked to receive a code.</span>
                 </div>
-
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/guides/service-transfert/4.webp"
@@ -338,7 +351,70 @@ export default function ServiceTransferGuide() {
               </li>
               <li>Inactive accounts (no 1-4 clear + no login since Nov 5, 2024) will be deleted Sep 26.</li>
               <li>Mail claim periods are not extended — claim before Sep 23.</li>
+              <li className="text-amber-200">
+                Recovery may <strong>not</strong> be possible for guest accounts or accounts without purchase history (ownership can’t be verified).
+              </li>
             </ul>
+          </section>
+
+          {/* Recovery Help (new) */}
+          <section id="recovery">
+            <h2 className="text-xl font-semibold mb-3">Recovery Help (No Code / Lost Code)</h2>
+            <div className="space-y-3 text-sm text-zinc-200">
+              <div className="rounded-lg border border-blue-600/40 bg-blue-600/10 p-4">
+                <p className="font-semibold">Step 1 — Check / issue your code</p>
+                <p>
+                  Use the official page:&nbsp;
+                  <Link
+                    href="https://outerplane.game.onstove.com/transfer"
+                    target="_blank"
+                    className="underline"
+                  >
+                    STOVE Transfer Code Confirmation
+                  </Link>
+                </p>
+                <p className="mt-1 text-zinc-300">
+                  If you didn’t receive a code before, you can still get one after agreeing to the transfer agreement.
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-zinc-700 bg-zinc-900/60 p-4">
+                <p className="font-semibold">Step 2 — Can’t verify your STOVE account?</p>
+                <p>
+                  If you have <strong>purchase history</strong>, contact support. Provide as much info as possible for a faster review:
+                </p>
+                <ol className="list-decimal pl-5 mt-2 space-y-1">
+                  <li>Server</li>
+                  <li>Nickname</li>
+                  <li>UID</li>
+                  <li>Device & OS (e.g., iPhone 14 / iOS 17)</li>
+                  <li>Service Transfer Code (if available)</li>
+                  <li>App Store / Google Play receipt (screenshot)</li>
+                </ol>
+                <div className="mt-2">
+                  Email:&nbsp;
+                  <Link href="mailto:outerplane_contact@vagames.kr" className="underline">
+                    outerplane_contact@vagames.kr
+                  </Link>
+                  <br />
+                  Help Center:&nbsp;
+                  <Link
+                    href="https://outerplane.helpshift.com/hc/en/4-outerplane/"
+                    target="_blank"
+                    className="underline"
+                  >
+                    https://outerplane.helpshift.com/hc/en/4-outerplane/
+                  </Link>
+                </div>
+                <p className="mt-2 text-zinc-300">
+                  Provide info based on data <strong>prior to Sep 26</strong>. Typical response time is 3–5 business days (may vary).
+                </p>
+              </div>
+
+              <p className="text-amber-200">
+                Note: Accounts created as <strong>Guest</strong> or <strong>without purchase history</strong> may not be eligible for recovery, as ownership can’t be verified.
+              </p>
+            </div>
           </section>
 
           {/* Refunds */}
@@ -388,7 +464,7 @@ export default function ServiceTransferGuide() {
               target="_blank"
               className="inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition mt-3"
             >
-              Update Notice - Service Transfer Code issuance has begun
+              Update Notice — Code issuance started
             </Link>
             <Link
               href="https://page.onstove.com/outerplane/en/view/10965889"
@@ -397,6 +473,35 @@ export default function ServiceTransferGuide() {
             >
               OUTERPLANE Service Transfer FAQ
             </Link>
+          </div>
+
+          {/* Recovery shortcut box */}
+          <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 p-4">
+            <h3 className="font-semibold mb-2">Need Recovery?</h3>
+            <ul className="text-sm space-y-2">
+              <li>
+                🔎{' '}
+                <Link href="https://outerplane.game.onstove.com/transfer" target="_blank" className="underline">
+                  Check / Issue Transfer Code (STOVE)
+                </Link>
+              </li>
+              <li>
+                ✉️{' '}
+                <Link href="mailto:outerplane_contact@vagames.kr" className="underline">
+                  outerplane_contact@vagames.kr
+                </Link>
+              </li>
+              <li>
+                🆘{' '}
+                <Link
+                  href="https://outerplane.helpshift.com/hc/en/4-outerplane/"
+                  target="_blank"
+                  className="underline"
+                >
+                  Help Center
+                </Link>
+              </li>
+            </ul>
           </div>
         </aside>
       </div>
