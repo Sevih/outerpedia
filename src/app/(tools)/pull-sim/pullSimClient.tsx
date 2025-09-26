@@ -9,6 +9,14 @@ import Image from 'next/image';
 import type { BadgeType, Entry } from '@/types/pull';
 import FocusSelect from '@/app/components/FocusSelect'
 
+function getMileageCost(kind: Kind): number {
+    switch (kind) {
+        case 'limited_rateup': return 150;
+        case 'premium_standard':
+        case 'regular_focus': return 200;
+        default: return Infinity; // "all" n’a pas d’exchange
+    }
+}
 
 
 const ElementIcon = dynamic(() =>
@@ -115,32 +123,53 @@ export default function PullSimClient() {
             setError('Select a focus before pulling on this banner.');
             return;
         }
+
+        // check mileage côté client pour l’exchange
+        // check mileage côté client pour l’exchange
+        if (action === 'exchange') {
+            if (kind === 'all') {
+                setError('No exchange on the All banner.');
+                return;
+            }
+            const cost = getMileageCost(kind);
+            if (mileage < cost) {
+                setError(`Not enough mileage. Need ${cost}.`);
+                return;
+            }
+        }
+
+
         const focus = focusSlug ? [focusSlug] : [];
         setError(null);
         setLoading(action);
+
         try {
             const res = await fetch('/api/pull-sim', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ kind, focus, action, grantMileage, exchangeSlug }),
+                cache: 'no-store',
+                body: JSON.stringify({ kind, focus, action, exchangeSlug }),
             });
             const data = await res.json();
+
             if (!data.ok) {
                 setError(data.error || 'Error');
-            } else {
-                if (action === 'one') {
-                    setLastTen(null);
-                    setLastPull(data.pull);
-                    setMileage(data.mileage ?? 0);
-                } else if (action === 'ten') {
-                    setLastPull(null);
-                    setLastTen({ pulls: data.pulls, stats: data.stats });
-                    setMileage(data.mileage ?? 0);
-                } else if (action === 'exchange') {
-                    setLastTen(null);
-                    setLastPull(data.result);
-                    setMileage(data.mileage ?? 0);
-                }
+                return;
+            }
+
+            if (action === 'one') {
+                setLastTen(null);
+                setLastPull(data.pull);
+                if (grantMileage) setMileage(m => m + 1); // ✅ côté client
+            } else if (action === 'ten') {
+                setLastPull(null);
+                setLastTen({ pulls: data.pulls, stats: data.stats });
+                if (grantMileage) setMileage(m => m + (data.pulls?.length ?? 10)); // ✅ côté client
+            } else if (action === 'exchange') {
+                setLastTen(null);
+                setLastPull(data.result);
+                const cost = getMileageCost(kind);
+                setMileage(m => m - cost); // ✅ décrémente du bon montant
             }
         } catch (e: unknown) {
             setError(e instanceof Error ? e.message : 'Network error');
@@ -148,6 +177,7 @@ export default function PullSimClient() {
             setLoading(null);
         }
     }
+
 
     const bannerLabel: Record<Kind, string> = {
         all: 'All',
