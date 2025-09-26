@@ -74,12 +74,14 @@ export default function PullSimClient() {
     const [lastTen, setLastTen] = useState<TenResult | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<'one' | 'ten' | 'exchange' | null>(null);
+    const [focusCount, setFocusCount] = useState(0);
 
     const [regular3, setRegular3] = useState<Entry[]>([]);
     const [premium3, setPremium3] = useState<Entry[]>([]);
     const [limited3, setLimited3] = useState<Entry[]>([]);
     const [focusSlug, setFocusSlug] = useState<string>('');
     useEffect(() => { setMounted(true); }, []);
+
 
     useEffect(() => {
         const ac = new AbortController();
@@ -112,6 +114,11 @@ export default function PullSimClient() {
     );
 
     useEffect(() => { setFocusSlug(''); }, [kind]);
+    useEffect(() => {
+        // on remet à zéro quand on change de banner OU de focus
+        setMileage(0);
+        setFocusCount(0);
+    }, [kind, focusSlug]);
 
     useEffect(() => {
         if (!focusSlug) return;
@@ -160,16 +167,34 @@ export default function PullSimClient() {
             if (action === 'one') {
                 setLastTen(null);
                 setLastPull(data.pull);
-                if (grantMileage) setMileage(m => m + 1); // ✅ côté client
+                if (grantMileage) setMileage(m => m + 1);
+
+                // 🔢 compteur focus (pull 1)
+                if (focusSlug && data?.pull?.pick?.slug === focusSlug) {
+                    setFocusCount(c => c + 1);
+                }
+
             } else if (action === 'ten') {
                 setLastPull(null);
                 setLastTen({ pulls: data.pulls, stats: data.stats });
-                if (grantMileage) setMileage(m => m + (data.pulls?.length ?? 10)); // ✅ côté client
+                if (grantMileage) setMileage(m => m + (data.pulls?.length ?? 10));
+
+                // 🔢 compteur focus (pull 10)
+                if (focusSlug && Array.isArray(data.pulls)) {
+                    const hits = data.pulls.reduce((acc: number, p: PullEntry) => acc + (p?.pick?.slug === focusSlug ? 1 : 0), 0);
+                    if (hits > 0) setFocusCount(c => c + hits);
+                }
+
             } else if (action === 'exchange') {
                 setLastTen(null);
                 setLastPull(data.result);
                 const cost = getMileageCost(kind);
-                setMileage(m => m - cost); // ✅ décrémente du bon montant
+                setMileage(m => m - cost);
+
+                // 🔢 compteur focus (exchange)
+                if (focusSlug && data?.result?.pick?.slug === focusSlug) {
+                    setFocusCount(c => c + 1);
+                }
             }
         } catch (e: unknown) {
             setError(e instanceof Error ? e.message : 'Network error');
@@ -303,7 +328,18 @@ export default function PullSimClient() {
                         <span className="inline-flex items-center rounded-md bg-neutral-800 px-2 py-1 text-xs font-semibold">
                             {mileage}
                         </span>
+
+                        {focusSlug && (
+                            <>
+                                <span className="text-neutral-500">•</span>
+                                <span className="text-neutral-400">Focus hits:</span>
+                                <span className="inline-flex items-center rounded-md bg-neutral-800 px-2 py-1 text-xs font-semibold">
+                                    {focusCount}
+                                </span>
+                            </>
+                        )}
                     </div>
+
                 </div>
             </div>
 
