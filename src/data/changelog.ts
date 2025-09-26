@@ -25,6 +25,15 @@ function migrateChangelogEntries(
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-09-27",
+    title: "Gacha Pull Simulator & Utilities rename",
+    type: "feature",
+    content: [
+      "- New **Gacha Pull Simulator**: simulate Rate Up, Premium, and Limited banners with the mileage system. [Try it here](/pull-sim)",
+      "- Renamed the **Tools** category to **Utilities** (URL stays `/tools`) and aligned page metadata for SEO."
+    ],
+  },
+  {
     date: "2025-09-25",
     title: "Official Video",
     type: "feature",

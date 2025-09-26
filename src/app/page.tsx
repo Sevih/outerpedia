@@ -9,7 +9,7 @@ const categories = [
   { name: 'Characters', path: '/characters' },
   { name: 'Equipments', path: '/equipments' },
   { name: 'Tier List', path: '/tierlist' },
-  { name: 'Tools', path: '/tools' },
+  { name: 'Utilities', path: '/tools' },
   { name: 'Guides', path: '/guides' },
 ]
 
@@ -44,7 +44,7 @@ export default function Home() {
           </h1>
 
           <p className="mt-2 text-gray-300 max-w-sm md:max-w-xl text-xs md:text-sm leading-snug md:leading-relaxed px-2">
-            A fan-made wiki for Outerplane. Explore builds, gear, tools, tier list, and strategy guides.
+            A fan-made wiki for Outerplane. Explore builds, gear, utilities, tier list, and strategy guides.
           </p>
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function Home() {
           <strong>Outerpedia</strong> is a community-driven database for <strong>Outerplane</strong>, the strategic turn-based mobile RPG.
         </p>
         <p>
-          Browse detailed <strong>character builds</strong>, <strong>gear effects</strong>, <strong>tier lists</strong>, <strong>tools</strong>, and <strong>guides</strong> — all carefully curated by passionate players.
+          Browse detailed <strong>character builds</strong>, <strong>gear effects</strong>, <strong>tier lists</strong>, <strong>utilities</strong>, and <strong>guides</strong> — all carefully curated by passionate players.
         </p>
         <p>
           Join our <Link href="https://discord.gg/keGhVQWsHv" className="underline text-cyan-400">community Discord</Link> to share team comps, ask questions, or theorycraft together.
@@ -83,7 +83,7 @@ export default function Home() {
                   Characters: 'CM_Lobby_Button_Character.webp',
                   Equipments: 'CM_Lobby_Button_Inventory.webp',
                   'Tier List': 'CM_Lobby_Button_Misson.webp',
-                  Tools: 'CM_Agit_Facility.webp',
+                  Utilities: 'CM_Agit_Facility.webp',
                   Guides: 'CM_Guild_Management.webp',
                 }
 

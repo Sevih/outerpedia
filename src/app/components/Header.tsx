@@ -8,7 +8,7 @@ const navItems = [
   { label: 'Characters', href: '/characters', icon: 'CM_EtcMenu_Colleague' },
   { label: 'Equipment', href: '/equipments', icon: 'CM_EtcMenu_Inventory' },
   { label: 'Tier List', href: '/tierlist', icon: 'CM_Mission_Icon_Weekly' },
-  { label: 'Tools', href: '/tools', icon: 'CM_EtcMenu_Setting' },
+  { label: 'Utilities', href: '/tools', icon: 'CM_EtcMenu_Setting' },
   { label: 'Guides', href: '/guides', icon: 'CM_EtcMenu_Character_Book' },
 ]
 

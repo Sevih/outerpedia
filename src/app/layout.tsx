@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'], display: 'swap' });
 export const metadata: Metadata = {
   title: 'Outerplane Tier List, Character Builds, Guides & Database – Outerpedia',
   description:
-    'Outerpedia is your go-to wiki for Outerplane: browse character builds, tier lists, tools, guides and strategy content.',
+    'Outerpedia is your go-to wiki for Outerplane: browse character builds, tier lists, utilities, guides and strategy content.',
   icons: {
     icon: '/favicon.ico',
     apple: '/images/icons/icon-192x192.png',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Outerpedia – Outerplane Tier List, Builds & Equipment Database',
     description:
-      'Discover characters, builds, tools and strategy guides for Outerplane. All data organized, searchable, and community-maintained.',
+      'Discover characters, builds, utilities and strategy guides for Outerplane. All data organized, searchable, and community-maintained.',
     url: 'https://outerpedia.com/',
     type: 'website',
     siteName: 'Outerpedia',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Outerplane Tier List, Character Builds, Guides & Database – Outerpedia',
     description:
-      'Browse character builds, tier lists, gear effects, tools and strategy guides for Outerplane. All in one clean and fast site.',
+      'Browse character builds, tier lists, gear effects, utilities and strategy guides for Outerplane. All in one clean and fast site.',
     images: ['https://outerpedia.com/images/ui/og_home.jpg'],
   },
   alternates: {

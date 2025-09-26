@@ -30,16 +30,21 @@
     "order": 5
   },
   "patch-history": {
-  "name": "Patch Notes & Dev Notes",
-  "description": "Browse all Outerplane patch notes, developer notes, hero compendium and more.",
-  "icon": "nav/CM_Lobby_Button_Agit.webp",
-  "order": 6
-},
+    "name": "Patch Notes & Dev Notes",
+    "description": "Browse all Outerplane patch notes, developer notes, hero compendium and more.",
+    "icon": "nav/CM_Lobby_Button_Agit.webp",
+    "order": 6
+  },
   "coupons": {
-  "name": "Coupon Codes",
-  "description": "Get all valid, expired, and upcoming promo codes for Outerplane. Updated regularly on Outerpedia.",
-  "icon": "nav/CM_Guild_NoticeBoard.webp",
-  "order": 7
-}
-
+    "name": "Coupon Codes",
+    "description": "Get all valid, expired, and upcoming promo codes for Outerplane. Updated regularly on Outerpedia.",
+    "icon": "nav/CM_Guild_NoticeBoard.webp",
+    "order": 7
+  },
+  "pull-sim": {
+    "name": "Pull Simulator",
+    "description": "Simulate gacha pulls for all Outerplane banners. Test your luck on Rate Up, Premium, and Limited banners with mileage system included.",
+    "icon": "nav/CM_Lobby_Button_Recruitment.webp",
+    "order": 8
+  }
 }
