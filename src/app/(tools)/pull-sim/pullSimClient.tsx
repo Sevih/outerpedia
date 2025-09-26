@@ -155,7 +155,7 @@ export default function PullSimClient() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 cache: 'no-store',
-                body: JSON.stringify({ kind, focus, action, exchangeSlug }),
+                body: JSON.stringify({ kind, focus, action, exchangeSlug, mileage }),
             });
             const data = await res.json();
 
@@ -213,7 +213,7 @@ export default function PullSimClient() {
     const canFocus = kind !== 'all';
     const hasFocus = !!focusSlug;
     const canPull = loading === null && (!canFocus || hasFocus);
-
+    const cost = getMileageCost(kind);
     return (
         <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
             {/* Header */}
@@ -314,8 +314,9 @@ export default function PullSimClient() {
 
                     <div className="mx-1 hidden h-6 w-px self-center bg-neutral-800 sm:block" />
 
+                    
                     <button
-                        disabled={!mounted || loading !== null || !focusSlug || kind === 'all'}
+                        disabled={!mounted || loading !== null || !focusSlug || kind === 'all' || mileage < cost}
                         onClick={() => callApi('exchange', focusSlug)}
                         className="rounded-md bg-neutral-800 px-4 py-2 text-sm font-medium hover:bg-neutral-700 disabled:opacity-50"
                         title="Échange le mileage contre une unité focus (si cap atteint)"

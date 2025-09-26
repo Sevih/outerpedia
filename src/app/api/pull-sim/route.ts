@@ -1,13 +1,24 @@
-// /src/app/api/pull-sim/route.ts
 import { NextResponse } from 'next/server';
 import { createBanner } from '@/lib/createBanner.cjs';
 
+// Types partagés
+type Kind = 'all' | 'premium_standard' | 'limited_rateup' | 'regular_focus';
+
 type Body = {
-  kind: 'all' | 'premium_standard' | 'limited_rateup' | 'regular_focus';
-  focus?: string[];             // slugs
+  kind: Kind;
+  focus?: string[];                 // slugs
   action: 'one' | 'ten' | 'exchange';
-  // grantMileage ignoré côté serveur (stateless)
-  exchangeSlug?: string;        // pour choisir l’unité focus (optionnel)
+  exchangeSlug?: string;            // slug explicite pour l'exchange (fallback: focus[0])
+};
+
+type PoolEntry = {
+  slug: string;
+  rarity: number;
+  id?: string;
+  name?: string;
+  element?: string;
+  class?: string;
+  badge?: string | null;
 };
 
 export async function POST(req: Request) {
@@ -16,11 +27,11 @@ export async function POST(req: Request) {
     const { kind, action, exchangeSlug } = body;
     const focus = Array.isArray(body.focus) ? body.focus.filter(Boolean) : [];
 
-    // ⚠️ Pas de mileageStore / pas d’état global
+    // Serveur stateless : pas de mileage ici.
     const banner = await createBanner({ kind, focus });
 
     if (action === 'one') {
-      const pull = banner.drawOne(); // pure RNG
+      const pull = banner.drawOne();
       return NextResponse.json(
         { ok: true, action, pull },
         { headers: { 'Cache-Control': 'no-store' } }
@@ -28,7 +39,7 @@ export async function POST(req: Request) {
     }
 
     if (action === 'ten') {
-      const { pulls } = banner.drawTen(); // pure RNG
+      const { pulls } = banner.drawTen();
       const stats = {
         total: pulls.length,
         star1: pulls.filter(p => p.rarity === 1).length,
@@ -42,19 +53,48 @@ export async function POST(req: Request) {
     }
 
     if (action === 'exchange') {
-      // Ne gère PAS de mileage ici; renvoie juste l’entrée focus
-      if (!focus.length && !exchangeSlug) {
+      const slug = exchangeSlug || focus[0];
+      if (!slug) {
         return NextResponse.json(
           { ok: false, error: 'No focus selected.' },
           { status: 400 }
         );
       }
-      const result = banner.exchangeForFocus(exchangeSlug);
-      return NextResponse.json(
-        { ok: true, action, result },
-        { headers: { 'Cache-Control': 'no-store' } }
-      );
+
+      try {
+        // 1) Essaye SANS argument : beaucoup d’implémentations utilisent this.focus en interne
+        const result = banner.exchangeForFocus();
+        // Optionnel: si tu veux t'assurer que c'est bien le bon slug,
+        // vérifie result.pick.slug et sinon continue sur le fallback ci-dessous.
+        return NextResponse.json(
+          { ok: true, action, result },
+          { headers: { 'Cache-Control': 'no-store' } }
+        );
+      } catch {
+        // 2) Fallback : cherche le perso 3★ par slug dans les pools de la bannière
+        try {
+          // @ts-expect-error: pools est exposé par createBanner.cjs
+          const entry = banner.pools?.star3?.find((e: PoolEntry) => e.slug === slug);
+          if (!entry) {
+            return NextResponse.json(
+              { ok: false, error: 'Unknown focus.' },
+              { status: 400 }
+            );
+          }
+          const result = { rarity: 3 as const, pick: entry };
+          return NextResponse.json(
+            { ok: true, action, result },
+            { headers: { 'Cache-Control': 'no-store' } }
+          );
+        } catch {
+          return NextResponse.json(
+            { ok: false, error: 'Unknown focus.' },
+            { status: 400 }
+          );
+        }
+      }
     }
+
 
     return NextResponse.json({ ok: false, error: 'Unknown action' }, { status: 400 });
   } catch (e: unknown) {
