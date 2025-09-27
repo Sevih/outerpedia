@@ -158,5 +158,13 @@
     },
     "start": "2025-09-23",
     "end": "2025-12-31"
+  },
+  {
+    "code": "OUTERPLANE",
+    "description": {
+      "Call of the Demiurge (Event)": "100"
+    },
+    "start": "2025-09-23",
+    "end": "2025-12-31"
   }
 ]

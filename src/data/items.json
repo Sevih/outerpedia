@@ -375,6 +375,16 @@
     "description": "A ticket used for limit recruitement. Each ticket will recruit one hero."
   },
   {
+    "name": "Call of the Demiurge (Event)",
+    "rarity": "normal",
+    "description": "A conduit that draws out the energy of the Demiurge. A sufficient number of these will allow you to recruit the Demiurge. Using this resource does not provide any mileage rewards."
+  },
+  {
+    "name": "Call of the Demiurge",
+    "rarity": "normal",
+    "description": "A conduit that draws out the energy of the Demiurge. A sufficient number of these will allow you to recruit the Demiurge."
+  },
+  {
     "name": "Special Recruitment Ticket",
     "rarity": "epic",
     "description": "A ticket used for special recruitement. Each ticket will recruit one hero."
