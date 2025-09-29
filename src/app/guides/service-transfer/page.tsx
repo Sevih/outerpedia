@@ -227,7 +227,7 @@ export default function ServiceTransferGuide() {
     },
     {
       title:
-        'After Sep 26 maintenance, create a VAGAMES account (Email/Google/Apple) and enter the code on the corresponding server.'
+        'After the transfer maintenance (date TBA), create a VAGAMES account (Email/Google/Apple) and enter the code on the corresponding server.'
     }
   ]
 
@@ -250,7 +250,7 @@ export default function ServiceTransferGuide() {
               📅 <strong className="font-semibold">Apply:</strong>&nbsp;Aug 12 → Sep 23, 2025
             </span>
             <span className="inline-flex items-center gap-1 rounded-md border border-zinc-700 bg-zinc-800 px-2 py-1">
-              ⏳ <strong className="font-semibold">Transfer:</strong>&nbsp;Sep 26, 2025 (after maintenance)
+              ⏳ <strong className="font-semibold">Transfer:</strong>&nbsp;TBA — official date expected this week
             </span>
           </div>
         </div>
@@ -264,7 +264,7 @@ export default function ServiceTransferGuide() {
             <GuideHeading level={3}>Overview</GuideHeading>
             <div className="prose prose-invert max-w-none">
               <p>
-                OUTERPLANE will be transferred to <strong>VAGAMES</strong> on <strong>September 26, 2025</strong>.
+                OUTERPLANE will be transferred to <strong>VAGAMES</strong>. The exact date will be announced this week.
                 Apply between <strong>August 12</strong> and <strong>September 23</strong> to receive your transfer code.
                 <strong> A separate code is required for each account on each server.</strong>
               </p>
@@ -349,7 +349,7 @@ export default function ServiceTransferGuide() {
                   loading="lazy"
                 />
               </li>
-              <li>Inactive accounts (no 1-4 clear + no login since Nov 5, 2024) will be deleted Sep 26.</li>
+              <li>Inactive accounts (no 1-4 clear + no login since Nov 5, 2024) will be deleted on the transfer maintenance date (TBA).</li>
               <li>Mail claim periods are not extended — claim before Sep 23.</li>
               <li className="text-amber-200">
                 Recovery may <strong>not</strong> be possible for guest accounts or accounts without purchase history (ownership can’t be verified).
@@ -407,7 +407,7 @@ export default function ServiceTransferGuide() {
                   </Link>
                 </div>
                 <p className="mt-2 text-zinc-300">
-                  Provide info based on data <strong>prior to Sep 26</strong>. Typical response time is 3–5 business days (may vary).
+                  Provide info based on data <strong>prior to the transfer maintenance date</strong>. Typical response time is 3–5 business days (may vary).
                 </p>
               </div>
 
@@ -421,7 +421,7 @@ export default function ServiceTransferGuide() {
           <section>
             <h2 className="text-xl font-semibold mb-3">Refund Requests</h2>
             <p className="text-sm text-zinc-300">
-              Available Sep 26 → Dec 21, 2025, for Paid Ether purchased in last 90 days, if you did not transfer.
+              Available post-transfer (TBA) → Dec 21, 2025, for Paid Ether purchased in last 90 days, if you did not transfer.
               Apply via STOVE Customer Center with proof of purchase.
             </p>
           </section>
@@ -430,7 +430,7 @@ export default function ServiceTransferGuide() {
           <section>
             <h2 className="text-xl font-semibold mb-3">Shop Suspension</h2>
             <p className="text-sm text-zinc-300">
-              Shop closed Sep 4 → Sep 26. One new hero + Battle Pass delayed. Event dungeon rerun during downtime.
+              Shop closed Sep 4 → until transfer maintenance (date TBA). One new hero + Battle Pass delayed. Event dungeon rerun during downtime.
             </p>
           </section>
 
@@ -445,7 +445,7 @@ export default function ServiceTransferGuide() {
               <li>✅ Apply Aug 12 → Sep 23</li>
               <li>✅ Get code for EACH account/server</li>
               <li>✅ Save the code (screenshot or email)</li>
-              <li>✅ Enter after Sep 26</li>
+              <li>✅ Enter after TBA — official date expected this week</li>
               <li>✅ Link guest accounts</li>
             </ul>
           </div>
