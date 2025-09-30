@@ -1,27 +1,58 @@
-import { changelog } from "@/data/changelog";
+import { getTenant } from '@/tenants/tenant'         // serveur
+import { getChangelogFor } from '@/data/changelog'   // isomorphique
 import { Card, CardContent } from "@/app/components/ui/card";
 import { renderMarkdown } from "@/utils/markdown";
 import { Metadata } from "next";
-export const metadata: Metadata = {
-  title: 'Changelog | Outerpedia',
-  description: 'Track all updates made to Outerpedia: guides, characters, tools, and more.',
-  keywords: [
-    'outerpedia changelog',
-    'outerpedia updates',
-    'patch notes',
-    'site update history',
-    'guide updates',
-    'tier list changes',
-    'new characters',
-    'tool improvements'
-  ],
-  alternates: {
-    canonical: 'https://outerpedia.com/changelog',
+
+const metaDict = {
+  en: {
+    title: "Changelog | Outerpedia",
+    desc: "Track all updates made to Outerpedia: guides, characters, tools, and more.",
   },
-};
+  fr: {
+    title: "Journal des mises à jour | Outerpedia",
+    desc: "Suivez toutes les mises à jour d’Outerpedia : guides, personnages, outils, et plus.",
+  },
+  jp: {
+    title: "更新履歴 | Outerpedia",
+    desc: "Outerpedia の更新情報（ガイド、キャラクター、ツールなど）を確認できます。",
+  },
+  kr: {
+    title: "변경 로그 | Outerpedia",
+    desc: "Outerpedia의 모든 업데이트(가이드, 캐릭터, 도구 등)를 확인하세요.",
+  },
+} as const;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { domain, key } = await getTenant();
+  const t = metaDict[key] ?? metaDict.en;
+
+  return {
+    title: t.title,
+    description: t.desc,
+    alternates: { canonical: `https://${domain}/changelog` },
+    openGraph: {
+      title: t.title,
+      description: t.desc,
+      url: `https://${domain}/changelog`,
+      type: "article",
+      siteName: "Outerpedia",
+      images: [{ url: `https://${domain}/images/ui/og_home.jpg`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.title,
+      description: t.desc,
+      images: [`https://${domain}/images/ui/og_home.jpg`],
+    },
+  };
+}
 
 
-export default function ChangelogPage() {
+export default async function ChangelogPage() {
+  const { key } = await getTenant()                  // 'en' | 'fr' | 'jp' | 'kr'
+  const entries = getChangelogFor(key)
+
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-white mb-8 text-center relative">
@@ -30,18 +61,18 @@ export default function ChangelogPage() {
       </h1>
 
       <div className="space-y-6">
-        {changelog.map((entry, index) => (
+        {entries.map((entry, index) => (
           <Card key={index}>
             <CardContent className="p-5 space-y-2">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">{entry.date}</span>
                 <span
                   className={`text-xs font-bold px-2 py-0.5 rounded uppercase bg-opacity-20 ${
-                    entry.type.toUpperCase() === 'FEATURE'
+                    entry.type === 'feature'
                       ? 'bg-green-800 text-green-100'
-                      : entry.type.toUpperCase() === 'UPDATE'
+                      : entry.type === 'update'
                       ? 'bg-blue-800 text-blue-100'
-                      : entry.type.toUpperCase() === 'FIX'
+                      : entry.type === 'fix'
                       ? 'bg-red-800 text-red-100'
                       : 'bg-gray-800 text-gray-100'
                   }`}

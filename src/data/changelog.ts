@@ -1,3 +1,13 @@
+import type { TenantKey } from '@/tenants/config'
+
+
+// --- types/helpers localisation (comme montré précédemment) ---
+type LString = string | { en: string; fr?: string; jp?: string; kr?: string };
+const resolveL = (s: LString, key: TenantKey) =>
+  typeof s === 'string' ? s : (s[key] ?? s.en);
+const toLines = (v: string | string[]) =>
+  Array.isArray(v) ? v : v.trim().split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+
 export type ChangelogEntry = {
   date: string;
   title: string;
@@ -5,25 +15,45 @@ export type ChangelogEntry = {
   content: string[];
 };
 
-// Fonction de migration avec typage strict
-function migrateChangelogEntries(
-  entries: readonly {
-    date: string;
-    title: string;
-    type: 'feature' | 'fix' | 'update' | 'balance';
-    content: string | string[];
-  }[]
-): ChangelogEntry[] {
-  return entries.map(entry => ({
-    ...entry,
-    content: Array.isArray(entry.content)
-      ? entry.content
-      : entry.content.trim().split(/\r?\n/).map(line => line.trim()).filter(line => line.length > 0),
-  }));
-}
+type RawEntry = {
+  date: string;
+  title: LString;
+  type: 'feature' | 'fix' | 'update' | 'balance';
+  content: string | string[] | LString[];
+};
 
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
+  {
+    date: "2025-09-30",
+    title: {
+      en: "Multilingual support (WIP)",
+      fr: "Support multilingue (en cours)",
+      jp: "多言語対応（進行中）",
+      kr: "다국어 지원(진행 중)",
+    } as LString,
+    type: "update",
+    content: [
+      {
+        en: "- Started implementing multi-language support. A **Language** selector is now available in the header and keeps your current page when switching (en/fr/jp/kr).",
+        fr: "- Début de l’implémentation multilingue. Un **sélecteur de langue** est maintenant disponible dans l’en-tête et conserve la page courante lors du changement (en/fr/jp/kr).",
+        jp: "- 多言語対応の実装を開始しました。ヘッダーに**言語**セレクターを追加し、切り替えても現在のページを維持します（en/fr/jp/kr）。",
+        kr: "- 다국어 지원 구현을 시작했습니다. 헤더에 **언어** 선택기가 추가되었고 전환 시 현재 페이지를 유지합니다(en/fr/jp/kr).",
+      } as LString,
+      {
+        en: "- Initial localization is live for homepage SEO and the changelog. More pages will roll out progressively.",
+        fr: "- La première localisation est en ligne pour le SEO de la page d’accueil et le changelog. D’autres pages arriveront progressivement.",
+        jp: "- まずはホームページのSEOと変更履歴でローカライズを公開しました。ほかのページも順次対応します。",
+        kr: "- 첫 로컬라이제이션은 홈페이지 SEO와 변경 로그에 적용되었습니다. 다른 페이지도 순차적으로 적용됩니다.",
+      } as LString,
+      {
+        en: "- Work in progress. Please report issues on Discord.",
+        fr: "- Travail en cours : certains textes restent en anglais. Merci de signaler les problèmes sur Discord.",
+        jp: "- 作業中のため、一部のテキストは英語のままです。問題があればDiscordでお知らせください。",
+        kr: "- 작업 진행 중이므로 일부 텍스트는 아직 영어입니다. 문제는 Discord로 알려 주세요.",
+      } as LString,
+    ],
+  },
   {
     date: "2025-09-27",
     title: "Gacha Pull Simulator & Utilities rename",
@@ -592,12 +622,14 @@ export const oldChangelog = [
     type: "feature",
     content: "Introduced visual cards for armor sets with hover effects and custom backgrounds."
   }
-] as const satisfies readonly {
-  date: string;
-  title: string;
-  type: 'feature' | 'fix' | 'update' | 'balance';
-  content: string | string[];
-}[];
+] as const satisfies readonly RawEntry[];
 
 // Changelog migré, typé, prêt à utiliser
-export const changelog: ChangelogEntry[] = migrateChangelogEntries(oldChangelog);
+export function getChangelogFor(lang: TenantKey): ChangelogEntry[] {
+  return (oldChangelog as readonly RawEntry[]).map(e => {
+    const title = resolveL(e.title, lang);
+    const list = Array.isArray(e.content) ? e.content : toLines(e.content);
+    const content = list.map(item => resolveL(item as LString, lang));
+    return { date: e.date, title, type: e.type, content };
+  });
+}

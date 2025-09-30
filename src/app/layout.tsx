@@ -4,98 +4,110 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { Inter } from 'next/font/google';
 import UpdateToast from './components/UpdateToast';
+import { getTenant } from '@/tenants/tenant'; // <-- ajouté
+import type { TenantKey } from '@/tenants/config'
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
-// SEO fallback (servira si aucune page ne définit son propre <head>)
-export const metadata: Metadata = {
-  title: 'Outerplane Tier List, Character Builds, Guides & Database – Outerpedia',
-  description:
-    'Outerpedia is your go-to wiki for Outerplane: browse character builds, tier lists, utilities, guides and strategy content.',
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/images/icons/icon-192x192.png',
-    shortcut: '/images/icons/icon-512x512.png',
-  },
-  manifest: '/manifest.json',
-  keywords: [
-    'outerplane',
-    'outerpedia',
-    'outerplane wiki',
-    'outerplane guide',
-    'outerplane tier list',
-    'character builds',
-    'gear usage statistics',
-    'gear usage finder',
-    'mobile rpg database',
-    'turn-based rpg',
-    'outerplane builds',
-    'outerplane exclusive equipment',
-    'outerplane gear sets',
-    'outerplane coupon',
-    'outerplane code',
-  ],
+const titles: Record<TenantKey, string> = {
+  en: 'Outerplane Tier List, Character Builds, Guides & Database – Outerpedia',
+  fr: 'Outerplane Tier List, Builds, Guides & Base de données – Outerpedia',
+  jp: 'Outerplane ティアリスト・ビルド・ガイド・データベース – Outerpedia',
+  kr: 'Outerplane 티어리스트, 빌드, 가이드 & 데이터베이스 – Outerpedia',
+}
 
-  openGraph: {
-    title: 'Outerpedia – Outerplane Tier List, Builds & Equipment Database',
-    description:
-      'Discover characters, builds, utilities and strategy guides for Outerplane. All data organized, searchable, and community-maintained.',
-    url: 'https://outerpedia.com/',
-    type: 'website',
-    siteName: 'Outerpedia',
-    images: [
-      {
-        url: 'https://outerpedia.com/images/ui/og_home.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Outerpedia Home Banner',
+const descs: Record<TenantKey, string> = {
+  en: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
+  fr: 'Découvrez les personnages, builds, équipements, tier lists et rejoignez notre Discord pour Outerplane !',
+  jp: 'Outerplane のキャラクター、ビルド、装備、ティアリストをチェックし、Discord コミュニティに参加しよう！',
+  kr: 'Outerplane의 캐릭터, 빌드, 장비, 티어리스트를 확인하고 Discord 커뮤니티에 참여하세요!',
+}
+
+const ogLocale: Record<TenantKey, string> = {
+  en: 'en_US',
+  fr: 'fr_FR',
+  jp: 'ja_JP',
+  kr: 'ko_KR',
+}
+
+const hreflang: Record<TenantKey, string> = {
+  en: 'en',
+  fr: 'fr',
+  jp: 'ja',
+  kr: 'ko',
+}
+
+// Domains par langue (adapte .local/.com selon ton getTenant())
+const isProd = process.env.NODE_ENV === 'production'
+const domainForKey: Record<TenantKey, string> = isProd
+  ? { en: 'outerpedia.com', fr: 'fr.outerpedia.com', jp: 'jp.outerpedia.com', kr: 'kr.outerpedia.com' }
+  : { en: 'outerpedia.local', fr: 'fr.outerpedia.local', jp: 'jp.outerpedia.local', kr: 'kr.outerpedia.local' }
+
+// Viewport statique, ça peut rester en export const
+// layout.tsx
+export const viewport: Viewport = { themeColor: '#081b1f' }
+
+// SEO global par défaut → mais maintenant en fonction du tenant
+export async function generateMetadata(): Promise<Metadata> {
+  const { domain, key } = await getTenant() // p.ex. { domain: 'fr.outerpedia.local', key: 'fr' }
+  const siteUrl = `https://${domain}`
+  const title = titles[key] ?? titles.en
+  const description = descs[key] ?? descs.en
+
+  return {
+    // Titre/description par défaut (page d’accueil et fallback global)
+    title,
+    description,
+
+    alternates: {
+      canonical: siteUrl,
+      languages: {
+        'x-default': `https://${domainForKey.en}/`,
+        en: `https://${domainForKey.en}/`,
+        fr: `https://${domainForKey.fr}/`,
+        ja: `https://${domainForKey.jp}/`,
+        ko: `https://${domainForKey.kr}/`,
       },
-    ],
-    locale: 'en_US',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Outerplane Tier List, Character Builds, Guides & Database – Outerpedia',
-    description:
-      'Browse character builds, tier lists, gear effects, utilities and strategy guides for Outerplane. All in one clean and fast site.',
-    images: ['https://outerpedia.com/images/ui/og_home.jpg'],
-  },
-  alternates: {
-    canonical: 'https://outerpedia.com/',
-  },
-};
+    },
 
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url: siteUrl,
+      siteName: 'Outerpedia',
+      locale: ogLocale[key] ?? 'en_US',
+      images: [{ url: `${siteUrl}/images/ui/og_home.jpg`, width: 1200, height: 630 }],
+    },
 
-// Mobile viewport + couleur de barre
-export const viewport: Viewport = {
-  themeColor: '#0891b2',
-};
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${siteUrl}/images/ui/og_home.jpg`],
+    },
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+    icons: {
+      icon: [
+        { url: '/favicon.ico' },
+      ],
+      apple: [{ url: '/apple-touch-icon.png' }],
+    },
+  }
+}
+
+// RootLayout devient async pour lire tenant
+// layout.tsx
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { key } = await getTenant()
   return (
-    <html lang="en">
-      <head suppressHydrationWarning>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
-        {/* ⚡ Preload Hero image pour LCP */}
-        <link rel="preload" as="image" href="/images/ui/og_home_no_text.webp" />
-      </head>
-
-      <body className={`${inter.className} text-white`}>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-1 w-full max-w-none mx-auto p-3 md:p-4">
-            {children}
-          </main>
-          <Footer />
-        </div>
+    <html lang={hreflang[key] ?? 'en'}>
+      <body className={`min-h-screen bg-black text-white ${inter.className}`}>
+        <Header current={key} />   {/* <-- passer la langue ici */}
+        {children}
+        <Footer />
         <UpdateToast />
       </body>
     </html>
-  );
+  )
 }
-

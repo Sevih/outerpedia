@@ -1,12 +1,21 @@
 'use client'
 
 import Link from 'next/link'
-import { changelog } from "@/data/changelog"
+import { type TenantKey } from '@/tenants/config'
+import { getChangelogFor, type ChangelogEntry } from '@/data/changelog'
+import { useMemo } from 'react'
 import { renderMarkdown } from "@/utils/markdown"
 
-const recentChanges = changelog.slice(0, 5)
+export default function HomeClient({ lang }: { lang: TenantKey }) {
+  const changelog = useMemo<ChangelogEntry[]>(
+    () => getChangelogFor(lang),
+    [lang]
+  )
+  const recentChanges = useMemo<ChangelogEntry[]>(
+    () => changelog.slice(0, 5),
+    [changelog]
+  )
 
-export default function HomeClient() {
   return (
     <div className="space-y-16 px-4 md:px-16">
       <script
@@ -44,21 +53,22 @@ export default function HomeClient() {
         </h2>
 
         <div className="relative border-l border-gray-700 pl-6 space-y-8">
-          {recentChanges.map((entry, index) => (
+          {recentChanges.map((entry: ChangelogEntry, index: number) => (
             <div key={index} className="relative bg-gray-800/50 p-4 rounded-xl border border-gray-700">
               <span className="absolute left-[-11px] top-5 w-3 h-3 bg-cyan-500 rounded-full border-2 border-white" />
 
               <div className="flex items-center justify-between text-sm text-gray-400 mb-1">
                 <span className="font-mono">{entry.date}</span>
                 <span
-                  className={`uppercase text-xs font-bold px-2 py-0.5 rounded bg-opacity-20 ${entry.type.toUpperCase() === 'FEATURE'
-                    ? 'bg-green-800 text-green-100'
-                    : entry.type.toUpperCase() === 'UPDATE'
-                      ? 'bg-blue-800 text-blue-100'
-                      : entry.type.toUpperCase() === 'FIX'
-                        ? 'bg-red-800 text-red-100'
-                        : 'bg-gray-800 text-gray-100'
+                  className={`uppercase text-xs font-bold px-2 py-0.5 rounded bg-opacity-20 ${entry.type === 'feature'
+                      ? 'bg-green-800 text-green-100'
+                      : entry.type === 'update'
+                        ? 'bg-blue-800 text-blue-100'
+                        : entry.type === 'fix'
+                          ? 'bg-red-800 text-red-100'
+                          : 'bg-gray-800 text-gray-100'
                     }`}
+
                 >
                   {entry.type.toUpperCase()}
                 </span>

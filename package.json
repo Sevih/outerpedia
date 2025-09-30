@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "3.2.6",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,7 +8,6 @@
     "build": "rm -rf .next && npm run set-version && npm run inject-sw-version && npm run generate:allchar && npm run generate:gear-stats && npm run gen:pool && npm run generate:gear-submap && npm run build:effects && next build",
     "inject-sw-version": "node scripts/inject-sw-version.js",
     "validate:build": "ls .next/static/css/*.css && ls .next/static/chunks/app/page-*.js && echo ✅ Build is valid",
-    "postbuild": "npm run sitemap",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "node scripts/generateSitemap.cjs",

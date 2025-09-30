@@ -78,3 +78,7 @@ outerpedia.code-workspace
 src/data/guides/guild-raid/empty.json
 
 scripts/backup-full-to-private.sh
+
+/certs/
+Caddyfile
+robots.txt

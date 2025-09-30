@@ -1,4 +1,5 @@
 import HomeClient from './HomeClient'
+import { getTenant } from '@/tenants/tenant'
 import CurrentlyPullable from './components/CurrentlyPullable'
 import WarningBanner from "@/app/components/WarningBanner"
 import Image from 'next/image'
@@ -13,7 +14,9 @@ const categories = [
   { name: 'Guides', path: '/guides' },
 ]
 
-export default function Home() {
+export default async function Home() {
+  const { key } = await getTenant()
+
   return (
     <>
       <WarningBanner />
@@ -159,7 +162,7 @@ export default function Home() {
         </div>
       </div>
 
-      <HomeClient />
+      <HomeClient lang={key} />
     </>
   )
 }

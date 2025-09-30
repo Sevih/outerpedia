@@ -3,6 +3,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import LanguageSwitcher from './LanguageSwitcher'
+import type { TenantKey } from '@/tenants/config'
+
+type HeaderProps = { current: TenantKey }  
 
 const navItems = [
   { label: 'Characters', href: '/characters', icon: 'CM_EtcMenu_Colleague' },
@@ -12,7 +16,7 @@ const navItems = [
   { label: 'Guides', href: '/guides', icon: 'CM_EtcMenu_Character_Book' },
 ]
 
-export default function Header() {
+export default function Header({ current }: HeaderProps) { 
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -67,6 +71,9 @@ export default function Header() {
               <span>{item.label}</span>
             </Link>
           ))}
+          <div className="mt-2 border-t border-neutral-700 pt-4">
+            <LanguageSwitcher current={current} /> 
+          </div>
         </div>
 
         {/* Menu desktop */}
@@ -89,6 +96,7 @@ export default function Header() {
               <span>{item.label}</span>
             </Link>
           ))}
+          <LanguageSwitcher current={current} /> 
         </div>
       </nav>
 
