@@ -6,14 +6,8 @@ import CurrentlyPullable from './components/CurrentlyPullable'
 import PromoCodes from './components/PromoCodes'
 // HomeClient reste pour la partie interactive, mais on ne lui passe plus lang
 import HomeClient from './HomeClient'
-
-const categories = [
-  { name: 'Characters', path: '/characters' },
-  { name: 'Equipments', path: '/equipments' },
-  { name: 'Tier List', path: '/tierlist' },
-  { name: 'Utilities', path: '/tools' },
-  { name: 'Guides', path: '/guides' },
-] as const
+import NewToBox from './components/home/NewToBox'
+import CategoriesBox from './components/home/CategoriesBox'
 
 export default async function Home() {
   return (
@@ -61,79 +55,12 @@ export default async function Home() {
 
       {/* Corps principal */}
       <div className="flex flex-col md:flex-row justify-between gap-8 px-4 md:px-16">
-        {/* Colonne gauche : Categories + Beginner box */}
+        {/* Colonne gauche */}
         <div className="flex flex-col gap-8 w-full md:w-3/5">
           <section className="text-center">
-            <h2 className="text-2xl font-extrabold tracking-wide text-white mb-6 relative">
-              <span className="relative z-10">Categories</span>
-              <span className="absolute left-1/2 -bottom-1 h-1 w-24 -translate-x-1/2 rounded bg-cyan-600/70" />
-            </h2>
-            <p className="text-sm text-gray-400 mb-4">
-              Discover categories to help you build teams, optimize gear, and master Outerplane content.
-            </p>
-
-            <ul className="grid grid-cols-2 lg:grid-cols-5 gap-6 place-items-center">
-              {categories.map((cat) => {
-                const iconMap: Record<(typeof categories)[number]['name'], string> = {
-                  Characters: 'CM_Lobby_Button_Character.webp',
-                  Equipments: 'CM_Lobby_Button_Inventory.webp',
-                  'Tier List': 'CM_Lobby_Button_Misson.webp',
-                  Utilities: 'CM_Agit_Facility.webp',
-                  Guides: 'CM_Guild_Management.webp',
-                }
-                const icon = iconMap[cat.name]
-
-                return (
-                  <li key={cat.path} className="w-full max-w-[140px]">
-                    <Link href={cat.path} aria-label={`Go to ${cat.name} page`}>
-                      <div className="aspect-square cursor-pointer rounded-2xl bg-gray-800 p-4 shadow-lg transition-transform hover:scale-105 hover:bg-gray-700">
-                        <div className="flex h-full w-full flex-col items-center justify-center">
-                          <div className="relative h-[80px] w-[80px]">
-                            <Image
-                              src={`/images/ui/nav/${icon}`}
-                              alt={`${cat.name} section - Outerplane`}
-                              fill
-                              sizes="80px"
-                              className="mb-2 object-contain"
-                            />
-                          </div>
-                          <span className="text-md font-semibold text-white">{cat.name}</span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-
+            <CategoriesBox />
             <div className="hidden md:block mt-6">
-              <div className="rounded-xl border border-zinc-700 bg-gray-800 p-4 shadow-lg">
-                <h3 className="mb-3 flex items-center gap-2 text-lg font-semibold text-white">🧭 New to Outerplane?</h3>
-                <p className="mb-4 text-sm text-gray-300">Start your journey with these beginner-friendly guides:</p>
-                <ul className="space-y-2 text-sm text-cyan-400">
-                  <li>
-                    <Link href="/guides/general-guides/free-heroes-start-banner" className="hover:underline">
-                      • <span className="text-white">Free Heroes & Starter Banners</span> — who to pull and how to start efficiently.
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/guides/general-guides/stats" className="hover:underline">
-                      • <span className="text-white">Statistics & Combat Basics</span> — understand stats and how combat works.
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/guides/general-guides/gear" className="hover:underline">
-                      • <span className="text-white">Gear</span> — how equipment works and how to upgrade it.
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/guides/general-guides/heroes-growth" className="hover:underline">
-                      • <span className="text-white">Hero Growth</span> — leveling, transcendence, trust, and more.
-                    </Link>
-                  </li>
-                </ul>
-                <div className="mt-4 text-xs italic text-gray-400">Perfect for first-time players</div>
-              </div>
+              <NewToBox />
             </div>
           </section>
         </div>
@@ -143,8 +70,8 @@ export default async function Home() {
           <CurrentlyPullable />
           <PromoCodes />
         </div>
-        
       </div>
+
       <HomeClient />
     </>
   )

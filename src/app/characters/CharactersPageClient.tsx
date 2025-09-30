@@ -31,7 +31,6 @@ const ElementIcon = dynamic(() => import('@/app/components/ElementIcon').then(m 
 const ClassIcon = dynamic(() => import('@/app/components/ClassIcon').then(m => m.ClassIcon))
 
 type TagMeta = { label: string; image: string; desc: string; type: string }
-const typeLabel = (t: string) => t.slice(0, 1).toUpperCase() + t.slice(1)
 
 // ===== Types
 type Payload = {
@@ -135,18 +134,18 @@ function keepOnePerType(keys: string[]): string[] {
 
 // ===== Effect groups
 const orderedBuffGroups = [
-  { title: 'Stat Boosts', items: ['BT_STAT|ST_ATK', 'BT_STAT|ST_DEF', 'BT_STAT|ST_SPEED', 'BT_STAT|ST_CRITICAL_RATE', 'BT_STAT|ST_CRITICAL_DMG_RATE', 'BT_STAT|ST_BUFF_CHANCE', 'BT_STAT|ST_BUFF_RESIST', 'BT_STAT|ST_AVOID', 'BT_STAT|ST_ACCURACY', 'BT_STAT|ST_PIERCE_POWER_RATE', 'BT_RANDOM_STAT'] },
-  { title: 'Supporting', items: ['BT_INVINCIBLE', 'BT_SHIELD_BASED_CASTER', 'BT_IMMUNE', 'IG_Buff_BuffdurationIncrease', 'BT_UNDEAD', 'BT_STEALTHED', 'BT_REMOVE_DEBUFF', 'BT_REVIVAL', 'BT_RESURRECTION_G', 'SYS_CONTINU_HEAL', 'BT_STAT|ST_VAMPIRIC'] },
-  { title: 'Utility', items: ['BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_STAT|ST_COUNTER_RATE', 'BT_CP_CHARGE', 'Heavy Strike', 'BT_DMG_ELEMENT_SUPERIORITY', 'BT_ADDITIVE_TURN', 'SYS_BUFF_REVENGE', 'SYS_REVENGE_HEAL', 'SYS_BUFF_BREAK_DMG', 'BT_CALL_BACKUP'] },
-  { title: 'Unique', items: ['UNIQUE_ARIEL', 'UNIQUE_SAKURA_CHIRU', 'UNIQUE_UME_ICHIRIN', 'UNIQUE_GRACE_OF_THE_VIRGIN_GODDESS', 'UNIQUE_CHARISMA', 'UNIQUE_DOLL_GARDEN_CARETAKER', 'UNIQUE_ETHER_BOOST', 'UNIQUE_DESTROYER_PUNISHMENT', 'UNIQUE_PUREBLOOD_DOMINION', 'UNIQUE_RADIANT_WILL', 'UNIQUE_RETRIBUTION_DOMINION', 'UNIQUE_HUBRIS_DOMINION', 'UNIQUE_GIFT_OF_BUFF', 'UNIQUE_FIERCE_OFFENSIVE', 'UNIQUE_REGINA_WORLD', 'UNIQUE_NINJA_AFTERIMAGE', 'UNIQUE_POLAR_KNIGHT', 'UNIQUE_WHITE_KNIGHT'] },
+  { title: 'characters.effectsGroups.buff.statBoosts', items: ['BT_STAT|ST_ATK', 'BT_STAT|ST_DEF', 'BT_STAT|ST_SPEED', 'BT_STAT|ST_CRITICAL_RATE', 'BT_STAT|ST_CRITICAL_DMG_RATE', 'BT_STAT|ST_BUFF_CHANCE', 'BT_STAT|ST_BUFF_RESIST', 'BT_STAT|ST_AVOID', 'BT_STAT|ST_ACCURACY', 'BT_STAT|ST_PIERCE_POWER_RATE', 'BT_RANDOM_STAT'] },
+  { title: 'characters.effectsGroups.buff.supporting', items: ['BT_INVINCIBLE', 'BT_SHIELD_BASED_CASTER', 'BT_IMMUNE', 'IG_Buff_BuffdurationIncrease', 'BT_UNDEAD', 'BT_STEALTHED', 'BT_REMOVE_DEBUFF', 'BT_REVIVAL', 'BT_RESURRECTION_G', 'SYS_CONTINU_HEAL', 'BT_STAT|ST_VAMPIRIC'] },
+  { title: 'characters.effectsGroups.buff.utility', items: ['BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_STAT|ST_COUNTER_RATE', 'BT_CP_CHARGE', 'Heavy Strike', 'BT_DMG_ELEMENT_SUPERIORITY', 'BT_ADDITIVE_TURN', 'SYS_BUFF_REVENGE', 'SYS_REVENGE_HEAL', 'SYS_BUFF_BREAK_DMG', 'BT_CALL_BACKUP'] },
+  { title: 'characters.effectsGroups.buff.unique', items: ['UNIQUE_ARIEL', 'UNIQUE_SAKURA_CHIRU', 'UNIQUE_UME_ICHIRIN', 'UNIQUE_GRACE_OF_THE_VIRGIN_GODDESS', 'UNIQUE_CHARISMA', 'UNIQUE_DOLL_GARDEN_CARETAKER', 'UNIQUE_ETHER_BOOST', 'UNIQUE_DESTROYER_PUNISHMENT', 'UNIQUE_PUREBLOOD_DOMINION', 'UNIQUE_RADIANT_WILL', 'UNIQUE_RETRIBUTION_DOMINION', 'UNIQUE_HUBRIS_DOMINION', 'UNIQUE_GIFT_OF_BUFF', 'UNIQUE_FIERCE_OFFENSIVE', 'UNIQUE_REGINA_WORLD', 'UNIQUE_NINJA_AFTERIMAGE', 'UNIQUE_POLAR_KNIGHT', 'UNIQUE_WHITE_KNIGHT'] },
 ]
 
 const orderedDebuffGroups = [
-  { title: 'Stat Reduction', items: ['BT_STAT|ST_ATK', 'BT_STAT|ST_DEF', 'BT_STAT|ST_SPEED', 'BT_STAT|ST_CRITICAL_RATE', 'BT_STAT|ST_CRITICAL_DMG_RATE', 'BT_STAT|ST_BUFF_CHANCE', 'BT_STAT|ST_BUFF_RESIST', 'BT_STAT|ST_AVOID', 'BT_STAT|ST_ACCURACY'] },
-  { title: 'Control Effects (CC)', items: ['BT_FREEZE', 'BT_STONE', 'BT_STUN', 'BT_SILENCE', 'BT_AGGRO', 'BT_MARKING'] },
-  { title: 'Damage Over Time (DoT)', items: ['BT_DOT_BURN', 'BT_DOT_BURN_IR', 'BT_DOT_CURSE', 'BT_DOT_CURSE_IR', 'BT_DOT_BLEED', 'BT_DOT_BLEED_IR', 'BT_DOT_POISON', 'BT_DOT_LIGHTNING', 'BT_DOT_ETERNAL_BLEED', 'BT_DETONATE'] },
-  { title: 'Utility Debuffs', items: ['BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_SEAL_COUNTER', 'BT_SEALED', 'BT_SEALED_IR', 'BT_SEALED_RESURRECTION', 'BT_SEAL_ADDITIVE_ATTACK', 'BT_STATBUFF_CONVERT_TO_STATDEBUFF', 'BT_STEAL_BUFF', 'BT_REMOVE_BUFF', 'IG_Buff_BuffdurationReduce', 'IG_Buff_DeBuffdurationIncrease', 'BT_SEALED_RECEIVE_HEAL', 'BT_WG_DMG', 'BT_FIXED_DAMAGE', 'BT_RESOURCE_DOWN'] },
-  { title: 'Unique', items: ['UNIQUE_MARTYRDOM', 'UNIQUE_IRREGULAR_INFECTION'] },
+  { title: 'characters.effectsGroups.debuff.statReduction', items: ['BT_STAT|ST_ATK', 'BT_STAT|ST_DEF', 'BT_STAT|ST_SPEED', 'BT_STAT|ST_CRITICAL_RATE', 'BT_STAT|ST_CRITICAL_DMG_RATE', 'BT_STAT|ST_BUFF_CHANCE', 'BT_STAT|ST_BUFF_RESIST', 'BT_STAT|ST_AVOID', 'BT_STAT|ST_ACCURACY'] },
+  { title: 'characters.effectsGroups.debuff.cc', items: ['BT_FREEZE', 'BT_STONE', 'BT_STUN', 'BT_SILENCE', 'BT_AGGRO', 'BT_MARKING'] },
+  { title: 'characters.effectsGroups.debuff.dot', items: ['BT_DOT_BURN', 'BT_DOT_BURN_IR', 'BT_DOT_CURSE', 'BT_DOT_CURSE_IR', 'BT_DOT_BLEED', 'BT_DOT_BLEED_IR', 'BT_DOT_POISON', 'BT_DOT_LIGHTNING', 'BT_DOT_ETERNAL_BLEED', 'BT_DETONATE'] },
+  { title: 'characters.effectsGroups.debuff.utility', items: ['BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_SEAL_COUNTER', 'BT_SEALED', 'BT_SEALED_IR', 'BT_SEALED_RESURRECTION', 'BT_SEAL_ADDITIVE_ATTACK', 'BT_STATBUFF_CONVERT_TO_STATDEBUFF', 'BT_STEAL_BUFF', 'BT_REMOVE_BUFF', 'IG_Buff_BuffdurationReduce', 'IG_Buff_DeBuffdurationIncrease', 'BT_SEALED_RECEIVE_HEAL', 'BT_WG_DMG', 'BT_FIXED_DAMAGE', 'BT_RESOURCE_DOWN'] },
+  { title: 'characters.effectsGroups.debuff.unique', items: ['UNIQUE_MARTYRDOM', 'UNIQUE_IRREGULAR_INFECTION'] },
 ]
 
 // ===== Small helpers
@@ -249,16 +248,6 @@ function splitIntoRows<T>(arr: T[], rows = 2): T[][] {
   for (let i = 0; i < rows; i++) out.push(arr.slice(i * perRow, (i + 1) * perRow))
   return out
 }
-
-function FilterChip({ children, onClear }: { children: React.ReactNode; onClear: () => void }) {
-  return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-slate-700/60 text-slate-200 px-2 py-1 text-xs">
-      {children}
-      <button type="button" onClick={onClear} aria-label="Remove filter" className="leading-none hover:text-white">×</button>
-    </span>
-  )
-}
-
 
 export default function CharactersPage() {
   const [characters, setCharacters] = useState<CharacterLite[]>([])
@@ -368,12 +357,16 @@ export default function CharactersPage() {
     setTagFilter(keepOnePerType(p.tags ?? []))
   }
 
-  const TAG_GROUPS = useMemo(() => {
+  type TagGroup = { type: string; items: { key: string; meta: TagMeta }[] }
+  const TAG_GROUPS = useMemo<TagGroup[]>(() => {
     const mapByType: Record<string, { key: string; meta: TagMeta }[]> = {}
-    for (const t of TAGS) (mapByType[t.type] ||= []).push({ key: t.key, meta: { label: t.label, image: t.image, desc: t.desc, type: t.type } })
-    const byTypeWithKeys: { title: string; items: { key: string; meta: TagMeta }[] }[] = []
-    for (const [t, items] of Object.entries(mapByType)) byTypeWithKeys.push({ title: typeLabel(t), items })
-    return byTypeWithKeys
+    for (const t of TAGS) {
+      (mapByType[t.type] ||= []).push({
+        key: t.key,
+        meta: { label: t.label, image: t.image, desc: t.desc, type: t.type },
+      })
+    }
+    return Object.entries(mapByType).map(([type, items]) => ({ type, items }))
   }, [])
 
   // 1) Hydration from URL once
@@ -468,20 +461,22 @@ export default function CharactersPage() {
     })
   }, [characters, query, elementFilter, classFilter, chainFilter, giftFilter, rarityFilter, selectedBuffs, selectedDebuffs, effectLogic, roleFilter, tagFilter])
 
-  if (loading) return <div className="text-center mt-8 text-white">Loading characters...</div>
+  if (loading) return <div className="text-center mt-8 text-white">
+    {t('characters.loading')}
+  </div>
 
   return (
     <div className="mx-auto max-w-[1400px] px-2 md:px-4 space-y-3">
 
 
-      <div className="sr-only"><h1>Outerplane Full Characters Database</h1></div>
+      <div className="sr-only"><h1>{t('characters.title')}</h1></div>
 
       <SearchBar searchTerm={rawQuery} setSearchTerm={setRawQuery} />
       {(payload.el || payload.cl || payload.r || payload.chain || payload.gift || payload.role || payload.tags) && (
         <div className="flex flex-wrap justify-center gap-2">
-          {elementFilter.map(v => <FilterChip key={'el-' + v} onClear={() => setElementFilter(el => el.filter(x => x !== v))}>{v}</FilterChip>)}
-          {/* idem pour les autres */}
-          <span className="text-xs text-slate-400">({filtered.length} matches)</span>
+          <span className="text-xs text-slate-400">
+            {t('characters.common.matches', { count: filtered.length })}
+          </span>
         </div>
       )}
 
@@ -635,12 +630,12 @@ export default function CharactersPage() {
             <div className="flex justify-center gap-3 items-center">
               <label htmlFor="show-unique-effects" className="inline-flex items-center gap-2 h-9 px-3 rounded text-sm text-white cursor-pointer select-none bg-gray-700 hover:bg-cyan-600 transition">
                 <input type="checkbox" id="show-unique-effects" checked={showUniqueEffects} onChange={() => setShowUniqueEffects(v => !v)} className="accent-cyan-500 w-4 h-4" />
-                Show Unique Effects
+                {t('characters.filters.unique')}
               </label>
 
               <div className="inline-grid grid-cols-2 rounded bg-slate-700 text-xs">
-                <button className={`px-2 py-1 ${effectLogic === 'AND' ? 'bg-cyan-600' : ''}`} onClick={() => setEffectLogic('AND')}>AND</button>
-                <button className={`px-2 py-1 ${effectLogic === 'OR' ? 'bg-cyan-600' : ''}`} onClick={() => setEffectLogic('OR')}>OR</button>
+                <button className={`px-2 py-1 ${effectLogic === 'AND' ? 'bg-cyan-600' : ''}`} onClick={() => setEffectLogic('AND')}>{t('characters.filters.and')}</button>
+                <button className={`px-2 py-1 ${effectLogic === 'OR' ? 'bg-cyan-600' : ''}`} onClick={() => setEffectLogic('OR')}>{t('characters.filters.or')}</button>
               </div>
             </div>
 
@@ -648,7 +643,7 @@ export default function CharactersPage() {
             <div className="mx-auto max-w-screen-lg w-full rounded-2xl border border-slate-700 bg-slate-900/60 p-4">
               {/* Buffs */}
               <div className="w-full">
-                <p className="text-xs uppercase tracking-wide text-cyan-300 text-center mb-2">Buffs</p>
+                <p className="text-xs uppercase tracking-wide text-cyan-300 text-center mb-2">{t('characters.filters.buffs')}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                   {buffGroups.map((group, i) => {
                     const visible = group.effects
@@ -657,7 +652,7 @@ export default function CharactersPage() {
                     if (!visible.length) return null
                     return (
                       <div key={`${group.title ?? 'group'}-buff-${i}`} className="rounded-xl bg-slate-800/40 ring-1 ring-slate-700 p-2">
-                        {group.title && <p className="text-cyan-300 font-semibold text-center mb-2">{group.title}</p>}
+                        {group.title && <p className="text-cyan-300 font-semibold text-center mb-2">{t(group.title)}</p>}
                         <div className="grid grid-cols-5 md:grid-cols-6 gap-1.5 justify-items-center">
                           {visible.map(effectKey => (
                             <div
@@ -679,7 +674,7 @@ export default function CharactersPage() {
 
               {/* Debuffs */}
               <div className="w-full">
-                <p className="text-xs uppercase tracking-wide text-red-300 text-center mb-2">Debuffs</p>
+                <p className="text-xs uppercase tracking-wide text-red-300 text-center mb-2">{t('characters.filters.debuffs')}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                   {debuffGroups.map((group, i) => {
                     const visible = group.effects
@@ -688,7 +683,7 @@ export default function CharactersPage() {
                     if (!visible.length) return null
                     return (
                       <div key={`${group.title ?? 'group'}-debuff-${i}`} className="rounded-xl bg-slate-800/40 ring-1 ring-slate-700 p-2">
-                        {group.title && <p className="text-red-300 font-semibold text-center mb-2">{group.title}</p>}
+                        {group.title && <p className="text-red-300 font-semibold text-center mb-2">{t(group.title)}</p>}
                         <div className="grid grid-cols-5 md:grid-cols-6 gap-1.5 justify-items-center">
                           {visible.map(effectKey => (
                             <div
@@ -721,15 +716,15 @@ export default function CharactersPage() {
             <div className="mx-auto max-w-screen-lg rounded-2xl border border-slate-700 bg-slate-900/60 p-4">
               <div className="grid md:grid-cols-2 gap-6">
                 {TAG_GROUPS.map(group => (
-                  <div key={group.title}>
+                  <div key={group.type}>
                     <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-2">
-                      {group.title.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                      {t(`characters.tags.types.${group.type}`)}
                     </p>
                     {/* 2 rangées max, centrées et compactes */}
                     <div className="space-y-2">
                       {splitIntoRows(group.items, 2).map((row, ridx) => (
                         <div
-                          key={`row-${group.title}-${ridx}`}
+                          key={`row-${group.type}-${ridx}`}
                           className="grid grid-cols-[repeat(auto-fit,minmax(120px,max-content))] gap-2 justify-center justify-items-center"
                         >
                           {row.map(({ key, meta }) => {
@@ -813,7 +808,7 @@ export default function CharactersPage() {
                 className="relative w-[120px] h-[231px] text-center shadow hover:shadow-lg transition overflow-hidden rounded"
               >
                 {char.limited && (
-                  <Image src="/images/ui/CM_Shop_Tag_Limited.webp" alt="Limited" width={75} height={30} className="absolute top-1 left-1 z-30 object-contain" style={{ width: 75, height: 30 }} />
+                  <Image src="/images/ui/CM_Shop_Tag_Limited.webp" alt={t('characters.badges.limited')} width={75} height={30} className="absolute top-1 left-1 z-30 object-contain" style={{ width: 75, height: 30 }} />
                 )}
 
                 <Image

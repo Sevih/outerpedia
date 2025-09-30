@@ -15,8 +15,7 @@ export default function WarningBanner() {
 
       {/* Cadre 2 : annonce du transfert */}
       <div className="bg-blue-500 text-white px-3 py-2 rounded-lg shadow-md text-sm text-center border border-blue-500">
-        📢 <strong>Service Transfer Update:</strong> The transfer of <strong>OUTERPLANE</strong> to <strong>VAGAMES</strong> is still in progress.  
-        An official date is expected to be announced this week.  
+        📢 <strong>Service Transfer Update:</strong> The transfer of <strong>OUTERPLANE</strong> to <strong>VAGAMES</strong> will officially open on <strong>October 1st</strong>.
         <div className="mt-1">
           <Link
             href="/guides/service-transfer"
@@ -26,6 +25,7 @@ export default function WarningBanner() {
           </Link>
         </div>
       </div>
+
     </div>
   )
 }
