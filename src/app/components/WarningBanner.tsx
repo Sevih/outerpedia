@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function WarningBanner() {
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 relative z-0">
       {/* Cadre 1 : avertissement fan-site */}
       <div className="bg-yellow-400 text-black px-3 py-2 rounded-lg shadow-md text-sm text-center border border-yellow-400">
         ⚠️ <strong>Outerpedia</strong> is an unofficial fan-made website for the game <strong>OUTERPLANE</strong>.

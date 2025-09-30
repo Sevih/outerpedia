@@ -14,12 +14,14 @@ import LZString from 'lz-string'
 import { EL, CL, CH, GF, EL_INV, CL_INV, CH_INV, GF_INV } from '@/data/filterCodes'
 import effectsIndex from '@/data/effectsIndex.json'
 import rawTAG_INDEX from '@/data/tags.json'
+import { useI18n } from '@/lib/contexts/I18nContext'
 
 // ===== Helpers for effect lookup
 const buffToId: Record<string, number> = effectsIndex.buffs
 const debuffToId: Record<string, number> = effectsIndex.debuffs
 const idToBuff = Object.fromEntries(Object.entries(buffToId).map(([k, v]) => [v, k])) as Record<number, string>
 const idToDebuff = Object.fromEntries(Object.entries(debuffToId).map(([k, v]) => [v, k])) as Record<number, string>
+
 
 // ===== Dynamic components
 const CharacterNameDisplay = dynamic(() => import('@/app/components/CharacterNameDisplay').then(m => m.CharacterNameDisplay))
@@ -94,6 +96,30 @@ const TAGS = TAG_KEYS.map(k => ({
   type: TAG_INDEX[k].type,
 }))
 
+// en haut du fichier, OK ici
+const ELEMENT_VALUES = ['Fire', 'Water', 'Earth', 'Light', 'Dark'] as const
+const CLASS_VALUES = ['Striker', 'Defender', 'Ranger', 'Healer', 'Mage'] as const
+
+const CHAINS_VALUES = [
+  { value: 'Start', key: 'starter' },
+  { value: 'Join', key: 'companion' },
+  { value: 'Finish', key: 'finisher' },
+] as const
+
+const GIFTS_VALUES = [
+  { value: 'science', key: 'science' },
+  { value: 'luxury', key: 'luxury' },
+  { value: 'magic tool', key: 'magicTool' },
+  { value: 'craftwork', key: 'craftwork' },
+  { value: 'natural object', key: 'naturalObject' },
+] as const
+
+type RoleSlug = 'dps' | 'support' | 'sustain'
+const ROLE_VALUES: RoleSlug[] = ['dps', 'support', 'sustain']
+const isRoleSlug = (v: unknown): v is RoleSlug =>
+  v === 'dps' || v === 'support' || v === 'sustain'
+
+
 // ——— Tag helpers: one-per-category
 const TAG_KEY_TO_TYPE: Record<string, string> = Object.fromEntries(TAGS.map(t => [t.key, t.type]))
 
@@ -106,19 +132,6 @@ function keepOnePerType(keys: string[]): string[] {
   }
   return out
 }
-
-const ROLES = [
-  { name: 'All', value: null },
-  { name: 'DPS', value: 'dps' },
-  { name: 'Support', value: 'support' },
-  { name: 'Sustain', value: 'sustain' },
-] as const satisfies ReadonlyArray<{ name: string; value: RoleSlug | null }>
-
-// 👇 Ajoute ça (au lieu de isRole)
-type RoleSlug = 'dps' | 'support' | 'sustain'
-const isRoleSlug = (v: unknown): v is RoleSlug =>
-  v === 'dps' || v === 'support' || v === 'sustain'
-
 
 // ===== Effect groups
 const orderedBuffGroups = [
@@ -278,6 +291,7 @@ export default function CharactersPage() {
   const [effectLogic, setEffectLogic] = useState<'AND' | 'OR'>('OR')
   const [rawQuery, setRawQuery] = useState('')
   const query = useDeferredValue(rawQuery)
+  const { t } = useI18n()
 
   const copyShareUrl = () => {
     const url = typeof window !== 'undefined' ? window.location.href : ''
@@ -287,6 +301,39 @@ export default function CharactersPage() {
       setTimeout(() => setCopied(false), 1200)
     })
   }
+
+  // Raretés (juste l’étiquette "All" dépend du t)
+  const RARITIES_UI = useMemo(() => ([
+    { label: t('characters.common.all'), value: null as number | null },
+    { label: 1, value: 1 },
+    { label: 2, value: 2 },
+    { label: 3, value: 3 },
+  ]), [t])
+
+  const ELEMENTS_UI = useMemo(() => ([
+    { name: t('characters.common.all'), value: null as string | null },
+    ...ELEMENT_VALUES.map(v => ({ name: v, value: v })),
+  ]), [t])
+
+  const CLASSES_UI = useMemo(() => ([
+    { name: t('characters.common.all'), value: null as string | null },
+    ...CLASS_VALUES.map(v => ({ name: v, value: v })),
+  ]), [t])
+
+  const CHAINS_UI = useMemo(() => ([
+    { name: t('characters.common.all'), value: null as string | null },
+    ...CHAINS_VALUES.map(x => ({ name: t(`characters.chains.${x.key}`), value: x.value })),
+  ]), [t])
+
+  const GIFTS_UI = useMemo(() => ([
+    { name: t('characters.common.all'), value: null as string | null },
+    ...GIFTS_VALUES.map(x => ({ name: t(`characters.gifts.${x.key}`), value: x.value })),
+  ]), [t])
+
+  const ROLES_UI = useMemo(() => ([
+    { name: t('characters.common.all'), value: null as RoleSlug | null },
+    ...ROLE_VALUES.map(v => ({ name: t(`characters.roles.${v}`), value: v })),
+  ]), [t])
 
   const buffGroups = useMemo(() => groupEffects(allBuffs, orderedBuffGroups, showUniqueEffects), [allBuffs, showUniqueEffects]);
   const debuffGroups = useMemo(() => groupEffects(allDebuffs, orderedDebuffGroups, showUniqueEffects), [allDebuffs, showUniqueEffects]);
@@ -425,29 +472,7 @@ export default function CharactersPage() {
 
   return (
     <div className="mx-auto max-w-[1400px] px-2 md:px-4 space-y-3">
-      {/* JSON-LD SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'CollectionPage',
-            name: 'Characters – Outerpedia',
-            url: 'https://outerpedia.com/characters',
-            description: 'Browse all characters in Outerplane with builds, skills, stats and exclusive equipment.',
-            mainEntity: {
-              '@type': 'ItemList',
-              itemListElement: characters.map((char, index) => ({
-                '@type': 'VideoGameCharacter',
-                name: char.Fullname,
-                url: `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
-                image: `https://outerpedia.com/images/characters/atb/IG_Turn_${char.ID}.webp`,
-                position: index + 1,
-              })),
-            },
-          }),
-        }}
-      />
+
 
       <div className="sr-only"><h1>Outerplane Full Characters Database</h1></div>
 
@@ -462,9 +487,9 @@ export default function CharactersPage() {
 
 
       {/* Rarities */}
-      <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">Rarity</p>
+      <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('characters.filters.rarity')}</p>
       <div className="flex justify-center gap-2 mb-1">
-        {RARITIES.map(r => {
+        {RARITIES_UI.map(r => {
           const active = (r.value === null && rarityFilter.length === 0) || (r.value !== null && rarityFilter.includes(r.value))
           return (
             <FilterPill
@@ -476,7 +501,7 @@ export default function CharactersPage() {
               }}
               className="h-8 px-3"
             >
-              {r.value === null ? "All" : (
+              {r.value === null ? t('characters.common.all') : (
                 <div className="flex items-center -space-x-1">
                   {Array.from({ length: r.label as number }).map((_, i) => (
                     <Image key={i} src="/images/ui/star.webp" alt="star" width={16} height={16} style={{ width: 16, height: 16 }} />
@@ -492,9 +517,9 @@ export default function CharactersPage() {
       <div className="mx-auto max-w-[820px] grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-x-6 place-items-center">
         {/* Elements */}
         <div className="w-full flex flex-col items-center">
-          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">Elements</p>
+          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('characters.filters.elements')}</p>
           <div className="flex gap-2 justify-center">
-            {ELEMENTS.map(el => (
+            {ELEMENTS_UI.map(el => (
               <FilterPill
                 key={el.name}
                 title={el.name}
@@ -504,7 +529,7 @@ export default function CharactersPage() {
               >
                 {el.value
                   ? <span className="scale-125 inline-block"><ElementIcon element={el.value as ElementType} /></span>
-                  : <span className="text-[11px]">All</span>}
+                  : <span className="text-[11px]">{t('characters.common.all')}</span>}
               </FilterPill>
             ))}
           </div>
@@ -512,9 +537,9 @@ export default function CharactersPage() {
 
         {/* Classes */}
         <div className="w-full flex flex-col items-center">
-          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">Classes</p>
+          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('characters.filters.classes')}</p>
           <div className="flex gap-2 justify-center">
-            {CLASSES.map(cl => (
+            {CLASSES_UI.map(cl => (
               <FilterPill
                 key={cl.name}
                 title={cl.name}
@@ -524,7 +549,7 @@ export default function CharactersPage() {
               >
                 {cl.value
                   ? <span className="scale-150 inline-block"><ClassIcon className={cl.name as ClassType} /></span>
-                  : <span className="text-[11px]">All</span>}
+                  : <span className="text-[11px]">{t('characters.common.all')}</span>}
               </FilterPill>
             ))}
           </div>
@@ -537,9 +562,9 @@ export default function CharactersPage() {
       <div className="mx-auto max-w-[820px] grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-x-6 place-items-center">
         {/* Chains */}
         <div className="w-full flex flex-col items-center">
-          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">Chains</p>
+          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('characters.filters.chains')}</p>
           <div className="flex flex-wrap gap-2 justify-center">
-            {CHAINS.map(ct => (
+            {CHAINS_UI.map(ct => (
               <FilterPill
                 key={ct.name}
                 active={(ct.value === null && chainFilter.length === 0) || (ct.value !== null && chainFilter.includes(ct.value))}
@@ -553,22 +578,25 @@ export default function CharactersPage() {
 
         {/* Roles */}
         <div className="w-full flex flex-col items-center">
-          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">Roles</p>
+          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('characters.filters.roles')}</p>
           <div className="flex flex-wrap gap-2 justify-center">
-            {ROLES.map(r => (
+            {ROLES_UI.map(r => (
               <FilterPill
                 key={r.name}
                 active={
                   (r.value === null && roleFilter.length === 0) ||
                   (r.value !== null && roleFilter.includes(r.value))
                 }
-                onClick={() =>
-                  r.value === null
-                    ? setRoleFilter([])
-                    : setRoleFilter(p =>
-                      p.includes(r.value) ? p.filter(v => v !== r.value) : [...p, r.value]
-                    )
-                }
+                onClick={() => {
+                  const val = r.value; // RoleSlug | null
+                  if (val === null) {
+                    setRoleFilter([]);           // reset "All"
+                    return;
+                  }
+                  setRoleFilter(prev =>
+                    prev.includes(val) ? prev.filter(v => v !== val) : [...prev, val]
+                  );
+                }}
               >
                 {r.name}
               </FilterPill>
@@ -580,9 +608,9 @@ export default function CharactersPage() {
 
 
       {/* Gifts */}
-      <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">Gifts</p>
+      <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('characters.filters.gifts')}</p>
       <div className="flex flex-wrap justify-center gap-2 mb-1">
-        {GIFTS.map(g => (
+        {GIFTS_UI.map(g => (
           <FilterPill
             key={g.name}
             active={(g.value === null && giftFilter.length === 0) || (g.value !== null && giftFilter.includes(g.value))}
@@ -597,7 +625,7 @@ export default function CharactersPage() {
       <div className="text-center mt-4">
         <div className='flex gap-2 justify-center'>
           <button onClick={() => setShowFilters(s => !s)} className="bg-gray-700 hover:bg-cyan-600 px-4 py-2 rounded text-sm mb-4">
-            {showFilters ? 'Hide Buffs/Debuffs Filters' : 'Show Buffs/Debuffs Filters'}
+            {showFilters ? t('characters.filters.hideBuffs') : t('characters.filters.showBuffs')}
           </button>
         </div>
 
@@ -684,7 +712,7 @@ export default function CharactersPage() {
         {/* Tags */}
         <div>
           <button onClick={() => setShowTagsPanel(s => !s)} className="bg-gray-700 hover:bg-cyan-600 px-4 py-2 rounded text-sm">
-            {showTagsPanel ? 'Hide Tags' : 'Show Tags'}
+            {showTagsPanel ? t('characters.filters.hideTags') : t('characters.filters.showTags')}
           </button>
         </div>
 
@@ -764,12 +792,12 @@ export default function CharactersPage() {
             }}
             className="bg-gray-700 hover:bg-red-700 px-4 py-1 rounded text-sm"
           >
-            Reset filters
+            {t('characters.filters.reset')}
           </button>
 
 
           <button onClick={copyShareUrl} className="bg-gray-700 hover:bg-cyan-600 px-4 py-1 rounded text-sm">
-            {copied ? 'Copied!' : 'Copy share link'}
+            {copied ? t('characters.filters.copied') : t('characters.filters.copy')}
           </button>
         </div>
 

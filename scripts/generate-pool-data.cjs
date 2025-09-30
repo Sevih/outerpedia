@@ -95,7 +95,7 @@ async function main() {
   /** @type {Entry[]} */ const limited = [];
   /** @type {Entry[]} */ const premium = [];
 
-  const EXCLUDED_NAMES = ["K", "Lisha", "Snow", "Eva", "Stella", "Sigma"];
+  const EXCLUDED_NAMES = ["K", "Lisha", "Snow", "Eva"];
 
   for (const file of files) {
     const base = path.basename(file);

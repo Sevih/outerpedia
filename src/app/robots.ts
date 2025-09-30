@@ -1,14 +1,19 @@
+// src/app/robots.ts
 import type { MetadataRoute } from 'next'
-import { getTenant } from '@/tenants/tenant'
+import { getTenantServer } from '@/tenants/tenant.server'
 
-export const dynamic = 'force-dynamic'        // généré au build puis mis en cache
+export const dynamic = 'force-dynamic'
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
-  const { domain } = await getTenant()
+  const { domain } = await getTenantServer()
 
   return {
     rules: [
-      { userAgent: '*', allow: '/', disallow: ['/api/', '/images/tmp/', '/webhooks/', '/UnderConstruction/'] },
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/api/', '/images/tmp/', '/webhooks/', '/UnderConstruction/'],
+      },
     ],
     sitemap: `https://${domain}/sitemap.xml`,
     host: `https://${domain}`,

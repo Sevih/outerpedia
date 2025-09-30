@@ -1,7 +1,14 @@
-import { NextResponse } from 'next/server';
-import { getTenant } from '@/tenants/tenant';
+// src/app/api/tenant/route.ts
+import { NextResponse } from 'next/server'
+import { getTenantServer } from '@/tenants/tenant.server'
+
+export const dynamic = 'force-dynamic' // évite le cache en dev
 
 export async function GET() {
-  const t = await getTenant();
-  return NextResponse.json(t);
+  try {
+    const t = await getTenantServer()
+    return NextResponse.json(t)
+  } catch {
+    return NextResponse.json({ error: 'failed-to-resolve-tenant' }, { status: 500 })
+  }
 }

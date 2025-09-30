@@ -1,31 +1,20 @@
-import { getTenant } from '@/tenants/tenant'         // serveur
-import { getChangelogFor } from '@/data/changelog'   // isomorphique
-import { Card, CardContent } from "@/app/components/ui/card";
-import { renderMarkdown } from "@/utils/markdown";
-import { Metadata } from "next";
+// src/app/changelog/page.tsx
+import { getTenantServer } from '@/tenants/tenant.server'   // ✅ server-only
+import { getChangelogFor } from '@/data/changelog'
+import { Card, CardContent } from '@/app/components/ui/card'
+import { renderMarkdown } from '@/utils/markdown'
+import { type Metadata } from 'next'
 
 const metaDict = {
-  en: {
-    title: "Changelog | Outerpedia",
-    desc: "Track all updates made to Outerpedia: guides, characters, tools, and more.",
-  },
-  fr: {
-    title: "Journal des mises à jour | Outerpedia",
-    desc: "Suivez toutes les mises à jour d’Outerpedia : guides, personnages, outils, et plus.",
-  },
-  jp: {
-    title: "更新履歴 | Outerpedia",
-    desc: "Outerpedia の更新情報（ガイド、キャラクター、ツールなど）を確認できます。",
-  },
-  kr: {
-    title: "변경 로그 | Outerpedia",
-    desc: "Outerpedia의 모든 업데이트(가이드, 캐릭터, 도구 등)를 확인하세요.",
-  },
-} as const;
+  en: { title: 'Changelog | Outerpedia', desc: 'Track all updates made to Outerpedia: guides, characters, tools, and more.' },
+  fr: { title: 'Journal des mises à jour | Outerpedia', desc: 'Suivez toutes les mises à jour d’Outerpedia : guides, personnages, outils, et plus.' },
+  jp: { title: '更新履歴 | Outerpedia', desc: 'Outerpedia の更新情報（ガイド、キャラクター、ツールなど）を確認できます。' },
+  kr: { title: '변경 로그 | Outerpedia', desc: 'Outerpedia의 모든 업데이트(가이드, 캐릭터, 도구 등)를 확인하세요.' },
+} as const
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { domain, key } = await getTenant();
-  const t = metaDict[key] ?? metaDict.en;
+  const { domain, key } = await getTenantServer()   // ✅ ici aussi
+  const t = metaDict[key] ?? metaDict.en
 
   return {
     title: t.title,
@@ -35,22 +24,21 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t.title,
       description: t.desc,
       url: `https://${domain}/changelog`,
-      type: "article",
-      siteName: "Outerpedia",
+      type: 'article',
+      siteName: 'Outerpedia',
       images: [{ url: `https://${domain}/images/ui/og_home.jpg`, width: 1200, height: 630 }],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: t.title,
       description: t.desc,
       images: [`https://${domain}/images/ui/og_home.jpg`],
     },
-  };
+  }
 }
 
-
 export default async function ChangelogPage() {
-  const { key } = await getTenant()                  // 'en' | 'fr' | 'jp' | 'kr'
+  const { key } = await getTenantServer()   // ✅ et là
   const entries = getChangelogFor(key)
 
   return (
@@ -91,5 +79,5 @@ export default async function ChangelogPage() {
         ))}
       </div>
     </div>
-  );
+  )
 }
