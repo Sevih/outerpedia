@@ -60,7 +60,7 @@ const teams = {
         ] as NoteEntry[]
 
     },
-     team3: {
+    team3: {
         label: 'One run kill',
         icon: 'SC_Buff_detonate.webp',
         setup: [
@@ -112,8 +112,11 @@ export default function IrregularQueenGuide() {
                 <br />
                 <p className="mb-2 text-neutral-300">
                     A sample video of the One run kill team.
+                    <p className="text-neutral-400 text-sm italic mt-2">
+                        Run provided by <span className="text-white font-semibold">XuRenChao</span> (01/10/2025)
+                    </p>
                 </p>
-                <YoutubeEmbed videoId="2ak_p64E8Y8" title="Irregular Queen - Pursuit Operation - 1 run kill  by Sevih" />
+                <YoutubeEmbed videoId="9Sr0YMGaro0" title="Irregular Queen (Post relaunch) - Pursuit Operation - 1 run kill (Auto) - by XuRenChao" />
             </div>
         </div>
     )

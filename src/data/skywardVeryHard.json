@@ -208,7 +208,7 @@
             "Demiurge Luna"
           ],
           [
-            "Rei",
+            "Rey",
             "Regina"
           ]
         ],
@@ -239,6 +239,31 @@
         ],
         "conditions": [
           "1 Defender"
+        ],
+        "note": []
+      },
+      "team3": {
+        "label": "No Light",
+        "icon": "light.webp",
+        "setup": [
+          [
+            "Nella",
+            "Liselotte"
+          ],
+          [
+            "Luna"
+          ],
+          [
+            "Ame",
+            "Demiurge Astei"
+          ],
+          [
+            "Rey",
+            "Aer"
+          ]
+        ],
+        "conditions": [
+          "No Light"
         ],
         "note": []
       }
@@ -567,6 +592,30 @@
           "No Dark"
         ],
         "note": []
+      },
+      "team3": {
+        "label": "1 Light",
+        "icon": "light.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Luna",
+            "Regina"
+          ],
+          [
+            "Drakhan"
+          ],
+          [
+            "Caren",
+            "Poolside Trickster Regina"
+          ]
+        ],
+        "conditions": [
+          "1 Light"
+        ],
+        "note": []
       }
     }
   },
@@ -601,12 +650,36 @@
             "Demiurge Luna"
           ],
           [
-            "Rei",
+            "Rey",
             "Regina"
           ]
         ],
         "conditions": [
           "No Ranger"
+        ],
+        "note": []
+      },
+      "team2": {
+        "label": "No Light",
+        "icon": "light.webp",
+        "setup": [
+          [
+            "Nella",
+            "Liselotte"
+          ],
+          [
+            "Caren"
+          ],
+          [
+            "Ame",
+            "Demiurge Astei"
+          ],
+          [
+            "Rey"
+          ]
+        ],
+        "conditions": [
+          "No Light"
         ],
         "note": []
       }
@@ -646,12 +719,37 @@
             "Demiurge Luna"
           ],
           [
-            "Rei",
+            "Rey",
             "Maxwell"
           ]
         ],
         "conditions": [
           "1 water"
+        ],
+        "note": []
+      },
+      "team2": {
+        "label": "1 Dark",
+        "icon": "dark.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Ame",
+            "Demiurge Luna"
+          ],
+          [
+            "Maxwell",
+            "Demiurge Astei"            
+          ]
+        ],
+        "conditions": [
+          "1 Dark"
         ],
         "note": []
       }
