@@ -74,7 +74,7 @@
     "name": "Immunity",
     "type": "Set",
     "class": null,
-    "count": 23,
+    "count": 24,
     "characters": [
       "Astei",
       "Bryn",
@@ -98,14 +98,15 @@
       "Omega Nadja",
       "Roxie",
       "Saeran",
-      "Sterope"
+      "Sterope",
+      "Summer Knight's Dream Ember"
     ]
   },
   {
     "name": "Swiftness",
     "type": "Set",
     "class": null,
-    "count": 22,
+    "count": 23,
     "characters": [
       "Astei",
       "Christina",
@@ -128,6 +129,7 @@
       "Rhona",
       "Saeran",
       "Sterope",
+      "Summer Knight's Dream Ember",
       "Veronica"
     ]
   },
@@ -210,6 +212,28 @@
     ]
   },
   {
+    "name": "Counterattack",
+    "type": "Set",
+    "class": null,
+    "count": 14,
+    "characters": [
+      "Astei",
+      "Christina",
+      "Demiurge Stella",
+      "Drakhan",
+      "Ember",
+      "Epsilon",
+      "Kanon",
+      "Kappa",
+      "Luna",
+      "Monad Eva",
+      "Omega Nadja",
+      "Rhona",
+      "Summer Knight's Dream Ember",
+      "Veronica"
+    ]
+  },
+  {
     "name": "Rampaging Caracal",
     "type": "Weapon",
     "class": "Ranger",
@@ -249,27 +273,6 @@
       "Regina",
       "Roxie",
       "Tamamo-no-Mae"
-    ]
-  },
-  {
-    "name": "Counterattack",
-    "type": "Set",
-    "class": null,
-    "count": 13,
-    "characters": [
-      "Astei",
-      "Christina",
-      "Demiurge Stella",
-      "Drakhan",
-      "Ember",
-      "Epsilon",
-      "Kanon",
-      "Kappa",
-      "Luna",
-      "Monad Eva",
-      "Omega Nadja",
-      "Rhona",
-      "Veronica"
     ]
   },
   {
@@ -347,6 +350,24 @@
     ]
   },
   {
+    "name": "Force Field Generator",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 10,
+    "characters": [
+      "Christina",
+      "Demiurge Drakhan",
+      "Ember",
+      "Hilde",
+      "Leo",
+      "Luna",
+      "Omega Nadja",
+      "Sterope",
+      "Summer Knight's Dream Ember",
+      "Veronica"
+    ]
+  },
+  {
     "name": "Dies Irae",
     "type": "Amulet",
     "class": "Mage",
@@ -381,19 +402,19 @@
     ]
   },
   {
-    "name": "Force Field Generator",
-    "type": "Weapon",
+    "name": "Coward's Treasure",
+    "type": "Amulet",
     "class": "Defender",
     "count": 9,
     "characters": [
-      "Christina",
       "Demiurge Drakhan",
       "Ember",
       "Hilde",
-      "Leo",
+      "Kappa",
       "Luna",
       "Omega Nadja",
       "Sterope",
+      "Summer Knight's Dream Ember",
       "Veronica"
     ]
   },
@@ -446,22 +467,6 @@
     ]
   },
   {
-    "name": "Coward's Treasure",
-    "type": "Amulet",
-    "class": "Defender",
-    "count": 8,
-    "characters": [
-      "Demiurge Drakhan",
-      "Ember",
-      "Hilde",
-      "Kappa",
-      "Luna",
-      "Omega Nadja",
-      "Sterope",
-      "Veronica"
-    ]
-  },
-  {
     "name": "Clock Up",
     "type": "Amulet",
     "class": "Striker",
@@ -492,6 +497,21 @@
     ]
   },
   {
+    "name": "Life",
+    "type": "Set",
+    "class": null,
+    "count": 7,
+    "characters": [
+      "Christina",
+      "Delta",
+      "Hilde",
+      "Liselotte",
+      "Nella",
+      "Omega Nadja",
+      "Summer Knight's Dream Ember"
+    ]
+  },
+  {
     "name": "Revenge",
     "type": "Set",
     "class": null,
@@ -503,20 +523,6 @@
       "Gnosis Dahlia",
       "Idith",
       "Vlada"
-    ]
-  },
-  {
-    "name": "Life",
-    "type": "Set",
-    "class": null,
-    "count": 6,
-    "characters": [
-      "Christina",
-      "Delta",
-      "Hilde",
-      "Liselotte",
-      "Nella",
-      "Omega Nadja"
     ]
   },
   {
@@ -665,6 +671,17 @@
     ]
   },
   {
+    "name": "Charmer's Necklace",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 3,
+    "characters": [
+      "Christina",
+      "Omega Nadja",
+      "Summer Knight's Dream Ember"
+    ]
+  },
+  {
     "name": "Gorgon's Wrath [Ranger]",
     "type": "Weapon",
     "class": "Ranger",
@@ -727,16 +744,6 @@
     ]
   },
   {
-    "name": "Charmer's Necklace",
-    "type": "Amulet",
-    "class": "Defender",
-    "count": 2,
-    "characters": [
-      "Christina",
-      "Omega Nadja"
-    ]
-  },
-  {
     "name": "Gorgon's Wrath [Healer]",
     "type": "Weapon",
     "class": "Healer",
@@ -754,6 +761,16 @@
     "characters": [
       "Demiurge Vlada",
       "Gnosis Beth"
+    ]
+  },
+  {
+    "name": "Fool's Dawn",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 2,
+    "characters": [
+      "Omega Nadja",
+      "Summer Knight's Dream Ember"
     ]
   },
   {
@@ -880,15 +897,6 @@
     "count": 1,
     "characters": [
       "Nella"
-    ]
-  },
-  {
-    "name": "Fool's Dawn",
-    "type": "Amulet",
-    "class": "Defender",
-    "count": 1,
-    "characters": [
-      "Omega Nadja"
     ]
   },
   {

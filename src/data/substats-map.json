@@ -6080,6 +6080,222 @@
       ]
     }
   },
+  "summer-knight-s-dream-ember": {
+    "Scaling": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "ATK",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
+      ]
+    },
+    "HP immune": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "ATK",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Life",
+        "Immunity"
+      ]
+    },
+    "HP scaling": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "ATK",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Life"
+      ]
+    },
+    "HP Counter": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "ATK",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Counterattack",
+        "Life"
+      ]
+    },
+    "Counter": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Charmer's Necklace",
+          "mainStat": [
+            "EVA",
+            "HH"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "ATK",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    }
+  },
   "tamamo-no-mae": {
     "Speed": {
       "weaponSub": [

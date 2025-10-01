@@ -301,6 +301,18 @@
       "5": { "pve": "2", "pvp": "1" },
       "6": { "pve": "2", "pvp": "1" }
     }
+  },
+  {
+    "name": "Summer Knight's Dream Ember",
+    "review": "A tank with good offensive support via priority boosts, penetration buff and buff removal. As the only defender she will need at least 3 hits to take down. Good damage potential through fixed damage. Transcends and EE+10 allow her to charge her S3 more quickly for high fixed damage output against bosses and arena opponents alike.",
+    "recommended_pve": "Any",
+    "recommended_pvp": "6",
+    "impact": {
+      "3": { "pve": "4", "pvp": "1" },
+      "4": { "pve": "3", "pvp": "3" },
+      "5": { "pve": "4", "pvp": "3" },
+      "6": { "pve": "5", "pvp": "5" }
+    }
   }
 ]
 

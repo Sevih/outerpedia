@@ -1,0 +1,209 @@
+{
+  "ID": "2000106",
+  "Fullname": "Summer Knight's Dream Ember",
+  "Rarity": 3,
+  "Element": "Water",
+   "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
+  "limited": true,
+  "role": "support",
+  "gift": "Natural Object",
+  "tags": [
+    "seasonal"
+  ],
+  "rank": null,
+  "rank_pvp": null,
+  "Class": "Defender",
+  "SubClass": "Sweeper",
+  "transcend": {
+    "1": null,
+    "2": null,
+    "3": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\nSelf Max HP +35%\nAllies' Evasion +4%\n\nWhen enemy uses Counterattack, Revenge, or Agile Response, increase self Priority +30%",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\nOn entry, AP +50\nWhen enemy acts, gain Azure Will +2 (once per turn)",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "6": "ATK DEF HP +30%\nWhen hit, reduce own skill cooldown by 2 turns (once per turn)\nAt battle start, gain Azure Will +2\nWhen enemy uses Counterattack, Revenge, or Agile Response, increase self Priority +40%"
+  },
+  "Chain_Type": "Start",
+  "skills": {
+    "SKT_FIRST": {
+      "name": "Dolphin Charge!",
+      "true_desc": "Attacks an enemy. Has a <color=#28d9ed>30%</color> chance to dispel <color=#28d9ed>1</color> <color=#28d9ed>Buffs</color> from the target, and gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Azure Will</color>.\nThis skill’s damage dealt increases proportional to the caster’s Max Health.",
+      "DescID": "SKILL_DESC_2000106_Skill01_LV1,SKILL_DESC_2000106_Skill01_LV1,SKILL_DESC_2000106_Skill01_LV1,SKILL_DESC_2000106_Skill01_LV1,SKILL_DESC_2000106_Skill01_LV1",
+      "FocusType_fallback1": "ATTACK",
+      "IconName": "Skill_First_2000106",
+      "NameIDSymbol": "10601",
+      "RangeType": "SINGLE",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_FIRST",
+      "SkipNameID": "SKILL_NAME_2000106_Skill01",
+      "TargetTeamType": "ENEMY",
+      "buff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "cost": 60,
+          "effect": "Buff Removal activation chance +50%",
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "cost": 90,
+          "effect": "Enhances Buff Removal\n(Ignores Resilience)",
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "cost": 120,
+          "effect": "Replaces with Empowered Skill\nAttack range expanded\nAzure Will +1",
+          "level": 3
+        }
+      },
+      "cd": null,
+      "debuff": [
+        "BT_REMOVE_BUFF"
+      ],
+      "description": [
+        "Attacks an enemy. Has a <color=#28d9ed>[Buff_C_2000106_1_3]</color> chance to dispel <color=#28d9ed>[Buff_V_2000106_1_3]</color> <color=#28d9ed>Buffs</color> from the target, and gains <color=#28d9ed>[Buff_V_2000106_1_2]</color> <color=#28d9ed>Unique Resource: Azure Will</color>.\\nThis skillâs damage dealt increases proportional to the casterâs Max Health."
+      ],
+      "enhancement": {
+        "2": [
+          "+1 Weakness Gauge damage",
+          "+10% damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+10% effect chance",
+          "+15% damage"
+        ],
+        "5": [
+          "Azure Will gain +1",
+          "+15% damage"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_SECOND": {
+      "name": "Master, Spike!",
+      "true_desc": "(Passive Effect) If the caster is the only Defender ally, damage suffered in one attack does not exceed <color=#28d9ed>65%</color> of the caster’s Max Health (includes Dual Attacks and Additional Attacks).\n\n(Active Effect) Attacks all enemies and increases all allies’ <color=#28d9ed>Penetration</color> for <color=#28d9ed>1</color> turns.\nThis skill’s damage dealt increases proportional to the caster’s Max Health.",
+      "ApproachType": "ATTACK",
+      "DescID": "SKILL_DESC_2000106_Skill02_LV1,SKILL_DESC_2000106_Skill02_LV1,SKILL_DESC_2000106_Skill02_LV1,SKILL_DESC_2000106_Skill02_LV1,SKILL_DESC_2000106_Skill02_LV1",
+      "IconName": "Skill_Second_2000106",
+      "NameIDSymbol": "10602",
+      "RangeType": "ALL",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_SECOND",
+      "SkipNameID": "SKILL_NAME_2000106_Skill02",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_STAT|ST_PIERCE_POWER_RATE"
+      ],
+      "cd": "4",
+      "debuff": [],
+      "description": [
+        "(Passive Effect) If the caster is the only Defender ally, damage suffered in one attack does not exceed <color=#28d9ed>[Buff_V_2000106_2_2]</color> of the casterâs Max Health (includes Dual Attacks and Additional Attacks).\\n\\n(Active Effect) Attacks all enemies and increases all alliesâ <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2000106_2_3]</color> turns.\\nThis skillâs damage dealt increases proportional to the casterâs Max Health."
+      ],
+      "enhancement": {
+        "2": [
+          "+1 Weakness Gauge damage",
+          "+10% damage"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown",
+          "-10% Health Limit"
+        ],
+        "4": [
+          "+1 turn Increased Penetration duration"
+        ],
+        "5": [
+          "-10% Health Limit"
+        ]
+      },
+      "wgr": 1
+    },
+    "SKT_ULTIMATE": {
+      "name": "Sudden Strike!",
+      "true_desc": "Deals Fixed Damage equal to <color=#28d9ed>5%</color> of the caster’s Max Health, then attacks all enemies. After attacking, increases the <color=#28d9ed>Priority</color> of all allies except the caster by <color=#28d9ed>10%</color>, and additionally deals Fixed Damage to bosses equal to <color=#28d9ed>8%</color> of the boss’s Max HP.\n\nWhen holding <color=#28d9ed>5</color> <color=#28d9ed>Unique Resource: Azure Will</color>, consumes all to double both the Fixed Damage and the Priority increase. (Bosses cannot be defeated by Fixed Damage applied after the attack.)",
+      "DescID": "SKILL_DESC_2000106_Skill03_LV1,SKILL_DESC_2000106_Skill03_LV1,SKILL_DESC_2000106_Skill03_LV1,SKILL_DESC_2000106_Skill03_LV1,SKILL_DESC_2000106_Skill03_LV1",
+      "IconName": "Skill_Ultimate_2000106",
+      "NameIDSymbol": "10603",
+      "RangeType": "ALL",
+      "RangeType_fallback1": "ATTACK",
+      "SkillSubType": "ACTIVE",
+      "SkillType": "SKT_ULTIMATE",
+      "SkipNameID": "SKILL_NAME_2000106_Skill03",
+      "TargetTeamType": "ENEMY",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "cd": "5",
+      "debuff": [],
+      "description": [
+        "Deals Fixed Damage equal to <color=#28d9ed>[Buff_V_2000106_3_3]</color> of the casterâs Max Health, then attacks all enemies. After attacking, increases the <color=#28d9ed>Priority</color> of all allies except the caster by <color=#28d9ed>[Buff_V_2000106_3_7]</color>, and additionally deals Fixed Damage to bosses equal to <color=#28d9ed>[Buff_V_2000106_3_5_1]</color> of the bossâs Max HP.\\n\\nWhen holding <color=#28d9ed>5</color> <color=#28d9ed>Unique Resource: Azure Will</color>, consumes all to double both the Fixed Damage and the Priority increase. (Bosses cannot be defeated by Fixed Damage applied after the attack.)"
+      ],
+      "enhancement": {
+        "2": [
+          "+1 Weakness Gauge damage",
+          "+10% damage"
+        ],
+        "3": [
+          "Fixed Damage +5% of self Max HP"
+        ],
+        "4": [
+          "Fixed Damage +5% of self Max HP"
+        ],
+        "5": [
+          "All allies except self Priority +10%"
+        ]
+      },
+      "wgr": 2
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "name": "Chain Passive",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color> : After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>5</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a 50% chance to remove 1 <color=#28d9ed>Buff</color> from the target.",
+      "DescID": "SKILL_DESC_2000106_Skill04_LV1,SKILL_DESC_2000106_Skill04_LV1,SKILL_DESC_2000106_Skill04_LV1,SKILL_DESC_2000106_Skill04_LV1,SKILL_DESC_2000106_Skill04_LV1",
+      "IconName": "Skill_ChainPassive_Water_Start",
+      "NameIDSymbol": "10604",
+      "RangeType": "NONE",
+      "RangeType_fallback1": "NONE",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
+      "TargetTeamType": "NONE",
+      "buff": [],
+      "cd": null,
+      "debuff": "BT_WG_DMG",
+      "description": [
+        "<color=#ffd732>Chain Starter Effect</color> : After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000106_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color> : After attacking, has a [Buff_C_2000106_backup_1_1] chance to remove [Buff_V_2000106_backup_1_1] <color=#28d9ed>Buff</color> from the target."
+      ],
+      "dual_debuff": "BT_REMOVE_BUFF",
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage "
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage ",
+          "+1 Weakness Gauge damage"
+        ]
+      },
+      "wgr": 3,
+      "wgr_dual": 1
+    }
+  }
+}

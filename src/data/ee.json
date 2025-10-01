@@ -1191,5 +1191,15 @@
 		"rank": "D",
 		"buff": ["IG_Buff_BuffdurationIncrease"],
 		"debuff": ["BT_SEAL_COUNTER"]
-	}
+	},
+	"summer-knight-s-dream-ember": {
+		"name": "Bouncy Master",
+		"mainStat": "Accuracy to Fire",
+		"effect": "Increases Boss Damage dealt by Water-type allies.",
+		"effect10": "When an ally is hit, gain Azure Will +2 (once per turn)",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "",
+		"buff": [""],
+		"debuff": [""]
+	}	
 }

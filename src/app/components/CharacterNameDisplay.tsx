@@ -16,8 +16,7 @@ const PREFIX_STYLES: Record<string, string> = {
   'Kitsune of Eternity': 'text-[10px]',
   'Ais': 'text-[18px]',
   'Poolside Trickster': 'text-[10px]',
-
-
+  "Summer Knight's Dream": 'text-[9px]',
 }
 
 const ABBR_STYLES: Record<string, string> = {
@@ -29,6 +28,7 @@ const ABBR_STYLES: Record<string, string> = {
   'Kitsune of Eternity': 'KoE ',
   'Poolside Trickster': 'PT ',
   "Tamamo-no-Mae": 'Tamamo',
+  "Summer Knight's Dream": 'S.',
 }
 
 const NAME_STYLES: Record<string, string> = {
@@ -49,6 +49,7 @@ const PREFIX_STYLES_BIG: Record<string, string> = {
   "Holy Night's Blessing": 'text-[21px]',
   'Kitsune of Eternity': 'text-[21px]',
   'Poolside Trickster': 'text-[21px]',
+  "Summer Knight's Dream": 'text-[21px]',
 }
 
 const NAME_STYLES_BIG: Record<string, string> = {

@@ -25,6 +25,36 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-10-01",
+    title: {
+      en: "New Hero Summer Knight’s Dream Ember",
+      fr: "Nouveau héros Summer Knight’s Dream Ember",
+      jp: "新ヒーロー Summer Knight’s Dream Ember",
+      kr: "신규 영웅 Summer Knight’s Dream Ember",
+    } as LString,
+    type: "update",
+    content: [
+      {
+        en: "- The seasonal Limited Hero **Summer Knight’s Dream Ember** has arrived in OUTERPLANE!",
+        fr: "- Le héros saisonnier **Summer Knight’s Dream Ember** est arrivé dans OUTERPLANE !",
+        jp: "- 季節限定ヒーロー **Summer Knight’s Dream Ember** がOUTERPLANEに登場！",
+        kr: "- 시즌 한정 영웅 **Summer Knight’s Dream Ember** 가 OUTERPLANE에 등장했습니다!",
+      } as LString,
+      {
+        en: "- She inflicts **fixed damage on bosses** and grants **Penetration** and **Priority** buffs to her allies.",
+        fr: "- Elle inflige des **dégâts fixes aux boss** et octroie les buffs **Pénétration** et **Priorité** à ses alliés.",
+        jp: "- ボスに**固定ダメージ**を与え、味方に**貫通**と**優先権**バフを付与します。",
+        kr: "- 보스에게 **고정 피해**를 입히고 아군에게 **관통** 및 **우선권** 버프를 부여합니다.",
+      } as LString,
+      {
+        en: "- Learn More [here](/characters/summer-knight-s-dream-ember)",
+        fr: "- En savoir plus [ici](/characters/summer-knight-s-dream-ember)",
+        jp: "- 詳細は[こちら](/characters/summer-knight-s-dream-ember)",
+        kr: "- 자세히 보기 [여기](/characters/summer-knight-s-dream-ember)",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-09-30",
     title: {
       en: "Multilingual support (WIP)",

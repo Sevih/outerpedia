@@ -751,7 +751,9 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
             </div>
 
             {/* Skill Priority & Sweetspots */}
+            
             {character.skill_priority && (
+              
               <SkillPriorityTabs
                 priority={character.skill_priority}
                 characterId={character.ID}
@@ -787,7 +789,7 @@ export default async function CharacterDetailPage(context: { params: Promise<{ n
                       buffs={character.skills.SKT_CHAIN_PASSIVE.buff}
                       debuffs={character.skills.SKT_CHAIN_PASSIVE.debuff}
                     />
-                    <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
+                    <div className="text-sm text-gray-200 whitespace-pre-line mt-1">                      
                       {formatEffectText(
                         (character.skills.SKT_CHAIN_PASSIVE.true_desc?.split('<color=#ffd732>Dual Attack Effect</color>:')[0] ?? '—').trim()
                       )}
