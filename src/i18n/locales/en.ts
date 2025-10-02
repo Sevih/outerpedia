@@ -70,6 +70,11 @@ const en = {
   'categories.tierlist': 'Tier List',
   'categories.utilities': 'Utilities',
   'categories.guides': 'Guides',
+  'characters.profile.birthday': 'Birthday',
+  'characters.profile.height': 'Height',
+  'characters.profile.weight': 'Weight',
+  'characters.basestats.note': 'Base stats shown assume the character is upgraded',
+  'characters.basestats.stage6': 'Stage 6 (Lv. 100)',
 
 
 }

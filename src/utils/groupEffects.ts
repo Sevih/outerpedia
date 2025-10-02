@@ -8,7 +8,6 @@ export function groupEffects(
   )]
   const cleanSet = new Set(clean)
   const grouped: { title: string; effects: string[] }[] = []
-  const known = new Set(orderedGroups.flatMap(g => g.items))
 
   for (const group of orderedGroups) {
     const effectsInGroup = group.items.filter(
@@ -17,10 +16,6 @@ export function groupEffects(
     if (effectsInGroup.length) grouped.push({ title: group.title, effects: effectsInGroup })
   }
 
-  const otherEffects = clean.filter(
-    e => !known.has(e) && (showUniqueEffects || !e.startsWith('UNIQUE_'))
-  )
-  if (otherEffects.length) grouped.push({ title: 'Other', effects: otherEffects })
-
+  
   return grouped
 }

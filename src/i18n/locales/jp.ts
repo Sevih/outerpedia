@@ -70,6 +70,11 @@ const jp = {
   'categories.tierlist': 'ティアリスト',
   'categories.utilities': 'ユーティリティ',
   'categories.guides': 'ガイド',
+  'characters.profile.birthday': '誕生日',
+  'characters.profile.height': '身長',
+  'characters.profile.weight': '体重',
+  'characters.basestats.note': '基礎ステータスはキャラクターが進化済みであることを前提としています',
+  'characters.basestats.stage6': '進化段階6（Lv.100）',
 
 
 }

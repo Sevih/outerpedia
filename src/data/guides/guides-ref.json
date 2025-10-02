@@ -767,6 +767,24 @@
   "second_image": "ether-income2",
   "last_updated": "2024-09-09",
   "author": "Birdmouth"
-}
+},
+"S3-8-10": {
+    "category": "adventure",
+    "title": "S3 Hard 8-10 : Abomination Hunter Belial",
+    "description": "Boss strategy guide.",
+    "icon": "S3-8-10",
+    "last_updated": "2025-10-02",
+    "author": "XuRenChao",
+    "second_image": "S3-8-10-2"
+  },
+  "S3-9-10": {
+    "category": "adventure",
+    "title": "S3 Hard 9-10 : Gnosis Nella",
+    "description": "Boss strategy guide.",
+    "icon": "S3-9-10",
+    "last_updated": "2025-10-02",
+    "author": "XuRenChao",
+    "second_image": "S3-9-10-2"
+  }
 
 }

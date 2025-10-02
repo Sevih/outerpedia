@@ -78,6 +78,12 @@
         "icon": "SC_Buff_Stat_BuffChance"
     },
     {
+        "name": "BT_STAT|ST_PIERCE_POWER_RATE",
+        "label": "Reduced Penetration",
+        "description": "Reduces the target's Penetration.",
+        "icon": "CM_Stat_Icon_PIERCE_POWER"
+    },
+    {
         "name": "BT_FREEZE",
         "label": "Frozen",
         "description": "Restricts movement. Removed when the caster dies\nOnly the debuff with the longest duration among :\nFrozen, Petrified, Stunned\ncan be inflicted at the same time",

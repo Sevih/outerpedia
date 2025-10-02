@@ -1,16 +1,19 @@
+'use client'
+import type { TenantKey } from '@/tenants/config'
 import rawProfiles from '@/data/character-profiles.json';
 import { Fragment, ReactNode } from 'react';
+import { useI18n } from '@/lib/contexts/I18nContext'
 
+type LocalizedString = Partial<Record<TenantKey, string>>
 type CharacterProfile = {
-  birthday?: string;
-  height?: string;
-  weight?: string;
-  story?: string;
-};
+  birthday?: string
+  height?: string
+  weight?: string
+  story?: LocalizedString
+}
 
 const characterProfiles = rawProfiles as Record<string, CharacterProfile>;
-
-type Props = { fullname: string };
+type Props = { fullname: string; lng: TenantKey }
 
 /** Remplace <Color=#FFBF00>...</Color> par <span style={{color:'#FFBF00'}}>{...}</span> (case-insensitive) */
 function renderWithColorTags(text: string): ReactNode[] {
@@ -72,23 +75,25 @@ function formatStory(text: string): ReactNode[] {
 
 
 
-export default function CharacterProfileDescription({ fullname }: Props) {
+export default function CharacterProfileDescription({ fullname, lng }: Props) {
+  const { t } = useI18n()
   const profile = characterProfiles[fullname];
   if (!profile) return null;
-
-  const { birthday, height, weight, story } = profile;
+  
+  const { birthday, height, weight } = profile;
+  const story = profile.story?.[lng];
 
   return (
     <div className="space-y-2 text-sm text-white/80 max-w-2xl mx-auto">
       <div className="flex gap-x-4 gap-y-1 flex-wrap">
         {birthday && (
-          <span>🎂 <strong className="text-white">Birthday:</strong> {birthday}</span>
+          <span>🎂 <strong className="text-white">{t('characters.profile.birthday')}:</strong> {birthday}</span>
         )}
         {height && (
-          <span>📏 <strong className="text-white">Height:</strong> {height}</span>
+          <span>📏 <strong className="text-white">{t('characters.profile.height')}:</strong> {height}</span>
         )}
         {weight && (
-          <span>⚖️ <strong className="text-white">Weight:</strong> {weight}</span>
+          <span>⚖️ <strong className="text-white">{t('characters.profile.weight')}:</strong> {weight}</span>
         )}
       </div>
 

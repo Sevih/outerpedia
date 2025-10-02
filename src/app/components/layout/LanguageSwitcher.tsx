@@ -10,7 +10,6 @@ export default function LanguageSwitcher() {
   const options = useMemo(
     () => ([
       { key: 'en', label: '🇬🇧 English' },
-      { key: 'fr', label: '🇫🇷 Français (WIP)' },
       { key: 'jp', label: '🇯🇵 日本語 (WIP)' },
       { key: 'kr', label: '🇰🇷 한국어 (WIP)' },
     ] as { key: TenantKey; label: string }[]),

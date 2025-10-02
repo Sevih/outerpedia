@@ -88,7 +88,7 @@ function SubstatPriorityBar({ priorities }: { priorities: SubstatPriority[] }) {
 
 type GearReference = { name: string; mainStat: string; usage?: string }
 
-type RecommendedGearSet = {
+export type RecommendedGearSet = {
   Weapon?: GearReference[]
   Amulet?: GearReference[]
   Set?: MiniSet[][]

@@ -70,6 +70,11 @@ const kr = {
   'categories.tierlist': '티어 리스트',
   'categories.utilities': '도구',
   'categories.guides': '가이드',
+  'characters.profile.birthday': '생일',
+  'characters.profile.height': '키',
+  'characters.profile.weight': '체중',
+  'characters.basestats.note': '표시된 기본 스탯은 캐릭터가 강화된 상태를 기준으로 합니다',
+  'characters.basestats.stage6': '6단계 (Lv.100)',
 
 
 }

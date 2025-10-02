@@ -13,6 +13,10 @@ export interface ExclusiveEquipment {
 
 export interface Skill {
   name: string
+  name_jp?: string; 
+  name_kr?: string; 
+  true_desc_jp?: string; 
+  true_desc_kr?: string;
   true_desc: string
   description: string
   cd: number | string
@@ -21,6 +25,8 @@ export interface Skill {
     level: number
     cost: string
     effect: string
+    effect_jp?: string; 
+    effect_kr?: string;
   }[]
   enhancement?: Record<string, string>[]
   buff: string[]
@@ -38,6 +44,8 @@ type ExtendedSkill = Skill & {
 export interface Character {
   ID: string
   Fullname: string
+  Fullname_jp?: string;
+  Fullname_kr?: string;
   Rarity: number
   Element: string
   Class: string
