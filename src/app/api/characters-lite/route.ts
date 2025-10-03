@@ -50,6 +50,28 @@ function extractBuffsAndDebuffs(character: Character) {
 
 type RoleType = 'DPS' | 'Support' | 'Sustain'
 
+type LocalizedNameFields = {
+  Fullname_jp?: unknown
+  Fullname_kr?: unknown
+}
+
+function isNonEmptyString(x: unknown): x is string {
+  return typeof x === 'string' && x.trim().length > 0
+}
+function pickLocalizedNames(
+  c: Character & Partial<LocalizedNameFields>
+): Partial<Record<'Fullname_jp' | 'Fullname_kr', string>> {
+  const out: Partial<Record<'Fullname_jp' | 'Fullname_kr', string>> = {}
+
+  if (isNonEmptyString(c.Fullname_jp)) {
+    out.Fullname_jp = c.Fullname_jp
+  }
+  if (isNonEmptyString(c.Fullname_kr)) {
+    out.Fullname_kr = c.Fullname_kr
+  }
+  return out
+}
+
 export async function GET() {
   try {
     const dirPath = path.join(process.cwd(), 'src/data/char')
@@ -70,6 +92,7 @@ export async function GET() {
         return {
           ID: character.ID,
           Fullname: character.Fullname,
+          ...pickLocalizedNames(character), 
           Class: character.Class,
           Element: character.Element,
           Rarity: character.Rarity,

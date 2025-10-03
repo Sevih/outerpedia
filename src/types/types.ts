@@ -73,6 +73,8 @@ export type RoleType = 'DPS' | 'Support' | 'Sustain'
 export type CharacterLite = {
   ID: string
   Fullname: string
+  Fullname_jp?: string;
+  Fullname_kr?: string;
   Element: string
   Class: string
   SubClass?: string            // <- optionnel (l’API ne le renvoie pas)

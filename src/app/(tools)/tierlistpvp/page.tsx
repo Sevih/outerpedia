@@ -5,13 +5,14 @@ import { getMonthYear } from '@/utils/getMonthYear';
 import TierListBase from '@/app/components/TierListBase'
 import { toKebabCase } from '@/utils/formatText'
 import { Suspense } from 'react'
+import { getTenantServer } from '@/tenants/tenant.server'
 
 const monthYear = getMonthYear();
 
 export const metadata: Metadata = {
   title: `Outerplane PvP Tier List – ${monthYear} Update | Outerpedia`,
   description: `Discover the best characters ranked for PvP in Outerplane. Updated for ${monthYear}, curated by the EvaMains Discord community.`,
-  keywords: ['Outerplane', 'Tier List', 'Best Characters', `${monthYear}`, 'EvaMains', 'Outerpedia','PvP'],
+  keywords: ['Outerplane', 'Tier List', 'Best Characters', `${monthYear}`, 'EvaMains', 'Outerpedia', 'PvP'],
   alternates: {
     canonical: 'https://outerpedia.com/tierlistpvp',
   },
@@ -37,20 +38,22 @@ export const metadata: Metadata = {
   },
 }
 
-export default function PvPTierList() {
+export default async function PvPTierList() {
+  const { domain, key: langKey } = await getTenantServer()
+  const base = `https://${domain}`
   const characters = charactersData as CharacterLite[]
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": `Outerplane PvP Tier List – ${monthYear}`,
-    "url": "https://outerpedia.com/tools/tierlistpvp",
+    "url": `${base}/tools/tierlistpvp`,
     "description": `Discover the best characters in Outerplane sorted by DPS, Support, and Sustain roles. PvP Tier list curated by the EvaMains community.`,
     "itemListElement": characters.map((char, index) => ({
       "@type": "ListItem",
       "position": index + 1,
-      "url": `https://outerpedia.com/characters/${toKebabCase(char.Fullname)}`,
+      "url": `${base}/characters/${toKebabCase(char.Fullname)}`,
       "name": char.Fullname,
-      "image": `https://outerpedia.com/images/characters/portrait/CT_${char.ID}.webp`,
+      "image": `${base}/images/characters/portrait/CT_${char.ID}.webp`,
     })),
   }
 
@@ -58,7 +61,7 @@ export default function PvPTierList() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Suspense fallback={<div>Loading...</div>}>
-        <TierListBase characters={characters} mode="pvp" />
+        <TierListBase characters={characters} mode="pvp" langue={langKey} />
       </Suspense>
     </>
   )

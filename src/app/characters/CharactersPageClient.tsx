@@ -14,6 +14,7 @@ import LZString from 'lz-string'
 import { EL, CL, CH, GF, EL_INV, CL_INV, CH_INV, GF_INV } from '@/data/filterCodes'
 import effectsIndex from '@/data/effectsIndex.json'
 import rawTAG_INDEX from '@/data/tags.json'
+import type { TenantKey } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
 
 // ===== Helpers for effect lookup
@@ -249,7 +250,21 @@ function splitIntoRows<T>(arr: T[], rows = 2): T[][] {
   return out
 }
 
-export default function CharactersPage() {
+
+
+type FullnameKey = Extract<keyof CharacterLite, `Fullname${'' | `_${string}`}`>
+function getLocalizedFullname(character: CharacterLite, langKey: TenantKey): string {
+  console.log(character)
+    const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
+    const localized = character[key] // type: string | undefined
+    return localized ?? character.Fullname
+}
+
+
+type ClientProps = {
+  langue: TenantKey
+}
+export default function CharactersPage({ langue }: ClientProps) {
   const [characters, setCharacters] = useState<CharacterLite[]>([])
   const [loading, setLoading] = useState(true)
   const [showTagsPanel, setShowTagsPanel] = useState(false)
@@ -835,7 +850,7 @@ export default function CharactersPage() {
                   <ElementIcon element={char.Element as ElementType} />
                 </div>
 
-                <CharacterNameDisplay fullname={char.Fullname} />
+                <CharacterNameDisplay fullname={getLocalizedFullname(char,langue)} />
               </Link>
             )
           })}

@@ -5,6 +5,7 @@ import charactersData from '@/data/_allCharacters.json'
 import { toKebabCase } from '@/utils/formatText'
 import type { Character } from '@/types/character'
 import { Suspense } from 'react'
+import { getTenantServer } from '@/tenants/tenant.server'
 
 export const metadata: Metadata = {
   title: 'Exclusive Equipment Priority – Outerpedia',
@@ -39,7 +40,9 @@ const characterMap = Object.fromEntries(
   (charactersData as Character[]).map((c) => [toKebabCase(c.Fullname), c])
 )
 
-export default function EePriorityPage() {
+export default async function EePriorityPage() {
+  const { domain, key: langKey } = await getTenantServer()
+  const base = `https://${domain}`
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -52,9 +55,9 @@ export default function EePriorityPage() {
         ? {
             "@type": "ListItem",
             "position": index + 1,
-            "url": `https://outerpedia.com/characters/${slug}`,
+            "url": `${base}/characters/${slug}`,
             "name": ee.name,
-            "image": `https://outerpedia.com/images/characters/portrait/CT_${char.ID}.webp`,
+            "image": `${base}/images/characters/portrait/CT_${char.ID}.webp`,
             "description": ee.effect,
           }
         : null
@@ -65,7 +68,7 @@ export default function EePriorityPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Suspense fallback={<div>Loading...</div>}>
-        <TierListBase equipments={eeData} mode="ee0" />
+        <TierListBase equipments={eeData} mode="ee0" langue={langKey} />
       </Suspense>
     </>
   )

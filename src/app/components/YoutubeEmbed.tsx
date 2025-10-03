@@ -14,7 +14,7 @@ export default function YoutubeEmbed({
 }) {
   const [play, setPlay] = useState(false)
   const [imgError, setImgError] = useState(false)
- console.log(videoId);
+ //console.log(videoId);
   if (!videoId) return null
 
   const thumbnail = imgError

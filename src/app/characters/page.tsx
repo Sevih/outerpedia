@@ -49,8 +49,9 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+
 export default async function Page() {
-  const { domain } = await getTenantServer()
+  const { domain, key: langKey } = await getTenantServer()
   const base = `https://${domain}`
 
   return (
@@ -77,7 +78,7 @@ export default async function Page() {
         }}
       />
       <div className="p-3">
-        <CharactersPage />
+        <CharactersPage langue={langKey} />
       </div>
     </>
   )

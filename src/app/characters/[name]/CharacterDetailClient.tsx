@@ -49,10 +49,43 @@ function UnitTypeBadge({ tags }: { tags?: string[] | string }) {
 
 type FullnameKey = Extract<keyof Character, `Fullname${'' | `_${string}`}`>
 function getLocalizedFullname(character: Character, langKey: TenantKey): string {
-  const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
-  const localized = character[key] // type: string | undefined
-  return localized ?? character.Fullname
+    const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
+    const localized = character[key] // type: string | undefined
+    return localized ?? character.Fullname
 }
+
+type SkillNameKey = Extract<keyof Skill, `name${'' | `_${string}`}`>
+type SkillDescKey = Extract<keyof Skill, `true_desc${'' | `_${string}`}`>
+function getLocalizedSkillName(skill: Skill, langKey: TenantKey): string {
+    const key: SkillNameKey = langKey === 'en' ? 'name' : (`name_${langKey}` as SkillNameKey)
+    return skill[key] ?? skill.name ?? ''
+}
+
+function getLocalizedSkillDesc(skill: Skill, langKey: TenantKey): string {
+    const key: SkillDescKey = langKey === 'en' ? 'true_desc' : (`true_desc_${langKey}` as SkillDescKey)
+    return skill[key] ?? skill.true_desc ?? ''
+}
+
+function splitChainDual(desc: string) {
+  // Cherche tous les tags colorés jaune
+  const marker = /<color=#ffd732>[^<]+<\/color>:\s*/gi
+  const matches = [...desc.matchAll(marker)]
+
+  if (matches.length < 2) {
+    // Si on n’a qu’un seul bloc => tout est "chain"
+    return { chain: desc.trim(), dual: '' }
+  }
+
+  const second = matches[1] // deuxième balise = début du dual
+  const splitIndex = second.index ?? 0
+
+  const chain = desc.slice(0, splitIndex).trim()
+  const dual = desc.slice(splitIndex + second[0].length).trim()
+
+  return { chain, dual }
+}
+
+
 
 
 function getRoleBadge(role?: string) {
@@ -185,6 +218,8 @@ export default function CharacterDetailClient({
         return anyVal ? (Array.isArray(anyVal) ? anyVal : [anyVal as string]) : []
     }
 
+    const ln = (s?: Skill) => (s ? getLocalizedSkillName(s, langKey) : undefined)
+
     return (
         <>
 
@@ -229,7 +264,7 @@ export default function CharacterDetailClient({
             <div className="max-w-6xl mx-auto p-6">
                 {/* Partie haute : illustration + infos principales */}
                 <CharacterNameDisplayBigNoH fullname={getLocalizedFullname(character, langKey)} />
-               
+
                 <div className="grid grid-cols-1 md:grid-cols-[400px_1fr] gap-6">
                     {/* Illustration du personnage */}
                     <div className="relative rounded overflow-hidden shadow mt-10">
@@ -469,7 +504,7 @@ export default function CharacterDetailClient({
                                     <div className="relative w-12 h-12">
                                         <Image
                                             src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
-                                            alt={skill.name}
+                                            alt={getLocalizedSkillName(skill, langKey)}
                                             width={48} height={48} className="object-contain"
                                         />
                                         {skill.burnEffect && Object.keys(skill.burnEffect).length > 0 && (
@@ -477,7 +512,7 @@ export default function CharacterDetailClient({
                                         )}
                                     </div>
                                     <div>
-                                        <p className="text-lg font-semibold">{skill.name}</p>
+                                        <p className="text-lg font-semibold">{getLocalizedSkillName(skill, langKey)}</p>
                                         <p className="text-sm text-gray-400 italic mb-1">
                                             Weakness Gauge Reduction: {skill.wgr ?? '—'}<br />
                                             Cooldown: {skill.cd ? `${skill.cd} turn(s)` : '—'}
@@ -488,7 +523,7 @@ export default function CharacterDetailClient({
 
                                 {/* Description */}
                                 <div className="text-sm text-gray-200 whitespace-pre-line">
-                                    {formatEffectText(skill.true_desc ?? '—')}
+                                    {formatEffectText(getLocalizedSkillDesc(skill, langKey) || '—')}
                                 </div>
 
                                 {/* Enhancement */}
@@ -604,77 +639,73 @@ export default function CharacterDetailClient({
                             priority={character.skill_priority}
                             characterId={character.ID}
                             skillNames={{
-                                First: character.skills.SKT_FIRST?.name,
-                                Second: character.skills.SKT_SECOND?.name,
-                                Ultimate: character.skills.SKT_ULTIMATE?.name,
+                                First: ln(character.skills.SKT_FIRST),
+                                Second: ln(character.skills.SKT_SECOND),
+                                Ultimate: ln(character.skills.SKT_ULTIMATE),
                             }}
                         />
                     )}
 
                     {/* Chain & Dual */}
-                    {character.skills?.SKT_CHAIN_PASSIVE && (
-                        <div className="flex flex-col gap-6 text-white">
-                            <div className="flex gap-4 items-start">
-                                <div className="w-16 h-16 shrink-0">
-                                    <Image
-                                        src={`/images/characters/chain/Skill_ChainPassive_${character.Element}_${character.Chain_Type}.webp`}
-                                        alt={`Chain icon for ${character.Element} ${character.Chain_Type}`}
-                                        width={64} height={64} className="object-contain"
-                                    />
-                                </div>
-                                <div>
-                                    <p className="font-semibold mb-1">Chain & Dual Attack</p>
-                                    <p className="text-sm text-gray-400 italic mb-1">
-                                        Weakness Gauge Reduction : {character.skills.SKT_CHAIN_PASSIVE.wgr ?? '—'}
-                                    </p>
-                                    <BuffDebuffDisplay
-                                        buffs={character.skills.SKT_CHAIN_PASSIVE.buff}
-                                        debuffs={character.skills.SKT_CHAIN_PASSIVE.debuff}
-                                    />
+                    {character.skills?.SKT_CHAIN_PASSIVE && (() => {
+                        const s = character.skills.SKT_CHAIN_PASSIVE
+                        const localizedDesc = getLocalizedSkillDesc(s, langKey)
+                        const { chain, dual } = splitChainDual(localizedDesc)
 
-                                    <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
-                                        {formatEffectText(
-                                            (character.skills.SKT_CHAIN_PASSIVE.true_desc?.split('<color=#ffd732>Dual Attack Effect</color>:')[0] ?? '—').trim()
-                                        )}
+                        return (
+                            <div className="flex flex-col gap-6 text-white">
+                                <div className="flex gap-4 items-start">
+                                    <div className="w-16 h-16 shrink-0">
+                                        <Image
+                                            src={`/images/characters/chain/Skill_ChainPassive_${character.Element}_${character.Chain_Type}.webp`}
+                                            alt={`Chain icon for ${character.Element} ${character.Chain_Type}`}
+                                            width={64} height={64} className="object-contain"
+                                        />
+                                    </div>
 
-                                        {/* Dual */}
-                                        <div className="flex gap-4 items-start">
+                                    <div>
+                                        <p className="font-semibold mb-1">Chain & Dual Attack</p>
+
+                                        <p className="text-sm text-gray-400 italic mb-1">
+                                            Weakness Gauge Reduction : {s.wgr ?? '—'}
+                                        </p>
+
+                                        <BuffDebuffDisplay buffs={s.buff} debuffs={s.debuff} />
+
+                                        {/* CHAIN part */}
+                                        <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
+                                            {formatEffectText(chain || '—')}
+                                        </div>
+
+                                        {/* DUAL part */}
+                                        <div className="flex gap-4 items-start mt-2">
                                             <div>
                                                 <p className="text-sm text-gray-400 italic mb-1">
-                                                    Weakness Gauge Reduction : {character.skills.SKT_CHAIN_PASSIVE.wgr_dual ?? '—'}
+                                                    Weakness Gauge Reduction : {s.wgr_dual ?? '—'}
                                                 </p>
+
                                                 <BuffDebuffDisplay
-                                                    buffs={
-                                                        Array.isArray(character.skills.SKT_CHAIN_PASSIVE.dual_buff)
-                                                            ? character.skills.SKT_CHAIN_PASSIVE.dual_buff
-                                                            : character.skills.SKT_CHAIN_PASSIVE.dual_buff
-                                                                ? [character.skills.SKT_CHAIN_PASSIVE.dual_buff]
-                                                                : []
-                                                    }
-                                                    debuffs={
-                                                        Array.isArray(character.skills.SKT_CHAIN_PASSIVE.dual_debuff)
-                                                            ? character.skills.SKT_CHAIN_PASSIVE.dual_debuff
-                                                            : character.skills.SKT_CHAIN_PASSIVE.dual_debuff
-                                                                ? [character.skills.SKT_CHAIN_PASSIVE.dual_debuff]
-                                                                : []
-                                                    }
+                                                    buffs={Array.isArray(s.dual_buff) ? s.dual_buff : s.dual_buff ? [s.dual_buff] : []}
+                                                    debuffs={Array.isArray(s.dual_debuff) ? s.dual_debuff : s.dual_debuff ? [s.dual_debuff] : []}
                                                 />
+
                                                 <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
-                                                    <span style={{ color: '#ffd732' }}>Dual Attack Effect:</span>{' '}
-                                                    {formatEffectText(
-                                                        (character.skills.SKT_CHAIN_PASSIVE.true_desc?.split('<color=#ffd732>Dual Attack Effect</color>:')[1] ?? '—').trim()
-                                                    )}
+                                                    <span style={{ color: '#ffd732' }}>
+                                                        {/* Le label reste visuel; le split ne dépend pas du texte */}
+                                                        Dual Attack Effect:
+                                                    </span>{' '}
+                                                    {formatEffectText(dual || '—')}
                                                 </div>
 
-                                                {character.skills.SKT_CHAIN_PASSIVE.enhancement && (
+                                                {s.enhancement && (
                                                     <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
                                                         <p className="font-bold mb-1">Enhancements:</p>
                                                         <div className="space-y-2">
                                                             {(() => {
-                                                                const enh = normalizeEnhancement(character.skills.SKT_CHAIN_PASSIVE.enhancement)
+                                                                const enh = normalizeEnhancement(s.enhancement)
                                                                 const levels = Object.keys(enh)
-                                                                    .filter(k => /^\d+$/.test(k))           // "2","3","4",...
-                                                                    .sort((a, b) => Number(a) - Number(b))  // tri croissant
+                                                                    .filter(k => /^\d+$/.test(k))
+                                                                    .sort((a, b) => Number(a) - Number(b))
 
                                                                 return levels.map(level => {
                                                                     const lines = pickEnhancementForLevel(enh, level, langKey)
@@ -697,8 +728,9 @@ export default function CharacterDetailClient({
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
+                        )
+                    })()}
+
                 </div>
 
                 {/* Gear */}

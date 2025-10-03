@@ -3,6 +3,8 @@ const path = require('path');
 
 const charactersDir = path.join(process.cwd(), 'src/data/char');
 const outputFile = path.join(process.cwd(), 'src/data/_allCharacters.json');
+const isNonEmpty = v => typeof v === 'string' && v.trim() !== '';
+
 
 async function generateAllCharacters() {
   try {
@@ -14,7 +16,7 @@ async function generateAllCharacters() {
         const filePath = path.join(charactersDir, file);
         const content = await fs.promises.readFile(filePath, 'utf-8');
         const character = JSON.parse(content);
-        allCharacters.push({
+        const entry = {
           ID: character.ID,
           Fullname: character.Fullname,
           Rarity: character.Rarity,
@@ -27,7 +29,12 @@ async function generateAllCharacters() {
           limited: character.limited ?? false,
           gift: character.gift ?? false,
           rank_pvp: character.rank_pvp ?? false,
-        });
+        }
+
+        if (isNonEmpty(character.Fullname_jp)) entry.Fullname_jp = character.Fullname_jp.trim()
+        if (isNonEmpty(character.Fullname_kr)) entry.Fullname_kr = character.Fullname_kr.trim()
+
+        allCharacters.push(entry)
       }
     }
 

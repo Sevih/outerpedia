@@ -14,18 +14,73 @@ import EeDisplayMini from '@/app/components/eeDisplayMini'
 import type { Character } from '@/types/character'
 import type { ClassType as classtipe, ElementType } from '@/types/enums'
 import charactersData from '@/data/_allCharacters.json'
+import type { TenantKey } from '@/tenants/config'
+
+
+type CharacterDisplay = Pick<Character, 'ID' | 'Fullname' | 'Rarity' | 'Class' | 'Element' | 'rank' | 'rank_pvp' | 'role'> &
+    Partial<Pick<Character, 'Fullname_kr' | 'Fullname_jp'>
+    >
+
+type GroupedCharacters = Record<string, CharacterDisplay[]>
+type GroupedEquipments = Record<string, [string, Equipment][]>
+type WithLocalizedNames = {
+  Fullname: string
+  Fullname_jp?: string
+  Fullname_kr?: string
+}
 
 const characterMap = Object.fromEntries(
     (charactersData as Character[]).map((c) => [toKebabCase(c.Fullname), c])
 )
 
-type CharacterDisplay = Pick<
-    Character,
-    'ID' | 'Fullname' | 'Rarity' | 'Class' | 'Element' | 'rank' | 'rank_pvp' | 'role'
->
+function norm(s: string) {
+    return s
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/\p{Diacritic}/gu, '')
+}
 
-type GroupedCharacters = Record<string, CharacterDisplay[]>
-type GroupedEquipments = Record<string, [string, Equipment][]>
+function includesCI(haystack: string | undefined, needle: string) {
+  if (!haystack) return false
+  return norm(haystack).includes(norm(needle))
+}
+
+function matchesCharacterSearch(c: CharacterDisplay, term: string) {
+  if (!term) return true
+  const slug = toKebabCase(c.Fullname)
+  return (
+    includesCI(c.Fullname, term) ||
+    includesCI(c.Fullname_jp, term) ||
+    includesCI(c.Fullname_kr, term) ||
+    includesCI(slug, term)
+  )
+}
+
+
+// pour les EE
+function matchesEESearch(
+  term: string,
+  slug: string,
+  ee: Equipment,
+  char?: WithLocalizedNames
+) {
+  if (!term) return true
+  return (
+    includesCI(ee.name, term) ||
+    includesCI(slug, term) ||
+    (char && (
+      includesCI(char.Fullname, term) ||
+      includesCI(char.Fullname_jp, term) ||
+      includesCI(char.Fullname_kr, term) ||
+      includesCI(toKebabCase(char.Fullname), term)
+    ))
+    // Optionnel :
+    // || includesCI(ee.effect, term) || includesCI(ee.effect10, term)
+  )
+}
+
+
+
 
 
 type Mode = 'pve' | 'pvp' | 'ee0' | 'ee10'
@@ -51,6 +106,7 @@ type TierListBaseProps = {
     characters?: CharacterDisplay[]
     equipments?: Record<string, Equipment>
     mode: Mode
+    langue: TenantKey
 }
 
 
@@ -94,7 +150,16 @@ function demoteOnce(rank: string): PveRank {
     return PVE_RANKS[Math.min(i < 0 ? PVE_RANKS.length - 1 : i + 1, PVE_RANKS.length - 1)]
 }
 
-export default function TierListBase({ characters = [], equipments = {}, mode }: TierListBaseProps) {
+type FullnameKey = Extract<keyof CharacterDisplay, `Fullname${'' | `_${string}`}`>
+function getLocalizedFullname(character: CharacterDisplay, langKey: TenantKey): string {
+    //console.log(character)
+    const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
+    const localized = character[key] // type: string | undefined
+    return localized ?? character.Fullname
+}
+
+
+export default function TierListBase({ characters = [], equipments = {}, mode, langue = "en" }: TierListBaseProps) {
     const searchParams = useSearchParams()
     const tabParam = searchParams.get('tab') as TabKey | null
     const [activeTab, setActiveTab] = useState<TabKey>('all')
@@ -335,7 +400,7 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
             {(mode === 'pve' || mode === 'pvp') && (
                 <div className="flex justify-center mb-8">
                     <AnimatedTabs
-                        tabs={TABS.map(t => ({ key: t.value, label: t.label, icon: t.icon}))}
+                        tabs={TABS.map(t => ({ key: t.value, label: t.label, icon: t.icon }))}
                         selected={activeTab}
                         onSelect={handleTabChange}
                         pillColor={tabColors[activeTab]}
@@ -385,7 +450,7 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
                                             if (mode === 'pve' || mode === 'pvp') {
                                                 const char = item as Character
                                                 return (
-                                                    char.Fullname.toLowerCase().includes(searchTerm.toLowerCase()) &&
+                                                    matchesCharacterSearch(char, searchTerm) &&
                                                     (elementFilter.length === 0 || elementFilter.includes(char.Element)) &&
                                                     (classFilter.length === 0 || classFilter.includes(char.Class)) &&
                                                     (!showRarityFilter || rarityFilter.length === 0 || rarityFilter.includes(char.Rarity))
@@ -395,10 +460,7 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
                                                 const char = characterMap[slug] || characterMap[toKebabCase(slug)]
                                                 if (!char) return false
 
-                                                const matchesSearch =
-                                                    ee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                                    slug.toLowerCase().includes(searchTerm.toLowerCase())
-
+                                                const matchesSearch = matchesEESearch(searchTerm, slug, ee, char)
                                                 const matchesElement = elementFilter.length === 0 || elementFilter.includes(char.Element)
                                                 const matchesClass = classFilter.length === 0 || classFilter.includes(char.Class)
                                                 const matchesRarity = rarityFilter.length === 0 || rarityFilter.includes(char.Rarity)
@@ -472,7 +534,7 @@ export default function TierListBase({ characters = [], equipments = {}, mode }:
                                                         <div className="absolute bottom-5.5 right-1.5 z-30">
                                                             <ElementIcon element={char!.Element as ElementType} />
                                                         </div>
-                                                        <CharacterNameDisplay fullname={char!.Fullname} />
+                                                        <CharacterNameDisplay fullname={getLocalizedFullname(char!, langue)} />
                                                     </div>
 
                                                     {/* Nom EE en dessous */}
