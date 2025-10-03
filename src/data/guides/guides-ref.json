@@ -480,8 +480,18 @@
   },
   "daily-stamina": {
     "category": "general-guides",
-    "title": "Daily Stamina Burn",
-    "description": "Learn how to efficiently spend your stamina daily in Outerplane with this step-by-step guide.",
+    "title": {
+      "en": "Daily Stamina Burn",
+      "jp": "デイリースタミナ消化",
+      "kr": "일일 스태미나 소모",
+      "fr": "Dépense quotidienne d'endurance"
+    },
+    "description": {
+      "en": "Learn how to efficiently spend your stamina daily in Outerplane with this step-by-step guide.",
+      "jp": "この手順ガイドで、Outerplane の毎日のスタミナを効率よく使う方法を学びましょう。",
+      "kr": "이 단계별 가이드로 Outerplane에서 매일 스태미나를 효율적으로 사용하는 법을 알아보세요.",
+      "fr": "Guide pas à pas pour dépenser efficacement votre endurance au quotidien dans Outerplane."
+    },
     "icon": "T_Chat_Emoticon_04",
     "last_updated": "2025-05-13",
     "author": "SADtherobot",

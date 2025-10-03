@@ -69,7 +69,7 @@ export default function QuirkGuide() {
     <div>
       <GuideHeading level={2}>Quirk System</GuideHeading>
       <p>
-        After clearing any Stage 8 Special Request, you will unlock the Quirk system.<br />
+        After clearing Season 1 stage 9-5 : The Responsibility of the Guilty, you will unlock the Quirk system.<br />
         Quirks are a permanent, account-wide enhancement system available in the <strong>Base → Quirk</strong> menu. They provide additional stats for your heroes or utility effects for your account, and are unlocked using materials such as <ItemInlineDisplay names="Proof of Destiny" />, <ItemInlineDisplay names="Token of Connection" />, and <ItemInlineDisplay names="Proof of Worth" />.
       </p>
 

@@ -204,6 +204,7 @@ const bannerTabs: BannerTab[] = [
                     <li><CharacterLinkCard name="Bell Cranel" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
                     <li><CharacterLinkCard name="Ryu Lion" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
                     <li><CharacterLinkCard name="Omega Nadja" /> – <strong className='text-pink-400'>Limited</strong> Hero, released May 7, 2025</li>
+                    <li><CharacterLinkCard name="Summer Knight's Dream Ember" /> – <strong className='text-pink-400'>Limited</strong> Hero, released Oct 1, 2025</li>
                 </ul>
 
 

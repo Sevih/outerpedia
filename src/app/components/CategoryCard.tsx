@@ -1,15 +1,26 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import categories from '@/data/guides/categories.json';
+'use client'
+import Link from 'next/link'
+import Image from 'next/image'
+import categories from '@/data/guides/categories.json'
+import type { TenantKey } from '@/tenants/config'
 
-export default function GuideCategoryList() {
+type Props = { lang: TenantKey }
+
+type Localized = { en: string; jp?: string; kr?: string; fr?: string }
+
+function getLocalized(obj: Localized | string, lang: TenantKey): string {
+  if (typeof obj === 'string') return obj
+  return obj[lang] ?? obj.en
+}
+
+export default function GuideCategoryList({ lang = 'en' }: Props) {
   const items = Object.entries(categories).map(([slug, cat]) => ({
     slug,
-    title: cat.title,
-    description: cat.description,
+    title: getLocalized(cat.title, lang),
+    description: getLocalized(cat.description, lang),
     icon: `${cat.icon}.webp`,
     valid: cat.valid,
-  }));
+  }))
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -39,5 +50,5 @@ export default function GuideCategoryList() {
         </Link>
       ))}
     </div>
-  );
+  )
 }
