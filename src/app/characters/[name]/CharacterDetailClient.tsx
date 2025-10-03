@@ -67,22 +67,22 @@ function getLocalizedSkillDesc(skill: Skill, langKey: TenantKey): string {
 }
 
 function splitChainDual(desc: string) {
-  // Cherche tous les tags colorés jaune
-  const marker = /<color=#ffd732>[^<]+<\/color>:\s*/gi
-  const matches = [...desc.matchAll(marker)]
+    // Cherche tous les tags colorés jaune
+    const marker = /<color=#ffd732>[^<]+<\/color>:\s*/gi
+    const matches = [...desc.matchAll(marker)]
 
-  if (matches.length < 2) {
-    // Si on n’a qu’un seul bloc => tout est "chain"
-    return { chain: desc.trim(), dual: '' }
-  }
+    if (matches.length < 2) {
+        // Si on n’a qu’un seul bloc => tout est "chain"
+        return { chain: desc.trim(), dual: '' }
+    }
 
-  const second = matches[1] // deuxième balise = début du dual
-  const splitIndex = second.index ?? 0
+    const second = matches[1] // deuxième balise = début du dual
+    const splitIndex = second.index ?? 0
 
-  const chain = desc.slice(0, splitIndex).trim()
-  const dual = desc.slice(splitIndex + second[0].length).trim()
+    const chain = desc.slice(0, splitIndex).trim()
+    const dual = desc.slice(splitIndex + second[0].length).trim()
 
-  return { chain, dual }
+    return { chain, dual }
 }
 
 
@@ -109,6 +109,22 @@ function toKebabCase(str: string): string {
 function getSkillLabel(index: number): string {
     return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`
 }
+
+// helper local (type-guard) — à mettre au dessus de l’usage
+type BurnCard = { level: number; cost: number; effect: string }
+function getBurns(s?: Skill): BurnCard[] {
+    const be = s?.burnEffect as unknown
+    if (!be) return []
+    if (Array.isArray(be)) {
+        // si jamais ton JSON est déjà un array
+        return be as BurnCard[]
+    }
+    if (typeof be === 'object') {
+        return Object.values(be as Record<string, BurnCard>)
+    }
+    return []
+}
+
 
 
 // ---------- composant ----------
@@ -571,16 +587,13 @@ export default function CharacterDetailClient({
                         <div className="flex flex-wrap justify-center gap-2">
                             {(() => {
                                 const entries = Object.entries(character.skills || {}) as [string, Skill][]
-                                const skillWithBurnEntry = entries.find(
-                                    ([, skill]) => !!skill.burnEffect && skill.burnEffect.length > 0
-                                )
+                                // trouve le premier skill qui possède des burns
+                                const skillWithBurnEntry = entries.find(([, s]) => getBurns(s).length > 0)
                                 if (!skillWithBurnEntry) return null
 
-                                const [skillKey, skillWithBurn] = skillWithBurnEntry as [string, Skill & {
-                                    burnEffect: Record<string, { level: number; cost: number; effect: string }>
-                                }]
+                                const [skillKey, skillWithBurn] = skillWithBurnEntry
                                 const index = ['SKT_FIRST', 'SKT_SECOND', 'SKT_ULTIMATE'].indexOf(skillKey)
-                                const burns = Object.values(skillWithBurn.burnEffect)
+                                const burns = getBurns(skillWithBurn).sort((a, b) => a.level - b.level)
 
                                 return (
                                     <div className="flex justify-center gap-6 items-center">
@@ -588,7 +601,7 @@ export default function CharacterDetailClient({
                                         <div className="flex flex-col items-center gap-2 relative w-16 h-16">
                                             <Image
                                                 src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
-                                                alt={skillWithBurn.name}
+                                                alt={getLocalizedSkillName(skillWithBurn, langKey)}
                                                 width={48} height={48} className="object-contain"
                                             />
                                             <Image
@@ -598,7 +611,7 @@ export default function CharacterDetailClient({
                                                 className="absolute top-0 left-0 w-5 h-5 z-10 pointer-events-none"
                                             />
                                             <span className="text-sm font-semibold text-white text-center mt-1">
-                                                {skillWithBurn.name}
+                                                {getLocalizedSkillName(skillWithBurn, langKey)}
                                             </span>
                                         </div>
 
@@ -630,6 +643,7 @@ export default function CharacterDetailClient({
                                     </div>
                                 )
                             })()}
+
                         </div>
                     </div>
 
