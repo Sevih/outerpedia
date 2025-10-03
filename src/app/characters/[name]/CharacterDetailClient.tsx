@@ -47,6 +47,14 @@ function UnitTypeBadge({ tags }: { tags?: string[] | string }) {
     return <TagDisplayMini tags={[picked]} />
 }
 
+type FullnameKey = Extract<keyof Character, `Fullname${'' | `_${string}`}`>
+function getLocalizedFullname(character: Character, langKey: TenantKey): string {
+  const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
+  const localized = character[key] // type: string | undefined
+  return localized ?? character.Fullname
+}
+
+
 function getRoleBadge(role?: string) {
     if (!role) return null
     const label: Record<string, string> = { dps: 'DPS', support: 'Support', sustain: 'Sustain' }
@@ -220,7 +228,8 @@ export default function CharacterDetailClient({
 
             <div className="max-w-6xl mx-auto p-6">
                 {/* Partie haute : illustration + infos principales */}
-                <CharacterNameDisplayBigNoH fullname={character.Fullname} />
+                <CharacterNameDisplayBigNoH fullname={getLocalizedFullname(character, langKey)} />
+               
                 <div className="grid grid-cols-1 md:grid-cols-[400px_1fr] gap-6">
                     {/* Illustration du personnage */}
                     <div className="relative rounded overflow-hidden shadow mt-10">
@@ -272,10 +281,6 @@ export default function CharacterDetailClient({
                         <div className="mt-2 p-2 bg-black/30 rounded">
                             <CharacterProfileDescription fullname={character.Fullname} lng={langKey} />
                         </div>
-
-                        <p className="text-gray-300 text-sm max-w-2xl mx-auto">
-                            {`${character.Fullname} is a ${character.Element} ${character.Class}. ${subclassInfo?.description || ''}`}
-                        </p>
 
                         {/* Statistiques + descriptions de classe + base stats */}
                         <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">

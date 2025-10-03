@@ -19,15 +19,15 @@ export default function BeginnerGuide() {
 
             <p>
                 At the start of the game, you can select one of the following 3★ characters:
-                <CharacterLinkCard name="Valentine" /> <CharacterLinkCard name="Rin" /> <CharacterLinkCard name="Noa" /> or <CharacterLinkCard name="Eternal" />.
+                <CharacterLinkCard name="Ame" /> <CharacterLinkCard name="Rin" /> <CharacterLinkCard name="Rey" /> or <CharacterLinkCard name="Vlada" />.
             </p>
 
             <p>
-                However, since <CharacterLinkCard name="Noa" /> and <CharacterLinkCard name="Eternal" /> are both given for free, we recommend the following:
+                We recommend the following:
             </p>
 
             <ul className="list-disc ml-6">
-                <li><CharacterLinkCard name="Valentine" /></li>
+                <li><CharacterLinkCard name="Ame" /></li>
                 <li>
                     <CharacterLinkCard name="Rin" />, only consider her if you already have <CharacterLinkCard name="Valentine" /> <CharacterLinkCard name="Tamara" /> or <CharacterLinkCard name="Skadi" />
                 </li>
@@ -169,6 +169,7 @@ export default function BeginnerGuide() {
             <div className="flex items-center gap-x-4">
                 <div className="flex flex-wrap items-start gap-2">
                     <CharacterInlineStacked name="Tamara" />
+                    <CharacterInlineStacked name="Valentine" deco={decoration} />
                     <CharacterInlineStacked name="Skadi" />
                 </div>
                 <p className="text-sm">Crit buffers</p>
@@ -219,6 +220,7 @@ export default function BeginnerGuide() {
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
                     <CharacterInlineStacked name="Astei" />
+                    <CharacterInlineStacked name="Liselotte" />                    
                 </div>
                 <p className="">Pure Healer</p>
             </div>
@@ -255,7 +257,7 @@ export default function BeginnerGuide() {
                 <p className="">Usable as DPS early on, but generally outscaled.</p>
             </div>
 
-            {/* Temporary DPS */}
+            {/* Niche usage */}
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
                     <CharacterInlineStacked name="Rhona" deco={decoration} />
@@ -272,7 +274,7 @@ export default function BeginnerGuide() {
                 </div>
                 <p className="">Niche usage</p>
             </div>
-
+            {/* Collection */}
             <div className="flex items-center gap-x-4 mt-4">
                 <div className="flex flex-wrap items-start gap-2">
                     <CharacterInlineStacked name="Francesca" deco={decoration} />

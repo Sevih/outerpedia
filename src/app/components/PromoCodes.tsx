@@ -87,7 +87,7 @@ export default function PromoCodes() {
                 </li>
                 <li>
                   <strong>For iOS devices:</strong> you can redeem it{' '}
-                  <Link href="https://outerplane.game.onstove.com/coupon?etype=1" className="underline text-cyan-400">
+                  <Link href="https://coupon.outerplane.vagames.co.kr:39009/coupon" className="underline text-cyan-400">
                     here
                   </Link>{' '}
                   and make sure to remember your{' '}

@@ -99,7 +99,7 @@ const sorted = [
     <div className="px-4 md:px-16 py-10 text-white">
       <h1 className="text-3xl font-bold mb-6">🎁 All Coupon Codes</h1>
     <p className="text-sm text-gray-300 max-w-4xl mt-2 text-center m-auto">
-  You can redeem Outerplane coupon codes directly in-game on <strong>Android</strong> by going to <strong>Settings &gt; Account &gt; Enter Coupon</strong>.<br /> If you&apos;re on <strong>iOS</strong>, use the official <Link href="https://outerplane.game.onstove.com/coupon?etype=1" className="underline text-cyan-400">coupon redemption page</Link> and make sure to have your <Link href="https://imgur.com/a/8gStkbJ" className="underline text-cyan-400">Member Info</Link> ready.
+  You can redeem Outerplane coupon codes directly in-game on <strong>Android</strong> by going to <strong>Settings &gt; Account &gt; Enter Coupon</strong>.<br /> If you&apos;re on <strong>iOS</strong>, use the official <Link href="https://coupon.outerplane.vagames.co.kr:39009/coupon" className="underline text-cyan-400">coupon redemption page</Link> and make sure to have your <Link href="https://imgur.com/a/8gStkbJ" className="underline text-cyan-400">Member Info</Link> ready.
 </p>
 
       <div className="bg-gray-900 rounded-xl p-6 divide-y divide-white/10">

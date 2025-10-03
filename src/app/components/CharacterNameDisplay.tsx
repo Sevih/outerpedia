@@ -11,6 +11,8 @@ const PREFIX_STYLES: Record<string, string> = {
   'Gnosis': 'text-xs',
   'Omega': 'text-xs',
   'Demiurge': 'text-[10px]',
+  '데미우르고스': 'text-[10px]',
+  'デミウルゴス': 'text-[10px]',
   'Monad': 'text-xs',
   "Holy Night's Blessing": 'text-[10px]',
   'Kitsune of Eternity': 'text-[10px]',
@@ -44,7 +46,11 @@ const NAME_STYLES: Record<string, string> = {
 const PREFIX_STYLES_BIG: Record<string, string> = {
   'Gnosis': 'text-[21px]',
   'Omega': 'text-[21px]',
+
   'Demiurge': 'text-[21px]',
+  '데미우르고스': 'text-[21px]',
+  'デミウルゴス': 'text-[21px]',
+  
   'Monad': 'text-[21px]',
   "Holy Night's Blessing": 'text-[21px]',
   'Kitsune of Eternity': 'text-[21px]',
