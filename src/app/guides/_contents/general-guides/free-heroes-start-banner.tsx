@@ -18,20 +18,9 @@ export default function BeginnerGuide() {
             <GuideHeading level={3}>Start Dash Banner</GuideHeading>
 
             <p>
-                At the start of the game, you can select one of the following 3★ characters:
+                At the start of the game, you can select one of the following 3★ characters. They’re all solid choices, so just pick the one you prefer :
                 <CharacterLinkCard name="Ame" /> <CharacterLinkCard name="Rin" /> <CharacterLinkCard name="Rey" /> or <CharacterLinkCard name="Vlada" />.
             </p>
-
-            <p>
-                We recommend the following:
-            </p>
-
-            <ul className="list-disc ml-6">
-                <li><CharacterLinkCard name="Ame" /></li>
-                <li>
-                    <CharacterLinkCard name="Rin" />, only consider her if you already have <CharacterLinkCard name="Valentine" /> <CharacterLinkCard name="Tamara" /> or <CharacterLinkCard name="Skadi" />
-                </li>
-            </ul>
 
             <GuideHeading level={3}>Free characters you&apos;ll unlock</GuideHeading>
             <GuideHeading level={4}>From <GuideIconInline name="New-User-Missions" /></GuideHeading>
