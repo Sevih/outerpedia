@@ -24,9 +24,9 @@ type CharacterDisplay = Pick<Character, 'ID' | 'Fullname' | 'Rarity' | 'Class' |
 type GroupedCharacters = Record<string, CharacterDisplay[]>
 type GroupedEquipments = Record<string, [string, Equipment][]>
 type WithLocalizedNames = {
-  Fullname: string
-  Fullname_jp?: string
-  Fullname_kr?: string
+    Fullname: string
+    Fullname_jp?: string
+    Fullname_kr?: string
 }
 
 const characterMap = Object.fromEntries(
@@ -41,42 +41,42 @@ function norm(s: string) {
 }
 
 function includesCI(haystack: string | undefined, needle: string) {
-  if (!haystack) return false
-  return norm(haystack).includes(norm(needle))
+    if (!haystack) return false
+    return norm(haystack).includes(norm(needle))
 }
 
 function matchesCharacterSearch(c: CharacterDisplay, term: string) {
-  if (!term) return true
-  const slug = toKebabCase(c.Fullname)
-  return (
-    includesCI(c.Fullname, term) ||
-    includesCI(c.Fullname_jp, term) ||
-    includesCI(c.Fullname_kr, term) ||
-    includesCI(slug, term)
-  )
+    if (!term) return true
+    const slug = toKebabCase(c.Fullname)
+    return (
+        includesCI(c.Fullname, term) ||
+        includesCI(c.Fullname_jp, term) ||
+        includesCI(c.Fullname_kr, term) ||
+        includesCI(slug, term)
+    )
 }
 
 
 // pour les EE
 function matchesEESearch(
-  term: string,
-  slug: string,
-  ee: Equipment,
-  char?: WithLocalizedNames
+    term: string,
+    slug: string,
+    ee: Equipment,
+    char?: WithLocalizedNames
 ) {
-  if (!term) return true
-  return (
-    includesCI(ee.name, term) ||
-    includesCI(slug, term) ||
-    (char && (
-      includesCI(char.Fullname, term) ||
-      includesCI(char.Fullname_jp, term) ||
-      includesCI(char.Fullname_kr, term) ||
-      includesCI(toKebabCase(char.Fullname), term)
-    ))
-    // Optionnel :
-    // || includesCI(ee.effect, term) || includesCI(ee.effect10, term)
-  )
+    if (!term) return true
+    return (
+        includesCI(ee.name, term) ||
+        includesCI(slug, term) ||
+        (char && (
+            includesCI(char.Fullname, term) ||
+            includesCI(char.Fullname_jp, term) ||
+            includesCI(char.Fullname_kr, term) ||
+            includesCI(toKebabCase(char.Fullname), term)
+        ))
+        // Optionnel :
+        // || includesCI(ee.effect, term) || includesCI(ee.effect10, term)
+    )
 }
 
 
@@ -149,6 +149,7 @@ function demoteOnce(rank: string): PveRank {
     const i = PVE_RANKS.indexOf((rank as PveRank) ?? 'E')
     return PVE_RANKS[Math.min(i < 0 ? PVE_RANKS.length - 1 : i + 1, PVE_RANKS.length - 1)]
 }
+
 
 type FullnameKey = Extract<keyof CharacterDisplay, `Fullname${'' | `_${string}`}`>
 function getLocalizedFullname(character: CharacterDisplay, langKey: TenantKey): string {
@@ -227,7 +228,8 @@ export default function TierListBase({ characters = [], equipments = {}, mode, l
         grouped = rankOrder.reduce<Record<string, CharacterDisplay[]>>((acc, rank) => {
             acc[rank] = current
                 .filter(c => {
-                    const base = (c[rankKey] as string) || 'E'
+                    const base = c[rankKey] as string | undefined
+                    if (!base) return false // on ignore ce perso
                     // En PvE, rétrograde d’un rang si 1★ ou 2★ ; sinon garde le rang
                     const effective =
                         mode === 'pve' && c.Rarity <= 2 ? demoteOnce(base) : (base as PveRank)
@@ -420,6 +422,7 @@ export default function TierListBase({ characters = [], equipments = {}, mode, l
                 >
                     {rankOrder.map(rank => {
                         const entries = grouped[rank]
+
                         if (!entries || entries.length === 0) return null
 
                         return (
