@@ -476,7 +476,8 @@
     "icon": "T_Chat_Emoticon_08",
     "last_updated": "2025-05-17",
     "author": "Arabyss/Birdmouth/Sevih/Shiraen",
-    "second_image": "T_Chat_Emoticon_05"
+    "second_image": "T_Chat_Emoticon_05",
+    "weight":1
   },
   "daily-stamina": {
     "category": "general-guides",
@@ -495,7 +496,8 @@
     "icon": "T_Chat_Emoticon_04",
     "last_updated": "2025-05-13",
     "author": "SADtherobot",
-    "second_image": "T_Chat_Emoticon_04"
+    "second_image": "T_Chat_Emoticon_04",
+    "weight":250
   },
   "banner-mileage": {
     "category": "general-guides",
@@ -504,7 +506,8 @@
     "icon": "myth",
     "last_updated": "2025-05-25",
     "author": "Sevih",
-    "second_image": "myth2"
+    "second_image": "myth2",
+    "weight":50
   },
   "S1-8-5": {
     "category": "adventure",
@@ -644,7 +647,8 @@
     "icon": "heroes-growth",
     "second_image": "heroes-growth-2",
     "last_updated": "2025-05-28",
-    "author": "Sevih"
+    "author": "Sevih",
+    "weight":400
   },
   "gear": {
     "category": "general-guides",
@@ -653,7 +657,8 @@
     "icon": "gear",
     "second_image": "gear-2",
     "last_updated": "2025-05-28",
-    "author": "Sevih"
+    "author": "Sevih",
+    "weight":450
   },
   "quirk": {
     "category": "general-guides",
@@ -663,7 +668,8 @@
     "second_image": "quirk-2",
     "last_updated": "2025-05-28",
     "author": "Kilvanoshei",
-    "hide": false
+    "hide": false,
+    "weight":500
   },
   "stats": {
     "category": "general-guides",
@@ -672,7 +678,8 @@
     "icon": "stats",
     "second_image": "stats",
     "last_updated": "2025-06-09",
-    "author": "Sevih / Shiraen"
+    "author": "Sevih / Shiraen",
+    "weight":550
   },
   "depth8-route1": {
     "category": "monad-gate",
@@ -741,7 +748,8 @@
     "icon": "timegate-resource",
     "second_image": "timegate-resource2",
     "last_updated": "2025-07-31",
-    "author": "Sevih / Shiraen"
+    "author": "Sevih / Shiraen",
+    "weight":350
   },
   "planetary-control-unit": {
     "category": "guild-raid",
@@ -758,7 +766,8 @@
     "icon": "shop-purchase-priorities",
     "second_image": "shop-purchase-priorities2",
     "last_updated": "2025-08-18",
-    "author": "Sevih / Shiraen"
+    "author": "Sevih / Shiraen",
+    "weight":300
   },
   "premium-limited": {
     "category": "general-guides",
@@ -767,7 +776,8 @@
     "icon": "premium-limited",
     "second_image": "premium-limited2",
     "last_updated": "2025-08-25",
-    "author": "Shiraen"
+    "author": "Shiraen",
+    "weight":100
   },
   "ether-income": {
     "category": "general-guides",
@@ -776,7 +786,8 @@
     "icon": "ether-income",
     "second_image": "ether-income2",
     "last_updated": "2024-09-09",
-    "author": "Birdmouth"
+    "author": "Birdmouth",
+    "weight":150
   },
   "S3-8-10": {
     "category": "adventure",
@@ -803,6 +814,7 @@
     "icon": "unlock-content",
     "last_updated": "2025-10-03",
     "author": "Sevih",
-    "second_image": "unlock-content"
+    "second_image": "unlock-content",
+    "weight":200
   }
 }

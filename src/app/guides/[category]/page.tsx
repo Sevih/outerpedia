@@ -32,6 +32,7 @@ type Guide = {
   last_updated: string
   author: string
   hide?: boolean
+  weight?: number
 }
 
 type CategoryMeta = {
@@ -105,6 +106,13 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
   const metaTitle = getLocalized(meta.title, langKey)
   const metaDesc = getLocalized(meta.description, langKey)
 
+  // helper pour normaliser le weight (undefined -> Infinity, string -> number, valeurs invalides -> Infinity)
+  const toWeight = (w: unknown) => {
+    if (typeof w === 'number' && Number.isFinite(w)) return w
+    const n = Number(w)
+    return Number.isFinite(n) ? n : Number.POSITIVE_INFINITY
+  }
+
   const isDev = process.env.NODE_ENV === 'development'
   const filtered = Object.entries(guides as Record<string, Guide>)
     .filter(([, g]) => g.category === category && (isDev || g.hide !== true))
@@ -116,17 +124,26 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
       category: g.category,
       last_updated: g.last_updated,
       author: g.author,
+      weight: toWeight((g as Guide).weight), // <= important pour le tri
     }))
 
   if (filtered.length === 0) {
     return <UnderConstruction />
   }
 
+  // Tri par défaut : weight ASC, puis last_updated DESC, puis title ASC
   filtered.sort((a, b) => {
+    if (a.weight !== b.weight) return a.weight - b.weight
     const dateDiff = new Date(b.last_updated).getTime() - new Date(a.last_updated).getTime()
     if (dateDiff !== 0) return dateDiff
-    return b.title.localeCompare(a.title) // Z → A
+    return a.title.localeCompare(b.title)
   })
+
+
+  if (filtered.length === 0) {
+    return <UnderConstruction />
+  }
+
 
   return (
     <div className="p-6">
