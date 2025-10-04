@@ -9,6 +9,7 @@ type GuideItem = {
   category: string;
   last_updated: string;
   author: string;
+  weight?: number
 };
 
 type Props = {
@@ -22,7 +23,7 @@ export default function GuideCardGrid({ items }: Props) {
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
     >
       {items.map(
-        ({ slug, title, description, icon, category, last_updated, author }) => (
+        ({ slug, title, description, icon, category, last_updated, author, weight }) => (
           <Link
             key={slug}
             href={`/guides/${category}/${slug}`}
@@ -30,6 +31,7 @@ export default function GuideCardGrid({ items }: Props) {
             data-title={title.toLowerCase()}
             data-author={author.toLowerCase()}
             data-date={new Date(last_updated).getTime()}
+            data-weight={weight ?? 9999}
           >
             <div className="flex items-start gap-4 mb-3">
               <Image
@@ -46,22 +48,22 @@ export default function GuideCardGrid({ items }: Props) {
               </div>
             </div>
             <div className="mt-auto text-sm text-neutral-400 flex flex-col sm:flex-row sm:justify-between sm:items-center pt-2 border-t border-neutral-700 gap-1">
-  <span className="flex items-start gap-1">
-    ✍️ <span className="overflow-wrap break-words">
-  {author.split('/').map((part, i) => (
-    <span key={i}>
-      {part}
-      {i < author.split('/').length - 1 && <span>/</span>}
-      <wbr />
-    </span>
-  ))}
-</span>
+              <span className="flex items-start gap-1">
+                ✍️ <span className="overflow-wrap break-words">
+                  {author.split('/').map((part, i) => (
+                    <span key={i}>
+                      {part}
+                      {i < author.split('/').length - 1 && <span>/</span>}
+                      <wbr />
+                    </span>
+                  ))}
+                </span>
 
-  </span>
-  <span className="flex items-center gap-1">
-    🕒 {new Date(last_updated).toLocaleDateString()}
-  </span>
-</div>
+              </span>
+              <span className="flex items-center gap-1">
+                🕒 {new Date(last_updated).toLocaleDateString()}
+              </span>
+            </div>
 
           </Link>
         )
