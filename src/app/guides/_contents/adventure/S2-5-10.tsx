@@ -23,7 +23,7 @@ export default function TyrantGuide() {
                 <li>Use 2 characters to handle <EffectInlineTag name="BT_STONE" type="debuff" /> mechanics with <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /> and <EffectInlineTag name="BT_IMMUNE" type="buff" /> .</li>
                 <li>If damage is a problem, try to bring a character that can prevent boss from taking buff <EffectInlineTag name="BT_SEALED" type="debuff" />.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Tio" /> <CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Faenan" /> <CharacterLinkCard name="Astei" /> <CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Monad Eva" />: choose any 2 for <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /></li>
                 <li><CharacterLinkCard name="Akari" /> : <EffectInlineTag name="BT_SEALED" type="debuff" /> and <EffectInlineTag name="BT_STAT|ST_ATK" type="debuff" /></li>

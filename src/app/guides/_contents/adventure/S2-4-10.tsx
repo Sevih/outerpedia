@@ -34,7 +34,7 @@ export default function TyrantGuide() {
                 <li>The boss has no immunities, so bring <EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" />.</li>
                 <li>Try to avoid using characters with non-offensive skills.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Demiurge Vlada" />, <CharacterLinkCard name="Sterope" />, <CharacterLinkCard name="Eternal" />: for <EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" /></li>
                 <li><CharacterLinkCard name="Monad Eva" />, <CharacterLinkCard name="Dianne" /> : can heal without using non-offensive skills</li>

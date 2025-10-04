@@ -21,7 +21,7 @@ export default function TyrantGuide() {
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>Use characters with <EffectInlineTag name="BT_IMMUNE" type="buff" />, <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" />.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Astei" />: for <EffectInlineTag name="BT_IMMUNE" type="buff" /></li>
             </ul>

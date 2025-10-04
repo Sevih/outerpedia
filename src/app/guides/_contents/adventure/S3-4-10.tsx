@@ -36,7 +36,7 @@ export default function TyrantGuide() {
                 <li>Bring <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" /> <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> to avoid getting <EffectInlineTag name="BT_AGGRO_IR" type="debuff" />.</li>
                 <li>Healers with healing on S1 can help if you end up getting <EffectInlineTag name="BT_AGGRO_IR" type="debuff" />.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Mero" />: for <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" /> and <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" />.</li>
                 <li><CharacterLinkCard name="Gnosis Beth" /> <CharacterLinkCard name="Ember" /> : for landing debuff while getting hit.</li>

@@ -24,7 +24,7 @@ export default function TyrantGuide() {
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>Use <ElementInlineTag element='fire' /> characters with either <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> or <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="debuff" />.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="K" /> : for <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="debuff" /></li>
                 <li><CharacterLinkCard name="Aer" /><CharacterLinkCard name="Kanon" /><CharacterLinkCard name="Lisha" /><CharacterLinkCard name="Mero" /> : for <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /></li>

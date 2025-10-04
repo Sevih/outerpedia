@@ -25,7 +25,7 @@ export default function TyrantGuide() {
                 <li>Use characters with <EffectInlineTag name="BT_IMMUNE" type="buff" />.</li>
                 <li>Use <EffectInlineTag name="BT_STAT|ST_ATK" type="debuff" /> to reduce <EffectInlineTag name="BT_DOT_BURN_IR" type="debuff" /> <EffectInlineTag name="BT_DOT_BURN" type="debuff" /> damage.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Astei" /> <CharacterLinkCard name="Nella" />: for <EffectInlineTag name="BT_IMMUNE" type="buff" /></li>
                 <li><CharacterLinkCard name="Akari" /> <CharacterLinkCard name="Laplace" /> : <EffectInlineTag name="BT_STAT|ST_ATK" type="debuff" /></li>

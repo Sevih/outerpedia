@@ -25,7 +25,7 @@ export default function TyrantGuide() {
                 <li>Save chains until the boss enrages.</li>
                 <li>You can try to burn it down with <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> chain attack.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Mene" />, <CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_RESURRECTION_G" type="buff" /></li>
                 <li><CharacterLinkCard name="Tamara" /> : got <EffectInlineTag name="BT_SILENCE" type="debuff" /> and <EffectInlineTag name="BT_COOL_CHARGE" type="debuff" /></li>

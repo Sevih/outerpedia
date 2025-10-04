@@ -22,7 +22,7 @@ export default function TyrantGuide() {
                 <li>Stack chain points before Enrage. This way, you can burst it down and skip the ultimate.</li>
                 <li>Bring <EffectInlineTag name="BT_IMMUNE" type="buff" /> and/or <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /> to negate the <EffectInlineTag name="BT_STUN" type="debuff" /> mechanic.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Astei" />, <CharacterLinkCard name="Dianne" />, <CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" /></li>
                 <li><CharacterLinkCard name="Saeran" />, <CharacterLinkCard name="Dianne" />, <CharacterLinkCard name="Tio" /> : for <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /></li>

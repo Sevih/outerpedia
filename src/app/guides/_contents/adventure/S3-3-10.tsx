@@ -32,7 +32,7 @@ export default function TyrantGuide() {
                 <li>Bring a hero with either <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> or <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> to remove <EffectInlineTag name="BT_STEALTHED" type="buff" />.</li>
                 <li><CharacterLinkCard name="Caren" /> is the MPV here since her S2 will still target Fatal while <EffectInlineTag name="BT_STEALTHED" type="buff" /></li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Kappa" /><CharacterLinkCard name="Regina" /> : for <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /></li>
                 <li><CharacterLinkCard name="Dahlia" /><CharacterLinkCard name="Demiurge Vlada" /><CharacterLinkCard name="Veronica" /><CharacterLinkCard name="Alice" /><CharacterLinkCard name="Gnosis Nella" /> : for AoE <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /></li>

@@ -24,7 +24,7 @@ export default function TyrantGuide() {
                 <li>Bring <EffectInlineTag name="BT_SEALED" type="debuff" /> to prevent the boss getting <EffectInlineTag name="BT_STAT|ST_BUFF_CHANCE" type="buff" />.</li>
                 <li>Bring <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /> to deal with <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> and <EffectInlineTag name="BT_FREEZE" type="debuff" />.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Demiurge Delta" /> <CharacterLinkCard name="Saeran" />: for <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" />.</li>
                 <li><CharacterLinkCard name="Akari" /> <CharacterLinkCard name="Luna" /> <CharacterLinkCard name="Gnosis Nella" /> <CharacterLinkCard name="Alice" /> : for <EffectInlineTag name="BT_SEALED" type="debuff" />.</li>

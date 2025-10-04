@@ -29,7 +29,7 @@ export default function TyrantGuide() {
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>Bring <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> to cunter <EffectInlineTag name="UNIQUE_REGINA_WORLD" type="buff" />.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Maxwell" /> <CharacterLinkCard name="Demiurge Astei" /> : <ElementInlineTag element='dark' /> DPS with high penetration.</li>
                 <li><CharacterLinkCard name="Charlotte" /> <CharacterLinkCard name="Skadi" /> <CharacterLinkCard name="Sterope" />: for <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" />.</li>

@@ -24,7 +24,7 @@ export default function TyrantGuide() {
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>Bring <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_STAT|ST_BUFF_RESIST" type="buff" /> to prevent <EffectInlineTag name="BT_DOT_POISON_IR" type="debuff" />.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Lyla" /> <CharacterLinkCard name="Demiurge Delta" /> <CharacterLinkCard name="Leo" />: for <EffectInlineTag name="BT_STAT|ST_BUFF_RESIST" type="buff" />.</li>
                 <li><CharacterLinkCard name="Dianne" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="IG_Buff_BuffdurationIncrease" type="buff" />.</li>

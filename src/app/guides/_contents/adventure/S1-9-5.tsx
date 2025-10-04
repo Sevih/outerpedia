@@ -30,7 +30,7 @@ export default function TyrantGuide() {
                 <li>Whichever the one you use, be sure that Leo isn&apost buffed when he is going for S3.</li>
                 <li><strong>S3</strong>: AoE, 50% chances to <EffectInlineTag name="BT_STUN" type="debuff" /> 1 turn.</li>
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Akari" />, <CharacterLinkCard name="Gnosis Nella" /> <CharacterLinkCard name="Luna" /> : for <EffectInlineTag name="BT_SEALED" type="debuff" /></li>
                 <li><CharacterLinkCard name="Caren" />, <CharacterLinkCard name="Poolside Trickster Regina" />, <CharacterLinkCard name="Stella" /> : for <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /></li>

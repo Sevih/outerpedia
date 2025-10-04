@@ -25,7 +25,7 @@ export default function TyrantGuide() {
                 <li>Also <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /> will be needed to get rid of <EffectInlineTag name="BT_STAT|ST_PIERCE_POWER_RATE" type="debuff" /> right when the boss is on the verge of breaking.</li>
                 
             </ul>
-            <GuideHeading level={4}>Recommanded Characters</GuideHeading>
+            <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Maxwell" /> <CharacterLinkCard name="Regina" /> <CharacterLinkCard name="Gnosis Beth" /> <CharacterLinkCard name="Demiurge Luna" /> <CharacterLinkCard name="Gnosis Dahlia" /> <CharacterLinkCard name="Demiurge Astei" /> <CharacterLinkCard name="Ame" />: as DPS unit.</li>
             </ul>
