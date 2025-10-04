@@ -31,7 +31,7 @@ export default function TyrantGuide() {
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Leo" /> <CharacterLinkCard name="Monad Eva" /> : for <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
                 <li><CharacterLinkCard name="Leo" /> <CharacterLinkCard name="Lyla" /> <CharacterLinkCard name="Demiurge Drakhan" /> <CharacterLinkCard name="Luna" /> <CharacterLinkCard name="Omega Nadja" /> <CharacterLinkCard name="Liselotte" />: for <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" />.</li>
-                <li><CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
+                <li><CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_RESURRECTION_G" type="buff" />.</li>
                 <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Astei" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" />.</li>
             </ul>
         </div>
