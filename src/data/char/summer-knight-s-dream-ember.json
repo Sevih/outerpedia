@@ -20,8 +20,8 @@
   "tags": [
     "seasonal"
   ],
-  "rank": null,
-  "rank_pvp": null,
+  "rank": "A",
+  "rank_pvp": "S",
   "Class": "Defender",
   "SubClass": "Sweeper",
   "transcend": {
