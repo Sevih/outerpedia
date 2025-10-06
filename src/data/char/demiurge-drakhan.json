@@ -106,7 +106,8 @@
       "buff": [
         "BT_SHIELD_BASED_CASTER",
         "BT_STAT|ST_PIERCE_POWER_RATE",
-        "BT_ADDITIVE_TURN"
+        "BT_ADDITIVE_TURN",
+        "UNIQUE_BT_SHARE_DMG_MULTI"
       ],
       "cd": "4",
       "debuff": [],

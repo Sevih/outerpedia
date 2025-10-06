@@ -69,7 +69,8 @@
     "UNIQUE_VENION_E": 67,
     "UNIQUE_VENION_F": 68,
     "UNIQUE_DAHLIA_A": 69,
-    "UNIQUE_DAHLIA_B": 70
+    "UNIQUE_DAHLIA_B": 70,
+    "UNIQUE_BT_SHARE_DMG_MULTI": 71
   },
   "debuffs": {
     "BT_REMOVE_BUFF": 1,
