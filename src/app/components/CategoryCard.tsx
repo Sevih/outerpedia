@@ -6,7 +6,7 @@ import type { TenantKey } from '@/tenants/config'
 
 type Props = { lang: TenantKey }
 
-type Localized = { en: string; jp?: string; kr?: string; fr?: string }
+type Localized = { en: string; jp?: string; kr?: string }
 
 function getLocalized(obj: Localized | string, lang: TenantKey): string {
   if (typeof obj === 'string') return obj

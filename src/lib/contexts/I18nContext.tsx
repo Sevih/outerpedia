@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useContext, useMemo, useState } from 'react'
 
-export type Lng = 'en' | 'fr' | 'jp' | 'kr'
+export type Lng = 'en' | 'jp' | 'kr'
 type Messages = Record<string, string>
 
 // ---- Types de t() avec surcharge : t(key) ou t(key, values) ----

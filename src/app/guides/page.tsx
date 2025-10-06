@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 // ---- Types & helpers
-type Localized = { en: string; jp?: string; kr?: string; fr?: string }
+type Localized = { en: string; jp?: string; kr?: string }
 type Category = {
   title: string | Localized
   description: string | Localized

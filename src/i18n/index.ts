@@ -1,6 +1,5 @@
 import type { TenantKey } from '@/tenants/config';
 import en from './locales/en';
-import fr from './locales/fr';
 import kr from './locales/kr';
 import jp from './locales/jp';
 
@@ -8,7 +7,6 @@ type Messages = Record<keyof typeof en, string>;
 
 const DICTS: Record<TenantKey, Messages> = {
   en: en as Messages,
-  fr: fr as Messages,
   kr: kr as Messages,
   jp: jp as Messages,
 };

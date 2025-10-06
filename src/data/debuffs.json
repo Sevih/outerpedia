@@ -20,6 +20,10 @@
     {
         "name": "BT_SEAL_COUNTER",
         "label": "Uncounterable",
+        "label_jp": "Uncounterable JP",
+        "label_kr": "Uncounterable KR",
+        "description_jp": "a",
+        "description_kr": "a",
         "description": "Negates enemy reactive strikes: Counterattack, Revenge, or Agile Response.",
         "icon": "IG_Buff_Seal_Counter"
     },

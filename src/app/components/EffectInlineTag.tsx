@@ -5,6 +5,7 @@ import Image from 'next/image'
 import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
 import type { CSSProperties } from 'react'
+import { useTenant } from '@/lib/contexts/TenantContext'
 
 type Props = {
   name: string
@@ -16,15 +17,31 @@ type Effect = {
   name: string
   type: 'buff' | 'debuff'
   label: string
-  icon: string
+  label_jp?: string
+  label_kr?: string
   description: string
+  description_jp?: string
+  description_kr?: string
+  icon: string
 }
 
 export default function EffectInlineTag({ name, type, triggerStyle }: Props) {
+  const { key } = useTenant()
+  const lang: 'en' | 'jp' | 'kr' = key === 'jp' ? 'jp' : key === 'kr' ? 'kr' : 'en'
   const effects: Effect[] = (type === 'buff' ? buffs : debuffs).map(e => ({ ...e, type }))
   const effect = effects.find((e) => e.name === name)
 
   if (!effect) return <span className="text-red-500">{name}</span>
+
+  const label =
+    lang === 'jp' ? (effect.label_jp ?? effect.label)
+      : lang === 'kr' ? (effect.label_kr ?? effect.label)
+        : effect.label
+
+  const description =
+    lang === 'jp' ? (effect.description_jp ?? effect.description)
+      : lang === 'kr' ? (effect.description_kr ?? effect.description)
+        : effect.description
 
   const iconPath = `/images/ui/effect/${effect.icon}.webp`
   const color = type === 'buff' ? 'text-sky-400' : 'text-red-400'
@@ -45,13 +62,13 @@ export default function EffectInlineTag({ name, type, triggerStyle }: Props) {
           <span className="inline-block w-[24px] h-[24px] relative">
             <Image
               src={iconPath}
-              alt={effect.label}
+              alt={label}
               fill
               sizes="24px"
               className={`object-contain ${imageClass}`}
             />
           </span>
-          <span className={`underline ${color}`}>{effect.label}</span>
+          <span className={`underline ${color}`}>{label}</span>
         </button>
       </HoverCard.Trigger>
 
@@ -64,16 +81,16 @@ export default function EffectInlineTag({ name, type, triggerStyle }: Props) {
           <div className="relative w-[28px] h-[28px] bg-black p-1 rounded shrink-0">
             <Image
               src={iconPath}
-              alt={effect.label}
+              alt={label}
               fill
               sizes="28px"
               className={`object-contain ${imageClass}`}
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-white text-sm leading-tight">{effect.label}</span>
+            <span className="font-bold text-white text-sm leading-tight">{label}</span>
             <span className="text-white text-xs leading-snug whitespace-pre-line">
-              {effect.description}
+              {description}
             </span>
           </div>
           <HoverCard.Arrow className={arrowFill} />

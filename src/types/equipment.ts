@@ -6,9 +6,15 @@ export type GearReference = {
 
 export type ExclusiveEquipment = {
   name: string;
+  name_jp?: string;
+  name_kr?: string;
   mainStat: string;
   effect: string;
   effect10?: string;
+  effect_jp?: string;
+  effect10_jp?: string;
+  effect_kr?: string;
+  effect10_kr?: string;
   icon_effect?: string;
   rank?: string;
   buff?: string[];   // Liste des buffs apportés par l'EE
@@ -39,7 +45,7 @@ export interface EquipmentBase {
   effect_desc1: string
   effect_desc4: string
   mainStats?: string[]
-  level:number
+  level: number
 }
 
 export type ArmorSet = {
@@ -99,7 +105,7 @@ export interface Accessory {
   source: string;
   boss: string | null;
   mode?: string | null;
-  level:number;
+  level: number;
 }
 
 export interface Weapon {
@@ -115,7 +121,7 @@ export interface Weapon {
   source: string;
   boss: string | null;
   mode?: string | null;
-  level:number;
+  level: number;
 }
 
 export type WeaponMini = EquipmentBase

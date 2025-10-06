@@ -27,7 +27,7 @@ export const viewport: Viewport = { themeColor: '#081b1f' }
 
 /** SEO global dynamique selon le tenant (subdomaine) */
 export async function generateMetadata(): Promise<Metadata> {
-  const { domain, key } = await getTenantServer() // p.ex. { domain: 'fr.outerpedia.com', key: 'fr' }
+  const { domain, key } = await getTenantServer()
   const siteUrl = `https://${domain}`
 
   const title = TITLES[key] ?? TITLES.en
@@ -77,7 +77,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const tenant = await getTenantServer() // { key, domain }
-  const langKey = tenant.key // 'en' | 'fr' | 'jp' | 'kr'
+  const langKey = tenant.key // 'en' | 'jp' | 'kr'
 
   // charge le dictionnaire sérialisable pour I18nProvider
   const messages = (await import(`@/i18n/locales/${langKey}.ts`)).default ?? {}

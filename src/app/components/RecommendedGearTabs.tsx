@@ -11,6 +11,7 @@ import rawStats from '@/data/stats.json' assert { type: 'json' }
 import SetVisual from "./SetVisual"
 import MiniTalismanCard from "@/app/components/MiniTalismanCard"
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
+import { useI18n } from '@/lib/contexts/I18nContext'
 
 
 const stats = rawStats as Record<string, { label: string; icon: string }>
@@ -44,18 +45,26 @@ function parseSubstatPrio(str: string): SubstatPriority[] {
   return result
 }
 
-function SubstatPriorityBar({ priorities }: { priorities: SubstatPriority[] }) {
+function SubstatPriorityBar({
+  priorities,
+  title,
+  iconAlt,
+}: {
+  priorities: SubstatPriority[]
+  title: string
+  iconAlt: string
+}) {
   return (
     <div className="flex flex-col items-center gap-4 mt-6">
       <p className="text-white font-semibold text-base flex items-center gap-2">
         <Image
           src="/images/ui/stats.webp"
-          alt="Substat icon"
+          alt={iconAlt}
           width={32}
           height={32}
           style={{ width: 32, height: 32 }}
         />
-        Substat Priority
+        {title}
       </p>
       <div className="flex flex-col gap-4 w-full max-w-md">
         {priorities.map((stat, i) => (
@@ -129,6 +138,7 @@ export default function RecommendedGearTabs({
   amulets: EquipmentBase[]
   talismans: Talisman[]
 }) {
+  const { t } = useI18n()
   const buildNames = Object.keys(character.builds)
   const [gearTab, setGearTab] = useState(buildNames[0])
 
@@ -145,7 +155,7 @@ export default function RecommendedGearTabs({
 
   return (
     <div className="mt-6">
-      <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Build and Gear</h2>
+      <h2 className="text-2xl font-bold text-white mb-4 text-center">{t('recommended_build_and_gear')}</h2>
 
       <div className="flex justify-center mb-6">
         <AnimatedTabs
@@ -153,7 +163,7 @@ export default function RecommendedGearTabs({
           selected={gearTab}
           onSelect={setGearTab}
           pillColor="#06b6d4" // cyan-500
-          
+
         />
       </div>
 
@@ -168,19 +178,19 @@ export default function RecommendedGearTabs({
         >
           <div className="flex flex-col md:flex-row justify-center gap-10 text-center">
             <div className="flex flex-col items-center gap-2">
-              <h3 className="text-lg font-semibold text-white mb-1">Weapons</h3>
+              <h3 className="text-lg font-semibold text-white mb-1">{t('weapons')}</h3>
               {recommendedWeapons.map((weapon, idx) => (
                 <WeaponMiniCard key={`weapon-${gearTab}-${idx}`} weapon={weapon} />
               ))}
             </div>
             <div className="flex flex-col items-center gap-2">
-              <h3 className="text-lg font-semibold text-white mb-1">Accessories</h3>
+              <h3 className="text-lg font-semibold text-white mb-1">{t('accessories')}</h3>
               {recommendedAmulets.map((amulet, idx) => (
                 <AccessoryMiniCard key={`amulet-${gearTab}-${idx}`} amulet={amulet} />
               ))}
             </div>
             <div className="flex flex-col items-center">
-              <h3 className="text-lg font-semibold text-white mb-1">Sets</h3>
+              <h3 className="text-lg font-semibold text-white mb-1">{t('sets')}</h3>
               <div className="flex flex-wrap justify-center gap-4">
                 {gear?.Set?.map((combo, comboIdx) => {
                   if (combo.length === 1 && combo[0].count === 4) {
@@ -238,13 +248,17 @@ export default function RecommendedGearTabs({
             <div className="flex flex-col md:flex-row justify-center gap-8 mt-6 items-start w-full max-w-4xl mx-auto">
               {gear?.SubstatPrio && (
                 <div className="flex-1 flex justify-center">
-                  <SubstatPriorityBar priorities={parseSubstatPrio(gear.SubstatPrio)} />
+                  <SubstatPriorityBar
+                    priorities={parseSubstatPrio(gear.SubstatPrio)}
+                    title={t('substat_priority')}
+                    iconAlt={t('substat_icon_alt')}
+                  />
                 </div>
               )}
               <div className="flex-1 flex flex-col gap-4 items-center">
                 <div className="flex-1 flex flex-col gap-4 items-center">
                   <div className="w-full">
-                    <h4 className="text-sm text-white font-bold mb-1 text-center">Talisman</h4>
+                    <h4 className="text-sm text-white font-bold mb-1 text-center">{t('talisman')}</h4>
                     <div className="w-full rounded-lg p-4 flex flex-wrap justify-center gap-3 overflow-visible">
                       {recommendedTalismans.length > 0 ? (
                         recommendedTalismans.map((talisman, idx) => (
@@ -252,7 +266,7 @@ export default function RecommendedGearTabs({
                         ))
                       ) : (
                         <div className="w-full max-w-[220px] min-h-[130px] flex items-center justify-center text-gray-400 italic">
-                          No talisman recommended
+                          {t('no_talisman_recommended')}
                         </div>
                       )}
                     </div>
@@ -266,14 +280,14 @@ export default function RecommendedGearTabs({
                       <div className="relative w-[20px] h-[20px]">
                         <Image
                           src="/images/ui/nav/TI_Item_Growth_Book_01.webp"
-                          alt="Note icon"
+                          alt={t('note_icon_alt')}
                           fill
                           className="object-contain"
                           sizes="20px"
                         />
                       </div>
                       <p className="font-bold">
-                        Notes
+                        {t('notes')}
                       </p>
                     </div>
 

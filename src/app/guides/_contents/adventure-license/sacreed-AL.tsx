@@ -50,9 +50,9 @@ export default function SacreedGuardianGuide() {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
         <p className="text-neutral-400 text-sm italic mt-2">
-          Run provided by <span className="text-white font-semibold">XuRenChao</span> (08/07/2025)
+          Run provided by <span className="text-white font-semibold">XuRenChao</span> (06/10/2025)
         </p>
-        <YoutubeEmbed videoId="5i9U0aBtqyo" title="Sacreed Guardian - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
+        <YoutubeEmbed videoId="1ui7TcwD7po" title="Sacreed Guardian - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
       </div>
     </div>
   )

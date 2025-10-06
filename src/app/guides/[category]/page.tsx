@@ -20,7 +20,7 @@ export const revalidate = 0
 
 
 
-type Localized = { en: string; jp?: string; kr?: string; fr?: string }
+type Localized = { en: string; jp?: string; kr?: string }
 const getLocalized = (v: Localized | string, lang: TenantKey) =>
   typeof v === 'string' ? v : (v[lang] ?? v.en)
 
@@ -62,17 +62,28 @@ export async function generateMetadata({ params }: { params: Promise<Props['para
   const metaTitle = getLocalized(meta.title, langKey)
   const metaDesc = getLocalized(meta.description, langKey)
   const base = `https://${domain}`
-  const iconUrl = `${base}${meta.icon}.png` // ex: /images/guides/CM_...
+  const iconUrl = `${base}${meta.icon}.png` //
+
+  // ✅ canonical toujours sur le domaine EN
+  const canonical = `https://outerpedia.com/guides/${category}`
+  const languages: Record<string, string> = {
+    en: `https://outerpedia.com/guides/${category}`,
+    jp: `https://jp.outerpedia.com/guides/${category}`,
+    kr: `https://kr.outerpedia.com/guides/${category}`,
+  }
 
   const metadata: Metadata = {
     title: `${metaTitle} | Outerpedia`,
     keywords: generateKeywords(category, metaTitle, langKey),
     description: metaDesc,
-    alternates: { canonical: `${base}/guides/${category}` },
+    alternates: {
+      canonical,
+      languages,
+    },
     openGraph: {
       title: `${metaTitle} | Outerpedia`,
       description: metaDesc,
-      url: `${base}/guides/${category}`,
+      url: canonical,
       type: 'website',
       images: [
         {

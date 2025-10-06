@@ -1,16 +1,22 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
 
+type Lang = 'en' | 'jp' | 'kr';
+
 type Props = {
-  transcendData: Record<string, string | null>;
+  transcendData: Record<string, string | null>; // déjà localisé côté data
+  lang: Lang;                                   // EN/JP/KR uniquement
 };
 
-type Step = {
-  label: string;
-  key: string;
-};
+type LevelId =
+  | '1' | '2' | '3'
+  | '4' | '4_1' | '4_2'
+  | '5' | '5_1' | '5_2' | '5_3'
+  | '6';
+
+type Step = { label: string; key: LevelId };
 
 const starIcons = {
   gray: "/images/ui/CM_icon_star_w.webp",
@@ -18,38 +24,74 @@ const starIcons = {
   orange: "/images/ui/CM_icon_star_o.webp",
   red: "/images/ui/CM_icon_star_r.webp",
   purple: "/images/ui/CM_icon_star_v.webp",
+} as const;
+
+/** Labels de niveaux par langue */
+const LEVEL_LABELS: Record<Lang, Record<LevelId, string>> = {
+  en: { '1': 'Lv 1', '2': 'Lv 2', '3': 'Lv 3', '4': 'Lv 4', '4_1': 'Lv 4', '4_2': 'Lv 4+', '5': 'Lv 5', '5_1': 'Lv 5', '5_2': 'Lv 5+', '5_3': 'Lv 5++', '6': 'Lv 6' },
+  jp: { '1': 'レベル1', '2': 'レベル2', '3': 'レベル3', '4': 'レベル4', '4_1': 'レベル4', '4_2': 'レベル4+', '5': 'レベル5', '5_1': 'レベル5', '5_2': 'レベル5+', '5_3': 'レベル5++', '6': 'レベル6' },
+  kr: { '1': '레벨 1', '2': '레벨 2', '3': '레벨 3', '4': '레벨 4', '4_1': '레벨 4', '4_2': '레벨 4+', '5': '레벨 5', '5_1': '레벨 5', '5_2': '레벨 5+', '5_3': '레벨 5++', '6': '레벨 6' },
 };
 
-const replaceablePatterns: RegExp[] = [
+/** Règles regex par langue (exemple) */
+const REPLACEABLE_PATTERNS: Record<Lang, RegExp[]> = {
+  en: [],
+  jp: [],
+  kr: [],
+};
 
-];
+const CUMULABLE_PATTERNS: Record<Lang, RegExp[]> = {
+  en: [],
+  jp: [],
+  kr: [],
+};
 
-const cumulablePatterns: RegExp[] = [
+const MERGEABLE_PATTERNS: Record<Lang, { regex: RegExp; prefix: string; suffix: string }[]> = {
+  en: [
+    {
+      regex: /^Reduces efficiency of Priority increase effects of the enemy by (\d+)%$/,
+      prefix: "Reduces efficiency of Priority increase effects of the enemy by ",
+      suffix: "%",
+    },
+  ],
+  jp: [
+    {
+      regex: /^敵の行動ゲージUPの効率(\d+)%DOWN$/,
+      prefix: "敵の行動ゲージUPの効率",
+      suffix: "%DOWN",
+    }
+  ],
+  kr: [
+    {
+      regex: /^적의 행동 게이지 증가 효율 (\d+)% 감소$/,
+      prefix: "적의 행동 게이지 증가 효율 ",
+      suffix: "% 감소",
+    }
+  ],
+};
 
-];
+/** Génère les 6 étoiles en fonction du levelKey, incluant les variantes colorées (+/++) */
+function starRowFor(levelKey: LevelId): string[] {
+  const g = starIcons.gray, y = starIcons.yellow, o = starIcons.orange, r = starIcons.red, p = starIcons.purple;
 
-const mergeablePatterns: { regex: RegExp; prefix: string; suffix: string }[] = [
-  {
-    regex: /^Reduces efficiency of Priority increase effects of the enemy by (\d+)%$/,
-    prefix: "Reduces efficiency of Priority increase effects of the enemy by ",
-    suffix: "%",
-  },
-];
-
-function TranscendenceStars({ levelLabel }: { levelLabel: string }) {
-  const stars: string[] = [];
-  switch (levelLabel) {
-    case "Lv 1": stars.push(...Array(1).fill(starIcons.yellow), ...Array(5).fill(starIcons.gray)); break;
-    case "Lv 2": stars.push(...Array(2).fill(starIcons.yellow), ...Array(4).fill(starIcons.gray)); break;
-    case "Lv 3": stars.push(...Array(3).fill(starIcons.yellow), ...Array(3).fill(starIcons.gray)); break;
-    case "Lv 4": stars.push(...Array(4).fill(starIcons.yellow), ...Array(2).fill(starIcons.gray)); break;
-    case "Lv 4+": stars.push(...Array(3).fill(starIcons.yellow), starIcons.orange, ...Array(2).fill(starIcons.gray)); break;
-    case "Lv 5": stars.push(...Array(5).fill(starIcons.yellow), starIcons.gray); break;
-    case "Lv 5+": stars.push(...Array(4).fill(starIcons.yellow), starIcons.red, starIcons.gray); break;
-    case "Lv 5++": stars.push(...Array(4).fill(starIcons.yellow), starIcons.purple, starIcons.gray); break;
-    case "Lv 6": stars.push(...Array(6).fill(starIcons.yellow)); break;
-    default: stars.push(...Array(6).fill(starIcons.gray)); break;
+  switch (levelKey) {
+    case '1': return [y, g, g, g, g, g];
+    case '2': return [y, y, g, g, g, g];
+    case '3': return [y, y, y, g, g, g];
+    case '4': return [y, y, y, y, g, g];
+    case '4_1': return [y, y, y, y, g, g];                 // même rendu que 4
+    case '4_2': return [y, y, y, o, g, g];                  // 4+
+    case '5': return [y, y, y, y, y, g];
+    case '5_1': return [y, y, y, y, y, g];                  // même rendu que 5
+    case '5_2': return [y, y, y, y, r, g];                  // 5+
+    case '5_3': return [y, y, y, y, p, g];                  // 5++
+    case '6': return [y, y, y, y, y, y];
+    default: return [g, g, g, g, g, g];
   }
+}
+
+function TranscendenceStars({ levelKey }: { levelKey: LevelId }) {
+  const stars = starRowFor(levelKey);
   return (
     <div className="flex gap-[1px]">
       {stars.map((src, idx) => (
@@ -59,27 +101,21 @@ function TranscendenceStars({ levelLabel }: { levelLabel: string }) {
   );
 }
 
-export default function TranscendenceSlider({ transcendData }: Props) {
-  const steps = useMemo(() => {
-    const s: Step[] = [];
-    if (transcendData["1"]) s.push({ label: "Lv 1", key: "1" });
-    if (transcendData["2"]) s.push({ label: "Lv 2", key: "2" });
-    if (transcendData["3"]) s.push({ label: "Lv 3", key: "3" });
-    if (transcendData["4"]) s.push({ label: "Lv 4", key: "4" });
-    if (transcendData["4_1"]) s.push({ label: "Lv 4", key: "4_1" });
-    if (transcendData["4_2"]) s.push({ label: "Lv 4+", key: "4_2" });
-    if (transcendData["5"]) s.push({ label: "Lv 5", key: "5" });
-    if (transcendData["5_1"]) s.push({ label: "Lv 5", key: "5_1" });
-    if (transcendData["5_2"]) s.push({ label: "Lv 5+", key: "5_2" });
-    if (transcendData["5_3"]) s.push({ label: "Lv 5++", key: "5_3" });
-    if (transcendData["6"]) s.push({ label: "Lv 6", key: "6" });
-    return s;
-  }, [transcendData]);
+export default function TranscendenceSlider({ transcendData, lang }: Props) {
+  /** Construit la liste des steps à partir des clés présentes (logic IDs) */
+  const steps = useMemo<Step[]>(() => {
+    const order: LevelId[] = ['1', '2', '3', '4', '4_1', '4_2', '5', '5_1', '5_2', '5_3', '6'];
+    return order
+      .filter((k) => transcendData[k] != null)
+      .map((k) => ({ key: k, label: LEVEL_LABELS[lang][k] }));
+  }, [transcendData, lang]);
 
   const [index, setIndex] = useState(0);
-  const currentLabel = steps[index]?.label ?? "";
+  const currentKey = steps[index]?.key as LevelId | undefined;
 
   const activeBonuses = useMemo(() => {
+    if (!steps.length) return [] as string[];
+
     let lastAtkDefHpLine: string | null = null;
     const bonusMap: Record<string, number> = {};
     const uniqueEffects: Map<string, string> = new Map();
@@ -88,117 +124,140 @@ export default function TranscendenceSlider({ transcendData }: Props) {
     for (let i = 0; i <= index; i++) {
       const raw = transcendData[steps[i].key];
       if (!raw) continue;
-      const lines = raw.split("\n");
+
+      const lines = raw.split('\n');
       for (const line of lines) {
         const trimmed = line.trim();
-        if (/^ATK DEF HP \+\d+%$/.test(trimmed)) {
-          lastAtkDefHpLine = trimmed;
+
+        // EN seulement pour triple stat
+        const mStats = trimmed.match(/^(?:ATK|Atk)\s+(?:DEF|Def)\s+(?:HP|Hp)\s*\+(\d+)%$/);
+        if (mStats) {
+          lastAtkDefHpLine = `ATK DEF HP +${mStats[1]}%`;
           continue;
         }
-        const matchFlat = trimmed.match(/^\+(\d+) (.+)$/);
+
+
+        // +X flat
+        const matchFlat = trimmed.match(/^\+(\d+)\s+(.+)$/);
         if (matchFlat) {
-          const amount = parseInt(matchFlat[1]);
+          const amount = parseInt(matchFlat[1], 10);
           const label = matchFlat[2];
           bonusMap[`flat|${label}`] = (bonusMap[`flat|${label}`] || 0) + amount;
           continue;
         }
 
-
-        const match = trimmed.match(/^\+(\d+)% (.+)$/);
-        if (match) {
-          const amount = parseInt(match[1]);
-          const label = match[2];
+        // +X% percent
+        const matchPct = trimmed.match(/^\+(\d+)%\s+(.+)$/);
+        if (matchPct) {
+          const amount = parseInt(matchPct[1], 10);
+          const label = matchPct[2];
           bonusMap[label] = (bonusMap[label] || 0) + amount;
           continue;
         }
 
-
-
-
         let handled = false;
 
-        for (const regex of replaceablePatterns) {
-          if (regex.test(trimmed)) {
-            uniqueEffects.set(regex.source, trimmed);
+        for (const rx of REPLACEABLE_PATTERNS[lang] ?? []) {
+          if (rx.test(trimmed)) {
+            uniqueEffects.set(rx.source, trimmed);
             handled = true;
             break;
           }
         }
-
         if (handled) continue;
 
-        for (const { regex, prefix, suffix } of mergeablePatterns) {
-          const match = trimmed.match(regex);
-          if (match) {
-            const value = parseInt(match[1]);
+        for (const { regex, prefix, suffix } of MERGEABLE_PATTERNS[lang] ?? []) {
+          const m = trimmed.match(regex);
+          if (m) {
+            const value = parseInt(m[1], 10);
             const key = `${prefix}|${suffix}`;
             bonusMap[key] = (bonusMap[key] || 0) + value;
             handled = true;
             break;
           }
         }
-
         if (handled) continue;
 
-        for (const regex of cumulablePatterns) {
-          if (regex.test(trimmed)) {
+        for (const rx of CUMULABLE_PATTERNS[lang] ?? []) {
+          if (rx.test(trimmed)) {
             otherBonuses.add(trimmed);
             handled = true;
             break;
           }
         }
+        if (handled) continue;
 
-        if (!handled) otherBonuses.add(trimmed);
+        otherBonuses.add(trimmed);
       }
     }
 
-    if (["Lv 5", "Lv 5+", "Lv 5++", "Lv 6"].includes(currentLabel)) {
-      otherBonuses.add("Burst Lv3");
-    } else if (["Lv 3", "Lv 4", "Lv 4+"].includes(currentLabel)) {
-      otherBonuses.add("Burst Lv2");
-    }
+    // Burst already included in JSON — no extra line added here
 
     const result: string[] = [];
     if (lastAtkDefHpLine) result.push(lastAtkDefHpLine);
+
     for (const [label, value] of Object.entries(bonusMap)) {
-      if (label.startsWith("flat|")) {
-        result.push(`+${value} ${label.replace("flat|", "")}`);
-      } else if (label.includes("|")) {
-        const [prefix, suffix] = label.split("|");
+      if (label.startsWith('flat|')) {
+        result.push(`+${value} ${label.slice(5)}`);
+      } else if (label.includes('|')) {
+        const [prefix, suffix] = label.split('|');
         result.push(`${prefix}${value}${suffix}`);
       } else {
         result.push(`+${value}% ${label}`);
       }
+    }
 
-    }
-    for (const effect of uniqueEffects.values()) {
-      result.push(effect);
-    }
-    for (const effect of otherBonuses) {
-      result.push(effect);
-    }
+    for (const v of uniqueEffects.values()) result.push(v);
+    for (const v of otherBonuses) result.push(v);
 
     return result;
-  }, [index, transcendData, steps, currentLabel]);
+  }, [index, steps, transcendData, lang]);
 
-  if (steps.length === 0) return null;
+
+  if (!steps.length || !currentKey) return null;
 
   return (
     <div className="bg-[#1a1c28] border border-gray-700 p-4 space-y-3 text-white max-w-[400px] w-full">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 flex-grow max-w-[260px]">
-          <button onClick={() => setIndex((prev) => Math.max(prev - 1, 0))} className="text-sm bg-gray-700 hover:bg-gray-600 text-white w-6 h-6 flex items-center justify-center rounded">–</button>
-          <div className="relative flex-grow max-w-[260px] h-2 bg-gray-700 rounded-full overflow-hidden">
-            <div className="absolute top-0 left-0 h-full bg-yellow-500 transition-all duration-300" style={{ width: `${(index / (steps.length - 1)) * 100}%` }} />
-            <input type="range" min={0} max={steps.length - 1} value={index} onChange={(e) => setIndex(Number(e.target.value))} className="w-full h-2 opacity-0 cursor-pointer absolute top-0 left-0" />
-          </div>
-          <button onClick={() => setIndex((prev) => Math.min(prev + 1, steps.length - 1))} className="text-sm bg-gray-700 hover:bg-gray-600 text-white w-6 h-6 flex items-center justify-center rounded">+</button>
-        </div>
-        <TranscendenceStars levelLabel={currentLabel} />
-      </div>
+          <button
+            onClick={() => setIndex((p) => Math.max(p - 1, 0))}
+            className="text-sm bg-gray-700 hover:bg-gray-600 text-white w-6 h-6 flex items-center justify-center rounded"
+            aria-label="Previous"
+          >
+            –
+          </button>
 
+          <div className="relative flex-grow max-w-[260px] h-2 bg-gray-700 rounded-full overflow-hidden">
+            <div
+              className="absolute top-0 left-0 h-full bg-yellow-500 transition-all duration-300"
+              style={{ width: `${(index / (steps.length - 1)) * 100}%` }}
+            />
+            <input
+              type="range"
+              min={0}
+              max={steps.length - 1}
+              value={index}
+              onChange={(e) => setIndex(Number(e.target.value))}
+              className="w-full h-2 opacity-0 cursor-pointer absolute top-0 left-0"
+              aria-label="Transcendence level"
+            />
+          </div>
+
+          <button
+            onClick={() => setIndex((p) => Math.min(p + 1, steps.length - 1))}
+            className="text-sm bg-gray-700 hover:bg-gray-600 text-white w-6 h-6 flex items-center justify-center rounded"
+            aria-label="Next"
+          >
+            +
+          </button>
+        </div>
+
+        <TranscendenceStars levelKey={currentKey} />
+      </div>
       <div className="space-y-1.5">
         {activeBonuses.map((bonus, idx) => {
+          // rendu spécial “ATK DEF HP +X%” (EN)
           const match = bonus.match(/^ATK DEF HP \+(\d+)%$/);
           if (match) {
             const value = match[1];
@@ -212,7 +271,9 @@ export default function TranscendenceSlider({ transcendData }: Props) {
             );
           }
           return (
-            <div key={idx} className="text-xs text-white whitespace-pre-line leading-tight">{bonus}</div>
+            <div key={idx} className="text-xs text-white whitespace-pre-line leading-tight">
+              {bonus}
+            </div>
           );
         })}
       </div>

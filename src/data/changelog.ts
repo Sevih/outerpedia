@@ -2,7 +2,7 @@ import type { TenantKey } from '@/tenants/config'
 
 
 // --- types/helpers localisation (comme montré précédemment) ---
-type LString = string | { en: string; fr?: string; jp?: string; kr?: string };
+type LString = string | { en: string; jp?: string; kr?: string };
 const resolveL = (s: LString, key: TenantKey) =>
   typeof s === 'string' ? s : (s[key] ?? s.en);
 const toLines = (v: string | string[]) =>
@@ -28,7 +28,6 @@ export const oldChangelog = [
     date: "2025-10-01",
     title: {
       en: "New Hero Summer Knight’s Dream Ember",
-      fr: "Nouveau héros Summer Knight’s Dream Ember",
       jp: "新ヒーロー Summer Knight’s Dream Ember",
       kr: "신규 영웅 Summer Knight’s Dream Ember",
     } as LString,
@@ -36,19 +35,16 @@ export const oldChangelog = [
     content: [
       {
         en: "- The seasonal Limited Hero **Summer Knight’s Dream Ember** has arrived in OUTERPLANE!",
-        fr: "- Le héros saisonnier **Summer Knight’s Dream Ember** est arrivé dans OUTERPLANE !",
         jp: "- 季節限定ヒーロー **Summer Knight’s Dream Ember** がOUTERPLANEに登場！",
         kr: "- 시즌 한정 영웅 **Summer Knight’s Dream Ember** 가 OUTERPLANE에 등장했습니다!",
       } as LString,
       {
         en: "- She inflicts **fixed damage on bosses** and grants **Penetration** and **Priority** buffs to her allies.",
-        fr: "- Elle inflige des **dégâts fixes aux boss** et octroie les buffs **Pénétration** et **Priorité** à ses alliés.",
         jp: "- ボスに**固定ダメージ**を与え、味方に**貫通**と**優先権**バフを付与します。",
         kr: "- 보스에게 **고정 피해**를 입히고 아군에게 **관통** 및 **우선권** 버프를 부여합니다.",
       } as LString,
       {
         en: "- Learn More [here](/characters/summer-knight-s-dream-ember)",
-        fr: "- En savoir plus [ici](/characters/summer-knight-s-dream-ember)",
         jp: "- 詳細は[こちら](/characters/summer-knight-s-dream-ember)",
         kr: "- 자세히 보기 [여기](/characters/summer-knight-s-dream-ember)",
       } as LString,
@@ -58,27 +54,23 @@ export const oldChangelog = [
     date: "2025-09-30",
     title: {
       en: "Multilingual support (WIP)",
-      fr: "Support multilingue (en cours)",
       jp: "多言語対応（進行中）",
       kr: "다국어 지원(진행 중)",
     } as LString,
     type: "update",
     content: [
       {
-        en: "- Started implementing multi-language support. A **Language** selector is now available in the header and keeps your current page when switching (en/fr/jp/kr).",
-        fr: "- Début de l’implémentation multilingue. Un **sélecteur de langue** est maintenant disponible dans l’en-tête et conserve la page courante lors du changement (en/fr/jp/kr).",
-        jp: "- 多言語対応の実装を開始しました。ヘッダーに**言語**セレクターを追加し、切り替えても現在のページを維持します（en/fr/jp/kr）。",
-        kr: "- 다국어 지원 구현을 시작했습니다. 헤더에 **언어** 선택기가 추가되었고 전환 시 현재 페이지를 유지합니다(en/fr/jp/kr).",
+        en: "- Started implementing multi-language support. A **Language** selector is now available in the header and keeps your current page when switching (en/jp/kr).",
+        jp: "- 多言語対応の実装を開始しました。ヘッダーに**言語**セレクターを追加し、切り替えても現在のページを維持します（en/jp/kr）。",
+        kr: "- 다국어 지원 구현을 시작했습니다. 헤더에 **언어** 선택기가 추가되었고 전환 시 현재 페이지를 유지합니다(en/jp/kr).",
       } as LString,
       {
         en: "- Initial localization is live for homepage SEO and the changelog. More pages will roll out progressively.",
-        fr: "- La première localisation est en ligne pour le SEO de la page d’accueil et le changelog. D’autres pages arriveront progressivement.",
         jp: "- まずはホームページのSEOと変更履歴でローカライズを公開しました。ほかのページも順次対応します。",
         kr: "- 첫 로컬라이제이션은 홈페이지 SEO와 변경 로그에 적용되었습니다. 다른 페이지도 순차적으로 적용됩니다.",
       } as LString,
       {
         en: "- Work in progress. Please report issues on Discord.",
-        fr: "- Travail en cours : certains textes restent en anglais. Merci de signaler les problèmes sur Discord.",
         jp: "- 作業中のため、一部のテキストは英語のままです。問題があればDiscordでお知らせください。",
         kr: "- 작업 진행 중이므로 일부 텍스트는 아직 영어입니다. 문제는 Discord로 알려 주세요.",
       } as LString,

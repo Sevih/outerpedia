@@ -4,6 +4,7 @@ import Image from 'next/image';
 import * as HoverCard from '@radix-ui/react-hover-card'; // ✅ On utilise HoverCard directement
 import buffs from '@/data/buffs.json';
 import debuffs from '@/data/debuffs.json';
+import { useTenant } from '@/lib/contexts/TenantContext';
 
 const effectsData: Effect[] = [
   ...buffs.map((e) => ({ ...e, type: 'buff' as const })),
@@ -17,13 +18,20 @@ export type BuffDebuffDisplayProps = {
 
 type Effect = {
   name: string;
-  type: 'buff' | 'debuff';
+  label_jp?: string;
+  label_kr?: string;
   label: string;
-  icon: string;
   description: string;
+  description_jp?: string;
+  description_kr?: string;
+  icon: string;
+  type: 'buff' | 'debuff';
 };
 
 export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebuffDisplayProps) {
+  const { key } = useTenant();   // ✅ on s’aligne sur TenantContext
+  const lang: 'en' | 'jp' | 'kr' = key === 'jp' ? 'jp' : key === 'kr' ? 'kr' : 'en';
+
   const normalizedBuffs = Array.isArray(buffs) ? buffs : buffs ? [buffs] : [];
   const normalizedDebuffs = Array.isArray(debuffs) ? debuffs : debuffs ? [debuffs] : [];
 
@@ -36,9 +44,19 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
   const debuffList = getEffects(normalizedDebuffs, 'debuff');
 
   const renderEffect = (effect: Effect, idx: number) => {
+    const label =
+      lang === 'jp' ? (effect.label_jp ?? effect.label)
+        : lang === 'kr' ? (effect.label_kr ?? effect.label)
+          : effect.label;
+
+    const description =
+      lang === 'jp' ? (effect.description_jp ?? effect.description)
+        : lang === 'kr' ? (effect.description_kr ?? effect.description)
+          : effect.description;
+
     const iconPath = `/images/ui/effect/${effect.icon}.webp`;
     const baseColor = effect.type === 'buff' ? 'bg-[#1a69a7]' : 'bg-[#a72a27]';
-    const showEffectColor = !effect.description.toLowerCase().includes('cannot be removed');
+    const showEffectColor = !description.toLowerCase().includes('cannot be removed');
     const imageClass = showEffectColor ? effect.type : '';
 
     return (
@@ -51,7 +69,7 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
             <div className="bg-black p-0.5 rounded shrink-0">
               <Image
                 src={iconPath}
-                alt={effect.name}
+                alt={label}
                 width={16}
                 height={16}
                 style={{ width: 16, height: 16 }}
@@ -61,7 +79,7 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
                 }}
               />
             </div>
-            <span>{effect.label}</span>
+            <span>{label}</span>
           </button>
         </HoverCard.Trigger>
 
@@ -83,8 +101,8 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-white text-sm leading-tight">{effect.label}</span>
-              <span className="text-white text-xs leading-snug whitespace-pre-line">{effect.description}</span>
+              <span className="font-bold text-white text-sm leading-tight">{label}</span>
+              <span className="text-white text-xs leading-snug whitespace-pre-line">{description}</span>
             </div>
             <HoverCard.Arrow
               className={`w-3 h-2 ${effect.type === 'buff' ? 'fill-[#2196f3]' : 'fill-[#e53935]'}`}

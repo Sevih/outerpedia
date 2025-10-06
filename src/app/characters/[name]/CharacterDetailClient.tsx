@@ -54,12 +54,30 @@ function getLocalizedFullname(character: Character, langKey: TenantKey): string 
     return localized ?? character.Fullname
 }
 
+function getLocalizedEEName(ee: ExclusiveEquipment, langKey: TenantKey): string {
+  if (langKey === 'jp' && ee.name_jp) return ee.name_jp
+  if (langKey === 'kr' && ee.name_kr) return ee.name_kr
+  return ee.name
+}
+
+
+
 type SkillNameKey = Extract<keyof Skill, `name${'' | `_${string}`}`>
 type SkillDescKey = Extract<keyof Skill, `true_desc${'' | `_${string}`}`>
 function getLocalizedSkillName(skill: Skill, langKey: TenantKey): string {
     const key: SkillNameKey = langKey === 'en' ? 'name' : (`name_${langKey}` as SkillNameKey)
     return skill[key] ?? skill.name ?? ''
 }
+
+function getLocalizedBurnEffect(
+    burn: { effect: string; effect_jp?: string; effect_kr?: string },
+    langKey: TenantKey
+): string {
+    if (langKey === 'jp' && burn.effect_jp) return burn.effect_jp
+    if (langKey === 'kr' && burn.effect_kr) return burn.effect_kr
+    return burn.effect
+}
+
 
 function getLocalizedSkillDesc(skill: Skill, langKey: TenantKey): string {
     const key: SkillDescKey = langKey === 'en' ? 'true_desc' : (`true_desc_${langKey}` as SkillDescKey)
@@ -85,8 +103,16 @@ function splitChainDual(desc: string) {
     return { chain, dual }
 }
 
-
-
+function getEEText(
+    ee: ExclusiveEquipment,
+    base: 'effect' | 'effect10',
+    langKey: TenantKey
+): string | undefined {
+    const suffix = langKey === 'jp' ? '_jp' : langKey === 'kr' ? '_kr' : '';
+    const key = `${base}${suffix}` as keyof ExclusiveEquipment;
+    const value = ee[key];
+    return typeof value === 'string' ? value : undefined; // évite buff/debuff (string[])
+}
 
 function getRoleBadge(role?: string) {
     if (!role) return null
@@ -160,7 +186,15 @@ export default function CharacterDetailClient({
     const classInfo = classData[character.Class as keyof typeof classData]
     const subclassInfo = classInfo?.subclasses?.[character.SubClass as keyof typeof classInfo.subclasses]
     const baseStats = subclassInfo?.[`stats${character.Rarity}`]
-    const statLabels = ['Health', 'Defense', 'Evasion', 'Accuracy', 'Speed', 'Attack']
+    const statLabels = [
+        t('stats.health'),
+        t('stats.defense'),
+        t('stats.evasion'),
+        t('stats.accuracy'),
+        t('stats.speed'),
+        t('stats.attack'),
+    ]
+
 
     const ee = eeData[toKebabCase(character.Fullname)]
     const profile = characterProfiles[character.Fullname]
@@ -176,7 +210,7 @@ export default function CharacterDetailClient({
     function renderMainStat(stat: string) {
         return (
             <div className="text-sm italic text-gray-300 flex items-center gap-2">
-                <span className="font-semibold text-white">Main Stat:</span>
+                <span className="font-semibold text-white">{t('main_stat')}</span>
                 <span>{stat}</span>
             </div>
         )
@@ -269,7 +303,7 @@ export default function CharacterDetailClient({
                 <Link href={`/characters`} className="relative block h-full w-full">
                     <Image
                         src="/images/ui/CM_TopMenu_Back.webp"
-                        alt="Back"
+                        alt={t('back')}
                         fill
                         sizes="32px"
                         className="opacity-80 hover:opacity-100 transition-opacity"
@@ -349,7 +383,7 @@ export default function CharacterDetailClient({
                                         {statLabels.map((label, index) => {
                                             const angle = (index / statLabels.length) * 2 * Math.PI - Math.PI / 2
                                             let labelRadius = 120
-                                            if (label === 'Health' || label === 'Accuracy') labelRadius = 110
+                                            if (label === t('stats.health') || label === t('stats.accuracy')) labelRadius = 110
                                             const x = 100 + Math.cos(angle) * labelRadius
                                             const y = 100 + Math.sin(angle) * labelRadius
                                             return (
@@ -364,14 +398,16 @@ export default function CharacterDetailClient({
                                         })}
                                     </div>
                                 ) : (
-                                    <p>No subclass image found.</p>
+                                    <p>{t('no_subclass_image')}</p>
                                 )}
                             </div>
 
                             <div className="flex flex-col gap-4 w-fit">
                                 <div className="p-2 rounded text-sm">
-                                    <p className="font-semibold">Class Effects Details : {character.Class} </p>
-                                    <p className="whitespace-pre-line">{classInfo?.description || 'No class description found.'}</p>
+                                    <p className="font-semibold">
+                                        {t('class_effects_details', { class: character.Class })}
+                                    </p>
+                                    <p className="whitespace-pre-line">{classInfo?.description || t('no_class_description')}</p>
                                 </div>
                             </div>
                         </div>
@@ -430,7 +466,7 @@ export default function CharacterDetailClient({
                                         {character.gift && (
                                             <div className="mt-2 flex flex-col gap-1">
                                                 <p className="text-sm font-semibold text-white text-center underline">
-                                                    <GuideIconInline name="CM_Goods_FriendPoint" text='Preferred Gift' />
+                                                    <GuideIconInline name="CM_Goods_FriendPoint" text={t('preferred_gift')} />
                                                 </p>
                                                 <div className="mx-auto">
                                                     <GiftCard category={character.gift} />
@@ -438,9 +474,9 @@ export default function CharacterDetailClient({
                                             </div>
                                         )}
                                     </div>
-
+                                    {/*EE */}
                                     <div className="flex flex-col gap-2">
-                                        <p className="text-lg font-semibold">{ee.name}</p>
+                                        <p className="text-lg font-semibold">{getLocalizedEEName(ee, langKey)}</p>
                                         {renderMainStat(ee.mainStat)}
 
                                         <div className="text-sm text-gray-300 flex flex-col gap-2">
@@ -452,13 +488,26 @@ export default function CharacterDetailClient({
                                                         width={20} height={20} style={{ width: 20, height: 20 }} className="object-contain"
                                                     />
                                                     <span className="text-sm font-semibold text-white">
-                                                        {character.Fullname}&apos;s Exclusive Equipment
+                                                        {t('exclusive_equipment_title', { name: getLocalizedFullname(character, langKey) })}
                                                     </span>
                                                 </div>
                                             )}
 
-                                            <p><span className="font-semibold text-white">Effect:</span> {ee.effect}</p>
-                                            {ee.effect10 && (<p><span className="font-semibold text-white">[LV 10]:</span> {ee.effect10}</p>)}
+
+                                            <p>
+                                                <span className="font-semibold text-white">{t('effect_label')}</span>{' '}
+                                                {formatEffectText(getEEText(ee, 'effect', langKey) ?? ee.effect ?? '—')}
+                                            </p>
+
+                                            {(() => {
+                                                const eff10 = getEEText(ee, 'effect10', langKey) ?? ee.effect10;
+                                                return eff10 ? (
+                                                    <p>
+                                                        <span className="font-semibold text-white">{t('effect_lv10_label')}</span>{' '}
+                                                        {formatEffectText(eff10)}
+                                                    </p>
+                                                ) : null;
+                                            })()}
 
                                             {(ee.buff || ee.debuff) && (
                                                 <div className="mt-2">
@@ -475,30 +524,30 @@ export default function CharacterDetailClient({
                                 <div className="flex gap-4">
                                     {/* EE Priority */}
                                     <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
-                                        <p className="font-semibold text-white mb-2">EE Priority</p>
+                                        <p className="font-semibold text-white mb-2">{t('ee_priority')}</p>
                                         {ee?.rank ? (
                                             <Image src={`/images/ui/IG_Event_Rank_${ee.rank}.webp`} alt={`EE Rank ${ee.rank}`} width={32} height={32} style={{ width: 32, height: 32 }} className="object-contain" />
                                         ) : <p className="text-gray-400 italic text-center">Coming soon...</p>}
                                     </div>
                                     {/* PvE */}
                                     <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
-                                        <p className="font-semibold text-white mb-2">PvE Tier</p>
+                                        <p className="font-semibold text-white mb-2">{t('pve_tier')}</p>
                                         {character.rank ? (
                                             <Image src={`/images/ui/IG_Event_Rank_${character.rank}.webp`} alt={`Rank ${character.rank}`} width={32} height={32} style={{ width: 32, height: 32 }} className="object-contain" />
-                                        ) : <p className="text-gray-400 italic text-center">Not Available</p>}
+                                        ) : <p className="text-gray-400 italic text-center">{t('not_available')}</p>}
                                     </div>
                                     {/* PvP */}
                                     <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
-                                        <p className="font-semibold text-white mb-2">PvP Tier</p>
+                                        <p className="font-semibold text-white mb-2">{t('pvp_tier')}</p>
                                         {character.rank_pvp ? (
                                             <Image src={`/images/ui/IG_Event_Rank_${character.rank_pvp}.webp`} alt={`Rank ${character.rank_pvp}`} width={32} height={32} style={{ width: 32, height: 32 }} className="object-contain" />
-                                        ) : <p className="text-gray-400 italic text-center">Not Available</p>}
+                                        ) : <p className="text-gray-400 italic text-center">{t('not_available')}</p>}
                                     </div>
                                 </div>
 
                                 {character.transcend && (
                                     <div className="w-full md:w-[400px] min-w-[320px]">
-                                        <TranscendenceSlider transcendData={character.transcend} />
+                                        <TranscendenceSlider transcendData={character.transcend} lang={langKey} />
                                     </div>
                                 )}
                             </div>
@@ -507,7 +556,7 @@ export default function CharacterDetailClient({
                 )}
 
                 <div className="mt-6 px-4 py-2 bg-yellow-800/50 border-l-4 border-yellow-400 rounded text-yellow-300 text-sm italic">
-                    Skills are displayed here with minimum enhancements applied. However, buffs and debuffs from Burst skills are still included in the display.
+                    {t('skills_note')}
                 </div>
 
                 {/* Section des 3 skills */}
@@ -517,11 +566,11 @@ export default function CharacterDetailClient({
                             <div key={index} className="p-4 rounded text-white">
                                 {/* Header : icône + nom + WGR + CD */}
                                 <div className="flex items-start gap-2 mb-2">
-                                    <div className="relative w-12 h-12">
+                                    <div className="relative w-12 h-12 shrink-0">
                                         <Image
                                             src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
                                             alt={getLocalizedSkillName(skill, langKey)}
-                                            width={48} height={48} className="object-contain"
+                                            width={48} height={48} className="object-contain w-12 h-12"
                                         />
                                         {skill.burnEffect && Object.keys(skill.burnEffect).length > 0 && (
                                             <div className="absolute top-0 left-0 bg-black text-white text-xs font-bold px-1 rounded-full border border-white">B</div>
@@ -530,8 +579,8 @@ export default function CharacterDetailClient({
                                     <div>
                                         <p className="text-lg font-semibold">{getLocalizedSkillName(skill, langKey)}</p>
                                         <p className="text-sm text-gray-400 italic mb-1">
-                                            Weakness Gauge Reduction: {skill.wgr ?? '—'}<br />
-                                            Cooldown: {skill.cd ? `${skill.cd} turn(s)` : '—'}
+                                            {t('weakness_gauge_reduction')}: {skill.wgr ?? '—'}<br />
+                                            {t('cooldown')}: {skill.cd ? `${skill.cd} ${t('turn_s')}` : '—'}
                                         </p>
                                         <BuffDebuffDisplay buffs={skill.buff} debuffs={skill.debuff} />
                                     </div>
@@ -545,7 +594,7 @@ export default function CharacterDetailClient({
                                 {/* Enhancement */}
                                 {skill.enhancement && (
                                     <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
-                                        <p className="font-bold mb-1">Enhancements:</p>
+                                        <p className="font-bold mb-1">{t('enhancements_label')}</p>
                                         <div className="space-y-2">
                                             {(() => {
                                                 const enh = normalizeEnhancement(skill.enhancement)
@@ -575,7 +624,7 @@ export default function CharacterDetailClient({
                     {/* Placeholder si skill manquant */}
                     {Array.from({ length: 3 - Object.values(character.skills || {}).length }).map((_, i) => (
                         <div key={`empty-${i}`} className="bg-gray-800 p-4 rounded text-center text-gray-500">
-                            No Skill
+                            {t('no_skill')}
                         </div>
                     ))}
                 </div>
@@ -634,7 +683,7 @@ export default function CharacterDetailClient({
                                                         }}
                                                     >
                                                         <div className="flex items-center justify-center w-full h-full text-center">
-                                                            {formatEffectText(burn.effect)}
+                                                            {formatEffectText(getLocalizedBurnEffect(burn, langKey))}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -678,10 +727,10 @@ export default function CharacterDetailClient({
                                     </div>
 
                                     <div>
-                                        <p className="font-semibold mb-1">Chain & Dual Attack</p>
+                                        <p className="font-semibold mb-1">{t('chain_dual_title')}</p>
 
                                         <p className="text-sm text-gray-400 italic mb-1">
-                                            Weakness Gauge Reduction : {s.wgr ?? '—'}
+                                            {t('weakness_gauge_reduction')} : {s.wgr ?? '—'}
                                         </p>
 
                                         <BuffDebuffDisplay buffs={s.buff} debuffs={s.debuff} />
@@ -695,7 +744,7 @@ export default function CharacterDetailClient({
                                         <div className="flex gap-4 items-start mt-2">
                                             <div>
                                                 <p className="text-sm text-gray-400 italic mb-1">
-                                                    Weakness Gauge Reduction : {s.wgr_dual ?? '—'}
+                                                    {t('weakness_gauge_reduction')} : {s.wgr_dual ?? '—'}
                                                 </p>
 
                                                 <BuffDebuffDisplay
@@ -705,15 +754,14 @@ export default function CharacterDetailClient({
 
                                                 <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
                                                     <span style={{ color: '#ffd732' }}>
-                                                        {/* Le label reste visuel; le split ne dépend pas du texte */}
-                                                        Dual Attack Effect:
+                                                        {t('dual_attack_effect')}
                                                     </span>{' '}
                                                     {formatEffectText(dual || '—')}
                                                 </div>
 
                                                 {s.enhancement && (
                                                     <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
-                                                        <p className="font-bold mb-1">Enhancements:</p>
+                                                        <p className="font-bold mb-1">{t('enhancements_label')}</p>
                                                         <div className="space-y-2">
                                                             {(() => {
                                                                 const enh = normalizeEnhancement(s.enhancement)
@@ -757,9 +805,11 @@ export default function CharacterDetailClient({
                     />
                 ) : (
                     <div className="mt-6">
-                        <h2 className="text-2xl font-bold text-white mb-4 text-center">Recommended Build and Gear</h2>
+                        <h2 className="text-2xl font-bold text-white mb-4 text-center">
+                            {t('recommended_build_and_gear')}
+                        </h2>
                         <p className="text-sm text-gray-400 text-center italic">
-                            No recommended gear information available for this character yet.
+                            {t('no_reco_gear')}
                         </p>
                     </div>
                 )}
@@ -767,7 +817,7 @@ export default function CharacterDetailClient({
                 {/* Vidéo */}
                 {character.video && (
                     <div className="mt-6">
-                        <h2 className="text-2xl font-bold text-white mb-4 text-center">Official video</h2>
+                        <h2 className="text-2xl font-bold text-white mb-4 text-center">{t('official_video')}</h2>
                         <YoutubeEmbed videoId={character.video} title={`Skill video of ${character.Fullname}`} />
                     </div>
                 )}

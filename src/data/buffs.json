@@ -2,13 +2,21 @@
     {
         "name": "BT_COOL_CHARGE",
         "label": "Cooldown Reduction",
+        "label_jp": "Cooldown Reduction JP",
+        "label_kr": "Cooldown Reduction KR",
         "description": "Reduces skill cooldowns.",
+        "description_jp": "a",
+        "description_kr": "a",
         "icon": "reducesalliesskillcooldowns"
     },
     {
         "name": "BT_ACTION_GAUGE",
         "label": "Increase Priority",
+        "label_jp": "Cooldown Reduction JP",
+        "label_kr": "Cooldown Reduction KR",
         "description": "Increase self/allies priority",
+        "description_jp": "a",
+        "description_kr": "a",
         "icon": "SC_Buff_Effect_Increase_Priority"
     },
     {
@@ -130,7 +138,7 @@
         "label": "Increases Lifesteal",
         "description": "Heals 20% of the damage dealt",
         "icon": "IG_Buff_HPdrain",
-        "cat":"test"
+        "cat": "test"
     },
     {
         "name": "Heavy Strike",

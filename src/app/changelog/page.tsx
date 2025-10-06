@@ -7,7 +7,6 @@ import { type Metadata } from 'next'
 
 const metaDict = {
   en: { title: 'Changelog | Outerpedia', desc: 'Track all updates made to Outerpedia: guides, characters, tools, and more.' },
-  fr: { title: 'Journal des mises à jour | Outerpedia', desc: 'Suivez toutes les mises à jour d’Outerpedia : guides, personnages, outils, et plus.' },
   jp: { title: '更新履歴 | Outerpedia', desc: 'Outerpedia の更新情報（ガイド、キャラクター、ツールなど）を確認できます。' },
   kr: { title: '변경 로그 | Outerpedia', desc: 'Outerpedia의 모든 업데이트(가이드, 캐릭터, 도구 등)를 확인하세요.' },
 } as const
