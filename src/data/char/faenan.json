@@ -4,17 +4,38 @@
   "Rarity": 2,
   "Element": "Light",
   "Class": "Healer",
-  "rank":"A",
+  "rank": "A",
   "gift": "Craftwork",
-  "role":"sustain",
-  "SubClass": "Sage","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "role": "sustain",
+  "SubClass": "Sage",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",
     "3": "ATK DEF HP +10%",
     "4": "ATK DEF HP +16%\n+5 Speed\n+1 Chain Passive Weakness Gauge damage",
-    "5": "ATK DEF HP +22%",
-    "6": "ATK DEF HP +30%\n+5 Speed\n+25 Action Points at battle start"
+    "5": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "6": "ATK DEF HP +30%\n+5 Speed\n+25 Action Points at battle start",
+    "2_jp": "ATK DEF HP +5%",
+    "2_kr": "ATK DEF HP +5%",
+    "3_jp": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "4_jp": "ATK DEF HP +16%\nスピード+5\nチェーンパッシブのWGダメージ+1",
+    "4_kr": "ATK DEF HP +16%\n속도 +5\n체인 패시브의 WG 감소량 +1",
+    "5_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\nスピード+5\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n속도 +5\n입장 시 AP +25"
   },
   "Chain_Type": "Join",
   "skills": {
@@ -49,13 +70,43 @@
         ],
         "5": [
           "+3% healing"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "HP回復量+2%"
+        ],
+        "3_kr": [
+          "체력 회복량 +2%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "HP回復量+3%"
+        ],
+        "5_kr": [
+          "체력 회복량 +3%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "광휘폭발",
+      "name_jp": "ライトバースト",
+      "true_desc_kr": "적을 공격하고 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 <color=#28d9ed>5%</color> 회복시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を<color=#28d9ed>5%</color>回復させる。"
     },
     "SKT_SECOND": {
       "name": "Healing Prayer",
-      "true_desc": "<color=#28d9ed>Heals</color> the caster and the selected ally by <color=#28d9ed>15%</color> of the target's Max Health and increases the selected ally's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>. ",
+      "true_desc": "<color=#28d9ed>Heals</color> the caster and the selected ally by <color=#28d9ed>15%</color> of the target's Max Health and increases the selected ally's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>.",
       "ApproachTime": "HEAL",
       "DescID": "SKILL_DESC_2000027_Skill02_LV1,SKILL_DESC_2000027_Skill02_LV1,SKILL_DESC_2000027_Skill02_LV1,SKILL_DESC_2000027_Skill02_LV1,SKILL_DESC_2000027_Skill02_LV1",
       "IconName": "Skill_Second_2000027",
@@ -73,17 +124,23 @@
         "SKT_BURST_1": {
           "cost": 100,
           "effect": "Effects are applied to all allies",
-          "level": 1
+          "level": 1,
+          "effect_kr": "아군 전체에게 효과 적용",
+          "effect_jp": "味方全体に効果適用"
         },
         "SKT_BURST_2": {
           "cost": 150,
           "effect": "Enhances Heal (Amount)",
-          "level": 2
+          "level": 2,
+          "effect_kr": "회복 강화(회복량)",
+          "effect_jp": "回復強化(回復量)"
         },
         "SKT_BURST_3": {
           "cost": 200,
           "effect": "Target Action Points +50",
-          "level": 3
+          "level": 3,
+          "effect_kr": "대상 AP +50",
+          "effect_jp": "対象のAP+50"
         }
       },
       "cd": "5",
@@ -104,9 +161,39 @@
         "5": [
           "-1 turn Skill Cooldown",
           "+5% healing"
+        ],
+        "2_jp": [
+          "HP回復量+5%"
+        ],
+        "2_kr": [
+          "체력 회복량 +5%"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "HP回復量+5%"
+        ],
+        "4_kr": [
+          "체력 회복량 +5%"
+        ],
+        "5_jp": [
+          "スキルターン-1ターン",
+          "HP回復量+5%"
+        ],
+        "5_kr": [
+          "스킬 쿨타임 -1턴",
+          "체력 회복량 +5%"
         ]
       },
-      "wgr": null
+      "wgr": null,
+      "name_kr": "치유 기도",
+      "name_jp": "癒しの祈とう",
+      "true_desc_kr": "자신과 선택한 아군의 <color=#28d9ed>체력</color>을 <color=#28d9ed>15%</color> 회복시키고, 선택한 아군의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "true_desc_jp": "自分と味方単体の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復させ、味方単体の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。"
     },
     "SKT_ULTIMATE": {
       "name": "Lunar Protection",
@@ -142,9 +229,41 @@
         "5": [
           "+5% healing",
           "-1 turn Skill Cooldown"
+        ],
+        "2_jp": [
+          "HP回復量+3%"
+        ],
+        "2_kr": [
+          "체력 회복량 +3%"
+        ],
+        "3_jp": [
+          "HP回復量+3%",
+          "免疫+1ターン"
+        ],
+        "3_kr": [
+          "체력 회복량 +3%",
+          "면역 지속 +1턴"
+        ],
+        "4_jp": [
+          "HP回復量+4%"
+        ],
+        "4_kr": [
+          "체력 회복량 +4%"
+        ],
+        "5_jp": [
+          "HP回復量+5%",
+          "スキルターン-1ターン"
+        ],
+        "5_kr": [
+          "체력 회복량 +5%",
+          "스킬 쿨타임 -1턴"
         ]
       },
-      "wgr": null
+      "wgr": null,
+      "name_kr": "달의 가호",
+      "name_jp": "月女神のご加護",
+      "true_desc_kr": "아군 전체의 <color=#28d9ed>체력</color>을 <color=#28d9ed>20%</color> 회복시키고, <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>면역</color>을 부여합니다.",
+      "true_desc_jp": "味方全体の<color=#28d9ed>HP</color>を<color=#28d9ed>20%</color>回復させ、<color=#28d9ed>免疫</color>を<color=#28d9ed>1ターン</color>の間付与する。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -166,22 +285,59 @@
       "dual_buff": "",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 가장 체력 상황이 나쁜 아군의 체력을 회복합니다. 회복량은 대상의 최대 체력에 비례합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 최대 체력의 <color=#28d9ed>10%</color>만큼 회복시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、残りHPが最も低い味方単体のHPを回復する。回復量は対象の最大HPが高いほどUPする。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を最大HPの<color=#28d9ed>10%</color>回復させる。"
     }
-  }
+  },
+  "Fullname_kr": "파이난",
+  "Fullname_jp": "ファイナン",
+  "VoiceActor": "VA. Skyler Davenport",
+  "VoiceActor_jp": "CV.秦佐和子",
+  "VoiceActor_kr": "CV.김유림"
 }

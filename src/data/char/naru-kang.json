@@ -3,18 +3,39 @@
   "Fullname": "Naru Kang",
   "Rarity": 2,
   "Element": "Fire",
-  "rank":"B",
-  "role":"support",
+  "rank": "B",
+  "role": "support",
   "gift": "Craftwork",
   "Class": "Defender",
-  "SubClass": "Sweeper","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Sweeper",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",
     "3": "ATK DEF HP +10%",
-    "4": "ATK DEF HP +16%\\n+2% Evasion\n+1 Chain Passive Weakness Gauge damage",
-    "5": "ATK DEF HP +22%",
-    "6": "ATK DEF HP +30%\n+2% Evasion\n+25 Action Points at battle start"
+    "4": "ATK DEF HP +16%\n+2% Evasion\n+1 Chain Passive Weakness Gauge damage",
+    "5": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "6": "ATK DEF HP +30%\n+2% Evasion\n+25 Action Points at battle start",
+    "2_jp": "ATK DEF HP +5%",
+    "2_kr": "ATK DEF HP +5%",
+    "3_jp": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "4_jp": "ATK DEF HP +16%\n回避+2%\nチェーンパッシブのWGダメージ+1",
+    "4_kr": "ATK DEF HP +16%\n회피 +2%\n체인 패시브의 WG 감소량 +1",
+    "5_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n回避+2%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n회피 +2%\n입장 시 AP +25"
   },
   "Chain_Type": "Join",
   "skills": {
@@ -51,9 +72,39 @@
         ],
         "5": [
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "허리케인 콤비네이션",
+      "name_jp": "ハリケーン・コンビネーション",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>15%</color> 확률로 대상을 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>스턴</color> 상태로 만듭니다. 이 스킬은 자신의 <color=#28d9ed>현재 체력</color>이 낮을수록 피해가 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、対象に<color=#28d9ed>15%</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>1ターン</color>の間付与する。このスキルは自分の<color=#28d9ed>残りHP</color>が低いほどダメージがUPする。"
     },
     "SKT_SECOND": {
       "name": "Typhoon Kick",
@@ -73,17 +124,23 @@
         "SKT_BURST_1": {
           "cost": 80,
           "effect": "Increases damage",
-          "level": 1
+          "level": 1,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_2": {
           "cost": 120,
           "effect": "Increases damage",
-          "level": 2
+          "level": 2,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_3": {
           "cost": 160,
           "effect": "Reduces Cyclone Change! Cooldown by 2 turns",
-          "level": 3
+          "level": 3,
+          "effect_kr": "사이클론 체인지! 쿨타임 -2턴",
+          "effect_jp": "【サイクロン・チェンジ!】\\nスキルターン-2ターン"
         }
       },
       "cd": "4",
@@ -107,9 +164,41 @@
         "5": [
           "+10% damage",
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "피해량 +10%",
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "타이푼 킥",
+      "name_jp": "タイフーン・キック",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>50%</color> 확률로 대상의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다. 이 스킬은 자신의 <color=#28d9ed>현재 체력</color>이 낮을수록 피해가 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>50%</color>の確率で対象の<color=#28d9ed>防御力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。このスキルは自分の<color=#28d9ed>残りHP</color>が低いほどダメージがUPする。"
     },
     "SKT_ULTIMATE": {
       "name": "Cyclone Change!",
@@ -124,7 +213,8 @@
       "SkipNameID": "SKILL_NAME_2000024_Skill03",
       "TargetTeamType": "ME",
       "buff": [
-        "BT_INVINCIBLE","BT_IMMUNE"
+        "BT_INVINCIBLE",
+        "BT_IMMUNE"
       ],
       "cd": "7",
       "debuff": [],
@@ -144,9 +234,39 @@
         ],
         "5": [
           "-1 turn Skill Cooldown"
+        ],
+        "2_jp": [
+          "効果ターン+1ターン"
+        ],
+        "2_kr": [
+          "효과 지속 +1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "効果ターン+1ターン",
+          "スキル使用時、免疫効果付与"
+        ],
+        "4_kr": [
+          "효과 지속 +1턴",
+          "스킬 사용 시 면역 효과 추가"
+        ],
+        "5_jp": [
+          "スキルターン-1ターン"
+        ],
+        "5_kr": [
+          "스킬 쿨타임 -1턴"
         ]
       },
-      "wgr": null
+      "wgr": null,
+      "name_kr": "사이클론 체인지!",
+      "name_jp": "サイクロン・チェンジ!",
+      "true_desc_kr": "스킬 사용 시 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>무적</color> 효과를 얻지만, <color=#28d9ed>체력</color>의 <color=#28d9ed>99%</color>가 감소합니다.",
+      "true_desc_jp": "スキル使用時、自分に<color=#28d9ed>無敵</color>効果を<color=#28d9ed>1ターン</color>の間付与するが、<color=#28d9ed>HP</color>の<color=#28d9ed>99%</color>がDOWNする。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -168,22 +288,59 @@
       "dual_debuff": "BT_STUN",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 <color=#28d9ed>2턴</color> 동안 대상의 효과 적중을 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>30%</color> 확률로 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>스턴</color> 상태로 만듭니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、<color=#28d9ed>100%</color>の確率で対象の効果命中を<color=#28d9ed>2ターン</color>の間DOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、対象に<color=#28d9ed>30%</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>1ターン</color>の間付与する。"
     }
-  }
+  },
+  "Fullname_kr": "강나루",
+  "Fullname_jp": "カン・ナル",
+  "VoiceActor": "VA. Brenna Larson",
+  "VoiceActor_jp": "CV.鷲見友美ジェナ",
+  "VoiceActor_kr": "CV.김예림"
 }
