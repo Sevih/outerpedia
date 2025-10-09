@@ -260,6 +260,24 @@ function getLocalizedFullname(character: CharacterLite, langKey: TenantKey): str
     return localized ?? character.Fullname
 }
 
+function norm(s: unknown): string {
+  return (typeof s === 'string' ? s : '')
+    .normalize('NFKC')
+    .toLowerCase()
+    .trim()
+}
+
+function getSearchableNames(char: CharacterLite): string[] {
+  const keys: FullnameKey[] = ['Fullname', 'Fullname_jp', 'Fullname_kr']
+  return keys.map(k => char[k]).filter(Boolean).map(norm)
+}
+
+function matchesAnyName(char: CharacterLite, q: string): boolean {
+  if (!q.trim()) return true
+  const nq = norm(q)
+  const names = getSearchableNames(char)
+  return names.some(name => name.includes(nq))
+}
 
 type ClientProps = {
   langue: TenantKey
@@ -405,7 +423,7 @@ export default function CharactersPage({ langue }: ClientProps) {
       setCharacters(data)
       setAllBuffs(extractAllEffects(data, 'buff'))
       setAllDebuffs(extractAllEffects(data, 'debuff'))
-      setLoading(false)
+      setLoading(false) 
     }
     fetchCharacters()
   }, [])
@@ -453,7 +471,8 @@ export default function CharactersPage({ langue }: ClientProps) {
   const filtered = useMemo(() => {
     const q = (query || '').toLowerCase()
     return characters.filter(char => {
-      if (!char.Fullname.toLowerCase().includes(q)) return false
+      //if (!char.Fullname.toLowerCase().includes(q)) return false
+      if (!matchesAnyName(char, q)) return false
       const elementMatch = elementFilter.length === 0 || elementFilter.includes(char.Element)
       const classMatch = classFilter.length === 0 || classFilter.includes(char.Class)
       const chainMatch = chainFilter.length === 0 || chainFilter.includes(char.Chain_Type || '')

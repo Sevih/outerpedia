@@ -101,8 +101,33 @@ function TranscendenceStars({ levelKey }: { levelKey: LevelId }) {
   );
 }
 
+// helper local
+function parseNumericBonus(s: string):
+  | { kind: 'pct' | 'flat'; label: string; amount: number }
+  | null {
+  // +X% Label   (valeur d'abord, pour EN)
+  let m = s.match(/^\+(\d+)%\s+(.+)$/);
+  if (m) return { kind: 'pct', amount: parseInt(m[1], 10), label: m[2].trim() };
+
+  // +X Label    (valeur d'abord, flat)
+  m = s.match(/^\+(\d+)\s+(.+)$/);
+  if (m) return { kind: 'flat', amount: parseInt(m[1], 10), label: m[2].trim() };
+
+  // Label +X%   (valeur à la fin, pour JP/KR/EN mixtes)
+  m = s.match(/^(.+?)\s*\+(\d+)%$/);
+  if (m) return { kind: 'pct', amount: parseInt(m[2], 10), label: m[1].trim() };
+
+  // Label +X    (valeur à la fin, flat)
+  m = s.match(/^(.+?)\s*\+(\d+)$/);
+  if (m) return { kind: 'flat', amount: parseInt(m[2], 10), label: m[1].trim() };
+
+  return null;
+}
+
+
 export default function TranscendenceSlider({ transcendData, lang }: Props) {
   /** Construit la liste des steps à partir des clés présentes (logic IDs) */
+
   const steps = useMemo<Step[]>(() => {
     const order: LevelId[] = ['1', '2', '3', '4', '4_1', '4_2', '5', '5_1', '5_2', '5_3', '6'];
     return order
@@ -130,30 +155,29 @@ export default function TranscendenceSlider({ transcendData, lang }: Props) {
         const trimmed = line.trim();
 
         // EN seulement pour triple stat
+
         const mStats = trimmed.match(/^(?:ATK|Atk)\s+(?:DEF|Def)\s+(?:HP|Hp)\s*\+(\d+)%$/);
         if (mStats) {
           lastAtkDefHpLine = `ATK DEF HP +${mStats[1]}%`;
           continue;
         }
 
+        // cumul générique EN/JP/KR
+        const parsed = parseNumericBonus(trimmed);
+        // On normalise un peu le label (éviter doubles espaces)
+        const normalizeLabel = (s: string) => s.replace(/\s+/g, ' ').trim();
 
-        // +X flat
-        const matchFlat = trimmed.match(/^\+(\d+)\s+(.+)$/);
-        if (matchFlat) {
-          const amount = parseInt(matchFlat[1], 10);
-          const label = matchFlat[2];
-          bonusMap[`flat|${label}`] = (bonusMap[`flat|${label}`] || 0) + amount;
+        if (parsed) {
+          const keyLabel = normalizeLabel(parsed.label);
+          if (parsed.kind === 'flat') {
+            bonusMap[`flat|${keyLabel}`] = (bonusMap[`flat|${keyLabel}`] || 0) + parsed.amount;
+          } else {
+            // pct
+            bonusMap[keyLabel] = (bonusMap[keyLabel] || 0) + parsed.amount;
+          }
           continue;
         }
 
-        // +X% percent
-        const matchPct = trimmed.match(/^\+(\d+)%\s+(.+)$/);
-        if (matchPct) {
-          const amount = parseInt(matchPct[1], 10);
-          const label = matchPct[2];
-          bonusMap[label] = (bonusMap[label] || 0) + amount;
-          continue;
-        }
 
         let handled = false;
 
