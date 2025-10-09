@@ -26,10 +26,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+4% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の会心ダメージ+4%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 피해 +4%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の会心ダメージ+4%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 치명 피해 +4%\n입장 시 AP +25"
   },
   "Chain_Type": "Finish",
   "skills": {
@@ -66,9 +72,39 @@
         ],
         "5": [
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "프레즐",
+      "name_jp": "プレッツェル",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>35%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>출혈</color>을 부여합니다. (2회 적용)",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>35%</color>の確率で<color=#28d9ed>出血</color>2個を<color=#28d9ed>2ターン</color>の間付与する。"
     },
     "SKT_SECOND": {
       "name": "Pilgrimage",
@@ -91,17 +127,23 @@
         "SKT_BURST_1": {
           "cost": 60,
           "effect": "Activates an additional attack\\nIncreases Priority by 50%",
-          "level": 1
+          "level": 1,
+          "effect_kr": "추가타 확정 발생\\n행동 게이지 +50%",
+          "effect_jp": "追加攻撃100%発生\\n行動ゲージ+50%"
         },
         "SKT_BURST_2": {
           "cost": 90,
           "effect": "Increases damage",
-          "level": 2
+          "level": 2,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_3": {
           "cost": 120,
           "effect": "Recovering Priority changes to gaining an extra turn",
-          "level": 3
+          "level": 3,
+          "effect_kr": "행동 게이지 회복이 추가 턴으로 변경",
+          "effect_jp": "行動ゲージUPが追加ターンに変更"
         }
       },
       "cd": "4",
@@ -124,9 +166,39 @@
         ],
         "5": [
           "+10% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+10%"
+        ],
+        "5_kr": [
+          "피해량 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "필그림에이지",
+      "name_jp": "ピルグリムエイジ",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>100%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>출혈</color>을 부여합니다. 대상이 <color=#28d9ed>출혈</color> 상태라면 동일한 대상에게 <color=#28d9ed>추가 공격</color>을 사용합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、対象に<color=#28d9ed>100%</color>の確率で<color=#28d9ed>出血</color>を<color=#28d9ed>2ターン</color>の間付与する。対象が<color=#28d9ed>出血</color>状態の場合、同じ対象に<color=#28d9ed>追加攻撃</color>を与える。"
     },
     "SKT_ULTIMATE": {
       "name": "Nine Inch Nails",
@@ -162,9 +234,41 @@
         "5": [
           "+10% damage",
           "-1 turn Skill Cooldown"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "スキルターン-1ターン"
+        ],
+        "5_kr": [
+          "피해량 +10%",
+          "스킬 쿨타임 -1턴"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "나인 인치 네얼스",
+      "name_jp": "ナイン・インチ・ネイルズ",
+      "true_desc_kr": "스킬 사용 시 <color=#28d9ed>100%</color> 확률로 대상의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>모두 해제</color>하고 적을 공격합니다.\\n대상이 <color=#28d9ed>출혈</color> 상태라면 피해가 증가합니다.",
+      "true_desc_jp": "スキル使用時、<color=#28d9ed>100%</color>の確率で対象の<color=#28d9ed>強化効果</color>を<color=#28d9ed>すべて解除</color>し、敵単体にダメージを与える。\\n対象が<color=#28d9ed>出血</color>状態の場合、ダメージがUPする。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -186,23 +290,60 @@
       "dual_debuff": "BT_DOT_BLEED",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>2</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>50%</color> 확률로 대상에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>출혈</color>을 2회 부여합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、対象のWGを追加で<color=#28d9ed>2</color>DOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、対象に<color=#28d9ed>50%</color>の確率で<color=#28d9ed>出血</color>2個を<color=#28d9ed>2ターン</color>の間付与する。"
     }
   },
-  "rank": "C"
+  "rank": "C",
+  "Fullname_kr": "프란시스카",
+  "Fullname_jp": "フランシスカ",
+  "VoiceActor": "VA. Kirsten Day",
+  "VoiceActor_jp": "CV.ゆかな",
+  "VoiceActor_kr": "CV.이새벽"
 }

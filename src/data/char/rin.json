@@ -26,16 +26,22 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+4% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の会心ダメージ+4%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 피해 +4%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の会心ダメージ+4%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 치명 피해 +4%\n입장 시 AP +25"
   },
   "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
       "name": "Requiem",
-      "true_desc": "Attacks an enemy and increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>. Increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>30%</color> if the target was a Fire enemy.",
+      "true_desc": "Attacks an enemy and increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>. Increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>40%</color> if the target was a Fire enemy.",
       "ApproachTime": "ATTACK",
       "DescID": "SKILL_DESC_2000019_Skill01_LV1,SKILL_DESC_2000019_Skill01_LV1,SKILL_DESC_2000019_Skill01_LV1,SKILL_DESC_2000019_Skill01_LV1,SKILL_DESC_2000019_Skill01_LV1",
       "IconName": "Skill_First_2000019",
@@ -66,13 +72,43 @@
         ],
         "5": [
           "+15% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+15%"
+        ],
+        "3_kr": [
+          "피해량 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+15%"
+        ],
+        "5_kr": [
+          "피해량 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "진혼",
+      "name_jp": "鎮魂",
+      "true_desc_kr": "적을 공격하고 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다. 대상이 화속성이라면 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>40%</color> 증가시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。対象が火属性の場合<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>40%</color>UPさせる。"
     },
     "SKT_SECOND": {
       "name": "Shura Slash",
-      "true_desc": "Attacks all enemies.\\nThis attack always deals <color=#28d9ed>advantageous damage</color>. Resets cooldown if the caster has a buff.",
+      "true_desc": "Attacks all enemies.\\nThis skill is always treated as having a <color=#28d9ed>favorable attribute</color> and its cooldown resets if you have a buff.\\nEach time you use <color=#28d9ed>Rending Rakshasa</color>, your <color=#28d9ed>Critical Damage</color> increases by <color=#28d9ed>7%</color> (up to 5 stacks).",
       "ApproachTime": "ATTACK",
       "DescID": "SKILL_DESC_2000019_Skill02_LV1,SKILL_DESC_2000019_Skill02_LV1,SKILL_DESC_2000019_Skill02_LV1,SKILL_DESC_2000019_Skill02_LV1,SKILL_DESC_2000019_Skill02_LV1",
       "IconName": "Skill_Second_2000019",
@@ -89,17 +125,23 @@
         "SKT_BURST_1": {
           "cost": 80,
           "effect": "Increases damage\\nReduces Doujikiri Yasutsuna Cooldown by 1 turn",
-          "level": 1
+          "level": 1,
+          "effect_kr": "피해 증가\\n도지기리 야스츠나 쿨타임 -1턴",
+          "effect_jp": "ダメージUP\\n【童子切安綱】スキルターン-1ターン"
         },
         "SKT_BURST_2": {
           "cost": 120,
           "effect": "Increases damage",
-          "level": 2
+          "level": 2,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_3": {
           "cost": 160,
           "effect": "Changed to Enhanced Skill\\nIncreased damage (With additional increased damage against Fire enemies)",
-          "level": 3
+          "level": 3,
+          "effect_kr": "강화 스킬로 교체\\n피해 증가 (화속성 적에게는 추가로 피해 증가)",
+          "effect_jp": "強化スキルに変更\\nダメージUP(火属性の敵には\\n追加でダメージUP)"
         }
       },
       "cd": "4",
@@ -121,13 +163,45 @@
         ],
         "5": [
           "+15% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+15%",
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "피해량 +15%",
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+15%"
+        ],
+        "5_kr": [
+          "피해량 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "나찰 가르기",
+      "name_jp": "羅刹斬り",
+      "true_desc_kr": "적 전체를 공격합니다.\\n이 스킬은 항상 <color=#28d9ed>유리한 상성</color>으로 적용되며 강화 효과 보유 시 쿨타임이 초기화됩니다.\\n<color=#28d9ed>나찰 가르기</color>를 사용할 때마다 <color=#28d9ed>치명 피해량</color>이 <color=#28d9ed>7%</color> 증가합니다. (최대 5회 누적)",
+      "true_desc_jp": "敵全体を攻撃します。\\nこのスキルは常に<color=#28d9ed>有利属性</color>として扱われ、強化効果を保有している場合、スキルターンが初期化されます。\\n<color=#28d9ed>羅刹斬り</color>を使用するたびに<color=#28d9ed>クリティカルダメージ</color>が<color=#28d9ed>7%</color>上昇します(最大5回累積)。"
     },
     "SKT_ULTIMATE": {
       "name": "Doujikiri Yasutsuna",
-      "true_desc": "When using this skill, <color=#28d9ed>increases</color> the caster's <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies.\\nEach time <color=#28d9ed>Doujikiri Yasutsuna</color> is used increases <color=#28d9ed>Attack</color> by <color=#28d9ed>7%</color>. (Max 3 stacks)",
+      "true_desc": "When using this skill, increases own <color=#28d9ed>Critical Chance</color> for <color=#28d9ed>2</color> turns and attacks all enemies. \\nEach time <color=#28d9ed>Dojigiri Yasutsuna</color> is used, increases own <color=#28d9ed>Attack</color> by <color=#28d9ed>15%</color>. (Stacks up to 3 times)",
       "DescID": "SKILL_DESC_2000019_Skill03_LV1,SKILL_DESC_2000019_Skill03_LV1,SKILL_DESC_2000019_Skill03_LV1,SKILL_DESC_2000019_Skill03_LV1,SKILL_DESC_2000019_Skill03_LV1",
       "IconName": "Skill_Ultimate_2000019",
       "NameIDSymbol": "1903",
@@ -159,9 +233,41 @@
         ],
         "5": [
           "+15% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+15%",
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "피해량 +15%",
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+15%"
+        ],
+        "5_kr": [
+          "피해량 +15%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "도지기리 야스츠나",
+      "name_jp": "童子切安綱",
+      "true_desc_kr": "스킬 사용 시 <color=#28d9ed>2턴</color> 동안 자신의 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>증가</color>시키고 적 전체를 공격합니다. \\n<color=#28d9ed>도지기리 야스츠나</color>를 사용할 때마다 <color=#28d9ed>공격력</color>이 <color=#28d9ed>15%</color> 증가합니다. (최대 3회 누적)",
+      "true_desc_jp": "スキル使用時、<color=#28d9ed>2</color>ターンの間、自身の<color=#28d9ed>クリティカル発生率</color>を<color=#28d9ed>上昇</color>させ、敵全体を攻撃する。\\n<color=#28d9ed>童子切安綱</color>を使用するたびに、自身の<color=#28d9ed>攻撃力</color>が<color=#28d9ed>15%</color>上昇する。(最大3回まで累積)"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -185,23 +291,60 @@
       "dual_buff": "BT_ACTION_GAUGE",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 자신의 스킬 체인 공격이 항상 유리한 상성으로 적용됩니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:この攻撃は敵の属性を無視し、有利属性の攻撃判定でダメージを与える。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>20%</color>UPする。"
     }
   },
-  "rank": "A"
+  "rank": "A",
+  "Fullname_kr": "린",
+  "Fullname_jp": "リン",
+  "VoiceActor": "VA. Val Rodriguez",
+  "VoiceActor_jp": "CV.本渡楓",
+  "VoiceActor_kr": "CV.김연우"
 }
