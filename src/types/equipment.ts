@@ -9,6 +9,8 @@ export type ExclusiveEquipment = {
   name_jp?: string;
   name_kr?: string;
   mainStat: string;
+  mainStat_jp?: string;
+  mainStat_kr?: string;
   effect: string;
   effect10?: string;
   effect_jp?: string;

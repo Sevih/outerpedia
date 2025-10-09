@@ -13,9 +13,9 @@ export interface ExclusiveEquipment {
 
 export interface Skill {
   name: string
-  name_jp?: string; 
-  name_kr?: string; 
-  true_desc_jp?: string; 
+  name_jp?: string;
+  name_kr?: string;
+  true_desc_jp?: string;
   true_desc_kr?: string;
   true_desc: string
   description: string
@@ -25,7 +25,7 @@ export interface Skill {
     level: number
     cost: string
     effect: string
-    effect_jp?: string; 
+    effect_jp?: string;
     effect_kr?: string;
   }[]
   enhancement?: Record<string, string>[]
@@ -40,6 +40,22 @@ type ExtendedSkill = Skill & {
   enhancement?: Record<string, string[]>;
 };
 
+export type Lang = 'en' | 'jp' | 'kr';
+
+export type LevelId =
+  | '1' | '2' | '3'
+  | '4' | '4_1' | '4_2'
+  | '5' | '5_1' | '5_2' | '5_3'
+  | '6';
+
+
+
+// Map des transcends telle que générée par tes JSON (avec variantes jp/kr)
+export type TranscendMap = Partial<
+  Record<LevelId | `${LevelId}_jp` | `${LevelId}_kr`, string | null>
+>;
+
+
 
 export interface Character {
   ID: string
@@ -51,8 +67,8 @@ export interface Character {
   Class: string
   SubClass: string
   video?: string
-  gift:string
-  tags?:string[]
+  gift: string
+  tags?: string[]
   Chain_Type: string
   dual_enhancement?: Record<string, string>[]
   skills: {
@@ -64,7 +80,7 @@ export interface Character {
   exclusifEquip?: ExclusiveEquipment[]
   recommendedGearPVE?: RecommendedGearSet
   recommendedGearPVP?: RecommendedGearSet
-  transcend?: Record<string, string | null>
+  transcend?: TranscendMap
   rank?: string
   rank_pvp?: string
   role?: string

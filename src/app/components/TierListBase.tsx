@@ -79,10 +79,6 @@ function matchesEESearch(
     )
 }
 
-
-
-
-
 type Mode = 'pve' | 'pvp' | 'ee0' | 'ee10'
 
 function getRankKey(mode: Mode): keyof Character | keyof Equipment {
@@ -94,9 +90,17 @@ function getRankKey(mode: Mode): keyof Character | keyof Equipment {
 
 type Equipment = {
     name: string
-    effect: string
-    effect10: string
-    mainStat: string
+	name_jp?: string
+	name_kr?: string
+	mainStat: string
+	mainStat_jp?: string
+	mainStat_kr?: string
+	effect: string
+	effect_jp?: string
+	effect_kr?: string
+	effect10: string
+	effect10_jp?: string
+	effect10_kr?: string
     rank: string
     rank10?: string
     icon_effect: string

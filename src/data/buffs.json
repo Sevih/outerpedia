@@ -197,8 +197,7 @@
         "description": "Heals 20% of damage dealt.",
         "description_jp": "対象は与えたダメージの 20%を回復する。",
         "description_kr": "대상은 입힌 피해의 20%를 회복합니다.",
-        "icon": "IG_Buff_HPdrain",
-        "cat": "test"
+        "icon": "IG_Buff_HPdrain"
     },
     {
         "name": "BT_CP_CHARGE",

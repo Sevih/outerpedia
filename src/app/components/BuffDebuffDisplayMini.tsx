@@ -91,7 +91,7 @@ export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: Buff
               <div className="relative w-[28px] h-[28px] bg-black p-1 rounded shrink-0">
                 <Image
                   src={iconPath}
-                  alt={effect.name}
+                  alt={label}
                   fill
                   sizes="28px"
                   className={`object-contain ${imageClass}`}

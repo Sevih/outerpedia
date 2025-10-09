@@ -12,7 +12,7 @@ import rawTAGS from '@/data/tags.json'
 
 import type { ClassDataMap, StatKey } from '@/types/types'
 import type { EquipmentBase, Talisman, ExclusiveEquipment } from '@/types/equipment'
-import type { Character, Skill } from '@/types/character'
+import type { Character, Skill, TranscendMap, Lang, LevelId } from '@/types/character'
 import { CharacterJsonLdServeur } from '@/app/components/seo';
 
 import { CharacterNameDisplayBigNoH } from '@/app/components/CharacterNameDisplay'
@@ -55,10 +55,34 @@ function getLocalizedFullname(character: Character, langKey: TenantKey): string 
 }
 
 function getLocalizedEEName(ee: ExclusiveEquipment, langKey: TenantKey): string {
-  if (langKey === 'jp' && ee.name_jp) return ee.name_jp
-  if (langKey === 'kr' && ee.name_kr) return ee.name_kr
-  return ee.name
+    if (langKey === 'jp' && ee.name_jp) return ee.name_jp
+    if (langKey === 'kr' && ee.name_kr) return ee.name_kr
+    return ee.name
 }
+
+const ORDER: LevelId[] = ['1', '2', '3', '4', '4_1', '4_2', '5', '5_1', '5_2', '5_3', '6'];
+
+function pickTranscendForLang(
+  t: TranscendMap | undefined,
+  lang: Lang
+): Record<LevelId, string | null> {
+  const src = t ?? {};
+  const out = {} as Record<LevelId, string | null>;
+
+  for (const k of ORDER) {
+    // on lit les 3 variantes une fois
+    const jp = (src[`${k}_jp` as keyof TranscendMap] ?? null) as string | null;
+    const kr = (src[`${k}_kr` as keyof TranscendMap] ?? null) as string | null;
+    const en = (src[k as keyof TranscendMap] ?? null) as string | null;
+
+    // puis on choisit sans utiliser &&
+    out[k] = lang === 'jp' ? (jp ?? en)
+           : lang === 'kr' ? (kr ?? en)
+           : en;
+  }
+  return out;
+}
+
 
 
 
@@ -85,8 +109,7 @@ function getLocalizedSkillDesc(skill: Skill, langKey: TenantKey): string {
 }
 
 function splitChainDual(desc: string) {
-    // Cherche tous les tags colorés jaune
-    const marker = /<color=#ffd732>[^<]+<\/color>:\s*/gi
+    const marker = /<color=#ffd732>[^<]+<\/color>\s*:\s*/gi
     const matches = [...desc.matchAll(marker)]
 
     if (matches.length < 2) {
@@ -94,11 +117,11 @@ function splitChainDual(desc: string) {
         return { chain: desc.trim(), dual: '' }
     }
 
-    const second = matches[1] // deuxième balise = début du dual
-    const splitIndex = second.index ?? 0
+    const splitIndex = matches[1].index ?? 0
 
+    // ✅ On garde le <color=...>Assist Effect</color> complet dans dual
     const chain = desc.slice(0, splitIndex).trim()
-    const dual = desc.slice(splitIndex + second[0].length).trim()
+    const dual = desc.slice(splitIndex).trim()
 
     return { chain, dual }
 }
@@ -134,6 +157,12 @@ function toKebabCase(str: string): string {
 
 function getSkillLabel(index: number): string {
     return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`
+}
+
+function getLocalizedEEStat(ee: ExclusiveEquipment, langKey: TenantKey): string {
+  if (langKey === 'jp' && ee.mainStat_jp) return ee.mainStat_jp;
+  if (langKey === 'kr' && ee.mainStat_kr) return ee.mainStat_kr;
+  return ee.mainStat;
 }
 
 // helper local (type-guard) — à mettre au dessus de l’usage
@@ -268,8 +297,8 @@ export default function CharacterDetailClient({
         return anyVal ? (Array.isArray(anyVal) ? anyVal : [anyVal as string]) : []
     }
 
-    const ln = (s?: Skill) => (s ? getLocalizedSkillName(s, langKey) : undefined)
-
+    const ln = (s?: Skill) => (s ? getLocalizedSkillName(s, langKey) : undefined);
+    const localizedTranscend = pickTranscendForLang(character.transcend, langKey);
     return (
         <>
 
@@ -342,15 +371,23 @@ export default function CharacterDetailClient({
                         <div className="flex items-center gap-4">
                             <div className="flex items-center gap-1">
                                 <Image src={`/images/ui/elem/${character.Element.toLowerCase()}.webp`} alt={character.Element} width={24} height={24} style={{ width: 24, height: 24 }} />
-                                <span className="text-base">{character.Element}</span>
+                                <span className="text-base">{t(`SYS_ELEMENT_NAME_${character.Element.toUpperCase()}`)}</span>
                             </div>
                             <div className="flex items-center gap-1">
                                 <Image src={`/images/ui/class/${character.Class.toLowerCase()}.webp`} alt={character.Class} width={24} height={24} style={{ width: 24, height: 24 }} />
-                                <span className="text-base">{character.Class}</span>
+                                <span className="text-base">
+                                    {t(`SYS_CLASS_${character.Class.toUpperCase()}`, {
+                                        defaultValue: character.Class
+                                    })}
+                                </span>
                             </div>
                             <div className="flex items-center gap-1">
                                 <Image src={`/images/ui/class/${character.SubClass.toLowerCase()}.webp`} alt={character.SubClass} width={24} height={24} style={{ width: 24, height: 24 }} />
-                                <span className="text-base">{character.SubClass}</span>
+                                <span className="text-base">
+                                    {t(`SYS_CLASS_NAME_${character.SubClass.toUpperCase()}`, {
+                                        defaultValue: character.SubClass
+                                    })}
+                                </span>
                             </div>
 
                             <div className="mt-2 mb-3 flex flex-wrap items-center gap-2">
@@ -405,9 +442,15 @@ export default function CharacterDetailClient({
                             <div className="flex flex-col gap-4 w-fit">
                                 <div className="p-2 rounded text-sm">
                                     <p className="font-semibold">
-                                        {t('class_effects_details', { class: character.Class })}
+                                        {t('class_effects_details', { class: t(`SYS_CLASS_${character.Class.toUpperCase()}`) })}
                                     </p>
-                                    <p className="whitespace-pre-line">{classInfo?.description || t('no_class_description')}</p>
+                                    <p className="whitespace-pre-line">
+                                        {t(`SYS_CLASS_PASSIVE_${character.Class.toUpperCase()}`, {
+                                            defaultValue: t('no_class_description')
+                                        }).replace(/([。\.])\s*/g, '$1\n')}
+                                    </p>
+
+
                                 </div>
                             </div>
                         </div>
@@ -477,7 +520,7 @@ export default function CharacterDetailClient({
                                     {/*EE */}
                                     <div className="flex flex-col gap-2">
                                         <p className="text-lg font-semibold">{getLocalizedEEName(ee, langKey)}</p>
-                                        {renderMainStat(ee.mainStat)}
+                                        {renderMainStat(getLocalizedEEStat(ee, langKey))}
 
                                         <div className="text-sm text-gray-300 flex flex-col gap-2">
                                             {ee.icon_effect && (
@@ -547,7 +590,7 @@ export default function CharacterDetailClient({
 
                                 {character.transcend && (
                                     <div className="w-full md:w-[400px] min-w-[320px]">
-                                        <TranscendenceSlider transcendData={character.transcend} lang={langKey} />
+                                        <TranscendenceSlider transcendData={localizedTranscend} lang={langKey} />
                                     </div>
                                 )}
                             </div>
@@ -753,9 +796,6 @@ export default function CharacterDetailClient({
                                                 />
 
                                                 <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
-                                                    <span style={{ color: '#ffd732' }}>
-                                                        {t('dual_attack_effect')}
-                                                    </span>{' '}
                                                     {formatEffectText(dual || '—')}
                                                 </div>
 
