@@ -3,21 +3,38 @@
   "Fullname": "Rhona",
   "Rarity": 3,
   "Element": "Earth",
-  "rank_pvp":"B",
+  "rank_pvp": "B",
   "gift": "Natural Object",
-  "role":"dps",
+  "role": "dps",
   "Class": "Striker",
-  "SubClass": "Bruiser","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Bruiser",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
-    "4_1": "ATK DEF HP +16%\\n+5% Ally Team Defense\\n+1 Chain Passive Weakness Gauge damage",
+    "4_1": "ATK DEF HP +16%\n+5% Ally Team Defense\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\\nBurst Level 3 Unlocked",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\\n+5% Ally Team Defense\\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+5% Ally Team Defense\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の防御力+5%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 방어력 +5%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の防御力+5%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 방어력 +5%\n입장 시 AP +25"
   },
   "Chain_Type": "Start",
   "skills": {
@@ -32,7 +49,9 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000008_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["Heavy Strike"],
+      "buff": [
+        "Heavy Strike"
+      ],
       "cd": null,
       "debuff": [],
       "description": [
@@ -51,9 +70,39 @@
         ],
         "5": [
           "+10% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+10%"
+        ],
+        "5_kr": [
+          "피해량 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "로즈 슬래쉬",
+      "name_jp": "ローズスラッシュ",
+      "true_desc_kr": "적 2인을 강격으로 공격합니다.\\n자신의 <color=#28d9ed>최대 체력</color>이 높을수록 피해가 증가합니다.",
+      "true_desc_jp": "敵2体に強撃でダメージを与える。\\n自分の<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。"
     },
     "SKT_SECOND": {
       "name": "Tidal Wave",
@@ -68,26 +117,38 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000008_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["Heavy Strike","BT_STAT|ST_DEF"],
+      "buff": [
+        "Heavy Strike",
+        "BT_STAT|ST_DEF"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
           "effect": "Increase Defense for 2 turns\\nRecovery +10%",
-          "level": 1
+          "level": 1,
+          "effect_kr": "2턴 동안 방어력 증가 \\n회복량 +10%",
+          "effect_jp": "2ターンの間防御力UP\\n回復量+10%"
         },
         "SKT_BURST_2": {
           "cost": 120,
           "effect": "Increases damage",
-          "level": 2
+          "level": 2,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_3": {
           "cost": 160,
           "effect": "Changed to Enhanced Skill\\n+2 turns Reduced Defense duration\\n+2 Weakness Gauge damage",
-          "level": 3
+          "level": 3,
+          "effect_kr": "강화 스킬로 교체\\n방어력 감소 +2턴\\nWG 피해 +2",
+          "effect_jp": "強化スキルに変更\\n防御力DOWN+2ターン\\nWGダメージ+2"
         }
       },
       "cd": "3",
-      "debuff": ["BT_WG_DMG","BT_STAT|ST_DEF"],
+      "debuff": [
+        "BT_WG_DMG",
+        "BT_STAT|ST_DEF"
+      ],
       "description": [
         "Attacks all enemies with Heavy Strike and recovers Health of the caster by <color=#28d9ed>[Buff_V_2000008_2_2]</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and additionally increases inversely proportional to the number of targets."
       ],
@@ -106,9 +167,43 @@
         "5": [
           "+10% damage",
           "+3% healing"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+5%",
+          "HP回復量+2%"
+        ],
+        "3_kr": [
+          "피해량 +5%",
+          "체력 회복량 +2%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "HP回復量+3%"
+        ],
+        "5_kr": [
+          "피해량 +10%",
+          "체력 회복량 +3%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "타이달 웨이브",
+      "name_jp": "タイダルウェーブ",
+      "true_desc_kr": "적 전체를 강격으로 공격하고 자신의 체력을 <color=#28d9ed>10%</color> 회복합니다.\\n자신의 <color=#28d9ed>최대 체력</color>이 높을수록 피해가 증가합니다. 대상의 수가 적을수록 피해가 추가로 증가합니다.",
+      "true_desc_jp": "敵全体に強撃でダメージを与え、自分のHPを<color=#28d9ed>10%</color>回復する。\\n自分の<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。対象の数が少ないほどダメージがUPする。"
     },
     "SKT_ULTIMATE": {
       "name": "End of the World",
@@ -122,7 +217,9 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000008_Skill03",
       "TargetTeamType": "ENEMY",
-      "buff": ["Heavy Strike"],
+      "buff": [
+        "Heavy Strike"
+      ],
       "cd": "5",
       "debuff": [
         "BT_STAT|ST_DEF"
@@ -143,9 +240,39 @@
         ],
         "5": [
           "+10% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "5_jp": [
+          "ダメージ+10%"
+        ],
+        "5_kr": [
+          "피해량 +10%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "엔드 오브 월드",
+      "name_jp": "エンド・オブ・ワールド",
+      "true_desc_kr": "적 전체를 강격으로 공격하고 대상 전체의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.\\n자신의 <color=#28d9ed>최대 체력</color>이 높을수록 피해가 증가합니다. 대상이 적을수록 피해가 추가로 증가합니다.",
+      "true_desc_jp": "敵全体に強撃でダメージを与え、対象全体の<color=#28d9ed>防御力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。\\n自分の<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。対象の数が少ないほどダメージがUPする。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -167,23 +294,60 @@
       "dual_buff": "Heavy Strike",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 아군 전체의 스킬 체인 피해량이 증가합니다. 해당 공격은 <color=#28d9ed>강격</color>으로 적용됩니다.\\n\\n<color=#ffd732>협공 효과</color> : 자신의 <color=#28d9ed>체력</color>이 높을수록 피해량이 증가합니다. 해당 공격은 <color=#28d9ed>강격</color>으로 적용됩니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:味方全体のチェーンスキルのダメージがUPする。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。\\n\\n<color=#ffd732>連携効果</color>:自分の<color=#28d9ed>HP</color>が高いほどダメージがUPする。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。"
     }
   },
-  "rank":"D"
+  "rank": "D",
+  "Fullname_kr": "로나",
+  "Fullname_jp": "ロナ",
+  "VoiceActor": "VA. Judy Alice Lee",
+  "VoiceActor_jp": "CV.明坂聡美",
+  "VoiceActor_kr": "CV.이보희"
 }
