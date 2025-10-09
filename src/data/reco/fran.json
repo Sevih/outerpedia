@@ -3,16 +3,32 @@
     "Weapon": [
       {
         "name": "Rampaging Caracal",
-        "mainStat": "ATK%"
+        "mainStat": "ATK%/HP%/DEF%"
       },
       {
-        "name": "Gorgon's Wrath [Ranger]",
-        "mainStat": "ATK%"
+        "name": "Heartunder's Blade",
+        "mainStat": "ATK%/HP%/DEF%"
+      },
+      {
+        "name": "Barrage of Truth",
+        "mainStat": "ATK%/HP%/DEF%"
       }
     ],
     "Amulet": [
       {
         "name": "Absolute Music",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Gorgon's Vanity [Ranger]",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Briareos's Ambition [Ranger]",
         "mainStat": "SPD"
       }
     ],
@@ -21,11 +37,10 @@
         { "name": "Speed", "count": 4 }
       ]
     ],
-    "SubstatPrio": "SPD>>ATK>CHC>CHD",
+    "SubstatPrio": "SPD>>CHC>ACC>ATK=CHD=HP",
     "Note": "",
     "Talisman": [
       "Rogue's Charm",
-      "Executionner's Charm",
       "Sage's Charm"
     ]
   }

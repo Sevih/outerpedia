@@ -296,6 +296,25 @@
     ]
   },
   {
+    "name": "Combination Simulator",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 11,
+    "characters": [
+      "Akari",
+      "Demiurge Vlada",
+      "Eliza",
+      "Fatal",
+      "Fran",
+      "Gnosis Beth",
+      "Ryu Lion",
+      "Skadi",
+      "Stella",
+      "Tamara",
+      "Valentine"
+    ]
+  },
+  {
     "name": "Violent Sledgehammer",
     "type": "Weapon",
     "class": "Striker",
@@ -328,24 +347,6 @@
       "Ryu Lion",
       "Skadi",
       "Stella",
-      "Valentine"
-    ]
-  },
-  {
-    "name": "Combination Simulator",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 10,
-    "characters": [
-      "Akari",
-      "Demiurge Vlada",
-      "Eliza",
-      "Fatal",
-      "Gnosis Beth",
-      "Ryu Lion",
-      "Skadi",
-      "Stella",
-      "Tamara",
       "Valentine"
     ]
   },
@@ -512,6 +513,21 @@
     ]
   },
   {
+    "name": "Talisman of Animosities",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 7,
+    "characters": [
+      "Demiurge Drakhan",
+      "Ember",
+      "Leo",
+      "Luna",
+      "Sterope",
+      "Summer Knight's Dream Ember",
+      "Veronica"
+    ]
+  },
+  {
     "name": "Revenge",
     "type": "Set",
     "class": null,
@@ -523,20 +539,6 @@
       "Gnosis Dahlia",
       "Idith",
       "Vlada"
-    ]
-  },
-  {
-    "name": "Talisman of Animosities",
-    "type": "Weapon",
-    "class": "Defender",
-    "count": 6,
-    "characters": [
-      "Demiurge Drakhan",
-      "Ember",
-      "Leo",
-      "Luna",
-      "Sterope",
-      "Veronica"
     ]
   },
   {
@@ -615,6 +617,18 @@
     ]
   },
   {
+    "name": "Barrage of Truth",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 4,
+    "characters": [
+      "Edelweiss",
+      "Fran",
+      "Holy Night's Blessing Dianne",
+      "Ryu Lion"
+    ]
+  },
+  {
     "name": "Physical Exorcism",
     "type": "Amulet",
     "class": "Ranger",
@@ -671,39 +685,6 @@
     ]
   },
   {
-    "name": "Charmer's Necklace",
-    "type": "Amulet",
-    "class": "Defender",
-    "count": 3,
-    "characters": [
-      "Christina",
-      "Omega Nadja",
-      "Summer Knight's Dream Ember"
-    ]
-  },
-  {
-    "name": "Gorgon's Wrath [Ranger]",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 3,
-    "characters": [
-      "Demiurge Vlada",
-      "Fran",
-      "Skadi"
-    ]
-  },
-  {
-    "name": "Barrage of Truth",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 3,
-    "characters": [
-      "Edelweiss",
-      "Holy Night's Blessing Dianne",
-      "Ryu Lion"
-    ]
-  },
-  {
     "name": "Memento Mori",
     "type": "Amulet",
     "class": "Mage",
@@ -744,6 +725,16 @@
     ]
   },
   {
+    "name": "Charmer's Necklace",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 2,
+    "characters": [
+      "Christina",
+      "Omega Nadja"
+    ]
+  },
+  {
     "name": "Gorgon's Wrath [Healer]",
     "type": "Weapon",
     "class": "Healer",
@@ -754,6 +745,16 @@
     ]
   },
   {
+    "name": "Gorgon's Wrath [Ranger]",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 2,
+    "characters": [
+      "Demiurge Vlada",
+      "Skadi"
+    ]
+  },
+  {
     "name": "Briareos's Recklessness [Ranger]",
     "type": "Weapon",
     "class": "Ranger",
@@ -761,6 +762,36 @@
     "characters": [
       "Demiurge Vlada",
       "Gnosis Beth"
+    ]
+  },
+  {
+    "name": "Heartunder's Blade",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 2,
+    "characters": [
+      "Fran",
+      "Maxie"
+    ]
+  },
+  {
+    "name": "Gorgon's Vanity [Ranger]",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 2,
+    "characters": [
+      "Fran",
+      "Skadi"
+    ]
+  },
+  {
+    "name": "Briareos's Ambition [Ranger]",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 2,
+    "characters": [
+      "Fran",
+      "Skadi"
     ]
   },
   {
@@ -882,15 +913,6 @@
     ]
   },
   {
-    "name": "Heartunder's Blade",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 1,
-    "characters": [
-      "Maxie"
-    ]
-  },
-  {
     "name": "Starlight Road",
     "type": "Amulet",
     "class": "Healer",
@@ -927,21 +949,12 @@
     ]
   },
   {
-    "name": "Gorgon's Vanity [Ranger]",
-    "type": "Amulet",
-    "class": "Ranger",
+    "name": "Gorgon's Wrath [Defender]",
+    "type": "Weapon",
+    "class": "Defender",
     "count": 1,
     "characters": [
-      "Skadi"
-    ]
-  },
-  {
-    "name": "Briareos's Ambition [Ranger]",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 1,
-    "characters": [
-      "Skadi"
+      "Summer Knight's Dream Ember"
     ]
   },
   {
@@ -1040,13 +1053,6 @@
     "name": "Briareos's Recklessness [Striker]",
     "type": "Weapon",
     "class": "Striker",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Gorgon's Wrath [Defender]",
-    "type": "Weapon",
-    "class": "Defender",
     "count": 0,
     "characters": []
   },

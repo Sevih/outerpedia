@@ -2792,13 +2792,25 @@
         {
           "name": "Rampaging Caracal",
           "mainStat": [
-            "ATK%"
+            "ATK%",
+            "HP%",
+            "DEF%"
           ]
         },
         {
-          "name": "Gorgon's Wrath [Ranger]",
+          "name": "Heartunder's Blade",
           "mainStat": [
-            "ATK%"
+            "ATK%",
+            "HP%",
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Barrage of Truth",
+          "mainStat": [
+            "ATK%",
+            "HP%",
+            "DEF%"
           ]
         }
       ],
@@ -2808,13 +2820,33 @@
           "mainStat": [
             "SPD"
           ]
+        },
+        {
+          "name": "Gorgon's Vanity [Ranger]",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Ranger]",
+          "mainStat": [
+            "SPD"
+          ]
         }
       ],
       "sub": [
         "SPD",
-        "ATK",
         "CHC",
-        "CHD"
+        "ACC",
+        "ATK",
+        "CHD",
+        "HP"
       ],
       "armorSets": [
         "Speed"
@@ -6081,10 +6113,22 @@
     }
   },
   "summer-knight-s-dream-ember": {
-    "Scaling": {
+    "Life Swift": {
       "weaponSub": [
         {
           "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Defender]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
           "mainStat": [
             "HP%"
           ]
@@ -6102,26 +6146,18 @@
           "mainStat": [
             "HP%"
           ]
-        },
-        {
-          "name": "Charmer's Necklace",
-          "mainStat": [
-            "EVA",
-            "HH"
-          ]
         }
       ],
       "sub": [
         "HP",
         "SPD",
         "CHC",
-        "ATK",
         "DEF",
         "CHD"
       ],
       "armorSets": [
         "Swiftness",
-        "Immunity"
+        "Life"
       ]
     },
     "HP immune": {
@@ -6131,6 +6167,18 @@
           "mainStat": [
             "HP%"
           ]
+        },
+        {
+          "name": "Gorgon's Wrath [Defender]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
         }
       ],
       "amuletSub": [
@@ -6145,20 +6193,12 @@
           "mainStat": [
             "HP%"
           ]
-        },
-        {
-          "name": "Charmer's Necklace",
-          "mainStat": [
-            "EVA",
-            "HH"
-          ]
         }
       ],
       "sub": [
         "HP",
         "SPD",
         "CHC",
-        "ATK",
         "DEF",
         "CHD"
       ],
@@ -6167,10 +6207,22 @@
         "Immunity"
       ]
     },
-    "HP scaling": {
+    "HP counter": {
       "weaponSub": [
         {
           "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Defender]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
           "mainStat": [
             "HP%"
           ]
@@ -6188,68 +6240,63 @@
           "mainStat": [
             "HP%"
           ]
-        },
-        {
-          "name": "Charmer's Necklace",
-          "mainStat": [
-            "EVA",
-            "HH"
-          ]
         }
       ],
       "sub": [
         "HP",
         "SPD",
         "CHC",
-        "ATK",
-        "DEF",
-        "CHD"
-      ],
-      "armorSets": [
-        "Swiftness",
-        "Life"
-      ]
-    },
-    "HP Counter": {
-      "weaponSub": [
-        {
-          "name": "Force Field Generator",
-          "mainStat": [
-            "HP%"
-          ]
-        }
-      ],
-      "amuletSub": [
-        {
-          "name": "Coward's Treasure",
-          "mainStat": [
-            "HP%"
-          ]
-        },
-        {
-          "name": "Fool's Dawn",
-          "mainStat": [
-            "HP%"
-          ]
-        },
-        {
-          "name": "Charmer's Necklace",
-          "mainStat": [
-            "EVA",
-            "HH"
-          ]
-        }
-      ],
-      "sub": [
-        "HP",
-        "SPD",
-        "CHC",
-        "ATK",
         "DEF",
         "CHD"
       ],
       "armorSets": [
         "Counterattack",
+        "Life"
+      ]
+    },
+    "Full HP": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Defender]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
         "Life"
       ]
     },
@@ -6260,6 +6307,18 @@
           "mainStat": [
             "HP%"
           ]
+        },
+        {
+          "name": "Gorgon's Wrath [Defender]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
         }
       ],
       "amuletSub": [
@@ -6274,12 +6333,51 @@
           "mainStat": [
             "HP%"
           ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "CHC",
+        "DEF",
+        "CHD"
+      ],
+      "armorSets": [
+        "Counterattack"
+      ]
+    },
+    "Immune": {
+      "weaponSub": [
+        {
+          "name": "Force Field Generator",
+          "mainStat": [
+            "HP%"
+          ]
         },
         {
-          "name": "Charmer's Necklace",
+          "name": "Gorgon's Wrath [Defender]",
           "mainStat": [
-            "EVA",
-            "HH"
+            "HP%"
+          ]
+        },
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "HP%"
           ]
         }
       ],
@@ -6287,12 +6385,11 @@
         "HP",
         "SPD",
         "CHC",
-        "ATK",
         "DEF",
         "CHD"
       ],
       "armorSets": [
-        "Counterattack"
+        "Immunity"
       ]
     }
   },
