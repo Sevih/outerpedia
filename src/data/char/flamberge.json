@@ -5,14 +5,35 @@
   "Element": "Earth",
   "gift": "Magic Tool",
   "Class": "Healer",
-  "SubClass": "Reliever","skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "SubClass": "Reliever",
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",
     "3": "ATK DEF HP +10%",
     "4": "ATK DEF HP +16%\n+5% Health\n+1 Chain Passive Weakness Gauge damage",
-    "5": "ATK DEF HP +22%",
-    "6": "ATK DEF HP +30%\n+5% Health\n+25 Action Points at battle start"
+    "5": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "6": "ATK DEF HP +30%\n+5% Health\n+25 Action Points at battle start",
+    "2_jp": "ATK DEF HP +5%",
+    "2_kr": "ATK DEF HP +5%",
+    "3_jp": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "4_jp": "ATK DEF HP +16%\nHP+5%\nチェーンパッシブのWGダメージ+1",
+    "4_kr": "ATK DEF HP +16%\n체력 +5%\n체인 패시브의 WG 감소량 +1",
+    "5_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\nHP+5%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n체력 +5%\n입장 시 AP +25"
   },
   "Chain_Type": "Join",
   "skills": {
@@ -49,9 +70,39 @@
         ],
         "5": [
           "+10% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "効果発生率+10%"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "맹렬한 질풍처럼",
+      "name_jp": "疾きこと風の如く",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>30%</color> 확률로 무작위 아군 한 명의 <color=#28d9ed>속도</color>를 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>30%</color>の確率でランダムの味方単体の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。"
     },
     "SKT_SECOND": {
       "name": "Like A Peaceful Forest",
@@ -82,9 +133,37 @@
         ],
         "5": [
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "効果発生率+10%"
+        ],
+        "2_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "4_jp": [
+          "効果発生率+15%"
+        ],
+        "4_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "5_jp": [
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 0
+      "wgr": 0,
+      "name_kr": "조용한 숲처럼",
+      "name_jp": "徐かなること林の如く",
+      "true_desc_kr": "(패시브 효과) 치명 피격 시 <color=#28d9ed>50%</color> 확률로 <color=#28d9ed>고고한 산처럼</color>의 스킬 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
+      "true_desc_jp": "(パッシブ効果)会心ダメージを受けた場合、<color=#28d9ed>50%</color>の確率で<color=#28d9ed>【動かざること山の如く】</color>のスキルターンが<color=#28d9ed>1ターン</color>減少する。"
     },
     "SKT_ULTIMATE": {
       "name": "Like A Noble Mountain",
@@ -98,22 +177,30 @@
       "SkillType": "SKT_ULTIMATE",
       "SkipNameID": "SKILL_NAME_2000050_Skill03",
       "TargetTeamType": "TEAM",
-      "buff": ["BT_AP_CHARGE"],
+      "buff": [
+        "BT_AP_CHARGE"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
           "effect": "Increases Speed Increase duration by 1 turn",
-          "level": 1
+          "level": 1,
+          "effect_kr": "속도 증가 지속 +1턴",
+          "effect_jp": "スピードUP+1ターン"
         },
         "SKT_BURST_2": {
           "cost": 120,
           "effect": "Increases Speed for 2 turns",
-          "level": 2
+          "level": 2,
+          "effect_kr": "2턴 동안 속도 증가",
+          "effect_jp": "2ターンの間スピードUP"
         },
         "SKT_BURST_3": {
           "cost": 160,
           "effect": "Target Action Points +50",
-          "level": 3
+          "level": 3,
+          "effect_kr": "대상 AP +50",
+          "effect_jp": "対象のAP+50"
         }
       },
       "cd": "4",
@@ -133,9 +220,37 @@
         ],
         "5": [
           "+5% healing"
+        ],
+        "2_jp": [
+          "HP回復量+3%"
+        ],
+        "2_kr": [
+          "체력 회복량 +3%"
+        ],
+        "3_jp": [
+          "HP回復量+3%"
+        ],
+        "3_kr": [
+          "체력 회복량 +3%"
+        ],
+        "4_jp": [
+          "HP回復量+4%"
+        ],
+        "4_kr": [
+          "체력 회복량 +4%"
+        ],
+        "5_jp": [
+          "HP回復量+5%"
+        ],
+        "5_kr": [
+          "체력 회복량 +5%"
         ]
       },
-      "wgr": null
+      "wgr": null,
+      "name_kr": "고고한 산처럼",
+      "name_jp": "動かざること山の如く",
+      "true_desc_kr": "아군 전체의 <color=#28d9ed>체력</color>을 플랑베르쥬 최대 체력의 <color=#28d9ed>20%</color>만큼 회복시킵니다.",
+      "true_desc_jp": "味方全体の<color=#28d9ed>HP</color>を【フランベルジュ】の最大HPの<color=#28d9ed>20%</color>回復させる。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -157,24 +272,61 @@
       "dual_buff": "BT_STAT|ST_SPEED",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 <color=#28d9ed>1.5%</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> :<color=#28d9ed>1턴</color> 동안 무작위 아군 한 명의 <color=#28d9ed>속도</color>가 증가합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、CPを<color=#28d9ed>1.5%</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:ランダムの味方単体の<color=#28d9ed>スピード</color>が<color=#28d9ed>1ターン</color>の間UPする。"
     }
   },
-  "rank":"C",
-  "role":"sustain"
+  "rank": "C",
+  "role": "sustain",
+  "Fullname_kr": "플랑베르쥬",
+  "Fullname_jp": "フランベルジュ",
+  "VoiceActor": "VA. Todd Haberkorn",
+  "VoiceActor_jp": "CV.野々井爽",
+  "VoiceActor_kr": "CV.이상호"
 }

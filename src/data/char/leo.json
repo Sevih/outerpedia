@@ -3,21 +3,38 @@
   "Fullname": "Leo",
   "Rarity": 3,
   "Element": "Light",
-  "role":"sustain",
+  "role": "sustain",
   "gift": "Magic Tool",
-  "rank_pvp":"B",
+  "rank_pvp": "B",
   "Class": "Defender",
-  "SubClass": "Phalanx","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "SubClass": "Phalanx",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+3% Ally Team Resilience\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+3% Ally Team Resilience\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+3% Ally Team Resilience\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の効果抵抗+3%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 효과 저항 +3%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の効果抵抗+3%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 효과 저항 +3%\n입장 시 AP +25"
   },
   "Chain_Type": "Start",
   "skills": {
@@ -40,21 +57,29 @@
         "SKT_BURST_1": {
           "cost": 120,
           "effect": "Inflicts Taunted for 1 turn\\nIncreases damage",
-          "level": 1
+          "level": 1,
+          "effect_kr": "대상 1턴 동안 도발\\n피해 증가",
+          "effect_jp": "対象1ターンの間挑発\\nダメージUP"
         },
         "SKT_BURST_2": {
           "cost": 160,
           "effect": "Enhances Taunted\\n(Ignores Resilience)",
-          "level": 2
+          "level": 2,
+          "effect_kr": "도발 강화\\n(효과 저항 무시)",
+          "effect_jp": "挑発強化\\n(効果抵抗無視)"
         },
         "SKT_BURST_3": {
           "cost": 200,
           "effect": "Changed to Enhanced Skill\\nTargets all enemies and deals additional damage proportional to Defense",
-          "level": 3
+          "level": 3,
+          "effect_kr": "강화 스킬로 교체\\n공격 범위 확대 및 방어 비례 피해 추가",
+          "effect_jp": "強化スキルに変更\\n攻撃範囲拡大および防御が\\n高いほどダメージUP"
         }
       },
       "cd": null,
-      "debuff": ["BT_AGGRO"],
+      "debuff": [
+        "BT_AGGRO"
+      ],
       "description": [
         "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000042_1_1]</color> chance to gain a <color=#28d9ed>barrier</color> for <color=#28d9ed>[Buff_T_2000042_1_1] turn(s)</color>. The barrier strength increases proportional to the caster's <color=#28d9ed>Defense</color>."
       ],
@@ -72,9 +97,41 @@
         "5": [
           "+15% damage",
           "Enhances barrier strength"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+15%",
+          "シールド強化"
+        ],
+        "5_kr": [
+          "피해량 +15%",
+          "실드 강화"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "정의의 사자사연격",
+      "name_jp": "正義の獅子四連撃",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>80%</color> 확률로 <color=#28d9ed>실드</color>를 <color=#28d9ed>2턴</color> 동안 획득합니다. 실드량은 자신의 <color=#28d9ed>방어력</color>이 높을수록 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>80%</color>の確率で<color=#28d9ed>シールド</color>を<color=#28d9ed>2ターン</color>の間獲得する。自分の<color=#28d9ed>防御力</color>が高いほど、シールド量がUPする。"
     },
     "SKT_SECOND": {
       "name": "Courageous Protection",
@@ -109,9 +166,37 @@
         ],
         "5": [
           "+1 turn effect duration"
+        ],
+        "2_jp": [
+          "シールド追加(防御力が高いほどシールド量がUP)"
+        ],
+        "2_kr": [
+          "실드 추가 (방어 비례)"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "シールド強化"
+        ],
+        "4_kr": [
+          "실드 강화"
+        ],
+        "5_jp": [
+          "効果ターン+1ターン"
+        ],
+        "5_kr": [
+          "효과 지속 +1턴"
         ]
       },
-      "wgr": null
+      "wgr": null,
+      "name_kr": "용기의 수호영역",
+      "name_jp": "勇気のイージスフィールド",
+      "true_desc_kr": "자신을 제외한 아군 전체의 <color=#28d9ed>회피</color>를 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
+      "true_desc_jp": "自分を除く味方全体の<color=#28d9ed>回避</color>を<color=#28d9ed>1ターン</color>の間UPさせる。"
     },
     "SKT_ULTIMATE": {
       "name": "Loving Justice Dive",
@@ -148,9 +233,41 @@
         "5": [
           "+20% damage",
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+20%",
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "피해량 +20%",
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "사랑의 저스티스 다이브",
+      "name_jp": "愛のジャスティス・ダイブ",
+      "true_desc_kr": "적 전체를 공격하고 아군 전체에게 각각 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>효과 저항 증가</color>와 <color=#28d9ed>무적</color>을 <color=#28d9ed>1턴</color> 동안 부여합니다.",
+      "true_desc_jp": "敵全体にダメージを与え、味方全体にそれぞれ<color=#28d9ed>70%</color>の確率で<color=#28d9ed>効果抵抗UP</color>と<color=#28d9ed>無敵</color>を<color=#28d9ed>1ターン</color>の間付与する。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -172,23 +289,60 @@
       "dual_buff": "",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 아군 전체의 스킬 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.\\n\\n<color=#ffd732>협공 효과</color> : 자신의 <color=#28d9ed>방어력</color>이 높을수록 피해량이 증가합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、味方全体のスキルターンが<color=#28d9ed>1ターン</color>減少する。\\n\\n<color=#fff95f>連携効果</color>:自分の<color=#28d9ed>防御力</color>が高いほどダメージがUPする。"
     }
   },
-  "rank":"C"
+  "rank": "C",
+  "Fullname_kr": "레오",
+  "Fullname_jp": "レオ",
+  "VoiceActor": "VA. Aleks Le",
+  "VoiceActor_jp": "CV.逢坂良太",
+  "VoiceActor_kr": "CV.정의한"
 }
