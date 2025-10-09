@@ -15,6 +15,16 @@ type EEEntry = {
   rank?: string;
 };
 
+function parseColoredText(text: string): string {
+  return text
+    .replace(/<color=#[0-9a-fA-F]{6}>/g, match => {
+      const color = match.match(/#[0-9a-fA-F]{6}/)?.[0] ?? '#fff';
+      return `<span style="color:${color}">`;
+    })
+    .replace(/<\/color>/g, '</span>')
+    .replace(/\\n/g, '<br>');
+}
+
 export default function ExclusiveEquipmentList() {
   const [search, setSearch] = useState("");
 
@@ -138,12 +148,18 @@ export default function ExclusiveEquipmentList() {
 
 
             {/* Description */}
-            <p className="text-white text-sm mt-1">{data.effect}</p>
+            <p
+              className="text-white text-sm mt-1"
+              dangerouslySetInnerHTML={{ __html: parseColoredText(data.effect) }}
+            />
 
             {data.effect10 && (
-              <p className="text-xs text-amber-300 mt-1 italic">
-                [LV 10]: {data.effect10}
-              </p>
+              <p
+                className="text-xs text-amber-300 mt-1 italic"
+                dangerouslySetInnerHTML={{
+                  __html: `[LV 10]: <span class="text-white">${parseColoredText(data.effect10)}</span>`
+                }}
+              />
             )}
           </Link>
         ))}
