@@ -343,8 +343,8 @@
       "wgr_dual": 1,
       "name_kr": "체인 패시브",
       "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>2.5%</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>75%</color> 확률로 <color=#28d9ed>2턴</color> 동안 표식을 부여합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、CPを<color=#28d9ed>2.5%</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>75%</color>の確率で標的を<color=#28d9ed>2ターン</color>の間付与する。"
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>75%</color> 확률로 <color=#28d9ed>2턴</color> 동안 표식을 부여합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、CPを<color=#28d9ed>25</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>75%</color>の確率で標的を<color=#28d9ed>2ターン</color>の間付与する。"
     }
   },
   "rank": "B",

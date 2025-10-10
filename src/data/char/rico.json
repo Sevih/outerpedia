@@ -328,8 +328,8 @@
       "wgr_dual": 1,
       "name_kr": "체인 패시브",
       "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신의 AP를 <color=#28d9ed>2.5%</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>20%</color> 확률로 대상의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、APを<color=#28d9ed>2.5%</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、対象に<color=#28d9ed>20%</color>の確率で対象の<color=#28d9ed>強化効果</color>を<color=#28d9ed>2個</color>解除する。"
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신의 AP를 <color=#28d9ed>25</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>20%</color> 확률로 대상의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、APを<color=#28d9ed>25</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、対象に<color=#28d9ed>20%</color>の確率で対象の<color=#28d9ed>強化効果</color>を<color=#28d9ed>2個</color>解除する。"
     }
   },
   "rank": "D",

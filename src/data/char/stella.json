@@ -337,8 +337,8 @@
       "wgr_dual": 1,
       "name_kr": "체인 패시브",
       "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신과 다음 스킬 체인 수행자의 AP를 <color=#28d9ed>2.5%</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>80%</color>의 확률로 대상의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>-20%</color> 감소시킵니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、自分と次のチェーンスキル参加者のAPを<color=#28d9ed>2.5%</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>80%</color>の確率で対象の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>-20%</color>DOWNさせる。"
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신과 다음 스킬 체인 수행자의 AP를 <color=#28d9ed>25</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>80%</color>의 확률로 대상의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>-20%</color> 감소시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、自分と次のチェーンスキル参加者のAPを<color=#28d9ed>25</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>80%</color>の確率で対象の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>-20%</color>DOWNさせる。"
     }
   },
   "rank": "A",

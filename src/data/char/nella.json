@@ -193,8 +193,8 @@
       "wgr": null,
       "name_kr": "어둠의 맹약",
       "name_jp": "闇の盟約",
-      "true_desc_kr": "(발동 효과) 피격 시 <color=#28d9ed>신속 대응</color> 효과가 발동합니다.\\n자신의 행동 게이지가 <color=#28d9ed>50%</color> 증가하며, 아군 전체의 <color=#28d9ed>체력</color>을 넬라 최대 체력의 <color=#28d9ed>10%</color>만큼 회복시킵니다. 이후 자신을 제외한 아군 전체의 AP를 <color=#28d9ed>2.5%</color> 증가시킵니다.",
-      "true_desc_jp": "(発動効果)ダメージを受けた時、<color=#28d9ed>【迅速対応】</color>を発動する。\\n【迅速対応】:自分の行動ゲージが<color=#28d9ed>50%</color>UPし、味方全体の<color=#28d9ed>HP</color>をネラの最大HPの<color=#28d9ed>10%</color>回復する。その後、自分を除く味方全体にAPを<color=#28d9ed>2.5%</color>獲得させる。"
+      "true_desc_kr": "(발동 효과) 피격 시 <color=#28d9ed>신속 대응</color> 효과가 발동합니다.\\n자신의 행동 게이지가 <color=#28d9ed>50%</color> 증가하며, 아군 전체의 <color=#28d9ed>체력</color>을 넬라 최대 체력의 <color=#28d9ed>10%</color>만큼 회복시킵니다. 이후 자신을 제외한 아군 전체의 AP를 <color=#28d9ed>25</color> 증가시킵니다.",
+      "true_desc_jp": "(発動効果)ダメージを受けた時、<color=#28d9ed>【迅速対応】</color>を発動する。\\n【迅速対応】:自分の行動ゲージが<color=#28d9ed>50%</color>UPし、味方全体の<color=#28d9ed>HP</color>をネラの最大HPの<color=#28d9ed>10%</color>回復する。その後、自分を除く味方全体にAPを<color=#28d9ed>25</color>獲得させる。"
     },
     "SKT_ULTIMATE": {
       "name": "The Coronation",

@@ -331,8 +331,8 @@
       "wgr_dual": 1,
       "name_kr": "체인 패시브",
       "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>2.5%</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 대상의 <color=#28d9ed>최대 체력</color>이 높을수록 피해량이 증가합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後<color=#28d9ed>2.5%</color>のCPを回復する。\\n\\n<color=#ffd732>連携効果</color>:対象の<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。"
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 대상의 <color=#28d9ed>최대 체력</color>이 높을수록 피해량이 증가합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後<color=#28d9ed>25</color>のCPを回復する。\\n\\n<color=#ffd732>連携効果</color>:対象の<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。"
     }
   },
   "rank": "C",
