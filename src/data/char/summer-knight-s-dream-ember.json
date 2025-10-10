@@ -3,7 +3,7 @@
   "Fullname": "Summer Knight's Dream Ember",
   "Rarity": 3,
   "Element": "Water",
-   "skill_priority": {
+  "skill_priority": {
     "First": {
       "prio": 3
     },
@@ -30,16 +30,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\nSelf Max HP +35%\nAllies' Evasion +4%\n\nWhen enemy uses Counterattack, Revenge, or Agile Response, increase self Priority +30%",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\nOn entry, AP +50\nWhen enemy acts, gain Azure Will +2 (once per turn)",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\nOn entry, AP +50\nWhen enemy acts, gain Azure Will +2 (once per turn)",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\nWhen hit, reduce own skill cooldown by 2 turns (once per turn)\nAt battle start, gain Azure Will +2\nWhen enemy uses Counterattack, Revenge, or Agile Response, increase self Priority +40%"
   },
-  "Chain_Type": "Start",
+  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
       "name": "Dolphin Charge!",
-      "true_desc": "Attacks an enemy. Has a <color=#28d9ed>30%</color> chance to dispel <color=#28d9ed>1</color> <color=#28d9ed>Buffs</color> from the target, and gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Azure Will</color>.\nThis skill’s damage dealt increases proportional to the caster’s Max Health.",
+      "true_desc": "Inflicts fixed damage equal to <color=#28d9ed>10%</color> of the caster's Max Health on the enemy, then attacks. Has 30% chance to dispel <color=#28d9ed>1</color><color=#28d9ed>Buff(s)</color> from the target, and gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Azure Will</color>.\\nThis skill's damage increases in proportion to the caster's Max Health.",
       "DescID": "SKILL_DESC_2000106_Skill01_LV1,SKILL_DESC_2000106_Skill01_LV1,SKILL_DESC_2000106_Skill01_LV1,SKILL_DESC_2000106_Skill01_LV1,SKILL_DESC_2000106_Skill01_LV1",
       "FocusType_fallback1": "ATTACK",
       "IconName": "Skill_First_2000106",
@@ -54,22 +54,29 @@
         "SKT_BURST_1": {
           "cost": 60,
           "effect": "Buff Removal activation chance +50%",
-          "level": 1
+          "level": 1,
+          "effect_kr": "강화 효과 해제 발동 확률 +50%",
+          "effect_jp": "強化効果解除の発動確率+50%"
         },
         "SKT_BURST_2": {
           "cost": 90,
-          "effect": "Enhances Buff Removal\n(Ignores Resilience)",
-          "level": 2
+          "effect": "Increases damage",
+          "level": 2,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_3": {
           "cost": 120,
-          "effect": "Replaces with Empowered Skill\nAttack range expanded\nAzure Will +1",
-          "level": 3
+          "effect": "Replaces with Empowered Skill\\nAttack range expanded\\nAzure Will +1",
+          "level": 3,
+          "effect_kr": "강화 스킬로 교체\\n공격 범위 확대\\n푸른 열정 +1",
+          "effect_jp": "強化スキルに置換\\n攻撃範囲拡大\\n「青き情熱」+1"
         }
       },
       "cd": null,
       "debuff": [
-        "BT_REMOVE_BUFF"
+        "BT_REMOVE_BUFF",
+        "BT_FIXED_DAMAGE"
       ],
       "description": [
         "Attacks an enemy. Has a <color=#28d9ed>[Buff_C_2000106_1_3]</color> chance to dispel <color=#28d9ed>[Buff_V_2000106_1_3]</color> <color=#28d9ed>Buffs</color> from the target, and gains <color=#28d9ed>[Buff_V_2000106_1_2]</color> <color=#28d9ed>Unique Resource: Azure Will</color>.\\nThis skillâs damage dealt increases proportional to the casterâs Max Health."
@@ -89,13 +96,45 @@
         "5": [
           "Azure Will gain +1",
           "+15% damage"
+        ],
+        "2_jp": [
+          "WGダメージ+1",
+          "ダメージ+10%"
+        ],
+        "2_kr": [
+          "WG 감소량 +1",
+          "피해량 +10%"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "4_jp": [
+          "効果発生率+10%",
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "효과 발동 확률 +10%",
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "「青き情熱」獲得量+1",
+          "ダメージ+15%"
+        ],
+        "5_kr": [
+          "푸른 열정 획득량 +1",
+          "피해량 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "돌핀 차징!",
+      "name_jp": "ドルフィンチャージ!"
     },
     "SKT_SECOND": {
       "name": "Master, Spike!",
-      "true_desc": "(Passive Effect) If the caster is the only Defender ally, damage suffered in one attack does not exceed <color=#28d9ed>65%</color> of the caster’s Max Health (includes Dual Attacks and Additional Attacks).\n\n(Active Effect) Attacks all enemies and increases all allies’ <color=#28d9ed>Penetration</color> for <color=#28d9ed>1</color> turns.\nThis skill’s damage dealt increases proportional to the caster’s Max Health.",
+      "true_desc": "(Passive Effect) Decreases damage taken by all allies by <color=#28d9ed>10%</color>, and if the caster is the only Defender among allies, damage received from a single attack does not exceed <color=#28d9ed>65%</color> of the caster's Max Health (includes Dual Attacks and Additional Attacks).\\n\\n(Active Effect) Increases all allies' <color=#28d9ed>Penetration</color> and <color=#28d9ed>Defense</color> for <color=#28d9ed>1</color> turns, then attacks all enemies and increases the caster's <color=#28d9ed>Combat Readiness</color> by <color=#28d9ed>20%</color>.\\nThis skill's damage increases in proportion to the caster's Max Helth.",
       "ApproachType": "ATTACK",
       "DescID": "SKILL_DESC_2000106_Skill02_LV1,SKILL_DESC_2000106_Skill02_LV1,SKILL_DESC_2000106_Skill02_LV1,SKILL_DESC_2000106_Skill02_LV1,SKILL_DESC_2000106_Skill02_LV1",
       "IconName": "Skill_Second_2000106",
@@ -106,7 +145,9 @@
       "SkipNameID": "SKILL_NAME_2000106_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "BT_STAT|ST_PIERCE_POWER_RATE"
+        "BT_STAT|ST_PIERCE_POWER_RATE",
+        "BT_STAT|ST_DEF",
+        "BT_ACTION_GAUGE"
       ],
       "cd": "4",
       "debuff": [],
@@ -123,17 +164,50 @@
           "-10% Health Limit"
         ],
         "4": [
-          "+1 turn Increased Penetration duration"
+          "+1 turn effect duration",
+          "+10% damage"
         ],
         "5": [
           "-10% Health Limit"
+        ],
+        "2_jp": [
+          "WGダメージ+1",
+          "ダメージ+10%"
+        ],
+        "2_kr": [
+          "WG 감소량 +1",
+          "피해량 +10%"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン",
+          "HPの条件-10%"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴",
+          "체력 조건 -10%"
+        ],
+        "4_jp": [
+          "効果ターン+1ターン",
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "효과 지속 +1턴",
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "HPの条件-10%"
+        ],
+        "5_kr": [
+          "체력 조건 -10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "스승님, 스파이크!",
+      "name_jp": "師匠、スパイク!"
     },
     "SKT_ULTIMATE": {
       "name": "Sudden Strike!",
-      "true_desc": "Deals Fixed Damage equal to <color=#28d9ed>5%</color> of the caster’s Max Health, then attacks all enemies. After attacking, increases the <color=#28d9ed>Priority</color> of all allies except the caster by <color=#28d9ed>10%</color>, and additionally deals Fixed Damage to bosses equal to <color=#28d9ed>8%</color> of the boss’s Max HP.\n\nWhen holding <color=#28d9ed>5</color> <color=#28d9ed>Unique Resource: Azure Will</color>, consumes all to double both the Fixed Damage and the Priority increase. (Bosses cannot be defeated by Fixed Damage applied after the attack.)",
+      "true_desc": "Deals Fixed Damage equal to <color=#28d9ed>5%</color> of the caster's Max Health, then attacks all enemies. After attacking, increases the <color=#28d9ed>Priority</color> of all allies except the caster by <color=#28d9ed>10%</color>, and additionally deals Fixed Damage to bosses equal to <color=#28d9ed>8%</color> of the boss's Max HP.\\n\\nWhen holding <color=#28d9ed>5</color> <color=#28d9ed>Unique Resource: Azure Will</color>, consumes all to double both the Fixed Damage and the Priority increase. (Bosses cannot be defeated by Fixed Damage applied after the attack.)",
       "DescID": "SKILL_DESC_2000106_Skill03_LV1,SKILL_DESC_2000106_Skill03_LV1,SKILL_DESC_2000106_Skill03_LV1,SKILL_DESC_2000106_Skill03_LV1,SKILL_DESC_2000106_Skill03_LV1",
       "IconName": "Skill_Ultimate_2000106",
       "NameIDSymbol": "10603",
@@ -147,9 +221,11 @@
         "BT_ACTION_GAUGE"
       ],
       "cd": "5",
-      "debuff": [],
+      "debuff": [
+        "BT_FIXED_DAMAGE"
+      ],
       "description": [
-        "Deals Fixed Damage equal to <color=#28d9ed>[Buff_V_2000106_3_3]</color> of the casterâs Max Health, then attacks all enemies. After attacking, increases the <color=#28d9ed>Priority</color> of all allies except the caster by <color=#28d9ed>[Buff_V_2000106_3_7]</color>, and additionally deals Fixed Damage to bosses equal to <color=#28d9ed>[Buff_V_2000106_3_5_1]</color> of the bossâs Max HP.\\n\\nWhen holding <color=#28d9ed>5</color> <color=#28d9ed>Unique Resource: Azure Will</color>, consumes all to double both the Fixed Damage and the Priority increase. (Bosses cannot be defeated by Fixed Damage applied after the attack.)"
+        "Deals Fixed Damage equal to <color=#28d9ed>[Buff_V_2000106_3_3]</color> of the casterâs Max Health, then attacks all enemies. After attacking, increases the <color=#28d9ed>Priority</color> of all allies by <color=#28d9ed>[Buff_V_2000106_3_7]</color>, and additionally deals Fixed Damage to bosses equal to <color=#28d9ed>[Buff_V_2000106_3_5_1]</color> of the bossâs Max HP.\\n\\nWhen holding <color=#28d9ed>5</color> <color=#28d9ed>Unique Resource: Azure Will</color>, consumes all to double both the Fixed Damage and the Priority increase. (Bosses cannot be defeated by Fixed Damage applied after the attack.)"
       ],
       "enhancement": {
         "2": [
@@ -163,16 +239,44 @@
           "Fixed Damage +5% of self Max HP"
         ],
         "5": [
-          "All allies except self Priority +10%"
+          "All allies Priority +10%"
+        ],
+        "2_jp": [
+          "WGダメージ+1",
+          "ダメージ+10%"
+        ],
+        "2_kr": [
+          "WG 감소량 +1",
+          "피해량 +10%"
+        ],
+        "3_jp": [
+          "自身最大HPの固定ダメージ+5%"
+        ],
+        "3_kr": [
+          "자신 최대 체력 고정 피해 +5%"
+        ],
+        "4_jp": [
+          "自身最大HPの固定ダメージ+5%"
+        ],
+        "4_kr": [
+          "자신 최대 체력 고정 피해 +5%"
+        ],
+        "5_jp": [
+          "味方全体の行動ゲージ+10%"
+        ],
+        "5_kr": [
+          "아군 전체 행동 게이지 +10%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "예상치 못한 일격!",
+      "name_jp": "予想外の一撃!"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Starter Effect</color> : After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>5</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a 50% chance to remove 1 <color=#28d9ed>Buff</color> from the target.",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color> : After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>3</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color> : After attacking, has a 50% chance to remove 1 <color=#28d9ed>Buff</color> from the target.",
       "DescID": "SKILL_DESC_2000106_Skill04_LV1,SKILL_DESC_2000106_Skill04_LV1,SKILL_DESC_2000106_Skill04_LV1,SKILL_DESC_2000106_Skill04_LV1,SKILL_DESC_2000106_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Water_Start",
+      "IconName": "Skill_ChainPassive_Water_Join",
       "NameIDSymbol": "10604",
       "RangeType": "NONE",
       "RangeType_fallback1": "NONE",
@@ -183,27 +287,64 @@
       "cd": null,
       "debuff": "BT_WG_DMG",
       "description": [
-        "<color=#ffd732>Chain Starter Effect</color> : After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000106_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color> : After attacking, has a [Buff_C_2000106_backup_1_1] chance to remove [Buff_V_2000106_backup_1_1] <color=#28d9ed>Buff</color> from the target."
+        "<color=#ffd732>Chain Companion Effect</color> : After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000106_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color> : After attacking, has a [Buff_C_2000106_backup_1_1] chance to remove [Buff_V_2000106_backup_1_1] <color=#28d9ed>Buff</color> from the target."
       ],
       "dual_debuff": "BT_REMOVE_BUFF",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 <color=#28d9ed>3</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 50% 확률로 대상의 <color=#28d9ed>강화 효과</color>를 1개 해제합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color> :攻撃後、WGを<color=#28d9ed>3</color>追加で減少させる。\\n\\n<color=#ffd732>協攻効果</color>\n:攻撃後、50%の確率で対象の<color=#28d9ed>強化効果</color>を1個解除する。"
     }
-  }
+  },
+  "Fullname_kr": "청운의 꿈 엠버",
+  "Fullname_jp": "青雲の志 エンバー",
+  "VoiceActor": "VA. Rie Hikisaka",
+  "VoiceActor_jp": "CV. 引坂理絵",
+  "VoiceActor_kr": "CV. 히키사카 리에"
 }
