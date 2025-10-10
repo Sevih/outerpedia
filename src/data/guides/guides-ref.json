@@ -584,6 +584,15 @@
     "author": "Sevih",
     "second_image": "S2-10-10-2"
   },
+  "S3-1-10": {
+    "category": "adventure",
+    "title": "S3 Hard 1-10 : Sphinx Guardian",
+    "description": "Boss strategy guide.",
+    "icon": "S3-1-10",
+    "last_updated": "2025-10-10",
+    "author": "Sevih",
+    "second_image": "S3-1-10-2"
+  },
   "S3-2-10": {
     "category": "adventure",
     "title": "S3 Hard 2-10 : Betrayed Deshret",
