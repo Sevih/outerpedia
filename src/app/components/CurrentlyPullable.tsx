@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { toKebabCase } from '@/utils/formatText'
 import CurrentlyPullableClient from './CurrentlyPullableClient'
+import { getTenantServer } from '@/tenants/tenant.server'
 
 type BannerEntry = {
   name: string
@@ -20,7 +21,9 @@ function isBannerActive(start: string, end: string): boolean {
   return now >= startDate && now < endDate
 }
 
-export default function CurrentlyPullable() {
+export default async function CurrentlyPullable() {
+  const { key: langKey } = await getTenantServer()
+  console.log(langKey)
   const bannerPath = path.resolve(process.cwd(), 'src/data/banner.json')
   const bannerData: BannerEntry[] = JSON.parse(fs.readFileSync(bannerPath, 'utf8'))
 
@@ -33,8 +36,16 @@ export default function CurrentlyPullable() {
     const filePath = path.resolve(process.cwd(), 'src/data/char', `${slug}.json`)
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'))
 
+    const trueName =
+      langKey === 'jp'
+        ? data.Fullname_jp ?? data.Fullname
+        : langKey === 'kr'
+          ? data.Fullname_kr ?? data.Fullname
+          : data.Fullname
+
+
     return {
-      name,
+      name:trueName,
       id: data.ID,
       rarity: data.Rarity,
       limited: data.limited,

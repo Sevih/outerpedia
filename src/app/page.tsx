@@ -1,7 +1,6 @@
 // src/app/page.tsx
 import Image from 'next/image'
 import Link from 'next/link'
-import WarningBanner from '@/app/components/WarningBanner'
 import CurrentlyPullable from './components/CurrentlyPullable'
 import PromoCodes from './components/PromoCodes'
 // HomeClient reste pour la partie interactive, mais on ne lui passe plus lang
@@ -12,7 +11,7 @@ import CategoriesBox from './components/home/CategoriesBox'
 export default async function Home() {
   return (
     <>
-      <WarningBanner />
+
 
       {/* HERO */}
       <div className="relative w-full rounded-xl overflow-hidden mb-8 min-h-[200px] md:min-h-[260px] bg-zinc-900">
