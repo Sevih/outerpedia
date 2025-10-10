@@ -29,10 +29,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+3% Ally Team Critical Hit Chance\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+3% Ally Team Critical Hit Chance\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+3% Ally Team Critical Hit Chance\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の会心率+3%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 확률 +3%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の会心率+3%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 치명 확률 +3%\n입장 시 AP +25"
   },
   "Chain_Type": "Start",
   "skills": {
@@ -56,17 +62,23 @@
         "SKT_BURST_1": {
           "cost": 100,
           "effect": "Guaranteed Dual Attack\\nIncreased damage",
-          "level": 1
+          "level": 1,
+          "effect_kr": "협공 확정 호출\\n피해 증가",
+          "effect_jp": "連携が確定で発生\\nダメージUP"
         },
         "SKT_BURST_2": {
           "cost": 150,
           "effect": "+2 turns increased Attack duration (Caster)",
-          "level": 2
+          "level": 2,
+          "effect_kr": "공격력 증가 +2턴 (자신)",
+          "effect_jp": "攻撃力UP+2ターン(自分)"
         },
         "SKT_BURST_3": {
           "cost": 200,
           "effect": "Changed to Enhanced Skill\\nIncreases Charisma duration of all allies and enemies except for Bryn by 1 turn",
-          "level": 3
+          "level": 3,
+          "effect_kr": "강화 스킬로 교체\\n브린 제외 아군과 적 모두 카리스마 +1턴",
+          "effect_jp": "強化スキルに変更\\nブリンを除く味方・敵全体に\\nカリスマ+1ターン"
         }
       },
       "cd": null,
@@ -87,9 +99,39 @@
         ],
         "5": [
           "+15% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "【アイドル力】の獲得量+1"
+        ],
+        "3_kr": [
+          "아이돌력 획득량 +1"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+15%"
+        ],
+        "5_kr": [
+          "피해량 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "팬 서비스 타임!",
+      "name_jp": "ファンサタイム!",
+      "true_desc_kr": "적을 공격합니다. 자신이 <color=#28d9ed>실드</color>를 보유한 상태라면 가장 공격력이 높은 아군의 <color=#28d9ed>협공</color>을 발생시킵니다. 자신의 턴이라면 <color=#28d9ed>고유자원 : 아이돌력</color>을 <color=#28d9ed>1개</color> 획득합니다.",
+      "true_desc_jp": "敵単体にダメージを与える。自分が<color=#28d9ed>シールド</color>状態の場合、最も攻撃力が高い味方に<color=#28d9ed>連携</color>を発生させる。自分のターンの場合、<color=#28d9ed>【固有資源:アイドル力】</color>を<color=#28d9ed>1個</color>獲得する。"
     },
     "SKT_SECOND": {
       "name": "Lovely Choreography",
@@ -124,9 +166,37 @@
         ],
         "5": [
           "Grants Charisma to all enemies"
+        ],
+        "2_jp": [
+          "シールド強化"
+        ],
+        "2_kr": [
+          "실드 강화"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "シールド強化"
+        ],
+        "4_kr": [
+          "실드 강화"
+        ],
+        "5_jp": [
+          "敵全体にカリスマ付与"
+        ],
+        "5_kr": [
+          "적 전체 카리스마 부여"
         ]
       },
-      "wgr": null
+      "wgr": null,
+      "name_kr": "사랑스러운 독무",
+      "name_jp": "ラブリーパフォーマンス",
+      "true_desc_kr": "(패시브 효과) 전투 입장 시 브린을 제외한 아군과 적 전체에게 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>카리스마</color>를 부여합니다.\\n\\n(액티브 효과) 브린을 제외한 제외한 아군 전체에게 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>카리스마</color>를 부여합니다. 그 이후 아군 전체에게 <color=#28d9ed>2턴</color> 동안 자신의 공격력에 비례하여 실드를 부여합니다.",
+      "true_desc_jp": "(パッシブ効果)戦闘開始時、ブリンを除く味方全体と敵全体に<color=#28d9ed>カリスマ</color>を<color=#28d9ed>1ターン</color>の間付与する。\\n\\n(アクティブ効果)ブリンを除く味方全体に<color=#28d9ed>カリスマ</color>を<color=#28d9ed>1ターン</color>の間付与する。その後、味方全体に自分の攻撃力に応じたシールドを<color=#28d9ed>2ターン</color>の間付与する。"
     },
     "SKT_ULTIMATE": {
       "name": "Dreams Come True",
@@ -161,9 +231,39 @@
         ],
         "5": [
           "+1 buff removed"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "強化効果解除+1"
+        ],
+        "5_kr": [
+          "강화 효과 해제 수량 +1"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "꿈의 무대",
+      "name_jp": "ドリームステージ",
+      "true_desc_kr": "<color=#28d9ed>고유 자원 : 아이돌력 5개 보유 시 사용 가능합니다.</color>\\n적 전체의 효과 저항을 무시하고 강화 효과를 <color=#28d9ed>1개</color> 해제한 뒤 적 전체를 공격합니다. 이 스킬은 대상의 방어력을 <color=#28d9ed>30%</color>무시하며, 빗나감이 발생하지 않습니다.",
+      "true_desc_jp": "このスキルは<color=#28d9ed>【固有資源:アイドル力】が5個ある場合、使用できる。</color>\\n敵全体の効果抵抗を無視し、強化効果を<color=#28d9ed>1個</color>解除した後、敵全体にダメージを与える。このスキルは対象の防御力を<color=#28d9ed>30%</COLOR>無視し、ミスヒットが発生しない。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -176,32 +276,69 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": "",
+      "buff": "BT_STAT|ST_PIERCE_POWER_RATE",
       "cd": null,
       "debuff": [],
       "description": [
         "<color=#ffd732>Chain Starter Effect</color>: Increases <color=#28d9ed>Penetration</color> of all characters participating in the Skill Chain by <color=#28d9ed>30%</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, grants the caster a barrier proportional to the caster's Attack for 1 turn."
       ],
-      "dual_buff": "BT_SHIELD_BASED_CASTER",
+      "dual_buff": "SYS_BUFF_SHIELD",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 해당 스킬 체인 참가자의 <color=#28d9ed>관통력</color>이 <color=#28d9ed>30%</color> 증가합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 자신에게 1턴 동안 자신의 공격력에 비례하여 실드를 부여합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:このチェーンスキル参加者の<color=#28d9ed>貫通力</color>が<color=#28d9ed>30%</color>UPする。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、自分にシールドを1ターンの間付与する。自分の攻撃力が高いほど効果がUPする。"
     }
   },
-  "rank": "B"
+  "rank": "B",
+  "Fullname_kr": "브린",
+  "Fullname_jp": "ブリン",
+  "VoiceActor": "VA. Katrina Salisbury",
+  "VoiceActor_jp": "CV. 木戸衣吹",
+  "VoiceActor_kr": "CV. Katrina Salisbury"
 }

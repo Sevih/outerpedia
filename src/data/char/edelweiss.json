@@ -29,10 +29,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+2% Ally Team Accuracy\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の命中+2%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 명중 +2%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の命中+2%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 명중 +2%\n입장 시 AP +25"
   },
   "Chain_Type": "Join",
   "skills": {
@@ -53,17 +59,23 @@
         "SKT_BURST_1": {
           "cost": 60,
           "effect": "Increases the chance to inflict Unbuffable by 50%",
-          "level": 1
+          "level": 1,
+          "effect_kr": "강화 불가 발동 확률 +50%",
+          "effect_jp": "強化不可発生率+50%"
         },
         "SKT_BURST_2": {
           "cost": 90,
           "effect": "Reduces Ninjutsu, Waterspout Technique Cooldown by 1 turn",
-          "level": 2
+          "level": 2,
+          "effect_kr": "인법 용오름의 술 쿨타임 -1턴",
+          "effect_jp": "【忍法・竜巻の術】の\\nスキルターン-1ターン"
         },
         "SKT_BURST_3": {
           "cost": 120,
           "effect": "Changed to Enhanced Skill\\nResets Ninjutsu, Waterspout Technique Cooldown",
-          "level": 3
+          "level": 3,
+          "effect_kr": "강화 스킬로 교체\\n인법 용오름의 술 쿨타임 초기화",
+          "effect_jp": "強化スキルに変更\\n【忍法・竜巻の術】の\\nスキルターン初期化"
         }
       },
       "cd": null,
@@ -86,9 +98,39 @@
         ],
         "5": [
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "닌자 버라이어티 콤보",
+      "name_jp": "ニンジャのバラエティコンボ",
+      "true_desc_kr": "적을 공격하고, <color=#28d9ed>25%</color> 확률로 대상에게 <color=#28d9ed>강화 불가</color>를 <color=#28d9ed>2턴</color> 동안 부여합니다.\\n이 스킬은 자신의 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、対象に<color=#28d9ed>25%</color>の確率で<color=#28d9ed>強化不可</color>を2ターンの間付与する。\\nこのスキルは自分の<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。"
     },
     "SKT_SECOND": {
       "name": "Elf-Style Hand Seals",
@@ -103,8 +145,8 @@
       "SkipNameID": "SKILL_NAME_2000072_Skill02",
       "TargetTeamType": "TEAM",
       "buff": [
-        "BT_REMOVE_DEBUFF",
         "SYS_REVENGE_HEAL",
+        "BT_REMOVE_DEBUFF",
         "UNIQUE_NINJA_AFTERIMAGE"
       ],
       "cd": "4",
@@ -126,9 +168,37 @@
         ],
         "5": [
           "+1 turn effect duration"
+        ],
+        "2_jp": [
+          "効果発生率+15%"
+        ],
+        "2_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "3_jp": [
+          "効果ターン+1ターン"
+        ],
+        "3_kr": [
+          "효과 지속 +1턴"
+        ],
+        "4_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "5_jp": [
+          "効果ターン+1ターン"
+        ],
+        "5_kr": [
+          "효과 지속 +1턴"
         ]
       },
-      "wgr": null
+      "wgr": null,
+      "name_kr": "엘프식 구자인법",
+      "name_jp": "エルフ流・九字忍法",
+      "true_desc_kr": "(패시브 효과)전투 시작 시, 자신에게 <color=#28d9ed>닌자의 잔상</color>을 부여합니다. \\n(발동 효과)아군에게 약화 효과 적용 시 <color=#28d9ed>신속 대응</color> 효과가 발동합니다.\\n아군 전체 <color=#28d9ed>약화 효과</color>를 1개 해제하고, 적 전체에게 <color=#28d9ed>85%</color> 확률로 <color=#28d9ed>1턴</color>동안 <color=#28d9ed>회복불가</color>를 부여합니다.",
+      "true_desc_jp": "(パッシブ効果)戦闘開始時、<color=#28d9ed>【ニンジャの残像】</color>を付与する。\\n(発動効果)味方に弱体効果がある場合、<color=#28d9ed>【迅速対応】</color>が発動する。\\n【迅速対応】:味方全体の<color=#28d9ed>弱体効果</color>を1個解除し、敵全体に<color=#28d9ed>85%</color>の確率で<color=#28d9ed>回復不可</color>を<color=#28d9ed>1ターン</color>の間付与する。"
     },
     "SKT_ULTIMATE": {
       "name": "Ninjutsu, Waterspout Technique",
@@ -164,9 +234,41 @@
         ],
         "5": [
           "+25% Ignored Defense to a single target"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "敵単体の防御力無視+25%"
+        ],
+        "3_kr": [
+          "단일 대상 방어력 무시 +25%"
+        ],
+        "4_jp": [
+          "ダメージ+20%",
+          "スキルターン-1ターン"
+        ],
+        "4_kr": [
+          "피해량 +20%",
+          "스킬 쿨타임 -1턴"
+        ],
+        "5_jp": [
+          "敵単体の防御力無視+25%"
+        ],
+        "5_kr": [
+          "단일 대상 방어력 무시 +25%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "인법 용오름의 술",
+      "name_jp": "忍法・竜巻の術",
+      "true_desc_kr": "적 전체를 공격합니다. 대상이 한명이 아니라면 방어력을 30% 무시합니다. 대상이 한 명이라면 방어력을 <color=#28d9ed>50%</color> 무시하고 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>모두</color> 빼앗습니다.\\n이 스킬은 자신의 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가하고, 잃은 체력에 비례하여 피해가 추가로 증가합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。対象が単体ではない場合は防御力を30%無視する。対象が単体だった場合は防御力を<color=#28d9ed>50%</color>無視し、<color=#28d9ed>強化効果</color>を<color=#28d9ed>すべて</color>奪う。\\nこのスキルは自分の<color=#28d9ed>最大HP</color>が高いほどダメージがUPし、自分の残りHPが低いほどダメージが追加でUPする。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -179,7 +281,7 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": "BT_CP_CHARGE",
+      "buff": "BT_AP_CHARGE",
       "cd": null,
       "debuff": [],
       "description": [
@@ -188,23 +290,60 @@
       "dual_debuff": "BT_SEALED",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신과 다음 스킬 체인 수행자의 AP를 <color=#28d9ed>2.5%</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>50%</color>확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>강화 불가</color> 상태로 만듭니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、自分と次のチェーンスキル参加者のAPを<color=#28d9ed>2.5%</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>50%</color>の確率で<color=#28d9ed>強化不可</color>を<color=#28d9ed>2ターン</color>の間付与する。"
     }
   },
-  "rank": "B"
+  "rank": "B",
+  "Fullname_kr": "에델바이스",
+  "Fullname_jp": "エーデルバイス",
+  "VoiceActor": "VA. Courtney Lin",
+  "VoiceActor_jp": "CV. 影山灯",
+  "VoiceActor_kr": "CV. Courtney Lin"
 }

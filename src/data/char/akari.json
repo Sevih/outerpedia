@@ -26,10 +26,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+2% Ally Team Accuracy\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の命中+2%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 명중 +2%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の命中+2%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 명중 +2%\n입장 시 AP +25"
   },
   "Chain_Type": "Start",
   "skills": {
@@ -67,9 +73,41 @@
         "5": [
           "+10% damage",
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "피해량 +10%",
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "사이카슈 철포술",
+      "name_jp": "雑賀衆の鉄砲術",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>40%</color>의 확률로 대상의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>40%</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。"
     },
     "SKT_SECOND": {
       "name": "Barrier of Ryouran",
@@ -88,17 +126,23 @@
         "SKT_BURST_1": {
           "cost": 60,
           "effect": "+1 turn reduced Critical Hit Chance on target",
-          "level": 1
+          "level": 1,
+          "effect_kr": "대상 치명 확률 감소 +1턴",
+          "effect_jp": "会心率DOWN+1ターン"
         },
         "SKT_BURST_2": {
           "cost": 80,
           "effect": "+1 turn Unbuffable on target",
-          "level": 2
+          "level": 2,
+          "effect_kr": "대상 강화 불가 +1턴",
+          "effect_jp": "強化不可+1ターン"
         },
         "SKT_BURST_3": {
           "cost": 120,
           "effect": "Changes skill effect order\\n(Debuff duration increase applies last)",
-          "level": 3
+          "level": 3,
+          "effect_kr": "약화 지속 증가 순서 교체\\n(가장 마지막에 적용)",
+          "effect_jp": "効果順番変更\\n弱体効果の付与後\\n持続ターン増加"
         }
       },
       "cd": "4",
@@ -125,9 +169,41 @@
         "5": [
           "+20% damage",
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "4_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "5_jp": [
+          "ダメージ+20%",
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "피해량 +20%",
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "요란의 결계",
+      "name_jp": "擾乱結界",
+      "true_desc_kr": "적 전체를 공격합니다. 공격 후 <color=#28d9ed>70%</color>의 확률로 적이 보유한 약화 효과의 지속 시간을 <color=#28d9ed>1턴</color> 증가시킨 후, 약화 효과가 없는 대상의 <color=#28d9ed>효과 저항</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+      "true_desc_jp": "敵全体にダメージを与える。攻撃後、<color=#28d9ed>70%</color>の確率で敵の弱体効果を<color=#28d9ed>1ターン</color>の間増加させ、弱体効果がない対象の<color=#28d9ed>効果抵抗</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。"
     },
     "SKT_ULTIMATE": {
       "name": "Juzumaru Tsunetsugu",
@@ -165,9 +241,41 @@
         "5": [
           "+20% damage",
           "+20% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "効果ターン+1ターン"
+        ],
+        "4_kr": [
+          "효과 지속 +1턴"
+        ],
+        "5_jp": [
+          "ダメージ+20%",
+          "効果発生率+20%"
+        ],
+        "5_kr": [
+          "피해량 +20%",
+          "효과 발동 확률 +20%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "쥬즈마루 츠네츠구",
+      "name_jp": "数珠丸恒次",
+      "true_desc_kr": "적 전체를 공격하고 <color=#28d9ed>80%</color>의 확률로 <color=#28d9ed>1턴</color> 동안 적 전체에게 <color=#28d9ed>강화 불가</color>와 <color=#28d9ed>방어력 감소</color>를 부여합니다.\\n이 스킬 직후에는 <color=#28d9ed>80%</color>의 확률로 적의 반격, 복수, 신속 대응이 발동하지 않습니다.",
+      "true_desc_jp": "敵全体にダメージを与え、敵全体に<color=#28d9ed>80%</color>の確率で<color=#28d9ed>強化不可</color>を<color=#28d9ed>1ターン</color>の間付与し、敵全体の<color=#28d9ed>防御力</color>を<color=#28d9ed>1ターン</color>の間DOWNさせる。\\nこのスキルでは<color=#28d9ed>80%</color>の確率で敵の反撃、復讐、迅速対応が発動しない。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -189,23 +297,60 @@
       "dual_debuff": "BT_STAT|ST_ATK",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : <color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>명중</color>을 증가시킨 후 적을 공격합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>70%</color>의 확률로 <color=#28d9ed>2턴</color> 동안 적 대상의 <color=#28d9ed>공격력</color>을 감소시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:味方全体の<color=#28d9ed>命中</color>を<color=#28d9ed>2ターン</color>の間UPさせ、ダメージを与える。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>70%</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。"
     }
   },
-  "rank": "S"
+  "rank": "S",
+  "Fullname_kr": "아카리",
+  "Fullname_jp": "アカリ",
+  "VoiceActor": "VA. Crystal Lee",
+  "VoiceActor_jp": "CV. 三宅麻理恵",
+  "VoiceActor_kr": "CV. Crystal Lee"
 }

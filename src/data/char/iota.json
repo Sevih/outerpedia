@@ -26,10 +26,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+3% Ally Team Effectiveness\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+3% Ally Team Effectiveness\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+3% Ally Team Effectiveness\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の効果命中+3%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 효과 적중 +3%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の効果命中+3%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 효과 적중 +3%\n입장 시 AP +25"
   },
   "Chain_Type": "Finish",
   "skills": {
@@ -66,9 +72,39 @@
         ],
         "5": [
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "코드 케프리",
+      "name_jp": "コードケプリ",
+      "true_desc_kr": "자신 체력을 <color=#28d9ed>10%</color> 감소시킨 후 적 대상을 공격합니다.\\n<color=#28d9ed>70%</color> 확률로 대상의 행동 게이지를 <color=#28d9ed>-20%</color> 감소 시킵니다.\\n해당 공격은 자신이 잃은 체력 비례 피해량이 증가합니다.\\n이 스킬로 인한 체력 감소로는 시전자가 사망하지 않습니다.",
+      "true_desc_jp": "自分のHPを<color=#28d9ed>10%</color>DOWNさせた後、敵単体にダメージを与える。\\n<color=#28d9ed>70%</color>の確率で対象の行動ゲージを<color=#28d9ed>-20%</color>DOWNさせる。\\nこのスキルは自分の残りHPが低いほどダメージがUPする。\\nこのスキルでスキル使用者が倒れることはない。"
     },
     "SKT_SECOND": {
       "name": "Code Medjed",
@@ -90,17 +126,23 @@
         "SKT_BURST_1": {
           "cost": 100,
           "effect": "Increases damage",
-          "level": 1
+          "level": 1,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_2": {
           "cost": 150,
           "effect": "Increases Speed for 1 turn",
-          "level": 2
+          "level": 2,
+          "effect_kr": "1턴 동안 속도 증가",
+          "effect_jp": "1ターンの間スピードUP"
         },
         "SKT_BURST_3": {
           "cost": 200,
           "effect": "Increases Immortality duration by 1 turn",
-          "level": 3
+          "level": 3,
+          "effect_kr": "불사 효과 +1턴",
+          "effect_jp": "不死効果+1ターン"
         }
       },
       "cd": "5",
@@ -124,9 +166,41 @@
         "5": [
           "-1 turn Skill Cooldown",
           "+10% damage"
+        ],
+        "2_jp": [
+          "ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "行動ゲージ10%DOWN"
+        ],
+        "4_kr": [
+          "행동 게이지 -10%"
+        ],
+        "5_jp": [
+          "スキルターン-1ターン",
+          "ダメージ+10%"
+        ],
+        "5_kr": [
+          "스킬 쿨타임 -1턴",
+          "피해량 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "코드 메제드",
+      "name_jp": "コードメジェド",
+      "true_desc_kr": "자신 체력을 <color=#28d9ed>10%</color> 감소시킨 후 적 전체를 공격합니다.\\n대상의 행동 게이지를 <color=#28d9ed>-10%</color> 감소 시킵니다.\\n해당 공격은 자신이 잃은 체력 비례 피해량이 증가합니다.\\n이 스킬로 인한 체력 감소로는 시전자가 사망하지 않습니다.",
+      "true_desc_jp": "自分のHPを<color=#28d9ed>10%</color>DOWNさせた後、敵全体にダメージを与える。\\n対象の行動ゲージを<color=#28d9ed>-10%</color>DOWNさせる。\\nこのスキルは自分の残りHPが低いほど、ダメージがUPする。\\nこのスキルでスキル使用者が倒れることはない。"
     },
     "SKT_ULTIMATE": {
       "name": "Code Anubis",
@@ -164,13 +238,45 @@
         "5": [
           "+20% damage",
           "+20% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "効果発生率+10%"
+        ],
+        "4_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+20%",
+          "効果発生率+20%"
+        ],
+        "5_kr": [
+          "피해량 +20%",
+          "효과 발동 확률 +20%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "코드 아누비스",
+      "name_jp": "コードアヌビス",
+      "true_desc_kr": "적 전체를 공격하고, 자신은 <color=#28d9ed>1턴</color> 동안 불사 상태가됩니다.\\n또한, <color=#28d9ed>70%</color> 확률로 무적 상태의 적은 <color=#28d9ed>2턴</color> 그 외의 적은 <color=#28d9ed>1턴</color> 동안 스턴 상태로 만듭니다.\\n해당 공격은 자신이 잃은 체력 비례 피해량이 증가합니다.",
+      "true_desc_jp": "敵全体にダメージを与え、自分に<color=#28d9ed>不死</color>を<color=#28d9ed>1ターン</color>の間付与する。\\nまた、無敵状態の敵に<color=#28d9ed>70%</color>の確率でスタンを<color=#28d9ed>2ターン</color>の間付与し、無敵状態でない敵にはスタンを<color=#28d9ed>1ターン</color>の間付与する。\\nこのスキルは自分の残りHPが低いほど、ダメージがUPする。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals fixed damage equal to <color=#28d9ed>8%</color> of the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to reduce <color=#28d9ed>Priority</color> of the target by <color=#28d9ed>20%</color>. ",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals fixed damage equal to <color=#28d9ed>8%</color> of the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to reduce <color=#28d9ed>Priority</color> of the target by <color=#28d9ed>20%</color>.",
       "DescID": "SKILL_DESC_2000069_Skill04_LV1,SKILL_DESC_2000069_Skill04_LV1,SKILL_DESC_2000069_Skill04_LV1,SKILL_DESC_2000069_Skill04_LV1,SKILL_DESC_2000069_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Dark_Finish",
       "NameIDSymbol": "6904",
@@ -188,23 +294,60 @@
       "dual_debuff": "BT_ACTION_GAUGE",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 대상에게 대상 최대 체력의 <color=#28d9ed>8%</color> 만큼의 고정 피해를 입힙니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 대상의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>-20%</color> 감소시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、対象の最大HPの<color=#28d9ed>8%</color>の固定ダメージを与える。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>100%</color>の確率で対象の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>-20%</color>DOWNさせる。"
     }
   },
-  "rank": "A"
+  "rank": "A",
+  "Fullname_kr": "요타",
+  "Fullname_jp": "イオータ",
+  "VoiceActor": "VA. Mara Junot",
+  "VoiceActor_jp": "CV. 森永千才",
+  "VoiceActor_kr": "CV. Mara Junot"
 }

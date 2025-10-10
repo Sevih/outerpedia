@@ -30,10 +30,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+6% Ally Critical Hit Chance\n+25 Action Points at the start of battle\n+1 Chain Passive Weakness Gauge reduction",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\n+25 Action Points at battle start",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\nIncreases all attack damage (Proportional to target's Max Health)"
+    "6": "ATK DEF HP +30%\nIncreases all attack damage\n(Proportional to target's Max Health)",
+    "4_1_jp": "ATK DEF HP +16%\n味方の会心率+6%\n戦闘開始時、AP+25\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 확률 +6%\n입장 시 AP +25\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\nすべてのスキルダメージUP\n(対象のHPが高いほどダメージUP)",
+    "6_kr": "ATK DEF HP +30%\n모든 공격 피해 증가\n(대상 최대 체력 비례)"
   },
   "Chain_Type": "Start",
   "skills": {
@@ -57,17 +63,23 @@
         "SKT_BURST_1": {
           "cost": 80,
           "effect": "+1 turn Doll Garden's Caretaker\\nIncreases damage",
-          "level": 1
+          "level": 1,
+          "effect_kr": "모형 정원의 관리자 +1턴\\n피해 증가",
+          "effect_jp": "【箱庭の主】+1ターン\\nダメージUP"
         },
         "SKT_BURST_2": {
           "cost": 120,
           "effect": "Increases damage",
-          "level": 2
+          "level": 2,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_3": {
           "cost": 160,
           "effect": "Resets all skill cooldowns",
-          "level": 3
+          "level": 3,
+          "effect_kr": "모든 스킬 쿨타임 초기화",
+          "effect_jp": "全スキルの\\nスキルターン\\n初期化"
         }
       },
       "cd": null,
@@ -88,9 +100,39 @@
         ],
         "5": [
           "+20% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+15%"
+        ],
+        "3_kr": [
+          "피해량 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
+        ],
+        "5_kr": [
+          "피해량 +20%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "하늘에는 신이",
+      "name_jp": "天にありては神",
+      "true_desc_kr": "적을 공격합니다.\\n<color=#28d9ed>모형 정원의 관리자</color> 보유 시 <color=#28d9ed>강화 공격</color>이 발생합니다.",
+      "true_desc_jp": "敵単体にダメージを与える。\\n自分に<color=#28d9ed>【箱庭の主】</color>がある場合、 このスキルが強化され、<color=#28d9ed>ダメージがUP</color>する。"
     },
     "SKT_SECOND": {
       "name": "The People on Earth",
@@ -129,9 +171,41 @@
         "5": [
           "+15% healing",
           "Resets Sanctuary for All's cooldown"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン"
+        ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "行動ゲージUP+80%"
+        ],
+        "3_kr": [
+          "행동 게이지 +80%"
+        ],
+        "4_jp": [
+          "スキルターン-1ターン",
+          "HP回復量+15%"
+        ],
+        "4_kr": [
+          "스킬 쿨타임 -1턴",
+          "체력 회복량 +15%"
+        ],
+        "5_jp": [
+          "HP回復量+15%",
+          "【万物にありては安息】のスキルターン初期化"
+        ],
+        "5_kr": [
+          "체력 회복량 +15%",
+          "만물에게 안식을 쿨타임 초기화"
         ]
       },
-      "wgr": null
+      "wgr": null,
+      "name_kr": "땅에는 인간이",
+      "name_jp": "地にありては者",
+      "true_desc_kr": "(발동 효과) 사망 시 즉시 <color=#28d9ed>20%</color>의 체력을 회복하며 <color=#28d9ed>부활</color>합니다. <color=#28d9ed>1턴</color> 동안 적을 처치하지 못하면 <color=#28d9ed>사망</color>하게 됩니다.\\n부활 시 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>모형 정원의 관리자</color>를 획득합니다.",
+      "true_desc_jp": "(発動効果)倒れた時、直ちに自分のHPを<color=#28d9ed>20%</color>回復して<color=#28d9ed>復活</color>する。敵を<color=#28d9ed>1ターン</color>の間に倒せなかった場合、自分が<color=#28d9ed>倒れる。</color>\\n復活時、自分に<color=#28d9ed>【箱庭の主】</color>を<color=#28d9ed>1ターン</color>の間付与する。"
     },
     "SKT_ULTIMATE": {
       "name": "Sanctuary for All",
@@ -164,9 +238,39 @@
         ],
         "5": [
           "+20% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
+        ],
+        "5_kr": [
+          "피해량 +20%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "만물에게 안식을",
+      "name_jp": "万物にありては安息",
+      "true_desc_kr": "적 전체를 공격합니다. 이 스킬은 대상의 방어력을 <color=#28d9ed>30%</color> 무시하며, 대상의 수가 적을수록 피해가 증가합니다.\\n이 스킬의 피해량은 사망자가 발생할 때마다 증가합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。このスキルは対象の防御力を<color=#28d9ed>30%</color>貫通し、対象の数が少ないほど与えるダメージがUPする。\\n倒れた敵の数に応じて、与えるダメージがUPする。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -188,23 +292,60 @@
       "dual_buff": "BT_STAT|ST_SPEED",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>5</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : <color=#28d9ed>1턴</color> 동안 자신의 <color=#28d9ed>속도</color>가 증가합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、WGを追加で<color=#28d9ed>5</color>DOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:自分の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。"
     }
   },
-  "rank": "A"
+  "rank": "A",
+  "Fullname_kr": "데미우르고스 아스테",
+  "Fullname_jp": "デミウルゴス アステ",
+  "VoiceActor": "VA. Kayli Mills",
+  "VoiceActor_jp": "CV. 柚木涼香",
+  "VoiceActor_kr": "CV. Kayli Mills"
 }

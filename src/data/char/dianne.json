@@ -26,10 +26,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+5 Ally Team Speed\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+5 Ally Team Speed\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+5 Ally Team Speed\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方のスピード+5\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 속도 +5\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方のスピード+5\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 속도 +5\n입장 시 AP +25"
   },
   "Chain_Type": "Start",
   "skills": {
@@ -66,12 +72,42 @@
         ],
         "5": [
           "+10% Priority"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "行動ゲージ10%UP"
+        ],
+        "5_kr": [
+          "행동 게이지 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "서방님 포착!",
+      "name_jp": "旦那様み~っけ!",
+      "true_desc_kr": "적을 공격하고, <color=#28d9ed>85%</color>확률로 공격력이 가장 높은 아군의 행동 게이지를 <color=#28d9ed>10%</color> 증가시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>85%</color>の確率で最も攻撃力の高い味方の行動ゲージを<color=#28d9ed>10%</color>UPさせる。"
     },
     "SKT_SECOND": {
-      "name": "I'm Not Letting You Go â¡",
+      "name": "I'm Not Letting You Go ♡",
       "true_desc": "Attacks all enemies, and recovers Health of all allies by <color=#28d9ed>10%</color>. For each target damaged, increases Priority of the caster by <color=#28d9ed>10%</color>.",
       "ApproachType": "ATTACK",
       "DescID": "SKILL_DESC_2000074_Skill02_LV1,SKILL_DESC_2000074_Skill02_LV1,SKILL_DESC_2000074_Skill02_LV3,SKILL_DESC_2000074_Skill02_LV3,SKILL_DESC_2000074_Skill02_LV3",
@@ -92,17 +128,23 @@
         "SKT_BURST_1": {
           "cost": 100,
           "effect": "Increases Priority of all allies\\n+25 Action Points to the fastest ally",
-          "level": 1
+          "level": 1,
+          "effect_kr": "아군 전체의 행동 게이지 증가\\n가장 빠른 아군 AP +25",
+          "effect_jp": "味方全体の行動ゲージUP\\n最も速い味方のAP+25"
         },
         "SKT_BURST_2": {
           "cost": 150,
           "effect": "Increases Sustained Recovery duration by 1 turn",
-          "level": 2
+          "level": 2,
+          "effect_kr": "지속 회복 +1턴",
+          "effect_jp": "継続回復+1ターン"
         },
         "SKT_BURST_3": {
           "cost": 200,
           "effect": "Changed to Enhanced Skill\\n+2 Weakness Gauge Damage\\n+50 Action Points to all allies",
-          "level": 3
+          "level": 3,
+          "effect_kr": "강화 스킬로 교체\\nWG 피해량 +2\\n 아군 전체 AP +50",
+          "effect_jp": "強化スキルに変更\\nWGダメージ+2\\n味方全体のAP+50"
         }
       },
       "cd": "5",
@@ -125,9 +167,39 @@
         ],
         "5": [
           "+10% healing"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "味方全体の強化効果の\\n持続ターン+1ターン"
+        ],
+        "3_kr": [
+          "아군 전체 강화 효과 지속 시간 +1턴"
+        ],
+        "4_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "5_jp": [
+          "HP回復量+10%"
+        ],
+        "5_kr": [
+          "체력 회복량 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "놓치지 않아요♡",
+      "name_jp": "逃がしませんよ♡",
+      "true_desc_kr": "적 전체를 공격하고, 아군 전체의 체력을 <color=#28d9ed>10%</color>만큼 회복시킵니다. 피해를 준 대상마다 자신의 행동 게이지가 <color=#28d9ed>10%</color> 증가합니다.",
+      "true_desc_jp": "敵全体にダメージを与え、味方全体のHPを<color=#28d9ed>10%</color>回復する。ダメージを与えた対象1体につき自分の行動ゲージが<color=#28d9ed>10%</color>UPする。"
     },
     "SKT_ULTIMATE": {
       "name": "Blessed Wedding Road",
@@ -164,9 +236,41 @@
         "5": [
           "+1 turn effect duration",
           "+10% healing"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "HP回復量+10%"
+        ],
+        "4_kr": [
+          "체력 회복량 +10%"
+        ],
+        "5_jp": [
+          "効果ターン+1ターン",
+          "HP回復量+10%"
+        ],
+        "5_kr": [
+          "효과 지속 +1턴",
+          "체력 회복량 +10%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "축복의 웨딩 로드",
+      "name_jp": "祝いのバージンロード",
+      "true_desc_kr": "적 전체를 공격합니다. 아군 전체의 모든 약화 효과를 해제하고 <color=#28d9ed>2턴</color> 동안 면역을 부여합니다. 아군 전체의 체력을 <color=#28d9ed>15%</color> 회복시킵니다.",
+      "true_desc_jp": "敵全体にダメージを与える。味方全体のすべての弱体効果を解除し、免疫を<color=#28d9ed>2ターン</color>の間付与する。味方全体のHPを<color=#28d9ed>15%</color>回復する。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -188,23 +292,60 @@
       "dual_buff": "BT_ACTION_GAUGE",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 아군 전체에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>약점 공략</color>을 부여합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 공격력이 가장 높은 아군의 행동 게이지를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、味方全体に<color=#28d9ed>弱点攻略</color>を<color=#28d9ed>2ターン</color>の間付与する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、最も攻撃力の高い味方の行動ゲージが<color=#28d9ed>20%</color>UPする。"
     }
   },
-  "rank": "A"
+  "rank": "A",
+  "Fullname_kr": "다이안",
+  "Fullname_jp": "ダイアン",
+  "VoiceActor": "VA. Mia Paige",
+  "VoiceActor_jp": "CV. 末柄里恵",
+  "VoiceActor_kr": "CV. Mia Paige"
 }
