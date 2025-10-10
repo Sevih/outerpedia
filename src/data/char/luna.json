@@ -26,16 +26,22 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+3% Ally Team Resilience\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+3% Ally Team Resilience\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+3% Ally Team Resilience\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の効果抵抗+3%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 효과 저항 +3%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の効果抵抗+3%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 효과 저항 +3%\n입장 시 AP +25"
   },
   "Chain_Type": "Finish",
   "skills": {
     "SKT_FIRST": {
       "name": "Moonlight Slash",
-      "true_desc": "Attacks an enemy, and if the caster has a Barrier, deals an Additional Attack.\\nAfter attacking, there is a <color=#28d9ed>20%</color> chance to trigger a Dual Attack from the ally with the highest Attack. If an Additional Attack occurs, the Dual Attack chance increases by <color=#28d9ed>30%</color>.",
+      "true_desc": "Attacks an enemy, and if the caster has a Barrier, deals an Additional Attack.\\nAfter attacking, there is a <color=#28d9ed>20%</color> chance to trigger a Dual Attack by the ally with the highest Attack. If an Additional Attack occurs, the Dual Attack chance increases by <color=#28d9ed>30%</color>.",
       "ApproachType": "ATTACK",
       "DescID": "SKILL_DESC_2000103_Skill01_LV1,SKILL_DESC_2000103_Skill01_LV1,SKILL_DESC_2000103_Skill01_LV1,SKILL_DESC_2000103_Skill01_LV1,SKILL_DESC_2000103_Skill01_LV1",
       "IconName": "Skill_First_2000103",
@@ -52,17 +58,23 @@
         "SKT_BURST_1": {
           "cost": 60,
           "effect": "Activates an additional attack\\nActivates Dual Attack with 1 ally",
-          "level": 1
+          "level": 1,
+          "effect_kr": "추가타 확정\\n아군 1명 협공 호출",
+          "effect_jp": "追加攻撃確定\\n連携1体発生"
         },
         "SKT_BURST_2": {
           "cost": 90,
           "effect": "+1 Weakness Gauge damage",
-          "level": 2
+          "level": 2,
+          "effect_kr": "WG 감소량 +1",
+          "effect_jp": "WGダメージ+1"
         },
         "SKT_BURST_3": {
           "cost": 120,
           "effect": "Activates Dual Attack with 2 allies",
-          "level": 3
+          "level": 3,
+          "effect_kr": "아군 2명 협공 호출",
+          "effect_jp": "連携2体発生"
         }
       },
       "cd": null,
@@ -87,13 +99,47 @@
         "5": [
           "+10% damage",
           "+20% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+10%",
+          "効果発生率+15%"
+        ],
+        "4_kr": [
+          "피해량 +10%",
+          "효과 발동 확률 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "効果発生率+20%"
+        ],
+        "5_kr": [
+          "피해량 +10%",
+          "효과 발동 확률 +20%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "달빛 가르기",
+      "name_jp": "月光斬り",
+      "true_desc_kr": "적을 공격하고, 실드를 보유한 상태라면 추가 공격을 입힙니다.\\n공격 후 <color=#28d9ed>20%</color> 확률로 가장 공격력이 높은 아군의 협공을 발생시키며, 추가 공격 발생 시 협공 확률이 <color=#28d9ed>30%</color> 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、自分がシールド状態の場合、追加攻撃を与える。\\n攻撃後、攻撃力が最も高い味方単体に<color=#28d9ed>20%</color>の確率で連携を発生させ、追加攻撃発生時、連携発生率が<color=#28d9ed>30%</color>UPする。"
     },
     "SKT_SECOND": {
       "name": "Hero's Emergence",
-      "true_desc": "Removes <color=#28d9ed>1</color> debuff(s) from all allies and grants a Barrier for <color=#28d9ed>2</color> turns. Barrier Strength increases proportionally to the caster's max Health.",
+      "true_desc": "Removes <color=#28d9ed>1</color> a debuff from all allies and grants a Barrier for <color=#28d9ed>2</color> turns. Barrier Strength increases proportionally to the caster's max Health.",
       "ApproachType": "CAST_BUFF",
       "DescID": "SKILL_DESC_2000103_Skill02_LV1,SKILL_DESC_2000103_Skill02_LV1,SKILL_DESC_2000103_Skill02_LV1,SKILL_DESC_2000103_Skill02_LV1,SKILL_DESC_2000103_Skill02_LV5",
       "IconName": "Skill_Second_2000103",
@@ -125,9 +171,37 @@
         ],
         "5": [
           "+30% All Ally Priority (Excluding the caster)"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン"
+        ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "弱体効果解除+1"
+        ],
+        "3_kr": [
+          "약화 효과 해제 수량 +1"
+        ],
+        "4_jp": [
+          "効果ターン+1ターン"
+        ],
+        "4_kr": [
+          "효과 지속 +1턴"
+        ],
+        "5_jp": [
+          "味方の行動ゲージUP+30%(自分を除く)"
+        ],
+        "5_kr": [
+          "아군 전체 행동 게이지 +30% (자신 제외)"
         ]
       },
-      "wgr": null
+      "wgr": null,
+      "name_kr": "영웅 출현",
+      "name_jp": "英雄出現",
+      "true_desc_kr": "아군 전체의 약화 효과를 <color=#28d9ed>1개</color> 해제 후 <color=#28d9ed>2턴</color>동안 실드를 부여합니다. 실드량은 자신의 최대 체력에 비례하여 증가합니다.",
+      "true_desc_jp": "味方全体の弱体効果を<color=#28d9ed>1個</color>解除した後、シールドを<color=#28d9ed>2ターン</color>の間付与する。自分の最大HPが高いほどシールド量がUPする。"
     },
     "SKT_ULTIMATE": {
       "name": "Someday I Will Reach the Moon",
@@ -163,9 +237,41 @@
         "5": [
           "+15% effect chance",
           "Enhances Unbuffable (Ignores Resilience)"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "4_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "5_jp": [
+          "効果発生率+15%",
+          "強化不可強化(効果抵抗無視)"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +15%",
+          "강화 불가 강화 (효과 저항 무시)"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "언젠가 달에 닿을 것",
+      "name_jp": "いつか月に届くもの",
+      "true_desc_kr": "적 전체를 공격합니다. <color=#28d9ed>70%</color> 확률로 대상 모두에게 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>강화 불가</color>를 부여합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。対象全体に<color=#28d9ed>70%</color>の確率で<color=#28d9ed>強化不可</color>を<color=#28d9ed>3ターン</color>の間付与する。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -187,23 +293,60 @@
       "dual_buff": "BT_SHIELD_BASED_CASTER",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 자신에게 1턴 동안 자신의 최대 체력에 비례하여 실드를 부여합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、CPを<color=#28d9ed>25</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、自分にシールドを1ターンの間付与する。自分の最大HPが高いほどシールド量がUPする。"
     }
   },
-  "rank": "S"
+  "rank": "S",
+  "Fullname_kr": "루나",
+  "Fullname_jp": "ルナ",
+  "VoiceActor": "VA. Sam Slade",
+  "VoiceActor_jp": "CV. 久保ユリカ",
+  "VoiceActor_kr": "CV. Sam Slade"
 }

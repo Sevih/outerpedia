@@ -31,16 +31,22 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\nAt the start of battle, grants Irregular Infection for 1 turn to the enemy with the highest Speed. (Ignores Immunity, Irremovable)\nIncreases Effectiveness by 40",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\nGrants Action Point by 50 on entry\nIncreases Ally Resilience by 6%",
+    "5_1": "ATK DEF HP +22%\nUnlock Burst Stage 3\nGrants Action Point by 50 on entry\nIncreases Ally Resilience by 6%",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\nWhen Irregular Infection effect triggers, buff / debuff durations are reduced by 2 turns\nIncreases allies' damage against the target inflicted with Irregular Infection by 50%"
+    "6": "ATK DEF HP +30%\nWhen Irregular Infection effect triggers, buff / debuff durations are reduced by 2 turns\nIncreases allies' damage against the target inflicted with Irregular Infection by 50%",
+    "4_1_jp": "ATK DEF HP +16%\n戦闘開始時、スピードが最も速い敵に\nイレギュラー感染症+1ターン(免疫無視、解除不可)\n効果命中+40",
+    "4_1_kr": "ATK DEF HP +16%\n전투 시작 시 속도가 가장 빠른 적에게 이레귤러 감염증 +1턴 (면역 무시, 해제 불가)\n효과 적중 +40",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP +50\n味方の効果抵抗+6%",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50\n아군 효과 저항 +6%",
+    "6_jp": "ATK DEF HP +30%\nイレギュラー感染症の効果発動時、強化/弱体効果の\n持続ターンが2ターンDOWNに変更\n味方がイレギュラー感染症の対象に与えるダメージ+50%",
+    "6_kr": "ATK DEF HP +30%\n이레귤러 감염증 효과 발동 시 강화/약화 효과의 지속 턴 2턴 감소로 변경\n아군이 이레귤러 감염증 대상에게 입히는 피해 +50%"
   },
   "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
       "name": "Feeding Frenzy",
-      "true_desc": "Attacks an enemy and increases own Priority by <color=#28d9ed>10%</color>. With a <color=#28d9ed>30%</color> chance, reduces the target’s <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn(s)</color>.\\nThis skill’s damage dealt increases proportional to Max Health instead of Attack.",
+      "true_desc": "Attacks an enemy and increases own Priority by <color=#28d9ed>10%</color>. With a <color=#28d9ed>30%</color> chance, reduces the target's <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn(s)</color>.\\nThis skill's damage dealt increases proportional to Max Health instead of Attack.",
       "DescID": "SKILL_DESC_2000102_Skill01_LV1,SKILL_DESC_2000102_Skill01_LV1,SKILL_DESC_2000102_Skill01_LV1,SKILL_DESC_2000102_Skill01_LV1,SKILL_DESC_2000102_Skill01_LV1",
       "FocusType_fallback1": "ATTACK_UNIQUE_BUFF_2000102",
       "IconName": "Skill_First_2000102",
@@ -57,17 +63,23 @@
         "SKT_BURST_1": {
           "cost": 80,
           "effect": "Increases Reduced Speed Chance by 50%",
-          "level": 1
+          "level": 1,
+          "effect_kr": "속도 감소 발생 확률 +50%",
+          "effect_jp": "スピードDOWN発生率+50%"
         },
         "SKT_BURST_2": {
           "cost": 120,
           "effect": "Grants Irregular Infection to the enemy with the highest Speed for 1 turn (Ignores Immunity, Irremovable)",
-          "level": 2
+          "level": 2,
+          "effect_kr": "가장 빠른 적에게 이레귤러 감염증 +1턴 (면역 무시, 해제 불가)",
+          "effect_jp": "最も速い敵にイレギュラー感染症\\n+1ターン(免疫無視、解除不可)"
         },
         "SKT_BURST_3": {
           "cost": 160,
           "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases Skill Range (All)\\nGrants Barrier to all allies for 2 turns (Proportional to caster's Health)",
-          "level": 3
+          "level": 3,
+          "effect_kr": "<color=#FFBF00>강화 공격</color>\\n스킬 범위 확대(전체)\\n아군 전체 실드 +2턴 (자신 체력 비례)",
+          "effect_jp": "<color=#FFBF00>強化攻撃</color>\\nスキル範囲拡大(全体)\\n味方全体にシールド+2ターン\\n(自分のHPに比例)"
         }
       },
       "cd": null,
@@ -91,13 +103,45 @@
         "5": [
           "+10% effect chance",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "行動ゲージ10%UP"
+        ],
+        "3_kr": [
+          "행동 게이지 +10%"
+        ],
+        "4_jp": [
+          "効果発生率+10%"
+        ],
+        "4_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "5_jp": [
+          "効果発生率+10%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +10%",
+          "WG 감소량 +1"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "포식자의 광란",
+      "name_jp": "捕食者の狂乱",
+      "true_desc_kr": "적을 공격하고 자신의 행동 게이지를 <color=#28d9ed>10%</color> 증가시킵니다. <color=#28d9ed>30%</color> 확률로 적 대상의 <color=#28d9ed>속도</color>가 <color=#28d9ed>1턴</color> 동안 감소합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、自分の行動ゲージを<color=#28d9ed>10%</color>UPさせる。<color=#28d9ed>30%</color>の確率で対象の<color=#28d9ed>スピード</color>が<color=#28d9ed>1ターン</color>の間DOWNする。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。"
     },
     "SKT_SECOND": {
       "name": "Species Extinction Protocol",
-      "true_desc": "(Passive Effect)\\nReduces Damage Taken by heroes with Barriers.\\n<color=#28d9ed>Reduces Damage Dealt by those inflicted with Irregular Infection</color>, and has an <color=#28d9ed>80%</color> chance to counterattack when hit.\\n\\n(Triggered Effect)\\nOn your turn, attacking a target with <color=#28d9ed>Irregular Infection</color> triggers an additional attack on all enemies. After the additional attack, reduces Priority of the infected target by <color=#28d9ed>50%</color>.\\nThis skill’s damage dealt increases proportional to Max Health instead of Attack.",
+      "true_desc": "(Passive Effect)\\nReduces Damage Taken by heroes with Barriers.\\n<color=#28d9ed>Reduces Damage Dealt by those inflicted with Irregular Infection</color>, and has an <color=#28d9ed>80%</color> chance to counterattack when hit.\\n\\n(Triggered Effect)\\nOn the caster's turn, attacking a target with <color=#28d9ed>Irregular Infection</color> triggers an additional attack on all enemies. After the additional attack, reduces Priority of the infected target by <color=#28d9ed>50%</color>.\\nThis skill's damage dealt increases proportional to Max Health instead of Attack.",
       "ApproachType": "ATTACK",
       "DescID": "SKILL_DESC_2000102_Skill02_LV1,SKILL_DESC_2000102_Skill02_LV1,SKILL_DESC_2000102_Skill02_LV1,SKILL_DESC_2000102_Skill02_LV4,SKILL_DESC_2000102_Skill02_LV4",
       "IconName": "Skill_Second_2000102",
@@ -129,13 +173,45 @@
         "5": [
           "+10% damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "反撃発生率UP+20%"
+        ],
+        "4_kr": [
+          "반격 확률 증가 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "생물 멸종 작업",
+      "name_jp": "生物滅種作業",
+      "true_desc_kr": "(패시브 효과)\\n실드를 보유한 아군의 받는 피해를 감소시킵니다.\\n<color=#28d9ed>이레귤러 감염증</color> 보유 대상의 피해량을 감소시키며, 피격 시 <color=#28d9ed>80%</color> 확률로 반격합니다.\\n\\n(발동 효과)\\n자신의 턴에 <color=#28d9ed>이레귤러 감염증</color> 보유 대상 공격 시 적 전체에게 추가 공격을 발동합니다. 추가 공격 후 <color=#28d9ed>이레귤러 감염증</color> 보유 대상의 행동 게이지가 <color=#28d9ed>50%</color> 감소합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "(パッシブ効果)\\nシールド状態の味方が受けるダメージをDOWNさせる。\\n<color=#28d9ed>イレギュラー感染症</color>状態の対象のダメージをDOWNさせ、ダメージを受けた場合、<color=#28d9ed>80%</color>の確率で反撃する。\\n\\n(発動効果)\\n自分のターンに<color=#28d9ed>イレギュラー感染症</color>状態の対象を攻撃時、敵全体に追加攻撃を与える。追加攻撃後、<color=#28d9ed>イレギュラー感染症</color>状態の対象の行動ゲージが<color=#28d9ed>50%</color>DOWNする。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。"
     },
     "SKT_ULTIMATE": {
       "name": "End of Protoform",
-      "true_desc": "Attacks all enemies. With a <color=#28d9ed>100%</color> chance, grants <color=#28d9ed>Taunted</color> to the target for <color=#28d9ed>1 turn(s)</color>, and when attacking a boss, deals Fixed Damage equal to <color=#28d9ed>8%</color> of the boss’ Max Health.\\n\\nThen grants a <color=#28d9ed>Barrier</color> to all heroes for <color=#28d9ed>1 turns</color> and grants <color=#28d9ed>Irregular Infection</color> to the fastest enemy for <color=#28d9ed>1 turns</color>. (Ignores Immunity, Irremovable)\\nThis skill’s damage dealt increases proportional to Max Health instead of Attack.",
+      "true_desc": "Attacks all enemies. With a <color=#28d9ed>100%</color> chance, grants <color=#28d9ed>Taunted</color> to the target for <color=#28d9ed>1 turn(s)</color>, and when attacking a boss, deals Fixed Damage equal to <color=#28d9ed>8%</color> of the boss' Max Health.\\n\\nThen grants a <color=#28d9ed>Barrier</color> to all heroes for <color=#28d9ed>1 turns</color> and grants <color=#28d9ed>Irregular Infection</color> to the fastest enemy for <color=#28d9ed>1 turns</color>. (Ignores Immunity, Irremovable)\\nThis skill's damage dealt increases proportional to Max Health instead of Attack.",
       "DescID": "SKILL_DESC_2000102_Skill03_LV1,SKILL_DESC_2000102_Skill03_LV1,SKILL_DESC_2000102_Skill03_LV1,SKILL_DESC_2000102_Skill03_LV1,SKILL_DESC_2000102_Skill03_LV1",
       "IconName": "Skill_Ultimate_2000102",
       "NameIDSymbol": "10203",
@@ -173,13 +249,47 @@
         "5": [
           "Irregular Infection duration by 1 turn",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "シールド持続+1ターン",
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "실드 지속 +1턴",
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "【イレギュラー感染症】持続+1ターン",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "이레귤러 감염증 지속 +1턴",
+          "WG 감소량 +1"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "아성체의 끝",
+      "name_jp": "亜成体の果て",
+      "true_desc_kr": "적 전체를 공격합니다. <color=#28d9ed>100%</color> 확률로 대상을 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>도발</color>하고, 보스 대상으로 공격 시 보스 최대 체력의 <color=#28d9ed>8%</color> 만큼 고정 피해를 입힙니다.\\n\\n이후 아군 전체에게 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>실드</color>를 부여하고, 가장 빠른 적에게는 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>이레귤러 감염증</color>을 부여합니다. (이레귤러 감염증은 면역 무시, 해제 불가) 실드량은 자신의 최대 체력에 비례하여 증가합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。<color=#28d9ed>100%</color>の確率で対象を<color=#28d9ed>1ターン</color>間<color=#28d9ed>挑発</color>し、対象がボスの場合、ボスの最大HPの<color=#28d9ed>8%</color>の固定ダメージを与える。\\n\\n攻撃後、味方全体に<color=#28d9ed>シールド</color>を<color=#28d9ed>1ターン</color>の間付与し、最もスピードが高い敵単体に<color=#28d9ed>イレギュラー感染症</color>を<color=#28d9ed>1ターン</color>の間付与する。(【イレギュラー感染症】は免疫を無視・解除不可)自分の最大HPが高いほどシールド量がUPする。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Increases caster’s Skill Chain Attack proportional to caster’s Max Health rather Attack and restores Action Point the caster and the next chain skill caster by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Increases caster’s Skill Chain Attack proportional to caster’s Max Health rather Attack and after the attack, has a 50% chance to reduce the target’s Speed for <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Increases caster's Skill Chain Attack proportional to caster's Max Health rather Attack and restores Action Point the caster and the next chain skill caster by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Increases caster's Skill Chain Attack proportional to caster's Max Health rather Attack and after the attack, has a 50% chance to reduce the target's Speed for <color=#28d9ed>1 turn(s)</color>.",
       "DescID": "SKILL_DESC_2000102_Skill04_LV1,SKILL_DESC_2000102_Skill04_LV1,SKILL_DESC_2000102_Skill04_LV1,SKILL_DESC_2000102_Skill04_LV1,SKILL_DESC_2000102_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Dark_Join",
       "NameIDSymbol": "10204",
@@ -199,22 +309,59 @@
       "dual_debuff": "BT_STAT|ST_SPEED",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 자신의 스킬 체인 공격이 공격력 대신 최대 체력에 비례하여 피해가 증가하고, 공격 후 자신과 다음 스킬 체인 수행자의 AP를 <color=#28d9ed>25</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 자신의 공격력 대신 최대 체력에 비례하여 피해가 증가하고, 공격 후 50% 확률로 <color=#28d9ed>1턴</color> 동안 대상의 속도가 감소합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color> : 自分のチェーンスキル攻撃が攻撃力の代わりに最大HPが高いほどダメージがUPし、攻撃後、自分と次のチェーンスキル参加者のAPを<color=#28d9ed>25</color>獲得する。\\n\\n<color=#ffd732>連携効果</color> : 自分の攻撃力の代わりに最大HPが高いほどダメージがUPし、攻撃後50%の確率で対象のスピードが<color=#28d9ed>1ターン</color>間DOWNする。"
     }
-  }
+  },
+  "Fullname_kr": "오메가 나쟈",
+  "Fullname_jp": "オメガ ナージャ",
+  "VoiceActor": "VA. Reba Buhr",
+  "VoiceActor_jp": "CV. 乾真由璃",
+  "VoiceActor_kr": "CV. Reba Buhr"
 }

@@ -3,29 +3,49 @@
   "Fullname": "Ais Wallenstein",
   "Rarity": 3,
   "Element": "Light",
-  "rank_pvp":"B",
+  "rank_pvp": "B",
   "gift": "Natural Object",
-  "role":"dps",
+  "role": "dps",
   "Class": "Striker",
   "SubClass": "Attacker",
-  "tags":["collab","ignore-defense"],
-  "limited":true,"skill_priority":{"First":{"prio": 2}, "Second":{"prio": 3}, "Ultimate":{"prio": 1}},
+  "tags": [
+    "collab",
+    "ignore-defense"
+  ],
+  "limited": true,
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\nAt the start of battle, grants Ariel for 1 turn\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\n+10% Ally Team Defense",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+10% Ally Team Defense",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+50% damage dealt to Bosses\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+50% damage dealt to Bosses\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n戦闘開始時、エアリエル+1ターン\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n전투 입장 시 에어리얼 +1턴\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n味方の防御力+10%",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n아군 방어력 +10%",
+    "6_jp": "ATK DEF HP +30%\nボスに与えるダメージ+50%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n보스 대상 피해 +50%\n입장 시 AP +25"
   },
   "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
       "name": "Swift Strike",
-      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>70%</color> chance to reduce skill cooldown of <color=#28d9ed>Gale of Sword Princess</color> by <color=#28d9ed>1 turn(s)</color>. ",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>70%</color> chance to reduce skill cooldown of <color=#28d9ed>Gale of Sword Princess</color> by <color=#28d9ed>1 turn(s)</color>.",
       "DescID": "SKILL_DESC_2000096_Skill01_LV1,SKILL_DESC_2000096_Skill01_LV1,SKILL_DESC_2000096_Skill01_LV1,SKILL_DESC_2000096_Skill01_LV1,SKILL_DESC_2000096_Skill01_LV1",
       "IconName": "Skill_First_2000096",
       "NameIDSymbol": "9601",
@@ -35,22 +55,31 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000096_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": ["UNIQUE_ARIEL","BT_ADDITIVE_TURN"],
+      "buff": [
+        "UNIQUE_ARIEL",
+        "BT_ADDITIVE_TURN"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 80,
           "effect": "Grants Ariel for 1 turn",
-          "level": 1
+          "level": 1,
+          "effect_kr": "에어리얼 +1턴",
+          "effect_jp": "エアリエル+1ターン"
         },
         "SKT_BURST_2": {
           "cost": 120,
           "effect": "Resets Gale of Sword Princess cooldown",
-          "level": 2
+          "level": 2,
+          "effect_kr": "검희의 바람 쿨타임 초기화",
+          "effect_jp": "【剣姫の風】スキルターン初期化"
         },
         "SKT_BURST_3": {
           "cost": 160,
           "effect": "Changes to Enhanced Skill\\nIncreases damage\\nExtra turn",
-          "level": 3
+          "level": 3,
+          "effect_kr": "강화 스킬로 교체\\n피해 증가\\n추가 턴",
+          "effect_jp": "強化スキルに変更\\nダメージUP\\n追加ターン獲得"
         }
       },
       "cd": null,
@@ -72,9 +101,41 @@
         "5": [
           "+15% damage",
           "+15% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+15%",
+          "効果発生率+15%"
+        ],
+        "5_kr": [
+          "피해량 +15%",
+          "효과 발동 확률 +15%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "신속한 일격",
+      "name_jp": "迅速な一撃",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>검희의 바람</color> 스킬의 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>70%</color>の確率で、<color=#28d9ed>【剣姫の風】</color>のスキルターンを<color=#28d9ed>1ターン</color>減少させる。"
     },
     "SKT_SECOND": {
       "name": "Tempest",
@@ -87,9 +148,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000096_Skill02",
       "TargetTeamType": "NONE",
-      "buff": [
-        
-      ],
+      "buff": [],
       "cd": 0,
       "debuff": [],
       "description": [
@@ -108,9 +167,39 @@
         "5": [
           "+15% effect proportional to missing Health",
           "+20% damage to Bosses"
+        ],
+        "2_jp": [
+          "HP DOWN時、効果+10%"
+        ],
+        "2_kr": [
+          "체력 감소 시 효과 +10%"
+        ],
+        "3_jp": [
+          "HP DOWN時、効果+10%"
+        ],
+        "3_kr": [
+          "체력 감소 시 효과 +10%"
+        ],
+        "4_jp": [
+          "HP DOWN時、効果+15%"
+        ],
+        "4_kr": [
+          "체력 감소 시 효과 +15%"
+        ],
+        "5_jp": [
+          "HP DOWN時、効果+15%",
+          "ボスモンスターに与えるダメージ+20%"
+        ],
+        "5_kr": [
+          "체력 감소 시 효과 +15%",
+          "보스에게 입히는 피해량 +20%"
         ]
       },
-      "wgr": 0
+      "wgr": 0,
+      "name_kr": "템페스트",
+      "name_jp": "テンペスト",
+      "true_desc_kr": "(패시브 효과) 체력이 감소할수록 공격력과 치명 확률이 증가합니다. (최대 <color=#28d9ed>50%</color>)\\n보스 몬스터에게 입히는 피해가 <color=#28d9ed>30%</color> 증가합니다.",
+      "true_desc_jp": "(パッシブ効果)残りHPが低いほど攻撃力と会心率がUPする。(最大<color=#28d9ed>50%</color>までUP)\\nボスモンスターに与えるダメージが<color=#28d9ed>30%</color>UPする。"
     },
     "SKT_ULTIMATE": {
       "name": "Gale of Sword Princess",
@@ -128,9 +217,7 @@
         "UNIQUE_ARIEL"
       ],
       "cd": "5",
-      "debuff": [
-        
-      ],
+      "debuff": [],
       "description": [
         "Attacks an enemy, and grants <color=#28d9ed>Ariel</color> for <color=#28d9ed>[Buff_T_2000096_3_1] turn(s)</color>.\\nBefore attacking, when already granted <color=#28d9ed>Ariel</color>, activates <color=#28d9ed>Lil Rafaga</color> instead.\\n\\n<color=#ffd732>Lil Rafaga</color>: Attacks all enemies. Ignores <color=#28d9ed>30%</color> of the target's Defense."
       ],
@@ -148,9 +235,41 @@
         "5": [
           "+20% damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "効果ターン+1ターン"
+        ],
+        "4_kr": [
+          "효과 지속 +1턴"
+        ],
+        "5_jp": [
+          "ダメージ+20%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "피해량 +20%",
+          "WG 감소량 +1"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "검희의 바람",
+      "name_jp": "剣姫の風",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>에어리얼</color>을 획득합니다.\\n공격 전 <color=#28d9ed>에어리얼</color> 을 이미 가지고 있었다면, \\n<color=#ffd732>릴 라파가</color>를 대신 사용합니다.\\n\\n<color=#ffd732>릴 라파가</color> : 적 전체를 공격합니다. 대상의 방어력을 <color=#28d9ed>30%</color> 무시합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、自分に<color=#28d9ed>エアリエル</color>を<color=#28d9ed>1ターン</color>の間付与する。\\n攻撃前に<color=#28d9ed>エアリエル</color>が付与されている場合、<color=#28d9ed>【リル・ラファーガ】</color>を発動する。\\n\\n<color=#ffd732>【リル・ラファーガ】</color>:敵全体にダメージを与える。対象の防御力を<color=#28d9ed>30%</color>無視する。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -163,7 +282,7 @@
       "SkillType": "SKT_CHAIN_PASSIVE",
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
-      "buff": "",
+      "buff": "BT_STAT|ST_CRITICAL_DMG_RATE",
       "cd": null,
       "debuff": [],
       "description": [
@@ -172,23 +291,60 @@
       "dual_buff": "",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 해당 공격의 치명 피해가 <color=#28d9ed>30%</color> 증가합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>검희의 바람</color>의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:この攻撃の会心ダメージが<color=#28d9ed>30%</color>UPする。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>【剣姫の風】</color>のスキルターンを<color=#28d9ed>1ターン</color>減少させる。"
     }
   },
-  "rank":"C"  
+  "rank": "C",
+  "Fullname_kr": "아이즈 발렌슈타인",
+  "Fullname_jp": "アイズ・ヴァレンシュタイン",
+  "VoiceActor": "VA. Saori Onishi",
+  "VoiceActor_jp": "CV. 大西沙織",
+  "VoiceActor_kr": "CV. 오오니시 사오리"
 }

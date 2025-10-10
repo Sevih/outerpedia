@@ -11,12 +11,12 @@
     },
     {
         "name": "BT_ACTION_GAUGE",
-        "label": "Priority Decrease",
-        "label_jp": "行動ゲージDOWN",
-        "label_kr": "행동 게이지 감소",
-        "description": "Reduces the target's Priority by a certain amount.",
-        "description_jp": "対象の行動ゲージを 一定割合DOWNさせる。",
-        "description_kr": "대상의 행동 게이지가 일정 비율 감소합니다.",
+        "label": "Priority Increase",
+        "label_jp": "行動ゲージUP",
+        "label_kr": "행동 게이지 증가",
+        "description": "Increases the target's Priority by a certain amount.",
+        "description_jp": "対象の行動ゲージを 一定割合UPさせる。",
+        "description_kr": "대상의 행동 게이지가 일정 비율 증가합니다.",
         "icon": "SC_Buff_Effect_Increase_Priority"
     },
     {
@@ -161,12 +161,12 @@
     },
     {
         "name": "BT_STAT|ST_ACCURACY",
-        "label": "Reduced Accuracy",
-        "label_jp": "命中DOWN",
-        "label_kr": "명중 감소",
-        "description": "Reduces Accuracy by 50%.",
-        "description_jp": "対象の命中を50%DOWNさせる。",
-        "description_kr": "대상의 명중을 50% 감소시킵니다.",
+        "label": "Increased Accuracy",
+        "label_jp": "命中UP",
+        "label_kr": "명중 증가",
+        "description": "Increases Accuracy by 50%.",
+        "description_jp": "対象の命中が50%UPする。",
+        "description_kr": "대상의 명중이 50% 증가합니다.",
         "icon": "SC_Buff_Stat_Accuracy"
     },
     {

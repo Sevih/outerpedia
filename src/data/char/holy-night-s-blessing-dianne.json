@@ -31,10 +31,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+30 Accuracy\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\n+25 Action Points at battle start",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\nGrants 1 additional random buff each turn\nIncreases Penetration by 30%"
+    "6": "ATK DEF HP +30%\nGrants 1 additional random buff each turn\nIncreases Penetration by 30%",
+    "4_1_jp": "ATK DEF HP +16%\n命中+30\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n명중 +30\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n毎ターンランダムバフ+1回\n貫通力+30%",
+    "6_kr": "ATK DEF HP +30%\n매 턴 무작위 버프 +1회\n관통력 +30%"
   },
   "Chain_Type": "Join",
   "skills": {
@@ -71,9 +77,39 @@
         ],
         "5": [
           "+10% Priority"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "行動ゲージ10%UP"
+        ],
+        "3_kr": [
+          "행동 게이지 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "行動ゲージ10%UP"
+        ],
+        "5_kr": [
+          "행동 게이지 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "산타, 등장♡",
+      "name_jp": "サンタ、おでまし♡",
+      "true_desc_kr": "적을 공격하고 자신의 행동 게이지가 <color=#28d9ed>10%</color> 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、自分の行動ゲージが<color=#28d9ed>10%</color>UPする。"
     },
     "SKT_SECOND": {
       "name": "Gift Shower",
@@ -97,17 +133,23 @@
         "SKT_BURST_1": {
           "cost": 80,
           "effect": "Gains an extra turn",
-          "level": 1
+          "level": 1,
+          "effect_kr": "추가 턴 발생",
+          "effect_jp": "追加ターン発生"
         },
         "SKT_BURST_2": {
           "cost": 120,
           "effect": "Increases damage",
-          "level": 2
+          "level": 2,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_3": {
           "cost": 160,
           "effect": "<color=#FFBF00>Enhanced Attack</color>\\nActivates Gift of Buffs for 1 turn\\nAfter gifting, grants increased Penetration for 2 turns",
-          "level": 3
+          "level": 3,
+          "effect_kr": "<color=#FFBF00>강화 공격</color>\\n강화 효과 선물 +1턴 발동\\n선물 후 관통력 증가 +2턴",
+          "effect_jp": "<color=#FFBF00>強化攻撃</color>\\n【強化効果プレゼント】+1ターン発動\\nプレゼント後、貫通力UP+2ターン"
         }
       },
       "cd": "4",
@@ -129,9 +171,41 @@
         "5": [
           "+20% damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+20%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "피해량 +20%",
+          "WG 감소량 +1"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "선물 공세",
+      "name_jp": "プレゼント攻勢",
+      "true_desc_kr": "(패시브 효과) 턴 시작 시 자신에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>무작위 능력치 증가</color> 효과를 부여합니다. (이미 보유중인 효과는 발생하지 않습니다.)\\n\\n(액티브 효과) 적을 공격합니다. 이 스킬은 자신의 속도가 높을수록 피해가 증가합니다.",
+      "true_desc_jp": "(パッシブ効果)ターン開始時、自分に<color=#28d9ed>ランダムのステータスUP効果</color>を<color=#28d9ed>2ターン</color>の間付与する。(すでに付与されている効果以外の強化効果が付与される。)\\n\\n(アクティブ効果)敵単体にダメージを与える。このスキルは自分のスピードが高いほどダメージがUPする。"
     },
     "SKT_ULTIMATE": {
       "name": "Winter Night's Blessing",
@@ -167,9 +241,41 @@
         "5": [
           "+1 turn Gift of Buffs duration",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "強化効果プレゼント+1ターン",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "강화 효과 선물 지속 +1턴",
+          "WG 감소량 +1"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "겨울밤의 축복",
+      "name_jp": "真冬の夜の祝福",
+      "true_desc_kr": "적 전체를 공격하고 아군 전체에게 <color=#28d9ed>강화 효과 선물</color>을 사용합니다. <color=#28d9ed>선물</color> 된 강화 효과는 <color=#28d9ed>1턴</color> 동안 유지됩니다.\\n이 스킬은 자신의 속도가 높을수록 피해가 증가하며, 아군 전체가 보유한 <color=#28d9ed>강화 효과</color>가 많을수록 피해가 추가로 증가합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。味方全体に<color=#28d9ed>【強化効果プレゼント】</color>を使用する。<color=#28d9ed>【強化効果プレゼント】</color>の強化効果は<color=#28d9ed>1ターン</color>の間持続する。\\nこのスキルは自分のスピードが高いほどダメージがUPし、味方全体の<color=#28d9ed>強化効果</color>が多いほどダメージがUPする。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -183,7 +289,7 @@
       "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
       "TargetTeamType": "NONE",
       "buff": [
-        "BT_CP_CHARGE"
+        "BT_AP_CHARGE"
       ],
       "cd": null,
       "debuff": "",
@@ -193,23 +299,60 @@
       "dual_buff": "BT_ACTION_GAUGE",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신과 다음 스킬 체인 수행자의 AP를 <color=#28d9ed>25</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 자신의 행동 게이지가 <color=#28d9ed>30%</color> 증가합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、自分と次のチェーンスキル参加者がAPを<color=#28d9ed>25</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、自分の行動ゲージが<color=#28d9ed>30%</color>UPする。"
     }
   },
-  "rank": "S"
+  "rank": "S",
+  "Fullname_kr": "성야의 축복 다이안",
+  "Fullname_jp": "聖夜の祝福 ダイアン",
+  "VoiceActor": "VA. Mia Paige",
+  "VoiceActor_jp": "CV. 末柄里恵",
+  "VoiceActor_kr": "CV. Mia Paige"
 }
