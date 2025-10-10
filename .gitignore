@@ -37,6 +37,7 @@ src/app/api/admin/
 /public/sitemaps*
 TODO.md
 /src/data/_allCharacters.json
+/src/data/_SlugToChar.json
 /src/data/characters_limited.json
 /src/data/characters_premium.json
 /src/data/characters_regular.json

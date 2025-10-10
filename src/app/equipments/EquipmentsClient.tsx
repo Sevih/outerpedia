@@ -2,34 +2,79 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+
 import weapons from "@/data/weapon.json";
+import accessories from "@/data/amulet.json";
+import talismans from "@/data/talisman.json";
+import sets from "@/data/sets.json";
+import eeData from "@/data/ee.json";
+
 import WeaponCard from "@/app/components/WeaponCard";
 import AccessoryCard from "@/app/components/AccessoryCard";
-import accessories from "@/data/amulet.json";
-import sets from "@/data/sets.json";
 import SetCard from "@/app/components/SetCard";
 import bossData from "@/data/boss.json";
 import statsData from "@/data/stats.json";
 import { cleanAccessory } from '@/lib/cleaner';
-import talismans from "@/data/talisman.json";
+
 import TalismanGrid from "@/app/components/TalismanGrid";
 import ExclusiveEquipmentList from "@/app/components/ExclusiveEquipmentCard";
-import eeData from "@/data/ee.json";
+
 import { AnimatedTabs } from "@/app/components/AnimatedTabs"
+// en haut du fichier EquipmentsClient.tsx, après les imports
+import { useSearchParams } from "next/navigation";
+import type { TenantKey } from '@/tenants/config'
+import { useI18n } from '@/lib/contexts/I18nContext'
+
+type TabKey = "weapon" | "accessory" | "armor" | "talisman" | "exclusive";
 
 
 
-export default function EquipmentsClient() {
-  const tabList = [
-    { key: "weapon", label: "Weapons", icon: "weapon.webp" },
-    { key: "accessory", label: "Accessories", icon: "accessory.webp" },
-    { key: "armor", label: "Armor Set", icon: "armor.webp" },
-    { key: "talisman", label: "Talismans", icon: "talisman.webp" },
-    { key: "exclusive", label: "Exclusive", icon: "exclusive.webp" }
+
+type Props = {
+  lang: TenantKey
+}
+
+
+export default function EquipmentsClient({ lang = "en" }: Props) {
+  const searchParams = useSearchParams();
+  const tabParam = (searchParams.get("tab") as TabKey | null) ?? null;
+  const { t } = useI18n()
+
+
+  const TABS: { key: TabKey; label: string; icon: string }[] = [
+    { key: "weapon", label: t("equipments_tabs.weapon"), icon: "/images/ui/nav/weapon.webp" },
+    { key: "accessory", label: t("equipments_tabs.accessory"), icon: "/images/ui/nav/accessory.webp" },
+    { key: "armor", label: t("equipments_tabs.armor"), icon: "/images/ui/nav/armor.webp" },
+    { key: "talisman", label: t("equipments_tabs.talisman"), icon: "/images/ui/nav/talisman.webp" },
+    { key: "exclusive", label: t("equipments_tabs.exclusive"), icon: "/images/ui/nav/exclusive.webp" }
   ];
 
 
-  const [tab, setTab] = useState<"weapon" | "accessory" | "armor" | "talisman" | "exclusive">("weapon");
+  // 👇 remplace l'ancien: const [tab, setTab] = useState<...>("weapon");
+  const [selected, setSelected] = useState<TabKey>("weapon");
+
+  // initialise depuis l’URL
+  useEffect(() => {
+    const allowed: TabKey[] = ["weapon", "accessory", "armor", "talisman", "exclusive"];
+    if (tabParam && (allowed as string[]).includes(tabParam)) {
+      setSelected(tabParam as TabKey);
+    } else if (tabParam == null) {
+      setSelected("weapon"); // défaut propre
+    }
+  }, [tabParam]);
+
+  // handler identique à ta page Premium
+  const handleTabChange = (key: TabKey) => {
+    setSelected(key);
+    const params = new URLSearchParams(window.location.search);
+    if (key === "weapon") params.delete("tab"); // onglet par défaut → URL propre
+    else params.set("tab", key);
+    const qs = params.toString();
+    const newUrl = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
+    window.history.replaceState(null, "", newUrl);
+  };
+
+
 
   const [weaponClassFilter, setWeaponClassFilter] = useState<string | null>(null);
   const [weaponBossFilter, setWeaponBossFilter] = useState<string | null>(null);
@@ -83,7 +128,7 @@ export default function EquipmentsClient() {
     setArmorBossFilter(null);
     setWeaponSearch("");
     setAccessorySearch("");
-  }, [tab]);
+  }, [selected]);
 
 
   type BossEntry = {
@@ -128,124 +173,21 @@ export default function EquipmentsClient() {
     });
   });
 
-  const TruetabList = tabList.map(({ key, label, icon }) => ({
-    key,
-    label,
-    icon: `/images/ui/nav/${icon}`
-  }))
 
 
   return (
     <main className="p-3">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "VideoGame",
-            "name": "Outerplane",
-            "url": "https://outerpedia.com/",
-            "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse equipments, characters, sets and more.",
-            "hasPart": [
-              ...weapons.map(w => ({
-                "@type": "CreativeWork",
-                "name": w.name,
-                "image": `https://outerpedia.com/images/equipment/${w.image}`
-              })),
-              ...accessories.map(a => ({
-                "@type": "CreativeWork",
-                "name": a.name,
-                "image": `https://outerpedia.com/images/equipment/${a.image}`
-              })),
-              ...sets.map((s, i) => {
-                const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
-                const variant = variants[i % variants.length];
-                return {
-                  "@type": "CreativeWork",
-                  "name": s.name,
-                  "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.webp`
-                };
-              }),
-              ...talismans.map(t => ({
-                "@type": "CreativeWork",
-                "name": t.name,
-                "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.webp`
-              })),
-              ...Object.entries(eeData).map(([charKey, ee]) => ({
-                "@type": "CreativeWork",
-                "name": ee.name,
-                "image": `https://outerpedia.com/images/characters/ex/${charKey}.webp`
-              }))
-            ]
-          })
-        }}
-      />
-
-
-      {process.env.NODE_ENV === "development" && (
-        <div className="fixed bottom-4 right-4 z-50">
-          <button
-            className="bg-cyan-600 text-white px-4 py-2 rounded shadow-lg hover:bg-cyan-700"
-            onClick={() => {
-              const data = {
-                "@context": "https://schema.org",
-                "@type": "VideoGame",
-                "name": "Outerplane",
-                "url": "https://outerpedia.com/",
-                "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse equipments, characters, sets and more.",
-                "hasPart": [
-                  ...weapons.map(w => ({
-                    "@type": "CreativeWork",
-                    "name": w.name,
-                    "image": `https://outerpedia.com/images/equipment/${w.image}`
-                  })),
-                  ...accessories.map(a => ({
-                    "@type": "CreativeWork",
-                    "name": a.name,
-                    "image": `https://outerpedia.com/images/equipment/${a.image}`
-                  })),
-                  ...sets.map((s, i) => {
-                    const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
-                    const variant = variants[i % variants.length];
-                    return {
-                      "@type": "CreativeWork",
-                      "name": s.name,
-                      "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.webp`
-                    };
-                  }),
-                  ...talismans.map(t => ({
-                    "@type": "CreativeWork",
-                    "name": t.name,
-                    "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.webp`
-                  })),
-                  ...Object.entries(eeData).map(([charKey, ee]) => ({
-                    "@type": "CreativeWork",
-                    "name": ee.name,
-                    "image": `https://outerpedia.com/images/characters/ex/${charKey}.webp`,
-                    "url": `https://outerpedia.com/characters/${charKey}`
-                  }))
-                ]
-              };
-              console.log("Generated JSON-LD:", data);
-              alert("JSON-LD logged in console ✅");
-            }}
-          >
-            Show JSON-LD
-          </button>
-        </div>
-      )}
       <div className="sr-only">
         <h1>Weapon, Set, Amulet, Exclusive Equipment, Talismans  Database</h1>
       </div>
 
       <div className="flex justify-center mb-6">
         <AnimatedTabs
-          tabs={TruetabList}
-          selected={tab}
-          onSelect={(key) => setTab(key as typeof tab)}
+          tabs={TABS}
+          selected={selected}
+          onSelect={(key) => handleTabChange(key as TabKey)}
           pillColor="#06b6d4" // cyan-500
           compact
-
         />
       </div>
 
@@ -253,7 +195,8 @@ export default function EquipmentsClient() {
 
 
 
-      {tab === "weapon" && (
+
+      {selected === "weapon" && (
         <>
           <div className="mb-4 flex flex-col items-center gap-4">
             <input
@@ -347,7 +290,7 @@ export default function EquipmentsClient() {
         </>
       )}
 
-      {tab === "accessory" && (
+      {selected === "accessory" && (
         <>
           <div className="mb-4 flex flex-col items-center gap-4">
             <input
@@ -470,7 +413,7 @@ export default function EquipmentsClient() {
         </>
       )}
 
-      {tab === "armor" && (
+      {selected === "armor" && (
         <>
           {/* Filtres boss/mode pour les armors */}
           <div className="mb-4 flex flex-wrap justify-center gap-2">
@@ -514,12 +457,12 @@ export default function EquipmentsClient() {
           </div>
         </>
       )}
-      {tab === "talisman" && (
+      {selected === "talisman" && (
         <TalismanGrid talismans={talismans} />
       )}
 
-      {tab === "exclusive" && (
-        <ExclusiveEquipmentList />
+      {selected === "exclusive" && (
+        <ExclusiveEquipmentList exdata={eeData} lang={lang} />
       )}
 
 

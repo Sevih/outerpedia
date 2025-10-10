@@ -119,7 +119,7 @@ const kr = {
   "note_icon_alt": "노트 아이콘",
 
   'SYS_CLASS_DEFENDER': '방어형',
-  'SYS_CLASS_ATTACKER': '공격형',  
+  'SYS_CLASS_ATTACKER': '공격형',
   'SYS_CLASS_STRIKER': '공격형',
   'SYS_CLASS_RANGER': '속도형',
   'SYS_CLASS_MAGE': '마법형',
@@ -177,6 +177,14 @@ const kr = {
   'SYS_STAT_HH_PERCENT': '피격 시 회복%',
   'SYS_STAT_EVA': '회피',
   'SYS_STAT_ACC': '명중',
+
+  "equipments_tabs.weapon": "무기",
+  "equipments_tabs.accessory": "액세서리",
+  "equipments_tabs.armor": "세트 장비",
+  "equipments_tabs.talisman": "탈리스만",
+  "equipments_tabs.exclusive": "전용 장비"
+
+
 
 
 

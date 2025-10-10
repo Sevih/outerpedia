@@ -90,17 +90,17 @@ function getRankKey(mode: Mode): keyof Character | keyof Equipment {
 
 type Equipment = {
     name: string
-	name_jp?: string
-	name_kr?: string
-	mainStat: string
-	mainStat_jp?: string
-	mainStat_kr?: string
-	effect: string
-	effect_jp?: string
-	effect_kr?: string
-	effect10: string
-	effect10_jp?: string
-	effect10_kr?: string
+    name_jp?: string
+    name_kr?: string
+    mainStat: string
+    mainStat_jp?: string
+    mainStat_kr?: string
+    effect: string
+    effect_jp?: string
+    effect_kr?: string
+    effect10: string
+    effect10_jp?: string
+    effect10_kr?: string
     rank: string
     rank10?: string
     icon_effect: string
@@ -161,6 +161,14 @@ function getLocalizedFullname(character: CharacterDisplay, langKey: TenantKey): 
     const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
     const localized = character[key] // type: string | undefined
     return localized ?? character.Fullname
+}
+
+type EEnameKey = Extract<keyof Equipment, `name${'' | `_${string}`}`>
+function getLocalizedEEname(ee: Equipment, langKey: TenantKey): string {
+    //console.log(character)
+    const key: EEnameKey = langKey === 'en' ? 'name' : (`name_${langKey}` as EEnameKey)
+    const localized = ee[key] // type: string | undefined
+    return localized ?? ee.name
 }
 
 
@@ -504,6 +512,11 @@ export default function TierListBase({ characters = [], equipments = {}, mode, l
                                                             className="relative"
                                                             style={{ width: '120px', height: '231px' }}
                                                         >
+                                                            
+                                                            {char.limited && (
+                                                                <Image src="/images/ui/CM_Shop_Tag_Limited.webp" alt={char!.Fullname} width={75} height={30} className="absolute top-1 left-1 z-30 object-contain" style={{ width: 75, height: 30 }} />
+                                                            )}
+                                                           
                                                             <Image
                                                                 src={`/images/characters/portrait/CT_${char!.ID}.webp`}
                                                                 alt={char!.Fullname}
@@ -516,8 +529,8 @@ export default function TierListBase({ characters = [], equipments = {}, mode, l
 
                                                         {/* Bloc spécifique EE */}
                                                         {ee && (
-                                                            <div className="absolute top-1 left-1 w-[48px] h-[48px] z-30 bg-black/70 rounded">
-                                                                <EeDisplayMini ee={ee} id={toKebabCase(char!.Fullname)} />
+                                                            <div className="absolute top-8 left-1 w-[48px] h-[48px] z-30 bg-black/50 rounded">
+                                                                <EeDisplayMini ee={ee} id={toKebabCase(char!.Fullname)} lang={langue} />
                                                             </div>
                                                         )}
 
@@ -547,7 +560,7 @@ export default function TierListBase({ characters = [], equipments = {}, mode, l
                                                     {/* Nom EE en dessous */}
                                                     {ee && (
                                                         <div className="mt-1 text-xs text-white font-semibold line-clamp-2">
-                                                            {ee.name}
+                                                            {getLocalizedEEname(ee,langue)}
                                                         </div>
                                                     )}
                                                 </Link>

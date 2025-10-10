@@ -29,6 +29,7 @@ const DATA: Entry[] = [
     { mode: 'Terminus Isle', unlock: 'S1-9-5 : The Responsibility of the Guilty', desc: 'Obtain Quirk and Precise Craft resources' },
     { mode: 'Precise Craft', unlock: 'S1-9-5 : The Responsibility of the Guilty', desc: 'Craft specific gear pieces' },
     { mode: 'Quirk', unlock: 'S1-9-5 : The Responsibility of the Guilty', desc: 'Account-wide bonuses (hero stats, stamina, drop rate, etc.)' },
+    { mode: 'Adventure License', unlock: "S1-10-14 : An Automaton’s Wish", desc: "Weekly challenge mode with various rewards" },
     { mode: 'Irregular Extermination', unlock: 'S2-10-15 : Unchanging', desc: "Various rewards and exclusive weapons and accessories" }
 ]
 

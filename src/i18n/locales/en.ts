@@ -178,6 +178,13 @@ const en = {
   'SYS_STAT_EVA': 'Evasion',
   'SYS_STAT_ACC': 'Accuracy',
 
+  "equipments_tabs.weapon": "Weapons",
+  "equipments_tabs.accessory": "Accessories",
+  "equipments_tabs.armor": "Armor Set",
+  "equipments_tabs.talisman": "Talismans",
+  "equipments_tabs.exclusive": "Exclusive"
+
+
 
 }
 

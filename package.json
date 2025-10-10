@@ -1,11 +1,11 @@
 {
   "name": "outerpedia-clean",
-  "version": "4.3.2",
+  "version": "4.4.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "set-version": "node scripts/set-version.js",
-    "build": "rm -rf .next && npm run set-version && npm run inject-sw-version && npm run generate:allchar && npm run generate:gear-stats && npm run gen:pool && npm run generate:gear-submap && npm run build:effects && next build",
+    "build": "rm -rf .next && npm run set-version && npm run inject-sw-version && npm run generate:allchar && npm run generate:slugToChar && npm run generate:gear-stats && npm run gen:pool && npm run generate:gear-submap && npm run build:effects && next build",
     "inject-sw-version": "node scripts/inject-sw-version.js",
     "validate:build": "ls .next/static/css/*.css && ls .next/static/chunks/app/page-*.js && echo ✅ Build is valid",
     "start": "next start",
@@ -14,6 +14,7 @@
     "build:effects": "node scripts/buildEffectIndex.mjs",
     "seo-check": "node scripts/seo-check.cjs",
     "generate:allchar": "node scripts/generateAllCharacters.js",
+    "generate:slugToChar": "node scripts/generateLinkSlugChar.js",
     "generate:gear-stats": "node scripts/generateGearUsageStats.js",
     "generate:gear-submap": "node scripts/generateSubstatsMap.js",
     "validate:upgrade": "npx next info && npm run build && npm run start -- -p 0",

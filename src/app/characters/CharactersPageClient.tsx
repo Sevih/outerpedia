@@ -37,12 +37,24 @@ type TagMeta = { label: string; image: string; desc: string; type: string }
 type Payload = {
   el?: string[]; cl?: string[]; r?: number[]; chain?: string[]; gift?: string[];
   buffs?: string[]; debuffs?: string[];
-  logic?: 'AND' | 'OR'; q?: string; uniq?: boolean; role?: string[]; tags?: string[]
+  logic?: 'AND' | 'OR'; q?: string; uniq?: boolean; role?: string[]; tags?: string[]; tagLogic?: 'AND' | 'OR'
 }
 type ZPayload = {
-  e?: number[]; c?: number[]; r?: number[]; ch?: number[]; g?: number[]; b?: number[]; d?: number[];
-  lg?: 0 | 1; q?: string; u?: 0 | 1; rl?: string[]; tg?: string[]
+  e?: number[]
+  c?: number[]
+  r?: number[]
+  ch?: number[]
+  g?: number[]
+  b?: number[]
+  d?: number[]
+  l?: 0 | 1         // old lg
+  q?: string
+  u?: 0 | 1
+  r2?: string[]     // old rl
+  t?: string[]      // old tg
+  tl?: 0 | 1
 }
+
 
 // ===== Constants
 const ELEMENTS = [
@@ -120,25 +132,12 @@ const isRoleSlug = (v: unknown): v is RoleSlug =>
   v === 'dps' || v === 'support' || v === 'sustain'
 
 
-// ——— Tag helpers: one-per-category
-const TAG_KEY_TO_TYPE: Record<string, string> = Object.fromEntries(TAGS.map(t => [t.key, t.type]))
-
-function keepOnePerType(keys: string[]): string[] {
-  const seen = new Set<string>(); const out: string[] = []
-  for (const k of keys) {
-    const type = TAG_KEY_TO_TYPE[k] || TAG_INDEX[k]?.type
-    if (!type || seen.has(type)) continue
-    seen.add(type); out.push(k)
-  }
-  return out
-}
-
 // ===== Effect groups
 const orderedBuffGroups = [
   { title: 'characters.effectsGroups.buff.statBoosts', items: ['BT_STAT|ST_ATK', 'BT_STAT|ST_DEF', 'BT_STAT|ST_SPEED', 'BT_STAT|ST_CRITICAL_RATE', 'BT_STAT|ST_CRITICAL_DMG_RATE', 'BT_STAT|ST_BUFF_CHANCE', 'BT_STAT|ST_BUFF_RESIST', 'BT_STAT|ST_AVOID', 'BT_STAT|ST_ACCURACY', 'BT_STAT|ST_PIERCE_POWER_RATE', 'BT_RANDOM_STAT'] },
   { title: 'characters.effectsGroups.buff.supporting', items: ['BT_INVINCIBLE', 'BT_SHIELD_BASED_CASTER', 'BT_IMMUNE', 'IG_Buff_BuffdurationIncrease', 'BT_UNDEAD', 'BT_STEALTHED', 'BT_REMOVE_DEBUFF', 'BT_REVIVAL', 'BT_RESURRECTION_G', 'SYS_CONTINU_HEAL', 'BT_STAT|ST_VAMPIRIC'] },
   { title: 'characters.effectsGroups.buff.utility', items: ['BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_STAT|ST_COUNTER_RATE', 'BT_CP_CHARGE', 'Heavy Strike', 'BT_DMG_ELEMENT_SUPERIORITY', 'BT_ADDITIVE_TURN', 'SYS_BUFF_REVENGE', 'SYS_REVENGE_HEAL', 'SYS_BUFF_BREAK_DMG', 'BT_CALL_BACKUP'] },
-  { title: 'characters.effectsGroups.buff.unique', items: ['UNIQUE_ARIEL', 'UNIQUE_SAKURA_CHIRU', 'UNIQUE_UME_ICHIRIN', 'UNIQUE_GRACE_OF_THE_VIRGIN_GODDESS', 'UNIQUE_CHARISMA', 'UNIQUE_DOLL_GARDEN_CARETAKER', 'UNIQUE_ETHER_BOOST', 'UNIQUE_DESTROYER_PUNISHMENT', 'UNIQUE_PUREBLOOD_DOMINION', 'UNIQUE_RADIANT_WILL', 'UNIQUE_RETRIBUTION_DOMINION', 'UNIQUE_HUBRIS_DOMINION', 'UNIQUE_GIFT_OF_BUFF', 'UNIQUE_FIERCE_OFFENSIVE', 'UNIQUE_REGINA_WORLD', 'UNIQUE_NINJA_AFTERIMAGE', 'UNIQUE_POLAR_KNIGHT', 'UNIQUE_WHITE_KNIGHT','UNIQUE_BT_SHARE_DMG_MULTI'] },
+  { title: 'characters.effectsGroups.buff.unique', items: ['UNIQUE_ARIEL', 'UNIQUE_SAKURA_CHIRU', 'UNIQUE_UME_ICHIRIN', 'UNIQUE_GRACE_OF_THE_VIRGIN_GODDESS', 'UNIQUE_CHARISMA', 'UNIQUE_DOLL_GARDEN_CARETAKER', 'UNIQUE_ETHER_BOOST', 'UNIQUE_DESTROYER_PUNISHMENT', 'UNIQUE_PUREBLOOD_DOMINION', 'UNIQUE_RADIANT_WILL', 'UNIQUE_RETRIBUTION_DOMINION', 'UNIQUE_HUBRIS_DOMINION', 'UNIQUE_GIFT_OF_BUFF', 'UNIQUE_FIERCE_OFFENSIVE', 'UNIQUE_REGINA_WORLD', 'UNIQUE_NINJA_AFTERIMAGE', 'UNIQUE_POLAR_KNIGHT', 'UNIQUE_WHITE_KNIGHT', 'UNIQUE_BT_SHARE_DMG_MULTI'] },
 ]
 
 const orderedDebuffGroups = [
@@ -164,11 +163,12 @@ function encodeStateToZ(p: Payload): string {
     g: isArr(p.gift) ? p.gift!.map(x => GF[x as keyof typeof GF]).filter(Boolean) : undefined,
     b: isArr(p.buffs) ? p.buffs!.map(b => buffToId[b]).filter(Boolean) : undefined,
     d: isArr(p.debuffs) ? p.debuffs!.map(d => debuffToId[d]).filter(Boolean) : undefined,
-    rl: isArr(p.role) ? p.role : undefined,
-    tg: isArr(p.tags) ? p.tags : undefined,
-    lg: p.logic === 'AND' ? 1 : undefined,
+    r2: isArr(p.role) ? p.role : undefined,
+    t: isArr(p.tags) ? p.tags : undefined,
+    l: p.logic === 'AND' ? 1 : undefined,
     q: p.q || undefined,
     u: p.uniq ? 1 : undefined,
+    tl: p.tagLogic === 'AND' ? 1 : undefined,
   }
   return LZString.compressToEncodedURIComponent(JSON.stringify(compact))
 }
@@ -178,18 +178,19 @@ function decodeZToState(z?: string): Partial<Payload> | null {
   try {
     const raw = JSON.parse(LZString.decompressFromEncodedURIComponent(z) || '{}') as ZPayload
     return {
-      el: raw.e?.map(id => EL_INV[id]).filter(Boolean) as string[] | undefined,
-      cl: raw.c?.map(id => CL_INV[id]).filter(Boolean) as string[] | undefined,
+      el: raw.e?.map(id => EL_INV[id]).filter(Boolean),
+      cl: raw.c?.map(id => CL_INV[id]).filter(Boolean),
       r: raw.r,
-      chain: raw.ch?.map(id => CH_INV[id]).filter(Boolean) as string[] | undefined,
-      gift: raw.g?.map(id => GF_INV[id]).filter(Boolean) as string[] | undefined,
+      chain: raw.ch?.map(id => CH_INV[id]).filter(Boolean),
+      gift: raw.g?.map(id => GF_INV[id]).filter(Boolean),
       buffs: raw.b?.map(id => idToBuff[id]).filter(Boolean),
       debuffs: raw.d?.map(id => idToDebuff[id]).filter(Boolean),
-      role: raw.rl ?? [],
-      tags: raw.tg ?? [],
-      logic: raw.lg === 1 ? 'AND' : 'OR',
+      role: raw.r2 ?? [],
+      tags: raw.t ?? [],
+      logic: raw.l === 1 ? 'AND' : 'OR',
       q: raw.q,
       uniq: raw.u === 1,
+      tagLogic: raw.tl === 1 ? 'AND' : 'OR',
     }
   } catch (e) {
     if (process.env.NODE_ENV !== 'production') console.warn('[Characters] decodeZToState failed', e)
@@ -255,9 +256,9 @@ function splitIntoRows<T>(arr: T[], rows = 2): T[][] {
 type FullnameKey = Extract<keyof CharacterLite, `Fullname${'' | `_${string}`}`>
 function getLocalizedFullname(character: CharacterLite, langKey: TenantKey): string {
   console.log(character)
-    const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
-    const localized = character[key] // type: string | undefined
-    return localized ?? character.Fullname
+  const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
+  const localized = character[key] // type: string | undefined
+  return localized ?? character.Fullname
 }
 
 function norm(s: unknown): string {
@@ -293,7 +294,10 @@ export default function CharactersPage({ langue }: ClientProps) {
   const [chainFilter, setChainFilter] = useState<string[]>([])
   const [giftFilter, setGiftFilter] = useState<string[]>([])
   const [roleFilter, setRoleFilter] = useState<RoleSlug[]>([])
+  // state
   const [tagFilter, setTagFilter] = useState<string[]>([])
+  const [tagLogic, setTagLogic] = useState<'AND' | 'OR'>('OR') // +++
+
 
   const [selectedBuffs, setSelectedBuffs] = useState<string[]>([])
   const [selectedDebuffs, setSelectedDebuffs] = useState<string[]>([])
@@ -373,7 +377,8 @@ export default function CharactersPage({ langue }: ClientProps) {
     uniq: showUniqueEffects || undefined,
     role: roleFilter.length ? roleFilter : undefined,
     tags: tagFilter.length ? tagFilter : undefined,
-  }), [elementFilter, classFilter, rarityFilter, chainFilter, giftFilter, selectedBuffs, selectedDebuffs, effectLogic, rawQuery, showUniqueEffects, roleFilter, tagFilter])
+    tagLogic: tagLogic !== 'OR' ? tagLogic : undefined,
+  }), [elementFilter, classFilter, rarityFilter, chainFilter, giftFilter, selectedBuffs, selectedDebuffs, effectLogic, rawQuery, showUniqueEffects, roleFilter, tagFilter, tagLogic])
 
   const applyPayload = (p: Partial<Payload>) => {
     setElementFilter(p.el ?? [])
@@ -387,7 +392,8 @@ export default function CharactersPage({ langue }: ClientProps) {
     setEffectLogic(p.logic === 'AND' || p.logic === 'OR' ? p.logic : 'OR')
     setShowUniqueEffects(Boolean(p.uniq))
     setRoleFilter((p.role ?? []).filter(isRoleSlug))
-    setTagFilter(keepOnePerType(p.tags ?? []))
+    setTagFilter((p.tags ?? []))
+    setTagLogic(p.tagLogic === 'AND' || p.tagLogic === 'OR' ? p.tagLogic : 'OR')
   }
 
   type TagGroup = { type: string; items: { key: string; meta: TagMeta }[] }
@@ -423,7 +429,7 @@ export default function CharactersPage({ langue }: ClientProps) {
       setCharacters(data)
       setAllBuffs(extractAllEffects(data, 'buff'))
       setAllDebuffs(extractAllEffects(data, 'debuff'))
-      setLoading(false) 
+      setLoading(false)
     }
     fetchCharacters()
   }, [])
@@ -448,10 +454,6 @@ export default function CharactersPage({ langue }: ClientProps) {
   useEffect(() => {
     const all = GIFTS.slice(1).map(g => g.value!); if (giftFilter.length === all.length) setGiftFilter([])
   }, [giftFilter])
-
-  useEffect(() => {
-    setTagFilter(prev => keepOnePerType(prev))
-  }, [showTagsPanel])
 
   // 4) Sync filters → URL
   useEffect(() => {
@@ -489,11 +491,17 @@ export default function CharactersPage({ langue }: ClientProps) {
         roleFilter.length === 0 ||
         (char.role && roleFilter.includes(char.role as RoleSlug)) // char.role vient du JSON (minuscule)
 
-      const tagMatch = tagFilter.length === 0 || tagFilter.every(t => char.tags?.includes(t))
+      const tagMatch =
+        tagFilter.length === 0
+          ? true
+          : tagLogic === 'AND'
+            ? tagFilter.every(t => char.tags?.includes(t))
+            : tagFilter.some(t => char.tags?.includes(t))
+
 
       return elementMatch && classMatch && rarityMatch && chainMatch && effectMatch && giftMatch && roleMatch && tagMatch
     })
-  }, [characters, query, elementFilter, classFilter, chainFilter, giftFilter, rarityFilter, selectedBuffs, selectedDebuffs, effectLogic, roleFilter, tagFilter])
+  }, [characters, query, elementFilter, classFilter, chainFilter, giftFilter, rarityFilter, selectedBuffs, selectedDebuffs, effectLogic, roleFilter, tagFilter,tagLogic])
 
   if (loading) return <div className="text-center mt-8 text-white">
     {t('characters.loading')}
@@ -747,6 +755,23 @@ export default function CharactersPage({ langue }: ClientProps) {
 
         {showTagsPanel && (
           <div className="w-full mt-2">
+            {/* Tags header controls (dans le panel tags) */}
+            <div className="flex justify-center gap-3 items-center mb-2">
+              <div className="inline-grid grid-cols-2 rounded bg-slate-700 text-xs">
+                <button
+                  className={`px-2 py-1 ${tagLogic === 'AND' ? 'bg-cyan-600' : ''}`}
+                  onClick={() => setTagLogic('AND')}
+                >
+                  {t('characters.filters.and')}
+                </button>
+                <button
+                  className={`px-2 py-1 ${tagLogic === 'OR' ? 'bg-cyan-600' : ''}`}
+                  onClick={() => setTagLogic('OR')}
+                >
+                  {t('characters.filters.or')}
+                </button>
+              </div>
+            </div>
             <div className="mx-auto max-w-screen-lg rounded-2xl border border-slate-700 bg-slate-900/60 p-4">
               <div className="grid md:grid-cols-2 gap-6">
                 {TAG_GROUPS.map(group => (
@@ -769,12 +794,9 @@ export default function CharactersPage({ langue }: ClientProps) {
                                 title={meta.desc}
                                 active={active}
                                 onClick={() =>
-                                  setTagFilter(prev => {
-                                    const type = meta.type
-                                    const isSelected = prev.includes(key)
-                                    const withoutType = prev.filter(k => (TAG_KEY_TO_TYPE[k] || TAG_INDEX[k]?.type) !== type)
-                                    return isSelected ? withoutType : [...withoutType, key]
-                                  })
+                                  setTagFilter(prev =>
+                                    prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]
+                                  )
                                 }
                                 className="w-auto min-w-[120px] h-8 px-2 text-[11px] gap-1 justify-center"
                               >
@@ -808,7 +830,8 @@ export default function CharactersPage({ langue }: ClientProps) {
               setEffectLogic('OR');
               setRawQuery('');
               setRoleFilter([]);
-              setTagFilter([]);
+              setTagFilter([])
+              setTagLogic('OR')
               setShowUniqueEffects(false);
 
               // ⬇️ collapse des panneaux
@@ -869,7 +892,7 @@ export default function CharactersPage({ langue }: ClientProps) {
                   <ElementIcon element={char.Element as ElementType} />
                 </div>
 
-                <CharacterNameDisplay fullname={getLocalizedFullname(char,langue)} />
+                <CharacterNameDisplay fullname={getLocalizedFullname(char, langue)} />
               </Link>
             )
           })}

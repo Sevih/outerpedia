@@ -531,7 +531,7 @@ export default function CharacterDetailClient({
                                                         width={20} height={20} style={{ width: 20, height: 20 }} className="object-contain"
                                                     />
                                                     <span className="text-sm font-semibold text-white">
-                                                        {t('exclusive_equipment_title', { name: getLocalizedFullname(character, langKey) })}
+                                                       {t('exclusive_equipment_title', { name: getLocalizedFullname(character, langKey) })}
                                                     </span>
                                                 </div>
                                             )}

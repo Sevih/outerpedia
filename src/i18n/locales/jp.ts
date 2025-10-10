@@ -119,7 +119,7 @@ const jp = {
   "note_icon_alt": "メモアイコン",
 
   'SYS_CLASS_DEFENDER': '防御型',
-  'SYS_CLASS_ATTACKER': '攻撃型',  
+  'SYS_CLASS_ATTACKER': '攻撃型',
   'SYS_CLASS_STRIKER': '攻撃型',
   'SYS_CLASS_RANGER': 'スピード型',
   'SYS_CLASS_MAGE': '魔法型',
@@ -177,6 +177,13 @@ const jp = {
   'SYS_STAT_HH_PERCENT': '被ダメージ回復%',
   'SYS_STAT_EVA': '回避',
   'SYS_STAT_ACC': '命中',
+
+  "equipments_tabs.weapon": "武器",
+  "equipments_tabs.accessory": "アクセサリー",
+  "equipments_tabs.armor": "セット装備",
+  "equipments_tabs.talisman": "タリスマン",
+  "equipments_tabs.exclusive": "専用装備"
+
 
 
 

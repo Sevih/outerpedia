@@ -7,6 +7,30 @@ type Props = {
   layout?: 'absolute' | 'normal';
 };
 
+function splitPrefixJP(fullname: string, prefixMap: Record<string, string>) {
+  // on trie par longueur pour éviter qu'un petit préfixe ne "mange" un plus long
+  const prefixes = Object.keys(prefixMap).sort((a, b) => b.length - a.length);
+  for (const p of prefixes) {
+    // 1) forme "Prefix + (espace/・) + XXX"
+    const rx1 = new RegExp(`^${escapeRegExp(p)}[\\s\\u3000・]+(.+)$`);
+    const m1 = fullname.match(rx1);
+    if (m1) return { prefix: p, name: m1[1] };
+
+    // 2) forme collée : "アイズ・ヴァレンシュタイン" ou "Tamamo-no-Mae" → déjà couvert par rx1 (・)
+    // 3) fallback : parfois il n'y a aucun séparateur mais le full commence bien par le préfixe
+    if (fullname.startsWith(p + ' ') || fullname.startsWith(p + '　')) {
+      return { prefix: p, name: fullname.slice((p + ' ').length) };
+    }
+  }
+  return { prefix: '', name: fullname };
+}
+
+//carousel compact
+function escapeRegExp(s: string) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+
 const PREFIX_STYLES: Record<string, string> = {
   'Gnosis': 'text-xs',
   'Omega': 'text-xs',
@@ -16,7 +40,10 @@ const PREFIX_STYLES: Record<string, string> = {
   'Monad': 'text-xs',
   "Holy Night's Blessing": 'text-[10px]',
   'Kitsune of Eternity': 'text-[10px]',
+
   'Ais': 'text-[18px]',
+  'アイズ': 'text-[18px]',
+
   'Poolside Trickster': 'text-[10px]',
   "Summer Knight's Dream": 'text-[9px]',
 }
@@ -35,11 +62,16 @@ const ABBR_STYLES: Record<string, string> = {
 
 const NAME_STYLES: Record<string, string> = {
   'Wallenstein': 'text-[15px] pb-1',
+  'ヴァレンシュタイン': 'text-[11px] pb-1',
+
   'Bell Cranel': 'text-[16px] pb-1',
+  'ベル・クラネル': 'text-[15px] pb-1',
+
   'Flamberge': 'text-[17px] pb-1',
   'Francesca': 'text-[17px] pb-1',
   'Hanbyul Lee': 'text-[14px] pb-1',
-  "Tamamo-no-Mae": 'text-[11px] pb-1',
+  "Tamamo-no-Mae": 'text-[11px] pb-1'
+
 
 }
 
@@ -50,7 +82,7 @@ const PREFIX_STYLES_BIG: Record<string, string> = {
   'Demiurge': 'text-[21px]',
   '데미우르고스': 'text-[21px]',
   'デミウルゴス': 'text-[21px]',
-  
+
   'Monad': 'text-[21px]',
   "Holy Night's Blessing": 'text-[21px]',
   'Kitsune of Eternity': 'text-[21px]',
@@ -64,48 +96,28 @@ const NAME_STYLES_BIG: Record<string, string> = {
 
 
 export function CharacterNameDisplay({ fullname, layout = 'absolute' }: Props) {
-  const matchedPrefix = Object.keys(PREFIX_STYLES).find((prefix) =>
-    fullname.startsWith(`${prefix} `)
-  );
-  let prefix = '';
-  let name = fullname;
+  const { prefix, name } = splitPrefixJP(fullname, PREFIX_STYLES);
 
-  if (matchedPrefix) {
-    prefix = matchedPrefix;
-    name = fullname.replace(`${prefix} `, '');
-  }
-
-  const prefixSize = matchedPrefix ? PREFIX_STYLES[matchedPrefix] : '';
+  const prefixSize = prefix ? PREFIX_STYLES[prefix] : '';
   const nameSize = NAME_STYLES[name] || 'text-lg';
 
-  // 🛠️ Correction ici : typage forcé React.CSSProperties
   const style: React.CSSProperties = layout === 'absolute'
     ? { position: 'absolute', bottom: '1.25rem', left: '0.625rem', zIndex: 30 }
     : {};
 
   return (
     <div style={style} className="text-white custom-text-shadow text-left leading-tight">
-      {prefix && (
-        <div className={`${prefixSize} mb-[-2px]`}>{prefix}</div>
-      )}
+      {prefix && <div className={`${prefixSize} mb-[-2px]`}>{prefix}</div>}
       <div className={`${nameSize}`}>{name}</div>
     </div>
   );
 }
 
 export function CharacterNameDisplayBig({ fullname }: Props) {
-  const matchedPrefix = Object.keys(PREFIX_STYLES_BIG).find((prefix) =>
-    fullname.startsWith(`${prefix} `)
-  );
-  let prefix = '';
-  let name = fullname;
+  // ✅ nouvelle logique compatible JP/KR/EN
+  const { prefix, name } = splitPrefixJP(fullname, PREFIX_STYLES_BIG);
 
-  if (matchedPrefix) {
-    prefix = matchedPrefix;
-    name = fullname.replace(`${prefix} `, '');
-  }
-
-  const prefixSize = matchedPrefix ? PREFIX_STYLES_BIG[matchedPrefix] : '';
+  const prefixSize = prefix ? PREFIX_STYLES_BIG[prefix] : '';
   const nameSize = NAME_STYLES_BIG[name] || 'text-4xl';
 
   return (
@@ -122,6 +134,7 @@ export function CharacterNameDisplayBig({ fullname }: Props) {
     </div>
   );
 }
+
 
 export function CharacterNameDisplayCompact({ fullname }: Props) {
   const matchedPrefix = Object.keys(PREFIX_STYLES).find((prefix) =>
@@ -148,11 +161,6 @@ export function CharacterNameDisplayCompact({ fullname }: Props) {
       <div className={`${nameSize} font-medium`}>{name}</div>
     </div>
   );
-}
-
-//carousel compact
-function escapeRegExp(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 export function CharacterNameDisplayCompactCarousel({ fullname }: Props) {

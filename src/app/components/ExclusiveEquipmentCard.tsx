@@ -1,44 +1,95 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
-import eeData from "@/data/ee.json";
-import statsData from "@/data/stats.json";
 import Link from "next/link";
+import type { ExclusiveEquipment } from "@/types/equipment";
+import type { TenantKey } from "@/tenants/config";
+import formatEffectText from "@/utils/formatText";
+import { useI18n } from "@/lib/contexts/I18nContext";
+import slugToCharJson from "@/data/_SlugToChar.json";
 
-type EEEntry = {
-  name: string;
-  mainStat: string;
-  effect: string;
-  effect10?: string;
-  icon_effect: string;
-  rank?: string;
+// --- types ---
+type Props = {
+  exdata: Record<string, ExclusiveEquipment>;
+  lang?: TenantKey;
 };
 
-function parseColoredText(text: string): string {
-  return text
-    .replace(/<color=#[0-9a-fA-F]{6}>/g, match => {
-      const color = match.match(/#[0-9a-fA-F]{6}/)?.[0] ?? '#fff';
-      return `<span style="color:${color}">`;
-    })
-    .replace(/<\/color>/g, '</span>')
-    .replace(/\\n/g, '<br>');
+type CharNameEntry = {
+  Fullname: string;
+  Fullname_jp?: string;
+  Fullname_kr?: string;
+};
+type SlugToCharMap = Record<string, CharNameEntry>;
+const SLUG_TO_CHAR = slugToCharJson as SlugToCharMap;
+
+// --- helpers ---
+function pickLangValue<T extends Record<string, string | undefined>>(
+  obj: T,
+  key: string,
+  lang: TenantKey
+): string {
+  if (!obj) return "";
+  const jp = obj[`${key}_jp`];
+  const kr = obj[`${key}_kr`];
+  const base = obj[key];
+
+  if (lang === "jp" && jp) return jp;
+  if (lang === "kr" && kr) return kr;
+  return base ?? "";
 }
 
-export default function ExclusiveEquipmentList() {
-  const [search, setSearch] = useState("");
+function pickLang(
+  obj: ExclusiveEquipment,
+  key: keyof ExclusiveEquipment,
+  lang: TenantKey
+): string {
+  const jpKey = `${key}_jp` as keyof ExclusiveEquipment;
+  const krKey = `${key}_kr` as keyof ExclusiveEquipment;
 
-  const filtered = Object.entries(eeData).filter(([slug, data]) => {
-    const lowerSearch = search.toLowerCase();
-    return (
-      slug.toLowerCase().includes(lowerSearch) ||
-      data.name.toLowerCase().includes(lowerSearch)
+  if (lang === "jp" && typeof obj[jpKey] === "string" && (obj[jpKey] as string).length > 0)
+    return obj[jpKey] as string;
+  if (lang === "kr" && typeof obj[krKey] === "string" && (obj[krKey] as string).length > 0)
+    return obj[krKey] as string;
+  return (obj[key] as string) ?? "";
+}
+
+function getLocalizedFullname(slug: string, lang: TenantKey): string {
+  const entry = SLUG_TO_CHAR[slug];
+  if (!entry) return "";
+  if (lang === "jp" && entry.Fullname_jp) return entry.Fullname_jp;
+  if (lang === "kr" && entry.Fullname_kr) return entry.Fullname_kr;
+  return entry.Fullname ?? "";
+}
+
+// --- composant principal ---
+export default function ExclusiveEquipmentList({ exdata, lang = "en" }: Props) {
+  const [search, setSearch] = useState("");
+  const { t } = useI18n();
+
+  const entries = useMemo(
+    () =>
+      Object.entries(exdata).map(([slug, data]) => ({
+        slug,
+        data,
+        name_en: data.name ?? "",
+        name_jp: data.name_jp ?? "",
+        name_kr: data.name_kr ?? "",
+      })),
+    [exdata]
+  );
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return entries;
+    return entries.filter(({ slug, name_en, name_jp, name_kr }) =>
+      [slug, name_en, name_jp, name_kr].some((s) => s.toLowerCase().includes(q))
     );
-  });
+  }, [entries, search]);
 
   return (
     <div className="w-full flex flex-col items-center gap-6">
-      {/* Champ de recherche */}
+      {/* search bar */}
       <input
         type="text"
         placeholder="Search exclusive equipment..."
@@ -47,122 +98,88 @@ export default function ExclusiveEquipmentList() {
         className="w-full max-w-sm px-4 py-2 border border-white/20 rounded-full bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring focus:border-cyan-400 transition"
       />
 
-      {/* Liste filtrée */}
       <div className="flex flex-wrap gap-4 justify-center">
-        {filtered.length === 0 && (
-          <p className="text-white/50 italic">No results found.</p>
-        )}
-        {filtered.map(([slug, data]: [string, EEEntry]) => (
-          <Link
-            href={`/characters/${slug}`}
-            key={slug}
-            className="relative bg-white/5 p-4 rounded-2xl shadow flex flex-col items-center text-center gap-2 w-[260px] hover:bg-white/10 transition"
-          >
-            {/* Image EE */}
-            <div className="relative w-[80px] h-[80px]">
-              <Image
-                src="/images/ui/bg_item_leg.webp"
-                alt="background"
-                fill
-                sizes="80px"
-                className="absolute inset-0 z-0"
-              />
-              <div className="relative w-[80px] h-[80px]">
+        {filtered.length === 0 && <p className="text-white/50 italic">No results found.</p>}
+
+        {filtered.map(({ slug, data }) => {
+          const name = pickLang(data, "name", lang);
+          const effect = pickLang(data, "effect", lang);
+          const effect10 = pickLang(data, "effect10", lang);
+          const mainStat = pickLangValue(data as unknown as Record<string, string | undefined>, "mainStat", lang);
+          const charName = getLocalizedFullname(slug, lang);
+
+          return (
+            <Link
+              href={`/characters/${slug}`}
+              key={slug}
+              className="relative bg-white/5 p-4 rounded-2xl shadow flex flex-col items-center text-center gap-2 w-[260px] hover:bg-white/10 transition"
+            >
+              {/* image */}
+              <div className="relative w-[60px] h-[60px]">
                 <Image
-                  src={`/images/characters/ex/${slug}.webp`}
-                  alt={data.name}
+                  src="/images/ui/bg_item_leg.webp"
+                  alt="background"
                   fill
-                  className="object-contain"
-                  sizes="80px"
+                  sizes="60px"
+                  className="absolute inset-0 z-0"
                 />
-              </div>
-
-              <div className="absolute top-1.5 right-1.5 z-20 translate-x-1/4 -translate-y-1/4 w-[24px] h-[24px]">
-                <Image
-                  src={`/images/ui/effect/CM_UO_EXCLUSIVE.webp`}
-                  alt="Effect"
-                  fill
-                  className="object-contain"
-                  sizes="24px"
-                />
-              </div>
-            </div>
-
-            <h3 className="text-red-400 text-base font-semibold leading-tight text-center">
-              {data.name}
-            </h3>
-
-            <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm text-white font-medium whitespace-nowrap mx-auto justify-center">
-              <div className="relative w-[18px] h-[18px]">
-                <Image
-                  src={`/images/ui/effect/${data.icon_effect}.webp`}
-                  alt="icon"
-                  fill
-                  className="object-contain"
-                  sizes="18px"
-                />
-              </div>
-              <span className="exclusive-equipment-text">
-                {slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}’s Exclusive Equipment
-              </span>
-            </div>
-
-            {/* Main stat avec icônes */}
-            <div className="text-white/80 text-sm italic mt-1 text-center">
-              <div className="flex items-center justify-center gap-1">
-                {(() => {
-                  const [statPart] = data.mainStat.split("(To:");
-                  const statKey = statPart.trim().split(" ")[0];
-                  const stat = statKey.replace(/[^A-Z%]/gi, "");
-                  const statInfo = statsData[stat as keyof typeof statsData];
-                  const icon = stat && stat in statsData ? statInfo.icon : null;
-                  const label = stat && stat in statsData ? statInfo.label : statPart.trim();
-
-                  return (
-                    <>
-                      {icon && (
-                        <div className="relative w-[16px] h-[16px] inline-block">
-                          <Image
-                            src={`/images/ui/effect/${icon}`}
-                            alt={stat}
-                            fill
-                            className="object-contain"
-                            sizes="16px"
-                          />
-                        </div>
-                      )}
-                      <span>{label}</span>
-                    </>
-                  );
-                })()}
-              </div>
-
-              {/* Ligne (To: X) en dessous */}
-              {data.mainStat.includes("(To:") && (
-                <div className="text-white/50 text-xs mt-0.5">
-                  {data.mainStat.match(/\(To: ([^)]+)\)/)?.[0]}
+                <div className="relative w-[60px] h-[60px]">
+                  <Image
+                    src={`/images/characters/ex/${slug}.webp`}
+                    alt={name}
+                    fill
+                    className="object-contain"
+                    sizes="60px"
+                  />
                 </div>
-              )}
-            </div>
+                <div className="absolute top-1.5 right-1.5 z-20 translate-x-1/4 -translate-y-1/4 w-[18px] h-[18px]">
+                  <Image
+                    src={`/images/ui/effect/CM_UO_EXCLUSIVE.webp`}
+                    alt="Effect"
+                    fill
+                    className="object-contain"
+                    sizes="18px"
+                  />
+                </div>
+              </div>
 
+              <h3 className="text-red-400 text-base font-semibold leading-tight text-center">
+                {name}
+              </h3>
 
+              {/* badge — now uses localized Fullname from _SlugToChar */}
+              <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm text-white font-medium whitespace-nowrap mx-auto justify-center">
+                <div className="relative w-[18px] h-[18px]">
+                  <Image
+                    src={`/images/ui/effect/${data.icon_effect}.webp`}
+                    alt="icon"
+                    fill
+                    className="object-contain"
+                    sizes="18px"
+                  />
+                </div>
+                <span className="exclusive-equipment-text text-xs">
+                  {t("exclusive_equipment_title", { name: charName })}
+                </span>
+              </div>
 
-            {/* Description */}
-            <p
-              className="text-white text-sm mt-1"
-              dangerouslySetInnerHTML={{ __html: parseColoredText(data.effect) }}
-            />
-
-            {data.effect10 && (
-              <p
-                className="text-xs text-amber-300 mt-1 italic"
-                dangerouslySetInnerHTML={{
-                  __html: `[LV 10]: <span class="text-white">${parseColoredText(data.effect10)}</span>`
-                }}
-              />
-            )}
-          </Link>
-        ))}
+              {/* main stat + effects */}
+              <div className="text-white/80 text-xs italic mt-1 text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <div className="text-center text-sky-200 font-semibold">{mainStat}</div>
+                </div>
+                <p className="mt-2">
+                  <span className="font-semibold text-white">{t("effect_label")}</span>{" "}
+                  {formatEffectText(effect)}
+                </p>
+                <p className="mt-2">
+                  <span className="font-semibold text-white">{t("effect_lv10_label")}</span>{" "}
+                  {formatEffectText(effect10)}
+                </p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
