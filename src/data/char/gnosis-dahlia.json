@@ -31,10 +31,16 @@
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\nWhen Terminal Winter defeats an enemy, reduces the cooldown of Terminal Winter by 2 turns \n+8% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\n+50 Action Points at battle start",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+50 Action Points at battle start",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\nAlways granted Hubris's Dominion\nWhen defeating an enemy, recovers Health by 10%"
+    "6": "ATK DEF HP +30%\nAlways granted Hubris's Dominion\nWhen defeating an enemy, recovers Health by 10%",
+    "4_1_jp": "ATK DEF HP +16%\n【フィンブルウィンター】で敵を倒した時、\n当該スキルのターンを2ターン減少\n味方の会心ダメージ+8%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n최후의 겨울로 적 처치 시 해당 스킬 쿨타임 -2턴\n아군 치명 피해 +8%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+50",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50",
+    "6_jp": "ATK DEF HP +30%\n【傲慢の領域】常時付与\n敵を倒した時、HP10%回復",
+    "6_kr": "ATK DEF HP +30%\n오만의 영역 상시 보유\n적 처치 시 체력 10% 회복"
   },
   "Chain_Type": "Finish",
   "skills": {
@@ -59,17 +65,23 @@
         "SKT_BURST_1": {
           "cost": 80,
           "effect": "Activates an enhanced attack\\nIncreases Penetration by 30%",
-          "level": 1
+          "level": 1,
+          "effect_kr": "강화 공격 확정 발생\\n관통력 30% 증가",
+          "effect_jp": "強化攻撃が確定で発動\\n貫通力30%UP"
         },
         "SKT_BURST_2": {
           "cost": 120,
           "effect": "Increases damage",
-          "level": 2
+          "level": 2,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_3": {
           "cost": 160,
           "effect": "Gains an extra turn",
-          "level": 3
+          "level": 3,
+          "effect_kr": "추가 턴 발생",
+          "effect_jp": "追加ターン発生"
         }
       },
       "cd": null,
@@ -91,9 +103,41 @@
         "5": [
           "+10% effect chance",
           "+10% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "4_jp": [
+          "WGダメージ+1"
+        ],
+        "4_kr": [
+          "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "効果発生率+10%",
+          "ダメージ+10%"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +10%",
+          "피해량 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "냉혹한 고문",
+      "name_jp": "ルースレストーチャー",
+      "true_desc_kr": "적을 공격합니다.\\n<color=#28d9ed>15%</color> 확률로 <color=#28d9ed>강화 공격</color>이 발생합니다. 강화 공격 후에는 <color=#28d9ed>아군 전체</color>의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.\\n<color=#28d9ed>오만의 영역</color> 보유 시 강화 공격의 발동 확률이 2배가 됩니다.",
+      "true_desc_jp": "敵単体にダメージを与える。\\n<color=#28d9ed>15%</color>の確率で、<color=#28d9ed>強化攻撃</color>が発生する。強化攻撃後、<color=#28d9ed>味方全体</color>の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。\\n<color=#28d9ed>【傲慢の領域】</color>がある場合、強化攻撃の発生率が2倍になる。"
     },
     "SKT_SECOND": {
       "name": "Untouchable One",
@@ -125,9 +169,37 @@
         ],
         "5": [
           "-10% Health Limit"
+        ],
+        "2_jp": [
+          "HPの条件-5%"
+        ],
+        "2_kr": [
+          "체력 조건 -5%"
+        ],
+        "3_jp": [
+          "HPの条件-5%"
+        ],
+        "3_kr": [
+          "체력 조건 -5%"
+        ],
+        "4_jp": [
+          "HPの条件-5%"
+        ],
+        "4_kr": [
+          "체력 조건 -5%"
+        ],
+        "5_jp": [
+          "HPの条件-10%"
+        ],
+        "5_kr": [
+          "체력 조건 -10%"
         ]
       },
-      "wgr": 0
+      "wgr": 0,
+      "name_kr": "언터쳐블 원",
+      "name_jp": "アンタッチャブル・ワン",
+      "true_desc_kr": "(패시브 효과) <color=#28d9ed>오만의 영역</color> 보유 시 한번에 받는 피해는 자신 최대 체력의 <color=#28d9ed>95%</color>를 초과하지 않습니다. (협공 및 추가타 포함)\\n(발동 효과) 치명 피격 시 대상에게 <color=#28d9ed>냉혹한 고문</color>을 사용합니다.",
+      "true_desc_jp": "(パッシブ効果)<color=#28d9ed>【傲慢の領域】</color>がある場合、一度に受けるダメージが自分の最大HPの<color=#28d9ed>95%</color>を超えない。(連携・追加攻撃も含む)\\n(発動効果)会心ダメージを受けた場合、対象に<color=#28d9ed>【ルースレストーチャー】</color>を使用する。"
     },
     "SKT_ULTIMATE": {
       "name": "Terminal Winter",
@@ -164,9 +236,43 @@
         "5": [
           "+10% damage",
           "Ignores the Defense of the enemy with the highest Max Health"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+10%",
+          "スキルターン-1ターン"
+        ],
+        "3_kr": [
+          "피해량 +10%",
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "効果ターン+1ターン"
+        ],
+        "4_kr": [
+          "효과 지속 +1턴"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "最大HPが最も高い敵単体の防御力無視"
+        ],
+        "5_kr": [
+          "피해량 +10%",
+          "가장 최대 체력이 높은 적의 방어력 무시"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "최후의 겨울",
+      "name_jp": "フィンブルウィンター",
+      "true_desc_kr": "적 전체를 공격합니다. 공격 후 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>오만의 영역</color>을 획득합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。攻撃後、自分に<color=#28d9ed>【傲慢の領域】</color>を<color=#28d9ed>1ターン</color>の間付与する。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
@@ -188,23 +294,60 @@
       "dual_buff": "BT_ACTION_GAUGE",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>2.5%</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、CPを<color=#28d9ed>2.5%</color>回復する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。"
     }
   },
-  "rank": "A"
+  "rank": "A",
+  "Fullname_kr": "그노시스 달리아",
+  "Fullname_jp": "グノーシス ダリア",
+  "VoiceActor": "VA. Amber Lee Connors",
+  "VoiceActor_jp": "CV. 山崎はるか",
+  "VoiceActor_kr": "CV. Amber Lee Connors"
 }

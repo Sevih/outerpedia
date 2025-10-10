@@ -3,28 +3,47 @@
   "Fullname": "Sigma",
   "Rarity": 3,
   "Element": "Dark",
-  "rank_pvp":"D",
+  "rank_pvp": "D",
   "Class": "Ranger",
   "gift": "Science",
-  "role":"support",
-  "tags":["ignore-defense"],
-  "SubClass": "Vanguard","skill_priority":{"First":{"prio": 3}, "Second":{"prio": 2}, "Ultimate":{"prio": 1}},
+  "role": "support",
+  "tags": [
+    "ignore-defense"
+  ],
+  "SubClass": "Vanguard",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 2
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+5% Ally Team Attack\n+1 Chain Passive Weakness Gauge damage",
     "4_2": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\n+5% Ally Team Attack\n+25 Action Points at battle start"
+    "6": "ATK DEF HP +30%\n+5% Ally Team Attack\n+25 Action Points at battle start",
+    "4_1_jp": "ATK DEF HP +16%\n味方の攻撃力+5%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 공격력 +5%\n체인 패시브의 WG 감소량 +1",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "6_jp": "ATK DEF HP +30%\n味方の攻撃力+5%\n戦闘開始時、AP+25",
+    "6_kr": "ATK DEF HP +30%\n아군 공격력 +5%\n입장 시 AP +25"
   },
   "Chain_Type": "Finish",
   "skills": {
     "SKT_FIRST": {
       "name": "Melee Weapon: Beam Sword",
-      "true_desc": "Attacks an enemy.\\nHas a <color=#28d9ed>70%</color> chance to gain <color=#28d9ed>Immunity</color> for <color=#28d9ed>1 turn(s)</color> if the target is inflicted with <color=#28d9ed>Shocked</color>.",
+      "true_desc": "Attacks an enemy.\\nIf the target is <color=#28d9ed>Electrified</color>, has a <color=#28d9ed>50%</color> chance to <color=#28d9ed>Stun</color> them for <color=#28d9ed>1</color> turns.\\n\\n<color=#ffd732>Guardian of the Tower</color>: Increases damage dealt in Tower of Transcendence.",
       "ApproachFreezeTime_fallback1": "ATTACK",
       "DescID": "SKILL_DESC_2000052_Skill01_LV1,SKILL_DESC_2000052_Skill01_LV1,SKILL_DESC_2000052_Skill01_LV1,SKILL_DESC_2000052_Skill01_LV1,SKILL_DESC_2000052_Skill01_LV1",
       "IconName": "Skill_First_2000052",
@@ -34,11 +53,11 @@
       "SkillType": "SKT_FIRST",
       "SkipNameID": "SKILL_NAME_2000052_Skill01",
       "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_IMMUNE"
-      ],
+      "buff": [],
       "cd": null,
-      "debuff": [],
+      "debuff": [
+        "BT_STUN"
+      ],
       "description": [
         "Attacks an enemy.\\nHas a <color=#28d9ed>[Buff_C_2000052_1_1]</color> chance to gain <color=#28d9ed>Immunity</color> for <color=#28d9ed>[Buff_T_2000052_1_1] turn(s)</color> if the target is inflicted with <color=#28d9ed>Shocked</color>."
       ],
@@ -48,21 +67,53 @@
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+15% effect chance"
+          "+10% effect chance"
         ],
         "4": [
           "+10% damage"
         ],
         "5": [
           "+10% damage",
-          "+15% effect chance"
+          "+10% effect chance"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "効果発生率+10%"
+        ],
+        "5_kr": [
+          "피해량 +10%",
+          "효과 발동 확률 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "근접 무장: 빔 소드",
+      "name_jp": "近接武装:ビームソード",
+      "true_desc_kr": "적을 공격합니다.\\n대상이 <color=#28d9ed>감전</color> 상태라면 <color=#28d9ed>50%</color> 확률로 <color=#28d9ed>1턴</color> 동안  <color=#28d9ed>스턴</color> 상태로 만듭니다.\\n\\n<color=#ffd732>탑의 관리자</color> : 비천의 탑에서 피해량이 증가합니다.",
+      "true_desc_jp": "敵単体を攻撃する。\\n対象が<color=#28d9ed>感電</color>状態の場合、<color=#28d9ed>50%</color>の確率で<color=#28d9ed>1</color>ターンの間<color=#28d9ed>スタン</color>状態にする。\\n\\n<color=#ffd732>塔の管理者</color>:飛天の塔で与えるダメージが増加。"
     },
     "SKT_SECOND": {
       "name": "Firepower Support: Homing Lazer",
-      "true_desc": "Attacks all enemies.\\nHas a <color=#28d9ed>80%</color> chance to inflict <color=#28d9ed>Shocked</color> on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc": "Attacks all enemies and has a <color=#28d9ed>80%</color> chance to inflict <color=#28d9ed>Electrocution</color> for <color=#28d9ed>2</color> turns.\\nAfter attacking, increases own <color=#28d9ed>Attack</color> for <color=#28d9ed>1</color> turns.\\n\\n<color=#ffd732>Guardian of the Tower</color>: Increases damage dealt in Tower of Transcendence.",
       "ApproachType": "ATTACK",
       "ApproachZ": "0.3",
       "DescID": "SKILL_DESC_2000052_Skill02_LV1,SKILL_DESC_2000052_Skill02_LV1,SKILL_DESC_2000052_Skill02_LV1,SKILL_DESC_2000052_Skill02_LV1,SKILL_DESC_2000052_Skill02_LV1",
@@ -73,22 +124,30 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000052_Skill02",
       "TargetTeamType": "ENEMY",
-      "buff": ["BT_STAT|ST_COUNTER_RATE"],
+      "buff": [
+        "BT_STAT|ST_ATK"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "cost": 60,
           "effect": "Increases damage\\nIncreases Counterattack chance",
-          "level": 1
+          "level": 1,
+          "effect_kr": "피해 증가\\n반격 확률 증가",
+          "effect_jp": "ダメージUP\\n反撃発生率UP"
         },
         "SKT_BURST_2": {
           "cost": 90,
           "effect": "Increases damage",
-          "level": 2
+          "level": 2,
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP"
         },
         "SKT_BURST_3": {
           "cost": 120,
           "effect": "Increases Penetration by 30%",
-          "level": 3
+          "level": 3,
+          "effect_kr": "관통력 30% 증가",
+          "effect_jp": "貫通力+30%"
         }
       },
       "cd": "4",
@@ -104,7 +163,8 @@
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "-1 turn Skill Cooldown"
+          "-1 turn Skill Cooldown",
+          "+1 turn Increased Attack duration"
         ],
         "4": [
           "+20% damage"
@@ -112,13 +172,47 @@
         "5": [
           "+20% effect chance",
           "+10% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン",
+          "攻撃力UP+1ターン"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴",
+          "공격력 증가 지속 +1턴"
+        ],
+        "4_jp": [
+          "ダメージ+20%"
+        ],
+        "4_kr": [
+          "피해량 +20%"
+        ],
+        "5_jp": [
+          "効果発生率+20%",
+          "ダメージ+10%"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +20%",
+          "피해량 +10%"
         ]
       },
-      "wgr": 1
+      "wgr": 1,
+      "name_kr": "화력 지원 : 호밍 레이저",
+      "name_jp": "火力支援:ホーミングレーザー",
+      "true_desc_kr": "적 전체를 공격하고 <color=#28d9ed>80%</color> 확률로 대상에게 <color=#28d9ed>감전</color>을 <color=#28d9ed>2턴</color> 동안 부여합니다.\\n공격 후, 자신의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>1턴</color> 동안 증가시킵니다.\\n\\n<color=#ffd732>탑의 관리자</color> : 비천의 탑에서 피해량이 증가합니다.",
+      "true_desc_jp": "敵全体を攻撃し、<color=#28d9ed>80%</color>の確率で対象に<color=#28d9ed>感電</color>を<color=#28d9ed>2</color>ターン付与する。\\n攻撃後、自身の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>1</color>ターンの間上昇させる。\\n\\n<color=#ffd732>塔の管理者</color>:飛天の塔で与えるダメージが増加。"
     },
     "SKT_ULTIMATE": {
       "name": "Add-on: Strike Launcher",
-      "true_desc": "Attacks all enemies.\\nIncreases the <color=#28d9ed>Priority</color> of all allies by <color=#28d9ed>1%</color> for each target damaged.",
+      "true_desc": "Attacks all enemies.\\nFor each damaged target, increases all allies' <color=#28d9ed>Priority</color> by <color=#28d9ed>2.5%</color>.\\nIf the target is <color=#28d9ed>Electrified</color>, has a <color=#28d9ed>80%</color> chance to apply <color=#28d9ed>Electrocution</color> again for <color=#28d9ed>2</color> turns.\\n\\n<color=#ffd732>Guardian of the Tower</color>: Increases damage dealt in Skyward Tower.",
       "DescID": "SKILL_DESC_2000052_Skill03_LV1,SKILL_DESC_2000052_Skill03_LV1,SKILL_DESC_2000052_Skill03_LV1,SKILL_DESC_2000052_Skill03_LV1,SKILL_DESC_2000052_Skill03_LV1",
       "IconName": "Skill_Ultimate_2000052",
       "NameIDSymbol": "5203",
@@ -132,7 +226,9 @@
         "BT_ACTION_GAUGE"
       ],
       "cd": "5",
-      "debuff": [],
+      "debuff": [
+        "BT_DOT_LIGHTNING"
+      ],
       "description": [
         "Attacks all enemies.\\nIncreases the <color=#28d9ed>Priority</color> of all allies by <color=#28d9ed>[Buff_V_2000052_3_2]</color> for each target damaged."
       ],
@@ -145,18 +241,53 @@
           "+15% damage"
         ],
         "4": [
-          "+15% damage"
+          "+15% damage",
+          "+20% effect chance"
         ],
         "5": [
-          "+1.5% Ally Priority",
+          "+2.5% Ally Priority",
           "+10% damage"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "ダメージ+15%"
+        ],
+        "3_kr": [
+          "피해량 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+15%",
+          "効果発生率+20%"
+        ],
+        "4_kr": [
+          "피해량 +15%",
+          "효과 발동 확률 +20%"
+        ],
+        "5_jp": [
+          "味方の行動ゲージ2.5%UP",
+          "ダメージ+10%"
+        ],
+        "5_kr": [
+          "아군 행동 게이지 +2.5%",
+          "피해량 +10%"
         ]
       },
-      "wgr": 2
+      "wgr": 2,
+      "name_kr": "애드온 : 런처 스트라이크",
+      "name_jp": "殲滅:エクスタミネーション",
+      "true_desc_kr": "적 전체를 공격합니다.\\n피해를 준 대상마다 아군 전체의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>2.5%</color> 증가합니다.\\n대상이 <color=#28d9ed>감전</color> 상태라면 <color=#28d9ed>80%</color> 확률로 <color=#28d9ed>2턴</color> 동안  <color=#28d9ed>감전</color>을 추가로 부여합니다.\\n\\n<color=#ffd732>탑의 관리자</color> : 비천의 탑에서 피해량이 증가합니다.",
+      "true_desc_jp": "敵全体を攻撃する。\\nダメージを与えた対象1体ごとに、味方全体の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>2.5%</color>増加する。\\n対象が<color=#28d9ed>感電</color>状態の場合、<color=#28d9ed>80%</color>の確率でさらに<color=#28d9ed>2</color>ターンの間<color=#28d9ed>感電</color>を付与する。\\n\\n<color=#ffd732>塔の管理者</color>:飛天の塔で与えるダメージが増加。"
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Gains <color=#28d9ed>Immunity</color> for <color=#28d9ed>1 turn(s)</color> if the target is <color=#28d9ed>Shocked</color>.",
+      "true_desc": "<color=#ffd732>Chain Finish</color>: After attacking, grants all allies <color=#28d9ed>Exploit Weakness</color> for <color=#28d9ed>2</color> turns.\\n\\n<color=#ffd732>Assist</color>: If the target is <color=#28d9ed>Shocked</color>, has a <color=#28d9ed>70%</color> chance to <color=#28d9ed>Stun</color> for <color=#28d9ed>1</color> turns.\\n\\n<color=#ffd732>Keeper of the Tower</color>: Deals increased damage in the Skyward Tower (applies to Chain Finish & Assist).",
       "DescID": "SKILL_DESC_2000052_Skill04_LV1,SKILL_DESC_2000052_Skill04_LV1,SKILL_DESC_2000052_Skill04_LV1,SKILL_DESC_2000052_Skill04_LV1,SKILL_DESC_2000052_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Dark_Finish",
       "NameIDSymbol": "5204",
@@ -171,26 +302,63 @@
       "description": [
         "<color=#ffd732>Chain Finish Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>[Buff_T_2000052_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Gains <color=#28d9ed>Immunity</color> for <color=#28d9ed>[Buff_T_2000052_backup_1_1] turn(s)</color> if the target is <color=#28d9ed>Shocked</color>."
       ],
-      "dual_buff": "BT_IMMUNE",
+      "dual_debuff": "BT_STUN",
       "enhancement": {
         "2": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
         "3": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "4": [
-          "+5% Dual Attack and Skill Chain damage "
+          "+5% Dual Attack and Skill Chain damage"
         ],
         "5": [
-          "+5% Dual Attack and Skill Chain damage ",
+          "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>2턴</color> 동안 아군 전체에게 <color=#28d9ed>약점 공략</color>을 부여합니다.\\n\\n<color=#ffd732>협공 효과</color> : 대상이 <color=#28d9ed>감전</color> 상태라면 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>1턴</color> 동안  <color=#28d9ed>스턴</color> 상태로 만듭니다.\\n\\n<color=#ffd732>탑의 관리자</color> : 비천의 탑에서 피해량이 증가합니다.(체인 피니시 및 협공)",
+      "true_desc_jp": "<color=#ffd732>チェーンフィニッシュ</color>:攻撃後、味方全体に<color=#28d9ed>弱点攻略</color>を<color=#28d9ed>2</color>ターン付与します。\\n\\n<color=#ffd732>連携</color>:対象が<color=#28d9ed>感電</color>状態の場合、<color=#28d9ed>70%</color>の確率で<color=#28d9ed>1</color>ターンの<color=#28d9ed>スタン</color>を付与します。\\n\\n<color=#ffd732>塔の管理者</color>:飛天の塔で与えるダメージが増加します(チェーンフィニッシュ/連携に適用)。"
     }
   },
-  "rank":"D"
+  "rank": "D",
+  "Fullname_kr": "시그마",
+  "Fullname_jp": "シグマ",
+  "VoiceActor": "VA. Stephanie Southerland",
+  "VoiceActor_jp": "CV.長谷川育美",
+  "VoiceActor_kr": "CV.이명호"
 }
