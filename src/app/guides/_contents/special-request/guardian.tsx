@@ -27,7 +27,6 @@ export default function MasterlessGuide() {
         <li>Bring <strong>AoE skills</strong> to clear the minions quickly.</li>
         <li>The core loop: upkeep debuffs → clear minions → break WG → burst during break.</li>
         <li>His DEF is relatively low, so bursting him down isn&apos;t incredibly hard, especially while he&apos;s in Break.</li>
-        <li>His DEF is relatively low, so bursting him down isn&apos;t incredibly hard, especially while he&apos;s in Break.</li>
         <li>Stage 12 - apply <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE_IR" type="debuff" /> on <ElementInlineTag element="earth" /> and <ElementInlineTag element="fire" /> units.</li>
         <li>Stage 13 - apply <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE_IR" type="debuff" /></li>
       </ul>
