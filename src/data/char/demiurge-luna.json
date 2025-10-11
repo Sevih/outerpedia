@@ -6,7 +6,27 @@
   "Rarity": 3,
   "Element": "Light",
   "Class": "Mage",
+  "gift": "Science",
+  "rank_pvp": "S",
+  "rank": "S",
+  "tags": [
+    "premium",
+    "ignore-defense"
+  ],
+  "role": "dps",
   "SubClass": "Wizard",
+  "video": "zlmBL-U6xEI",
+  "skill_priority": {
+    "First": {
+      "prio": 3
+    },
+    "Second": {
+      "prio": 1
+    },
+    "Ultimate": {
+      "prio": 2
+    }
+  },
   "transcend": {
     "1": null,
     "2": null,
@@ -227,7 +247,9 @@
       "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers the caster's and the next Skill Chain caster's Action Points by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: (White Night) After attacking, increases the caster's Priority by <color=#28d9ed>20%</color>.\\n(Polar Night) After attacking, increases the caster's Attack by <color=#28d9ed>1 turns</color>.",
       "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신과 다음 스킬 체인 수행자의 AP를 <color=#28d9ed>25</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : (백야) 공격 후 자신의 행동 게이지를 <color=#28d9ed>20%</color>증가시킵니다.\\n(극야)공격 후 자신의 공격력을 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
       "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、自分と次のチェーンスキル参加者のAPを<color=#28d9ed>25</color>獲得する。\\n\\n<color=#ffd732>連携効果</color>:(白夜)攻撃後、自分の行動ゲージを<color=#28d9ed>20%</color>UPさせる。\\n(極夜)攻撃後、自分の攻撃力を<color=#28d9ed>1ターン</color>の間UPさせる。",
-      "buff": ["BT_AP_CHARGE"],
+      "buff": [
+        "BT_AP_CHARGE"
+      ],
       "cd": null,
       "debuff": [],
       "dual_buff": "BT_ACTION_GAUGE",
