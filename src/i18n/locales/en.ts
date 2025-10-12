@@ -5,6 +5,29 @@ const en = {
   'nav.utilities': 'Utilities',
   'nav.guides': 'Guides',
 
+  "nav.characters_short": "Chars",
+  "nav.equipment_short": "Equip",
+  "nav.tierlist_short": "Tier",
+  "nav.utilities_short": "Tools",
+  "nav.guides_short": "Guide",
+
+  //title across the website
+  'titles.main.main': 'Outerplane Tier List, Character Builds, Guides & Database',
+  'titles.main.desc':'A fan-made wiki for Outerplane. Explore builds, gear, utilities, tier list, and strategy guides.',
+  'titles.main.pull':'Currently Pullable',
+  'titles.main.coupon':'Coupon Codes',
+  'titles.main.changetitle':'Latest Outerpedia Updates & Features',
+  'titles.main.tochangelog':'View full changelog',
+  'titles.tl.outerplaneTL':'Outerplane Tier List',
+  'titles.tl.desc':'Choose between PvE and PvP character rankings. Based on evaluations with 6★ transcends and level 0 EE effects.',
+  'titles.tl.pvedesc':'PvE performance rankings across all content.',
+  'titles.tl.pvpdesc':'Performance-based Arena evaluation.',
+  'titles.tool.commuEv':'Community Event',
+
+  //community event
+  "events.history.desc_active": "Browse all Outerplane events (active: {active}, total: {total}).",
+  "events.history.desc_inactive": "Browse all Outerplane events (total: {total}).",
+
   //character page
   'characters.filters.rarity': 'Rarity',
   'characters.filters.elements': 'Elements',
@@ -123,6 +146,7 @@ const en = {
   'SYS_CLASS_STRIKER': 'Striker',
   'SYS_CLASS_RANGER': 'Ranger',
   'SYS_CLASS_MAGE': 'Mage',
+  'SYS_CLASS_HEALER': 'Healer',
   'SYS_CLASS_PRIEST': 'Healer',
 
   'SYS_CLASS_PASSIVE_DEFENDER': 'Generates 5 Action Points at the start of turn. Generates 35 Action Points when hit. Increases Defense by 15%.',
@@ -182,7 +206,20 @@ const en = {
   "equipments_tabs.accessory": "Accessories",
   "equipments_tabs.armor": "Armor Set",
   "equipments_tabs.talisman": "Talismans",
-  "equipments_tabs.exclusive": "Exclusive"
+  "equipments_tabs.exclusive": "Exclusive",
+
+  "toc.overview": "Overview",
+  "toc.base_stats": "Base Stats",
+  "toc.ee_transcend": "EE & Transcend",
+  "toc.skills": "Skills",
+  "toc.burn": "Burn Cards",
+  "toc.chain_dual": "Chain & Dual",
+  "toc.gear": "Recommended Gear",
+  "toc.video": "Official Video",
+  "toc.partners": "Partners",
+  "partners_title": "Recommended Partners",
+  "no_reason_provided": "No reason provided"
+
 
 
 

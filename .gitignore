@@ -1,4 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+/src/data/events/registry.generated.ts
+/src/data/events/loaders.ts
+/src/data/events/20251011-video.tsx
+/public/images/events/collab*
+
+
 
 # dependencies
 /node_modules

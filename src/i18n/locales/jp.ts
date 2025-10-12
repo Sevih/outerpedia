@@ -5,6 +5,29 @@ const jp = {
   'nav.utilities': 'ユーティリティ',
   'nav.guides': 'ガイド',
 
+  "nav.characters_short": "キャラ",
+  "nav.equipment_short": "装備",
+  "nav.tierlist_short": "ティア",
+  "nav.utilities_short": "ツール",
+  "nav.guides_short": "ガイド",
+
+  //title across the website
+  "titles.main.main": "Outerplane ティアリスト・キャラビルド・ガイド・データベース",
+  "titles.main.desc": "Outerplane の非公式ファンサイト。ビルド、装備、ツール、ティアリスト、攻略ガイドをチェック！",
+  "titles.main.pull": "現在入手可能",
+  "titles.main.coupon": "クーポンコード",
+  "titles.main.changetitle": "Outerpedia 最新アップデート＆新機能",
+  "titles.main.tochangelog": "すべての更新履歴を見る",
+  "titles.tl.outerplaneTL": "Outerplane ティアリスト",
+  "titles.tl.desc": "PvE・PvPキャラ評価を選択できます。6★超越・EEレベル0を基準にした評価です。",
+  "titles.tl.pvedesc": "全コンテンツにおけるPvE性能評価。",
+  "titles.tl.pvpdesc": "アリーナにおける性能評価。",
+  "titles.tool.commuEv": "コミュニティイベント",
+
+  //community event
+  "events.history.desc_active": "Outerplane のイベント一覧（開催中: {active}、合計: {total}）",
+  "events.history.desc_inactive": "Outerplane のイベント一覧（合計: {total}）",
+
   //character page
   'characters.filters.rarity': 'レア度',
   'characters.filters.elements': '属性',
@@ -123,6 +146,7 @@ const jp = {
   'SYS_CLASS_STRIKER': '攻撃型',
   'SYS_CLASS_RANGER': 'スピード型',
   'SYS_CLASS_MAGE': '魔法型',
+  'SYS_CLASS_HEALER': '回復型',
   'SYS_CLASS_PRIEST': '回復型',
 
   'SYS_CLASS_PASSIVE_DEFENDER': 'ターン開始時、APが5回復する。ダメージを受けた時、APが35回復する。防御力が15%UPする。',
@@ -182,8 +206,19 @@ const jp = {
   "equipments_tabs.accessory": "アクセサリー",
   "equipments_tabs.armor": "セット装備",
   "equipments_tabs.talisman": "タリスマン",
-  "equipments_tabs.exclusive": "専用装備"
+  "equipments_tabs.exclusive": "専用装備",
 
+  "toc.overview": "概要",
+  "toc.base_stats": "基本ステータス",
+  "toc.ee_transcend": "専用装備と超越",
+  "toc.skills": "スキル",
+  "toc.burn": "バーストカード",
+  "toc.chain_dual": "チェイン＆デュアル",
+  "toc.gear": "おすすめ装備",
+  "toc.video": "公式動画",
+  "toc.partners": "パートナー",
+  "partners_title": "おすすめのパートナー",
+  "no_reason_provided": "理由が記載されていません"
 
 
 

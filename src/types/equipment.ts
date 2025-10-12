@@ -95,36 +95,70 @@ export type Talisman = {
 
 export interface Accessory {
   name: string;
-  type: string;
-  rarity: string;
-  image: string;
+  name_jp?: string;
+  name_kr?: string;
+
+  type: string;                  // "amulet"
+  rarity: string;                // "Legendary" | "Epic" | ...
+  image: string;                 // ex: "irregular_accessary_02.webp"
+
   mainStats: string[];
+
   effect_name: string;
+  effect_name_jp?: string;
+  effect_name_kr?: string;
+
   effect_desc1: string;
+  effect_desc1_jp?: string;
+  effect_desc1_kr?: string;
+
   effect_desc4: string;
+  effect_desc4_jp?: string;
+  effect_desc4_kr?: string;
+
   effect_icon: string;
+
   class: string | null;
   source: string;
+  source_jp?: string;
+  source_kr?: string;
+
   boss: string | null;
   mode?: string | null;
   level: number;
 }
 
+
 export interface Weapon {
-  name: string;
-  type: string;
-  rarity: string;
-  image: string;
-  effect_name: string;
-  effect_desc1: string;
-  effect_desc4: string;
-  effect_icon: string;
-  class: string | null;
-  source: string;
-  boss: string | null;
-  mode?: string | null;
-  level: number;
+  name: string
+  name_jp?: string
+  name_kr?: string
+
+  type: string
+  rarity: string
+  image: string
+
+  effect_name: string
+  effect_name_jp?: string
+  effect_name_kr?: string
+
+  effect_desc1: string
+  effect_desc1_jp?: string
+  effect_desc1_kr?: string
+
+  effect_desc4: string
+  effect_desc4_jp?: string
+  effect_desc4_kr?: string
+
+  effect_icon: string
+
+  class: string | null
+  source: string
+  boss: string | null
+  mode?: string | null
+  level: number
 }
+
 
 export type WeaponMini = EquipmentBase
 export type AmuletMini = EquipmentBase

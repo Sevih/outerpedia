@@ -3,7 +3,7 @@
     "name": "Speed",
     "type": "Set",
     "class": null,
-    "count": 63,
+    "count": 64,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -47,6 +47,7 @@
       "Maxie",
       "Maxwell",
       "Mene",
+      "Mero",
       "Monad Eva",
       "Nella",
       "Noa",
@@ -165,7 +166,7 @@
     "name": "Penetration",
     "type": "Set",
     "class": null,
-    "count": 18,
+    "count": 19,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -178,6 +179,7 @@
       "Holy Night's Blessing Dianne",
       "Laplace",
       "Maxwell",
+      "Mero",
       "Noa",
       "Notia",
       "Poolside Trickster Regina",
@@ -212,6 +214,28 @@
     ]
   },
   {
+    "name": "Rampaging Caracal",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 14,
+    "characters": [
+      "Akari",
+      "Charlotte",
+      "Edelweiss",
+      "Eliza",
+      "Fatal",
+      "Fran",
+      "Holy Night's Blessing Dianne",
+      "Maxie",
+      "Mero",
+      "Notia",
+      "Skadi",
+      "Stella",
+      "Tamara",
+      "Valentine"
+    ]
+  },
+  {
     "name": "Counterattack",
     "type": "Set",
     "class": null,
@@ -231,27 +255,6 @@
       "Rhona",
       "Summer Knight's Dream Ember",
       "Veronica"
-    ]
-  },
-  {
-    "name": "Rampaging Caracal",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 13,
-    "characters": [
-      "Akari",
-      "Charlotte",
-      "Edelweiss",
-      "Eliza",
-      "Fatal",
-      "Fran",
-      "Holy Night's Blessing Dianne",
-      "Maxie",
-      "Notia",
-      "Skadi",
-      "Stella",
-      "Tamara",
-      "Valentine"
     ]
   },
   {
@@ -299,7 +302,7 @@
     "name": "Combination Simulator",
     "type": "Amulet",
     "class": "Ranger",
-    "count": 11,
+    "count": 12,
     "characters": [
       "Akari",
       "Demiurge Vlada",
@@ -307,10 +310,30 @@
       "Fatal",
       "Fran",
       "Gnosis Beth",
+      "Mero",
       "Ryu Lion",
       "Skadi",
       "Stella",
       "Tamara",
+      "Valentine"
+    ]
+  },
+  {
+    "name": "Absolute Music",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 11,
+    "characters": [
+      "Akari",
+      "Charlotte",
+      "Edelweiss",
+      "Fran",
+      "Holy Night's Blessing Dianne",
+      "Maxie",
+      "Mero",
+      "Ryu Lion",
+      "Skadi",
+      "Stella",
       "Valentine"
     ]
   },
@@ -330,24 +353,6 @@
       "Kanon",
       "Rhona",
       "Vlada"
-    ]
-  },
-  {
-    "name": "Absolute Music",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 10,
-    "characters": [
-      "Akari",
-      "Charlotte",
-      "Edelweiss",
-      "Fran",
-      "Holy Night's Blessing Dianne",
-      "Maxie",
-      "Ryu Lion",
-      "Skadi",
-      "Stella",
-      "Valentine"
     ]
   },
   {
@@ -468,6 +473,21 @@
     ]
   },
   {
+    "name": "Revenge",
+    "type": "Set",
+    "class": null,
+    "count": 7,
+    "characters": [
+      "Ais Wallenstein",
+      "Demiurge Stella",
+      "Ember",
+      "Gnosis Dahlia",
+      "Idith",
+      "Mero",
+      "Vlada"
+    ]
+  },
+  {
     "name": "Clock Up",
     "type": "Amulet",
     "class": "Striker",
@@ -525,20 +545,6 @@
       "Sterope",
       "Summer Knight's Dream Ember",
       "Veronica"
-    ]
-  },
-  {
-    "name": "Revenge",
-    "type": "Set",
-    "class": null,
-    "count": 6,
-    "characters": [
-      "Ais Wallenstein",
-      "Demiurge Stella",
-      "Ember",
-      "Gnosis Dahlia",
-      "Idith",
-      "Vlada"
     ]
   },
   {
@@ -685,6 +691,50 @@
     ]
   },
   {
+    "name": "Gorgon's Wrath [Ranger]",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 3,
+    "characters": [
+      "Demiurge Vlada",
+      "Mero",
+      "Skadi"
+    ]
+  },
+  {
+    "name": "Heartunder's Blade",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 3,
+    "characters": [
+      "Fran",
+      "Maxie",
+      "Mero"
+    ]
+  },
+  {
+    "name": "Gorgon's Vanity [Ranger]",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 3,
+    "characters": [
+      "Fran",
+      "Mero",
+      "Skadi"
+    ]
+  },
+  {
+    "name": "Briareos's Ambition [Ranger]",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 3,
+    "characters": [
+      "Fran",
+      "Mero",
+      "Skadi"
+    ]
+  },
+  {
     "name": "Memento Mori",
     "type": "Amulet",
     "class": "Mage",
@@ -745,16 +795,6 @@
     ]
   },
   {
-    "name": "Gorgon's Wrath [Ranger]",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 2,
-    "characters": [
-      "Demiurge Vlada",
-      "Skadi"
-    ]
-  },
-  {
     "name": "Briareos's Recklessness [Ranger]",
     "type": "Weapon",
     "class": "Ranger",
@@ -765,33 +805,13 @@
     ]
   },
   {
-    "name": "Heartunder's Blade",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 2,
-    "characters": [
-      "Fran",
-      "Maxie"
-    ]
-  },
-  {
-    "name": "Gorgon's Vanity [Ranger]",
+    "name": "Burning Soul",
     "type": "Amulet",
     "class": "Ranger",
     "count": 2,
     "characters": [
-      "Fran",
-      "Skadi"
-    ]
-  },
-  {
-    "name": "Briareos's Ambition [Ranger]",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 2,
-    "characters": [
-      "Fran",
-      "Skadi"
+      "Mero",
+      "Ryu Lion"
     ]
   },
   {
@@ -928,15 +948,6 @@
     "count": 1,
     "characters": [
       "Rhona"
-    ]
-  },
-  {
-    "name": "Burning Soul",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 1,
-    "characters": [
-      "Ryu Lion"
     ]
   },
   {

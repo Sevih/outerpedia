@@ -17,6 +17,28 @@ import rawTAG_INDEX from '@/data/tags.json'
 import type { TenantKey } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
 
+type RecruitBadge = { src: string; altKey: string }
+
+function getRecruitBadge(char: CharacterLite): RecruitBadge | null {
+  const tags = new Set(char.tags ?? [])
+
+  // Priorité : Collab > Seasonal > Premium > Limited (fallback)
+  if (tags.has('collab')) {
+    return { src: "/images/ui/CM_Recruit_Tag_Collab.webp", altKey: 'collab' }
+  }
+  if (tags.has('seasonal')) {
+    return { src: "/images/ui/CM_Recruit_Tag_Seasonal.webp", altKey: 'seasonal' }
+  }
+  if (tags.has('premium')) {
+    return { src: "/images/ui/CM_Recruit_Tag_Premium.webp", altKey: 'premium' }
+  }
+  if (char.limited) {
+    return { src: "/images/ui/CM_Recruit_Tag_Fes.webp", altKey: 'limited' }
+  }
+  return null
+}
+
+
 // ===== Helpers for effect lookup
 const buffToId: Record<string, number> = effectsIndex.buffs
 const debuffToId: Record<string, number> = effectsIndex.debuffs
@@ -255,7 +277,6 @@ function splitIntoRows<T>(arr: T[], rows = 2): T[][] {
 
 type FullnameKey = Extract<keyof CharacterLite, `Fullname${'' | `_${string}`}`>
 function getLocalizedFullname(character: CharacterLite, langKey: TenantKey): string {
-  console.log(character)
   const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
   const localized = character[key] // type: string | undefined
   return localized ?? character.Fullname
@@ -501,7 +522,7 @@ export default function CharactersPage({ langue }: ClientProps) {
 
       return elementMatch && classMatch && rarityMatch && chainMatch && effectMatch && giftMatch && roleMatch && tagMatch
     })
-  }, [characters, query, elementFilter, classFilter, chainFilter, giftFilter, rarityFilter, selectedBuffs, selectedDebuffs, effectLogic, roleFilter, tagFilter,tagLogic])
+  }, [characters, query, elementFilter, classFilter, chainFilter, giftFilter, rarityFilter, selectedBuffs, selectedDebuffs, effectLogic, roleFilter, tagFilter, tagLogic])
 
   if (loading) return <div className="text-center mt-8 text-white">
     {t('characters.loading')}
@@ -857,6 +878,7 @@ export default function CharactersPage({ langue }: ClientProps) {
         <div className="flex flex-wrap justify-center gap-6">
           {filtered.map((char, index) => {
             const isPriority = index <= 5
+            const badge = getRecruitBadge(char)
             return (
               <Link
                 href={`/characters/${toKebabCase(char.Fullname.toLowerCase())}`}
@@ -864,8 +886,16 @@ export default function CharactersPage({ langue }: ClientProps) {
                 key={char.ID}
                 className="relative w-[120px] h-[231px] text-center shadow hover:shadow-lg transition overflow-hidden rounded"
               >
-                {char.limited && (
-                  <Image src="/images/ui/CM_Shop_Tag_Limited.webp" alt={t('characters.badges.limited')} width={75} height={30} className="absolute top-1 left-1 z-30 object-contain" style={{ width: 75, height: 30 }} />
+
+                {badge && (
+                  <Image
+                    src={badge.src}
+                    alt={badge.altKey}
+                    width={75}
+                    height={30}
+                    className="absolute top-1 left-1 z-30 object-contain"
+                  // pas de width:auto ici → taille 75×30 stricte, ratio préservé par l'image
+                  />
                 )}
 
                 <Image

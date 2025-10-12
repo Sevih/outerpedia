@@ -29,6 +29,13 @@
     "icon": "nav/gear-solver.webp",
     "order": 5
   },
+  "event": {
+    "name": "Community events",
+    "description": "",
+    "icon": "nav/CM_Agit_Retention.webp",
+    "order": 6,
+    "hide":true
+  },
   "patch-history": {
     "name": "Patch Notes & Dev Notes",
     "description": "Browse all Outerplane patch notes, developer notes, hero compendium and more.",

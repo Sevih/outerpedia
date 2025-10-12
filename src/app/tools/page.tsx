@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { getToolRoutes } from "@/lib/getToolRoutes";
 import Link from "next/link";
 import Image from "next/image";
-
-export const dynamic = "force-static";
+import { headers } from 'next/headers'
+import { getServerI18n, detectLangFromHost } from '@/lib/contexts/server-i18n'
 
 const tools = Object.values(toolDescriptions) as {
   name: string;
@@ -16,10 +16,10 @@ const title = 'Outerplane Utilities | Outerpedia';
 const description = `Use Outerplane utilities like ${tools.map(t => t.name).join(', ')}, and more to optimize your builds and gear.`;
 
 const stopwords = new Set([
-  'the', 'and', 'their', 'with', 'which', 'use', 'using', 'helps', 'help','considered','effects','star','list', 'tool', 'tools', 'tier','gear','recommended',
-  'complete', 'based', 'most', 'best', 'this', 'that', 'your', 'unsure','builds','character','evaluations','usage','exclusive','discover',
-  'characters', 'match', 'impact', 'level', 'usefulness', 'find', 'finder','amulets','weapons','sets','transcends','outerplane','priority',
-  'ranking', 'statistics','equipment', 'gear'
+  'the', 'and', 'their', 'with', 'which', 'use', 'using', 'helps', 'help', 'considered', 'effects', 'star', 'list', 'tool', 'tools', 'tier', 'gear', 'recommended',
+  'complete', 'based', 'most', 'best', 'this', 'that', 'your', 'unsure', 'builds', 'character', 'evaluations', 'usage', 'exclusive', 'discover',
+  'characters', 'match', 'impact', 'level', 'usefulness', 'find', 'finder', 'amulets', 'weapons', 'sets', 'transcends', 'outerplane', 'priority',
+  'ranking', 'statistics', 'equipment', 'gear'
 ]);
 
 const keywords = new Set<string>();
@@ -51,13 +51,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ToolsPage() {
+export default async function ToolsPage() {
+  const h = await headers()
+  const host = h.get('host') ?? ''         // ex: 'jp.outerpedia.local'
+  const lang = detectLangFromHost(host)    // 'en' | 'jp' | 'kr'
+
+  const { t } = await getServerI18n(lang)
   const tools = getToolRoutes();
 
   return (
     <main className="p-6">
       {/* 🏷️ Heading mis à "Utilities" */}
-      <h1 className="text-3xl font-bold mb-6">Utilities</h1>
+      <h1 className="text-3xl font-bold mb-6">{t('nav.utilities')}</h1>
       <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {tools.map((tool) => (
           <Link

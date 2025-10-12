@@ -2,19 +2,20 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-
+import { useEffect, useMemo, useRef, useState } from "react"
 import classDataRaw from '@/data/class.json'
 import rawWeapons from '@/data/weapon.json'
 import rawAmulets from '@/data/amulet.json'
 import rawTalismans from '@/data/talisman.json'
 import eeDataRaw from '@/data/ee.json'
 import rawTAGS from '@/data/tags.json'
+import parseText from '@/utils/parseText'
 
 import type { ClassDataMap, StatKey } from '@/types/types'
 import type { EquipmentBase, Talisman, ExclusiveEquipment } from '@/types/equipment'
 import type { Character, Skill, TranscendMap, Lang, LevelId } from '@/types/character'
 import { CharacterJsonLdServeur } from '@/app/components/seo';
-
+import slugToCharJson from "@/data/_SlugToChar.json";
 import { CharacterNameDisplayBigNoH } from '@/app/components/CharacterNameDisplay'
 import RecommendedGearTabs from '@/app/components/RecommendedGearTabs'
 import type { RecommendedGearSet } from '@/app/components/RecommendedGearTabs'
@@ -28,16 +29,124 @@ import CharacterProfileDescription from '@/app/components/CharacterProfileDescri
 import TranscendenceSlider from '@/app/components/TranscendenceSlider'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import TagDisplayMini from '@/app/components/TagDisplayInline'
+import type { PartnerEntry } from '@/types/partners';
+import abbrev from '@/data/abbrev.json'
 
 import formatEffectText from '@/utils/formatText'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TenantKey } from '@/tenants/config'
+
+type CharNameEntry = {
+    Fullname: string;
+    Fullname_jp?: string;
+    Fullname_kr?: string;
+    ID?: string;
+};
+type SlugToCharMap = Record<string, CharNameEntry>;
+const SLUG_TO_CHAR = slugToCharJson as SlugToCharMap;
+
+
+
+function getLocalizedPartnerFullname(slug: string, lang: TenantKey): string {
+    const entry = SLUG_TO_CHAR[slug];
+    if (!entry) return "";
+    if (lang === "jp" && entry.Fullname_jp) return entry.Fullname_jp;
+    if (lang === "kr" && entry.Fullname_kr) return entry.Fullname_kr;
+    return entry.Fullname ?? "";
+}
+
+function getLocalizedReason(
+    reason: { en: string; jp: string; kr: string },
+    lang: TenantKey
+): string {
+    if (lang === "jp" && reason.jp.trim()) return reason.jp;
+    if (lang === "kr" && reason.kr.trim()) return reason.kr;
+    return reason.en;
+}
 
 // ---------- helpers & constants (repris tels quels) ----------
 type TagDef = { label: string; image: string; desc: string; type: string }
 type TagsMap = Record<string, TagDef>
 const TAGS: TagsMap = rawTAGS as TagsMap
 const UNIT_TYPE_ORDER = ['premium', 'limited', 'seasonal', 'collab'] as const
+type TocSection = { id: string; label: string }
+
+function useSectionObserver(ids: string[]) {
+    const [active, setActive] = useState<string>(ids[0] ?? "")
+    const observerRef = useRef<IntersectionObserver | null>(null)
+
+    useEffect(() => {
+        const els = ids
+            .map((id) => document.getElementById(id))
+            .filter((el): el is HTMLElement => !!el)
+
+        if (!els.length) return
+
+        observerRef.current?.disconnect()
+        observerRef.current = new IntersectionObserver(
+            (entries) => {
+                // On choisit la section la plus visible dans le viewport
+                const visible = entries
+                    .filter((e) => e.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+                if (visible?.target?.id) setActive(visible.target.id)
+            },
+            { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+        )
+
+        els.forEach((el) => observerRef.current!.observe(el))
+        return () => observerRef.current?.disconnect()
+    }, [ids])
+
+    return active
+}
+
+function QuickToc({ sections }: { sections: TocSection[] }) {
+    const ids = useMemo(() => sections.map((s) => s.id), [sections])
+    const active = useSectionObserver(ids)
+
+    return (
+        <nav
+            aria-label="Page sections"
+            className="
+        sticky top-4 z-30 mb-6 mx-auto w-fit
+        rounded-xl border border-white/10 bg-black/40 backdrop-blur
+        px-3 py-2 shadow-sm
+      "
+        >
+            <ul className="flex flex-wrap items-center justify-center gap-2">
+                {sections.map((s) => {
+                    const isActive = s.id === active
+                    return (
+                        <li key={s.id}>
+                            <a
+                                href={`#${s.id}`}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    const el = document.getElementById(s.id)
+                                    if (el) {
+                                        el.scrollIntoView({ behavior: "smooth", block: "start" })
+                                        history.replaceState(null, "", `#${s.id}`)
+                                    }
+                                }}
+                                className={[
+                                    "inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm",
+                                    "transition ring-1",
+                                    isActive
+                                        ? "bg-yellow-500/20 text-yellow-300 ring-yellow-400/40"
+                                        : "bg-white/5 text-gray-200 hover:bg-white/10 ring-white/10",
+                                ].join(" ")}
+                            >
+                                {s.label}
+                            </a>
+                        </li>
+                    )
+                })}
+            </ul>
+        </nav>
+    )
+}
+
 
 function UnitTypeBadge({ tags }: { tags?: string[] | string }) {
     const all = Array.isArray(tags) ? tags : tags ? [tags] : []
@@ -63,28 +172,25 @@ function getLocalizedEEName(ee: ExclusiveEquipment, langKey: TenantKey): string 
 const ORDER: LevelId[] = ['1', '2', '3', '4', '4_1', '4_2', '5', '5_1', '5_2', '5_3', '6'];
 
 function pickTranscendForLang(
-  t: TranscendMap | undefined,
-  lang: Lang
+    t: TranscendMap | undefined,
+    lang: Lang
 ): Record<LevelId, string | null> {
-  const src = t ?? {};
-  const out = {} as Record<LevelId, string | null>;
+    const src = t ?? {};
+    const out = {} as Record<LevelId, string | null>;
 
-  for (const k of ORDER) {
-    // on lit les 3 variantes une fois
-    const jp = (src[`${k}_jp` as keyof TranscendMap] ?? null) as string | null;
-    const kr = (src[`${k}_kr` as keyof TranscendMap] ?? null) as string | null;
-    const en = (src[k as keyof TranscendMap] ?? null) as string | null;
+    for (const k of ORDER) {
+        // on lit les 3 variantes une fois
+        const jp = (src[`${k}_jp` as keyof TranscendMap] ?? null) as string | null;
+        const kr = (src[`${k}_kr` as keyof TranscendMap] ?? null) as string | null;
+        const en = (src[k as keyof TranscendMap] ?? null) as string | null;
 
-    // puis on choisit sans utiliser &&
-    out[k] = lang === 'jp' ? (jp ?? en)
-           : lang === 'kr' ? (kr ?? en)
-           : en;
-  }
-  return out;
+        // puis on choisit sans utiliser &&
+        out[k] = lang === 'jp' ? (jp ?? en)
+            : lang === 'kr' ? (kr ?? en)
+                : en;
+    }
+    return out;
 }
-
-
-
 
 type SkillNameKey = Extract<keyof Skill, `name${'' | `_${string}`}`>
 type SkillDescKey = Extract<keyof Skill, `true_desc${'' | `_${string}`}`>
@@ -160,9 +266,9 @@ function getSkillLabel(index: number): string {
 }
 
 function getLocalizedEEStat(ee: ExclusiveEquipment, langKey: TenantKey): string {
-  if (langKey === 'jp' && ee.mainStat_jp) return ee.mainStat_jp;
-  if (langKey === 'kr' && ee.mainStat_kr) return ee.mainStat_kr;
-  return ee.mainStat;
+    if (langKey === 'jp' && ee.mainStat_jp) return ee.mainStat_jp;
+    if (langKey === 'kr' && ee.mainStat_kr) return ee.mainStat_kr;
+    return ee.mainStat;
 }
 
 // helper local (type-guard) — à mettre au dessus de l’usage
@@ -182,17 +288,22 @@ function getBurns(s?: Skill): BurnCard[] {
 
 
 
+
+
+
 // ---------- composant ----------
 export default function CharacterDetailClient({
     character,
     slug,
     langKey,
     recoData,
+    partners
 }: {
     character: Character
     slug: string
     langKey: TenantKey
     recoData: Record<string, unknown> | null
+    partners: PartnerEntry[]
 }) {
     const { t } = useI18n()
 
@@ -204,7 +315,7 @@ export default function CharacterDetailClient({
         story?: LocalizedString
     }
 
-    // data locales (client)
+
     const weapons = rawWeapons as unknown as EquipmentBase[]
     const amulets = rawAmulets as unknown as EquipmentBase[]
     const talismans = rawTalismans as Talisman[]
@@ -299,6 +410,22 @@ export default function CharacterDetailClient({
 
     const ln = (s?: Skill) => (s ? getLocalizedSkillName(s, langKey) : undefined);
     const localizedTranscend = pickTranscendForLang(character.transcend, langKey);
+    const hasVideo = typeof character.video === 'string' && character.video.trim().length > 0
+
+    // --- Sommaire : ordre et libellés (i18n-friendly) ---
+    const SECTIONS: { id: string; label: string }[] = [
+        { id: "overview", label: t("toc.overview", { defaultValue: "Overview" }) },
+        baseStats && { id: "base-stats", label: t("toc.base_stats", { defaultValue: "Base Stats" }) },
+        (ee || character.transcend) && { id: "ee-transcend", label: t("toc.ee_transcend", { defaultValue: "EE & Transcend" }) },
+        { id: "skills", label: t("toc.skills", { defaultValue: "Skills" }) },
+        // (optionnel) burn only si présent
+        // hasBurn && { id: "burn", label: t("toc.burn", { defaultValue: "Burn Cards" }) },
+        character.skills?.SKT_CHAIN_PASSIVE && { id: "chain-dual", label: t("toc.chain_dual", { defaultValue: "Chain & Dual" }) },
+        partners.length > 0 && { id: "partners", label: t("toc.partners", { defaultValue: "Partners" }) },
+        { id: "gear", label: t("toc.gear", { defaultValue: "Recommended Gear" }) },
+        hasVideo && { id: "video", label: t("toc.video", { defaultValue: "Official Video" }) },
+    ].filter(Boolean) as { id: string; label: string }[]
+
     return (
         <>
 
@@ -342,148 +469,154 @@ export default function CharacterDetailClient({
 
             <div className="max-w-6xl mx-auto p-6">
                 {/* Partie haute : illustration + infos principales */}
-                <CharacterNameDisplayBigNoH fullname={getLocalizedFullname(character, langKey)} />
-
-                <div className="grid grid-cols-1 md:grid-cols-[400px_1fr] gap-6">
-                    {/* Illustration du personnage */}
-                    <div className="relative rounded overflow-hidden shadow mt-10">
-                        <Image
-                            src={`/images/characters/full/IMG_${character.ID}.webp`}
-                            alt={character.Fullname}
-                            width={360}
-                            height={400}
-                            priority
-                            style={{ width: 360, height: 400, maxHeight: 400, maxWidth: 360 }}
-                            className="object-contain"
-                        />
+                <section id="overview">
+                    <CharacterNameDisplayBigNoH fullname={getLocalizedFullname(character, langKey)} />
+                    <div className="mt-3 flex justify-center">
+                        <QuickToc sections={SECTIONS} />
                     </div>
-
-                    {/* Détails à droite : nom, rareté, classe, etc. */}
-                    <div className="space-y-4">
-                        {/* Rareté sous forme d'étoiles */}
-                        <div className="flex items-center gap-2">
-                            {[...Array(character.Rarity)].map((_, i) => (
-                                <Image key={i} src="/images/ui/star.webp" alt="star" width={20} height={20} style={{ width: 20, height: 20 }} />
-                            ))}
+                    <div className="grid grid-cols-1 md:grid-cols-[400px_1fr] gap-6">
+                        {/* Illustration du personnage */}
+                        <div className="relative rounded overflow-hidden shadow mt-10">
+                            <Image
+                                src={`/images/characters/full/IMG_${character.ID}.webp`}
+                                alt={character.Fullname}
+                                width={360}
+                                height={400}
+                                priority
+                                style={{ width: 360, height: 400, maxHeight: 400, maxWidth: 360 }}
+                                className="object-contain"
+                            />
                         </div>
 
-                        {/* Élément, Classe, Sous-classe */}
-                        <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-1">
-                                <Image src={`/images/ui/elem/${character.Element.toLowerCase()}.webp`} alt={character.Element} width={24} height={24} style={{ width: 24, height: 24 }} />
-                                <span className="text-base">{t(`SYS_ELEMENT_NAME_${character.Element.toUpperCase()}`)}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                                <Image src={`/images/ui/class/${character.Class.toLowerCase()}.webp`} alt={character.Class} width={24} height={24} style={{ width: 24, height: 24 }} />
-                                <span className="text-base">
-                                    {t(`SYS_CLASS_${character.Class.toUpperCase()}`, {
-                                        defaultValue: character.Class
-                                    })}
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                                <Image src={`/images/ui/class/${character.SubClass.toLowerCase()}.webp`} alt={character.SubClass} width={24} height={24} style={{ width: 24, height: 24 }} />
-                                <span className="text-base">
-                                    {t(`SYS_CLASS_NAME_${character.SubClass.toUpperCase()}`, {
-                                        defaultValue: character.SubClass
-                                    })}
-                                </span>
+
+                        {/* Détails à droite : nom, rareté, classe, etc. */}
+                        <div className="space-y-4">
+                            {/* Rareté sous forme d'étoiles */}
+                            <div className="flex items-center gap-2">
+                                {[...Array(character.Rarity)].map((_, i) => (
+                                    <Image key={i} src="/images/ui/star.webp" alt="star" width={20} height={20} style={{ width: 20, height: 20 }} />
+                                ))}
                             </div>
 
-                            <div className="mt-2 mb-3 flex flex-wrap items-center gap-2">
-                                <span><UnitTypeBadge tags={character.tags} /></span>
-                                {roleBadge && (
-                                    <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm text-white ring-1 ring-white/10 ${roleBadge.className}`}>
-                                        <span>{roleBadge.label}</span>
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="mt-2 p-2 bg-black/30 rounded">
-                            <CharacterProfileDescription fullname={character.Fullname} lng={langKey} />
-                        </div>
-
-                        {/* Statistiques + descriptions de classe + base stats */}
-                        <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">
-                            <div className="relative p-2 rounded text-sm w-fit h-fit">
-                                {subclassInfo?.image ? (
-                                    <div className="relative mx-auto">
-                                        <Image
-                                            src={subclassInfo.image}
-                                            alt={character.SubClass}
-                                            width={200}
-                                            height={200}
-                                            style={{ width: 200, height: 200 }}
-                                            className="object-contain"
-                                        />
-                                        {statLabels.map((label, index) => {
-                                            const angle = (index / statLabels.length) * 2 * Math.PI - Math.PI / 2
-                                            let labelRadius = 120
-                                            if (label === t('stats.health') || label === t('stats.accuracy')) labelRadius = 110
-                                            const x = 100 + Math.cos(angle) * labelRadius
-                                            const y = 100 + Math.sin(angle) * labelRadius
-                                            return (
-                                                <div
-                                                    key={index}
-                                                    className="absolute text-[12px] text-center text-white whitespace-nowrap"
-                                                    style={{ left: `${x}px`, top: `${y}px`, transform: 'translate(-50%, -50%)' }}
-                                                >
-                                                    {label}
-                                                </div>
-                                            )
+                            {/* Élément, Classe, Sous-classe */}
+                            <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-1">
+                                    <Image src={`/images/ui/elem/${character.Element.toLowerCase()}.webp`} alt={character.Element} width={24} height={24} style={{ width: 24, height: 24 }} />
+                                    <span className="text-base">{t(`SYS_ELEMENT_NAME_${character.Element.toUpperCase()}`)}</span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                    <Image src={`/images/ui/class/${character.Class.toLowerCase()}.webp`} alt={character.Class} width={24} height={24} style={{ width: 24, height: 24 }} />
+                                    <span className="text-base">
+                                        {t(`SYS_CLASS_${character.Class.toUpperCase()}`, {
+                                            defaultValue: character.Class
                                         })}
-                                    </div>
-                                ) : (
-                                    <p>{t('no_subclass_image')}</p>
-                                )}
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                    <Image src={`/images/ui/class/${character.SubClass.toLowerCase()}.webp`} alt={character.SubClass} width={24} height={24} style={{ width: 24, height: 24 }} />
+                                    <span className="text-base">
+                                        {t(`SYS_CLASS_NAME_${character.SubClass.toUpperCase()}`, {
+                                            defaultValue: character.SubClass
+                                        })}
+                                    </span>
+                                </div>
+
+                                <div className="mt-2 mb-3 flex flex-wrap items-center gap-2">
+                                    <span><UnitTypeBadge tags={character.tags} /></span>
+                                    {roleBadge && (
+                                        <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm text-white ring-1 ring-white/10 ${roleBadge.className}`}>
+                                            <span>{roleBadge.label}</span>
+                                        </span>
+                                    )}
+                                </div>
                             </div>
 
-                            <div className="flex flex-col gap-4 w-fit">
-                                <div className="p-2 rounded text-sm">
-                                    <p className="font-semibold">
-                                        {t('class_effects_details', { class: t(`SYS_CLASS_${character.Class.toUpperCase()}`) })}
-                                    </p>
-                                    <p className="whitespace-pre-line">
-                                        {t(`SYS_CLASS_PASSIVE_${character.Class.toUpperCase()}`, {
-                                            defaultValue: t('no_class_description')
-                                        }).replace(/([。\.])\s*/g, '$1\n')}
-                                    </p>
+                            <div className="mt-2 p-2 bg-black/30 rounded">
+                                <CharacterProfileDescription fullname={character.Fullname} lng={langKey} />
+                            </div>
+
+                            {/* Statistiques + descriptions de classe + base stats */}
+                            <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">
+                                <div className="relative p-2 rounded text-sm w-fit h-fit">
+                                    {subclassInfo?.image ? (
+                                        <div className="relative mx-auto">
+                                            <Image
+                                                src={subclassInfo.image}
+                                                alt={character.SubClass}
+                                                width={200}
+                                                height={200}
+                                                style={{ width: 200, height: 200 }}
+                                                className="object-contain"
+                                            />
+                                            {statLabels.map((label, index) => {
+                                                const angle = (index / statLabels.length) * 2 * Math.PI - Math.PI / 2
+                                                let labelRadius = 120
+                                                if (label === t('stats.health') || label === t('stats.accuracy')) labelRadius = 110
+                                                const x = 100 + Math.cos(angle) * labelRadius
+                                                const y = 100 + Math.sin(angle) * labelRadius
+                                                return (
+                                                    <div
+                                                        key={index}
+                                                        className="absolute text-[12px] text-center text-white whitespace-nowrap"
+                                                        style={{ left: `${x}px`, top: `${y}px`, transform: 'translate(-50%, -50%)' }}
+                                                    >
+                                                        {label}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    ) : (
+                                        <p>{t('no_subclass_image')}</p>
+                                    )}
+                                </div>
+
+                                <div className="flex flex-col gap-4 w-fit">
+                                    <div className="p-2 rounded text-sm">
+                                        <p className="font-semibold">
+                                            {t('class_effects_details', { class: t(`SYS_CLASS_${character.Class.toUpperCase()}`) })}
+                                        </p>
+                                        <p className="whitespace-pre-line">
+                                            {t(`SYS_CLASS_PASSIVE_${character.Class.toUpperCase()}`, {
+                                                defaultValue: t('no_class_description')
+                                            }).replace(/([。\.])\s*/g, '$1\n')}
+                                        </p>
 
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </section>
                 {/* Base Stats */}
                 {baseStats && (() => {
                     const entries = Object.entries(baseStats)
                     return (
-                        <div>
-                            <div className="mt-6 px-4 py-2 bg-yellow-800/50 border-l-4 border-yellow-400 rounded text-yellow-300 text-sm italic">
-                                {t('characters.basestats.note')}{' '}
-                                <GuideIconInline name='CM_Evolution_05' text={t('characters.basestats.stage6')} size={20} />.
-                            </div>
+                        <section id="base-stats">
+                            <div>
+                                <div className="mt-6 px-4 py-2 bg-yellow-800/50 border-l-4 border-yellow-400 rounded text-yellow-300 text-sm italic">
+                                    {t('characters.basestats.note')}{' '}
+                                    <GuideIconInline name='CM_Evolution_05' text={t('characters.basestats.stage6')} size={20} />.
+                                </div>
 
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-sm text-white mt-5 m-auto">
-                                {entries.map(([key, value]) => {
-                                    const upperKey = key.toUpperCase() as StatKey
-                                    return (
-                                        <div key={key} className="flex items-center gap-2 px-2 py-1 bg-black/30 rounded">
-                                            <StatInlineTag name={upperKey} abbr={true} />
-                                            <span className="text-white mt-1">{key === 'chc' || key === 'chd' ? `${value}%` : value}</span>
-                                        </div>
-                                    )
-                                })}
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-sm text-white mt-5 m-auto">
+                                    {entries.map(([key, value]) => {
+                                        const upperKey = key.toUpperCase() as StatKey
+                                        return (
+                                            <div key={key} className="flex items-center gap-2 px-2 py-1 bg-black/30 rounded">
+                                                <StatInlineTag name={upperKey} abbr={true} />
+                                                <span className="text-white mt-1">{key === 'chc' || key === 'chd' ? `${value}%` : value}</span>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                             </div>
-                        </div>
+                        </section>
                     )
                 })()}
 
                 {(ee || character.transcend) && (
-                    <div className="mt-8 text-white flex flex-col gap-4 items-start">
+                    <section id="ee-transcend" className="mt-8 text-white flex flex-col gap-4 items-start">
                         <div className="flex flex-wrap md:flex-nowrap gap-4 w-full items-start">
                             {/* EE à gauche */}
                             {ee && (
@@ -531,7 +664,7 @@ export default function CharacterDetailClient({
                                                         width={20} height={20} style={{ width: 20, height: 20 }} className="object-contain"
                                                     />
                                                     <span className="text-sm font-semibold text-white">
-                                                       {t('exclusive_equipment_title', { name: getLocalizedFullname(character, langKey) })}
+                                                        {t('exclusive_equipment_title', { name: getLocalizedFullname(character, langKey) })}
                                                     </span>
                                                 </div>
                                             )}
@@ -595,7 +728,7 @@ export default function CharacterDetailClient({
                                 )}
                             </div>
                         </div>
-                    </div>
+                    </section>
                 )}
 
                 <div className="mt-6 px-4 py-2 bg-yellow-800/50 border-l-4 border-yellow-400 rounded text-yellow-300 text-sm italic">
@@ -603,154 +736,161 @@ export default function CharacterDetailClient({
                 </div>
 
                 {/* Section des 3 skills */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                    {[character.skills.SKT_FIRST, character.skills.SKT_SECOND, character.skills.SKT_ULTIMATE].filter((s): s is Skill => Boolean(s))
-                        .map((skill, index) => (
-                            <div key={index} className="p-4 rounded text-white">
-                                {/* Header : icône + nom + WGR + CD */}
-                                <div className="flex items-start gap-2 mb-2">
-                                    <div className="relative w-12 h-12 shrink-0">
-                                        <Image
-                                            src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
-                                            alt={getLocalizedSkillName(skill, langKey)}
-                                            width={48} height={48} className="object-contain w-12 h-12"
-                                        />
-                                        {skill.burnEffect && Object.keys(skill.burnEffect).length > 0 && (
-                                            <div className="absolute top-0 left-0 bg-black text-white text-xs font-bold px-1 rounded-full border border-white">B</div>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <p className="text-lg font-semibold">{getLocalizedSkillName(skill, langKey)}</p>
-                                        <p className="text-sm text-gray-400 italic mb-1">
-                                            {t('weakness_gauge_reduction')}: {skill.wgr ?? '—'}<br />
-                                            {t('cooldown')}: {skill.cd ? `${skill.cd} ${t('turn_s')}` : '—'}
-                                        </p>
-                                        <BuffDebuffDisplay buffs={skill.buff} debuffs={skill.debuff} />
-                                    </div>
-                                </div>
-
-                                {/* Description */}
-                                <div className="text-sm text-gray-200 whitespace-pre-line">
-                                    {formatEffectText(getLocalizedSkillDesc(skill, langKey) || '—')}
-                                </div>
-
-                                {/* Enhancement */}
-                                {skill.enhancement && (
-                                    <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
-                                        <p className="font-bold mb-1">{t('enhancements_label')}</p>
-                                        <div className="space-y-2">
-                                            {(() => {
-                                                const enh = normalizeEnhancement(skill.enhancement)
-                                                const levels = Object.keys(enh)
-                                                    .filter(k => /^\d+$/.test(k))           // ne garder que "2","3","4",...
-                                                    .sort((a, b) => Number(a) - Number(b))  // tri croissant
-
-                                                return levels.map(level => {
-                                                    const lines = pickEnhancementForLevel(enh, level, langKey)
-                                                    if (!lines.length) return null
-                                                    return (
-                                                        <div key={level} className="flex">
-                                                            <div className="w-10 font-bold text-white flex-shrink-0">+{parseInt(level, 10)}:</div>
-                                                            <div className="text-gray-300 whitespace-pre-wrap ml-10">
-                                                                {lines.map((line, i) => <div key={i}>{formatEffectText(line)}</div>)}
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })
-                                            })()}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-
-                    {/* Placeholder si skill manquant */}
-                    {Array.from({ length: 3 - Object.values(character.skills || {}).length }).map((_, i) => (
-                        <div key={`empty-${i}`} className="bg-gray-800 p-4 rounded text-center text-gray-500">
-                            {t('no_skill')}
-                        </div>
-                    ))}
-                </div>
-
-                {/* Section burn + chain/dual attack */}
-                <div className="flex flex-col gap-6 mt-6">
-                    {/* Burn cards centrées */}
-                    <div className="flex justify-center">
-                        <div className="flex flex-wrap justify-center gap-2">
-                            {(() => {
-                                const entries = Object.entries(character.skills || {}) as [string, Skill][]
-                                // trouve le premier skill qui possède des burns
-                                const skillWithBurnEntry = entries.find(([, s]) => getBurns(s).length > 0)
-                                if (!skillWithBurnEntry) return null
-
-                                const [skillKey, skillWithBurn] = skillWithBurnEntry
-                                const index = ['SKT_FIRST', 'SKT_SECOND', 'SKT_ULTIMATE'].indexOf(skillKey)
-                                const burns = getBurns(skillWithBurn).sort((a, b) => a.level - b.level)
-
-                                return (
-                                    <div className="flex justify-center gap-6 items-center">
-                                        {/* Colonne gauche : icône + nom du skill */}
-                                        <div className="flex flex-col items-center gap-2 relative w-16 h-16">
+                <section id="skills">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                        {[character.skills.SKT_FIRST, character.skills.SKT_SECOND, character.skills.SKT_ULTIMATE].filter((s): s is Skill => Boolean(s))
+                            .map((skill, index) => (
+                                <div key={index} className="p-4 rounded text-white">
+                                    {/* Header : icône + nom + WGR + CD */}
+                                    <div className="flex items-start gap-2 mb-2">
+                                        <div className="relative w-12 h-12 shrink-0">
                                             <Image
                                                 src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
-                                                alt={getLocalizedSkillName(skillWithBurn, langKey)}
-                                                width={48} height={48} className="object-contain"
+                                                alt={getLocalizedSkillName(skill, langKey)}
+                                                width={48} height={48} className="object-contain w-12 h-12"
                                             />
-                                            <Image
-                                                src="/images/ui/CM_Skill_Icon_Burst.webp"
-                                                alt="Burn icon"
-                                                width={20} height={20}
-                                                className="absolute top-0 left-0 w-5 h-5 z-10 pointer-events-none"
-                                            />
-                                            <span className="text-sm font-semibold text-white text-center mt-1">
-                                                {getLocalizedSkillName(skillWithBurn, langKey)}
-                                            </span>
+                                            {skill.burnEffect && Object.keys(skill.burnEffect).length > 0 && (
+                                                <div className="absolute top-0 left-0 bg-black text-white text-xs font-bold px-1 rounded-full border border-white">B</div>
+                                            )}
                                         </div>
-
-                                        {/* Cartes burn */}
-                                        <div className="flex flex-wrap justify-center gap-2">
-                                            {burns.map((burn) => (
-                                                <div
-                                                    key={burn.level}
-                                                    className="relative w-[185px] h-[262px] bg-cover bg-center rounded overflow-hidden text-white transform transition-transform duration-200 hover:scale-105 hover:shadow-lg hover:ring-[1px] hover:ring-yellow-400 hover:ring-offset-[0.2px] cursor-pointer"
-                                                    style={{ backgroundImage: `url(/images/ui/Burst${burn.level}.webp)` }}
-                                                >
-                                                    <div className="absolute top-2.5 right-2.5 text-[15px] font-bold rounded-full flex items-center justify-center" style={{ width: '26px', height: '26px' }}>
-                                                        {burn.cost}
-                                                    </div>
-                                                    <div
-                                                        className="absolute text-center text-[11px] leading-snug text-white drop-shadow-md"
-                                                        style={{
-                                                            top: '125px', left: '20.5px', width: '139px', height: '109px', overflow: 'hidden',
-                                                            display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3,
-                                                        }}
-                                                    >
-                                                        <div className="flex items-center justify-center w-full h-full text-center">
-                                                            {formatEffectText(getLocalizedBurnEffect(burn, langKey))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))}
+                                        <div>
+                                            <p className="text-lg font-semibold">{getLocalizedSkillName(skill, langKey)}</p>
+                                            <p className="text-sm text-gray-400 italic mb-1">
+                                                {t('weakness_gauge_reduction')}: {skill.wgr ?? '—'}<br />
+                                                {t('cooldown')}: {skill.cd ? `${skill.cd} ${t('turn_s')}` : '—'}
+                                            </p>
+                                            <BuffDebuffDisplay buffs={skill.buff} debuffs={skill.debuff} />
                                         </div>
                                     </div>
-                                )
-                            })()}
 
-                        </div>
+                                    {/* Description */}
+                                    <div className="text-sm text-gray-200 whitespace-pre-line">
+                                        {formatEffectText(getLocalizedSkillDesc(skill, langKey) || '—')}
+                                    </div>
+
+                                    {/* Enhancement */}
+                                    {skill.enhancement && (
+                                        <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
+                                            <p className="font-bold mb-1">{t('enhancements_label')}</p>
+                                            <div className="space-y-2">
+                                                {(() => {
+                                                    const enh = normalizeEnhancement(skill.enhancement)
+                                                    const levels = Object.keys(enh)
+                                                        .filter(k => /^\d+$/.test(k))           // ne garder que "2","3","4",...
+                                                        .sort((a, b) => Number(a) - Number(b))  // tri croissant
+
+                                                    return levels.map(level => {
+                                                        const lines = pickEnhancementForLevel(enh, level, langKey)
+                                                        if (!lines.length) return null
+                                                        return (
+                                                            <div key={level} className="flex">
+                                                                <div className="w-10 font-bold text-white flex-shrink-0">+{parseInt(level, 10)}:</div>
+                                                                <div className="text-gray-300 whitespace-pre-wrap ml-10">
+                                                                    {lines.map((line, i) => <div key={i}>{formatEffectText(line)}</div>)}
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    })
+                                                })()}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+
+                        {/* Placeholder si skill manquant */}
+                        {Array.from({ length: 3 - Object.values(character.skills || {}).length }).map((_, i) => (
+                            <div key={`empty-${i}`} className="bg-gray-800 p-4 rounded text-center text-gray-500">
+                                {t('no_skill')}
+                            </div>
+                        ))}
                     </div>
+                </section>
 
-                    {/* Skill Priority & Sweetspots */}
-                    {character.skill_priority && (
-                        <SkillPriorityTabs
-                            priority={character.skill_priority}
-                            characterId={character.ID}
-                            skillNames={{
-                                First: ln(character.skills.SKT_FIRST),
-                                Second: ln(character.skills.SKT_SECOND),
-                                Ultimate: ln(character.skills.SKT_ULTIMATE),
-                            }}
-                        />
-                    )}
+
+                {/* Section burn + chain/dual attack */}
+
+                <div className="flex flex-col gap-6 mt-6">
+
+                    {/* Burn cards centrées */}
+                    <section id="burn" className="mt-6">
+                        <div className="flex justify-center">
+                            <div className="flex flex-wrap justify-center gap-2">
+                                {(() => {
+                                    const entries = Object.entries(character.skills || {}) as [string, Skill][]
+                                    // trouve le premier skill qui possède des burns
+                                    const skillWithBurnEntry = entries.find(([, s]) => getBurns(s).length > 0)
+                                    if (!skillWithBurnEntry) return null
+
+                                    const [skillKey, skillWithBurn] = skillWithBurnEntry
+                                    const index = ['SKT_FIRST', 'SKT_SECOND', 'SKT_ULTIMATE'].indexOf(skillKey)
+                                    const burns = getBurns(skillWithBurn).sort((a, b) => a.level - b.level)
+
+                                    return (
+                                        <div className="flex justify-center gap-6 items-center">
+                                            {/* Colonne gauche : icône + nom du skill */}
+                                            <div className="flex flex-col items-center gap-2 relative w-16 h-16">
+                                                <Image
+                                                    src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
+                                                    alt={getLocalizedSkillName(skillWithBurn, langKey)}
+                                                    width={48} height={48} className="object-contain"
+                                                />
+                                                <Image
+                                                    src="/images/ui/CM_Skill_Icon_Burst.webp"
+                                                    alt="Burn icon"
+                                                    width={20} height={20}
+                                                    className="absolute top-0 left-0 w-5 h-5 z-10 pointer-events-none"
+                                                />
+                                                <span className="text-sm font-semibold text-white text-center mt-1">
+                                                    {getLocalizedSkillName(skillWithBurn, langKey)}
+                                                </span>
+                                            </div>
+
+                                            {/* Cartes burn */}
+                                            <div className="flex flex-wrap justify-center gap-2">
+                                                {burns.map((burn) => (
+                                                    <div
+                                                        key={burn.level}
+                                                        className="relative w-[185px] h-[262px] bg-cover bg-center rounded overflow-hidden text-white transform transition-transform duration-200 hover:scale-105 hover:shadow-lg hover:ring-[1px] hover:ring-yellow-400 hover:ring-offset-[0.2px] cursor-pointer"
+                                                        style={{ backgroundImage: `url(/images/ui/Burst${burn.level}.webp)` }}
+                                                    >
+                                                        <div className="absolute top-2.5 right-2.5 text-[15px] font-bold rounded-full flex items-center justify-center" style={{ width: '26px', height: '26px' }}>
+                                                            {burn.cost}
+                                                        </div>
+                                                        <div
+                                                            className="absolute text-center text-[11px] leading-snug text-white drop-shadow-md"
+                                                            style={{
+                                                                top: '125px', left: '20.5px', width: '139px', height: '109px', overflow: 'hidden',
+                                                                display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3,
+                                                            }}
+                                                        >
+                                                            <div className="flex items-center justify-center w-full h-full text-center">
+                                                                {formatEffectText(getLocalizedBurnEffect(burn, langKey))}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )
+                                })()}
+
+                            </div>
+                        </div>
+
+                        {/* Skill Priority & Sweetspots */}
+                        {character.skill_priority && (
+                            <SkillPriorityTabs
+                                priority={character.skill_priority}
+                                characterId={character.ID}
+                                skillNames={{
+                                    First: ln(character.skills.SKT_FIRST),
+                                    Second: ln(character.skills.SKT_SECOND),
+                                    Ultimate: ln(character.skills.SKT_ULTIMATE),
+                                }}
+                            />
+                        )}
+                    </section>
 
                     {/* Chain & Dual */}
                     {character.skills?.SKT_CHAIN_PASSIVE && (() => {
@@ -759,107 +899,165 @@ export default function CharacterDetailClient({
                         const { chain, dual } = splitChainDual(localizedDesc)
 
                         return (
-                            <div className="flex flex-col gap-6 text-white">
-                                <div className="flex gap-4 items-start">
-                                    <div className="w-16 h-16 shrink-0">
-                                        <Image
-                                            src={`/images/characters/chain/Skill_ChainPassive_${character.Element}_${character.Chain_Type}.webp`}
-                                            alt={`Chain icon for ${character.Element} ${character.Chain_Type}`}
-                                            width={64} height={64} className="object-contain"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <p className="font-semibold mb-1">{t('chain_dual_title')}</p>
-
-                                        <p className="text-sm text-gray-400 italic mb-1">
-                                            {t('weakness_gauge_reduction')} : {s.wgr ?? '—'}
-                                        </p>
-
-                                        <BuffDebuffDisplay buffs={s.buff} debuffs={s.debuff} />
-
-                                        {/* CHAIN part */}
-                                        <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
-                                            {formatEffectText(chain || '—')}
+                            <section id="chain-dual" className="mt-6">
+                                <div className="flex flex-col gap-6 text-white">
+                                    <div className="flex gap-4 items-start">
+                                        <div className="w-16 h-16 shrink-0">
+                                            <Image
+                                                src={`/images/characters/chain/Skill_ChainPassive_${character.Element}_${character.Chain_Type}.webp`}
+                                                alt={`Chain icon for ${character.Element} ${character.Chain_Type}`}
+                                                width={64} height={64} className="object-contain"
+                                            />
                                         </div>
 
-                                        {/* DUAL part */}
-                                        <div className="flex gap-4 items-start mt-2">
-                                            <div>
-                                                <p className="text-sm text-gray-400 italic mb-1">
-                                                    {t('weakness_gauge_reduction')} : {s.wgr_dual ?? '—'}
-                                                </p>
+                                        <div>
+                                            <p className="font-semibold mb-1">{t('chain_dual_title')}</p>
 
-                                                <BuffDebuffDisplay
-                                                    buffs={Array.isArray(s.dual_buff) ? s.dual_buff : s.dual_buff ? [s.dual_buff] : []}
-                                                    debuffs={Array.isArray(s.dual_debuff) ? s.dual_debuff : s.dual_debuff ? [s.dual_debuff] : []}
-                                                />
+                                            <p className="text-sm text-gray-400 italic mb-1">
+                                                {t('weakness_gauge_reduction')} : {s.wgr ?? '—'}
+                                            </p>
 
-                                                <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
-                                                    {formatEffectText(dual || '—')}
-                                                </div>
+                                            <BuffDebuffDisplay buffs={s.buff} debuffs={s.debuff} />
 
-                                                {s.enhancement && (
-                                                    <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
-                                                        <p className="font-bold mb-1">{t('enhancements_label')}</p>
-                                                        <div className="space-y-2">
-                                                            {(() => {
-                                                                const enh = normalizeEnhancement(s.enhancement)
-                                                                const levels = Object.keys(enh)
-                                                                    .filter(k => /^\d+$/.test(k))
-                                                                    .sort((a, b) => Number(a) - Number(b))
+                                            {/* CHAIN part */}
+                                            <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
+                                                {formatEffectText(chain || '—')}
+                                            </div>
 
-                                                                return levels.map(level => {
-                                                                    const lines = pickEnhancementForLevel(enh, level, langKey)
-                                                                    if (!lines.length) return null
-                                                                    return (
-                                                                        <div key={level} className="flex">
-                                                                            <div className="w-10 font-bold text-white flex-shrink-0">+{parseInt(level, 10)}:</div>
-                                                                            <div className="text-gray-300 whitespace-pre-wrap">
-                                                                                {lines.map((line, i) => (<div key={i}>{formatEffectText(line)}</div>))}
-                                                                            </div>
-                                                                        </div>
-                                                                    )
-                                                                })
-                                                            })()}
-                                                        </div>
+                                            {/* DUAL part */}
+                                            <div className="flex gap-4 items-start mt-2">
+                                                <div>
+                                                    <p className="text-sm text-gray-400 italic mb-1">
+                                                        {t('weakness_gauge_reduction')} : {s.wgr_dual ?? '—'}
+                                                    </p>
+
+                                                    <BuffDebuffDisplay
+                                                        buffs={Array.isArray(s.dual_buff) ? s.dual_buff : s.dual_buff ? [s.dual_buff] : []}
+                                                        debuffs={Array.isArray(s.dual_debuff) ? s.dual_debuff : s.dual_debuff ? [s.dual_debuff] : []}
+                                                    />
+
+                                                    <div className="text-sm text-gray-200 whitespace-pre-line mt-1">
+                                                        {formatEffectText(dual || '—')}
                                                     </div>
-                                                )}
+
+                                                    {s.enhancement && (
+                                                        <div className="mt-3 text-xs text-gray-300 border-t border-gray-600 pt-2">
+                                                            <p className="font-bold mb-1">{t('enhancements_label')}</p>
+                                                            <div className="space-y-2">
+                                                                {(() => {
+                                                                    const enh = normalizeEnhancement(s.enhancement)
+                                                                    const levels = Object.keys(enh)
+                                                                        .filter(k => /^\d+$/.test(k))
+                                                                        .sort((a, b) => Number(a) - Number(b))
+
+                                                                    return levels.map(level => {
+                                                                        const lines = pickEnhancementForLevel(enh, level, langKey)
+                                                                        if (!lines.length) return null
+                                                                        return (
+                                                                            <div key={level} className="flex">
+                                                                                <div className="w-10 font-bold text-white flex-shrink-0">+{parseInt(level, 10)}:</div>
+                                                                                <div className="text-gray-300 whitespace-pre-wrap">
+                                                                                    {lines.map((line, i) => (<div key={i}>{formatEffectText(line)}</div>))}
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    })
+                                                                })()}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </section>
                         )
                     })()}
 
                 </div>
 
-                {/* Gear */}
-                {recoData ? (
-                    <RecommendedGearTabs
-                        character={{ builds: recoData as Record<string, RecommendedGearSet> }}
-                        weapons={weapons}
-                        amulets={amulets}
-                        talismans={talismans}
-                    />
-                ) : (
-                    <div className="mt-6">
-                        <h2 className="text-2xl font-bold text-white mb-4 text-center">
-                            {t('recommended_build_and_gear')}
+                {/* Partners */}
+                {partners.length > 0 && (
+
+                    <section id="partners" className="mt-8">
+                        <h2 className="text-2xl font-bold text-white mb-4 flex justify-center gap-2">
+                            {t("partners_title", { defaultValue: "Recommended Partners" })}
                         </h2>
-                        <p className="text-sm text-gray-400 text-center italic">
-                            {t('no_reco_gear')}
-                        </p>
-                    </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center w-full max-w-4xl mx-auto">
+                            {partners.map((entry, i) => (
+                                <div
+                                    key={i}
+                                    className="bg-black/30 border border-white/10 rounded-lg p-3 flex items-center gap-3 hover:bg-white/5 transition"
+                                >
+                                    {entry.hero.map((slug: string) => {
+                                        const char = SLUG_TO_CHAR[slug];
+                                        const name = getLocalizedPartnerFullname(slug, langKey);
+                                        const id = char ? char.ID : undefined;
+                                        const shortName = (abbrev as Record<string, string>)[name] ?? name
+                                        return (
+                                            <Link
+                                                key={slug}
+                                                href={`/characters/${slug}`}
+                                                className="flex-shrink-0 flex flex-col items-center text-center w-[60px]"
+                                                title={name}
+                                            >
+                                                <Image
+                                                    src={`/images/characters/atb/IG_Turn_${id ?? "unknown"}.webp`}
+                                                    alt={name}
+                                                    width={48}
+                                                    height={48}
+                                                    className="rounded-full object-contain border border-white/10 group-hover:border-yellow-400/60 transition"
+                                                />
+                                                <span className="text-sm text-white font-semibold mt-1">{shortName}</span>
+                                            </Link>
+                                        );
+                                    })}
+
+                                    <div className="flex-1 ml-3">
+                                        <p className="text-sm text-gray-300 italic leading-snug">
+                                            {parseText(
+                                                getLocalizedReason(entry.reason, langKey)?.trim() || t("no_reason_provided")
+                                            )}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                    </section>
+
                 )}
+
+
+
+                {/* Gear */}
+                <section id="gear" className="mt-6">
+                    {recoData ? (
+                        <RecommendedGearTabs
+                            character={{ builds: recoData as Record<string, RecommendedGearSet> }}
+                            weapons={weapons}
+                            amulets={amulets}
+                            talismans={talismans}
+                        />
+                    ) : (
+                        <div className="mt-6">
+                            <h2 className="text-2xl font-bold text-white mb-4 text-center">
+                                {t('recommended_build_and_gear')}
+                            </h2>
+                            <p className="text-sm text-gray-400 text-center italic">
+                                {t('no_reco_gear')}
+                            </p>
+                        </div>
+                    )}
+                </section>
 
                 {/* Vidéo */}
                 {character.video && (
-                    <div className="mt-6">
+                    <section id="video" className="mt-6">
                         <h2 className="text-2xl font-bold text-white mb-4 text-center">{t('official_video')}</h2>
                         <YoutubeEmbed videoId={character.video} title={`Skill video of ${character.Fullname}`} />
-                    </div>
+                    </section>
                 )}
             </div>
         </>

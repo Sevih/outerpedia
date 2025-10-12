@@ -1,17 +1,10 @@
 'use client'
 
 import Image from 'next/image'
+import { useI18n } from '@/lib/contexts/I18nContext'
 
 type Props = {
   element: string // 'fire', 'water', etc.
-}
-
-const ELEMENT_LABELS: Record<string, string> = {
-  fire: 'Fire',
-  water: 'Water',
-  earth: 'Earth',
-  light: 'Light',
-  dark: 'Dark'
 }
 
 const ELEMENT_COLORS: Record<string, string> = {
@@ -24,9 +17,11 @@ const ELEMENT_COLORS: Record<string, string> = {
 
 export default function ElementInlineTag({ element }: Props) {
   const key = element.toLowerCase()
-  const label = ELEMENT_LABELS[key]
+  const { t }= useI18n()
   const colorClass = ELEMENT_COLORS[key] || 'text-neutral-300'
   const iconPath = `/images/ui/elem/${key}.webp`
+   const translationKey = `SYS_ELEMENT_NAME_${key.toUpperCase()}`
+  const label = t(translationKey, { defaultValue: key.charAt(0).toUpperCase() + key.slice(1) })
 
   if (!label) return <span className="text-red-500">{element}</span>
 

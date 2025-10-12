@@ -3,17 +3,26 @@
 import Image from 'next/image';
 import * as HoverCard from '@radix-ui/react-hover-card';
 import rawItems from '@/data/items.json';
+import { useTenant } from '@/lib/contexts/TenantContext';
 
-const items = rawItems as {
-  name: string;
-  rarity: 'normal' | 'superior' | 'epic' | 'legendary';
-  description: string;
-}[];
+type ItemRarity = 'normal' | 'superior' | 'epic' | 'legendary';
+
+type ItemDef = {
+  name: string;               // canon EN (sert pour les slugs/images)
+  name_jp?: string;
+  name_kr?: string;
+  rarity: ItemRarity;
+  description: string;        // EN
+  description_jp?: string;
+  description_kr?: string;
+};
+
+const items = rawItems as ItemDef[];
 
 type Props = {
-  names: string[] | string;
-  text?: boolean
-  size?: number
+  names: string[] | string;   // ⚠️ correspond aux "name" (EN canon)
+  text?: boolean;
+  size?: number;
 };
 
 function toKebabCase(str: string) {
@@ -25,19 +34,29 @@ function toKebabCase(str: string) {
 }
 
 export default function ItemInlineDisplay({ names, text = true, size = 25 }: Props) {
+  const { key } = useTenant();
+  const lang: 'en' | 'jp' | 'kr' = key === 'jp' ? 'jp' : key === 'kr' ? 'kr' : 'en';
+
+  const pick = (base: string, jp?: string, kr?: string) =>
+    lang === 'jp' ? (jp ?? base) : lang === 'kr' ? (kr ?? base) : base;
+
   const normalized = Array.isArray(names) ? names : names ? [names] : [];
-  const sizePixel = `${size}px`
+  const sizePixel = `${size}px`;
+
+  // On recherche par "name" canon EN (clé stable)
   const itemList = normalized
     .map((name) => items.find((item) => item.name === name))
-    .filter((item): item is typeof items[number] => !!item);
+    .filter((item): item is ItemDef => !!item);
 
   return (
     <span className="inline-flex items-center gap-1 align-middle cursor-help">
-
       {itemList.map((item, idx) => {
-        const iconBase = toKebabCase(item.name);
+        const iconBase = toKebabCase(item.name); // slug depuis le nom canon EN
         const webpIcon = `/images/items/${iconBase}.webp`;
         const pngIcon = `/images/items/${iconBase}.png`;
+
+        const label = pick(item.name, item.name_jp, item.name_kr);
+        const description = pick(item.description, item.description_jp, item.description_kr);
 
         return (
           <HoverCard.Root key={`${item.name}-${idx}`} openDelay={0} closeDelay={0}>
@@ -46,40 +65,38 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
                 type="button"
                 className="inline-flex items-center gap-1 px-1 py-0.5 text-white cursor-help focus:outline-none align-middle"
               >
-
-
-                <span className={`relative rounded shrink-0`} style={{ width: size, height: size }} >
+                <span className="relative rounded shrink-0" style={{ width: size, height: size }}>
                   <Image
                     src={`/images/bg/CT_Slot_${item.rarity}.webp`}
                     alt="rarity background"
                     fill
                     className="absolute inset-0 z-0 object-cover rounded"
-                    sizes={`${sizePixel}`}
+                    sizes={sizePixel}
                     onError={(e) => {
-                      const img = e.currentTarget;
+                      const img = e.currentTarget as HTMLImageElement;
                       img.onerror = null;
                       img.src = `/images/bg/CT_Slot_${item.rarity}.png`;
                     }}
                   />
                   <Image
                     src={webpIcon}
-                    alt={item.name}
+                    alt={label}
                     fill
                     className="relative z-10 object-contain"
-                    sizes={`${sizePixel}`}
+                    sizes={sizePixel}
                     onError={(e) => {
-                      const img = e.currentTarget;
+                      const img = e.currentTarget as HTMLImageElement;
                       img.onerror = null;
                       img.src = pngIcon;
                     }}
                   />
                 </span>
+
                 {text && (
-                  <span className="leading-none align-middle mb-0.5 underline cursor-help">{item.name}</span>
+                  <span className="leading-none align-middle mb-0.5 underline cursor-help">
+                    {label}
+                  </span>
                 )}
-
-
-
               </button>
             </HoverCard.Trigger>
 
@@ -98,19 +115,19 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
                     className="absolute inset-0 z-0 object-cover rounded"
                     sizes="50px"
                     onError={(e) => {
-                      const img = e.currentTarget;
+                      const img = e.currentTarget as HTMLImageElement;
                       img.onerror = null;
                       img.src = `/images/bg/CT_Slot_${item.rarity}.png`;
                     }}
                   />
                   <Image
                     src={webpIcon}
-                    alt={item.name}
+                    alt={label}
                     fill
                     className="relative z-10 object-contain"
                     sizes="50px"
                     onError={(e) => {
-                      const img = e.currentTarget;
+                      const img = e.currentTarget as HTMLImageElement;
                       img.onerror = null;
                       img.src = pngIcon;
                     }}
@@ -118,8 +135,10 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
                 </span>
 
                 <span className="flex flex-col text-white">
-                  <span className="font-bold text-sm leading-tight drop-shadow-sm">{item.name}</span>
-                  <span className="text-xs leading-snug whitespace-pre-line drop-shadow-sm">{item.description}</span>
+                  <span className="font-bold text-sm leading-tight drop-shadow-sm">{label}</span>
+                  <span className="text-xs leading-snug whitespace-pre-line drop-shadow-sm">
+                    {description}
+                  </span>
                 </span>
                 <HoverCard.Arrow className="w-3 h-2 fill-current text-black" />
               </HoverCard.Content>

@@ -7,6 +7,9 @@ import path from 'path'
 import type { Character } from '@/types/character'
 import { TENANTS, OG_LOCALE, HREFLANG, type TenantKey } from '@/tenants/config'
 import CharacterDetailClient from './CharacterDetailClient'
+import partnersData from '@/data/partners.json'; // un seul gros fichier
+import { selectPartners } from '@/lib/selectPartners';
+import type { PartnerRoot } from '@/types/partners';
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -110,6 +113,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function Page({ params }: PageProps) {
   const { key: langKey } = await getTenantServer()
   const { name: slug } = await params 
+  const partners = selectPartners(partnersData as PartnerRoot, slug);
 
   const label = `⏱️ Character page: ${slug} - ${Date.now()}`
   console.time(label)
@@ -127,6 +131,7 @@ export default async function Page({ params }: PageProps) {
       slug={slug}
       langKey={langKey}
       recoData={recoData}
+      partners={partners}
     />
   )
 }

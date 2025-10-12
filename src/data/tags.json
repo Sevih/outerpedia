@@ -12,7 +12,7 @@
         "type": "unit-type"
     },
     "limited": {
-        "label": "Limited Units",
+        "label": "Festival Units",
         "image": "/images/ui/tags/limited.webp",
         "desc": "These characters are time-limited and only available during specific banners.",
         "type": "unit-type"

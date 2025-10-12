@@ -4474,6 +4474,122 @@
       ]
     }
   },
+  "mero": {
+    "Support": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Heartunder's Blade",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Gorgon's Vanity [Ranger]",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Ranger]",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "CHC",
+        "ATK",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "DPS Revenge": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "CHD",
+        "ACC",
+        "SPD"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
+    },
+    "DPS Pen": {
+      "weaponSub": [
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "CHD",
+        "ACC",
+        "SPD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
   "monad-eva": {
     "Speed": {
       "weaponSub": [

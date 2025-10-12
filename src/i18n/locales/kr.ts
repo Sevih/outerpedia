@@ -5,6 +5,29 @@ const kr = {
   'nav.utilities': '유틸리티',
   'nav.guides': '가이드',
 
+  "nav.characters_short": "캐릭",
+  "nav.equipment_short": "장비",
+  "nav.tierlist_short": "티어",
+  "nav.utilities_short": "도구",
+  "nav.guides_short": "가이드",
+
+  //title across the website
+  "titles.main.main": "Outerplane 티어 리스트, 캐릭터 빌드, 가이드 및 데이터베이스",
+  "titles.main.desc": "Outerplane 비공식 팬 위키. 빌드, 장비, 유틸리티, 티어 리스트, 공략 가이드를 확인하세요.",
+  "titles.main.pull": "현재 픽업 가능",
+  "titles.main.coupon": "쿠폰 코드",
+  "titles.main.changetitle": "Outerpedia 최신 업데이트 및 기능",
+  "titles.main.tochangelog": "전체 변경 로그 보기",
+  "titles.tl.outerplaneTL": "Outerplane 티어 리스트",
+  "titles.tl.desc": "PvE 및 PvP 캐릭터 평가를 선택하세요. 6★ 초월 및 EE 레벨 0 기준으로 평가되었습니다.",
+  "titles.tl.pvedesc": "모든 콘텐츠에서의 PvE 성능 평가.",
+  "titles.tl.pvpdesc": "아레나 성능 평가.",
+  "titles.tool.commuEv": "커뮤니티 이벤트",
+
+  //community event
+  "events.history.desc_active": "Outerplane 이벤트 목록 (진행 중: {active}, 전체: {total})",
+  "events.history.desc_inactive": "Outerplane 이벤트 목록 (전체: {total})",
+
   //character page
   'characters.filters.rarity': '등급',
   'characters.filters.elements': '속성',
@@ -123,6 +146,7 @@ const kr = {
   'SYS_CLASS_STRIKER': '공격형',
   'SYS_CLASS_RANGER': '속도형',
   'SYS_CLASS_MAGE': '마법형',
+  'SYS_CLASS_HEALER': '회복형',
   'SYS_CLASS_PRIEST': '회복형',
 
   'SYS_CLASS_PASSIVE_DEFENDER': '턴 시작 시 AP 5 회복. 피격 시 AP 35 회복. 방어력 15% 증가.',
@@ -182,7 +206,19 @@ const kr = {
   "equipments_tabs.accessory": "액세서리",
   "equipments_tabs.armor": "세트 장비",
   "equipments_tabs.talisman": "탈리스만",
-  "equipments_tabs.exclusive": "전용 장비"
+  "equipments_tabs.exclusive": "전용 장비",
+
+  "toc.overview": "개요",
+  "toc.base_stats": "기본 스탯",
+  "toc.ee_transcend": "전용 장비 및 초월",
+  "toc.skills": "스킬",
+  "toc.burn": "버스트 카드",
+  "toc.chain_dual": "체인 & 듀얼",
+  "toc.gear": "추천 장비",
+  "toc.video": "공식 영상",
+  "toc.partners": "파트너",
+  "partners_title": "추천 파트너",
+  "no_reason_provided": "이유가 제공되지 않았습니다"
 
 
 

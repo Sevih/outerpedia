@@ -23,7 +23,6 @@ function isBannerActive(start: string, end: string): boolean {
 
 export default async function CurrentlyPullable() {
   const { key: langKey } = await getTenantServer()
-  console.log(langKey)
   const bannerPath = path.resolve(process.cwd(), 'src/data/banner.json')
   const bannerData: BannerEntry[] = JSON.parse(fs.readFileSync(bannerPath, 'utf8'))
 
