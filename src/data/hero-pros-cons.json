@@ -24,7 +24,7 @@
     "charlotte": {
         "pro": [
             "easy to build",
-            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE}"
+            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE}"
         ],
         "con": [
             "her skillset are mainly to help mage class character",
