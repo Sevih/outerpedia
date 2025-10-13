@@ -1,0 +1,64 @@
+{
+    "valentine": {
+        "pro": [
+            "easy to build",
+            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE}"
+        ],
+        "con": [
+            "RNG reliant for her EE to activate",
+            "by making her too fast can make you waste alot of turns"
+        ]
+    },
+
+    "tamara": {
+        "pro": [
+            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE}",
+            "very flexible and can use in many team", "debuffing enemies with {D/BT_STAT|ST_DEF} {D/BT_SILENCE} {D/BT_MARKING} {D/BT_COOL_CHARGE}"
+        ],
+        "con": [
+            "require alot of stats to use at minimum",
+            "require max skills upgrade at minimum"
+        ]
+    },
+
+    "charlotte": {
+        "pro": [
+            "easy to build",
+            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE}"
+        ],
+        "con": [
+            "her skillset are mainly to help mage class character",
+            "not helpful for most of time"
+        ]
+    },
+
+    "skadi": {
+        "pro": [
+            "easy to build",
+            "buffing allies with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_BUFF_CHANCE}"
+        ],
+        "con": [
+            "want max skills upgrade"
+        ]
+    },
+
+    "monad-eva": {
+        "pro": [
+            "have built-in {B/BT_CALL_BACKUP}",
+            "help team with {B/BT_INVINCIBLE} {B/SYS_REVENGE_HEAL} {B/BT_REVIVAL} {B/BT_AP_CHARGE}"
+        ],
+        "con": [
+            "want 5star transcend for double {B/BT_CALL_BACKUP}",
+            "want her exclusive equipment to heal when she using {B/SYS_REVENGE_HEAL}"
+        ]
+    },
+    "nella": {
+        "pro": [
+            "have built-in {B/BT_CALL_BACKUP}",
+            "help team with {B/BT_RESURRECTION_G} {B/SYS_REVENGE_HEAL} {B/BT_IMMUNE} {B/BT_AP_CHARGE}"
+        ],
+        "con": [
+            "don't have any form to cleanse debuffs outside {B/BT_IMMUNE}"
+        ]
+    }
+}

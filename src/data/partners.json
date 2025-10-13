@@ -64,7 +64,7 @@
             "skadi"
           ],
           "reason": {
-            "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE} closes the gap in Ame's {B/UNIQUE_SAKURA_CHIRU} and {B/UNIQUE_UME_ICHIRIN} uptime",
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} \n{B/BT_COOL_CHARGE} closes the gap in Ame's {B/UNIQUE_SAKURA_CHIRU} and {B/UNIQUE_UME_ICHIRIN} uptime",
             "kr": " ",
             "jp": " "
           }
@@ -105,7 +105,7 @@
             "francesca"
           ],
           "reason": {
-            "en": "Also {C/Mage} with {I-W/Noblewoman's Guile}: More {D/BT_DOT_BLEED} uptime to enable Beth's  {I-A/Gorgon's Vanity [Healer]} extra effects",
+            "en": "Also {C/Mage} with {I-W/Noblewoman's Guile}: More {D/BT_DOT_BLEED} uptime to enable Beth's extra effects",
             "kr": " ",
             "jp": " "
           }

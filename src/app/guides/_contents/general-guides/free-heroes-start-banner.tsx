@@ -43,6 +43,8 @@ export default function BeginnerGuide() {
             <GuideHeading level={4}>From All Around Mirsha I</GuideHeading>
             <p><CharacterLinkCard name="Veronica" /> when you clear Season 1 Normal Adventure 2-3</p>
             <p>Another <GuideIconInline name="T_Recruit_Card_03" text="Season 1 Selector" /> when you clear Season 1 Hardmode Adventure 10-7 </p>
+            <GuideHeading level={4}>From clearing Season 3 1-13 : The Identity of the Relic</GuideHeading>
+            <p><CharacterLinkCard name="Fatal" /></p>
             <GuideHeading level={4}>From clearing Skyward Tower Floor 100</GuideHeading>
             <p><CharacterLinkCard name="Sigma" /></p>
             <GuideHeading level={4}>From <GuideIconInline name="CM_Shop_Tab_Exchange" text='Friendship Shop' />  : 10 hero pieces per week for 700 <GuideIconInline name="CM_Goods_FriendPoint" text='Friendship Points' /></GuideHeading>
@@ -259,7 +261,6 @@ export default function BeginnerGuide() {
                     <CharacterInlineStacked name="Edelweiss" />
                     <CharacterInlineStacked name="Vlada" />
                     <CharacterInlineStacked name="Bryn" />
-                    <CharacterInlineStacked name="Fatal" />
                 </div>
                 <p className="">Niche usage</p>
             </div>

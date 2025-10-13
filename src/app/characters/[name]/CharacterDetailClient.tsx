@@ -30,6 +30,7 @@ import TranscendenceSlider from '@/app/components/TranscendenceSlider'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import TagDisplayMini from '@/app/components/TagDisplayInline'
 import type { PartnerEntry } from '@/types/partners';
+import rawProsCons from '@/data/hero-pros-cons.json'
 import abbrev from '@/data/abbrev.json'
 
 import formatEffectText from '@/utils/formatText'
@@ -44,6 +45,16 @@ type CharNameEntry = {
 };
 type SlugToCharMap = Record<string, CharNameEntry>;
 const SLUG_TO_CHAR = slugToCharJson as SlugToCharMap;
+
+type ProsCons = {
+    pro?: string[];
+    con?: string[];
+    pro_jp?: string[];
+    con_jp?: string[];
+    pro_kr?: string[];
+    con_kr?: string[];
+};
+type ProsConsMap = Record<string, ProsCons>;
 
 
 
@@ -346,6 +357,33 @@ export default function CharacterDetailClient({
     ].filter((s): s is string => Boolean(s))
     const roleBadge = getRoleBadge(character.role)
 
+
+    const prosCons = rawProsCons as ProsConsMap
+    const heroKey = toKebabCase(character.Fullname)
+    const pc = prosCons[heroKey]
+
+    function getLocalizedProsCons(pc?: ProsCons, lang?: TenantKey) {
+        if (!pc) return { pros: [], cons: [] }
+
+        const pros =
+            lang === 'jp' && pc.pro_jp ? pc.pro_jp :
+                lang === 'kr' && pc.pro_kr ? pc.pro_kr :
+                    pc.pro ?? []
+
+        const cons =
+            lang === 'jp' && pc.con_jp ? pc.con_jp :
+                lang === 'kr' && pc.con_kr ? pc.con_kr :
+                    pc.con ?? []
+
+        return { pros, cons }
+    }
+
+    const { pros, cons } = getLocalizedProsCons(pc, langKey)
+    const hasPros = pros.length > 0
+    const hasCons = cons.length > 0
+    const hasProsCons = hasPros || hasCons
+
+
     // util local (comme avant)
     function renderMainStat(stat: string) {
         return (
@@ -418,7 +456,9 @@ export default function CharacterDetailClient({
         baseStats && { id: "base-stats", label: t("toc.base_stats", { defaultValue: "Base Stats" }) },
         (ee || character.transcend) && { id: "ee-transcend", label: t("toc.ee_transcend", { defaultValue: "EE & Transcend" }) },
         { id: "skills", label: t("toc.skills", { defaultValue: "Skills" }) },
-        // (optionnel) burn only si présent
+        // (optionnel) 
+        hasProsCons && { id: "pros-cons", label: t("toc.pros_cons", { defaultValue: "Pros & Cons" }) },
+
         // hasBurn && { id: "burn", label: t("toc.burn", { defaultValue: "Burn Cards" }) },
         character.skills?.SKT_CHAIN_PASSIVE && { id: "chain-dual", label: t("toc.chain_dual", { defaultValue: "Chain & Dual" }) },
         partners.length > 0 && { id: "partners", label: t("toc.partners", { defaultValue: "Partners" }) },
@@ -588,6 +628,46 @@ export default function CharacterDetailClient({
                         </div>
                     </div>
                 </section>
+
+                {hasProsCons && (
+                    <section id="pros-cons" className="mt-8">
+                        <h2 className="text-2xl font-bold text-white mb-4 text-center">
+                            {t('pros_cons_title', { defaultValue: 'Pros & Cons' })}
+                        </h2>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                            {hasPros && (
+                                <div className="bg-green-900/30 border border-green-600/30 rounded-lg p-4">
+                                    <h3 className="text-lg font-semibold text-green-300 mb-2">{t('pros.label')}</h3>
+                                    <ul className="list-disc list-inside space-y-1 text-gray-200">
+                                        {pros.map((p, i) => (
+                                            <li key={i}>
+                                                {parseText(p.charAt(0).toUpperCase() + p.slice(1))}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {hasCons && (
+                                <div className="bg-red-900/30 border border-red-600/30 rounded-lg p-4">
+                                    <h3 className="text-lg font-semibold text-red-300 mb-2">{t('cons.label')}</h3>
+                                    <ul className="list-disc list-inside space-y-1 text-gray-200">
+                                        {cons.map((c, i) => (
+                                            <li key={i}>
+                                                {parseText(c.charAt(0).toUpperCase() + c.slice(1))}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    </section>
+                )}
+
+
+
+
                 {/* Base Stats */}
                 {baseStats && (() => {
                     const entries = Object.entries(baseStats)

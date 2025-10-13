@@ -18,6 +18,23 @@ import ItemInlineDisplay from '@/app/components/ItemInline'
  * {I-A/AmuletName}  -> amulette (à brancher si tu as le composant)
  * {I-I/ItemName[,ItemName2,...]} -> items (ton composant ItemInlineDisplay)
  */
+
+// Insère des <br /> pour chaque retour à la ligne trouvé dans `text`
+function pushTextWithLineBreaks(
+  acc: React.ReactNode[],
+  text: string,
+  keyPrefix: string
+) {
+  if (!text) return
+  // Supporte \r\n (Windows) et \n
+  const segments = text.split(/\r?\n/g)
+  segments.forEach((seg, i) => {
+    if (i > 0) acc.push(<br key={`${keyPrefix}-br-${i}`} />)
+    if (seg) acc.push(<React.Fragment key={`${keyPrefix}-seg-${i}`}>{seg}</React.Fragment>)
+  })
+}
+
+
 export default function parseText(text: string): React.ReactNode[] {
   // capture le type complet (B|D|C|E|I-W|I-A|I-I) puis le payload jusqu’à la }
   const regex = /\{((?:[BDCE])|I-(?:W|A|I))\/([^}]+)\}/g
@@ -30,9 +47,10 @@ export default function parseText(text: string): React.ReactNode[] {
     const [full, type, rawName] = match
     const index = match.index
 
-    // Texte brut avant le tag
+    // Texte brut avant le tag (avec gestion des retours à la ligne)
     if (lastIndex < index) {
-      parts.push(text.slice(lastIndex, index))
+      const raw = text.slice(lastIndex, index)
+      pushTextWithLineBreaks(parts, raw, `t-${lastIndex}`)
     }
 
     const name = rawName.trim()
@@ -45,7 +63,7 @@ export default function parseText(text: string): React.ReactNode[] {
     } else if (type === 'I-W') {
       parts.push(<WeaponInlineTag key={`w-${index}-${name}`} name={name} />)
     } else if (type === 'I-A') {
-       parts.push(<AmuletInlineTag key={`a-${index}-${name}`} name={name} />)
+      parts.push(<AmuletInlineTag key={`a-${index}-${name}`} name={name} />)
     } else if (type === 'I-I') {
       // Si ton ItemInlineDisplay accepte une liste séparée par virgules :
       parts.push(<ItemInlineDisplay key={`i-${index}-${name}`} names={name} />)
@@ -67,7 +85,8 @@ export default function parseText(text: string): React.ReactNode[] {
 
   // Fin de texte
   if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex))
+    const raw = text.slice(lastIndex)
+    pushTextWithLineBreaks(parts, raw, `t-end-${lastIndex}`)
   }
 
   return parts
