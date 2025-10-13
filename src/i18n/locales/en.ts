@@ -7,22 +7,22 @@ const en = {
 
   "nav.characters_short": "Chars",
   "nav.equipment_short": "Equip",
-  "nav.tierlist_short": "Tier",
-  "nav.utilities_short": "Tools",
-  "nav.guides_short": "Guide",
+  "nav.tierlist_short": "Tier List",
+  "nav.utilities_short": "Utils",
+  "nav.guides_short": "Guides",
 
   //title across the website
   'titles.main.main': 'Outerplane Tier List, Character Builds, Guides & Database',
-  'titles.main.desc':'A fan-made wiki for Outerplane. Explore builds, gear, utilities, tier list, and strategy guides.',
-  'titles.main.pull':'Currently Pullable',
-  'titles.main.coupon':'Coupon Codes',
-  'titles.main.changetitle':'Latest Outerpedia Updates & Features',
-  'titles.main.tochangelog':'View full changelog',
-  'titles.tl.outerplaneTL':'Outerplane Tier List',
-  'titles.tl.desc':'Choose between PvE and PvP character rankings. Based on evaluations with 6★ transcends and level 0 EE effects.',
-  'titles.tl.pvedesc':'PvE performance rankings across all content.',
-  'titles.tl.pvpdesc':'Performance-based Arena evaluation.',
-  'titles.tool.commuEv':'Community Event',
+  'titles.main.desc': 'A fan-made wiki for Outerplane. Explore builds, gear, utilities, tier list, and strategy guides.',
+  'titles.main.pull': 'Currently Pullable',
+  'titles.main.coupon': 'Coupon Codes',
+  'titles.main.changetitle': 'Latest Outerpedia Updates & Features',
+  'titles.main.tochangelog': 'View full changelog',
+  'titles.tl.outerplaneTL': 'Outerplane Tier List',
+  'titles.tl.desc': 'Choose between PvE and PvP character rankings. Based on evaluations with 6★ transcends and level 0 EE effects.',
+  'titles.tl.pvedesc': 'PvE performance rankings across all content.',
+  'titles.tl.pvpdesc': 'Performance-based Arena evaluation.',
+  'titles.tool.commuEv': 'Community Events',
 
   //community event
   "events.history.desc_active": "Browse all Outerplane events (active: {active}, total: {total}).",
@@ -74,6 +74,10 @@ const en = {
   'characters.tags.types.mechanic': 'Mechanic',
   'characters.tags.types.unit-type': 'Unit Type',
   'characters.badges.limited': 'Limited',
+  'pros_cons_title': 'Pros & Cons',
+  'toc.pros_cons': 'Pros & Cons',
+  'pros.label': 'Pros',
+  'cons.label': 'Cons',
 
   'home.newTo': '🧭 New to Outerplane?',
   'home.newTo.desc': 'Start your journey with these beginner-friendly guides:',
@@ -155,6 +159,7 @@ const en = {
   'SYS_CLASS_PASSIVE_RANGER': 'Generates 20 Action Points at the start of turn.',
   'SYS_CLASS_PASSIVE_MAGE': 'Generates 5 Action Points at the start of turn. Generates Action Points when using skills. Increases Attack by 10%.',
   'SYS_CLASS_PASSIVE_PRIEST': 'Generates 5 Action Points at the start of turn. Generates 25 Action Points when an ally is hit. Increases Health by 10%.',
+  'SYS_CLASS_PASSIVE_HEALER': 'Generates 5 Action Points at the start of turn. Generates 25 Action Points when an ally is hit. Increases Health by 10%.',
 
   'SYS_CLASS_NAME_ATTACKER': 'Attacker',
   'SYS_CLASS_NAME_BRUISER': 'Bruiser',
@@ -218,7 +223,12 @@ const en = {
   "toc.video": "Official Video",
   "toc.partners": "Partners",
   "partners_title": "Recommended Partners",
-  "no_reason_provided": "No reason provided"
+  "no_reason_provided": "No reason provided",
+
+  //equip
+  "items.tier0": "Tier 0",
+  "items.tier4": "Tier 4",
+  "items.obtained": "Obtained :",
 
 
 

@@ -74,6 +74,10 @@ const jp = {
   'characters.tags.types.mechanic': 'メカニック',
   'characters.tags.types.unit-type': 'ユニットタイプ',
   'characters.badges.limited': '限定',
+  'pros_cons_title': '長所と短所',
+  'toc.pros_cons': '長所と短所',
+  'pros.label': '長所',
+  'cons.label': '短所',
 
   'home.newTo': '🧭 Outerplaneを初めてプレイしますか？',
   'home.newTo.desc': '初心者向けのガイドで冒険を始めましょう：',
@@ -155,6 +159,7 @@ const jp = {
   'SYS_CLASS_PASSIVE_RANGER': 'ターン開始時、APが20回復する。',
   'SYS_CLASS_PASSIVE_MAGE': 'ターン開始時、APが5回復する。スキル使用時、個別AP獲得する。攻撃力が10%UPする。',
   'SYS_CLASS_PASSIVE_PRIEST': 'ターン開始時、APが5回復する。味方がダメージを受けた時、APが25回復する。HPが10%UPする。',
+  'SYS_CLASS_PASSIVE_HEALER': 'ターン開始時、APが5回復する。味方がダメージを受けた時、APが25回復する。HPが10%UPする。',
 
   'SYS_CLASS_NAME_ATTACKER': 'アタッカー',
   'SYS_CLASS_NAME_BRUISER': 'ブルーザー',
@@ -218,8 +223,12 @@ const jp = {
   "toc.video": "公式動画",
   "toc.partners": "パートナー",
   "partners_title": "おすすめのパートナー",
-  "no_reason_provided": "理由が記載されていません"
+  "no_reason_provided": "理由が記載されていません",
 
+  //equip
+  "items.tier0": "ティア0",
+  "items.tier4": "ティア4",
+  "items.obtained": "入手方法：",
 
 
 

@@ -74,6 +74,10 @@ const kr = {
   'characters.tags.types.mechanic': '메카닉',
   'characters.tags.types.unit-type': '유닛 타입',
   'characters.badges.limited': '한정',
+  'pros_cons_title': '장점과 단점',
+  'toc.pros_cons': '장점과 단점',
+  'pros.label': '장점',
+  'cons.label': '단점',
 
   'home.newTo': '🧭 Outerplane이 처음이신가요?',
   'home.newTo.desc': '초보자를 위한 가이드로 여정을 시작하세요:',
@@ -155,6 +159,7 @@ const kr = {
   'SYS_CLASS_PASSIVE_RANGER': '턴 시작 시 AP 20 회복.',
   'SYS_CLASS_PASSIVE_MAGE': '턴 시작 시 AP 5 회복. 스킬 사용 시 개별 AP 획득. 공격력 10% 증가.',
   'SYS_CLASS_PASSIVE_PRIEST': '턴 시작 시 AP 5 회복. 아군 피격 시 AP 25 획득. 체력 10% 증가.',
+  'SYS_CLASS_PASSIVE_HEALER': '턴 시작 시 AP 5 회복. 아군 피격 시 AP 25 획득. 체력 10% 증가.',
 
   'SYS_CLASS_NAME_ATTACKER': '어태커',
   'SYS_CLASS_NAME_BRUISER': '브루저',
@@ -218,8 +223,12 @@ const kr = {
   "toc.video": "공식 영상",
   "toc.partners": "파트너",
   "partners_title": "추천 파트너",
-  "no_reason_provided": "이유가 제공되지 않았습니다"
+  "no_reason_provided": "이유가 제공되지 않았습니다",
 
+  //equip
+  "items.tier0": "티어 0",
+  "items.tier4": "티어 4",
+  "items.obtained": "획득처 :",
 
 
 
