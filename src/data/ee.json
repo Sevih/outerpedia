@@ -1663,9 +1663,7 @@
 		"effect10_kr": "<color=#28d9ed>비트 갑니다!</color> 사용 시 30% 확률로 <color=#28d9ed>파티 시간이야!</color>의 쿨타임 1턴 감소",
 		"icon_effect": "TI_Icon_UO_Accessary_07",
 		"rank": "C",
-		"buff": [
-			"BT_ADDITIVE_TURN"
-		],
+		"buff": [],
 		"debuff": [
 			"BT_WG_DMG"
 		]
