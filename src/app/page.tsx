@@ -1,14 +1,17 @@
 // src/app/page.tsx
 import Image from 'next/image'
-import Link from 'next/link'
 import CurrentlyPullable from './components/CurrentlyPullable'
 import PromoCodes from './components/PromoCodes'
 // HomeClient reste pour la partie interactive, mais on ne lui passe plus lang
 import HomeClient from './HomeClient'
 import NewToBox from './components/home/NewToBox'
 import CategoriesBox from './components/home/CategoriesBox'
+import { getServerI18n } from '@/lib/contexts/server-i18n' // ✅ chemin corrigé
+import { getTenantServer } from '@/tenants/tenant.server'
 
 export default async function Home() {
+  const { key: langKey } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
   return (
     <>
 
@@ -35,21 +38,21 @@ export default async function Home() {
               max-w-[95%] sm:max-w-[90%] lg:max-w-[80%]
               homepage-title homepage-title-responsive
             ">
-            Outerplane Tier List, Character Builds, Guides & Database
+            {t('titles.main.main')}
             <span className="pointer-events-none absolute bottom-0 left-1/2 h-[10px] md:h-[12px] w-full -translate-x-1/2 bg-[url('/images/ui/CM_Result_Victory_Bg.webp')] bg-bottom bg-no-repeat bg-contain" />
           </h1>
 
           <p className="mt-2 text-gray-300 max-w-sm md:max-w-xl text-xs md:text-sm leading-snug md:leading-relaxed px-2">
-            A fan-made wiki for Outerplane. Explore builds, gear, utilities, tier list, and strategy guides.
+            {t('titles.main.desc')}
           </p>
         </div>
       </div>
 
       {/* Intro text */}
       <section className="max-w-3xl mx-auto px-4 md:px-0 text-center text-sm text-gray-400 space-y-4 mb-12">
-        <p><strong>Outerpedia</strong> is a community-driven database for <strong>Outerplane</strong>, the strategic turn-based mobile RPG.</p>
-        <p>Browse detailed <strong>character builds</strong>, <strong>gear effects</strong>, <strong>tier lists</strong>, <strong>utilities</strong>, and <strong>guides</strong> — all carefully curated by passionate players.</p>
-        <p>Join our <Link href="https://discord.gg/keGhVQWsHv" className="underline text-cyan-400">community Discord</Link> to share team comps, ask questions, or theorycraft together.</p>
+        <p dangerouslySetInnerHTML={{ __html: t('home.intro.1') }} />
+        <p dangerouslySetInnerHTML={{ __html: t('home.intro.2') }} />
+        <p dangerouslySetInnerHTML={{ __html: t('home.intro.3') }} />
       </section>
 
       {/* Corps principal */}

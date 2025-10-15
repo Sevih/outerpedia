@@ -4,21 +4,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useMemo, useRef, useState } from "react"
 import classDataRaw from '@/data/class.json'
-import rawWeapons from '@/data/weapon.json'
-import rawAmulets from '@/data/amulet.json'
-import rawTalismans from '@/data/talisman.json'
 import eeDataRaw from '@/data/ee.json'
 import rawTAGS from '@/data/tags.json'
 import parseText from '@/utils/parseText'
 
 import type { ClassDataMap, StatKey } from '@/types/types'
-import type { EquipmentBase, Talisman, ExclusiveEquipment } from '@/types/equipment'
+import type { ExclusiveEquipment } from '@/types/equipment'
 import type { Character, Skill, TranscendMap, Lang, LevelId } from '@/types/character'
 import { CharacterJsonLdServeur } from '@/app/components/seo';
 import slugToCharJson from "@/data/_SlugToChar.json";
 import { CharacterNameDisplayBigNoH } from '@/app/components/CharacterNameDisplay'
-import RecommendedGearTabs from '@/app/components/RecommendedGearTabs'
-import type { RecommendedGearSet } from '@/app/components/RecommendedGearTabs'
+import RecommendedGearTabs, { RecommendedGearBuild } from "@/app/components/RecommendedGearTabs"
 import BuffDebuffDisplay from '@/app/components/BuffDebuffDisplayClient'
 import SkillPriorityTabs from '@/app/components/SkillPriorityTabs'
 import StatInlineTag from '@/app/components/StatInlineTag'
@@ -32,6 +28,7 @@ import TagDisplayMini from '@/app/components/TagDisplayInline'
 import type { PartnerEntry } from '@/types/partners';
 import rawProsCons from '@/data/hero-pros-cons.json'
 import abbrev from '@/data/abbrev.json'
+import type { Talisman, Accessory, Weapon, ArmorSet } from '@/types/equipment'
 
 import formatEffectText from '@/utils/formatText'
 import { useI18n } from '@/lib/contexts/I18nContext'
@@ -297,24 +294,17 @@ function getBurns(s?: Skill): BurnCard[] {
     return []
 }
 
-
-
-
-
-
 // ---------- composant ----------
-export default function CharacterDetailClient({
-    character,
-    slug,
-    langKey,
-    recoData,
-    partners
-}: {
+export default function CharacterDetailClient({ character, slug, langKey, recoData, partners, weapons, amulets, talismans, sets }: {
     character: Character
     slug: string
     langKey: TenantKey
     recoData: Record<string, unknown> | null
     partners: PartnerEntry[]
+    weapons: Weapon[]
+    amulets: Accessory[]
+    talismans: Talisman[]
+    sets: ArmorSet[]
 }) {
     const { t } = useI18n()
 
@@ -327,9 +317,6 @@ export default function CharacterDetailClient({
     }
 
 
-    const weapons = rawWeapons as unknown as EquipmentBase[]
-    const amulets = rawAmulets as unknown as EquipmentBase[]
-    const talismans = rawTalismans as Talisman[]
     const classData = classDataRaw as ClassDataMap
     const eeData = eeDataRaw as Record<string, ExclusiveEquipment>
     const characterProfiles = rawProfiles as Record<string, CharacterProfile>
@@ -1113,22 +1100,22 @@ export default function CharacterDetailClient({
 
                 {/* Gear */}
                 <section id="gear" className="mt-6">
+                    <h2 className="text-2xl font-bold text-white mb-4 text-center">
+                                {t('recommended_build_and_gear')}
+                            </h2>
                     {recoData ? (
                         <RecommendedGearTabs
-                            character={{ builds: recoData as Record<string, RecommendedGearSet> }}
+                            character={{ builds: recoData as Record<string, RecommendedGearBuild> }}
                             weapons={weapons}
                             amulets={amulets}
                             talismans={talismans}
+                            sets={sets}
                         />
+
                     ) : (
-                        <div className="mt-6">
-                            <h2 className="text-2xl font-bold text-white mb-4 text-center">
-                                {t('recommended_build_and_gear')}
-                            </h2>
                             <p className="text-sm text-gray-400 text-center italic">
                                 {t('no_reco_gear')}
                             </p>
-                        </div>
                     )}
                 </section>
 

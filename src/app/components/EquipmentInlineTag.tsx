@@ -32,7 +32,7 @@ type BaseItem = {
   effect10?: string
   icon_effect?: string
   effect_desc1?: string
-  effect_desc4?: string
+  effect_desc4?: string | null
   class?: string | null
   source?: string | null
   boss?: string | null

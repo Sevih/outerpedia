@@ -3,55 +3,55 @@
     "name": "Tier List - PvE",
     "description": "Complete ranking of all characters in Outerplane for PVE content, based on evaluations with 6-star transcends and level 0 Exclusive Equipment effects.",
     "icon": "nav/CM_Lobby_Button_Misson.webp",
-    "order": 1
+    "order": 100
   },
   "tierlistpvp": {
     "name": "Tier List - PvP",
     "description": "Complete ranking of all characters in Outerplane for PvP content, based on evaluations with 6-star transcends and level 0 Exclusive Equipment effects.",
     "icon": "nav/CM_Lobby_Button_Misson.webp",
-    "order": 2
+    "order": 200
   },
   "ee-priority": {
     "name": "Exclusive Equipment Priority",
     "description": "A ranking of exclusive equipment (EE) based on their usefulness and impact at level 0. +10 effects are not considered.",
     "icon": "nav/CM_Lobby_Button_Shop.webp",
-    "order": 3
+    "order": 300
   },
   "gear-usage-stats": {
     "name": "Gear Usage Statistics",
     "description": "Discover the most recommended weapons, amulets and sets in Outerplane builds.",
     "icon": "nav/CM_Lobby_Btn_StepUp.webp",
-    "order": 4
+    "order": 400
   },
   "gear-solver": {
     "name": "Gear Usage Finder",
     "description": "Unsure which character can use your gear? This tool helps you find the best match based on equipment.",
     "icon": "nav/gear-solver.webp",
-    "order": 5
+    "order": 500
   },
   "event": {
     "name": "Community events",
     "description": "",
     "icon": "nav/CM_Agit_Retention.webp",
-    "order": 6,
+    "order": 600,
     "hide":true
   },
   "patch-history": {
     "name": "Patch Notes & Dev Notes",
     "description": "Browse all Outerplane patch notes, developer notes, hero compendium and more.",
     "icon": "nav/CM_Lobby_Button_Agit.webp",
-    "order": 6
+    "order": 700
   },
   "coupons": {
     "name": "Coupon Codes",
     "description": "Get all valid, expired, and upcoming promo codes for Outerplane. Updated regularly on Outerpedia.",
     "icon": "nav/CM_Guild_NoticeBoard.webp",
-    "order": 7
+    "order": 800
   },
   "pull-sim": {
     "name": "Pull Simulator",
     "description": "Simulate gacha pulls for all Outerplane banners. Test your luck on Rate Up, Premium, and Limited banners with mileage system included.",
     "icon": "nav/CM_Lobby_Button_Recruitment.webp",
-    "order": 8
+    "order": 900
   }
 }

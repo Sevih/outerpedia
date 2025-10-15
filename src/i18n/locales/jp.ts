@@ -23,6 +23,17 @@ const jp = {
   "titles.tl.pvedesc": "全コンテンツにおけるPvE性能評価。",
   "titles.tl.pvpdesc": "アリーナにおける性能評価。",
   "titles.tool.commuEv": "コミュニティイベント",
+  'home.intro.1': `<strong>Outerpedia</strong> は、戦略的ターン制モバイルRPG <strong>Outerplane</strong> のためのコミュニティ主導データベースです。`,
+  'home.intro.2': `情熱あるプレイヤーが厳選した <strong>キャラビルド</strong>、<strong>装備効果</strong>、<strong>ティアリスト</strong>、<strong>ユーティリティ</strong>、<strong>各種ガイド</strong> をチェックしましょう。`,
+  'home.intro.3': `編成共有や質問、理論構築は <a href="https://discord.gg/keGhVQWsHv" class="underline text-cyan-400">コミュニティDiscord</a> へ！`,
+  'coupon.copy': 'コピー',
+  'coupon.copied': 'コピーしました！',
+  'coupon.redeem.title': 'クーポンコードの入力方法',
+  'coupon.redeem.android': '<strong>Android端末の場合：</strong> ゲーム内の <strong>設定 &gt; アカウント &gt; クーポン入力</strong> から入力できます。',
+  'coupon.redeem.ios': '<strong>iOS端末の場合：</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">こちら</a> で入力し、<a href="https://imgur.com/a/8gStkbJ" class="underline text-cyan-400">会員情報</a> を確認してください。',
+  'general.endsin': '終了まで',
+
+
 
   //community event
   "events.history.desc_active": "Outerplane のイベント一覧（開催中: {active}、合計: {total}）",
@@ -190,10 +201,10 @@ const jp = {
 
   'SYS_STAT_ATK': '攻撃力',
   'SYS_STAT_DEF': '防御力',
-  'SYS_STAT_HP': 'HP',
+  'SYS_STAT_HP': '体力',
   'SYS_STAT_ATK_PERCENT': '攻撃力%',
   'SYS_STAT_DEF_PERCENT': '防御力%',
-  'SYS_STAT_HP_PERCENT': 'HP%',
+  'SYS_STAT_HP_PERCENT': '体力%',
   'SYS_STAT_EFF': '効果命中',
   'SYS_STAT_RES': '効果抵抗',
   'SYS_STAT_SPD': 'スピード',
@@ -229,6 +240,37 @@ const jp = {
   "items.tier0": "ティア0",
   "items.tier4": "ティア4",
   "items.obtained": "入手方法：",
+  'items.mainstats': 'メインステータス',
+  'items.setEffects': 'セット効果',
+  'items.noAdditional': '追加効果なし',
+  'items.set.twoPiece': '2セット',
+  'items.set.fourPiece': '4セット',
+  "items.stat": "ステータス",
+  "items.lv0": "Lv.0",
+  "items.lv10": "Lv.10",
+  "items.na": "N/A",
+  "items.secondMainstats": "追加メインステータス",
+
+  "items.classRestriction": "クラス制限：",
+  "items.rarity": "レア度：",
+  "items.baseEffect": "基本効果：",
+  "items.tier4Effect": "Tier4効果：",
+
+  // talisman
+  "talisman.base": "基本効果",
+  "talisman.level10": "レベル10効果",
+  "talisman.effect": "効果",
+  "talisman.effects": "効果一覧",
+  "talisman.obtained": "入手方法：",
+  "talisman.source": "入手先",
+  "talisman.type": "タイプ",
+  "talisman.rarity": "レアリティ",
+  "talisman.info": "タリスマン情報",
+  "talisman.showMore": "詳細を表示",
+  "talisman.showLess": "詳細を非表示",
+  "talisman.noLv10": "追加効果なし"
+
+
 
 
 

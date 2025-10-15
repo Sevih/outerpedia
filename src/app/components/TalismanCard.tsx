@@ -1,71 +1,210 @@
+'use client'
+
 import Image from "next/image";
+import { useState } from "react";
+import { useI18n } from '@/lib/contexts/I18nContext'
+import type { TenantKey } from "@/tenants/config";
+import React from "react";
+import type { Talisman } from "@/types/equipment";
 
-type Props = {
-  name: string;
-  icon: string;
-  icon_item:string;
-  icon_effect: string;
-  effect_name: string;
-  effect: string;
-  effect10: string;
-};
+/* ---------- Helpers identiques à ton WeaponCard ---------- */
 
-export default function TalismanCard({
-  name,
-  icon,
-  icon_item,
-  icon_effect,
-  effect_name,
-  effect,
-  effect10,
-}: Props) {
+function formatEffectTextAndHighlightNum(text: string): React.ReactElement {
+  if (!text) return <></>;
+
+  const tokens = text.split(/(<[^>]+>)/g);
+  const numRe = /(\d+(?:\.\d+)?)(\s*%?)/g;
+
+  let html = tokens
+    .map(tok => {
+      if (tok.startsWith('<') && tok.endsWith('>')) return tok;
+      return tok.replace(numRe, (_m, n, pct) => `<color=#28d9ed>${n}${pct}</color>`);
+    })
+    .join('');
+
+  const colorTagRe = /<color=(#[0-9a-fA-F]{6})>([\s\S]*?)<\/color>/;
+  while (colorTagRe.test(html)) {
+    html = html.replace(colorTagRe, (_m, color, inner) => {
+      return `<span style="color:${color}">${inner}</span>`;
+    });
+  }
+
+  html = html.replace(/\\n|\\\\n/g, '<br />');
+  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
+function pickByLang(base?: string | null, jp?: string | null, kr?: string | null, langue?: TenantKey): string {
+  if (langue === "jp" && jp && jp.trim().length) return jp;
+  if (langue === "kr" && kr && kr.trim().length) return kr;
+  return base ?? ""; // ← évite l'erreur et renvoie une string vide si null
+}
+
+
+/* -------------------- Composant -------------------- */
+
+export default function TalismanCard({ talisman, langue }: { talisman: Talisman, langue: TenantKey }) {
+  const { t } = useI18n();
+  const [expanded, setExpanded] = useState(false);
+
+  const displayName = pickByLang(
+    talisman.name,
+    talisman.name_jp,
+    talisman.name_kr,
+    langue
+  );
+  const displayEffectName = pickByLang(
+    talisman.effect_name,
+    talisman.effect_name_jp,
+    talisman.effect_name_kr,
+    langue
+  );
+  const displayDescBase = pickByLang(
+    talisman.effect_desc1,
+    talisman.effect_desc1_jp,
+    talisman.effect_desc1_kr,
+    langue
+  );
+  const displayDescLv10 = pickByLang(
+    talisman.effect_desc4,
+    talisman.effect_desc4_jp,
+    talisman.effect_desc4_kr,
+    langue
+  );
+
+  // Normalisation multilingue du label d'effet
+  // Normalisation multilingue du label d'effet
+  let shortEffectName: React.ReactNode = displayEffectName;
+
+  (() => {
+    if (!displayEffectName) return;
+
+    // 1) Split prioritaire sur " - ", sinon sur ": "
+    const splitPrimary = displayEffectName.split(" - ");
+    const parts = splitPrimary.length > 1 ? splitPrimary : displayEffectName.split(": ");
+
+    const first = (parts[0] ?? "").trim();
+    const second = (parts[1] ?? "").trim();
+
+    // 2) Détection AP / CP
+    const firstLower = first.toLowerCase();
+    let tag: "AP" | "CP" | null = null;
+
+    if (firstLower.includes("action point") || firstLower.startsWith("ap")) {
+      tag = "AP";
+    } else if (firstLower.includes("chain point") || firstLower.startsWith("cp")) {
+      tag = "CP";
+    }
+
+    // 3) Reformat
+    if (tag && second) {
+      shortEffectName = (
+        <>
+          {tag}
+          <br />
+          {second}
+        </>
+      );
+    } else if (tag && !second) {
+      shortEffectName = tag;
+    } else {
+      shortEffectName = displayEffectName;
+    }
+  })();
+
+
+
   return (
-    <div className="relative bg-white/5 p-4 rounded-2xl shadow flex flex-col items-center text-center gap-2 w-[260px]">
-
-      {/* Zone image avec fond + icône + effet */}
-      <div className="relative w-20 h-20">
-        {/* Fond rouge */}
+    <div
+      onClick={() => setExpanded(!expanded)}
+      className={`relative bg-white/5 p-[0.6rem] rounded-2xl shadow flex flex-col items-center text-center transition-all duration-300 ${expanded ? "w-[160px]" : "w-[160px]"} cursor-pointer`}
+    >
+      {/* Image centrale (basée sur icon_item) */}
+      <div className="relative w-[80px] h-[80px]">
+        {/* Cadre neutre (si tu as un fond dédié aux talismans, remplace ce bg) */}
         <Image
-          src="/images/ui/bg_item_leg.webp"
+          src={`/images/bg/CT_Slot_${talisman.rarity}.webp`}
           alt="background"
           fill
           sizes="80px"
           className="absolute inset-0 z-0"
         />
-        {/* Icône du talisman */}
         <Image
-          src={`/images/equipment/TI_Equipment_Talisman_${icon}.webp`}
-          alt={name}
+          src={`/images/equipment/${talisman.image}.webp`}
+          alt={displayName}
           fill
           sizes="80px"
           className="relative z-10 object-contain"
         />
-        {/* Icône d'effet en haut à droite */}
-        <div className="absolute top-2 right-2 z-20 translate-x-1/3 -translate-y-1/3">
-          <Image
-            src={`/images/ui/effect/TI_Icon_UO_Talisman_${icon_item}.webp`}
-            alt={effect_name}
-            width={24}
-            height={24}
-          />
-        </div>
+
+        {/* icône d’effet */}
+        {talisman.effect_icon && (
+          <div className="absolute top-2 right-2 z-20 translate-x-1/3 -translate-y-1/3">
+            <Image
+              src={`/images/ui/effect/${talisman.effect_icon}.webp`}
+              alt="Effect"
+              width={20}
+              height={20}
+              style={{ width: 20, height: 20 }}
+            />
+          </div>
+        )}
+
       </div>
 
-      {/* Infos texte */}
-      <h3 className="text-lg font-semibold mt-2">{name}</h3>
-      <div className="flex items-center gap-2">
-        <Image
-          src={`/images/ui/effect/Talisman_${icon_effect}.webp`}
-          alt={effect_name}
-          width={24}
-          height={24}
-          style={{ width: 24, height: 24 }}
-        />
-        <span className="text-sm">{effect_name}</span>
+      {/* Nom du talisman */}
+      <h3 className="text-[12px] font-bold text-rose-300 mt-1.5 leading-tight">
+        {displayName}
+      </h3>
+
+      {/* Label effet */}
+      <div className="inline-flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full text-[11px] text-white font-medium mt-1">
+        <div className="relative w-[13px] h-[13px]">
+          <Image
+            src={`/images/ui/effect/SC_Buff_Effect_Freeze.webp`}
+            alt={displayEffectName}
+            fill
+            className="object-contain"
+            sizes="13px"
+          />
+        </div>
+        <span>{shortEffectName}</span>
       </div>
-      <p className="text-sm text-white/80">{effect}</p>
-      {effect10 && (
-        <p className="text-xs text-amber-300 mt-1 italic">Enhanced: {effect10}</p>
+
+      {/* Indicateur visuel */}
+      <div className="text-white/40 text-[10px] mt-1">{expanded ? "▲" : "▼"}</div>
+
+      {/* Contenu des effets */}
+      {expanded && (
+        <div className="rounded-xl text-[11px] text-white/90 w-full flex flex-col gap-1">
+          <div>
+            <p className="text-cyan-400 font-semibold text-[12px]">
+              {t('talisman.base', { defaultValue: 'Base' })}
+            </p>
+            <p className="leading-snug">{formatEffectTextAndHighlightNum(displayDescBase)}</p>
+          </div>
+          <div>
+            <p className="text-yellow-300 font-semibold text-[12px]">
+              {t('talisman.level10', { defaultValue: 'Level 10' })}
+            </p>
+            <p className="leading-snug">
+              {displayDescLv10 && displayDescLv10.trim().length > 0
+                ? formatEffectTextAndHighlightNum(displayDescLv10)
+                : <span className="text-white/50 italic">{t('talisman.noLv10', { defaultValue: 'No additional effect' })}</span>}
+            </p>
+
+          </div>
+
+          {/* Source */}
+          <div className="mt-1">
+            <p className="text-gray-400 font-semibold text-[10px]">
+              {t('items.obtained', { defaultValue: 'Obtained :' })}
+            </p>
+            <p className="text-gray-400 text-[10px]">
+              {talisman.source} <br />
+              {talisman.boss || talisman.mode}
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

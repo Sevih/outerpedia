@@ -69,7 +69,7 @@ export default async function EquipmentsPage() {
       ...talismans.map(t => ({
         "@type": "CreativeWork",
         "name": t.name,
-        "image": `https://outerpedia.com/images/equipment/TI_Equipment_Talisman_${t.icon}.webp`
+        "image": `https://outerpedia.com/images/equipment/${t.image}.webp`
       })),
       ...Object.entries(eeData).map(([charKey, ee]) => ({
         "@type": "CreativeWork",

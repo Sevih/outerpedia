@@ -25,6 +25,32 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-10-15",
+    title: {
+      en: "Outerpedia Update – October 2025",
+      jp: "Outerpediaアップデート – 2025年10月",
+      kr: "Outerpedia 업데이트 – 2025년 10월",
+    } as LString,
+    type: "update",
+    content: [
+      {
+        en: "A major update focused on **item pages** and **multilingual support**!",
+        jp: "**アイテムページ**と**多言語対応**に焦点を当てた大型アップデート！",
+        kr: "**아이템 페이지**와 **다국어 지원**에 초점을 맞춘 대형 업데이트!",
+      } as LString,
+      {
+        en: "🌍 **Multilingual Expansion** – All item pages (Weapons, Accessories, Sets) are now fully available in **English, Japanese, and Korean**.",
+        jp: "🌍 **多言語拡張** – すべてのアイテムページ（武器・アクセサリー・セット）が**英語・日本語・韓国語**に完全対応しました。",
+        kr: "🌍 **다국어 확장** – 모든 아이템 페이지(무기, 액세서리, 세트)가 이제 **영어, 일본어, 한국어**로 완전히 제공됩니다.",
+      } as LString,
+      {
+        en: "⚔️ **Equipment Overhaul** – Complete visual rework of the database pages for a cleaner, unified look.",
+        jp: "⚔️ **装備リニューアル** – データベースページのデザインを全面的に一新し、より統一感のあるビジュアルに。",
+        kr: "⚔️ **장비 개편** – 데이터베이스 페이지의 비주얼을 전면적으로 새롭게 개선했습니다.",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-10-01",
     title: {
       en: "New Hero Summer Knight’s Dream Ember",

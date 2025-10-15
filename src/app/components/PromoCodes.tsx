@@ -6,6 +6,7 @@ import { Copy } from 'lucide-react'
 import Accordion from '@/app/components/ui/Accordion'
 import Link from 'next/link'
 import ItemInlineDisplay from './ItemInline'
+import { useI18n } from '@/lib/contexts/I18nContext'
 
 type PromoCode = {
   code: string
@@ -15,6 +16,7 @@ type PromoCode = {
 }
 
 export default function PromoCodes() {
+  const { t } = useI18n()
   const [validCodes, setValidCodes] = useState<PromoCode[]>([])
   const [copied, setCopied] = useState<string | null>(null)
 
@@ -48,7 +50,7 @@ export default function PromoCodes() {
       <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
         <span className="text-xl">🎁</span>{' '}
         <Link href="/coupons" className="underline text-cyan-400">
-          Coupon Codes
+          {t('titles.main.coupon')}
         </Link>
       </h2>
 
@@ -62,7 +64,7 @@ export default function PromoCodes() {
                 className="text-cyan-400 hover:text-cyan-300 text-sm flex items-center gap-1"
               >
                 <Copy size={16} />
-                {copied === code ? 'Copied!' : 'Copy'}
+                {copied === code ? t('coupon.copied') : t('coupon.copy')}
               </button>
             </div>
             <ul className="mt-1 text-sm text-gray-300 space-y-1">
@@ -78,28 +80,17 @@ export default function PromoCodes() {
         items={[
           {
             key: 'redeem',
-            title: 'How can I redeem my codes?',
+            title: t('coupon.redeem.title'),
             content: (
               <ul className="list-disc list-inside mt-2">
-                <li>
-                  <strong>For Android devices:</strong> you can redeem it in-game by going into{' '}
-                  <strong>Settings &gt; Account &gt; Enter Coupon</strong>.
-                </li>
-                <li>
-                  <strong>For iOS devices:</strong> you can redeem it{' '}
-                  <Link href="https://coupon.outerplane.vagames.co.kr:39009/coupon" className="underline text-cyan-400">
-                    here
-                  </Link>{' '}
-                  and make sure to remember your{' '}
-                  <Link href="https://imgur.com/a/8gStkbJ" className="underline text-cyan-400">
-                    Member Info
-                  </Link>.
-                </li>
+                <li dangerouslySetInnerHTML={{ __html: t('coupon.redeem.android') }} />
+                <li dangerouslySetInnerHTML={{ __html: t('coupon.redeem.ios') }} />
               </ul>
             )
           }
         ]}
       />
+
     </section>
   )
 }

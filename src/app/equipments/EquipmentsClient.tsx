@@ -16,7 +16,8 @@ import bossData from "@/data/boss.json";
 import statsData from "@/data/stats.json";
 import { cleanAccessory } from '@/lib/cleaner';
 
-import TalismanGrid from "@/app/components/TalismanGrid";
+import TalismanCard from "@/app/components/TalismanCard";
+
 import ExclusiveEquipmentList from "@/app/components/ExclusiveEquipmentCard";
 
 import { AnimatedTabs } from "@/app/components/AnimatedTabs"
@@ -25,7 +26,7 @@ import { useSearchParams } from "next/navigation";
 import type { TenantKey } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
 
-type TabKey = "weapon" | "accessory" | "armor" | "talisman" | "exclusive";
+type TabKey = "weapon" | "accessory" | "set" | "talisman" | "exclusive";
 
 
 
@@ -44,7 +45,7 @@ export default function EquipmentsClient({ lang = "en" }: Props) {
   const TABS: { key: TabKey; label: string; icon: string }[] = [
     { key: "weapon", label: t("equipments_tabs.weapon"), icon: "/images/ui/nav/weapon.webp" },
     { key: "accessory", label: t("equipments_tabs.accessory"), icon: "/images/ui/nav/accessory.webp" },
-    { key: "armor", label: t("equipments_tabs.armor"), icon: "/images/ui/nav/armor.webp" },
+    { key: "set", label: t("equipments_tabs.armor"), icon: "/images/ui/nav/armor.webp" },
     { key: "talisman", label: t("equipments_tabs.talisman"), icon: "/images/ui/nav/talisman.webp" },
     { key: "exclusive", label: t("equipments_tabs.exclusive"), icon: "/images/ui/nav/exclusive.webp" }
   ];
@@ -55,7 +56,7 @@ export default function EquipmentsClient({ lang = "en" }: Props) {
 
   // initialise depuis l’URL
   useEffect(() => {
-    const allowed: TabKey[] = ["weapon", "accessory", "armor", "talisman", "exclusive"];
+    const allowed: TabKey[] = ["weapon", "accessory", "set", "talisman", "exclusive"];
     if (tabParam && (allowed as string[]).includes(tabParam)) {
       setSelected(tabParam as TabKey);
     } else if (tabParam == null) {
@@ -284,7 +285,7 @@ export default function EquipmentsClient({ lang = "en" }: Props) {
 
           <div className="flex flex-wrap gap-2 justify-center">
             {filteredWeapons.map((weapon) => (
-              <WeaponCard key={weapon.name} weapon={weapon} />
+              <WeaponCard key={weapon.name} weapon={weapon} langue={lang} />
             ))}
           </div>
         </>
@@ -407,13 +408,13 @@ export default function EquipmentsClient({ lang = "en" }: Props) {
 
           <div className="flex flex-wrap gap-2 justify-center">
             {filteredAccessories.map((accessory) => (
-              <AccessoryCard key={accessory.name} accessory={cleanAccessory(accessory)} />
+              <AccessoryCard key={accessory.name} accessory={cleanAccessory(accessory)} langue={lang} />
             ))}
           </div>
         </>
       )}
 
-      {selected === "armor" && (
+      {selected === "set" && (
         <>
           {/* Filtres boss/mode pour les armors */}
           <div className="mb-4 flex flex-wrap justify-center gap-2">
@@ -452,14 +453,19 @@ export default function EquipmentsClient({ lang = "en" }: Props) {
             {sets
               .filter(set => !armorBossFilter || (set.boss || set.mode) === armorBossFilter)
               .map(set => (
-                <SetCard key={set.name} set={set} />
+                <SetCard key={set.name} set={set}  langue={lang}/>
               ))}
           </div>
         </>
       )}
       {selected === "talisman" && (
-        <TalismanGrid talismans={talismans} />
+        <div className="flex flex-wrap gap-2 justify-center">
+          {talismans.map((t) => (
+            <TalismanCard key={t.name} talisman={t} langue={lang} />
+          ))}
+        </div>
       )}
+
 
       {selected === "exclusive" && (
         <ExclusiveEquipmentList exdata={eeData} lang={lang} />

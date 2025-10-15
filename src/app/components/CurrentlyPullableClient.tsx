@@ -8,6 +8,7 @@ import type { ElementType, ClassType } from '@/types/enums';
 import { CharacterNameDisplay } from '@/app/components/CharacterNameDisplay'
 import { ElementIcon } from '@/app/components/ElementIcon'
 import { ClassIcon } from '@/app/components/ClassIcon'
+import { useI18n } from '@/lib/contexts/I18nContext'
 
 type Character = {
   name: string
@@ -20,12 +21,13 @@ type Character = {
   class: string
 }
 
-export default function CurrentlyPullableClient({ characters }: { characters: Character[] }) {
+export default function CurrentlyPullableClient({ characters }: { characters: Character[]}) {
+  const {t} = useI18n()
   return (
     <section className="flex flex-col items-center space-y-4">
       {/* Titre centré */}
       <h2 className="text-2xl font-extrabold tracking-wide text-white relative text-center">
-        <span className="z-10 relative">Currently Pullable</span>
+        <span className="z-10 relative">{t('titles.main.pull')}</span>
         <span className="absolute left-1/2 transform -translate-x-1/2 -bottom-1 w-3/4 h-1 bg-cyan-600 opacity-70 rounded" />
       </h2>
 

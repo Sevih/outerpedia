@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { toKebabCase } from "@/utils/formatText"
 import { useI18n } from "@/lib/contexts/I18nContext"
-import type { Weapon } from "@/types/equipment"
+import type { Accessory } from "@/types/equipment"
 import rawStats from "@/data/stats.json"
 import { highlightNumbersOnly } from "@/utils/textHighlighter"
 
@@ -15,23 +15,23 @@ type StatIconMap = {
 const stats = rawStats as StatIconMap
 
 // ---- Types exacts pour la carte ----
-export type WeaponForCard = Weapon & {
+export type AmuletForCard = Accessory & {
   forcedMainStat: string
   usage?: string
 }
 
-// Normalise un ID d'icône d'effet : accepte suffixe ("09") ou ID complet ("TI_Icon_UO_Weapon_09")
-function normalizeEffectIcon(id?: string | null) {
-  if (!id) return null
-  return id.startsWith("TI_") ? id : `TI_Icon_UO_Weapon_${id}`
-}
-
-// Ajoute .webp si manquant
+// ajoute .webp si manquant
 function ensureWebp(path: string) {
   return path.endsWith(".webp") ? path : `${path}.webp`
 }
 
-// Localisation sûre (sans any)
+// normalise l'icône d'effet (suffixe "09" ou ID complet "TI_Icon_UO_Accessary_09")
+function normalizeEffectIcon(id?: string | null) {
+  if (!id) return null
+  return id.startsWith("TI_") ? id : `TI_Icon_UO_Accessary_${id}`
+}
+
+// localisation sûre (sans any)
 function getLocalized<
   T extends Partial<Record<K | `${K}_jp` | `${K}_kr`, string | null>>,
   K extends string
@@ -44,20 +44,20 @@ function getLocalized<
   return String(base ?? "")
 }
 
-export default function WeaponMiniCard({ weapon }: { weapon: WeaponForCard }) {
+export default function AmuletMiniCard({ amulet }: { amulet: AmuletForCard }) {
   const { lang } = useI18n()
 
-  const hasDualStats = weapon.forcedMainStat?.includes("/")
+  const hasDualStats = amulet.forcedMainStat?.includes("/")
   const mainStats = hasDualStats
-    ? weapon.forcedMainStat.split("/")
-    : [weapon.forcedMainStat].filter(Boolean)
+    ? amulet.forcedMainStat.split("/")
+    : [amulet.forcedMainStat].filter(Boolean)
 
-  const locName = getLocalized(weapon, "name", lang)
-  const locEffectName = getLocalized(weapon, "effect_name", lang)
-  const locEffectDesc4 = getLocalized(weapon, "effect_desc4", lang)
+  const locName = getLocalized(amulet, "name", lang)
+  const locEffectName = getLocalized(amulet, "effect_name", lang)
+  const locEffectDesc4 = getLocalized(amulet, "effect_desc4", lang)
 
-  const effectIconId = normalizeEffectIcon(weapon.effect_icon ?? undefined)
-  const equipmentImage = ensureWebp(String(weapon.image ?? ""))
+  const effectIconId = normalizeEffectIcon(amulet.effect_icon ?? undefined)
+  const equipmentImage = ensureWebp(String(amulet.image ?? ""))
 
   const renderStatIcons = () => (
     <div className="flex items-center gap-1">
@@ -67,12 +67,12 @@ export default function WeaponMiniCard({ weapon }: { weapon: WeaponForCard }) {
         return (
           <React.Fragment key={index}>
             {index > 0 && <span className="text-white">/</span>}
-            <div className="relative w-[14px] h-[14px] inline">
+            <div className="relative w-[14px] h-[14px]">
               <Image
                 src={`/images/ui/effect/${icon}`}
                 alt={`${trimmed} Icon`}
                 fill
-                className="object-contain"
+                className="object-contain inline"
                 sizes="14px"
               />
             </div>
@@ -85,7 +85,7 @@ export default function WeaponMiniCard({ weapon }: { weapon: WeaponForCard }) {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Zone de hover */}
+      {/* vignette + overlays */}
       <div className="relative group">
         <div
           className="w-[48px] h-[48px] rounded shadow-md"
@@ -117,11 +117,11 @@ export default function WeaponMiniCard({ weapon }: { weapon: WeaponForCard }) {
             </div>
           )}
 
-          {weapon.class && (
+          {amulet.class && (
             <div className="absolute bottom-1 right-1 z-10 w-[16px] h-[16px]">
               <Image
-                src={`/images/ui/class/${String(weapon.class).toLowerCase()}.webp`}
-                alt={weapon.class}
+                src={`/images/ui/class/${String(amulet.class).toLowerCase()}.webp`}
+                alt={amulet.class}
                 fill
                 className="object-contain"
                 sizes="16px"
@@ -130,25 +130,13 @@ export default function WeaponMiniCard({ weapon }: { weapon: WeaponForCard }) {
           )}
         </div>
 
-        {/* Tooltip */}
-        {((weapon.source || weapon.boss || weapon.mode) || locEffectName || locEffectDesc4) && (
-          <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-max max-w-[260px] bg-gray-900 text-white text-[12px] rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow-lg pointer-events-none">
+        {/* tooltip */}
+        {((amulet.source || amulet.boss || amulet.mode) || locEffectName || locEffectDesc4) && (
+          <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-max max-w-[250px] bg-gray-900 text-white text-[12px] rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow-lg pointer-events-none">
             <p className="text-red-400 font-bold text-sm leading-tight mb-2">{locName}</p>
 
-            {/* bloc stats principales (dummy valeurs d’exemple) */}
             <div className="flex justify-between items-center gap-1 mt-1 mb-1">
               {renderStatIcons()}
-              <span>
-                {mainStats.map((stat, index) => {
-                  const value = String(stat).includes("HP%") ? "48%" : "60%"
-                  return (
-                    <React.Fragment key={index}>
-                      {index > 0 && " / "}
-                      {value}
-                    </React.Fragment>
-                  )
-                })}
-              </span>
             </div>
 
             <div className="border-t border-gray-600 bg-gray-700 rounded p-2 pt-2 mt-2">
@@ -177,19 +165,19 @@ export default function WeaponMiniCard({ weapon }: { weapon: WeaponForCard }) {
 
             <div className="mt-2 text-xs text-gray-400">
               <div className="border-t border-gray-600 pt-2 mt-2">
-                {weapon.source && <p><strong>Source:</strong> {weapon.source}</p>}
-                {weapon.boss && <p><strong>Boss:</strong> {weapon.boss}</p>}
-                {!weapon.boss && weapon.mode && <p><strong>Mode:</strong> {weapon.mode}</p>}
+                {amulet.source && <p><strong>Source:</strong> {amulet.source}</p>}
+                {amulet.boss && <p><strong>Boss:</strong> {amulet.boss}</p>}
+                {!amulet.boss && amulet.mode && <p><strong>Mode:</strong> {amulet.mode}</p>}
               </div>
             </div>
           </div>
         )}
       </div>
 
-      {/* Bloc en dessous */}
+      {/* label + stats */}
       <div className="mt-1 text-center text-white text-[12px] leading-tight w-full z-0">
-        <p className="text-red-400 text-sm leading-tight">
-          <Link href={`/item/weapon/${toKebabCase(locName)}`} className="hover:underline">
+         <p className="text-red-400 text-sm leading-tight">
+          <Link href={`/item/accessory/${toKebabCase(locName)}`} className="hover:underline">
           {locName.includes("[") ? (
             <>
               <span className="block">{locName.split("[")[0].trim()}</span>

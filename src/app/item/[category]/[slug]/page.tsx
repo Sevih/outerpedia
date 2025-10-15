@@ -1,196 +1,196 @@
+// app/item/[category]/[slug]/page.tsx
 import weaponData from '@/data/weapon.json'
 import accessoryData from '@/data/amulet.json'
 import setData from '@/data/sets.json'
-//import talismanData from '@/data/talisman.json'
-//import eeData from '@/data/ee.json'
 
 import renderWeapon from '@/app/components/renderWeapon'
 import renderAccessory from '@/app/components/renderAccessory'
 import renderSet from '@/app/components/renderSet'
-//import renderTalisman from '@/app/components/renderTalisman'
-//import renderEE from '@/app/components/renderEE'
 
-
+import type { Weapon, Accessory, ArmorSet } from '@/types/equipment'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { toKebabCase } from '@/utils/formatText'
+import BackButton from '@/app/components/ui/BackButton'
 
-type Params = { category: string; slug: string }
-type GenericItem = { 
-  name: string; 
-  effect_name?: string; 
-  class?: string; 
-  mainStats?: string[]; 
-  effect_desc1?: string; 
-  effect?: string; 
-  icon_effect?: string; 
-  icon_item?: string; 
-  image?: string; 
-  set_icon?: string
- }
+// 🌍 localisation
+import { TENANTS, OG_LOCALE, HREFLANG, type TenantKey } from '@/tenants/config'
+import { getTenantServer } from '@/tenants/tenant.server'
 
-type SetItem = {
-  name: string
-  rarity: number
-  class?: string
-  mainStats?: string[]
-  substats?: string[]
-  set_icon?: string
-  effect_2_1?: string
-  effect_2_4?: string
-  effect_4_1?: string
-  effect_4_4?: string
-  source?: string
-  boss?: string
-  mode?: string
-  image_prefix?: string
+// ---------- Types ----------
+type Category = 'weapon' | 'accessory' | 'set'
+type Params = { category: Category; slug: string }
+
+// ---------- Données ----------
+const WEAPONS = weaponData as Weapon[]
+const ACCESSORIES = accessoryData as Accessory[]
+const SETS = setData as ArmorSet[]
+
+// ---------- Utils ----------
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-
-const datasets: Record<string, unknown[] | Record<string, unknown>> = {
-  weapon: weaponData,
-  accessory: accessoryData,
-  set: setData,
-  //talisman: talismanData,
-  //ee: eeData,
+function findEntry<T extends { name: string }>(list: T[], slug: string): T | null {
+  return list.find(i => toKebabCase(i.name) === slug) ?? null
 }
 
-function capitalize(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
-function isValidItem(item: unknown): item is GenericItem {
-  return typeof item === 'object' && item !== null && 'name' in item && typeof (item as { name?: unknown }).name === 'string'
-}
-
-function findEntry(data: unknown[] | Record<string, unknown>, slug: string): GenericItem | null {
-  const entries = Array.isArray(data) ? data : Object.values(data)
-  const match = entries.find((item) => isValidItem(item) && toKebabCase(item.name) === slug) as GenericItem | undefined
-  return match ?? null
-}
-
-function getItemImageUrl(entry: GenericItem, category: string): string {
-//  if (category === 'ee') {
-  //  return `https://outerpedia.com/images/equipment/effect/${entry.icon_effect}.png`
-  //}
-  if (category === 'set') {
-    return `https://outerpedia.com/images/equipment/set/${entry.set_icon}.png`
+function getEntry(category: Category, slug: string) {
+  switch (category) {
+    case 'weapon':
+      return findEntry<Weapon>(WEAPONS, slug)
+    case 'accessory':
+      return findEntry<Accessory>(ACCESSORIES, slug)
+    case 'set':
+      return findEntry<ArmorSet>(SETS, slug)
   }
-  //if (category === 'talisman') {
-    //return `https://outerpedia.com/images/equipment/talisman/${entry.icon_item}.png`
-  //}
-  if (category === 'weapon') {
-    return `https://outerpedia.com/images/equipment/${entry.image?.replace('.webp', '.png') || 'default.png'}`
-  }
-  if (category === 'accessory') {
-    return `https://outerpedia.com/images/equipment/${entry.image?.replace('.webp', '.png') || 'default.png'}`
-  }
-  return `https://outerpedia.com/images/equipment/icon/${entry.image?.replace('.webp', '.png') || 'default.png'}`
 }
 
-function generateItemKeywords(entry: GenericItem, category: string, slug: string): string[] {
-  const base = [
-    'outerplane',
-    'outerpedia',
-    'outerplane item',
-    'outerplane gear',
-    'outerplane database',
-    entry.name,
-    slug,
-    category,
-  ]
-
-  const extras: string[] = []
-
-  if (entry.class) extras.push(entry.class)
-  if (entry.effect_name) extras.push(entry.effect_name)
-  if (entry.name.includes('Set')) extras.push('gear set', 'set bonus')
-  if (entry.name.includes('Talisman')) extras.push('talisman effect', 'relic')
-
-  return base.concat(extras)
+// Construit la map hreflang -> URL pour ce chemin
+function buildLanguageAlternates(path: string) {
+  const acc: Record<string, string> = {}
+    ; (Object.keys(TENANTS) as TenantKey[]).forEach(k => {
+      acc[HREFLANG[k]] = `https://${TENANTS[k].domain}${path}`
+    })
+  return acc
 }
 
-// 📦 Routes statiques
+// ---------- Static params (weapons + accessories + sets) ----------
 export async function generateStaticParams() {
   const params: Params[] = []
-
-  for (const [category, data] of Object.entries(datasets)) {
-    const entries = Array.isArray(data) ? data : Object.values(data)
-    for (const item of entries) {
-      if (isValidItem(item)) {
-        params.push({ category, slug: toKebabCase(item.name) })
-      }
-    }
+  for (const it of WEAPONS) {
+    params.push({ category: 'weapon', slug: toKebabCase(it.name) })
   }
-
+  for (const it of ACCESSORIES) {
+    params.push({ category: 'accessory', slug: toKebabCase(it.name) })
+  }
+  for (const it of SETS) {
+    params.push({ category: 'set', slug: toKebabCase(it.name) })
+  }
   return params
 }
 
-// 🧠 SEO metadata
-export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const { category, slug } = await params
-  const data = datasets[category]
-  if (!data) return { title: 'Item not found', description: 'This item does not exist.' }
+// ---------- SEO helpers ----------
+function getItemPngImageUrl(category: Category, entry: Weapon | Accessory | ArmorSet): string {
+  // Weapons & Accessories: /images/equipment/{image}.png (source: entry.image[.webp])
+  if (category === 'weapon' || category === 'accessory') {
+    const imageField = (entry as Weapon | Accessory).image
+    if (!imageField) return '/images/equipment/default.png'
+    const file = imageField.endsWith('.webp') ? imageField.replace('.webp', '.png') : imageField
+    return `/images/equipment/${file}`
+  }
 
-  const entry = findEntry(data, slug)
-  if (!entry) return { title: 'Item not found', description: 'This item does not exist.' }
+  // Sets: use set icon (already like TI_Icon_Set_Enchant_XXXX) in /images/ui/effect/
+  const setIcon = (entry as ArmorSet).set_icon
+  if (setIcon) return `/images/ui/effect/${setIcon}.png`
+  return '/images/ui/nav/CM_Lobby_Button_Character.png'
+}
 
-  const url = `https://outerpedia.com/item/${category}/${slug}`
-  const image = getItemImageUrl(entry, category)
-
+function notFoundMeta(domain: string, path: string, ogLocale: string): Metadata {
   return {
-    title: `${entry.name} | ${capitalize(category)} | Outerpedia`,
-    description: `Details, stats, and effects for ${entry.name} (${category}) in Outerplane.`,
-    keywords: generateItemKeywords(entry, category, slug),
+    title: 'Item not found',
+    description: 'This item does not exist.',
     alternates: {
-      canonical: url,
+      canonical: `https://${TENANTS.en.domain}${path}`,
+      languages: buildLanguageAlternates(path),
     },
     openGraph: {
-      title: `${entry.name} | ${capitalize(category)} | Outerpedia`,
-      description: `Find detailed information about ${entry.name}, including stats, rarity, and effects.`,
-      type: 'article',
-      url,
-      images: [{ url: image }],
+      url: `https://${domain}${path}`,
+      siteName: 'Outerpedia',
+      title: 'Item not found',
+      description: 'This item does not exist.',
+      type: 'website',
+      images: [{ url: `https://${domain}/images/ui/nav/CM_Lobby_Button_Character.png`, width: 150, height: 150 }],
+      locale: ogLocale,
     },
     twitter: {
       card: 'summary',
-      title: `${entry.name} | ${capitalize(category)} | Outerpedia`,
-      description: `Outerplane ${category} database: ${entry.name} full details.`,
+      title: 'Item not found',
+      description: 'This item does not exist.',
+      images: [`https://${domain}/images/ui/nav/CM_Lobby_Button_Character.png`],
+    },
+    robots: { index: false, follow: false },
+  }
+}
+
+// ---------- Metadata ----------
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { category, slug } = await params
+  const { key: langKey, domain } = await getTenantServer()
+
+  const BASE_DOMAIN = TENANTS.en.domain
+  const path = `/item/${category}/${slug}`
+  const canonical = `https://${BASE_DOMAIN}${path}`
+  const languages = buildLanguageAlternates(path)
+  const ogLocale = OG_LOCALE[langKey] ?? 'en_US'
+
+  if (category !== 'weapon' && category !== 'accessory' && category !== 'set') {
+    return notFoundMeta(domain, path, ogLocale)
+  }
+
+  const entry = getEntry(category, slug) as (Weapon | Accessory | ArmorSet | null)
+  if (!entry) return notFoundMeta(domain, path, ogLocale)
+
+  const image = `https://${domain}${getItemPngImageUrl(category, entry)}`
+  const title = `${entry.name} | ${capitalize(category)} | Outerpedia`
+  const description = `Détails, statistiques et effets de ${entry.name} (${category}) dans Outerplane.`
+  const className =
+    category === 'weapon'
+      ? (entry as Weapon).class
+      : category === 'accessory'
+        ? (entry as Accessory).class
+        : (entry as ArmorSet).class
+
+
+  return {
+    title,
+    description,
+    keywords: [
+      'Outerplane', 'Outerpedia', entry.name,
+      `${entry.name} Outerplane`, `${entry.name} Build`, `${entry.name} Guide`,
+      className ?? '',
+      category, 'gear', 'effect',
+    ].filter(Boolean),
+    alternates: {
+      canonical,
+      languages,
+    },
+    openGraph: {
+      url: `https://${domain}${path}`,
+      siteName: 'Outerpedia',
+      title,
+      description,
+      type: 'website',
+      images: [{ url: image, width: 512, height: 512, alt: `${entry.name} - ${capitalize(category)} Image` }],
+      locale: ogLocale,
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
       images: [image],
     },
   }
 }
 
-// 🔍 Page
-export default async function ItemPage({ params }: { params: Promise<Params> }) {
+// ---------- Page ----------
+export default async function Page({ params }: { params: Promise<Params> }) {
+  const { key: langKey } = await getTenantServer()
   const { category, slug } = await params
 
-  const data = datasets[category]
-  if (!data) notFound()
-
-  const entry = findEntry(data, slug)
+  const entry = getEntry(category, slug) as (Weapon | Accessory | ArmorSet | null)
   if (!entry) notFound()
 
   return (
-    <div className="p-6 text-white">
-      {renderItem(category, entry)}
-    </div>
+    <>
+      <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
+        <BackButton fallback="/item" />
+      </div>
+      <div className="p-6 text-white">
+        {category === 'weapon' && renderWeapon(entry as Weapon, langKey)}
+        {category === 'accessory' && renderAccessory(entry as Accessory, langKey)}
+        {category === 'set' && renderSet(entry as ArmorSet, langKey)}
+      </div>
+    </>
   )
-}
-
-function renderItem(category: string, entry: GenericItem) {
-  switch (category) {
-    case 'weapon':
-      return renderWeapon(entry)
-    case 'accessory':
-      return renderAccessory(entry)
-    case 'set':
-      return renderSet(entry as SetItem) 
-    //case 'talisman':
-      //return renderTalisman(entry)
-    //case 'ee':
-      //return renderEE(entry)
-    default:
-      return <div>Unsupported item type: {category}</div>
-  }
 }

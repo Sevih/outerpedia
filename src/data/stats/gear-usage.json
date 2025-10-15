@@ -1075,7 +1075,7 @@
     "characters": []
   },
   {
-    "name": "High School Girl Invicibility",
+    "name": "High School Girl Invincibility",
     "type": "Weapon",
     "class": "Striker",
     "count": 0,
@@ -1110,14 +1110,14 @@
     "characters": []
   },
   {
-    "name": "Kon-Chiki-Chin ♪",
+    "name": "Kon-Chiki-Chin♪",
     "type": "Weapon",
     "class": "Mage",
     "count": 0,
     "characters": []
   },
   {
-    "name": "Middle School Girl Invicibility",
+    "name": "Middle School Girl Invincibility",
     "type": "Weapon",
     "class": "Ranger",
     "count": 0,
@@ -1222,7 +1222,7 @@
     "characters": []
   },
   {
-    "name": "Megaphone of encouragement",
+    "name": "Megaphone of Encouragement",
     "type": "Amulet",
     "class": "Defender",
     "count": 0,
@@ -1292,56 +1292,147 @@
     "characters": []
   },
   {
-    "name": "Critical Hit",
+    "name": "Attack Set",
     "type": "Set",
     "class": null,
     "count": 0,
     "characters": []
   },
   {
-    "name": "Resilience",
+    "name": "Defense Set",
     "type": "Set",
     "class": null,
     "count": 0,
     "characters": []
   },
   {
-    "name": "Evasion",
+    "name": "Life Set",
     "type": "Set",
     "class": null,
     "count": 0,
     "characters": []
   },
   {
-    "name": "Lifesteal",
+    "name": "Critical Hit Set",
     "type": "Set",
     "class": null,
     "count": 0,
     "characters": []
   },
   {
-    "name": "Patience",
+    "name": "Effectiveness Set",
     "type": "Set",
     "class": null,
     "count": 0,
     "characters": []
   },
   {
-    "name": "Pulverization",
+    "name": "Resilience Set",
     "type": "Set",
     "class": null,
     "count": 0,
     "characters": []
   },
   {
-    "name": "Weakness",
+    "name": "Counterattack Set",
     "type": "Set",
     "class": null,
     "count": 0,
     "characters": []
   },
   {
-    "name": "Bursting",
+    "name": "Accuracy Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Evasion Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Lifesteal Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Penetration Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Critical Strike Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Speed Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Revenge Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Patience Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Pulverization Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Immunity Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Swiftness Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Weakness Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Augmentation Set",
+    "type": "Set",
+    "class": null,
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Bursting Set",
     "type": "Set",
     "class": null,
     "count": 0,

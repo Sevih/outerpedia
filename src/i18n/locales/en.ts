@@ -23,6 +23,16 @@ const en = {
   'titles.tl.pvedesc': 'PvE performance rankings across all content.',
   'titles.tl.pvpdesc': 'Performance-based Arena evaluation.',
   'titles.tool.commuEv': 'Community Events',
+  'home.intro.1': `<strong>Outerpedia</strong> is a community-driven database for <strong>Outerplane</strong>, the strategic turn-based mobile RPG.`,
+  'home.intro.2': `Browse detailed <strong>character builds</strong>, <strong>gear effects</strong>, <strong>tier lists</strong>, <strong>utilities</strong>, and <strong>guides</strong> — all carefully curated by passionate players.`,
+  'home.intro.3': `Join our <a href="https://discord.gg/keGhVQWsHv" class="underline text-cyan-400">community Discord</a> to share team comps, ask questions, or theorycraft together.`,
+  'coupon.copy': 'Copy',
+  'coupon.copied': 'Copied!',
+  'coupon.redeem.title': 'How can I redeem my codes?',
+  'coupon.redeem.android': '<strong>For Android devices:</strong> you can redeem it in-game by going into <strong>Settings &gt; Account &gt; Enter Coupon</strong>.',
+  'coupon.redeem.ios': '<strong>For iOS devices:</strong> you can redeem it <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">here</a> and make sure to remember your <a href="https://imgur.com/a/8gStkbJ" class="underline text-cyan-400">Member Info</a>.',
+  'general.endsin': 'Ends in',
+
 
   //community event
   "events.history.desc_active": "Browse all Outerplane events (active: {active}, total: {total}).",
@@ -229,6 +239,36 @@ const en = {
   "items.tier0": "Tier 0",
   "items.tier4": "Tier 4",
   "items.obtained": "Obtained :",
+  'items.mainstats': 'Main Stats',
+  'items.setEffects': 'Set Effects',
+  'items.noAdditional': 'No additional effect',
+  'items.set.twoPiece': '2-Piece',
+  'items.set.fourPiece': '4-Piece',
+  "items.stat": "Stat",
+  "items.lv0": "Lv.0",
+  "items.lv10": "Lv.10",
+  "items.na": "N/A",
+  "items.secondMainstats": "Second Main Stats",
+
+  "items.classRestriction": "Class restriction:",
+  "items.rarity": "Rarity:",
+  "items.baseEffect": "Base Effect:",
+  "items.tier4Effect": "Tier 4 Effect:",
+  // talisman
+  "talisman.base": "Base",
+  "talisman.level10": "Level 10",
+  "talisman.effect": "Effect",
+  "talisman.effects": "Effects",
+  "talisman.obtained": "Obtained :",
+  "talisman.source": "Source",
+  "talisman.type": "Type",
+  "talisman.rarity": "Rarity",
+  "talisman.info": "Talisman Information",
+  "talisman.showMore": "Show details",
+  "talisman.showLess": "Hide details",
+  "talisman.noLv10": "No additional effect"
+
+
 
 
 

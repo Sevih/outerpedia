@@ -10,6 +10,11 @@ import CharacterDetailClient from './CharacterDetailClient'
 import partnersData from '@/data/partners.json'; // un seul gros fichier
 import { selectPartners } from '@/lib/selectPartners';
 import type { PartnerRoot } from '@/types/partners';
+import rawWeapons from '@/data/weapon.json'
+import rawAmulets from '@/data/amulet.json'
+import rawTalismans from '@/data/talisman.json'
+import rawSets from '@/data/sets.json'
+import type { Talisman, Accessory, ArmorSet, Weapon } from '@/types/equipment'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -112,7 +117,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params }: PageProps) {
   const { key: langKey } = await getTenantServer()
-  const { name: slug } = await params 
+  const { name: slug } = await params
   const partners = selectPartners(partnersData as PartnerRoot, slug);
 
   const label = `⏱️ Character page: ${slug} - ${Date.now()}`
@@ -123,7 +128,11 @@ export default async function Page({ params }: PageProps) {
 
   const recoData = await readCharacterRecoFile(slug)
 
-  console.timeEnd(label)
+  // -- CHARGEMENT SERVER des gear-data --
+  const weapons = (rawWeapons as unknown) as Weapon[]
+  const amulets = (rawAmulets as unknown) as Accessory[]
+  const talismans = (rawTalismans as unknown) as Talisman[]
+  const sets = (rawSets as unknown) as ArmorSet[]
 
   return (
     <CharacterDetailClient
@@ -132,6 +141,10 @@ export default async function Page({ params }: PageProps) {
       langKey={langKey}
       recoData={recoData}
       partners={partners}
+      weapons={weapons}
+      amulets={amulets}
+      talismans={talismans}
+      sets={sets}
     />
   )
 }

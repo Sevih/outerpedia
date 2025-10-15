@@ -23,6 +23,16 @@ const kr = {
   "titles.tl.pvedesc": "모든 콘텐츠에서의 PvE 성능 평가.",
   "titles.tl.pvpdesc": "아레나 성능 평가.",
   "titles.tool.commuEv": "커뮤니티 이벤트",
+  'home.intro.1': `<strong>Outerpedia</strong> 는 전략 턴제 모바일 RPG <strong>Outerplane</strong> 를 위한 커뮤니티 주도의 데이터베이스입니다.`,
+  'home.intro.2': `열정적인 플레이어들이 정리한 <strong>캐릭터 빌드</strong>, <strong>장비 효과</strong>, <strong>티어 리스트</strong>, <strong>유틸리티</strong>, <strong>가이드</strong>를 둘러보세요.`,
+  'home.intro.3': `팀 조합 공유, 질문, 이론 제작은 <a href="https://discord.gg/keGhVQWsHv" class="underline text-cyan-400">커뮤니티 디스코드</a>에서 함께하세요.`,
+  'coupon.copy': '복사',
+  'coupon.copied': '복사됨!',
+  'coupon.redeem.title': '쿠폰 코드는 어떻게 등록하나요?',
+  'coupon.redeem.android': '<strong>안드로이드 기기:</strong> 게임 내 <strong>설정 &gt; 계정 &gt; 쿠폰 입력</strong> 메뉴에서 입력할 수 있습니다.',
+  'coupon.redeem.ios': '<strong>iOS 기기:</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">여기</a>에서 입력하고, <a href="https://imgur.com/a/8gStkbJ" class="underline text-cyan-400">회원 정보</a>를 확인하세요.',
+  'general.endsin': '종료까지',
+
 
   //community event
   "events.history.desc_active": "Outerplane 이벤트 목록 (진행 중: {active}, 전체: {total})",
@@ -229,6 +239,37 @@ const kr = {
   "items.tier0": "티어 0",
   "items.tier4": "티어 4",
   "items.obtained": "획득처 :",
+  'items.mainstats': '메인 스탯',
+  'items.setEffects': '세트 효과',
+  'items.noAdditional': '추가 효과 없음',
+  'items.set.twoPiece': '2세트',
+  'items.set.fourPiece': '4세트',
+  "items.stat": "능력치",
+  "items.lv0": "Lv.0",
+  "items.lv10": "Lv.10",
+  "items.na": "N/A",
+  "items.secondMainstats": "추가 메인 능력치",
+
+  "items.classRestriction": "클래스 제한:",
+  "items.rarity": "희귀도:",
+  "items.baseEffect": "기본 효과:",
+  "items.tier4Effect": "티어4 효과:",
+
+  // talisman
+  "talisman.base": "기본 효과",
+  "talisman.level10": "레벨 10 효과",
+  "talisman.effect": "효과",
+  "talisman.effects": "효과 목록",
+  "talisman.obtained": "획득처:",
+  "talisman.source": "획득 장소",
+  "talisman.type": "종류",
+  "talisman.rarity": "등급",
+  "talisman.info": "탈리스만 정보",
+  "talisman.showMore": "자세히 보기",
+  "talisman.showLess": "숨기기",
+  "talisman.noLv10": "추가 효과 없음"
+
+
 
 
 
