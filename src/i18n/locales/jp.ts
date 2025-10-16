@@ -441,12 +441,12 @@ const jp = {
   'tierIndex.collection.title': 'アウタープレーン ティアリスト — {monthYear}',
   'tierIndex.collection.desc': 'PvE と PvP のキャラランキングを選択できます。',
 
-'item.meta.title': '{name} | {category} | Outerpedia',
-'item.meta.desc': '{name}（{category}）の詳細・ステータス・効果まとめ。',
-'item.meta.ogTitle': '{name} | {category} | Outerpedia',
-'item.meta.ogDesc': '{name}（{category}）のステータスと効果をチェック。',
-'item.meta.twTitle': '{name} | {category}',
-'item.meta.twDesc': '{name}（{category}）のステータス・効果情報。',
+'item.meta.title': '{name} | Outerpedia',
+'item.meta.desc': '{name} の詳細・ステータス・効果まとめ。',
+'item.meta.ogTitle': '{name} | Outerpedia',
+'item.meta.ogDesc': '{name} のステータスと効果をチェック。',
+'item.meta.twTitle': '{name} | ',
+'item.meta.twDesc': '{name} のステータス・効果情報。',
 
 
 
