@@ -10,15 +10,16 @@ import AdventureGuideGrid from '@/app/components/AdventureGuideGrid'
 import AdventureLicenseGuideGrid from '@/app/components/AdventureLicenseGuideGrid'
 import MonadGateGuideGrid from '@/app/components/MonadGateGuideGrid'
 import SkywardTowerGuideGrid from '@/app/components/SkywardTowerGuideGrid'
-import { FaDiscord } from 'react-icons/fa'
 import { getTenantServer } from '@/tenants/tenant.server'
 import type { TenantKey } from '@/tenants/config'
 import { generateGuideKeywords as generateKeywords } from '@/lib/seo_guides'
 
+import { createPageMetadata } from '@/lib/seo'
+import JsonLd from '@/app/components/JsonLd'
+import { websiteLd, breadcrumbLd, guidesCollectionLd } from './jsonld'
+
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
-
-
 
 type Localized = { en: string; jp?: string; kr?: string }
 const getLocalized = (v: Localized | string, lang: TenantKey) =>
@@ -38,7 +39,7 @@ type Guide = {
 type CategoryMeta = {
   title: string | Localized
   description: string | Localized
-  icon: string
+  icon: string // sans extension (ex: '/images/guides/CM_GuideQuest_Navigate')
   valid: boolean
 }
 
@@ -47,6 +48,7 @@ const guides = guidesRaw as Record<string, Guide>
 
 type Props = { params: { category: string } }
 
+// ---------- Metadata ----------
 export async function generateMetadata({ params }: { params: Promise<Props['params']> }): Promise<Metadata> {
   const { key: langKey, domain } = await getTenantServer()
   const { category } = await params
@@ -56,59 +58,44 @@ export async function generateMetadata({ params }: { params: Promise<Props['para
     return {
       title: 'Category not found',
       description: 'This guide category does not exist.',
+      robots: { index: false, follow: false },
     }
   }
 
   const metaTitle = getLocalized(meta.title, langKey)
   const metaDesc = getLocalized(meta.description, langKey)
-  const base = `https://${domain}`
-  const iconUrl = `${base}${meta.icon}.png` //
 
-  // ✅ canonical toujours sur le domaine EN
-  const canonical = `https://outerpedia.com/guides/${category}`
-  const languages: Record<string, string> = {
-    en: `https://outerpedia.com/guides/${category}`,
-    jp: `https://jp.outerpedia.com/guides/${category}`,
-    kr: `https://kr.outerpedia.com/guides/${category}`,
-  }
+  const path = `/guides/${category}` as `/${string}`
+  const iconAbs = `https://${domain}${meta.icon}.png` // règle PNG metadata respectée
 
-  const metadata: Metadata = {
-    title: `${metaTitle} | Outerpedia`,
+  // même modèle que les autres pages (clés i18n génériques)
+  return createPageMetadata({
+    path,
+    titleKey: 'guides.cat.meta.title',
+    descKey: 'guides.cat.meta.desc',
+    ogTitleKey: 'guides.cat.og.title',
+    ogDescKey: 'guides.cat.og.desc',
+    twitterTitleKey: 'guides.cat.tw.title',
+    twitterDescKey: 'guides.cat.tw.desc',
     keywords: generateKeywords(category, metaTitle, langKey),
-    description: metaDesc,
-    alternates: {
-      canonical,
-      languages,
+    image: {
+      url: iconAbs,
+      width: 150,
+      height: 150,
+      altFallback: `${metaTitle} icon`,
     },
-    openGraph: {
-      title: `${metaTitle} | Outerpedia`,
-      description: metaDesc,
-      url: canonical,
-      type: 'website',
-      images: [
-        {
-          url: iconUrl,
-          width: 150,
-          height: 150,
-          alt: `${metaTitle} icon`,
-        },
-      ],
+    ogType: 'website',
+    twitterCard: 'summary',
+    vars: {
+      cat: metaTitle,
+      desc: metaDesc,
     },
-    twitter: {
-      card: 'summary', // petit format, cohérent avec une icône 150x150
-      title: `${metaTitle} | Outerpedia`,
-      description: metaDesc,
-      images: [iconUrl],
-    },
-  }
-
-  //console.log('Generated metadata for /guides/[category]:', metadata)
-  return metadata
+  })
 }
 
-
+// ---------- Page ----------
 export default async function CategoryPage({ params }: { params: Promise<Props['params']> }) {
-  const { key: langKey } = await getTenantServer()
+  const { key: langKey, domain } = await getTenantServer()
   const { category } = await params
 
   const meta = categoryMeta[category]
@@ -117,7 +104,7 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
   const metaTitle = getLocalized(meta.title, langKey)
   const metaDesc = getLocalized(meta.description, langKey)
 
-  // helper pour normaliser le weight (undefined -> Infinity, string -> number, valeurs invalides -> Infinity)
+  // helper normalisation du weight
   const toWeight = (w: unknown) => {
     if (typeof w === 'number' && Number.isFinite(w)) return w
     const n = Number(w)
@@ -135,12 +122,10 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
       category: g.category,
       last_updated: g.last_updated,
       author: g.author,
-      weight: toWeight((g as Guide).weight), // <= important pour le tri
+      weight: toWeight((g as Guide).weight),
     }))
 
-  if (filtered.length === 0) {
-    return <UnderConstruction />
-  }
+  if (filtered.length === 0) return <UnderConstruction />
 
   // Tri par défaut : weight ASC, puis last_updated DESC, puis title ASC
   filtered.sort((a, b) => {
@@ -150,14 +135,33 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
     return a.title.localeCompare(b.title)
   })
 
-
-  if (filtered.length === 0) {
-    return <UnderConstruction />
-  }
-
+  const path = `/guides/${category}`
 
   return (
     <div className="p-6">
+      {/* JSON-LD */}
+      <JsonLd
+        json={[
+          websiteLd(domain),
+          breadcrumbLd(domain, {
+            home: langKey === 'jp' ? 'ホーム' : langKey === 'kr' ? '홈' : 'Home',
+            current: metaTitle,
+            currentPath: path,
+          }),
+          guidesCollectionLd(domain, {
+            title: `${metaTitle} | Outerpedia`,
+            description: metaDesc,
+            path,
+            items: filtered.map(g => ({
+              title: g.title,
+              author: g.author,
+              last_updated: g.last_updated,
+              description: g.description,
+            })),
+          }),
+        ]}
+      />
+
       <div className="relative w-full h-[150px] rounded-2xl overflow-hidden mb-6">
         {/* Flèche retour */}
         <div className="absolute top-4 left-4 z-10 h-[32px] w-[32px]">
@@ -172,7 +176,7 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
           </Link>
         </div>
 
-        {/* Titre de la catégorie */}
+        {/* Titre */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 px-4 text-center w-full max-w-[90%]">
           <h1 className="text-white font-bold drop-shadow-sm leading-tight uppercase tracking-wide text-balance text-[clamp(1.25rem,5vw,2.25rem)]">
             {metaTitle}
@@ -187,37 +191,6 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
         </div>
       )}
 
-      {category === 'general-guides' ? (
-        <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
-          This section contains <strong>general guides</strong> covering fundamental systems, core mechanics, and
-          beginner-friendly tips that apply across all game modes in Outerplane. If you&apos;re missing a specific
-          topic, feel free to suggest it on our&nbsp;
-          <Link
-            href="https://discord.gg/keGhVQWsHv"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline inline-flex items-center gap-1 !text-amber-300"
-          >
-            <FaDiscord /> EvaMains Discord
-          </Link>
-          .
-        </p>
-      ) : (
-        <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
-          This section contains all available guides for the <strong>{metaTitle}</strong> mode in Outerplane. If a
-          specific guide is missing, you can suggest it directly via our&nbsp;
-          <Link
-            href="https://discord.gg/keGhVQWsHv"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline inline-flex items-center gap-1 text-amber-300"
-          >
-            <FaDiscord /> EvaMains Discord
-          </Link>
-          .
-        </p>
-      )}
-
       {category === 'adventure' ? (
         <AdventureGuideGrid items={filtered} />
       ) : category === 'monad-gate' ? (
@@ -229,27 +202,6 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
       ) : (
         <GuideCardGrid items={filtered} />
       )}
-
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'CollectionPage',
-            name: metaTitle,
-            description: metaDesc,
-            mainEntity: filtered.map((g) => ({
-              '@type': 'Article',
-              headline: g.title,
-              author: { '@type': 'Person', name: g.author },
-              datePublished: g.last_updated,
-              description: g.description,
-            })),
-          }),
-        }}
-      />
     </div>
   )
 }

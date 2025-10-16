@@ -441,12 +441,27 @@ const jp = {
   'tierIndex.collection.title': 'アウタープレーン ティアリスト — {monthYear}',
   'tierIndex.collection.desc': 'PvE と PvP のキャラランキングを選択できます。',
 
-'item.meta.title': '{name} | Outerpedia',
-'item.meta.desc': '{name} の詳細・ステータス・効果まとめ。',
-'item.meta.ogTitle': '{name} | Outerpedia',
-'item.meta.ogDesc': '{name} のステータスと効果をチェック。',
-'item.meta.twTitle': '{name} | ',
-'item.meta.twDesc': '{name} のステータス・効果情報。',
+  'item.meta.title': '{name} | Outerpedia',
+  'item.meta.desc': '{name} の詳細・ステータス・効果まとめ。',
+  'item.meta.ogTitle': '{name} | Outerpedia',
+  'item.meta.ogDesc': '{name} のステータスと効果をチェック。',
+  'item.meta.twTitle': '{name} | ',
+  'item.meta.twDesc': '{name} のステータス・効果情報。',
+  // jp.ts
+  'guides.cat.meta.title': '{cat} | Outerpedia',
+  'guides.cat.meta.desc': '{desc}',
+  'guides.cat.og.title': '{cat} | Outerpedia',
+  'guides.cat.og.desc': '{desc}',
+  'guides.cat.tw.title': '{cat}',
+  'guides.cat.tw.desc': '{desc}',
+  // jp.ts
+  'guides.detail.meta.title': '{guide} | {cat} | Outerpedia',
+  'guides.detail.meta.desc': '{cat} {guide} {desc}',
+  'guides.detail.og.title': '{guide} | {cat} | Outerpedia',
+  'guides.detail.og.desc': '{cat} {guide} {desc}',
+  'guides.detail.tw.title': '{guide} | {cat}',
+  'guides.detail.tw.desc': '{desc}',
+
 
 
 
