@@ -462,6 +462,27 @@ const en = {
   'guides.detail.tw.title': '{guide} | {cat}',
   'guides.detail.tw.desc': '{desc}',
 
+  'equip.meta.title': 'Equipments – Outerpedia',
+  'equip.meta.desc': 'Browse all equipment in Outerplane: weapons, accessories, talismans, sets, and exclusive equipment.',
+  'equip.og.title': 'Equipments – Outerpedia',
+  'equip.og.desc': 'All Outerplane equipment in one place: weapons, accessories, talismans, sets, and exclusive gear.',
+  'equip.twitter.title': 'Equipments',
+  'equip.twitter.desc': 'Browse weapons, accessories, talismans, sets, and exclusive equipment.',
+  // --- Characters SEO ---
+  'char.meta.title': '{name} | Character Details | Outerpedia',
+  'char.meta.desc': '{element} {class} {name} — skill breakdown, upgrade priority, ranking, exclusive equipment, and recommended sets.',
+  'char.og.title': '{name} | Character Details | Outerpedia',
+  'char.og.desc': '{element} {class} {name} — detailed overview, skills, gear builds, and tier placement.',
+  'char.twitter.title': '{name} | Outerplane Character',
+  'char.twitter.desc': '{element} {class} {name} — skills, ranking, and build recommendations.',
+  //
+  'chars.meta.title': 'Outerplane Characters – Full Database Updated {monthYear} | Outerpedia',
+  'chars.meta.desc': 'Explore all characters in Outerplane with detailed stats, skills, gear recommendations and exclusive equipment data. Updated {monthYear}, curated by the EvaMains Discord community.',
+  'chars.og.title': 'Outerplane Characters – Full Database Updated {monthYear} | Outerpedia',
+  'chars.og.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
+  'chars.twitter.title': 'Outerplane Characters – Updated {monthYear} | Outerpedia',
+  'chars.twitter.desc': 'Full character database for Outerplane: stats, skills, gear, exclusive equipment. Updated {monthYear} by EvaMains Discord.',
+
 
 
 

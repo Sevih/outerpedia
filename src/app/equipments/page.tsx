@@ -1,92 +1,103 @@
-import type { Metadata } from "next";
-import { getTenantServer } from '@/tenants/tenant.server'
+import type { Metadata } from 'next'
 import { Suspense } from 'react'
-import EquipmentsClient from "./EquipmentsClient";
-import weapons from "@/data/weapon.json";
-import accessories from "@/data/amulet.json";
-import talismans from "@/data/talisman.json";
-import sets from "@/data/sets.json";
-import eeData from "@/data/ee.json";
+import { getTenantServer } from '@/tenants/tenant.server'
 
-export const metadata: Metadata = {
-  title: "Equipments – Outerpedia",
-  description: "Browse all equipment in Outerplane.",
-  keywords: ["Outerplane", "Equipments", "Gear", "Stats", "Builds", "Outerpedia"],
-  alternates: {
-    canonical: "https://outerpedia.com/equipments",
-  },
-  openGraph: {
-    title: "Equipments – Outerpedia",
-    description: "Browse all equipment in Outerplane.",
-    url: "https://outerpedia.com/equipments",
-    type: "website",
-    images: [
-      {
-        url: "https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Inventory.png",
-        width: 150,
-        height: 150,
-        alt: "Outerpedia Equipments",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary",
-    title: "Equipments – Outerpedia",
-    description: "Browse all equipment in Outerplane.",
-    images: ["https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Inventory.png"],
-  },
-};
+import EquipmentsClient from './EquipmentsClient'
 
+// Données
+import weapons from '@/data/weapon.json'
+import accessories from '@/data/amulet.json'
+import talismans from '@/data/talisman.json'
+import sets from '@/data/sets.json'
+import eeData from '@/data/ee.json'
+
+// SEO unifié
+import { createPageMetadata } from '@/lib/seo'
+import JsonLd from '@/app/components/JsonLd'
+import { websiteLd, breadcrumbLd, equipmentsCollectionLd } from './jsonld'
+
+// ---------- Metadata (helper global) ----------
+export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
+  const path = '/equipments' as `/${string}`
+  const iconAbs = `https://${domain}/images/ui/nav/CM_Lobby_Button_Inventory.png` // ✅ PNG en metadata
+
+  return createPageMetadata({
+    path,
+    titleKey: 'equip.meta.title',        // ex: 'Equipments – Outerpedia'
+    descKey: 'equip.meta.desc',          // ex: 'Browse all equipment in Outerplane.'
+    ogTitleKey: 'equip.og.title',
+    ogDescKey: 'equip.og.desc',
+    twitterTitleKey: 'equip.twitter.title',
+    twitterDescKey: 'equip.twitter.desc',
+    keywords: ['Outerplane', 'Equipments', 'Gear', 'Stats', 'Builds', 'Outerpedia'],
+    image: {
+      url: iconAbs,
+      width: 150,
+      height: 150,
+      altFallback: 'Outerpedia Equipments',
+    },
+    ogType: 'website',
+    twitterCard: 'summary',
+  })
+}
+
+// ---------- Page ----------
 export default async function EquipmentsPage() {
-  const { key: langKey } = await getTenantServer()
+  const { key: langKey, domain } = await getTenantServer()
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "VideoGame",
-    "name": "Outerplane",
-    "url": "https://outerpedia.com/",
-    "description": "Outerpedia is a fan-made encyclopedia for the mobile RPG Outerplane. Browse equipments, characters, sets and more.",
-    "hasPart": [
-      ...weapons.map(w => ({
-        "@type": "CreativeWork",
-        "name": w.name,
-        "image": `https://outerpedia.com/images/equipment/${w.image}`
-      })),
-      ...accessories.map(a => ({
-        "@type": "CreativeWork",
-        "name": a.name,
-        "image": `https://outerpedia.com/images/equipment/${a.image}`
-      })),
-      ...sets.map((s, i) => {
-        const variants = ["Helmet", "Armor", "Gloves", "Shoes"];
-        const variant = variants[i % variants.length];
-        return {
-          "@type": "CreativeWork",
-          "name": s.name,
-          "image": `https://outerpedia.com/images/equipment/TI_Equipment_${variant}_06.webp`
-        };
-      }),
-      ...talismans.map(t => ({
-        "@type": "CreativeWork",
-        "name": t.name,
-        "image": `https://outerpedia.com/images/equipment/${t.image}.webp`
-      })),
-      ...Object.entries(eeData).map(([charKey, ee]) => ({
-        "@type": "CreativeWork",
-        "name": ee.name,
-        "image": `https://outerpedia.com/images/characters/ex/${charKey}.webp`
-      }))
-    ]
+  const path = '/equipments'
+  const iconAbs = `https://${domain}/images/ui/nav/CM_Lobby_Button_Inventory.png`
+
+  // Petites stats pour enrichir le JSON-LD (sans lister chaque item)
+  const counts = {
+    weapons: (weapons as unknown[]).length,
+    accessories: (accessories as unknown[]).length,
+    talismans: (talismans as unknown[]).length,
+    sets: (sets as unknown[]).length,
+    ee: Object.keys(eeData as Record<string, unknown>).length,
   }
 
-  return (
+  const pageTitle =
+    langKey === 'jp'
+      ? '装備一覧'
+      : langKey === 'kr'
+      ? '장비 목록'
+      : 'Equipments'
 
+  const pageDesc =
+    langKey === 'jp'
+      ? '『アウタープレーン』の全装備を一覧表示。武器・アクセサリー・タリスマン・セット・専用装備をチェック。'
+      : langKey === 'kr'
+      ? '‘아우터플레인’의 모든 장비를 한 곳에서 확인하세요. 무기, 액세서리, 탈리스만, 세트, 전용 장비.'
+      : 'Browse all equipment in Outerplane: weapons, accessories, talismans, sets, and exclusive equipment.'
+
+  return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {/* JSON-LD harmonisé */}
+      <JsonLd
+        json={[
+          websiteLd(domain),
+          breadcrumbLd(domain, {
+            home: langKey === 'jp' ? 'ホーム' : langKey === 'kr' ? '홈' : 'Home',
+            current: pageTitle,
+            currentPath: path,
+          }),
+          equipmentsCollectionLd(domain, {
+            title: `${pageTitle} – Outerpedia`,
+            description: pageDesc,
+            path,
+            imageUrl: iconAbs,
+            counts,
+            inLanguage: ['en', 'jp', 'kr'],
+          }),
+        ]}
+      />
+
       <Suspense fallback={<div>Loading...</div>}>
-        <EquipmentsClient lang={langKey} />;
+        <EquipmentsClient lang={langKey} />
       </Suspense>
     </>
   )
-
 }

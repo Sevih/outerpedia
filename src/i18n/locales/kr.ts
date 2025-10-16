@@ -462,7 +462,26 @@ const kr = {
   'guides.detail.tw.title': '{guide} | {cat}',
   'guides.detail.tw.desc': '{desc}',
 
-
+  'equip.meta.title': '장비 목록 – Outerpedia',
+  'equip.meta.desc': '‘아우터플레인’의 모든 장비를 한 곳에서 확인하세요: 무기, 액세서리, 탈리스만, 세트, 전용 장비.',
+  'equip.og.title': '장비 목록 – Outerpedia',
+  'equip.og.desc': '무기, 액세서리, 탈리스만, 세트, 전용 장비를 한눈에 확인.',
+  'equip.twitter.title': '장비 목록',
+  'equip.twitter.desc': '무기, 액세서리, 탈리스만, 세트, 전용 장비를 살펴보세요.',
+  // --- Characters SEO ---
+  'char.meta.title': '{name} | 캐릭터 상세정보 | Outerpedia',
+  'char.meta.desc': '{element} 속성 {class} 클래스 {name} — 스킬 설명, 강화 우선순위, 랭킹, 전용 장비 및 추천 세트.',
+  'char.og.title': '{name} | 캐릭터 상세정보 | Outerpedia',
+  'char.og.desc': '{element} 속성 {class} 클래스 {name} — 스킬, 장비 빌드 및 티어 정보.',
+  'char.twitter.title': '{name} | 아우터플레인 캐릭터',
+  'char.twitter.desc': '{element} 속성 {class} 클래스 {name} — 스킬, 랭킹, 빌드 추천.',
+   // ...
+  'chars.meta.title': '아우터플레인 캐릭터 데이터베이스 — {monthYear} 업데이트 | Outerpedia',
+  'chars.meta.desc': '모든 캐릭터 정보: 상세 스탯, 스킬, 장비 추천, 전용 장비 데이터. {monthYear} 업데이트 (EvaMains Discord).',
+  'chars.og.title': '아우터플레인 캐릭터 — {monthYear} 업데이트 | Outerpedia',
+  'chars.og.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',
+  'chars.twitter.title': '캐릭터 목록 — {monthYear} 업데이트 | Outerpedia',
+  'chars.twitter.desc': '스탯, 스킬, 장비, 전용 장비까지 모두 모은 DB. {monthYear} 업데이트.',
 
 
 
