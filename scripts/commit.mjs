@@ -206,7 +206,7 @@ function insertChangelogTsBlock(block) {
     }
 
     logStep("✏️  Mise à jour package.json via npm run set-version …");
-    sh(`npm run set-version "${newVersion}"`);
+    sh(`npm run set-version "${newVersion}" && npm run inject-sw-version`);
 
     if (SKIP_BUILD) console.log("[skip-build] Build ignoré.");
     else { logStep("🏗 Lancement du build …"); sh("npm run build"); }
