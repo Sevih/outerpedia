@@ -9,7 +9,7 @@ function isString(v: unknown): v is string {
   return typeof v === 'string'
 }
 
-/** Vérifie qu'un item du tableau est bien un EventDef valide (sans any) */
+/** Vérifie qu'un item du tableau est bien un EventDef valide */
 function isEventDef(x: unknown): x is EventDef {
   if (!isRecord(x)) return false
 

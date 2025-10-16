@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import * as HoverCard from '@radix-ui/react-hover-card'; // ✅ On utilise HoverCard directement
+import * as HoverCard from '@radix-ui/react-hover-card'
 import React from 'react'
 
 import ee from '@/data/ee.json'
@@ -9,112 +9,130 @@ import talisman from '@/data/talisman.json'
 import weapon from '@/data/weapon.json'
 import amulet from '@/data/amulet.json'
 import sets from '@/data/sets.json'
-import { ClassIcon } from '@/app/components/ClassIcon'
 
+import type { ExclusiveEquipment, Talisman, Weapon, Accessory, ArmorSet } from '@/types/equipment'
+
+import { ClassIcon } from '@/app/components/ClassIcon'
 import { ClassType } from '@/types/enums'
+
+// i18n + localize
+import { useI18n } from '@/lib/contexts/I18nContext'
+import { l } from '@/lib/localize'
 
 function isValidClass(c: unknown): c is ClassType {
   return typeof c === 'string' && ['Striker', 'Defender', 'Ranger', 'Healer', 'Mage'].includes(c)
 }
-
-
 
 type Props = {
   name: string
   type: 'ee' | 'talisman' | 'weapon' | 'amulet' | 'set'
 }
 
-type BaseItem = {
-  name: string
-  icon?: string
-  image?: string
-  effect?: string
-  effect10?: string
-  icon_effect?: string
-  effect_desc1?: string
-  effect_desc4?: string | null
-  class?: string | null
+type EquipmentUnion = ExclusiveEquipment | Talisman | Weapon | Accessory | ArmorSet
+
+type Obtainable = {
   source?: string | null
   boss?: string | null
   mode?: string | null
 }
 
+function isObtainable(v: unknown): v is Obtainable {
+  return !!v && typeof v === 'object' && ('source' in v || 'boss' in v || 'mode' in v)
+}
+
+
 export default function EquipmentInlineTag({ name, type }: Props) {
-  let item: BaseItem | undefined
+  const { lang, t } = useI18n() // 'en' | 'jp' | 'kr'
+
+  let item: EquipmentUnion | undefined
   let iconPath = ''
   let effectText = ''
   let subEffect = ''
+  let displayName = name
 
-  let customSetTooltip = null
+  let customSetTooltip: React.ReactNode = null
+
+  const obtain: { source?: string; bossOrMode?: string } | null = isObtainable(item)
+  ? {
+      source: item.source ?? undefined,
+      bossOrMode: [item.boss, item.mode].filter(Boolean).join(' ') || undefined,
+    }
+  : null
+
+  const hasObtain = !!(obtain && (obtain.source || obtain.bossOrMode))
+
+
 
   switch (type) {
     case 'ee': {
-      const match = Object.values(ee).find((e) => (e as BaseItem).name === name) as BaseItem | undefined
+      const match = Object.values(ee).find((e) => (e as ExclusiveEquipment).name === name) as ExclusiveEquipment | undefined
       if (match) {
         item = match
-        iconPath = `/images/characters/ex/TI_Equipment_EX_${item.icon}.png`
-        effectText = item.effect || ''
-        subEffect = item.effect10 || ''
+        displayName = l(item, 'name', lang)
+        // EE: icon_effect
+        iconPath = `/images/characters/ex/${item.icon_effect}.webp`
+        effectText = l(item, 'effect', lang)
+        subEffect  = l(item, 'effect10', lang)
       }
       break
     }
 
     case 'talisman': {
-      item = talisman.find((t) => t.name === name)
-      if (item) {
-        iconPath = `/images/equipment/TI_Equipment_Talisman_${item.icon}.webp`
-        effectText = item.effect || ''
-        subEffect = item.effect10 || ''
+      const match = (talisman as Talisman[]).find((t) => t.name === name)
+      if (match) {
+        item = match
+        displayName = l(item, 'name', lang)
+        // Talisman: image via icon_item
+        iconPath = `/images/equipment/${item.image}.webp`
+        effectText = l(item, 'effect_desc1', lang)
+        subEffect  = l(item, 'effect_desc4', lang)
       }
       break
     }
 
     case 'weapon': {
-      item = weapon.find((w) => w.name === name)
-      if (item) {
-        iconPath = `/images/equipment/${item.image}`
-        effectText = item.effect_desc1 || ''
-        subEffect = item.effect_desc4 || ''
+      const match = (weapon as Weapon[]).find((w) => w.name === name)
+      if (match) {
+        item = match
+        displayName = l(item, 'name', lang)
+        iconPath = `/images/equipment/${item.image}.webp`
+        subEffect  = l(item, 'effect_desc4', lang)
       }
       break
     }
 
-    case 'amulet': {
-      item = amulet.find((a) => a.name === name)
-      if (item) {
-        iconPath = `/images/equipment/${item.image}`
-        effectText = `Tier 0: ${item.effect_desc1 ?? ''}`
-        subEffect = `Tier 4: ${item.effect_desc4 ?? ''}`
+    case 'amulet': { // Accessory
+      const match = (amulet as Accessory[]).find((a) => a.name === name)
+      if (match) {
+        item = match
+        displayName = l(item, 'name', lang)
+        iconPath = `/images/equipment/${item.image}.webp`
+        const tier4 = l(item, 'effect_desc4', lang)
+        subEffect  = tier4 ? `${t('items.tier4')}: ${tier4}` : ''
       }
       break
     }
 
     case 'set': {
-      const match = sets.find((s) => s.name === name)
+      const match = (sets as ArmorSet[]).find((s) => s.name === name)
       if (match) {
-        item = {
-          name: match.name,
-          source: match.source ?? null,
-          boss: match.boss ?? null,
-          mode: match.mode ?? null,
-        }
-        iconPath = `/images/ui/effect/TI_Icon_Set_Enchant_${match.set_icon}.webp`
+        // on garde un mini-objet pour footer; mais on peut aussi utiliser match directement
+        item = match
+        displayName = l(match as unknown as Record<string, unknown>, 'name', lang)
+        iconPath = `/images/ui/effect/${match.set_icon}.webp`
 
-        const lines2 = []
-        const lines4 = []
+        const lines2: React.ReactNode[] = []
+        const lines4: React.ReactNode[] = []
 
 
-        if (match.effect_2_1) lines2.push(
-          <p key="2-0" className="text-white text-xs">Tier 0: {match.effect_2_1}</p>
+        const e24 = l(match as unknown as Record<string, unknown>, 'effect_2_4', lang)
+        const e44 = l(match as unknown as Record<string, unknown>, 'effect_4_4', lang)
+
+        if (e24) lines2.push(
+          <p key="2-4" className="text-amber-300 text-xs italic">{t('items.tier4')}: {e24}</p>
         )
-        if (match.effect_2_4) lines2.push(
-          <p key="2-4" className="text-amber-300 text-xs italic">Tier 4: {match.effect_2_4}</p>
-        )
-        if (match.effect_4_1) lines4.push(
-          <p key="4-0" className="text-white text-xs">Tier 0: {match.effect_4_1}</p>
-        )
-        if (match.effect_4_4) lines4.push(
-          <p key="4-4" className="text-amber-300 text-xs italic">Tier 4: {match.effect_4_4}</p>
+        if (e44) lines4.push(
+          <p key="4-4" className="text-amber-300 text-xs italic">{t('items.tier4')}: {e44}</p>
         )
 
         customSetTooltip = (
@@ -150,13 +168,13 @@ export default function EquipmentInlineTag({ name, type }: Props) {
           <span className="inline-block w-[24px] h-[24px] relative align-bottom">
             <Image
               src={iconPath}
-              alt={item.name}
+              alt={displayName}
               fill
               sizes="24px"
               className="object-contain relative z-10"
             />
           </span>
-          <span>{item.name}</span>
+          <span>{displayName}</span>
         </button>
       </HoverCard.Trigger>
 
@@ -170,17 +188,18 @@ export default function EquipmentInlineTag({ name, type }: Props) {
           <div className="bg-black p-1 rounded shrink-0">
             <Image
               src={iconPath}
-              alt={item.name}
+              alt={displayName}
               width={28}
               height={28}
               style={{ width: 28, height: 28 }}
               className="object-contain"
             />
           </div>
+
           <div className="flex flex-col">
             <span className="font-bold text-white text-sm leading-tight">
-              {item.name}
-              {item.class && isValidClass(item.class) && (
+              {displayName}
+              {'class' in item && item.class && isValidClass(item.class) && (
                 <span className="inline-block ml-1 align-middle">
                   <ClassIcon className={item.class} />
                 </span>
@@ -192,24 +211,31 @@ export default function EquipmentInlineTag({ name, type }: Props) {
             ) : (
               <>
                 {effectText && (
-                  <span className="text-white text-xs leading-snug whitespace-pre-line">{effectText}</span>
+                  <span className="text-white text-xs leading-snug whitespace-pre-line">
+                    {effectText}
+                  </span>
                 )}
                 {subEffect && (
-                  <span className="text-xs text-amber-300 italic mt-1">{subEffect}</span>
+                  <span className="text-xs text-amber-300 italic mt-1">
+                    {subEffect}
+                  </span>
                 )}
               </>
             )}
 
-            {/* BLOC AJOUTÉ */}
-            <div className="mt-2">
-              <p className="text-gray-400 font-semibold text-xs">Obtained from : </p>
-              <p className="text-gray-400 text-xs">
-                {item.source} <br />
-                {item.boss || item.mode}
-              </p>
-            </div>
+            {hasObtain && (
+  <div className="mt-2">
+    <p className="text-gray-400 font-semibold text-xs">{t('items.obtained')}</p>
+    <p className="text-gray-400 text-xs">
+      {obtain?.source ?? ''}
+      {obtain?.source && obtain?.bossOrMode ? <br /> : null}
+      {obtain?.bossOrMode ?? ''}
+    </p>
+  </div>
+)}
 
           </div>
+
           <HoverCard.Arrow className="fill-neutral-700 w-3 h-2" />
         </HoverCard.Content>
       </HoverCard.Portal>

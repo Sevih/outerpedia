@@ -27,12 +27,16 @@ import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import TagDisplayMini from '@/app/components/TagDisplayInline'
 import type { PartnerEntry } from '@/types/partners';
 import rawProsCons from '@/data/hero-pros-cons.json'
-import abbrev from '@/data/abbrev.json'
 import type { Talisman, Accessory, Weapon, ArmorSet } from '@/types/equipment'
 
 import formatEffectText from '@/utils/formatText'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TenantKey } from '@/tenants/config'
+import abbrevData from '@/data/abbrev.json'
+import { lRec } from '@/lib/localize'
+
+type AbbrevEntry = string | { en: string; jp?: string; kr?: string }
+const abbrev = abbrevData as Record<string, AbbrevEntry>
 
 type CharNameEntry = {
     Fullname: string;
@@ -1058,20 +1062,26 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     className="bg-black/30 border border-white/10 rounded-lg p-3 flex items-center gap-3 hover:bg-white/5 transition"
                                 >
                                     {entry.hero.map((slug: string) => {
-                                        const char = SLUG_TO_CHAR[slug];
-                                        const name = getLocalizedPartnerFullname(slug, langKey);
-                                        const id = char ? char.ID : undefined;
-                                        const shortName = (abbrev as Record<string, string>)[name] ?? name
+                                        const char = SLUG_TO_CHAR[slug]
+                                        const id = char?.ID
+
+                                        const localizedName = getLocalizedPartnerFullname(slug, langKey) // affichage
+                                        const enFull = char?.Fullname ?? localizedName                   // clé pour abbrev.json (EN si possible)
+
+                                        const ab = abbrev[enFull]
+                                        const shortName = ab
+                                            ? (typeof ab === 'string' ? ab : lRec(ab, langKey))            // abrév localisée
+                                            : localizedName
                                         return (
                                             <Link
                                                 key={slug}
                                                 href={`/characters/${slug}`}
                                                 className="flex-shrink-0 flex flex-col items-center text-center w-[60px]"
-                                                title={name}
+                                                title={localizedName}
                                             >
                                                 <Image
                                                     src={`/images/characters/atb/IG_Turn_${id ?? "unknown"}.webp`}
-                                                    alt={name}
+                                                    alt={localizedName}
                                                     width={48}
                                                     height={48}
                                                     className="rounded-full object-contain border border-white/10 group-hover:border-yellow-400/60 transition"
@@ -1101,8 +1111,8 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                 {/* Gear */}
                 <section id="gear" className="mt-6">
                     <h2 className="text-2xl font-bold text-white mb-4 text-center">
-                                {t('recommended_build_and_gear')}
-                            </h2>
+                        {t('recommended_build_and_gear')}
+                    </h2>
                     {recoData ? (
                         <RecommendedGearTabs
                             character={{ builds: recoData as Record<string, RecommendedGearBuild> }}
@@ -1113,9 +1123,9 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                         />
 
                     ) : (
-                            <p className="text-sm text-gray-400 text-center italic">
-                                {t('no_reco_gear')}
-                            </p>
+                        <p className="text-sm text-gray-400 text-center italic">
+                            {t('no_reco_gear')}
+                        </p>
                     )}
                 </section>
 

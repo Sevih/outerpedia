@@ -9,29 +9,27 @@
             "by making her too fast can make you waste alot of turns"
         ]
     },
-
     "tamara": {
         "pro": [
             "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE}",
-            "very flexible and can use in many team", "debuffing enemies with {D/BT_STAT|ST_DEF} {D/BT_SILENCE} {D/BT_MARKING} {D/BT_COOL_CHARGE}"
+            "very flexible and can use in many team",
+            "debuffing enemies with {D/BT_STAT|ST_DEF} {D/BT_SILENCE} {D/BT_MARKING} {D/BT_COOL_CHARGE}"
         ],
         "con": [
             "require alot of stats to use at minimum",
             "require max skills upgrade at minimum"
         ]
     },
-
     "charlotte": {
         "pro": [
             "easy to build",
-            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE}"
+            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK}"
         ],
         "con": [
             "her skillset are mainly to help mage class character",
             "not helpful for most of time"
         ]
     },
-
     "skadi": {
         "pro": [
             "easy to build",
@@ -41,7 +39,6 @@
             "want max skills upgrade"
         ]
     },
-
     "monad-eva": {
         "pro": [
             "have built-in {B/BT_CALL_BACKUP}",
@@ -59,6 +56,45 @@
         ],
         "con": [
             "don't have any form to cleanse debuffs outside {B/BT_IMMUNE}"
+        ]
+    },
+    "ame": {
+        "pro": [
+            "deal increased damage against bosses",
+            "have free critical chance"
+        ],
+        "con": [
+            "-"
+        ]
+    },
+    "rin": {
+        "pro": [
+            "strong at clearing all enemies at one",
+            "self buff with {B/BT_STAT|ST_CRITICAL_RATE}",
+            "damage increase everytime she using skill"
+        ],
+        "con": [
+            "weak against bosses unless have max Exclusive Equipment"
+        ]
+    },
+    "vlada": {
+        "pro": [
+            "easy to build with attack stat",
+            "can detonate {D/BT_DOT_BURN}",
+            "her ultimate skill reset if its kill enemy"
+        ],
+        "con": [
+            "want teammate that can extend {D/BT_DOT_BURN} for more damage"
+        ]
+    },
+    "rey": {
+        "pro": [
+            "strong against Irregular bosses",
+            "can get turns alot with {B/BT_ADDITIVE_TURN} and {B/BT_COOL_CHARGE} combined",
+            "can stop water or healer enemies from being revived"
+        ],
+        "con": [
+            "can waste too much turns or die by DoT debuffs"
         ]
     }
 }

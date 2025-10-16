@@ -4,10 +4,18 @@ import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react';
 import type { ElementType, ClassType } from '@/types/enums';
 import StarLevel from '@/app/components/StarLevel';
-import abbrev from '@/data/abbrev.json'
 import Image from 'next/image';
 import type { BadgeType, Entry } from '@/types/pull';
 import FocusSelect from '@/app/components/FocusSelect'
+import abbrevData from '@/data/abbrev.json'
+import { useI18n } from '@/lib/contexts/I18nContext'
+import { l, lRec } from '@/lib/localize'
+import slugToCharRaw from '@/data/_SlugToChar.json'
+import type { SlugToCharMap, SlugCharEntry } from '@/types/pull'
+const slugToChar = slugToCharRaw as SlugToCharMap
+
+type AbbrevEntry = string | { en: string; jp?: string; kr?: string };
+const abbrev = abbrevData as Record<string, AbbrevEntry>;
 
 function getMileageCost(kind: Kind): number {
     switch (kind) {
@@ -66,6 +74,7 @@ function getRing(r: 1 | 2 | 3, badge: BadgeType) {
 
 
 export default function PullSimClient() {
+    const { t, lang } = useI18n()
     const [kind, setKind] = useState<Kind>('all');
     const [mounted, setMounted] = useState(false);
     const [grantMileage, setGrantMileage] = useState(true);
@@ -127,7 +136,7 @@ export default function PullSimClient() {
 
     async function callApi(action: 'one' | 'ten' | 'exchange', exchangeSlug?: string) {
         if (kind !== 'all' && !focusSlug) {
-            setError('Select a focus before pulling on this banner.');
+            setError(t('pullSim.error.needFocus'));
             return;
         }
 
@@ -135,12 +144,12 @@ export default function PullSimClient() {
         // check mileage côté client pour l’exchange
         if (action === 'exchange') {
             if (kind === 'all') {
-                setError('No exchange on the All banner.');
+                setError(t('pullSim.error.noExchangeAll'));
                 return;
             }
             const cost = getMileageCost(kind);
             if (mileage < cost) {
-                setError(`Not enough mileage. Need ${cost}.`);
+                setError(t('pullSim.error.notEnoughMileage', { cost }));
                 return;
             }
         }
@@ -205,10 +214,10 @@ export default function PullSimClient() {
 
 
     const bannerLabel: Record<Kind, string> = {
-        all: 'All',
-        regular_focus: 'Rate Up Banner',
-        premium_standard: 'Premium Banner',
-        limited_rateup: 'Limited Banner',
+        all: t('pullSim.bannerType.all'),
+        regular_focus: t('pullSim.bannerType.rateup'),
+        premium_standard: t('pullSim.bannerType.premium'),
+        limited_rateup: t('pullSim.bannerType.limited'),
     };
     const canFocus = kind !== 'all';
     const hasFocus = !!focusSlug;
@@ -217,24 +226,24 @@ export default function PullSimClient() {
     return (
         <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
             {/* Header */}
-            <h1 className="text-2xl font-bold">Pull Simulator</h1>
+            <h1 className="text-2xl font-bold">{t('pullSim.title')}</h1>
 
             {/* Controls */}
             <div className="rounded-xl border border-neutral-800 bg-neutral-900/40">
                 <div className="p-4 border-b border-neutral-800">
-                    <div className="text-base font-medium">Banner & Focus</div>
-                    <div className="text-sm text-neutral-400">Select your banner; set a 3★ focus when applicable.</div>
+                    <div className="text-base font-medium">{t('pullSim.bannerFocus.title')}</div>
+                    <div className="text-sm text-neutral-400">{t('pullSim.bannerFocus.subtitle')}</div>
                 </div>
                 <div className="p-4 grid gap-4 sm:grid-cols-2">
                     {/* Banner */}
                     <div className="space-y-2">
-                        <label className="text-sm text-neutral-300">Banner</label>
+                        <label className="text-sm text-neutral-300">{t('pullSim.banner')}</label>
                         <select
                             value={kind}
                             onChange={(e) => setKind(e.target.value as Kind)}
                             className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         >
-                            <option value="all">{bannerLabel.all} (Limited & Premium include)</option>
+                            <option value="all">{bannerLabel.all} {t('pullSim.bannerType.allHint')}</option>
                             <option value="regular_focus">{bannerLabel.regular_focus}</option>
                             <option value="premium_standard">{bannerLabel.premium_standard}</option>
                             <option value="limited_rateup">{bannerLabel.limited_rateup}</option>
@@ -244,7 +253,14 @@ export default function PullSimClient() {
                     {/* Focus */}
                     {kind !== 'all' && (
                         <FocusSelect
-                            options={focusOptions.map(o => ({ slug: o.slug, name: o.name }))}
+                            options={focusOptions.map(o => {
+                                const entry: SlugCharEntry | undefined = slugToChar[o.slug]; // { Fullname, Fullname_jp, Fullname_kr, ... }
+                                const enFull = entry?.Fullname ?? o.name;                  // clé pour abbrev.json
+                                const localized = entry ? l(entry, 'Fullname', lang) : o.name;
+                                const ab = abbrev[enFull];
+                                const display = ab ? (typeof ab === 'string' ? ab : lRec(ab, lang)) : localized;
+                                return { slug: o.slug, name: display };
+                            })}
                             value={focusSlug}
                             onChange={setFocusSlug}
                             disabled={focusOptions.length === 0}
@@ -256,8 +272,8 @@ export default function PullSimClient() {
                     {/* Mileage toggle */}
                     <div className="sm:col-span-2 flex items-center justify-between rounded-md border border-neutral-800 px-3 py-2">
                         <div className="space-y-0.5">
-                            <div className="text-sm text-neutral-200">Count Mileage</div>
-                            <p className="text-xs text-neutral-400">Track mileage on pulls and exchanges.</p>
+                            <div className="text-sm text-neutral-200">{t('pullSim.mileage.toggle.title')}</div>
+                            <p className="text-xs text-neutral-400">{t('pullSim.mileage.toggle.desc')}</p>
                         </div>
                         {/* --- SWITCH animé on/off --- */}
                         <button
@@ -301,7 +317,7 @@ export default function PullSimClient() {
                         onClick={() => callApi('one')}
                         className="min-w-[110px] rounded-md bg-blue-600 px-4 py-2 text-sm font-medium hover:bg-blue-500 disabled:opacity-50"
                     >
-                        {loading === 'one' ? 'Pulling…' : 'Draw 1'}
+                        {loading === 'one' ? t('pullSim.btn.pulling1') : t('pullSim.btn.draw1')}
                     </button>
 
                     <button
@@ -309,23 +325,23 @@ export default function PullSimClient() {
                         onClick={() => callApi('ten')}
                         className="min-w-[110px] rounded-md bg-green-600 px-4 py-2 text-sm font-medium hover:bg-green-500 disabled:opacity-50"
                     >
-                        {loading === 'ten' ? 'Pulling 10…' : 'Draw 10'}
+                        {loading === 'ten' ? t('pullSim.btn.pulling10') : t('pullSim.btn.draw10')}
                     </button>
 
                     <div className="mx-1 hidden h-6 w-px self-center bg-neutral-800 sm:block" />
 
-                    
+
                     <button
                         disabled={!mounted || loading !== null || !focusSlug || kind === 'all' || mileage < cost}
                         onClick={() => callApi('exchange', focusSlug)}
                         className="rounded-md bg-neutral-800 px-4 py-2 text-sm font-medium hover:bg-neutral-700 disabled:opacity-50"
                         title="Échange le mileage contre une unité focus (si cap atteint)"
                     >
-                        {loading === 'exchange' ? 'Exchanging…' : 'Exchange mileage → Focus'}
+                        {loading === 'exchange' ? t('pullSim.btn.exchanging') : t('pullSim.btn.exchange')}
                     </button>
 
                     <div className="ml-auto flex items-center gap-2 text-sm">
-                        <span className="text-neutral-400">Mileage:</span>
+                        <span className="text-neutral-400">{t('pullSim.mileage')}</span>
                         <span className="inline-flex items-center rounded-md bg-neutral-800 px-2 py-1 text-xs font-semibold">
                             {mileage}
                         </span>
@@ -333,7 +349,7 @@ export default function PullSimClient() {
                         {focusSlug && (
                             <>
                                 <span className="text-neutral-500">•</span>
-                                <span className="text-neutral-400">Focus hits:</span>
+                                <span className="text-neutral-400">{t('pullSim.focusHits')}</span>
                                 <span className="inline-flex items-center rounded-md bg-neutral-800 px-2 py-1 text-xs font-semibold">
                                     {focusCount}
                                 </span>
@@ -373,11 +389,19 @@ export default function PullSimClient() {
 }
 
 function PullCardTile({ entry }: { entry: PullEntry }) {
+    const { lang } = useI18n()
     if (!entry?.pick) return null
+
     const { pick } = entry
     const r = Number(entry.rarity) as 1 | 2 | 3
-    const shortName = (abbrev as Record<string, string>)[pick.name] ?? pick.name
     const portrait = `/images/characters/atb/IG_Turn_${pick.id}.webp`
+
+    const charEntry: SlugCharEntry | undefined = slugToChar[pick.slug];
+    const enFull = charEntry?.Fullname ?? pick.name;         // clé EN pour abbrev.json
+    const localizedName = charEntry ? l(charEntry, 'Fullname', lang) : pick.name;
+    const ab = abbrev[enFull];
+    const shortName = ab ? (typeof ab === 'string' ? ab : lRec(ab, lang)) : localizedName;
+
 
     const tone = getTone(r, pick.badge)
     const ring = getRing(r, pick.badge)
@@ -388,29 +412,26 @@ function PullCardTile({ entry }: { entry: PullEntry }) {
             className={`block rounded-lg border bg-gradient-to-br ${tone} ${ring} p-1.5 hover:scale-[1.02] transition-transform`}
         >
             <div className="flex flex-col items-center text-center gap-1">
-                {/* Image carrée compacte */}
+                {/* Image */}
                 <div className="h-14 w-14 overflow-hidden rounded-md relative">
                     <Image
                         src={portrait}
-                        alt={pick.name}
+                        alt={localizedName}
                         fill
                         className="object-cover"
-                        onError={(e) => {
-                            (e.currentTarget as HTMLImageElement).style.display = 'none';
-                        }}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
                     />
                 </div>
 
-                {/* Ligne icônes compacte */}
-
+                {/* Badges */}
                 <div className="flex items-center gap-2 leading-none">
                     <RarityBadge rarity={r} />
                     <ElementIcon element={pick.element as ElementType} size={20} />
                     <ClassIcon className={pick.class as ClassType} size={20} />
                 </div>
 
-                {/* Nom */}
-                <div className="w-full truncate text-[14px] font-medium" title={pick.name}>
+                {/* Nom (abrégé localisé si dispo) */}
+                <div className="w-full truncate text-[14px] font-medium" title={localizedName}>
                     {shortName}
                 </div>
             </div>
@@ -418,11 +439,13 @@ function PullCardTile({ entry }: { entry: PullEntry }) {
     )
 }
 
+
 function RarityBadge({ rarity }: { rarity: 1 | 2 | 3 }) {
+    const { t } = useI18n()
     return (
         <span className="inline-flex items-center gap-0.5 rounded px-1 py-0.5 text-[11px] font-semibold">
             <StarLevel levelLabel={String(rarity)} size={20} />
-            <span className="sr-only">{rarity} star</span>
+            <span className="sr-only">{t('pullSim.sr.rarity', { rarity })}</span>
         </span>
     );
 }

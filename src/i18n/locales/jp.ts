@@ -4,7 +4,6 @@ const jp = {
   'nav.tierlist': 'ティアリスト',
   'nav.utilities': 'ユーティリティ',
   'nav.guides': 'ガイド',
-
   "nav.characters_short": "キャラ",
   "nav.equipment_short": "装備",
   "nav.tierlist_short": "ティア",
@@ -32,8 +31,6 @@ const jp = {
   'coupon.redeem.android': '<strong>Android端末の場合：</strong> ゲーム内の <strong>設定 &gt; アカウント &gt; クーポン入力</strong> から入力できます。',
   'coupon.redeem.ios': '<strong>iOS端末の場合：</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">こちら</a> で入力し、<a href="https://imgur.com/a/8gStkbJ" class="underline text-cyan-400">会員情報</a> を確認してください。',
   'general.endsin': '終了まで',
-
-
 
   //community event
   "events.history.desc_active": "Outerplane のイベント一覧（開催中: {active}、合計: {total}）",
@@ -89,7 +86,6 @@ const jp = {
   'toc.pros_cons': '長所と短所',
   'pros.label': '長所',
   'cons.label': '短所',
-
   'home.newTo': '🧭 Outerplaneを初めてプレイしますか？',
   'home.newTo.desc': '初心者向けのガイドで冒険を始めましょう：',
   'home.newTo.links.freeHeroes': '無料ヒーロー & スタートバナー',
@@ -138,14 +134,12 @@ const jp = {
   "skills_note": "ここに表示されるスキルは最小強化での内容です。ただし、バーストスキルによるバフ／デバフは表示に含まれます。",
   "recommended_build_and_gear": "おすすめビルド＆装備",
   "no_reco_gear": "このキャラクターのおすすめ装備情報はまだありません。",
-
   "stats.health": "体力",
   "stats.defense": "防御",
   "stats.evasion": "回避",
   "stats.accuracy": "命中",
   "stats.speed": "速度",
   "stats.attack": "攻撃",
-
   "substat_priority": "サブステ優先度",
   "weapons": "武器",
   "accessories": "アクセサリー",
@@ -155,7 +149,6 @@ const jp = {
   "notes": "メモ",
   "substat_icon_alt": "サブステアイコン",
   "note_icon_alt": "メモアイコン",
-
   'SYS_CLASS_DEFENDER': '防御型',
   'SYS_CLASS_ATTACKER': '攻撃型',
   'SYS_CLASS_STRIKER': '攻撃型',
@@ -163,7 +156,6 @@ const jp = {
   'SYS_CLASS_MAGE': '魔法型',
   'SYS_CLASS_HEALER': '回復型',
   'SYS_CLASS_PRIEST': '回復型',
-
   'SYS_CLASS_PASSIVE_DEFENDER': 'ターン開始時、APが5回復する。ダメージを受けた時、APが35回復する。防御力が15%UPする。',
   'SYS_CLASS_PASSIVE_ATTACKER': 'ターン開始時、APが5回復する。ダメージを受けた時、APが20回復する。会心率が5%UPする。',
   'SYS_CLASS_PASSIVE_STRIKER': 'ターン開始時、APが5回復する。ダメージを受けた時、APが20回復する。会心率が5%UPする。',
@@ -171,7 +163,6 @@ const jp = {
   'SYS_CLASS_PASSIVE_MAGE': 'ターン開始時、APが5回復する。スキル使用時、個別AP獲得する。攻撃力が10%UPする。',
   'SYS_CLASS_PASSIVE_PRIEST': 'ターン開始時、APが5回復する。味方がダメージを受けた時、APが25回復する。HPが10%UPする。',
   'SYS_CLASS_PASSIVE_HEALER': 'ターン開始時、APが5回復する。味方がダメージを受けた時、APが25回復する。HPが10%UPする。',
-
   'SYS_CLASS_NAME_ATTACKER': 'アタッカー',
   'SYS_CLASS_NAME_BRUISER': 'ブルーザー',
   'SYS_CLASS_NAME_WIZARD': 'ウィザード',
@@ -182,7 +173,6 @@ const jp = {
   'SYS_CLASS_NAME_PHALANX': 'ファランクス',
   'SYS_CLASS_NAME_RELIEVER': 'リリーバー',
   'SYS_CLASS_NAME_SAGE': 'セージ',
-
   'SYS_CLASS_INFO_ATTACKER': '高い攻撃力で敵を粉砕する勇猛な戦士。',
   'SYS_CLASS_INFO_BRUISER': '攻防バランスが良く、長期戦に特化した喧嘩師。',
   'SYS_CLASS_INFO_WIZARD': '強力なスキルで戦場を圧倒する魔法使い。',
@@ -198,7 +188,6 @@ const jp = {
   'SYS_ELEMENT_NAME_EARTH': '地',
   'SYS_ELEMENT_NAME_LIGHT': '光',
   'SYS_ELEMENT_NAME_DARK': '闇',
-
   'SYS_STAT_ATK': '攻撃力',
   'SYS_STAT_DEF': '防御力',
   'SYS_STAT_HP': '体力',
@@ -217,13 +206,11 @@ const jp = {
   'SYS_STAT_HH_PERCENT': '被ダメージ回復%',
   'SYS_STAT_EVA': '回避',
   'SYS_STAT_ACC': '命中',
-
   "equipments_tabs.weapon": "武器",
   "equipments_tabs.accessory": "アクセサリー",
   "equipments_tabs.armor": "セット装備",
   "equipments_tabs.talisman": "タリスマン",
   "equipments_tabs.exclusive": "専用装備",
-
   "toc.overview": "概要",
   "toc.base_stats": "基本ステータス",
   "toc.ee_transcend": "専用装備と超越",
@@ -250,7 +237,6 @@ const jp = {
   "items.lv10": "Lv.10",
   "items.na": "N/A",
   "items.secondMainstats": "追加メインステータス",
-
   "items.classRestriction": "クラス制限：",
   "items.rarity": "レア度：",
   "items.baseEffect": "基本効果：",
@@ -268,8 +254,60 @@ const jp = {
   "talisman.info": "タリスマン情報",
   "talisman.showMore": "詳細を表示",
   "talisman.showLess": "詳細を非表示",
-  "talisman.noLv10": "追加効果なし"
+  "talisman.noLv10": "追加効果なし",
 
+  //tools
+  //gear usages
+  'gear.notice.line1': '以下の統計は Evamains 推奨ビルドのデータに基づいています。',
+  'gear.notice.line2': 'カウントが 0 でも「弱い」という意味ではなく、現在の推奨に含まれていないだけです。',
+  'table.name': '名前',
+  'table.usedBy': '使用数',
+  'table.characters': 'キャラクター',
+  'fullList': '全リスト',
+  'mostUsed': '最も使用された',
+  // pullsim
+  'pullSim.title': '召喚シミュレーター',
+  'pullSim.bannerFocus.title': 'バナー＆ピックアップ',
+  'pullSim.bannerFocus.subtitle': '召喚バナーを選択し、必要に応じて★3ピックアップを設定してください。',
+  'pullSim.banner': 'バナー',
+  'pullSim.bannerType.all': 'すべて',
+  'pullSim.bannerType.rateup': 'レートアップバナー',
+  'pullSim.bannerType.premium': 'プレミアムバナー',
+  'pullSim.bannerType.limited': '限定バナー',
+  'pullSim.btn.draw1': '1回召喚',
+  'pullSim.btn.draw10': '10回召喚',
+  'pullSim.btn.pulling1': '召喚中…',
+  'pullSim.btn.pulling10': '10回召喚中…',
+  'pullSim.btn.exchange': 'マイレージ交換 → ピックアップ',
+  'pullSim.btn.exchanging': '交換中…',
+  'pullSim.mileage': 'マイレージ',
+  'pullSim.focusHits': 'ピックアップ獲得数',
+  'pullSim.error.needFocus': 'このバナーで召喚する前にピックアップを選択してください。',
+  'pullSim.error.noExchangeAll': '「すべて」バナーでは交換できません。',
+  'pullSim.error.notEnoughMileage': 'マイレージが不足しています。必要：{cost}',
+  'pullSim.sr.rarity': '{rarity}★',
+  'pullSim.mileage.toggle.title': 'マイレージをカウント',
+  'pullSim.mileage.toggle.desc': '召喚および交換時のマイレージを追跡します。',
+  'pullSim.bannerType.allHint': '（限定＆プレミアムを含む）',
+
+
+
+  //SEO
+  'gearUsage.meta.title': 'アウタープレーン 装備使用統計 – {monthYear} | Outerpedia',
+  'gearUsage.meta.desc': 'EvaMains Discordコミュニティが作成したビルドにおける、最も推奨される武器・アクセサリー・セットを確認できます。{monthYear} 更新。',
+  'gearUsage.og.title': 'アウタープレーン 装備使用統計 – {monthYear} | Outerpedia',
+  'gearUsage.og.desc': 'EvaMainsコミュニティの推奨ビルドで最も頻繁に使用されている武器・アクセサリー・セットを確認しましょう。{monthYear} 更新。',
+  'gearUsage.og.imageAlt': '装備使用統計 – Outerpedia',
+  'gearUsage.twitter.title': 'アウタープレーン 装備使用統計 – {monthYear} | Outerpedia',
+  'gearUsage.twitter.desc': 'EvaMains作成のビルドで最も多く使用されている武器・セット・アクセサリー。{monthYear} 更新。',
+  'gearUsage.keyword.stats': '装備統計',
+  'gearUsage.keyword.usage': '装備使用',
+  'gearUsage.keyword.weapons': '武器',
+  'gearUsage.keyword.amulets': 'アクセサリー',
+  'gearUsage.keyword.sets': 'セット',
+  //JSON-LD
+  'nav.home': 'ホーム',
+  'gearUsage.meta.breadcrumb': '装備使用統計',
 
 
 

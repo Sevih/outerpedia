@@ -43,7 +43,7 @@ export default function WeaponInlineTag({
     const defaultAlignClass = triggerStyle?.verticalAlign ? '' : 'align-bottom'
     const sizePx = `${size}px`
 
-    console.log(effectLv4)
+   //console.log(effectLv4)
 
     return (
         <HoverCard.Root openDelay={0} closeDelay={0}>

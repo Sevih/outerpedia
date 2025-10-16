@@ -1,23 +1,107 @@
 {
-    "Tamamo-no-Mae": "Tamamo",
-    "Kitsune of Eternity Tamamo-no-Mae": "E.Tamamo",
-    "Gnosis Nella": "G.Nella",
-    "Gnosis Dahlia": "G.Dahlia",
-    "Monad Eva": "MEva",
-    "Poolside Trickster Regina": "P.Regina",
-    "Holy Night's Blessing Dianne": "H.Dianne",
-    "Gnosis Beth": "G.Beth",
-    "Bell Cranel": "Bell",
-    "Ais Wallenstein": "Ais",
-    "Demiurge Drakhan": "D.Drakhan",
-    "Omega Nadja": "O.Nadja",
-    "Demiurge Astei": "D.Astei",
-    "Demiurge Delta": "D.Delta",
-    "Demiurge Vlada": "D.Vlada",
-    "Demiurge Stella":"D.Stella",
-    "Demiurge Luna":"D.Luna",
-    "Ryu Lion":"Ryu",
-    "Hanbyul Lee":"Byul",
-    "Naru Kang": "Naru",
-    "Summer Knight's Dream Ember" : "S.Ember"
+    "Tamamo-no-Mae": {
+        "en": "Tamamo",
+        "jp": "タマモ",
+        "kr": "타마모"
+    },
+    "Kitsune of Eternity Tamamo-no-Mae": {
+        "en": "E.Tamamo",
+        "jp": "E.タマモ",
+        "kr": "E.타마모"
+    },
+    "Demiurge Drakhan": {
+        "en": "D.Drakhan",
+        "jp": "D.ドレイカーン",
+        "kr": "D.드레이칸"
+    },
+    "Demiurge Astei": {
+        "en": "D.Astei",
+        "jp": "D.アステ",
+        "kr": "D.아스테"
+    },
+    "Summer Knight's Dream Ember": {
+        "en": "S.Ember",
+        "jp": "S.エンバー",
+        "kr": "S.엠버"
+    },
+    "Ais Wallenstein": {
+        "en": "Ais",
+        "jp": "アイズ",
+        "kr": "아이즈"
+    },
+    "Bell Cranel": {
+        "en": "Bell",
+        "jp": "ベル",
+        "kr": "벨"
+    },
+    "Ryu Lion": {
+        "en": "Ryu",
+        "jp": "リュー",
+        "kr": "류"
+    },
+    "Gnosis Beth": {
+        "en": "G.Beth",
+        "jp": "G.ベス",
+        "kr": "G.베스"
+    },
+    "Gnosis Dahlia": {
+        "en": "G.Dahlia",
+        "jp": "G.ダリア",
+        "kr": "G.달리아"
+    },
+    "Gnosis Nella": {
+        "en": "G.Nella",
+        "jp": "G.ネラ",
+        "kr": "G.넬라"
+    },
+    "Monad Eva": {
+        "en": "MEva",
+        "jp": "Mエヴァ",
+        "kr": "M에바"
+    },
+    "Poolside Trickster Regina": {
+        "en": "P.Regina",
+        "jp": "P.レジーナ",
+        "kr": "P.레지나"
+    },
+    "Holy Night's Blessing Dianne": {
+        "en": "H.Dianne",
+        "jp": "H.ダイアン",
+        "kr": "H.다이안"
+    },
+    "Demiurge Delta": {
+        "en": "D.Delta",
+        "jp": "D.デルタ",
+        "kr": "D.델타"
+    },
+    "Demiurge Vlada": {
+        "en": "D.Vlada",
+        "jp": "D.ヴラダ",
+        "kr": "D.블라다"
+    },
+    "Demiurge Stella": {
+        "en": "D.Stella",
+        "jp": "D.ステラ",
+        "kr": "D.스텔라"
+    },
+    "Demiurge Luna": {
+        "en": "D.Luna",
+        "jp": "D.ルナ",
+        "kr": "D.루나"
+    },
+    "Omega Nadja": {
+        "en": "O.Nadja",
+        "jp": "O.ナージャ",
+        "kr": "O.나쟈"
+    },
+    "Hanbyul Lee": {
+        "en": "Byul",
+        "jp": "ハンビョル",
+        "kr": "한별"
+    },
+    "Naru Kang": {
+        "en": "Naru",
+        "jp": "ナル",
+        "kr": "나루"
+    }
 }

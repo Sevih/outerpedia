@@ -4,7 +4,6 @@ const en = {
   'nav.tierlist': 'Tier List',
   'nav.utilities': 'Utilities',
   'nav.guides': 'Guides',
-
   "nav.characters_short": "Chars",
   "nav.equipment_short": "Equip",
   "nav.tierlist_short": "Tier List",
@@ -32,7 +31,6 @@ const en = {
   'coupon.redeem.android': '<strong>For Android devices:</strong> you can redeem it in-game by going into <strong>Settings &gt; Account &gt; Enter Coupon</strong>.',
   'coupon.redeem.ios': '<strong>For iOS devices:</strong> you can redeem it <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">here</a> and make sure to remember your <a href="https://imgur.com/a/8gStkbJ" class="underline text-cyan-400">Member Info</a>.',
   'general.endsin': 'Ends in',
-
 
   //community event
   "events.history.desc_active": "Browse all Outerplane events (active: {active}, total: {total}).",
@@ -88,7 +86,6 @@ const en = {
   'toc.pros_cons': 'Pros & Cons',
   'pros.label': 'Pros',
   'cons.label': 'Cons',
-
   'home.newTo': '🧭 New to Outerplane?',
   'home.newTo.desc': 'Start your journey with these beginner-friendly guides:',
   'home.newTo.links.freeHeroes': 'Free Heroes & Starter Banners',
@@ -137,14 +134,12 @@ const en = {
   "skills_note": "Skills are displayed here with minimum enhancements applied. However, buffs and debuffs from Burst skills are still included in the display.",
   "recommended_build_and_gear": "Recommended Build and Gear",
   "no_reco_gear": "No recommended gear information available for this character yet.",
-
   "stats.health": "Health",
   "stats.defense": "Defense",
   "stats.evasion": "Evasion",
   "stats.accuracy": "Accuracy",
   "stats.speed": "Speed",
   "stats.attack": "Attack",
-
   "substat_priority": "Substat Priority",
   "weapons": "Weapons",
   "accessories": "Accessories",
@@ -154,7 +149,6 @@ const en = {
   "notes": "Notes",
   "substat_icon_alt": "Substat icon",
   "note_icon_alt": "Note icon",
-
   'SYS_CLASS_DEFENDER': 'Defender',
   'SYS_CLASS_ATTACKER': 'Striker',
   'SYS_CLASS_STRIKER': 'Striker',
@@ -162,7 +156,6 @@ const en = {
   'SYS_CLASS_MAGE': 'Mage',
   'SYS_CLASS_HEALER': 'Healer',
   'SYS_CLASS_PRIEST': 'Healer',
-
   'SYS_CLASS_PASSIVE_DEFENDER': 'Generates 5 Action Points at the start of turn. Generates 35 Action Points when hit. Increases Defense by 15%.',
   'SYS_CLASS_PASSIVE_ATTACKER': 'Generates 5 Action Points at the start of turn. Generates 20 Action Points when attacking. Increases Critical Hit Chance by 5%.',
   'SYS_CLASS_PASSIVE_STRIKER': 'Generates 5 Action Points at the start of turn. Generates 20 Action Points when attacking. Increases Critical Hit Chance by 5%.',
@@ -170,7 +163,6 @@ const en = {
   'SYS_CLASS_PASSIVE_MAGE': 'Generates 5 Action Points at the start of turn. Generates Action Points when using skills. Increases Attack by 10%.',
   'SYS_CLASS_PASSIVE_PRIEST': 'Generates 5 Action Points at the start of turn. Generates 25 Action Points when an ally is hit. Increases Health by 10%.',
   'SYS_CLASS_PASSIVE_HEALER': 'Generates 5 Action Points at the start of turn. Generates 25 Action Points when an ally is hit. Increases Health by 10%.',
-
   'SYS_CLASS_NAME_ATTACKER': 'Attacker',
   'SYS_CLASS_NAME_BRUISER': 'Bruiser',
   'SYS_CLASS_NAME_WIZARD': 'Wizard',
@@ -181,7 +173,6 @@ const en = {
   'SYS_CLASS_NAME_PHALANX': 'Phalanx',
   'SYS_CLASS_NAME_RELIEVER': 'Reliever',
   'SYS_CLASS_NAME_SAGE': 'Sage',
-
   'SYS_CLASS_INFO_ATTACKER': 'A brave warrior who crushes enemies with high Attack.',
   'SYS_CLASS_INFO_BRUISER': 'A brawler who specializes in prolonged battles with balanced offensive and defensive skills.',
   'SYS_CLASS_INFO_WIZARD': 'A master of magic who wreaks havoc on the battlefield with powerful spells.',
@@ -197,7 +188,6 @@ const en = {
   'SYS_ELEMENT_NAME_EARTH': 'Earth',
   'SYS_ELEMENT_NAME_LIGHT': 'Light',
   'SYS_ELEMENT_NAME_DARK': 'Dark',
-
   'SYS_STAT_ATK': 'Attack',
   'SYS_STAT_DEF': 'Defense',
   'SYS_STAT_HP': 'Health',
@@ -216,13 +206,11 @@ const en = {
   'SYS_STAT_HH_PERCENT': 'Heals when Hit %',
   'SYS_STAT_EVA': 'Evasion',
   'SYS_STAT_ACC': 'Accuracy',
-
   "equipments_tabs.weapon": "Weapons",
   "equipments_tabs.accessory": "Accessories",
   "equipments_tabs.armor": "Armor Set",
   "equipments_tabs.talisman": "Talismans",
   "equipments_tabs.exclusive": "Exclusive",
-
   "toc.overview": "Overview",
   "toc.base_stats": "Base Stats",
   "toc.ee_transcend": "EE & Transcend",
@@ -249,11 +237,11 @@ const en = {
   "items.lv10": "Lv.10",
   "items.na": "N/A",
   "items.secondMainstats": "Second Main Stats",
-
   "items.classRestriction": "Class restriction:",
   "items.rarity": "Rarity:",
   "items.baseEffect": "Base Effect:",
   "items.tier4Effect": "Tier 4 Effect:",
+
   // talisman
   "talisman.base": "Base",
   "talisman.level10": "Level 10",
@@ -266,10 +254,59 @@ const en = {
   "talisman.info": "Talisman Information",
   "talisman.showMore": "Show details",
   "talisman.showLess": "Hide details",
-  "talisman.noLv10": "No additional effect"
+  "talisman.noLv10": "No additional effect",
+
+  //tools
+  //gear usages
+  'gear.notice.line1': 'The statistics below are based on Evamains recommended builds only.',
+  'gear.notice.line2': "A 0 count doesn't mean the item is bad — it just hasn't been included in current recommendations.",
+  'table.name': 'Name',
+  'table.usedBy': 'Used by',
+  'table.characters': 'Characters',
+  'fullList': 'Full List of',
+  'mostUsed': 'Most Used',
+  //pullsim
+  'pullSim.title': 'Pull Simulator',
+  'pullSim.bannerFocus.title': 'Banner & Focus',
+  'pullSim.bannerFocus.subtitle': 'Select your banner; set a 3★ focus when applicable.',
+  'pullSim.banner': 'Banner',
+  'pullSim.bannerType.all': 'All',
+  'pullSim.bannerType.rateup': 'Rate Up Banner',
+  'pullSim.bannerType.premium': 'Premium Banner',
+  'pullSim.bannerType.limited': 'Limited Banner',
+  'pullSim.btn.draw1': 'Draw 1',
+  'pullSim.btn.draw10': 'Draw 10',
+  'pullSim.btn.pulling1': 'Pulling…',
+  'pullSim.btn.pulling10': 'Pulling 10…',
+  'pullSim.btn.exchange': 'Exchange mileage → Focus',
+  'pullSim.btn.exchanging': 'Exchanging…',
+  'pullSim.mileage': 'Mileage',
+  'pullSim.focusHits': 'Focus hits',
+  'pullSim.error.needFocus': 'Select a focus before pulling on this banner.',
+  'pullSim.error.noExchangeAll': 'No exchange on the All banner.',
+  'pullSim.error.notEnoughMileage': 'Not enough mileage. Need {cost}.',
+  'pullSim.sr.rarity': '{rarity} star',
+  'pullSim.mileage.toggle.title': 'Count Mileage',
+  'pullSim.mileage.toggle.desc': 'Track mileage on pulls and exchanges.',
+  'pullSim.bannerType.allHint': '(Limited & Premium included)',
 
 
-
+  //SEO
+  'gearUsage.meta.title': 'Outerplane Gear Usage Statistics – {monthYear} | Outerpedia',
+  'gearUsage.meta.desc': 'Discover the most recommended weapons, amulets and sets in Outerplane builds curated by the EvaMains Discord. Updated for {monthYear}.',
+  'gearUsage.og.title': 'Outerplane Gear Usage Statistics – {monthYear} | Outerpedia',
+  'gearUsage.og.desc': 'See which weapons, amulets and sets are most frequently recommended in builds curated by the EvaMains community. Updated for {monthYear}.',
+  'gearUsage.og.imageAlt': 'Gear Usage Statistics – Outerpedia',
+  'gearUsage.twitter.title': 'Outerplane Gear Usage – {monthYear} | Outerpedia',
+  'gearUsage.twitter.desc': 'Most used weapons, sets, and accessories in builds curated by EvaMains. Updated {monthYear}.',
+  'gearUsage.keyword.stats': 'Gear Stats',
+  'gearUsage.keyword.usage': 'Gear Usage',
+  'gearUsage.keyword.weapons': 'Weapons',
+  'gearUsage.keyword.amulets': 'Amulets',
+  'gearUsage.keyword.sets': 'Sets',
+  //JSON-LD
+  'nav.home': 'Home',
+  'gearUsage.meta.breadcrumb': 'Gear Usage Stats',
 
 
 

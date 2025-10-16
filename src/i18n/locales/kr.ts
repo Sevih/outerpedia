@@ -4,7 +4,6 @@ const kr = {
   'nav.tierlist': '티어 리스트',
   'nav.utilities': '유틸리티',
   'nav.guides': '가이드',
-
   "nav.characters_short": "캐릭",
   "nav.equipment_short": "장비",
   "nav.tierlist_short": "티어",
@@ -32,7 +31,6 @@ const kr = {
   'coupon.redeem.android': '<strong>안드로이드 기기:</strong> 게임 내 <strong>설정 &gt; 계정 &gt; 쿠폰 입력</strong> 메뉴에서 입력할 수 있습니다.',
   'coupon.redeem.ios': '<strong>iOS 기기:</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">여기</a>에서 입력하고, <a href="https://imgur.com/a/8gStkbJ" class="underline text-cyan-400">회원 정보</a>를 확인하세요.',
   'general.endsin': '종료까지',
-
 
   //community event
   "events.history.desc_active": "Outerplane 이벤트 목록 (진행 중: {active}, 전체: {total})",
@@ -88,7 +86,6 @@ const kr = {
   'toc.pros_cons': '장점과 단점',
   'pros.label': '장점',
   'cons.label': '단점',
-
   'home.newTo': '🧭 Outerplane이 처음이신가요?',
   'home.newTo.desc': '초보자를 위한 가이드로 여정을 시작하세요:',
   'home.newTo.links.freeHeroes': '무료 영웅 & 시작 배너',
@@ -137,14 +134,12 @@ const kr = {
   "skills_note": "표시된 스킬은 최소 강화 기준입니다. 다만, 버스트 스킬의 버프/디버프는 표시에 포함됩니다.",
   "recommended_build_and_gear": "추천 빌드 및 장비",
   "no_reco_gear": "이 캐릭터의 추천 장비 정보가 아직 없습니다.",
-
   "stats.health": "체력",
   "stats.defense": "방어",
   "stats.evasion": "회피",
   "stats.accuracy": "명중",
   "stats.speed": "속도",
   "stats.attack": "공격",
-
   "substat_priority": "부옵 우선순위",
   "weapons": "무기",
   "accessories": "장신구",
@@ -154,7 +149,6 @@ const kr = {
   "notes": "노트",
   "substat_icon_alt": "부옵 아이콘",
   "note_icon_alt": "노트 아이콘",
-
   'SYS_CLASS_DEFENDER': '방어형',
   'SYS_CLASS_ATTACKER': '공격형',
   'SYS_CLASS_STRIKER': '공격형',
@@ -162,7 +156,6 @@ const kr = {
   'SYS_CLASS_MAGE': '마법형',
   'SYS_CLASS_HEALER': '회복형',
   'SYS_CLASS_PRIEST': '회복형',
-
   'SYS_CLASS_PASSIVE_DEFENDER': '턴 시작 시 AP 5 회복. 피격 시 AP 35 회복. 방어력 15% 증가.',
   'SYS_CLASS_PASSIVE_ATTACKER': '턴 시작 시 AP 5 회복. 공격 시 AP 20 회복. 치명 확률 5% 증가.',
   'SYS_CLASS_PASSIVE_STRIKER': '턴 시작 시 AP 5 회복. 공격 시 AP 20 회복. 치명 확률 5% 증가.',
@@ -170,7 +163,6 @@ const kr = {
   'SYS_CLASS_PASSIVE_MAGE': '턴 시작 시 AP 5 회복. 스킬 사용 시 개별 AP 획득. 공격력 10% 증가.',
   'SYS_CLASS_PASSIVE_PRIEST': '턴 시작 시 AP 5 회복. 아군 피격 시 AP 25 획득. 체력 10% 증가.',
   'SYS_CLASS_PASSIVE_HEALER': '턴 시작 시 AP 5 회복. 아군 피격 시 AP 25 획득. 체력 10% 증가.',
-
   'SYS_CLASS_NAME_ATTACKER': '어태커',
   'SYS_CLASS_NAME_BRUISER': '브루저',
   'SYS_CLASS_NAME_WIZARD': '위저드',
@@ -181,7 +173,6 @@ const kr = {
   'SYS_CLASS_NAME_PHALANX': '팔랑크스',
   'SYS_CLASS_NAME_RELIEVER': '릴리버',
   'SYS_CLASS_NAME_SAGE': '세이지',
-
   'SYS_CLASS_INFO_ATTACKER': '높은 공격력으로 적을 분쇄하는 용맹한 전사.',
   'SYS_CLASS_INFO_BRUISER': '공방의 균형이 잘 잡혀 있어, 장기전에 특화된 싸움꾼.',
   'SYS_CLASS_INFO_WIZARD': '강력한 스킬로 전장을 휩쓸어버리는 마법의 대가.',
@@ -197,7 +188,6 @@ const kr = {
   'SYS_ELEMENT_NAME_EARTH': '지',
   'SYS_ELEMENT_NAME_LIGHT': '명',
   'SYS_ELEMENT_NAME_DARK': '암',
-
   'SYS_STAT_ATK': '공격력',
   'SYS_STAT_DEF': '방어력',
   'SYS_STAT_HP': '체력',
@@ -216,13 +206,11 @@ const kr = {
   'SYS_STAT_HH_PERCENT': '피격 시 회복%',
   'SYS_STAT_EVA': '회피',
   'SYS_STAT_ACC': '명중',
-
   "equipments_tabs.weapon": "무기",
   "equipments_tabs.accessory": "액세서리",
   "equipments_tabs.armor": "세트 장비",
   "equipments_tabs.talisman": "탈리스만",
   "equipments_tabs.exclusive": "전용 장비",
-
   "toc.overview": "개요",
   "toc.base_stats": "기본 스탯",
   "toc.ee_transcend": "전용 장비 및 초월",
@@ -249,7 +237,6 @@ const kr = {
   "items.lv10": "Lv.10",
   "items.na": "N/A",
   "items.secondMainstats": "추가 메인 능력치",
-
   "items.classRestriction": "클래스 제한:",
   "items.rarity": "희귀도:",
   "items.baseEffect": "기본 효과:",
@@ -267,8 +254,60 @@ const kr = {
   "talisman.info": "탈리스만 정보",
   "talisman.showMore": "자세히 보기",
   "talisman.showLess": "숨기기",
-  "talisman.noLv10": "추가 효과 없음"
+  "talisman.noLv10": "추가 효과 없음",
 
+  //tools
+  //gear usages
+  'gear.notice.line1': '아래 통계는 Evamains 추천 빌드만을 기준으로 합니다.',
+  'gear.notice.line2': '카운트가 0이라고 해서 아이템이 나쁘다는 뜻은 아니며, 현재 추천 목록에 포함되지 않았다는 의미입니다.',
+  'table.name': '이름',
+  'table.usedBy': '사용 수',
+  'table.characters': '캐릭터',
+  'fullList': '전체 목록',
+  'mostUsed': '가장 많이 사용된',
+  // pullsim
+  'pullSim.title': '소환 시뮬레이터',
+  'pullSim.bannerFocus.title': '배너 및 픽업',
+  'pullSim.bannerFocus.subtitle': '소환 배너를 선택하고 필요 시 ★3 픽업을 설정하세요.',
+  'pullSim.banner': '배너',
+  'pullSim.bannerType.all': '전체',
+  'pullSim.bannerType.rateup': '확률 업 배너',
+  'pullSim.bannerType.premium': '프리미엄 배너',
+  'pullSim.bannerType.limited': '한정 배너',
+  'pullSim.btn.draw1': '1회 소환',
+  'pullSim.btn.draw10': '10회 소환',
+  'pullSim.btn.pulling1': '소환 중…',
+  'pullSim.btn.pulling10': '10회 소환 중…',
+  'pullSim.btn.exchange': '마일리지 교환 → 픽업',
+  'pullSim.btn.exchanging': '교환 중…',
+  'pullSim.mileage': '마일리지',
+  'pullSim.focusHits': '픽업 획득 횟수',
+  'pullSim.error.needFocus': '이 배너에서 소환하기 전에 픽업을 선택하세요.',
+  'pullSim.error.noExchangeAll': '전체 배너에서는 교환할 수 없습니다.',
+  'pullSim.error.notEnoughMileage': '마일리지가 부족합니다. 필요: {cost}',
+  'pullSim.sr.rarity': '{rarity}성',
+  'pullSim.mileage.toggle.title': '마일리지 계산',
+  'pullSim.mileage.toggle.desc': '소환 및 교환 시 마일리지를 추적합니다.',
+  'pullSim.bannerType.allHint': '(한정 및 프리미엄 포함)',
+
+
+
+  //SEO
+  'gearUsage.meta.title': '아우터플레인 장비 사용 통계 – {monthYear} | Outerpedia',
+  'gearUsage.meta.desc': 'EvaMains 디스코드 커뮤니티가 제작한 빌드에서 가장 추천되는 무기, 장신구, 세트를 확인하세요. {monthYear} 업데이트.',
+  'gearUsage.og.title': '아우터플레인 장비 사용 통계 – {monthYear} | Outerpedia',
+  'gearUsage.og.desc': 'EvaMains 커뮤니티의 추천 빌드에서 가장 자주 사용되는 무기, 장신구, 세트를 확인해보세요. {monthYear} 업데이트.',
+  'gearUsage.og.imageAlt': '장비 사용 통계 – Outerpedia',
+  'gearUsage.twitter.title': '아우터플레인 장비 사용 통계 – {monthYear} | Outerpedia',
+  'gearUsage.twitter.desc': 'EvaMains에서 제작한 빌드에서 가장 많이 사용되는 무기, 세트, 장신구입니다. {monthYear} 업데이트.',
+  'gearUsage.keyword.stats': '장비 통계',
+  'gearUsage.keyword.usage': '장비 사용',
+  'gearUsage.keyword.weapons': '무기',
+  'gearUsage.keyword.amulets': '장신구',
+  'gearUsage.keyword.sets': '세트',
+  //JSON-LD
+  'nav.home': '홈',
+  'gearUsage.meta.breadcrumb': '장비 사용 통계',
 
 
 

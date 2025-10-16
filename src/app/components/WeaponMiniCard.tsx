@@ -31,7 +31,7 @@ function ensureWebp(path: string) {
   return path.endsWith(".webp") ? path : `${path}.webp`
 }
 
-// Localisation sûre (sans any)
+// Localisation sûre
 function getLocalized<
   T extends Partial<Record<K | `${K}_jp` | `${K}_kr`, string | null>>,
   K extends string

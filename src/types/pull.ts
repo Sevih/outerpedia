@@ -12,3 +12,13 @@ export interface Entry {
   class: string;
   rarity: number | string; // générateur permet number OU string
 }
+
+
+export interface SlugCharEntry {
+  ID: string
+  Fullname: string
+  Fullname_jp?: string
+  Fullname_kr?: string
+}
+
+export type SlugToCharMap = Record<string, SlugCharEntry>

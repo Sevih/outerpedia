@@ -112,9 +112,9 @@ export default function IrregularQueenGuide() {
                 <br />
                 <p className="mb-2 text-neutral-300">
                     A sample video of the One run kill team.
-                    <p className="text-neutral-400 text-sm italic mt-2">
+                    <span className="text-neutral-400 text-sm italic mt-2">
                         Run provided by <span className="text-white font-semibold">XuRenChao</span> (01/10/2025)
-                    </p>
+                    </span>
                 </p>
                 <YoutubeEmbed videoId="9Sr0YMGaro0" title="Irregular Queen (Post relaunch) - Pursuit Operation - 1 run kill (Auto) - by XuRenChao" />
             </div>

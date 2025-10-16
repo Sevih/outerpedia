@@ -31,7 +31,7 @@ function normalizeEffectIcon(id?: string | null) {
   return id.startsWith("TI_") ? id : `TI_Icon_UO_Accessary_${id}`
 }
 
-// localisation sûre (sans any)
+// localisation sûre
 function getLocalized<
   T extends Partial<Record<K | `${K}_jp` | `${K}_kr`, string | null>>,
   K extends string
