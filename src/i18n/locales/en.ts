@@ -441,6 +441,13 @@ const en = {
 'tierIndex.collection.title': 'Outerplane Tier Lists — {monthYear}',
 'tierIndex.collection.desc': 'Choose between PvE and PvP character rankings.',
 
+'item.meta.title': '{name} | {category} | Outerpedia',
+'item.meta.desc': 'Details, stats, and effects for {name} ({category}) in Outerplane.',
+'item.meta.ogTitle': '{name} | {category} | Outerpedia',
+'item.meta.ogDesc': 'Explore stats and effects for {name} ({category}) on Outerpedia.',
+'item.meta.twTitle': '{name} | {category}',
+'item.meta.twDesc': 'Stats and effects for {name} ({category}) in Outerplane.'
+
 
 
 

@@ -1,21 +1,27 @@
-// app/item/[category]/[slug]/page.tsx
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+
+import { createPageMetadata } from '@/lib/seo'
+import JsonLd from '@/app/components/JsonLd'
+import { websiteLd, breadcrumbLd, itemWebPageLd } from './jsonld'
+import { getTenantServer } from '@/tenants/tenant.server'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
+
+// Data
 import weaponData from '@/data/weapon.json'
 import accessoryData from '@/data/amulet.json'
 import setData from '@/data/sets.json'
 
+// Renderers
 import renderWeapon from '@/app/components/renderWeapon'
 import renderAccessory from '@/app/components/renderAccessory'
 import renderSet from '@/app/components/renderSet'
 
+// Types & utils
 import type { Weapon, Accessory, ArmorSet } from '@/types/equipment'
-import { notFound } from 'next/navigation'
-import type { Metadata } from 'next'
+import { TENANTS, OG_LOCALE, HREFLANG, type TenantKey } from '@/tenants/config'
 import { toKebabCase } from '@/utils/formatText'
 import BackButton from '@/app/components/ui/BackButton'
-
-// 🌍 localisation
-import { TENANTS, OG_LOCALE, HREFLANG, type TenantKey } from '@/tenants/config'
-import { getTenantServer } from '@/tenants/tenant.server'
 
 // ---------- Types ----------
 type Category = 'weapon' | 'accessory' | 'set'
@@ -55,32 +61,23 @@ function buildLanguageAlternates(path: string) {
   return acc
 }
 
-// ---------- Static params (weapons + accessories + sets) ----------
+// ---------- Static params ----------
 export async function generateStaticParams() {
   const params: Params[] = []
-  for (const it of WEAPONS) {
-    params.push({ category: 'weapon', slug: toKebabCase(it.name) })
-  }
-  for (const it of ACCESSORIES) {
-    params.push({ category: 'accessory', slug: toKebabCase(it.name) })
-  }
-  for (const it of SETS) {
-    params.push({ category: 'set', slug: toKebabCase(it.name) })
-  }
+  for (const it of WEAPONS) params.push({ category: 'weapon', slug: toKebabCase(it.name) })
+  for (const it of ACCESSORIES) params.push({ category: 'accessory', slug: toKebabCase(it.name) })
+  for (const it of SETS) params.push({ category: 'set', slug: toKebabCase(it.name) })
   return params
 }
 
 // ---------- SEO helpers ----------
 function getItemPngImageUrl(category: Category, entry: Weapon | Accessory | ArmorSet): string {
-  // Weapons & Accessories: /images/equipment/{image}.png (source: entry.image[.webp])
   if (category === 'weapon' || category === 'accessory') {
     const imageField = (entry as Weapon | Accessory).image
     if (!imageField) return '/images/equipment/default.png'
     const file = imageField.endsWith('.webp') ? imageField.replace('.webp', '.png') : imageField
     return `/images/equipment/${file}`
   }
-
-  // Sets: use set icon (already like TI_Icon_Set_Enchant_XXXX) in /images/ui/effect/
   const setIcon = (entry as ArmorSet).set_icon
   if (setIcon) return `/images/ui/effect/${setIcon}.png`
   return '/images/ui/nav/CM_Lobby_Button_Character.png'
@@ -117,11 +114,7 @@ function notFoundMeta(domain: string, path: string, ogLocale: string): Metadata 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { category, slug } = await params
   const { key: langKey, domain } = await getTenantServer()
-
-  const BASE_DOMAIN = TENANTS.en.domain
-  const path = `/item/${category}/${slug}`
-  const canonical = `https://${BASE_DOMAIN}${path}`
-  const languages = buildLanguageAlternates(path)
+  const path = `/item/${category}/${slug}` as `/${string}`
   const ogLocale = OG_LOCALE[langKey] ?? 'en_US'
 
   if (category !== 'weapon' && category !== 'accessory' && category !== 'set') {
@@ -132,57 +125,70 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!entry) return notFoundMeta(domain, path, ogLocale)
 
   const image = `https://${domain}${getItemPngImageUrl(category, entry)}`
-  const title = `${entry.name} | ${capitalize(category)} | Outerpedia`
-  const description = `Détails, statistiques et effets de ${entry.name} (${category}) dans Outerplane.`
-  const className =
-    category === 'weapon'
-      ? (entry as Weapon).class
-      : category === 'accessory'
-        ? (entry as Accessory).class
-        : (entry as ArmorSet).class
 
-
-  return {
-    title,
-    description,
+  // ✅ Respect règle projet : PNG en metadata
+  return createPageMetadata({
+    path, // déjà typé as `/${string}` plus haut
+    titleKey: 'item.meta.title',
+    descKey: 'item.meta.desc',
+    ogTitleKey: 'item.meta.ogTitle',
+    ogDescKey: 'item.meta.ogDesc',
+    twitterTitleKey: 'item.meta.twTitle',
+    twitterDescKey: 'item.meta.twDesc',
     keywords: [
       'Outerplane', 'Outerpedia', entry.name,
       `${entry.name} Outerplane`, `${entry.name} Build`, `${entry.name} Guide`,
-      className ?? '',
       category, 'gear', 'effect',
-    ].filter(Boolean),
-    alternates: {
-      canonical,
-      languages,
+    ],
+    image: {
+      url: image,           // ton URL absolue, .webp auto-convertie en .png par seo.ts si besoin
+      width: 512,
+      height: 512,
+      altFallback: `${entry.name} - ${capitalize(category)} Image`,
     },
-    openGraph: {
-      url: `https://${domain}${path}`,
-      siteName: 'Outerpedia',
-      title,
-      description,
-      type: 'website',
-      images: [{ url: image, width: 512, height: 512, alt: `${entry.name} - ${capitalize(category)} Image` }],
-      locale: ogLocale,
+    ogType: 'website',
+    twitterCard: 'summary',
+    // variables pour interpoler les clés i18n
+    vars: {
+      name: entry.name,
+      category: capitalize(category),
     },
-    twitter: {
-      card: 'summary',
-      title,
-      description,
-      images: [image],
-    },
-  }
+  })
 }
 
 // ---------- Page ----------
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const { key: langKey } = await getTenantServer()
+  const { key: langKey, domain } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
   const { category, slug } = await params
 
   const entry = getEntry(category, slug) as (Weapon | Accessory | ArmorSet | null)
   if (!entry) notFound()
 
+  const path = `/item/${category}/${slug}`
+
+
   return (
     <>
+      {/* JSON-LD */}
+      <JsonLd
+        json={[
+          websiteLd(domain),
+          breadcrumbLd(domain, {
+            home: t('nav.home') ?? 'Home',
+            current: entry!.name,
+            currentPath: path,
+          }),
+          itemWebPageLd(domain, {
+            name: entry!.name,
+            category,
+            imageUrl: `https://${domain}${getItemPngImageUrl(category, entry!)}`,
+            path,
+            inLanguage: ['en', 'jp', 'kr'],
+          }),
+        ]}
+      />
+
       <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
         <BackButton fallback="/item" />
       </div>

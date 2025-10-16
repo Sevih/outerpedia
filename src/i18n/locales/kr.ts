@@ -441,6 +441,12 @@ const kr = {
 'tierIndex.collection.title': '아우터플레인 티어 리스트 — {monthYear}',
 'tierIndex.collection.desc': 'PvE와 PvP 캐릭터 랭킹 중에서 선택하세요.',
 
+'item.meta.title': '{name} | {category} | Outerpedia',
+'item.meta.desc': '{name}({category})의 상세 정보, 스탯, 효과 정리.',
+'item.meta.ogTitle': '{name} | {category} | Outerpedia',
+'item.meta.ogDesc': '{name}({category})의 스탯과 효과를 확인하세요.',
+'item.meta.twTitle': '{name} | {category}',
+'item.meta.twDesc': '{name}({category})의 스탯/효과 정보.',
 
 
 
