@@ -291,7 +291,6 @@ const kr = {
   'pullSim.bannerType.allHint': '(한정 및 프리미엄 포함)',
 
 
-
   //SEO
   'gearUsage.meta.title': '아우터플레인 장비 사용 통계 – {monthYear} | Outerpedia',
   'gearUsage.meta.desc': 'EvaMains 디스코드 커뮤니티가 제작한 빌드에서 가장 추천되는 무기, 장신구, 세트를 확인하세요. {monthYear} 업데이트.',
@@ -308,6 +307,145 @@ const kr = {
   //JSON-LD
   'nav.home': '홈',
   'gearUsage.meta.breadcrumb': '장비 사용 통계',
+  // SEO
+  'patchHistory.meta.title': '패치 기록 — 업데이트 & 개발자 레터 | Outerpedia',
+  'patchHistory.meta.desc': '모든 패치 노트와 개발자 레터를 한곳에서 확인하세요. 히스토리를 검색·필터링할 수 있습니다.',
+  'patchHistory.og.title': '패치 기록 — 업데이트 & 개발자 레터 | Outerpedia',
+  'patchHistory.og.desc': '패치 노트와 개발자 레터를 날짜·키워드로 검색할 수 있습니다.',
+  'patchHistory.og.imageAlt': 'Outerpedia 패치 기록 목록과 필터',
+  'patchHistory.twitter.title': '패치 기록 — 업데이트 & 개발자 레터 | Outerpedia',
+  'patchHistory.twitter.desc': '패치 노트/개발자 레터로 업데이트 흐름을 추적하세요.',
+  // UI
+  'patchHistory.h1': '패치 기록',
+  'patchHistory.meta.breadcrumb': '패치 기록',
+  'patchHistory.intro': '아우터플레인의 패치 노트, 개발자 레터, 컴펜디움을 한 곳에서 확인하세요. 날짜·키워드로 검색 가능합니다.',
+  // SEO
+  'gearSolver.meta.title': '장비 사용 찾기 | Outerpedia',
+  'gearSolver.meta.desc': '내 장비를 누가 쓸 수 있을까? 추천 빌드 기반으로 최적의 캐릭터를 찾아보세요.',
+  'gearSolver.og.title': '장비 사용 찾기 | Outerpedia',
+  'gearSolver.og.desc': '세트·무기·장신구 전반에서 내 장비를 활용할 캐릭터를 검색합니다.',
+  'gearSolver.og.imageAlt': 'Outerpedia 장비 사용 찾기',
+  'gearSolver.twitter.title': '장비 사용 찾기 | Outerpedia',
+  'gearSolver.twitter.desc': '장비에 가장 잘 맞는 캐릭터를 빠르게 찾아보세요.',
+  // UI
+  'gearSolver.h1': '장비 사용 찾기',
+  'gearSolver.meta.breadcrumb': '장비 사용 찾기',
+  'gearSolver.warning':
+    '⚠️ 본 도구는 아직 개발 중입니다. 결과가 불완전하거나 부정확할 수 있으니 참고 용도로만 사용하세요.',
+  // SEO
+  'eePriority.meta.title': '전용 장비 우선순위 | Outerpedia',
+  'eePriority.meta.desc': '커뮤니티가 선정한 전용 장비(EE) 우선순위 리스트. +0 기본 효과를 기준으로 해제 순서를 최적화합니다.',
+  'eePriority.og.title': '전용 장비 우선순위 | Outerpedia',
+  'eePriority.og.desc': '어떤 전용 장비부터 해제할까? +0 기본 효과에 초점을 둔 커뮤니티 랭킹.',
+  'eePriority.og.imageAlt': 'Outerpedia 전용 장비 우선순위 목록',
+  'eePriority.twitter.title': '전용 장비 우선순위 | Outerpedia',
+  'eePriority.twitter.desc': '기본 효과(+0)를 기준으로 한 전용 장비 우선순위 리스트.',
+  // UI / Breadcrumb
+  'eePriority.meta.breadcrumb': '전용 장비 우선순위',
+  // ItemList JSON-LD labels
+  'eePriority.itemList.title': '전용 장비 우선순위 (+0)',
+  'eePriority.itemList.desc': '레벨 0 기본 효과만을 기준으로 한 전용 장비 우선순위(해제 순서).',
+  //seo
+  'coupons.meta.title': '아우터플레인 쿠폰 코드 — Outerpedia',
+  'coupons.meta.desc': '유효/예정/만료된 쿠폰 코드를 한 곳에서 확인하세요. 정기적으로 업데이트됩니다.',
+  'coupons.og.title': '아우터플레인 쿠폰 코드 — Outerpedia',
+  'coupons.og.desc': '유효 및 만료된 쿠폰을 한 번에 확인하고 쉽게 복사하세요.',
+  'coupons.og.imageAlt': 'Outerpedia 쿠폰 코드',
+  'coupons.twitter.title': '아우터플레인 쿠폰 코드 — Outerpedia',
+  'coupons.twitter.desc': '유효/만료 쿠폰을 한 곳에서 확인하세요.',
+  // Breadcrumb + ItemList
+  'coupons.meta.breadcrumb': '쿠폰 코드',
+  'coupons.itemList.title': '아우터플레인 쿠폰 코드',
+  'coupons.itemList.desc': '유효, 예정, 만료된 쿠폰 코드 목록.',
+  // UI
+  'coupon.status.active': '✅ 사용 가능',
+  'coupon.status.expired': '❌ 만료됨',
+  'coupon.status.upcoming': '⏳ 예정',
+  'coupon.validity': '<time>{start}</time>부터 <time>{end}</time>까지 유효',
+  'coupon.note.disclaimer': '일부 코드는 플랫폼/지역 제한이 있을 수 있습니다. 게임 내 공지를 확인하세요.',
+  //seo
+  'pullSim.meta.title': '뽑기 시뮬레이터 | Outerpedia',
+'pullSim.meta.desc': '아우터플레인 모든 배너를 대상으로 마일리지 규칙까지 포함해 뽑기를 시뮬레이션하세요. 레이트업/프리미엄/한정 배너 지원.',
+'pullSim.og.title': '뽑기 시뮬레이터 | Outerpedia',
+'pullSim.og.desc': '실제로 지르기 전에 가상으로 먼저 돌려보세요. 마일리지와 배너 규칙 지원.',
+'pullSim.og.imageAlt': 'Outerpedia 뽑기 시뮬레이터',
+'pullSim.twitter.title': '뽑기 시뮬레이터 | Outerpedia',
+'pullSim.twitter.desc': '배너 확률과 마일리지를 반영한 뽑기 시뮬레이션.',
+'pullSim.meta.breadcrumb': '뽑기 시뮬레이터',
+'pullSim.webapp.name': '뽑기 시뮬레이터',
+'pullSim.webapp.desc': '마일리지 및 배너 규칙을 반영한 무료 웹 기반 뽑기 시뮬레이터.',
+//seo
+'tierPve.meta.title': '아우터플레인 PvE 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+'tierPve.meta.desc': '{monthYear} 기준 PvE 최강 캐릭터 랭킹. EvaMains 디스코드 커뮤니티가 큐레이션했습니다.',
+'tierPve.og.title': '아우터플레인 PvE 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+'tierPve.og.desc': '{monthYear} 기준 PvE 캐릭터 평가. EvaMains 커뮤니티 큐레이션.',
+'tierPve.og.imageAlt': 'Outerpedia PvE 티어 리스트',
+'tierPve.twitter.title': '아우터플레인 PvE 티어 리스트 — {monthYear} | Outerpedia',
+'tierPve.twitter.desc': '{monthYear} 업데이트된 PvE 캐릭터 랭킹 (EvaMains).',
+'tierPve.meta.breadcrumb': 'PvE 티어 리스트',
+//jsonld
+'tierPve.itemList.title': '아우터플레인 PvE 티어 리스트 — {monthYear}',
+'tierPve.itemList.desc': 'DPS·서포트·지속(생존) 역할별로 최고의 캐릭터를 소개합니다. EvaMains 커뮤니티 큐레이션.',
+// --- SEO (PvP 티어 리스트) ---
+'tierPvp.meta.title': '아우터플레인 PvP 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+'tierPvp.meta.desc': '{monthYear} 기준 PvP 최강 캐릭터 랭킹. EvaMains 디스코드 커뮤니티가 큐레이션했습니다.',
+'tierPvp.og.title': '아우터플레인 PvP 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+'tierPvp.og.desc': '{monthYear} 기준 PvP 캐릭터 평가. EvaMains 커뮤니티 큐레이션.',
+'tierPvp.og.imageAlt': 'Outerpedia PvP 티어 리스트',
+'tierPvp.twitter.title': '아우터플레인 PvP 티어 리스트 — {monthYear} | Outerpedia',
+'tierPvp.twitter.desc': '{monthYear} 업데이트된 PvP 캐릭터 랭킹 (EvaMains).',
+'tierPvp.meta.breadcrumb': 'PvP 티어 리스트',
+// --- JSON-LD (PvP 티어 리스트) ---
+'tierPvp.itemList.title': '아우터플레인 PvP 티어 리스트 — {monthYear}',
+'tierPvp.itemList.desc': '역할과 성능을 기준으로 PvP에 강한 캐릭터를 소개합니다. EvaMains 커뮤니티 큐레이션.',
+// --- TierListBase UI ---
+'tier.ui.title.pve': '티어 리스트 - PvE',
+'tier.ui.title.pvp': '티어 리스트 - PvP',
+'tier.ui.title.ee0': '전용 장비 우선순위 (+0)',
+'tier.ui.title.ee10': '전용 장비 우선순위 (+10)',
+
+'tier.ui.warning.pve': '⚠️ 본 티어 리스트는 <strong>6성 각성</strong>과 <strong>전용 장비 레벨 0 효과</strong>를 전제로 합니다.<br/>강화 여부에 따라 체감이 달라질 수 있으며, <strong>PvE 전용</strong> 평가입니다.',
+'tier.ui.warning.pvp': '⚠️ 본 티어 리스트는 <strong>6성 각성</strong>과 <strong>전용 장비 레벨 0 효과</strong>를 전제로 합니다.<br/>강화 여부에 따라 체감이 달라질 수 있으며, <strong>PvP 전용</strong> 평가입니다.',
+'tier.ui.warning.ee0': '⚠️ <strong>전용 장비(EE)</strong>의 해제 우선순위를 <strong>레벨 0 기본 효과</strong>만으로 평가합니다.<br/><strong>+10 추가 효과는 고려하지 않습니다.</strong>',
+'tier.ui.warning.ee10': '⚠️ <strong>전용 장비(EE)</strong>를 <strong>+10 추가 효과</strong>까지 포함하여 평가하여, 기본 효과 이후의 강화 우선순위를 안내합니다.',
+
+'tier.ui.search.placeholder': '검색...',
+'tier.ui.tab.all': '전체',
+'tier.ui.tab.dps': 'DPS',
+'tier.ui.tab.support': '서포트',
+'tier.ui.tab.sustain': '지속',
+'tier.ui.filter.all': '전체',
+'tier.ui.filter.element': '속성',
+'tier.ui.filter.class': '클래스',
+'tier.ui.alt.back': '뒤로',
+'tier.ui.alt.star': '별',
+'tier.ui.alt.rank': '랭크 {rank}',
+'tier.ui.alt.letter': '문자 {rank}',
+// --- SEO (티어 리스트 인덱스) ---
+'tierIndex.meta.title': '아우터플레인 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+'tierIndex.meta.desc': '{monthYear} 기준 캐릭터 랭킹. EvaMains 디스코드 커뮤니티 큐레이션.',
+'tierIndex.og.title': '아우터플레인 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+'tierIndex.og.desc': '{monthYear} 기준 최신 캐릭터 평가. EvaMains 커뮤니티 큐레이션.',
+'tierIndex.og.imageAlt': 'Outerpedia 티어 리스트',
+'tierIndex.twitter.title': '아우터플레인 티어 리스트 — {monthYear} | Outerpedia',
+'tierIndex.twitter.desc': '{monthYear} 업데이트된 캐릭터 랭킹 (EvaMains).',
+'tierIndex.meta.breadcrumb': '티어 리스트',
+// --- 페이지 문구 ---
+'tierIndex.h1': '아우터플레인 티어 리스트',
+'tierIndex.lead': 'PvE와 PvP 캐릭터 랭킹 중에서 선택하세요. 6★ 초월과 전용 장비 0레벨 효과를 기준으로 평가합니다.',
+'tierIndex.card.pve.title': '티어 리스트 — PvE',
+'tierIndex.card.pve.desc': '모든 PvE 콘텐츠 대상 성능 평가.',
+'tierIndex.card.pvp.title': '티어 리스트 — PvP',
+'tierIndex.card.pvp.desc': '아레나 중심 성능 평가.',
+// --- JSON-LD ---
+'tierIndex.collection.title': '아우터플레인 티어 리스트 — {monthYear}',
+'tierIndex.collection.desc': 'PvE와 PvP 캐릭터 랭킹 중에서 선택하세요.',
+
+
+
+
+
+
 
 
 

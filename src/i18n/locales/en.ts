@@ -307,6 +307,146 @@ const en = {
   //JSON-LD
   'nav.home': 'Home',
   'gearUsage.meta.breadcrumb': 'Gear Usage Stats',
+  // SEO
+  'patchHistory.meta.title': 'Patch History — Updates & Dev Letters | Outerpedia',
+  'patchHistory.meta.desc': 'Explore every Outerplane patch note and developer letter in one place. Search and filter historical updates.',
+  'patchHistory.og.title': 'Patch History — Updates & Dev Letters | Outerpedia',
+  'patchHistory.og.desc': 'All patch notes and developer letters, searchable by date and keyword.',
+  'patchHistory.og.imageAlt': 'Outerpedia patch history list and filters',
+  'patchHistory.twitter.title': 'Patch History — Updates & Dev Letters | Outerpedia',
+  'patchHistory.twitter.desc': 'Track Outerplane updates across patch notes and developer letters.',
+  // UI
+  'patchHistory.h1': 'Patch History',
+  'patchHistory.meta.breadcrumb': 'Patch History',
+  'patchHistory.intro': 'Browse all Outerplane patch notes, developer letters, and compendium entries — searchable and sorted by date.',
+  // SEO
+  'gearSolver.meta.title': 'Gear Usage Finder | Outerpedia',
+  'gearSolver.meta.desc': 'Not sure who can use your gear? Find the best character matches from recommended builds.',
+  'gearSolver.og.title': 'Gear Usage Finder | Outerpedia',
+  'gearSolver.og.desc': 'Search which characters can use your gear across sets, weapons, and amulets.',
+  'gearSolver.og.imageAlt': 'Outerpedia Gear Usage Finder',
+  'gearSolver.twitter.title': 'Gear Usage Finder | Outerpedia',
+  'gearSolver.twitter.desc': 'Quickly discover best character matches for your gear.',
+  // UI
+  'gearSolver.h1': 'Gear Usage Finder',
+  'gearSolver.meta.breadcrumb': 'Gear Usage Finder',
+  'gearSolver.warning':
+    '⚠️ The Gear Usage Finder tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.',
+  // SEO
+  'eePriority.meta.title': 'Exclusive Equipment Priority | Outerpedia',
+  'eePriority.meta.desc': 'Community-curated priority list for Exclusive Equipment (EE), focusing on +0 base effects for optimal unlock order.',
+  'eePriority.og.title': 'Exclusive Equipment Priority | Outerpedia',
+  'eePriority.og.desc': 'Which Exclusive Equipment should you unlock first? A community ranking focused on +0 base effects.',
+  'eePriority.og.imageAlt': 'Outerpedia Exclusive Equipment priority list',
+  'eePriority.twitter.title': 'Exclusive Equipment Priority | Outerpedia',
+  'eePriority.twitter.desc': 'A curated priority list for EE based on base effects (+0).',
+  // UI / Breadcrumb
+  'eePriority.meta.breadcrumb': 'EE Priority',
+  // ItemList JSON-LD labels
+  'eePriority.itemList.title': 'Exclusive Equipment Priority (+0)',
+  'eePriority.itemList.desc': 'Exclusive Equipment Priority based on level 0 base effects only, for optimal unlock order.',
+  // SEO
+  'coupons.meta.title': 'Outerplane Coupon Codes – Outerpedia',
+  'coupons.meta.desc': 'All valid, upcoming, and expired coupon codes for Outerplane. Updated regularly on Outerpedia.',
+  'coupons.og.title': 'Outerplane Coupon Codes – Outerpedia',
+  'coupons.og.desc': 'Browse all working and expired coupon codes for Outerplane and copy them easily.',
+  'coupons.og.imageAlt': 'Outerpedia Coupon Codes',
+  'coupons.twitter.title': 'Outerplane Coupon Codes – Outerpedia',
+  'coupons.twitter.desc': 'Get all valid and expired coupon codes in one place.',
+  // Breadcrumb + ItemList
+  'coupons.meta.breadcrumb': 'Coupon Codes',
+  'coupons.itemList.title': 'Outerplane Coupon Codes',
+  'coupons.itemList.desc': 'Valid, upcoming, and expired coupon codes for Outerplane.',
+  // UI
+  'coupon.status.active': '✅ Active',
+  'coupon.status.expired': '❌ Expired',
+  'coupon.status.upcoming': '⏳ Upcoming',
+  'coupon.validity': 'Valid from <time>{start}</time> to <time>{end}</time>',
+  'coupon.note.disclaimer': 'Note: Some codes are platform or region-limited. Always check in-game notices.',
+  //seo
+  'pullSim.meta.title': 'Pull Simulator | Outerpedia',
+'pullSim.meta.desc': 'Simulate gacha pulls for all Outerplane banners, including mileage rules. Test your luck on Rate Up, Premium, and Limited banners.',
+'pullSim.og.title': 'Pull Simulator | Outerpedia',
+'pullSim.og.desc': 'Try your pulls virtually before spending. Supports mileage and banner rules.',
+'pullSim.og.imageAlt': 'Outerpedia Pull Simulator',
+'pullSim.twitter.title': 'Pull Simulator | Outerpedia',
+'pullSim.twitter.desc': 'Simulate Outerplane pulls with banner rates and mileage.',
+'pullSim.meta.breadcrumb': 'Pull Simulator',
+'pullSim.webapp.name': 'Pull Simulator',
+'pullSim.webapp.desc': 'A free web tool to simulate Outerplane gacha pulls with mileage and banner rules.',
+// SEO
+'tierPve.meta.title': 'Outerplane PvE Tier List — {monthYear} Update | Outerpedia',
+'tierPve.meta.desc': 'Discover the best characters ranked for PvE in Outerplane. Updated for {monthYear}, curated by the EvaMains Discord community.',
+'tierPve.og.title': 'Outerplane PvE Tier List — {monthYear} Update | Outerpedia',
+'tierPve.og.desc': 'Latest Outerplane character PvE rankings as of {monthYear}, curated by the EvaMains community.',
+'tierPve.og.imageAlt': 'Outerpedia PvE Tier List',
+'tierPve.twitter.title': 'Outerplane PvE Tier List — {monthYear} | Outerpedia',
+'tierPve.twitter.desc': 'Best Outerplane characters ranked for PvE — {monthYear} update curated by EvaMains.',
+'tierPve.meta.breadcrumb': 'PvE Tier List',
+// JSON-LD
+'tierPve.itemList.title': 'Outerplane PvE Tier List — {monthYear}',
+'tierPve.itemList.desc': 'Discover the best characters in Outerplane sorted by DPS, Support, and Sustain. Curated by the EvaMains community.',
+// --- SEO (PvP Tier List) ---
+'tierPvp.meta.title': 'Outerplane PvP Tier List — {monthYear} Update | Outerpedia',
+'tierPvp.meta.desc': 'Discover the best characters ranked for PvP in Outerplane. Updated for {monthYear}, curated by the EvaMains Discord community.',
+'tierPvp.og.title': 'Outerplane PvP Tier List — {monthYear} Update | Outerpedia',
+'tierPvp.og.desc': 'Latest Outerplane character PvP rankings as of {monthYear}, curated by the EvaMains community.',
+'tierPvp.og.imageAlt': 'Outerpedia PvP Tier List',
+'tierPvp.twitter.title': 'Outerplane PvP Tier List — {monthYear} | Outerpedia',
+'tierPvp.twitter.desc': 'Best Outerplane characters ranked for PvP — {monthYear} update curated by EvaMains.',
+'tierPvp.meta.breadcrumb': 'PvP Tier List',
+// --- JSON-LD (PvP Tier List) ---
+'tierPvp.itemList.title': 'Outerplane PvP Tier List — {monthYear}',
+'tierPvp.itemList.desc': 'Discover the best PvP characters in Outerplane by role and performance. Curated by the EvaMains community.',
+// --- TierListBase UI ---
+'tier.ui.title.pve': 'Tier List - PvE',
+'tier.ui.title.pvp': 'Tier List - PvP',
+'tier.ui.title.ee0': 'Exclusive Equipment Priority (+0)',
+'tier.ui.title.ee10': 'Exclusive Equipment Priority (+10)',
+
+'tier.ui.warning.pve': '⚠️ This tier list assumes <strong>6-star transcends</strong> and <strong>level 0 Exclusive Equipment effects</strong>.<br/>Results may vary if upgrades are not unlocked. This list is for <strong>PvE content</strong> only.',
+'tier.ui.warning.pvp': '⚠️ This tier list assumes <strong>6-star transcends</strong> and <strong>level 0 Exclusive Equipment effects</strong>.<br/>Results may vary if upgrades are not unlocked. This list is for <strong>PvP content</strong> only.',
+'tier.ui.warning.ee0': '⚠️ This ranking helps decide which <strong>Exclusive Equipment (EE)</strong> to unlock first, based on <strong>level 0 base effects</strong> only.<br/><strong>+10 bonus effects are not considered.</strong>',
+'tier.ui.warning.ee10': '⚠️ This ranking evaluates <strong>Exclusive Equipment (EE)</strong> including their <strong>+10 bonus effects</strong>, to guide upgrades beyond base effects.',
+
+'tier.ui.search.placeholder': 'Search...',
+'tier.ui.tab.all': 'All',
+'tier.ui.tab.dps': 'DPS',
+'tier.ui.tab.support': 'Support',
+'tier.ui.tab.sustain': 'Sustain',
+'tier.ui.filter.all': 'All',
+'tier.ui.filter.element': 'Element',
+'tier.ui.filter.class': 'Class',
+'tier.ui.alt.back': 'Back',
+'tier.ui.alt.star': 'star',
+'tier.ui.alt.rank': 'Rank {rank}',
+'tier.ui.alt.letter': 'Letter {rank}',
+// --- SEO (Tier List index) ---
+'tierIndex.meta.title': 'Outerplane Tier List — {monthYear} Update | Outerpedia',
+'tierIndex.meta.desc': 'Discover the best characters ranked in Outerplane. Updated for {monthYear}, curated by the EvaMains Discord community.',
+'tierIndex.og.title': 'Outerplane Tier List — {monthYear} Update | Outerpedia',
+'tierIndex.og.desc': 'Latest Outerplane character rankings as of {monthYear}, curated by the EvaMains community.',
+'tierIndex.og.imageAlt': 'Outerpedia Tier List',
+'tierIndex.twitter.title': 'Outerplane Tier List — {monthYear} | Outerpedia',
+'tierIndex.twitter.desc': 'Best Outerplane characters ranked — {monthYear} update curated by EvaMains.',
+'tierIndex.meta.breadcrumb': 'Tier Lists',
+// --- Page texts ---
+'tierIndex.h1': 'Outerplane Tier List',
+'tierIndex.lead': 'Choose between PvE and PvP character rankings. Based on evaluations with 6★ transcends and level 0 EE effects.',
+'tierIndex.card.pve.title': 'Tier List — PvE',
+'tierIndex.card.pve.desc': 'PvE performance rankings across all content.',
+'tierIndex.card.pvp.title': 'Tier List — PvP',
+'tierIndex.card.pvp.desc': 'Performance-based Arena evaluation.',
+// --- JSON-LD ---
+'tierIndex.collection.title': 'Outerplane Tier Lists — {monthYear}',
+'tierIndex.collection.desc': 'Choose between PvE and PvP character rankings.',
+
+
+
+
+
+
+
 
 
 
