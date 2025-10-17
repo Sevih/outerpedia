@@ -189,7 +189,7 @@ export default function WeaponMiniCard({ weapon }: { weapon: WeaponForCard }) {
       {/* Bloc en dessous */}
       <div className="mt-1 text-center text-white text-[12px] leading-tight w-full z-0">
         <p className="text-red-400 text-sm leading-tight">
-          <Link href={`/item/weapon/${toKebabCase(locName)}`} className="hover:underline">
+          <Link href={`/item/weapon/${toKebabCase(weapon.name)}`} className="hover:underline">
           {locName.includes("[") ? (
             <>
               <span className="block">{locName.split("[")[0].trim()}</span>

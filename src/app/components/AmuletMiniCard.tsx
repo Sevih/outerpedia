@@ -177,7 +177,7 @@ export default function AmuletMiniCard({ amulet }: { amulet: AmuletForCard }) {
       {/* label + stats */}
       <div className="mt-1 text-center text-white text-[12px] leading-tight w-full z-0">
          <p className="text-red-400 text-sm leading-tight">
-          <Link href={`/item/accessory/${toKebabCase(locName)}`} className="hover:underline">
+          <Link href={`/item/accessory/${toKebabCase(amulet.name)}`} className="hover:underline">
           {locName.includes("[") ? (
             <>
               <span className="block">{locName.split("[")[0].trim()}</span>
