@@ -482,6 +482,14 @@ const en = {
   'chars.og.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
   'chars.twitter.title': 'Outerplane Characters – Updated {monthYear} | Outerpedia',
   'chars.twitter.desc': 'Full character database for Outerplane: stats, skills, gear, exclusive equipment. Updated {monthYear} by EvaMains Discord.',
+  // en.ts
+  'guides.meta.title': 'Outerplane Guides | Outerpedia',
+  'guides.meta.desc': 'Browse all strategy guides for Outerplane: {list}. Updated regularly with boss tips, adventure help, and event walkthroughs.',
+  'guides.og.title': 'Outerplane Guides | Outerpedia',
+  'guides.og.desc': 'All strategy guides in one place: {list}.',
+  'guides.twitter.title': 'Outerplane Guides',
+  'guides.twitter.desc': 'Latest guides: {list}.',
+
 
 
 

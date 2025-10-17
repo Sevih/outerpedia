@@ -468,20 +468,28 @@ const jp = {
   'equip.og.desc': '武器・アクセサリー・タリスマン・セット・専用装備を一覧で確認できます。',
   'equip.twitter.title': '装備一覧',
   'equip.twitter.desc': '武器・アクセサリー・タリスマン・セット・専用装備をチェック。',
-    // --- Characters SEO ---
+  // --- Characters SEO ---
   'char.meta.title': '{name} | キャラクター詳細 | Outerpedia',
   'char.meta.desc': '{element}属性・{class}クラスの{name}。スキル解説、強化優先度、評価、専用装備、推奨セットを紹介。',
   'char.og.title': '{name} | キャラクター詳細 | Outerpedia',
   'char.og.desc': '{element}属性・{class}クラスの{name}。スキル情報やおすすめ装備を掲載。',
   'char.twitter.title': '{name} | アウタープレーン キャラ情報',
   'char.twitter.desc': '{element}属性・{class}クラスの{name}のスキルやビルド情報。',
-   // ...
+  // ...
   'chars.meta.title': 'アウタープレーン キャラクター一覧 — {monthYear} 更新 | Outerpedia',
   'chars.meta.desc': '『アウタープレーン』の全キャラクターを網羅。詳細ステータス、スキル、装備ビルド、専用装備データを掲載。{monthYear} 更新・EvaMains Discord 監修。',
   'chars.og.title': 'アウタープレーン キャラクター一覧 — {monthYear} 更新 | Outerpedia',
   'chars.og.desc': '全ヒーローのステータス・スキル・装備・専用装備をチェック。{monthYear} 更新（EvaMains Discord）。',
   'chars.twitter.title': 'キャラクター一覧 — {monthYear} 更新 | Outerpedia',
   'chars.twitter.desc': 'ステータス、スキル、装備、専用装備などのデータベース。{monthYear} 更新。',
+  // jp.ts
+  'guides.meta.title': 'Outerplane 攻略ガイド | Outerpedia',
+  'guides.meta.desc': 'Outerplane の各種攻略ガイド: {list}。ボス攻略・冒険・イベントのウォークスルーを随時更新。',
+  'guides.og.title': 'Outerplane 攻略ガイド | Outerpedia',
+  'guides.og.desc': 'すべての攻略ガイド: {list}。',
+  'guides.twitter.title': 'Outerplane 攻略ガイド',
+  'guides.twitter.desc': '最新ガイド一覧: {list}。',
+
 
 
 

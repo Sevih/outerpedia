@@ -13,7 +13,7 @@
     "teams": {
       "team1": {
         "label": "No Healer",
-        "icon": "SC_Buff_Effect_Cleanse.webp",
+        "icon": "healer.webp",
         "setup": [
           [
             "Demiurge Drakhan",
@@ -83,6 +83,41 @@
             "string": "Using Astei or Drakhan can assist if survival's an issue with the critical hit chance debuff."
           }
         ]
+      },
+      "team3": {
+        "label": "No fire",
+        "icon": "fire.webp",
+        "setup": [
+          [
+            "Demiurge Drakhan",
+            "Omega Nadja"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Tamara",
+            "Gnosis Nella"
+          ],
+          [
+            "Caren",
+            "Demiurge Luna",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No fire"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "Max speed Tamara to Silence Valentine and then increase the CD."
+          },
+          {
+            "type": "p",
+            "string": "Using Drakhan can assist if survival's an issue with the critical hit chance debuff."
+          }
+        ]
       }
     }
   },
@@ -131,10 +166,6 @@
           "No mage"
         ],
         "note": [
-          {
-            "type": "p",
-            "string": "Tamara for Cooldown increase."
-          }
         ]
       },
       "team2": {
@@ -163,14 +194,35 @@
           "No fire"
         ],
         "note": [
-          {
-            "type": "p",
-            "string": "Tamara for Cooldown increase."
-          },
-          {
-            "type": "p",
-            "string": "Immunity, Cleanse and revenge will do the job."
-          }
+        ]
+      },
+      "team3": {
+        "label": "1 Light",
+        "icon": "light.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne",
+            "Astei",
+            "Nella"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Stella",
+            "Delta"
+          ],
+          [
+            "Tamara",
+            "Caren",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "1 Light"
+        ],
+        "note": [
         ]
       }
     }
@@ -402,6 +454,30 @@
           "1 x 1★"
         ],
         "note": []
+      },
+      "team3": {
+        "label": "1 Healer",
+        "icon": "healer.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne"
+          ],
+          [
+            "Fran",
+            "Charlotte"
+          ],
+          [
+            "Demiurge Luna"
+          ],
+          [
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "1 Healer"
+        ],
+        "note": []
       }
     }
   },
@@ -517,11 +593,35 @@
           ],
           [
             "Fran",
-            "Poolside Trickster Regina"
+            "Tamara"
           ]
         ],
         "conditions": [
           "No Defender"
+        ],
+        "note": []
+      },
+      "team3": {
+        "label": "No Water",
+        "icon": "water.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Luna",
+            "Demiurge Astei"
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Fran",
+            "Valentine"
+          ]
+        ],
+        "conditions": [
+          "No Water"
         ],
         "note": []
       }
@@ -745,7 +845,7 @@
           ],
           [
             "Maxwell",
-            "Demiurge Astei"            
+            "Demiurge Astei"
           ]
         ],
         "conditions": [
@@ -792,6 +892,30 @@
         ],
         "conditions": [
           "1 water"
+        ],
+        "note": []
+      },
+      "team2": {
+        "label": "1 x 3★",
+        "icon": "CM_icon_star_y.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamara",
+            "Gnosis Nella"
+          ],
+          [
+            "Demiurge Drakhan",
+            "Fatal"
+          ],
+          [
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 x 3★"
         ],
         "note": []
       }
@@ -876,6 +1000,35 @@
         ],
         "conditions": [
           "No Healer"
+        ],
+        "note": []
+      },
+      "team3": {
+        "label": "1 Earth",
+        "icon": "earth.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Akari",
+            "Stella",
+            "Fran",
+            "Cindy",
+            "Ember"
+          ],
+          [
+            "Demiurge Stella",
+            "Kanon"
+          ],
+          [
+            "Rey",
+            "Delta",
+            "Ame"
+          ]
+        ],
+        "conditions": [
+          "1 Earth"
         ],
         "note": []
       }
@@ -1069,6 +1222,36 @@
           "No Ranger"
         ],
         "note": []
+      },
+      "team3": {
+        "label": "1 Light",
+        "icon": "light.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamamo-no-Mae",
+            "Delta",
+            "Demiurge Drakhan",
+            "Hilde",
+            "Christina"
+          ],
+          [
+            "Fran",
+            "Gnosis Beth",
+            "Demiurge Vlada",
+            "Notia"
+          ],
+          [
+            "Kanon",
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 Light"
+        ],
+        "note": []
       }
     }
   },
@@ -1119,7 +1302,7 @@
       },
       "team2": {
         "label": "1 Healer",
-        "icon": "ranger.webp",
+        "icon": "healer.webp",
         "setup": [
           [
             "Monad Eva"
@@ -1141,6 +1324,35 @@
         ],
         "conditions": [
           "1 Healer"
+        ],
+        "note": []
+      },
+      "team3": {
+        "label": "1 Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Stella",
+            "Valentine",
+            "Iota"
+          ],
+          [
+            "Omega Nadja",
+            "Luna",
+            "Summer Knight's Dream Ember",
+            "Demiurge Drakhan"
+          ],
+          [
+            "Maxwell",
+            "Ame",
+            "Demiurge Astei"
+          ]
+        ],
+        "conditions": [
+          "1 Defender"
         ],
         "note": []
       }

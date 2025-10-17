@@ -1429,7 +1429,7 @@ const data: Record<ShopKey, ShopItem[]> = {
             limit: { count: 0, period: 'One-time' }
         },
         {
-            name: 'Hero Pieces',
+            name: 'Wildcard Pieces',
             priority: 'A',
             gives: { amount: 0, unit: '' },
             costs: [{ currency: 'TBD', amount: 0 }],

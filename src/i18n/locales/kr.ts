@@ -475,13 +475,21 @@ const kr = {
   'char.og.desc': '{element} 속성 {class} 클래스 {name} — 스킬, 장비 빌드 및 티어 정보.',
   'char.twitter.title': '{name} | 아우터플레인 캐릭터',
   'char.twitter.desc': '{element} 속성 {class} 클래스 {name} — 스킬, 랭킹, 빌드 추천.',
-   // ...
+  // ...
   'chars.meta.title': '아우터플레인 캐릭터 데이터베이스 — {monthYear} 업데이트 | Outerpedia',
   'chars.meta.desc': '모든 캐릭터 정보: 상세 스탯, 스킬, 장비 추천, 전용 장비 데이터. {monthYear} 업데이트 (EvaMains Discord).',
   'chars.og.title': '아우터플레인 캐릭터 — {monthYear} 업데이트 | Outerpedia',
   'chars.og.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',
   'chars.twitter.title': '캐릭터 목록 — {monthYear} 업데이트 | Outerpedia',
   'chars.twitter.desc': '스탯, 스킬, 장비, 전용 장비까지 모두 모은 DB. {monthYear} 업데이트.',
+  // kr.ts
+  'guides.meta.title': 'Outerplane 가이드 | Outerpedia',
+  'guides.meta.desc': 'Outerplane의 공략 가이드: {list}. 보스 팁, 모험, 이벤트 공략을 꾸준히 업데이트합니다.',
+  'guides.og.title': 'Outerplane 가이드 | Outerpedia',
+  'guides.og.desc': '모든 공략 모음: {list}.',
+  'guides.twitter.title': 'Outerplane 가이드',
+  'guides.twitter.desc': '최신 공략: {list}.',
+
 
 
 

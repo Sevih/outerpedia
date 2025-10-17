@@ -3,18 +3,23 @@
 import Image from 'next/image';
 import * as HoverCard from '@radix-ui/react-hover-card';
 import rawItems from '@/data/items.json';
-import { useTenant } from '@/lib/contexts/TenantContext';
+import { useI18n } from '@/lib/contexts/I18nContext';
+import { l, lRec } from '@/lib/localize';
 
 type ItemRarity = 'normal' | 'superior' | 'epic' | 'legendary';
+type Lng = 'en' | 'jp' | 'kr';
+
+type LangMap = Record<Lng, string>;
 
 type ItemDef = {
   name: string;               // canon EN (sert pour les slugs/images)
   name_jp?: string;
   name_kr?: string;
   rarity: ItemRarity;
-  description: string;        // EN
+  description: string | LangMap; // supporte string ou map {en,jp,kr}
   description_jp?: string;
   description_kr?: string;
+  icon?: string;
 };
 
 const items = rawItems as ItemDef[];
@@ -33,17 +38,18 @@ function toKebabCase(str: string) {
     .toLowerCase();
 }
 
+function isLangMap(v: unknown): v is LangMap {
+  if (!v || typeof v !== 'object') return false;
+  const m = v as Record<string, unknown>;
+  return ['en', 'jp', 'kr'].every(k => typeof m[k] === 'string');
+}
+
 export default function ItemInlineDisplay({ names, text = true, size = 25 }: Props) {
-  const { key } = useTenant();
-  const lang: 'en' | 'jp' | 'kr' = key === 'jp' ? 'jp' : key === 'kr' ? 'kr' : 'en';
-
-  const pick = (base: string, jp?: string, kr?: string) =>
-    lang === 'jp' ? (jp ?? base) : lang === 'kr' ? (kr ?? base) : base;
-
+  const { lang } = useI18n(); // 'en' | 'jp' | 'kr'
   const normalized = Array.isArray(names) ? names : names ? [names] : [];
   const sizePixel = `${size}px`;
 
-  // On recherche par "name" canon EN (clé stable)
+  // Recherche par "name" canon EN
   const itemList = normalized
     .map((name) => items.find((item) => item.name === name))
     .filter((item): item is ItemDef => !!item);
@@ -51,12 +57,19 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
   return (
     <span className="inline-flex items-center gap-1 align-middle cursor-help">
       {itemList.map((item, idx) => {
-        const iconBase = toKebabCase(item.name); // slug depuis le nom canon EN
-        const webpIcon = `/images/items/${iconBase}.webp`;
-        const pngIcon = `/images/items/${iconBase}.png`;
+        const iconBase = item.icon
+          ? `/images/item/${item.icon}.webp`
+          : `/images/items/${toKebabCase(item.name)}.webp`;
+        const iconFallback = iconBase.replace(/\.webp$/, '.png');
 
-        const label = pick(item.name, item.name_jp, item.name_kr);
-        const description = pick(item.description, item.description_jp, item.description_kr);
+
+        // Nom localisé via l() : gère name/name_jp/name_kr
+        const label = l(item, 'name', lang as Lng);
+
+        // Description : accepte soit champs plats *_jp/_kr, soit map {en,jp,kr}
+        const description = isLangMap(item.description)
+          ? lRec(item.description, lang as Lng, { allowEmpty: true })
+          : l(item, 'description', lang as Lng, { allowEmpty: true });
 
         return (
           <HoverCard.Root key={`${item.name}-${idx}`} openDelay={0} closeDelay={0}>
@@ -79,7 +92,7 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
                     }}
                   />
                   <Image
-                    src={webpIcon}
+                    src={iconBase}
                     alt={label}
                     fill
                     className="relative z-10 object-contain"
@@ -87,7 +100,7 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
                     onError={(e) => {
                       const img = e.currentTarget as HTMLImageElement;
                       img.onerror = null;
-                      img.src = pngIcon;
+                      img.src = iconFallback;
                     }}
                   />
                 </span>
@@ -121,7 +134,7 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
                     }}
                   />
                   <Image
-                    src={webpIcon}
+                    src={iconBase}
                     alt={label}
                     fill
                     className="relative z-10 object-contain"
@@ -129,7 +142,7 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
                     onError={(e) => {
                       const img = e.currentTarget as HTMLImageElement;
                       img.onerror = null;
-                      img.src = pngIcon;
+                      img.src = iconFallback;
                     }}
                   />
                 </span>
@@ -137,10 +150,10 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
                 <span className="flex flex-col text-white">
                   <span className="font-bold text-sm leading-tight drop-shadow-sm">{label}</span>
                   <span className="text-xs leading-snug whitespace-pre-line drop-shadow-sm">
-                    {description}
+                    {description.replace(/\\n/g, '\n')}
                   </span>
                 </span>
-                <HoverCard.Arrow className="w-3 h-2 fill-current text-black" />
+                <HoverCard.Arrow className="w-3 h-2 fill-neutral-800" />
               </HoverCard.Content>
             </HoverCard.Portal>
           </HoverCard.Root>
