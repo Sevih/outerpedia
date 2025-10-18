@@ -9,6 +9,11 @@ const kr = {
   "nav.tierlist_short": "티어",
   "nav.utilities_short": "도구",
   "nav.guides_short": "가이드",
+  "tools.meta.title": "Outerplane 유틸리티 및 도구 | Outerpedia",
+  "tools.meta.desc": "티어 리스트, 장비 찾기, 뽑기 시뮬레이터, 쿠폰 코드 등 Outerplane 유틸리티를 사용하여 빌드와 게임플레이를 최적화하세요.",
+  "tools.meta.ogTitle": "Outerplane 유틸리티 및 도구",
+  "tools.meta.ogDesc": "유틸리티 및 도구 모음으로 Outerplane 게임플레이를 최적화하세요.",
+  "tools.page.h1": "Outerplane 유틸리티 및 도구",
 
   //title across the website
   "titles.main.main": "Outerplane 티어 리스트, 캐릭터 빌드, 가이드 및 데이터베이스",

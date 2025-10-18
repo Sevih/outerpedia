@@ -195,9 +195,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <BackButton fallback="/item" />
       </div>
       <div className="p-6 text-white">
-        {category === 'weapon' && renderWeapon(entry as Weapon, langKey)}
-        {category === 'accessory' && renderAccessory(entry as Accessory, langKey)}
-        {category === 'set' && renderSet(entry as ArmorSet, langKey)}
+        {category === 'weapon' && renderWeapon(entry as Weapon, langKey,t)}
+        {category === 'accessory' && renderAccessory(entry as Accessory, langKey,t)}
+        {category === 'set' && renderSet(entry as ArmorSet, langKey,t)}
       </div>
     </>
   )

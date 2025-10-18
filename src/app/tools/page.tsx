@@ -1,5 +1,6 @@
 import toolDescriptions from '@/lib/toolDescriptions.json';
 import type { Metadata } from 'next';
+import { createPageMetadata } from '@/lib/seo'
 import { getToolRoutes } from "@/lib/getToolRoutes";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,10 +11,6 @@ const tools = Object.values(toolDescriptions) as {
   name: string;
   description: string;
 }[];
-
-// 🔁 Titre & description alignés sur "Utilities"
-const title = 'Outerplane Utilities | Outerpedia';
-const description = `Use Outerplane utilities like ${tools.map(t => t.name).join(', ')}, and more to optimize your builds and gear.`;
 
 const stopwords = new Set([
   'the', 'and', 'their', 'with', 'which', 'use', 'using', 'helps', 'help', 'considered', 'effects', 'star', 'list', 'tool', 'tools', 'tier', 'gear', 'recommended',
@@ -33,23 +30,32 @@ for (const t of tools) {
   });
 }
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: 'https://outerpedia.com/tools' },
-  keywords: ['outerpedia', 'outerplane tools', 'outerplane utilities', 'mobile rpg tools', ...Array.from(keywords).sort()],
-  openGraph: {
-    title,
-    description,
-    url: 'https://outerpedia.com/tools',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title,
-    description,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return createPageMetadata({
+    path: '/tools',
+    titleKey: 'tools.meta.title',
+    descKey: 'tools.meta.desc',
+    ogTitleKey: 'tools.meta.ogTitle',
+    ogDescKey: 'tools.meta.ogDesc',
+    keywords: [
+      'outerpedia', 
+      'outerplane tools', 
+      'outerplane utilities', 
+      'tier list',
+      'gear finder',
+      'pull simulator',
+      'coupon codes',
+      'exclusive equipment',
+      'patch notes'
+    ],
+    image: {
+      url: '/images/ui/nav/CM_Lobby_Btn_StepUp.png',
+      width: 150,
+      height: 150,
+      altFallback: 'Outerplane Tools',
+    },
+  })
+}
 
 export default async function ToolsPage() {
   const h = await headers()
@@ -62,7 +68,7 @@ export default async function ToolsPage() {
   return (
     <main className="p-6">
       {/* 🏷️ Heading mis à "Utilities" */}
-      <h1 className="text-3xl font-bold mb-6">{t('nav.utilities')}</h1>
+      <h1 className="text-3xl font-bold mb-6">{t('tools.page.h1')}</h1>
       <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {tools.map((tool) => (
           <Link

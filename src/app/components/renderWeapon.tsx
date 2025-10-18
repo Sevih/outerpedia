@@ -64,9 +64,10 @@ function localize(entry: Weapon, lang: Lang) {
  * @param entry Weapon
  * @param lang 'en' | 'jp' | 'kr' (par défaut 'en')
  */
-export default function renderWeapon(entry: Weapon, lang: Lang = 'en') {
+export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: string, vars?: Record<string, unknown>) => string) {
     const L = LABELS[lang]
     const loc = localize(entry, lang)
+
 
     // Images d’affichage en .webp (pas de remplacement)
     const imageUrl = `/images/equipment/${entry.image}.webp`
@@ -158,7 +159,7 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en') {
 
 
                 <div className="text-center sm:text-left">
-                    <h1 className="text-2xl font-bold mb-2">{loc.name}</h1>
+                    <h1 className="text-2xl font-bold mb-2">{loc.name} - {t('weapons')}</h1>
 
                     {entry.class && (
                         <p className="text-sm text-neutral-300">

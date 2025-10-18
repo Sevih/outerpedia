@@ -9,6 +9,11 @@ const jp = {
   "nav.tierlist_short": "ティア",
   "nav.utilities_short": "ツール",
   "nav.guides_short": "ガイド",
+  "tools.meta.title": "Outerplaneユーティリティ＆ツール | Outerpedia",
+  "tools.meta.desc": "ティアリスト、装備検索、ガチャシミュレーター、クーポンコードなどのOuterplaneユーティリティを使用して、ビルドとゲームプレイを最適化します。",
+  "tools.meta.ogTitle": "Outerplaneユーティリティ＆ツール",
+  "tools.meta.ogDesc": "ユーティリティとツールのコレクションでOuterplaneのゲームプレイを最適化しましょう。",
+  "tools.page.h1": "Outerplaneユーティリティ＆ツール",
 
   //title across the website
   "titles.main.main": "Outerplane ティアリスト・キャラビルド・ガイド・データベース",

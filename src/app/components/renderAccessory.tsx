@@ -64,7 +64,7 @@ function localize(entry: Accessory, lang: Lang) {
   return { name, effect_name, effect_desc1, effect_desc4, source }
 }
 
-export default function renderAccessory(entry: Accessory, lang: Lang = 'en') {
+export default function renderAccessory(entry: Accessory, lang: Lang = 'en',t: (key: string, vars?: Record<string, unknown>) => string) {
   const L = LABELS[lang]
   const loc = localize(entry, lang)
 
@@ -160,7 +160,7 @@ export default function renderAccessory(entry: Accessory, lang: Lang = 'en') {
         </div>
 
         <div className="text-center sm:text-left">
-          <h1 className="text-2xl font-bold mb-2">{loc.name}</h1>
+          <h1 className="text-2xl font-bold mb-2">{loc.name} - {t('equipments_tabs.accessory')}</h1>
 
           {entry.class && (
             <p className="text-sm text-neutral-300">

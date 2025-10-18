@@ -9,6 +9,11 @@ const en = {
   "nav.tierlist_short": "Tier List",
   "nav.utilities_short": "Utils",
   "nav.guides_short": "Guides",
+"tools.meta.title": "Outerplane Utilities & Tools | Outerpedia",
+  "tools.meta.desc": "Use Outerplane utilities like Tier Lists, Gear Finder, Pull Simulator, and Coupon Codes to optimize your builds and gameplay.",
+  "tools.meta.ogTitle": "Outerplane Utilities & Tools",
+  "tools.meta.ogDesc": "Optimize your Outerplane gameplay with our collection of utilities and tools.",
+  "tools.page.h1": "Outerplane Utilities & Tools",
 
   //title across the website
   'titles.main.main': 'Outerplane Tier List, Character Builds, Guides & Database',

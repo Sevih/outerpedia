@@ -14,11 +14,10 @@ const LABELS: Record<Lang, {
   setEffects: string
   twoPiece: string
   fourPiece: string
-  setSuffix: string
 }> = {
-  en: { rarity: 'Rarity:', setEffects: 'Set Effects', twoPiece: '2-Piece', fourPiece: '4-Piece', setSuffix: 'Set' },
-  jp: { rarity: 'レア度：', setEffects: 'セット効果', twoPiece: '2セット', fourPiece: '4セット', setSuffix: 'セット' },
-  kr: { rarity: '희귀도:', setEffects: '세트 효과', twoPiece: '2세트', fourPiece: '4세트', setSuffix: '세트' },
+  en: { rarity: 'Rarity:', setEffects: 'Set Effects', twoPiece: '2-Piece', fourPiece: '4-Piece' },
+  jp: { rarity: 'レア度：', setEffects: 'セット効果', twoPiece: '2セット', fourPiece: '4セット' },
+  kr: { rarity: '희귀도:', setEffects: '세트 효과', twoPiece: '2세트', fourPiece: '4세트' },
 }
 
 
@@ -52,10 +51,9 @@ function localize(entry: ArmorSet, lang: Lang) {
   return { name, effect_2_1, effect_4_1, effect_2_4, effect_4_4 }
 }
 
-export default function renderSet(entry: ArmorSet, lang: Lang = 'en') {
+export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: string, vars?: Record<string, unknown>) => string) {
   const L = LABELS[lang]
   const loc = localize(entry, lang)
-
   // Icône de set : set_icon contient déjà le nom complet qui commence par TI_Icon_Set_Enchant_...
   const imageUrl = entry.set_icon
     ? `/images/ui/effect/${entry.set_icon}.webp`
@@ -82,7 +80,7 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en') {
 
         <div className="text-center sm:text-left">
           <h1 className="text-2xl font-bold mb-2">
-            {loc.name} {L.setSuffix}
+            {loc.name} - {t('equipments_tabs.armor')}
           </h1>
         </div>
       </div>
@@ -141,7 +139,7 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en') {
           {imageUrl && (
             <div className="flex items-center gap-2">
               <Image src={imageUrl} alt="Set Icon" width={24} height={24} />
-              <span className="font-semibold text-white">{loc.name} {L.setEffects}</span>
+              <span className="font-semibold text-white">{loc.name} - {L.setEffects}</span>
             </div>
           )}
 
