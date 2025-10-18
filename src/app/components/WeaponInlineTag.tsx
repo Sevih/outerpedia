@@ -65,7 +65,7 @@ export default function WeaponInlineTag({
                     >
                         <div className="relative w-full h-full">
                             <Image
-                                src={`/images/equipment/${weapon.image}`}
+                                src={`/images/equipment/${weapon.image}.webp`}
                                 alt={label}
                                 fill
                                 className="object-contain"

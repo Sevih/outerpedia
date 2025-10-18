@@ -68,7 +68,7 @@ export default function AmuletInlineTag({
           >
             <div className="relative w-full h-full">
               <Image
-                src={`/images/equipment/${amulet.image}`}
+                src={`/images/equipment/${amulet.image}.webp`}
                 alt={label}
                 fill
                 className="object-contain"

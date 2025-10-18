@@ -22,6 +22,7 @@ import type { Weapon, Accessory, ArmorSet } from '@/types/equipment'
 import { TENANTS, OG_LOCALE, HREFLANG, type TenantKey } from '@/tenants/config'
 import { toKebabCase } from '@/utils/formatText'
 import BackButton from '@/app/components/ui/BackButton'
+import { l } from '@/lib/localize'
 
 // ---------- Types ----------
 type Category = 'weapon' | 'accessory' | 'set'
@@ -124,6 +125,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const entry = getEntry(category, slug) as (Weapon | Accessory | ArmorSet | null)
   if (!entry) return notFoundMeta(domain, path, ogLocale)
 
+  const translatedName = l(entry, 'name', langKey)
   const image = `https://${domain}${getItemPngImageUrl(category, entry)}`
 
   // ✅ Respect règle projet : PNG en metadata
@@ -136,21 +138,21 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     twitterTitleKey: 'item.meta.twTitle',
     twitterDescKey: 'item.meta.twDesc',
     keywords: [
-      'Outerplane', 'Outerpedia', entry.name,
-      `${entry.name} Outerplane`, `${entry.name} Build`, `${entry.name} Guide`,
+      'Outerplane', 'Outerpedia', translatedName,
+      `${translatedName} Outerplane`, `${translatedName} Build`, `${translatedName} Guide`,
       category, 'gear', 'effect',
     ],
     image: {
       url: image,           // ton URL absolue, .webp auto-convertie en .png par seo.ts si besoin
       width: 512,
       height: 512,
-      altFallback: `${entry.name} - ${capitalize(category)} Image`,
+      altFallback: `${translatedName} - ${capitalize(category)} Image`,
     },
     ogType: 'website',
     twitterCard: 'summary',
     // variables pour interpoler les clés i18n
     vars: {
-      name: entry.name,
+      name: translatedName,
       category: capitalize(category),
     },
   })
