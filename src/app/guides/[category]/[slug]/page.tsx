@@ -8,7 +8,6 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import { getTenantServer } from '@/tenants/tenant.server'
 import type { TenantKey } from '@/tenants/config'
-
 import { createPageMetadata } from '@/lib/seo'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd, guidesWebPageLd } from './jsonld'
@@ -40,7 +39,7 @@ type CategoryMeta = {
   valid: boolean
 }
 
-type Props = { params: { category: string; slug: string } }
+type Props = { params: Promise<{ category: string; slug: string }> }
 
 const categoryMeta = rawCategoryMeta as Record<string, CategoryMeta>
 const guides = rawGuides as Record<string, Guide>
@@ -54,7 +53,7 @@ export async function generateStaticParams() {
 }
 
 // ---------- Metadata ----------
-export async function generateMetadata({ params }: { params: Promise<Props['params']> }): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { key: langKey, domain } = await getTenantServer()
   const { category, slug } = await params
   const guide = guides[slug]
@@ -74,7 +73,6 @@ export async function generateMetadata({ params }: { params: Promise<Props['para
 
   const path = `/guides/${guide.category}/${slug}` as `/${string}`
 
-  // ✅ PNG pour SEO images
   const ogPng =
     guide.category === 'monad-gate'
       ? `https://${domain}/images/guides/monad-gate/CM_Adventure_MonadGate.png`
@@ -110,7 +108,7 @@ export async function generateMetadata({ params }: { params: Promise<Props['para
 }
 
 // ---------- Page ----------
-export default async function GuidePage({ params }: { params: Promise<Props['params']> }) {
+export default async function GuidePage({ params }: Props) {
   const { key: langKey, domain } = await getTenantServer()
   const { category, slug } = await params
   const guide = guides[slug]
@@ -140,7 +138,6 @@ export default async function GuidePage({ params }: { params: Promise<Props['par
 
   return (
     <div className="p-6">
-      {/* JSON-LD */}
       <JsonLd
         json={[
           websiteLd(domain),
@@ -159,10 +156,8 @@ export default async function GuidePage({ params }: { params: Promise<Props['par
         ]}
       />
 
-      {/* Titre masqué pour SEO */}
-      <div className="sr-only">
-        <h1>{`${guideTitle} | ${catTitle}`}</h1>
-      </div>
+      {/* H1 visible pour les lecteurs d'écran */}
+      <h1 className="sr-only">{`${guideTitle} - ${catTitle}`}</h1>
 
       {/* Bannière */}
       <div className="relative w-full h-[150px] rounded-2xl overflow-hidden mb-6">
@@ -212,39 +207,55 @@ export default async function GuidePage({ params }: { params: Promise<Props['par
 
         {/* Overlay titre */}
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-white text-center px-4">
-          <div className="text-xs sm:text-sm uppercase tracking-wide font-semibold mb-3">
-            <span>{category.replace(/-/g, ' ')}</span>
-          </div>
-          <div className="text-base sm:text-lg md:text-xl font-bold leading-tight max-w-full break-words">
-            <span>{guideTitle}</span>
-          </div>
+          <p className="guide-title text-xs sm:text-sm uppercase tracking-wide font-semibold mb-3">
+            {category.replace(/-/g, ' ')}
+          </p>
+          <p className="guide-title text-base sm:text-lg md:text-xl font-bold leading-tight max-w-full break-words">
+            {guideTitle}
+          </p>
         </div>
       </div>
 
       {/* Auteur + date */}
       <div className="text-sm text-neutral-400 mb-6">
-        ✍️ {guide.author} · 🕒 {new Date(guide.last_updated).toLocaleDateString()}
+        ✍️ <span itemProp="author">{guide.author}</span> · 🕒{' '}
+        <time dateTime={guide.last_updated}>
+          {new Date(guide.last_updated).toLocaleDateString()}
+        </time>
       </div>
 
       {/* Texte introductif */}
-      <p className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
-        This guide covers <strong>{guideTitle}</strong> in Outerplane.
-        <br />
-        If you have additional strategies or suggestions, share them on&nbsp;
-        <Link
-          href="https://discord.gg/keGhVQWsHv"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline inline-flex items-center gap-1 text-amber-300"
-        >
-          EvaMains Discord
-        </Link>.
-      </p>
-
-      {/* Contenu principal */}
-      <div className="mt-6">
-        <GuideContentWrapper category={category} slug={slug} />
+      <div className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
+        <p className="mb-2">
+          This guide covers <strong>{guideTitle}</strong> in Outerplane.
+        </p>
+        <p>
+          If you have additional strategies or suggestions, share them on{' '}
+          <Link
+            href="https://discord.gg/keGhVQWsHv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline inline-flex items-center gap-1 text-amber-300"
+          >
+            EvaMains Discord
+          </Link>
+          .
+        </p>
       </div>
+
+      {/* Contenu principal avec métadonnées structurées */}
+      <article 
+        className="mt-6"
+        itemScope
+        itemType="https://schema.org/Guide"
+      >
+        <meta itemProp="name" content={guideTitle} />
+        <meta itemProp="description" content={guideDesc} />
+        <meta itemProp="datePublished" content={guide.last_updated} />
+        <meta itemProp="author" content={guide.author} />
+        
+        <GuideContentWrapper category={category} slug={slug} />
+      </article>
     </div>
   )
 }
@@ -255,9 +266,16 @@ function generateGuideKeywords(guide: Guide, slug: string, lang: TenantKey): str
     typeof guide.title === 'string' ? guide.title : (guide.title[lang] ?? guide.title.en)
 
   const base_en = [
-    'outerplane', 'outerpedia', 'outerplane wiki', 'outerplane guide',
-    titleStr, `${titleStr} guide`, slug,
-    'turn-based rpg', 'mobile rpg', 'character builds',
+    'outerplane',
+    'outerpedia',
+    'outerplane wiki',
+    'outerplane guide',
+    titleStr,
+    `${titleStr} guide`,
+    slug,
+    'turn-based rpg',
+    'mobile rpg',
+    'character builds',
   ]
   const base_jp = ['アウタープレーン', 'Outerpedia', `${titleStr} ガイド`]
   const base_kr = ['아우터플레인', 'Outerpedia', `${titleStr} 가이드`]

@@ -495,6 +495,11 @@ const jp = {
   'guides.twitter.title': 'Outerplane 攻略ガイド',
   'guides.twitter.desc': '最新ガイド一覧: {list}。',
 
+  "legal.meta.title": "法的情報 | Outerpedia",
+  "legal.meta.desc": "Outerpediaの法的免責事項、著作権、コンテンツ使用情報。Outerplaneの非営利ファンプロジェクト。",
+  "legal.meta.ogTitle": "法的情報 | Outerpedia",
+  "legal.meta.ogDesc": "Outerpediaファンプロジェクトの法的情報と免責事項。"
+
 
 
 

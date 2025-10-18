@@ -89,3 +89,6 @@ scripts/backup-full-to-private.sh
 /certs/
 Caddyfile
 robots.txt
+
+/src/data/oldguide*
+audit.txt

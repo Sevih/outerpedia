@@ -9,7 +9,7 @@ const en = {
   "nav.tierlist_short": "Tier List",
   "nav.utilities_short": "Utils",
   "nav.guides_short": "Guides",
-"tools.meta.title": "Outerplane Utilities & Tools | Outerpedia",
+  "tools.meta.title": "Outerplane Utilities & Tools | Outerpedia",
   "tools.meta.desc": "Use Outerplane utilities like Tier Lists, Gear Finder, Pull Simulator, and Coupon Codes to optimize your builds and gameplay.",
   "tools.meta.ogTitle": "Outerplane Utilities & Tools",
   "tools.meta.ogDesc": "Optimize your Outerplane gameplay with our collection of utilities and tools.",
@@ -452,7 +452,7 @@ const en = {
   'item.meta.ogDesc': 'Explore stats and effects for {name} on Outerpedia.',
   'item.meta.twTitle': '{name}',
   'item.meta.twDesc': 'Stats and effects for {name} in Outerplane.',
-// Category pages
+  // Category pages
   'guides.cat.meta.title': '{cat} | Outerpedia',
   'guides.cat.meta.desc': '{desc}',
   'guides.cat.og.title': '{cat} Guides',  // ✅ Ajout de "Guides"
@@ -460,12 +460,12 @@ const en = {
   'guides.cat.tw.title': '{cat} Guides',  // ✅ Ajout de "Guides"
   'guides.cat.tw.desc': '{desc}',
   // Detail pages - CHANGEMENTS ICI
-  'guides.detail.meta.title': '{guide} - {cat} Guide | Outerpedia',  // ✅ Remplace | par -
-  'guides.detail.meta.desc': 'Complete guide for {guide} in Outerplane. {desc}',  // ✅ Plus descriptif
+  'guides.detail.meta.title': '{guide} - {cat} | Outerpedia',  // ✅ Remplace | par -
+  'guides.detail.meta.desc': 'Complete {cat} for {guide}  in Outerplane. {desc}',  // ✅ Plus descriptif
   'guides.detail.og.title': '{guide} - {cat} Guide',  // ✅ Format optimisé
-  'guides.detail.og.desc': '{desc}',  // ✅ Garde la desc simple
+  'guides.detail.og.desc': 'Complete {cat} for {guide}  in Outerplane. {desc}',  // ✅ Garde la desc simple
   'guides.detail.tw.title': '{guide} Guide',  // ✅ Plus court pour Twitter
-  'guides.detail.tw.desc': '{desc}',
+  'guides.detail.tw.desc': 'Complete {cat} for {guide}  in Outerplane. {desc}',
 
   'equip.meta.title': 'Equipments – Outerpedia',
   'equip.meta.desc': 'Browse all equipment in Outerplane: weapons, accessories, talismans, sets, and exclusive equipment.',
@@ -495,7 +495,10 @@ const en = {
   'guides.twitter.title': 'Outerplane Guides',
   'guides.twitter.desc': 'Latest guides: {list}.',
 
-
+  "legal.meta.title": "Legal Notice & Disclaimer | Outerpedia",
+  "legal.meta.desc": "Legal disclaimer, copyright, and content usage information for Outerpedia, a non-commercial fan project dedicated to Outerplane.",
+  "legal.meta.ogTitle": "Legal Notice | Outerpedia",
+  "legal.meta.ogDesc": "Legal information and disclaimer for Outerpedia fan project."
 
 
 

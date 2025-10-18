@@ -495,6 +495,11 @@ const kr = {
   'guides.twitter.title': 'Outerplane 가이드',
   'guides.twitter.desc': '최신 공략: {list}.',
 
+  "legal.meta.title": "법적 고지 | Outerpedia",
+  "legal.meta.desc": "Outerpedia의 법적 면책 조항, 저작권 및 콘텐츠 사용 정보. Outerplane 비영리 팬 프로젝트.",
+  "legal.meta.ogTitle": "법적 고지 | Outerpedia",
+  "legal.meta.ogDesc": "Outerpedia 팬 프로젝트의 법적 정보 및 면책 조항."
+
 
 
 

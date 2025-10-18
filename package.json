@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "5.0.12",
+  "version": "5.0.13",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -22,7 +22,9 @@
     "gen:pool": "node scripts/generate-pool-data.cjs",
     "commit:dry": "node scripts/commit.mjs --dry-run",
     "commit": "node scripts/commit.mjs --no-changelog",
-    "commit:fast": "node scripts/commit.mjs --no-changelog --skip-build"
+    "commit:fast": "node scripts/commit.mjs --no-changelog --skip-build",
+    "seo:audit": "node scripts/seo-audit.js",
+    "seo:check": "npm run seo:audit"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",

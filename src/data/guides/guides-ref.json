@@ -1,128 +1,256 @@
 {
   "dahlia": {
     "category": "world-boss",
-    "title": "Dahlia",
-    "description": "World Boss Guide! Full Run and Explanation",
+    "title": {
+      "en": "Dahlia",
+      "jp": "ダリア",
+      "kr": "달리아"
+    },
+    "description": {
+      "en": "Full run and explanation with optimal team compositions",
+      "jp": "最適なチーム編成による完全攻略と解説",
+      "kr": "최적의 팀 구성으로 완전 공략 및 설명"
+    },
     "icon": "dahlia",
     "last_updated": "2025-07-01",
     "author": "Sevih"
   },
   "ragnakeus": {
     "category": "world-boss",
-    "title": "Ragnakeus",
-    "description": "Video guide",
+    "title": {
+      "en": "Ragnakeus",
+      "jp": "ラグナケウス",
+      "kr": "라그나케우스"
+    },
+    "description": {
+      "en": "Video guide with strategy and team recommendations",
+      "jp": "戦略とチーム推奨を含むビデオガイド",
+      "kr": "전략 및 팀 추천이 포함된 비디오 가이드"
+    },
     "icon": "ragnakeus",
     "last_updated": "2024-10-28",
     "author": "Ducky"
   },
   "harshna": {
     "category": "world-boss",
-    "title": "Harshna",
-    "description": "World Boss Guide! Full Run and Explanation",
+    "title": {
+      "en": "Harshna",
+      "jp": "ハルシュナ",
+      "kr": "하르슈나"
+    },
+    "description": {
+      "en": "Full run and explanation with optimal team compositions",
+      "jp": "最適なチーム編成による完全攻略と解説",
+      "kr": "최적의 팀 구성으로 완전 공략 및 설명"
+    },
     "icon": "harshna",
     "last_updated": "2025-07-29",
     "author": "Sevih"
   },
   "drakhan": {
     "category": "world-boss",
-    "title": "Drakhan",
-    "description": "Combat Footage",
+    "title": {
+      "en": "Drakhan",
+      "jp": "ドレイカーン",
+      "kr": "드레이칸"
+    },
+    "description": {
+      "en": "Combat footage with strategy breakdown",
+      "jp": "戦略解説付きの戦闘映像",
+      "kr": "전략 분석이 포함된 전투 영상"
+    },
     "icon": "drakhan",
     "last_updated": "2024-12-17",
     "author": "Ducky"
   },
   "primordial_sentinel": {
     "category": "world-boss",
-    "title": "Primordial Sentinel",
-    "description": "World Boss Guide! Full Run and Explanation",
+    "title": {
+      "en": "Primordial Sentinel",
+      "jp": "太古の番兵",
+      "kr": "태고의 파수병"
+    },
+    "description": {
+      "en": "Full run and explanation with optimal team compositions",
+      "jp": "最適なチーム編成による完全攻略と解説",
+      "kr": "최적의 팀 구성으로 완전 공략 및 설명"
+    },
     "icon": "primordial_sentinel",
     "last_updated": "2024-07-09",
     "author": "Ducky"
   },
   "venion": {
     "category": "world-boss",
-    "title": "Venion",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Venion",
+      "jp": "ベニオン",
+      "kr": "베니온"
+    },
+    "description": {
+      "en": "Strategy guide with team recommendations and mechanics breakdown",
+      "jp": "チーム推奨とメカニクス解説を含む攻略ガイド",
+      "kr": "팀 추천 및 메커니즘 분석이 포함된 공략 가이드"
+    },
     "icon": "venion",
     "last_updated": "2025-06-04",
     "author": "Sevih"
   },
   "glicys": {
     "category": "special-request",
-    "title": "Glicys",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Glicys",
+      "jp": "グリシス",
+      "kr": "글리시스"
+    },
+    "description": {
+      "en": "Strategy guide for Special Request: Identification mission",
+      "jp": "特別依頼：正体究明ミッションの攻略ガイド",
+      "kr": "특별 의뢰: 정체 규명 미션 공략 가이드"
+    },
     "icon": "glicys",
     "last_updated": "2025-04-08",
     "author": "Arabyss & Kilvanoshei"
   },
   "beatles": {
     "category": "special-request",
-    "title": "Dek'ril & Mek'ril",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Dek'Ril & Mek'Ril",
+      "jp": "メグリル&デグリル",
+      "kr": "데그릴 & 메그릴"
+    },
+    "description": {
+      "en": "Twin beetle bosses strategy for Special Request: Identification mission",
+      "jp": "特別依頼：正体究明ミッションの双子カブトムシボス攻略",
+      "kr": "특별 의뢰: 정체 규명 미션 쌍둥이 딱정벌레 보스 공략"
+    },
     "icon": "beatles",
     "last_updated": "2025-04-08",
     "author": "Arabyss & Kilvanoshei"
   },
   "meteos": {
     "category": "special-request",
-    "title": "Blazing Knight Meteos",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Blazing Knight Meteos",
+      "jp": "火炎の騎士メテウス",
+      "kr": "화염기사 메테우스"
+    },
+    "description": {
+      "en": "Strategy guide for Special Request: Identification mission",
+      "jp": "特別依頼：正体究明ミッションの攻略ガイド",
+      "kr": "특별 의뢰: 정체 규명 미션 공략 가이드"
+    },
     "icon": "meteos",
     "last_updated": "2025-04-08",
     "author": "Arabyss & Kilvanoshei"
   },
   "chimera": {
     "category": "special-request",
-    "title": "Unidentified Chimera",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Unidentified Chimera",
+      "jp": "未確認キメラ",
+      "kr": "미확인 키메라"
+    },
+    "description": {
+      "en": "Strategy guide for Special Request: Ecology Study mission",
+      "jp": "特別依頼：生態調査ミッションの攻略ガイド",
+      "kr": "특별 의뢰: 생태 조사 미션 공략 가이드"
+    },
     "icon": "chimera",
     "last_updated": "2024-09-19",
     "author": "Ducky"
   },
   "guardian": {
     "category": "special-request",
-    "title": "Masterless Guardian",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Masterless Guardian",
+      "jp": "主を失ったガーディアン",
+      "kr": "주인 잃은 가디언"
+    },
+    "description": {
+      "en": "Strategy guide for Special Request: Ecology Study mission",
+      "jp": "特別依頼：生態調査ミッションの攻略ガイド",
+      "kr": "특별 의뢰: 생태 조사 미션 공략 가이드"
+    },
     "icon": "guardian",
     "last_updated": "2024-09-19",
     "author": "Ducky"
   },
   "ars-nova": {
     "category": "special-request",
-    "title": "Ars Nova",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Ars Nova",
+      "jp": "アルス・ノーヴァ",
+      "kr": "아르스 노바"
+    },
+    "description": {
+      "en": "Strategy guide for Special Request: Identification mission",
+      "jp": "特別依頼：正体究明ミッションの攻略ガイド",
+      "kr": "특별 의뢰: 정체 규명 미션 공략 가이드"
+    },
     "icon": "ars-nova",
     "last_updated": "2025-05-13",
     "author": "SADtherobot"
   },
   "amadeus": {
     "category": "special-request",
-    "title": "Amadeus",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Amadeus",
+      "jp": "アマデウス",
+      "kr": "아마데우스"
+    },
+    "description": {
+      "en": "Strategy guide for Special Request: Identification mission",
+      "jp": "特別依頼：正体究明ミッションの攻略ガイド",
+      "kr": "특별 의뢰: 정체 규명 미션 공략 가이드"
+    },
     "icon": "amadeus",
     "last_updated": "2025-04-11",
     "author": "SADtherobot"
   },
   "sacreed": {
     "category": "special-request",
-    "title": "Sacreed Guardian",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Sacreed Guardian",
+      "jp": "セイクリッドガーディアン",
+      "kr": "세이크리드 가디언"
+    },
+    "description": {
+      "en": "Strategy guide for Special Request: Ecology Study mission",
+      "jp": "特別依頼：生態調査ミッションの攻略ガイド",
+      "kr": "특별 의뢰: 생태 조사 미션 공략 가이드"
+    },
     "icon": "sacreed",
     "last_updated": "2025-05-01",
     "author": "SADtherobot"
   },
   "grand-calamari": {
     "category": "special-request",
-    "title": "Grand Calamari",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Grand Calamari",
+      "jp": "グラン・カラマリー",
+      "kr": "그랑 칼라마리"
+    },
+    "description": {
+      "en": "Strategy guide for Special Request: Ecology Study mission",
+      "jp": "特別依頼：生態調査ミッションの攻略ガイド",
+      "kr": "특별 의뢰: 생태 조사 미션 공략 가이드"
+    },
     "icon": "calamari",
     "last_updated": "2025-04-01",
     "author": "SADtherobot"
   },
   "tyrant": {
     "category": "special-request",
-    "title": "Tyrant Toddler",
-    "description": "Boss strategy guide",
+    "title": {
+      "en": "Tyrant Toddler",
+      "jp": "タイラントの幼生",
+      "kr": "타일런트 유생체"
+    },
+    "description": {
+      "en": "Strategy guide for Special Request: Ecology Study mission",
+      "jp": "特別依頼：生態調査ミッションの攻略ガイド",
+      "kr": "특별 의뢰: 생태 조사 미션 공략 가이드"
+    },
     "icon": "tyrant",
     "last_updated": "2024-09-19",
     "author": "Ducky"
@@ -471,13 +599,21 @@
   },
   "free-heroes-start-banner": {
     "category": "general-guides",
-    "title": "Free Heroes & Starter Banners",
-    "description": "Learn which heroes you'll get for free in Outerplane and how to make the best choices from the Start",
+    "title": {
+      "en": "Free Heroes & Starter Banners",
+      "jp": "無料ヒーロー&スターターバナー",
+      "kr": "무료 영웅 & 스타터 배너"
+    },
+    "description": {
+      "en": "Learn which heroes you'll get for free in Outerplane and how to make the best choices from the start",
+      "jp": "Outerplaneで無料で入手できるヒーローと、最初から最適な選択をする方法を学びましょう。",
+      "kr": "Outerplane에서 무료로 받을 수 있는 영웅과 시작부터 최선의 선택을 하는 방법을 배우세요."
+    },
     "icon": "T_Chat_Emoticon_08",
     "last_updated": "2025-05-17",
     "author": "Various Author",
     "second_image": "T_Chat_Emoticon_05",
-    "weight":1
+    "weight": 1
   },
   "daily-stamina": {
     "category": "general-guides",
@@ -495,17 +631,25 @@
     "last_updated": "2025-05-13",
     "author": "SADtherobot",
     "second_image": "T_Chat_Emoticon_04",
-    "weight":250
+    "weight": 250
   },
   "banner-mileage": {
     "category": "general-guides",
-    "title": "Banners & Mileage System",
-    "description": "Understand the banner types and the mileage system in Outerplane to optimize your summons.",
+    "title": {
+      "en": "Banners & Mileage System",
+      "jp": "バナー&マイレージシステム",
+      "kr": "배너 & 마일리지 시스템"
+    },
+    "description": {
+      "en": "Understand the banner types and the mileage system in Outerplane to optimize your summons.",
+      "jp": "Outerplaneのバナータイプとマイレージシステムを理解して、召喚を最適化しましょう。",
+      "kr": "Outerplane의 배너 유형과 마일리지 시스템을 이해하고 소환을 최적화하세요."
+    },
     "icon": "myth",
     "last_updated": "2025-05-25",
     "author": "Sevih",
     "second_image": "myth2",
-    "weight":50
+    "weight": 50
   },
   "S1-8-5": {
     "category": "adventure",
@@ -649,34 +793,58 @@
   },
   "heroes-growth": {
     "category": "general-guides",
-    "title": "Hero Growth",
-    "description": "A complete breakdown of how to power up your heroes efficiently, from leveling and upgrades to transcendence, gear, skills, and trust.",
+    "title": {
+      "en": "Hero Growth",
+      "jp": "ヒーロー育成",
+      "kr": "영웅 육성"
+    },
+    "description": {
+      "en": "A complete breakdown of how to power up your heroes efficiently, from leveling and upgrades to transcendence, gear, skills, and trust.",
+      "jp": "レベリング、アップグレード、超越、装備、スキル、信頼まで、ヒーローを効率的に強化する方法の完全ガイド。",
+      "kr": "레벨링, 업그레이드, 초월, 장비, 스킬, 신뢰도까지 영웅을 효율적으로 강화하는 방법에 대한 완전 가이드."
+    },
     "icon": "heroes-growth",
     "second_image": "heroes-growth-2",
     "last_updated": "2025-05-28",
     "author": "Sevih",
-    "weight":400
+    "weight": 400
   },
   "gear": {
     "category": "general-guides",
-    "title": "Gear",
-    "description": "A guide to gear types, upgrades, and how to make your equipment stronger.",
+    "title": {
+      "en": "Gear",
+      "jp": "装備",
+      "kr": "장비"
+    },
+    "description": {
+      "en": "A guide to gear types, upgrades, and how to make your equipment stronger.",
+      "jp": "装備タイプ、アップグレード、装備を強化する方法のガイド。",
+      "kr": "장비 유형, 업그레이드 및 장비를 강화하는 방법에 대한 가이드."
+    },
     "icon": "gear",
     "second_image": "gear-2",
     "last_updated": "2025-05-28",
     "author": "Sevih",
-    "weight":450
+    "weight": 450
   },
   "quirk": {
     "category": "general-guides",
-    "title": "Quirk System",
-    "description": "Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials.",
+    "title": {
+      "en": "Quirk System",
+      "jp": "ギフトシステム",
+      "kr": "기프트 시스템"
+    },
+    "description": {
+      "en": "Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials.",
+      "jp": "ギフトシステムでヒーローを効率的に強化する方法：アップグレードパス、推奨優先順位、必要素材。",
+      "kr": "기프트 시스템으로 영웅을 효율적으로 강화하는 방법: 업그레이드 경로, 추천 우선순위, 필요 재료."
+    },
     "icon": "quirk",
     "second_image": "quirk-2",
     "last_updated": "2025-05-28",
     "author": "Kilvanoshei",
     "hide": false,
-    "weight":500
+    "weight": 500
   },
   "stats": {
     "category": "general-guides",
@@ -686,7 +854,7 @@
     "second_image": "stats",
     "last_updated": "2025-06-09",
     "author": "Sevih / Shiraen",
-    "weight":550
+    "weight": 550
   },
   "depth8-route1": {
     "category": "monad-gate",
@@ -750,13 +918,21 @@
   },
   "timegate-resource": {
     "category": "general-guides",
-    "title": "Timegated Resources Guide",
-    "description": "Complete guide to Outerplane’s timegated resources — skill books, transistones, special gear materials, and glunite sources.",
+    "title": {
+      "en": "Timegated Resources Guide",
+      "jp": "時間制限リソースガイド",
+      "kr": "시간 제한 자원 가이드"
+    },
+    "description": {
+      "en": "Complete guide to Outerplane's timegated resources — skill books, transistones, special gear materials, and glunite sources.",
+      "jp": "Outerplaneの時間制限リソースの完全ガイド — スキルブック、トランジストーン、特殊装備素材、グルナイト源。",
+      "kr": "Outerplane의 시간 제한 자원 완전 가이드 — 스킬북, 트랜지스톤, 특수 장비 재료, 글루나이트 소스."
+    },
     "icon": "timegate-resource",
     "second_image": "timegate-resource2",
     "last_updated": "2025-07-31",
     "author": "Sevih / Shiraen",
-    "weight":350
+    "weight": 350
   },
   "planetary-control-unit": {
     "category": "guild-raid",
@@ -768,33 +944,57 @@
   },
   "shop-purchase-priorities": {
     "category": "general-guides",
-    "title": "Shop Purchase Priorities",
-    "description": "Outerplane shop guide with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely.",
+    "title": {
+      "en": "Shop Purchase Priorities",
+      "jp": "ショップ購入優先順位",
+      "kr": "상점 구매 우선순위"
+    },
+    "description": {
+      "en": "Outerplane shop guide with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely.",
+      "jp": "Outerplaneショップガイド：購入優先順位 — 購入すべきアイテム、スキップすべきもの、通貨の賢い使い方。",
+      "kr": "Outerplane 상점 가이드: 구매 우선순위 — 구매해야 할 아이템, 건너뛸 것, 화폐를 현명하게 사용하는 방법."
+    },
     "icon": "shop-purchase-priorities",
     "second_image": "shop-purchase-priorities2",
     "last_updated": "2025-08-18",
     "author": "Sevih / Shiraen",
-    "weight":300
+    "weight": 300
   },
   "premium-limited": {
     "category": "general-guides",
-    "title": "Premium & Limited Guide",
-    "description": "Pull priorities, PvE/PvP recommendations, and key transcendence sweetspots (3★→6★) for Premium and Limited heroes in Outerplane.",
+    "title": {
+      "en": "Premium & Limited Guide",
+      "jp": "プレミアム&期間限定ガイド",
+      "kr": "프리미엄 & 한정 가이드"
+    },
+    "description": {
+      "en": "Pull priorities, PvE/PvP recommendations, and key transcendence sweetspots (3★→6★) for Premium and Limited heroes in Outerplane.",
+      "jp": "Outerplaneのプレミアムと期間限定ヒーローの召喚優先順位、PvE/PvP推奨、重要な超越スイートスポット（3★→6★）。",
+      "kr": "Outerplane의 프리미엄 및 한정 영웅에 대한 뽑기 우선순위, PvE/PvP 추천, 주요 초월 스위트스팟 (3★→6★)."
+    },
     "icon": "premium-limited",
     "second_image": "premium-limited2",
     "last_updated": "2025-08-25",
     "author": "Shiraen",
-    "weight":100
+    "weight": 100
   },
   "ether-income": {
     "category": "general-guides",
-    "title": "Ether Income",
-    "description": "Overview of all regular and variable sources of Ether in Outerplane, with daily, weekly, and monthly totals.",
+    "title": {
+      "en": "Ether Income",
+      "jp": "エーテル収入",
+      "kr": "에테르 수입"
+    },
+    "description": {
+      "en": "Overview of all regular and variable sources of Ether in Outerplane, with daily, weekly, and monthly totals.",
+      "jp": "Outerplaneのエーテルの定期的および変動的な供給源の概要（日次、週次、月次の合計付き）。",
+      "kr": "Outerplane의 에테르에 대한 정기적 및 변동 소스 개요（일일, 주간, 월간 합계 포함）。"
+    },
     "icon": "ether-income",
     "second_image": "ether-income2",
     "last_updated": "2024-09-09",
     "author": "Birdmouth",
-    "weight":150
+    "weight": 150
   },
   "S3-8-10": {
     "category": "adventure",
@@ -816,12 +1016,20 @@
   },
   "unlock-content": {
     "category": "general-guides",
-    "title": "Unlocking Content",
-    "description": "List of all game modes and features with their unlock conditions and short explanations.",
+    "title": {
+      "en": "Unlocking Content",
+      "jp": "コンテンツのアンロック",
+      "kr": "콘텐츠 잠금 해제"
+    },
+    "description": {
+      "en": "List of all game modes and features with their unlock conditions and short explanations.",
+      "jp": "すべてのゲームモードと機能のリスト、そのアンロック条件と簡単な説明。",
+      "kr": "모든 게임 모드 및 기능 목록과 잠금 해제 조건 및 간단한 설명."
+    },
     "icon": "unlock-content",
     "last_updated": "2025-10-03",
     "author": "Sevih",
     "second_image": "unlock-content",
-    "weight":200
+    "weight": 200
   }
 }
