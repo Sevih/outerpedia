@@ -14,56 +14,128 @@
     "valid": true
   },
   "adventure": {
-    "title": "Adventure",
-    "description": "Strategies to progress through Adventure mode.",
+    "title": {
+      "en": "Adventure Guides",
+      "jp": "冒険ガイド",
+      "kr": "모험 가이드"
+    },
+    "description": {
+      "en": "Strategies to progress through Adventure mode.",
+      "jp": "冒険モードを進めるための攻略。",
+      "kr": "모험 모드를 진행하기 위한 공략."
+    },
     "icon": "/images/guides/CM_EtcMenu_Adventure",
     "valid": true
   },
   "world-boss": {
-    "title": "World Boss Guides",
-    "description": "Form the best teams to defeat massive enemies.",
+    "title": {
+      "en": "World Boss Guides",
+      "jp": "ワールドボスガイド",
+      "kr": "월드 보스 가이드"
+    },
+    "description": {
+      "en": "Form the best teams to defeat massive enemies.",
+      "jp": "強大な敵を倒すための最高のチーム編成。",
+      "kr": "거대한 적을 물리치기 위한 최고의 팀 구성."
+    },
     "icon": "/images/guides/CM_Adventure_WorldBoss",
     "valid": true
   },
   "special-request": {
-    "title": "Gear Boss",
-    "description": "Strategies for Special Request Ecology Study & Identification.",
+    "title": {
+      "en": "Special Request Guides",
+      "jp": "特別依頼ガイド",
+      "kr": "특별 의뢰 가이드"
+    },
+    "description": {
+      "en": "Strategies for Special Request: Ecology Study & Identification.",
+      "jp": "特別依頼：生態調査と正体究明の攻略。",
+      "kr": "특별 의뢰: 생태 조사 및 정체 규명 공략."
+    },
     "icon": "/images/guides/CM_Adventure_Challenge",
     "valid": true
   },
   "skyward-tower": {
-    "title": "Skyward Tower",
-    "description": "Strategies to help you climb the tower.",
+    "title": {
+      "en": "Skyward Tower Guides",
+      "jp": "飛天の塔ガイド",
+      "kr": "비천의 탑 가이드"
+    },
+    "description": {
+      "en": "Strategies to help you climb the tower.",
+      "jp": "塔を登るための攻略。",
+      "kr": "탑을 오르기 위한 공략."
+    },
     "icon": "/images/guides/CT_Symbol_Automata",
     "valid": true
   },
   "joint-boss": {
-    "title": "Joint Boss",
-    "description": "Find synergy to grab the maximum point.",
+    "title": {
+      "en": "Joint Challenge Guides",
+      "jp": "共同作戦ガイド",
+      "kr": "합동 챌린지 가이드"
+    },
+    "description": {
+      "en": "Find synergy to grab the maximum point.",
+      "jp": "最大ポイントを獲得するためのシナジーを見つける。",
+      "kr": "최대 점수를 획득하기 위한 시너지 찾기."
+    },
     "icon": "/images/guides/CM_Adventure_Cooperation",
     "valid": true
   },
   "guild-raid": {
-    "title": "Guild Raid",
-    "description": "Helps you to achieve high score in guild raids.",
+    "title": {
+      "en": "Guild Raid Guides",
+      "jp": "ギルド連合戦ガイド",
+      "kr": "길드 연합전 가이드"
+    },
+    "description": {
+      "en": "Helps you to achieve high score in guild raids.",
+      "jp": "ギルド連合戦で高得点を達成するためのガイド。",
+      "kr": "길드 연합전에서 높은 점수를 달성하기 위한 가이드."
+    },
     "icon": "/images/guides/GD_Mark_07",
     "valid": true
   },
   "adventure-license": {
-    "title": "Adventure License",
-    "description": "Level up your license.",
+    "title": {
+      "en": "Adventure License Guides",
+      "jp": "冒険者ライセンスガイド",
+      "kr": "모험 라이선스 가이드"
+    },
+    "description": {
+      "en": "Level up your license.",
+      "jp": "ライセンスをレベルアップ。",
+      "kr": "라이선스 레벨업."
+    },
     "icon": "/images/guides/T_Licence_Level_03",
     "valid": true
   },
   "irregular-extermination": {
-    "title": "Irregular Extermination",
-    "description": "Ease your way to kill the queen and her foes.",
+    "title": {
+      "en": "Irregular Extermination Project Guides",
+      "jp": "イレギュラー殲滅戦ガイド",
+      "kr": "이레귤러 섬멸전 가이드"
+    },
+    "description": {
+      "en": "Ease your way to kill the queen and her foes.",
+      "jp": "女王とその敵を倒すための攻略。",
+      "kr": "여왕과 그 적들을 처치하기 위한 공략."
+    },
     "icon": "/images/guides/CM_Adventure_Irregular",
     "valid": true
   },
   "monad-gate": {
-    "title": "Monad Gate",
-    "description": "To help you find your way through this labyrinth and overcome its enemies.",
+    "title": {
+      "en": "Monad Gate Guides",
+      "jp": "モナド・ゲートガイド",
+      "kr": "모나드 게이트 가이드"
+    },
+    "description": {
+      "en": "To help you find your way through this labyrinth and overcome its enemies.",
+      "jp": "この迷宮を攻略し、敵を倒すためのガイド。",
+      "kr": "이 미로를 공략하고 적을 물리치기 위한 가이드."
+    },
     "icon": "/images/guides/CM_Adventure_MonadGate",
     "valid": true
   }

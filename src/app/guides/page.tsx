@@ -1,3 +1,4 @@
+//guides/page
 import GuideCategoryList from '@/app/components/CategoryCard'
 import type { Metadata } from 'next'
 import rawCategories from '@/data/guides/categories.json'

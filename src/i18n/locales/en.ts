@@ -452,19 +452,19 @@ const en = {
   'item.meta.ogDesc': 'Explore stats and effects for {name} on Outerpedia.',
   'item.meta.twTitle': '{name}',
   'item.meta.twDesc': 'Stats and effects for {name} in Outerplane.',
-  // en.ts
+// Category pages
   'guides.cat.meta.title': '{cat} | Outerpedia',
   'guides.cat.meta.desc': '{desc}',
-  'guides.cat.og.title': '{cat} | Outerpedia',
+  'guides.cat.og.title': '{cat} Guides',  // ✅ Ajout de "Guides"
   'guides.cat.og.desc': '{desc}',
-  'guides.cat.tw.title': '{cat}',
+  'guides.cat.tw.title': '{cat} Guides',  // ✅ Ajout de "Guides"
   'guides.cat.tw.desc': '{desc}',
-  // en.ts
-  'guides.detail.meta.title': '{guide} | {cat} | Outerpedia',
-  'guides.detail.meta.desc': '{cat} {guide} {desc}',
-  'guides.detail.og.title': '{guide} | {cat} | Outerpedia',
-  'guides.detail.og.desc': '{cat} {guide} {desc}',
-  'guides.detail.tw.title': '{guide} | {cat}',
+  // Detail pages - CHANGEMENTS ICI
+  'guides.detail.meta.title': '{guide} - {cat} Guide | Outerpedia',  // ✅ Remplace | par -
+  'guides.detail.meta.desc': 'Complete guide for {guide} in Outerplane. {desc}',  // ✅ Plus descriptif
+  'guides.detail.og.title': '{guide} - {cat} Guide',  // ✅ Format optimisé
+  'guides.detail.og.desc': '{desc}',  // ✅ Garde la desc simple
+  'guides.detail.tw.title': '{guide} Guide',  // ✅ Plus court pour Twitter
   'guides.detail.tw.desc': '{desc}',
 
   'equip.meta.title': 'Equipments – Outerpedia',

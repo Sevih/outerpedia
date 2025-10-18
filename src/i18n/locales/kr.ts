@@ -455,16 +455,16 @@ const kr = {
   // kr.ts
   'guides.cat.meta.title': '{cat} | Outerpedia',
   'guides.cat.meta.desc': '{desc}',
-  'guides.cat.og.title': '{cat} | Outerpedia',
+  'guides.cat.og.title': '{cat} 가이드',
   'guides.cat.og.desc': '{desc}',
-  'guides.cat.tw.title': '{cat}',
+  'guides.cat.tw.title': '{cat} 가이드',
   'guides.cat.tw.desc': '{desc}',
-  // kr.ts
-  'guides.detail.meta.title': '{guide} | {cat} | Outerpedia',
-  'guides.detail.meta.desc': '{cat} {guide} {desc}',
-  'guides.detail.og.title': '{guide} | {cat} | Outerpedia',
-  'guides.detail.og.desc': '{cat} {guide} {desc}',
-  'guides.detail.tw.title': '{guide} | {cat}',
+
+  'guides.detail.meta.title': '{guide} - {cat} 가이드 | Outerpedia',
+  'guides.detail.meta.desc': 'Outerplane의 {guide}에 대한 완전한 가이드. {desc}',
+  'guides.detail.og.title': '{guide} - {cat} 가이드',
+  'guides.detail.og.desc': '{desc}',
+  'guides.detail.tw.title': '{guide} 가이드',
   'guides.detail.tw.desc': '{desc}',
 
   'equip.meta.title': '장비 목록 – Outerpedia',

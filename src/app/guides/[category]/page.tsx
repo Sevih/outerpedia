@@ -1,3 +1,4 @@
+//guides/[category]/page
 import guidesRaw from '@/data/guides/guides-ref.json'
 import GuideCardGrid from '@/app/components/GuideCardGrid'
 import UnderConstruction from '@/app/components/UnderConstruction'
