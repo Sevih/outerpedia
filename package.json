@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "5.0.13",
+  "version": "5.0.14",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -61,6 +61,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
     "fast-glob": "^3.3.3",
+    "node-html-parser": "7.0.1",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
     "tree-kill": "^1.2.2",

@@ -1,20 +1,14 @@
-const fs = require('fs');
-const path = require('path');
+const https = require('https');
+const http = require('http');
 
-// Configuration pour votre structure
-const GUIDES_DIR = path.join(__dirname, '../src/app/guides/_contents');
-const MIN_WORD_COUNT = 300;
-const REQUIRED_PATTERNS = {
-    h2: /<h2[^>]*>|<GuideHeading level={2}>|GuideTemplate/gi,
-    h3: /<h3[^>]*>|<GuideHeading level={3}>/gi,
-    h4: /<h4[^>]*>|<GuideHeading level={4}>/gi,
-    paragraphs: /<p[^>]*>/gi,
-    lists: /<ul[^>]*>/gi,
-    guideTemplate: /GuideTemplate/g,
-    guideHeading: /GuideHeading/g,
-};
+// Configuration
+const BASE_URL = process.env.BASE_URL || 'https://outerpedia.local';
+const SITEMAP_URL = `${BASE_URL}/sitemap.xml`;
+const TIMEOUT = 10000;
 
-// Couleurs pour le terminal
+// Ignorer les erreurs SSL en dev (certificat self-signed)
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const colors = {
     reset: '\x1b[0m',
     red: '\x1b[31m',
@@ -28,141 +22,272 @@ function log(message, color = 'reset') {
     console.log(`${colors[color]}${message}${colors.reset}`);
 }
 
-function countWords(content) {
-    const textContent = content
+// Fetch HTTP avec timeout et suivi des redirections
+function fetchUrl(url, followRedirects = true, maxRedirects = 5) {
+    return new Promise((resolve, reject) => {
+        if (maxRedirects === 0) {
+            return reject(new Error('Too many redirects'));
+        }
+
+        const protocol = url.startsWith('https') ? https : http;
+        const startTime = Date.now();
+
+        const options = {
+            timeout: TIMEOUT,
+            rejectUnauthorized: false // Accepte les certificats self-signed
+        };
+
+        const req = protocol.get(url, options, (res) => {
+            // Gestion des redirections
+            if (followRedirects && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                const redirectUrl = res.headers.location.startsWith('http') 
+                    ? res.headers.location 
+                    : `${BASE_URL}${res.headers.location}`;
+                
+                return fetchUrl(redirectUrl, true, maxRedirects - 1)
+                    .then(resolve)
+                    .catch(reject);
+            }
+
+            let data = '';
+            
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                const loadTime = Date.now() - startTime;
+                resolve({
+                    statusCode: res.statusCode,
+                    headers: res.headers,
+                    body: data,
+                    loadTime,
+                    redirectUrl: res.headers.location,
+                });
+            });
+        });
+
+        req.on('error', reject);
+        req.on('timeout', () => {
+            req.destroy();
+            reject(new Error('Timeout'));
+        });
+    });
+}
+
+// Parse le sitemap XML et extrait les URLs
+function parseSitemap(xml) {
+    const urlRegex = /<loc>(.*?)<\/loc>/g;
+    const urls = [];
+    let match;
+
+    while ((match = urlRegex.exec(xml)) !== null) {
+        const url = match[1].trim();
+        // Ne garde que les URLs contenant /guides/
+        if (url.includes('/guides/')) {
+            urls.push(url);
+        }
+    }
+
+    return urls;
+}
+
+// Parsers HTML légers (sans dépendance)
+function getTagContent(html, tagName) {
+    const regex = new RegExp(`<${tagName}[^>]*>([^<]+)<\/${tagName}>`, 'i');
+    const match = html.match(regex);
+    return match ? match[1].trim() : null;
+}
+
+function getMetaContent(html, name, isProperty = false) {
+    const attr = isProperty ? 'property' : 'name';
+    const regex = new RegExp(`<meta\\s+${attr}=["']${name}["']\\s+content=["']([^"']+)["']`, 'i');
+    const match = html.match(regex);
+    return match ? match[1] : null;
+}
+
+function getLinkHref(html, rel) {
+    const regex = new RegExp(`<link\\s+rel=["']${rel}["']\\s+href=["']([^"']+)["']`, 'i');
+    const match = html.match(regex);
+    return match ? match[1] : null;
+}
+
+function countTags(html, tagName) {
+    const regex = new RegExp(`<${tagName}[^>]*>`, 'gi');
+    return (html.match(regex) || []).length;
+}
+
+function getImagesWithoutAlt(html) {
+    const imgRegex = /<img[^>]*>/gi;
+    const images = html.match(imgRegex) || [];
+    const withoutAlt = images.filter(img => !img.match(/alt=["'][^"']*["']/i));
+    return { total: images.length, withoutAlt: withoutAlt.length };
+}
+
+function getTextContent(html) {
+    return html
+        .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+        .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
         .replace(/<[^>]+>/g, ' ')
-        .replace(/\{[^}]+\}/g, ' ')
-        .replace(/[^a-zA-Z\s]/g, ' ')
-        .split(/\s+/)
-        .filter(word => word.length > 2);
-
-    return textContent.length;
+        .replace(/\s+/g, ' ')
+        .trim();
 }
 
-function checkHeadingHierarchy(content) {
-    const h2Matches = content.match(REQUIRED_PATTERNS.h2) || [];
-    const h3Matches = content.match(REQUIRED_PATTERNS.h3) || [];
-    const h4Matches = content.match(REQUIRED_PATTERNS.h4) || [];
-
-    return {
-        h2Count: h2Matches.length,
-        h3Count: h3Matches.length,
-        h4Count: h4Matches.length,
-        hasH2: h2Matches.length > 0,
-        hasProperStructure: h2Matches.length > 0 && h3Matches.length > 0,
-    };
-}
-
-function analyzeGuide(filePath, relativePath) {
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const wordCount = countWords(content);
-    const headings = checkHeadingHierarchy(content);
-
+// Analyse SEO du HTML rendu
+function analyzeSEO(html, url, response) {
     const issues = [];
     const warnings = [];
     const successes = [];
+    let score = 100;
 
-    if (wordCount < MIN_WORD_COUNT) {
-        // ✅ Sauf si utilise GuideTemplate
-        if (!content.includes('GuideTemplate')) {
-            issues.push(`❌ Contenu insuffisant: ${wordCount} mots (minimum: ${MIN_WORD_COUNT})`);
-        }
+    // 1. Status Code
+    if (response.statusCode === 200) {
+        successes.push('✅ Status 200 OK');
+    } else if (response.statusCode >= 300 && response.statusCode < 400) {
+        warnings.push(`⚠️  Redirection ${response.statusCode} vers ${response.redirectUrl}`);
+        score -= 10;
     } else {
-        successes.push(`✅ Contenu suffisant: ${wordCount} mots`);
+        issues.push(`❌ Status ${response.statusCode}`);
+        score -= 30;
     }
 
-    if (!headings.hasH2) {
-        // ✅ Si GuideTemplate, considérer H2 présent
-        if (!content.includes('GuideTemplate')) {
-            issues.push('❌ Aucun H2 trouvé');
-        }
+    // 2. Load Time
+    if (response.loadTime < 1000) {
+        successes.push(`✅ Temps de chargement: ${response.loadTime}ms`);
+    } else if (response.loadTime < 3000) {
+        warnings.push(`⚠️  Temps de chargement: ${response.loadTime}ms`);
+        score -= 5;
     } else {
-        successes.push(`✅ H2 présent`);
+        issues.push(`❌ Temps de chargement lent: ${response.loadTime}ms`);
+        score -= 15;
     }
 
-    if (!headings.hasProperStructure) {
-        // ✅ Ignorer si utilise GuideTemplate (H3 dans versions)
-        if (!content.includes('GuideTemplate')) {
-            warnings.push('⚠️  Structure de headings incomplète');
-        }
+    // 3. Title
+    const title = getTagContent(html, 'title');
+    if (!title) {
+        issues.push('❌ Balise <title> manquante ou vide');
+        score -= 20;
     } else {
-        successes.push(`✅ Structure hiérarchique complète`);
-    }
-
-    const paragraphCount = (content.match(REQUIRED_PATTERNS.paragraphs) || []).length;
-    if (paragraphCount < 5) {
-        // ✅ Ignorer si GuideTemplate
-        if (!content.includes('GuideTemplate')) {
-            warnings.push(`⚠️  Peu de paragraphes: ${paragraphCount}`);
+        const titleLength = title.length;
+        if (titleLength >= 30 && titleLength <= 60) {
+            successes.push(`✅ Title optimisée (${titleLength} car.)`);
+        } else if (titleLength < 30) {
+            warnings.push(`⚠️  Title trop courte (${titleLength} car.)`);
+            score -= 5;
+        } else {
+            warnings.push(`⚠️  Title trop longue (${titleLength} car.)`);
+            score -= 5;
         }
+    }
+
+    // 4. Meta Description
+    const metaDesc = getMetaContent(html, 'description');
+    if (!metaDesc) {
+        issues.push('❌ Meta description manquante');
+        score -= 15;
     } else {
-        successes.push(`✅ Bon nombre de paragraphes: ${paragraphCount}`);
+        const descLength = metaDesc.length;
+        if (descLength >= 120 && descLength <= 160) {
+            successes.push(`✅ Meta description optimisée (${descLength} car.)`);
+        } else if (descLength < 120) {
+            warnings.push(`⚠️  Meta description trop courte (${descLength} car.)`);
+            score -= 5;
+        } else {
+            warnings.push(`⚠️  Meta description trop longue (${descLength} car.)`);
+            score -= 5;
+        }
     }
 
-    const usesTemplate = REQUIRED_PATTERNS.guideTemplate.test(content);
-    if (usesTemplate) {
-        successes.push('✅ Utilise GuideTemplate');
+    // 5. Canonical URL
+    const canonical = getLinkHref(html, 'canonical');
+    if (canonical) {
+        successes.push('✅ Canonical URL présente');
+    } else {
+        warnings.push('⚠️  Canonical URL manquante');
+        score -= 5;
     }
 
-    const usesGuideHeading = REQUIRED_PATTERNS.guideHeading.test(content);
-    if (usesGuideHeading) {
-        successes.push('✅ Utilise GuideHeading');
+    // 6. Open Graph
+    const ogTitle = getMetaContent(html, 'og:title', true);
+    const ogDesc = getMetaContent(html, 'og:description', true);
+    const ogImage = getMetaContent(html, 'og:image', true);
+    
+    if (ogTitle && ogDesc && ogImage) {
+        successes.push('✅ Open Graph complet');
+    } else {
+        warnings.push('⚠️  Open Graph incomplet');
+        score -= 5;
     }
 
-    const hasVideo = content.includes('YoutubeEmbed');
-    if (hasVideo) {
-        successes.push('✅ Contient une vidéo');
+    // 7. Structured Data (JSON-LD)
+    const jsonLdCount = countTags(html, 'script type="application/ld\\+json"');
+    if (jsonLdCount > 0) {
+        successes.push(`✅ Données structurées présentes (${jsonLdCount})`);
+    } else {
+        warnings.push('⚠️  Pas de données structurées JSON-LD');
+        score -= 10;
     }
 
-    const characterLinks = (content.match(/CharacterLinkCard/g) || []).length;
-    if (characterLinks > 0) {
-        successes.push(`✅ Liens internes: ${characterLinks}`);
+    // 8. Headings
+    const h1Count = countTags(html, 'h1');
+    if (h1Count === 0) {
+        issues.push('❌ Aucun H1');
+        score -= 15;
+    } else if (h1Count === 1) {
+        successes.push('✅ Un seul H1 (idéal)');
+    } else {
+        warnings.push(`⚠️  Plusieurs H1 (${h1Count})`);
+        score -= 5;
     }
 
-    const score = Math.max(0, Math.min(100,
-        100 - (issues.length * 20) - (warnings.length * 5) + Math.min(successes.length * 8, 80) - 40
-    ));
+    const h2Count = countTags(html, 'h2');
+    if (h2Count > 0) {
+        successes.push(`✅ Structure avec ${h2Count} H2`);
+    } else {
+        warnings.push('⚠️  Aucun H2');
+        score -= 5;
+    }
+
+    // 9. Images sans alt
+    const imageStats = getImagesWithoutAlt(html);
+    if (imageStats.withoutAlt === 0 && imageStats.total > 0) {
+        successes.push(`✅ Toutes les images ont un alt (${imageStats.total})`);
+    } else if (imageStats.withoutAlt > 0) {
+        warnings.push(`⚠️  ${imageStats.withoutAlt}/${imageStats.total} images sans alt`);
+        score -= Math.min(imageStats.withoutAlt * 2, 10);
+    }
+
+    // 10. Contenu textuel
+    const textContent = getTextContent(html);
+    const wordCount = textContent.split(' ').length;
+    if (wordCount >= 300) {
+        successes.push(`✅ Contenu substantiel (${wordCount} mots)`);
+    } else {
+        warnings.push(`⚠️  Contenu léger (${wordCount} mots)`);
+        score -= 10;
+    }
+
+    // 11. Headers HTTP
+    if (response.headers['cache-control']) {
+        successes.push('✅ Cache-Control configuré');
+    } else {
+        warnings.push('⚠️  Pas de Cache-Control');
+        score -= 3;
+    }
 
     return {
-        relativePath,
-        wordCount,
-        headings,
+        score: Math.max(0, Math.min(100, score)),
         issues,
         warnings,
         successes,
-        score,
+        loadTime: response.loadTime,
+        statusCode: response.statusCode,
     };
 }
 
-function scanDirectory(dir) {
-    const results = [];
-
-    function scan(currentDir) {
-        const items = fs.readdirSync(currentDir);
-
-        for (const item of items) {
-            const fullPath = path.join(currentDir, item);
-            const stat = fs.statSync(fullPath);
-
-            if (stat.isDirectory()) {
-                scan(fullPath);
-            } else if (item.endsWith('.tsx') || item.endsWith('.ts')) {
-                const relativePath = path.relative(GUIDES_DIR, fullPath);
-                results.push({ path: fullPath, relativePath });
-            }
-        }
-    }
-
-    scan(dir);
-    return results;
-}
-
-function printReport(result) {
-    const { relativePath, score, issues, warnings, successes } = result;
+function printReport(url, result) {
+    const { score, issues, warnings, successes } = result;
     const color = score >= 80 ? 'green' : score >= 60 ? 'yellow' : 'red';
 
     console.log('\n' + '='.repeat(80));
-    log(`📄 ${relativePath}`, 'blue');
+    log(`🌐 ${url}`, 'blue');
     log(`Score SEO: ${score}/100`, color);
     console.log('='.repeat(80));
 
@@ -177,24 +302,74 @@ function printReport(result) {
     }
 
     if (issues.length > 0) {
-        log('\n🚨 Problèmes:', 'red');
+        log('\n🚨 Problèmes critiques:', 'red');
         issues.forEach(i => console.log(`  ${i}`));
     }
 }
 
-function printSummary(results) {
+async function main() {
+    log('🔍 Audit SEO HTTP des Guides Outerpedia\n', 'magenta');
+
+    // 1. Récupérer le sitemap
+    log(`📥 Récupération du sitemap: ${SITEMAP_URL}`, 'blue');
+    
+    let sitemapResponse;
+    try {
+        sitemapResponse = await fetchUrl(SITEMAP_URL);
+    } catch (error) {
+        log(`❌ Impossible de récupérer le sitemap: ${error.message}`, 'red');
+        process.exit(1);
+    }
+
+    if (sitemapResponse.statusCode !== 200) {
+        log(`❌ Sitemap inaccessible (Status ${sitemapResponse.statusCode})`, 'red');
+        process.exit(1);
+    }
+
+    // 2. Parser le sitemap
+    const urls = parseSitemap(sitemapResponse.body);
+
+    if (urls.length === 0) {
+        log('⚠️  Aucune URL /guides/ trouvée dans le sitemap', 'yellow');
+        process.exit(0);
+    }
+
+    log(`✅ ${urls.length} URL(s) /guides/ trouvée(s)\n`, 'green');
+
+    // 3. Analyser chaque URL
+    const results = [];
+
+    for (const url of urls) {
+        try {
+            log(`🔄 Vérification: ${url}`, 'blue');
+            const response = await fetchUrl(url);
+            const result = analyzeSEO(response.body, url, response);
+            printReport(url, result);
+            results.push({ url, ...result });
+        } catch (error) {
+            log(`❌ Erreur: ${url} - ${error.message}`, 'red');
+        }
+
+        // Rate limiting
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    // 4. Résumé global
     console.log('\n\n' + '='.repeat(80));
     log('📊 RÉSUMÉ GLOBAL', 'magenta');
     console.log('='.repeat(80));
 
     const total = results.length;
     const avg = results.reduce((s, r) => s + r.score, 0) / total;
+    const avgLoadTime = results.reduce((s, r) => s + r.loadTime, 0) / total;
+
+    console.log(`\n📚 Pages analysées: ${total}`);
+    log(`📈 Score moyen: ${avg.toFixed(1)}/100`, avg >= 80 ? 'green' : avg >= 60 ? 'yellow' : 'red');
+    log(`⏱️  Temps de chargement moyen: ${avgLoadTime.toFixed(0)}ms`, avgLoadTime < 2000 ? 'green' : 'yellow');
+
     const excellent = results.filter(r => r.score >= 80).length;
     const good = results.filter(r => r.score >= 60 && r.score < 80).length;
     const needsWork = results.filter(r => r.score < 60).length;
-
-    console.log(`\n📚 Guides analysés: ${total}`);
-    log(`📈 Score moyen: ${avg.toFixed(1)}/100`, avg >= 80 ? 'green' : avg >= 60 ? 'yellow' : 'red');
 
     console.log('\n📊 Distribution:');
     log(`  🌟 Excellents (80+): ${excellent}`, 'green');
@@ -207,40 +382,9 @@ function printSummary(results) {
             .filter(r => r.score < 60)
             .sort((a, b) => a.score - b.score)
             .slice(0, 5)
-            .forEach(r => log(`  • ${r.relativePath} (${r.score}/100)`, 'red'));
-    }
-}
-
-function main() {
-    log('🔍 Audit SEO des Guides Outerpedia\n', 'magenta');
-
-    if (!fs.existsSync(GUIDES_DIR)) {
-        log(`❌ Dossier introuvable: ${GUIDES_DIR}`, 'red');
-        process.exit(1);
+            .forEach(r => log(`  • ${r.url} (${r.score}/100)`, 'red'));
     }
 
-    const files = scanDirectory(GUIDES_DIR);
-
-    if (files.length === 0) {
-        log('⚠️  Aucun guide trouvé', 'yellow');
-        process.exit(0);
-    }
-
-    log(`📁 Analyse de ${files.length} fichier(s)...\n`, 'blue');
-
-    const results = files.map(f => {
-        try {
-            return analyzeGuide(f.path, f.relativePath);
-        } catch (error) {
-            log(`❌ Erreur: ${f.relativePath}`, 'red');
-            return null;
-        }
-    }).filter(Boolean);
-
-    results.forEach(printReport);
-    printSummary(results);
-
-    const avg = results.reduce((s, r) => s + r.score, 0) / results.length;
     process.exit(avg >= 60 ? 0 : 1);
 }
 

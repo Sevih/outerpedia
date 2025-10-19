@@ -95,6 +95,19 @@ export default async function Page() {
       />
 
       <div className="p-3">
+        {/* ✅ H1 visible avec les mots-clés du title */}
+      <h1 className="text-3xl font-bold mb-2">
+        {langKey === 'jp' ? 'キャラクター一覧' 
+         : langKey === 'kr' ? '캐릭터 목록'
+         : 'Outerplane Characters Database'}
+      </h1>
+      
+      {/* ✅ Date visible pour matcher le title */}
+      <p className="text-sm text-gray-400 mb-6">
+        {langKey === 'jp' ? `${monthYear} 更新`
+         : langKey === 'kr' ? `${monthYear} 업데이트`
+         : `Updated ${monthYear}`}
+      </p>
         <CharactersPage langue={langKey} />
       </div>
     </>

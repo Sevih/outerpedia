@@ -6,24 +6,38 @@
       "kr": "일반 가이드"
     },
     "description": {
-      "en": "Fundamental systems, mechanics, and beginner-friendly guides that apply to the entire game.",
-      "jp": "ゲーム全体に共通する基本的なシステム・メカニクス・初心者向けガイド。",
-      "kr": "게임 전반에 적용되는 기본 시스템, 메커닉, 초보자용 가이드."
+      "en": "Master game fundamentals: combat mechanics, character progression, equipment systems, and essential beginner tips for new players.",
+      "jp": "ゲームの基礎をマスター：戦闘メカニクス、キャラクター育成、装備システム、初心者向け必須ヒント。",
+      "kr": "게임 기초 마스터: 전투 메커닉, 캐릭터 성장, 장비 시스템, 초보자를 위한 필수 팁."
     },
+    "keywords": [
+      "beginner guide",
+      "game mechanics",
+      "tutorial",
+      "how to play",
+      "starter tips"
+    ],
     "icon": "/images/guides/CM_Adventure_SideStory",
     "valid": true
   },
   "adventure": {
     "title": {
-      "en": "Adventure Guides",
-      "jp": "冒険ガイド",
-      "kr": "모험 가이드"
+      "en": "Adventure Boss Guides",
+      "jp": "冒険ボスガイド",
+      "kr": "모험 보스 가이드"
     },
     "description": {
-      "en": "Strategies to progress through Adventure mode.",
-      "jp": "冒険モードを進めるための攻略。",
-      "kr": "모험 모드를 진행하기 위한 공략."
+      "en": "Detailed strategies to defeat challenging Adventure bosses: recommended teams, mechanics explanation, and stage tips.",
+      "jp": "冒険モードの強敵ボス攻略：おすすめチーム編成、メカニクス解説、ステージ攻略のヒント。",
+      "kr": "모험 모드의 강력한 보스를 공략하기 위한 상세 전략: 추천 팀 구성, 메커닉 설명, 스테이지 팁."
     },
+    "keywords": [
+      "adventure boss",
+      "story boss",
+      "stage guide",
+      "battle strategy",
+      "team composition"
+    ],
     "icon": "/images/guides/CM_EtcMenu_Adventure",
     "valid": true
   },
@@ -34,10 +48,17 @@
       "kr": "월드 보스 가이드"
     },
     "description": {
-      "en": "Form the best teams to defeat massive enemies.",
-      "jp": "強大な敵を倒すための最高のチーム編成。",
-      "kr": "거대한 적을 물리치기 위한 최고의 팀 구성."
+      "en": "Comprehensive strategies to achieve SSS rank in Extreme League World Boss battles: optimal team setups, rotation timing, and damage maximization.",
+      "jp": "エクストリームリーグのワールドボス戦でSSSランクを達成するための完全攻略：最適なチーム編成、スキルローテーション、ダメージ最大化。",
+      "kr": "익스트림 리그 월드 보스전에서 SSS 등급을 달성하기 위한 완벽 공략: 최적 팀 구성, 스킬 로테이션, 데미지 극대화."
     },
+    "keywords": [
+      "world boss",
+      "extreme league",
+      "SSS rank",
+      "damage optimization",
+      "team rotation"
+    ],
     "icon": "/images/guides/CM_Adventure_WorldBoss",
     "valid": true
   },
@@ -48,10 +69,18 @@
       "kr": "특별 의뢰 가이드"
     },
     "description": {
-      "en": "Strategies for Special Request: Ecology Study & Identification.",
-      "jp": "特別依頼：生態調査と正体究明の攻略。",
-      "kr": "특별 의뢰: 생태 조사 및 정체 규명 공략."
+      "en": "In-depth strategies for Special Request missions: Ecology Study and Identification. Learn boss mechanics, team synergies, and key tactics for success.",
+      "jp": "特別依頼ミッション徹底攻略：生態調査と正体究明。ボスメカニクス、チームシナジー、勝利のための重要戦術を解説。",
+      "kr": "특별 의뢰 미션 완벽 공략: 생태 조사 및 정체 규명. 보스 메커닉, 팀 시너지, 성공을 위한 핵심 전술을 소개합니다."
     },
+    "keywords": [
+      "special request",
+      "ecology study",
+      "identification",
+      "mission guide",
+      "boss mechanics",
+      "team synergy"
+    ],
     "icon": "/images/guides/CM_Adventure_Challenge",
     "valid": true
   },
@@ -62,10 +91,17 @@
       "kr": "비천의 탑 가이드"
     },
     "description": {
-      "en": "Strategies to help you climb the tower.",
-      "jp": "塔を登るための攻略。",
-      "kr": "탑을 오르기 위한 공략."
+      "en": "Floor-by-floor strategies to climb Skyward Tower: optimal characters, team synergies, and tactics for higher floors.",
+      "jp": "飛天の塔を登るためのフロア別攻略：最適キャラクター、チームシナジー、上層階の戦術。",
+      "kr": "비천의 탑을 오르기 위한 층별 공략: 최적 캐릭터, 팀 시너지, 상층부 전술."
     },
+    "keywords": [
+      "tower climbing",
+      "skyward tower",
+      "floor guide",
+      "endgame content",
+      "high tier"
+    ],
     "icon": "/images/guides/CT_Symbol_Automata",
     "valid": true
   },
@@ -76,24 +112,39 @@
       "kr": "합동 챌린지 가이드"
     },
     "description": {
-      "en": "Find synergy to grab the maximum point.",
-      "jp": "最大ポイントを獲得するためのシナジーを見つける。",
-      "kr": "최대 점수를 획득하기 위한 시너지 찾기."
+      "en": "Score higher in Joint Challenge battles with advanced strategies: best team compositions, skill timing, and synergy tips for top rankings.",
+      "jp": "共同作戦で高スコアを狙うための上級攻略：最適なチーム編成、スキルタイミング、シナジー活用のコツ。",
+      "kr": "합동 챌린지에서 높은 점수를 얻기 위한 고급 공략: 최적 팀 구성, 스킬 타이밍, 시너지 활용 팁."
     },
+    "keywords": [
+      "joint challenge",
+      "co-op battle",
+      "high score",
+      "skill timing",
+      "team synergy",
+      "ranking tips"
+    ],
     "icon": "/images/guides/CM_Adventure_Cooperation",
     "valid": true
   },
   "guild-raid": {
     "title": {
       "en": "Guild Raid Guides",
-      "jp": "ギルド連合戦ガイド",
-      "kr": "길드 연합전 가이드"
+      "jp": "ギルドレイドガイド",
+      "kr": "길드 레이드 가이드"
     },
     "description": {
-      "en": "Helps you to achieve high score in guild raids.",
-      "jp": "ギルド連合戦で高得点を達成するためのガイド。",
-      "kr": "길드 연합전에서 높은 점수를 달성하기 위한 가이드."
+      "en": "Comprehensive strategies for Guild Raids: boss mechanics, optimal team setups, and damage-maximizing tactics to achieve the highest raid scores.",
+      "jp": "ギルドレイド完全攻略：ボスメカニクス、最適なチーム編成、最高スコアを狙うためのダメージ最大化戦術。",
+      "kr": "길드 레이드 완벽 공략: 보스 메커닉, 최적 팀 구성, 최고 점수를 위한 데미지 극대화 전술."
     },
+    "keywords": [
+      "guild raid",
+      "raid strategy",
+      "boss mechanics",
+      "damage optimization",
+      "high score"
+    ],
     "icon": "/images/guides/GD_Mark_07",
     "valid": true
   },
@@ -101,27 +152,41 @@
     "title": {
       "en": "Adventure License Guides",
       "jp": "冒険者ライセンスガイド",
-      "kr": "모험 라이선스 가이드"
+      "kr": "모험자 라이선스 가이드"
     },
     "description": {
-      "en": "Level up your license.",
-      "jp": "ライセンスをレベルアップ。",
-      "kr": "라이선스 레벨업."
+      "en": "Guides for all Adventure License battles, including Promotion Fights: learn enemy mechanics, team recommendations, and strategies for every stage.",
+      "jp": "冒険者ライセンスの全バトル攻略（昇格戦を含む）：敵のメカニクス、推奨チーム、各ステージの攻略法を解説。",
+      "kr": "모험자 라이선스의 모든 전투 공략(승급전을 포함): 적 메커닉, 추천 팀, 각 스테이지별 전략을 안내합니다."
     },
+    "keywords": [
+      "adventure license",
+      "promotion fight",
+      "license battle",
+      "boss strategy",
+      "team composition"
+    ],
     "icon": "/images/guides/T_Licence_Level_03",
     "valid": true
   },
   "irregular-extermination": {
     "title": {
-      "en": "Irregular Extermination Project Guides",
+      "en": "Irregular Extermination Guides",
       "jp": "イレギュラー殲滅戦ガイド",
       "kr": "이레귤러 섬멸전 가이드"
     },
     "description": {
-      "en": "Ease your way to kill the queen and her foes.",
-      "jp": "女王とその敵を倒すための攻略。",
-      "kr": "여왕과 그 적들을 처치하기 위한 공략."
+      "en": "Boss guides for the Irregular Extermination Project mode: learn boss patterns, recommended teams, and effective strategies for each stage.",
+      "jp": "イレギュラー殲滅戦モードのボス攻略：ボスのパターン、推奨チーム、各ステージの効果的な戦略を紹介。",
+      "kr": "이레귤러 섬멸전 모드의 보스 공략: 보스 패턴, 추천 팀 구성, 각 스테이지별 효율적인 전략."
     },
+    "keywords": [
+      "irregular extermination",
+      "irregular project",
+      "boss guide",
+      "team strategy",
+      "stage guide"
+    ],
     "icon": "/images/guides/CM_Adventure_Irregular",
     "valid": true
   },
@@ -132,10 +197,17 @@
       "kr": "모나드 게이트 가이드"
     },
     "description": {
-      "en": "To help you find your way through this labyrinth and overcome its enemies.",
-      "jp": "この迷宮を攻略し、敵を倒すためのガイド。",
-      "kr": "이 미로를 공략하고 적을 물리치기 위한 가이드."
+      "en": "Stage guides for Monad Gate: recommended paths, choices, and strategies to reach the true ending of the mode.",
+      "jp": "モナド・ゲートのステージ攻略：真エンディングに到達するためのルート選択と戦略を紹介。",
+      "kr": "모나드 게이트 스테이지 공략: 진 엔딩에 도달하기 위한 경로 선택과 전략을 안내합니다."
     },
+    "keywords": [
+      "monad gate",
+      "true ending",
+      "stage guide",
+      "route choices",
+      "story walkthrough"
+    ],
     "icon": "/images/guides/CM_Adventure_MonadGate",
     "valid": true
   }

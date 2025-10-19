@@ -63,17 +63,6 @@ export default function SkywardBossFightVeryHard({
 
   return (
     <div className="grid gap-6">
-      {/* Info Very Hard */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="text-sm leading-relaxed space-y-1">
-            <p>Floor and condition are random (choose between 3-4 sets for every player)</p>
-            <p>Floor 5/10/15 are random in position : Demiurge Stella, Demiurge Drakhan and Demiurge Vlada</p>
-            <p>Floor 20 can alternate between 2 sets of boss</p>
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Onglets */}
       {availableTabs.length > 1 && (
         <div className="flex flex-wrap items-center gap-2">

@@ -474,11 +474,11 @@ const kr = {
   'equip.twitter.title': '장비 목록',
   'equip.twitter.desc': '무기, 액세서리, 탈리스만, 세트, 전용 장비를 살펴보세요.',
   // --- Characters SEO ---
-  'char.meta.title': '{name} | 캐릭터 상세정보 | Outerpedia',
+  'char.meta.title': "{name} – 캐릭터 가이드 | Outerpedia",
   'char.meta.desc': '{element} 속성 {class} 클래스 {name} — 스킬 설명, 강화 우선순위, 랭킹, 전용 장비 및 추천 세트.',
-  'char.og.title': '{name} | 캐릭터 상세정보 | Outerpedia',
+  'char.og.title': "{name} – 캐릭터 가이드 | Outerpedia",
   'char.og.desc': '{element} 속성 {class} 클래스 {name} — 스킬, 장비 빌드 및 티어 정보.',
-  'char.twitter.title': '{name} | 아우터플레인 캐릭터',
+  'char.twitter.title': "{name} – 캐릭터 가이드 | Outerpedia",
   'char.twitter.desc': '{element} 속성 {class} 클래스 {name} — 스킬, 랭킹, 빌드 추천.',
   // ...
   'chars.meta.title': '아우터플레인 캐릭터 데이터베이스 — {monthYear} 업데이트 | Outerpedia',

@@ -11,6 +11,10 @@ import { ClassIcon } from '@/app/components/ClassIcon'
 import Link from 'next/link'
 import { toKebabCase } from '@/utils/formatText'
 import Image from 'next/image'
+import { l } from '@/lib/localize'
+import { useTenant } from '@/lib/contexts/TenantContext';
+import type { TenantKey } from '@/tenants/config'
+
 
 function getCharacterData(name: string) {
   return allCharacters.find((char) => char.Fullname === name)
@@ -50,6 +54,7 @@ const carousel: KeenSliderPlugin = (slider) => {
 }
 
 export default function CarouselSlot({ characters }: Props) {
+  const { key } = useTenant()
   const sliderRef = useRef<HTMLDivElement>(null)
   const [sliderInstanceRef, slider] = useKeenSlider<HTMLDivElement>(
     {
@@ -96,20 +101,20 @@ export default function CarouselSlot({ characters }: Props) {
 
             const slug = toKebabCase(data.Fullname)
             const isActive = i === activeIndex
-
+            const namelocalized = data ? l(data, 'Fullname', key as TenantKey) : name;    
             return (
               <div
                 key={i}
                 className={`carousel__cell ${isActive ? 'is-active' : ''}`}
               >
                 <div className="relative w-full h-full">
-                    <Link
-                      href={`/characters/${slug}`}
-                      prefetch={false}
-                      className="absolute inset-0 z-40"
-                    >
-                      <span className="sr-only">{data.Fullname}</span>
-                    </Link>
+                  <Link
+                    href={`/characters/${slug}`}
+                    prefetch={false}
+                    className="absolute inset-0 z-40"
+                  >
+                    <span className="sr-only">{data.Fullname}</span>
+                  </Link>
 
                   <Image
                     src={`/images/characters/portrait/CT_${data.ID}.webp`}
@@ -120,18 +125,18 @@ export default function CarouselSlot({ characters }: Props) {
                     loading="lazy"
                   />
 
-<div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
-  {rarityToStars(data.Rarity).map((_, i) => (
-    <Image
-      key={i}
-      src="/images/ui/star.webp"
-      alt="star"
-      width={20}
-      height={20}
-      style={{ width: 20, height: 20 }}
-    />
-  ))}
-</div>
+                  <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
+                    {rarityToStars(data.Rarity).map((_, i) => (
+                      <Image
+                        key={i}
+                        src="/images/ui/star.webp"
+                        alt="star"
+                        width={20}
+                        height={20}
+                        style={{ width: 20, height: 20 }}
+                      />
+                    ))}
+                  </div>
 
                   <div className="absolute bottom-[3.125rem] right-2 z-30 overlay-fade">
                     <ClassIcon className={data.Class as ClassType} />
@@ -141,8 +146,9 @@ export default function CarouselSlot({ characters }: Props) {
                     <ElementIcon element={data.Element as ElementType} />
                   </div>
 
-                  <div className="absolute bottom-0 left-0 w-full overlay-fade z-30">
-                    <CharacterNameDisplay fullname={data.Fullname} />
+                  <div className="absolute bottom-0 left-0 w-full overlay-fade z-30">  
+                                  
+                    <CharacterNameDisplay fullname={namelocalized} />
                   </div>
                 </div>
               </div>

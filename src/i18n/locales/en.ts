@@ -474,11 +474,11 @@ const en = {
   'equip.twitter.title': 'Equipments',
   'equip.twitter.desc': 'Browse weapons, accessories, talismans, sets, and exclusive equipment.',
   // --- Characters SEO ---
-  'char.meta.title': '{name} | Character Details | Outerpedia',
+  'char.meta.title': "{name} – Character Guide | Outerpedia",
   'char.meta.desc': '{element} {class} {name} — skill breakdown, upgrade priority, ranking, exclusive equipment, and recommended sets.',
-  'char.og.title': '{name} | Character Details | Outerpedia',
+  'char.og.title': "{name} – Character Guide | Outerpedia",
   'char.og.desc': '{element} {class} {name} — detailed overview, skills, gear builds, and tier placement.',
-  'char.twitter.title': '{name} | Outerplane Character',
+  'char.twitter.title': "{name} – Character Guide | Outerpedia",
   'char.twitter.desc': '{element} {class} {name} — skills, ranking, and build recommendations.',
   //
   'chars.meta.title': 'Outerplane Characters – Full Database Updated {monthYear} | Outerpedia',

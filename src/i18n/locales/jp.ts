@@ -474,11 +474,11 @@ const jp = {
   'equip.twitter.title': '装備一覧',
   'equip.twitter.desc': '武器・アクセサリー・タリスマン・セット・専用装備をチェック。',
   // --- Characters SEO ---
-  'char.meta.title': '{name} | キャラクター詳細 | Outerpedia',
+  'char.meta.title': "{name} – キャラクターガイド | Outerpedia",
   'char.meta.desc': '{element}属性・{class}クラスの{name}。スキル解説、強化優先度、評価、専用装備、推奨セットを紹介。',
-  'char.og.title': '{name} | キャラクター詳細 | Outerpedia',
+  'char.og.title': "{name} – キャラクターガイド | Outerpedia",
   'char.og.desc': '{element}属性・{class}クラスの{name}。スキル情報やおすすめ装備を掲載。',
-  'char.twitter.title': '{name} | アウタープレーン キャラ情報',
+  'char.twitter.title': "{name} – キャラクターガイド | Outerpedia",
   'char.twitter.desc': '{element}属性・{class}クラスの{name}のスキルやビルド情報。',
   // ...
   'chars.meta.title': 'アウタープレーン キャラクター一覧 — {monthYear} 更新 | Outerpedia',
