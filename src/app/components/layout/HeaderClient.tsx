@@ -9,11 +9,11 @@ import type { EventMeta } from '@/data/events/registry.types'
 
 
 const nav = [
-  { key: 'nav.characters', href: '/characters', icon: 'CM_EtcMenu_Colleague', short: 'Chars' },
-  { key: 'nav.equipment', href: '/equipments', icon: 'CM_EtcMenu_Inventory', short: 'Equip' },
-  { key: 'nav.tierlist', href: '/tierlist', icon: 'CM_Mission_Icon_Weekly', short: 'Tier' },
-  { key: 'nav.utilities', href: '/tools', icon: 'CM_EtcMenu_Setting', short: 'Tools' },
-  { key: 'nav.guides', href: '/guides', icon: 'CM_EtcMenu_Character_Book', short: 'Guides' },
+  { key: 'nav.characters', href: '/characters', icon: 'CM_EtcMenu_Colleague', short: 'Chars'},
+  { key: 'nav.equipment', href: '/equipments', icon: 'CM_EtcMenu_Inventory', short: 'Equip'},
+  { key: 'nav.tierlist', href: '/tierlist', icon: 'CM_Mission_Icon_Weekly', short: 'Tier'},
+  { key: 'nav.utilities', href: '/tools', icon: 'CM_EtcMenu_Setting', short: 'Tools'},
+  { key: 'nav.guides', href: '/guides', icon: 'CM_EtcMenu_Character_Book', short: 'Guides'},
 ] as const
 
 
@@ -69,6 +69,7 @@ export default function HeaderClient({ activeEvent }: Props) {
             <Link
               key={i.href}
               href={i.href}
+             
               className="px-2 lg:px-3 py-2 rounded-md hover:bg-zinc-800/60 flex items-center gap-1.5 lg:gap-2 text-sm"
               aria-label={t(i.key)}
               title={t(i.key)} // utile quand texte masqué/abrégé
@@ -77,7 +78,7 @@ export default function HeaderClient({ activeEvent }: Props) {
               <span className="hidden lg:inline-block relative h-[18px] w-[18px] shrink-0">
                 <Image
                   src={`/images/ui/nav/${i.icon}.webp`}
-                  alt=""
+                   alt={t(i.key)}
                   fill
                   sizes="18px"
                   className="object-contain"

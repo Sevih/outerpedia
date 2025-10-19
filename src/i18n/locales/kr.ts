@@ -29,7 +29,7 @@ const kr = {
   "titles.tool.commuEv": "커뮤니티 이벤트",
   'home.intro.1': `<strong>Outerpedia</strong> 는 전략 턴제 모바일 RPG <strong>Outerplane</strong> 를 위한 커뮤니티 주도의 데이터베이스입니다.`,
   'home.intro.2': `열정적인 플레이어들이 정리한 <strong>캐릭터 빌드</strong>, <strong>장비 효과</strong>, <strong>티어 리스트</strong>, <strong>유틸리티</strong>, <strong>가이드</strong>를 둘러보세요.`,
-  'home.intro.3': `팀 조합 공유, 질문, 이론 제작은 <a href="https://discord.gg/keGhVQWsHv" class="underline text-cyan-400">커뮤니티 디스코드</a>에서 함께하세요.`,
+  'home.intro.3': `팀 조합 공유, 질문, 이론 제작은 <a href="https://discord.com/invite/keGhVQWsHv" class="underline text-cyan-400">커뮤니티 디스코드</a>에서 함께하세요.`,
   'coupon.copy': '복사',
   'coupon.copied': '복사됨!',
   'coupon.redeem.title': '쿠폰 코드는 어떻게 등록하나요?',
@@ -482,11 +482,11 @@ const kr = {
   'char.twitter.desc': '{element} 속성 {class} 클래스 {name} — 스킬, 랭킹, 빌드 추천.',
   // ...
   'chars.meta.title': '아우터플레인 캐릭터 데이터베이스 — {monthYear} 업데이트 | Outerpedia',
-  'chars.meta.desc': '모든 캐릭터 정보: 상세 스탯, 스킬, 장비 추천, 전용 장비 데이터. {monthYear} 업데이트 (EvaMains Discord).',
+  'chars.meta.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',
   'chars.og.title': '아우터플레인 캐릭터 — {monthYear} 업데이트 | Outerpedia',
   'chars.og.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',
   'chars.twitter.title': '캐릭터 목록 — {monthYear} 업데이트 | Outerpedia',
-  'chars.twitter.desc': '스탯, 스킬, 장비, 전용 장비까지 모두 모은 DB. {monthYear} 업데이트.',
+  'chars.twitter.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',
   // kr.ts
   'guides.meta.title': 'Outerplane 가이드 | Outerpedia',
   'guides.meta.desc': 'Outerplane의 공략 가이드: {list}. 보스 팁, 모험, 이벤트 공략을 꾸준히 업데이트합니다.',

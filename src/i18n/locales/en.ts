@@ -29,7 +29,7 @@ const en = {
   'titles.tool.commuEv': 'Community Events',
   'home.intro.1': `<strong>Outerpedia</strong> is a community-driven database for <strong>Outerplane</strong>, the strategic turn-based mobile RPG.`,
   'home.intro.2': `Browse detailed <strong>character builds</strong>, <strong>gear effects</strong>, <strong>tier lists</strong>, <strong>utilities</strong>, and <strong>guides</strong> — all carefully curated by passionate players.`,
-  'home.intro.3': `Join our <a href="https://discord.gg/keGhVQWsHv" class="underline text-cyan-400">community Discord</a> to share team comps, ask questions, or theorycraft together.`,
+  'home.intro.3': `Join our <a href="https://discord.com/invite/keGhVQWsHv" class="underline text-cyan-400">community Discord</a> to share team comps, ask questions, or theorycraft together.`,
   'coupon.copy': 'Copy',
   'coupon.copied': 'Copied!',
   'coupon.redeem.title': 'How can I redeem my codes?',
@@ -482,11 +482,11 @@ const en = {
   'char.twitter.desc': '{element} {class} {name} — skills, ranking, and build recommendations.',
   //
   'chars.meta.title': 'Outerplane Characters – Full Database Updated {monthYear} | Outerpedia',
-  'chars.meta.desc': 'Explore all characters in Outerplane with detailed stats, skills, gear recommendations and exclusive equipment data. Updated {monthYear}, curated by the EvaMains Discord community.',
+  'chars.meta.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
   'chars.og.title': 'Outerplane Characters – Full Database Updated {monthYear} | Outerpedia',
   'chars.og.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
   'chars.twitter.title': 'Outerplane Characters – Updated {monthYear} | Outerpedia',
-  'chars.twitter.desc': 'Full character database for Outerplane: stats, skills, gear, exclusive equipment. Updated {monthYear} by EvaMains Discord.',
+  'chars.twitter.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
   // en.ts
   'guides.meta.title': 'Outerplane Guides | Outerpedia',
   'guides.meta.desc': 'Browse all strategy guides for Outerplane: {list}. Updated regularly with boss tips, adventure help, and event walkthroughs.',

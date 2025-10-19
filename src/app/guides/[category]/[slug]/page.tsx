@@ -232,7 +232,7 @@ export default async function GuidePage({ params }: Props) {
         <p>
           If you have additional strategies or suggestions, share them on{' '}
           <Link
-            href="https://discord.gg/keGhVQWsHv"
+            href="https://discord.com/invite/keGhVQWsHv"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline inline-flex items-center gap-1 text-amber-300"

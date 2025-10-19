@@ -11,7 +11,7 @@ It provides a clean and structured UI to browse characters, gear, builds, and ti
 > Built with [Next.js 15](https://nextjs.org), TypeScript, and Tailwind CSS.
 
 🌐 Live: [https://outerpedia.com](https://outerpedia.com)  
-💬 Community: [Join the EvaMains Discord](https://discord.gg/keGhVQWsHv)  
+💬 Community: [Join the EvaMains Discord](hhttps://discord.com/invite/keGhVQWsHv)  
 🛠️ Current version: **1.27 – Demiurge Luna patch**
 
 ---

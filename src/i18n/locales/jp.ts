@@ -29,7 +29,7 @@ const jp = {
   "titles.tool.commuEv": "コミュニティイベント",
   'home.intro.1': `<strong>Outerpedia</strong> は、戦略的ターン制モバイルRPG <strong>Outerplane</strong> のためのコミュニティ主導データベースです。`,
   'home.intro.2': `情熱あるプレイヤーが厳選した <strong>キャラビルド</strong>、<strong>装備効果</strong>、<strong>ティアリスト</strong>、<strong>ユーティリティ</strong>、<strong>各種ガイド</strong> をチェックしましょう。`,
-  'home.intro.3': `編成共有や質問、理論構築は <a href="https://discord.gg/keGhVQWsHv" class="underline text-cyan-400">コミュニティDiscord</a> へ！`,
+  'home.intro.3': `編成共有や質問、理論構築は <a href="https://discord.com/invite/keGhVQWsHv" class="underline text-cyan-400">コミュニティDiscord</a> へ！`,
   'coupon.copy': 'コピー',
   'coupon.copied': 'コピーしました！',
   'coupon.redeem.title': 'クーポンコードの入力方法',
@@ -482,11 +482,11 @@ const jp = {
   'char.twitter.desc': '{element}属性・{class}クラスの{name}のスキルやビルド情報。',
   // ...
   'chars.meta.title': 'アウタープレーン キャラクター一覧 — {monthYear} 更新 | Outerpedia',
-  'chars.meta.desc': '『アウタープレーン』の全キャラクターを網羅。詳細ステータス、スキル、装備ビルド、専用装備データを掲載。{monthYear} 更新・EvaMains Discord 監修。',
+  'chars.meta.desc': '全ヒーローのステータス・スキル・装備・専用装備をチェック。{monthYear} 更新（EvaMains Discord）。',
   'chars.og.title': 'アウタープレーン キャラクター一覧 — {monthYear} 更新 | Outerpedia',
   'chars.og.desc': '全ヒーローのステータス・スキル・装備・専用装備をチェック。{monthYear} 更新（EvaMains Discord）。',
   'chars.twitter.title': 'キャラクター一覧 — {monthYear} 更新 | Outerpedia',
-  'chars.twitter.desc': 'ステータス、スキル、装備、専用装備などのデータベース。{monthYear} 更新。',
+  'chars.twitter.desc': '全ヒーローのステータス・スキル・装備・専用装備をチェック。{monthYear} 更新（EvaMains Discord）。',
   // jp.ts
   'guides.meta.title': 'Outerplane 攻略ガイド | Outerpedia',
   'guides.meta.desc': 'Outerplane の各種攻略ガイド: {list}。ボス攻略・冒険・イベントのウォークスルーを随時更新。',

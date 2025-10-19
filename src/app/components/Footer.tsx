@@ -34,7 +34,7 @@ export default function Footer() {
           </Link>
 
           <Link
-            href="https://discord.gg/keGhVQWsHv"
+            href="https://discord.com/invite/keGhVQWsHv"
             aria-label="EvaMains Discord for Outerpedia community"
             target="_blank"
             rel="noopener noreferrer"

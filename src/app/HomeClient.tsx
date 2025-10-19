@@ -40,7 +40,7 @@ export default function HomeClient() {
               "name": "Outerpedia",
               "url": "https://outerpedia.com",
               "logo": "https://outerpedia.com/images/icons/icon-192x192.png",
-              "sameAs": ["https://discord.gg/keGhVQWsHv"],
+              "sameAs": ["https://discord.com/invite/keGhVQWsHv"],
               "description":
                 "Fan-made wiki for Outerplane: tier list, character builds, equipment database and more."
             }
