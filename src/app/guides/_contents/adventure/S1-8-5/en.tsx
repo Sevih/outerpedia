@@ -2,7 +2,7 @@
 
 import GuideHeading from '@/app/components/GuideHeading'
 
-export default function TyrantGuide() {
+export default function S185Guide() {
     return (
         <div>
             <GuideHeading level={3}>Strategy Overview</GuideHeading>

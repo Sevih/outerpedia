@@ -254,7 +254,7 @@ export default async function GuidePage({ params }: Props) {
         <meta itemProp="datePublished" content={guide.last_updated} />
         <meta itemProp="author" content={guide.author} />
         
-        <GuideContentWrapper category={category} slug={slug} />
+        <GuideContentWrapper category={category} slug={slug} lang={langKey} />
       </article>
     </div>
   )
