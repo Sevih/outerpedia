@@ -2,8 +2,10 @@
 
 import Link from 'next/link'
 import { FaGithub, FaDiscord, FaReddit, FaYoutube, FaTwitter } from 'react-icons/fa'
+import { useI18n } from '@/lib/contexts/I18nContext'
 
 export default function Footer() {
+  const { t } = useI18n()
   const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || 'dev'
 
   return (
@@ -45,13 +47,13 @@ export default function Footer() {
         {/* Liens officiels Outerplane */}
         <nav aria-label="Official Outerplane Links" className="flex flex-wrap justify-center gap-4">
           <Link
-            href="http://outerplane.vagames.kr/index.html"
+            href={t('link.officialwebsite')}
             aria-label="Outerplane Official Homepage"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-zinc-200"
           >
-            Homepage
+            Official Website
           </Link>
           <Link
             href="https://discord.com/invite/zvktrHTu"

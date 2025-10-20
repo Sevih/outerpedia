@@ -1,4 +1,5 @@
 const kr = {
+  'link.officialwebiste': 'https://outerplane.vagames.kr/index.html',
   'nav.characters': '캐릭터',
   'nav.equipment': '장비',
   'nav.tierlist': '티어 리스트',
@@ -452,6 +453,11 @@ const kr = {
   'item.meta.ogDesc': '{name} 의 스탯과 효과를 확인하세요.',
   'item.meta.twTitle': '{name} ',
   'item.meta.twDesc': '{name} 의 스탯/효과 정보.',
+  'weapon.intro1': "다른 장비와 마찬가지로, Outerplane의 무기에는 티어 및 재련 시스템이 있으며, 이를 통해 능력치와 고유 효과를 강화할 수 있습니다. 상위 티어 무기는 더 높은 기본 능력치와 패시브 효과를 제공합니다. 재련과 장비 성장에 대한 자세한 내용은 <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/kr/guides/general-guides/gear'>장비 가이드</a>에서 확인할 수 있습니다.",
+  'weapon.intro2': "장비의 스탯 구조를 이해하는 것은 장비의 성능을 최대한 끌어내기 위해 매우 중요합니다. <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/kr/guides/general-guides/stats'>스탯 및 전투 기본 가이드</a>가 이를 이해하는 데 도움이 될 것입니다.",
+  'accessory.intro1': "다른 장비와 마찬가지로, Outerplane의 액세서리에도 티어 및 재련 시스템이 존재하며, 이를 통해 능력치와 고유 효과를 강화할 수 있습니다. 상위 티어 액세서리는 더 높은 기본 능력치와 패시브 효과를 제공합니다. 재련과 장비 성장에 대한 자세한 내용은 <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/kr/guides/general-guides/gear'>장비 가이드</a>에서 확인할 수 있습니다.",
+  'sets.intro1': "다른 장비와 마찬가지로, Outerplane의 세트 장비에도 티어 및 재련 시스템이 있으며, 이를 통해 능력치와 고유 효과를 강화할 수 있습니다. 상위 티어 세트는 더 높은 기본 능력치와 패시브 효과를 제공합니다. 재련과 장비 성장에 대한 자세한 내용은 <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/kr/guides/general-guides/gear'>장비 가이드</a>에서 확인할 수 있습니다.",
+
   // kr.ts
   'guides.cat.meta.title': '{cat} | Outerpedia',
   'guides.cat.meta.desc': '{desc}',

@@ -280,12 +280,7 @@
         {
           "name": "Noblewoman's Guile",
           "mainStat": [
-            "ATK%"
-          ]
-        },
-        {
-          "name": "Noblewoman's Guile",
-          "mainStat": [
+            "ATK%",
             "HP%"
           ]
         }

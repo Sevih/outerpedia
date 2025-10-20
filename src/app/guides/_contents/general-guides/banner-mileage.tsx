@@ -41,7 +41,7 @@ const bannerTabs: BannerTab[] = [
 
                 <p className='mt-2'>
                     This banner is always available.<br /> You can choose up to 3 characters to force the drop rate of those. <br />For example if you select
-                    <CharacterLinkCard name="Alice" />, <CharacterLinkCard name="Eliza" /> and <CharacterLinkCard name="Francesca" /> you can&apos;t drop another 3{star} exept for those 3.</p>
+                    <CharacterLinkCard name="Alice" />, <CharacterLinkCard name="Eliza" /> and <CharacterLinkCard name="Francesca" /> you can&apos;t drop another 3{star} except for those 3.</p>
                 <p className='mt-4'>
                     It uses 3 types of ressources :</p>
                 <ul>

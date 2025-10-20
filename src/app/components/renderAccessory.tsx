@@ -224,6 +224,17 @@ export default function renderAccessory(entry: Accessory, lang: Lang = 'en',t: (
         mode={entry.mode ?? undefined}
       />
 
+       <p className='w-full max-w-3xl'
+              dangerouslySetInnerHTML={{
+                __html: t('accessory.intro1')
+              }}
+            />
+            <p className='w-full max-w-3xl'
+              dangerouslySetInnerHTML={{
+                __html: t('weapon.intro2')
+              }}
+            />
+
       {/* SEO JSON-LD (URLs absolues) */}
       <script
         type="application/ld+json"

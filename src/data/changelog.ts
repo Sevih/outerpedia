@@ -637,7 +637,7 @@ export const oldChangelog = [
     date: "2025-04-13",
     title: "Official Discord Server",
     type: "feature",
-    content: "The official Outerpedia Discord server is now live! [Join the community](https://discord.gg/keGhVQWsHv) to discuss builds, report issues, suggest improvements, and receive update notifications."
+    content: "The official Outerpedia Discord server is now live! [Join the community](https://discord.com/invite/keGhVQWsHv) to discuss builds, report issues, suggest improvements, and receive update notifications."
   },
   {
     date: "2025-04-12",

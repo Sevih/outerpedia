@@ -207,6 +207,17 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: s
                 mode={entry.mode ?? undefined}
             />
 
+            <p className='w-full max-w-3xl'
+              dangerouslySetInnerHTML={{
+                __html: t('weapon.intro1')
+              }}
+            />
+            <p className='w-full max-w-3xl'
+              dangerouslySetInnerHTML={{
+                __html: t('weapon.intro2')
+              }}
+            />
+
             {/* SEO JSON-LD (URLs absolues) */}
             <script
                 type="application/ld+json"

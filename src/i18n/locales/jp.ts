@@ -1,4 +1,5 @@
 const jp = {
+  'link.officialwebiste': 'https://outerplane.vagames.kr/index_ja.html',
   'nav.characters': 'キャラクター',
   'nav.equipment': '装備',
   'nav.tierlist': 'ティアリスト',
@@ -452,6 +453,11 @@ const jp = {
   'item.meta.ogDesc': '{name} のステータスと効果をチェック。',
   'item.meta.twTitle': '{name} | ',
   'item.meta.twDesc': '{name} のステータス・効果情報。',
+  'weapon.intro1': "他の装備と同様に、Outerplane の武器にはティアとリフォージ（再鍛造）システムがあり、ステータスや固有効果を強化できます。高ティアの武器ほど基礎能力値やパッシブ効果が優れています。リフォージや装備の強化については、<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/jp/guides/general-guides/gear'>装備ガイド</a> をご覧ください。",
+  'weapon.intro2': "装備ステータスの仕組みを理解することは、ギアの性能を最大限に引き出すために欠かせません。<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/jp/guides/general-guides/stats'>ステータスと戦闘の基本ガイド</a> がその理解を深めるのに役立ちます。",
+  'accessory.intro1': "他の装備と同様に、Outerplane のアクセサリーにもティアとリフォージ（再鍛造）システムがあり、ステータスや固有効果を強化できます。高ティアのアクセサリーほど基礎能力値やパッシブ効果が優れています。リフォージや装備の強化については、<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/jp/guides/general-guides/gear'>装備ガイド</a> をご覧ください。",
+  'sets.intro1': "他の装備と同様に、Outerplane のセットにもティアとリフォージ（再鍛造）システムがあり、ステータスや固有効果を強化できます。高ティアのセットほど基礎能力値やパッシブ効果が優れています。リフォージや装備の強化については、<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/jp/guides/general-guides/gear'>装備ガイド</a> をご覧ください。",
+
   // jp.ts
   'guides.cat.meta.title': '{cat} | Outerpedia',
   'guides.cat.meta.desc': '{desc}',

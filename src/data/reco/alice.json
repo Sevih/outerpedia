@@ -3,11 +3,7 @@
     "Weapon": [
       {
         "name": "Noblewoman's Guile",
-        "mainStat": "ATK%"
-      },
-      {
-        "name": "Noblewoman's Guile",
-        "mainStat": "HP%"
+        "mainStat": "ATK%/HP%"
       }
     ],
     "Amulet": [

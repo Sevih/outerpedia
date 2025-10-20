@@ -2,66 +2,66 @@
     "valentine": {
         "pro": [
             "easy to build",
-            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE}"
+            "buffing allies' damage with {B/BT_STAT|ST_CRITICAL_RATE} and {B/BT_STAT|ST_CRITICAL_DMG_RATE}"
         ],
         "con": [
             "RNG reliant for her EE to activate",
-            "by making her too fast can make you waste alot of turns"
+            "by making her too fast can make you waste a lot of turns"
         ]
     },
     "tamara": {
         "pro": [
-            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE}",
-            "very flexible and can use in many team",
-            "debuffing enemies with {D/BT_STAT|ST_DEF} {D/BT_SILENCE} {D/BT_MARKING} {D/BT_COOL_CHARGE}"
+            "buffing allies' damage with {B/BT_STAT|ST_CRITICAL_RATE} and {B/BT_STAT|ST_CRITICAL_DMG_RATE}",
+            "very flexible and usable in many teams",
+            "debuffing enemies with {D/BT_STAT|ST_DEF} {D/BT_SILENCE} {D/BT_MARKING} and {D/BT_COOL_CHARGE}"
         ],
         "con": [
-            "require alot of stats to use at minimum",
-            "require max skills upgrade at minimum"
+            "requires high stats to perform well",
+            "requires max skill upgrades for full potential"
         ]
     },
     "charlotte": {
         "pro": [
             "easy to build",
-            "Buffing allies damages with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK}"
+            "buffing allies' damage with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} and {B/BT_STAT|ST_ATK}"
         ],
         "con": [
-            "her skillset are mainly to help mage class character",
-            "not helpful for most of time"
+            "her skillset mainly supports mage-type characters",
+            "not helpful most of the time"
         ]
     },
     "skadi": {
         "pro": [
             "easy to build",
-            "buffing allies with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_BUFF_CHANCE}"
+            "buffing allies with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} and {B/BT_STAT|ST_BUFF_CHANCE}"
         ],
         "con": [
-            "want max skills upgrade"
+            "needs max skill upgrades"
         ]
     },
     "monad-eva": {
         "pro": [
-            "have built-in {B/BT_CALL_BACKUP}",
-            "help team with {B/BT_INVINCIBLE} {B/SYS_REVENGE_HEAL} {B/BT_REVIVAL} {B/BT_AP_CHARGE}"
+            "has built-in {B/BT_CALL_BACKUP}",
+            "supports the team with {B/BT_INVINCIBLE} {B/SYS_REVENGE_HEAL} {B/BT_REVIVAL} {B/BT_AP_CHARGE}"
         ],
         "con": [
-            "want 5star transcend for double {B/BT_CALL_BACKUP}",
-            "want her exclusive equipment to heal when she using {B/SYS_REVENGE_HEAL}"
+            "needs 5-star transcendence for double {B/BT_CALL_BACKUP}",
+            "needs her exclusive equipment to heal when using {B/SYS_REVENGE_HEAL}"
         ]
     },
     "nella": {
         "pro": [
-            "have built-in {B/BT_CALL_BACKUP}",
-            "help team with {B/BT_RESURRECTION_G} {B/SYS_REVENGE_HEAL} {B/BT_IMMUNE} {B/BT_AP_CHARGE}"
+            "has built-in {B/BT_CALL_BACKUP}",
+            "supports the team with {B/BT_RESURRECTION_G} {B/SYS_REVENGE_HEAL} {B/BT_IMMUNE} {B/BT_AP_CHARGE}"
         ],
         "con": [
-            "don't have any form to cleanse debuffs outside {B/BT_IMMUNE}"
+            "has no way to cleanse debuffs outside preventing them with {B/BT_IMMUNE}"
         ]
     },
     "ame": {
         "pro": [
             "deal increased damage against bosses",
-            "have free critical chance"
+            "has innate critical chance"
         ],
         "con": [
             "-"
@@ -69,9 +69,9 @@
     },
     "rin": {
         "pro": [
-            "strong at clearing all enemies at one",
+            "strong at clearing all enemies at once",
             "self buff with {B/BT_STAT|ST_CRITICAL_RATE}",
-            "damage increase everytime she using skill"
+            "damage increases each time she uses a skill"
         ],
         "con": [
             "weak against bosses unless have max Exclusive Equipment"
@@ -81,20 +81,20 @@
         "pro": [
             "easy to build with attack stat",
             "can detonate {D/BT_DOT_BURN}",
-            "her ultimate skill reset if its kill enemy"
+            "her ultimate resets if it kills an enemy"
         ],
         "con": [
-            "want teammate that can extend {D/BT_DOT_BURN} for more damage"
+            "benefits from teammates who can extend {D/BT_DOT_BURN} duration"
         ]
     },
     "rey": {
         "pro": [
             "strong against Irregular bosses",
-            "can get turns alot with {B/BT_ADDITIVE_TURN} and {B/BT_COOL_CHARGE} combined",
-            "can stop water or healer enemies from being revived"
+            "can take many extra turns with {B/BT_ADDITIVE_TURN} and {B/BT_COOL_CHARGE} combined",
+            "can prevent water- or healer-type enemies from being revived"
         ],
         "con": [
-            "can waste too much turns or die by DoT debuffs"
+            "can waste too many turns or die to DoT debuffs"
         ]
     }
 }

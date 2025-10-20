@@ -54,7 +54,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
           <li><CharacterLinkCard name="Dianne" /> :  You can use her as a remplacement if you don&apos;t own <CharacterLinkCard name="Liselotte" />.</li>
         </ul>
         <p className="text-neutral-400 text-sm italic mb-4">
-          Note: you want <CharacterLinkCard name="Demiurge Vlada" /> <CharacterLinkCard name="Eliza" /> to be at 240 (not over) and play before your DPS to remove the <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" />. Be carefull, be sure to take <CharacterLinkCard name="Liselotte" /> transcend bonus in count since she gives 5 speed at <StarLevel levelLabel="4" size={14} /> and 10 at <StarLevel levelLabel="6" size={14} />.
+          Note: you want <CharacterLinkCard name="Demiurge Vlada" /> <CharacterLinkCard name="Eliza" /> to be at 240 (not over) and play before your DPS to remove the <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" />. Be careful, be sure to take <CharacterLinkCard name="Liselotte" /> transcend bonus in count since she gives 5 speed at <StarLevel levelLabel="4" size={14} /> and 10 at <StarLevel levelLabel="6" size={14} />.
         </p>
         <hr className="my-6 border-neutral-700" />
         <RecommendedTeam team={teamSetup0625} />

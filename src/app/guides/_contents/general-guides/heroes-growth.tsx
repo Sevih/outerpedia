@@ -146,7 +146,7 @@ export default function HeroGrowthGuide() {
             <GuideHeading level={3} >Trust (Friendship)</GuideHeading>
             <p>
                 Increasing a hero&apos;s trust level unlocks their Exclusive Equipment at level 10.<br />
-                You can give them any gift, but each heros gots his preferred ones (you can check gift preference in <strong>Hero → Trust Level</strong> top-left box).<br />
+                You can give them any gift, but each heroes gots his preferred ones (you can check gift preference in <strong>Hero → Trust Level</strong> top-left box).<br />
                 You can also give them Upgrade Stones matching their element. 170 000 total trust points are needed for level 10.
             </p>
             <ul>

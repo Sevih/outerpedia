@@ -1,4 +1,5 @@
 const en = {
+  'link.officialwebiste': 'https://outerplane.vagames.kr/index_en.html',
   'nav.characters': 'Characters',
   'nav.equipment': 'Equipment',
   'nav.tierlist': 'Tier List',
@@ -452,6 +453,10 @@ const en = {
   'item.meta.ogDesc': 'Explore stats and effects for {name} on Outerpedia.',
   'item.meta.twTitle': '{name}',
   'item.meta.twDesc': 'Stats and effects for {name} in Outerplane.',
+  'weapon.intro1': "Just like other equipment, weapons in Outerplane have a tier and reforge system that lets you enhance their stats and unique effects. Higher-tier weapons grant better base attributes and passives. To learn more about reforging and equipment progression, check the <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/gear'>Gear Guide</a>.",
+  'weapon.intro2': "Understanding how equipment statistics work is also essential to get the most out of your gear — the <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/stats'>Statistics & Combat Basics Guide</a> will help you master that part.",
+  'accessory.intro1': "Just like other equipment, accessories in Outerplane have a tier and reforge system that lets you enhance their stats and unique effects. Higher-tier accessories grant better base attributes and passives. To learn more about reforging and equipment progression, check the <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/gear'>Gear Guide</a>.",
+  'sets.intro1': "Just like other equipment, armor sets in Outerplane have a tier and reforge system that lets you enhance their stats and unique effects. Higher-tier sets grant better base attributes and passives. To learn more about reforging and equipment progression, check the <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/gear'>Gear Guide</a>.",
   // Category pages
   'guides.cat.meta.title': '{cat} | Outerpedia',
   'guides.cat.meta.desc': '{desc}',
