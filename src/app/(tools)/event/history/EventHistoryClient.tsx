@@ -156,7 +156,7 @@ export default function EventHistoryClient({ metas, nowISO }: Props) {
                       {m.cover ? (
                         <Image
                           src={m.cover}
-                          alt=""
+                          alt="cover"
                           fill
                           sizes="(max-width: 640px) 100vw, 320px"
                           className="object-cover rounded-lg border border-white/10"

@@ -125,7 +125,7 @@ export default function HeaderClient({ activeEvent }: Props) {
             {nav.map(i => (
               <Link key={i.href} href={i.href} className="px-3 py-2 rounded hover:bg-zinc-800 flex items-center gap-2" onClick={() => setOpen(false)} aria-label={t(i.key)}>
                 <span className="relative inline-block h-[18px] w-[18px]">
-                  <Image src={`/images/ui/nav/${i.icon}.webp`} alt="" fill sizes="18px" className="object-contain" />
+                  <Image src={`/images/ui/nav/${i.icon}.webp`} alt={`${i.short}`} fill sizes="18px" className="object-contain" />
                 </span>
                 <span>{t(i.key)}</span>
               </Link>

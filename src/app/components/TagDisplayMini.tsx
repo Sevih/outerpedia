@@ -34,7 +34,7 @@ export default function TagDisplayMini({ tags: input = [] }: TagDisplayMiniProps
             <div className="flex items-center p-0 rounded cursor-pointer mr-1 mb-1">
               <Image
                 src={def.image}
-                alt=""
+                alt={def.label}
                 width={24}
                 height={24}
                 style={{ width: 24, height: 24 }}

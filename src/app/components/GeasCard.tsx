@@ -32,7 +32,7 @@ export default function GeasCard({ geas, type = "bonus" }: Props) {
           {geas.bg && (
             <Image
               src={`/images/ui/geas/GD_Slot_Bg_0${geas.bg}.webp`}
-              alt=""
+              alt="geas background"
               width={40}
               height={40}
               style={{ width: 40, height: 40 }}
@@ -74,7 +74,7 @@ export default function GeasCard({ geas, type = "bonus" }: Props) {
             {geas.bg && (
               <Image
                 src={`/images/ui/geas/GD_Slot_Bg_0${geas.bg}.webp`}
-                alt=""
+                alt="geas background"
                 width={40}
                 height={40}
                 style={{ width: 40, height: 40 }}

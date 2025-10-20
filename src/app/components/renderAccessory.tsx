@@ -97,7 +97,7 @@ export default function renderAccessory(entry: Accessory, lang: Lang = 'en',t: (
           {/* fond selon la rareté (décoratif) */}
           <Image
             src={`/images/bg/CT_Slot_${slotBgKey}.webp`}
-            alt=""
+            alt="background"
             aria-hidden="true"
             fill
             sizes="80px"
@@ -122,7 +122,7 @@ export default function renderAccessory(entry: Accessory, lang: Lang = 'en',t: (
                 <Image
                   key={i}
                   src="/images/ui/CM_icon_star_y.webp"
-                  alt=""
+                  alt="star"
                   aria-hidden="true"
                   width={15}
                   height={15}

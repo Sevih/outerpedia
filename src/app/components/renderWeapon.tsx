@@ -96,7 +96,7 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: s
                     {/* fond selon la rareté */}
                     <Image
                         src={`/images/bg/CT_Slot_${slotBgKey}.webp`}
-                        alt=""
+                        alt="background"
                         aria-hidden="true"
                         fill
                         sizes="80px"

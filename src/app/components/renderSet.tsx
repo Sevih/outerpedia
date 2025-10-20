@@ -102,7 +102,7 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
                 <div className="relative w-[80px] h-[80px]">
                   <Image
                     src="/images/ui/bg_item_leg.webp"
-                    alt=""
+                    alt="background"
                     aria-hidden="true"
                     fill
                     className="absolute inset-0 z-0"
