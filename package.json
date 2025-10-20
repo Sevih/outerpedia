@@ -33,6 +33,7 @@
     "@radix-ui/react-tooltip": "^1.2.3",
     "cheerio": "^1.0.0",
     "classnames": "^2.5.1",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.18.1",
     "jsdom": "^26.1.0",
     "jsonc-parser": "^3.3.1",
