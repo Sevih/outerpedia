@@ -7,6 +7,7 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 export default function Footer() {
   const { t } = useI18n()
   const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || 'dev'
+  const offLink = t('link.officialwebiste')
 
   return (
     <footer className="mt-10 border-t border-zinc-800 bg-black/40">
@@ -47,7 +48,7 @@ export default function Footer() {
         {/* Liens officiels Outerplane */}
         <nav aria-label="Official Outerplane Links" className="flex flex-wrap justify-center gap-4">
           <Link
-            href={t('link.officialwebsite')}
+            href={offLink}
             aria-label="Outerplane Official Homepage"
             target="_blank"
             rel="noopener noreferrer"
