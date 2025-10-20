@@ -13,6 +13,7 @@ export type ChangelogEntry = {
   title: string;
   type: 'feature' | 'fix' | 'update' | 'balance';
   content: string[];
+  url?: string;
 };
 
 type RawEntry = {
@@ -20,6 +21,7 @@ type RawEntry = {
   title: LString;
   type: 'feature' | 'fix' | 'update' | 'balance';
   content: string | string[] | LString[];
+  url?: string;
 };
 
 // Ancienne version brute avec type explicite (const + types littéraux)
@@ -53,26 +55,22 @@ export const oldChangelog = [
   {
     date: "2025-10-01",
     title: {
-      en: "New Hero Summer Knight’s Dream Ember",
-      jp: "新ヒーロー Summer Knight’s Dream Ember",
-      kr: "신규 영웅 Summer Knight’s Dream Ember",
+      en: "New Hero Summer Knight's Dream Ember",
+      jp: "新ヒーロー Summer Knight's Dream Ember",
+      kr: "신규 영웅 Summer Knight's Dream Ember",
     } as LString,
     type: "update",
+    url: "/characters/summer-knight-s-dream-ember",
     content: [
       {
-        en: "- The seasonal Limited Hero **Summer Knight’s Dream Ember** has arrived in OUTERPLANE!",
-        jp: "- 季節限定ヒーロー **Summer Knight’s Dream Ember** がOUTERPLANEに登場！",
-        kr: "- 시즌 한정 영웅 **Summer Knight’s Dream Ember** 가 OUTERPLANE에 등장했습니다!",
+        en: "- The seasonal Limited Hero **Summer Knight's Dream Ember** has arrived in OUTERPLANE!",
+        jp: "- 季節限定ヒーロー **Summer Knight's Dream Ember** がOUTERPLANEに登場！",
+        kr: "- 시즌 한정 영웅 **Summer Knight's Dream Ember** 가 OUTERPLANE에 등장했습니다!",
       } as LString,
       {
         en: "- She inflicts **fixed damage on bosses** and grants **Penetration** and **Priority** buffs to her allies.",
         jp: "- ボスに**固定ダメージ**を与え、味方に**貫通**と**優先権**バフを付与します。",
         kr: "- 보스에게 **고정 피해**를 입히고 아군에게 **관통** 및 **우선권** 버프를 부여합니다.",
-      } as LString,
-      {
-        en: "- Learn More [here](/characters/summer-knight-s-dream-ember)",
-        jp: "- 詳細は[こちら](/characters/summer-knight-s-dream-ember)",
-        kr: "- 자세히 보기 [여기](/characters/summer-knight-s-dream-ember)",
       } as LString,
     ],
   },
@@ -106,8 +104,9 @@ export const oldChangelog = [
     date: "2025-09-27",
     title: "Gacha Pull Simulator & Utilities rename",
     type: "feature",
+    url: "/pull-sim",
     content: [
-      "- New **Gacha Pull Simulator**: simulate Rate Up, Premium, and Limited banners with the mileage system. [Try it here](/pull-sim)",
+      "- New **Gacha Pull Simulator**: simulate Rate Up, Premium, and Limited banners with the mileage system.",
       "- Renamed the **Tools** category to **Utilities** (URL stays `/tools`) and aligned page metadata for SEO."
     ],
   },
@@ -123,24 +122,27 @@ export const oldChangelog = [
     date: "2025-09-24",
     title: "Ether Income Guide",
     type: "feature",
+    url: "/guides/general-guides/ether-income",
     content: [
-      "Added the [Ether Income Guide](/guides/general-guides/ether-income) : overview of all regular and variable sources of Ether in Outerplane, with daily, weekly, and monthly totals.",
+      "Added the **Ether Income Guide**: overview of all regular and variable sources of Ether in Outerplane, with daily, weekly, and monthly totals.",
     ]
   },
   {
     date: "2025-08-26",
     title: "Premium & Limited Guide",
     type: "feature",
+    url: "/guides/general-guides/premium-limited",
     content: [
-      "Added the [Premium & Limited Guide](/guides/general-guides/premium-limited) : Quick recommendations for Premium and Limited banners.",
+      "Added the **Premium & Limited Guide**: Quick recommendations for Premium and Limited banners.",
     ]
   },
   {
     date: "2025-08-23",
     title: "Skyward Tower Guide, Tags & Roles Filters",
     type: "feature",
+    url: "/guides/skyward-tower",
     content: [
-      "Added the [Skyward Tower Guide](/guides/skyward-tower)",
+      "Added the **Skyward Tower Guide**",
       "Introduced tag filters on the character list",
       "Introduced role filters on the character list",
       "Improved character sorting and browsing with the new filters"
@@ -150,6 +152,7 @@ export const oldChangelog = [
     date: "2025-08-20",
     title: "Sharable Character Filters",
     type: "feature",
+    url: "/characters",
     content: [
       "- Character page filters (element, class, rarity, buffs/debuffs, etc.) are now encoded in the URL.",
       "- You can copy and share the link to directly show your filtered characters to others.",
@@ -159,8 +162,9 @@ export const oldChangelog = [
     date: "2025-08-20",
     title: "Shop Guide Release",
     type: "feature",
+    url: "/guides/general-guides/shop-purchase-priorities",
     content: [
-      "- Outerplane shop guide with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely. Learn more [here](/guides/general-guides/shop-purchase-priorities)",
+      "- Outerplane **shop guide** with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely.",
     ],
   },
 
@@ -168,16 +172,18 @@ export const oldChangelog = [
     date: "2025-08-19",
     title: "Shichifuja Update",
     type: "update",
+     url: "/guides/joint-boss/shichifuja",
     content: [
-      "- [Joint boss Shichifuja](/guides/joint-boss/shichifuja) has been updated for August 2025 version.",
+      "- Joint boss Shichifuja has been updated for August 2025 version.",
     ],
   },
   {
     date: "2025-08-13",
     title: "Planetary Control Unit Guild Raid",
     type: "update",
+     url: "/guides/guild-raid/planetary-control-unit",
     content: [
-      "- Planetary Control Unit Guild Raid Guide release. learn more [here](/guides/guild-raid/planetary-control-unit)",
+      "- Planetary Control Unit Guild Raid Guide release.",
     ],
   },
   {
@@ -194,49 +200,54 @@ export const oldChangelog = [
     date: "2025-07-31",
     title: "Timegated Resources Guide",
     type: "feature",
+    url: "/guides/general-guides/timegate-resource",
     content: [
-      "- Complete guide to Outerplane’s timegated resources — skill books, transistones, special gear materials, and glunite sources. Learn More [here](/guides/general-guides/timegate-resource)",
+      "- Complete guide to Outerplane’s timegated resources — skill books, transistones, special gear materials, and glunite sources.",
     ],
   },
   {
     date: "2025-07-29",
     title: "Revenant Dragon Harshna update",
     type: "update",
+    url: "/guides/world-boss/harshna",
     content: [
-      "- Guide is up to date for july 2025 version. Learn More [here](/guides/world-boss/harshna)",
+      "- Guide is up to date for july 2025 version. Learn More",
     ],
   },
   {
     date: "2025-07-29",
     title: "New Hero Fran",
     type: "update",
+    url: "/characters/fran",
     content: [
       "- Fran, a genius gamer who grants Counterattack to all allies and reduces all of the Unique Resource count on the target.",
-      "- Learn More [here](/characters/fran)",
     ],
   },
   {
     date: "2025-07-23",
     title: "Deep Sea Guardian Update",
     type: "update",
+    url :"/guides/joint-boss/deep-sea-guardian",
     content: [
-      "- [Joint boss Deep Sea Guardian](/guides/joint-boss/deep-sea-guardian) has been updated for July 2025 version.",
+      "- Joint boss Deep Sea Guardian has been updated for July 2025 version.",
     ],
   },
   {
     date: "2025-07-16",
     title: "Dignity of the Golden Kingdom Guild Raid",
     type: "update",
+    url:"/guides/guild-raid/dignity-of-the-golden-kingdom",
     content: [
-      "- Dignity of the Golden Kingdom Guild Raid Guide release. learn more [here](/guides/guild-raid/dignity-of-the-golden-kingdom)",
+      "- Dignity of the Golden Kingdom Guild Raid Guide release.",
     ],
   },
   {
     date: "2025-07-01",
     title: "Archdemon of Hubris Dahlia update",
     type: "update",
+    url:"/guides/world-boss/dahlia",
     content: [
-      "- Guide is up to date for july 2025 version. Learn More [here](/guides/world-boss/dahlia)",
+      "- Guide is up to date for july 2025 version.",
     ],
   },
   {
@@ -251,25 +262,27 @@ export const oldChangelog = [
     date: "2025-06-24",
     title: "Annihilator Update",
     type: "update",
+    url:"/guides/joint-boss/annihilator",
     content: [
-      "- [Joint boss Annihilator](/guides/joint-boss/annihilator)  has been updated for June 2025 version.",
+      "- Joint boss Annihilator  has been updated for June 2025 version.",
     ],
   },
   {
     date: "2025-06-19",
     title: "Prevent World Alteration Guild Raid",
     type: "update",
+    url:"/guides/guild-raid/prevent-world-alteration",
     content: [
-      "- Prevent World Alteration Guild Raid Guide release. learn more [here](/guides/guild-raid/prevent-world-alteration)",
+      "- Prevent World Alteration Guild Raid Guide release.",
     ],
   },
   {
     date: "2025-06-17",
     title: "New Hero Liselotte",
     type: "update",
+    url:"/characters/liselotte",
     content: [
       "- Liselotte, a genius magician who increases barrier and defense when an ally uses an attack that targets all enemies and fights by removing debuffs and reducing cooldowns.",
-      "- Learn More [here](/characters/liselotte)",
     ],
   },
   {
@@ -284,8 +297,9 @@ export const oldChangelog = [
     date: "2025-06-14",
     title: "Quirk guide",
     type: "feature",
+    url:"/guides/general-guides/quirk",
     content: [
-      "- Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials. Learn More [here](/guides/general-guides/quirk)",
+      "- Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials.",
     ],
   },
   {
@@ -303,16 +317,17 @@ export const oldChangelog = [
     title: "Statistics & Combat Basics and Promotion : Monad Eva guides now available",
     type: "update",
     content: [
-      "- Statistics & Combat Basics : Fundamental systems, mechanics, and beginner-friendly guides that apply to the entire game. Learn More [here](/guides/general-guides/stats)",
-      "- Promotion Monad Eva : Boss strategy guide. Learn More [here](/guides/adventure-license/prom-meva)",
+      "- [Statistics & Combat Basics](/guides/general-guides/stats) : Fundamental systems, mechanics, and beginner-friendly guides that apply to the entire game.",
+      "- [Promotion Monad Eva](/guides/adventure-license/prom-meva) : Boss strategy guide.",
     ],
   },
   {
     date: "2025-06-04",
     title: "Walking Fortress Venion update",
     type: "update",
+    url:"/guides/world-boss/venion",
     content: [
-      "- Guide is up to date for june 2025 version. Learn More [here](/guides/world-boss/venion)",
+      "- Guide is up to date for june 2025 version.",
     ],
   },
   {
@@ -320,16 +335,17 @@ export const oldChangelog = [
     title: "Hero Growth & Gear guides",
     type: "update",
     content: [
-      "- Hero Growth guide : A complete breakdown of how to power up your heroes efficiently. Learn More [here](/guides/general-guides/heroes-growth)",
-      "- Gear guide : A guide to gear types, upgrades, and how to make your equipment stronger. Learn More [here](guides/general-guides/gear)",
+      "- [Hero Growth guide](/guides/general-guides/heroes-growth) : A complete breakdown of how to power up your heroes efficiently.",
+      "- [Gear guide](guides/general-guides/gear) : A guide to gear types, upgrades, and how to make your equipment stronger.",
     ],
   },
   {
     date: "2025-05-27",
     title: "Knight of Hope Meteos guide",
     type: "update",
+    url:"/guides/joint-boss/koh-meteos",
     content: [
-      "- Learn More [here](/guides/joint-boss/koh-meteos)",
+      "- Guide update for May 2025.",
     ],
   },
   {
@@ -348,8 +364,8 @@ export const oldChangelog = [
     title: "Guides updated: New entries in the General section",
     type: "feature",
     content: [
-      "- Banners & Mileage System guide : learn more [here](/guides/general-guides/banner-mileage)",
-      "- Daily Stamina Burn guide : learn more [here](/guides/general-guides/daily-stamina)",
+      "- [Banners & Mileage System](/guides/general-guides/banner-mileage) guide release.",
+      "- [Daily Stamina Burn](/guides/general-guides/daily-stamina) guide release.",
     ],
   },
   {
@@ -383,36 +399,37 @@ export const oldChangelog = [
     date: "2025-05-20",
     title: "Demiurge Luna",
     type: "update",
+    url:"/characters/demiurge-luna",
     content: [
       "- Demiurge Luna, a versatile Hero who deals heavy single-target damage to enemies and excels at multi-target damage is now live.",
-      "- Learn More [here](/characters/demiurge-luna)",
     ],
   },
   {
     date: "2025-05-19",
     title: "Gear Usage Finder",
     type: "feature",
+    url:"/gear-solver",
     content: [
       "- Unsure which character can use your gear? This tool helps you find the best match based on equipment.",
       "- This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.",
-      "- [Learn more](/gear-solver)",
     ],
   },
   {
     date: "2025-05-19",
     title: "Gear Usage Statistics",
     type: "feature",
+    url:"/gear-usage-stats",
     content: [
       "- Discover the most recommended weapons, amulets and sets in Outerplane builds.",
-      "- [Learn more](/gear-usage-stats)",
     ],
   },
   {
     date: "2025-05-17",
     title: "New guide - Understanding Free Heroes & Starter Banners",
     type: "feature",
+    url:"/guides/general-guides/free-heroes-start-banner",
     content: [
-      "- Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start. [Read the guide here](/guides/general-guides/free-heroes-start-banner)",
+      "- Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start.",
     ],
   },
   {
@@ -672,12 +689,25 @@ export const oldChangelog = [
   }
 ] as const satisfies readonly RawEntry[];
 
-// Changelog migré, typé, prêt à utiliser
-export function getChangelogFor(lang: TenantKey): ChangelogEntry[] {
-  return (oldChangelog as readonly RawEntry[]).map(e => {
+// Fonction unifiée pour accéder au changelog
+export function getChangelog(lang: TenantKey, options?: { limit?: number }) {
+  const entries = (oldChangelog as readonly RawEntry[]).map(e => {
     const title = resolveL(e.title, lang);
     const list = Array.isArray(e.content) ? e.content : toLines(e.content);
     const content = list.map(item => resolveL(item as LString, lang));
-    return { date: e.date, title, type: e.type, content };
+    return {
+      date: e.date,
+      title,
+      type: e.type,
+      content,
+      url: e.url  // ✅ URL spécifique à l'entrée (optionnel)
+    };
   });
+
+  return options?.limit ? entries.slice(0, options.limit) : entries;
+}
+
+// Legacy function (deprecated - use getChangelog instead)
+export function getChangelogFor(lang: TenantKey): ChangelogEntry[] {
+  return getChangelog(lang);
 }

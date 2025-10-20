@@ -1,9 +1,10 @@
 // src/app/changelog/page.tsx
 import { getTenantServer } from '@/tenants/tenant.server'   // ✅ server-only
-import { getChangelogFor } from '@/data/changelog'
+import { getChangelog } from '@/data/changelog'
 import { Card, CardContent } from '@/app/components/ui/card'
 import { renderMarkdown } from '@/utils/markdown'
 import { type Metadata } from 'next'
+import Link from 'next/link'
 
 const metaDict = {
   en: { title: 'Changelog | Outerpedia', desc: 'Track all updates made to Outerpedia: guides, characters, tools, and more.' },
@@ -38,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ChangelogPage() {
   const { key } = await getTenantServer()   // ✅ et là
-  const entries = getChangelogFor(key)
+  const entries = getChangelog(key)
 
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -68,7 +69,15 @@ export default async function ChangelogPage() {
                 </span>
               </div>
 
-              <h2 className="text-lg font-semibold text-white">{entry.title}</h2>
+              {entry.url ? (
+                <Link href={entry.url}>
+                  <h2 className="text-lg font-semibold text-red-400 hover:text-cyan-400 transition-colors cursor-pointer">
+                    {entry.title}
+                  </h2>
+                </Link>
+              ) : (
+                <h2 className="text-lg font-semibold text-white">{entry.title}</h2>
+              )}
               <div
                 className="text-sm text-gray-400 markdown"
                 dangerouslySetInnerHTML={{ __html: renderMarkdown(entry.content.join('\n')) }}

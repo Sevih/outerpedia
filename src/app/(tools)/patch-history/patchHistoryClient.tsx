@@ -110,12 +110,13 @@ export default function PatchNotesViewer() {
   const [loadErr, setLoadErr] = useState<string | null>(null)
   const activeLabel = SOURCES.find(s => s.value === src)?.label ?? ''
 
-  // Mettre à jour l’URL quand la source change
+  // Mettre à jour l'URL quand la source change
   useEffect(() => {
     const sp = new URLSearchParams(Array.from(searchParams.entries()))
     sp.set('src', src)
     router.replace(`${pathname}?${sp.toString()}`, { scroll: false })
-  }, [src, router, pathname, searchParams])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src, router, pathname])
 
   // Charger le JSON (forme garantie { items: [...] })
   useEffect(() => {

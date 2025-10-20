@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { getChangelogFor, type ChangelogEntry } from '@/data/changelog'
+import { getChangelog, type ChangelogEntry } from '@/data/changelog'
 import { useMemo } from 'react'
 import { renderMarkdown } from '@/utils/markdown'
 import { useI18n } from '@/lib/contexts/I18nContext'
@@ -9,14 +9,9 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 export default function HomeClient() {
   const { lang } = useI18n()
 
-  const changelog = useMemo<ChangelogEntry[]>(
-    () => getChangelogFor(lang),
-    [lang]
-  )
-
   const recentChanges = useMemo<ChangelogEntry[]>(
-    () => changelog.slice(0, 5),
-    [changelog]
+    () => getChangelog(lang, { limit: 5 }),
+    [lang]
   )
 
   return (
@@ -82,9 +77,17 @@ export default function HomeClient() {
                 </span>
               </div>
 
-              <div className="mb-1 text-lg font-semibold text-white">
-                {entry.title}
-              </div>
+              {entry.url ? (
+                <Link href={entry.url}>
+                  <div className="mb-1 text-lg font-semibold text-red-400 hover:text-cyan-400 transition-colors cursor-pointer">
+                    {entry.title}
+                  </div>
+                </Link>
+              ) : (
+                <div className="mb-1 text-lg font-semibold text-white">
+                  {entry.title}
+                </div>
+              )}
               <div
                 className="markdown leading-relaxed text-sm text-gray-300"
                 dangerouslySetInnerHTML={{

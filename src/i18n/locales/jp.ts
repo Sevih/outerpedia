@@ -34,7 +34,7 @@ const jp = {
   'coupon.copied': 'コピーしました！',
   'coupon.redeem.title': 'クーポンコードの入力方法',
   'coupon.redeem.android': '<strong>Android端末の場合：</strong> ゲーム内の <strong>設定 &gt; アカウント &gt; クーポン入力</strong> から入力できます。',
-  'coupon.redeem.ios': '<strong>iOS端末の場合：</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">こちら</a> で入力し、<a href="https://imgur.com/a/8gStkbJ" class="underline text-cyan-400">会員情報</a> を確認してください。',
+  'coupon.redeem.ios': '<strong>iOS端末の場合：</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">こちら</a> で入力し、<a href="/images/guides/member_info.webp" target="_blank" class="underline text-cyan-400">会員情報</a> を確認してください。',
   'general.endsin': '終了まで',
 
   //community event

@@ -34,7 +34,7 @@ const kr = {
   'coupon.copied': '복사됨!',
   'coupon.redeem.title': '쿠폰 코드는 어떻게 등록하나요?',
   'coupon.redeem.android': '<strong>안드로이드 기기:</strong> 게임 내 <strong>설정 &gt; 계정 &gt; 쿠폰 입력</strong> 메뉴에서 입력할 수 있습니다.',
-  'coupon.redeem.ios': '<strong>iOS 기기:</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">여기</a>에서 입력하고, <a href="https://imgur.com/a/8gStkbJ" class="underline text-cyan-400">회원 정보</a>를 확인하세요.',
+  'coupon.redeem.ios': '<strong>iOS 기기:</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">여기</a>에서 입력하고, <a href="/images/guides/member_info.webp" target="_blank" class="underline text-cyan-400">회원 정보</a>를 확인하세요.',
   'general.endsin': '종료까지',
 
   //community event

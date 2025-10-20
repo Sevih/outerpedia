@@ -16,8 +16,14 @@ try {
 
 const nextConfig = {
   compress: true,
+  // Permettre les requêtes cross-origin en dev pour les sous-domaines
+  allowedDevOrigins: [
+    'http://outerpedia.local:3000',
+    'http://jp.outerpedia.local:3000',
+    'http://kr.outerpedia.local:3000',
+  ],
   images: {
-	unoptimized: true, // ✅ Désactive l’optimisation dynamique
+	unoptimized: true, // ✅ Désactive l'optimisation dynamique
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       { protocol: 'https', hostname: 'img.youtube.com' },
