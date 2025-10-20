@@ -18,9 +18,9 @@ const nextConfig = {
   compress: true,
   // Permettre les requêtes cross-origin en dev pour les sous-domaines
   allowedDevOrigins: [
-    'http://outerpedia.local:3000',
-    'http://jp.outerpedia.local:3000',
-    'http://kr.outerpedia.local:3000',
+    'outerpedia.local',
+    'jp.outerpedia.local',
+    'kr.outerpedia.local',
   ],
   images: {
 	unoptimized: true, // ✅ Désactive l'optimisation dynamique

@@ -61,12 +61,12 @@ export default function LegalNoticePage() {
         OVH SAS<br />
         2 rue Kellermann – 59100 Roubaix – France<br />
         <Link
-          href="https://www.ovh.com"
+          href="https://www.ovhcloud.com"
           target="_blank"
           rel="noopener noreferrer"
           className="underline text-red-600"
         >
-          https://www.ovh.com
+          https://www.ovhcloud.com
         </Link>
       </p>
 
