@@ -11,8 +11,8 @@ const teams = {
     icon: 'SC_Buff_Effect_Remove_Buff.webp',
     setup: [
       ['Monad Eva'],
-      ['Stella'],
-      ['Regina'],
+      ['Stella','Kuro'],
+      ['Regina','Demiurge Luna','Gnosis Beth'],
       ['Akari', 'Gnosis Nella']
     ]
   }

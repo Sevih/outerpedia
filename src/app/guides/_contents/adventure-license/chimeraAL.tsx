@@ -8,10 +8,10 @@ const teams = {
     label: 'Team 1 – Genetic Erasure',
     icon: 'SC_Buff_Stat_Atk.webp',
     setup: [
-      ['Holy Night\'s Blessing Dianne', 'Maxie'],
+      ["Holy Night's Blessing Dianne", 'Maxie','Liselotte','Mero'],
       ['Eternal', 'Tamamo-no-Mae'],
-      ['Aer'],
-      ['Kanon']
+      ['Aer','Bryn','Bell Cranel'],
+      ['Kanon','Vlada']
     ]
   }
 }

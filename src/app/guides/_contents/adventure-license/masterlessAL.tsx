@@ -9,10 +9,10 @@ const teams = {
     label: 'Team 1 – Heavy HP Clear',
     icon: 'SC_Buff_Stat_Atk.webp',
     setup: [
-      ['Tamara'],
-      ['Marian'],
-      ['Roxie'],
-      ['Poolside Trickster Regina']
+      ["Summer Knight's Dream Ember",'Luna','Veronica'],      
+      ['Tamara','Marian'],      
+      ['Roxie','Caren','Beth','Fatal'],
+      ['Rin','Laplace','Poolside Trickster Regina']
     ]
   }
 }

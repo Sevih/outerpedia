@@ -14,7 +14,7 @@ const teams = {
     setup: [
       ['Aer'],
       ['Eternal', 'Tamamo-no-Mae'],
-      ['Holy Night\'s Blessing Dianne', 'Kanon'],
+      ["Holy Night's Blessing Dianne", 'Kanon'],
       ['Tio']
     ]
   },

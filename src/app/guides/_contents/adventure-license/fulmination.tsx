@@ -1,14 +1,13 @@
 'use client'
 
 import EffectInlineTag from '@/app/components/EffectInlineTag'
-import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import GuideHeading from '@/app/components/GuideHeading'
 import TeamTabSelector from '@/app/components/TeamTabSelector'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 
 const teams = {
   standard: {
-    label: 'Recommended Team',
+    label: 'Curse Team',
     icon: 'SC_Buff_Dot_Curse.webp',
     setup: [
       ['Monad Eva'],
@@ -21,10 +20,10 @@ const teams = {
     label: 'Counter Team',
     icon: 'SC_Buff_Counter.webp',
     setup: [
-      ['Delta'],
+      ['Delta','Idith '],
       ['Fran'],
-      ['Rey','Rhona'],
-      ['Ame']
+      ['Rey', 'Rhona'],
+      ['Ame','Noa','Ryu Lion']
     ]
   }
 }
@@ -43,20 +42,12 @@ export default function FulMiNationAssaultSuitGuide() {
         <li><strong>Enrage:</strong> Inflicts <EffectInlineTag name="BT_SILENCE_IR" type="debuff" />, but usually too late to matter</li>
         <li>Low resilience; only immune to crowd control</li>
       </ul>
-
-      <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Team Suggestions</h3>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li><CharacterLinkCard name="Monad Eva" /></li>
-        <li><CharacterLinkCard name="Dianne" /></li>
-        <li><CharacterLinkCard name="Marian" /></li>
-        <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> / <CharacterLinkCard name="Drakhan" /></li>
-      </ul>
-
       <p className="text-neutral-400 text-sm italic mb-4">
         Note: Typically cleared in 1 attempt. Verified up to stage 10.
       </p>
-
       <hr className="my-6 border-neutral-700" />
+
+
       <TeamTabSelector teams={teams} />
 
       <hr className="my-6 border-neutral-700" />

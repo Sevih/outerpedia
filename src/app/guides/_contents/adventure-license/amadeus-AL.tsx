@@ -11,9 +11,9 @@ const teams = {
     label: 'Recommended Team',
     icon: 'SC_Buff_Dark_Dmg.webp',
     setup: [
-      ['Stella'],
-      ['Demiurge Stella'],
-      ['Drakhan'],
+      ['Stella','Skadi'],
+      ['Demiurge Stella','Ais Wallenstein'],
+      ['Drakhan','Demiurge Luna','Gnosis Beth'],
       ['Regina', 'Akari', 'Kuro']
     ]
   }

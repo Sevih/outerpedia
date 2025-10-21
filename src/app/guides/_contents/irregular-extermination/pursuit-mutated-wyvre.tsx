@@ -20,7 +20,7 @@ const teams = {
             ['Dianne'],
             ['Skadi'],            
             ['Caren','Demiurge Astei','Maxwell'],
-            ['Gnosis Dahlia', 'Holy Night\'s Blessing Dianne','Ame']
+            ['Gnosis Dahlia', "Holy Night's Blessing Dianne",'Ame']
         ],
         note: [
             {

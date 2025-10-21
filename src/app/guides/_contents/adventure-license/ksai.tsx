@@ -11,9 +11,9 @@ const teams = {
     icon: 'SC_Buff_Stat_BuffChance.webp',
     setup: [
       ['Tamara'],
-      ['Roxie'],
+      ['Caren','Roxie'],
       ['Poolside Trickster Regina', 'Laplace'],
-      ['Demiurge Vlada', 'Edelweiss', 'Sterope']
+      ["Summer Knight's Dream Ember",'Demiurge Vlada', 'Edelweiss', 'Sterope']
     ]
   }
 }

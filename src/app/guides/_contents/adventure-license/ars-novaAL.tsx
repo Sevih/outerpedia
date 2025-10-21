@@ -10,9 +10,9 @@ const teams = {
     label: 'Team 1 – Consistent Clear',
     icon: 'SC_Buff_Effect_Element_Superiority.webp',
     setup: [
-      ['Nella'],
-      ['Demiurge Vlada'],
-      ['Demiurge Astei'],
+      ['Nella','Demiurge Delta'],
+      ['Demiurge Vlada','Eliza','Sterope '],
+      ['Demiurge Astei','Francesca'],
       ['Gnosis Dahlia', 'Maxwell']
     ]
   }

@@ -12,7 +12,7 @@ const teams = {
     setup: [
       ['Kappa'],
       ['Charlotte','Rhona'],
-      ['Rey'],
+      ['Rey','Ryu Lion'],
       ['Ame','Noa']
     ]
   }

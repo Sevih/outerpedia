@@ -10,10 +10,10 @@ const teams = {
     label: 'Team 1 – Fast Clear',
     icon: 'SC_Buff_Stat_Speed.webp',
     setup: [
-      ['Kanon', 'Holy Night\'s Blessing Dianne'],
-      ['Tamamo-no-Mae'],
-      ['Maxie'],
-      ['Aer']
+      ['Kanon', "Holy Night's Blessing Dianne",'Vlada'],
+      ['Tamamo-no-Mae',],
+      ['Maxie','Bell Cranel'],
+      ['Aer','Bryn']
     ]
   }
 }

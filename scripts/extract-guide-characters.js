@@ -6,24 +6,42 @@ const guidesDir = path.join(__dirname, '../src/app/guides/_contents');
 const guildRaidDir = path.join(__dirname, '../src/data/guides/guild-raid');
 const skywardDataDir = path.join(__dirname, '../src/data');
 const outputFile = path.join(__dirname, '../src/data/stats/guide-character-usage.json');
+const allCharactersFile = path.join(__dirname, '../src/data/_allCharacters.json');
 
 // Categories to exclude
 const EXCLUDED_CATEGORIES = ['general-guides', 'monad-gate'];
 
-// Regex pour trouver les références de personnages dans les guides TSX
-const characterRegex = /<CharacterLinkCard\s+name=["']([^"']+)["']\s*\/>/g;
+// Load all characters
+let allCharacters = [];
+try {
+  const charactersData = fs.readFileSync(allCharactersFile, 'utf8');
+  allCharacters = JSON.parse(charactersData);
+} catch (error) {
+  console.error(`Error loading characters file: ${error.message}`);
+  process.exit(1);
+}
 
 function extractCharactersFromTSX(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
-    const characters = new Set();
-    let match;
+    const foundCharacters = [];
 
-    while ((match = characterRegex.exec(content)) !== null) {
-      characters.add(match[1]);
+    // Pour chaque personnage, vérifier s'il apparaît dans le fichier entre quotes
+    for (const character of allCharacters) {
+      const fullname = character.Fullname;
+
+      // Échapper les caractères spéciaux pour regex
+      const escapedName = fullname.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+      // Chercher le nom entouré de quotes simples ou doubles
+      const regex = new RegExp(`['"]${escapedName}['"]`);
+
+      if (regex.test(content)) {
+        foundCharacters.push(fullname);
+      }
     }
 
-    return Array.from(characters);
+    return foundCharacters;
   } catch (error) {
     console.error(`Error reading ${filePath}: ${error.message}`);
     return [];

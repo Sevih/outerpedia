@@ -10,10 +10,10 @@ const teams = {
     label: 'Team 1 – Orb Management',
     icon: 'SC_Buff_Effect_Cleanse.webp',
     setup: [
-      ['Monad Eva'],
-      ['Astei'],
-      ['Drakhan', 'Marian'],
-      ['Kitsune of Eternity Tamamo-no-Mae', 'Marian']
+      ['Monad Eva','Nella','Astei'],
+      ['Aer','Gnosis Dahlia','Tamara','Maxie','Ryu Lion','Vlada', 'Bell Cranel'],
+      ['Drakhan', 'Marian','Francesca','Demiurge Luna','Regina','Fatal'],
+      ['Kitsune of Eternity Tamamo-no-Mae', 'Marian','Roxie','Rey']
     ]
   }
 }
@@ -26,6 +26,7 @@ export default function GustavGuide() {
         <li>Reduces damage taken when orbs are defeated</li>
         <li>Orbs deal <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> when attacked</li>
         <li>Bring <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /> and/or <EffectInlineTag name="BT_IMMUNE" type="buff" /></li>
+        <li>Focus on single target damage.</li>
       </ul>
 
       <hr className="my-6 border-neutral-700" />

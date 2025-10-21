@@ -10,10 +10,10 @@ const teams = {
     label: 'Team 1 – Blue Tantrum Clear',
     icon: 'SC_Buff_Stat_Def.webp',
     setup: [
-      ['Dianne'],
-      ['Kappa', 'Ame', 'Rey','Noa', 'Ryu Lion','Kitsune of Eternity Tamamo-no-Mae'],
-      ['Ame','Kappa', 'Rey', 'Noa', 'Ryu Lion','Kitsune of Eternity Tamamo-no-Mae'],
-      ['Rey','Kappa', 'Ame', 'Noa', 'Ryu Lion','Kitsune of Eternity Tamamo-no-Mae']
+      ['Dianne','Saeran'],
+      ['Kappa','Fran','Ryu Lion'],
+      ['Ame','Noa'],
+      ['Rey','Kitsune of Eternity Tamamo-no-Mae']
     ]
   }
 }
@@ -34,12 +34,12 @@ export default function TyrantToddlerGuide() {
       <hr className="my-6 border-neutral-700" />
 
       <div className="mb-4">
-              <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-              <p className="text-neutral-400 text-sm italic mt-2">
-                Run provided by <span className="text-white font-semibold">XuRenChao</span> (11/08/2025)
-              </p>
-              <YoutubeEmbed videoId="i7HvX6Gzic8" title="Tyrant Toddler - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
-            </div>
+        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
+        <p className="text-neutral-400 text-sm italic mt-2">
+          Run provided by <span className="text-white font-semibold">XuRenChao</span> (11/08/2025)
+        </p>
+        <YoutubeEmbed videoId="i7HvX6Gzic8" title="Tyrant Toddler - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
+      </div>
     </div>
   )
 }
