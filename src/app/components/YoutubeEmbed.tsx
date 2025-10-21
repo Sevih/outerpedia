@@ -13,13 +13,25 @@ export default function YoutubeEmbed({
   startTime?: number
 }) {
   const [play, setPlay] = useState(false)
-  const [imgError, setImgError] = useState(false)
+  const [thumbnailIndex, setThumbnailIndex] = useState(0)
  //console.log(videoId);
   if (!videoId) return null
 
-  const thumbnail = imgError
-    ? `https://img.youtube.com/vi_webp/${videoId}/hqdefault.webp`
-    : `https://img.youtube.com/vi_webp/${videoId}/maxresdefault.webp`
+  // Cascade de fallbacks - on commence par hqdefault qui est quasi toujours disponible
+  const thumbnailOptions = [
+    `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,     // 480x360 (quasi toujours disponible)
+    `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,     // 320x180
+    `https://img.youtube.com/vi/${videoId}/default.jpg`,       // 120x90 (toujours disponible)
+  ]
+
+  const thumbnail = thumbnailOptions[thumbnailIndex]
+
+  const handleImageError = () => {
+    // Si l'image échoue, passe à la suivante
+    if (thumbnailIndex < thumbnailOptions.length - 1) {
+      setThumbnailIndex(thumbnailIndex + 1)
+    }
+  }
 
   return (
     <div className="w-full rounded overflow-hidden mt-6 aspect-video bg-black">
@@ -38,12 +50,13 @@ export default function YoutubeEmbed({
           onClick={() => setPlay(true)}
         >
           <Image
+            key={thumbnail}
             src={thumbnail}
             alt={title}
             fill
             className="object-contain"
-            priority
-            onError={() => setImgError(true)}
+            unoptimized
+            onError={handleImageError}
           />
 
           <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-colors duration-200">

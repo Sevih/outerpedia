@@ -12,20 +12,20 @@ It provides a clean and structured UI to browse characters, gear, builds, and ti
 
 🌐 Live: [https://outerpedia.com](https://outerpedia.com)  
 💬 Community: [Join the EvaMains Discord](hhttps://discord.com/invite/keGhVQWsHv)  
-🛠️ Current version: **1.27 – Demiurge Luna patch**
+🛠️ Current version: **v6.0.2 – Summer Knight's Dream Ember patch**
 
 ---
 
 ## 🚀 Features
 
 Here's what you'll find:
-🔥 Tier Lists (PvE & PvP)
-🧙‍♀️ Character Database with skills, buffs/debuffs, EE, builds & detailed profiles
-🛡️ Equipment DB with full gear catalog & advanced filters
-📘 60+ Guides across Outerplane content (world bosses, raids, adventure, weekly conquests, towers, and more)
-⚙️ Tools: EE priority, gear solver, usage stats, pull simulator, and other utilities
-🚀 Lightning fast (static site, CDN, PWA support)
-🌐 Multilingual (EN, JP, KR)
+-🔥 Tier Lists (PvE & PvP)
+-🧙‍♀️ Character Database with skills, buffs/debuffs, EE, builds & detailed profiles
+-🛡️ Equipment DB with full gear catalog & advanced filters
+-📘 60+ Guides across Outerplane content (world bosses, raids, adventure, weekly conquests, towers, and more)
+-⚙️ Tools: EE priority, gear solver, usage stats, pull simulator, and other utilities
+-🚀 Lightning fast (static site, CDN, PWA support)
+-🌐 Multilingual (EN, JP, KR)
 
 ---
 
