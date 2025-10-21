@@ -1,4 +1,10 @@
 {
+   "most-used-unit": {
+    "name": "Most Used Units",
+    "description": "Discover which Outerplane characters are most frequently recommended across game guides.",
+    "icon": "nav/CM_Lobby_Button_Misson.webp",
+    "order": 50
+  },
   "tierlistpve": {
     "name": "Tier List - PvE",
     "description": "Complete ranking of all characters in Outerplane for PVE content, based on evaluations with 6-star transcends and level 0 Exclusive Equipment effects.",

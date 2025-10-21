@@ -443,6 +443,11 @@ const kr = {
   'tierIndex.card.pve.desc': '모든 PvE 콘텐츠 대상 성능 평가.',
   'tierIndex.card.pvp.title': '티어 리스트 — PvP',
   'tierIndex.card.pvp.desc': '아레나 중심 성능 평가.',
+  'tierIndex.usage.h2': '가이드에서 가장 많이 쓰는 유닛',
+  'tierIndex.usage.lead': '초보자에겐 이 목록이 더 실용적입니다. 게임 각 콘텐츠에서 자주 추천되는 영웅을 보여줍니다.',
+  'tierIndex.card.usage.title': '최다 사용 유닛',
+  'tierIndex.card.usage.desc': 'Outerpedia 가이드 사용률 집계.',
+  'tierIndex.section.tiers.h2': '티어 리스트 (PvE & PvP)',
   // --- JSON-LD ---
   'tierIndex.collection.title': '아우터플레인 티어 리스트 — {monthYear}',
   'tierIndex.collection.desc': 'PvE와 PvP 캐릭터 랭킹 중에서 선택하세요.',
@@ -457,7 +462,6 @@ const kr = {
   'weapon.intro2': "장비의 스탯 구조를 이해하는 것은 장비의 성능을 최대한 끌어내기 위해 매우 중요합니다. <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/kr/guides/general-guides/stats'>스탯 및 전투 기본 가이드</a>가 이를 이해하는 데 도움이 될 것입니다.",
   'accessory.intro1': "다른 장비와 마찬가지로, Outerplane의 액세서리에도 티어 및 재련 시스템이 존재하며, 이를 통해 능력치와 고유 효과를 강화할 수 있습니다. 상위 티어 액세서리는 더 높은 기본 능력치와 패시브 효과를 제공합니다. 재련과 장비 성장에 대한 자세한 내용은 <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/kr/guides/general-guides/gear'>장비 가이드</a>에서 확인할 수 있습니다.",
   'sets.intro1': "다른 장비와 마찬가지로, Outerplane의 세트 장비에도 티어 및 재련 시스템이 있으며, 이를 통해 능력치와 고유 효과를 강화할 수 있습니다. 상위 티어 세트는 더 높은 기본 능력치와 패시브 효과를 제공합니다. 재련과 장비 성장에 대한 자세한 내용은 <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/kr/guides/general-guides/gear'>장비 가이드</a>에서 확인할 수 있습니다.",
-
   // kr.ts
   'guides.cat.meta.title': '{cat} | Outerpedia',
   'guides.cat.meta.desc': '{desc}',
@@ -504,7 +508,52 @@ const kr = {
   "legal.meta.title": "법적 고지 | Outerpedia",
   "legal.meta.desc": "Outerpedia의 법적 면책 조항, 저작권 및 콘텐츠 사용 정보. Outerplane 비영리 팬 프로젝트.",
   "legal.meta.ogTitle": "법적 고지 | Outerpedia",
-  "legal.meta.ogDesc": "Outerpedia 팬 프로젝트의 법적 정보 및 면책 조항."
+  "legal.meta.ogDesc": "Outerpedia 팬 프로젝트의 법적 정보 및 면책 조항.",
+  // ========== mostUsedUnit ==========
+// Metadata & SEO
+'mostUsedUnit.meta.title': '가이드에서 가장 많이 사용되는 유닛 | Outerpedia',
+'mostUsedUnit.meta.desc': 'Outerplane 게임 가이드에서 가장 자주 추천되는 캐릭터를 찾아보세요.',
+'mostUsedUnit.og.title': '가이드에서 가장 많이 사용되는 유닛 | Outerpedia',
+'mostUsedUnit.og.desc': 'Outerplane 가이드 전체에서 가장 자주 등장하는 영웅을 확인하세요.',
+'mostUsedUnit.og.imageAlt': '가장 많이 사용되는 유닛 – Outerpedia',
+'mostUsedUnit.twitter.title': '가이드에서 가장 많이 사용되는 유닛 | Outerpedia',
+'mostUsedUnit.twitter.desc': '가이드에서 가장 추천되는 Outerplane 유닛을 찾아보세요.',
+'mostUsedUnit.meta.breadcrumb': '가장 많이 사용되는 유닛',
+
+// Page Content
+'mostUsedUnit.h1': '가이드에서 가장 많이 사용되는 유닛',
+'mostUsedUnit.filters.category': '카테고리',
+'mostUsedUnit.filters.allCategories': '모든 카테고리',
+'mostUsedUnit.filters.includeLimited': '한정 캐릭터 포함',
+'mostUsedUnit.filters.allRarity': '전체',
+'mostUsedUnit.filters.allElement': '전체',
+'mostUsedUnit.filters.allClass': '전체',
+
+// Results
+'mostUsedUnit.results.showing': '{count}개의 유닛 표시 중',
+'mostUsedUnit.results.noResults': '선택한 필터와 일치하는 유닛을 찾을 수 없습니다.',
+'mostUsedUnit.badge.limited': '한정',
+'mostUsedUnit.badge.free': '무료',
+'mostUsedUnit.count.guide': '가이드',
+'mostUsedUnit.count.guides': '가이드',
+
+// Expanded section
+'mostUsedUnit.expanded.title': '가이드에서 사용됨',
+'mostUsedUnit.expanded.titleFiltered': '가이드에서 사용됨 ({category})',
+
+// Disclaimer
+'mostUsedUnit.disclaimer.intro': '이 도구는 모든 Outerpedia 가이드에서 추천된 영웅을 분석하여 언급된 횟수를 기준으로 순위를 매깁니다.',
+'mostUsedUnit.disclaimer.note': '데이터를 업데이트하고 있지만 순위에 큰 변화는 없을 것으로 예상됩니다.',
+
+// Categories
+'categories.adventure': '모험',
+'categories.adventure-license': '모험 라이선스',
+'categories.special-request': '특별 의뢰',
+'categories.guild-raid': '길드 레이드',
+'categories.irregular-extermination': '불규칙 토벌',
+'categories.joint-boss': '협력 보스',
+'categories.world-boss': '월드 보스',
+'categories.skyward-tower': '스카이워드 타워',
 
 
 

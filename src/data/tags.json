@@ -28,5 +28,11 @@
         "image": "/images/ui/tags/collab.webp",
         "desc": "These characters are limited to crossovers events with other franchises. They are the least likely to return.",
         "type": "unit-type"
+    },
+    "free": {
+        "label": "Free Units",
+        "image": "/images/ui/tags/free.webp",
+        "desc": "These characters can be obtained for free. You can check where to obtain them under Guides > General Guides > Free Heroes & Starter Banners.",
+        "type": "unit-type"
     }
 }

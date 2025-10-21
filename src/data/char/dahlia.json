@@ -9,6 +9,7 @@
   "Class": "Mage",
   "SubClass": "Enchanter",
   "video": "rfsYrJKYSRg",
+  "tags": ["free"],
   "skill_priority": {
     "First": {
       "prio": 3

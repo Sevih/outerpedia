@@ -1,0 +1,551 @@
+{
+  "_comment": "Portrait crop coordinates for character images. Each character can have custom offsetX and offsetY to center their face/head in the portrait display.",
+  "_imageSize": {
+    "width": 240,
+    "height": 462,
+    "description": "Original portrait image dimensions"
+  },
+  "_defaultCrop": {
+    "size": 140,
+    "offsetX": 50,
+    "offsetY": 80,
+    "description": "Default crop settings - shows upper chest and head area"
+  },
+  "characters": {
+    "2000001": {
+      "name": "Alpha",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000002": {
+      "name": "Aria",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000003": {
+      "name": "Beleth",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000004": {
+      "name": "Berial",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000005": {
+      "name": "Bloody Witch",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000006": {
+      "name": "Boris",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000007": {
+      "name": "Camilla",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000008": {
+      "name": "Cathy",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000009": {
+      "name": "Chulsoo",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000010": {
+      "name": "Claudia",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000011": {
+      "name": "Clown",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000012": {
+      "name": "Daniel",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000013": {
+      "name": "Demiurge Drakhan",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000014": {
+      "name": "Duke Skarbs",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000015": {
+      "name": "Eleonore",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000016": {
+      "name": "Elisheva",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000017": {
+      "name": "Emily",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000018": {
+      "name": "Emma",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000019": {
+      "name": "Engineer Kim",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000020": {
+      "name": "Alice",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000021": {
+      "name": "Evangeline",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000022": {
+      "name": "Flora",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000023": {
+      "name": "Saeran",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000024": {
+      "name": "Garcia",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000025": {
+      "name": "Gazelle",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000026": {
+      "name": "Gondar",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000027": {
+      "name": "Heide",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000028": {
+      "name": "Maxwell",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000029": {
+      "name": "Hype",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000030": {
+      "name": "Isaiah",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000031": {
+      "name": "Jack Howitzer",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000032": {
+      "name": "Jin Kanzaki",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000033": {
+      "name": "Adelie",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000034": {
+      "name": "June",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000035": {
+      "name": "K",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000036": {
+      "name": "La Crima",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000037": {
+      "name": "Lahaina",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000038": {
+      "name": "Laurent",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000039": {
+      "name": "Stella",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000040": {
+      "name": "Leo",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000041": {
+      "name": "Liam",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000042": {
+      "name": "Lisha",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000043": {
+      "name": "Luna",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000044": {
+      "name": "Magnolia",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000045": {
+      "name": "Merope",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000046": {
+      "name": "Mikha",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000047": {
+      "name": "Minister Duncan",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000048": {
+      "name": "Miriam",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000049": {
+      "name": "Naiah",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000050": {
+      "name": "Nix",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000051": {
+      "name": "Paruru",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000052": {
+      "name": "Princess Loen",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000053": {
+      "name": "Demiurge Stella",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000054": {
+      "name": "Ren",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000055": {
+      "name": "Aer",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000056": {
+      "name": "Renya",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000057": {
+      "name": "Revi",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000058": {
+      "name": "Astei",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000059": {
+      "name": "Demiurge Astei",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000060": {
+      "name": "Sammy",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000061": {
+      "name": "Sandra Blanchet",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000062": {
+      "name": "Drakhan",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000063": {
+      "name": "Seeha",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000064": {
+      "name": "Akari",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000065": {
+      "name": "Serendia",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000066": {
+      "name": "Sinbad",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000067": {
+      "name": "Regina",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000068": {
+      "name": "Stella",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000069": {
+      "name": "Rusalka",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000070": {
+      "name": "Sword Saint Henir",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000071": {
+      "name": "Teresse",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000072": {
+      "name": "Edelweiss",
+      "offsetX": 30,
+      "offsetY": 70
+    },
+    "2000073": {
+      "name": "Vlada",
+      "offsetX": 30,
+      "offsetY": 80
+    },
+    "2000074": {
+      "name": "Dianne",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000075": {
+      "name": "Demiurge Vlada",
+      "offsetX": 30,
+      "offsetY": 70
+    },
+    "2000076": {
+      "name": "Vertra",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000077": {
+      "name": "Ycris",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000078": {
+      "name": "Yeona",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000079": {
+      "name": "Kuro",
+      "offsetX": 30,
+      "offsetY": 80
+    },
+    "2000080": {
+      "name": "Tamamo-no-Mae",
+      "offsetX": 30,
+      "offsetY": 80
+    },
+    "2000081": {
+      "name": "Maxie",
+      "offsetX": 30,
+      "offsetY": 80
+    },
+    "2000082": {
+      "name": "Eva",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000083": {
+      "name": "Nella",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000084": {
+      "name": "Monad Eva",
+      "offsetX": 30,
+      "offsetY": 80
+    },
+    "2000085": {
+      "name": "Jill",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000086": {
+      "name": "Kitsune of Eternity Tamamo-no-Mae",
+      "offsetX": 30,
+      "offsetY": 70
+    },
+    "2000087": {
+      "name": "Renee",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000088": {
+      "name": "Valentina",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000089": {
+      "name": "Zara",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000090": {
+      "name": "Beelzebub",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000091": {
+      "name": "Nagarani",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000092": {
+      "name": "Neema",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000093": {
+      "name": "Snow",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000094": {
+      "name": "Tasha",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000095": {
+      "name": "Aika",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000096": {
+      "name": "Ais Wallenstein",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000097": {
+      "name": "Bell Cranel",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000098": {
+      "name": "Lefiya Viridis",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000099": {
+      "name": "Ryuu Lion",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000100": {
+      "name": "Albert",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000101": {
+      "name": "Brunhilde",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000102": {
+      "name": "Dia",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000103": {
+      "name": "Delphi",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000104": {
+      "name": "Erebus",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000105": {
+      "name": "Kielsa",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000106": {
+      "name": "Nikita",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000119": {
+      "name": "Demiurge Luna",
+      "offsetX": 30,
+      "offsetY": 60
+    }
+  }
+}

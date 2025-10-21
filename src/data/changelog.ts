@@ -27,6 +27,33 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-10-21",
+    title: {
+      en: "Most Used Units in Guides",
+      jp: "ガイドで最も使用されているユニット",
+      kr: "가이드에서 가장 많이 사용되는 유닛",
+    } as LString,
+    type: "feature",
+    url: "/most-used-unit",
+    content: [
+      {
+        en: "🔍 **New Tool Available** – Discover which heroes are most frequently recommended across all Outerpedia guides.",
+        jp: "🔍 **新ツール公開** – すべてのOuterpediaガイドで最も頻繁に推奨されているヒーローを発見しましょう。",
+        kr: "🔍 **새로운 도구 출시** – 모든 Outerpedia 가이드에서 가장 자주 추천되는 영웅을 찾아보세요.",
+      } as LString,
+      {
+        en: "🎯 Filter by category, element, class, rarity, and toggle limited units.",
+        jp: "🎯 カテゴリー、属性、クラス、レアリティでフィルタリングし、限定ユニットを切り替えることができます。",
+        kr: "🎯 카테고리, 속성, 클래스, 레어도로 필터링하고 한정 유닛을 전환할 수 있습니다.",
+      } as LString,
+      {
+        en: "🆓 **Free Unit tag** now available on character pages and tier lists.",
+        jp: "🆓 **無料ユニットタグ**がキャラクターページとティアリストで利用可能になりました。",
+        kr: "🆓 **무료 유닛 태그**가 캐릭터 페이지와 티어 리스트에서 이용 가능합니다.",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-10-15",
     title: {
       en: "Outerpedia Update – October 2025",

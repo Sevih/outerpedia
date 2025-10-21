@@ -28,9 +28,10 @@ async function generateAllCharacters() {
           Chain_Type: character.Chain_Type,
           limited: character.limited ?? false,
           gift: character.gift ?? false,
-          rank_pvp: character.rank_pvp ?? false,
+          rank_pvp: character.rank_pvp ?? false
         }
-
+        
+        if (Array.isArray(character.tags) && character.tags.length > 0) entry.tags = character.tags
         if (isNonEmpty(character.Fullname_jp)) entry.Fullname_jp = character.Fullname_jp.trim()
         if (isNonEmpty(character.Fullname_kr)) entry.Fullname_kr = character.Fullname_kr.trim()
 

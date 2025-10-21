@@ -8,6 +8,7 @@
   "role": "dps",
   "Class": "Striker",
   "SubClass": "Bruiser",
+  "tags": ["free"],
   "skill_priority": {
     "First": {
       "prio": 3

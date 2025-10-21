@@ -443,6 +443,11 @@ const en = {
   'tierIndex.card.pve.desc': 'PvE performance rankings across all content.',
   'tierIndex.card.pvp.title': 'Tier List — PvP',
   'tierIndex.card.pvp.desc': 'Performance-based Arena evaluation.',
+  'tierIndex.usage.h2': 'Most Used Units in Guides',
+  'tierIndex.usage.lead': 'For newer players, this list is often more practical. It shows which heroes are most frequently recommended across game content.',
+  'tierIndex.card.usage.title': 'Most Used Units',
+  'tierIndex.card.usage.desc': 'Aggregated usage from Outerpedia guides.',
+  'tierIndex.section.tiers.h2': 'Tier Lists (PvE & PvP)',
   // --- JSON-LD ---
   'tierIndex.collection.title': 'Outerplane Tier Lists — {monthYear}',
   'tierIndex.collection.desc': 'Choose between PvE and PvP character rankings.',
@@ -503,7 +508,52 @@ const en = {
   "legal.meta.title": "Legal Notice & Disclaimer | Outerpedia",
   "legal.meta.desc": "Legal disclaimer, copyright, and content usage information for Outerpedia, a non-commercial fan project dedicated to Outerplane.",
   "legal.meta.ogTitle": "Legal Notice | Outerpedia",
-  "legal.meta.ogDesc": "Legal information and disclaimer for Outerpedia fan project."
+  "legal.meta.ogDesc": "Legal information and disclaimer for Outerpedia fan project.",
+  // ========== mostUsedUnit (à ajouter) ==========
+  // Metadata & SEO
+  'mostUsedUnit.meta.title': 'Most Used Units in Guides | Outerpedia',
+  'mostUsedUnit.meta.desc': 'Discover which Outerplane characters are most frequently recommended across game guides. Aggregated from all Outerpedia content.',
+  'mostUsedUnit.og.title': 'Most Used Units in Guides | Outerpedia',
+  'mostUsedUnit.og.desc': 'See which heroes appear most often in Outerplane guides across all content types.',
+  'mostUsedUnit.og.imageAlt': 'Most Used Units – Outerpedia',
+  'mostUsedUnit.twitter.title': 'Most Used Units in Guides | Outerpedia',
+  'mostUsedUnit.twitter.desc': 'Discover which Outerplane units are most recommended in guides.',
+  'mostUsedUnit.meta.breadcrumb': 'Most Used Units',
+
+  // Page Content
+  'mostUsedUnit.h1': 'Most Used Units in Guides',
+  'mostUsedUnit.filters.category': 'Category',
+  'mostUsedUnit.filters.allCategories': 'All Categories',
+  'mostUsedUnit.filters.includeLimited': 'Include limited',
+  'mostUsedUnit.filters.allRarity': 'All',
+  'mostUsedUnit.filters.allElement': 'All',
+  'mostUsedUnit.filters.allClass': 'All',
+
+  // Results
+  'mostUsedUnit.results.showing': 'Showing {count} unit{plural}',
+  'mostUsedUnit.results.noResults': 'No units found matching the selected filters.',
+  'mostUsedUnit.badge.limited': 'Limited',
+  'mostUsedUnit.badge.free': 'Free',
+  'mostUsedUnit.count.guide': 'guide',
+  'mostUsedUnit.count.guides': 'guides',
+
+  // Expanded section
+  'mostUsedUnit.expanded.title': 'Used in guides',
+  'mostUsedUnit.expanded.titleFiltered': 'Used in guides ({category})',
+
+  // Disclaimer
+  'mostUsedUnit.disclaimer.intro': 'This tool scans every recommendation across all Outerpedia guides and ranks heroes based on how many times they were mentioned.',
+  'mostUsedUnit.disclaimer.note': 'The data is being updated, but there is unlikely to be any drastic change in rankings.',
+
+  // Categories (déjà dans guides, mais pour cohérence)
+  'categories.adventure': 'Adventure',
+  'categories.adventure-license': 'Adventure License',
+  'categories.special-request': 'Special Request',
+  'categories.guild-raid': 'Guild Raid',
+  'categories.irregular-extermination': 'Irregular Extermination',
+  'categories.joint-boss': 'Joint Boss',
+  'categories.world-boss': 'World Boss',
+  'categories.skyward-tower': 'Skyward Tower',
 
 
 

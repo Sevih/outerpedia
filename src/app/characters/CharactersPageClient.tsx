@@ -32,6 +32,9 @@ function getRecruitBadge(char: CharacterLite): RecruitBadge | null {
   if (tags.has('premium')) {
     return { src: "/images/ui/CM_Recruit_Tag_Premium.webp", altKey: 'premium' }
   }
+  if (tags.has('free')) {
+    return { src: "/images/ui/CM_Recruit_Tag_Free.webp", altKey: 'free' }
+  }
   if (char.limited) {
     return { src: "/images/ui/CM_Recruit_Tag_Fes.webp", altKey: 'limited' }
   }

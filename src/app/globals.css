@@ -185,6 +185,44 @@ h1:not(.sr-only)::after,
   pointer-events: none;
 }
 
+.h2_custom {
+  position: relative;
+  font-family: 'Rajdhani';
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  color: #e0e6ff;
+  padding: 0.5rem 1.5rem 0.7rem; /* un peu plus de padding bas pour la bande */
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* bande image + glow vert */
+.h2_custom::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: url('/images/ui/CM_Gradation_Bg.webp') center bottom / cover no-repeat;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.h2_custom::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 10px;
+  background: linear-gradient(90deg, transparent, rgba(0,255,180,0.6), transparent);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
 .guide-title {
   font-family: 'Rajdhani';
   font-size: 1.5rem;

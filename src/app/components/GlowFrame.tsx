@@ -6,7 +6,7 @@ import clsx from 'clsx'
 type GlowFrameProps = {
   src: string
   alt: string
-  color?: 'blue' | 'red'
+  color?: 'blue' | 'red' | 'green'
   size?: number
 }
 
@@ -19,7 +19,9 @@ export default function GlowFrame({
   const glowClass =
     color === 'red'
       ? 'from-red-500 to-pink-500'
-      : 'from-cyan-400 to-blue-500'
+      : color === 'green'
+        ? 'from-emerald-400 to-lime-500'
+        : 'from-cyan-400 to-blue-500'
 
   return (
     <div
@@ -29,11 +31,24 @@ export default function GlowFrame({
       {/* Glow animé */}
       <div
         className={clsx(
-          'absolute inset-0 rounded-xl blur-xl opacity-60 animate-pulse z-0',
+          'absolute inset-0 rounded-xl blur-xl opacity-60 animate-[glowPulse_2.5s_ease-in-out_infinite] z-0',
           'bg-gradient-to-br',
           glowClass
         )}
       ></div>
+
+      <style jsx>{`
+  @keyframes glowPulse {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+`}</style>
 
       {/* Image au-dessus */}
       <div className="relative z-10">

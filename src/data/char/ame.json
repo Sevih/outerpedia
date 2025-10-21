@@ -8,8 +8,9 @@
   "role": "dps",
   "rank_pvp": "B",
   "tags": [
-    "ignore-defense"
+    "ignore-defense","free"
   ],
+  "free-location":"",
   "SubClass": "Wizard",
   "video": "JKHIYrgk3xY",
   "skill_priority": {

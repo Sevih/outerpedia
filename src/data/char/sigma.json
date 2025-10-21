@@ -8,7 +8,7 @@
   "gift": "Science",
   "role": "support",
   "tags": [
-    "ignore-defense"
+    "ignore-defense","free"
   ],
   "SubClass": "Vanguard",
   "skill_priority": {

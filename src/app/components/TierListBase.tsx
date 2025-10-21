@@ -21,9 +21,9 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 
 type CharacterDisplay = Pick<
     Character,
-    'ID' | 'Fullname' | 'Rarity' | 'Class' | 'Element' | 'rank' | 'rank_pvp' | 'role'
+    'ID' | 'Fullname' | 'Rarity' | 'Class' | 'Element' | 'rank' | 'rank_pvp' | 'role' | 'limited'
 > &
-    Partial<Pick<Character, 'Fullname_kr' | 'Fullname_jp'>>
+    Partial<Pick<Character, 'Fullname_kr' | 'Fullname_jp' | 'tags'>>
 
 type GroupedCharacters = Record<string, CharacterDisplay[]>
 type GroupedEquipments = Record<string, [string, Equipment][]>
@@ -68,6 +68,11 @@ type TabItem = {
     value: TabKey
     icon: string
     color?: string
+}
+
+type RecruitBadge = {
+    src: string
+    altKey: string
 }
 
 /* ------------------------------ Data helpers ---------------------------- */
@@ -143,6 +148,28 @@ const RANKS_EE = ['S', 'A', 'B', 'C', 'D'] as const
 function demoteOnce(rank: string): PveRank {
     const i = RANKS_PVE.indexOf((rank as PveRank) ?? 'E')
     return RANKS_PVE[Math.min(i < 0 ? RANKS_PVE.length - 1 : i + 1, RANKS_PVE.length - 1)]
+}
+
+function getRecruitBadge(char: CharacterDisplay): RecruitBadge | null {
+    const tags = new Set(char.tags ?? [])
+
+    // Priorité : Collab > Seasonal > Premium > Free > Limited (fallback)
+    if (tags.has('collab')) {
+        return { src: "/images/ui/CM_Recruit_Tag_Collab.webp", altKey: 'collab' }
+    }
+    if (tags.has('seasonal')) {
+        return { src: "/images/ui/CM_Recruit_Tag_Seasonal.webp", altKey: 'seasonal' }
+    }
+    if (tags.has('premium')) {
+        return { src: "/images/ui/CM_Recruit_Tag_Premium.webp", altKey: 'premium' }
+    }
+    if (tags.has('free')) {
+        return { src: "/images/ui/CM_Recruit_Tag_Free.webp", altKey: 'free' }
+    }
+    if (char.limited) {
+        return { src: "/images/ui/CM_Recruit_Tag_Fes.webp", altKey: 'limited' }
+    }
+    return null
 }
 
 /* ---------------------------- Localized fields -------------------------- */
@@ -561,16 +588,19 @@ export default function TierListBase({
                                                 >
                                                     <div className="relative w-[121px] h-[232px]">
                                                         <div className="relative" style={{ width: '120px', height: '231px' }}>
-                                                            {char!.limited && (
-                                                                <Image
-                                                                    src="/images/ui/CM_Shop_Tag_Limited.webp"
-                                                                    alt={char!.Fullname}
-                                                                    width={75}
-                                                                    height={30}
-                                                                    className="absolute top-1 left-1 z-30 object-contain"
-                                                                    style={{ width: 75, height: 30 }}
-                                                                />
-                                                            )}
+                                                            {(() => {
+                                                                const badge = getRecruitBadge(char!)
+                                                                return badge ? (
+                                                                    <Image
+                                                                        src={badge.src}
+                                                                        alt={badge.altKey}
+                                                                        width={75}
+                                                                        height={30}
+                                                                        className="absolute top-1 left-1 z-30 object-contain"
+                                                                        style={{ width: 75, height: 30 }}
+                                                                    />
+                                                                ) : null
+                                                            })()}
 
                                                             <Image
                                                                 src={`/images/characters/portrait/CT_${char!.ID}.webp`}

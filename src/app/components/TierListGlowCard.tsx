@@ -7,11 +7,15 @@ type Props = {
   title: string
   description: string
   image: string
-  type: 'pve' | 'pvp'
+  type: 'pve' | 'pvp' | 'usage'
 }
 
 export function TierListGlowCard({ href, title, description, image, type }: Props) {
-  const glowShort = type === 'pve' ? 'blue' : 'red'
+  const glowShort = 
+    type === 'pve' 
+      ? 'blue' 
+      : type === 'pvp' 
+      ? 'red' : 'green'
 
   return (
     <Link

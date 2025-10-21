@@ -9,6 +9,7 @@
   "Class": "Healer",
   "SubClass": "Sage",
   "video": "3WCXBVQRQls",
+  "tags": ["free"],
   "skill_priority": {
     "First": {
       "prio": 3

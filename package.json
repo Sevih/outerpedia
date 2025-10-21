@@ -1,11 +1,11 @@
 {
   "name": "outerpedia-clean",
-  "version": "5.0.21",
+  "version": "6.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "set-version": "node scripts/set-version.js",
-    "build": "rm -rf .next && npm run set-version && npm run gen:events && npm run inject-sw-version && npm run generate:allchar && npm run generate:slugToChar && npm run generate:gear-stats && npm run gen:pool && npm run generate:gear-submap && npm run build:effects && next build",
+    "build": "rm -rf .next && npm run set-version && npm run gen:events && npm run inject-sw-version && npm run generate:allchar && npm run generate:slugToChar && npm run generate:gear-stats && npm run generate:guide-chars && npm run gen:pool && npm run generate:gear-submap && npm run build:effects && next build",
     "inject-sw-version": "node scripts/inject-sw-version.js",
     "validate:build": "ls .next/static/css/*.css && ls .next/static/chunks/app/page-*.js && echo ✅ Build is valid",
     "start": "next start",
@@ -24,7 +24,8 @@
     "commit": "node scripts/commit.mjs --no-changelog",
     "commit:fast": "node scripts/commit.mjs --no-changelog --skip-build",
     "seo:audit": "node scripts/seo-audit.js",
-    "seo:check": "npm run seo:audit"
+    "seo:check": "npm run seo:audit",
+    "generate:guide-chars": "node scripts/extract-guide-characters.js"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",

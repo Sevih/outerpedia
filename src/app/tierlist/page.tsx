@@ -19,7 +19,15 @@ export async function generateMetadata(): Promise<Metadata> {
     ogDescKey: 'tierIndex.og.desc',
     twitterTitleKey: 'tierIndex.twitter.title',
     twitterDescKey: 'tierIndex.twitter.desc',
-    keywords: ['Outerplane','Tier List','PvE','PvP','Best Characters','EvaMains', monthYear],
+    keywords: ['Outerplane',
+      'Tier List',
+      'Best Characters',
+      'Character Rankings',
+      'PvE Tier List',
+      'PvP Tier List',
+      'Most Used Units',
+      'Recommended Heroes',
+      'EvaMains', monthYear],
     image: {
       url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png', // PNG ok pour metadata
       width: 150,
@@ -56,10 +64,33 @@ export default async function TierListPageWrapper() {
         {t('tierIndex.h1') ?? 'Outerplane Tier List'}
       </h1>
 
-      <p className="text-gray-400 text-center max-w-2xl">
+      <h2 className="h2_custom text-3xl md:text-4xl font-bold text-center text-white">
+        {t('tierIndex.usage.h2') ?? 'Most Used Units in Guides'}
+      </h2>
+      <p className="text-white text-center max-w-2xl">
+        {t('tierIndex.usage.lead') ??
+          'For newer players, this list is often more practical. It shows which heroes are most frequently recommended across game content.'}
+      </p>
+
+      <div className="text-center">
+        <TierListGlowCard
+          href="/most-used-unit"
+          title={t('tierIndex.card.usage.title') ?? 'Most Used Units'}
+          description={t('tierIndex.card.usage.desc') ?? 'Aggregated usage from Outerpedia guides.'}
+          image="/images/ui/nav/tierlist.webp"
+          type="usage"
+        />
+      </div>
+
+      <h2 className="h2_custom text-3xl md:text-4xl font-bold text-center text-white">
+        {t('tierIndex.section.tiers.h2') ?? 'Tier Lists (PvE & PvP)'}
+      </h2>
+      <p className="text-white text-center max-w-2xl">
         {t('tierIndex.lead') ??
           'Choose between PvE and PvP character rankings. Based on evaluations with 6★ transcends and level 0 EE effects.'}
       </p>
+
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
         <TierListGlowCard

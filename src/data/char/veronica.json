@@ -9,6 +9,7 @@
   "Class": "Defender",
   "SubClass": "Sweeper",
   "video": "znqtUpXMza8",
+  "tags": ["free"],
   "skill_priority": {
     "First": {
       "prio": 3

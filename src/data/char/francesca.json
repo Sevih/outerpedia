@@ -9,6 +9,7 @@
   "Class": "Striker",
   "SubClass": "Attacker",
   "video": "-QjB2wYAhpk",
+  "tags": ["free"],
   "skill_priority": {
     "First": {
       "prio": 3

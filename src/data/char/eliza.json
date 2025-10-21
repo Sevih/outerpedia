@@ -9,6 +9,7 @@
   "Class": "Ranger",
   "SubClass": "Tactician",
   "video": "QBBZaePTff4",
+  "tags": ["free"],
   "skill_priority": {
     "First": {
       "prio": 3

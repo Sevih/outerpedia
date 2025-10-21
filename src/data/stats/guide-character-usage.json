@@ -1,0 +1,940 @@
+{
+  "adventure/S1-9-5": {
+    "category": "adventure",
+    "guideId": "S1-9-5",
+    "characters": [
+      "Alpha",
+      "Leo",
+      "Akari",
+      "Gnosis Nella",
+      "Luna",
+      "Caren",
+      "Poolside Trickster Regina",
+      "Stella",
+      "Regina",
+      "Kappa",
+      "Aer",
+      "Astei",
+      "Dianne",
+      "Nella",
+      "Saeran",
+      "Tio"
+    ]
+  },
+  "adventure/S2-1-10": {
+    "category": "adventure",
+    "guideId": "S2-1-10",
+    "characters": [
+      "Astei",
+      "Dianne",
+      "Nella",
+      "Saeran",
+      "Tio",
+      "Demiurge Stella"
+    ]
+  },
+  "adventure/S2-10-10": {
+    "category": "adventure",
+    "guideId": "S2-10-10",
+    "characters": [
+      "Mene",
+      "Astei",
+      "Monad Eva",
+      "Nella",
+      "Dianne"
+    ]
+  },
+  "adventure/S2-3-10": {
+    "category": "adventure",
+    "guideId": "S2-3-10",
+    "characters": [
+      "Mene",
+      "Nella",
+      "Tamara",
+      "Dahlia",
+      "Iota",
+      "Gnosis Nella",
+      "Tamamo-no-Mae",
+      "Demiurge Stella",
+      "Laplace",
+      "Ryu Lion"
+    ]
+  },
+  "adventure/S2-4-10": {
+    "category": "adventure",
+    "guideId": "S2-4-10",
+    "characters": [
+      "Demiurge Vlada",
+      "Sterope",
+      "Eternal",
+      "Monad Eva",
+      "Dianne"
+    ]
+  },
+  "adventure/S2-5-10": {
+    "category": "adventure",
+    "guideId": "S2-5-10",
+    "characters": [
+      "Tio",
+      "Dianne",
+      "Faenan",
+      "Astei",
+      "Nella",
+      "Monad Eva",
+      "Akari",
+      "Edelweiss",
+      "Luna",
+      "Veronica",
+      "Stella",
+      "Demiurge Stella"
+    ]
+  },
+  "adventure/S2-7-10": {
+    "category": "adventure",
+    "guideId": "S2-7-10",
+    "characters": [
+      "Dianne",
+      "Astei",
+      "Nella",
+      "Akari",
+      "Laplace"
+    ]
+  },
+  "adventure/S2-9-10": {
+    "category": "adventure",
+    "guideId": "S2-9-10",
+    "characters": [
+      "Nella",
+      "Dianne",
+      "Astei"
+    ]
+  },
+  "adventure/S3-1-10": {
+    "category": "adventure",
+    "guideId": "S3-1-10",
+    "characters": [
+      "Ember",
+      "Veronica",
+      "Fatal",
+      "Nella",
+      "Mene"
+    ]
+  },
+  "adventure/S3-2-10": {
+    "category": "adventure",
+    "guideId": "S3-2-10",
+    "characters": [
+      "K",
+      "Aer",
+      "Kanon",
+      "Lisha",
+      "Mero"
+    ]
+  },
+  "adventure/S3-3-10": {
+    "category": "adventure",
+    "guideId": "S3-3-10",
+    "characters": [
+      "Caren",
+      "Kappa",
+      "Regina",
+      "Dahlia",
+      "Demiurge Vlada",
+      "Veronica",
+      "Alice",
+      "Gnosis Nella",
+      "Akari",
+      "Stella"
+    ]
+  },
+  "adventure/S3-4-10": {
+    "category": "adventure",
+    "guideId": "S3-4-10",
+    "characters": [
+      "Mero",
+      "Gnosis Beth",
+      "Ember",
+      "Tamamo-no-Mae",
+      "Charlotte",
+      "Skadi",
+      "Sterope",
+      "Hilde",
+      "Edelweiss"
+    ]
+  },
+  "adventure/S3-5-10": {
+    "category": "adventure",
+    "guideId": "S3-5-10",
+    "characters": [
+      "Maxwell",
+      "Demiurge Astei",
+      "Charlotte",
+      "Skadi",
+      "Sterope"
+    ]
+  },
+  "adventure/S3-6-10": {
+    "category": "adventure",
+    "guideId": "S3-6-10",
+    "characters": [
+      "Dianne",
+      "Demiurge Delta",
+      "Saeran",
+      "Akari",
+      "Luna",
+      "Gnosis Nella",
+      "Alice"
+    ]
+  },
+  "adventure/S3-7-10": {
+    "category": "adventure",
+    "guideId": "S3-7-10",
+    "characters": [
+      "Lyla",
+      "Demiurge Delta",
+      "Leo",
+      "Dianne",
+      "Astei",
+      "Nella"
+    ]
+  },
+  "adventure/S3-8-10": {
+    "category": "adventure",
+    "guideId": "S3-8-10",
+    "characters": [
+      "Leo",
+      "Monad Eva",
+      "Lyla",
+      "Demiurge Drakhan",
+      "Luna",
+      "Omega Nadja",
+      "Liselotte",
+      "Nella",
+      "Dianne",
+      "Astei"
+    ]
+  },
+  "adventure/S3-9-10": {
+    "category": "adventure",
+    "guideId": "S3-9-10",
+    "characters": [
+      "Maxwell",
+      "Regina",
+      "Gnosis Beth",
+      "Demiurge Luna",
+      "Gnosis Dahlia",
+      "Demiurge Astei",
+      "Ame"
+    ]
+  },
+  "adventure-license/amadeus-AL": {
+    "category": "adventure-license",
+    "guideId": "amadeus-AL",
+    "characters": [
+      "Stella",
+      "Demiurge Stella",
+      "Drakhan",
+      "Regina",
+      "Akari",
+      "Kuro"
+    ]
+  },
+  "adventure-license/anubis-g": {
+    "category": "adventure-license",
+    "guideId": "anubis-g",
+    "characters": [
+      "Aer",
+      "Eternal",
+      "Tamamo-no-Mae",
+      "Kanon",
+      "Tio"
+    ]
+  },
+  "adventure-license/fulmination": {
+    "category": "adventure-license",
+    "guideId": "fulmination",
+    "characters": [
+      "Monad Eva",
+      "Dianne",
+      "Marian",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Drakhan"
+    ]
+  },
+  "adventure-license/heavy-fixed-vladi-max": {
+    "category": "adventure-license",
+    "guideId": "heavy-fixed-vladi-max",
+    "characters": [
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Dianne",
+      "Rhona",
+      "Noa",
+      "Ryu Lion",
+      "Ame",
+      "Rey",
+      "Kappa"
+    ]
+  },
+  "adventure-license/meteos-AL": {
+    "category": "adventure-license",
+    "guideId": "meteos-AL",
+    "characters": [
+      "Luna",
+      "Veronica",
+      "Caren",
+      "Tamara",
+      "Laplace",
+      "Poolside Trickster Regina",
+      "Roxie"
+    ]
+  },
+  "adventure-license/prom-dastei": {
+    "category": "adventure-license",
+    "guideId": "prom-dastei",
+    "characters": [
+      "Sterope",
+      "Akari",
+      "Stella",
+      "Monad Eva",
+      "Dianne",
+      "Nella",
+      "Drakhan",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Marian",
+      "Gnosis Nella",
+      "Tamamo-no-Mae",
+      "Demiurge Stella",
+      "Ryu Lion"
+    ]
+  },
+  "adventure-license/prom-ddrakhan": {
+    "category": "adventure-license",
+    "guideId": "prom-ddrakhan",
+    "characters": [
+      "Monad Eva",
+      "Leo",
+      "Nella",
+      "Mene",
+      "Tamamo-no-Mae",
+      "Gnosis Nella",
+      "Iota",
+      "Laplace",
+      "Demiurge Stella"
+    ]
+  },
+  "adventure-license/prom-dstella": {
+    "category": "adventure-license",
+    "guideId": "prom-dstella",
+    "characters": [
+      "Monad Eva",
+      "Demiurge Astei",
+      "Demiurge Stella",
+      "Tamamo-no-Mae",
+      "Gnosis Nella"
+    ]
+  },
+  "adventure-license/prom-dvlada": {
+    "category": "adventure-license",
+    "guideId": "prom-dvlada",
+    "characters": [
+      "Sterope",
+      "Monad Eva",
+      "Tio",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Drakhan",
+      "Marian",
+      "Demiurge Stella",
+      "Tamamo-no-Mae",
+      "Gnosis Nella"
+    ]
+  },
+  "adventure-license/prom-gdahlia": {
+    "category": "adventure-license",
+    "guideId": "prom-gdahlia",
+    "characters": [
+      "Gnosis Beth",
+      "Vlada",
+      "Maxie"
+    ]
+  },
+  "adventure-license/prom-meva": {
+    "category": "adventure-license",
+    "guideId": "prom-meva",
+    "characters": [
+      "Monad Eva",
+      "Demiurge Delta",
+      "Nella",
+      "Maxwell",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Drakhan",
+      "Marian",
+      "Iota",
+      "Demiurge Stella",
+      "Tamamo-no-Mae",
+      "Gnosis Nella"
+    ]
+  },
+  "adventure-license/sacreed-AL": {
+    "category": "adventure-license",
+    "guideId": "sacreed-AL",
+    "characters": [
+      "Iota",
+      "Demiurge Vlada",
+      "Eliza",
+      "Demiurge Astei",
+      "Gnosis Dahlia",
+      "Maxwell",
+      "Francesca"
+    ]
+  },
+  "adventure-license/toddlerAL": {
+    "category": "adventure-license",
+    "guideId": "toddlerAL",
+    "characters": [
+      "Kitsune of Eternity Tamamo-no-Mae"
+    ]
+  },
+  "adventure-license/ziggsaron": {
+    "category": "adventure-license",
+    "guideId": "ziggsaron",
+    "characters": [
+      "Monad Eva",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Marian",
+      "Tamara",
+      "Ember",
+      "Fatal",
+      "Edelweiss",
+      "Stella",
+      "Veronica",
+      "Rin",
+      "Caren",
+      "Beth"
+    ]
+  },
+  "irregular-extermination/pursuit-blockbuster": {
+    "category": "irregular-extermination",
+    "guideId": "pursuit-blockbuster",
+    "characters": [
+      "Monad Eva",
+      "Stella",
+      "Saeran",
+      "Alice",
+      "Akari",
+      "Gnosis Nella",
+      "Rhona",
+      "Kitsune of Eternity Tamamo-no-Mae"
+    ]
+  },
+  "irregular-extermination/pursuit-iron-stretcher": {
+    "category": "irregular-extermination",
+    "guideId": "pursuit-iron-stretcher",
+    "characters": [
+      "Caren",
+      "Poolside Trickster Regina",
+      "Tamara",
+      "Gnosis Nella",
+      "Akari",
+      "Edelweiss",
+      "Regina",
+      "Aer"
+    ]
+  },
+  "irregular-extermination/pursuit-mutated-wyvre": {
+    "category": "irregular-extermination",
+    "guideId": "pursuit-mutated-wyvre",
+    "characters": [
+      "Dianne",
+      "Skadi"
+    ]
+  },
+  "irregular-extermination/pursuit-queen": {
+    "category": "irregular-extermination",
+    "guideId": "pursuit-queen",
+    "characters": [
+      "Akari",
+      "Drakhan",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Gnosis Nella",
+      "Iota",
+      "Regina",
+      "Caren",
+      "Gnosis Dahlia",
+      "Tio",
+      "Monad Eva",
+      "Astei",
+      "Demiurge Delta",
+      "Dianne",
+      "Shu"
+    ]
+  },
+  "joint-boss/annihilator": {
+    "category": "joint-boss",
+    "guideId": "annihilator",
+    "characters": [
+      "Liselotte",
+      "Maxwell",
+      "Demiurge Vlada",
+      "Eliza",
+      "Epsilon",
+      "Gnosis Dahlia",
+      "Demiurge Astei",
+      "Iota",
+      "Omega Nadja",
+      "Monad Eva",
+      "Dianne"
+    ]
+  },
+  "joint-boss/deep-sea-guardian": {
+    "category": "joint-boss",
+    "guideId": "deep-sea-guardian",
+    "characters": [
+      "Kanon",
+      "Poolside Trickster Regina",
+      "Caren",
+      "Aer",
+      "Kappa",
+      "Eliza",
+      "Regina",
+      "Delta",
+      "Ryu Lion",
+      "Monad Eva",
+      "Demiurge Delta",
+      "Rey",
+      "Ame",
+      "Dstella",
+      "Stella",
+      "Notia",
+      "Idith",
+      "Hanbyul Lee",
+      "Dianne"
+    ]
+  },
+  "joint-boss/koh-meteos": {
+    "category": "joint-boss",
+    "guideId": "koh-meteos",
+    "characters": [
+      "Demiurge Luna",
+      "Bryn",
+      "Gnosis Dahlia",
+      "Ryu Lion",
+      "Regina",
+      "Omega Nadja",
+      "Roxie"
+    ]
+  },
+  "joint-boss/shichifuja": {
+    "category": "joint-boss",
+    "guideId": "shichifuja",
+    "characters": [
+      "Tamamo-no-Mae",
+      "Gnosis Nella",
+      "Demiurge Stella",
+      "Ryu Lion",
+      "Iota",
+      "Laplace",
+      "Demiurge Drakhan",
+      "Kuro",
+      "Drakhan",
+      "Monad Eva"
+    ]
+  },
+  "special-request/amadeus": {
+    "category": "special-request",
+    "guideId": "amadeus",
+    "characters": [
+      "Kuro",
+      "Dianne",
+      "Drakhan",
+      "Gnosis Beth",
+      "Akari",
+      "Skadi"
+    ]
+  },
+  "special-request/beatles": {
+    "category": "special-request",
+    "guideId": "beatles",
+    "characters": [
+      "Eternal",
+      "Aer",
+      "Mero",
+      "Meva",
+      "Kanon"
+    ]
+  },
+  "special-request/chimera": {
+    "category": "special-request",
+    "guideId": "chimera",
+    "characters": [
+      "Valentine",
+      "Eternal",
+      "Aer"
+    ]
+  },
+  "special-request/grand-calamari": {
+    "category": "special-request",
+    "guideId": "grand-calamari",
+    "characters": [
+      "Gnosis Nella",
+      "Kuro",
+      "Monad Eva",
+      "Drakhan",
+      "Akari",
+      "Edelweiss",
+      "Regina",
+      "Gnosis Beth"
+    ]
+  },
+  "special-request/meteos": {
+    "category": "special-request",
+    "guideId": "meteos",
+    "characters": [
+      "Veronica",
+      "Laplace",
+      "Caren",
+      "Poolside Trickster Regina",
+      "Edelweiss",
+      "Monad Eva"
+    ]
+  },
+  "special-request/sacreed": {
+    "category": "special-request",
+    "guideId": "sacreed",
+    "characters": [
+      "Demiurge Stella",
+      "Stella",
+      "Iota",
+      "Francesca",
+      "Omega Nadja",
+      "Aer",
+      "Kuro",
+      "Maxwell",
+      "Demiurge Astei",
+      "Dahlia",
+      "Notia",
+      "Gnosis Nella"
+    ]
+  },
+  "special-request/tyrant": {
+    "category": "special-request",
+    "guideId": "tyrant",
+    "characters": [
+      "Tio",
+      "Meva",
+      "Stella",
+      "Dianne",
+      "Saeran",
+      "Shu",
+      "Monad Eva"
+    ]
+  },
+  "world-boss/dahlia": {
+    "category": "world-boss",
+    "guideId": "dahlia",
+    "characters": [
+      "Demiurge Drakhan",
+      "Leo",
+      "Monad Eva",
+      "Dianne",
+      "Gnosis Nella",
+      "Alice",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Demiurge Stella",
+      "Ryu Lion",
+      "Akari",
+      "Notia",
+      "Tamara",
+      "Luna",
+      "Omega Nadja",
+      "Demiurge Vlada"
+    ]
+  },
+  "world-boss/harshna": {
+    "category": "world-boss",
+    "guideId": "harshna",
+    "characters": [
+      "Demiurge Drakhan",
+      "Kappa",
+      "Leo",
+      "Ryu Lion",
+      "Rey",
+      "Ame",
+      "Demiurge Luna",
+      "Maxwell",
+      "Regina",
+      "Demiurge Astei",
+      "Fran",
+      "Charlotte",
+      "Valentine",
+      "Dianne",
+      "Astei",
+      "Nella",
+      "Gnosis Beth",
+      "Notia",
+      "Akari",
+      "Roxie",
+      "Bell Cranel",
+      "Vlada",
+      "Maxie",
+      "Ember",
+      "Monad Eva"
+    ]
+  },
+  "world-boss/primordial_sentinel": {
+    "category": "world-boss",
+    "guideId": "primordial_sentinel",
+    "characters": [
+      "Val",
+      "Iota",
+      "Notia",
+      "Dianne",
+      "Valentine",
+      "Monad Eva",
+      "Meva",
+      "DStella",
+      "Stella"
+    ]
+  },
+  "world-boss/venion": {
+    "category": "world-boss",
+    "guideId": "venion",
+    "characters": [
+      "Gnosis Dahlia",
+      "Regina",
+      "Demiurge Luna",
+      "Drakhan",
+      "Monad Eva",
+      "Caren",
+      "Veronica",
+      "Kanon",
+      "Tamara",
+      "Laplace",
+      "Tamamo-no-Mae",
+      "Ryu Lion"
+    ]
+  },
+  "guild-raid/dignity-of-the-golden-kingdom": {
+    "category": "guild-raid",
+    "guideId": "dignity-of-the-golden-kingdom",
+    "characters": [
+      "Monad Eva",
+      "Tamara",
+      "Luna",
+      "Veronica",
+      "Mero",
+      "Demiurge Astei",
+      "Demiurge Luna",
+      "Maxwell",
+      "Gnosis Dahlia",
+      "Francesca",
+      "Dianne",
+      "Skadi",
+      "Drakhan",
+      "Regina",
+      "Demiurge Stella",
+      "Demiurge Drakhan",
+      "Ember",
+      "Kuro",
+      "Akari",
+      "Gnosis Beth"
+    ]
+  },
+  "guild-raid/frost-legion": {
+    "category": "guild-raid",
+    "guideId": "frost-legion",
+    "characters": [
+      "Luna",
+      "Demiurge Drakhan",
+      "Omega Nadja",
+      "Kuro",
+      "Dianne",
+      "Monad Eva",
+      "Tamara",
+      "Ryu Lion",
+      "Akari",
+      "Demiurge Luna",
+      "Ame",
+      "Drakhan",
+      "Skadi",
+      "Maxwell",
+      "Demiurge Astei",
+      "Gnosis Dahlia",
+      "Sterope",
+      "Gnosis Beth",
+      "Maxie",
+      "Vlada",
+      "Parti",
+      "Ember",
+      "Bell Cranel"
+    ]
+  },
+  "guild-raid/maxwell": {
+    "category": "guild-raid",
+    "guideId": "maxwell",
+    "characters": [
+      "Ryu Lion",
+      "Ame",
+      "Rey",
+      "Monad Eva",
+      "Notia",
+      "Delta",
+      "Kappa",
+      "Demiurge Stella",
+      "Charlotte",
+      "Hanbyul Lee",
+      "Maxwell",
+      "Demiurge Astei",
+      "Laine",
+      "Eternal",
+      "Dahlia",
+      "Skadi",
+      "Tamara"
+    ]
+  },
+  "guild-raid/planetary-control-unit": {
+    "category": "guild-raid",
+    "guideId": "planetary-control-unit",
+    "characters": [
+      "Astei",
+      "Dianne",
+      "Liselotte",
+      "Maxwell",
+      "Bryn",
+      "Francesca",
+      "Demiurge Astei",
+      "Demiurge Luna",
+      "Aer",
+      "Luna",
+      "Ember",
+      "Drakhan",
+      "Demiurge Stella",
+      "Regina",
+      "Monad Eva",
+      "Maxie",
+      "Roxie",
+      "Akari",
+      "Vlada"
+    ]
+  },
+  "guild-raid/prevent-world-alteration": {
+    "category": "guild-raid",
+    "guideId": "prevent-world-alteration",
+    "characters": [
+      "Fatal",
+      "Ryu Lion",
+      "Holy Night's Blessing Dianne",
+      "Maxwell",
+      "Monad Eva",
+      "Mene",
+      "Veronica",
+      "Tamara",
+      "Laplace",
+      "Poolside Trickster Regina",
+      "Roxie",
+      "Demiurge Astei",
+      "Francesca",
+      "Regina",
+      "Luna",
+      "Caren",
+      "Demiurge Luna",
+      "Beth",
+      "Edelweiss",
+      "Rin",
+      "Lyla",
+      "Gnosis Beth",
+      "Maxie",
+      "Akari"
+    ]
+  },
+  "skyward-tower/normal": {
+    "category": "skyward-tower",
+    "guideId": "normal",
+    "characters": [
+      "Astei",
+      "Nella",
+      "Dianne",
+      "Tio",
+      "Monad Eva",
+      "Stella",
+      "Demiurge Stella",
+      "Valentine",
+      "Aer"
+    ]
+  },
+  "skyward-tower/hard": {
+    "category": "skyward-tower",
+    "guideId": "hard",
+    "characters": [
+      "K",
+      "Faenan",
+      "Tio",
+      "Eva",
+      "Drakhan",
+      "Caren",
+      "Demiurge Stella",
+      "Dolly",
+      "Marian"
+    ]
+  },
+  "skyward-tower/very-hard": {
+    "category": "skyward-tower",
+    "guideId": "very-hard",
+    "characters": [
+      "Demiurge Drakhan",
+      "Omega Nadja",
+      "Astei",
+      "Summer Knight's Dream Ember",
+      "Demiurge Stella",
+      "Tamara",
+      "Gnosis Nella",
+      "Caren",
+      "Demiurge Luna",
+      "Drakhan",
+      "Monad Eva",
+      "Dianne",
+      "Nella",
+      "Stella",
+      "Delta",
+      "Ame",
+      "Rey",
+      "Regina",
+      "Luna",
+      "Liselotte",
+      "Demiurge Astei",
+      "Aer",
+      "Fran",
+      "Charlotte",
+      "Shu",
+      "Claire",
+      "Eternal",
+      "Demiurge Vlada",
+      "Sterope",
+      "Edelweiss",
+      "Rhona",
+      "Gnosis Beth",
+      "Maxwell",
+      "Poolside Trickster Regina",
+      "Valentine",
+      "Fatal",
+      "Cindy",
+      "Ember",
+      "Kanon",
+      "Tamamo-no-Mae",
+      "Dahlia",
+      "Akari",
+      "Eliza",
+      "Iota",
+      "Kuro",
+      "Hilde",
+      "Christina",
+      "Notia",
+      "Gnosis Dahlia",
+      "Leo",
+      "Epsilon",
+      "Veronica",
+      "Kappa",
+      "Maxie",
+      "Roxie"
+    ]
+  }
+}

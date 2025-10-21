@@ -8,7 +8,7 @@
   "gift": "Magic Tool",
   "role": "dps",
   "tags": [
-    "ignore-defense"
+    "ignore-defense","free"
   ],
   "SubClass": "Wizard",
   "skill_priority": {

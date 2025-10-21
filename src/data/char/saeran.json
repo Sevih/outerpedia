@@ -8,6 +8,7 @@
   "role": "sustain",
   "Class": "Healer",
   "SubClass": "Reliever",
+  "tags": ["free"],
   "skill_priority": {
     "First": {
       "prio": 3

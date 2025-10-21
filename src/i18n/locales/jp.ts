@@ -443,6 +443,11 @@ const jp = {
   'tierIndex.card.pve.desc': 'あらゆるPvEコンテンツの評価。',
   'tierIndex.card.pvp.title': 'ティアリスト — PvP',
   'tierIndex.card.pvp.desc': 'アリーナ中心の実戦評価。',
+  'tierIndex.usage.h2': 'ガイドで最も使われるユニット',
+  'tierIndex.usage.lead': '初心者の方にはこちらのリストの方が実用的です。各コンテンツで推奨される頻度が高い英雄を示します。',
+  'tierIndex.card.usage.title': '使用率の高いユニット',
+  'tierIndex.card.usage.desc': 'Outerpediaガイドの集計使用率。',
+  'tierIndex.section.tiers.h2': 'ティアリスト（PvE & PvP）',
   // --- JSON-LD ---
   'tierIndex.collection.title': 'アウタープレーン ティアリスト — {monthYear}',
   'tierIndex.collection.desc': 'PvE と PvP のキャラランキングを選択できます。',
@@ -457,7 +462,6 @@ const jp = {
   'weapon.intro2': "装備ステータスの仕組みを理解することは、ギアの性能を最大限に引き出すために欠かせません。<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/jp/guides/general-guides/stats'>ステータスと戦闘の基本ガイド</a> がその理解を深めるのに役立ちます。",
   'accessory.intro1': "他の装備と同様に、Outerplane のアクセサリーにもティアとリフォージ（再鍛造）システムがあり、ステータスや固有効果を強化できます。高ティアのアクセサリーほど基礎能力値やパッシブ効果が優れています。リフォージや装備の強化については、<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/jp/guides/general-guides/gear'>装備ガイド</a> をご覧ください。",
   'sets.intro1': "他の装備と同様に、Outerplane のセットにもティアとリフォージ（再鍛造）システムがあり、ステータスや固有効果を強化できます。高ティアのセットほど基礎能力値やパッシブ効果が優れています。リフォージや装備の強化については、<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/jp/guides/general-guides/gear'>装備ガイド</a> をご覧ください。",
-
   // jp.ts
   'guides.cat.meta.title': '{cat} | Outerpedia',
   'guides.cat.meta.desc': '{desc}',
@@ -504,8 +508,52 @@ const jp = {
   "legal.meta.title": "法的情報 | Outerpedia",
   "legal.meta.desc": "Outerpediaの法的免責事項、著作権、コンテンツ使用情報。Outerplaneの非営利ファンプロジェクト。",
   "legal.meta.ogTitle": "法的情報 | Outerpedia",
-  "legal.meta.ogDesc": "Outerpediaファンプロジェクトの法的情報と免責事項。"
+  "legal.meta.ogDesc": "Outerpediaファンプロジェクトの法的情報と免責事項。",
+// ========== mostUsedUnit ==========
+// Metadata & SEO
+'mostUsedUnit.meta.title': 'ガイドで最も使用されているユニット | Outerpedia',
+'mostUsedUnit.meta.desc': 'Outerplaneの全ガイドで最も推奨されているキャラクターを発見しましょう。',
+'mostUsedUnit.og.title': 'ガイドで最も使用されているユニット | Outerpedia',
+'mostUsedUnit.og.desc': 'Outerplaneガイド全体で最も頻繁に登場するヒーローを確認しましょう。',
+'mostUsedUnit.og.imageAlt': '最も使用されているユニット – Outerpedia',
+'mostUsedUnit.twitter.title': 'ガイドで最も使用されているユニット | Outerpedia',
+'mostUsedUnit.twitter.desc': 'ガイドで最も推奨されているOuterplaneユニットを発見しましょう。',
+'mostUsedUnit.meta.breadcrumb': '最も使用されているユニット',
 
+// Page Content
+'mostUsedUnit.h1': 'ガイドで最も使用されているユニット',
+'mostUsedUnit.filters.category': 'カテゴリー',
+'mostUsedUnit.filters.allCategories': 'すべてのカテゴリー',
+'mostUsedUnit.filters.includeLimited': '限定キャラを含む',
+'mostUsedUnit.filters.allRarity': 'すべて',
+'mostUsedUnit.filters.allElement': 'すべて',
+'mostUsedUnit.filters.allClass': 'すべて',
+
+// Results
+'mostUsedUnit.results.showing': '{count}ユニットを表示中',
+'mostUsedUnit.results.noResults': '選択したフィルターに一致するユニットが見つかりません。',
+'mostUsedUnit.badge.limited': '限定',
+'mostUsedUnit.badge.free': '無料',
+'mostUsedUnit.count.guide': 'ガイド',
+'mostUsedUnit.count.guides': 'ガイド',
+
+// Expanded section
+'mostUsedUnit.expanded.title': 'ガイドで使用されています',
+'mostUsedUnit.expanded.titleFiltered': 'ガイドで使用されています（{category}）',
+
+// Disclaimer
+'mostUsedUnit.disclaimer.intro': 'このツールは、すべてのOuterpediaガイドで推奨されたヒーローをスキャンし、言及された回数に基づいてランク付けしています。',
+'mostUsedUnit.disclaimer.note': 'データは更新中ですが、ランキングに大きな変化はないと思われます。',
+
+// Categories
+'categories.adventure': '冒険',
+'categories.adventure-license': '冒険許可証',
+'categories.special-request': '特別依頼',
+'categories.guild-raid': 'ギルドレイド',
+'categories.irregular-extermination': '不規則な討伐',
+'categories.joint-boss': '協力ボス',
+'categories.world-boss': 'ワールドボス',
+'categories.skyward-tower': 'スカイワードタワー',
 
 
 

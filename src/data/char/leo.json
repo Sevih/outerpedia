@@ -8,6 +8,7 @@
   "rank_pvp": "B",
   "Class": "Defender",
   "SubClass": "Phalanx",
+  "tags": ["free"],
   "skill_priority": {
     "First": {
       "prio": 3
