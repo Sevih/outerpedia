@@ -34,7 +34,7 @@ export function CharacterPortrait({
 
   return (
     <div
-      className={`relative overflow-y-hidden ${className}`}
+      className={`relative overflow-hidden ${className}`}
       style={{
         width: size,
         height: size,
