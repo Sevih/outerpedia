@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'Meta Characters',
     ],
     image: {
-      url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Btn_Character.png',
+      url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png',
       width: 150,
       height: 150,
       altKey: 'mostUsedUnit.og.imageAlt',
