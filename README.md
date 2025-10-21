@@ -18,13 +18,14 @@ It provides a clean and structured UI to browse characters, gear, builds, and ti
 
 ## 🚀 Features
 
-- 🔥 Tier List (updated monthly)  
-- 🧙‍♀️ Character pages with skills, buffs/debuffs, EE, and builds  
-- 🛡️ Equipment Database: weapons, armor sets, talismans, amulets  
-- 🎯 Advanced filters (class, element, buffs, etc.)  
-- 📘 Guides for PvE, PvP, raids, and more  
-- ⚙️ Tools: EE priority viewer, Item Stats Usage, gear solver  
-- 🚀 Lightning fast (static site, CDN, PWA support)
+Here's what you'll find:
+🔥 Tier Lists (PvE & PvP)
+🧙‍♀️ Character Database with skills, buffs/debuffs, EE, builds & detailed profiles
+🛡️ Equipment DB with full gear catalog & advanced filters
+📘 60+ Guides across Outerplane content (world bosses, raids, adventure, weekly conquests, towers, and more)
+⚙️ Tools: EE priority, gear solver, usage stats, pull simulator, and other utilities
+🚀 Lightning fast (static site, CDN, PWA support)
+🌐 Multilingual (EN, JP, KR)
 
 ---
 
