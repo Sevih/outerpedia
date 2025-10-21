@@ -543,7 +543,7 @@ const en = {
 
   // Disclaimer
   'mostUsedUnit.disclaimer.intro': 'This tool scans every recommendation across all Outerpedia guides and ranks heroes based on how many times they were mentioned.',
-  'mostUsedUnit.disclaimer.note': 'The data is being updated, but there is unlikely to be any drastic change in rankings.',
+  'mostUsedUnit.disclaimer.note': 'Guide data is currently being updated, so rankings are not final.',
 
   // Categories (déjà dans guides, mais pour cohérence)
   'categories.adventure': 'Adventure',
