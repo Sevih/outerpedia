@@ -388,6 +388,29 @@
           "1 Earth"
         ],
         "note": []
+      },
+      "team3": {
+        "label": "No Light",
+        "icon": "light.webp",
+        "setup": [
+          [
+            "Nella",
+            "Demiurge Delta"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Rey"
+          ],
+          [
+            "Ame"
+          ]
+        ],
+        "conditions": [
+          "No Light"
+        ],
+        "note": []
       }
     }
   },
@@ -525,6 +548,36 @@
         ],
         "conditions": [
           "No Dark"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "G.Beth's Eternal Bleeding's damage is not affected by Rhona's passive."
+          }
+        ]
+      },
+      "team2": {
+        "label": "No Mage",
+        "icon": "mage.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Vlada",
+            "Sterope",
+            "Edelweiss"
+          ],
+          [
+            "Rhona"
+          ],
+          [
+            "Gnosis Beth",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No Mage"
         ],
         "note": [
           {
@@ -1098,6 +1151,30 @@
           "No defender"
         ],
         "note": []
+      },
+      "team3": {
+        "label": "1 x 2★",
+        "icon": "CM_icon_star_y.webp",
+        "setup": [
+          [
+            "Tio"
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Tamara",
+            "Eliza"
+          ],
+          [
+            "Rey",
+            "Demiurge Luna"
+          ]
+        ],
+        "conditions": [
+          "1 x 2★"
+        ],
+        "note": []
       }
     }
   },
@@ -1140,6 +1217,32 @@
         ],
         "conditions": [
           "No water"
+        ],
+        "note": []
+      },
+      "team2": {
+        "label": "1 Striker",
+        "icon": "striker.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Iota",
+            "Gnosis Nella"
+          ],
+          [
+            "Akari",
+            "Kuro"
+          ],
+          [
+            "Rey",
+            "Kanon",
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 Striker"
         ],
         "note": []
       }
