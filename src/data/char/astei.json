@@ -331,7 +331,7 @@
       "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、残りHPが最も低い味方と自分の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復させる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、対象に<color=#28d9ed>70%</color>の確率で<color=#28d9ed>呪い</color>を<color=#28d9ed>2ターン</color>の間付与する。"
     }
   },
-  "rank": "A",
+  "rank": "S",
   "Fullname_kr": "아스테",
   "Fullname_jp": "アステ",
   "VoiceActor": "VA. None",
