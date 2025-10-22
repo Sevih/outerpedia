@@ -410,12 +410,13 @@ const en = {
   'tier.ui.title.ee0': 'Exclusive Equipment Priority (+0)',
   'tier.ui.title.ee10': 'Exclusive Equipment Priority (+10)',
 
-  'tier.ui.warning.pve': '⚠️ This tier list assumes <strong>6-star transcends</strong> and <strong>level 0 Exclusive Equipment effects</strong>.<br/>Results may vary if upgrades are not unlocked. This list is for <strong>PvE content</strong> only.',
-  'tier.ui.warning.pvp': '⚠️ This tier list assumes <strong>6-star transcends</strong> and <strong>level 0 Exclusive Equipment effects</strong>.<br/>Results may vary if upgrades are not unlocked. This list is for <strong>PvP content</strong> only.',
+  'tier.ui.warning.pve': '⚠️ This tier list assumes to have the <strong>Exclusive Equipment Lv0</strong>.<br/>Results may vary if upgrades are not unlocked. This list is for <strong>PvE content</strong> only.',
+  'tier.ui.warning.pvp': '⚠️ This tier list assumes <strong>6-star transcends</strong> and <strong>level 10 Exclusive Equipment effects</strong>.<br/>Results may vary if upgrades are not unlocked. This list is for <strong>PvP content</strong> only.',
   'tier.ui.warning.ee0': '⚠️ This ranking helps decide which <strong>Exclusive Equipment (EE)</strong> to unlock first, based on <strong>level 0 base effects</strong> only.<br/><strong>+10 bonus effects are not considered.</strong>',
   'tier.ui.warning.ee10': '⚠️ This ranking evaluates <strong>Exclusive Equipment (EE)</strong> including their <strong>+10 bonus effects</strong>, to guide upgrades beyond base effects.',
 
   'tier.ui.search.placeholder': 'Search...',
+  'tier.ui.filter.transcend': 'Transcend Level',
   'tier.ui.tab.all': 'All',
   'tier.ui.tab.dps': 'DPS',
   'tier.ui.tab.support': 'Support',
@@ -438,7 +439,7 @@ const en = {
   'tierIndex.meta.breadcrumb': 'Tier Lists',
   // --- Page texts ---
   'tierIndex.h1': 'Outerplane Tier List',
-  'tierIndex.lead': 'Choose between PvE and PvP character rankings. Based on evaluations with 6★ transcends and level 0 EE effects.',
+  'tierIndex.lead': 'Choose between PvE and PvP character rankings.',
   'tierIndex.card.pve.title': 'Tier List — PvE',
   'tierIndex.card.pve.desc': 'PvE performance rankings across all content.',
   'tierIndex.card.pvp.title': 'Tier List — PvP',

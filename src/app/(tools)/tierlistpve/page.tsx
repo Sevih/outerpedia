@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import type { CharacterLite } from '@/types/character'
 import charactersData from '@/data/_allCharacters.json'
 import { getMonthYear } from '@/utils/getMonthYear'
-import TierListBase from '@/app/components/TierListBase'
+import TierListBase from '@/app/components/TierListPVE'
 import { toKebabCase } from '@/utils/formatText'
 import { Suspense } from 'react'
 
@@ -65,7 +65,7 @@ export default async function PvETierList() {
         ]}
       />
       <Suspense fallback={<div>Loading...</div>}>
-      <TierListBase characters={characters} mode="pve" langue={langKey} />
+      <TierListBase characters={characters} langue={langKey} />
       </Suspense>
     </>
   )

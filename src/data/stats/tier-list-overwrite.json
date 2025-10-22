@@ -1,0 +1,116 @@
+{
+    "demiurge-astei": {
+        "3": "A",
+        "4": "A",
+        "5": "A",
+        "6": "S"
+    },
+    "demiurge-delta": {
+        "3": "B",
+        "4": "B",
+        "5": "B",
+        "6": "A"
+    },
+    "demiurge-drakhan": {
+        "3": "A",
+        "4": "A",
+        "5": "A",
+        "6": "A"
+    },
+    "demiurge-luna": {
+        "3": "S",
+        "4": "S",
+        "5": "S",
+        "6": "S"
+    },
+    "demiurge-stella": {
+        "3": "S",
+        "4": "S",
+        "5": "S",
+        "6": "S"
+    },
+    "demiurge-vlada": {
+        "3": "B",
+        "4": "B",
+        "5": "A",
+        "6": "A"
+    },
+    "gnosis-beth": {
+        "3": "B",
+        "4": "A",
+        "5": "A",
+        "6": "A"
+    },
+    "monad-eva": {
+        "3": "A",
+        "4": "A",
+        "5": "S",
+        "6": "S"
+    },
+    "ais-wallenstein": {
+        "3": "D",
+        "4": "C",
+        "5": "C",
+        "6": "B"
+    },
+    "bell-cranel": {
+        "3": "S",
+        "4": "S",
+        "5": "S",
+        "6": "S"
+    },
+    "gnosis-dahlia": {
+        "3": "B",
+        "4": "A",
+        "5": "A",
+        "6": "A"
+    },
+    "gnosis-nella": {
+        "3": "S",
+        "4": "S",
+        "5": "S",
+        "6": "S"
+    },
+    "holy-night-s-blessing-dianne": {
+        "3": {
+            "rank": "A",
+            "role": "support"
+        },
+        "4": "A",
+        "5": "S",
+        "6": {
+            "rank": "S",
+            "role": "DPS"
+        }
+    },
+    "kitsune-of-eternity-tamamo-no-mae": {
+        "3": "S",
+        "4": "S",
+        "5": "S",
+        "6": "S"
+    },
+    "omega-nadja": {
+        "3": "B",
+        "4": "B",
+        "5": "A",
+        "6": "A"
+    },
+    "poolside-trickster-regina": {
+        "3": "S",
+        "4": "S",
+        "5": "S",
+        "6": "S"
+    },
+    "ryu-lion": {
+        "3": "S",
+        "4": "S",
+        "5": "S",
+        "6": "S"
+    },
+    "summer-knight-s-dream-ember": {
+        "3": "A",
+        "4": "A",
+        "5": "A",
+        "6": "A"
+    }
+}

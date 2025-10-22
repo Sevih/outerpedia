@@ -410,12 +410,13 @@ const jp = {
   'tier.ui.title.ee0': '専用装備 優先度（+0）',
   'tier.ui.title.ee10': '専用装備 優先度（+10）',
 
-  'tier.ui.warning.pve': '⚠️ 本ティアリストは<strong>6凸</strong>および<strong>専用装備レベル0の効果</strong>を前提としています。<br/>強化状況により体感は異なる場合があります。<strong>PvE用</strong>の評価です。',
-  'tier.ui.warning.pvp': '⚠️ 本ティアリストは<strong>6凸</strong>および<strong>専用装備レベル0の効果</strong>を前提としています。<br/>強化状況により体感は異なる場合があります。<strong>PvP用</strong>の評価です。',
+  'tier.ui.warning.pve': '⚠️ 本ティアリストは<strong>専用装備レベル0</strong>を前提としています。<br/>強化状況により体感は異なる場合があります。<strong>PvE用</strong>の評価です。',
+  'tier.ui.warning.pvp': '⚠️ 本ティアリストは<strong>6凸</strong>および<strong>専用装備レベル10の効果</strong>を前提としています。<br/>強化状況により体感は異なる場合があります。<strong>PvP用</strong>の評価です。',
   'tier.ui.warning.ee0': '⚠️ <strong>専用装備（EE）</strong>の解放優先度を、<strong>レベル0の基礎効果</strong>のみで評価します。<br/><strong>+10の追加効果は考慮しません。</strong>',
   'tier.ui.warning.ee10': '⚠️ <strong>専用装備（EE）</strong>を<strong>+10の追加効果</strong>も含めて評価し、基礎効果以降の強化優先度を示します。',
 
   'tier.ui.search.placeholder': '検索...',
+  'tier.ui.filter.transcend': '超越レベル',
   'tier.ui.tab.all': 'すべて',
   'tier.ui.tab.dps': 'DPS',
   'tier.ui.tab.support': 'サポート',
@@ -438,7 +439,7 @@ const jp = {
   'tierIndex.meta.breadcrumb': 'ティアリスト',
   // --- ページ文言 ---
   'tierIndex.h1': 'アウタープレーン ティアリスト',
-  'tierIndex.lead': 'PvE / PvP のキャラランキングを選択してください。6★超越と専用装備レベル0を前提とした評価です。',
+  'tierIndex.lead': 'PvE / PvP のキャラランキングを選択してください。',
   'tierIndex.card.pve.title': 'ティアリスト — PvE',
   'tierIndex.card.pve.desc': 'あらゆるPvEコンテンツの評価。',
   'tierIndex.card.pvp.title': 'ティアリスト — PvP',

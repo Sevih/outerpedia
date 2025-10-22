@@ -410,12 +410,13 @@ const kr = {
   'tier.ui.title.ee0': '전용 장비 우선순위 (+0)',
   'tier.ui.title.ee10': '전용 장비 우선순위 (+10)',
 
-  'tier.ui.warning.pve': '⚠️ 본 티어 리스트는 <strong>6성 각성</strong>과 <strong>전용 장비 레벨 0 효과</strong>를 전제로 합니다.<br/>강화 여부에 따라 체감이 달라질 수 있으며, <strong>PvE 전용</strong> 평가입니다.',
-  'tier.ui.warning.pvp': '⚠️ 본 티어 리스트는 <strong>6성 각성</strong>과 <strong>전용 장비 레벨 0 효과</strong>를 전제로 합니다.<br/>강화 여부에 따라 체감이 달라질 수 있으며, <strong>PvP 전용</strong> 평가입니다.',
+  'tier.ui.warning.pve': '⚠️ 본 티어 리스트는 <strong>전용 장비 레벨 0</strong>을 전제로 합니다.<br/>강화 여부에 따라 체감이 달라질 수 있으며, <strong>PvE 전용</strong> 평가입니다.',
+  'tier.ui.warning.pvp': '⚠️ 본 티어 리스트는 <strong>6성 각성</strong>과 <strong>전용 장비 레벨 10 효과</strong>를 전제로 합니다.<br/>강화 여부에 따라 체감이 달라질 수 있으며, <strong>PvP 전용</strong> 평가입니다.',
   'tier.ui.warning.ee0': '⚠️ <strong>전용 장비(EE)</strong>의 해제 우선순위를 <strong>레벨 0 기본 효과</strong>만으로 평가합니다.<br/><strong>+10 추가 효과는 고려하지 않습니다.</strong>',
   'tier.ui.warning.ee10': '⚠️ <strong>전용 장비(EE)</strong>를 <strong>+10 추가 효과</strong>까지 포함하여 평가하여, 기본 효과 이후의 강화 우선순위를 안내합니다.',
 
   'tier.ui.search.placeholder': '검색...',
+  'tier.ui.filter.transcend': '초월 레벨',
   'tier.ui.tab.all': '전체',
   'tier.ui.tab.dps': 'DPS',
   'tier.ui.tab.support': '서포트',
@@ -438,7 +439,7 @@ const kr = {
   'tierIndex.meta.breadcrumb': '티어 리스트',
   // --- 페이지 문구 ---
   'tierIndex.h1': '아우터플레인 티어 리스트',
-  'tierIndex.lead': 'PvE와 PvP 캐릭터 랭킹 중에서 선택하세요. 6★ 초월과 전용 장비 0레벨 효과를 기준으로 평가합니다.',
+  'tierIndex.lead': 'PvE와 PvP 캐릭터 랭킹 중에서 선택하세요.',
   'tierIndex.card.pve.title': '티어 리스트 — PvE',
   'tierIndex.card.pve.desc': '모든 PvE 콘텐츠 대상 성능 평가.',
   'tierIndex.card.pvp.title': '티어 리스트 — PvP',
