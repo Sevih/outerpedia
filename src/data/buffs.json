@@ -330,6 +330,16 @@
         "icon": "SC_Buff_Effect_Cleanse"
     },
     {
+        "name": "IG_Buff_DeBuffdurationdecrease",
+        "label": "Reduce Debuff Duration",
+        "label_jp": "デバフ持続時間減少",
+        "label_kr": "디버프 지속시간 감소",
+        "description": "Reduces the duration of detrimental effects affecting the target.",
+        "description_jp": "対象に影響を与える有害効果の持続時間を減少させる。",
+        "description_kr": "대상에게 영향을 주는 해로운 효과의 지속 시간을 감소시킵니다.",
+        "icon": "IG_Buff_BuffdurationReduce"
+    },
+    {
         "name": "SYS_REVENGE_HEAL",
         "label": "Agile Response",
         "label_jp": "迅速対応",

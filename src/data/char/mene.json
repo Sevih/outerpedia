@@ -145,7 +145,7 @@
       "SkillType": "SKT_SECOND",
       "SkipNameID": "SKILL_NAME_2000054_Skill02",
       "TargetTeamType": "TEAM",
-      "buff": [],
+      "buff": ["IG_Buff_DeBuffdurationdecrease"],
       "cd": "5",
       "debuff": [],
       "description": [

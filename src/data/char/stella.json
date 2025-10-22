@@ -145,7 +145,8 @@
       "SkipNameID": "SKILL_NAME_2000039_Skill02",
       "TargetTeamType": "ENEMY",
       "buff": [
-        "SYS_BUFF_REVENGE"
+        "SYS_BUFF_REVENGE",
+        "IG_Buff_DeBuffdurationdecrease"
       ],
       "cd": "2",
       "debuff": [],
