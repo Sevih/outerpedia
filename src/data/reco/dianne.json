@@ -4,7 +4,11 @@
       {
         "name": "Emblem of Dominance",
         "mainStat": "HP%"
-      }      
+      }      ,
+      {
+        "name": "Legacy of the Dream",
+        "mainStat": "HP%"
+      }    
     ],
     "Amulet": [
       {
