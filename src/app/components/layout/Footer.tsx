@@ -57,7 +57,7 @@ export default function Footer() {
             Official Website
           </Link>
           <Link
-            href="https://discord.com/invite/zvktrHTu"
+            href="https://discord.com/invite/77mVJcJByq"
             aria-label="Outerplane Official Discord"
             target="_blank"
             rel="noopener noreferrer"
