@@ -254,7 +254,7 @@
         "S2: AoE, grants {B/BT_STAT|ST_CRITICAL_RATE_IR} 2 turns.",
         "S1: Single, prioritizes the Frontline unit. {B/BT_IMMUNE_IR} 1 turn if the target is not a {C/Defender}.",
         "Increases damage taken from {C/Mage} and even more from {C/Mage} {E/Earth}.",
-        "Reduce effectiveness and criticalhit chance of all {C/Striker}.",
+        "Reduce effectiveness and critical hit chance of all {C/Striker}.",
         "Takes 300% {D/BT_WG_DMG} if {D/BT_DOT_POISON}.",
         "Reduce damage dealt against {E/Earth} heroes and takes increased damage from them.",
         "Increase damage dealt against {E/Fire} heroes and reduces damage taken from them.",
@@ -282,7 +282,10 @@
           ],
           "setup": [
             [
-              "Ryu Lion"
+              "Ryu Lion",
+              "Rhona",
+              "Ame",
+              "Rey"
             ],
             [
               "Notia",
@@ -290,16 +293,24 @@
             ],
             [
               "Charlotte",
-              "Viella"
+              "Viella",
+              "Fran"
             ],
             [
               "Kappa",
               "Hanbyul Lee"
             ]
           ]
+          ,
+          "note": [
+            {
+              "type": "p",
+              "string": "Remove the ranger geas if needed."
+            }
+          ]
         },
         "team2": {
-          "label": "Laine team",
+          "label": "Mage team",
           "icon": "dark.webp",
           "video": {
             "id": "Szgkhaza1jI",
@@ -329,8 +340,10 @@
               "Notia"
             ],
             [
+              "Alice",
               "Eternal",
-              "Dahlia"
+              "Dahlia",
+              "Omega Nadja"            
             ],
             [
               "Skadi",
@@ -340,11 +353,11 @@
           "note": [
             {
               "type": "p",
-              "string": "Speed Tuning : Maxwell > Laine > Skadi > Eternal"
+              "string": "Speed Tuning : Maxwell > Laine > Skadi > Alice"
             },
             {
               "type": "p",
-              "string": "Chain Order : Eternal > Laine > Maxwell > Skadi"
+              "string": "Chain Order : Alice > Laine > Maxwell > Skadi"
             },
             {
               "type": "p",
@@ -352,7 +365,7 @@
             },
             {
               "type": "p",
-              "string": "Remove Eternal EE : you don't want her to get an extra turn"
+              "string": "If playing her remove Eternal EE : you don't want her to get an extra turn"
             },
             {
               "type": "p",
@@ -364,7 +377,7 @@
                 "Maxwell prio : S3 > S2 Burn Lv 2 > S1",
                 "Laine : Only S1 for getting priority",
                 "Skadi : Only S1 Burn Lv 1 exept for first break when she will use Chain attack",
-                "Eternal : Use S3 once to speed down the boss then use Chain attack on the other break"
+                "Alice : Use S2 once to speed down the boss then use Chain attack on the other break"
               ]
             }
           ]
