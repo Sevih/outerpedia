@@ -520,6 +520,16 @@
         "icon": "SC_Buff_Sealed_Receive_Heal"
     },
     {
+        "name": "DMG_REDUCE_RATE_DOWN",
+        "label": "Increased Damage Taken",
+        "label_jp": "受けるダメージUP",
+        "label_kr": "받는 피해 증가",
+        "description": "Increases Damage taken by a certain ratio. (Irremovable)",
+        "description_jp": "受けるダメージが 一定比率UPする。 (解除不可)",
+        "description_kr": "입는 피해량이 일정 비율 증가합니다. (해제 불가)",
+        "icon": "IG_Buff_Dmg_Reduce"
+    },
+    {
         "name": "BT_DETONATE",
         "label": "Detonate",
         "label_jp": "破裂",

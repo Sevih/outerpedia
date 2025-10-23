@@ -18,10 +18,10 @@
       ]
     ],
     "SubstatPrio": "SPD>ATK>EFF>ACC",
-    "Note": "PvP:Mage's Charm3\nPvE:Mage's Charm3Executionner's Charm2",
+    "Note": "PvP:Mage's Charm3\nPvE:Mage's Charm3Executioner's Charm2",
     "Talisman": [
       "Mage's Charm",
-      "Executionner's Charm"
+      "Executioner's Charm"
     ]
   }
 }

@@ -23,7 +23,7 @@
 ],
 "SubstatPrio": "ATK>SPD>HP",
 "Note": "PvP:Assassin's Charm3Tactician's Charm2\nPvE:Executioner's Charm3",  
-"Talisman":["Assassin's Charm","Tactician's Charm","Executionner's Charm"]
+"Talisman":["Assassin's Charm","Tactician's Charm","Executioner's Charm"]
 },
 "Counter": {
 "Weapon": [
@@ -49,7 +49,7 @@
 ],
 "SubstatPrio": "ATK>SPD>HP",
 "Note": "PvP:Assassin's Charm3Tactician's Charm2\nPvE:Executioner's Charm3",  
-"Talisman":["Assassin's Charm","Tactician's Charm","Executionner's Charm"]
+"Talisman":["Assassin's Charm","Tactician's Charm","Executioner's Charm"]
 },
 "Scaling": {
 "Weapon": [
@@ -76,6 +76,6 @@
 ],
 "SubstatPrio": "ATK>SPD>HP",
 "Note": "PvP:Assassin's Charm3Tactician's Charm2\nPvE:3Executioner's Charm3",  
-"Talisman":["Assassin's Charm","Tactician's Charm","Executionner's Charm"]
+"Talisman":["Assassin's Charm","Tactician's Charm","Executioner's Charm"]
 }
 }

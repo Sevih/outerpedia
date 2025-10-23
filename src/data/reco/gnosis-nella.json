@@ -22,10 +22,10 @@
       ]
     ],
     "SubstatPrio": "SPD>HP>EFF>ACC",
-    "Note": "PvP:Assassin's Charm3Vanguard's Charm2\nPvE:Executionner's Charm3Sage's Charm2",
+    "Note": "PvP:Assassin's Charm3Vanguard's Charm2\nPvE:Executioner's Charm3Sage's Charm2",
     "Talisman": [
       "Vanguard's Charm",
-      "Executionner's Charm",
+      "Executioner's Charm",
       "Sage's Charm",
       "Assassin's Charm"
       
@@ -55,10 +55,10 @@
       ]
     ],
     "SubstatPrio": "SPD>HP>EFF>ACC",
-    "Note": "PvP:Assassin's Charm3Vanguard's Charm2\nPvE:Executionner's Charm3Vanguard's Charm2Sage's Charm2",
+    "Note": "PvP:Assassin's Charm3Vanguard's Charm2\nPvE:Executioner's Charm3Vanguard's Charm2Sage's Charm2",
     "Talisman": [
       "Vanguard's Charm",
-      "Executionner's Charm",
+      "Executioner's Charm",
       "Sage's Charm",
       "Assassin's Charm"
       

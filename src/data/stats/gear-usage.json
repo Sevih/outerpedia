@@ -3,7 +3,7 @@
     "name": "Speed Set",
     "type": "Set",
     "class": null,
-    "count": 64,
+    "count": 65,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -68,6 +68,7 @@
       "Tamara",
       "Valentine",
       "Veronica",
+      "Viella",
       "Vlada"
     ]
   },
@@ -75,7 +76,7 @@
     "name": "Immunity Set",
     "type": "Set",
     "class": null,
-    "count": 24,
+    "count": 25,
     "characters": [
       "Astei",
       "Bryn",
@@ -100,14 +101,15 @@
       "Roxie",
       "Saeran",
       "Sterope",
-      "Summer Knight's Dream Ember"
+      "Summer Knight's Dream Ember",
+      "Viella"
     ]
   },
   {
     "name": "Swiftness Set",
     "type": "Set",
     "class": null,
-    "count": 23,
+    "count": 24,
     "characters": [
       "Astei",
       "Christina",
@@ -131,7 +133,8 @@
       "Saeran",
       "Sterope",
       "Summer Knight's Dream Ember",
-      "Veronica"
+      "Veronica",
+      "Viella"
     ]
   },
   {
@@ -408,6 +411,23 @@
     ]
   },
   {
+    "name": "Resurrection Token",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 9,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Dianne",
+      "Liselotte",
+      "Mene",
+      "Monad Eva",
+      "Nella",
+      "Saeran",
+      "Viella"
+    ]
+  },
+  {
     "name": "Spirit of Unification",
     "type": "Amulet",
     "class": "Mage",
@@ -454,22 +474,6 @@
       "Kitsune of Eternity Tamamo-no-Mae",
       "Kuro",
       "Tamamo-no-Mae"
-    ]
-  },
-  {
-    "name": "Resurrection Token",
-    "type": "Amulet",
-    "class": "Healer",
-    "count": 8,
-    "characters": [
-      "Astei",
-      "Demiurge Delta",
-      "Dianne",
-      "Liselotte",
-      "Mene",
-      "Monad Eva",
-      "Nella",
-      "Saeran"
     ]
   },
   {
@@ -551,26 +555,41 @@
     "name": "Emblem of Dominance",
     "type": "Weapon",
     "class": "Healer",
-    "count": 5,
+    "count": 6,
     "characters": [
       "Dianne",
       "Liselotte",
       "Mene",
       "Monad Eva",
-      "Saeran"
+      "Saeran",
+      "Viella"
     ]
   },
   {
     "name": "Obsidian Oath",
     "type": "Amulet",
     "class": "Healer",
-    "count": 5,
+    "count": 6,
     "characters": [
       "Astei",
       "Demiurge Delta",
       "Dianne",
       "Liselotte",
-      "Saeran"
+      "Saeran",
+      "Viella"
+    ]
+  },
+  {
+    "name": "Legacy of the Dream",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 5,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Dianne",
+      "Nella",
+      "Viella"
     ]
   },
   {
@@ -714,17 +733,6 @@
   },
   {
     "name": "Immortal Pride",
-    "type": "Weapon",
-    "class": "Healer",
-    "count": 3,
-    "characters": [
-      "Astei",
-      "Demiurge Delta",
-      "Nella"
-    ]
-  },
-  {
-    "name": "Legacy of the Dream",
     "type": "Weapon",
     "class": "Healer",
     "count": 3,

@@ -2121,6 +2121,12 @@
           "mainStat": [
             "HP%"
           ]
+        },
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
         }
       ],
       "amuletSub": [
@@ -6683,6 +6689,72 @@
       "armorSets": [
         "Swiftness",
         "Counterattack"
+      ]
+    }
+  },
+  "viella": {
+    "PvE": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Legacy of the Dream",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "ATK",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "PvP": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF",
+        "EVA",
+        "RES"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Immunity"
       ]
     }
   },

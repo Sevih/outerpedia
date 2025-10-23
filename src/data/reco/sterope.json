@@ -26,10 +26,10 @@
       ]
     ],
     "SubstatPrio": "SPD>HP>EFF",
-    "Note": "PvP:Vanguard's Charm3Mage's Charm2\nPvE:Executionner's Charm3Mage's Charm2",
+    "Note": "PvP:Vanguard's Charm3Mage's Charm2\nPvE:Executioner's Charm3Mage's Charm2",
     "Talisman": [
       "Vanguard's Charm",
-      "Executionner's Charm",
+      "Executioner's Charm",
       "Mage's Charm"
     ]
   },
@@ -61,10 +61,10 @@
       ]
     ],
     "SubstatPrio": "SPD>HP>EFF",
-    "Note": "PvP:Vanguard's Charm3Mage's Charm2\nPvE:Executionner's Charm3Mage's Charm2",
+    "Note": "PvP:Vanguard's Charm3Mage's Charm2\nPvE:Executioner's Charm3Mage's Charm2",
     "Talisman": [
       "Vanguard's Charm",
-      "Executionner's Charm",
+      "Executioner's Charm",
       "Mage's Charm"
     ]
   },
@@ -95,10 +95,10 @@
       ]
     ],
     "SubstatPrio": "ATK>CHC>CHD>SPD",
-    "Note": "PvP:Vanguard's Charm3Mage's Charm2\nPvE:Executionner's Charm3Rogue's Charm2",
+    "Note": "PvP:Vanguard's Charm3Mage's Charm2\nPvE:Executioner's Charm3Rogue's Charm2",
     "Talisman": [
       "Vanguard's Charm",
-      "Executionner's Charm",
+      "Executioner's Charm",
       "Rogue's Charm"
     ]
   },
@@ -130,10 +130,10 @@
       ]
     ],
     "SubstatPrio": "ATK>CHC>CHD>SPD",
-    "Note": "PvP:Vanguard's Charm3Mage's Charm2\nPvE:Executionner's Charm3Rogue's Charm2",
+    "Note": "PvP:Vanguard's Charm3Mage's Charm2\nPvE:Executioner's Charm3Rogue's Charm2",
     "Talisman": [
       "Vanguard's Charm",
-      "Executionner's Charm",
+      "Executioner's Charm",
       "Rogue's Charm"
     ]
   }

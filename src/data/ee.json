@@ -2059,5 +2059,23 @@
 		"debuff": [
 			""
 		]
+	},
+	"viella": {
+		"name": "Mortician's Coffin",
+		"name_jp": "葬儀屋の棺",
+		"name_kr": "장의사의 관",
+		"mainStat": "Reduces Water Damage Taken",
+		"mainStat_jp": "水属性の対象の受けるダメージDOWN",
+		"mainStat_kr": "수속성 대상 받는 피해 감소",
+		"effect": "Increases Max Health of Earth allies by +30%",
+		"effect_jp": "地属性の味方の最大HP +30%",
+		"effect_kr": "지속성 아군 최대 체력 +30%",
+		"effect10": "Increases damage dealt by allies to targets afflicted with Poison",
+		"effect10_jp": "味方が中毒を保有している対象に与えるダメージUP",
+		"effect10_kr": "아군이 중독 보유 대상에게 입히는 피해 증가",
+		"icon_effect": "TI_Icon_UO_Accessary_07",
+		"rank": "",
+		"buff": [],
+		"debuff": []
 	}
 }

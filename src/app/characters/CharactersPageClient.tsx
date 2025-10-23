@@ -169,7 +169,7 @@ const orderedDebuffGroups = [
   { title: 'characters.effectsGroups.debuff.statReduction', items: ['BT_STAT|ST_ATK', 'BT_STAT|ST_DEF', 'BT_STAT|ST_SPEED', 'BT_STAT|ST_CRITICAL_RATE', 'BT_STAT|ST_CRITICAL_DMG_RATE', 'BT_STAT|ST_BUFF_CHANCE', 'BT_STAT|ST_BUFF_RESIST', 'BT_STAT|ST_AVOID', 'BT_STAT|ST_ACCURACY'] },
   { title: 'characters.effectsGroups.debuff.cc', items: ['BT_FREEZE', 'BT_STONE', 'BT_STUN', 'BT_SILENCE', 'BT_AGGRO', 'BT_MARKING'] },
   { title: 'characters.effectsGroups.debuff.dot', items: ['BT_DOT_BURN', 'BT_DOT_BURN_IR', 'BT_DOT_CURSE', 'BT_DOT_CURSE_IR', 'BT_DOT_BLEED', 'BT_DOT_BLEED_IR', 'BT_DOT_POISON', 'BT_DOT_LIGHTNING', 'BT_DOT_ETERNAL_BLEED', 'BT_DETONATE'] },
-  { title: 'characters.effectsGroups.debuff.utility', items: ['BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_SEAL_COUNTER', 'BT_SEALED', 'BT_SEALED_IR', 'BT_SEALED_RESURRECTION', 'BT_SEAL_ADDITIVE_ATTACK', 'BT_STATBUFF_CONVERT_TO_STATDEBUFF', 'BT_STEAL_BUFF', 'BT_REMOVE_BUFF', 'IG_Buff_BuffdurationReduce', 'IG_Buff_DeBuffdurationIncrease', 'BT_SEALED_RECEIVE_HEAL', 'BT_WG_DMG', 'BT_FIXED_DAMAGE', 'BT_RESOURCE_DOWN'] },
+  { title: 'characters.effectsGroups.debuff.utility', items: ['BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_SEAL_COUNTER', 'BT_SEALED', 'BT_SEALED_IR', 'BT_SEALED_RESURRECTION', 'BT_SEAL_ADDITIVE_ATTACK', 'BT_STATBUFF_CONVERT_TO_STATDEBUFF', 'BT_STEAL_BUFF', 'BT_REMOVE_BUFF', 'IG_Buff_BuffdurationReduce', 'IG_Buff_DeBuffdurationIncrease', 'BT_SEALED_RECEIVE_HEAL', 'BT_WG_DMG', 'BT_FIXED_DAMAGE', 'BT_RESOURCE_DOWN','DMG_REDUCE_RATE_DOWN'] },
   { title: 'characters.effectsGroups.debuff.unique', items: ['UNIQUE_MARTYRDOM', 'UNIQUE_IRREGULAR_INFECTION'] },
 ]
 
