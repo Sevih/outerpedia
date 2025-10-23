@@ -24,7 +24,7 @@ export default function Footer() {
           </Link>
 
           <Link
-            href="https://discord.com/invite/xUcrH7H8jA"
+            href="https://discord.gg/outerplaneglobal"
             aria-label="Outerplane Official Discord"
             target="_blank"
             rel="noopener noreferrer"

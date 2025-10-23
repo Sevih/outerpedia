@@ -250,22 +250,109 @@
     "phase2": {
       "bossName": "Maxwell",
       "overview": [
-        "Coming Soon"
+        "S3: AoE, grants {B/BT_STAT|ST_ATK} {B/BT_STAT|ST_SPEED} {B/BT_STAT|ST_DEF} for 3 turns.",
+        "S2: AoE, grants {B/BT_STAT|ST_CRITICAL_RATE_IR} 2 turns.",
+        "S1: Single, prioritizes the Frontline unit. {B/BT_IMMUNE_IR} 1 turn if the target is not a {C/Defender}.",
+        "Increases damage taken from {C/Mage} and even more from {C/Mage} {E/Earth}.",
+        "Reduce effectiveness and criticalhit chance of all {C/Striker}.",
+        "Takes 300% {D/BT_WG_DMG} if {D/BT_DOT_POISON}.",
+        "Reduce damage dealt against {E/Earth} heroes and takes increased damage from them.",
+        "Increase damage dealt against {E/Fire} heroes and reduces damage taken from them.",
+        "{D/BT_FIXED_DAMAGE} and {D/BT_DOT_CURSE}, cannot exceed 20,000. (Stage 5+).",
+        "Enrage (every 50K damage taken) : AoE, {D/BT_REMOVE_BUFF} all buff and ignoring defense (damage increase everytimes he enraged).",
+        "The best way to deal with him is to chain break"
       ],
       "teams": {
         "team1": {
-          "label": "",
-          "icon": "IG_Buff_Effect_2000120_Interruption.webp",
+          "label": "Full Earth Team",
+          "icon": "earth.webp",
+          "video": {
+            "id": "rfWf4ytqWW8",
+            "title": "Outerplane - The Madman's Laboratory - 11.4M Points by Sevih"
+          },
+          "geas-active": [
+            "1-3B",
+            "2-3B",
+            "2-1B",
+            "1-5M"
+          ],
           "setup": [
-            
+            [
+              "Ryu Lion"
+            ],
+            [
+              "Notia"
+            ],
+            [
+              "Charlotte"
+            ],
+            [
+              "Kappa",
+              "Hanbyul Lee"
+            ]
           ]
-          
         },
         "team2": {
-          "label": "",
-          "icon": "IG_Buff_Effect_2000119_Interruption.webp",
+          "label": "Laine team",
+          "icon": "dark.webp",
+          "video": {
+            "id": "Szgkhaza1jI",
+            "title": "Maxell Guild Raid with Maxwell DPS by XITangoIX"
+          },
+          "geas-active": [
+            "1-3B",
+            "2-3B",
+            "2-1B",
+            "1-5M"
+          ],
           "setup": [
-            
+            [
+              "Maxwell",
+              "Demiurge Astei",
+              "Ame"
+            ],
+            [
+              "Laine"
+            ],
+            [
+              "Eternal",
+              "Dahlia"
+            ],
+            [
+              "Skadi",
+              "Tamara"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Speed Tuning : Maxwell > Laine > Skadi > Eternal"
+            },
+            {
+              "type": "p",
+              "string": "Chain Order : Eternal > Laine > Maxwell > Skadi"
+            },
+            {
+              "type": "p",
+              "string": "Maxwell S1 + Laine S3 + Skadi S2 musn't exceed 50K damage (you don't want the boss to strike you with his enrage move)"
+            },
+            {
+              "type": "p",
+              "string": "Remove Eternal EE : you don't want her to get an extra turn"
+            },
+            {
+              "type": "p",
+              "string": "Break rotation"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Maxwell prio : S3 > S2 Burn Lv 2 > S1",
+                "Laine : Only S1 for getting priority",
+                "Skadi : Only S1 Burn Lv 1 exept for first break when she will use Chain attack",
+                "Eternal : Use S3 once to speed down the boss then use Chain attack on the other break"
+              ]
+            }
           ]
         }
       }
