@@ -284,7 +284,7 @@
       "TargetTeamType": "NONE",
       "buff": [],
       "cd": null,
-      "debuff": "FIX_DAMAGE",
+      "debuff": "BT_FIXED_DAMAGE",
       "description": [
         "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals fixed damage equal to <color=#28d9ed>[Buff_V_2000044_chain_1_1]</color> of the target's Max Health.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000044_backup_1_1]</color> chance to reduce the target's <color=#28d9ed>Speed</color> for <color=#28d9ed>[Buff_T_2000044_backup_1_1] turn(s)</color>."
       ],

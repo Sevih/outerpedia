@@ -1570,8 +1570,23 @@
     "weight": "50 kg",
     "story": {
       "en": "This is Ember, a Demibeast who proudly calls herself a ‘Pioneer Knight.'\\nShe says she's had all sorts of mysterious adventures alongside her master—sailing into unknown worlds, battling giant sea monsters, even foiling the schemes of someone who looked just like a princess from a faraway kingdom.\\n\\nThere are plenty more tales where that came from, but... wouldn't it be more fun to hear them directly from her yourself?",
-      "jp": "自らを開拓騎士と名乗る獣人のエンバー様です。\\nエンバー様はこれまで師匠と共に、不思議な体験をしてきたそうです。正体不明の世界へと足を踏み入れ、大海で巨大なタコと戦い、ある国の王女にそっくりな者の陰謀を打ち破るなど——さまざまな出来事を経験されたとか。\\n\\nこのほかにも多くのお話がありますが......残りはぜひ、オーナーご自身の耳で確かめてみてはいかがでしょうか?",
+      "jp": "自らを開拓騎士と名乗る獣人のエンバー獣人のエンバーさんです。\\nエンバーさんはこれまで師匠と共に、不思議な体験をしてきたそうです。正体不明の世界へと足を踏み入れ、大海で巨大なタコと戦い、ある国の王女にそっくりな者の陰謀を打ち破るなど——さまざまな出来事を経験されたとか。\\n\\nこのほかにも多くのお話がありますが......残りはぜひ、マスターご自身の耳で確かめてみてはいかがでしょうか?",
       "kr": "자신을 개척기사라 부르는 수인 엠버 님입니다.\\n엠버 님 께서는 그동안 스승님과 함께 신비한 경험을 했다고 합니다. 정체불명의 세계로 들어가 망망대해에서 거대한 문어와 싸우고, 어느 나라의 왕녀를 닮은 사람의 음모도 파훼하는 등. 여러 일들을 겪었다고 하시네요.\\n\\n이외에도 많은 이야기를 하셨지만, 나머지는 오너께서 직접 들어 보시는 건 어떨까요?"
+    }
+  },
+  "Viella": {
+    "fullname": {
+      "en": "Viella",
+      "jp": "ビエラ",
+      "kr": "비엘라"
+    },
+    "birthday": "04/01",
+    "height": "161 cm",
+    "weight": "48 kg",
+    "story": {
+      "en": "Viella is one of the Archdemon who holds the most extreme ideology among her kind.\\nBorn with the innate power of Bane, she suffers from constant, excruciating pain — a torment that has twisted her values beyond recognition.\\nTo rationalize her agony, she came to believe that poison itself is a revelation from [Mother Mirsha] — a divine truth that must be spread to all living beings.\\nFor thousands of years, Eliza has watched Viella's ravings and became convinced that her dear sister had succumbed to madness. Out of compassion, Elise tried countless times to heal her...\\n\\nBut in no Worldline has Viella's delusion ever been cured. After all <Color=#FFBF00>it was never a delusion to begin with</color>.",
+      "jp": "ビエラは魔王の中でも最も過激な思想を持つ魔族です。\\n「劇毒」という先天的な権能がもたらす慢性的な苦痛。その痛みに歪められた彼女の価値観は、毒こそが〈母メルシャの啓示〉であると正当化し、あらゆる生命体にそれを広めるべきと語るようになりました。\\n数千年もの間ビエラの狂言を見守ってきたエリーゼ様は、それを精神の病と確信し、姉妹同然のビエラを癒そうとしましたが......\\n\\nどの世界線においても、彼女の妄想は癒されたことがありません。なぜなら、それは最初から<Color=#FFBF00>妄想ではなかった</color>のですから。",
+      "kr": "비엘라는 마왕 중에서도 가장 극단적인 사상을 가진 마족입니다.\\n극독이라는 선천적인 권능이 주는 만성적 고통. 이에 일그러진 그녀의 가치관은, 독이야말로 [어머니 메르샤의 계시]라 합리화하고 이를 온 생명체에게 퍼뜨려야 한다 말하는 지경에 이르렀습니다. \\n비엘라가 쏟아내는 광언을 수 천년 동안 지켜본 엘리제 님은 이를 정신병이라 확신하고, 자매와 다름없는 비엘라를 치유하려 했으나...... \\n\\n어느 세계선에서도 그녀의 망상병이 치유된 적은 없습니다. 애초에, 그것은 <Color=#FFBF00>망상이 아니었으니까</Color>요."
     }
   },
   "Demiurge Luna": {
