@@ -29,6 +29,23 @@ export const oldChangelog = [
   {
     date: "2025-10-23",
     title: {
+      en: "The Madman's Laboratory Guild Raid",
+      jp: "狂人の研究室 ギルドレイド",
+      kr: "The Madman's Laboratory 길드 레이드",
+    } as LString,
+    type: "update",
+    url: "/guides/guild-raid/madman-laboratory",
+    content: [
+      {
+        en: "The Madman's Laboratory guild raid updated for october 2025 version.",
+        jp: "狂人の研究室 ギルドレイドが2025年10月版にアップデートされました。",
+        kr: "The Madman's Laboratory 길드 레이드가 2025년 10월 버전으로 업데이트되었습니다.",
+      } as LString,
+    ],
+  },
+  {
+    date: "2025-10-23",
+    title: {
       en: "New Hero Viella",
       jp: "新ヒーロー ビエラ",
       kr: "신규 영웅 비엘라",

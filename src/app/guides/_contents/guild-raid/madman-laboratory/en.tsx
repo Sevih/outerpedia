@@ -13,11 +13,6 @@ export default function MaxwellGuidePage() {
       title="Maxwell Guild Raid Guide"
       introduction="Guild Raid guide for Maxwell. This guide covers both Phase 1 Geas Bosses and Phase 2 strategies with recommended team compositions."
       defaultVersion="default"
-      beforeVersions={
-        <div className="bg-yellow-100 text-black px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100">
-          ⚠️ This guilde raid guide isn&apos;t accurate, it&apos;s just a placeholder until the next one. Do not use it as reference ⚠️
-        </div>
-      }
       versions={{
         default: {
           label: 'Guide',

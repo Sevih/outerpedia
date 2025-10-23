@@ -1,7 +1,7 @@
 {
   "v1": {
-    "label": "April 2025 Version - Poison",
-    "date": "2025-04-15",
+    "label": "Oct 2025 Version",
+    "date": "2025-10-23",
     "phase1": {
       "bosses": [
         {
@@ -10,15 +10,15 @@
           "geas": {
             "1": {
               "bonus": {
-                "effect": "Reduces damage taken from enemies inflicted with Poisoned by 300%.",
-                "ratio": "-25%",
-                "image": "special",
-                "bg": "1"
+                "effect": "Increases Crit Chance of Striker allies (Irremovable).",
+                "ratio": "-70%",
+                "image": "Striker",
+                "bg": "3"
               },
               "malus": {
-                "effect": "At the end of the Boss Monster's turn, reduces Chain Points of allies by -10",
+                "effect": "Increases the Attack of boss monsters by 30%",
                 "ratio": "+20%",
-                "image": "Boss",
+                "image": "Atk",
                 "bg": "1"
               }
             },
@@ -52,7 +52,7 @@
             },
             "4": {
               "bonus": {
-                "effect": "Increases damage against enemies inflicted with Poisoned",
+                "effect": "Increases damage against enemies inflicted with Poisoned by 200%.",
                 "ratio": "-25%",
                 "image": "Boss",
                 "bg": "1"
@@ -80,46 +80,54 @@
             }
           },
           "notes": [
-            "Opens with {D/BT_DOT_BURN} and {D/BT_STAT|ST_DEF}.",
-            "Immune to {D/BT_STUN}."
+            "S3: AoE, grants {B/BT_STAT|ST_DEF} {B/BT_STAT|ST_ATK} for 3 turns.",
+            "S2: AoE, inflicts {D/BT_STAT|ST_DEF} 2 turns.",
+            "S1: Single, prioritizes the leftmost unit. {D/BT_STAT|ST_DEF} 2 turn if the target is a {C/Defender}",
+            "Reduce damage dealt against {E/Earth} heroes and takes increased damage from them.",
+            "Reduce effectiveness and resilience of all heroes except {E/Earth}.",
+            "Increases damage taken from {C/Striker}.",
+            "{D/BT_FIXED_DAMAGE} and {D/BT_DOT_CURSE}, cannot exceed 20,000."
           ],
           "recommended": [
             {
-              "name": "Ryu Lion",
-              "comment": "Cleanse and Burn Resist"
+              "name": "Rey",
+              "comment": "{C/Striker} dps {E/Earth}."
             },
             {
-              "name": "Ame",
-              "comment": "High burst vs Fire"
+              "name": "Noa",
+              "comment": "{C/Striker} dps {E/Earth}."
             },
             {
-              "name":"Monad Eva",
-              "comment": "Dual attack"
+              "name": "Delta",
+              "comment": "{C/Striker} dps {E/Earth}."
+            },
+            {
+              "name": "Rhona",
+              "comment": "{C/Striker} dps {E/Earth}."
             }
           ],
           "team": [
             [
-              "Ryu Lion",
-              "Ame",
-              "Rey"
+              "Viella",
+              "Saeran",
+              "Monad Eva"
             ],
             [
-              "Monad Eva",
-              "Rey"
+              "Rey",
+              "Noa"
             ],
             [
-              "Monad Eva",
-              "Rey"
+              "Rhona",
+              "Delta",
+              "Drakhan"
             ],
             [
-              "Monad Eva",
-              "Rey"
+              "Kappa",
+              "Tamara",
+              "Skadi",
+              "Hanbyul Lee"
             ]
-          ],
-          "video": {
-            "id": "abc123",
-            "title": "Molten Fang Full Auto"
-          }
+          ]
         },
         {
           "id": "02",
@@ -127,22 +135,22 @@
           "geas": {
             "1": {
               "bonus": {
-                "effect": "Increases damage against enemies inflicted with Poisoned by 200%.",
-                "ratio": "-25%",
-                "image": "Boss",
-                "bg": "1"
+                "effect": "Reduces damage taken from enemies inflicted with Poisoned by 300%.",
+                "ratio": "-45%",
+                "image": "special",
+                "bg": "2"
               },
               "malus": {
-                "effect": "Increases the Attack of boss monsters by 30%",
+                "effect": "At the end of boss monster's turn, Reduces chain point of allies by 10.",
                 "ratio": "+20%",
-                "image": "Atk",
+                "image": "Boss",
                 "bg": "1"
               }
             },
             "2": {
               "bonus": {
                 "effect": "Increases damage dealt by cursed/fixed damage by 100%",
-                "ratio": "-65%",
+                "ratio": "-70%",
                 "image": "Curse",
                 "bg": "3"
               },
@@ -155,7 +163,7 @@
             },
             "3": {
               "bonus": {
-                "effect": "Increases damage dealt to targets inflicted with break by 1000%",
+                "effect": "Increases damage dealt to targets inflicted with break by 500%",
                 "ratio": "-25%",
                 "image": "Atk",
                 "bg": "1"
@@ -197,130 +205,67 @@
             }
           },
           "notes": [
-            "Applies {D/BT_FREEZE} every 2 turns.",
-            "Reduces AP gain by 50%."
+            "S3: AoE, grants {B/BT_STAT|ST_CRITICAL_RATE} for 2 turns.",
+            "S2: AoE, inflicts {D/BT_DOT_POISON} 2 turns.",
+            "S1: Single, prioritizes the Frontline unit. {D/BT_STAT|ST_DEF} 2 turn if the target is a {C/Defender}",
+            "Reduce damage dealt against {E/Earth} heroes and takes increased damage from them.",
+            "Reduce effectiveness and resilience of all heroes except {E/Earth}.",
+            "Increases damage taken from {C/Ranger}.",
+            "{D/BT_FIXED_DAMAGE} and {D/BT_DOT_CURSE}, cannot exceed 20,000."
           ],
           "recommended": [
             {
-              "name": "Notia",
-              "comment": "Cleanser and AP booster"
+              "name": "Ryu Lion",
+              "comment": "{C/Ranger} dps {E/Earth}."
             },
             {
-              "name": "Delta",
-              "comment": "Good into slow fights"
+              "name": "Notia",
+              "comment": "{C/Ranger} sub-dps {E/Earth}."
             }
           ],
           "team": [
             [
-              "Notia",
-              "Delta"
+              "Viella",
+              "Saeran",
+              "Monad Eva"
             ],
             [
-              "Rey",
+              "Ryu Lion",
+              "Demiurge Luna",
+              "Ame",
+              "Kitsune of Eternity Tamamo-no-Mae"
+            ],
+            [
+              "Notia"
+            ],
+            [
               "Kappa",
-              "Demiurge Stella"
+              "Tamara",
+              "Hanbyul Lee"
             ]
           ]
         }
       ]
     },
     "phase2": {
-      "bossName":"Maxwell",
+      "bossName": "Maxwell",
       "overview": [
-        "Boss will strike with his enrage every 50K damage taken.",
-        "Takes 300% {D/BT_WG_DMG} if {D/BT_DOT_POISON}",
-        "The best way to deal with him is to chain break"
+        "Coming Soon"
       ],
       "teams": {
         "team1": {
-          "label": "Full Earth Team",
-          "icon": "earth.webp",
-          "video": {
-            "id": "rfWf4ytqWW8",
-            "title": "Outerplane - The Madman's Laboratory - 11.4M Points by Sevih"
-          },
-          "geas-active": [
-            "1-3B",
-            "2-3B",
-            "2-1B",
-            "1-5M"
-          ],
+          "label": "",
+          "icon": "IG_Buff_Effect_2000120_Interruption.webp",
           "setup": [
-            [
-              "Ryu Lion"
-            ],
-            [
-              "Notia"
-            ],
-            [
-              "Charlotte"
-            ],
-            [
-              "Kappa",
-              "Hanbyul Lee"
-            ]
+            
           ]
+          
         },
         "team2": {
-          "label": "Laine team",
-          "icon": "dark.webp",
-          "video": {
-            "id": "Szgkhaza1jI",
-            "title": "Maxell Guild Raid with Maxwell DPS by XITangoIX"
-          },
-          "geas-active": [
-            "1-3B",
-            "2-3B",
-            "2-1B",
-            "1-5M"
-          ],
+          "label": "",
+          "icon": "IG_Buff_Effect_2000119_Interruption.webp",
           "setup": [
-            [
-              "Maxwell",
-              "Demiurge Astei", "Ame"
-            ],
-            [
-              "Laine"
-            ],
-            [
-              "Eternal",
-              "Dahlia"
-            ],
-            [
-              "Skadi",
-              "Tamara"
-            ]
-          ],
-          "note": [
-            {
-              "type": "p",
-              "string": "Speed Tuning : Maxwell > Laine > Skadi > Eternal"
-            },
-            {
-              "type": "p",
-              "string": "Chain Order : Eternal > Laine > Maxwell > Skadi"
-            },
-            {
-              "type": "p",
-              "string": "Maxwell S1 + Laine S3 + Skadi S2 musn't exceed 50K damage (you don't want the boss to strike you with his enrage move)"
-            },
-            {
-              "type": "p",
-              "string": "Remove Eternal EE : you don't want her to get an extra turn"
-            },
-            {
-              "type": "p",
-              "string": "Break rotation"
-            },
-            {
-              "type": "ul",
-              "items": [
-                "Maxwell prio : S3 > S2 Burn Lv 2 > S1",
-                "Laine : Only S1 for getting priority",
-                "Skadi : Only S1 Burn Lv 1 exept for first break when she will use Chain attack",
-                "Eternal : Use S3 once to speed down the boss then use Chain attack on the other break"
-              ]
-            }
+            
           ]
         }
       }

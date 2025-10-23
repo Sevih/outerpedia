@@ -6714,6 +6714,12 @@
           "mainStat": [
             "SPD"
           ]
+        },
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
         }
       ],
       "sub": [
@@ -6721,8 +6727,7 @@
         "HP",
         "DEF",
         "ATK",
-        "EVA",
-        "RES"
+        "ACC"
       ],
       "armorSets": [
         "Speed"
