@@ -351,6 +351,149 @@ export default function TierListBase({
                     className="p-2 rounded-lg border border-gray-600 bg-gray-800 text-white placeholder-gray-400 w-full max-w-md"
                     aria-label={t('tier.ui.search.placeholder') ?? 'Search'}
                 />
+            </div>           
+
+            {/* Rarities */}
+            <div className="flex flex-col items-center gap-1 mb-6">
+                <p className="text-xs uppercase tracking-wide text-slate-300">{t('characters.filters.rarity')}</p>
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => setRarityFilter([])}
+                        className={`flex items-center justify-center h-7 px-3 rounded border ${rarityFilter.length === 0
+                            ? 'bg-cyan-500'
+                            : 'bg-gray-700'
+                            } hover:bg-cyan-600`}
+                        aria-pressed={rarityFilter.length === 0}
+                        aria-label={t('tier.ui.filter.all') ?? 'All'}
+                    >
+                        <span className="text-white text-sm font-bold">
+                            {t('tier.ui.filter.all') ?? 'All'}
+                        </span>
+                    </button>
+                    {RARITIES.map((rarity) => (
+                        <button
+                            key={rarity}
+                            onClick={() =>
+                                setRarityFilter((prev) =>
+                                    prev.includes(rarity)
+                                        ? prev.filter((r) => r !== rarity)
+                                        : [...prev, rarity]
+                                )
+                            }
+                            className={`flex items-center justify-center h-7 px-2 rounded border ${rarityFilter.includes(rarity)
+                                ? 'bg-cyan-500'
+                                : 'bg-gray-700'
+                                } hover:bg-cyan-600`}
+                            aria-pressed={rarityFilter.includes(rarity)}
+                            aria-label={`${t('tier.ui.filter.rarity') ?? 'Rarity'}: ${rarity}`}
+                        >
+                            <div className="flex items-center -space-x-1">
+                                {Array(rarity)
+                                    .fill(0)
+                                    .map((_, i) => (
+                                        <Image
+                                            key={i}
+                                            src="/images/ui/star.webp"
+                                            alt={t('tier.ui.alt.star') ?? 'star'}
+                                            width={16}
+                                            height={16}
+                                            style={{ width: 16, height: 16 }}
+                                        />
+                                    ))}
+                            </div>
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="flex justify-center gap-8 mb-6 flex-wrap">
+                {/* Elements */}
+                <div className="flex flex-col items-center gap-1">
+                    <p className="text-xs uppercase tracking-wide text-slate-300">{t('characters.filters.elements')}</p>
+                    <div className="flex gap-2">
+                        {ELEMENTS.map((el) => (
+                            <button
+                                key={el}
+                                onClick={() =>
+                                    el === 'All'
+                                        ? setElementFilter([])
+                                        : setElementFilter((prev) =>
+                                            prev.includes(el as ElementType)
+                                                ? prev.filter((v) => v !== (el as ElementType))
+                                                : [...prev, el as ElementType]
+                                        )
+                                }
+                                className={`flex items-center justify-center h-7 rounded border ${(el === 'All' && elementFilter.length === 0) ||
+                                    (el !== 'All' && elementFilter.includes(el as ElementType))
+                                    ? 'bg-cyan-500'
+                                    : 'bg-gray-700'
+                                    } hover:bg-cyan-600`}
+                                title={String(el)}
+                                aria-pressed={
+                                    (el === 'All' && elementFilter.length === 0) ||
+                                    (el !== 'All' && elementFilter.includes(el as ElementType))
+                                }
+                                aria-label={
+                                    el === 'All'
+                                        ? (t('tier.ui.filter.all') ?? 'All')
+                                        : `${t('tier.ui.filter.element') ?? 'Element'}: ${el}`
+                                }
+                            >
+                                {el === 'All' ? (
+                                    <span className="text-white text-sm font-bold">
+                                        {t('tier.ui.filter.all') ?? 'All'}
+                                    </span>
+                                ) : (
+                                    <ElementIcon element={el as ElementType} />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Classes */}
+                <div className="flex flex-col items-center gap-1">
+                    <p className="text-xs uppercase tracking-wide text-slate-300">{t('characters.filters.classes')}</p>
+                    <div className="flex gap-2">
+                        {CLASSES.map((cl) => (
+                            <button
+                                key={cl}
+                                onClick={() =>
+                                    cl === 'All'
+                                        ? setClassFilter([])
+                                        : setClassFilter((prev) =>
+                                            prev.includes(cl as classtipe)
+                                                ? prev.filter((v) => v !== (cl as classtipe))
+                                                : [...prev, cl as classtipe]
+                                        )
+                                }
+                                className={`flex items-center justify-center h-7 rounded border ${(cl === 'All' && classFilter.length === 0) ||
+                                    (cl !== 'All' && classFilter.includes(cl as classtipe))
+                                    ? 'bg-cyan-500'
+                                    : 'bg-gray-700'
+                                    } hover:bg-cyan-600`}
+                                title={String(cl)}
+                                aria-pressed={
+                                    (cl === 'All' && classFilter.length === 0) ||
+                                    (cl !== 'All' && classFilter.includes(cl as classtipe))
+                                }
+                                aria-label={
+                                    cl === 'All'
+                                        ? (t('tier.ui.filter.all') ?? 'All')
+                                        : `${t('tier.ui.filter.class') ?? 'Class'}: ${cl}`
+                                }
+                            >
+                                {cl === 'All' ? (
+                                    <span className="text-white text-sm font-bold">
+                                        {t('tier.ui.filter.all') ?? 'All'}
+                                    </span>
+                                ) : (
+                                    <ClassIcon className={cl as classtipe} />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
             </div>
 
             {/* Transcend Level Filter */}
@@ -389,92 +532,9 @@ export default function TierListBase({
                 </div>
             </div>
 
-            <div className="flex justify-center gap-8 mb-6 flex-wrap">
-                {/* Elements */}
-                <div className="flex gap-2">
-                    {ELEMENTS.map((el) => (
-                        <button
-                            key={el}
-                            onClick={() =>
-                                el === 'All'
-                                    ? setElementFilter([])
-                                    : setElementFilter((prev) =>
-                                        prev.includes(el as ElementType)
-                                            ? prev.filter((v) => v !== (el as ElementType))
-                                            : [...prev, el as ElementType]
-                                    )
-                            }
-                            className={`flex items-center justify-center h-7 rounded border ${(el === 'All' && elementFilter.length === 0) ||
-                                (el !== 'All' && elementFilter.includes(el as ElementType))
-                                ? 'bg-cyan-500'
-                                : 'bg-gray-700'
-                                } hover:bg-cyan-600`}
-                            title={String(el)}
-                            aria-pressed={
-                                (el === 'All' && elementFilter.length === 0) ||
-                                (el !== 'All' && elementFilter.includes(el as ElementType))
-                            }
-                            aria-label={
-                                el === 'All'
-                                    ? (t('tier.ui.filter.all') ?? 'All')
-                                    : `${t('tier.ui.filter.element') ?? 'Element'}: ${el}`
-                            }
-                        >
-                            {el === 'All' ? (
-                                <span className="text-white text-sm font-bold">
-                                    {t('tier.ui.filter.all') ?? 'All'}
-                                </span>
-                            ) : (
-                                <ElementIcon element={el as ElementType} />
-                            )}
-                        </button>
-                    ))}
-                </div>
-
-                {/* Classes */}
-                <div className="flex gap-2">
-                    {CLASSES.map((cl) => (
-                        <button
-                            key={cl}
-                            onClick={() =>
-                                cl === 'All'
-                                    ? setClassFilter([])
-                                    : setClassFilter((prev) =>
-                                        prev.includes(cl as classtipe)
-                                            ? prev.filter((v) => v !== (cl as classtipe))
-                                            : [...prev, cl as classtipe]
-                                    )
-                            }
-                            className={`flex items-center justify-center h-7 rounded border ${(cl === 'All' && classFilter.length === 0) ||
-                                (cl !== 'All' && classFilter.includes(cl as classtipe))
-                                ? 'bg-cyan-500'
-                                : 'bg-gray-700'
-                                } hover:bg-cyan-600`}
-                            title={String(cl)}
-                            aria-pressed={
-                                (cl === 'All' && classFilter.length === 0) ||
-                                (cl !== 'All' && classFilter.includes(cl as classtipe))
-                            }
-                            aria-label={
-                                cl === 'All'
-                                    ? (t('tier.ui.filter.all') ?? 'All')
-                                    : `${t('tier.ui.filter.class') ?? 'Class'}: ${cl}`
-                            }
-                        >
-                            {cl === 'All' ? (
-                                <span className="text-white text-sm font-bold">
-                                    {t('tier.ui.filter.all') ?? 'All'}
-                                </span>
-                            ) : (
-                                <ClassIcon className={cl as classtipe} />
-                            )}
-                        </button>
-                    ))}
-                </div>
-            </div>
-
             {/* Tabs PvE */}
-            <div className="flex justify-center mb-8">
+            <div className="flex flex-col items-center gap-1 mb-8">
+                <p className="text-xs uppercase tracking-wide text-slate-300">{t('characters.filters.roles')}</p>
                 <AnimatedTabs
                     tabs={TABS.map((t) => ({ key: t.value, label: t.label, icon: t.icon }))}
                     selected={activeTab}
@@ -520,72 +580,72 @@ export default function TierListBase({
                                 </div>
 
                                 <div className="flex flex-wrap justify-center gap-6">
-                                                    {(entries as CharacterDisplay[]).map((char, index) => {
-                                                        const slug = toKebabCase(char.Fullname)
+                                    {(entries as CharacterDisplay[]).map((char, index) => {
+                                        const slug = toKebabCase(char.Fullname)
 
-                                                        return (
-                                                            <Link
-                                                                key={char.ID}
-                                                                href={`/characters/${slug}`}
-                                                                className="w-[120px] text-center shadow hover:shadow-lg transition relative overflow-visible"
-                                                            >
-                                                                <div className="relative w-[121px] h-[232px]">
-                                                                    <div className="relative" style={{ width: '120px', height: '231px' }}>
-                                                                        {(() => {
-                                                                            const badge = getRecruitBadge(char)
-                                                                            return badge ? (
-                                                                                <Image
-                                                                                    src={badge.src}
-                                                                                    alt={badge.altKey}
-                                                                                    width={75}
-                                                                                    height={30}
-                                                                                    className="absolute top-1 left-1 z-30 object-contain"
-                                                                                    style={{ width: 75, height: 30 }}
-                                                                                />
-                                                                            ) : null
-                                                                        })()}
+                                        return (
+                                            <Link
+                                                key={char.ID}
+                                                href={`/characters/${slug}`}
+                                                className="w-[120px] text-center shadow hover:shadow-lg transition relative overflow-visible"
+                                            >
+                                                <div className="relative w-[121px] h-[232px]">
+                                                    <div className="relative" style={{ width: '120px', height: '231px' }}>
+                                                        {(() => {
+                                                            const badge = getRecruitBadge(char)
+                                                            return badge ? (
+                                                                <Image
+                                                                    src={badge.src}
+                                                                    alt={badge.altKey}
+                                                                    width={75}
+                                                                    height={30}
+                                                                    className="absolute top-1 left-1 z-30 object-contain"
+                                                                    style={{ width: 75, height: 30 }}
+                                                                />
+                                                            ) : null
+                                                        })()}
 
-                                                                        <Image
-                                                                            src={`/images/characters/portrait/CT_${char.ID}.webp`}
-                                                                            alt={char.Fullname}
-                                                                            width={120}
-                                                                            height={231}
-                                                                            className="object-cover rounded"
-                                                                            priority={['dps', 'all'].includes(activeTab) && index <= 7}
-                                                                        />
-                                                                    </div>
+                                                        <Image
+                                                            src={`/images/characters/portrait/CT_${char.ID}.webp`}
+                                                            alt={char.Fullname}
+                                                            width={120}
+                                                            height={231}
+                                                            className="object-cover rounded"
+                                                            priority={['dps', 'all'].includes(activeTab) && index <= 7}
+                                                        />
+                                                    </div>
 
-                                                                    {/* Stars - Transcend Level */}
-                                                                    <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
-                                                                        {Array(transcendLevel)
-                                                                            .fill(0)
-                                                                            .map((_, i) => (
-                                                                                <Image
-                                                                                    key={i}
-                                                                                    src="/images/ui/star.webp"
-                                                                                    alt={t('tier.ui.alt.star') ?? 'star'}
-                                                                                    width={20}
-                                                                                    height={20}
-                                                                                    style={{ width: 20, height: 20 }}
-                                                                                />
-                                                                            ))}
-                                                                    </div>
+                                                    {/* Stars - Transcend Level */}
+                                                    <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
+                                                        {Array(transcendLevel)
+                                                            .fill(0)
+                                                            .map((_, i) => (
+                                                                <Image
+                                                                    key={i}
+                                                                    src="/images/ui/star.webp"
+                                                                    alt={t('tier.ui.alt.star') ?? 'star'}
+                                                                    width={20}
+                                                                    height={20}
+                                                                    style={{ width: 20, height: 20 }}
+                                                                />
+                                                            ))}
+                                                    </div>
 
-                                                                    {/* Class / Element icons */}
-                                                                    <div className="absolute right-2 z-30" style={{ bottom: '3.125rem' }}>
-                                                                        <ClassIcon className={char.Class as classtipe} />
-                                                                    </div>
-                                                                    <div className="absolute right-1.5 z-30" style={{ bottom: '1.375rem' }}>
-                                                                        <ElementIcon element={char.Element as ElementType} />
-                                                                    </div>
+                                                    {/* Class / Element icons */}
+                                                    <div className="absolute right-2 z-30" style={{ bottom: '3.125rem' }}>
+                                                        <ClassIcon className={char.Class as classtipe} />
+                                                    </div>
+                                                    <div className="absolute right-1.5 z-30" style={{ bottom: '1.375rem' }}>
+                                                        <ElementIcon element={char.Element as ElementType} />
+                                                    </div>
 
-                                                                    <CharacterNameDisplay
-                                                                        fullname={getLocalizedFullname(char, langue)}
-                                                                    />
-                                                                </div>
-                                                            </Link>
-                                                        )
-                                                    })}
+                                                    <CharacterNameDisplay
+                                                        fullname={getLocalizedFullname(char, langue)}
+                                                    />
+                                                </div>
+                                            </Link>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         )
