@@ -25,7 +25,7 @@
         { "name": "Speed", "count": 4 }
       ]
     ],
-    "SubstatPrio": "SPD>HP>DEF>ATK>EVA>RES",
+    "SubstatPrio": "SPD>HP>DEF>ATK>ACC",
     "Note": "",
     "Talisman": [
       "Sage's Charm",
