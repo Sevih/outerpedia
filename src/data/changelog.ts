@@ -27,6 +27,23 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-10-23",
+    title: {
+      en: "New Hero Viella",
+      jp: "新ヒーロー ビエラ",
+      kr: "신규 영웅 비엘라",
+    } as LString,
+    type: "update",
+    url: "/characters/viella",
+    content: [
+      {
+        en: "Viella, who grants immunity to allies and increases the team's overall damage through Poison, is now underway.",
+        jp: "味方に免疫を付与し、毒を通じてチーム全体のダメージを増加させるビエラが登場しました。",
+        kr: "아군에게 면역을 부여하고 독을 통해 팀 전체의 데미지를 증가시키는 비엘라가 등장했습니다.",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-10-21",
     title: {
       en: "Most Used Units in Guides",
