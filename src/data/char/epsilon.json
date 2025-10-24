@@ -206,7 +206,7 @@
     },
     "SKT_ULTIMATE": {
       "name": "The World Is Ours",
-      "true_desc": "Attacks all enemies and recovers the <color=#28d9ed>Action Points</color> of the caster by <color=#28d9ed>3.5%</color> for each target damaged.\\n\\nIf the target has a <color=#28d9ed>barrier</color>, damage dealt increases.",
+      "true_desc": "Attacks all enemies and recovers the <color=#28d9ed>Action Points</color> of the caster by <color=#28d9ed>35</color> for each target damaged.\\n\\nIf the target has a <color=#28d9ed>barrier</color>, damage dealt increases.",
       "DescID": "SKILL_DESC_2000070_Skill03_LV1,SKILL_DESC_2000070_Skill03_LV1,SKILL_DESC_2000070_Skill03_LV1,SKILL_DESC_2000070_Skill03_LV1,SKILL_DESC_2000070_Skill03_LV5",
       "IconName": "Skill_Ultimate_2000070",
       "NameIDSymbol": "7003",

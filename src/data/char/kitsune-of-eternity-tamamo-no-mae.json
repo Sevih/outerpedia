@@ -220,7 +220,7 @@
     },
     "SKT_ULTIMATE": {
       "name": "All Ties Are But Dreams",
-      "true_desc": "Attacks all enemies with Heavy Strike and recovers Chain Points by <color=#28d9ed>1.5%</color>.\nAfter attacking, detonates all Cursed stacks on the target and reduces Action Points by <color=#28d9ed>80</color>.",
+      "true_desc": "Attacks all enemies with Heavy Strike and recovers Chain Points by <color=#28d9ed>15</color>.\nAfter attacking, detonates all Cursed stacks on the target and reduces Action Points by <color=#28d9ed>80</color>.",
       "DescID": "SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1",
       "IconName": "Skill_Ultimate_2000086",
       "NameIDSymbol": "8603",

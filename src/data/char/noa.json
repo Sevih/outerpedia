@@ -267,7 +267,7 @@
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>2.5%</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: The damage increases proportional to the target's <color=#28d9ed>Max Health</color>.",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>25</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: The damage increases proportional to the target's <color=#28d9ed>Max Health</color>.",
       "DescID": "SKILL_DESC_2000022_Skill04_LV1,SKILL_DESC_2000022_Skill04_LV1,SKILL_DESC_2000022_Skill04_LV1,SKILL_DESC_2000022_Skill04_LV1,SKILL_DESC_2000022_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Earth_Finish",
       "NameIDSymbol": "2204",

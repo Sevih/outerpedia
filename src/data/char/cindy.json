@@ -265,7 +265,7 @@
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>2.5%</color> Action Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Speed</color>.",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Action Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Speed</color>.",
       "DescID": "SKILL_DESC_2000031_Skill04_LV1,SKILL_DESC_2000031_Skill04_LV1,SKILL_DESC_2000031_Skill04_LV1,SKILL_DESC_2000031_Skill04_LV1,SKILL_DESC_2000031_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Water_Join",
       "NameIDSymbol": "3104",

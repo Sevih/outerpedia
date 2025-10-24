@@ -133,7 +133,7 @@
     },
     "SKT_SECOND": {
       "name": "Oath of Darkness",
-      "true_desc": "(Triggered Effect) When hit, activates <color=#28d9ed>Agile Response</color>.\\nIncreases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>50%</color>, and recovers <color=#28d9ed>Health</color> of all allies by <color=#28d9ed>10%</color> of Nella's Max Health. Then, increases Action Points of all allies except the caster by <color=#28d9ed>2.5%</color>.",
+      "true_desc": "(Triggered Effect) When hit, activates <color=#28d9ed>Agile Response</color>.\\nIncreases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>50%</color>, and recovers <color=#28d9ed>Health</color> of all allies by <color=#28d9ed>10%</color> of Nella's Max Health. Then, increases Action Points of all allies except the caster by <color=#28d9ed>25</color>.",
       "ApproachType": "CAST_BUFF",
       "DescID": "SKILL_DESC_2000083_Skill02_LV1,SKILL_DESC_2000083_Skill02_LV1,SKILL_DESC_2000083_Skill02_LV1,SKILL_DESC_2000083_Skill02_LV1,SKILL_DESC_2000083_Skill02_LV1",
       "IconName": "Skill_Second_2000083",

@@ -278,7 +278,7 @@
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster and the next Skill Chain caster by <color=#28d9ed>2.5%</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>20%</color>.",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers Action Points of the caster and the next Skill Chain caster by <color=#28d9ed>25</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>20%</color>.",
       "DescID": "SKILL_DESC_2000056_Skill04_LV1,SKILL_DESC_2000056_Skill04_LV1,SKILL_DESC_2000056_Skill04_LV1,SKILL_DESC_2000056_Skill04_LV1,SKILL_DESC_2000056_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Earth_Join",
       "NameIDSymbol": "5604",

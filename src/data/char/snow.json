@@ -269,7 +269,7 @@
     },
     "SKT_CHAIN_PASSIVE": {
       "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>2.5%</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Speed</color>.",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: Generates <color=#28d9ed>25</color> Chain Points after attacking.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage increases proportional to the caster's <color=#28d9ed>Speed</color>.",
       "DescID": "SKILL_DESC_2000003_Skill04_LV1,SKILL_DESC_2000003_Skill04_LV1,SKILL_DESC_2000003_Skill04_LV1,SKILL_DESC_2000003_Skill04_LV1,SKILL_DESC_2000003_Skill04_LV1",
       "IconName": "Skill_ChainPassive_Water_Finish",
       "NameIDSymbol": "304",
