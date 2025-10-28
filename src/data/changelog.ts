@@ -27,6 +27,23 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-10-28",
+    title: {
+      en: "Prototype EX-78 Joint Boss",
+      jp: "試作機:EX-78 共同ボス",
+      kr: "EX-78 시범기 공동 보스",
+    } as LString,
+    type: "update",
+    url: "/guides/joint-boss/prototype-ex-78",
+    content: [
+      {
+        en: "Prototype EX-78 joint boss updated for October 2025 version.",
+        jp: "試作機:EX-78 共同ボスが2025年10月版にアップデートされました。",
+        kr: "EX-78 시범기 공동 보스가 2025년 10월 버전으로 업데이트되었습니다.",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-10-23",
     title: {
       en: "The Madman's Laboratory Guild Raid",

@@ -28,7 +28,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
         <ul className="list-disc list-inside text-neutral-300 mb-4">
           <li><strong>S1</strong>: Single, gains <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" />.</li>
           <li><strong>S2</strong>: AoE, <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE" type="debuff" /> <EffectInlineTag name="BT_STAT|ST_CRITICAL_DMG_RATE" type="debuff" /> 9 turns. <EffectInlineTag name="BT_ACTION_GAUGE" type="debuff" /> of all non-<ClassInlineTag name='Healer' /> to 0.</li>
-          <li><strong>S2</strong>: AoE, <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> then <EffectInlineTag name="BT_SEALED" type="debuff" /> 9 turns.</li>
+          <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> then <EffectInlineTag name="BT_SEALED" type="debuff" /> 9 turns.</li>
           <li><strong>Passive</strong>: Right after all attacks, does not trigger <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" />, <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> and <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />.</li>
           <li><strong>Passive</strong>: When hit by single target attack, reduce final damage taken by 70% and restore 3 weakness gauge.</li>
           <li><strong>Passive</strong>: Each time an enemy uses a non-attack action, the boss takes 10 000 damage twice as <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" />.</li>

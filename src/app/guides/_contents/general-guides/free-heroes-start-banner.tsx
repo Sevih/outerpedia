@@ -160,7 +160,7 @@ export default function BeginnerGuide() {
             <div className="flex items-center gap-x-4">
                 <div className="flex flex-wrap items-start gap-2">
                     <CharacterInlineStacked name="Tamara" />
-                    <CharacterInlineStacked name="Valentine" deco={decoration} />
+                    <CharacterInlineStacked name="Valentine" />
                     <CharacterInlineStacked name="Skadi" />
                 </div>
                 <p className="text-sm">Crit buffers</p>
@@ -234,6 +234,7 @@ export default function BeginnerGuide() {
                     <CharacterInlineStacked name="Notia" />
                     <CharacterInlineStacked name="Hilde" deco={decoration} />
                     <CharacterInlineStacked name="Charlotte" />
+                    <CharacterInlineStacked name="Fran" />
                     <CharacterInlineStacked name="Luna" />
                 </div>
                 <p className="">Niche but Special use cases</p>
