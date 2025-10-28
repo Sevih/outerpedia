@@ -50,7 +50,7 @@ export default function DahliaGuide() {
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
                 <li><strong>S1</strong>: Single target attack with <EffectInlineTag name="IG_Buff_BuffdurationIncrease" type="buff" />.</li>
                 <li><strong>S2</strong>: AoE passive skill that triggers when taking a critical hit. Applies <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> and <EffectInlineTag name="BT_FREEZE" type="debuff" /> for 5 turns.</li>
-                <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_SEAL_COUNTER" type="debuff" />, <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" />, and <EffectInlineTag name="BT_FREEZE" type="debuff" /> for 5 turns.</li>
+                <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_SEAL_COUNTER" type="buff" />, <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" />, and <EffectInlineTag name="BT_FREEZE" type="debuff" /> for 5 turns.</li>
                 <li><strong>Passive</strong>: At the start of battle and her turn, gains <EffectInlineTag name="BT_IMMUNE" type="buff" /> for 1 turn.</li>
                 <li><strong>Passive</strong>: Grants <EffectInlineTag name="UNIQUE_DAHLIA_A" type="buff" /> to enemy team with class-specific effects:
                   <ul className="ml-8 mt-1 space-y-1">

@@ -3,7 +3,7 @@ import { getTenantServer } from '@/tenants/tenant.server'
 import CharactersPage from './CharactersPageClient'
 
 import characters from '@/data/_allCharacters.json'
-import type { Character } from '@/types/character'
+import type { CharacterLite } from '@/types/types'
 import { toKebabCase } from '@/utils/formatText'
 import { getMonthYear } from '@/utils/getMonthYear'
 
@@ -50,7 +50,7 @@ export default async function Page() {
   const base = `https://${domain}`
 
   // Compte (léger) pour le JSON-LD
-  const list = characters as Character[]
+  const list = characters as unknown as CharacterLite[]
   const count = list.length
 
   // Un petit échantillon (max 8) pour le JSON-LD sans tout alourdir
@@ -96,18 +96,18 @@ export default async function Page() {
 
       <div className="p-3">
         {/* ✅ H1 visible avec les mots-clés du title */}
-      <h1 className="text-3xl font-bold mb-2">
+      <h1 className="text-3xl font-bold">
         {langKey === 'jp' ? 'キャラクター一覧' 
          : langKey === 'kr' ? '캐릭터 목록'
          : 'Outerplane Characters Database'}
       </h1>
       
       {/* ✅ Date visible pour matcher le title */}
-      <p className="text-sm text-gray-400 mb-6">
+      <h2 className="text-sm text-gray-400 text-center mb-2">
         {langKey === 'jp' ? `${monthYear} 更新`
          : langKey === 'kr' ? `${monthYear} 업데이트`
          : `Updated ${monthYear}`}
-      </p>
+      </h2>
         <CharactersPage langue={langKey} />
       </div>
     </>

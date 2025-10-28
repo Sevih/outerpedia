@@ -113,6 +113,7 @@ const kr = {
   'characters.profile.birthday': '생일',
   'characters.profile.height': '키',
   'characters.profile.weight': '체중',
+  'characters.profile.voice_actor': '성우',
   'characters.basestats.note': '표시된 기본 스탯은 캐릭터가 강화된 상태를 기준으로 합니다',
   'characters.basestats.stage6': '6단계 (Lv.100)',
   "exclusive_equipment_title": "{name}의 전용 장비",

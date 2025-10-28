@@ -1,17 +1,18 @@
 {
   "ID": "2000053",
   "Fullname": "Demiurge Stella",
+  "Fullname_jp": "デミウルゴス ステラ",
+  "Fullname_kr": "데미우르고스 스텔라",
   "Rarity": 3,
   "Element": "Light",
+  "Class": "Striker",
+  "SubClass": "Bruiser",
+  "rank": "S",
   "rank_pvp": "S",
   "role": "dps",
-  "gift": "Science",
   "tags": [
     "premium"
   ],
-  "Class": "Striker",
-  "SubClass": "Bruiser",
-  "video": "UBgH1dn4Z_g",
   "skill_priority": {
     "First": {
       "prio": 2
@@ -23,328 +24,298 @@
       "prio": 3
     }
   },
+  "Chain_Type": "Finish",
+  "video": "UBgH1dn4Z_g",
+  "VoiceActor": "VA. Laura Post",
+  "VoiceActor_kr": "CV.박지윤",
+  "VoiceActor_jp": "CV. 田中理恵",
+  "gift": "Science",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+10% Ally Team Defense\n+25 Action Points at battle start\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 방어력 +10%\n입장 시 AP +25\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の防御力+10%\n戦闘開始時、AP+25\nチェーンパッシブの\nWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+10% Ally Defense\n+1 turn ally barriers at battle start\n(Proportional to target's Health)",
-    "4_1_jp": "ATK DEF HP +16%\n味方の防御力+10%\n戦闘開始時、AP+25\nチェーンパッシブの\nWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 방어력 +10%\n입장 시 AP +25\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
-    "6_jp": "ATK DEF HP +30%\n防御力10%UP\n戦闘開始時、味方のシールド+1ターン\n(対象のHPが高いほどシールド量UP)",
-    "6_kr": "ATK DEF HP +30%\n아군 방어력 +10%\n전투 시작 시 아군 실드 +1턴\n(대상 체력 비례)"
+    "6_kr": "ATK DEF HP +30%\n아군 방어력 +10%\n전투 시작 시 아군 실드 +1턴\n(대상 체력 비례)",
+    "6_jp": "ATK DEF HP +30%\n防御力10%UP\n戦闘開始時、味方のシールド+1ターン\n(対象のHPが高いほどシールド量UP)"
   },
-  "Chain_Type": "Finish",
   "skills": {
     "SKT_FIRST": {
-      "name": "Flight of Abraxas",
-      "true_desc": "Attacks all enemies.\\nIf it is the caster's turn, obtains <color=#28d9ed>1</color> <color=#28d9ed>Desire to Dominate (Unique Resource)</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals greater damage to boss monsters.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000053_Skill01_LV1,SKILL_DESC_2000053_Skill01_LV1,SKILL_DESC_2000053_Skill01_LV1,SKILL_DESC_2000053_Skill01_LV1,SKILL_DESC_2000053_Skill01_LV1",
-      "IconName": "Skill_First_2000053",
       "NameIDSymbol": "5301",
-      "RangeType": "ALL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000053",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000053_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_SHIELD_BASED_CASTER",
-        "BT_ADDITIVE_TURN"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 120,
-          "effect": "Adds barrier (Proportional to Health)\\nGains 1 additional Desire to Dominate",
-          "level": 1,
-          "effect_kr": "실드 추가 (체력 비례)\\n지배욕 획득량 +1",
-          "effect_jp": "シールド追加\\n(HPが高いほどシールド量UP)\\n【支配欲】獲得量+1"
-        },
-        "SKT_BURST_2": {
-          "cost": 180,
-          "effect": "Increases damage",
-          "level": 2,
-          "effect_kr": "피해 증가",
-          "effect_jp": "ダメージUP"
-        },
-        "SKT_BURST_3": {
-          "cost": 300,
-          "effect": "Extra Turn\\nGains 4 additional Desire to Dominate",
-          "level": 3,
-          "effect_kr": "추가 턴\\n지배욕 추가 획득 +4",
-          "effect_jp": "追加ターン\\n【支配欲】追加獲得+4"
-        }
-      },
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks all enemies.\\nIf it is the caster's turn, obtains <color=#28d9ed>[Buff_V_2000053_1_1]</color> <color=#28d9ed>Desire to Dominate (Unique Resource)</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals greater damage to boss monsters."
-      ],
+      "name": "Flight of Abraxas",
+      "name_kr": "아브락사스의 비상",
+      "name_jp": "アブラクサスの飛翔",
+      "true_desc": "Attacks all enemies.\\nIf it is the caster's turn, obtains <color=#28d9ed>1</color> <color=#28d9ed>Desire to Dominate (Unique Resource)</color>.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals greater damage to boss monsters.",
+      "true_desc_kr": "적 전체를 공격합니다.\\n자신의 턴이라면 <color=#28d9ed>고유 자원 : 지배욕</color>을 <color=#28d9ed>1개</color> 획득합니다.\\n이 스킬은 자신의 <color=#28d9ed>최대 체력</color>이 높을수록 피해가 증가하고, 보스에게는 더 큰 피해를 입힙니다.",
+      "true_desc_jp": "敵全体にダメージを与える。\\n自分のターンの場合、<color=#28d9ed>【固有資源:支配欲】</color>を<color=#28d9ed>1個</color>獲得する。\\nこのスキルは自分の<color=#28d9ed>最大HP</color>が高いほど与えるダメージがUPし、ボスの場合、より大ダメージを与える。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
-        ],
-        "3": [
-          "+15% damage"
-        ],
-        "4": [
-          "+15% damage"
-        ],
-        "5": [
-          "+20% damage"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
         ],
         "2_kr": [
           "피해량 +10%",
           "WG 감소량 +1"
         ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "3": [
+          "+15% damage"
+        ],
+        "3_kr": [
+          "피해량 +15%"
+        ],
         "3_jp": [
           "ダメージ+15%"
         ],
-        "3_kr": [
+        "4": [
+          "+15% damage"
+        ],
+        "4_kr": [
           "피해량 +15%"
         ],
         "4_jp": [
           "ダメージ+15%"
         ],
-        "4_kr": [
-          "피해량 +15%"
-        ],
-        "5_jp": [
-          "ダメージ+20%"
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
       "wgr": 1,
-      "name_kr": "아브락사스의 비상",
-      "name_jp": "アブラクサスの飛翔",
-      "true_desc_kr": "적 전체를 공격합니다.\\n자신의 턴이라면 <color=#28d9ed>고유 자원 : 지배욕</color>을 <color=#28d9ed>1개</color> 획득합니다.\\n이 스킬은 자신의 <color=#28d9ed>최대 체력</color>이 높을수록 피해가 증가하고, 보스에게는 더 큰 피해를 입힙니다.",
-      "true_desc_jp": "敵全体にダメージを与える。\\n自分のターンの場合、<color=#28d9ed>【固有資源:支配欲】</color>を<color=#28d9ed>1個</color>獲得する。\\nこのスキルは自分の<color=#28d9ed>最大HP</color>が高いほど与えるダメージがUPし、ボスの場合、より大ダメージを与える。"
+      "cd": null,
+      "buff": [
+        "BT_SHIELD_BASED_CASTER",
+        "BT_ADDITIVE_TURN"
+      ],
+      "debuff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Adds barrier (Proportional to Health)\\nGains 1 additional Desire to Dominate",
+          "effect_kr": "실드 추가 (체력 비례)\\n지배욕 획득량 +1",
+          "effect_jp": "シールド追加\\n(HPが高いほどシールド量UP)\\n【支配欲】獲得量+1",
+          "cost": 120,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Increases damage",
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP",
+          "cost": 180,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Extra Turn\\nGains 4 additional Desire to Dominate",
+          "effect_kr": "추가 턴\\n지배욕 추가 획득 +4",
+          "effect_jp": "追加ターン\\n【支配欲】追加獲得+4",
+          "cost": 300,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Merciless God",
-      "true_desc": "(Passive Effect) Immune to <color=#28d9ed>Stunned</color>, <color=#28d9ed>Frozen</color>, <color=#28d9ed>Petrified</color>, and <color=#28d9ed>Priority Reduction</color>. Damage taken from single attacks is reduced by <color=#28d9ed>20%</color>.\\n(Triggered Effect) Prepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of the skill.\\nAttacks all enemies and increases the caster's Priority by <color=#28d9ed>25%</color> when <color=#28d9ed>Revenge</color> is activated. This skill deals damage proportional to the caster's <color=#28d9ed>Max Health</color>.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000053_Skill02_LV1,SKILL_DESC_2000053_Skill02_LV1,SKILL_DESC_2000053_Skill02_LV1,SKILL_DESC_2000053_Skill02_LV1,SKILL_DESC_2000053_Skill02_LV1",
-      "IconName": "Skill_Second_2000053",
       "NameIDSymbol": "5302",
-      "RangeType": "ALL",
-      "SkillSubType": "PASSIVE",
+      "IconName": "Skill_Second_2000053",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000053_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "SYS_BUFF_REVENGE",
-        "BT_ACTION_GAUGE"
-      ],
-      "cd": "1",
-      "debuff": [],
-      "description": [
-        "(Passive Effect) Immune to <color=#28d9ed>Stunned</color>, <color=#28d9ed>Frozen</color>, <color=#28d9ed>Petrified</color>, and <color=#28d9ed>Priority Reduction</color>. Damage taken from single attacks is reduced by <color=#28d9ed>[Buff_V_2000053_2_1]</color>.\\n(Triggered Effect) Prepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of the skill.\\nAttacks all enemies and increases the caster's Priority by <color=#28d9ed>[Buff_V_2000053_2_3]</color> when <color=#28d9ed>Revenge</color> is activated. This skill deals damage proportional to the caster's <color=#28d9ed>Max Health</color>."
-      ],
+      "name": "Merciless God",
+      "name_kr": "관대하지 않은 신",
+      "name_jp": "寛大ならざる神",
+      "true_desc": "(Passive Effect) Immune to <color=#28d9ed>Stunned</color>, <color=#28d9ed>Frozen</color>, <color=#28d9ed>Petrified</color>, and <color=#28d9ed>Priority Reduction</color>. Damage taken from single attacks is reduced by <color=#28d9ed>20%</color>.\\n(Triggered Effect) Prepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of the skill.\\nAttacks all enemies and increases the caster's Priority by <color=#28d9ed>25%</color> when <color=#28d9ed>Revenge</color> is activated. This skill deals damage proportional to the caster's <color=#28d9ed>Max Health</color>.",
+      "true_desc_kr": "(패시브 효과) <color=#28d9ed>스턴</color>, <color=#28d9ed>빙결</color>, <color=#28d9ed>석화</color>, <color=#28d9ed>행동 게이지 감소</color>의 영향을 받지 않고, 단일 공격으로 받는 피해를 <color=#28d9ed>20%</color> 감소시킵니다.\\n(발동 효과) 스킬의 <color=#28d9ed>쿨타임</color>마다 <color=#28d9ed>복수</color> 효과를 준비합니다.\\n<color=#28d9ed>복수</color> 발동 시 적 전체를 공격하고 자신의 행동 게이지가 <color=#28d9ed>25%</color> 증가합니다. 이 스킬은 자신의 <color=#28d9ed>최대 체력</color>이 높을수록 피해가 증가합니다.",
+      "true_desc_jp": "(パッシブ効果)<color=#28d9ed>スタン</color>、<color=#28d9ed>凍結</color>、<color=#28d9ed>石化</color>、<color=#28d9ed>行動ゲージDOWN</color>の影響を受けず、単体攻撃で受けるダメージを<color=#28d9ed>20%</color>DOWNさせる。\\n(発動効果)<color=#28d9ed>スキルターン</color>ごとに<color=#28d9ed>【復讐】</color>を発動する。\\n<color=#28d9ed>【復讐】</color>:敵全体にダメージを与え、自分の行動ゲージが<color=#28d9ed>25%</color>UPする。このスキルは自分の<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "-10% damage taken"
         ],
+        "3_kr": [
+          "받는 피해 -10%"
+        ],
+        "3_jp": [
+          "受けるダメージ-10%"
+        ],
         "4": [
           "+20% damage"
+        ],
+        "4_kr": [
+          "피해량 +20%"
+        ],
+        "4_jp": [
+          "ダメージ+20%"
         ],
         "5": [
           "+20% damage",
           "-20% damage taken"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "受けるダメージ-10%"
-        ],
-        "3_kr": [
-          "받는 피해 -10%"
-        ],
-        "4_jp": [
-          "ダメージ+20%"
-        ],
-        "4_kr": [
-          "피해량 +20%"
+        "5_kr": [
+          "피해량 +20%",
+          "받는 피해 -20%"
         ],
         "5_jp": [
           "ダメージ+20%",
           "受けるダメージ-20%"
-        ],
-        "5_kr": [
-          "피해량 +20%",
-          "받는 피해 -20%"
         ]
       },
+      "cd": "1",
       "wgr": 2,
-      "name_kr": "관대하지 않은 신",
-      "name_jp": "寛大ならざる神",
-      "true_desc_kr": "(패시브 효과) <color=#28d9ed>스턴</color>, <color=#28d9ed>빙결</color>, <color=#28d9ed>석화</color>, <color=#28d9ed>행동 게이지 감소</color>의 영향을 받지 않고, 단일 공격으로 받는 피해를 <color=#28d9ed>20%</color> 감소시킵니다.\\n(발동 효과) 스킬의 <color=#28d9ed>쿨타임</color>마다 <color=#28d9ed>복수</color> 효과를 준비합니다.\\n<color=#28d9ed>복수</color> 발동 시 적 전체를 공격하고 자신의 행동 게이지가 <color=#28d9ed>25%</color> 증가합니다. 이 스킬은 자신의 <color=#28d9ed>최대 체력</color>이 높을수록 피해가 증가합니다.",
-      "true_desc_jp": "(パッシブ効果)<color=#28d9ed>スタン</color>、<color=#28d9ed>凍結</color>、<color=#28d9ed>石化</color>、<color=#28d9ed>行動ゲージDOWN</color>の影響を受けず、単体攻撃で受けるダメージを<color=#28d9ed>20%</color>DOWNさせる。\\n(発動効果)<color=#28d9ed>スキルターン</color>ごとに<color=#28d9ed>【復讐】</color>を発動する。\\n<color=#28d9ed>【復讐】</color>:敵全体にダメージを与え、自分の行動ゲージが<color=#28d9ed>25%</color>UPする。このスキルは自分の<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。"
+      "buff": [
+        "SYS_BUFF_REVENGE",
+        "BT_ACTION_GAUGE"
+      ],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
-      "name": "The World Is Mine",
-      "true_desc": "<color=#28d9ed>Requires 5 Desire to Dominate (Unique Resource) to use this skill.</color>\\nAttacks all enemies, and inflicts <color=#28d9ed>Petrified</color> for <color=#28d9ed>1 turn(s)</color>. The Petrified effect ignores Resilience.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals increased damage to boss monsters.",
-      "DescID": "SKILL_DESC_2000053_Skill03_LV1,SKILL_DESC_2000053_Skill03_LV1,SKILL_DESC_2000053_Skill03_LV1,SKILL_DESC_2000053_Skill03_LV1,SKILL_DESC_2000053_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000053",
       "NameIDSymbol": "5303",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000053",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000053_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": null,
-      "debuff": [
-        "BT_STONE"
-      ],
-      "description": [
-        "<color=#28d9ed>Requires [Buff_V_2000053_3_1] Desire to Dominate (Unique Resource) to use this skill.</color>\\nAttacks all enemies, and inflicts <color=#28d9ed>Petrified</color> for <color=#28d9ed>[Buff_T_2000053_3_3] turn(s)</color>. The Petrified effect ignores Resilience.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals increased damage to boss monsters."
-      ],
+      "name": "The World Is Mine",
+      "name_kr": "더 월드 이즈 마인",
+      "name_jp": "ワールド・イズ・マイン",
+      "true_desc": "<color=#28d9ed>Requires 5 Desire to Dominate (Unique Resource) to use this skill.</color>\\nAttacks all enemies, and inflicts <color=#28d9ed>Petrified</color> for <color=#28d9ed>1 turn(s)</color>. The Petrified effect ignores Resilience.\\nDamage dealt increases proportional to the caster's <color=#28d9ed>Max Health</color> and deals increased damage to boss monsters.",
+      "true_desc_kr": "<color=#28d9ed>고유 자원 : 지배욕 5개 보유 시 사용 가능합니다.</color>\\n적 전체를 공격하고, <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>석화</color>를 부여합니다. 석화 효과는 대상의 효과 저항을 무시합니다.\\n이 스킬은 자신의 <color=#28d9ed>최대 체력</color>이 높을수록 피해가 증가하고, 보스에게는 더 큰 피해를 입힙니다.",
+      "true_desc_jp": "このスキルは<color=#28d9ed>【固有資源:支配欲】が5個ある場合、使用できる。</color>\\n敵全体にダメージを与え、<color=#28d9ed>石化</color>を<color=#28d9ed>1ターン</color>の間付与する。石化は対象の効果抵抗を無視する。\\nこのスキルは自分の<color=#28d9ed>最大HP</color>が高いほどダメージがUPし、ボスの場合、より大ダメージを与える。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+15% damage"
-        ],
-        "4": [
-          "+15% damage"
-        ],
-        "5": [
-          "+20% damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
+        "3": [
+          "+15% damage"
+        ],
+        "3_kr": [
+          "피해량 +15%"
         ],
         "3_jp": [
           "ダメージ+15%"
         ],
-        "3_kr": [
+        "4": [
+          "+15% damage"
+        ],
+        "4_kr": [
           "피해량 +15%"
         ],
         "4_jp": [
           "ダメージ+15%"
         ],
-        "4_kr": [
-          "피해량 +15%"
-        ],
-        "5_jp": [
-          "ダメージ+20%"
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
+      "cd": "35",
       "wgr": 4,
-      "name_kr": "더 월드 이즈 마인",
-      "name_jp": "ワールド・イズ・マイン",
-      "true_desc_kr": "<color=#28d9ed>고유 자원 : 지배욕 5개 보유 시 사용 가능합니다.</color>\\n적 전체를 공격하고, <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>석화</color>를 부여합니다. 석화 효과는 대상의 효과 저항을 무시합니다.\\n이 스킬은 자신의 <color=#28d9ed>최대 체력</color>이 높을수록 피해가 증가하고, 보스에게는 더 큰 피해를 입힙니다.",
-      "true_desc_jp": "このスキルは<color=#28d9ed>【固有資源:支配欲】が5個ある場合、使用できる。</color>\\n敵全体にダメージを与え、<color=#28d9ed>石化</color>を<color=#28d9ed>1ターン</color>の間付与する。石化は対象の効果抵抗を無視する。\\nこのスキルは自分の<color=#28d9ed>最大HP</color>が高いほどダメージがUPし、ボスの場合、より大ダメージを与える。"
+      "buff": [],
+      "debuff": [
+        "BT_STONE"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals <color=#28d9ed>10%</color> of the target's Max Health as fixed damage to the target. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>.",
-      "DescID": "SKILL_DESC_2000053_Skill04_LV1,SKILL_DESC_2000053_Skill04_LV1,SKILL_DESC_2000053_Skill04_LV1,SKILL_DESC_2000053_Skill04_LV1,SKILL_DESC_2000053_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Light_Finish",
       "NameIDSymbol": "5304",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Light_Finish",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": [],
-      "cd": null,
-      "debuff": "BT_FIXED_DAMAGE",
-      "description": [
-        "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals <color=#28d9ed>[Buff_V_2000053_chain_1_1]</color> of the target's Max Health as fixed damage to the target. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000053_backup_1_1]</color>."
-      ],
-      "dual_buff": "BT_ACTION_GAUGE",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, deals <color=#28d9ed>10%</color> of the target's Max Health as fixed damage to the target. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 대상에게 대상 최대 체력의 <color=#28d9ed>10%</color> 만큼의 고정 피해를 입힙니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 회복합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、対象に最大HPの<color=#28d9ed>10%</color>の固定ダメージを与える。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>20%</color>UPする。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 대상에게 대상 최대 체력의 <color=#28d9ed>10%</color> 만큼의 고정 피해를 입힙니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 회복합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、対象に最大HPの<color=#28d9ed>10%</color>の固定ダメージを与える。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>20%</color>UPする。"
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "BT_REVERSE_HEAL_BASED_TARGET"
+      ],
+      "dual_buff": [
+        "BT_ACTION_GAUGE"
+      ]
     }
-  },
-  "rank": "S",
-  "Fullname_kr": "데미우르고스 스텔라",
-  "Fullname_jp": "デミウルゴス ステラ",
-  "VoiceActor": "VA. Laura Post",
-  "VoiceActor_jp": "CV.田中理恵",
-  "VoiceActor_kr": "CV.박지윤"
+  }
 }

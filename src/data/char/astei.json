@@ -1,14 +1,15 @@
 {
   "ID": "2000058",
   "Fullname": "Astei",
+  "Fullname_jp": "アステ",
+  "Fullname_kr": "아스테",
   "Rarity": 3,
   "Element": "Fire",
-  "rank_pvp": "D",
-  "gift": "Natural Object",
-  "role": "sustain",
   "Class": "Healer",
   "SubClass": "Reliever",
-  "video": "2bwlrUTxOHQ",
+  "rank": "S",
+  "rank_pvp": "D",
+  "role": "sustain",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -20,321 +21,288 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Join",
+  "video": "2bwlrUTxOHQ",
+  "VoiceActor": "VA. None",
+  "VoiceActor_kr": "CV.김예림",
+  "VoiceActor_jp": "CV. 柚木涼香",
+  "gift": "Natural Object",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+5% Ally Team Health\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 체력 +5%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方のHP+5%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+5% Ally Team Health\n+25 Action Points at battle start",
-    "4_1_jp": "ATK DEF HP +16%\n味方のHP+5%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 체력 +5%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n味方のHP+5%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n아군 체력 +5%\n입장 시 AP +25"
+    "6_kr": "ATK DEF HP +30%\n아군 체력 +5%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n味方のHP+5%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "The Stars in Heaven",
-      "true_desc": "Attacks an enemy. Has a <color=#28d9ed>70%</color> chance to remove <color=#28d9ed>1</color> debuff from the caster after attacking.\\nWhen used on the caster's turn, has a <color=#28d9ed>30%</color> chance to activate <color=#28d9ed>The Flowers on Earth</color>. Increases the activation chance of <color=#28d9ed>The Flowers on Earth</color> by <color=#28d9ed>40%</color> if the caster has a buff.\\n\\nUnaffected by and has no effect on the cooldown of <color=#28d9ed>The Flowers on Earth</color>.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000058_Skill01_LV1,SKILL_DESC_2000058_Skill01_LV1,SKILL_DESC_2000058_Skill01_LV1,SKILL_DESC_2000058_Skill01_LV1,SKILL_DESC_2000058_Skill01_LV1",
-      "IconName": "Skill_First_2000058",
       "NameIDSymbol": "5801",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000058",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000058_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_REMOVE_DEBUFF"
-      ],
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy. Has a <color=#28d9ed>[Buff_C_2000058_1_3]</color> chance to remove <color=#28d9ed>[Buff_V_2000058_1_3]</color> debuff from the caster after attacking.\\nWhen used on the caster's turn, has a <color=#28d9ed>[Buff_V_2000058_1_1]</color> chance to activate <color=#28d9ed>The Flowers on Earth</color>. Increases the activation chance of <color=#28d9ed>The Flowers on Earth</color> by <color=#28d9ed>40%</color> if the caster has a buff.\\n\\nUnaffected by and has no effect on the cooldown of <color=#28d9ed>The Flowers on Earth</color>."
-      ],
+      "name": "The Stars in Heaven",
+      "name_kr": "하늘에는 별이",
+      "name_jp": "天にありては星",
+      "true_desc": "Attacks an enemy. Has a <color=#28d9ed>70%</color> chance to remove <color=#28d9ed>1</color> debuff from the caster after attacking.\\nWhen used on the caster's turn, has a <color=#28d9ed>30%</color> chance to activate <color=#28d9ed>The Flowers on Earth</color>. Increases the activation chance of <color=#28d9ed>The Flowers on Earth</color> by <color=#28d9ed>40%</color> if the caster has a buff.\\n\\nUnaffected by and has no effect on the cooldown of <color=#28d9ed>The Flowers on Earth</color>.",
+      "true_desc_kr": "적을 공격합니다. 공격 후 <color=#28d9ed>70%</color> 확률로 자신의 약화 효과를 <color=#28d9ed>1</color>개 해제합니다.\\n자신의 턴에 사용 시, <color=#28d9ed>30%</color> 확률로 <color=#28d9ed>땅에는 꽃이</color>를 사용합니다. 강화 효과 보유 시에는 <color=#28d9ed>땅에는 꽃이</color>의 발동 확률이 <color=#28d9ed>40%</color> 증가합니다.\\n\\n<color=#28d9ed>땅에는 꽃이</color> 스킬 쿨타임의 영향을 주거나 받지 않습니다.",
+      "true_desc_jp": "敵単体にダメージを与える。攻撃後、<color=#28d9ed>70%</color>の確率で自分の弱体効果を<color=#28d9ed>1</color>個解除する。\\nこのスキルを自分のターンに使用した場合、 <color=#28d9ed>30%</color>の確率で<color=#28d9ed>【地にありては花】</color>を発動する。自分に強化効果がある場合、<color=#28d9ed>【地にありては花】</color>の発動確率が<color=#28d9ed>40%</color>UPする。\\n\\nこのスキルで発動された<color=#28d9ed>【地にありては花】</color>は特殊スキル【地にありては花】のスキルターンに影響を受けない。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+15% effect chance"
-        ],
-        "4": [
-          "+10% damage"
-        ],
-        "5": [
-          "+15% effect chance"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "効果発生率+15%"
+        "3": [
+          "+15% effect chance"
         ],
         "3_kr": [
           "효과 발동 확률 +15%"
         ],
-        "4_jp": [
-          "ダメージ+10%"
+        "3_jp": [
+          "効果発生率+15%"
+        ],
+        "4": [
+          "+10% damage"
         ],
         "4_kr": [
           "피해량 +10%"
         ],
-        "5_jp": [
-          "効果発生率+15%"
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "5": [
+          "+15% effect chance"
         ],
         "5_kr": [
           "효과 발동 확률 +15%"
+        ],
+        "5_jp": [
+          "効果発生率+15%"
         ]
       },
       "wgr": 1,
-      "name_kr": "하늘에는 별이",
-      "name_jp": "天にありては星",
-      "true_desc_kr": "적을 공격합니다. 공격 후 <color=#28d9ed>70%</color> 확률로 자신의 약화 효과를 <color=#28d9ed>1</color>개 해제합니다.\\n자신의 턴에 사용 시, <color=#28d9ed>30%</color> 확률로 <color=#28d9ed>땅에는 꽃이</color>를 사용합니다. 강화 효과 보유 시에는 <color=#28d9ed>땅에는 꽃이</color>의 발동 확률이 <color=#28d9ed>40%</color> 증가합니다.\\n\\n<color=#28d9ed>땅에는 꽃이</color> 스킬 쿨타임의 영향을 주거나 받지 않습니다.",
-      "true_desc_jp": "敵単体にダメージを与える。攻撃後、<color=#28d9ed>70%</color>の確率で自分の弱体効果を<color=#28d9ed>1</color>個解除する。\\nこのスキルを自分のターンに使用した場合、 <color=#28d9ed>30%</color>の確率で<color=#28d9ed>【地にありては花】</color>を発動する。自分に強化効果がある場合、<color=#28d9ed>【地にありては花】</color>の発動確率が<color=#28d9ed>40%</color>UPする。\\n\\nこのスキルで発動された<color=#28d9ed>【地にありては花】</color>は特殊スキル【地にありては花】のスキルターンに影響を受けない。"
-    },
-    "SKT_SECOND": {
-      "name": "The Flowers on Earth",
-      "true_desc": "<color=#28d9ed>Heals</color> all allies except the caster for <color=#28d9ed>15%</color> of Astei's Max Health and generates <color=#28d9ed>25</color> <color=#28d9ed>Action Points</color>.",
-      "ApproachType": "HEAL",
-      "DescID": "SKILL_DESC_2000058_Skill02_LV1,SKILL_DESC_2000058_Skill02_LV1,SKILL_DESC_2000058_Skill02_LV1,SKILL_DESC_2000058_Skill02_LV1,SKILL_DESC_2000058_Skill02_LV5",
-      "IconName": "Skill_Second_2000058",
-      "NameIDSymbol": "5802",
-      "RangeType": "ALL",
-      "SkillSubType": "ACTIVE",
-      "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000058_Skill02",
-      "TargetTeamType": "ME",
+      "cd": null,
       "buff": [
-        "BT_AP_CHARGE",
-        "BT_IMMUNE",
         "BT_REMOVE_DEBUFF"
       ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Target Action Points +25",
-          "level": 1,
-          "effect_kr": "대상 AP +25",
-          "effect_jp": "対象のAP+25"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Include the caster in healing targets",
-          "level": 2,
-          "effect_kr": "체력 회복 대상에 자신 포함",
-          "effect_jp": "HP回復対象に\\n自分も含む"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "+2 turns Immunity for all allies\\nRemoves 1 debuff",
-          "level": 3,
-          "effect_kr": "아군 전체 면역 +2턴\\n약화 효과 1개 해제",
-          "effect_jp": "味方全体に免疫+2ターン\\n味方全体の弱体効果解除+1"
-        }
-      },
-      "cd": "3",
-      "debuff": [],
-      "description": [
-        "<color=#28d9ed>Heals</color> all allies except the caster for <color=#28d9ed>[Buff_V_2000058_2_1]</color> of Astei's Max Health and generates <color=#28d9ed>[Buff_V_2000058_2_2]</color> <color=#28d9ed>Action Points</color>."
-      ],
+      "debuff": []
+    },
+    "SKT_SECOND": {
+      "NameIDSymbol": "5802",
+      "IconName": "Skill_Second_2000058",
+      "SkillType": "SKT_SECOND",
+      "name": "The Flowers on Earth",
+      "name_kr": "땅에는 꽃이",
+      "name_jp": "地にありては花",
+      "true_desc": "<color=#28d9ed>Heals</color> all allies except the caster for <color=#28d9ed>15%</color> of Astei's Max Health and generates <color=#28d9ed>25</color> <color=#28d9ed>Action Points</color>.",
+      "true_desc_kr": "자신을 제외한 아군 전체의 <color=#28d9ed>체력</color>을 아스테 최대 체력의 <color=#28d9ed>15%</color> 만큼 회복시키고, <color=#28d9ed>AP</color>를 <color=#28d9ed>25</color> 증가시킵니다.",
+      "true_desc_jp": "自分を除く味方全体の<color=#28d9ed>HP</color>を【アステ】の最大HPの<color=#28d9ed>15%</color>回復させ、自分を除く味方全体に<color=#28d9ed>AP</color>を<color=#28d9ed>25</color>獲得させる。",
       "enhancement": {
         "2": [
           "+5% healing"
         ],
+        "2_kr": [
+          "체력 회복량 +5%"
+        ],
+        "2_jp": [
+          "HP回復量+5%"
+        ],
         "3": [
           "+5% healing"
         ],
+        "3_kr": [
+          "체력 회복량 +5%"
+        ],
+        "3_jp": [
+          "HP回復量+5%"
+        ],
         "4": [
           "+10% healing"
+        ],
+        "4_kr": [
+          "체력 회복량 +10%"
+        ],
+        "4_jp": [
+          "HP回復量+10%"
         ],
         "5": [
           "+10% Priority"
         ],
-        "2_jp": [
-          "HP回復量+5%"
-        ],
-        "2_kr": [
-          "체력 회복량 +5%"
-        ],
-        "3_jp": [
-          "HP回復量+5%"
-        ],
-        "3_kr": [
-          "체력 회복량 +5%"
-        ],
-        "4_jp": [
-          "HP回復量+10%"
-        ],
-        "4_kr": [
-          "체력 회복량 +10%"
+        "5_kr": [
+          "행동 게이지 +10%"
         ],
         "5_jp": [
           "行動ゲージ10%UP"
-        ],
-        "5_kr": [
-          "행동 게이지 +10%"
         ]
       },
-      "wgr": null,
-      "name_kr": "땅에는 꽃이",
-      "name_jp": "地にありては花",
-      "true_desc_kr": "자신을 제외한 아군 전체의 <color=#28d9ed>체력</color>을 아스테 최대 체력의 <color=#28d9ed>15%</color> 만큼 회복시키고, <color=#28d9ed>AP</color>를 <color=#28d9ed>2.5%</color> 증가시킵니다.",
-      "true_desc_jp": "自分を除く味方全体の<color=#28d9ed>HP</color>を【アステ】の最大HPの<color=#28d9ed>15%</color>回復させ、自分を除く味方全体に<color=#28d9ed>AP</color>を<color=#28d9ed>2.5%</color>獲得させる。"
+      "cd": "3",
+      "buff": [
+        "BT_AP_CHARGE",
+        "BT_ACTION_GAUGE",
+        "BT_IMMUNE",
+        "BT_REMOVE_DEBUFF"
+      ],
+      "debuff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Target Action Points +25",
+          "effect_kr": "대상 AP +25",
+          "effect_jp": "対象のAP+25",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Include the caster in healing targets",
+          "effect_kr": "체력 회복 대상에 자신 포함",
+          "effect_jp": "HP回復対象に\\n自分も含む",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "+2 turns Immunity for all allies\\nRemoves 1 debuff",
+          "effect_kr": "아군 전체 면역 +2턴\\n약화 효과 1개 해제",
+          "effect_jp": "味方全体に免疫+2ターン\\n味方全体の弱体効果解除+1",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_ULTIMATE": {
-      "name": "The Love in Our Hearts",
-      "true_desc": "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>20%</color> of Astei's Max Health and grants <color=#28d9ed>Immunity</color> for <color=#28d9ed>2 turn(s)</color>.\\nInflicts reduced <color=#28d9ed>Critical Hit Chance</color> on all enemies for <color=#28d9ed>2 turn(s)</color>. This effect ignores the target's Resilience.",
-      "DescID": "SKILL_DESC_2000058_Skill03_LV1,SKILL_DESC_2000058_Skill03_LV1,SKILL_DESC_2000058_Skill03_LV1,SKILL_DESC_2000058_Skill03_LV1,SKILL_DESC_2000058_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000058",
       "NameIDSymbol": "5803",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "HEAL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000058",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000058_Skill03",
-      "TargetTeamType": "TEAM",
-      "buff": [
-        "BT_IMMUNE"
-      ],
-      "cd": "5",
-      "debuff": [
-        "BT_STAT|ST_CRITICAL_RATE"
-      ],
-      "description": [
-        "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>[Buff_V_2000058_3_1]</color> of Astei's Max Health and grants <color=#28d9ed>Immunity</color> for <color=#28d9ed>[Buff_T_2000058_3_2] turn(s)</color>.\\nInflicts reduced <color=#28d9ed>Critical Hit Chance</color> on all enemies for <color=#28d9ed>[Buff_T_2000058_3_3] turn(s)</color>. This effect ignores the target's Resilience."
-      ],
+      "name": "The Love in Our Hearts",
+      "name_kr": "사람에게는 사랑이",
+      "name_jp": "人にありては愛",
+      "true_desc": "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>20%</color> of Astei's Max Health and grants <color=#28d9ed>Immunity</color> for <color=#28d9ed>2 turn(s)</color>.\\nInflicts reduced <color=#28d9ed>Critical Hit Chance</color> on all enemies for <color=#28d9ed>2 turn(s)</color>. This effect ignores the target's Resilience.",
+      "true_desc_kr": "아군 전체의 <color=#28d9ed>체력</color>을 아스테 최대 체력의 <color=#28d9ed>20%</color> 만큼 회복시키고, <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>면역</color>을 부여합니다.\\n적 전체의 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다. 이 효과는 대상의 효과 저항을 무시합니다.",
+      "true_desc_jp": "味方全体の<color=#28d9ed>HP</color>を【アステ】の最大HPの<color=#28d9ed>20%</color>回復させ、味方全体に<color=#28d9ed>免疫</color>を<color=#28d9ed>2ターン</color>の間付与する。\\n敵全体の<color=#28d9ed>会心率</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。この効果は対象の効果抵抗を無視する。",
       "enhancement": {
         "2": [
           "+10% healing"
+        ],
+        "2_kr": [
+          "체력 회복량 +10%"
+        ],
+        "2_jp": [
+          "HP回復量+10%"
         ],
         "3": [
           "-1 turn Skill Cooldown"
         ],
-        "4": [
-          "+10% healing"
-        ],
-        "5": [
-          "+1 turn effect duration"
-        ],
-        "2_jp": [
-          "HP回復量+10%"
-        ],
-        "2_kr": [
-          "체력 회복량 +10%"
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
         ],
         "3_jp": [
           "スキルターン-1ターン"
         ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "HP回復量+10%"
+        "4": [
+          "+10% healing"
         ],
         "4_kr": [
           "체력 회복량 +10%"
         ],
-        "5_jp": [
-          "効果ターン+1ターン"
+        "4_jp": [
+          "HP回復量+10%"
+        ],
+        "5": [
+          "+1 turn effect duration"
         ],
         "5_kr": [
           "효과 지속 +1턴"
+        ],
+        "5_jp": [
+          "効果ターン+1ターン"
         ]
       },
-      "wgr": null,
-      "name_kr": "사람에게는 사랑이",
-      "name_jp": "人にありては愛",
-      "true_desc_kr": "아군 전체의 <color=#28d9ed>체력</color>을 아스테 최대 체력의 <color=#28d9ed>20%</color> 만큼 회복시키고, <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>면역</color>을 부여합니다.\\n적 전체의 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다. 이 효과는 대상의 효과 저항을 무시합니다.",
-      "true_desc_jp": "味方全体の<color=#28d9ed>HP</color>を【アステ】の最大HPの<color=#28d9ed>20%</color>回復させ、味方全体に<color=#28d9ed>免疫</color>を<color=#28d9ed>2ターン</color>の間付与する。\\n敵全体の<color=#28d9ed>会心率</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。この効果は対象の効果抵抗を無視する。"
+      "cd": "5",
+      "buff": [
+        "BT_IMMUNE"
+      ],
+      "debuff": [
+        "BT_STAT|ST_CRITICAL_RATE"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, <color=#28d9ed>heals</color> the caster and the ally with the lowest Health by <color=#28d9ed>15%</color>. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Cursed</color> for <color=#28d9ed>2 turns</color>.",
-      "DescID": "SKILL_DESC_2000058_Skill04_LV1,SKILL_DESC_2000058_Skill04_LV1,SKILL_DESC_2000058_Skill04_LV1,SKILL_DESC_2000058_Skill04_LV1,SKILL_DESC_2000058_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Fire_Join",
       "NameIDSymbol": "5804",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Fire_Join",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: After attacking, <color=#28d9ed>heals</color> the caster and the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000054_chain_1_1]</color>. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000058_backup_1_1]</color> chance to inflict <color=#28d9ed>Cursed</color> for <color=#28d9ed>[Buff_T_2000058_backup_1_1] turns</color>."
-      ],
-      "dual_debuff": "BT_DOT_CURSE",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, <color=#28d9ed>heals</color> the caster and the ally with the lowest Health by <color=#28d9ed>15%</color>. \\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Cursed</color> for <color=#28d9ed>2 turns</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군과 자신의 <color=#28d9ed>체력</color>을 <color=#28d9ed>15%</color> 회복시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 대상에게 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、残りHPが最も低い味方と自分の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復させる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、対象に<color=#28d9ed>70%</color>の確率で<color=#28d9ed>呪い</color>を<color=#28d9ed>2ターン</color>の間付与する。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군과 자신의 <color=#28d9ed>체력</color>을 <color=#28d9ed>15%</color> 회복시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 대상에게 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、残りHPが最も低い味方と自分の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復させる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、対象に<color=#28d9ed>70%</color>の確率で<color=#28d9ed>呪い</color>を<color=#28d9ed>2ターン</color>の間付与する。"
+      "cd": null,
+      "buff": [],
+      "debuff": [],
+      "dual_debuff": [
+        "BT_DOT_CURSE"
+      ]
     }
-  },
-  "rank": "S",
-  "Fullname_kr": "아스테",
-  "Fullname_jp": "アステ",
-  "VoiceActor": "VA. None",
-  "VoiceActor_jp": "CV.아스테 성우 이름",
-  "VoiceActor_kr": "CV.김예림"
+  }
 }

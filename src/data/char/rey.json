@@ -1,17 +1,19 @@
 {
   "ID": "2000087",
   "Fullname": "Rey",
+  "Fullname_jp": "レイ",
+  "Fullname_kr": "레이",
   "Rarity": 3,
   "Element": "Earth",
-  "rank_pvp": "A",
-  "gift": "Natural Object",
-  "role": "dps",
   "Class": "Striker",
-  "tags": [
-    "ignore-defense","free"
-  ],
   "SubClass": "Attacker",
-  "video": "NbkIux5uYro",
+  "rank": "A",
+  "rank_pvp": "A",
+  "role": "dps",
+  "tags": [
+    "ignore-defense",
+    "free"
+  ],
   "skill_priority": {
     "First": {
       "prio": 3
@@ -23,329 +25,304 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Start",
+  "video": "NbkIux5uYro",
+  "VoiceActor": "VA. Ratana Therakulsathit",
+  "VoiceActor_kr": "CV. Ratana Therakulsathit",
+  "VoiceActor_jp": "CV. 飯田ヒカル",
+  "gift": "Natural Object",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+4% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 피해 +4%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の会心ダメージ+4%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start",
-    "4_1_jp": "ATK DEF HP +16%\n味方の会心ダメージ+4%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 치명 피해 +4%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n味方の会心ダメージ+4%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n아군 치명 피해 +4%\n입장 시 AP +25"
+    "6_kr": "ATK DEF HP +30%\n아군 치명 피해 +4%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n味方の会心ダメージ+4%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Start",
   "skills": {
     "SKT_FIRST": {
-      "name": "Blade Dance",
-      "true_desc": "Attacks an enemy. On the caster's turn, gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Natural Talent</color>.If the target is <color=#28d9ed>Water</color>, gains <color=#28d9ed>20</color> <color=#28d9ed>AP</color>.",
-      "ApproachTime": "ATTACK",
-      "DescID": "SKILL_DESC_2000087_Skill01_LV1,SKILL_DESC_2000087_Skill01_LV1,SKILL_DESC_2000087_Skill01_LV1,SKILL_DESC_2000087_Skill01_LV1,SKILL_DESC_2000087_Skill01_LV1",
-      "IconName": "Skill_First_2000087",
       "NameIDSymbol": "8701",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000087",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000087_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_AP_CHARGE"
-      ],
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy, and when it is the caster's turn, obtains <color=#28d9ed>[Buff_V_2000087_1_1]</color> <color=#28d9ed>Natural Talent (Unique Resource)</color>. "
-      ],
+      "name": "Blade Dance",
+      "name_kr": "블레이드 댄스",
+      "name_jp": "ブレードダンス",
+      "true_desc": "Attacks an enemy. On the caster's turn, gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Natural Talent</color>.If the target is <color=#28d9ed>Water</color>, gains <color=#28d9ed>20</color> <color=#28d9ed>AP</color>.",
+      "true_desc_kr": "적을 공격하고 자신의 턴이라면 <color=#28d9ed>고유 자원 : 타고난 재능</color>을 <color=#28d9ed>1개</color> 획득합니다.\\n대상이 <color=#28d9ed>수속성</color> 일 경우 자신의 <color=#28d9ed>AP</color>를 <color=#28d9ed>20</color> 획득합니다.",
+      "true_desc_jp": "敵を攻撃し、自分のターンなら<color=#28d9ed>固有資源:天賦の才能</color>を<color=#28d9ed>1</color>獲得。対象が<color=#28d9ed>水属性</color>の場合、自身の<color=#28d9ed>AP</color>を<color=#28d9ed>20</color>獲得。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
-        ],
-        "3": [
-          "+10% damage"
-        ],
-        "4": [
-          "+1 Natural Talent obtained"
-        ],
-        "5": [
-          "+20% damage"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
         ],
         "2_kr": [
           "피해량 +10%",
           "WG 감소량 +1"
         ],
-        "3_jp": [
-          "ダメージ+10%"
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "3": [
+          "+10% damage"
         ],
         "3_kr": [
           "피해량 +10%"
         ],
-        "4_jp": [
-          "【生まれつきの才能】の獲得量+1"
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "4": [
+          "+1 Natural Talent obtained"
         ],
         "4_kr": [
           "타고난 재능 획득량 +1"
         ],
-        "5_jp": [
-          "ダメージ+20%"
+        "4_jp": [
+          "【生まれつきの才能】の獲得量+1"
+        ],
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
       "wgr": 1,
-      "name_kr": "블레이드 댄스",
-      "name_jp": "ブレードダンス",
-      "true_desc_kr": "적을 공격하고 자신의 턴이라면 <color=#28d9ed>고유 자원 : 타고난 재능</color>을 <color=#28d9ed>1개</color> 획득합니다.\\n대상이 <color=#28d9ed>수속성</color> 일 경우 자신의 <color=#28d9ed>AP</color>를 <color=#28d9ed>2%</color> 획득합니다.",
-      "true_desc_jp": "敵を攻撃し、自分のターンなら<color=#28d9ed>固有資源:天賦の才能</color>を<color=#28d9ed>1</color>獲得。対象が<color=#28d9ed>水属性</color>の場合、自身の<color=#28d9ed>AP</color>を<color=#28d9ed>2%</color>獲得。"
+      "cd": null,
+      "buff": [
+        "BT_AP_CHARGE"
+      ],
+      "debuff": []
     },
     "SKT_SECOND": {
-      "name": "Pulse, Release!",
-      "true_desc": "Attacks an enemy. On the caster's turn, gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Natural Talent</color>. This skill ignores <color=#28d9ed>30%</color> of <color=#28d9ed>Defense</color> of <color=#28d9ed>Water</color> or <color=#28d9ed>Healer</color> enemies. <color=#ffd732>Irregular Monsters</color>: Deals increased damage.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000087_Skill02_LV1,SKILL_DESC_2000087_Skill02_LV1,SKILL_DESC_2000087_Skill02_LV1,SKILL_DESC_2000087_Skill02_LV1,SKILL_DESC_2000087_Skill02_LV1",
-      "IconName": "Skill_Second_2000087",
       "NameIDSymbol": "8702",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Second_2000087",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000087_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Increases damage\\nReduces cooldown of Pulse, Release! by 2 turns",
-          "level": 1,
-          "effect_kr": "피해 증가\\n펄스 전개 쿨타임 -2턴",
-          "effect_jp": "ダメージUP\\n【パルス全開】のスキルターン-2ターン"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "+1 Weakness Gauge damage",
-          "level": 2,
-          "effect_kr": "WG 감소량 +1",
-          "effect_jp": "WGダメージ+1"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "Changes to Enhanced Skill\\nExpands attack range\\nResets skill cooldown of Faster than Bullets!",
-          "level": 3,
-          "effect_kr": "강화 스킬로 교체\\n공격 범위 확대\\n총알보다 빠르게! 쿨타임 초기화",
-          "effect_jp": "強化スキルに変更\\n攻撃範囲拡大\\n【弾丸よりも早く!】の\\nスキルターン初期化"
-        }
-      },
-      "cd": "4",
-      "debuff": [],
-      "description": [
-        "Attacks an enemy, and when it is the caster's turn, obtains <color=#28d9ed>[Buff_V_2000087_2_1]</color> <color=#28d9ed>Natural Talent (Unique Resource)</color>.\\n\\nThis skill ignores the Defense of <color=#28d9ed>Water</color> or <color=#28d9ed>Healer</color> enemies by <color=#28d9ed>30%</color>."
-      ],
+      "name": "Pulse, Release!",
+      "name_kr": "펄스 전개",
+      "name_jp": "パルス全開",
+      "true_desc": "Attacks an enemy. On the caster's turn, gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Natural Talent</color>. This skill ignores <color=#28d9ed>30%</color> of <color=#28d9ed>Defense</color> of <color=#28d9ed>Water</color> or <color=#28d9ed>Healer</color> enemies. <color=#ffd732>Irregular Monsters</color>: Deals increased damage.",
+      "true_desc_kr": "적을 공격하고 자신의 턴이라면 <color=#28d9ed>고유 자원 : 타고난 재능</color>을 <color=#28d9ed>1개</color> 획득합니다. \\n\\n이 스킬은 <color=#28d9ed>수속성</color> 또는 <color=#28d9ed>회복형</color> 적의 방어력을 <color=#28d9ed>30%</color> 무시합니다.\\n\\n<color=#ffd732>이레귤러 몬스터</color> 공격 시 피해량이 증가합니다.",
+      "true_desc_jp": "敵を攻撃し、自分のターンなら<color=#28d9ed>固有資源:天賦の才能</color>を<color=#28d9ed>1</color>獲得。 このスキルは<color=#28d9ed>水属性</color>または<color=#28d9ed>回復型</color>の敵の<color=#28d9ed>防御力</color>を<color=#28d9ed>30%</color>無視。 <color=#ffd732>イレギュラーモンスター</color>へのダメージ増加。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "-1 turn Skill Cooldown"
         ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
         "4": [
           "+15% damage"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
         ],
         "5": [
           "+1 Natural Talent obtained",
           "+15% damage"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
-        ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "ダメージ+15%"
-        ],
-        "4_kr": [
+        "5_kr": [
+          "타고난 재능 획득량 +1",
           "피해량 +15%"
         ],
         "5_jp": [
           "【生まれつきの才能】の獲得量+1",
           "ダメージ+15%"
-        ],
-        "5_kr": [
-          "타고난 재능 획득량 +1",
-          "피해량 +15%"
         ]
       },
+      "cd": "4",
       "wgr": 1,
-      "name_kr": "펄스 전개",
-      "name_jp": "パルス全開",
-      "true_desc_kr": "적을 공격하고 자신의 턴이라면 <color=#28d9ed>고유 자원 : 타고난 재능</color>을 <color=#28d9ed>1개</color> 획득합니다. \\n\\n이 스킬은 <color=#28d9ed>수속성</color> 또는 <color=#28d9ed>회복형</color> 적의 방어력을 <color=#28d9ed>30%</color> 무시합니다.\\n\\n<color=#ffd732>이레귤러 몬스터</color> 공격 시 피해량이 증가합니다.",
-      "true_desc_jp": "敵を攻撃し、自分のターンなら<color=#28d9ed>固有資源:天賦の才能</color>を<color=#28d9ed>1</color>獲得。 このスキルは<color=#28d9ed>水属性</color>または<color=#28d9ed>回復型</color>の敵の<color=#28d9ed>防御力</color>を<color=#28d9ed>30%</color>無視。 <color=#ffd732>イレギュラーモンスター</color>へのダメージ増加。"
+      "buff": [
+        "BT_COOL2_CHARGE"
+      ],
+      "debuff": [
+        "BT_WG_REVERSE_HEAL"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Increases damage\\nReduces cooldown of Pulse, Release! by 2 turns",
+          "effect_kr": "피해 증가\\n펄스 전개 쿨타임 -2턴",
+          "effect_jp": "ダメージUP\\n【パルス全開】のスキルターン-2ターン",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "+1 Weakness Gauge damage",
+          "effect_kr": "WG 감소량 +1",
+          "effect_jp": "WGダメージ+1",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Changes to Enhanced Skill\\nExpands attack range\\nResets skill cooldown of Faster than Bullets!",
+          "effect_kr": "강화 스킬로 교체\\n공격 범위 확대\\n총알보다 빠르게! 쿨타임 초기화",
+          "effect_jp": "強化スキルに変更\\n攻撃範囲拡大\\n【弾丸よりも早く!】の\\nスキルターン初期化",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_ULTIMATE": {
-      "name": "Faster than Bullets!",
-      "true_desc": "Attacks an enemy. On the caster's turn, gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Natural Talent</color>. Enemies killed by this skill that are <color=#28d9ed>Water</color> or <color=#28d9ed>Healer</color> cannot be revived, and bosses take increased damage. If holding <color=#28d9ed>5</color> <color=#28d9ed>Natural Talent</color>, consumes all to reset the cooldown of <color=#28d9ed>Faster Than a Bullet!</color> and ignore <color=#28d9ed>30%</color> <color=#28d9ed>Defense</color>. <color=#ffd732>Irregular Monsters</color>: Deals increased damage.",
-      "DescID": "SKILL_DESC_2000087_Skill03_LV1,SKILL_DESC_2000087_Skill03_LV1,SKILL_DESC_2000087_Skill03_LV1,SKILL_DESC_2000087_Skill03_LV1,SKILL_DESC_2000087_Skill03_LV5",
-      "IconName": "Skill_Ultimate_2000087",
       "NameIDSymbol": "8703",
-      "RangeType": "SINGLE",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000087",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000087_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_ADDITIVE_TURN"
-      ],
-      "cd": "4",
-      "debuff": [
-        "BT_SEALED_RESURRECTION"
-      ],
-      "description": [
-        "Attacks an enemy.\\n<color=#28d9ed>Water</color> or <color=#28d9ed>Healer</color> enemies killed by this skill cannot be Resurrected or Revived.\\nIf the caster has <color=#28d9ed>[Buff_V_2000087_3_1]</color> <color=#28d9ed>Natural Talent (Unique Resource)</color>, consumes all to <color=#28d9ed>fully</color> recover skill cooldown of <color=#28d9ed>Faster than Bullets!</color> and ignores the target's Defense by <color=#28d9ed>30%</color>."
-      ],
+      "name": "Faster than Bullets!",
+      "name_kr": "총알보다 빠르게!",
+      "name_jp": "弾丸よりも早く!",
+      "true_desc": "Attacks an enemy. On the caster's turn, gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Natural Talent</color>. Enemies killed by this skill that are <color=#28d9ed>Water</color> or <color=#28d9ed>Healer</color> cannot be revived, and bosses take increased damage. If holding <color=#28d9ed>5</color> <color=#28d9ed>Natural Talent</color>, consumes all to reset the cooldown of <color=#28d9ed>Faster Than a Bullet!</color> and ignore <color=#28d9ed>30%</color> <color=#28d9ed>Defense</color>. <color=#ffd732>Irregular Monsters</color>: Deals increased damage.",
+      "true_desc_kr": "적을 공격하고 자신의 턴이라면 <color=#28d9ed>고유 자원 : 타고난 재능</color>을 <color=#28d9ed>1개</color> 획득합니다.\\n이 스킬로 사망한 <color=#28d9ed>수속성</color> 또는 <color=#28d9ed>회복형</color> 적은 부활 및 소생이 불가능하며 보스에게는 더 큰 피해를 입힙니다.\\n<color=#28d9ed>고유 자원 : 타고난 재능</color>을 <color=#28d9ed>5개</color> 보유 시, 모두 소모하여 <color=#28d9ed>총알보다 빠르게!</color> 스킬의 쿨타임을 <color=#28d9ed>모두</color> 회복시키고 대상의 방어력을 <color=#28d9ed>30%</color> 무시합니다.\\n\\n<color=#ffd732>이레귤러 몬스터</color> 공격 시 피해량이 증가합니다.",
+      "true_desc_jp": "敵を攻撃し、自分のターンなら<color=#28d9ed>固有資源:天賦の才能</color>を<color=#28d9ed>1</color>獲得。このスキルで倒された<color=#28d9ed>水属性</color>または<color=#28d9ed>回復型</color>の敵は復活・蘇生不可、ボスには追加ダメージ。<color=#28d9ed>天賦の才能</color>を<color=#28d9ed>5</color>所持している場合、全て消費して<color=#28d9ed>「弾丸より速く!」</color>のスキルターンを全回復し、<color=#28d9ed>防御力</color>を<color=#28d9ed>30%</color>無視。<color=#ffd732>イレギュラーモンスター</color>へのダメージ増加。",
       "enhancement": {
         "2": [
           "Gains an extra turn",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+10% damage",
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "+10% damage"
-        ],
-        "5": [
-          "+20% damage"
+        "2_kr": [
+          "추가 턴 발생",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "追加ターン発生",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "추가 턴 발생",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "ダメージ+10%",
-          "スキルターン-1ターン"
+        "3": [
+          "+10% damage",
+          "-1 turn Skill Cooldown"
         ],
         "3_kr": [
           "피해량 +10%",
           "스킬 쿨타임 -1턴"
         ],
-        "4_jp": [
-          "ダメージ+10%"
+        "3_jp": [
+          "ダメージ+10%",
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "+10% damage"
         ],
         "4_kr": [
           "피해량 +10%"
         ],
-        "5_jp": [
-          "ダメージ+20%"
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
+      "cd": "4",
       "wgr": 2,
-      "name_kr": "총알보다 빠르게!",
-      "name_jp": "弾丸よりも早く!",
-      "true_desc_kr": "적을 공격하고 자신의 턴이라면 <color=#28d9ed>고유 자원 : 타고난 재능</color>을 <color=#28d9ed>1개</color> 획득합니다.\\n이 스킬로 사망한 <color=#28d9ed>수속성</color> 또는 <color=#28d9ed>회복형</color> 적은 부활 및 소생이 불가능하며 보스에게는 더 큰 피해를 입힙니다.\\n<color=#28d9ed>고유 자원 : 타고난 재능</color>을 <color=#28d9ed>5개</color> 보유 시, 모두 소모하여 <color=#28d9ed>총알보다 빠르게!</color> 스킬의 쿨타임을 <color=#28d9ed>모두</color> 회복시키고 대상의 방어력을 <color=#28d9ed>30%</color> 무시합니다.\\n\\n<color=#ffd732>이레귤러 몬스터</color> 공격 시 피해량이 증가합니다.",
-      "true_desc_jp": "敵を攻撃し、自分のターンなら<color=#28d9ed>固有資源:天賦の才能</color>を<color=#28d9ed>1</color>獲得。このスキルで倒された<color=#28d9ed>水属性</color>または<color=#28d9ed>回復型</color>の敵は復活・蘇生不可、ボスには追加ダメージ。<color=#28d9ed>天賦の才能</color>を<color=#28d9ed>5</color>所持している場合、全て消費して<color=#28d9ed>「弾丸より速く!」</color>のスキルターンを全回復し、<color=#28d9ed>防御力</color>を<color=#28d9ed>30%</color>無視。<color=#ffd732>イレギュラーモンスター</color>へのダメージ増加。"
+      "buff": [
+        "BT_COOL3_CHARGE",
+        "BT_ADDITIVE_TURN"
+      ],
+      "debuff": [
+        "BT_SEALED_RESURRECTION"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, reduces skill cooldowns of all allies by <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Recovers Action Points of the caster by <color=#28d9ed>15</color>.",
-      "DescID": "SKILL_DESC_2000087_Skill04_LV1,SKILL_DESC_2000087_Skill04_LV1,SKILL_DESC_2000087_Skill04_LV1,SKILL_DESC_2000087_Skill04_LV1,SKILL_DESC_2000087_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Earth_Start",
       "NameIDSymbol": "8704",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Earth_Start",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "BT_COOL_CHARGE",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Starter Effect</color>: After attacking, reduces skill cooldowns of all allies by <color=#28d9ed>[Buff_V_2000042_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Recovers Action Points of the caster by <color=#28d9ed>[Buff_V_2000065_backup_1_1]</color>."
-      ],
-      "dual_buff": "BT_AP_CHARGE",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, reduces skill cooldowns of all allies by <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Recovers Action Points of the caster by <color=#28d9ed>15</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 아군 전체의 스킬 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.\\n\\n<color=#ffd732>협공 효과</color> : 자신의 AP를 <color=#28d9ed>15</color> 회복합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、味方全体のスキルターンが<color=#28d9ed>1ターン</color>減少する。\\n\\n<color=#ffd732>連携効果</color>:自分のAPを<color=#28d9ed>15</color>獲得させる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 아군 전체의 스킬 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.\\n\\n<color=#ffd732>협공 효과</color> : 자신의 AP를 <color=#28d9ed>15</color> 회복합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、味方全体のスキルターンが<color=#28d9ed>1ターン</color>減少する。\\n\\n<color=#ffd732>連携効果</color>:自分のAPを<color=#28d9ed>15</color>獲得させる。"
+      "cd": null,
+      "buff": [
+        "BT_COOL_CHARGE"
+      ],
+      "debuff": [],
+      "dual_buff": [
+        "BT_AP_CHARGE"
+      ]
     }
-  },
-  "rank": "A",
-  "Fullname_kr": "레이",
-  "Fullname_jp": "レイ",
-  "VoiceActor": "VA. Ratana Therakulsathit",
-  "VoiceActor_jp": "CV. 飯田ヒカル",
-  "VoiceActor_kr": "CV. Ratana Therakulsathit"
+  }
 }

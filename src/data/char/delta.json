@@ -1,17 +1,18 @@
 {
   "ID": "2000099",
   "Fullname": "Delta",
+  "Fullname_jp": "デルタ",
+  "Fullname_kr": "델타",
   "Rarity": 3,
   "Element": "Earth",
-  "rank_pvp": "C",
-  "gift": "Science",
-  "role": "dps",
   "Class": "Striker",
+  "SubClass": "Bruiser",
+  "rank": "D",
+  "rank_pvp": "C",
+  "role": "dps",
   "tags": [
     "ignore-defense"
   ],
-  "SubClass": "Bruiser",
-  "video": "A8eKlpmjKJI",
   "skill_priority": {
     "First": {
       "prio": 2
@@ -23,331 +24,300 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Join",
+  "video": "A8eKlpmjKJI",
+  "VoiceActor": "VA. Risa Mei",
+  "VoiceActor_kr": "CV. Risa Mei",
+  "VoiceActor_jp": "CV. 井上ほの花",
+  "gift": "Science",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+5% Ally Team Defense\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 방어력 +5%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の防御力+5%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+5% Ally Team Defense\n+25 Action Points at battle start",
-    "4_1_jp": "ATK DEF HP +16%\n味方の防御力+5%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 방어력 +5%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n味方の防御力+5%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n아군 방어력 +5%\n입장 시 AP +25"
+    "6_kr": "ATK DEF HP +30%\n아군 방어력 +5%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n味方の防御力+5%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "Delta Burst",
-      "true_desc": "Attacks an enemy. When the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skill's damage dealt increases proportional to Max Health instead of Attack.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000099_Skill01_LV1,SKILL_DESC_2000099_Skill01_LV1,SKILL_DESC_2000099_Skill01_LV1,SKILL_DESC_2000099_Skill01_LV1,SKILL_DESC_2000099_Skill01_LV5",
-      "IconName": "Skill_First_2000099",
       "NameIDSymbol": "9901",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000099",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000099_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_REMOVE_DEBUFF"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 60,
-          "effect": "Increases damage",
-          "level": 1,
-          "effect_kr": "피해 증가",
-          "effect_jp": "ダメージUP"
-        },
-        "SKT_BURST_2": {
-          "cost": 90,
-          "effect": "+1 Weakness Gauge damage",
-          "level": 2,
-          "effect_kr": "WG 감소량 +1",
-          "effect_jp": "WGダメージ+1"
-        },
-        "SKT_BURST_3": {
-          "cost": 120,
-          "effect": "Changes to Enhanced Skill\\nRemoves all debuffs from the caster\\nIncreases damage",
-          "level": 3,
-          "effect_kr": "강화 스킬로 교체\\n자신의 약화 효과 모두 해제\\n피해 증가",
-          "effect_jp": "強化スキルに変更\\n自分の弱体効果をすべて解除\\nダメージUP"
-        }
-      },
-      "cd": null,
-      "debuff": [
-        "BT_WG_DMG"
-      ],
-      "description": [
-        "Attacks an enemy. When the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
-      ],
+      "name": "Delta Burst",
+      "name_kr": "델타 버스트",
+      "name_jp": "デルタバースト",
+      "true_desc": "Attacks an enemy. When the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skill's damage dealt increases proportional to Max Health instead of Attack.",
+      "true_desc_kr": "적을 공격합니다. 대상의 최대 체력이 델타 이하라면 해당 공격의 관통력이 <color=#28d9ed>30%</color> 증가합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与える。対象の最大HPが自分の最大HP以下の場合、貫通力が<color=#28d9ed>30%</color>UPする。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
-        ],
-        "3": [
-          "+10% damage"
-        ],
-        "4": [
-          "+10% damage"
-        ],
-        "5": [
-          "+30% Penetration against Bosses"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
         ],
         "2_kr": [
           "피해량 +10%",
           "WG 감소량 +1"
         ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "3": [
+          "+10% damage"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
         "3_jp": [
           "ダメージ+10%"
         ],
-        "3_kr": [
+        "4": [
+          "+10% damage"
+        ],
+        "4_kr": [
           "피해량 +10%"
         ],
         "4_jp": [
           "ダメージ+10%"
         ],
-        "4_kr": [
-          "피해량 +10%"
-        ],
-        "5_jp": [
-          "ボス対象への貫通力+30%"
+        "5": [
+          "+30% Penetration against Bosses"
         ],
         "5_kr": [
           "보스 대상 관통력 +30%"
+        ],
+        "5_jp": [
+          "ボス対象への貫通力+30%"
         ]
       },
       "wgr": 1,
-      "name_kr": "델타 버스트",
-      "name_jp": "デルタバースト",
-      "true_desc_kr": "적을 공격합니다. 대상의 최대 체력이 델타 이하라면 해당 공격의 관통력이 <color=#28d9ed>30%</color> 증가합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "敵単体にダメージを与える。対象の最大HPが自分の最大HP以下の場合、貫通力が<color=#28d9ed>30%</color>UPする。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。"
+      "cd": null,
+      "buff": [
+        "BT_REMOVE_DEBUFF"
+      ],
+      "debuff": [
+        "BT_WG_REVERSE_HEAL"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Increases damage",
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP",
+          "cost": 60,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "+1 Weakness Gauge damage",
+          "effect_kr": "WG 감소량 +1",
+          "effect_jp": "WGダメージ+1",
+          "cost": 90,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Changes to Enhanced Skill\\nRemoves all debuffs from the caster\\nIncreases damage",
+          "effect_kr": "강화 스킬로 교체\\n자신의 약화 효과 모두 해제\\n피해 증가",
+          "effect_jp": "強化スキルに変更\\n自分の弱体効果をすべて解除\\nダメージUP",
+          "cost": 120,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Code: Machine Gun Fist",
-      "true_desc": "(Triggered Effect)\\nPrepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of this skill.\\nWhen <color=#28d9ed>Revenge</color> is activated, attacks the target and has a <color=#28d9ed>70%</color> chance each to grant <color=#28d9ed>Counterattack</color> to all allies for <color=#28d9ed>1 turn(s)</color>.\\nThis skill's damage dealt increases proportional to Max Health instead of Attack.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000099_Skill02_LV1,SKILL_DESC_2000099_Skill02_LV1,SKILL_DESC_2000099_Skill02_LV1,SKILL_DESC_2000099_Skill02_LV1,SKILL_DESC_2000099_Skill02_LV1",
-      "IconName": "Skill_Second_2000099",
       "NameIDSymbol": "9902",
-      "RangeType": "SINGLE",
-      "SkillSubType": "PASSIVE",
+      "IconName": "Skill_Second_2000099",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000099_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "SYS_BUFF_REVENGE",
-        "BT_STAT|ST_COUNTER_RATE"
-      ],
-      "cd": "4",
-      "debuff": [],
-      "description": [
-        "(Triggered Effect)\\nPrepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of this skill.\\nWhen <color=#28d9ed>Revenge</color> is activated, attacks the target and has a <color=#28d9ed>[Buff_C_2000099_2_2]</color> chance each to grant <color=#28d9ed>Counterattack</color> to all allies for <color=#28d9ed>[Buff_T_2000099_2_2] turn(s)</color>.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
-      ],
+      "name": "Code: Machine Gun Fist",
+      "name_kr": "코드 : 머신건 피스트",
+      "name_jp": "コード:マシンガンフィスト",
+      "true_desc": "(Triggered Effect)\\nPrepares the <color=#28d9ed>Revenge</color> effect for every <color=#28d9ed>cooldown cycle</color> of this skill.\\nWhen <color=#28d9ed>Revenge</color> is activated, attacks the target and has a <color=#28d9ed>70%</color> chance each to grant <color=#28d9ed>Counterattack</color> to all allies for <color=#28d9ed>1 turn(s)</color>.\\nThis skill's damage dealt increases proportional to Max Health instead of Attack.",
+      "true_desc_kr": "(발동 효과)\\n스킬의 <color=#28d9ed>쿨타임</color>마다 <color=#28d9ed>복수</color> 효과를 준비합니다.\\n<color=#28d9ed>복수</color> 발동 시 대상을 공격하고 아군 전체에게 각각 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>반격</color>을 부여합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "(発動効果)<color=#28d9ed>スキルターン</color>ごとに<color=#28d9ed>【復讐】</color>を発動する。\\n<color=#28d9ed>【復讐】</color>:対象にダメージを与え、味方全体にそれぞれ<color=#28d9ed>70%</color>の確率で<color=#28d9ed>反撃</color>を<color=#28d9ed>1ターン</color>の間付与する。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+15% effect chance"
         ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
+        ],
         "4": [
           "+20% damage"
+        ],
+        "4_kr": [
+          "피해량 +20%"
+        ],
+        "4_jp": [
+          "ダメージ+20%"
         ],
         "5": [
           "+15% effect chance",
           "-1 turn Skill Cooldown"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "効果発生率+15%"
-        ],
-        "3_kr": [
-          "효과 발동 확률 +15%"
-        ],
-        "4_jp": [
-          "ダメージ+20%"
-        ],
-        "4_kr": [
-          "피해량 +20%"
+        "5_kr": [
+          "효과 발동 확률 +15%",
+          "스킬 쿨타임 -1턴"
         ],
         "5_jp": [
           "効果発生率+15%",
           "スキルターン-1ターン"
-        ],
-        "5_kr": [
-          "효과 발동 확률 +15%",
-          "스킬 쿨타임 -1턴"
         ]
       },
+      "cd": "4",
       "wgr": 1,
-      "name_kr": "코드 : 머신건 피스트",
-      "name_jp": "コード:マシンガンフィスト",
-      "true_desc_kr": "(발동 효과)\\n스킬의 <color=#28d9ed>쿨타임</color>마다 <color=#28d9ed>복수</color> 효과를 준비합니다.\\n<color=#28d9ed>복수</color> 발동 시 대상을 공격하고 아군 전체에게 각각 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>반격</color>을 부여합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "(発動効果)<color=#28d9ed>スキルターン</color>ごとに<color=#28d9ed>【復讐】</color>を発動する。\\n<color=#28d9ed>【復讐】</color>:対象にダメージを与え、味方全体にそれぞれ<color=#28d9ed>70%</color>の確率で<color=#28d9ed>反撃</color>を<color=#28d9ed>1ターン</color>の間付与する。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。"
+      "buff": [
+        "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER",
+        "BT_STAT|ST_COUNTER_RATE",
+        "SYS_BUFF_REVENGE"
+      ],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
-      "name": "Delta's Forbidden Technique",
-      "true_desc": "Attacks an enemy, and grants <color=#28d9ed>Counterattack</color> for <color=#28d9ed>1 turn(s)</color>.\\nWhen the target is a Boss or the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skill's damage dealt increases proportional to Max Health instead of Attack.",
-      "DescID": "SKILL_DESC_2000099_Skill03_LV1,SKILL_DESC_2000099_Skill03_LV1,SKILL_DESC_2000099_Skill03_LV1,SKILL_DESC_2000099_Skill03_LV1,SKILL_DESC_2000099_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000099",
       "NameIDSymbol": "9903",
-      "RangeType": "SINGLE",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000099",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000099_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_STAT|ST_COUNTER_RATE"
-      ],
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "Attacks an enemy, and grants <color=#28d9ed>Counterattack</color> for <color=#28d9ed>[Buff_T_2000099_3_1] turn(s)</color>.\\nWhen the target is a Boss or the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skillâs damage dealt increases proportional to Max Health instead of Attack."
-      ],
+      "name": "Delta's Forbidden Technique",
+      "name_kr": "델타의 금지 기술",
+      "name_jp": "デルタの禁断の技",
+      "true_desc": "Attacks an enemy, and grants <color=#28d9ed>Counterattack</color> for <color=#28d9ed>1 turn(s)</color>.\\nWhen the target is a Boss or the target's Max Health is equal to or lower than Delta's Max Health, this attack penetrates <color=#28d9ed>30%</color> of the target's Defense.\\nThis skill's damage dealt increases proportional to Max Health instead of Attack.",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>반격</color>을 획득합니다.\\n대상이 보스거나 최대 체력이 델타 이하라면 해당 공격의 관통력이 <color=#28d9ed>30%</color> 증가합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与える。自分に<color=#28d9ed>反撃</color>を<color=#28d9ed>1ターン</color>の間付与する。\\n対象がボスまたは対象の最大HPが自分の最大HP以下の場合、貫通力が<color=#28d9ed>30%</color>UPする。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "+1 turn effect duration"
-        ],
-        "5": [
-          "+20% damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
+        "3": [
+          "-1 turn Skill Cooldown"
         ],
         "3_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "4_jp": [
-          "効果ターン+1ターン"
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "+1 turn effect duration"
         ],
         "4_kr": [
           "효과 지속 +1턴"
         ],
-        "5_jp": [
-          "ダメージ+20%",
-          "WGダメージ+1"
+        "4_jp": [
+          "効果ターン+1ターン"
+        ],
+        "5": [
+          "+20% damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "피해량 +20%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "ダメージ+20%",
+          "WGダメージ+1"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "델타의 금지 기술",
-      "name_jp": "デルタの禁断の技",
-      "true_desc_kr": "적을 공격하고 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>반격</color>을 획득합니다.\\n대상이 보스거나 최대 체력이 델타 이하라면 해당 공격의 관통력이 <color=#28d9ed>30%</color> 증가합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "敵単体にダメージを与える。自分に<color=#28d9ed>反撃</color>を<color=#28d9ed>1ターン</color>の間付与する。\\n対象がボスまたは対象の最大HPが自分の最大HP以下の場合、貫通力が<color=#28d9ed>30%</color>UPする。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。"
+      "buff": [
+        "BT_STAT|ST_COUNTER_RATE"
+      ],
+      "debuff": []
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and after attacking, grants Counterattack for <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.",
-      "DescID": "SKILL_DESC_2000099_Skill04_LV1,SKILL_DESC_2000099_Skill04_LV1,SKILL_DESC_2000099_Skill04_LV1,SKILL_DESC_2000099_Skill04_LV1,SKILL_DESC_2000099_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Earth_Join",
       "NameIDSymbol": "9904",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Earth_Join",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "BT_STAT|ST_COUNTER_RATE",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and after attacking, grants Counterattack for <color=#28d9ed>[Buff_T_2000099_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack."
-      ],
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and after attacking, grants Counterattack for <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 자신의 스킬 체인 공격이 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가하며, 공격 후 <color=#28d9ed>1턴</color> 동안 반격을 획득합니다. \\n\\n<color=#ffd732>협공 효과</color> : 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:このスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPし、攻撃後、反撃を<color=#28d9ed>1ターン</color>の間付与する。\\n\\n<color=#ffd732>連携効果</color>:このスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 자신의 스킬 체인 공격이 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가하며, 공격 후 <color=#28d9ed>1턴</color> 동안 반격을 획득합니다. \\n\\n<color=#ffd732>협공 효과</color> : 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:このスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPし、攻撃後、反撃を<color=#28d9ed>1ターン</color>の間付与する。\\n\\n<color=#ffd732>連携効果</color>:このスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。"
+      "cd": null,
+      "buff": [
+        "BT_STAT|ST_COUNTER_RATE"
+      ],
+      "debuff": []
     }
-  },
-  "rank": "D",
-  "Fullname_kr": "델타",
-  "Fullname_jp": "デルタ",
-  "VoiceActor": "VA. Risa Mei",
-  "VoiceActor_jp": "CV. 井上ほの花",
-  "VoiceActor_kr": "CV. Risa Mei"
+  }
 }

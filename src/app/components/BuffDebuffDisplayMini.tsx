@@ -50,14 +50,17 @@ export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: Buff
         : lang === 'kr' ? (effect.label_kr ?? effect.label)
           : effect.label;
 
-    const description =
+    const rawDescription =
       lang === 'jp' ? (effect.description_jp ?? effect.description)
         : lang === 'kr' ? (effect.description_kr ?? effect.description)
           : effect.description;
 
+    // Replace \n and \\n with <br /> tags
+    const description = rawDescription.replace(/\\n/g, '<br />').replace(/\n/g, '<br />');
+
     const iconPath = `/images/ui/effect/${effect.icon}.webp`;
     const baseColor = effect.type === 'buff' ? 'bg-[#1a69a7]' : 'bg-[#a72a27]';
-    const showEffectColor = !description.toLowerCase().includes('cannot be removed');
+    const showEffectColor = !rawDescription.toLowerCase().includes('cannot be removed');
     const imageClass = showEffectColor ? effect.type : '';
 
     return (
@@ -100,7 +103,10 @@ export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: Buff
 
               <div className="flex flex-col">
                 <span className="font-bold text-white text-sm leading-tight">{label}</span>
-                <span className="text-white text-xs leading-snug whitespace-pre-line">{description}</span>
+                <span
+                  className="text-white text-xs leading-snug"
+                  dangerouslySetInnerHTML={{ __html: description }}
+                />
               </div>
               <Tooltip.Arrow className={effect.type === 'buff' ? 'fill-[#2196f3]' : 'fill-[#e53935]'} />
             </Tooltip.Content>

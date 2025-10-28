@@ -90,6 +90,9 @@ export interface Character {
       prio: number;
     };
   };
+  VoiceActor?:string
+  VoiceActor_kr?:string
+  VoiceActor_jp?:string
 }
 
 export type CharacterLite = Omit<Character, 'skills'>

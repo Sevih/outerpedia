@@ -273,6 +273,15 @@ function toKebabCase(str: string): string {
         .replace(/(^-|-$)/g, '')
 }
 
+// Demote rank for 1-2 star characters in PvE (same logic as TierListPVE)
+const RANKS_PVE = ['S', 'A', 'B', 'C', 'D', 'E'] as const
+type PveRank = (typeof RANKS_PVE)[number]
+
+function demoteOnce(rank: string): PveRank {
+    const i = RANKS_PVE.indexOf((rank as PveRank) ?? 'E')
+    return RANKS_PVE[Math.min(i < 0 ? RANKS_PVE.length - 1 : i + 1, RANKS_PVE.length - 1)]
+}
+
 function getSkillLabel(index: number): string {
     return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`
 }
@@ -561,10 +570,23 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     )}
                                 </div>
                             </div>
-
-                            <div className="mt-2 p-2 bg-black/30 rounded">
+                            {/* Voice Actor */}
+                            {(character.VoiceActor || character.VoiceActor_jp || character.VoiceActor_kr) && (
+                                <div className="mt-2 p-2 rounded">
+                                    <div className="text-sm text-white/80 max-w-2xl mx-auto">
+                                        <span>🎤 <strong className="text-white">{t('characters.profile.voice_actor')}:</strong> {
+                                            langKey === 'jp' && character.VoiceActor_jp ? character.VoiceActor_jp :
+                                                langKey === 'kr' && character.VoiceActor_kr ? character.VoiceActor_kr :
+                                                    character.VoiceActor || character.VoiceActor_jp || character.VoiceActor_kr
+                                        }</span>
+                                    </div>
+                                </div>
+                            )}
+                            <div className="mt-2 p-2 rounded">
                                 <CharacterProfileDescription fullname={character.Fullname} lng={langKey} />
                             </div>
+
+
 
                             {/* Statistiques + descriptions de classe + base stats */}
                             <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">
@@ -779,9 +801,10 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     {/* PvE */}
                                     <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
                                         <p className="font-semibold text-white mb-2">{t('pve_tier')}</p>
-                                        {character.rank ? (
-                                            <Image src={`/images/ui/IG_Event_Rank_${character.rank}.webp`} alt={`Rank ${character.rank}`} width={32} height={32} style={{ width: 32, height: 32 }} className="object-contain" />
-                                        ) : <p className="text-gray-400 italic text-center">{t('not_available')}</p>}
+                                        {character.rank ? (() => {
+                                            const effectiveRank = character.Rarity <= 2 ? demoteOnce(character.rank) : character.rank;
+                                            return <Image src={`/images/ui/IG_Event_Rank_${effectiveRank}.webp`} alt={`Rank ${effectiveRank}`} width={32} height={32} style={{ width: 32, height: 32 }} className="object-contain" />;
+                                        })() : <p className="text-gray-400 italic text-center">{t('not_available')}</p>}
                                     </div>
                                     {/* PvP */}
                                     <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">

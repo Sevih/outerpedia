@@ -14,6 +14,7 @@ const effectsData: Effect[] = [
 export type BuffDebuffDisplayProps = {
   buffs?: string[] | string;
   debuffs?: string[] | string;
+  hideVariants?: boolean; // Hide variant effects and show only main groups (default: true)
 };
 
 type Effect = {
@@ -26,19 +27,93 @@ type Effect = {
   description_kr?: string;
   icon: string;
   type: 'buff' | 'debuff';
+  group?: string; // Group name if this effect is a variant
 };
 
-export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebuffDisplayProps) {
-  const { key } = useTenant();   // ✅ on s’aligne sur TenantContext
+export default function BuffDebuffDisplay({ buffs = [], debuffs = [], hideVariants = true }: BuffDebuffDisplayProps) {
+  const { key } = useTenant();   // ✅ on s'aligne sur TenantContext
   const lang: 'en' | 'jp' | 'kr' = key === 'jp' ? 'jp' : key === 'kr' ? 'kr' : 'en';
 
   const normalizedBuffs = Array.isArray(buffs) ? buffs : buffs ? [buffs] : [];
   const normalizedDebuffs = Array.isArray(debuffs) ? debuffs : debuffs ? [debuffs] : [];
 
-  const getEffects = (names: string[], type: 'buff' | 'debuff') =>
-    names
+  const getEffects = (names: string[], type: 'buff' | 'debuff') => {
+    const effects = names
       .map((name) => effectsData.find((e: Effect) => e.name === name && e.type === type))
       .filter((e): e is Effect => !!e);
+
+    if (!hideVariants) {
+      return effects;
+    }
+
+    // Helper: check if descriptions differ by more than just "(Irremovable)" or "cannot be removed"
+    const hasSubstantiveDifference = (desc1: string, desc2: string): boolean => {
+      const normalize = (desc: string) => desc
+        .replace(/\(Irremovable\)/gi, '')
+        .replace(/;\s*cannot be removed/gi, '')
+        .replace(/Cannot be removed/gi, '')
+        .trim();
+
+      const normalized1 = normalize(desc1);
+      const normalized2 = normalize(desc2);
+      return normalized1 !== normalized2;
+    };
+
+    // Filter out variants and keep only main groups
+    // BUT: show variants if they have a substantive description difference
+    const effectsToDisplay = new Set<string>();
+    const variantsToShow: Effect[] = [];
+    const explicitlyCalledNames = new Set(names);
+
+    for (const effect of effects) {
+      if (effect.group) {
+        // This effect has a group (it's a variant)
+        const isParentExplicitlyCalled = explicitlyCalledNames.has(effect.group);
+
+        // Find the main group effect
+        const mainGroupEffect = effectsData.find((e: Effect) =>
+          e.name === effect.group && e.type === type && !e.group
+        );
+
+        if (mainGroupEffect) {
+          const hasRealDifference = hasSubstantiveDifference(effect.description, mainGroupEffect.description);
+
+          if (hasRealDifference) {
+            // Substantial difference: show both parent and variant
+            if (isParentExplicitlyCalled) {
+              effectsToDisplay.add(effect.group);
+            }
+            variantsToShow.push(effect);
+          } else {
+            // Only "(Irremovable)" or "cannot be removed" difference
+            if (isParentExplicitlyCalled) {
+              // Parent explicitly called: show only parent
+              effectsToDisplay.add(effect.group);
+            } else {
+              // Parent not called: show only variant
+              variantsToShow.push(effect);
+            }
+          }
+        } else {
+          // No parent found in effectsData, but parent was explicitly called
+          if (isParentExplicitlyCalled) {
+            effectsToDisplay.add(effect.group);
+          }
+        }
+      } else {
+        // Regular effect without group, add it directly
+        effectsToDisplay.add(effect.name);
+      }
+    }
+
+    // Get the main group effects
+    const mainEffects = Array.from(effectsToDisplay)
+      .map(name => effectsData.find((e: Effect) => e.name === name && e.type === type))
+      .filter((e): e is Effect => !!e);
+
+    // Combine main effects and variants with different descriptions
+    return [...mainEffects, ...variantsToShow];
+  };
 
   const buffList = getEffects(normalizedBuffs, 'buff');
   const debuffList = getEffects(normalizedDebuffs, 'debuff');
@@ -49,14 +124,17 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
         : lang === 'kr' ? (effect.label_kr ?? effect.label)
           : effect.label;
 
-    const description =
+    const rawDescription =
       lang === 'jp' ? (effect.description_jp ?? effect.description)
         : lang === 'kr' ? (effect.description_kr ?? effect.description)
           : effect.description;
 
+    // Replace \n and \\n with <br /> tags
+    const description = rawDescription.replace(/\\n/g, '<br />').replace(/\n/g, '<br />');
+
     const iconPath = `/images/ui/effect/${effect.icon}.webp`;
     const baseColor = effect.type === 'buff' ? 'bg-[#1a69a7]' : 'bg-[#a72a27]';
-    const showEffectColor = !description.toLowerCase().includes('cannot be removed');
+    const showEffectColor = !rawDescription.toLowerCase().includes('cannot be removed');
     const imageClass = showEffectColor ? effect.type : '';
 
     return (
@@ -102,7 +180,10 @@ export default function BuffDebuffDisplay({ buffs = [], debuffs = [] }: BuffDebu
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-white text-sm leading-tight">{label}</span>
-              <span className="text-white text-xs leading-snug whitespace-pre-line">{description}</span>
+              <span
+                className="text-white text-xs leading-snug"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
             </div>
             <HoverCard.Arrow
               className={`w-3 h-2 ${effect.type === 'buff' ? 'fill-[#2196f3]' : 'fill-[#e53935]'}`}

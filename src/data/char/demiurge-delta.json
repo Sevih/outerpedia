@@ -1,17 +1,18 @@
 {
   "ID": "2000100",
   "Fullname": "Demiurge Delta",
+  "Fullname_jp": "デミウルゴス デルタ",
+  "Fullname_kr": "데미우르고스 델타",
   "Rarity": 3,
   "Element": "Dark",
-  "role": "sustain",
-  "gift": "Science",
+  "Class": "Healer",
+  "SubClass": "Reliever",
+  "rank": "B",
   "rank_pvp": "S",
+  "role": "sustain",
   "tags": [
     "premium"
   ],
-  "Class": "Healer",
-  "SubClass": "Reliever",
-  "video": "uswwN1IKlFI",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -23,329 +24,292 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Finish",
+  "video": "uswwN1IKlFI",
+  "VoiceActor": "VA. Risa Mei",
+  "VoiceActor_kr": "CV. Risa Mei",
+  "VoiceActor_jp": "CV. 井上ほの花",
+  "gift": "Science",
   "transcend": {
     "1": null,
     "2": null,
-    "3": "ATK DEF HP +10%\nBurst Level 2 Unlocked",
+    "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+40% caster's Priority when an ally resists an effect\n(Effects applied at the start of battle excluded, only once per turn)\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 효과 저항 시 자신 행동 게이지 +40%\n(전투 입장 시 생성 효과 제외, 1턴당 1회)\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方が効果抵抗時、自分の行動ゲージ+40%\n(戦闘開始時に付与される効果除外、1ターンに一度のみ発動)\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start\n+10 Ally Speed",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25\n아군 속도 +10",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25\n味方のスピード+10",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\nWhen using Code: Reverse, grants Ether Boost to Dark heroes except Healers for 1 turn\nAt the start of battle, grants increased Resilience to all allies for 1 turn (Irremovable)",
-    "3_jp": "ATK DEF HP +10%\nバーストスキル2段階解禁",
-    "3_kr": "ATK DEF HP +10%\n버스트 2단계 해금",
-    "4_1_jp": "ATK DEF HP +16%\n味方が効果抵抗時、自分の行動ゲージ+40%\n(戦闘開始時に付与される効果除外、1ターンに一度のみ発動)\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 효과 저항 시 자신 행동 게이지 +40%\n(전투 입장 시 생성 효과 제외, 1턴당 1회)\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25\n味方のスピード+10",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25\n아군 속도 +10",
-    "6_jp": "ATK DEF HP +30%\n【コード:リバース】使用時、回復型以外の\n闇属性に【エーテルブースト】+1ターン追加\n戦闘開始時、味方全体の効果抵抗+1ターン(解除不可)",
-    "6_kr": "ATK DEF HP +30%\n코드 : 리버스 사용 시 회복형 제외 암속성에게 에테르 부스트 +1턴 추가\n전투 입장 시 아군 전체 효과 저항 +1턴 (해제 불가)"
+    "6_kr": "ATK DEF HP +30%\n코드 : 리버스 사용 시 회복형 제외 암속성에게 에테르 부스트 +1턴 추가\n전투 입장 시 아군 전체 효과 저항 +1턴 (해제 불가)",
+    "6_jp": "ATK DEF HP +30%\n【コード:リバース】使用時、回復型以外の\n闇属性に【エーテルブースト】+1ターン追加\n戦闘開始時、味方全体の効果抵抗+1ターン(解除不可)"
   },
-  "Chain_Type": "Finish",
   "skills": {
     "SKT_FIRST": {
-      "name": "Code: Purifier",
-      "true_desc": "Attacks an enemy. Increases Priority of the ally with the lowest Health by <color=#28d9ed>10%</color>, and recovers Health by <color=#28d9ed>5%</color> of Delta's Max Health.",
-      "DescID": "SKILL_DESC_2000100_Skill01_LV1,SKILL_DESC_2000100_Skill01_LV1,SKILL_DESC_2000100_Skill01_LV1,SKILL_DESC_2000100_Skill01_LV1,SKILL_DESC_2000100_Skill01_LV1",
-      "FocusType_fallback1": "ATTACK",
-      "IconName": "Skill_First_2000100",
       "NameIDSymbol": "10001",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000100",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000100_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_ACTION_GAUGE",
-        "BT_REMOVE_DEBUFF",
-        "BT_STAT|ST_BUFF_RESIST",
-        "BT_AP_CHARGE",
-        "BT_COOL_CHARGE"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 60,
-          "effect": "Increases Action Points of ally healing target by 70",
-          "level": 1,
-          "effect_kr": "아군 회복 대상 AP +70",
-          "effect_jp": "回復を受けた味方のAP+70"
-        },
-        "SKT_BURST_2": {
-          "cost": 90,
-          "effect": "Grants increased Resilience to ally healing target for 2 turns",
-          "level": 2,
-          "effect_kr": "아군 회복 대상 효과 저항 +2턴",
-          "effect_jp": "回復を受けた味方の効果抵抗+2ターン"
-        },
-        "SKT_BURST_3": {
-          "cost": 120,
-          "effect": "Resets cooldown of ally healing target",
-          "level": 3,
-          "effect_kr": "아군 회복 대상 쿨타임 초기화",
-          "effect_jp": "回復を受けた味方のスキルターン初期化"
-        }
-      },
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy. Increases Priority of the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000100_1_1]</color>, and recovers Health by <color=#28d9ed>[Buff_V_2000100_1_2]</color> of Delta's Max Health."
-      ],
+      "name": "Code: Purifier",
+      "name_kr": "코드 : 퓨리파이어",
+      "name_jp": "コード:ピューリファイヤー",
+      "true_desc": "Attacks an enemy. Increases Priority of the ally with the lowest Health by <color=#28d9ed>10%</color>, and recovers Health by <color=#28d9ed>5%</color> of Delta's Max Health.",
+      "true_desc_kr": "적을 공격합니다. 체력 상황이 가장 나쁜 아군의 행동 게이지를 <color=#28d9ed>10%</color> 증가시키고, 체력을 델타의 최대 체력의 <color=#28d9ed>5%</color>만큼 회복시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与える。残りHPが最も低い味方単体の行動ゲージを<color=#28d9ed>10%</color>UPさせ、HPを自分の最大HPの<color=#28d9ed>5%</color>回復させる。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% healing"
-        ],
-        "4": [
-          "+10% Priority"
-        ],
-        "5": [
-          "+5% healing",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "HP回復量+5%"
+        "3": [
+          "+5% healing"
         ],
         "3_kr": [
           "체력 회복량 +5%"
         ],
-        "4_jp": [
-          "行動ゲージ10%UP"
+        "3_jp": [
+          "HP回復量+5%"
+        ],
+        "4": [
+          "+10% Priority"
         ],
         "4_kr": [
           "행동 게이지 +10%"
         ],
-        "5_jp": [
-          "HP回復量+5%",
-          "WGダメージ+1"
+        "4_jp": [
+          "行動ゲージ10%UP"
+        ],
+        "5": [
+          "+5% healing",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "체력 회복량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "HP回復量+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 1,
-      "name_kr": "코드 : 퓨리파이어",
-      "name_jp": "コード:ピューリファイヤー",
-      "true_desc_kr": "적을 공격합니다. 체력 상황이 가장 나쁜 아군의 행동 게이지를 <color=#28d9ed>10%</color> 증가시키고, 체력을 델타의 최대 체력의 <color=#28d9ed>5%</color>만큼 회복시킵니다.",
-      "true_desc_jp": "敵単体にダメージを与える。残りHPが最も低い味方単体の行動ゲージを<color=#28d9ed>10%</color>UPさせ、HPを自分の最大HPの<color=#28d9ed>5%</color>回復させる。"
+      "cd": null,
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_AP_CHARGE",
+        "BT_STAT|ST_BUFF_RESIST",
+        "BT_COOL_CHARGE"
+      ],
+      "debuff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Increases Action Points of ally healing target by 70",
+          "effect_kr": "아군 회복 대상 AP +70",
+          "effect_jp": "回復を受けた味方のAP+70",
+          "cost": 60,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Grants increased Resilience to ally healing target for 2 turns",
+          "effect_kr": "아군 회복 대상 효과 저항 +2턴",
+          "effect_jp": "回復を受けた味方の効果抵抗+2ターン",
+          "cost": 90,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Resets cooldown of ally healing target",
+          "effect_kr": "아군 회복 대상 쿨타임 초기화",
+          "effect_jp": "回復を受けた味方のスキルターン初期化",
+          "cost": 120,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Code: Icarus",
-      "true_desc": "Removes 2 debuffs from the ally target, and recovers the target's Health by <color=#28d9ed>40%</color> of Delta's Max Health. Then, increases Priority of the ally target by <color=#28d9ed>40%</color>.",
-      "ApproachType": "CAST_BUFF",
-      "DescID": "SKILL_DESC_2000100_Skill02_LV1,SKILL_DESC_2000100_Skill02_LV1,SKILL_DESC_2000100_Skill02_LV1,SKILL_DESC_2000100_Skill02_LV1,SKILL_DESC_2000100_Skill02_LV5",
-      "IconName": "Skill_Second_2000100",
       "NameIDSymbol": "10002",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Second_2000100",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000100_Skill02",
-      "TargetTeamType": "TEAM",
-      "buff": [
-        "BT_REMOVE_DEBUFF",
-        "BT_ACTION_GAUGE"
-      ],
-      "cd": "3",
-      "debuff": [],
-      "description": [
-        "Removes 2 debuffs from the ally target, and recovers the target's Health by <color=#28d9ed>[Buff_V_2000100_2_2]</color> of Delta's Max Health. Then, increases Priority of the ally target by <color=#28d9ed>[Buff_V_2000100_2_3]</color>."
-      ],
+      "name": "Code: Icarus",
+      "name_kr": "코드 : 이카로스",
+      "name_jp": "コード:イカルス",
+      "true_desc": "Removes 2 debuffs from the ally target, and recovers the target's Health by <color=#28d9ed>40%</color> of Delta's Max Health. Then, increases Priority of the ally target by <color=#28d9ed>40%</color>.",
+      "true_desc_kr": "아군 대상의 약화 효과를 2개 해제시키고, 대상의 체력을 델타의 최대 체력의 <color=#28d9ed>40%</color> 만큼 회복시킵니다. 이후 아군 대상의 행동 게이지를 <color=#28d9ed>40%</color> 증가시킵니다.",
+      "true_desc_jp": "味方対象の弱体効果を2個解除し、対象のHPを自分の最大HPの<color=#28d9ed>40%</color>回復させる。その後、味方対象の行動ゲージを<color=#28d9ed>40%</color>UPさせる。",
       "enhancement": {
         "2": [
           "+15% Priority"
         ],
+        "2_kr": [
+          "행동 게이지 +15%"
+        ],
+        "2_jp": [
+          "行動ゲージ15%UP"
+        ],
         "3": [
           "-1 turn Skill Cooldown"
         ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
         "4": [
           "+15% Priority"
+        ],
+        "4_kr": [
+          "행동 게이지 +15%"
+        ],
+        "4_jp": [
+          "行動ゲージ15%UP"
         ],
         "5": [
           "Removes all debuffs"
         ],
-        "2_jp": [
-          "行動ゲージ15%UP"
-        ],
-        "2_kr": [
-          "행동 게이지 +15%"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
-        ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "行動ゲージ15%UP"
-        ],
-        "4_kr": [
-          "행동 게이지 +15%"
+        "5_kr": [
+          "모든 약화 효과 해제"
         ],
         "5_jp": [
           "全ての弱体効果を解除"
-        ],
-        "5_kr": [
-          "모든 약화 효과 해제"
         ]
       },
-      "wgr": null,
-      "name_kr": "코드 : 이카로스",
-      "name_jp": "コード:イカルス",
-      "true_desc_kr": "아군 대상의 약화 효과를 2개 해제시키고, 대상의 체력을 델타의 최대 체력의 <color=#28d9ed>40%</color> 만큼 회복시킵니다. 이후 아군 대상의 행동 게이지를 <color=#28d9ed>40%</color> 증가시킵니다.",
-      "true_desc_jp": "味方対象の弱体効果を2個解除し、対象のHPを自分の最大HPの<color=#28d9ed>40%</color>回復させる。その後、味方対象の行動ゲージを<color=#28d9ed>40%</color>UPさせる。"
+      "cd": "3",
+      "buff": [
+        "BT_REMOVE_DEBUFF",
+        "BT_ACTION_GAUGE"
+      ],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
-      "name": "Code: Reverse",
-      "true_desc": "Recovers Health of all allies by <color=#28d9ed>20%</color> of Delta's Max Health, and grants <color=#28d9ed>Revival</color> for <color=#28d9ed>1 turn(s)</color>. Then, grants <color=#28d9ed>Ether Boost</color> to the ally with the highest Attack for <color=#28d9ed>1 turn(s)</color>. <color=#28d9ed>Ether Boost</COLOR> cannot be granted to Healers.",
-      "DescID": "SKILL_DESC_2000100_Skill03_LV1,SKILL_DESC_2000100_Skill03_LV1,SKILL_DESC_2000100_Skill03_LV1,SKILL_DESC_2000100_Skill03_LV1,SKILL_DESC_2000100_Skill03_LV5",
-      "IconName": "Skill_Ultimate_2000100",
       "NameIDSymbol": "10003",
-      "RangeType": "SINGLE",
-      "RangeType_fallback1": "CAST_BUFF",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000100",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000100_Skill03",
-      "TargetTeamType": "TEAM",
-      "buff": [
-        "BT_REVIVAL",
-        "BT_ADDITIVE_TURN",
-        "UNIQUE_ETHER_BOOST"
-      ],
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "Recovers Health of all allies by <color=#28d9ed>[Buff_V_2000100_3_1]</color> of Delta's Max Health, and grants <color=#28d9ed>Revival</color> for <color=#28d9ed>[Buff_T_2000100_3_2] turn(s)</color>. Then, grants <color=#28d9ed>Ether Boost</color> to the ally with the highest Attack for <color=#28d9ed>[Buff_T_2000100_3_3] turn(s)</color>. <color=#28d9ed>Ether Boost</COLOR> cannot be granted to Healers."
-      ],
+      "name": "Code: Reverse",
+      "name_kr": "코드 : 리버스",
+      "name_jp": "コード:リバース",
+      "true_desc": "Recovers Health of all allies by <color=#28d9ed>20%</color> of Delta's Max Health, and grants <color=#28d9ed>Revival</color> for <color=#28d9ed>1 turn(s)</color>. Then, grants <color=#28d9ed>Ether Boost</color> to the ally with the highest Attack for <color=#28d9ed>1 turn(s)</color>. <color=#28d9ed>Ether Boost</COLOR> cannot be granted to Healers.",
+      "true_desc_kr": "아군 전체의 체력을 델타 최대 체력의 <color=#28d9ed>20%</color> 만큼 회복하고, <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>소생</color>을 부여합니다. 이후 공격력이 가장 높은 아군에게 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>에테르 부스트</color>를 부여합니다. <color=#28d9ed>에테르 부스트</color>는 회복형에게는 부여되지 않습니다.",
+      "true_desc_jp": "味方全体のHPをデルタの最大HPの<color=#28d9ed>20%</color>回復させ、味方全体に<color=#28d9ed>蘇生</color>を<color=#28d9ed>1ターン</color>の間付与する。その後、攻撃力が最も高い味方単体に<color=#28d9ed>1ターン</color>の間<color=#28d9ed>【エーテルブースト】</color>を付与する。<color=#28d9ed>【エーテルブースト】</color>は回復型には付与できない。",
       "enhancement": {
         "2": [
           "+10% healing"
+        ],
+        "2_kr": [
+          "체력 회복량 +10%"
+        ],
+        "2_jp": [
+          "HP回復量+10%"
         ],
         "3": [
           "-1 turn Skill Cooldown"
         ],
-        "4": [
-          "+10% healing"
-        ],
-        "5": [
-          "Grants an extra turn"
-        ],
-        "2_jp": [
-          "HP回復量+10%"
-        ],
-        "2_kr": [
-          "체력 회복량 +10%"
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
         ],
         "3_jp": [
           "スキルターン-1ターン"
         ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "HP回復量+10%"
+        "4": [
+          "+10% healing"
         ],
         "4_kr": [
           "체력 회복량 +10%"
         ],
-        "5_jp": [
-          "追加ターン獲得"
+        "4_jp": [
+          "HP回復量+10%"
+        ],
+        "5": [
+          "Grants an extra turn"
         ],
         "5_kr": [
           "추가 턴 획득"
+        ],
+        "5_jp": [
+          "追加ターン獲得"
         ]
       },
-      "wgr": null,
-      "name_kr": "코드 : 리버스",
-      "name_jp": "コード:リバース",
-      "true_desc_kr": "아군 전체의 체력을 델타 최대 체력의 <color=#28d9ed>20%</color> 만큼 회복하고, <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>소생</color>을 부여합니다. 이후 공격력이 가장 높은 아군에게 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>에테르 부스트</color>를 부여합니다. <color=#28d9ed>에테르 부스트</color>는 회복형에게는 부여되지 않습니다.",
-      "true_desc_jp": "味方全体のHPをデルタの最大HPの<color=#28d9ed>20%</color>回復させ、味方全体に<color=#28d9ed>蘇生</color>を<color=#28d9ed>1ターン</color>の間付与する。その後、攻撃力が最も高い味方単体に<color=#28d9ed>1ターン</color>の間<color=#28d9ed>【エーテルブースト】</color>を付与する。<color=#28d9ed>【エーテルブースト】</color>は回復型には付与できない。"
+      "cd": "5",
+      "buff": [
+        "BT_REVIVAL",
+        "IG_Buff_Effect_2000100_Interruption",
+        "BT_ADDITIVE_TURN"
+      ],
+      "debuff": []
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>5</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers Health of the ally with the lowest Health by <color=#28d9ed>15%</color> of Delta's Max Health.",
-      "DescID": "SKILL_DESC_2000100_Skill04_LV1,SKILL_DESC_2000100_Skill04_LV1,SKILL_DESC_2000100_Skill04_LV1,SKILL_DESC_2000100_Skill04_LV1,SKILL_DESC_2000100_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Dark_Finish",
       "NameIDSymbol": "10004",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Dark_Finish",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": [],
-      "cd": null,
-      "debuff": "BT_WG_DMG",
-      "description": [
-        "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000100_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers Health of the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000100_backup_1_1]</color> of Delta's Max Health."
-      ],
-      "dual_buff": "",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>5</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers Health of the ally with the lowest Health by <color=#28d9ed>15%</color> of Delta's Max Health.",
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>5</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군의 체력을 델타 최대 체력의 <color=#28d9ed>15%</color> 회복시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、<color=#28d9ed>5</color>のWGを追加でDOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、残りHPが最も低い味方単体のHPを自分の最大HPの<color=#28d9ed>13%</color>回復させる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>5</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군의 체력을 델타 최대 체력의 <color=#28d9ed>15%</color> 회복시킵니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、<color=#28d9ed>5</color>のWGを追加でDOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、残りHPが最も低い味方単体のHPを自分の最大HPの<color=#28d9ed>13%</color>回復させる。"
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "BT_WG_REVERSE_HEAL"
+      ],
+      "dual_buff": []
     }
-  },
-  "rank": "B",
-  "Fullname_kr": "데미우르고스 델타",
-  "Fullname_jp": "デミウルゴス デルタ",
-  "VoiceActor": "VA. Risa Mei",
-  "VoiceActor_jp": "CV. 井上ほの花",
-  "VoiceActor_kr": "CV. Risa Mei"
+  }
 }

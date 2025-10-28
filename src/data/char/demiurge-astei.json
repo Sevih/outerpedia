@@ -1,18 +1,19 @@
 {
   "ID": "2000059",
   "Fullname": "Demiurge Astei",
+  "Fullname_jp": "デミウルゴス アステ",
+  "Fullname_kr": "데미우르고스 아스테",
   "Rarity": 3,
   "Element": "Dark",
-  "rank_pvp": "S",
-  "gift": "Science",
   "Class": "Mage",
+  "SubClass": "Wizard",
+  "rank": "A",
+  "rank_pvp": "S",
+  "role": "dps",
   "tags": [
     "premium",
     "ignore-defense"
   ],
-  "role": "dps",
-  "SubClass": "Wizard",
-  "video": "orOhHJzO9qA",
   "skill_priority": {
     "First": {
       "prio": 2
@@ -24,328 +25,298 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Start",
+  "video": "orOhHJzO9qA",
+  "VoiceActor": "VA. Kayli Mills",
+  "VoiceActor_kr": "CV. Kayli Mills",
+  "VoiceActor_jp": "CV. 柚木涼香",
+  "gift": "Science",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+6% Ally Critical Hit Chance\n+25 Action Points at the start of battle\n+1 Chain Passive Weakness Gauge reduction",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 확률 +6%\n입장 시 AP +25\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の会心率+6%\n戦闘開始時、AP+25\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\nIncreases all attack damage\n(Proportional to target's Max Health)",
-    "4_1_jp": "ATK DEF HP +16%\n味方の会心率+6%\n戦闘開始時、AP+25\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 치명 확률 +6%\n입장 시 AP +25\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
-    "6_jp": "ATK DEF HP +30%\nすべてのスキルダメージUP\n(対象のHPが高いほどダメージUP)",
-    "6_kr": "ATK DEF HP +30%\n모든 공격 피해 증가\n(대상 최대 체력 비례)"
+    "6_kr": "ATK DEF HP +30%\n모든 공격 피해 증가\n(대상 최대 체력 비례)",
+    "6_jp": "ATK DEF HP +30%\nすべてのスキルダメージUP\n(対象のHPが高いほどダメージUP)"
   },
-  "Chain_Type": "Start",
   "skills": {
     "SKT_FIRST": {
-      "name": "The Gods in Heaven",
-      "true_desc": "Attacks an enemy. \\nIf the caster has <color=#28d9ed>Doll Garden's Caretaker</color>, activates an <color=#28d9ed>enhanced attack</color>.",
-      "ApproachZ": "0,0",
-      "DescID": "SKILL_DESC_2000059_Skill01_LV1,SKILL_DESC_2000059_Skill01_LV1,SKILL_DESC_2000059_Skill01_LV1,SKILL_DESC_2000059_Skill01_LV1,SKILL_DESC_2000059_Skill01_LV1",
-      "FocusType_fallback1": "ATTACK",
-      "IconName": "Skill_First_2000059",
       "NameIDSymbol": "5901",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000059",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000059_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "UNIQUE_DOLL_GARDEN_CARETAKER"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "+1 turn Doll Garden's Caretaker\\nIncreases damage",
-          "level": 1,
-          "effect_kr": "모형 정원의 관리자 +1턴\\n피해 증가",
-          "effect_jp": "【箱庭の主】+1ターン\\nダメージUP"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Increases damage",
-          "level": 2,
-          "effect_kr": "피해 증가",
-          "effect_jp": "ダメージUP"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "Resets all skill cooldowns",
-          "level": 3,
-          "effect_kr": "모든 스킬 쿨타임 초기화",
-          "effect_jp": "全スキルの\\nスキルターン\\n初期化"
-        }
-      },
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy. \\nIf the caster has <color=#28d9ed>Doll Garden's Caretaker</color>, activates an <color=#28d9ed>enhanced attack</color>."
-      ],
+      "name": "The Gods in Heaven",
+      "name_kr": "하늘에는 신이",
+      "name_jp": "天にありては神",
+      "true_desc": "Attacks an enemy. \\nIf the caster has <color=#28d9ed>Doll Garden's Caretaker</color>, activates an <color=#28d9ed>enhanced attack</color>.",
+      "true_desc_kr": "적을 공격합니다.\\n<color=#28d9ed>모형 정원의 관리자</color> 보유 시 <color=#28d9ed>강화 공격</color>이 발생합니다.",
+      "true_desc_jp": "敵単体にダメージを与える。\\n自分に<color=#28d9ed>【箱庭の主】</color>がある場合、 このスキルが強化され、<color=#28d9ed>ダメージがUP</color>する。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+15% damage"
-        ],
-        "4": [
-          "+15% damage"
-        ],
-        "5": [
-          "+20% damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
+        "3": [
+          "+15% damage"
+        ],
+        "3_kr": [
+          "피해량 +15%"
         ],
         "3_jp": [
           "ダメージ+15%"
         ],
-        "3_kr": [
+        "4": [
+          "+15% damage"
+        ],
+        "4_kr": [
           "피해량 +15%"
         ],
         "4_jp": [
           "ダメージ+15%"
         ],
-        "4_kr": [
-          "피해량 +15%"
-        ],
-        "5_jp": [
-          "ダメージ+20%"
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
       "wgr": 1,
-      "name_kr": "하늘에는 신이",
-      "name_jp": "天にありては神",
-      "true_desc_kr": "적을 공격합니다.\\n<color=#28d9ed>모형 정원의 관리자</color> 보유 시 <color=#28d9ed>강화 공격</color>이 발생합니다.",
-      "true_desc_jp": "敵単体にダメージを与える。\\n自分に<color=#28d9ed>【箱庭の主】</color>がある場合、 このスキルが強化され、<color=#28d9ed>ダメージがUP</color>する。"
+      "cd": null,
+      "buff": [
+        "IG_Buff_2000059_Interruption",
+        "BT_COOL_CHARGE"
+      ],
+      "debuff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "+1 turn Doll Garden's Caretaker\\nIncreases damage",
+          "effect_kr": "모형 정원의 관리자 +1턴\\n피해 증가",
+          "effect_jp": "【箱庭の主】+1ターン\\nダメージUP",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Increases damage",
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Resets all skill cooldowns",
+          "effect_kr": "모든 스킬 쿨타임 초기화",
+          "effect_jp": "全スキルの\\nスキルターン\\n初期化",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "The People on Earth",
-      "true_desc": "(Triggered Effect) <color=#28d9ed>Resurrects</color> and heals for <color=#28d9ed>20%</color> upon death. <color=#28d9ed>Dies</color> if no enemy is slain in <color=#28d9ed>1 turn</color>.\\nGrants the caster <color=#28d9ed>Doll Garden's Caretaker</color> for <color=#28d9ed>1 turn</color> upon resurrection.",
-      "ApproachType": "CAST_BUFF",
-      "DescID": "SKILL_DESC_2000059_Skill02_LV1,SKILL_DESC_2000059_Skill02_LV1,SKILL_DESC_2000059_Skill02_LV3,SKILL_DESC_2000059_Skill02_LV3,SKILL_DESC_2000059_Skill02_LV5",
-      "IconName": "Skill_Second_2000059",
       "NameIDSymbol": "5902",
-      "RangeType": "SINGLE",
-      "SkillSubType": "PASSIVE",
+      "IconName": "Skill_Second_2000059",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000059_Skill02",
-      "TargetTeamType": "ME",
-      "buff": [
-        "UNIQUE_DOLL_GARDEN_CARETAKER",
-        "BT_ACTION_GAUGE"
-      ],
-      "cd": "9",
-      "debuff": [
-        "UNIQUE_MARTYRDOM"
-      ],
-      "description": [
-        "(Triggered Effect) <color=#28d9ed>Resurrects</color> and heals for <color=#28d9ed>[Buff_V_2000059_2_1]</color> upon death. <color=#28d9ed>Dies</color> if no enemy is slain in <color=#28d9ed>[Buff_T_2000059_2_2] turn</color>.\\nGrants the caster <color=#28d9ed>Doll Garden's Caretaker</color> for <color=#28d9ed>[Buff_T_2000059_2_5] turn</color> upon resurrection."
-      ],
+      "name": "The People on Earth",
+      "name_kr": "땅에는 인간이",
+      "name_jp": "地にありては者",
+      "true_desc": "(Triggered Effect) <color=#28d9ed>Resurrects</color> and heals for <color=#28d9ed>20%</color> upon death. <color=#28d9ed>Dies</color> if no enemy is slain in <color=#28d9ed>1 turn</color>.\\nGrants the caster <color=#28d9ed>Doll Garden's Caretaker</color> for <color=#28d9ed>1 turn</color> upon resurrection.",
+      "true_desc_kr": "(발동 효과) 사망 시 즉시 <color=#28d9ed>20%</color>의 체력을 회복하며 <color=#28d9ed>부활</color>합니다. <color=#28d9ed>1턴</color> 동안 적을 처치하지 못하면 <color=#28d9ed>사망</color>하게 됩니다.\\n부활 시 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>모형 정원의 관리자</color>를 획득합니다.",
+      "true_desc_jp": "(発動効果)倒れた時、直ちに自分のHPを<color=#28d9ed>20%</color>回復して<color=#28d9ed>復活</color>する。敵を<color=#28d9ed>1ターン</color>の間に倒せなかった場合、自分が<color=#28d9ed>倒れる。</color>\\n復活時、自分に<color=#28d9ed>【箱庭の主】</color>を<color=#28d9ed>1ターン</color>の間付与する。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
         ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン"
+        ],
         "3": [
           "+80% Priority"
+        ],
+        "3_kr": [
+          "행동 게이지 +80%"
+        ],
+        "3_jp": [
+          "行動ゲージUP+80%"
         ],
         "4": [
           "-1 turn Skill Cooldown",
           "+15% healing"
         ],
-        "5": [
-          "+15% healing",
-          "Resets Sanctuary for All's cooldown"
-        ],
-        "2_jp": [
-          "スキルターン-1ターン"
-        ],
-        "2_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "3_jp": [
-          "行動ゲージUP+80%"
-        ],
-        "3_kr": [
-          "행동 게이지 +80%"
+        "4_kr": [
+          "스킬 쿨타임 -1턴",
+          "체력 회복량 +15%"
         ],
         "4_jp": [
           "スキルターン-1ターン",
           "HP回復量+15%"
         ],
-        "4_kr": [
-          "스킬 쿨타임 -1턴",
-          "체력 회복량 +15%"
-        ],
-        "5_jp": [
-          "HP回復量+15%",
-          "【万物にありては安息】のスキルターン初期化"
+        "5": [
+          "+15% healing",
+          "Resets Sanctuary for All's cooldown"
         ],
         "5_kr": [
           "체력 회복량 +15%",
           "만물에게 안식을 쿨타임 초기화"
+        ],
+        "5_jp": [
+          "HP回復量+15%",
+          "【万物にありては安息】のスキルターン初期化"
         ]
       },
-      "wgr": null,
-      "name_kr": "땅에는 인간이",
-      "name_jp": "地にありては者",
-      "true_desc_kr": "(발동 효과) 사망 시 즉시 <color=#28d9ed>20%</color>의 체력을 회복하며 <color=#28d9ed>부활</color>합니다. <color=#28d9ed>1턴</color> 동안 적을 처치하지 못하면 <color=#28d9ed>사망</color>하게 됩니다.\\n부활 시 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>모형 정원의 관리자</color>를 획득합니다.",
-      "true_desc_jp": "(発動効果)倒れた時、直ちに自分のHPを<color=#28d9ed>20%</color>回復して<color=#28d9ed>復活</color>する。敵を<color=#28d9ed>1ターン</color>の間に倒せなかった場合、自分が<color=#28d9ed>倒れる。</color>\\n復活時、自分に<color=#28d9ed>【箱庭の主】</color>を<color=#28d9ed>1ターン</color>の間付与する。"
+      "cd": "9",
+      "buff": [
+        "IG_Buff_2000059_Interruption",
+        "BT_ACTION_GAUGE",
+        "BT_COOL3_CHARGE"
+      ],
+      "debuff": [
+        "IG_Buff_Death_Timer_Interruption_D"
+      ]
     },
     "SKT_ULTIMATE": {
-      "name": "Sanctuary for All",
-      "true_desc": "Attacks all enemies. This skill ignores <color=#28d9ed>30%</color> of the target's Defense and deals damage inversely proportional to the number of targets.\\nThe damage of the skill increases every time someone dies.",
-      "DescID": "SKILL_DESC_2000059_Skill03_LV1,SKILL_DESC_2000059_Skill03_LV1,SKILL_DESC_2000059_Skill03_LV1,SKILL_DESC_2000059_Skill03_LV1,SKILL_DESC_2000059_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000059",
       "NameIDSymbol": "5903",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000059",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000059_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "Attacks all enemies. This skill ignores <color=#28d9ed>30%</color> of the target's Defense and deals damage inversely proportional to the number of targets.\\nThe damage of the skill increases every time someone dies."
-      ],
+      "name": "Sanctuary for All",
+      "name_kr": "만물에게 안식을",
+      "name_jp": "万物にありては安息",
+      "true_desc": "Attacks all enemies. This skill ignores <color=#28d9ed>30%</color> of the target's Defense and deals damage inversely proportional to the number of targets.\\nThe damage of the skill increases every time someone dies.",
+      "true_desc_kr": "적 전체를 공격합니다. 이 스킬은 대상의 방어력을 <color=#28d9ed>30%</color> 무시하며, 대상의 수가 적을수록 피해가 증가합니다.\\n이 스킬의 피해량은 사망자가 발생할 때마다 증가합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。このスキルは対象の防御力を<color=#28d9ed>30%</color>貫通し、対象の数が少ないほど与えるダメージがUPする。\\n倒れた敵の数に応じて、与えるダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "+15% damage"
-        ],
-        "5": [
-          "+20% damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
+        "3": [
+          "-1 turn Skill Cooldown"
         ],
         "3_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "4_jp": [
-          "ダメージ+15%"
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "+15% damage"
         ],
         "4_kr": [
           "피해량 +15%"
         ],
-        "5_jp": [
-          "ダメージ+20%"
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "만물에게 안식을",
-      "name_jp": "万物にありては安息",
-      "true_desc_kr": "적 전체를 공격합니다. 이 스킬은 대상의 방어력을 <color=#28d9ed>30%</color> 무시하며, 대상의 수가 적을수록 피해가 증가합니다.\\n이 스킬의 피해량은 사망자가 발생할 때마다 증가합니다.",
-      "true_desc_jp": "敵全体にダメージを与える。このスキルは対象の防御力を<color=#28d9ed>30%</color>貫通し、対象の数が少ないほど与えるダメージがUPする。\\n倒れた敵の数に応じて、与えるダメージがUPする。"
+      "buff": [],
+      "debuff": []
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, deals <color=#28d9ed>5</color> additional Weakness Gauge damage. \\n\\n<color=#ffd732>Dual Attack Effect</color>: Grants increased <color=#28d9ed>Speed</color> to the caster for <color=#28d9ed>1 turn</color>.",
-      "DescID": "SKILL_DESC_2000059_Skill04_LV1,SKILL_DESC_2000059_Skill04_LV1,SKILL_DESC_2000059_Skill04_LV1,SKILL_DESC_2000059_Skill04_LV1,SKILL_DESC_2000059_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Dark_Start",
       "NameIDSymbol": "5904",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Dark_Start",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": [],
-      "cd": null,
-      "debuff": "BT_WG_DMG",
-      "description": [
-        "<color=#ffd732>Chain Starter Effect</color>: After attacking, deals <color=#28d9ed>[Buff_V_2000059_chain_1_1]</color> additional Weakness Gauge damage. \\n\\n<color=#ffd732>Dual Attack Effect</color>: Grants increased <color=#28d9ed>Speed</color> to the caster for <color=#28d9ed>[Buff_T_2000059_backup_1_1] turn</color>."
-      ],
-      "dual_buff": "BT_STAT|ST_SPEED",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, deals <color=#28d9ed>5</color> additional Weakness Gauge damage. \\n\\n<color=#ffd732>Dual Attack Effect</color>: Grants increased <color=#28d9ed>Speed</color> to the caster for <color=#28d9ed>1 turn</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>5</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : <color=#28d9ed>1턴</color> 동안 자신의 <color=#28d9ed>속도</color>가 증가합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、WGを追加で<color=#28d9ed>5</color>DOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:自分の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>5</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : <color=#28d9ed>1턴</color> 동안 자신의 <color=#28d9ed>속도</color>가 증가합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、WGを追加で<color=#28d9ed>5</color>DOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:自分の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。"
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "BT_WG_REVERSE_HEAL"
+      ],
+      "dual_buff": [
+        "BT_STAT|ST_SPEED"
+      ]
     }
-  },
-  "rank": "A",
-  "Fullname_kr": "데미우르고스 아스테",
-  "Fullname_jp": "デミウルゴス アステ",
-  "VoiceActor": "VA. Kayli Mills",
-  "VoiceActor_jp": "CV. 柚木涼香",
-  "VoiceActor_kr": "CV. Kayli Mills"
+  }
 }

@@ -1,19 +1,19 @@
 {
   "ID": "2000090",
   "Fullname": "Gnosis Dahlia",
+  "Fullname_jp": "グノーシス ダリア",
+  "Fullname_kr": "그노시스 달리아",
   "Rarity": 3,
   "Element": "Dark",
   "Class": "Striker",
-  "gift": "Magic Tool",
-  "role": "dps",
-  "rank_pvp": "S",
-  "limited": true,
-  "tags": [
-    "limited",
-    "ignore-defense"
-  ],
   "SubClass": "Attacker",
-  "video": "zwJUawe5X0g",
+  "rank": "A",
+  "rank_pvp": "S",
+  "role": "dps",
+  "tags": [
+    "ignore-defense",
+    "limited"
+  ],
   "skill_priority": {
     "First": {
       "prio": 2
@@ -25,329 +25,299 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Finish",
+  "video": "zwJUawe5X0g",
+  "VoiceActor": "VA. Amber Lee Connors",
+  "VoiceActor_kr": "CV. Amber Lee Connors",
+  "VoiceActor_jp": "CV. 山崎はるか",
+  "limited": true,
+  "gift": "Magic Tool",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\nWhen Terminal Winter defeats an enemy, reduces the cooldown of Terminal Winter by 2 turns \n+8% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n최후의 겨울로 적 처치 시 해당 스킬 쿨타임 -2턴\n아군 치명 피해 +8%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n【フィンブルウィンター】で敵を倒した時、\n当該スキルのターンを2ターン減少\n味方の会心ダメージ+8%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+50 Action Points at battle start",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+50",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\nAlways granted Hubris's Dominion\nWhen defeating an enemy, recovers Health by 10%",
-    "4_1_jp": "ATK DEF HP +16%\n【フィンブルウィンター】で敵を倒した時、\n当該スキルのターンを2ターン減少\n味方の会心ダメージ+8%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n최후의 겨울로 적 처치 시 해당 스킬 쿨타임 -2턴\n아군 치명 피해 +8%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+50",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50",
-    "6_jp": "ATK DEF HP +30%\n【傲慢の領域】常時付与\n敵を倒した時、HP10%回復",
-    "6_kr": "ATK DEF HP +30%\n오만의 영역 상시 보유\n적 처치 시 체력 10% 회복"
+    "6_kr": "ATK DEF HP +30%\n오만의 영역 상시 보유\n적 처치 시 체력 10% 회복",
+    "6_jp": "ATK DEF HP +30%\n【傲慢の領域】常時付与\n敵を倒した時、HP10%回復"
   },
-  "Chain_Type": "Finish",
   "skills": {
     "SKT_FIRST": {
-      "name": "Cold-Blooded Torture",
-      "true_desc": "Attacks an enemy.\\nHas a <color=#28d9ed>15%</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>20%</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack.",
-      "ApproachType": "ATTACK",
-      "ApproachZ": "1.5,1.5",
-      "DescID": "SKILL_DESC_2000090_Skill01_LV1,SKILL_DESC_2000090_Skill01_LV1,SKILL_DESC_2000090_Skill01_LV1,SKILL_DESC_2000090_Skill01_LV1,SKILL_DESC_2000090_Skill01_LV1",
-      "IconName": "Skill_First_2000090",
       "NameIDSymbol": "9001",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000090",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000090_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_ACTION_GAUGE",
-        "BT_ADDITIVE_TURN"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Activates an enhanced attack\\nIncreases Penetration by 30%",
-          "level": 1,
-          "effect_kr": "강화 공격 확정 발생\\n관통력 30% 증가",
-          "effect_jp": "強化攻撃が確定で発動\\n貫通力30%UP"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Increases damage",
-          "level": 2,
-          "effect_kr": "피해 증가",
-          "effect_jp": "ダメージUP"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "Gains an extra turn",
-          "level": 3,
-          "effect_kr": "추가 턴 발생",
-          "effect_jp": "追加ターン発生"
-        }
-      },
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy.\\nHas a <color=#28d9ed>[Buff_V_2000090_1_1]</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>[Buff_V_2000090_1_3]</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack."
-      ],
+      "name": "Cold-Blooded Torture",
+      "name_kr": "냉혹한 고문",
+      "name_jp": "ルースレストーチャー",
+      "true_desc": "Attacks an enemy.\\nHas a <color=#28d9ed>15%</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>20%</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack.",
+      "true_desc_kr": "적을 공격합니다.\\n<color=#28d9ed>15%</color> 확률로 <color=#28d9ed>강화 공격</color>이 발생합니다. 강화 공격 후에는 <color=#28d9ed>아군 전체</color>의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.\\n<color=#28d9ed>오만의 영역</color> 보유 시 강화 공격의 발동 확률이 2배가 됩니다.",
+      "true_desc_jp": "敵単体にダメージを与える。\\n<color=#28d9ed>15%</color>の確率で、<color=#28d9ed>強化攻撃</color>が発生する。強化攻撃後、<color=#28d9ed>味方全体</color>の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。\\n<color=#28d9ed>【傲慢の領域】</color>がある場合、強化攻撃の発生率が2倍になる。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+10% effect chance"
         ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
         "4": [
           "+1 Weakness Gauge damage"
+        ],
+        "4_kr": [
+          "WG 감소량 +1"
+        ],
+        "4_jp": [
+          "WGダメージ+1"
         ],
         "5": [
           "+10% effect chance",
           "+10% damage"
         ],
+        "5_kr": [
+          "효과 발동 확률 +10%",
+          "피해량 +10%"
+        ],
+        "5_jp": [
+          "効果発生率+10%",
+          "ダメージ+10%"
+        ]
+      },
+      "wgr": 1,
+      "cd": null,
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_ADDITIVE_TURN"
+      ],
+      "debuff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Activates an enhanced attack\\nIncreases Penetration by 30%",
+          "effect_kr": "강화 공격 확정 발생\\n관통력 30% 증가",
+          "effect_jp": "強化攻撃が確定で発動\\n貫通力30%UP",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Increases damage",
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Gains an extra turn",
+          "effect_kr": "추가 턴 발생",
+          "effect_jp": "追加ターン発生",
+          "cost": 160,
+          "level": 3
+        }
+      }
+    },
+    "SKT_SECOND": {
+      "NameIDSymbol": "9002",
+      "IconName": "Skill_Second_2000090",
+      "SkillType": "SKT_SECOND",
+      "name": "Untouchable One",
+      "name_kr": "언터쳐블 원",
+      "name_jp": "アンタッチャブル・ワン",
+      "true_desc": "(Passive Effect) When granted <color=#28d9ed>Hubris's Dominion</color>, damage suffered in one attack does not exceed <color=#28d9ed>95%</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks)\\n(Triggered Effect) Upon taking a critical hit, activates <color=#28d9ed>Cold-Blooded Torture</color> against the target.",
+      "true_desc_kr": "(패시브 효과) <color=#28d9ed>오만의 영역</color> 보유 시 한번에 받는 피해는 자신 최대 체력의 <color=#28d9ed>95%</color>를 초과하지 않습니다. (협공 및 추가타 포함)\\n(발동 효과) 치명 피격 시 대상에게 <color=#28d9ed>냉혹한 고문</color>을 사용합니다.",
+      "true_desc_jp": "(パッシブ効果)<color=#28d9ed>【傲慢の領域】</color>がある場合、一度に受けるダメージが自分の最大HPの<color=#28d9ed>95%</color>を超えない。(連携・追加攻撃も含む)\\n(発動効果)会心ダメージを受けた場合、対象に<color=#28d9ed>【ルースレストーチャー】</color>を使用する。",
+      "enhancement": {
+        "2": [
+          "-5% Health Limit"
+        ],
+        "2_kr": [
+          "체력 조건 -5%"
+        ],
         "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
+          "HPの条件-5%"
+        ],
+        "3": [
+          "-5% Health Limit"
+        ],
+        "3_kr": [
+          "체력 조건 -5%"
+        ],
+        "3_jp": [
+          "HPの条件-5%"
+        ],
+        "4": [
+          "-5% Health Limit"
+        ],
+        "4_kr": [
+          "체력 조건 -5%"
+        ],
+        "4_jp": [
+          "HPの条件-5%"
+        ],
+        "5": [
+          "-10% Health Limit"
+        ],
+        "5_kr": [
+          "체력 조건 -10%"
+        ],
+        "5_jp": [
+          "HPの条件-10%"
+        ]
+      },
+      "buff": [
+        "BT_RUN_FIRST_SKILL_ON_TURN_END_DEFENDER"
+      ],
+      "debuff": []
+    },
+    "SKT_ULTIMATE": {
+      "NameIDSymbol": "9003",
+      "IconName": "Skill_Ultimate_2000090",
+      "SkillType": "SKT_ULTIMATE",
+      "name": "Terminal Winter",
+      "name_kr": "최후의 겨울",
+      "name_jp": "フィンブルウィンター",
+      "true_desc": "Attacks all enemies. After attacking, grants <color=#28d9ed>Hubris's Dominion</color> to the caster for <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc_kr": "적 전체를 공격합니다. 공격 후 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>오만의 영역</color>을 획득합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。攻撃後、自分に<color=#28d9ed>【傲慢の領域】</color>を<color=#28d9ed>1ターン</color>の間付与する。",
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
         ],
         "2_kr": [
           "피해량 +10%",
           "WG 감소량 +1"
         ],
-        "3_jp": [
-          "効果発生率+10%"
-        ],
-        "3_kr": [
-          "효과 발동 확률 +10%"
-        ],
-        "4_jp": [
-          "WGダメージ+1"
-        ],
-        "4_kr": [
-          "WG 감소량 +1"
-        ],
-        "5_jp": [
-          "効果発生率+10%",
-          "ダメージ+10%"
-        ],
-        "5_kr": [
-          "효과 발동 확률 +10%",
-          "피해량 +10%"
-        ]
-      },
-      "wgr": 1,
-      "name_kr": "냉혹한 고문",
-      "name_jp": "ルースレストーチャー",
-      "true_desc_kr": "적을 공격합니다.\\n<color=#28d9ed>15%</color> 확률로 <color=#28d9ed>강화 공격</color>이 발생합니다. 강화 공격 후에는 <color=#28d9ed>아군 전체</color>의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.\\n<color=#28d9ed>오만의 영역</color> 보유 시 강화 공격의 발동 확률이 2배가 됩니다.",
-      "true_desc_jp": "敵単体にダメージを与える。\\n<color=#28d9ed>15%</color>の確率で、<color=#28d9ed>強化攻撃</color>が発生する。強化攻撃後、<color=#28d9ed>味方全体</color>の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。\\n<color=#28d9ed>【傲慢の領域】</color>がある場合、強化攻撃の発生率が2倍になる。"
-    },
-    "SKT_SECOND": {
-      "name": "Untouchable One",
-      "true_desc": "(Passive Effect) When granted <color=#28d9ed>Hubris's Dominion</color>, damage suffered in one attack does not exceed <color=#28d9ed>95%</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks)\\n(Triggered Effect) Upon taking a critical hit, activates <color=#28d9ed>Cold-Blooded Torture</color> against the target.",
-      "ApproachTime": "ATTACK",
-      "DescID": "SKILL_DESC_2000090_Skill02_LV1,SKILL_DESC_2000090_Skill02_LV1,SKILL_DESC_2000090_Skill02_LV1,SKILL_DESC_2000090_Skill02_LV1,SKILL_DESC_2000090_Skill02_LV1",
-      "IconName": "Skill_Second_2000090",
-      "NameIDSymbol": "9002",
-      "RangeType": "SINGLE",
-      "SkillSubType": "PASSIVE",
-      "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000090_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": 0,
-      "debuff": [],
-      "description": [
-        "(Passive Effect) When granted <color=#28d9ed>Hubris's Dominion</color>, damage suffered in one attack does not exceed <color=#28d9ed>[Buff_V_2000090_2_1]</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks)\\n(Triggered Effect) Upon taking a critical hit, activates <color=#28d9ed>Cold-Blooded Torture</color> against the target."
-      ],
-      "enhancement": {
-        "2": [
-          "-5% Health Limit"
-        ],
-        "3": [
-          "-5% Health Limit"
-        ],
-        "4": [
-          "-5% Health Limit"
-        ],
-        "5": [
-          "-10% Health Limit"
-        ],
         "2_jp": [
-          "HPの条件-5%"
-        ],
-        "2_kr": [
-          "체력 조건 -5%"
-        ],
-        "3_jp": [
-          "HPの条件-5%"
-        ],
-        "3_kr": [
-          "체력 조건 -5%"
-        ],
-        "4_jp": [
-          "HPの条件-5%"
-        ],
-        "4_kr": [
-          "체력 조건 -5%"
-        ],
-        "5_jp": [
-          "HPの条件-10%"
-        ],
-        "5_kr": [
-          "체력 조건 -10%"
-        ]
-      },
-      "wgr": 0,
-      "name_kr": "언터쳐블 원",
-      "name_jp": "アンタッチャブル・ワン",
-      "true_desc_kr": "(패시브 효과) <color=#28d9ed>오만의 영역</color> 보유 시 한번에 받는 피해는 자신 최대 체력의 <color=#28d9ed>95%</color>를 초과하지 않습니다. (협공 및 추가타 포함)\\n(발동 효과) 치명 피격 시 대상에게 <color=#28d9ed>냉혹한 고문</color>을 사용합니다.",
-      "true_desc_jp": "(パッシブ効果)<color=#28d9ed>【傲慢の領域】</color>がある場合、一度に受けるダメージが自分の最大HPの<color=#28d9ed>95%</color>を超えない。(連携・追加攻撃も含む)\\n(発動効果)会心ダメージを受けた場合、対象に<color=#28d9ed>【ルースレストーチャー】</color>を使用する。"
-    },
-    "SKT_ULTIMATE": {
-      "name": "Terminal Winter",
-      "true_desc": "Attacks all enemies. After attacking, grants <color=#28d9ed>Hubris's Dominion</color> to the caster for <color=#28d9ed>1 turn(s)</color>.",
-      "DescID": "SKILL_DESC_2000090_Skill03_LV1,SKILL_DESC_2000090_Skill03_LV1,SKILL_DESC_2000090_Skill03_LV1,SKILL_DESC_2000090_Skill03_LV1,SKILL_DESC_2000090_Skill03_LV5",
-      "IconName": "Skill_Ultimate_2000090",
-      "NameIDSymbol": "9003",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
-      "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000090_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "UNIQUE_HUBRIS_DOMINION"
-      ],
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "Attacks all enemies. After attacking, grants <color=#28d9ed>Hubris's Dominion</color> to the caster for <color=#28d9ed>[Buff_T_2000090_3_1] turn(s)</color>."
-      ],
-      "enhancement": {
-        "2": [
-          "+10% damage",
-          "+1 Weakness Gauge damage"
+          "ダメージ+10%",
+          "WGダメージ+1"
         ],
         "3": [
           "+10% damage",
           "-1 turn Skill Cooldown"
         ],
-        "4": [
-          "+1 turn effect duration"
-        ],
-        "5": [
-          "+10% damage",
-          "Ignores the Defense of the enemy with the highest Max Health"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
+        "3_kr": [
           "피해량 +10%",
-          "WG 감소량 +1"
+          "스킬 쿨타임 -1턴"
         ],
         "3_jp": [
           "ダメージ+10%",
           "スキルターン-1ターン"
         ],
-        "3_kr": [
-          "피해량 +10%",
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "効果ターン+1ターン"
+        "4": [
+          "+1 turn effect duration"
         ],
         "4_kr": [
           "효과 지속 +1턴"
         ],
-        "5_jp": [
-          "ダメージ+10%",
-          "最大HPが最も高い敵単体の防御力無視"
+        "4_jp": [
+          "効果ターン+1ターン"
+        ],
+        "5": [
+          "+10% damage",
+          "Ignores the Defense of the enemy with the highest Max Health"
         ],
         "5_kr": [
           "피해량 +10%",
           "가장 최대 체력이 높은 적의 방어력 무시"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "最大HPが最も高い敵単体の防御力無視"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "최후의 겨울",
-      "name_jp": "フィンブルウィンター",
-      "true_desc_kr": "적 전체를 공격합니다. 공격 후 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>오만의 영역</color>을 획득합니다.",
-      "true_desc_jp": "敵全体にダメージを与える。攻撃後、自分に<color=#28d9ed>【傲慢の領域】</color>を<color=#28d9ed>1ターン</color>の間付与する。"
+      "buff": [
+        "IG_Buff_2000090_Interruption"
+      ],
+      "debuff": []
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>10%</color>.",
-      "DescID": "SKILL_DESC_2000090_Skill04_LV1,SKILL_DESC_2000090_Skill04_LV1,SKILL_DESC_2000090_Skill04_LV1,SKILL_DESC_2000090_Skill04_LV1,SKILL_DESC_2000090_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Dark_Finish",
       "NameIDSymbol": "9004",
-      "RangeType": "NONE",
+      "IconName": "Skill_ChainPassive_Dark_Finish",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "TargetTeamType_fallback1": "NONE",
-      "buff": "BT_CP_CHARGE",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>[Buff_V_2000090_chain_1_1]</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000090_backup_1_1]</color>."
-      ],
-      "dual_buff": "BT_ACTION_GAUGE",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>10%</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、CPを<color=#28d9ed>25</color>回復する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後、CPを<color=#28d9ed>25</color>回復する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。"
+      "cd": null,
+      "buff": [
+        "BT_CP_CHARGE"
+      ],
+      "debuff": [],
+      "dual_buff": [
+        "BT_ACTION_GAUGE"
+      ]
     }
-  },
-  "rank": "A",
-  "Fullname_kr": "그노시스 달리아",
-  "Fullname_jp": "グノーシス ダリア",
-  "VoiceActor": "VA. Amber Lee Connors",
-  "VoiceActor_jp": "CV. 山崎はるか",
-  "VoiceActor_kr": "CV. Amber Lee Connors"
+  }
 }

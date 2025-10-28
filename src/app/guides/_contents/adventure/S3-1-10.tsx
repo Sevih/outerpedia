@@ -12,8 +12,8 @@ export default function TyrantGuide() {
             <GuideHeading level={4}>Sphinx Guardian moveset</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><strong>S1</strong>: Single, <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> before attacking. Prioritizes <ClassInlineTag name="Ranger" /> and inflicts Instant Death on <ClassInlineTag name="Ranger" />.</li>
-                <li><strong>S2</strong>: AoE, inflicts <EffectInlineTag name="BT_SEALED" type="debuff" /> for 2 turns. <EffectInlineTag name="BT_SEAL_COUNTER" type="debuff" />.</li>
-                <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_AP_CHARGE" type="debuff" /> by 50. <EffectInlineTag name="BT_SEAL_COUNTER" type="debuff" />.</li>
+                <li><strong>S2</strong>: AoE, inflicts <EffectInlineTag name="BT_SEALED" type="debuff" /> for 2 turns. <EffectInlineTag name="BT_SEAL_COUNTER" type="buff" />.</li>
+                <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_AP_CHARGE" type="debuff" /> by 50. <EffectInlineTag name="BT_SEAL_COUNTER" type="buff" />.</li>
                 <li><strong>Passive</strong>: If there are no <ClassInlineTag name="Ranger" /> enemies, enemy Speed becomes 0 and <EffectInlineTag name="BT_ACTION_GAUGE" type="debuff" /> by 100% at the end of the turn.</li>
                 <li><strong>Passive</strong>: When inflicted with a debuff, gains <EffectInlineTag name="BT_STAT|ST_BUFF_RESIST" type="buff" /> for 2 turns.</li>
                 <li><strong>Passive</strong>: Grants an <EffectInlineTag name="BT_ADDITIVE_TURN" type="buff" /> when defeating an enemy.</li>

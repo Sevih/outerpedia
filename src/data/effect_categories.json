@@ -1,0 +1,94 @@
+{
+  "buff": {
+    "statBoosts": {
+      "label": "Stat Boosts",
+      "label_jp": "ステータス上昇",
+      "label_kr": "스탯 증가",
+      "description": "Buffs that increase character stats",
+      "description_jp": "キャラクターのステータスを上昇させるバフ",
+      "description_kr": "캐릭터의 스탯을 증가시키는 버프"
+    },
+    "supporting": {
+      "label": "Supporting",
+      "label_jp": "サポート",
+      "label_kr": "지원",
+      "description": "Protective and healing buffs",
+      "description_jp": "保護と回復のバフ",
+      "description_kr": "보호 및 치유 버프"
+    },
+    "utility": {
+      "label": "Utility",
+      "label_jp": "ユーティリティ",
+      "label_kr": "유틸리티",
+      "description": "Utility buffs (cooldown, action gauge, etc.)",
+      "description_jp": "ユーティリティバフ（クールダウン、行動ゲージなど）",
+      "description_kr": "유틸리티 버프 (쿨타임, 행동 게이지 등)"
+    },
+    "unique": {
+      "label": "Unique",
+      "label_jp": "ユニーク",
+      "label_kr": "고유",
+      "description": "Character-specific unique buffs",
+      "description_jp": "キャラクター固有のバフ",
+      "description_kr": "캐릭터 고유 버프"
+    },
+    "hidden": {
+      "label": "Hidden",
+      "label_jp": "非表示",
+      "label_kr": "숨김",
+      "description": "Buffs that should not be displayed in the UI",
+      "description_jp": "UIに表示されないバフ",
+      "description_kr": "UI에 표시되지 않는 버프"
+    }
+  },
+  "debuff": {
+    "statReduction": {
+      "label": "Stat Reduction",
+      "label_jp": "ステータス減少",
+      "label_kr": "스탯 감소",
+      "description": "Debuffs that reduce character stats",
+      "description_jp": "キャラクターのステータスを減少させるデバフ",
+      "description_kr": "캐릭터의 스탯을 감소시키는 디버프"
+    },
+    "cc": {
+      "label": "Crowd Control",
+      "label_jp": "行動妨害",
+      "label_kr": "군중 제어",
+      "description": "Crowd control effects (stun, freeze, silence, etc.)",
+      "description_jp": "行動妨害効果（スタン、凍結、沈黙など）",
+      "description_kr": "군중 제어 효과 (스턴, 빙결, 침묵 등)"
+    },
+    "dot": {
+      "label": "Damage Over Time",
+      "label_jp": "継続ダメージ",
+      "label_kr": "지속 피해",
+      "description": "Debuffs that deal damage over time",
+      "description_jp": "継続ダメージを与えるデバフ",
+      "description_kr": "시간 경과에 따라 피해를 주는 디버프"
+    },
+    "utility": {
+      "label": "Utility",
+      "label_jp": "ユーティリティ",
+      "label_kr": "유틸리티",
+      "description": "Utility debuffs (cooldown, seal, etc.)",
+      "description_jp": "ユーティリティデバフ（クールダウン、封印など）",
+      "description_kr": "유틸리티 디버프 (쿨타임, 봉인 등)"
+    },
+    "unique": {
+      "label": "Unique",
+      "label_jp": "ユニーク",
+      "label_kr": "고유",
+      "description": "Character-specific unique debuffs",
+      "description_jp": "キャラクター固有のデバフ",
+      "description_kr": "캐릭터 고유 디버프"
+    },
+    "hidden": {
+      "label": "Hidden",
+      "label_jp": "非表示",
+      "label_kr": "숨김",
+      "description": "Debuffs that should not be displayed in the UI",
+      "description_jp": "UIに表示されないデバフ",
+      "description_kr": "UI에 표시되지 않는 디버프"
+    }
+  }
+}

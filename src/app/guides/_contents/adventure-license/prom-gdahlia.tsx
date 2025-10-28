@@ -30,7 +30,7 @@ export default function GnosisDahliaGuide() {
         <li><strong>S2</strong>: Single, <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> by 20%.</li>
         <li><strong>S3</strong>: AoE, ignores defense.</li>
         <li><strong>Passive</strong>: Damage taken in one attack cannot exceed 6% of her health (dual and additional attack are included).</li>
-        <li><strong>Passive</strong>: All boss attacks are <EffectInlineTag name="BT_SEAL_COUNTER" type="debuff" />.</li>
+        <li><strong>Passive</strong>: All boss attacks are <EffectInlineTag name="BT_SEAL_COUNTER" type="buff" />.</li>
         <li><strong>Passive</strong>: Counter with S1 when taking a critical hit.</li>
         <li><strong>Enrage</strong>:  When health drops under 20%. AoE, no longer takes Weakness Gauge damage and gains <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE_IR" type="buff" />.</li>
       </ul>

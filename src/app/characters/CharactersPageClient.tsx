@@ -14,8 +14,25 @@ import LZString from 'lz-string'
 import { EL, CL, CH, GF, EL_INV, CL_INV, CH_INV, GF_INV } from '@/data/filterCodes'
 import effectsIndex from '@/data/effectsIndex.json'
 import rawTAG_INDEX from '@/data/tags.json'
+import rawBuffsData from '@/data/buffs.json'
+import rawDebuffsData from '@/data/debuffs.json'
+import effectCategories from '@/data/effect_categories.json'
 import type { TenantKey } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
+
+// Type for buff/debuff data structure
+type EffectFullData = {
+  name: string
+  category?: string
+  group?: string
+  label: string
+  label_jp?: string
+  label_kr?: string
+  description: string
+  description_jp?: string
+  description_kr?: string
+  icon: string
+}
 
 type RecruitBadge = { src: string; altKey: string }
 
@@ -157,26 +174,44 @@ const isRoleSlug = (v: unknown): v is RoleSlug =>
   v === 'dps' || v === 'support' || v === 'sustain'
 
 
-// ===== Effect groups
-const orderedBuffGroups = [
-  { title: 'characters.effectsGroups.buff.statBoosts', items: ['BT_STAT|ST_ATK', 'BT_STAT|ST_DEF', 'BT_STAT|ST_SPEED', 'BT_STAT|ST_CRITICAL_RATE', 'BT_STAT|ST_CRITICAL_DMG_RATE', 'BT_STAT|ST_BUFF_CHANCE', 'BT_STAT|ST_BUFF_RESIST', 'BT_STAT|ST_AVOID', 'BT_STAT|ST_ACCURACY', 'BT_STAT|ST_PIERCE_POWER_RATE', 'BT_RANDOM_STAT'] },
-  { title: 'characters.effectsGroups.buff.supporting', items: ['BT_INVINCIBLE', 'BT_SHIELD_BASED_CASTER', 'BT_IMMUNE', 'IG_Buff_BuffdurationIncrease', 'BT_UNDEAD', 'BT_STEALTHED', 'BT_REMOVE_DEBUFF', 'BT_REVIVAL', 'BT_RESURRECTION_G', 'SYS_CONTINU_HEAL', 'BT_STAT|ST_VAMPIRIC','IG_Buff_DeBuffdurationdecrease'] },
-  { title: 'characters.effectsGroups.buff.utility', items: ['BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_STAT|ST_COUNTER_RATE', 'BT_CP_CHARGE', 'Heavy Strike', 'BT_DMG_ELEMENT_SUPERIORITY', 'BT_ADDITIVE_TURN', 'SYS_BUFF_REVENGE', 'SYS_REVENGE_HEAL', 'SYS_BUFF_BREAK_DMG', 'BT_CALL_BACKUP'] },
-  { title: 'characters.effectsGroups.buff.unique', items: ['UNIQUE_ARIEL', 'UNIQUE_SAKURA_CHIRU', 'UNIQUE_UME_ICHIRIN', 'UNIQUE_GRACE_OF_THE_VIRGIN_GODDESS', 'UNIQUE_CHARISMA', 'UNIQUE_DOLL_GARDEN_CARETAKER', 'UNIQUE_ETHER_BOOST', 'UNIQUE_DESTROYER_PUNISHMENT', 'UNIQUE_PUREBLOOD_DOMINION', 'UNIQUE_RADIANT_WILL', 'UNIQUE_RETRIBUTION_DOMINION', 'UNIQUE_HUBRIS_DOMINION', 'UNIQUE_GIFT_OF_BUFF', 'UNIQUE_FIERCE_OFFENSIVE', 'UNIQUE_REGINA_WORLD', 'UNIQUE_NINJA_AFTERIMAGE', 'UNIQUE_POLAR_KNIGHT', 'UNIQUE_WHITE_KNIGHT', 'UNIQUE_BT_SHARE_DMG_MULTI'] },
-]
-
-const orderedDebuffGroups = [
-  { title: 'characters.effectsGroups.debuff.statReduction', items: ['BT_STAT|ST_ATK', 'BT_STAT|ST_DEF', 'BT_STAT|ST_SPEED', 'BT_STAT|ST_CRITICAL_RATE', 'BT_STAT|ST_CRITICAL_DMG_RATE', 'BT_STAT|ST_BUFF_CHANCE', 'BT_STAT|ST_BUFF_RESIST', 'BT_STAT|ST_AVOID', 'BT_STAT|ST_ACCURACY'] },
-  { title: 'characters.effectsGroups.debuff.cc', items: ['BT_FREEZE', 'BT_STONE', 'BT_STUN', 'BT_SILENCE', 'BT_AGGRO', 'BT_MARKING'] },
-  { title: 'characters.effectsGroups.debuff.dot', items: ['BT_DOT_BURN', 'BT_DOT_BURN_IR', 'BT_DOT_CURSE', 'BT_DOT_CURSE_IR', 'BT_DOT_BLEED', 'BT_DOT_BLEED_IR', 'BT_DOT_POISON', 'BT_DOT_LIGHTNING', 'BT_DOT_ETERNAL_BLEED', 'BT_DETONATE'] },
-  { title: 'characters.effectsGroups.debuff.utility', items: ['BT_COOL_CHARGE', 'BT_ACTION_GAUGE', 'BT_AP_CHARGE', 'BT_SEAL_COUNTER', 'BT_SEALED', 'BT_SEALED_IR', 'BT_SEALED_RESURRECTION', 'BT_SEAL_ADDITIVE_ATTACK', 'BT_STATBUFF_CONVERT_TO_STATDEBUFF', 'BT_STEAL_BUFF', 'BT_REMOVE_BUFF', 'IG_Buff_BuffdurationReduce', 'IG_Buff_DeBuffdurationIncrease', 'BT_SEALED_RECEIVE_HEAL', 'BT_WG_DMG', 'BT_FIXED_DAMAGE', 'BT_RESOURCE_DOWN','DMG_REDUCE_RATE_DOWN'] },
-  { title: 'characters.effectsGroups.debuff.unique', items: ['UNIQUE_MARTYRDOM', 'UNIQUE_IRREGULAR_INFECTION'] },
-]
+// ===== Effect groups - Category keys for grouping
+const buffCategoryKeys = Object.keys(effectCategories.buff)
+const debuffCategoryKeys = Object.keys(effectCategories.debuff)
 
 // ===== Small helpers
 const isArr = <T,>(v: T[] | undefined): v is T[] => Array.isArray(v) && v.length > 0
 const getAllEffects = (char: CharacterLite, type: 'buff' | 'debuff') => (Array.isArray(char[type]) ? char[type]! : [])
 const extractAllEffects = (list: CharacterLite[], type: 'buff' | 'debuff') => [...new Set(list.flatMap(c => (Array.isArray(c[type]) ? c[type]! : [])))].sort()
+
+// ===== Effect grouping helpers
+// Build a map of effect name -> group (if it has one)
+const effectGroupMap = new Map<string, string>()
+const buffsData = rawBuffsData as Array<{ name: string; group?: string }>
+const debuffsData = rawDebuffsData as Array<{ name: string; group?: string }>
+;[...buffsData, ...debuffsData].forEach(effect => {
+  if (effect.group) {
+    effectGroupMap.set(effect.name, effect.group)
+  }
+})
+
+// Check if a character has an effect, considering groups
+// If the filter is for "BT_CALL_BACKUP", it should match characters with "BT_CALL_BACKUP" OR "BT_CALL_BACKUP_2" (grouped)
+function charHasEffect(char: CharacterLite, filterEffect: string, type: 'buff' | 'debuff'): boolean {
+  const charEffects = getAllEffects(char, type)
+
+  // Direct match
+  if (charEffects.includes(filterEffect)) return true
+
+  // Check if any of the character's effects belong to the same group as filterEffect
+  for (const charEffect of charEffects) {
+    const charGroup = effectGroupMap.get(charEffect)
+    if (charGroup && charGroup === filterEffect) {
+      return true
+    }
+  }
+
+  return false
+}
 
 // ===== URL (de)serialization
 function encodeStateToZ(p: Payload): string {
@@ -385,8 +420,8 @@ export default function CharactersPage({ langue }: ClientProps) {
     ...ROLE_VALUES.map(v => ({ name: t(`characters.roles.${v}`), value: v })),
   ]), [t])
 
-  const buffGroups = useMemo(() => groupEffects(allBuffs, orderedBuffGroups, showUniqueEffects), [allBuffs, showUniqueEffects]);
-  const debuffGroups = useMemo(() => groupEffects(allDebuffs, orderedDebuffGroups, showUniqueEffects), [allDebuffs, showUniqueEffects]);
+  const buffGroups = useMemo(() => groupEffects(allBuffs, rawBuffsData as EffectFullData[], buffCategoryKeys, 'buff', showUniqueEffects), [allBuffs, showUniqueEffects]);
+  const debuffGroups = useMemo(() => groupEffects(allDebuffs, rawDebuffsData as EffectFullData[], debuffCategoryKeys, 'debuff', showUniqueEffects), [allDebuffs, showUniqueEffects]);
 
   const payload = useMemo<Payload>(() => ({
     el: elementFilter.length ? elementFilter : undefined,
@@ -505,8 +540,8 @@ export default function CharactersPage({ langue }: ClientProps) {
       const giftMatch = giftFilter.length === 0 || giftFilter.includes((char.gift || '').trim().toLowerCase())
       const rarityMatch = rarityFilter.length === 0 || rarityFilter.includes(char.Rarity)
 
-      const hasBuffs = selectedBuffs.length > 0 ? (effectLogic === 'AND' ? selectedBuffs.every(b => getAllEffects(char, 'buff').includes(b)) : selectedBuffs.some(b => getAllEffects(char, 'buff').includes(b))) : true
-      const hasDebuffs = selectedDebuffs.length > 0 ? (effectLogic === 'AND' ? selectedDebuffs.every(d => getAllEffects(char, 'debuff').includes(d)) : selectedDebuffs.some(d => getAllEffects(char, 'debuff').includes(d))) : true
+      const hasBuffs = selectedBuffs.length > 0 ? (effectLogic === 'AND' ? selectedBuffs.every(b => charHasEffect(char, b, 'buff')) : selectedBuffs.some(b => charHasEffect(char, b, 'buff'))) : true
+      const hasDebuffs = selectedDebuffs.length > 0 ? (effectLogic === 'AND' ? selectedDebuffs.every(d => charHasEffect(char, d, 'debuff')) : selectedDebuffs.some(d => charHasEffect(char, d, 'debuff'))) : true
       const effectMatch = (selectedBuffs.length > 0 && selectedDebuffs.length > 0)
         ? (effectLogic === 'AND' ? hasBuffs && hasDebuffs : hasBuffs || hasDebuffs)
         : (selectedBuffs.length > 0 ? hasBuffs : selectedDebuffs.length > 0 ? hasDebuffs : true)
@@ -534,11 +569,8 @@ export default function CharactersPage({ langue }: ClientProps) {
   return (
     <div className="mx-auto max-w-[1400px] px-2 md:px-4 space-y-3">
 
-
-      <div className="sr-only"><h1>{t('characters.title')}</h1></div>
-
       <SearchBar searchTerm={rawQuery} setSearchTerm={setRawQuery} />
-      {(payload.el || payload.cl || payload.r || payload.chain || payload.gift || payload.role || payload.tags) && (
+      {(payload.el || payload.cl || payload.r || payload.chain || payload.gift || payload.role || payload.tags || payload.buffs || payload.debuffs) && (
         <div className="flex flex-wrap justify-center gap-2">
           <span className="text-xs text-slate-400">
             {t('characters.common.matches', { count: filtered.length })}

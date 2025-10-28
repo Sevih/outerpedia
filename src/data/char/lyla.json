@@ -1,13 +1,14 @@
 {
   "ID": "2000047",
   "Fullname": "Lyla",
+  "Fullname_jp": "ライラ",
+  "Fullname_kr": "라일라",
   "Rarity": 2,
   "Element": "Water",
-  "rank": "A",
-  "gift": "Natural Object",
-  "role": "sustain",
   "Class": "Healer",
   "SubClass": "Reliever",
+  "rank": "A",
+  "role": "sustain",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -19,324 +20,290 @@
       "prio": 2
     }
   },
+  "Chain_Type": "Join",
+  "VoiceActor": "VA. Stephanie Southerland",
+  "VoiceActor_kr": "CV.김나율",
+  "VoiceActor_jp": "CV. 渕上舞",
+  "gift": "Natural Object",
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",
-    "3": "ATK DEF HP +10%",
-    "4": "ATK DEF HP +16%\n+5% Health\n+1 Chain Passive Weakness Gauge damage",
-    "5": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
-    "6": "ATK DEF HP +30%\n+5% Health\n+25 Action Points at battle start",
-    "2_jp": "ATK DEF HP +5%",
     "2_kr": "ATK DEF HP +5%",
-    "3_jp": "ATK DEF HP +10%",
+    "2_jp": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
-    "4_jp": "ATK DEF HP +16%\nHP+5%\nチェーンパッシブのWGダメージ+1",
+    "3_jp": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+5% Health\n+1 Chain Passive Weakness Gauge damage",
     "4_kr": "ATK DEF HP +16%\n체력 +5%\n체인 패시브의 WG 감소량 +1",
-    "5_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "4_jp": "ATK DEF HP +16%\nHP+5%\nチェーンパッシブのWGダメージ+1",
+    "5": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\nHP+5%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n체력 +5%\n입장 시 AP +25"
+    "5_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "6": "ATK DEF HP +30%\n+5% Health\n+25 Action Points at battle start",
+    "6_kr": "ATK DEF HP +30%\n체력 +5%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\nHP+5%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "Stardust",
-      "true_desc": "Attacks an enemy. <color=#28d9ed>Heals</color> the ally with the lowest Health for <color=#28d9ed>1.5%</color> of Lyla's Max Health.",
-      "DescID": "SKILL_DESC_2000047_Skill01_LV1,SKILL_DESC_2000047_Skill01_LV1,SKILL_DESC_2000047_Skill01_LV1,SKILL_DESC_2000047_Skill01_LV1,SKILL_DESC_2000047_Skill01_LV1",
-      "FocusType_fallback1": "ATTACK",
-      "IconName": "Skill_First_2000047",
       "NameIDSymbol": "4701",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000047",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000047_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy. <color=#28d9ed>Heals</color> the ally with the lowest Health for <color=#28d9ed>[Buff_V_2000047_1_1]</color> of Lylaâs Max Health."
-      ],
+      "name": "Stardust",
+      "name_kr": "스타더스트",
+      "name_jp": "スターセラピー",
+      "true_desc": "Attacks an enemy. <color=#28d9ed>Heals</color> the ally with the lowest Health for <color=#28d9ed>1.5%</color> of Lyla's Max Health.",
+      "true_desc_kr": "적을 공격하고 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 라일라 최대 체력의 <color=#28d9ed>1.5%</color> 만큼 회복시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を、自分の最大HPの<color=#28d9ed>1.5%</color>回復する。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+1% healing"
-        ],
-        "4": [
-          "+10% damage"
-        ],
-        "5": [
-          "+1% healing",
-          "+10% damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "HP回復量+1%"
+        "3": [
+          "+1% healing"
         ],
         "3_kr": [
           "체력 회복량 +1%"
         ],
+        "3_jp": [
+          "HP回復量+1%"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
         "4_jp": [
           "ダメージ+10%"
         ],
-        "4_kr": [
+        "5": [
+          "+1% healing",
+          "+10% damage"
+        ],
+        "5_kr": [
+          "체력 회복량 +1%",
           "피해량 +10%"
         ],
         "5_jp": [
           "HP回復量+1%",
           "ダメージ+10%"
-        ],
-        "5_kr": [
-          "체력 회복량 +1%",
-          "피해량 +10%"
         ]
       },
       "wgr": 1,
-      "name_kr": "스타더스트",
-      "name_jp": "スターセラピー",
-      "true_desc_kr": "적을 공격하고 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 라일라 최대 체력의 <color=#28d9ed>1.5%</color> 만큼 회복시킵니다.",
-      "true_desc_jp": "敵単体にダメージを与え、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を、自分の最大HPの<color=#28d9ed>1.5%</color>回復する。"
+      "cd": null,
+      "buff": [],
+      "debuff": []
     },
     "SKT_SECOND": {
-      "name": "Unified Hearts",
-      "true_desc": "(Passive Effect) Reduces damage taken by allies from attacks that target all allies by <color=#28d9ed>5%</color>.\\n\\n(Triggered Effect) Upon taking damage from an attack that targets all allies, activates an <color=#28d9ed>Agile Response</color> effect.\\nGrants all allies <color=#28d9ed>Sustained Recovery</color> for <color=#28d9ed>1 turn(s)</color>.",
-      "ApproachTime": "CAST_BUFF",
-      "DescID": "SKILL_DESC_2000047_Skill02_LV1,SKILL_DESC_2000047_Skill02_LV1,SKILL_DESC_2000047_Skill02_LV1,SKILL_DESC_2000047_Skill02_LV1,SKILL_DESC_2000047_Skill02_LV1",
-      "IconName": "Skill_Second_2000047",
       "NameIDSymbol": "4702",
-      "RangeType": "ALL",
-      "SkillSubType": "PASSIVE",
+      "IconName": "Skill_Second_2000047",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000047_Skill02",
-      "TargetTeamType": "TEAM",
-      "buff": [
-        "SYS_CONTINU_HEAL",
-        "SYS_REVENGE_HEAL"
-      ],
-      "cd": "3",
-      "debuff": [],
-      "description": [
-        "(Passive Effect) Reduces damage taken by allies from attacks that target all allies by <color=#28d9ed>[Buff_V_2000047_2_2]</color>.\\n\\n(Triggered Effect) Upon taking damage from an attack that targets all allies, activates an <color=#28d9ed>Agile Response</color> effect.\\nGrants all allies <color=#28d9ed>Sustained Recovery</color> for <color=#28d9ed>[Buff_T_2000047_2_3] turn(s)</color>."
-      ],
+      "name": "Unified Hearts",
+      "name_kr": "하나 된 마음",
+      "name_jp": "天星のご加護",
+      "true_desc": "(Passive Effect) Reduces damage taken by allies from attacks that target all allies by <color=#28d9ed>5%</color>.\\n\\n(Triggered Effect) Upon taking damage from an attack that targets all allies, activates an <color=#28d9ed>Agile Response</color> effect.\\nGrants all allies <color=#28d9ed>Sustained Recovery</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc_kr": "(패시브 효과) 아군들이 전체 공격으로 받는 피해를 <color=#28d9ed>5%</color> 감소시킵니다.\\n\\n(발동 효과) 전체 공격 피격 시 <color=#28d9ed>신속 대응</color> 효과가 발동합니다.\\n아군 전체에게 <color=#28d9ed>지속 회복</color>을 <color=#28d9ed>1턴</color> 동안 부여합니다.",
+      "true_desc_jp": "(パッシブ効果)味方が受ける全体攻撃のダメージを<color=#28d9ed>5%</color>DOWNさせる。この効果は【ライラ】が倒れても持続する。\\n\\n敵から全体攻撃を受けた場合、<color=#28d9ed>【迅速対応】</color>を発動する。\\n【迅速対応】:味方全体に<color=#28d9ed>継続回復</color>を<color=#28d9ed>1ターン</color>の間付与する。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
         ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン"
+        ],
         "3": [
           "-5% damage taken"
         ],
+        "3_kr": [
+          "받는 피해 -5%"
+        ],
+        "3_jp": [
+          "受けるダメージ-5%"
+        ],
         "4": [
           "Increases Sustained Recovery duration by 1 turn"
+        ],
+        "4_kr": [
+          "지속 회복 +1턴"
+        ],
+        "4_jp": [
+          "継続回復+1ターン"
         ],
         "5": [
           "-5% damage taken",
           "-1 turn Skill Cooldown"
         ],
-        "2_jp": [
-          "スキルターン-1ターン"
-        ],
-        "2_kr": [
+        "5_kr": [
+          "받는 피해 -5%",
           "스킬 쿨타임 -1턴"
-        ],
-        "3_jp": [
-          "受けるダメージ-5%"
-        ],
-        "3_kr": [
-          "받는 피해 -5%"
-        ],
-        "4_jp": [
-          "継続回復+1ターン"
-        ],
-        "4_kr": [
-          "지속 회복 +1턴"
         ],
         "5_jp": [
           "受けるダメージ-5%",
           "スキルターン-1ターン"
-        ],
-        "5_kr": [
-          "받는 피해 -5%",
-          "스킬 쿨타임 -1턴"
         ]
       },
-      "wgr": null,
-      "name_kr": "하나 된 마음",
-      "name_jp": "天星のご加護",
-      "true_desc_kr": "(패시브 효과) 아군들이 전체 공격으로 받는 피해를 <color=#28d9ed>5%</color> 감소시킵니다.\\n\\n(발동 효과) 전체 공격 피격 시 <color=#28d9ed>신속 대응</color> 효과가 발동합니다.\\n아군 전체에게 <color=#28d9ed>지속 회복</color>을 <color=#28d9ed>1턴</color> 동안 부여합니다.",
-      "true_desc_jp": "(パッシブ効果)味方が受ける全体攻撃のダメージを<color=#28d9ed>5%</color>DOWNさせる。この効果は【ライラ】が倒れても持続する。\\n\\n敵から全体攻撃を受けた場合、<color=#28d9ed>【迅速対応】</color>を発動する。\\n【迅速対応】:味方全体に<color=#28d9ed>継続回復</color>を<color=#28d9ed>1ターン</color>の間付与する。"
+      "cd": "3",
+      "wgr": 3,
+      "buff": [
+        "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK",
+        "BT_CONTINU_HEAL"
+      ],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
-      "name": "Road to the Light",
-      "true_desc": "Grants <color=#28d9ed>Sustained Recovery</color> to all allies for <color=#28d9ed>1 turn</color>. Has a <color=#28d9ed>70%</color> chance to grant <color=#28d9ed>Increased Resilience</color> to all allies for <color=#28d9ed>1 turn</color>.",
-      "DescID": "SKILL_DESC_2000047_Skill03_LV1,SKILL_DESC_2000047_Skill03_LV1,SKILL_DESC_2000047_Skill03_LV1,SKILL_DESC_2000047_Skill03_LV1,SKILL_DESC_2000047_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000047",
       "NameIDSymbol": "4703",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "HEAL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000047",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000047_Skill03",
-      "TargetTeamType": "TEAM",
-      "buff": [
-        "BT_STAT|ST_BUFF_RESIST",
-        "SYS_CONTINU_HEAL",
-        "BT_ACTION_GAUGE"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Adds a barrier (Proportional to target's Health)",
-          "level": 1,
-          "effect_kr": "실드 추가 (대상 체력 비례)",
-          "effect_jp": "シールド追加\\n(対象のHPが高いほど\\nシールド量UP)"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Enhances barrier strength",
-          "level": 2,
-          "effect_kr": "실드 강화",
-          "effect_jp": "シールド強化"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "Target Action Points +50",
-          "level": 3,
-          "effect_kr": "대상 AP +50",
-          "effect_jp": "対象のAP+50"
-        }
-      },
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "Grants <color=#28d9ed>Sustained Recovery</color> to all allies for <color=#28d9ed>[Buff_T_2000047_3_2] turn</color>. Has a <color=#28d9ed>[Buff_C_2000047_3_1]</color> chance to grant <color=#28d9ed>Increased Resilience</color> to all allies for <color=#28d9ed>[Buff_T_2000047_3_1] turn</color>."
-      ],
-      "enhancement": {
-        "2": [
-          "+15% Resilience effect activation chance"
-        ],
-        "3": [
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "+15% Resilience effect activation chance"
-        ],
-        "5": [
-          "-1 turn Skill Cooldown"
-        ],
-        "2_jp": [
-          "効果抵抗発生率+15%"
-        ],
-        "2_kr": [
-          "효과 저항 발동 확률 증가 +15%"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
-        ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "効果抵抗発生率+15%"
-        ],
-        "4_kr": [
-          "효과 저항 발동 확률 증가 +15%"
-        ],
-        "5_jp": [
-          "スキルターン-1ターン"
-        ],
-        "5_kr": [
-          "스킬 쿨타임 -1턴"
-        ]
-      },
-      "wgr": null,
+      "name": "Road to the Light",
       "name_kr": "빛을 인도하는 길",
       "name_jp": "光の導き",
+      "true_desc": "Grants <color=#28d9ed>Sustained Recovery</color> to all allies for <color=#28d9ed>1 turn</color>. Has a <color=#28d9ed>70%</color> chance to grant <color=#28d9ed>Increased Resilience</color> to all allies for <color=#28d9ed>1 turn</color>.",
       "true_desc_kr": "아군 전체에게 <color=#28d9ed>지속 회복</color>을 <color=#28d9ed>1턴</color>동안 부여하고, <color=#28d9ed>70%</color> 확률로 아군 전체의 <color=#28d9ed>효과 저항</color>을 <color=#28d9ed>1턴</color> 증가시킵니다.",
-      "true_desc_jp": "味方全体に<color=#28d9ed>継続回復</color>を<color=#28d9ed>1ターン</color>の間付与し、<color=#28d9ed>70%</color>の確率で味方全体の<color=#28d9ed>効果抵抗</color>を<color=#28d9ed>1ターン</color>の間UPさせる。"
+      "true_desc_jp": "味方全体に<color=#28d9ed>継続回復</color>を<color=#28d9ed>1ターン</color>の間付与し、<color=#28d9ed>70%</color>の確率で味方全体の<color=#28d9ed>効果抵抗</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
+      "enhancement": {
+        "2": [
+          "+15% Resilience effect activation chance"
+        ],
+        "2_kr": [
+          "효과 저항 발동 확률 증가 +15%"
+        ],
+        "2_jp": [
+          "効果抵抗発生率+15%"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "+15% Resilience effect activation chance"
+        ],
+        "4_kr": [
+          "효과 저항 발동 확률 증가 +15%"
+        ],
+        "4_jp": [
+          "効果抵抗発生率+15%"
+        ],
+        "5": [
+          "-1 turn Skill Cooldown"
+        ],
+        "5_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "5_jp": [
+          "スキルターン-1ターン"
+        ]
+      },
+      "cd": "5",
+      "buff": [
+        "BT_STAT|ST_BUFF_RESIST",
+        "BT_CONTINU_HEAL",
+        "BT_SHIELD_BASED_TARGET",
+        "BT_AP_CHARGE"
+      ],
+      "debuff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Adds a barrier (Proportional to target's Health)",
+          "effect_kr": "실드 추가 (대상 체력 비례)",
+          "effect_jp": "シールド追加\\n(対象のHPが高いほど\\nシールド量UP)",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Enhances barrier strength",
+          "effect_kr": "실드 강화",
+          "effect_jp": "シールド強化",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Target Action Points +50",
+          "effect_kr": "대상 AP +50",
+          "effect_jp": "対象のAP+50",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, grants <color=#28d9ed>Sustained Recovery</color> to the ally with the lowest Health for <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health for <color=#28d9ed>3.5%</color> of Lyla's Max Health.",
-      "DescID": "SKILL_DESC_2000047_Skill04_LV1,SKILL_DESC_2000047_Skill04_LV1,SKILL_DESC_2000047_Skill04_LV1,SKILL_DESC_2000047_Skill04_LV1,SKILL_DESC_2000047_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Water_Join",
       "NameIDSymbol": "4704",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Water_Join",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "SYS_CONTINU_HEAL",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: After attacking, grants <color=#28d9ed>Sustained Recovery</color> to the ally with the lowest Health for <color=#28d9ed>[Buff_T_2000047_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health for <color=#28d9ed>[Buff_V_2000047_backup_1_1]</color> of Lylaâs Max Health."
-      ],
-      "dual_buff": "",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, grants <color=#28d9ed>Sustained Recovery</color> to the ally with the lowest Health for <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health for <color=#28d9ed>3.5%</color> of Lyla's Max Health.",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 가장 체력 상황이 나쁜 아군에게 <color=#28d9ed>지속 회복</color>을 <color=#28d9ed>1턴</color> 동안 부여합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 라일라 최대 체력의 <color=#28d9ed>3.5%</color> 만큼 회복시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color> : 攻撃後、残りHPが最も低い味方単体に<color=#28d9ed>継続回復</color>を<color=#28d9ed>1ターン</color>の間付与する。\\n\\n<color=#ffd732>連携効果</color> : 攻撃後、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を自分の最大HPの<color=#28d9ed>3.5%</color>回復させる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 가장 체력 상황이 나쁜 아군에게 <color=#28d9ed>지속 회복</color>을 <color=#28d9ed>1턴</color> 동안 부여합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 라일라 최대 체력의 <color=#28d9ed>3.5%</color> 만큼 회복시킵니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color> : 攻撃後、残りHPが最も低い味方単体に<color=#28d9ed>継続回復</color>を<color=#28d9ed>1ターン</color>の間付与する。\\n\\n<color=#ffd732>連携効果</color> : 攻撃後、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を自分の最大HPの<color=#28d9ed>3.5%</color>回復させる。"
+      "cd": null,
+      "buff": [
+        "BT_CONTINU_HEAL"
+      ],
+      "debuff": [],
+      "dual_buff": []
     }
-  },
-  "Fullname_kr": "라일라",
-  "Fullname_jp": "ライラ",
-  "VoiceActor": "VA. Stephanie Southerland",
-  "VoiceActor_jp": "CV.渕上舞",
-  "VoiceActor_kr": "CV.김나율"
+  }
 }

@@ -1,13 +1,14 @@
 {
   "ID": "2000013",
   "Fullname": "Dolly",
+  "Fullname_jp": "ドーリー",
+  "Fullname_kr": "돌리",
   "Rarity": 2,
   "Element": "Earth",
-  "rank": "A",
-  "role": "support",
-  "gift": "Natural Object",
   "Class": "Mage",
   "SubClass": "Enchanter",
+  "rank": "A",
+  "role": "support",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -19,328 +20,297 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Join",
+  "VoiceActor": "VA. Ryan Bartley",
+  "VoiceActor_kr": "CV.차영희",
+  "VoiceActor_jp": "CV. 諏訪彩花",
+  "gift": "Natural Object",
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",
-    "3": "ATK DEF HP +10%",
-    "4": "ATK DEF HP +16%\n+3% Effectiveness\n+1 Chain Passive Weakness Gauge damage",
-    "5": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
-    "6": "ATK DEF HP +30%\n+3% Effectiveness\n+25 Action Points at battle start",
-    "2_jp": "ATK DEF HP +5%",
     "2_kr": "ATK DEF HP +5%",
-    "3_jp": "ATK DEF HP +10%",
+    "2_jp": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
-    "4_jp": "ATK DEF HP +16%\n効果命中+3%\nチェーンパッシブのWGダメージ+1",
+    "3_jp": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+3% Effectiveness\n+1 Chain Passive Weakness Gauge damage",
     "4_kr": "ATK DEF HP +16%\n효과 적중 +3%\n체인 패시브의 WG 감소량 +1",
-    "5_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "4_jp": "ATK DEF HP +16%\n効果命中+3%\nチェーンパッシブのWGダメージ+1",
+    "5": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n効果命中+3%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n효과 적중 +3%\n입장 시 AP +25"
+    "5_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "6": "ATK DEF HP +30%\n+3% Effectiveness\n+25 Action Points at battle start",
+    "6_kr": "ATK DEF HP +30%\n효과 적중 +3%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n効果命中+3%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "I Sleepwalk",
-      "true_desc": "Attacks an enemy and has a <color=#28d9ed>30%</color> chance to reduce the target's <color=#28d9ed>Attack</color> for <color=#28d9ed>2 turn(s)</color>.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000013_Skill01_LV1,SKILL_DESC_2000013_Skill01_LV1,SKILL_DESC_2000013_Skill01_LV1,SKILL_DESC_2000013_Skill01_LV1,SKILL_DESC_2000013_Skill01_LV1",
-      "IconName": "Skill_First_2000013",
       "NameIDSymbol": "1301",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000013",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000013_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": null,
-      "debuff": [
-        "BT_STAT|ST_ATK"
-      ],
-      "description": [
-        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000013_1_1]</color> chance to reduce the target's <color=#28d9ed>Attack</color> for <color=#28d9ed>[Buff_T_2000013_1_1] turn(s)</color>."
-      ],
+      "name": "I Sleepwalk",
+      "name_kr": "몽유병이 있어요",
+      "name_jp": "まくら投げ",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>30%</color> chance to reduce the target's <color=#28d9ed>Attack</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>30%</color> 확률로 대상의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>30%</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+10% effect chance"
-        ],
-        "4": [
-          "+10% damage"
-        ],
-        "5": [
-          "+10% damage",
-          "+10% effect chance"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "効果発生率+10%"
+        "3": [
+          "+10% effect chance"
         ],
         "3_kr": [
           "효과 발동 확률 +10%"
         ],
-        "4_jp": [
-          "ダメージ+10%"
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "4": [
+          "+10% damage"
         ],
         "4_kr": [
           "피해량 +10%"
         ],
-        "5_jp": [
-          "ダメージ+10%",
-          "効果発生率+10%"
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "5": [
+          "+10% damage",
+          "+10% effect chance"
         ],
         "5_kr": [
           "피해량 +10%",
           "효과 발동 확률 +10%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "効果発生率+10%"
         ]
       },
       "wgr": 1,
-      "name_kr": "몽유병이 있어요",
-      "name_jp": "まくら投げ",
-      "true_desc_kr": "적을 공격하고 <color=#28d9ed>30%</color> 확률로 대상의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
-      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>30%</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。"
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "BT_STAT|ST_ATK"
+      ]
     },
     "SKT_SECOND": {
-      "name": "Still Drowsy",
-      "true_desc": "Has a <color=#28d9ed>70%</color> chance to reduce all enemies' <color=#28d9ed>Speed</color> and <color=#28d9ed>Accuracy</color> for <color=#28d9ed>2 turn(s)</color>.",
-      "ApproachFreezeTime_fallback1": "CAST_DEBUFF",
-      "DescID": "SKILL_DESC_2000013_Skill02_LV1,SKILL_DESC_2000013_Skill02_LV1,SKILL_DESC_2000013_Skill02_LV1,SKILL_DESC_2000013_Skill02_LV1,SKILL_DESC_2000013_Skill02_LV1",
-      "IconName": "Skill_Second_2000013",
       "NameIDSymbol": "1302",
-      "RangeType": "ALL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Second_2000013",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000013_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": "4",
-      "debuff": [
-        "BT_STAT|ST_ACCURACY",
-        "BT_STAT|ST_SPEED"
-      ],
-      "description": [
-        "Has a <color=#28d9ed>[Buff_C_2000013_2_1]</color> chance to reduce all enemies' <color=#28d9ed>Speed</color> and <color=#28d9ed>Accuracy</color> for <color=#28d9ed>[Buff_T_2000013_2_1] turn(s)</color>."
-      ],
+      "name": "Still Drowsy",
+      "name_kr": "자도자도 졸려요",
+      "name_jp": "眠気さそい",
+      "true_desc": "Has a <color=#28d9ed>70%</color> chance to reduce all enemies' <color=#28d9ed>Speed</color> and <color=#28d9ed>Accuracy</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "<color=#28d9ed>70%</color> 확률로 적 전체의 <color=#28d9ed>속도</color>와 <color=#28d9ed>명중</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+      "true_desc_jp": "<color=#28d9ed>70%</color>の確率で敵全体の<color=#28d9ed>スピード</color>と<color=#28d9ed>命中</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
       "enhancement": {
         "2": [
           "+15% effect chance"
+        ],
+        "2_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "2_jp": [
+          "効果発生率+15%"
         ],
         "3": [
           "-1 turn Skill Cooldown"
         ],
-        "4": [
-          "+15% effect chance"
-        ],
-        "5": [
-          "+1 turn effect duration"
-        ],
-        "2_jp": [
-          "効果発生率+15%"
-        ],
-        "2_kr": [
-          "효과 발동 확률 +15%"
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
         ],
         "3_jp": [
           "スキルターン-1ターン"
         ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "効果発生率+15%"
+        "4": [
+          "+15% effect chance"
         ],
         "4_kr": [
           "효과 발동 확률 +15%"
         ],
-        "5_jp": [
-          "効果ターン+1ターン"
+        "4_jp": [
+          "効果発生率+15%"
+        ],
+        "5": [
+          "+1 turn effect duration"
         ],
         "5_kr": [
           "효과 지속 +1턴"
+        ],
+        "5_jp": [
+          "効果ターン+1ターン"
         ]
       },
-      "wgr": null,
-      "name_kr": "자도자도 졸려요",
-      "name_jp": "眠気さそい",
-      "true_desc_kr": "<color=#28d9ed>70%</color> 확률로 적 전체의 <color=#28d9ed>속도</color>와 <color=#28d9ed>명중</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
-      "true_desc_jp": "<color=#28d9ed>70%</color>の確率で敵全体の<color=#28d9ed>スピード</color>と<color=#28d9ed>命中</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。"
+      "cd": "4",
+      "buff": [],
+      "debuff": [
+        "BT_STAT|ST_ACCURACY",
+        "BT_STAT|ST_SPEED"
+      ]
     },
     "SKT_ULTIMATE": {
-      "name": "Sweet Dreams",
-      "true_desc": "Attacks all enemies and has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Silenced</color> on the target for <color=#28d9ed>2 turn(s)</color>.",
-      "DescID": "SKILL_DESC_2000013_Skill03_LV1,SKILL_DESC_2000013_Skill03_LV1,SKILL_DESC_2000013_Skill03_LV1,SKILL_DESC_2000013_Skill03_LV1,SKILL_DESC_2000013_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000013",
       "NameIDSymbol": "1303",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000013",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000013_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Removes 1 additional buff from the target",
-          "level": 1,
-          "effect_kr": "대상의 강화 효과 1개 추가 해제",
-          "effect_jp": "対象の強化効果1個追加解除"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Reduces Sweet Dreams Cooldown by 1 turn",
-          "level": 2,
-          "effect_kr": "잘자요 좋은 꿈 쿨타임 -1턴",
-          "effect_jp": "【おやすみなさあい】\\nスキルターン-1ターン"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "Removes 1 additional buff from the target",
-          "level": 3,
-          "effect_kr": "대상의 강화 효과 1개 추가 해제",
-          "effect_jp": "対象の強化効果1個追加解除"
-        }
-      },
-      "cd": "4",
-      "debuff": [
-        "BT_SILENCE",
-        "BT_REMOVE_BUFF"
-      ],
-      "description": [
-        "Attacks all enemies and has a <color=#28d9ed>[Buff_C_2000013_3_1]</color> chance to inflict <color=#28d9ed>Silenced</color> on the target for <color=#28d9ed>[Buff_T_2000013_3_1] turn(s)</color>."
-      ],
+      "name": "Sweet Dreams",
+      "name_kr": "잘자요 좋은 꿈",
+      "name_jp": "おやすみなさあい",
+      "true_desc": "Attacks all enemies and has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Silenced</color> on the target for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "적 전체를 공격하고 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>침묵</color> 상태로 만듭니다.",
+      "true_desc_jp": "敵全体にダメージを与え、<color=#28d9ed>70%</color>の確率で<color=#28d9ed>沈黙</color>を<color=#28d9ed>2ターン</color>の間付与する。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+15% effect chance"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
         ],
         "4": [
           "+10% damage"
         ],
-        "5": [
-          "+10% damage",
-          "+15% effect chance"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "効果発生率+15%"
-        ],
-        "3_kr": [
-          "효과 발동 확률 +15%"
+        "4_kr": [
+          "피해량 +10%"
         ],
         "4_jp": [
           "ダメージ+10%"
         ],
-        "4_kr": [
-          "피해량 +10%"
-        ],
-        "5_jp": [
-          "ダメージ+10%",
-          "効果発生率+15%"
+        "5": [
+          "+10% damage",
+          "+15% effect chance"
         ],
         "5_kr": [
           "피해량 +10%",
           "효과 발동 확률 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "効果発生率+15%"
         ]
       },
+      "cd": "4",
       "wgr": 2,
-      "name_kr": "잘자요 좋은 꿈",
-      "name_jp": "おやすみなさあい",
-      "true_desc_kr": "적 전체를 공격하고 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>침묵</color> 상태로 만듭니다.",
-      "true_desc_jp": "敵全体にダメージを与え、<color=#28d9ed>70%</color>の確率で<color=#28d9ed>沈黙</color>を<color=#28d9ed>2ターン</color>の間付与する。"
+      "buff": [
+        "BT_COOL_CHARGE"
+      ],
+      "debuff": [
+        "BT_SILENCE",
+        "BT_REMOVE_BUFF"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Removes 1 additional buff from the target",
+          "effect_kr": "대상의 강화 효과 1개 추가 해제",
+          "effect_jp": "対象の強化効果1個追加解除",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Reduces Sweet Dreams Cooldown by 1 turn",
+          "effect_kr": "잘자요 좋은 꿈 쿨타임 -1턴",
+          "effect_jp": "【おやすみなさあい】\\nスキルターン-1ターン",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Removes 1 additional buff from the target",
+          "effect_kr": "대상의 강화 효과 1개 추가 해제",
+          "effect_jp": "対象の強化効果1個追加解除",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to reduce Attack of the target for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>40%</color> chance to reduce <color=#28d9ed>Attack</color> of the target by <color=#28d9ed>-30%</color> for <color=#28d9ed>2 turn(s)</color>.",
-      "DescID": "SKILL_DESC_2000013_Skill04_LV1,SKILL_DESC_2000013_Skill04_LV1,SKILL_DESC_2000013_Skill04_LV1,SKILL_DESC_2000013_Skill04_LV1,SKILL_DESC_2000013_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Earth_Join",
       "NameIDSymbol": "1304",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Earth_Join",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": [],
-      "cd": null,
-      "debuff": "BT_STAT|ST_ATK",
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000013_chain_1_1]</color> chance to reduce Attack of the target for <color=#28d9ed>[Buff_T_2000013_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000013_backup_1_1]</color> chance to reduce <color=#28d9ed>Attack</color> of the target by <color=#28d9ed>[Buff_V_2000013_backup_1_1]</color> for <color=#28d9ed>[Buff_T_2000013_backup_1_1] turn(s)</color>."
-      ],
-      "dual_debuff": "BT_STAT|ST_ATK",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to reduce Attack of the target for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>40%</color> chance to reduce <color=#28d9ed>Attack</color> of the target by <color=#28d9ed>30%</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 <color=#28d9ed>2턴</color> 동안 대상의 공격력을 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>40%</color> 확률로 <color=#28d9ed>2턴</color> 동안 대상의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>-30%</color> 감소시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、<color=#28d9ed>100%</color>の確率で対象の攻撃力を<color=#28d9ed>2ターン</color>の間DOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>40%</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 <color=#28d9ed>2턴</color> 동안 대상의 공격력을 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>40%</color> 확률로 <color=#28d9ed>2턴</color> 동안 대상의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>-30%</color> 감소시킵니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、<color=#28d9ed>100%</color>の確率で対象の攻撃力を<color=#28d9ed>2ターン</color>の間DOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>40%</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。"
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "BT_STAT|ST_ATK"
+      ],
+      "dual_debuff": [
+        "BT_STAT|ST_ATK"
+      ]
     }
-  },
-  "Fullname_kr": "돌리",
-  "Fullname_jp": "ドーリー",
-  "VoiceActor": "VA. Ryan Bartley",
-  "VoiceActor_jp": "CV.諏訪彩花",
-  "VoiceActor_kr": "CV.차영희"
+  }
 }

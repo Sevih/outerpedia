@@ -1,18 +1,18 @@
 {
   "ID": "2000086",
   "Fullname": "Kitsune of Eternity Tamamo-no-Mae",
+  "Fullname_jp": "三世妖狐 タマモノマエ",
+  "Fullname_kr": "삼세요호 타마모노마에",
   "Rarity": 3,
   "Element": "Earth",
-  "rank_pvp": "B",
-  "gift": "Luxury",
   "Class": "Mage",
+  "SubClass": "Wizard",
+  "rank": "S",
+  "rank_pvp": "B",
   "role": "dps",
-  "limited": true,
   "tags": [
     "seasonal"
   ],
-  "SubClass": "Wizard",
-  "video": "Va3W2CmrnMU",
   "skill_priority": {
     "First": {
       "prio": 2
@@ -24,355 +24,325 @@
       "prio": 3
     }
   },
+  "Chain_Type": "Start",
+  "video": "Va3W2CmrnMU",
+  "VoiceActor": "VA. Frankie Kevich",
+  "VoiceActor_kr": "CV. Frankie Kevich",
+  "VoiceActor_jp": "CV. 豊田萌絵",
+  "limited": true,
+  "gift": "Luxury",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\nAt the start of the turn, inflicts Cursed on two random enemies for 1 turn (Irremovable)\n+1 Chain Passive Weakness Gauge reduction",
+    "4_1_kr": "ATK DEF HP +16%\n턴 시작 시 무작위 적 2명에게 저주 +1턴 (해제 불가)\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\nターン開始時、ランダムの敵2体に呪いを+1ターン(解除不可)\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+100% Effectiveness\nRight after attacking, does not trigger an enemy's Counterattack, Revenge, or Agile Response",
-    "4_1_jp": "ATK DEF HP +16%\nターン開始時、ランダムの敵2体に呪いを+1ターン(解除不可)\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n턴 시작 시 무작위 적 2명에게 저주 +1턴 (해제 불가)\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
-    "6_jp": "ATK DEF HP +30%\n効果命中+100%\n攻撃後、敵の反撃/復讐/迅速対応発動不可",
-    "6_kr": "ATK DEF HP +30%\n효과 적중 +100%\n공격 직후 적의 반격/복수/신속 대응 불가"
+    "6_kr": "ATK DEF HP +30%\n효과 적중 +100%\n공격 직후 적의 반격/복수/신속 대응 불가",
+    "6_jp": "ATK DEF HP +30%\n効果命中+100%\n攻撃後、敵の反撃/復讐/迅速対応発動不可"
   },
-  "Chain_Type": "Start",
   "skills": {
     "SKT_FIRST": {
-      "name": "Kitsunebi",
-      "true_desc": "Attacks an enemy with Heavy Strike.\nHas a <color=#28d9ed>50%</color> chance to inflict Cursed on the target for <color=#28d9ed>1 turn(s)</color>. (Irremovable)",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000086_Skill01_LV1,SKILL_DESC_2000086_Skill01_LV1,SKILL_DESC_2000086_Skill01_LV1,SKILL_DESC_2000086_Skill01_LV1,SKILL_DESC_2000086_Skill01_LV1",
-      "IconName": "Skill_First_2000086",
       "NameIDSymbol": "8601",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000086",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000086_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "Heavy Strike",
-        "BT_ADDITIVE_TURN"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 120,
-          "effect": "Inflicts 1 additional Cursed (Irremovable)\\n+20% effect chance",
-          "level": 1,
-          "effect_kr": "저주 1개 추가 발생 (해제 불가)\\n효과 발동 확률 +20%",
-          "effect_jp": "呪い1個追加(解除不可)\\n効果発動確率+20%"
-        },
-        "SKT_BURST_2": {
-          "cost": 180,
-          "effect": "Inflicts 1 additional Cursed (Irremovable)",
-          "level": 2,
-          "effect_kr": "저주 1개 추가 발생 (해제 불가)",
-          "effect_jp": "呪い1個追加(解除不可)"
-        },
-        "SKT_BURST_3": {
-          "cost": 300,
-          "effect": "Changes to Enhanced Skill\\nTargets all enemies\\nResets all skill cooldowns of the caster\\nExtra Turn",
-          "level": 3,
-          "effect_kr": "강화 스킬로 교체\\n공격 범위 확대\\n자신의 모든 스킬 쿨타임 초기화\\n추가 턴",
-          "effect_jp": "強化スキルに変更\\n攻撃範囲拡大\\n自分のすべてのスキルターン初期化\\n追加ターン"
-        }
-      },
-      "cd": null,
-      "debuff": [
-        "BT_DOT_CURSE_IR"
-      ],
-      "description": [
-        "Attacks an enemy with Heavy Strike.\nHas a <color=#28d9ed>[Buff_C_2000086_1_1]</color> chance to inflict Cursed on the target for <color=#28d9ed>[Buff_T_2000086_1_1] turn(s)</color>. (Irremovable)"
-      ],
+      "name": "Kitsunebi",
+      "name_kr": "여우불 만개",
+      "name_jp": "狐火満開",
+      "true_desc": "Attacks an enemy with Heavy Strike.\nHas a <color=#28d9ed>50%</color> chance to inflict Cursed on the target for <color=#28d9ed>1 turn(s)</color>. (Irremovable)",
+      "true_desc_kr": "적을 강격으로 공격합니다. \n대상에게 <color=#28d9ed>50%</color> 확률로 <color=#28d9ed>1턴</color> 동안 저주를 부여합니다. (해제 불가)",
+      "true_desc_jp": "敵単体に強撃でダメージを与える。\n対象に<color=#28d9ed>50%</color>の確率で呪いを<color=#28d9ed>1ターン</color>の間付与する。(解除不可)",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+15% effect chance"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
         ],
         "4": [
           "+10% damage",
           "+1 Weakness Gauge damage"
+        ],
+        "4_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "4_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
         ],
         "5": [
           "+15% effect chance",
           "+1 turn effect duration"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "効果発生率+15%"
-        ],
-        "3_kr": [
-          "효과 발동 확률 +15%"
-        ],
-        "4_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "4_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
+        "5_kr": [
+          "효과 발동 확률 +15%",
+          "효과 지속 +1턴"
         ],
         "5_jp": [
           "効果発生率+15%",
           "効果ターン+1ターン"
-        ],
-        "5_kr": [
-          "효과 발동 확률 +15%",
-          "효과 지속 +1턴"
         ]
       },
       "wgr": 1,
-      "name_kr": "여우불 만개",
-      "name_jp": "狐火満開",
-      "true_desc_kr": "적을 강격으로 공격합니다. \n대상에게 <color=#28d9ed>50%</color> 확률로 <color=#28d9ed>1턴</color> 동안 저주를 부여합니다. (해제 불가)",
-      "true_desc_jp": "敵単体に強撃でダメージを与える。\n対象に<color=#28d9ed>50%</color>の確率で呪いを<color=#28d9ed>1ターン</color>の間付与する。(解除不可)"
+      "cd": null,
+      "buff": [
+        "HEAVY_STRIKE",
+        "BT_ADDITIVE_TURN",
+        "BT_COOL_CHARGE"
+      ],
+      "debuff": [
+        "IG_Buff_Dot_Curse_Interruption_D"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Inflicts 1 additional Cursed (Irremovable)\\n+20% effect chance",
+          "effect_kr": "저주 1개 추가 발생 (해제 불가)\\n효과 발동 확률 +20%",
+          "effect_jp": "呪い1個追加(解除不可)\\n効果発動確率+20%",
+          "cost": 120,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Inflicts 1 additional Cursed (Irremovable)",
+          "effect_kr": "저주 1개 추가 발생 (해제 불가)",
+          "effect_jp": "呪い1個追加(解除不可)",
+          "cost": 180,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Changes to Enhanced Skill\\nTargets all enemies\\nResets all skill cooldowns of the caster\\nExtra Turn",
+          "effect_kr": "강화 스킬로 교체\\n공격 범위 확대\\n자신의 모든 스킬 쿨타임 초기화\\n추가 턴",
+          "effect_jp": "強化スキルに変更\\n攻撃範囲拡大\\n自分のすべてのスキルターン初期化\\n追加ターン",
+          "cost": 300,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Bite ‘Em, Kitsu!",
-      "true_desc": "Attacks all enemies with Heavy Strike.\nFor each target damaged, increases Priority of the caster by <color=#28d9ed>25%</color>, and has a <color=#28d9ed>70%</color> chance to inflict Cursed on all targets for <color=#28d9ed>2 turn(s)</color>. (Irremovable)",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000086_Skill02_LV1,SKILL_DESC_2000086_Skill02_LV1,SKILL_DESC_2000086_Skill02_LV1,SKILL_DESC_2000086_Skill02_LV1,SKILL_DESC_2000086_Skill02_LV1",
-      "IconName": "Skill_Second_2000086",
       "NameIDSymbol": "8602",
-      "RangeType": "ALL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Second_2000086",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000086_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_ACTION_GAUGE",
-        "Heavy Strike"
-      ],
-      "cd": "4",
-      "debuff": [
-        "BT_DOT_CURSE_IR"
-      ],
-      "description": [
-        "Attacks all enemies with Heavy Strike.\nFor each target damaged, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000086_2_2]</color>, and has a <color=#28d9ed>[Buff_C_2000086_2_3]</color> chance to inflict Cursed on all targets for <color=#28d9ed>[Buff_T_2000086_2_3] turn(s)</color>. (Irremovable)"
-      ],
+      "name": "Bite ‘Em, Kitsu!",
+      "name_kr": "나비야, 물어!",
+      "name_jp": "ポチ、好きにお食べ",
+      "true_desc": "Attacks all enemies with Heavy Strike.\nFor each target damaged, increases Priority of the caster by <color=#28d9ed>25%</color>, and has a <color=#28d9ed>70%</color> chance to inflict Cursed on all targets for <color=#28d9ed>2 turn(s)</color>. (Irremovable)",
+      "true_desc_kr": "적 전체를 강격으로 공격합니다. \n피해를 준 대상마다 자신의 행동 게이지가 <color=#28d9ed>25%</color> 증가하고, 대상 전체에게 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 저주를 부여합니다. (해제 불가)",
+      "true_desc_jp": "敵全体に強撃でダメージを与える。\nダメージを与えた対象の数に応じて自分の行動ゲージが<color=#28d9ed>25%</color>UPし、対象全体に<color=#28d9ed>70%</color>の確率で、呪いを<color=#28d9ed>2ターン</color>の間付与する。(解除不可)",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "-1 turn Skill Cooldown"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
         ],
         "4": [
           "+15% effect chance",
           "+1 Weakness Gauge damage"
+        ],
+        "4_kr": [
+          "효과 발동 확률 +15%",
+          "WG 감소량 +1"
+        ],
+        "4_jp": [
+          "効果発生率+15%",
+          "WGダメージ+1"
         ],
         "5": [
           "+15% effect chance",
           "+20% damage"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
-        ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "効果発生率+15%",
-          "WGダメージ+1"
-        ],
-        "4_kr": [
+        "5_kr": [
           "효과 발동 확률 +15%",
-          "WG 감소량 +1"
+          "피해량 +20%"
         ],
         "5_jp": [
           "効果発生率+15%",
           "ダメージ+20%"
-        ],
-        "5_kr": [
-          "효과 발동 확률 +15%",
-          "피해량 +20%"
         ]
       },
+      "cd": "4",
       "wgr": 1,
-      "name_kr": "나비야, 물어!",
-      "name_jp": "ポチ、好きにお食べ",
-      "true_desc_kr": "적 전체를 강격으로 공격합니다. \n피해를 준 대상마다 자신의 행동 게이지가 <color=#28d9ed>25%</color> 증가하고, 대상 전체에게 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 저주를 부여합니다. (해제 불가)",
-      "true_desc_jp": "敵全体に強撃でダメージを与える。\nダメージを与えた対象の数に応じて自分の行動ゲージが<color=#28d9ed>25%</color>UPし、対象全体に<color=#28d9ed>70%</color>の確率で、呪いを<color=#28d9ed>2ターン</color>の間付与する。(解除不可)"
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "HEAVY_STRIKE"
+      ],
+      "debuff": [
+        "IG_Buff_Dot_Curse_Interruption_D"
+      ]
     },
     "SKT_ULTIMATE": {
-      "name": "All Ties Are But Dreams",
-      "true_desc": "Attacks all enemies with Heavy Strike and recovers Chain Points by <color=#28d9ed>15</color>.\nAfter attacking, detonates all Cursed stacks on the target and reduces Action Points by <color=#28d9ed>80</color>.",
-      "DescID": "SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1,SKILL_DESC_2000086_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000086",
       "NameIDSymbol": "8603",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "CURSE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000086",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000086_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_CP_CHARGE",
-        "Heavy Strike"
-      ],
-      "cd": "5",
-      "debuff": [
-        "BT_DETONATE",
-        "BT_AP_CHARGE"
-      ],
-      "description": [
-        "Attacks all enemies with Heavy Strike and recovers Chain Points by <color=#28d9ed>[Buff_V_2000086_3_1]</color>.\nAfter attacking, detonates all Cursed stacks on the target and reduces Action Points by <color=#28d9ed>80</color>."
-      ],
+      "name": "All Ties Are But Dreams",
+      "name_kr": "일체유위법 요몽환포영",
+      "name_jp": "一切有為法 如夢幻泡影",
+      "true_desc": "Attacks all enemies with Heavy Strike and recovers Chain Points by <color=#28d9ed>15</color>.\nAfter attacking, detonates all Cursed stacks on the target and reduces Action Points by <color=#28d9ed>80</color>.",
+      "true_desc_kr": "적 전체를 강격으로 공격하고 CP를 <color=#28d9ed>15</color> 회복합니다.\n공격 후 대상의 저주를 모두 폭발시키고, AP를 <color=#28d9ed>80</color> 감소시킵니다.",
+      "true_desc_jp": "敵全体に強撃でダメージを与え、CPを<color=#28d9ed>15</color>獲得する。\n攻撃後、対象の呪いをすべて破裂させ、APを<color=#28d9ed>80</color>DOWNさせる。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "-1 turn Skill Cooldown"
         ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
         "4": [
           "+20% damage"
+        ],
+        "4_kr": [
+          "피해량 +20%"
+        ],
+        "4_jp": [
+          "ダメージ+20%"
         ],
         "5": [
           "+20% damage",
           "+1 Weakness Gauge damage"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
+        "5_kr": [
+          "피해량 +20%",
           "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
-        ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "ダメージ+20%"
-        ],
-        "4_kr": [
-          "피해량 +20%"
         ],
         "5_jp": [
           "ダメージ+20%",
           "WGダメージ+1"
-        ],
-        "5_kr": [
-          "피해량 +20%",
-          "WG 감소량 +1"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "일체유위법 요몽환포영",
-      "name_jp": "一切有為法 如夢幻泡影",
-      "true_desc_kr": "적 전체를 강격으로 공격하고 CP를 <color=#28d9ed>1.5%</color> 회복합니다.\n공격 후 대상의 저주를 모두 폭발시키고, AP를 <color=#28d9ed>80</color> 감소시킵니다.",
-      "true_desc_jp": "敵全体に強撃でダメージを与え、CPを<color=#28d9ed>1.5%</color>獲得する。\n攻撃後、対象の呪いをすべて破裂させ、APを<color=#28d9ed>80</color>DOWNさせる。"
+      "buff": [
+        "BT_CP_CHARGE",
+        "HEAVY_STRIKE"
+      ],
+      "debuff": [
+        "BT_IMMEDIATELY_CURSE",
+        "BT_AP_CHARGE"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>3 turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> for <color=#28d9ed>1 turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack.",
-      "DescID": "SKILL_DESC_2000086_Skill04_LV1,SKILL_DESC_2000086_Skill04_LV1,SKILL_DESC_2000086_Skill04_LV1,SKILL_DESC_2000086_Skill04_LV1,SKILL_DESC_2000086_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Earth_Start",
       "NameIDSymbol": "8604",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Earth_Start",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": [
-        "Heavy Strike"
-      ],
-      "cd": null,
-      "debuff": "BT_DOT_CURSE_IR",
-      "description": [
-        "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000086_chain_1_1]</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>[Buff_T_2000086_chain_1_1] turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000086_backup_1_1]</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> for <color=#28d9ed>[Buff_T_2000086_backup_1_1] turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack."
-      ],
-      "dual_debuff": [
-        "BT_DOT_CURSE_IR"
-      ],
-      "dual_buff": [
-        "Heavy Strike"
-      ],
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> on the target for <color=#28d9ed>3 turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict irremovable <color=#28d9ed>Cursed</color> for <color=#28d9ed>1 turn(s)</color>. Applies <color=#28d9ed>Heavy Strike</color> to this attack.",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 <color=#28d9ed>3턴</color> 동안 대상에게 해제 불가능한 <color=#28d9ed>저주</color>를 부여합니다. 해당 공격은 <color=#28d9ed>강격</color>으로 적용됩니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>100%</color> 확률로 <color=#28d9ed>1턴</color> 동안 해제 불가능한 <color=#28d9ed>저주</color>를 부여합니다. 해당 공격은 <color=#28d9ed>강격</color>으로 적용됩니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、<color=#28d9ed>100%</color>の確率で対象に解除不可能な<color=#28d9ed>呪い</color>を<color=#28d9ed>3ターン</color>の間付与する。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>100%</color>の確率で解除不可能な<color=#28d9ed>呪い</color>を<color=#28d9ed>1ターン</color>の間付与する。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 <color=#28d9ed>3턴</color> 동안 대상에게 해제 불가능한 <color=#28d9ed>저주</color>를 부여합니다. 해당 공격은 <color=#28d9ed>강격</color>으로 적용됩니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>100%</color> 확률로 <color=#28d9ed>1턴</color> 동안 해제 불가능한 <color=#28d9ed>저주</color>를 부여합니다. 해당 공격은 <color=#28d9ed>강격</color>으로 적용됩니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、<color=#28d9ed>100%</color>の確率で対象に解除不可能な<color=#28d9ed>呪い</color>を<color=#28d9ed>3ターン</color>の間付与する。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>100%</color>の確率で解除不可能な<color=#28d9ed>呪い</color>を<color=#28d9ed>1ターン</color>の間付与する。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。"
+      "cd": null,
+      "buff": [
+        "HEAVY_STRIKE"
+      ],
+      "debuff": [
+        "IG_Buff_Dot_Curse_Interruption_D"
+      ],
+      "dual_debuff": [
+        "IG_Buff_Dot_Curse_Interruption_D"
+      ],
+      "dual_buff": [
+        "HEAVY_STRIKE"
+      ]
     }
-  },
-  "rank": "S",
-  "Fullname_kr": "삼세요호 타마모노마에",
-  "Fullname_jp": "三世妖狐 タマモノマエ",
-  "VoiceActor": "VA. Frankie Kevich",
-  "VoiceActor_jp": "CV. 豊田萌絵",
-  "VoiceActor_kr": "CV. Frankie Kevich"
+  }
 }

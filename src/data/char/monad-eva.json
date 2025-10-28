@@ -1,17 +1,18 @@
 {
   "ID": "2000084",
   "Fullname": "Monad Eva",
+  "Fullname_jp": "モナド エヴァ",
+  "Fullname_kr": "모나드 에바",
   "Rarity": 3,
   "Element": "Light",
-  "gift": "Science",
-  "role": "sustain",
+  "Class": "Healer",
+  "SubClass": "Sage",
+  "rank": "S",
   "rank_pvp": "S",
+  "role": "sustain",
   "tags": [
     "premium"
   ],
-  "Class": "Healer",
-  "SubClass": "Sage",
-  "video": "xmzgtcPHmT4",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -23,332 +24,298 @@
       "prio": 2
     }
   },
+  "Chain_Type": "Start",
+  "video": "xmzgtcPHmT4",
+  "VoiceActor": "VA. Courtney Lin",
+  "VoiceActor_kr": "CV. Courtney Lin",
+  "VoiceActor_jp": "CV. 小倉唯",
+  "gift": "Science",
   "transcend": {
     "1": null,
     "2": null,
-    "3": "ATK DEF HP +10%\nBurst Level 2 Unlocked",
+    "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+20% Ally Team Health\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 체력 +20%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方のHP+20%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\nWhen using Ticking Clockwork, Changes to Dual Attack with 2 allies",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n움직이는 시계태엽 사용 시 2명 협공으로 변경",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n【動く時計軸】使用時、連携2体発生",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\nAt the start of battle, seals extra skill of all enemies by 1 turn (Ignores Resilience)\n+25 Action Points at the start of battle",
-    "3_jp": "ATK DEF HP +10%\nバーストスキル2段階解禁",
-    "3_kr": "ATK DEF HP +10%\n버스트 2단계 해금",
-    "4_1_jp": "ATK DEF HP +16%\n味方のHP+20%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 체력 +20%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n【動く時計軸】使用時、連携2体発生",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n움직이는 시계태엽 사용 시 2명 협공으로 변경",
-    "6_jp": "ATK DEF HP +30%\n戦闘開始時、 敵全体に追加 スキル 封印+1ターン (効果抵抗 無視)\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n전투 입장 시 적 전체에게 추가 스킬 봉인 +1턴 (효과 저항 무시)\n입장 시 AP +25"
+    "6_kr": "ATK DEF HP +30%\n전투 입장 시 적 전체에게 추가 스킬 봉인 +1턴 (효과 저항 무시)\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n戦闘開始時、 敵全体に追加 スキル 封印+1ターン (効果抵抗 無視)\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Start",
   "skills": {
     "SKT_FIRST": {
-      "name": "Ticking Clockwork",
-      "true_desc": "Attacks an enemy. Heals the ally with the lowest Health by <color=#28d9ed>5%</color> of Eva's Max Health.\\nActivates a <color=#28d9ed>Dual Attack</color> from the ally with the highest Attack.",
-      "DescID": "SKILL_DESC_2000084_Skill01_LV1,SKILL_DESC_2000084_Skill01_LV1,SKILL_DESC_2000084_Skill01_LV1,SKILL_DESC_2000084_Skill01_LV1,SKILL_DESC_2000084_Skill01_LV1",
-      "FocusType_fallback1": "ATTACK",
-      "IconName": "Skill_First_2000084",
       "NameIDSymbol": "8401",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000084",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000084_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_CALL_BACKUP",
-        "BT_REMOVE_DEBUFF",
-        "BT_REVIVAL",
-        "BT_AP_CHARGE"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 70,
-          "effect": "Effects are applied to all allies",
-          "level": 1,
-          "effect_kr": "아군 전체에게 효과 적용",
-          "effect_jp": "味方全体に効果適用"
-        },
-        "SKT_BURST_2": {
-          "cost": 105,
-          "effect": "+70 Action Points to Target (Excluding the caster)",
-          "level": 2,
-          "effect_kr": "대상 AP +70 (자신 제외)",
-          "effect_jp": "対象のAP+70(自分以外)"
-        },
-        "SKT_BURST_3": {
-          "cost": 140,
-          "effect": "Changes to Enhanced Skill\\nRemoves all debuffs\\nIncreases Revival duration by 2 turns",
-          "level": 3,
-          "effect_kr": "강화 스킬로 교체\\n모든 약화 효과 해제\\n소생 +2턴",
-          "effect_jp": "強化スキルに変更\\nすべての弱体効果解除\\n蘇生+2ターン"
-        }
-      },
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy. Heals the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000084_1_1]</color> of Evaâs Max Health.\\nActivates a <color=#28d9ed>Dual Attack</color> from the ally with the highest Attack."
-      ],
+      "name": "Ticking Clockwork",
+      "name_kr": "움직이는 시계태엽",
+      "name_jp": "動く時計軸",
+      "true_desc": "Attacks an enemy. Heals the ally with the lowest Health by <color=#28d9ed>5%</color> of Eva's Max Health.\\nActivates a <color=#28d9ed>Dual Attack</color> from the ally with the highest Attack.",
+      "true_desc_kr": "적을 공격하고, 체력 상황이 가장 나쁜 아군의 체력을 에바 최대 체력의 <color=#28d9ed>5%</color>만큼 회복시킵니다.\\n가장 공격력이 높은 아군의 <color=#28d9ed>협공</color>을 발생시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、残りHPが最も低い味方単体のHPを【エヴァ】の最大HPの<color=#28d9ed>5%</color>回復させる。\\n攻撃力が最も高い味方単体に<color=#28d9ed>連携</color>を発生させる。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+2% healing"
-        ],
-        "4": [
-          "+3% healing"
-        ],
-        "5": [
-          "+3% healing",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "HP回復量+2%"
+        "3": [
+          "+2% healing"
         ],
         "3_kr": [
           "체력 회복량 +2%"
         ],
-        "4_jp": [
-          "HP回復量+3%"
+        "3_jp": [
+          "HP回復量+2%"
+        ],
+        "4": [
+          "+3% healing"
         ],
         "4_kr": [
           "체력 회복량 +3%"
         ],
-        "5_jp": [
-          "HP回復量+3%",
-          "WGダメージ+1"
+        "4_jp": [
+          "HP回復量+3%"
+        ],
+        "5": [
+          "+3% healing",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "체력 회복량 +3%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "HP回復量+3%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 1,
-      "name_kr": "움직이는 시계태엽",
-      "name_jp": "動く時計軸",
-      "true_desc_kr": "적을 공격하고, 체력 상황이 가장 나쁜 아군의 체력을 에바 최대 체력의 <color=#28d9ed>5%</color>만큼 회복시킵니다.\\n가장 공격력이 높은 아군의 <color=#28d9ed>협공</color>을 발생시킵니다.",
-      "true_desc_jp": "敵単体にダメージを与え、残りHPが最も低い味方単体のHPを【エヴァ】の最大HPの<color=#28d9ed>5%</color>回復させる。\\n攻撃力が最も高い味方単体に<color=#28d9ed>連携</color>を発生させる。"
+      "cd": null,
+      "buff": [
+        "BT_AP_CHARGE",
+        "BT_REMOVE_DEBUFF",
+        "BT_REVIVAL",
+        "BT_CALL_BACKUP_2",
+        "BT_CALL_BACKUP"
+      ],
+      "debuff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Effects are applied to all allies",
+          "effect_kr": "아군 전체에게 효과 적용",
+          "effect_jp": "味方全体に効果適用",
+          "cost": 70,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "+70 Action Points to Target (Excluding the caster)",
+          "effect_kr": "대상 AP +70 (자신 제외)",
+          "effect_jp": "対象のAP+70(自分以外)",
+          "cost": 105,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Changes to Enhanced Skill\\nRemoves all debuffs\\nIncreases Revival duration by 2 turns",
+          "effect_kr": "강화 스킬로 교체\\n모든 약화 효과 해제\\n소생 +2턴",
+          "effect_jp": "強化スキルに変更\\nすべての弱体効果解除\\n蘇生+2ターン",
+          "cost": 140,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Time Dilation",
-      "true_desc": "(Passive Effect) Cannot be inflicted with Frozen or Silenced.\\n(Triggered Effect) When an ally is inflicted with a <color=#28d9ed>debuff</color>, activates an <color=#28d9ed>Agile Response</color>.\\nWhen Agile Response is activated, reduces the duration of all <color=#28d9ed>debuff(s)</color> inflicted on allies by <color=#28d9ed>1 turn</color> and inflicts <color=#28d9ed>Seal Extra Skill</color> on all enemies for <color=#28d9ed>1 turn(s)</color>. The enemy's Counterattack, Revenge, and Agile Response cannot activate immediately after using this skill.",
-      "ApproachType": "CAST_BUFF",
-      "DescID": "SKILL_DESC_2000084_Skill02_LV1,SKILL_DESC_2000084_Skill02_LV1,SKILL_DESC_2000084_Skill02_LV3,SKILL_DESC_2000084_Skill02_LV3,SKILL_DESC_2000084_Skill02_LV5",
-      "IconName": "Skill_Second_2000084",
       "NameIDSymbol": "8402",
-      "RangeType": "ALL",
-      "SkillSubType": "PASSIVE",
+      "IconName": "Skill_Second_2000084",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000084_Skill02",
-      "TargetTeamType": "TEAM",
-      "buff": [
-        "SYS_REVENGE_HEAL",
-        "IG_Buff_DeBuffdurationdecrease"
-      ],
-      "cd": "4",
-      "debuff": [
-        "BT_SEAL_ADDITIVE_ATTACK"
-      ],
-      "description": [
-        "(Passive Effect) Cannot be inflicted with Frozen or Silenced.\\n(Triggered Effect) When an ally is inflicted with a <color=#28d9ed>debuff</color>, activates an <color=#28d9ed>Agile Response</color>.\\nWhen Agile Response is activated, reduces the duration of all <color=#28d9ed>debuff(s)</color> inflicted on allies by <color=#28d9ed>1 turn</color> and inflicts <color=#28d9ed>Seal Extra Skill</color> on all enemies for <color=#28d9ed>[Buff_T_2000084_2_3] turn(s)</color>. The enemy's Counterattack, Revenge, and Agile Response cannot activate immediately after using this skill."
-      ],
+      "name": "Time Dilation",
+      "name_kr": "시간 팽창",
+      "name_jp": "時間膨張",
+      "true_desc": "(Passive Effect) Cannot be inflicted with Frozen or Silenced.\\n(Triggered Effect) When an ally is inflicted with a <color=#28d9ed>debuff</color>, activates an <color=#28d9ed>Agile Response</color>.\\nWhen Agile Response is activated, reduces the duration of all <color=#28d9ed>debuff(s)</color> inflicted on allies by <color=#28d9ed>1 turn</color> and inflicts <color=#28d9ed>Seal Extra Skill</color> on all enemies for <color=#28d9ed>1 turn(s)</color>. The enemy's Counterattack, Revenge, and Agile Response cannot activate immediately after using this skill.",
+      "true_desc_kr": "(패시브 효과) 빙결, 침묵의 영향을 받지 않습니다.\\n(발동 효과) 아군에게 <color=#28d9ed>약화 효과</color> 적용 시 <color=#28d9ed>신속 대응</color> 효과가 발동합니다.\\n신속대응 발동 시 아군 전체의 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>1턴</color> 감소시키고, <color=#28d9ed>1턴</color> 동안 적 전체에게 <color=#28d9ed>추가 스킬 봉인</color>을 부여합니다.\\n이 스킬 직후에는 적의 반격, 복수, 신속대응이 발동하지 않습니다.",
+      "true_desc_jp": "(パッシブ効果)凍結、沈黙の影響を受けない。\\n(発動効果)味方に<color=#28d9ed>弱体効果</color>がある場合、<color=#28d9ed>【迅速対応】</color>を発動する。\\n迅速対応発動時、味方全体の<color=#28d9ed>弱体効果</color>を<color=#28d9ed>1ターン</color>減少し、敵全体に<color=#28d9ed>追加スキル封印</color>を<color=#28d9ed>1ターン</color>の間付与する。\\nこのスキルでは敵の反撃、復讐、迅速対応が発動しない。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
-        ],
-        "3": [
-          "-1 turn debuff durations"
-        ],
-        "4": [
-          "-1 turn Skill Cooldown"
-        ],
-        "5": [
-          "Enhances Seal Extra Skill (Ignores Resilience)"
-        ],
-        "2_jp": [
-          "スキルターン-1ターン"
         ],
         "2_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "3_jp": [
-          "弱体効果のターン-1ターン"
+        "2_jp": [
+          "スキルターン-1ターン"
+        ],
+        "3": [
+          "-1 turn debuff durations"
         ],
         "3_kr": [
           "약화 효과 지속 -1턴"
         ],
-        "4_jp": [
-          "スキルターン-1ターン"
+        "3_jp": [
+          "弱体効果のターン-1ターン"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
         ],
         "4_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "5_jp": [
-          "追加スキル封印の強化(効果抵抗 無視)"
+        "4_jp": [
+          "スキルターン-1ターン"
+        ],
+        "5": [
+          "Enhances Seal Extra Skill (Ignores Resilience)"
         ],
         "5_kr": [
           "추가 스킬 봉인 강화 (효과 저항 무시)"
+        ],
+        "5_jp": [
+          "追加スキル封印の強化(効果抵抗 無視)"
         ]
       },
-      "wgr": null,
-      "name_kr": "시간 팽창",
-      "name_jp": "時間膨張",
-      "true_desc_kr": "(패시브 효과) 빙결, 침묵의 영향을 받지 않습니다.\\n(발동 효과) 아군에게 <color=#28d9ed>약화 효과</color> 적용 시 <color=#28d9ed>신속 대응</color> 효과가 발동합니다.\\n신속대응 발동 시 아군 전체의 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>1턴</color> 감소시키고, <color=#28d9ed>1턴</color> 동안 적 전체에게 <color=#28d9ed>추가 스킬 봉인</color>을 부여합니다.\\n이 스킬 직후에는 적의 반격, 복수, 신속대응이 발동하지 않습니다.",
-      "true_desc_jp": "(パッシブ効果)凍結、沈黙の影響を受けない。\\n(発動効果)味方に<color=#28d9ed>弱体効果</color>がある場合、<color=#28d9ed>【迅速対応】</color>を発動する。\\n迅速対応発動時、味方全体の<color=#28d9ed>弱体効果</color>を<color=#28d9ed>1ターン</color>減少し、敵全体に<color=#28d9ed>追加スキル封印</color>を<color=#28d9ed>1ターン</color>の間付与する。\\nこのスキルでは敵の反撃、復讐、迅速対応が発動しない。"
+      "cd": "4",
+      "buff": [
+        "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK",
+        "BT_EXTEND_DEBUFF",
+        "BT_SEAL_COUNTER"
+      ],
+      "debuff": [
+        "BT_SEAL_ADDITIVE_ATTACK"
+      ]
     },
     "SKT_ULTIMATE": {
-      "name": "Dreaming of You",
-      "true_desc": "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>10%</color> of Eva's Max Health and increases <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn(s)</color>.",
-      "DescID": "SKILL_DESC_2000084_Skill03_LV1,SKILL_DESC_2000084_Skill03_LV1,SKILL_DESC_2000084_Skill03_LV1,SKILL_DESC_2000084_Skill03_LV1,SKILL_DESC_2000084_Skill03_LV5",
-      "IconName": "Skill_Ultimate_2000084",
       "NameIDSymbol": "8403",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "HEAL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000084",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000084_Skill03",
-      "TargetTeamType": "TEAM",
-      "buff": [
-        "BT_STAT|ST_SPEED",
-        "BT_INVINCIBLE"
-      ],
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>[Buff_V_2000084_3_3]</color> of Eva's Max Health and increases <color=#28d9ed>Speed</color> for <color=#28d9ed>[Buff_T_2000084_3_2] turn(s)</color>."
-      ],
+      "name": "Dreaming of You",
+      "name_kr": "당신을 위한 소망",
+      "name_jp": "マスターへの想い",
+      "true_desc": "<color=#28d9ed>Heals</color> all allies for <color=#28d9ed>10%</color> of Eva's Max Health and increases <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc_kr": "아군 전체의 <color=#28d9ed>체력</color>을 에바 최대 체력의 <color=#28d9ed>10%</color>만큼 회복시키고, <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>속도</color>를 증가시킵니다.",
+      "true_desc_jp": "味方全体の<color=#28d9ed>HP</color>を【エヴァ】の最大HPの<color=#28d9ed>10%</color>回復させ、<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
         ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン"
+        ],
         "3": [
           "+10% healing"
         ],
+        "3_kr": [
+          "체력 회복량 +10%"
+        ],
+        "3_jp": [
+          "HP回復量+10%"
+        ],
         "4": [
           "+10% healing"
+        ],
+        "4_kr": [
+          "체력 회복량 +10%"
+        ],
+        "4_jp": [
+          "HP回復量+10%"
         ],
         "5": [
           "+1 turn Increased Speed duration",
           "+1 turn Invulnerability on allies"
         ],
-        "2_jp": [
-          "スキルターン-1ターン"
-        ],
-        "2_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "3_jp": [
-          "HP回復量+10%"
-        ],
-        "3_kr": [
-          "체력 회복량 +10%"
-        ],
-        "4_jp": [
-          "HP回復量+10%"
-        ],
-        "4_kr": [
-          "체력 회복량 +10%"
+        "5_kr": [
+          "속도 지속 +1턴",
+          "아군 팀 무적 +1턴"
         ],
         "5_jp": [
           "スピードUP+1ターン",
           "味方全体に無敵+1ターン"
-        ],
-        "5_kr": [
-          "속도 지속 +1턴",
-          "아군 팀 무적 +1턴"
         ]
       },
-      "wgr": null,
-      "name_kr": "당신을 위한 소망",
-      "name_jp": "マスターへの想い",
-      "true_desc_kr": "아군 전체의 <color=#28d9ed>체력</color>을 에바 최대 체력의 <color=#28d9ed>10%</color>만큼 회복시키고, <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>속도</color>를 증가시킵니다.",
-      "true_desc_jp": "味方全体の<color=#28d9ed>HP</color>を【エヴァ】の最大HPの<color=#28d9ed>10%</color>回復させ、<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。"
+      "cd": "5",
+      "buff": [
+        "BT_STAT|ST_SPEED",
+        "BT_INVINCIBLE"
+      ],
+      "debuff": []
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>5</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers the <color=#28d9ed>Health</color> of the ally with the lowest Health by <color=#28d9ed>13%</color> of Eva's Max Health.",
-      "DescID": "SKILL_DESC_2000084_Skill04_LV1,SKILL_DESC_2000084_Skill04_LV1,SKILL_DESC_2000084_Skill04_LV1,SKILL_DESC_2000084_Skill04_LV1,SKILL_DESC_2000084_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Light_Start",
       "NameIDSymbol": "8404",
-      "RangeType": "NONE",
+      "IconName": "Skill_ChainPassive_Light_Start",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "TargetTeamType_fallback1": "NONE",
-      "buff": [],
-      "cd": null,
-      "debuff": "BT_WG_DMG",
-      "description": [
-        "<color=#ffd732>Chain Starter Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>[Buff_V_2000084_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers the <color=#28d9ed>Health</color> of the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000084_backup_1_1]</color> of Eva's Max Health."
-      ],
-      "dual_buff": "",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, additionally reduces Weakness Gauge by <color=#28d9ed>5</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, recovers the <color=#28d9ed>Health</color> of the ally with the lowest Health by <color=#28d9ed>13%</color> of Eva's Max Health.",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>5</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 에바 최대 체력의 <color=#28d9ed>13%</color> 회복시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、<color=#28d9ed>5</color>のWGを追加でDOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>をエヴァの最大HPの<color=#28d9ed>13%</color>回復させる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>5</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 에바 최대 체력의 <color=#28d9ed>13%</color> 회복시킵니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、<color=#28d9ed>5</color>のWGを追加でDOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>をエヴァの最大HPの<color=#28d9ed>13%</color>回復させる。"
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "BT_WG_REVERSE_HEAL"
+      ],
+      "dual_buff": []
     }
-  },
-  "rank": "S",
-  "Fullname_kr": "모나드 에바",
-  "Fullname_jp": "モナド エヴァ",
-  "VoiceActor": "VA. Courtney Lin",
-  "VoiceActor_jp": "CV. 小倉唯",
-  "VoiceActor_kr": "CV. Courtney Lin"
+  }
 }

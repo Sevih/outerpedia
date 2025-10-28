@@ -1,15 +1,18 @@
 {
   "ID": "2000068",
   "Fullname": "Dahlia",
+  "Fullname_jp": "ダリア",
+  "Fullname_kr": "달리아",
   "Rarity": 3,
   "Element": "Water",
-  "role": "support",
-  "gift": "Magic Tool",
-  "rank_pvp": "S",
   "Class": "Mage",
   "SubClass": "Enchanter",
-  "video": "rfsYrJKYSRg",
-  "tags": ["free"],
+  "rank": "C",
+  "rank_pvp": "S",
+  "role": "support",
+  "tags": [
+    "free"
+  ],
   "skill_priority": {
     "First": {
       "prio": 3
@@ -21,337 +24,308 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Start",
+  "video": "rfsYrJKYSRg",
+  "VoiceActor": "VA. Amber Lee Connors",
+  "VoiceActor_kr": "CV. Amber Lee Connors",
+  "VoiceActor_jp": "CV. 山崎はるか",
+  "gift": "Magic Tool",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+3% Ally Team Effectiveness\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 효과 적중 +3%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の効果命中+3%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+3% Ally Team Effectiveness\n+25 Action Points at battle start",
-    "4_1_jp": "ATK DEF HP +16%\n味方の効果命中+3%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 효과 적중 +3%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n味方の効果命中+3%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n아군 효과 적중 +3%\n입장 시 AP +25"
+    "6_kr": "ATK DEF HP +30%\n아군 효과 적중 +3%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n味方の効果命中+3%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Start",
   "skills": {
     "SKT_FIRST": {
-      "name": "Icicle Lance",
-      "true_desc": "Attacks an enemy and increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>20%</color>.",
-      "ApproachTime": "ATTACK",
-      "DescID": "SKILL_DESC_2000068_Skill01_LV1,SKILL_DESC_2000068_Skill01_LV1,SKILL_DESC_2000068_Skill01_LV1,SKILL_DESC_2000068_Skill01_LV1,SKILL_DESC_2000068_Skill01_LV1",
-      "IconName": "Skill_First_2000068",
       "NameIDSymbol": "6801",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000068",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000068_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_ACTION_GAUGE"
-      ],
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy and increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000068_1_1]</color>."
-      ],
+      "name": "Icicle Lance",
+      "name_kr": "아이시클 랜스",
+      "name_jp": "アイシクルランス",
+      "true_desc": "Attacks an enemy and increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>20%</color>.",
+      "true_desc_kr": "적을 공격하고 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。",
       "enhancement": {
         "2": [
           "+5% damage",
           "+1 Weakness Gauge damage"
-        ],
-        "3": [
-          "+10% damage"
-        ],
-        "4": [
-          "+10% Priority"
-        ],
-        "5": [
-          "+20% damage"
-        ],
-        "2_jp": [
-          "ダメージ+5%",
-          "WGダメージ+1"
         ],
         "2_kr": [
           "피해량 +5%",
           "WG 감소량 +1"
         ],
-        "3_jp": [
-          "ダメージ+10%"
+        "2_jp": [
+          "ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "3": [
+          "+10% damage"
         ],
         "3_kr": [
           "피해량 +10%"
         ],
-        "4_jp": [
-          "行動ゲージ10%UP"
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "4": [
+          "+10% Priority"
         ],
         "4_kr": [
           "행동 게이지 +10%"
         ],
-        "5_jp": [
-          "ダメージ+20%"
+        "4_jp": [
+          "行動ゲージ10%UP"
+        ],
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
       "wgr": 1,
-      "name_kr": "아이시클 랜스",
-      "name_jp": "アイシクルランス",
-      "true_desc_kr": "적을 공격하고 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다.",
-      "true_desc_jp": "敵単体にダメージを与え、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。"
+      "cd": null,
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "debuff": []
     },
     "SKT_SECOND": {
-      "name": "Absolute Zero",
-      "true_desc": "Removes <color=#28d9ed>1</color> buff(s) from targets not inflicted with Frozen, then attacks all enemies.\nIncreases damage dealt to targets inflicted with Frozen.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000068_Skill02_LV1,SKILL_DESC_2000068_Skill02_LV1,SKILL_DESC_2000068_Skill02_LV1,SKILL_DESC_2000068_Skill02_LV1,SKILL_DESC_2000068_Skill02_LV1",
-      "IconName": "Skill_Second_2000068",
       "NameIDSymbol": "6802",
-      "RangeType": "ALL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Second_2000068",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000068_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_SHIELD_BASED_CASTER"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 60,
-          "effect": "Grants barrier to all allies (proportional to Attack)",
-          "level": 1,
-          "effect_kr": "아군 실드 추가(공격력 비례)",
-          "effect_jp": "味方にシールド付与\\n(攻撃力が高いほどシールド量がUP)"
-        },
-        "SKT_BURST_2": {
-          "cost": 90,
-          "effect": "Inflicts Frozen on all enemies for 1 turn\\nIncreases damage dealt to bosses",
-          "level": 2,
-          "effect_kr": "적 전체 빙결 1턴\\n보스에게 입히는 피해 증가",
-          "effect_jp": "敵全体に凍結を1ターンの間付与\\nボスに与えるダメージUP"
-        },
-        "SKT_BURST_3": {
-          "cost": 120,
-          "effect": "Changed to Enhanced Skill\\nActivates all effects of Absolute Zero",
-          "level": 3,
-          "effect_kr": "강화 스킬로 교체\\n앱솔루트 제로의 모든 효과 발동",
-          "effect_jp": "強化スキルに変更\\n【絶対零度】の効果をすべて発動"
-        }
-      },
-      "cd": "4",
-      "debuff": [
-        "BT_REMOVE_BUFF",
-        "BT_FREEZE"
-      ],
-      "description": [
-        "Removes <color=#28d9ed>[Buff_V_2000068_2_2]</color> buff(s) from targets not inflicted with Frozen, then attacks all enemies.\nIncreases damage dealt to targets inflicted with Frozen."
-      ],
+      "name": "Absolute Zero",
+      "name_kr": "앱솔루트 제로",
+      "name_jp": "絶対零度",
+      "true_desc": "Removes <color=#28d9ed>1</color> buff(s) from targets not inflicted with Frozen, then attacks all enemies.\nIncreases damage dealt to targets inflicted with Frozen.",
+      "true_desc_kr": "빙결이 없는 대상들의 강화 효과를 <color=#28d9ed>1개</color> 해제 후 적 전체를 공격합니다.\n이 스킬로 빙결 대상에게 입히는 피해가 증가합니다.",
+      "true_desc_jp": "凍結がない対象の強化効果を<color=#28d9ed>1個</color>解除した後、敵全体にダメージを与える。\nこのスキルで凍結状態の対象に与えるダメージがUPする。",
       "enhancement": {
         "2": [
           "+5% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+5%",
+          "WGダメージ+1"
+        ],
         "3": [
           "-1 turn Skill Cooldown"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
         ],
         "4": [
           "+10% damage",
           "+1 Weakness Gauge damage"
+        ],
+        "4_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "4_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
         ],
         "5": [
           "+1 buff removed",
           "+15% damage"
         ],
-        "2_jp": [
-          "ダメージ+5%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +5%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
-        ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "4_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
+        "5_kr": [
+          "강화 효과 해제 수량 +1",
+          "피해량 +15%"
         ],
         "5_jp": [
           "強化効果解除+1",
           "ダメージ+15%"
-        ],
-        "5_kr": [
-          "강화 효과 해제 수량 +1",
-          "피해량 +15%"
         ]
       },
+      "cd": "4",
       "wgr": 1,
-      "name_kr": "앱솔루트 제로",
-      "name_jp": "絶対零度",
-      "true_desc_kr": "빙결이 없는 대상들의 강화 효과를 <color=#28d9ed>1개</color> 해제 후 적 전체를 공격합니다.\n이 스킬로 빙결 대상에게 입히는 피해가 증가합니다.",
-      "true_desc_jp": "凍結がない対象の強化効果を<color=#28d9ed>1個</color>解除した後、敵全体にダメージを与える。\nこのスキルで凍結状態の対象に与えるダメージがUPする。"
+      "buff": [
+        "BT_SHIELD_BASED_CASTER"
+      ],
+      "debuff": [
+        "BT_REMOVE_BUFF",
+        "BT_FREEZE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Grants barrier to all allies (proportional to Attack)",
+          "effect_kr": "아군 실드 추가(공격력 비례)",
+          "effect_jp": "味方にシールド付与\\n(攻撃力が高いほどシールド量がUP)",
+          "cost": 60,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Inflicts Frozen on all enemies for 1 turn\\nIncreases damage dealt to bosses",
+          "effect_kr": "적 전체 빙결 1턴\\n보스에게 입히는 피해 증가",
+          "effect_jp": "敵全体に凍結を1ターンの間付与\\nボスに与えるダメージUP",
+          "cost": 90,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Changed to Enhanced Skill\\nActivates all effects of Absolute Zero",
+          "effect_kr": "강화 스킬로 교체\\n앱솔루트 제로의 모든 효과 발동",
+          "effect_jp": "強化スキルに変更\\n【絶対零度】の効果をすべて発動",
+          "cost": 120,
+          "level": 3
+        }
+      }
     },
     "SKT_ULTIMATE": {
-      "name": "Diamond Dust",
-      "true_desc": "Attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Frozen</color> on all enemies for <color=#28d9ed>1 turn(s)</color> and has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Reduced Speed</color> for <color=#28d9ed>2 turn(s)</color>.\\nRight after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response, and increases damage dealt to bosses.",
-      "DescID": "SKILL_DESC_2000068_Skill03_LV1,SKILL_DESC_2000068_Skill03_LV1,SKILL_DESC_2000068_Skill03_LV1,SKILL_DESC_2000068_Skill03_LV1,SKILL_DESC_2000068_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000068",
       "NameIDSymbol": "6803",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000068",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000068_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": "5",
-      "debuff": [
-        "BT_FREEZE",
-        "BT_STAT|ST_SPEED",
-        "BT_SEAL_COUNTER"
-      ],
-      "description": [
-        "Attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>[Buff_C_2000068_3_2]</color> chance to inflict <color=#28d9ed>Frozen</color> on all enemies for <color=#28d9ed>[Buff_T_2000068_3_2] turn(s)</color> and has a <color=#28d9ed>[Buff_C_2000068_3_3]</color> chance to inflict <color=#28d9ed>Reduced Speed</color> for <color=#28d9ed>[Buff_T_2000068_3_3] turn(s)</color>.\\nRight after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response, and increases damage dealt to bosses."
-      ],
+      "name": "Diamond Dust",
+      "name_kr": "다이아몬드 더스트",
+      "name_jp": "ダイヤモンドダスト",
+      "true_desc": "Attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Frozen</color> on all enemies for <color=#28d9ed>1 turn(s)</color> and has a <color=#28d9ed>70%</color> chance to inflict <color=#28d9ed>Reduced Speed</color> for <color=#28d9ed>2 turn(s)</color>.\\nRight after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response, and increases damage dealt to bosses.",
+      "true_desc_kr": "적 전체를 공격합니다.\\n공격 후 적 전체에게 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>빙결</color>을 부여하고, <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>속도 감소</color>를 부여합니다.\\n이 스킬 직후에는 적의 반격, 복수, 신속 대응이 발동하지 않고, 보스에게 입히는 피해가 증가합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。\\n攻撃後、敵全体に<color=#28d9ed>70%</color>の確率で<color=#28d9ed>凍結</color>を<color=#28d9ed>1ターン</color>の間付与し、<color=#28d9ed>70%</color>の確率で敵全体の<color=#28d9ed>スピード</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。\\nこのスキルでは敵の反撃、復讐、迅速対応が発動しない。また、ボスに与えるダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+15% effect chance"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "3_jp": [
+          "効果発生率+15%"
         ],
         "4": [
           "-1 turn Skill Cooldown"
         ],
-        "5": [
-          "+10% damage",
-          "+15% effect chance"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "効果発生率+15%"
-        ],
-        "3_kr": [
-          "효과 발동 확률 +15%"
+        "4_kr": [
+          "스킬 쿨타임 -1턴"
         ],
         "4_jp": [
           "スキルターン-1ターン"
         ],
-        "4_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "5_jp": [
-          "ダメージ+10%",
-          "効果発生率+15%"
+        "5": [
+          "+10% damage",
+          "+15% effect chance"
         ],
         "5_kr": [
           "피해량 +10%",
           "효과 발동 확률 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "効果発生率+15%"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "다이아몬드 더스트",
-      "name_jp": "ダイヤモンドダスト",
-      "true_desc_kr": "적 전체를 공격합니다.\\n공격 후 적 전체에게 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>빙결</color>을 부여하고, <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>속도 감소</color>를 부여합니다.\\n이 스킬 직후에는 적의 반격, 복수, 신속 대응이 발동하지 않고, 보스에게 입히는 피해가 증가합니다.",
-      "true_desc_jp": "敵全体にダメージを与える。\\n攻撃後、敵全体に<color=#28d9ed>70%</color>の確率で<color=#28d9ed>凍結</color>を<color=#28d9ed>1ターン</color>の間付与し、<color=#28d9ed>70%</color>の確率で敵全体の<color=#28d9ed>スピード</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。\\nこのスキルでは敵の反撃、復讐、迅速対応が発動しない。また、ボスに与えるダメージがUPする。"
+      "buff": [
+        "BT_SEAL_COUNTER"
+      ],
+      "debuff": [
+        "BT_FREEZE",
+        "BT_STAT|ST_SPEED"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>30%</color>.",
-      "DescID": "SKILL_DESC_2000068_Skill04_LV1,SKILL_DESC_2000068_Skill04_LV1,SKILL_DESC_2000068_Skill04_LV1,SKILL_DESC_2000068_Skill04_LV1,SKILL_DESC_2000068_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Water_Start",
       "NameIDSymbol": "6804",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Water_Start",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "SYS_BUFF_BREAK_DMG",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Starter Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>[Buff_T_2000070_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>[Buff_V_2000068_backup_1_1]</color>."
-      ],
-      "dual_buff": "BT_ACTION_GAUGE",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, grants <color=#28d9ed>Find Weakness</color> to all allies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases the <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>30%</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>2턴</color> 동안 아군 전체에게 <color=#28d9ed>약점 공략</color>을 부여합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>30%</color> 증가시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、味方全体に<color=#28d9ed>弱点攻略</color>を<color=#28d9ed>2ターン</color>の間付与する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>30%</color>UPさせる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>2턴</color> 동안 아군 전체에게 <color=#28d9ed>약점 공략</color>을 부여합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>30%</color> 증가시킵니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、味方全体に<color=#28d9ed>弱点攻略</color>を<color=#28d9ed>2ターン</color>の間付与する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>30%</color>UPさせる。"
+      "cd": null,
+      "buff": [
+        "BT_DMG_TARGET_BREAK"
+      ],
+      "debuff": [],
+      "dual_buff": [
+        "BT_ACTION_GAUGE"
+      ]
     }
-  },
-  "rank": "C",
-  "Fullname_kr": "달리아",
-  "Fullname_jp": "ダリア",
-  "VoiceActor": "VA. Amber Lee Connors",
-  "VoiceActor_jp": "CV. 山崎はるか",
-  "VoiceActor_kr": "CV. Amber Lee Connors"
+  }
 }

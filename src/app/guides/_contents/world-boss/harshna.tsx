@@ -69,7 +69,7 @@ export default function HarshnaGuide() {
               <GuideHeading level={4}>Phase 2 : Frozen Dragon of phantasm Harshna moveset</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><strong>S1</strong>: Single, <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /> 1 debuff from the caster. Prioritize leftmost enemy.</li>
-                <li><strong>S2</strong>: AoE, penetratre 30% of defense. <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> <EffectInlineTag name="BT_SEAL_COUNTER" type="debuff" />.</li>
+                <li><strong>S2</strong>: AoE, penetratre 30% of defense. <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> <EffectInlineTag name="BT_SEAL_COUNTER" type="buff" />.</li>
                 <li><strong>S3</strong>: AoE, if the caster is not inflicted a debuff, ignores 100% of the target&apos;s defense</li>
                 <li><strong>Passive</strong>: If the caster is not inflicted with a debuff, weakness gauge cannot be reduced.</li>
                 <li><strong>Passive</strong>: Increases weakness gauge damage taken from enemies with <EffectInlineTag name="BT_STEALTHED" type="buff" />.</li>

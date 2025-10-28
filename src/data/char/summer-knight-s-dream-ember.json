@@ -1,10 +1,18 @@
 {
   "ID": "2000106",
   "Fullname": "Summer Knight's Dream Ember",
-  "Fullname_kr": "청운의 꿈 엠버",
   "Fullname_jp": "青雲の志 エンバー",
+  "Fullname_kr": "청운의 꿈 엠버",
   "Rarity": 3,
   "Element": "Water",
+  "Class": "Defender",
+  "SubClass": "Sweeper",
+  "rank": "A",
+  "rank_pvp": "S",
+  "role": "support",
+  "tags": [
+    "seasonal"
+  ],
   "skill_priority": {
     "First": {
       "prio": 3
@@ -16,49 +24,102 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Join",
+  "video": "XDHBkfCI8Sk",
+  "VoiceActor": "VA. Rie Hikisaka",
+  "VoiceActor_kr": "CV. 히키사카 리에",
+  "VoiceActor_jp": "CV. 引坂理絵",
   "limited": true,
-  "role": "support",
   "gift": "Natural Object",
-  "tags": [
-    "seasonal"
-  ],
-  "rank": "A",
-  "rank_pvp": "S",
-  "Class": "Defender",
-  "SubClass": "Sweeper",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
-    "4_1": "ATK DEF HP +16%\nSelf Max HP +35%\nAllies' Evasion +4%\n\nWhen enemy uses Counterattack, Revenge, or Agile Response, increase self Priority +30%",
-    "4_1_jp": "ATK DEF HP +16%\n自身最大HP+35%\n味方の回避+4%\n敵の反撃、復讐、迅速対応使用時、自身の行動ゲージ+30%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
+    "4_1": "ATK DEF HP +16%\nSelf Max HP +35%\nAllies' Evasion +4%\nWhen enemy uses Counterattack, Revenge, or Agile Response, increase self Priority +30%",
     "4_1_kr": "ATK DEF HP +16%\n자신 최대 체력 +35%\n아군 회피 +4%\n적 반격,복수,신속 대응 사용 시 자신 행동 게이지 증가 +30%",
+    "4_1_jp": "ATK DEF HP +16%\n自身最大HP+35%\n味方の回避+4%\n敵の反撃、復讐、迅速対応使用時、自身の行動ゲージ+30%",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\nOn entry, AP +50\nWhen enemy acts, gain Azure Will +2 (once per turn)",
-    "5_1_jp": "ATK DEF HP +22%\nバーストLv.3解放\n入場時AP+50\n敵が行動時、「青き情熱」+2(1ターンに1回)",
     "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50\n적 행동 시 푸른 열정 +2 (1턴에 1회)",
+    "5_1_jp": "ATK DEF HP +22%\nバーストLv.3解放\n入場時AP+50\n敵が行動時、「青き情熱」+2(1ターンに1回)",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\nWhen hit, reduce own skill cooldown by 2 turns (once per turn)\nAt battle start, gain Azure Will +2\nWhen enemy uses Counterattack, Revenge, or Agile Response, increase self Priority +40%",
-    "6_jp": "ATK DEF HP +30%\n被弾時、自身のスキルターン-2(1ターンに1回)\n戦闘開始時、「青き情熱」+2\n敵の反撃敵の反撃、復讐、迅速対応使用時、自身の行動ゲージ+40%",
-    "6_kr": "ATK DEF HP +30%\n피격 시 자신 스킬 쿨타임 -2턴 (1턴에 1회)\n전투 시작 시 푸른 열정 +2\n적 반격,복수,신속 대응 사용 시 자신 행동 게이지 증가 +40%"
+    "6_kr": "ATK DEF HP +30%\n피격 시 자신 스킬 쿨타임 -2턴 (1턴에 1회)\n전투 시작 시 푸른 열정 +2\n적 반격,복수,신속 대응 사용 시 자신 행동 게이지 증가 +40%",
+    "6_jp": "ATK DEF HP +30%\n被弾時、自身のスキルターン-2(1ターンに1回)\n戦闘開始時、「青き情熱」+2\n敵の反撃敵の反撃、復讐、迅速対応使用時、自身の行動ゲージ+40%"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
+      "NameIDSymbol": "10601",
+      "IconName": "Skill_First_2000106",
+      "SkillType": "SKT_FIRST",
       "name": "Dolphin Charge!",
       "name_kr": "돌핀 차징!",
       "name_jp": "ドルフィンチャージ!",
       "true_desc": "Inflicts fixed damage equal to <color=#28d9ed>10%</color> of the caster's Max Health on the enemy, then attacks. Has a <color=#28d9ed>30%</color> chance to dispel <color=#28d9ed>1</color> <color=#28d9ed>Buff(s)</color> from the target, and gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Azure Will</color>.\\nDamage dealt increases proportional to Max Heath instead of Attack.",
       "true_desc_kr": "적에게 자신의 최대 체력의 <color=#28d9ed>10%</color> 만큼 고정 피해를 입힌 후 공격합니다. <color=#28d9ed>30%</color> 확률로 대상의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>1개</color> 해제하고, <color=#28d9ed>고유 자원 : 푸른 열정</color>을 <color=#28d9ed>1개</color> 획득합니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
       "true_desc_jp": "敵に自身の最大HPの<color=#28d9ed>10%</color>分の固定ダメージを与えた後、攻撃する。\\n<color=#28d9ed>30%</color>の確率で対象の<color=#28d9ed>強化効果</color>を<color=#28d9ed>1</color>個解除し、<color=#28d9ed>「青き情熱」</color>を<color=#28d9ed>1</color>獲得する。\\nここのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。",
-      "FocusType_fallback1": "ATTACK",
+      "enhancement": {
+        "2": [
+          "+1 Weakness Gauge damage",
+          "+10% damage"
+        ],
+        "2_kr": [
+          "WG 감소량 +1",
+          "피해량 +10%"
+        ],
+        "2_jp": [
+          "WGダメージ+1",
+          "ダメージ+10%"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "4": [
+          "+10% effect chance",
+          "+15% damage"
+        ],
+        "4_kr": [
+          "효과 발동 확률 +10%",
+          "피해량 +15%"
+        ],
+        "4_jp": [
+          "効果発生率+10%",
+          "ダメージ+15%"
+        ],
+        "5": [
+          "Azure Will gain +1",
+          "+15% damage"
+        ],
+        "5_kr": [
+          "푸른 열정 획득량 +1",
+          "피해량 +15%"
+        ],
+        "5_jp": [
+          "「青き情熱」獲得量+1",
+          "ダメージ+15%"
+        ]
+      },
+      "wgr": 1,
+      "cd": null,
       "buff": [],
+      "debuff": [
+        "BT_REMOVE_BUFF",
+        "BT_REVERSE_HEAL_BASED_CASTER"
+      ],
       "burnEffect": {
         "SKT_BURST_1": {
           "effect": "Enhances Buff Removal\\nActivation chance +50%\\n(Ignores Resilience)",
           "effect_kr": "강화 해제 강화\\n(효과 저항 무시)\\n(발동 확률 +50%)",
-          "effect_jp": "強化解除強化の発動確率+50%\\n(効果抵抗無視)",
+          "effect_jp": "強化解除強化の\\n発動確率+50%\\n(効果抵抗無視)",
           "cost": 60,
           "level": 1
         },
@@ -76,240 +137,199 @@
           "cost": 120,
           "level": 3
         }
-      },
-      "cd": null,
-      "debuff": [
-        "BT_REMOVE_BUFF",
-         "BT_FIXED_DAMAGE"
-      ],
-      "enhancement": {
-        "2": [
-          "+1 Weakness Gauge damage",
-          "+10% damage"
-        ],
-        "2_jp": [
-          "WGダメージ+1",
-          "ダメージ+10%"
-        ],
-        "2_kr": [
-          "WG 감소량 +1",
-          "피해량 +10%"
-        ],
-        "3": [
-          "+10% effect chance"
-        ],
-        "3_jp": [
-          "効果発生率+10%"
-        ],
-        "3_kr": [
-          "효과 발동 확률 +10%"
-        ],
-        "4": [
-          "+10% effect chance",
-          "+15% damage"
-        ],
-        "4_jp": [
-          "効果発生率+10%",
-          "ダメージ+15%"
-        ],
-        "4_kr": [
-          "효과 발동 확률 +10%",
-          "피해량 +15%"
-        ],
-        "5": [
-          "Azure Will gain +1",
-          "+15% damage"
-        ],
-        "5_jp": [
-          "「青き情熱」獲得量+1",
-          "ダメージ+15%"
-        ],
-        "5_kr": [
-          "푸른 열정 획득량 +1",
-          "피해량 +15%"
-        ]
-      },
-      "wgr": 1
+      }
     },
     "SKT_SECOND": {
+      "NameIDSymbol": "10602",
+      "IconName": "Skill_Second_2000106",
+      "SkillType": "SKT_SECOND",
       "name": "Master, Spike!",
       "name_kr": "스승님, 스파이크!",
       "name_jp": "師匠、スパイク!",
       "true_desc": "(Passive Effect) Decreases damage taken by all allies by <color=#28d9ed>10%</color>, and if the caster is the only Defender among allies, damage received from a single attack does not exceed <color=#28d9ed>65%</color> of the caster's Max Health (includes Dual Attacks and Additional Attacks).\\n\\n(Active Effect) Increases all allies' <color=#28d9ed>Penetration</color> and <color=#28d9ed>Defense</color> for <color=#28d9ed>1</color> turns, then attacks all enemies and increases the caster's <color=#28d9ed>Combat Readiness</color> by <color=#28d9ed>20%</color>.\\nDamage dealt increases proportional to Max Heath instead of Attack.",
       "true_desc_kr": "(패시브 효과) 아군 전체가 받는 피해를 <color=#28d9ed>10%</color> 감소시키고 자신이 아군 중 유일한 방어형이라면 한번에 받는 피해는 자신 최대 체력의 <color=#28d9ed>65%</color>를 초과하지 않습니다. (협공 및 추가타 포함)\\n\\n(액티브 효과) <color=#28d9ed>1턴</color> 동안 아군 전체의 <color=#28d9ed>관통력</color>과 <color=#28d9ed>방어력</color>을 증가시킨 뒤 적 전체를 공격하고 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다.\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
       "true_desc_jp": "(パッシブ効果)味方全体が受けるダメージを<color=#28d9ed>10%</color>減少させ、味方中で自身が唯一の防御型である場合、1回で受けるダメージは自身の最大HPの<color=#28d9ed>65%</color>を超えない(協攻・追加攻撃を含む)。\\n\\n(アクティブ効果)<color=#28d9ed>1</color>ターンの間、味方全体の<color=#28d9ed>貫通力</color>と<color=#28d9ed>防御力</color>を上昇させ、その後、敵全体を攻撃し、自身の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>増加させる。\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。",
-      "ApproachType": "ATTACK",
-      "buff": [
-        "BT_STAT|ST_PIERCE_POWER_RATE",
-        "BT_STAT|ST_DEF",
-        "BT_ACTION_GAUGE"
-      ],
-      "cd": "4",
-      "debuff": [],
       "enhancement": {
         "2": [
           "+1 Weakness Gauge damage",
           "+10% damage"
         ],
-        "2_jp": [
-          "WGダメージ+1",
-          "ダメージ+10%"
-        ],
         "2_kr": [
           "WG 감소량 +1",
           "피해량 +10%"
+        ],
+        "2_jp": [
+          "WGダメージ+1",
+          "ダメージ+10%"
         ],
         "3": [
           "-1 turn Skill Cooldown",
           "-10% Health Limit"
         ],
-        "3_jp": [
-          "スキルターン-1ターン",
-          "HPの条件-10%"
-        ],
         "3_kr": [
           "스킬 쿨타임 -1턴",
           "체력 조건 -10%"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン",
+          "HPの条件-10%"
         ],
         "4": [
           "+1 turn effect duration",
           "+10% damage"
         ],
-        "4_jp": [
-          "効果ターン+1ターン",
-          "ダメージ+10%"
-        ],
         "4_kr": [
           "효과 지속 +1턴",
           "피해량 +10%"
         ],
+        "4_jp": [
+          "効果ターン+1ターン",
+          "ダメージ+10%"
+        ],
         "5": [
           "-10% Health Limit"
         ],
-        "5_jp": [
-          "HPの条件-10%"
-        ],
         "5_kr": [
           "체력 조건 -10%"
+        ],
+        "5_jp": [
+          "HPの条件-10%"
         ]
       },
-      "wgr": 1
+      "cd": "4",
+      "wgr": 1,
+      "buff": [
+        "BT_STAT|ST_PIERCE_POWER_RATE",
+        "BT_STAT|ST_DEF",
+        "BT_ACTION_GAUGE"
+      ],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
+      "NameIDSymbol": "10603",
+      "IconName": "Skill_Ultimate_2000106",
+      "SkillType": "SKT_ULTIMATE",
       "name": "Sudden Strike!",
       "name_kr": "예상치 못한 일격!",
       "name_jp": "予想外の一撃!",
       "true_desc": "Deals Fixed Damage equal to <color=#28d9ed>5%</color> of the caster's Max Health, then attacks all enemies. After attacking, increases the <color=#28d9ed>Priority</color> of all allies by <color=#28d9ed>10%</color>, and additionally deals Fixed Damage to bosses equal to <color=#28d9ed>8%</color> of the boss's Max HP.\\n\\nWhen holding <color=#28d9ed>5</color> <color=#28d9ed>Unique Resource: Azure Will</color>, consumes all to double both the Fixed Damage and the Priority increase. (Bosses cannot be defeated by Fixed Damage applied after the attack.)\\nDamage dealt increases proportional to Max Heath instead of Attack.",
       "true_desc_kr": "적 전체에게 자신의 최대 체력의 <color=#28d9ed>5%</color> 만큼 고정 피해를 입힌 후 공격합니다. 공격 후 아군 전체의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>10%</color> 증가하고, 보스에게는 보스의 최대 체력의 <color=#28d9ed>8%</color> 만큼 고정 피해를 추가로 부여합니다.\\n\\n<color=#28d9ed>고유 자원 : 푸른 열정</color>을 5개 보유 시, 모두 소모하여 고정 피해, 행동 게이지 증가 비율이 2배로 적용 됩니다. (공격 후 부여되는 고정 피해로는 보스가 사망하지 않습니다.)\\n이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
       "true_desc_jp": "敵全体に自身の最大HPの<color=#28d9ed>5%</color>分の固定ダメージを与え、その後攻撃する。攻撃後、味方全体の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>増加させ、ボスにはボスの最大HPの<color=#28d9ed>8%</color>分の固定ダメージを追加で与える。\\n\\n<color=#28d9ed>「青き情熱」</color>を<color=#28d9ed>5</color>個保有している場合、すべて消費し、固定ダメージと行動ゲージ増加量が2倍になる。(攻撃後に付与される固定ダメージではボスを撃破できない)\\nこのスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。",
-      "buff": [
-        "BT_ACTION_GAUGE"
-      ],
-      "cd": "5",
-      "debuff": ["BT_FIXED_DAMAGE"],
       "enhancement": {
         "2": [
           "+1 Weakness Gauge damage",
           "+10% damage"
         ],
-        "2_jp": [
-          "WGダメージ+1",
-          "ダメージ+10%"
-        ],
         "2_kr": [
           "WG 감소량 +1",
           "피해량 +10%"
         ],
+        "2_jp": [
+          "WGダメージ+1",
+          "ダメージ+10%"
+        ],
         "3": [
           "Fixed Damage +5% of self Max HP"
-        ],
-        "3_jp": [
-          "自身最大HPの固定ダメージ+5%"
         ],
         "3_kr": [
           "자신 최대 체력 고정 피해 +5%"
         ],
+        "3_jp": [
+          "自身最大HPの固定ダメージ+5%"
+        ],
         "4": [
           "Fixed Damage +5% of self Max HP"
-        ],
-        "4_jp": [
-          "自身最大HPの固定ダメージ+5%"
         ],
         "4_kr": [
           "자신 최대 체력 고정 피해 +5%"
         ],
+        "4_jp": [
+          "自身最大HPの固定ダメージ+5%"
+        ],
         "5": [
           "All allies Priority +10%"
         ],
-        "5_jp": [
-          "味方の行動ゲージ10%UP"
-        ],
         "5_kr": [
           "아군 전체 행동 게이지 +10%"
+        ],
+        "5_jp": [
+          "味方の行動ゲージ10%UP"
         ]
       },
-      "wgr": 2
+      "cd": "5",
+      "wgr": 2,
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "debuff": [
+        "BT_REVERSE_HEAL_BASED_CASTER",
+        "BT_REVERSE_HEAL_BASED_TARGET"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
+      "NameIDSymbol": "10604",
+      "IconName": "Skill_ChainPassive_Water_Start",
+      "SkillType": "SKT_CHAIN_PASSIVE",
       "name": "Chain Passive",
       "name_kr": "체인 패시브",
       "name_jp": "チェーンパッシブ",
       "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, additionally decreases the target's <color=#28d9ed>Weakness Gauge</color> by <color=#28d9ed>3</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a 50% chance to dispel 1 <color=#28d9ed>Buff(s)</color> from the target.",
       "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 <color=#28d9ed>3</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 50% 확률로 대상의 <color=#28d9ed>강화 효과</color>를 1개 해제합니다.",
       "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、対象の<color=#28d9ed>WG</color>を<color=#28d9ed>3</color>追加で減少させる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>50%</color>の確率で対象の<color=#28d9ed>強化効果</color>を<color=#28d9ed>1</color>個解除する。",
-      "buff": [],
-      "cd": null,
-      "debuff": "BT_WG_DMG",
-      "dual_debuff": "BT_REMOVE_BUFF",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "2_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
-        ],
         "2_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
         ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+5% Dual Attack and Skill Chain damage"
-        ],
-        "3_jp": [
-          "チェーンスキルと連携ダメージ+5%"
         ],
         "3_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
         "4": [
           "+5% Dual Attack and Skill Chain damage"
         ],
-        "4_jp": [
-          "チェーンスキルと連携ダメージ+5%"
-        ],
         "4_kr": [
           "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
         ],
         "5": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
-        ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
-      "wgr_dual": 1
+      "wgr_dual": 1,
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "BT_WG_REVERSE_HEAL"
+      ],
+      "dual_debuff": [
+        "BT_REMOVE_BUFF"
+      ]
     }
-  },
-  "VoiceActor": "VA. Rie Hikisaka",
-  "VoiceActor_jp": "CV. 引坂理絵",
-  "VoiceActor_kr": "CV. 히키사카 리에"
+  }
 }

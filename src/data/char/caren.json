@@ -1,17 +1,18 @@
 {
   "ID": "2000089",
   "Fullname": "Caren",
+  "Fullname_jp": "カレン",
+  "Fullname_kr": "카렌",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp": "A",
-  "gift": "Science",
-  "role": "dps",
   "Class": "Striker",
   "SubClass": "Bruiser",
+  "rank": "A",
+  "rank_pvp": "A",
+  "role": "dps",
   "tags": [
     "ignore-defense"
   ],
-  "video": "n_5zHyzmVVQ",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -23,330 +24,301 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Join",
+  "video": "n_5zHyzmVVQ",
+  "VoiceActor": "VA. Crystal Lee",
+  "VoiceActor_kr": "CV. Crystal Lee",
+  "VoiceActor_jp": "CV. 近藤唯",
+  "gift": "Science",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+5% Ally Team Defense\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 방어력 +5%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の防御力+5%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+5% Ally Team Defense\n+25 Action Points at battle start",
-    "4_1_jp": "ATK DEF HP +16%\n味方の防御力+5%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 방어력 +5%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n味方の防御力+5%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n아군 방어력 +5%\n입장 시 AP +25"
+    "6_kr": "ATK DEF HP +30%\n아군 방어력 +5%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n味方の防御力+5%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "Theory Refutation",
-      "true_desc": "Attacks 2 enemies. When an enemy is defeated, recovers Health of the caster by <color=#28d9ed>20%</color>. This skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
-      "ApproachTime": "ATTACK",
-      "DescID": "SKILL_DESC_2000089_Skill01_LV1,SKILL_DESC_2000089_Skill01_LV1,SKILL_DESC_2000089_Skill01_LV1,SKILL_DESC_2000089_Skill01_LV1,SKILL_DESC_2000089_Skill01_LV1",
-      "IconName": "Skill_First_2000089",
       "NameIDSymbol": "8901",
-      "RangeType": "DOUBLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000089",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000089_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Inflicts reduced Critical Damage for 2 turns (Ignores the target's Resilience)\\nIncreases Damage",
-          "level": 1,
-          "effect_kr": "대상 치명 피해 -2턴(대상 효과 저항 무시)\\n피해 증가",
-          "effect_jp": "対象の会心ダメージDOWN-2ターン\\n(対象の効果抵抗無視)\\nダメージUP"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Increases Penetration by 30%",
-          "level": 2,
-          "effect_kr": "관통력 30% 증가",
-          "effect_jp": "貫通力+30%"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases Damage\\nRight after using this skill, does not trigger Counterattack, Revenge, or Agile Response",
-          "level": 3,
-          "effect_kr": "<color=#FFBF00>강화 공격</color>\\n피해 증가\\n해당 스킬 직후 반격/복수/신속 대응 불가",
-          "effect_jp": "<color=#FFBF00>強化攻撃</color>\\nダメージUP\\nこのスキルでは敵の\\n反撃/復讐/迅速対応が発動不可"
-        }
-      },
-      "cd": null,
-      "debuff": [
-        "BT_STAT|ST_CRITICAL_DMG_RATE",
-        "BT_SEAL_COUNTER"
-      ],
-      "description": [
-        "Attacks 2 enemies. When an enemy is defeated, recovers Health of the caster by <color=#28d9ed>[Buff_V_2000089_1]</color>. This skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack."
-      ],
+      "name": "Theory Refutation",
+      "name_kr": "이론 논파",
+      "name_jp": "論破",
+      "true_desc": "Attacks 2 enemies. When an enemy is defeated, recovers Health of the caster by <color=#28d9ed>20%</color>. This skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
+      "true_desc_kr": "적 2인을 공격합니다. 적 처치 시 자신의 체력을 <color=#28d9ed>20%</color> 회복합니다.\\n이 스킬은 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "敵2体にダメージを与える。敵を倒した時、自分のHPを<color=#28d9ed>20%</color>回復する。\\nこのスキルは攻撃力の代わりに<color=#28d9ed>防御力</color>が高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+10% damage"
         ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
         "4": [
           "+10% damage"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
         ],
         "5": [
           "+20% damage",
           "+10% healing"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "ダメージ+10%"
-        ],
-        "3_kr": [
-          "피해량 +10%"
-        ],
-        "4_jp": [
-          "ダメージ+10%"
-        ],
-        "4_kr": [
-          "피해량 +10%"
+        "5_kr": [
+          "피해량 +20%",
+          "체력 회복량 +10%"
         ],
         "5_jp": [
           "ダメージ+20%",
           "HP回復量+10%"
-        ],
-        "5_kr": [
-          "피해량 +20%",
-          "체력 회복량 +10%"
         ]
       },
       "wgr": 1,
-      "name_kr": "이론 논파",
-      "name_jp": "論破",
-      "true_desc_kr": "적 2인을 공격합니다. 적 처치 시 자신의 체력을 <color=#28d9ed>20%</color> 회복합니다.\\n이 스킬은 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "敵2体にダメージを与える。敵を倒した時、自分のHPを<color=#28d9ed>20%</color>回復する。\\nこのスキルは攻撃力の代わりに<color=#28d9ed>防御力</color>が高いほどダメージがUPする。"
+      "cd": null,
+      "buff": [
+        "BT_SEAL_COUNTER"
+      ],
+      "debuff": [
+        "BT_STAT|ST_CRITICAL_DMG_RATE"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Inflicts reduced Critical Damage for 2 turns (Ignores the target's Resilience)\\nIncreases Damage",
+          "effect_kr": "대상 치명 피해 -2턴(대상 효과 저항 무시)\\n피해 증가",
+          "effect_jp": "対象の会心ダメージDOWN-2ターン\\n(対象の効果抵抗無視)\\nダメージUP",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Increases Penetration by 30%",
+          "effect_kr": "관통력 30% 증가",
+          "effect_jp": "貫通力+30%",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases Damage\\nRight after using this skill, does not trigger Counterattack, Revenge, or Agile Response",
+          "effect_kr": "<color=#FFBF00>강화 공격</color>\\n피해 증가\\n해당 스킬 직후 반격/복수/신속 대응 불가",
+          "effect_jp": "<color=#FFBF00>強化攻撃</color>\\nダメージUP\\nこのスキルでは敵の\\n反撃/復讐/迅速対応が発動不可",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Disassembly Analysis",
-      "true_desc": "(Passive Effect) After attacking an enemy, increases Priority of the caster by <color=#28d9ed>10%</color>, and after defeating an enemy, increases Priority by an additional <color=#28d9ed>20%</color>.\\n\\n(Triggered Effect) When an ally other than the caster performs an attack that targets all enemies, steals <color=#28d9ed>1</color> buff(s) from the enemy with the highest Max Health and then attacks the target. (Ignores the target's Resilience.)\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
-      "AIType": "ATTACK",
-      "ApproachTime": "HIGHEST,ST_HP",
-      "DescID": "SKILL_DESC_2000089_Skill02_LV1,SKILL_DESC_2000089_Skill02_LV1,SKILL_DESC_2000089_Skill02_LV1,SKILL_DESC_2000089_Skill02_LV1,SKILL_DESC_2000089_Skill02_LV1",
-      "IconName": "Skill_Second_2000089",
       "NameIDSymbol": "8902",
-      "RangeType": "SINGLE",
-      "SkillSubType": "PASSIVE",
+      "IconName": "Skill_Second_2000089",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000089_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_ACTION_GAUGE"
-      ],
-      "cd": "4",
-      "debuff": [
-        "BT_STEAL_BUFF"
-      ],
-      "description": [
-        "(Passive Effect) After attacking an enemy, increases Priority of the caster by <color=#28d9ed>10%</color>, and after defeating an enemy, increases Priority by an additional <color=#28d9ed>20%</color>.\\n\\n(Triggered Effect) When an ally other than the caster performs an attack that targets all enemies, steals <color=#28d9ed>[Buff_V_2000089_2_6]</color> buff(s) from the enemy with the highest Max Health and then attacks the target. (Ignores the targetâs Resilience.)\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack."
-      ],
+      "name": "Disassembly Analysis",
+      "name_kr": "해체 분석",
+      "name_jp": "解体分析",
+      "true_desc": "(Passive Effect) After attacking an enemy, increases Priority of the caster by <color=#28d9ed>10%</color>, and after defeating an enemy, increases Priority by an additional <color=#28d9ed>20%</color>.\\n\\n(Triggered Effect) When an ally other than the caster performs an attack that targets all enemies, steals <color=#28d9ed>1</color> buff(s) from the enemy with the highest Max Health and then attacks the target. (Ignores the target's Resilience.)\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
+      "true_desc_kr": "(패시브 효과) 카렌이 적을 공격 후 자신의 행동 게이지를 <color=#28d9ed>10%</color> 증가시키고, 적 처치 후 추가로 <color=#28d9ed>20%</color>를 증가시킵니다.\\n\\n(발동 효과) 자신을 제외한 아군이 전체 공격 시 최대 체력이 가장 높은 적의 강화 효과를 <color=#28d9ed>1개</color> 빼앗은 후, 대상을 공격합니다. (대상의 효과 저항 무시)\\n이 스킬은 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "(パッシブ効果)カレンが敵に攻撃後、自分の行動ゲージを<color=#28d9ed>10%</color>UPさせる。敵を倒した場合、行動ゲージが追加で<color=#28d9ed>20%</color>UPする。\\n\\n(発動効果)自分を除く味方が全体攻撃時、最大HPが最も高い敵単体の強化効果を<color=#28d9ed>1個</color>奪った後、対象にダメージを与える。(対象の効果抵抗無視)\\nこのスキルは攻撃力の代わりに<color=#28d9ed>防御力</color>が高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
-        ],
-        "3": [
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "+1 Buff Stolen"
-        ],
-        "5": [
-          "+20% damage"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
         ],
         "2_kr": [
           "피해량 +10%",
           "WG 감소량 +1"
         ],
-        "3_jp": [
-          "スキルターン-1ターン"
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "3": [
+          "-1 turn Skill Cooldown"
         ],
         "3_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "4_jp": [
-          "強化効果を奪う個数+1"
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "+1 Buff Stolen"
         ],
         "4_kr": [
           "강화 효과 강탈 +1"
         ],
-        "5_jp": [
-          "ダメージ+20%"
+        "4_jp": [
+          "強化効果を奪う個数+1"
+        ],
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
+      "cd": "4",
       "wgr": 1,
-      "name_kr": "해체 분석",
-      "name_jp": "解体分析",
-      "true_desc_kr": "(패시브 효과) 카렌이 적을 공격 후 자신의 행동 게이지를 <color=#28d9ed>10%</color> 증가시키고, 적 처치 후 추가로 <color=#28d9ed>20%</color>를 증가시킵니다.\\n\\n(발동 효과) 자신을 제외한 아군이 전체 공격 시 최대 체력이 가장 높은 적의 강화 효과를 <color=#28d9ed>1개</color> 빼앗은 후, 대상을 공격합니다. (대상의 효과 저항 무시)\\n이 스킬은 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "(パッシブ効果)カレンが敵に攻撃後、自分の行動ゲージを<color=#28d9ed>10%</color>UPさせる。敵を倒した場合、行動ゲージが追加で<color=#28d9ed>20%</color>UPする。\\n\\n(発動効果)自分を除く味方が全体攻撃時、最大HPが最も高い敵単体の強化効果を<color=#28d9ed>1個</color>奪った後、対象にダメージを与える。(対象の効果抵抗無視)\\nこのスキルは攻撃力の代わりに<color=#28d9ed>防御力</color>が高いほどダメージがUPする。"
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_RUN_PASSIVE_SKILL_ON_TURN_END_TEAM"
+      ],
+      "debuff": [
+        "BT_STEAL_BUFF"
+      ]
     },
     "SKT_ULTIMATE": {
-      "name": "Final Cleanup",
-      "true_desc": "Attacks all enemies.\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack, and ignores <color=#28d9ed>30%</color> of the target's Defense.\\n\\n<color=#ffd732>When attacking Irregular Monsters</color>, it ignores <color=#28d9ed>all</color> of the target's Defense and reduces all of Caren's Skill Cooldowns by <color=#28d9ed>2 turns</color>.",
-      "DescID": "SKILL_DESC_2000089_Skill03_LV1,SKILL_DESC_2000089_Skill03_LV1,SKILL_DESC_2000089_Skill03_LV1,SKILL_DESC_2000089_Skill03_LV1,SKILL_DESC_2000089_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000089",
       "NameIDSymbol": "8903",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000089",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000089_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "Attacks all enemies.\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack and ignores <color=#28d9ed>30%</color> of the target's Defense.\\n\\nWhen attacking <color=#ffd732>Irregulars</color>, <color=#28d9ed>completely</color> ignores the targetâs Defense and reduces all skill cooldowns of the caster by <color=#28d9ed>2 turns</color>."
-      ],
+      "name": "Final Cleanup",
+      "name_kr": "마지막 정리",
+      "name_jp": "最終定理",
+      "true_desc": "Attacks all enemies.\\nThis skill's damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack, and ignores <color=#28d9ed>30%</color> of the target's Defense.\\n\\n<color=#ffd732>When attacking Irregular Monsters</color>, it ignores <color=#28d9ed>all</color> of the target's Defense and reduces all of Caren's Skill Cooldowns by <color=#28d9ed>2 turns</color>.",
+      "true_desc_kr": "적 전체를 공격합니다.\\n이 스킬은 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가하며, 대상의 방어력을 <color=#28d9ed>30%</color> 무시합니다.\\n\\n<color=#ffd732>이레귤러 몬스터</color> 공격 시 대상의 방어력을 <color=#28d9ed>모두</color> 무시하며, 카렌의 모든 스킬 쿨타임이 <color=#28d9ed>2턴</color> 감소합니다.",
+      "true_desc_jp": "敵全体にダメージを与える。\\nこのスキルは攻撃力の代わりに<color=#28d9ed>防御力</color>に比例してダメージがUPし、対象の防御力を<color=#28d9ed>30%</color>無視する。\\n\\n<color=#ffd732>イレギュラーモンスター</color>攻撃時、対象の防御力を<color=#28d9ed>すべて</color>無視し、カレンのすべてのスキルターンが<color=#28d9ed>2ターン</color>減少する。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "-1 turn Skill Cooldown"
         ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
         "4": [
           "+15% damage"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
         ],
         "5": [
           "+20% damage",
           "+1 Weakness Gauge damage"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
+        "5_kr": [
+          "피해량 +20%",
           "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
-        ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "ダメージ+15%"
-        ],
-        "4_kr": [
-          "피해량 +15%"
         ],
         "5_jp": [
           "ダメージ+20%",
           "WGダメージ+1"
-        ],
-        "5_kr": [
-          "피해량 +20%",
-          "WG 감소량 +1"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "마지막 정리",
-      "name_jp": "最終定理",
-      "true_desc_kr": "적 전체를 공격합니다.\\n이 스킬은 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가하며, 대상의 방어력을 <color=#28d9ed>30%</color> 무시합니다.\\n\\n<color=#ffd732>이레귤러 몬스터</color> 공격 시 대상의 방어력을 <color=#28d9ed>모두</color> 무시하며, 카렌의 모든 스킬 쿨타임이 <color=#28d9ed>2턴</color> 감소합니다.",
-      "true_desc_jp": "敵全体にダメージを与える。\\nこのスキルは攻撃力の代わりに<color=#28d9ed>防御力</color>に比例してダメージがUPし、対象の防御力を<color=#28d9ed>30%</color>無視する。\\n\\n<color=#ffd732>イレギュラーモンスター</color>攻撃時、対象の防御力を<color=#28d9ed>すべて</color>無視し、カレンのすべてのスキルターンが<color=#28d9ed>2ターン</color>減少する。"
+      "buff": [
+        "BT_COOL_CHARGE"
+      ],
+      "debuff": []
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Defense</color> instead of Attack, and after attacking, reduces skill cooldown of <color=#28d9ed>Final Cleanup</color> by <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
-      "DescID": "SKILL_DESC_2000089_Skill04_LV1,SKILL_DESC_2000089_Skill04_LV1,SKILL_DESC_2000089_Skill04_LV1,SKILL_DESC_2000089_Skill04_LV1,SKILL_DESC_2000089_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Water_Join",
       "NameIDSymbol": "8904",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Water_Join",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Defense</color> instead of Attack, and after attacking, reduces skill cooldown of <color=#28d9ed>Final Cleanup</color> by <color=#28d9ed>[Buff_V_2000089_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack."
-      ],
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Defense</color> instead of Attack, and after attacking, reduces skill cooldown of <color=#28d9ed>Final Cleanup</color> by <color=#28d9ed>1 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Defense</color> instead of Attack.",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 자신의 스킬 체인 공격이 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가하며, 공격 후 <color=#28d9ed>마지막 정리</color> 스킬 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:自分のチェーンスキルが攻撃力の代わりに<color=#28d9ed>防御力</color>が高いほどダメージがUPし、攻撃後、<color=#28d9ed>【最終定理】</color>のスキルターンを<color=#28d9ed>1ターン</color>DOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃力の代わりに<color=#28d9ed>防御力</color>が高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 자신의 스킬 체인 공격이 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가하며, 공격 후 <color=#28d9ed>마지막 정리</color> 스킬 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격력 대신 <color=#28d9ed>방어력</color>에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:自分のチェーンスキルが攻撃力の代わりに<color=#28d9ed>防御力</color>が高いほどダメージがUPし、攻撃後、<color=#28d9ed>【最終定理】</color>のスキルターンを<color=#28d9ed>1ターン</color>DOWNさせる。\\n\\n<color=#ffd732>連携効果</color>:攻撃力の代わりに<color=#28d9ed>防御力</color>が高いほどダメージがUPする。"
+      "cd": null,
+      "buff": [
+        "BT_COOL3_CHARGE"
+      ],
+      "debuff": []
     }
-  },
-  "rank": "A",
-  "Fullname_kr": "카렌",
-  "Fullname_jp": "カレン",
-  "VoiceActor": "VA. Crystal Lee",
-  "VoiceActor_jp": "CV. 近藤唯",
-  "VoiceActor_kr": "CV. Crystal Lee"
+  }
 }

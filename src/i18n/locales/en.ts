@@ -113,6 +113,7 @@ const en = {
   'characters.profile.birthday': 'Birthday',
   'characters.profile.height': 'Height',
   'characters.profile.weight': 'Weight',
+  'characters.profile.voice_actor': 'Voice Actor',
   'characters.basestats.note': 'Base stats shown assume the character is upgraded',
   'characters.basestats.stage6': 'Stage 6 (Lv. 100)',
   "exclusive_equipment_title": "{name}'s Exclusive Equipment",

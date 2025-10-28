@@ -1,18 +1,18 @@
 {
   "ID": "2000063",
   "Fullname": "Demiurge Drakhan",
+  "Fullname_jp": "デミウルゴス ドレイカーン",
+  "Fullname_kr": "데미우르고스 드레이칸",
   "Rarity": 3,
   "Element": "Light",
-  "rank_pvp": "S",
-  "gift": "Science",
   "Class": "Defender",
-  "tags": [
-    "premium",
-    "ignore-defense"
-  ],
-  "role": "sustain",
   "SubClass": "Sweeper",
-  "video": "zz0OHkP8y0I",
+  "rank": "S",
+  "rank_pvp": "S",
+  "role": "sustain",
+  "tags": [
+    "premium"
+  ],
   "skill_priority": {
     "First": {
       "prio": 3
@@ -24,327 +24,294 @@
       "prio": 2
     }
   },
+  "Chain_Type": "Join",
+  "video": "zz0OHkP8y0I",
+  "VoiceActor": "VA. Cristina Valenzuela",
+  "VoiceActor_kr": "CV. Cristina Valenzuela",
+  "VoiceActor_jp": "CV. 小清水亜美",
+  "gift": "Science",
   "transcend": {
     "1": null,
     "2": null,
-    "3": "ATK DEF HP +10%\n-30% ally damage taken from attacks that target all enemies",
+    "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+10% caster Priority when an ally scores a critical hit (Only once per turn)\nChain Passive Weakness Gauge reduction +1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 공격 시 자신 행동 게이지 +10% (1턴에 1회)\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の攻撃で会心が発生時、\n自分の行動ゲージ+10%\n(1ターンに一度のみ発動)\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+50 Action Points at battle start",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+50",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+25% caster Priority when an ally scores a critical hit (Only once per turn)",
-    "3_jp": "ATK DEF HP +10%\n味方の全体攻撃で受けるダメージ-30%",
-    "3_kr": "ATK DEF HP +10%\n아군 전체 공격으로 받는 피해 -30%",
-    "4_1_jp": "ATK DEF HP +16%\n味方の攻撃で会心が発生時、\n自分の行動ゲージ+10%\n(1ターンに一度のみ発動)\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 치명 공격 시 자신 행동 게이지 +10% (1턴에 1회)\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+50",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50",
-    "6_jp": "ATK DEF HP +30%\n味方に会心が発生した場合\n自分の行動ゲージ+25%\n(1ターンに一度のみ発動)",
-    "6_kr": "ATK DEF HP +30%\n아군 치명 공격 시 자신 행동 게이지 +25% (1턴에 1회)"
+    "6_kr": "ATK DEF HP +30%\n아군 치명 공격 시 자신 행동 게이지 +25% (1턴에 1회)",
+    "6_jp": "ATK DEF HP +30%\n味方に会心が発生した場合\n自分の行動ゲージ+25%\n(1ターンに一度のみ発動)"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "Conqueror's Fang",
-      "true_desc": "Attacks an enemy and deals <color=#28d9ed>2%</color> of the target's Max Health as fixed damage.\\nDamage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000063_Skill01_LV1,SKILL_DESC_2000063_Skill01_LV1,SKILL_DESC_2000063_Skill01_LV1,SKILL_DESC_2000063_Skill01_LV1,SKILL_DESC_2000063_Skill01_LV1",
-      "IconName": "Skill_First_2000063",
       "NameIDSymbol": "6301",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000063",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000063_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Increases Penetration by 30%",
-          "level": 1,
-          "effect_kr": "관통력 30% 증가",
-          "effect_jp": "貫通力+30%"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Damage dealt increases proportional to missing Health",
-          "level": 2,
-          "effect_kr": "잃은 체력에 비례하여 피해 증가",
-          "effect_jp": "残りHPが低いほど\\nダメージUP"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "Changed to Enhanced Skill\\nResets cooldown of Dragon Ruler's Breath",
-          "level": 3,
-          "effect_kr": "강화 스킬로 교체\\n용왕의 숨결 쿨타임 초기화",
-          "effect_jp": "強化スキルに変更\\n【竜王の息吹】スキルターン初期化"
-        }
-      },
-      "cd": null,
-      "debuff": [
-        "BT_FIXED_DAMAGE"
-      ],
-      "description": [
-        "Attacks an enemy and deals <color=#28d9ed>[Buff_V_2000063_1_2]</color> of the target's Max Health as fixed damage.\\nDamage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack. "
-      ],
+      "name": "Conqueror's Fang",
+      "name_kr": "정복자의 송곳니",
+      "name_jp": "征服者の牙",
+      "true_desc": "Attacks an enemy and deals <color=#28d9ed>2%</color> of the target's Max Health as fixed damage.\\nDamage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.",
+      "true_desc_kr": "적을 공격하고, 대상 최대 체력의 <color=#28d9ed>2%</color> 만큼 고정 피해를 입힙니다.\\n이 스킬은 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、対象の最大HPの<color=#28d9ed>2%</color>の固定ダメージを与える。\\nこのスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
-        ],
-        "3": [
-          "+10% damage"
-        ],
-        "4": [
-          "+15% damage"
-        ],
-        "5": [
-          "+20% damage"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
         ],
         "2_kr": [
           "피해량 +10%",
           "WG 감소량 +1"
         ],
-        "3_jp": [
-          "ダメージ+10%"
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "3": [
+          "+10% damage"
         ],
         "3_kr": [
           "피해량 +10%"
         ],
-        "4_jp": [
-          "ダメージ+15%"
+        "3_jp": [
+          "ダメージ+10%"
+        ],
+        "4": [
+          "+15% damage"
         ],
         "4_kr": [
           "피해량 +15%"
         ],
-        "5_jp": [
-          "ダメージ+20%"
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
       "wgr": 1,
-      "name_kr": "정복자의 송곳니",
-      "name_jp": "征服者の牙",
-      "true_desc_kr": "적을 공격하고, 대상 최대 체력의 <color=#28d9ed>2%</color> 만큼 고정 피해를 입힙니다.\\n이 스킬은 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "敵単体にダメージを与え、対象の最大HPの<color=#28d9ed>2%</color>の固定ダメージを与える。\\nこのスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。"
+      "cd": null,
+      "buff": [
+        "BT_COOL3_CHARGE"
+      ],
+      "debuff": [
+        "BT_REVERSE_HEAL_BASED_TARGET"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Increases Penetration by 30%",
+          "effect_kr": "관통력 30% 증가",
+          "effect_jp": "貫通力+30%",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Damage dealt increases proportional to missing Health",
+          "effect_kr": "잃은 체력에 비례하여 피해 증가",
+          "effect_jp": "残りHPが低いほど\\nダメージUP",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Changed to Enhanced Skill\\nResets cooldown of Dragon Ruler's Breath",
+          "effect_kr": "강화 스킬로 교체\\n용왕의 숨결 쿨타임 초기화",
+          "effect_jp": "強化スキルに変更\\n【竜王の息吹】スキルターン初期化",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Doom Heralding Cry",
-      "true_desc": "Grants <color=#28d9ed>Show Your Loyalty!</color> and a <color=#28d9ed>barrier</color> to all allies except for the caster for <color=#28d9ed>2 turn(s)</color>. Barrier strength increases proportional to the caster's Max Health.\\nIncreases <color=#28d9ed>Penetration</color> of all allies for <color=#28d9ed>2 turn(s)</color>.",
-      "ApproachType": "CAST_BUFF",
-      "DescID": "SKILL_DESC_2000063_Skill02_LV1,SKILL_DESC_2000063_Skill02_LV1,SKILL_DESC_2000063_Skill02_LV1,SKILL_DESC_2000063_Skill02_LV1,SKILL_DESC_2000063_Skill02_LV5",
-      "IconName": "Skill_Second_2000063",
       "NameIDSymbol": "6302",
-      "RangeType": "ALL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Second_2000063",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000063_Skill02",
-      "TargetTeamType": "ME",
-      "buff": [
-        "UNIQUE_BT_SHARE_DMG_MULTI",
-        "BT_SHIELD_BASED_CASTER",
-        "BT_STAT|ST_PIERCE_POWER_RATE",
-        "BT_ADDITIVE_TURN"
-      ],
-      "cd": "4",
-      "debuff": [],
-      "description": [
-        "Grants <color=#28d9ed>Show Your Loyalty!</color> and a <color=#28d9ed>barrier</color> to all allies except for the caster for <color=#28d9ed>[Buff_T_2000063_2_1] turn(s)</color>. Barrier strength increases proportional to the casterâs Max Health.\\nIncreases <color=#28d9ed>Penetration</color> of all allies for <color=#28d9ed>[Buff_T_2000063_2_4] turn(s)</color>."
-      ],
+      "name": "Doom Heralding Cry",
+      "name_kr": "멸망을 부르는 함성",
+      "name_jp": "滅亡をもたらす叫び",
+      "true_desc": "Grants <color=#28d9ed>Show Your Loyalty!</color> and a <color=#28d9ed>barrier</color> to all allies except for the caster for <color=#28d9ed>2 turn(s)</color>. Barrier strength increases proportional to the caster's Max Health.\\nIncreases <color=#28d9ed>Penetration</color> of all allies for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "자신을 제외한 아군 전체에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>충의를 보여라</color> 및 <color=#28d9ed>실드</color>를 부여합니다. 실드량은 자신의 최대 체력에 비례하여 증가합니다.\\n<color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>관통력</color>을 증가시킵니다.",
+      "true_desc_jp": "自分を除く味方全体に<color=#28d9ed>【忠義をみせろ】</color>と<color=#28d9ed>シールド</color>を<color=#28d9ed>2ターン</color>の間付与する。自分の最大HPが高いほどシールド量がUPする。\\n味方全体の<color=#28d9ed>貫通力</color>を<color=#28d9ed>2ターン</color>の間UPさせる。",
       "enhancement": {
         "2": [
           "Enhances barrier strength"
         ],
-        "3": [
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "Enhances barrier strength"
-        ],
-        "5": [
-          "Gains an extra turn"
+        "2_kr": [
+          "실드 강화"
         ],
         "2_jp": [
           "シールド強化"
         ],
-        "2_kr": [
-          "실드 강화"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
+        "3": [
+          "-1 turn Skill Cooldown"
         ],
         "3_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "4_jp": [
-          "シールド強化"
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "Enhances barrier strength"
         ],
         "4_kr": [
           "실드 강화"
         ],
-        "5_jp": [
-          "追加ターン発生"
+        "4_jp": [
+          "シールド強化"
+        ],
+        "5": [
+          "Gains an extra turn"
         ],
         "5_kr": [
           "추가 턴 발생"
+        ],
+        "5_jp": [
+          "追加ターン発生"
         ]
       },
-      "wgr": null,
-      "name_kr": "멸망을 부르는 함성",
-      "name_jp": "滅亡をもたらす叫び",
-      "true_desc_kr": "자신을 제외한 아군 전체에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>충의를 보여라</color> 및 <color=#28d9ed>실드</color>를 부여합니다. 실드량은 자신의 최대 체력에 비례하여 증가합니다.\\n<color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>관통력</color>을 증가시킵니다.",
-      "true_desc_jp": "自分を除く味方全体に<color=#28d9ed>【忠義をみせろ】</color>と<color=#28d9ed>シールド</color>を<color=#28d9ed>2ターン</color>の間付与する。自分の最大HPが高いほどシールド量がUPする。\\n味方全体の<color=#28d9ed>貫通力</color>を<color=#28d9ed>2ターン</color>の間UPさせる。"
+      "cd": "4",
+      "buff": [
+        "IG_Buff_2000063_Interruption",
+        "BT_SHIELD_BASED_CASTER",
+        "BT_STAT|ST_PIERCE_POWER_RATE",
+        "BT_ADDITIVE_TURN"
+      ],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
-      "name": "Dragon Ruler's Breath",
-      "true_desc": "Attacks an enemy.\\nDamage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.\\nEnemies killed by this skill cannot be Resurrected or Revived.",
-      "DescID": "SKILL_DESC_2000063_Skill03_LV1,SKILL_DESC_2000063_Skill03_LV1,SKILL_DESC_2000063_Skill03_LV1,SKILL_DESC_2000063_Skill03_LV1,SKILL_DESC_2000063_Skill03_LV5",
-      "IconName": "Skill_Ultimate_2000063",
       "NameIDSymbol": "6303",
-      "RangeType": "SINGLE",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000063",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000063_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": "6",
-      "debuff": [
-        "BT_SEALED_RESURRECTION"
-      ],
-      "description": [
-        "Attacks an enemy.\\nDamage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.\\nEnemies killed by this skill cannot be Resurrected or Revived."
-      ],
+      "name": "Dragon Ruler's Breath",
+      "name_kr": "용왕의 숨결",
+      "name_jp": "竜王の息吹",
+      "true_desc": "Attacks an enemy.\\nDamage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.\\nEnemies killed by this skill cannot be Resurrected or Revived.",
+      "true_desc_kr": "적을 공격합니다.\\n이 스킬은 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가합니다.\\n이 스킬로 사망한 적은 부활 및 소생이 불가능합니다.",
+      "true_desc_jp": "敵単体にダメージを与える。\\nこのスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。\\nこのスキルで倒れた敵は復活と蘇生ができなくなる。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "-1 turn Skill Cooldown"
         ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
         "4": [
           "+15% damage"
+        ],
+        "4_kr": [
+          "피해량 +15%"
+        ],
+        "4_jp": [
+          "ダメージ+15%"
         ],
         "5": [
           "+20% damage",
           "Damage dealt increases proportional to missing Health"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
-        ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "4_jp": [
-          "ダメージ+15%"
-        ],
-        "4_kr": [
-          "피해량 +15%"
+        "5_kr": [
+          "피해량 +20%",
+          "잃은 체력에 비례하여 피해 증가"
         ],
         "5_jp": [
           "ダメージ+20%",
           "残りHPが低いほど\\nダメージUP"
-        ],
-        "5_kr": [
-          "피해량 +20%",
-          "잃은 체력에 비례하여 피해 증가"
         ]
       },
+      "cd": "6",
       "wgr": 2,
-      "name_kr": "용왕의 숨결",
-      "name_jp": "竜王の息吹",
-      "true_desc_kr": "적을 공격합니다.\\n이 스킬은 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가합니다.\\n이 스킬로 사망한 적은 부활 및 소생이 불가능합니다.",
-      "true_desc_jp": "敵単体にダメージを与える。\\nこのスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。\\nこのスキルで倒れた敵は復活と蘇生ができなくなる。"
+      "buff": [],
+      "debuff": [
+        "BT_SEALED_RESURRECTION"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack and always has elemental advantage.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.",
-      "DescID": "SKILL_DESC_2000063_Skill04_LV1,SKILL_DESC_2000063_Skill04_LV1,SKILL_DESC_2000063_Skill04_LV1,SKILL_DESC_2000063_Skill04_LV1,SKILL_DESC_2000063_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Light_Finish",
       "NameIDSymbol": "6304",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Light_Finish",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "BT_DMG_ELEMENT_SUPERIORITY",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack and always has elemental advantage.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack."
-      ],
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack and always has elemental advantage.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Damage dealt increases proportional to <color=#28d9ed>Max Health</color> instead of Attack.",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 자신의 스킬 체인 공격이 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가하며, 항상 유리한 상성으로 적용됩니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:このスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPし、有利属性の攻撃判定でダメージを与える。\\n\\n<color=#ffd732>連携効果</color>:このスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 자신의 스킬 체인 공격이 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가하며, 항상 유리한 상성으로 적용됩니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:このスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPし、有利属性の攻撃判定でダメージを与える。\\n\\n<color=#ffd732>連携効果</color>:このスキルは攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPする。"
+      "cd": null,
+      "buff": [
+        "BT_DMG_ELEMENT_SUPERIORITY"
+      ],
+      "debuff": []
     }
-  },
-  "rank": "S",
-  "Fullname_kr": "데미우르고스 드레이칸",
-  "Fullname_jp": "デミウルゴス ドレイカーン",
-  "VoiceActor": "VA. Cristina Valenzuela",
-  "VoiceActor_jp": "CV. 小清水亜美",
-  "VoiceActor_kr": "CV. Cristina Valenzuela"
+  }
 }

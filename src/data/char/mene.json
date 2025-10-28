@@ -1,15 +1,18 @@
 {
   "ID": "2000054",
   "Fullname": "Mene",
+  "Fullname_jp": "メネ",
+  "Fullname_kr": "메네",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp": "A",
-  "role": "sustain",
-  "gift": "Natural Object",
   "Class": "Healer",
   "SubClass": "Sage",
-  "video": "3WCXBVQRQls",
-  "tags": ["free"],
+  "rank": "B",
+  "rank_pvp": "A",
+  "role": "sustain",
+  "tags": [
+    "free"
+  ],
   "skill_priority": {
     "First": {
       "prio": 3
@@ -21,322 +24,292 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Join",
+  "video": "3WCXBVQRQls",
+  "VoiceActor": "VA. None",
+  "VoiceActor_kr": "CV.이은조 / 이주승",
+  "VoiceActor_jp": "CV. 藤田茜&竹内栄治",
+  "gift": "Natural Object",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+5 Ally Team Speed\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 속도 +5\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方のスピード+5\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+5 Ally Team Speed\n+25 Action Points at battle start",
-    "4_1_jp": "ATK DEF HP +16%\n味方のスピード+5\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 속도 +5\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n味方のスピード+5\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n아군 속도 +5\n입장 시 AP +25"
+    "6_kr": "ATK DEF HP +30%\n아군 속도 +5\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n味方のスピード+5\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "Shark Attack!",
-      "true_desc": "Attacks an enemy and <color=#28d9ed>heals</color> the ally with the lowest Health by <color=#28d9ed>7%</color>.",
-      "DescID": "SKILL_DESC_2000054_Skill01_LV1,SKILL_DESC_2000054_Skill01_LV1,SKILL_DESC_2000054_Skill01_LV1,SKILL_DESC_2000054_Skill01_LV1,SKILL_DESC_2000054_Skill01_LV1",
-      "FocusType_fallback1": "ATTACK",
-      "IconName": "Skill_First_2000054",
       "NameIDSymbol": "5401",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000054",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000054_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_AP_CHARGE"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Effects are applied to all allies",
-          "level": 1,
-          "effect_kr": "아군 전체에게 효과 적용",
-          "effect_jp": "味方全体に効果適用"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "+70 Action Points to Target",
-          "level": 2,
-          "effect_kr": "대상 AP +70",
-          "effect_jp": "対象のAP+70"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "Recovery Boost (Amount)\\nDebuff Duration −2 turns",
-          "level": 3,
-          "effect_kr": "회복 강화(회복량)\\n약화 효과 지속 -2턴",
-          "effect_jp": "回復強化(回復量)\\n弱体効果持続 −2ターン"
-        }
-      },
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy and <color=#28d9ed>heals</color> the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000054_1_1]</color>."
-      ],
+      "name": "Shark Attack!",
+      "name_kr": "샤크 어택!",
+      "name_jp": "アオイアタック",
+      "true_desc": "Attacks an enemy and <color=#28d9ed>heals</color> the ally with the lowest Health by <color=#28d9ed>7%</color>.",
+      "true_desc_kr": "적을 공격하고 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 <color=#28d9ed>7%</color> 회복시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を<color=#28d9ed>7%</color>回復する。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+3% healing"
-        ],
-        "4": [
-          "+10% damage"
-        ],
-        "5": [
-          "+3% healing",
-          "+10% damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "HP回復量+3%"
+        "3": [
+          "+3% healing"
         ],
         "3_kr": [
           "체력 회복량 +3%"
         ],
+        "3_jp": [
+          "HP回復量+3%"
+        ],
+        "4": [
+          "+10% damage"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
         "4_jp": [
           "ダメージ+10%"
         ],
-        "4_kr": [
+        "5": [
+          "+3% healing",
+          "+10% damage"
+        ],
+        "5_kr": [
+          "체력 회복량 +3%",
           "피해량 +10%"
         ],
         "5_jp": [
           "HP回復量+3%",
           "ダメージ+10%"
-        ],
-        "5_kr": [
-          "체력 회복량 +3%",
-          "피해량 +10%"
         ]
       },
       "wgr": 1,
-      "name_kr": "샤크 어택!",
-      "name_jp": "アオイアタック",
-      "true_desc_kr": "적을 공격하고 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 <color=#28d9ed>7%</color> 회복시킵니다.",
-      "true_desc_jp": "敵単体にダメージを与え、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を<color=#28d9ed>7%</color>回復する。"
+      "cd": null,
+      "buff": [
+        "BT_AP_CHARGE",
+        "BT_EXTEND_DEBUFF"
+      ],
+      "debuff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Effects are applied to all allies",
+          "effect_kr": "아군 전체에게 효과 적용",
+          "effect_jp": "味方全体に効果適用",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "+70 Action Points to Target",
+          "effect_kr": "대상 AP +70",
+          "effect_jp": "対象のAP+70",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Recovery Boost (Amount)\\nDebuff Duration −2 turns",
+          "effect_kr": "회복 강화(회복량)\\n약화 효과 지속 -2턴",
+          "effect_jp": "回復強化(回復量)\\n弱体効果持続 −2ターン",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Sharks Are Friends",
-      "true_desc": "Restores all allies' <color=#28d9ed>HP</color> by <color=#28d9ed>15%</color> and reduces the duration of debuffs by <color=#28d9ed>2 turns</color>.",
-      "ApproachType": "HEAL",
-      "DescID": "SKILL_DESC_2000054_Skill02_LV1,SKILL_DESC_2000054_Skill02_LV1,SKILL_DESC_2000054_Skill02_LV1,SKILL_DESC_2000054_Skill02_LV1,SKILL_DESC_2000054_Skill02_LV1",
-      "IconName": "Skill_Second_2000054",
       "NameIDSymbol": "5402",
-      "RangeType": "ALL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Second_2000054",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000054_Skill02",
-      "TargetTeamType": "TEAM",
-      "buff": ["IG_Buff_DeBuffdurationdecrease"],
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "<color=#28d9ed>Heals</color> all allies by <color=#28d9ed>[Buff_V_2000054_2_1]</color> and reduces the duration of debuffs by <color=#28d9ed>1 turn</color>."
-      ],
+      "name": "Sharks Are Friends",
+      "name_kr": "상어는 친구",
+      "name_jp": "起こさないで",
+      "true_desc": "Restores all allies' <color=#28d9ed>HP</color> by <color=#28d9ed>15%</color> and reduces the duration of debuffs by <color=#28d9ed>2 turns</color>.",
+      "true_desc_kr": "아군 전체의 <color=#28d9ed>체력</color>을 <color=#28d9ed>15%</color>만큼 회복시키고, 약화 효과의 지속 시간을 <color=#28d9ed>2턴</color> 감소시킵니다.",
+      "true_desc_jp": "味方全体の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復し、弱体効果の持続時間を<color=#28d9ed>2ターン</color>減少させる。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
         ],
-        "3": [
-          "+10% healing"
-        ],
-        "4": [
-          "+10% healing"
-        ],
-        "5": [
-          "-1 turn Skill Cooldown"
+        "2_kr": [
+          "스킬 쿨타임 -1턴"
         ],
         "2_jp": [
           "スキルターン-1ターン"
         ],
-        "2_kr": [
-          "스킬 쿨타임 -1턴"
+        "3": [
+          "+10% healing"
+        ],
+        "3_kr": [
+          "체력 회복량 +10%"
         ],
         "3_jp": [
           "HP回復量+10%"
         ],
-        "3_kr": [
+        "4": [
+          "+10% healing"
+        ],
+        "4_kr": [
           "체력 회복량 +10%"
         ],
         "4_jp": [
           "HP回復量+10%"
         ],
-        "4_kr": [
-          "체력 회복량 +10%"
-        ],
-        "5_jp": [
-          "スキルターン-1ターン"
+        "5": [
+          "-1 turn Skill Cooldown"
         ],
         "5_kr": [
           "스킬 쿨타임 -1턴"
+        ],
+        "5_jp": [
+          "スキルターン-1ターン"
         ]
       },
-      "wgr": null,
-      "name_kr": "상어는 친구",
-      "name_jp": "起こさないで",
-      "true_desc_kr": "아군 전체의 <color=#28d9ed>체력</color>을 <color=#28d9ed>15%</color>만큼 회복시키고, 약화 효과의 지속 시간을 <color=#28d9ed>2턴</color> 감소시킵니다.",
-      "true_desc_jp": "味方全体の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復し、弱体効果の持続時間を<color=#28d9ed>2ターン</color>減少させる。"
+      "cd": "5",
+      "buff": [
+        "BT_EXTEND_DEBUFF"
+      ],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
-      "name": "Wakey-Wakey",
-      "true_desc": "Grants increased <color=#28d9ed>Attack</color> to surviving allies for <color=#28d9ed>2 turn(s)</color>, then <color=#28d9ed>Resurrects (Greater)</color> all slain allies. Afterward, <color=#28d9ed>heals</color> all allies by <color=#28d9ed>15%</color>.",
-      "DescID": "SKILL_DESC_2000054_Skill03_LV1,SKILL_DESC_2000054_Skill03_LV1,SKILL_DESC_2000054_Skill03_LV1,SKILL_DESC_2000054_Skill03_LV1,SKILL_DESC_2000054_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000054",
       "NameIDSymbol": "5403",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "RESURRECTION",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000054",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000054_Skill03",
-      "TargetTeamType": "TEAM_WITH_DEAD",
-      "buff": [
-        "BT_STAT|ST_ATK",
-        "BT_RESURRECTION_G"
-      ],
-      "cd": "7",
-      "debuff": [],
-      "description": [
-        "Grants increased <color=#28d9ed>Attack</color> to surviving allies for <color=#28d9ed>[Buff_T_2000054_3_3] turn(s)</color>, then <color=#28d9ed>Resurrects (Greater)</color> all slain allies. Afterward, <color=#28d9ed>heals</color> all allies by <color=#28d9ed>[Buff_V_2000054_3_2]</color>."
-      ],
+      "name": "Wakey-Wakey",
+      "name_kr": "잠들면 안 돼",
+      "name_jp": "寝るんじゃねぇガキ!",
+      "true_desc": "Grants increased <color=#28d9ed>Attack</color> to surviving allies for <color=#28d9ed>2 turn(s)</color>, then <color=#28d9ed>Resurrects (Greater)</color> all slain allies. Afterward, <color=#28d9ed>heals</color> all allies by <color=#28d9ed>15%</color>.",
+      "true_desc_kr": "생존한 아군의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 증가시킨 후, 사망한 아군 전체를 <color=#28d9ed>부활(강화)</color>시킵니다. 이후 아군 전체의 <color=#28d9ed>체력</color>을 <color=#28d9ed>15%</color>만큼 회복시킵니다.",
+      "true_desc_jp": "戦場にいる味方の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間UPさせた後、倒れた味方全体を<color=#28d9ed>復活(強化)</color>させる。その後、味方全体の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復させる。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
         ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン"
+        ],
         "3": [
           "+10% healing"
         ],
+        "3_kr": [
+          "체력 회복량 +10%"
+        ],
+        "3_jp": [
+          "HP回復量+10%"
+        ],
         "4": [
           "-1 turn Skill Cooldown"
+        ],
+        "4_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "スキルターン-1ターン"
         ],
         "5": [
           "-1 turn Skill Cooldown",
           "+10% healing"
         ],
-        "2_jp": [
-          "スキルターン-1ターン"
-        ],
-        "2_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "3_jp": [
-          "HP回復量+10%"
-        ],
-        "3_kr": [
+        "5_kr": [
+          "스킬 쿨타임 -1턴",
           "체력 회복량 +10%"
-        ],
-        "4_jp": [
-          "スキルターン-1ターン"
-        ],
-        "4_kr": [
-          "스킬 쿨타임 -1턴"
         ],
         "5_jp": [
           "スキルターン-1ターン",
           "HP回復量+10%"
-        ],
-        "5_kr": [
-          "스킬 쿨타임 -1턴",
-          "체력 회복량 +10%"
         ]
       },
-      "wgr": null,
-      "name_kr": "잠들면 안 돼",
-      "name_jp": "寝るんじゃねぇガキ!",
-      "true_desc_kr": "생존한 아군의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 증가시킨 후, 사망한 아군 전체를 <color=#28d9ed>부활(강화)</color>시킵니다. 이후 아군 전체의 <color=#28d9ed>체력</color>을 <color=#28d9ed>15%</color>만큼 회복시킵니다.",
-      "true_desc_jp": "戦場にいる味方の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間UPさせた後、倒れた味方全体を<color=#28d9ed>復活(強化)</color>させる。その後、味方全体の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復させる。"
+      "cd": "7",
+      "wgr": 7,
+      "buff": [
+        "BT_STAT|ST_ATK",
+        "BT_RESURRECTION"
+      ],
+      "debuff": []
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, <color=#28d9ed>heals</color> the caster and the ally with the lowest Health by <color=#28d9ed>15%</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health by <color=#28d9ed>13%</color>.",
-      "DescID": "SKILL_DESC_2000054_Skill04_LV1,SKILL_DESC_2000054_Skill04_LV1,SKILL_DESC_2000054_Skill04_LV1,SKILL_DESC_2000054_Skill04_LV1,SKILL_DESC_2000054_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Water_Join",
       "NameIDSymbol": "5404",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Water_Join",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: After attacking, <color=#28d9ed>heals</color> the caster and the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000054_chain_1_1]</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health by <color=#28d9ed>[Buff_V_2000054_backup_1_1]</color>."
-      ],
-      "dual_buff": "",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, <color=#28d9ed>heals</color> the caster and the ally with the lowest Health by <color=#28d9ed>15%</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, <color=#28d9ed>heals</color> the ally with the lowest Health by <color=#28d9ed>13%</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군과 자신의 <color=#28d9ed>체력</color>을 <color=#28d9ed>15%</color> 회복시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 <color=#28d9ed>13%</color> 회복시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、残りHPが最も低い味方単体と自分の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復させる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を<color=#28d9ed>13%</color>回復させる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군과 자신의 <color=#28d9ed>체력</color>을 <color=#28d9ed>15%</color> 회복시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 체력 상황이 가장 나쁜 아군의 <color=#28d9ed>체력</color>을 <color=#28d9ed>13%</color> 회복시킵니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、残りHPが最も低い味方単体と自分の<color=#28d9ed>HP</color>を<color=#28d9ed>15%</color>回復させる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、残りHPが最も低い味方単体の<color=#28d9ed>HP</color>を<color=#28d9ed>13%</color>回復させる。"
+      "cd": null,
+      "buff": [
+      ],
+      "debuff": [],
+      "dual_buff": [
+      ]
     }
-  },
-  "rank": "B",
-  "Fullname_kr": "메네",
-  "Fullname_jp": "メネ",
-  "VoiceActor": "VA. None",
-  "VoiceActor_jp": "CV.氅旊劋 靹膘毎 鞚措",
-  "VoiceActor_kr": "CV.이은조 / 이주승"
+  }
 }

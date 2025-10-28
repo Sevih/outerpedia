@@ -1,17 +1,18 @@
 {
   "ID": "2000095",
   "Fullname": "Bell Cranel",
+  "Fullname_jp": "ベル・クラネル",
+  "Fullname_kr": "벨 크라넬",
   "Rarity": 3,
   "Element": "Fire",
-  "rank_pvp": "B",
   "Class": "Mage",
-  "gift": "Craftwork",
   "SubClass": "Wizard",
+  "rank": "S",
+  "rank_pvp": "B",
+  "role": "dps",
   "tags": [
     "collab"
   ],
-  "limited": true,
-  "role": "dps",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -23,340 +24,311 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Join",
+  "VoiceActor": "VA. Yoshitsugu Matsuoka&\\nInori Minase",
+  "VoiceActor_kr": "CV. 마츠오카 요시츠구&미나세 이노리",
+  "VoiceActor_jp": "CV. 松岡禎丞&水瀬いのり",
+  "limited": true,
+  "gift": "Craftwork",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+50% damage dealt by all allies against targets inflicted with Burned\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 전체가 화상 보유 대상에게 입히는 피해 +50%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方全体の火傷状態の対象に与えるダメージ+50%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\nGrants irremovable Buff Enhancement (+100% increased stat effect efficiency)\n+50 Accuracy",
-    "4_1_jp": "ATK DEF HP +16%\n味方全体の火傷状態の対象に与えるダメージ+50%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 전체가 화상 보유 대상에게 입히는 피해 +50%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
-    "6_jp": "ATK DEF HP +30%\n解除不可能な強化促進付与\n(ステータスUP効果の効率+100%)\n命中+50",
-    "6_kr": "ATK DEF HP +30%\n해제 불가 강화 촉진(능력치 강화 효과 효율 +100%) 상시 적용\n명중 +50"
+    "6_kr": "ATK DEF HP +30%\n해제 불가 강화 촉진(능력치 강화 효과 효율 +100%) 상시 적용\n명중 +50",
+    "6_jp": "ATK DEF HP +30%\n解除不可能な強化促進付与\n(ステータスUP効果の効率+100%)\n命中+50"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "Swift Chain",
-      "true_desc": "Attacks an enemy. After attacking, inflicts <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>1 turn(s)</color>.",
-      "DescID": "SKILL_DESC_2000095_Skill01_LV1,SKILL_DESC_2000095_Skill01_LV1,SKILL_DESC_2000095_Skill01_LV1,SKILL_DESC_2000095_Skill01_LV1,SKILL_DESC_2000095_Skill01_LV5",
-      "FocusType_fallback1": "ATTACK",
-      "IconName": "Skill_First_2000095",
       "NameIDSymbol": "9501",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000095",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000095_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Increases damage\\n+1 turn Burned duration",
-          "level": 1,
-          "effect_kr": "피해 증가\\n화상 지속 +1턴",
-          "effect_jp": "ダメージUP\\n火傷の持続ターン+1ターン"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "+1 Burned effect",
-          "level": 2,
-          "effect_kr": "화상 +1개",
-          "effect_jp": "火傷+1個"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases damage\\nApplies Irremovable to Burned",
-          "level": 3,
-          "effect_kr": "<color=#FFBF00>강화 공격</color>\\n피해 증가\\n화상이 해제불가로 변경",
-          "effect_jp": "<color=#FFBF00>強化攻撃</color>\\nダメージUP\\n解除不可能な火傷に変更"
-        }
-      },
-      "cd": null,
-      "debuff": [
-        "BT_DOT_BURN",
-        "BT_DOT_BURN_IR"
-      ],
-      "description": [
-        "Attacks an enemy. After attacking, inflicts <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>[Buff_T_2000095_1_1] turn(s)</color>."
-      ],
+      "name": "Swift Chain",
+      "name_kr": "신속한 연계",
+      "name_jp": "迅速な連携",
+      "true_desc": "Attacks an enemy. After attacking, inflicts <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc_kr": "적을 공격합니다. 공격 후 대상에게 <color=#28d9ed>1턴</color>동안 지속되는 <color=#28d9ed>화상</color>을 부여합니다.",
+      "true_desc_jp": "敵単体にダメージを与える。攻撃後、対象に<color=#28d9ed>火傷</color>を<color=#28d9ed>1ターン</color>の間付与する。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+10% damage"
+        ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
         ],
         "4": [
           "+10% damage",
           "+1 Weakness Gauge damage"
+        ],
+        "4_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "4_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
         ],
         "5": [
           "+20% damage",
           "+1 Burned effect"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "ダメージ+10%"
-        ],
-        "3_kr": [
-          "피해량 +10%"
-        ],
-        "4_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "4_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
+        "5_kr": [
+          "피해량 +20%",
+          "화상 +1개"
         ],
         "5_jp": [
           "ダメージ+20%",
           "火傷+1個"
-        ],
-        "5_kr": [
-          "피해량 +20%",
-          "화상 +1개"
         ]
       },
       "wgr": 1,
-      "name_kr": "신속한 연계",
-      "name_jp": "迅速な連携",
-      "true_desc_kr": "적을 공격합니다. 공격 후 대상에게 <color=#28d9ed>1턴</color>동안 지속되는 <color=#28d9ed>화상</color>을 부여합니다.",
-      "true_desc_jp": "敵単体にダメージを与える。攻撃後、対象に<color=#28d9ed>火傷</color>を<color=#28d9ed>1ターン</color>の間付与する。"
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "BT_DOT_BURN",
+        "IG_Buff_Dot_Burn_Interruption_D"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Increases damage\\n+1 turn Burned duration",
+          "effect_kr": "피해 증가\\n화상 지속 +1턴",
+          "effect_jp": "ダメージUP\\n火傷の持続ターン+1ターン",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "+1 Burned effect",
+          "effect_kr": "화상 +1개",
+          "effect_jp": "火傷+1個",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases damage\\nApplies Irremovable to Burned",
+          "effect_kr": "<color=#FFBF00>강화 공격</color>\\n피해 증가\\n화상이 해제불가로 변경",
+          "effect_jp": "<color=#FFBF00>強化攻撃</color>\\nダメージUP\\n解除不可能な火傷に変更",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Hestia's Cheer",
-      "true_desc": "(Passive Effect) Increases Attack by <color=#28d9ed>10%</color>.\\n\\n(Triggered Effect) After using <color=#28d9ed>Swift Chain</color> or <color=#28d9ed>Argo Vesta</color>, grants <color=#28d9ed>Grace of the Virgin Goddess</color>.",
-      "ApproachType": "ATTACK",
-      "DescID": "SKILL_DESC_2000095_Skill02_LV1,SKILL_DESC_2000095_Skill02_LV1,SKILL_DESC_2000095_Skill02_LV1,SKILL_DESC_2000095_Skill02_LV1,SKILL_DESC_2000095_Skill02_LV5",
-      "IconName": "Skill_Second_2000095",
       "NameIDSymbol": "9502",
-      "RangeType": "SINGLE",
-      "SkillSubType": "PASSIVE",
+      "IconName": "Skill_Second_2000095",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000095_Skill02",
-      "TargetTeamType": "TEAM",
-      "buff": [
-        "UNIQUE_GRACE_OF_THE_VIRGIN_GODDESS"
-      ],
-      "cd": "4",
-      "debuff": [
-        "BT_SEAL_COUNTER"
-      ],
-      "description": [
-        "(Passive Effect) Increases Attack by <color=#28d9ed>[Buff_V_2000095_2_1]</color>.\\n\\n(Triggered Effect) After using <color=#28d9ed>Swift Chain</color> or <color=#28d9ed>Argo Vesta</color>, grants <color=#28d9ed>Grace of the Virgin Goddess</color>."
-      ],
+      "name": "Hestia's Cheer",
+      "name_kr": "헤스티아의 응원",
+      "name_jp": "ヘスティアの応援",
+      "true_desc": "(Passive Effect) Increases Attack by <color=#28d9ed>10%</color>.\\n\\n(Triggered Effect) After using <color=#28d9ed>Swift Chain</color> or <color=#28d9ed>Argo Vesta</color>, grants <color=#28d9ed>Grace of the Virgin Goddess</color>.",
+      "true_desc_kr": "(패시브 효과) 공격력이 <color=#28d9ed>10%</color> 증가합니다.\\n\\n(발동 효과) <color=#28d9ed>신속한 연계</color> 또는 <color=#28d9ed>아르고 베스타</color> 사용 후, <color=#28d9ed>처녀신의 은총</color>을 부여합니다.",
+      "true_desc_jp": "(パッシブ効果)攻撃力が<color=#28d9ed>10%</color>UPする。\\n\\n(発動効果)<color=#28d9ed>【迅速な連携】</color>または<color=#28d9ed>【アルゴ・ウェスタ】</color>使用後、<color=#28d9ed>【処女神の恩寵】</color>を付与する。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
         ],
+        "2_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "2_jp": [
+          "スキルターン-1ターン"
+        ],
         "3": [
           "(Passive Effect) Increases Attack by 10%"
         ],
+        "3_kr": [
+          "(패시브 효과) 상시 공격력 +10%"
+        ],
+        "3_jp": [
+          "(パッシブ効果)攻撃力+10%"
+        ],
         "4": [
           "-1 turn Skill Cooldown"
+        ],
+        "4_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_jp": [
+          "スキルターン-1ターン"
         ],
         "5": [
           "(Passive Effect) Increases Attack by 10%",
           "Adds Unable to Counterattack / Revenge / Agile Response"
         ],
-        "2_jp": [
-          "スキルターン-1ターン"
-        ],
-        "2_kr": [
-          "스킬 쿨타임 -1턴"
-        ],
-        "3_jp": [
-          "(パッシブ効果)攻撃力+10%"
-        ],
-        "3_kr": [
-          "(패시브 효과) 상시 공격력 +10%"
-        ],
-        "4_jp": [
-          "スキルターン-1ターン"
-        ],
-        "4_kr": [
-          "스킬 쿨타임 -1턴"
+        "5_kr": [
+          "(패시브 효과) 상시 공격력 +10%",
+          "반격, 복수, 신속 대응 불가 추가"
         ],
         "5_jp": [
           "(パッシブ効果)攻撃力+10%",
           "反撃、復讐、迅速対応発動不可追加"
-        ],
-        "5_kr": [
-          "(패시브 효과) 상시 공격력 +10%",
-          "반격, 복수, 신속 대응 불가 추가"
         ]
       },
-      "wgr": null,
-      "name_kr": "헤스티아의 응원",
-      "name_jp": "ヘスティアの応援",
-      "true_desc_kr": "(패시브 효과) 공격력이 <color=#28d9ed>10%</color> 증가합니다.\\n\\n(발동 효과) <color=#28d9ed>신속한 연계</color> 또는 <color=#28d9ed>아르고 베스타</color> 사용 후, <color=#28d9ed>처녀신의 은총</color>을 부여합니다.",
-      "true_desc_jp": "(パッシブ効果)攻撃力が<color=#28d9ed>10%</color>UPする。\\n\\n(発動効果)<color=#28d9ed>【迅速な連携】</color>または<color=#28d9ed>【アルゴ・ウェスタ】</color>使用後、<color=#28d9ed>【処女神の恩寵】</color>を付与する。"
+      "cd": "4",
+      "wgr": 4,
+      "buff": [
+        "BT_SEAL_COUNTER",
+        "BT_ACTION_GAUGE",
+        "BT_COOL3_CHARGE",
+        "GRACE_OF_THE_VIRGIN_GODDESS"
+      ],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
-      "name": "Argo Vesta",
-      "true_desc": "Has a <color=#28d9ed>70%</color> chance to grant increased <color=#28d9ed>Attack</color> to the caster for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>70%</color> chance each to inflict irremovable <color=#28d9ed>Burned</color> 2 times on all targets for <color=#28d9ed>2 turn(s)</color>.",
-      "DescID": "SKILL_DESC_2000095_Skill03_LV1,SKILL_DESC_2000095_Skill03_LV1,SKILL_DESC_2000095_Skill03_LV1,SKILL_DESC_2000095_Skill03_LV1,SKILL_DESC_2000095_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000095",
       "NameIDSymbol": "9503",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000095",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000095_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_STAT|ST_ATK"
-      ],
-      "cd": "5",
-      "debuff": [
-        "BT_DOT_BURN"
-      ],
-      "description": [
-        "Has a <color=#28d9ed>[Buff_C_2000095_3_1]</color> chance toÂ grant increased <color=#28d9ed>Attack</color> to the caster for <color=#28d9ed>[Buff_T_2000095_3_1] turn(s)</color>, then attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>[Buff_C_2000095_3_1]</color> chance each to inflict irremovable <color=#28d9ed>Burned</color> 2 times on all targets for <color=#28d9ed>[Buff_T_2000095_3_1] turn(s)</color>."
-      ],
+      "name": "Argo Vesta",
+      "name_kr": "아르고 베스타",
+      "name_jp": "アルゴ・ウェスタ",
+      "true_desc": "Has a <color=#28d9ed>70%</color> chance to grant increased <color=#28d9ed>Attack</color> to the caster for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies.\\nAfter attacking, has a <color=#28d9ed>70%</color> chance each to inflict irremovable <color=#28d9ed>Burned</color> 2 times on all targets for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "<color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 자신의 <color=#28d9ed>공격력</color>을 증가시킨 후, 적 전체를 공격합니다.\\n공격 후 대상 전체에게 각각 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 지속되는 해제 불가능한 <color=#28d9ed>화상</color>을 2회 부여합니다.",
+      "true_desc_jp": "<color=#28d9ed>70%</color>の確率で<color=#28d9ed>2ターン</color>の間自分の<color=#28d9ed>攻撃力</color>をUPした後、敵全体にダメージを与える。\\n攻撃後、対象全体にそれぞれ<color=#28d9ed>70%</color>の確率で解除不可能な<color=#28d9ed>火傷</color>2個を<color=#28d9ed>2ターン</color>の間付与する。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "+20% damage",
-          "+15% effect chance"
-        ],
-        "5": [
-          "+1 turn effect duration",
-          "+15% effect chance"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
+        "3": [
+          "-1 turn Skill Cooldown"
         ],
         "3_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "4_jp": [
-          "ダメージ+20%",
-          "効果発生率+15%"
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "+20% damage",
+          "+15% effect chance"
         ],
         "4_kr": [
           "피해량 +20%",
           "효과 발동 확률 +15%"
         ],
-        "5_jp": [
-          "効果ターン+1ターン",
+        "4_jp": [
+          "ダメージ+20%",
           "効果発生率+15%"
+        ],
+        "5": [
+          "+1 turn effect duration",
+          "+15% effect chance"
         ],
         "5_kr": [
           "효과 지속 +1턴",
           "효과 발동 확률 +15%"
+        ],
+        "5_jp": [
+          "効果ターン+1ターン",
+          "効果発生率+15%"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "아르고 베스타",
-      "name_jp": "アルゴ・ウェスタ",
-      "true_desc_kr": "<color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 자신의 <color=#28d9ed>공격력</color>을 증가시킨 후, 적 전체를 공격합니다.\\n공격 후 대상 전체에게 각각 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 지속되는 해제 불가능한 <color=#28d9ed>화상</color>을 2회 부여합니다.",
-      "true_desc_jp": "<color=#28d9ed>70%</color>の確率で<color=#28d9ed>2ターン</color>の間自分の<color=#28d9ed>攻撃力</color>をUPした後、敵全体にダメージを与える。\\n攻撃後、対象全体にそれぞれ<color=#28d9ed>70%</color>の確率で解除不可能な<color=#28d9ed>火傷</color>2個を<color=#28d9ed>2ターン</color>の間付与する。"
+      "buff": [
+        "BT_STAT|ST_ATK"
+      ],
+      "debuff": [
+        "IG_Buff_Dot_Burn_Interruption_D"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, inflicts irremovable <color=#28d9ed>Burned</color> once on all enemies for <color=#28d9ed>1 turn(s)</color>. (Ignores the target's Resilience)\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, inflicts irremovable <color=#28d9ed>Burned</color> once on the enemy for <color=#28d9ed>1 turn(s)</color>. (Ignores the target's Resilience)",
-      "DescID": "SKILL_DESC_2000095_Skill04_LV1,SKILL_DESC_2000095_Skill04_LV1,SKILL_DESC_2000095_Skill04_LV1,SKILL_DESC_2000095_Skill04_LV1,SKILL_DESC_2000095_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Fire_Join",
       "NameIDSymbol": "9504",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Fire_Join",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": [],
-      "cd": null,
-      "debuff": "BT_DOT_BURN",
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: After attacking, inflicts irremovable <color=#28d9ed>Burned</color>Â once on all enemies for <color=#28d9ed>[Buff_T_2000095_chain_1_1] turn(s)</color>. (Ignores the target's Resilience)\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, inflicts irremovable <color=#28d9ed>Burned</color> once on the enemy for <color=#28d9ed>[Buff_T_2000095_backup_1_1] turn(s)</color>. (Ignores the target's Resilience)"
-      ],
-      "dual_debuff": "BT_DOT_BURN",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, inflicts irremovable <color=#28d9ed>Burned</color> once on all enemies for <color=#28d9ed>1 turn(s)</color>. (Ignores the target's Resilience)\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, inflicts irremovable <color=#28d9ed>Burned</color> once on the enemy for <color=#28d9ed>1 turn(s)</color>. (Ignores the target's Resilience)",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 적 전체에게 <color=#28d9ed>1턴</color> 동안 해제 불가능한 <color=#28d9ed>화상</color>을 1회 부여합니다. (대상의 효과 저항 무시)\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 적에게 <color=#28d9ed>1턴</color> 동안 해제 불가능한 <color=#28d9ed>화상</color>을 1회 부여합니다. (대상의 효과 저항 무시)",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、敵全体に解除不可能な<color=#28d9ed>火傷</color>を<color=#28d9ed>1ターン</color>の間付与する。(対象の効果抵抗無視)\\n\\n<color=#ffd732>連携効果</color>:攻撃後、敵に解除不可能な<color=#28d9ed>火傷</color>を<color=#28d9ed>1</color>ターンの間付与する。(対象の効果抵抗無視)",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 적 전체에게 <color=#28d9ed>1턴</color> 동안 해제 불가능한 <color=#28d9ed>화상</color>을 1회 부여합니다. (대상의 효과 저항 무시)\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 적에게 <color=#28d9ed>1턴</color> 동안 해제 불가능한 <color=#28d9ed>화상</color>을 1회 부여합니다. (대상의 효과 저항 무시)",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、敵全体に解除不可能な<color=#28d9ed>火傷</color>を<color=#28d9ed>1ターン</color>の間付与する。(対象の効果抵抗無視)\\n\\n<color=#ffd732>連携効果</color>:攻撃後、敵に解除不可能な<color=#28d9ed>火傷</color>を<color=#28d9ed>1</color>ターンの間付与する。(対象の効果抵抗無視)"
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "IG_Buff_Dot_Burn_Interruption_D"
+      ],
+      "dual_debuff": [
+        "IG_Buff_Dot_Burn_Interruption_D"
+      ]
     }
-  },
-  "rank": "S",
-  "Fullname_kr": "벨 크라넬",
-  "Fullname_jp": "ベル・クラネル",
-  "VoiceActor": "Yoshitsugu Matsuoka &\\nInori Minase",
-  "VoiceActor_jp": "CV. 松岡禎丞&水瀬いのり",
-  "VoiceActor_kr": "CV. 마츠오카 요시츠구&미나세 이노리"
+  }
 }

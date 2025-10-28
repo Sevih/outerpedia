@@ -1,15 +1,18 @@
 {
   "ID": "2000055",
   "Fullname": "Aer",
+  "Fullname_jp": "アエル",
+  "Fullname_kr": "아에르",
   "Rarity": 3,
   "Element": "Fire",
-  "rank_pvp": "C",
-  "role": "dps",
-  "gift": "Luxury",
   "Class": "Striker",
   "SubClass": "Attacker",
-  "video": "X1IylquwEHY",
-  "tags": ["free"],
+  "rank": "S",
+  "rank_pvp": "C",
+  "role": "dps",
+  "tags": [
+    "free"
+  ],
   "skill_priority": {
     "First": {
       "prio": 3
@@ -21,330 +24,299 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Join",
+  "video": "X1IylquwEHY",
+  "VoiceActor": "VA. None",
+  "VoiceActor_kr": "CV.정혜원",
+  "VoiceActor_jp": "CV. ファイルーズあい",
+  "gift": "Luxury",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+4% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 피해 +4%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の会心ダメージ+4%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+4% Ally Team Critical Damage\n+25 Action Points at battle start",
-    "4_1_jp": "ATK DEF HP +16%\n味方の会心ダメージ+4%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 치명 피해 +4%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n味方の会心ダメージ+4%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n아군 치명 피해 +4%\n입장 시 AP +25"
+    "6_kr": "ATK DEF HP +30%\n아군 치명 피해 +4%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n味方の会心ダメージ+4%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "Whatever!",
-      "true_desc": "Attacks an enemy and has a <color=#28d9ed>30%</color> chance to grant the caster increased <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>2 turn(s)</color>.",
-      "ApproachFreezeTime_fallback1": "ATTACK",
-      "ApproachZ": "1.4",
-      "DescID": "SKILL_DESC_2000055_Skill01_LV1,SKILL_DESC_2000055_Skill01_LV1,SKILL_DESC_2000055_Skill01_LV1,SKILL_DESC_2000055_Skill01_LV1,SKILL_DESC_2000055_Skill01_LV1",
-      "IconName": "Skill_First_2000055",
       "NameIDSymbol": "5501",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000055",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000055_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_STAT|ST_CRITICAL_RATE"
-      ],
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000055_1]</color> chance to grant the caster increased <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>[Buff_T_2000055_1] turn(s)</color>."
-      ],
+      "name": "Whatever!",
+      "name_kr": "어떻게든 되겠지!",
+      "name_jp": "くるっとターン♪",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>30%</color> chance to grant the caster increased <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>30%</color> 확률로 자신의 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>30%</color>の確率で自分の<color=#28d9ed>会心率</color>を<color=#28d9ed>2ターン</color>の間UPさせる。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
         ],
         "3": [
           "+10% effect chance"
         ],
-        "4": [
-          "+15% damage"
-        ],
-        "5": [
-          "+15% damage"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
+        "3_kr": [
+          "효과 발동 확률 +10%"
         ],
         "3_jp": [
           "効果発生率+10%"
         ],
-        "3_kr": [
-          "효과 발동 확률 +10%"
-        ],
-        "4_jp": [
-          "ダメージ+15%"
+        "4": [
+          "+15% damage"
         ],
         "4_kr": [
           "피해량 +15%"
         ],
-        "5_jp": [
+        "4_jp": [
           "ダメージ+15%"
+        ],
+        "5": [
+          "+15% damage"
         ],
         "5_kr": [
           "피해량 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+15%"
         ]
       },
       "wgr": 1,
-      "name_kr": "어떻게든 되겠지!",
-      "name_jp": "くるっとターン♪",
-      "true_desc_kr": "적을 공격하고 <color=#28d9ed>30%</color> 확률로 자신의 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.",
-      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>30%</color>の確率で自分の<color=#28d9ed>会心率</color>を<color=#28d9ed>2ターン</color>の間UPさせる。"
+      "cd": null,
+      "buff": [
+        "BT_STAT|ST_CRITICAL_RATE"
+      ],
+      "debuff": []
     },
     "SKT_SECOND": {
-      "name": "To the Beach?",
-      "true_desc": "When using this skill, <color=#28d9ed>removes all</color> <color=#28d9ed>buffs</color> on the target and attacks the enemy. If the caster is granted increased <color=#28d9ed>Critical Hit Chance</color>, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>. This attack bypasses the target's Resilience.",
-      "ApproachType": "ATTACK",
-      "ApproachZ": "5",
-      "DescID": "SKILL_DESC_2000055_Skill02_LV1,SKILL_DESC_2000055_Skill02_LV1,SKILL_DESC_2000055_Skill02_LV1,SKILL_DESC_2000055_Skill02_LV1,SKILL_DESC_2000055_Skill02_LV1",
-      "IconName": "Skill_Second_2000055",
       "NameIDSymbol": "5502",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Second_2000055",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000055_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_ACTION_GAUGE"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Increases damage (Additional increase against Earth enemies)",
-          "level": 1,
-          "effect_kr": "피해 증가 (지속성 적에게는 추가로 피해 증가)",
-          "effect_jp": "ダメージUP\\n(地属性の敵には\\n追加でダメージUP)"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Increases damage",
-          "level": 2,
-          "effect_kr": "피해 증가",
-          "effect_jp": "ダメージUP"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "Changed to Enhanced Skill\\nResets Gone Surfing! cooldown",
-          "level": 3,
-          "effect_kr": "강화 스킬로 교체\\n다들 서핑하러 갔대! 쿨타임 초기화",
-          "effect_jp": "強化スキルに変更\\n【ハデに決めちゃうし!】\\nスキルターン初期化"
-        }
-      },
-      "cd": "4",
-      "debuff": [
-        "BT_REMOVE_BUFF"
-      ],
-      "description": [
-        "When using this skill, <color=#28d9ed>removes all</color> <color=#28d9ed>buffs</color> on the target and attacks the enemy. If the caster is granted increased <color=#28d9ed>Critical Hit Chance</color>, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_2000055_2_1]</color>. This attack bypasses the target's Resilience."
-      ],
+      "name": "To the Beach?",
+      "name_kr": "여름으로 가는 물?",
+      "name_jp": "みんなもサーフィンしよっ!",
+      "true_desc": "When using this skill, <color=#28d9ed>removes all</color> <color=#28d9ed>buffs</color> on the target and attacks the enemy. If the caster is granted increased <color=#28d9ed>Critical Hit Chance</color>, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>. This attack bypasses the target's Resilience.",
+      "true_desc_kr": "스킬 사용 시 대상의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>모두 해제</color>하고 적을 공격합니다. 자신의 <color=#28d9ed>치명 확률</color>이 증가한 상태라면 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다. 이 공격은 대상의 효과 저항을 무시합니다.",
+      "true_desc_jp": "スキル使用時、敵単体の<color=#28d9ed>強化効果</color>を<color=#28d9ed>すべて解除</color>し、ダメージを与える。自分の<color=#28d9ed>会心率</color>がUPした状態の場合、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。この攻撃は対象の効果抵抗を無視する。",
       "enhancement": {
         "2": [
           "+5% Priority",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "+15% damage"
-        ],
-        "5": [
-          "+5% Priority",
-          "+20% damage"
+        "2_kr": [
+          "행동 게이지 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "行動ゲージ5%UP",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "행동 게이지 +5%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
+        "3": [
+          "-1 turn Skill Cooldown"
         ],
         "3_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "4_jp": [
-          "ダメージ+15%"
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "+15% damage"
         ],
         "4_kr": [
           "피해량 +15%"
         ],
-        "5_jp": [
-          "行動ゲージ5%UP",
-          "ダメージ+20%"
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "5": [
+          "+5% Priority",
+          "+20% damage"
         ],
         "5_kr": [
           "행동 게이지 +5%",
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "行動ゲージ5%UP",
+          "ダメージ+20%"
         ]
       },
+      "cd": "4",
       "wgr": 1,
-      "name_kr": "여름으로 가는 물?",
-      "name_jp": "みんなもサーフィンしよっ!",
-      "true_desc_kr": "스킬 사용 시 대상의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>모두 해제</color>하고 적을 공격합니다. 자신의 <color=#28d9ed>치명 확률</color>이 증가한 상태라면 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다. 이 공격은 대상의 효과 저항을 무시합니다.",
-      "true_desc_jp": "スキル使用時、敵単体の<color=#28d9ed>強化効果</color>を<color=#28d9ed>すべて解除</color>し、ダメージを与える。自分の<color=#28d9ed>会心率</color>がUPした状態の場合、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。この攻撃は対象の効果抵抗を無視する。"
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_COOL3_CHARGE"
+      ],
+      "debuff": [
+        "BT_REMOVE_BUFF"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Increases damage (Additional increase against Earth enemies)",
+          "effect_kr": "피해 증가 (지속성 적에게는 추가로 피해 증가)",
+          "effect_jp": "ダメージUP\\n(地属性の敵には\\n追加でダメージUP)",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Increases damage",
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Changed to Enhanced Skill\\nResets Gone Surfing! cooldown",
+          "effect_kr": "강화 스킬로 교체\\n다들 서핑하러 갔대! 쿨타임 초기화",
+          "effect_jp": "強化スキルに変更\\n【ハデに決めちゃうし!】\\nスキルターン初期化",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_ULTIMATE": {
-      "name": "Gone Surfing!",
-      "true_desc": "Attacks an enemy. Increases damage dealt to enemies with <color=#28d9ed>buffs</color>.\\nWhen the enemy has no <color=#28d9ed>buffs</color> or is defeated after this skill is used, grants an <color=#28d9ed>extra turn</color>.\\nThis skill deals increased damage to Earth bosses.",
-      "DescID": "SKILL_DESC_2000055_Skill03_LV1,SKILL_DESC_2000055_Skill03_LV1,SKILL_DESC_2000055_Skill03_LV1,SKILL_DESC_2000055_Skill03_LV1,SKILL_DESC_2000055_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000055",
       "NameIDSymbol": "5503",
-      "RangeType": "SINGLE",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000055",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000055_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_ADDITIVE_TURN"
-      ],
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "Attacks an enemy. Increases damage dealt to enemies with <color=#28d9ed>buffs</color>.\\nWhen the enemy has no <color=#28d9ed>buffs</color> or is defeated after this skill is used, grants an <color=#28d9ed>extra turn</color>.\\nThis skill deals increased damage to Earth bosses."
-      ],
+      "name": "Gone Surfing!",
+      "name_kr": "다들 서핑하러 갔대!",
+      "name_jp": "ハデに決めちゃうし!",
+      "true_desc": "Attacks an enemy. Increases damage dealt to enemies with <color=#28d9ed>buffs</color>.\\nWhen the enemy has no <color=#28d9ed>buffs</color> or is defeated after this skill is used, grants an <color=#28d9ed>extra turn</color>.\\nThis skill deals increased damage to Earth bosses.",
+      "true_desc_kr": "적을 공격합니다. <color=#28d9ed>강화 효과</color>를 보유한 적에게 입히는 피해가 증가합니다.\\n스킬 사용 후 대상에게 적용된 <color=#28d9ed>강화 효과</color>가 없거나, 적이 처치된 경우 <color=#28d9ed>추가 턴</color>을 획득합니다.\\n이 스킬은 지속성 보스에게 입히는 피해가 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与える。対象に<color=#28d9ed>強化効果</color>がある場合、与えるダメージがUPする。\\nスキル使用後、対象に<color=#28d9ed>強化効果</color>がない、または敵が倒れた場合、<color=#28d9ed>追加ターン</color>を獲得する。\\nこのスキルは地属性のボスに与えるダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "+15% damage"
-        ],
-        "5": [
-          "+20% damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
+        "3": [
+          "-1 turn Skill Cooldown"
         ],
         "3_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "4_jp": [
-          "ダメージ+15%"
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "+15% damage"
         ],
         "4_kr": [
           "피해량 +15%"
         ],
-        "5_jp": [
-          "ダメージ+20%"
+        "4_jp": [
+          "ダメージ+15%"
+        ],
+        "5": [
+          "+20% damage"
         ],
         "5_kr": [
           "피해량 +20%"
+        ],
+        "5_jp": [
+          "ダメージ+20%"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "다들 서핑하러 갔대!",
-      "name_jp": "ハデに決めちゃうし!",
-      "true_desc_kr": "적을 공격합니다. <color=#28d9ed>강화 효과</color>를 보유한 적에게 입히는 피해가 증가합니다.\\n스킬 사용 후 대상에게 적용된 <color=#28d9ed>강화 효과</color>가 없거나, 적이 처치된 경우 <color=#28d9ed>추가 턴</color>을 획득합니다.\\n이 스킬은 지속성 보스에게 입히는 피해가 증가합니다.",
-      "true_desc_jp": "敵単体にダメージを与える。対象に<color=#28d9ed>強化効果</color>がある場合、与えるダメージがUPする。\\nスキル使用後、対象に<color=#28d9ed>強化効果</color>がない、または敵が倒れた場合、<color=#28d9ed>追加ターン</color>を獲得する。\\nこのスキルは地属性のボスに与えるダメージがUPする。"
+      "buff": [
+        "BT_ADDITIVE_TURN"
+      ],
+      "debuff": []
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Attacks an enemy and increases <color=#28d9ed>Attack</color> of the caster for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Attacks an enemy and has a <color=#28d9ed>40%</color> chance to increase <color=#28d9ed>Critical Hit Chance</color> of the caster for <color=#28d9ed>2 turn(s)</color>.",
-      "DescID": "SKILL_DESC_2000055_Skill04_LV1,SKILL_DESC_2000055_Skill04_LV1,SKILL_DESC_2000055_Skill04_LV1,SKILL_DESC_2000055_Skill04_LV1,SKILL_DESC_2000055_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Fire_Start",
       "NameIDSymbol": "5504",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Fire_Start",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "BT_STAT|ST_ATK",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: Attacks an enemy and increases <color=#28d9ed>Attack</color> of the caster for <color=#28d9ed>[Buff_T_2000055_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000055_backup_1_1]</color> chance to increase <color=#28d9ed>Critical Hit Chance</color> of the caster for <color=#28d9ed>[Buff_T_2000055_backup_1_1] turn(s)</color>."
-      ],
-      "dual_buff": "BT_STAT|ST_CRITICAL_RATE",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: Attacks an enemy and increases <color=#28d9ed>Attack</color> of the caster for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: Attacks an enemy and has a <color=#28d9ed>40%</color> chance to increase <color=#28d9ed>Critical Hit Chance</color> of the caster for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 적을 공격하고 자신의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 적을 공격하고 <color=#28d9ed>40%</color> 확률로 자신의 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:敵単体にダメージを与え、自分の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間UPさせる。\\n\\n<color=#ffd732>連携効果</color>:敵単体にダメージを与え、<color=#28d9ed>40%</color>の確率で自分の<color=#28d9ed>会心率</color>を<color=#28d9ed>2ターン</color>の間UPさせる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 적을 공격하고 자신의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 적을 공격하고 <color=#28d9ed>40%</color> 확률로 자신의 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:敵単体にダメージを与え、自分の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間UPさせる。\\n\\n<color=#ffd732>連携効果</color>:敵単体にダメージを与え、<color=#28d9ed>40%</color>の確率で自分の<color=#28d9ed>会心率</color>を<color=#28d9ed>2ターン</color>の間UPさせる。"
+      "cd": null,
+      "buff": [
+        "BT_STAT|ST_ATK"
+      ],
+      "debuff": [],
+      "dual_buff": [
+        "BT_STAT|ST_CRITICAL_RATE"
+      ]
     }
-  },
-  "rank": "S",
-  "Fullname_kr": "아에르",
-  "Fullname_jp": "アエル",
-  "VoiceActor": "VA. None",
-  "VoiceActor_jp": "CV.아에르 성우 이름",
-  "VoiceActor_kr": "CV.정혜원"
+  }
 }

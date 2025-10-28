@@ -1,18 +1,18 @@
 {
   "ID": "2000091",
   "Fullname": "Gnosis Nella",
+  "Fullname_jp": "グノーシス ネラ",
+  "Fullname_kr": "그노시스 넬라",
   "Rarity": 3,
   "Element": "Light",
-  "role": "support",
+  "Class": "Mage",
+  "SubClass": "Enchanter",
+  "rank": "S",
   "rank_pvp": "S",
-  "gift": "Magic Tool",
+  "role": "support",
   "tags": [
     "limited"
   ],
-  "Class": "Mage",
-  "limited": true,
-  "SubClass": "Enchanter",
-  "video": "dwaGHaRFY98",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -24,355 +24,326 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Start",
+  "video": "dwaGHaRFY98",
+  "VoiceActor": "VA. Dawn M. Bennett",
+  "VoiceActor_kr": "CV. Dawn M. Bennett",
+  "VoiceActor_jp": "CV. 関根明良",
+  "limited": true,
+  "gift": "Magic Tool",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+6% Ally Team Effectiveness\n+1 Chain Passive Weakness Gauge damage\nIncreases damage proportional to Effectiveness (Max 100%)",
+    "4_1_kr": "ATK DEF HP +16%\n아군 효과 적중 +6%\n체인 패시브의 WG 감소량 +1\n효과 적중 비례 피해 증가 (최대 100%)",
+    "4_1_jp": "ATK DEF HP +16%\n味方の効果命中+6%\nチェーンパッシブのWGダメージ+1\n効果命中が高いほどダメージUP(最大100%までUP)",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+50 Action Points, +20 Chain Points at battle start\nIncreases damage proportional to Effectiveness (Max +100%)",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50 , CP +20\n효과 적중 비례 피해 증가 (최대 +100%)",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+50、CP+20\n効果命中が高いほどダメージUP(最大100%までUP)",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\nIncreases caster's Health by 35%\nIncreases Priority of the caster by 40% when hit by an attack that targets all enemies (Once per turn)",
-    "4_1_jp": "ATK DEF HP +16%\n味方の効果命中+6%\nチェーンパッシブのWGダメージ+1\n効果命中が高いほどダメージUP(最大100%までUP)",
-    "4_1_kr": "ATK DEF HP +16%\n아군 효과 적중 +6%\n체인 패시브의 WG 감소량 +1\n효과 적중 비례 피해 증가 (최대 100%)",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+50、CP+20\n効果命中が高いほどダメージUP(最大100%までUP)",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50 , CP +20\n효과 적중 비례 피해 증가 (최대 +100%)",
-    "6_jp": "ATK DEF HP +30%\n自分のHP+35%\n全体攻撃を受けた場合、自分の行動ゲージ+40%\n(1ターンに一度のみ発動)",
-    "6_kr": "ATK DEF HP +30%\n자신 체력 증가 +35%\n전체 공격 피격 시 자신 행동 게이지 +40% (1턴에 1회)"
+    "6_kr": "ATK DEF HP +30%\n자신 체력 증가 +35%\n전체 공격 피격 시 자신 행동 게이지 +40% (1턴에 1회)",
+    "6_jp": "ATK DEF HP +30%\n自分のHP+35%\n全体攻撃を受けた場合、自分の行動ゲージ+40%\n(1ターンに一度のみ発動)"
   },
-  "Chain_Type": "Start",
   "skills": {
     "SKT_FIRST": {
-      "name": "False Grace",
-      "true_desc": "Attacks 2 enemies with <color=#28d9ed>Heavy Strike</color>, and has a <color=#28d9ed>30%</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>2 turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack.",
-      "DescID": "SKILL_DESC_2000091_Skill01_LV1,SKILL_DESC_2000091_Skill01_LV1,SKILL_DESC_2000091_Skill01_LV1,SKILL_DESC_2000091_Skill01_LV1,SKILL_DESC_2000091_Skill01_LV1",
-      "IconName": "Skill_First_2000091",
       "NameIDSymbol": "9101",
-      "RangeType": "DOUBLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000091",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000091_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_STAT|ST_BUFF_CHANCE",
-        "Heavy Strike"
-      ],
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks 2 enemies with <color=#28d9ed>Heavy Strike</color>, and has a <color=#28d9ed>[Buff_C_2000091_1_2]</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>[Buff_T_2000091_1_2] turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack."
-      ],
+      "name": "False Grace",
+      "name_kr": "거짓된 은총",
+      "name_jp": "偽りの恩寵",
+      "true_desc": "Attacks 2 enemies with <color=#28d9ed>Heavy Strike</color>, and has a <color=#28d9ed>30%</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>2 turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack.",
+      "true_desc_kr": "적 2인을 <color=#28d9ed>강격</color>으로 공격하고 <color=#28d9ed>30%</color> 확률로 자신의 <color=#28d9ed>효과 적중</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다. 이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "敵2体に<color=#28d9ed>強撃</color>でダメージを与え、<color=#28d9ed>30%</color>の確率で自分の<color=#28d9ed>効果命中</color>を<color=#28d9ed>2ターン</color>の間UPさせる。このスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
-        ],
-        "3": [
-          "+10% effect chance"
-        ],
-        "4": [
-          "+10% damage"
-        ],
-        "5": [
-          "+10% effect chance"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
         ],
         "2_kr": [
           "피해량 +10%",
           "WG 감소량 +1"
         ],
-        "3_jp": [
-          "効果発生率+10%"
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "3": [
+          "+10% effect chance"
         ],
         "3_kr": [
           "효과 발동 확률 +10%"
         ],
-        "4_jp": [
-          "ダメージ+10%"
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "4": [
+          "+10% damage"
         ],
         "4_kr": [
           "피해량 +10%"
         ],
-        "5_jp": [
-          "効果発生率+10%"
+        "4_jp": [
+          "ダメージ+10%"
+        ],
+        "5": [
+          "+10% effect chance"
         ],
         "5_kr": [
           "효과 발동 확률 +10%"
+        ],
+        "5_jp": [
+          "効果発生率+10%"
         ]
       },
       "wgr": 1,
-      "name_kr": "거짓된 은총",
-      "name_jp": "偽りの恩寵",
-      "true_desc_kr": "적 2인을 <color=#28d9ed>강격</color>으로 공격하고 <color=#28d9ed>30%</color> 확률로 자신의 <color=#28d9ed>효과 적중</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다. 이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "敵2体に<color=#28d9ed>強撃</color>でダメージを与え、<color=#28d9ed>30%</color>の確率で自分の<color=#28d9ed>効果命中</color>を<color=#28d9ed>2ターン</color>の間UPさせる。このスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。"
+      "cd": null,
+      "buff": [
+        "BT_STAT|ST_BUFF_CHANCE",
+        "HEAVY_STRIKE"
+      ],
+      "debuff": []
     },
     "SKT_SECOND": {
-      "name": "Rules of Salvation",
-      "true_desc": "Attacks all enemies with <color=#28d9ed>Heavy Strike</color>. Has a <color=#28d9ed>75%</color> chance to inflict irremovable <color=#28d9ed>Unbuffable</color> on all enemies for <color=#28d9ed>1 turn(s)</color>, and a <color=#28d9ed>75%</color> chance to increase <color=#28d9ed>skill cooldowns</color> of all targets by <color=#28d9ed>2 turns</color>. This skill's damage dealt increases proportional to Max Health instead of Attack.",
-      "ApproachTime": "ATTACK",
-      "ApproachZ": "1",
-      "DescID": "SKILL_DESC_2000091_Skill02_LV1,SKILL_DESC_2000091_Skill02_LV1,SKILL_DESC_2000091_Skill02_LV1,SKILL_DESC_2000091_Skill02_LV1,SKILL_DESC_2000091_Skill02_LV1",
-      "IconName": "Skill_Second_2000091",
       "NameIDSymbol": "9102",
-      "RangeType": "ALL",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Second_2000091",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000091_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "Heavy Strike"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Inflicts reduced Defense on the target for 2 turns",
-          "level": 1,
-          "effect_kr": "대상 방어력 -2턴",
-          "effect_jp": "対象の防御力-2ターン"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Reduces buff duration of the target by 2 turns before attacking",
-          "level": 2,
-          "effect_kr": "대상 강화 효과 지속 -2턴 후 공격",
-          "effect_jp": "対象の強化効果ターンを-2ターン後、攻撃"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "Changed to Enhanced Skill\\nInflicts Stunned on the target for 1 turn",
-          "level": 3,
-          "effect_kr": "강화 스킬로 교체\\n대상 스턴 +1턴",
-          "effect_jp": "強化スキルに変更\\n対象にスタン+1ターン"
-        }
-      },
-      "cd": "4",
-      "debuff": [
-        "BT_SEALED_IR",
-        "BT_COOL_CHARGE",
-        "BT_STAT|ST_DEF",
-        "BT_STUN"
-      ],
-      "description": [
-        "Attacks all enemies with <color=#28d9ed>Heavy Strike</color>. Has a <color=#28d9ed>[Buff_C_2000091_2_1]</color> chance to inflict irremovable <color=#28d9ed>Unbuffable</color> on all enemies for <color=#28d9ed>[Buff_T_2000091_2_1] turn(s)</color>, and a <color=#28d9ed>[Buff_C_2000091_2_2]</color> chance to increase <color=#28d9ed>skill cooldowns</color> of all targets by <color=#28d9ed>2 turns</color>. This skill's damage dealt increases proportional to Max Health instead of Attack."
-      ],
+      "name": "Rules of Salvation",
+      "name_kr": "구세의 계율",
+      "name_jp": "救世の戒葎",
+      "true_desc": "Attacks all enemies with <color=#28d9ed>Heavy Strike</color>. Has a <color=#28d9ed>75%</color> chance to inflict irremovable <color=#28d9ed>Unbuffable</color> on all enemies for <color=#28d9ed>1 turn(s)</color>, and a <color=#28d9ed>75%</color> chance to increase <color=#28d9ed>skill cooldowns</color> of all targets by <color=#28d9ed>2 turns</color>. This skill's damage dealt increases proportional to Max Health instead of Attack.",
+      "true_desc_kr": "적 전체를 <color=#28d9ed>강격</color>으로 공격합니다. <color=#28d9ed>75%</color> 확률로 <color=#28d9ed>1턴</color> 동안 적 전체에게 해제 불가능한 <color=#28d9ed>강화 불가</color>를 부여하고, <color=#28d9ed>75%</color> 확률로 대상 모두의 <color=#28d9ed>스킬 쿨타임</color>을 <color=#28d9ed>2턴</color> 증가시킵니다. 이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
+      "true_desc_jp": "敵全体に<color=#28d9ed>強撃</color>でダメージを与える。<color=#28d9ed>75%</color>の確率で敵全体に解除不可能な<color=#28d9ed>強化不可</color>を<color=#28d9ed>1ターン</color>の間付与し、<color=#28d9ed>75%</color>の確率で対象のすべての<color=#28d9ed>スキルターン</color>を<color=#28d9ed>2ターン</color>増加させる。このスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+10% effect chance",
-          "+1 Weakness Gauge damage"
-        ],
-        "4": [
-          "+1 turn effect duration",
-          "+1 Weakness Gauge damage"
-        ],
-        "5": [
-          "+15% effect chance",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
+        "3": [
+          "+10% effect chance",
+          "+1 Weakness Gauge damage"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%",
           "WG 감소량 +1"
         ],
         "3_jp": [
           "効果発生率+10%",
           "WGダメージ+1"
         ],
-        "3_kr": [
-          "효과 발동 확률 +10%",
+        "4": [
+          "+1 turn effect duration",
+          "+1 Weakness Gauge damage"
+        ],
+        "4_kr": [
+          "효과 지속 +1턴",
           "WG 감소량 +1"
         ],
         "4_jp": [
           "効果ターン+1ターン",
           "WGダメージ+1"
         ],
-        "4_kr": [
-          "효과 지속 +1턴",
+        "5": [
+          "+15% effect chance",
+          "+1 Weakness Gauge damage"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +15%",
           "WG 감소량 +1"
         ],
         "5_jp": [
           "効果発生率+15%",
           "WGダメージ+1"
-        ],
-        "5_kr": [
-          "효과 발동 확률 +15%",
-          "WG 감소량 +1"
         ]
       },
+      "cd": "4",
       "wgr": 1,
-      "name_kr": "구세의 계율",
-      "name_jp": "救世の戒葎",
-      "true_desc_kr": "적 전체를 <color=#28d9ed>강격</color>으로 공격합니다. <color=#28d9ed>75%</color> 확률로 <color=#28d9ed>1턴</color> 동안 적 전체에게 해제 불가능한 <color=#28d9ed>강화 불가</color>를 부여하고, <color=#28d9ed>75%</color> 확률로 대상 모두의 <color=#28d9ed>스킬 쿨타임</color>을 <color=#28d9ed>2턴</color> 증가시킵니다. 이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가합니다.",
-      "true_desc_jp": "敵全体に<color=#28d9ed>強撃</color>でダメージを与える。<color=#28d9ed>75%</color>の確率で敵全体に解除不可能な<color=#28d9ed>強化不可</color>を<color=#28d9ed>1ターン</color>の間付与し、<color=#28d9ed>75%</color>の確率で対象のすべての<color=#28d9ed>スキルターン</color>を<color=#28d9ed>2ターン</color>増加させる。このスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。"
-    },
-    "SKT_ULTIMATE": {
-      "name": "I Am the Sole Perfection",
-      "true_desc": "Has a <color=#28d9ed>75%</color> chance to remove 1 <color=#28d9ed>buff</color> from all enemies, and attacks all enemies with <color=#28d9ed>Heavy Strike</color>. After attacking, has a <color=#28d9ed>75%</color> chance to inflict <color=#28d9ed>Stunned</color> on all enemies for <color=#28d9ed>1 turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and right after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response.",
-      "DescID": "SKILL_DESC_2000091_Skill03_LV1,SKILL_DESC_2000091_Skill03_LV1,SKILL_DESC_2000091_Skill03_LV1,SKILL_DESC_2000091_Skill03_LV1,SKILL_DESC_2000091_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000091",
-      "NameIDSymbol": "9103",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
-      "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000091_Skill03",
-      "TargetTeamType": "ENEMY",
       "buff": [
-        "Heavy Strike"
+        "HEAVY_STRIKE"
       ],
-      "cd": "5",
       "debuff": [
-        "BT_REMOVE_BUFF",
+        "IG_Buff_Effect_Sealed_Interruption_D",
+        "BT_COOL_CHARGE",
+        "BT_STAT|ST_DEF",
+        "BT_EXTEND_BUFF",
         "BT_STUN"
       ],
-      "description": [
-        "Has a <color=#28d9ed>[Buff_C_2000091_3_1]</color> chance to remove 1 <color=#28d9ed>buff</color> from all enemies, and attacks all enemies with <color=#28d9ed>Heavy Strike</color>. After attacking, has a <color=#28d9ed>[Buff_C_2000091_3_2]</color> chance to inflict <color=#28d9ed>Stunned</color> on all enemies for <color=#28d9ed>[Buff_T_2000091_3_2] turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and right after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response."
-      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Inflicts reduced Defense on the target for 2 turns",
+          "effect_kr": "대상 방어력 -2턴",
+          "effect_jp": "対象の防御力-2ターン",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Reduces buff duration of the target by 2 turns before attacking",
+          "effect_kr": "대상 강화 효과 지속 -2턴 후 공격",
+          "effect_jp": "対象の強化効果ターンを-2ターン後、攻撃",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "Changed to Enhanced Skill\\nInflicts Stunned on the target for 1 turn",
+          "effect_kr": "강화 스킬로 교체\\n대상 스턴 +1턴",
+          "effect_jp": "強化スキルに変更\\n対象にスタン+1ターン",
+          "cost": 160,
+          "level": 3
+        }
+      }
+    },
+    "SKT_ULTIMATE": {
+      "NameIDSymbol": "9103",
+      "IconName": "Skill_Ultimate_2000091",
+      "SkillType": "SKT_ULTIMATE",
+      "name": "I Am the Sole Perfection",
+      "name_kr": "나 홀로 존귀하리라",
+      "name_jp": "尊貴なる存在",
+      "true_desc": "Has a <color=#28d9ed>75%</color> chance to remove 1 <color=#28d9ed>buff</color> from all enemies, and attacks all enemies with <color=#28d9ed>Heavy Strike</color>. After attacking, has a <color=#28d9ed>75%</color> chance to inflict <color=#28d9ed>Stunned</color> on all enemies for <color=#28d9ed>1 turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and right after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response.",
+      "true_desc_kr": "<color=#28d9ed>75%</color> 확률로 적 전체의 <color=#28d9ed>강화 효과</color>를 1개 해제하고 적 전체를 <color=#28d9ed>강격</color>으로 공격합니다. 공격 후 <color=#28d9ed>75%</color> 확률로 적 전체를 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>스턴</color> 상태로 만듭니다. 이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가하고, 이 스킬 직후에는 적의 반격, 복수, 신속 대응이 발동하지 않습니다.",
+      "true_desc_jp": "<color=#28d9ed>75%</color>の確率で敵全体の<color=#28d9ed>強化効果</color>を1個解除し、敵全体に<color=#28d9ed>強撃</color>でダメージを与える。攻撃後、<color=#28d9ed>75%</color>の確率で敵全体に<color=#28d9ed>スタン</color>を<color=#28d9ed>1ターン</color>の間付与する。このスキルは攻撃力の代わりに最大HPが高いほどダメージがUPし、このスキルでは敵の反撃、復讐、迅速対応が発動しない。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+10% effect chance",
-          "+1 Weakness Gauge damage"
-        ],
-        "4": [
-          "-1 turn Skill Cooldown",
-          "+1 Weakness Gauge damage"
-        ],
-        "5": [
-          "+20% damage",
-          "+15% effect chance"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
+        "3": [
+          "+10% effect chance",
+          "+1 Weakness Gauge damage"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%",
           "WG 감소량 +1"
         ],
         "3_jp": [
           "効果発生率+10%",
           "WGダメージ+1"
         ],
-        "3_kr": [
-          "효과 발동 확률 +10%",
+        "4": [
+          "-1 turn Skill Cooldown",
+          "+1 Weakness Gauge damage"
+        ],
+        "4_kr": [
+          "스킬 쿨타임 -1턴",
           "WG 감소량 +1"
         ],
         "4_jp": [
           "スキルターン-1ターン",
           "WGダメージ+1"
         ],
-        "4_kr": [
-          "스킬 쿨타임 -1턴",
-          "WG 감소량 +1"
-        ],
-        "5_jp": [
-          "ダメージ+20%",
-          "効果発生率+15%"
+        "5": [
+          "+20% damage",
+          "+15% effect chance"
         ],
         "5_kr": [
           "피해량 +20%",
           "효과 발동 확률 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+20%",
+          "効果発生率+15%"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "나 홀로 존귀하리라",
-      "name_jp": "尊貴なる存在",
-      "true_desc_kr": "<color=#28d9ed>75%</color> 확률로 적 전체의 <color=#28d9ed>강화 효과</color>를 1개 해제하고 적 전체를 <color=#28d9ed>강격</color>으로 공격합니다. 공격 후 <color=#28d9ed>75%</color> 확률로 적 전체를 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>스턴</color> 상태로 만듭니다. 이 스킬은 공격력 대신 최대 체력에 비례하여 피해가 증가하고, 이 스킬 직후에는 적의 반격, 복수, 신속 대응이 발동하지 않습니다.",
-      "true_desc_jp": "<color=#28d9ed>75%</color>の確率で敵全体の<color=#28d9ed>強化効果</color>を1個解除し、敵全体に<color=#28d9ed>強撃</color>でダメージを与える。攻撃後、<color=#28d9ed>75%</color>の確率で敵全体に<color=#28d9ed>スタン</color>を<color=#28d9ed>1ターン</color>の間付与する。このスキルは攻撃力の代わりに最大HPが高いほどダメージがUPし、このスキルでは敵の反撃、復讐、迅速対応が発動しない。"
+      "buff": [
+        "BT_SEAL_COUNTER",
+        "HEAVY_STRIKE"
+      ],
+      "debuff": [
+        "BT_REMOVE_BUFF",
+        "BT_STUN"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and when attacking, deals <color=#28d9ed>8%</color> of the target's Max Health as fixed damage to the target. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>2 turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and applies <color=#28d9ed>Heavy Strike</color>.",
-      "DescID": "SKILL_DESC_2000091_Skill04_LV1,SKILL_DESC_2000091_Skill04_LV1,SKILL_DESC_2000091_Skill04_LV1,SKILL_DESC_2000091_Skill04_LV1,SKILL_DESC_2000091_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Light_Start",
       "NameIDSymbol": "9104",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Light_Start",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": [
-        "Heavy Strike"
-      ],
-      "cd": null,
-      "debuff": "BT_FIXED_DAMAGE",
-      "description": [
-        "<color=#ffd732>Chain Starter Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and when attacking, deals <color=#28d9ed>[Buff_V_2000091_chain_1_1]</color> of the target's Max Health as fixed damage to the target. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000091_backup_1_1]</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>[Buff_T_2000091_backup_1_1] turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and applies <color=#28d9ed>Heavy Strike</color>."
-      ],
-      "dual_buff": [
-        "BT_STAT|ST_BUFF_CHANCE",
-        "Heavy Strike"
-      ],
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: Damage dealt by Skill Chain attacks of the caster increases proportional to <color=#28d9ed>Max Health</color> instead of Attack, and when attacking, deals <color=#28d9ed>8%</color> of the target's Max Health as fixed damage to the target. Applies <color=#28d9ed>Heavy Strike</color> to this attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to grant increased <color=#28d9ed>Effectiveness</color> to the caster for <color=#28d9ed>2 turn(s)</color>. This skill's damage dealt increases proportional to Max Health instead of Attack, and applies <color=#28d9ed>Heavy Strike</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 자신의 스킬 체인 공격이 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가하며, 공격 시 대상에게 대상 최대 체력의 <color=#28d9ed>8%</color> 만큼의 고정 피해를 입힙니다. 해당 공격은 <color=#28d9ed>강격</color>으로 적용됩니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>50%</color> 확률로 자신의 <color=#28d9ed>효과 적중</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다. 공격력 대신 최대 체력에 비례하여 피해가 증가하고, <color=#28d9ed>강격</color>으로 적용됩니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:自分のチェーンスキルが攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPし、攻撃時、対象に対象の最大HPの<color=#28d9ed>8%</color>の固定ダメージを与える。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>50%</color>の確率で自分の<color=#28d9ed>効果命中</color>を<color=#28d9ed>2ターン</color>の間UPさせる。このスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 자신의 스킬 체인 공격이 공격력 대신 <color=#28d9ed>최대 체력</color>에 비례하여 피해가 증가하며, 공격 시 대상에게 대상 최대 체력의 <color=#28d9ed>8%</color> 만큼의 고정 피해를 입힙니다. 해당 공격은 <color=#28d9ed>강격</color>으로 적용됩니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>50%</color> 확률로 자신의 <color=#28d9ed>효과 적중</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다. 공격력 대신 최대 체력에 비례하여 피해가 증가하고, <color=#28d9ed>강격</color>으로 적용됩니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:自分のチェーンスキルが攻撃力の代わりに<color=#28d9ed>最大HP</color>が高いほどダメージがUPし、攻撃時、対象に対象の最大HPの<color=#28d9ed>8%</color>の固定ダメージを与える。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>50%</color>の確率で自分の<color=#28d9ed>効果命中</color>を<color=#28d9ed>2ターン</color>の間UPさせる。このスキルは攻撃力の代わりに最大HPが高いほどダメージがUPする。このスキルは<color=#28d9ed>強撃</color>の攻撃判定になる。"
+      "cd": null,
+      "buff": [
+        "HEAVY_STRIKE"
+      ],
+      "debuff": [
+        "BT_REVERSE_HEAL_BASED_TARGET"
+      ],
+      "dual_buff": [
+        "BT_STAT|ST_BUFF_CHANCE",
+        "HEAVY_STRIKE"
+      ]
     }
-  },
-  "rank": "S",
-  "Fullname_kr": "그노시스 넬라",
-  "Fullname_jp": "グノーシス ネラ",
-  "VoiceActor": "VA. Dawn M. Bennett",
-  "VoiceActor_jp": "CV. 関根明良",
-  "VoiceActor_kr": "CV. Dawn M. Bennett"
+  }
 }

@@ -1,14 +1,15 @@
 {
   "ID": "2000082",
   "Fullname": "Roxie",
+  "Fullname_jp": "ロキシー",
+  "Fullname_kr": "록시",
   "Rarity": 3,
   "Element": "Water",
-  "rank_pvp": "A",
-  "gift": "Natural Object",
-  "role": "dps",
   "Class": "Mage",
   "SubClass": "Wizard",
-  "video": "lyNQ73PBPZg",
+  "rank": "A",
+  "rank_pvp": "A",
+  "role": "dps",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -20,326 +21,299 @@
       "prio": 1
     }
   },
+  "Chain_Type": "Start",
+  "video": "lyNQ73PBPZg",
+  "VoiceActor": "VA. Risa Mei",
+  "VoiceActor_kr": "CV. Risa Mei",
+  "VoiceActor_jp": "CV. 指出毬亞",
+  "gift": "Natural Object",
   "transcend": {
     "1": null,
     "2": null,
     "3": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_jp": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+3% Ally Team Critical Hit Chance\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 확률 +3%\n체인 패시브의 WG 감소량 +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の会心率+3%\nチェーンパッシブのWGダメージ+1",
     "4_2": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+3% Ally Team Critical Hit Chance\n+25 Action Points at battle start",
-    "4_1_jp": "ATK DEF HP +16%\n味方の会心率+3%\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 치명 확률 +3%\n체인 패시브의 WG 감소량 +1",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n味方の会心率+3%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n아군 치명 확률 +3%\n입장 시 AP +25"
+    "6_kr": "ATK DEF HP +30%\n아군 치명 확률 +3%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n味方の会心率+3%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Start",
   "skills": {
     "SKT_FIRST": {
-      "name": "Chilling, Isn't It?",
-      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>30%</color> chance to inflict <color=#28d9ed>Shocked</color> for <color=#28d9ed>2 turn(s)</color>.\\nDamage dealt increases when the caster is granted a buff.",
-      "ApproachTime": "ATTACK",
-      "DescID": "SKILL_DESC_2000082_Skill01_LV1,SKILL_DESC_2000082_Skill01_LV1,SKILL_DESC_2000082_Skill01_LV1,SKILL_DESC_2000082_Skill01_LV1,SKILL_DESC_2000082_Skill01_LV1",
-      "IconName": "Skill_First_2000082",
       "NameIDSymbol": "8201",
-      "RangeType": "SINGLE",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000082",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000082_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 70,
-          "effect": "Shocked Chance +50%\\nInflicts an additional Shocked for 2 turns",
-          "level": 1,
-          "effect_kr": "감전 발생 확률 +50%\\n감전 2턴 추가 발생",
-          "effect_jp": "感電発生率+50%\\n感電2ターン追加"
-        },
-        "SKT_BURST_2": {
-          "cost": 105,
-          "effect": "+1 turn debuff duration",
-          "level": 2,
-          "effect_kr": "약화 효과 지속 시간 +1턴",
-          "effect_jp": "弱体効果の持続ターン+1ターン"
-        },
-        "SKT_BURST_3": {
-          "cost": 140,
-          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nResets all skill cooldowns\\nHelp Me, Sis guaranteed activation",
-          "level": 3,
-          "effect_kr": "<color=#FFBF00>강화 공격</color>\\n모든 스킬 쿨타임 초기화\\n도와줘, 언니! 반드시 발동",
-          "effect_jp": "<color=#FFBF00>強化攻撃</color>\\n全スキルのスキルターン初期化\\n【助けて、お姉さん!】が必ず発動"
-        }
-      },
-      "cd": null,
-      "debuff": [
-        "BT_DOT_LIGHTNING",
-        "IG_Buff_DeBuffdurationIncrease"
-      ],
-      "description": [
-        "Attacks an enemy, and has a <color=#28d9ed>[Buff_C_2000082_1_1]</color> chance to inflict <color=#28d9ed>Shocked</color> for <color=#28d9ed>[Buff_T_2000082_1_1] turn(s)</color>.\\nDamage dealt increases when the caster is granted a buff."
-      ],
+      "name": "Chilling, Isn't It?",
+      "name_kr": "짜릿하지?",
+      "name_jp": "痺れたでしょ?",
+      "true_desc": "Attacks an enemy, and has a <color=#28d9ed>30%</color> chance to inflict <color=#28d9ed>Shocked</color> for <color=#28d9ed>2 turn(s)</color>.\\nDamage dealt increases when the caster is granted a buff.",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>30%</color> 확률로 <color=#28d9ed>2턴</color> 동안 지속되는 <color=#28d9ed>감전</color>을 부여합니다.\\n이 스킬은 자신이 강화 효과 보유 시 피해가 증가합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>30%</color>の確率で<color=#28d9ed>感電</color>を<color=#28d9ed>2ターン</color>の間付与する。\\nこのスキルは自分に強化効果がある場合、ダメージがUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+10% damage"
         ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
         "4": [
           "+10% damage"
+        ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "4_jp": [
+          "ダメージ+10%"
         ],
         "5": [
           "+20% effect chance"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "ダメージ+10%"
-        ],
-        "3_kr": [
-          "피해량 +10%"
-        ],
-        "4_jp": [
-          "ダメージ+10%"
-        ],
-        "4_kr": [
-          "피해량 +10%"
+        "5_kr": [
+          "효과 발동 확률 +20%"
         ],
         "5_jp": [
           "効果発生率+20%"
-        ],
-        "5_kr": [
-          "효과 발동 확률 +20%"
         ]
       },
       "wgr": 1,
-      "name_kr": "짜릿하지?",
-      "name_jp": "痺れたでしょ?",
-      "true_desc_kr": "적을 공격하고 <color=#28d9ed>30%</color> 확률로 <color=#28d9ed>2턴</color> 동안 지속되는 <color=#28d9ed>감전</color>을 부여합니다.\\n이 스킬은 자신이 강화 효과 보유 시 피해가 증가합니다.",
-      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>30%</color>の確率で<color=#28d9ed>感電</color>を<color=#28d9ed>2ターン</color>の間付与する。\\nこのスキルは自分に強化効果がある場合、ダメージがUPする。"
+      "cd": null,
+      "buff": [
+        "BT_COOL_CHARGE"
+      ],
+      "debuff": [
+        "BT_DOT_LIGHTNING",
+        "BT_EXTEND_DEBUFF"
+      ],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Shocked Chance +50%\\nInflicts an additional Shocked for 2 turns",
+          "effect_kr": "감전 발생 확률 +50%\\n감전 2턴 추가 발생",
+          "effect_jp": "感電発生率+50%\\n感電2ターン追加",
+          "cost": 70,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "+1 turn debuff duration",
+          "effect_kr": "약화 효과 지속 시간 +1턴",
+          "effect_jp": "弱体効果の持続ターン+1ターン",
+          "cost": 105,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "<color=#FFBF00>Enhanced Attack</color>\\nResets all skill cooldowns\\nHelp Me, Sis guaranteed activation",
+          "effect_kr": "<color=#FFBF00>강화 공격</color>\\n모든 스킬 쿨타임 초기화\\n도와줘, 언니! 반드시 발동",
+          "effect_jp": "<color=#FFBF00>強化攻撃</color>\\n全スキルのスキルターン初期化\\n【助けて、お姉さん!】が必ず発動",
+          "cost": 140,
+          "level": 3
+        }
+      }
     },
     "SKT_SECOND": {
-      "name": "Help Me, Sis!",
-      "true_desc": "(Triggered Effect) When an ally <color=#28d9ed>Ranger</color> attacks, activates an additional attack on the enemy with the highest Speed. After attacking, increases Priority of the caster by <color=#28d9ed>25%</color>, and grants increased Effectiveness to ally <color=#28d9ed>Mages</color> and <color=#28d9ed>Rangers</color> for <color=#28d9ed>2 turn(s)</color>.",
-      "AIType": "ATTACK",
-      "ApproachTime": "HIGHEST,ST_SPEED",
-      "DescID": "SKILL_DESC_2000082_Skill02_LV1,SKILL_DESC_2000082_Skill02_LV1,SKILL_DESC_2000082_Skill02_LV1,SKILL_DESC_2000082_Skill02_LV1,SKILL_DESC_2000082_Skill02_LV1",
-      "IconName": "Skill_Second_2000082",
       "NameIDSymbol": "8202",
-      "RangeType": "SINGLE",
-      "SkillSubType": "PASSIVE",
+      "IconName": "Skill_Second_2000082",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000082_Skill02",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_ACTION_GAUGE",
-        "BT_STAT|ST_BUFF_CHANCE"
-      ],
-      "cd": "4",
-      "debuff": [],
-      "description": [
-        "(Triggered Effect) When an ally <color=#28d9ed>Ranger</color> attacks, activates an additional attack on the enemy with the highest Speed. After attacking, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000082_2_2]</color>, and grants increased Effectiveness to ally <color=#28d9ed>Mages</color> and <color=#28d9ed>Rangers</color> for <color=#28d9ed>[Buff_T_2000082_2_3] turn(s)</color>."
-      ],
+      "name": "Help Me, Sis!",
+      "name_kr": "도와줘, 언니!",
+      "name_jp": "助けて、お姉さん!",
+      "true_desc": "(Triggered Effect) When an ally <color=#28d9ed>Ranger</color> attacks, activates an additional attack on the enemy with the highest Speed. After attacking, increases Priority of the caster by <color=#28d9ed>25%</color>, and grants increased Effectiveness to ally <color=#28d9ed>Mages</color> and <color=#28d9ed>Rangers</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "(발동 효과) 아군의 <color=#28d9ed>속도형</color> 캐릭터가 공격했을 때 속도가 가장 높은 적에게 추가 공격을 합니다. 공격 후 자신의 행동 게이지가 <color=#28d9ed>25%</color> 증가하며, 아군의 <color=#28d9ed>마법형</color>과 <color=#28d9ed>속도형</color> 캐릭터의 효과 적중을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.",
+      "true_desc_jp": "(発動効果)<color=#28d9ed>スピード型</color>の味方が攻撃時、スピードが最も高い敵単体に追加攻撃を与える。攻撃後、自分の行動ゲージが<color=#28d9ed>25%</color>UPし、<color=#28d9ed>魔法型</color>と<color=#28d9ed>スピード型</color>の味方の効果命中を<color=#28d9ed>2ターン</color>の間UPさせる。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "-1 turn Skill Cooldown"
+        ],
+        "3_kr": [
+          "스킬 쿨타임 -1턴"
+        ],
+        "3_jp": [
+          "スキルターン-1ターン"
         ],
         "4": [
           "+15% Priority"
         ],
-        "5": [
-          "+15% damage"
-        ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
-        ],
-        "3_kr": [
-          "스킬 쿨타임 -1턴"
+        "4_kr": [
+          "행동 게이지 +15%"
         ],
         "4_jp": [
           "行動ゲージ15%UP"
         ],
-        "4_kr": [
-          "행동 게이지 +15%"
-        ],
-        "5_jp": [
-          "ダメージ+15%"
+        "5": [
+          "+15% damage"
         ],
         "5_kr": [
           "피해량 +15%"
+        ],
+        "5_jp": [
+          "ダメージ+15%"
         ]
       },
+      "cd": "4",
       "wgr": 1,
-      "name_kr": "도와줘, 언니!",
-      "name_jp": "助けて、お姉さん!",
-      "true_desc_kr": "(발동 효과) 아군의 <color=#28d9ed>속도형</color> 캐릭터가 공격했을 때 속도가 가장 높은 적에게 추가 공격을 합니다. 공격 후 자신의 행동 게이지가 <color=#28d9ed>25%</color> 증가하며, 아군의 <color=#28d9ed>마법형</color>과 <color=#28d9ed>속도형</color> 캐릭터의 효과 적중을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.",
-      "true_desc_jp": "(発動効果)<color=#28d9ed>スピード型</color>の味方が攻撃時、スピードが最も高い敵単体に追加攻撃を与える。攻撃後、自分の行動ゲージが<color=#28d9ed>25%</color>UPし、<color=#28d9ed>魔法型</color>と<color=#28d9ed>スピード型</color>の味方の効果命中を<color=#28d9ed>2ターン</color>の間UPさせる。"
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_STAT|ST_BUFF_CHANCE"
+      ],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
-      "name": "Twin Tornado!",
-      "true_desc": "Inflicts <color=#28d9ed>Shocked</color> once on all enemies for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies. Damage dealt increases proportionally to the number of debuffs inflicted on the target. This skill always has elemental advantage.",
-      "DescID": "SKILL_DESC_2000082_Skill03_LV1,SKILL_DESC_2000082_Skill03_LV1,SKILL_DESC_2000082_Skill03_LV1,SKILL_DESC_2000082_Skill03_LV1,SKILL_DESC_2000082_Skill03_LV5",
-      "IconName": "Skill_Ultimate_2000082",
       "NameIDSymbol": "8203",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000082",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000082_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [],
-      "cd": "5",
-      "debuff": [
-        "BT_DOT_LIGHTNING"
-      ],
-      "description": [
-        "Inflicts <color=#28d9ed>Shocked</color> once on all enemies for <color=#28d9ed>[Buff_T_2000082_3_1] turn(s)</color>, then attacks all enemies. Damage dealt increases proportionally to the number of debuffs inflicted on the target. This skill always has elemental advantage."
-      ],
+      "name": "Twin Tornado!",
+      "name_kr": "트윈 토네이도!",
+      "name_jp": "ツイントルネード!",
+      "true_desc": "Inflicts <color=#28d9ed>Shocked</color> once on all enemies for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies. Damage dealt increases proportionally to the number of debuffs inflicted on the target. This skill always has elemental advantage.",
+      "true_desc_kr": "적 전체에게 <color=#28d9ed>2턴</color> 동안 지속되는 <color=#28d9ed>감전</color>을 1회 부여하고 공격합니다. 이 공격은 대상의 약화 효과가 많을수록 피해가 증가합니다. 이 스킬은 항상 유리한 상성으로 적용됩니다.",
+      "true_desc_jp": "敵全体に感電1個を2ターンの間付与し、ダメージを与える。この攻撃は対象の弱体効果の数に応じてダメージがUPする。このスキルは有利属性の攻撃判定になる。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+20% damage"
-        ],
-        "4": [
-          "-1 turn Skill Cooldown"
-        ],
-        "5": [
-          "+1 effect stack"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "ダメージ+20%"
+        "3": [
+          "+20% damage"
         ],
         "3_kr": [
           "피해량 +20%"
         ],
-        "4_jp": [
-          "スキルターン-1ターン"
+        "3_jp": [
+          "ダメージ+20%"
+        ],
+        "4": [
+          "-1 turn Skill Cooldown"
         ],
         "4_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "5_jp": [
-          "効果の数UP+1"
+        "4_jp": [
+          "スキルターン-1ターン"
+        ],
+        "5": [
+          "+1 effect stack"
         ],
         "5_kr": [
           "효과 수량 +1"
+        ],
+        "5_jp": [
+          "効果の数UP+1"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "트윈 토네이도!",
-      "name_jp": "ツイントルネード!",
-      "true_desc_kr": "적 전체에게 <color=#28d9ed>2턴</color> 동안 지속되는 <color=#28d9ed>감전</color>을 1회 부여하고 공격합니다. 이 공격은 대상의 약화 효과가 많을수록 피해가 증가합니다. 이 스킬은 항상 유리한 상성으로 적용됩니다.",
-      "true_desc_jp": "敵全体に感電1個を2ターンの間付与し、ダメージを与える。この攻撃は対象の弱体効果の数に応じてダメージがUPする。このスキルは有利属性の攻撃判定になる。"
+      "buff": [
+        "BT_DMG_ELEMENT_SUPERIORITY"
+      ],
+      "debuff": [
+        "BT_DOT_LIGHTNING"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict Shocked on all enemies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to inflict Shocked for <color=#28d9ed>2 turn(s)</color>.",
-      "DescID": "SKILL_DESC_2000082_Skill04_LV1,SKILL_DESC_2000082_Skill04_LV1,SKILL_DESC_2000082_Skill04_LV1,SKILL_DESC_2000082_Skill04_LV1,SKILL_DESC_2000082_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Water_Start",
       "NameIDSymbol": "8204",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Water_Start",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": [],
-      "cd": null,
-      "debuff": "BT_DOT_LIGHTNING",
-      "description": [
-        "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000082_chain_1_1]</color> chance to inflict Shocked on all enemies for <color=#28d9ed>[Buff_T_2000082_chain_1_1] turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000082_backup_1_1]</color> chance to inflict Shocked for <color=#28d9ed>[Buff_T_2000082_backup_1_1] turn(s)</color>."
-      ],
-      "dual_debuff": "BT_DOT_LIGHTNING",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Starter Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to inflict Shocked on all enemies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>50%</color> chance to inflict Shocked for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 적 전체에게 <color=#28d9ed>2턴</color> 동안 지속되는 감전을 부여합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>50%</color> 확률로 <color=#28d9ed>2턴</color> 동안 지속되는 감전을 부여합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、敵全体に<color=#28d9ed>100%</color>の確率で<color=#28d9ed>感電</color>を2ターンの間付与する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>50%</color>の確率で感電を<color=#28d9ed>2ターン</color>の間付与する。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 적 전체에게 <color=#28d9ed>2턴</color> 동안 지속되는 감전을 부여합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>50%</color> 확률로 <color=#28d9ed>2턴</color> 동안 지속되는 감전을 부여합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(初手)</color>:攻撃後、敵全体に<color=#28d9ed>100%</color>の確率で<color=#28d9ed>感電</color>を2ターンの間付与する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>50%</color>の確率で感電を<color=#28d9ed>2ターン</color>の間付与する。"
+      "cd": null,
+      "buff": [],
+      "debuff": [
+        "BT_DOT_LIGHTNING"
+      ],
+      "dual_debuff": [
+        "BT_DOT_LIGHTNING"
+      ]
     }
-  },
-  "rank": "A",
-  "Fullname_kr": "록시",
-  "Fullname_jp": "ロキシー",
-  "VoiceActor": "VA. Risa Mei",
-  "VoiceActor_jp": "CV. 指出毬亞",
-  "VoiceActor_kr": "CV. Risa Mei"
+  }
 }

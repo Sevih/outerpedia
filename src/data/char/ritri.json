@@ -1,13 +1,14 @@
 {
   "ID": "2000048",
   "Fullname": "Ritri",
+  "Fullname_jp": "レトリ",
+  "Fullname_kr": "리트리",
   "Rarity": 2,
   "Element": "Water",
-  "rank": "A",
-  "gift": "Craftwork",
-  "role": "sustain",
   "Class": "Defender",
   "SubClass": "Phalanx",
+  "rank": "A",
+  "role": "sustain",
   "skill_priority": {
     "First": {
       "prio": 3
@@ -19,323 +20,291 @@
       "prio": 2
     }
   },
+  "Chain_Type": "Join",
+  "VoiceActor": "VA. Stephanie Panisello",
+  "VoiceActor_kr": "CV.김아롱",
+  "VoiceActor_jp": "CV. 高森奈津美",
+  "gift": "Craftwork",
   "transcend": {
     "1": null,
     "2": "ATK DEF HP +5%",
-    "3": "ATK DEF HP +10%",
-    "4": "ATK DEF HP +16%\n+3% Resilience\n+1 Chain Passive Weakness Gauge damage",
-    "5": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
-    "6": "ATK DEF HP +30%\n+3% Resilience\n+25 Action Points at battle start",
-    "2_jp": "ATK DEF HP +5%",
     "2_kr": "ATK DEF HP +5%",
-    "3_jp": "ATK DEF HP +10%",
+    "2_jp": "ATK DEF HP +5%",
+    "3": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
-    "4_jp": "ATK DEF HP +16%\n効果抵抗+3%\nチェーンパッシブのWGダメージ+1",
+    "3_jp": "ATK DEF HP +10%",
+    "4": "ATK DEF HP +16%\n+3% Resilience\n+1 Chain Passive Weakness Gauge damage",
     "4_kr": "ATK DEF HP +16%\n효과 저항 +3%\n체인 패시브의 WG 감소량 +1",
-    "5_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "4_jp": "ATK DEF HP +16%\n効果抵抗+3%\nチェーンパッシブのWGダメージ+1",
+    "5": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
-    "6_jp": "ATK DEF HP +30%\n効果抵抗+3%\n戦闘開始時、AP+25",
-    "6_kr": "ATK DEF HP +30%\n효과 저항 +3%\n입장 시 AP +25"
+    "5_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "6": "ATK DEF HP +30%\n+3% Resilience\n+25 Action Points at battle start",
+    "6_kr": "ATK DEF HP +30%\n효과 저항 +3%\n입장 시 AP +25",
+    "6_jp": "ATK DEF HP +30%\n効果抵抗+3%\n戦闘開始時、AP+25"
   },
-  "Chain_Type": "Join",
   "skills": {
     "SKT_FIRST": {
-      "name": "Thump! Thump! Smash!",
-      "true_desc": "Attacks an enemy. Has a <color=#28d9ed>40%</color> chance to remove <color=#28d9ed>1</color> <color=#28d9ed>debuff</color> from the caster.",
-      "DescID": "SKILL_DESC_2000048_Skill01_LV1,SKILL_DESC_2000048_Skill01_LV1,SKILL_DESC_2000048_Skill01_LV1,SKILL_DESC_2000048_Skill01_LV1,SKILL_DESC_2000048_Skill01_LV1",
-      "IconName": "Skill_First_2000048",
       "NameIDSymbol": "4801",
-      "RangeType": "SINGLE",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_First_2000048",
       "SkillType": "SKT_FIRST",
-      "SkipNameID": "SKILL_NAME_2000048_Skill01",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_REMOVE_DEBUFF"
-      ],
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "Attacks an enemy. Has a <color=#28d9ed>[Buff_C_2000048_1_1]</color> chance to remove <color=#28d9ed>[Buff_V_2000048_1_1]</color> <color=#28d9ed>debuff</color> from the caster."
-      ],
+      "name": "Thump! Thump! Smash!",
+      "name_kr": "쿵! 쿵! 땅!",
+      "name_jp": "とっとっとりゃっ!",
+      "true_desc": "Attacks an enemy. Has a <color=#28d9ed>40%</color> chance to remove <color=#28d9ed>1</color> <color=#28d9ed>debuff</color> from the caster.",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>40%</color> 확률로 자신의 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>1개</color> 해제합니다.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>40%</color>の確率で自分の<color=#28d9ed>弱体効果</color>を<color=#28d9ed>1個</color>解除する。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
         "3": [
           "+10% damage"
         ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "3_jp": [
+          "ダメージ+10%"
+        ],
         "4": [
           "+15% effect chance"
+        ],
+        "4_kr": [
+          "효과 발동 확률 +15%"
+        ],
+        "4_jp": [
+          "効果発生率+15%"
         ],
         "5": [
           "+15% effect chance",
           "+10% damage"
         ],
-        "2_jp": [
-          "ダメージ+10%",
-          "WGダメージ+1"
-        ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "ダメージ+10%"
-        ],
-        "3_kr": [
+        "5_kr": [
+          "효과 발동 확률 +15%",
           "피해량 +10%"
-        ],
-        "4_jp": [
-          "効果発生率+15%"
-        ],
-        "4_kr": [
-          "효과 발동 확률 +15%"
         ],
         "5_jp": [
           "効果発生率+15%",
           "ダメージ+10%"
-        ],
-        "5_kr": [
-          "효과 발동 확률 +15%",
-          "피해량 +10%"
         ]
       },
       "wgr": 1,
-      "name_kr": "쿵! 쿵! 땅!",
-      "name_jp": "とっとっとりゃっ!",
-      "true_desc_kr": "적을 공격하고 <color=#28d9ed>40%</color> 확률로 자신의 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>1개</color> 해제합니다.",
-      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>40%</color>の確率で自分の<color=#28d9ed>弱体効果</color>を<color=#28d9ed>1個</color>解除する。"
+      "cd": null,
+      "buff": [
+        "BT_REMOVE_DEBUFF"
+      ],
+      "debuff": []
     },
     "SKT_SECOND": {
-      "name": "Ritri Will Protect You!",
-      "true_desc": "(Passive Effect) Reduces the damage taken by all allies by <color=#28d9ed>2.5%</color>.",
-      "DescID": "SKILL_DESC_2000048_Skill02_LV1,SKILL_DESC_2000048_Skill02_LV2,SKILL_DESC_2000048_Skill02_LV2,SKILL_DESC_2000048_Skill02_LV2,SKILL_DESC_2000048_Skill02_LV2",
-      "IconName": "Skill_Second_2000048",
       "NameIDSymbol": "4802",
-      "RangeType": "NONE",
+      "IconName": "Skill_Second_2000048",
       "SkillType": "SKT_SECOND",
-      "SkipNameID": "SKILL_NAME_2000048_Skill02",
-      "TargetTeamType": "NONE",
-      "buff": [],
-      "cd": 0,
-      "debuff": [],
-      "description": [
-        "(Passive Effect) Reduces the damage taken by all allies by <color=#28d9ed>[Buff_V_2000048_2_1]</color>."
-      ],
+      "name": "Ritri Will Protect You!",
+      "name_kr": "리트리가 지켜줄게!",
+      "name_jp": "レトリが守る!",
+      "true_desc": "(Passive Effect) Reduces the damage taken by all allies by <color=#28d9ed>2.5%</color>.",
+      "true_desc_kr": "(패시브 효과) 아군 전체가 받는 피해를 <color=#28d9ed>2.5%</color> 감소시킵니다.",
+      "true_desc_jp": "(パッシブ効果)味方全体の受けるダメージを<color=#28d9ed>2.5%</color>DOWNさせる。",
       "enhancement": {
         "2": [
           "Heals 10% of damage taken"
         ],
-        "3": [
-          "-2.5% damage taken"
-        ],
-        "4": [
-          "-2.5% damage taken"
-        ],
-        "5": [
-          "-2.5% damage taken"
+        "2_kr": [
+          "받는 피해 10% 회복"
         ],
         "2_jp": [
           "受けるダメージの10%回復"
         ],
-        "2_kr": [
-          "받는 피해 10% 회복"
+        "3": [
+          "-2.5% damage taken"
+        ],
+        "3_kr": [
+          "받는 피해 -2.5%"
         ],
         "3_jp": [
           "受けるダメージ-2.5%"
         ],
-        "3_kr": [
+        "4": [
+          "-2.5% damage taken"
+        ],
+        "4_kr": [
           "받는 피해 -2.5%"
         ],
         "4_jp": [
           "受けるダメージ-2.5%"
         ],
-        "4_kr": [
+        "5": [
+          "-2.5% damage taken"
+        ],
+        "5_kr": [
           "받는 피해 -2.5%"
         ],
         "5_jp": [
           "受けるダメージ-2.5%"
-        ],
-        "5_kr": [
-          "받는 피해 -2.5%"
         ]
       },
-      "wgr": 0,
-      "name_kr": "리트리가 지켜줄게!",
-      "name_jp": "レトリが守る!",
-      "true_desc_kr": "(패시브 효과) 아군 전체가 받는 피해를 <color=#28d9ed>2.5%</color> 감소시킵니다.",
-      "true_desc_jp": "(パッシブ効果)味方全体の受けるダメージを<color=#28d9ed>2.5%</color>DOWNさせる。"
+      "buff": [],
+      "debuff": []
     },
     "SKT_ULTIMATE": {
-      "name": "Thump! Thump! Thump! Smash!",
-      "true_desc": "Attacks all enemies. Grants a <color=#28d9ed>Barrier</color> to the ally with the lowest Health for <color=#28d9ed>2 turns</color>. The barrier strength is proportional to the caster's <color=#28d9ed>Max Health</color>.",
-      "DescID": "SKILL_DESC_2000048_Skill03_LV1,SKILL_DESC_2000048_Skill03_LV1,SKILL_DESC_2000048_Skill03_LV1,SKILL_DESC_2000048_Skill03_LV1,SKILL_DESC_2000048_Skill03_LV1",
-      "IconName": "Skill_Ultimate_2000048",
       "NameIDSymbol": "4803",
-      "RangeType": "ALL",
-      "RangeType_fallback1": "ATTACK",
-      "SkillSubType": "ACTIVE",
+      "IconName": "Skill_Ultimate_2000048",
       "SkillType": "SKT_ULTIMATE",
-      "SkipNameID": "SKILL_NAME_2000048_Skill03",
-      "TargetTeamType": "ENEMY",
-      "buff": [
-        "BT_SHIELD_BASED_CASTER",
-        "BT_ACTION_GAUGE"
-      ],
-      "burnEffect": {
-        "SKT_BURST_1": {
-          "cost": 80,
-          "effect": "Increases damage",
-          "level": 1,
-          "effect_kr": "피해 증가",
-          "effect_jp": "ダメージUP"
-        },
-        "SKT_BURST_2": {
-          "cost": 120,
-          "effect": "Increases damage",
-          "level": 2,
-          "effect_kr": "피해 증가",
-          "effect_jp": "ダメージUP"
-        },
-        "SKT_BURST_3": {
-          "cost": 160,
-          "effect": "+50% Priority",
-          "level": 3,
-          "effect_kr": "행동 게이지 +50%",
-          "effect_jp": "行動ゲージ50%UP"
-        }
-      },
-      "cd": "5",
-      "debuff": [],
-      "description": [
-        "Attacks all enemies. Grants a <color=#28d9ed>Barrier</color> to the ally with the lowest Health for <color=#28d9ed>[Buff_T_2000048_3_1] turns</color>. The barrier strength is proportional to the casterâs <color=#28d9ed>Max Health</color>."
-      ],
+      "name": "Thump! Thump! Thump! Smash!",
+      "name_kr": "쿵! 쿵! 쿵! 땅!",
+      "name_jp": "レトリインパクト",
+      "true_desc": "Attacks all enemies. Grants a <color=#28d9ed>Barrier</color> to the ally with the lowest Health for <color=#28d9ed>2 turns</color>. The barrier strength is proportional to the caster's <color=#28d9ed>Max Health</color>.",
+      "true_desc_kr": "적 전체를 공격하고 체력 상황이 가장 나쁜 아군에게 <color=#28d9ed>실드</color>를 <color=#28d9ed>2턴</color> 동안 부여합니다. 실드량은 자신의 <color=#28d9ed>최대 체력</color>이 높을수록 증가합니다.",
+      "true_desc_jp": "敵全体にダメージを与え、残りHPが最も低い味方単体に<color=#28d9ed>シールド</color>を<color=#28d9ed>2ターン</color>の間付与する。自分の<color=#28d9ed>最大HP</color>が高いほどシールド量がUPする。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "-1 turn Skill Cooldown"
-        ],
-        "4": [
-          "Enhances barrier strength"
-        ],
-        "5": [
-          "Enhances barrier strength",
-          "+15% damage"
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
-        "3_jp": [
-          "スキルターン-1ターン"
+        "3": [
+          "-1 turn Skill Cooldown"
         ],
         "3_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "4_jp": [
-          "シールド強化"
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
+        "4": [
+          "Enhances barrier strength"
         ],
         "4_kr": [
           "실드 강화"
         ],
-        "5_jp": [
-          "シールド強化",
-          "ダメージ+15%"
+        "4_jp": [
+          "シールド強化"
+        ],
+        "5": [
+          "Enhances barrier strength",
+          "+15% damage"
         ],
         "5_kr": [
           "실드 강화",
           "피해량 +15%"
+        ],
+        "5_jp": [
+          "シールド強化",
+          "ダメージ+15%"
         ]
       },
+      "cd": "5",
       "wgr": 2,
-      "name_kr": "쿵! 쿵! 쿵! 땅!",
-      "name_jp": "レトリインパクト",
-      "true_desc_kr": "적 전체를 공격하고 체력 상황이 가장 나쁜 아군에게 <color=#28d9ed>실드</color>를 <color=#28d9ed>2턴</color> 동안 부여합니다. 실드량은 자신의 <color=#28d9ed>최대 체력</color>이 높을수록 증가합니다.",
-      "true_desc_jp": "敵全体にダメージを与え、残りHPが最も低い味方単体に<color=#28d9ed>シールド</color>を<color=#28d9ed>2ターン</color>の間付与する。自分の<color=#28d9ed>最大HP</color>が高いほどシールド量がUPする。"
+      "buff": [
+        "BT_SHIELD_BASED_CASTER",
+        "BT_ACTION_GAUGE"
+      ],
+      "debuff": [],
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Increases damage",
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP",
+          "cost": 80,
+          "level": 1
+        },
+        "SKT_BURST_2": {
+          "effect": "Increases damage",
+          "effect_kr": "피해 증가",
+          "effect_jp": "ダメージUP",
+          "cost": 120,
+          "level": 2
+        },
+        "SKT_BURST_3": {
+          "effect": "+50% Priority",
+          "effect_kr": "행동 게이지 +50%",
+          "effect_jp": "行動ゲージ50%UP",
+          "cost": 160,
+          "level": 3
+        }
+      }
     },
     "SKT_CHAIN_PASSIVE": {
-      "name": "Chain Passive",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Action Points of the caster.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to remove <color=#28d9ed>2</color> <color=#28d9ed>debuffs</color> from the caster.",
-      "DescID": "SKILL_DESC_2000048_Skill04_LV1,SKILL_DESC_2000048_Skill04_LV1,SKILL_DESC_2000048_Skill04_LV1,SKILL_DESC_2000048_Skill04_LV1,SKILL_DESC_2000048_Skill04_LV1",
-      "IconName": "Skill_ChainPassive_Water_Join",
       "NameIDSymbol": "4804",
-      "RangeType": "NONE",
-      "RangeType_fallback1": "NONE",
+      "IconName": "Skill_ChainPassive_Water_Join",
       "SkillType": "SKT_CHAIN_PASSIVE",
-      "SkipNameID": "SKILL_NAME_CHAIN_PASSIVE",
-      "TargetTeamType": "NONE",
-      "buff": "BT_AP_CHARGE",
-      "cd": null,
-      "debuff": [],
-      "description": [
-        "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>[Buff_V_2000048_chain_1_1]</color> Action Points of the caster.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>[Buff_C_2000048_backup_1_1]</color> chance to remove <color=#28d9ed>[Buff_V_2000048_backup_1_1]</color> <color=#28d9ed>debuffs</color> from the caster."
-      ],
-      "dual_buff": "BT_REMOVE_DEBUFF",
+      "name": "Chain Passive",
+      "name_kr": "체인 패시브",
+      "name_jp": "チェーンパッシブ",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Action Points of the caster.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to remove <color=#28d9ed>2</color> <color=#28d9ed>debuffs</color> from the caster.",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신의 AP를 <color=#28d9ed>25</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>100%</color> 확률로 자신의 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>2개</color> 해제합니다.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color> : 攻撃後、APを<color=#28d9ed>25</color>獲得する。\\n\\n<color=#ffd732>連携効果</color> : 攻撃後、<color=#28d9ed>100%</color>の確率で自分の<color=#28d9ed>弱体効果</color>を<color=#28d9ed>2個</color>解除する。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "3": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "4": [
-          "+5% Dual Attack and Skill Chain damage"
-        ],
-        "5": [
-          "+5% Dual Attack and Skill Chain damage",
-          "+1 Weakness Gauge damage"
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
         ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "3_kr": [
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
         "4_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
-        "4_kr": [
-          "협공/스킬 체인 피해량 +5%"
-        ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
         ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
         ]
       },
       "wgr": 3,
       "wgr_dual": 1,
-      "name_kr": "체인 패시브",
-      "name_jp": "チェーンパッシブ",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신의 AP를 <color=#28d9ed>25</color> 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>100%</color> 확률로 자신의 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>2개</color> 해제합니다.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color> : 攻撃後、APを<color=#28d9ed>25</color>獲得する。\\n\\n<color=#ffd732>連携効果</color> : 攻撃後、<color=#28d9ed>100%</color>の確率で自分の<color=#28d9ed>弱体効果</color>を<color=#28d9ed>2個</color>解除する。"
+      "cd": null,
+      "buff": [
+        "BT_AP_CHARGE"
+      ],
+      "debuff": [],
+      "dual_buff": [
+        "BT_REMOVE_DEBUFF"
+      ]
     }
-  },
-  "Fullname_kr": "리트리",
-  "Fullname_jp": "レトリ",
-  "VoiceActor": "VA. Stephanie Panisello",
-  "VoiceActor_jp": "CV.高森奈津美",
-  "VoiceActor_kr": "CV.김아롱"
+  }
 }
