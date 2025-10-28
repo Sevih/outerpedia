@@ -506,6 +506,8 @@ const kr = {
   'guides.og.desc': '모든 공략 모음: {list}.',
   'guides.twitter.title': 'Outerplane 가이드',
   'guides.twitter.desc': '최신 공략: {list}.',
+  'guides.spoilerFree.enable': '스포일러 방지 모드 활성화',
+  'guides.spoilerFree.disable': '스포일러 방지 모드 비활성화',
 
   "legal.meta.title": "법적 고지 | Outerpedia",
   "legal.meta.desc": "Outerpedia의 법적 면책 조항, 저작권 및 콘텐츠 사용 정보. Outerplane 비영리 팬 프로젝트.",

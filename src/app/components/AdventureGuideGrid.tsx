@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useI18n } from '@/lib/contexts/I18nContext'
 
 type GuideItem = {
   slug: string;
@@ -20,6 +21,7 @@ type Props = {
 
 export default function AdventureGuideGrid({ items }: Props) {
   const [spoilerFree, setSpoilerFree] = useState(true);
+  const { t } = useI18n();
 
   const grouped = items.reduce((acc: Record<string, GuideItem[]>, item) => {
     const match = item.slug.match(/^(S\d+)-/);
@@ -54,13 +56,13 @@ export default function AdventureGuideGrid({ items }: Props) {
           onClick={() => setSpoilerFree((v) => !v)}
           className="px-3 py-1 text-sm border border-neutral-600 rounded bg-neutral-800 hover:bg-neutral-700 transition"
         >
-          {spoilerFree ? 'Disable Spoiler-Free Mode' : 'Enable Spoiler-Free Mode'}
+          {spoilerFree ? t('guides.spoilerFree.disable') : t('guides.spoilerFree.enable')}
         </button>
       </div>
 
       {sortedSeasons.map((season) => (
         <div key={season}>
-          <h2 className="text-xl font-semibold text-white mb-4">{season} Adventure</h2>
+          <h2 className="text-xl font-semibold text-white mb-4">{season} {t('categories.adventure')}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {grouped[season].sort(sortByChapter).map((item) => {
               const [safeTitle] = item.title.split(':');

@@ -506,6 +506,8 @@ const en = {
   'guides.og.desc': 'All strategy guides in one place: {list}.',
   'guides.twitter.title': 'Outerplane Guides',
   'guides.twitter.desc': 'Latest guides: {list}.',
+  'guides.spoilerFree.enable': 'Enable Spoiler-Free Mode',
+  'guides.spoilerFree.disable': 'Disable Spoiler-Free Mode',
 
   "legal.meta.title": "Legal Notice & Disclaimer | Outerpedia",
   "legal.meta.desc": "Legal disclaimer, copyright, and content usage information for Outerpedia, a non-commercial fan project dedicated to Outerplane.",

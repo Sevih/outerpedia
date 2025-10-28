@@ -506,6 +506,8 @@ const jp = {
   'guides.og.desc': 'すべての攻略ガイド: {list}。',
   'guides.twitter.title': 'Outerplane 攻略ガイド',
   'guides.twitter.desc': '最新ガイド一覧: {list}。',
+  'guides.spoilerFree.enable': 'ネタバレ防止モードを有効化',
+  'guides.spoilerFree.disable': 'ネタバレ防止モードを無効化',
 
   "legal.meta.title": "法的情報 | Outerpedia",
   "legal.meta.desc": "Outerpediaの法的免責事項、著作権、コンテンツ使用情報。Outerplaneの非営利ファンプロジェクト。",
