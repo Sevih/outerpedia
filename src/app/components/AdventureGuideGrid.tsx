@@ -64,6 +64,14 @@ export default function AdventureGuideGrid({ items }: Props) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {grouped[season].sort(sortByChapter).map((item) => {
               const [safeTitle] = item.title.split(':');
+              // Extract mode from title
+              const modeMatch = safeTitle.match(/(Normal|Hard|ノーマル|ハード|노말|하드)/);
+              const mode = modeMatch ? modeMatch[1] : '';
+              // Extract from slug: "S1-8-5" + mode → "S1 Normal 8-5"
+              const slugMatch = item.slug.match(/^(S\d+)-(\d+)-(\d+)/);
+              const spoilerFreeTitle = slugMatch
+                ? `${slugMatch[1]}${mode ? ' ' + mode : ''} ${slugMatch[2]}-${slugMatch[3]}`
+                : safeTitle;
 
               return (
                 <Link
@@ -74,7 +82,7 @@ export default function AdventureGuideGrid({ items }: Props) {
                   <div className="flex items-start gap-4 mb-3">
                     {spoilerFree ? (
                       <div className="w-full">
-                        <h2 className="text-white text-lg font-bold">{safeTitle.trim()}</h2>
+                        <h2 className="text-white text-lg font-bold">{spoilerFreeTitle.trim()}</h2>
                         <div className="mt-2 text-sm text-neutral-400 flex flex-col sm:flex-row sm:justify-between sm:items-center border-t border-neutral-700 pt-2 gap-1">
                           <span className="flex items-start gap-1">
                             ✍️{' '}
