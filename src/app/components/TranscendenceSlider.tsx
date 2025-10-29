@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import Image from 'next/image';
 import type { TenantKey } from '@/tenants/config';
 
@@ -10,6 +10,7 @@ type Props = {
   transcendData: Record<string, string | null>; // déjà localisé côté data
   lang: Lang;
   t: (key: string) => string; // fonction de traduction
+  rarity?: number; // rareté du personnage (1-3)
 };
 
 type LevelId =
@@ -138,17 +139,44 @@ function parseNumericBonus(s: string):
 }
 
 
-export default function TranscendenceSlider({ transcendData, lang, t }: Props) {
+export default function TranscendenceSlider({ transcendData, lang, t, rarity = 3 }: Props) {
   /** Construit la liste des steps à partir des clés présentes (logic IDs) */
 
   const steps = useMemo<Step[]>(() => {
-    const order: LevelId[] = ['1', '2', '3', '4', '4_1', '4_2', '5', '5_1', '5_2', '5_3', '6'];
+    // Rareté 1-2 : niveaux simples (1, 2, 3, 4, 5, 6)
+    // Rareté 3 : niveaux avec subdivisions (3, 4_1, 4_2, 5_1, 5_2, 5_3, 6)
+    const order: LevelId[] = rarity === 3
+      ? ['3', '4_1', '4_2', '5_1', '5_2', '5_3', '6']
+      : ['1', '2', '3', '4', '5', '6'];
+
     return order
       .filter((k) => transcendData[k] != null)
       .map((k) => ({ key: k, label: t(LEVEL_KEYS[k]) }));
-  }, [transcendData, t]);
+  }, [transcendData, t, rarity]);
 
-  const [index, setIndex] = useState(0);
+  // Initialise le slider au niveau correspondant à la rareté
+  // Rareté 1-2 : commence au niveau de rareté (1 ou 2)
+  // Rareté 3 : commence au niveau 3 (premier niveau disponible)
+  const { initialIndex, minIndex } = useMemo(() => {
+    if (!steps.length) return { initialIndex: 0, minIndex: 0 };
+
+    // Pour rareté 3, cherche le niveau "3" (premier disponible)
+    // Pour rareté 1-2, cherche le niveau correspondant à la rareté
+    const targetLevel = Math.min(Math.max(rarity, 1), 3).toString() as LevelId;
+    const idx = steps.findIndex((step) => step.key === targetLevel);
+
+    // Si le niveau cible n'existe pas, prend le premier disponible
+    const validIdx = idx >= 0 ? idx : 0;
+    return { initialIndex: validIdx, minIndex: validIdx };
+  }, [steps, rarity]);
+
+  const [index, setIndex] = useState(initialIndex);
+
+  // Réinitialise l'index si la rareté ou les steps changent
+  useEffect(() => {
+    setIndex(initialIndex);
+  }, [initialIndex]);
+
   const currentKey = steps[index]?.key as LevelId | undefined;
 
   const activeBonuses = useMemo(() => {
@@ -159,7 +187,8 @@ export default function TranscendenceSlider({ transcendData, lang, t }: Props) {
     const uniqueEffects: Map<string, string> = new Map();
     const otherBonuses: Set<string> = new Set();
 
-    for (let i = 0; i <= index; i++) {
+    // Cumule les bonus depuis minIndex (rareté) jusqu'à l'index actuel
+    for (let i = minIndex; i <= index; i++) {
       const raw = transcendData[steps[i].key];
       if (!raw) continue;
 
@@ -248,7 +277,7 @@ export default function TranscendenceSlider({ transcendData, lang, t }: Props) {
     for (const v of otherBonuses) result.push(v);
 
     return result;
-  }, [index, steps, transcendData, lang]);
+  }, [index, minIndex, steps, transcendData, lang]);
 
 
   if (!steps.length || !currentKey) return null;
@@ -258,8 +287,9 @@ export default function TranscendenceSlider({ transcendData, lang, t }: Props) {
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 flex-grow max-w-[260px]">
           <button
-            onClick={() => setIndex((p) => Math.max(p - 1, 0))}
-            className="text-sm bg-gray-700 hover:bg-gray-600 text-white w-6 h-6 flex items-center justify-center rounded"
+            onClick={() => setIndex((p) => Math.max(p - 1, minIndex))}
+            disabled={index <= minIndex}
+            className="text-sm bg-gray-700 hover:bg-gray-600 text-white w-6 h-6 flex items-center justify-center rounded disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous"
           >
             –
@@ -268,11 +298,11 @@ export default function TranscendenceSlider({ transcendData, lang, t }: Props) {
           <div className="relative flex-grow max-w-[260px] h-2 bg-gray-700 rounded-full overflow-hidden">
             <div
               className="absolute top-0 left-0 h-full bg-yellow-500 transition-all duration-300"
-              style={{ width: `${(index / (steps.length - 1)) * 100}%` }}
+              style={{ width: `${((index - minIndex) / (steps.length - 1 - minIndex)) * 100}%` }}
             />
             <input
               type="range"
-              min={0}
+              min={minIndex}
               max={steps.length - 1}
               value={index}
               onChange={(e) => setIndex(Number(e.target.value))}
@@ -283,7 +313,8 @@ export default function TranscendenceSlider({ transcendData, lang, t }: Props) {
 
           <button
             onClick={() => setIndex((p) => Math.min(p + 1, steps.length - 1))}
-            className="text-sm bg-gray-700 hover:bg-gray-600 text-white w-6 h-6 flex items-center justify-center rounded"
+            disabled={index >= steps.length - 1}
+            className="text-sm bg-gray-700 hover:bg-gray-600 text-white w-6 h-6 flex items-center justify-center rounded disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next"
           >
             +

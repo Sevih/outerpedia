@@ -1,11 +1,8 @@
 //guides/page
 import GuideCategoryList from '@/app/components/CategoryCard'
 import type { Metadata } from 'next'
-import rawCategories from '@/data/guides/categories.json'
+import { categoryMeta, getCategoryTitle } from '@/lib/guideCategories'
 import { getTenantServer } from '@/tenants/tenant.server'
-import type { TenantKey } from '@/tenants/config'
-import type { Localized } from '@/types/common'
-import { lRec } from '@/lib/localize'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 import { createPageMetadata } from '@/lib/seo'
@@ -15,48 +12,30 @@ import { websiteLd, breadcrumbLd, guidesWebPageLd } from './jsonld'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-// ---- Types & helpers
-type Category = {
-  title: string | Localized
-  description: string | Localized
-  keywords?: string[]
-  icon: string
-  valid: boolean
-}
-
-const categories = rawCategories as Record<string, Category>
-const categoryMeta: Category[] = Object.values(categories)
-
-function getTitle(cat: Category, lang: TenantKey): string {
-  return typeof cat.title === 'string' ? cat.title : lRec(cat.title, lang)
-}
-
 // ---- Metadata (via helper site-wide)
 export async function generateMetadata(): Promise<Metadata> {
   const { key: langKey, domain } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
 
   // Dans generateMetadata()
-  const allKeywords = categoryMeta
-    .filter(cat => cat.valid)
-    .flatMap(cat => cat.keywords || []) // <-- récupère tous les keywords
+  const categoryEntries = Object.entries(categoryMeta).filter(([, cat]) => cat.valid)
+
+  const allKeywords = categoryEntries.flatMap(([, cat]) => cat.keywords || [])
 
   const listForKeywords = Array.from(
     new Set([
-      ...allKeywords, // <-- inclus les keywords
-      ...categoryMeta
-        .filter(cat => cat.valid)
-        .flatMap(cat => {
-          const t = getTitle(cat, langKey)
-          const base = t.replace(/ Guides$/i, '')
-          return [t, base]
-        })
+      ...allKeywords,
+      ...categoryEntries.flatMap(([slug]) => {
+        const title = getCategoryTitle(slug, t)
+        const base = title.replace(/ Guides$/i, '')
+        return [title, base]
+      })
         .map(k => k.toLowerCase())
     ])
   )
 
-  const listForDesc = categoryMeta
-    .filter(c => c.valid)
-    .map(c => getTitle(c, langKey).replace(/ Guides$/i, ''))
+  const listForDesc = categoryEntries
+    .map(([slug]) => getCategoryTitle(slug, t).replace(/ Guides$/i, ''))
     .join(', ')
 
   const path = '/guides' as `/${string}`
@@ -106,9 +85,9 @@ export default async function GuidesHome() {
   const iconRel = '/images/guides/CM_GuideQuest_Navigate.png'
   const iconAbs = `https://${domain}${iconRel}`
 
-  const categoryList = categoryMeta
-    .filter(c => c.valid)
-    .map(c => getTitle(c, langKey).replace(/ Guides$/i, ''))
+  const categoryList = Object.entries(categoryMeta)
+    .filter(([, cat]) => cat.valid)
+    .map(([slug]) => getCategoryTitle(slug, t).replace(/ Guides$/i, ''))
     .join(', ')
 
   return (
@@ -132,7 +111,7 @@ export default async function GuidesHome() {
       />
 
       <h1 className="text-3xl font-bold mb-6">{titleH1}</h1>
-      <GuideCategoryList lang={langKey} />
+      <GuideCategoryList />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 // app/guides/[category]/[slug]/page.tsx
 import rawGuides from '@/data/guides/guides-ref.json'
-import rawCategoryMeta from '@/data/guides/categories.json'
+import { getCategoryTitle } from '@/lib/guideCategories'
 import { notFound } from 'next/navigation'
 import GuideContentWrapper from './GuideContentWrapper'
 import Link from 'next/link'
@@ -30,16 +30,8 @@ type Guide = {
   second_image?: string
 }
 
-type CategoryMeta = {
-  title: string | Localized
-  description: string | Localized
-  icon: string
-  valid: boolean
-}
-
 type Props = { params: Promise<{ category: string; slug: string }> }
 
-const categoryMeta = rawCategoryMeta as Record<string, CategoryMeta>
 const guides = rawGuides as Record<string, Guide>
 
 // ---------- Static params ----------
@@ -53,6 +45,7 @@ export async function generateStaticParams() {
 // ---------- Metadata ----------
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { key: langKey, domain } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
   const { category, slug } = await params
   const guide = guides[slug]
 
@@ -64,8 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const meta = categoryMeta[category]
-  const catTitle = getLocalized(meta.title, langKey)
+  const catTitle = getCategoryTitle(category, t)
   const guideTitle = getLocalized(guide.title, langKey)
   const guideDesc = getLocalized(guide.description, langKey)
 
@@ -108,13 +100,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // ---------- Page ----------
 export default async function GuidePage({ params }: Props) {
   const { key: langKey, domain } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
   const { category, slug } = await params
   const guide = guides[slug]
 
   if (!guide || guide.category !== category) notFound()
 
-  const meta = categoryMeta[category]
-  const catTitle = getLocalized(meta.title, langKey)
+  const catTitle = getCategoryTitle(category, t)
   const guideTitle = getLocalized(guide.title, langKey)
   const guideDesc = getLocalized(guide.description, langKey)
 
@@ -133,8 +125,6 @@ export default async function GuidePage({ params }: Props) {
     guide.category === 'monad-gate'
       ? `https://${domain}/images/guides/monad-gate/CM_Adventure_MonadGate.png`
       : `https://${domain}/images/guides/${guide.category}/${slug}_portrait.png`
-
-  const { t } = await getServerI18n(langKey)
 
   return (
     <div className="p-6">
@@ -207,7 +197,7 @@ export default async function GuidePage({ params }: Props) {
         {/* Overlay titre */}
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-white text-center px-4">
           <p className="guide-title text-xs sm:text-sm uppercase tracking-wide font-semibold mb-3">
-            {category.replace(/-/g, ' ')}
+            {catTitle}
           </p>
           <p className="guide-title text-base sm:text-lg md:text-xl font-bold leading-tight max-w-full break-words">
             {guideTitle}

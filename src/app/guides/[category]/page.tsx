@@ -2,7 +2,7 @@
 import guidesRaw from '@/data/guides/guides-ref.json'
 import GuideCardGrid from '@/app/components/GuideCardGrid'
 import UnderConstruction from '@/app/components/UnderConstruction'
-import rawCategoryMeta from '@/data/guides/categories.json'
+import { categoryMeta, getCategoryTitle, getCategoryDescription } from '@/lib/guideCategories'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -38,14 +38,6 @@ type Guide = {
   weight?: number
 }
 
-type CategoryMeta = {
-  title: string | Localized
-  description: string | Localized
-  icon: string // sans extension (ex: '/images/guides/CM_GuideQuest_Navigate')
-  valid: boolean
-}
-
-const categoryMeta = rawCategoryMeta as Record<string, CategoryMeta>
 const guides = guidesRaw as Record<string, Guide>
 
 type Props = { params: { category: string } }
@@ -53,6 +45,7 @@ type Props = { params: { category: string } }
 // ---------- Metadata ----------
 export async function generateMetadata({ params }: { params: Promise<Props['params']> }): Promise<Metadata> {
   const { key: langKey, domain } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
   const { category } = await params
 
   const meta = categoryMeta[category]
@@ -64,8 +57,8 @@ export async function generateMetadata({ params }: { params: Promise<Props['para
     }
   }
 
-  const metaTitle = getLocalized(meta.title, langKey)
-  const metaDesc = getLocalized(meta.description, langKey)
+  const metaTitle = getCategoryTitle(category, t)
+  const metaDesc = getCategoryDescription(category, t)
 
   const path = `/guides/${category}` as `/${string}`
   const iconAbs = `https://${domain}${meta.icon}.png` // règle PNG metadata respectée
@@ -98,13 +91,14 @@ export async function generateMetadata({ params }: { params: Promise<Props['para
 // ---------- Page ----------
 export default async function CategoryPage({ params }: { params: Promise<Props['params']> }) {
   const { key: langKey, domain } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
   const { category } = await params
 
   const meta = categoryMeta[category]
   if (!meta) return <UnderConstruction />
 
-  const metaTitle = getLocalized(meta.title, langKey)
-  const metaDesc = getLocalized(meta.description, langKey)
+  const metaTitle = getCategoryTitle(category, t)
+  const metaDesc = getCategoryDescription(category, t)
 
   // helper normalisation du weight
   const toWeight = (w: unknown) => {
@@ -137,7 +131,6 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
     return a.title.localeCompare(b.title)
   })
 
-  const { t } = await getServerI18n(langKey)
   const path = `/guides/${category}`
 
   return (

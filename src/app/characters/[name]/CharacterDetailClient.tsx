@@ -33,7 +33,7 @@ import formatEffectText from '@/utils/formatText'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
 import abbrevData from '@/data/abbrev.json'
-import { l, lRec } from '@/lib/localize'
+import { l, lRec, lEnhancement } from '@/lib/localize'
 
 type AbbrevEntry = string | { en: string; jp?: string; kr?: string }
 const abbrev = abbrevData as Record<string, AbbrevEntry>
@@ -321,42 +321,11 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
         )
     }
 
-    type EnhRecord = Record<string, string | string[] | undefined>
-
-    function isRecordArray(val: unknown): val is Record<string, string>[] {
-        return Array.isArray(val) && val.every(v => v && typeof v === 'object' && !Array.isArray(v))
-    }
-
-    /** Normalise skill.enhancement (array de records) en objet plat { "2": [...], "2_jp": [...], ... } */
-    function normalizeEnhancement(enh: Skill['enhancement']): EnhRecord {
-        if (!enh) return {}
-        if (isRecordArray(enh)) {
-            const out: EnhRecord = {}
-            for (const obj of enh) {
-                for (const [k, v] of Object.entries(obj)) {
-                    // conserve string[] si déjà array, sinon wrap en array
-                    const arr = Array.isArray(v) ? v : typeof v === 'string' ? [v] : []
-                    // fusion: si la clé existe déjà, concatène
-                    if (out[k]) {
-                        const cur = Array.isArray(out[k]) ? out[k] as string[] : typeof out[k] === 'string' ? [out[k] as string] : []
-                        out[k] = [...cur, ...arr]
-                    } else {
-                        out[k] = arr
-                    }
-                }
-            }
-            return out
-        }
-        // Si jamais un objet plat arrive (incohérence de type), le tolérer
-        if (enh && typeof enh === 'object') return enh as unknown as EnhRecord
-        return {}
-    }
-
-    /** Récupère les lignes pour un niveau (ex '2') selon la langue, fallback EN */
-    function pickEnhancementForLevel(enh: EnhRecord, level: string, langKey: TenantKey): string[] {
-        const value = l(enh as Record<string, unknown>, level, langKey)
-        if (!value) return []
-        return Array.isArray(value) ? value : [value as string]
+    /** Récupère les enhancements localisés pour un skill */
+    function getLocalizedEnhancements(skill: Skill | undefined): Record<string, string[]> {
+        if (!skill?.enhancement) return {}
+        const rawEnh = skill.enhancement as unknown as Record<string, string[]>
+        return lEnhancement(rawEnh, langKey) ?? {}
     }
 
     const ln = (s?: Skill) => (s ? l(s, 'name', langKey) : undefined);
@@ -740,7 +709,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
 
                                 {character.transcend && (
                                     <div className="w-full md:w-[400px] min-w-[320px]">
-                                        <TranscendenceSlider transcendData={localizedTranscend} lang={langKey} t={t} />
+                                        <TranscendenceSlider transcendData={localizedTranscend} lang={langKey} t={t} rarity={character.Rarity} />
                                     </div>
                                 )}
                             </div>
@@ -791,19 +760,19 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                             <p className="font-bold mb-1">{t('enhancements_label')}</p>
                                             <div className="space-y-2">
                                                 {(() => {
-                                                    const enh = normalizeEnhancement(skill.enhancement)
+                                                    const enh = getLocalizedEnhancements(skill)
                                                     const levels = Object.keys(enh)
-                                                        .filter(k => /^\d+$/.test(k))           // ne garder que "2","3","4",...
-                                                        .sort((a, b) => Number(a) - Number(b))  // tri croissant
+                                                        .filter(k => /^\d+$/.test(k))
+                                                        .sort((a, b) => Number(a) - Number(b))
 
                                                     return levels.map(level => {
-                                                        const lines = pickEnhancementForLevel(enh, level, langKey)
-                                                        if (!lines.length) return null
+                                                        const lines = enh[level]
+                                                        if (!lines || !lines.length) return null
                                                         return (
-                                                            <div key={level} className="flex">
+                                                            <div key={level} className="flex gap-2">
                                                                 <div className="w-10 font-bold text-white flex-shrink-0">+{parseInt(level, 10)}:</div>
-                                                                <div className="text-gray-300 whitespace-pre-wrap ml-10">
-                                                                    {lines.map((line, i) => <div key={i}>{formatEffectText(line)}</div>)}
+                                                                <div className="text-gray-300 whitespace-pre-wrap flex-1">
+                                                                    {lines.map((line: string, i: number) => <div key={i}>{formatEffectText(line)}</div>)}
                                                                 </div>
                                                             </div>
                                                         )
@@ -962,19 +931,19 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                                             <p className="font-bold mb-1">{t('enhancements_label')}</p>
                                                             <div className="space-y-2">
                                                                 {(() => {
-                                                                    const enh = normalizeEnhancement(s.enhancement)
+                                                                    const enh = getLocalizedEnhancements(s)
                                                                     const levels = Object.keys(enh)
                                                                         .filter(k => /^\d+$/.test(k))
                                                                         .sort((a, b) => Number(a) - Number(b))
 
                                                                     return levels.map(level => {
-                                                                        const lines = pickEnhancementForLevel(enh, level, langKey)
-                                                                        if (!lines.length) return null
+                                                                        const lines = enh[level]
+                                                                        if (!lines || !lines.length) return null
                                                                         return (
-                                                                            <div key={level} className="flex">
+                                                                            <div key={level} className="flex gap-2">
                                                                                 <div className="w-10 font-bold text-white flex-shrink-0">+{parseInt(level, 10)}:</div>
-                                                                                <div className="text-gray-300 whitespace-pre-wrap">
-                                                                                    {lines.map((line, i) => (<div key={i}>{formatEffectText(line)}</div>))}
+                                                                                <div className="text-gray-300 whitespace-pre-wrap flex-1">
+                                                                                    {lines.map((line: string, i: number) => (<div key={i}>{formatEffectText(line)}</div>))}
                                                                                 </div>
                                                                             </div>
                                                                         )

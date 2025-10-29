@@ -1,17 +1,16 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import categories from '@/data/guides/categories.json'
-import type { TenantKey } from '@/tenants/config'
-import { lRec } from '@/lib/localize'
+import { categoryMeta } from '@/lib/guideCategories'
+import { useI18n } from '@/lib/contexts/I18nContext'
 
-type Props = { lang: TenantKey }
+export default function GuideCategoryList() {
+  const { t } = useI18n()
 
-export default function GuideCategoryList({ lang = 'en' }: Props) {
-  const items = Object.entries(categories).map(([slug, cat]) => ({
+  const items = Object.entries(categoryMeta).map(([slug, cat]) => ({
     slug,
-    title: lRec(cat.title, lang),
-    description: lRec(cat.description, lang),
+    title: t(`guides.categories.${slug}.title`),
+    description: t(`guides.categories.${slug}.description`),
     icon: `${cat.icon}.webp`,
     valid: cat.valid,
   }))
