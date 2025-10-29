@@ -58,7 +58,7 @@
                 "bg": "2"
               },
               "malus": {
-                "effect": "Team restriction (You cannot use Ranger heroes in your team)",
+                "effect": "Team restriction (You cannot use Ranger heroes)",
                 "ratio": "+40%",
                 "image": "Ranger",
                 "bg": "2"
@@ -72,7 +72,7 @@
                 "bg": "1"
               },
               "malus": {
-                "effect": "Team restriction (You cannot use Dark heroes in your team)",
+                "effect": "Team restriction (You cannot use Dark heroes)",
                 "ratio": "+65%",
                 "image": "Dark",
                 "bg": "3"
@@ -182,7 +182,7 @@
                 "bg": "2"
               },
               "malus": {
-                "effect": "Team restriction (You cannot use Mage heroes in your team)",
+                "effect": "Team restriction (You cannot use Mage heroes)",
                 "ratio": "+40%",
                 "image": "Mage",
                 "bg": "2"
@@ -196,7 +196,7 @@
                 "bg": "2"
               },
               "malus": {
-                "effect": "Team restriction (You can one use Striker heroes in your team)",
+                "effect": "Team restriction (You can only use Striker heroes)",
                 "ratio": "+40%",
                 "image": "Striker",
                 "bg": "2"

@@ -58,7 +58,7 @@
                 "bg": "1"
               },
               "malus": {
-                "effect": "Team restriction (You cannot use stricker heroes in your team)",
+                "effect": "Team restriction (You cannot use Stricker heroes)",
                 "ratio": "+40%",
                 "image": "Striker",
                 "bg": "2"
@@ -155,7 +155,7 @@
                 "bg": "3"
               },
               "malus": {
-                "effect": "Team restriction (You cannot use ranger heroes in your team)",
+                "effect": "Team restriction (You cannot use Ranger heroes)",
                 "ratio": "+40%",
                 "image": "Ranger",
                 "bg": "2"
@@ -183,7 +183,7 @@
                 "bg": "2"
               },
               "malus": {
-                "effect": "Team restriction (You cannot use mage heroes in your team)",
+                "effect": "Team restriction (You cannot use Mage heroes)",
                 "ratio": "+40%",
                 "image": "Mage",
                 "bg": "2"
@@ -197,7 +197,7 @@
                 "bg": "2"
               },
               "malus": {
-                "effect": "Team restriction (You can one use earth heroes in your team)",
+                "effect": "Team restriction (You can only use Earth heroes)",
                 "ratio": "+65%",
                 "image": "Earth",
                 "bg": "3"

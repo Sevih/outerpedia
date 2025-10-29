@@ -58,7 +58,7 @@
                 "bg": "1"
               },
               "malus": {
-                "effect": "Not Allowed on Team (Rangers cannot be deployed)",
+                "effect": "Team restriction (You cannot use Rangers heroes)",
                 "ratio": "+40%",
                 "image": "Ranger",
                 "bg": "2"
@@ -72,7 +72,7 @@
                 "bg": "3"
               },
               "malus": {
-                "effect": "Not Allowed on Team (Only Light allies can be deployed)",
+                "effect": "Team restriction (You can only use Light heroes)",
                 "ratio": "+65%",
                 "image": "Light",
                 "bg": "3"
@@ -198,7 +198,7 @@
                 "bg": "1"
               },
               "malus": {
-                "effect": "Team Restriction (You cannot use striker heroes in your team)",
+                "effect": "Team Restriction (You cannot use striker heroes)",
                 "ratio": "+40%",
                 "image": "Striker",
                 "bg": "2"
