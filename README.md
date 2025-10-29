@@ -61,15 +61,9 @@
 4. **Gear Usage Stats** - Character gear popularity analysis
 5. **Most Used Unit** - Meta analysis
 6. **Interactive Tier Lists** - PvE & PvP rankings with filtering
-7. **Event Tracker** - Community event history & active events
-8. **Coupon Codes** - Active coupon code manager with copy functionality
-9. **Patch History** - Version changelog tracking
+7. **Coupon Codes** - Active coupon code manager with copy functionality
+8. **Patch History** - Version changelog tracking
 
-### Administrative Tools
-- Monad editor (boss/puzzle mode)
-- Asset verification and download
-- Script execution interface
-- File management utilities
 
 ### Technical Features
 - Lightning Fast - Static generation with ISR, CDN optimized
@@ -185,6 +179,7 @@ The app will be available at:
 - Local EN: `https://outerpedia.local/`
 - Local JP: `https://jp.outerpedia.local/`
 - Local KR: `https://kr.outerpedia.local/`
+- Local ZH: `https://zh.outerpedia.local/`
 
 ### Development Scripts
 
@@ -301,7 +296,6 @@ outerpedia/
 │   │
 │   ├── data/                    # Game data (JSON)
 │   │   ├── char/                # 107 character files
-│   │   ├── events/              # Event registry
 │   │   ├── guides/              # Guide categories
 │   │   ├── _allCharacters.json  # Generated character index
 │   │   ├── amulet.json          # Equipment data
@@ -391,7 +385,6 @@ Join the [EvaMains Discord](https://discord.com/invite/keGhVQWsHv) to discuss co
 
 ### In Progress
 - Japanese, Korean, and Chinese translations
-- User contribution tools for guides/tier lists
 - Clickable stats in guide text
 - Project health dashboard
 
