@@ -7,6 +7,7 @@ import path from 'node:path'
 const DOMAIN_EN = 'https://outerpedia.com'
 const DOMAIN_JP = 'https://jp.outerpedia.com'
 const DOMAIN_KR = 'https://kr.outerpedia.com'
+const DOMAIN_ZH = 'https://zh.outerpedia.com'
 
 // ——— Helpers ———
 const ROOT = process.cwd()
@@ -111,6 +112,7 @@ function renderSitemapXml(pages: Page[]): string {
         const en = `${DOMAIN_EN}${p.path}`
         const ja = `${DOMAIN_JP}${p.path}`
         const ko = `${DOMAIN_KR}${p.path}`
+        const zh = `${DOMAIN_ZH}${p.path}`
         const last = p.lastmod ? `<lastmod>${p.lastmod}</lastmod>` : ''
         return `
   <url>
@@ -119,6 +121,7 @@ function renderSitemapXml(pages: Page[]): string {
     <xhtml:link rel="alternate" hreflang="en" href="${xmlEscape(en)}"/>
     <xhtml:link rel="alternate" hreflang="ja" href="${xmlEscape(ja)}"/>
     <xhtml:link rel="alternate" hreflang="ko" href="${xmlEscape(ko)}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="${xmlEscape(zh)}"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${xmlEscape(en)}"/>
   </url>`.trim()
     }).join('\n')
