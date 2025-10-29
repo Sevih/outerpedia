@@ -46,7 +46,7 @@ export default function RavenousWolfKingZiggsaronGuide() {
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li><strong>Passive:</strong> Permanent <EffectInlineTag name="BT_STAT|ST_ATK" type="debuff" /> (irremovable)</li>
         <li>Inflicts <EffectInlineTag name="BT_SEALED" type="debuff" /> at the start of each turn (1 turn)</li>
-        <li><strong>Disables:</strong> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" /></li>
+        <li><strong>Disables:</strong> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" /></li>
         <li><strong>Damage Reduction:</strong> Takes reduced damage from non-Rangers and -50% WG damage from non-Water units</li>
         <li><strong>Enrage:</strong> Every 4 turns, lasts 3 turns – Enrage Ult is lethal</li>
         <li><strong>S1:</strong> <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> 2 buffs and deals greatly increased damage to Rangers</li>

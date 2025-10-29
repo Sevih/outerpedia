@@ -47,7 +47,7 @@ export default function IrregularMutatedWyvreGuide() {
             <GuideHeading level={3}>Strategy Overview</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>Permanent <EffectInlineTag name="BT_IMMUNE" type="buff" /></li>
-                <li><EffectInlineTag name="BT_STUN" type="debuff" /> everyone on Non-attack and <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /></li>
+                <li><EffectInlineTag name="BT_STUN" type="debuff" /> everyone on Non-attack and <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /></li>
                 <li>Non critical hit makes him recovers 50% of WG</li>
                 <li><strong>S3:</strong> Attacks all enemies, 3 turns <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE" type="debuff" /> on highest attack hero, 3 turn  <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE" type="buff" /> on the boss</li>
                 <li><strong>S2:</strong> 3 turn <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> on the boss, <EffectInlineTag name="BT_STAT|ST_CRITICAL_DMG_RATE" type="buff" /> on the team</li>

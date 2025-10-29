@@ -42,17 +42,17 @@
     "monad-eva": {
         "pro": [
             "has built-in {B/BT_CALL_BACKUP}",
-            "supports the team with {B/BT_INVINCIBLE} {B/SYS_REVENGE_HEAL} {B/BT_REVIVAL} {B/BT_AP_CHARGE}"
+            "supports the team with {B/BT_INVINCIBLE} {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK} {B/BT_REVIVAL} {B/BT_AP_CHARGE}"
         ],
         "con": [
             "needs 5-star transcendence for double {B/BT_CALL_BACKUP}",
-            "needs her exclusive equipment to heal when using {B/SYS_REVENGE_HEAL}"
+            "needs her exclusive equipment to heal when using {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}"
         ]
     },
     "nella": {
         "pro": [
             "has built-in {B/BT_CALL_BACKUP}",
-            "supports the team with {B/BT_RESURRECTION_G} {B/SYS_REVENGE_HEAL} {B/BT_IMMUNE} {B/BT_AP_CHARGE}"
+            "supports the team with {B/BT_RESURRECTION_G} {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK} {B/BT_IMMUNE} {B/BT_AP_CHARGE}"
         ],
         "con": [
             "has no way to cleanse debuffs outside preventing them with {B/BT_IMMUNE}"

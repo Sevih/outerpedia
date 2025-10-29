@@ -15,7 +15,7 @@ export default function TyrantGuide() {
                 <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_DETONATE" type="debuff" /> all <EffectInlineTag name="BT_DOT_CURSE" type="debuff" />. If target&apos;s HP &lt; 70%, inflict <EffectInlineTag name="BT_FREEZE" type="debuff" /> (ignore immunity)</li>
                 <li><strong>Passive</strong>: When attacking while granted <EffectInlineTag name="BT_STAT|ST_BUFF_CHANCE" type="buff" />, inflict <EffectInlineTag name="BT_DOT_CURSE_IR" type="debuff" /> 9 turns (ignore immunity).</li>
                 <li><strong>Passive</strong>: When attacking <EffectInlineTag name="BT_FREEZE" type="debuff" /> target, penetrate 100% of target&apos;s defense and <EffectInlineTag name="BT_SEALED_RESURRECTION" type="debuff" /> if target is killed.</li>
-                <li><strong>Passive</strong>: Does not trigger <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />, <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" /> or <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />.</li>   
+                <li><strong>Passive</strong>: Does not trigger <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />, <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" /> or <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />.</li>   
                 <li><strong>Enrage</strong>: Every 10 enemies actions. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />.</li>
                 <li><strong>Enrage Ultimate</strong>: AoE used when enrage ends. Inflict <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> 9 turns.</li>
             </ul>

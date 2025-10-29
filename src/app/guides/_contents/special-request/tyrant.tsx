@@ -29,7 +29,7 @@ export default function TyrantGuide() {
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>Upon entering the battle, you will be instantly stacked with <EffectInlineTag name="BT_DOT_POISON" type="debuff" />, <EffectInlineTag name="BT_DOT_BLEED" type="debuff" />, and <EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /> but so will the boss.</li>
                                 <li>These DoTs will kill you very quickly if not cleansed immediately.</li>
-                                <li>Since they are applied at the start of battle, <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" /> that cleanse like <CharacterLinkCard name="Tio" />, <CharacterLinkCard name="Meva" />, <CharacterLinkCard name="Stella" /> will not trigger.</li>
+                                <li>Since they are applied at the start of battle, <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" /> that cleanse like <CharacterLinkCard name="Tio" />, <CharacterLinkCard name="Meva" />, <CharacterLinkCard name="Stella" /> will not trigger.</li>
                                 <li>Units with AoE cleansing are very important.</li>
                                 <li><CharacterLinkCard name="Dianne" />&#39;s S3 completely trivializes this boss by cleansing the full duration of all debuffs.</li>
                                 <li><CharacterLinkCard name="Saeran" />&#39;s Skill 2 Burst 2 is also viable, but you need to build enough AP in the first area to use it immediately.</li>

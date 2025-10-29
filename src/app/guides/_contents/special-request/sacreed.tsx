@@ -50,8 +50,8 @@ export default function SacreedGuardian13Guide() {
                                 <li>Debuff the boss consistently to delay its AoE and S2 skills.</li>
 
                                 <li>Healing is optional, focus on lockdown and bursting the boss quickly before it gains buffs.</li>
-                                <li>Stage 12: The boss heals when these effects are triggered: <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />, <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" />, and <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />.</li>
-                                <li>Stage 13 : The boss negates <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> characters like <CharacterLinkCard name="Demiurge Stella" /> and <CharacterLinkCard name="Stella" /> are immune to stun but won&apos;t trigger their passives.</li>
+                                <li>Stage 12: The boss heals when these effects are triggered: <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />, <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" />, and <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />.</li>
+                                <li>Stage 13 : The boss negates <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> characters like <CharacterLinkCard name="Demiurge Stella" /> and <CharacterLinkCard name="Stella" /> are immune to stun but won&apos;t trigger their passives.</li>
                             </ul>
 
                             <hr className="my-6 border-neutral-700" />

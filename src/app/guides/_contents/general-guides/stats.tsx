@@ -363,7 +363,7 @@ function CombatBasicsContent() {
                                                         </li>
                                                         <li>Extra hits are triggered, such as <SkillInline character="Ryu Lion" skill="S2" />.</li>
                                                         <li>Ally reactions, like <SkillInline character="Caren" skill="S2" />, may also trigger. These follow-up effects are resolved in positional order: <strong>Front-right → Top → Bottom → Back-left</strong>.</li>
-                                                        <li>Enemy reactions such as <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />, <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" /> or <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> may occur, and also follow this positional order.</li>
+                                                        <li>Enemy reactions such as <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />, <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" /> or <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> may occur, and also follow this positional order.</li>
                                                     </ul>
                                                 </li>
                                             </ul>

@@ -42,7 +42,7 @@ export default function GlicysGuide() {
               <hr className="my-6 border-neutral-700" />
               <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Stage 13 Mechanics</h3>
               <p className="text-neutral-300 mb-4">
-                On Stage 13, Glicys&apos; attacks does not trigger <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" />.
+                On Stage 13, Glicys&apos; attacks does not trigger <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" />.
               </p>
               <hr className="my-6 border-neutral-700" />
               <RecommendedTeam team={teamSetup} />

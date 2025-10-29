@@ -13,7 +13,7 @@ export default function TyrantGuide() {
                 <li><strong>S1</strong>: Single, reduces chain point by 20.</li>
                 <li><strong>S2</strong>: AoE, inflict <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> 2 turns.</li>
                 <li><strong>S3</strong>: AoE, 20% chance to <EffectInlineTag name="BT_STUN" type="debuff" /> 4 turns. If enemy is inflicted by <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> chances go up to 100%</li>
-                <li><strong>Passive</strong>: Does not trigger <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />, <EffectInlineTag name="SYS_REVENGE_HEAL" type="buff" /> or <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />.</li>
+                <li><strong>Passive</strong>: Does not trigger <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />, <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" /> or <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />.</li>
                 <li><strong>Enrage</strong>: When health drops under 40%. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />. Increases Attack and Speed by 15%. Recovers 10% of weakness gauge.</li>
                 <li><strong>Enrage Ultimate</strong>: used when enrage ends. Reduce action points and chain points by 100%.</li>
             </ul>
