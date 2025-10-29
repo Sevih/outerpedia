@@ -1,40 +1,26 @@
 // src/app/changelog/page.tsx
-import { getTenantServer } from '@/tenants/tenant.server'   // ✅ server-only
+import { getTenantServer } from '@/tenants/tenant.server'
 import { getChangelog } from '@/data/changelog'
 import { Card, CardContent } from '@/app/components/ui/card'
 import { renderMarkdown } from '@/utils/markdown'
 import { type Metadata } from 'next'
 import Link from 'next/link'
-
-const metaDict = {
-  en: { title: 'Changelog | Outerpedia', desc: 'Track all updates made to Outerpedia: guides, characters, tools, and more.' },
-  jp: { title: '更新履歴 | Outerpedia', desc: 'Outerpedia の更新情報（ガイド、キャラクター、ツールなど）を確認できます。' },
-  kr: { title: '변경 로그 | Outerpedia', desc: 'Outerpedia의 모든 업데이트(가이드, 캐릭터, 도구 등)를 확인하세요.' },
-} as const
+import { createPageMetadata } from '@/lib/seo'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { domain, key } = await getTenantServer()   // ✅ ici aussi
-  const t = metaDict[key] ?? metaDict.en
-
-  return {
-    title: t.title,
-    description: t.desc,
-    alternates: { canonical: `https://${domain}/changelog` },
-    openGraph: {
-      title: t.title,
-      description: t.desc,
-      url: `https://${domain}/changelog`,
-      type: 'article',
-      siteName: 'Outerpedia',
-      images: [{ url: `https://${domain}/images/ui/og_home.jpg`, width: 1200, height: 630 }],
+  return createPageMetadata({
+    path: '/changelog',
+    titleKey: 'changelog.meta.title',
+    descKey: 'changelog.meta.desc',
+    image: {
+      url: '/images/ui/og_home.jpg',
+      width: 1200,
+      height: 630,
+      altFallback: 'Outerpedia Changelog',
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: t.title,
-      description: t.desc,
-      images: [`https://${domain}/images/ui/og_home.jpg`],
-    },
-  }
+    ogType: 'article',
+    twitterCard: 'summary_large_image',
+  })
 }
 
 export default async function ChangelogPage() {

@@ -6,8 +6,8 @@ import allCharacters from '@/data/_allCharacters.json';
 import { toKebabCase } from '@/utils/formatText';
 import abbrevData from '@/data/abbrev.json';
 import { useI18n } from '@/lib/contexts/I18nContext'
-import { l } from '@/lib/localize'
-import { lRec } from '@/lib/localize'
+import { l, lRec } from '@/lib/localize'
+import { getAvailableLanguages } from '@/tenants/config'
 
 
 type AbbrevEntry = string | { en: string; jp?: string; kr?: string };
@@ -23,9 +23,21 @@ type Props = {
 export default function CharacterInlineStacked({ name, size = 50, deco }: Props) {
   const { lang } = useI18n()
   const fullName = name;
-  const char = allCharacters.find(c =>
-    [c.Fullname, c.Fullname_jp, c.Fullname_kr].includes(fullName)
-  );
+
+  // Find character by checking all language variants
+  const char = allCharacters.find(c => {
+    // Check base name
+    if (c.Fullname === fullName) return true
+
+    // Check all language variants
+    const languages = getAvailableLanguages()
+    for (const lng of languages) {
+      if (lng === 'en') continue
+      const localizedName = l(c as Record<string, unknown>, 'Fullname', lng)
+      if (localizedName === fullName) return true
+    }
+    return false
+  });
 
   const italic = deco ? deco : ""
   if (!char) return <span className="text-red-500">{name}</span>;

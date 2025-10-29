@@ -7,6 +7,7 @@ import { toKebabCase } from "@/utils/formatText";
 import Link from "next/link";
 import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TenantKey } from "@/tenants/config";
+import { l } from "@/lib/localize";
 
 
 function formatEffectTextAndHighlightNum(text: string): React.ReactElement {
@@ -40,13 +41,6 @@ function formatEffectTextAndHighlightNum(text: string): React.ReactElement {
   return <span dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-
-function pickByLang(base: string, jp?: string, kr?: string, langue?: TenantKey) {
-  if (langue === "jp" && jp && jp.trim().length) return jp;
-  if (langue === "kr" && kr && kr.trim().length) return kr;
-  return base;
-}
-
 export default function WeaponCard({
   weapon,
   langue,
@@ -57,10 +51,10 @@ export default function WeaponCard({
   const { t } = useI18n();
   const [expanded, setExpanded] = useState(false);
 
-  const displayName = pickByLang(weapon.name, weapon.name_jp, weapon.name_kr, langue);
-  const displayEffectName = pickByLang(weapon.effect_name, weapon.effect_name_jp, weapon.effect_name_kr, langue);
-  const displayDesc1 = pickByLang(weapon.effect_desc1, weapon.effect_desc1_jp, weapon.effect_desc1_kr, langue);
-  const displayDesc4 = pickByLang(weapon.effect_desc4, weapon.effect_desc4_jp, weapon.effect_desc4_kr, langue);
+  const displayName = l(weapon, "name", langue);
+  const displayEffectName = l(weapon, "effect_name", langue);
+  const displayDesc1 = l(weapon, "effect_desc1", langue);
+  const displayDesc4 = l(weapon, "effect_desc4", langue);
 
   return (
     <div

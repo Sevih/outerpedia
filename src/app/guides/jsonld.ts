@@ -1,4 +1,6 @@
 // JSON-safe typing (même pattern que Pull Sim / Items)
+import { getAvailableLanguageCodes } from '@/tenants/config'
+
 type JSONValue =
   | string
   | number
@@ -47,7 +49,6 @@ export function guidesWebPageLd(domain: string, opts: {
   description: string
   path: string
   imageUrl: string
-  inLanguage: ('en' | 'jp' | 'kr')[]
 }): JsonLdObject {
   const base = normalizeBase(domain)
   return {
@@ -57,7 +58,7 @@ export function guidesWebPageLd(domain: string, opts: {
     url: `${base}${opts.path}`,
     description: opts.description,
     isPartOf: { '@type': 'WebSite', name: 'Outerpedia', url: `${base}/` },
-    inLanguage: opts.inLanguage,
+    inLanguage: getAvailableLanguageCodes(),
     primaryImageOfPage: { '@type': 'ImageObject', url: opts.imageUrl },
   }
 }

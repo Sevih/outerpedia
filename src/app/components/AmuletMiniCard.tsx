@@ -4,7 +4,8 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { toKebabCase } from "@/utils/formatText"
-import { useI18n } from "@/lib/contexts/I18nContext"
+import { useTenant } from "@/lib/contexts/TenantContext"
+import { l } from "@/lib/localize"
 import type { Accessory } from "@/types/equipment"
 import rawStats from "@/data/stats.json"
 import { highlightNumbersOnly } from "@/utils/textHighlighter"
@@ -32,29 +33,17 @@ function normalizeEffectIcon(id?: string | null) {
 }
 
 // localisation sûre
-function getLocalized<
-  T extends Partial<Record<K | `${K}_jp` | `${K}_kr`, string | null>>,
-  K extends string
->(obj: T, key: K, lang: "en" | "jp" | "kr") {
-  const base = obj[key]
-  const jp = obj[`${key}_jp` as `${K}_jp`]
-  const kr = obj[`${key}_kr` as `${K}_kr`]
-  if (lang === "jp" && jp) return String(jp)
-  if (lang === "kr" && kr) return String(kr)
-  return String(base ?? "")
-}
-
 export default function AmuletMiniCard({ amulet }: { amulet: AmuletForCard }) {
-  const { lang } = useI18n()
+  const { key: tenantKey } = useTenant()
 
   const hasDualStats = amulet.forcedMainStat?.includes("/")
   const mainStats = hasDualStats
     ? amulet.forcedMainStat.split("/")
     : [amulet.forcedMainStat].filter(Boolean)
 
-  const locName = getLocalized(amulet, "name", lang)
-  const locEffectName = getLocalized(amulet, "effect_name", lang)
-  const locEffectDesc4 = getLocalized(amulet, "effect_desc4", lang)
+  const locName = l(amulet, "name", tenantKey)
+  const locEffectName = l(amulet, "effect_name", tenantKey)
+  const locEffectDesc4 = l(amulet, "effect_desc4", tenantKey)
 
   const effectIconId = normalizeEffectIcon(amulet.effect_icon ?? undefined)
   const equipmentImage = ensureWebp(String(amulet.image ?? ""))

@@ -21,6 +21,7 @@ const nextConfig = {
     'outerpedia.local',
     'jp.outerpedia.local',
     'kr.outerpedia.local',
+    'zh.outerpedia.local',
   ],
   images: {
 	unoptimized: true, // ✅ Désactive l'optimisation dynamique

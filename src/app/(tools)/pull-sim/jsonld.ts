@@ -1,4 +1,6 @@
 // JSON-safe typing
+import { getAvailableLanguageCodes } from '@/tenants/config'
+
 type JSONValue =
   | string
   | number
@@ -58,6 +60,6 @@ export function webAppLd(
     url: `${base}/pull-sim`,
     offers: { '@type': 'Offer', price: 0, priceCurrency: 'USD' },
     isAccessibleForFree: true,
-    inLanguage: ['en', 'jp', 'kr'],
+    inLanguage: getAvailableLanguageCodes(),
   }
 }

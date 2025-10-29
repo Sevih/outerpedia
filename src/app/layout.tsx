@@ -9,8 +9,6 @@ import UpdateToast from '@/app/components/UpdateToast'
 
 import { getTenantServer } from '@/tenants/tenant.server'
 import {
-  TITLES,
-  DESCS,
   OG_LOCALE,
   HREFLANG,
   TENANTS,
@@ -19,6 +17,7 @@ import {
 
 import { TenantProvider } from '@/lib/contexts/TenantContext'
 import { I18nProvider } from '@/lib/contexts/I18nContext'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
@@ -30,8 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const { domain, key } = await getTenantServer()
   const siteUrl = `https://${domain}`
 
-  const title = TITLES[key] ?? TITLES.en
-  const description = DESCS[key] ?? DESCS.en
+  const { t } = await getServerI18n(key)
+  const title = t('titles.main.main')
+  const description = t('titles.main.desc')
 
   // Construit les <link rel="alternate" hreflang="..."> à partir de ta config TENANTS
   const languages = (Object.keys(TENANTS) as TenantKey[]).reduce<Record<string, string>>(
@@ -77,7 +77,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const tenant = await getTenantServer() // { key, domain }
-  const langKey = tenant.key // 'en' | 'jp' | 'kr'
+  const langKey = tenant.key 
 
   // charge le dictionnaire sérialisable pour I18nProvider
   const messages = (await import(`@/i18n/locales/${langKey}.ts`)).default ?? {}

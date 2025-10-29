@@ -13,6 +13,7 @@ import SetComboCard from "@/app/components/SetComboCard"
 import TalismanMiniCard from "./TalismanMiniCard"
 import rawStats from '@/data/stats.json' assert { type: 'json' }
 import { TenantKey } from "@/tenants/config"
+import { l } from "@/lib/localize"
 import Image from "next/image"
 
 type GearReference = { name: string; mainStat: string; usage?: string }
@@ -226,15 +227,6 @@ export default function RecommendedGearTabs({
     return map
   }, [talismans])
 
-  function getLocalizedTalismanName(baseName: string, lang: TenantKey, byName: Map<string, Talisman>) {
-    const tal = byName.get(baseName.trim().toLowerCase())
-    if (!tal) return baseName
-    if (lang === "jp" && tal.name_jp) return tal.name_jp
-    if (lang === "kr" && tal.name_kr) return tal.name_kr
-    return tal.name
-  }
-
-
   const setCombos = useMemo(() => {
     if (!Array.isArray(currentBuild.Set)) return []
     return currentBuild.Set.map((option) => {
@@ -365,7 +357,10 @@ export default function RecommendedGearTabs({
                         {entries.map((e, j) => (
                           <li key={`${i}-${j}`} className="flex items-center gap-2">
                             <span className="text-white">
-                              {getLocalizedTalismanName(e.name, lang as TenantKey, talismanByName)}
+                              {(() => {
+                                const tal = talismanByName.get(e.name.trim().toLowerCase())
+                                return tal ? l(tal, "name", lang as TenantKey) : e.name
+                              })()}
                             </span>
                             <div className="flex gap-[2px]">
                               {Array.from({ length: 3 }).map((_, idx) => (

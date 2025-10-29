@@ -2,7 +2,7 @@ import type { TenantKey } from '@/tenants/config'
 
 
 // --- types/helpers localisation (comme montré précédemment) ---
-type LString = string | { en: string; jp?: string; kr?: string };
+type LString = string | { en: string; jp?: string; kr?: string; zh?: string };
 const resolveL = (s: LString, key: TenantKey) =>
   typeof s === 'string' ? s : (s[key] ?? s.en);
 const toLines = (v: string | string[]) =>

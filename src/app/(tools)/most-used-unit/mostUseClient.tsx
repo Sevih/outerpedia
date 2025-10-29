@@ -14,6 +14,7 @@ import GuidesRaw from '@/data/guides/guides-ref.json'
 import GuidesCatRaw from '@/data/guides/categories.json'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
+import type { Localized } from '@/types/common'
 
 const GUIDES = GuidesRaw as unknown as Record<string, Guide>
 const GUIDES_CAT = GuidesCatRaw as unknown as Record<string, GuideCat>
@@ -44,7 +45,6 @@ type GuideCat = {
 }
 
 // ---- Types & utils
-type Localized = { en: string; jp?: string; kr?: string }
 type Guide = {
   category: string
   title: string | Localized
@@ -86,7 +86,7 @@ const cleanGuideWord = (s: string): string =>
 export default function MostUsedClient({ charactersData, guideUsageData }: MostUsedClientProps) {
   const { lang, t } = useI18n()
   const tLoc = (v: string | Localized): string =>
-    typeof v === 'string' ? v : (v[lang] ?? v.en)
+    typeof v === 'string' ? v : (v[lang as keyof typeof v] ?? v.en)
 
   // Helper to get localized character name
   const getCharName = (char: CharacterData) => l(char, 'Fullname', lang)

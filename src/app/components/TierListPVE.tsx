@@ -12,17 +12,18 @@ import { ClassIcon } from '@/app/components/ClassIcon'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import type { Character } from '@/types/character'
 import type { ClassType as classtipe, ElementType } from '@/types/enums'
+import type { LocalizedFieldNames } from '@/types/common'
 import tierListOverwrite from '@/data/stats/tier-list-overwrite.json'
-import type { TenantKey } from '@/tenants/config'
+import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
+import { l } from '@/lib/localize'
 
 /* -------------------------------- Types -------------------------------- */
 
 type CharacterDisplay = Pick<
     Character,
-    'ID' | 'Fullname' | 'Rarity' | 'Class' | 'Element' | 'rank' | 'role' | 'limited'
-> &
-    Partial<Pick<Character, 'Fullname_kr' | 'Fullname_jp' | 'tags'>>
+    'ID' | LocalizedFieldNames<Character, 'Fullname'> | 'Rarity' | 'Class' | 'Element' | 'rank' | 'role' | 'limited' | 'tags'
+>
 
 
 type TierListBaseProps = {
@@ -124,12 +125,19 @@ function includesCI(haystack: string | undefined, needle: string) {
 function matchesCharacterSearch(c: CharacterDisplay, term: string) {
     if (!term) return true
     const slug = toKebabCase(c.Fullname)
-    return (
-        includesCI(c.Fullname, term) ||
-        includesCI(c.Fullname_jp, term) ||
-        includesCI(c.Fullname_kr, term) ||
-        includesCI(slug, term)
-    )
+
+    // Search in base name and slug
+    if (includesCI(c.Fullname, term) || includesCI(slug, term)) return true
+
+    // Search in all available language variants
+    const languages = getAvailableLanguages()
+    for (const lang of languages) {
+        if (lang === 'en') continue // Already checked c.Fullname
+        const localizedName = l(c as Record<string, unknown>, 'Fullname', lang)
+        if (localizedName && includesCI(localizedName, term)) return true
+    }
+
+    return false
 }
 
 const ELEMENTS: (ElementType | 'All')[] = ['All', 'Fire', 'Water', 'Earth', 'Light', 'Dark']
@@ -181,12 +189,7 @@ function getRecruitBadge(char: CharacterDisplay): RecruitBadge | null {
 
 /* ---------------------------- Localized fields -------------------------- */
 
-type FullnameKey = Extract<keyof CharacterDisplay, `Fullname${'' | `_${string}`}`>
-function getLocalizedFullname(character: CharacterDisplay, langKey: TenantKey): string {
-    const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
-    const localized = character[key]
-    return localized ?? character.Fullname
-}
+// Removed: use l() from @/lib/localize instead
 
 /* -------------------------------- Component ----------------------------- */
 
@@ -640,7 +643,7 @@ export default function TierListBase({
                                                     </div>
 
                                                     <CharacterNameDisplay
-                                                        fullname={getLocalizedFullname(char, langue)}
+                                                        fullname={l(char, 'Fullname', langue)}
                                                     />
                                                 </div>
                                             </Link>

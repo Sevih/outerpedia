@@ -3,7 +3,8 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import eeRaw from '@/data/ee.json'
 import type { ExclusiveEquipment } from '@/types/character'
-import type { Character } from '@/types/character' // <= On utilise ton vrai type complet
+import type { Character } from '@/types/character'
+import { getAvailableLanguages } from '@/tenants/config'
 
 const eeData: Record<string, ExclusiveEquipment> = eeRaw
 
@@ -50,24 +51,20 @@ function extractBuffsAndDebuffs(character: Character) {
 
 type RoleType = 'DPS' | 'Support' | 'Sustain'
 
-type LocalizedNameFields = {
-  Fullname_jp?: unknown
-  Fullname_kr?: unknown
-}
-
 function isNonEmptyString(x: unknown): x is string {
   return typeof x === 'string' && x.trim().length > 0
 }
-function pickLocalizedNames(
-  c: Character & Partial<LocalizedNameFields>
-): Partial<Record<'Fullname_jp' | 'Fullname_kr', string>> {
-  const out: Partial<Record<'Fullname_jp' | 'Fullname_kr', string>> = {}
 
-  if (isNonEmptyString(c.Fullname_jp)) {
-    out.Fullname_jp = c.Fullname_jp
-  }
-  if (isNonEmptyString(c.Fullname_kr)) {
-    out.Fullname_kr = c.Fullname_kr
+function pickLocalizedNames(c: Character): Partial<Record<string, string>> {
+  const out: Partial<Record<string, string>> = {}
+  const languages = getAvailableLanguages().filter(lang => lang !== 'en')
+
+  for (const lang of languages) {
+    const key = `Fullname_${lang}` as keyof Character
+    const value = c[key]
+    if (isNonEmptyString(value)) {
+      out[key] = value
+    }
   }
   return out
 }

@@ -5,6 +5,8 @@ import { promises as fs } from 'fs'
 import path from 'path'
 
 import { getTenantServer } from '@/tenants/tenant.server'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
+import type { TenantKey } from '@/tenants/config'
 import type { Character } from '@/types/character'
 import CharacterDetailClient from './CharacterDetailClient'
 import partnersData from '@/data/partners.json'
@@ -16,6 +18,7 @@ import rawAmulets from '@/data/amulet.json'
 import rawTalismans from '@/data/talisman.json'
 import rawSets from '@/data/sets.json'
 import type { Talisman, Accessory, ArmorSet, Weapon } from '@/types/equipment'
+import { l } from '@/lib/localize'
 
 // 🔹 SEO unifié
 import { createPageMetadata } from '@/lib/seo'
@@ -45,10 +48,8 @@ async function readCharacterRecoFile(slug: string) {
   }
 }
 
-function localizedDisplayName(char: Character, langKey: 'en' | 'jp' | 'kr') {
-  if (langKey === 'jp' && char.Fullname_jp) return char.Fullname_jp
-  if (langKey === 'kr' && char.Fullname_kr) return char.Fullname_kr
-  return char.Fullname
+function localizedDisplayName(char: Character, langKey: TenantKey) {
+  return l(char, 'Fullname', langKey)
 }
 
 // ---------- Metadata ----------
@@ -148,6 +149,7 @@ export default async function Page({ params }: PageProps) {
   // -- CHARGEMENT SERVER des gear-data --
   const weapons = rawWeapons as Weapon[]
   const amulets = rawAmulets as Accessory[]
+  const { t } = await getServerI18n(langKey)
   const talismans = rawTalismans as Talisman[]
   const sets = rawSets as ArmorSet[]
 
@@ -166,7 +168,7 @@ export default async function Page({ params }: PageProps) {
         json={[
           websiteLd(domain),
           breadcrumbLd(domain, {
-            home: langKey === 'jp' ? 'ホーム' : langKey === 'kr' ? '홈' : 'Home',
+            home: t('chars.breadcrumb.home'),
             current: displayName,
             currentPath: pathUrl,
           }),
@@ -175,7 +177,6 @@ export default async function Page({ params }: PageProps) {
             description: `${char.Element} ${char.Class} ${displayName} — skills, upgrades, ranking, exclusive equipment, and recommended sets.`,
             path: pathUrl,
             imageUrl: absPortraitPng,
-            inLanguage: ['en', 'jp', 'kr'],
             attrs: {
               name: displayName,
               id: String(char.ID),

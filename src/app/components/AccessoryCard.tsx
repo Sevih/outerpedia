@@ -9,6 +9,7 @@ import type { Accessory } from "@/types/equipment";
 import StatIconsRow from "@/app/components/StatIconsRow";
 import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TenantKey } from "@/tenants/config";
+import { l } from "@/lib/localize";
 
 function formatEffectTextAndHighlightNum(text: string): React.ReactElement {
   if (!text) return <></>;
@@ -28,12 +29,6 @@ function formatEffectTextAndHighlightNum(text: string): React.ReactElement {
   return <span dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-function pickByLang(base: string, jp?: string, kr?: string, langue?: TenantKey) {
-  if (langue === "jp" && jp && jp.trim()) return jp;
-  if (langue === "kr" && kr && kr.trim()) return kr;
-  return base;
-}
-
 export default function AccessoryCard({
   accessory,
   langue,
@@ -44,11 +39,11 @@ export default function AccessoryCard({
   const [expanded, setExpanded] = useState(false);
   const { t } = useI18n();
 
-  const displayName       = pickByLang(accessory.name,        accessory.name_jp,        accessory.name_kr,        langue);
-  const displayEffectName = pickByLang(accessory.effect_name, accessory.effect_name_jp, accessory.effect_name_kr, langue);
-  const displayDesc1      = pickByLang(accessory.effect_desc1,accessory.effect_desc1_jp,accessory.effect_desc1_kr,langue);
-  const displayDesc4      = pickByLang(accessory.effect_desc4,accessory.effect_desc4_jp,accessory.effect_desc4_kr,langue);
-  const displaySource     = pickByLang(accessory.source,      accessory.source_jp,      accessory.source_kr,      langue);
+  const displayName       = l(accessory, "name", langue);
+  const displayEffectName = l(accessory, "effect_name", langue);
+  const displayDesc1      = l(accessory, "effect_desc1", langue);
+  const displayDesc4      = l(accessory, "effect_desc4", langue);
+  const displaySource     = l(accessory, "source", langue);
 
   return (
     <div

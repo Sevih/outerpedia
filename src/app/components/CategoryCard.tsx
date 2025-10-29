@@ -3,21 +3,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import categories from '@/data/guides/categories.json'
 import type { TenantKey } from '@/tenants/config'
+import { lRec } from '@/lib/localize'
 
 type Props = { lang: TenantKey }
-
-type Localized = { en: string; jp?: string; kr?: string }
-
-function getLocalized(obj: Localized | string, lang: TenantKey): string {
-  if (typeof obj === 'string') return obj
-  return obj[lang] ?? obj.en
-}
 
 export default function GuideCategoryList({ lang = 'en' }: Props) {
   const items = Object.entries(categories).map(([slug, cat]) => ({
     slug,
-    title: getLocalized(cat.title, lang),
-    description: getLocalized(cat.description, lang),
+    title: lRec(cat.title, lang),
+    description: lRec(cat.description, lang),
     icon: `${cat.icon}.webp`,
     valid: cat.valid,
   }))

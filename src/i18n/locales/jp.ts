@@ -23,6 +23,8 @@ const jp = {
   "titles.main.coupon": "クーポンコード",
   "titles.main.changetitle": "Outerpedia 最新アップデート＆新機能",
   "titles.main.tochangelog": "すべての更新履歴を見る",
+  "changelog.meta.title": "更新履歴 | Outerpedia",
+  "changelog.meta.desc": "Outerpedia の更新情報（ガイド、キャラクター、ツールなど）を確認できます。",
   "titles.tl.outerplaneTL": "Outerplane ティアリスト",
   "titles.tl.desc": "PvE・PvPキャラ評価を選択できます。6★超越・EEレベル0を基準にした評価です。",
   "titles.tl.pvedesc": "全コンテンツにおけるPvE性能評価。",
@@ -148,6 +150,18 @@ const jp = {
   "stats.speed": "速度",
   "stats.attack": "攻撃",
   "substat_priority": "サブステ優先度",
+
+  // Transcendence levels
+  "transcend.level1": "レベル1",
+  "transcend.level2": "レベル2",
+  "transcend.level3": "レベル3",
+  "transcend.level4": "レベル4",
+  "transcend.level4plus": "レベル4+",
+  "transcend.level5": "レベル5",
+  "transcend.level5plus": "レベル5+",
+  "transcend.level5plusplus": "レベル5++",
+  "transcend.level6": "レベル6",
+
   "weapons": "武器",
   "accessories": "アクセサリー",
   "sets": "セット",
@@ -499,6 +513,42 @@ const jp = {
   'chars.og.desc': '全ヒーローのステータス・スキル・装備・専用装備をチェック。{monthYear} 更新（EvaMains Discord）。',
   'chars.twitter.title': 'キャラクター一覧 — {monthYear} 更新 | Outerpedia',
   'chars.twitter.desc': '全ヒーローのステータス・スキル・装備・専用装備をチェック。{monthYear} 更新（EvaMains Discord）。',
+  'chars.page.h1.short': 'キャラクター一覧',
+  'chars.page.h1.full': 'キャラクター一覧',
+  'chars.page.updated': '{monthYear} 更新',
+  'chars.breadcrumb.home': 'ホーム',
+  'chars.jsonld.desc': '全キャラクターの詳細：ステータス、スキル、ビルド、専用装備。{monthYear} 更新。',
+
+  // Equipments page
+  'equipments.page.title': '装備一覧',
+  'equipments.page.desc': '『アウタープレーン』の全装備を一覧表示。武器・アクセサリー・タリスマン・セット・専用装備をチェック。',
+  'equipments.breadcrumb.home': 'ホーム',
+
+  // Skills
+  'skills.dualAttack': 'デュアルアタック',
+
+  // SEO Keywords - Base
+  'seo.gameName': 'アウタープレーン',
+  'seo.siteName': 'Outerpedia',
+  'seo.wiki': 'アウタープレーン wiki',
+  'seo.guide': 'アウタープレーン 攻略',
+  'seo.guideSuffix': 'ガイド',
+  'seo.turnBasedRpg': 'ターン制RPG',
+  'seo.mobileRpg': 'モバイルRPG',
+  'seo.characterBuilds': 'キャラクタービルド',
+
+  // SEO Keywords - Category Specific
+  'seo.category.adventure': 'アドベンチャー,ストーリーモード,チャプター攻略,マップ,ネタバレ無し,ステージ進行,PvE',
+  'seo.category.world-boss': 'ワールドボス,ボス攻略,編成,装備おすすめ,エクストリームリーグ,PvE',
+  'seo.category.joint-boss': '合同ボス,協力,スコア稼ぎ,ダメージ最適化,編成,PvE',
+  'seo.category.adventure-license': 'アドベンチャーライセンス,昇級ライセンス,ライセンスレベル,ライセンス任務,PvE',
+  'seo.category.special-request': '装備ボス,スペシャル依頼,鑑定,生態調査,素材,PvE',
+  'seo.category.irregular-extermination': '異常個体討伐,期間限定イベント,イベントボス,報酬,PvE',
+  'seo.category.guild-raid': 'ギルドレイド,協力ボス,週間ランキング,ギルドダメージ,編成,PvE',
+  'seo.category.general-guides': '初心者向け,資源管理,日課,システム概要,小技,PvE',
+  'seo.category.skyward-tower': '天空の塔,フロア,攻略,おすすめ編成,PvE',
+  'seo.category.monad-gate': 'モナドゲート,ローグライク,ルート,マップ,遺物,PvE',
+
   // jp.ts
   'guides.meta.title': 'Outerplane 攻略ガイド | Outerpedia',
   'guides.meta.desc': 'Outerplane の各種攻略ガイド: {list}。ボス攻略・冒険・イベントのウォークスルーを随時更新。',
@@ -508,6 +558,11 @@ const jp = {
   'guides.twitter.desc': '最新ガイド一覧: {list}。',
   'guides.spoilerFree.enable': 'ネタバレ防止モードを有効化',
   'guides.spoilerFree.disable': 'ネタバレ防止モードを無効化',
+  'guides.page.h1': 'すべてのガイド',
+  'guides.breadcrumb.home': 'ホーム',
+  'guides.jsonld.title': 'Outerplane 攻略ガイド | Outerpedia',
+  'guides.jsonld.desc.prefix': 'Outerplane の各種攻略ガイド: ',
+  'guides.jsonld.desc.suffix': '。ボス攻略・冒険・イベントのウォークスルーを随時更新。',
 
   "legal.meta.title": "法的情報 | Outerpedia",
   "legal.meta.desc": "Outerpediaの法的免責事項、著作権、コンテンツ使用情報。Outerplaneの非営利ファンプロジェクト。",

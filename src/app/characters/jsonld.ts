@@ -1,3 +1,5 @@
+import { getAvailableLanguageCodes } from '@/tenants/config'
+
 // JSON-safe typing
 type JSONValue =
   | string
@@ -50,7 +52,6 @@ export function charactersCollectionLd(
     description: string
     path: string
     imageUrl: string
-    inLanguage: ('en' | 'jp' | 'kr')[]
     count: number
     sample?: Array<{ name: string; url: string; image: string; description?: string }>
   }
@@ -77,13 +78,13 @@ export function charactersCollectionLd(
     description: opts.description,
     url: `${base}${opts.path}`,
     isPartOf: { '@type': 'WebSite', name: 'Outerpedia', url: `${base}/` },
-    inLanguage: opts.inLanguage,
+    inLanguage: getAvailableLanguageCodes(),
     primaryImageOfPage: { '@type': 'ImageObject', url: opts.imageUrl },
     about: {
       '@type': 'Thing',
       name: 'Characters',
       additionalProperty: { '@type': 'PropertyValue', name: 'count', value: opts.count },
     },
-    ...(mainEntity ? { mainEntity } : {}), // ✅ on n’ajoute la clé que si elle existe
+    ...(mainEntity ? { mainEntity } : {}), // ✅ on n'ajoute la clé que si elle existe
   }
 }

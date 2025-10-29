@@ -4,7 +4,8 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { toKebabCase } from "@/utils/formatText"
-import { useI18n } from "@/lib/contexts/I18nContext"
+import { useTenant } from "@/lib/contexts/TenantContext"
+import { l } from "@/lib/localize"
 import type { Weapon } from "@/types/equipment"
 import rawStats from "@/data/stats.json"
 import { highlightNumbersOnly } from "@/utils/textHighlighter"
@@ -31,30 +32,17 @@ function ensureWebp(path: string) {
   return path.endsWith(".webp") ? path : `${path}.webp`
 }
 
-// Localisation sûre
-function getLocalized<
-  T extends Partial<Record<K | `${K}_jp` | `${K}_kr`, string | null>>,
-  K extends string
->(obj: T, key: K, lang: "en" | "jp" | "kr") {
-  const base = obj[key]
-  const jp = obj[`${key}_jp` as `${K}_jp`]
-  const kr = obj[`${key}_kr` as `${K}_kr`]
-  if (lang === "jp" && jp) return String(jp)
-  if (lang === "kr" && kr) return String(kr)
-  return String(base ?? "")
-}
-
 export default function WeaponMiniCard({ weapon }: { weapon: WeaponForCard }) {
-  const { lang } = useI18n()
+  const { key: tenantKey } = useTenant()
 
   const hasDualStats = weapon.forcedMainStat?.includes("/")
   const mainStats = hasDualStats
     ? weapon.forcedMainStat.split("/")
     : [weapon.forcedMainStat].filter(Boolean)
 
-  const locName = getLocalized(weapon, "name", lang)
-  const locEffectName = getLocalized(weapon, "effect_name", lang)
-  const locEffectDesc4 = getLocalized(weapon, "effect_desc4", lang)
+  const locName = l(weapon, "name", tenantKey)
+  const locEffectName = l(weapon, "effect_name", tenantKey)
+  const locEffectDesc4 = l(weapon, "effect_desc4", tenantKey)
 
   const effectIconId = normalizeEffectIcon(weapon.effect_icon ?? undefined)
   const equipmentImage = ensureWebp(String(weapon.image ?? ""))

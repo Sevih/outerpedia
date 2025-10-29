@@ -2,12 +2,14 @@
 
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
+import type { TenantKey } from '@/tenants/config';
 
-type Lang = 'en' | 'jp' | 'kr';
+type Lang = TenantKey;
 
 type Props = {
   transcendData: Record<string, string | null>; // déjà localisé côté data
-  lang: Lang;                                   // EN/JP/KR uniquement
+  lang: Lang;
+  t: (key: string) => string; // fonction de traduction
 };
 
 type LevelId =
@@ -26,11 +28,19 @@ const starIcons = {
   purple: "/images/ui/CM_icon_star_v.webp",
 } as const;
 
-/** Labels de niveaux par langue */
-const LEVEL_LABELS: Record<Lang, Record<LevelId, string>> = {
-  en: { '1': 'Lv 1', '2': 'Lv 2', '3': 'Lv 3', '4': 'Lv 4', '4_1': 'Lv 4', '4_2': 'Lv 4+', '5': 'Lv 5', '5_1': 'Lv 5', '5_2': 'Lv 5+', '5_3': 'Lv 5++', '6': 'Lv 6' },
-  jp: { '1': 'レベル1', '2': 'レベル2', '3': 'レベル3', '4': 'レベル4', '4_1': 'レベル4', '4_2': 'レベル4+', '5': 'レベル5', '5_1': 'レベル5', '5_2': 'レベル5+', '5_3': 'レベル5++', '6': 'レベル6' },
-  kr: { '1': '레벨 1', '2': '레벨 2', '3': '레벨 3', '4': '레벨 4', '4_1': '레벨 4', '4_2': '레벨 4+', '5': '레벨 5', '5_1': '레벨 5', '5_2': '레벨 5+', '5_3': '레벨 5++', '6': '레벨 6' },
+/** Mapping des IDs de niveau vers les clés i18n */
+const LEVEL_KEYS: Record<LevelId, string> = {
+  '1': 'transcend.level1',
+  '2': 'transcend.level2',
+  '3': 'transcend.level3',
+  '4': 'transcend.level4',
+  '4_1': 'transcend.level4',
+  '4_2': 'transcend.level4plus',
+  '5': 'transcend.level5',
+  '5_1': 'transcend.level5',
+  '5_2': 'transcend.level5plus',
+  '5_3': 'transcend.level5plusplus',
+  '6': 'transcend.level6',
 };
 
 /** Règles regex par langue (exemple) */
@@ -38,12 +48,14 @@ const REPLACEABLE_PATTERNS: Record<Lang, RegExp[]> = {
   en: [],
   jp: [],
   kr: [],
+  zh: [],
 };
 
 const CUMULABLE_PATTERNS: Record<Lang, RegExp[]> = {
   en: [],
   jp: [],
   kr: [],
+  zh: [],
 };
 
 const MERGEABLE_PATTERNS: Record<Lang, { regex: RegExp; prefix: string; suffix: string }[]> = {
@@ -68,6 +80,7 @@ const MERGEABLE_PATTERNS: Record<Lang, { regex: RegExp; prefix: string; suffix: 
       suffix: "% 감소",
     }
   ],
+  zh: [],
 };
 
 /** Génère les 6 étoiles en fonction du levelKey, incluant les variantes colorées (+/++) */
@@ -125,15 +138,15 @@ function parseNumericBonus(s: string):
 }
 
 
-export default function TranscendenceSlider({ transcendData, lang }: Props) {
+export default function TranscendenceSlider({ transcendData, lang, t }: Props) {
   /** Construit la liste des steps à partir des clés présentes (logic IDs) */
 
   const steps = useMemo<Step[]>(() => {
     const order: LevelId[] = ['1', '2', '3', '4', '4_1', '4_2', '5', '5_1', '5_2', '5_3', '6'];
     return order
       .filter((k) => transcendData[k] != null)
-      .map((k) => ({ key: k, label: LEVEL_LABELS[lang][k] }));
-  }, [transcendData, lang]);
+      .map((k) => ({ key: k, label: t(LEVEL_KEYS[k]) }));
+  }, [transcendData, t]);
 
   const [index, setIndex] = useState(0);
   const currentKey = steps[index]?.key as LevelId | undefined;

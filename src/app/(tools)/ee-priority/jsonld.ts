@@ -1,3 +1,6 @@
+import { getAvailableLanguageCodes, type TenantKey } from '@/tenants/config'
+import { l } from '@/lib/localize'
+
 // --- Types JSON-safe
 type JSONValue =
   | string
@@ -37,19 +40,7 @@ function normalizeBase(domain: string): string {
   return withProto.replace(/\/+$/, '')
 }
 
-// --- Pick langue: 'en' | 'jp' | 'kr'
-function pickLang(
-  obj: Record<string, unknown>,
-  baseKey: string,
-  lang: 'en' | 'jp' | 'kr'
-): string | undefined {
-  const key =
-    lang === 'jp' ? `${baseKey}_jp`
-    : lang === 'kr' ? `${baseKey}_kr`
-    : baseKey
-  const v = obj[key]
-  return (typeof v === 'string' && v.trim().length > 0) ? v : undefined
-}
+// --- Pick language key removed - using centralized l() function
 
 // --- Nettoie les balises et espaces pour JSON-LD
 function stripRichText(s: string): string {
@@ -107,7 +98,7 @@ export function itemListLd(
     list: Record<string, EEEntry> // slug → EE
     characterMap: CharacterMap    // slug → Character
     imageKind?: 'portrait' | 'atb'
-    lang: 'en' | 'jp' | 'kr'
+    lang: TenantKey
   }
 ): JsonLdObject {
   const base = normalizeBase(domain)
@@ -123,16 +114,11 @@ export function itemListLd(
     const char = opts.characterMap[slug]
     if (!char) continue
 
-    // Localisés (fallback EN → JP → KR déjà gérés par pickLang grâce au key choisi)
-    const name =
-      pickLang(ee as unknown as Record<string, unknown>, 'name', opts.lang) ??
-      ee.name // fallback final
+    // Localisés (fallback EN → JP → KR)
+    const name = l(ee, 'name', opts.lang)
 
     // EE Priority +0 → on utilise 'effect' (pas effect10)
-    const rawEffect =
-      pickLang(ee as unknown as Record<string, unknown>, 'effect', opts.lang) ??
-      ee.effect ??
-      ''
+    const rawEffect = l(ee, 'effect', opts.lang) || ''
 
     const description = stripRichText(rawEffect)
 
@@ -154,5 +140,6 @@ export function itemListLd(
     url: `${base}/ee-priority`,
     description: opts.description,
     itemListElement: elements,
+    inLanguage: getAvailableLanguageCodes(),
   }
 }

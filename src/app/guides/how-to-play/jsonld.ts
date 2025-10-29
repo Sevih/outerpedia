@@ -1,3 +1,5 @@
+import { getAvailableLanguageCodes } from '@/tenants/config'
+
 // JSON-safe typing
 type JSONValue =
   | string
@@ -65,6 +67,6 @@ export function articleLd(
       url: base,
     },
     url: `${base}${opts.path ?? '/guides/how-to-play'}`,
-    inLanguage: 'en',
+    inLanguage: getAvailableLanguageCodes(),
   }
 }

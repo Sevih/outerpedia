@@ -69,7 +69,7 @@ export default function MonadEvaGuide() {
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li><CharacterLinkCard name="Monad Eva" />: <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" />, <EffectInlineTag name="BT_REVIVAL" type="buff" />, <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> and her <EffectInlineTag name="BT_CALL_BACKUP" type="buff" /> helps to stack more <EffectInlineTag name="BT_DOT_CURSE" type="debuff" />.</li>
         <li><CharacterLinkCard name="Demiurge Delta" />: <EffectInlineTag name="BT_REVIVAL" type="buff" />.</li>
-        <li><CharacterLinkCard name="Nella" />: <EffectInlineTag name="BT_RESURRECTION_G" type="buff" />.</li>
+        <li><CharacterLinkCard name="Nella" />: <EffectInlineTag name="BT_RESURRECTION" type="buff" />.</li>
         <li><CharacterLinkCard name="Maxwell" />: All his skills are AoE.</li>
         <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" />, <CharacterLinkCard name="Drakhan" />, <CharacterLinkCard name="Marian" />:  <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> specialists.</li>
         <li><CharacterLinkCard name="Iota" />, <CharacterLinkCard name="Demiurge Stella" />, <CharacterLinkCard name="Tamamo-no-Mae" />, <CharacterLinkCard name="Gnosis Nella" />:  <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> specialists.</li>

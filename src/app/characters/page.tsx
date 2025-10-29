@@ -6,6 +6,7 @@ import characters from '@/data/_allCharacters.json'
 import type { CharacterLite } from '@/types/types'
 import { toKebabCase } from '@/utils/formatText'
 import { getMonthYear } from '@/utils/getMonthYear'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 import { createPageMetadata } from '@/lib/seo'
 import JsonLd from '@/app/components/JsonLd'
@@ -46,6 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
 // ---------- Page ----------
 export default async function Page() {
   const { domain, key: langKey } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
   const path = '/characters'
   const base = `https://${domain}`
 
@@ -61,10 +63,8 @@ export default async function Page() {
     description: `Element: ${char.Element} | Class: ${char.Class} | Subclass: ${char.SubClass}`,
   }))
 
-  const titleH1 =
-    langKey === 'jp' ? 'キャラクター一覧'
-    : langKey === 'kr' ? '캐릭터 목록'
-    : 'Outerplane Characters'
+  const titleH1Short = t('chars.page.h1.short')
+  const titleH1Full = t('chars.page.h1.full')
 
   return (
     <>
@@ -73,21 +73,15 @@ export default async function Page() {
         json={[
           websiteLd(domain),
           breadcrumbLd(domain, {
-            home: langKey === 'jp' ? 'ホーム' : langKey === 'kr' ? '홈' : 'Home',
-            current: titleH1,
+            home: t('chars.breadcrumb.home'),
+            current: titleH1Short,
             currentPath: path,
           }),
           charactersCollectionLd(domain, {
-            title: `${titleH1} – Outerpedia`,
-            description:
-              langKey === 'jp'
-                ? `全キャラクターの詳細：ステータス、スキル、ビルド、専用装備。${monthYear} 更新。`
-                : langKey === 'kr'
-                ? `모든 캐릭터 정보: 스탯, 스킬, 빌드, 전용 장비. ${monthYear} 업데이트.`
-                : `Full character database: stats, skills, builds, and exclusive equipment. Updated ${monthYear}.`,
+            title: `${titleH1Short} – Outerpedia`,
+            description: t('chars.jsonld.desc', { monthYear }),
             path,
             imageUrl: `${base}/images/ui/nav/CM_Lobby_Button_Character.png`,
-            inLanguage: ['en', 'jp', 'kr'],
             count,
             sample,
           }),
@@ -96,18 +90,12 @@ export default async function Page() {
 
       <div className="p-3">
         {/* ✅ H1 visible avec les mots-clés du title */}
-      <h1 className="text-3xl font-bold">
-        {langKey === 'jp' ? 'キャラクター一覧' 
-         : langKey === 'kr' ? '캐릭터 목록'
-         : 'Outerplane Characters Database'}
-      </h1>
-      
-      {/* ✅ Date visible pour matcher le title */}
-      <h2 className="text-sm text-gray-400 text-center mb-2">
-        {langKey === 'jp' ? `${monthYear} 更新`
-         : langKey === 'kr' ? `${monthYear} 업데이트`
-         : `Updated ${monthYear}`}
-      </h2>
+        <h1 className="text-3xl font-bold">{titleH1Full}</h1>
+
+        {/* ✅ Date visible pour matcher le title */}
+        <h2 className="text-sm text-gray-400 text-center mb-2">
+          {t('chars.page.updated', { monthYear })}
+        </h2>
         <CharactersPage langue={langKey} />
       </div>
     </>

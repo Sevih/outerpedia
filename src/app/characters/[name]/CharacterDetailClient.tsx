@@ -31,9 +31,9 @@ import type { Talisman, Accessory, Weapon, ArmorSet } from '@/types/equipment'
 
 import formatEffectText from '@/utils/formatText'
 import { useI18n } from '@/lib/contexts/I18nContext'
-import type { TenantKey } from '@/tenants/config'
+import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
 import abbrevData from '@/data/abbrev.json'
-import { lRec } from '@/lib/localize'
+import { l, lRec } from '@/lib/localize'
 
 type AbbrevEntry = string | { en: string; jp?: string; kr?: string }
 const abbrev = abbrevData as Record<string, AbbrevEntry>
@@ -59,22 +59,7 @@ type ProsConsMap = Record<string, ProsCons>;
 
 
 
-function getLocalizedPartnerFullname(slug: string, lang: TenantKey): string {
-    const entry = SLUG_TO_CHAR[slug];
-    if (!entry) return "";
-    if (lang === "jp" && entry.Fullname_jp) return entry.Fullname_jp;
-    if (lang === "kr" && entry.Fullname_kr) return entry.Fullname_kr;
-    return entry.Fullname ?? "";
-}
-
-function getLocalizedReason(
-    reason: { en: string; jp: string; kr: string },
-    lang: TenantKey
-): string {
-    if (lang === "jp" && reason.jp.trim()) return reason.jp;
-    if (lang === "kr" && reason.kr.trim()) return reason.kr;
-    return reason.en;
-}
+// Removed: use l() and lRec() from @/lib/localize instead
 
 // ---------- helpers & constants (repris tels quels) ----------
 type TagDef = { label: string; image: string; desc: string; type: string }
@@ -168,18 +153,7 @@ function UnitTypeBadge({ tags }: { tags?: string[] | string }) {
     return <TagDisplayMini tags={[picked]} />
 }
 
-type FullnameKey = Extract<keyof Character, `Fullname${'' | `_${string}`}`>
-function getLocalizedFullname(character: Character, langKey: TenantKey): string {
-    const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
-    const localized = character[key] // type: string | undefined
-    return localized ?? character.Fullname
-}
-
-function getLocalizedEEName(ee: ExclusiveEquipment, langKey: TenantKey): string {
-    if (langKey === 'jp' && ee.name_jp) return ee.name_jp
-    if (langKey === 'kr' && ee.name_kr) return ee.name_kr
-    return ee.name
-}
+// Removed: use l() from @/lib/localize instead
 
 const ORDER: LevelId[] = ['1', '2', '3', '4', '4_1', '4_2', '5', '5_1', '5_2', '5_3', '6'];
 
@@ -191,40 +165,12 @@ function pickTranscendForLang(
     const out = {} as Record<LevelId, string | null>;
 
     for (const k of ORDER) {
-        // on lit les 3 variantes une fois
-        const jp = (src[`${k}_jp` as keyof TranscendMap] ?? null) as string | null;
-        const kr = (src[`${k}_kr` as keyof TranscendMap] ?? null) as string | null;
-        const en = (src[k as keyof TranscendMap] ?? null) as string | null;
-
-        // puis on choisit sans utiliser &&
-        out[k] = lang === 'jp' ? (jp ?? en)
-            : lang === 'kr' ? (kr ?? en)
-                : en;
+        out[k] = l(src as Record<string, unknown>, k, lang) as string | null;
     }
     return out;
 }
 
-type SkillNameKey = Extract<keyof Skill, `name${'' | `_${string}`}`>
-type SkillDescKey = Extract<keyof Skill, `true_desc${'' | `_${string}`}`>
-function getLocalizedSkillName(skill: Skill, langKey: TenantKey): string {
-    const key: SkillNameKey = langKey === 'en' ? 'name' : (`name_${langKey}` as SkillNameKey)
-    return skill[key] ?? skill.name ?? ''
-}
-
-function getLocalizedBurnEffect(
-    burn: { effect: string; effect_jp?: string; effect_kr?: string },
-    langKey: TenantKey
-): string {
-    if (langKey === 'jp' && burn.effect_jp) return burn.effect_jp
-    if (langKey === 'kr' && burn.effect_kr) return burn.effect_kr
-    return burn.effect
-}
-
-
-function getLocalizedSkillDesc(skill: Skill, langKey: TenantKey): string {
-    const key: SkillDescKey = langKey === 'en' ? 'true_desc' : (`true_desc_${langKey}` as SkillDescKey)
-    return skill[key] ?? skill.true_desc ?? ''
-}
+// Removed: use l() from @/lib/localize instead
 
 function splitChainDual(desc: string) {
     const marker = /<color=#ffd732>[^<]+<\/color>\s*:\s*/gi
@@ -249,9 +195,7 @@ function getEEText(
     base: 'effect' | 'effect10',
     langKey: TenantKey
 ): string | undefined {
-    const suffix = langKey === 'jp' ? '_jp' : langKey === 'kr' ? '_kr' : '';
-    const key = `${base}${suffix}` as keyof ExclusiveEquipment;
-    const value = ee[key];
+    const value = l(ee as Record<string, unknown>, base, langKey);
     return typeof value === 'string' ? value : undefined; // évite buff/debuff (string[])
 }
 
@@ -286,11 +230,7 @@ function getSkillLabel(index: number): string {
     return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`
 }
 
-function getLocalizedEEStat(ee: ExclusiveEquipment, langKey: TenantKey): string {
-    if (langKey === 'jp' && ee.mainStat_jp) return ee.mainStat_jp;
-    if (langKey === 'kr' && ee.mainStat_kr) return ee.mainStat_kr;
-    return ee.mainStat;
-}
+// Removed: use l() from @/lib/localize instead
 
 // helper local (type-guard) — à mettre au dessus de l’usage
 type BurnCard = { level: number; cost: number; effect: string }
@@ -362,23 +302,10 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
     const heroKey = toKebabCase(character.Fullname)
     const pc = prosCons[heroKey]
 
-    function getLocalizedProsCons(pc?: ProsCons, lang?: TenantKey) {
-        if (!pc) return { pros: [], cons: [] }
-
-        const pros =
-            lang === 'jp' && pc.pro_jp ? pc.pro_jp :
-                lang === 'kr' && pc.pro_kr ? pc.pro_kr :
-                    pc.pro ?? []
-
-        const cons =
-            lang === 'jp' && pc.con_jp ? pc.con_jp :
-                lang === 'kr' && pc.con_kr ? pc.con_kr :
-                    pc.con ?? []
-
-        return { pros, cons }
-    }
-
-    const { pros, cons } = getLocalizedProsCons(pc, langKey)
+    // Removed: use l() from @/lib/localize instead
+    // Replacement inline below
+    const pros = pc ? (l(pc, 'pro', langKey) as unknown as string[]) || [] : []
+    const cons = pc ? (l(pc, 'con', langKey) as unknown as string[]) || [] : []
     const hasPros = pros.length > 0
     const hasCons = cons.length > 0
     const hasProsCons = hasPros || hasCons
@@ -427,26 +354,12 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
 
     /** Récupère les lignes pour un niveau (ex '2') selon la langue, fallback EN */
     function pickEnhancementForLevel(enh: EnhRecord, level: string, langKey: TenantKey): string[] {
-        const lang = String(langKey).toLowerCase() // 'en' | 'jp' | 'kr'...
-        const primaryKey = lang === 'en' ? level : `${level}_${lang}`
-        const candidates = lang === 'en'
-            ? [primaryKey, level, `${level}_en`]
-            : [primaryKey, level, `${level}_en`]
-
-        for (const key of candidates) {
-            const v = enh[key]
-            if (v && (Array.isArray(v) ? v.length : true)) {
-                return Array.isArray(v) ? v : [v as string]
-            }
-        }
-
-        // dernier recours: n'importe quelle variante commençant par `${level}_`
-        const anyKey = Object.keys(enh).find(k => k === level || k.startsWith(`${level}_`))
-        const anyVal = anyKey ? enh[anyKey] : undefined
-        return anyVal ? (Array.isArray(anyVal) ? anyVal : [anyVal as string]) : []
+        const value = l(enh as Record<string, unknown>, level, langKey)
+        if (!value) return []
+        return Array.isArray(value) ? value : [value as string]
     }
 
-    const ln = (s?: Skill) => (s ? getLocalizedSkillName(s, langKey) : undefined);
+    const ln = (s?: Skill) => (s ? l(s, 'name', langKey) : undefined);
     const localizedTranscend = pickTranscendForLang(character.transcend, langKey);
     const hasVideo = typeof character.video === 'string' && character.video.trim().length > 0
 
@@ -510,7 +423,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
             <div className="max-w-6xl mx-auto p-6">
                 {/* Partie haute : illustration + infos principales */}
                 <section id="overview">
-                    <CharacterNameDisplayBigNoH fullname={getLocalizedFullname(character, langKey)} />
+                    <CharacterNameDisplayBigNoH fullname={l(character, 'Fullname', langKey)} />
                     <div className="mt-3 flex justify-center">
                         <QuickToc sections={SECTIONS} />
                     </div>
@@ -571,17 +484,27 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                 </div>
                             </div>
                             {/* Voice Actor */}
-                            {(character.VoiceActor || character.VoiceActor_jp || character.VoiceActor_kr) && (
-                                <div className="mt-2 p-2 rounded">
-                                    <div className="text-sm text-white/80 max-w-2xl mx-auto">
-                                        <span>🎤 <strong className="text-white">{t('characters.profile.voice_actor')}:</strong> {
-                                            langKey === 'jp' && character.VoiceActor_jp ? character.VoiceActor_jp :
-                                                langKey === 'kr' && character.VoiceActor_kr ? character.VoiceActor_kr :
-                                                    character.VoiceActor || character.VoiceActor_jp || character.VoiceActor_kr
-                                        }</span>
+                            {(() => {
+                                const voiceActor = l(character, 'VoiceActor', langKey)
+                                const languages = getAvailableLanguages()
+                                const hasVoiceActor = voiceActor || languages.some((lang: TenantKey) =>
+                                    l(character, 'VoiceActor', lang)
+                                )
+
+                                if (!hasVoiceActor) return null
+
+                                const displayVoiceActor = voiceActor || languages
+                                    .map((lang: TenantKey) => l(character, 'VoiceActor', lang))
+                                    .find((v: string | undefined) => v)
+
+                                return (
+                                    <div className="mt-2 p-2 rounded">
+                                        <div className="text-sm text-white/80 max-w-2xl mx-auto">
+                                            <span>🎤 <strong className="text-white">{t('characters.profile.voice_actor')}:</strong> {displayVoiceActor}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )
+                            })()}
                             <div className="mt-2 p-2 rounded">
                                 <CharacterProfileDescription fullname={character.Fullname} lng={langKey} />
                             </div>
@@ -745,8 +668,8 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     </div>
                                     {/*EE */}
                                     <div className="flex flex-col gap-2">
-                                        <p className="text-lg font-semibold">{getLocalizedEEName(ee, langKey)}</p>
-                                        {renderMainStat(getLocalizedEEStat(ee, langKey))}
+                                        <p className="text-lg font-semibold">{l(ee, 'name', langKey)}</p>
+                                        {renderMainStat(l(ee, 'mainStat', langKey))}
 
                                         <div className="text-sm text-gray-300 flex flex-col gap-2">
                                             {ee.icon_effect && (
@@ -757,7 +680,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                                         width={20} height={20} style={{ width: 20, height: 20 }} className="object-contain"
                                                     />
                                                     <span className="text-sm font-semibold text-white">
-                                                        {t('exclusive_equipment_title', { name: getLocalizedFullname(character, langKey) })}
+                                                        {t('exclusive_equipment_title', { name: l(character, 'Fullname', langKey) })}
                                                     </span>
                                                 </div>
                                             )}
@@ -817,7 +740,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
 
                                 {character.transcend && (
                                     <div className="w-full md:w-[400px] min-w-[320px]">
-                                        <TranscendenceSlider transcendData={localizedTranscend} lang={langKey} />
+                                        <TranscendenceSlider transcendData={localizedTranscend} lang={langKey} t={t} />
                                     </div>
                                 )}
                             </div>
@@ -840,7 +763,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                         <div className="relative w-12 h-12 shrink-0">
                                             <Image
                                                 src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
-                                                alt={getLocalizedSkillName(skill, langKey)}
+                                                alt={l(skill, 'name', langKey)}
                                                 width={48} height={48} className="object-contain w-12 h-12"
                                             />
                                             {skill.burnEffect && Object.keys(skill.burnEffect).length > 0 && (
@@ -848,7 +771,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                             )}
                                         </div>
                                         <div>
-                                            <p className="text-lg font-semibold">{getLocalizedSkillName(skill, langKey)}</p>
+                                            <p className="text-lg font-semibold">{l(skill, 'name', langKey)}</p>
                                             <p className="text-sm text-gray-400 italic mb-1">
                                                 {t('weakness_gauge_reduction')}: {skill.wgr ?? '—'}<br />
                                                 {t('cooldown')}: {skill.cd ? `${skill.cd} ${t('turn_s')}` : '—'}
@@ -859,7 +782,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
 
                                     {/* Description */}
                                     <div className="text-sm text-gray-200 whitespace-pre-line">
-                                        {formatEffectText(getLocalizedSkillDesc(skill, langKey) || '—')}
+                                        {formatEffectText(l(skill, 'true_desc', langKey) || '—')}
                                     </div>
 
                                     {/* Enhancement */}
@@ -926,7 +849,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                             <div className="flex flex-col items-center gap-2 relative w-16 h-16">
                                                 <Image
                                                     src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
-                                                    alt={getLocalizedSkillName(skillWithBurn, langKey)}
+                                                    alt={l(skillWithBurn, 'name', langKey)}
                                                     width={48} height={48} className="object-contain"
                                                 />
                                                 <Image
@@ -936,7 +859,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                                     className="absolute top-0 left-0 w-5 h-5 z-10 pointer-events-none"
                                                 />
                                                 <span className="text-sm font-semibold text-white text-center mt-1">
-                                                    {getLocalizedSkillName(skillWithBurn, langKey)}
+                                                    {l(skillWithBurn, 'name', langKey)}
                                                 </span>
                                             </div>
 
@@ -959,7 +882,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                                             }}
                                                         >
                                                             <div className="flex items-center justify-center w-full h-full text-center">
-                                                                {formatEffectText(getLocalizedBurnEffect(burn, langKey))}
+                                                                {formatEffectText(l(burn, 'effect', langKey))}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -989,7 +912,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                     {/* Chain & Dual */}
                     {character.skills?.SKT_CHAIN_PASSIVE && (() => {
                         const s = character.skills.SKT_CHAIN_PASSIVE
-                        const localizedDesc = getLocalizedSkillDesc(s, langKey)
+                        const localizedDesc = l(s, 'true_desc', langKey)
                         const { chain, dual } = splitChainDual(localizedDesc)
 
                         return (
@@ -1088,7 +1011,8 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                         const char = SLUG_TO_CHAR[slug]
                                         const id = char?.ID
 
-                                        const localizedName = getLocalizedPartnerFullname(slug, langKey) // affichage
+                                        const charEntry = SLUG_TO_CHAR[slug]
+                                        const localizedName = charEntry ? l(charEntry, 'Fullname', langKey) : slug // affichage
                                         const enFull = char?.Fullname ?? localizedName                   // clé pour abbrev.json (EN si possible)
 
                                         const ab = abbrev[enFull]
@@ -1117,7 +1041,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     <div className="flex-1 ml-3">
                                         <p className="text-sm text-gray-300 italic leading-snug">
                                             {parseText(
-                                                getLocalizedReason(entry.reason, langKey)?.trim() || t("no_reason_provided")
+                                                lRec(entry.reason, langKey)?.trim() || t("no_reason_provided")
                                             )}
                                         </p>
                                     </div>

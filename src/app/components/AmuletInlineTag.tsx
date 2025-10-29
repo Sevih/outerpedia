@@ -7,6 +7,7 @@ import amuletsRaw from '@/data/amulet.json'
 import type { Accessory } from '@/types/equipment'
 import { useTenant } from '@/lib/contexts/TenantContext'
 import formatEffectText from '@/utils/formatText'
+import { l } from '@/lib/localize'
 
 type Props = {
   name: string
@@ -21,26 +22,20 @@ export default function AmuletInlineTag({
   showLabel = true,
   size = 24,
 }: Props) {
-  const { key } = useTenant()
-  const lang: 'en' | 'jp' | 'kr' = key === 'jp' ? 'jp' : key === 'kr' ? 'kr' : 'en'
+  const { key: lang } = useTenant()
 
   const amulets = amuletsRaw as Accessory[]
   const amulet = amulets.find(a => a.name === name)
   if (!amulet) return <span className="text-red-500">{name}</span>
 
-  const pick = (base?: string, jp?: string, kr?: string) =>
-    lang === 'jp' ? (jp ?? base ?? '') : lang === 'kr' ? (kr ?? base ?? '') : (base ?? '')
-
-  const label = pick(amulet.name, amulet.name_jp, amulet.name_kr)
+  const label = l(amulet, 'name', lang)
 
   // On privilégie la description Lv4 si dispo, sinon Lv1
-  const effectText = pick(
-    amulet.effect_desc4 || amulet.effect_desc1,
-    amulet.effect_desc4_jp || amulet.effect_desc1_jp,
-    amulet.effect_desc4_kr || amulet.effect_desc1_kr
-  )
+  const effectDesc4 = l(amulet, 'effect_desc4', lang)
+  const effectDesc1 = l(amulet, 'effect_desc1', lang)
+  const effectText = effectDesc4 || effectDesc1
 
-  const effectName = pick(amulet.effect_name, amulet.effect_name_jp, amulet.effect_name_kr)
+  const effectName = l(amulet, 'effect_name', lang)
 
   const rarity = (amulet.rarity || 'Legendary').toLowerCase()
   const bgPath = `/images/bg/CT_Slot_${rarity}.webp`

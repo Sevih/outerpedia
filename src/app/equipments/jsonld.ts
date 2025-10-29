@@ -1,4 +1,6 @@
 // JSON-safe typing (même pattern que le reste)
+import { getAvailableLanguageCodes } from '@/tenants/config'
+
 type JSONValue =
   | string
   | number
@@ -42,14 +44,13 @@ export function breadcrumbLd(
   }
 }
 
-/** Page collection d’équipements */
+/** Page collection d'équipements */
 export function equipmentsCollectionLd(domain: string, opts: {
   title: string
   description: string
   path: string
   imageUrl: string
   counts: { weapons: number; accessories: number; talismans: number; sets: number; ee: number }
-  inLanguage: ('en' | 'jp' | 'kr')[]
 }): JsonLdObject {
   const base = normalizeBase(domain)
   return {
@@ -59,7 +60,7 @@ export function equipmentsCollectionLd(domain: string, opts: {
     description: opts.description,
     url: `${base}${opts.path}`,
     isPartOf: { '@type': 'WebSite', name: 'Outerpedia', url: `${base}/` },
-    inLanguage: opts.inLanguage,
+    inLanguage: getAvailableLanguageCodes(),
     primaryImageOfPage: { '@type': 'ImageObject', url: opts.imageUrl },
     about: [
       { '@type': 'Thing', name: 'Weapons', additionalProperty: { '@type': 'PropertyValue', name: 'count', value: opts.counts.weapons } },

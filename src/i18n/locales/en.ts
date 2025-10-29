@@ -23,6 +23,8 @@ const en = {
   'titles.main.coupon': 'Coupon Codes',
   'titles.main.changetitle': 'Latest Outerpedia Updates & Features',
   'titles.main.tochangelog': 'View full changelog',
+  'changelog.meta.title': 'Changelog | Outerpedia',
+  'changelog.meta.desc': 'Track all updates made to Outerpedia: guides, characters, tools, and more.',
   'titles.tl.outerplaneTL': 'Outerplane Tier List',
   'titles.tl.desc': 'Choose between PvE and PvP character rankings. Based on evaluations with 6★ transcends and level 0 EE effects.',
   'titles.tl.pvedesc': 'PvE performance rankings across all content.',
@@ -148,6 +150,18 @@ const en = {
   "stats.speed": "Speed",
   "stats.attack": "Attack",
   "substat_priority": "Substat Priority",
+
+  // Transcendence levels
+  "transcend.level1": "Lv 1",
+  "transcend.level2": "Lv 2",
+  "transcend.level3": "Lv 3",
+  "transcend.level4": "Lv 4",
+  "transcend.level4plus": "Lv 4+",
+  "transcend.level5": "Lv 5",
+  "transcend.level5plus": "Lv 5+",
+  "transcend.level5plusplus": "Lv 5++",
+  "transcend.level6": "Lv 6",
+
   "weapons": "Weapons",
   "accessories": "Accessories",
   "sets": "Sets",
@@ -499,6 +513,42 @@ const en = {
   'chars.og.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
   'chars.twitter.title': 'Outerplane Characters – Updated {monthYear} | Outerpedia',
   'chars.twitter.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
+  'chars.page.h1.short': 'Outerplane Characters',
+  'chars.page.h1.full': 'Outerplane Characters Database',
+  'chars.page.updated': 'Updated {monthYear}',
+  'chars.breadcrumb.home': 'Home',
+  'chars.jsonld.desc': 'Full character database: stats, skills, builds, and exclusive equipment. Updated {monthYear}.',
+
+  // Equipments page
+  'equipments.page.title': 'Equipments',
+  'equipments.page.desc': 'Browse all equipment in Outerplane: weapons, accessories, talismans, sets, and exclusive equipment.',
+  'equipments.breadcrumb.home': 'Home',
+
+  // Skills
+  'skills.dualAttack': 'Dual Attack',
+
+  // SEO Keywords - Base
+  'seo.gameName': 'outerplane',
+  'seo.siteName': 'outerpedia',
+  'seo.wiki': 'outerplane wiki',
+  'seo.guide': 'outerplane guide',
+  'seo.guideSuffix': 'guide',
+  'seo.turnBasedRpg': 'turn-based rpg',
+  'seo.mobileRpg': 'mobile rpg',
+  'seo.characterBuilds': 'character builds',
+
+  // SEO Keywords - Category Specific
+  'seo.category.adventure': 'adventure,story mode,chapter walkthrough,map,spoiler-free,stage progression,pve',
+  'seo.category.world-boss': 'world boss,boss strategy,team building,gear recommendation,extreme league,pve',
+  'seo.category.joint-boss': 'joint boss,co-op,raid score,damage optimization,team comps,pve',
+  'seo.category.adventure-license': 'adventure license,promotion license,license levels,license quests,pve',
+  'seo.category.special-request': 'gear boss,special request,identification,ecology study,materials,pve',
+  'seo.category.irregular-extermination': 'irregular extermination,limited-time event,event boss,rewards,pve',
+  'seo.category.guild-raid': 'guild raid,co-op boss,weekly ranking,guild damage,team building,pve',
+  'seo.category.general-guides': 'beginner guide,resource management,daily routine,systems overview,tips and tricks,pve',
+  'seo.category.skyward-tower': 'skyward tower,floors,clear strategy,recommended teams,pve',
+  'seo.category.monad-gate': 'monad gate,roguelike,routes,map,relics,pve',
+
   // en.ts
   'guides.meta.title': 'Outerplane Guides | Outerpedia',
   'guides.meta.desc': 'Browse all strategy guides for Outerplane: {list}. Updated regularly with boss tips, adventure help, and event walkthroughs.',
@@ -508,6 +558,11 @@ const en = {
   'guides.twitter.desc': 'Latest guides: {list}.',
   'guides.spoilerFree.enable': 'Enable Spoiler-Free Mode',
   'guides.spoilerFree.disable': 'Disable Spoiler-Free Mode',
+  'guides.page.h1': 'All Guides',
+  'guides.breadcrumb.home': 'Home',
+  'guides.jsonld.title': 'Outerplane Guides | Outerpedia',
+  'guides.jsonld.desc.prefix': 'Browse all strategy guides for Outerplane: ',
+  'guides.jsonld.desc.suffix': '. Updated regularly with boss tips, adventure help, and event walkthroughs.',
 
   "legal.meta.title": "Legal Notice & Disclaimer | Outerpedia",
   "legal.meta.desc": "Legal disclaimer, copyright, and content usage information for Outerpedia, a non-commercial fan project dedicated to Outerplane.",

@@ -1,19 +1,20 @@
 // src/tenants/config.ts
 
-export type TenantKey = 'en' | 'jp' | 'kr';
+export type TenantKey = 'en' | 'jp' | 'kr' | 'zh';
 
 export const BASE_DOMAIN =
   process.env.NEXT_PUBLIC_BASE_DOMAIN || 'outerpedia.local';
 
 export const TENANTS: Record<TenantKey, {
-  locale: 'en-US'|'ja-JP'|'ko-KR';
+  locale: 'en-US'|'ja-JP'|'ko-KR'|'zh-CN';
   label: string;
   domain: string;
-  theme?: 'default'|'jp'|'kr';
+  theme?: 'default'|'jp'|'kr'|'zh';
 }> = {
   en: { locale: 'en-US', label: 'English',  domain: BASE_DOMAIN,         theme: 'default' },
   jp: { locale: 'ja-JP', label: '日本語',     domain: `jp.${BASE_DOMAIN}`, theme: 'jp' },
   kr: { locale: 'ko-KR', label: '한국어',     domain: `kr.${BASE_DOMAIN}`, theme: 'kr' },
+  zh: { locale: 'zh-CN', label: '简体中文',   domain: `zh.${BASE_DOMAIN}`, theme: 'zh' },
 };
 
 export function resolveTenantFromHost(host?: string): TenantKey {
@@ -23,30 +24,36 @@ export function resolveTenantFromHost(host?: string): TenantKey {
   const sub = parts.length > 2 ? parts[0] : '';
   if (sub === 'jp') return 'jp';
   if (sub === 'kr') return 'kr';
+  if (sub === 'zh') return 'zh';
   return 'en';
 }
-
-// ↓↓↓ EXPORTER ces quatre maps ↓↓↓
-export const TITLES: Record<TenantKey, string> = {
-  en: 'Outerplane Tier List, Character Builds, Guides & Database – Outerpedia',
-  jp: 'Outerplane ティアリスト・ビルド・ガイド・データベース – Outerpedia',
-  kr: 'Outerplane 티어리스트, 빌드, 가이드 & 데이터베이스 – Outerpedia',
-};
-
-export const DESCS: Record<TenantKey, string> = {
-  en: 'Explore characters, builds, gear, tier lists and join our Discord community for Outerplane!',
-  jp: 'Outerplane のキャラクター、ビルド、装備、ティアリストをチェックし、Discord コミュニティに参加しよう！',
-  kr: 'Outerplane의 캐릭터, 빌드, 장비, 티어리스트를 확인하고 Discord 커뮤니티에 참여하세요!',
-};
 
 export const OG_LOCALE: Record<TenantKey, string> = {
   en: 'en_US',
   jp: 'ja_JP',
   kr: 'ko_KR',
+  zh: 'zh_CN',
 };
 
 export const HREFLANG: Record<TenantKey, string> = {
   en: 'en',
   jp: 'ja',
   kr: 'ko',
+  zh: 'zh',
 };
+
+/**
+ * Retourne toutes les langues disponibles (depuis TENANTS)
+ * Utiliser cette fonction au lieu de hardcoder ['en', 'jp', 'kr', 'zh']
+ */
+export function getAvailableLanguages(): TenantKey[] {
+  return Object.keys(TENANTS) as TenantKey[];
+}
+
+/**
+ * Retourne les codes de langue pour JSON-LD (ex: ['en', 'ja', 'ko', 'zh'])
+ * Utilise HREFLANG au lieu de TenantKey
+ */
+export function getAvailableLanguageCodes(): string[] {
+  return getAvailableLanguages().map(k => HREFLANG[k]);
+}

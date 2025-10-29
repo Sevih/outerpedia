@@ -7,20 +7,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
 import { getTenantServer } from '@/tenants/tenant.server'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
 import type { TenantKey } from '@/tenants/config'
+import type { Localized } from '@/types/common'
+import { lRec } from '@/lib/localize'
 import { createPageMetadata } from '@/lib/seo'
+import { generateGuideKeywords } from '@/lib/seo_guides'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd, guidesWebPageLd } from './jsonld'
 
 // ---- Types & utils
-type Localized = { en: string; jp?: string; kr?: string }
 const getLocalized = (v: Localized | string, lang: TenantKey) =>
-  typeof v === 'string' ? v : (v[lang] ?? v.en)
-
-function dedupeByLocale(list: string[], lang: TenantKey): string[] {
-  const norm = (s: string) => (lang === 'en' ? s.toLowerCase() : s)
-  return Array.from(new Map(list.map(k => [norm(k), k])).values())
-}
+  typeof v === 'string' ? v : lRec(v, lang)
 
 type Guide = {
   category: string
@@ -86,9 +84,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ogDescKey: 'guides.detail.og.desc',
     twitterTitleKey: 'guides.detail.tw.title',
     twitterDescKey: 'guides.detail.tw.desc',
-    keywords: generateGuideKeywords(
-      { ...guide, title: guideTitle, description: guideDesc },
-      slug,
+    keywords: await generateGuideKeywords(
+      category,
+      guideTitle,
       langKey
     ),
     image: {
@@ -136,13 +134,15 @@ export default async function GuidePage({ params }: Props) {
       ? `https://${domain}/images/guides/monad-gate/CM_Adventure_MonadGate.png`
       : `https://${domain}/images/guides/${guide.category}/${slug}_portrait.png`
 
+  const { t } = await getServerI18n(langKey)
+
   return (
     <div className="p-6">
       <JsonLd
         json={[
           websiteLd(domain),
           breadcrumbLd(domain, {
-            home: langKey === 'jp' ? 'ホーム' : langKey === 'kr' ? '홈' : 'Home',
+            home: t('guides.breadcrumb.home'),
             current: `${guideTitle} | ${catTitle}`,
             currentPath: path,
           }),
@@ -151,7 +151,6 @@ export default async function GuidePage({ params }: Props) {
             description: `${catTitle} ${guideTitle} ${guideDesc}`,
             path,
             imageUrl: absImage,
-            inLanguage: ['en', 'jp', 'kr'],
           }),
         ]}
       />
@@ -258,32 +257,4 @@ export default async function GuidePage({ params }: Props) {
       </article>
     </div>
   )
-}
-
-// ---------- Keyword helper ----------
-function generateGuideKeywords(guide: Guide, slug: string, lang: TenantKey): string[] {
-  const titleStr =
-    typeof guide.title === 'string' ? guide.title : (guide.title[lang] ?? guide.title.en)
-
-  const base_en = [
-    'outerplane',
-    'outerpedia',
-    'outerplane wiki',
-    'outerplane guide',
-    titleStr,
-    `${titleStr} guide`,
-    slug,
-    'turn-based rpg',
-    'mobile rpg',
-    'character builds',
-  ]
-  const base_jp = ['アウタープレーン', 'Outerpedia', `${titleStr} ガイド`]
-  const base_kr = ['아우터플레인', 'Outerpedia', `${titleStr} 가이드`]
-
-  let out: string[]
-  if (lang === 'jp') out = base_jp
-  else if (lang === 'kr') out = base_kr
-  else out = base_en
-
-  return dedupeByLocale(out, lang)
 }

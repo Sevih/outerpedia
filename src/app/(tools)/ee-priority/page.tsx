@@ -62,10 +62,10 @@ export default async function EePriorityPage() {
       description:
         t('eePriority.itemList.desc') ??
         'Exclusive Equipment Priority based on level 0 base effects only, for optimal unlock order.',
-      list: eeData,            // <- ton objet Record<slug, EEEntry>
-      characterMap,            // <- déjà construit
-      imageKind: 'portrait',   // ou 'atb'
-      lang: langKey,           // <- AJOUT ICI ( 'en' | 'jp' | 'kr' )
+      list: eeData,            
+      characterMap,            
+      imageKind: 'portrait',  
+      lang: langKey,    
     }),
   ]
 

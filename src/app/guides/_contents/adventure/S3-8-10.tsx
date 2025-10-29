@@ -25,13 +25,13 @@ export default function TyrantGuide() {
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>Bring <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" /> and/or <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> to deal with <EffectInlineTag name="BT_DOT_BURN" type="debuff" /> (make sure to apply those at the end of the second battle).</li>
                 <li>Bring <EffectInlineTag name="BT_IMMUNE" type="buff" /> to block <EffectInlineTag name="BT_DOT_BURN" type="debuff" /> after the first <EffectInlineTag name="BT_DETONATE" type="debuff" />.</li>
-                <li>Bring <EffectInlineTag name="BT_RESURRECTION_G" type="buff" /> to recover from any deaths after the first <EffectInlineTag name="BT_DETONATE" type="debuff" />.</li>
+                <li>Bring <EffectInlineTag name="BT_RESURRECTION" type="buff" /> to recover from any deaths after the first <EffectInlineTag name="BT_DETONATE" type="debuff" />.</li>
             </ul>
             <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Leo" /> <CharacterLinkCard name="Monad Eva" /> : for <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
                 <li><CharacterLinkCard name="Leo" /> <CharacterLinkCard name="Lyla" /> <CharacterLinkCard name="Demiurge Drakhan" /> <CharacterLinkCard name="Luna" /> <CharacterLinkCard name="Omega Nadja" /> <CharacterLinkCard name="Liselotte" />: for <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" />.</li>
-                <li><CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_RESURRECTION_G" type="buff" />.</li>
+                <li><CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_RESURRECTION" type="buff" />.</li>
                 <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Astei" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" />.</li>
             </ul>
         </div>

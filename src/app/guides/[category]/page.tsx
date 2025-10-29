@@ -12,7 +12,9 @@ import AdventureLicenseGuideGrid from '@/app/components/AdventureLicenseGuideGri
 import MonadGateGuideGrid from '@/app/components/MonadGateGuideGrid'
 import SkywardTowerGuideGrid from '@/app/components/SkywardTowerGuideGrid'
 import { getTenantServer } from '@/tenants/tenant.server'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
 import type { TenantKey } from '@/tenants/config'
+import type { Localized } from '@/types/common'
 import { generateGuideKeywords as generateKeywords } from '@/lib/seo_guides'
 
 import { createPageMetadata } from '@/lib/seo'
@@ -22,9 +24,8 @@ import { websiteLd, breadcrumbLd, guidesCollectionLd } from './jsonld'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-type Localized = { en: string; jp?: string; kr?: string }
 const getLocalized = (v: Localized | string, lang: TenantKey) =>
-  typeof v === 'string' ? v : (v[lang] ?? v.en)
+  typeof v === 'string' ? v : (v[lang as keyof typeof v] ?? v.en)
 
 type Guide = {
   category: string
@@ -78,7 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<Props['para
     ogDescKey: 'guides.cat.og.desc',
     twitterTitleKey: 'guides.cat.tw.title',
     twitterDescKey: 'guides.cat.tw.desc',
-    keywords: generateKeywords(category, metaTitle, langKey),
+    keywords: await generateKeywords(category, metaTitle, langKey),
     image: {
       url: iconAbs,
       width: 150,
@@ -136,6 +137,7 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
     return a.title.localeCompare(b.title)
   })
 
+  const { t } = await getServerI18n(langKey)
   const path = `/guides/${category}`
 
   return (
@@ -145,7 +147,7 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
         json={[
           websiteLd(domain),
           breadcrumbLd(domain, {
-            home: langKey === 'jp' ? 'ホーム' : langKey === 'kr' ? '홈' : 'Home',
+            home: t('guides.breadcrumb.home'),
             current: metaTitle,
             currentPath: path,
           }),

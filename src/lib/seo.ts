@@ -1,7 +1,7 @@
 // src/lib/seo.ts
 import type { Metadata } from 'next'
 import { getTenantServer } from '@/tenants/tenant.server'
-import { TENANTS, HREFLANG, OG_LOCALE, type TenantKey } from '@/tenants/config'
+import { TENANTS, HREFLANG, OG_LOCALE, getAvailableLanguages } from '@/tenants/config'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 type ImageOpt = {
@@ -37,12 +37,12 @@ type CreatePageMetaArgs = {
   vars?: Record<string, unknown>
 }
 
-/** Construit l’objet { 'en-US': urlEn, 'ja-JP': urlJp, ... } pour alternates.languages, avec x-default */
+/** Construit l'objet { 'en-US': urlEn, 'ja-JP': urlJp, ... } pour alternates.languages, avec x-default */
 function buildLanguageAlternates(
   path: string
 ): Record<string, string> & { 'x-default': string } {
   const base: Record<string, string> = Object.fromEntries(
-    (Object.keys(TENANTS) as TenantKey[]).map((k) => [
+    getAvailableLanguages().map((k) => [
       HREFLANG[k],
       `https://${TENANTS[k].domain}${path}`,
     ])
@@ -111,7 +111,7 @@ export async function createPageMetadata({
   const url = `https://${domain}${path}`
   const languages = buildLanguageAlternates(path)
   const ogLocale = OG_LOCALE[langKey] ?? 'en_US'
-  const ogAlternateLocales = (Object.keys(TENANTS) as TenantKey[])
+  const ogAlternateLocales = getAvailableLanguages()
     .filter(k => k !== langKey)
     .map(k => OG_LOCALE[k])
 

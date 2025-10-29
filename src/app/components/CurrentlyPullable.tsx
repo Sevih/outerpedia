@@ -3,6 +3,7 @@ import path from 'path'
 import { toKebabCase } from '@/utils/formatText'
 import CurrentlyPullableClient from './CurrentlyPullableClient'
 import { getTenantServer } from '@/tenants/tenant.server'
+import { l } from '@/lib/localize'
 
 type BannerEntry = {
   name: string
@@ -35,13 +36,7 @@ export default async function CurrentlyPullable() {
     const filePath = path.resolve(process.cwd(), 'src/data/char', `${slug}.json`)
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'))
 
-    const trueName =
-      langKey === 'jp'
-        ? data.Fullname_jp ?? data.Fullname
-        : langKey === 'kr'
-          ? data.Fullname_kr ?? data.Fullname
-          : data.Fullname
-
+    const trueName = l(data, 'Fullname', langKey)
 
     return {
       name:trueName,

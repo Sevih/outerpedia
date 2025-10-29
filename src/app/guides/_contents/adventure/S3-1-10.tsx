@@ -33,7 +33,7 @@ export default function TyrantGuide() {
                 <li><CharacterLinkCard name="Veronica" /> : <EffectInlineTag name="BT_AGGRO" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Fatal" /> : <EffectInlineTag name="BT_STEALTHED" type="buff" />.</li>
                 <li>Any <ClassInlineTag name="Ranger" />.</li>
-                <li><CharacterLinkCard name="Nella" /><CharacterLinkCard name="Mene" /> : for <EffectInlineTag name="BT_RESURRECTION_G" type="buff" /></li>
+                <li><CharacterLinkCard name="Nella" /><CharacterLinkCard name="Mene" /> : for <EffectInlineTag name="BT_RESURRECTION" type="buff" /></li>
             </ul>
         </div>
     )

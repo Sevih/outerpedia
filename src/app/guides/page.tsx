@@ -4,6 +4,9 @@ import type { Metadata } from 'next'
 import rawCategories from '@/data/guides/categories.json'
 import { getTenantServer } from '@/tenants/tenant.server'
 import type { TenantKey } from '@/tenants/config'
+import type { Localized } from '@/types/common'
+import { lRec } from '@/lib/localize'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 import { createPageMetadata } from '@/lib/seo'
 import JsonLd from '@/app/components/JsonLd'
@@ -13,7 +16,6 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 // ---- Types & helpers
-type Localized = { en: string; jp?: string; kr?: string }
 type Category = {
   title: string | Localized
   description: string | Localized
@@ -25,11 +27,8 @@ type Category = {
 const categories = rawCategories as Record<string, Category>
 const categoryMeta: Category[] = Object.values(categories)
 
-function getLocalized(v: string | Localized, lang: TenantKey): string {
-  return typeof v === 'string' ? v : (v[lang] ?? v.en)
-}
 function getTitle(cat: Category, lang: TenantKey): string {
-  return getLocalized(cat.title, lang)
+  return typeof cat.title === 'string' ? cat.title : lRec(cat.title, lang)
 }
 
 // ---- Metadata (via helper site-wide)
@@ -99,15 +98,18 @@ export async function generateMetadata(): Promise<Metadata> {
 // ---- Page
 export default async function GuidesHome() {
   const { key: langKey, domain } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
 
-  const titleH1 =
-    langKey === 'jp' ? 'すべてのガイド'
-      : langKey === 'kr' ? '전체 가이드'
-        : 'All Guides'
+  const titleH1 = t('guides.page.h1')
 
   const path = '/guides'
   const iconRel = '/images/guides/CM_GuideQuest_Navigate.png'
   const iconAbs = `https://${domain}${iconRel}`
+
+  const categoryList = categoryMeta
+    .filter(c => c.valid)
+    .map(c => getTitle(c, langKey).replace(/ Guides$/i, ''))
+    .join(', ')
 
   return (
     <div className="p-6">
@@ -116,35 +118,15 @@ export default async function GuidesHome() {
         json={[
           websiteLd(domain),
           breadcrumbLd(domain, {
-            home: langKey === 'jp' ? 'ホーム'
-              : langKey === 'kr' ? '홈'
-                : 'Home',
+            home: t('guides.breadcrumb.home'),
             current: titleH1,
             currentPath: path,
           }),
           guidesWebPageLd(domain, {
-            title:
-              langKey === 'jp' ? 'Outerplane 攻略ガイド | Outerpedia'
-                : langKey === 'kr' ? 'Outerplane 가이드 | Outerpedia'
-                  : 'Outerplane Guides | Outerpedia',
-            description:
-              (langKey === 'jp'
-                ? 'Outerplane の各種攻略ガイド: '
-                : langKey === 'kr'
-                  ? 'Outerplane의 모든 공략 가이드: '
-                  : 'Browse all strategy guides for Outerplane: ') +
-              categoryMeta
-                .filter(c => c.valid)
-                .map(c => getTitle(c, langKey).replace(/ Guides$/i, ''))
-                .join(', ') +
-              (langKey === 'jp'
-                ? '。ボス攻略・冒険・イベントのウォークスルーを随時更新。'
-                : langKey === 'kr'
-                  ? '. 보스 팁, 모험, 이벤트 공략이 정기적으로 업데이트됩니다.'
-                  : '. Updated regularly with boss tips, adventure help, and event walkthroughs.'),
+            title: t('guides.jsonld.title'),
+            description: t('guides.jsonld.desc.prefix') + categoryList + t('guides.jsonld.desc.suffix'),
             path,
             imageUrl: iconAbs,
-            inLanguage: ['en', 'jp', 'kr'],
           }),
         ]}
       />

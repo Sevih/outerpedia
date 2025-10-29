@@ -5,55 +5,17 @@ import ItemSourceBox from './SourceBox'
 import ItemStatsBlock from './ItemStatsBlock'
 import type { TenantKey } from '@/tenants/config'
 import type { ArmorSet } from '@/types/equipment'
+import { l } from '@/lib/localize'
 
 type Lang = TenantKey
 
-// Libellés simples (on garde la même approche que renderWeapon/Accessory)
-const LABELS: Record<Lang, {
-  rarity: string
-  setEffects: string
-  twoPiece: string
-  fourPiece: string
-}> = {
-  en: { rarity: 'Rarity:', setEffects: 'Set Effects', twoPiece: '2-Piece', fourPiece: '4-Piece' },
-  jp: { rarity: 'レア度：', setEffects: 'セット効果', twoPiece: '2セット', fourPiece: '4セット' },
-  kr: { rarity: '희귀도:', setEffects: '세트 효과', twoPiece: '2세트', fourPiece: '4세트' },
-}
-
-
-// Localisation champs avec fallback EN
-function localize(entry: ArmorSet, lang: Lang) {
-  const name =
-    (lang === 'jp' && entry.name_jp) ||
-    (lang === 'kr' && entry.name_kr) ||
-    entry.name
-
-  const effect_2_1 =
-    (lang === 'jp' && entry.effect_2_1_jp) ||
-    (lang === 'kr' && entry.effect_2_1_kr) ||
-    entry.effect_2_1
-
-  const effect_4_1 =
-    (lang === 'jp' && entry.effect_4_1_jp) ||
-    (lang === 'kr' && entry.effect_4_1_kr) ||
-    entry.effect_4_1
-
-  const effect_2_4 =
-    (lang === 'jp' && entry.effect_2_4_jp) ||
-    (lang === 'kr' && entry.effect_2_4_kr) ||
-    entry.effect_2_4
-
-  const effect_4_4 =
-    (lang === 'jp' && entry.effect_4_4_jp) ||
-    (lang === 'kr' && entry.effect_4_4_kr) ||
-    entry.effect_4_4
-
-  return { name, effect_2_1, effect_4_1, effect_2_4, effect_4_4 }
-}
-
 export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: string, vars?: Record<string, unknown>) => string) {
-  const L = LABELS[lang]
-  const loc = localize(entry, lang)
+  // Utilise la fonction l() de localize.ts
+  const name = l(entry, 'name', lang)
+  const effect_2_1 = l(entry, 'effect_2_1', lang)
+  const effect_4_1 = l(entry, 'effect_4_1', lang)
+  const effect_2_4 = l(entry, 'effect_2_4', lang)
+  const effect_4_4 = l(entry, 'effect_4_4', lang)
   // Icône de set : set_icon contient déjà le nom complet qui commence par TI_Icon_Set_Enchant_...
   const imageUrl = entry.set_icon
     ? `/images/ui/effect/${entry.set_icon}.webp`
@@ -62,7 +24,7 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
   const url = `https://outerpedia.com/item/set/${toKebabCase(entry.name)}`
 
   const hasAnyEffect =
-    !!(loc.effect_2_1?.trim() || loc.effect_4_1?.trim() || loc.effect_2_4?.trim() || loc.effect_4_4?.trim())
+    !!(effect_2_1?.trim() || effect_4_1?.trim() || effect_2_4?.trim() || effect_4_4?.trim())
 
   return (
     <div className="flex flex-col gap-6 text-white items-center">
@@ -71,7 +33,7 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
         <div className="w-[80px] h-[80px] relative shrink-0">
           <Image
             src={imageUrl}
-            alt={loc.name}
+            alt={name}
             fill
             sizes="100px"
             className="object-contain rounded-xl bg-neutral-900 border border-white/10"
@@ -80,7 +42,7 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
 
         <div className="text-center sm:text-left">
           <h1 className="text-2xl font-bold mb-2">
-            {loc.name} - {t('equipments_tabs.armor')}
+            {name} - {t('equipments_tabs.armor')}
           </h1>
         </div>
       </div>
@@ -139,7 +101,7 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
           {imageUrl && (
             <div className="flex items-center gap-2">
               <Image src={imageUrl} alt="Set Icon" width={24} height={24} />
-              <span className="font-semibold text-white">{loc.name} - {L.setEffects}</span>
+              <span className="font-semibold text-white">{name} - {t('items.setEffects')}</span>
             </div>
           )}
 
@@ -148,30 +110,30 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
             <thead>
               <tr className="text-amber-300 border-b border-white/10">
                 <th className="p-2 font-semibold"> </th>
-                <th className="p-2 font-semibold">{L.twoPiece}</th>
-                <th className="p-2 font-semibold">{L.fourPiece}</th>
+                <th className="p-2 font-semibold">{t('items.set.twoPiece')}</th>
+                <th className="p-2 font-semibold">{t('items.set.fourPiece')}</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b border-white/5">
                 <td className="p-2 text-neutral-400 font-medium">T0</td>
                 <td className="p-2 text-neutral-200 whitespace-pre-line">
-                  {loc.effect_2_1 || <span className="text-neutral-500 italic">—</span>}
+                  {effect_2_1 || <span className="text-neutral-500 italic">—</span>}
                 </td>
                 <td className="p-2 text-neutral-200 whitespace-pre-line">
-                  {loc.effect_4_1 || <span className="text-neutral-500 italic">—</span>}
+                  {effect_4_1 || <span className="text-neutral-500 italic">—</span>}
                 </td>
               </tr>
               <tr>
                 <td className="p-2 text-neutral-400 font-medium">T4</td>
                 <td className="p-2 text-neutral-200 whitespace-pre-line">
-                  {loc.effect_2_4
-                    ? highlightDiff(loc.effect_2_1 ?? '', loc.effect_2_4)
+                  {effect_2_4
+                    ? highlightDiff(effect_2_1 ?? '', effect_2_4)
                     : <span className="text-neutral-500 italic">—</span>}
                 </td>
                 <td className="p-2 text-neutral-200 whitespace-pre-line">
-                  {loc.effect_4_4
-                    ? highlightDiff(loc.effect_4_1 ?? '', loc.effect_4_4)
+                  {effect_4_4
+                    ? highlightDiff(effect_4_1 ?? '', effect_4_4)
                     : <span className="text-neutral-500 italic">—</span>}
                 </td>
               </tr>
@@ -181,7 +143,7 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
       )}
 
       <ItemSourceBox
-        itemname={loc.name}
+        itemname={name}
         source={entry.source ?? undefined}
         boss={entry.boss ?? undefined}
         mode={entry.mode ?? undefined}
@@ -214,10 +176,10 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
               image: imageUrl.startsWith('http') ? imageUrl : `https://outerpedia.com${imageUrl}`,
               url,
               description:
-                loc.effect_4_4 ??
-                loc.effect_2_4 ??
-                loc.effect_4_1 ??
-                loc.effect_2_1 ?? '',
+                effect_4_4 ??
+                effect_2_4 ??
+                effect_4_1 ??
+                effect_2_1 ?? '',
             }
           }),
         }}

@@ -6,6 +6,7 @@ import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
 import type { CSSProperties } from 'react'
 import { useTenant } from '@/lib/contexts/TenantContext'
+import { l } from '@/lib/localize'
 
 type Props = {
   name: string
@@ -26,22 +27,14 @@ type Effect = {
 }
 
 export default function EffectInlineTag({ name, type, triggerStyle }: Props) {
-  const { key } = useTenant()
-  const lang: 'en' | 'jp' | 'kr' = key === 'jp' ? 'jp' : key === 'kr' ? 'kr' : 'en'
+  const { key: lang } = useTenant()
   const effects: Effect[] = (type === 'buff' ? buffs : debuffs).map(e => ({ ...e, type }))
   const effect = effects.find((e) => e.name === name)
 
   if (!effect) return <span className="text-red-500">{name}</span>
 
-  const label =
-    lang === 'jp' ? (effect.label_jp ?? effect.label)
-      : lang === 'kr' ? (effect.label_kr ?? effect.label)
-        : effect.label
-
-  const description =
-    lang === 'jp' ? (effect.description_jp ?? effect.description)
-      : lang === 'kr' ? (effect.description_kr ?? effect.description)
-        : effect.description
+  const label = l(effect, 'label', lang)
+  const description = l(effect, 'description', lang)
 
   const iconPath = `/images/ui/effect/${effect.icon}.webp`
   const color = type === 'buff' ? 'text-sky-400' : 'text-red-400'

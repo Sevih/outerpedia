@@ -6,6 +6,7 @@ import { useI18n } from "@/lib/contexts/I18nContext"
 import { toKebabCase } from "@/utils/formatText"
 import type { ArmorSet } from "@/types/equipment"
 import type { TenantKey } from "@/tenants/config"
+import { l } from "@/lib/localize"
 
 // ---- Helpers ----
 function highlightNums(text?: string | null) {
@@ -14,12 +15,6 @@ function highlightNums(text?: string | null) {
   const numRe = /(\d+(?:\.\d+)?\s*%?)/g
   const html = text.replace(numRe, '<span style="color:#28d9ed">$1</span>').replace(/\\n|\\\\n/g, "<br />")
   return <span dangerouslySetInnerHTML={{ __html: html }} />
-}
-
-function pickByLang(base?: string | null, jp?: string | null, kr?: string | null, langue?: TenantKey) {
-  if (langue === "jp" && jp && jp.trim().length) return jp
-  if (langue === "kr" && kr && kr.trim().length) return kr
-  return base ?? ""
 }
 
 type TwoOrFour =
@@ -56,11 +51,11 @@ export default function SetComboCard(props: (TwoOrFour & { langue: TenantKey }))
     const leftSet = props.left.set
     const rightSet = props.right.set
 
-    const leftName = pickByLang(leftSet.name, leftSet.name_jp, leftSet.name_kr, langue)
-    const rightName = pickByLang(rightSet.name, rightSet.name_jp, rightSet.name_kr, langue)
+    const leftName = l(leftSet, "name", langue)
+    const rightName = l(rightSet, "name", langue)
 
-    const leftTier4 = pickByLang(leftSet.effect_2_4, leftSet.effect_2_4_jp, leftSet.effect_2_4_kr, langue)
-    const rightTier4 = pickByLang(rightSet.effect_2_4, rightSet.effect_2_4_jp, rightSet.effect_2_4_kr, langue)
+    const leftTier4 = l(leftSet, "effect_2_4", langue)
+    const rightTier4 = l(rightSet, "effect_2_4", langue)
 
     return (
       <div className="relative bg-white/5 p-1 rounded-2xl shadow inline-flex flex-col items-center text-center">
@@ -160,9 +155,9 @@ export default function SetComboCard(props: (TwoOrFour & { langue: TenantKey }))
 
   // --- 4 pièces : un seul groupe + tooltip Tier 4 (2-pc + 4-pc), nom SOUS le bloc (sans "×4") ---
   const set = props.solo.set
-  const displayName = pickByLang(set.name, set.name_jp, set.name_kr, langue)
-  const tier4_2p = pickByLang(set.effect_2_4, set.effect_2_4_jp, set.effect_2_4_kr, langue) // ← ajouté
-  const tier4_4p = pickByLang(set.effect_4_4, set.effect_4_4_jp, set.effect_4_4_kr, langue) // ← renommé
+  const displayName = l(set, "name", langue)
+  const tier4_2p = l(set, "effect_2_4", langue) // ← ajouté
+  const tier4_4p = l(set, "effect_4_4", langue) // ← renommé
 
 
   return (

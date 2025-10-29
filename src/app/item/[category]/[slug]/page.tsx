@@ -185,7 +185,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             category,
             imageUrl: `https://${domain}${getItemPngImageUrl(category, entry!)}`,
             path,
-            inLanguage: ['en', 'jp', 'kr'],
           }),
         ]}
       />

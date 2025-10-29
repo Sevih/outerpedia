@@ -23,6 +23,8 @@ const kr = {
   "titles.main.coupon": "쿠폰 코드",
   "titles.main.changetitle": "Outerpedia 최신 업데이트 및 기능",
   "titles.main.tochangelog": "전체 변경 로그 보기",
+  "changelog.meta.title": "변경 로그 | Outerpedia",
+  "changelog.meta.desc": "Outerpedia의 모든 업데이트(가이드, 캐릭터, 도구 등)를 확인하세요.",
   "titles.tl.outerplaneTL": "Outerplane 티어 리스트",
   "titles.tl.desc": "PvE 및 PvP 캐릭터 평가를 선택하세요. 6★ 초월 및 EE 레벨 0 기준으로 평가되었습니다.",
   "titles.tl.pvedesc": "모든 콘텐츠에서의 PvE 성능 평가.",
@@ -148,6 +150,18 @@ const kr = {
   "stats.speed": "속도",
   "stats.attack": "공격",
   "substat_priority": "부옵 우선순위",
+
+  // Transcendence levels
+  "transcend.level1": "레벨 1",
+  "transcend.level2": "레벨 2",
+  "transcend.level3": "레벨 3",
+  "transcend.level4": "레벨 4",
+  "transcend.level4plus": "레벨 4+",
+  "transcend.level5": "레벨 5",
+  "transcend.level5plus": "레벨 5+",
+  "transcend.level5plusplus": "레벨 5++",
+  "transcend.level6": "레벨 6",
+
   "weapons": "무기",
   "accessories": "장신구",
   "sets": "세트",
@@ -499,6 +513,42 @@ const kr = {
   'chars.og.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',
   'chars.twitter.title': '캐릭터 목록 — {monthYear} 업데이트 | Outerpedia',
   'chars.twitter.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',
+  'chars.page.h1.short': '캐릭터 목록',
+  'chars.page.h1.full': '캐릭터 목록',
+  'chars.page.updated': '{monthYear} 업데이트',
+  'chars.breadcrumb.home': '홈',
+  'chars.jsonld.desc': '모든 캐릭터 정보: 스탯, 스킬, 빌드, 전용 장비. {monthYear} 업데이트.',
+
+  // Equipments page
+  'equipments.page.title': '장비 목록',
+  'equipments.page.desc': '아우터플레인 의 모든 장비를 한 곳에서 확인하세요. 무기, 액세서리, 탈리스만, 세트, 전용 장비.',
+  'equipments.breadcrumb.home': '홈',
+
+  // Skills
+  'skills.dualAttack': '듀얼 어택',
+
+  // SEO Keywords - Base
+  'seo.gameName': '아우터플레인',
+  'seo.siteName': 'Outerpedia',
+  'seo.wiki': '아우터플레인 위키',
+  'seo.guide': '아우터플레인 공략',
+  'seo.guideSuffix': '가이드',
+  'seo.turnBasedRpg': '턴제 RPG',
+  'seo.mobileRpg': '모바일 RPG',
+  'seo.characterBuilds': '캐릭터 빌드',
+
+  // SEO Keywords - Category Specific
+  'seo.category.adventure': '모험,스토리 모드,챕터 공략,맵,스포일러 없음,스테이지 진행,PVE',
+  'seo.category.world-boss': '월드 보스,보스 공략,팀 구성,장비 추천,익스트림 리그,PVE',
+  'seo.category.joint-boss': '합동 보스,협동,레이드 점수,딜 최적화,조합,PVE',
+  'seo.category.adventure-license': '모험 라이선스,승급 라이선스,라이선스 레벨,라이선스 퀘스트,PVE',
+  'seo.category.special-request': '장비 보스,스페셜 의뢰,감정,생태 조사,재료,PVE',
+  'seo.category.irregular-extermination': '이레귤러 토벌,한정 이벤트,이벤트 보스,보상,PVE',
+  'seo.category.guild-raid': '길드 레이드,협동 보스,주간 랭킹,길드 딜,조합,PVE',
+  'seo.category.general-guides': '초보자 가이드,자원 관리,일일 루틴,시스템 개요,꿀팁,PVE',
+  'seo.category.skyward-tower': '하늘탑,층,공략,추천 조합,PVE',
+  'seo.category.monad-gate': '모나드 게이트,로그라이크,루트,맵,유물,PVE',
+
   // kr.ts
   'guides.meta.title': 'Outerplane 가이드 | Outerpedia',
   'guides.meta.desc': 'Outerplane의 공략 가이드: {list}. 보스 팁, 모험, 이벤트 공략을 꾸준히 업데이트합니다.',
@@ -508,6 +558,11 @@ const kr = {
   'guides.twitter.desc': '최신 공략: {list}.',
   'guides.spoilerFree.enable': '스포일러 방지 모드 활성화',
   'guides.spoilerFree.disable': '스포일러 방지 모드 비활성화',
+  'guides.page.h1': '전체 가이드',
+  'guides.breadcrumb.home': '홈',
+  'guides.jsonld.title': 'Outerplane 가이드 | Outerpedia',
+  'guides.jsonld.desc.prefix': 'Outerplane의 모든 공략 가이드: ',
+  'guides.jsonld.desc.suffix': '. 보스 팁, 모험, 이벤트 공략이 정기적으로 업데이트됩니다.',
 
   "legal.meta.title": "법적 고지 | Outerpedia",
   "legal.meta.desc": "Outerpedia의 법적 면책 조항, 저작권 및 콘텐츠 사용 정보. Outerplane 비영리 팬 프로젝트.",

@@ -1,4 +1,6 @@
 // JSON-safe typing (même pattern que le reste)
+import { getAvailableLanguageCodes } from '@/tenants/config'
+
 type JSONValue =
   | string
   | number
@@ -43,13 +45,12 @@ export function breadcrumbLd(
   }
 }
 
-/** Page d’un guide individuel (WebPage “détail”) */
+/** Page d'un guide individuel (WebPage "détail") */
 export function guidesWebPageLd(domain: string, opts: {
   title: string
   description: string
   path: string
   imageUrl?: string
-  inLanguage: ('en' | 'jp' | 'kr')[]
 }): JsonLdObject {
   const base = normalizeBase(domain)
   const out: JsonLdObject = {
@@ -59,7 +60,7 @@ export function guidesWebPageLd(domain: string, opts: {
     description: opts.description,
     url: `${base}${opts.path}`,
     isPartOf: { '@type': 'WebSite', name: 'Outerpedia', url: `${base}/` },
-    inLanguage: opts.inLanguage,
+    inLanguage: getAvailableLanguageCodes(),
   }
   if (opts.imageUrl) {
     out.primaryImageOfPage = { '@type': 'ImageObject', url: opts.imageUrl }

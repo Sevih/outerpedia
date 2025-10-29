@@ -6,6 +6,7 @@ import type { ExclusiveEquipment } from '@/types/equipment'
 import type { TenantKey } from '@/tenants/config'
 import formatEffectText from '@/utils/formatText'
 import { useI18n } from '@/lib/contexts/I18nContext'
+import { l } from '@/lib/localize'
 
 type Props = {
     ee: ExclusiveEquipment
@@ -13,34 +14,13 @@ type Props = {
     lang: TenantKey
 }
 
-// 🔧 Helper pour choisir la bonne clé en fonction de la langue
-type LocalizableKey = 'name' | 'mainStat' | 'effect' | 'effect10'
-
-function pickLangValue(  obj: ExclusiveEquipment,  key: LocalizableKey,  lang: TenantKey): string {
-  // On projette l'objet sur un index signature strictement typé
-  type I18nIndex =
-    | LocalizableKey
-    | `${LocalizableKey}_jp`
-    | `${LocalizableKey}_kr`
-
-  const o = obj as unknown as Record<I18nIndex, string | undefined>
-
-  const base = o[key]
-  const jp = o[`${key}_jp`]
-  const kr = o[`${key}_kr`]
-
-  if (lang === 'jp' && jp) return jp
-  if (lang === 'kr' && kr) return kr
-  return base ?? ''
-}
-
 
 export default function EeDisplayMini({ ee, id, lang = 'en' }: Props) {
     const { t } = useI18n()
-    const name = pickLangValue(ee, 'name', lang)
-    const mainStat = pickLangValue(ee, 'mainStat', lang)
-    const effect = pickLangValue(ee, 'effect', lang)
-    const effect10 = pickLangValue(ee, 'effect10', lang)
+    const name = l(ee, 'name', lang)
+    const mainStat = l(ee, 'mainStat', lang)
+    const effect = l(ee, 'effect', lang)
+    const effect10 = l(ee, 'effect10', lang)
     return (
         <Tooltip.Provider delayDuration={0}>
             <Tooltip.Root>

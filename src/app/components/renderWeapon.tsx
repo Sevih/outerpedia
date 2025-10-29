@@ -6,67 +6,20 @@ import ItemSourceBox from './SourceBox'
 import ItemStatsBlock from './ItemStatsBlock'
 import type { Weapon } from '@/types/equipment'
 import type { TenantKey } from '@/tenants/config'
+import { l } from '@/lib/localize'
 type Lang = TenantKey
-
-const LABELS: Record<Lang, {
-    classRestriction: string
-    rarity: string
-    baseEffect: string
-    tier4Effect: string
-}> = {
-    en: {
-        classRestriction: 'Class restriction:',
-        rarity: 'Rarity:',
-        baseEffect: 'Base Effect:',
-        tier4Effect: 'Tier 4 Effect:',
-    },
-    jp: {
-        classRestriction: 'クラス制限：',
-        rarity: 'レア度：',
-        baseEffect: '基本効果：',
-        tier4Effect: 'Tier4効果：',
-    },
-    kr: {
-        classRestriction: '클래스 제한:',
-        rarity: '희귀도:',
-        baseEffect: '기본 효과:',
-        tier4Effect: '티어4 효과:',
-    },
-}
-
-// Sélectionne les champs localisés avec fallback EN
-function localize(entry: Weapon, lang: Lang) {
-    const name =
-        (lang === 'jp' && entry.name_jp) ||
-        (lang === 'kr' && entry.name_kr) ||
-        entry.name
-
-    const effect_name =
-        (lang === 'jp' && entry.effect_name_jp) ||
-        (lang === 'kr' && entry.effect_name_kr) ||
-        entry.effect_name
-
-    const effect_desc1 =
-        (lang === 'jp' && entry.effect_desc1_jp) ||
-        (lang === 'kr' && entry.effect_desc1_kr) ||
-        entry.effect_desc1
-
-    const effect_desc4 =
-        (lang === 'jp' && entry.effect_desc4_jp) ||
-        (lang === 'kr' && entry.effect_desc4_kr) ||
-        entry.effect_desc4
-
-    return { name, effect_name, effect_desc1, effect_desc4 }
-}
 
 /**
  * Affichage WEBP pour tout (icônes, images). PNG réservé à la page/metadata.
  * @param entry Weapon
- * @param lang 'en' | 'jp' | 'kr' (par défaut 'en')
+ * @param lang TenantKey (par défaut 'en')
  */
-export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: string, vars?: Record<string, unknown>) => string) {
-    const L = LABELS[lang]
-    const loc = localize(entry, lang)
+export default function renderWeapon(entry: Weapon, lang: Lang = 'en', t: (key: string, vars?: Record<string, unknown>) => string) {
+    // Utilise la fonction l() de localize.ts au lieu d'une fonction locale
+    const name = l(entry, 'name', lang)
+    const effect_name = l(entry, 'effect_name', lang)
+    const effect_desc1 = l(entry, 'effect_desc1', lang)
+    const effect_desc4 = l(entry, 'effect_desc4', lang)
 
 
     // Images d’affichage en .webp (pas de remplacement)
@@ -79,9 +32,9 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: s
     const slotBgKey = entry.rarity
 
     // Effets présents ?
-    const hasBaseEffect = !!loc.effect_desc1?.trim()
-    const hasT4Effect = !!loc.effect_desc4?.trim()
-    const showT4Line = hasT4Effect && loc.effect_desc4 !== loc.effect_desc1
+    const hasBaseEffect = !!effect_desc1?.trim()
+    const hasT4Effect = !!effect_desc4?.trim()
+    const showT4Line = hasT4Effect && effect_desc4 !== effect_desc1
 
     // URL canonique (JSON-LD)
       const url = `https://outerpedia.com/item/weapon/${toKebabCase(entry.name)}`
@@ -107,7 +60,7 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: s
                     {/* image de l'arme en premier plan */}
                     <Image
                         src={imageUrl} // `/images/equipment/${entry.image}.webp`
-                        alt={loc.name}
+                        alt={name}
                         fill
                         sizes="80px"
                         className="relative z-10 object-contain"
@@ -130,12 +83,12 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: s
                         </div>
                     )}
 
-                    {/* icône d’effet (overlay en haut-droite) */}
+                    {/* icône d'effet (overlay en haut-droite) */}
                     {effectKey && (
                         <div className="absolute top-2 right-2 z-20 translate-x-1/3 -translate-y-1/3">
                             <Image
                                 src={`/images/ui/effect/${effectKey}.webp`}
-                                alt={loc.effect_name}
+                                alt={effect_name}
                                 width={20}
                                 height={20}
                                 style={{ width: 20, height: 20 }}
@@ -159,11 +112,11 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: s
 
 
                 <div className="text-center sm:text-left">
-                    <h1 className="text-2xl font-bold mb-2">{loc.name} - {t('weapons')}</h1>
+                    <h1 className="text-2xl font-bold mb-2">{name} - {t('weapons')}</h1>
 
                     {entry.class && (
                         <p className="text-sm text-neutral-300">
-                            <span className="font-semibold">{L.classRestriction}</span>{' '}
+                            <span className="font-semibold">{t('items.classRestriction')}</span>{' '}
                             <ClassInlineTag name={entry.class} />
                         </p>
                     )}
@@ -174,26 +127,26 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: s
             <ItemStatsBlock stats={['ATK']} substats={['ATK%', 'DEF%', 'HP%']} type="weapons" rare={starLevel} lang={lang} />
 
             {/* Effets */}
-            {loc.effect_name && (hasBaseEffect || hasT4Effect) && (
+            {effect_name && (hasBaseEffect || hasT4Effect) && (
                 <div className="bg-black/30 border border-white/10 rounded-xl p-5 w-full max-w-3xl">
                     <div className="flex items-center gap-2 mb-3">
                         {iconEffectUrl && (
-                            <Image src={iconEffectUrl} alt={loc.effect_name} width={24} height={24} />
+                            <Image src={iconEffectUrl} alt={effect_name} width={24} height={24} />
                         )}
-                        <span className="font-semibold text-white">{loc.effect_name}</span>
+                        <span className="font-semibold text-white">{effect_name}</span>
                     </div>
 
                     {hasBaseEffect && (
                         <p className="text-sm text-neutral-200 whitespace-pre-line mb-2">
-                            <span className="text-amber-300 font-semibold">{L.baseEffect}</span>{' '}
-                            {highlightDiff(loc.effect_desc4 || '', loc.effect_desc1 || '')}
+                            <span className="text-amber-300 font-semibold">{t('items.baseEffect')}</span>{' '}
+                            {highlightDiff(effect_desc4 || '', effect_desc1 || '')}
                         </p>
                     )}
 
                     {showT4Line && (
                         <p className="text-sm text-neutral-200 whitespace-pre-line">
-                            <span className="text-amber-300 font-semibold">{L.tier4Effect}</span>{' '}
-                            {highlightDiff(loc.effect_desc1 || '', loc.effect_desc4 || '')}
+                            <span className="text-amber-300 font-semibold">{t('items.tier4Effect')}</span>{' '}
+                            {highlightDiff(effect_desc1 || '', effect_desc4 || '')}
                         </p>
                     )}
                 </div>
@@ -201,7 +154,7 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en',t: (key: s
 
             {/* Source / Boss / Mode */}
             <ItemSourceBox
-                itemname={loc.name}
+                itemname={name}
                 source={entry.source}
                 boss={entry.boss ?? undefined}
                 mode={entry.mode ?? undefined}

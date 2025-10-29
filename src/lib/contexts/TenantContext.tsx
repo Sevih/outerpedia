@@ -1,6 +1,8 @@
 'use client'
 import { createContext, useContext } from 'react'
-export type TenantCtx = { key: string; domain: string }
+import type { TenantKey } from '@/tenants/config'
+
+export type TenantCtx = { key: TenantKey; domain: string }
 const Ctx = createContext<TenantCtx | null>(null)
 export const useTenant = () => {
   const v = useContext(Ctx)

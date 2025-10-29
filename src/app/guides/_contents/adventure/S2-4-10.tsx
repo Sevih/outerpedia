@@ -17,7 +17,7 @@ export default function TyrantGuide() {
                 <li><strong>S2</strong>: Heals all allies, <EffectInlineTag name="BT_COOL_CHARGE" type="buff" /> of ultimate skills. Recovers 30% of weakness gauge.</li>
                 <li><strong>S3</strong>: Heals all allies,  inflict <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE" type="debuff" /> 3 turns on all enemies.</li>
                 <li><strong>Passive</strong>: Increases the Attack of all allies (except Astei) by 15% each turn.</li>
-                <li><strong>Enrage</strong>: When health drops under 40%. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />. <EffectInlineTag name="BT_RESURRECTION_G" type="buff" /> all allies and <EffectInlineTag name="BT_SILENCE" type="debuff" /> 3 turns on all enemies. Does not take weakness gauge damage <strong>AFTER</strong> becoming enraged.</li>
+                <li><strong>Enrage</strong>: When health drops under 40%. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />. <EffectInlineTag name="BT_RESURRECTION" type="buff" /> all allies and <EffectInlineTag name="BT_SILENCE" type="debuff" /> 3 turns on all enemies. Does not take weakness gauge damage <strong>AFTER</strong> becoming enraged.</li>
             </ul>
             <GuideHeading level={4}>Sterope moveset</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">

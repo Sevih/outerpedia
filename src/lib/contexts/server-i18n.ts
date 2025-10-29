@@ -1,8 +1,8 @@
 // src/lib/contexts/server-i18n.ts
 import { cache } from 'react'
+import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
+import { importLocale, type Messages } from '@/i18n'
 
-export type Lng = 'en' | 'jp' | 'kr'
-export type Messages = Record<string, string>
 type TValues = Record<string, unknown>
 
 export type TFunction = {
@@ -39,33 +39,15 @@ function makeT<T extends Messages>(dict: T) {
     return t
 }
 
-
-// 🔒 Import explicite par langue (pas d’indexation dynamique)
-async function importLocale(lang: Lng): Promise<Messages> {
-    switch (lang) {
-        case 'en': return (await import('@/i18n/locales/en')).default
-        case 'jp': return (await import('@/i18n/locales/jp')).default
-        case 'kr': return (await import('@/i18n/locales/kr')).default
-        default: return (await import('@/i18n/locales/en')).default
-    }
-}
-
-export const loadMessages = cache(async (lang: Lng): Promise<Messages> => {
+export const loadMessages = cache(async (lang: TenantKey): Promise<Messages> => {
     // 🛡️ garde-fou au cas où `lang` est mal détecté au runtime
-    const safeLang: Lng = (['en', 'jp', 'kr'] as const).includes(lang) ? lang : 'en'
+    const availableLanguages = getAvailableLanguages()
+    const safeLang: TenantKey = availableLanguages.includes(lang) ? lang : 'en'
     return importLocale(safeLang)
 })
 
-export const getServerI18n = cache(async (lang: Lng) => {
+export const getServerI18n = cache(async (lang: TenantKey) => {
     const dict = await loadMessages(lang)
     const t = makeT(dict)
     return { t, messages: dict, lang }
 })
-
-// Optionnel : assure qu’on ne renvoie que 'en' | 'jp' | 'kr'
-export function detectLangFromHost(host?: string): Lng {
-    if (!host) return 'en'
-    if (host.startsWith('jp.')) return 'jp'
-    if (host.startsWith('kr.')) return 'kr'
-    return 'en'
-}

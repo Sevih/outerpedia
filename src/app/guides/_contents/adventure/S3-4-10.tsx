@@ -13,7 +13,7 @@ export default function TyrantGuide() {
                 <li><strong>S1</strong>: Single, <EffectInlineTag name="BT_CALL_BACKUP" type="buff" /> with 2 allies.</li>
                 <li><strong>S2</strong>: Single, used after being hit on the enemy with the lowest health. Inflict <EffectInlineTag name="BT_STONE" type="debuff" /> 1 turn.</li>
                 <li><strong>S3</strong>: Single, <EffectInlineTag name="IG_Buff_BuffdurationReduce" type="debuff" /> by 1 turn.</li>
-                <li><strong>Passive</strong>: when alone at the start of turn, <EffectInlineTag name="BT_RESURRECTION_G" type="buff" /> all slain allies.</li>
+                <li><strong>Passive</strong>: when alone at the start of turn, <EffectInlineTag name="BT_RESURRECTION" type="buff" /> all slain allies.</li>
                 <li><strong>Passive</strong>: when hit,  if at least one ally isn&apos;t debuffed, <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> of the boss by 100%.</li>
                 <li><strong>Passive</strong>: when at least 1 ally evades, inflict <EffectInlineTag name="BT_AGGRO_IR" type="debuff" /> taunted 4 turns. Ignore immunity. Can be activated only once during the battle.</li>
                 <li><strong>Enrage</strong>: Every 4 turns. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />.</li>

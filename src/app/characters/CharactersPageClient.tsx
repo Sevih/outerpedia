@@ -18,7 +18,9 @@ import rawBuffsData from '@/data/buffs.json'
 import rawDebuffsData from '@/data/debuffs.json'
 import effectCategories from '@/data/effect_categories.json'
 import type { TenantKey } from '@/tenants/config'
+import { getAvailableLanguages } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
+import { l } from '@/lib/localize'
 
 // Type for buff/debuff data structure
 type EffectFullData = {
@@ -313,12 +315,6 @@ function splitIntoRows<T>(arr: T[], rows = 2): T[][] {
 
 
 
-type FullnameKey = Extract<keyof CharacterLite, `Fullname${'' | `_${string}`}`>
-function getLocalizedFullname(character: CharacterLite, langKey: TenantKey): string {
-  const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
-  const localized = character[key] // type: string | undefined
-  return localized ?? character.Fullname
-}
 
 function norm(s: unknown): string {
   return (typeof s === 'string' ? s : '')
@@ -328,8 +324,16 @@ function norm(s: unknown): string {
 }
 
 function getSearchableNames(char: CharacterLite): string[] {
-  const keys: FullnameKey[] = ['Fullname', 'Fullname_jp', 'Fullname_kr']
-  return keys.map(k => char[k]).filter(Boolean).map(norm)
+  // Utilise toutes les langues disponibles dynamiquement
+  const languages = getAvailableLanguages()
+  const names: string[] = []
+
+  for (const lang of languages) {
+    const name = l(char, 'Fullname', lang)
+    if (name) names.push(name)
+  }
+
+  return names.map(norm)
 }
 
 function matchesAnyName(char: CharacterLite, q: string): boolean {
@@ -957,7 +961,7 @@ export default function CharactersPage({ langue }: ClientProps) {
                   <ElementIcon element={char.Element as ElementType} />
                 </div>
 
-                <CharacterNameDisplay fullname={getLocalizedFullname(char, langue)} />
+                <CharacterNameDisplay fullname={l(char, 'Fullname', langue)} />
               </Link>
             )
           })}

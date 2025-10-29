@@ -6,6 +6,7 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TenantKey } from "@/tenants/config";
 import React from "react";
 import type { Talisman } from "@/types/equipment";
+import { l } from "@/lib/localize";
 
 /* ---------- Helpers identiques à ton WeaponCard ---------- */
 
@@ -33,12 +34,6 @@ function formatEffectTextAndHighlightNum(text: string): React.ReactElement {
   return <span dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-function pickByLang(base?: string | null, jp?: string | null, kr?: string | null, langue?: TenantKey): string {
-  if (langue === "jp" && jp && jp.trim().length) return jp;
-  if (langue === "kr" && kr && kr.trim().length) return kr;
-  return base ?? ""; // ← évite l'erreur et renvoie une string vide si null
-}
-
 
 /* -------------------- Composant -------------------- */
 
@@ -46,30 +41,10 @@ export default function TalismanCard({ talisman, langue }: { talisman: Talisman,
   const { t } = useI18n();
   const [expanded, setExpanded] = useState(false);
 
-  const displayName = pickByLang(
-    talisman.name,
-    talisman.name_jp,
-    talisman.name_kr,
-    langue
-  );
-  const displayEffectName = pickByLang(
-    talisman.effect_name,
-    talisman.effect_name_jp,
-    talisman.effect_name_kr,
-    langue
-  );
-  const displayDescBase = pickByLang(
-    talisman.effect_desc1,
-    talisman.effect_desc1_jp,
-    talisman.effect_desc1_kr,
-    langue
-  );
-  const displayDescLv10 = pickByLang(
-    talisman.effect_desc4,
-    talisman.effect_desc4_jp,
-    talisman.effect_desc4_kr,
-    langue
-  );
+  const displayName = l(talisman, "name", langue);
+  const displayEffectName = l(talisman, "effect_name", langue);
+  const displayDescBase = l(talisman, "effect_desc1", langue);
+  const displayDescLv10 = l(talisman, "effect_desc4", langue);
 
   // Normalisation multilingue du label d'effet
   // Normalisation multilingue du label d'effet

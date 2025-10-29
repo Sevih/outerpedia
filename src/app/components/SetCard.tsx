@@ -7,6 +7,7 @@ import { toKebabCase } from "@/utils/formatText";
 import type { ArmorSet } from "@/types/equipment";
 import type { TenantKey } from "@/tenants/config";
 import { useI18n } from "@/lib/contexts/I18nContext";
+import { l } from "@/lib/localize";
 
 // ---- Helpers ----
 function formatEffectTextAndHighlightNum(text?: string | null) {
@@ -31,25 +32,19 @@ function formatEffectTextAndHighlightNum(text?: string | null) {
   return <span dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-function pickByLang(base?: string | null, jp?: string | null, kr?: string | null, langue?: TenantKey) {
-  if (langue === "jp" && jp && jp.trim().length) return jp;
-  if (langue === "kr" && kr && kr.trim().length) return kr;
-  return base ?? "";
-}
-
 // ---- Composant ----
 export default function SetCard({ set, langue }: { set: ArmorSet; langue: TenantKey }) {
   const [expanded, setExpanded] = useState(false);
   const { t } = useI18n();
   const parts = ["Helmet", "Armor", "Gloves", "Shoes"];
 
-  const displayName = pickByLang(set.name, set.name_jp, set.name_kr, langue);
+  const displayName = l(set, "name", langue);
 
   // Effets par langue
-  const e2_1 = pickByLang(set.effect_2_1, set.effect_2_1_jp, set.effect_2_1_kr, langue);
-  const e4_1 = pickByLang(set.effect_4_1, set.effect_4_1_jp, set.effect_4_1_kr, langue);
-  const e2_4 = pickByLang(set.effect_2_4, set.effect_2_4_jp, set.effect_2_4_kr, langue);
-  const e4_4 = pickByLang(set.effect_4_4, set.effect_4_4_jp, set.effect_4_4_kr, langue);
+  const e2_1 = l(set, "effect_2_1", langue);
+  const e4_1 = l(set, "effect_4_1", langue);
+  const e2_4 = l(set, "effect_2_4", langue);
+  const e4_4 = l(set, "effect_4_4", langue);
 
   const noExtra = <em className="text-zinc-400">{t('items.noAdditional', { defaultValue: 'No additional effect' })}</em>;
 

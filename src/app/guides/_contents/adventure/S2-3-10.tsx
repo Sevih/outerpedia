@@ -20,14 +20,14 @@ export default function TyrantGuide() {
             <GuideHeading level={4}>Advice</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>The boss has no immunities so bring hard CC like <EffectInlineTag name="BT_STUN" type="debuff" /> <EffectInlineTag name="BT_FREEZE" type="debuff" /> <EffectInlineTag name="BT_STONE" type="debuff" /> <EffectInlineTag name="BT_COOL_CHARGE" type="debuff" /> <EffectInlineTag name="BT_SILENCE" type="debuff" />.</li>
-                <li>Bringing <EffectInlineTag name="BT_RESURRECTION_G" type="buff" /> can help too.</li>
+                <li>Bringing <EffectInlineTag name="BT_RESURRECTION" type="buff" /> can help too.</li>
                 <li><EffectInlineTag name="BT_ACTION_GAUGE" type="debuff" /> <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> <EffectInlineTag name="BT_STAT|ST_SPEED" type="debuff" /> <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> can prevent the boss taking too many turns and enraging.</li>
                 <li>Save chains until the boss enrages.</li>
                 <li>You can try to burn it down with <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> chain attack.</li>
             </ul>
             <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                <li><CharacterLinkCard name="Mene" />, <CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_RESURRECTION_G" type="buff" /></li>
+                <li><CharacterLinkCard name="Mene" />, <CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_RESURRECTION" type="buff" /></li>
                 <li><CharacterLinkCard name="Tamara" /> : got <EffectInlineTag name="BT_SILENCE" type="debuff" /> and <EffectInlineTag name="BT_COOL_CHARGE" type="debuff" /></li>
                 <li><CharacterLinkCard name="Dahlia" /> : got <EffectInlineTag name="BT_FREEZE" type="debuff" /> and <EffectInlineTag name="BT_STAT|ST_SPEED" type="debuff" /></li>
                 <li><CharacterLinkCard name="Iota" /> : got <EffectInlineTag name="BT_STUN" type="debuff" /> <EffectInlineTag name="BT_ACTION_GAUGE" type="debuff" /> and <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /></li>

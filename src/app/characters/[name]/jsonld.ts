@@ -1,4 +1,6 @@
 // app/characters/[name]/jsonld.ts
+import { getAvailableLanguageCodes } from '@/tenants/config'
+
 type JSONValue =
   | string | number | boolean | null
   | { [key: string]: JSONValue }
@@ -42,7 +44,6 @@ export function characterWebPageLd(
     description: string
     path: string
     imageUrl: string
-    inLanguage: ('en' | 'jp' | 'kr')[]
     attrs: { name: string; id: string; element: string; class: string; subclass?: string }
   }
 ): JsonLdObject {
@@ -53,7 +54,7 @@ export function characterWebPageLd(
     name: opts.title,
     description: opts.description,
     url: `${base}${opts.path}`,
-    inLanguage: opts.inLanguage,
+    inLanguage: getAvailableLanguageCodes(),
     isPartOf: { '@type': 'WebSite', name: 'Outerpedia', url: `${base}/` },
     primaryImageOfPage: { '@type': 'ImageObject', url: opts.imageUrl },
     about: {

@@ -35,7 +35,7 @@ function formatColorTags(input: string) {
 }
 
 export default function SkillInline({ character, skill, text = true, skupDisplay = false }: Props) {
-    const { lang } = useI18n()
+    const { lang, t } = useI18n()
     const [data, setData] = useState<null | {
         name: string
         displayName: string
@@ -63,11 +63,7 @@ export default function SkillInline({ character, skill, text = true, skupDisplay
                 // 🔹 Nom de skill localisé via l()
                 const displayName =
                     skill === 'Passive'
-                        ? (lang === 'jp'
-                            ? 'デュアルアタック'
-                            : lang === 'kr'
-                                ? '듀얼 어택'
-                                : 'Dual Attack')
+                        ? t('skills.dualAttack')
                         : l(rawSkill, 'name', lang)
 
                 // 🔹 Description localisée via l()
@@ -103,7 +99,7 @@ export default function SkillInline({ character, skill, text = true, skupDisplay
             .catch((err) => {
                 console.error(`[SkillInline] Erreur chargement de ${slug}.json`, err)
             })
-    }, [slug, skillKey, skill, lang])
+    }, [slug, skillKey, skill, lang, t])
 
 
     if (!data) return <span className="text-red-500">[Skill non trouvé]</span>

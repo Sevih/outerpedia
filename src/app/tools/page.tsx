@@ -5,7 +5,8 @@ import { getToolRoutes } from "@/lib/getToolRoutes";
 import Link from "next/link";
 import Image from "next/image";
 import { headers } from 'next/headers'
-import { getServerI18n, detectLangFromHost } from '@/lib/contexts/server-i18n'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
+import { resolveTenantFromHost } from '@/tenants/config'
 
 const tools = Object.values(toolDescriptions) as {
   name: string;
@@ -59,8 +60,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ToolsPage() {
   const h = await headers()
-  const host = h.get('host') ?? ''         // ex: 'jp.outerpedia.local'
-  const lang = detectLangFromHost(host)    // 'en' | 'jp' | 'kr'
+  const host = h.get('host') ?? ''
+  const lang = resolveTenantFromHost(host)
 
   const { t } = await getServerI18n(lang)
   const tools = getToolRoutes();

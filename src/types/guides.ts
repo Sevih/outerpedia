@@ -1,3 +1,5 @@
+import type { Localized } from './common'
+
 export type Guide = {
   category: string
   title: string | Localized
@@ -8,4 +10,4 @@ export type Guide = {
   second_image?: string
 }
 
-export type Localized = { en: string; jp?: string; kr?: string; }
+export type { Localized }

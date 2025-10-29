@@ -7,6 +7,7 @@ import weapons from '@/data/weapon.json'
 import type { Weapon } from '@/types/equipment'
 import { useTenant } from '@/lib/contexts/TenantContext'
 import formatEffectText from '@/utils/formatText'
+import { l } from '@/lib/localize'
 
 type Props = {
     name: string
@@ -21,21 +22,15 @@ export default function WeaponInlineTag({
     showLabel = true,
     size = 24,
 }: Props) {
-    const { key } = useTenant()
-    const lang: 'en' | 'jp' | 'kr' = key === 'jp' ? 'jp' : key === 'kr' ? 'kr' : 'en'
+    const { key: lang } = useTenant()
 
     const weapon = (weapons as Weapon[]).find(w => w.name === name)
     if (!weapon) return <span className="text-red-500">{name}</span>
 
-    const pick = (base: string, jp?: string, kr?: string) =>
-        lang === 'jp' ? (jp ?? base) : lang === 'kr' ? (kr ?? base) : base
-
-    const label = pick(weapon.name, weapon.name_jp, weapon.name_kr)
-    const effectLv4 = pick(
-        weapon.effect_desc4 || weapon.effect_desc1,
-        weapon.effect_desc4_jp,
-        weapon.effect_desc4_kr
-    )
+    const label = l(weapon, 'name', lang)
+    const effectDesc4 = l(weapon, 'effect_desc4', lang)
+    const effectDesc1 = l(weapon, 'effect_desc1', lang)
+    const effectLv4 = effectDesc4 || effectDesc1
 
     const rarity = (weapon.rarity || 'Legendary').toLowerCase()
     const bgPath = `/images/bg/CT_Slot_${rarity}.webp`

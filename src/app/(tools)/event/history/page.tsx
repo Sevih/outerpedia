@@ -1,11 +1,11 @@
 // src/app/(tools)/event/history/page.tsx
 import type { Metadata } from 'next'
 import { getTenantServer } from '@/tenants/tenant.server'
-import { TENANTS, OG_LOCALE, HREFLANG, type TenantKey } from '@/tenants/config'
+import { TENANTS, OG_LOCALE, HREFLANG, type TenantKey, resolveTenantFromHost } from '@/tenants/config'
 import { EVENTS } from '@/data/events/registry.generated'
 import EventHistoryClient, { type EventCardMeta } from './EventHistoryClient'
 import { headers } from 'next/headers'
-import { getServerI18n, detectLangFromHost } from '@/lib/contexts/server-i18n'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -75,8 +75,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Page() {
   const h = await headers()
-  const host = h.get('host') ?? ''         // ex: 'jp.outerpedia.local'
-  const lang = detectLangFromHost(host)    // 'en' | 'jp' | 'kr'
+  const host = h.get('host') ?? ''
+  const lang = resolveTenantFromHost(host)
   const { t } = await getServerI18n(lang)
   const metas = toMetas()
   return (

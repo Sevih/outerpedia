@@ -5,9 +5,10 @@ import * as HoverCard from '@radix-ui/react-hover-card';
 import rawItems from '@/data/items.json';
 import { useI18n } from '@/lib/contexts/I18nContext';
 import { l, lRec } from '@/lib/localize';
+import { getAvailableLanguages, type TenantKey } from '@/tenants/config';
 
 type ItemRarity = 'normal' | 'superior' | 'epic' | 'legendary';
-type Lng = 'en' | 'jp' | 'kr';
+type Lng = TenantKey;
 
 type LangMap = Record<Lng, string>;
 
@@ -41,11 +42,12 @@ function toKebabCase(str: string) {
 function isLangMap(v: unknown): v is LangMap {
   if (!v || typeof v !== 'object') return false;
   const m = v as Record<string, unknown>;
-  return ['en', 'jp', 'kr'].every(k => typeof m[k] === 'string');
+  const availableLanguages = getAvailableLanguages();
+  return availableLanguages.every(k => typeof m[k] === 'string');
 }
 
 export default function ItemInlineDisplay({ names, text = true, size = 25 }: Props) {
-  const { lang } = useI18n(); // 'en' | 'jp' | 'kr'
+  const { lang } = useI18n(); // TenantKey
   const normalized = Array.isArray(names) ? names : names ? [names] : [];
   const sizePixel = `${size}px`;
 

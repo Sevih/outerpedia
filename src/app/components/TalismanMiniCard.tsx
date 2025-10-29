@@ -2,6 +2,8 @@
 
 import React from "react"
 import Image from "next/image"
+import { useTenant } from "@/lib/contexts/TenantContext"
+import { l } from "@/lib/localize"
 import { useI18n } from "@/lib/contexts/I18nContext"
 import type { Talisman } from "@/types/equipment"
 import { highlightNumbersOnly } from "@/utils/textHighlighter"
@@ -17,19 +19,6 @@ function normalizeEffectIcon(id?: string | null) {
   return id.startsWith("TI_") ? id : `TI_Icon_UO_Talisman_${id}`
 }
 
-// localisation sûre (name/effect_name/effect_desc*)
-function getLocalized<
-  T extends Partial<Record<K | `${K}_jp` | `${K}_kr`, string | null>>,
-  K extends string
->(obj: T, key: K, lang: "en" | "jp" | "kr") {
-  const base = obj[key]
-  const jp = obj[`${key}_jp` as `${K}_jp`]
-  const kr = obj[`${key}_kr` as `${K}_kr`]
-  if (lang === "jp" && jp) return String(jp)
-  if (lang === "kr" && kr) return String(kr)
-  return String(base ?? "")
-}
-
 const rarityBgMap: Record<string, string> = {
   legendary: "/images/ui/bg_item_leg.webp",
   epic: "/images/ui/bg_item_epic.webp",
@@ -39,12 +28,13 @@ const rarityBgMap: Record<string, string> = {
 }
 
 export default function TalismanMiniCard({ talisman }: { talisman: Talisman }) {
-  const { lang, t } = useI18n()
+  const { key: tenantKey } = useTenant()
+  const { t } = useI18n()
 
-  const locName = getLocalized(talisman, "name", lang)
-  const locEffectName = getLocalized(talisman, "effect_name", lang)
-  const locTier0 = getLocalized(talisman, "effect_desc1", lang)
-  const locTier4 = getLocalized(talisman, "effect_desc4", lang)
+  const locName = l(talisman, "name", tenantKey)
+  const locEffectName = l(talisman, "effect_name", tenantKey)
+  const locTier0 = l(talisman, "effect_desc1", tenantKey)
+  const locTier4 = l(talisman, "effect_desc4", tenantKey)
 
   const effectIconId = normalizeEffectIcon(talisman.effect_icon ?? undefined)
   const equipmentImage = ensureWebp(String(talisman.image ?? ""))

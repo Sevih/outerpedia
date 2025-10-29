@@ -8,6 +8,7 @@ import type { TenantKey } from "@/tenants/config";
 import formatEffectText from "@/utils/formatText";
 import { useI18n } from "@/lib/contexts/I18nContext";
 import slugToCharJson from "@/data/_SlugToChar.json";
+import { l } from "@/lib/localize";
 
 // --- types ---
 type Props = {
@@ -22,45 +23,6 @@ type CharNameEntry = {
 };
 type SlugToCharMap = Record<string, CharNameEntry>;
 const SLUG_TO_CHAR = slugToCharJson as SlugToCharMap;
-
-// --- helpers ---
-function pickLangValue<T extends Record<string, string | undefined>>(
-  obj: T,
-  key: string,
-  lang: TenantKey
-): string {
-  if (!obj) return "";
-  const jp = obj[`${key}_jp`];
-  const kr = obj[`${key}_kr`];
-  const base = obj[key];
-
-  if (lang === "jp" && jp) return jp;
-  if (lang === "kr" && kr) return kr;
-  return base ?? "";
-}
-
-function pickLang(
-  obj: ExclusiveEquipment,
-  key: keyof ExclusiveEquipment,
-  lang: TenantKey
-): string {
-  const jpKey = `${key}_jp` as keyof ExclusiveEquipment;
-  const krKey = `${key}_kr` as keyof ExclusiveEquipment;
-
-  if (lang === "jp" && typeof obj[jpKey] === "string" && (obj[jpKey] as string).length > 0)
-    return obj[jpKey] as string;
-  if (lang === "kr" && typeof obj[krKey] === "string" && (obj[krKey] as string).length > 0)
-    return obj[krKey] as string;
-  return (obj[key] as string) ?? "";
-}
-
-function getLocalizedFullname(slug: string, lang: TenantKey): string {
-  const entry = SLUG_TO_CHAR[slug];
-  if (!entry) return "";
-  if (lang === "jp" && entry.Fullname_jp) return entry.Fullname_jp;
-  if (lang === "kr" && entry.Fullname_kr) return entry.Fullname_kr;
-  return entry.Fullname ?? "";
-}
 
 // --- composant principal ---
 export default function ExclusiveEquipmentList({ exdata, lang = "en" }: Props) {
@@ -102,11 +64,12 @@ export default function ExclusiveEquipmentList({ exdata, lang = "en" }: Props) {
         {filtered.length === 0 && <p className="text-white/50 italic">No results found.</p>}
 
         {filtered.map(({ slug, data }) => {
-          const name = pickLang(data, "name", lang);
-          const effect = pickLang(data, "effect", lang);
-          const effect10 = pickLang(data, "effect10", lang);
-          const mainStat = pickLangValue(data as unknown as Record<string, string | undefined>, "mainStat", lang);
-          const charName = getLocalizedFullname(slug, lang);
+          const name = l(data, "name", lang);
+          const effect = l(data, "effect", lang);
+          const effect10 = l(data, "effect10", lang);
+          const mainStat = l(data, "mainStat", lang);
+          const charEntry = SLUG_TO_CHAR[slug];
+          const charName = charEntry ? l(charEntry, "Fullname", lang) : "";
 
           return (
             <Link

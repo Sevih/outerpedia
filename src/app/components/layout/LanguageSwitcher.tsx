@@ -1,18 +1,34 @@
 'use client'
 
 import { useMemo } from 'react'
-import { TENANTS, type TenantKey, BASE_DOMAIN } from '@/tenants/config'
+import { TENANTS, getAvailableLanguages, type TenantKey, BASE_DOMAIN } from '@/tenants/config'
 import { useTenant } from '@/lib/contexts/TenantContext'
 
+const LANGUAGE_FLAGS: Record<TenantKey, string> = {
+  en: '🇬🇧',
+  jp: '🇯🇵',
+  kr: '🇰🇷',
+  zh: '🇨🇳',
+}
+
+const LANGUAGE_STATUS: Record<TenantKey, string> = {
+  en: '',
+  jp: ' (WIP)',
+  kr: ' (WIP)',
+  zh: ' (WIP)',
+}
+
 export default function LanguageSwitcher() {
-  const { key } = useTenant()   // ✅ on s’aligne sur TenantContext
+  const { key } = useTenant()
 
   const options = useMemo(
-    () => ([
-      { key: 'en', label: '🇬🇧 English' },
-      { key: 'jp', label: '🇯🇵 日本語 (WIP)' },
-      { key: 'kr', label: '🇰🇷 한국어 (WIP)' },
-    ] as { key: TenantKey; label: string }[]),
+    () => {
+      const availableLanguages = getAvailableLanguages()
+      return availableLanguages.map(lang => ({
+        key: lang,
+        label: `${LANGUAGE_FLAGS[lang]} ${TENANTS[lang].label}${LANGUAGE_STATUS[lang]}`,
+      }))
+    },
     []
   )
 

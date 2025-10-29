@@ -1,7 +1,8 @@
 'use client'
 import { createContext, useContext, useMemo, useState } from 'react'
+import type { TenantKey } from '@/tenants/config'
 
-export type Lng = 'en' | 'jp' | 'kr'
+export type Lng = TenantKey
 type Messages = Record<string, string>
 
 // ---- Types de t() avec surcharge : t(key) ou t(key, values) ----

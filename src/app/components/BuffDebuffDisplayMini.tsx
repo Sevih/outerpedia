@@ -5,6 +5,7 @@ import * as Tooltip from '@radix-ui/react-tooltip'
 import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
 import { useTenant } from '@/lib/contexts/TenantContext';
+import { l } from '@/lib/localize';
 
 const effectsData: Effect[] = [
   ...buffs.map((e) => ({ ...e, type: 'buff' as const })),
@@ -30,8 +31,7 @@ type Effect = {
 };
 
 export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: BuffDebuffDisplayProps) {
-  const { key } = useTenant();   // ✅ on s’aligne sur TenantContext
-  const lang: 'en' | 'jp' | 'kr' = key === 'jp' ? 'jp' : key === 'kr' ? 'kr' : 'en';
+  const { key: lang } = useTenant();
 
   const normalizedBuffs = Array.isArray(buffs) ? buffs : buffs ? [buffs] : [];
   const normalizedDebuffs = Array.isArray(debuffs) ? debuffs : debuffs ? [debuffs] : [];
@@ -45,15 +45,8 @@ export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: Buff
   const debuffList = getEffects(normalizedDebuffs, 'debuff');
 
   const renderEffect = (effect: Effect, idx: number) => {
-    const label =
-      lang === 'jp' ? (effect.label_jp ?? effect.label)
-        : lang === 'kr' ? (effect.label_kr ?? effect.label)
-          : effect.label;
-
-    const rawDescription =
-      lang === 'jp' ? (effect.description_jp ?? effect.description)
-        : lang === 'kr' ? (effect.description_kr ?? effect.description)
-          : effect.description;
+    const label = l(effect, 'label', lang);
+    const rawDescription = l(effect, 'description', lang);
 
     // Replace \n and \\n with <br /> tags
     const description = rawDescription.replace(/\\n/g, '<br />').replace(/\n/g, '<br />');

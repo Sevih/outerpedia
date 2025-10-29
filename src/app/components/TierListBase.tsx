@@ -11,52 +11,29 @@ import { ElementIcon } from '@/app/components/ElementIcon'
 import { ClassIcon } from '@/app/components/ClassIcon'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import EeDisplayMini from '@/app/components/eeDisplayMini'
-import type { Character } from '@/types/character'
+import type { Character, ExclusiveEquipment } from '@/types/character'
 import type { ClassType as classtipe, ElementType } from '@/types/enums'
+import type { LocalizedFieldNames } from '@/types/common'
 import charactersData from '@/data/_allCharacters.json'
-import type { TenantKey } from '@/tenants/config'
+import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
+import { l } from '@/lib/localize'
 
 /* -------------------------------- Types -------------------------------- */
 
 type CharacterDisplay = Pick<
     Character,
-    'ID' | 'Fullname' | 'Rarity' | 'Class' | 'Element' | 'rank' | 'rank_pvp' | 'role' | 'limited'
-> &
-    Partial<Pick<Character, 'Fullname_kr' | 'Fullname_jp' | 'tags'>>
+    'ID' | LocalizedFieldNames<Character, 'Fullname'> | 'Rarity' | 'Class' | 'Element' | 'rank' | 'rank_pvp' | 'role' | 'limited' | 'tags'
+>
 
 type GroupedCharacters = Record<string, CharacterDisplay[]>
-type GroupedEquipments = Record<string, [string, Equipment][]>
-
-type WithLocalizedNames = {
-    Fullname: string
-    Fullname_jp?: string
-    Fullname_kr?: string
-}
+type GroupedEquipments = Record<string, [string, ExclusiveEquipment][]>
 
 type Mode = 'pve' | 'pvp' | 'ee0' | 'ee10'
 
-type Equipment = {
-    name: string
-    name_jp?: string
-    name_kr?: string
-    mainStat: string
-    mainStat_jp?: string
-    mainStat_kr?: string
-    effect: string
-    effect_jp?: string
-    effect_kr?: string
-    effect10: string
-    effect10_jp?: string
-    effect10_kr?: string
-    rank: string
-    rank10?: string
-    icon_effect: string
-}
-
 type TierListBaseProps = {
     characters?: CharacterDisplay[]
-    equipments?: Record<string, Equipment>
+    equipments?: Record<string, ExclusiveEquipment>
     mode: Mode
     langue: TenantKey
 }
@@ -93,31 +70,44 @@ function includesCI(haystack: string | undefined, needle: string) {
 function matchesCharacterSearch(c: CharacterDisplay, term: string) {
     if (!term) return true
     const slug = toKebabCase(c.Fullname)
-    return (
-        includesCI(c.Fullname, term) ||
-        includesCI(c.Fullname_jp, term) ||
-        includesCI(c.Fullname_kr, term) ||
-        includesCI(slug, term)
-    )
+
+    // Search in base name and slug
+    if (includesCI(c.Fullname, term) || includesCI(slug, term)) return true
+
+    // Search in all available language variants
+    const languages = getAvailableLanguages()
+    for (const lang of languages) {
+        if (lang === 'en') continue // Already checked c.Fullname
+        const localizedName = l(c as Record<string, unknown>, 'Fullname', lang)
+        if (localizedName && includesCI(localizedName, term)) return true
+    }
+
+    return false
 }
 
 // EE search
-function matchesEESearch(term: string, slug: string, ee: Equipment, char?: WithLocalizedNames) {
+function matchesEESearch(term: string, slug: string, ee: ExclusiveEquipment, char?: CharacterDisplay) {
     if (!term) return true
-    return (
-        includesCI(ee.name, term) ||
-        includesCI(slug, term) ||
-        (char &&
-            (includesCI(char.Fullname, term) ||
-                includesCI(char.Fullname_jp, term) ||
-                includesCI(char.Fullname_kr, term) ||
-                includesCI(toKebabCase(char.Fullname), term)))
-        // Optionnel :
-        // || includesCI(ee.effect, term) || includesCI(ee.effect10, term)
-    )
+
+    // Search in EE name and slug
+    if (includesCI(ee.name, term) || includesCI(slug, term)) return true
+
+    // Search in character name (all languages)
+    if (char) {
+        if (includesCI(char.Fullname, term) || includesCI(toKebabCase(char.Fullname), term)) return true
+
+        const languages = getAvailableLanguages()
+        for (const lang of languages) {
+            if (lang === 'en') continue
+            const localizedName = l(char as Record<string, unknown>, 'Fullname', lang)
+            if (localizedName && includesCI(localizedName, term)) return true
+        }
+    }
+
+    return false
 }
 
-function getRankKey(mode: Mode): keyof Character | keyof Equipment {
+function getRankKey(mode: Mode): keyof Character | keyof ExclusiveEquipment {
     if (mode === 'pvp') return 'rank_pvp'
     if (mode === 'ee10') return 'rank10'
     return 'rank'
@@ -174,19 +164,7 @@ function getRecruitBadge(char: CharacterDisplay): RecruitBadge | null {
 
 /* ---------------------------- Localized fields -------------------------- */
 
-type FullnameKey = Extract<keyof CharacterDisplay, `Fullname${'' | `_${string}`}`>
-function getLocalizedFullname(character: CharacterDisplay, langKey: TenantKey): string {
-    const key: FullnameKey = langKey === 'en' ? 'Fullname' : (`Fullname_${langKey}` as FullnameKey)
-    const localized = character[key]
-    return localized ?? character.Fullname
-}
-
-type EEnameKey = Extract<keyof Equipment, `name${'' | `_${string}`}`>
-function getLocalizedEEname(ee: Equipment, langKey: TenantKey): string {
-    const key: EEnameKey = langKey === 'en' ? 'name' : (`name_${langKey}` as EEnameKey)
-    const localized = ee[key]
-    return localized ?? ee.name
-}
+// Removed local getLocalized functions: use l() from @/lib/localize instead
 
 /* -------------------------------- Component ----------------------------- */
 
@@ -292,15 +270,18 @@ export default function TierListBase({
             }, {})
         } else {
             rankOrderLocal = [...RANKS_EE]
-            const rankKey = getRankKey(mode) as keyof Equipment
+            const rankKey = getRankKey(mode) as keyof ExclusiveEquipment
 
             const eeEntries = Object.entries(equipments).sort(([, a], [, b]) =>
                 a.name.localeCompare(b.name)
             )
 
-            result = rankOrderLocal.reduce<Record<string, [string, Equipment][]>>((acc, rank) => {
+            result = rankOrderLocal.reduce<Record<string, [string, ExclusiveEquipment][]>>((acc, rank) => {
                 acc[rank] = eeEntries
-                    .filter(([, ee]) => (ee[rankKey] as string) === rank)
+                    .filter(([, ee]) => {
+                        const rankValue = ee[rankKey as keyof typeof ee]
+                        return typeof rankValue === 'string' && rankValue === rank
+                    })
                     .filter(([slug, ee]) => {
                         const ch = characterMap[slug] || characterMap[toKebabCase(slug)]
                         if (!ch) return false
@@ -563,17 +544,17 @@ export default function TierListBase({
                                 </div>
 
                                 <div className="flex flex-wrap justify-center gap-6">
-                                    {(entries as (Character | [string, Equipment])[])
+                                    {(entries as (Character | [string, ExclusiveEquipment])[])
                                         .map((item, index) => {
                                             let char: Character | undefined
                                             let slug: string | undefined
-                                            let ee: Equipment | undefined
+                                            let ee: ExclusiveEquipment | undefined
 
                                             if (mode === 'pve' || mode === 'pvp') {
                                                 char = item as Character
                                                 slug = toKebabCase(char.Fullname)
                                             } else {
-                                                const entry = item as [string, Equipment]
+                                                const entry = item as [string, ExclusiveEquipment]
                                                 slug = entry[0]
                                                 ee = entry[1]
                                                 char = characterMap[slug] || characterMap[toKebabCase(slug)]
@@ -651,14 +632,14 @@ export default function TierListBase({
                                                         </div>
 
                                                         <CharacterNameDisplay
-                                                            fullname={getLocalizedFullname(char!, langue)}
+                                                            fullname={l(char!, 'Fullname', langue)}
                                                         />
                                                     </div>
 
                                                     {/* EE name */}
                                                     {ee && (
                                                         <div className="mt-1 text-xs text-white font-semibold line-clamp-2">
-                                                            {getLocalizedEEname(ee, langue)}
+                                                            {l(ee, 'name', langue)}
                                                         </div>
                                                     )}
                                                 </Link>

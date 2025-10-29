@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { getTenantServer } from '@/tenants/tenant.server'
+import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 import EquipmentsClient from './EquipmentsClient'
 
@@ -51,6 +52,8 @@ export default async function EquipmentsPage() {
   const iconAbs = `https://${domain}/images/ui/nav/CM_Lobby_Button_Inventory.png`
 
   // Petites stats pour enrichir le JSON-LD (sans lister chaque item)
+  const { t } = await getServerI18n(langKey)
+
   const counts = {
     weapons: (weapons as unknown[]).length,
     accessories: (accessories as unknown[]).length,
@@ -59,19 +62,8 @@ export default async function EquipmentsPage() {
     ee: Object.keys(eeData as Record<string, unknown>).length,
   }
 
-  const pageTitle =
-    langKey === 'jp'
-      ? '装備一覧'
-      : langKey === 'kr'
-      ? '장비 목록'
-      : 'Equipments'
-
-  const pageDesc =
-    langKey === 'jp'
-      ? '『アウタープレーン』の全装備を一覧表示。武器・アクセサリー・タリスマン・セット・専用装備をチェック。'
-      : langKey === 'kr'
-      ? '‘아우터플레인’의 모든 장비를 한 곳에서 확인하세요. 무기, 액세서리, 탈리스만, 세트, 전용 장비.'
-      : 'Browse all equipment in Outerplane: weapons, accessories, talismans, sets, and exclusive equipment.'
+  const pageTitle = t('equipments.page.title')
+  const pageDesc = t('equipments.page.desc')
 
   return (
     <>
@@ -80,7 +72,7 @@ export default async function EquipmentsPage() {
         json={[
           websiteLd(domain),
           breadcrumbLd(domain, {
-            home: langKey === 'jp' ? 'ホーム' : langKey === 'kr' ? '홈' : 'Home',
+            home: t('equipments.breadcrumb.home'),
             current: pageTitle,
             currentPath: path,
           }),
@@ -90,7 +82,6 @@ export default async function EquipmentsPage() {
             path,
             imageUrl: iconAbs,
             counts,
-            inLanguage: ['en', 'jp', 'kr'],
           }),
         ]}
       />

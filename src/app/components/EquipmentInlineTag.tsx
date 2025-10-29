@@ -42,7 +42,7 @@ function isObtainable(v: unknown): v is Obtainable {
 
 
 export default function EquipmentInlineTag({ name, type }: Props) {
-  const { lang, t } = useI18n() // 'en' | 'jp' | 'kr'
+  const { lang, t } = useI18n() // TenantKey
 
   let item: EquipmentUnion | undefined
   let iconPath = ''
