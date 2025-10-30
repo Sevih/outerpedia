@@ -5,6 +5,7 @@ import PromoCodes from './components/PromoCodes'
 // HomeClient reste pour la partie interactive, mais on ne lui passe plus lang
 import HomeClient from './HomeClient'
 import NewToBox from './components/home/NewToBox'
+import HowToPlayBox from './components/home/HowToPlayBox'
 import CategoriesBox from './components/home/CategoriesBox'
 import { getServerI18n } from '@/lib/contexts/server-i18n' // ✅ chemin corrigé
 import { getTenantServer } from '@/tenants/tenant.server'
@@ -61,6 +62,9 @@ export default async function Home() {
         <div className="flex flex-col gap-8 w-full md:w-3/5">
           <section className="text-center">
             <CategoriesBox />
+            <div className="hidden md:block mt-6">
+              <HowToPlayBox />
+            </div>
             <div className="hidden md:block mt-6">
               <NewToBox />
             </div>

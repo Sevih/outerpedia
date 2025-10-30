@@ -3,6 +3,7 @@
   "Fullname": "Valentine",
   "Fullname_jp": "バレンタイン",
   "Fullname_kr": "발렌타인",
+  "Fullname_zh": "瓦伦塔茵",
   "Rarity": 3,
   "Element": "Fire",
   "Class": "Ranger",
@@ -25,29 +26,39 @@
     }
   },
   "Chain_Type": "Finish",
+  "gift": "Luxury",
   "video": "U3aSzg_kYxo",
   "VoiceActor": "VA. Allegra Clark",
-  "VoiceActor_kr": "CV.안영미",
   "VoiceActor_jp": "CV. 甲斐田裕子",
-  "gift": "Luxury",
+  "VoiceActor_kr": "CV.안영미",
+  "VoiceActor_zh": "CV. 甲斐田裕子",
   "transcend": {
     "1": null,
+    "1_zh": null,
     "2": null,
+    "2_zh": null,
     "3": "ATK DEF HP +10%",
-    "3_kr": "ATK DEF HP +10%",
     "3_jp": "ATK DEF HP +10%",
+    "3_kr": "ATK DEF HP +10%",
+    "3_zh": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\n+2% Ally Team Accuracy\n+1 Chain Passive Weakness Gauge damage",
-    "4_1_kr": "ATK DEF HP +16%\n아군 명중 +2%\n체인 패시브의 WG 감소량 +1",
     "4_1_jp": "ATK DEF HP +16%\n味方の命中+2%\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 명중 +2%\n체인 패시브의 WG 감소량 +1",
+    "4_1_zh": "ATK DEF HP +16%\n友军命中+2%\n连携被动技能的WG降低量+1",
     "4_2": "ATK DEF HP +19%",
+    "4_2_zh": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
     "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
+    "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发",
     "5_2": "ATK DEF HP +25%",
+    "5_2_zh": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
+    "5_3_zh": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start",
+    "6_jp": "ATK DEF HP +30%\n味方の命中+2%\n戦闘開始時、AP+25",
     "6_kr": "ATK DEF HP +30%\n아군 명중 +2%\n입장 시 AP +25",
-    "6_jp": "ATK DEF HP +30%\n味方の命中+2%\n戦闘開始時、AP+25"
+    "6_zh": "ATK DEF HP +30%\n友军命中+2%\n入场时AP+25"
   },
   "skills": {
     "SKT_FIRST": {
@@ -55,50 +66,65 @@
       "IconName": "Skill_First_2000012",
       "SkillType": "SKT_FIRST",
       "name": "Trigger Happy",
-      "name_kr": "트리거 해피",
       "name_jp": "トリガーハッピー",
+      "name_kr": "트리거 해피",
+      "name_zh": "快乐扳机",
       "true_desc": "Attacks an enemy and increases the <color=#28d9ed>Priority</color> of the ally with the highest Attack by <color=#28d9ed>10%</color>.",
-      "true_desc_kr": "적을 공격하고 공격력이 가장 높은 아군의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
       "true_desc_jp": "敵単体にダメージを与え、攻撃力が最も高い味方単体の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。",
+      "true_desc_kr": "적을 공격하고 공격력이 가장 높은 아군의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
+      "true_desc_zh": "攻击敌人,并使攻击力最高的友军<color=#28d9ed>行动值</color>提升\\n<color=#28d9ed>10%</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_zh": [
+          "伤害量+10%",
+          "WG降低量+1"
+        ],
         "3": [
           "+10% damage"
-        ],
-        "3_kr": [
-          "피해량 +10%"
         ],
         "3_jp": [
           "ダメージ+10%"
         ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "3_zh": [
+          "伤害量+10%"
+        ],
         "4": [
           "+10% damage"
-        ],
-        "4_kr": [
-          "피해량 +10%"
         ],
         "4_jp": [
           "ダメージ+10%"
         ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "4_zh": [
+          "伤害量+10%"
+        ],
         "5": [
           "+10% Priority"
+        ],
+        "5_jp": [
+          "行動ゲージ10%UP"
         ],
         "5_kr": [
           "행동 게이지 +10%"
         ],
-        "5_jp": [
-          "行動ゲージ10%UP"
+        "5_zh": [
+          "行动值+10%"
         ]
       },
       "wgr": 1,
@@ -112,22 +138,25 @@
       "burnEffect": {
         "SKT_BURST_1": {
           "effect": "Increases the Priority of all allies\\nIncreases Priority by 10%",
-          "effect_kr": "아군 전체의 행동 게이지 증가\\n행동 게이지 +10%",
           "effect_jp": "味方全体に行動ゲージUP\\n行動ゲージ+10%",
+          "effect_kr": "아군 전체의 행동 게이지 증가\\n행동 게이지 +10%",
+          "effect_zh": "全体友军行动值提升\\n行动值+10%",
           "cost": 80,
           "level": 1
         },
         "SKT_BURST_2": {
           "effect": "Activates Dual Attack with 1 ally",
-          "effect_kr": "아군 1명 협공 호출",
           "effect_jp": "連携1体発生",
+          "effect_kr": "아군 1명 협공 호출",
+          "effect_zh": "呼叫1名友军发动夹攻",
           "cost": 120,
           "level": 2
         },
         "SKT_BURST_3": {
           "effect": "Activates Dual Attack with 2 allies",
-          "effect_kr": "아군 2명 협공 호출",
           "effect_jp": "連携2体発生",
+          "effect_kr": "아군 2명 협공 호출",
+          "effect_zh": "呼叫2名友军发动夹攻",
           "cost": 160,
           "level": 3
         }
@@ -138,50 +167,65 @@
       "IconName": "Skill_Second_2000012",
       "SkillType": "SKT_SECOND",
       "name": "Lucky or Die",
-      "name_kr": "Lucky or Die",
       "name_jp": "ラッキー・オア・ダイ",
+      "name_kr": "Lucky or Die",
+      "name_zh": "Lucky or Die",
       "true_desc": "Increases all allies' <color=#28d9ed>Critical Hit Chance</color> and <color=#28d9ed>Critical Damage</color> for <color=#28d9ed>2 turn(s)</color>. Gains an <color=#28d9ed>extra turn</color> after using this skill.",
-      "true_desc_kr": "<color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>치명 확률</color>과 <color=#28d9ed>치명 피해</color>를 증가시킵니다. 스킬 사용 후 <color=#28d9ed>추가 턴</color>을 획득합니다.",
       "true_desc_jp": "味方全体の<color=#28d9ed>会心率</color>と<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>2ターン</color>の間UPさせる。スキル使用後、<color=#28d9ed>追加ターン</color>を獲得する。",
+      "true_desc_kr": "<color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>치명 확률</color>과 <color=#28d9ed>치명 피해</color>를 증가시킵니다. 스킬 사용 후 <color=#28d9ed>추가 턴</color>을 획득합니다.",
+      "true_desc_zh": "使全体友军的<color=#28d9ed>暴击率</color>和<color=#28d9ed>暴击伤害</color>提升,持续<color=#28d9ed>2回合</color>。使用技能后,获得<color=#28d9ed>额外回合</color>。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
         ],
+        "2_jp": [
+          "スキルターン-1ターン"
+        ],
         "2_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "2_jp": [
-          "スキルターン-1ターン"
+        "2_zh": [
+          "冷却时间-1回合"
         ],
         "3": [
           "-1 turn Skill Cooldown"
         ],
+        "3_jp": [
+          "スキルターン-1ターン"
+        ],
         "3_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "3_jp": [
-          "スキルターン-1ターン"
+        "3_zh": [
+          "冷却时间-1回合"
         ],
         "4": [
           "+1 turn Increased Crit Chance duration",
           "+1 turn Increased Crit Damage duration"
         ],
-        "4_kr": [
-          "치명 확률 지속 +1턴",
-          "치명 피해량 지속 +1턴"
-        ],
         "4_jp": [
           "会心率UP+1ターン",
           "会心ダメージUP+1ターン"
         ],
+        "4_kr": [
+          "치명 확률 지속 +1턴",
+          "치명 피해량 지속 +1턴"
+        ],
+        "4_zh": [
+          "暴击率持续时间+1回合",
+          "暴击伤害量持续时间+1回合"
+        ],
         "5": [
           "-1 turn Skill Cooldown"
+        ],
+        "5_jp": [
+          "スキルターン-1ターン"
         ],
         "5_kr": [
           "스킬 쿨타임 -1턴"
         ],
-        "5_jp": [
-          "スキルターン-1ターン"
+        "5_zh": [
+          "冷却时间-1回合"
         ]
       },
       "cd": "7",
@@ -197,54 +241,69 @@
       "IconName": "Skill_Ultimate_2000012",
       "SkillType": "SKT_ULTIMATE",
       "name": "My Bloody Valentine",
-      "name_kr": "마이 블러디 발렌타인",
       "name_jp": "マイ・ブラッディ・バレンタイン",
+      "name_kr": "마이 블러디 발렌타인",
+      "name_zh": "我的血腥情人",
       "true_desc": "Attacks all enemies and reduces the target's Priority by <color=#28d9ed>15%</color>.",
-      "true_desc_kr": "적 전체를 공격합니다. 대상의 행동 게이지를 <color=#28d9ed>-15%</color> 감소시킵니다.",
       "true_desc_jp": "敵全体にダメージを与える。対象の行動ゲージを<color=#28d9ed>-15%</color>DOWNさせる。",
+      "true_desc_kr": "적 전체를 공격합니다. 대상의 행동 게이지를 <color=#28d9ed>-15%</color> 감소시킵니다.",
+      "true_desc_zh": "攻击全体敌人,使敌人的行动值降低<color=#28d9ed>-15%</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
           "+1 Weakness Gauge damage"
         ],
-        "2_kr": [
-          "피해량 +10%",
-          "WG 감소량 +1"
-        ],
         "2_jp": [
           "ダメージ+10%",
           "WGダメージ+1"
         ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "2_zh": [
+          "伤害量+10%",
+          "WG降低量+1"
+        ],
         "3": [
           "+10% damage"
-        ],
-        "3_kr": [
-          "피해량 +10%"
         ],
         "3_jp": [
           "ダメージ+10%"
         ],
+        "3_kr": [
+          "피해량 +10%"
+        ],
+        "3_zh": [
+          "伤害量+10%"
+        ],
         "4": [
           "+10% damage"
-        ],
-        "4_kr": [
-          "피해량 +10%"
         ],
         "4_jp": [
           "ダメージ+10%"
         ],
+        "4_kr": [
+          "피해량 +10%"
+        ],
+        "4_zh": [
+          "伤害量+10%"
+        ],
         "5": [
           "-10% Priority"
+        ],
+        "5_jp": [
+          "行動ゲージ10%DOWN"
         ],
         "5_kr": [
           "행동 게이지 -10%"
         ],
-        "5_jp": [
-          "行動ゲージ10%DOWN"
+        "5_zh": [
+          "行动值-10%"
         ]
       },
-      "cd": "5",
       "wgr": 2,
+      "cd": "5",
       "buff": [],
       "debuff": [
         "BT_ACTION_GAUGE"
@@ -255,53 +314,69 @@
       "IconName": "Skill_ChainPassive_Fire_Finish",
       "SkillType": "SKT_CHAIN_PASSIVE",
       "name": "Chain Passive",
-      "name_kr": "체인 패시브",
       "name_jp": "チェーンパッシブ",
+      "name_kr": "체인 패시브",
+      "name_zh": "连携被动",
       "true_desc": "<color=#ffd732>Chain Finish Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to increase Critical Damage of all allies for <color=#28d9ed>2 turn(s)</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases the <color=#28d9ed>Priority</color> of the ally with the highest Attack by <color=#28d9ed>20%</color>.",
-      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 <color=#28d9ed>2턴</color> 동안 아군 전체의 치명 피해량이 증가합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 공격력이 가장 높은 아군의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다.",
       "true_desc_jp": "<color=#ffd732>チェーン効果(トドメ)</color>:攻撃後<color=#28d9ed>100%</color>の確率で味方全体の会心ダメージが<color=#28d9ed>2ターン</color>の間UPする。\\n\\n<color=#fff95f>連携効果</color>:攻撃後、攻撃力が最も高い味方単体の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。",
+      "true_desc_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>100%</color>의 확률로 <color=#28d9ed>2턴</color> 동안 아군 전체의 치명 피해량이 증가합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 공격력이 가장 높은 아군의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "true_desc_zh": "<color=#ffd732>连携收尾效果</color>:攻击后,有<color=#28d9ed>100%</color>的几率使全体友军的暴击伤害量提升,持续<color=#28d9ed>2回合</color>。\\n\\n<color=#ffd732>夹攻效果</color>:攻击后,使攻击力最高友军的<color=#28d9ed>行动值</color>提升<color=#28d9ed>20%</color>。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
-        "2_kr": [
-          "협공/스킬 체인 피해량 +5%",
-          "WG 감소량 +1"
-        ],
         "2_jp": [
           "チェーンスキルと連携ダメージ+5%",
           "WGダメージ+1"
         ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "2_zh": [
+          "夹攻/连携技能伤害量+5%",
+          "WG降低量+1"
+        ],
         "3": [
           "+5% Dual Attack and Skill Chain damage"
-        ],
-        "3_kr": [
-          "협공/스킬 체인 피해량 +5%"
         ],
         "3_jp": [
           "チェーンスキルと連携ダメージ+5%"
         ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "3_zh": [
+          "夹攻/连携技能伤害量+5%"
+        ],
         "4": [
           "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
         ],
         "4_kr": [
           "협공/스킬 체인 피해량 +5%"
         ],
-        "4_jp": [
-          "チェーンスキルと連携ダメージ+5%"
+        "4_zh": [
+          "夹攻/连携技能伤害量+5%"
         ],
         "5": [
           "+5% Dual Attack and Skill Chain damage",
           "+1 Weakness Gauge damage"
         ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
         "5_kr": [
           "협공/스킬 체인 피해량 +5%",
           "WG 감소량 +1"
         ],
-        "5_jp": [
-          "チェーンスキルと連携ダメージ+5%",
-          "WGダメージ+1"
+        "5_zh": [
+          "夹攻/连携技能伤害量+5%",
+          "WG降低量+1"
         ]
       },
       "wgr": 3,
