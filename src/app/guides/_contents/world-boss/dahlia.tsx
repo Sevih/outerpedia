@@ -48,7 +48,7 @@ export default function DahliaGuide() {
               
               <GuideHeading level={4}>Phase 1: Dahlia Moveset</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
-                <li><strong>S1</strong>: Single target attack with <EffectInlineTag name="IG_Buff_BuffdurationIncrease" type="buff" />.</li>
+                <li><strong>S1</strong>: Single target attack with <EffectInlineTag name="BT_EXTEND_BUFF" type="buff" />.</li>
                 <li><strong>S2</strong>: AoE passive skill that triggers when taking a critical hit. Applies <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> and <EffectInlineTag name="BT_FREEZE" type="debuff" /> for 5 turns.</li>
                 <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_SEAL_COUNTER" type="buff" />, <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" />, and <EffectInlineTag name="BT_FREEZE" type="debuff" /> for 5 turns.</li>
                 <li><strong>Passive</strong>: At the start of battle and her turn, gains <EffectInlineTag name="BT_IMMUNE" type="buff" /> for 1 turn.</li>
@@ -73,7 +73,7 @@ export default function DahliaGuide() {
 
               <GuideHeading level={4}>Phase 2: Gnosis Dahlia Moveset</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
-                <li><strong>S1</strong>: Single target attack with <EffectInlineTag name="IG_Buff_BuffdurationIncrease" type="buff" />.</li>
+                <li><strong>S1</strong>: Single target attack with <EffectInlineTag name="BT_EXTEND_BUFF" type="buff" />.</li>
                 <li><strong>S2</strong>: AoE attack granting <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> for 3 turns.</li>
                 <li><strong>S3</strong>: AoE attack with <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> and <EffectInlineTag name="BT_SEALED_RESURRECTION" type="debuff" />. Reduces health of <ClassInlineTag name='Striker' />, <ClassInlineTag name='Healer' />, and <ClassInlineTag name='Mage' /> heroes by 99% before attacking.<br /><span className='ml-11'>This skill is immune to <EffectInlineTag name='BT_COOL_CHARGE' type='debuff' />.</span></li>
                 <li><strong>Passive</strong>: After performing an action, reduces debuff duration by 2 turns.</li>

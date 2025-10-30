@@ -39,7 +39,7 @@ export default function MonadEvaGuide() {
       <GuideHeading level={4}>Monad Eva Mechanics</GuideHeading>
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li><strong>S1</strong>: Single, <EffectInlineTag name="BT_CALL_BACKUP" type="buff" />.</li>
-        <li><strong>S2</strong>: Single, <EffectInlineTag name="IG_Buff_BuffdurationIncrease" type="buff" /> of allies by 1 turn.</li>
+        <li><strong>S2</strong>: Single, <EffectInlineTag name="BT_EXTEND_BUFF" type="buff" /> of allies by 1 turn.</li>
         <li><strong>S3</strong>:<EffectInlineTag name="BT_INVINCIBLE" type="buff" /> 3 turns on K.</li>
         <li><strong>Passive</strong>: When hit by single attack, negates weakness gauge damage and reduce damage taken.</li>
         <li><strong>Enrage</strong>:  When health drops under 60%. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />.</li>

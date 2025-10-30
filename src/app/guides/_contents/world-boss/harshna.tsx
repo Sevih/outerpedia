@@ -110,7 +110,7 @@ export default function HarshnaGuide() {
                 <li><CharacterLinkCard name="Roxie" />: <EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /> <EffectInlineTag name="IG_Buff_DeBuffdurationIncrease" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Bell Cranel" /><CharacterLinkCard name="Vlada" /><CharacterLinkCard name="Maxie" /><CharacterLinkCard name="Ember" />: <EffectInlineTag name="BT_DOT_BURN" type="debuff" /> specialist.</li>
                 <li><CharacterLinkCard name="Monad Eva" />: strong as always.</li>
-                <li><CharacterLinkCard name="Fran" />: <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> and <EffectInlineTag name="IG_Buff_BuffdurationIncrease" type="buff" /> (be sure to use it after the boss&apos;s S2).</li>
+                <li><CharacterLinkCard name="Fran" />: <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> and <EffectInlineTag name="BT_EXTEND_BUFF" type="buff" /> (be sure to use it after the boss&apos;s S2).</li>
               </ul>
               <hr className="my-6 border-neutral-700" />
               <TeamTabSelector teams={teams} />

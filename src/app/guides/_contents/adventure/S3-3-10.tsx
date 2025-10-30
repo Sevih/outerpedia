@@ -16,7 +16,7 @@ export default function TyrantGuide() {
                 <li><strong>S3</strong>: Single, if granted <EffectInlineTag name="BT_STEALTHED" type="buff" /> gain <EffectInlineTag name="BT_SEALED_RESURRECTION" type="debuff" /> and <EffectInlineTag name="BT_ADDITIVE_TURN" type="buff" /> on kill.</li>
                 <li><strong>Passive</strong>: inflict <EffectInlineTag name="BT_SILENCE_IR" type="debuff" /> on <ElementInlineTag element='fire' /> enemies.</li>
                 <li><strong>Passive</strong>: <EffectInlineTag name="BT_RESURRECTION" type="buff" /> foes when performing an action.</li>
-                <li><strong>Passive</strong>: <EffectInlineTag name="IG_Buff_BuffdurationIncrease" type="buff" /> by 1 turn on all allies after performing an action.</li>
+                <li><strong>Passive</strong>: <EffectInlineTag name="BT_EXTEND_BUFF" type="buff" /> by 1 turn on all allies after performing an action.</li>
                 <li><strong>Passive</strong>: Increase damage when granted <EffectInlineTag name="BT_STEALTHED" type="buff" />, damage taken cannot exceed 100 and does not take weakness gauge damage.</li>
                 <li><strong>Enrage</strong>: After 10 enemy actions. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />.</li>
                 <li><strong>Enrage Ultimate</strong>: AoE used when enrage ends. Damage increases every time this skill is used.</li>

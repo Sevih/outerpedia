@@ -27,7 +27,7 @@ export default function TyrantGuide() {
             <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Lyla" /> <CharacterLinkCard name="Demiurge Delta" /> <CharacterLinkCard name="Leo" />: for <EffectInlineTag name="BT_STAT|ST_BUFF_RESIST" type="buff" />.</li>
-                <li><CharacterLinkCard name="Dianne" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="IG_Buff_BuffdurationIncrease" type="buff" />.</li>
+                <li><CharacterLinkCard name="Dianne" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_EXTEND_BUFF" type="buff" />.</li>
                 <li><CharacterLinkCard name="Astei" /> <CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" />.</li>
             </ul>
         </div>
