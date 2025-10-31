@@ -47,7 +47,7 @@ export default function ChimeraGuide() {
                 <li><strong>Speed is important</strong> due to the boss&#39;s ability to gain 10% <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> whenever attacked. Ideally, you want your entire team to be above 175 <StatInlineTag name="SPD" /> for Stage 12 (185 for Stage 13).</li>
               </ul>
               <hr className="my-6 border-neutral-700" />
-              <StageBasedTeamSelector teamData={chimeraTeams} defaultStage="1-10" icon='/images/ui/effect/fire.webp' replace={{ lead: "Stage ", mid: "-", tail: "" }}/>
+              <StageBasedTeamSelector teamData={chimeraTeams} defaultStage="1-10" icon='/images/ui/effect/fire.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }}/>
               <hr className="my-6 border-neutral-700" />
               <div className="mb-4">
                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
