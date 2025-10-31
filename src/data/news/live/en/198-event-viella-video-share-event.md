@@ -1,0 +1,53 @@
+---
+title: "[Event] Viella Video Share Event"
+date: "2025.10.24"
+category: "Event"
+views: 57
+url: "https://vagames.co.kr/noticewrite/notice_en/?uid=198&mod=document"
+uid: "198"
+---
+
+![](/images/news/live/en/198-37eb1303.png)  
+
+  
+
+  
+
+  
+
+Viella, the Archdemon of Bane, has arrived—let’s spread the word! ![💀](/images/news/live/en/198-3dcd7131.svg)![✨](/images/news/live/en/199-9d3be226.svg)
+
+Share her intro video on SNS for a chance to grab Special Recruit Tickets!
+
+  
+
+![📌](/images/news/live/en/200-86a26cd6.svg) How to Participate
+
+1\. Share the video with \[#OUTERPLANE\] \[#VIELLA\] on X, Instagram, Facebook, or preferred SNS.
+
+\-   
+2\. Post your link + Server + UID + Nickname on the discord.
+
+\- https://discord.com/channels/1004791978141171765/1431148301121490944/1431148301121490944
+
+  
+
+![🎁](/images/news/live/en/200-00ebbf59.svg) Rewards
+
+10 Special Recruit Tickets — 15 Winners Chosen at Random
+
+  
+
+![🗓](/images/news/live/en/200-4b75bfd9.svg) Event Period
+
+2025/10/24(Fri) ~ 2025/11/04(Tue) Before Maintenance
+
+  
+
+![📢](/images/news/live/en/200-4d91df69.svg) Winners Annoucement
+
+2025/11/11(Tue)
+
+  
+
+Share the venom, claim your prize. ![🐍](/images/news/live/en/198-392700fd.svg)

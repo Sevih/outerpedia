@@ -1,6 +1,6 @@
-// app/(tools)/patch-history/jsonld.ts
+// JSON-safe typing
+import { getAvailableLanguageCodes } from '@/tenants/config'
 
-// A JSON-safe value (no functions, no undefined)
 type JSONValue =
   | string
   | number
@@ -18,7 +18,6 @@ function normalizeBase(domain: string): string {
   return withProto.replace(/\/+$/, '')
 }
 
-/** Minimal WebSite LD (JSON-safe) */
 export function websiteLd(domain: string): JsonLdObject {
   const base = normalizeBase(domain)
   return {
@@ -29,7 +28,6 @@ export function websiteLd(domain: string): JsonLdObject {
   }
 }
 
-/** Breadcrumb LD (Home → Current) */
 export function breadcrumbLd(
   domain: string,
   labels: { home: string; current: string; currentPath?: string }
@@ -40,18 +38,29 @@ export function breadcrumbLd(
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: labels.home,
-        item: `${base}/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: labels.current,
-        item: currentUrl,
-      },
+      { '@type': 'ListItem', position: 1, name: labels.home, item: `${base}/` },
+      { '@type': 'ListItem', position: 2, name: labels.current, item: currentUrl },
     ],
+  }
+}
+
+/** CollectionPage schema for a news/patch history listing */
+export function collectionPageLd(
+  domain: string,
+  opts: { name: string; description: string }
+): JsonLdObject {
+  const base = normalizeBase(domain)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: opts.name,
+    description: opts.description,
+    url: `${base}/patch-history`,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Outerpedia',
+      url: `${base}/`,
+    },
+    inLanguage: getAvailableLanguageCodes(),
   }
 }

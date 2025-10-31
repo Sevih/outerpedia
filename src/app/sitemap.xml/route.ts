@@ -2,6 +2,8 @@
 import { NextResponse } from 'next/server'
 import fs from 'node:fs'
 import path from 'node:path'
+import { VA_AVAILABLE_LANGUAGES } from '@/tenants/config'
+import { getNewsSlugs, type NewsCategory } from '@/lib/news'
 
 // ——— Domains (fixes, car 3 tenants EN/JP/KR) ———
 const DOMAIN_EN = 'https://outerpedia.com'
@@ -21,7 +23,15 @@ const ITEM_FILES: Array<{ file: string; url: string }> = [
 
 const STATIC_PAGES = [
     '/', '/characters', '/equipments', '/tierlist', '/guides',
-    '/changelog', '/tools', '/legal', '/coupons',
+    '/changelog', '/tools', '/legal', '/coupons', '/patch-history',
+]
+
+const NEWS_CATEGORIES: NewsCategory[] = [
+    // VA Live categories
+    'notice', 'maintenance', 'issues', 'event', 'winners',
+    // Legacy categories
+    'patchnotes', 'compendium', 'developer-notes', 'official-4-cut-cartoon',
+    'probabilities', 'world-introduction', 'media-archives',
 ]
 
 function xmlEscape(s: string) {
@@ -94,6 +104,19 @@ function collectPages(): Page[] {
                 ? new Date(meta.last_updated).toISOString().split('T')[0]
                 : fileLm
             pages.push({ path: `/guides/${meta.category}/${slug}`, lastmod: lm })
+        }
+    }
+
+    // Patch History (legacy + live articles)
+    for (const lang of VA_AVAILABLE_LANGUAGES) {
+        for (const category of NEWS_CATEGORIES) {
+            const slugs = getNewsSlugs(category, lang)
+            for (const slug of slugs) {
+                pages.push({
+                    path: `/patch-history/${category}/${slug}`,
+                    lastmod: new Date().toISOString().split('T')[0]
+                })
+            }
         }
     }
 

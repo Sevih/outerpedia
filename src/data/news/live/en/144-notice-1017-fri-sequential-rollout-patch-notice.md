@@ -1,0 +1,49 @@
+---
+title: "[Notice] 10/17 (Fri) Sequential Rollout Patch Notice"
+date: "2025.10.17"
+category: "Notice"
+views: 117
+url: "https://vagames.co.kr/noticewrite/notice_en/?pageid=2&mod=document&uid=144"
+uid: "144"
+---
+
+![](/images/news/live/en/144-f0e6b3d5.png)  
+
+  
+Hello, Masters.
+
+  
+
+We will carry out a patch for fixing issues in the game.
+
+Please see below for more information.
+
+  
+
+◈ Patch Schedule
+
+\- 10/17 (Fri) 09:00 ~ 09:10 UTC
+
+※ Patch will be applied sequentially within the specified time frame.
+
+  
+
+◈ Details
+
+\- Translation and typo correction
+
+  
+
+Notice
+
+\- After downloading the patch, you will be able to access the game's fixed content.
+
+  
+
+We apologize for the inconvenience.
+
+We’ll keep doing our best to bring you a better and more enjoyable experience.
+
+  
+
+Thank you.

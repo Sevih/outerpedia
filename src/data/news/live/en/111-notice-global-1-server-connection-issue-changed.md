@@ -1,0 +1,30 @@
+---
+title: "[Notice] Global 1 Server Connection Issue (Changed)"
+date: "2025.10.08"
+category: "Notice"
+views: 73
+url: "https://vagames.co.kr/noticewrite/notice_en/?pageid=2&mod=document&uid=111"
+uid: "111"
+---
+
+![](/images/news/live/en/111-2f22b782.png)
+
+Dear Masters,
+
+  
+
+We have identified an issue where some players are unable to access the Global 1 server.
+
+Our team is currently working to restore normal connection and stabilize the service.
+
+  
+
+◈ Maintenance Schedule
+
+Oct 8, 2025 (UTC) 05:30 – 07:00 (Changed)
+
+We sincerely apologize for the inconvenience caused.
+
+A follow-up notice will be provided once the issue has been fully resolved.
+
+Thank you for your patience.

@@ -1,15 +1,13 @@
-// app/(tools)/patch-history/page.tsx
+// src/app/(tools)/patch-history/page.tsx
 import type { Metadata } from 'next'
-import { Suspense } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-
-import PatchNotesViewer from './patchHistoryClient'
+import { getAllNews } from '@/lib/news'
+import NewsPageClient from './page-client'
 import { createPageMetadata } from '@/lib/seo'
-import JsonLd from '@/app/components/JsonLd' // <- optionnel (cf. explications plus bas)
-import { websiteLd, breadcrumbLd } from './jsonld' // <- optionnel
+import JsonLd from '@/app/components/JsonLd'
+import { websiteLd, breadcrumbLd, collectionPageLd } from './jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
+import { getVALanguage } from '@/tenants/config'
 
 export async function generateMetadata(): Promise<Metadata> {
   return createPageMetadata({
@@ -21,64 +19,142 @@ export async function generateMetadata(): Promise<Metadata> {
     twitterTitleKey: 'patchHistory.twitter.title',
     twitterDescKey: 'patchHistory.twitter.desc',
     keywords: [
-      // Tu peux utiliser tes clés si tu veux localiser les keywords
-      // ou laisser des tokens EN, c'est OK pour SEO.
       'Outerplane',
-      'Outerpedia',
       'Patch Notes',
-      'Developer Letters',
       'Update History',
+      'Events',
+      'Developer Notes',
+      'News',
       'Changelog',
+      'Outerpedia',
     ],
     image: {
-      // Rappel projet: PNG pour metadata (OG/Twitter), WEBP en page
-      url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Agit.png',
-      width: 150, height: 150,
+      url: 'https://outerpedia.com/images/ui/nav/tool_default.png',
+      width: 150,
+      height: 150,
       altKey: 'patchHistory.og.imageAlt',
-      altFallback: 'Patch history and developer letters — Outerpedia',
+      altFallback: 'Patch History — Outerpedia',
     },
   })
 }
 
-export default async function Page() {
-  const { key: lang, domain } = await getTenantServer()
-  const { t } = await getServerI18n(lang)
+const CATEGORY_LABELS: Record<string, string> = {
+  all: 'All News',
+  // VA Live categories
+  notice: 'Notices',
+  maintenance: 'Maintenance',
+  issues: 'Known Issues',
+  event: 'Events',
+  winners: 'Winners',
+  // Legacy categories
+  patchnotes: 'Patch Notes',
+  'developer-notes': 'Developer Notes',
+  compendium: 'Hero Compendium',
+  'world-introduction': 'World Introduction',
+  'official-4-cut-cartoon': '4-Cut Cartoon',
+  probabilities: 'Probabilities',
+  'media-archives': 'Media Archives',
+}
+
+export default async function PatchHistoryPage() {
+  const { key: langKey, domain } = await getTenantServer()
+  const { t } = await getServerI18n(langKey)
+
+  // Mapper la langue du tenant vers une langue VA disponible
+  const newsLang = getVALanguage(langKey)
+
+  // Récupérer tous les articles côté serveur (legacy + live)
+  const allArticles = getAllNews(newsLang)
+
+  // Compter les articles par catégorie
+  const categoryCounts: Record<string, number> = {}
+  allArticles.forEach(article => {
+    categoryCounts[article.frontmatter.category] = (categoryCounts[article.frontmatter.category] || 0) + 1
+  })
+
+  // Groupes de catégories fusionnées
+  type CategoryGroup = {
+    value: string
+    label: string
+    count: number
+    includes: string[] // catégories incluses dans ce groupe
+  }
+
+  const categoryGroups: CategoryGroup[] = [
+    {
+      value: 'notice',
+      label: t('patchHistory.categories.notice') ?? 'Notices',
+      count: (categoryCounts['notice'] || 0) + (categoryCounts['issues'] || 0),
+      includes: ['notice', 'issues'],
+    },
+    {
+      value: 'event',
+      label: t('patchHistory.categories.event') ?? 'Events',
+      count: (categoryCounts['event'] || 0) + (categoryCounts['winners'] || 0),
+      includes: ['event', 'winners'],
+    },
+    {
+      value: 'maintenance',
+      label: t('patchHistory.categories.maintenance') ?? 'Maintenance',
+      count: categoryCounts['maintenance'] || 0,
+      includes: ['maintenance'],
+    },
+  ]
+
+  // Ajouter les catégories legacy individuellement
+  const legacyCategories = [
+    'patchnotes',
+    'developer-notes',
+    'media-archives',
+    'compendium',
+    'world-introduction',
+    'official-4-cut-cartoon',
+    'probabilities',
+  ]
+
+  const categories = [
+    { value: 'all', label: t('patchHistory.categories.all') ?? 'All News', count: allArticles.length, includes: [] },
+    ...categoryGroups.filter(group => group.count > 0),
+    ...legacyCategories
+      .filter(category => categoryCounts[category] > 0)
+      .map(category => ({
+        value: category,
+        label: t(`patchHistory.categories.${category}`) ?? (CATEGORY_LABELS[category] || category),
+        count: categoryCounts[category],
+        includes: [category],
+      })),
+  ]
+
+  // Préparer les données pour le client (format simplifié)
+  const clientArticles = allArticles.map(article => ({
+    slug: article.slug,
+    title: article.frontmatter.title,
+    date: article.frontmatter.date,
+    category: article.frontmatter.category,
+    excerpt: article.excerpt,
+    coverImage: article.frontmatter.coverImage,
+    images: article.frontmatter.images,
+  }))
 
   return (
-    <main className="p-6 max-w-5xl mx-auto">
-      <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
-        <Link href="/tools" className="relative block h-full w-full" aria-label={t('common.back') ?? 'Back'}>
-          <Image
-            src="/images/ui/CM_TopMenu_Back.webp" // webp in-page
-            alt={t('common.back') ?? 'Back'}
-            fill sizes="32px"
-            className="opacity-80 hover:opacity-100 transition-opacity"
-          />
-        </Link>
-      </div>
-
-      <h1>{t('patchHistory.h1') ?? 'Patch History'}</h1>
-      <p className="text-neutral-300 mb-4">
-        {t('patchHistory.intro') ??
-          'Browse all Outerplane patch notes, developer letters, and compendium entries — searchable and sorted by date.'}
-      </p>
-
-      {/* JSON-LD (optionnel) */}
+    <>
       <JsonLd
         json={[
           websiteLd(domain),
           breadcrumbLd(domain, {
             home: t('nav.home') ?? 'Home',
             current: t('patchHistory.meta.breadcrumb') ?? 'Patch History',
-            // optionnel si l’URL change : currentPath: '/patch-history'
+            currentPath: '/patch-history',
+          }),
+          collectionPageLd(domain, {
+            name: t('patchHistory.collection.name') ?? 'Patch History',
+            description:
+              t('patchHistory.collection.desc') ??
+              'Complete history of patch notes, events, developer notes and updates for Outerplane.',
           }),
         ]}
       />
-
-
-      <Suspense fallback={<div className="text-sm text-neutral-400">Loading…</div>}>
-        <PatchNotesViewer />
-      </Suspense>
-    </main>
+      <NewsPageClient initialArticles={clientArticles} categories={categories} />
+    </>
   )
 }

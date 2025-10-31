@@ -1,0 +1,74 @@
+---
+title: "[Maintenance] 10/22 (Wed) Update Maintenance"
+date: "2025.10.22"
+category: "Maintenance"
+views: 210
+url: "https://vagames.co.kr/noticewrite/notice_en/?uid=172&mod=document"
+uid: "172"
+---
+
+![](/images/news/live/en/172-8cc9e80e.png)  
+  
+  
+  
+Hello Masters,
+
+  
+  
+  
+
+We would like to inform you that we will have an update on 10/22 (Wed)
+
+Please see below for more details.
+
+  
+
+◈ Maintenance Schedule
+
+\- 10/22 (Wed) 23:30 - 10/23 (Thu) 07:00 UTC
+
+  
+
+◈ Details
+
+1\. New 3★ Companion “Viella” added
+
+2\. New Side Story opened
+
+3\. Returning of Limited Hero “Kitsune of Eternity Tamamo-no-Mae”
+
+4\. Returning Event Story “Never Stop Soulslayers!”
+
+5\. Battle Pass: “Fatal Bunny Girl Viella” added
+
+6\. New Season for \[Guild Raid\] and \[Joint Challenge\]
+
+7\. Monad Festival
+
+8\. Various bug fixes and improvements
+
+  
+
+Please Note
+
+\- Please log out of your game before the maintenance to ensure that your game data is stored properly.
+
+\- Players will not be able to access OUTERPLANE during the maintenance.
+
+\- The maintenance schedule is subject to change.
+
+\- The coupon page and the Drops page cannot be accessed during the maintenance period.
+
+  
+
+We appreciate your patience and hope that you will enjoy this update!
+
+For more information, please refer to the \[[Update Notice](https://vagames.co.kr/noticewrite/notice_en/?uid=157&mod=document)\]
+
+  
+
+We will do our best to provide you with even better service.
+
+  
+
+Thank you.

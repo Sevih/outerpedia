@@ -1,0 +1,55 @@
+---
+title: "[Notice] 10/5 (Sun) Sequential Rollout Patch Notice"
+date: "2025.10.05"
+category: "Notice"
+views: 225
+url: "https://vagames.co.kr/noticewrite/notice_en/?pageid=2&mod=document&uid=107"
+uid: "107"
+---
+
+![](/images/news/live/en/107-432b26e3.png)  
+
+  
+
+Hello, Masters.
+
+  
+
+We will carry out a patch for server stability and fixing issues in the game.
+
+Please note that players may experience some server instability during this time, but players can continue to play.
+
+We kindly ask for your understanding. Please see below for more information.
+
+  
+
+◈ Patch Schedule
+
+\- 10/5 (Sun) 07:00 ~ 07:30 UTC
+
+※ It will be applied sequentially within the specified timeframe.
+
+  
+
+◈ Details
+
+\- Server Stability  
+\- An issue where the unlock conditions for the Terminus Isle are displayed incorrectly in-game
+
+  
+
+Notice
+
+\- Players may experience some server instability.
+
+\- After downloading the patch, you will be able to access the game's improved function.
+
+  
+
+We sincerely apologize for any inconvenience caused.
+
+We will continue doing our best to provide you with the best service possible.
+
+  
+
+Thank you.

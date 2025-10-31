@@ -1,0 +1,84 @@
+---
+title: "[Event] Summer Knight's Dream Ember Lobby Screenshot Event"
+date: "2025.10.04"
+category: "Event"
+views: 138
+url: "https://vagames.co.kr/noticewrite/notice_en/?pageid=2&mod=document&uid=95"
+uid: "95"
+---
+
+Hello Masters!
+
+To celebrate the arrival of the new limited hero “Summer Knight’s Dream Ember”, we’re hosting a special Screenshot Event!
+
+Recruit Ember, take a lobby screenshot, and join for a chance to win exclusive rewards! ![🎁](/images/news/live/en/200-00ebbf59.svg)
+
+  
+
+◈ Service Transfer Celebration – Support Comment Event
+
+  
+
+  
+
+![](/images/news/live/en/95-fe4bd4a8.png)  
+
+  
+
+![✨](/images/news/live/en/199-9d3be226.svg) Event Period
+
+\- 2025/10/03 (Fri) ~ 2025/10/17 (Fri) 14:59 (UTC)
+
+  
+
+![✨](/images/news/live/en/199-9d3be226.svg) How to Participate
+
+(1) After recruiting Summer Knight’s Dream Ember, take a lobby screenshot showing your profile image and nickname.
+
+\- Example Screenshot:
+
+  
+
+![](/images/news/live/en/95-60b0bef7.png)
+
+  
+
+(2) Upload the screenshot to the \[Summer Knight’s Dream Ember Screenshot Event\] post within Discord Event category with your nickname/server.
+
+\- Example: GM Ame / Global 2
+
+\- Discord ![▶](/images/news/live/en/95-518b9332.svg) [https://discord.gg/gN3shF4Grk](https://discord.gg/gN3shF4Grk)
+
+  
+
+ **![✨](/images/news/live/en/199-9d3be226.svg) Event Reward**
+
+\- 10x Limited Recruit Tickets (15 winners chosen at random)
+
+  
+
+ **![✨](/images/news/live/en/199-9d3be226.svg) Reward Distribution**
+
+\- 2025/10/22 (Wed) 06:00 (UTC)
+
+◈ Important Notes
+
+\- Entries without the correct nickname and server will not be eligible.
+
+\- Participation will be recognized based on the nickname written in your comment.
+
+\- Multiple entries will not count — only the first comment will count, and rewards are limited to once per account.
+
+\- Spam or unrelated comments may be deleted without prior notice.
+
+\- If you delete your comment before the event ends, your entry will not be counted.
+
+\- Entries that do not meet participation requirements will be excluded.
+
+\- Event details may be subject to change due to internal circumstances.
+
+\- Rewards will be delivered via the in-game mailbox (storage period: 7 days).
+
+\- Please check the \[Event Rules\] for more details.
+
+Good luck, and see you in Mirsha!

@@ -1,0 +1,34 @@
+---
+title: "[Notice] Issue with Game Stuck on Loading Screen (Version.1.3.26)"
+date: "2025.10.23"
+category: "Notice"
+views: 65
+url: "https://vagames.co.kr/noticewrite/notice_en/?uid=181&mod=document"
+uid: "181"
+---
+
+![](/images/news/live/en/181-36058849.png)  
+
+Hello Masters,
+
+  
+
+We have identified an issue where players are stuck at loading screen when launching the game without applying the latest market update.
+
+We kindly ask you to manually update the game through the links below.
+
+  
+
+![📱](/images/news/live/en/181-276763f3.svg) Update Link
+
+(Android) https://play.google.com/store/apps/details?id=com.smilegate.outerplane.stove.google
+
+(iOS) https://apps.apple.com/us/app/outerplane-strategy-anime/id1630880836
+
+  
+
+Once again we apologize for any inconvenience caused.
+
+We will continue to inform our Masters regarding this issue via this notice.
+
+Thank you.

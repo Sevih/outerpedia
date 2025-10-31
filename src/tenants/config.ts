@@ -57,3 +57,20 @@ export function getAvailableLanguages(): TenantKey[] {
 export function getAvailableLanguageCodes(): string[] {
   return getAvailableLanguages().map(k => HREFLANG[k]);
 }
+
+/**
+ * Langues pour lesquelles VA Games publie des notices live
+ * Si VA Games ajoute une nouvelle langue (ex: zh), il suffit de l'ajouter ici
+ */
+export const VA_AVAILABLE_LANGUAGES = ['en', 'kr', 'jp'] as const;
+export type VALanguage = typeof VA_AVAILABLE_LANGUAGES[number];
+
+/**
+ * Mapper une TenantKey vers une langue VA disponible
+ * Si la langue du tenant n'a pas de notices VA, retourne 'en' par défaut
+ */
+export function getVALanguage(tenantKey: TenantKey): VALanguage {
+  return (VA_AVAILABLE_LANGUAGES as readonly string[]).includes(tenantKey)
+    ? (tenantKey as VALanguage)
+    : 'en';
+}

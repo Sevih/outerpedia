@@ -35,7 +35,6 @@ export function getToolRoutes() {
 
       let href = `/${slug}`;
       if (slug === "event") href = `/${slug}/history`;
-      if (slug === "patch-history") href = `/${slug}?src=patchnotes`;
       // Retourne un tuple [order, routeSansOrder]
       return [metadata.order, { name: metadata.name, description: metadata.description, icon: metadata.icon, href }] as const;
     })

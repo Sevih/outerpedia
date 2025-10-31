@@ -1,16 +1,15 @@
 {
   "name": "outerpedia-clean",
-  "version": "7.0.3",
+  "version": "7.0.5",
   "private": true,
   "scripts": {
-    "dev": "node -e \"console.log('\\n   ▲ Next.js'); console.log('   - LocalEn:    https://outerpedia.local/'); console.log('   - LocalJp:    https://jp.outerpedia.local/'); console.log('   - LocalKr:    https://kr.outerpedia.local/'); console.log('   - LocalZh:    https://Zh.outerpedia.local/\\n')\" && next dev",
+    "dev": "node -e \"console.log('\\n   ▲ Next.js'); console.log('   - LocalEn:    https://outerpedia.local/'); console.log('   - LocalJp:    https://jp.outerpedia.local/'); console.log('   - LocalKr:    https://kr.outerpedia.local/'); console.log('   - LocalZh:    https://zh.outerpedia.local/\\n')\" && next dev",
     "set-version": "node scripts/set-version.js",
     "build": "rm -rf .next && npm run set-version && npm run gen:events && npm run inject-sw-version && npm run generate:allchar && npm run generate:slugToChar && npm run generate:gear-stats && npm run generate:guide-chars && npm run gen:pool && npm run generate:gear-submap && npm run build:effects && next build",
     "inject-sw-version": "node scripts/inject-sw-version.js",
     "validate:build": "ls .next/static/css/*.css && ls .next/static/chunks/app/page-*.js && echo ✅ Build is valid",
     "start": "next start",
     "lint": "next lint",
-    "sitemap": "node scripts/generateSitemap.cjs",
     "build:effects": "node scripts/buildEffectIndex.mjs",
     "seo-check": "node scripts/seo-check.cjs",
     "generate:allchar": "node scripts/generateAllCharacters.js",
@@ -25,7 +24,8 @@
     "commit:fast": "node scripts/commit.mjs --no-changelog --skip-build",
     "seo:audit": "node scripts/seo-audit.js",
     "seo:check": "npm run seo:audit",
-    "generate:guide-chars": "node scripts/extract-guide-characters.js"
+    "generate:guide-chars": "node scripts/extract-guide-characters.js",
+    "migrate:news": "node scripts/migrate-news-to-markdown.mjs"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",
@@ -36,6 +36,7 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.18.1",
+    "gray-matter": "^4.0.3",
     "jsdom": "^26.1.0",
     "jsonc-parser": "^3.3.1",
     "keen-slider": "^6.8.6",
@@ -69,6 +70,7 @@
     "tree-kill": "^1.2.2",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.3",
+    "turndown": "^7.2.2",
     "typescript": "^5.9.2"
   }
 }
