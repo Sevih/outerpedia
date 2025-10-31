@@ -48,6 +48,31 @@ function extractCharactersFromTSX(filePath) {
   }
 }
 
+function extractFromGuideJSON(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(content);
+    const characters = new Set();
+
+    // Parcourir toutes les clés (stages: "1-10", "11-13", etc.)
+    Object.values(data).forEach(stageData => {
+      // Si c'est la nouvelle structure avec { team: [...], note: [...] }
+      if (stageData.team && Array.isArray(stageData.team)) {
+        extractCharactersFromArray(stageData.team).forEach(char => characters.add(char));
+      }
+      // Si c'est l'ancienne structure (direct array)
+      else if (Array.isArray(stageData)) {
+        extractCharactersFromArray(stageData).forEach(char => characters.add(char));
+      }
+    });
+
+    return Array.from(characters);
+  } catch (error) {
+    console.error(`Error reading guide JSON ${filePath}: ${error.message}`);
+    return [];
+  }
+}
+
 function extractCharactersFromArray(arr) {
   const characters = new Set();
 
@@ -165,9 +190,21 @@ function walkTSXDirectory(dir, category = '', parentDirName = '') {
           continue;
         }
 
-        const characters = extractCharactersFromTSX(fullPath);
+        // Extract from TSX file
+        const tsxCharacters = extractCharactersFromTSX(fullPath);
 
-        if (characters.length > 0) {
+        // Also check for associated JSON file (e.g., Chimera.json in the same directory)
+        let jsonCharacters = [];
+        const jsonFiles = files.filter(f => f.endsWith('.json'));
+        if (jsonFiles.length > 0) {
+          const jsonPath = path.join(dir, jsonFiles[0]);
+          jsonCharacters = extractFromGuideJSON(jsonPath);
+        }
+
+        // Combine characters from both sources
+        const allCharacters = [...new Set([...tsxCharacters, ...jsonCharacters])];
+
+        if (allCharacters.length > 0) {
           // If it's a multilingual guide (en.tsx/jp.tsx/kr.tsx), use parent directory name
           // Otherwise use the file name
           const guideId = isMultilingualFolder ? parentDirName : fileName;
@@ -176,7 +213,7 @@ function walkTSXDirectory(dir, category = '', parentDirName = '') {
           results[key] = {
             category: category,
             guideId: guideId,
-            characters: characters
+            characters: allCharacters
           };
         }
       }

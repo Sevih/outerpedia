@@ -11,13 +11,11 @@ import type { ElementType } from '@/types/enums'
 import type { ClassType as classtipe } from '@/types/enums'
 import { toKebabCase } from '@/utils/formatText'
 import GuidesRaw from '@/data/guides/guides-ref.json'
-import GuidesCatRaw from '@/data/guides/categories.json'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
 import type { Localized } from '@/types/common'
 
 const GUIDES = GuidesRaw as unknown as Record<string, Guide>
-const GUIDES_CAT = GuidesCatRaw as unknown as Record<string, GuideCat>
 // Using a flexible character type that allows for missing skills property
 type CharacterData = Omit<Character, 'skills'> & { skills?: Character['skills'] }
 
@@ -37,11 +35,6 @@ interface GuideData {
 interface MostUsedClientProps {
   charactersData: CharacterData[]
   guideUsageData: Record<string, GuideData>
-}
-
-type GuideCat = {
-  title: string | Localized
-  description: string | Localized
 }
 
 // ---- Types & utils
@@ -85,8 +78,10 @@ const cleanGuideWord = (s: string): string =>
 
 export default function MostUsedClient({ charactersData, guideUsageData }: MostUsedClientProps) {
   const { lang, t } = useI18n()
-  const tLoc = (v: string | Localized): string =>
-    typeof v === 'string' ? v : (v[lang as keyof typeof v] ?? v.en)
+  const tLoc = (v: string | Localized | undefined): string => {
+    if (!v) return ''
+    return typeof v === 'string' ? v : (v[lang as keyof typeof v] ?? v.en ?? '')
+  }
 
   // Helper to get localized character name
   const getCharName = (char: CharacterData) => l(char, 'Fullname', lang)
@@ -483,8 +478,7 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
                         const guideDef = GUIDES[guideData.guideId]
                         const guideName = guideDef ? tLoc(guideDef.title) : guideData.guideId
 
-                        const guideCat = GUIDES_CAT[guideData.category];
-                        const rawTitle = guideCat ? tLoc(guideCat.title) : guideData.guideId;
+                        const rawTitle = t(`categories.${guideData.category}`) || guideData.category;
                         const guideCatName = cleanGuideWord(rawTitle);
 
                         return (

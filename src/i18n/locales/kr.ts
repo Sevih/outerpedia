@@ -343,6 +343,8 @@ const kr = {
   'patchHistory.collection.name': '패치 기록',
   'patchHistory.collection.desc': '아우터플레인의 패치 노트, 이벤트, 개발자 레터, 업데이트의 전체 히스토리.',
   'patchHistory.categories.all': '모든 소식',
+  // Merged categories
+  'patchHistory.categories.updates': '업데이트',
   // VA Live categories
   'patchHistory.categories.notice': '공지사항',
   'patchHistory.categories.maintenance': '점검',

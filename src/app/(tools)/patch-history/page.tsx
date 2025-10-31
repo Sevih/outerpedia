@@ -82,10 +82,10 @@ export default async function PatchHistoryPage() {
 
   const categoryGroups: CategoryGroup[] = [
     {
-      value: 'notice',
-      label: t('patchHistory.categories.notice') ?? 'Notices',
-      count: (categoryCounts['notice'] || 0) + (categoryCounts['issues'] || 0),
-      includes: ['notice', 'issues'],
+      value: 'updates',
+      label: t('patchHistory.categories.updates') ?? 'Updates',
+      count: (categoryCounts['notice'] || 0) + (categoryCounts['issues'] || 0) + (categoryCounts['patchnotes'] || 0) + (categoryCounts['maintenance'] || 0),
+      includes: ['notice', 'issues', 'patchnotes', 'maintenance'],
     },
     {
       value: 'event',
@@ -93,17 +93,10 @@ export default async function PatchHistoryPage() {
       count: (categoryCounts['event'] || 0) + (categoryCounts['winners'] || 0),
       includes: ['event', 'winners'],
     },
-    {
-      value: 'maintenance',
-      label: t('patchHistory.categories.maintenance') ?? 'Maintenance',
-      count: categoryCounts['maintenance'] || 0,
-      includes: ['maintenance'],
-    },
   ]
 
-  // Ajouter les catégories legacy individuellement
+  // Ajouter les catégories legacy individuellement (sans patchnotes qui est maintenant dans updates)
   const legacyCategories = [
-    'patchnotes',
     'developer-notes',
     'media-archives',
     'compendium',

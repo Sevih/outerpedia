@@ -343,6 +343,8 @@ const en = {
   'patchHistory.collection.name': 'Patch History',
   'patchHistory.collection.desc': 'Complete history of patch notes, events, developer notes and updates for Outerplane.',
   'patchHistory.categories.all': 'All News',
+  // Merged categories
+  'patchHistory.categories.updates': 'Updates',
   // VA Live categories
   'patchHistory.categories.notice': 'Notices',
   'patchHistory.categories.maintenance': 'Maintenance',

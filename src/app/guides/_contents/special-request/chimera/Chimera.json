@@ -1,0 +1,92 @@
+{
+    "1-10": {
+        "team": [
+            [
+                "Valentine",
+                "Mero",
+                "Skadi",
+                "Tamara",
+                "Bryn",
+                "Ember"
+            ],
+            [
+                "Aer",
+                "Vlada",
+                "Ame",
+                "Noa",
+                "Rey",
+                "Maxie",
+                "Regina",
+                "Maxwell",
+                "Demiurge Luna",
+                "Demiurge Astei",
+                "Holy Night's Blessing Dianne",
+                "Ryu Lion",
+                "Bell Cranel"
+            ],
+            [
+                "Eternal",
+                "Tamamo-no-Mae",
+                "Rhona",
+                "Iota",
+                "Akari",
+                "Gnosis Nella",
+                "Demiurge Stella",
+                "Hilde",
+                "K",
+                "Kate"
+            ],
+            [
+                "Astei",
+                "Monad Eva",
+                "Liselotte",
+                "Nella",
+                "Tio",
+                "Dianne",
+                "Viella",
+                "Demiurge Delta",
+                "Saeran",
+                "Mene"
+            ]
+        ],
+        "note": [
+            {
+                "type": "p",
+                "string": "This team composition is recommended for stages 1-10."
+            }
+        ]
+    },
+    "11-13": {
+        "team": [
+            [
+                "Valentine",
+                "Mero",
+                "Skadi",
+                "Bryn",
+                "Ember"
+            ],
+            [
+                "Aer",
+                "Vlada",
+                "Maxie",
+                "Demiurge Luna",
+                "Holy Night's Blessing Dianne",
+                "Bell Cranel"
+            ],
+            [
+                "Eternal",
+                "Tamamo-no-Mae",
+                "Iota",
+                "Gnosis Nella"
+            ],
+            [
+                "Demiurge Stella",
+                "Hilde",
+                "Kanon",
+                "Astei",
+                "Monad Eva",
+                "Liselotte"
+            ]
+        ]
+    }
+}

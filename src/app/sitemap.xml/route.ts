@@ -58,7 +58,7 @@ function readJson<T>(p: string): T {
 }
 
 // ——— Page collection (une seule fois) ———
-type Page = { path: string; lastmod?: string }
+type Page = { path: string; lastmod?: string; isLiveArticle?: boolean }
 
 function collectPages(): Page[] {
     const pages: Page[] = []
@@ -108,14 +108,24 @@ function collectPages(): Page[] {
     }
 
     // Patch History (legacy + live articles)
+    // Les articles "live" sont spécifiques à chaque langue (live-en-, live-kr-, live-ja-)
+    // et ne doivent pas avoir d'alternates. Seuls les articles legacy ont des alternates.
+    const newsPathsSet = new Set<string>()
     for (const lang of VA_AVAILABLE_LANGUAGES) {
         for (const category of NEWS_CATEGORIES) {
             const slugs = getNewsSlugs(category, lang)
             for (const slug of slugs) {
-                pages.push({
-                    path: `/patch-history/${category}/${slug}`,
-                    lastmod: new Date().toISOString().split('T')[0]
-                })
+                const newsPath = `/patch-history/${category}/${slug}`
+                if (!newsPathsSet.has(newsPath)) {
+                    newsPathsSet.add(newsPath)
+                    // Marquer si c'est un article live (spécifique à une langue)
+                    const isLiveArticle = slug.startsWith('live-')
+                    pages.push({
+                        path: newsPath,
+                        lastmod: new Date().toISOString().split('T')[0],
+                        isLiveArticle // Flag pour désactiver les alternates
+                    })
+                }
             }
         }
     }
@@ -137,15 +147,35 @@ function renderSitemapXml(pages: Page[]): string {
         const ko = `${DOMAIN_KR}${p.path}`
         const zh = `${DOMAIN_ZH}${p.path}`
         const last = p.lastmod ? `<lastmod>${p.lastmod}</lastmod>` : ''
-        return `
+
+        // Les articles live sont spécifiques à une langue
+        if (p.isLiveArticle) {
+            // Déterminer le domaine en fonction du préfixe live-XX-
+            let primaryUrl = en
+            if (p.path.includes('/live-ja-')) primaryUrl = ja
+            else if (p.path.includes('/live-kr-')) primaryUrl = ko
+            else if (p.path.includes('/live-zh-')) primaryUrl = zh
+            // live-en- ou pas de préfixe spécifique -> EN par défaut
+
+            return `
   <url>
-    <loc>${xmlEscape(en)}</loc>
+    <loc>${xmlEscape(primaryUrl)}</loc>
     ${last}
+  </url>`.trim()
+        }
+
+        // Articles legacy : avec alternates
+        const alternates = `
     <xhtml:link rel="alternate" hreflang="en" href="${xmlEscape(en)}"/>
     <xhtml:link rel="alternate" hreflang="ja" href="${xmlEscape(ja)}"/>
     <xhtml:link rel="alternate" hreflang="ko" href="${xmlEscape(ko)}"/>
     <xhtml:link rel="alternate" hreflang="zh" href="${xmlEscape(zh)}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${xmlEscape(en)}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${xmlEscape(en)}"/>`
+
+        return `
+  <url>
+    <loc>${xmlEscape(en)}</loc>
+    ${last}${alternates}
   </url>`.trim()
     }).join('\n')
 

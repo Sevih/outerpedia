@@ -56,17 +56,51 @@ const carousel: KeenSliderPlugin = (slider) => {
 export default function CarouselSlot({ characters }: Props) {
   const { key } = useTenant()
   const sliderRef = useRef<HTMLDivElement>(null)
+
+  // Maximum visible characters in carousel at once
+  const maxVisibleCharacters = 5
+  const [centerIndex, setCenterIndex] = useState(0)
+
+  // Get visible characters: create a sliding window
+  // centerIdx is the character that should be in the CENTER (front) of the carousel
+  const getVisibleCharacters = (centerIdx: number) => {
+    if (characters.length <= maxVisibleCharacters) {
+      return characters
+    }
+
+    const visible: string[] = []
+    const half = Math.floor(maxVisibleCharacters / 2)
+
+    // Create window with centerIdx in the middle
+    for (let i = -half; i <= half; i++) {
+      const idx = (centerIdx + i + characters.length) % characters.length
+      visible.push(characters[idx])
+    }
+
+    return visible
+  }
+
+  const displayedCharacters = getVisibleCharacters(centerIndex)
+  const hasMoreThanMax = characters.length > maxVisibleCharacters
+  const middleIdx = Math.floor(displayedCharacters.length / 2)
+
+  // Use displayed characters as key to force re-mount when they change
+  const carouselKey = hasMoreThanMax ? displayedCharacters.join(',') : 'static'
+
   const [sliderInstanceRef, slider] = useKeenSlider<HTMLDivElement>(
     {
       loop: true,
       selector: '.carousel__cell',
       renderMode: 'custom',
       mode: 'free-snap',
+      initial: middleIdx,
+      // Disable animation on initial mount for smoother transitions
+      ...(hasMoreThanMax && { animationEnded: () => {} }),
     },
     [carousel]
   )
 
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(middleIdx)
 
   useEffect(() => {
     if (!slider.current) return
@@ -85,17 +119,35 @@ export default function CarouselSlot({ characters }: Props) {
     update()
   }, [slider])
 
+  // Handle navigation to update center index
+  const handlePrev = () => {
+    if (hasMoreThanMax) {
+      setCenterIndex((prev) => (prev - 1 + characters.length) % characters.length)
+    } else {
+      slider.current?.prev()
+    }
+  }
+
+  const handleNext = () => {
+    if (hasMoreThanMax) {
+      setCenterIndex((prev) => (prev + 1) % characters.length)
+    } else {
+      slider.current?.next()
+    }
+  }
+
   return (
     <div className="wrapper_carrousel">
       <div className="scene">
         <div
+          key={carouselKey}
           className="carousel keen-slider"
           ref={(el) => {
             sliderRef.current = el
             sliderInstanceRef(el)
           }}
         >
-          {characters.map((name, i) => {
+          {displayedCharacters.map((name, i) => {
             const data = getCharacterData(name)
             if (!data?.ID) return null
 
@@ -157,10 +209,10 @@ export default function CarouselSlot({ characters }: Props) {
         </div>
       </div>
 
-      {characters.length > 1 && (
+      {displayedCharacters.length > 1 && (
         <div className="controls">
           <button
-            onClick={() => slider.current?.prev()}
+            onClick={handlePrev}
             aria-label="Previous slide"
             className="arrow-button"
           >
@@ -174,7 +226,7 @@ export default function CarouselSlot({ characters }: Props) {
             />
           </button>
           <button
-            onClick={() => slider.current?.next()}
+            onClick={handleNext}
             aria-label="Next slide"
             className="arrow-button"
           >

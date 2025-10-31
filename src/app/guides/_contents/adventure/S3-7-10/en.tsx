@@ -21,14 +21,17 @@ export default function TyrantGuide() {
                 <li><strong>Enrage Ultimate</strong>: Inflict <EffectInlineTag name="BT_DOT_POISON_IR" type="debuff" /> 3 turns to all enemies.</li>
             </ul>
             <GuideHeading level={4}>Advice</GuideHeading>
+            <p>Two ways to handle this :</p>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                <li>Bring <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_STAT|ST_BUFF_RESIST" type="buff" /> to prevent <EffectInlineTag name="BT_DOT_POISON_IR" type="debuff" />.</li>
+                <li>Either bring <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_STAT|ST_BUFF_RESIST" type="buff" /> to prevent being <EffectInlineTag name="BT_DOT_POISON_IR" type="debuff" />.</li>
+                <li>Or take advantage of the boss&apos;s weakness to <EffectInlineTag name="BT_COOL3_CHARGE" type="debuff" /> so it never uses its S3.</li>
             </ul>
             <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Lyla" /> <CharacterLinkCard name="Demiurge Delta" /> <CharacterLinkCard name="Leo" />: for <EffectInlineTag name="BT_STAT|ST_BUFF_RESIST" type="buff" />.</li>
                 <li><CharacterLinkCard name="Dianne" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" /> and <EffectInlineTag name="BT_EXTEND_BUFF" type="buff" />.</li>
                 <li><CharacterLinkCard name="Astei" /> <CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" />.</li>
+                <li><CharacterLinkCard name="Demiurge Vlada" /> <CharacterLinkCard name="Gnosis Nella" /> <CharacterLinkCard name="Tamara" /> <CharacterLinkCard name="Tamamo-no-Mae" />: for <EffectInlineTag name="BT_COOL3_CHARGE" type="debuff" /></li>
             </ul>
         </div>
     )

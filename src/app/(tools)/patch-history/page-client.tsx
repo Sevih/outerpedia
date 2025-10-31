@@ -76,44 +76,64 @@ export default function NewsPageClient({ initialArticles, categories }: NewsPage
       <h1 className="text-3xl font-bold text-white mb-8">{t('patchHistory.h1')}</h1>
 
       {/* Filters */}
-      <div className="mb-8 space-y-4">
-        {/* Category filter */}
-        <div className="flex flex-wrap gap-2">
-          {categories.map(cat => (
-            <button
-              key={cat.value}
-              onClick={() => handleCategoryChange(cat.value)}
-              className={`
-                px-4 py-2 rounded-lg text-sm font-medium transition-colors
-                ${
-                  selectedCategory === cat.value
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
-                }
-              `}
-            >
-              {cat.label} ({cat.count})
-            </button>
-          ))}
-        </div>
-
+      <div className="mb-8 space-y-6">
         {/* Search */}
-        <div className="flex gap-2">
+        <div className="relative max-w-2xl">
+          <svg
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t('patchHistory.search.placeholder') ?? 'Search news...'}
-            className="flex-1 px-4 py-2 rounded-lg bg-neutral-800 text-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full pl-12 pr-12 py-3 rounded-xl bg-neutral-800/50 border border-neutral-700 text-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="px-4 py-2 rounded-lg bg-neutral-800 text-neutral-300 hover:bg-neutral-700 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-700 transition-colors"
+              aria-label="Clear search"
             >
-              {t('patchHistory.search.clear')}
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           )}
+        </div>
+
+        {/* Category filter */}
+        <div>
+          <h2 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3">Categories</h2>
+          <div className="flex flex-wrap gap-2">
+            {categories.map(cat => (
+              <button
+                key={cat.value}
+                onClick={() => handleCategoryChange(cat.value)}
+                className={`
+                  group relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
+                  ${
+                    selectedCategory === cat.value
+                      ? 'bg-gradient-to-br from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/30'
+                      : 'bg-neutral-800/50 text-neutral-300 hover:bg-neutral-700/80 border border-neutral-700/50 hover:border-neutral-600'
+                  }
+                `}
+              >
+                <span className="relative z-10">{cat.label}</span>
+                <span className={`
+                  ml-1.5 text-xs font-semibold
+                  ${selectedCategory === cat.value ? 'text-blue-100' : 'text-neutral-500 group-hover:text-neutral-400'}
+                `}>
+                  {cat.count}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

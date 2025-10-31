@@ -343,6 +343,8 @@ const jp = {
   'patchHistory.collection.name': 'パッチ履歴',
   'patchHistory.collection.desc': 'アウタープレーンのパッチノート、イベント、開発者レター、アップデートの完全な履歴。',
   'patchHistory.categories.all': 'すべてのニュース',
+  // Merged categories
+  'patchHistory.categories.updates': 'アップデート',
   // VA Live categories
   'patchHistory.categories.notice': 'お知らせ',
   'patchHistory.categories.maintenance': 'メンテナンス',
