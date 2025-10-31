@@ -1,6 +1,8 @@
 'use client'
 
-import CarouselSlot from './CarouselSlot'
+import CarouselSlotV2 from './CarouselSlotV2'
+
+import parseText from '@/utils/parseText'
 
 type NoteEntry =
   | { type: 'p'; string: string }
@@ -31,21 +33,21 @@ export default function RecommendedTeamCarousel({ team, note }: Props) {
   }}
 >
         {team.map((candidates, index) => (
-          <CarouselSlot key={index} characters={candidates} />
+          <CarouselSlotV2 key={`${index}-${candidates.join(',')}`} characters={candidates} />
         ))}
       </div>
       {note && (
-        <div className="text-neutral-400 text-sm italic mb-4">
+        <div className="mb-4">
           {note.map((entry, idx) => {
             if (entry.type === 'p') {
-              return <p key={idx} className="mb-2">Note: {entry.string}</p>
+              return <p key={idx} className="mb-2">{parseText(entry.string)}</p>
             }
 
             if (entry.type === 'ul') {
               return (
                 <ul key={idx} className="list-disc list-inside ml-4 space-y-1">
                   {entry.items.map((item: string, i: number) => (
-                    <li key={i}>{item}</li>
+                    <li key={i}>{parseText(item)}</li>
                   ))}
                 </ul>
               )

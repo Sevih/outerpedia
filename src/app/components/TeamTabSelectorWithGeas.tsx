@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import RecommendedTeam from './RecommendedTeamCarouselNoNote'
+import RecommendedTeam from './RecommendedTeamCarousel'
 import GeasCard, { Geas } from './GeasCard'
 import { resolveGeasRef } from '@/utils/geas'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'

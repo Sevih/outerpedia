@@ -93,6 +93,8 @@ export default function NewsPageClient({ initialArticles, categories }: NewsPage
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t('patchHistory.search.placeholder') ?? 'Search news...'}
             className="w-full pl-12 pr-12 py-3 rounded-xl bg-neutral-800/50 border border-neutral-700 text-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            role="search"
+            autoComplete="off"
           />
           {searchQuery && (
             <button

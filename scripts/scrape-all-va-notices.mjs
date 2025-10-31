@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,6 +54,47 @@ async function fetchPage(url) {
 }
 
 /**
+ * Get fallback image based on title patterns
+ */
+function getFallbackImage(title, lang, imageDir) {
+  // EN: Patch Note pattern (mm/dd (day) Patch Note)
+  if (lang === 'en' && /^\d{1,2}\/\d{1,2}\s+\([A-Za-z]+\)\s+Patch Note/i.test(title)) {
+    // Look for any existing patch note image in the directory
+    const files = fs.readdirSync(imageDir);
+    const patchNoteImage = files.find(f => /^\d+-[a-f0-9]+\.(png|webp)$/i.test(f));
+    if (patchNoteImage) {
+      // Change extension to .webp
+      const imageName = patchNoteImage.replace(/\.(png|webp)$/i, '.webp');
+      return `/images/news/live/${lang}/${imageName}`;
+    }
+  }
+
+  // KR: 접속 보상 이벤트 pattern
+  if (lang === 'kr' && /접속\s*보상\s*이벤트/i.test(title)) {
+    // Look for existing 접속 보상 event image (195-22b0a5b8)
+    const files = fs.readdirSync(imageDir);
+    const eventImage = files.find(f => /^195-[a-f0-9]+\.(png|webp)$/i.test(f));
+    if (eventImage) {
+      const imageName = eventImage.replace(/\.(png|webp)$/i, '.webp');
+      return `/images/news/live/${lang}/${imageName}`;
+    }
+  }
+
+  // KR: 엠버 event pattern (청운의 꿈 엠버, etc.)
+  if (lang === 'kr' && /엠버.*이벤트|이벤트.*엠버/i.test(title)) {
+    // Look for existing 엠버 event image (102-169728cd)
+    const files = fs.readdirSync(imageDir);
+    const amberImage = files.find(f => /^102-[a-f0-9]+\.(png|webp)$/i.test(f));
+    if (amberImage) {
+      const imageName = amberImage.replace(/\.(png|webp)$/i, '.webp');
+      return `/images/news/live/${lang}/${imageName}`;
+    }
+  }
+
+  return null;
+}
+
+/**
  * Download an image and save it locally
  */
 async function downloadImage(imageUrl, imageDir, uid) {
@@ -90,15 +132,16 @@ async function downloadImage(imageUrl, imageDir, uid) {
     const filePath = path.join(imageDir, filename);
     fs.writeFileSync(filePath, uint8Array);
 
-    // Return relative path from public directory
+    // Return relative path with .webp extension (actual file stays .png for now)
     // Extract language from imageDir (en, kr, or jp)
     const lang = path.basename(imageDir);
-    const relativePath = `/images/news/live/${lang}/${filename}`;
+    const webpFilename = filename.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+    const relativePath = `/images/news/live/${lang}/${webpFilename}`;
 
     // Cache the result
     imageCache.set(imageUrl, relativePath);
 
-    console.log(`  Downloaded image: ${filename}`);
+    console.log(`  Downloaded image: ${filename} (referenced as .webp)`);
     return relativePath;
 
   } catch (error) {
@@ -133,12 +176,13 @@ function saveBase64Image(base64Data, imageDir, uid, index) {
     const buffer = Buffer.from(data, 'base64');
     fs.writeFileSync(filePath, buffer);
 
-    // Return relative path from public directory
+    // Return relative path with .webp extension (actual file stays as original)
     // Extract language from imageDir (en, kr, or jp)
     const lang = path.basename(imageDir);
-    const relativePath = `/images/news/live/${lang}/${filename}`;
+    const webpFilename = filename.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+    const relativePath = `/images/news/live/${lang}/${webpFilename}`;
 
-    console.log(`  Saved base64 image: ${filename}`);
+    console.log(`  Saved base64 image: ${filename} (referenced as .webp)`);
     return relativePath;
 
   } catch (error) {
@@ -189,7 +233,7 @@ function createTurndownService(imageDir, uid) {
 /**
  * Download all external images from markdown and update paths
  */
-async function processMarkdownImages(markdown, imageDir, uid) {
+async function processMarkdownImages(markdown, imageDir, uid, title, lang) {
   // Find all image references
   const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
   let match;
@@ -212,6 +256,23 @@ async function processMarkdownImages(markdown, imageDir, uid) {
           original: match[0],
           replacement: `![${alt}](${localPath})`
         });
+      } else {
+        // Download failed, try to find a fallback image
+        const fallbackPath = getFallbackImage(title, lang, imageDir);
+        if (fallbackPath) {
+          console.log(`  Using fallback image: ${fallbackPath}`);
+          replacements.push({
+            original: match[0],
+            replacement: `![${alt}](${fallbackPath})`
+          });
+        } else {
+          // No fallback available, leave image empty
+          console.log(`  No fallback available, leaving image empty`);
+          replacements.push({
+            original: match[0],
+            replacement: `![${alt}]()`
+          });
+        }
       }
     }
   }
@@ -297,7 +358,7 @@ function hasNextPage(html, baseUrl) {
 /**
  * Extract notice content from detail page
  */
-async function extractNoticeContent(url, metadata, imageDir) {
+async function extractNoticeContent(url, metadata, imageDir, lang) {
   const html = await fetchPage(url);
   const $ = cheerio.load(html);
 
@@ -345,7 +406,7 @@ async function extractNoticeContent(url, metadata, imageDir) {
   let markdown = turndownService.turndown(htmlContent);
 
   // Download all external images and update markdown
-  markdown = await processMarkdownImages(markdown, imageDir, metadata.uid);
+  markdown = await processMarkdownImages(markdown, imageDir, metadata.uid, metadata.title, lang);
 
   return {
     ...metadata,
@@ -356,31 +417,47 @@ async function extractNoticeContent(url, metadata, imageDir) {
 }
 
 /**
+ * Check if an article already exists with the same uid and title
+ */
+function shouldSkipArticle(uid, title, dataDir) {
+  const filename = `${uid}.md`;
+  const filePath = path.join(dataDir, filename);
+
+  // If file doesn't exist, don't skip
+  if (!fs.existsSync(filePath)) {
+    return false;
+  }
+
+  // Read the file and check if the title matches
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    const titleMatch = content.match(/^title:\s*"(.+)"$/m);
+
+    if (titleMatch) {
+      const existingTitle = titleMatch[1];
+      // If title matches, skip this article
+      if (existingTitle === title) {
+        return true;
+      }
+    }
+  } catch (error) {
+    console.warn(`Error reading ${filename}:`, error.message);
+  }
+
+  // If we couldn't read the title or it doesn't match, don't skip (re-scrape)
+  return false;
+}
+
+/**
  * Save notice to Markdown file
  */
-function saveNotice(notice, dataDir, skipIfExists = false) {
-  // Create filename from UID and title
-  // Keep Unicode characters (for KR/JP), only remove special chars that could cause filesystem issues
-  const safeTitle = notice.title
-    .toLowerCase()
-    .replace(/[<>:"/\\|?*]/g, '') // Remove filesystem-unsafe characters
-    .replace(/[\[\](){}]/g, '') // Remove brackets
-    .replace(/[!@#$%^&+=~`]/g, '') // Remove other special chars
-    .replace(/\s+/g, '-') // Replace spaces with dashes
-    .replace(/^-+|-+$/g, '') // Remove leading/trailing dashes
-    .substring(0, 80); // Allow longer filenames for Unicode
-
-  const filename = `${notice.uid}-${safeTitle || 'notice'}.md`;
+function saveNotice(notice, dataDir) {
+  // Use only UID for filename (WordPress UIDs are stable and unique)
+  const filename = `${notice.uid}.md`;
   const filePath = path.join(dataDir, filename);
 
   // Ensure directory exists
   fs.mkdirSync(dataDir, { recursive: true });
-
-  // Skip if file already exists and skipIfExists is true
-  if (skipIfExists && fs.existsSync(filePath)) {
-    console.log(`Skipped (exists): ${filename}`);
-    return false;
-  }
 
   // Create frontmatter
   const frontmatter = `---
@@ -405,7 +482,7 @@ uid: "${notice.uid}"
 /**
  * Scrape all notices for a specific language
  */
-async function scrapeLanguage(lang, maxPages = 10, skipIfExists = false) {
+async function scrapeLanguage(lang) {
   const config = BOARDS[lang];
   console.log(`\n${'='.repeat(60)}`);
   console.log(`SCRAPING ${lang.toUpperCase()} NOTICES`);
@@ -415,8 +492,8 @@ async function scrapeLanguage(lang, maxPages = 10, skipIfExists = false) {
   let pageCount = 0;
   const allEntries = [];
 
-  // Step 1: Collect all entries from list pages
-  while (currentUrl && pageCount < maxPages) {
+  // Step 1: Collect all entries from list pages (no limit, scrape everything)
+  while (currentUrl) {
     pageCount++;
     console.log(`\nPage ${pageCount}: ${currentUrl}`);
 
@@ -450,17 +527,19 @@ async function scrapeLanguage(lang, maxPages = 10, skipIfExists = false) {
     const entry = allEntries[i];
     console.log(`\n[${i + 1}/${allEntries.length}] Processing: ${entry.title}`);
 
+    // Check if we should skip this article (uid + title match)
+    if (shouldSkipArticle(entry.uid, entry.title, config.dataDir)) {
+      console.log(`Skipped (already exists with same title): ${entry.uid}.md`);
+      skippedCount++;
+      continue;
+    }
+
     try {
-      const notice = await extractNoticeContent(entry.url, entry, config.imageDir);
+      const notice = await extractNoticeContent(entry.url, entry, config.imageDir, lang);
 
       if (notice && notice.content) {
-        const wasSaved = saveNotice(notice, config.dataDir, skipIfExists);
-        if (wasSaved) {
-          savedCount++;
-        } else {
-          skippedCount++;
-          continue; // Skip the delay if file already exists
-        }
+        saveNotice(notice, config.dataDir);
+        savedCount++;
       }
 
       // Be nice to the server
@@ -487,11 +566,10 @@ async function main() {
   console.log('================================\n');
 
   const args = process.argv.slice(2);
-  const maxPages = args.length > 0 ? parseInt(args[0]) : 10;
-  const languages = args.length > 1 ? args.slice(1) : ['en', 'kr', 'jp'];
+  const languages = args.length > 0 ? args : ['en', 'kr', 'jp'];
 
-  console.log(`Max pages per language: ${maxPages}`);
-  console.log(`Languages to scrape: ${languages.join(', ')}\n`);
+  console.log(`Languages to scrape: ${languages.join(', ')}`);
+  console.log('Mode: Scraping ALL pages (no limit)\n');
 
   const stats = {};
 
@@ -502,7 +580,7 @@ async function main() {
     }
 
     try {
-      const count = await scrapeLanguage(lang, maxPages);
+      const count = await scrapeLanguage(lang);
       stats[lang] = count;
     } catch (error) {
       console.error(`Error scraping ${lang}:`, error.message);
@@ -518,6 +596,28 @@ async function main() {
     console.log(`${lang.toUpperCase()}: ${count} notices`);
   }
   console.log('\nAll done!');
+
+  // Convert images to WebP
+  console.log('\n\n' + '='.repeat(60));
+  console.log('CONVERTING IMAGES TO WEBP');
+  console.log('='.repeat(60));
+
+  try {
+    const convertScriptPath = path.join(__dirname, '..', 'convert_to_webp.bat');
+    console.log(`Running: ${convertScriptPath}`);
+
+    // Execute the batch file
+    execSync(`"${convertScriptPath}"`, {
+      cwd: path.join(__dirname, '..'),
+      stdio: 'inherit', // Show output in console
+      windowsHide: false
+    });
+
+    console.log('\nWebP conversion completed!');
+  } catch (error) {
+    console.error('\nError during WebP conversion:', error.message);
+    console.error('You may need to run convert_to_webp.bat manually.');
+  }
 }
 
 main().catch(console.error);

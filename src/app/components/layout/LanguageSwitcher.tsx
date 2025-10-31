@@ -40,9 +40,14 @@ export default function LanguageSwitcher() {
     const isOnBaseDomain =
       host === BASE_DOMAIN || host.endsWith(`.${BASE_DOMAIN}`)
 
+    // Check if we're on a live article page (language-specific content)
+    const isLiveArticle = pathname.match(/\/patch-history\/[^/]+\/live-[a-z]{2}-/)
+
     if (isOnBaseDomain) {
       const nextHost = TENANTS[target].domain
-      window.location.href = `${protocol}//${nextHost}${pathname}${search}${hash}`
+      // If on a live article, redirect to patch-history page instead of the specific article
+      const nextPath = isLiveArticle ? '/patch-history' : pathname
+      window.location.href = `${protocol}//${nextHost}${nextPath}${search}${hash}`
       return
     }
 
