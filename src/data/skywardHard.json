@@ -40,5 +40,170 @@
         "conditions": ["2 base 2★ units","No healers"]
       }
     }
+  },
+  {
+    "floor": 33,
+    "boss": { "name": "Tamara", "image": ["2010060_E","2010066_E","2000014_E"] },
+    "note": [
+      { "type": "p", "string": "Avoid AoE attack" },
+      { "type": "p", "string": "Unbuffable to avoid Tamara getting counterattack buff." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["Tio"],
+          ["Akari"],
+          ["Caren"],
+          ["Rey"]
+        ],
+        "conditions": ["1 base 2★ units","No Mage"]
+      }
+    }
+  },
+  {
+    "floor": 34,
+    "boss": { "name": "Glicys", "image": ["4076001"] },
+    "note": [
+      { "type": "p", "string": "Immunity to avoid freeze." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["Kappa"],
+          ["Ame","Ryu Lion"],
+          ["Viella"],
+          ["Rey","Noa"]
+        ],
+        "conditions": ["No Light","No Dark"]
+      }
+    }
+  },
+  {
+    "floor": 35,
+    "boss": { "name": "Demiurge Vlada", "image": ["2000075_E","2000070_E"] },
+    "note": [
+      { "type": "p", "string": "Kill Epsilon using curse to be granted Imunity against Demiurge Vlada." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["Monad Eva"],
+          ["Drakhan"],
+          ["Akari"],
+          ["Kuro"]
+        ],
+        "conditions": []
+      }
+    }
+  },
+  {
+    "floor": 36,
+    "boss": { "name": "Fatal", "image": ["2000078_E","2000043_E"] },
+    "note": [
+      { "type": "p", "string": "Tamara to increases boss' cooldown." },
+      { "type": "p", "string": "Kill Eternal as soon as possible so you can focus Fatal." },
+      { "type": "p", "string": "Avoid Using non-attack skill." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["Tio"],
+          ["Tamara"],
+          ["Roxie"],
+          ["Beth","Caren"]
+        ],
+        "conditions": ["No Light","1 base 2★ units"]
+      }
+    }
+  },
+  {
+    "floor": 37,
+    "boss": { "name": "Shichifuja's Shadow", "image": ["4038004","4151015"] },
+    "note": [
+      { "type": "p", "string": "Try to have Caren S2 available when the boss gains imunity." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["Tio"],
+          ["Drakhan"],
+          ["Marian"],
+          ["Caren"]
+        ],
+        "conditions": ["No Defender","1 base 2★ units"]
+      }
+    }
+  },
+  {
+    "floor": 38,
+    "boss": { "name": "Tamamo-no-Mae", "image": ["2000080_E","2000080_E","2000080_E","2000080_E"] },
+    "note": [
+      { "type": "p", "string": "Nothing special just brute force with AoE." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["Luna","Summer Knight's Dream Ember"],
+          ["Laplace","Poolside Trickster Regina"],
+          ["Roxie","Rin"],
+          ["Caren","Beth"]
+        ],
+        "conditions": ["Only Water","No Ranger"]
+      }
+    }
+  },
+  {
+    "floor": 39,
+    "boss": { "name": "Amadeus", "image": ["4076009","4151015"] },
+    "note": [
+      { "type": "p", "string": "Keep a debuff on the boss to break him." },
+      { "type": "p", "string": "The leftmost unit will be stun so use a stun immune unit." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["Demiurge Stella","Stella"],
+          ["Monad Eva"],
+          ["Drakhan","Gnosis Beth","Akari"],          
+          ["Demiurge Luna","Regina","Demiurge Drakhan"]
+        ],
+        "conditions": ["Only Light"]
+      }
+    }
+  },
+  {
+    "floor": 40,
+    "boss": { "name": "Demiurge Drakhan", "image": ["2000063_E","4151014"] },
+    "note": [
+      { "type": "p", "string": "Curse and Unbuffable will seal the deal." },
+      { "type": "p", "string": "Try to have as low Critical Hit Chance as possible to avoid resetting the boss’s ultimate." }
+    ],
+    "teams": {
+      "team1": {
+        "label": "2 base 2★ units",
+        "icon": "CM_Work_Tab_Siar_02_Select.webp",
+        "setup": [
+          ["Monad Eva"],
+          ["Marian","Akari"],          
+          ["Drakhan","Gnosis Beth"],          
+          ["Rhona","Kitsune of Eternity Tamamo-no-Mae"]
+        ],
+        "conditions": []
+      }
+    }
   }
 ]

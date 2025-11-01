@@ -165,8 +165,7 @@
         "conditions": [
           "No mage"
         ],
-        "note": [
-        ]
+        "note": []
       },
       "team2": {
         "label": "No Fire",
@@ -193,8 +192,7 @@
         "conditions": [
           "No fire"
         ],
-        "note": [
-        ]
+        "note": []
       },
       "team3": {
         "label": "1 Light",
@@ -222,8 +220,7 @@
         "conditions": [
           "1 Light"
         ],
-        "note": [
-        ]
+        "note": []
       }
     }
   },
@@ -501,6 +498,32 @@
           "1 Healer"
         ],
         "note": []
+      },
+      "team4": {
+        "label": "No mage",
+        "icon": "mage.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne"
+          ],
+          [
+            "Fran",
+            "Charlotte"
+          ],
+          [
+            "Rey",
+            "Demiurge Stella"
+          ],
+          [
+            "Drakhan",
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "No mage"
+        ],
+        "note": []
       }
     }
   },
@@ -557,6 +580,38 @@
         ]
       },
       "team2": {
+        "label": "1 Dark",
+        "icon": "dark.webp",
+        "setup": [
+          [
+            "Nella"
+          ],
+          [
+            "Eternal",
+            "Demiurge Vlada",
+            "Sterope",
+            "Edelweiss"
+          ],
+          [
+            "Gnosis Nella",
+            "Rhona"
+          ],
+          [
+            "Gnosis Beth",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "1 Dark"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "G.Beth's Eternal Bleeding's damage is not affected by Rhona's passive."
+          }
+        ]
+      },
+      "team3": {
         "label": "No Mage",
         "icon": "mage.webp",
         "setup": [
@@ -903,6 +958,35 @@
         ],
         "conditions": [
           "1 Dark"
+        ],
+        "note": []
+      },
+      "team3": {
+        "label": "1 Fire",
+        "icon": "fire.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Aer",
+            "Kanon",
+            "Vlada",
+            "Bryn"
+          ],
+          [
+            "Maxwell",
+            "Demiurge Astei",
+            "Ame",
+            "Demiurge Luna"
+          ]
+        ],
+        "conditions": [
+          "1 Fire"
         ],
         "note": []
       }
@@ -1456,6 +1540,35 @@
         ],
         "conditions": [
           "1 Defender"
+        ],
+        "note": []
+      },
+      "team4": {
+        "label": "1 Dark",
+        "icon": "dark.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Stella",
+            "Valentine",
+            "Iota"
+          ],
+          [
+            "Ame",
+            "Luna",
+            "Summer Knight's Dream Ember",
+            "Demiurge Drakhan"
+          ],
+          [
+            "Maxwell",
+            "Omega Nadja",
+            "Demiurge Astei"
+          ]
+        ],
+        "conditions": [
+          "1 Dark"
         ],
         "note": []
       }

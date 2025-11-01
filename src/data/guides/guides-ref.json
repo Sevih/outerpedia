@@ -1401,7 +1401,7 @@
       "kr": "더 강력한 적과 전술적 도전이 가득한 30층에 도전하세요. 정확성과 전략이 핵심입니다."
     },
     "icon": "hard",
-    "last_updated": "2025-08-23",
+    "last_updated": "2025-11-01",
     "author": "Various Author"
   },
   "very-hard": {
@@ -1417,7 +1417,7 @@
       "kr": "가장 엘리트 팀만이 최상층 20층의 잔인한 시련에서 살아남을 것입니다."
     },
     "icon": "very-hard",
-    "last_updated": "2025-10-22",
+    "last_updated": "2025-11-01",
     "author": "Various Author"
   },
   "timegate-resource": {
