@@ -11,6 +11,23 @@ import GuideIconInline from '@/app/components/GuideIconInline';
 
 const gearUpgradeFaq = [
   {
+    key: 'red-gear-weapons',
+    title: 'Should I only aim for Legendary gear?',
+    content: (
+      <>
+        <p>
+          <strong>No!</strong> Epic gear is a strong alternative, especially on armor. 
+        </p>
+        <p className="mt-2">
+           It is cheaper to upgrade and the maximum stats are just 1 reforge lower than Legendary.
+        </p>
+        <p className="mt-2">
+           Weapons and Accessories have unique skills, so you would prefer looking for Legendary gear here, followed by Gloves for Accuracy.
+        </p>
+      </>
+    ),
+  },
+  {
     key: '6v5-comparison',
     title: 'Is 6-star gear always better than 5-star legendary gear?',
     content: (
@@ -25,15 +42,6 @@ const gearUpgradeFaq = [
           Grey/Green 6-star armor should only be used temporarily until you get better blue or red gear.
         </p>
       </>
-    ),
-  },
-  {
-    key: 'red-gear-weapons',
-    title: 'Should I aim for red gear on weapons and accessories?',
-    content: (
-      <p>
-        Yes. For weapons and accessories, red gear is preferred due to the additional effects.
-      </p>
     ),
   },
   {
@@ -181,11 +189,11 @@ export default function BeginnerGuide() {
         Available via the <strong>Enhance</strong> menu, using hammers <ItemInlineDisplay names="Apprentice's Hammer" text={false} /><ItemInlineDisplay names="Expert's Hammer" text={false} /><ItemInlineDisplay names="Master's Hammer" text={false} /><ItemInlineDisplay names="Artisan's Hammer" text={false} /> to increase the item&apos;s enhancement level up to +10.
         This improves the <strong>Main Stat only</strong>, based on the item&apos;s grade and star level.
       </p>
-<p className="text-neutral-400 text-sm italic mb-4">
-  Note: You can convert hammers to a higher grade in your inventory with a 2:1 ratio (e.g., 2 <ItemInlineDisplay names="Master's Hammer" /> for 1 <ItemInlineDisplay names="Artisan's Hammer" />).  <br />
-  Converting hammers is only useful for enhancing Special Gear — there is no benefit to doing that for regular enhancing.  <br />
-  Also, combining <ItemInlineDisplay names="Apprentice's Hammer" text={true} /> can yield slightly more total EXP (200 EXP vs. 250 EXP when converted into an <ItemInlineDisplay names="Expert's Hammer" text={true} />), but it costs gold — so the gain is often offset by the conversion expense.
-</p>
+      <p className="text-neutral-400 text-sm italic mb-4">
+        Note: You can convert hammers to a higher grade in your inventory with a 2:1 ratio (e.g., 2 <ItemInlineDisplay names="Master's Hammer" /> for 1 <ItemInlineDisplay names="Artisan's Hammer" />).  <br />
+        Converting hammers is only useful for enhancing Special Gear — there is no benefit to doing that for regular enhancing.  <br />
+        Also, combining <ItemInlineDisplay names="Apprentice's Hammer" text={true} /> can yield slightly more total EXP (200 EXP vs. 250 EXP when converted into an <ItemInlineDisplay names="Expert's Hammer" text={true} />), but it costs gold — so the gain is often offset by the conversion expense.
+      </p>
 
       <p>Example comparisons:</p>
       <div className="flex flex-wrap justify-center gap-8">

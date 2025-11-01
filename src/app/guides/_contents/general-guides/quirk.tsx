@@ -97,11 +97,10 @@ export default function QuirkGuide() {
       </p>
       <p className="mt-2">
         Next, focus on <GuideIconInline name="CM_Gift_Menu_03" text="Class Enhancement" size={40} />, starting with the class of your main DPS. Then move on to <GuideIconInline name="CM_Gift_Menu_01" text="Element Enhancement" size={40} />, prioritizing the element your team relies on the most.
-        <p className="mt-2">
-          Finally, consider <GuideIconInline name="CM_Gift_Menu_04" text="Utility" size={40} /> quirks, which offer account-wide bonuses such as EXP gain, drop rate, crafting discounts — and most notably, an increase to your stamina cap.
-          While the stamina cap boost is the most impactful perk in this category, Utility quirks as a whole still remain a lower priority early on.
-        </p>
-
+      </p>
+      <p className="mt-2">
+        Finally, consider <GuideIconInline name="CM_Gift_Menu_04" text="Utility" size={40} /> quirks, which offer account-wide bonuses such as EXP gain, drop rate, crafting discounts — and most notably, an increase to your stamina cap.
+        While the stamina cap boost is the most impactful perk in this category, Utility quirks as a whole still remain a lower priority early on.
       </p>
       <p className="mt-2">
         As for the <GuideIconInline name="CM_Gift_Menu_06" text="Adventure License" size={40} /> tree: this is an endgame system and shouldn’t be your early focus. It’s also the only tree that requires <ItemInlineDisplay names="Proof of Worth" />, which is exclusively obtained from Adventure License mode.
