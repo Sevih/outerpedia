@@ -372,11 +372,40 @@ export function searchNewsFullText(query: string, category?: NewsCategory, lang:
     const fileContent = fs.readFileSync(filePath, 'utf-8')
     const { data, content } = matter(fileContent)
 
-    // Chercher dans le titre et le contenu
+    // Nettoyer le contenu avant la recherche
+    const cleanedContent = content
+      // Supprimer les images ![alt](url)
+      .replace(/!\[([^\]]*)\]\([^)]+\)/g, '')
+      // Supprimer les liens [text](url) mais garder le texte
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      // Supprimer les URLs complètes (http://, https://, www.)
+      .replace(/https?:\/\/[^\s)]+/g, '')
+      .replace(/www\.[^\s)]+/g, '')
+      // Supprimer les URLs encodées (%XX%XX...)
+      .replace(/(?:%[0-9a-f]{2})+/gi, '')
+      // Supprimer les balises SVG complètes
+      .replace(/<svg[^>]*>[\s\S]*?<\/svg>/gi, '')
+      // Supprimer toutes les balises HTML
+      .replace(/<[^>]+>/g, ' ')
+      // Nettoyer les espaces multiples
+      .replace(/\s+/g, ' ')
+      .trim()
+
+    // Chercher dans le titre et le contenu nettoyé
     const title = (data.title as string || '').toLowerCase()
-    const textContent = content.toLowerCase()
+    const textContent = cleanedContent.toLowerCase()
 
     if (title.includes(lowerQuery) || textContent.includes(lowerQuery)) {
+      // Debug: log where the match was found (only in development)
+      if (process.env.NODE_ENV === 'development') {
+        const matchInTitle = title.includes(lowerQuery)
+        const matchIndex = matchInTitle ? title.indexOf(lowerQuery) : textContent.indexOf(lowerQuery)
+        const context = matchInTitle
+          ? title.substring(Math.max(0, matchIndex - 20), Math.min(title.length, matchIndex + lowerQuery.length + 20))
+          : textContent.substring(Math.max(0, matchIndex - 20), Math.min(textContent.length, matchIndex + lowerQuery.length + 20))
+        console.log(`[SEARCH] Match "${lowerQuery}" in ${slug}: ${matchInTitle ? 'TITLE' : 'CONTENT'}`)
+        console.log(`  Context: ...${context}...`)
+      }
       // Construire le frontmatter selon le type d'article
       let frontmatter: NewsFrontmatter
 
