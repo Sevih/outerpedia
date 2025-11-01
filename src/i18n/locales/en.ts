@@ -367,6 +367,7 @@ const en = {
   'patchHistory.results.noResults': 'No news found',
   'patchHistory.results.tryAdjusting': 'Try adjusting your search or filters',
   'patchHistory.results.showing': 'Showing {count} {count, plural, one {article} other {articles}}',
+  'patchHistory.loadMore': 'Load More ({remaining} remaining)',
   // SEO
   'gearSolver.meta.title': 'Gear Usage Finder | Outerpedia',
   'gearSolver.meta.desc': 'Not sure who can use your gear? Find the best character matches from recommended builds.',

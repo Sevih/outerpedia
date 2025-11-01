@@ -5,6 +5,8 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useI18n } from '@/lib/contexts/I18nContext'
+import { useTenant } from '@/lib/contexts/TenantContext'
+import { getVALanguage } from '@/tenants/config'
 
 type NewsArticle = {
   slug: string
@@ -16,17 +18,35 @@ type NewsArticle = {
   images?: string[]
 }
 
+type ApiNewsArticle = {
+  slug: string
+  frontmatter: {
+    title: string
+    date: string
+    category: string
+    coverImage?: string
+    images?: string[]
+  }
+  excerpt?: string
+}
+
 type NewsPageClientProps = {
   initialArticles: NewsArticle[]
   categories: Array<{ value: string; label: string; count: number; includes: string[] }>
 }
 
+const ARTICLES_PER_PAGE = 50
+
 export default function NewsPageClient({ initialArticles, categories }: NewsPageClientProps) {
   const { t } = useI18n()
+  const { key: langKey } = useTenant()
   const searchParams = useSearchParams()
   const router = useRouter()
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
+  const [displayCount, setDisplayCount] = useState(ARTICLES_PER_PAGE)
+  const [searchResults, setSearchResults] = useState<NewsArticle[] | null>(null)
+  const [isSearching, setIsSearching] = useState(false)
 
   // Synchroniser avec le paramètre d'URL
   useEffect(() => {
@@ -39,6 +59,7 @@ export default function NewsPageClient({ initialArticles, categories }: NewsPage
   // Fonction pour changer de catégorie et mettre à jour l'URL
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category)
+    setDisplayCount(ARTICLES_PER_PAGE) // Reset pagination
     if (category === 'all') {
       router.push('/patch-history')
     } else {
@@ -46,8 +67,65 @@ export default function NewsPageClient({ initialArticles, categories }: NewsPage
     }
   }
 
-  // Filtrage dynamique côté client
+  // Reset pagination when search query changes
+  useEffect(() => {
+    setDisplayCount(ARTICLES_PER_PAGE)
+  }, [searchQuery])
+
+  // Recherche full-text via API quand l'utilisateur tape
+  useEffect(() => {
+    const performSearch = async () => {
+      if (!searchQuery.trim() || searchQuery.trim().length < 2) {
+        setSearchResults(null)
+        setIsSearching(false)
+        return
+      }
+
+      setIsSearching(true)
+
+      try {
+        const lang = getVALanguage(langKey)
+        const categoryParam = selectedCategory !== 'all' ? `&category=${selectedCategory}` : ''
+        const response = await fetch(`/api/news/search?q=${encodeURIComponent(searchQuery)}&lang=${lang}${categoryParam}`)
+
+        if (response.ok) {
+          const data = await response.json()
+          // Normaliser les résultats de l'API (NewsArticlePreview) vers le format NewsArticle
+          const normalizedResults: NewsArticle[] = data.results.map((result: ApiNewsArticle) => ({
+            slug: result.slug,
+            title: result.frontmatter.title,
+            date: result.frontmatter.date,
+            category: result.frontmatter.category,
+            excerpt: result.excerpt,
+            coverImage: result.frontmatter.coverImage,
+            images: result.frontmatter.images,
+          }))
+          setSearchResults(normalizedResults)
+        } else {
+          console.error('Search failed:', response.statusText)
+          setSearchResults(null)
+        }
+      } catch (error) {
+        console.error('Search error:', error)
+        setSearchResults(null)
+      } finally {
+        setIsSearching(false)
+      }
+    }
+
+    // Debounce la recherche (attendre 300ms après que l'utilisateur arrête de taper)
+    const timer = setTimeout(performSearch, 300)
+    return () => clearTimeout(timer)
+  }, [searchQuery, selectedCategory, langKey])
+
+  // Filtrage dynamique côté client ou résultats de recherche API
   const filteredArticles = useMemo(() => {
+    // Si une recherche est en cours via API, utiliser les résultats de l'API
+    if (searchQuery.trim().length >= 2 && searchResults !== null) {
+      return searchResults
+    }
+
+    // Sinon, filtrer localement depuis le cache
     let filtered = initialArticles
 
     // Filtre par catégorie
@@ -59,17 +137,17 @@ export default function NewsPageClient({ initialArticles, categories }: NewsPage
       filtered = filtered.filter(article => includedCategories.includes(article.category))
     }
 
-    // Filtre par recherche
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase()
-      filtered = filtered.filter(article =>
-        article.title.toLowerCase().includes(query) ||
-        (article.excerpt || '').toLowerCase().includes(query)
-      )
-    }
-
     return filtered
-  }, [initialArticles, selectedCategory, searchQuery, categories])
+  }, [initialArticles, selectedCategory, searchQuery, searchResults, categories])
+
+  // Articles à afficher (avec pagination)
+  const displayedArticles = filteredArticles.slice(0, displayCount)
+  const hasMore = displayCount < filteredArticles.length
+
+  // Fonction pour charger plus d'articles
+  const loadMore = () => {
+    setDisplayCount(prev => prev + ARTICLES_PER_PAGE)
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -95,7 +173,13 @@ export default function NewsPageClient({ initialArticles, categories }: NewsPage
             className="w-full pl-12 pr-12 py-3 rounded-xl bg-neutral-800/50 border border-neutral-700 text-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             role="search"
             autoComplete="off"
+            disabled={isSearching}
           />
+          {isSearching && (
+            <div className="absolute right-12 top-1/2 -translate-y-1/2">
+              <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
@@ -151,10 +235,13 @@ export default function NewsPageClient({ initialArticles, categories }: NewsPage
         <>
           <p className="text-sm text-neutral-400 mb-4">
             {t('patchHistory.results.showing', { count: filteredArticles.length })}
+            {displayCount < filteredArticles.length && (
+              <span> (displaying {displayCount})</span>
+            )}
           </p>
 
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-            {filteredArticles.map((article) => {
+            {displayedArticles.map((article) => {
               const coverImage = article.coverImage || article.images?.[0]
               const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -205,6 +292,18 @@ export default function NewsPageClient({ initialArticles, categories }: NewsPage
               )
             })}
           </div>
+
+          {/* Load More Button */}
+          {hasMore && (
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={loadMore}
+                className="px-6 py-3 bg-gradient-to-br from-blue-600 to-blue-500 text-white font-semibold rounded-lg shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 transition-all duration-200"
+              >
+                {t('patchHistory.loadMore', { remaining: filteredArticles.length - displayCount }) || `Load More (${filteredArticles.length - displayCount} remaining)`}
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>

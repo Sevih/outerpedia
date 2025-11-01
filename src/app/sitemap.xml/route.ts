@@ -152,7 +152,7 @@ function renderSitemapXml(pages: Page[]): string {
         if (p.isLiveArticle) {
             // Déterminer le domaine en fonction du préfixe live-XX-
             let primaryUrl = en
-            if (p.path.includes('/live-ja-')) primaryUrl = ja
+            if (p.path.includes('/live-jp-')) primaryUrl = ja
             else if (p.path.includes('/live-kr-')) primaryUrl = ko
             else if (p.path.includes('/live-zh-')) primaryUrl = zh
             // live-en- ou pas de préfixe spécifique -> EN par défaut

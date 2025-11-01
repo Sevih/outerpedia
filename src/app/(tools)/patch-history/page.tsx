@@ -1,6 +1,7 @@
 // src/app/(tools)/patch-history/page.tsx
 import type { Metadata } from 'next'
-import { getAllNews } from '@/lib/news'
+import fs from 'fs'
+import path from 'path'
 import NewsPageClient from './page-client'
 import { createPageMetadata } from '@/lib/seo'
 import JsonLd from '@/app/components/JsonLd'
@@ -8,6 +9,9 @@ import { websiteLd, breadcrumbLd, collectionPageLd } from './jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 import { getVALanguage } from '@/tenants/config'
+
+// Chemin vers le cache généré au build time
+const NEWS_CACHE_PATH = path.join(process.cwd(), 'src', 'data', 'news', 'news-cache.json')
 
 export async function generateMetadata(): Promise<Metadata> {
   return createPageMetadata({
@@ -56,6 +60,21 @@ const CATEGORY_LABELS: Record<string, string> = {
   'media-archives': 'Media Archives',
 }
 
+type CachedArticle = {
+  slug: string
+  title: string
+  date: string
+  category: string
+  excerpt?: string
+  coverImage?: string
+  images?: string[]
+  isLegacy?: boolean
+  uid?: string
+  url?: string
+  views?: number
+  lang?: string
+}
+
 export default async function PatchHistoryPage() {
   const { key: langKey, domain } = await getTenantServer()
   const { t } = await getServerI18n(langKey)
@@ -63,13 +82,20 @@ export default async function PatchHistoryPage() {
   // Mapper la langue du tenant vers une langue VA disponible
   const newsLang = getVALanguage(langKey)
 
-  // Récupérer tous les articles côté serveur (legacy + live)
-  const allArticles = getAllNews(newsLang)
+  // Récupérer tous les articles depuis le cache JSON (beaucoup plus rapide que getAllNews)
+  let allArticles: CachedArticle[] = []
+  if (fs.existsSync(NEWS_CACHE_PATH)) {
+    const cacheContent = fs.readFileSync(NEWS_CACHE_PATH, 'utf-8')
+    const cache = JSON.parse(cacheContent) as Record<string, CachedArticle[]>
+    allArticles = cache[newsLang] || []
+  } else {
+    console.warn('⚠️ News cache not found. Run `npm run gen:news-cache` to generate it.')
+  }
 
   // Compter les articles par catégorie
   const categoryCounts: Record<string, number> = {}
   allArticles.forEach(article => {
-    categoryCounts[article.frontmatter.category] = (categoryCounts[article.frontmatter.category] || 0) + 1
+    categoryCounts[article.category] = (categoryCounts[article.category] || 0) + 1
   })
 
   // Groupes de catégories fusionnées
@@ -118,16 +144,8 @@ export default async function PatchHistoryPage() {
       })),
   ]
 
-  // Préparer les données pour le client (format simplifié)
-  const clientArticles = allArticles.map(article => ({
-    slug: article.slug,
-    title: article.frontmatter.title,
-    date: article.frontmatter.date,
-    category: article.frontmatter.category,
-    excerpt: article.excerpt,
-    coverImage: article.frontmatter.coverImage,
-    images: article.frontmatter.images,
-  }))
+  // Préparer les données pour le client (déjà au bon format depuis le cache)
+  const clientArticles = allArticles
 
   return (
     <>

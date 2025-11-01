@@ -32,11 +32,32 @@ const BOARDS = {
 // Track downloaded images to avoid duplicates
 const imageCache = new Map();
 
+// ANSI color codes for better log visibility
+const COLORS = {
+  en: '\x1b[36m', // Cyan
+  jp: '\x1b[35m', // Magenta
+  kr: '\x1b[33m', // Yellow
+  reset: '\x1b[0m',
+};
+
+/**
+ * Log with language prefix and color
+ */
+function logWithLang(lang, message) {
+  const color = COLORS[lang] || COLORS.reset;
+  const prefix = `[${lang.toUpperCase()}]`;
+  console.log(`${color}${prefix}${COLORS.reset} ${message}`);
+}
+
 /**
  * Fetch a page with proper headers
  */
-async function fetchPage(url) {
-  console.log(`Fetching: ${url}`);
+async function fetchPage(url, lang) {
+  if (lang) {
+    logWithLang(lang, `Fetching: ${url}`);
+  } else {
+    console.log(`Fetching: ${url}`);
+  }
 
   const response = await fetch(url, {
     headers: {
@@ -141,7 +162,6 @@ async function downloadImage(imageUrl, imageDir, uid) {
     // Cache the result
     imageCache.set(imageUrl, relativePath);
 
-    console.log(`  Downloaded image: ${filename} (referenced as .webp)`);
     return relativePath;
 
   } catch (error) {
@@ -182,7 +202,6 @@ function saveBase64Image(base64Data, imageDir, uid, index) {
     const webpFilename = filename.replace(/\.(png|jpg|jpeg)$/i, '.webp');
     const relativePath = `/images/news/live/${lang}/${webpFilename}`;
 
-    console.log(`  Saved base64 image: ${filename} (referenced as .webp)`);
     return relativePath;
 
   } catch (error) {
@@ -260,14 +279,12 @@ async function processMarkdownImages(markdown, imageDir, uid, title, lang) {
         // Download failed, try to find a fallback image
         const fallbackPath = getFallbackImage(title, lang, imageDir);
         if (fallbackPath) {
-          console.log(`  Using fallback image: ${fallbackPath}`);
           replacements.push({
             original: match[0],
             replacement: `![${alt}](${fallbackPath})`
           });
         } else {
           // No fallback available, leave image empty
-          console.log(`  No fallback available, leaving image empty`);
           replacements.push({
             original: match[0],
             replacement: `![${alt}]()`
@@ -451,7 +468,7 @@ function shouldSkipArticle(uid, title, dataDir) {
 /**
  * Save notice to Markdown file
  */
-function saveNotice(notice, dataDir) {
+function saveNotice(notice, dataDir, lang) {
   // Use only UID for filename (WordPress UIDs are stable and unique)
   const filename = `${notice.uid}.md`;
   const filePath = path.join(dataDir, filename);
@@ -475,7 +492,6 @@ uid: "${notice.uid}"
 
   // Write file
   fs.writeFileSync(filePath, fileContent, 'utf-8');
-  console.log(`Saved: ${filename}`);
   return true;
 }
 
@@ -484,9 +500,10 @@ uid: "${notice.uid}"
  */
 async function scrapeLanguage(lang) {
   const config = BOARDS[lang];
-  console.log(`\n${'='.repeat(60)}`);
-  console.log(`SCRAPING ${lang.toUpperCase()} NOTICES`);
-  console.log(`${'='.repeat(60)}\n`);
+
+  logWithLang(lang, `${'='.repeat(50)}`);
+  logWithLang(lang, `STARTING SCRAPING`);
+  logWithLang(lang, `${'='.repeat(50)}`);
 
   let currentUrl = config.url;
   let pageCount = 0;
@@ -495,13 +512,13 @@ async function scrapeLanguage(lang) {
   // Step 1: Collect all entries from list pages (no limit, scrape everything)
   while (currentUrl) {
     pageCount++;
-    console.log(`\nPage ${pageCount}: ${currentUrl}`);
+    logWithLang(lang, `Page ${pageCount}`);
 
     try {
-      const html = await fetchPage(currentUrl);
+      const html = await fetchPage(currentUrl, lang);
       const entries = parseListPage(html);
 
-      console.log(`Found ${entries.length} entries on this page`);
+      logWithLang(lang, `Found ${entries.length} entries on page ${pageCount}`);
       allEntries.push(...entries);
 
       // Check for next page
@@ -512,12 +529,12 @@ async function scrapeLanguage(lang) {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
     } catch (error) {
-      console.error(`Error fetching page ${pageCount}:`, error.message);
+      logWithLang(lang, `❌ Error fetching page ${pageCount}: ${error.message}`);
       break;
     }
   }
 
-  console.log(`\n\nTotal entries found for ${lang}: ${allEntries.length}`);
+  logWithLang(lang, `✓ Found ${allEntries.length} total entries`);
 
   // Step 2: Extract and save each notice
   let savedCount = 0;
@@ -525,11 +542,9 @@ async function scrapeLanguage(lang) {
 
   for (let i = 0; i < allEntries.length; i++) {
     const entry = allEntries[i];
-    console.log(`\n[${i + 1}/${allEntries.length}] Processing: ${entry.title}`);
 
     // Check if we should skip this article (uid + title match)
     if (shouldSkipArticle(entry.uid, entry.title, config.dataDir)) {
-      console.log(`Skipped (already exists with same title): ${entry.uid}.md`);
       skippedCount++;
       continue;
     }
@@ -538,22 +553,27 @@ async function scrapeLanguage(lang) {
       const notice = await extractNoticeContent(entry.url, entry, config.imageDir, lang);
 
       if (notice && notice.content) {
-        saveNotice(notice, config.dataDir);
+        saveNotice(notice, config.dataDir, lang);
         savedCount++;
+
+        // Show progress every 10 articles
+        if (savedCount % 10 === 0) {
+          logWithLang(lang, `Progress: ${savedCount} saved, ${skippedCount} skipped (${i + 1}/${allEntries.length})`);
+        }
       }
 
       // Be nice to the server
       await new Promise(resolve => setTimeout(resolve, 2000));
 
     } catch (error) {
-      console.error(`Error processing ${entry.uid}:`, error.message);
+      logWithLang(lang, `❌ Error processing ${entry.uid}: ${error.message}`);
     }
   }
 
-  console.log(`\n${lang.toUpperCase()} scraping complete!`);
-  console.log(`Saved: ${savedCount} | Skipped: ${skippedCount} | Total: ${allEntries.length}`);
-  console.log(`Files in: ${config.dataDir}`);
-  console.log(`Images in: ${config.imageDir}`);
+  logWithLang(lang, `${'='.repeat(50)}`);
+  logWithLang(lang, `✅ SCRAPING COMPLETE`);
+  logWithLang(lang, `Saved: ${savedCount} | Skipped: ${skippedCount} | Total: ${allEntries.length}`);
+  logWithLang(lang, `${'='.repeat(50)}`);
 
   return savedCount;
 }
@@ -573,18 +593,30 @@ async function main() {
 
   const stats = {};
 
-  for (const lang of languages) {
-    if (!BOARDS[lang]) {
-      console.error(`Unknown language: ${lang}`);
-      continue;
-    }
+  // Parallelize all languages using Promise.all
+  const results = await Promise.allSettled(
+    languages.map(async (lang) => {
+      if (!BOARDS[lang]) {
+        console.error(`Unknown language: ${lang}`);
+        return { lang, count: 0 };
+      }
 
-    try {
-      const count = await scrapeLanguage(lang);
-      stats[lang] = count;
-    } catch (error) {
-      console.error(`Error scraping ${lang}:`, error.message);
-      stats[lang] = 0;
+      try {
+        const count = await scrapeLanguage(lang);
+        return { lang, count };
+      } catch (error) {
+        console.error(`Error scraping ${lang}:`, error.message);
+        return { lang, count: 0 };
+      }
+    })
+  );
+
+  // Collect stats from results
+  for (const result of results) {
+    if (result.status === 'fulfilled') {
+      stats[result.value.lang] = result.value.count;
+    } else {
+      console.error(`Failed to scrape a language:`, result.reason);
     }
   }
 

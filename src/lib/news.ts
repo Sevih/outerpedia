@@ -342,7 +342,7 @@ export function getNewsSlugs(category: NewsCategory, lang: VALanguage = 'en'): s
 }
 
 /**
- * Recherche dans les articles
+ * Recherche dans les articles (titre et excerpt uniquement)
  */
 export function searchNews(query: string, category?: NewsCategory, lang: VALanguage = 'en'): NewsArticlePreview[] {
   const articles = category ? getNewsByCategory(category, lang) : getAllNews(lang)
@@ -355,5 +355,104 @@ export function searchNews(query: string, category?: NewsCategory, lang: VALangu
       title.toLowerCase().includes(lowerQuery) ||
       excerpt.toLowerCase().includes(lowerQuery)
     )
+  })
+}
+
+/**
+ * Recherche full-text dans le contenu complet des articles
+ */
+export function searchNewsFullText(query: string, category?: NewsCategory, lang: VALanguage = 'en'): NewsArticlePreview[] {
+  const lowerQuery = query.toLowerCase()
+  const results: NewsArticlePreview[] = []
+
+  // Helper pour chercher dans un fichier markdown
+  const searchInFile = (filePath: string, slug: string, isLive: boolean, liveCategory?: NewsCategory): boolean => {
+    if (!fs.existsSync(filePath)) return false
+
+    const fileContent = fs.readFileSync(filePath, 'utf-8')
+    const { data, content } = matter(fileContent)
+
+    // Chercher dans le titre et le contenu
+    const title = (data.title as string || '').toLowerCase()
+    const textContent = content.toLowerCase()
+
+    if (title.includes(lowerQuery) || textContent.includes(lowerQuery)) {
+      // Construire le frontmatter selon le type d'article
+      let frontmatter: NewsFrontmatter
+
+      if (isLive && liveCategory) {
+        const imageMatch = content.match(/!\[([^\]]*)\]\(([^)]+)\)/)
+        const coverImage = imageMatch ? imageMatch[2] : undefined
+
+        frontmatter = {
+          title: data.title as string,
+          date: data.date as string,
+          category: liveCategory,
+          id: data.uid as string,
+          sourceUrl: data.url as string,
+          coverImage,
+          uid: data.uid as string,
+          url: data.url as string,
+          views: data.views as number,
+        }
+      } else {
+        frontmatter = data as NewsFrontmatter
+      }
+
+      results.push({
+        slug,
+        frontmatter,
+        excerpt: createExcerpt(content),
+      })
+      return true
+    }
+    return false
+  }
+
+  // Chercher dans les articles legacy (incluant event qui a des articles legacy ET live)
+  const legacyCategories = ['patchnotes', 'compendium', 'developer-notes', 'official-4-cut-cartoon', 'probabilities', 'world-introduction', 'media-archives', 'event', 'notice', 'maintenance', 'issues', 'winners']
+
+  if (!category || legacyCategories.includes(category)) {
+    const categoriesToSearch = category ? [category] : legacyCategories
+
+    for (const cat of categoriesToSearch) {
+      const categoryDir = path.join(LEGACY_DIR, cat)
+      if (fs.existsSync(categoryDir)) {
+        const files = fs.readdirSync(categoryDir).filter(f => f.endsWith('.md'))
+        for (const filename of files) {
+          const slug = filename.replace(/\.md$/, '')
+          const filePath = path.join(categoryDir, filename)
+          searchInFile(filePath, slug, false)
+        }
+      }
+    }
+  }
+
+  // Chercher dans les articles live
+  const liveDir = path.join(LIVE_DIR, lang)
+  if (fs.existsSync(liveDir)) {
+    const files = fs.readdirSync(liveDir).filter(f => f.endsWith('.md'))
+    for (const filename of files) {
+      const slug = filename.replace(/\.md$/, '')
+      const filePath = path.join(liveDir, filename)
+
+      // Lire la catégorie pour filtrer si nécessaire
+      const fileContent = fs.readFileSync(filePath, 'utf-8')
+      const { data } = matter(fileContent)
+      const vaCategory = (data.category as string) || ''
+      const mappedCategory = mapVACategoryToNewsCategory(vaCategory)
+
+      // Si une catégorie est spécifiée et ne correspond pas, skip
+      if (category && mappedCategory !== category) continue
+
+      searchInFile(filePath, `live-${lang}-${slug}`, true, mappedCategory)
+    }
+  }
+
+  // Trier par date décroissante
+  return results.sort((a, b) => {
+    const dateA = new Date(a.frontmatter.date).getTime()
+    const dateB = new Date(b.frontmatter.date).getTime()
+    return dateB - dateA
   })
 }

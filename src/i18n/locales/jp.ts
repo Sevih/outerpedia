@@ -367,6 +367,7 @@ const jp = {
   'patchHistory.results.noResults': 'ニュースが見つかりません',
   'patchHistory.results.tryAdjusting': '検索条件やフィルターを調整してください',
   'patchHistory.results.showing': '{count}件の記事を表示',
+  'patchHistory.loadMore': 'もっと見る（残り{remaining}件）',
   // SEO
   'gearSolver.meta.title': '装備適合ファインダー | Outerpedia',
   'gearSolver.meta.desc': '手持ちの装備は誰に合う？ 推奨ビルドから最適なキャラ候補を検索できます。',

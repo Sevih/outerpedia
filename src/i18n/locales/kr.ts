@@ -367,6 +367,7 @@ const kr = {
   'patchHistory.results.noResults': '뉴스를 찾을 수 없습니다',
   'patchHistory.results.tryAdjusting': '검색어나 필터를 조정해 보세요',
   'patchHistory.results.showing': '{count}개의 기사 표시',
+  'patchHistory.loadMore': '더 보기 (남은 {remaining}개)',
   // SEO
   'gearSolver.meta.title': '장비 사용 찾기 | Outerpedia',
   'gearSolver.meta.desc': '내 장비를 누가 쓸 수 있을까? 추천 빌드 기반으로 최적의 캐릭터를 찾아보세요.',
