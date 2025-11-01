@@ -13,11 +13,7 @@ const DOMAIN_ZH = 'https://zh.outerpedia.com'
 const ROOT = process.cwd()
 const CHAR_DIR = path.join(ROOT, 'src', 'data', 'char')
 const GUIDE_REF_PATH = path.join(ROOT, 'src', 'data', 'guides', 'guides-ref.json')
-const ITEM_FILES: Array<{ file: string; url: string }> = [
-    { file: 'weapon', url: 'weapon' },
-    { file: 'amulet', url: 'accessory' },
-    { file: 'sets', url: 'set' },
-]
+// Item files removed from sitemap (noindex)
 
 const STATIC_PAGES = [
     '/', '/characters', '/equipments', '/tierlist', '/guides',
@@ -31,13 +27,7 @@ function xmlEscape(s: string) {
         .replace(/'/g, '&apos;')
 }
 
-function toKebabCase(str = '') {
-    return String(str)
-        .toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '')
-}
+// toKebabCase removed (no longer needed after removing items from sitemap)
 
 function statMtime(p: string) {
     try { return fs.statSync(p).mtime } catch { return undefined }
@@ -71,19 +61,7 @@ function collectPages(): Page[] {
         }
     }
 
-    // Items
-    for (const { file, url } of ITEM_FILES) {
-        const fp = path.join(ROOT, 'src', 'data', `${file}.json`)
-        if (!fs.existsSync(fp)) continue
-        type ItemFile = Array<{ name?: string; Name?: string }> | Record<string, { name?: string; Name?: string }>
-        const raw = readJson<ItemFile>(fp)
-        const list: Array<{ name?: string; Name?: string }> = Array.isArray(raw) ? raw : Object.values(raw)
-        const lm = (statMtime(fp) ?? new Date()).toISOString().split('T')[0]
-        for (const e of list) {
-            const slug = toKebabCase(e?.name ?? e?.Name ?? '')
-            if (slug) pages.push({ path: `/item/${url}/${slug}`, lastmod: lm })
-        }
-    }
+    // Items pages are excluded from sitemap (noindex)
 
     // Guides
     if (fs.existsSync(GUIDE_REF_PATH)) {

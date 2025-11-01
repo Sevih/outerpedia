@@ -129,7 +129,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const image = `https://${domain}${getItemPngImageUrl(category, entry)}`
 
   // ✅ Respect règle projet : PNG en metadata
-  return createPageMetadata({
+  const metadata = await createPageMetadata({
     path, // déjà typé as `/${string}` plus haut
     titleKey: 'item.meta.title',
     descKey: 'item.meta.desc',
@@ -156,6 +156,15 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       category: capitalize(category),
     },
   })
+
+  // Override robots to noindex for item pages
+  return {
+    ...metadata,
+    robots: {
+      index: false,
+      follow: true,
+    },
+  }
 }
 
 // ---------- Page ----------
