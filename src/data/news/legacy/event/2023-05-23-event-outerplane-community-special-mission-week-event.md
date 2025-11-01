@@ -1,16 +1,23 @@
 ---
-title: "[Event] OUTERPLANE Community Special Mission Week Event"
-date: "2023-05-23T00:00:00.000Z"
-category: "event"
-id: "2023-05-23-event-outerplane-community-special-mission-week-event"
+title: '[Event] OP Community Special Mission Week'
+date: '2023-05-23T00:00:00.000Z'
+category: event
+id: 2023-05-23-event-outerplane-community-special-mission-week-event
 images:
-  - /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/5fce2a65cb074ae0ac07b11a3a6de847.webp
-  - /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/4887854be80b42899759bbb1935a44f2.webp
-  - /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/8fa5d8ec858c47c6a0a77a4bb13bedc7.webp
-  - /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/e0884051f7364d3aa818af40d492f468.webp
-  - /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/b95d981597414c3fa68bcd094e0dbbd4.webp
-  - /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/0e09a053c1f0459bab1cc9c0a4b7fbde.webp
-  - https://page.onstove.com/[Event]%20OUTERPLANE%20Community%20Special%20Mission%20Week%20Event_fichiers/09_%EA%B0%90%EC%82%AC.png
+  - >-
+    /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/5fce2a65cb074ae0ac07b11a3a6de847.webp
+  - >-
+    /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/4887854be80b42899759bbb1935a44f2.webp
+  - >-
+    /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/8fa5d8ec858c47c6a0a77a4bb13bedc7.webp
+  - >-
+    /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/e0884051f7364d3aa818af40d492f468.webp
+  - >-
+    /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/b95d981597414c3fa68bcd094e0dbbd4.webp
+  - >-
+    /images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/0e09a053c1f0459bab1cc9c0a4b7fbde.webp
+  - >-
+    https://page.onstove.com/[Event]%20OUTERPLANE%20Community%20Special%20Mission%20Week%20Event_fichiers/09_%EA%B0%90%EC%82%AC.png
 ---
 
 ![](/images/news/legacy/event/2023-05-23-event-outerplane-community-special-mission-week-event/5fce2a65cb074ae0ac07b11a3a6de847.webp)

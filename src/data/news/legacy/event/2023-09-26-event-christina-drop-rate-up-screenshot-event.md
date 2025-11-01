@@ -1,11 +1,13 @@
 ---
-title: "[Event] Christina Drop Rate Up Screenshot Event"
-date: "2023-09-26T00:00:00.000Z"
-category: "event"
-id: "2023-09-26-event-christina-drop-rate-up-screenshot-event"
+title: '[Event] Christina Rate Up Screenshot'
+date: '2023-09-26T00:00:00.000Z'
+category: event
+id: 2023-09-26-event-christina-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-09-26-event-christina-drop-rate-up-screenshot-event/df8a7bb309a641969736cfd69c174cbc.webp
-  - /images/news/legacy/event/2023-09-26-event-christina-drop-rate-up-screenshot-event/91274f926f1846b0933dabac46fe67db_002.webp
+  - >-
+    /images/news/legacy/event/2023-09-26-event-christina-drop-rate-up-screenshot-event/df8a7bb309a641969736cfd69c174cbc.webp
+  - >-
+    /images/news/legacy/event/2023-09-26-event-christina-drop-rate-up-screenshot-event/91274f926f1846b0933dabac46fe67db_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-09-26-event-christina-drop-rate-up-screenshot-event/df8a7bb309a641969736cfd69c174cbc.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Push Event (5/21~6/3)"
-date: "2024-05-21T00:00:00.000Z"
-category: "event"
-id: "2024-05-21-event-push-event-5-21-6-3"
+title: '[Event] Push (5/21~6/3)'
+date: '2024-05-21T00:00:00.000Z'
+category: event
+id: 2024-05-21-event-push-event-5-21-6-3
 images:
-  - /images/news/legacy/event/2024-05-21-event-push-event-5-21-6-3/c2456f67670744869b5ac86993eb289c.webp
-  - /images/news/legacy/event/2024-05-21-event-push-event-5-21-6-3/1a46a050d0214b16be31afe1586c3dc1.webp
+  - >-
+    /images/news/legacy/event/2024-05-21-event-push-event-5-21-6-3/c2456f67670744869b5ac86993eb289c.webp
+  - >-
+    /images/news/legacy/event/2024-05-21-event-push-event-5-21-6-3/1a46a050d0214b16be31afe1586c3dc1.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-21-event-push-event-5-21-6-3/c2456f67670744869b5ac86993eb289c.webp)  

@@ -1,11 +1,14 @@
 ---
-title: "[Event] Seasonal Limited 'Kitsune of Eternity, Tamamo-no-Mae' Drop Rate Up"
-date: "2024-10-22T00:00:00.000Z"
-category: "event"
-id: "2024-10-22-event-seasonal-limited-kitsune-of-eternity-tamamo-no-mae-drop-rate-up"
+title: '[Event] Limited '' Tamamo-no-Mae'' Rate Up'
+date: '2024-10-22T00:00:00.000Z'
+category: event
+id: >-
+  2024-10-22-event-seasonal-limited-kitsune-of-eternity-tamamo-no-mae-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-10-22-event-seasonal-limited-kitsune-of-eternity-tamamo-no-mae-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
-  - /images/news/legacy/event/2024-10-22-event-seasonal-limited-kitsune-of-eternity-tamamo-no-mae-drop-rate-up/82b3a79c15b343afa1c49935df46f52b_002.webp
+  - >-
+    /images/news/legacy/event/2024-10-22-event-seasonal-limited-kitsune-of-eternity-tamamo-no-mae-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
+  - >-
+    /images/news/legacy/event/2024-10-22-event-seasonal-limited-kitsune-of-eternity-tamamo-no-mae-drop-rate-up/82b3a79c15b343afa1c49935df46f52b_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-10-22-event-seasonal-limited-kitsune-of-eternity-tamamo-no-mae-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp)  

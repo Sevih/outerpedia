@@ -1,11 +1,13 @@
 ---
-title: "[Event] Special Request Drop Rate Up Event"
-date: "2025-03-25T00:00:00.000Z"
-category: "event"
-id: "2025-03-25-event-special-request-drop-rate-up-event"
+title: '[Event] Special Request Rate Up'
+date: '2025-03-25T00:00:00.000Z'
+category: event
+id: 2025-03-25-event-special-request-drop-rate-up-event
 images:
-  - /images/news/legacy/event/2025-03-25-event-special-request-drop-rate-up-event/996bc6a914fe46fcbd0e896f8064384e.webp
-  - /images/news/legacy/event/2025-03-25-event-special-request-drop-rate-up-event/32206602e3d6454388b97fe02ba86065.webp
+  - >-
+    /images/news/legacy/event/2025-03-25-event-special-request-drop-rate-up-event/996bc6a914fe46fcbd0e896f8064384e.webp
+  - >-
+    /images/news/legacy/event/2025-03-25-event-special-request-drop-rate-up-event/32206602e3d6454388b97fe02ba86065.webp
 ---
 
 ![](/images/news/legacy/event/2025-03-25-event-special-request-drop-rate-up-event/996bc6a914fe46fcbd0e896f8064384e.webp)

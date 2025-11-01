@@ -1,11 +1,13 @@
 ---
-title: "[Event] OUTERPLANE Festival Gnosis Dahlia Recruit Chance"
-date: "2024-07-30T00:00:00.000Z"
-category: "event"
-id: "2024-07-30-event-outerplane-festival-gnosis-dahlia-recruit-chance"
+title: '[Event] OP Festival Gnosis Dahlia Recruit'
+date: '2024-07-30T00:00:00.000Z'
+category: event
+id: 2024-07-30-event-outerplane-festival-gnosis-dahlia-recruit-chance
 images:
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-gnosis-dahlia-recruit-chance/34e8c07059514b98a77e6581df0e5889.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-gnosis-dahlia-recruit-chance/037691c852ae4a60960eca61599a6b02.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-gnosis-dahlia-recruit-chance/34e8c07059514b98a77e6581df0e5889.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-gnosis-dahlia-recruit-chance/037691c852ae4a60960eca61599a6b02.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-30-event-outerplane-festival-gnosis-dahlia-recruit-chance/34e8c07059514b98a77e6581df0e5889.webp)  

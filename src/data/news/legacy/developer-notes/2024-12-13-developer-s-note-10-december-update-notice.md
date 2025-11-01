@@ -1,10 +1,11 @@
 ---
-title: "Developer's Note #10: December Update Notice"
-date: "2024-12-13T00:00:00.000Z"
-category: "developer-notes"
-id: "2024-12-13-developer-s-note-10-december-update-notice"
+title: 'Dev Note #10: December Update Notice'
+date: '2024-12-13T00:00:00.000Z'
+category: developer-notes
+id: 2024-12-13-developer-s-note-10-december-update-notice
 images:
-  - /images/news/legacy/developer-notes/2024-12-13-developer-s-note-10-december-update-notice/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-12-13-developer-s-note-10-december-update-notice/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2024-12-13-developer-s-note-10-december-update-notice/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp)  

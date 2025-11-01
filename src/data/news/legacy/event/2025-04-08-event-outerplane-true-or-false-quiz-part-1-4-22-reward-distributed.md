@@ -1,11 +1,13 @@
 ---
-title: "[Event] OUTERPLANE True or False Quiz Part 1(4/22 Reward distributed)"
-date: "2025-04-08T00:00:00.000Z"
-category: "event"
-id: "2025-04-08-event-outerplane-true-or-false-quiz-part-1-4-22-reward-distributed"
+title: '[Event] OP True or False Quiz Part 1(4/22 Rewards Sent)'
+date: '2025-04-08T00:00:00.000Z'
+category: event
+id: 2025-04-08-event-outerplane-true-or-false-quiz-part-1-4-22-reward-distributed
 images:
-  - /images/news/legacy/event/2025-04-08-event-outerplane-true-or-false-quiz-part-1-4-22-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2025-04-08-event-outerplane-true-or-false-quiz-part-1-4-22-reward-distributed/dd40d7cb64294ea5910fe18c151aadc1.webp
+  - >-
+    /images/news/legacy/event/2025-04-08-event-outerplane-true-or-false-quiz-part-1-4-22-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2025-04-08-event-outerplane-true-or-false-quiz-part-1-4-22-reward-distributed/dd40d7cb64294ea5910fe18c151aadc1.webp
 ---
 
 ![](/images/news/legacy/event/2025-04-08-event-outerplane-true-or-false-quiz-part-1-4-22-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

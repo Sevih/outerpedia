@@ -1,13 +1,17 @@
 ---
-title: "[Closed] Chat with Eva & Acquire a Badge Event (Extended)"
-date: "2023-04-18T00:00:00.000Z"
-category: "event"
-id: "2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended"
+title: '[Closed] Chat with Eva & Acquire a Badge (Extended)'
+date: '2023-04-18T00:00:00.000Z'
+category: event
+id: 2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended
 images:
-  - /images/news/legacy/event/2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended/eec29fb45f7c4e2fb157bb28b22c5913.webp
-  - /images/news/legacy/event/2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended/2a6b59d7fdfc47a8a7604095508e3c54_002.webp
-  - /images/news/legacy/event/2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended/208521fd0b644198b51676b52af52479.webp
-  - /images/news/legacy/event/2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended/3dfa7ce5786a4d72a1cebdcae51b6a20.webp
+  - >-
+    /images/news/legacy/event/2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended/eec29fb45f7c4e2fb157bb28b22c5913.webp
+  - >-
+    /images/news/legacy/event/2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended/2a6b59d7fdfc47a8a7604095508e3c54_002.webp
+  - >-
+    /images/news/legacy/event/2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended/208521fd0b644198b51676b52af52479.webp
+  - >-
+    /images/news/legacy/event/2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended/3dfa7ce5786a4d72a1cebdcae51b6a20.webp
 ---
 
 ![](/images/news/legacy/event/2023-04-18-closed-chat-with-eva-acquire-a-badge-event-extended/eec29fb45f7c4e2fb157bb28b22c5913.webp)

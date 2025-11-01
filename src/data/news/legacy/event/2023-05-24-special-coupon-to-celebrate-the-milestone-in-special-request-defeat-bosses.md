@@ -1,11 +1,14 @@
 ---
-title: "Special Coupon to celebrate the Milestone in [Special Request: Defeat Bosses]"
-date: "2023-05-24T00:00:00.000Z"
-category: "event"
-id: "2023-05-24-special-coupon-to-celebrate-the-milestone-in-special-request-defeat-bosses"
+title: 'Coupon to celebrate the Milestone in [ Defeat Bosses]'
+date: '2023-05-24T00:00:00.000Z'
+category: event
+id: >-
+  2023-05-24-special-coupon-to-celebrate-the-milestone-in-special-request-defeat-bosses
 images:
-  - /images/news/legacy/event/2023-05-24-special-coupon-to-celebrate-the-milestone-in-special-request-defeat-bosses/2d62aee367794d7ebcac5b08fafcaac1.webp
-  - /images/news/legacy/event/2023-05-24-special-coupon-to-celebrate-the-milestone-in-special-request-defeat-bosses/1c81ed0b5e4a45df99c0696fc3c3a524.webp
+  - >-
+    /images/news/legacy/event/2023-05-24-special-coupon-to-celebrate-the-milestone-in-special-request-defeat-bosses/2d62aee367794d7ebcac5b08fafcaac1.webp
+  - >-
+    /images/news/legacy/event/2023-05-24-special-coupon-to-celebrate-the-milestone-in-special-request-defeat-bosses/1c81ed0b5e4a45df99c0696fc3c3a524.webp
 ---
 
 ![](/images/news/legacy/event/2023-05-24-special-coupon-to-celebrate-the-milestone-in-special-request-defeat-bosses/2d62aee367794d7ebcac5b08fafcaac1.webp)

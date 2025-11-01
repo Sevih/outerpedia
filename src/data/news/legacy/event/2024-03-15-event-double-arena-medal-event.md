@@ -1,12 +1,15 @@
 ---
-title: "[Event] Double Arena Medal Event"
-date: "2024-03-15T00:00:00.000Z"
-category: "event"
-id: "2024-03-15-event-double-arena-medal-event"
+title: '[Event] Double Arena Medal'
+date: '2024-03-15T00:00:00.000Z'
+category: event
+id: 2024-03-15-event-double-arena-medal-event
 images:
-  - /images/news/legacy/event/2024-03-15-event-double-arena-medal-event/f2e5bc8db94d48b491462991adf860ac.webp
-  - /images/news/legacy/event/2024-03-15-event-double-arena-medal-event/9d0b16052eaf4025b1fc804e533904fb_002.webp
-  - /images/news/legacy/event/2024-03-15-event-double-arena-medal-event/d65e705e3c054dfea612ecf7b1d788aa.webp
+  - >-
+    /images/news/legacy/event/2024-03-15-event-double-arena-medal-event/f2e5bc8db94d48b491462991adf860ac.webp
+  - >-
+    /images/news/legacy/event/2024-03-15-event-double-arena-medal-event/9d0b16052eaf4025b1fc804e533904fb_002.webp
+  - >-
+    /images/news/legacy/event/2024-03-15-event-double-arena-medal-event/d65e705e3c054dfea612ecf7b1d788aa.webp
 ---
 
 ![](/images/news/legacy/event/2024-03-15-event-double-arena-medal-event/f2e5bc8db94d48b491462991adf860ac.webp)  

@@ -1,14 +1,19 @@
 ---
-title: "[Event] Which Hero Do You Want to Attend the Festival With? Event"
-date: "2024-03-12T00:00:00.000Z"
-category: "event"
-id: "2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event"
+title: '[Event] Which Hero Do You Want to Attend the Festival With?'
+date: '2024-03-12T00:00:00.000Z'
+category: event
+id: 2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event
 images:
-  - /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/d35ac5c070574f36add7647b898a01d8.webp
-  - /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/4e556838c1d9499597a2011f81ea603a.webp
-  - /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/0f3db878346f41359836bde39e281b9f.webp
-  - /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/addda9704a5645a3a9ef8116a525cf1b.webp
-  - /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/e55fb9b8053d49d7bc514deb3db5f9d1.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/d35ac5c070574f36add7647b898a01d8.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/4e556838c1d9499597a2011f81ea603a.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/0f3db878346f41359836bde39e281b9f.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/addda9704a5645a3a9ef8116a525cf1b.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/e55fb9b8053d49d7bc514deb3db5f9d1.webp
 ---
 
 ![](/images/news/legacy/event/2024-03-12-event-which-hero-do-you-want-to-attend-the-festival-with-event/d35ac5c070574f36add7647b898a01d8.webp)  

@@ -1,10 +1,12 @@
 ---
-title: "[Event] In celebration of increased hero recruitment chances Push Event"
-date: "2023-06-07T00:00:00.000Z"
-category: "event"
-id: "2023-06-07-event-in-celebration-of-increased-hero-recruitment-chances-push-event"
+title: '[Event] In celebration of increased hero recruitment chances Push'
+date: '2023-06-07T00:00:00.000Z'
+category: event
+id: >-
+  2023-06-07-event-in-celebration-of-increased-hero-recruitment-chances-push-event
 images:
-  - /images/news/legacy/event/2023-06-07-event-in-celebration-of-increased-hero-recruitment-chances-push-event/7cc28e40ce514bef99b2f16d300aa005.webp
+  - >-
+    /images/news/legacy/event/2023-06-07-event-in-celebration-of-increased-hero-recruitment-chances-push-event/7cc28e40ce514bef99b2f16d300aa005.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-07-event-in-celebration-of-increased-hero-recruitment-chances-push-event/7cc28e40ce514bef99b2f16d300aa005.webp)

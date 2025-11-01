@@ -1,10 +1,11 @@
 ---
-title: "[Event] July Push Event"
-date: "2023-07-18T00:00:00.000Z"
-category: "event"
-id: "2023-07-18-event-july-push-event"
+title: '[Event] July Push'
+date: '2023-07-18T00:00:00.000Z'
+category: event
+id: 2023-07-18-event-july-push-event
 images:
-  - /images/news/legacy/event/2023-07-18-event-july-push-event/d1a9f3e3a5704bdebddca6d1d841656f.webp
+  - >-
+    /images/news/legacy/event/2023-07-18-event-july-push-event/d1a9f3e3a5704bdebddca6d1d841656f.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-18-event-july-push-event/d1a9f3e3a5704bdebddca6d1d841656f.webp)

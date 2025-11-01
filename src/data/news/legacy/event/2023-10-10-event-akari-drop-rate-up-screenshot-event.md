@@ -1,11 +1,13 @@
 ---
-title: "[Event] Akari Drop Rate Up Screenshot Event"
-date: "2023-10-10T00:00:00.000Z"
-category: "event"
-id: "2023-10-10-event-akari-drop-rate-up-screenshot-event"
+title: '[Event] Akari Rate Up Screenshot'
+date: '2023-10-10T00:00:00.000Z'
+category: event
+id: 2023-10-10-event-akari-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-10-10-event-akari-drop-rate-up-screenshot-event/34d080699cea4640b29f1e3a7b6b2fb9.webp
-  - /images/news/legacy/event/2023-10-10-event-akari-drop-rate-up-screenshot-event/0e4162db15e34b669d60be27b630000e_002.webp
+  - >-
+    /images/news/legacy/event/2023-10-10-event-akari-drop-rate-up-screenshot-event/34d080699cea4640b29f1e3a7b6b2fb9.webp
+  - >-
+    /images/news/legacy/event/2023-10-10-event-akari-drop-rate-up-screenshot-event/0e4162db15e34b669d60be27b630000e_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-10-10-event-akari-drop-rate-up-screenshot-event/34d080699cea4640b29f1e3a7b6b2fb9.webp)  

@@ -1,12 +1,15 @@
 ---
-title: "[Event] Double Upgrade Stone Retrieval Event"
-date: "2024-03-08T00:00:00.000Z"
-category: "event"
-id: "2024-03-08-event-double-upgrade-stone-retrieval-event"
+title: '[Event] Double Upgrade Stone Retrieval'
+date: '2024-03-08T00:00:00.000Z'
+category: event
+id: 2024-03-08-event-double-upgrade-stone-retrieval-event
 images:
-  - /images/news/legacy/event/2024-03-08-event-double-upgrade-stone-retrieval-event/907432aa2676454986ebc444a3874687.webp
-  - /images/news/legacy/event/2024-03-08-event-double-upgrade-stone-retrieval-event/85851a0080544730a00b341cf9117853_002.webp
-  - /images/news/legacy/event/2024-03-08-event-double-upgrade-stone-retrieval-event/1235a4cbca3f423899a053264b8696ee.webp
+  - >-
+    /images/news/legacy/event/2024-03-08-event-double-upgrade-stone-retrieval-event/907432aa2676454986ebc444a3874687.webp
+  - >-
+    /images/news/legacy/event/2024-03-08-event-double-upgrade-stone-retrieval-event/85851a0080544730a00b341cf9117853_002.webp
+  - >-
+    /images/news/legacy/event/2024-03-08-event-double-upgrade-stone-retrieval-event/1235a4cbca3f423899a053264b8696ee.webp
 ---
 
 ![](/images/news/legacy/event/2024-03-08-event-double-upgrade-stone-retrieval-event/907432aa2676454986ebc444a3874687.webp)  

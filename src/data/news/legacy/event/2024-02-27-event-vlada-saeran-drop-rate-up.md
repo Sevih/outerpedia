@@ -1,12 +1,15 @@
 ---
-title: "[Event] Vlada & Saeran Drop Rate Up!"
-date: "2024-02-27T00:00:00.000Z"
-category: "event"
-id: "2024-02-27-event-vlada-saeran-drop-rate-up"
+title: '[Event] Vlada & Saeran Rate Up!'
+date: '2024-02-27T00:00:00.000Z'
+category: event
+id: 2024-02-27-event-vlada-saeran-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-02-27-event-vlada-saeran-drop-rate-up/707d064948c34483a85d3a3a18a34867.webp
-  - /images/news/legacy/event/2024-02-27-event-vlada-saeran-drop-rate-up/c4cc369a9e1940debf24c968719ac230.webp
-  - /images/news/legacy/event/2024-02-27-event-vlada-saeran-drop-rate-up/ef507fce46d0447c9354caaf90f7ed7d.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-vlada-saeran-drop-rate-up/707d064948c34483a85d3a3a18a34867.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-vlada-saeran-drop-rate-up/c4cc369a9e1940debf24c968719ac230.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-vlada-saeran-drop-rate-up/ef507fce46d0447c9354caaf90f7ed7d.webp
 ---
 
 ![](/images/news/legacy/event/2024-02-27-event-vlada-saeran-drop-rate-up/707d064948c34483a85d3a3a18a34867.webp)  

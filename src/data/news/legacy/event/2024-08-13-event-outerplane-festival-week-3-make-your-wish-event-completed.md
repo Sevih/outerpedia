@@ -1,12 +1,15 @@
 ---
-title: "[Event] OUTERPLANE Festival - Week 3 Make Your Wish Event(Completed)"
-date: "2024-08-13T00:00:00.000Z"
-category: "event"
-id: "2024-08-13-event-outerplane-festival-week-3-make-your-wish-event-completed"
+title: '[Event] OP Festival - Week 3 Make Your Wish (Completed)'
+date: '2024-08-13T00:00:00.000Z'
+category: event
+id: 2024-08-13-event-outerplane-festival-week-3-make-your-wish-event-completed
 images:
-  - /images/news/legacy/event/2024-08-13-event-outerplane-festival-week-3-make-your-wish-event-completed/da5d60a649a246dca2e5c18bc94d6f79.webp
-  - /images/news/legacy/event/2024-08-13-event-outerplane-festival-week-3-make-your-wish-event-completed/524d619216e04eff8d5e36e75def6037.webp
-  - https://page.onstove.com/[Event]%20OUTERPLANE%20Festival%20-%20Week%203%20Make%20Your%20Wish%20Event(Completed)_fichiers/%EC%95%84%EC%97%90%EB%A5%B4_1694156343734.png
+  - >-
+    /images/news/legacy/event/2024-08-13-event-outerplane-festival-week-3-make-your-wish-event-completed/da5d60a649a246dca2e5c18bc94d6f79.webp
+  - >-
+    /images/news/legacy/event/2024-08-13-event-outerplane-festival-week-3-make-your-wish-event-completed/524d619216e04eff8d5e36e75def6037.webp
+  - >-
+    https://page.onstove.com/[Event]%20OUTERPLANE%20Festival%20-%20Week%203%20Make%20Your%20Wish%20Event(Completed)_fichiers/%EC%95%84%EC%97%90%EB%A5%B4_1694156343734.png
 ---
 
 ![](/images/news/legacy/event/2024-08-13-event-outerplane-festival-week-3-make-your-wish-event-completed/da5d60a649a246dca2e5c18bc94d6f79.webp)  

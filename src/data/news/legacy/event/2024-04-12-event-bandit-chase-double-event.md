@@ -1,12 +1,15 @@
 ---
-title: "[Event] Bandit Chase Double Event"
-date: "2024-04-12T00:00:00.000Z"
-category: "event"
-id: "2024-04-12-event-bandit-chase-double-event"
+title: '[Event] Bandit Chase Double'
+date: '2024-04-12T00:00:00.000Z'
+category: event
+id: 2024-04-12-event-bandit-chase-double-event
 images:
-  - /images/news/legacy/event/2024-04-12-event-bandit-chase-double-event/9c8fbf37df364573b6b01cc7c16bccdf.webp
-  - /images/news/legacy/event/2024-04-12-event-bandit-chase-double-event/ead1e4208ca54ccea81ad7e6535b1b63_002.webp
-  - /images/news/legacy/event/2024-04-12-event-bandit-chase-double-event/72710055d7874f868bba5bb1bf4af445.webp
+  - >-
+    /images/news/legacy/event/2024-04-12-event-bandit-chase-double-event/9c8fbf37df364573b6b01cc7c16bccdf.webp
+  - >-
+    /images/news/legacy/event/2024-04-12-event-bandit-chase-double-event/ead1e4208ca54ccea81ad7e6535b1b63_002.webp
+  - >-
+    /images/news/legacy/event/2024-04-12-event-bandit-chase-double-event/72710055d7874f868bba5bb1bf4af445.webp
 ---
 
 ![](/images/news/legacy/event/2024-04-12-event-bandit-chase-double-event/9c8fbf37df364573b6b01cc7c16bccdf.webp)  

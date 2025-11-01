@@ -1,12 +1,15 @@
 ---
-title: "[Event] Fatal & Aer Drop Rate Up!"
-date: "2024-06-18T00:00:00.000Z"
-category: "event"
-id: "2024-06-18-event-fatal-aer-drop-rate-up"
+title: '[Event] Fatal & Aer Rate Up!'
+date: '2024-06-18T00:00:00.000Z'
+category: event
+id: 2024-06-18-event-fatal-aer-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-06-18-event-fatal-aer-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
-  - /images/news/legacy/event/2024-06-18-event-fatal-aer-drop-rate-up/d981d2726cf748578a22a73a57a15006.webp
-  - /images/news/legacy/event/2024-06-18-event-fatal-aer-drop-rate-up/899a9d2e806c4d82ba167fa615477e81.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-fatal-aer-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-fatal-aer-drop-rate-up/d981d2726cf748578a22a73a57a15006.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-fatal-aer-drop-rate-up/899a9d2e806c4d82ba167fa615477e81.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-18-event-fatal-aer-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp)  

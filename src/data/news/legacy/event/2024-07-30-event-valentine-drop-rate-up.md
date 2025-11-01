@@ -1,11 +1,13 @@
 ---
-title: "[Event] Valentine Drop Rate Up!"
-date: "2024-07-30T00:00:00.000Z"
-category: "event"
-id: "2024-07-30-event-valentine-drop-rate-up"
+title: '[Event] Valentine Rate Up!'
+date: '2024-07-30T00:00:00.000Z'
+category: event
+id: 2024-07-30-event-valentine-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-07-30-event-valentine-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
-  - /images/news/legacy/event/2024-07-30-event-valentine-drop-rate-up/816b6be6fd8d4ebea9d234af83caa02f.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-valentine-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-valentine-drop-rate-up/816b6be6fd8d4ebea9d234af83caa02f.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-30-event-valentine-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp)  

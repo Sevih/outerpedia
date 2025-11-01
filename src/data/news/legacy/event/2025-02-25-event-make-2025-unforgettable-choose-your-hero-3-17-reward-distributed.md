@@ -1,11 +1,14 @@
 ---
-title: "[Event] Make 2025 Unforgettable! Choose Your Hero💖 (3/17 Reward distributed)"
-date: "2025-02-25T00:00:00.000Z"
-category: "event"
-id: "2025-02-25-event-make-2025-unforgettable-choose-your-hero-3-17-reward-distributed"
+title: "[Event] 2025: Choose Your Hero\U0001F496 (3/17 Rewards Sent)"
+date: '2025-02-25T00:00:00.000Z'
+category: event
+id: >-
+  2025-02-25-event-make-2025-unforgettable-choose-your-hero-3-17-reward-distributed
 images:
-  - /images/news/legacy/event/2025-02-25-event-make-2025-unforgettable-choose-your-hero-3-17-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2025-02-25-event-make-2025-unforgettable-choose-your-hero-3-17-reward-distributed/c748dab98a514502a5b42e7eeda8d771.webp
+  - >-
+    /images/news/legacy/event/2025-02-25-event-make-2025-unforgettable-choose-your-hero-3-17-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2025-02-25-event-make-2025-unforgettable-choose-your-hero-3-17-reward-distributed/c748dab98a514502a5b42e7eeda8d771.webp
 ---
 
 ![](/images/news/legacy/event/2025-02-25-event-make-2025-unforgettable-choose-your-hero-3-17-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

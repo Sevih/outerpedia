@@ -1,12 +1,15 @@
 ---
-title: "[Event] Hanbyul Lee & Saeran Drop Rate Up!"
-date: "2023-06-20T00:00:00.000Z"
-category: "event"
-id: "2023-06-20-event-hanbyul-lee-saeran-drop-rate-up"
+title: '[Event] Hanbyul Lee & Saeran Rate Up!'
+date: '2023-06-20T00:00:00.000Z'
+category: event
+id: 2023-06-20-event-hanbyul-lee-saeran-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-06-20-event-hanbyul-lee-saeran-drop-rate-up/e30f766b8d184e6b94e5b17dada5d72a.webp
-  - /images/news/legacy/event/2023-06-20-event-hanbyul-lee-saeran-drop-rate-up/d5f771bffa0047b6b14ac2f625fbeb25.webp
-  - /images/news/legacy/event/2023-06-20-event-hanbyul-lee-saeran-drop-rate-up/8ed74d79ad6a4806993164a15e0ae508.webp
+  - >-
+    /images/news/legacy/event/2023-06-20-event-hanbyul-lee-saeran-drop-rate-up/e30f766b8d184e6b94e5b17dada5d72a.webp
+  - >-
+    /images/news/legacy/event/2023-06-20-event-hanbyul-lee-saeran-drop-rate-up/d5f771bffa0047b6b14ac2f625fbeb25.webp
+  - >-
+    /images/news/legacy/event/2023-06-20-event-hanbyul-lee-saeran-drop-rate-up/8ed74d79ad6a4806993164a15e0ae508.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-20-event-hanbyul-lee-saeran-drop-rate-up/e30f766b8d184e6b94e5b17dada5d72a.webp)

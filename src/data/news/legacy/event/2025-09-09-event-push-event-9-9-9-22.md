@@ -1,10 +1,11 @@
 ---
-title: "[Event] Push Event (9/9~9/22)"
-date: "2025-09-09T00:00:00.000Z"
-category: "event"
-id: "2025-09-09-event-push-event-9-9-9-22"
+title: '[Event] Push (9/9~9/22)'
+date: '2025-09-09T00:00:00.000Z'
+category: event
+id: 2025-09-09-event-push-event-9-9-9-22
 images:
-  - /images/news/legacy/event/2025-09-09-event-push-event-9-9-9-22/4759c200b4a94ca4a56a76260f0d31bb.webp
+  - >-
+    /images/news/legacy/event/2025-09-09-event-push-event-9-9-9-22/4759c200b4a94ca4a56a76260f0d31bb.webp
 ---
 
 ![](/images/news/legacy/event/2025-09-09-event-push-event-9-9-9-22/4759c200b4a94ca4a56a76260f0d31bb.webp)  

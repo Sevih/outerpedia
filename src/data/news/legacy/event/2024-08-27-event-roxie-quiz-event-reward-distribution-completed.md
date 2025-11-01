@@ -1,11 +1,13 @@
 ---
-title: "[Event] Roxie Quiz Event (Reward Distribution Completed)"
-date: "2024-08-27T00:00:00.000Z"
-category: "event"
-id: "2024-08-27-event-roxie-quiz-event-reward-distribution-completed"
+title: '[Event] Roxie Quiz (Rewards Sent)'
+date: '2024-08-27T00:00:00.000Z'
+category: event
+id: 2024-08-27-event-roxie-quiz-event-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-08-27-event-roxie-quiz-event-reward-distribution-completed/996a4561303a4c8eafe2961b2464cb1d.webp
-  - /images/news/legacy/event/2024-08-27-event-roxie-quiz-event-reward-distribution-completed/682c354931e34573a54e4323b0e4a81a.webp
+  - >-
+    /images/news/legacy/event/2024-08-27-event-roxie-quiz-event-reward-distribution-completed/996a4561303a4c8eafe2961b2464cb1d.webp
+  - >-
+    /images/news/legacy/event/2024-08-27-event-roxie-quiz-event-reward-distribution-completed/682c354931e34573a54e4323b0e4a81a.webp
 ---
 
 ![](/images/news/legacy/event/2024-08-27-event-roxie-quiz-event-reward-distribution-completed/996a4561303a4c8eafe2961b2464cb1d.webp)  

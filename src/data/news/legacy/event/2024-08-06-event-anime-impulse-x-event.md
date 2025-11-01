@@ -1,11 +1,13 @@
 ---
-title: "[Event] Anime Impulse X Event"
-date: "2024-08-06T00:00:00.000Z"
-category: "event"
-id: "2024-08-06-event-anime-impulse-x-event"
+title: '[Event] Anime Impulse X'
+date: '2024-08-06T00:00:00.000Z'
+category: event
+id: 2024-08-06-event-anime-impulse-x-event
 images:
-  - /images/news/legacy/event/2024-08-06-event-anime-impulse-x-event/37dece69232341399ae210bd577e1446.webp
-  - /images/news/legacy/event/2024-08-06-event-anime-impulse-x-event/0fc5d82c1ba04a4e84f43308de4e6d4a_002.webp
+  - >-
+    /images/news/legacy/event/2024-08-06-event-anime-impulse-x-event/37dece69232341399ae210bd577e1446.webp
+  - >-
+    /images/news/legacy/event/2024-08-06-event-anime-impulse-x-event/0fc5d82c1ba04a4e84f43308de4e6d4a_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-08-06-event-anime-impulse-x-event/37dece69232341399ae210bd577e1446.webp)  

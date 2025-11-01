@@ -1,13 +1,18 @@
 ---
-title: "OUTERPLANE's 100th-Day Anniversary Celebration! Congratulatory Message Event"
-date: "2023-08-29T00:00:00.000Z"
-category: "event"
-id: "2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event"
+title: OP's 100-Day Anniversary! Congratulatory Message Event
+date: '2023-08-29T00:00:00.000Z'
+category: event
+id: >-
+  2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event
 images:
-  - /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event/526ee2ee5a9143d395c009ddb4de7106.webp
-  - /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event/55dda6f6fe6049bfa2a5a14862c0b66c_002.webp
-  - /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event/c25d77f7e9ff41be8de9b01ca53f5f95.webp
-  - /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event/a9654b93dd0f4adc9c9e1c4d29f17b1d.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event/526ee2ee5a9143d395c009ddb4de7106.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event/55dda6f6fe6049bfa2a5a14862c0b66c_002.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event/c25d77f7e9ff41be8de9b01ca53f5f95.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event/a9654b93dd0f4adc9c9e1c4d29f17b1d.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-congratulatory-message-event/526ee2ee5a9143d395c009ddb4de7106.webp)  

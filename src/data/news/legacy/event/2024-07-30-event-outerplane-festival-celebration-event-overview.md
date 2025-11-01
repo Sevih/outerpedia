@@ -1,12 +1,15 @@
 ---
-title: "[Event] OUTERPLANE Festival Celebration! Event Overview"
-date: "2024-07-30T00:00:00.000Z"
-category: "event"
-id: "2024-07-30-event-outerplane-festival-celebration-event-overview"
+title: '[Event] OP Festival Celebration! Event Overview'
+date: '2024-07-30T00:00:00.000Z'
+category: event
+id: 2024-07-30-event-outerplane-festival-celebration-event-overview
 images:
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-event-overview/7cab40b6a7254cab899e818e466b4ff5.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-event-overview/ba338f69eb3540009b1aa215c2a590e7.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-event-overview/bb885663ad214dd786255708a107f98f.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-event-overview/7cab40b6a7254cab899e818e466b4ff5.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-event-overview/ba338f69eb3540009b1aa215c2a590e7.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-event-overview/bb885663ad214dd786255708a107f98f.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-event-overview/7cab40b6a7254cab899e818e466b4ff5.webp)

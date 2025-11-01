@@ -1,11 +1,13 @@
 ---
-title: "[Event] Knowledage Master ✏👑 Event"
-date: "2023-12-11T00:00:00.000Z"
-category: "event"
-id: "2023-12-11-event-knowledage-master-event"
+title: "[Event] Knowledage Master ✏\U0001F451"
+date: '2023-12-11T00:00:00.000Z'
+category: event
+id: 2023-12-11-event-knowledage-master-event
 images:
-  - /images/news/legacy/event/2023-12-11-event-knowledage-master-event/64682b5d9f294357ac68ba68cf191e4b.webp
-  - /images/news/legacy/event/2023-12-11-event-knowledage-master-event/1b118661e59a4f61ad6fa801f6c56115.webp
+  - >-
+    /images/news/legacy/event/2023-12-11-event-knowledage-master-event/64682b5d9f294357ac68ba68cf191e4b.webp
+  - >-
+    /images/news/legacy/event/2023-12-11-event-knowledage-master-event/1b118661e59a4f61ad6fa801f6c56115.webp
 ---
 
 ![](/images/news/legacy/event/2023-12-11-event-knowledage-master-event/64682b5d9f294357ac68ba68cf191e4b.webp)  

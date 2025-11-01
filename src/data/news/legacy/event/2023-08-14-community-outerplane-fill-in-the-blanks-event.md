@@ -1,11 +1,13 @@
 ---
-title: "[Community] OUTERPLANE Fill in the Blanks Event!"
-date: "2023-08-14T00:00:00.000Z"
-category: "event"
-id: "2023-08-14-community-outerplane-fill-in-the-blanks-event"
+title: '[Community] OP Fill in the Blanks Event!'
+date: '2023-08-14T00:00:00.000Z'
+category: event
+id: 2023-08-14-community-outerplane-fill-in-the-blanks-event
 images:
-  - /images/news/legacy/event/2023-08-14-community-outerplane-fill-in-the-blanks-event/29c245552df44da0ae7b9d435d8f6362.webp
-  - /images/news/legacy/event/2023-08-14-community-outerplane-fill-in-the-blanks-event/9034ad3832fd4c9db16438a246d90bf3.webp
+  - >-
+    /images/news/legacy/event/2023-08-14-community-outerplane-fill-in-the-blanks-event/29c245552df44da0ae7b9d435d8f6362.webp
+  - >-
+    /images/news/legacy/event/2023-08-14-community-outerplane-fill-in-the-blanks-event/9034ad3832fd4c9db16438a246d90bf3.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-14-community-outerplane-fill-in-the-blanks-event/29c245552df44da0ae7b9d435d8f6362.webp)

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Nella Quiz Event (10/15 01:30 Reward Distribution Completed)"
-date: "2024-09-24T00:00:00.000Z"
-category: "event"
-id: "2024-09-24-event-nella-quiz-event-10-15-01-30-reward-distribution-completed"
+title: '[Event] Nella Quiz (10/15 01:30 Rewards Sent)'
+date: '2024-09-24T00:00:00.000Z'
+category: event
+id: 2024-09-24-event-nella-quiz-event-10-15-01-30-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-09-24-event-nella-quiz-event-10-15-01-30-reward-distribution-completed/ac82495e1b1c48e18b23ac4d68196255.webp
-  - /images/news/legacy/event/2024-09-24-event-nella-quiz-event-10-15-01-30-reward-distribution-completed/c13d2577e51e443ba6fa8a24c46b7ae9.webp
+  - >-
+    /images/news/legacy/event/2024-09-24-event-nella-quiz-event-10-15-01-30-reward-distribution-completed/ac82495e1b1c48e18b23ac4d68196255.webp
+  - >-
+    /images/news/legacy/event/2024-09-24-event-nella-quiz-event-10-15-01-30-reward-distribution-completed/c13d2577e51e443ba6fa8a24c46b7ae9.webp
 ---
 
 ![](/images/news/legacy/event/2024-09-24-event-nella-quiz-event-10-15-01-30-reward-distribution-completed/ac82495e1b1c48e18b23ac4d68196255.webp)  

@@ -1,12 +1,15 @@
 ---
-title: "[Event] Dahlia & Ame Drop Rate Up!"
-date: "2023-12-19T00:00:00.000Z"
-category: "event"
-id: "2023-12-19-event-dahlia-ame-drop-rate-up"
+title: '[Event] Dahlia & Ame Rate Up!'
+date: '2023-12-19T00:00:00.000Z'
+category: event
+id: 2023-12-19-event-dahlia-ame-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-12-19-event-dahlia-ame-drop-rate-up/df1b1525f27c4f349be512ce50b1945a.webp
-  - /images/news/legacy/event/2023-12-19-event-dahlia-ame-drop-rate-up/26ad65e1a302472cbace3e1d0b6b3a05.webp
-  - /images/news/legacy/event/2023-12-19-event-dahlia-ame-drop-rate-up/38f9d307593146fab30680a8c7629cac.webp
+  - >-
+    /images/news/legacy/event/2023-12-19-event-dahlia-ame-drop-rate-up/df1b1525f27c4f349be512ce50b1945a.webp
+  - >-
+    /images/news/legacy/event/2023-12-19-event-dahlia-ame-drop-rate-up/26ad65e1a302472cbace3e1d0b6b3a05.webp
+  - >-
+    /images/news/legacy/event/2023-12-19-event-dahlia-ame-drop-rate-up/38f9d307593146fab30680a8c7629cac.webp
 ---
 
 ![](/images/news/legacy/event/2023-12-19-event-dahlia-ame-drop-rate-up/df1b1525f27c4f349be512ce50b1945a.webp)  

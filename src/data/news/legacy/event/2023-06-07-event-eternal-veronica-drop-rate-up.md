@@ -1,12 +1,15 @@
 ---
-title: "[Event] Eternal & Veronica Drop Rate Up!"
-date: "2023-06-07T00:00:00.000Z"
-category: "event"
-id: "2023-06-07-event-eternal-veronica-drop-rate-up"
+title: '[Event] Eternal & Veronica Rate Up!'
+date: '2023-06-07T00:00:00.000Z'
+category: event
+id: 2023-06-07-event-eternal-veronica-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-06-07-event-eternal-veronica-drop-rate-up/bfa6610bf02c40568cf9246352e3279d.webp
-  - /images/news/legacy/event/2023-06-07-event-eternal-veronica-drop-rate-up/0c4feb2e19d4415d893ec076444f35a4.webp
-  - /images/news/legacy/event/2023-06-07-event-eternal-veronica-drop-rate-up/7aa3c34847274992bbdbda8765657c11.webp
+  - >-
+    /images/news/legacy/event/2023-06-07-event-eternal-veronica-drop-rate-up/bfa6610bf02c40568cf9246352e3279d.webp
+  - >-
+    /images/news/legacy/event/2023-06-07-event-eternal-veronica-drop-rate-up/0c4feb2e19d4415d893ec076444f35a4.webp
+  - >-
+    /images/news/legacy/event/2023-06-07-event-eternal-veronica-drop-rate-up/7aa3c34847274992bbdbda8765657c11.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-07-event-eternal-veronica-drop-rate-up/bfa6610bf02c40568cf9246352e3279d.webp)

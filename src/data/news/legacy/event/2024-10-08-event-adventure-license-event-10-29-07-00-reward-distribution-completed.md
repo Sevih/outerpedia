@@ -1,11 +1,14 @@
 ---
-title: "[Event] Adventure License Event (10/29 07:00 Reward Distribution Completed)"
-date: "2024-10-08T00:00:00.000Z"
-category: "event"
-id: "2024-10-08-event-adventure-license-event-10-29-07-00-reward-distribution-completed"
+title: '[Event] Adventure License (10/29 07:00 Rewards Sent)'
+date: '2024-10-08T00:00:00.000Z'
+category: event
+id: >-
+  2024-10-08-event-adventure-license-event-10-29-07-00-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-10-08-event-adventure-license-event-10-29-07-00-reward-distribution-completed/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp
-  - /images/news/legacy/event/2024-10-08-event-adventure-license-event-10-29-07-00-reward-distribution-completed/15139e9756c64255ad9e518425fe7445.webp
+  - >-
+    /images/news/legacy/event/2024-10-08-event-adventure-license-event-10-29-07-00-reward-distribution-completed/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp
+  - >-
+    /images/news/legacy/event/2024-10-08-event-adventure-license-event-10-29-07-00-reward-distribution-completed/15139e9756c64255ad9e518425fe7445.webp
 ---
 
 ![](/images/news/legacy/event/2024-10-08-event-adventure-license-event-10-29-07-00-reward-distribution-completed/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Community] Congratulatory Messages for November-born Heroes! Event"
-date: "2023-11-01T00:00:00.000Z"
-category: "event"
-id: "2023-11-01-community-congratulatory-messages-for-november-born-heroes-event"
+title: '[Community] Congrats to November Heroes! Event'
+date: '2023-11-01T00:00:00.000Z'
+category: event
+id: 2023-11-01-community-congratulatory-messages-for-november-born-heroes-event
 images:
-  - /images/news/legacy/event/2023-11-01-community-congratulatory-messages-for-november-born-heroes-event/464b5e397c964ef08d348025f9d69028.webp
-  - /images/news/legacy/event/2023-11-01-community-congratulatory-messages-for-november-born-heroes-event/43b23f2bab764011994d6230ddbfc2ce.webp
+  - >-
+    /images/news/legacy/event/2023-11-01-community-congratulatory-messages-for-november-born-heroes-event/464b5e397c964ef08d348025f9d69028.webp
+  - >-
+    /images/news/legacy/event/2023-11-01-community-congratulatory-messages-for-november-born-heroes-event/43b23f2bab764011994d6230ddbfc2ce.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-01-community-congratulatory-messages-for-november-born-heroes-event/464b5e397c964ef08d348025f9d69028.webp)  

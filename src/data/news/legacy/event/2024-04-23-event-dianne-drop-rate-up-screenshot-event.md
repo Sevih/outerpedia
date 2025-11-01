@@ -1,12 +1,15 @@
 ---
-title: "[Event] Dianne Drop Rate Up Screenshot Event"
-date: "2024-04-23T00:00:00.000Z"
-category: "event"
-id: "2024-04-23-event-dianne-drop-rate-up-screenshot-event"
+title: '[Event] Dianne Rate Up Screenshot'
+date: '2024-04-23T00:00:00.000Z'
+category: event
+id: 2024-04-23-event-dianne-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2024-04-23-event-dianne-drop-rate-up-screenshot-event/7bc7b1a941be4241bb03ec5a3772cc8b.webp
-  - /images/news/legacy/event/2024-04-23-event-dianne-drop-rate-up-screenshot-event/a5db096912174515b4e1463c32e13767_002.webp
-  - /images/news/legacy/event/2024-04-23-event-dianne-drop-rate-up-screenshot-event/97cee1c184bd4391a083d37fcf8ae3bc.webp
+  - >-
+    /images/news/legacy/event/2024-04-23-event-dianne-drop-rate-up-screenshot-event/7bc7b1a941be4241bb03ec5a3772cc8b.webp
+  - >-
+    /images/news/legacy/event/2024-04-23-event-dianne-drop-rate-up-screenshot-event/a5db096912174515b4e1463c32e13767_002.webp
+  - >-
+    /images/news/legacy/event/2024-04-23-event-dianne-drop-rate-up-screenshot-event/97cee1c184bd4391a083d37fcf8ae3bc.webp
 ---
 
 ![](/images/news/legacy/event/2024-04-23-event-dianne-drop-rate-up-screenshot-event/7bc7b1a941be4241bb03ec5a3772cc8b.webp)  

@@ -1,10 +1,11 @@
 ---
-title: "[Event] Bandit Chase Double Event"
-date: "2023-08-25T00:00:00.000Z"
-category: "event"
-id: "2023-08-25-event-bandit-chase-double-event"
+title: '[Event] Bandit Chase Double'
+date: '2023-08-25T00:00:00.000Z'
+category: event
+id: 2023-08-25-event-bandit-chase-double-event
 images:
-  - /images/news/legacy/event/2023-08-25-event-bandit-chase-double-event/5fb9c34ee1394a93b25b9d5b7f48cd75.webp
+  - >-
+    /images/news/legacy/event/2023-08-25-event-bandit-chase-double-event/5fb9c34ee1394a93b25b9d5b7f48cd75.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-25-event-bandit-chase-double-event/5fb9c34ee1394a93b25b9d5b7f48cd75.webp)  

@@ -1,11 +1,14 @@
 ---
-title: "[Event] Bounty Hunter! Find Poolside Trickster Regina Event (8/16 Completed)"
-date: "2024-07-23T00:00:00.000Z"
-category: "event"
-id: "2024-07-23-event-bounty-hunter-find-poolside-trickster-regina-event-8-16-completed"
+title: '[Event] Find Poolside Trickster Regina (8/16 Completed)'
+date: '2024-07-23T00:00:00.000Z'
+category: event
+id: >-
+  2024-07-23-event-bounty-hunter-find-poolside-trickster-regina-event-8-16-completed
 images:
-  - /images/news/legacy/event/2024-07-23-event-bounty-hunter-find-poolside-trickster-regina-event-8-16-completed/349332a5293c43db99d10f0eb42edfad.webp
-  - /images/news/legacy/event/2024-07-23-event-bounty-hunter-find-poolside-trickster-regina-event-8-16-completed/82c118f859804d32844422bc63fd1425.webp
+  - >-
+    /images/news/legacy/event/2024-07-23-event-bounty-hunter-find-poolside-trickster-regina-event-8-16-completed/349332a5293c43db99d10f0eb42edfad.webp
+  - >-
+    /images/news/legacy/event/2024-07-23-event-bounty-hunter-find-poolside-trickster-regina-event-8-16-completed/82c118f859804d32844422bc63fd1425.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-23-event-bounty-hunter-find-poolside-trickster-regina-event-8-16-completed/349332a5293c43db99d10f0eb42edfad.webp)  

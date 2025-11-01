@@ -1,10 +1,11 @@
 ---
-title: "[Event] Side Story Pieces Extra Collection Event"
-date: "2023-08-21T00:00:00.000Z"
-category: "event"
-id: "2023-08-21-event-side-story-pieces-extra-collection-event"
+title: '[Event] Side Story Pieces Extra Collection'
+date: '2023-08-21T00:00:00.000Z'
+category: event
+id: 2023-08-21-event-side-story-pieces-extra-collection-event
 images:
-  - /images/news/legacy/event/2023-08-21-event-side-story-pieces-extra-collection-event/ac3d5f33864e42598a98fc038afa5415_002.webp
+  - >-
+    /images/news/legacy/event/2023-08-21-event-side-story-pieces-extra-collection-event/ac3d5f33864e42598a98fc038afa5415_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-21-event-side-story-pieces-extra-collection-event/ac3d5f33864e42598a98fc038afa5415_002.webp)

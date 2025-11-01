@@ -1,11 +1,13 @@
 ---
-title: "[Event] Hilde Drop Rate Up!"
-date: "2024-11-19T00:00:00.000Z"
-category: "event"
-id: "2024-11-19-event-hilde-drop-rate-up"
+title: '[Event] Hilde Rate Up!'
+date: '2024-11-19T00:00:00.000Z'
+category: event
+id: 2024-11-19-event-hilde-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-11-19-event-hilde-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2024-11-19-event-hilde-drop-rate-up/e267c54cef8a4fa38a6a2f512fdf4a86.webp
+  - >-
+    /images/news/legacy/event/2024-11-19-event-hilde-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2024-11-19-event-hilde-drop-rate-up/e267c54cef8a4fa38a6a2f512fdf4a86.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-19-event-hilde-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

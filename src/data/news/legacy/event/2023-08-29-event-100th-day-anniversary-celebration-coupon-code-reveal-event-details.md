@@ -1,16 +1,24 @@
 ---
-title: "[Event] 100th-Day Anniversary Celebration! Coupon Code Reveal & Event Details"
-date: "2023-08-29T00:00:00.000Z"
-category: "event"
-id: "2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details"
+title: '[Event] 100-Day Anniversary! Coupon Code Reveal & Event Details'
+date: '2023-08-29T00:00:00.000Z'
+category: event
+id: >-
+  2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details
 images:
-  - /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/526ee2ee5a9143d395c009ddb4de7106.webp
-  - /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/9da8ba4b40774823bbd0c2a7941b36b8.webp
-  - /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/071638cbac224d14a1131ca33a9a251a.webp
-  - /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/1264c3e195c14c55954d0f54cf3aa961.webp
-  - /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/8296e235126a4cdb920ee0021abce70a.webp
-  - /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/1ea04b721fac4c2a9ab9b248b1d16b0f.webp
-  - /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/011a9c1ca76d48efb8f14c8f5be96f29.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/526ee2ee5a9143d395c009ddb4de7106.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/9da8ba4b40774823bbd0c2a7941b36b8.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/071638cbac224d14a1131ca33a9a251a.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/1264c3e195c14c55954d0f54cf3aa961.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/8296e235126a4cdb920ee0021abce70a.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/1ea04b721fac4c2a9ab9b248b1d16b0f.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/011a9c1ca76d48efb8f14c8f5be96f29.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-29-event-100th-day-anniversary-celebration-coupon-code-reveal-event-details/526ee2ee5a9143d395c009ddb4de7106.webp)  

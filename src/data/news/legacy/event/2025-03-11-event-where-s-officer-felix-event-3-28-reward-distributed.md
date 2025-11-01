@@ -1,12 +1,15 @@
 ---
-title: "[Event] 🐾💬Where's Officer Felix? Event! 🐾!(3/28 Reward distributed)"
-date: "2025-03-11T00:00:00.000Z"
-category: "event"
-id: "2025-03-11-event-where-s-officer-felix-event-3-28-reward-distributed"
+title: '[Event] Where''s Officer Felix? Event! !(3/28 Rewards Sent)'
+date: '2025-03-11T00:00:00.000Z'
+category: event
+id: 2025-03-11-event-where-s-officer-felix-event-3-28-reward-distributed
 images:
-  - /images/news/legacy/event/2025-03-11-event-where-s-officer-felix-event-3-28-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2025-03-11-event-where-s-officer-felix-event-3-28-reward-distributed/43df9ff40bfb4fb1857070e7be564a5a_002.webp
-  - /images/news/legacy/event/2025-03-11-event-where-s-officer-felix-event-3-28-reward-distributed/bf7b70a0d4914875a854ebebf3415437.webp
+  - >-
+    /images/news/legacy/event/2025-03-11-event-where-s-officer-felix-event-3-28-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2025-03-11-event-where-s-officer-felix-event-3-28-reward-distributed/43df9ff40bfb4fb1857070e7be564a5a_002.webp
+  - >-
+    /images/news/legacy/event/2025-03-11-event-where-s-officer-felix-event-3-28-reward-distributed/bf7b70a0d4914875a854ebebf3415437.webp
 ---
 
 ![](/images/news/legacy/event/2025-03-11-event-where-s-officer-felix-event-3-28-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

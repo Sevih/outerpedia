@@ -1,10 +1,11 @@
 ---
-title: "[Event] Push Event (7/1~7/14)"
-date: "2025-07-01T00:00:00.000Z"
-category: "event"
-id: "2025-07-01-event-push-event-7-1-7-14"
+title: '[Event] Push (7/1~7/14)'
+date: '2025-07-01T00:00:00.000Z'
+category: event
+id: 2025-07-01-event-push-event-7-1-7-14
 images:
-  - /images/news/legacy/event/2025-07-01-event-push-event-7-1-7-14/4759c200b4a94ca4a56a76260f0d31bb.webp
+  - >-
+    /images/news/legacy/event/2025-07-01-event-push-event-7-1-7-14/4759c200b4a94ca4a56a76260f0d31bb.webp
 ---
 
 ![](/images/news/legacy/event/2025-07-01-event-push-event-7-1-7-14/4759c200b4a94ca4a56a76260f0d31bb.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Charlotte Drop Rate Up!"
-date: "2024-09-10T00:00:00.000Z"
-category: "event"
-id: "2024-09-10-event-charlotte-drop-rate-up"
+title: '[Event] Charlotte Rate Up!'
+date: '2024-09-10T00:00:00.000Z'
+category: event
+id: 2024-09-10-event-charlotte-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-09-10-event-charlotte-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2024-09-10-event-charlotte-drop-rate-up/0a5c27e77d23458fa61fedf5d8b6d9c6.webp
+  - >-
+    /images/news/legacy/event/2024-09-10-event-charlotte-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2024-09-10-event-charlotte-drop-rate-up/0a5c27e77d23458fa61fedf5d8b6d9c6.webp
 ---
 
 ![](/images/news/legacy/event/2024-09-10-event-charlotte-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

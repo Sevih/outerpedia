@@ -1,11 +1,14 @@
 ---
-title: "[Event] Dungeon Exploration Balance Game! What is your choice?(Completed)"
-date: "2025-03-25T00:00:00.000Z"
-category: "event"
-id: "2025-03-25-event-dungeon-exploration-balance-game-what-is-your-choice-completed"
+title: '[Event] Dungeon Game: Choose!(Completed)'
+date: '2025-03-25T00:00:00.000Z'
+category: event
+id: >-
+  2025-03-25-event-dungeon-exploration-balance-game-what-is-your-choice-completed
 images:
-  - /images/news/legacy/event/2025-03-25-event-dungeon-exploration-balance-game-what-is-your-choice-completed/a3c5fee0e12a4b24a46ff38664e7fe52.webp
-  - /images/news/legacy/event/2025-03-25-event-dungeon-exploration-balance-game-what-is-your-choice-completed/c6751971e0174004a89453c059e8ed16_002.webp
+  - >-
+    /images/news/legacy/event/2025-03-25-event-dungeon-exploration-balance-game-what-is-your-choice-completed/a3c5fee0e12a4b24a46ff38664e7fe52.webp
+  - >-
+    /images/news/legacy/event/2025-03-25-event-dungeon-exploration-balance-game-what-is-your-choice-completed/c6751971e0174004a89453c059e8ed16_002.webp
 ---
 
 ![](/images/news/legacy/event/2025-03-25-event-dungeon-exploration-balance-game-what-is-your-choice-completed/a3c5fee0e12a4b24a46ff38664e7fe52.webp)  

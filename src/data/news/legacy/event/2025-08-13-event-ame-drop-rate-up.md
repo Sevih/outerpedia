@@ -1,11 +1,13 @@
 ---
-title: "[Event] Ame Drop Rate Up!"
-date: "2025-08-13T00:00:00.000Z"
-category: "event"
-id: "2025-08-13-event-ame-drop-rate-up"
+title: '[Event] Ame Rate Up!'
+date: '2025-08-13T00:00:00.000Z'
+category: event
+id: 2025-08-13-event-ame-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-08-13-event-ame-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2025-08-13-event-ame-drop-rate-up/798368191b1e4408b02e147211ae5d21.webp
+  - >-
+    /images/news/legacy/event/2025-08-13-event-ame-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2025-08-13-event-ame-drop-rate-up/798368191b1e4408b02e147211ae5d21.webp
 ---
 
 ![](/images/news/legacy/event/2025-08-13-event-ame-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

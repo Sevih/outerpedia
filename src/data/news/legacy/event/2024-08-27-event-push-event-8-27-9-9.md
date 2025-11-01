@@ -1,10 +1,11 @@
 ---
-title: "[Event] Push Event (8/27~9/9)"
-date: "2024-08-27T00:00:00.000Z"
-category: "event"
-id: "2024-08-27-event-push-event-8-27-9-9"
+title: '[Event] Push (8/27~9/9)'
+date: '2024-08-27T00:00:00.000Z'
+category: event
+id: 2024-08-27-event-push-event-8-27-9-9
 images:
-  - /images/news/legacy/event/2024-08-27-event-push-event-8-27-9-9/0ac80d4ca2a843819c831ea82bb5521a.webp
+  - >-
+    /images/news/legacy/event/2024-08-27-event-push-event-8-27-9-9/0ac80d4ca2a843819c831ea82bb5521a.webp
 ---
 
 ![](/images/news/legacy/event/2024-08-27-event-push-event-8-27-9-9/0ac80d4ca2a843819c831ea82bb5521a.webp)  

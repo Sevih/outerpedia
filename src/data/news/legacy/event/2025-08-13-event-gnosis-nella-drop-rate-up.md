@@ -1,11 +1,13 @@
 ---
-title: "[Event] Gnosis Nella Drop Rate Up!"
-date: "2025-08-13T00:00:00.000Z"
-category: "event"
-id: "2025-08-13-event-gnosis-nella-drop-rate-up"
+title: '[Event] Gnosis Nella Rate Up!'
+date: '2025-08-13T00:00:00.000Z'
+category: event
+id: 2025-08-13-event-gnosis-nella-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-08-13-event-gnosis-nella-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp
-  - /images/news/legacy/event/2025-08-13-event-gnosis-nella-drop-rate-up/0495692507f54861ac030f98b1a09adb.webp
+  - >-
+    /images/news/legacy/event/2025-08-13-event-gnosis-nella-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp
+  - >-
+    /images/news/legacy/event/2025-08-13-event-gnosis-nella-drop-rate-up/0495692507f54861ac030f98b1a09adb.webp
 ---
 
 ![](/images/news/legacy/event/2025-08-13-event-gnosis-nella-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp)  

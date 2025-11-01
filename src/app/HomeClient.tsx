@@ -7,7 +7,7 @@ import { renderMarkdown } from '@/utils/markdown'
 import { useI18n } from '@/lib/contexts/I18nContext'
 
 export default function HomeClient() {
-  const { lang } = useI18n()
+  const { t, lang } = useI18n()
 
   const recentChanges = useMemo<ChangelogEntry[]>(
     () => getChangelog(lang, { limit: 5 }),
@@ -44,10 +44,10 @@ export default function HomeClient() {
       />
 
       {/* RECENT UPDATES */}
-      <section className="mt-12">
+      <section>
         <h2 className="relative mb-8 text-center text-2xl font-bold text-white">
           <span className="relative z-10">
-            Latest Outerpedia Updates & Features
+            {t('titles.main.changetitle')}
           </span>
           <span className="absolute left-1/2 -bottom-1 h-1 w-24 -translate-x-1/2 rounded bg-cyan-600 opacity-70" />
         </h2>
@@ -63,15 +63,14 @@ export default function HomeClient() {
               <div className="mb-1 flex items-center justify-between text-sm text-gray-400">
                 <span className="font-mono">{entry.date}</span>
                 <span
-                  className={`uppercase text-xs font-bold px-2 py-0.5 rounded bg-opacity-20 ${
-                    entry.type === 'feature'
+                  className={`uppercase text-xs font-bold px-2 py-0.5 rounded bg-opacity-20 ${entry.type === 'feature'
                       ? 'bg-green-800 text-green-100'
                       : entry.type === 'update'
-                      ? 'bg-blue-800 text-blue-100'
-                      : entry.type === 'fix'
-                      ? 'bg-red-800 text-red-100'
-                      : 'bg-gray-800 text-gray-100'
-                  }`}
+                        ? 'bg-blue-800 text-blue-100'
+                        : entry.type === 'fix'
+                          ? 'bg-red-800 text-red-100'
+                          : 'bg-gray-800 text-gray-100'
+                    }`}
                 >
                   {entry.type.toUpperCase()}
                 </span>
@@ -102,8 +101,7 @@ export default function HomeClient() {
           <Link
             href="/changelog"
             className="text-sm text-primary hover:underline"
-          >
-            View full changelog →
+          >{t('titles.main.tochangelog')} →
           </Link>
         </div>
         <h2 className="sr-only">

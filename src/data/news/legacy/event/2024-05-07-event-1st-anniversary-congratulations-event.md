@@ -1,11 +1,13 @@
 ---
-title: "[Event] 1st Anniversary! Congratulations Event"
-date: "2024-05-07T00:00:00.000Z"
-category: "event"
-id: "2024-05-07-event-1st-anniversary-congratulations-event"
+title: '[Event] 1st Anniversary! Congratulations'
+date: '2024-05-07T00:00:00.000Z'
+category: event
+id: 2024-05-07-event-1st-anniversary-congratulations-event
 images:
-  - /images/news/legacy/event/2024-05-07-event-1st-anniversary-congratulations-event/46d2fb6d00e54669bf049774d4c619d5.webp
-  - /images/news/legacy/event/2024-05-07-event-1st-anniversary-congratulations-event/85a9c66638cc4ca6b1f649a62e027b1d_002.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-1st-anniversary-congratulations-event/46d2fb6d00e54669bf049774d4c619d5.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-1st-anniversary-congratulations-event/85a9c66638cc4ca6b1f649a62e027b1d_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-07-event-1st-anniversary-congratulations-event/46d2fb6d00e54669bf049774d4c619d5.webp)  

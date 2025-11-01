@@ -1,11 +1,13 @@
 ---
-title: "[Event] Survey Hub Double Survey Point Event"
-date: "2023-09-08T00:00:00.000Z"
-category: "event"
-id: "2023-09-08-event-survey-hub-double-survey-point-event"
+title: '[Event] Survey Hub Double Survey Point'
+date: '2023-09-08T00:00:00.000Z'
+category: event
+id: 2023-09-08-event-survey-hub-double-survey-point-event
 images:
-  - /images/news/legacy/event/2023-09-08-event-survey-hub-double-survey-point-event/989e5e5810aa4066bc3b4e53d53359e8.webp
-  - /images/news/legacy/event/2023-09-08-event-survey-hub-double-survey-point-event/3dc7809a1bfd4b239a2dfccb54dbcb4d_002.webp
+  - >-
+    /images/news/legacy/event/2023-09-08-event-survey-hub-double-survey-point-event/989e5e5810aa4066bc3b4e53d53359e8.webp
+  - >-
+    /images/news/legacy/event/2023-09-08-event-survey-hub-double-survey-point-event/3dc7809a1bfd4b239a2dfccb54dbcb4d_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-09-08-event-survey-hub-double-survey-point-event/989e5e5810aa4066bc3b4e53d53359e8.webp)  

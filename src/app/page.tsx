@@ -15,10 +15,8 @@ export default async function Home() {
   const { t } = await getServerI18n(langKey)
   return (
     <>
-
-
       {/* HERO */}
-      <div className="relative w-full rounded-xl overflow-hidden mb-8 min-h-[200px] md:min-h-[260px] bg-zinc-900">
+      <div className="relative w-full rounded-xl overflow-hidden mb-2 min-h-[200px] md:min-h-[260px] bg-zinc-900">
         <Image
           src="/images/ui/og_home_no_text.webp"
           alt="Outerpedia - Outerplane Tier List, Characters & Gear"
@@ -50,7 +48,7 @@ export default async function Home() {
       </div>
 
       {/* Intro text */}
-      <section className="max-w-3xl mx-auto px-4 md:px-0 text-center text-sm text-gray-400 space-y-4 mb-12">
+      <section className="max-w-3xl mx-auto px-4 md:px-0 text-center text-sm text-gray-400 space-y-4 mb-8">
         <p dangerouslySetInnerHTML={{ __html: t('home.intro.1') }} />
         <p dangerouslySetInnerHTML={{ __html: t('home.intro.2') }} />
         <p dangerouslySetInnerHTML={{ __html: t('home.intro.3') }} />

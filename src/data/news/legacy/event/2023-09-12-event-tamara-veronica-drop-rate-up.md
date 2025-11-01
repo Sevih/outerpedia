@@ -1,12 +1,15 @@
 ---
-title: "[Event] Tamara & Veronica Drop Rate Up!"
-date: "2023-09-12T00:00:00.000Z"
-category: "event"
-id: "2023-09-12-event-tamara-veronica-drop-rate-up"
+title: '[Event] Tamara & Veronica Rate Up!'
+date: '2023-09-12T00:00:00.000Z'
+category: event
+id: 2023-09-12-event-tamara-veronica-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-09-12-event-tamara-veronica-drop-rate-up/bbde5162dfda400ba8369f43df896370.webp
-  - /images/news/legacy/event/2023-09-12-event-tamara-veronica-drop-rate-up/89555738d7e9470b8fd5e4b4e4ed2f30.webp
-  - /images/news/legacy/event/2023-09-12-event-tamara-veronica-drop-rate-up/bea3158891864433baa79ecb061d11d1.webp
+  - >-
+    /images/news/legacy/event/2023-09-12-event-tamara-veronica-drop-rate-up/bbde5162dfda400ba8369f43df896370.webp
+  - >-
+    /images/news/legacy/event/2023-09-12-event-tamara-veronica-drop-rate-up/89555738d7e9470b8fd5e4b4e4ed2f30.webp
+  - >-
+    /images/news/legacy/event/2023-09-12-event-tamara-veronica-drop-rate-up/bea3158891864433baa79ecb061d11d1.webp
 ---
 
 ![](/images/news/legacy/event/2023-09-12-event-tamara-veronica-drop-rate-up/bbde5162dfda400ba8369f43df896370.webp)  

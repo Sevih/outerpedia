@@ -1,11 +1,13 @@
 ---
-title: "[EVENT] Seasonal Limited Poolside Trickster Regina Drop Rate Up"
-date: "2024-07-16T00:00:00.000Z"
-category: "event"
-id: "2024-07-16-event-seasonal-limited-poolside-trickster-regina-drop-rate-up"
+title: '[EVENT] Limited Poolside Trickster Regina Rate Up'
+date: '2024-07-16T00:00:00.000Z'
+category: event
+id: 2024-07-16-event-seasonal-limited-poolside-trickster-regina-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-07-16-event-seasonal-limited-poolside-trickster-regina-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
-  - /images/news/legacy/event/2024-07-16-event-seasonal-limited-poolside-trickster-regina-drop-rate-up/62b21e2057cc4be088733d526bcd8bb9.webp
+  - >-
+    /images/news/legacy/event/2024-07-16-event-seasonal-limited-poolside-trickster-regina-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
+  - >-
+    /images/news/legacy/event/2024-07-16-event-seasonal-limited-poolside-trickster-regina-drop-rate-up/62b21e2057cc4be088733d526bcd8bb9.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-16-event-seasonal-limited-poolside-trickster-regina-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Tamara Drop Rate Up Screenshot Event"
-date: "2023-09-12T00:00:00.000Z"
-category: "event"
-id: "2023-09-12-event-tamara-drop-rate-up-screenshot-event"
+title: '[Event] Tamara Rate Up Screenshot'
+date: '2023-09-12T00:00:00.000Z'
+category: event
+id: 2023-09-12-event-tamara-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-09-12-event-tamara-drop-rate-up-screenshot-event/6c55c58df7ca42e5bc64e676907762cc.webp
-  - /images/news/legacy/event/2023-09-12-event-tamara-drop-rate-up-screenshot-event/b4ea036af8e84d9ba72c844c3c60b430_002.webp
+  - >-
+    /images/news/legacy/event/2023-09-12-event-tamara-drop-rate-up-screenshot-event/6c55c58df7ca42e5bc64e676907762cc.webp
+  - >-
+    /images/news/legacy/event/2023-09-12-event-tamara-drop-rate-up-screenshot-event/b4ea036af8e84d9ba72c844c3c60b430_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-09-12-event-tamara-drop-rate-up-screenshot-event/6c55c58df7ca42e5bc64e676907762cc.webp)  

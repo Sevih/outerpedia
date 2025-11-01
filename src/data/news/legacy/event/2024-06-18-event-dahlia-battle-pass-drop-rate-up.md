@@ -1,11 +1,13 @@
 ---
-title: "[Event] Dahlia Battle Pass Drop Rate Up"
-date: "2024-06-18T00:00:00.000Z"
-category: "event"
-id: "2024-06-18-event-dahlia-battle-pass-drop-rate-up"
+title: '[Event] Dahlia Battle Pass Rate Up'
+date: '2024-06-18T00:00:00.000Z'
+category: event
+id: 2024-06-18-event-dahlia-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-06-18-event-dahlia-battle-pass-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp
-  - /images/news/legacy/event/2024-06-18-event-dahlia-battle-pass-drop-rate-up/6481ad5d56be4263a0b8dfcc51c2d051.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-dahlia-battle-pass-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-dahlia-battle-pass-drop-rate-up/6481ad5d56be4263a0b8dfcc51c2d051.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-18-event-dahlia-battle-pass-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp)  

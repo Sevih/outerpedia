@@ -1,10 +1,11 @@
 ---
-title: "Developer's Note #3: Apologies for Service Instability"
-date: "2023-09-15T00:00:00.000Z"
-category: "developer-notes"
-id: "2023-09-15-developer-s-note-3-apologies-for-service-instability"
+title: 'Dev Note #3: Apologies for Service Instability'
+date: '2023-09-15T00:00:00.000Z'
+category: developer-notes
+id: 2023-09-15-developer-s-note-3-apologies-for-service-instability
 images:
-  - /images/news/legacy/developer-notes/2023-09-15-developer-s-note-3-apologies-for-service-instability/2ca3c80182804225a6b2fc76bdf3eb97.webp
+  - >-
+    /images/news/legacy/developer-notes/2023-09-15-developer-s-note-3-apologies-for-service-instability/2ca3c80182804225a6b2fc76bdf3eb97.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2023-09-15-developer-s-note-3-apologies-for-service-instability/2ca3c80182804225a6b2fc76bdf3eb97.webp)  

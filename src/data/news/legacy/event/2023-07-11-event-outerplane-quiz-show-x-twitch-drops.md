@@ -1,25 +1,41 @@
 ---
-title: "[Event] OUTERPLANE Quiz Show X Twitch Drops"
-date: "2023-07-11T00:00:00.000Z"
-category: "event"
-id: "2023-07-11-event-outerplane-quiz-show-x-twitch-drops"
+title: '[Event] OP Quiz Show X Twitch Drops'
+date: '2023-07-11T00:00:00.000Z'
+category: event
+id: 2023-07-11-event-outerplane-quiz-show-x-twitch-drops
 images:
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/bdb311970e284d36a6103868f31ddc05.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/ceb22e037cf34b30af324ca9bb8d68d8.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/08dcf7aa2d874fa685791d773e8db7d0.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/1c54a147b69244658c523f2950f47b8b.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/31f5943a18a44d71bb9949eba32efc5e.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/821e6f2e21ab4370bd2a4f4fe329fc65.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/8532679ba2654d9c8472744c935bfb78.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/84a5039cc26b41a9928af918e84e0efd.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/d4ffa68f72464aa9bb9515044c488f41.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/d52867e30da74c35a722e5a7382c7460.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/bcc57f0e2a8549fea57be7a0d6284f93.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/801f7f412cab470ebe1d62180992f63e.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/f80f1dc785ff4c30b565d27c444a0fef.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/1f67d8c953744e6a9f174b50d9fe0f96.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/e075fac7c6a246029b2acb496b6a5d37.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/1b399ec045634696a1f7afa142817368.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/bdb311970e284d36a6103868f31ddc05.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/ceb22e037cf34b30af324ca9bb8d68d8.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/08dcf7aa2d874fa685791d773e8db7d0.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/1c54a147b69244658c523f2950f47b8b.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/31f5943a18a44d71bb9949eba32efc5e.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/821e6f2e21ab4370bd2a4f4fe329fc65.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/8532679ba2654d9c8472744c935bfb78.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/84a5039cc26b41a9928af918e84e0efd.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/d4ffa68f72464aa9bb9515044c488f41.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/d52867e30da74c35a722e5a7382c7460.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/bcc57f0e2a8549fea57be7a0d6284f93.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/801f7f412cab470ebe1d62180992f63e.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/f80f1dc785ff4c30b565d27c444a0fef.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/1f67d8c953744e6a9f174b50d9fe0f96.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/e075fac7c6a246029b2acb496b6a5d37.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/1b399ec045634696a1f7afa142817368.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-11-event-outerplane-quiz-show-x-twitch-drops/bdb311970e284d36a6103868f31ddc05.webp)

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Astei Drop Rate Up Screenshot Event"
-date: "2023-08-29T00:00:00.000Z"
-category: "event"
-id: "2023-08-29-event-astei-drop-rate-up-screenshot-event"
+title: '[Event] Astei Rate Up Screenshot'
+date: '2023-08-29T00:00:00.000Z'
+category: event
+id: 2023-08-29-event-astei-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-08-29-event-astei-drop-rate-up-screenshot-event/271b2c020fda404cb94f56ff4d141bf9.webp
-  - /images/news/legacy/event/2023-08-29-event-astei-drop-rate-up-screenshot-event/58c34cc634604e0f982d0f8af95ebf51_002.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-astei-drop-rate-up-screenshot-event/271b2c020fda404cb94f56ff4d141bf9.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-astei-drop-rate-up-screenshot-event/58c34cc634604e0f982d0f8af95ebf51_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-29-event-astei-drop-rate-up-screenshot-event/271b2c020fda404cb94f56ff4d141bf9.webp)  

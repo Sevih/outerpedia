@@ -1,12 +1,15 @@
 ---
-title: "[Event] Edelweiss & Stella Drop Rate Up!"
-date: "2024-04-09T00:00:00.000Z"
-category: "event"
-id: "2024-04-09-event-edelweiss-stella-drop-rate-up"
+title: '[Event] Edelweiss & Stella Rate Up!'
+date: '2024-04-09T00:00:00.000Z'
+category: event
+id: 2024-04-09-event-edelweiss-stella-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-04-09-event-edelweiss-stella-drop-rate-up/860b9d68cdec4e8ea945c8112ecfc2f5.webp
-  - /images/news/legacy/event/2024-04-09-event-edelweiss-stella-drop-rate-up/05c047cc87d44a4d870e5f5568780cce.webp
-  - /images/news/legacy/event/2024-04-09-event-edelweiss-stella-drop-rate-up/22efa2a5930b4ceaa3f420f8e25757f0.webp
+  - >-
+    /images/news/legacy/event/2024-04-09-event-edelweiss-stella-drop-rate-up/860b9d68cdec4e8ea945c8112ecfc2f5.webp
+  - >-
+    /images/news/legacy/event/2024-04-09-event-edelweiss-stella-drop-rate-up/05c047cc87d44a4d870e5f5568780cce.webp
+  - >-
+    /images/news/legacy/event/2024-04-09-event-edelweiss-stella-drop-rate-up/22efa2a5930b4ceaa3f420f8e25757f0.webp
 ---
 
 ![](/images/news/legacy/event/2024-04-09-event-edelweiss-stella-drop-rate-up/860b9d68cdec4e8ea945c8112ecfc2f5.webp)  

@@ -1,12 +1,15 @@
 ---
-title: "[Event] Leo & Eternal Drop Rate Up!"
-date: "2024-03-12T00:00:00.000Z"
-category: "event"
-id: "2024-03-12-event-leo-eternal-drop-rate-up"
+title: '[Event] Leo & Eternal Rate Up!'
+date: '2024-03-12T00:00:00.000Z'
+category: event
+id: 2024-03-12-event-leo-eternal-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-03-12-event-leo-eternal-drop-rate-up/10b73a70dbdd432ab1d9c660c6a02e9f.webp
-  - /images/news/legacy/event/2024-03-12-event-leo-eternal-drop-rate-up/84d0a9ea745f4737809a951215fdc160.webp
-  - /images/news/legacy/event/2024-03-12-event-leo-eternal-drop-rate-up/571012e617d84d89b1f43ba56fb2c120.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-leo-eternal-drop-rate-up/10b73a70dbdd432ab1d9c660c6a02e9f.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-leo-eternal-drop-rate-up/84d0a9ea745f4737809a951215fdc160.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-leo-eternal-drop-rate-up/571012e617d84d89b1f43ba56fb2c120.webp
 ---
 
 ![](/images/news/legacy/event/2024-03-12-event-leo-eternal-drop-rate-up/10b73a70dbdd432ab1d9c660c6a02e9f.webp)  

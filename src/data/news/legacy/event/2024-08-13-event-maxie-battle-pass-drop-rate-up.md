@@ -1,11 +1,13 @@
 ---
-title: "[Event] Maxie Battle Pass Drop Rate Up"
-date: "2024-08-13T00:00:00.000Z"
-category: "event"
-id: "2024-08-13-event-maxie-battle-pass-drop-rate-up"
+title: '[Event] Maxie Battle Pass Rate Up'
+date: '2024-08-13T00:00:00.000Z'
+category: event
+id: 2024-08-13-event-maxie-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-08-13-event-maxie-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp
-  - /images/news/legacy/event/2024-08-13-event-maxie-battle-pass-drop-rate-up/8811de564cb546debadbfe80c9cc15bf.webp
+  - >-
+    /images/news/legacy/event/2024-08-13-event-maxie-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp
+  - >-
+    /images/news/legacy/event/2024-08-13-event-maxie-battle-pass-drop-rate-up/8811de564cb546debadbfe80c9cc15bf.webp
 ---
 
 ![](/images/news/legacy/event/2024-08-13-event-maxie-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp)  

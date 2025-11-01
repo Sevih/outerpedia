@@ -1,10 +1,11 @@
 ---
-title: "[Event] Special Request Drop Rate Up Event"
-date: "2023-07-10T00:00:00.000Z"
-category: "event"
-id: "2023-07-10-event-special-request-drop-rate-up-event"
+title: '[Event] Special Request Rate Up'
+date: '2023-07-10T00:00:00.000Z'
+category: event
+id: 2023-07-10-event-special-request-drop-rate-up-event
 images:
-  - /images/news/legacy/event/2023-07-10-event-special-request-drop-rate-up-event/996bc6a914fe46fcbd0e896f8064384e.webp
+  - >-
+    /images/news/legacy/event/2023-07-10-event-special-request-drop-rate-up-event/996bc6a914fe46fcbd0e896f8064384e.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-10-event-special-request-drop-rate-up-event/996bc6a914fe46fcbd0e896f8064384e.webp)

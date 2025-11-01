@@ -1,11 +1,13 @@
 ---
-title: "[Event] Kanon Drop Rate Up!"
-date: "2024-10-22T00:00:00.000Z"
-category: "event"
-id: "2024-10-22-event-kanon-drop-rate-up"
+title: '[Event] Kanon Rate Up!'
+date: '2024-10-22T00:00:00.000Z'
+category: event
+id: 2024-10-22-event-kanon-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-10-22-event-kanon-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2024-10-22-event-kanon-drop-rate-up/66b834cf726c4c2c8fe99c4b598a3ac6.webp
+  - >-
+    /images/news/legacy/event/2024-10-22-event-kanon-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2024-10-22-event-kanon-drop-rate-up/66b834cf726c4c2c8fe99c4b598a3ac6.webp
 ---
 
 ![](/images/news/legacy/event/2024-10-22-event-kanon-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

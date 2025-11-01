@@ -1,11 +1,13 @@
 ---
-title: "[Event] Dahlia Drop Rate Up Screenshot Event"
-date: "2023-12-19T00:00:00.000Z"
-category: "event"
-id: "2023-12-19-event-dahlia-drop-rate-up-screenshot-event"
+title: '[Event] Dahlia Rate Up Screenshot'
+date: '2023-12-19T00:00:00.000Z'
+category: event
+id: 2023-12-19-event-dahlia-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-12-19-event-dahlia-drop-rate-up-screenshot-event/69eaa51f765045eda51e48d7b4ee62ec.webp
-  - /images/news/legacy/event/2023-12-19-event-dahlia-drop-rate-up-screenshot-event/1ee28016de364e3cbe1be3cc83c386d3_002.webp
+  - >-
+    /images/news/legacy/event/2023-12-19-event-dahlia-drop-rate-up-screenshot-event/69eaa51f765045eda51e48d7b4ee62ec.webp
+  - >-
+    /images/news/legacy/event/2023-12-19-event-dahlia-drop-rate-up-screenshot-event/1ee28016de364e3cbe1be3cc83c386d3_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-12-19-event-dahlia-drop-rate-up-screenshot-event/69eaa51f765045eda51e48d7b4ee62ec.webp)  

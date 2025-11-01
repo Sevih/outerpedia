@@ -1,14 +1,20 @@
 ---
-title: "[Event]OUTERPLANE Festival Celebration! Merchandise Poll Event(Completed)"
-date: "2024-07-30T00:00:00.000Z"
-category: "event"
-id: "2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed"
+title: '[Event]OP Festival Celebration! Merchandise Poll (Completed)'
+date: '2024-07-30T00:00:00.000Z'
+category: event
+id: >-
+  2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed
 images:
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/349332a5293c43db99d10f0eb42edfad.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/0456f0759c2f44838b7461cd0693e5df_002.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/bde9e3c772ca47b68d072404aa0ed0ac.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/71bd14f3d3274c03831851abf9fbf6a5.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/2e9395e0904d43c9ba5c4dac1366ff5f.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/349332a5293c43db99d10f0eb42edfad.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/0456f0759c2f44838b7461cd0693e5df_002.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/bde9e3c772ca47b68d072404aa0ed0ac.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/71bd14f3d3274c03831851abf9fbf6a5.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/2e9395e0904d43c9ba5c4dac1366ff5f.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-30-event-outerplane-festival-celebration-merchandise-poll-event-completed/349332a5293c43db99d10f0eb42edfad.webp)  

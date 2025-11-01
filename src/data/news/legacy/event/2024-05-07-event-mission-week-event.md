@@ -1,13 +1,17 @@
 ---
-title: "[Event] Mission Week Event"
-date: "2024-05-07T00:00:00.000Z"
-category: "event"
-id: "2024-05-07-event-mission-week-event"
+title: '[Event] Mission Week'
+date: '2024-05-07T00:00:00.000Z'
+category: event
+id: 2024-05-07-event-mission-week-event
 images:
-  - /images/news/legacy/event/2024-05-07-event-mission-week-event/b33d5bbcbd5446d4b23bb451887dc514.webp
-  - /images/news/legacy/event/2024-05-07-event-mission-week-event/59ffa75ff9f74da38c4f0c6f7dad0365.webp
-  - /images/news/legacy/event/2024-05-07-event-mission-week-event/b88f1b2d710d49d69e07c0771324ae48.webp
-  - /images/news/legacy/event/2024-05-07-event-mission-week-event/373d1e2856fd4313aa9fbb086a4e4677.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-mission-week-event/b33d5bbcbd5446d4b23bb451887dc514.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-mission-week-event/59ffa75ff9f74da38c4f0c6f7dad0365.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-mission-week-event/b88f1b2d710d49d69e07c0771324ae48.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-mission-week-event/373d1e2856fd4313aa9fbb086a4e4677.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-07-event-mission-week-event/b33d5bbcbd5446d4b23bb451887dc514.webp)  

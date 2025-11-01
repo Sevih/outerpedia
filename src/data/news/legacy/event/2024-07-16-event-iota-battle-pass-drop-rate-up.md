@@ -1,11 +1,13 @@
 ---
-title: "[Event] Iota Battle Pass Drop Rate Up"
-date: "2024-07-16T00:00:00.000Z"
-category: "event"
-id: "2024-07-16-event-iota-battle-pass-drop-rate-up"
+title: '[Event] Iota Battle Pass Rate Up'
+date: '2024-07-16T00:00:00.000Z'
+category: event
+id: 2024-07-16-event-iota-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-07-16-event-iota-battle-pass-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp
-  - /images/news/legacy/event/2024-07-16-event-iota-battle-pass-drop-rate-up/ca31474311cb4be0854a71b7e2366604.webp
+  - >-
+    /images/news/legacy/event/2024-07-16-event-iota-battle-pass-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp
+  - >-
+    /images/news/legacy/event/2024-07-16-event-iota-battle-pass-drop-rate-up/ca31474311cb4be0854a71b7e2366604.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-16-event-iota-battle-pass-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp)  

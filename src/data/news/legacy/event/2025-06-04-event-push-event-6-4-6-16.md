@@ -1,10 +1,11 @@
 ---
-title: "[Event] Push Event (6/4~6/16)"
-date: "2025-06-04T00:00:00.000Z"
-category: "event"
-id: "2025-06-04-event-push-event-6-4-6-16"
+title: '[Event] Push (6/4~6/16)'
+date: '2025-06-04T00:00:00.000Z'
+category: event
+id: 2025-06-04-event-push-event-6-4-6-16
 images:
-  - /images/news/legacy/event/2025-06-04-event-push-event-6-4-6-16/4759c200b4a94ca4a56a76260f0d31bb.webp
+  - >-
+    /images/news/legacy/event/2025-06-04-event-push-event-6-4-6-16/4759c200b4a94ca4a56a76260f0d31bb.webp
 ---
 
 ![](/images/news/legacy/event/2025-06-04-event-push-event-6-4-6-16/4759c200b4a94ca4a56a76260f0d31bb.webp)  

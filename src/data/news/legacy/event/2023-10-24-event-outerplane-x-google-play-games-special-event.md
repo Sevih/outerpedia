@@ -1,10 +1,11 @@
 ---
-title: "[Event] OUTERPLANE x Google Play Games Special Event"
-date: "2023-10-24T00:00:00.000Z"
-category: "event"
-id: "2023-10-24-event-outerplane-x-google-play-games-special-event"
+title: '[Event] OP x Google Play Games Special'
+date: '2023-10-24T00:00:00.000Z'
+category: event
+id: 2023-10-24-event-outerplane-x-google-play-games-special-event
 images:
-  - /images/news/legacy/event/2023-10-24-event-outerplane-x-google-play-games-special-event/4f3238110cd94e4282175a99b98fd533.webp
+  - >-
+    /images/news/legacy/event/2023-10-24-event-outerplane-x-google-play-games-special-event/4f3238110cd94e4282175a99b98fd533.webp
 ---
 
 ![](/images/news/legacy/event/2023-10-24-event-outerplane-x-google-play-games-special-event/4f3238110cd94e4282175a99b98fd533.webp)  

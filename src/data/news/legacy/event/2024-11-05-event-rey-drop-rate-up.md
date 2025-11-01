@@ -1,11 +1,13 @@
 ---
-title: "[Event] Rey Drop Rate Up!"
-date: "2024-11-05T00:00:00.000Z"
-category: "event"
-id: "2024-11-05-event-rey-drop-rate-up"
+title: '[Event] Rey Rate Up!'
+date: '2024-11-05T00:00:00.000Z'
+category: event
+id: 2024-11-05-event-rey-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-11-05-event-rey-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2024-11-05-event-rey-drop-rate-up/fd4bb08a913d4afba9cfff7e23f29ac1.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-rey-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-rey-drop-rate-up/fd4bb08a913d4afba9cfff7e23f29ac1.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-05-event-rey-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

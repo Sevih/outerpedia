@@ -1,10 +1,11 @@
 ---
-title: "[Event] Special Request: Ecology Study Drop Rate Up Event"
-date: "2023-10-02T00:00:00.000Z"
-category: "event"
-id: "2023-10-02-event-special-request-ecology-study-drop-rate-up-event"
+title: '[Event]  Ecology Study Rate Up'
+date: '2023-10-02T00:00:00.000Z'
+category: event
+id: 2023-10-02-event-special-request-ecology-study-drop-rate-up-event
 images:
-  - /images/news/legacy/event/2023-10-02-event-special-request-ecology-study-drop-rate-up-event/b7b874754a2142a597dbf3773f491d31.webp
+  - >-
+    /images/news/legacy/event/2023-10-02-event-special-request-ecology-study-drop-rate-up-event/b7b874754a2142a597dbf3773f491d31.webp
 ---
 
 ![](/images/news/legacy/event/2023-10-02-event-special-request-ecology-study-drop-rate-up-event/b7b874754a2142a597dbf3773f491d31.webp)  

@@ -1,12 +1,15 @@
 ---
-title: "[Event] Kate's Workshop Crafting Gold Discount Event"
-date: "2024-03-04T00:00:00.000Z"
-category: "event"
-id: "2024-03-04-event-kate-s-workshop-crafting-gold-discount-event"
+title: '[Event] Crafting Gold Discount'
+date: '2024-03-04T00:00:00.000Z'
+category: event
+id: 2024-03-04-event-kate-s-workshop-crafting-gold-discount-event
 images:
-  - /images/news/legacy/event/2024-03-04-event-kate-s-workshop-crafting-gold-discount-event/63f8560101d54b88aa55892f276f8215.webp
-  - /images/news/legacy/event/2024-03-04-event-kate-s-workshop-crafting-gold-discount-event/1458c41f7fa442ce9df3a0b6897d3733_002.webp
-  - /images/news/legacy/event/2024-03-04-event-kate-s-workshop-crafting-gold-discount-event/ed8ad32019c148938f52cea569915e67.webp
+  - >-
+    /images/news/legacy/event/2024-03-04-event-kate-s-workshop-crafting-gold-discount-event/63f8560101d54b88aa55892f276f8215.webp
+  - >-
+    /images/news/legacy/event/2024-03-04-event-kate-s-workshop-crafting-gold-discount-event/1458c41f7fa442ce9df3a0b6897d3733_002.webp
+  - >-
+    /images/news/legacy/event/2024-03-04-event-kate-s-workshop-crafting-gold-discount-event/ed8ad32019c148938f52cea569915e67.webp
 ---
 
 ![](/images/news/legacy/event/2024-03-04-event-kate-s-workshop-crafting-gold-discount-event/63f8560101d54b88aa55892f276f8215.webp)  

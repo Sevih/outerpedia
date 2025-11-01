@@ -1,12 +1,15 @@
 ---
-title: "[Event] Vlada Drop Rate Up Screenshot Event"
-date: "2024-02-27T00:00:00.000Z"
-category: "event"
-id: "2024-02-27-event-vlada-drop-rate-up-screenshot-event"
+title: '[Event] Vlada Rate Up Screenshot'
+date: '2024-02-27T00:00:00.000Z'
+category: event
+id: 2024-02-27-event-vlada-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2024-02-27-event-vlada-drop-rate-up-screenshot-event/a273c3a2e24e4cbe8e5fa57a1991cb36.webp
-  - /images/news/legacy/event/2024-02-27-event-vlada-drop-rate-up-screenshot-event/37f649cbea09417d8bab4b408eefe40a_002.webp
-  - /images/news/legacy/event/2024-02-27-event-vlada-drop-rate-up-screenshot-event/897efdc7193d4ffabc97fb5f4dced9fd.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-vlada-drop-rate-up-screenshot-event/a273c3a2e24e4cbe8e5fa57a1991cb36.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-vlada-drop-rate-up-screenshot-event/37f649cbea09417d8bab4b408eefe40a_002.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-vlada-drop-rate-up-screenshot-event/897efdc7193d4ffabc97fb5f4dced9fd.webp
 ---
 
 ![](/images/news/legacy/event/2024-02-27-event-vlada-drop-rate-up-screenshot-event/a273c3a2e24e4cbe8e5fa57a1991cb36.webp)  

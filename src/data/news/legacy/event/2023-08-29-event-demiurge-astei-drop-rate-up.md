@@ -1,11 +1,13 @@
 ---
-title: "[Event] Demiurge Astei Drop Rate Up!"
-date: "2023-08-29T00:00:00.000Z"
-category: "event"
-id: "2023-08-29-event-demiurge-astei-drop-rate-up"
+title: '[Event] Demiurge Astei Rate Up!'
+date: '2023-08-29T00:00:00.000Z'
+category: event
+id: 2023-08-29-event-demiurge-astei-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-08-29-event-demiurge-astei-drop-rate-up/c6f803079cc949b691cce043ac12bef8.webp
-  - /images/news/legacy/event/2023-08-29-event-demiurge-astei-drop-rate-up/02bc45bef65343c68ca3375414074806.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-demiurge-astei-drop-rate-up/c6f803079cc949b691cce043ac12bef8.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-demiurge-astei-drop-rate-up/02bc45bef65343c68ca3375414074806.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-29-event-demiurge-astei-drop-rate-up/c6f803079cc949b691cce043ac12bef8.webp)  

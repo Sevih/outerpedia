@@ -1,12 +1,15 @@
 ---
-title: "[Event] Push Event (3/26~4/8)(Added on 4/5)"
-date: "2024-03-26T00:00:00.000Z"
-category: "event"
-id: "2024-03-26-event-push-event-3-26-4-8-added-on-4-5"
+title: '[Event] Push (3/26~4/8)(Added on 4/5)'
+date: '2024-03-26T00:00:00.000Z'
+category: event
+id: 2024-03-26-event-push-event-3-26-4-8-added-on-4-5
 images:
-  - /images/news/legacy/event/2024-03-26-event-push-event-3-26-4-8-added-on-4-5/394cdfa26b114bca91a018b4b4658dbf.webp
-  - /images/news/legacy/event/2024-03-26-event-push-event-3-26-4-8-added-on-4-5/05a96ed05fe74543b50e0e68bde66284.webp
-  - /images/news/legacy/event/2024-03-26-event-push-event-3-26-4-8-added-on-4-5/a43acf2702e141f0b8e8aa0fa0649c38.webp
+  - >-
+    /images/news/legacy/event/2024-03-26-event-push-event-3-26-4-8-added-on-4-5/394cdfa26b114bca91a018b4b4658dbf.webp
+  - >-
+    /images/news/legacy/event/2024-03-26-event-push-event-3-26-4-8-added-on-4-5/05a96ed05fe74543b50e0e68bde66284.webp
+  - >-
+    /images/news/legacy/event/2024-03-26-event-push-event-3-26-4-8-added-on-4-5/a43acf2702e141f0b8e8aa0fa0649c38.webp
 ---
 
 ![](/images/news/legacy/event/2024-03-26-event-push-event-3-26-4-8-added-on-4-5/394cdfa26b114bca91a018b4b4658dbf.webp)

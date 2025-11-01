@@ -1,11 +1,14 @@
 ---
-title: "[Event] My Favorite Hero Mobile Wallpaper Upload Event (Reward distributed)"
-date: "2024-11-26T00:00:00.000Z"
-category: "event"
-id: "2024-11-26-event-my-favorite-hero-mobile-wallpaper-upload-event-reward-distributed"
+title: '[Event] My Favorite Hero Mobile Wallpaper Upload (Rewards Sent)'
+date: '2024-11-26T00:00:00.000Z'
+category: event
+id: >-
+  2024-11-26-event-my-favorite-hero-mobile-wallpaper-upload-event-reward-distributed
 images:
-  - /images/news/legacy/event/2024-11-26-event-my-favorite-hero-mobile-wallpaper-upload-event-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2024-11-26-event-my-favorite-hero-mobile-wallpaper-upload-event-reward-distributed/a9baeba7975a4bef9fa60472d9d66e31.webp
+  - >-
+    /images/news/legacy/event/2024-11-26-event-my-favorite-hero-mobile-wallpaper-upload-event-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2024-11-26-event-my-favorite-hero-mobile-wallpaper-upload-event-reward-distributed/a9baeba7975a4bef9fa60472d9d66e31.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-26-event-my-favorite-hero-mobile-wallpaper-upload-event-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)  

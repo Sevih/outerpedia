@@ -1,11 +1,13 @@
 ---
-title: "[Event] Caren Battle Pass Drop Rate Up"
-date: "2024-12-17T00:00:00.000Z"
-category: "event"
-id: "2024-12-17-event-caren-battle-pass-drop-rate-up"
+title: '[Event] Caren Battle Pass Rate Up'
+date: '2024-12-17T00:00:00.000Z'
+category: event
+id: 2024-12-17-event-caren-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-12-17-event-caren-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp
-  - /images/news/legacy/event/2024-12-17-event-caren-battle-pass-drop-rate-up/a0972c71a73d4955bea993566ce4ef89.webp
+  - >-
+    /images/news/legacy/event/2024-12-17-event-caren-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp
+  - >-
+    /images/news/legacy/event/2024-12-17-event-caren-battle-pass-drop-rate-up/a0972c71a73d4955bea993566ce4ef89.webp
 ---
 
 ![](/images/news/legacy/event/2024-12-17-event-caren-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp)  

@@ -1,12 +1,15 @@
 ---
-title: "[Event] Proxxon's Ladder Game Event (Reward Distribution Completed)"
-date: "2024-05-21T00:00:00.000Z"
-category: "event"
-id: "2024-05-21-event-proxxon-s-ladder-game-event-reward-distribution-completed"
+title: '[Event] Proxxon''s Ladder Game (Rewards Sent)'
+date: '2024-05-21T00:00:00.000Z'
+category: event
+id: 2024-05-21-event-proxxon-s-ladder-game-event-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-05-21-event-proxxon-s-ladder-game-event-reward-distribution-completed/c1851c3efd614683af39b19df0e445e2.webp
-  - /images/news/legacy/event/2024-05-21-event-proxxon-s-ladder-game-event-reward-distribution-completed/c5e5c971465c4f05a3fa21dae4e9687f_002.webp
-  - /images/news/legacy/event/2024-05-21-event-proxxon-s-ladder-game-event-reward-distribution-completed/88a13e84e8d8406a8641b937bf7f1a1b.webp
+  - >-
+    /images/news/legacy/event/2024-05-21-event-proxxon-s-ladder-game-event-reward-distribution-completed/c1851c3efd614683af39b19df0e445e2.webp
+  - >-
+    /images/news/legacy/event/2024-05-21-event-proxxon-s-ladder-game-event-reward-distribution-completed/c5e5c971465c4f05a3fa21dae4e9687f_002.webp
+  - >-
+    /images/news/legacy/event/2024-05-21-event-proxxon-s-ladder-game-event-reward-distribution-completed/88a13e84e8d8406a8641b937bf7f1a1b.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-21-event-proxxon-s-ladder-game-event-reward-distribution-completed/c1851c3efd614683af39b19df0e445e2.webp)  

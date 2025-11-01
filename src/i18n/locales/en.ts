@@ -535,7 +535,7 @@ const en = {
   'char.twitter.title': "{name} – Character Guide | Outerpedia",
   'char.twitter.desc': '{element} {class} {name} — skills, ranking, and build recommendations.',
   //
-  'chars.meta.title': 'Outerplane Characters – Full Database Updated {monthYear} | Outerpedia',
+  'chars.meta.title': 'Outerplane Characters – Database Updated {monthYear} | Outerpedia',
   'chars.meta.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
   'chars.og.title': 'Outerplane Characters – Full Database Updated {monthYear} | Outerpedia',
   'chars.og.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',

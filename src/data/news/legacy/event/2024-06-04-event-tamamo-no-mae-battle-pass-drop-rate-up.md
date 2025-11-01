@@ -1,11 +1,13 @@
 ---
-title: "[Event] Tamamo-no-Mae Battle Pass Drop Rate Up"
-date: "2024-06-04T00:00:00.000Z"
-category: "event"
-id: "2024-06-04-event-tamamo-no-mae-battle-pass-drop-rate-up"
+title: '[Event] Tamamo-no-Mae Battle Pass Rate Up'
+date: '2024-06-04T00:00:00.000Z'
+category: event
+id: 2024-06-04-event-tamamo-no-mae-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-06-04-event-tamamo-no-mae-battle-pass-drop-rate-up/b091878edc32460ba2b0083974011ae2.webp
-  - /images/news/legacy/event/2024-06-04-event-tamamo-no-mae-battle-pass-drop-rate-up/ed26cc169ce3497d86f0c0c55060a549.webp
+  - >-
+    /images/news/legacy/event/2024-06-04-event-tamamo-no-mae-battle-pass-drop-rate-up/b091878edc32460ba2b0083974011ae2.webp
+  - >-
+    /images/news/legacy/event/2024-06-04-event-tamamo-no-mae-battle-pass-drop-rate-up/ed26cc169ce3497d86f0c0c55060a549.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-04-event-tamamo-no-mae-battle-pass-drop-rate-up/b091878edc32460ba2b0083974011ae2.webp)  

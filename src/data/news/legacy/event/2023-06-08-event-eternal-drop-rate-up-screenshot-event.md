@@ -1,10 +1,11 @@
 ---
-title: "[Event] Eternal Drop Rate Up Screenshot Event"
-date: "2023-06-08T00:00:00.000Z"
-category: "event"
-id: "2023-06-08-event-eternal-drop-rate-up-screenshot-event"
+title: '[Event] Eternal Rate Up Screenshot'
+date: '2023-06-08T00:00:00.000Z'
+category: event
+id: 2023-06-08-event-eternal-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-06-08-event-eternal-drop-rate-up-screenshot-event/8b745daba2ad4d41bf4102759d82d478.webp
+  - >-
+    /images/news/legacy/event/2023-06-08-event-eternal-drop-rate-up-screenshot-event/8b745daba2ad4d41bf4102759d82d478.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-08-event-eternal-drop-rate-up-screenshot-event/8b745daba2ad4d41bf4102759d82d478.webp)

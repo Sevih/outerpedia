@@ -1,11 +1,13 @@
 ---
-title: "[Event] Gnosis Nella's Gift Selection Chest (11/15 Reward distributed)"
-date: "2024-11-05T00:00:00.000Z"
-category: "event"
-id: "2024-11-05-event-gnosis-nella-s-gift-selection-chest-11-15-reward-distributed"
+title: '[Event] Gnosis Nella''s Gift Selection Chest (11/15 Rewards Sent)'
+date: '2024-11-05T00:00:00.000Z'
+category: event
+id: 2024-11-05-event-gnosis-nella-s-gift-selection-chest-11-15-reward-distributed
 images:
-  - /images/news/legacy/event/2024-11-05-event-gnosis-nella-s-gift-selection-chest-11-15-reward-distributed/7cab40b6a7254cab899e818e466b4ff5.webp
-  - /images/news/legacy/event/2024-11-05-event-gnosis-nella-s-gift-selection-chest-11-15-reward-distributed/f251f02f95c64415838becf582d4262f_002.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-gnosis-nella-s-gift-selection-chest-11-15-reward-distributed/7cab40b6a7254cab899e818e466b4ff5.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-gnosis-nella-s-gift-selection-chest-11-15-reward-distributed/f251f02f95c64415838becf582d4262f_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-05-event-gnosis-nella-s-gift-selection-chest-11-15-reward-distributed/7cab40b6a7254cab899e818e466b4ff5.webp)

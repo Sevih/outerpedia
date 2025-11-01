@@ -2,8 +2,6 @@
 import { NextResponse } from 'next/server'
 import fs from 'node:fs'
 import path from 'node:path'
-import { VA_AVAILABLE_LANGUAGES } from '@/tenants/config'
-import { getNewsSlugs, type NewsCategory } from '@/lib/news'
 
 // ——— Domains (fixes, car 3 tenants EN/JP/KR) ———
 const DOMAIN_EN = 'https://outerpedia.com'
@@ -24,14 +22,6 @@ const ITEM_FILES: Array<{ file: string; url: string }> = [
 const STATIC_PAGES = [
     '/', '/characters', '/equipments', '/tierlist', '/guides',
     '/changelog', '/tools', '/legal', '/coupons', '/patch-history',
-]
-
-const NEWS_CATEGORIES: NewsCategory[] = [
-    // VA Live categories
-    'notice', 'maintenance', 'issues', 'event', 'winners',
-    // Legacy categories
-    'patchnotes', 'compendium', 'developer-notes', 'official-4-cut-cartoon',
-    'probabilities', 'world-introduction', 'media-archives',
 ]
 
 function xmlEscape(s: string) {
@@ -107,28 +97,7 @@ function collectPages(): Page[] {
         }
     }
 
-    // Patch History (legacy + live articles)
-    // Les articles "live" sont spécifiques à chaque langue (live-en-, live-kr-, live-ja-)
-    // et ne doivent pas avoir d'alternates. Seuls les articles legacy ont des alternates.
-    const newsPathsSet = new Set<string>()
-    for (const lang of VA_AVAILABLE_LANGUAGES) {
-        for (const category of NEWS_CATEGORIES) {
-            const slugs = getNewsSlugs(category, lang)
-            for (const slug of slugs) {
-                const newsPath = `/patch-history/${category}/${slug}`
-                if (!newsPathsSet.has(newsPath)) {
-                    newsPathsSet.add(newsPath)
-                    // Marquer si c'est un article live (spécifique à une langue)
-                    const isLiveArticle = slug.startsWith('live-')
-                    pages.push({
-                        path: newsPath,
-                        lastmod: new Date().toISOString().split('T')[0],
-                        isLiveArticle // Flag pour désactiver les alternates
-                    })
-                }
-            }
-        }
-    }
+    // Patch History pages are excluded from sitemap (noindex)
 
     // Dédoublonnage
     const map = new Map<string, Page>()

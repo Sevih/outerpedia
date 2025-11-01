@@ -1,10 +1,11 @@
 ---
-title: "[Closed] OUTERPLANE Quiz Event!"
-date: "2023-04-17T00:00:00.000Z"
-category: "event"
-id: "2023-04-17-closed-outerplane-quiz-event"
+title: '[Closed] OP Quiz Event!'
+date: '2023-04-17T00:00:00.000Z'
+category: event
+id: 2023-04-17-closed-outerplane-quiz-event
 images:
-  - /images/news/legacy/event/2023-04-17-closed-outerplane-quiz-event/d03a9010334147a89811df988f327dfe_002.webp
+  - >-
+    /images/news/legacy/event/2023-04-17-closed-outerplane-quiz-event/d03a9010334147a89811df988f327dfe_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-04-17-closed-outerplane-quiz-event/d03a9010334147a89811df988f327dfe_002.webp)

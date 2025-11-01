@@ -1,12 +1,15 @@
 ---
-title: "[Event] Maxie Quiz Event(Reward Distribution Completed)"
-date: "2024-08-13T00:00:00.000Z"
-category: "event"
-id: "2024-08-13-event-maxie-quiz-event-reward-distribution-completed"
+title: '[Event] Maxie Quiz (Rewards Sent)'
+date: '2024-08-13T00:00:00.000Z'
+category: event
+id: 2024-08-13-event-maxie-quiz-event-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-08-13-event-maxie-quiz-event-reward-distribution-completed/36cb0ba77b9744fb9b4bc1efd899ead4.webp
-  - /images/news/legacy/event/2024-08-13-event-maxie-quiz-event-reward-distribution-completed/69d8970a5bcc47eaa152cc4382ddaf59.webp
-  - https://page.onstove.com/[Event]%20Maxie%20Quiz%20Event(Reward%20Distribution%20Completed)_fichiers/09_%EA%B0%90%EC%82%AC.png
+  - >-
+    /images/news/legacy/event/2024-08-13-event-maxie-quiz-event-reward-distribution-completed/36cb0ba77b9744fb9b4bc1efd899ead4.webp
+  - >-
+    /images/news/legacy/event/2024-08-13-event-maxie-quiz-event-reward-distribution-completed/69d8970a5bcc47eaa152cc4382ddaf59.webp
+  - >-
+    https://page.onstove.com/[Event]%20Maxie%20Quiz%20Event(Reward%20Distribution%20Completed)_fichiers/09_%EA%B0%90%EC%82%AC.png
 ---
 
 ![](/images/news/legacy/event/2024-08-13-event-maxie-quiz-event-reward-distribution-completed/36cb0ba77b9744fb9b4bc1efd899ead4.webp)  

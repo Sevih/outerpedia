@@ -1,12 +1,15 @@
 ---
-title: "[Event] Find the Owner of the Shoe♬ Event (2/14 Reward distributed)"
-date: "2025-01-24T00:00:00.000Z"
-category: "event"
-id: "2025-01-24-event-find-the-owner-of-the-shoe-event-2-14-reward-distributed"
+title: '[Event] Find the Owner of the Shoe♬ (2/14 Rewards Sent)'
+date: '2025-01-24T00:00:00.000Z'
+category: event
+id: 2025-01-24-event-find-the-owner-of-the-shoe-event-2-14-reward-distributed
 images:
-  - /images/news/legacy/event/2025-01-24-event-find-the-owner-of-the-shoe-event-2-14-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2025-01-24-event-find-the-owner-of-the-shoe-event-2-14-reward-distributed/b5c2896fcd664ad1872733f80a89b11c_002.webp
-  - /images/news/legacy/event/2025-01-24-event-find-the-owner-of-the-shoe-event-2-14-reward-distributed/4060eedf76c24d81855545e3902ba2e2.webp
+  - >-
+    /images/news/legacy/event/2025-01-24-event-find-the-owner-of-the-shoe-event-2-14-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2025-01-24-event-find-the-owner-of-the-shoe-event-2-14-reward-distributed/b5c2896fcd664ad1872733f80a89b11c_002.webp
+  - >-
+    /images/news/legacy/event/2025-01-24-event-find-the-owner-of-the-shoe-event-2-14-reward-distributed/4060eedf76c24d81855545e3902ba2e2.webp
 ---
 
 ![](/images/news/legacy/event/2025-01-24-event-find-the-owner-of-the-shoe-event-2-14-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

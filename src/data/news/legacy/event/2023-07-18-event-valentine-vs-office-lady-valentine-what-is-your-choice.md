@@ -1,12 +1,15 @@
 ---
-title: "[Event] Valentine vs Office Lady Valentine - What is Your Choice?"
-date: "2023-07-18T00:00:00.000Z"
-category: "event"
-id: "2023-07-18-event-valentine-vs-office-lady-valentine-what-is-your-choice"
+title: '[Event] Valentine vs Office Lady Valentine - Choose!'
+date: '2023-07-18T00:00:00.000Z'
+category: event
+id: 2023-07-18-event-valentine-vs-office-lady-valentine-what-is-your-choice
 images:
-  - /images/news/legacy/event/2023-07-18-event-valentine-vs-office-lady-valentine-what-is-your-choice/0d646b087a734f0e844f202e4106f5d7.webp
-  - /images/news/legacy/event/2023-07-18-event-valentine-vs-office-lady-valentine-what-is-your-choice/7368002291634c1c97a9e32ac108b158_002.webp
-  - https://page.onstove.com/[Event]%20Valentine%20vs%20Office%20Lady%20Valentine%20-%20What%20is%20Your%20Choice__fichiers/09_%EA%B0%90%EC%82%AC.png
+  - >-
+    /images/news/legacy/event/2023-07-18-event-valentine-vs-office-lady-valentine-what-is-your-choice/0d646b087a734f0e844f202e4106f5d7.webp
+  - >-
+    /images/news/legacy/event/2023-07-18-event-valentine-vs-office-lady-valentine-what-is-your-choice/7368002291634c1c97a9e32ac108b158_002.webp
+  - >-
+    https://page.onstove.com/[Event]%20Valentine%20vs%20Office%20Lady%20Valentine%20-%20What%20is%20Your%20Choice__fichiers/09_%EA%B0%90%EC%82%AC.png
 ---
 
 ![](/images/news/legacy/event/2023-07-18-event-valentine-vs-office-lady-valentine-what-is-your-choice/0d646b087a734f0e844f202e4106f5d7.webp)

@@ -1,11 +1,13 @@
 ---
-title: "[Event] World Boss Grand Opening Celebration Event (Edited)"
-date: "2024-07-02T00:00:00.000Z"
-category: "event"
-id: "2024-07-02-event-world-boss-grand-opening-celebration-event-edited"
+title: '[Event] World Boss Grand Opening Celebration (Edited)'
+date: '2024-07-02T00:00:00.000Z'
+category: event
+id: 2024-07-02-event-world-boss-grand-opening-celebration-event-edited
 images:
-  - /images/news/legacy/event/2024-07-02-event-world-boss-grand-opening-celebration-event-edited/031e809d75be466ab757ae92d6415f09.webp
-  - /images/news/legacy/event/2024-07-02-event-world-boss-grand-opening-celebration-event-edited/b69c02b19afb45e1a7ec49b1cdd399a4_002.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-world-boss-grand-opening-celebration-event-edited/031e809d75be466ab757ae92d6415f09.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-world-boss-grand-opening-celebration-event-edited/b69c02b19afb45e1a7ec49b1cdd399a4_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-02-event-world-boss-grand-opening-celebration-event-edited/031e809d75be466ab757ae92d6415f09.webp)  

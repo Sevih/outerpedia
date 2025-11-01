@@ -1,11 +1,13 @@
 ---
-title: "[Event] Real-Time Arena Participation Event (Edited)"
-date: "2024-01-16T00:00:00.000Z"
-category: "event"
-id: "2024-01-16-event-real-time-arena-participation-event-edited"
+title: '[Event] Real-Time Arena Participation (Edited)'
+date: '2024-01-16T00:00:00.000Z'
+category: event
+id: 2024-01-16-event-real-time-arena-participation-event-edited
 images:
-  - /images/news/legacy/event/2024-01-16-event-real-time-arena-participation-event-edited/9c60cd7ea8e7424094df27a4e25d9e07.webp
-  - /images/news/legacy/event/2024-01-16-event-real-time-arena-participation-event-edited/fd284d105b7b42cab826302fd8484172.webp
+  - >-
+    /images/news/legacy/event/2024-01-16-event-real-time-arena-participation-event-edited/9c60cd7ea8e7424094df27a4e25d9e07.webp
+  - >-
+    /images/news/legacy/event/2024-01-16-event-real-time-arena-participation-event-edited/fd284d105b7b42cab826302fd8484172.webp
 ---
 
 ![](/images/news/legacy/event/2024-01-16-event-real-time-arena-participation-event-edited/9c60cd7ea8e7424094df27a4e25d9e07.webp)  

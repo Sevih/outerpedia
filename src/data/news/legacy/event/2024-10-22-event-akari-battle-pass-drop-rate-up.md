@@ -1,11 +1,13 @@
 ---
-title: "[Event] Akari Battle Pass Drop Rate Up"
-date: "2024-10-22T00:00:00.000Z"
-category: "event"
-id: "2024-10-22-event-akari-battle-pass-drop-rate-up"
+title: '[Event] Akari Battle Pass Rate Up'
+date: '2024-10-22T00:00:00.000Z'
+category: event
+id: 2024-10-22-event-akari-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-10-22-event-akari-battle-pass-drop-rate-up/6c68b153056d42d69a89238700b0d38e.webp
-  - /images/news/legacy/event/2024-10-22-event-akari-battle-pass-drop-rate-up/a50b5cf574a14089aa9251d1c0073711.webp
+  - >-
+    /images/news/legacy/event/2024-10-22-event-akari-battle-pass-drop-rate-up/6c68b153056d42d69a89238700b0d38e.webp
+  - >-
+    /images/news/legacy/event/2024-10-22-event-akari-battle-pass-drop-rate-up/a50b5cf574a14089aa9251d1c0073711.webp
 ---
 
 ![](/images/news/legacy/event/2024-10-22-event-akari-battle-pass-drop-rate-up/6c68b153056d42d69a89238700b0d38e.webp)

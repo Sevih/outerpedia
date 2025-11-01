@@ -1,12 +1,16 @@
 ---
-title: "[Event]OUTERPLANE Festival Week 2- Dungeon Quiz(Reward Distribution Completed)"
-date: "2024-08-06T00:00:00.000Z"
-category: "event"
-id: "2024-08-06-event-outerplane-festival-week-2-dungeon-quiz-reward-distribution-completed"
+title: '[Event]OP Festival Week 2- Dungeon Quiz(Rewards Sent)'
+date: '2024-08-06T00:00:00.000Z'
+category: event
+id: >-
+  2024-08-06-event-outerplane-festival-week-2-dungeon-quiz-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-08-06-event-outerplane-festival-week-2-dungeon-quiz-reward-distribution-completed/89b9f6a079654ca7abdb45a3953a8a0a.webp
-  - /images/news/legacy/event/2024-08-06-event-outerplane-festival-week-2-dungeon-quiz-reward-distribution-completed/5798306191514bcc87920bf877a019b0.webp
-  - https://page.onstove.com/[Event]OUTERPLANE%20Festival%20Week%202-%20Dungeon%20Quiz(Reward%20Distribution%20Completed)_fichiers/09_%EA%B0%90%EC%82%AC.png
+  - >-
+    /images/news/legacy/event/2024-08-06-event-outerplane-festival-week-2-dungeon-quiz-reward-distribution-completed/89b9f6a079654ca7abdb45a3953a8a0a.webp
+  - >-
+    /images/news/legacy/event/2024-08-06-event-outerplane-festival-week-2-dungeon-quiz-reward-distribution-completed/5798306191514bcc87920bf877a019b0.webp
+  - >-
+    https://page.onstove.com/[Event]OUTERPLANE%20Festival%20Week%202-%20Dungeon%20Quiz(Reward%20Distribution%20Completed)_fichiers/09_%EA%B0%90%EC%82%AC.png
 ---
 
 ![](/images/news/legacy/event/2024-08-06-event-outerplane-festival-week-2-dungeon-quiz-reward-distribution-completed/89b9f6a079654ca7abdb45a3953a8a0a.webp)  

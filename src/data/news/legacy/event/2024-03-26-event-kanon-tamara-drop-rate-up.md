@@ -1,12 +1,15 @@
 ---
-title: "[Event] Kanon & Tamara Drop Rate Up!"
-date: "2024-03-26T00:00:00.000Z"
-category: "event"
-id: "2024-03-26-event-kanon-tamara-drop-rate-up"
+title: '[Event] Kanon & Tamara Rate Up!'
+date: '2024-03-26T00:00:00.000Z'
+category: event
+id: 2024-03-26-event-kanon-tamara-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-03-26-event-kanon-tamara-drop-rate-up/df7a71bafc9d410b8ac44b3767f675a5.webp
-  - /images/news/legacy/event/2024-03-26-event-kanon-tamara-drop-rate-up/17e8982aa5264a2298d575e36d6ef76d.webp
-  - /images/news/legacy/event/2024-03-26-event-kanon-tamara-drop-rate-up/768dad4181a143f5ace63bd0903cf33c.webp
+  - >-
+    /images/news/legacy/event/2024-03-26-event-kanon-tamara-drop-rate-up/df7a71bafc9d410b8ac44b3767f675a5.webp
+  - >-
+    /images/news/legacy/event/2024-03-26-event-kanon-tamara-drop-rate-up/17e8982aa5264a2298d575e36d6ef76d.webp
+  - >-
+    /images/news/legacy/event/2024-03-26-event-kanon-tamara-drop-rate-up/768dad4181a143f5ace63bd0903cf33c.webp
 ---
 
 ![](/images/news/legacy/event/2024-03-26-event-kanon-tamara-drop-rate-up/df7a71bafc9d410b8ac44b3767f675a5.webp)  

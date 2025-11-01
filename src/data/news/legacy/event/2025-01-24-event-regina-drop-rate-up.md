@@ -1,11 +1,13 @@
 ---
-title: "[Event] Regina Drop Rate Up!"
-date: "2025-01-24T00:00:00.000Z"
-category: "event"
-id: "2025-01-24-event-regina-drop-rate-up"
+title: '[Event] Regina Rate Up!'
+date: '2025-01-24T00:00:00.000Z'
+category: event
+id: 2025-01-24-event-regina-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-01-24-event-regina-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2025-01-24-event-regina-drop-rate-up/0594c377d20d48ea906d4ba39fd584dc.webp
+  - >-
+    /images/news/legacy/event/2025-01-24-event-regina-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2025-01-24-event-regina-drop-rate-up/0594c377d20d48ea906d4ba39fd584dc.webp
 ---
 
 ![](/images/news/legacy/event/2025-01-24-event-regina-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

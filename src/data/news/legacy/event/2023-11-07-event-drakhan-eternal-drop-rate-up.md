@@ -1,12 +1,15 @@
 ---
-title: "[Event] Drakhan & Eternal Drop Rate Up!"
-date: "2023-11-07T00:00:00.000Z"
-category: "event"
-id: "2023-11-07-event-drakhan-eternal-drop-rate-up"
+title: '[Event] Drakhan & Eternal Rate Up!'
+date: '2023-11-07T00:00:00.000Z'
+category: event
+id: 2023-11-07-event-drakhan-eternal-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-11-07-event-drakhan-eternal-drop-rate-up/2eea2c8ce4ee4afab88f80357052c225.webp
-  - /images/news/legacy/event/2023-11-07-event-drakhan-eternal-drop-rate-up/ac4df8bee648401885e520997925e34e.webp
-  - /images/news/legacy/event/2023-11-07-event-drakhan-eternal-drop-rate-up/1e03fbaa77f941c3b89c58205e68482c.webp
+  - >-
+    /images/news/legacy/event/2023-11-07-event-drakhan-eternal-drop-rate-up/2eea2c8ce4ee4afab88f80357052c225.webp
+  - >-
+    /images/news/legacy/event/2023-11-07-event-drakhan-eternal-drop-rate-up/ac4df8bee648401885e520997925e34e.webp
+  - >-
+    /images/news/legacy/event/2023-11-07-event-drakhan-eternal-drop-rate-up/1e03fbaa77f941c3b89c58205e68482c.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-07-event-drakhan-eternal-drop-rate-up/2eea2c8ce4ee4afab88f80357052c225.webp)  

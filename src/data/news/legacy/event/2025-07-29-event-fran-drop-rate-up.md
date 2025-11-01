@@ -1,11 +1,13 @@
 ---
-title: "[Event] Fran Drop Rate Up!"
-date: "2025-07-29T00:00:00.000Z"
-category: "event"
-id: "2025-07-29-event-fran-drop-rate-up"
+title: '[Event] Fran Rate Up!'
+date: '2025-07-29T00:00:00.000Z'
+category: event
+id: 2025-07-29-event-fran-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-07-29-event-fran-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2025-07-29-event-fran-drop-rate-up/34d286a49adf40cda7ff05ae81cb85d2.webp
+  - >-
+    /images/news/legacy/event/2025-07-29-event-fran-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2025-07-29-event-fran-drop-rate-up/34d286a49adf40cda7ff05ae81cb85d2.webp
 ---
 
 ![](/images/news/legacy/event/2025-07-29-event-fran-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

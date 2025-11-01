@@ -1,11 +1,13 @@
 ---
-title: "[Event] What's Your Vacation Style? (Reward Distribution Completed)"
-date: "2024-07-02T00:00:00.000Z"
-category: "event"
-id: "2024-07-02-event-what-s-your-vacation-style-reward-distribution-completed"
+title: '[Event] What''s Your Vacation Style? (Rewards Sent)'
+date: '2024-07-02T00:00:00.000Z'
+category: event
+id: 2024-07-02-event-what-s-your-vacation-style-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-07-02-event-what-s-your-vacation-style-reward-distribution-completed/db2cdf64d393462f811ddce389fd99f9.webp
-  - /images/news/legacy/event/2024-07-02-event-what-s-your-vacation-style-reward-distribution-completed/1a87cdd4269344af8f0f6228910f6dd9.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-what-s-your-vacation-style-reward-distribution-completed/db2cdf64d393462f811ddce389fd99f9.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-what-s-your-vacation-style-reward-distribution-completed/1a87cdd4269344af8f0f6228910f6dd9.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-02-event-what-s-your-vacation-style-reward-distribution-completed/db2cdf64d393462f811ddce389fd99f9.webp)  

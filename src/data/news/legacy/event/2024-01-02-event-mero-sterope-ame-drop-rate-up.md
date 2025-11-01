@@ -1,13 +1,17 @@
 ---
-title: "[Event] Mero & Sterope & Ame Drop Rate Up!"
-date: "2024-01-02T00:00:00.000Z"
-category: "event"
-id: "2024-01-02-event-mero-sterope-ame-drop-rate-up"
+title: '[Event] Mero & Sterope & Ame Rate Up!'
+date: '2024-01-02T00:00:00.000Z'
+category: event
+id: 2024-01-02-event-mero-sterope-ame-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-01-02-event-mero-sterope-ame-drop-rate-up/1efd4fafb50c4b63a5c93bae700ca869.webp
-  - /images/news/legacy/event/2024-01-02-event-mero-sterope-ame-drop-rate-up/a50a040ec709413f89a0903ac0f052f2.webp
-  - /images/news/legacy/event/2024-01-02-event-mero-sterope-ame-drop-rate-up/67b6b9c985524d25a0c2b8a7526dc059.webp
-  - /images/news/legacy/event/2024-01-02-event-mero-sterope-ame-drop-rate-up/28f92a52296d4296a0f3563315382377.webp
+  - >-
+    /images/news/legacy/event/2024-01-02-event-mero-sterope-ame-drop-rate-up/1efd4fafb50c4b63a5c93bae700ca869.webp
+  - >-
+    /images/news/legacy/event/2024-01-02-event-mero-sterope-ame-drop-rate-up/a50a040ec709413f89a0903ac0f052f2.webp
+  - >-
+    /images/news/legacy/event/2024-01-02-event-mero-sterope-ame-drop-rate-up/67b6b9c985524d25a0c2b8a7526dc059.webp
+  - >-
+    /images/news/legacy/event/2024-01-02-event-mero-sterope-ame-drop-rate-up/28f92a52296d4296a0f3563315382377.webp
 ---
 
 ![](/images/news/legacy/event/2024-01-02-event-mero-sterope-ame-drop-rate-up/1efd4fafb50c4b63a5c93bae700ca869.webp)  

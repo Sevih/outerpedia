@@ -1,11 +1,14 @@
 ---
-title: "[Event] New Hero Kuro's Quotable Moments Event (Reward Distribution Completed)"
-date: "2024-06-04T00:00:00.000Z"
-category: "event"
-id: "2024-06-04-event-new-hero-kuro-s-quotable-moments-event-reward-distribution-completed"
+title: '[Event] New Hero Kuro''s Quotable Moments (Rewards Sent)'
+date: '2024-06-04T00:00:00.000Z'
+category: event
+id: >-
+  2024-06-04-event-new-hero-kuro-s-quotable-moments-event-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-06-04-event-new-hero-kuro-s-quotable-moments-event-reward-distribution-completed/33f77059793f45f184fd9dbd7773366f.webp
-  - /images/news/legacy/event/2024-06-04-event-new-hero-kuro-s-quotable-moments-event-reward-distribution-completed/ad3cc00880394a388914b17a427bafab.webp
+  - >-
+    /images/news/legacy/event/2024-06-04-event-new-hero-kuro-s-quotable-moments-event-reward-distribution-completed/33f77059793f45f184fd9dbd7773366f.webp
+  - >-
+    /images/news/legacy/event/2024-06-04-event-new-hero-kuro-s-quotable-moments-event-reward-distribution-completed/ad3cc00880394a388914b17a427bafab.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-04-event-new-hero-kuro-s-quotable-moments-event-reward-distribution-completed/33f77059793f45f184fd9dbd7773366f.webp)  

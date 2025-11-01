@@ -1,10 +1,11 @@
 ---
-title: "[Event] Push Event (3/25~4/7)"
-date: "2025-03-25T00:00:00.000Z"
-category: "event"
-id: "2025-03-25-event-push-event-3-25-4-7"
+title: '[Event] Push (3/25~4/7)'
+date: '2025-03-25T00:00:00.000Z'
+category: event
+id: 2025-03-25-event-push-event-3-25-4-7
 images:
-  - /images/news/legacy/event/2025-03-25-event-push-event-3-25-4-7/4759c200b4a94ca4a56a76260f0d31bb.webp
+  - >-
+    /images/news/legacy/event/2025-03-25-event-push-event-3-25-4-7/4759c200b4a94ca4a56a76260f0d31bb.webp
 ---
 
 ![](/images/news/legacy/event/2025-03-25-event-push-event-3-25-4-7/4759c200b4a94ca4a56a76260f0d31bb.webp)  

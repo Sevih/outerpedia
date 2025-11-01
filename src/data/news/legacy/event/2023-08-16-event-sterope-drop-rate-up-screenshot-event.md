@@ -1,11 +1,13 @@
 ---
-title: "[Event] Sterope Drop Rate Up Screenshot Event"
-date: "2023-08-16T00:00:00.000Z"
-category: "event"
-id: "2023-08-16-event-sterope-drop-rate-up-screenshot-event"
+title: '[Event] Sterope Rate Up Screenshot'
+date: '2023-08-16T00:00:00.000Z'
+category: event
+id: 2023-08-16-event-sterope-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-08-16-event-sterope-drop-rate-up-screenshot-event/e38b01c240a9445ca7838004d9f5cd7b.webp
-  - /images/news/legacy/event/2023-08-16-event-sterope-drop-rate-up-screenshot-event/fe6e3857693047db8c9c0beed1c00e21_002.webp
+  - >-
+    /images/news/legacy/event/2023-08-16-event-sterope-drop-rate-up-screenshot-event/e38b01c240a9445ca7838004d9f5cd7b.webp
+  - >-
+    /images/news/legacy/event/2023-08-16-event-sterope-drop-rate-up-screenshot-event/fe6e3857693047db8c9c0beed1c00e21_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-16-event-sterope-drop-rate-up-screenshot-event/e38b01c240a9445ca7838004d9f5cd7b.webp)

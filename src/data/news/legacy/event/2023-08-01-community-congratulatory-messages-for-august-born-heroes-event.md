@@ -1,11 +1,13 @@
 ---
-title: "[Community] Congratulatory Messages for August-born Heroes! Event"
-date: "2023-08-01T00:00:00.000Z"
-category: "event"
-id: "2023-08-01-community-congratulatory-messages-for-august-born-heroes-event"
+title: '[Community] Congrats to August Heroes! Event'
+date: '2023-08-01T00:00:00.000Z'
+category: event
+id: 2023-08-01-community-congratulatory-messages-for-august-born-heroes-event
 images:
-  - /images/news/legacy/event/2023-08-01-community-congratulatory-messages-for-august-born-heroes-event/2ef8e770fa5d4d05829fd7e47466b0dd.webp
-  - /images/news/legacy/event/2023-08-01-community-congratulatory-messages-for-august-born-heroes-event/e86728737d2a49639ec3d954bf50113f.webp
+  - >-
+    /images/news/legacy/event/2023-08-01-community-congratulatory-messages-for-august-born-heroes-event/2ef8e770fa5d4d05829fd7e47466b0dd.webp
+  - >-
+    /images/news/legacy/event/2023-08-01-community-congratulatory-messages-for-august-born-heroes-event/e86728737d2a49639ec3d954bf50113f.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-01-community-congratulatory-messages-for-august-born-heroes-event/2ef8e770fa5d4d05829fd7e47466b0dd.webp)

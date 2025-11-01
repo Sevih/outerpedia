@@ -1,12 +1,15 @@
 ---
-title: "[Event] Akari & Eliza Drop Rate Up!"
-date: "2023-10-10T00:00:00.000Z"
-category: "event"
-id: "2023-10-10-event-akari-eliza-drop-rate-up"
+title: '[Event] Akari & Eliza Rate Up!'
+date: '2023-10-10T00:00:00.000Z'
+category: event
+id: 2023-10-10-event-akari-eliza-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-10-10-event-akari-eliza-drop-rate-up/ecea176f6f2f40549157bd2bf62bc5fd.webp
-  - /images/news/legacy/event/2023-10-10-event-akari-eliza-drop-rate-up/484449aa1b2b49daaff774b66c6fe550.webp
-  - /images/news/legacy/event/2023-10-10-event-akari-eliza-drop-rate-up/6e79c19066c14fa18c348fe8b7cd3efe.webp
+  - >-
+    /images/news/legacy/event/2023-10-10-event-akari-eliza-drop-rate-up/ecea176f6f2f40549157bd2bf62bc5fd.webp
+  - >-
+    /images/news/legacy/event/2023-10-10-event-akari-eliza-drop-rate-up/484449aa1b2b49daaff774b66c6fe550.webp
+  - >-
+    /images/news/legacy/event/2023-10-10-event-akari-eliza-drop-rate-up/6e79c19066c14fa18c348fe8b7cd3efe.webp
 ---
 
 ![](/images/news/legacy/event/2023-10-10-event-akari-eliza-drop-rate-up/ecea176f6f2f40549157bd2bf62bc5fd.webp)  

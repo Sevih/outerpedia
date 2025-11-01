@@ -1,11 +1,14 @@
 ---
-title: "[Event] Vote✅for Your Favorite💖Hero Event👀✨(6/4 07:00 Reward distributed)"
-date: "2025-05-20T00:00:00.000Z"
-category: "event"
-id: "2025-05-20-event-vote-for-your-favorite-hero-event-6-4-07-00-reward-distributed"
+title: "[Event] Vote for Your Favorite Hero (6/4 Rewards Sent)"
+date: '2025-05-20T00:00:00.000Z'
+category: event
+id: >-
+  2025-05-20-event-vote-for-your-favorite-hero-event-6-4-07-00-reward-distributed
 images:
-  - /images/news/legacy/event/2025-05-20-event-vote-for-your-favorite-hero-event-6-4-07-00-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2025-05-20-event-vote-for-your-favorite-hero-event-6-4-07-00-reward-distributed/7ed7d5c790104aa9bd75ef5aec4febf1.webp
+  - >-
+    /images/news/legacy/event/2025-05-20-event-vote-for-your-favorite-hero-event-6-4-07-00-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2025-05-20-event-vote-for-your-favorite-hero-event-6-4-07-00-reward-distributed/7ed7d5c790104aa9bd75ef5aec4febf1.webp
 ---
 
 ![](/images/news/legacy/event/2025-05-20-event-vote-for-your-favorite-hero-event-6-4-07-00-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

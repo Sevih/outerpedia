@@ -1,12 +1,15 @@
 ---
-title: "[Event] Edelweiss Drop Rate Up Screenshot Event"
-date: "2024-04-09T00:00:00.000Z"
-category: "event"
-id: "2024-04-09-event-edelweiss-drop-rate-up-screenshot-event"
+title: '[Event] Edelweiss Rate Up Screenshot'
+date: '2024-04-09T00:00:00.000Z'
+category: event
+id: 2024-04-09-event-edelweiss-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2024-04-09-event-edelweiss-drop-rate-up-screenshot-event/c762e198cbf64b08be5c40ba755535e4.webp
-  - /images/news/legacy/event/2024-04-09-event-edelweiss-drop-rate-up-screenshot-event/82281f854781436f93f04c8b9a52597a_002.webp
-  - /images/news/legacy/event/2024-04-09-event-edelweiss-drop-rate-up-screenshot-event/50d8be68f0a3415f90bcda8d539ec260.webp
+  - >-
+    /images/news/legacy/event/2024-04-09-event-edelweiss-drop-rate-up-screenshot-event/c762e198cbf64b08be5c40ba755535e4.webp
+  - >-
+    /images/news/legacy/event/2024-04-09-event-edelweiss-drop-rate-up-screenshot-event/82281f854781436f93f04c8b9a52597a_002.webp
+  - >-
+    /images/news/legacy/event/2024-04-09-event-edelweiss-drop-rate-up-screenshot-event/50d8be68f0a3415f90bcda8d539ec260.webp
 ---
 
 ![](/images/news/legacy/event/2024-04-09-event-edelweiss-drop-rate-up-screenshot-event/c762e198cbf64b08be5c40ba755535e4.webp)  

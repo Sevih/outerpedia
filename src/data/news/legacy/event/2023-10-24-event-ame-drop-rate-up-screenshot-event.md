@@ -1,11 +1,13 @@
 ---
-title: "[Event] Ame Drop Rate Up Screenshot Event"
-date: "2023-10-24T00:00:00.000Z"
-category: "event"
-id: "2023-10-24-event-ame-drop-rate-up-screenshot-event"
+title: '[Event] Ame Rate Up Screenshot'
+date: '2023-10-24T00:00:00.000Z'
+category: event
+id: 2023-10-24-event-ame-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-10-24-event-ame-drop-rate-up-screenshot-event/6f9e59f8ccef4518818f21e1df3087d6.webp
-  - /images/news/legacy/event/2023-10-24-event-ame-drop-rate-up-screenshot-event/03f9cf7ec83542e5afc7a4f9f3a2621e.webp
+  - >-
+    /images/news/legacy/event/2023-10-24-event-ame-drop-rate-up-screenshot-event/6f9e59f8ccef4518818f21e1df3087d6.webp
+  - >-
+    /images/news/legacy/event/2023-10-24-event-ame-drop-rate-up-screenshot-event/03f9cf7ec83542e5afc7a4f9f3a2621e.webp
 ---
 
 ![](/images/news/legacy/event/2023-10-24-event-ame-drop-rate-up-screenshot-event/6f9e59f8ccef4518818f21e1df3087d6.webp)  

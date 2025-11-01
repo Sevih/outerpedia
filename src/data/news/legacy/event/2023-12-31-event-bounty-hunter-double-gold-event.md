@@ -1,11 +1,13 @@
 ---
-title: "[Event] Bounty Hunter Double Gold Event"
-date: "2023-12-31T00:00:00.000Z"
-category: "event"
-id: "2023-12-31-event-bounty-hunter-double-gold-event"
+title: '[Event] Bounty Hunter Double Gold'
+date: '2023-12-31T00:00:00.000Z'
+category: event
+id: 2023-12-31-event-bounty-hunter-double-gold-event
 images:
-  - /images/news/legacy/event/2023-12-31-event-bounty-hunter-double-gold-event/fa65ce624f944bc09eece218f5dda011.webp
-  - /images/news/legacy/event/2023-12-31-event-bounty-hunter-double-gold-event/415c7a0cc3ed457282e75e1a0de1163a_002.webp
+  - >-
+    /images/news/legacy/event/2023-12-31-event-bounty-hunter-double-gold-event/fa65ce624f944bc09eece218f5dda011.webp
+  - >-
+    /images/news/legacy/event/2023-12-31-event-bounty-hunter-double-gold-event/415c7a0cc3ed457282e75e1a0de1163a_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-12-31-event-bounty-hunter-double-gold-event/fa65ce624f944bc09eece218f5dda011.webp)  

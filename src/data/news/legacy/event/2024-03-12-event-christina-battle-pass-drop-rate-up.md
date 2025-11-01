@@ -1,11 +1,13 @@
 ---
-title: "[Event] Christina Battle Pass Drop Rate Up"
-date: "2024-03-12T00:00:00.000Z"
-category: "event"
-id: "2024-03-12-event-christina-battle-pass-drop-rate-up"
+title: '[Event] Christina Battle Pass Rate Up'
+date: '2024-03-12T00:00:00.000Z'
+category: event
+id: 2024-03-12-event-christina-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-03-12-event-christina-battle-pass-drop-rate-up/c469c67b52b04596af42f0ee3f28f854.webp
-  - /images/news/legacy/event/2024-03-12-event-christina-battle-pass-drop-rate-up/f74700b4c82643b1919d2102244fd1df.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-christina-battle-pass-drop-rate-up/c469c67b52b04596af42f0ee3f28f854.webp
+  - >-
+    /images/news/legacy/event/2024-03-12-event-christina-battle-pass-drop-rate-up/f74700b4c82643b1919d2102244fd1df.webp
 ---
 
 ![](/images/news/legacy/event/2024-03-12-event-christina-battle-pass-drop-rate-up/c469c67b52b04596af42f0ee3f28f854.webp)  

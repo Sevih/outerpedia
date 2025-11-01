@@ -1,12 +1,15 @@
 ---
-title: "[Event] Sterope & Leo Drop Rate Up!"
-date: "2023-08-16T00:00:00.000Z"
-category: "event"
-id: "2023-08-16-event-sterope-leo-drop-rate-up"
+title: '[Event] Sterope & Leo Rate Up!'
+date: '2023-08-16T00:00:00.000Z'
+category: event
+id: 2023-08-16-event-sterope-leo-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-08-16-event-sterope-leo-drop-rate-up/e24173c57f12421d969d1b8e18d88647.webp
-  - /images/news/legacy/event/2023-08-16-event-sterope-leo-drop-rate-up/931a98df27e54127a34541f9c9e23986.webp
-  - /images/news/legacy/event/2023-08-16-event-sterope-leo-drop-rate-up/f2999f8df351406bac074957de9a53c5.webp
+  - >-
+    /images/news/legacy/event/2023-08-16-event-sterope-leo-drop-rate-up/e24173c57f12421d969d1b8e18d88647.webp
+  - >-
+    /images/news/legacy/event/2023-08-16-event-sterope-leo-drop-rate-up/931a98df27e54127a34541f9c9e23986.webp
+  - >-
+    /images/news/legacy/event/2023-08-16-event-sterope-leo-drop-rate-up/f2999f8df351406bac074957de9a53c5.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-16-event-sterope-leo-drop-rate-up/e24173c57f12421d969d1b8e18d88647.webp)

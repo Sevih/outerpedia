@@ -1,10 +1,12 @@
 ---
-title: "Developer's Note #13: Publishing Service Termination and Developer Transfer"
-date: "2025-07-11T00:00:00.000Z"
-category: "developer-notes"
-id: "2025-07-11-developer-s-note-13-publishing-service-termination-and-developer-transfer"
+title: 'Dev Note #13: Service End and Developer Transfer'
+date: '2025-07-11T00:00:00.000Z'
+category: developer-notes
+id: >-
+  2025-07-11-developer-s-note-13-publishing-service-termination-and-developer-transfer
 images:
-  - /images/news/legacy/developer-notes/2025-07-11-developer-s-note-13-publishing-service-termination-and-developer-transfer/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
+  - >-
+    /images/news/legacy/developer-notes/2025-07-11-developer-s-note-13-publishing-service-termination-and-developer-transfer/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2025-07-11-developer-s-note-13-publishing-service-termination-and-developer-transfer/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp)  

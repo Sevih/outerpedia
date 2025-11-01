@@ -1,12 +1,15 @@
 ---
-title: "[Event] Notia & Beth Drop Rate Up!"
-date: "2023-08-01T00:00:00.000Z"
-category: "event"
-id: "2023-08-01-event-notia-beth-drop-rate-up"
+title: '[Event] Notia & Beth Rate Up!'
+date: '2023-08-01T00:00:00.000Z'
+category: event
+id: 2023-08-01-event-notia-beth-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-08-01-event-notia-beth-drop-rate-up/18950fa59fd540ee9841c67ae03d4468.webp
-  - /images/news/legacy/event/2023-08-01-event-notia-beth-drop-rate-up/bcf9f26191824ce7ad6401390b965aa0.webp
-  - /images/news/legacy/event/2023-08-01-event-notia-beth-drop-rate-up/f3e4ed44acd84b99873c198ed02f643c.webp
+  - >-
+    /images/news/legacy/event/2023-08-01-event-notia-beth-drop-rate-up/18950fa59fd540ee9841c67ae03d4468.webp
+  - >-
+    /images/news/legacy/event/2023-08-01-event-notia-beth-drop-rate-up/bcf9f26191824ce7ad6401390b965aa0.webp
+  - >-
+    /images/news/legacy/event/2023-08-01-event-notia-beth-drop-rate-up/f3e4ed44acd84b99873c198ed02f643c.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-01-event-notia-beth-drop-rate-up/18950fa59fd540ee9841c67ae03d4468.webp)

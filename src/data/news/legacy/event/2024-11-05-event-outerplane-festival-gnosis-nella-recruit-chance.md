@@ -1,11 +1,13 @@
 ---
-title: "[Event] OUTERPLANE Festival Gnosis Nella Recruit Chance"
-date: "2024-11-05T00:00:00.000Z"
-category: "event"
-id: "2024-11-05-event-outerplane-festival-gnosis-nella-recruit-chance"
+title: '[Event] OP Festival Gnosis Nella Recruit'
+date: '2024-11-05T00:00:00.000Z'
+category: event
+id: 2024-11-05-event-outerplane-festival-gnosis-nella-recruit-chance
 images:
-  - /images/news/legacy/event/2024-11-05-event-outerplane-festival-gnosis-nella-recruit-chance/34e8c07059514b98a77e6581df0e5889.webp
-  - /images/news/legacy/event/2024-11-05-event-outerplane-festival-gnosis-nella-recruit-chance/99e6e976087f4999bf6e5a1ba656f749.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-outerplane-festival-gnosis-nella-recruit-chance/34e8c07059514b98a77e6581df0e5889.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-outerplane-festival-gnosis-nella-recruit-chance/99e6e976087f4999bf6e5a1ba656f749.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-05-event-outerplane-festival-gnosis-nella-recruit-chance/34e8c07059514b98a77e6581df0e5889.webp)  

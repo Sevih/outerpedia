@@ -1,11 +1,13 @@
 ---
-title: "[Event] ✨👑Luna Quiz Event🔍✨(5/9 07:00 Reward distributed)"
-date: "2025-04-28T00:00:00.000Z"
-category: "event"
-id: "2025-04-28-event-luna-quiz-event-5-9-07-00-reward-distributed"
+title: "[Event] ✨\U0001F451Luna Quiz Event\U0001F50D✨(5/9 07:00 Rewards Sent)"
+date: '2025-04-28T00:00:00.000Z'
+category: event
+id: 2025-04-28-event-luna-quiz-event-5-9-07-00-reward-distributed
 images:
-  - /images/news/legacy/event/2025-04-28-event-luna-quiz-event-5-9-07-00-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2025-04-28-event-luna-quiz-event-5-9-07-00-reward-distributed/62e21685b7a64de6a4192c9315ec33ba.webp
+  - >-
+    /images/news/legacy/event/2025-04-28-event-luna-quiz-event-5-9-07-00-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2025-04-28-event-luna-quiz-event-5-9-07-00-reward-distributed/62e21685b7a64de6a4192c9315ec33ba.webp
 ---
 
 ![](/images/news/legacy/event/2025-04-28-event-luna-quiz-event-5-9-07-00-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

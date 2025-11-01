@@ -1,12 +1,15 @@
 ---
-title: "[Event] Holy Night's Blessing Dianne & Tamara Drop Rate Up!"
-date: "2024-12-17T00:00:00.000Z"
-category: "event"
-id: "2024-12-17-event-holy-night-s-blessing-dianne-tamara-drop-rate-up"
+title: '[Event] Holy Night''s Blessing Dianne & Tamara Rate Up!'
+date: '2024-12-17T00:00:00.000Z'
+category: event
+id: 2024-12-17-event-holy-night-s-blessing-dianne-tamara-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-12-17-event-holy-night-s-blessing-dianne-tamara-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp
-  - /images/news/legacy/event/2024-12-17-event-holy-night-s-blessing-dianne-tamara-drop-rate-up/b3247c238f7049b4be4302425eaf3e23.webp
-  - /images/news/legacy/event/2024-12-17-event-holy-night-s-blessing-dianne-tamara-drop-rate-up/af4caaff2b6f4449b8b9ee17e881d635.webp
+  - >-
+    /images/news/legacy/event/2024-12-17-event-holy-night-s-blessing-dianne-tamara-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp
+  - >-
+    /images/news/legacy/event/2024-12-17-event-holy-night-s-blessing-dianne-tamara-drop-rate-up/b3247c238f7049b4be4302425eaf3e23.webp
+  - >-
+    /images/news/legacy/event/2024-12-17-event-holy-night-s-blessing-dianne-tamara-drop-rate-up/af4caaff2b6f4449b8b9ee17e881d635.webp
 ---
 
 ![](/images/news/legacy/event/2024-12-17-event-holy-night-s-blessing-dianne-tamara-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp)  

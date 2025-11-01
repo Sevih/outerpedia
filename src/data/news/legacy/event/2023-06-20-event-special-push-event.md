@@ -1,11 +1,13 @@
 ---
-title: "[Event] Special Push Event"
-date: "2023-06-20T00:00:00.000Z"
-category: "event"
-id: "2023-06-20-event-special-push-event"
+title: '[Event] Special Push'
+date: '2023-06-20T00:00:00.000Z'
+category: event
+id: 2023-06-20-event-special-push-event
 images:
-  - /images/news/legacy/event/2023-06-20-event-special-push-event/a67ece40005d4fafbd50756f4dad9603.webp
-  - /images/news/legacy/event/2023-06-20-event-special-push-event/13a71ee6dc9240e3bdcb9cff23627b1f.webp
+  - >-
+    /images/news/legacy/event/2023-06-20-event-special-push-event/a67ece40005d4fafbd50756f4dad9603.webp
+  - >-
+    /images/news/legacy/event/2023-06-20-event-special-push-event/13a71ee6dc9240e3bdcb9cff23627b1f.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-20-event-special-push-event/a67ece40005d4fafbd50756f4dad9603.webp)

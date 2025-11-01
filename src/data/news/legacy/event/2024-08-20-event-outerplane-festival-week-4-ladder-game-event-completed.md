@@ -1,12 +1,15 @@
 ---
-title: "[Event] OUTERPLANE Festival - Week 4 Ladder Game Event(Completed)"
-date: "2024-08-20T00:00:00.000Z"
-category: "event"
-id: "2024-08-20-event-outerplane-festival-week-4-ladder-game-event-completed"
+title: '[Event] OP Festival - Week 4 Ladder Game (Completed)'
+date: '2024-08-20T00:00:00.000Z'
+category: event
+id: 2024-08-20-event-outerplane-festival-week-4-ladder-game-event-completed
 images:
-  - /images/news/legacy/event/2024-08-20-event-outerplane-festival-week-4-ladder-game-event-completed/7feb0cb5fee740dcb269f4ea7bb81447.webp
-  - /images/news/legacy/event/2024-08-20-event-outerplane-festival-week-4-ladder-game-event-completed/e4e1cb3d7f694ecf8413ae22e0d0d368.webp
-  - https://page.onstove.com/[Event]%20OUTERPLANE%20Festival%20-%20Week%204%20Ladder%20Game%20Event(Completed)_fichiers/09_%EA%B0%90%EC%82%AC.png
+  - >-
+    /images/news/legacy/event/2024-08-20-event-outerplane-festival-week-4-ladder-game-event-completed/7feb0cb5fee740dcb269f4ea7bb81447.webp
+  - >-
+    /images/news/legacy/event/2024-08-20-event-outerplane-festival-week-4-ladder-game-event-completed/e4e1cb3d7f694ecf8413ae22e0d0d368.webp
+  - >-
+    https://page.onstove.com/[Event]%20OUTERPLANE%20Festival%20-%20Week%204%20Ladder%20Game%20Event(Completed)_fichiers/09_%EA%B0%90%EC%82%AC.png
 ---
 
 ![](/images/news/legacy/event/2024-08-20-event-outerplane-festival-week-4-ladder-game-event-completed/7feb0cb5fee740dcb269f4ea7bb81447.webp)  

@@ -1,13 +1,17 @@
 ---
-title: "[Event] Celebrating the Half Year Anniversary! General Event Details"
-date: "2023-11-17T00:00:00.000Z"
-category: "event"
-id: "2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details"
+title: '[Event] Half Year Anniversary! Details'
+date: '2023-11-17T00:00:00.000Z'
+category: event
+id: 2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details
 images:
-  - /images/news/legacy/event/2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details/1dee1941b56543abb804e9749aae5537.webp
-  - /images/news/legacy/event/2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details/965a5ec659e94afdb48de8058d3d58e3.webp
-  - /images/news/legacy/event/2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details/37e76ad974f54cd29292518e3f889c48.webp
-  - /images/news/legacy/event/2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details/05ba435b23bf47859b7f1e1128e237d5.webp
+  - >-
+    /images/news/legacy/event/2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details/1dee1941b56543abb804e9749aae5537.webp
+  - >-
+    /images/news/legacy/event/2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details/965a5ec659e94afdb48de8058d3d58e3.webp
+  - >-
+    /images/news/legacy/event/2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details/37e76ad974f54cd29292518e3f889c48.webp
+  - >-
+    /images/news/legacy/event/2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details/05ba435b23bf47859b7f1e1128e237d5.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-17-event-celebrating-the-half-year-anniversary-general-event-details/1dee1941b56543abb804e9749aae5537.webp)  

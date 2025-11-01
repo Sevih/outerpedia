@@ -1,11 +1,13 @@
 ---
-title: "[Event] 1st Anniversary Celebration Push Event (Added on 5/13)"
-date: "2024-05-07T00:00:00.000Z"
-category: "event"
-id: "2024-05-07-event-1st-anniversary-celebration-push-event-added-on-5-13"
+title: '[Event] 1st Anniversary Celebration Push (Added on 5/13)'
+date: '2024-05-07T00:00:00.000Z'
+category: event
+id: 2024-05-07-event-1st-anniversary-celebration-push-event-added-on-5-13
 images:
-  - /images/news/legacy/event/2024-05-07-event-1st-anniversary-celebration-push-event-added-on-5-13/48080119f94248938524d756a111df0b.webp
-  - /images/news/legacy/event/2024-05-07-event-1st-anniversary-celebration-push-event-added-on-5-13/49ce79b546bb410ca8cede84786bf652.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-1st-anniversary-celebration-push-event-added-on-5-13/48080119f94248938524d756a111df0b.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-1st-anniversary-celebration-push-event-added-on-5-13/49ce79b546bb410ca8cede84786bf652.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-07-event-1st-anniversary-celebration-push-event-added-on-5-13/48080119f94248938524d756a111df0b.webp)  

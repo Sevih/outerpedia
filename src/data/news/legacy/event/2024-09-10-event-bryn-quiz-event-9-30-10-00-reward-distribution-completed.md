@@ -1,11 +1,13 @@
 ---
-title: "[Event] Bryn Quiz Event (9/30 10:00 Reward Distribution Completed)"
-date: "2024-09-10T00:00:00.000Z"
-category: "event"
-id: "2024-09-10-event-bryn-quiz-event-9-30-10-00-reward-distribution-completed"
+title: '[Event] Bryn Quiz (9/30 10:00 Rewards Sent)'
+date: '2024-09-10T00:00:00.000Z'
+category: event
+id: 2024-09-10-event-bryn-quiz-event-9-30-10-00-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-09-10-event-bryn-quiz-event-9-30-10-00-reward-distribution-completed/ac82495e1b1c48e18b23ac4d68196255.webp
-  - /images/news/legacy/event/2024-09-10-event-bryn-quiz-event-9-30-10-00-reward-distribution-completed/7759e8d7857b49009c6d384750effb1c_002.webp
+  - >-
+    /images/news/legacy/event/2024-09-10-event-bryn-quiz-event-9-30-10-00-reward-distribution-completed/ac82495e1b1c48e18b23ac4d68196255.webp
+  - >-
+    /images/news/legacy/event/2024-09-10-event-bryn-quiz-event-9-30-10-00-reward-distribution-completed/7759e8d7857b49009c6d384750effb1c_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-09-10-event-bryn-quiz-event-9-30-10-00-reward-distribution-completed/ac82495e1b1c48e18b23ac4d68196255.webp)  

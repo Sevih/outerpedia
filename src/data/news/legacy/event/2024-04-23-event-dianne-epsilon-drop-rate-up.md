@@ -1,12 +1,15 @@
 ---
-title: "[Event] Dianne & Epsilon Drop Rate Up!"
-date: "2024-04-23T00:00:00.000Z"
-category: "event"
-id: "2024-04-23-event-dianne-epsilon-drop-rate-up"
+title: '[Event] Dianne & Epsilon Rate Up!'
+date: '2024-04-23T00:00:00.000Z'
+category: event
+id: 2024-04-23-event-dianne-epsilon-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-04-23-event-dianne-epsilon-drop-rate-up/9a00692035f94c46a3ea340454eefce0.webp
-  - /images/news/legacy/event/2024-04-23-event-dianne-epsilon-drop-rate-up/d978411987cb4b4c83f86bc6d687ba3a.webp
-  - /images/news/legacy/event/2024-04-23-event-dianne-epsilon-drop-rate-up/44c10c651b8c4361b673bf9cebba0c13.webp
+  - >-
+    /images/news/legacy/event/2024-04-23-event-dianne-epsilon-drop-rate-up/9a00692035f94c46a3ea340454eefce0.webp
+  - >-
+    /images/news/legacy/event/2024-04-23-event-dianne-epsilon-drop-rate-up/d978411987cb4b4c83f86bc6d687ba3a.webp
+  - >-
+    /images/news/legacy/event/2024-04-23-event-dianne-epsilon-drop-rate-up/44c10c651b8c4361b673bf9cebba0c13.webp
 ---
 
 ![](/images/news/legacy/event/2024-04-23-event-dianne-epsilon-drop-rate-up/9a00692035f94c46a3ea340454eefce0.webp)  

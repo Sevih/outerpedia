@@ -1,11 +1,13 @@
 ---
-title: "[Event] ✨Ember Quiz Event🔍🐾🐾 (2/28 Reward distributed)"
-date: "2025-02-11T00:00:00.000Z"
-category: "event"
-id: "2025-02-11-event-ember-quiz-event-2-28-reward-distributed"
+title: '[Event] ✨Ember Quiz (2/28 Rewards Sent)'
+date: '2025-02-11T00:00:00.000Z'
+category: event
+id: 2025-02-11-event-ember-quiz-event-2-28-reward-distributed
 images:
-  - /images/news/legacy/event/2025-02-11-event-ember-quiz-event-2-28-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2025-02-11-event-ember-quiz-event-2-28-reward-distributed/1a4b2d4030bd4855a52f08ce8a5aabd4.webp
+  - >-
+    /images/news/legacy/event/2025-02-11-event-ember-quiz-event-2-28-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2025-02-11-event-ember-quiz-event-2-28-reward-distributed/1a4b2d4030bd4855a52f08ce8a5aabd4.webp
 ---
 
 ![](/images/news/legacy/event/2025-02-11-event-ember-quiz-event-2-28-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

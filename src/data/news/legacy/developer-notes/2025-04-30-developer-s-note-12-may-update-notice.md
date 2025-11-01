@@ -1,12 +1,15 @@
 ---
-title: "Developer's Note #12: May Update Notice"
-date: "2025-04-30T00:00:00.000Z"
-category: "developer-notes"
-id: "2025-04-30-developer-s-note-12-may-update-notice"
+title: 'Dev Note #12: May Update Notice'
+date: '2025-04-30T00:00:00.000Z'
+category: developer-notes
+id: 2025-04-30-developer-s-note-12-may-update-notice
 images:
-  - /images/news/legacy/developer-notes/2025-04-30-developer-s-note-12-may-update-notice/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
-  - /images/news/legacy/developer-notes/2025-04-30-developer-s-note-12-may-update-notice/241a53d386f74ef89110a0ca54f2a4d0.webp
-  - /images/news/legacy/developer-notes/2025-04-30-developer-s-note-12-may-update-notice/b36fef04f24d4dc18f2830ab48a3f1bd.webp
+  - >-
+    /images/news/legacy/developer-notes/2025-04-30-developer-s-note-12-may-update-notice/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
+  - >-
+    /images/news/legacy/developer-notes/2025-04-30-developer-s-note-12-may-update-notice/241a53d386f74ef89110a0ca54f2a4d0.webp
+  - >-
+    /images/news/legacy/developer-notes/2025-04-30-developer-s-note-12-may-update-notice/b36fef04f24d4dc18f2830ab48a3f1bd.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2025-04-30-developer-s-note-12-may-update-notice/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp)  

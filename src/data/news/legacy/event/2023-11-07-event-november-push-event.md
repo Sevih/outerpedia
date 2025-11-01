@@ -1,10 +1,11 @@
 ---
-title: "[Event] November Push Event"
-date: "2023-11-07T00:00:00.000Z"
-category: "event"
-id: "2023-11-07-event-november-push-event"
+title: '[Event] November Push'
+date: '2023-11-07T00:00:00.000Z'
+category: event
+id: 2023-11-07-event-november-push-event
 images:
-  - /images/news/legacy/event/2023-11-07-event-november-push-event/74d8b790ad5d421fa26010a1298d5717.webp
+  - >-
+    /images/news/legacy/event/2023-11-07-event-november-push-event/74d8b790ad5d421fa26010a1298d5717.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-07-event-november-push-event/74d8b790ad5d421fa26010a1298d5717.webp)  

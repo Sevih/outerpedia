@@ -1,11 +1,13 @@
 ---
-title: "[Event] November Push Event (21/11~04/12)"
-date: "2023-11-21T00:00:00.000Z"
-category: "event"
-id: "2023-11-21-event-november-push-event-21-11-04-12"
+title: '[Event] November Push (21/11~04/12)'
+date: '2023-11-21T00:00:00.000Z'
+category: event
+id: 2023-11-21-event-november-push-event-21-11-04-12
 images:
-  - /images/news/legacy/event/2023-11-21-event-november-push-event-21-11-04-12/034a37f1ef764a15a7886edb5ae8a632.webp
-  - /images/news/legacy/event/2023-11-21-event-november-push-event-21-11-04-12/ce1ebb7d11ea401989088faac451c28c.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-november-push-event-21-11-04-12/034a37f1ef764a15a7886edb5ae8a632.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-november-push-event-21-11-04-12/ce1ebb7d11ea401989088faac451c28c.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-21-event-november-push-event-21-11-04-12/034a37f1ef764a15a7886edb5ae8a632.webp)  

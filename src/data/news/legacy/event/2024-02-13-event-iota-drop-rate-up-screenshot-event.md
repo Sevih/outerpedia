@@ -1,11 +1,13 @@
 ---
-title: "[Event]Iota Drop Rate Up Screenshot Event"
-date: "2024-02-13T00:00:00.000Z"
-category: "event"
-id: "2024-02-13-event-iota-drop-rate-up-screenshot-event"
+title: '[Event]Iota Rate Up Screenshot Event'
+date: '2024-02-13T00:00:00.000Z'
+category: event
+id: 2024-02-13-event-iota-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2024-02-13-event-iota-drop-rate-up-screenshot-event/340e8f9d0cc44d7392a868783c2855bb.webp
-  - /images/news/legacy/event/2024-02-13-event-iota-drop-rate-up-screenshot-event/ed540b6713cd483dbb9511c17c3c34e0.webp
+  - >-
+    /images/news/legacy/event/2024-02-13-event-iota-drop-rate-up-screenshot-event/340e8f9d0cc44d7392a868783c2855bb.webp
+  - >-
+    /images/news/legacy/event/2024-02-13-event-iota-drop-rate-up-screenshot-event/ed540b6713cd483dbb9511c17c3c34e0.webp
 ---
 
 ![](/images/news/legacy/event/2024-02-13-event-iota-drop-rate-up-screenshot-event/340e8f9d0cc44d7392a868783c2855bb.webp)  

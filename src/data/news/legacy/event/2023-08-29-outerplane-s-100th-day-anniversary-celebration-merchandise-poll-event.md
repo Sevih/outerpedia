@@ -1,11 +1,14 @@
 ---
-title: "OUTERPLANE's 100th-Day Anniversary Celebration! Merchandise Poll Event"
-date: "2023-08-29T00:00:00.000Z"
-category: "event"
-id: "2023-08-29-outerplane-s-100th-day-anniversary-celebration-merchandise-poll-event"
+title: OP's 100-Day Anniversary! Merchandise Poll Event
+date: '2023-08-29T00:00:00.000Z'
+category: event
+id: >-
+  2023-08-29-outerplane-s-100th-day-anniversary-celebration-merchandise-poll-event
 images:
-  - /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-merchandise-poll-event/94a143f74b6e42eaabe58cc69e12f8bd.webp
-  - /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-merchandise-poll-event/d1109273daa9492b91a3d1958b856f32_002.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-merchandise-poll-event/94a143f74b6e42eaabe58cc69e12f8bd.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-merchandise-poll-event/d1109273daa9492b91a3d1958b856f32_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-29-outerplane-s-100th-day-anniversary-celebration-merchandise-poll-event/94a143f74b6e42eaabe58cc69e12f8bd.webp)

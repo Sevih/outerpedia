@@ -1,11 +1,13 @@
 ---
-title: "[Event] Special Buff Event"
-date: "2025-01-27T00:00:00.000Z"
-category: "event"
-id: "2025-01-27-event-special-buff-event"
+title: '[Event] Special Buff'
+date: '2025-01-27T00:00:00.000Z'
+category: event
+id: 2025-01-27-event-special-buff-event
 images:
-  - /images/news/legacy/event/2025-01-27-event-special-buff-event/78933287dd38475aa79934cd937ad938.webp
-  - /images/news/legacy/event/2025-01-27-event-special-buff-event/3d91b0c84fe9421ab86d9f0b52997c12.webp
+  - >-
+    /images/news/legacy/event/2025-01-27-event-special-buff-event/78933287dd38475aa79934cd937ad938.webp
+  - >-
+    /images/news/legacy/event/2025-01-27-event-special-buff-event/3d91b0c84fe9421ab86d9f0b52997c12.webp
 ---
 
 ![](/images/news/legacy/event/2025-01-27-event-special-buff-event/78933287dd38475aa79934cd937ad938.webp)  

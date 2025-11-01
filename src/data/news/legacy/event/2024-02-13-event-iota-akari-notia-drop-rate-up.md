@@ -1,13 +1,17 @@
 ---
-title: "[Event] Iota & Akari & Notia Drop Rate Up!"
-date: "2024-02-13T00:00:00.000Z"
-category: "event"
-id: "2024-02-13-event-iota-akari-notia-drop-rate-up"
+title: '[Event] Iota & Akari & Notia Rate Up!'
+date: '2024-02-13T00:00:00.000Z'
+category: event
+id: 2024-02-13-event-iota-akari-notia-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-02-13-event-iota-akari-notia-drop-rate-up/7423efa82cca45099897fcc3f8492349.webp
-  - /images/news/legacy/event/2024-02-13-event-iota-akari-notia-drop-rate-up/0c2feae470d848b08aca4ef912d60c2c.webp
-  - /images/news/legacy/event/2024-02-13-event-iota-akari-notia-drop-rate-up/6e70ed47c82641f78474aebe32989818.webp
-  - /images/news/legacy/event/2024-02-13-event-iota-akari-notia-drop-rate-up/54894385e8544e72ae959c847fd6c904.webp
+  - >-
+    /images/news/legacy/event/2024-02-13-event-iota-akari-notia-drop-rate-up/7423efa82cca45099897fcc3f8492349.webp
+  - >-
+    /images/news/legacy/event/2024-02-13-event-iota-akari-notia-drop-rate-up/0c2feae470d848b08aca4ef912d60c2c.webp
+  - >-
+    /images/news/legacy/event/2024-02-13-event-iota-akari-notia-drop-rate-up/6e70ed47c82641f78474aebe32989818.webp
+  - >-
+    /images/news/legacy/event/2024-02-13-event-iota-akari-notia-drop-rate-up/54894385e8544e72ae959c847fd6c904.webp
 ---
 
 ![](/images/news/legacy/event/2024-02-13-event-iota-akari-notia-drop-rate-up/7423efa82cca45099897fcc3f8492349.webp)  

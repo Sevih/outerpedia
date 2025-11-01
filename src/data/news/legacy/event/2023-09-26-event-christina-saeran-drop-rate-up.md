@@ -1,12 +1,15 @@
 ---
-title: "[Event] Christina & Saeran Drop Rate Up!"
-date: "2023-09-26T00:00:00.000Z"
-category: "event"
-id: "2023-09-26-event-christina-saeran-drop-rate-up"
+title: '[Event] Christina & Saeran Rate Up!'
+date: '2023-09-26T00:00:00.000Z'
+category: event
+id: 2023-09-26-event-christina-saeran-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-09-26-event-christina-saeran-drop-rate-up/cd923866a1aa45fa91fdf149e5e974d9.webp
-  - /images/news/legacy/event/2023-09-26-event-christina-saeran-drop-rate-up/f4e97768af064283b23b8cfaad86487b.webp
-  - /images/news/legacy/event/2023-09-26-event-christina-saeran-drop-rate-up/cc88b58c088043fbaa230f2b537a0231.webp
+  - >-
+    /images/news/legacy/event/2023-09-26-event-christina-saeran-drop-rate-up/cd923866a1aa45fa91fdf149e5e974d9.webp
+  - >-
+    /images/news/legacy/event/2023-09-26-event-christina-saeran-drop-rate-up/f4e97768af064283b23b8cfaad86487b.webp
+  - >-
+    /images/news/legacy/event/2023-09-26-event-christina-saeran-drop-rate-up/cc88b58c088043fbaa230f2b537a0231.webp
 ---
 
 ![](/images/news/legacy/event/2023-09-26-event-christina-saeran-drop-rate-up/cd923866a1aa45fa91fdf149e5e974d9.webp)  

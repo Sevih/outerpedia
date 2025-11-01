@@ -1,12 +1,15 @@
 ---
-title: "[Event] Ame & Laplace Drop Rate Up!"
-date: "2023-10-24T00:00:00.000Z"
-category: "event"
-id: "2023-10-24-event-ame-laplace-drop-rate-up"
+title: '[Event] Ame & Laplace Rate Up!'
+date: '2023-10-24T00:00:00.000Z'
+category: event
+id: 2023-10-24-event-ame-laplace-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-10-24-event-ame-laplace-drop-rate-up/b06a941586704982b04e2b1643dac8ba.webp
-  - /images/news/legacy/event/2023-10-24-event-ame-laplace-drop-rate-up/3da21bb73a4c4a06b54e2c647ec6986c.webp
-  - /images/news/legacy/event/2023-10-24-event-ame-laplace-drop-rate-up/7c7aeb52da8b4616ba6846fa010680d2.webp
+  - >-
+    /images/news/legacy/event/2023-10-24-event-ame-laplace-drop-rate-up/b06a941586704982b04e2b1643dac8ba.webp
+  - >-
+    /images/news/legacy/event/2023-10-24-event-ame-laplace-drop-rate-up/3da21bb73a4c4a06b54e2c647ec6986c.webp
+  - >-
+    /images/news/legacy/event/2023-10-24-event-ame-laplace-drop-rate-up/7c7aeb52da8b4616ba6846fa010680d2.webp
 ---
 
 ![](/images/news/legacy/event/2023-10-24-event-ame-laplace-drop-rate-up/b06a941586704982b04e2b1643dac8ba.webp)  

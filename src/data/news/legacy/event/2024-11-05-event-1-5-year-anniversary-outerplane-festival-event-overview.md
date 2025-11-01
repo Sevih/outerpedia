@@ -1,16 +1,23 @@
 ---
-title: "[Event] 1.5-Year Anniversary OUTERPLANE Festival Event Overview"
-date: "2024-11-05T00:00:00.000Z"
-category: "event"
-id: "2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview"
+title: '[Event] 1.5-Year Anniversary OP Festival Event Overview'
+date: '2024-11-05T00:00:00.000Z'
+category: event
+id: 2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview
 images:
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/7cab40b6a7254cab899e818e466b4ff5.webp
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/87b7403a6ce048e8ad2b3af202575c7b.webp
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/f17aa657ede6473f8b1978cb773d16f3.webp
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/445225377a8843d7a8062f34c9205bba.webp
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/1207b4a618ff4caebf81bd3b025c7dd0.webp
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/ba338f69eb3540009b1aa215c2a590e7.webp
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/bb885663ad214dd786255708a107f98f.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/7cab40b6a7254cab899e818e466b4ff5.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/87b7403a6ce048e8ad2b3af202575c7b.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/f17aa657ede6473f8b1978cb773d16f3.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/445225377a8843d7a8062f34c9205bba.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/1207b4a618ff4caebf81bd3b025c7dd0.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/ba338f69eb3540009b1aa215c2a590e7.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/bb885663ad214dd786255708a107f98f.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-event-overview/7cab40b6a7254cab899e818e466b4ff5.webp)

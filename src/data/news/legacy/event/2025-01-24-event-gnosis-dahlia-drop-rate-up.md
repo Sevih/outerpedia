@@ -1,11 +1,13 @@
 ---
-title: "[Event] Gnosis Dahlia Drop Rate Up!"
-date: "2025-01-24T00:00:00.000Z"
-category: "event"
-id: "2025-01-24-event-gnosis-dahlia-drop-rate-up"
+title: '[Event] Gnosis Dahlia Rate Up!'
+date: '2025-01-24T00:00:00.000Z'
+category: event
+id: 2025-01-24-event-gnosis-dahlia-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-01-24-event-gnosis-dahlia-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp
-  - /images/news/legacy/event/2025-01-24-event-gnosis-dahlia-drop-rate-up/c4e6d4daff974a9092f81642c39c6945.webp
+  - >-
+    /images/news/legacy/event/2025-01-24-event-gnosis-dahlia-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp
+  - >-
+    /images/news/legacy/event/2025-01-24-event-gnosis-dahlia-drop-rate-up/c4e6d4daff974a9092f81642c39c6945.webp
 ---
 
 ![](/images/news/legacy/event/2025-01-24-event-gnosis-dahlia-drop-rate-up/34e8c07059514b98a77e6581df0e5889.webp)  

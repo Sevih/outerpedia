@@ -1,11 +1,13 @@
 ---
-title: "[Event] Stella Drop Rate Up Screenshot Event"
-date: "2023-12-05T00:00:00.000Z"
-category: "event"
-id: "2023-12-05-event-stella-drop-rate-up-screenshot-event"
+title: '[Event] Stella Rate Up Screenshot'
+date: '2023-12-05T00:00:00.000Z'
+category: event
+id: 2023-12-05-event-stella-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-12-05-event-stella-drop-rate-up-screenshot-event/4095d52154bc4a46b428a409d48125e3.webp
-  - /images/news/legacy/event/2023-12-05-event-stella-drop-rate-up-screenshot-event/5934406f718c412783216ad310012a21_002.webp
+  - >-
+    /images/news/legacy/event/2023-12-05-event-stella-drop-rate-up-screenshot-event/4095d52154bc4a46b428a409d48125e3.webp
+  - >-
+    /images/news/legacy/event/2023-12-05-event-stella-drop-rate-up-screenshot-event/5934406f718c412783216ad310012a21_002.webp
 ---
 
   

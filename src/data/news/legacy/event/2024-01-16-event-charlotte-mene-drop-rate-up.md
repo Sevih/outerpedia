@@ -1,12 +1,15 @@
 ---
-title: "[Event] Charlotte & Mene Drop Rate Up!"
-date: "2024-01-16T00:00:00.000Z"
-category: "event"
-id: "2024-01-16-event-charlotte-mene-drop-rate-up"
+title: '[Event] Charlotte & Mene Rate Up!'
+date: '2024-01-16T00:00:00.000Z'
+category: event
+id: 2024-01-16-event-charlotte-mene-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-01-16-event-charlotte-mene-drop-rate-up/a4316805bf4246d08dd4dd88408a2a37.webp
-  - /images/news/legacy/event/2024-01-16-event-charlotte-mene-drop-rate-up/ccc3945c840a4d33a7793cf8a2f3fcfe.webp
-  - /images/news/legacy/event/2024-01-16-event-charlotte-mene-drop-rate-up/fee926cb7f2443129c6ae3fd00d442f5.webp
+  - >-
+    /images/news/legacy/event/2024-01-16-event-charlotte-mene-drop-rate-up/a4316805bf4246d08dd4dd88408a2a37.webp
+  - >-
+    /images/news/legacy/event/2024-01-16-event-charlotte-mene-drop-rate-up/ccc3945c840a4d33a7793cf8a2f3fcfe.webp
+  - >-
+    /images/news/legacy/event/2024-01-16-event-charlotte-mene-drop-rate-up/fee926cb7f2443129c6ae3fd00d442f5.webp
 ---
 
 ![](/images/news/legacy/event/2024-01-16-event-charlotte-mene-drop-rate-up/a4316805bf4246d08dd4dd88408a2a37.webp)  

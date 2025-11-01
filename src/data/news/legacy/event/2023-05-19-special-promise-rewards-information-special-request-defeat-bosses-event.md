@@ -1,10 +1,12 @@
 ---
-title: "Special Promise & Rewards Information: [Special Request: Defeat Bosses] Event"
-date: "2023-05-19T00:00:00.000Z"
-category: "event"
-id: "2023-05-19-special-promise-rewards-information-special-request-defeat-bosses-event"
+title: 'Special Promise & Rewards Information: [ Defeat Bosses] Event'
+date: '2023-05-19T00:00:00.000Z'
+category: event
+id: >-
+  2023-05-19-special-promise-rewards-information-special-request-defeat-bosses-event
 images:
-  - /images/news/legacy/event/2023-05-19-special-promise-rewards-information-special-request-defeat-bosses-event/157abbf6767145bd84845ef8b2135a83.webp
+  - >-
+    /images/news/legacy/event/2023-05-19-special-promise-rewards-information-special-request-defeat-bosses-event/157abbf6767145bd84845ef8b2135a83.webp
 ---
 
 ![](/images/news/legacy/event/2023-05-19-special-promise-rewards-information-special-request-defeat-bosses-event/157abbf6767145bd84845ef8b2135a83.webp)

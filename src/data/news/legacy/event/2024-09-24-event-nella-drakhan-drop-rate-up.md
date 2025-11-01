@@ -1,12 +1,15 @@
 ---
-title: "[Event] Nella & Drakhan Drop Rate Up!"
-date: "2024-09-24T00:00:00.000Z"
-category: "event"
-id: "2024-09-24-event-nella-drakhan-drop-rate-up"
+title: '[Event] Nella & Drakhan Rate Up!'
+date: '2024-09-24T00:00:00.000Z'
+category: event
+id: 2024-09-24-event-nella-drakhan-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-09-24-event-nella-drakhan-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp
-  - /images/news/legacy/event/2024-09-24-event-nella-drakhan-drop-rate-up/a822fa0a81b24333ba7bdb46fc88c903.webp
-  - /images/news/legacy/event/2024-09-24-event-nella-drakhan-drop-rate-up/ffb0f9756b6c407896be65b1e1fad699.webp
+  - >-
+    /images/news/legacy/event/2024-09-24-event-nella-drakhan-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp
+  - >-
+    /images/news/legacy/event/2024-09-24-event-nella-drakhan-drop-rate-up/a822fa0a81b24333ba7bdb46fc88c903.webp
+  - >-
+    /images/news/legacy/event/2024-09-24-event-nella-drakhan-drop-rate-up/ffb0f9756b6c407896be65b1e1fad699.webp
 ---
 
 ![](/images/news/legacy/event/2024-09-24-event-nella-drakhan-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp)  

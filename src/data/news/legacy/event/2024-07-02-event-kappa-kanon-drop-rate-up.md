@@ -1,12 +1,15 @@
 ---
-title: "[Event] Kappa & Kanon Drop Rate Up!"
-date: "2024-07-02T00:00:00.000Z"
-category: "event"
-id: "2024-07-02-event-kappa-kanon-drop-rate-up"
+title: '[Event] Kappa & Kanon Rate Up!'
+date: '2024-07-02T00:00:00.000Z'
+category: event
+id: 2024-07-02-event-kappa-kanon-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-07-02-event-kappa-kanon-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
-  - /images/news/legacy/event/2024-07-02-event-kappa-kanon-drop-rate-up/04bcf3427f1c42d59d47e6362af6f546.webp
-  - /images/news/legacy/event/2024-07-02-event-kappa-kanon-drop-rate-up/24049a11988c41df893a9e04ff7330ac.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-kappa-kanon-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-kappa-kanon-drop-rate-up/04bcf3427f1c42d59d47e6362af6f546.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-kappa-kanon-drop-rate-up/24049a11988c41df893a9e04ff7330ac.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-02-event-kappa-kanon-drop-rate-up/ada2200cb0db4a5f939ce77199bedae5.webp)  

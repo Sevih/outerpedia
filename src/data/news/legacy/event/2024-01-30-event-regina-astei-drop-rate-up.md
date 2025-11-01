@@ -1,12 +1,15 @@
 ---
-title: "[Event] Regina & Astei Drop Rate Up!"
-date: "2024-01-30T00:00:00.000Z"
-category: "event"
-id: "2024-01-30-event-regina-astei-drop-rate-up"
+title: '[Event] Regina & Astei Rate Up!'
+date: '2024-01-30T00:00:00.000Z'
+category: event
+id: 2024-01-30-event-regina-astei-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-01-30-event-regina-astei-drop-rate-up/a4316805bf4246d08dd4dd88408a2a37.webp
-  - /images/news/legacy/event/2024-01-30-event-regina-astei-drop-rate-up/9ae20c7cbd1d400eba89b1e768496aa5.webp
-  - /images/news/legacy/event/2024-01-30-event-regina-astei-drop-rate-up/8c886f2dc7294396a4bbab1c6828e3f4.webp
+  - >-
+    /images/news/legacy/event/2024-01-30-event-regina-astei-drop-rate-up/a4316805bf4246d08dd4dd88408a2a37.webp
+  - >-
+    /images/news/legacy/event/2024-01-30-event-regina-astei-drop-rate-up/9ae20c7cbd1d400eba89b1e768496aa5.webp
+  - >-
+    /images/news/legacy/event/2024-01-30-event-regina-astei-drop-rate-up/8c886f2dc7294396a4bbab1c6828e3f4.webp
 ---
 
 ![](/images/news/legacy/event/2024-01-30-event-regina-astei-drop-rate-up/a4316805bf4246d08dd4dd88408a2a37.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Survey Hub 150% Survey Point Event"
-date: "2024-07-30T00:00:00.000Z"
-category: "event"
-id: "2024-07-30-event-survey-hub-150-survey-point-event"
+title: '[Event] Survey Hub 150% Survey Point'
+date: '2024-07-30T00:00:00.000Z'
+category: event
+id: 2024-07-30-event-survey-hub-150-survey-point-event
 images:
-  - /images/news/legacy/event/2024-07-30-event-survey-hub-150-survey-point-event/7e348ad272f448309f2c2555bf05ed29.webp
-  - /images/news/legacy/event/2024-07-30-event-survey-hub-150-survey-point-event/f8ec5db0cd064c1093feea5f84e33324.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-survey-hub-150-survey-point-event/7e348ad272f448309f2c2555bf05ed29.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-survey-hub-150-survey-point-event/f8ec5db0cd064c1093feea5f84e33324.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-30-event-survey-hub-150-survey-point-event/7e348ad272f448309f2c2555bf05ed29.webp)  

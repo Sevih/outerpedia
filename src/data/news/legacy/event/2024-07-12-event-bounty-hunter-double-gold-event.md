@@ -1,11 +1,13 @@
 ---
-title: "[Event] Bounty Hunter Double Gold Event"
-date: "2024-07-12T00:00:00.000Z"
-category: "event"
-id: "2024-07-12-event-bounty-hunter-double-gold-event"
+title: '[Event] Bounty Hunter Double Gold'
+date: '2024-07-12T00:00:00.000Z'
+category: event
+id: 2024-07-12-event-bounty-hunter-double-gold-event
 images:
-  - /images/news/legacy/event/2024-07-12-event-bounty-hunter-double-gold-event/7a8880f5b8534c4b88ed83ee236f8e8d.webp
-  - /images/news/legacy/event/2024-07-12-event-bounty-hunter-double-gold-event/efee3e85e79249b2b5adc38d2eedff75.webp
+  - >-
+    /images/news/legacy/event/2024-07-12-event-bounty-hunter-double-gold-event/7a8880f5b8534c4b88ed83ee236f8e8d.webp
+  - >-
+    /images/news/legacy/event/2024-07-12-event-bounty-hunter-double-gold-event/efee3e85e79249b2b5adc38d2eedff75.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-12-event-bounty-hunter-double-gold-event/7a8880f5b8534c4b88ed83ee236f8e8d.webp)  

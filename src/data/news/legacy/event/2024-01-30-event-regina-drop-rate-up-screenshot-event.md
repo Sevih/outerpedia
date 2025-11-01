@@ -1,11 +1,13 @@
 ---
-title: "[Event] Regina Drop Rate Up Screenshot Event"
-date: "2024-01-30T00:00:00.000Z"
-category: "event"
-id: "2024-01-30-event-regina-drop-rate-up-screenshot-event"
+title: '[Event] Regina Rate Up Screenshot'
+date: '2024-01-30T00:00:00.000Z'
+category: event
+id: 2024-01-30-event-regina-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2024-01-30-event-regina-drop-rate-up-screenshot-event/340e8f9d0cc44d7392a868783c2855bb.webp
-  - /images/news/legacy/event/2024-01-30-event-regina-drop-rate-up-screenshot-event/0c34149294da4081addf9639f039ba86.webp
+  - >-
+    /images/news/legacy/event/2024-01-30-event-regina-drop-rate-up-screenshot-event/340e8f9d0cc44d7392a868783c2855bb.webp
+  - >-
+    /images/news/legacy/event/2024-01-30-event-regina-drop-rate-up-screenshot-event/0c34149294da4081addf9639f039ba86.webp
 ---
 
 ![](/images/news/legacy/event/2024-01-30-event-regina-drop-rate-up-screenshot-event/340e8f9d0cc44d7392a868783c2855bb.webp)  

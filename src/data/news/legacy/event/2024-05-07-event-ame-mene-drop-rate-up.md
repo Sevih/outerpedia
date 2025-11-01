@@ -1,12 +1,15 @@
 ---
-title: "[Event] Ame & Mene Drop Rate Up!"
-date: "2024-05-07T00:00:00.000Z"
-category: "event"
-id: "2024-05-07-event-ame-mene-drop-rate-up"
+title: '[Event] Ame & Mene Rate Up!'
+date: '2024-05-07T00:00:00.000Z'
+category: event
+id: 2024-05-07-event-ame-mene-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-05-07-event-ame-mene-drop-rate-up/1743daad21c844bc9caf433ad4ae9c0e.webp
-  - /images/news/legacy/event/2024-05-07-event-ame-mene-drop-rate-up/c4ed3dbb3cd54540b3bb0171c9be7019.webp
-  - /images/news/legacy/event/2024-05-07-event-ame-mene-drop-rate-up/363df5c97b20446f914274980e0712ca.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-ame-mene-drop-rate-up/1743daad21c844bc9caf433ad4ae9c0e.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-ame-mene-drop-rate-up/c4ed3dbb3cd54540b3bb0171c9be7019.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-ame-mene-drop-rate-up/363df5c97b20446f914274980e0712ca.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-07-event-ame-mene-drop-rate-up/1743daad21c844bc9caf433ad4ae9c0e.webp)  

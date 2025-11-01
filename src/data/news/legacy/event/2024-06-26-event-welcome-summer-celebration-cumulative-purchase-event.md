@@ -1,11 +1,13 @@
 ---
-title: "[Event] Welcome Summer Celebration🎀 Cumulative Purchase Event"
-date: "2024-06-26T00:00:00.000Z"
-category: "event"
-id: "2024-06-26-event-welcome-summer-celebration-cumulative-purchase-event"
+title: "[Event] Welcome Summer Celebration\U0001F380 Cumulative Purchase"
+date: '2024-06-26T00:00:00.000Z'
+category: event
+id: 2024-06-26-event-welcome-summer-celebration-cumulative-purchase-event
 images:
-  - /images/news/legacy/event/2024-06-26-event-welcome-summer-celebration-cumulative-purchase-event/656e7c92b0fd405d8a3e63a4957ade2f.webp
-  - /images/news/legacy/event/2024-06-26-event-welcome-summer-celebration-cumulative-purchase-event/20f709ef0a314c8984a2f9eeb0bf61e3_002.webp
+  - >-
+    /images/news/legacy/event/2024-06-26-event-welcome-summer-celebration-cumulative-purchase-event/656e7c92b0fd405d8a3e63a4957ade2f.webp
+  - >-
+    /images/news/legacy/event/2024-06-26-event-welcome-summer-celebration-cumulative-purchase-event/20f709ef0a314c8984a2f9eeb0bf61e3_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-26-event-welcome-summer-celebration-cumulative-purchase-event/656e7c92b0fd405d8a3e63a4957ade2f.webp)  

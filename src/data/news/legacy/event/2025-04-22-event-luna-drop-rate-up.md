@@ -1,11 +1,13 @@
 ---
-title: "[Event] Luna Drop Rate Up!"
-date: "2025-04-22T00:00:00.000Z"
-category: "event"
-id: "2025-04-22-event-luna-drop-rate-up"
+title: '[Event] Luna Rate Up!'
+date: '2025-04-22T00:00:00.000Z'
+category: event
+id: 2025-04-22-event-luna-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-04-22-event-luna-drop-rate-up/3ac25fa176624380825758a9f99e1072.webp
-  - /images/news/legacy/event/2025-04-22-event-luna-drop-rate-up/49b960ad35f24039804954f2a88e27d4.webp
+  - >-
+    /images/news/legacy/event/2025-04-22-event-luna-drop-rate-up/3ac25fa176624380825758a9f99e1072.webp
+  - >-
+    /images/news/legacy/event/2025-04-22-event-luna-drop-rate-up/49b960ad35f24039804954f2a88e27d4.webp
 ---
 
 ![](/images/news/legacy/event/2025-04-22-event-luna-drop-rate-up/3ac25fa176624380825758a9f99e1072.webp)  

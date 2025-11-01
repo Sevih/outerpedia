@@ -1,11 +1,13 @@
 ---
-title: "[Event] Aer Battle Pass Drop Rate Up"
-date: "2024-04-09T00:00:00.000Z"
-category: "event"
-id: "2024-04-09-event-aer-battle-pass-drop-rate-up"
+title: '[Event] Aer Battle Pass Rate Up'
+date: '2024-04-09T00:00:00.000Z'
+category: event
+id: 2024-04-09-event-aer-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-04-09-event-aer-battle-pass-drop-rate-up/83b8bb53d9004c83b2dc20997df54828.webp
-  - /images/news/legacy/event/2024-04-09-event-aer-battle-pass-drop-rate-up/625f972286ac4e2da53f7f8ce6e21e92.webp
+  - >-
+    /images/news/legacy/event/2024-04-09-event-aer-battle-pass-drop-rate-up/83b8bb53d9004c83b2dc20997df54828.webp
+  - >-
+    /images/news/legacy/event/2024-04-09-event-aer-battle-pass-drop-rate-up/625f972286ac4e2da53f7f8ce6e21e92.webp
 ---
 
 ![](/images/news/legacy/event/2024-04-09-event-aer-battle-pass-drop-rate-up/83b8bb53d9004c83b2dc20997df54828.webp)  

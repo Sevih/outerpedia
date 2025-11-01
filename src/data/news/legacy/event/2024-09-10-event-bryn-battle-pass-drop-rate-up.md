@@ -1,11 +1,13 @@
 ---
-title: "[Event] Bryn Battle Pass Drop Rate Up"
-date: "2024-09-10T00:00:00.000Z"
-category: "event"
-id: "2024-09-10-event-bryn-battle-pass-drop-rate-up"
+title: '[Event] Bryn Battle Pass Rate Up'
+date: '2024-09-10T00:00:00.000Z'
+category: event
+id: 2024-09-10-event-bryn-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-09-10-event-bryn-battle-pass-drop-rate-up/6c68b153056d42d69a89238700b0d38e.webp
-  - /images/news/legacy/event/2024-09-10-event-bryn-battle-pass-drop-rate-up/c682ba5020eb45a3ba2238f1cce4745e.webp
+  - >-
+    /images/news/legacy/event/2024-09-10-event-bryn-battle-pass-drop-rate-up/6c68b153056d42d69a89238700b0d38e.webp
+  - >-
+    /images/news/legacy/event/2024-09-10-event-bryn-battle-pass-drop-rate-up/c682ba5020eb45a3ba2238f1cce4745e.webp
 ---
 
 ![](/images/news/legacy/event/2024-09-10-event-bryn-battle-pass-drop-rate-up/6c68b153056d42d69a89238700b0d38e.webp)

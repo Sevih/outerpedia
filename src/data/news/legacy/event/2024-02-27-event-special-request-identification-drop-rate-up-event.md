@@ -1,12 +1,15 @@
 ---
-title: "[Event] Special Request : Identification Drop Rate Up Event"
-date: "2024-02-27T00:00:00.000Z"
-category: "event"
-id: "2024-02-27-event-special-request-identification-drop-rate-up-event"
+title: '[Event] Special Request : Identification Rate Up'
+date: '2024-02-27T00:00:00.000Z'
+category: event
+id: 2024-02-27-event-special-request-identification-drop-rate-up-event
 images:
-  - /images/news/legacy/event/2024-02-27-event-special-request-identification-drop-rate-up-event/65d96753ecf3452ea032968ef4d09a04.webp
-  - /images/news/legacy/event/2024-02-27-event-special-request-identification-drop-rate-up-event/654abe5f6f444187a41d85ef13652387_002.webp
-  - /images/news/legacy/event/2024-02-27-event-special-request-identification-drop-rate-up-event/fde206fbf68a470984b9dcc91d81fba4.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-special-request-identification-drop-rate-up-event/65d96753ecf3452ea032968ef4d09a04.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-special-request-identification-drop-rate-up-event/654abe5f6f444187a41d85ef13652387_002.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-special-request-identification-drop-rate-up-event/fde206fbf68a470984b9dcc91d81fba4.webp
 ---
 
 ![](/images/news/legacy/event/2024-02-27-event-special-request-identification-drop-rate-up-event/65d96753ecf3452ea032968ef4d09a04.webp)  

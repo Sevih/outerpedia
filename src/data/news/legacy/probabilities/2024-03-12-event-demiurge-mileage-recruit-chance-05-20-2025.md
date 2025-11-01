@@ -1,11 +1,13 @@
 ---
-title: "[Event] Demiurge Mileage Recruit Chance (05/20/2025)"
-date: "2024-03-12T00:00:00.000Z"
-category: "probabilities"
-id: "2024-03-12-event-demiurge-mileage-recruit-chance-05-20-2025"
+title: '[Event] Demiurge Mileage Recruit (05/20/2025)'
+date: '2024-03-12T00:00:00.000Z'
+category: probabilities
+id: 2024-03-12-event-demiurge-mileage-recruit-chance-05-20-2025
 images:
-  - /images/news/legacy/probabilities/2024-03-12-event-demiurge-mileage-recruit-chance-05-20-2025/a907d02e470241bb8ddf35e2df3246d6.webp
-  - /images/news/legacy/probabilities/2024-03-12-event-demiurge-mileage-recruit-chance-05-20-2025/b9cfec893b694f11ace11cb3de4e5a31.webp
+  - >-
+    /images/news/legacy/probabilities/2024-03-12-event-demiurge-mileage-recruit-chance-05-20-2025/a907d02e470241bb8ddf35e2df3246d6.webp
+  - >-
+    /images/news/legacy/probabilities/2024-03-12-event-demiurge-mileage-recruit-chance-05-20-2025/b9cfec893b694f11ace11cb3de4e5a31.webp
 ---
 
 ![](/images/news/legacy/probabilities/2024-03-12-event-demiurge-mileage-recruit-chance-05-20-2025/a907d02e470241bb8ddf35e2df3246d6.webp)  

@@ -1,10 +1,11 @@
 ---
-title: "[Closed] Rin Drop Rate Up Screenshot Event"
-date: "2023-05-23T00:00:00.000Z"
-category: "event"
-id: "2023-05-23-closed-rin-drop-rate-up-screenshot-event"
+title: '[Closed] Rin Rate Up Screenshot Event'
+date: '2023-05-23T00:00:00.000Z'
+category: event
+id: 2023-05-23-closed-rin-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-05-23-closed-rin-drop-rate-up-screenshot-event/48270bd3d874496480a65e495bf572bb.webp
+  - >-
+    /images/news/legacy/event/2023-05-23-closed-rin-drop-rate-up-screenshot-event/48270bd3d874496480a65e495bf572bb.webp
 ---
 
 ![](/images/news/legacy/event/2023-05-23-closed-rin-drop-rate-up-screenshot-event/48270bd3d874496480a65e495bf572bb.webp)

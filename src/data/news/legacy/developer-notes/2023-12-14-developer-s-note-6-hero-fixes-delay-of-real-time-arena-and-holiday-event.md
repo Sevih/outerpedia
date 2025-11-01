@@ -1,10 +1,12 @@
 ---
-title: "Developer's Note #6: Hero Fixes, Delay of Real-Time Arena, and Holiday Event"
-date: "2023-12-14T00:00:00.000Z"
-category: "developer-notes"
-id: "2023-12-14-developer-s-note-6-hero-fixes-delay-of-real-time-arena-and-holiday-event"
+title: 'Dev Note #6: Hero Fixes, Arena Delay & Holiday Event'
+date: '2023-12-14T00:00:00.000Z'
+category: developer-notes
+id: >-
+  2023-12-14-developer-s-note-6-hero-fixes-delay-of-real-time-arena-and-holiday-event
 images:
-  - /images/news/legacy/developer-notes/2023-12-14-developer-s-note-6-hero-fixes-delay-of-real-time-arena-and-holiday-event/fb171f2511a6460abeed8afca6d1a5dc.webp
+  - >-
+    /images/news/legacy/developer-notes/2023-12-14-developer-s-note-6-hero-fixes-delay-of-real-time-arena-and-holiday-event/fb171f2511a6460abeed8afca6d1a5dc.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2023-12-14-developer-s-note-6-hero-fixes-delay-of-real-time-arena-and-holiday-event/fb171f2511a6460abeed8afca6d1a5dc.webp)  

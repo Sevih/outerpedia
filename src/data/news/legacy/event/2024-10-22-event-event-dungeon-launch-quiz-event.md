@@ -1,11 +1,13 @@
 ---
-title: "[Event] Event Dungeon Launch Quiz Event"
-date: "2024-10-22T00:00:00.000Z"
-category: "event"
-id: "2024-10-22-event-event-dungeon-launch-quiz-event"
+title: '[Event] Dungeon Launch Quiz'
+date: '2024-10-22T00:00:00.000Z'
+category: event
+id: 2024-10-22-event-event-dungeon-launch-quiz-event
 images:
-  - /images/news/legacy/event/2024-10-22-event-event-dungeon-launch-quiz-event/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp
-  - /images/news/legacy/event/2024-10-22-event-event-dungeon-launch-quiz-event/9297b53b63d2463096fc37402296ea98_002.webp
+  - >-
+    /images/news/legacy/event/2024-10-22-event-event-dungeon-launch-quiz-event/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp
+  - >-
+    /images/news/legacy/event/2024-10-22-event-event-dungeon-launch-quiz-event/9297b53b63d2463096fc37402296ea98_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-10-22-event-event-dungeon-launch-quiz-event/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp)  

@@ -1,10 +1,11 @@
 ---
-title: "[Event] Weekend Side Story Hero Piece Hot Time Event"
-date: "2023-06-23T00:00:00.000Z"
-category: "event"
-id: "2023-06-23-event-weekend-side-story-hero-piece-hot-time-event"
+title: '[Event] Weekend Side Story Hero Piece Hot Time'
+date: '2023-06-23T00:00:00.000Z'
+category: event
+id: 2023-06-23-event-weekend-side-story-hero-piece-hot-time-event
 images:
-  - /images/news/legacy/event/2023-06-23-event-weekend-side-story-hero-piece-hot-time-event/852cce3d35974b8691d367f21143060c.webp
+  - >-
+    /images/news/legacy/event/2023-06-23-event-weekend-side-story-hero-piece-hot-time-event/852cce3d35974b8691d367f21143060c.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-23-event-weekend-side-story-hero-piece-hot-time-event/852cce3d35974b8691d367f21143060c.webp)

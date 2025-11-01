@@ -1,11 +1,13 @@
 ---
-title: "[Event] lota Battle Pass Drop Rate Up"
-date: "2025-01-24T00:00:00.000Z"
-category: "event"
-id: "2025-01-24-event-lota-battle-pass-drop-rate-up"
+title: '[Event] lota Battle Pass Rate Up'
+date: '2025-01-24T00:00:00.000Z'
+category: event
+id: 2025-01-24-event-lota-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-01-24-event-lota-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp
-  - /images/news/legacy/event/2025-01-24-event-lota-battle-pass-drop-rate-up/c1c208576e4146f7b8f70b32b9f4f90e.webp
+  - >-
+    /images/news/legacy/event/2025-01-24-event-lota-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp
+  - >-
+    /images/news/legacy/event/2025-01-24-event-lota-battle-pass-drop-rate-up/c1c208576e4146f7b8f70b32b9f4f90e.webp
 ---
 
 ![](/images/news/legacy/event/2025-01-24-event-lota-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp)  

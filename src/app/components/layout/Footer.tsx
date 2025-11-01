@@ -10,7 +10,7 @@ export default function Footer() {
   const offLink = t('link.officialwebiste')
 
   return (
-    <footer className="mt-10 border-t border-zinc-800 bg-black/40">
+    <footer className="mt-6 border-t border-zinc-800 bg-black/40">
       <div className="mx-auto max-w-6xl px-4 py-6 flex flex-col items-center gap-6 text-sm text-zinc-400 md:flex-row md:flex-wrap md:justify-between">
         {/* Infos version */}
         <p className="text-center md:text-left">

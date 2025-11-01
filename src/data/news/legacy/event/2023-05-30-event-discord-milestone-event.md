@@ -1,12 +1,15 @@
 ---
-title: "[Event] Discord Milestone Event"
-date: "2023-05-30T00:00:00.000Z"
-category: "event"
-id: "2023-05-30-event-discord-milestone-event"
+title: '[Event] Discord Milestone'
+date: '2023-05-30T00:00:00.000Z'
+category: event
+id: 2023-05-30-event-discord-milestone-event
 images:
-  - /images/news/legacy/event/2023-05-30-event-discord-milestone-event/7c22deab8d2b4782bf7df5372f788ec1.webp
-  - /images/news/legacy/event/2023-05-30-event-discord-milestone-event/905361e29ad24c18bb3b79c4fe87561c.webp
-  - https://page.onstove.com/[Event]%20Discord%20Milestone%20Event_fichiers/01_%EC%95%88%EB%85%95.png
+  - >-
+    /images/news/legacy/event/2023-05-30-event-discord-milestone-event/7c22deab8d2b4782bf7df5372f788ec1.webp
+  - >-
+    /images/news/legacy/event/2023-05-30-event-discord-milestone-event/905361e29ad24c18bb3b79c4fe87561c.webp
+  - >-
+    https://page.onstove.com/[Event]%20Discord%20Milestone%20Event_fichiers/01_%EC%95%88%EB%85%95.png
 ---
 
 ![](/images/news/legacy/event/2023-05-30-event-discord-milestone-event/7c22deab8d2b4782bf7df5372f788ec1.webp)

@@ -1,11 +1,13 @@
 ---
-title: "[Event] OUTERPLANE X DanMachi V Event Details"
-date: "2025-03-25T00:00:00.000Z"
-category: "event"
-id: "2025-03-25-event-outerplane-x-danmachi-v-event-details"
+title: '[Event] OP X DanMachi V Event Details'
+date: '2025-03-25T00:00:00.000Z'
+category: event
+id: 2025-03-25-event-outerplane-x-danmachi-v-event-details
 images:
-  - /images/news/legacy/event/2025-03-25-event-outerplane-x-danmachi-v-event-details/9c57d38797e847fa85d5a153dbee9212.webp
-  - /images/news/legacy/event/2025-03-25-event-outerplane-x-danmachi-v-event-details/21057861a72c4d95b568ae460121a091.webp
+  - >-
+    /images/news/legacy/event/2025-03-25-event-outerplane-x-danmachi-v-event-details/9c57d38797e847fa85d5a153dbee9212.webp
+  - >-
+    /images/news/legacy/event/2025-03-25-event-outerplane-x-danmachi-v-event-details/21057861a72c4d95b568ae460121a091.webp
 ---
 
 ![](/images/news/legacy/event/2025-03-25-event-outerplane-x-danmachi-v-event-details/9c57d38797e847fa85d5a153dbee9212.webp)

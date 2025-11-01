@@ -1,11 +1,13 @@
 ---
-title: "[Event] Celebrate Our 1.5-Year Anniversary! (11/22 Reward distributed)"
-date: "2024-11-05T00:00:00.000Z"
-category: "event"
-id: "2024-11-05-event-celebrate-our-1-5-year-anniversary-11-22-reward-distributed"
+title: '[Event] Celebrate Our 1.5-Year Anniversary! (11/22 Rewards Sent)'
+date: '2024-11-05T00:00:00.000Z'
+category: event
+id: 2024-11-05-event-celebrate-our-1-5-year-anniversary-11-22-reward-distributed
 images:
-  - /images/news/legacy/event/2024-11-05-event-celebrate-our-1-5-year-anniversary-11-22-reward-distributed/7cab40b6a7254cab899e818e466b4ff5.webp
-  - /images/news/legacy/event/2024-11-05-event-celebrate-our-1-5-year-anniversary-11-22-reward-distributed/8eb20494c7e0471e8483cdc2790129d4.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-celebrate-our-1-5-year-anniversary-11-22-reward-distributed/7cab40b6a7254cab899e818e466b4ff5.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-celebrate-our-1-5-year-anniversary-11-22-reward-distributed/8eb20494c7e0471e8483cdc2790129d4.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-05-event-celebrate-our-1-5-year-anniversary-11-22-reward-distributed/7cab40b6a7254cab899e818e466b4ff5.webp)

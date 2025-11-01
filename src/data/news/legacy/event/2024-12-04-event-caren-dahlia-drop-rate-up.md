@@ -1,12 +1,15 @@
 ---
-title: "[Event] Caren & Dahlia Drop Rate Up!"
-date: "2024-12-04T00:00:00.000Z"
-category: "event"
-id: "2024-12-04-event-caren-dahlia-drop-rate-up"
+title: '[Event] Caren & Dahlia Rate Up!'
+date: '2024-12-04T00:00:00.000Z'
+category: event
+id: 2024-12-04-event-caren-dahlia-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-12-04-event-caren-dahlia-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp
-  - /images/news/legacy/event/2024-12-04-event-caren-dahlia-drop-rate-up/e232721f69284846b7988df2cfd15956.webp
-  - /images/news/legacy/event/2024-12-04-event-caren-dahlia-drop-rate-up/0d1f2516355f469b9652924928ed735a.webp
+  - >-
+    /images/news/legacy/event/2024-12-04-event-caren-dahlia-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp
+  - >-
+    /images/news/legacy/event/2024-12-04-event-caren-dahlia-drop-rate-up/e232721f69284846b7988df2cfd15956.webp
+  - >-
+    /images/news/legacy/event/2024-12-04-event-caren-dahlia-drop-rate-up/0d1f2516355f469b9652924928ed735a.webp
 ---
 
 ![](/images/news/legacy/event/2024-12-04-event-caren-dahlia-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Special Request : Identification Drop Rate Up Event"
-date: "2023-11-21T00:00:00.000Z"
-category: "event"
-id: "2023-11-21-event-special-request-identification-drop-rate-up-event"
+title: '[Event] Special Request : Identification Rate Up'
+date: '2023-11-21T00:00:00.000Z'
+category: event
+id: 2023-11-21-event-special-request-identification-drop-rate-up-event
 images:
-  - /images/news/legacy/event/2023-11-21-event-special-request-identification-drop-rate-up-event/49745ac0012346ef820f9962e5dd43a1.webp
-  - /images/news/legacy/event/2023-11-21-event-special-request-identification-drop-rate-up-event/6b149cbb94e5474db59ef677fdcac657_002.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-special-request-identification-drop-rate-up-event/49745ac0012346ef820f9962e5dd43a1.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-special-request-identification-drop-rate-up-event/6b149cbb94e5474db59ef677fdcac657_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-21-event-special-request-identification-drop-rate-up-event/49745ac0012346ef820f9962e5dd43a1.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Aer Drop Rate Up Screenshot Event"
-date: "2023-07-04T00:00:00.000Z"
-category: "event"
-id: "2023-07-04-event-aer-drop-rate-up-screenshot-event"
+title: '[Event] Aer Rate Up Screenshot'
+date: '2023-07-04T00:00:00.000Z'
+category: event
+id: 2023-07-04-event-aer-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-07-04-event-aer-drop-rate-up-screenshot-event/1d3046a1a49e4683859a07138a20c263.webp
-  - /images/news/legacy/event/2023-07-04-event-aer-drop-rate-up-screenshot-event/2a40411f4f7f4bdbbd1575362d7ce8ec.webp
+  - >-
+    /images/news/legacy/event/2023-07-04-event-aer-drop-rate-up-screenshot-event/1d3046a1a49e4683859a07138a20c263.webp
+  - >-
+    /images/news/legacy/event/2023-07-04-event-aer-drop-rate-up-screenshot-event/2a40411f4f7f4bdbbd1575362d7ce8ec.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-04-event-aer-drop-rate-up-screenshot-event/1d3046a1a49e4683859a07138a20c263.webp)

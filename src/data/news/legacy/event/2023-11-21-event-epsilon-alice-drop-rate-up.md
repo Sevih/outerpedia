@@ -1,12 +1,15 @@
 ---
-title: "[Event] Epsilon & Alice Drop Rate Up!"
-date: "2023-11-21T00:00:00.000Z"
-category: "event"
-id: "2023-11-21-event-epsilon-alice-drop-rate-up"
+title: '[Event] Epsilon & Alice Rate Up!'
+date: '2023-11-21T00:00:00.000Z'
+category: event
+id: 2023-11-21-event-epsilon-alice-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-11-21-event-epsilon-alice-drop-rate-up/6c499782167b4855999c10d30ea201de.webp
-  - /images/news/legacy/event/2023-11-21-event-epsilon-alice-drop-rate-up/fb943130004c4c0a99ad54ab0120bc92.webp
-  - /images/news/legacy/event/2023-11-21-event-epsilon-alice-drop-rate-up/7fa7642639e64f7fb786ef18b3515f36.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-epsilon-alice-drop-rate-up/6c499782167b4855999c10d30ea201de.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-epsilon-alice-drop-rate-up/fb943130004c4c0a99ad54ab0120bc92.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-epsilon-alice-drop-rate-up/7fa7642639e64f7fb786ef18b3515f36.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-21-event-epsilon-alice-drop-rate-up/6c499782167b4855999c10d30ea201de.webp)  

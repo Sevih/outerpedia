@@ -1,11 +1,13 @@
 ---
-title: "[Event] Find the Real Poolside Trickster Regina Event (8/9 Completed)"
-date: "2024-07-16T00:00:00.000Z"
-category: "event"
-id: "2024-07-16-event-find-the-real-poolside-trickster-regina-event-8-9-completed"
+title: '[Event] Find the Real Poolside Trickster Regina (8/9 Completed)'
+date: '2024-07-16T00:00:00.000Z'
+category: event
+id: 2024-07-16-event-find-the-real-poolside-trickster-regina-event-8-9-completed
 images:
-  - /images/news/legacy/event/2024-07-16-event-find-the-real-poolside-trickster-regina-event-8-9-completed/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp
-  - /images/news/legacy/event/2024-07-16-event-find-the-real-poolside-trickster-regina-event-8-9-completed/e6f446c1460a41d3ab6b3ba24ed6ca31.webp
+  - >-
+    /images/news/legacy/event/2024-07-16-event-find-the-real-poolside-trickster-regina-event-8-9-completed/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp
+  - >-
+    /images/news/legacy/event/2024-07-16-event-find-the-real-poolside-trickster-regina-event-8-9-completed/e6f446c1460a41d3ab6b3ba24ed6ca31.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-16-event-find-the-real-poolside-trickster-regina-event-8-9-completed/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp)  

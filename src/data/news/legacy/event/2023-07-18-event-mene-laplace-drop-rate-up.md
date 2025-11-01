@@ -1,12 +1,15 @@
 ---
-title: "[Event] Mene & Laplace Drop Rate Up!"
-date: "2023-07-18T00:00:00.000Z"
-category: "event"
-id: "2023-07-18-event-mene-laplace-drop-rate-up"
+title: '[Event] Mene & Laplace Rate Up!'
+date: '2023-07-18T00:00:00.000Z'
+category: event
+id: 2023-07-18-event-mene-laplace-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-07-18-event-mene-laplace-drop-rate-up/82a8fef9a53a457293b2335aa9c4e8d0.webp
-  - /images/news/legacy/event/2023-07-18-event-mene-laplace-drop-rate-up/f5353b8209a24fe68ee623adbcd40118.webp
-  - /images/news/legacy/event/2023-07-18-event-mene-laplace-drop-rate-up/441f21ec99a9418db146413958cb85f8.webp
+  - >-
+    /images/news/legacy/event/2023-07-18-event-mene-laplace-drop-rate-up/82a8fef9a53a457293b2335aa9c4e8d0.webp
+  - >-
+    /images/news/legacy/event/2023-07-18-event-mene-laplace-drop-rate-up/f5353b8209a24fe68ee623adbcd40118.webp
+  - >-
+    /images/news/legacy/event/2023-07-18-event-mene-laplace-drop-rate-up/441f21ec99a9418db146413958cb85f8.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-18-event-mene-laplace-drop-rate-up/82a8fef9a53a457293b2335aa9c4e8d0.webp)

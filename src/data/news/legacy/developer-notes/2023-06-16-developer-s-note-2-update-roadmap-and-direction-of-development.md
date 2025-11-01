@@ -1,11 +1,13 @@
 ---
-title: "Developer's Note #2: Update roadmap and direction of development"
-date: "2023-06-16T00:00:00.000Z"
-category: "developer-notes"
-id: "2023-06-16-developer-s-note-2-update-roadmap-and-direction-of-development"
+title: 'Dev Note #2: Update roadmap and direction of development'
+date: '2023-06-16T00:00:00.000Z'
+category: developer-notes
+id: 2023-06-16-developer-s-note-2-update-roadmap-and-direction-of-development
 images:
-  - /images/news/legacy/developer-notes/2023-06-16-developer-s-note-2-update-roadmap-and-direction-of-development/aa5d1430279944c9971475fe55ffc6d6_002.webp
-  - /images/news/legacy/developer-notes/2023-06-16-developer-s-note-2-update-roadmap-and-direction-of-development/b4a658ab19e542478f487d69581929d8.webp
+  - >-
+    /images/news/legacy/developer-notes/2023-06-16-developer-s-note-2-update-roadmap-and-direction-of-development/aa5d1430279944c9971475fe55ffc6d6_002.webp
+  - >-
+    /images/news/legacy/developer-notes/2023-06-16-developer-s-note-2-update-roadmap-and-direction-of-development/b4a658ab19e542478f487d69581929d8.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2023-06-16-developer-s-note-2-update-roadmap-and-direction-of-development/aa5d1430279944c9971475fe55ffc6d6_002.webp)

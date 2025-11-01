@@ -1,10 +1,11 @@
 ---
-title: "[Event] Mene Drop Rate Up Screenshot Event"
-date: "2023-07-18T00:00:00.000Z"
-category: "event"
-id: "2023-07-18-event-mene-drop-rate-up-screenshot-event"
+title: '[Event] Mene Rate Up Screenshot'
+date: '2023-07-18T00:00:00.000Z'
+category: event
+id: 2023-07-18-event-mene-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-07-18-event-mene-drop-rate-up-screenshot-event/b9572c4a71eb455ab0cc229efcf2a508.webp
+  - >-
+    /images/news/legacy/event/2023-07-18-event-mene-drop-rate-up-screenshot-event/b9572c4a71eb455ab0cc229efcf2a508.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-18-event-mene-drop-rate-up-screenshot-event/b9572c4a71eb455ab0cc229efcf2a508.webp)

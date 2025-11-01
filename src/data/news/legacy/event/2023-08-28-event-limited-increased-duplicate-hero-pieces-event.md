@@ -1,11 +1,13 @@
 ---
-title: "[Event] Limited! Increased Duplicate Hero Pieces Event"
-date: "2023-08-28T00:00:00.000Z"
-category: "event"
-id: "2023-08-28-event-limited-increased-duplicate-hero-pieces-event"
+title: '[Event] Limited! Increased Duplicate Hero Pieces'
+date: '2023-08-28T00:00:00.000Z'
+category: event
+id: 2023-08-28-event-limited-increased-duplicate-hero-pieces-event
 images:
-  - /images/news/legacy/event/2023-08-28-event-limited-increased-duplicate-hero-pieces-event/6d83a11ebcd946b3bd99a2cd262c40c5.webp
-  - /images/news/legacy/event/2023-08-28-event-limited-increased-duplicate-hero-pieces-event/92c112f44b06419d8664ed9434426666_002.webp
+  - >-
+    /images/news/legacy/event/2023-08-28-event-limited-increased-duplicate-hero-pieces-event/6d83a11ebcd946b3bd99a2cd262c40c5.webp
+  - >-
+    /images/news/legacy/event/2023-08-28-event-limited-increased-duplicate-hero-pieces-event/92c112f44b06419d8664ed9434426666_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-28-event-limited-increased-duplicate-hero-pieces-event/6d83a11ebcd946b3bd99a2cd262c40c5.webp)  

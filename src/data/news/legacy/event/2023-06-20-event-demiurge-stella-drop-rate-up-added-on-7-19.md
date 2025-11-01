@@ -1,11 +1,13 @@
 ---
-title: "[Event] Demiurge Stella Drop Rate Up! (Added on 7/19)"
-date: "2023-06-20T00:00:00.000Z"
-category: "event"
-id: "2023-06-20-event-demiurge-stella-drop-rate-up-added-on-7-19"
+title: '[Event] Demiurge Stella Rate Up! (Added on 7/19)'
+date: '2023-06-20T00:00:00.000Z'
+category: event
+id: 2023-06-20-event-demiurge-stella-drop-rate-up-added-on-7-19
 images:
-  - /images/news/legacy/event/2023-06-20-event-demiurge-stella-drop-rate-up-added-on-7-19/f11bf83f449d4f6ca7e8103fdd27061e.webp
-  - /images/news/legacy/event/2023-06-20-event-demiurge-stella-drop-rate-up-added-on-7-19/05bc3a7d3a474882b12b664d37fe232c.webp
+  - >-
+    /images/news/legacy/event/2023-06-20-event-demiurge-stella-drop-rate-up-added-on-7-19/f11bf83f449d4f6ca7e8103fdd27061e.webp
+  - >-
+    /images/news/legacy/event/2023-06-20-event-demiurge-stella-drop-rate-up-added-on-7-19/05bc3a7d3a474882b12b664d37fe232c.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-20-event-demiurge-stella-drop-rate-up-added-on-7-19/f11bf83f449d4f6ca7e8103fdd27061e.webp)

@@ -1,12 +1,15 @@
 ---
-title: "[Event] Roxie & Dianne Drop Rate Up!"
-date: "2024-08-27T00:00:00.000Z"
-category: "event"
-id: "2024-08-27-event-roxie-dianne-drop-rate-up"
+title: '[Event] Roxie & Dianne Rate Up!'
+date: '2024-08-27T00:00:00.000Z'
+category: event
+id: 2024-08-27-event-roxie-dianne-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-08-27-event-roxie-dianne-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp
-  - /images/news/legacy/event/2024-08-27-event-roxie-dianne-drop-rate-up/82f2cb6742864d29ab4d1284f24f779a.webp
-  - /images/news/legacy/event/2024-08-27-event-roxie-dianne-drop-rate-up/a716a33922404c089b76fa66826fd8fd.webp
+  - >-
+    /images/news/legacy/event/2024-08-27-event-roxie-dianne-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp
+  - >-
+    /images/news/legacy/event/2024-08-27-event-roxie-dianne-drop-rate-up/82f2cb6742864d29ab4d1284f24f779a.webp
+  - >-
+    /images/news/legacy/event/2024-08-27-event-roxie-dianne-drop-rate-up/a716a33922404c089b76fa66826fd8fd.webp
 ---
 
 ![](/images/news/legacy/event/2024-08-27-event-roxie-dianne-drop-rate-up/4746e6c1094d414dbbbd9214829c8e52.webp)  

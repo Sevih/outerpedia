@@ -1,11 +1,13 @@
 ---
-title: "[Livestream] OUTERPLANE 1 Star Wonder Livestream"
-date: "2023-08-21T00:00:00.000Z"
-category: "event"
-id: "2023-08-21-livestream-outerplane-1-star-wonder-livestream"
+title: '[Livestream] OP 1 Star Wonder Livestream'
+date: '2023-08-21T00:00:00.000Z'
+category: event
+id: 2023-08-21-livestream-outerplane-1-star-wonder-livestream
 images:
-  - /images/news/legacy/event/2023-08-21-livestream-outerplane-1-star-wonder-livestream/e7c2e91ad91b497396b9c8235c4a11ca.webp
-  - /images/news/legacy/event/2023-08-21-livestream-outerplane-1-star-wonder-livestream/adf7f795f73c45e487be79cca248b34c_002.webp
+  - >-
+    /images/news/legacy/event/2023-08-21-livestream-outerplane-1-star-wonder-livestream/e7c2e91ad91b497396b9c8235c4a11ca.webp
+  - >-
+    /images/news/legacy/event/2023-08-21-livestream-outerplane-1-star-wonder-livestream/adf7f795f73c45e487be79cca248b34c_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-21-livestream-outerplane-1-star-wonder-livestream/e7c2e91ad91b497396b9c8235c4a11ca.webp)

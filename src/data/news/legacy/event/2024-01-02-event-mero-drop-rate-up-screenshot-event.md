@@ -1,11 +1,13 @@
 ---
-title: "[Event] Mero Drop Rate Up Screenshot Event"
-date: "2024-01-02T00:00:00.000Z"
-category: "event"
-id: "2024-01-02-event-mero-drop-rate-up-screenshot-event"
+title: '[Event] Mero Rate Up Screenshot'
+date: '2024-01-02T00:00:00.000Z'
+category: event
+id: 2024-01-02-event-mero-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2024-01-02-event-mero-drop-rate-up-screenshot-event/c2a2af610a9344238885f4b3780df199.webp
-  - /images/news/legacy/event/2024-01-02-event-mero-drop-rate-up-screenshot-event/7d0dcdf8d8084eab90988c12ebb930e8.webp
+  - >-
+    /images/news/legacy/event/2024-01-02-event-mero-drop-rate-up-screenshot-event/c2a2af610a9344238885f4b3780df199.webp
+  - >-
+    /images/news/legacy/event/2024-01-02-event-mero-drop-rate-up-screenshot-event/7d0dcdf8d8084eab90988c12ebb930e8.webp
 ---
 
 ![](/images/news/legacy/event/2024-01-02-event-mero-drop-rate-up-screenshot-event/c2a2af610a9344238885f4b3780df199.webp)  

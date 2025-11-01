@@ -1,11 +1,13 @@
 ---
-title: "[Event] Stella Drop Rate Up!"
-date: "2024-10-08T00:00:00.000Z"
-category: "event"
-id: "2024-10-08-event-stella-drop-rate-up"
+title: '[Event] Stella Rate Up!'
+date: '2024-10-08T00:00:00.000Z'
+category: event
+id: 2024-10-08-event-stella-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-10-08-event-stella-drop-rate-up/3ac25fa176624380825758a9f99e1072.webp
-  - /images/news/legacy/event/2024-10-08-event-stella-drop-rate-up/4381c126b20f4018acf8a83bd9c01c39.webp
+  - >-
+    /images/news/legacy/event/2024-10-08-event-stella-drop-rate-up/3ac25fa176624380825758a9f99e1072.webp
+  - >-
+    /images/news/legacy/event/2024-10-08-event-stella-drop-rate-up/4381c126b20f4018acf8a83bd9c01c39.webp
 ---
 
 ![](/images/news/legacy/event/2024-10-08-event-stella-drop-rate-up/3ac25fa176624380825758a9f99e1072.webp)  

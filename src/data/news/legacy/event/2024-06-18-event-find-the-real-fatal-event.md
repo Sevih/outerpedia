@@ -1,11 +1,13 @@
 ---
-title: "[Event] Find the Real Fatal Event"
-date: "2024-06-18T00:00:00.000Z"
-category: "event"
-id: "2024-06-18-event-find-the-real-fatal-event"
+title: '[Event] Find the Real Fatal'
+date: '2024-06-18T00:00:00.000Z'
+category: event
+id: 2024-06-18-event-find-the-real-fatal-event
 images:
-  - /images/news/legacy/event/2024-06-18-event-find-the-real-fatal-event/d390a2fb2b9443fbb41d8fa5c6f5f540.webp
-  - /images/news/legacy/event/2024-06-18-event-find-the-real-fatal-event/e7ead5c7d7c344b7a3253766e4d5f086.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-find-the-real-fatal-event/d390a2fb2b9443fbb41d8fa5c6f5f540.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-find-the-real-fatal-event/e7ead5c7d7c344b7a3253766e4d5f086.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-18-event-find-the-real-fatal-event/d390a2fb2b9443fbb41d8fa5c6f5f540.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Notia Drop Rate Up Screenshot Event"
-date: "2023-08-01T00:00:00.000Z"
-category: "event"
-id: "2023-08-01-event-notia-drop-rate-up-screenshot-event"
+title: '[Event] Notia Rate Up Screenshot'
+date: '2023-08-01T00:00:00.000Z'
+category: event
+id: 2023-08-01-event-notia-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-08-01-event-notia-drop-rate-up-screenshot-event/91eb9b80956e48d0b488510a80989767.webp
-  - /images/news/legacy/event/2023-08-01-event-notia-drop-rate-up-screenshot-event/b9a34cb267da46ec9e762ded924fc18d_002.webp
+  - >-
+    /images/news/legacy/event/2023-08-01-event-notia-drop-rate-up-screenshot-event/91eb9b80956e48d0b488510a80989767.webp
+  - >-
+    /images/news/legacy/event/2023-08-01-event-notia-drop-rate-up-screenshot-event/b9a34cb267da46ec9e762ded924fc18d_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-01-event-notia-drop-rate-up-screenshot-event/91eb9b80956e48d0b488510a80989767.webp)

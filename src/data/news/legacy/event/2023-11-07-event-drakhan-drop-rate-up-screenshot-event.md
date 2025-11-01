@@ -1,11 +1,13 @@
 ---
-title: "[Event] Drakhan Drop Rate Up Screenshot Event"
-date: "2023-11-07T00:00:00.000Z"
-category: "event"
-id: "2023-11-07-event-drakhan-drop-rate-up-screenshot-event"
+title: '[Event] Drakhan Rate Up Screenshot'
+date: '2023-11-07T00:00:00.000Z'
+category: event
+id: 2023-11-07-event-drakhan-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-11-07-event-drakhan-drop-rate-up-screenshot-event/a6a2edea857c49ca9c9fad1b6ffc48db.webp
-  - /images/news/legacy/event/2023-11-07-event-drakhan-drop-rate-up-screenshot-event/8fa7d24bb05348f0aec7fe44cdd29f78.webp
+  - >-
+    /images/news/legacy/event/2023-11-07-event-drakhan-drop-rate-up-screenshot-event/a6a2edea857c49ca9c9fad1b6ffc48db.webp
+  - >-
+    /images/news/legacy/event/2023-11-07-event-drakhan-drop-rate-up-screenshot-event/8fa7d24bb05348f0aec7fe44cdd29f78.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-07-event-drakhan-drop-rate-up-screenshot-event/a6a2edea857c49ca9c9fad1b6ffc48db.webp)  

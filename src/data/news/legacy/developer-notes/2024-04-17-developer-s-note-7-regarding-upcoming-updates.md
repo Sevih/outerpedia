@@ -1,16 +1,23 @@
 ---
-title: "Developer's Note #7: Regarding Upcoming Updates"
-date: "2024-04-17T00:00:00.000Z"
-category: "developer-notes"
-id: "2024-04-17-developer-s-note-7-regarding-upcoming-updates"
+title: 'Dev Note #7: Regarding Upcoming Updates'
+date: '2024-04-17T00:00:00.000Z'
+category: developer-notes
+id: 2024-04-17-developer-s-note-7-regarding-upcoming-updates
 images:
-  - /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/9e7943b48a57485d8015573f51ecb094.webp
-  - /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/828a7cfde9c74513954a6f6d38cd34e0.webp
-  - /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/215510b6144044bba43123caacaf7f2d.webp
-  - /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/48303520f7d74b24bb903349b34269a0.webp
-  - /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/f3142e2ccece4756bcf0a1ba0083f838.webp
-  - /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/10fa7e06c51a4bb086e4404808a56d98.webp
-  - /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/85a3d328d1e846328114168ecd99dccb.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/9e7943b48a57485d8015573f51ecb094.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/828a7cfde9c74513954a6f6d38cd34e0.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/215510b6144044bba43123caacaf7f2d.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/48303520f7d74b24bb903349b34269a0.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/f3142e2ccece4756bcf0a1ba0083f838.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/10fa7e06c51a4bb086e4404808a56d98.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/85a3d328d1e846328114168ecd99dccb.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2024-04-17-developer-s-note-7-regarding-upcoming-updates/9e7943b48a57485d8015573f51ecb094.webp)  

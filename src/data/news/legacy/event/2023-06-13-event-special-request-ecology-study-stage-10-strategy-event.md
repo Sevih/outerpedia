@@ -1,10 +1,11 @@
 ---
-title: "[Event] Special Request: Ecology Study Stage 10 Strategy Event"
-date: "2023-06-13T00:00:00.000Z"
-category: "event"
-id: "2023-06-13-event-special-request-ecology-study-stage-10-strategy-event"
+title: '[Event]  Ecology Study Stage 10 Strategy'
+date: '2023-06-13T00:00:00.000Z'
+category: event
+id: 2023-06-13-event-special-request-ecology-study-stage-10-strategy-event
 images:
-  - /images/news/legacy/event/2023-06-13-event-special-request-ecology-study-stage-10-strategy-event/5d8595429102403a969dd3a97bdca6f5.webp
+  - >-
+    /images/news/legacy/event/2023-06-13-event-special-request-ecology-study-stage-10-strategy-event/5d8595429102403a969dd3a97bdca6f5.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-13-event-special-request-ecology-study-stage-10-strategy-event/5d8595429102403a969dd3a97bdca6f5.webp)

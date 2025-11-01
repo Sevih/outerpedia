@@ -1,11 +1,13 @@
 ---
-title: "[Event] Edelweiss Drop Rate Up!"
-date: "2024-08-13T00:00:00.000Z"
-category: "event"
-id: "2024-08-13-event-edelweiss-drop-rate-up"
+title: '[Event] Edelweiss Rate Up!'
+date: '2024-08-13T00:00:00.000Z'
+category: event
+id: 2024-08-13-event-edelweiss-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-08-13-event-edelweiss-drop-rate-up/8644f31c662d41c0b888abdadcf18170.webp
-  - /images/news/legacy/event/2024-08-13-event-edelweiss-drop-rate-up/82a6d0fe73e4479f81a4680b7b17d029.webp
+  - >-
+    /images/news/legacy/event/2024-08-13-event-edelweiss-drop-rate-up/8644f31c662d41c0b888abdadcf18170.webp
+  - >-
+    /images/news/legacy/event/2024-08-13-event-edelweiss-drop-rate-up/82a6d0fe73e4479f81a4680b7b17d029.webp
 ---
 
 ![](/images/news/legacy/event/2024-08-13-event-edelweiss-drop-rate-up/8644f31c662d41c0b888abdadcf18170.webp)  

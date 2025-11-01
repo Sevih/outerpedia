@@ -1,11 +1,13 @@
 ---
-title: "[Event] OUTERPLANE x Google Play Games Payment Discount Promotion"
-date: "2023-11-21T00:00:00.000Z"
-category: "event"
-id: "2023-11-21-event-outerplane-x-google-play-games-payment-discount-promotion"
+title: '[Event] OP x Google Play Games Payment Discount Promotion'
+date: '2023-11-21T00:00:00.000Z'
+category: event
+id: 2023-11-21-event-outerplane-x-google-play-games-payment-discount-promotion
 images:
-  - /images/news/legacy/event/2023-11-21-event-outerplane-x-google-play-games-payment-discount-promotion/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2023-11-21-event-outerplane-x-google-play-games-payment-discount-promotion/64c54f8122824e0a8768698477eecb06.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-outerplane-x-google-play-games-payment-discount-promotion/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-outerplane-x-google-play-games-payment-discount-promotion/64c54f8122824e0a8768698477eecb06.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-21-event-outerplane-x-google-play-games-payment-discount-promotion/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Celebrating OUTERPLANE's No.1 Ranking on AOS Store"
-date: "2023-04-20T00:00:00.000Z"
-category: "event"
-id: "2023-04-20-event-celebrating-outerplane-s-no-1-ranking-on-aos-store"
+title: '[Event] Celebrating OP''s No.1 Ranking on AOS Store'
+date: '2023-04-20T00:00:00.000Z'
+category: event
+id: 2023-04-20-event-celebrating-outerplane-s-no-1-ranking-on-aos-store
 images:
-  - /images/news/legacy/event/2023-04-20-event-celebrating-outerplane-s-no-1-ranking-on-aos-store/c55673b126dc4bf5b00538562cba8bc2.webp
-  - /images/news/legacy/event/2023-04-20-event-celebrating-outerplane-s-no-1-ranking-on-aos-store/0f1d4fd44a3a45e792209b90793ce905.webp
+  - >-
+    /images/news/legacy/event/2023-04-20-event-celebrating-outerplane-s-no-1-ranking-on-aos-store/c55673b126dc4bf5b00538562cba8bc2.webp
+  - >-
+    /images/news/legacy/event/2023-04-20-event-celebrating-outerplane-s-no-1-ranking-on-aos-store/0f1d4fd44a3a45e792209b90793ce905.webp
 ---
 
 ![](/images/news/legacy/event/2023-04-20-event-celebrating-outerplane-s-no-1-ranking-on-aos-store/c55673b126dc4bf5b00538562cba8bc2.webp)

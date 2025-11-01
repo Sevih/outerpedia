@@ -1,12 +1,15 @@
 ---
-title: "[Event] What’s Roxie’s Charm? Event (Reward Distribution Completed)"
-date: "2024-08-27T00:00:00.000Z"
-category: "event"
-id: "2024-08-27-event-what-s-roxie-s-charm-event-reward-distribution-completed"
+title: '[Event] What’s Roxie’s Charm? (Rewards Sent)'
+date: '2024-08-27T00:00:00.000Z'
+category: event
+id: 2024-08-27-event-what-s-roxie-s-charm-event-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-08-27-event-what-s-roxie-s-charm-event-reward-distribution-completed/3c1b5a302f0543eebf66e506bd8ecbbb.webp
-  - /images/news/legacy/event/2024-08-27-event-what-s-roxie-s-charm-event-reward-distribution-completed/3ecf0f7d799d49e0a32a9f15c291eeb3.webp
-  - /images/news/legacy/event/2024-08-27-event-what-s-roxie-s-charm-event-reward-distribution-completed/713d06e892334935b8d017df1282839d.webp
+  - >-
+    /images/news/legacy/event/2024-08-27-event-what-s-roxie-s-charm-event-reward-distribution-completed/3c1b5a302f0543eebf66e506bd8ecbbb.webp
+  - >-
+    /images/news/legacy/event/2024-08-27-event-what-s-roxie-s-charm-event-reward-distribution-completed/3ecf0f7d799d49e0a32a9f15c291eeb3.webp
+  - >-
+    /images/news/legacy/event/2024-08-27-event-what-s-roxie-s-charm-event-reward-distribution-completed/713d06e892334935b8d017df1282839d.webp
 ---
 
 ![](/images/news/legacy/event/2024-08-27-event-what-s-roxie-s-charm-event-reward-distribution-completed/3c1b5a302f0543eebf66e506bd8ecbbb.webp)  

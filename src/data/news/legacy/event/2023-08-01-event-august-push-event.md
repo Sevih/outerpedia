@@ -1,11 +1,13 @@
 ---
-title: "[Event] August Push Event"
-date: "2023-08-01T00:00:00.000Z"
-category: "event"
-id: "2023-08-01-event-august-push-event"
+title: '[Event] August Push'
+date: '2023-08-01T00:00:00.000Z'
+category: event
+id: 2023-08-01-event-august-push-event
 images:
-  - /images/news/legacy/event/2023-08-01-event-august-push-event/fef31a20133449d48ab109cf6871e204.webp
-  - /images/news/legacy/event/2023-08-01-event-august-push-event/8890563095b54fc9b17dd74534720ec5.webp
+  - >-
+    /images/news/legacy/event/2023-08-01-event-august-push-event/fef31a20133449d48ab109cf6871e204.webp
+  - >-
+    /images/news/legacy/event/2023-08-01-event-august-push-event/8890563095b54fc9b17dd74534720ec5.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-01-event-august-push-event/fef31a20133449d48ab109cf6871e204.webp)

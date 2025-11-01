@@ -1,12 +1,15 @@
 ---
-title: "[Event] Hilde Cutscene Poll Event(11/29 Reward distributed)"
-date: "2024-11-19T00:00:00.000Z"
-category: "event"
-id: "2024-11-19-event-hilde-cutscene-poll-event-11-29-reward-distributed"
+title: '[Event] Hilde Cutscene Poll (11/29 Rewards Sent)'
+date: '2024-11-19T00:00:00.000Z'
+category: event
+id: 2024-11-19-event-hilde-cutscene-poll-event-11-29-reward-distributed
 images:
-  - /images/news/legacy/event/2024-11-19-event-hilde-cutscene-poll-event-11-29-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2024-11-19-event-hilde-cutscene-poll-event-11-29-reward-distributed/cca7d9e8bd1b4f299df747f0cff42a61.webp
-  - /images/news/legacy/event/2024-11-19-event-hilde-cutscene-poll-event-11-29-reward-distributed/446efbfd2d4d4f59ab17e0474d4a67cf.webp
+  - >-
+    /images/news/legacy/event/2024-11-19-event-hilde-cutscene-poll-event-11-29-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2024-11-19-event-hilde-cutscene-poll-event-11-29-reward-distributed/cca7d9e8bd1b4f299df747f0cff42a61.webp
+  - >-
+    /images/news/legacy/event/2024-11-19-event-hilde-cutscene-poll-event-11-29-reward-distributed/446efbfd2d4d4f59ab17e0474d4a67cf.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-19-event-hilde-cutscene-poll-event-11-29-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)  

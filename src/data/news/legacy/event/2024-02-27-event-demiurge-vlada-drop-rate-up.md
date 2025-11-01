@@ -1,11 +1,13 @@
 ---
-title: "[Event] Demiurge Vlada Drop Rate Up!"
-date: "2024-02-27T00:00:00.000Z"
-category: "event"
-id: "2024-02-27-event-demiurge-vlada-drop-rate-up"
+title: '[Event] Demiurge Vlada Rate Up!'
+date: '2024-02-27T00:00:00.000Z'
+category: event
+id: 2024-02-27-event-demiurge-vlada-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-02-27-event-demiurge-vlada-drop-rate-up/bb6d2411a845486581a970e939430211.webp
-  - /images/news/legacy/event/2024-02-27-event-demiurge-vlada-drop-rate-up/d76f35c8b8624f909ba5bfd998e0bc1a.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-demiurge-vlada-drop-rate-up/bb6d2411a845486581a970e939430211.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-demiurge-vlada-drop-rate-up/d76f35c8b8624f909ba5bfd998e0bc1a.webp
 ---
 
 ![](/images/news/legacy/event/2024-02-27-event-demiurge-vlada-drop-rate-up/bb6d2411a845486581a970e939430211.webp)  

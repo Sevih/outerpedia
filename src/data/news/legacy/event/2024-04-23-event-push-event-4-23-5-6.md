@@ -1,12 +1,15 @@
 ---
-title: "[Event] Push Event (4/23~5/6)"
-date: "2024-04-23T00:00:00.000Z"
-category: "event"
-id: "2024-04-23-event-push-event-4-23-5-6"
+title: '[Event] Push (4/23~5/6)'
+date: '2024-04-23T00:00:00.000Z'
+category: event
+id: 2024-04-23-event-push-event-4-23-5-6
 images:
-  - /images/news/legacy/event/2024-04-23-event-push-event-4-23-5-6/ac8dfd85b5cc4f3486c6dd4bcefd0ed0.webp
-  - /images/news/legacy/event/2024-04-23-event-push-event-4-23-5-6/7d7fc80d788a414ab3a3acb8823a7f31.webp
-  - /images/news/legacy/event/2024-04-23-event-push-event-4-23-5-6/0472626b96ba4a03960a66e482e11e31.webp
+  - >-
+    /images/news/legacy/event/2024-04-23-event-push-event-4-23-5-6/ac8dfd85b5cc4f3486c6dd4bcefd0ed0.webp
+  - >-
+    /images/news/legacy/event/2024-04-23-event-push-event-4-23-5-6/7d7fc80d788a414ab3a3acb8823a7f31.webp
+  - >-
+    /images/news/legacy/event/2024-04-23-event-push-event-4-23-5-6/0472626b96ba4a03960a66e482e11e31.webp
 ---
 
 ![](/images/news/legacy/event/2024-04-23-event-push-event-4-23-5-6/ac8dfd85b5cc4f3486c6dd4bcefd0ed0.webp)  

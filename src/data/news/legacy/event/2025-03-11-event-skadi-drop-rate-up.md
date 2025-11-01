@@ -1,11 +1,13 @@
 ---
-title: "[Event] Skadi Drop Rate Up!"
-date: "2025-03-11T00:00:00.000Z"
-category: "event"
-id: "2025-03-11-event-skadi-drop-rate-up"
+title: '[Event] Skadi Rate Up!'
+date: '2025-03-11T00:00:00.000Z'
+category: event
+id: 2025-03-11-event-skadi-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-03-11-event-skadi-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2025-03-11-event-skadi-drop-rate-up/04a18cac7bdc428db75e300c1663c4ab.webp
+  - >-
+    /images/news/legacy/event/2025-03-11-event-skadi-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2025-03-11-event-skadi-drop-rate-up/04a18cac7bdc428db75e300c1663c4ab.webp
 ---
 
 ![](/images/news/legacy/event/2025-03-11-event-skadi-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

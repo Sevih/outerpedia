@@ -1,11 +1,13 @@
 ---
-title: "[Event] Ame Quiz Event (5/24 Reward Distribution Completed)"
-date: "2024-05-07T00:00:00.000Z"
-category: "event"
-id: "2024-05-07-event-ame-quiz-event-5-24-reward-distribution-completed"
+title: '[Event] Ame Quiz (5/24 Rewards Sent)'
+date: '2024-05-07T00:00:00.000Z'
+category: event
+id: 2024-05-07-event-ame-quiz-event-5-24-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-05-07-event-ame-quiz-event-5-24-reward-distribution-completed/c20d5cb8b7e14b08a9bf8522948fbc3b.webp
-  - /images/news/legacy/event/2024-05-07-event-ame-quiz-event-5-24-reward-distribution-completed/139422bf40604f06802217a5222beca3_002.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-ame-quiz-event-5-24-reward-distribution-completed/c20d5cb8b7e14b08a9bf8522948fbc3b.webp
+  - >-
+    /images/news/legacy/event/2024-05-07-event-ame-quiz-event-5-24-reward-distribution-completed/139422bf40604f06802217a5222beca3_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-07-event-ame-quiz-event-5-24-reward-distribution-completed/c20d5cb8b7e14b08a9bf8522948fbc3b.webp)  

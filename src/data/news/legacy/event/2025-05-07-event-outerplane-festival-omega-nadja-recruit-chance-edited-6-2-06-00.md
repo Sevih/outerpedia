@@ -1,11 +1,14 @@
 ---
-title: "[Event] OUTERPLANE Festival 'Omega Nadja' Recruit Chance(Edited 6/2 06:00)"
-date: "2025-05-07T00:00:00.000Z"
-category: "event"
-id: "2025-05-07-event-outerplane-festival-omega-nadja-recruit-chance-edited-6-2-06-00"
+title: '[Event] OP Festival ''Omega Nadja'' Recruit(Edited 6/2 06:00)'
+date: '2025-05-07T00:00:00.000Z'
+category: event
+id: >-
+  2025-05-07-event-outerplane-festival-omega-nadja-recruit-chance-edited-6-2-06-00
 images:
-  - /images/news/legacy/event/2025-05-07-event-outerplane-festival-omega-nadja-recruit-chance-edited-6-2-06-00/34e8c07059514b98a77e6581df0e5889.webp
-  - /images/news/legacy/event/2025-05-07-event-outerplane-festival-omega-nadja-recruit-chance-edited-6-2-06-00/655349b8cdbb4940a3142c7fc05729c6.webp
+  - >-
+    /images/news/legacy/event/2025-05-07-event-outerplane-festival-omega-nadja-recruit-chance-edited-6-2-06-00/34e8c07059514b98a77e6581df0e5889.webp
+  - >-
+    /images/news/legacy/event/2025-05-07-event-outerplane-festival-omega-nadja-recruit-chance-edited-6-2-06-00/655349b8cdbb4940a3142c7fc05729c6.webp
 ---
 
 ![](/images/news/legacy/event/2025-05-07-event-outerplane-festival-omega-nadja-recruit-chance-edited-6-2-06-00/34e8c07059514b98a77e6581df0e5889.webp)  

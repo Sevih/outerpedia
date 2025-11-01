@@ -1,11 +1,13 @@
 ---
-title: "[Event] Kappa Battle Pass Drop Rate Up"
-date: "2024-12-30T00:00:00.000Z"
-category: "event"
-id: "2024-12-30-event-kappa-battle-pass-drop-rate-up"
+title: '[Event] Kappa Battle Pass Rate Up'
+date: '2024-12-30T00:00:00.000Z'
+category: event
+id: 2024-12-30-event-kappa-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-12-30-event-kappa-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp
-  - /images/news/legacy/event/2024-12-30-event-kappa-battle-pass-drop-rate-up/525ae37170d048eab7d4a92798b43a86.webp
+  - >-
+    /images/news/legacy/event/2024-12-30-event-kappa-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp
+  - >-
+    /images/news/legacy/event/2024-12-30-event-kappa-battle-pass-drop-rate-up/525ae37170d048eab7d4a92798b43a86.webp
 ---
 
 ![](/images/news/legacy/event/2024-12-30-event-kappa-battle-pass-drop-rate-up/7f543534d8a44118a703744837b1f5cc.webp)  

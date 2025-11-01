@@ -1,11 +1,13 @@
 ---
-title: "[Event] Summer Island Push Event"
-date: "2023-07-04T00:00:00.000Z"
-category: "event"
-id: "2023-07-04-event-summer-island-push-event"
+title: '[Event] Summer Island Push'
+date: '2023-07-04T00:00:00.000Z'
+category: event
+id: 2023-07-04-event-summer-island-push-event
 images:
-  - /images/news/legacy/event/2023-07-04-event-summer-island-push-event/07040c4c41f44fc39828118b86d7d12f.webp
-  - /images/news/legacy/event/2023-07-04-event-summer-island-push-event/9bf36f68e2e44dcebdf984a81f2f2be3.webp
+  - >-
+    /images/news/legacy/event/2023-07-04-event-summer-island-push-event/07040c4c41f44fc39828118b86d7d12f.webp
+  - >-
+    /images/news/legacy/event/2023-07-04-event-summer-island-push-event/9bf36f68e2e44dcebdf984a81f2f2be3.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-04-event-summer-island-push-event/07040c4c41f44fc39828118b86d7d12f.webp)

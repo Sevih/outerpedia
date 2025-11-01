@@ -1,12 +1,15 @@
 ---
-title: "[Event] Demiurge Special Event! Drop Rate Up!"
-date: "2023-12-19T00:00:00.000Z"
-category: "event"
-id: "2023-12-19-event-demiurge-special-event-drop-rate-up"
+title: '[Event] Demiurge Special Event! Rate Up!'
+date: '2023-12-19T00:00:00.000Z'
+category: event
+id: 2023-12-19-event-demiurge-special-event-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-12-19-event-demiurge-special-event-drop-rate-up/c439f9efd94f47ecaa09ad7e6e2391b2.webp
-  - /images/news/legacy/event/2023-12-19-event-demiurge-special-event-drop-rate-up/20ee2c4371254c73acc5b2724a76a036.webp
-  - /images/news/legacy/event/2023-12-19-event-demiurge-special-event-drop-rate-up/a40efafcf99a45bc82c942258fccbe53.webp
+  - >-
+    /images/news/legacy/event/2023-12-19-event-demiurge-special-event-drop-rate-up/c439f9efd94f47ecaa09ad7e6e2391b2.webp
+  - >-
+    /images/news/legacy/event/2023-12-19-event-demiurge-special-event-drop-rate-up/20ee2c4371254c73acc5b2724a76a036.webp
+  - >-
+    /images/news/legacy/event/2023-12-19-event-demiurge-special-event-drop-rate-up/a40efafcf99a45bc82c942258fccbe53.webp
 ---
 
 ![](/images/news/legacy/event/2023-12-19-event-demiurge-special-event-drop-rate-up/c439f9efd94f47ecaa09ad7e6e2391b2.webp)  

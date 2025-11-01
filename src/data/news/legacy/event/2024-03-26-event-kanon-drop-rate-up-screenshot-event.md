@@ -1,12 +1,15 @@
 ---
-title: "[Event] Kanon Drop Rate Up Screenshot Event"
-date: "2024-03-26T00:00:00.000Z"
-category: "event"
-id: "2024-03-26-event-kanon-drop-rate-up-screenshot-event"
+title: '[Event] Kanon Rate Up Screenshot'
+date: '2024-03-26T00:00:00.000Z'
+category: event
+id: 2024-03-26-event-kanon-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2024-03-26-event-kanon-drop-rate-up-screenshot-event/efafabfdb9ec4fc28ad31e883e89085c.webp
-  - /images/news/legacy/event/2024-03-26-event-kanon-drop-rate-up-screenshot-event/4a372462c8784665bc3c347238ad6be4_002.webp
-  - /images/news/legacy/event/2024-03-26-event-kanon-drop-rate-up-screenshot-event/a05779cb62634876a1bf63d7e98df0f5.webp
+  - >-
+    /images/news/legacy/event/2024-03-26-event-kanon-drop-rate-up-screenshot-event/efafabfdb9ec4fc28ad31e883e89085c.webp
+  - >-
+    /images/news/legacy/event/2024-03-26-event-kanon-drop-rate-up-screenshot-event/4a372462c8784665bc3c347238ad6be4_002.webp
+  - >-
+    /images/news/legacy/event/2024-03-26-event-kanon-drop-rate-up-screenshot-event/a05779cb62634876a1bf63d7e98df0f5.webp
 ---
 
 ![](/images/news/legacy/event/2024-03-26-event-kanon-drop-rate-up-screenshot-event/efafabfdb9ec4fc28ad31e883e89085c.webp)  

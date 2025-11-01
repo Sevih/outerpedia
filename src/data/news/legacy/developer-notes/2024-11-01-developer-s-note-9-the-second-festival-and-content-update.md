@@ -1,10 +1,11 @@
 ---
-title: "Developer's Note #9: The Second Festival and Content Update"
-date: "2024-11-01T00:00:00.000Z"
-category: "developer-notes"
-id: "2024-11-01-developer-s-note-9-the-second-festival-and-content-update"
+title: 'Dev Note #9: The Second Festival and Content Update'
+date: '2024-11-01T00:00:00.000Z'
+category: developer-notes
+id: 2024-11-01-developer-s-note-9-the-second-festival-and-content-update
 images:
-  - /images/news/legacy/developer-notes/2024-11-01-developer-s-note-9-the-second-festival-and-content-update/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-11-01-developer-s-note-9-the-second-festival-and-content-update/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2024-11-01-developer-s-note-9-the-second-festival-and-content-update/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp)  

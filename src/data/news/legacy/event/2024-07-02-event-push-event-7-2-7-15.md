@@ -1,11 +1,13 @@
 ---
-title: "[Event] Push Event (7/2~7/15)"
-date: "2024-07-02T00:00:00.000Z"
-category: "event"
-id: "2024-07-02-event-push-event-7-2-7-15"
+title: '[Event] Push (7/2~7/15)'
+date: '2024-07-02T00:00:00.000Z'
+category: event
+id: 2024-07-02-event-push-event-7-2-7-15
 images:
-  - /images/news/legacy/event/2024-07-02-event-push-event-7-2-7-15/78933287dd38475aa79934cd937ad938.webp
-  - /images/news/legacy/event/2024-07-02-event-push-event-7-2-7-15/067fe260338e4477a93217fcb63ee460.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-push-event-7-2-7-15/78933287dd38475aa79934cd937ad938.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-push-event-7-2-7-15/067fe260338e4477a93217fcb63ee460.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-02-event-push-event-7-2-7-15/78933287dd38475aa79934cd937ad938.webp)  

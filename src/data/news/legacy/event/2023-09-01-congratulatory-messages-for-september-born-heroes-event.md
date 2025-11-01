@@ -1,11 +1,13 @@
 ---
-title: "Congratulatory Messages for September-born Heroes! Event"
-date: "2023-09-01T00:00:00.000Z"
-category: "event"
-id: "2023-09-01-congratulatory-messages-for-september-born-heroes-event"
+title: Congrats to September Heroes! Event
+date: '2023-09-01T00:00:00.000Z'
+category: event
+id: 2023-09-01-congratulatory-messages-for-september-born-heroes-event
 images:
-  - /images/news/legacy/event/2023-09-01-congratulatory-messages-for-september-born-heroes-event/4bf93808c6374ac0af4cc07f58fa1d76.webp
-  - /images/news/legacy/event/2023-09-01-congratulatory-messages-for-september-born-heroes-event/2af6b4a96d1241afb489f5cfa64039bc.webp
+  - >-
+    /images/news/legacy/event/2023-09-01-congratulatory-messages-for-september-born-heroes-event/4bf93808c6374ac0af4cc07f58fa1d76.webp
+  - >-
+    /images/news/legacy/event/2023-09-01-congratulatory-messages-for-september-born-heroes-event/2af6b4a96d1241afb489f5cfa64039bc.webp
 ---
 
 ![](/images/news/legacy/event/2023-09-01-congratulatory-messages-for-september-born-heroes-event/4bf93808c6374ac0af4cc07f58fa1d76.webp)

@@ -1,13 +1,17 @@
 ---
-title: "[Event] 1.5-Year Anniversary OUTERPLANE Festival In-game Event"
-date: "2024-11-05T00:00:00.000Z"
-category: "event"
-id: "2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event"
+title: '[Event] 1.5-Year Anniversary OP Festival In-game Event'
+date: '2024-11-05T00:00:00.000Z'
+category: event
+id: 2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event
 images:
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event/9e619b8efc354d25928815d55e9d48af.webp
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event/43609a4a0fab4b4ca72b0a0f9f6efc94.webp
-  - /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event/cec653ce881c44b28cfb5fd9383fd8d9.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event/9e619b8efc354d25928815d55e9d48af.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event/43609a4a0fab4b4ca72b0a0f9f6efc94.webp
+  - >-
+    /images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event/cec653ce881c44b28cfb5fd9383fd8d9.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-05-event-1-5-year-anniversary-outerplane-festival-in-game-event/4ffd3f939d9c4ca79d854b4ee8a0d1a7.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Best Tip📝👑 Event"
-date: "2023-12-11T00:00:00.000Z"
-category: "event"
-id: "2023-12-11-event-best-tip-event"
+title: "[Event] Best Tip\U0001F4DD\U0001F451"
+date: '2023-12-11T00:00:00.000Z'
+category: event
+id: 2023-12-11-event-best-tip-event
 images:
-  - /images/news/legacy/event/2023-12-11-event-best-tip-event/85a1ae1519b04326a7b8004d6f8d0625.webp
-  - /images/news/legacy/event/2023-12-11-event-best-tip-event/549df5942da44c5481a54c640a35d371.webp
+  - >-
+    /images/news/legacy/event/2023-12-11-event-best-tip-event/85a1ae1519b04326a7b8004d6f8d0625.webp
+  - >-
+    /images/news/legacy/event/2023-12-11-event-best-tip-event/549df5942da44c5481a54c640a35d371.webp
 ---
 
 ![](/images/news/legacy/event/2023-12-11-event-best-tip-event/85a1ae1519b04326a7b8004d6f8d0625.webp)  

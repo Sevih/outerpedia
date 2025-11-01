@@ -1,10 +1,11 @@
 ---
-title: "📢 Looking for Partners to Create OUTERPLANE Content! 📢"
-date: "2023-05-23T00:00:00.000Z"
-category: "event"
-id: "2023-05-23-looking-for-partners-to-create-outerplane-content"
+title: "\U0001F4E2 Looking for Partners to Create OP Content! \U0001F4E2"
+date: '2023-05-23T00:00:00.000Z'
+category: event
+id: 2023-05-23-looking-for-partners-to-create-outerplane-content
 images:
-  - /images/news/legacy/event/2023-05-23-looking-for-partners-to-create-outerplane-content/324cd214004546aab1aaeeaa055528b7.webp
+  - >-
+    /images/news/legacy/event/2023-05-23-looking-for-partners-to-create-outerplane-content/324cd214004546aab1aaeeaa055528b7.webp
 ---
 
 ![](/images/news/legacy/event/2023-05-23-looking-for-partners-to-create-outerplane-content/324cd214004546aab1aaeeaa055528b7.webp)

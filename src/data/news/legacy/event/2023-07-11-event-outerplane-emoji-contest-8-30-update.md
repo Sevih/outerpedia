@@ -1,12 +1,15 @@
 ---
-title: "[Event] OUTERPLANE Emoji Contest (8/30 Update)"
-date: "2023-07-11T00:00:00.000Z"
-category: "event"
-id: "2023-07-11-event-outerplane-emoji-contest-8-30-update"
+title: '[Event] OP Emoji Contest (8/30 Update)'
+date: '2023-07-11T00:00:00.000Z'
+category: event
+id: 2023-07-11-event-outerplane-emoji-contest-8-30-update
 images:
-  - /images/news/legacy/event/2023-07-11-event-outerplane-emoji-contest-8-30-update/51bebe0a348646f6ae30ab67eb3f785a.webp
-  - /images/news/legacy/event/2023-07-11-event-outerplane-emoji-contest-8-30-update/8b9a43620da64325a1f8844b9028f01d_002.webp
-  - https://page.onstove.com/[Event]%20OUTERPLANE%20Emoji%20Contest%20(8_30%20Update)_fichiers/09_%EA%B0%90%EC%82%AC.png
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-emoji-contest-8-30-update/51bebe0a348646f6ae30ab67eb3f785a.webp
+  - >-
+    /images/news/legacy/event/2023-07-11-event-outerplane-emoji-contest-8-30-update/8b9a43620da64325a1f8844b9028f01d_002.webp
+  - >-
+    https://page.onstove.com/[Event]%20OUTERPLANE%20Emoji%20Contest%20(8_30%20Update)_fichiers/09_%EA%B0%90%EC%82%AC.png
 ---
 
 ![](/images/news/legacy/event/2023-07-11-event-outerplane-emoji-contest-8-30-update/51bebe0a348646f6ae30ab67eb3f785a.webp)

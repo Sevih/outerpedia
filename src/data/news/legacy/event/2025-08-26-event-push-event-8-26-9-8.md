@@ -1,10 +1,11 @@
 ---
-title: "[Event] Push Event (8/26~9/8)"
-date: "2025-08-26T00:00:00.000Z"
-category: "event"
-id: "2025-08-26-event-push-event-8-26-9-8"
+title: '[Event] Push (8/26~9/8)'
+date: '2025-08-26T00:00:00.000Z'
+category: event
+id: 2025-08-26-event-push-event-8-26-9-8
 images:
-  - /images/news/legacy/event/2025-08-26-event-push-event-8-26-9-8/4759c200b4a94ca4a56a76260f0d31bb.webp
+  - >-
+    /images/news/legacy/event/2025-08-26-event-push-event-8-26-9-8/4759c200b4a94ca4a56a76260f0d31bb.webp
 ---
 
 ![](/images/news/legacy/event/2025-08-26-event-push-event-8-26-9-8/4759c200b4a94ca4a56a76260f0d31bb.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Hanbyul Lee Drop Rate Up Screenshot Event"
-date: "2023-06-20T00:00:00.000Z"
-category: "event"
-id: "2023-06-20-event-hanbyul-lee-drop-rate-up-screenshot-event"
+title: '[Event] Hanbyul Lee Rate Up Screenshot'
+date: '2023-06-20T00:00:00.000Z'
+category: event
+id: 2023-06-20-event-hanbyul-lee-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2023-06-20-event-hanbyul-lee-drop-rate-up-screenshot-event/f0113e7389c140b8bef91aa70d2b54e4.webp
-  - /images/news/legacy/event/2023-06-20-event-hanbyul-lee-drop-rate-up-screenshot-event/ea5931a1a35a4f539ed7609a27172d9b_002.webp
+  - >-
+    /images/news/legacy/event/2023-06-20-event-hanbyul-lee-drop-rate-up-screenshot-event/f0113e7389c140b8bef91aa70d2b54e4.webp
+  - >-
+    /images/news/legacy/event/2023-06-20-event-hanbyul-lee-drop-rate-up-screenshot-event/ea5931a1a35a4f539ed7609a27172d9b_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-20-event-hanbyul-lee-drop-rate-up-screenshot-event/f0113e7389c140b8bef91aa70d2b54e4.webp)

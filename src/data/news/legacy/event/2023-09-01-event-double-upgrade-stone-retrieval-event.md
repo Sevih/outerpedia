@@ -1,10 +1,11 @@
 ---
-title: "[Event] Double Upgrade Stone Retrieval Event"
-date: "2023-09-01T00:00:00.000Z"
-category: "event"
-id: "2023-09-01-event-double-upgrade-stone-retrieval-event"
+title: '[Event] Double Upgrade Stone Retrieval'
+date: '2023-09-01T00:00:00.000Z'
+category: event
+id: 2023-09-01-event-double-upgrade-stone-retrieval-event
 images:
-  - /images/news/legacy/event/2023-09-01-event-double-upgrade-stone-retrieval-event/69d250c48c0f495c8301c8d3751f10bb.webp
+  - >-
+    /images/news/legacy/event/2023-09-01-event-double-upgrade-stone-retrieval-event/69d250c48c0f495c8301c8d3751f10bb.webp
 ---
 
 ![](/images/news/legacy/event/2023-09-01-event-double-upgrade-stone-retrieval-event/69d250c48c0f495c8301c8d3751f10bb.webp)  

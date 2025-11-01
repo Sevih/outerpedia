@@ -1,11 +1,13 @@
 ---
-title: "[Event] Bandit Chase Double Event"
-date: "2023-11-03T00:00:00.000Z"
-category: "event"
-id: "2023-11-03-event-bandit-chase-double-event"
+title: '[Event] Bandit Chase Double'
+date: '2023-11-03T00:00:00.000Z'
+category: event
+id: 2023-11-03-event-bandit-chase-double-event
 images:
-  - /images/news/legacy/event/2023-11-03-event-bandit-chase-double-event/6fc2a78503d84a2db3dfba4d918909ba.webp
-  - /images/news/legacy/event/2023-11-03-event-bandit-chase-double-event/379af11848c34017976ee1cbd26e5f5b_002.webp
+  - >-
+    /images/news/legacy/event/2023-11-03-event-bandit-chase-double-event/6fc2a78503d84a2db3dfba4d918909ba.webp
+  - >-
+    /images/news/legacy/event/2023-11-03-event-bandit-chase-double-event/379af11848c34017976ee1cbd26e5f5b_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-03-event-bandit-chase-double-event/6fc2a78503d84a2db3dfba4d918909ba.webp)  

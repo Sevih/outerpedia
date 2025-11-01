@@ -1,11 +1,13 @@
 ---
-title: "[EVENT] Special Buff Event"
-date: "2024-07-03T00:00:00.000Z"
-category: "event"
-id: "2024-07-03-event-special-buff-event"
+title: '[Event] Special Buff'
+date: '2024-07-03T00:00:00.000Z'
+category: event
+id: 2024-07-03-event-special-buff-event
 images:
-  - /images/news/legacy/event/2024-07-03-event-special-buff-event/78933287dd38475aa79934cd937ad938.webp
-  - /images/news/legacy/event/2024-07-03-event-special-buff-event/93199968df55474b974f0cfaad5cb354_002.webp
+  - >-
+    /images/news/legacy/event/2024-07-03-event-special-buff-event/78933287dd38475aa79934cd937ad938.webp
+  - >-
+    /images/news/legacy/event/2024-07-03-event-special-buff-event/93199968df55474b974f0cfaad5cb354_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-03-event-special-buff-event/78933287dd38475aa79934cd937ad938.webp)  

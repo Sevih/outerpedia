@@ -1,12 +1,15 @@
 ---
-title: "[Event] Choose Your Favorite Illustration! Event"
-date: "2024-08-13T00:00:00.000Z"
-category: "event"
-id: "2024-08-13-event-choose-your-favorite-illustration-event"
+title: '[Event] Choose Your Favorite Illustration!'
+date: '2024-08-13T00:00:00.000Z'
+category: event
+id: 2024-08-13-event-choose-your-favorite-illustration-event
 images:
-  - /images/news/legacy/event/2024-08-13-event-choose-your-favorite-illustration-event/78933287dd38475aa79934cd937ad938.webp
-  - /images/news/legacy/event/2024-08-13-event-choose-your-favorite-illustration-event/55ce206766aa434caf57f18c05b3ab90.webp
-  - /images/news/legacy/event/2024-08-13-event-choose-your-favorite-illustration-event/073a036eeaf14a97baa7fb2492bb2cc5.webp
+  - >-
+    /images/news/legacy/event/2024-08-13-event-choose-your-favorite-illustration-event/78933287dd38475aa79934cd937ad938.webp
+  - >-
+    /images/news/legacy/event/2024-08-13-event-choose-your-favorite-illustration-event/55ce206766aa434caf57f18c05b3ab90.webp
+  - >-
+    /images/news/legacy/event/2024-08-13-event-choose-your-favorite-illustration-event/073a036eeaf14a97baa7fb2492bb2cc5.webp
 ---
 
 ![](/images/news/legacy/event/2024-08-13-event-choose-your-favorite-illustration-event/78933287dd38475aa79934cd937ad938.webp)  

@@ -1,12 +1,16 @@
 ---
-title: "[Event] OUTERPLANE Official YouTube/X Subscribe & Follow Event (Added on 5/29)"
-date: "2024-05-08T00:00:00.000Z"
-category: "event"
-id: "2024-05-08-event-outerplane-official-youtube-x-subscribe-follow-event-added-on-5-29"
+title: '[Event] OP Official YouTube/X Subscribe & Follow (Added on 5/29)'
+date: '2024-05-08T00:00:00.000Z'
+category: event
+id: >-
+  2024-05-08-event-outerplane-official-youtube-x-subscribe-follow-event-added-on-5-29
 images:
-  - /images/news/legacy/event/2024-05-08-event-outerplane-official-youtube-x-subscribe-follow-event-added-on-5-29/e93c7d2dc0bf44a5a071984d5296307b.webp
-  - /images/news/legacy/event/2024-05-08-event-outerplane-official-youtube-x-subscribe-follow-event-added-on-5-29/5f998ffbaf33427592a4e8026f99354f_002.webp
-  - https://page.onstove.com/[Event]%20OUTERPLANE%20Official%20YouTube_X%20Subscribe%20&%20Follow%20Event%20(Added%20on%205_29)_fichiers/09_%EA%B0%90%EC%82%AC.png
+  - >-
+    /images/news/legacy/event/2024-05-08-event-outerplane-official-youtube-x-subscribe-follow-event-added-on-5-29/e93c7d2dc0bf44a5a071984d5296307b.webp
+  - >-
+    /images/news/legacy/event/2024-05-08-event-outerplane-official-youtube-x-subscribe-follow-event-added-on-5-29/5f998ffbaf33427592a4e8026f99354f_002.webp
+  - >-
+    https://page.onstove.com/[Event]%20OUTERPLANE%20Official%20YouTube_X%20Subscribe%20&%20Follow%20Event%20(Added%20on%205_29)_fichiers/09_%EA%B0%90%EC%82%AC.png
 ---
 
 ![](/images/news/legacy/event/2024-05-08-event-outerplane-official-youtube-x-subscribe-follow-event-added-on-5-29/e93c7d2dc0bf44a5a071984d5296307b.webp)  

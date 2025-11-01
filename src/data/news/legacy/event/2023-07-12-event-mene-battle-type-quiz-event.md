@@ -1,11 +1,13 @@
 ---
-title: "[Event] 'Mene' Battle Type Quiz Event"
-date: "2023-07-12T00:00:00.000Z"
-category: "event"
-id: "2023-07-12-event-mene-battle-type-quiz-event"
+title: '[Event] ''Mene'' Battle Type Quiz'
+date: '2023-07-12T00:00:00.000Z'
+category: event
+id: 2023-07-12-event-mene-battle-type-quiz-event
 images:
-  - /images/news/legacy/event/2023-07-12-event-mene-battle-type-quiz-event/ca260a0b79204555afe8874d30bf36db.webp
-  - /images/news/legacy/event/2023-07-12-event-mene-battle-type-quiz-event/6e573968a5a04cbd9c1bc997627f6979_002.webp
+  - >-
+    /images/news/legacy/event/2023-07-12-event-mene-battle-type-quiz-event/ca260a0b79204555afe8874d30bf36db.webp
+  - >-
+    /images/news/legacy/event/2023-07-12-event-mene-battle-type-quiz-event/6e573968a5a04cbd9c1bc997627f6979_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-12-event-mene-battle-type-quiz-event/ca260a0b79204555afe8874d30bf36db.webp)

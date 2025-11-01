@@ -1,11 +1,13 @@
 ---
-title: "[Event] Delta Drop Rate Up!"
-date: "2025-02-25T00:00:00.000Z"
-category: "event"
-id: "2025-02-25-event-delta-drop-rate-up"
+title: '[Event] Delta Rate Up!'
+date: '2025-02-25T00:00:00.000Z'
+category: event
+id: 2025-02-25-event-delta-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-02-25-event-delta-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2025-02-25-event-delta-drop-rate-up/8b5f3da858da411cbe0d38ced525451f.webp
+  - >-
+    /images/news/legacy/event/2025-02-25-event-delta-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2025-02-25-event-delta-drop-rate-up/8b5f3da858da411cbe0d38ced525451f.webp
 ---
 
 ![](/images/news/legacy/event/2025-02-25-event-delta-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

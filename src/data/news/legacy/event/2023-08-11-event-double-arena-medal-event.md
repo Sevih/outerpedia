@@ -1,10 +1,11 @@
 ---
-title: "[Event] Double Arena Medal Event"
-date: "2023-08-11T00:00:00.000Z"
-category: "event"
-id: "2023-08-11-event-double-arena-medal-event"
+title: '[Event] Double Arena Medal'
+date: '2023-08-11T00:00:00.000Z'
+category: event
+id: 2023-08-11-event-double-arena-medal-event
 images:
-  - /images/news/legacy/event/2023-08-11-event-double-arena-medal-event/41e2a0db3f3342d680d2519ef802e27d.webp
+  - >-
+    /images/news/legacy/event/2023-08-11-event-double-arena-medal-event/41e2a0db3f3342d680d2519ef802e27d.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-11-event-double-arena-medal-event/41e2a0db3f3342d680d2519ef802e27d.webp)

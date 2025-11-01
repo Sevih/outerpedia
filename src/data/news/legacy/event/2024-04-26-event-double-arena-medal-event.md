@@ -1,11 +1,13 @@
 ---
-title: "[Event] Double Arena Medal Event"
-date: "2024-04-26T00:00:00.000Z"
-category: "event"
-id: "2024-04-26-event-double-arena-medal-event"
+title: '[Event] Double Arena Medal'
+date: '2024-04-26T00:00:00.000Z'
+category: event
+id: 2024-04-26-event-double-arena-medal-event
 images:
-  - /images/news/legacy/event/2024-04-26-event-double-arena-medal-event/16a4c068b2f64a178d81c7d1559725e2.webp
-  - /images/news/legacy/event/2024-04-26-event-double-arena-medal-event/c53f57e6d7c54e0780ab5a7012538b5d.webp
+  - >-
+    /images/news/legacy/event/2024-04-26-event-double-arena-medal-event/16a4c068b2f64a178d81c7d1559725e2.webp
+  - >-
+    /images/news/legacy/event/2024-04-26-event-double-arena-medal-event/c53f57e6d7c54e0780ab5a7012538b5d.webp
 ---
 
 ![](/images/news/legacy/event/2024-04-26-event-double-arena-medal-event/16a4c068b2f64a178d81c7d1559725e2.webp)  

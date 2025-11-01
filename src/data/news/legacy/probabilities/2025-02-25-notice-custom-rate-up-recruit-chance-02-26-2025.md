@@ -1,10 +1,11 @@
 ---
-title: "[Notice] Custom Rate Up Recruit Chance (02/26/2025)"
-date: "2025-02-25T00:00:00.000Z"
-category: "probabilities"
-id: "2025-02-25-notice-custom-rate-up-recruit-chance-02-26-2025"
+title: '[Notice] Custom Rate Up Recruit (02/26/2025)'
+date: '2025-02-25T00:00:00.000Z'
+category: probabilities
+id: 2025-02-25-notice-custom-rate-up-recruit-chance-02-26-2025
 images:
-  - /images/news/legacy/probabilities/2025-02-25-notice-custom-rate-up-recruit-chance-02-26-2025/a907d02e470241bb8ddf35e2df3246d6.webp
+  - >-
+    /images/news/legacy/probabilities/2025-02-25-notice-custom-rate-up-recruit-chance-02-26-2025/a907d02e470241bb8ddf35e2df3246d6.webp
 ---
 
 ![](/images/news/legacy/probabilities/2025-02-25-notice-custom-rate-up-recruit-chance-02-26-2025/a907d02e470241bb8ddf35e2df3246d6.webp)  

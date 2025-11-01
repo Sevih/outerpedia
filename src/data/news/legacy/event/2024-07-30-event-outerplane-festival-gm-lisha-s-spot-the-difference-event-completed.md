@@ -1,13 +1,18 @@
 ---
-title: "[Event] OUTERPLANE Festival-GM Lisha’s Spot the Difference Event! (Completed)"
-date: "2024-07-30T00:00:00.000Z"
-category: "event"
-id: "2024-07-30-event-outerplane-festival-gm-lisha-s-spot-the-difference-event-completed"
+title: '[Event] OP Festival: Find Differences! (Completed)'
+date: '2024-07-30T00:00:00.000Z'
+category: event
+id: >-
+  2024-07-30-event-outerplane-festival-gm-lisha-s-spot-the-difference-event-completed
 images:
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-gm-lisha-s-spot-the-difference-event-completed/9644a6ac529f4d1a8aecfd48a7f89a07.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-gm-lisha-s-spot-the-difference-event-completed/28cbca47caf74dc6afa1ac86f89ea9c1.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-gm-lisha-s-spot-the-difference-event-completed/733b1509dee74d93986358269c54a07e.webp
-  - https://page.onstove.com/[Event]%20OUTERPLANE%20Festival-GM%20Lisha%E2%80%99s%20Spot%20the%20Difference%20Event!%20(Completed)_fichiers/09_%EA%B0%90%EC%82%AC.png
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-gm-lisha-s-spot-the-difference-event-completed/9644a6ac529f4d1a8aecfd48a7f89a07.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-gm-lisha-s-spot-the-difference-event-completed/28cbca47caf74dc6afa1ac86f89ea9c1.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-gm-lisha-s-spot-the-difference-event-completed/733b1509dee74d93986358269c54a07e.webp
+  - >-
+    https://page.onstove.com/[Event]%20OUTERPLANE%20Festival-GM%20Lisha%E2%80%99s%20Spot%20the%20Difference%20Event!%20(Completed)_fichiers/09_%EA%B0%90%EC%82%AC.png
 ---
 
 ![](/images/news/legacy/event/2024-07-30-event-outerplane-festival-gm-lisha-s-spot-the-difference-event-completed/9644a6ac529f4d1a8aecfd48a7f89a07.webp)  

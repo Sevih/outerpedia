@@ -1,10 +1,11 @@
 ---
-title: "[Closed] Rin & Valentine Drop Rate Up!"
-date: "2023-05-23T00:00:00.000Z"
-category: "event"
-id: "2023-05-23-closed-rin-valentine-drop-rate-up"
+title: '[Closed] Rin & Valentine Rate Up!'
+date: '2023-05-23T00:00:00.000Z'
+category: event
+id: 2023-05-23-closed-rin-valentine-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-05-23-closed-rin-valentine-drop-rate-up/aeb00cdf36954bac88b0c202e44a000d.webp
+  - >-
+    /images/news/legacy/event/2023-05-23-closed-rin-valentine-drop-rate-up/aeb00cdf36954bac88b0c202e44a000d.webp
 ---
 
 ![](/images/news/legacy/event/2023-05-23-closed-rin-valentine-drop-rate-up/aeb00cdf36954bac88b0c202e44a000d.webp)

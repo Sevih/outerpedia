@@ -1,12 +1,16 @@
 ---
-title: "[Event] Find the Hidden Stamina in the Image! Event(1/31 Reward distributed)"
-date: "2025-01-14T00:00:00.000Z"
-category: "event"
-id: "2025-01-14-event-find-the-hidden-stamina-in-the-image-event-1-31-reward-distributed"
+title: '[Event] Find the Hidden Stamina in the Image! (1/31 Rewards Sent)'
+date: '2025-01-14T00:00:00.000Z'
+category: event
+id: >-
+  2025-01-14-event-find-the-hidden-stamina-in-the-image-event-1-31-reward-distributed
 images:
-  - /images/news/legacy/event/2025-01-14-event-find-the-hidden-stamina-in-the-image-event-1-31-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2025-01-14-event-find-the-hidden-stamina-in-the-image-event-1-31-reward-distributed/1b2f7576c2de4b59869cb05668550e73_002.webp
-  - /images/news/legacy/event/2025-01-14-event-find-the-hidden-stamina-in-the-image-event-1-31-reward-distributed/c356337ab174499bbca85deb1d7d238c.webp
+  - >-
+    /images/news/legacy/event/2025-01-14-event-find-the-hidden-stamina-in-the-image-event-1-31-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2025-01-14-event-find-the-hidden-stamina-in-the-image-event-1-31-reward-distributed/1b2f7576c2de4b59869cb05668550e73_002.webp
+  - >-
+    /images/news/legacy/event/2025-01-14-event-find-the-hidden-stamina-in-the-image-event-1-31-reward-distributed/c356337ab174499bbca85deb1d7d238c.webp
 ---
 
 ![](/images/news/legacy/event/2025-01-14-event-find-the-hidden-stamina-in-the-image-event-1-31-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

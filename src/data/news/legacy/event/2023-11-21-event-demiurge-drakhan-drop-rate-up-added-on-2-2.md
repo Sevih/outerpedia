@@ -1,11 +1,13 @@
 ---
-title: "[Event] Demiurge Drakhan Drop Rate Up! (Added on 2/2)"
-date: "2023-11-21T00:00:00.000Z"
-category: "event"
-id: "2023-11-21-event-demiurge-drakhan-drop-rate-up-added-on-2-2"
+title: '[Event] Demiurge Drakhan Rate Up! (Added on 2/2)'
+date: '2023-11-21T00:00:00.000Z'
+category: event
+id: 2023-11-21-event-demiurge-drakhan-drop-rate-up-added-on-2-2
 images:
-  - /images/news/legacy/event/2023-11-21-event-demiurge-drakhan-drop-rate-up-added-on-2-2/68e1809c090146b596d065b52cf4e780.webp
-  - /images/news/legacy/event/2023-11-21-event-demiurge-drakhan-drop-rate-up-added-on-2-2/018862c60e304dfab2d60fef4150a6eb.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-demiurge-drakhan-drop-rate-up-added-on-2-2/68e1809c090146b596d065b52cf4e780.webp
+  - >-
+    /images/news/legacy/event/2023-11-21-event-demiurge-drakhan-drop-rate-up-added-on-2-2/018862c60e304dfab2d60fef4150a6eb.webp
 ---
 
 ![](/images/news/legacy/event/2023-11-21-event-demiurge-drakhan-drop-rate-up-added-on-2-2/68e1809c090146b596d065b52cf4e780.webp)  

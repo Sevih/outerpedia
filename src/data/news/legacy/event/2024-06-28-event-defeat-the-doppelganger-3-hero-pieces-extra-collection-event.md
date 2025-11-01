@@ -1,11 +1,13 @@
 ---
-title: "[Event] Defeat the Doppelgänger 3★ Hero Pieces Extra Collection Event"
-date: "2024-06-28T00:00:00.000Z"
-category: "event"
-id: "2024-06-28-event-defeat-the-doppelganger-3-hero-pieces-extra-collection-event"
+title: '[Event] Defeat the Doppelgänger 3★ Hero Pieces Extra Collection'
+date: '2024-06-28T00:00:00.000Z'
+category: event
+id: 2024-06-28-event-defeat-the-doppelganger-3-hero-pieces-extra-collection-event
 images:
-  - /images/news/legacy/event/2024-06-28-event-defeat-the-doppelganger-3-hero-pieces-extra-collection-event/6456c4777da94da4bcc0de209bca3782.webp
-  - /images/news/legacy/event/2024-06-28-event-defeat-the-doppelganger-3-hero-pieces-extra-collection-event/3b3e578b58264220a99684f9d32b0638.webp
+  - >-
+    /images/news/legacy/event/2024-06-28-event-defeat-the-doppelganger-3-hero-pieces-extra-collection-event/6456c4777da94da4bcc0de209bca3782.webp
+  - >-
+    /images/news/legacy/event/2024-06-28-event-defeat-the-doppelganger-3-hero-pieces-extra-collection-event/3b3e578b58264220a99684f9d32b0638.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-28-event-defeat-the-doppelganger-3-hero-pieces-extra-collection-event/6456c4777da94da4bcc0de209bca3782.webp)  

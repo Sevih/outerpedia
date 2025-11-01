@@ -1,10 +1,11 @@
 ---
-title: "[Event] Push Event (4/22~5/6)"
-date: "2025-04-22T00:00:00.000Z"
-category: "event"
-id: "2025-04-22-event-push-event-4-22-5-6"
+title: '[Event] Push (4/22~5/6)'
+date: '2025-04-22T00:00:00.000Z'
+category: event
+id: 2025-04-22-event-push-event-4-22-5-6
 images:
-  - /images/news/legacy/event/2025-04-22-event-push-event-4-22-5-6/4759c200b4a94ca4a56a76260f0d31bb.webp
+  - >-
+    /images/news/legacy/event/2025-04-22-event-push-event-4-22-5-6/4759c200b4a94ca4a56a76260f0d31bb.webp
 ---
 
 ![](/images/news/legacy/event/2025-04-22-event-push-event-4-22-5-6/4759c200b4a94ca4a56a76260f0d31bb.webp)  

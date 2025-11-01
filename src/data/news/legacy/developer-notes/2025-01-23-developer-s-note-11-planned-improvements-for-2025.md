@@ -1,10 +1,11 @@
 ---
-title: "Developer's Note #11: Planned Improvements for 2025"
-date: "2025-01-23T00:00:00.000Z"
-category: "developer-notes"
-id: "2025-01-23-developer-s-note-11-planned-improvements-for-2025"
+title: 'Dev Note #11: Planned Improvements for 2025'
+date: '2025-01-23T00:00:00.000Z'
+category: developer-notes
+id: 2025-01-23-developer-s-note-11-planned-improvements-for-2025
 images:
-  - /images/news/legacy/developer-notes/2025-01-23-developer-s-note-11-planned-improvements-for-2025/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
+  - >-
+    /images/news/legacy/developer-notes/2025-01-23-developer-s-note-11-planned-improvements-for-2025/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2025-01-23-developer-s-note-11-planned-improvements-for-2025/b0e0a5a2c84d4ca3a0d81c1f385e6e88.webp)  

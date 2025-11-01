@@ -1,11 +1,13 @@
 ---
-title: "[Event] Kate's Workshop Crafting Gold Discount Event"
-date: "2023-10-24T00:00:00.000Z"
-category: "event"
-id: "2023-10-24-event-kate-s-workshop-crafting-gold-discount-event"
+title: '[Event] Crafting Gold Discount'
+date: '2023-10-24T00:00:00.000Z'
+category: event
+id: 2023-10-24-event-kate-s-workshop-crafting-gold-discount-event
 images:
-  - /images/news/legacy/event/2023-10-24-event-kate-s-workshop-crafting-gold-discount-event/2887c04ef00e4cc398fb8d6a442d89d7.webp
-  - /images/news/legacy/event/2023-10-24-event-kate-s-workshop-crafting-gold-discount-event/f808dead491948c0966e499bf2d459b8_002.webp
+  - >-
+    /images/news/legacy/event/2023-10-24-event-kate-s-workshop-crafting-gold-discount-event/2887c04ef00e4cc398fb8d6a442d89d7.webp
+  - >-
+    /images/news/legacy/event/2023-10-24-event-kate-s-workshop-crafting-gold-discount-event/f808dead491948c0966e499bf2d459b8_002.webp
 ---
 
 ![](/images/news/legacy/event/2023-10-24-event-kate-s-workshop-crafting-gold-discount-event/2887c04ef00e4cc398fb8d6a442d89d7.webp)  

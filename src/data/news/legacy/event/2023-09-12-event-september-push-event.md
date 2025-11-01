@@ -1,11 +1,13 @@
 ---
-title: "[Event] September Push Event"
-date: "2023-09-12T00:00:00.000Z"
-category: "event"
-id: "2023-09-12-event-september-push-event"
+title: '[Event] September Push'
+date: '2023-09-12T00:00:00.000Z'
+category: event
+id: 2023-09-12-event-september-push-event
 images:
-  - /images/news/legacy/event/2023-09-12-event-september-push-event/2fd943c6810a4389b887ee35194ef0f9.webp
-  - /images/news/legacy/event/2023-09-12-event-september-push-event/d1d506d08e46436bac906ce7e6b2c777.webp
+  - >-
+    /images/news/legacy/event/2023-09-12-event-september-push-event/2fd943c6810a4389b887ee35194ef0f9.webp
+  - >-
+    /images/news/legacy/event/2023-09-12-event-september-push-event/d1d506d08e46436bac906ce7e6b2c777.webp
 ---
 
 ![](/images/news/legacy/event/2023-09-12-event-september-push-event/2fd943c6810a4389b887ee35194ef0f9.webp)  

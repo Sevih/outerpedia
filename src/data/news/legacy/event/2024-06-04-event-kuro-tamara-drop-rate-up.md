@@ -1,12 +1,15 @@
 ---
-title: "[Event] Kuro & Tamara Drop Rate Up!"
-date: "2024-06-04T00:00:00.000Z"
-category: "event"
-id: "2024-06-04-event-kuro-tamara-drop-rate-up"
+title: '[Event] Kuro & Tamara Rate Up!'
+date: '2024-06-04T00:00:00.000Z'
+category: event
+id: 2024-06-04-event-kuro-tamara-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-06-04-event-kuro-tamara-drop-rate-up/0ad46c706fa94b8cbe51d5d34806be1f.webp
-  - /images/news/legacy/event/2024-06-04-event-kuro-tamara-drop-rate-up/8e039dcb29634ee19e961d9b3f99f21b.webp
-  - /images/news/legacy/event/2024-06-04-event-kuro-tamara-drop-rate-up/343f7725aeda4375bcf7865eb97d4bfd.webp
+  - >-
+    /images/news/legacy/event/2024-06-04-event-kuro-tamara-drop-rate-up/0ad46c706fa94b8cbe51d5d34806be1f.webp
+  - >-
+    /images/news/legacy/event/2024-06-04-event-kuro-tamara-drop-rate-up/8e039dcb29634ee19e961d9b3f99f21b.webp
+  - >-
+    /images/news/legacy/event/2024-06-04-event-kuro-tamara-drop-rate-up/343f7725aeda4375bcf7865eb97d4bfd.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-04-event-kuro-tamara-drop-rate-up/0ad46c706fa94b8cbe51d5d34806be1f.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event]Gnosis Dahlia Quiz Event(Reward Distribution Completed)"
-date: "2024-07-30T00:00:00.000Z"
-category: "event"
-id: "2024-07-30-event-gnosis-dahlia-quiz-event-reward-distribution-completed"
+title: '[Event]Gnosis Dahlia Quiz (Rewards Sent)'
+date: '2024-07-30T00:00:00.000Z'
+category: event
+id: 2024-07-30-event-gnosis-dahlia-quiz-event-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-07-30-event-gnosis-dahlia-quiz-event-reward-distribution-completed/349332a5293c43db99d10f0eb42edfad.webp
-  - /images/news/legacy/event/2024-07-30-event-gnosis-dahlia-quiz-event-reward-distribution-completed/272fbf0e6da74885bb215072f77b2953_002.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-gnosis-dahlia-quiz-event-reward-distribution-completed/349332a5293c43db99d10f0eb42edfad.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-gnosis-dahlia-quiz-event-reward-distribution-completed/272fbf0e6da74885bb215072f77b2953_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-30-event-gnosis-dahlia-quiz-event-reward-distribution-completed/349332a5293c43db99d10f0eb42edfad.webp)  

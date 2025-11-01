@@ -1,11 +1,13 @@
 ---
-title: "[Event] 🔍Caren Quiz Event✨ (12/20 Reward distributed)"
-date: "2024-12-03T00:00:00.000Z"
-category: "event"
-id: "2024-12-03-event-caren-quiz-event-12-20-reward-distributed"
+title: "[Event] \U0001F50DCaren Quiz Event✨ (12/20 Rewards Sent)"
+date: '2024-12-03T00:00:00.000Z'
+category: event
+id: 2024-12-03-event-caren-quiz-event-12-20-reward-distributed
 images:
-  - /images/news/legacy/event/2024-12-03-event-caren-quiz-event-12-20-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2024-12-03-event-caren-quiz-event-12-20-reward-distributed/53490450aadc4b6eb76b12b60cc73c7a.webp
+  - >-
+    /images/news/legacy/event/2024-12-03-event-caren-quiz-event-12-20-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2024-12-03-event-caren-quiz-event-12-20-reward-distributed/53490450aadc4b6eb76b12b60cc73c7a.webp
 ---
 
 ![](/images/news/legacy/event/2024-12-03-event-caren-quiz-event-12-20-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

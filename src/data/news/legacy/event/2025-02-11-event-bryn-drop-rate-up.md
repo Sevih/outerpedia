@@ -1,11 +1,13 @@
 ---
-title: "[Event] Bryn Drop Rate Up!"
-date: "2025-02-11T00:00:00.000Z"
-category: "event"
-id: "2025-02-11-event-bryn-drop-rate-up"
+title: '[Event] Bryn Rate Up!'
+date: '2025-02-11T00:00:00.000Z'
+category: event
+id: 2025-02-11-event-bryn-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-02-11-event-bryn-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2025-02-11-event-bryn-drop-rate-up/1c78046bd2d04c199e840def03370cce.webp
+  - >-
+    /images/news/legacy/event/2025-02-11-event-bryn-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2025-02-11-event-bryn-drop-rate-up/1c78046bd2d04c199e840def03370cce.webp
 ---
 
 ![](/images/news/legacy/event/2025-02-11-event-bryn-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

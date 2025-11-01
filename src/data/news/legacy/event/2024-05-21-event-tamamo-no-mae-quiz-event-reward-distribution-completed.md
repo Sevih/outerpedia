@@ -1,11 +1,13 @@
 ---
-title: "[Event] Tamamo-no-Mae Quiz Event (Reward Distribution Completed)"
-date: "2024-05-21T00:00:00.000Z"
-category: "event"
-id: "2024-05-21-event-tamamo-no-mae-quiz-event-reward-distribution-completed"
+title: '[Event] Tamamo-no-Mae Quiz (Rewards Sent)'
+date: '2024-05-21T00:00:00.000Z'
+category: event
+id: 2024-05-21-event-tamamo-no-mae-quiz-event-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-05-21-event-tamamo-no-mae-quiz-event-reward-distribution-completed/caac4e9e88ac46b78741707cedb4e185.webp
-  - /images/news/legacy/event/2024-05-21-event-tamamo-no-mae-quiz-event-reward-distribution-completed/1f5cf2d63f1149ff875b4ac5e835c7f9_002.webp
+  - >-
+    /images/news/legacy/event/2024-05-21-event-tamamo-no-mae-quiz-event-reward-distribution-completed/caac4e9e88ac46b78741707cedb4e185.webp
+  - >-
+    /images/news/legacy/event/2024-05-21-event-tamamo-no-mae-quiz-event-reward-distribution-completed/1f5cf2d63f1149ff875b4ac5e835c7f9_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-21-event-tamamo-no-mae-quiz-event-reward-distribution-completed/caac4e9e88ac46b78741707cedb4e185.webp)  

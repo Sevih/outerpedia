@@ -1,11 +1,13 @@
 ---
-title: "[Community] Which Otherworldly Villain Are You? Personality Test Event"
-date: "2023-08-16T00:00:00.000Z"
-category: "event"
-id: "2023-08-16-community-which-otherworldly-villain-are-you-personality-test-event"
+title: '[Community] Which Otherworldly Villain Are You? Quiz'
+date: '2023-08-16T00:00:00.000Z'
+category: event
+id: 2023-08-16-community-which-otherworldly-villain-are-you-personality-test-event
 images:
-  - /images/news/legacy/event/2023-08-16-community-which-otherworldly-villain-are-you-personality-test-event/25c7833805864621ad936a7867ace13d.webp
-  - /images/news/legacy/event/2023-08-16-community-which-otherworldly-villain-are-you-personality-test-event/91a46587411a47f0b13325f7ebe870f0.webp
+  - >-
+    /images/news/legacy/event/2023-08-16-community-which-otherworldly-villain-are-you-personality-test-event/25c7833805864621ad936a7867ace13d.webp
+  - >-
+    /images/news/legacy/event/2023-08-16-community-which-otherworldly-villain-are-you-personality-test-event/91a46587411a47f0b13325f7ebe870f0.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-16-community-which-otherworldly-villain-are-you-personality-test-event/25c7833805864621ad936a7867ace13d.webp)

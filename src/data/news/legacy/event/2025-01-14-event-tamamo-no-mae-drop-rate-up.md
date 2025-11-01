@@ -1,11 +1,13 @@
 ---
-title: "[Event] Tamamo-no-Mae Drop Rate Up!"
-date: "2025-01-14T00:00:00.000Z"
-category: "event"
-id: "2025-01-14-event-tamamo-no-mae-drop-rate-up"
+title: '[Event] Tamamo-no-Mae Rate Up!'
+date: '2025-01-14T00:00:00.000Z'
+category: event
+id: 2025-01-14-event-tamamo-no-mae-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-01-14-event-tamamo-no-mae-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
-  - /images/news/legacy/event/2025-01-14-event-tamamo-no-mae-drop-rate-up/62aba5f7c0fa447281a6672123244ec1.webp
+  - >-
+    /images/news/legacy/event/2025-01-14-event-tamamo-no-mae-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp
+  - >-
+    /images/news/legacy/event/2025-01-14-event-tamamo-no-mae-drop-rate-up/62aba5f7c0fa447281a6672123244ec1.webp
 ---
 
 ![](/images/news/legacy/event/2025-01-14-event-tamamo-no-mae-drop-rate-up/e10142f4a3ed4affb904a1f11272d114.webp)  

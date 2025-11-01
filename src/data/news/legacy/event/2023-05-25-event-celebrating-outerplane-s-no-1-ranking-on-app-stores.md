@@ -1,11 +1,13 @@
 ---
-title: "[Event] Celebrating OUTERPLANE's No.1 Ranking on App Stores"
-date: "2023-05-25T00:00:00.000Z"
-category: "event"
-id: "2023-05-25-event-celebrating-outerplane-s-no-1-ranking-on-app-stores"
+title: '[Event] Celebrating OP''s No.1 Ranking on App Stores'
+date: '2023-05-25T00:00:00.000Z'
+category: event
+id: 2023-05-25-event-celebrating-outerplane-s-no-1-ranking-on-app-stores
 images:
-  - /images/news/legacy/event/2023-05-25-event-celebrating-outerplane-s-no-1-ranking-on-app-stores/60213c5c41044a6e824ebe5c89da3fab.webp
-  - /images/news/legacy/event/2023-05-25-event-celebrating-outerplane-s-no-1-ranking-on-app-stores/12dfa7712170441f9eec74d96e084722.webp
+  - >-
+    /images/news/legacy/event/2023-05-25-event-celebrating-outerplane-s-no-1-ranking-on-app-stores/60213c5c41044a6e824ebe5c89da3fab.webp
+  - >-
+    /images/news/legacy/event/2023-05-25-event-celebrating-outerplane-s-no-1-ranking-on-app-stores/12dfa7712170441f9eec74d96e084722.webp
 ---
 
 ![](/images/news/legacy/event/2023-05-25-event-celebrating-outerplane-s-no-1-ranking-on-app-stores/60213c5c41044a6e824ebe5c89da3fab.webp)

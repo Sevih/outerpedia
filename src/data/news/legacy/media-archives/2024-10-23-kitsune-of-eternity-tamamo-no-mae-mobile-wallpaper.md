@@ -1,10 +1,11 @@
 ---
-title: "[Kitsune of Eternity, Tamamo-no-Mae] Mobile Wallpaper"
-date: "2024-10-23T00:00:00.000Z"
-category: "media-archives"
-id: "2024-10-23-kitsune-of-eternity-tamamo-no-mae-mobile-wallpaper"
+title: '[ Tamamo-no-Mae] Mobile Wallpaper'
+date: '2024-10-23T00:00:00.000Z'
+category: media-archives
+id: 2024-10-23-kitsune-of-eternity-tamamo-no-mae-mobile-wallpaper
 images:
-  - /images/news/legacy/media-archives/2024-10-23-kitsune-of-eternity-tamamo-no-mae-mobile-wallpaper/15ca409663674268b29f17261d9b349f.webp
+  - >-
+    /images/news/legacy/media-archives/2024-10-23-kitsune-of-eternity-tamamo-no-mae-mobile-wallpaper/15ca409663674268b29f17261d9b349f.webp
 ---
 
 **The Action Anime,** **OUTERPLANE**  

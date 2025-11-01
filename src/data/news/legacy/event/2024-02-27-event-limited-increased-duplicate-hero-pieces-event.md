@@ -1,12 +1,15 @@
 ---
-title: "[Event] Limited! Increased Duplicate Hero Pieces Event"
-date: "2024-02-27T00:00:00.000Z"
-category: "event"
-id: "2024-02-27-event-limited-increased-duplicate-hero-pieces-event"
+title: '[Event] Limited! Increased Duplicate Hero Pieces'
+date: '2024-02-27T00:00:00.000Z'
+category: event
+id: 2024-02-27-event-limited-increased-duplicate-hero-pieces-event
 images:
-  - /images/news/legacy/event/2024-02-27-event-limited-increased-duplicate-hero-pieces-event/354c30fec65f43ff95e266b2f1cd0a0a.webp
-  - /images/news/legacy/event/2024-02-27-event-limited-increased-duplicate-hero-pieces-event/b44d5ab28b2441a6b5484bea315f23da.webp
-  - /images/news/legacy/event/2024-02-27-event-limited-increased-duplicate-hero-pieces-event/6c5009a7307545288aaf5d9531798e0d.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-limited-increased-duplicate-hero-pieces-event/354c30fec65f43ff95e266b2f1cd0a0a.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-limited-increased-duplicate-hero-pieces-event/b44d5ab28b2441a6b5484bea315f23da.webp
+  - >-
+    /images/news/legacy/event/2024-02-27-event-limited-increased-duplicate-hero-pieces-event/6c5009a7307545288aaf5d9531798e0d.webp
 ---
 
 ![](/images/news/legacy/event/2024-02-27-event-limited-increased-duplicate-hero-pieces-event/354c30fec65f43ff95e266b2f1cd0a0a.webp)  

@@ -1,10 +1,11 @@
 ---
-title: "[Event] Bug Report Event"
-date: "2023-06-09T00:00:00.000Z"
-category: "event"
-id: "2023-06-09-event-bug-report-event"
+title: '[Event] Bug Report'
+date: '2023-06-09T00:00:00.000Z'
+category: event
+id: 2023-06-09-event-bug-report-event
 images:
-  - /images/news/legacy/event/2023-06-09-event-bug-report-event/01d372509af043918142f70f839985a5.webp
+  - >-
+    /images/news/legacy/event/2023-06-09-event-bug-report-event/01d372509af043918142f70f839985a5.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-09-event-bug-report-event/01d372509af043918142f70f839985a5.webp)

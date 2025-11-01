@@ -1,11 +1,13 @@
 ---
-title: "[Event] Survey Hub Double Survey Point Event"
-date: "2024-07-02T00:00:00.000Z"
-category: "event"
-id: "2024-07-02-event-survey-hub-double-survey-point-event"
+title: '[Event] Survey Hub Double Survey Point'
+date: '2024-07-02T00:00:00.000Z'
+category: event
+id: 2024-07-02-event-survey-hub-double-survey-point-event
 images:
-  - /images/news/legacy/event/2024-07-02-event-survey-hub-double-survey-point-event/7e348ad272f448309f2c2555bf05ed29.webp
-  - /images/news/legacy/event/2024-07-02-event-survey-hub-double-survey-point-event/bce8f2bc5c1647e6992100b168bcdbd3.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-survey-hub-double-survey-point-event/7e348ad272f448309f2c2555bf05ed29.webp
+  - >-
+    /images/news/legacy/event/2024-07-02-event-survey-hub-double-survey-point-event/bce8f2bc5c1647e6992100b168bcdbd3.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-02-event-survey-hub-double-survey-point-event/7e348ad272f448309f2c2555bf05ed29.webp)  

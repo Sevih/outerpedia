@@ -1,11 +1,13 @@
 ---
-title: "[Event] Dungeon Knowledge Quiz Event📚💡(4/11 Reward distributed)"
-date: "2025-04-01T00:00:00.000Z"
-category: "event"
-id: "2025-04-01-event-dungeon-knowledge-quiz-event-4-11-reward-distributed"
+title: "[Event] Dungeon Knowledge Quiz Event\U0001F4DA\U0001F4A1(4/11 Rewards Sent)"
+date: '2025-04-01T00:00:00.000Z'
+category: event
+id: 2025-04-01-event-dungeon-knowledge-quiz-event-4-11-reward-distributed
 images:
-  - /images/news/legacy/event/2025-04-01-event-dungeon-knowledge-quiz-event-4-11-reward-distributed/a3c5fee0e12a4b24a46ff38664e7fe52.webp
-  - /images/news/legacy/event/2025-04-01-event-dungeon-knowledge-quiz-event-4-11-reward-distributed/7dd2da2128f249db86b0fa94075ac2b1.webp
+  - >-
+    /images/news/legacy/event/2025-04-01-event-dungeon-knowledge-quiz-event-4-11-reward-distributed/a3c5fee0e12a4b24a46ff38664e7fe52.webp
+  - >-
+    /images/news/legacy/event/2025-04-01-event-dungeon-knowledge-quiz-event-4-11-reward-distributed/7dd2da2128f249db86b0fa94075ac2b1.webp
 ---
 
 ![](/images/news/legacy/event/2025-04-01-event-dungeon-knowledge-quiz-event-4-11-reward-distributed/a3c5fee0e12a4b24a46ff38664e7fe52.webp)  

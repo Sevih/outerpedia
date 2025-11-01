@@ -1,11 +1,13 @@
 ---
-title: "[Event] OUTERPLANE x Google Play Games 10% Discount Promotion (Round 2)"
-date: "2024-11-07T00:00:00.000Z"
-category: "event"
-id: "2024-11-07-event-outerplane-x-google-play-games-10-discount-promotion-round-2"
+title: '[Event] OP x Google Play Games 10% Discount Promotion (Round 2)'
+date: '2024-11-07T00:00:00.000Z'
+category: event
+id: 2024-11-07-event-outerplane-x-google-play-games-10-discount-promotion-round-2
 images:
-  - /images/news/legacy/event/2024-11-07-event-outerplane-x-google-play-games-10-discount-promotion-round-2/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2024-11-07-event-outerplane-x-google-play-games-10-discount-promotion-round-2/b9af22f323c74964a0e006e602eadc7d.webp
+  - >-
+    /images/news/legacy/event/2024-11-07-event-outerplane-x-google-play-games-10-discount-promotion-round-2/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2024-11-07-event-outerplane-x-google-play-games-10-discount-promotion-round-2/b9af22f323c74964a0e006e602eadc7d.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-07-event-outerplane-x-google-play-games-10-discount-promotion-round-2/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)  

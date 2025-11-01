@@ -1,11 +1,13 @@
 ---
-title: "OUTERPLANE Official YouTube/Twitter Subscribe & Follow Event"
-date: "2024-01-11T00:00:00.000Z"
-category: "event"
-id: "2024-01-11-outerplane-official-youtube-twitter-subscribe-follow-event"
+title: OP Official YouTube/Twitter Subscribe & Follow Event
+date: '2024-01-11T00:00:00.000Z'
+category: event
+id: 2024-01-11-outerplane-official-youtube-twitter-subscribe-follow-event
 images:
-  - /images/news/legacy/event/2024-01-11-outerplane-official-youtube-twitter-subscribe-follow-event/2386fcab867e4f34a75e95f9537c2d3f.webp
-  - https://page.onstove.com/OUTERPLANE%20Official%20YouTube_Twitter%20Subscribe%20&%20Follow%20Event_fichiers/%EC%95%84%EC%97%90%EB%A5%B4_1694156343734.png
+  - >-
+    /images/news/legacy/event/2024-01-11-outerplane-official-youtube-twitter-subscribe-follow-event/2386fcab867e4f34a75e95f9537c2d3f.webp
+  - >-
+    https://page.onstove.com/OUTERPLANE%20Official%20YouTube_Twitter%20Subscribe%20&%20Follow%20Event_fichiers/%EC%95%84%EC%97%90%EB%A5%B4_1694156343734.png
 ---
 
 ![](/images/news/legacy/event/2024-01-11-outerplane-official-youtube-twitter-subscribe-follow-event/2386fcab867e4f34a75e95f9537c2d3f.webp)  

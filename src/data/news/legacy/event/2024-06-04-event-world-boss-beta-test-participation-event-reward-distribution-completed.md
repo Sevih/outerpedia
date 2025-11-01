@@ -1,11 +1,14 @@
 ---
-title: "[Event]World Boss Beta Test Participation Event(Reward Distribution Completed)"
-date: "2024-06-04T00:00:00.000Z"
-category: "event"
-id: "2024-06-04-event-world-boss-beta-test-participation-event-reward-distribution-completed"
+title: '[Event]World Boss Beta Test Participation (Rewards Sent)'
+date: '2024-06-04T00:00:00.000Z'
+category: event
+id: >-
+  2024-06-04-event-world-boss-beta-test-participation-event-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-06-04-event-world-boss-beta-test-participation-event-reward-distribution-completed/98214a84cee14c62a9c2a0297cc42248.webp
-  - /images/news/legacy/event/2024-06-04-event-world-boss-beta-test-participation-event-reward-distribution-completed/1b14ed51ea9d40bd8086db84046e7972_002.webp
+  - >-
+    /images/news/legacy/event/2024-06-04-event-world-boss-beta-test-participation-event-reward-distribution-completed/98214a84cee14c62a9c2a0297cc42248.webp
+  - >-
+    /images/news/legacy/event/2024-06-04-event-world-boss-beta-test-participation-event-reward-distribution-completed/1b14ed51ea9d40bd8086db84046e7972_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-04-event-world-boss-beta-test-participation-event-reward-distribution-completed/98214a84cee14c62a9c2a0297cc42248.webp)  

@@ -1,10 +1,11 @@
 ---
-title: "Developer's Note #8: Regarding Upcoming Updates for the Second Half"
-date: "2024-07-26T00:00:00.000Z"
-category: "developer-notes"
-id: "2024-07-26-developer-s-note-8-regarding-upcoming-updates-for-the-second-half"
+title: 'Dev Note #8: Regarding Upcoming Updates for the Second Half'
+date: '2024-07-26T00:00:00.000Z'
+category: developer-notes
+id: 2024-07-26-developer-s-note-8-regarding-upcoming-updates-for-the-second-half
 images:
-  - /images/news/legacy/developer-notes/2024-07-26-developer-s-note-8-regarding-upcoming-updates-for-the-second-half/561305b69fde4d00bd8aeaa5f5a5bfd0.webp
+  - >-
+    /images/news/legacy/developer-notes/2024-07-26-developer-s-note-8-regarding-upcoming-updates-for-the-second-half/561305b69fde4d00bd8aeaa5f5a5bfd0.webp
 ---
 
 ![](/images/news/legacy/developer-notes/2024-07-26-developer-s-note-8-regarding-upcoming-updates-for-the-second-half/561305b69fde4d00bd8aeaa5f5a5bfd0.webp)  

@@ -73,9 +73,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const articleLang = slug.match(/^live-([a-z]{2})-/)?.[1] as TenantKey | undefined
     if (articleLang && TENANTS[articleLang]) {
       const canonical = `https://${TENANTS[articleLang].domain}${articlePath}`
+      // Avoid adding "- Outerplane" if already present in title
+      const pageTitle = article.frontmatter.title.toLowerCase().includes('outerplane')
+        ? article.frontmatter.title
+        : `${article.frontmatter.title} - Outerplane`
       return {
-        title: `${article.frontmatter.title} - Outerplane`,
+        title: pageTitle,
         description: article.content.substring(0, 160),
+        robots: {
+          index: false,
+          follow: true,
+        },
         alternates: {
           canonical,
         },
@@ -92,9 +100,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // Articles legacy: disponibles sur tous les domaines
   const canonical = `https://${currentDomain}${articlePath}`
+  // Avoid adding "- Outerplane" if already present in title
+  const pageTitle = article.frontmatter.title.toLowerCase().includes('outerplane')
+    ? article.frontmatter.title
+    : `${article.frontmatter.title} - Outerplane`
   return {
-    title: `${article.frontmatter.title} - Outerplane`,
+    title: pageTitle,
     description: article.content.substring(0, 160),
+    robots: {
+      index: false,
+      follow: true,
+    },
     alternates: {
       canonical,
       languages: {

@@ -1,10 +1,11 @@
 ---
-title: "[Event] Charlotte Drop Rate Up Screenshot Event"
-date: "2024-01-16T00:00:00.000Z"
-category: "event"
-id: "2024-01-16-event-charlotte-drop-rate-up-screenshot-event"
+title: '[Event] Charlotte Rate Up Screenshot'
+date: '2024-01-16T00:00:00.000Z'
+category: event
+id: 2024-01-16-event-charlotte-drop-rate-up-screenshot-event
 images:
-  - /images/news/legacy/event/2024-01-16-event-charlotte-drop-rate-up-screenshot-event/2c082e528e5f403d929e63e21ec39423.webp
+  - >-
+    /images/news/legacy/event/2024-01-16-event-charlotte-drop-rate-up-screenshot-event/2c082e528e5f403d929e63e21ec39423.webp
 ---
 
 **The Action Anime,** **OUTERPLANE**  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Congratulatory Messages for July-born Heroes!"
-date: "2023-06-30T00:00:00.000Z"
-category: "event"
-id: "2023-06-30-event-congratulatory-messages-for-july-born-heroes"
+title: '[Event] Congrats to July Heroes!'
+date: '2023-06-30T00:00:00.000Z'
+category: event
+id: 2023-06-30-event-congratulatory-messages-for-july-born-heroes
 images:
-  - /images/news/legacy/event/2023-06-30-event-congratulatory-messages-for-july-born-heroes/a893651f12e340659fc9382f39c6f5a3.webp
-  - /images/news/legacy/event/2023-06-30-event-congratulatory-messages-for-july-born-heroes/9437bf4a2c104e3e837ad4f4fbbf9f94.webp
+  - >-
+    /images/news/legacy/event/2023-06-30-event-congratulatory-messages-for-july-born-heroes/a893651f12e340659fc9382f39c6f5a3.webp
+  - >-
+    /images/news/legacy/event/2023-06-30-event-congratulatory-messages-for-july-born-heroes/9437bf4a2c104e3e837ad4f4fbbf9f94.webp
 ---
 
 ![](/images/news/legacy/event/2023-06-30-event-congratulatory-messages-for-july-born-heroes/a893651f12e340659fc9382f39c6f5a3.webp)

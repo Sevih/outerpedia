@@ -1,11 +1,13 @@
 ---
-title: "[Event] ✨Mirsha Festival Celebration! Message Event✨(Reward distributed)"
-date: "2025-05-07T00:00:00.000Z"
-category: "event"
-id: "2025-05-07-event-mirsha-festival-celebration-message-event-reward-distributed"
+title: '[Event] ✨Mirsha Festival Message✨(Rewards Sent)'
+date: '2025-05-07T00:00:00.000Z'
+category: event
+id: 2025-05-07-event-mirsha-festival-celebration-message-event-reward-distributed
 images:
-  - /images/news/legacy/event/2025-05-07-event-mirsha-festival-celebration-message-event-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2025-05-07-event-mirsha-festival-celebration-message-event-reward-distributed/de726c4cb72e4dae84afc216e90604ea_002.webp
+  - >-
+    /images/news/legacy/event/2025-05-07-event-mirsha-festival-celebration-message-event-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2025-05-07-event-mirsha-festival-celebration-message-event-reward-distributed/de726c4cb72e4dae84afc216e90604ea_002.webp
 ---
 
 ![](/images/news/legacy/event/2025-05-07-event-mirsha-festival-celebration-message-event-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

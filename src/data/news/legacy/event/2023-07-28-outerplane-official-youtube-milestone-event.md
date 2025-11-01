@@ -1,11 +1,13 @@
 ---
-title: "OUTERPLANE Official YouTube Milestone Event"
-date: "2023-07-28T00:00:00.000Z"
-category: "event"
-id: "2023-07-28-outerplane-official-youtube-milestone-event"
+title: OP Official YouTube Milestone Event
+date: '2023-07-28T00:00:00.000Z'
+category: event
+id: 2023-07-28-outerplane-official-youtube-milestone-event
 images:
-  - /images/news/legacy/event/2023-07-28-outerplane-official-youtube-milestone-event/294aeb96eea04ae1a31aad4044672074.webp
-  - /images/news/legacy/event/2023-07-28-outerplane-official-youtube-milestone-event/d0d7e7cd5f1247fa83ce4c344eab25f5.webp
+  - >-
+    /images/news/legacy/event/2023-07-28-outerplane-official-youtube-milestone-event/294aeb96eea04ae1a31aad4044672074.webp
+  - >-
+    /images/news/legacy/event/2023-07-28-outerplane-official-youtube-milestone-event/d0d7e7cd5f1247fa83ce4c344eab25f5.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-28-outerplane-official-youtube-milestone-event/294aeb96eea04ae1a31aad4044672074.webp)

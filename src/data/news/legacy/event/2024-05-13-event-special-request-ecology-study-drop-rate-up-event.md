@@ -1,11 +1,13 @@
 ---
-title: "[Event] Special Request: Ecology Study Drop Rate Up Event"
-date: "2024-05-13T00:00:00.000Z"
-category: "event"
-id: "2024-05-13-event-special-request-ecology-study-drop-rate-up-event"
+title: '[Event]  Ecology Study Rate Up'
+date: '2024-05-13T00:00:00.000Z'
+category: event
+id: 2024-05-13-event-special-request-ecology-study-drop-rate-up-event
 images:
-  - /images/news/legacy/event/2024-05-13-event-special-request-ecology-study-drop-rate-up-event/b9ca96882cbd4f528f0922a1c5aeea17.webp
-  - /images/news/legacy/event/2024-05-13-event-special-request-ecology-study-drop-rate-up-event/b7b3ab101cb94a4bb0a20f2af490d4f6_002.webp
+  - >-
+    /images/news/legacy/event/2024-05-13-event-special-request-ecology-study-drop-rate-up-event/b9ca96882cbd4f528f0922a1c5aeea17.webp
+  - >-
+    /images/news/legacy/event/2024-05-13-event-special-request-ecology-study-drop-rate-up-event/b7b3ab101cb94a4bb0a20f2af490d4f6_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-13-event-special-request-ecology-study-drop-rate-up-event/b9ca96882cbd4f528f0922a1c5aeea17.webp)  

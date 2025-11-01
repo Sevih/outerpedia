@@ -1,11 +1,13 @@
 ---
-title: "[Event] World Boss New Season Celebration Event"
-date: "2024-09-24T00:00:00.000Z"
-category: "event"
-id: "2024-09-24-event-world-boss-new-season-celebration-event"
+title: '[Event] World Boss New Season Celebration'
+date: '2024-09-24T00:00:00.000Z'
+category: event
+id: 2024-09-24-event-world-boss-new-season-celebration-event
 images:
-  - /images/news/legacy/event/2024-09-24-event-world-boss-new-season-celebration-event/30a2531cdfe94c68bea7a9db29c961ad.webp
-  - /images/news/legacy/event/2024-09-24-event-world-boss-new-season-celebration-event/b15f8e5839164296a68ae761cabd36ca_002.webp
+  - >-
+    /images/news/legacy/event/2024-09-24-event-world-boss-new-season-celebration-event/30a2531cdfe94c68bea7a9db29c961ad.webp
+  - >-
+    /images/news/legacy/event/2024-09-24-event-world-boss-new-season-celebration-event/b15f8e5839164296a68ae761cabd36ca_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-09-24-event-world-boss-new-season-celebration-event/30a2531cdfe94c68bea7a9db29c961ad.webp)  

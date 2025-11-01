@@ -1,10 +1,12 @@
 ---
-title: "[Notice] In-game Equipment Reforge and Rico's Secret Shop Probabilities"
-date: "2024-01-30T00:00:00.000Z"
-category: "probabilities"
-id: "2024-01-30-notice-in-game-equipment-reforge-and-rico-s-secret-shop-probabilities"
+title: '[Notice] Equipment & Shop Probabilities'
+date: '2024-01-30T00:00:00.000Z'
+category: probabilities
+id: >-
+  2024-01-30-notice-in-game-equipment-reforge-and-rico-s-secret-shop-probabilities
 images:
-  - /images/news/legacy/probabilities/2024-01-30-notice-in-game-equipment-reforge-and-rico-s-secret-shop-probabilities/b441250671bf4e40a83c32ba486074b2.webp
+  - >-
+    /images/news/legacy/probabilities/2024-01-30-notice-in-game-equipment-reforge-and-rico-s-secret-shop-probabilities/b441250671bf4e40a83c32ba486074b2.webp
 ---
 
 ![](/images/news/legacy/probabilities/2024-01-30-notice-in-game-equipment-reforge-and-rico-s-secret-shop-probabilities/b441250671bf4e40a83c32ba486074b2.webp)  

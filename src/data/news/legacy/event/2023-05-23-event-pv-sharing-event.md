@@ -1,10 +1,11 @@
 ---
-title: "[Event] PV Sharing Event"
-date: "2023-05-23T00:00:00.000Z"
-category: "event"
-id: "2023-05-23-event-pv-sharing-event"
+title: '[Event] PV Sharing'
+date: '2023-05-23T00:00:00.000Z'
+category: event
+id: 2023-05-23-event-pv-sharing-event
 images:
-  - /images/news/legacy/event/2023-05-23-event-pv-sharing-event/e00e532208d04df1b88328373835e021.webp
+  - >-
+    /images/news/legacy/event/2023-05-23-event-pv-sharing-event/e00e532208d04df1b88328373835e021.webp
 ---
 
 ![](/images/news/legacy/event/2023-05-23-event-pv-sharing-event/e00e532208d04df1b88328373835e021.webp)

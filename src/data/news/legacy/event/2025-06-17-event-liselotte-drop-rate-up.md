@@ -1,11 +1,13 @@
 ---
-title: "[Event] Liselotte Drop Rate Up!"
-date: "2025-06-17T00:00:00.000Z"
-category: "event"
-id: "2025-06-17-event-liselotte-drop-rate-up"
+title: '[Event] Liselotte Rate Up!'
+date: '2025-06-17T00:00:00.000Z'
+category: event
+id: 2025-06-17-event-liselotte-drop-rate-up
 images:
-  - /images/news/legacy/event/2025-06-17-event-liselotte-drop-rate-up/3ac25fa176624380825758a9f99e1072.webp
-  - /images/news/legacy/event/2025-06-17-event-liselotte-drop-rate-up/526ffe0f26e74c07b91e5a252a831081.webp
+  - >-
+    /images/news/legacy/event/2025-06-17-event-liselotte-drop-rate-up/3ac25fa176624380825758a9f99e1072.webp
+  - >-
+    /images/news/legacy/event/2025-06-17-event-liselotte-drop-rate-up/526ffe0f26e74c07b91e5a252a831081.webp
 ---
 
 ![](/images/news/legacy/event/2025-06-17-event-liselotte-drop-rate-up/3ac25fa176624380825758a9f99e1072.webp)  

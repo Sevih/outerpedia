@@ -1,11 +1,13 @@
 ---
-title: "[Event] Who Would You Bring on a Trip? (Reward Distribution Completed)"
-date: "2024-06-18T00:00:00.000Z"
-category: "event"
-id: "2024-06-18-event-who-would-you-bring-on-a-trip-reward-distribution-completed"
+title: '[Event] Who Would You Bring on a Trip? (Rewards Sent)'
+date: '2024-06-18T00:00:00.000Z'
+category: event
+id: 2024-06-18-event-who-would-you-bring-on-a-trip-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-06-18-event-who-would-you-bring-on-a-trip-reward-distribution-completed/348b938c930044d7a64cc419f6bc8c3e.webp
-  - /images/news/legacy/event/2024-06-18-event-who-would-you-bring-on-a-trip-reward-distribution-completed/239d00401dd340238f264053705149bb_002.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-who-would-you-bring-on-a-trip-reward-distribution-completed/348b938c930044d7a64cc419f6bc8c3e.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-who-would-you-bring-on-a-trip-reward-distribution-completed/239d00401dd340238f264053705149bb_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-18-event-who-would-you-bring-on-a-trip-reward-distribution-completed/348b938c930044d7a64cc419f6bc8c3e.webp)  

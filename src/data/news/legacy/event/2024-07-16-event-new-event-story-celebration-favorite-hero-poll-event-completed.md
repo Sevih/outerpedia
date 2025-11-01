@@ -1,11 +1,14 @@
 ---
-title: "[Event] New Event Story Celebration! Favorite Hero Poll Event (Completed)"
-date: "2024-07-16T00:00:00.000Z"
-category: "event"
-id: "2024-07-16-event-new-event-story-celebration-favorite-hero-poll-event-completed"
+title: '[Event] New Story: Hero Poll (Completed)'
+date: '2024-07-16T00:00:00.000Z'
+category: event
+id: >-
+  2024-07-16-event-new-event-story-celebration-favorite-hero-poll-event-completed
 images:
-  - /images/news/legacy/event/2024-07-16-event-new-event-story-celebration-favorite-hero-poll-event-completed/451bf855251346f18e9fab543d79ffa5.webp
-  - /images/news/legacy/event/2024-07-16-event-new-event-story-celebration-favorite-hero-poll-event-completed/9e9395b76b9746439d9ffb9663012fb6.webp
+  - >-
+    /images/news/legacy/event/2024-07-16-event-new-event-story-celebration-favorite-hero-poll-event-completed/451bf855251346f18e9fab543d79ffa5.webp
+  - >-
+    /images/news/legacy/event/2024-07-16-event-new-event-story-celebration-favorite-hero-poll-event-completed/9e9395b76b9746439d9ffb9663012fb6.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-16-event-new-event-story-celebration-favorite-hero-poll-event-completed/451bf855251346f18e9fab543d79ffa5.webp)

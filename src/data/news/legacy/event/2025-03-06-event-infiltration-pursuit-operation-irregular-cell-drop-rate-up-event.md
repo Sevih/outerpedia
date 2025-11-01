@@ -1,11 +1,14 @@
 ---
-title: "[Event] Infiltration&Pursuit Operation Irregular Cell Drop Rate Up! Event"
-date: "2025-03-06T00:00:00.000Z"
-category: "event"
-id: "2025-03-06-event-infiltration-pursuit-operation-irregular-cell-drop-rate-up-event"
+title: '[Event] Infiltration&Pursuit Operation Irregular Cell Rate Up!'
+date: '2025-03-06T00:00:00.000Z'
+category: event
+id: >-
+  2025-03-06-event-infiltration-pursuit-operation-irregular-cell-drop-rate-up-event
 images:
-  - /images/news/legacy/event/2025-03-06-event-infiltration-pursuit-operation-irregular-cell-drop-rate-up-event/5d12d8b92faa4955bfff6e390cbb5ba9.webp
-  - /images/news/legacy/event/2025-03-06-event-infiltration-pursuit-operation-irregular-cell-drop-rate-up-event/71cc8bf448524849802581aeef7b6138.webp
+  - >-
+    /images/news/legacy/event/2025-03-06-event-infiltration-pursuit-operation-irregular-cell-drop-rate-up-event/5d12d8b92faa4955bfff6e390cbb5ba9.webp
+  - >-
+    /images/news/legacy/event/2025-03-06-event-infiltration-pursuit-operation-irregular-cell-drop-rate-up-event/71cc8bf448524849802581aeef7b6138.webp
 ---
 
 ![](/images/news/legacy/event/2025-03-06-event-infiltration-pursuit-operation-irregular-cell-drop-rate-up-event/5d12d8b92faa4955bfff6e390cbb5ba9.webp)  

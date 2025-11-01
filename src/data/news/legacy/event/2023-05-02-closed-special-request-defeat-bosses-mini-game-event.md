@@ -1,12 +1,15 @@
 ---
-title: "[Closed] [Special Request: Defeat Bosses] Mini-Game Event"
-date: "2023-05-02T00:00:00.000Z"
-category: "event"
-id: "2023-05-02-closed-special-request-defeat-bosses-mini-game-event"
+title: '[Closed] [ Defeat Bosses] Mini-Game Event'
+date: '2023-05-02T00:00:00.000Z'
+category: event
+id: 2023-05-02-closed-special-request-defeat-bosses-mini-game-event
 images:
-  - /images/news/legacy/event/2023-05-02-closed-special-request-defeat-bosses-mini-game-event/5fa050bdadba4537903c7bf3faabe77e.webp
-  - /images/news/legacy/event/2023-05-02-closed-special-request-defeat-bosses-mini-game-event/a4b0c9d2bcb7458b8c485405b6d29e4e.webp
-  - /images/news/legacy/event/2023-05-02-closed-special-request-defeat-bosses-mini-game-event/483dfafc266d4b96ad84f92d129bdf68.webp
+  - >-
+    /images/news/legacy/event/2023-05-02-closed-special-request-defeat-bosses-mini-game-event/5fa050bdadba4537903c7bf3faabe77e.webp
+  - >-
+    /images/news/legacy/event/2023-05-02-closed-special-request-defeat-bosses-mini-game-event/a4b0c9d2bcb7458b8c485405b6d29e4e.webp
+  - >-
+    /images/news/legacy/event/2023-05-02-closed-special-request-defeat-bosses-mini-game-event/483dfafc266d4b96ad84f92d129bdf68.webp
 ---
 
 ![](/images/news/legacy/event/2023-05-02-closed-special-request-defeat-bosses-mini-game-event/5fa050bdadba4537903c7bf3faabe77e.webp)

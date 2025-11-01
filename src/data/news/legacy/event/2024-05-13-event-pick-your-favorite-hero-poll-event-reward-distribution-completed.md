@@ -1,11 +1,14 @@
 ---
-title: "[Event] Pick Your Favorite! Hero Poll Event (Reward Distribution Completed)"
-date: "2024-05-13T00:00:00.000Z"
-category: "event"
-id: "2024-05-13-event-pick-your-favorite-hero-poll-event-reward-distribution-completed"
+title: '[Event] Pick Your Favorite! Hero Poll (Rewards Sent)'
+date: '2024-05-13T00:00:00.000Z'
+category: event
+id: >-
+  2024-05-13-event-pick-your-favorite-hero-poll-event-reward-distribution-completed
 images:
-  - /images/news/legacy/event/2024-05-13-event-pick-your-favorite-hero-poll-event-reward-distribution-completed/e207d10c994d4872945956a16878bf29.webp
-  - /images/news/legacy/event/2024-05-13-event-pick-your-favorite-hero-poll-event-reward-distribution-completed/0146f51d9f0e4c71b4a40fc3001e62d8_002.webp
+  - >-
+    /images/news/legacy/event/2024-05-13-event-pick-your-favorite-hero-poll-event-reward-distribution-completed/e207d10c994d4872945956a16878bf29.webp
+  - >-
+    /images/news/legacy/event/2024-05-13-event-pick-your-favorite-hero-poll-event-reward-distribution-completed/0146f51d9f0e4c71b4a40fc3001e62d8_002.webp
 ---
 
 ![](/images/news/legacy/event/2024-05-13-event-pick-your-favorite-hero-poll-event-reward-distribution-completed/e207d10c994d4872945956a16878bf29.webp)

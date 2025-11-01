@@ -1,11 +1,13 @@
 ---
-title: "[Event] Ame Battle Pass Drop Rate Up"
-date: "2024-10-08T00:00:00.000Z"
-category: "event"
-id: "2024-10-08-event-ame-battle-pass-drop-rate-up"
+title: '[Event] Ame Battle Pass Rate Up'
+date: '2024-10-08T00:00:00.000Z'
+category: event
+id: 2024-10-08-event-ame-battle-pass-drop-rate-up
 images:
-  - /images/news/legacy/event/2024-10-08-event-ame-battle-pass-drop-rate-up/d13d3fd6d82b46728654a746a2dc2678.webp
-  - /images/news/legacy/event/2024-10-08-event-ame-battle-pass-drop-rate-up/bf88790e9d0d42a4a7f3c0d22a380659.webp
+  - >-
+    /images/news/legacy/event/2024-10-08-event-ame-battle-pass-drop-rate-up/d13d3fd6d82b46728654a746a2dc2678.webp
+  - >-
+    /images/news/legacy/event/2024-10-08-event-ame-battle-pass-drop-rate-up/bf88790e9d0d42a4a7f3c0d22a380659.webp
 ---
 
 ![](/images/news/legacy/event/2024-10-08-event-ame-battle-pass-drop-rate-up/d13d3fd6d82b46728654a746a2dc2678.webp)  
@@ -23,7 +25,7 @@ Players will be able to recruit Battle Pass featured hero 《The Passing Rain, 
 **✨ Drop Rate Up Hero**  
 \- Battle Pass featued hero 3★《The Passing Rain, Ame》
 
-[](/event/2024-10-08-event-ame-battle-pass-drop-rate-up/c682ba5020eb45a3ba2238f1cce4745e.webp)![](/images/news/legacy/event/2024-10-08-event-ame-battle-pass-drop-rate-up/bf88790e9d0d42a4a7f3c0d22a380659.webp)  
+![](/images/news/legacy/event/2024-10-08-event-ame-battle-pass-drop-rate-up/c682ba5020eb45a3ba2238f1cce4745e.webp)![](/images/news/legacy/event/2024-10-08-event-ame-battle-pass-drop-rate-up/bf88790e9d0d42a4a7f3c0d22a380659.webp)  
 
 **《The Passing Rain, Ame》 Recruit Rate Chart**  
 Have not cleared Area 10 in Normal Mode + Have not cleared Skyward Tower 100F   

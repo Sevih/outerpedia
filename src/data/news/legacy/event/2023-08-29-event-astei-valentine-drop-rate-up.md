@@ -1,12 +1,15 @@
 ---
-title: "[Event] Astei & Valentine Drop Rate Up!"
-date: "2023-08-29T00:00:00.000Z"
-category: "event"
-id: "2023-08-29-event-astei-valentine-drop-rate-up"
+title: '[Event] Astei & Valentine Rate Up!'
+date: '2023-08-29T00:00:00.000Z'
+category: event
+id: 2023-08-29-event-astei-valentine-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-08-29-event-astei-valentine-drop-rate-up/8d6ded7b024c46d5827166d6ff433290.webp
-  - /images/news/legacy/event/2023-08-29-event-astei-valentine-drop-rate-up/fc736d1e44e8406f90c996d4d475a88d.webp
-  - /images/news/legacy/event/2023-08-29-event-astei-valentine-drop-rate-up/cff48902c1f642749795171b54a6c8ec.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-astei-valentine-drop-rate-up/8d6ded7b024c46d5827166d6ff433290.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-astei-valentine-drop-rate-up/fc736d1e44e8406f90c996d4d475a88d.webp
+  - >-
+    /images/news/legacy/event/2023-08-29-event-astei-valentine-drop-rate-up/cff48902c1f642749795171b54a6c8ec.webp
 ---
 
 ![](/images/news/legacy/event/2023-08-29-event-astei-valentine-drop-rate-up/8d6ded7b024c46d5827166d6ff433290.webp)  

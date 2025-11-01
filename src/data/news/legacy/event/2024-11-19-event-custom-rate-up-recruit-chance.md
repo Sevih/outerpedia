@@ -1,10 +1,11 @@
 ---
-title: "[Event] Custom Rate Up Recruit Chance"
-date: "2024-11-19T00:00:00.000Z"
-category: "event"
-id: "2024-11-19-event-custom-rate-up-recruit-chance"
+title: '[Event] Custom Rate Up Recruit'
+date: '2024-11-19T00:00:00.000Z'
+category: event
+id: 2024-11-19-event-custom-rate-up-recruit-chance
 images:
-  - /images/news/legacy/event/2024-11-19-event-custom-rate-up-recruit-chance/34e8c07059514b98a77e6581df0e5889.webp
+  - >-
+    /images/news/legacy/event/2024-11-19-event-custom-rate-up-recruit-chance/34e8c07059514b98a77e6581df0e5889.webp
 ---
 
 ![](/images/news/legacy/event/2024-11-19-event-custom-rate-up-recruit-chance/34e8c07059514b98a77e6581df0e5889.webp)  

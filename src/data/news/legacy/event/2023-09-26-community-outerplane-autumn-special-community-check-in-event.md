@@ -1,11 +1,13 @@
 ---
-title: "[Community] OUTERPLANE Autumn Special Community Check-in Event!"
-date: "2023-09-26T00:00:00.000Z"
-category: "event"
-id: "2023-09-26-community-outerplane-autumn-special-community-check-in-event"
+title: '[Community] OP Autumn Special Community Check-in Event!'
+date: '2023-09-26T00:00:00.000Z'
+category: event
+id: 2023-09-26-community-outerplane-autumn-special-community-check-in-event
 images:
-  - /images/news/legacy/event/2023-09-26-community-outerplane-autumn-special-community-check-in-event/ebb3b11d16c04227b9da90caa532fc70.webp
-  - /images/news/legacy/event/2023-09-26-community-outerplane-autumn-special-community-check-in-event/435e255483d34da38ff01d8a1abc3757.webp
+  - >-
+    /images/news/legacy/event/2023-09-26-community-outerplane-autumn-special-community-check-in-event/ebb3b11d16c04227b9da90caa532fc70.webp
+  - >-
+    /images/news/legacy/event/2023-09-26-community-outerplane-autumn-special-community-check-in-event/435e255483d34da38ff01d8a1abc3757.webp
 ---
 
 ![](/images/news/legacy/event/2023-09-26-community-outerplane-autumn-special-community-check-in-event/ebb3b11d16c04227b9da90caa532fc70.webp)

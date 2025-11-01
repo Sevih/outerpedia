@@ -1,14 +1,19 @@
 ---
-title: "[Event] Stella & Tamara & Drakhan Drop Rate Up!"
-date: "2023-12-05T00:00:00.000Z"
-category: "event"
-id: "2023-12-05-event-stella-tamara-drakhan-drop-rate-up"
+title: '[Event] Stella & Tamara & Drakhan Rate Up!'
+date: '2023-12-05T00:00:00.000Z'
+category: event
+id: 2023-12-05-event-stella-tamara-drakhan-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/5ef77645846248c680d67dac23227124.webp
-  - /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/bca5b8358b3c4fab9d15895eb4b7dfe2.webp
-  - /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/7abe1f738b4345f7a2802d3b855860b5.webp
-  - /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/3471cbd8e5b844eaba2131c2e0d5c47f.webp
-  - /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/4458d4ba80634c61b2f3566413b0734d.webp
+  - >-
+    /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/5ef77645846248c680d67dac23227124.webp
+  - >-
+    /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/bca5b8358b3c4fab9d15895eb4b7dfe2.webp
+  - >-
+    /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/7abe1f738b4345f7a2802d3b855860b5.webp
+  - >-
+    /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/3471cbd8e5b844eaba2131c2e0d5c47f.webp
+  - >-
+    /images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/4458d4ba80634c61b2f3566413b0734d.webp
 ---
 
 ![](/images/news/legacy/event/2023-12-05-event-stella-tamara-drakhan-drop-rate-up/5ef77645846248c680d67dac23227124.webp)  

@@ -1,11 +1,13 @@
 ---
-title: "[Event] Push Event (6/18~7/1)"
-date: "2024-06-18T00:00:00.000Z"
-category: "event"
-id: "2024-06-18-event-push-event-6-18-7-1"
+title: '[Event] Push (6/18~7/1)'
+date: '2024-06-18T00:00:00.000Z'
+category: event
+id: 2024-06-18-event-push-event-6-18-7-1
 images:
-  - /images/news/legacy/event/2024-06-18-event-push-event-6-18-7-1/78933287dd38475aa79934cd937ad938.webp
-  - /images/news/legacy/event/2024-06-18-event-push-event-6-18-7-1/aff798889d6a43b8b40ed23870084875.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-push-event-6-18-7-1/78933287dd38475aa79934cd937ad938.webp
+  - >-
+    /images/news/legacy/event/2024-06-18-event-push-event-6-18-7-1/aff798889d6a43b8b40ed23870084875.webp
 ---
 
 ![](/images/news/legacy/event/2024-06-18-event-push-event-6-18-7-1/78933287dd38475aa79934cd937ad938.webp)  

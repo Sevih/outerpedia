@@ -1,12 +1,16 @@
 ---
-title: "[Event] Choose Your Ideal Christmas Companion! Event (1/3 Reward distributed)"
-date: "2024-12-17T00:00:00.000Z"
-category: "event"
-id: "2024-12-17-event-choose-your-ideal-christmas-companion-event-1-3-reward-distributed"
+title: '[Event] Christmas Companion! (1/3 Rewards Sent)'
+date: '2024-12-17T00:00:00.000Z'
+category: event
+id: >-
+  2024-12-17-event-choose-your-ideal-christmas-companion-event-1-3-reward-distributed
 images:
-  - /images/news/legacy/event/2024-12-17-event-choose-your-ideal-christmas-companion-event-1-3-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
-  - /images/news/legacy/event/2024-12-17-event-choose-your-ideal-christmas-companion-event-1-3-reward-distributed/e972aa3676794812b296831c48200290.webp
-  - /images/news/legacy/event/2024-12-17-event-choose-your-ideal-christmas-companion-event-1-3-reward-distributed/213cbba729ab46559e73cab32380bb63.webp
+  - >-
+    /images/news/legacy/event/2024-12-17-event-choose-your-ideal-christmas-companion-event-1-3-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp
+  - >-
+    /images/news/legacy/event/2024-12-17-event-choose-your-ideal-christmas-companion-event-1-3-reward-distributed/e972aa3676794812b296831c48200290.webp
+  - >-
+    /images/news/legacy/event/2024-12-17-event-choose-your-ideal-christmas-companion-event-1-3-reward-distributed/213cbba729ab46559e73cab32380bb63.webp
 ---
 
 ![](/images/news/legacy/event/2024-12-17-event-choose-your-ideal-christmas-companion-event-1-3-reward-distributed/cd4dacfe1bad4fc8ba3bb7e00bf0fea4.webp)

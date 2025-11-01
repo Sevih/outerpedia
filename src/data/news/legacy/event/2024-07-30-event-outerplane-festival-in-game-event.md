@@ -1,13 +1,17 @@
 ---
-title: "[Event] OUTERPLANE Festival! In-game Event"
-date: "2024-07-30T00:00:00.000Z"
-category: "event"
-id: "2024-07-30-event-outerplane-festival-in-game-event"
+title: '[Event] OP Festival! In-game Event'
+date: '2024-07-30T00:00:00.000Z'
+category: event
+id: 2024-07-30-event-outerplane-festival-in-game-event
 images:
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-in-game-event/6f42622b883547589d7bd6a2ca6fe762.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-in-game-event/fea4c66445fe40f3875dbab47fa24e64.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-in-game-event/df556fa1430149ccac0c7a1261646e9d.webp
-  - /images/news/legacy/event/2024-07-30-event-outerplane-festival-in-game-event/f658099a37ce4a72988e71726aa91757.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-in-game-event/6f42622b883547589d7bd6a2ca6fe762.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-in-game-event/fea4c66445fe40f3875dbab47fa24e64.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-in-game-event/df556fa1430149ccac0c7a1261646e9d.webp
+  - >-
+    /images/news/legacy/event/2024-07-30-event-outerplane-festival-in-game-event/f658099a37ce4a72988e71726aa91757.webp
 ---
 
 ![](/images/news/legacy/event/2024-07-30-event-outerplane-festival-in-game-event/6f42622b883547589d7bd6a2ca6fe762.webp)  

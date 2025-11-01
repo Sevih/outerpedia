@@ -1,12 +1,15 @@
 ---
-title: "[Event] Aer & Eliza Drop Rate Up!"
-date: "2023-07-04T00:00:00.000Z"
-category: "event"
-id: "2023-07-04-event-aer-eliza-drop-rate-up"
+title: '[Event] Aer & Eliza Rate Up!'
+date: '2023-07-04T00:00:00.000Z'
+category: event
+id: 2023-07-04-event-aer-eliza-drop-rate-up
 images:
-  - /images/news/legacy/event/2023-07-04-event-aer-eliza-drop-rate-up/2d4af1ee40794ce2b5c6fd1945cf76a7.webp
-  - /images/news/legacy/event/2023-07-04-event-aer-eliza-drop-rate-up/fa8075744d6c4b35b288ab853230fbbf.webp
-  - /images/news/legacy/event/2023-07-04-event-aer-eliza-drop-rate-up/7db762b0e97d4b9fa00390eb6540ad10.webp
+  - >-
+    /images/news/legacy/event/2023-07-04-event-aer-eliza-drop-rate-up/2d4af1ee40794ce2b5c6fd1945cf76a7.webp
+  - >-
+    /images/news/legacy/event/2023-07-04-event-aer-eliza-drop-rate-up/fa8075744d6c4b35b288ab853230fbbf.webp
+  - >-
+    /images/news/legacy/event/2023-07-04-event-aer-eliza-drop-rate-up/7db762b0e97d4b9fa00390eb6540ad10.webp
 ---
 
 ![](/images/news/legacy/event/2023-07-04-event-aer-eliza-drop-rate-up/2d4af1ee40794ce2b5c6fd1945cf76a7.webp)
