@@ -334,7 +334,7 @@ function CombatBasicsContent() {
                                             <strong>Starting Phase</strong>
                                             <ul className="list-disc list-inside ml-4">
                                                 <li>All skill cooldowns are reduced by 1.</li>
-                                                <li>Healing-over-time (HoT) effects are applied, such as <EffectInlineTag name="SYS_CONTINU_HEAL" type="buff" /></li>
+                                                <li>Healing-over-time (HoT) effects are applied, such as <EffectInlineTag name="BT_CONTINU_HEAL" type="buff" /></li>
                                                 <li>Damage-over-time (DoT) effects are applied, such as <EffectInlineTag name="BT_DOT_BLEED" type="debuff" /></li>
                                             </ul>
                                         </li>
@@ -798,7 +798,7 @@ function StatsContent() {
                                         If your Effectiveness is equal to or higher than the enemy&apos;s Resilience, the base chance to apply a debuff is 100%.
                                     </p>
                                     <p>
-                                        Some skills can scale with Effectiveness, such as Gnosis Beth&apos;s <EffectInlineTag name="BT_DOT_ETERNAL_BLEED" type="debuff" />.
+                                        Some skills can scale with Effectiveness, such as Gnosis Beth&apos;s <EffectInlineTag name="BT_DOT_2000092" type="debuff" />.
                                     </p>
 
                                 </>

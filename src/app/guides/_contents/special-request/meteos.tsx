@@ -29,7 +29,7 @@ export default function MeteosGuide() {
                 <li>He has a special gauge that triggers an AoE counter every 5 actions, so <strong>Dual Attack</strong> and <strong>Chain Attack</strong> are recommended.</li>
                 <li>He does more damage if he has debuffs — 2 to 3 debuffs are manageable.</li>
                 <li>If he kills one of your teammates, he will use an <strong>instant kill move</strong> that removes all buffs first, deals damage, and blocks revival.</li>
-                <li>On <strong>Stage 13</strong>, he gains <EffectInlineTag name="SYS_CONTINU_HEAL" type="buff" /> and heals after attacking.</li>
+                <li>On <strong>Stage 13</strong>, he gains <EffectInlineTag name="BT_CONTINU_HEAL" type="buff" /> and heals after attacking.</li>
                 <li><strong>Healers are useless</strong> as he blocks healing effects.</li>
                 <li>His enrage is a powerful AoE attack.</li>
                 <li>He also applies <EffectInlineTag name="BT_SEALED" type="debuff" /> on DPS units on higher stages.</li>
