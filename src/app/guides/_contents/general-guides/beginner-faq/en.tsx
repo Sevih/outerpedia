@@ -95,9 +95,12 @@ export default function BeginnerFAQ() {
                       <div>
                         <p className=" leading-relaxed mb-2">
                           Regular heroes can be farmed in the Doppelgänger Challenge, so pulling multiple copies is not required.
-                          Unlocking a 3-star hero without recruiting them takes 250 hero pieces, transcending takes 150 per step.
+                          Unlocking a 3-star hero without recruiting them takes 250 hero pieces, transcending takes 150 per step(*).
                           So recruiting regular heroes while farming for their transcends in Doppelgänger is slightly more efficient.
                           New heroes take 3 months to get added to Doppelgänger and Custom Recruit.
+                        </p>
+                        <p className='text-xs text-gray-300 mb-4'>
+                          (*) Transcend Steps being 4*, 4+, 5*, 5+, 5++, 6* for 900 total pieces required.
                         </p>
                         <div className="ml-4 space-y-1 text-sm text-gray-400">
                           <p>• <StarLevel levelLabel='4' /> — for the increased Weakness Gauge Damage is the main target.</p>
