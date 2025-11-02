@@ -12,7 +12,7 @@ export default function TyrantGuide() {
             <GuideHeading level={4}>Regina moveset</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><strong>S1</strong>: Single, <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> of the caster by 20%.</li>
-                <li><strong>S2</strong>: Single, triggered when evading. Grants <EffectInlineTag name="UNIQUE_REGINA_WORLD" type="buff" /> 2 turns.</li>
+                <li><strong>S2</strong>: Single, triggered when evading. Grants <EffectInlineTag name="IG_Buff_Effect_2000067_Interruption" type="buff" /> 2 turns.</li>
                 <li><strong>S3</strong>: Single, <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" />.</li>
                 <li><strong>Passive</strong>: Damage dealt increases based on Evasion.</li>
                 <li><strong>Enrage</strong>: Every 10 enemies actions. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" /> <EffectInlineTag name="BT_STAT|ST_AVOID_IR" type="buff" />.</li>
@@ -22,12 +22,12 @@ export default function TyrantGuide() {
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><strong>S1</strong>: Single, <EffectInlineTag name="BT_CALL_BACKUP" type="buff" /> with 2 allies.</li>
                 <li><strong>S2</strong>: Single, used after being hit on the enemy with the lowest health. Inflict <EffectInlineTag name="BT_STONE" type="debuff" /> 1 turn.</li>
-                <li><strong>S3</strong>: Single, <EffectInlineTag name="IG_Buff_BuffdurationReduce" type="debuff" /> by 1 turn.</li>
+                <li><strong>S3</strong>: Single, <EffectInlineTag name="BT_EXTEND_BUFF" type="debuff" /> by 1 turn.</li>
             </ul>
 
             <GuideHeading level={4}>Advice</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                <li>Bring <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> to cunter <EffectInlineTag name="UNIQUE_REGINA_WORLD" type="buff" />.</li>
+                <li>Bring <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> to counter <EffectInlineTag name="IG_Buff_Effect_2000067_Interruption" type="buff" />.</li>
             </ul>
             <GuideHeading level={4}>Recommended Characters</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">

@@ -2,6 +2,7 @@ import Accordion from '@/app/components/ui/Accordion'
 import stats from '@/data/stats.json'
 import StatInlineTag from '@/app/components/StatInlineTag'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
+import type { BuffName, DebuffName } from '@/types/effect-names'
 
 type Props = {
   title: string
@@ -9,8 +10,8 @@ type Props = {
   desc?: string
   text?: React.ReactNode
   effect?: {
-    buff?: string[]
-    debuff?: string[]
+    buff?: BuffName[]
+    debuff?: DebuffName[]
   }
 }
 

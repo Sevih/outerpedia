@@ -7,6 +7,7 @@ import EffectInlineTag from '@/app/components/EffectInlineTag'
 import WeaponInlineTag from '@/app/components/WeaponInlineTag'
 import AmuletInlineTag from '@/app/components/AmuletInlineTag'
 import ItemInlineDisplay from '@/app/components/ItemInline'
+import type { BuffName, DebuffName } from '@/types/effect-names'
 
 /**
  * Tags supportés :
@@ -67,12 +68,20 @@ export default function parseText(text: string): React.ReactNode[] {
     } else if (type === 'I-I') {
       // Si ton ItemInlineDisplay accepte une liste séparée par virgules :
       parts.push(<ItemInlineDisplay key={`i-${index}-${name}`} names={name} />)
-    } else if (type === 'B' || type === 'D') {
+    } else if (type === 'B') {
       parts.push(
         <EffectInlineTag
           key={`fx-${index}-${name}`}
-          name={name}
-          type={type === 'B' ? 'buff' : 'debuff'}
+          name={name as BuffName}
+          type="buff"
+        />
+      )
+    } else if (type === 'D') {
+      parts.push(
+        <EffectInlineTag
+          key={`fx-${index}-${name}`}
+          name={name as DebuffName}
+          type="debuff"
         />
       )
     } else {

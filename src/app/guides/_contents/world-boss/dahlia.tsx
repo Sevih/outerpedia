@@ -113,7 +113,7 @@ export default function DahliaGuide() {
                 <li><CharacterLinkCard name="Dianne" />: Excellent alternative to <CharacterLinkCard name="Monad Eva" />.</li>
                 <li><CharacterLinkCard name="Gnosis Nella" />: Provides <EffectInlineTag name="BT_SEALED" type="debuff" /> application.</li>
                 <li><CharacterLinkCard name="Alice" />: Good alternative to <CharacterLinkCard name="Gnosis Nella" />.</li>
-                <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" />: Offers <EffectInlineTag name="Heavy Strike" type="buff" /> and debuff stacking with <EffectInlineTag name="IG_Buff_Dot_Curse_Interruption_D" type="debuff" />.</li>
+                <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" />: Offers <EffectInlineTag name="HEAVY_STRIKE" type="buff" /> and debuff stacking with <EffectInlineTag name="IG_Buff_Dot_Curse_Interruption_D" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Demiurge Stella" />: Provides <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> and is immune to <EffectInlineTag name="BT_FREEZE" type="debuff" />.</li>
               </ul>
 

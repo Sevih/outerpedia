@@ -58,7 +58,7 @@ export default function IrregularBlockbusterGuide() {
             <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Monad Eva" /><CharacterLinkCard name="Stella" /><CharacterLinkCard name="Saeran" /> : can cleanse <EffectInlineTag name="BT_STUN" type="debuff" /> with <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /></li>
                 <li><CharacterLinkCard name="Alice" /><CharacterLinkCard name="Akari" /><CharacterLinkCard name="Gnosis Nella" /> : prevent boss from buffing with <EffectInlineTag name="BT_SEALED" type="debuff" /></li>
-                <li><CharacterLinkCard name="Rhona" /><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> : non-crit dps thanks to <EffectInlineTag name="Heavy Strike" type="buff" /></li>
+                <li><CharacterLinkCard name="Rhona" /><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> : non-crit dps thanks to <EffectInlineTag name="HEAVY_STRIKE" type="buff" /></li>
             </ul>
             <p className="text-neutral-400 text-sm italic mb-4">
                 Note:  You can just use any kind of DPS and ignore the WG

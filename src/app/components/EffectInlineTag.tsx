@@ -2,14 +2,12 @@
 
 import * as HoverCard from '@radix-ui/react-hover-card'
 import Image from 'next/image'
-import buffs from '@/data/buffs.json'
-import debuffs from '@/data/debuffs.json'
 import type { CSSProperties } from 'react'
 import { useTenant } from '@/lib/contexts/TenantContext'
 import { l } from '@/lib/localize'
-
-type BuffName = typeof buffs[number]['name']
-type DebuffName = typeof debuffs[number]['name']
+import type { BuffName, DebuffName } from '@/types/effect-names'
+import buffs from '@/data/buffs.json'
+import debuffs from '@/data/debuffs.json'
 
 type Props =
   | {
@@ -40,7 +38,10 @@ export default function EffectInlineTag({ name, type, triggerStyle }: Props) {
   const effects: Effect[] = (type === 'buff' ? buffs : debuffs).map(e => ({ ...e, type }))
   const effect = effects.find((e) => e.name === name)
 
-  if (!effect) return <span className="text-red-500">{name}</span>
+  if (!effect) {
+    // TypeScript garantit que cette branche ne devrait jamais être atteinte
+    throw new Error(`Effect not found: ${name} (${type})`)
+  }
 
   const label = l(effect, 'label', lang)
   const description = l(effect, 'description', lang)

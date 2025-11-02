@@ -40,13 +40,13 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
         <hr className="my-6 border-neutral-700" />
         <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Recommended Characters</h3>
         <ul className="list-disc list-inside text-neutral-300 mb-4">
-          <li><CharacterLinkCard name="Demiurge Luna" />: Essential pick because of the score bonus. Use Revenge Set, <GuideIconInline name="TI_Equipment_Accessary_06" text="Queen of Prism" />  and <EffectInlineTag name="UNIQUE_POLAR_KNIGHT" type="buff" /></li>
+          <li><CharacterLinkCard name="Demiurge Luna" />: Essential pick because of the score bonus. Use Revenge Set, <GuideIconInline name="TI_Equipment_Accessary_06" text="Queen of Prism" />  and <EffectInlineTag name="IG_Buff_Effect_2000120_Interruption" type="buff" /></li>
           <li><CharacterLinkCard name="Bryn" />: Essential pick because of the score bonus. Her exclusive equipment boost damage of allies with <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" />.</li>
           <li><CharacterLinkCard name="Gnosis Dahlia" /> : S1 will push team (synergizes with boss passive).</li>
           <li><CharacterLinkCard name="Ryu Lion" /> : <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> (ideally slower than <CharacterLinkCard name="Demiurge Luna" />).</li>
           <li><CharacterLinkCard name="Regina" /> : <ElementInlineTag element='light' /> <ClassInlineTag name='Mage' /> with self-<EffectInlineTag name="BT_ACTION_GAUGE" type="buff" />. You can use her as a remplacement if you don&apos;t own <CharacterLinkCard name="Demiurge Luna" />.</li>
           <li><CharacterLinkCard name="Omega Nadja" /> : Nice damage with <EffectInlineTag name="BT_ACTION_GAUGE" type="debuff" /> <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" />.</li>
-          <li><CharacterLinkCard name="Holy Night's Blessing Dianne" /> : <EffectInlineTag name="UNIQUE_GIFT_OF_BUFF" type="buff" /> with self-<EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> (ideally slower than <CharacterLinkCard name="Demiurge Luna" />).</li>
+          <li><CharacterLinkCard name="Holy Night's Blessing Dianne" /> : <EffectInlineTag name="BT_CASTER_COPY_BUFF" type="buff" /> with self-<EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> (ideally slower than <CharacterLinkCard name="Demiurge Luna" />).</li>
         </ul>
         <p className="text-neutral-400 text-sm italic mb-4">
           Note: <br />Any mage can be play on leftmost position. If you don&apos;t own <CharacterLinkCard name="Demiurge Luna" /> or <CharacterLinkCard name="Regina" />, <br />try choosing a <ClassInlineTag name='Mage' /> with some <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> like <CharacterLinkCard name="Roxie" />.

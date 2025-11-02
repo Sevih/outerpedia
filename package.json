@@ -1,12 +1,13 @@
 {
   "name": "outerpedia-clean",
-  "version": "7.1.19",
+  "version": "7.1.20",
   "private": true,
   "scripts": {
     "dev": "node -e \"console.log('\\n   ▲ Next.js'); console.log('   - LocalEn:    https://outerpedia.local/'); console.log('   - LocalJp:    https://jp.outerpedia.local/'); console.log('   - LocalKr:    https://kr.outerpedia.local/'); console.log('   - LocalZh:    https://zh.outerpedia.local/\\n')\" && next dev",
     "set-version": "node scripts/set-version.js",
-    "build": "rm -rf .next && npm run set-version && npm run gen:events && npm run inject-sw-version && npm run generate:allchar && npm run generate:slugToChar && npm run generate:gear-stats && npm run generate:guide-chars && npm run gen:pool && npm run generate:gear-submap && npm run build:effects && npm run gen:news-cache && next build",
+    "build": "rm -rf .next && npm run set-version && npm run gen:events && npm run inject-sw-version && npm run generate:allchar && npm run generate:slugToChar && npm run generate:gear-stats && npm run generate:guide-chars && npm run gen:pool && npm run generate:gear-submap && npm run build:effects && npm run gen:effect-types && npm run gen:news-cache && next build",
     "gen:news-cache": "node scripts/generateNewsCache.js",
+    "gen:effect-types": "node scripts/generate-effect-types.js",
     "inject-sw-version": "node scripts/inject-sw-version.js",
     "validate:build": "ls .next/static/css/*.css && ls .next/static/chunks/app/page-*.js && echo ✅ Build is valid",
     "start": "next start",

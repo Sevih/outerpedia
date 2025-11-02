@@ -695,7 +695,7 @@ function StatsContent() {
                                     <ul className="ml-5">
                                         <li>Crit Chance is capped at 100% — any excess is wasted.</li>
                                         <li>Healing and Shielding cannot crit.</li>
-                                        <li>Skills with <EffectInlineTag name="Heavy Strike" type="buff" triggerStyle={{ verticalAlign: 'middle', marginTop: '-6px' }} /> effect cannot crit like <SkillInline character="Kitsune of Eternity Tamamo-no-Mae" skill="S1" />.</li>
+                                        <li>Skills with <EffectInlineTag name="HEAVY_STRIKE" type="buff" triggerStyle={{ verticalAlign: 'middle', marginTop: '-6px' }} /> effect cannot crit like <SkillInline character="Kitsune of Eternity Tamamo-no-Mae" skill="S1" />.</li>
                                         <li>Damage over Time effects cannot crit.</li>
                                     </ul>
                                 </>

@@ -34,7 +34,7 @@ export default function GrandCalamari13Guide() {
                         <>
                             <GuideHeading level={3}>Strategy Overview</GuideHeading>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li>Immune to <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> and <EffectInlineTag name="IG_Buff_BuffdurationReduce" type="debuff" /></li>
+                                <li>Immune to <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> and <EffectInlineTag name="BT_EXTEND_BUFF" type="debuff" /></li>
                                 <li>Reduces debuff duration by 1 each turn (except irremovable debuff like <EffectInlineTag name="IG_Buff_Effect_Sealed_Interruption_D" type="debuff" /> from <CharacterLinkCard name="Gnosis Nella" />)</li>
                                 <li>Applies <EffectInlineTag name="BT_STAT|ST_BUFF_CHANCE" type="debuff" /> via S3</li>
                                 <li><CharacterLinkCard name="Kuro" /> can flip buffs into long-duration debuffs</li>
