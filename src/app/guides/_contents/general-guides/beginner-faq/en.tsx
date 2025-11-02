@@ -362,7 +362,7 @@ export default function BeginnerFAQ() {
                   <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/30 border border-slate-700 rounded-xl p-6 space-y-3">
                     <h4 className="text-lg font-semibold text-green-300">What Base upgrades should I go for?</h4>
                     <div className="space-y-2">
-                      <p>You can unlock and upgrade them in the order of Eva's Menu:</p>
+                      <p>You can unlock and upgrade them in the order of Eva&apos;s Menu:</p>
                       <div className="p-3 bg-red-900/10 border-l-4 border-red-500 rounded">
                         <p className="text-sm font-semibold text-red-300">1. Antiparticle Generator <span className="text-sm text-gray-400">Max this first!</span></p>
                       </div>
@@ -435,7 +435,7 @@ export default function BeginnerFAQ() {
                   </div>
                   <div className="p-3 bg-purple-900/10 border-l-4 border-purple-500 rounded">
                     <p className="text-sm font-semibold text-purple-300 mb-1">
-                      Against bosses that set your <StatInlineTag name="ATK" /> to 0 (Like Shichifuja&apos;s Shadow in Skyward Tower Hard): Delta can deal damage normally. Demiurge Stella&apos;s damage will reduce to double digits.
+                      Against bosses that set your <StatInlineTag name="ATK" /> to 0 (Like Shichifuja&apos;s Shadow in Skyward Tower Hard): Delta can deal damage normally. Demiurge Stella&apos;s damage will reduce to single digits.
                     </p>
                   </div>
                 </div>
