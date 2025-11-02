@@ -96,6 +96,8 @@ const kr = {
   'cons.label': '단점',
   'home.newTo': '🧭 Outerplane이 처음이신가요?',
   'home.newTo.desc': '초보자를 위한 가이드로 여정을 시작하세요:',
+  'home.newTo.links.faq': '초보자 FAQ',
+  'home.newTo.links.faq.desc': '— 신규 플레이어를 위한 자주 묻는 질문과 답변.',
   'home.newTo.links.freeHeroes': '무료 영웅 & 시작 배너',
   'home.newTo.links.freeHeroes.desc': '— 누구를 뽑을지와 효율적으로 시작하는 방법.',
   'home.newTo.links.stats': '스탯 & 전투 기본',

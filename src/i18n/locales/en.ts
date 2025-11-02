@@ -96,6 +96,8 @@ const en = {
   'cons.label': 'Cons',
   'home.newTo': '🧭 New to Outerplane?',
   'home.newTo.desc': 'Start your journey with these beginner-friendly guides:',
+  'home.newTo.links.faq': 'Beginner FAQ',
+  'home.newTo.links.faq.desc': '— common questions and answers for new players.',
   'home.newTo.links.freeHeroes': 'Free Heroes & Starter Banners',
   'home.newTo.links.freeHeroes.desc': '— who to pull and how to start efficiently.',
   'home.newTo.links.stats': 'Statistics & Combat Basics',

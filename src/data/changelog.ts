@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-11-03",
+    title: {
+      en: "Beginner FAQ Guide",
+      jp: "初心者向けFAQガイド",
+      kr: "초보자 FAQ 가이드",
+      zh: "新手FAQ指南",
+    } as LString,
+    type: "feature",
+    url: "/guides/general-guides/beginner-faq",
+    content: [
+      {
+        en: "Common questions from new players: starting teams, pulling priorities, gear progression, and resource management.",
+        jp: "新規プレイヤーからの一般的な質問：スタートチーム、召喚優先度、装備進行、リソース管理。",
+        kr: "신규 플레이어의 일반적인 질문: 시작 팀, 뽑기 우선순위, 장비 진행, 자원 관리.",
+        zh: "新玩家常见问题：起始队伍、抽卡优先级、装备进度、资源管理。",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-10-28",
     title: {
       en: "Prototype EX-78 Joint Boss",

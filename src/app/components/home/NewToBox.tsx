@@ -18,6 +18,11 @@ export default function NewToBox() {
 
       <ul className="space-y-2 text-sm text-cyan-400">
         <li>
+          <Link href="/guides/general-guides/beginner-faq" className="hover:underline">
+            • <span className="text-white">{t('home.newTo.links.faq')}</span> {t('home.newTo.links.faq.desc')}
+          </Link>
+        </li>
+        <li>
           <Link href="/guides/general-guides/free-heroes-start-banner" className="hover:underline">
             • <span className="text-white">{t('home.newTo.links.freeHeroes')}</span> {t('home.newTo.links.freeHeroes.desc')}
           </Link>

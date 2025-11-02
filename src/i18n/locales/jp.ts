@@ -96,6 +96,8 @@ const jp = {
   'cons.label': '短所',
   'home.newTo': '🧭 Outerplaneを初めてプレイしますか？',
   'home.newTo.desc': '初心者向けのガイドで冒険を始めましょう：',
+  'home.newTo.links.faq': '初心者向けFAQ',
+  'home.newTo.links.faq.desc': '— 新規プレイヤーのよくある質問と回答。',
   'home.newTo.links.freeHeroes': '無料ヒーロー & スタートバナー',
   'home.newTo.links.freeHeroes.desc': '— 誰を引くべきか、効率的な始め方。',
   'home.newTo.links.stats': 'ステータス & 戦闘の基本',

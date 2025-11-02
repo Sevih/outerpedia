@@ -394,6 +394,7 @@ export default function BeginnerFAQ() {
                     <p className="">
                       Your preferred damage dealer subclass (Attacker, Bruiser, Wizard, Vanguard) and their element can go before supporters unless you&apos;re having trouble keeping them alive.
                     </p>
+                    <p>Level 5 on the main node is enough to pick up all the side nodes, so you can leave level 6-10 for later.</p>
                     <p className="">
                       Utility doesn&apos;t help in combat, so picking up these QoL perks is at your own discretion.
                     </p>
