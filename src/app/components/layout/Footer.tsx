@@ -84,13 +84,22 @@ export default function Footer() {
             <FaYoutube /> YouTube
           </Link>
           <Link
+            href="https://x.com/outerplane"
+            aria-label="Outerplane Twitter / X"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 hover:text-zinc-200"
+          >
+            <FaTwitter /> Official X (Twitter)
+          </Link>
+          <Link
             href="https://x.com/M9_outerplane"
             aria-label="Outerplane Twitter / X"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 hover:text-zinc-200"
           >
-            <FaTwitter /> X (Twitter)
+            <FaTwitter /> Official Publisher X (Twitter)
           </Link>
         </nav>
       </div>
