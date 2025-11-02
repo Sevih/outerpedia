@@ -313,7 +313,7 @@ export default function BeginnerFAQ() {
                     <div className="space-y-2">
                       <div className="flex items-start gap-2">
                         <span className="text-amber-400 mt-1">1.</span>
-                        <p className=""><strong>Weapons</strong> will speed up the early game a lot, this is one you can start doing as soon as you notice progress slowing down.</p>
+                        <p className=""><strong>Enhancing Weapons</strong> will speed up the early game a lot, this is one you can start doing as soon as you notice progress slowing down.</p>
                       </div>
                       <div className="flex items-start gap-2">
                         <span className="text-amber-400 mt-1">2.</span>
@@ -355,18 +355,29 @@ export default function BeginnerFAQ() {
                       </ol>
                     </div>
                     <p className="text-sm text-gray-300">
-                     Chain passive can be left at level 2 until much later, the Weakness Gauge damage increase at level 5 is the only interesting part, so you can save skill manuals here until the more important skills are taken care of.
+                      Chain passive can be left at level 2 until much later, the Weakness Gauge damage increase at level 5 is the only interesting part, so you can save skill manuals here until the more important skills are taken care of.
                     </p>
                   </div>
 
                   <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/30 border border-slate-700 rounded-xl p-6 space-y-3">
                     <h4 className="text-lg font-semibold text-green-300">What Base upgrades should I go for?</h4>
                     <div className="space-y-2">
+                      <p>You can unlock and upgrade them in the order of Eva's Menu:</p>
                       <div className="p-3 bg-red-900/10 border-l-4 border-red-500 rounded">
-                        <p className="text-sm font-semibold text-red-300">1. Antiparticle Generator</p>
-                        <p className="text-sm text-gray-400">Max this first!</p>
+                        <p className="text-sm font-semibold text-red-300">1. Antiparticle Generator <span className="text-sm text-gray-400">Max this first!</span></p>
                       </div>
-                      <p className=" text-sm">After this you can unlock and upgrade them in the order of Eva&apos;s menu: Expedition, Supply Module, Kate&apos;s Workshop, Synchro Room.</p>
+                      <div className="p-3 bg-orange-900/10 border-l-4 border-orange-500 rounded">
+                        <p className="text-sm font-semibold text-orange-300">2. Expedition</p>
+                      </div>
+                      <div className="p-3 bg-yellow-900/10 border-l-4 border-yellow-500 rounded">
+                        <p className="text-sm font-semibold text-yellow-300">3. Supply Module</p>
+                      </div>
+                      <div className="p-3 bg-lime-900/10 border-l-4 border-lime-500 rounded">
+                        <p className="text-sm font-semibold text-lime-300">4. Kate&apos;s Workshop</p>
+                      </div>
+                      <div className="p-3 bg-green-900/10 border-l-4 border-green-500 rounded">
+                        <p className="text-sm font-semibold text-green-300">5. Synchro Room</p>
+                      </div>
                       <p className=" text-sm">Unlock <strong>Quirks & Precise Crafting</strong> when they are opened (Clear Season 1 stage 9-5).</p>
                     </div>
                   </div>
@@ -400,8 +411,8 @@ export default function BeginnerFAQ() {
                 <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/30 border border-slate-700 rounded-xl p-6 space-y-3">
                   <h4 className="text-lg font-semibold text-rose-300">My hero has skills that scale with health/defense/speed/evasion, should I focus on that then?</h4>
                   <p className=" leading-relaxed">
-                    The key words to look for here is  <strong className='underline'>&quot;instead of Attack&quot;</strong>. 
-                    When a skill only says its damage increases proportional to a stat, it will still mainly use Attack for its damage calculation. 
+                    The key words to look for here are <strong className='underline'>&quot;instead of Attack&quot;</strong>.
+                    When a skill only says its damage increases proportional to a stat, it will still mainly use Attack for its damage calculation.
                     The proportional stat will act as an extra multiplier, but this is generally too small to become the main focus.
                   </p>
 
@@ -411,7 +422,7 @@ export default function BeginnerFAQ() {
                         <CharacterLinkCard name="Delta" /> <span className="text-xs">(HP instead of ATK)</span>
                       </p>
                       <p className="text-sm "><SkillInline character='Delta' skill='S1' /><SkillInline character='Delta' skill='S2' /><SkillInline character='Delta' skill='S3' /></p>
-                      <p>Delta&apos;s skills scale proportional to Max Health instead of Attack: Focus on <StatInlineTag name="HP" /></p>
+                      <p>Delta&apos;s skills scale proportional to Max Health instead of <StatInlineTag name="ATK" />: Focus on <StatInlineTag name="HP" /></p>
                     </div>
 
                     <div className="p-4 bg-amber-900/20 border border-amber-500/30 rounded-lg">
@@ -419,12 +430,12 @@ export default function BeginnerFAQ() {
                         <CharacterLinkCard name="Demiurge Stella" /> <span className="text-xs">(HP bonus)</span>
                       </p>
                       <p className="text-sm "><SkillInline character='Demiurge Stella' skill='S1' /><SkillInline character='Demiurge Stella' skill='S2' /><SkillInline character='Demiurge Stella' skill='S3' /></p>
-                      <p className="text-sm ">Demiurge Stella&apos;s skills scale proportional to Max Health: Still goes for <StatInlineTag name="ATK" /> to increase damage, Health is a bonus.</p>
+                      <p className="text-sm ">Demiurge Stella&apos;s skills scale proportional to Max Health: Still goes for <StatInlineTag name="ATK" /> to increase damage, <StatInlineTag name="HP" /> is a bonus.</p>
                     </div>
                   </div>
                   <div className="p-3 bg-purple-900/10 border-l-4 border-purple-500 rounded">
-                        <p className="text-sm font-semibold text-purple-300 mb-1">
-                      Against bosses that sets your <StatInlineTag name="ATK" /> to 0 (Like Shichifuja&apos;s Shadow in Skyward Tower Hard): Delta can deal damage normally. Demiurge Stella&apos;s damage will reduce to double digits.
+                    <p className="text-sm font-semibold text-purple-300 mb-1">
+                      Against bosses that set your <StatInlineTag name="ATK" /> to 0 (Like Shichifuja&apos;s Shadow in Skyward Tower Hard): Delta can deal damage normally. Demiurge Stella&apos;s damage will reduce to double digits.
                     </p>
                   </div>
                 </div>
