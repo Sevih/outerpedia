@@ -26,7 +26,7 @@ export default function DemiurgeDrakhanPromoGuide() {
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li><EffectInlineTag name="BT_INVINCIBLE_IR" type="buff" /> for 3 turns. Reapplied if Demiurge Drakhan scores a kill.</li>
         <li><strong>Skills:</strong> Identical to Season 2 Part 2 (Hard).</li>
-        <li><strong>Burn Mechanic:</strong> Vlada applies 4 turn <EffectInlineTag name="BT_DOT_BURN_IR" type="debuff" />. Detonation is lethal.</li>
+        <li><strong>Burn Mechanic:</strong> Vlada applies 4 turn <EffectInlineTag name="IG_Buff_Dot_Burn_Interruption_D" type="debuff" />. Detonation is lethal.</li>
       </ul>
 
       <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Team Suggestions</h3>

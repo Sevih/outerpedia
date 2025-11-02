@@ -22,12 +22,12 @@ export default function SchwartzGuide() {
     <div>
       <GuideHeading level={3}>Strategy Overview</GuideHeading>
       <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li>Inflicts irremovable <EffectInlineTag name="BT_SEALED_IR" type="debuff" /></li>
+        <li>Inflicts irremovable <EffectInlineTag name="IG_Buff_Effect_Sealed_Interruption_D" type="debuff" /></li>
         <li>Deals low damage when alone</li>
         <li>Damage dealt increases while Shadow Beast is alive</li>
         <li>Shadow Beasts are vulnerable to AoE</li>
         <li>Enrage makes Shadow Beasts invincible</li>
-        <li>Reduces <EffectInlineTag name="BT_WG_DMG" type="debuff" /> from non-Dark units</li>
+        <li>Reduces <EffectInlineTag name="BT_WG_REVERSE_HEAL" type="debuff" /> from non-Dark units</li>
       </ul>
 
       <hr className="my-6 border-neutral-700" />

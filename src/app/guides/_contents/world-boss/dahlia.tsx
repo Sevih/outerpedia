@@ -113,7 +113,7 @@ export default function DahliaGuide() {
                 <li><CharacterLinkCard name="Dianne" />: Excellent alternative to <CharacterLinkCard name="Monad Eva" />.</li>
                 <li><CharacterLinkCard name="Gnosis Nella" />: Provides <EffectInlineTag name="BT_SEALED" type="debuff" /> application.</li>
                 <li><CharacterLinkCard name="Alice" />: Good alternative to <CharacterLinkCard name="Gnosis Nella" />.</li>
-                <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" />: Offers <EffectInlineTag name="Heavy Strike" type="buff" /> and debuff stacking with <EffectInlineTag name="BT_DOT_CURSE_IR" type="debuff" />.</li>
+                <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" />: Offers <EffectInlineTag name="Heavy Strike" type="buff" /> and debuff stacking with <EffectInlineTag name="IG_Buff_Dot_Curse_Interruption_D" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Demiurge Stella" />: Provides <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> and is immune to <EffectInlineTag name="BT_FREEZE" type="debuff" />.</li>
               </ul>
 
@@ -124,7 +124,7 @@ export default function DahliaGuide() {
               <GuideHeading level={4}>Phase 2 Recommended Characters</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
                 <li><CharacterLinkCard name="Ryu Lion" />: Provides <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> and <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" />.</li>
-                <li><CharacterLinkCard name="Akari" />: Offers <EffectInlineTag name="BT_SEALED" type="debuff" /> and <EffectInlineTag name="IG_Buff_DeBuffdurationIncrease" type="debuff" />.</li>
+                <li><CharacterLinkCard name="Akari" />: Offers <EffectInlineTag name="BT_SEALED" type="debuff" /> and <EffectInlineTag name="BT_EXTEND_DEBUFF" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Notia" />: <EffectInlineTag name="BT_DOT_POISON" type="debuff" /> limits the boss&apos;s turn count.</li>
                 <li><CharacterLinkCard name="Tamara" />: Provides <EffectInlineTag name="BT_CALL_BACKUP" type="buff" />, <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE" type="buff" />, and <EffectInlineTag name="BT_MARKING" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Luna" />: Offers <EffectInlineTag name="BT_CALL_BACKUP" type="buff" /> and <EffectInlineTag name="BT_SEALED" type="debuff" />.</li>

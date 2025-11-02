@@ -33,7 +33,7 @@ export default function Amadeus13Guide() {
                         <>
                             <GuideHeading level={3}>Strategy Overview</GuideHeading>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li>Immune to <EffectInlineTag name="BT_WG_DMG" type="debuff" /> if not debuff</li>
+                                <li>Immune to <EffectInlineTag name="BT_WG_REVERSE_HEAL" type="debuff" /> if not debuff</li>
                                 <li>Applies random debuffs that bypass <EffectInlineTag name="BT_IMMUNE" type="buff" /></li>
                                 <li>Using non-attack skills gives the boss <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE_IR" type="buff" /></li>
                                 <li>Immune to <EffectInlineTag name="BT_SEALED" type="debuff" /></li>
@@ -42,7 +42,7 @@ export default function Amadeus13Guide() {
                             <hr className="my-6 border-neutral-700" />
                             <GuideHeading level={3}>Tactical Tips</GuideHeading>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li>Keep applying debuffs to deal enough <EffectInlineTag name="BT_WG_DMG" type="debuff" /> before the enrage mechanic triggers.</li>
+                                <li>Keep applying debuffs to deal enough <EffectInlineTag name="BT_WG_REVERSE_HEAL" type="debuff" /> before the enrage mechanic triggers.</li>
                                 <li>The boss applies random debuffs that ignore immunity. Cleansing is crucial after they land.</li>
                                 <li>The boss extends party debuffs by 1 turn each round. Plan your cleanses accordingly.</li>
                                 <li>Do not use characters with non-attack skills, as they grant the boss a permanent critical hit buff.</li>

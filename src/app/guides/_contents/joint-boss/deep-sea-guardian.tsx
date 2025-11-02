@@ -34,7 +34,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }>= {
           <ul className="list-disc list-inside text-neutral-300 mb-4">
             <li><strong>S1</strong>: AoE, <EffectInlineTag name="BT_DOT_BLEED" type="debuff" /> 3 turns. <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> if only 1 target.</li>
             <li><strong>S2</strong>: AoE, 2 <EffectInlineTag name="BT_DOT_BLEED_IR" type="debuff" /> 3 turns (ignore immunity).</li>
-            <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> 9 turns. <EffectInlineTag name="BT_DETONATE" type="debuff" /> all <EffectInlineTag name="BT_DOT_BLEED" type="debuff" />.</li>
+            <li><strong>S3</strong>: AoE, <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> 9 turns. <EffectInlineTag name="BT_IMMEDIATELY_2000092" type="debuff" /> all <EffectInlineTag name="BT_DOT_BLEED" type="debuff" />.</li>
             <li><strong>Passive</strong>: When any character with <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> gains a turn, their Ultimate Skill cooldown is reduced by 1 turn, regardless of whether they are an ally or enemy.</li>
             <li><strong>Passive</strong>: Reduces enemies effectiveness by 90%.</li>
             <li><strong>Passive</strong>: Increases caster’s<EffectInlineTag name="BT_DOT_BLEED" type="debuff" /> damage by 100%.</li>

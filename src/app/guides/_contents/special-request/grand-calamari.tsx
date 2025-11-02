@@ -35,7 +35,7 @@ export default function GrandCalamari13Guide() {
                             <GuideHeading level={3}>Strategy Overview</GuideHeading>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>Immune to <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> and <EffectInlineTag name="IG_Buff_BuffdurationReduce" type="debuff" /></li>
-                                <li>Reduces debuff duration by 1 each turn (except irremovable debuff like <EffectInlineTag name="BT_SEALED_IR" type="debuff" /> from <CharacterLinkCard name="Gnosis Nella" />)</li>
+                                <li>Reduces debuff duration by 1 each turn (except irremovable debuff like <EffectInlineTag name="IG_Buff_Effect_Sealed_Interruption_D" type="debuff" /> from <CharacterLinkCard name="Gnosis Nella" />)</li>
                                 <li>Applies <EffectInlineTag name="BT_STAT|ST_BUFF_CHANCE" type="debuff" /> via S3</li>
                                 <li><CharacterLinkCard name="Kuro" /> can flip buffs into long-duration debuffs</li>
                             </ul>
@@ -54,7 +54,7 @@ export default function GrandCalamari13Guide() {
 
                             <GuideHeading level={3}>Recommended Characters</GuideHeading>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li><CharacterLinkCard name="Gnosis Nella" /> is ideal thanks to <EffectInlineTag name="BT_SEALED_IR" type="debuff" />.</li>
+                                <li><CharacterLinkCard name="Gnosis Nella" /> is ideal thanks to <EffectInlineTag name="IG_Buff_Effect_Sealed_Interruption_D" type="debuff" />.</li>
                                 <li><CharacterLinkCard name="Akari" /> <CharacterLinkCard name="Edelweiss" /> have strong debuffs, including <EffectInlineTag name="BT_SEALED" type="debuff" />.</li>
                                 <li><CharacterLinkCard name="Kuro" /> is a great pick with <EffectInlineTag name="BT_STATBUFF_CONVERT_TO_STATDEBUFF" type="debuff" />.</li>
                                 <li><CharacterLinkCard name="Monad Eva" /> is excellent for cleansing the boss&apos;s S3 debuff passively.</li>

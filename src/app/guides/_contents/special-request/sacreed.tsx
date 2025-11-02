@@ -60,7 +60,7 @@ export default function SacreedGuardian13Guide() {
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li><CharacterLinkCard name="Iota" />  is excellent here for AoE <EffectInlineTag name="BT_STUN" type="debuff" /> and <EffectInlineTag name="BT_ACTION_GAUGE" type="debuff" />.</li>
                                 <li><CharacterLinkCard name="Francesca" /> can handle both DPS and buff removal but needs to pass effectiveness checks.</li>
-                                <li><CharacterLinkCard name="Omega Nadja" /> is great at 4 stars (for stage 13) since her <EffectInlineTag name="UNIQUE_IRREGULAR_INFECTION" type="debuff" /> will remove the initial speed buff as a result removing the threat of being stunned from Sacreed Guardian&apos;s first attack.</li>
+                                <li><CharacterLinkCard name="Omega Nadja" /> is great at 4 stars (for stage 13) since her <EffectInlineTag name="IG_Buff_Effect_2000102_Interruption_D" type="debuff" /> will remove the initial speed buff as a result removing the threat of being stunned from Sacreed Guardian&apos;s first attack.</li>
                                 <li><CharacterLinkCard name="Aer" /> is reliable for <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> without relying on success rate checks.</li>
                                 <li><CharacterLinkCard name="Kuro" /> is a great pick with <EffectInlineTag name="BT_STATBUFF_CONVERT_TO_STATDEBUFF" type="debuff" /></li>
                                 <li><CharacterLinkCard name="Maxwell" /> and <CharacterLinkCard name="Demiurge Astei" /> are strong <ElementInlineTag element="dark" /> DPS picks for this fight.</li>

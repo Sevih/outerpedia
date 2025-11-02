@@ -37,7 +37,7 @@ export default function GnosisDahliaGuide() {
       <GuideHeading level={4}>Points of interest</GuideHeading>
       <ul className="list-disc list-inside text-neutral-300 mb-4">
         <li>
-          The boss has a 25-turn limit. Unless your team can consistently deal between <strong>39,296</strong> and <strong>58,945</strong> damage per turn, the most reliable approach is DoT — <EffectInlineTag name="BT_DOT_ETERNAL_BLEED" type="debuff" /> or <EffectInlineTag name="BT_DOT_BURN" type="debuff" />.
+          The boss has a 25-turn limit. Unless your team can consistently deal between <strong>39,296</strong> and <strong>58,945</strong> damage per turn, the most reliable approach is DoT — <EffectInlineTag name="BT_DOT_2000092" type="debuff" /> or <EffectInlineTag name="BT_DOT_BURN" type="debuff" />.
           This makes units like <CharacterLinkCard name="Gnosis Beth" />, <CharacterLinkCard name="Vlada" /> and <CharacterLinkCard name="Maxie" /> especially effective.
         </li>
         <li>

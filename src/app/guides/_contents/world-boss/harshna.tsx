@@ -104,10 +104,10 @@ export default function HarshnaGuide() {
               <p className='mt-4'>Bring a <ClassInlineTag name='Defender' /> will ease your way to go through phase 1 with <EffectInlineTag name="BT_STAT|ST_DEF_IR" type="debuff" />.</p>
               <p className='font-bold underline mt-2'>Phase 2 recommended characters</p>
               <ul className="list-disc list-inside text-neutral-300 mb-4">
-                <li><CharacterLinkCard name="Gnosis Beth" />: <EffectInlineTag name="BT_STEALTHED" type="buff" /> <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> <EffectInlineTag name="BT_DOT_ETERNAL_BLEED" type="debuff" />  and good damage.</li>
+                <li><CharacterLinkCard name="Gnosis Beth" />: <EffectInlineTag name="BT_STEALTHED" type="buff" /> <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> <EffectInlineTag name="BT_DOT_2000092" type="debuff" />  and good damage.</li>
                 <li><CharacterLinkCard name="Notia" />: Can maintain debuff like <EffectInlineTag name="BT_DOT_POISON" type="debuff" /> and <EffectInlineTag name="BT_STAT|ST_ATK" type="debuff" /> <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" />.</li>
-                <li><CharacterLinkCard name="Akari" />: <EffectInlineTag name="BT_SEALED" type="debuff" /> <EffectInlineTag name="IG_Buff_DeBuffdurationIncrease" type="debuff" />.</li>
-                <li><CharacterLinkCard name="Roxie" />: <EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /> <EffectInlineTag name="IG_Buff_DeBuffdurationIncrease" type="debuff" />.</li>
+                <li><CharacterLinkCard name="Akari" />: <EffectInlineTag name="BT_SEALED" type="debuff" /> <EffectInlineTag name="BT_EXTEND_DEBUFF" type="debuff" />.</li>
+                <li><CharacterLinkCard name="Roxie" />: <EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /> <EffectInlineTag name="BT_EXTEND_DEBUFF" type="debuff" />.</li>
                 <li><CharacterLinkCard name="Bell Cranel" /><CharacterLinkCard name="Vlada" /><CharacterLinkCard name="Maxie" /><CharacterLinkCard name="Ember" />: <EffectInlineTag name="BT_DOT_BURN" type="debuff" /> specialist.</li>
                 <li><CharacterLinkCard name="Monad Eva" />: strong as always.</li>
                 <li><CharacterLinkCard name="Fran" />: <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> and <EffectInlineTag name="BT_EXTEND_BUFF" type="buff" /> (be sure to use it after the boss&apos;s S2).</li>

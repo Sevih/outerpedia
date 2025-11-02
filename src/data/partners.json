@@ -216,7 +216,7 @@
             "kitsune-of-eternity-tamamo-no-mae"
           ],
           "reason": {
-            "en": "Can {D/BT_DETONATE} {D/BT_DOT_CURSE}",
+            "en": "Can {D/BT_IMMEDIATELY_2000092} {D/BT_DOT_CURSE}",
             "kr": " ",
             "jp": " "
           }
@@ -289,7 +289,7 @@
             "ember"
           ],
           "reason": {
-            "en": "{D/IG_Buff_DeBuffdurationIncrease}",
+            "en": "{D/BT_EXTEND_DEBUFF}",
             "kr": " ",
             "jp": " "
           }
@@ -328,7 +328,7 @@
             "kitsune-of-eternity-tamamo-no-mae"
           ],
           "reason": {
-            "en": "Can {D/BT_DETONATE} {D/BT_DOT_CURSE}",
+            "en": "Can {D/BT_IMMEDIATELY_2000092} {D/BT_DOT_CURSE}",
             "kr": " ",
             "jp": " "
           }

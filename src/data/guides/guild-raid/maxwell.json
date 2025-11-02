@@ -255,7 +255,7 @@
         "S1: Single, prioritizes the Frontline unit. {B/BT_IMMUNE_IR} 1 turn if the target is not a {C/Defender}.",
         "Increases damage taken from {C/Mage} and even more from {C/Mage} {E/Earth}.",
         "Reduce effectiveness and critical hit chance of all {C/Striker}.",
-        "Takes 300% {D/BT_WG_DMG} if {D/BT_DOT_POISON}.",
+        "Takes 300% {D/BT_WG_REVERSE_HEAL} if {D/BT_DOT_POISON}.",
         "Reduce damage dealt against {E/Earth} heroes and takes increased damage from them.",
         "Increase damage dealt against {E/Fire} heroes and reduces damage taken from them.",
         "{D/BT_FIXED_DAMAGE} and {D/BT_DOT_CURSE}, cannot exceed 20,000. (Stage 5+).",

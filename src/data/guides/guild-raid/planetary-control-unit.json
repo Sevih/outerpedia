@@ -216,7 +216,7 @@
             }
           },
           "notes": [
-            "S3: AoE, {D/BT_DETONATE} {D/BT_DOT_BURN}.",
+            "S3: AoE, {D/BT_IMMEDIATELY_2000092} {D/BT_DOT_BURN}.",
             "S2: AoE, {D/BT_DOT_BURN} 3 turns.",
             "S1: Single, prioritizes the leftmost unit. {D/BT_STUN} 1 turn if not a {C/Defender}",
             "Reduce damage dealt against {E/Fire} heroes and takes increased damage from them.",

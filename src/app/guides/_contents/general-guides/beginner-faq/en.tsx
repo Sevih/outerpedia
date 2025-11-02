@@ -76,7 +76,7 @@ export default function BeginnerFAQ() {
                         <h5 className="font-semibold text-green-300">Regular</h5>
                         <p className="text-sm  mb-2">
                           For Regular heroes in Rate Up Recruit and Custom Recruit we recommend only using <ItemInlineDisplay names={'Special Recruitment Ticket'} /> <ItemInlineDisplay names={'Special Recruitment Ticket (Event)'} />.
-                          <br />The first goal in Custom Recruit when starting out is a hero that gives <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE" type="buff" /> buffers.
+                          <br />The first goal in Custom Recruit when starting out is a hero that gives <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE" type="buff" /> buff.
                         </p>
                         <div className="gap-1">
                           <CharacterLinkCard name="Valentine" />
@@ -135,7 +135,7 @@ export default function BeginnerFAQ() {
                       </div>
 
                       <div className="p-3 bg-blue-900/10 border-l-4 border-blue-500 rounded">
-                        <p className="text-sm font-semibold text-blue-300 mb-2">Crit Buffers (from Custom Recruit banner)</p>
+                        <p className="text-sm font-semibold text-blue-300 mb-2">Crit Buff (from Custom Recruit banner)</p>
                         <div className="gap-1">
                           <CharacterLinkCard name="Valentine" />
                           <CharacterLinkCard name="Tamara" />

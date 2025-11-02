@@ -26,7 +26,7 @@ export default function KsaiGuide() {
         <li>Non-water units suffer <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="debuff" /> and <EffectInlineTag name="BT_STAT|ST_DEF_IR" type="debuff" /></li>
         <li>Team has <EffectInlineTag name="BT_SYS_DEBUFF_ENHANCE_IR" type="debuff" /></li>
         <li>Boss has <EffectInlineTag name="BT_SYS_BUFF_ENHANCE_IR" type="buff" /></li>
-        <li>Takes no <EffectInlineTag name="BT_WG_DMG" type="debuff" /> until boss HP &lt; 70%</li>
+        <li>Takes no <EffectInlineTag name="BT_WG_REVERSE_HEAL" type="debuff" /> until boss HP &lt; 70%</li>
         <li><strong>DoT Cap:</strong> <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> / <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> limited to 5k</li>
         <li><strong>S1:</strong> AoE + heals 40% HP</li>
         <li><strong>S2:</strong> If HP &gt; 70%, launches additional AoE and gains irremovable <EffectInlineTag name="BT_STAT|ST_DEF_IR" type="buff" /> for 4 turns</li>

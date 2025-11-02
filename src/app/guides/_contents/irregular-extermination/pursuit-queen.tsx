@@ -89,9 +89,9 @@ export default function IrregularQueenGuide() {
             <hr className="my-6 border-neutral-700" />
             <GuideHeading level={3}>Noticable Heroes</GuideHeading>
             <ul className="list-disc list-inside text-neutral-300 mb-4">
-                <li><CharacterLinkCard name="Akari" />: Applies uncounterrable <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> <EffectInlineTag name="BT_SEALED" type="debuff" /> and <EffectInlineTag name="IG_Buff_DeBuffdurationIncrease" type="debuff" /> </li>
+                <li><CharacterLinkCard name="Akari" />: Applies uncounterrable <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> <EffectInlineTag name="BT_SEALED" type="debuff" /> and <EffectInlineTag name="BT_EXTEND_DEBUFF" type="debuff" /> </li>
                 <li><CharacterLinkCard name="Drakhan" />: Applies uncounterrable <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /></li>
-                <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> 6★: Can&apos;t be countered and applies <EffectInlineTag name="BT_DOT_CURSE_IR" type="debuff" /> freely (except dual attack & chain)</li>
+                <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> 6★: Can&apos;t be countered and applies <EffectInlineTag name="IG_Buff_Dot_Curse_Interruption_D" type="debuff" /> freely (except dual attack & chain)</li>
                 <li><CharacterLinkCard name="Gnosis Nella" /><CharacterLinkCard name="Iota" />: Can <EffectInlineTag name="BT_STUN" type="debuff" /> the boss</li>
                 <li><CharacterLinkCard name="Regina" /><CharacterLinkCard name="Caren" /><CharacterLinkCard name="Gnosis Dahlia" /><CharacterLinkCard name="Holy Night's Blessing Dianne" />: High damage dealers without relying on debuffs</li>
                 <li><CharacterLinkCard name="Tio" />: Cleanses the <EffectInlineTag name="BT_AGGRO" type="debuff" /> from S2</li>

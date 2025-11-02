@@ -14,7 +14,7 @@ export default function TyrantGuide() {
                 <li><strong>S2</strong>: AoE, grants <EffectInlineTag name="BT_STAT|ST_DEF_IR" type="buff" /> 5 turns.</li>
                 <li><strong>S3</strong>: AoE, inflicts <EffectInlineTag name="BT_STAT|ST_PIERCE_POWER_RATE" type="debuff" /> 9 turns.</li>
                 <li><strong>Passive</strong>: Increases damage dealt against enemies without <EffectInlineTag name="BT_STAT|ST_PIERCE_POWER_RATE" type="debuff" />.</li>
-                <li><strong>Passive</strong>: Always inflicts <EffectInlineTag name="BT_SYS_DEBUFF_ENHANCE_IR" type="debuff" /> and <EffectInlineTag name="BT_SEALED_IR" type="debuff" /> on all enemies.</li>
+                <li><strong>Passive</strong>: Always inflicts <EffectInlineTag name="BT_SYS_DEBUFF_ENHANCE_IR" type="debuff" /> and <EffectInlineTag name="IG_Buff_Effect_Sealed_Interruption_D" type="debuff" /> on all enemies.</li>
                 <li><strong>Passive</strong>: Damage from <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> and <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> will not exceed 1 000.</li>
                 <li><strong>Enrage</strong>:  Every 30 enemy actions.</li>
                 <li><strong>Enrage Ultimate</strong>: <EffectInlineTag name="BT_SEALED_RESURRECTION" type="debuff" /> Instantly kills all enemies.</li>

@@ -8,11 +8,20 @@ import type { CSSProperties } from 'react'
 import { useTenant } from '@/lib/contexts/TenantContext'
 import { l } from '@/lib/localize'
 
-type Props = {
-  name: string
-  type: 'buff' | 'debuff'
-  triggerStyle?: CSSProperties // ← nouveau prop
-}
+type BuffName = typeof buffs[number]['name']
+type DebuffName = typeof debuffs[number]['name']
+
+type Props =
+  | {
+      name: BuffName
+      type: 'buff'
+      triggerStyle?: CSSProperties
+    }
+  | {
+      name: DebuffName
+      type: 'debuff'
+      triggerStyle?: CSSProperties
+    }
 
 type Effect = {
   name: string

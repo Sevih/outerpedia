@@ -28,7 +28,7 @@ export default function ShadowArchdemonGuide() {
         <li><strong>S2:</strong> Applies <EffectInlineTag name="BT_STATBUFF_CONVERT_TO_STATDEBUFF" type="debuff" /></li>
         <li><strong>S3:</strong> Grants <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" />, <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE" type="buff" />, <EffectInlineTag name="BT_STAT|ST_CRITICAL_DMG_RATE" type="buff" /> to both allies and enemies</li>
         <li>When boss acts, heroes with stat down effects are inflicted with <EffectInlineTag name="BT_STUN" type="debuff" /> for 5 turns (ignores resilience but not immunity)</li>
-        <li>Immune to <EffectInlineTag name="BT_WG_DMG" type="debuff" /> while buffed</li>
+        <li>Immune to <EffectInlineTag name="BT_WG_REVERSE_HEAL" type="debuff" /> while buffed</li>
         <li>Applying any debuff to the boss restores its WG completely</li>
       </ul>
 
