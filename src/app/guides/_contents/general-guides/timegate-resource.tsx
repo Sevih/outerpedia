@@ -31,7 +31,7 @@ const data: Record<TabKey, ResourceItem[]> = {
         {
             name: 'Basic Skill Manual',
             sources: [
-                { source: "Irregular Infiltration (Floor 3's)", monthly: 28 },
+                { source: "Irregular Infiltration (Floor 3)", monthly: 28 },
                 { source: 'Skyward Tower Shop', monthly: 25 },
                 { source: 'Guild Shop', weekly: 3 },
                 { source: 'Resource Shop', weekly: 5 },
@@ -44,7 +44,7 @@ const data: Record<TabKey, ResourceItem[]> = {
         {
             name: 'Intermediate Skill Manual',
             sources: [
-                { source: "Irregular Infiltration (Floor 3's)", monthly: 17 },
+                { source: "Irregular Infiltration (Floor 3)", monthly: 17 },
                 { source: 'Skyward Tower Shop', monthly: 15 },
                 { source: 'Guild Shop', weekly: 2 },
                 { source: 'Resource Shop', weekly: 2 },
@@ -59,7 +59,7 @@ const data: Record<TabKey, ResourceItem[]> = {
         {
             name: 'Professional Skill Manual',
             sources: [
-                { source: "Irregular Infiltration (Floor 3's)", monthly: 3 },
+                { source: "Irregular Infiltration (Floor 3)", monthly: 3 },
                 { source: 'Skyward Tower Shop', monthly: 5 },
                 { source: 'Guild Shop', weekly: 1 },
                 { source: 'Arena Shop', weekly: 2 },
@@ -74,10 +74,11 @@ const data: Record<TabKey, ResourceItem[]> = {
             name: 'Transistone (Total)',
             sources: [
                 { source: "Joint Challenge Shop", monthly: 1 },
-                { source: 'Star\'s memory Shop', monthly: 2 },
+                { source: 'Star\'s memory Shop', weekly: 2 },
                 { source: 'World Boss Shop', monthly: 2 },
                 { source: 'Skyward Tower Shop', monthly: 1 },
                 { source: 'Irregular Extermination Point', monthly: 12 },
+                { source: "Irregular Infiltration (Floor 3)", monthly: 9 },
                 { source: 'Kate\'s Workshop', monthly: 3 },
 
             ],
@@ -90,6 +91,7 @@ const data: Record<TabKey, ResourceItem[]> = {
                 { source: 'World Boss Shop', monthly: 2 },
                 { source: 'Skyward Tower Shop', monthly: 1 },
                 { source: 'Irregular Extermination Point', monthly: 12 },
+                { source: "Irregular Infiltration (Floor 3)", monthly: 9 },
                 { source: 'Kate\'s Workshop', monthly: 3 },
             ],
         }
@@ -159,6 +161,7 @@ const data: Record<TabKey, ResourceItem[]> = {
 function ResourceTable({ item }: { item: ResourceItem }) {
     const totalWeekly = item.sources.reduce((sum, s) => sum + (s.weekly || 0), 0)
     const totalMonthly = item.sources.reduce((sum, s) => sum + (s.monthly || 0), 0)
+    const grandTotalMonthly = totalMonthly + (totalWeekly * 4)
 
     return (
         <div className="flex justify-center my-6">
@@ -186,6 +189,11 @@ function ResourceTable({ item }: { item: ResourceItem }) {
                             <td className="border px-3 py-2 text-left">Total</td>
                             <td className="border px-3 py-2">{totalWeekly || '–'}</td>
                             <td className="border px-3 py-2">{totalMonthly || '–'}</td>
+                        </tr>
+                        <tr className="bg-gray-800 font-bold">
+                            <td className="border px-3 py-2 text-left">Grand Total Monthly</td>
+                            <td className="border px-3 py-2">–</td>
+                            <td className="border px-3 py-2">{grandTotalMonthly || '–'}</td>
                         </tr>
                     </tbody>
                 </table>
