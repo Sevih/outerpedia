@@ -225,7 +225,7 @@ export default function BeginnerFAQ() {
                   <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/30 border border-slate-700 rounded-xl p-6 space-y-3">
                     <h4 className="text-lg font-semibold text-amber-300">How do I get gear?</h4>
                     <p className=" leading-relaxed">
-                      Eva&apos;s Guide Quests and Skyward Tower will sort this out while levelling, along with the Challenge! Special Request missions&apos; 6-star legendary gear. When enough Survey Hub or Arena currency is available, there can also offer solid 6-star gear (season 2 for Survey Hub).
+                      Eva&apos;s Guide Quests and Skyward Tower will sort this out while levelling, along with the Challenge! Special Request missions&apos; 6-star legendary gear. When enough Survey Hub or Arena currency is available, these can also offer solid 6-star gear (season 2 for Survey Hub).
                       Farming for gear isn&apos;t a big focus until you have cleared Stage 10 on the Special Request bosses, so they can only drop 6-star gear.
                     </p>
 
