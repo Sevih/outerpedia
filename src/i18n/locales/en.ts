@@ -726,6 +726,21 @@ const en = {
   'howToPlay.sidebar.reddit': 'Reddit',
   'howToPlay.sidebar.twitter': 'X (Twitter)',
 
+  // Effects table headers
+  'effects.table.icon': 'Icon',
+  'effects.table.name': 'Name',
+  'effects.table.description': 'Description',
+
+  // Buffs section
+  'effects.buffs.intro': 'Buffs are beneficial effects that are applied to characters.',
+  'effects.buffs.customIcon': 'Those whose names appear in orange italics do not have an in-game icon. The one displayed is the custom icon used on this website.',
+  'effects.buffs.listIntro': 'Here is the list of those (excluding irremovable unique character mechanics):',
+
+  // Debuffs section
+  'effects.debuffs.intro': 'Debuffs are detrimental effects that are applied to characters.',
+  'effects.debuffs.customIcon': 'Those whose names appear in orange italics do not have an in-game icon. The one displayed is the custom icon used on this website.',
+  'effects.debuffs.listIntro': 'Here is the list of those (excluding irremovable unique character mechanics):',
+
 
 
 

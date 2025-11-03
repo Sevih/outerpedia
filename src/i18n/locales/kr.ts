@@ -726,6 +726,21 @@ const kr = {
   'howToPlay.sidebar.reddit': 'Reddit',
   'howToPlay.sidebar.twitter': 'X (Twitter)',
 
+  // Effects table headers
+  'effects.table.icon': '아이콘',
+  'effects.table.name': '이름',
+  'effects.table.description': '설명',
+
+  // Buffs section
+  'effects.buffs.intro': '버프는 캐릭터에게 적용되는 유익한 효과입니다.',
+  'effects.buffs.customIcon': '주황색 이탤릭체로 표시된 이름은 게임 내 아이콘이 없습니다. 표시된 아이콘은 이 웹사이트에서 사용하는 커스텀 아이콘입니다.',
+  'effects.buffs.listIntro': '다음은 목록입니다 (제거할 수 없는 고유 효과 제외):',
+
+  // Debuffs section
+  'effects.debuffs.intro': '디버프는 캐릭터에게 적용되는 해로운 효과입니다.',
+  'effects.debuffs.customIcon': '주황색 이탤릭체로 표시된 이름은 게임 내 아이콘이 없습니다. 표시된 아이콘은 이 웹사이트에서 사용하는 커스텀 아이콘입니다.',
+  'effects.debuffs.listIntro': '다음은 목록입니다 (제거할 수 없는 고유 효과 제외):',
+
 
 
 

@@ -726,6 +726,21 @@ const jp = {
   'howToPlay.sidebar.reddit': 'Reddit',
   'howToPlay.sidebar.twitter': 'X（Twitter）',
 
+  // Effects table headers
+  'effects.table.icon': 'アイコン',
+  'effects.table.name': '名前',
+  'effects.table.description': '説明',
+
+  // Buffs section
+  'effects.buffs.intro': 'バフはキャラクターに適用される有益な効果です。',
+  'effects.buffs.customIcon': 'オレンジ色の斜体で表示されている名前は、ゲーム内にアイコンがありません。表示されているのは、このウェブサイトで使用されているカスタムアイコンです。',
+  'effects.buffs.listIntro': '以下はそのリストです（取り除けないユニーク効果を除く）：',
+
+  // Debuffs section
+  'effects.debuffs.intro': 'デバフはキャラクターに適用される有害な効果です。',
+  'effects.debuffs.customIcon': 'オレンジ色の斜体で表示されている名前は、ゲーム内にアイコンがありません。表示されているのは、このウェブサイトで使用されているカスタムアイコンです。',
+  'effects.debuffs.listIntro': '以下はそのリストです（取り除けないユニーク効果を除く）：',
+
 
 
 

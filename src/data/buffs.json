@@ -77,7 +77,7 @@
     "description_jp": "味方を2人呼び出して攻撃する。",
     "description_kr": "아군 2명의 공격을 호출합니다.",
     "description_zh": "召唤2名友方一起攻击。",
-    "icon": "SC_Buff_Effect_Dual_Attack"
+    "icon": "SC_Buff_Effect_Double_Dual_Attack"
   },
   {
     "name": "BT_CASTER_COPY_BUFF",
