@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap');
 @import "tailwindcss";
 
-
 /* Séparation du body et html pour éviter les blocages de couleurs */
 html {
   padding: 0;
@@ -52,7 +51,7 @@ img {
 }
 
 /* Next.js injecte parfois le style dans des span autour des <img>, on force */
-:global img {
+img[style] {
   background-color: transparent !important;
   image-rendering: auto;
 }
