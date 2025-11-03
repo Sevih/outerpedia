@@ -1,6 +1,18 @@
 {
   "en": [
     {
+      "slug": "live-en-213",
+      "title": "11/04 (Tue) Patch Note",
+      "date": "2025.11.03",
+      "category": "notice",
+      "excerpt": "Dear Master, We would like to inform you of the in-game update scheduled for 11/04 (Tue). You can check the updated content in the game after maintenance is completed. Please refer to the details belo...",
+      "coverImage": "/images/news/live/en/213-a7898fc4.webp",
+      "uid": "213",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=213&mod=document",
+      "views": 335,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-211",
       "title": "[Notice] End of Support for Android 32-bit Devices",
       "date": "2025.10.31",
@@ -11545,6 +11557,30 @@
   ],
   "jp": [
     {
+      "slug": "live-jp-215",
+      "title": "11/4（火）アップデート内容のお知ら（1）(11/4 17:30 追加)",
+      "date": "2025.11.03",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG 『アウタープレーン』 こんにちは！GMあめです。 11/4 (火) のアップデート内容を案内いたします。 アップデート内容は、メンテナンス終了後にゲーム内でご確認いただけます。 詳細につきましては、下記をご覧ください。 1. 新規デミウルゴス仲間【グノーシス・ビエラ】登場 \\- 敵に様々なデバフ効果を与えながら攻撃する 【グノーシス・ビエラ】が登場します。 \\# 名前：グノー...",
+      "coverImage": "/images/news/live/jp/215-ffa48415.webp",
+      "uid": "215",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=215&mod=document",
+      "views": 47,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-217",
+      "title": "11/4（火）アップデート内容のお知ら（2）(11/4 16:00 追加)",
+      "date": "2025.11.03",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG 『アウタープレーン』 こんにちは！GMあめです。 11/4 (火) のアップデート内容を案内いたします。 アップデート内容は、メンテナンス終了後にゲーム内でご確認いただけます。 詳細につきましては、下記をご覧ください。 * 7.【リーグ：覇者】が開催されます。 \\- 新たなリーグが開催されます。 1) リーグの名称 - リーグの名称は【リーグ：覇者 】で、13週間にわたって開...",
+      "coverImage": "/images/news/live/jp/217-2ed13155.webp",
+      "uid": "217",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=217&mod=document",
+      "views": 33,
+      "lang": "jp"
+    },
+    {
       "slug": "live-jp-212",
       "title": "【お知らせ】32bit版Android端末のサポート終了について",
       "date": "2025.10.31",
@@ -23075,6 +23111,30 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-214",
+      "title": "11월 4일(화) 업데이트 안내 Part.1 (11/4 17:30 추가)",
+      "date": "2025.11.03",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 11/4 (화) 진행될 게임 내 업데이트 사항을 안내해 드립니다. 업데이트 내용은 점검 후 게임 내에서 확인하실 수 있습니다. 자세한 내용은 아래를 확인해 주시기 바랍니다. ※ 11/4 오후 5:30 : 그노시스 비엘라 초월 효과 텍스트 누락분 추가 * 1\\. 신규 데미우르고스 동료 \\[그노시...",
+      "coverImage": "/images/news/live/kr/214-96e0a83d.webp",
+      "uid": "214",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=214&mod=document",
+      "views": 144,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-216",
+      "title": "11월 4일 (화) 업데이트 안내 Part.2 (11/3 16:15 추가)",
+      "date": "2025.11.03",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 11/4 (화) 진행될 게임 내 업데이트 사항을 안내해 드립니다. 업데이트 내용은 점검 후 게임 내에서 확인하실 수 있습니다. 자세한 내용은 아래를 확인해 주시기 바랍니다. * 7\\. 결투장 리그 \\[패자의 리그\\] 시작 \\- 새로운 결투장 리그가 시작됩니다. 1) 리그 명칭 \\- 리그 명칭은...",
+      "coverImage": "/images/news/live/kr/216-f229f045.webp",
+      "uid": "216",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=216&mod=document",
+      "views": 89,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-210",
       "title": "[공지] 11/4(화) 32bit Android 기기 지원 중단 사전 안내",

@@ -316,7 +316,11 @@ function parseListPage(html) {
     // Extract title and link
     const $titleCell = $row.find('td.kboard-list-title');
     const $link = $titleCell.find('a');
-    const title = $link.text().trim();
+    let title = $link.text().trim();
+
+    // Remove "New" prefix with tabs/whitespace (forum notification)
+    title = title.replace(/^New\s+/, '');
+
     const href = $link.attr('href');
 
     // Skip if no link
@@ -332,9 +336,18 @@ function parseListPage(html) {
     let date = '';
     $cells.each((_, cell) => {
       const text = $(cell).text().trim();
-      // Match YYYY.MM.DD or HH:mm format
-      if (text.match(/^\d{4}\.\d{2}\.\d{2}$/) || text.match(/^\d{2}:\d{2}$/)) {
+      // Match YYYY.MM.DD format
+      if (text.match(/^\d{4}\.\d{2}\.\d{2}$/)) {
         date = text;
+      }
+      // Match HH:mm format (posted today, less than 24h ago)
+      else if (text.match(/^\d{2}:\d{2}$/)) {
+        // Convert to today's date in YYYY.MM.DD format
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        date = `${year}.${month}.${day}`;
       }
     });
 
