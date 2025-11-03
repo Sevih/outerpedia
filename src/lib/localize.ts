@@ -111,6 +111,28 @@ export function lEnhancement(
   return lSubMap<string[]>(raw, lang)
 }
 
+/**
+ * lArray() - Localise un champ tableau avec suffixes `_jp` / `_kr` (EN = base).
+ * Exemples: pro, pro_jp, pro_kr | con, con_jp, con_kr
+ * Retourne un tableau vide si aucune valeur n'est trouvée.
+ */
+export function lArray<T extends object>(
+  obj: T,
+  baseKey: string,
+  lang: TenantKey
+): string[] {
+  const anyObj = obj as Record<string, unknown>;
+
+  const langKey = lang === 'en' ? baseKey : `${baseKey}_${lang}`;
+  const v1 = anyObj[langKey];
+  if (Array.isArray(v1)) return v1 as string[];
+
+  const v2 = anyObj[baseKey];
+  if (Array.isArray(v2)) return v2 as string[];
+
+  return [];
+}
+
 // Alias ergonomiques (optionnels)
 export const pickLocalized = l;     // même chose que l()
 export const pickLocalizedRec = lRec; // même chose que lRec()

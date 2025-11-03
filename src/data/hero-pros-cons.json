@@ -1,3 +1,100 @@
 {
-
+    "valentine": {
+        "pro": [
+            "easy to build",
+            "buffing allies' damage with {B/BT_STAT|ST_CRITICAL_RATE} and {B/BT_STAT|ST_CRITICAL_DMG_RATE}"
+        ],
+        "con": [
+            "RNG reliant for her EE to activate",
+            "by making her too fast can make you waste a lot of turns"
+        ]
+    },
+    "tamara": {
+        "pro": [
+            "buffing allies' damage with {B/BT_STAT|ST_CRITICAL_RATE} and {B/BT_STAT|ST_CRITICAL_DMG_RATE}",
+            "very flexible and usable in many teams",
+            "debuffing enemies with {D/BT_STAT|ST_DEF} {D/BT_SILENCE} {D/BT_MARKING} and {D/BT_COOL_CHARGE}"
+        ],
+        "con": [
+            "requires high stats to perform well",
+            "requires max skill upgrades for full potential"
+        ]
+    },
+    "charlotte": {
+        "pro": [
+            "easy to build",
+            "buffing allies' damage with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} and {B/BT_STAT|ST_ATK}"
+        ],
+        "con": [
+            "her skillset mainly supports mage-type characters",
+            "not helpful most of the time"
+        ]
+    },
+    "skadi": {
+        "pro": [
+            "easy to build",
+            "buffing allies with {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} and {B/BT_STAT|ST_BUFF_CHANCE}"
+        ],
+        "con": [
+            "needs max skill upgrades"
+        ]
+    },
+    "monad-eva": {
+        "pro": [
+            "has built-in {B/BT_CALL_BACKUP}",
+            "supports the team with {B/BT_INVINCIBLE} {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK} {B/BT_REVIVAL} {B/BT_AP_CHARGE}"
+        ],
+        "con": [
+            "needs 5-star transcendence for double {B/BT_CALL_BACKUP}",
+            "needs her exclusive equipment to heal when using {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}"
+        ]
+    },
+    "nella": {
+        "pro": [
+            "has built-in {B/BT_CALL_BACKUP}",
+            "supports the team with {B/BT_RESURRECTION} {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK} {B/BT_IMMUNE} {B/BT_AP_CHARGE}"
+        ],
+        "con": [
+            "has no way to cleanse debuffs outside preventing them with {B/BT_IMMUNE}"
+        ]
+    },
+    "ame": {
+        "pro": [
+            "deal increased damage against bosses",
+            "has innate critical chance"
+        ],
+        "con": [
+            "-"
+        ]
+    },
+    "rin": {
+        "pro": [
+            "strong at clearing all enemies at once",
+            "self buff with {B/BT_STAT|ST_CRITICAL_RATE}",
+            "damage increases each time she uses a skill"
+        ],
+        "con": [
+            "weak against bosses unless have max Exclusive Equipment"
+        ]
+    },
+    "vlada": {
+        "pro": [
+            "easy to build with attack stat",
+            "can detonate {D/BT_DOT_BURN}",
+            "her ultimate resets if it kills an enemy"
+        ],
+        "con": [
+            "benefits from teammates who can extend {D/BT_DOT_BURN} duration"
+        ]
+    },
+    "rey": {
+        "pro": [
+            "strong against Irregular bosses",
+            "can take many extra turns with {B/BT_ADDITIVE_TURN} and {B/BT_COOL_CHARGE} combined",
+            "can prevent water- or healer-type enemies from being revived"
+        ],
+        "con": [
+            "can waste too many turns or die to DoT debuffs"
+        ]
+    }
 }

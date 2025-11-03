@@ -33,7 +33,7 @@ import formatEffectText from '@/utils/formatText'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
 import abbrevData from '@/data/abbrev.json'
-import { l, lRec, lEnhancement } from '@/lib/localize'
+import { l, lRec, lEnhancement, lArray } from '@/lib/localize'
 
 type AbbrevEntry = string | { en: string; jp?: string; kr?: string }
 const abbrev = abbrevData as Record<string, AbbrevEntry>
@@ -302,10 +302,9 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
     const heroKey = toKebabCase(character.Fullname)
     const pc = prosCons[heroKey]
 
-    // Removed: use l() from @/lib/localize instead
-    // Replacement inline below
-    const pros = pc ? (l(pc, 'pro', langKey) as unknown as string[]) || [] : []
-    const cons = pc ? (l(pc, 'con', langKey) as unknown as string[]) || [] : []
+    // Use lArray() for array fields with localization support
+    const pros = pc ? lArray(pc, 'pro', langKey) : []
+    const cons = pc ? lArray(pc, 'con', langKey) : []
     const hasPros = pros.length > 0
     const hasCons = cons.length > 0
     const hasProsCons = hasPros || hasCons

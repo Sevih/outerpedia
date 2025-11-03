@@ -78,7 +78,7 @@ const versions: Record<string, { label: string; content: React.ReactNode }> = {
           </ol>
           <li><strong>Passive</strong>: Takes increased damage from <ElementInlineTag element='light' /><ElementInlineTag element='dark' /> enemies and they always have <EffectInlineTag name='BT_DMG_ELEMENT_SUPERIORITY' type='buff' />.</li>
           <li><strong>Passive</strong>: Takes increased damage from attack that targets all enemies.</li>
-          <li><strong>Passive</strong>: Reduce enemies speed to 0 and inflict them with <EffectInlineTag name="BT_SEAL_ADDITIVE_ATTACK_IR" type="debuff" /> and <EffectInlineTag name="BT_SEAL_ADDITIVE_TURN_IR" type="debuff" />.</li>
+          <li><strong>Passive</strong>: Reduce enemies speed to 0 and inflict them with <EffectInlineTag name="BT_SEAL_BT_CALL_BACKUP_IR" type="debuff" /> and <EffectInlineTag name="BT_SEAL_ADDITIVE_TURN_IR" type="debuff" />.</li>
           <li><strong>Passive</strong>: After the caster attack, <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> of enemies by 100%.</li>
           <li><strong>Passive</strong>: At the start of the turn, inflict <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> on all enemies that have 30% or less HP and change their HP to 1.</li>
           <li><strong>Passive</strong>: Damage taken from <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /> does not exceed 10 000.</li>

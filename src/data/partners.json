@@ -1,3 +1,510 @@
   {
-
+    "aer": {
+      "partner": [
+        {
+          "hero": [
+            "valentine"
+          ],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_ACTION_GAUGE} {B/BT_CALL_BACKUP}",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "eternal"
+          ],
+          "reason": {
+            "en": "{D/BT_STAT|ST_DEF}",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "liselotte"
+          ],
+          "reason": {
+            "en": "S3's {B/BT_COOL_CHARGE} resets Aer's Skill 3-Skill 2 combo",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "ais-wallenstein": {
+      "partner": [
+        {
+          "hero": [
+            "monad-eva"
+          ],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} to reduce Skill 3 cooldown",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "skadi"
+          ],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "ame": {
+      "partner": [
+        {
+          "hero": [
+            "skadi"
+          ],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} \n{B/BT_COOL_CHARGE} closes the gap in Ame's {B/IG_Buff_Effect_2000065_A_Interruption} and {B/IG_Buff_Effect_2000065_B_Interruption} uptime",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "charlotte"
+          ],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_ATK} {B/BT_ACTION_GAUGE} for {C/Mage}",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "bell-cranel": {
+      "partner": [
+        {
+          "hero": [
+            "vlada",
+            "maxie",
+            "ember"
+          ],
+          "reason": {
+            "en": "{D/BT_DOT_BURN} team",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "beth": {
+      "partner": [
+        {
+          "hero": [
+            "eliza",
+            "francesca"
+          ],
+          "reason": {
+            "en": "Also {C/Mage} with {I-W/Noblewoman's Guile}: More {D/BT_DOT_BLEED} uptime to enable Beth's extra effects",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "caren": {
+      "partner": [
+        {
+          "hero": [
+            "veronica",
+            "summer-knight-s-dream-ember"
+          ],
+          "reason": {
+            "en": "{B/BT_STAT|ST_DEF} support",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "delta": {
+      "partner": [
+        {
+          "hero": [
+            "fran"
+          ],
+          "reason": {
+            "en": "Increased {B/BT_STAT|ST_COUNTER_RATE} buff uptime, {B/BT_ACTION_GAUGE} for highest max health",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "demiurge-astei": {
+      "partner": [
+        {
+          "hero": [
+            "maxwell"
+          ],
+          "reason": {
+            "en": "Strengthens ally {C/Mage}",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "demiurge-delta"
+          ],
+          "reason": {
+            "en": "{B/IG_Buff_Effect_2000100_Interruption} after Demiurge Astei used her Skill 3",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "demiurge-luna": {
+      "partner": [
+        {
+          "hero": [
+            "skadi"
+          ],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE}, {B/BT_STAT|ST_CRITICAL_DMG_RATE} & {B/BT_STAT|ST_ATK}, {B/BT_COOL_CHARGE}",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "demiurge-stella": {
+      "partner": [
+        {
+          "hero": [
+            "monad-eva"
+          ],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} and {B/BT_AP_CHARGE} to use her expensive Burst skills",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "demiurge-vlada": {
+      "partner": [
+        {
+          "hero": [
+            "nella",
+            "monad-eva",
+            "demiurge-delta"
+          ],
+          "reason": {
+            "en": "{B/BT_AP_CHARGE} or {B/IG_Buff_Effect_2000100_Interruption} to let her use her Burst 3 every turn",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "drakhan": {
+      "partner": [
+        {
+          "hero": [
+            "kitsune-of-eternity-tamamo-no-mae"
+          ],
+          "reason": {
+            "en": "Can {D/BT_IMMEDIATELY_2000092} {D/BT_DOT_CURSE}",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "marian"
+          ],
+          "reason": {
+            "en": "More {D/BT_DOT_CURSE} stacks",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "eliza": {
+      "partner": [
+        {
+          "hero": [
+            "beth",
+            "francesca"
+          ],
+          "reason": {
+            "en": "Stronger against enemies inflicted with {D/BT_DOT_BLEED}",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "ember": {
+      "partner": [
+        {
+          "hero": [
+            "vlada",
+            "maxie",
+            "bell-cranel"
+          ],
+          "reason": {
+            "en": "{D/BT_DOT_BURN} team",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "fatal": {
+      "partner": [
+        {
+          "hero": [
+            "gnosis-beth"
+          ],
+          "reason": {
+            "en": "Provides {B/BT_STEALTHED}",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "gnosis-beth": {
+      "partner": [
+        {
+          "hero": [
+            "akari",
+            "kuro",
+            "roxie",
+            "maxie",
+            "ember"
+          ],
+          "reason": {
+            "en": "{D/BT_EXTEND_DEBUFF}",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "kitsune-of-eternity-tamamo-no-mae": {
+      "partner": [
+        {
+          "hero": [
+            "drakhan",
+            "marian"
+          ],
+          "reason": {
+            "en": "More {D/BT_DOT_CURSE} stacks",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "monad-eva"
+          ],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP}",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "marian": {
+      "partner": [
+        {
+          "hero": [
+            "kitsune-of-eternity-tamamo-no-mae"
+          ],
+          "reason": {
+            "en": "Can {D/BT_IMMEDIATELY_2000092} {D/BT_DOT_CURSE}",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "drakhan"
+          ],
+          "reason": {
+            "en": "More {D/BT_DOT_CURSE} stacks",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "monad-eva",
+            "tamara",
+            "luna",
+            "veronica"
+          ],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP}",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "maxie": {
+      "partner": [
+        {
+          "hero": [
+            "roxie",
+            "notia"
+          ],
+          "reason": {
+            "en": "The twins will activate eachother's skills and apply debuffs to launch great combo attacks",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "vlada",
+            "ember",
+            "bell-cranel"
+          ],
+          "reason": {
+            "en": "{D/BT_DOT_BURN} team",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "mero": {
+      "partner": [
+        {
+          "hero": [
+            "fran",
+            "delta",
+            "hanbyul-lee"
+          ],
+          "reason": {
+            "en": "{B/BT_STAT|ST_COUNTER_RATE}, {B/BT_STAT|ST_VAMPIRIC} and {I-W/Gorgon's Wrath [Ranger]} allow her to keep her {B/BT_UNDEAD} active full time",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "noa": {
+      "partner": [
+        {
+          "hero": [
+            "valentine"
+          ],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE} so Noa doesn't need to use her Skill 3, {B/BT_STAT|ST_CRITICAL_DMG_RATE}, {B/BT_ACTION_GAUGE}, {B/BT_CALL_BACKUP}",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "notia": {
+      "partner": [
+        {
+          "hero": [
+            "tamara",
+            "roxie",
+            "maxie",
+            "demiurge-vlada",
+            "akari",
+            "eternal"
+          ],
+          "reason": {
+            "en": "Debuffers to activate Notia's Skill 2 consistently",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "roxie": {
+      "partner": [
+        {
+          "hero": [
+            "tamara"
+          ],
+          "reason": {
+            "en": "Buffs and {B/BT_CALL_BACKUP}, Roxie wants a {C/Ranger} in the team to trigger her Skill 2",
+            "kr": " ",
+            "jp": " "
+          }
+        },
+        {
+          "hero": [
+            "roxie",
+            "notia"
+          ],
+          "reason": {
+            "en": "The twins will activate eachother's skills and apply debuffs to launch great combo attacks",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "sigma": {
+      "partner": [
+        {
+          "hero": [
+            "roxie",
+            "philia"
+          ],
+          "reason": {
+            "en": "Better {D/BT_DOT_LIGHTNING} uptime to activate Sigma's extra effects",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "tamamo-no-mae": {
+      "partner": [
+        {
+          "hero": [
+            "demiurge-stella",
+            "ryu-lion",
+            "iota",
+            "laplace"
+          ],
+          "reason": {
+            "en": "{D/BT_FIXED_DAMAGE} Chain Finishers",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    },
+    "vlada": {
+      "partner": [
+        {
+          "hero": [
+            "bell-cranel",
+            "maxie",
+            "ember"
+          ],
+          "reason": {
+            "en": "{D/BT_DOT_BURN} team",
+            "kr": " ",
+            "jp": " "
+          }
+        }
+      ]
+    }
   }
