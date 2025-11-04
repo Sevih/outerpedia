@@ -1,0 +1,205 @@
+{
+  "Pen": {
+    "Weapon": [
+      {
+        "name": "Surefire Javelin",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "PEN%/HP%"
+      },
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%/HP%"
+      }
+    ], 
+    "Set": [
+      [
+        { "name": "Penetration", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "HP>SPD>EFF=ACC>CHC>CHD",
+    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "Talisman": [
+      "Vanguard's Charm",
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executioner's Charm"
+      
+    ]
+  },
+  "Life": {
+    "Weapon": [
+      {
+        "name": "Surefire Javelin",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "PEN%/HP%"
+      },
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%/HP%"
+      }
+    ], 
+    "Set": [
+      [
+        { "name": "Life", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "HP>SPD>EFF=ACC>CHC>CHD",
+    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "Talisman": [
+      "Vanguard's Charm",
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executioner's Charm"
+      
+    ]
+  },
+  "Pen / Life": {
+    "Weapon": [
+      {
+        "name": "Surefire Javelin",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "PEN%/HP%"
+      },
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%/HP%"
+      }
+    ], 
+    "Set": [
+      [
+        { "name": "Penetration", "count": 2 },
+         { "name": "Life", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "HP>SPD>EFF=ACC>CHC>CHD",
+    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "Talisman": [
+      "Vanguard's Charm",
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executioner's Charm"
+      
+    ]
+  },
+  "Pen / Swift": {
+    "Weapon": [
+      {
+        "name": "Surefire Javelin",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "PEN%/HP%"
+      },
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%/HP%"
+      }
+    ], 
+    "Set": [
+      [
+         { "name": "Penetration", "count": 2 },
+         { "name": "Swiftness", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "HP>SPD>EFF=ACC>CHC>CHD",
+    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "Talisman": [
+      "Vanguard's Charm",
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executioner's Charm"
+      
+    ]
+  },
+  "Life / Swift": {
+    "Weapon": [
+      {
+        "name": "Surefire Javelin",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "PEN%/HP%"
+      },
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%/HP%"
+      }
+    ], 
+    "Set": [
+      [
+        { "name": "Life", "count": 2 },
+         { "name": "Swiftness", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "HP>SPD>EFF=ACC>CHC>CHD",
+    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "Talisman": [
+      "Vanguard's Charm",
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executioner's Charm"
+      
+    ]
+  }
+}
