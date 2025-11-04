@@ -82,7 +82,9 @@
     "UNIQUE_VENION_C": 80,
     "UNIQUE_VENION_D": 81,
     "UNIQUE_VENION_E": 82,
-    "UNIQUE_VENION_F": 83
+    "UNIQUE_VENION_F": 83,
+    "IG_Buff_Effect_2000109_Interruption": 84,
+    "IG_Buff_2000053_Interruption": 85
   },
   "debuffs": {
     "BT_REMOVE_BUFF": 1,
@@ -150,6 +152,10 @@
     "BT_DOT_POISON_IR": 63,
     "BT_RANDOM": 64,
     "BT_SYS_DEBUFF_ENHANCE_IR": 65,
-    "BT_SEAL_BT_CALL_BACKUP_IR": 66
+    "BT_SEAL_BT_CALL_BACKUP_IR": 66,
+    "BT_IMMEDIATELY_POISON": 67,
+    "IG_Buff_Effect_2000109_Interruption_D": 68,
+    "BT_DOT_POISON2": 69,
+    "BT_KILL_UNDER_HP_RATE": 70
   }
 }

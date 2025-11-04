@@ -85,6 +85,8 @@ export type BuffName =
   | 'UNIQUE_VENION_D'
   | 'UNIQUE_VENION_E'
   | 'UNIQUE_VENION_F'
+  | 'IG_Buff_Effect_2000109_Interruption'
+  | 'IG_Buff_2000053_Interruption'
 
 export type DebuffName =
   | 'BT_ACTION_GAUGE'
@@ -153,3 +155,7 @@ export type DebuffName =
   | 'IG_Buff_Effect_2000102_Interruption_D'
   | 'IG_Buff_Effect_Sealed_Interruption_D'
   | 'UNIQUE_KERAUNOS'
+  | 'BT_IMMEDIATELY_POISON'
+  | 'IG_Buff_Effect_2000109_Interruption_D'
+  | 'BT_DOT_POISON2'
+  | 'BT_KILL_UNDER_HP_RATE'

@@ -26,6 +26,25 @@ type RawEntry = {
 
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
+   {
+    date: "2025-11-04",
+    title: {
+      en: "New Demiurge Hero : Gnosis Viella",
+      jp: "新デミウルゴヒーロー：グノーシス ビエラ",
+      kr: "새로운 데미우르고 영웅: 그노시스 비엘라",
+      zh: "新的造物主英雄：诺希斯 比埃拉",
+    } as LString,
+    type: "update",
+    url: "/characters/gnosis-viella",
+    content: [
+      {
+        en: "Gnosis Viella, who attacks enemies while inflicting various debuffs, joins the battlefield.",
+        jp: "様々なデバフを与えながら敵を攻撃するグノーシス ビエラが戦場に参戦します。",
+        kr: "다양한 디버프를 가하며 적을 공격하는 그노시스 비엘라가 전장에 참전합니다.",
+        zh: "诺希斯 比埃拉在攻击敌人的同时施加各种减益效果，加入战场。",
+      } as LString,
+    ],
+  },
   {
     date: "2025-11-03",
     title: {

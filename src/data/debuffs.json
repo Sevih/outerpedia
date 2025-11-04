@@ -876,5 +876,59 @@
     "description_kr": "받는 치유 효과를 50% 감소시킵니다. (해제 불가)",
     "description_zh": "所受治愈效果降低50%。(无法解除)",
     "icon": "IG_Buff_2000057_Interruption_D"
+  },
+  {
+    "name": "BT_IMMEDIATELY_POISON",
+    "category": "dot",
+    "group": "BT_IMMEDIATELY_BURN",
+    "label": "Detonate",
+    "label_jp": "破裂",
+    "label_kr": "폭발",
+    "label_zh": "爆炸",
+    "description": "Activates certain debuffs immediately. Magnitude determined by the number of turns remaining and stacks applied.",
+    "description_jp": "指定された弱体効果の\\nダメージを即時に与える。\\n弱体効果のターン数と付与数が\\n多いほど、ダメージがUPする。",
+    "description_kr": "지정된 약화 효과를 즉시 발동시킵니다. 턴 수와 적용된 수량에 영향을 받습니다.",
+    "description_zh": "立即发动指定的弱化效果。会受到\\n回合数与附带数量的影响。",
+    "icon": "SC_Buff_detonate"
+  },
+  {
+    "name": "IG_Buff_Effect_2000109_Interruption_D",
+    "category": "unique",
+    "label": "Bane's Domain",
+    "label_jp": "劇毒の領域",
+    "label_kr": "극독의 영역",
+    "label_zh": "剧毒领域",
+    "description": "Each target affected by Bane's Domain receives the following effects:\\nEnemies: -30% Received Final Damage\\nGnosis Viella: +30% DEF, -30% Received Final Damage\\nSelf: -50% ATK, When turn is gained: Gnosis Viella's Priority +20%\\n\\n(Irremovable. Removed when Gnosis Viella dies. Only the highest Final Damage Reduction effect is applied.)",
+    "description_jp": "劇毒の領域状態の対象は以下の効果が適用されます。\\n敵対象:受ける最終ダメージ‐30%\\nグノーシス・ビエラ:防御力+30%/受ける最終ダメージ‐30%\\n自身:攻撃力‐50%/ターン獲得時、\\nグノーシス・ビエラの行動ゲージ20%UP\\n\\n(解除不可/グノーシス・ビエラが戦闘不能時に解除/最終ダメージ減少は最も高い値のみ適用)",
+    "description_kr": "극독의 영역 상태의 각 대상은 아래의 효과를 받습니다.\\n적 대상 : 받는 최종 피해 -30%\\n그노시스 비엘라 : 방어력 +30%, 받는 최종 피해 -30%\\n자신 : 공격력 -50%, 턴 획득 시 그노시스 비엘라 행동 게이지 +20%\\n\\n(해제 불가, 그노시스 비엘라 사망 시 해제, 최종 피해 감소는 가장 높은 값만 적용)",
+    "description_zh": "剧毒领域状态下的各目标将受到以下效果。\\n敌方目标:受到的最终伤害‐30%\\n诺希斯·比埃拉:防御力+30%/受到的最终伤害‐30%\\n自身:攻击力‐50%, 获得回合时:诺斯替斯·维艾拉的行动条 +20%\\n\\n(无法解除/诺希斯·比埃拉死亡时解除/最终伤害减少仅取最高值生效)",
+    "icon": "IG_Buff_Effect_2000109_Interruption_D"
+  },
+  {
+    "name": "BT_DOT_POISON2",
+    "category": "dot",
+    "group": "BT_DOT_POISON",
+    "label": "Corrosive Poison",
+    "label_jp": "酸性の毒液",
+    "label_kr": "산성독",
+    "label_zh": "酸性毒液",
+    "description": "Reduces all Priority increases by 20% and deals damage proportional to the caster's Max HP at the start of the turn.\nRemoved when the caster dies.",
+    "description_jp": "すべての行動ゲージUPの効率を\n20%DOWNさせ、ターン開始時、\n使用者の最大HPが高いほど\nダメージUPされる。\nこの効果はスキル使用者が\n倒れた時解除される。",
+    "description_kr": "적용되는 모든 행동 게이지 증가량이 20% 감소하고, 턴 시작 시 시전자의 체력에 비례한 피해를 입습니다.\n시전자가 사망 시 해제됩니다.",
+    "description_zh": "所有<color=#28d9ed>行动条</color>提升效果减少20%,每回合开始时受到与施术者生命值成比例的伤害。\n施术者死亡时解除。",
+    "icon": "IG_Buff_Dot_Poison02"
+  },
+  {
+    "name": "BT_KILL_UNDER_HP_RATE",
+    "category": "utility",
+    "label": "Instant Death",
+    "label_jp": "即死",
+    "label_kr": "즉사",
+    "label_zh": "即死",
+    "description": "Instantly kills the target after attacking if the target's Health drops below a certain level.",
+    "description_jp": "攻撃後、対象のHPが\\n一定値以下になると\\n即時倒れる。",
+    "description_kr": "공격 후 대상의 체력이 특정 수치 이하일 때, 대상을 즉시 사망시킵니다.",
+    "description_zh": "攻击后,若目标的生命值降至特定数\\n值以下,则使目标即死。",
+    "icon": "IG_Buff_Effect_InstantDeath"
   }
 ]
