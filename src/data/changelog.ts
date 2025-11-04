@@ -29,6 +29,25 @@ export const oldChangelog = [
    {
     date: "2025-11-04",
     title: {
+      en: "Primordial Sentinel World Boss",
+      jp: "原初の番人 ワールドボス",
+      kr: "원시의 파수꾼 월드 보스",
+      zh: "原初守卫 世界首领",
+    } as LString,
+    type: "update",
+    url: "/guides/world-boss/primordial-sentinel",
+    content: [
+      {
+        en: "Primordial Sentinel world boss updated for November 2025 version.",
+        jp: "原初の番人 ワールドボスが2025年11月版にアップデートされました。",
+        kr: "원시의 파수꾼 월드 보스가 2025년 11월 버전으로 업데이트되었습니다。",
+        zh: "原初守卫 世界首领已更新至2025年11月版本。",
+      } as LString,
+    ],
+  },
+   {
+    date: "2025-11-04",
+    title: {
       en: "New Demiurge Hero : Gnosis Viella",
       jp: "新デミウルゴヒーロー：グノーシス ビエラ",
       kr: "새로운 데미우르고 영웅: 그노시스 비엘라",

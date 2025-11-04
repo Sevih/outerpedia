@@ -1094,12 +1094,31 @@
     "category": "world-boss",
     "guideId": "primordial_sentinel",
     "characters": [
+      "Akari",
+      "Astei",
+      "Demiurge Delta",
+      "Demiurge Drakhan",
+      "Demiurge Luna",
+      "Demiurge Stella",
+      "Demiurge Vlada",
       "Dianne",
+      "Drakhan",
+      "Fran",
+      "Gnosis Beth",
+      "Gnosis Dahlia",
+      "Gnosis Viella",
       "Iota",
+      "Kuro",
       "Monad Eva",
+      "Nella",
       "Notia",
+      "Regina",
+      "Saeran",
+      "Skadi",
       "Stella",
-      "Valentine"
+      "Tio",
+      "Valentine",
+      "Viella"
     ]
   },
   "world-boss/venion": {

@@ -1,70 +1,48 @@
 {
-   "most-used-unit": {
-    "name": "Most Used Units",
-    "description": "Discover which Outerplane characters are most frequently recommended across game guides.",
+  "most-used-unit": {
     "icon": "nav/CM_Lobby_Button_Misson.webp",
     "order": 50
   },
   "tierlistpve": {
-    "name": "Tier List - PvE",
-    "description": "Complete ranking of all characters in Outerplane for PVE content, based on evaluations with 6-star transcends and level 0 Exclusive Equipment effects.",
     "icon": "nav/CM_Lobby_Button_Misson.webp",
     "order": 100
   },
   "tierlistpvp": {
-    "name": "Tier List - PvP",
-    "description": "Complete ranking of all characters in Outerplane for PvP content, based on evaluations with 6-star transcends and level 0 Exclusive Equipment effects.",
     "icon": "nav/CM_Lobby_Button_Misson.webp",
     "order": 200
   },
   "ee-priority": {
-    "name": "Exclusive Equipment Priority",
-    "description": "A ranking of exclusive equipment (EE) based on their usefulness and impact at level 0. +10 effects are not considered.",
     "icon": "nav/CM_Lobby_Button_Shop.webp",
     "order": 300
   },
   "gear-usage-stats": {
-    "name": "Gear Usage Statistics",
-    "description": "Discover the most recommended weapons, amulets and sets in Outerplane builds.",
     "icon": "nav/CM_Lobby_Btn_StepUp.webp",
     "order": 400
   },
   "gear-solver": {
-    "name": "Gear Usage Finder",
-    "description": "Unsure which character can use your gear? This tool helps you find the best match based on equipment.",
     "icon": "nav/gear-solver.webp",
     "order": 500
   },
   "event": {
-    "name": "Community events",
-    "description": "",
     "icon": "nav/CM_Agit_Retention.webp",
     "order": 600,
-    "hide":true
+    "hide": true
   },
   "patch-history": {
-    "name": "Patch Notes & Dev Notes",
-    "description": "Browse all Outerplane patch notes, developer notes, hero compendium and more.",
     "icon": "nav/CM_Lobby_Button_Agit.webp",
     "order": 700
   },
   "coupons": {
-    "name": "Coupon Codes",
-    "description": "Get all valid, expired, and upcoming promo codes for Outerplane. Updated regularly on Outerpedia.",
     "icon": "nav/CM_Guild_NoticeBoard.webp",
     "order": 800
   },
   "pull-sim": {
-    "name": "Pull Simulator",
-    "description": "Simulate gacha pulls for all Outerplane banners. Test your luck on Rate Up, Premium, and Limited banners with mileage system included.",
     "icon": "nav/CM_Lobby_Button_Recruitment.webp",
     "order": 900
   },
   "team-planner": {
-    "name": "Team Planner",
-    "description": "Build and validate teams for Outerplane with custom rules and restrictions. Perfect for Skyward Tower, Guild Raids, World Bosses, and more.",
     "icon": "nav/CM_Lobby_Button_Misson.webp",
     "order": 1000,
-    "hide":true
+    "hide": true
   }
 }

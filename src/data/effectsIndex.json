@@ -84,7 +84,8 @@
     "UNIQUE_VENION_E": 82,
     "UNIQUE_VENION_F": 83,
     "IG_Buff_Effect_2000109_Interruption": 84,
-    "IG_Buff_2000053_Interruption": 85
+    "IG_Buff_2000053_Interruption": 85,
+    "CORE_ENERGY": 86
   },
   "debuffs": {
     "BT_REMOVE_BUFF": 1,

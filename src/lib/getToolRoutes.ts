@@ -5,8 +5,6 @@ import toolMetaRaw from "./toolDescriptions.json";
 const TOOL_METADATA: Record<
   string,
   {
-    name: string;
-    description: string;
     icon: string;
     order: number;
     hide?: boolean
@@ -15,7 +13,7 @@ const TOOL_METADATA: Record<
 
 const TOOLS_ROOT = path.join(process.cwd(), "src/app/(tools)");
 
-export function getToolRoutes() {
+export function getToolRoutes(t?: (key: string) => string) {
   const entries = fs.readdirSync(TOOLS_ROOT, { withFileTypes: true });
 
   const routes = entries
@@ -26,17 +24,19 @@ export function getToolRoutes() {
 
       const slug = dir.name;
       const metadata = TOOL_METADATA[slug] ?? {
-        name: slug.charAt(0).toUpperCase() + slug.slice(1),
-        description: "No description provided.",
         icon: "tool_default.png",
         order: 999,
       };
       if (metadata.hide) return null;
 
+      // Use i18n if t function is provided, otherwise fallback to slug
+      const name = t ? t(`tool.${slug}.name`) : slug.charAt(0).toUpperCase() + slug.slice(1);
+      const description = t ? t(`tool.${slug}.description`) : "No description provided.";
+
       let href = `/${slug}`;
       if (slug === "event") href = `/${slug}/history`;
       // Retourne un tuple [order, routeSansOrder]
-      return [metadata.order, { name: metadata.name, description: metadata.description, icon: metadata.icon, href }] as const;
+      return [metadata.order, { name, description, icon: metadata.icon, href }] as const;
     })
     .filter((x): x is readonly [number, { name: string; description: string; icon: string; href: string }] => x !== null)
     .sort((a, b) => a[0] - b[0])

@@ -87,6 +87,7 @@ export type BuffName =
   | 'UNIQUE_VENION_F'
   | 'IG_Buff_Effect_2000109_Interruption'
   | 'IG_Buff_2000053_Interruption'
+  | 'CORE_ENERGY'
 
 export type DebuffName =
   | 'BT_ACTION_GAUGE'

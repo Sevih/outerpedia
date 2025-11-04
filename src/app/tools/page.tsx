@@ -1,4 +1,3 @@
-import toolDescriptions from '@/lib/toolDescriptions.json';
 import type { Metadata } from 'next';
 import { createPageMetadata } from '@/lib/seo'
 import { getToolRoutes } from "@/lib/getToolRoutes";
@@ -7,29 +6,6 @@ import Image from "next/image";
 import { headers } from 'next/headers'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 import { resolveTenantFromHost } from '@/tenants/config'
-
-const tools = Object.values(toolDescriptions) as {
-  name: string;
-  description: string;
-}[];
-
-const stopwords = new Set([
-  'the', 'and', 'their', 'with', 'which', 'use', 'using', 'helps', 'help', 'considered', 'effects', 'star', 'list', 'tool', 'tools', 'tier', 'gear', 'recommended',
-  'complete', 'based', 'most', 'best', 'this', 'that', 'your', 'unsure', 'builds', 'character', 'evaluations', 'usage', 'exclusive', 'discover',
-  'characters', 'match', 'impact', 'level', 'usefulness', 'find', 'finder', 'amulets', 'weapons', 'sets', 'transcends', 'outerplane', 'priority',
-  'ranking', 'statistics', 'equipment', 'gear'
-]);
-
-const keywords = new Set<string>();
-for (const t of tools) {
-  keywords.add(t.name.toLowerCase().replace(/\s*-\s*/g, ' '));
-  t.name.toLowerCase().split(/\W+/).forEach(w => {
-    if (w.length > 3 && !stopwords.has(w)) keywords.add(w);
-  });
-  t.description.toLowerCase().split(/\W+/).forEach(w => {
-    if (w.length > 3 && !stopwords.has(w)) keywords.add(w);
-  });
-}
 
 export async function generateMetadata(): Promise<Metadata> {
   return createPageMetadata({
@@ -64,7 +40,7 @@ export default async function ToolsPage() {
   const lang = resolveTenantFromHost(host)
 
   const { t } = await getServerI18n(lang)
-  const tools = getToolRoutes();
+  const tools = getToolRoutes(t);
 
   return (
     <main className="p-6">

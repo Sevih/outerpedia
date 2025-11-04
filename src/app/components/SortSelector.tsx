@@ -25,7 +25,18 @@ export default function SortSelector() {
           const na = Number(va)
           const nb = Number(vb)
           if (!Number.isFinite(na) || !Number.isFinite(nb)) return 0
-          return order === 'asc' ? na - nb : nb - na
+          const primarySort = order === 'asc' ? na - nb : nb - na
+
+          // Si les valeurs primaires sont égales, tri secondaire par date (plus récent en premier)
+          if (primarySort === 0 && key === 'weight') {
+            const dateA = Number(a.getAttribute('data-date'))
+            const dateB = Number(b.getAttribute('data-date'))
+            if (Number.isFinite(dateA) && Number.isFinite(dateB)) {
+              return dateB - dateA // DESC (plus récent en premier)
+            }
+          }
+
+          return primarySort
         }
 
         return order === 'asc'

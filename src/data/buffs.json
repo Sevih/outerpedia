@@ -1120,5 +1120,18 @@
     "description_kr": "적이 공격이 아닌 스킬 사용 시: 자신의 AP +50\\n\n자신보다 체력이 낮은 적 행동시 : 자신의 행동 게이지 +10%\\n\\n(해제 불가)",
     "description_zh": "敌人使用非攻击技能时:自身AP+50\\n生命值低于自身的敌人行动时:自身行动条 +10%\\n\\n(无法被解除)",
     "icon": "IG_Buff_2000053_Interruption"
+  },
+  {
+    "name": "CORE_ENERGY",
+    "category": "hidden",
+    "label": "Core Energy",
+    "label_jp": "コアの力",
+    "label_kr": "코어 에너지",
+    "label_zh": "核心能量",
+    "description": "Activates an additional attack by activating the energy gathered within the Core. (Irremovable)",
+    "description_jp": "コアに集まった力を活性化し、追加攻撃が発生する。(解除不可)",
+    "description_kr": "코어에 응집된 에너지를 활성화하여, 추가 공격이 발생합니다. (해제 불가)",
+    "description_zh": "激活核心中聚集的能量,触发额外攻击。(无法解除)",
+    "icon": "IG_Buff_4086008_Interruption"
   }
 ]
