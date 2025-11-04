@@ -39,7 +39,8 @@ const CUSTOM_ICON_DEBUFFS = new Set<string>([
 'BT_EXTEND_BUFF',
 'BT_STEAL_BUFF',
 'BT_RESOURCE_DOWN',
-'BT_WG_REVERSE_HEAL'
+'BT_WG_REVERSE_HEAL',
+'BT_KILL_UNDER_HP_RATE'
 ])
 
 // Buffs to exclude from the list (irremovable unique mechanics & unused)
@@ -101,6 +102,7 @@ const IGNORED_DEBUFFS = new Set<string>([
     'BT_IMMEDIATELY_CURSE',
     'BT_IMMEDIATELY_BLEED',
     'BT_IMMEDIATELY_2000092',
+    'BT_IMMEDIATELY_POISON'
 
 ])
 
