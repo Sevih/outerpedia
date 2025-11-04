@@ -46,7 +46,7 @@ export default function PrimordialSentinelGuide() {
             <>
               <GuideHeading level={3}>Strategy Overview</GuideHeading>
 
-              <GuideHeading level={4}>Phase 1: [Boss Name] Moveset</GuideHeading>
+              <GuideHeading level={4}>Phase 1: Primordial Sentinel Moveset</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
                 <li><strong>S1</strong>: Single, grants <EffectInlineTag name='BT_STAT|ST_CRITICAL_RATE' type='buff' /> for 2 turns.</li>
                 <li><strong>S2</strong>: AoE, reduces chain points by 5 for each target. If the target is <EffectInlineTag name='BT_DOT_LIGHTNING' type='debuff' />, additionally reduces chain points by 20 points each.</li>
@@ -69,7 +69,7 @@ export default function PrimordialSentinelGuide() {
 
               <hr className="my-6 border-neutral-700" />
 
-              <GuideHeading level={4}>Phase 2: [Boss Name] Moveset</GuideHeading>
+              <GuideHeading level={4}>Phase 2: Glorious Sentinel Moveset</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
                 <li><strong>S1</strong>: Single, guaranteed critical hit if the target has a debuff.</li>
                 <li><strong>S2</strong>: AoE, inflicts <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="debuff" /> for 2 turns if the target has <EffectInlineTag name='BT_DOT_LIGHTNING' type='debuff' />.</li>
