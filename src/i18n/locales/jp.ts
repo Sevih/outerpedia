@@ -145,12 +145,6 @@ const jp = {
   "skills_note": "ここに表示されるスキルは最小強化での内容です。ただし、バーストスキルによるバフ／デバフは表示に含まれます。",
   "recommended_build_and_gear": "おすすめビルド＆装備",
   "no_reco_gear": "このキャラクターのおすすめ装備情報はまだありません。",
-  "stats.health": "体力",
-  "stats.defense": "防御",
-  "stats.evasion": "回避",
-  "stats.accuracy": "命中",
-  "stats.speed": "速度",
-  "stats.attack": "攻撃",
   "substat_priority": "サブステ優先度",
 
   // Transcendence levels

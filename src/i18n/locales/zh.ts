@@ -145,12 +145,6 @@ const zh = {
   "skills_note": "Skills are displayed here with minimum enhancements applied. However, buffs and debuffs from Burst skills are still included in the display.",
   "recommended_build_and_gear": "推荐 Build and Gear",
   "no_reco_gear": "No 推荐 gear information available for this character yet.",
-  "stats.health": "Health",
-  "stats.defense": "Defense",
-  "stats.evasion": "Evasion",
-  "stats.accuracy": "Accuracy",
-  "stats.speed": "Speed",
-  "stats.attack": "Attack",
   "substat_priority": "Substat Priority",
 
   // Transcendence levels

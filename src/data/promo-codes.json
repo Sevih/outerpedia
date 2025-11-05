@@ -182,6 +182,24 @@
     },
     "start": "2025-10-02",
     "end": "2025-12-31"
+  },
+  {
+    "code": "VOTEEVENT",
+    "description": {
+      "Stamina": "120"
+    },
+    "start": "2025-11-05",
+    "end": "2025-11-11"
+  },
+  {
+    "code": "MONADMATSURI",
+    "description": {
+      "Ether": "1500",
+      "Stamina": "200",
+      "Gold": "1 000 000"
+    },
+    "start": "2025-11-05",
+    "end": "???"
   }
 ]
 

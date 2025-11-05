@@ -145,12 +145,6 @@ const kr = {
   "skills_note": "표시된 스킬은 최소 강화 기준입니다. 다만, 버스트 스킬의 버프/디버프는 표시에 포함됩니다.",
   "recommended_build_and_gear": "추천 빌드 및 장비",
   "no_reco_gear": "이 캐릭터의 추천 장비 정보가 아직 없습니다.",
-  "stats.health": "체력",
-  "stats.defense": "방어",
-  "stats.evasion": "회피",
-  "stats.accuracy": "명중",
-  "stats.speed": "속도",
-  "stats.attack": "공격",
   "substat_priority": "부옵 우선순위",
 
   // Transcendence levels

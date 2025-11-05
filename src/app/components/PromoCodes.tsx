@@ -24,8 +24,8 @@ export default function PromoCodes() {
     const today = new Date()
     const filtered = promoCodes.filter(c => {
       const start = new Date(c.start)
-      const end = new Date(c.end)
-      return start <= today && today <= end
+      const end = c.end === '???' ? null : new Date(c.end)
+      return start <= today && (end === null || today <= end)
     })
     setValidCodes(
       filtered.map(code => ({

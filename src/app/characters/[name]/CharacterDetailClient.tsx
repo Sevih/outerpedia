@@ -278,12 +278,12 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
     const subclassInfo = classInfo?.subclasses?.[character.SubClass as keyof typeof classInfo.subclasses]
     const baseStats = subclassInfo?.[`stats${character.Rarity}`]
     const statLabels = [
-        t('stats.health'),
-        t('stats.defense'),
-        t('stats.evasion'),
-        t('stats.accuracy'),
-        t('stats.speed'),
-        t('stats.attack'),
+        t('SYS_STAT_HP'),
+        t('SYS_STAT_DEF'),
+        t('SYS_STAT_EVA'),
+        t('SYS_STAT_ACC'),
+        t('SYS_STAT_SPD'),
+        t('SYS_STAT_ATK'),
     ]
 
 
@@ -495,7 +495,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                             {statLabels.map((label, index) => {
                                                 const angle = (index / statLabels.length) * 2 * Math.PI - Math.PI / 2
                                                 let labelRadius = 120
-                                                if (label === t('stats.health') || label === t('stats.accuracy')) labelRadius = 110
+                                                if (label === t('SYS_STAT_HP') || label === t('SYS_STAT_ACC')) labelRadius = 110
                                                 const x = 100 + Math.cos(angle) * labelRadius
                                                 const y = 100 + Math.sin(angle) * labelRadius
                                                 return (
