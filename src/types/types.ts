@@ -79,8 +79,8 @@ export type CharacterLite = {
   Class: string
   SubClass?: string            // <- optionnel (l’API ne le renvoie pas)
   Rarity: number
-  buff: string[]
-  debuff: string[]
+  buff?: string[]
+  debuff?: string[]
   Chain_Type?: string          // <- optionnel
   limited?: boolean            // <- boolean (aligné avec l’API)
   gift?: string                // <- string (OK pour tes filtres)

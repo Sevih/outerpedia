@@ -16,6 +16,7 @@ import type { ElementType, ClassType } from "@/types/enums"
 import TranscendInline from "@/app/components/TranscendInline"
 import Image from "next/image"
 import { RecoTrans } from "@/app/components/GlowCardTrans"
+import { CharacterPortrait } from "@/app/components/CharacterPortrait"
 
 /* ===================== Types ===================== */
 type Impact = { pve: string; pvp: string }
@@ -42,17 +43,6 @@ const TABS: TabDef[] = [
 ]
 
 /* ===================== UI bits ===================== */
-function StarIcons({ count, size = 20 }: { count: number; size?: number }) {
-    return (
-        <div className="flex -space-y-1 flex-col items-end">
-            {Array.from({ length: count }).map((_, i) => (
-                <Image key={i} src="/images/ui/star.webp" alt="star" width={size} height={size}
-                    style={{ width: size, height: size }} />
-            ))}
-        </div>
-    )
-}
-
 interface CharacterCardProps {
     char?: CharacterLite
     stars: number
@@ -65,32 +55,41 @@ function CharacterCard({ char, stars, isPriority = false }: CharacterCardProps) 
         <Link
             href={href}
             prefetch={false}
-            className="relative w-[60px] h-[115px] text-center shadow hover:shadow-lg transition overflow-hidden rounded"
+            className="relative flex-shrink-0 text-center shadow hover:shadow-lg transition"
             aria-disabled={!char}
         >
             {char?.ID ? (
-                <Image
-                    src={`/images/characters/portrait/CT_${char.ID}.webp`}
-                    alt={char.Fullname}
-                    width={60}
-                    height={115}
-                    style={{ width: 60, height: 115 }}
-                    className="object-cover rounded opacity-80"
-                    priority={isPriority}
-                    loading={isPriority ? undefined : "lazy"}
-                    unoptimized
-                />
+                <div className="relative">
+                    <CharacterPortrait
+                        characterId={char.ID}
+                        characterName={char.Fullname}
+                        size={80}
+                        className="rounded-lg border-2 border-gray-600 bg-gray-900"
+                        priority={isPriority}
+                        showIcons={true}
+                    />
+                    {/* Rarity Stars */}
+                    <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 flex justify-center items-center -space-x-1">
+                        {Array(stars)
+                            .fill(0)
+                            .map((_, i) => (
+                                <Image
+                                    key={i}
+                                    src="/images/ui/star.webp"
+                                    alt="star"
+                                    width={17}
+                                    height={17}
+                                />
+                            ))}
+                    </div>
+                </div>
             ) : (
                 <div
-                    className="w-[60px] h-[115px] flex items-center justify-center bg-gray-800/50 rounded text-xs text-gray-400"
+                    className="w-[80px] h-[80px] flex items-center justify-center bg-gray-800/50 rounded-lg border-2 border-gray-600 text-xs text-gray-400"
                 >
                     ?
                 </div>
             )}
-
-            <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
-                <StarIcons count={stars} size={18} />
-            </div>
         </Link>
     )
 }
@@ -130,47 +129,88 @@ function ImpactTable({ impact }: { impact: HeroReview["impact"] }) {
 }
 
 /* ===================== Premium pulling order ===================== */
-const PREMIUM_ORDER: Entry[] = [
-    { name: "Monad Eva", stars: 5, op: ">" },
-    { name: "Demiurge Stella", stars: 3, op: ">" },
-    { name: "Demiurge Luna", stars: 3, op: ">=" },
-    { name: "Demiurge Astei", stars: 3, op: ">=" },
-    { name: "Demiurge Drakhan", stars: 3, op: ">=" },
-    { name: "Gnosis Beth", stars: 4, op: ">=" },
-    { name: "Demiurge Vlada", stars: 5, op: ">=" },
+const PREMIUM_ORDER_1ST: Entry[] = [
+    { name: "Monad Eva", stars: 3, op: null },
+    { name: "Demiurge Stella", stars: 3, op: null },
+    { name: "Demiurge Luna", stars: 3, op: null },
+]
+
+const PREMIUM_ORDER_2ND: Entry[] = [
+    { name: "Demiurge Astei", stars: 3, op: null },
+    { name: "Gnosis Beth", stars: 3, op: null },
+    { name: "Gnosis Viella", stars: 3, op: null },
+    { name: "Demiurge Vlada", stars: 3, op: null },
+]
+
+const PREMIUM_ORDER_3RD: Entry[] = [
+    { name: "Demiurge Drakhan", stars: 3, op: null },
     { name: "Demiurge Delta", stars: 3, op: null },
 ]
 
-function PremiumPullingOrder({
-    title = "Who do I pick?",
+const TRANSCEND_PRIORITY: Entry[] = [
+    { name: "Monad Eva", stars: 5, op: null },
+    { name: "Gnosis Beth", stars: 4, op: null },
+    { name: "Demiurge Vlada", stars: 5, op: null },
+    { name: "Demiurge Luna", stars: 6, op: null },
+]
+
+function PremiumPriorityRow({
+    title,
     entries,
     charIndex,
 }: {
-    title?: string
+    title: string
     entries: Entry[]
     charIndex: Record<string, CharacterLite>
 }) {
     return (
-        <section className="rounded-2xl border border-white/10 p-4 bg-white/5">
-            <h3 className="text-center text-lg font-semibold tracking-wide mb-3">{title}</h3>
-
-            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-4">
+        <div className="space-y-2">
+            <h4 className="text-sm font-semibold tracking-wide opacity-90 text-center">{title}</h4>
+            <div className="flex flex-wrap items-center justify-center gap-3">
                 {entries.map((e, i) => {
                     const char = charIndex[toKebabCase(e.name)]
-                    return (
-                        <div key={`${e.name}-${i}`} className="flex items-center">
-                            <CharacterCard char={char} stars={e.stars} isPriority={i === 0} />
-                            {e.op && i < entries.length - 1 && (
-                                <div className="mx-2 text-2xl font-bold opacity-80 select-none">{e.op}</div>
-                            )}
-                        </div>
-                    )
+                    return <CharacterCard key={`${e.name}-${i}`} char={char} stars={e.stars} isPriority={i === 0} />
                 })}
             </div>
+        </div>
+    )
+}
 
-            <p className="text-center text-xs opacity-70 mt-3">
-                Note: after <strong>D.Stella</strong>, the order is more flexible depending on your needs (PvE/PvP).
-            </p>
+function PremiumPullingOrder({ charIndex }: { charIndex: Record<string, CharacterLite> }) {
+    return (
+        <section className="rounded-2xl border border-white/10 p-6 bg-white/5 space-y-6">
+            <h3 className="text-center text-xl font-semibold tracking-wide">Recommended Choices</h3>
+
+            <div className="space-y-5">
+                <PremiumPriorityRow
+                    title="1st Priority"
+                    entries={PREMIUM_ORDER_1ST}
+                    charIndex={charIndex}
+                />
+                <PremiumPriorityRow
+                    title="2nd Priority"
+                    entries={PREMIUM_ORDER_2ND}
+                    charIndex={charIndex}
+                />
+                <PremiumPriorityRow
+                    title="3rd Priority"
+                    entries={PREMIUM_ORDER_3RD}
+                    charIndex={charIndex}
+                />
+            </div>
+
+            <div className="border-t border-white/10 pt-5 mt-5">
+                <h4 className="text-sm font-semibold tracking-wide opacity-90 mb-2 text-center">Transcendence Priority</h4>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                    {TRANSCEND_PRIORITY.map((e, i) => {
+                        const char = charIndex[toKebabCase(e.name)]
+                        return <CharacterCard key={`${e.name}-${i}`} char={char} stars={e.stars} isPriority={i === 0} />
+                    })}
+                </div>
+                <p className="text-xs opacity-70 mt-3 text-center">
+                    Focus on transcending these heroes first for maximum impact.
+                </p>
+            </div>
         </section>
     )
 }
@@ -441,11 +481,7 @@ export default function PremiumLimitedGuide() {
             </div>
 
             {selected === "Premium" && (
-                <PremiumPullingOrder
-                    title="Recommended Pulling Order (Premium)"
-                    entries={PREMIUM_ORDER}
-                    charIndex={charIndex}
-                />
+                <PremiumPullingOrder charIndex={charIndex} />
             )}
 
             {sorted.length === 0 ? (
