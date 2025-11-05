@@ -109,7 +109,7 @@
     "name": "Swiftness Set",
     "type": "Set",
     "class": null,
-    "count": 24,
+    "count": 25,
     "characters": [
       "Astei",
       "Christina",
@@ -119,6 +119,7 @@
       "Dianne",
       "Ember",
       "Gnosis Dahlia",
+      "Gnosis Viella",
       "Hilde",
       "Iota",
       "Kanon",
@@ -169,7 +170,7 @@
     "name": "Penetration Set",
     "type": "Set",
     "class": null,
-    "count": 19,
+    "count": 20,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -179,6 +180,7 @@
       "Demiurge Astei",
       "Demiurge Luna",
       "Francesca",
+      "Gnosis Viella",
       "Holy Night's Blessing Dianne",
       "Laplace",
       "Maxwell",
@@ -196,7 +198,7 @@
     "name": "Death's Hold",
     "type": "Amulet",
     "class": "Striker",
-    "count": 16,
+    "count": 17,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -207,6 +209,7 @@
       "Epsilon",
       "Francesca",
       "Gnosis Dahlia",
+      "Gnosis Viella",
       "Idith",
       "Kanon",
       "Noa",
@@ -261,6 +264,27 @@
     ]
   },
   {
+    "name": "Surefire Javelin",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 13,
+    "characters": [
+      "Aer",
+      "Ais Wallenstein",
+      "Beth",
+      "Delta",
+      "Drakhan",
+      "Francesca",
+      "Gnosis Viella",
+      "Noa",
+      "Poolside Trickster Regina",
+      "Rey",
+      "Rhona",
+      "Sofia",
+      "Vlada"
+    ]
+  },
+  {
     "name": "Thumping Knuckle Dusters",
     "type": "Weapon",
     "class": "Mage",
@@ -302,26 +326,6 @@
     ]
   },
   {
-    "name": "Surefire Javelin",
-    "type": "Weapon",
-    "class": "Striker",
-    "count": 12,
-    "characters": [
-      "Aer",
-      "Ais Wallenstein",
-      "Beth",
-      "Delta",
-      "Drakhan",
-      "Francesca",
-      "Noa",
-      "Poolside Trickster Regina",
-      "Rey",
-      "Rhona",
-      "Sofia",
-      "Vlada"
-    ]
-  },
-  {
     "name": "Absolute Music",
     "type": "Amulet",
     "class": "Ranger",
@@ -341,6 +345,25 @@
     ]
   },
   {
+    "name": "Violent Sledgehammer",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 11,
+    "characters": [
+      "Ais Wallenstein",
+      "Caren",
+      "Delta",
+      "Demiurge Stella",
+      "Epsilon",
+      "Gnosis Dahlia",
+      "Gnosis Viella",
+      "Idith",
+      "Kanon",
+      "Rhona",
+      "Vlada"
+    ]
+  },
+  {
     "name": "Force Field Generator",
     "type": "Weapon",
     "class": "Defender",
@@ -356,24 +379,6 @@
       "Sterope",
       "Summer Knight's Dream Ember",
       "Veronica"
-    ]
-  },
-  {
-    "name": "Violent Sledgehammer",
-    "type": "Weapon",
-    "class": "Striker",
-    "count": 10,
-    "characters": [
-      "Ais Wallenstein",
-      "Caren",
-      "Delta",
-      "Demiurge Stella",
-      "Epsilon",
-      "Gnosis Dahlia",
-      "Idith",
-      "Kanon",
-      "Rhona",
-      "Vlada"
     ]
   },
   {
@@ -461,6 +466,22 @@
     ]
   },
   {
+    "name": "Life Set",
+    "type": "Set",
+    "class": null,
+    "count": 8,
+    "characters": [
+      "Christina",
+      "Delta",
+      "Gnosis Viella",
+      "Hilde",
+      "Liselotte",
+      "Nella",
+      "Omega Nadja",
+      "Summer Knight's Dream Ember"
+    ]
+  },
+  {
     "name": "Noblewoman's Guile",
     "type": "Weapon",
     "class": "Mage",
@@ -504,21 +525,6 @@
       "Gnosis Dahlia",
       "Kanon",
       "Sofia"
-    ]
-  },
-  {
-    "name": "Life Set",
-    "type": "Set",
-    "class": null,
-    "count": 7,
-    "characters": [
-      "Christina",
-      "Delta",
-      "Hilde",
-      "Liselotte",
-      "Nella",
-      "Omega Nadja",
-      "Summer Knight's Dream Ember"
     ]
   },
   {
@@ -753,6 +759,16 @@
     ]
   },
   {
+    "name": "Briareos's Ambition [Striker]",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 2,
+    "characters": [
+      "Delta",
+      "Gnosis Viella"
+    ]
+  },
+  {
     "name": "Briareos's Recklessness [Ranger]",
     "type": "Weapon",
     "class": "Ranger",
@@ -860,15 +876,6 @@
     ]
   },
   {
-    "name": "Briareos's Ambition [Striker]",
-    "type": "Amulet",
-    "class": "Striker",
-    "count": 1,
-    "characters": [
-      "Delta"
-    ]
-  },
-  {
     "name": "Briareos's Recklessness [Defender]",
     "type": "Weapon",
     "class": "Defender",
@@ -893,6 +900,15 @@
     "count": 1,
     "characters": [
       "Demiurge Luna"
+    ]
+  },
+  {
+    "name": "Briareos's Recklessness [Striker]",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 1,
+    "characters": [
+      "Gnosis Viella"
     ]
   },
   {
@@ -1044,13 +1060,6 @@
     "name": "Briareos's Ambition [Defender]",
     "type": "Amulet",
     "class": "Defender",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Briareos's Recklessness [Striker]",
-    "type": "Weapon",
-    "class": "Striker",
     "count": 0,
     "characters": []
   },

@@ -1,6 +1,111 @@
 {
   "en": [
     {
+      "slug": "live-en-223",
+      "title": "[Issues] Known Issues (11/04 Maintenance) (Nov 5, 06:40 Added)",
+      "date": "2025.11.04",
+      "category": "issues",
+      "excerpt": ", We would like to inform you about several issues that have been identified. Our apologies for the trouble while we work on fixing these issues. 1\\. An issue where the 2.5th Anniversary Daily Mission...",
+      "coverImage": "/images/news/live/en/223-b4cd0e56.webp",
+      "uid": "223",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=223&mod=document",
+      "views": 131,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-226",
+      "title": "[Maintenance] 11/4 (Tue) Update Maintenance Complete",
+      "date": "2025.11.04",
+      "category": "maintenance",
+      "excerpt": ". The maintenance was successfully completed on 11/4 (Tue) at 04:30 UTC. ◈ Maintenance Compensation \\- Compensation: 200 Ether (Delivered to your in-game mailbox, Storage Period: 7 Days) \\- Claim Peri...",
+      "coverImage": "/images/news/live/en/226-a905d123.webp",
+      "uid": "226",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=226&mod=document",
+      "views": 59,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-228",
+      "title": "[Notice] 11/4 (Tue) Sequential Rollout Patch Notice",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": ". We will carry out a patch for fixing issues in the game. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your un...",
+      "uid": "228",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=228&mod=document",
+      "views": 55,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-230",
+      "title": "[🎉Event] 2.5-Year Anniversary Cumulative Purchase Event",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "Hello Master! Celebrate OUTERPLANE’s 2.5-Year Anniversary with amazing cumulative purchase rewards! Earn rewards based on your total spending during the event period - the more you spend, the greater ...",
+      "coverImage": "/images/news/live/kr/231-ceb08b6c.svg",
+      "uid": "230",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=230&mod=document",
+      "views": 34,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-235",
+      "title": "[🎉Event] Gnosis Viella Video Comment Event",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "Watch the new Gnosis Viella Introduction Video and share your thoughts or impressions in the comments! How to Participate 1️. Watch the Gnosis Viella Introduction Video. 2️. Leave a comment on YouTube...",
+      "coverImage": "/images/news/live/kr/233-92c28e7c.svg",
+      "uid": "235",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=235&mod=document",
+      "views": 36,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-236",
+      "title": "[🎉Event] 2.5-Year Anniversary – Show Off Your Strongest Hero Event 🎉",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": ", To celebrate OUTERPLANE’s 2.5-Year Anniversary, show off your proudest and most powerful hero! How to Participate 1️. Share a screenshot of your strongest or most beloved hero, along with your UID a...",
+      "coverImage": "/images/news/live/kr/241-01d79ab9.svg",
+      "uid": "236",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=236&mod=document",
+      "views": 35,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-237",
+      "title": "[🎉Event] 2.5-Year Anniversary Celebration Reply Event",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": ", Join us in celebrating OUTERPLANE’s 2.5-Year Anniversary! Leave a congratulatory message on the official X (Twitter) event post and claim special rewards! How to Participate 1️. Reply to the officia...",
+      "coverImage": "/images/news/live/kr/242-b83011d6.svg",
+      "uid": "237",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=237&mod=document",
+      "views": 42,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-246",
+      "title": "[Event] Push Event (11/4-11/17)",
+      "date": "2025.11.04",
+      "category": "event",
+      "excerpt": "GM Ame at your service! We’ve prepared special login gifts for everyone joining us in Utopia! Log in during the event period and claim your rewards each day—don’t miss out! ■ Event Period November 4, ...",
+      "uid": "246",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=246&mod=document",
+      "views": 103,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-247",
+      "title": "[Event] In-game Buff Event Details (11/4 - 11/17)",
+      "date": "2025.11.04",
+      "category": "event",
+      "excerpt": "From November 4 to 17, a special buff event will be taking place in Outerplane! 1) Bandit Chase reward amount by 100% \\- Event Period : 2025/11/4(Tue) after the maintenance ~ 2025/11/10(Mon) 23:59 UTC...",
+      "uid": "247",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=247&mod=document",
+      "views": 31,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-213",
       "title": "11/04 (Tue) Patch Note",
       "date": "2025.11.03",
@@ -10,6 +115,18 @@
       "uid": "213",
       "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=213&mod=document",
       "views": 335,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-218",
+      "title": "[Maintenance] 11/3 (Mon) Update Maintenance",
+      "date": "2025.11.03",
+      "category": "maintenance",
+      "excerpt": ", We would like to inform you that we will have an update on 11/3(Mon). Please see below for more details. ◈ Maintenance Schedule \\- 11/03 (Mon) 23:30 - 11/04 (Tue) 07:00 UTC ◈ Details 1\\. New Hero : ...",
+      "coverImage": "/images/news/live/en/218-43ee1397.webp",
+      "uid": "218",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=218&mod=document",
+      "views": 207,
       "lang": "en"
     },
     {
@@ -11557,6 +11674,113 @@
   ],
   "jp": [
     {
+      "slug": "live-jp-222",
+      "title": "【不具合】現在確認されている不具合について (11/04)",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG『アウタープレーン』 いつも「アウタープレーン」をプレイしていただき、 誠にありがとうございます。「アウタープレーン」運営チームです。 大変ご不便をおかけして申し訳ございません。 現在確認されている不具合についてご案内いたします。 1．メモリアル対戦をまとめてスキップした場合、フェス記念デイリーミッションにてすぐ反映されない現象 \\- 再ログイン後に進行状況が反映されます。 →...",
+      "coverImage": "/images/news/live/jp/222-e1cc1012.webp",
+      "uid": "222",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=222&mod=document",
+      "views": 343,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-225",
+      "title": "[11/04（火）アップデート完了のお知らせ]",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG「アウタープレーン」 いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 下記の期間実施しておりましたメンテナンスは、 11/4(火)13:30に終了いたしました。 ◈メンテナンスのお詫び メンテナンスのお詫びといたしまして、みなさまへ以下の対応をさせていただきます。 1．お詫びの内容：エーテル200個 2．配布期間...",
+      "coverImage": "/images/news/live/jp/225-69316965.webp",
+      "uid": "225",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=225&mod=document",
+      "views": 41,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-229",
+      "title": "【お知らせ】データ更新のお知らせ(11/4)",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG 『アウタープレーン』 いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 11/4(火)、データ更新作業を実施いたします。 一時的に接続が不安定になる場合がございます。 より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈データ更新...",
+      "uid": "229",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=229&mod=document",
+      "views": 33,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-232",
+      "title": "🎉1.5周年記念 累計購入イベント開催！🎉",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "マスターの皆様、こんにちは！GMあめです 『アウタープレーン』の1.5周年を記念して、 イベント期間中に ¥1,100以上 ご購入いただいたマスター様全員に、 さまざまな報酬をプレゼントいたします さらに、累計購入金額に応じて 追加の豪華報酬も獲得できますので、ぜひお見逃しなく！ 参加方法 イベント期間中に、下記の購入金額条件を達成すると自動で参加となります。 ※条件を満たした場合、以前の段階の報...",
+      "coverImage": "/images/news/live/kr/242-b83011d6.svg",
+      "uid": "232",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=232&mod=document",
+      "views": 13,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-234",
+      "title": "【🎉イベント】「グノーシス・ビエラ」紹介動画 感想コメントイベント",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "スキルタイミングRPG『OUTERPLANE（アウタープレーン）』 こんにちは、GMアメです！ 「グノーシス・ビエラ」紹介動画 感想コメントイベント開催！ 新たなデミウルゴス仲間「グノーシス・ビエラ」の紹介動画をチェックして、 あなたの感想や印象をコメントで教えてください！ 参加方法 1️. 「グノーシス・ビエラ」紹介動画を視聴後、 感想またはコメントとUID、サーバー名をYouTubeコメント欄...",
+      "coverImage": "/images/news/live/kr/242-b83011d6.svg",
+      "uid": "234",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=234&mod=document",
+      "views": 12,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-239",
+      "title": "【🎉イベント】1.5周年記念「最強仲間自慢大会」開催",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "1.5周年記念「最強仲間自慢大会」開催！ マスターの皆様、こんにちは！GMあめです 『アウタープレーン』の1.5周年を記念して、 マスターの皆さんが誇る “最強の仲間” を披露してください！ 参加方法 【公式】アウタープレーン（@OP\\_TWT\\_JP ）をフォロー これまで育ててきた仲間の中で、 戦闘力が最も高い、または自慢したい仲間のスクリーンショットに #アウタープレーン #アウプレ #最強...",
+      "coverImage": "/images/news/live/jp/249-5e3f7088.svg",
+      "uid": "239",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=239&mod=document",
+      "views": 12,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-240",
+      "title": "🎉1.5周年記念！お祝いコメントイベント開催！🎉",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "マスターの皆様、こんにちは！GMあめです 『アウタープレーン』は皆様のおかげで 1.5周年 を迎えることができました！ これを記念して、お祝いコメントイベント を開催いたします 公式X（旧Twitter）のイベント投稿にお祝いメッセージを残して、 豪華な報酬をゲットしちゃおう！ 参加方法 【公式】アウタープレーン（@OP\\_TWT\\_JP)をフォロー Link: https://x.com/OP\\...",
+      "coverImage": "/images/news/live/jp/240-8d49cb7f.webp",
+      "uid": "240",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=240&mod=document",
+      "views": 13,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-248",
+      "title": "【イベント】期間限定バフ (11/4 - 11/18)",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG 『アウタープレーン』 マスターの皆様、こんにちは！ GM あめです。 * 2025年11月4日～11月18日まで、 ゲーム内でさまざまな期間限定バフイベントを開催いたします！ ぜひこの機会をお見逃しなく！ 通常イベント一覧 【盗賊団追撃】報酬2倍 ・開催期間：2025年11月4日（火）メンテナンス後 ～ 11月11日（火）08:59（JST） 【指名手配】ゴールドドロップ2倍...",
+      "coverImage": "/images/news/live/jp/249-70cde509.svg",
+      "uid": "248",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=248&mod=document",
+      "views": 12,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-249",
+      "title": "【イベント】ログイン報酬 (11/4 - 11/18)",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG 『アウタープレーン』 マスターの皆様、こんにちは！ GM あめです。 ユートピアに訪れたマスターの皆さまへ！ 毎日決まった時間にログインするだけで、特別なプレゼントがもらえるチャンス！ マスターの皆様のご来訪をお祝いして、日替わりログイン報酬をご用意いたしました！ 忘れずにログインして、豪華報酬をぜひお受け取りください ■開催期間 2025年11月04日（火) ～ 2025年...",
+      "coverImage": "/images/news/live/jp/249-00ebbf59.svg",
+      "uid": "249",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=249&mod=document",
+      "views": 151,
+      "lang": "jp"
+    },
+    {
       "slug": "live-jp-215",
       "title": "11/4（火）アップデート内容のお知ら（1）(11/4 17:30 追加)",
       "date": "2025.11.03",
@@ -11578,6 +11802,18 @@
       "uid": "217",
       "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=217&mod=document",
       "views": 33,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-220",
+      "title": "【メンテナンス】定期メンテナンスお知らせ (11/4)",
+      "date": "2025.11.03",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG「アウタープレーン」 いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 11/4(火)にコンテンツ更新のため、メンテナンスを実施いたします。 詳しくは下記内容をご確認ください。 ◈メンテナンス予定実施時間 \\- 11/4(火) 08:30 ~ 16:00 (JST) ◈メンテナンスの内容 1\\. 新規デミウルゴス仲...",
+      "coverImage": "/images/news/live/jp/220-33523a8b.webp",
+      "uid": "220",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=220&mod=document",
+      "views": 76,
       "lang": "jp"
     },
     {
@@ -23112,6 +23348,99 @@
   ],
   "kr": [
     {
+      "slug": "live-kr-221",
+      "title": "[이슈] 11/04 업데이트 이후 확인된 현상 (11/5 15:40 추가)",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 현재 확인된 현상에 대해 안내 드립니다. 게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다. 1\\. 메모리얼 대전 일괄 소탕 후 2.5주년 일일 미션에 바로 반영되지 않는 현상 ㄴ 재접속 시 반영됩니다. → 해당 현상 확인 중에 있습니다. 2\\. 배틀패스 프리미엄 보상 아이템 중 일부 아이...",
+      "coverImage": "/images/news/live/kr/221-b4380732.webp",
+      "uid": "221",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=221&mod=document",
+      "views": 48,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-227",
+      "title": "[공지] 11월 4일 (화) 무점검 패치 진행 안내",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 \\- 11월 4일 (화) 16:30 ~ 16:50 (KST) ※ ...",
+      "uid": "227",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=227&mod=document",
+      "views": 24,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-231",
+      "title": "[🎉이벤트] 2.5주년 기념 누적 결제 이벤트",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요, GM 아메입니다! 2.5주년을 기념하여, 이벤트 기간 동안 누적 결제 금액에 따라 다양한 보상을 드립니다! 결제할수록 더 많은 보상이 기다리고 있으니 놓치지 마세요! 참여 방법 이벤트 기간 동안 아래 결제 금액 구간을 달성하면 자동으로 참여됩니다. 누적형 보상 1\\. 10,000원 이상 결제 시 → 골드 1,0...",
+      "coverImage": "/images/news/live/kr/242-b83011d6.svg",
+      "uid": "231",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=231&mod=document",
+      "views": 23,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-233",
+      "title": "[🎉이벤트] 그노시스 비엘라 소개 영상 소감 댓글 이벤트",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요, GM 아메입니다! 새로운 데미우르고스 동료 ‘그노시스 비엘라’의 소개 영상을 감상하고, 여러분의 소감을 댓글로 남겨주세요! 이벤트 참여 방법 1️. 그노시스 비엘라 소개 영상을 시청한 후 감상평 또는 느낀점, UID, 서버를 함께 유튜브 댓글로 작성해주세요! 예시: 그노시스 비엘라의 성능이 기대돼요! / 123...",
+      "coverImage": "/images/news/live/kr/242-b83011d6.svg",
+      "uid": "233",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=233&mod=document",
+      "views": 21,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-241",
+      "title": "[🎉이벤트] 2.5 주년 기념 나의 최강 영웅 자랑 이벤트",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "아우터플레인의 2.5주년을 기념하여, 오너 여러분이 가장 자랑스럽다고 생각하는 ‘최강 영웅’을 보여주세요! 이벤트 참여 방법 1️. 지금까지 키워온 영웅 중 전투력이 가장 높거나 가장 자랑스러운 영웅의 스크린샷, UID, 서버를 포함하여 이벤트 전용 게시판에 작성해주세요! https://game.naver.com/lounge/OUTERPLANE/board/...",
+      "coverImage": "/images/news/live/kr/241-01d79ab9.svg",
+      "uid": "241",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=241&mod=document",
+      "views": 23,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-242",
+      "title": "[🎉이벤트] 2.5 주년 기념 응원 답글 이벤트",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요, GM 아메입니다! 2.5주년 기념 응원 답글 이벤트 아우터플레인의 2.5주년을 함께 축하해주세요! X(트위터) 공식 이벤트 게시물에 축하 메시지를 남기고 푸짐한 보상을 받아가세요! 이벤트 참여 방법 1️. 아우터플레인 공식 X 이벤트 게시글 확인! X 링크: https://x.com/OP\\_TWT\\_KR/sta...",
+      "coverImage": "/images/news/live/kr/242-b83011d6.svg",
+      "uid": "242",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=242&mod=document",
+      "views": 15,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-243",
+      "title": "[이벤트] 인게임 버프 이벤트 (11/4 - 11/18)",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메 입니다. 11/4 ~ 11/18까지 아우터플레인에서 진행되는 특별한 버프 이벤트 소식을 안내 드립니다. \\[주간 이벤트\\] 1) 도적단 추격 보상 2배 이벤트 ㄴ 이벤트 기간 : 2025/11/4(화) 점검 후 ~ 2025/11/10(화) 08:59 KST 2) 현상 수배 골드 드롭 2배 이벤트 ㄴ ...",
+      "uid": "243",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=243&mod=document",
+      "views": 15,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-244",
+      "title": "[이벤트] 접속 보상 이벤트 (11/4 - 11/18)",
+      "date": "2025.11.04",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 유토피아에 찾아온 오너 여러분을 위한 접속 선물 보상! 매일매일 시간 내 접속하시면 받을 수 있는 선물을 준비했습니다. 꼭 접속하셔서 보상 받아가세요~! ■ 진행 기간 : 2025/11/04(화) ~ 2025/11/18(화) ■ 참여 방법 : 이벤트 기간동안 아래 시간대에 맞춰 접속하여 보상을...",
+      "uid": "244",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=244&mod=document",
+      "views": 32,
+      "lang": "kr"
+    },
+    {
       "slug": "live-kr-214",
       "title": "11월 4일(화) 업데이트 안내 Part.1 (11/4 17:30 추가)",
       "date": "2025.11.03",
@@ -23133,6 +23462,18 @@
       "uid": "216",
       "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=216&mod=document",
       "views": 89,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-219",
+      "title": "[점검] 11월 04일 (화) 업데이트 점검 안내 (완료)",
+      "date": "2025.11.03",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 11월 4일 (화) 13:30 (KST) 업데이트 점검이 완료되었습니다. 기다려주신 모든 오너님들께 감사드립니다. ◈ 점검 보상 지급 \\- 보상 : 200 에테르 (우편함 지급, 보관기간 7일) \\- 수령 기간: 11월 4일 (화) 점검 종료 이후 ~ 11월 5일 (수) 23:59 (KST) ...",
+      "coverImage": "/images/news/live/kr/219-5227a41e.webp",
+      "uid": "219",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=219&mod=document",
+      "views": 267,
       "lang": "kr"
     },
     {

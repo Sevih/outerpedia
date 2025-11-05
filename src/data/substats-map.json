@@ -3176,6 +3176,256 @@
       ]
     }
   },
+  "gnosis-viella": {
+    "Pen": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "EFF",
+        "ACC",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "Life": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "EFF",
+        "ACC",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Life"
+      ]
+    },
+    "Pen / Life": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "EFF",
+        "ACC",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Penetration",
+        "Life"
+      ]
+    },
+    "Pen / Swift": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "EFF",
+        "ACC",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Penetration",
+        "Swiftness"
+      ]
+    },
+    "Life / Swift": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "SPD",
+        "EFF",
+        "ACC",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Life",
+        "Swiftness"
+      ]
+    }
+  },
   "hilde": {
     "Scaling": {
       "weaponSub": [
