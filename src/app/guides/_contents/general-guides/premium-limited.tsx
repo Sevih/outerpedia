@@ -222,8 +222,8 @@ export function TargetDisplay({ value }: { value: string }) {
 
 /* ===================== Hero Card ===================== */
 function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
-    const element = (char?.Element as ElementType) || "—"
-    const cls = (char?.Class as ClassType) || "—"
+    const element = char?.Element as ElementType | undefined
+    const cls = char?.Class as ClassType | undefined
     const sub = char?.SubClass || "—"
     const name = char?.Fullname || "—"
     const portraitSrc = char?.ID ? `/images/characters/atb/IG_Turn_${char.ID}.webp` : undefined
@@ -297,9 +297,9 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
                 </h2>
 
                 <div className="flex items-center gap-2 text-xs opacity-80">
-                    <Badge><ElementInlineTag element={element} /></Badge>
-                    <Badge><ClassInlineTag name={cls} /></Badge>
-                    {sub && sub !== "—" && (
+                    {element && <Badge><ElementInlineTag element={element} /></Badge>}
+                    {cls && <Badge><ClassInlineTag name={cls} /></Badge>}
+                    {sub && sub !== "—" && cls && (
                         <Badge><ClassInlineTag name={cls} subclass={sub} /></Badge>
                     )}
                 </div>

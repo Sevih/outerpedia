@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import * as HoverCard from '@radix-ui/react-hover-card'
 
 type SkillKey = 'Ultimate' | 'First' | 'Second'
 
@@ -33,42 +32,19 @@ export default function SkillPriorityBlocks({
                 <h2 className="text-white text-xl font-bold tracking-wide uppercase">
                     Skill Upgrade Priority
                 </h2>
-
-                <HoverCard.Root openDelay={0} closeDelay={0}>
-                    <HoverCard.Trigger asChild>
-                        <button type="button" className="w-5 h-5 cursor-pointer">
-                            <Image
-                                src="/images/ui/CM_icon_top_help.webp"
-                                alt="Help"
-                                width={20}
-                                height={20}
-                                className="object-contain opacity-80 hover:opacity-100"
-                            />
-                        </button>
-                    </HoverCard.Trigger>
-
-                    <HoverCard.Portal>
-                        <HoverCard.Content
-                            side="top"
-                            align="start"
-                            sideOffset={8}
-                            className="z-50 px-3 py-2 rounded-md shadow-lg max-w-[300px] bg-yellow-900/95 border border-yellow-400 text-yellow-100 text-xs leading-relaxed outline-none focus:outline-none"
-                        >
-                            <p className="mb-1 font-bold text-yellow-300">General skill upgrade priority:</p>
-                            <ul className="list-disc list-inside space-y-1">
-                                <li><strong>Level 2</strong> first (for Weakness Gauge bonus)</li>
-                                <li>Then <strong>important effects</strong> (buffs/debuffs)</li>
-                                <li>Then <strong>duration</strong> and <strong>CD reduction</strong></li>
-                                <li><strong>Damage</strong> last, unless it&apos;s your main DPS skill</li>
-                                <li><strong>Chain Passive</strong> can usually stay at level 2</li>
-                            </ul>
-                            <HoverCard.Arrow className="fill-yellow-400" />
-                        </HoverCard.Content>
-                    </HoverCard.Portal>
-                </HoverCard.Root>
             </div>
 
-
+            <div className="mb-6 px-4 py-3 rounded-md bg-yellow-900/30 border border-yellow-400/30 max-w-2xl mx-auto">
+                <p className="mb-2 text-yellow-100/90 text-xs font-semibold">Skill up rule of thumb:</p>
+                <ul className="list-disc list-inside space-y-1 text-yellow-100/90 text-xs ml-4">
+                    <li>Level 2 for Weakness Gauge damage</li>
+                    <li>Effect chance, effect duration & cooldown reductions.</li>
+                    <li>Damage increases (DPS only)</li>
+                </ul>
+                <p className="mt-3 text-yellow-100/90 text-xs">
+                    Chain passive can be left at level 2 until much later, the Weakness Gauge damage increase at level 5 is the only interesting part, so you can save skill manuals here until the more important skills are taken care of.
+                </p>
+            </div>
 
             <div className="flex justify-center w-full">
                 <div className="flex flex-col items-center mt-4">
