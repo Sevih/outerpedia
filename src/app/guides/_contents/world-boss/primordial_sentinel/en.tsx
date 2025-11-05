@@ -15,10 +15,10 @@ const teams = {
     label: 'Phase 1',
     icon: 'ranger.webp', // Change icon as needed
     setup: [
-      ['Iota', 'Stella'],
+      ['Iota'],
       ['Valentine'],
-      ['Notia', 'Fran'],
-      ['Dianne', 'Demiurge Delta','Saeran', 'Tio', 'Nella', 'Astei']
+      ['Stella','Notia', 'Fran'],
+      ['Nella', 'Dianne', 'Demiurge Delta', 'Saeran', 'Tio',  'Astei']
     ]
   },
   team2: {
@@ -119,7 +119,7 @@ export default function PrimordialSentinelGuide() {
                 <li><CharacterLinkCard name="Demiurge Drakhan" />  : <ClassInlineTag name='Defender' /> with <EffectInlineTag name='BT_ACTION_GAUGE' type='buff' /> on their S1.</li>
                 <li><CharacterLinkCard name="Gnosis Beth" /> : pushes her whole team with her DoT <EffectInlineTag name='BT_DOT_2000092' type='debuff' /></li>
                 <li><CharacterLinkCard name="Kuro" /> <CharacterLinkCard name="Demiurge Vlada" /> <CharacterLinkCard name="Gnosis Viella" />: can remove <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> from the boss.</li>
-                <li><CharacterLinkCard name="Akari" /> : can prevent the boss from gaining <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" />.</li>                
+                <li><CharacterLinkCard name="Akari" /> : can prevent the boss from gaining <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" />.</li>
                 <li><CharacterLinkCard name="Skadi" /> : cycles your skills CD faster with <EffectInlineTag name="BT_COOL_CHARGE" type="buff" />.</li>
               </ul>
 
@@ -127,6 +127,14 @@ export default function PrimordialSentinelGuide() {
 
               <GuideHeading level={3}>Team Compositions</GuideHeading>
               <TeamTabSelector teams={teams} />
+
+              <hr className="my-6 border-neutral-700" />
+
+              <GuideHeading level={3}>Showcase Video</GuideHeading>
+              <p className="mt-2">
+                Note : This video showcases an SSS Extreme clear. The same strategy can be applied to lower difficulties, but certain boss mechanics may be weakened or disabled. As the score is not unlimited before Extreme League, this requires less focus on building chain points in phase 1, you can use them freely.
+              </p>
+              <YoutubeEmbed videoId='4me_DqMftbs' title='Primordial Sentinel - World Boss - SSS - Extreme League' />
 
 
             </>
