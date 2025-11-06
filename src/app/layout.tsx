@@ -94,6 +94,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <UpdateToast />
           </I18nProvider>
         </TenantProvider>
+        <div id="portal-root" />
       </body>
     </html>
   )

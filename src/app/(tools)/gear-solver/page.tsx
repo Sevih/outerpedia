@@ -48,10 +48,10 @@ export default async function Page() {
   return (
     <main className="p-6 max-w-5xl mx-auto">
       <div className="relative top-4 left-4 z-20 h-[32px] w-[32px]">
-        <Link href="/tools" className="relative block h-full w-full" aria-label={t('common.back') ?? 'Back'}>
+        <Link href="/tools" className="relative block h-full w-full" aria-label={t('back') ?? 'Back'}>
           <Image
             src="/images/ui/CM_TopMenu_Back.webp" // WEBP en page
-            alt={t('common.back') ?? 'Back'}
+            alt={t('back') ?? 'Back'}
             fill
             sizes="32px"
             className="opacity-80 hover:opacity-100 transition-opacity"

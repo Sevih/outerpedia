@@ -52,7 +52,7 @@ export default async function PvETierList() {
             currentPath: '/tierlistpve',
           }),
           tierItemListLd(domain, {
-            title: t('tierPve.itemList.title', { monthYear }) ?? `Outerplane PvE Tier List — ${monthYear}`,
+            title: t('tierPve.itemList.title', { monthYear }),
             description:
               t('tierPve.itemList.desc') ??
               'Discover the best characters in Outerplane sorted by DPS, Support, and Sustain. Curated by the EvaMains community.',

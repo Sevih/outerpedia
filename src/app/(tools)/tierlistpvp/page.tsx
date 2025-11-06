@@ -51,10 +51,9 @@ export default async function PvPTierList() {
             currentPath: '/tierlistpvp',
           }),
           tierItemListLd(domain, {
-            title: t('tierPvp.itemList.title', { monthYear }) ?? `Outerplane PvP Tier List — ${monthYear}`,
+            title: t('tierPvp.itemList.title', { monthYear }),
             description:
-              t('tierPvp.itemList.desc') ??
-              'Discover the best characters in Outerplane for PvP. Curated by the EvaMains community.',
+              t('tierPvp.itemList.desc'),
             characters: characters.map(c => ({
               slug: toKebabCase(c.Fullname),
               id: String(c.ID),

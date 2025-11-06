@@ -66,7 +66,17 @@ export function I18nProvider({
 
     // Implémentation avec surcharge réelle
     const translate = ((key: string, values?: TValues) => {
-      const template = dict[key] ?? key
+      const template = dict[key]
+
+      // En développement, on crash si la clé n'existe pas
+      if (template === undefined) {
+        if (process.env.NODE_ENV === 'development') {
+          throw new Error(`[i18n] Missing translation key: "${key}"`)
+        }
+        // En production, on fallback sur la clé (pour éviter de casser le site)
+        return key
+      }
+
       if (values && typeof values === 'object') {
         return formatICU(template, values)
       }

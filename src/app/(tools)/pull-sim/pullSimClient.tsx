@@ -214,7 +214,7 @@ export default function PullSimClient() {
 
 
     const bannerLabel: Record<Kind, string> = {
-        all: t('pullSim.bannerType.all'),
+        all: t('filters.common.all'),
         regular_focus: t('pullSim.bannerType.rateup'),
         premium_standard: t('pullSim.bannerType.premium'),
         limited_rateup: t('pullSim.bannerType.limited'),

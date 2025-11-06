@@ -5,7 +5,7 @@ import eeData from '@/data/ee.json'
 import TierListBase from '@/app/components/TierListBase'
 import charactersData from '@/data/_allCharacters.json'
 import { toKebabCase } from '@/utils/formatText'
-import type { Character } from '@/types/character'
+import type { CharacterLite } from '@/types/types'
 import { Suspense } from 'react'
 import { createPageMetadata } from '@/lib/seo'
 import JsonLd from '@/app/components/JsonLd'
@@ -14,7 +14,7 @@ import { getTenantServer } from '@/tenants/tenant.server'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 const characterMap = Object.fromEntries(
-  (charactersData as Character[]).map((c) => [toKebabCase(c.Fullname), c])
+  (charactersData as CharacterLite[]).map((c) => [toKebabCase(c.Fullname), c])
 )
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -95,14 +95,14 @@ export default async function TierListPageWrapper() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
         <TierListGlowCard
           href="/tierlistpve"
-          title={t('tierIndex.card.pve.title') ?? 'Tier List — PvE'}
+          title={t('tier.ui.title.pve') ?? 'Tier List - PvE'}
           description={t('tierIndex.card.pve.desc') ?? 'PvE performance rankings across all content.'}
           image="/images/ui/nav/pve.png"
           type="pve"
         />
         <TierListGlowCard
           href="/tierlistpvp"
-          title={t('tierIndex.card.pvp.title') ?? 'Tier List — PvP'}
+          title={t('tier.ui.title.pvp') ?? 'Tier List - PvP'}
           description={t('tierIndex.card.pvp.desc') ?? 'Performance-based Arena evaluation.'}
           image="/images/ui/nav/pvp.webp"
           type="pvp"

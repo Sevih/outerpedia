@@ -96,7 +96,7 @@ export default async function Page() {
         <h2 className="text-sm text-gray-400 text-center mb-2">
           {t('chars.page.updated', { monthYear })}
         </h2>
-        <CharactersPage langue={langKey} />
+        <CharactersPage langue={langKey} initialCharacters={list} />
       </div>
     </>
   )

@@ -1,4 +1,6 @@
 // src/types/types.ts
+import type { WithLocalizedFields } from '@/types/common'
+
 export type StatBlock = {
   atk: number
   def: number
@@ -70,22 +72,36 @@ export interface SkillLite {
 
 export type RoleType = 'DPS' | 'Support' | 'Sustain'
 
-export type CharacterLite = {
+export type EffectsBySource = {
+  SKT_FIRST: { buff: string[]; debuff: string[] }
+  SKT_SECOND: { buff: string[]; debuff: string[] }
+  SKT_ULTIMATE: { buff: string[]; debuff: string[] }
+  SKT_CHAIN_PASSIVE: { buff: string[]; debuff: string[] }  // Chain skill passive effects
+  DUAL_ATTACK: { buff: string[]; debuff: string[] }        // Dual attack effects
+  EXCLUSIVE_EQUIP: { buff: string[]; debuff: string[] }
+}
+
+// Type de base pour CharacterLite (sans variantes localisées)
+export interface CharacterLiteBase {
   ID: string
   Fullname: string
-  Fullname_jp?: string;
-  Fullname_kr?: string;
   Element: string
   Class: string
-  SubClass?: string            // <- optionnel (l’API ne le renvoie pas)
+  SubClass?: string            // <- optionnel (l'API ne le renvoie pas)
   Rarity: number
   buff?: string[]
   debuff?: string[]
   Chain_Type?: string          // <- optionnel
-  limited?: boolean            // <- boolean (aligné avec l’API)
+  limited?: boolean            // <- boolean (aligné avec l'API)
   gift?: string                // <- string (OK pour tes filtres)
 
   // nouveaux champs
-  role?: RoleType
+  role?: RoleType | string
+  rank?: string | boolean
+  rank_pvp?: string | boolean
   tags?: string[]
+  effectsBySource?: EffectsBySource  // <- NEW: effects organized by source
 }
+
+// Type complet avec variantes localisées pour Fullname
+export type CharacterLite = WithLocalizedFields<CharacterLiteBase, 'Fullname'>

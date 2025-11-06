@@ -238,7 +238,7 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
                 } hover:bg-cyan-600 px-2 py-1 rounded border`}
             >
               {r === null ? (
-                <span className="text-white text-sm font-bold">{t('mostUsedUnit.filters.allRarity')}</span>
+                <span className="text-white text-sm font-bold">{t('filters.common.all')}</span>
               ) : (
                 <div className="flex items-center -space-x-1">
                   {Array(r)
@@ -282,7 +282,7 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
                 title={String(el)}
               >
                 {el === 'All' ? (
-                  <span className="text-white text-sm font-bold px-2">{t('mostUsedUnit.filters.allElement')}</span>
+                  <span className="text-white text-sm font-bold px-2">{t('filters.common.all')}</span>
                 ) : (
                   <ElementIcon element={el as ElementType} />
                 )}
@@ -312,7 +312,7 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
                 title={String(cl)}
               >
                 {cl === 'All' ? (
-                  <span className="text-white text-sm font-bold px-2">{t('mostUsedUnit.filters.allClass')}</span>
+                  <span className="text-white text-sm font-bold px-2">{t('filters.common.all')}</span>
                 ) : (
                   <ClassIcon className={cl as classtipe} />
                 )}

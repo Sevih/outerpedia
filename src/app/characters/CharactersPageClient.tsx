@@ -13,10 +13,6 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import LZString from 'lz-string'
 import { EL, CL, CH, GF, EL_INV, CL_INV, CH_INV, GF_INV } from '@/data/filterCodes'
 import effectsIndex from '@/data/effectsIndex.json'
-import rawTAG_INDEX from '@/data/tags.json'
-import rawBuffsData from '@/data/buffs.json'
-import rawDebuffsData from '@/data/debuffs.json'
-import effectCategories from '@/data/effect_categories.json'
 import type { TenantKey } from '@/tenants/config'
 import { getAvailableLanguages } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
@@ -34,6 +30,23 @@ type EffectFullData = {
   description_jp?: string
   description_kr?: string
   icon: string
+}
+
+// Type for effect categories data structure
+type EffectCategory = {
+  label: string
+  label_jp?: string
+  label_kr?: string
+  label_zh?: string
+  description: string
+  description_jp?: string
+  description_kr?: string
+  description_zh?: string
+}
+
+type EffectCategoriesData = {
+  buff: Record<string, EffectCategory>
+  debuff: Record<string, EffectCategory>
 }
 
 type RecruitBadge = { src: string; altKey: string }
@@ -82,6 +95,7 @@ type Payload = {
   el?: string[]; cl?: string[]; r?: number[]; chain?: string[]; gift?: string[];
   buffs?: string[]; debuffs?: string[];
   logic?: 'AND' | 'OR'; q?: string; uniq?: boolean; role?: string[]; tags?: string[]; tagLogic?: 'AND' | 'OR'
+  sources?: SourceKey[]  // NEW: source filters
 }
 type ZPayload = {
   e?: number[]
@@ -97,6 +111,7 @@ type ZPayload = {
   r2?: string[]     // old rl
   t?: string[]      // old tg
   tl?: 0 | 1
+  src?: string[]    // NEW: source filters (abbreviated)
 }
 
 
@@ -142,16 +157,6 @@ const GIFTS = [
   { name: 'Natural Object', value: 'natural object' },
 ] as const
 
-const TAG_INDEX = rawTAG_INDEX as Record<string, TagMeta>
-const TAG_KEYS = Object.keys(TAG_INDEX)
-const TAGS = TAG_KEYS.map(k => ({
-  key: k,
-  label: TAG_INDEX[k].label,
-  image: TAG_INDEX[k].image,
-  desc: TAG_INDEX[k].desc,
-  type: TAG_INDEX[k].type,
-}))
-
 // en haut du fichier, OK ici
 const ELEMENT_VALUES = ['Fire', 'Water', 'Earth', 'Light', 'Dark'] as const
 const CLASS_VALUES = ['Striker', 'Defender', 'Ranger', 'Healer', 'Mage'] as const
@@ -175,26 +180,24 @@ const ROLE_VALUES: RoleSlug[] = ['dps', 'support', 'sustain']
 const isRoleSlug = (v: unknown): v is RoleSlug =>
   v === 'dps' || v === 'support' || v === 'sustain'
 
-
-// ===== Effect groups - Category keys for grouping
-const buffCategoryKeys = Object.keys(effectCategories.buff)
-const debuffCategoryKeys = Object.keys(effectCategories.debuff)
+// ===== Source filters
+type SourceKey = 'SKT_FIRST' | 'SKT_SECOND' | 'SKT_ULTIMATE' | 'SKT_CHAIN_PASSIVE' | 'DUAL_ATTACK' | 'EXCLUSIVE_EQUIP'
+const SOURCE_VALUES: { key: SourceKey; labelKey: string }[] = [
+  { key: 'SKT_FIRST', labelKey: 'characters.filters.sources.skill1' },
+  { key: 'SKT_SECOND', labelKey: 'characters.filters.sources.skill2' },
+  { key: 'SKT_ULTIMATE', labelKey: 'characters.filters.sources.skill3' },
+  { key: 'SKT_CHAIN_PASSIVE', labelKey: 'characters.filters.sources.chainPassive' },
+  { key: 'DUAL_ATTACK', labelKey: 'characters.filters.sources.dualAttack' },
+  { key: 'EXCLUSIVE_EQUIP', labelKey: 'characters.filters.sources.exclusiveEquip' },
+]
 
 // ===== Small helpers
 const isArr = <T,>(v: T[] | undefined): v is T[] => Array.isArray(v) && v.length > 0
 const getAllEffects = (char: CharacterLite, type: 'buff' | 'debuff') => (Array.isArray(char[type]) ? char[type]! : [])
 const extractAllEffects = (list: CharacterLite[], type: 'buff' | 'debuff') => [...new Set(list.flatMap(c => (Array.isArray(c[type]) ? c[type]! : [])))].sort()
 
-// ===== Effect grouping helpers
-// Build a map of effect name -> group (if it has one)
-const effectGroupMap = new Map<string, string>()
-const buffsData = rawBuffsData as Array<{ name: string; group?: string }>
-const debuffsData = rawDebuffsData as Array<{ name: string; group?: string }>
-;[...buffsData, ...debuffsData].forEach(effect => {
-  if (effect.group) {
-    effectGroupMap.set(effect.name, effect.group)
-  }
-})
+// ===== Effect grouping helpers - will be populated lazily
+let effectGroupMap = new Map<string, string>()
 
 // Check if a character has an effect, considering groups
 // If the filter is for "BT_CALL_BACKUP", it should match characters with "BT_CALL_BACKUP" OR "BT_CALL_BACKUP_2" (grouped)
@@ -209,6 +212,41 @@ function charHasEffect(char: CharacterLite, filterEffect: string, type: 'buff' |
     const charGroup = effectGroupMap.get(charEffect)
     if (charGroup && charGroup === filterEffect) {
       return true
+    }
+  }
+
+  return false
+}
+
+// NEW: Check if character has effect from specific sources
+function charHasEffectFromSources(
+  char: CharacterLite,
+  filterEffect: string,
+  type: 'buff' | 'debuff',
+  sources: SourceKey[]
+): boolean {
+  // If no sources specified, use original function
+  if (sources.length === 0) {
+    return charHasEffect(char, filterEffect, type)
+  }
+
+  // Check if character has the effect in any of the specified sources
+  if (!char.effectsBySource) {
+    return charHasEffect(char, filterEffect, type)
+  }
+
+  for (const source of sources) {
+    const sourceEffects = char.effectsBySource[source]?.[type] || []
+
+    // Direct match
+    if (sourceEffects.includes(filterEffect)) return true
+
+    // Check groups
+    for (const effect of sourceEffects) {
+      const effectGroup = effectGroupMap.get(effect)
+      if (effectGroup && effectGroup === filterEffect) {
+        return true
+      }
     }
   }
 
@@ -231,6 +269,7 @@ function encodeStateToZ(p: Payload): string {
     q: p.q || undefined,
     u: p.uniq ? 1 : undefined,
     tl: p.tagLogic === 'AND' ? 1 : undefined,
+    src: isArr(p.sources) ? p.sources : undefined,  // NEW: encode sources
   }
   return LZString.compressToEncodedURIComponent(JSON.stringify(compact))
 }
@@ -253,6 +292,7 @@ function decodeZToState(z?: string): Partial<Payload> | null {
       q: raw.q,
       uniq: raw.u === 1,
       tagLogic: raw.tl === 1 ? 'AND' : 'OR',
+      sources: (raw.src ?? []) as SourceKey[],  // NEW: decode sources
     }
   } catch (e) {
     if (process.env.NODE_ENV !== 'production') console.warn('[Characters] decodeZToState failed', e)
@@ -336,19 +376,13 @@ function getSearchableNames(char: CharacterLite): string[] {
   return names.map(norm)
 }
 
-function matchesAnyName(char: CharacterLite, q: string): boolean {
-  if (!q.trim()) return true
-  const nq = norm(q)
-  const names = getSearchableNames(char)
-  return names.some(name => name.includes(nq))
-}
-
 type ClientProps = {
   langue: TenantKey
+  initialCharacters: CharacterLite[]
 }
-export default function CharactersPage({ langue }: ClientProps) {
-  const [characters, setCharacters] = useState<CharacterLite[]>([])
-  const [loading, setLoading] = useState(true)
+export default function CharactersPage({ langue, initialCharacters }: ClientProps) {
+  const [characters] = useState<CharacterLite[]>(initialCharacters)
+  const [loading] = useState(false)
   const [showTagsPanel, setShowTagsPanel] = useState(false)
 
   const [elementFilter, setElementFilter] = useState<string[]>([])
@@ -367,9 +401,18 @@ export default function CharactersPage({ langue }: ClientProps) {
   const [allBuffs, setAllBuffs] = useState<string[]>([])
   const [allDebuffs, setAllDebuffs] = useState<string[]>([])
 
+  // NEW: Source filters
+  const [sourceFilter, setSourceFilter] = useState<SourceKey[]>([])
+
   const [showUniqueEffects, setShowUniqueEffects] = useState<boolean>(false)
   const [showFilters, setShowFilters] = useState(false)
   const [copied, setCopied] = useState(false)
+
+  // NEW: Lazy-loaded data
+  const [buffsMetadata, setBuffsMetadata] = useState<EffectFullData[]>([])
+  const [debuffsMetadata, setDebuffsMetadata] = useState<EffectFullData[]>([])
+  const [effectCategoriesData, setEffectCategoriesData] = useState<EffectCategoriesData | null>(null)
+  const [tagsData, setTagsData] = useState<Record<string, TagMeta> | null>(null)
 
   const router = useRouter()
   const pathname = usePathname()
@@ -391,41 +434,50 @@ export default function CharactersPage({ langue }: ClientProps) {
     })
   }
 
-  // Raretés (juste l’étiquette "All" dépend du t)
+  // Raretés (juste l'étiquette "All" dépend du t)
   const RARITIES_UI = useMemo(() => ([
-    { label: t('characters.common.all'), value: null as number | null },
+    { label: t('filters.common.all'), value: null as number | null },
     { label: 1, value: 1 },
     { label: 2, value: 2 },
     { label: 3, value: 3 },
   ]), [t])
 
   const ELEMENTS_UI = useMemo(() => ([
-    { name: t('characters.common.all'), value: null as string | null },
+    { name: t('filters.common.all'), value: null as string | null },
     ...ELEMENT_VALUES.map(v => ({ name: v, value: v })),
   ]), [t])
 
   const CLASSES_UI = useMemo(() => ([
-    { name: t('characters.common.all'), value: null as string | null },
+    { name: t('filters.common.all'), value: null as string | null },
     ...CLASS_VALUES.map(v => ({ name: v, value: v })),
   ]), [t])
 
   const CHAINS_UI = useMemo(() => ([
-    { name: t('characters.common.all'), value: null as string | null },
+    { name: t('filters.common.all'), value: null as string | null },
     ...CHAINS_VALUES.map(x => ({ name: t(`characters.chains.${x.key}`), value: x.value })),
   ]), [t])
 
   const GIFTS_UI = useMemo(() => ([
-    { name: t('characters.common.all'), value: null as string | null },
+    { name: t('filters.common.all'), value: null as string | null },
     ...GIFTS_VALUES.map(x => ({ name: t(`characters.gifts.${x.key}`), value: x.value })),
   ]), [t])
 
   const ROLES_UI = useMemo(() => ([
-    { name: t('characters.common.all'), value: null as RoleSlug | null },
-    ...ROLE_VALUES.map(v => ({ name: t(`characters.roles.${v}`), value: v })),
+    { name: t('filters.common.all'), value: null as RoleSlug | null },
+    ...ROLE_VALUES.map(v => ({ name: t(`filters.roles.${v}`), value: v })),
   ]), [t])
 
-  const buffGroups = useMemo(() => groupEffects(allBuffs, rawBuffsData as EffectFullData[], buffCategoryKeys, 'buff', showUniqueEffects), [allBuffs, showUniqueEffects]);
-  const debuffGroups = useMemo(() => groupEffects(allDebuffs, rawDebuffsData as EffectFullData[], debuffCategoryKeys, 'debuff', showUniqueEffects), [allDebuffs, showUniqueEffects]);
+  const buffGroups = useMemo(() => {
+    if (!effectCategoriesData || buffsMetadata.length === 0) return []
+    const buffCategoryKeys = Object.keys(effectCategoriesData.buff)
+    return groupEffects(allBuffs, buffsMetadata, buffCategoryKeys, 'buff', showUniqueEffects)
+  }, [allBuffs, showUniqueEffects, buffsMetadata, effectCategoriesData]);
+
+  const debuffGroups = useMemo(() => {
+    if (!effectCategoriesData || debuffsMetadata.length === 0) return []
+    const debuffCategoryKeys = Object.keys(effectCategoriesData.debuff)
+    return groupEffects(allDebuffs, debuffsMetadata, debuffCategoryKeys, 'debuff', showUniqueEffects)
+  }, [allDebuffs, showUniqueEffects, debuffsMetadata, effectCategoriesData]);
 
   const payload = useMemo<Payload>(() => ({
     el: elementFilter.length ? elementFilter : undefined,
@@ -441,7 +493,8 @@ export default function CharactersPage({ langue }: ClientProps) {
     role: roleFilter.length ? roleFilter : undefined,
     tags: tagFilter.length ? tagFilter : undefined,
     tagLogic: tagLogic !== 'OR' ? tagLogic : undefined,
-  }), [elementFilter, classFilter, rarityFilter, chainFilter, giftFilter, selectedBuffs, selectedDebuffs, effectLogic, rawQuery, showUniqueEffects, roleFilter, tagFilter, tagLogic])
+    sources: sourceFilter.length ? sourceFilter : undefined,  // NEW
+  }), [elementFilter, classFilter, rarityFilter, chainFilter, giftFilter, selectedBuffs, selectedDebuffs, effectLogic, rawQuery, showUniqueEffects, roleFilter, tagFilter, tagLogic, sourceFilter])
 
   const applyPayload = (p: Partial<Payload>) => {
     setElementFilter(p.el ?? [])
@@ -457,19 +510,19 @@ export default function CharactersPage({ langue }: ClientProps) {
     setRoleFilter((p.role ?? []).filter(isRoleSlug))
     setTagFilter((p.tags ?? []))
     setTagLogic(p.tagLogic === 'AND' || p.tagLogic === 'OR' ? p.tagLogic : 'OR')
+    setSourceFilter(p.sources ?? [])  // NEW
   }
 
   type TagGroup = { type: string; items: { key: string; meta: TagMeta }[] }
   const TAG_GROUPS = useMemo<TagGroup[]>(() => {
+    if (!tagsData) return []
+
     const mapByType: Record<string, { key: string; meta: TagMeta }[]> = {}
-    for (const t of TAGS) {
-      (mapByType[t.type] ||= []).push({
-        key: t.key,
-        meta: { label: t.label, image: t.image, desc: t.desc, type: t.type },
-      })
+    for (const [key, meta] of Object.entries(tagsData)) {
+      (mapByType[meta.type] ||= []).push({ key, meta })
     }
     return Object.entries(mapByType).map(([type, items]) => ({ type, items }))
-  }, [])
+  }, [tagsData])
 
   // 1) Hydration from URL once
   useEffect(() => {
@@ -484,17 +537,11 @@ export default function CharactersPage({ langue }: ClientProps) {
     }
   }, [searchParams])
 
-  // 2) Fetch characters
+  // 2) Initialize buffs/debuffs from initial characters
   useEffect(() => {
-    const fetchCharacters = async () => {
-      const res = await fetch('/api/characters-lite')
-      const data: CharacterLite[] = await res.json()
-      setCharacters(data)
-      setAllBuffs(extractAllEffects(data, 'buff'))
-      setAllDebuffs(extractAllEffects(data, 'debuff'))
-      setLoading(false)
-    }
-    fetchCharacters()
+    setAllBuffs(extractAllEffects(characters, 'buff'))
+    setAllDebuffs(extractAllEffects(characters, 'debuff'))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // 3) Normalize "All"
@@ -518,53 +565,104 @@ export default function CharactersPage({ langue }: ClientProps) {
     const all = GIFTS.slice(1).map(g => g.value!); if (giftFilter.length === all.length) setGiftFilter([])
   }, [giftFilter])
 
-  // 4) Sync filters → URL
+  // 3.5) Lazy load metadata when filters panel opens
   useEffect(() => {
-    const isEmpty = !payload.el && !payload.cl && !payload.r && !payload.chain && !payload.gift && !payload.buffs && !payload.debuffs && !payload.role && !payload.tags && !payload.logic && !payload.q && !payload.uniq
-    const serialized = isEmpty ? pathname : `${pathname}?z=${encodeStateToZ(payload)}`
-    if (lastSerializedRef.current === serialized) return
+    if (showFilters && buffsMetadata.length === 0) {
+      Promise.all([
+        import('@/data/buffs.json'),
+        import('@/data/debuffs.json'),
+        import('@/data/effect_categories.json'),
+      ]).then(([buffs, debuffs, categories]) => {
+        setBuffsMetadata(buffs.default as EffectFullData[])
+        setDebuffsMetadata(debuffs.default as EffectFullData[])
+        setEffectCategoriesData(categories.default)
+
+        // Build effect group map
+        const newMap = new Map<string, string>()
+        ;[...buffs.default, ...debuffs.default].forEach((effect: { name: string; group?: string }) => {
+          if (effect.group) {
+            newMap.set(effect.name, effect.group)
+          }
+        })
+        effectGroupMap = newMap
+      })
+    }
+  }, [showFilters, buffsMetadata.length])
+
+  // 3.6) Lazy load tags when tags panel opens
+  useEffect(() => {
+    if (showTagsPanel && !tagsData) {
+      import('@/data/tags.json').then(module => {
+        setTagsData(module.default as Record<string, TagMeta>)
+      })
+    }
+  }, [showTagsPanel, tagsData])
+
+  // 4) Sync filters → URL (OPTIMIZED: serialization moved inside timeout)
+  useEffect(() => {
     const handle = setTimeout(() => {
+      const isEmpty = !payload.el && !payload.cl && !payload.r && !payload.chain && !payload.gift && !payload.buffs && !payload.debuffs && !payload.role && !payload.tags && !payload.logic && !payload.q && !payload.uniq
+      const serialized = isEmpty ? pathname : `${pathname}?z=${encodeStateToZ(payload)}`
       if (lastSerializedRef.current !== serialized) {
         lastSerializedRef.current = serialized
         router.replace(serialized, { scroll: false })
       }
-    }, 250)
+    }, 150) // Reduced from 250ms
     return () => clearTimeout(handle)
   }, [pathname, router, payload])
 
-  // 5) Derived filtered characters
+  // 5) Pre-index characters for faster filtering (OPTIMIZED)
+  type IndexedCharacter = CharacterLite & {
+    searchNames: string[]
+    buffSet: Set<string>
+    debuffSet: Set<string>
+  }
+
+  const indexedCharacters = useMemo<IndexedCharacter[]>(() => {
+    return characters.map(char => ({
+      ...char,
+      searchNames: getSearchableNames(char),
+      buffSet: new Set(char.buff || []),
+      debuffSet: new Set(char.debuff || []),
+    }))
+  }, [characters])
+
+  // 5.5) Derived filtered characters (OPTIMIZED: uses pre-indexed data)
   const filtered = useMemo(() => {
     const q = (query || '').toLowerCase()
-    return characters.filter(char => {
-      //if (!char.Fullname.toLowerCase().includes(q)) return false
-      if (!matchesAnyName(char, q)) return false
-      const elementMatch = elementFilter.length === 0 || elementFilter.includes(char.Element)
-      const classMatch = classFilter.length === 0 || classFilter.includes(char.Class)
-      const chainMatch = chainFilter.length === 0 || chainFilter.includes(char.Chain_Type || '')
-      const giftMatch = giftFilter.length === 0 || giftFilter.includes((char.gift || '').trim().toLowerCase())
-      const rarityMatch = rarityFilter.length === 0 || rarityFilter.includes(char.Rarity)
 
-      const hasBuffs = selectedBuffs.length > 0 ? (effectLogic === 'AND' ? selectedBuffs.every(b => charHasEffect(char, b, 'buff')) : selectedBuffs.some(b => charHasEffect(char, b, 'buff'))) : true
-      const hasDebuffs = selectedDebuffs.length > 0 ? (effectLogic === 'AND' ? selectedDebuffs.every(d => charHasEffect(char, d, 'debuff')) : selectedDebuffs.some(d => charHasEffect(char, d, 'debuff'))) : true
+    return indexedCharacters.filter(char => {
+      // Early return optimizations
+      if (q && !char.searchNames.some(name => name.includes(q))) return false
+      if (elementFilter.length && !elementFilter.includes(char.Element)) return false
+      if (classFilter.length && !classFilter.includes(char.Class)) return false
+      if (rarityFilter.length && !rarityFilter.includes(char.Rarity)) return false
+      if (chainFilter.length && !chainFilter.includes(char.Chain_Type || '')) return false
+      if (giftFilter.length && !giftFilter.includes((char.gift || '').trim().toLowerCase())) return false
+
+      // Effect matching
+      const hasBuffs = selectedBuffs.length > 0 ? (effectLogic === 'AND' ? selectedBuffs.every(b => charHasEffectFromSources(char, b, 'buff', sourceFilter)) : selectedBuffs.some(b => charHasEffectFromSources(char, b, 'buff', sourceFilter))) : true
+      const hasDebuffs = selectedDebuffs.length > 0 ? (effectLogic === 'AND' ? selectedDebuffs.every(d => charHasEffectFromSources(char, d, 'debuff', sourceFilter)) : selectedDebuffs.some(d => charHasEffectFromSources(char, d, 'debuff', sourceFilter))) : true
       const effectMatch = (selectedBuffs.length > 0 && selectedDebuffs.length > 0)
         ? (effectLogic === 'AND' ? hasBuffs && hasDebuffs : hasBuffs || hasDebuffs)
         : (selectedBuffs.length > 0 ? hasBuffs : selectedDebuffs.length > 0 ? hasDebuffs : true)
 
-      const roleMatch =
-        roleFilter.length === 0 ||
-        (char.role && roleFilter.includes(char.role as RoleSlug)) // char.role vient du JSON (minuscule)
+      if (!effectMatch) return false
 
-      const tagMatch =
-        tagFilter.length === 0
-          ? true
-          : tagLogic === 'AND'
-            ? tagFilter.every(t => char.tags?.includes(t))
-            : tagFilter.some(t => char.tags?.includes(t))
+      // Role matching
+      if (roleFilter.length && (!char.role || !roleFilter.includes(char.role as RoleSlug))) return false
 
+      // Tag matching
+      if (tagFilter.length) {
+        const tagMatch = tagLogic === 'AND'
+          ? tagFilter.every(t => char.tags?.includes(t))
+          : tagFilter.some(t => char.tags?.includes(t))
+        if (!tagMatch) return false
+      }
 
-      return elementMatch && classMatch && rarityMatch && chainMatch && effectMatch && giftMatch && roleMatch && tagMatch
+      return true
     })
-  }, [characters, query, elementFilter, classFilter, chainFilter, giftFilter, rarityFilter, selectedBuffs, selectedDebuffs, effectLogic, roleFilter, tagFilter, tagLogic])
+  }, [indexedCharacters, query, elementFilter, classFilter, chainFilter, giftFilter, rarityFilter, selectedBuffs, selectedDebuffs, effectLogic, roleFilter, tagFilter, tagLogic, sourceFilter])
 
   if (loading) return <div className="text-center mt-8 text-white">
     {t('characters.loading')}
@@ -584,7 +682,7 @@ export default function CharactersPage({ langue }: ClientProps) {
 
 
       {/* Rarities */}
-      <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('characters.filters.rarity')}</p>
+      <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('filters.rarity')}</p>
       <div className="flex justify-center gap-2 mb-1">
         {RARITIES_UI.map(r => {
           const active = (r.value === null && rarityFilter.length === 0) || (r.value !== null && rarityFilter.includes(r.value))
@@ -598,7 +696,7 @@ export default function CharactersPage({ langue }: ClientProps) {
               }}
               className="h-8 px-3"
             >
-              {r.value === null ? t('characters.common.all') : (
+              {r.value === null ? t('filters.common.all') : (
                 <div className="flex items-center -space-x-1">
                   {Array.from({ length: r.label as number }).map((_, i) => (
                     <Image key={i} src="/images/ui/star.webp" alt="star" width={16} height={16} style={{ width: 16, height: 16 }} />
@@ -614,7 +712,7 @@ export default function CharactersPage({ langue }: ClientProps) {
       <div className="mx-auto max-w-[820px] grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-x-6 place-items-center">
         {/* Elements */}
         <div className="w-full flex flex-col items-center">
-          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('characters.filters.elements')}</p>
+          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('filters.elements')}</p>
           <div className="flex gap-2 justify-center">
             {ELEMENTS_UI.map(el => (
               <FilterPill
@@ -626,7 +724,7 @@ export default function CharactersPage({ langue }: ClientProps) {
               >
                 {el.value
                   ? <span className="scale-125 inline-block"><ElementIcon element={el.value as ElementType} /></span>
-                  : <span className="text-[11px]">{t('characters.common.all')}</span>}
+                  : <span className="text-[11px]">{t('filters.common.all')}</span>}
               </FilterPill>
             ))}
           </div>
@@ -634,7 +732,7 @@ export default function CharactersPage({ langue }: ClientProps) {
 
         {/* Classes */}
         <div className="w-full flex flex-col items-center">
-          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('characters.filters.classes')}</p>
+          <p className="text-xs uppercase tracking-wide text-slate-300 text-center mb-1">{t('filters.classes')}</p>
           <div className="flex gap-2 justify-center">
             {CLASSES_UI.map(cl => (
               <FilterPill
@@ -646,7 +744,7 @@ export default function CharactersPage({ langue }: ClientProps) {
               >
                 {cl.value
                   ? <span className="scale-150 inline-block"><ClassIcon className={cl.name as ClassType} /></span>
-                  : <span className="text-[11px]">{t('characters.common.all')}</span>}
+                  : <span className="text-[11px]">{t('filters.common.all')}</span>}
               </FilterPill>
             ))}
           </div>
@@ -738,6 +836,27 @@ export default function CharactersPage({ langue }: ClientProps) {
               <div className="inline-grid grid-cols-2 rounded bg-slate-700 text-xs">
                 <button className={`px-2 py-1 ${effectLogic === 'AND' ? 'bg-cyan-600' : ''}`} onClick={() => setEffectLogic('AND')}>{t('characters.filters.and')}</button>
                 <button className={`px-2 py-1 ${effectLogic === 'OR' ? 'bg-cyan-600' : ''}`} onClick={() => setEffectLogic('OR')}>{t('characters.filters.or')}</button>
+              </div>
+            </div>
+
+            {/* Source Filter Toggles */}
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-xs text-slate-300">{t('characters.filters.sources.filterBySource')}</p>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {SOURCE_VALUES.map(source => (
+                  <FilterPill
+                    key={source.key}
+                    active={sourceFilter.includes(source.key)}
+                    onClick={() => setSourceFilter(prev =>
+                      prev.includes(source.key)
+                        ? prev.filter(s => s !== source.key)
+                        : [...prev, source.key]
+                    )}
+                    className="text-xs"
+                  >
+                    {t(source.labelKey)}
+                  </FilterPill>
+                ))}
               </div>
             </div>
 
@@ -893,6 +1012,7 @@ export default function CharactersPage({ langue }: ClientProps) {
               setTagFilter([])
               setTagLogic('OR')
               setShowUniqueEffects(false);
+              setSourceFilter([]);  // NEW: reset source filter
 
               // ⬇️ collapse des panneaux
               setShowFilters(false);     // ferme Buffs/Debuffs
@@ -925,7 +1045,6 @@ export default function CharactersPage({ langue }: ClientProps) {
                 key={char.ID}
                 className="relative w-[120px] h-[231px] text-center shadow hover:shadow-lg transition overflow-hidden rounded"
               >
-
                 {badge && (
                   <Image
                     src={badge.src}
@@ -933,7 +1052,6 @@ export default function CharactersPage({ langue }: ClientProps) {
                     width={75}
                     height={30}
                     className="absolute top-1 left-1 z-30 object-contain"
-                  // pas de width:auto ici → taille 75×30 stricte, ratio préservé par l'image
                   />
                 )}
 

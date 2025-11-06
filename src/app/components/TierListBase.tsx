@@ -12,6 +12,7 @@ import { ClassIcon } from '@/app/components/ClassIcon'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import EeDisplayMini from '@/app/components/eeDisplayMini'
 import type { Character, ExclusiveEquipment } from '@/types/character'
+import type { CharacterLite } from '@/types/types'
 import type { ClassType as classtipe, ElementType } from '@/types/enums'
 import type { LocalizedFieldNames } from '@/types/common'
 import charactersData from '@/data/_allCharacters.json'
@@ -22,8 +23,8 @@ import { l } from '@/lib/localize'
 /* -------------------------------- Types -------------------------------- */
 
 type CharacterDisplay = Pick<
-    Character,
-    'ID' | LocalizedFieldNames<Character, 'Fullname'> | 'Rarity' | 'Class' | 'Element' | 'rank' | 'rank_pvp' | 'role' | 'limited' | 'tags'
+    CharacterLite,
+    'ID' | LocalizedFieldNames<CharacterLite, 'Fullname'> | 'Rarity' | 'Class' | 'Element' | 'rank' | 'rank_pvp' | 'role' | 'limited' | 'tags'
 >
 
 type GroupedCharacters = Record<string, CharacterDisplay[]>
@@ -55,7 +56,7 @@ type RecruitBadge = {
 /* ------------------------------ Data helpers ---------------------------- */
 
 const characterMap = Object.fromEntries(
-    (charactersData as Character[]).map((c) => [toKebabCase(c.Fullname), c])
+    (charactersData as CharacterLite[]).map((c) => [toKebabCase(c.Fullname), c])
 )
 
 function norm(s: string) {
@@ -187,10 +188,10 @@ export default function TierListBase({
 
     // Tabs i18n (dans le composant pour récupérer t())
     const TABS: readonly TabItem[] = [
-        { label: t('tier.ui.tab.all') ?? 'All', value: 'all', icon: '/images/ui/all.webp' },
-        { label: t('tier.ui.tab.dps') ?? 'DPS', value: 'dps', icon: '/images/ui/dps.webp' },
-        { label: t('tier.ui.tab.support') ?? 'Support', value: 'support', icon: '/images/ui/support.webp' },
-        { label: t('tier.ui.tab.sustain') ?? 'Sustain', value: 'sustain', icon: '/images/ui/sustain.webp' },
+        { label: t('filters.common.all'), value: 'all', icon: '/images/ui/all.webp' },
+        { label: t('filters.roles.dps'), value: 'dps', icon: '/images/ui/dps.webp' },
+        { label: t('filters.roles.support'), value: 'support', icon: '/images/ui/support.webp' },
+        { label: t('filters.roles.sustain'), value: 'sustain', icon: '/images/ui/sustain.webp' },
     ] as const
 
     // initial tab from URL
@@ -319,7 +320,7 @@ export default function TierListBase({
                 <Link href={`/tools`} className="relative block h-full w-full">
                     <Image
                         src="/images/ui/CM_TopMenu_Back.webp"
-                        alt={t('tier.ui.alt.back') ?? 'Back'}
+                        alt={t('back') ?? 'Back'}
                         fill
                         sizes="32px"
                         className="opacity-80 hover:opacity-100 transition-opacity"
@@ -390,7 +391,7 @@ export default function TierListBase({
                             }
                         >
                             {r === null ? (
-                                <span className="text-white text-sm font-bold">{t('tier.ui.filter.all') ?? 'All'}</span>
+                                <span className="text-white text-sm font-bold">{t('filters.common.all') ?? 'All'}</span>
                             ) : (
                                 <div className="flex items-center -space-x-1">
                                     {Array(r)
@@ -438,13 +439,13 @@ export default function TierListBase({
                             }
                             aria-label={
                                 el === 'All'
-                                    ? (t('tier.ui.filter.all') ?? 'All')
-                                    : `${t('tier.ui.filter.element') ?? 'Element'}: ${el}`
+                                    ? (t('filters.common.all') ?? 'All')
+                                    : `${t('filters.element') ?? 'Element'}: ${el}`
                             }
                         >
                             {el === 'All' ? (
                                 <span className="text-white text-sm font-bold">
-                                    {t('tier.ui.filter.all') ?? 'All'}
+                                    {t('filters.common.all') ?? 'All'}
                                 </span>
                             ) : (
                                 <ElementIcon element={el as ElementType} />
@@ -479,13 +480,13 @@ export default function TierListBase({
                             }
                             aria-label={
                                 cl === 'All'
-                                    ? (t('tier.ui.filter.all') ?? 'All')
-                                    : `${t('tier.ui.filter.class') ?? 'Class'}: ${cl}`
+                                    ? (t('filters.common.all') ?? 'All')
+                                    : `${t('filters.class') ?? 'Class'}: ${cl}`
                             }
                         >
                             {cl === 'All' ? (
                                 <span className="text-white text-sm font-bold">
-                                    {t('tier.ui.filter.all') ?? 'All'}
+                                    {t('filters.common.all') ?? 'All'}
                                 </span>
                             ) : (
                                 <ClassIcon className={cl as classtipe} />
@@ -526,7 +527,7 @@ export default function TierListBase({
                                     <div className="relative w-[100px] h-[80px]">
                                         <Image
                                             src={`/images/ui/text_rank_${rank}.png`}
-                                            alt={t('tier.ui.alt.rank', { rank }) ?? `Rank ${rank}`}
+                                            alt={t('tier.ui.alt.rank', { rank })}
                                             fill
                                             className="object-contain"
                                             sizes="100px"
@@ -535,7 +536,7 @@ export default function TierListBase({
                                     <div className={`relative w-[30px] h-[80px] ${rank === 'A' ? 'mb-1' : ''}`}>
                                         <Image
                                             src={`/images/ui/IG_Event_Rank_${rank}.png`}
-                                            alt={t('tier.ui.alt.letter', { rank }) ?? `Letter ${rank}`}
+                                            alt={t('tier.ui.alt.letter', { rank })}
                                             fill
                                             className="object-contain"
                                             sizes="30px"
@@ -544,14 +545,14 @@ export default function TierListBase({
                                 </div>
 
                                 <div className="flex flex-wrap justify-center gap-6">
-                                    {(entries as (Character | [string, ExclusiveEquipment])[])
+                                    {(entries as (CharacterLite | [string, ExclusiveEquipment])[])
                                         .map((item, index) => {
-                                            let char: Character | undefined
+                                            let char: CharacterLite | undefined
                                             let slug: string | undefined
                                             let ee: ExclusiveEquipment | undefined
 
                                             if (mode === 'pve' || mode === 'pvp') {
-                                                char = item as Character
+                                                char = item as CharacterLite
                                                 slug = toKebabCase(char.Fullname)
                                             } else {
                                                 const entry = item as [string, ExclusiveEquipment]

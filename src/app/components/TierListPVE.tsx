@@ -210,10 +210,10 @@ export default function TierListBase({
 
     // Tabs i18n (dans le composant pour récupérer t())
     const TABS: readonly TabItem[] = [
-        { label: t('tier.ui.tab.all') ?? 'All', value: 'all', icon: '/images/ui/all.webp' },
-        { label: t('tier.ui.tab.dps') ?? 'DPS', value: 'dps', icon: '/images/ui/dps.webp' },
-        { label: t('tier.ui.tab.support') ?? 'Support', value: 'support', icon: '/images/ui/support.webp' },
-        { label: t('tier.ui.tab.sustain') ?? 'Sustain', value: 'sustain', icon: '/images/ui/sustain.webp' },
+        { label: t('filters.common.all'), value: 'all', icon: '/images/ui/all.webp' },
+        { label: t('filters.roles.dps'), value: 'dps', icon: '/images/ui/dps.webp' },
+        { label: t('filters.roles.support'), value: 'support', icon: '/images/ui/support.webp' },
+        { label: t('filters.roles.sustain'), value: 'sustain', icon: '/images/ui/sustain.webp' },
     ] as const
 
     // initial tab from URL
@@ -325,7 +325,7 @@ export default function TierListBase({
                 <Link href={`/tools`} className="relative block h-full w-full">
                     <Image
                         src="/images/ui/CM_TopMenu_Back.webp"
-                        alt={t('tier.ui.alt.back') ?? 'Back'}
+                        alt={t('back') ?? 'Back'}
                         fill
                         sizes="32px"
                         className="opacity-80 hover:opacity-100 transition-opacity"
@@ -354,11 +354,11 @@ export default function TierListBase({
                     className="p-2 rounded-lg border border-gray-600 bg-gray-800 text-white placeholder-gray-400 w-full max-w-md"
                     aria-label={t('tier.ui.search.placeholder') ?? 'Search'}
                 />
-            </div>           
+            </div>
 
             {/* Rarities */}
             <div className="flex flex-col items-center gap-1 mb-6">
-                <p className="text-xs uppercase tracking-wide text-slate-300">{t('characters.filters.rarity')}</p>
+                <p className="text-xs uppercase tracking-wide text-slate-300">{t('filters.rarity')}</p>
                 <div className="flex gap-2">
                     <button
                         onClick={() => setRarityFilter([])}
@@ -367,10 +367,10 @@ export default function TierListBase({
                             : 'bg-gray-700'
                             } hover:bg-cyan-600`}
                         aria-pressed={rarityFilter.length === 0}
-                        aria-label={t('tier.ui.filter.all') ?? 'All'}
+                        aria-label={t('filters.common.all') ?? 'All'}
                     >
                         <span className="text-white text-sm font-bold">
-                            {t('tier.ui.filter.all') ?? 'All'}
+                            {t('filters.common.all') ?? 'All'}
                         </span>
                     </button>
                     {RARITIES.map((rarity) => (
@@ -388,7 +388,7 @@ export default function TierListBase({
                                 : 'bg-gray-700'
                                 } hover:bg-cyan-600`}
                             aria-pressed={rarityFilter.includes(rarity)}
-                            aria-label={`${t('tier.ui.filter.rarity') ?? 'Rarity'}: ${rarity}`}
+                            aria-label={`${t('filters.rarity') ?? 'Rarity'}: ${rarity}`}
                         >
                             <div className="flex items-center -space-x-1">
                                 {Array(rarity)
@@ -412,7 +412,7 @@ export default function TierListBase({
             <div className="flex justify-center gap-8 mb-6 flex-wrap">
                 {/* Elements */}
                 <div className="flex flex-col items-center gap-1">
-                    <p className="text-xs uppercase tracking-wide text-slate-300">{t('characters.filters.elements')}</p>
+                    <p className="text-xs uppercase tracking-wide text-slate-300">{t('filters.elements')}</p>
                     <div className="flex gap-2">
                         {ELEMENTS.map((el) => (
                             <button
@@ -438,13 +438,13 @@ export default function TierListBase({
                                 }
                                 aria-label={
                                     el === 'All'
-                                        ? (t('tier.ui.filter.all') ?? 'All')
-                                        : `${t('tier.ui.filter.element') ?? 'Element'}: ${el}`
+                                        ? (t('filters.common.all') ?? 'All')
+                                        : `${t('filters.elements') ?? 'Element'}: ${el}`
                                 }
                             >
                                 {el === 'All' ? (
                                     <span className="text-white text-sm font-bold">
-                                        {t('tier.ui.filter.all') ?? 'All'}
+                                        {t('filters.common.all') ?? 'All'}
                                     </span>
                                 ) : (
                                     <ElementIcon element={el as ElementType} />
@@ -456,7 +456,7 @@ export default function TierListBase({
 
                 {/* Classes */}
                 <div className="flex flex-col items-center gap-1">
-                    <p className="text-xs uppercase tracking-wide text-slate-300">{t('characters.filters.classes')}</p>
+                    <p className="text-xs uppercase tracking-wide text-slate-300">{t('filters.classes')}</p>
                     <div className="flex gap-2">
                         {CLASSES.map((cl) => (
                             <button
@@ -482,13 +482,13 @@ export default function TierListBase({
                                 }
                                 aria-label={
                                     cl === 'All'
-                                        ? (t('tier.ui.filter.all') ?? 'All')
-                                        : `${t('tier.ui.filter.class') ?? 'Class'}: ${cl}`
+                                        ? (t('filters.common.all') ?? 'All')
+                                        : `${t('filters.classes') ?? 'Class'}: ${cl}`
                                 }
                             >
                                 {cl === 'All' ? (
                                     <span className="text-white text-sm font-bold">
-                                        {t('tier.ui.filter.all') ?? 'All'}
+                                        {t('filters.common.all') ?? 'All'}
                                     </span>
                                 ) : (
                                     <ClassIcon className={cl as classtipe} />

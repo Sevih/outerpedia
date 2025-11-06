@@ -164,8 +164,7 @@ export default async function CouponsPage() {
             <p
               className="text-xs text-gray-500 mt-2"
               dangerouslySetInnerHTML={{
-                __html: t('coupon.validity', { start, end }) ??
-                  `Valid from <time>${start}</time> to <time>${end}</time>`,
+                __html: t('coupon.validity', { start, end }),
               }}
             />
 

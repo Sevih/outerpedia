@@ -44,6 +44,17 @@ body>* {
   z-index: 1;
 }
 
+/* Portal root for modals - must be above everything */
+#portal-root {
+  position: relative;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+#portal-root > * {
+  pointer-events: auto;
+}
+
 /* Corriger certains rendus PNG transparents */
 img {
   image-rendering: auto;

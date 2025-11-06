@@ -57,8 +57,8 @@ export default async function Page() {
         json={[
           websiteLd(domain),
           breadcrumbLd(domain, {
-            home: t('nav.home') ?? 'Home',
-            current: t('gearUsage.meta.breadcrumb') ?? 'Gear Usage Stats',
+            home: t('nav.home'),
+            current: t('gearUsage.meta.breadcrumb'),
           }),
         ]}
       />

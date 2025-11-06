@@ -28,7 +28,17 @@ function formatICU(template: string, values: TValues) {
 function makeT<T extends Messages>(dict: T) {
     const base: Messages = dict
     const t = ((key: keyof T | string, values?: TValues) => {
-        const template = base[String(key)] ?? String(key)
+        const template = base[String(key)]
+
+        // En développement, on crash si la clé n'existe pas
+        if (template === undefined) {
+            if (process.env.NODE_ENV === 'development') {
+                throw new Error(`[i18n] Missing translation key: "${String(key)}"`)
+            }
+            // En production, on fallback sur la clé (pour éviter de casser le site)
+            return String(key)
+        }
+
         return values ? formatICU(template, values) : template
     }) as {
         <K extends keyof T>(key: K): string
