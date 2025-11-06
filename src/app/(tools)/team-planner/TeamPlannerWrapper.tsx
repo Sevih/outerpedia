@@ -285,6 +285,10 @@ export default function TeamPlannerWrapper() {
         onSelect={handleSelectCharacter}
         characters={characters}
         selectedPosition={selectedPosition || 1}
+        excludeCharacterIds={team
+          .filter(slot => slot.characterId !== null && slot.position !== selectedPosition)
+          .map(slot => slot.characterId as string)
+        }
       />
     </div>
   )

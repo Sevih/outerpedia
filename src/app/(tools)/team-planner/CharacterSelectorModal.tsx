@@ -12,6 +12,7 @@ interface CharacterSelectorModalProps {
   onSelect: (characterId: string, characterName: string) => void
   characters: CharacterLite[]
   selectedPosition: number
+  excludeCharacterIds?: string[]
 }
 
 export default function CharacterSelectorModal({
@@ -20,6 +21,7 @@ export default function CharacterSelectorModal({
   onSelect,
   characters,
   selectedPosition,
+  excludeCharacterIds = [],
 }: CharacterSelectorModalProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const [mounted, setMounted] = useState(false)
@@ -45,14 +47,20 @@ export default function CharacterSelectorModal({
   }, [isOpen, onClose])
 
   const filteredCharacters = useMemo(() => {
-    if (!searchTerm) return characters
+    // First, exclude characters already in the team
+    const availableCharacters = characters.filter(
+      char => !excludeCharacterIds.includes(char.ID)
+    )
+
+    // Then apply search filter if there's a search term
+    if (!searchTerm) return availableCharacters
 
     const term = searchTerm.toLowerCase()
-    return characters.filter(char =>
+    return availableCharacters.filter(char =>
       char.Fullname.toLowerCase().includes(term) ||
       char.ID.toLowerCase().includes(term)
     )
-  }, [characters, searchTerm])
+  }, [characters, searchTerm, excludeCharacterIds])
 
   if (!isOpen || !mounted || !portalElement) return null
 
