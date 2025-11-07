@@ -1,5 +1,5 @@
 // app/(tools)/team-planner/bossPresets.ts
-import type { BossPreset } from './types'
+import type { BossPreset } from '@/types/team-planner'
 
 /**
  * Presets pour différents boss et contenus du jeu

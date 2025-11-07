@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TenantKey } from '@/tenants/config'
 import { AnimatedTabs } from "@/app/components/AnimatedTabs"
+//TODO Utiliser les enums
 
 type GearItem = {
     name: string

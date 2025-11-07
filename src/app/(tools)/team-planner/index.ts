@@ -16,7 +16,7 @@ export type {
   ValidationWarning,
   ValidationSuggestion,
   RuleMetadata,
-} from './types'
+} from '@/types/team-planner'
 
 // Configuration des règles
 export {

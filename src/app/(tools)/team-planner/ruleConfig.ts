@@ -1,5 +1,5 @@
 // app/(tools)/team-planner/ruleConfig.ts
-import type { RuleMetadata, RuleType } from './types'
+import type { RuleMetadata, RuleType } from '@/types/team-planner'
 
 /**
  * Configuration et métadonnées de toutes les règles disponibles

@@ -19,7 +19,7 @@ import charactersData from '@/data/_allCharacters.json'
 import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
-
+//TODO Utiliser les enums
 /* -------------------------------- Types -------------------------------- */
 
 type CharacterDisplay = Pick<

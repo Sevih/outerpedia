@@ -9,6 +9,7 @@ import talisman from '@/data/talisman.json'
 import weapon from '@/data/weapon.json'
 import amulet from '@/data/amulet.json'
 import sets from '@/data/sets.json'
+//TODO Utiliser les enums
 
 import type { ExclusiveEquipment, Talisman, Weapon, Accessory, ArmorSet } from '@/types/equipment'
 

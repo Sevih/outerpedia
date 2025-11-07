@@ -11,7 +11,7 @@ import Image from 'next/image'
 import { toKebabCase } from '@/utils/formatText';
 import GearSearchResult from '@/app/components/GearSearchResult';
 import { ResultEntry } from '@/types/gear-solver';
-
+//TODO Utiliser les enums
 
 
 type GearType = 'weapon' | 'amulet' | 'set';

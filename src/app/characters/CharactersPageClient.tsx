@@ -18,6 +18,8 @@ import { getAvailableLanguages } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
 
+//TODO : Utiliser les enums
+
 // Type for buff/debuff data structure
 type EffectFullData = {
   name: string

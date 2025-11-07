@@ -14,6 +14,7 @@ import GuidesRaw from '@/data/guides/guides-ref.json'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
 import type { Localized } from '@/types/common'
+//TODO Utiliser les enums
 
 const GUIDES = GuidesRaw as unknown as Record<string, Guide>
 // Using a flexible character type that allows for missing skills property
