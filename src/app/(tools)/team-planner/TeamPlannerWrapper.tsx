@@ -50,15 +50,18 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
 
   // Charger l'équipe depuis l'URL au montage
   useEffect(() => {
-    const teamParam = searchParams.get('team')
-    if (teamParam) {
-      const decoded = decodeTeamFromURL(teamParam)
-      if (decoded) {
-        setTeam(decoded.team)
-        setChainOrder(decoded.chainOrder)
-        setNotes(decoded.notes)
+    const loadTeam = async () => {
+      const teamParam = searchParams.get('team')
+      if (teamParam) {
+        const decoded = await decodeTeamFromURL(teamParam)
+        if (decoded) {
+          setTeam(decoded.team)
+          setChainOrder(decoded.chainOrder)
+          setNotes(decoded.notes)
+        }
       }
     }
+    loadTeam()
   }, [searchParams])
 
   const handleOpenModal = (position: number) => {
@@ -113,7 +116,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     if (!hasAnyCharacter) return
 
     // Créer l'URL avec les notes incluses, pointant vers la page view-only
-    const encoded = encodeTeamToURL(team, chainOrder, notes)
+    const encoded = await encodeTeamToURL(team, chainOrder, notes)
     const baseUrl = window.location.origin + '/team-planner/view'
     const shareUrl = `${baseUrl}?team=${encoded}`
 
@@ -426,7 +429,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
           <div className="mt-8 pt-6 border-t border-gray-700">
             <h3 className="text-lg sm:text-xl font-bold mb-4 text-white">Notes</h3>
             <div
-              className="prose prose-invert prose-sm sm:prose-base max-w-none text-gray-300"
+              className="prose prose-invert prose-sm sm:prose-base max-w-none text-gray-300 [&_a]:text-red-400 [&_a:hover]:text-red-200 [&_a]:underline [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-1"
               dangerouslySetInnerHTML={{ __html: formattedNotes }}
             />
           </div>

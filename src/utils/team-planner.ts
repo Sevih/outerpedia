@@ -49,20 +49,86 @@ export function calculateCPPerTurn(elementCount: number): number {
 
 /**
  * Encode l'état de l'équipe dans une chaîne URL-safe
- * Format: characterId1,characterId2,characterId3,characterId4|chainOrder1,chainOrder2,chainOrder3,chainOrder4|base64Notes
+ * Utilise toujours l'API shortener pour générer un ID court
+ * Format: s:shortId
  */
-export function encodeTeamToURL(team: TeamSlot[], chainOrder: number[], notes: string): string {
+export async function encodeTeamToURL(team: TeamSlot[], chainOrder: number[], notes: string): Promise<string> {
   const teamIds = team.map(slot => slot.characterId || '').join(',')
   const chainOrderStr = chainOrder.join(',')
-  const encodedNotes = notes ? btoa(encodeURIComponent(notes)) : ''
-  return `${teamIds}|${chainOrderStr}|${encodedNotes}`
+
+  // Always use API shortener
+  try {
+    const response = await fetch('/api/team/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ team: teamIds, chainOrder: chainOrderStr, notes })
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to save team')
+    }
+
+    const { id } = await response.json()
+    return `s:${id}`
+  } catch (error) {
+    console.error('Error saving team to API:', error)
+    // Fallback to inline encoding if API fails
+    const encodedNotes = notes ? btoa(encodeURIComponent(notes)) : ''
+    return `${teamIds}|${chainOrderStr}|${encodedNotes}`
+  }
 }
 
 /**
  * Decode l'état de l'équipe depuis une chaîne URL
+ * Supporte deux formats:
+ * - Format court: teamIds|chainOrder|base64Notes
+ * - Format long (shortener): s:shortId
  */
-export function decodeTeamFromURL(encoded: string): EncodedTeamData | null {
+export async function decodeTeamFromURL(encoded: string): Promise<EncodedTeamData | null> {
   try {
+    // Check if it's a short ID format (s:xxxxx)
+    if (encoded.startsWith('s:')) {
+      const shortId = encoded.substring(2)
+
+      try {
+        const response = await fetch(`/api/team/${shortId}`)
+
+        if (!response.ok) {
+          console.error('Failed to load team from API')
+          return null
+        }
+
+        const data = await response.json()
+        const { team: teamIds, chainOrder: chainOrderStr, notes } = data
+
+        // Parse team IDs
+        const characterIds = teamIds.split(',')
+        if (characterIds.length !== 4) return null
+
+        // Parse chain order
+        const chainOrderArr = chainOrderStr.split(',').map(Number)
+        if (chainOrderArr.length !== 4) return null
+        if (chainOrderArr.some((n: number) => isNaN(n) || n < 1 || n > 4)) return null
+
+        // Build team
+        const team: TeamSlot[] = characterIds.map((id: string, index: number) => {
+          const characterId = id || null
+          const character = characterId ? characters.find(c => c.ID === characterId) : null
+          return {
+            position: index + 1,
+            characterId,
+            characterName: character?.Fullname || null
+          }
+        })
+
+        return { team, chainOrder: chainOrderArr, notes: notes || '' }
+      } catch (error) {
+        console.error('Error loading team from API:', error)
+        return null
+      }
+    }
+
+    // Original inline format
     const parts = encoded.split('|')
     const [teamPart, chainPart, notesPart] = parts
 
