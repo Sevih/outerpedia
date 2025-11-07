@@ -1,6 +1,39 @@
 {
   "en": [
     {
+      "slug": "live-en-250",
+      "title": "[Notice] 11/5 (Wed) Sequential Rollout Patch Notice",
+      "date": "2025.11.05",
+      "category": "notice",
+      "excerpt": ". We will carry out a patch for fixing issues in the game. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your un...",
+      "uid": "250",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=250&mod=document",
+      "views": 36,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-254",
+      "title": "[Notice] Regarding Reward Board Points Not Given for Clearing “Never Stop the Soulslayers (Hard)\"",
+      "date": "2025.11.05",
+      "category": "notice",
+      "excerpt": "We would like to inform you of an issue that has been identified in the ongoing \\[2.5-Year Anniversary Reward Board\\] event. \\[Known Issue\\] \\- Reward Board Points are not granted when clearing the Ha...",
+      "uid": "254",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=254&mod=document",
+      "views": 36,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-257",
+      "title": "[Notice] 11/5(Wed) Account Suspension Notice",
+      "date": "2025.11.05",
+      "category": "notice",
+      "excerpt": "We have permanently banned players who were found to have violated our Operations Policy by using unauthorized programs or modifying the game client. Please refer to the details below. ◈ Unauthorized ...",
+      "uid": "257",
+      "url": "https://vagames.co.kr/noticewrite/notice_en/?uid=257&mod=document",
+      "views": 36,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-223",
       "title": "[Issues] Known Issues (11/04 Maintenance) (Nov 5, 06:40 Added)",
       "date": "2025.11.04",
@@ -11673,6 +11706,39 @@
     }
   ],
   "jp": [
+    {
+      "slug": "live-jp-252",
+      "title": "【お知らせ】データ更新のお知らせ(11/5)",
+      "date": "2025.11.05",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG 『アウタープレーン』 いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 11/5(水)、データ更新作業を実施いたします。 一時的に接続が不安定になる場合がございます。 より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈データ更新...",
+      "uid": "252",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=252&mod=document",
+      "views": 21,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-255",
+      "title": "【フェス記念！リワードボード】における不具合および補填のご案内",
+      "date": "2025.11.05",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、 誠にありがとうございます。『アウタープレーン』運営チームです。 現在開催中の【フェス記念！リワードボード】のポイント獲得対象に【霊斬士を止めるな!】イベントダンジョン・ハード難易度が含まれてないの不具合を確認いたしましたのでご案内申し上げます。 【確認された現象】 ・イベントダンジョン「霊斬士を止めるな！」ハード難易度でリワードボードポイントが獲得...",
+      "uid": "255",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=255&mod=document",
+      "views": 19,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-258",
+      "title": "【おしらせ】 11/5(水) 不正利用の対応について",
+      "date": "2025.11.05",
+      "category": "notice",
+      "excerpt": "いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。 「アウタープレーン」運営チームです。 不正プログラムの使用、不具合の悪用など 運営ポリシーに違反する行為が確認された不正利用プレイヤーに対し、 アカウント利用制限措置を行いました。 詳しくは下記内容をご確認ください。 ◈ 不正利用プレイヤーに対するアカウント利用制限措置のご案内 1\\. 不正利用対応 : ゲーム内における不...",
+      "uid": "258",
+      "url": "https://vagames.co.kr/noticewrite/notice_jp/?uid=258&mod=document",
+      "views": 13,
+      "lang": "jp"
+    },
     {
       "slug": "live-jp-222",
       "title": "【不具合】現在確認されている不具合について (11/04)",
@@ -23347,6 +23413,39 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-251",
+      "title": "[공지] 11월 5일 (수) 무점검 패치 진행 안내",
+      "date": "2025.11.05",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 \\- 11월 5일 (수) 17:00 ~ 17:30 (KST) ※ ...",
+      "uid": "251",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=251&mod=document",
+      "views": 11,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-253",
+      "title": "[공지]  이벤트 던전 '영참사를 멈추면 안돼' 하드 스테이지 클리어 시 아우터 리워드 포인트가 지급되지 않는 현상 관련 안내",
+      "date": "2025.11.05",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 현재 진행 중인 \\[2.5주년 리워드 보드\\] 관련하여 일부 현상이 확인되어 안내드립니다. \\[확인된 현상\\] \\- '영참사를 멈추면 안돼' 이벤트 던전 하드에서 아우터 리워드 포인트가 지급되지 않는 현상 \\[보상 안내\\] 위 현상에 따라 아래 보상이 지급될 예정입니다. \\[보상 내용\\] \\-...",
+      "uid": "253",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=253&mod=document",
+      "views": 17,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-256",
+      "title": "[공지] 11/5(수) 불량 이용자 제재 안내",
+      "date": "2025.11.05",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요, GM 아메입니다. 아우터플레인에서 비인가 프로그램 사용, 버그 악용 등 운영 정책에 위반되는 행위를 한 불량 이용자에 대해 계정 제재가 진행되었습니다. 자세한 내용은 아래를 확인해 주시기 바랍니다. ◈ 불량 이용자 제재 안내 1\\. 제재 사유 : 게임 내 비정상적인 행위 2\\. 제재 내역 : 영구 제한 ※ 명단...",
+      "uid": "256",
+      "url": "https://vagames.co.kr/noticewrite/notice_kr/?uid=256&mod=document",
+      "views": 13,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-221",
       "title": "[이슈] 11/04 업데이트 이후 확인된 현상 (11/5 15:40 추가)",
