@@ -7,12 +7,12 @@ import type { EffectCategory, GroupedEffects, EffectData } from '@/types/team-pl
 interface EffectFilterDropdownProps {
   isOpen: boolean
   groupedEffects: GroupedEffects
-  selectedEffects: string[]
+  selectedEffects: {name: string; type: 'buff' | 'debuff'}[]
   effectCategories: {
     buff: EffectCategory
     debuff: EffectCategory
   }
-  onToggleEffect: (effectName: string) => void
+  onToggleEffect: (effectName: string, effectType: 'buff' | 'debuff') => void
   onClose: () => void
 }
 
@@ -42,13 +42,13 @@ export default function EffectFilterDropdown({
                   {categoryLabel}
                 </div>
                 {effects.map((effect: EffectData) => {
-                  const isSelected = selectedEffects.includes(effect.name)
+                  const isSelected = selectedEffects.some(e => e.name === effect.name && e.type === 'buff')
                   return (
                     <button
                       key={effect.name}
                       type="button"
                       onClick={() => {
-                        onToggleEffect(effect.name)
+                        onToggleEffect(effect.name, 'buff')
                         onClose()
                       }}
                       disabled={isSelected}
@@ -94,13 +94,13 @@ export default function EffectFilterDropdown({
                   {categoryLabel}
                 </div>
                 {effects.map((effect: EffectData) => {
-                  const isSelected = selectedEffects.includes(effect.name)
+                  const isSelected = selectedEffects.some(e => e.name === effect.name && e.type === 'debuff')
                   return (
                     <button
                       key={effect.name}
                       type="button"
                       onClick={() => {
-                        onToggleEffect(effect.name)
+                        onToggleEffect(effect.name, 'debuff')
                         onClose()
                       }}
                       disabled={isSelected}

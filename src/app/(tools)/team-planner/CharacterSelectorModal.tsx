@@ -49,7 +49,7 @@ export default function CharacterSelectorModal({
   const [selectedClasses, setSelectedClasses] = useState<string[]>([])
   const [selectedRarities, setSelectedRarities] = useState<number[]>([])
   const [selectedChainTypes, setSelectedChainTypes] = useState<string[]>([])
-  const [selectedEffects, setSelectedEffects] = useState<string[]>([])
+  const [selectedEffects, setSelectedEffects] = useState<{name: string; type: 'buff' | 'debuff'}[]>([])
   const [selectedSources, setSelectedSources] = useState<SkillKey[]>([])
   const [effectsLogic, setEffectsLogic] = useState<EffectsLogic>('OR')
   const [isFiltersExpanded, setIsFiltersExpanded] = useState(true)
@@ -127,11 +127,12 @@ export default function CharacterSelectorModal({
   const charHasEffectFromSources = useCallback((
     char: CharacterLite,
     filterEffect: string,
+    effectType: 'buff' | 'debuff',
     sources: SkillKey[]
   ): boolean => {
-    // If no sources specified, check all effects
+    // If no sources specified, check only the correct effect type
     if (sources.length === 0) {
-      const charEffects = [...(char.buff || []), ...(char.debuff || [])]
+      const charEffects = effectType === 'buff' ? (char.buff || []) : (char.debuff || [])
       return charHasEffect(charEffects, filterEffect)
     }
 
@@ -141,9 +142,9 @@ export default function CharacterSelectorModal({
     }
 
     for (const source of sources) {
-      const sourceBuffs = char.effectsBySource[source]?.buff || []
-      const sourceDebuffs = char.effectsBySource[source]?.debuff || []
-      const sourceEffects = [...sourceBuffs, ...sourceDebuffs]
+      const sourceEffects = effectType === 'buff'
+        ? (char.effectsBySource[source]?.buff || [])
+        : (char.effectsBySource[source]?.debuff || [])
 
       if (charHasEffect(sourceEffects, filterEffect)) {
         return true
@@ -194,12 +195,12 @@ export default function CharacterSelectorModal({
         if (effectsLogic === 'OR') {
           // OR logic: Character must have at least ONE of the selected effects from the specified sources
           return selectedEffects.some(effect =>
-            charHasEffectFromSources(char, effect, selectedSources)
+            charHasEffectFromSources(char, effect.name, effect.type, selectedSources)
           )
         } else {
           // AND logic: Character must have ALL selected effects from the specified sources
           return selectedEffects.every(effect =>
-            charHasEffectFromSources(char, effect, selectedSources)
+            charHasEffectFromSources(char, effect.name, effect.type, selectedSources)
           )
         }
       })
@@ -222,65 +223,71 @@ export default function CharacterSelectorModal({
   const groupedEffects = useMemo(() => {
     type EffectMapEntry = { name: string; label: string; icon: string; type: 'buff' | 'debuff'; category: string }
 
-    // Build effect group map
+    // Build effect group map for filtering logic
     buildEffectGroupMap()
 
-    // Collect all effects that should be displayed
-    const effectsToDisplay = new Set<string>()
-    const effectsMap: Record<string, EffectMapEntry> = {}
+    // SAME LOGIC AS groupEffects.ts in CharactersPageClient
+    // If an effect has a 'group', hide it and display only the group parent instead
 
-    // Process buffs
+    // Build maps for grouping logic - SEPARATE for buffs and debuffs!
+    const buffsWithGroup = new Set<string>() // Buffs that have a group (should be hidden)
+    const debuffsWithGroup = new Set<string>() // Debuffs that have a group (should be hidden)
+    const buffGroupToCategory = new Map<string, string>() // Map buff group name to its category
+    const debuffGroupToCategory = new Map<string, string>() // Map debuff group name to its category
+
+    // Process buffs to identify which ones should be hidden
     ;(buffs as EffectWithGroup[]).forEach((buff: EffectWithGroup) => {
-      // Skip hidden and unique categories
-      if (buff.category === 'hidden' || buff.category === 'unique') return
-
-      // If this effect has a group, add the group name instead
       if (buff.group) {
-        effectsToDisplay.add(buff.group)
-      } else {
-        effectsToDisplay.add(buff.name)
-      }
-    })
-
-    // Process debuffs
-    ;(debuffs as EffectWithGroup[]).forEach((debuff: EffectWithGroup) => {
-      // Skip hidden and unique categories
-      if (debuff.category === 'hidden' || debuff.category === 'unique') return
-
-      // If this effect has a group, add the group name instead
-      if (debuff.group) {
-        effectsToDisplay.add(debuff.group)
-      } else {
-        effectsToDisplay.add(debuff.name)
-      }
-    })
-
-    // Now build the effects map with metadata for each effect to display
-    effectsToDisplay.forEach(effectName => {
-      // Find the effect metadata
-      const buffMeta = (buffs as EffectWithGroup[]).find(b => b.name === effectName)
-      const debuffMeta = (debuffs as EffectWithGroup[]).find(d => d.name === effectName)
-      const meta = buffMeta || debuffMeta
-
-      if (meta) {
-        effectsMap[effectName] = {
-          name: effectName,
-          label: meta.label,
-          icon: meta.icon,
-          type: buffMeta ? 'buff' : 'debuff',
-          category: meta.category || 'utility'
+        buffsWithGroup.add(buff.name)
+        if (buff.category) {
+          buffGroupToCategory.set(buff.group, buff.category)
         }
       }
     })
 
-    // Group by type and category
-    const allEffects = Object.values(effectsMap)
-    const buffEffects = allEffects.filter(e => e.type === 'buff')
-    const debuffEffects = allEffects.filter(e => e.type === 'debuff')
+    // Process debuffs to identify which ones should be hidden
+    ;(debuffs as EffectWithGroup[]).forEach((debuff: EffectWithGroup) => {
+      if (debuff.group) {
+        debuffsWithGroup.add(debuff.name)
+        if (debuff.category) {
+          debuffGroupToCategory.set(debuff.group, debuff.category)
+        }
+      }
+    })
+
+    // Filter and map buffs: skip hidden/unique/grouped effects
+    const buffEffects: EffectMapEntry[] = (buffs as EffectWithGroup[])
+      .filter(buff =>
+        buff.category !== 'hidden' &&
+        buff.category !== 'unique' &&
+        !buffsWithGroup.has(buff.name) // Skip buffs that have a group
+      )
+      .map(buff => ({
+        name: buff.name,
+        label: buff.label,
+        icon: buff.icon,
+        type: 'buff' as const,
+        category: buff.category || buffGroupToCategory.get(buff.name) || 'utility'
+      }))
+
+    // Filter and map debuffs: skip hidden/unique/grouped effects
+    const debuffEffects: EffectMapEntry[] = (debuffs as EffectWithGroup[])
+      .filter(debuff =>
+        debuff.category !== 'hidden' &&
+        debuff.category !== 'unique' &&
+        !debuffsWithGroup.has(debuff.name) // Skip debuffs that have a group
+      )
+      .map(debuff => ({
+        name: debuff.name,
+        label: debuff.label,
+        icon: debuff.icon,
+        type: 'debuff' as const,
+        category: debuff.category || debuffGroupToCategory.get(debuff.name) || 'utility'
+      }))
 
     // Helper to group by category
-    const groupByCategory = (effects: typeof allEffects): Record<string, typeof allEffects> => {
-      const categoryMap: Record<string, typeof allEffects> = {}
+    const groupByCategory = (effects: EffectMapEntry[]): Record<string, EffectMapEntry[]> => {
+      const categoryMap: Record<string, EffectMapEntry[]> = {}
       effects.forEach(effect => {
         const category = effect.category
         if (!categoryMap[category]) {
@@ -328,10 +335,15 @@ export default function CharacterSelectorModal({
     )
   }
 
-  const toggleEffect = (effectName: string) => {
-    setSelectedEffects(prev =>
-      prev.includes(effectName) ? prev.filter(e => e !== effectName) : [...prev, effectName]
-    )
+  const toggleEffect = (effectName: string, effectType: 'buff' | 'debuff') => {
+    setSelectedEffects(prev => {
+      const exists = prev.find(e => e.name === effectName && e.type === effectType)
+      if (exists) {
+        return prev.filter(e => !(e.name === effectName && e.type === effectType))
+      } else {
+        return [...prev, { name: effectName, type: effectType }]
+      }
+    })
   }
 
   const toggleSource = (source: SkillKey) => {

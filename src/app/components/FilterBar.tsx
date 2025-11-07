@@ -16,7 +16,7 @@ interface FilterBarProps {
   selectedClasses: string[]
   selectedRarities: number[]
   selectedChainTypes: string[]
-  selectedEffects: string[]
+  selectedEffects: {name: string; type: 'buff' | 'debuff'}[]
   selectedSources: SkillKey[]
   effectsLogic: EffectsLogic
   isFiltersExpanded: boolean
@@ -36,7 +36,7 @@ interface FilterBarProps {
   onToggleClass: (className: string) => void
   onToggleRarity: (rarity: number) => void
   onToggleChainType: (chainType: string) => void
-  onToggleEffect: (effectName: string) => void
+  onToggleEffect: (effectName: string, effectType: 'buff' | 'debuff') => void
   onToggleSource: (source: SkillKey) => void
   onToggleEffectsLogic: () => void
   onToggleFiltersExpanded: () => void

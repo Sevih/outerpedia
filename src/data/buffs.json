@@ -131,7 +131,7 @@
     "description_jp": "スキルターンを減少させる。",
     "description_kr": "스킬 쿨타임을 일정 턴 감소시킵니다.",
     "description_zh": "使技能冷却时间减少一定回合。",
-    "icon": "reducesalliesskillcooldowns"
+    "icon": "SC_Buff_Cool_Charge"
   },
   {
     "name": "BT_COOL_CHARGE",
@@ -144,7 +144,7 @@
     "description_jp": "スキルターンを減少させる。",
     "description_kr": "스킬 쿨타임을 일정 턴 감소시킵니다.",
     "description_zh": "使技能冷却时间减少一定回合。",
-    "icon": "reducesalliesskillcooldowns"
+    "icon": "SC_Buff_Cool_Charge"
   },
   {
     "name": "BT_CP_CHARGE",

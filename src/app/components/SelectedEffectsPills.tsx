@@ -5,9 +5,9 @@ import Image from 'next/image'
 import type { EffectData, GroupedEffects } from '@/types/team-planner'
 
 interface SelectedEffectsPillsProps {
-  selectedEffects: string[]
+  selectedEffects: {name: string; type: 'buff' | 'debuff'}[]
   groupedEffects: GroupedEffects
-  onRemoveEffect: (effectName: string) => void
+  onRemoveEffect: (effectName: string, effectType: 'buff' | 'debuff') => void
 }
 
 export default function SelectedEffectsPills({
@@ -19,26 +19,22 @@ export default function SelectedEffectsPills({
 
   return (
     <div className="flex flex-wrap gap-1 justify-center">
-      {selectedEffects.map(effectName => {
-        // Find the effect in buffs or debuffs
+      {selectedEffects.map(selectedEffect => {
+        // Find the effect in the correct type (buff or debuff)
         let effect: EffectData | null = null
-        for (const effects of Object.values(groupedEffects.buffs)) {
-          effect = effects.find((e: EffectData) => e.name === effectName) || null
+        const effectList = selectedEffect.type === 'buff' ? groupedEffects.buffs : groupedEffects.debuffs
+
+        for (const effects of Object.values(effectList)) {
+          effect = effects.find((e: EffectData) => e.name === selectedEffect.name) || null
           if (effect) break
-        }
-        if (!effect) {
-          for (const effects of Object.values(groupedEffects.debuffs)) {
-            effect = effects.find((e: EffectData) => e.name === effectName) || null
-            if (effect) break
-          }
         }
         if (!effect) return null
 
         return (
           <div
-            key={effectName}
+            key={`${selectedEffect.type}-${selectedEffect.name}`}
             className={`flex items-center gap-1 px-1.5 py-0.5 text-[9px] rounded border ${
-              effect.type === 'buff'
+              selectedEffect.type === 'buff'
                 ? 'bg-blue-900/30 border-blue-600 text-blue-300'
                 : 'bg-red-900/30 border-red-600 text-red-300'
             }`}
@@ -53,7 +49,7 @@ export default function SelectedEffectsPills({
             <span className="text-[9px] font-medium">{effect.label}</span>
             <button
               type="button"
-              onClick={() => onRemoveEffect(effectName)}
+              onClick={() => onRemoveEffect(selectedEffect.name, selectedEffect.type)}
               className="ml-0.5 text-gray-400 hover:text-white transition-colors"
             >
               ×

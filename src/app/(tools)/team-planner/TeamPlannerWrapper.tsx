@@ -79,6 +79,18 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     )
   }
 
+  const removeCharacter = (position: number) => {
+    if (viewOnly) return
+
+    setTeam(prevTeam =>
+      prevTeam.map(slot =>
+        slot.position === position
+          ? { ...slot, characterId: null, characterName: null }
+          : slot
+      )
+    )
+  }
+
   const handleChainSlotClick = (chainIndex: number) => {
     if (viewOnly) return
     if (selectedChainIndex === null) {
@@ -214,10 +226,19 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
               </div>
             </div>
           )}
-          {/* Position number badge */}
-          <div className="absolute -top-2 -left-2 w-5 h-5 sm:w-6 sm:h-6 bg-cyan-600 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold text-white border-2 border-gray-900 z-10">
-            {position}
-          </div>
+          {/* Remove character button - only show when slot has a character */}
+          {slot.characterId && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                removeCharacter(position)
+              }}
+              className="absolute -top-2 -left-2 w-5 h-5 sm:w-6 sm:h-6 bg-red-600 hover:bg-red-500 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold text-white border-2 border-gray-900 z-10 transition-colors cursor-pointer"
+              title={`Remove character from position ${position}`}
+            >
+              ×
+            </button>
+          )}
         </div>
 
         {/* CP per turn display */}
