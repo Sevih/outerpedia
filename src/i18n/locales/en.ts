@@ -90,6 +90,12 @@ const en = {
   'characters.filters.sources.chainPassive': 'Chain Passive',
   'characters.filters.sources.dualAttack': 'Dual Attack',
   'characters.filters.sources.exclusiveEquip': 'Exclusive Equipment',
+  'characters.filters.sources.skill1Compact': 'S1',
+  'characters.filters.sources.skill2Compact': 'S2',
+  'characters.filters.sources.skill3Compact': 'S3',
+  'characters.filters.sources.chainPassiveCompact': 'Chain',
+  'characters.filters.sources.dualAttackCompact': 'Dual',
+  'characters.filters.sources.exclusiveEquipCompact': 'EE',
   'characters.effectsGroups.buff.statBoosts': 'Stat Boosts',
   'characters.effectsGroups.buff.supporting': 'Supporting',
   'characters.effectsGroups.buff.utility': 'Utility',
@@ -753,6 +759,7 @@ const en = {
   'teamPlanner.meta.breadcrumb': 'Team Planner',
   'teamPlanner.h1': 'Team Planner',
   'teamPlanner.info': 'ℹ️ Build your team and validate it against specific rules and restrictions. Perfect for Skyward Tower, Guild Raids, World Bosses, and more.',
+  'teamPlanner.viewInfo': 'ℹ️ Viewing shared team composition. Click Edit to make changes.',
   'teamPlanner.team': 'Team',
   'teamPlanner.teamConfiguration': 'Team Configuration',
   'teamPlanner.skillChainOrder': 'Skill Chain Order',
@@ -778,17 +785,6 @@ const en = {
   'effects.debuffs.intro': 'Debuffs are detrimental effects that are applied to characters.',
   'effects.debuffs.customIcon': 'Those whose names appear in orange italics do not have an in-game icon. The one displayed is the custom icon used on this website.',
   'effects.debuffs.listIntro': 'Here is the list of those (excluding irremovable unique character mechanics):',
-
-
-
-
-
-
-
-
-
-
-
 }
 
 export default en

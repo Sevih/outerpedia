@@ -90,6 +90,12 @@ const jp = {
   'characters.filters.sources.chainPassive': 'チェーンパッシブ',
   'characters.filters.sources.dualAttack': 'デュアルアタック',
   'characters.filters.sources.exclusiveEquip': '専用装備',
+  'characters.filters.sources.skill1Compact': 'S1',
+  'characters.filters.sources.skill2Compact': 'S2',
+  'characters.filters.sources.skill3Compact': 'S3',
+  'characters.filters.sources.chainPassiveCompact': 'チェーン',
+  'characters.filters.sources.dualAttackCompact': 'デュアル',
+  'characters.filters.sources.exclusiveEquipCompact': 'EE',
   'characters.effectsGroups.buff.statBoosts': 'ステータス強化',
   'characters.effectsGroups.buff.supporting': '支援',
   'characters.effectsGroups.buff.utility': 'ユーティリティ',
@@ -753,6 +759,7 @@ const jp = {
   'teamPlanner.meta.breadcrumb': 'チームプランナー',
   'teamPlanner.h1': 'チームプランナー',
   'teamPlanner.info': 'ℹ️ チームを構築し、特定のルールと制限に対して検証できます。飛天の塔、ギルドレイド、ワールドボスなどに最適です。',
+  'teamPlanner.viewInfo': 'ℹ️ 共有されたチーム構成を表示しています。変更するには編集をクリックしてください。',
   'teamPlanner.team': 'チーム',
   'teamPlanner.teamConfiguration': 'チーム編成',
   'teamPlanner.skillChainOrder': 'スキルチェーン順序',
@@ -778,14 +785,6 @@ const jp = {
   'effects.debuffs.intro': 'デバフはキャラクターに適用される有害な効果です。',
   'effects.debuffs.customIcon': 'オレンジ色の斜体で表示されている名前は、ゲーム内にアイコンがありません。表示されているのは、このウェブサイトで使用されているカスタムアイコンです。',
   'effects.debuffs.listIntro': '以下はそのリストです（取り除けないユニーク効果を除く）：',
-
-
-
-
-
-
-
-
 }
 
 export default jp

@@ -90,6 +90,12 @@ const kr = {
   'characters.filters.sources.chainPassive': '체인 패시브',
   'characters.filters.sources.dualAttack': '듀얼 어택',
   'characters.filters.sources.exclusiveEquip': '전용 장비',
+  'characters.filters.sources.skill1Compact': 'S1',
+  'characters.filters.sources.skill2Compact': 'S2',
+  'characters.filters.sources.skill3Compact': 'S3',
+  'characters.filters.sources.chainPassiveCompact': '체인',
+  'characters.filters.sources.dualAttackCompact': '듀얼',
+  'characters.filters.sources.exclusiveEquipCompact': 'EE',
   'characters.effectsGroups.buff.statBoosts': '스탯 상승',
   'characters.effectsGroups.buff.supporting': '지원',
   'characters.effectsGroups.buff.utility': '유틸리티',
@@ -753,6 +759,7 @@ const kr = {
   'teamPlanner.meta.breadcrumb': '팀 플래너',
   'teamPlanner.h1': '팀 플래너',
   'teamPlanner.info': 'ℹ️ 팀을 구축하고 특정 규칙 및 제한에 대해 검증하세요. 비상의 탑, 길드 레이드, 월드 보스 등에 완벽합니다.',
+  'teamPlanner.viewInfo': 'ℹ️ 공유된 팀 구성을 보고 있습니다. 변경하려면 편집을 클릭하세요.',
   'teamPlanner.team': '팀',
   'teamPlanner.teamConfiguration': '팀 구성',
   'teamPlanner.skillChainOrder': '스킬 체인 순서',
@@ -778,14 +785,6 @@ const kr = {
   'effects.debuffs.intro': '디버프는 캐릭터에게 적용되는 해로운 효과입니다.',
   'effects.debuffs.customIcon': '주황색 이탤릭체로 표시된 이름은 게임 내 아이콘이 없습니다. 표시된 아이콘은 이 웹사이트에서 사용하는 커스텀 아이콘입니다.',
   'effects.debuffs.listIntro': '다음은 목록입니다 (제거할 수 없는 고유 효과 제외):',
-
-
-
-
-
-
-
-
 }
 
 export default kr
