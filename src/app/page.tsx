@@ -60,10 +60,10 @@ export default async function Home() {
         <div className="flex flex-col gap-8 w-full md:w-3/5">
           <section className="text-center">
             <CategoriesBox />
-            <div className="hidden md:block mt-6">
+            <div className="mt-6">
               <HowToPlayBox />
             </div>
-            <div className="hidden md:block mt-6">
+            <div className="mt-6">
               <NewToBox />
             </div>
           </section>
