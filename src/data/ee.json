@@ -2529,7 +2529,7 @@
     "effect10_kr": "공격 시 대상 방어력 <color=#28d9ed>30%</color> 무시",
     "effect10_zh": "攻击时无视目标<color=#28d9ed>30%</color>防御力",
     "icon_effect": "TI_Icon_UO_Accessary_07",
-    "rank": "",
+    "rank": "A",
     "buff": [],
     "debuff": [
       "BT_DOT_POISON2"

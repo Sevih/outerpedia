@@ -257,7 +257,7 @@ export default function RecommendedGearTabs({
             selected={selected}
             onSelect={setSelected}
             pillColor="#0ea5e9"
-            scrollable
+            
           />
         </div>
       )}

@@ -429,7 +429,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
           <div className="mt-8 pt-6 border-t border-gray-700">
             <h3 className="text-lg sm:text-xl font-bold mb-4 text-white">Notes</h3>
             <div
-              className="prose prose-invert prose-sm sm:prose-base max-w-none text-gray-300 [&_a]:text-red-400 [&_a:hover]:text-red-200 [&_a]:underline [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-1"
+              className="prose prose-invert prose-sm sm:prose-base max-w-none [&_a]:text-red-400 [&_a:hover]:text-red-200 [&_a]:underline [&_ul]:list-disc [&_ul]:ml-6 [&_ol]:list-decimal [&_ol]:ml-6 [&_li]:whitespace-pre-line"
               dangerouslySetInnerHTML={{ __html: formattedNotes }}
             />
           </div>

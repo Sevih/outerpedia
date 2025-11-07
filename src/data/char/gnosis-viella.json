@@ -8,8 +8,8 @@
   "Element": "Dark",
   "Class": "Striker",
   "SubClass": "Bruiser",
-  "rank": null,
-  "rank_pvp": null,
+  "rank": "A",
+  "rank_pvp": "S",
   "role": "dps",
   "tags": [
     "premium",

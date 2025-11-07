@@ -3177,7 +3177,7 @@
     }
   },
   "gnosis-viella": {
-    "Pen": {
+    "PvE - Pen": {
       "weaponSub": [
         {
           "name": "Surefire Javelin",
@@ -3226,7 +3226,7 @@
         "Penetration"
       ]
     },
-    "Life": {
+    "Pve - Life": {
       "weaponSub": [
         {
           "name": "Surefire Javelin",
@@ -3275,7 +3275,7 @@
         "Life"
       ]
     },
-    "Pen / Life": {
+    "PvE - Pen / Life": {
       "weaponSub": [
         {
           "name": "Surefire Javelin",
@@ -3325,7 +3325,7 @@
         "Life"
       ]
     },
-    "Pen / Swift": {
+    "PvP - Pen/Swift": {
       "weaponSub": [
         {
           "name": "Surefire Javelin",
@@ -3364,18 +3364,18 @@
       ],
       "sub": [
         "HP",
+        "CHC",
+        "CHD",
         "SPD",
         "EFF",
-        "ACC",
-        "CHC",
-        "CHD"
+        "ACC"
       ],
       "armorSets": [
         "Penetration",
         "Swiftness"
       ]
     },
-    "Life / Swift": {
+    "PvP - Life/Swift": {
       "weaponSub": [
         {
           "name": "Surefire Javelin",
@@ -3414,14 +3414,64 @@
       ],
       "sub": [
         "HP",
+        "CHC",
+        "CHD",
         "SPD",
         "EFF",
-        "ACC",
-        "CHC",
-        "CHD"
+        "ACC"
       ],
       "armorSets": [
         "Life",
+        "Swiftness"
+      ]
+    },
+    "PvP - Speed/Swift": {
+      "weaponSub": [
+        {
+          "name": "Surefire Javelin",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        }
+      ],
+      "sub": [
+        "HP",
+        "CHC",
+        "CHD",
+        "SPD",
+        "EFF",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed",
         "Swiftness"
       ]
     }

@@ -1,5 +1,5 @@
 {
-  "Pen": {
+  "PvE - Pen": {
     "Weapon": [
       {
         "name": "Surefire Javelin",
@@ -39,7 +39,7 @@
       
     ]
   },
-  "Life": {
+  "Pve - Life": {
     "Weapon": [
       {
         "name": "Surefire Javelin",
@@ -79,7 +79,7 @@
       
     ]
   },
-  "Pen / Life": {
+  "PvE - Pen / Life": {
     "Weapon": [
       {
         "name": "Surefire Javelin",
@@ -120,7 +120,7 @@
       
     ]
   },
-  "Pen / Swift": {
+  "PvP - Pen/Swift": {
     "Weapon": [
       {
         "name": "Surefire Javelin",
@@ -151,17 +151,15 @@
          { "name": "Swiftness", "count": 2 }
       ]
     ],
-    "SubstatPrio": "HP>SPD>EFF=ACC>CHC>CHD",
-    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "SubstatPrio": "HP>CHC>CHD>SPD>EFF=ACC",
+    "Note": "",
     "Talisman": [
       "Vanguard's Charm",
-      "Sage's Charm",
-      "Rogue's Charm",
-      "Executioner's Charm"
+      "Mage's Charm"
       
     ]
   },
-  "Life / Swift": {
+  "PvP - Life/Swift": {
     "Weapon": [
       {
         "name": "Surefire Javelin",
@@ -192,14 +190,50 @@
          { "name": "Swiftness", "count": 2 }
       ]
     ],
-    "SubstatPrio": "HP>SPD>EFF=ACC>CHC>CHD",
-    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "SubstatPrio": "HP>CHC>CHD>SPD>EFF=ACC",
+    "Note": "",
     "Talisman": [
       "Vanguard's Charm",
-      "Sage's Charm",
-      "Rogue's Charm",
-      "Executioner's Charm"
+      "Mage's Charm"
       
+    ]
+  },
+  "PvP - Speed/Swift": {
+    "Weapon": [
+      {
+        "name": "Surefire Javelin",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "PEN%/HP%"
+      },
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%/HP%"
+      }
+    ], 
+    "Set": [
+      [
+        { "name": "Speed", "count": 2 },
+         { "name": "Swiftness", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "HP>CHC>CHD>SPD>EFF=ACC",
+    "Note": "",
+    "Talisman": [
+      "Vanguard's Charm",
+      "Mage's Charm"      
     ]
   }
 }

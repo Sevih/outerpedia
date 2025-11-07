@@ -152,7 +152,7 @@ export default function NotesEditor({
       />
 
       <p className="mt-2 text-xs text-gray-500">
-        Your notes will be saved in the share URL. You can use Markdown formatting (e.g., **bold**, *italic*, ~~strikethrough~~, [link](url)).
+        Your notes will be saved in the share URL. You can use Markdown formatting (e.g., **bold**, *italic*, ~~strikethrough~~, [link](url)). Tip: Use two line breaks to exit a list.
       </p>
     </section>
   )
