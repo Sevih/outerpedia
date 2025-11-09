@@ -1,7 +1,8 @@
 // src/lib/localize.ts
-// Helper de localisation pour Outerpedia (EN/JP/KR uniquement)
+// Helper de localisation pour Outerpedia
 
 import type { TenantKey } from '@/tenants/config';
+import { getAvailableLanguages } from '@/tenants/config';
 
 export type LangMap = Partial<Record<TenantKey, string>>;
 
@@ -87,10 +88,14 @@ export function lSubMap<T>(
   if (!map) return undefined
 
   const keys = Object.keys(map)
-  // collecter toutes les racines: "2" à partir de "2", "2_jp", "2_kr"…
+  // Build regex dynamically from available languages (excluding 'en')
+  const langSuffixes = getAvailableLanguages().filter(l => l !== 'en').join('|')
+  const langPattern = new RegExp(`^(.+?)_(${langSuffixes})$`)
+
+  // collecter toutes les racines: "2" à partir de "2", "2_jp", "2_kr", "2_zh"…
   const roots = new Set<string>()
   for (const k of keys) {
-    const m = k.match(/^(.+?)_(jp|kr)$/)
+    const m = k.match(langPattern)
     const root = m ? m[1] : k
     if (isRoot(root)) roots.add(root)
   }

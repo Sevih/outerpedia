@@ -1,4 +1,6 @@
 // src/types/pull.ts
+import type { WithLocalizedFields } from './common';
+
 export type PoolType = 'regular' | 'limited' | 'premium';
 export type BadgeType = 'premium' | 'limited' | 'seasonal' | 'collab' | null;
 
@@ -13,12 +15,13 @@ export interface Entry {
   rarity: number | string; // générateur permet number OU string
 }
 
-
-export interface SlugCharEntry {
+// Type de base pour SlugCharEntry (sans variantes localisées)
+export interface SlugCharEntryBase {
   ID: string
   Fullname: string
-  Fullname_jp?: string
-  Fullname_kr?: string
 }
+
+// Type complet avec variantes localisées pour Fullname
+export type SlugCharEntry = WithLocalizedFields<SlugCharEntryBase, 'Fullname'>
 
 export type SlugToCharMap = Record<string, SlugCharEntry>

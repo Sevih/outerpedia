@@ -19,7 +19,12 @@ import { TenantProvider } from '@/lib/contexts/TenantContext'
 import { I18nProvider } from '@/lib/contexts/I18nContext'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 
-const inter = Inter({ subsets: ['latin'], display: 'swap' })
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  adjustFontFallback: true
+})
 
 /** Couleur d’UI pour mobile */
 export const viewport: Viewport = { themeColor: '#081b1f' }

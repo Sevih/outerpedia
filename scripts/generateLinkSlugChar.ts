@@ -1,13 +1,15 @@
-/* generateLinkSlugChar.js */
-const fs = require('fs');
-const path = require('path');
+/* generateLinkSlugChar.ts */
+import * as fs from 'fs';
+import * as path from 'path';
+import { getAvailableLanguages } from '../src/tenants/config.js';
+import type { SlugToCharMap } from '../src/types/pull.js';
 
 const charactersDir = path.join(process.cwd(), 'src/data/char');
 const outputFile = path.join(process.cwd(), 'src/data/_SlugToChar.json');
 
-const isNonEmpty = (v) => typeof v === 'string' && v.trim() !== '';
+const isNonEmpty = (v: any): v is string => typeof v === 'string' && v.trim() !== '';
 
-function toKebabCase(input) {
+function toKebabCase(input: any): string {
   if (typeof input !== 'string') {
     console.warn('toKebabCase: input not a string:', input);
     return '';
@@ -23,19 +25,18 @@ function toKebabCase(input) {
 async function generateSlugToChar() {
   try {
     const files = await fs.promises.readdir(charactersDir);
-    /** @type {Record<string, {ID:string, Fullname:string, Fullname_jp?:string, Fullname_kr?:string}>} */
-    const map = {};
+    const map: SlugToCharMap = {};
     let count = 0;
 
     for (const file of files) {
       if (!file.endsWith('.json')) continue;
 
       const filePath = path.join(charactersDir, file);
-      let character;
+      let character: any;
       try {
         const content = await fs.promises.readFile(filePath, 'utf-8');
         character = JSON.parse(content);
-      } catch (e) {
+      } catch (e: any) {
         console.warn('⚠️  Skip invalid JSON:', filePath, e.message);
         continue;
       }
@@ -54,12 +55,19 @@ async function generateSlugToChar() {
         continue;
       }
 
-      const entry = {
+      const entry: any = {
         ID: String(ID),
         Fullname: String(Fullname).trim(),
       };
-      if (isNonEmpty(character.Fullname_jp)) entry.Fullname_jp = character.Fullname_jp.trim();
-      if (isNonEmpty(character.Fullname_kr)) entry.Fullname_kr = character.Fullname_kr.trim();
+
+      // Add localized fullnames dynamically based on available languages
+      for (const lang of getAvailableLanguages()) {
+        if (lang === 'en') continue; // Skip English as it's the default Fullname
+        const fullnameKey = `Fullname_${lang}`;
+        if (isNonEmpty(character[fullnameKey])) {
+          entry[fullnameKey] = character[fullnameKey].trim();
+        }
+      }
 
       map[slug] = entry;
       count++;

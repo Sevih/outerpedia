@@ -1,5 +1,6 @@
 import { getAvailableLanguageCodes, type TenantKey } from '@/tenants/config'
 import { l } from '@/lib/localize'
+import type { ExclusiveEquipment } from '@/types/character'
 
 // --- Types JSON-safe
 type JSONValue =
@@ -12,25 +13,8 @@ type JSONValue =
 
 export type JsonLdObject = { [key: string]: JSONValue }
 
-// --- EE type (selon ton JSON)
-export type EEEntry = {
-  name: string
-  name_jp?: string
-  name_kr?: string
-  mainStat?: string
-  mainStat_jp?: string
-  mainStat_kr?: string
-  effect?: string
-  effect_jp?: string
-  effect_kr?: string
-  effect10?: string
-  effect10_jp?: string
-  effect10_kr?: string
-  icon_effect?: string
-  rank?: string
-  buff?: string[]
-  debuff?: string[]
-}
+// --- EE type (utilise le type centralisé au lieu d'une redéfinition)
+export type EEEntry = ExclusiveEquipment
 
 // --- Normalise le domaine
 function normalizeBase(domain: string): string {

@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "8.0.4",
+  "version": "8.0.5",
   "private": true,
   "scripts": {
     "dev": "node -e \"console.log('\\n   ▲ Next.js'); console.log('   - LocalEn:    https://outerpedia.local/'); console.log('   - LocalJp:    https://jp.outerpedia.local/'); console.log('   - LocalKr:    https://kr.outerpedia.local/'); console.log('   - LocalZh:    https://zh.outerpedia.local/\\n')\" && next dev",
@@ -13,8 +13,8 @@
     "set-version": "node scripts/set-version.js",
     "gen:events": "node scripts/generateEventRegistry.js",
     "inject-sw-version": "node scripts/inject-sw-version.js",
-    "generate:allchar": "node scripts/generateAllCharacters.js",
-    "generate:slugToChar": "node scripts/generateLinkSlugChar.js",
+    "generate:allchar": "tsx scripts/generateAllCharacters.ts",
+    "generate:slugToChar": "tsx scripts/generateLinkSlugChar.ts",
     "generate:gear-stats": "node scripts/generateGearUsageStats.js",
     "generate:guide-chars": "node scripts/extract-guide-characters.js",
     "gen:pool": "node scripts/generate-pool-data.cjs",

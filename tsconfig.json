@@ -15,6 +15,7 @@
     "incremental": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
@@ -22,7 +23,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/content/*": ["/src/content/*"]
+      "@/content/*": ["./src/content/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "script/generate-sitemap.js", "script/generate-sitemap.js", "src/lib/toolDescriptions.js", "scripts/export-toolmeta.js"],
