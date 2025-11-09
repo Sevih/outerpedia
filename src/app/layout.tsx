@@ -84,7 +84,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messages = (await import(`@/i18n/locales/${langKey}.ts`)).default ?? {}
 
   return (
-    <html lang={HREFLANG[langKey]}>
+    <html lang={HREFLANG[langKey]} data-scroll-behavior="smooth">
       <body className={`min-h-dvh bg-black text-white ${inter.className}`}>
         <TenantProvider value={tenant}>
           <I18nProvider initialLang={langKey} messages={messages}>

@@ -6,6 +6,7 @@ interface TeamRow extends RowDataPacket {
   team: string
   chain_order: string
   notes: string
+  title: string
   created_at: Date
 }
 
@@ -22,7 +23,7 @@ export async function GET(
 
     // Query team from MySQL
     const [rows] = await pool.execute<TeamRow[]>(
-      'SELECT team, chain_order, notes, created_at FROM teams WHERE id = ?',
+      'SELECT team, chain_order, notes, title, created_at FROM teams WHERE id = ?',
       [id]
     )
 
@@ -36,10 +37,13 @@ export async function GET(
       team: teamData.team,
       chainOrder: teamData.chain_order,
       notes: teamData.notes,
+      title: teamData.title || '',
       createdAt: teamData.created_at
     }, { status: 200 })
   } catch (error) {
     console.error('Error loading team:', error)
+    console.error('Error details:', error instanceof Error ? error.message : 'Unknown error')
+    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace')
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

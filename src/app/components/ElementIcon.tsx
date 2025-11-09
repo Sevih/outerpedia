@@ -10,16 +10,14 @@ type Props = {
 
 export function ElementIcon({ element, size = 24 }: Props) {
   return (
-    <div className="relative" style={{ width: size, height: size }}>
-      <Image
-        src={`/images/ui/elem/${element.toLowerCase()}.webp`}
-        alt={element}
-        width={size}
-        height={size}
-        style={{ width: size, height: size }}
-        className="object-contain"
-        loading="lazy"
-      />
-    </div>
+    <Image
+      src={`/images/ui/elem/${element.toLowerCase()}.webp`}
+      alt={element}
+      width={0}
+      height={0}
+      sizes={`${size}px`}
+      //className="absolute drop-shadow-md z-10"
+      className={`w-[${size}px] h-[${size}px] inline-block object-contain drop-shadow-md`}
+    />
   )
 }

@@ -366,21 +366,8 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
                     characterName={usage.character.Fullname}
                     size={80}
                     className="rounded-lg border-2 border-gray-600 bg-gray-900"
+                    showStars
                   />
-                  {/* Rarity Stars */}
-                  <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 flex justify-center items-center -space-x-1">
-                    {Array(usage.character.Rarity)
-                      .fill(0)
-                      .map((_, i) => (
-                        <Image
-                          key={i}
-                          src="/images/ui/star.webp"
-                          alt="star"
-                          width={17}
-                          height={17}
-                        />
-                      ))}
-                  </div>
                 </div>
 
                 {/* Character Info */}

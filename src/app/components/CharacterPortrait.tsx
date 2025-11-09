@@ -19,6 +19,8 @@ interface CharacterPortraitProps {
   priority?: boolean
   /** Afficher les icônes d'élément et de classe */
   showIcons?: boolean
+  /** Afficher les étoiles de rareté */
+  showStars?: boolean
 }
 
 export function CharacterPortrait({
@@ -31,6 +33,7 @@ export function CharacterPortrait({
   className = '',
   priority = false,
   showIcons = false,
+  showStars = false,
 }: CharacterPortraitProps) {
   const charCoords = portraitCoordinates.characters[characterId as keyof typeof portraitCoordinates.characters]
   const defaultCoords = portraitCoordinates._defaultCrop
@@ -72,33 +75,62 @@ export function CharacterPortrait({
       {showIcons && character && (
         <>
           {element && (
-            <Image
-              src={`/images/ui/elem/${element}.webp`}
+            <div className="absolute -top-1.5 right-0 z-10">
+                <Image                
+                  src={`/images/ui/elem/${element}.webp`}
               alt={element}
-              width={iconSize}
-              height={iconSize}
-              className="absolute drop-shadow-md z-10"
-              style={{
-                top: -3,
-                right: -3,
-              }}
-            />
+                  width={0}
+                  height={0}
+                  sizes={`${iconSize}px`}
+                  //className="absolute drop-shadow-md z-10"
+                  className={`w-[${iconSize}px] h-[${iconSize}px] drop-shadow-md`}
+                  style={{
+                    top: -3,
+                    right: -3
+                  }}
+                />
+              </div>
+
+
           )}
           {cls && (
-            <Image
-              src={`/images/ui/class/${cls}.webp`}
-              alt={cls}
-              width={iconSize}
-              height={iconSize}
-              className="absolute drop-shadow-md z-10"
-              style={{
-                top: iconSize - 2,
-                right: -3,
-              }}
-            />
+              <div className="absolute top-6 right-0 z-10">
+                <Image                
+                  src={`/images/ui/class/${cls}.webp`}
+                  alt={cls}
+                  width={0}
+                  height={0}
+                  sizes={`${iconSize}px`}
+                  //className="absolute drop-shadow-md z-10"
+                  className={`w-[${iconSize}px] h-[${iconSize}px] drop-shadow-md`}
+                  style={{
+                    top: iconSize - 2,
+                    right: -3
+                  }}
+                />
+              </div>
           )}
-        </>
-      )}
-    </div>
-  )
+            </>
+          )}
+
+          {/* Étoiles de rareté */}
+          {showStars && character?.Rarity && (
+            <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 flex justify-center items-center gap-0 z-10">
+              {Array(character.Rarity)
+                .fill(0)
+                .map((_, i) => (
+                  <Image
+                    key={i}
+                    src="/images/ui/star.webp"
+                    alt="star"
+                    width={0}
+                    height={0}
+                    sizes="17px"
+                    className="w-[17px] h-[17px] -mx-0.5"
+                  />
+                ))}
+            </div>
+          )}
+        </div>
+      )
 }

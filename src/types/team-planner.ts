@@ -115,6 +115,7 @@ export interface EncodedTeamData {
   team: TeamSlot[]
   chainOrder: number[]
   notes: string
+  title?: string
 }
 
 // ============================================================================

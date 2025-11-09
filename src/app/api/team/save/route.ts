@@ -5,7 +5,7 @@ import pool from '@/lib/db'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { team, chainOrder, notes } = body
+    const { team, chainOrder, notes, title } = body
 
     if (!team || !chainOrder) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
@@ -16,8 +16,8 @@ export async function POST(request: NextRequest) {
 
     // Save team data to MySQL
     await pool.execute(
-      'INSERT INTO teams (id, team, chain_order, notes) VALUES (?, ?, ?, ?)',
-      [id, team, chainOrder, notes || '']
+      'INSERT INTO teams (id, team, chain_order, notes, title) VALUES (?, ?, ?, ?, ?)',
+      [id, team, chainOrder, notes || '', title || '']
     )
 
     return NextResponse.json({ id }, { status: 200 })

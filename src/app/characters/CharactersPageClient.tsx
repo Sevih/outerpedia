@@ -581,11 +581,11 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
 
         // Build effect group map
         const newMap = new Map<string, string>()
-        ;[...buffs.default, ...debuffs.default].forEach((effect: { name: string; group?: string }) => {
-          if (effect.group) {
-            newMap.set(effect.name, effect.group)
-          }
-        })
+          ;[...buffs.default, ...debuffs.default].forEach((effect: { name: string; group?: string }) => {
+            if (effect.group) {
+              newMap.set(effect.name, effect.group)
+            }
+          })
         effectGroupMap = newMap
       })
     }
@@ -1051,9 +1051,10 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
                   <Image
                     src={badge.src}
                     alt={badge.altKey}
-                    width={75}
-                    height={30}
-                    className="absolute top-1 left-1 z-30 object-contain"
+                    width={0}
+                    height={0}
+                    sizes={`75px`}
+                    className={`absolute w-[75px] h-[30px]  top-1 left-1 z-30 object-contain drop-shadow-md`}
                   />
                 )}
 

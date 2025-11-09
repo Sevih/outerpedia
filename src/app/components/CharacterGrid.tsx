@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
 import { CharacterPortrait } from '@/app/components/CharacterPortrait'
 import type { CharacterLite } from '@/types/types'
 
@@ -30,30 +29,14 @@ export default function CharacterGrid({
           onClick={() => onSelectCharacter(char.ID, char.Fullname)}
           className="relative flex-shrink-0 text-center transition hover:scale-105"
         >
-          <div className="relative">
-            <CharacterPortrait
-              characterId={char.ID}
-              characterName={char.Fullname}
-              size={80}
-              className="rounded-lg border-2 border-gray-600 bg-gray-900 hover:border-cyan-500 transition-colors w-full h-auto"
-              showIcons={true}
-            />
-            {/* Rarity Stars */}
-            <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 flex justify-center items-center -space-x-1">
-              {Array(char.Rarity)
-                .fill(0)
-                .map((_, i) => (
-                  <Image
-                    key={i}
-                    src="/images/ui/star.webp"
-                    alt="star"
-                    width={17}
-                    height={17}
-                    className="w-[14px] h-[14px] sm:w-[17px] sm:h-[17px]"
-                  />
-                ))}
-            </div>
-          </div>
+          <CharacterPortrait
+            characterId={char.ID}
+            characterName={char.Fullname}
+            size={80}
+            className="rounded-lg border-2 border-gray-600 bg-gray-900 hover:border-cyan-500 transition-colors w-full h-auto"
+            showIcons={true}
+            showStars={true}
+          />
         </button>
       ))}
     </div>

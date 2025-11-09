@@ -23,7 +23,7 @@ export {
   RULE_METADATA,
   RULES_BY_CATEGORY,
   CATEGORY_LABELS,
-} from './ruleConfig'
+} from '@/lib/team-planner/ruleConfig'
 
 // Presets de boss
 export {
@@ -32,13 +32,13 @@ export {
   getPresetsByCategory,
   BOSS_CATEGORY_LABELS,
   DIFFICULTY_LABELS,
-} from './bossPresets'
+} from '@/lib/team-planner/bossPresets'
 
 // JSON-LD
-export type { JsonLdObject } from './jsonld'
+export type { JsonLdObject } from '@/lib/seo/team-planner-jsonld'
 export {
   websiteLd,
   breadcrumbLd,
   webPageLd,
   softwareApplicationLd,
-} from './jsonld'
+} from '@/lib/seo/team-planner-jsonld'

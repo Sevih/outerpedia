@@ -6,8 +6,8 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { marked } from 'marked'
 import { CharacterPortrait } from '@/app/components/CharacterPortrait'
-import CharacterSelectorModal from './CharacterSelectorModal'
-import ChainEffectIcons from './ChainEffectIcons'
+import CharacterSelectorModal from '@/app/components/team-planner/CharacterSelectorModal'
+import ChainEffectIcons from '@/app/components/team-planner/ChainEffectIcons'
 import NotesEditor from '@/app/components/NotesEditor'
 import _allCharacters from '@/data/_allCharacters.json'
 import type { CharacterLite } from '@/types/types'
@@ -19,11 +19,16 @@ import {
   encodeTeamToURL,
   decodeTeamFromURL
 } from '@/utils/team-planner'
+import {
+  generateTeamImage1920x1080,
+  copyImageToClipboard,
+  downloadImage
+} from '@/utils/canvas-team-export'
 
 const characters = _allCharacters as CharacterLite[]
 
 export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrapperProps) {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const searchParams = useSearchParams()
 
   const [team, setTeam] = useState<TeamSlot[]>([
@@ -40,12 +45,33 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
   const [selectedPosition, setSelectedPosition] = useState<number | null>(null)
   const [selectedChainIndex, setSelectedChainIndex] = useState<number | null>(null)
   const [shareSuccess, setShareSuccess] = useState(false)
+  const [downloadingImage, setDownloadingImage] = useState(false)
+  const [imageCopied, setImageCopied] = useState(false)
+  const [title, setTitle] = useState('')
   const [notes, setNotes] = useState('')
 
-  // Parse Markdown notes to HTML for view-only mode
+  // Parse Markdown notes to HTML for view-only mode avec support des tags custom
   const formattedNotes = useMemo(() => {
     if (!viewOnly || !notes) return ''
-    return marked(notes, { breaks: true })
+
+    // Parser les tags custom et les convertir directement en HTML
+    let processedNotes = notes
+
+    // Convertir <size=X>text</size> en HTML spans
+    processedNotes = processedNotes.replace(/<size=(\d+)>([^<]*)<\/size>/g, (_match, size, text) => {
+      // On échappe les caractères markdown pour éviter qu'ils soient interprétés
+      return `<span style="font-size: ${size}px">${text}</span>`
+    })
+
+    // Convertir <color=X>text</color> en HTML spans
+    processedNotes = processedNotes.replace(/<color=([^>]+)>([^<]*)<\/color>/g, (_match, color, text) => {
+      return `<span style="color: ${color}">${text}</span>`
+    })
+
+    // Convertir le Markdown basique - marked va préserver les tags HTML
+    const html = marked.parse(processedNotes, { breaks: true }) as string
+
+    return html
   }, [viewOnly, notes])
 
   // Charger l'équipe depuis l'URL au montage
@@ -58,6 +84,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
           setTeam(decoded.team)
           setChainOrder(decoded.chainOrder)
           setNotes(decoded.notes)
+          setTitle(decoded.title || '')
         }
       }
     }
@@ -115,12 +142,12 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     const hasAnyCharacter = team.some(slot => slot.characterId !== null)
     if (!hasAnyCharacter) return
 
-    // Créer l'URL avec les notes incluses, pointant vers la page view-only
-    const encoded = await encodeTeamToURL(team, chainOrder, notes)
+    // Créer l'URL avec les notes et titre inclus, pointant vers la page view-only
+    const encoded = await encodeTeamToURL(team, chainOrder, notes, title)
     const baseUrl = window.location.origin + '/team-planner/view'
     const shareUrl = `${baseUrl}?team=${encoded}`
 
-    console.log('Sharing team with notes:', notes)
+    console.log('Sharing team with title:', title, 'notes:', notes)
     console.log('Encoded URL:', shareUrl)
 
     try {
@@ -129,6 +156,33 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
       setTimeout(() => setShareSuccess(false), 2000)
     } catch (err) {
       console.error('Failed to copy URL:', err)
+    }
+  }
+
+  const handleCopyImage = async () => {
+    const hasAnyCharacter = team.some(slot => slot.characterId !== null)
+    if (!hasAnyCharacter) return
+
+    setDownloadingImage(true)
+
+    try {
+      const blob = await generateTeamImage1920x1080(team, chainOrder, notes, title, lang as 'en' | 'kr' | 'jp' | 'zh')
+
+      // Essayer de copier dans le presse-papiers
+      try {
+        await copyImageToClipboard(blob)
+        setImageCopied(true)
+        setTimeout(() => setImageCopied(false), 2000)
+      } catch (clipboardErr) {
+        // Fallback: télécharger l'image si le clipboard ne fonctionne pas
+        console.warn('Clipboard failed, falling back to download:', clipboardErr)
+        downloadImage(blob, `team-composition-${Date.now()}.png`)
+      }
+    } catch (err) {
+      console.error('Failed to generate image:', err)
+      alert('Failed to generate image. Please try again.')
+    } finally {
+      setDownloadingImage(false)
     }
   }
 
@@ -189,8 +243,9 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
                 <Image
                   src={`/images/ui/elem/${character.Element.toLowerCase()}.webp`}
                   alt={character.Element}
-                  width={24}
-                  height={24}
+                  width={0}
+                  height={0}
+                  sizes="24px"
                   className="absolute top-0 right-0 drop-shadow-md z-10 w-[20px] h-[20px] sm:w-[24px] sm:h-[24px]"
                 />
               )}
@@ -199,8 +254,9 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
                 <Image
                   src={`/images/ui/class/${character.Class.toLowerCase()}.webp`}
                   alt={character.Class}
-                  width={24}
-                  height={24}
+                  width={0}
+                  height={0}
+                  sizes="24px"
                   className="absolute top-[18px] right-0 drop-shadow-md z-10 w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] sm:top-[22px]"
                 />
               )}
@@ -247,7 +303,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
         {/* CP per turn display */}
         {slot.characterId && character && (
           <div className="mt-1 text-center text-[10px] sm:text-xs font-semibold text-gray-300">
-            CP per turn: {cpPerTurn}
+            {t('teamPlanner.cpPerTurn')}: {cpPerTurn}
           </div>
         )}
       </div>
@@ -256,51 +312,111 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
 
   return (
     <div className="space-y-6">
+      {/* Team Title Input */}
+      {!viewOnly && (
+        <section className="bg-gray-800 rounded-lg shadow-md p-4 sm:p-6 border border-gray-700">
+          <label htmlFor="team-title" className="block text-sm font-semibold text-gray-300 mb-2">
+            Team Name
+          </label>
+          <input
+            id="team-title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="e.g., Skyward Tower F100, Fire Mono Team, etc."
+            maxLength={100}
+            className="w-full px-4 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+          />
+        </section>
+      )}
+
+      {/* Team Title Display (View Only) */}
+      {viewOnly && title && (
+        <section className="bg-gray-800 rounded-lg shadow-md p-4 sm:p-6 border border-gray-700">
+          <h1 className="text-2xl sm:text-3xl font-bold text-cyan-400 text-center">{title}</h1>
+        </section>
+      )}
+
       {/* Team Configuration */}
       <section className="bg-gray-800 rounded-lg shadow-md p-4 sm:p-6 lg:p-8 border border-gray-700">
         <div className="flex items-center justify-between mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white">{t('teamPlanner.teamConfiguration')}</h2>
 
-          {/* Share/Edit Button */}
+          {/* Share/Edit/Download Buttons */}
           {team.some(slot => slot.characterId !== null) && (
-            viewOnly ? (
-              <Link
-                href={`/team-planner?team=${searchParams.get('team')}`}
-                className="flex items-center gap-2 px-3 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors text-sm font-semibold"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-                <span>Edit</span>
-              </Link>
-            ) : (
+            <div className="flex items-center gap-2">
+              {viewOnly ? (
+                <Link
+                  href={`/team-planner?team=${searchParams.get('team')}`}
+                  className="flex items-center gap-2 px-3 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors text-sm font-semibold"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
+                  <span>Edit</span>
+                </Link>
+              ) : (
+                <button
+                  onClick={handleShareTeam}
+                  className="flex items-center gap-2 px-3 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors text-sm font-semibold"
+                >
+                  {shareSuccess ? (
+                    <>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                      </svg>
+                      <span>Share</span>
+                    </>
+                  )}
+                </button>
+              )}
+
+              {/* Copy Image Button */}
               <button
-                onClick={handleShareTeam}
-                className="flex items-center gap-2 px-3 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors text-sm font-semibold"
+                onClick={handleCopyImage}
+                disabled={downloadingImage}
+                className="flex items-center gap-2 px-3 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors text-sm font-semibold"
+                title="Copy team image to clipboard (1920x1080)"
               >
-                {shareSuccess ? (
+                {downloadingImage ? (
+                  <>
+                    <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    <span className="hidden sm:inline">Generating...</span>
+                  </>
+                ) : imageCopied ? (
                   <>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Copied!</span>
+                    <span className="hidden sm:inline">Copied!</span>
+                    <span className="sm:hidden">✓</span>
                   </>
                 ) : (
                   <>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <span>Share</span>
+                    <span className="hidden sm:inline">Copy Image</span>
+                    <span className="sm:hidden">Image</span>
                   </>
                 )}
               </button>
-            )
+            </div>
           )}
         </div>
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
           {/* Left Side - Character positions in cross pattern */}
-          <div className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] flex-shrink-0">
+          <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] flex-shrink-0">
             {/* Position 1 - Right */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2">
               {renderCharacterSlot(1)}
@@ -321,17 +437,10 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
               {renderCharacterSlot(4)}
             </div>
 
-            {/* Center decoration */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-gray-900/30 border border-gray-700/50 flex items-center justify-center">
-              <span className="text-xs text-gray-600">{t('teamPlanner.team')}</span>
-            </div>
-          </div>
-
-          {/* Average CP Display */}
-          <div className="flex flex-col items-center justify-center gap-2">
-            <div className="text-sm sm:text-base font-semibold text-gray-400">Average CP/turn</div>
-            <div className="text-3xl sm:text-4xl font-bold text-cyan-400">
-              {getAverageCPPerTurn().toFixed(1)}
+            {/* Center decoration with Average CP */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gray-900/30 border border-gray-700/50 flex flex-col items-center justify-center gap-1">
+              <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">{t('teamPlanner.averageCPTurn')}</span>
+              <span className="text-xl sm:text-2xl font-bold text-cyan-400">{getAverageCPPerTurn().toFixed(1)}</span>
             </div>
           </div>
 
@@ -404,10 +513,10 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
                                 : 'bg-gray-700/80 text-gray-300'
                             }`}>
                               {character.Chain_Type === 'Start'
-                                ? t('teamPlanner.starterExclusive')
+                                ? `${t('characters.chains.starter')}\n${t('teamPlanner.chain.exclusive')}`
                                 : character.Chain_Type === 'Finish'
-                                ? t('teamPlanner.finisherExclusive')
-                                : t('teamPlanner.companion')}
+                                ? `${t('characters.chains.finisher')}\n${t('teamPlanner.chain.exclusive')}`
+                                : t('characters.chains.companion')}
                             </div>
                           )}
                         </>
@@ -427,7 +536,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
         {/* Formatted Notes in View-Only Mode */}
         {viewOnly && notes && (
           <div className="mt-8 pt-6 border-t border-gray-700">
-            <h3 className="text-lg sm:text-xl font-bold mb-4 text-white">Notes</h3>
+            <h3 className="text-lg sm:text-xl font-bold mb-4 text-white">{t('teamPlanner.notes.title')}</h3>
             <div
               className="prose prose-invert prose-sm sm:prose-base max-w-none [&_a]:text-red-400 [&_a:hover]:text-red-200 [&_a]:underline [&_ul]:list-disc [&_ul]:ml-6 [&_ol]:list-decimal [&_ol]:ml-6 [&_li]:whitespace-pre-line"
               dangerouslySetInnerHTML={{ __html: formattedNotes }}

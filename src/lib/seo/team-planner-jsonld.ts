@@ -1,4 +1,4 @@
-// app/(tools)/team-planner/jsonld.ts
+// lib/seo/team-planner-jsonld.ts
 
 type JSONValue =
   | string

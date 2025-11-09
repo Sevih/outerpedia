@@ -7,7 +7,7 @@ import TeamPlannerWrapper from '../TeamPlannerWrapper'
 
 import { createPageMetadata } from '@/lib/seo'
 import JsonLd from '@/app/components/JsonLd'
-import { websiteLd, breadcrumbLd, webPageLd, softwareApplicationLd } from '../jsonld'
+import { websiteLd, breadcrumbLd, webPageLd, softwareApplicationLd } from '@/lib/seo/team-planner-jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 

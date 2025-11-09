@@ -1,4 +1,4 @@
-// app/(tools)/team-planner/ruleConfig.ts
+// lib/team-planner/ruleConfig.ts
 import type { RuleMetadata, RuleType } from '@/types/team-planner'
 
 /**

@@ -13,11 +13,12 @@ export function ClassIcon({ className, size = 24 }: Props) {
     <Image
       src={`/images/ui/class/${className.toLowerCase()}.webp`}
       alt={className}
-      width={size}
-      height={size}
-      style={{ width: size, height: size }}
-      className="inline-block object-contain"
-      loading="lazy"
+      width={0}
+      height={0}
+      sizes={`${size}px`}
+      //className="absolute drop-shadow-md z-10"
+      className={`w-[${size}px] h-[${size}px] inline-block object-contain drop-shadow-md`}
     />
+
   )
 }

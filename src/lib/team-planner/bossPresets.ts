@@ -1,4 +1,4 @@
-// app/(tools)/team-planner/bossPresets.ts
+// lib/team-planner/bossPresets.ts
 import type { BossPreset } from '@/types/team-planner'
 
 /**
