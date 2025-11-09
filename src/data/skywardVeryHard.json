@@ -163,7 +163,7 @@
           ]
         ],
         "conditions": [
-          "No mage"
+          "No Mage"
         ],
         "note": []
       },
@@ -500,7 +500,7 @@
         "note": []
       },
       "team4": {
-        "label": "No mage",
+        "label": "No Mage",
         "icon": "mage.webp",
         "setup": [
           [
@@ -521,7 +521,7 @@
           ]
         ],
         "conditions": [
-          "No mage"
+          "No Mage"
         ],
         "note": []
       }
@@ -732,6 +732,30 @@
           "No Water"
         ],
         "note": []
+      },
+      "team4": {
+        "label": "No Light",
+        "icon": "light.webp",
+        "setup": [
+          [
+            "Viella"
+          ],
+          [
+            "Demiurge Astei",
+            "Tamamo-no-Mae"
+          ],
+          [
+            "Maxwell"
+          ],
+          [
+            "Fran",
+            "Valentine"
+          ]
+        ],
+        "conditions": [
+          "No Light"
+        ],
+        "note": []
       }
     }
   },
@@ -888,6 +912,31 @@
         ],
         "conditions": [
           "No Light"
+        ],
+        "note": []
+      },
+       "team3": {
+        "label": "No Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Nella",
+            "Liselotte"
+          ],
+          [
+            "Caren"
+          ],
+          [
+            "Ame",
+            "Demiurge Astei"
+          ],
+          [
+            "Rey"
+          ]
+        ],
+        "conditions": [
+          "No Defender"
         ],
         "note": []
       }
@@ -1055,6 +1104,29 @@
           "1 x 3★"
         ],
         "note": []
+      },
+      "team3": {
+        "label": "No Mage",
+        "icon": "mage.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Demiurge Drakhan",
+            "Fatal"
+          ],
+          [
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "No Mage"
+        ],
+        "note": []
       }
     }
   },
@@ -1213,7 +1285,7 @@
         "note": []
       },
       "team2": {
-        "label": "No defender",
+        "label": "No Defender",
         "icon": "defender.webp",
         "setup": [
           [
@@ -1232,7 +1304,7 @@
           ]
         ],
         "conditions": [
-          "No defender"
+          "No Defender"
         ],
         "note": []
       },
