@@ -244,6 +244,8 @@ const jp = {
   'SYS_STAT_HH_PERCENT': '被ダメージ回復%',
   'SYS_STAT_EVA': '回避',
   'SYS_STAT_ACC': '命中',
+  'SYS_PVE_RAID_B': '特別依頼:正体究明',
+  'SYS_PVE_RAID_A': '特別依頼:生態調査',
   "equipments_tabs.weapon": "武器",
   "equipments_tabs.accessory": "アクセサリー",
   "equipments_tabs.armor": "セット装備",

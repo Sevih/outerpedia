@@ -65,7 +65,8 @@
         "jp": "自分の弱体効果を<color=#28d9ed>2個</color>解除した後、敵全体に大ダメージを与える。このスキルは、貫通力が<color=#28d9ed>15%</color>UPし、自分に<color=#28d9ed>弱体効果</color>がある場合、ダメージがDOWNする。",
         "zh": "解除自身的<color=#28d9ed>2个</color>弱化效果后,对全体敌人造成巨额伤害。发动该攻击时,穿透力提升<color=#28d9ed>15%</color>,且若自身附带<color=#28d9ed>弱化效果</color>,则伤害量降低。"
       },
-      "icon": "Skill_Ultimate_4044001"
+      "icon": "Skill_Ultimate_4044001",
+       "buff": ["BT_REMOVE_DEBUFF"]
     },
     {
       "name": {
@@ -82,7 +83,8 @@
         "zh": "(被动效果)\n每回合使<color=#28d9ed>攻击力</color>提升。该效果最多可叠加<color=#28d9ed>20次</color>。\n\n受到攻击时,若未附带弱化效果,则使WG伤害降低<color=#28d9ed>100%</color>。若未额外触发暴击,则使全体友军的<color=#28d9ed>行动值</color>提升<color=#28d9ed>15%</color>,并使<color=#28d9ed>守护者加农炮</color>的冷却时间减少<color=#28d9ed>1回合</color>。\n使敌人的暴击率降低。\n\n受到的非水属性敌人的WG伤害量降低<color=#28d9ed>50%</color>,并使对其造成的伤害提升,且所受伤害降低。\n使对水属性敌人造成的伤害降低,且所受伤害提升。\n首领受到的<color=#28d9ed>诅咒/固定伤害</color>不超过<color=#28d9ed>10000</color>。"
       },
       "icon": "MT_Passive_1_Fire",
-      "debuff": ["BT_STAT|ST_CRITICAL_RATE_IR","BT_REMOVE_BUFF"]
+      "buff": ["BT_ACTION_GAUGE","BT_COOL_CHARGE"],
+      "debuff": ["BT_STAT|ST_CRITICAL_RATE_IR"]
     },
     {
       "name": {

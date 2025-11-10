@@ -244,6 +244,8 @@ const en = {
   'SYS_STAT_HH_PERCENT': 'Heals when Hit %',
   'SYS_STAT_EVA': 'Evasion',
   'SYS_STAT_ACC': 'Accuracy',
+  'SYS_PVE_RAID_B': 'Special Request: Identification',
+  'SYS_PVE_RAID_A': 'Special Request: Ecology Study',
   "equipments_tabs.weapon": "Weapons",
   "equipments_tabs.accessory": "Accessories",
   "equipments_tabs.armor": "Armor Set",

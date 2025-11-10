@@ -244,6 +244,8 @@ const kr = {
   'SYS_STAT_HH_PERCENT': '피격 시 회복%',
   'SYS_STAT_EVA': '회피',
   'SYS_STAT_ACC': '명중',
+  'SYS_PVE_RAID_B': '특별의뢰: 정체 규명',
+  'SYS_PVE_RAID_A': '특별의뢰: 생태 조사',
   "equipments_tabs.weapon": "무기",
   "equipments_tabs.accessory": "액세서리",
   "equipments_tabs.armor": "세트 장비",

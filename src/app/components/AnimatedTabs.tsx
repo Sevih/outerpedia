@@ -85,9 +85,9 @@ export function AnimatedTabs<T extends string>({
                 <Image
                   src={tab.icon}
                   alt={tab.label}
-                  width={16}
-                  height={16}
-                  style={{ width: 16, height: 16 }}
+                  width={20}
+                  height={20}
+                  style={{ width: 20, height: 20 }}
                   className="object-contain"
                 />
 

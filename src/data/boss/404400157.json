@@ -47,7 +47,8 @@
         "jp": "敵全体にダメージを与え、<color=#28d9ed>【ミニガーディアン】</color>を<color=#28d9ed>2体</color>召喚する。\n【ミニガーディアン】が攻撃時、【主を失ったガーディアン】の行動ゲージが<color=#28d9ed>20%</color>UPし、弱体効果を<color=#28d9ed>2個</color>解除する。<color=#28d9ed>【ガーディアンキャノン】</color>のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
         "zh": "攻击全体敌人,并召唤<color=#28d9ed>2个</color><color=#28d9ed>小型守护者</color>。\n小型守护者攻击时,使首领的行动值提升<color=#28d9ed>20%</color>,并解除其附带的<color=#28d9ed>2个</color>弱化效果。额外使<color=#28d9ed>守护者加农炮</color>的冷却时间减少<color=#28d9ed>1回合</color>。"
       },
-      "icon": "Skill_Second_4076006"
+      "icon": "Skill_Second_4076006",
+      "buff": ["BT_COOL_CHARGE"]
     },
     {
       "name": {
@@ -79,7 +80,8 @@
         "jp": "(パッシブ効果)\nダメージを受けた時、自分に弱体効果がない場合、受けるWGダメージが<color=#28d9ed>50%</color>DOWNする。敵の攻撃を受けた時、会心が発生しなかった場合は味方全体の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>15%</color>UPし、<color=#28d9ed>【ガーディアンキャノン】</color>のスキルターンが<color=#28d9ed>1ターン</color>減少する。\n\n水属性以外の敵に与えるダメージがUPし、受けるダメージがDOWNする。\n水属性の敵に与えるダメージがDOWNし、受けるダメージがUPする。",
         "zh": "(被动效果)\n受到攻击时,若未附带弱化效果,则使受到的WG伤害降低<color=#28d9ed>50%</color>。若未触发暴击,则使全体友军的<color=#28d9ed>行动值</color>提升<color=#28d9ed>15%</color>,并使<color=#28d9ed>守护者加农炮</color>的冷却时间减少<color=#28d9ed>1回合</color>。\n\n对非水属性敌人造成的伤害提升,且所受伤害降低。\n对水属性敌人造成的伤害降低,且所受伤害提升。"
       },
-      "icon": "MT_Passive_1_Fire"
+      "icon": "MT_Passive_1_Fire",
+      "buff": ["BT_COOL_CHARGE","BT_ACTION_GAUGE"]
     },
     {
       "name": {
@@ -95,7 +97,8 @@
         "jp": "5ターンごとに<color=#28d9ed>【狂暴化】</color>状態に切り替わる。\n\n<color=#28d9ed>【狂暴化】</color>:自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与し、WGを10%回復する。【狂暴化】は4ターンの間持続する。\n\n<color=#28d9ed>【ガーディアンキャノン - フルバースト】</color>:【狂暴化】終了時に発動する。\n自分の<color=#28d9ed>弱体効果</color>と関係なく<color=#28d9ed>【ガーディアンキャノン】</color>の最大ダメージを与える。ブレイクするまで自分に<color=#28d9ed>免疫</color>効果を付与する。",
         "zh": "每5回合转换为<color=#28d9ed>狂暴化</color>状态。\n\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法被解除的攻击力提升/伤害降低效果,持续3回合,并使WG恢复\n10%。狂暴化持续4回合。\n\n<color=#28d9ed>守护者加农炮-全弹发射</color>:狂暴化结束时发动。\n无视自身的<color=#28d9ed>弱化效果</color>,<color=#28d9ed>守护者加农炮</color>造成最大伤害。获得<color=#28d9ed>免疫</color>效果,持续至进入力竭状态为止。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": ["BT_STAT|ST_ATK_IR","BT_DAMGE_TAKEN","BT_IMMUNE"]
     }
   ],
   "location": {

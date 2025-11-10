@@ -244,6 +244,8 @@ const zh = {
   'SYS_STAT_HH_PERCENT': '受到攻击时恢复(%)',
   'SYS_STAT_EVA': '回避',
   'SYS_STAT_ACC': '命中',
+  'SYS_PVE_RAID_B': '特别委托:查清身份',
+  'SYS_PVE_RAID_A': '特别委托:生态调查',
   "equipments_tabs.weapon": "武器",
   "equipments_tabs.accessory": "饰品",
   "equipments_tabs.armor": "套装",
