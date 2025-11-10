@@ -1,0 +1,70 @@
+{
+    "1-13": {
+        "team": [
+            [
+                "Veronica",
+                "Lyla",
+                "Ritri",
+                "Mene",
+                "Monad Eva"
+            ],
+            [
+                "Tamara",
+                "Valentine"
+            ],
+            [
+                "Poolside Trickster Regina",
+                "Beth",
+                "Rin",
+                "Demiurge Astei"
+            ],
+            [
+                "Laplace",
+                "Edelweiss",
+                "Fatal",
+                "Demiurge Stella",
+                "Luna",
+                "Roxie",
+                "Caren",
+                "Marian"
+            ]
+        ],
+        "note": [
+            {
+                "type": "p",
+                "string": "Don't forget you can use your friends' units to help you beat those stages."
+            }
+        ]
+    },
+    "11-13": {
+        "team": [
+            [
+                "Veronica",
+                "Lyla",
+                "Ritri",
+                "Mene",
+                "Monad Eva"
+            ],
+            [
+                "Tamara",
+                "Valentine"
+            ],
+            [
+                "Poolside Trickster Regina",
+                "Beth",
+                "Rin",
+                "Demiurge Astei"
+            ],
+            [
+                "Laplace",
+                "Edelweiss",
+                "Fatal",
+                "Demiurge Stella",
+                "Luna",
+                "Roxie",
+                "Caren",
+                "Marian"
+            ]
+        ]
+    }
+}

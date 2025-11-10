@@ -1,17 +1,27 @@
 'use client'
 
 import GuideTemplate from '@/app/components/GuideTemplate'
-import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
-import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import ElementInlineTag from '@/app/components/ElementInline'
+import BossDisplay from '@/app/components/BossDisplay'
+import guardianTeamsData from './Guardian.json'
 
-const teamSetup = [
-  ['Veronica', 'Lyla', 'Ritri', 'Mene', 'Monad Eva'],
-  ['Tamara', 'Valentine'],
-  ['Poolside Trickster Regina', 'Beth','Rin',  'Demiurge Astei'],
-  ['Laplace', 'Edelweiss', 'Fatal', 'Demiurge Stella','Luna','Roxie','Caren','Marian']
-]
+type NoteEntry =
+  | { type: 'p'; string: string }
+  | { type: 'ul'; items: string[] }
+
+type StageData = {
+  team: string[][]
+  note?: NoteEntry[]
+}
+
+type TeamData = {
+  [key: string]: StageData
+}
+
+const guardianTeams = guardianTeamsData as TeamData
 
 export default function MasterlessGuide() {
   return (
@@ -24,6 +34,7 @@ export default function MasterlessGuide() {
           label: 'Guide',
           content: (
             <>
+              <BossDisplay bossKey='Masterless Guardian' modeKey='Special Request: Ecology Study' defaultBossId='404400162' />
               <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Strategy Overview</h3>
               <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>All three of the boss&#39;s skills remove 2 debuffs and decrease the cooldown of his Ultimate.</li>
@@ -37,11 +48,14 @@ export default function MasterlessGuide() {
                 <li>Stage 13 - apply <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE_IR" type="debuff" /></li>
               </ul>
               <hr className="my-6 border-neutral-700" />
-              <RecommendedTeam team={teamSetup} />
+              <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Boss Information</h3>
+
+              <hr className="my-6 border-neutral-700" />
+              <StageBasedTeamSelector teamData={guardianTeams} defaultStage="1-13" icon='/images/ui/effect/water.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }} />
               <hr className="my-6 border-neutral-700" />
               <div className="mb-4">
                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-                <YoutubeEmbed videoId="jAJOiJgASCU" title='combat footage'/>
+                <YoutubeEmbed videoId="jAJOiJgASCU" title='combat footage' />
               </div>
             </>
           ),

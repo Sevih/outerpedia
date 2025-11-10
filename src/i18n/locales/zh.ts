@@ -98,6 +98,9 @@ const zh = {
   'characters.filters.sources.exclusiveEquipCompact': 'EE',
   'characters.effectsGroups.buff.statBoosts': '数值强化',
   'characters.effectsGroups.buff.supporting': '支援效果',
+
+  //boss display
+  'boss.immunities': '免疫',
   'characters.effectsGroups.buff.utility': '其他效果',
   'characters.effectsGroups.buff.unique': '独有效果.',
   'characters.effectsGroups.debuff.statReduction': '数值弱化',

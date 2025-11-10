@@ -98,6 +98,9 @@ const en = {
   'characters.filters.sources.exclusiveEquipCompact': 'EE',
   'characters.effectsGroups.buff.statBoosts': 'Stat Boosts',
   'characters.effectsGroups.buff.supporting': 'Supporting',
+
+  //boss display
+  'boss.immunities': 'Immunities',
   'characters.effectsGroups.buff.utility': 'Utility',
   'characters.effectsGroups.buff.unique': 'Unique',
   'characters.effectsGroups.debuff.statReduction': 'Stat Reduction',

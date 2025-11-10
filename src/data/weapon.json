@@ -289,7 +289,7 @@
     "effect_desc4_jp": "自分の残りHPが低いほどダメージがUPする。(最大60%までダメージUP)",
     "effect_desc4_kr": "자신의 체력이 낮아질수록 피해량 증가 (최대 60%)",
     "effect_desc4_zh": "自身生命值越低,伤害量越高\\n(最多60%)",
-    "effect_icon": "TI_Icon_UO_Accessary_13",
+    "effect_icon": "TI_Icon_UO_Weapon_26",
     "class": "Striker",
     "source": "Special Request",
     "boss": "Dek'Ril & Mek'Ril",

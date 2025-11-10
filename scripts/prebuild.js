@@ -22,6 +22,7 @@ const scripts = [
   { name: 'Effect Types', cmd: 'node scripts/generate-effect-types.js' },
   { name: 'News Cache', cmd: 'node scripts/generateNewsCache.js' },
   { name: 'Validate Effects', cmd: 'node scripts/validate-effects.js' },
+  { name: 'Boss Index', cmd: 'node scripts/generateBossIndex.js' },
 ];
 
 console.log('🚀 Préparation du build...\n');
@@ -145,6 +146,12 @@ function extractSummary(output, scriptName) {
   if (scriptName === 'Validate Effects') {
     const match = output.match(/(\d+) références vérifiées/);
     if (match) return `${match[1]} refs OK`;
+  }
+
+  // Boss Index
+  if (scriptName === 'Boss Index') {
+    const match = output.match(/Total de boss: (\d+)/);
+    if (match) return `${match[1]} boss`;
   }
 
   return '';

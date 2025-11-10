@@ -98,6 +98,9 @@ const jp = {
   'characters.filters.sources.exclusiveEquipCompact': 'EE',
   'characters.effectsGroups.buff.statBoosts': 'ステータス強化',
   'characters.effectsGroups.buff.supporting': '支援',
+
+  //boss display
+  'boss.immunities': '免疫',
   'characters.effectsGroups.buff.utility': 'ユーティリティ',
   'characters.effectsGroups.buff.unique': 'ユニーク',
   'characters.effectsGroups.debuff.statReduction': 'ステータス低下',

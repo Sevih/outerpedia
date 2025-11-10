@@ -11,6 +11,7 @@ import AdventureGuideGrid from '@/app/components/AdventureGuideGrid'
 import AdventureLicenseGuideGrid from '@/app/components/AdventureLicenseGuideGrid'
 import MonadGateGuideGrid from '@/app/components/MonadGateGuideGrid'
 import SkywardTowerGuideGrid from '@/app/components/SkywardTowerGuideGrid'
+import SpecialReqCardGrid from '@/app/components/SpecialReqCardGrid'
 import { getTenantServer } from '@/tenants/tenant.server'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 import type { TenantKey } from '@/tenants/config'
@@ -195,6 +196,8 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
         <SkywardTowerGuideGrid items={filtered} />
       ) : category === 'adventure-license' ? (
         <AdventureLicenseGuideGrid items={filtered} />
+      ) : category === 'special-request' ? (
+        <SpecialReqCardGrid items={filtered} />
       ) : (
         <GuideCardGrid items={filtered} />
       )}

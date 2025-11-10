@@ -5,6 +5,7 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 
 type Props = {
   element: string // 'fire', 'water', etc.
+  notext?: boolean
 }
 
 const ELEMENT_COLORS: Record<string, string> = {
@@ -15,7 +16,7 @@ const ELEMENT_COLORS: Record<string, string> = {
   dark: 'text-purple-400'
 }
 
-export default function ElementInlineTag({ element }: Props) {
+export default function ElementInlineTag({ element, notext = false }: Props) {
   const key = element.toLowerCase()
   const { t }= useI18n()
   const colorClass = ELEMENT_COLORS[key] || 'text-neutral-300'
@@ -36,7 +37,7 @@ export default function ElementInlineTag({ element }: Props) {
           className="object-contain"
         />
       </span>
-      <span className={`${colorClass}`}>{label}</span>
+      {!notext && <span className={`${colorClass}`}>{label}</span>}
     </span>
   )
 }

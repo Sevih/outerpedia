@@ -98,6 +98,9 @@ const kr = {
   'characters.filters.sources.exclusiveEquipCompact': 'EE',
   'characters.effectsGroups.buff.statBoosts': '스탯 상승',
   'characters.effectsGroups.buff.supporting': '지원',
+
+  //boss display
+  'boss.immunities': '면역',
   'characters.effectsGroups.buff.utility': '유틸리티',
   'characters.effectsGroups.buff.unique': '고유',
   'characters.effectsGroups.debuff.statReduction': '스탯 감소',

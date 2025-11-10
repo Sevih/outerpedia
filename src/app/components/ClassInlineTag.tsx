@@ -22,12 +22,13 @@ type ClassMap = Record<string, ClassInfo>
 type Props = {
   name: string        // ex: 'ATTACKER', 'MAGE', 'PRIEST', ...
   subclass?: string   // ex: 'WIZARD', 'VANGUARD', ...
+  notext?: boolean
 }
 
 // petit helper
 const capitalize = (s: string) => (s ? s[0].toUpperCase() + s.slice(1).toLowerCase() : s)
 
-export default function ClassInlineTag({ name, subclass }: Props) {
+export default function ClassInlineTag({ name, subclass, notext = false }: Props) {
   const { t } = useI18n()
 
   const classData = classes[name]
@@ -57,7 +58,7 @@ export default function ClassInlineTag({ name, subclass }: Props) {
           className="object-contain"
         />
       </span>
-      <span>{label}</span>
+      {!notext && <span>{label}</span>}
     </span>
   )
 }

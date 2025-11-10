@@ -415,7 +415,7 @@
     "effect_desc4_jp": "敵の攻撃を回避した場合、最大HPの30%回復する。",
     "effect_desc4_kr": "적의 공격을 회피한 경우, 최대 체력의 30% 회복",
     "effect_desc4_zh": "回避敌人的攻击时,使生命值恢复上限的30%",
-    "effect_icon": "TI_Icon_UO_Weapon_01",
+    "effect_icon": "TI_Icon_UO_Accessary_13",
     "class": "Ranger",
     "mainStats": [
       "ACC",
