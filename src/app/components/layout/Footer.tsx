@@ -43,6 +43,9 @@ export default function Footer() {
           <Link href="/changelog" className="hover:text-zinc-200">
             Changelog
           </Link>
+          <Link href="/contributors" className="hover:text-zinc-200">
+            Contributors
+          </Link>
         </nav>
 
         {/* Liens officiels Outerplane */}

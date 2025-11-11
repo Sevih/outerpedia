@@ -32,7 +32,11 @@
         "zh": "攻击敌人。\n有小型守护者存在时,伤害量提升,并召唤<color=#28d9ed>2个</color><color=#28d9ed>小型守护者</color>。\n攻击小型守护者时,首领的行动值提升<color=#28d9ed>20%</color>,解除附带的<color=#28d9ed>2个</color>弱化效果。使<color=#28d9ed>守护者加农炮</color>的冷却时间减少<color=#28d9ed>1回合</color>。"
       },
       "icon": "Skill_First_4044001",
-      "buff": ["BT_COOL_CHARGE"]
+      "buff": [
+        "BT_COOL_CHARGE",
+        "BT_ACTION_GAUGE",
+        "BT_REMOVE_DEBUFF"
+      ]
     },
     {
       "name": {
@@ -49,7 +53,11 @@
         "zh": "攻击全体敌人。\n有小型守护者存在时,伤害量提升,并召唤<color=#28d9ed>2个</color><color=#28d9ed>小型守护者</color>。\n攻击小型守护者时,首领的行动值提升<color=#28d9ed>20%</color>,解除附带的<color=#28d9ed>2个</color>弱化效果。使<color=#28d9ed>守护者加农炮</color>的冷却时间减少<color=#28d9ed>1回合</color>。"
       },
       "icon": "Skill_Second_4076006",
-      "buff": ["BT_COOL_CHARGE"]
+      "buff": [
+        "BT_COOL_CHARGE",
+        "BT_ACTION_GAUGE",
+        "BT_REMOVE_DEBUFF"
+      ]
     },
     {
       "name": {
@@ -66,7 +74,9 @@
         "zh": "解除自身的<color=#28d9ed>2个</color>弱化效果后,对全体敌人造成巨额伤害。发动该攻击时,穿透力提升<color=#28d9ed>15%</color>,且若自身附带<color=#28d9ed>弱化效果</color>,则伤害量降低。"
       },
       "icon": "Skill_Ultimate_4044001",
-       "buff": ["BT_REMOVE_DEBUFF"]
+      "buff": [
+        "BT_REMOVE_DEBUFF"
+      ]
     },
     {
       "name": {
@@ -83,8 +93,13 @@
         "zh": "(被动效果)\n每回合使<color=#28d9ed>攻击力</color>提升。该效果最多可叠加\n<color=#28d9ed>20次</color>。\n\n受到攻击,若未附带弱化效果,则使WG伤害降低<color=#28d9ed>100%</color>。若未额外触发暴击,则使全体友军的<color=#28d9ed>行动值</color>提升<color=#28d9ed>15%</color>,并使<color=#28d9ed>守护者加农炮</color>的冷却时间减少<color=#28d9ed>1回合</color>。\n使火属性与土属性敌人的暴击率降低。\n\n受到来自非水属性敌人的WG伤害量降低<color=#28d9ed>50%</color>,并使对其造成的伤害提升,且所受伤害降低。\n使对水属性敌人造成的伤害降低,且所受伤害提升。"
       },
       "icon": "MT_Passive_1_Fire",
-      "buff": ["BT_ACTION_GAUGE","BT_COOL_CHARGE"],
-      "debuff": ["BT_STAT|ST_CRITICAL_RATE_IR"]
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_COOL_CHARGE"
+      ],
+      "debuff": [
+        "BT_STAT|ST_CRITICAL_RATE_IR"
+      ]
     },
     {
       "name": {
@@ -101,7 +116,11 @@
         "zh": "每3回合转换为<color=#28d9ed>狂暴化</color>状态。\n\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法被解除的攻击力提升/伤害降低效果,持续3回合,并使WG恢复\n\n<color=#28d9ed>10%。狂暴化持续4回合。\n守护者加农炮-全弹发射</color>:狂暴化结束时发动。\n无视自身的<color=#28d9ed>弱化效果</color>,<color=#28d9ed>守护者加农炮</color>造成最大伤害。获得<color=#28d9ed>免疫</color>效果,持续至进入力竭状态为止。"
       },
       "icon": "MT_Boss_Rage_Common_1",
-      "buff": ["BT_STAT|ST_ATK_IR","BT_DAMGE_TAKEN","BT_IMMUNE"]
+      "buff": [
+        "BT_STAT|ST_ATK_IR",
+        "BT_DAMGE_TAKEN",
+        "BT_IMMUNE"
+      ]
     }
   ],
   "location": {

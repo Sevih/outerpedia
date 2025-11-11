@@ -96,5 +96,103 @@
         "con": [
             "can waste too many turns or die to DoT debuffs"
         ]
+    },
+    "noa": {
+        "pro": [
+            "Easy to build",
+            "Buffing herself damages with {B/BT_STAT|ST_CRITICAL_RATE}",
+            "After critting with basic attack on her turn will follow up with AoE"
+        ],
+        "con": [
+            "Strong alternatives available in Start Dash",
+            "At risk in a fight that punishes AoE"
+        ]
+    },
+    "eternal": {
+        "pro": [
+            "Many useful debuffs, especially against {E/Earth} targets",
+            "Makes {E/Earth} element enemies significantly easier",
+            "2 target attacks are not considered single or AoE"
+        ],
+        "con": [
+            "Wants max skills to apply debuffs consistently",
+            "Can only apply {D/BT_SEALED_RECEIVE_HEAL} {D/BT_STAT|ST_AVOID} against {E/Earth} enemies"
+        ]
+    },
+    "laplace": {
+        "pro": [
+            "Can give the whole team {B/BT_SHIELD_BASED_CASTER}",
+            "Strong chain finisher",
+            "Her Grand Blue Punishment will do more damage with more debuffs on the target"
+        ],
+        "con": [
+            "Dependant on teammates to apply debuffs for high bonus damage"
+        ]
+    },
+    "aer": {
+        "pro": [
+            "Can {D/BT_REMOVE_BUFF} all enemy buffs, ignoring evasion and resilience",
+            "Very strong against Earth element bosses"
+        ],
+        "con": [
+            "-"
+        ]
+    },
+    "kappa": {
+        "pro": [
+            "All her attack scale purely from Defense stat",
+            "Increase all {E/Earth} element allies' damage with her EE"
+        ],
+        "con": [
+            "Difficult to build well early on because of Defense focus"
+        ]
+    },
+    "beth": {
+        "pro": [
+            "Strong fixed damage skills"
+        ],
+        "con": [
+            "Wants {D/BT_DOT_BLEED} on her enemies and {B/BT_STAT|ST_PIERCE_POWER_RATE} on herself to function fully",
+            "Low {D/BT_DOT_BLEED} uptime when building for damage, so needs assistance"
+        ]
+    },
+    "veronica": {
+        "pro": [
+            "Will cleanse debuffs on herself every turn",
+            "Gives lowest health teammate {B/BT_SHIELD_BASED_CASTER} every turn",
+            "Can trigger {B/BT_CALL_BACKUP} easily"
+        ],
+        "con": [
+            "-"
+        ]
+    },
+    "mene": {
+        "pro": [
+            "Can resurrect dead allies",
+            "Heals every turn"
+        ],
+        "con": [
+            "Decreasing debuff duration may not always be enough"
+        ]
+    },
+    "sigma": {
+        "pro": [
+            "Good subdps in Skyward Tower",
+            "Strong {D/BT_DOT_LIGHTNING} support"
+        ],
+        "con": [
+            "Outclassed outside of Skyward Tower"
+        ]
+    },
+    "stella": {
+        "pro": [
+            "Can't be stunned, frozen, or petrified",
+            "Frequent Debuff duration reduction via her Revenge",
+            "Delays enemy turns",
+            "{D/BT_STEAL_BUFF} is not considered {D/BT_REMOVE_BUFF}"
+        ],
+        "con": [
+            "Debuffs duration decrease needs her to Revenge, and may not always be enough to remove them"
+        ]
     }
 }

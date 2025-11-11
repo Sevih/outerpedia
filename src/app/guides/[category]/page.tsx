@@ -181,7 +181,7 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
         </div>
       </div>
 
-      {category !== 'adventure' && (
+      {!['adventure', 'special-request'].includes(category) && (
         <div className="mb-4 flex justify-end items-center gap-2">
           <label className="text-sm text-white">Sort by:</label>
           <SortSelector />

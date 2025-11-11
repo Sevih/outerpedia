@@ -26,6 +26,7 @@ import TranscendenceSlider from '@/app/components/TranscendenceSlider'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import TagDisplayMini from '@/app/components/TagDisplayInline'
 import type { PartnerEntry } from '@/types/partners';
+import type { ProsConsMap } from '@/types/hero-content';
 import rawProsCons from '@/data/hero-pros-cons.json'
 import type { Talisman, Accessory, Weapon, ArmorSet } from '@/types/equipment'
 
@@ -34,28 +35,19 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
 import abbrevData from '@/data/abbrev.json'
 import { l, lRec, lEnhancement, lArray } from '@/lib/localize'
+import type { LocalizedOptional, WithLocalizedFields } from '@/types/common'
 
-type AbbrevEntry = string | { en: string; jp?: string; kr?: string }
+type AbbrevEntry = string | LocalizedOptional
 const abbrev = abbrevData as Record<string, AbbrevEntry>
 
-type CharNameEntry = {
+interface CharNameEntryBase {
     Fullname: string;
-    Fullname_jp?: string;
-    Fullname_kr?: string;
     ID?: string;
-};
-type SlugToCharMap = Record<string, CharNameEntry>;
+}
+type CharNameEntry = WithLocalizedFields<CharNameEntryBase, 'Fullname'>
+type SlugToCharMap = Record<string, CharNameEntry>
 const SLUG_TO_CHAR = slugToCharJson as SlugToCharMap;
 
-type ProsCons = {
-    pro?: string[];
-    con?: string[];
-    pro_jp?: string[];
-    con_jp?: string[];
-    pro_kr?: string[];
-    con_kr?: string[];
-};
-type ProsConsMap = Record<string, ProsCons>;
 
 
 

@@ -817,6 +817,12 @@ const en = {
   'effects.debuffs.intro': 'Debuffs are detrimental effects that are applied to characters.',
   'effects.debuffs.customIcon': 'Those whose names appear in orange italics do not have an in-game icon. The one displayed is the custom icon used on this website.',
   'effects.debuffs.listIntro': 'Here is the list of those (excluding irremovable unique character mechanics):',
+
+  // Contributors page
+  'contributors.meta.title': 'Contributors | Outerpedia',
+  'contributors.meta.desc': 'Meet the team and contributors who helped build Outerpedia.',
+  'contributors.title': 'Contributors',
+  'contributors.description': 'Thank you to everyone who has contributed to making Outerpedia a valuable resource for the Outerplane community.',
 }
 
 export default en
