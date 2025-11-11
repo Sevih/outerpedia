@@ -15,6 +15,7 @@ import { createPageMetadata } from '@/lib/seo'
 import { generateGuideKeywords } from '@/lib/seo_guides'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd, guidesWebPageLd } from './jsonld'
+import ShareButtons from '@/app/components/ShareButtons'
 
 // ---- Types & utils
 const getLocalized = (v: Localized | string, lang: TenantKey) =>
@@ -205,12 +206,18 @@ export default async function GuidePage({ params }: Props) {
         </div>
       </div>
 
-      {/* Auteur + date */}
-      <div className="text-sm text-neutral-400 mb-6">
-        ✍️ <span itemProp="author">{guide.author}</span> · 🕒{' '}
-        <time dateTime={guide.last_updated}>
-          {new Date(guide.last_updated).toLocaleDateString()}
-        </time>
+      {/* Auteur + date + Share */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6 text-sm text-neutral-400">
+        <div>
+          ✍️ <span itemProp="author">{guide.author}</span> · 🕒{' '}
+          <time dateTime={guide.last_updated}>
+            {new Date(guide.last_updated).toLocaleDateString()}
+          </time>
+        </div>
+        <ShareButtons
+          title={`${guideTitle} - ${catTitle}`}
+          lang={langKey}
+        />
       </div>
 
       {/* Texte introductif */}
