@@ -6,12 +6,13 @@ import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import ClassInlineTag from '@/app/components/ClassInlineTag'
+import BossDisplay from '@/app/components/BossDisplay'
 
 const teamSetup = [
-    ['Dianne', 'Saeran', 'Shu','Monad Eva'],
-    ['Noa','Ame','Rey'],
-    ['Kappa','Charlotte','Tamara','Rhona'],
-    ['Ame','Rey','Delta']
+    ['Dianne', 'Saeran', 'Shu', 'Monad Eva'],
+    ['Noa', 'Ame', 'Rey'],
+    ['Kappa', 'Charlotte', 'Tamara', 'Rhona'],
+    ['Ame', 'Rey', 'Delta']
 ]
 
 export default function TyrantGuide() {
@@ -25,6 +26,7 @@ export default function TyrantGuide() {
                     label: 'Guide',
                     content: (
                         <>
+                            <BossDisplay bossKey='Tyrant Toddler' modeKey='Special Request: Ecology Study' defaultBossId='401400262' />
                             <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Strategy Overview</h3>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>Upon entering the battle, you will be instantly stacked with <EffectInlineTag name="BT_DOT_POISON" type="debuff" />, <EffectInlineTag name="BT_DOT_BLEED" type="debuff" />, and <EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /> but so will the boss.</li>
@@ -45,7 +47,7 @@ export default function TyrantGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <div className="mb-4">
                                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-                                    <YoutubeEmbed videoId="n9-IcrXHyBA" title='combat footage'/>
+                                <YoutubeEmbed videoId="n9-IcrXHyBA" title='combat footage' />
                             </div>
                         </>
                     ),

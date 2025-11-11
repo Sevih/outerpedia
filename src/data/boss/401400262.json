@@ -47,7 +47,10 @@
         "jp": "(発動効果)味方に弱体効果が付与された時、敵全体にダメージを与え、自分のすべての<color=#28d9ed>弱体効果</color>の持続ターンを2ターン減少する。",
         "zh": "(触发效果)友军受到弱化效果攻击时,攻击全体敌人,并使自身附带的所有<color=#28d9ed>弱化效果</color>持续时间减少2回合。"
       },
-      "icon": "Skill_Second_4014002_Water"
+      "icon": "Skill_Second_4014002_Water",
+      "buff": [
+        "BT_EXTEND_DEBUFF"
+      ]
     },
     {
       "name": {
@@ -63,7 +66,10 @@
         "jp": "敵全体にダメージを与え、自分の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間UPさせる。",
         "zh": "攻击全体敌人,并使自身的<color=#28d9ed>攻击力</color>提升,持续<color=#28d9ed>2回合</color>。"
       },
-      "icon": "Skill_Ultimate_4014002_Water"
+      "icon": "Skill_Ultimate_4014002_Water",
+      "buff": [
+        "BT_STAT|ST_ATK"
+      ]
     },
     {
       "name": {
@@ -79,7 +85,10 @@
         "jp": "(パッシブ効果)\n毎ターン開始時、敵に与えるダメージが<color=#28d9ed>5%</color>UPする。\nバーストスキルと連携、チェーンスキル以外の攻撃で受けるWGダメージが<color=#28d9ed>100%</color>DOWNする。防御型以外の敵から受けるダメージを<color=#28d9ed>-95%</color>DOWNし、防御型以外の敵の会心率をすべてDOWNさせる。\n戦闘開始時、自分と敵全体に<color=#28d9ed>感電</color>、<color=#28d9ed>出血</color>、<color=#28d9ed>中毒</color>を9ターンの間付与する。この効果は対象の免疫を無視する。\n敵を倒した時、自分のすべての弱体効果を解除し、HPを100%回復する。\n地属性以外の敵から受けるWGダメージが<color=#28d9ed>50%</color>DOWNする。\n地属性以外の敵に与えるダメージがUPし、受けるダメージがDOWNする。地属性の敵に与えるダメージがDOWNし、受けるダメージがUPする。\nボスが受ける<color=#28d9ed>呪い/固定ダメージ</color>のダメージは<color=#28d9ed>10000</color>を超えない。",
         "zh": "(被动效果)\n每回合开始时,对敌人造成的伤害提升<color=#28d9ed>5%</color>。\n受到除爆发技能、夹攻和连携技能以外的攻击时,使所受WG伤害降低<color=#28d9ed>100%</color>。使所有非防御型敌人带来的伤害降低<color=#28d9ed>-95%</color>,并使暴击率全部降低。\n使自身和全体敌人以<color=#28d9ed>触电</color>、<color=#28d9ed>出血</color>、<color=#28d9ed>中毒</color>状态开始战斗,持续9回合。该效果无视目标的免疫效果。\n击杀敌人时,使所有的弱化效果解除,并恢复全部生命值。\n非土属性敌人带来的WG伤害量降低<color=#28d9ed>50%</color>,并使对其造成的伤害提升,且所受伤害降低。\n使对土属性敌人造成的伤害降低,且所受伤害提升。\n首领受到的<color=#28d9ed>诅咒/固定伤害</color>不超过<color=#28d9ed>10000</color>。"
       },
-      "icon": "MT_Passive_1_Water"
+      "icon": "MT_Passive_1_Water",
+      "debuff": [
+        "BT_DOT_LIGHTNING","BT_DOT_BLEED","BT_DOT_POISON"
+      ]
     },
     {
       "name": {
@@ -95,7 +104,10 @@
         "jp": "5ターンごとに<color=#28d9ed>【狂暴化】</color>状態に切り替わり、攻撃力とスピードが<color=#28d9ed>5%</color>UPする。この効果は最大3回まで累積し、ブレイクすると解除される。\n\n<color=#28d9ed>【狂暴化】と【必殺スキル】</color>:【狂暴化】状態になる際、敵全体に大ダメージを与えるが、最大HPの<color=#28d9ed>20%</color>のダメージを受ける。地属性以外の敵に解除不可能な<color=#28d9ed>感電</color>、<color=#28d9ed>出血</color>、<color=#28d9ed>中毒</color>を<color=#28d9ed>3ターン</color>の間付与し、WGを30%回復する。この攻撃は敵の防御力を貫通する。【狂暴化】の持続ターンはない。",
         "zh": "每5回合转化为<color=#28d9ed>狂暴化</color>状态,并使攻击力和速度提升<color=#28d9ed>5%</color>。该效果最多可叠加3次,且该效果将持续至进入力竭状态为止。\n\n<color=#28d9ed>陷入狂暴化和必杀技</color>:陷入狂暴化时,对全体敌人造成巨额伤害,使自身受到相当于生命值上限<color=#28d9ed>20%</color>的伤害。\n对不是土属性的敌人赋予无法解除的<color=#28d9ed>触电</color>、<color=#28d9ed>出血</color>、<color=#28d9ed>中毒</color>,持续<color=#28d9ed>3回合</color>,并使WG恢复30%。该攻击可穿透敌人的防御力。狂暴化状态立即解除。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "debuff": [
+        "BT_DOT_LIGHTNING_IR","BT_DOT_BLEED_IR","BT_DOT_POISON_IR"
+      ]
     }
   ],
   "location": {

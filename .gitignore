@@ -97,3 +97,8 @@ templetbinaryfolder.lnk
 report.txt
 /optimizer
 src/data/boss/index.json
+scripts/completed-bosses.json
+scripts/add-buff-debuff.js
+scripts/buff-debuff-patterns.json
+scripts/buff-debuff-template.txt
+scripts/README-add-buff-debuff.md

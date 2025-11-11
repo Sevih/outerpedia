@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "8.1.4",
+  "version": "8.1.5",
   "private": true,
   "scripts": {
     "dev": "node scripts/dev-with-webp.js",
@@ -30,7 +30,8 @@
     "commit": "node scripts/commit.mjs --no-changelog",
     "commit:fast": "node scripts/commit.mjs --no-changelog --skip-build",
     "migrate:news": "node scripts/migrate-news-to-markdown.mjs",
-    "check:news": "node scripts/scrape-all-va-notices.mjs && node scripts/optimize-news-titles"
+    "check:news": "node scripts/scrape-all-va-notices.mjs && node scripts/optimize-news-titles",
+    "boss:add-buff-debuff": "node scripts/add-buff-debuff.js"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",
