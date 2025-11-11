@@ -7,6 +7,7 @@ import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import EquipmentInlineTag from '@/app/components/EquipmentInlineTag'
 import ElementInlineTag from '@/app/components/ElementInline'
 import StatInlineTag from '@/app/components/StatInlineTag'
+import BossDisplay from '@/app/components/BossDisplay'
 import chimeraTeamsData from './Chimera.json'
 
 type NoteEntry =
@@ -27,7 +28,7 @@ const chimeraTeams = chimeraTeamsData as TeamData
 export default function ChimeraGuide() {
   return (
     <GuideTemplate
-      title="Chimera Strategy Guide"
+      title="Unidentified Chimera Strategy Guide"
       introduction="THE boss you want to conquer as fast as possible to get that sweet sweet speed gear... and critical strike. Chimera&apos;s kit is not overly complex — this is more of a DPS race than anything. If you can&apos;t kill her before she enrages, you&apos;ll have a much harder time surviving."
       defaultVersion="default"
       versions={{
@@ -35,6 +36,7 @@ export default function ChimeraGuide() {
           label: 'Guide',
           content: (
             <>
+              <BossDisplay bossKey='Unidentified Chimera' modeKey='Special Request: Ecology Study' defaultBossId='403400262' />
               <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Strategy Overview</h3>
               <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>If you can&#39;t kill her before she enrages, you&#39;ll have a much harder time surviving.</li>
@@ -47,7 +49,7 @@ export default function ChimeraGuide() {
                 <li><strong>Speed is important</strong> due to the boss&#39;s ability to gain 10% <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> whenever attacked. Ideally, you want your entire team to be above 175 <StatInlineTag name="SPD" /> for Stage 12 (185 for Stage 13).</li>
               </ul>
               <hr className="my-6 border-neutral-700" />
-              <StageBasedTeamSelector teamData={chimeraTeams} defaultStage="1-10" icon='/images/ui/effect/fire.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }}/>
+              <StageBasedTeamSelector teamData={chimeraTeams} defaultStage="1-10" icon='/images/ui/effect/fire.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }} />
               <hr className="my-6 border-neutral-700" />
               <div className="mb-4">
                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>

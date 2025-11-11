@@ -11,19 +11,22 @@ import { execSync } from 'child_process';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Only scrape news after this date (inclusive)
+const MIN_DATE = new Date('2025-11-05');
+
 const BOARDS = {
   en: {
-    url: 'https://vagames.co.kr/noticewrite/notice_en/',
+    url: 'https://annoucements.outerplane.vagames.co.kr/category/annoucements/',
     dataDir: path.join(__dirname, '..', 'src', 'data', 'news', 'live', 'en'),
     imageDir: path.join(__dirname, '..', 'public', 'images', 'news', 'live', 'en'),
   },
   kr: {
-    url: 'https://vagames.co.kr/noticewrite/notice_kr/',
+    url: 'https://annoucements.outerplane.vagames.co.kr/category/annoucements-kr/',
     dataDir: path.join(__dirname, '..', 'src', 'data', 'news', 'live', 'kr'),
     imageDir: path.join(__dirname, '..', 'public', 'images', 'news', 'live', 'kr'),
   },
   jp: {
-    url: 'https://vagames.co.kr/noticewrite/notice_jp/',
+    url: 'https://annoucements.outerplane.vagames.co.kr/category/announcements-jp/',
     dataDir: path.join(__dirname, '..', 'src', 'data', 'news', 'live', 'jp'),
     imageDir: path.join(__dirname, '..', 'public', 'images', 'news', 'live', 'jp'),
   },
@@ -310,62 +313,67 @@ function parseListPage(html) {
   const $ = cheerio.load(html);
   const entries = [];
 
-  $('.kboard-list tbody tr').each((_, row) => {
-    const $row = $(row);
+  $('article.entry-card.post').each((_, article) => {
+    const $article = $(article);
 
-    // Extract title and link
-    const $titleCell = $row.find('td.kboard-list-title');
-    const $link = $titleCell.find('a');
-    let title = $link.text().trim();
-
-    // Remove "New" prefix with tabs/whitespace (forum notification)
-    title = title.replace(/^New\s+/, '');
-
-    const href = $link.attr('href');
+    // Extract title and link from .entry-title
+    const $titleLink = $article.find('.entry-title a');
+    let title = $titleLink.text().trim();
+    const href = $titleLink.attr('href');
 
     // Skip if no link
     if (!href) return;
 
-    // Extract category/badge
-    const category = $titleCell.find('.kboard-category').text().trim();
+    // Extract category from WordPress classes (category-notice, category-update, etc.)
+    const classes = $article.attr('class') || '';
+    const categoryMatch = classes.match(/category-([a-z-]+)/);
+    let category = categoryMatch ? categoryMatch[1] : '';
 
-    // Extract all columns
-    const $cells = $row.find('td');
+    // Also check for [Category] prefix in title
+    const titleCategoryMatch = title.match(/^\[([^\]]+)\]/);
+    if (titleCategoryMatch) {
+      category = titleCategoryMatch[1];
+    }
 
-    // Find date column (look for the one with date format or time)
-    let date = '';
-    $cells.each((_, cell) => {
-      const text = $(cell).text().trim();
-      // Match YYYY.MM.DD format
-      if (text.match(/^\d{4}\.\d{2}\.\d{2}$/)) {
-        date = text;
+    // Extract date from time element
+    const $time = $article.find('time');
+    let date = $time.text().trim();
+
+    // Convert Korean date format (11월 11, 2025) to YYYY.MM.DD
+    const koreanDateMatch = date.match(/(\d+)월\s+(\d+),\s+(\d{4})/);
+    if (koreanDateMatch) {
+      const month = koreanDateMatch[1].padStart(2, '0');
+      const day = koreanDateMatch[2].padStart(2, '0');
+      const year = koreanDateMatch[3];
+      date = `${year}.${month}.${day}`;
+    }
+
+    // Skip articles older than MIN_DATE
+    if (date) {
+      const [year, month, day] = date.split('.');
+      const articleDate = new Date(`${year}-${month}-${day}`);
+      if (articleDate < MIN_DATE) {
+        return; // Skip this article
       }
-      // Match HH:mm format (posted today, less than 24h ago)
-      else if (text.match(/^\d{2}:\d{2}$/)) {
-        // Convert to today's date in YYYY.MM.DD format
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const day = String(today.getDate()).padStart(2, '0');
-        date = `${year}.${month}.${day}`;
-      }
-    });
+    }
 
-    // Extract view count (last numeric cell)
-    const views = $row.find('td').last().text().trim();
+    // Extract featured image
+    const $img = $article.find('img');
+    const featuredImage = $img.attr('src') || '';
 
-    // Extract UID from URL
-    const uidMatch = href.match(/uid=(\d+)/);
-    const uid = uidMatch ? uidMatch[1] : null;
+    // Extract UID from URL (WordPress post ID from classes like post-3933)
+    const postIdMatch = classes.match(/post-(\d+)/);
+    const uid = postIdMatch ? postIdMatch[1] : null;
 
-    if (uid) {
+    if (uid && href) {
       entries.push({
         uid,
         title,
         category,
         date,
-        views,
-        url: href.startsWith('http') ? href : new URL(href, 'https://vagames.co.kr').href
+        views: '0', // WordPress doesn't show view count on listing
+        url: href,
+        featuredImage
       });
     }
   });
@@ -378,11 +386,16 @@ function parseListPage(html) {
  */
 function hasNextPage(html, baseUrl) {
   const $ = cheerio.load(html);
-  const nextLink = $('.kboard-pagination a').filter((_, el) => {
-    return $(el).text().includes('»') || $(el).text().includes('다음');
-  }).attr('href');
 
-  return nextLink ? new URL(nextLink, baseUrl).href : null;
+  // Look for "next" link in pagination
+  const $nextLink = $('.ct-pagination a.next.page-numbers');
+  const nextHref = $nextLink.attr('href');
+
+  if (nextHref) {
+    return nextHref.startsWith('http') ? nextHref : new URL(nextHref, baseUrl).href;
+  }
+
+  return null;
 }
 
 /**
@@ -392,27 +405,35 @@ async function extractNoticeContent(url, metadata, imageDir, lang) {
   const html = await fetchPage(url);
   const $ = cheerio.load(html);
 
-  // Extract the main content area
-  const $content = $('.kboard-detail-content, .kboard-content, article.kboard-detail');
+  // Extract the main content area (WordPress structure)
+  // Use .last() because there might be multiple .entry-content (navigation at top)
+  const $content = $('.entry-content').last();
 
   if ($content.length === 0) {
     console.warn(`No content found for ${url}`);
     return null;
   }
 
-  // Extract better metadata from detail page
-  const $metaInfo = $('.kboard-detail-meta, .kboard-meta');
+  // Try to extract the title from the page if not already set
+  const $pageTitle = $('.page-title, h1.entry-title');
+  if ($pageTitle.length && !metadata.title) {
+    metadata.title = $pageTitle.text().trim();
+  }
 
-  // Try to extract the real date from the detail page
+  // Try to extract date from time element if available
   let realDate = metadata.date;
-  $metaInfo.find('span, div').each((_, elem) => {
-    const text = $(elem).text().trim();
-    // Look for date in YYYY.MM.DD format or YYYY-MM-DD
-    const dateMatch = text.match(/(\d{4})[.\-](\d{2})[.\-](\d{2})/);
-    if (dateMatch) {
-      realDate = `${dateMatch[1]}.${dateMatch[2]}.${dateMatch[3]}`;
+  const $time = $('time');
+  if ($time.length) {
+    const timeText = $time.text().trim();
+    // Convert Korean date format if needed
+    const koreanDateMatch = timeText.match(/(\d+)월\s+(\d+),\s+(\d{4})/);
+    if (koreanDateMatch) {
+      const month = koreanDateMatch[1].padStart(2, '0');
+      const day = koreanDateMatch[2].padStart(2, '0');
+      const year = koreanDateMatch[3];
+      realDate = `${year}.${month}.${day}`;
     }
-  });
+  }
 
   // Extract category from title if not already present
   let category = metadata.category;

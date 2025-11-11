@@ -44,7 +44,7 @@ export default function PrimordialSentinelGuide() {
           label: 'November 2025',
           content: (
             <>
-              <GuideHeading level={3}>Strategy Overview</GuideHeading>
+              <GuideHeading level={3}>Skills Overview</GuideHeading>
 
               <GuideHeading level={4}>Phase 1: Primordial Sentinel Moveset</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
