@@ -248,7 +248,7 @@
       "wgr": 1,
       "cd": "3",
       "buff": [
-        "BT_STAT|ST_SPEED"
+        "BT_STAT|ST_SPEED","BT_EXTRA_ATTACK_ON_TURN_END"
       ],
       "debuff": []
     },

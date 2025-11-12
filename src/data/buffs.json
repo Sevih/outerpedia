@@ -573,6 +573,20 @@
     "icon": "SC_Buff_Counter"
   },
   {
+    "name": "BT_STAT|ST_COUNTER_RATE_IR",
+    "category": "utility",
+    "group": "BT_STAT|ST_COUNTER_RATE",
+    "label": "Counterattack",
+    "label_jp": "反撃",
+    "label_kr": "반격",
+    "label_zh": "反击",
+    "description": "Counterattacks when attacked (Irremovable).",
+    "description_jp": "敵からダメージを受けた時、\\\\nその敵に反撃する。(解除不可)",
+    "description_kr": "피격 시 대상에게 반격합니다. (해제 불가)",
+    "description_zh": "受到攻击时,对目标进行反击。(无法解除)",
+    "icon": "IG_Buff_Counter_Interruption"
+  },
+  {
     "name": "BT_STAT|ST_CRITICAL_DMG_RATE",
     "category": "statBoosts",
     "label": "Increased Critical Damage",

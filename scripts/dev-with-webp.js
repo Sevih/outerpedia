@@ -1,40 +1,57 @@
 const { spawn } = require('child_process');
 const kill = require('tree-kill');
 
-// Afficher le message d'accueil
-console.log('\n   ▲ Next.js');
-console.log('   - LocalEn:    https://outerpedia.local/');
-console.log('   - LocalJp:    https://jp.outerpedia.local/');
-console.log('   - LocalKr:    https://kr.outerpedia.local/');
-console.log('   - LocalZh:    https://zh.outerpedia.local/\n');
+console.log('🔨 Exécution de prebuild...\n');
 
-// Lancer le watcher WebP
-const webpWatcher = spawn('node', ['scripts/watch-webp.js'], {
+// Exécuter prebuild d'abord
+const prebuild = spawn('npm', ['run', 'prebuild'], {
   stdio: 'inherit',
   shell: true
 });
 
-// Attendre un peu avant de lancer Next.js pour laisser le watcher se mettre en place
-setTimeout(() => {
-  // Lancer Next.js
-  const nextDev = spawn('next', ['dev'], {
+prebuild.on('exit', (code) => {
+  if (code !== 0) {
+    console.error('❌ Prebuild a échoué');
+    process.exit(code);
+  }
+
+  console.log('✅ Prebuild terminé\n');
+
+  // Afficher le message d'accueil
+  console.log('\n   ▲ Next.js');
+  console.log('   - LocalEn:    https://outerpedia.local/');
+  console.log('   - LocalJp:    https://jp.outerpedia.local/');
+  console.log('   - LocalKr:    https://kr.outerpedia.local/');
+  console.log('   - LocalZh:    https://zh.outerpedia.local/\n');
+
+  // Lancer le watcher WebP
+  const webpWatcher = spawn('node', ['scripts/watch-webp.js'], {
     stdio: 'inherit',
     shell: true
   });
 
-  // Gérer l'arrêt propre
-  const cleanup = () => {
-    console.log('\n👋 Arrêt des serveurs...');
-    if (webpWatcher.pid) kill(webpWatcher.pid);
-    if (nextDev.pid) kill(nextDev.pid);
-    process.exit(0);
-  };
+  // Attendre un peu avant de lancer Next.js pour laisser le watcher se mettre en place
+  setTimeout(() => {
+    // Lancer Next.js
+    const nextDev = spawn('next', ['dev'], {
+      stdio: 'inherit',
+      shell: true
+    });
 
-  process.on('SIGINT', cleanup);
-  process.on('SIGTERM', cleanup);
+    // Gérer l'arrêt propre
+    const cleanup = () => {
+      console.log('\n👋 Arrêt des serveurs...');
+      if (webpWatcher.pid) kill(webpWatcher.pid);
+      if (nextDev.pid) kill(nextDev.pid);
+      process.exit(0);
+    };
 
-  nextDev.on('exit', () => {
-    if (webpWatcher.pid) kill(webpWatcher.pid);
-    process.exit(0);
-  });
-}, 500);
+    process.on('SIGINT', cleanup);
+    process.on('SIGTERM', cleanup);
+
+    nextDev.on('exit', () => {
+      if (webpWatcher.pid) kill(webpWatcher.pid);
+      process.exit(0);
+    });
+  }, 500);
+});

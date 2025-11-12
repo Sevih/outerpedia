@@ -1,0 +1,128 @@
+'use client'
+
+import GuideTemplate from '@/app/components/GuideTemplate'
+import BossDisplay from '@/app/components/BossDisplay'
+import EffectInlineTag from '@/app/components/EffectInlineTag'
+import EquipmentInlineTag from '@/app/components/EquipmentInlineTag'
+import TeamTabSelector from '@/app/components/TeamTabSelector'
+import YoutubeEmbed from '@/app/components/YoutubeEmbed';
+import CharacterLinkCard from '@/app/components/CharacterLinkCard'
+
+type NoteEntry =
+    | { type: 'p'; string: string }
+    | { type: 'ul'; items: string[] }
+
+const teams = {
+    team1: {
+        label: 'Recommended Team',
+        icon: 'SC_Buff_Stat_CriRate.webp',
+        setup: [
+            ['Akari'],
+            ['Gnosis Nella', 'Iota'],
+            ['Regina', 'Caren', 'Gnosis Dahlia', 'Demiurge Astei'],
+            ['Tio', 'Monad Eva']
+        ]
+    },
+    team2: {
+        label: '1 run public',
+        icon: 'IG_Buff_Seal_Counter.webp',
+        setup: [
+            ['Demiurge Stella'],
+            ['Drakhan'],
+            ['Regina',],
+            ['Monad Eva']
+        ],
+        note: [
+            {
+                type: 'p',
+                string: "This team requires precise setup but the payoff is that it doesn't rely on RNG."
+            },
+            {
+                type: 'ul',
+                items: [
+                    "Drakhan must be faster than the boss, and MEva / Regina slower.",
+                    "You don't want Drakhan's S3 to deal more than 40,000 damage on turn 1 — you want the boss to take one turn before enrage.",
+                    "MEva must be 5★, use Saint's Ring and Vanguard's Charm, while the other 3 units run Rogue or Executioner."
+                ]
+            },
+            {
+                type: 'p',
+                string: 'Here is the fight opening:'
+            },
+            {
+                type: 'ul',
+                items: [
+                    "Drakhan starts with S3 to trigger a counter (giving MEva +50 AP with Vanguard's Charm and +25 AP from allies being hit via healer passive).",
+                    "Queen uses S2 (giving MEva another +50 AP with Vanguard's Charm and +25 AP from allies being hit).",
+                    "MEva takes the turn with 150 AP (200 if 6★ with a +10 Vanguard), self-cleanses with Saint's Ring, and can use S1 Burn 3 to cleanse the team.",
+                    "The rest of the fight is straightforward — use Chain Attack with Drakhan if the boss isn't broken or if S2 is available."
+                ]
+            }
+        ] as NoteEntry[]
+
+    },
+    team3: {
+        label: 'One run kill',
+        icon: 'SC_Buff_detonate.webp',
+        setup: [
+            ['Vlada'],
+            ['Iota'],
+            ['Maxie'],
+            ['Fatal']
+        ]
+    }
+}
+
+export default function IrregularQueenGuide() {
+    return (
+        <GuideTemplate
+            title="Irregular Queen Strategy Guide"
+            introduction="The Irregular Queen is a challenging boss that counters when debuffed with 100% critical chance. She becomes immune to WG damage unless debuffed, making careful debuff management essential."
+            defaultVersion="default"
+            versions={{
+                default: {
+                    label: 'Guide',
+                    content: (
+                        <>
+                            <BossDisplay
+                                bossKey='Irregular Queen'
+                                modeKey='Pursuit Operation'
+                                defaultBossId='51202004'
+                            />
+                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Noticable Heroes</h3>
+                            <ul className="list-disc list-inside text-neutral-300 mb-4">
+                                <li><CharacterLinkCard name="Akari" />: Applies uncounterrable <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> <EffectInlineTag name="BT_SEALED" type="debuff" /> and <EffectInlineTag name="BT_EXTEND_DEBUFF" type="debuff" /> </li>
+                                <li><CharacterLinkCard name="Drakhan" />: Applies uncounterrable <EffectInlineTag name="BT_DOT_CURSE" type="debuff" /></li>
+                                <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> 6★: Can&apos;t be countered and applies <EffectInlineTag name="IG_Buff_Dot_Curse_Interruption_D" type="debuff" /> freely (except dual attack & chain)</li>
+                                <li><CharacterLinkCard name="Gnosis Nella" /> <CharacterLinkCard name="Iota" />: Can <EffectInlineTag name="BT_STUN" type="debuff" /> the boss</li>
+                                <li><CharacterLinkCard name="Regina" /> <CharacterLinkCard name="Caren" /> <CharacterLinkCard name="Gnosis Dahlia" /> <CharacterLinkCard name="Holy Night's Blessing Dianne" />: High damage dealers without relying on debuffs</li>
+                                <li><CharacterLinkCard name="Tio" />: Cleanses the <EffectInlineTag name="BT_AGGRO" type="debuff" /> from S2</li>
+                                <li><CharacterLinkCard name="Monad Eva" /> <CharacterLinkCard name="Astei" /> <CharacterLinkCard name="Demiurge Delta" /> <CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Shu" />: These units can cleanse <EffectInlineTag name="BT_AGGRO" type="debuff" />, but they need <EquipmentInlineTag name="Saint's Ring" type="amulet" /> in order to remove it from themselves at the start of their turn.</li>
+                            </ul>
+
+                            <hr className="my-6 border-neutral-700" />
+                            <TeamTabSelector teams={teams} />
+                            <hr className="my-6 border-neutral-700" />
+
+                            <div className="mb-4">
+                                <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
+                                <p className="mb-2 text-neutral-300">
+                                    A sample video of the 1 run public team.
+                                </p>
+                                <YoutubeEmbed videoId="bPwKu7gjGWg" title="Irregular Queen - Pursuit Operation - 700K (1 run) by Sevih" />
+                                <br />
+                                <p className="mb-2 text-neutral-300">
+                                    A sample video of the One run kill team.
+                                    <span className="text-neutral-400 text-sm italic mt-2">
+                                        Run provided by <span className="text-white font-semibold">XuRenChao</span> (01/10/2025)
+                                    </span>
+                                </p>
+                                <YoutubeEmbed videoId="9Sr0YMGaro0" title="Irregular Queen (Post relaunch) - Pursuit Operation - 1 run kill (Auto) - by XuRenChao" />
+                            </div>
+                        </>
+                    ),
+                },
+            }}
+        />
+    )
+}

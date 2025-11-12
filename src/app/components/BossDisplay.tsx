@@ -203,7 +203,14 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
 
       {/* Skills Section */}
       <div className="mt-4 space-y-2">
-        {data.skills.map((skill, index) => {
+        {data.skills
+          .filter((skill) => {
+            const skillName = lRec(skill.name, lang)
+            const skillDesc = lRec(skill.description, lang)
+            // Skip skills with empty name or description
+            return skillName.trim() !== '' && skillDesc.trim() !== ''
+          })
+          .map((skill, index) => {
           const skillName = lRec(skill.name, lang)
           const skillDesc = formatColorTags(lRec(skill.description, lang))
           const skillIcon = `/images/characters/boss/skill/${skill.icon}.webp`

@@ -231,7 +231,7 @@
       "cd": "4",
       "buff": [
         "BT_ACTION_GAUGE",
-        "BT_AP_CHARGE"
+        "BT_AP_CHARGE","BT_EXTRA_ATTACK_ON_TURN_END"
       ],
       "debuff": []
     },
