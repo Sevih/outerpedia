@@ -817,6 +817,12 @@ const zh = {
   'effects.debuffs.intro': '减益Debuff是施加于敌友方角色的有害效果。',
   'effects.debuffs.customIcon': '一些Debuff没有游戏内图标。本站为其使用自定义图标并用橙色斜体字标记其名字。',
   'effects.debuffs.listIntro': '此处将其（已排除不可移除的角色独有机制）列出：',
+
+  // Contributors page
+  'contributors.meta.title': '贡献者 | Outerpedia',
+  'contributors.meta.desc': '认识帮助构建Outerpedia的团队和贡献者。',
+  'contributors.title': '贡献者',
+  'contributors.description': '感谢所有为使Outerpedia成为Outerplane社区宝贵资源而做出贡献的人。',
 }
 
 export default zh

@@ -817,6 +817,12 @@ const kr = {
   'effects.debuffs.intro': '디버프는 캐릭터에게 적용되는 해로운 효과입니다.',
   'effects.debuffs.customIcon': '주황색 이탤릭체로 표시된 이름은 게임 내 아이콘이 없습니다. 표시된 아이콘은 이 웹사이트에서 사용하는 커스텀 아이콘입니다.',
   'effects.debuffs.listIntro': '다음은 목록입니다 (제거할 수 없는 고유 효과 제외):',
+
+  // Contributors page
+  'contributors.meta.title': '기여자 | Outerpedia',
+  'contributors.meta.desc': 'Outerpedia 구축에 기여한 팀과 기여자들을 만나보세요.',
+  'contributors.title': '기여자',
+  'contributors.description': 'Outerpedia를 Outerplane 커뮤니티를 위한 가치 있는 리소스로 만드는 데 기여해 주신 모든 분들께 감사드립니다.',
 }
 
 export default kr

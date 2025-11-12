@@ -817,6 +817,12 @@ const jp = {
   'effects.debuffs.intro': 'デバフはキャラクターに適用される有害な効果です。',
   'effects.debuffs.customIcon': 'オレンジ色の斜体で表示されている名前は、ゲーム内にアイコンがありません。表示されているのは、このウェブサイトで使用されているカスタムアイコンです。',
   'effects.debuffs.listIntro': '以下はそのリストです（取り除けないユニーク効果を除く）：',
+
+  // Contributors page
+  'contributors.meta.title': 'コントリビューター | Outerpedia',
+  'contributors.meta.desc': 'Outerpediaの構築に貢献したチームとコントリビューターをご紹介します。',
+  'contributors.title': 'コントリビューター',
+  'contributors.description': 'OuterpediaをOuterplaneコミュニティにとって価値あるリソースにするために貢献してくださったすべての方々に感謝します。',
 }
 
 export default jp

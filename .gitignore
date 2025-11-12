@@ -102,3 +102,6 @@ scripts/add-buff-debuff.js
 scripts/buff-debuff-patterns.json
 scripts/buff-debuff-template.txt
 scripts/README-add-buff-debuff.md
+.temp/missing-partners.json
+.temp/missing-pros-cons.json
+scripts/check-missing-content.js

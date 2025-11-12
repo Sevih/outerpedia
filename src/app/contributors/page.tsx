@@ -42,32 +42,34 @@ export default async function ContributorsPage() {
         {contributors.map((contributor) => (
           <Card key={contributor.id}>
             <CardContent className="p-6">
-              <div className="flex items-start gap-4">
-                {contributor.avatar && (
-                  <Image
-                    src={`/images/contributors/${contributor.avatar}.webp`}
-                    alt={contributor.name}
-                    width={80}
-                    height={80}
-                    className="w-20 h-20 rounded-full object-cover border-2 border-cyan-600/30"
-                  />
-                )}
-                <div className="flex-1">
-                  <h2 className="text-xl font-semibold text-white mb-1">{contributor.name}</h2>
-                  <p className="text-sm text-cyan-400 mb-2">{contributor.role}</p>
-
-                  {contributor.favoriteCharacter && (
-                    <p className="text-sm text-gray-400 mb-2">
-                      <span className="text-gray-500">Favorite Character:</span> {contributor.favoriteCharacter}
-                    </p>
+              <div className="flex flex-col gap-4">
+                <div className="flex items-start gap-4">
+                  {contributor.avatar && (
+                    <Image
+                      src={`/images/contributors/${contributor.avatar}.webp`}
+                      alt={contributor.name}
+                      width={80}
+                      height={80}
+                      className="w-20 h-20 rounded-full object-cover border-2 border-cyan-600/30"
+                    />
                   )}
+                  <div className="flex-1">
+                    <h2 className="text-xl font-semibold text-white mb-1">{contributor.name}</h2>
+                    <p className="text-sm text-cyan-400 mb-2">{contributor.role}</p>
 
-                  {contributor.quote && (
-                    <p className="text-sm text-gray-300 italic mt-3 border-l-2 border-cyan-600/50 pl-3">
-                      &ldquo;{contributor.quote}&rdquo;
-                    </p>
-                  )}
+                    {contributor.favoriteCharacter && (
+                      <p className="text-sm text-gray-400 mb-2">
+                        <span className="text-gray-500">Favorite Character:</span> {contributor.favoriteCharacter}
+                      </p>
+                    )}
+                  </div>
                 </div>
+
+                {contributor.quote && (
+                  <p className="text-sm text-gray-300 italic border-l-2 border-cyan-600/50 pl-3">
+                    &ldquo;{contributor.quote}&rdquo;
+                  </p>
+                )}
               </div>
             </CardContent>
           </Card>
