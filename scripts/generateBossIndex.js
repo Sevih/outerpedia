@@ -15,6 +15,18 @@ function extractStageNumber(dungeonName) {
 }
 
 /**
+ * Extrait la difficulté depuis le nom du donjon et retourne une valeur de priorité
+ * Extreme (4) > Very Hard (3) > Hard (2) > Normal (1) > Aucune (0)
+ */
+function extractDifficultyPriority(dungeonName) {
+  if (/Extreme/i.test(dungeonName)) return 4;
+  if (/Very Hard/i.test(dungeonName)) return 3;
+  if (/Hard/i.test(dungeonName)) return 2;
+  if (/Normal/i.test(dungeonName)) return 1;
+  return 0;
+}
+
+/**
  * Génère une clé unique pour grouper les variations d'un même boss
  */
 function generateBossKey(bossData) {
@@ -74,10 +86,45 @@ function generateBossIndex() {
     };
   }
 
-  console.log(`\n📊 Résumé de l'index:`);
-  console.log(`   Total de boss: ${Object.keys(index).length}`);
-
+  // Trier par numéro de Stage (du plus grand vers le plus petit) et utiliser un array
+  const sortedIndex = {};
   for (const [bossName, modes] of Object.entries(index)) {
+    sortedIndex[bossName] = {};
+    for (const [modeName, dungeons] of Object.entries(modes)) {
+      // Créer un array d'objets avec id et données
+      const dungeonsArray = Object.entries(dungeons).map(([id, data]) => ({
+        id,
+        ...data
+      }));
+
+      // Trier par numéro de Stage décroissant, puis par difficulté décroissante
+      dungeonsArray.sort((a, b) => {
+        const stageA = extractStageNumber(a.label.en);
+        const stageB = extractStageNumber(b.label.en);
+
+        // Si les deux ont un numéro de stage, trier par stage
+        if (stageA !== null && stageB !== null) {
+          return stageB - stageA; // Ordre décroissant
+        }
+
+        // Si seulement un a un numéro de stage, celui-ci vient en premier
+        if (stageA !== null) return -1;
+        if (stageB !== null) return 1;
+
+        // Si aucun n'a de stage, trier par difficulté (Extreme > Very Hard > Hard > Normal)
+        const diffA = extractDifficultyPriority(a.label.en);
+        const diffB = extractDifficultyPriority(b.label.en);
+        return diffB - diffA; // Ordre décroissant
+      });
+
+      sortedIndex[bossName][modeName] = dungeonsArray;
+    }
+  }
+
+  console.log(`\n📊 Résumé de l'index:`);
+  console.log(`   Total de boss: ${Object.keys(sortedIndex).length}`);
+
+  for (const [bossName, modes] of Object.entries(sortedIndex)) {
     console.log(`\n   ${bossName}`);
     for (const [modeName, dungeons] of Object.entries(modes)) {
       const dungeonCount = Object.keys(dungeons).length;
@@ -86,7 +133,7 @@ function generateBossIndex() {
   }
 
   // Sauvegarder l'index
-  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(index, null, 2), 'utf-8');
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(sortedIndex, null, 2), 'utf-8');
   console.log(`\n✅ Index généré: ${OUTPUT_FILE}`);
 
   return index;

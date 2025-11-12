@@ -26,6 +26,9 @@ function extractCharactersFromTSX(filePath) {
     const content = fs.readFileSync(filePath, 'utf8');
     const foundCharacters = [];
 
+    // Props JSX à exclure (ne contiennent pas de noms de personnages)
+    const excludedProps = ['bossKey', 'modeKey', 'defaultBossId', 'bossId'];
+
     // Pour chaque personnage, vérifier s'il apparaît dans le fichier entre quotes
     for (const character of allCharacters) {
       const fullname = character.Fullname;
@@ -34,10 +37,23 @@ function extractCharactersFromTSX(filePath) {
       const escapedName = fullname.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
       // Chercher le nom entouré de quotes simples ou doubles
-      const regex = new RegExp(`['"]${escapedName}['"]`);
+      const regex = new RegExp(`['"]${escapedName}['"]`, 'g');
+      const matches = content.matchAll(regex);
 
-      if (regex.test(content)) {
-        foundCharacters.push(fullname);
+      for (const match of matches) {
+        const matchIndex = match.index;
+        // Vérifier le contexte avant le match pour voir si c'est une prop exclue
+        const before = content.substring(Math.max(0, matchIndex - 50), matchIndex);
+
+        // Si c'est précédé d'une prop exclue (ex: bossKey=), on skip
+        const isExcluded = excludedProps.some(prop =>
+          new RegExp(`${prop}\\s*=\\s*$`).test(before)
+        );
+
+        if (!isExcluded) {
+          foundCharacters.push(fullname);
+          break; // On ajoute le personnage une seule fois
+        }
       }
     }
 

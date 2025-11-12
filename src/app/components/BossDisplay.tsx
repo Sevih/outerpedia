@@ -9,7 +9,12 @@ import ElementInlineTag from './ElementInline'
 import ClassInlineTag from './ClassInlineTag'
 import BuffDebuffDisplayMini from './BuffDebuffDisplayMini'
 import BuffDebuffDisplay from './BuffDebuffDisplay'
+import { CharacterPortrait } from './CharacterPortrait'
+import slugToCharJson from '@/data/_SlugToChar.json'
 import type { BossData } from '@/types/boss'
+import type { SlugToCharMap } from '@/types/pull'
+
+const SLUG_TO_CHAR = slugToCharJson as SlugToCharMap
 
 type Props = {
   bossKey: string
@@ -42,8 +47,8 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
   useEffect(() => {
     import('@/data/boss/index.json')
       .then((indexMod) => {
-        const index = (indexMod.default || indexMod) as Record<string, Record<string, Record<string, { label: Record<string, string> }>>>
-        const bossData = index[bossKey]?.[selectedModeKey] as Record<string, { label: Record<string, string> }> | undefined
+        const index = (indexMod.default || indexMod) as Record<string, Record<string, Array<{ id: string; label: Record<string, string> }>>>
+        const bossData = index[bossKey]?.[selectedModeKey]
 
         if (!bossData) {
           setError(`Boss not found: ${bossKey} - ${selectedModeKey}`)
@@ -51,9 +56,9 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
         }
 
         // Extraire les versions depuis l'index (déjà avec labels localisés)
-        const versions = Object.entries(bossData).map(([id, data]) => ({
-          id,
-          label: id, // Gardé pour compatibilité
+        const versions = bossData.map((data) => ({
+          id: data.id,
+          label: data.id, // Gardé pour compatibilité
           localizedLabel: data.label
         }))
 
@@ -106,6 +111,12 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
   const bossName = lRec(data.Name, lang)
   const bossSurname = lRec(data.Surname, lang)
   const portrait = `/images/characters/boss/portrait/MT_${data.icons}.webp`
+  const isCharacterPortrait = data.icons.startsWith('2')
+
+  // Récupérer le nom complet du personnage depuis slugToChar si c'est un portrait de personnage
+  const characterFullName = isCharacterPortrait && SLUG_TO_CHAR[data.icons]
+    ? lRec(SLUG_TO_CHAR[data.icons].Fullname, lang)
+    : bossName
 
   // Fusionner BuffImmune et StatBuffImmune dans une seule liste
   const allImmunities = [
@@ -119,20 +130,32 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
       <div className="relative bg-neutral-900/30 p-4 rounded-lg border border-neutral-700/30">
         <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-0">
           {/* Portrait - spans 2 rows */}
-          <div className="row-span-2 relative w-24 h-24 rounded-lg overflow-hidden border-2 border-neutral-600">
-            <Image
-              src={portrait}
-              alt={bossName}
-              fill
-              className="object-cover"
-              sizes="96px"
-              onError={(e) => {
-                const img = e.currentTarget
-                img.onerror = null
-                img.src = portrait.replace('.webp', '.png')
-              }}
-            />
-          </div>
+
+          {isCharacterPortrait ? (
+            <div className="row-span-2 relative w-20 h-20 rounded-lg overflow-hidden border-2 border-neutral-600">
+              <CharacterPortrait
+                characterId={data.icons}
+                characterName={characterFullName}
+                size={80}
+              />
+            </div>
+          ) : (
+            <div className="row-span-2 relative w-24 h-24 rounded-lg overflow-hidden border-2 border-neutral-600">
+              <Image
+                src={portrait}
+                alt={bossName}
+                fill
+                className="object-cover"
+                sizes="96px"
+                onError={(e) => {
+                  const img = e.currentTarget
+                  img.onerror = null
+                  img.src = portrait.replace('.webp', '.png')
+                }}
+              />
+            </div>
+          )}
+
 
           {/* Top row: surname, class, element, level */}
           <div className="flex flex-wrap gap-2 items-end text-sm">
@@ -211,49 +234,49 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
             return skillName.trim() !== '' && skillDesc.trim() !== ''
           })
           .map((skill, index) => {
-          const skillName = lRec(skill.name, lang)
-          const skillDesc = formatColorTags(lRec(skill.description, lang))
-          const skillIcon = `/images/characters/boss/skill/${skill.icon}.webp`
+            const skillName = lRec(skill.name, lang)
+            const skillDesc = formatColorTags(lRec(skill.description, lang))
+            const skillIcon = `/images/characters/boss/skill/${skill.icon}.webp`
 
-          return (
-            <div
-              key={index}
-              className="bg-neutral-800/30 rounded-lg p-2.5 border border-neutral-700/30 hover:border-neutral-600/50 transition-colors"
-            >
-              <div className="flex items-start gap-2">
-                <div className="relative w-10 h-10 shrink-0">
-                  <Image
-                    src={skillIcon}
-                    alt={skillName}
-                    fill
-                    className="object-contain"
-                    sizes="40px"
-                    onError={(e) => {
-                      const img = e.currentTarget
-                      img.onerror = null
-                      img.src = skillIcon.replace('.webp', '.png')
-                    }}
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <div className="font-bold text-white text-base">{skillName}</div>
-                    {(skill.buff || skill.debuff) && (
-                      <BuffDebuffDisplay
-                        buffs={skill.buff}
-                        debuffs={skill.debuff}
-                      />
-                    )}
+            return (
+              <div
+                key={index}
+                className="bg-neutral-800/30 rounded-lg p-2.5 border border-neutral-700/30 hover:border-neutral-600/50 transition-colors"
+              >
+                <div className="flex items-start gap-2">
+                  <div className="relative w-10 h-10 shrink-0">
+                    <Image
+                      src={skillIcon}
+                      alt={skillName}
+                      fill
+                      className="object-contain"
+                      sizes="40px"
+                      onError={(e) => {
+                        const img = e.currentTarget
+                        img.onerror = null
+                        img.src = skillIcon.replace('.webp', '.png')
+                      }}
+                    />
                   </div>
-                  <div
-                    className="text-neutral-300 text-xs leading-snug"
-                    dangerouslySetInnerHTML={{ __html: skillDesc }}
-                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <div className="font-bold text-white text-base">{skillName}</div>
+                      {(skill.buff || skill.debuff) && (
+                        <BuffDebuffDisplay
+                          buffs={skill.buff}
+                          debuffs={skill.debuff}
+                        />
+                      )}
+                    </div>
+                    <div
+                      className="text-neutral-300 text-xs leading-snug"
+                      dangerouslySetInnerHTML={{ __html: skillDesc }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
       </div>
     </div>
   )
