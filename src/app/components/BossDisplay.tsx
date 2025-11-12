@@ -13,8 +13,9 @@ import type { BossData } from '@/types/boss'
 
 type Props = {
   bossKey: string
-  modeKey: string
+  modeKey: string | string[]
   defaultBossId?: string
+  defaultModeKey?: string
 }
 
 function formatColorTags(input: string) {
@@ -26,22 +27,26 @@ function formatColorTags(input: string) {
     .replace(/\n/g, '<br />')
 }
 
-export default function BossDisplay({ bossKey, modeKey, defaultBossId }: Props) {
+export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultModeKey }: Props) {
   const { lang } = useI18n()
   const t = getT(lang)
   const [data, setData] = useState<BossData | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [bossVersions, setBossVersions] = useState<{ id: string; label: string; localizedLabel: Record<string, string> }[]>([])
   const [selectedBossId, setSelectedBossId] = useState<string>('')
+  const [modeKeys] = useState<string[]>(Array.isArray(modeKey) ? modeKey : [modeKey])
+  const [selectedModeKey, setSelectedModeKey] = useState<string>(
+    defaultModeKey || (Array.isArray(modeKey) ? modeKey[0] : modeKey)
+  )
 
   useEffect(() => {
     import('@/data/boss/index.json')
       .then((indexMod) => {
         const index = (indexMod.default || indexMod) as Record<string, Record<string, Record<string, { label: Record<string, string> }>>>
-        const bossData = index[bossKey]?.[modeKey] as Record<string, { label: Record<string, string> }> | undefined
+        const bossData = index[bossKey]?.[selectedModeKey] as Record<string, { label: Record<string, string> }> | undefined
 
         if (!bossData) {
-          setError(`Boss not found: ${bossKey} - ${modeKey}`)
+          setError(`Boss not found: ${bossKey} - ${selectedModeKey}`)
           return
         }
 
@@ -54,7 +59,9 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId }: Props) 
 
         setBossVersions(versions)
 
-        const initialId = defaultBossId || versions[0]?.id
+        // Utiliser defaultBossId seulement pour le mode par défaut initial
+        const isInitialMode = selectedModeKey === (defaultModeKey || (Array.isArray(modeKey) ? modeKey[0] : modeKey))
+        const initialId = (isInitialMode && defaultBossId) ? defaultBossId : versions[0]?.id
         if (initialId) {
           setSelectedBossId(initialId)
         }
@@ -63,7 +70,7 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId }: Props) 
         console.error('[BossDisplay] Error loading index.json', err)
         setError('Failed to load boss index')
       })
-  }, [bossKey, modeKey, defaultBossId])
+  }, [bossKey, selectedModeKey, defaultBossId, defaultModeKey, modeKey])
 
   useEffect(() => {
     if (!selectedBossId) return
@@ -99,6 +106,12 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId }: Props) 
   const bossName = lRec(data.Name, lang)
   const bossSurname = lRec(data.Surname, lang)
   const portrait = `/images/characters/boss/portrait/MT_${data.icons}.webp`
+
+  // Fusionner BuffImmune et StatBuffImmune dans une seule liste
+  const allImmunities = [
+    ...(data.BuffImmune ? data.BuffImmune.split(',').map(s => s.trim()).filter(Boolean) : []),
+    ...(data.StatBuffImmune ? data.StatBuffImmune.split(',').map(s => s.trim()).filter(Boolean) : [])
+  ]
 
   return (
     <div className="rounded-lg overflow-hidden">
@@ -145,8 +158,21 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId }: Props) 
 
         {/* Selector and Immunities below portrait */}
         <div className="mt-3 flex flex-col gap-2">
-          {bossVersions.length > 1 && (
-            <div className="inline-flex">
+          <div className="flex flex-wrap gap-2">
+            {modeKeys.length > 1 && (
+              <select
+                value={selectedModeKey}
+                onChange={(e) => setSelectedModeKey(e.target.value)}
+                className="bg-neutral-800 border border-neutral-600 rounded px-3 py-1.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+              >
+                {modeKeys.map((mode) => (
+                  <option key={mode} value={mode}>
+                    {mode}
+                  </option>
+                ))}
+              </select>
+            )}
+            {bossVersions.length > 1 && (
               <select
                 value={selectedBossId}
                 onChange={(e) => setSelectedBossId(e.target.value)}
@@ -158,18 +184,17 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId }: Props) 
                   </option>
                 ))}
               </select>
-            </div>
-          )}
-          {(data.BuffImmune || data.StatBuffImmune) && (
+            )}
+          </div>
+          {allImmunities.length > 0 && (
             <div className="flex flex-col gap-1">
               <div className="text-xs text-neutral-400 font-semibold">{t('boss.immunities')}</div>
               <div className="flex flex-wrap gap-1">
-                {data.BuffImmune && data.BuffImmune.split(',').map((effectKey, index) => (
-                  <BuffDebuffDisplayMini key={index} debuffs={[effectKey.trim()]} />
-                ))}
-                {data.StatBuffImmune && data.StatBuffImmune.split(',').map((effectKey, index) => (
-                  <BuffDebuffDisplayMini key={`stat-${index}`} debuffs={[`BT_STAT|${effectKey.trim()}`]} />
-                ))}
+                {allImmunities.map((effectKey, index) => {
+                  // Si la clé commence par ST_, ajouter le préfixe BT_STAT|
+                  const formattedKey = effectKey.startsWith('ST_') ? `BT_STAT|${effectKey}` : effectKey
+                  return <BuffDebuffDisplayMini key={index} debuffs={[formattedKey]} />
+                })}
               </div>
             </div>
           )}
