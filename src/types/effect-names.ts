@@ -158,6 +158,7 @@ export type DebuffName =
   | 'IG_Buff_Death_Timer_Interruption_D'
   | 'IG_Buff_Dot_Bleed_Interruption_D'
   | 'IG_Buff_Dot_Burn_Interruption_D'
+  | 'BT_DOT_BURN_IR'
   | 'IG_Buff_Dot_Curse_Interruption_D'
   | 'IG_Buff_Effect_2000102_Interruption_D'
   | 'IG_Buff_Effect_Sealed_Interruption_D'

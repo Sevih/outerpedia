@@ -893,6 +893,20 @@
     "icon": "IG_Buff_Dot_Burn_Interruption_D"
   },
   {
+    "name": "BT_DOT_BURN_IR",
+    "category": "dot",
+    "group": "BT_DOT_BURN",
+    "label": "Burned",
+    "label_jp": "火傷",
+    "label_kr": "화상",
+    "label_zh": "烧伤",
+    "description": "Takes damage proportional to the caster's Attack at the start of the turn. Ignores Defense. (Irremovable)",
+    "description_jp": "ターン開始時、防御力を無視する\\nダメージを受ける。\\nスキル使用者の攻撃力が高いほど\\n受けるダメージがUPする。\\n(解除不可)",
+    "description_kr": "턴 시작 시 시전자의 공격력에 비례한 피해를 입습니다. 대상의 방어력을 무시합니다. (해제 불가)",
+    "description_zh": "回合开始时,根据施展者的攻击力\\n受到等比伤害。无视目标的防御力。\\n(无法解除)",
+    "icon": "IG_Buff_Dot_Burn_Interruption_D"
+  },
+  {
     "name": "IG_Buff_Dot_Curse_Interruption_D",
     "category": "dot",
     "group": "BT_DOT_CURSE",

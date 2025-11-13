@@ -164,6 +164,7 @@
     "BT_DOT_BLEED_IR": 73,
     "BT_STAT|ST_CRITICAL_DMG_RATE_IR": 74,
     "BT_STAT|ST_SPEED_IR": 75,
-    "BT_KILL": 76
+    "BT_KILL": 76,
+    "BT_DOT_BURN_IR": 77
   }
 }

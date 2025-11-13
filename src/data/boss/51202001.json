@@ -63,7 +63,7 @@
       },
       "type": "SKT_SECOND",
       "description": {
-        "en": "Attacks an enemy, and reduces Priority of the target by <color=#28d9ed>20%</color>, and increases Priority of all allies by <color=#28d9ed>-20%</color>.",
+        "en": "Attacks an enemy, and reduces Priority of the target by <color=#28d9ed>20%</color>, and increases Priority of all allies by <color=#28d9ed>20%</color>.",
         "kr": "적을 공격하고 대상의 행동 게이지를 <color=#28d9ed>20%</color> 감소시키고, 아군 전체의 행동 게이지를 <color=#28d9ed>-20%</color> 증가시킵니다.",
         "jp": "敵単体にダメージを与え、対象の行動ゲージを<color=#28d9ed>20%</color>DOWNさせ、味方全体の行動ゲージを<color=#28d9ed>-20%</color>UPさせる。",
         "zh": "攻击敌人,并使目标的行动值降低<color=#28d9ed>20%</color>,且使全体友军的行动值提升<color=#28d9ed>-20%</color>。"

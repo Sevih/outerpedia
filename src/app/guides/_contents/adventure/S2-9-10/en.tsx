@@ -22,15 +22,6 @@ export default function VladiMaxGuide() {
                                 defaultModeKey='Story (Hard)'
                                 defaultBossId='4144004'
                             />
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Vladi Max moveset</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li><strong>S1</strong>: Single, reduces chain point by 20.</li>
-                                <li><strong>S2</strong>: AoE, inflict <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> 2 turns.</li>
-                                <li><strong>S3</strong>: AoE, 20% chance to <EffectInlineTag name="BT_STUN" type="debuff" /> 4 turns. If enemy is inflicted by <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> chances go up to 100%</li>
-                                <li><strong>Passive</strong>: Does not trigger <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />, <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" /> or <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />.</li>
-                                <li><strong>Enrage</strong>: When health drops under 40%. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />. Increases Attack and Speed by 15%. Recovers 10% of weakness gauge.</li>
-                                <li><strong>Enrage Ultimate</strong>: used when enrage ends. Reduce action points and chain points by 100%.</li>
-                            </ul>
                             <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advice</h3>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>Use characters with <EffectInlineTag name="BT_IMMUNE" type="buff" />, <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" />.</li>
