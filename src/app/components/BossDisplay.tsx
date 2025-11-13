@@ -162,6 +162,12 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
     ...(data.StatBuffImmune ? data.StatBuffImmune.split(',').map(s => s.trim()).filter(Boolean) : [])
   ]
 
+  // Vérifier si c'est un mode Story pour afficher la localisation
+  const isStoryMode = data.location ? (() => {
+    const mode = lRec(data.location.mode, lang);
+    return mode === 'Story (Normal)' || mode === 'Story (Hard)';
+  })() : false;
+
   return (
     <div className="rounded-lg overflow-hidden">
       {/* Header with portrait and basic info */}
@@ -250,6 +256,11 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
               </select>
             )}
           </div>
+          {isStoryMode && (
+            <div className="text-sm text-neutral-300">
+              {lRec(data.location.area_id, lang)} - {lRec(data.location.dungeon, lang)}
+            </div>
+          )}
           {allImmunities.length > 0 && (
             <div className="flex flex-col gap-1">
               <div className="text-xs text-neutral-400 font-semibold">{t('boss.immunities')}</div>

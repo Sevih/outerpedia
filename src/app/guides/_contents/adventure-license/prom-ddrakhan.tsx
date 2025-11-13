@@ -8,12 +8,22 @@ import TeamTabSelector from '@/app/components/TeamTabSelector'
 const teams = {
   promo: {
     label: 'Promotion Run',
-    icon: 'SC_Buff_Invincible.webp',
+    icon: 'SC_Buff_Stat_HitRecovery.webp',
     setup: [
       ['Monad Eva', 'Leo'],
       ['Nella', 'Mene'],
       ['Gnosis Nella', 'Tamamo-no-Mae'],
       ['Iota', 'Laplace', 'Demiurge Stella']
+    ]
+  },
+  safe: {
+    label: 'Safe Prom Run',
+    icon: 'CM_Stat_Icon_HP.webp',
+    setup: [
+      ['Monad Eva'],
+      ['Nella'],
+      ['Gnosis Viella'],
+      ["Summer Knight's Dream Ember"]
     ]
   }
 }

@@ -161,11 +161,11 @@ export default function CarouselSlotV2({ characters }: Props) {
                     ))}
                   </div>
 
-                  <div className="absolute bottom-[3.125rem] right-2 z-30 overlay-fade">
+                  <div className="absolute bottom-12.5 right-2 z-30 h-6 w-6">
                     <ClassIcon className={data.Class as ClassType} />
                   </div>
 
-                  <div className="absolute bottom-[1.375rem] right-1.5 z-30 overlay-fade">
+                  <div className="absolute bottom-5.5 right-1.5 z-30 h-6 w-6">
                     <ElementIcon element={data.Element as ElementType} />
                   </div>
 

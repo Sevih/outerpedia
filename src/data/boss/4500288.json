@@ -54,7 +54,10 @@
         "jp": "敵単体にダメージを与え、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>30%</color>UPさせる。\\nこのスキルは自分の<color=#28d9ed>回避</color>が高いほどダメージがUPする。",
         "zh": "攻击敌人,并使自身<color=#28d9ed>行动值</color>提升<color=#28d9ed>30%</color>。\\n自身<color=#28d9ed>回避</color>越高,则该技能伤害越高。"
       },
-      "icon": "Skill_First_2000067"
+      "icon": "Skill_First_2000067",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ]
     },
     {
       "name": {
@@ -70,7 +73,10 @@
         "jp": "(パッシブ効果)HPがDOWNするたびに、最大<color=#28d9ed>ミスヒット</color>確率がUPする。<color=#28d9ed>【レジーナワールド】</color>がある場合、ダメージが大幅にUPする。\\n(発動効果)敵の攻撃を回避時、対象に反撃し、<color=#28d9ed>【レジーナワールド】</color>を<color=#28d9ed>2回</color>付与する。このスキルは自分の<color=#28d9ed>回避</color>が高いほどダメージがUPする。",
         "zh": "(被动效果)生命值降低时,最大<color=#28d9ed>闪避</color>几率提升。附带<color=#28d9ed>蕾吉纳的世界</color>时,伤害大幅增加。\\n(触发效果)回避敌人攻击时,对目标进行反击,并触发<color=#28d9ed>2次</color><color=#28d9ed>蕾吉纳的世界</color>。自身<color=#28d9ed>回避</color>越高,则该技能伤害越高。"
       },
-      "icon": "Skill_Second_2000067"
+      "icon": "Skill_Second_2000067",
+      "buff": [
+        "IG_Buff_Effect_2000067_Interruption"
+      ]
     },
     {
       "name": {
@@ -86,7 +92,10 @@
         "jp": "対象の強化効果をすべて解除し、敵単体にダメージを与える。\\nこのスキルは対象の防御力を<color=#28d9ed>30%</color>無視し、自分の<color=#28d9ed>回避</color>が高いほどダメージがUPする。強化効果の解除効果は対象の効果抵抗を無視する。",
         "zh": "解除目标所有强化效果,并攻击敌人。\\n该技能无视目标的<color=#28d9ed>30%</color>防御力,自身<color=#28d9ed>回避</color>越高,则该技能伤害越高。强化解除效果无视目标的效果抵抗。"
       },
-      "icon": "Skill_Ultimate_2000067"
+      "icon": "Skill_Ultimate_2000067",
+      "debuff": [
+        "BT_REMOVE_BUFF"
+      ]
     },
     {
       "name": {
@@ -102,7 +111,11 @@
         "jp": "敵が10回行動するたびに<color=#28d9ed>【狂暴化】</color>状態に切り替わり、自分に解除不可能な攻撃力UP/ダメージDOWN/回避UP効果を3ターンの間付与する。\\n\\n<color=#28d9ed>【狂暴化】と【必殺スキル】</color>:敵全体に大ダメージを与える。",
         "zh": "敌人每行动10次,便转化为<color=#28d9ed>狂暴化</color>状态,并使自身获得无法解除的攻击力提升/伤害降低/回避提升效果,持续3回合。\\n\\n<color=#28d9ed>陷入狂暴化和必杀技</color>:对全体敌人造成巨额伤害。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_STAT|ST_ATK_IR",
+        "BT_STAT|ST_AVOID_IR"
+      ]
     }
   ]
 }

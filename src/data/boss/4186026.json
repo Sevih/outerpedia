@@ -54,7 +54,10 @@
         "jp": "敵単体にダメージを与え、対象に<color=#28d9ed>呪い</color>を<color=#28d9ed>3ターン</color>の間付与する。",
         "zh": "攻击敌人,并对目标造成<color=#28d9ed>诅咒</color>效果,持续<color=#28d9ed>3回合</color>。"
       },
-      "icon": "Skill_First_4086026"
+      "icon": "Skill_First_4086026",
+      "debuff": [
+        "BT_DOT_CURSE"
+      ]
     },
     {
       "name": {
@@ -70,7 +73,13 @@
         "jp": "敵全体にダメージを与える。対象に<color=#28d9ed>呪い</color>を3ターンの間付与し、自分の<color=#28d9ed>効果命中</color>を<color=#28d9ed>3ターン</color>の間UPさせる。",
         "zh": "攻击全体敌人。对目标造成<color=#28d9ed>诅咒</color>,持续<color=#28d9ed>3回合</color>,并使自身<color=#28d9ed>效果命中</color>提升,持续<color=#28d9ed>3回合</color>。"
       },
-      "icon": "Skill_Second_4086026"
+      "icon": "Skill_Second_4086026",
+      "debuff": [
+        "BT_DOT_CURSE"
+      ],
+      "buff": [
+        "BT_STAT|ST_BUFF_CHANCE"
+      ]
     },
     {
       "name": {
@@ -86,7 +95,11 @@
         "jp": "敵全体にダメージを与え、対象の呪いをすべて<color=#28d9ed>破裂</color>させる。その後、残りHPが70%以下の敵の免疫を無視し、<color=#28d9ed>凍結</color>を<color=#28d9ed>2ターン</color>の間付与する。",
         "zh": "攻击全体敌人,并使目标受到的所有诅咒效果<color=#28d9ed>爆炸</color>。此后无视生命值在70%以下敌人的免疫效果,并使其陷入<color=#28d9ed>冰冻</color>状态,持续<color=#28d9ed>2回合</color>。"
       },
-      "icon": "Skill_Ultimate_4086026"
+      "icon": "Skill_Ultimate_4086026",
+      "debuff": [
+        "BT_FREEZE",
+        "BT_IMMEDIATELY_CURSE"
+      ]
     },
     {
       "name": {
@@ -102,7 +115,37 @@
         "jp": "(パッシブ効果)\\n<color=#28d9ed>効果的中</color>がUPした状態で攻撃時、敵全体に免疫を無視する、解除不可能な<color=#28d9ed>呪い</color>を<color=#28d9ed>9ターン</color>の間追加で付与する。\\n攻撃対象が<color=#28d9ed>凍結</color>状態の場合、対象の防御力を<color=#28d9ed>100%</color>無視し、復活と蘇生ができなくなる。\\n【ハルシュナ】のスキルでは敵の反撃、復讐、迅速対応が発動しない。",
         "zh": "(被动效果)\\n处于<color=#28d9ed>效果命中</color>提升状态下攻击时,无视全体敌人的免疫效果,并额外造成无法解除的<color=#28d9ed>诅咒</color>效果,持续<color=#28d9ed>9回合</color>。\\n攻击时,若目标处于<color=#28d9ed>冰冻</color>状态,则无视目标防御力的<color=#28d9ed>100%</color>,且无法触发复活与苏醒效果。\\n赫索纳的所有攻击后,不会触发敌人的反击、复仇、迅速应对效果。"
       },
-      "icon": "MT_Passive_1_Water"
+      "icon": "MT_Passive_1_Water",
+      "buff": [
+        "BT_SEAL_COUNTER"
+      ],
+      "debuff": [
+        "BT_SEALED_RESURRECTION",
+        "IG_Buff_Dot_Curse_Interruption_D"
+      ]
+    },
+    {
+      "name": {
+        "en": "Enraged",
+        "kr": "광폭화",
+        "jp": "狂暴化",
+        "zh": "狂暴化"
+      },
+      "type": "SKT_RAGE_ENTER1",
+      "description": {
+        "en": "For every 10 enemy actions, becomes <color=#28d9ed>Enraged</color>, and grants an irremovable effect to the caster that increases Attack and reduces damage taken for 3 turns.\\n\\n<color=#28d9ed>Enraged Ultimate Skill</color>: Deals heavy damage to all enemies. Then, inflicts Cursed on the target for <color=#28d9ed>9 turn(s)</color>.",
+        "kr": "적이 10회 행동할 때마다 <color=#28d9ed>광폭화</color> 상태로 전환하고, 자신에게 해제되지 않는 공격력 증가/피해 감소 효과를 3턴 동안 부여합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체에게 큰 피해를 입힙니다. 이후 대상에게 <color=#28d9ed>9턴</color> 동안 저주를 부여합니다.",
+        "jp": "敵が10回行動するたびに<color=#28d9ed>【狂暴化】</color>状態に切り替わり、自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与する。\\n\\n<color=#28d9ed>【狂暴化】と【必殺スキル】</color>:敵全体に大ダメージを与える。その後、対象に呪いを<color=#28d9ed>9ターン</color>の間付与する。",
+        "zh": "敌人每行动10次,便转化为<color=#28d9ed>狂暴化</color>状态,并使自身获得无法解除的攻击力提升/回避降低效果,持续3回合。\\n\\n<color=#28d9ed>陷入狂暴化和必杀技</color>:对全体敌人造成巨额伤害。此后,对目标造成诅咒效果,持续<color=#28d9ed>9回合</color>。"
+      },
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_ATK_IR"
+      ],
+      "debuff": [
+        "BT_DOT_CURSE"
+      ]
     }
   ]
 }

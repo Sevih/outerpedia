@@ -197,8 +197,8 @@ const bannerTabs: BannerTab[] = [
                 <ul>
                     <li><CharacterLinkCard name="Poolside Trickster Regina" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released July 16, 2023 (last rerun: July 01, 2025)</li>
                     <li><CharacterLinkCard name="Gnosis Dahlia" /> – <strong className='text-pink-400'>Limited</strong> Hero, released July 29, 2024 (last rerun: January 23, 2025)</li>
-                    <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released October 21, 2024 (last rerun: August 12, 2025)</li>
-                    <li><CharacterLinkCard name="Gnosis Nella" /> – <strong className='text-pink-400'>Limited</strong> Hero, released November 4, 2024 (last rerun: October 23, 2025)</li>
+                    <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released October 21, 2024 (last rerun: October 23, 2025)</li>
+                    <li><CharacterLinkCard name="Gnosis Nella" /> – <strong className='text-pink-400'>Limited</strong> Hero, released November 4, 2024 (last rerun: August 12, 2025)</li>
                     <li><CharacterLinkCard name="Holy Night's Blessing Dianne" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released December 16, 2024</li>
                     <li><CharacterLinkCard name="Ais Wallenstein" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
                     <li><CharacterLinkCard name="Bell Cranel" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>

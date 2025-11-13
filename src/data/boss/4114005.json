@@ -49,7 +49,10 @@
         "jp": "敵単体にダメージを与え、<color=#28d9ed>2ターン</color>の間、対象に<color=#28d9ed>火傷</color>を付与する。",
         "zh": "攻击敌人,并赋予目标<color=#28d9ed>2回合</color>的<color=#28d9ed>烧伤</color>。"
       },
-      "icon": "Skill_First_4014005"
+      "icon": "Skill_First_4014005",
+      "debuff": [
+        "BT_DOT_BURN"
+      ]
     },
     {
       "name": {
@@ -65,7 +68,10 @@
         "jp": "敵全体にダメージを与え、<color=#28d9ed>3ターン</color>の間、対象に<color=#28d9ed>火傷</color>を付与する。",
         "zh": "攻击全体敌人,并赋予目标<color=#28d9ed>3回合</color>的<color=#28d9ed>烧伤</color>。"
       },
-      "icon": "Skill_Second_4014005"
+      "icon": "Skill_Second_4014005",
+      "debuff": [
+        "BT_DOT_BURN"
+      ]
     },
     {
       "name": {
@@ -81,7 +87,10 @@
         "jp": "敵全体にダメージを与え、対象の火傷をすべて<color=#28d9ed>破裂</color>させる。",
         "zh": "解除全体敌人的<color=#28d9ed>所有</color><color=#28d9ed>强化效果</color>,攻击全体敌人。并引爆目标身上的烧伤效果。"
       },
-      "icon": "Skill_Ultimate_4014005"
+      "icon": "Skill_Ultimate_4014005",
+      "debuff": [
+        "BT_IMMEDIATELY_BURN"
+      ]
     },
     {
       "name": {
@@ -97,7 +106,14 @@
         "jp": "(パッシブ効果)\\n戦闘開始時、自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>100%</color>UPし、敵全体に<color=#28d9ed>1ターン</color>の間、解除不可能な<color=#28d9ed>火傷</color>2個を付与する。(対象の効果抵抗及び免疫無視)\\n\\nHPが<color=#28d9ed>80%</color>を超えると、WGダメージを受けない。\\n\\n防御型ではない敵のターン終了時、対象に<color=#28d9ed>2ターン</color>の間、火傷を付与する。\\n\\n自分が与える火傷のダメージが<color=#28d9ed>100%</color>UPする。",
         "zh": "(被动效果)\\n战斗开始时,赋予全体敌人2层无法解除的<color=#28d9ed>烧伤</color>效果,持续<color=#28d9ed>1回合</color>(无视目标的效果抵抗与免疫)。\\n\\n若生命值超过<color=#28d9ed>90%</color>,则不会受到WG伤害。\\n\\n每当非防御型敌人结束回合时,赋予全体敌人<color=#28d9ed>[Buff_T_4014005_4_6_1]回合</color>的烧伤效果。\\n\\n自身造成的烧伤伤害提升<color=#28d9ed>100%</color>。"
       },
-      "icon": "MT_Passive_1_Fire"
+      "icon": "MT_Passive_1_Fire",
+      "buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "debuff": [
+        "BT_DOT_BURN",
+        "IG_Buff_Dot_Burn_Interruption_D"
+      ]
     },
     {
       "name": {
@@ -113,7 +129,13 @@
         "jp": "敵が10回行動するごとに<color=#28d9ed>【狂暴化】</color>状態に切り替わる。\\n\\n<color=#28d9ed>【狂暴化】</color> : 自分に解除不可能なダメージDOWN効果を5ターンの間付与し、WG30%を回復する。狂暴化は5ターンの間継続する。\\n\\n<color=#28d9ed>【片づけの時間】</color> : 狂暴化終了時に使用する。\\n敵全体の強化効果をすべて解除し、すべて死亡させる。\\nこのスキルで倒れた敵は復活と蘇生ができなくなる。",
         "zh": "每当敌人行动10次,转换为<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法被解除的承受伤害降低效果,持续5回合,并使WG恢复30%。狂暴化持续5回合。\\n\\n<color=#28d9ed>收割时刻</color>:狂暴化结束时发动。\\n解除全体敌人的所有强化效果并使其立即死亡。\\n被此技能击杀的敌人无法复活与苏醒。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "debuff": [
+        "BT_SEALED_RESURRECTION"
+      ],
+      "buff": [
+        "BT_DAMGE_TAKEN"
+      ]
     }
   ]
 }

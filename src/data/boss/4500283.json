@@ -49,7 +49,10 @@
         "jp": "敵単体にダメージを与え、攻撃力が最も高い味方2体に<color=#28d9ed>連携</color>を発生させる。",
         "zh": "攻击敌人,并使攻击力最高的2名友军发动<color=#28d9ed>夹攻</color>。"
       },
-      "icon": "Skill_First_2000088"
+      "icon": "Skill_First_2000088",
+      "buff": [
+        "BT_CALL_BACKUP"
+      ]
     },
     {
       "name": {
@@ -65,7 +68,10 @@
         "jp": "(発動効果)ダメージを受けた後、最大HPが最も低い敵単体に<color=#28d9ed>【来て、ハウンド】</color>を使用する。<color=#28d9ed>100%</color>の確率で対象に<color=#28d9ed>石化</color>を<color=#28d9ed>1ターン</color>の間付与する。",
         "zh": "(触发效果)受到攻击后,使生命值上限最低的敌人使用<color=#28d9ed>来吧,哈恩德</color>。有<color=#28d9ed>100%</color>的几率对目标造成<color=#28d9ed>石化</color>效果,持续<color=#28d9ed>1回合</color>。"
       },
-      "icon": "Skill_Second_2000088"
+      "icon": "Skill_Second_2000088",
+      "debuff": [
+        "BT_STONE"
+      ]
     },
     {
       "name": {
@@ -81,7 +87,10 @@
         "jp": "対象の<color=#28d9ed>強化効果</color>の持続ターンを<color=#28d9ed>1ターン</color>減少させた後、敵単体にダメージを与える。\\nこのスキルは対象の防御力を<color=#28d9ed>30%</color>無視する。",
         "zh": "使目标的<color=#28d9ed>强化效果</color>持续回合数减少<color=#28d9ed>1回合</color>后,攻击敌人。\\n无视该技能目标的<color=#28d9ed>30%</color>防御力。"
       },
-      "icon": "Skill_Ultimate_2000088"
+      "icon": "Skill_Ultimate_2000088",
+      "debuff": [
+        "BT_EXTEND_BUFF"
+      ]
     },
     {
       "name": {
@@ -97,7 +106,14 @@
         "jp": "ターン開始時、戦場に自分1体のみいる場合、倒れた味方全体を<color=#28d9ed>復活(強化)</color>させた後、ダメージを与える。\\n自分が攻撃を受けた時、味方に<color=#28d9ed>弱体効果</color>が付与されなかった場合、自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>100%</color>UPする。\\n味方が回避した時、免疫を無視し、敵全体を<color=#28d9ed>4ターン</color>の間<color=#28d9ed>挑発</color>する。(解除不可、戦闘中に1度のみ発動)",
         "zh": "回合开始时,若只剩自身存活,则使死亡的全体友军<color=#28d9ed>复活(强化)</color>后攻击。\\n自身受到攻击时,若友军中至少有1人未附带<color=#28d9ed>弱化效果</color>,则使自身<color=#28d9ed>行动值</color>提升<color=#28d9ed>100%</color>。\\n若友军中至少有1名回避时,则无视免疫效果,并对全体敌人造成<color=#28d9ed>挑衅</color>效果,持续<color=#28d9ed>4回合</color>。(无法解除,战斗中仅首次触发1次)"
       },
-      "icon": "MT_Passive_1_Dark"
+      "icon": "MT_Passive_1_Dark",
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_RESURRECTION"
+      ],
+      "debuff": [
+        "BT_AGGRO_IR"
+      ]
     },
     {
       "name": {
@@ -113,7 +129,12 @@
         "jp": "4ターンごとに<color=#28d9ed>【狂暴化】</color>状態に切り替わり、自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与する。\\n\\n<color=#28d9ed>【狂暴化】と【必殺スキル】</color>:敵全体に大ダメージを与え、味方全体の<color=#28d9ed>回避</color>を<color=#28d9ed>3ターン</color>の間UPさせる(解除不可)",
         "zh": "每4回合转化为<color=#28d9ed>狂暴化</color>状态,并使自身获得无法解除的攻击力提升/伤害降低效果,持续3回合。\\n\\n<color=#28d9ed>陷入狂暴化和必杀技</color>:对全体敌人造成巨额伤害,对全体友军造成<color=#28d9ed>回避</color>效果,持续<color=#28d9ed>3回合</color>。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_ATK_IR",
+        "BT_STAT|ST_AVOID_IR"
+      ]
     }
   ]
 }
