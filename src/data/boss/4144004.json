@@ -49,7 +49,10 @@
         "jp": "敵単体にダメージを与え、敵の<color=#28d9ed>CP</color>を<color=#28d9ed>12</color>DOWNさせる。",
         "zh": "攻击敌人,并使敌军<color=#28d9ed>CP</color>降低<color=#28d9ed>12</color>。"
       },
-      "icon": "MT_Attack_Arrow_1_Light"
+      "icon": "MT_Attack_Arrow_1_Light",
+      "debuff": [
+        "BT_CP_CHARGE"
+      ]
     },
     {
       "name": {
@@ -65,7 +68,10 @@
         "jp": "敵全体にダメージを与え、<color=#28d9ed>100%</color>の確率で対象の<color=#28d9ed>防御力</color>を2ターンの間DOWNさせる。",
         "zh": "攻击全体敌人,并有<color=#28d9ed>100%</color>的几率对目标造成<color=#28d9ed>防御力</color>降低,持续<color=#28d9ed>2回合</color>。"
       },
-      "icon": "MT_Attack_Claw_1_Light"
+      "icon": "MT_Attack_Claw_1_Light",
+      "debuff": [
+        "BT_STAT|ST_DEF"
+      ]
     },
     {
       "name": {
@@ -81,7 +87,10 @@
         "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>20%</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>2ターン</color>の間付与する。<color=#28d9ed>防御力</color>がDOWNした状態の敵に<color=#28d9ed>100%</color>の確率で<color=#28d9ed>スタン</color>を発動する。",
         "zh": "攻击全体敌人,并有<color=#28d9ed>20%</color>的几率对目标造成<color=#28d9ed>晕眩</color>效果,持续<color=#28d9ed>2回合</color>。有<color=#28d9ed>100%</color>的几率对<color=#28d9ed>防御力</color>降低的敌人造成<color=#28d9ed>晕眩</color>效果。"
       },
-      "icon": "MT_Attack_Magic_1_Light"
+      "icon": "MT_Attack_Magic_1_Light",
+      "debuff": [
+        "BT_STUN"
+      ]
     },
     {
       "name": {
@@ -97,7 +106,10 @@
         "jp": "(パッシブ効果)\\nブラッディマックスのすべての攻撃後には、敵の反撃、復讐、迅速対応が発動しない。",
         "zh": "(被动效果)\\n血腥麦克斯的所有攻击都不会触发敌人的反击、复仇、迅速应对。"
       },
-      "icon": "MT_Passive_1_Light"
+      "icon": "MT_Passive_1_Light",
+      "buff": [
+        "BT_SEAL_COUNTER"
+      ]
     },
     {
       "name": {
@@ -113,7 +125,15 @@
         "jp": "最大HPの<color=#28d9ed>40%</color>以下になると<color=#28d9ed>【狂暴化】</color>状態に切り替わり、攻撃力とスピードが<color=#28d9ed>15%</color>UPする。この効果はブレイクすると解除される。\\n\\n<color=#28d9ed>【狂暴化】</color>:自分に解除不可能な攻撃力UPとダメージDOWN効果を3ターンの間付与し、WG10%を回復する。【狂暴化】は3ターンの間持続する。\\n\\n<color=#28d9ed>【大元帥の名において】</color>:【狂暴化】終了時に発動する。\\n敵全体の<color=#28d9ed>CP</color>と<color=#28d9ed>AP</color>を<color=#28d9ed>-100%</color>DOWNさせる。",
         "zh": "若生命值降至上限的<color=#28d9ed>40%</color>以下,则转换为<color=#28d9ed>狂暴化</color>状态,并使攻击力和速度提升<color=#28d9ed>15%</color>。该效果将持续至进入力竭状态为止。\\n\\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法被解除的攻击力提升/伤害降低效果,持续3回合,且WG恢复10%。狂暴化持续3个回合。\\n\\n<color=#28d9ed>以大元帅之名</color>:狂暴化结束时使用。\\n使全体敌人的<color=#28d9ed>CP</color>和<color=#28d9ed>AP</color>降低<color=#28d9ed>-100%</color>。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_ATK_IR"
+      ],
+      "debuff": [
+        "BT_CP_CHARGE",
+        "BT_AP_CHARGE"
+      ]
     },
     {
       "name": {
