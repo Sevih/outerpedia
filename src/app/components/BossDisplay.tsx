@@ -21,7 +21,7 @@ type Props = {
   modeKey: string | string[]
   defaultBossId?: string
   defaultModeKey?: string
-  labelFilter?: string // Filter boss versions by label (e.g., "An Unpleasant Reunion")
+  labelFilter?: string | string[] // Filter boss versions by label(s) (e.g., "An Unpleasant Reunion" or ["Label1", "Label2"])
 }
 
 function formatColorTags(input: string) {
@@ -61,11 +61,14 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
             return
           }
 
-          // Collecter toutes les versions qui matchent le label
+          // Normaliser labelFilter en tableau
+          const labelFilters = Array.isArray(labelFilter) ? labelFilter : [labelFilter]
+
+          // Collecter toutes les versions qui matchent un des labels
           for (const [mode, versions] of Object.entries(bossEntry)) {
             for (const version of versions) {
-              // Vérifier si le label correspond (en anglais pour la comparaison)
-              if (version.label.en === labelFilter) {
+              // Vérifier si le label correspond à un des filtres (en anglais pour la comparaison)
+              if (labelFilters.includes(version.label.en)) {
                 allVersions.push({
                   id: version.id,
                   label: version.id,
@@ -77,7 +80,7 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
           }
 
           if (allVersions.length === 0) {
-            setError(`No boss found with label: ${labelFilter}`)
+            setError(`No boss found with label(s): ${labelFilters.join(', ')}`)
             return
           }
         } else {

@@ -54,7 +54,10 @@
         "jp": "敵単体にダメージを与え、自分の<color=#28d9ed>会心率</color>が<color=#28d9ed>6ターン</color>の間UPする。",
         "zh": "攻击敌人,并使<color=#28d9ed>暴击率</color>提升,持续<color=#28d9ed>6回合</color>。"
       },
-      "icon": "Skill_First_2000059"
+      "icon": "Skill_First_2000059",
+      "buff": [
+        "BT_STAT|ST_CRITICAL_RATE"
+      ]
     },
     {
       "name": {
@@ -70,7 +73,10 @@
         "jp": "敵単体にダメージを与え、自分の<color=#28d9ed>会心ダメージ</color>が<color=#28d9ed>6ターン</color>の間UPする。",
         "zh": "攻击敌人,并使<color=#28d9ed>暴击伤害</color>提升,持续<color=#28d9ed>6回合</color>。"
       },
-      "icon": "MT_Attack_Magic_1_Dark"
+      "icon": "MT_Attack_Magic_1_Dark",
+      "buff": [
+        "BT_STAT|ST_CRITICAL_DMG_RATE"
+      ]
     },
     {
       "name": {
@@ -86,7 +92,10 @@
         "jp": "敵全体にダメージを与える。攻撃対象が<color=#28d9ed>石化</color>状態の場合、解除不可能な<color=#28d9ed>石化</color>を<color=#28d9ed>2ターン</color>の間付与する。この攻撃は、対象の効果抵抗と免疫を無視する。",
         "zh": "攻击全体敌人。若攻击目标处于<color=#28d9ed>石化</color>状态,则变更为无法解除的<color=#28d9ed>石化</color>,持续<color=#28d9ed>2回合</color>。该攻击无视目标的效果抵抗与免疫。"
       },
-      "icon": "Skill_Ultimate_2000059"
+      "icon": "Skill_Ultimate_2000059",
+      "debuff": [
+        "BT_STONE_IR"
+      ]
     },
     {
       "name": {
@@ -102,7 +111,10 @@
         "jp": "(パッシブ効果)\\nターン終了時、ランダムの敵単体に<color=#28d9ed>石化</color>を<color=#28d9ed>1ターン</color>の間付与する。\\n\\n狂暴化中のみWGダメージを受ける。",
         "zh": "(被动效果)\\n回合结束时,使随机1名敌人陷入<color=#28d9ed>石化</color>状态,持续<color=#28d9ed>1回合</color>。\\n\\n仅在狂暴化时受到WG伤害。"
       },
-      "icon": "MT_Passive_1_Dark"
+      "icon": "MT_Passive_1_Dark",
+      "debuff": [
+        "BT_STONE"
+      ]
     },
     {
       "name": {
@@ -118,7 +130,12 @@
         "jp": "最大HPの<color=#28d9ed>50%</color>以下になると<color=#28d9ed>【狂暴化】</color>状態に切り替わり、攻撃力とスピードが<color=#28d9ed>15%</color>UPする。この効果はブレイクすると解除される。\\n\\n<color=#28d9ed>【狂暴化】</color>:自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与し、WG10%を回復する。【狂暴化】は3ターンの間持続する。\\n\\n<color=#28d9ed>【世界の果て】</color>:【狂暴化】終了時に発動する。\\n敵に致命的なダメージを与える。\\n\\n<color=#ffd732>3ターン以内に【狂暴化】した場合、敵にCPを60獲得させる。</color>",
         "zh": "若生命值降至上限的<color=#28d9ed>50%</color>以下,则转换为<color=#28d9ed>狂暴化</color>状态,并使攻击力和速度提升<color=#28d9ed>15%</color>。该效果将持续至进入力竭状态为止。\\n\\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法被解除的攻击力提升/伤害降低效果,持续3回合,且WG恢复10%。狂暴化持续3个回合。\\n\\n<color=#28d9ed>世界的极限</color>:狂暴化结束时发动。\\n对敌人造成致命伤害。\\n\\n<color=#ffd732>在3回合内陷入狂暴化状态时,恢复60CP。</color>"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_ATK_IR",
+        "BT_CP_CHARGE"
+      ]
     },
     {
       "name": {
