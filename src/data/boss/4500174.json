@@ -54,7 +54,10 @@
         "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>100%</color>の確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>2ターン</color>の間付与する。",
         "zh": "攻击全体敌人,并有<color=#28d9ed>100%</color>的几率对目标造成<color=#28d9ed>烧伤</color>效果,持续<color=#28d9ed>2回合</color>。"
       },
-      "icon": "Skill_First_2000073"
+      "icon": "Skill_First_2000073",
+      "debuff": [
+        "BT_DOT_BURN"
+      ]
     },
     {
       "name": {
@@ -70,7 +73,10 @@
         "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>100%</color>の確率で解除不可能な<color=#28d9ed>火傷</color>を<color=#28d9ed>2ターン</color>の間付与する。",
         "zh": "攻击全体敌人,并有<color=#28d9ed>100%</color>的几率对目标造成无法解除的<color=#28d9ed>烧伤</color>效果,持续<color=#28d9ed>2回合</color>。"
       },
-      "icon": "Skill_Second_2000073"
+      "icon": "Skill_Second_2000073",
+      "debuff": [
+        "IG_Buff_Dot_Burn_Interruption_D"
+      ]
     },
     {
       "name": {
@@ -86,7 +92,10 @@
         "jp": "敵全体にダメージを与える。対象に付与された火傷をすべて破裂させ、破裂のダメージが<color=#28d9ed>100%</color>UPする。",
         "zh": "攻击全体敌人。使目标的所有烧伤爆发,因爆发造成的伤害提升<color=#28d9ed>100%</color>。"
       },
-      "icon": "Skill_Ultimate_2000073"
+      "icon": "Skill_Ultimate_2000073",
+      "debuff": [
+        "BT_IMMEDIATELY_BURN"
+      ]
     },
     {
       "name": {
@@ -102,7 +111,10 @@
         "jp": "(パッシブ効果)\\n<color=#28d9ed>強化促進</color>を付与する。この効果は解除されない。\\n火傷状態の敵はWGがDOWNしない。",
         "zh": "(被动效果)\\n始终获得<color=#28d9ed>强化促进</color>效果。该效果不会被解除。\\n对附带烧伤的敌人不会造成WG降低效果。"
       },
-      "icon": "MT_Passive_1_Fire"
+      "icon": "MT_Passive_1_Fire",
+      "buff": [
+        "BT_SYS_BUFF_ENHANCE_IR"
+      ]
     },
     {
       "name": {
@@ -118,7 +130,12 @@
         "jp": "最大HPの<color=#28d9ed>40%</color>以下になると<color=#28d9ed>【狂暴化】</color>状態に切り替わる。\\n\\n<color=#28d9ed>【狂暴化】</color>:敵全体にダメージを与える。狂暴化後、永続的に\\n攻撃力<color=#28d9ed>と</color>スピード<color=#28d9ed>がUPし、</color>受けるダメージ<color=#28d9ed>がDOWNする</color>。",
         "zh": "若生命值降至上限的<color=#28d9ed>40%</color>以下,则转换为<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化</color>:攻击全体敌人。\\n狂暴化后永久获得<color=#28d9ed>攻击力</color>和<color=#28d9ed>速度</color>提升,并使<color=#28d9ed>所受伤害</color>降低。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_STAT|ST_ATK_IR",
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_SPEED_IR"
+      ]
     }
   ]
 }
