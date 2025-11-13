@@ -1,11 +1,15 @@
 'use client'
 
+import { useState } from 'react'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import BossDisplay from '@/app/components/BossDisplay'
+import MiniBossDisplay from '@/app/components/MiniBossDisplay'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 
 export default function HildeGuide() {
+    const [selectedMode, setSelectedMode] = useState('Story (Hard)')
+
     return (
         <GuideTemplate
             title="Hilde Strategy Guide"
@@ -21,6 +25,17 @@ export default function HildeGuide() {
                                 modeKey={['Story (Normal)', 'Story (Hard)']}
                                 defaultModeKey='Story (Hard)'
                                 defaultBossId='4500283'
+                                labelFilter={"Top Fiend Officer"}
+                                onModeChange={setSelectedMode}
+                            />
+                            <MiniBossDisplay
+                                bosses={[
+                                    { bossKey: 'Maxie', defaultBossId: '4500281' },
+                                    { bossKey: 'Roxie', defaultBossId: '4500282' }
+                                ]}
+                                modeKey={['Story (Normal)', 'Story (Hard)']}
+                                defaultModeKey='Story (Hard)'
+                                controlledMode={selectedMode}
                             />
                             <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Maxie moveset</h3>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">

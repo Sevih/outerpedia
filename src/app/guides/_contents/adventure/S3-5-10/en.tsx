@@ -1,12 +1,16 @@
 'use client'
 
+import { useState } from 'react'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import BossDisplay from '@/app/components/BossDisplay'
+import MiniBossDisplay from '@/app/components/MiniBossDisplay'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import ElementInlineTag from '@/app/components/ElementInline'
 
 export default function ReginaGuide() {
+    const [selectedMode, setSelectedMode] = useState('Story (Hard)')
+
     return (
         <GuideTemplate
             title="Regina Strategy Guide"
@@ -22,13 +26,17 @@ export default function ReginaGuide() {
                                 modeKey={['Story (Normal)', 'Story (Hard)']}
                                 defaultModeKey='Story (Hard)'
                                 defaultBossId='4500293'
+                                labelFilter={"The Grand Escape Magic"}
+                                onModeChange={setSelectedMode}
                             />
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Hilde moveset</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li><strong>S1</strong>: Single, <EffectInlineTag name="BT_CALL_BACKUP" type="buff" /> with 2 allies.</li>
-                                <li><strong>S2</strong>: Single, used after being hit on the enemy with the lowest health. Inflict <EffectInlineTag name="BT_STONE" type="debuff" /> 1 turn.</li>
-                                <li><strong>S3</strong>: Single, <EffectInlineTag name="BT_EXTEND_BUFF" type="debuff" /> by 1 turn.</li>
-                            </ul>
+                            <MiniBossDisplay
+                                bosses={[
+                                    { bossKey: 'Hilde', labelFilter: 'The Grand Escape Magic' }
+                                ]}
+                                modeKey={['Story (Normal)', 'Story (Hard)']}
+                                defaultModeKey='Story (Hard)'
+                                controlledMode={selectedMode}
+                            />
                             <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advice</h3>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>Bring <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> to counter <EffectInlineTag name="IG_Buff_Effect_2000067_Interruption" type="buff" />.</li>

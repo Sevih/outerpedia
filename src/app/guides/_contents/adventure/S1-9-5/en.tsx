@@ -1,11 +1,15 @@
 'use client'
 
+import { useState } from 'react'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import BossDisplay from '@/app/components/BossDisplay'
+import MiniBossDisplay from '@/app/components/MiniBossDisplay'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 
 export default function LeoGuide() {
+    const [selectedMode, setSelectedMode] = useState('Story (Hard)')
+
     return (
         <GuideTemplate
             title="Leo Strategy Guide"
@@ -20,13 +24,15 @@ export default function LeoGuide() {
                                 bossKey='Leo'
                                 modeKey='Story (Hard)'
                                 defaultBossId='400401111'
+                                onModeChange={setSelectedMode}
                             />
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Alpha moveset</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li><strong>S1</strong>: Single, 40% chances to <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> 2 turns.</li>
-                                <li><strong>S2</strong>: AoE, 70% chances to <EffectInlineTag name="BT_STAT|ST_AVOID" type="debuff" /> 2 turns.</li>
-                                <li><strong>S3</strong>: AoE, 50% chances to <EffectInlineTag name="BT_STUN" type="debuff" /> 1 turn.</li>
-                            </ul>
+                            <MiniBossDisplay
+                                bosses={[
+                                    { bossKey: 'Alpha', defaultBossId: '400401011' }
+                                ]}
+                                modeKey='Story (Hard)'
+                                controlledMode={selectedMode}
+                            />
                             <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advice</h3>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>Bring <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" /> and/or <EffectInlineTag name="BT_IMMUNE" type="buff" /> to negates Alpha.</li>

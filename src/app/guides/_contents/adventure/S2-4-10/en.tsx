@@ -1,11 +1,15 @@
 'use client'
 
+import { useState } from 'react'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import BossDisplay from '@/app/components/BossDisplay'
+import MiniBossDisplay from '@/app/components/MiniBossDisplay'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 
 export default function AsteiGuide() {
+    const [selectedMode, setSelectedMode] = useState('Story (Hard)')
+
     return (
         <GuideTemplate
             title="Astei Strategy Guide"
@@ -25,15 +29,16 @@ export default function AsteiGuide() {
                                 defaultModeKey='Story (Hard)'
                                 defaultBossId='4500045'
                                 labelFilter='An Unpleasant Reunion'
+                                onModeChange={setSelectedMode}
                             />
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Sterope moveset</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li><strong>S1</strong>: Single, if Sterope has a buff activates an additional attack and grants Divine Retribution (Increases damage dealt by all allies by 4% (Max 15 stacks)).</li>
-                                <li><strong>S3</strong>: Grants <EffectInlineTag name="BT_STAT|ST_BUFF_CHANCE" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> 2 turns on all allies.</li>
-                                <li><strong>Passive</strong>: At the start of battle, inflicts <EffectInlineTag name="UNIQUE_KERAUNOS" type="debuff" /> for 3 turns on all units (allies and enemies).</li>
-                                <li><strong>Passive</strong>: When enemies use a non-attack skill, recovers all allies&apos; weakness gauge by 4 and health by 3%.</li>
-                                <li><strong>Passive</strong>: Inflict 700 <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /> when hit and <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> of all allies by 10%.</li>
-                            </ul>
+                            <MiniBossDisplay
+                                bosses={[
+                                    { bossKey: 'Sterope', defaultBossId: '4500046', labelFilter: 'An Unpleasant Reunion' }
+                                ]}
+                                modeKey={['Story (Normal)', 'Story (Hard)']}
+                                defaultModeKey='Story (Hard)'
+                                controlledMode={selectedMode}
+                            />
                             <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advice</h3>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>The boss has no immunities, so bring <EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" />.</li>

@@ -23,6 +23,7 @@ export default function VladaGuide() {
                                 bossKey='Vlada'
                                 modeKey={['Story (Normal)', 'Story (Hard)']}
                                 defaultModeKey='Story (Hard)'
+                                labelFilter='As You Wish, Your Excellency'
                                 defaultBossId='4500174'
                             />
                             <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advice</h3>

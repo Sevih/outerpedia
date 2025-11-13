@@ -22,6 +22,7 @@ type Props = {
   defaultBossId?: string
   defaultModeKey?: string
   labelFilter?: string | string[] // Filter boss versions by label(s) (e.g., "An Unpleasant Reunion" or ["Label1", "Label2"])
+  onModeChange?: (mode: string) => void // Callback when mode changes
 }
 
 function formatColorTags(input: string) {
@@ -33,7 +34,7 @@ function formatColorTags(input: string) {
     .replace(/\n/g, '<br />')
 }
 
-export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultModeKey, labelFilter }: Props) {
+export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultModeKey, labelFilter, onModeChange }: Props) {
   const { lang } = useI18n()
   const t = getT(lang)
   const [data, setData] = useState<BossData | null>(null)
@@ -226,10 +227,13 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
         {/* Selector and Immunities below portrait */}
         <div className="mt-3 flex flex-col gap-2">
           <div className="flex flex-wrap gap-2">
-            {!labelFilter && modeKeys.length > 1 && (
+            {modeKeys.length > 1 && (
               <select
                 value={selectedModeKey}
-                onChange={(e) => setSelectedModeKey(e.target.value)}
+                onChange={(e) => {
+                  setSelectedModeKey(e.target.value)
+                  onModeChange?.(e.target.value)
+                }}
                 className="bg-neutral-800 border border-neutral-600 rounded px-3 py-1.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
               >
                 {modeKeys.map((mode) => (
@@ -239,7 +243,7 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
                 ))}
               </select>
             )}
-            {bossVersions.length > 1 && (
+            {!labelFilter && bossVersions.length > 1 && (
               <select
                 value={selectedBossId}
                 onChange={(e) => setSelectedBossId(e.target.value)}
@@ -247,10 +251,7 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
               >
                 {bossVersions.map((version) => (
                   <option key={version.id} value={version.id}>
-                    {labelFilter
-                      ? version.mode
-                      : lRec(version.localizedLabel, lang)
-                    }
+                    {lRec(version.localizedLabel, lang)}
                   </option>
                 ))}
               </select>

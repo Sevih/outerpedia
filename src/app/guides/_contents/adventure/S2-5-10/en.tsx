@@ -18,7 +18,8 @@ export default function AsteiDemiurgeGuide() {
                         <>
                             <BossDisplay
                                 bossKey='Astei'
-                                modeKey='Story (Hard)'
+                                modeKey={['Story (Normal)', 'Story (Hard)']}
+                                defaultModeKey='Story (Hard)'
                                 defaultBossId='4500047'
                                 labelFilter={["Snapped Back to Reality", "Doll Garden's Caretaker"]}
                             />

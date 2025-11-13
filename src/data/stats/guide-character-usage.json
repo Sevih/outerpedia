@@ -5,6 +5,7 @@
     "characters": [
       "Aer",
       "Akari",
+      "Alpha",
       "Astei",
       "Caren",
       "Dianne",
@@ -39,7 +40,8 @@
       "Dianne",
       "Mene",
       "Monad Eva",
-      "Nella"
+      "Nella",
+      "Vlada"
     ]
   },
   "adventure/S2-3-10": {
@@ -154,7 +156,9 @@
       "Ember",
       "Gnosis Beth",
       "Hilde",
+      "Maxie",
       "Mero",
+      "Roxie",
       "Skadi",
       "Sterope",
       "Tamamo-no-Mae"
@@ -166,6 +170,7 @@
     "characters": [
       "Charlotte",
       "Demiurge Astei",
+      "Hilde",
       "Maxwell",
       "Skadi",
       "Sterope"
