@@ -54,7 +54,10 @@
         "jp": "敵単体にダメージを与え、攻撃力が最も高い味方単体に<color=#28d9ed>連携</color>を発生させる。",
         "zh": "攻击敌人,并使攻击力最高的友军发动<color=#28d9ed>夹攻</color>。"
       },
-      "icon": "Skill_First_2000058"
+      "icon": "Skill_First_2000058",
+      "buff": [
+        "BT_CALL_BACKUP"
+      ]
     },
     {
       "name": {
@@ -70,7 +73,10 @@
         "jp": "味方全体のHPを<color=#28d9ed>15%</color>回復させ、必殺スキルのスキルターンを<color=#28d9ed>1ターン</color>減少させる。また、自分のWGを<color=#28d9ed>30%</color>回復させる。",
         "zh": "使全体友军生命值恢复<color=#28d9ed>15%</color>,必杀技的冷却时间减少<color=#28d9ed>1回合</color>。并使自身的WG恢复<color=#28d9ed>30%</color>。"
       },
-      "icon": "Skill_Second_2000058"
+      "icon": "Skill_Second_2000058",
+      "buff": [
+        "BT_COOL_CHARGE"
+      ]
     },
     {
       "name": {
@@ -86,7 +92,10 @@
         "jp": "味方全体のHPを<color=#28d9ed>25%</color>回復させ、敵全体の<color=#28d9ed>会心率</color>を<color=#28d9ed>3ターン</color>の間DOWNさせる。",
         "zh": "使全体友军生命值恢复<color=#28d9ed>25%</color>,并使全体敌人的<color=#28d9ed>暴击率</color>降低,持续<color=#28d9ed>3回合</color>。"
       },
-      "icon": "Skill_Ultimate_2000058"
+      "icon": "Skill_Ultimate_2000058",
+      "debuff": [
+        "BT_STAT|ST_CRITICAL_RATE"
+      ]
     },
     {
       "name": {
@@ -102,7 +111,10 @@
         "jp": "(パッシブ効果)\\nターン開始時、自分を除く味方全体の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>15%</color>UPさせる。\\n\\n【ステロペ】に以下の能力を付与する。ダメージを受けた場合、敵全体に<color=#28d9ed>500</color>の固定ダメージを与える。\\n敵が攻撃以外のスキルを使用時、味方全体のWGを<color=#28d9ed>4</color>、HPを<color=#28d9ed>3%</color>回復する。",
         "zh": "(被动效果)\\n每回合使除自身外的全体友军的<color=#28d9ed>攻击力</color>提升<color=#28d9ed>15%</color>。\\n\\n史提洛佩拥有以下能力。\\n受到攻击时,对全体敌人造成<color=#28d9ed>500</color>的固定伤害。\\n敌人使用非攻击类技能时,使全体友军的WG恢复<color=#28d9ed>4</color>,生命值恢复<color=#28d9ed>3%</color>。"
       },
-      "icon": "MT_Passive_1_Fire"
+      "icon": "MT_Passive_1_Fire",
+      "debuff": [
+        "BT_FIXED_DAMAGE"
+      ]
     },
     {
       "name": {
@@ -118,7 +130,12 @@
         "jp": "最大HPの<color=#28d9ed>40%</color>以下になると<color=#28d9ed>【狂暴化】</color>状態に切り替わる。\\n\\n<color=#28d9ed>【狂暴化】と【必殺スキル】</color>:自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与し、倒れた味方をすべて<color=#28d9ed>復活(強化)</color>させる。\\n敵全体に<color=#28d9ed>沈黙</color>を<color=#28d9ed>3ターン</color>の間付与する。この効果は対象の効果抵抗を無視する。【狂暴化】後、WGダメージを受けない。",
         "zh": "若生命值降至上限的<color=#28d9ed>40%</color>以下,则转换为<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>陷入狂暴化与必杀技</color>:使自身获得无法被解除的攻击力提升/伤害降低效果,持续3回合,并使所有死亡的友军<color=#28d9ed>复活(强化)</color>。\\n对全体敌人造成<color=#28d9ed>沉默</color>效果,持续<color=#28d9ed>3回合</color>。沉默无视目标的效果抵抗。狂暴化后,不会受到WG伤害。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_ATK_IR",
+        "BT_RESURRECTION"
+      ]
     }
   ]
 }

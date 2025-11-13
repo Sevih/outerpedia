@@ -21,6 +21,7 @@ type Props = {
   modeKey: string | string[]
   defaultBossId?: string
   defaultModeKey?: string
+  labelFilter?: string // Filter boss versions by label (e.g., "An Unpleasant Reunion")
 }
 
 function formatColorTags(input: string) {
@@ -32,12 +33,12 @@ function formatColorTags(input: string) {
     .replace(/\n/g, '<br />')
 }
 
-export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultModeKey }: Props) {
+export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultModeKey, labelFilter }: Props) {
   const { lang } = useI18n()
   const t = getT(lang)
   const [data, setData] = useState<BossData | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [bossVersions, setBossVersions] = useState<{ id: string; label: string; localizedLabel: Record<string, string> }[]>([])
+  const [bossVersions, setBossVersions] = useState<{ id: string; label: string; localizedLabel: Record<string, string>; mode: string }[]>([])
   const [selectedBossId, setSelectedBossId] = useState<string>('')
   const [modeKeys] = useState<string[]>(Array.isArray(modeKey) ? modeKey : [modeKey])
   const [selectedModeKey, setSelectedModeKey] = useState<string>(
@@ -48,25 +49,59 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
     import('@/data/boss/index.json')
       .then((indexMod) => {
         const index = (indexMod.default || indexMod) as Record<string, Record<string, Array<{ id: string; label: Record<string, string> }>>>
-        const bossData = index[bossKey]?.[selectedModeKey]
 
-        if (!bossData) {
-          setError(`Boss not found: ${bossKey} - ${selectedModeKey}`)
-          return
+        // Si labelFilter est spécifié, on collecte toutes les versions qui matchent ce label depuis tous les modes
+        let allVersions: Array<{ id: string; label: string; localizedLabel: Record<string, string>; mode: string }> = []
+
+        if (labelFilter) {
+          // Parcourir tous les modes pour ce boss
+          const bossEntry = index[bossKey]
+          if (!bossEntry) {
+            setError(`Boss not found: ${bossKey}`)
+            return
+          }
+
+          // Collecter toutes les versions qui matchent le label
+          for (const [mode, versions] of Object.entries(bossEntry)) {
+            for (const version of versions) {
+              // Vérifier si le label correspond (en anglais pour la comparaison)
+              if (version.label.en === labelFilter) {
+                allVersions.push({
+                  id: version.id,
+                  label: version.id,
+                  localizedLabel: version.label,
+                  mode
+                })
+              }
+            }
+          }
+
+          if (allVersions.length === 0) {
+            setError(`No boss found with label: ${labelFilter}`)
+            return
+          }
+        } else {
+          // Comportement original : utiliser le mode sélectionné
+          const bossData = index[bossKey]?.[selectedModeKey]
+
+          if (!bossData) {
+            setError(`Boss not found: ${bossKey} - ${selectedModeKey}`)
+            return
+          }
+
+          allVersions = bossData.map((data) => ({
+            id: data.id,
+            label: data.id,
+            localizedLabel: data.label,
+            mode: selectedModeKey
+          }))
         }
 
-        // Extraire les versions depuis l'index (déjà avec labels localisés)
-        const versions = bossData.map((data) => ({
-          id: data.id,
-          label: data.id, // Gardé pour compatibilité
-          localizedLabel: data.label
-        }))
-
-        setBossVersions(versions)
+        setBossVersions(allVersions)
 
         // Utiliser defaultBossId seulement pour le mode par défaut initial
         const isInitialMode = selectedModeKey === (defaultModeKey || (Array.isArray(modeKey) ? modeKey[0] : modeKey))
-        const initialId = (isInitialMode && defaultBossId) ? defaultBossId : versions[0]?.id
+        const initialId = (isInitialMode && defaultBossId) ? defaultBossId : allVersions[0]?.id
         if (initialId) {
           setSelectedBossId(initialId)
         }
@@ -75,7 +110,7 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
         console.error('[BossDisplay] Error loading index.json', err)
         setError('Failed to load boss index')
       })
-  }, [bossKey, selectedModeKey, defaultBossId, defaultModeKey, modeKey])
+  }, [bossKey, selectedModeKey, defaultBossId, defaultModeKey, modeKey, labelFilter])
 
   useEffect(() => {
     if (!selectedBossId) return
@@ -182,7 +217,7 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
         {/* Selector and Immunities below portrait */}
         <div className="mt-3 flex flex-col gap-2">
           <div className="flex flex-wrap gap-2">
-            {modeKeys.length > 1 && (
+            {!labelFilter && modeKeys.length > 1 && (
               <select
                 value={selectedModeKey}
                 onChange={(e) => setSelectedModeKey(e.target.value)}
@@ -203,7 +238,10 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
               >
                 {bossVersions.map((version) => (
                   <option key={version.id} value={version.id}>
-                    {lRec(version.localizedLabel, lang)}
+                    {labelFilter
+                      ? version.mode
+                      : lRec(version.localizedLabel, lang)
+                    }
                   </option>
                 ))}
               </select>

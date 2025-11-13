@@ -22,15 +22,6 @@ export default function SacreedGuardianGuide() {
                                 defaultModeKey='Story (Hard)'
                                 defaultBossId='4144003'
                             />
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Sacreed Guardian moveset</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li><strong>S1</strong>: Single, inflict <EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /> 2 turns.</li>
-                                <li><strong>S2</strong>: AoE, inflict <EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /> 2 turns.</li>
-                                <li><strong>S3</strong>: AoE, inflict <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> and kill the hero with the highest attack.</li>
-                                <li><strong>Passive</strong>: Recovers 5 weakness gauge when killing an enemy. Takes weakness damage only if enrage</li>
-                                <li><strong>Enrage</strong>: every 5 turns. Gain <EffectInlineTag name="BT_DAMGE_TAKEN" type="buff" /> <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="buff" />. Recovers weakness gauge by 10% when enraging.</li>
-                                <li><strong>Enrage Ultimate</strong>: used when enrage ends. AoE, inflict <EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /> 2 turns and reset S3 cooldown.</li>
-                            </ul>
                             <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advice</h3>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>The boss has no immunities so bring hard CC like <EffectInlineTag name="BT_STUN" type="debuff" /> <EffectInlineTag name="BT_FREEZE" type="debuff" /> <EffectInlineTag name="BT_STONE" type="debuff" /> <EffectInlineTag name="BT_COOL_CHARGE" type="debuff" /> <EffectInlineTag name="BT_SILENCE" type="debuff" />.</li>
