@@ -999,5 +999,19 @@
     "description_kr": "공격 후 대상의 체력이 특정 수치 이하일 때, 대상을 즉시 사망시킵니다.",
     "description_zh": "攻击后,若目标的生命值降至特定数\\n值以下,则使目标即死。",
     "icon": "IG_Buff_Effect_InstantDeath"
+  },
+  {
+    "name": "BT_KILL",
+    "category": "utility",
+    "group": "BT_KILL_UNDER_HP_RATE",
+    "label": "Instant Death",
+    "label_jp": "即死",
+    "label_kr": "즉사",
+    "label_zh": "即死",
+    "description": "Instantly kills the target.",
+    "description_jp": "対象を即死させる。",
+    "description_kr": "대상을 즉사시킵니다.",
+    "description_zh": "使目标即死。",
+    "icon": "IG_Buff_Effect_InstantDeath"
   }
 ]

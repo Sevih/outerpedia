@@ -166,3 +166,4 @@ export type DebuffName =
   | 'IG_Buff_Effect_2000109_Interruption_D'
   | 'BT_DOT_POISON2'
   | 'BT_KILL_UNDER_HP_RATE'
+  | 'BT_KILL'

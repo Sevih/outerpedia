@@ -65,7 +65,10 @@
         "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>100%</color>の確率で<color=#28d9ed>強化不可</color>を<color=#28d9ed>2ターン</color>の間付与する。",
         "zh": "攻击全体敌人,并有<color=#28d9ed>100%</color>的几率对目标造成<color=#28d9ed>无法强化</color>效果,持续<color=#28d9ed>2回合</color>。"
       },
-      "icon": "Skill_Second_4034003"
+      "icon": "Skill_Second_4034003",
+      "debuff": [
+        "BT_SEALED"
+      ]
     },
     {
       "name": {
@@ -81,7 +84,10 @@
         "jp": "敵全体にダメージを与えた後、対象の<color=#28d9ed>弱体効果</color>の持続ターンを<color=#28d9ed>1ターン</color>増加させる。対象が<color=#28d9ed>スタン</color>状態の場合、ダメージがUPする。",
         "zh": "攻击全体敌人。使用技能后,目标附带的<color=#28d9ed>弱化效果</color>持续时间增加<color=#28d9ed>1回合</color>,且目标处于<color=#28d9ed>晕眩</color>状态时,伤害提升。"
       },
-      "icon": "Skill_Ultimate_4034003"
+      "icon": "Skill_Ultimate_4034003",
+      "debuff": [
+        "BT_EXTEND_DEBUFF"
+      ]
     },
     {
       "name": {
@@ -97,7 +103,10 @@
         "jp": "(パッシブ効果)\\nスキル使用後、攻撃力が最も高い敵単体に<color=#28d9ed>100%</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>2ターン</color>の間付与する。",
         "zh": "(被动效果)\\n使用技能后,有<color=#28d9ed>100%</color>的几率使攻击力最高的1名敌人陷入<color=#28d9ed>晕眩</color>状态,持续<color=#28d9ed>2回合</color>。"
       },
-      "icon": "MT_Passive_1_Dark"
+      "icon": "MT_Passive_1_Dark",
+      "debuff": [
+        "BT_STUN"
+      ]
     },
     {
       "name": {
@@ -113,7 +122,16 @@
         "jp": "最大HPの<color=#28d9ed>50%</color>以下になると<color=#28d9ed>【狂暴化】</color>状態に切り替わり、攻撃力とスピードが<color=#28d9ed>15%</color>UPする。この効果はブレイクすると解除される。\\n\\n<color=#28d9ed>【狂暴化】</color>:自分に解除不可能な攻撃力UP/ダメージDOWNを3ターンの間付与し、WGを10%回復する。【狂暴化】は3ターンの間持続する。\\n\\n<color=#28d9ed>【ヴォイドアタック】</color>:【狂暴化】終了時に発動する。\\n敵全体にダメージを与える。対象の行動ゲージを<color=#28d9ed>[Buff_T_403400301_12_1]</color>DOWNさせ、火傷を<color=#28d9ed>2ターン</color>の間付与する。\\nこの攻撃は対象の<color=#28d9ed>効果抵抗</color>を無視する。\\n\\n<color=#ffd732>戦闘開始時から3ターン以内に【狂暴化】した場合、敵にCPを60獲得させる。</color>",
         "zh": "若生命值降至上限的<color=#28d9ed>50%</color>以下,则转换为<color=#28d9ed>狂暴化</color>状态,并使攻击力和速度提升<color=#28d9ed>15%</color>。该效果将持续至进入力竭状态为止。\\n\\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法被解除的攻击力提升/伤害降低效果,持续3回合,并使WG恢复10%。狂暴化持续3回合。\\n\\n<color=#28d9ed>虚空入侵</color>:狂暴化结束时发动。\\n攻击全体敌人。使目标的行动值降低<color=#28d9ed>-50%</color>,并造成烧伤效果,持续<color=#28d9ed>2回合</color>。\\n该攻击无视目标的<color=#28d9ed>效果抵抗</color>。\\n\\n<color=#ffd732>在3回合内陷入狂暴化状态时,使CP恢复60。</color>"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_ATK_IR",
+        "BT_CP_CHARGE"
+      ],
+      "debuff": [
+        "BT_ACTION_GAUGE",
+        "BT_DOT_BURN"
+      ]
     }
   ]
 }
