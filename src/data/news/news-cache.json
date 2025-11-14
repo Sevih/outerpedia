@@ -1,6 +1,30 @@
 {
   "en": [
     {
+      "slug": "live-en-4016",
+      "title": "[Developer’s Letter] 2.5-Year Anniversary Message & Update Preview",
+      "date": "2025.11.12",
+      "category": "notice",
+      "excerpt": ". I’m Moonsoo Hyun, the PD leading the development of OUTERPLANE. As we celebrate our 2.5-year anniversary, I’m truly grateful that we can continue this journey together. Thanks to your constant suppo...",
+      "coverImage": "/images/news/live/en/4016-7cab1224.webp",
+      "uid": "4016",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/12/developers-letter-2-5-year-anniversary-message-update-preview/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-4069",
+      "title": "[Notice] Scheduled Website Infrastructure Maintenance",
+      "date": "2025.11.12",
+      "category": "notice",
+      "excerpt": "To provide a more stable and reliable service environment, our website infrastructure will undergo scheduled maintenance. During the maintenance period, you may experience intermittent connection issu...",
+      "coverImage": "/images/news/live/en/4069-e6014d5a.webp",
+      "uid": "4069",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/12/notice-scheduled-website-infrastructure-maintenance/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-3867",
       "title": "[Winners Announcement] Kanon VA Autograph Giveaway Event",
       "date": "2025.11.11",
@@ -11754,6 +11778,30 @@
     }
   ],
   "jp": [
+    {
+      "slug": "live-jp-4021",
+      "title": "【開発者お便り】1.5周年を迎えて– 今後の改善内容と開発チームからのご挨拶",
+      "date": "2025.11.12",
+      "category": "notice",
+      "excerpt": "マスターの皆様、こんにちは。 『アウタープレーン』開発プロデューサーのヒョン・ムンスです。 1.5周年という節目を、マスターの皆様と共に迎えることができ、心より感謝申し上げます。 いつもお寄せいただく温かいご声援とご意見のおかげで、私たち開発チームは日々、 より良い方向を考えながら、歩み続けております。 本来であれば今週、多くのマスターの皆様から送っていただいた ご提案に対するQ&Aおよび開発アッ...",
+      "coverImage": "/images/news/live/jp/4021-f4270423.webp",
+      "uid": "4021",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/12/%e3%80%90%e9%96%8b%e7%99%ba%e8%80%85%e3%81%8a%e4%be%bf%e3%82%8a%e3%80%912-5%e5%91%a8%e5%b9%b4%e3%82%92%e8%bf%8e%e3%81%88%e3%81%a6-%e4%bb%8a%e5%be%8c%e3%81%ae%e6%94%b9%e5%96%84%e5%86%85/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-4073",
+      "title": "公式WEBサイトメンテナンスのお知らせ",
+      "date": "2025.11.12",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、 誠にありがとうございます。『アウタープレーン』運営チームです。 安定したサービス環境の提供を目的として、 公式WEBサイトのメンテナンスを実施いたします。 メンテナンス期間中、一時的に公式WEBサイトへのアクセスが難しい場合がございます。 ご理解とご協力をお願いいたします。 📅 メンテナンス期間 2025年11月13日（木）09:00 ～ 最大4...",
+      "coverImage": "/images/news/live/jp/4073-05dbf64a.webp",
+      "uid": "4073",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/12/%e5%85%ac%e5%bc%8fweb%e3%82%b5%e3%82%a4%e3%83%88%e3%83%a1%e3%83%b3%e3%83%86%e3%83%8a%e3%83%b3%e3%82%b9%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/",
+      "views": 0,
+      "lang": "jp"
+    },
     {
       "slug": "live-jp-3859",
       "title": "【イベント】✨移管記念最大1000連ガチャキャンペーン開催！",
@@ -23533,6 +23581,30 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-4025",
+      "title": "[개발자 편지] 2.5주년 기념 인사와 향후 업데이트 안내",
+      "date": "2025.11.12",
+      "category": "notice",
+      "excerpt": "안녕하세요, 오너님들. 아우터플레인 PD 현문수 입니다. 2.5주년을 맞이해 오너님들과 함께할 수 있다는 것이 정말 감사한 일입니다. 항상 보내주시는 관심과 의견 덕분에 저희 개발팀은 매일 더 좋은 방향을 고민하며 나아가고 있습니다. 원래 이번 주에는 오너분들의 건의사항에 대한 Q&A와 개발 업데이트 안내 영상을 공개할 예정이었습니다. 하지만 전하고 싶은 ...",
+      "coverImage": "/images/news/live/kr/4025-cfc8725a.webp",
+      "uid": "4025",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/12/%ea%b0%9c%eb%b0%9c%ec%9e%90-%ed%8e%b8%ec%a7%80-2-5%ec%a3%bc%eb%85%84-%ea%b8%b0%eb%85%90-%ec%9d%b8%ec%82%ac%ec%99%80-%ed%96%a5%ed%9b%84-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-4064",
+      "title": "[안내] 홈페이지 인프라 점검 관련 안내",
+      "date": "2025.11.12",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요, 아우터플레인 운영팀입니다. 안정적인 서비스 환경을 제공하기 위해 홈페이지 인프라 점검 작업이 진행될 예정입니다. 점검 기간 동안 간헐적으로 홈페이지 접속이 원활하지 않을 수 있는 점 오너 여러분의 너른 양해 부탁드립니다. 📅 점검 기간 2025년 11월 13일(목) 09:00 ~ 최대 24시간 (KST) 보다...",
+      "coverImage": "/images/news/live/kr/4064-d3a4b852.webp",
+      "uid": "4064",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/12/%ec%95%88%eb%82%b4-%ed%99%88%ed%8e%98%ec%9d%b4%ec%a7%80-%ec%9d%b8%ed%94%84%eb%9d%bc-%ec%a0%90%ea%b2%80-%ea%b4%80%eb%a0%a8-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-3866",
       "title": "[당첨자 발표] 비엘라 소개 영상 공유 이벤트",

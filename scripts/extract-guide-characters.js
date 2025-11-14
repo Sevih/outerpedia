@@ -27,7 +27,7 @@ function extractCharactersFromTSX(filePath) {
     const foundCharacters = [];
 
     // Props JSX à exclure (ne contiennent pas de noms de personnages)
-    const excludedProps = ['bossKey', 'modeKey', 'defaultBossId', 'bossId'];
+    const excludedProps = ['bossKey', 'modeKey', 'defaultBossId', 'bossId', 'labelFilter', 'controlledMode', 'defaultModeKey'];
 
     // Pour chaque personnage, vérifier s'il apparaît dans le fichier entre quotes
     for (const character of allCharacters) {
@@ -45,9 +45,9 @@ function extractCharactersFromTSX(filePath) {
         // Vérifier le contexte avant le match pour voir si c'est une prop exclue
         const before = content.substring(Math.max(0, matchIndex - 50), matchIndex);
 
-        // Si c'est précédé d'une prop exclue (ex: bossKey=), on skip
+        // Si c'est précédé d'une prop exclue (ex: bossKey= ou bossKey:), on skip
         const isExcluded = excludedProps.some(prop =>
-          new RegExp(`${prop}\\s*=\\s*$`).test(before)
+          new RegExp(`${prop}\\s*[=:]\\s*$`).test(before)
         );
 
         if (!isExcluded) {
