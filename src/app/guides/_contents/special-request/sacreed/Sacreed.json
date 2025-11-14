@@ -1,0 +1,74 @@
+{
+    "1-10": {
+        "team": [
+            [
+                "Iota",
+                "Notia",
+                "Gnosis Nella",
+                "Dahlia",
+                "Kuro",
+                "Stella"
+            ],
+            [
+                "Demiurge Vlada",
+                "Omega Nadja",
+                "Eliza",
+                "Gnosis Nella",
+                "Dahlia",
+                "Alice",
+                "Aer"
+            ],
+            [
+                "Gnosis Dahlia",
+                "Francesca",
+                "Demiurge Astei",
+                "Maxwell"
+            ],
+            [
+                "Demiurge Astei",
+                "Maxwell",
+                "Demiurge Delta",
+                "Nella"
+            ]
+        ],
+        "note": [
+            {
+                "type": "p",
+                "string": "Don't forget you can use your friends' units to help you beat those stages."
+            }
+        ]
+    },
+    "11-13": {
+        "team": [
+            [
+                "Iota",
+                "Notia",
+                "Gnosis Nella",
+                "Dahlia",
+                "Kuro",
+                "Stella"
+            ],
+            [
+                "Demiurge Vlada",
+                "Omega Nadja",
+                "Eliza",
+                "Gnosis Nella",
+                "Dahlia",
+                "Alice",
+                "Aer"
+            ],
+            [
+                "Gnosis Dahlia",
+                "Francesca",
+                "Demiurge Astei",
+                "Maxwell"
+            ],
+            [
+                "Demiurge Astei",
+                "Maxwell",
+                "Demiurge Delta",
+                "Nella"
+            ]
+        ]
+    }
+}

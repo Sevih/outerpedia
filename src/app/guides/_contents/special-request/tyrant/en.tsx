@@ -2,18 +2,15 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
-import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import ClassInlineTag from '@/app/components/ClassInlineTag'
 import BossDisplay from '@/app/components/BossDisplay'
+import TyrantTeamsData from './Tyrant.json'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import type {TeamData} from '@/types/team'
 
-const teamSetup = [
-    ['Dianne', 'Saeran', 'Shu', 'Monad Eva'],
-    ['Noa', 'Ame', 'Rey'],
-    ['Kappa', 'Charlotte', 'Tamara', 'Rhona'],
-    ['Ame', 'Rey', 'Delta']
-]
+const TyrantTeams = TyrantTeamsData as TeamData
 
 export default function TyrantGuide() {
     return (
@@ -43,7 +40,7 @@ export default function TyrantGuide() {
                                 <li>Stage 13: Fully reduces Critical Hit chance and reduces the damage of all classes except <ClassInlineTag name="Defender" /> by 95%.</li>
                             </ul>
                             <hr className="my-6 border-neutral-700" />
-                            <RecommendedTeam team={teamSetup} />
+                            <StageBasedTeamSelector teamData={TyrantTeams} defaultStage="1-10" icon='/images/ui/effect/earth.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }} />
                             <hr className="my-6 border-neutral-700" />
                             <div className="mb-4">
                                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>

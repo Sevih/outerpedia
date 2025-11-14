@@ -9,19 +9,7 @@ import ElementInlineTag from '@/app/components/ElementInline'
 import StatInlineTag from '@/app/components/StatInlineTag'
 import BossDisplay from '@/app/components/BossDisplay'
 import chimeraTeamsData from './Chimera.json'
-
-type NoteEntry =
-  | { type: 'p'; string: string }
-  | { type: 'ul'; items: string[] }
-
-type StageData = {
-  team: string[][]
-  note?: NoteEntry[]
-}
-
-type TeamData = {
-  [key: string]: StageData
-}
+import type {TeamData} from '@/types/team'
 
 const chimeraTeams = chimeraTeamsData as TeamData
 

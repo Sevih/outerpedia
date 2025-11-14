@@ -1,27 +1,36 @@
 'use client'
 
+import { useState, useCallback } from 'react'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
 import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import ElementInlineTag from '@/app/components/ElementInline'
+import SacreedTeamsData from './Sacreed.json'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import type { TeamData } from '@/types/team'
+import BossDisplay from '@/app/components/BossDisplay'
+import ClassInlineTag from '@/app/components/ClassInlineTag'
+import MiniBossDisplay from '@/app/components/MiniBossDisplay'
 
-const teams = {
-    team1: {
-        label: 'Suggested Core',
-        icon: 'SC_Buff_Effect_Remove_Buff.webp',
-        setup: [
-            ['Iota', 'Notia', 'Gnosis Nella', 'Dahlia', 'Kuro', 'Stella'],
-            ['Demiurge Vlada', 'Omega Nadja', 'Eliza', 'Gnosis Nella', 'Dahlia', 'Alice', 'Aer'],
-            ['Gnosis Dahlia', 'Francesca', 'Demiurge Astei', 'Maxwell'],
-            ['Demiurge Astei', 'Maxwell', 'Demiurge Delta', 'Nella']
-        ]
-    }
-}
+const SacreedTeams = SacreedTeamsData as TeamData
 
 export default function SacreedGuardian13Guide() {
+    const [miniBossId, setMiniBossId] = useState('404400462')
+
+    // Mapping: Sacreed Guardian boss ID → Deformed Inferior Core boss ID
+    const handleBossChange = useCallback((sacreedBossId: string) => {
+        const bossIdMap: Record<string, string> = {
+            '404400362': '404400462', // Stage 13
+            '404400361': '404400461', // Stage 12
+            '404400360': '404400460', // Stage 11
+            '404400359': '404400459', // Stage 10
+        }
+        // Stage 9 et moins utilisent tous 404400450
+        setMiniBossId(bossIdMap[sacreedBossId] || '404400450')
+    }, [])
+
     return (
         <GuideTemplate
             title="Sacreed Guardian 13 Strategy Guide"
@@ -32,6 +41,21 @@ export default function SacreedGuardian13Guide() {
                     label: 'Guide',
                     content: (
                         <>
+                            {/**<BossDisplay bossKey='Sacreed Guardian' modeKey='Special Request: Ecology Study' defaultBossId='404400362' />*/}
+
+                            <BossDisplay
+                                bossKey='Sacreed Guardian'
+                                modeKey='Special Request: Ecology Study'
+                                defaultBossId='404400362'
+                                onBossChange={handleBossChange}
+                            />
+                            <MiniBossDisplay
+                                bosses={[
+                                    { bossKey: 'Deformed Inferior Core', defaultBossId: miniBossId }
+                                ]}
+                                modeKey='Special Request: Ecology Study'
+                            />
+
                             <GuideHeading level={3}>Strategy Overview</GuideHeading>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>Immune to <EffectInlineTag name="BT_SEALED" type="debuff" /> : use <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> <EffectInlineTag name="BT_STATBUFF_CONVERT_TO_STATDEBUFF" type="debuff" /> <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /></li>
@@ -48,7 +72,7 @@ export default function SacreedGuardian13Guide() {
                                 <li>Use a fast unit to strip the boss&apos;s initial <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> at the start of the fight.</li>
                                 <li>Apply AoE debuffs to disable the orb, which applies 3 buffs every turn to the boss.</li>
                                 <li>Debuff the boss consistently to delay its AoE and S2 skills.</li>
-
+                                <li><ClassInlineTag name='Healer' /> can&apos;t be stun until Stage 11</li>
                                 <li>Healing is optional, focus on lockdown and bursting the boss quickly before it gains buffs.</li>
                                 <li>Stage 12: The boss heals when these effects are triggered: <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" />, <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" />, and <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" />.</li>
                                 <li>Stage 13 : The boss negates <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> characters like <CharacterLinkCard name="Demiurge Stella" /> and <CharacterLinkCard name="Stella" /> are immune to stun but won&apos;t trigger their passives.</li>
@@ -65,13 +89,15 @@ export default function SacreedGuardian13Guide() {
                                 <li><CharacterLinkCard name="Kuro" /> is a great pick with <EffectInlineTag name="BT_STATBUFF_CONVERT_TO_STATDEBUFF" type="debuff" /></li>
                                 <li><CharacterLinkCard name="Maxwell" /> and <CharacterLinkCard name="Demiurge Astei" /> are strong <ElementInlineTag element="dark" /> DPS picks for this fight.</li>
                                 <li><CharacterLinkCard name="Dahlia" />, <CharacterLinkCard name="Notia" />, and <CharacterLinkCard name="Gnosis Nella" /> provide key debuffs or buff removal.</li>
-                            </ul>            
+                            </ul>
                             <span className="text-sm text-gray-400"><strong>Note: </strong><CharacterLinkCard name="Omega Nadja" /> and <CharacterLinkCard name="Iota" /> pair well if Iota is really fast and can prevent the boss from attacking. Just be mindful of the turn limit, and make sure both DPS units, along with Iota, are fast as well.
                             </span>
 
                             <hr className="my-6 border-neutral-700" />
 
-                            <TeamTabSelector teams={teams} />
+
+                            <StageBasedTeamSelector teamData={SacreedTeams} defaultStage="1-10" icon='/images/ui/effect/dark.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }} />
+
 
                             <hr className="my-6 border-neutral-700" />
                             <div className="mb-4">

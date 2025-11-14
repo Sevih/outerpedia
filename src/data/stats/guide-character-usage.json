@@ -942,9 +942,6 @@
     "guideId": "grand-calamari",
     "characters": [
       "Akari",
-      "Alice",
-      "Demiurge Stella",
-      "Dianne",
       "Drakhan",
       "Edelweiss",
       "Gnosis Beth",
@@ -952,7 +949,10 @@
       "Kuro",
       "Monad Eva",
       "Regina",
-      "Stella"
+      "Alice",
+      "Stella",
+      "Demiurge Stella",
+      "Dianne"
     ]
   },
   "special-request/guardian": {
@@ -1001,43 +1001,43 @@
     "guideId": "sacreed",
     "characters": [
       "Aer",
-      "Alice",
       "Dahlia",
       "Demiurge Astei",
-      "Demiurge Delta",
       "Demiurge Stella",
-      "Demiurge Vlada",
-      "Eliza",
       "Francesca",
-      "Gnosis Dahlia",
       "Gnosis Nella",
       "Iota",
       "Kuro",
       "Maxwell",
-      "Nella",
       "Notia",
       "Omega Nadja",
-      "Stella"
+      "Stella",
+      "Demiurge Vlada",
+      "Eliza",
+      "Alice",
+      "Gnosis Dahlia",
+      "Demiurge Delta",
+      "Nella"
     ]
   },
   "special-request/tyrant": {
     "category": "special-request",
     "guideId": "tyrant",
     "characters": [
-      "Ame",
-      "Charlotte",
-      "Delta",
       "Dianne",
-      "Kappa",
       "Monad Eva",
-      "Noa",
-      "Rey",
-      "Rhona",
       "Saeran",
       "Shu",
       "Stella",
+      "Tio",
+      "Noa",
+      "Ame",
+      "Rey",
+      "Kappa",
+      "Charlotte",
       "Tamara",
-      "Tio"
+      "Rhona",
+      "Delta"
     ]
   },
   "world-boss/dahlia": {

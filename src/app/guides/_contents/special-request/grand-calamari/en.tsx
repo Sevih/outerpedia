@@ -3,23 +3,17 @@
 import GuideTemplate from '@/app/components/GuideTemplate'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
 import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import ElementInlineTag from '@/app/components/ElementInline'
+import CalamariTeamsData from './Grand-Calamari.json'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import type {TeamData} from '@/types/team'
+import BossDisplay from '@/app/components/BossDisplay'
 
-const teams = {
-    team1: {
-        label: 'Suggested Core',
-        icon: 'SC_Debuff_Effect_Unbuffable.webp',
-        setup: [
-            ['Akari','Gnosis Nella','Alice','Edelweiss'],
-            ['Kuro', 'Stella','Edelweiss' ],
-            ['Drakhan','Gnosis Beth', 'Regina', 'Demiurge Stella'],
-            ['Monad Eva', 'Dianne']
-        ]
-    }
-}
+const CalamariTeams = CalamariTeamsData as TeamData
+
+
 
 export default function GrandCalamari13Guide() {
     return (
@@ -32,15 +26,7 @@ export default function GrandCalamari13Guide() {
                     label: 'Guide',
                     content: (
                         <>
-                            <GuideHeading level={3}>Strategy Overview</GuideHeading>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li>Immune to <EffectInlineTag name="BT_REMOVE_BUFF" type="debuff" /> and <EffectInlineTag name="BT_EXTEND_BUFF" type="debuff" /></li>
-                                <li>Reduces debuff duration by 1 each turn (except irremovable debuff like <EffectInlineTag name="IG_Buff_Effect_Sealed_Interruption_D" type="debuff" /> from <CharacterLinkCard name="Gnosis Nella" />)</li>
-                                <li>Applies <EffectInlineTag name="BT_STAT|ST_BUFF_CHANCE" type="debuff" /> via S3</li>
-                                <li><CharacterLinkCard name="Kuro" /> can flip buffs into long-duration debuffs</li>
-                            </ul>
-
-                            <hr className="my-6 border-neutral-700" />
+                            <BossDisplay bossKey='Grand Calamari' modeKey='Special Request: Ecology Study' defaultBossId='403400362' />
 
                             <GuideHeading level={3}>Tactical Tips</GuideHeading>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
@@ -63,7 +49,7 @@ export default function GrandCalamari13Guide() {
 
                             <hr className="my-6 border-neutral-700" />
 
-                            <TeamTabSelector teams={teams} />
+                            <StageBasedTeamSelector teamData={CalamariTeams} defaultStage="1-10" icon='/images/ui/effect/light.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }} />
 
                             <hr className="my-6 border-neutral-700" />
                             <div className="mb-4">

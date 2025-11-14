@@ -7,19 +7,7 @@ import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import ElementInlineTag from '@/app/components/ElementInline'
 import BossDisplay from '@/app/components/BossDisplay'
 import guardianTeamsData from './Guardian.json'
-
-type NoteEntry =
-  | { type: 'p'; string: string }
-  | { type: 'ul'; items: string[] }
-
-type StageData = {
-  team: string[][]
-  note?: NoteEntry[]
-}
-
-type TeamData = {
-  [key: string]: StageData
-}
+import type {TeamData} from '@/types/team'
 
 const guardianTeams = guardianTeamsData as TeamData
 

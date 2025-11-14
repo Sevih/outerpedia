@@ -1,0 +1,58 @@
+{
+    "1-10": {
+        "team": [
+            [
+                "Akari",
+                "Gnosis Nella",
+                "Alice",
+                "Edelweiss"
+            ],
+            [
+                "Kuro",
+                "Stella",
+                "Edelweiss"
+            ],
+            [
+                "Drakhan",
+                "Gnosis Beth",
+                "Regina",
+                "Demiurge Stella"
+            ],
+            [
+                "Monad Eva",
+                "Dianne"
+            ]
+        ],
+        "note": [
+            {
+                "type": "p",
+                "string": "Don't forget you can use your friends' units to help you beat those stages."
+            }
+        ]
+    },
+    "11-13": {
+        "team": [
+            [
+                "Akari",
+                "Gnosis Nella",
+                "Alice",
+                "Edelweiss"
+            ],
+            [
+                "Kuro",
+                "Stella",
+                "Edelweiss"
+            ],
+            [
+                "Drakhan",
+                "Gnosis Beth",
+                "Regina",
+                "Demiurge Stella"
+            ],
+            [
+                "Monad Eva",
+                "Dianne"
+            ]
+        ]
+    }
+}

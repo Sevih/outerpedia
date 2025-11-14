@@ -23,6 +23,7 @@ type Props = {
   defaultModeKey?: string
   labelFilter?: string | string[] // Filter boss versions by label(s) (e.g., "An Unpleasant Reunion" or ["Label1", "Label2"])
   onModeChange?: (mode: string) => void // Callback when mode changes
+  onBossChange?: (bossId: string) => void // Callback when boss version changes
 }
 
 function formatColorTags(input: string) {
@@ -34,7 +35,7 @@ function formatColorTags(input: string) {
     .replace(/\n/g, '<br />')
 }
 
-export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultModeKey, labelFilter, onModeChange }: Props) {
+export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultModeKey, labelFilter, onModeChange, onBossChange }: Props) {
   const { lang } = useI18n()
   const t = getT(lang)
   const [data, setData] = useState<BossData | null>(null)
@@ -108,13 +109,14 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
         const initialId = (isInitialMode && defaultBossId) ? defaultBossId : allVersions[0]?.id
         if (initialId) {
           setSelectedBossId(initialId)
+          onBossChange?.(initialId)
         }
       })
       .catch((err) => {
         console.error('[BossDisplay] Error loading index.json', err)
         setError('Failed to load boss index')
       })
-  }, [bossKey, selectedModeKey, defaultBossId, defaultModeKey, modeKey, labelFilter])
+  }, [bossKey, selectedModeKey, defaultBossId, defaultModeKey, modeKey, labelFilter, onBossChange])
 
   useEffect(() => {
     if (!selectedBossId) return
@@ -246,7 +248,10 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
             {!labelFilter && bossVersions.length > 1 && (
               <select
                 value={selectedBossId}
-                onChange={(e) => setSelectedBossId(e.target.value)}
+                onChange={(e) => {
+                  setSelectedBossId(e.target.value)
+                  onBossChange?.(e.target.value)
+                }}
                 className="bg-neutral-800 border border-neutral-600 rounded px-3 py-1.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
               >
                 {bossVersions.map((version) => (

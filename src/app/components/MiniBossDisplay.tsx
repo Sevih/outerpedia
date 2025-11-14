@@ -169,7 +169,7 @@ export default function MiniBossDisplay({ bosses, modeKey, defaultModeKey, contr
         const data = miniBoss.data
         const bossName = lRec(data.Name, lang)
         const bossSurname = lRec(data.Surname, lang)
-        const miniPortrait = `/images/characters/boss/mini/IG_Turn_${data.icons}_E.webp`
+        const miniPortrait = `/images/characters/boss/portrait/MT_${data.icons}.webp`
         const isCharacterPortrait = data.icons.startsWith('2')
 
         // Récupérer le nom complet du personnage depuis slugToChar si c'est un portrait de personnage
@@ -225,8 +225,7 @@ export default function MiniBossDisplay({ bosses, modeKey, defaultModeKey, contr
                 {/* Class, Element, Level */}
                 <div className="flex flex-wrap gap-2 items-center text-xs">
                   <ClassInlineTag name={data.class} notext />
-                  <ElementInlineTag element={data.element.toLowerCase()} notext />
-                  <span className="text-neutral-400">Lvl {data.level}</span>
+                  <ElementInlineTag element={data.element.toLowerCase()} notext />                  
                 </div>
 
                 {/* Immunities */}

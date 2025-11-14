@@ -1,0 +1,60 @@
+{
+    "1-10": {
+        "team": [
+            [
+                "Dianne",
+                "Saeran",
+                "Shu",
+                "Monad Eva"
+            ],
+            [
+                "Noa",
+                "Ame",
+                "Rey"
+            ],
+            [
+                "Kappa",
+                "Charlotte",
+                "Tamara",
+                "Rhona"
+            ],
+            [
+                "Ame",
+                "Rey",
+                "Delta"
+            ]
+        ],
+        "note": [
+            {
+                "type": "p",
+                "string": "Don't forget you can use your friends' units to help you beat those stages."
+            }
+        ]
+    },
+    "11-13": {
+        "team": [
+            [
+                "Dianne",
+                "Saeran",
+                "Shu",
+                "Monad Eva"
+            ],
+            [
+                "Noa",
+                "Ame",
+                "Rey"
+            ],
+            [
+                "Kappa",
+                "Charlotte",
+                "Tamara",
+                "Rhona"
+            ],
+            [
+                "Ame",
+                "Rey",
+                "Delta"
+            ]
+        ]
+    }
+}
