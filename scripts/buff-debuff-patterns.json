@@ -1,0 +1,869 @@
+{
+  "patterns": [
+    {
+      "pattern": "[Ii]ncreases?.*<[^>]*>Priority.*by",
+      "type": "buff",
+      "code": "BT_ACTION_GAUGE"
+    },
+    {
+      "pattern": "[Ii]ncreases?.*Priority.*by.*<[^>]*>\\d+%",
+      "type": "buff",
+      "code": "BT_ACTION_GAUGE"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+Priority",
+      "type": "debuff",
+      "code": "BT_ACTION_GAUGE"
+    },
+    {
+      "pattern": "[Ii]ncreases?\\s+Priority",
+      "type": "buff",
+      "code": "BT_ACTION_GAUGE"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+the\\s+target'?s\\s+Priority\\s+by\\s+<[^>]*>-?\\d+%",
+      "type": "debuff",
+      "code": "BT_ACTION_GAUGE"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+the\\s+target'?s\\s+Priority\\s+by\\s+<[^>]*>-?\\d+%",
+      "type": "debuff",
+      "code": "BT_ACTION_GAUGE"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+the\\s+target'?s\\s+<[^>]*>Priority<[^>]*>\\s+by\\s+<[^>]*>-?\\d+%",
+      "type": "debuff",
+      "code": "BT_ACTION_GAUGE"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+an?\\s+<[^>]*>extra\\s+turn",
+      "type": "buff",
+      "code": "BT_ADDITIVE_TURN"
+    },
+    {
+      "pattern": "(?<!is\\s)[Ii]nflicts?\\s+<[^>]*>Taunted<[^>]*>(?!.*[Ii]rremovable).*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_AGGRO"
+    },
+    {
+      "pattern": "(?<!is\\s)[Ii]nflicts?.*irremovable.*<[^>]*>Taunted.*for.*turn",
+      "type": "debuff",
+      "code": "BT_AGGRO_IR"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+<[^>]*>Taunted<[^>]*>.*for.*turns?\\)?\\.\\s*\\([Ii]rremovable",
+      "type": "debuff",
+      "code": "BT_AGGRO_IR"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+<[^>]*>Taunted<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?.*[Ii]rremovable",
+      "type": "debuff",
+      "code": "BT_AGGRO_IR"
+    },
+    {
+      "pattern": "[Rr]educes?.*<[^>]*>Action\\s+Points<[^>]*>.*by\\s+<[^>]*>-?\\d+%",
+      "type": "debuff",
+      "code": "BT_AP_CHARGE"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+<[^>]*>Action\\s+Points<[^>]*>\\s+of\\s+all\\s+enemies\\s+by\\s+<[^>]*>\\d+",
+      "type": "debuff",
+      "code": "BT_AP_CHARGE"
+    },
+    {
+      "pattern": "[Gg]rants?.*(?:<[^>]*>)?Barrier(?:<[^>]*>)?",
+      "type": "buff",
+      "code": "BT_BARRIER"
+    },
+    {
+      "pattern": "activates?\\s+a\\s+(<[^>]*>)?Dual\\s+Attack",
+      "type": "buff",
+      "code": "BT_CALL_BACKUP"
+    },
+    {
+      "pattern": "cooldown.*reduces?\\s+by.*\\d+\\s+turn",
+      "type": "buff",
+      "code": "BT_COOL_CHARGE"
+    },
+    {
+      "pattern": "reduces.*cooldown.*by.*<[^>]*>\\d+\\s+turn",
+      "type": "buff",
+      "code": "BT_COOL_CHARGE"
+    },
+    {
+      "pattern": "resets?\\s+the\\s+caster'?s\\s+<[^>]*>[^<]+<[^>]*>\\s+cooldown",
+      "type": "buff",
+      "code": "BT_COOL_CHARGE"
+    },
+    {
+      "pattern": "fully\\s+reduces?\\s+the\\s+cooldown\\s+of\\s+<[^>]*>[^<]+",
+      "type": "buff",
+      "code": "BT_COOL_CHARGE"
+    },
+    {
+      "pattern": "[Ii]ncreases?\\s+<[^>]*>skill\\s+cooldowns?<[^>]*>.*by\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_COOL_CHARGE"
+    },
+    {
+      "pattern": "reduces?\\s+all\\s+the\\s+cooldown\\s+of\\s+<[^>]*>[^<]+",
+      "type": "buff",
+      "code": "BT_COOL_CHARGE "
+    },
+    {
+      "pattern": "decreases?.*[Cc]hain\\s+[Pp]oints?\\s+by",
+      "type": "debuff",
+      "code": "BT_CP_CHARGE"
+    },
+    {
+      "pattern": "reduces?.*[Cc]hain\\s+[Pp]oints?.*by\\s+\\d+",
+      "type": "debuff",
+      "code": "BT_CP_CHARGE"
+    },
+    {
+      "pattern": "grants?\\s+\\d+\\s+Chain\\s+Points",
+      "type": "buff",
+      "code": "BT_CP_CHARGE"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+<[^>]*>Chain\\s+Points<[^>]*>\\s+of\\s+the\\s+enemy\\s+team\\s+by\\s+<[^>]*>\\d+",
+      "type": "debuff",
+      "code": "BT_CP_CHARGE"
+    },
+    {
+      "pattern": "[Rr]educes?.*<[^>]*>Chain\\s+Points<[^>]*>.*by\\s+<[^>]*>-?\\d+%",
+      "type": "debuff",
+      "code": "BT_CP_CHARGE"
+    },
+    {
+      "pattern": "Enraged.*reduces damage taken",
+      "type": "buff",
+      "code": "BT_DAMGE_TAKEN"
+    },
+    {
+      "pattern": "[Ee]nraged.*[Rr]educed\\s+[Dd]amage",
+      "type": "buff",
+      "code": "BT_DAMGE_TAKEN"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+an?\\s+irremovable\\s+Damage\\s+Reduction",
+      "type": "buff",
+      "code": "BT_DAMGE_TAKEN"
+    },
+    {
+      "pattern": "[Ee]nraged.*permanently.*reduces?\\s+<[^>]*>damage\\s+taken",
+      "type": "buff",
+      "code": "BT_DAMGE_TAKEN "
+    },
+    {
+      "pattern": "always\\s+has\\s+elemental\\s+advantage",
+      "type": "buff",
+      "code": "BT_DMG_ELEMENT_SUPERIORITY"
+    },
+    {
+      "pattern": "[Ii]nflicts?(?!\\s+irremovable)\\s+<[^>]*>Bleeding",
+      "type": "debuff",
+      "code": "BT_DOT_BLEED"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+irremovable.*<[^>]*>Bleeding",
+      "type": "debuff",
+      "code": "BT_DOT_BLEED_IR"
+    },
+    {
+      "pattern": "(?<!is\\s)[Ii]nflicts?(?!.*irremovable).*<[^>]*>Burned.*for.*turns?",
+      "type": "debuff",
+      "code": "BT_DOT_BURN"
+    },
+    {
+      "pattern": "[Gg]rants?(?!\\s+irremovable).*<[^>]*>Burned",
+      "type": "debuff",
+      "code": "BT_DOT_BURN"
+    },
+    {
+      "pattern": "inflicts?\\s+[Bb]urned\\s+for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "debuff",
+      "code": "BT_DOT_BURN"
+    },
+    {
+      "pattern": "[Ii]nflicts?(?!\\s+irremovable)\\s+<[^>]*>Cursed<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_DOT_CURSE"
+    },
+    {
+      "pattern": "[Ii]nflicts?(?!\\s+irremovable)\\s+Cursed\\s+on\\s+the\\s+target\\s+for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_DOT_CURSE"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+<[^>]*>Shocked<[^>]*>\\s+on\\s+the\\s+target\\s+for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "debuff",
+      "code": "BT_DOT_LIGHTNING"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+<[^>]*>Shocked<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "debuff",
+      "code": "BT_DOT_LIGHTNING"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+irremovable\\s+<[^>]*>Shocked",
+      "type": "debuff",
+      "code": "BT_DOT_LIGHTNING_IR"
+    },
+    {
+      "pattern": "[Ii]nflicts?(?!\\s+irremovable)(?:(?!irremovable).)*<[^>]*>Poisoned",
+      "type": "debuff",
+      "code": "BT_DOT_POISON"
+    },
+    {
+      "pattern": "grants?\\s+<[^>]*>Poisoned<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_DOT_POISON "
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+irremovable.*<[^>]*>Poisoned",
+      "type": "debuff",
+      "code": "BT_DOT_POISON_IR"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+an?\\s+irremovable\\s+<[^>]*>Poisoned<[^>]*>\\s+for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_DOT_POISON_IR"
+    },
+    {
+      "pattern": "[Ii]ncreases?\\s+duration\\s+of\\s+all\\s+<[^>]*>buffs?<[^>]*>.*by\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_EXTEND_BUFF"
+    },
+    {
+      "pattern": "increases?\\s+duration\\s+of\\s+<[^>]*>buffs?<[^>]*>.*by\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_EXTEND_BUFF"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+the\\s+duration\\s+of\\s+<[^>]*>buffs?<[^>]*>.*by\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_EXTEND_BUFF"
+    },
+    {
+      "pattern": "[Ii]ncreases?\\s+(?:the\\s+)?duration\\s+of\\s+all\\s+(?:<[^>]*>)?buffs?(?:<[^>]*>)?.*by\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_EXTEND_BUFF"
+    },
+    {
+      "pattern": "reduces?.*duration.*<[^>]*>debuffs",
+      "type": "buff",
+      "code": "BT_EXTEND_DEBUFF"
+    },
+    {
+      "pattern": "increases?\\s+duration\\s+of\\s+<[^>]*>debuffs?<[^>]*>\\s+on\\s+the\\s+target\\s+by\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_EXTEND_DEBUFF"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+(?:the\\s+)?duration\\s+of\\s+(?:<[^>]*>)?debuffs?(?:<[^>]*>)?.*by\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_EXTEND_DEBUFF"
+    },
+    {
+      "pattern": "deals?\\s+<[^>]*>\\d+<[^>]*>\\s+fixed\\s+damage",
+      "type": "debuff",
+      "code": "BT_FIXED_DAMAGE"
+    },
+    {
+      "pattern": "[Ii]nflicts?(?!\\s+irremovable)\\s+<[^>]*>Frozen<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_FREEZE"
+    },
+    {
+      "pattern": "[Dd]etonates?\\s+all\\s+Burned\\s+stacks?",
+      "type": "debuff",
+      "code": "BT_IMMEDIATELY_BURN"
+    },
+    {
+      "pattern": "[Dd]etonates?\\s+all\\s+<[^>]*>Burned<[^>]*>\\s+(effects?\\s+)?on\\s+the\\s+targets?",
+      "type": "debuff",
+      "code": "BT_IMMEDIATELY_BURN"
+    },
+    {
+      "pattern": "[Dd]etonates?(<[^>]*>)?\\s+all\\s+Burned\\s+stacks?",
+      "type": "debuff",
+      "code": "BT_IMMEDIATELY_BURN"
+    },
+    {
+      "pattern": "[Dd]etonates?\\s+all\\s+<[^>]*>Cursed<[^>]*>\\s+stacks?",
+      "type": "debuff",
+      "code": "BT_IMMEDIATELY_CURSE"
+    },
+    {
+      "pattern": "[Dd]etonates?(<[^>]*>)?\\s+all\\s+Cursed\\s+stacks?",
+      "type": "debuff",
+      "code": "BT_IMMEDIATELY_CURSE"
+    },
+    {
+      "pattern": "[Dd]etonates?\\s+all\\s+Cursed\\s+stacks?",
+      "type": "debuff",
+      "code": "BT_IMMEDIATELY_CURSE"
+    },
+    {
+      "pattern": "[Gg]rants?(?!.*irremovable).*(?:<[^>]*>)?Immunity(?:<[^>]*>)?",
+      "type": "buff",
+      "code": "BT_IMMUNE"
+    },
+    {
+      "pattern": "[Gg]rants?.*irremovable\\s+(?:<[^>]*>)?Immunity(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_IMMUNE_IR"
+    },
+    {
+      "pattern": "permanently\\s+grants?\\s+Immunity",
+      "type": "buff",
+      "code": "BT_IMMUNE_IR"
+    },
+    {
+      "pattern": "(?:<[^>]*>)?Invulnerability(?:<[^>]*>)?(?!.*[Cc]annot\\s+be\\s+removed)(?!.*[Ii]rremovable)",
+      "type": "buff",
+      "code": "BT_INVINCIBLE"
+    },
+    {
+      "pattern": "(?:<[^>]*>)?Invulnerability(?:<[^>]*>)?.*(?:[Cc]annot\\s+be\\s+removed|[Ii]rremovable)",
+      "type": "buff",
+      "code": "BT_INVINCIBLE_IR"
+    },
+    {
+      "pattern": "kills?\\s+(them|the\\s+target)\\s+instantly",
+      "type": "debuff",
+      "code": "BT_KILL"
+    },
+    {
+      "pattern": "instantly\\s+kills?\\s+the\\s+(enemy|target)",
+      "type": "debuff",
+      "code": "BT_KILL"
+    },
+    {
+      "pattern": "inflicts?\\s+<[^>]*>instant\\s+death",
+      "type": "debuff",
+      "code": "BT_KILL"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+<[^>]*>instant\\s+death<[^>]*>.*if.*current\\s+Health.*below.*\\d+%",
+      "type": "debuff",
+      "code": "BT_KILL_UNDER_HP_RATE"
+    },
+    {
+      "pattern": "[Ii]f\\s+the\\s+target'?s\\s+<[^>]*>current\\s+Health<[^>]*>\\s+is\\s+at\\s+or\\s+below\\s+<[^>]*>\\d+%<[^>]*>,\\s+inflicts?\\s+<[^>]*>[Ii]nstant\\s+[Dd]eath",
+      "type": "debuff",
+      "code": "BT_KILL_UNDER_HP_RATE"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+a\\s+random\\s+buff",
+      "type": "buff",
+      "code": "BT_RANDOM_STAT"
+    },
+    {
+      "pattern": "[Rr]emoves?\\s+<[^>]*>all<[^>]*>\\s+<[^>]*>buffs?",
+      "type": "debuff",
+      "code": "BT_REMOVE_BUFF"
+    },
+    {
+      "pattern": "[Rr]emoves?.*<[^>]*>\\d+<[^>]*>.*buffs?(?!</[^>]*>).*from",
+      "type": "debuff",
+      "code": "BT_REMOVE_BUFF"
+    },
+    {
+      "pattern": "[Rr]emoving\\s+all\\s+<[^>]*>buffs?(?!</[^>]*>)",
+      "type": "debuff",
+      "code": "BT_REMOVE_BUFF"
+    },
+    {
+      "pattern": "[Rr]emoves?\\s+all\\s+buffs?\\s+from",
+      "type": "debuff",
+      "code": "BT_REMOVE_BUFF"
+    },
+    {
+      "pattern": "[Rr]emoves?\\s+all\\s+(?:<[^>]*>)?buffs?(?:<[^>]*>)?\\s+from",
+      "type": "debuff",
+      "code": "BT_REMOVE_BUFF"
+    },
+    {
+      "pattern": "[Rr]emoves?.*<[^>]*>\\d+\\s+debuff",
+      "type": "buff",
+      "code": "BT_REMOVE_DEBUFF"
+    },
+    {
+      "pattern": "[Rr]emoves?.*<[^>]*>\\d+<[^>]*>\\s+debuff",
+      "type": "buff",
+      "code": "BT_REMOVE_DEBUFF"
+    },
+    {
+      "pattern": "[Rr]emoves?.*all.*<[^>]*>debuffs?",
+      "type": "buff",
+      "code": "BT_REMOVE_DEBUFF"
+    },
+    {
+      "pattern": "[Rr]emoves?\\s+<[^>]*>all<[^>]*>\\s+debuffs?",
+      "type": "buff",
+      "code": "BT_REMOVE_DEBUFF"
+    },
+    {
+      "pattern": "(?<!(?:[Bb]e|[Cc]annot)\\s)[Rr]esurrects?",
+      "type": "buff",
+      "code": "BT_RESURRECTION"
+    },
+    {
+      "pattern": "[Dd]eals?\\s+[Ff]ixed\\s+[Dd]amage\\s+equal\\s+to\\s+<[^>]*>\\d+%<[^>]*>\\s+of\\s+target'?s\\s+[Mm]ax\\s+[Hh]ealth",
+      "type": "debuff",
+      "code": "BT_REVERSE_HEAL_BASED_TARGET"
+    },
+    {
+      "pattern": "deals\\s+Fixed\\s+Damage\\s+equal\\s+to\\s+<[^>]*>\\d+%<[^>]*>\\s+of\\s+Max\\s+Health",
+      "type": "debuff",
+      "code": "BT_REVERSE_HEAL_BASED_TARGET"
+    },
+    {
+      "pattern": "[Dd]eals?\\s+<[^>]*>\\d+%<[^>]*>\\s+of\\s+the\\s+target'?s\\s+Max\\s+Health\\s+as\\s+fixed\\s+damage",
+      "type": "debuff",
+      "code": "BT_REVERSE_HEAL_BASED_TARGET"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+fixed\\s+damage\\s+equal\\s+to\\s+<[^>]*>\\d+%<[^>]*>\\s+of\\s+the\\s+target'?s\\s+max\\s+Health",
+      "type": "debuff",
+      "code": "BT_REVERSE_HEAL_BASED_TARGET"
+    },
+    {
+      "pattern": "(?:<[^>]*>)?[Cc]ounterattacks?(?:<[^>]*>)?\\s+when\\s+hit.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_RUN_FIRST_SKILL_ON_TURN_END_DEFENDER"
+    },
+    {
+      "pattern": "does\\s+not\\s+trigger\\s+an?\\s+enemy'?s\\s+Counterattack,?\\s+Revenge,?\\s+(or\\s+)?Agile\\s+Response",
+      "type": "buff",
+      "code": "BT_SEAL_COUNTER"
+    },
+    {
+      "pattern": "[Ii]nflicts?(?!.*irremovable).*<[^>]*>Unbuffable",
+      "type": "debuff",
+      "code": "BT_SEALED"
+    },
+    {
+      "pattern": "cannot\\s+([Bb]e\\s+)?[Rr]esurrected\\s+or\\s+[Rr]evived?",
+      "type": "debuff",
+      "code": "BT_SEALED_RESURRECTION"
+    },
+    {
+      "pattern": "cannot\\s+be\\s+[Rr]esurrected\\s+or\\s+[Rr]evive",
+      "type": "debuff",
+      "code": "BT_SEALED_RESURRECTION"
+    },
+    {
+      "pattern": "[Gg](rants?|ains?)\\s+(a\\s+)?(<[^>]*>)?barrier",
+      "type": "buff",
+      "code": "BT_SHIELD_BASED_CASTER"
+    },
+    {
+      "pattern": "[Gg]ains?\\s+(a\\s+)?barrier",
+      "type": "buff",
+      "code": "BT_SHIELD_BASED_TARGET"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+(a\\s+)?(<[^>]*>)?barrier",
+      "type": "buff",
+      "code": "BT_SHIELD_BASED_TARGET"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+<[^>]*>Silenced<[^>]*>\\s+for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "debuff",
+      "code": "BT_SILENCE"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+<[^>]*>Silenced<[^>]*>.*cannot\\s+be\\s+removed",
+      "type": "debuff",
+      "code": "BT_SILENCE_IR"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+<[^>]*>Accuracy<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_ACCURACY"
+    },
+    {
+      "pattern": "[Rr]educes?.*<[^>]*>Accuracy",
+      "type": "debuff",
+      "code": "BT_STAT|ST_ACCURACY"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+.*<[^>]*>Attack<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_ATK"
+    },
+    {
+      "pattern": "increases.*<[^>]*>Attack.*for.*turn",
+      "type": "buff",
+      "code": "BT_STAT|ST_ATK"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+<[^>]*>Attack<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "buff",
+      "code": "BT_STAT|ST_ATK"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+.*(?:<[^>]*>)?Attack(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_ATK"
+    },
+    {
+      "pattern": "[Gg]rants?.*increased\\s+.*(?:<[^>]*>)?Attack(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_ATK"
+    },
+    {
+      "pattern": "irremovable.*[Ii]ncreased\\s+(?:<[^>]*>)?Attack(?:<[^>]*>)?",
+      "type": "buff",
+      "code": "BT_STAT|ST_ATK_IR"
+    },
+    {
+      "pattern": "[Ee]nraged.*irremovable.*increases?\\s+[Aa]ttack",
+      "type": "buff",
+      "code": "BT_STAT|ST_ATK_IR"
+    },
+    {
+      "pattern": "[Ee]nraged.*[Gg]rants?\\s+irremovable\\s+[Ii]ncreased\\s+[Aa]ttack",
+      "type": "buff",
+      "code": "BT_STAT|ST_ATK_IR"
+    },
+    {
+      "pattern": "[Ee]nraged.*permanently\\s+increases?\\s+<[^>]*>Attack",
+      "type": "buff",
+      "code": "BT_STAT|ST_ATK_IR"
+    },
+    {
+      "pattern": "[Dd]ecreases?\\s+(?:<[^>]*>)?Attack(?:<[^>]*>)?.*irremovable",
+      "type": "debuff",
+      "code": "BT_STAT|ST_ATK_IR"
+    },
+    {
+      "pattern": "irremovable.*(?:[Dd]ecreases?|[Rr]educes?)\\s+(?:<[^>]*>)?Attack(?:<[^>]*>)?|(?:[Dd]ecreases?|[Rr]educes?)\\s+(?:<[^>]*>)?Attack(?:<[^>]*>)?.*irremovable",
+      "type": "debuff",
+      "code": "BT_STAT|ST_ATK_IR"
+    },
+    {
+      "pattern": "[Gg]rants?.*increased\\s+.*(?:<[^>]*>)?Evasion(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_AVOID"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+the\\s+target'?s\\s+<[^>]*>Evasion<[^>]*>\\s+for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_STAT|ST_AVOID"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+<[^>]*>Evasion<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?(?!.*[Ii]rremovable)",
+      "type": "buff",
+      "code": "BT_STAT|ST_AVOID"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+<[^>]*>Evasion<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?.*[Ii]rremovable",
+      "type": "buff",
+      "code": "BT_STAT|ST_AVOID_IR"
+    },
+    {
+      "pattern": "[Ee]nraged.*irremovable.*increases?.*[Ee]vasion",
+      "type": "buff",
+      "code": "BT_STAT|ST_AVOID_IR"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+Effectiveness\\s+to.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_BUFF_CHANCE"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+.*<[^>]*>Effectiveness<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_BUFF_CHANCE"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+.*<[^>]*>Effectiveness<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_BUFF_CHANCE"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+<[^>]*>Effectiveness<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_BUFF_CHANCE"
+    },
+    {
+      "pattern": "[Rr]educes?.*<[^>]*>Effectiveness",
+      "type": "debuff",
+      "code": "BT_STAT|ST_BUFF_CHANCE"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+(?:<[^>]*>)?Effectiveness(?:<[^>]*>)?(?!.*for\\s+<[^>]*>\\d+\\s+turns?)",
+      "type": "debuff",
+      "code": "BT_STAT|ST_BUFF_CHANCE_IR"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+<[^>]*>Resilience<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "buff",
+      "code": "BT_STAT|ST_BUFF_RESIST"
+    },
+    {
+      "pattern": "\\b[Rr]educes?.*(?:<[^>]*>)?Resilience(?:<[^>]*>)?(?!.*for\\s+<[^>]*>\\d+\\s+turns?)",
+      "type": "debuff",
+      "code": "BT_STAT|ST_BUFF_RESIST_IR"
+    },
+    {
+      "pattern": "\\b[Rr]educes?.*(?:<[^>]*>)?Resilience(?:<[^>]*>)?(?!.*for\\s+<[^>]*>\\d+\\s+turns?)",
+      "type": "debuff",
+      "code": "BT_STAT|ST_BUFF_RESIST_IR"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+Effectiveness\\s+and\\s+(?:<[^>]*>)?Resilience(?:<[^>]*>)?",
+      "type": "debuff",
+      "code": "BT_STAT|ST_BUFF_RESIST_IR"
+    },
+    {
+      "pattern": "[Cc]ounterattacks?\\s+with",
+      "type": "buff",
+      "code": "BT_STAT|ST_COUNTER_RATE"
+    },
+    {
+      "pattern": "counterattacks.*cannot be removed",
+      "type": "buff",
+      "code": "BT_STAT|ST_COUNTER_RATE_IR"
+    },
+    {
+      "pattern": "[Ii]nflicts?(?!.*irremovable).*reduced.*<[^>]*>Critical Damage",
+      "type": "debuff",
+      "code": "BT_STAT|ST_CRITICAL_DMG_RATE"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+<[^>]*>Critical\\s+Damage<[^>]*>\\s+for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "buff",
+      "code": "BT_STAT|ST_CRITICAL_DMG_RATE"
+    },
+    {
+      "pattern": "[Rr]educes?.*<[^>]*>Critical Damage(?!.*turn)",
+      "type": "debuff",
+      "code": "BT_STAT|ST_CRITICAL_DMG_RATE_IR"
+    },
+    {
+      "pattern": "[Ii]nflicts?.*irremovable.*reduced.*<[^>]*>Critical Damage",
+      "type": "debuff",
+      "code": "BT_STAT|ST_CRITICAL_DMG_RATE_IR"
+    },
+    {
+      "pattern": "[Ii]nflicts?(?!.*irremovable).*reduced.*<[^>]*>Critical Hit Chance",
+      "type": "debuff",
+      "code": "BT_STAT|ST_CRITICAL_RATE"
+    },
+    {
+      "pattern": "[Gg]rants?(?!.*irremovable).*increased.*(?:<[^>]*>)?Critical Hit Chance(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_CRITICAL_RATE"
+    },
+    {
+      "pattern": "(?<!\\bhas\\s)\\bincreases?\\b.*<[^>]*>Critical Hit Chance(?!.*for.*turns?)",
+      "type": "buff",
+      "code": "BT_STAT|ST_CRITICAL_RATE_IR"
+    },
+    {
+      "pattern": "[Gg]rants?.*irremovable.*increased.*<[^>]*>Critical Hit Chance",
+      "type": "buff",
+      "code": "BT_STAT|ST_CRITICAL_RATE_IR"
+    },
+    {
+      "pattern": "[Gg]rants?.*irremovable\\s+(?:<[^>]*>)?[Ii]ncreased\\s+(?:<[^>]*>)?Critical Hit Chance(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_CRITICAL_RATE_IR"
+    },
+    {
+      "pattern": "[Ii]nflicts?.*irremovable.*reduced.*<[^>]*>Critical Hit Chance",
+      "type": "debuff",
+      "code": "BT_STAT|ST_CRITICAL_RATE_IR"
+    },
+    {
+      "pattern": "[Gg]rants?.*increased\\s+.*(?:<[^>]*>)?Defense(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_DEF"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+reduced\\s+(?:<[^>]*>)?Defense(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_STAT|ST_DEF"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+the\\s+target'?s\\s+<[^>]*>Defense<[^>]*>\\s+for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_STAT|ST_DEF"
+    },
+    {
+      "pattern": "increases.*<[^>]*>Defense.*for.*turn",
+      "type": "buff",
+      "code": "BT_STAT|ST_DEF"
+    },
+    {
+      "pattern": "grants?.*increased.*<[^>]*>Defense.*for.*turn",
+      "type": "buff",
+      "code": "BT_STAT|ST_DEF"
+    },
+    {
+      "pattern": "[Rr]educes?\\s+<[^>]*>Defense<[^>]*>\\s+of\\s+the\\s+target\\s+for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "debuff",
+      "code": "BT_STAT|ST_DEF"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+.*<[^>]*>Penetration<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_PIERCE_POWER_RATE"
+    },
+    {
+      "pattern": "[Dd]ecreases?\\s+<[^>]*>Penetration<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_STAT|ST_PIERCE_POWER_RATE"
+    },
+    {
+      "pattern": "[Gg]rants?.*increased\\s+.*(?:<[^>]*>)?Speed(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_SPEED"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+.*<[^>]*>Speed<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_SPEED"
+    },
+    {
+      "pattern": "reduces Speed\\.",
+      "type": "debuff",
+      "code": "BT_STAT|ST_SPEED"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+increased\\s+.*(?:<[^>]*>)?Speed(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "buff",
+      "code": "BT_STAT|ST_SPEED"
+    },
+    {
+      "pattern": "grants?.*increased.*<[^>]*>Speed.*for.*turn",
+      "type": "buff",
+      "code": "BT_STAT|ST_SPEED"
+    },
+    {
+      "pattern": "[Dd]ecreases?\\s+(?:<[^>]*>)?Speed(?:<[^>]*>)?.*irremovable",
+      "type": "debuff",
+      "code": "BT_STAT|ST_SPEED_IR"
+    },
+    {
+      "pattern": "[Rr]educes?.*Speed.*for.*turn.*\\(Irremovable\\)",
+      "type": "debuff",
+      "code": "BT_STAT|ST_SPEED_IR"
+    },
+    {
+      "pattern": "[Ee]nraged.*permanently\\s+increases?\\s+<[^>]*>Speed",
+      "type": "buff",
+      "code": "BT_STAT|ST_SPEED_IR"
+    },
+    {
+      "pattern": "[Ee]nraged.*permanently\\s+increases?.*<[^>]*>Speed",
+      "type": "buff",
+      "code": "BT_STAT|ST_SPEED_IR"
+    },
+    {
+      "pattern": "[Ee]nraged.*permanently\\s+increases?.*<[^>]*>Speed",
+      "type": "buff",
+      "code": "BT_STAT|ST_SPEED_IR"
+    },
+    {
+      "pattern": "[Pp]ermanently\\s+increases?\\s+<[^>]*>Speed",
+      "type": "buff",
+      "code": "BT_STAT|ST_SPEED_IR"
+    },
+    {
+      "pattern": "[Gg]rants?.*<[^>]*>Lifesteal",
+      "type": "buff",
+      "code": "BT_STAT|ST_VAMPIRIC"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+<[^>]*>Stealth<[^>]*>(\\s+to)?",
+      "type": "buff",
+      "code": "BT_STEALTHED"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+<[^>]*>Petrified<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "debuff",
+      "code": "BT_STONE"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+<[^>]*>Petrified<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_STONE"
+    },
+    {
+      "pattern": "irremovable\\s+<[^>]*>Petrified<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?\\(s\\)?",
+      "type": "debuff",
+      "code": "BT_STONE_IR"
+    },
+    {
+      "pattern": "(?:chance\\s+to\\s+)?[Ii]nflicts?(?!.*irremovable).*(?:<[^>]*>)?Stun(?:ned)?(?:<[^>]*>)?.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "BT_STUN"
+    },
+    {
+      "pattern": "(?<!is\\s)[Ii]nflicts?(?!\\s+irremovable).*<[^>]*>Stunned.*for.*turn",
+      "type": "debuff",
+      "code": "BT_STUN"
+    },
+    {
+      "pattern": "(?<!is\\s)[Ii]nflicts?\\s+irremovable\\s+<[^>]*>Stunned.*for.*turn",
+      "type": "debuff",
+      "code": "BT_STUN_IR"
+    },
+    {
+      "pattern": "[Aa]lways\\s+gains?\\s+<[^>]*>Buff\\s+Enhancement<[^>]*>",
+      "type": "buff",
+      "code": "BT_SYS_BUFF_ENHANCE_IR"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+Debuff Enhancement.*[Ii]rremovable",
+      "type": "debuff",
+      "code": "BT_SYS_DEBUFF_ENHANCE_IR"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+\\d+\\s+irremovable\\s+<[^>]*>Burned",
+      "type": "debuff",
+      "code": "IG_Buff_Dot_Burn_Interruption_D"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+irremovable\\s+<[^>]*>Burned",
+      "type": "debuff",
+      "code": "IG_Buff_Dot_Burn_Interruption_D"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+irremovable\\s+<[^>]*>Burned<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "IG_Buff_Dot_Burn_Interruption_D"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+irremovable\\s+<[^>]*>Cursed<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "IG_Buff_Dot_Curse_Interruption_D"
+    },
+    {
+      "pattern": "[Gg]rants?\\s+<[^>]*>Regina'?s\\s+World",
+      "type": "buff",
+      "code": "IG_Buff_Effect_2000067_Interruption"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+irremovable\\s+<[^>]*>Unbuffable<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "IG_Buff_Effect_Sealed_Interruption_D"
+    },
+    {
+      "pattern": "[Pp]repares?\\s+(?:the\\s+)?(?:<[^>]*>)?Revenge(?:<[^>]*>)?\\s+effect",
+      "type": "buff",
+      "code": "SYS_BUFF_REVENGE"
+    },
+    {
+      "pattern": "[Ii]nflicts?\\s+<[^>]*>Keraunos<[^>]*>.*for\\s+<[^>]*>\\d+\\s+turns?",
+      "type": "debuff",
+      "code": "UNIQUE_KERAUNOS"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "v1": {
+    "label": "Initial Version",
+    "date": "2025-01-01",
+    "phase1": {
+      "bosses": [
+        {
+          "bossId": "440400XXX-1-1",
+          "geas": {
+            "1": {
+              "bonus": 1,
+              "malus": 2
+            },
+            "2": {
+              "bonus": 3,
+              "malus": 4
+            },
+            "3": {
+              "bonus": 5,
+              "malus": 6
+            },
+            "4": {
+              "bonus": 7,
+              "malus": 8
+            },
+            "5": {
+              "bonus": 9,
+              "malus": 10
+            }
+          },
+          "notes": [
+            "S3: AoE attack description",
+            "S2: Single target description",
+            "S1: Basic attack description"
+          ],
+          "recommended": [
+            {
+              "name": "Character Name 1",
+              "comment": "Role description"
+            },
+            {
+              "name": "Character Name 2",
+              "comment": "Role description"
+            }
+          ],
+          "team": [
+            ["Character1", "Character2"],
+            ["Character3"],
+            ["Character4", "Character5"],
+            ["Character6"]
+          ],
+          "video": {
+            "id": "youtube-video-id",
+            "title": "Video Title"
+          }
+        },
+        {
+          "bossId": "440400XXX-2-1",
+          "geas": {
+            "1": {
+              "bonus": 11,
+              "malus": 12
+            },
+            "2": {
+              "bonus": 13,
+              "malus": 14
+            },
+            "3": {
+              "bonus": 15,
+              "malus": 16
+            },
+            "4": {
+              "bonus": 17,
+              "malus": 18
+            },
+            "5": {
+              "bonus": 19,
+              "malus": 20
+            }
+          },
+          "notes": [
+            "Boss mechanic description"
+          ],
+          "recommended": [
+            {
+              "name": "Character Name",
+              "comment": "Role description"
+            }
+          ],
+          "team": [
+            ["Character1"],
+            ["Character2"],
+            ["Character3"],
+            ["Character4"]
+          ]
+        }
+      ]
+    },
+    "phase2": {
+      "id": "440400XXX-B-1",
+      "overview": [
+        "Boss mechanic overview 1",
+        "Boss mechanic overview 2",
+        "Boss mechanic overview 3"
+      ],
+      "teams": {
+        "team1": {
+          "label": "Team Strategy Name 1",
+          "icon": "earth.webp",
+          "geas-active": {
+            "bonus": [5, 38, 18],
+            "malus": [86, 60, 53]
+          },
+          "setup": [
+            ["DPS1", "DPS2"],
+            ["Support1"],
+            ["Tank1"],
+            ["Healer1"]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Important strategy note"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Step 1 of rotation",
+                "Step 2 of rotation",
+                "Step 3 of rotation"
+              ]
+            }
+          ],
+          "video": {
+            "id": "youtube-video-id",
+            "title": "Video Title"
+          }
+        },
+        "team2": {
+          "label": "Team Strategy Name 2",
+          "icon": "fire.webp",
+          "geas-active": {
+            "bonus": [1, 2, 3],
+            "malus": [4, 5, 6]
+          },
+          "setup": [
+            ["Character1"],
+            ["Character2"],
+            ["Character3"],
+            ["Character4"]
+          ]
+        }
+      }
+    }
+  }
+}

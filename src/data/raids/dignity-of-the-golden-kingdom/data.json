@@ -1,0 +1,247 @@
+{
+  "v1": {
+    "label": "July 2025 Version",
+    "date": "2025-07-16",
+    "phase1": {
+      "bosses": [
+        {
+          "bossId": "440500174-9-1",
+          "geas": {
+            "1": {
+              "bonus": 76,
+              "malus": 16
+            },
+            "2": {
+              "bonus": 47,
+              "malus": 38
+            },
+            "3": {
+              "bonus": 49,
+              "malus": 103
+            },
+            "4": {
+              "bonus": 72,
+              "malus": 57
+            },
+            "5": {
+              "bonus": 54,
+              "malus": 71
+            }
+          },
+          "notes": [
+            ""
+          ],
+          "recommended": [
+            {
+              "name": "Monad Eva",
+              "comment": "{B/BT_CALL_BACKUP} and cleanses {D/BT_SILENCE}"
+            },
+            {
+              "name": "Maxwell",
+              "comment": "Standard {E/Dark} dps"
+            },
+            {
+              "name": "Demiurge Astei",
+              "comment": "Standard {E/Dark} dps"
+            },
+            {
+              "name": "Tamara",
+              "comment": "100% crit chance for consistent dual attacks"
+            }
+          ],
+          "team": [
+            [
+              "Monad Eva"
+            ],
+            [
+              "Tamara",
+              "Luna",
+              "Veronica",
+              "Mero"
+            ],
+            [
+              "Demiurge Astei",
+              "Demiurge Luna"
+            ],
+            [
+              "Maxwell",
+              "Gnosis Dahlia",
+              "Francesca"
+            ]
+          ],
+          "video": {
+            "id": "",
+            "title": ""
+          }
+        },
+        {
+          "bossId": "440500274-10-1",
+          "geas": {
+            "1": {
+              "bonus": 68,
+              "malus": 15
+            },
+            "2": {
+              "bonus": 69,
+              "malus": 70
+            },
+            "3": {
+              "bonus": 50,
+              "malus": 56
+            },
+            "4": {
+              "bonus": 104,
+              "malus": 30
+            },
+            "5": {
+              "bonus": 53,
+              "malus": 20
+            }
+          },
+          "notes": [
+            ""
+          ],
+          "recommended": [
+            {
+              "name": "Dianne",
+              "comment": "{B/BT_IMMUNE}, no non-attacks"
+            },
+            {
+              "name": "Skadi",
+              "comment": "{B/BT_STAT|ST_CRITICAL_RATE}, no non-attacks"
+            },
+            {
+              "name": "Demiurge Luna",
+              "comment": "{E/Light} dps"
+            }
+          ],
+          "team": [
+            [
+              "Dianne"
+            ],
+            [
+              "Skadi",
+              "Tamara"
+            ],
+            [
+              "Demiurge Luna",
+              "Drakhan"
+            ],
+            [
+              "Regina",
+              "Demiurge Stella"
+            ]
+          ],
+          "video": {
+            "id": "",
+            "title": ""
+          }
+        }
+      ]
+    },
+    "phase2": {
+      "id": "440500079-B-1",
+      "overview": [
+        ""
+      ],
+      "teams": {
+        "team1": {
+          "label": "Light",
+          "icon": "light.webp",
+          "video": {
+            "id": "",
+            "title": ""
+          },
+          "geas-active": {
+            "bonus": [
+              47,49,53
+            ],
+            "malus": [
+              16,38,103,57,71,15,70,56
+            ]
+          },
+          "setup": [
+            [
+              "Demiurge Drakhan"
+            ],
+            [
+              "Demiurge Luna",
+              "Regina"
+            ],
+            [
+              "Drakhan",
+              "Demiurge Stella"
+            ],
+            [
+              "Monad Eva"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Mind the No Extra Turn for DLuna S2"
+            }
+          ]
+        },
+        "team2": {
+          "label": "Ember",
+          "icon": "fire.webp",
+          "video": {
+            "id": "",
+            "title": ""
+          },
+          "geas-active": {
+            "bonus": [
+              69
+            ],
+            "malus": [
+              16,38,103,57,15,70,56,30,20
+            ]
+          },
+          "setup": [
+            [
+              "Ember"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Ember is all you need."
+            }
+          ]
+        },
+        "team3": {
+          "label": "GBeth",
+          "icon": "light.webp",
+          "video": {
+            "id": "",
+            "title": ""
+          },
+                    "geas-active": {
+            "bonus": [
+              68,69
+            ],
+            "malus": [
+             16,38,103,71,15,70,56,20
+            ]
+          },
+          "setup": [
+            [
+              "Kuro"
+            ],
+            [
+              "Akari"
+            ],
+            [
+              "Gnosis Beth"
+            ],
+            [
+              "Monad Eva"
+            ]
+          ],
+          "note": []
+        }
+      }
+    }
+  }
+}

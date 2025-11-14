@@ -1,13 +1,13 @@
 'use client'
 
 import GuideTemplate from '@/app/components/GuideTemplate'
-import guideDataRaw from '@/data/guides/guild-raid/prevent-world-alteration.json' assert { type: 'json' }
-import GuildRaidGuide from '@/app/components/guides/GuildRaidGuide'
-import type { GuildRaidGuideVersion } from '@/app/components/guides/GuildRaidGuide'
+import raidDataRaw from '@/data/raids/prevent-world-alteration/data.json' assert { type: 'json' }
+import { GuildRaidPage } from '@/app/components/guild-raid'
+import type { GuildRaidData } from '@/schemas/guild-raid.schema'
 
-const guideData = guideDataRaw as Record<string, GuildRaidGuideVersion>
+const raidData = raidDataRaw as GuildRaidData
 
-export default function FrostLegionGuidePage() {
+export default function PreventWorldAlterationGuidePage() {
   return (
     <GuideTemplate
       title="Prevent World Alteration Guild Raid Guide"
@@ -16,11 +16,7 @@ export default function FrostLegionGuidePage() {
       versions={{
         default: {
           label: 'Guide',
-          content: (
-            <>
-              <GuildRaidGuide guideData={guideData} />
-            </>
-          ),
+          content: <GuildRaidPage data={raidData} />,
         },
       }}
     />

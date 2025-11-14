@@ -1144,30 +1144,37 @@
       "Veronica"
     ]
   },
-  "guild-raid/dignity-of-the-golden-kingdom": {
+  "guild-raid/madman-laboratory": {
     "category": "guild-raid",
-    "guideId": "dignity-of-the-golden-kingdom",
+    "guideId": "madman-laboratory",
     "characters": [
+      "Viella",
+      "Saeran",
       "Monad Eva",
-      "Tamara",
-      "Luna",
-      "Veronica",
-      "Mero",
-      "Demiurge Astei",
-      "Demiurge Luna",
-      "Maxwell",
-      "Gnosis Dahlia",
-      "Francesca",
-      "Dianne",
-      "Skadi",
+      "Rey",
+      "Noa",
+      "Rhona",
+      "Delta",
       "Drakhan",
-      "Regina",
-      "Demiurge Stella",
-      "Demiurge Drakhan",
-      "Ember",
+      "Kappa",
+      "Tamara",
+      "Skadi",
+      "Hanbyul Lee",
+      "Ryu Lion",
+      "Demiurge Luna",
+      "Ame",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Notia",
+      "Laine",
+      "Charlotte",
+      "Fran",
+      "Maxwell",
+      "Demiurge Astei",
+      "Alice",
+      "Eternal",
       "Kuro",
-      "Akari",
-      "Gnosis Beth"
+      "Dahlia",
+      "Omega Nadja"
     ]
   },
   "guild-raid/frost-legion": {
@@ -1197,39 +1204,6 @@
       "Parti",
       "Ember",
       "Bell Cranel"
-    ]
-  },
-  "guild-raid/maxwell": {
-    "category": "guild-raid",
-    "guideId": "maxwell",
-    "characters": [
-      "Viella",
-      "Saeran",
-      "Monad Eva",
-      "Rey",
-      "Noa",
-      "Rhona",
-      "Delta",
-      "Drakhan",
-      "Kappa",
-      "Tamara",
-      "Skadi",
-      "Hanbyul Lee",
-      "Ryu Lion",
-      "Demiurge Luna",
-      "Ame",
-      "Kitsune of Eternity Tamamo-no-Mae",
-      "Notia",
-      "Laine",
-      "Charlotte",
-      "Fran",
-      "Maxwell",
-      "Demiurge Astei",
-      "Alice",
-      "Eternal",
-      "Kuro",
-      "Dahlia",
-      "Omega Nadja"
     ]
   },
   "guild-raid/planetary-control-unit": {
@@ -1285,6 +1259,32 @@
       "Gnosis Beth",
       "Maxie",
       "Akari"
+    ]
+  },
+  "guild-raid/dignity-of-the-golden-kingdom": {
+    "category": "guild-raid",
+    "guideId": "dignity-of-the-golden-kingdom",
+    "characters": [
+      "Monad Eva",
+      "Tamara",
+      "Luna",
+      "Veronica",
+      "Mero",
+      "Demiurge Astei",
+      "Demiurge Luna",
+      "Maxwell",
+      "Gnosis Dahlia",
+      "Francesca",
+      "Dianne",
+      "Skadi",
+      "Drakhan",
+      "Regina",
+      "Demiurge Stella",
+      "Demiurge Drakhan",
+      "Ember",
+      "Kuro",
+      "Akari",
+      "Gnosis Beth"
     ]
   },
   "skyward-tower/normal": {

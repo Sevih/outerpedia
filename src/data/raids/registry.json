@@ -1,0 +1,29 @@
+{
+  "raids": {
+    "madman-laboratory": {
+      "slug": "madman-laboratory",
+      "enabled": true,
+      "dataPath": "madman-laboratory/data.json"
+    },
+    "frost-legion": {
+      "slug": "frost-legion",
+      "enabled": true,
+      "dataPath": "frost-legion/data.json"
+    },
+    "planetary-control-unit": {
+      "slug": "planetary-control-unit",
+      "enabled": true,
+      "dataPath": "planetary-control-unit/data.json"
+    },
+    "prevent-world-alteration": {
+      "slug": "prevent-world-alteration",
+      "enabled": true,
+      "dataPath": "prevent-world-alteration/data.json"
+    },
+    "dignity-of-the-golden-kingdom": {
+      "slug": "dignity-of-the-golden-kingdom",
+      "enabled": true,
+      "dataPath": "dignity-of-the-golden-kingdom/data.json"
+    }
+  }
+}

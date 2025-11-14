@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 const guidesDir = path.join(__dirname, '../src/app/guides/_contents');
-const guildRaidDir = path.join(__dirname, '../src/data/guides/guild-raid');
+const raidsDir = path.join(__dirname, '../src/data/raids');
+const raidsRegistryFile = path.join(__dirname, '../src/data/raids/registry.json');
 const skywardDataDir = path.join(__dirname, '../src/data');
 const outputFile = path.join(__dirname, '../src/data/stats/guide-character-usage.json');
 const allCharactersFile = path.join(__dirname, '../src/data/_allCharacters.json');
@@ -245,20 +246,31 @@ function processGuildRaids() {
   const results = {};
 
   try {
-    const files = fs.readdirSync(guildRaidDir);
+    // Load the registry to get all raid slugs
+    if (!fs.existsSync(raidsRegistryFile)) {
+      console.warn(`⚠️  Raids registry not found: ${raidsRegistryFile}`);
+      return results;
+    }
 
-    for (const file of files) {
-      if (!file.endsWith('.json') || file === 'empty.json') continue;
+    const registryContent = fs.readFileSync(raidsRegistryFile, 'utf8');
+    const registry = JSON.parse(registryContent);
 
-      const fullPath = path.join(guildRaidDir, file);
-      const guideId = path.basename(file, '.json');
-      const characters = extractFromGuildRaidJSON(fullPath, file);
+    // Process each raid from the registry
+    for (const [slug, raidInfo] of Object.entries(registry.raids)) {
+      const dataPath = path.join(raidsDir, raidInfo.dataPath);
+
+      if (!fs.existsSync(dataPath)) {
+        console.warn(`⚠️  Raid data file not found: ${dataPath}`);
+        continue;
+      }
+
+      const characters = extractFromGuildRaidJSON(dataPath, slug);
 
       if (characters.length > 0) {
-        const key = `guild-raid/${guideId}`;
+        const key = `guild-raid/${slug}`;
         results[key] = {
           category: 'guild-raid',
-          guideId: guideId,
+          guideId: slug,
           characters: characters
         };
       }

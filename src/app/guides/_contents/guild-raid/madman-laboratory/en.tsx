@@ -1,11 +1,11 @@
 'use client'
 
 import GuideTemplate from '@/app/components/GuideTemplate'
-import guideDataRaw from '@/data/guides/guild-raid/maxwell.json' assert { type: 'json' }
-import GuildRaidGuide from '@/app/components/guides/GuildRaidGuide'
-import type { GuildRaidGuideVersion } from '@/app/components/guides/GuildRaidGuide'
+import raidDataRaw from '@/data/raids/madman-laboratory/data.json' assert { type: 'json' }
+import { GuildRaidPage } from '@/app/components/guild-raid'
+import type { GuildRaidData } from '@/schemas/guild-raid.schema'
 
-const guideData = guideDataRaw as Record<string, GuildRaidGuideVersion>
+const raidData = raidDataRaw as GuildRaidData
 
 export default function MaxwellGuidePage() {
   return (
@@ -16,11 +16,7 @@ export default function MaxwellGuidePage() {
       versions={{
         default: {
           label: 'Guide',
-          content: (
-            <>
-              <GuildRaidGuide guideData={guideData} />
-            </>
-          ),
+          content: <GuildRaidPage data={raidData} />,
         },
       }}
     />

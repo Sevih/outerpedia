@@ -10,6 +10,7 @@ import ClassInlineTag from './ClassInlineTag'
 import BuffDebuffDisplayMini from './BuffDebuffDisplayMini'
 import BuffDebuffDisplay from './BuffDebuffDisplay'
 import { CharacterPortrait } from './CharacterPortrait'
+import { SkillDescription } from './SkillDescriptionParser'
 import slugToCharJson from '@/data/_SlugToChar.json'
 import type { BossData } from '@/types/boss'
 import type { SlugToCharMap } from '@/types/pull'
@@ -26,14 +27,6 @@ type Props = {
   onBossChange?: (bossId: string) => void // Callback when boss version changes
 }
 
-function formatColorTags(input: string) {
-  return input
-    .replace(/<color=#(.*?)>(.*?)<\/color>/g, (_m, color, text) => {
-      return `<span style="color:#${color}">${text}</span>`
-    })
-    .replace(/\\n/g, '<br />')
-    .replace(/\n/g, '<br />')
-}
 
 export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultModeKey, labelFilter, onModeChange, onBossChange }: Props) {
   const { lang } = useI18n()
@@ -293,7 +286,7 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
           })
           .map((skill, index) => {
             const skillName = lRec(skill.name, lang)
-            const skillDesc = formatColorTags(lRec(skill.description, lang))
+            const rawDesc = lRec(skill.description, lang)
             const skillIcon = `/images/characters/boss/skill/${skill.icon}.webp`
 
             return (
@@ -326,10 +319,9 @@ export default function BossDisplay({ bossKey, modeKey, defaultBossId, defaultMo
                         />
                       )}
                     </div>
-                    <div
-                      className="text-neutral-300 text-xs leading-snug"
-                      dangerouslySetInnerHTML={{ __html: skillDesc }}
-                    />
+                    <div className="text-neutral-300 text-xs leading-snug">
+                      <SkillDescription text={rawDesc} />
+                    </div>
                   </div>
                 </div>
               </div>

@@ -1,0 +1,258 @@
+{
+  "v1": {
+    "label": "June 2025 Version",
+    "date": "2025-06-18",
+    "phase1": {
+      "bosses": [
+        {
+          "bossId": "440600105-3-1",
+          "geas": {
+            "1": {
+              "bonus": 21,
+              "malus": 61
+            },
+            "2": {
+              "bonus": 2,
+              "malus": 25
+            },
+            "3": {
+              "bonus": 100,
+              "malus": 102
+            },
+            "4": {
+              "bonus": 73,
+              "malus": 77
+            },
+            "5": {
+              "bonus": 74,
+              "malus": 67
+            }
+          },
+          "notes": [
+            ""
+          ],
+          "recommended": [
+            {
+              "name": "Veronica",
+              "comment": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
+            },
+            {
+              "name": "Fatal",
+              "comment": "{C/Ranger} {E/Water}"
+            },
+            {
+              "name": "Monad Eva",
+              "comment": "{C/Healer}, {B/BT_CALL_BACKUP}"
+            },
+            {
+              "name": "Maxwell",
+              "comment": "Strong damage unit"
+            },
+            {
+              "name": "Demiurge Astei",
+              "comment": "Strong damage unit"
+            }
+          ],
+          "team": [
+            [
+              "Fatal",
+              "Ryu Lion",
+              "Holy Night's Blessing Dianne",
+              "Maxwell"
+            ],
+            [
+              "Monad Eva",
+              "Mene"
+            ],
+            [
+              "Veronica",
+              "Tamara",
+              "Laplace"
+            ],
+            [
+              "Poolside Trickster Regina",
+              "Roxie",
+              "Demiurge Astei",
+              "Francesca"
+            ]
+          ],
+          "video": {
+            "id": "Ru-_1L59wjI",
+            "title": "Prevent World Alteration - Geas Boss Sample Collection Terminal (Stage 3) - by Sevih"
+          }
+        },
+        {
+          "bossId": "440600205-4-1",
+          "geas": {
+            "1": {
+              "bonus": 12,
+              "malus": 78
+            },
+            "2": {
+              "bonus": 101,
+              "malus": 20
+            },
+            "3": {
+              "bonus": 75,
+              "malus": 29
+            },
+            "4": {
+              "bonus": 76,
+              "malus": 58
+            },
+            "5": {
+              "bonus": 66,
+              "malus": 31
+            }
+          },
+          "notes": [
+            ""
+          ],
+          "recommended": [
+            {
+              "name": "Demiurge Luna",
+              "comment": "Strong damage unit"
+            },
+            {
+              "name": "Poolside Trickster Regina",
+              "comment": "Strong damage unit"
+            },
+            {
+              "name": "Veronica",
+              "comment": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
+            },
+            {
+              "name": "Fatal",
+              "comment": "{C/Ranger} {E/Water}"
+            }
+          ],
+          "team": [
+            [
+              "Fatal",
+              "Ryu Lion",
+              "Holy Night's Blessing Dianne",
+              "Regina"
+            ],
+            [
+              "Veronica",
+              "Luna"
+            ],
+            [
+              "Tamara",
+              "Laplace",
+              "Caren"
+            ],
+            [
+              "Poolside Trickster Regina",
+              "Demiurge Luna",
+              "Roxie",
+              "Beth"
+            ]
+          ],
+          "video": {
+            "id": "HxYVQy9puEE",
+            "title": "Prevent World Alteration - Geas Boss Strategic Defense Automaton (Stage 4) - By Sevih"
+          }
+        }
+      ]
+    },
+    "phase2": {
+      "id": "440600010-B-1",
+      
+      "overview": [
+        ""
+      ],
+      "teams": {
+        "team1": {
+          "label": "Water Striker",
+          "icon": "water.webp",
+          "video": {
+            "id": "5ieNf4f0xfg",
+            "title": "Prevent World Alteration - Planet Purification Unit Stage 5 - Water Striker Team - By Sevih"
+          },
+          "geas-active": [],
+          "setup": [
+            [
+              "Tamara",
+              "Edelweiss",
+              "Fatal"
+            ],
+            [
+              "Caren",
+              "Beth",
+              "Rin",
+              "Poolside Trickster Regina"
+            ],
+            [
+              "Poolside Trickster Regina",
+              "Caren",
+              "Beth",
+              "Rin"
+              
+            ],
+            [
+              "Lyla",
+              "Monad Eva",
+              "Mene",
+              "Luna"
+            ]
+          ],
+          "note": []
+        },
+        "team2": {
+          "label": "Water Mage",
+          "icon": "water.webp",
+          "video": {
+            "id": "vV2faY6DzHw",
+            "title": "Prevent World Alteration - Planet Purification Unit Stage 6 - Water Mage Team - By Sevih"
+          },
+          "geas-active": [],
+          "setup": [
+            [
+              "Tamara",
+              "Edelweiss",
+              "Fatal"
+            ],
+            [
+              "Roxie"
+            ],
+            [
+              "Laplace"              
+            ],
+            [
+              "Lyla",
+              "Monad Eva",
+              "Mene",
+              "Luna"
+            ]
+          ],
+          "note": []
+        },
+        "team3": {
+          "label": "GBeth",
+          "icon": "SC_Buff_2100092.webp",
+          "video": {
+            "id": "PBTKXTwFuBg",
+            "title": "Prevent World Alteration - Planet Purification Unit Stage 11 - G.Beth Team - By Sevih"
+          },
+          "geas-active": [],
+          "setup": [
+            [
+              "Gnosis Beth"
+            ],
+            [
+              "Maxie"
+            ],
+            [
+              "Monad Eva"              
+            ],
+            [
+              "Akari"
+            ]
+          ],
+          "note": []
+        }
+      }
+    }
+  }
+}
