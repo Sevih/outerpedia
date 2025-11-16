@@ -127,13 +127,13 @@ export default function CarouselSlotCompact(_props: Props) {
                   </div>
 
                   {/* Class Icon */}
-                  <div className="absolute z-30 overlay-fade" style={{ right: 17, bottom: CLASS_BOTTOM }}>
+                  <div className="absolute z-30 overlay-fade h-6 w-6" style={{ right: 17, bottom: CLASS_BOTTOM }}>
                       <ClassIcon className={data.Class as ClassType} />
 
                   </div>
 
                   {/* Element Icon */}
-                  <div className="absolute z-30 overlay-fade" style={{ right: 17, bottom: ELEMENT_BOTTOM }}>
+                  <div className="absolute z-30 overlay-fade h-6 w-6" style={{ right: 17, bottom: ELEMENT_BOTTOM }}>
                       <ElementIcon element={data.Element as ElementType} />
                   </div>
 
