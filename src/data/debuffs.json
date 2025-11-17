@@ -439,6 +439,20 @@
     "description_zh": "生命值恢复效果无效。",
     "icon": "SC_Buff_Sealed_Receive_Heal"
   },
+   {
+    "name": "BT_SEALED_RECEIVE_HEAL_IR",
+    "category": "utility",
+    "group":"BT_SEALED_RECEIVE_HEAL",
+    "label": "Unhealable",
+    "label_jp": "回復不可",
+    "label_kr": "회복 불가",
+    "label_zh": "无法恢复",
+    "description": "Cannot be applied with Health recovery effects (Irremovable).",
+    "description_jp": "HP回復効果が適用されない。(解除不可)",
+    "description_kr": "체력 회복 효과가 적용되지 않습니다. (해제 불가)",
+    "description_zh": "生命值恢复效果无效。\\n(无法解除)",
+    "icon": "IG_Buff_Sealed_Receive_Heal_Interruption_D"
+  },
   {
     "name": "BT_SEALED_RESURRECTION",
     "category": "utility",
@@ -879,6 +893,7 @@
     "description_zh": "受到地属性敌人的伤害增加.(无法解除)",
     "icon": "IG_Buff_2000020_Interruption_D"
   },
+
   {
     "name": "IG_Buff_Death_Timer_Interruption_D",
     "category": "unique",

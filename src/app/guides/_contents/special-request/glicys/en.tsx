@@ -2,15 +2,13 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
-import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import BossDisplay from '@/app/components/BossDisplay'
+import GlicysTeamsData from './Glicys.json'
+import type { TeamData } from '@/types/team'
 
-const teamSetup = [
-    ['Charlotte'],
-    ['Noa'],
-    ['Kappa'],
-    ['Ame', 'Monad Eva','Rey', 'Delta','Kitsune of Eternity Tamamo-no-Mae', 'Saeran'],
-  ]
+const GlicysTeams = GlicysTeamsData as TeamData
 
 export default function GlicysGuide() {
   return (
@@ -23,6 +21,7 @@ export default function GlicysGuide() {
           label: 'Guide',
           content: (
             <>
+              <BossDisplay bossKey='Glicys' modeKey='Special Request: Identification' defaultBossId='407600162' />
               <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Strategy Overview</h3>
               <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>She summons a <strong>small mob on the right side</strong>. Hitting it with <em>single-target skills</em> will lower both the mob&apos;s and boss&apos; DEF.</li>
@@ -45,11 +44,11 @@ export default function GlicysGuide() {
                 On Stage 13, Glicys&apos; attacks does not trigger <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> <EffectInlineTag name="SYS_BUFF_REVENGE" type="buff" /> <EffectInlineTag name="BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK" type="buff" />.
               </p>
               <hr className="my-6 border-neutral-700" />
-              <RecommendedTeam team={teamSetup} />
+              <StageBasedTeamSelector teamData={GlicysTeams} defaultStage="1-10" icon='/images/ui/effect/fire.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }} />
               <hr className="my-6 border-neutral-700" />
               <div className="mb-4">
                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-                <YoutubeEmbed videoId="NikwWwstygo" title='combat footage'/>
+                <YoutubeEmbed videoId="NikwWwstygo" title='combat footage' />
               </div>
             </>
           ),

@@ -86,7 +86,10 @@
     "IG_Buff_Effect_2000109_Interruption": 84,
     "IG_Buff_2000053_Interruption": 85,
     "CORE_ENERGY": 86,
-    "BT_STAT|ST_COUNTER_RATE_IR": 87
+    "BT_STAT|ST_COUNTER_RATE_IR": 87,
+    "BT_STAT|ST_PIERCE_POWER_RATE_IR": 88,
+    "BT_STAT|ST_CRITICAL_DMG_RATE_IR": 89,
+    "HARMONY_DESPAIR": 90
   },
   "debuffs": {
     "BT_REMOVE_BUFF": 1,
@@ -167,6 +170,7 @@
     "BT_KILL": 76,
     "BT_DOT_BURN_IR": 77,
     "BT_STAT|ST_BUFF_CHANCE_IR": 78,
-    "BT_STAT|ST_BUFF_RESIST_IR": 79
+    "BT_STAT|ST_BUFF_RESIST_IR": 79,
+    "BT_SEALED_RECEIVE_HEAL_IR": 80
   }
 }

@@ -217,6 +217,7 @@ export default function MiniBossDisplay({ bosses, modeKey, defaultModeKey, contr
 
                 {/* Class, Element, Level */}
                 <div className="flex flex-wrap gap-2 items-center text-xs">
+                  <span className="text-neutral-400">Level {data.level}</span>
                   <ClassInlineTag name={data.class} notext />
                   <ElementInlineTag element={data.element.toLowerCase()} notext />                  
                 </div>

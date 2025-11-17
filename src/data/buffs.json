@@ -599,6 +599,19 @@
     "description_zh": "使目标的暴击伤害提升50%。",
     "icon": "SC_Buff_Stat_CriDmgRate"
   },
+   {
+    "name": "BT_STAT|ST_CRITICAL_DMG_RATE_IR",
+    "category": "statBoosts",
+    "label": "Increased Critical Damage",
+    "label_jp": "会心ダメージUP",
+    "label_kr": "치명 피해 증가",
+    "label_zh": "暴击伤害提升",
+    "description": "Increases Critical Damage by 50% (Irremovable).",
+    "description_jp": "対象の会心ダメージが\\n50%UPする。(解除不可)",
+    "description_kr": "대상의 치명 피해가 50% 증가합니다. (해제 불가)",
+    "description_zh": "使目标的暴击伤害提升50%。\\n(无法解除)",
+    "icon": "IG_Buff_Stat_CriDmgRate_Interruption"
+  },
   {
     "name": "BT_STAT|ST_CRITICAL_RATE",
     "category": "statBoosts",
@@ -665,6 +678,33 @@
     "description_kr": "대상의 방어력을 30% 무시하여 피해를 입힙니다.",
     "description_zh": "无视目标的30%防御力,并造成伤害。",
     "icon": "CM_Stat_Icon_PIERCE_POWER"
+  },
+    {
+    "name": "HARMONY_DESPAIR",
+    "category": "unique",
+    "label": "Harmony of Despair",
+    "label_jp": "絶望のハーモニー",
+    "label_kr": "절망의 하모니",
+    "label_zh": "绝望的和声",
+    "description": "Instantly kills all enemies when the performance ends. (Irremovable)",
+    "description_jp": "演奏が終了時、敵全体が\n直ちに倒れる。\n(解除不可)",
+    "description_kr": "연주가 끝나면 적 전체를 즉시 사망시킵니다. (해제 불가)",
+    "description_zh": "演奏结束之后,全体敌人立即死亡。(无法解除)",
+    "icon": "IG_Buff_Effect_4076009_Interruption"
+  },
+  {
+    "name": "BT_STAT|ST_PIERCE_POWER_RATE_IR",
+    "category": "statBoosts",
+    "group":"BT_STAT|ST_PIERCE_POWER_RATE",
+    "label": "Increased Penetration",
+    "label_jp": "貫通力UP",
+    "label_kr": "관통력 증가",
+    "label_zh": "穿透力提升",
+    "description": "Penetrates the target's Defense by 30% when dealing damage (Irremovable).",
+    "description_jp": "対象の防御力を\\n30%無視したダメージを与える。(解除不可)",
+    "description_kr": "대상의 방어력을 30% 무시하여 피해를 입힙니다. (해제 불가)",
+    "description_zh": "无视目标的30%防御力,并造成伤害。\\n(无法解除)",
+    "icon": "IG_Buff_Stat_PierceRate_Interruption"
   },
   {
     "name": "BT_STAT|ST_SPEED",

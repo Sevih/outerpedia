@@ -1,17 +1,15 @@
 'use client'
 
+import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
-import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
-import CharacterLinkCard from '@/app/components/CharacterLinkCard'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import BossDisplay from '@/app/components/BossDisplay'
+import MeteosTeamsData from './Meteos.json'
+import type { TeamData } from '@/types/team'
 
-const teamSetup = [
-  ['Veronica'],
-  ['Laplace'],
-  ['Tamara'],
-  ['Poolside Trickster Regina', 'Edelweiss', 'Monad Eva','Luna','Rin','Caren','Beth'],
-]
+const MeteosTeams = MeteosTeamsData as TeamData
 
 export default function MeteosGuide() {
   return (
@@ -24,6 +22,7 @@ export default function MeteosGuide() {
           label: 'Guide',
           content: (
             <>
+              <BossDisplay bossKey='Blazing Knight Meteos' modeKey='Special Request: Identification' defaultBossId='407600262' />
               <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Strategy Overview</h3>
               <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li>He has a special gauge that triggers an AoE counter every 5 actions, so <strong>Dual Attack</strong> and <strong>Chain Attack</strong> are recommended.</li>
@@ -35,36 +34,36 @@ export default function MeteosGuide() {
                 <li>He also applies <EffectInlineTag name="BT_SEALED" type="debuff" /> on DPS units on higher stages.</li>
                 <li>He does significantly less damage to units protected by <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" />, even during Enrage — except for the instant kill move.</li>
               </ul>
-               
+
               <hr className="my-6 border-neutral-700" />
               <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Recommended Characters</h3>
               <ul className="list-disc list-inside text-neutral-300 mb-4">
                 <li><CharacterLinkCard name="Veronica" /><br />
-                A defender who grants <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" /> to the lowest HP ally each turn. She can solo Meteos up to stage 10. From stage 11 onward, Meteos deals more damage when fewer allies are alive. She also has <EffectInlineTag name="BT_STAT|ST_DEF" type="buff" /> and triggers Dual Attacks.</li>
+                  A defender who grants <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" /> to the lowest HP ally each turn. She can solo Meteos up to stage 10. From stage 11 onward, Meteos deals more damage when fewer allies are alive. She also has <EffectInlineTag name="BT_STAT|ST_DEF" type="buff" /> and triggers Dual Attacks.</li>
 
                 <li><CharacterLinkCard name="Laplace" /><br />
-                A sub-DPS and support who grants team-wide <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" /> with her second skill. She also applies debuffs to reduce Meteos&#39;s damage. Her chain finisher deals <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" />.</li>
+                  A sub-DPS and support who grants team-wide <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" /> with her second skill. She also applies debuffs to reduce Meteos&#39;s damage. Her chain finisher deals <EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" />.</li>
 
                 <li><CharacterLinkCard name="Caren" /><br />
-                Can be your main DPS if built properly. Her damage is strong, especially when her second skill is triggered, which also <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" />.</li>
+                  Can be your main DPS if built properly. Her damage is strong, especially when her second skill is triggered, which also <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" />.</li>
 
                 <li><CharacterLinkCard name="Poolside Trickster Regina" /><br />
-                Probably the best option if you have her. Her second skill <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> and deals heavy damage, while her third skill removes Meteos&#39;s counter gauge, delaying his AoE counter and resetting her second skill cooldown.</li>
+                  Probably the best option if you have her. Her second skill <EffectInlineTag name="BT_STEAL_BUFF" type="debuff" /> and deals heavy damage, while her third skill removes Meteos&#39;s counter gauge, delaying his AoE counter and resetting her second skill cooldown.</li>
 
                 <li><CharacterLinkCard name="Edelweiss" /><br />
-                A semi-tank with <EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" /> and buff steal. She can redirect some damage from allies to herself.</li>
+                  A semi-tank with <EffectInlineTag name="BT_SEALED_RECEIVE_HEAL" type="debuff" /> and buff steal. She can redirect some damage from allies to herself.</li>
 
                 <li><CharacterLinkCard name="Monad Eva" /><br />
-                While a healer, if you have her at 5★, she becomes a valuable pick. She boosts team damage significantly with double Dual Attack and provides <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
+                  While a healer, if you have her at 5★, she becomes a valuable pick. She boosts team damage significantly with double Dual Attack and provides <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
               </ul>
 
               <hr className="my-6 border-neutral-700" />
-              <RecommendedTeam team={teamSetup} />
+              <StageBasedTeamSelector teamData={MeteosTeams} defaultStage="1-10" icon='/images/ui/effect/fire.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }} />
               <hr className="my-6 border-neutral-700" />
-              
+
               <div className="mb-4">
                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-                  <YoutubeEmbed videoId="U2R6eEZgyuI" title='combat footage'/>
+                <YoutubeEmbed videoId="U2R6eEZgyuI" title='combat footage' />
               </div>
             </>
           ),

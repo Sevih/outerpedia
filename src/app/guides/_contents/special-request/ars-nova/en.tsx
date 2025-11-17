@@ -1,23 +1,15 @@
 'use client'
 
+import GuideHeading from '@/app/components/GuideHeading'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
-import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import BossDisplay from '@/app/components/BossDisplay'
+import ArsNovaTeamsData from './Ars-Nova.json'
+import type { TeamData } from '@/types/team'
 
-const teams = {
-    team1: {
-        label: 'Suggested Core',
-        icon: 'SC_Buff_Effect_Remove_Buff.webp',
-        setup: [
-            ['Demiurge Vlada', 'Eliza','Gnosis Nella', 'Francesca', 'Aer', 'Dahlia', 'Alice'],
-            ['Nella', 'Demiurge Delta','Dianne', 'Astei', 'Monad Eva'],
-            ['Maxwell', 'Gnosis Dahlia'],
-            ['Demiurge Astei',  'Omega Nadja','Demiurge Stella','Stella', 'Caren']
-        ]
-    }
-}
+const ArsNovaTeams = ArsNovaTeamsData as TeamData
 
 export default function ArsNova13Guide() {
     return (
@@ -30,6 +22,8 @@ export default function ArsNova13Guide() {
                     label: 'Guide',
                     content: (
                         <>
+                            <BossDisplay bossKey='Ars Nova' modeKey='Special Request: Identification' defaultBossId='407600862' />
+
                             <GuideHeading level={3}>Strategy Overview</GuideHeading>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>Immune to <EffectInlineTag name="BT_SEALED" type="debuff" /></li>
@@ -50,8 +44,8 @@ export default function ArsNova13Guide() {
                                 <li>It&apos;s vulnerable to priority manipulation (pushback, etc.).</li>
                             </ul>
                             <hr className="my-6 border-neutral-700" />
-                            <TeamTabSelector teams={teams} />
-                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={ArsNovaTeams} defaultStage="1-10" icon='/images/ui/effect/fire.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }} />
+
                             <div className="mb-4">
                                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
                                 <YoutubeEmbed videoId="vsR7eGIbuFE" title="Ars Nova 13 – Clean Run Showcase by Sevih" />

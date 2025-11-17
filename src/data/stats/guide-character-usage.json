@@ -820,13 +820,13 @@
     "guideId": "amadeus",
     "characters": [
       "Akari",
-      "Demiurge Stella",
       "Dianne",
       "Drakhan",
       "Gnosis Beth",
       "Kuro",
-      "Regina",
       "Skadi",
+      "Demiurge Stella",
+      "Regina",
       "Stella"
     ]
   },
@@ -834,25 +834,25 @@
     "category": "special-request",
     "guideId": "ars-nova",
     "characters": [
-      "Aer",
-      "Alice",
-      "Astei",
-      "Caren",
-      "Dahlia",
-      "Demiurge Astei",
-      "Demiurge Delta",
-      "Demiurge Stella",
       "Demiurge Vlada",
-      "Dianne",
       "Eliza",
-      "Francesca",
-      "Gnosis Dahlia",
       "Gnosis Nella",
-      "Maxwell",
-      "Monad Eva",
+      "Francesca",
+      "Aer",
+      "Dahlia",
+      "Alice",
       "Nella",
+      "Demiurge Delta",
+      "Dianne",
+      "Astei",
+      "Monad Eva",
+      "Maxwell",
+      "Gnosis Dahlia",
+      "Demiurge Astei",
       "Omega Nadja",
-      "Stella"
+      "Demiurge Stella",
+      "Stella",
+      "Caren"
     ]
   },
   "special-request/beatles": {
@@ -862,13 +862,13 @@
       "Aer",
       "Eternal",
       "Kanon",
-      "Maxie",
       "Mero",
-      "Monad Eva",
-      "Tamamo-no-Mae",
-      "Tio",
       "Valentine",
-      "Vlada"
+      "Maxie",
+      "Tamamo-no-Mae",
+      "Vlada",
+      "Monad Eva",
+      "Tio"
     ]
   },
   "special-request/chimera": {
@@ -921,14 +921,14 @@
     "category": "special-request",
     "guideId": "glicys",
     "characters": [
-      "Ame",
       "Charlotte",
-      "Delta",
-      "Kappa",
-      "Kitsune of Eternity Tamamo-no-Mae",
-      "Monad Eva",
       "Noa",
+      "Kappa",
+      "Ame",
+      "Monad Eva",
       "Rey",
+      "Delta",
+      "Kitsune of Eternity Tamamo-no-Mae",
       "Saeran"
     ]
   },
@@ -1001,16 +1001,16 @@
     "category": "special-request",
     "guideId": "meteos",
     "characters": [
-      "Beth",
       "Caren",
       "Edelweiss",
       "Laplace",
-      "Luna",
       "Monad Eva",
       "Poolside Trickster Regina",
-      "Rin",
+      "Veronica",
       "Tamara",
-      "Veronica"
+      "Luna",
+      "Rin",
+      "Beth"
     ]
   },
   "special-request/sacreed": {

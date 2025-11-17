@@ -1,24 +1,16 @@
 'use client'
 
+import GuideHeading from '@/app/components/GuideHeading'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
-import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import BossDisplay from '@/app/components/BossDisplay'
+import AmadeusTeamsData from './Amadeus.json'
+import type { TeamData } from '@/types/team'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 
-const teams = {
-    team1: {
-        label: 'Suggested Core',
-        icon: 'SC_Debuff_Effect_Add_Debuff.webp',
-        setup: [
-            ['Gnosis Beth','Demiurge Stella','Skadi'],
-            ['Regina','Akari','Kuro'],
-            ['Dianne','Stella'],
-            ['Drakhan'],
-        ]
-    }
-}
+const AmadeusTeams = AmadeusTeamsData as TeamData
 
 export default function Amadeus13Guide() {
     return (
@@ -31,6 +23,9 @@ export default function Amadeus13Guide() {
                     label: 'Guide',
                     content: (
                         <>
+                            <BossDisplay bossKey='Amadeus' modeKey='Special Request: Identification' defaultBossId='407600962' />
+
+
                             <GuideHeading level={3}>Strategy Overview</GuideHeading>
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li>Immune to <EffectInlineTag name="BT_WG_REVERSE_HEAL" type="debuff" /> if not debuff</li>
@@ -52,12 +47,13 @@ export default function Amadeus13Guide() {
                             <ul className="list-disc list-inside text-neutral-300 mb-4">
                                 <li><CharacterLinkCard name="Dianne" /> is ideal as both her heals are attacks, and she can cleanse without triggering the boss mechanic.</li>
                                 <li><CharacterLinkCard name="Kuro" /> shines with buff reversal. Use S3 after boss self-buffs to convert them into long debuffs.</li>
-                                <li><CharacterLinkCard name="Drakhan" /> and <CharacterLinkCard name="Gnosis Beth" /> are MVPs thanks to their repeated debuffs</li>                
+                                <li><CharacterLinkCard name="Drakhan" /> and <CharacterLinkCard name="Gnosis Beth" /> are MVPs thanks to their repeated debuffs</li>
                                 <li><CharacterLinkCard name="Akari" /> works even without Unbuffable thanks to her broad debuff kit.</li>
                                 <li><CharacterLinkCard name="Skadi" /> could be used to fill a slot as the buffs can help someone like Regina do more damage.</li>
                             </ul>
                             <hr className="my-6 border-neutral-700" />
-                            <TeamTabSelector teams={teams} />
+                            <StageBasedTeamSelector teamData={AmadeusTeams} defaultStage="1-10" icon='/images/ui/effect/fire.webp' replace={{ lead: "Stage ", mid: " to ", tail: "" }} />
+
                             <hr className="my-6 border-neutral-700" />
                             <div className="mb-4">
                                 <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>

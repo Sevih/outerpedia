@@ -1,0 +1,52 @@
+{
+    "1-10": {
+        "team": [
+            [
+                "Veronica"
+            ],
+            [
+                "Laplace"
+            ],
+            [
+                "Tamara"
+            ],
+            [
+                "Poolside Trickster Regina",
+                "Edelweiss",
+                "Monad Eva",
+                "Luna",
+                "Rin",
+                "Caren",
+                "Beth"
+            ]
+        ],
+        "note": [
+            {
+                "type": "p",
+                "string": "Don't forget you can use your friends' units to help you beat those stages."
+            }
+        ]
+    },
+    "11-13": {
+        "team": [
+            [
+                "Veronica"
+            ],
+            [
+                "Laplace"
+            ],
+            [
+                "Tamara"
+            ],
+            [
+                "Poolside Trickster Regina",
+                "Edelweiss",
+                "Monad Eva",
+                "Luna",
+                "Rin",
+                "Caren",
+                "Beth"
+            ]
+        ]
+    }
+}
