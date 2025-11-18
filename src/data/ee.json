@@ -2523,7 +2523,7 @@
     "effect": "When hit, <color=#28d9ed>Corrosive Poison</color> 2 turns to all enemies (Activated only once every 2 turns, Ignores Resilience)",
     "effect_jp": "ダメージを受けた場合、敵全体に<color=#28d9ed>酸性の毒液</color> 2ターン(2ターンに一度のみ発動、効果抵抗無視)",
     "effect_kr": "피격 시 적 전체에게 <color=#28d9ed>산성독</color> 2턴(2턴에 1회, 효과 저항 무시)",
-    "effect_zh":"受到攻击时,对所有敌人施加<color=#28d9ed>酸性毒液</color>2回合(每2回合触发1次,效果抵抗无视)",
+    "effect_zh": "受到攻击时,对所有敌人施加<color=#28d9ed>酸性毒液</color>2回合(每2回合触发1次,效果抵抗无视)",
     "effect10": "Ignores <color=#28d9ed>30%</color> of the target's Defense when attacking.",
     "effect10_jp": "攻撃時、対象の防御力無視<color=#28d9ed>30%</color>",
     "effect10_kr": "공격 시 대상 방어력 <color=#28d9ed>30%</color> 무시",
@@ -2534,5 +2534,27 @@
     "debuff": [
       "BT_DOT_POISON2"
     ]
+  },
+  "fortuna": {
+    "name": "Omertà",
+    "name_jp": "オメルタ",
+    "name_kr": "오메르타",
+    "name_zh": "沉默守則(Omertà)",
+    "mainStat": "Effectiveness (To: Fire)",
+    "mainStat_jp": "火属性の対象の効果命中",
+    "mainStat_kr": "화속성 대상 효과 적중",
+    "mainStat_zh": "火属性效果命中",
+    "effect": "Increases damage dealt to target's inflicted with Bleeding",
+    "effect_jp": "味方が出血効果対象に与えるダメージ増加",
+    "effect_kr": "아군이 출혈 보유 대상에게 입히는 피해 증가",
+    "effect_zh": "我方对处于出血状态的敌人造成的伤害提高",
+    "effect10": "+50% Bleed damage dealt by allies",
+    "effect10_jp": "味方が与える出血ダメージ 50%",
+    "effect10_kr": "아군이 입히는 출혈 피해 50%",
+    "effect10_zh": "我方造成的出血伤害 +500",
+    "icon_effect": "TI_Icon_UO_Accessary_07",
+    "rank": "",
+    "buff": [],
+    "debuff": []
   }
 }

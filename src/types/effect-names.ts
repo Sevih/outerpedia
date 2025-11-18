@@ -92,6 +92,7 @@ export type BuffName =
   | 'IG_Buff_Effect_2000109_Interruption'
   | 'IG_Buff_2000053_Interruption'
   | 'CORE_ENERGY'
+  | 'BT_RUN_ACTIVE_SKILL_ON_TURN_END'
 
 export type DebuffName =
   | 'BT_ACTION_GAUGE'

@@ -26,6 +26,25 @@ type RawEntry = {
 
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
+  {
+    date: "2025-11-18",
+    title: {
+      en: "New Hero Fortuna",
+      jp: "新ヒーロー フォルトゥナ",
+      kr: "신규 영웅 포르투나",
+      zh: "新英雄 福图娜",
+    } as LString,
+    type: "update",
+    url: "/characters/fortuna",
+    content: [
+      {
+        en: "Fortuna, who attacks enemies while inflicting debuffs such as Freeze, Bleed, and Priority decrease, joins the battlefield.",
+        jp: "凍結、出血、優先度減少などのデバフを与えながら敵を攻撃するフォルトゥナが戦場に参戦します。",
+        kr: "빙결, 출혈, 우선권 감소 등의 디버프를 가하며 적을 공격하는 포르투나가 전장에 참전합니다.",
+        zh: "福图娜在攻击敌人的同时施加冰冻、流血和优先度降低等减益效果，加入战场。",
+      } as LString,
+    ],
+  },
    {
     date: "2025-11-04",
     title: {

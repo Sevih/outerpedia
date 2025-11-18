@@ -1834,5 +1834,22 @@
       "kr": "그저 시뮬레이션이 제시한 하나의 가능성이라 치부했던 존재.\\n하지만 두 세계선의 메르샤에게 동시에 마왕으로 영지되며, 이 위협은 실현되었습니다.\\n한층 흉포해진 광기는 제압하였지만, 여전히 의문은 남아있네요.\\n세계선 X가 그녀를 영지한 이유는 무엇일까요? 그저 게이트를 침공하기 위한 첨병이 필요했던 걸까요? 아니면......\\n\\n<Color=#FFBF00>그녀의 새로운 가능성</Color>을 확인하고자 했던 <Color=#FFBF00>누군가</Color>의 소행일까요?",
       "zh": "曾被视为只是模拟提出的一种可能性。\\n然而,当两个世界线的美洛莎同时被加冕为魔王时,这一威胁成为现实。\\n虽然更加凶暴的疯狂被压制,但疑问仍然存在。\\n为什么世界线X会选择她?是为了入侵之门的<color=#FFBF00>先锋</color>吗?还是......\\n\\n这是<Color=#FFBF00>某人</Color>为了确认<Color=#FFBF00>她的新可能性</Color>而采取的行动?"
     }
+  },
+  "Fortuna": {
+    "fullname": {
+      "en": "Fortuna",
+      "jp": "フォルトゥナ",
+      "kr": "포르투나",
+      "zh": "福尔图娜"
+    },
+    "birthday": "09/01",
+    "height": "177 cm",
+    "weight": "60 kg",
+    "story": {
+      "en": "This is Fortuna, the Frost Elf Adventurer.\\nShe is as remarkable for her striking outfit as for her impressive record.\\nTo put it briefly, she once purged the outskirts of the city and several underground organizations after discovering an attempt to harm her friend.\\nThese days, rather than taking on adventuring work, she travels across the continent seeking to form her own <color=#FFBF00>[Family]</color>.\\n\\nRumor has it that Fortuna values her friends above all else.\\nWhen you have the chance, why not build a good relationship with her and make her your ally?",
+      "jp": "こちらの方は「フロストエルフの冒険者」、フォルトゥナ様です。\\n特異な衣装と同じくらい、印象的な前歴をお持ちの方でもあります。\\n簡単に申し上げますと――かつて、友人を害そうとした者たちを討つために、\\n都市の辺境や暗黒街に巣食う小規模な組織を自らの手で壊滅させたという逸話がございます。\\n現在は冒険よりも、自身の<color=#FFBF00>「ファミリー」</color>を築くために大陸各地を旅しているそうです。\\n\\n噂によれば、フォルトゥナ様は何よりも“友”を大切にされるとのこと。\\nもし機会があれば、ぜひ良好な関係を築き、信頼できる仲間として迎え入れてみてはいかがでしょうか。",
+      "kr": "이분은 서리엘프 모험가, 포르투나 님입니다.\\n특이한 복장만큼이나 눈에 띄는 전과를 가진 분입니다. 짧게 말씀드리자면, 자신의 친구를 해하려 했다는 이유로 도시 변방과 암흑가의 소규모 조직들을 소탕했던 일화가 있습니다. 현재는 모험가의 일보다는 자신의 <Color=#FFBF00>패밀리</Color>를 만들기 위해 대륙을 누비는 중이라고 하네요.\\n\\n오너, 소문에 의하면 포르투나 님은 자신의 친구를 무엇보다 소중히 여긴다고 합니다. 여유가 될 때, 그녀와 좋은 관계를 쌓아 동료로 삼으시는 건 어떨까요?",
+      "zh": "这位是霜精灵冒险者——福尔图娜。她不仅服装独特,经历也同样引人注目。\\n简单来说,她曾因为有人企图伤害她的朋友,而亲自清剿了城市边缘与黑市中盘踞的小型组织。\\n如今,她比起接受冒险委托,更专注于游历大陆,寻找能够建立自己<color=#FFBF00>「Family」</color>的伙伴。\\n\\n据传,福尔图娜最看重的便是“朋友”。\\n若有机会,不妨与她建立良好关系,将她视为值得依赖的同伴吧。"
+    }
   }
 }

@@ -1,6 +1,54 @@
 {
   "en": [
     {
+      "slug": "live-en-4207",
+      "title": "[Event] In-game Buff Event Details (11/18~12/1)",
+      "date": "2025.11.18",
+      "category": "event",
+      "excerpt": "From 11/18 To 12/1, a special buff event will be taking place in Outerplane! 1) Challenge! Special Request: Ecology Study Drop Rate +30% – Event Period : 2025/11/18(Tue) after the maintenance ~ 2025/1...",
+      "coverImage": "/images/news/live/en/4207-8914ba09.webp",
+      "uid": "4207",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/18/event-in-game-buff-event-details-11-1812-1/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-4238",
+      "title": "[Maintenance] 11/18 (Tue) Update Maintenance Complete",
+      "date": "2025.11.18",
+      "category": "maintenance",
+      "excerpt": ". The maintenance was successfully completed on 11/18 (Tue) at 04:30 UTC. ◈ Maintenance Compensation – Compensation: 200 Ether (Delivered to your in-game mailbox, Storage Period: 7 Days) – Claim Perio...",
+      "coverImage": "/images/news/live/en/4238-b6b8d67c.webp",
+      "uid": "4238",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/18/maintenance-11-18-tue-update-maintenance-complete/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-4083",
+      "title": "[Update] 11/18 (Tue) Patch Note (Edited on 11/18 02:59 UTC)",
+      "date": "2025.11.17",
+      "category": "notice",
+      "excerpt": "Dear Master, We would like to inform you of the in-game update scheduled for 11/18 (Tue) . You can check the updated content in the game after maintenance is completed. Please refer to the details bel...",
+      "coverImage": "/images/news/live/en/4083-24ee2075.webp",
+      "uid": "4083",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/17/update-11-18-tue-patch-note/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-4186",
+      "title": "[Maintenance] 11/17 (Mon) Update Maintenance",
+      "date": "2025.11.17",
+      "category": "maintenance",
+      "excerpt": ", We would like to inform you that we will have an update on 11/17(Mon). Please see below for more details. ◈ Maintenance Schedule – 11/17 (Mon) 23:30 – 11/18 (Tue) 04:30 UTC ◈ Details 1\\. New Hero: F...",
+      "coverImage": "/images/news/live/en/4186-fcea29b3.webp",
+      "uid": "4186",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/17/maintenance-11-17-mon-update-maintenance/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-4016",
       "title": "[Developer’s Letter] 2.5-Year Anniversary Message & Update Preview",
       "date": "2025.11.12",
@@ -11778,6 +11826,54 @@
     }
   ],
   "jp": [
+    {
+      "slug": "live-jp-4209",
+      "title": "【イベント】期間限定バフ (11/18~12/1)",
+      "date": "2025.11.18",
+      "category": "notice",
+      "excerpt": "マスターの皆様、こんにちは！GM あめです。 📅2025/11/18～12/1まで、ゲーム内でさまざまな期間限定バフイベントを開催いたします！ ぜひこの機会をお見逃しなく！ 🧭 通常イベント一覧 🔹 特別依頼：生態調査ドロップ率30%UP ・開催期間：2025年11月18日（火）メンテナンス後 ～ 11月25日（火）08:59（JST） 🔹 特別依頼：正体究明ドロップ率30%UP ・開催期...",
+      "coverImage": "/images/news/live/jp/4209-ba407d02.webp",
+      "uid": "4209",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/18/%e3%80%90%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e3%80%91%e6%9c%9f%e9%96%93%e9%99%90%e5%ae%9a%e3%83%90%e3%83%95-11-1812-1/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-4243",
+      "title": "[11/18（火）アップデート完了のお知らせ]",
+      "date": "2025.11.18",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 下記の期間実施しておりましたメンテナンスは、 11/18(火)13:30に終了いたしました。 ◈メンテナンスのお詫び メンテナンスのお詫びといたしまして、みなさまへ以下の対応をさせていただきます。 1．お詫びの内容：エーテル200個 ※メールボックス保管期間7日 2．配布期間： 11/...",
+      "coverImage": "/images/news/live/jp/4243-c0a2bb3e.webp",
+      "uid": "4243",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/18/11-18%ef%bc%88%e7%81%ab%ef%bc%89%e3%82%a2%e3%83%83%e3%83%97%e3%83%87%e3%83%bc%e3%83%88%e5%ae%8c%e4%ba%86%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-4141",
+      "title": "11/18(火)アップデート内容のお知らせ(11/180 12:00 追記)",
+      "date": "2025.11.17",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG 『アウタープレーン』 こんにちは！GMあめです。 11/18 (火) のアップデート内容を案内いたします。 アップデート内容は、メンテナンス終了後にゲーム内でご確認いただけます。 詳細につきましては、下記をご覧ください。 ■ 修正事項 1．スターピースショップ販売される「★6タリスマン選択ボックス」の販売期間が追記されました。 1. 新規仲間【フォルトゥナ】登場及びピックアッ...",
+      "coverImage": "/images/news/live/jp/4141-2a054c6d.webp",
+      "uid": "4141",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/17/11-18%e7%81%ab%e3%82%a2%e3%83%83%e3%83%97%e3%83%87%e3%83%bc%e3%83%88%e5%86%85%e5%ae%b9%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-4190",
+      "title": "【メンテナンス】定期メンテナンスお知らせ (11/18)",
+      "date": "2025.11.17",
+      "category": "notice",
+      "excerpt": "美ジュアル物語RPG「アウタープレーン」 いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 11/18(火)にコンテンツ更新のため、メンテナンスを実施いたします。 詳しくは下記内容をご確認ください。 ◈メンテナンス予定実施時間 – 11/18(火) 08:30 ~ 13:30 (JST) ◈メンテナンスの内容 1\\. 新規仲間「フォル...",
+      "coverImage": "/images/news/live/jp/4190-853d7ae6.webp",
+      "uid": "4190",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/17/%e3%80%90%e3%83%a1%e3%83%b3%e3%83%86%e3%83%8a%e3%83%b3%e3%82%b9%e3%80%91%e5%ae%9a%e6%9c%9f%e3%83%a1%e3%83%b3%e3%83%86%e3%83%8a%e3%83%b3%e3%82%b9%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b-11-18/",
+      "views": 0,
+      "lang": "jp"
+    },
     {
       "slug": "live-jp-4021",
       "title": "【開発者お便り】1.5周年を迎えて– 今後の改善内容と開発チームからのご挨拶",
@@ -23581,6 +23677,54 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-4234",
+      "title": "11/18 (화) 업데이트 완료 안내",
+      "date": "2025.11.18",
+      "category": "notice",
+      "excerpt": "안녕하세요, 오너 여러분. GM 아메입니다. 11월 18일 (화) 13:30 (KST) 업데이트 점검이 완료되었습니다. 기다려주신 모든 오너님들께 감사드립니다. ◈ 점검 보상 지급 – 보상 : 200 에테르 (우편함 지급, 보관기간 7일) – 수령 기간: 11월 18일 (화) 점검 종료 이후 ~ 11월 19일 (수) 23:59 (KST) 앞으로도 계속해서 ...",
+      "coverImage": "/images/news/live/kr/4234-18cc8913.webp",
+      "uid": "4234",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/18/11-18-%ed%99%94-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%99%84%eb%a3%8c-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-4247",
+      "title": "[공지] 11/18(화) 불량 이용자 제재 안내",
+      "date": "2025.11.18",
+      "category": "notice",
+      "excerpt": "안녕하세요, GM 아메입니다. ​아우터플레인에서 운영 정책에 위반되는 행위를 한 이용자에 대해 계정 제재가 진행되었습니다. 자세한 내용은 아래를 확인해 주시기 바랍니다. ​◈ 불량 이용자 제재 안내 1\\. 제재 사유 – 게임 내 비인가 프로그램 사용 – 게임 내 비매너 행위 2\\. 제재 내역 – 게임 내 비인가 프로그램 사용 : 영구 제한 – 게임 내 비매...",
+      "coverImage": "/images/news/live/kr/4247-72f9577e.webp",
+      "uid": "4247",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/18/%ea%b3%b5%ec%a7%80-11-18%ed%99%94-%eb%b6%88%eb%9f%89-%ec%9d%b4%ec%9a%a9%ec%9e%90-%ec%a0%9c%ec%9e%ac-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-4091",
+      "title": "11/18(화) 업데이트 안내 (11/18 12:14 추가)",
+      "date": "2025.11.17",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 11/18 (화) 진행될 게임 내 업데이트 사항을 안내해 드립니다. 업데이트 내용은 점검 후 게임 내에서 확인하실 수 있습니다. 자세한 내용은 아래를 확인해 주시기 바랍니다. ■ 수정 내용 1.별의 기억 상점 상품 중 일부 상품의 판매 기간이 추가되었습니다. 1\\. 신규 동료 \\[포르투나\\] ...",
+      "coverImage": "/images/news/live/kr/4091-777e5182.webp",
+      "uid": "4091",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/17/11-18%ed%99%94-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-4183",
+      "title": "[점검] 11월 18일 (화) 업데이트 점검 안내",
+      "date": "2025.11.17",
+      "category": "notice",
+      "excerpt": "스킬 타이밍 RPG, 아우터플레인 안녕하세요. GM 아메입니다. 11월 18일 (화) 업데이트 점검이 예정되어 안내드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 점검 일정 – 11월 18일 (화) 08:30 ~ 13:30 (KST) ◈ 내용 1\\. 신규 동료 ‘포르투나’ 2\\. 신규 이벤트 스토리 – 축제, 그리고 비밀의 레시피 3\\. 페스...",
+      "coverImage": "/images/news/live/kr/4183-76b65800.webp",
+      "uid": "4183",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/17/%ec%a0%90%ea%b2%80-11%ec%9b%94-18%ec%9d%bc-%ed%99%94-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%a0%90%ea%b2%80-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-4025",
       "title": "[개발자 편지] 2.5주년 기념 인사와 향후 업데이트 안내",
