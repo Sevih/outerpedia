@@ -1,4 +1,323 @@
 {
+  "v2": {
+    "label": "November 2025 Version",
+    "date": "2025-11-19",
+    "phase1": {
+      "bosses": [
+        {
+          "bossId": "440400174-7-1",
+          "geas": {
+            "1": {
+              "bonus": 51,
+              "malus": 61
+            },
+            "2": {
+              "bonus": 64,
+              "malus": 60
+            },
+            "3": {
+              "bonus": 49,
+              "malus": 63
+            },
+            "4": {
+              "bonus": 52,
+              "malus": 57
+            },
+            "5": {
+              "bonus": 53,
+              "malus": 59
+            }          
+          },
+          "notes": [
+           
+            "If you can chain break him, replace the {C/Defender} with another DPS. In the footage, Kuro was chosen because she is a {E/Light} character, with decent damage, {B/BT_CP_CHARGE}, and {D/BT_MARKING}."
+          ],
+          "recommended": [
+            {
+              "name": "Dianne",
+              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
+            },
+            {
+              "name": "Monad Eva",
+              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
+            },
+            {
+              "name": "Luna",
+              "comment": "{B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP} and she is a {C/Defender}"
+            }
+          ],
+          "team": [
+            [
+              "Luna",
+              "Demiurge Drakhan",
+              "Omega Nadja",
+              "Kuro"
+            ],
+            [
+              "Dianne",
+              "Monad Eva"
+            ],
+            [
+              "Tamara",
+              "Ryu Lion",
+              "Akari"
+            ],
+            [
+              "Demiurge Luna",
+              "Ame",
+              "Drakhan"
+            ]
+          ],
+          "video": {
+            "id": "eQRbxgOoL9k",
+            "title": "The Frost Legion - Geas Boss Prototype EX-78 (Stage 5) by Sevih"
+          }
+        },
+        {
+          "bossId": "440400274-8-1",
+          "geas": {
+            "1": {
+              "bonus": 94,
+              "malus": 65
+            },
+            "2": {
+              "bonus": 46,
+              "malus": 55
+            },
+            "3": {
+              "bonus": 50,
+              "malus": 96
+            },
+            "4": {
+              "bonus": 95,
+              "malus": 58
+            },
+            "5": {
+              "bonus": 99,
+              "malus": 20
+            }
+          },
+          "notes": [
+            ""
+          ],
+          "recommended": [
+            {
+              "name": "Dianne",
+              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
+            },
+            {
+              "name": "Monad Eva",
+              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
+            }
+          ],
+          "team": [
+            [
+              "Tamara",
+              "Skadi"
+            ],
+            [
+              "Dianne",
+              "Monad Eva"
+            ],
+            [
+              "Demiurge Luna",
+              "Maxwell",
+              "Ryu Lion"
+            ],
+            [
+              "Demiurge Astei",
+              "Gnosis Dahlia"
+            ]
+          ],
+          "video": {
+            "id": "-z3VlH16dA4",
+            "title": "The Frost Legion - Geas Boss Vlada Assault Suit (Stage 4) by Sevih"
+          }
+        }
+      ]
+    },
+    "phase2": {
+      "id": "440400079-B-1",
+      "overview": [
+        ""
+      ],
+      "teams": {
+        "team1": {
+          "label": "Full Dark",
+          "icon": "dark.webp",
+          "video": {
+            "id": "zpnej0kGURA",
+            "title": "The Frost Legion - Vladi Max Stage 15 - Dark Team by Sevih"
+          },
+          "geas-active": {
+            "bonus": [
+              49,52,53,94,46
+            ],
+            "malus": [
+              61,60,63,57,59,65,55,96,20
+            ]
+          },
+          "setup": [
+            [
+              "Omega Nadja"
+            ],
+            [
+              "Maxwell"
+            ],
+            [
+              "Demiurge Astei"
+            ],
+            [
+              "Sterope"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Speed tune : Sterope > Maxwell > D.Astei > O.Nadja"
+            },
+            {
+              "type": "p",
+              "string": "Role :"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Sterope : S3 and Skill Chain with her first",
+                "O.Nadja : S1B3 > S3 > S1 ",
+                "Astei : S1B2 > S3 > S1",
+                "Maxwell : S3 > S2B2 > S2 > S1"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Use Rogue's Charm / Sage's Charm depending of your critical chance"
+            }
+          ]
+        },
+        "team2": {
+          "label": "Classic G.Beth",
+          "icon": "light.webp",
+          "video": {
+            "id": "rUKAQnQmiZc",
+            "title": "The Frost Legion - Vladi Max Stage 7 - G.Beth Team by Sevih"
+          },
+          "geas-active": {
+            "bonus": [
+              64
+            ],
+            "malus": [
+              61,60,63,65,96,58,20
+            ]
+          },
+          "setup": [
+            [
+              "Monad Eva"
+            ],
+            [
+              "Gnosis Beth"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Nothing special just do S2-S3-S1B3 with G.Beth"
+            },
+            {
+              "type": "p",
+              "string": "Use Meva S1B3 before boss enrage skill (even if it won't kill you)"
+            }
+          ]
+        },
+        "team3": {
+          "label": "Burn Team",
+          "icon": "fire.webp",
+          "video": {
+            "id": "zetrz8-fqZg",
+            "title": "The Frost Legion - Vladi Max Stage 13 - Burn Team by Sevih"
+          },
+          "geas-active": {
+            "bonus": [
+              64
+            ],
+            "malus": [
+              61,60,63,65,55,96,58
+            ]
+          },
+          "setup": [
+            [
+              "Monad Eva"
+            ],
+            [
+              "Maxie"
+            ],
+            [
+              "Vlada",
+              "Parti"
+            ],
+            [
+              "Ember",
+              "Bell Cranel"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Speed tune : Roxie > Meva > Ember > Vlada"
+            },
+            {
+              "type": "p",
+              "string": "If you got Ember 5 star you want her with 20/30 more speed than Vlada in order to extend {D/BT_DOT_BURN} duration"
+            },
+            {
+              "type": "p",
+              "string": "Role :"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Meva : S1B2 to refill AP",
+                "Roxie : Only S1B3 then S3 at her than turn",
+                "Ember : S1B3 > S3",
+                "Vlada : S3 then only S1 until she got her last turn (ideally 19th turn) and S2B2"
+              ]
+            }
+          ]
+        },
+        "team4": {
+          "label": "Solo Ember",
+          "icon": "fire.webp",
+          "geas-active": {
+            "bonus": [
+              64
+            ],
+            "malus": [
+              61,60,63,57,65,55,96,58,20
+            ]
+          },
+          "setup": [
+            [
+              "Ember"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "You want : Revenge Set, Vanguard Charm, Token of the Supreme Witch weapon and an effectiveness Accessory"
+            },
+            {
+              "type": "p",
+              "string": "Stats needed : Eff > Atk > All and low speed (around 120-130)"
+            },
+            {
+              "type": "p",
+              "string": "Whenever you play just S1B3 to extend your {D/BT_DOT_BURN} duration"
+            }
+          ]
+        }
+      }
+    }
+  },
   "v1": {
     "label": "May 2025 Version",
     "date": "2025-05-21",

@@ -10,16 +10,23 @@ import { Phase2View } from './Phase2View'
 
 type Props = {
   data: GuildRaidData
+  defaultVersion?: string
 }
 
 /**
  * Main Guild Raid Page Component
  * Handles version selection and phase navigation
  */
-export function GuildRaidPage({ data }: Props) {
+export function GuildRaidPage({ data, defaultVersion }: Props) {
   const { lang } = useI18n()
   const versionKeys = Object.keys(data)
-  const [selectedVersion, setSelectedVersion] = useState(versionKeys[0])
+
+  // Use defaultVersion if provided and exists, otherwise use first key
+  const initialVersion = defaultVersion && versionKeys.includes(defaultVersion)
+    ? defaultVersion
+    : versionKeys[0]
+
+  const [selectedVersion, setSelectedVersion] = useState(initialVersion)
   const [currentPhase, setCurrentPhase] = useState<'phase1' | 'phase2'>('phase1')
   const [phase2BossName, setPhase2BossName] = useState<string>('')
 

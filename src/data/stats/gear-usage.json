@@ -3,7 +3,7 @@
     "name": "Speed Set",
     "type": "Set",
     "class": null,
-    "count": 66,
+    "count": 67,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -31,6 +31,7 @@
       "Epsilon",
       "Eternal",
       "Fatal",
+      "Fortuna",
       "Fran",
       "Francesca",
       "Gnosis Beth",
@@ -265,6 +266,28 @@
     ]
   },
   {
+    "name": "Thumping Knuckle Dusters",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 14,
+    "characters": [
+      "Ame",
+      "Bell Cranel",
+      "Bryn",
+      "Demiurge Astei",
+      "Demiurge Luna",
+      "Fortuna",
+      "Gnosis Nella",
+      "Iota",
+      "Kuro",
+      "Laplace",
+      "Maxwell",
+      "Regina",
+      "Roxie",
+      "Tamamo-no-Mae"
+    ]
+  },
+  {
     "name": "Surefire Javelin",
     "type": "Weapon",
     "class": "Striker",
@@ -283,27 +306,6 @@
       "Rhona",
       "Sofia",
       "Vlada"
-    ]
-  },
-  {
-    "name": "Thumping Knuckle Dusters",
-    "type": "Weapon",
-    "class": "Mage",
-    "count": 13,
-    "characters": [
-      "Ame",
-      "Bell Cranel",
-      "Bryn",
-      "Demiurge Astei",
-      "Demiurge Luna",
-      "Gnosis Nella",
-      "Iota",
-      "Kuro",
-      "Laplace",
-      "Maxwell",
-      "Regina",
-      "Roxie",
-      "Tamamo-no-Mae"
     ]
   },
   {
@@ -365,6 +367,24 @@
     ]
   },
   {
+    "name": "Dies Irae",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 10,
+    "characters": [
+      "Alice",
+      "Bell Cranel",
+      "Dahlia",
+      "Eternal",
+      "Fortuna",
+      "Gnosis Nella",
+      "Iota",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Kuro",
+      "Tamamo-no-Mae"
+    ]
+  },
+  {
     "name": "Force Field Generator",
     "type": "Weapon",
     "class": "Defender",
@@ -380,6 +400,24 @@
       "Sterope",
       "Summer Knight's Dream Ember",
       "Veronica"
+    ]
+  },
+  {
+    "name": "Spirit of Unification",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 10,
+    "characters": [
+      "Ame",
+      "Bell Cranel",
+      "Bryn",
+      "Demiurge Astei",
+      "Demiurge Luna",
+      "Fortuna",
+      "Laplace",
+      "Maxwell",
+      "Regina",
+      "Roxie"
     ]
   },
   {
@@ -400,15 +438,15 @@
     ]
   },
   {
-    "name": "Dies Irae",
-    "type": "Amulet",
+    "name": "Noblewoman's Guile",
+    "type": "Weapon",
     "class": "Mage",
     "count": 9,
     "characters": [
       "Alice",
-      "Bell Cranel",
       "Dahlia",
       "Eternal",
+      "Fortuna",
       "Gnosis Nella",
       "Iota",
       "Kitsune of Eternity Tamamo-no-Mae",
@@ -431,23 +469,6 @@
       "Nella",
       "Saeran",
       "Viella"
-    ]
-  },
-  {
-    "name": "Spirit of Unification",
-    "type": "Amulet",
-    "class": "Mage",
-    "count": 9,
-    "characters": [
-      "Ame",
-      "Bell Cranel",
-      "Bryn",
-      "Demiurge Astei",
-      "Demiurge Luna",
-      "Laplace",
-      "Maxwell",
-      "Regina",
-      "Roxie"
     ]
   },
   {
@@ -480,22 +501,6 @@
       "Nella",
       "Omega Nadja",
       "Summer Knight's Dream Ember"
-    ]
-  },
-  {
-    "name": "Noblewoman's Guile",
-    "type": "Weapon",
-    "class": "Mage",
-    "count": 8,
-    "characters": [
-      "Alice",
-      "Dahlia",
-      "Eternal",
-      "Gnosis Nella",
-      "Iota",
-      "Kitsune of Eternity Tamamo-no-Mae",
-      "Kuro",
-      "Tamamo-no-Mae"
     ]
   },
   {
@@ -750,6 +755,17 @@
     ]
   },
   {
+    "name": "Queen of Prism",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 3,
+    "characters": [
+      "Bryn",
+      "Demiurge Luna",
+      "Fortuna"
+    ]
+  },
+  {
     "name": "Attack Set",
     "type": "Set",
     "class": null,
@@ -837,16 +853,6 @@
     "characters": [
       "Bell Cranel",
       "Laplace"
-    ]
-  },
-  {
-    "name": "Queen of Prism",
-    "type": "Amulet",
-    "class": "Mage",
-    "count": 2,
-    "characters": [
-      "Bryn",
-      "Demiurge Luna"
     ]
   },
   {
@@ -949,6 +955,15 @@
     ]
   },
   {
+    "name": "Gorgon's Vanity [Mage]",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 1,
+    "characters": [
+      "Fortuna"
+    ]
+  },
+  {
     "name": "Gorgon's Vanity [Striker]",
     "type": "Amulet",
     "class": "Striker",
@@ -1027,6 +1042,15 @@
     "count": 1,
     "characters": [
       "Nella"
+    ]
+  },
+  {
+    "name": "Sublime Melody",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 1,
+    "characters": [
+      "Fortuna"
     ]
   },
   {
@@ -1152,13 +1176,6 @@
     "name": "Gorgon's Vanity [Healer]",
     "type": "Amulet",
     "class": "Healer",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Gorgon's Vanity [Mage]",
-    "type": "Amulet",
-    "class": "Mage",
     "count": 0,
     "characters": []
   },
@@ -1313,13 +1330,6 @@
     "name": "Sacreed Edge",
     "type": "Weapon",
     "class": "Ranger",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Sublime Melody",
-    "type": "Weapon",
-    "class": "Mage",
     "count": 0,
     "characters": []
   },

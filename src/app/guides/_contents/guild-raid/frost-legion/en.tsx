@@ -16,7 +16,7 @@ export default function FrostLegionGuidePage() {
       versions={{
         default: {
           label: 'Guide',
-          content: <GuildRaidPage data={raidData} />,
+          content: <GuildRaidPage data={raidData} defaultVersion="v2" />,
         },
       }}
     />

@@ -2787,6 +2787,67 @@
       ]
     }
   },
+  "fortuna": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Noblewoman's Guile",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Thumping Knuckle Dusters",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Sublime Melody",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Gorgon's Vanity [Mage]",
+          "mainStat": [
+            "EFF"
+          ]
+        },
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "EFF"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "EFF"
+          ]
+        },
+        {
+          "name": "Dies Irae",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "EFF",
+        "SPD",
+        "ACC",
+        "ATK",
+        "CHC",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
   "fran": {
     "Speed": {
       "weaponSub": [
