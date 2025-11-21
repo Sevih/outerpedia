@@ -40,6 +40,7 @@ const PREFIX_STYLES: Record<string, string> = {
   'Monad': 'text-xs',
   "Holy Night's Blessing": 'text-[10px]',
   'Kitsune of Eternity': 'text-[10px]',
+  'Core Fusion': 'text-xs',
 
   'Ais': 'text-[18px]',
   'アイズ': 'text-[18px]',
@@ -58,6 +59,7 @@ const ABBR_STYLES: Record<string, string> = {
   'Poolside Trickster': 'PT ',
   "Tamamo-no-Mae": 'Tamamo',
   "Summer Knight's Dream": 'S.',
+  'Core Fusion': 'C.F',
 }
 
 const NAME_STYLES: Record<string, string> = {
@@ -70,8 +72,8 @@ const NAME_STYLES: Record<string, string> = {
   'Flamberge': 'text-[17px] pb-1',
   'Francesca': 'text-[17px] pb-1',
   'Hanbyul Lee': 'text-[14px] pb-1',
-  "Tamamo-no-Mae": 'text-[11px] pb-1'
-
+  "Tamamo-no-Mae": 'text-[11px] pb-1',
+  
 
 }
 
@@ -88,6 +90,7 @@ const PREFIX_STYLES_BIG: Record<string, string> = {
   'Kitsune of Eternity': 'text-[21px]',
   'Poolside Trickster': 'text-[21px]',
   "Summer Knight's Dream": 'text-[21px]',
+  'Core Fusion': 'text-[21px]'
 }
 
 const NAME_STYLES_BIG: Record<string, string> = {

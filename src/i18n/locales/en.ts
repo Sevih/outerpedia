@@ -828,10 +828,9 @@ const en = {
   'core_fusion.title': 'Core Fusion Character',
   'core_fusion.base_character': 'Base Character',
   'core_fusion.requirements': 'Requires',
-  'core_fusion.fusion_cores': 'Fusion Cores',
   'core_fusion.fusion_levels': 'Core Fusion Levels',
-  'core_fusion.level': 'Level',
-  'core_fusion.skill_upgrades': 'Skill Upgrades',
+  'core_fusion.core_fusion_short': 'Core Fusion',
+  'core_fusion.skill_lv_max': 'Skill Lv Max\nCore-Fused Passive Lv Max',
   'core_fusion.wip_notice': 'This Core Fusion character page is still under development. Some information may be incomplete or subject to change.',
   'level': 'Lv',
 }

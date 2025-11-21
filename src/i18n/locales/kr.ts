@@ -828,10 +828,9 @@ const kr = {
   'core_fusion.title': '코어 융합 캐릭터',
   'core_fusion.base_character': '기본 캐릭터',
   'core_fusion.requirements': '필요조건',
-  'core_fusion.fusion_cores': '융합 코어',
   'core_fusion.fusion_levels': '코어 융합 레벨',
-  'core_fusion.level': '레벨',
-  'core_fusion.skill_upgrades': '스킬 업그레이드',
+  'core_fusion.core_fusion_short': '코어 융합',
+  'core_fusion.skill_lv_max': '스킬 Lv Max\n코어 융합 패시브 Lv Max',
   'core_fusion.wip_notice': '이 코어 융합 캐릭터 페이지는 아직 개발 중입니다. 일부 정보가 불완전하거나 변경될 수 있습니다.',
   'level': 'Lv',
 }

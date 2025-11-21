@@ -828,10 +828,9 @@ const jp = {
   'core_fusion.title': 'コアフュージョンキャラクター',
   'core_fusion.base_character': 'ベースキャラクター',
   'core_fusion.requirements': '必要条件',
-  'core_fusion.fusion_cores': 'フュージョンコア',
   'core_fusion.fusion_levels': 'コアフュージョンレベル',
-  'core_fusion.level': 'レベル',
-  'core_fusion.skill_upgrades': 'スキルアップグレード',
+  'core_fusion.core_fusion_short': 'コアフュージョン',
+  'core_fusion.skill_lv_max': 'スキル Lv Max\nコアフュージョンパッシブLv Max',
   'core_fusion.wip_notice': 'このコアフュージョンキャラクターページは開発中です。一部の情報が不完全または変更される可能性があります。',
   'level': 'Lv',
 }

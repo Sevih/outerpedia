@@ -25,6 +25,7 @@ import CharacterProfileDescription from '@/app/components/CharacterProfileDescri
 import TranscendenceSlider from '@/app/components/TranscendenceSlider'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import TagDisplayMini from '@/app/components/TagDisplayInline'
+import ItemInline from '@/app/components/ItemInline'
 import type { PartnerEntry } from '@/types/partners';
 import type { ProsConsMap } from '@/types/hero-content';
 import rawProsCons from '@/data/hero-pros-cons.json'
@@ -509,10 +510,14 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                                 })()}
                                             </p>
                                             {character.fusionRequirements && (
-                                                <p className="text-xs text-gray-400 mt-1">
-                                                    {t('core_fusion.requirements', { defaultValue: 'Requires' })}: T{character.fusionRequirements.transcendence}
+                                                <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
+                                                    <span>{t('core_fusion.requirements', { defaultValue: 'Requires' })}: T{character.fusionRequirements.transcendence}</span>
                                                     {character.fusionRequirements.material && (
-                                                        <> + {character.fusionRequirements.material.quantity}x {t('core_fusion.fusion_cores', { defaultValue: 'Fusion Cores' })}</>
+                                                        <>
+                                                            <span>+</span>
+                                                            <ItemInline names={character.fusionRequirements.material.id} text={false} size={20} />
+                                                            <span className="font-semibold">×{character.fusionRequirements.material.quantity}</span>
+                                                        </>
                                                     )}
                                                 </p>
                                             )}
@@ -780,25 +785,39 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     key={fusionLevel.level}
                                     className="bg-black/30 border border-purple-500/30 rounded-lg p-4"
                                 >
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <div className="bg-purple-600/30 text-purple-300 rounded-full w-8 h-8 flex items-center justify-center font-bold">
-                                            {fusionLevel.level}
-                                        </div>
-                                        <h3 className="text-lg font-semibold text-purple-300">
-                                            {t('core_fusion.level', { defaultValue: 'Level' })} {fusionLevel.level}
-                                        </h3>
-                                    </div>
-
-                                    <div className="space-y-2 text-sm">
-                                        <p className="text-gray-400">
-                                            {t('core_fusion.skill_upgrades', { defaultValue: 'Skill Upgrades' })}:
-                                        </p>
-                                        {Object.entries(fusionLevel.skillUpgrades).map(([skillKey, upgrade]) => (
-                                            <div key={skillKey} className="text-gray-300 pl-2">
-                                                <span className="text-purple-400">•</span> {skillKey}: {upgrade.value}
-                                                {upgrade.level && ` (${t('level', { defaultValue: 'Lv' })} ${upgrade.level})`}
+                                    <div className="flex items-center justify-between mb-3">
+                                        <div className="flex items-center gap-2">
+                                            <div className="bg-purple-600/30 text-purple-300 rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg">
+                                                {fusionLevel.level}
                                             </div>
-                                        ))}
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className="text-sm font-semibold text-purple-300 truncate">
+                                                    {(() => {
+                                                        const originalSlug = Object.entries(SLUG_TO_CHAR).find(
+                                                            ([, char]) => char.ID === character.originalCharacter
+                                                        )?.[0];
+                                                        const originalChar = originalSlug ? SLUG_TO_CHAR[originalSlug] : null;
+                                                        const baseName = originalChar ? l(originalChar, 'Fullname', langKey) : '';
+
+                                                        return `${baseName} ${t('core_fusion.core_fusion_short', { defaultValue: 'Core Fusion' })} ${t('level', { defaultValue: 'Lv' })} ${fusionLevel.level}`;
+                                                    })()}
+                                                </h3>
+                                                <p className="text-xs text-gray-400 whitespace-pre-line">
+                                                    {fusionLevel.level === 5
+                                                        ? t('core_fusion.skill_lv_max', { defaultValue: 'Skill Lv Max\nCore-Fused Passive Lv Max' })
+                                                        : `Skill ${t('level', { defaultValue: 'Lv' })} ${fusionLevel.level}`
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Required Item */}
+                                        {fusionLevel.requireItemID && (
+                                            <div className="flex items-center gap-1">
+                                                <ItemInline names={fusionLevel.requireItemID} text={false} size={28} />
+                                                <span className="text-white font-bold text-base">×{fusionLevel.level === 1 ? '300' : '150'}</span>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             ))}

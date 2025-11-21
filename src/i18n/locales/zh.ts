@@ -828,10 +828,9 @@ const zh = {
   'core_fusion.title': '核心融合角色',
   'core_fusion.base_character': '基础角色',
   'core_fusion.requirements': '需求',
-  'core_fusion.fusion_cores': '融合核心',
   'core_fusion.fusion_levels': '核心融合等级',
-  'core_fusion.level': '等级',
-  'core_fusion.skill_upgrades': '技能升级',
+  'core_fusion.core_fusion_short': '核心融合',
+  'core_fusion.skill_lv_max': '技能 Lv Max\n核心融合被动 Lv Max',
   'core_fusion.wip_notice': '此核心融合角色页面仍在开发中。部分信息可能不完整或可能会更改。',
   'level': 'Lv',
 }

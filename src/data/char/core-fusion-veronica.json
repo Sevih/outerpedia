@@ -412,14 +412,14 @@
   "fusionRequirements": {
     "transcendence": 5,
     "material": {
-      "id": "60001",
+      "id": "Fusion-Type Core",
       "quantity": 300
     }
   },
   "fusionLevels": [
     {
       "level": 1,
-      "requireItemID": "60001",
+      "requireItemID": "Fusion-Type Core",
       "skillUpgrades": {
         "skill_1": {
           "value": "300",
@@ -445,7 +445,7 @@
     },
     {
       "level": 2,
-      "requireItemID": "60001",
+      "requireItemID": "Fusion-Type Core",
       "skillUpgrades": {
         "skill_1": {
           "value": "150",
@@ -471,7 +471,7 @@
     },
     {
       "level": 3,
-      "requireItemID": "60001",
+      "requireItemID": "Fusion-Type Core",
       "skillUpgrades": {
         "skill_1": {
           "value": "150",
@@ -497,7 +497,7 @@
     },
     {
       "level": 4,
-      "requireItemID": "60001",
+      "requireItemID": "Fusion-Type Core",
       "skillUpgrades": {
         "skill_1": {
           "value": "150",
@@ -523,7 +523,7 @@
     },
     {
       "level": 5,
-      "requireItemID": "60001",
+      "requireItemID": "Fusion-Type Core",
       "skillUpgrades": {
         "skill_1": {
           "value": "150",
