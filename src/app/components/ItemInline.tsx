@@ -6,24 +6,13 @@ import rawItems from '@/data/items.json';
 import { useI18n } from '@/lib/contexts/I18nContext';
 import { l, lRec } from '@/lib/localize';
 import { getAvailableLanguages, type TenantKey } from '@/tenants/config';
+import type { Item } from '@/types/item';
 
-type ItemRarity = 'normal' | 'superior' | 'epic' | 'legendary';
 type Lng = TenantKey;
 
 type LangMap = Record<Lng, string>;
 
-type ItemDef = {
-  name: string;               // canon EN (sert pour les slugs/images)
-  name_jp?: string;
-  name_kr?: string;
-  rarity: ItemRarity;
-  description: string | LangMap; // supporte string ou map {en,jp,kr}
-  description_jp?: string;
-  description_kr?: string;
-  icon?: string;
-};
-
-const items = rawItems as ItemDef[];
+const items = rawItems as Item[];
 
 type Props = {
   names: string[] | string;   // ⚠️ correspond aux "name" (EN canon)
@@ -54,7 +43,7 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
   // Recherche par "name" canon EN
   const itemList = normalized
     .map((name) => items.find((item) => item.name === name))
-    .filter((item): item is ItemDef => !!item);
+    .filter((item): item is Item => !!item);
 
   return (
     <span className="inline-flex items-center gap-1 align-middle cursor-help">

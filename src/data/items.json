@@ -1577,5 +1577,29 @@
     "description_jp": "★6レジェンドブーツの中から1個を選択して獲得できる。オプションはすべて固定された状態で提供されます。",
     "description_kr": "6성 전설 신발 중 한가지를 선택하여 얻습니다. 제공되는 장비는 고정된 옵션으로 제공됩니다.",
     "icon": "TI_Armor_Box02"
+  },
+  {
+    "name": "Fusion-Type Core",
+    "rarity": "legendary",
+    "description": "A material used for [Core Fusion]. It can help unleash the hidden potential of the targeted ally.\n※Can be obtained through the following:\nArena Weekly Rewards\nEvent Dungeon (Hard) & Shop (Permanent Event Dungeons excluded)",
+    "name_jp": "フュージョン型コア",
+    "name_kr": "융합형 코어",
+    "name_zh": "融合型核心",
+    "description_jp": "[コアフュージョン]に使用される素材です。対象の仲間の潜在能力を解放できます。\n※以下の方法で入手できます。\nアリーナのウィークリー報酬\nイベントストーリー(ハード)・イベントショップ\n(常時開設イベントストーリー対象外)",
+    "description_kr": "[코어 융합] 에 활용되는 재료입니다. 대상이 되는 동료의 잠재된 힘을 해방할 수 있습니다.\n※아래 경로로 입수하실 수 있습니다\n결투장 주간 보상\n이벤트 던전 하드 난이도와 이벤트 상점\n(상시 이벤트 던전은 제외됩니다)",
+    "description_zh": "用于[核心融合]的材料。可释放目标同伴的潜在力量。\n※可通过以下途径获取:\n竞技场每周奖励、活动地下城困难难度与活动商店。\n(不包含常驻活动地下城)",
+    "icon": "TI_Item_CoreMerged"
+  },
+  {
+    "name": "Ghost Bride Valentine",
+    "rarity": "epic",
+    "description": "This is a costume that can be worn by Valentine.",
+    "name_jp": "ゴースト花嫁 バレンタイン",
+    "name_kr": "유령 신부 발렌타인",
+    "name_zh": "幽灵新娘瓦伦塔茵",
+    "description_jp": "【バレンタイン】のスキンです。\nスキンは【仲間】→【スキン】で装備でき\n【スキン】ボタンは仲間のスキンがある場合のみ表示されます。",
+    "description_kr": "[발렌타인]이 착용할 수 있는 코스튬입니다.",
+    "description_zh": "【瓦伦塔茵】可穿戴的皮肤。",
+    "icon": "TI_Costume_Clothes_2000012_03"
   }
 ]

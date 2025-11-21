@@ -217,11 +217,6 @@ function demoteOnce(rank: string): PveRank {
     const i = RANKS_PVE.indexOf((rank as PveRank) ?? 'E')
     return RANKS_PVE[Math.min(i < 0 ? RANKS_PVE.length - 1 : i + 1, RANKS_PVE.length - 1)]
 }
-
-function getSkillLabel(index: number): string {
-    return ['First', 'Second', 'Ultimate'][index] || `Skill ${index + 1}`
-}
-
 // Removed: use l() from @/lib/localize instead
 
 // helper local (type-guard) — à mettre au dessus de l’usage
@@ -380,6 +375,17 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                 </Link>
             </div>
 
+            {/* Core Fusion Work in Progress Banner */}
+            {character.fusionType === 'core-fusion' && (
+                <div className="max-w-6xl mx-auto px-6 pt-6">
+                    <div className="px-4 py-3 bg-yellow-900/30 border border-yellow-500/50 rounded-lg text-yellow-200 text-sm">
+                        <p className="font-semibold">
+                            ⚠️ {t('core_fusion.wip_notice', { defaultValue: 'This Core Fusion character page is still under development. Some information may be incomplete or subject to change.' })}
+                        </p>
+                    </div>
+                </div>
+            )}
+
             <div className="max-w-6xl mx-auto p-6">
                 {/* Partie haute : illustration + infos principales */}
                 <section id="overview">
@@ -465,9 +471,59 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     </div>
                                 )
                             })()}
-                            <div className="mt-2 p-2 rounded">
-                                <CharacterProfileDescription fullname={character.Fullname} lng={langKey} />
-                            </div>
+
+                            {/* Core Fusion info or Character Profile */}
+                            {character.fusionType === 'core-fusion' && character.originalCharacter ? (
+                                <div className="mt-2 p-4 rounded bg-purple-900/30 border border-purple-500/50">
+                                    <div className="flex items-center gap-3">
+                                        <Image
+                                            src="/images/ui/CM_Skill_Icon_Burst.webp"
+                                            alt="Core Fusion"
+                                            width={32}
+                                            height={32}
+                                            className="object-contain"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="text-lg font-semibold text-purple-300 mb-1">
+                                                {t('core_fusion.title', { defaultValue: 'Core Fusion Character' })}
+                                            </p>
+                                            <p className="text-sm text-gray-300">
+                                                {t('core_fusion.base_character', { defaultValue: 'Base Character' })}:{' '}
+                                                {(() => {
+                                                    const originalSlug = Object.entries(SLUG_TO_CHAR).find(
+                                                        ([, char]) => char.ID === character.originalCharacter
+                                                    )?.[0];
+
+                                                    if (originalSlug) {
+                                                        const originalChar = SLUG_TO_CHAR[originalSlug];
+                                                        return (
+                                                            <Link
+                                                                href={`/characters/${originalSlug}`}
+                                                                className="text-purple-400 hover:text-purple-300 underline font-semibold"
+                                                            >
+                                                                {l(originalChar, 'Fullname', langKey)}
+                                                            </Link>
+                                                        );
+                                                    }
+                                                    return character.originalCharacter;
+                                                })()}
+                                            </p>
+                                            {character.fusionRequirements && (
+                                                <p className="text-xs text-gray-400 mt-1">
+                                                    {t('core_fusion.requirements', { defaultValue: 'Requires' })}: T{character.fusionRequirements.transcendence}
+                                                    {character.fusionRequirements.material && (
+                                                        <> + {character.fusionRequirements.material.quantity}x {t('core_fusion.fusion_cores', { defaultValue: 'Fusion Cores' })}</>
+                                                    )}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="mt-2 p-2 rounded">
+                                    <CharacterProfileDescription fullname={character.Fullname} lng={langKey} />
+                                </div>
+                            )}
 
 
 
@@ -712,6 +768,44 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                     {t('skills_note')}
                 </div>
 
+                {/* Core Fusion Levels */}
+                {character.fusionType === 'core-fusion' && character.fusionLevels && character.fusionLevels.length > 0 && (
+                    <section className="mt-8">
+                        <h2 className="text-2xl font-bold text-white mb-4 text-center">
+                            {t('core_fusion.fusion_levels', { defaultValue: 'Core Fusion Levels' })}
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {character.fusionLevels.map((fusionLevel) => (
+                                <div
+                                    key={fusionLevel.level}
+                                    className="bg-black/30 border border-purple-500/30 rounded-lg p-4"
+                                >
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <div className="bg-purple-600/30 text-purple-300 rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                                            {fusionLevel.level}
+                                        </div>
+                                        <h3 className="text-lg font-semibold text-purple-300">
+                                            {t('core_fusion.level', { defaultValue: 'Level' })} {fusionLevel.level}
+                                        </h3>
+                                    </div>
+
+                                    <div className="space-y-2 text-sm">
+                                        <p className="text-gray-400">
+                                            {t('core_fusion.skill_upgrades', { defaultValue: 'Skill Upgrades' })}:
+                                        </p>
+                                        {Object.entries(fusionLevel.skillUpgrades).map(([skillKey, upgrade]) => (
+                                            <div key={skillKey} className="text-gray-300 pl-2">
+                                                <span className="text-purple-400">•</span> {skillKey}: {upgrade.value}
+                                                {upgrade.level && ` (${t('level', { defaultValue: 'Lv' })} ${upgrade.level})`}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
                 {/* Section des 3 skills */}
                 <section id="skills">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
@@ -722,7 +816,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     <div className="flex items-start gap-2 mb-2">
                                         <div className="relative w-12 h-12 shrink-0">
                                             <Image
-                                                src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
+                                                src={`/images/characters/skills/${skill.IconName}.webp`}
                                                 alt={l(skill, 'name', langKey)}
                                                 width={48} height={48} className="object-contain w-12 h-12"
                                             />
@@ -799,8 +893,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     const skillWithBurnEntry = entries.find(([, s]) => getBurns(s).length > 0)
                                     if (!skillWithBurnEntry) return null
 
-                                    const [skillKey, skillWithBurn] = skillWithBurnEntry
-                                    const index = ['SKT_FIRST', 'SKT_SECOND', 'SKT_ULTIMATE'].indexOf(skillKey)
+                                    const [, skillWithBurn] = skillWithBurnEntry
                                     const burns = getBurns(skillWithBurn).sort((a, b) => a.level - b.level)
 
                                     return (
@@ -808,7 +901,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                             {/* Colonne gauche : icône + nom du skill */}
                                             <div className="flex flex-col items-center gap-2 relative w-16 h-16">
                                                 <Image
-                                                    src={`/images/characters/skills/Skill_${getSkillLabel(index)}_${character.ID}.webp`}
+                                                    src={`/images/characters/skills/${skillWithBurn.IconName}.webp`}
                                                     alt={l(skillWithBurn, 'name', langKey)}
                                                     width={48} height={48} className="object-contain"
                                                 />
@@ -859,11 +952,15 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                         {character.skill_priority && (
                             <SkillPriorityTabs
                                 priority={character.skill_priority}
-                                characterId={character.ID}
                                 skillNames={{
                                     First: ln(character.skills.SKT_FIRST),
                                     Second: ln(character.skills.SKT_SECOND),
                                     Ultimate: ln(character.skills.SKT_ULTIMATE),
+                                }}
+                                skillIcons={{
+                                    First: character.skills.SKT_FIRST?.IconName,
+                                    Second: character.skills.SKT_SECOND?.IconName,
+                                    Ultimate: character.skills.SKT_ULTIMATE?.IconName,
                                 }}
                             />
                         )}

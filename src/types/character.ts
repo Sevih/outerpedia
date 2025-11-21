@@ -39,6 +39,7 @@ type BurnEffect = WithLocalizedFields<BurnEffectBase, 'effect'>
 
 // Type de base pour Skill (sans variantes localisées)
 export interface SkillBase {
+  IconName: string
   name: string
   true_desc: string
   description: string
@@ -113,6 +114,28 @@ export interface CharacterBase {
     };
   };
   VoiceActor?: string
+  // Core Fusion properties
+  fusionType?: string
+  originalCharacter?: string
+  isPermanent?: boolean
+  fusionRequirements?: {
+    transcendence: number
+    material?: {
+      id: string
+      quantity: number
+    }
+  }
+  fusionLevels?: Array<{
+    level: number
+    requireItemID: string
+    skillUpgrades: Record<string, {
+      value: string
+      level: string | null
+    }>
+  }>
+  // Original character Core Fusion link
+  hasCoreFusion?: boolean
+  coreFusionId?: string
 }
 
 // Type complet avec variantes localisées pour Fullname et VoiceActor

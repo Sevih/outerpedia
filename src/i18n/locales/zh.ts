@@ -823,6 +823,17 @@ const zh = {
   'contributors.meta.desc': '认识帮助建设Outerpedia的团队及贡献者。',
   'contributors.title': '贡献者',
   'contributors.description': '感谢所有为帮助本站(Outerpedia)成为《异域战记》社区的宝贵资源而做出贡献的人们。',
+
+  // Core Fusion
+  'core_fusion.title': '核心融合角色',
+  'core_fusion.base_character': '基础角色',
+  'core_fusion.requirements': '需求',
+  'core_fusion.fusion_cores': '融合核心',
+  'core_fusion.fusion_levels': '核心融合等级',
+  'core_fusion.level': '等级',
+  'core_fusion.skill_upgrades': '技能升级',
+  'core_fusion.wip_notice': '此核心融合角色页面仍在开发中。部分信息可能不完整或可能会更改。',
+  'level': 'Lv',
 }
 
 export default zh

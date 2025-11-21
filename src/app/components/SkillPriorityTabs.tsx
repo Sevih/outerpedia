@@ -12,12 +12,16 @@ type SkillPriority = {
 
 export default function SkillPriorityBlocks({
     priority,
-    characterId,
     skillNames,
+    skillIcons,
 }: {
     priority: SkillPriority
-    characterId: string
     skillNames: {
+        First?: string
+        Second?: string
+        Ultimate?: string
+    }
+    skillIcons: {
         First?: string
         Second?: string
         Ultimate?: string
@@ -50,15 +54,14 @@ export default function SkillPriorityBlocks({
                 <div className="flex flex-col items-center mt-4">
                     <div className="flex items-end gap-6">
                         {sortedSkills.map(([key]) => {
-                            const iconKey = key
-                            const skillIcon = `/images/characters/skills/Skill_${iconKey}_${characterId}.webp`
+                            const skillIcon = skillIcons[key]
                             const skillName = skillNames[key] || key
 
                             return (
                                 <div key={key} className="flex flex-col items-center gap-1">
                                     <div className="relative w-12 h-12">
                                         <Image
-                                            src={skillIcon}
+                                            src={`/images/characters/skills/${skillIcon}.webp`}
                                             alt={key}
                                             fill
                                             sizes="48px"

@@ -208,6 +208,30 @@
     },
     "start": "2025-11-12",
     "end": "2025-12-11"
+  },
+  {
+    "code": "VALENTINE",
+    "description": {
+      "Limited Recruitment Ticket": "10",
+      "Ghost Bride Valentine": "1"
+    },
+    "start": "2025-11-21",
+    "end": "2026-03-31"
+  },
+  {
+    "code": "M9FORU",
+    "description": {
+      "Call of the Demiurge (Event)": "100"
+    },
+    "start": "2025-11-21",
+    "end": "2026-03-31"
+  },
+  {
+    "code": "ARCALIVE",
+    "description": {
+      "Ether": "1500"
+    },
+    "start": "2025-11-21",
+    "end": "2026-03-31"
   }
 ]
-

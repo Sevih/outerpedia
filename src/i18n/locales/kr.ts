@@ -823,6 +823,17 @@ const kr = {
   'contributors.meta.desc': 'Outerpedia 구축에 기여한 팀과 기여자들을 만나보세요.',
   'contributors.title': '기여자',
   'contributors.description': 'Outerpedia를 Outerplane 커뮤니티를 위한 가치 있는 리소스로 만드는 데 기여해 주신 모든 분들께 감사드립니다.',
+
+  // Core Fusion
+  'core_fusion.title': '코어 융합 캐릭터',
+  'core_fusion.base_character': '기본 캐릭터',
+  'core_fusion.requirements': '필요조건',
+  'core_fusion.fusion_cores': '융합 코어',
+  'core_fusion.fusion_levels': '코어 융합 레벨',
+  'core_fusion.level': '레벨',
+  'core_fusion.skill_upgrades': '스킬 업그레이드',
+  'core_fusion.wip_notice': '이 코어 융합 캐릭터 페이지는 아직 개발 중입니다. 일부 정보가 불완전하거나 변경될 수 있습니다.',
+  'level': 'Lv',
 }
 
 export default kr

@@ -823,6 +823,17 @@ const jp = {
   'contributors.meta.desc': 'Outerpediaの構築に貢献したチームとコントリビューターをご紹介します。',
   'contributors.title': 'コントリビューター',
   'contributors.description': 'OuterpediaをOuterplaneコミュニティにとって価値あるリソースにするために貢献してくださったすべての方々に感謝します。',
+
+  // Core Fusion
+  'core_fusion.title': 'コアフュージョンキャラクター',
+  'core_fusion.base_character': 'ベースキャラクター',
+  'core_fusion.requirements': '必要条件',
+  'core_fusion.fusion_cores': 'フュージョンコア',
+  'core_fusion.fusion_levels': 'コアフュージョンレベル',
+  'core_fusion.level': 'レベル',
+  'core_fusion.skill_upgrades': 'スキルアップグレード',
+  'core_fusion.wip_notice': 'このコアフュージョンキャラクターページは開発中です。一部の情報が不完全または変更される可能性があります。',
+  'level': 'Lv',
 }
 
 export default jp

@@ -2556,5 +2556,23 @@
     "rank": "",
     "buff": [],
     "debuff": []
+  },
+  "core-fusion-veronica": {
+    "name": "Asphodel",
+    "name_jp": "アスフォデル",
+    "name_kr": "아스포델",
+    "mainStat": "Accuracy (To: Fire)",
+    "mainStat_jp": "火属性の対象の命中",
+    "mainStat_kr": "화속성 대상 명중",
+    "effect": "Increases damage dealt when using <color=#28d9ed>Sword Destroyer</color>.",
+    "effect_jp": "<color=#28d9ed>ソード・デストロイヤー</color>使用時、与えるダメージが増加する。",
+    "effect_kr": "<color=#28d9ed>소드 디스트로이어</color> 사용 시, 피해량 증가",
+    "effect10": "Increases Priority by 30% when hit (Activated once every 2 turns).",
+    "effect10_jp": "ダメージを受けた場合、行動ゲージが30%UPする。(2ターンに1回のみ発動)",
+    "effect10_kr": "피격 시 행동 게이지 증가 30% (2턴에 1회만 발동)",
+    "icon_effect": "TI_Icon_UO_Accessary_07",
+    "rank": "",
+    "buff": [],
+    "debuff": []
   }
 }

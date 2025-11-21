@@ -823,6 +823,17 @@ const en = {
   'contributors.meta.desc': 'Meet the team and contributors who helped build Outerpedia.',
   'contributors.title': 'Contributors',
   'contributors.description': 'Thank you to everyone who has contributed to making Outerpedia a valuable resource for the Outerplane community.',
+
+  // Core Fusion
+  'core_fusion.title': 'Core Fusion Character',
+  'core_fusion.base_character': 'Base Character',
+  'core_fusion.requirements': 'Requires',
+  'core_fusion.fusion_cores': 'Fusion Cores',
+  'core_fusion.fusion_levels': 'Core Fusion Levels',
+  'core_fusion.level': 'Level',
+  'core_fusion.skill_upgrades': 'Skill Upgrades',
+  'core_fusion.wip_notice': 'This Core Fusion character page is still under development. Some information may be incomplete or subject to change.',
+  'level': 'Lv',
 }
 
 export default en
