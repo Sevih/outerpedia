@@ -980,8 +980,8 @@
       "zh": "首领攻略指南"
     },
     "icon": "frost-legion",
-    "last_updated": "2025-11-19",
-    "author": "Sevih"
+    "last_updated": "2025-11-22",
+    "author": "Tango"
   },
   "prevent-world-alteration": {
     "category": "guild-raid",
@@ -1607,7 +1607,7 @@
       "zh": "只有最精英的队伍才能在最顶层的20层残酷楼层中生存"
     },
     "icon": "very-hard",
-    "last_updated": "2025-11-16",
+    "last_updated": "2025-11-22",
     "author": "Various Author"
   },
   "timegate-resource": {

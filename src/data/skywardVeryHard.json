@@ -257,6 +257,36 @@
           "1 Light"
         ],
         "note": []
+      },
+      "team4": {
+        "label": "No Stricker",
+        "icon": "striker.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne",
+            "Astei",
+            "Nella",
+            "Viella"
+          ],
+          [
+            "Demiurge Luna"
+          ],
+          [
+            "Stella",
+            "Gnosis Beth"
+          ],
+          [
+            "Maxie",
+            "Roxie",
+            "Skadi",
+            "Tamara"
+          ]
+        ],
+        "conditions": [
+          "No Stricker"
+        ],
+        "note": []
       }
     }
   },
@@ -467,6 +497,32 @@
         ],
         "conditions": [
           "No Light"
+        ],
+        "note": []
+      },
+      "team4": {
+        "label": "1 x 1★",
+        "icon": "CM_icon_star_y.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Dianne",
+            "Nella"
+          ],
+          [
+            "Orox",
+            "Yuri"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Stella",
+            "Rey"
+          ]
+        ],
+        "conditions": [
+          "1 x 1★"
         ],
         "note": []
       }
@@ -907,6 +963,30 @@
         ],
         "conditions": [
           "1 Light"
+        ],
+        "note": []
+      },
+      "team4": {
+        "label": "1 Striker",
+        "icon": "striker.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Luna",
+            "Regina"
+          ],
+          [
+            "Drakhan"
+          ],
+          [
+            "Caren",
+            "Poolside Trickster Regina"
+          ]
+        ],
+        "conditions": [
+          "1 Striker"
         ],
         "note": []
       }
@@ -1620,6 +1700,34 @@
         ],
         "conditions": [
           "1 Light"
+        ],
+        "note": []
+      },
+      "team4": {
+        "label": "1 Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Demiurge Drakhan",
+            "Hilde",
+            "Christina"
+          ],
+          [
+            "Fran",
+            "Gnosis Beth",
+            "Demiurge Vlada",
+            "Notia"
+          ],
+          [
+            "Kanon",
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 Defender"
         ],
         "note": []
       }

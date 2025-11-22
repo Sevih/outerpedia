@@ -1225,7 +1225,9 @@
       "Vlada",
       "Parti",
       "Ember",
-      "Bell Cranel"
+      "Bell Cranel",
+      "Liselotte",
+      "Ritri"
     ]
   },
   "guild-raid/planetary-control-unit": {
@@ -1385,6 +1387,11 @@
       "Nella",
       "Stella",
       "Delta",
+      "Viella",
+      "Gnosis Beth",
+      "Maxie",
+      "Roxie",
+      "Skadi",
       "Ame",
       "Rey",
       "Regina",
@@ -1392,6 +1399,8 @@
       "Demiurge Astei",
       "Aer",
       "Demiurge Delta",
+      "Orox",
+      "Yuri",
       "Fran",
       "Charlotte",
       "Shu",
@@ -1401,11 +1410,9 @@
       "Sterope",
       "Edelweiss",
       "Rhona",
-      "Gnosis Beth",
       "Maxwell",
       "Poolside Trickster Regina",
       "Valentine",
-      "Viella",
       "Tamamo-no-Mae",
       "Kanon",
       "Vlada",
@@ -1424,9 +1431,7 @@
       "Leo",
       "Epsilon",
       "Veronica",
-      "Kappa",
-      "Maxie",
-      "Roxie"
+      "Kappa"
     ]
   }
 }

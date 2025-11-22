@@ -298,20 +298,205 @@
           "setup": [
             [
               "Ember"
+            ],
+            [
+              "Liselotte",
+              "Ritri"
+            ],
+            [
+              "Omega Nadja"
+            ],
+            [
+              "Demiurge Drakhan"
             ]
           ],
           "note": [
             {
               "type": "p",
-              "string": "You want : Revenge Set, Vanguard Charm, Token of the Supreme Witch weapon and an effectiveness Accessory"
+              "string": "NOTE: This guide is aimed at stage 10+. Boss has different stats at lower stages."
             },
             {
               "type": "p",
-              "string": "Stats needed : Eff > Atk > All and low speed (around 120-130)"
+              "string": "Ember Build:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "T4 Revenge Set (mandatory at higher stages for bigger shield), Vanguard Charm, Token of the Supreme Witch weapon",
+                "Accessory: ATK% preferred. Effectiveness accessory if you can't reach required effectiveness. {I-A/Gorgon's Vanity [Defender]} as last resort (doesn't help effectiveness on Burst 3 and you have 1 turn without the buff)",
+                "Stats priority: Eff > Atk > HP > Def > Crit Rate (optional) and low speed (around 120-130, ideally +6-10 speed to refresh shield just before stun)",
+                "Crit Rate lets the boss counter to apply more burns to himself which is good as long as your shield can hold up",
+                "AVOID Resilience - You're relying on the burn to go into revenge range. Ember has 160 resilience naturally while boss has 167 effectiveness.",
+                "If dying past the initial few turns: Trade other stats (including effectiveness) for more ATK to get a bigger shield",
+                "Gameplay: Only use S1B3 to extend your {D/BT_DOT_BURN} duration"
+              ]
             },
             {
               "type": "p",
-              "string": "Whenever you play just S1B3 to extend your {D/BT_DOT_BURN} duration"
+              "string": "Sacrifice Characters (to hold charms):"
+            },
+            {
+              "type": "p",
+              "string": "Ideal sacrifices with passive damage reduction (persists after death):"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Omega Nadja - Passive damage reduction with shield. DO NOT use her EE (gives unwanted dmg reduction vs light and effectiveness which can cause counter into speed debuff). Might need to reset her level at lower stages.",
+                "Demiurge Drakhan - Passive damage reduction (AoE only)",
+                "Hilde - 15% damage reduction (AoE only) with inbuilt Charmer's Necklace passive",
+                "Ritri - Passive damage reduction",
+                "Liselotte with EE - Passive damage reduction with shield. Her passive speed boost (+5 at 4★ or +10 at 6★) only reduces damage if the boost puts Ember above desired speed. If you build some speed on Ember anyway, she won't reduce your damage."
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Best combination: O.Nadja + D.Drakhan + Liselotte makes boss non-crits do less than 100 DMG overall, even on his enrage ultimate, making it far easier to survive."
+            },
+            {
+              "type": "p",
+              "string": "Charm holders:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Charmer's Necklace: Any defender can hold it to help them die faster. Give enough tankiness to survive first hit but NOT second hit, so Charmer's activates on first + second hit.",
+                "Defenders can also hold Unholy Exulset",
+                "Healers can hold Starlight Road"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Turn 1 Strategy with Liselotte (only if you can't survive turn 1 consistently, as it lowers your damage by 1 turn):"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Put Liselotte in front row (first slot) to reduce turn 1 RNG - If both hit 100% priority at the same time, it will always give Liselotte first turn",
+                "Low speed but faster than Ember (130ish speed at max)",
+                "0 crit, 0 accuracy, 0 resilience",
+                "Enough tankiness to survive the first 2 hits (including crit) + burn damage",
+                "Use Vanguard Charm",
+                "On her turn: Use Burst S3 or Burst 2 to top up Ember's health before the burn damage so you survive",
+                "She'll die before her second turn"
+              ]
+            }
+          ]
+        },
+        "team5": {
+          "label": "Safe Burn Team",
+          "icon": "fire.webp",
+          "video": {
+            "id": "6_Gt1jU0f4k",
+            "title": "Gornolf Guild Raid Stage 23 - Maxie Burn Team - 21.9m Dmg - (47m score, 115% score multiplier) by Tango"
+          },
+          "geas-active": {
+            "bonus": [
+              64
+            ],
+            "malus": [
+              60,63,61,65,58
+            ]
+          },
+          "setup": [
+            [
+              "Monad Eva"
+            ],
+            [
+              "Maxie"
+            ],
+            [
+              "Akari"
+            ],
+            [
+              "Vlada"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Much safer at higher stages with more damage but only a 115% multiplier. Speed tuning is very important - try to follow the speeds as closely as possible."
+            },
+            {
+              "type": "p",
+              "string": "IMPORTANT: If you have a 6★ M.Eva, her starting seal extra skill debuff prevents Akari from placing resilience down. Use an effectiveness accessory on Maxie instead."
+            },
+            {
+              "type": "p",
+              "string": "Speed Order and Turn Counts:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Akari: 292 speed (6 turns total) - There's wiggle room to go faster as long as you're faster than the boss to apply resilience down. If running a 6★ M.Eva, you can't apply resilience down.",
+                "M.Eva: 164 speed (3 turns total) - Her turn 2 must come before Maxie's turn 3. Her last turn must be just before the boss uses his enrage ultimate to use Burst 3. If this isn't happening, make her faster.",
+                "Maxie: 178 speed (8 turns total) - If she has more than 8 turns, make her slower or Vlada faster.",
+                "Vlada: 124 speed (3 turns total) - Must move on the last turn. If that's not happening, make Vlada faster or Maxie/M.Eva slower."
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Character Builds:"
+            },
+            {
+              "type": "p",
+              "string": "M.Eva:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Must be 5★ minimum (6★ is Pay to Lose unless using effectiveness on Maxie)",
+                "EE fully maxed",
+                "2-set Burst + 6★ +10 Vanguard Charm",
+                "Royal Stinger weapon for more healing",
+                "Stack HP once you reach required speed for more healing",
+                "MUST dual attack with Maxie and Vlada - If your Akari has more ATK than Maxie, it will mess things up",
+                "Move order: Burst 2 - Burst 1 - Burst 3"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Akari:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Rogue Charm with 100% crit or Executioner's Charm",
+                "2-set Burst (6★ transcendence optional for turn 1 Burst 1 but not needed)",
+                "134 effectiveness with Briareos's Recklessness weapon, or 268 without it",
+                "Go tanky if you want to lessen the healing burden",
+                "ATK must be lower than Maxie (so M.Eva dual attacks with Maxie, not Akari)",
+                "Move order if applying resilience down: S2 - S3 - S1 - Chain - Burst 3 S2 - S3",
+                "Move order if NOT applying resilience down (Maxie has 268 effectiveness): S1 - S1 - Burst 3 S2 - Chain - S3 - S2"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Maxie:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "T4 Revenge set preferred",
+                "Heartrender's Blade weapon",
+                "6★ transcendence needed for +25 AP on battle start (or use 2-set Burst)",
+                "134 effectiveness or 268 with 6★ M.Eva",
+                "ATK must be higher than Akari (so M.Eva dual attacks with Maxie)",
+                "Move order: S3 - Burst 3 x7"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Vlada:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "T4 Revenge set preferred",
+                "Phantom Necrosis weapon to lower your speed",
+                "Executioner's Charm or Rogue Charm with 100% crit",
+                "Move order: S3 - Chain - S2"
+              ]
             }
           ]
         }

@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-11-20",
+    title: {
+      en: "The Frost Legion Guild Raid",
+      jp: "雪国の軍勢 ギルドレイド",
+      kr: "설국의 군세 길드 레이드",
+      zh: "霜冻军团 公会战",
+    } as LString,
+    type: "update",
+    url: "/guides/guild-raid/frost-legion",
+    content: [
+      {
+        en: "The Frost Legion guild raid updated for November 2025 version.",
+        jp: "雪国の軍勢 ギルドレイドが2025年11月版にアップデートされました。",
+        kr: "설국의 군세 길드 레이드가 2025년 11월 버전으로 업데이트되었습니다.",
+        zh: "霜冻军团 公会战已更新至2025年11月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-11-18",
     title: {
       en: "New Hero Fortuna",
