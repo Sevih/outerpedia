@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import EquipmentInlineTag from '@/app/components/EquipmentInlineTag'
 import InlineBarList from '@/app/components/InlineBarList'
@@ -9,7 +9,8 @@ import Link from 'next/link'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TenantKey } from '@/tenants/config'
 import { AnimatedTabs } from "@/app/components/AnimatedTabs"
-//TODO Utiliser les enums
+import { CLASSES, ClassType } from '@/types/enums'
+import { useSearchParams } from "next/navigation"
 
 type GearItem = {
     name: string
@@ -24,10 +25,12 @@ type Props = {
     lang: TenantKey
 }
 
+type TabKey = 'Set' | 'Weapon' | 'Amulet'
+
 export default function GearUsageStatsClients({ data }: Props) {
     const { t } = useI18n()
-
-    type TabKey = 'Set' | 'Weapon' | 'Amulet'
+    const searchParams = useSearchParams()
+    const tabParam = (searchParams.get("tab") as TabKey | null) ?? null
 
     const tabs: { key: TabKey; label: string; icon?: string }[] = [
         { key: 'Set', label: t('sets'), icon: '/images/ui/nav/armor.webp' },
@@ -35,9 +38,30 @@ export default function GearUsageStatsClients({ data }: Props) {
         { key: 'Amulet', label: t('accessories'), icon: '/images/ui/nav/accessory.webp' },
     ]
 
-    const CLASSES_EN = ['Striker', 'Defender', 'Ranger', 'Healer', 'Mage'] as const
-    const [activeTab, setActiveTab] = useState<'Set' | 'Weapon' | 'Amulet'>('Set')
-    const [classFilter, setClassFilter] = useState<string[]>([])
+    const [activeTab, setActiveTab] = useState<TabKey>('Set')
+    const [classFilter, setClassFilter] = useState<ClassType[]>([])
+
+    // Initialise depuis l'URL
+    useEffect(() => {
+        const allowed: TabKey[] = ['Set', 'Weapon', 'Amulet']
+        if (tabParam && (allowed as string[]).includes(tabParam)) {
+            setActiveTab(tabParam as TabKey)
+        } else if (tabParam == null) {
+            setActiveTab('Set')
+        }
+    }, [tabParam])
+
+    // Met à jour l'URL quand on change d'onglet
+    const handleTabChange = (key: TabKey) => {
+        setActiveTab(key)
+        setClassFilter([])
+        const params = new URLSearchParams(window.location.search)
+        if (key === 'Set') params.delete('tab') // onglet par défaut → URL propre
+        else params.set('tab', key)
+        const qs = params.toString()
+        const newUrl = `${window.location.pathname}${qs ? `?${qs}` : ''}`
+        window.history.replaceState(null, '', newUrl)
+    }
 
     // Filtered data
     const filtered = data.filter(item => item.type === activeTab)
@@ -46,11 +70,11 @@ export default function GearUsageStatsClients({ data }: Props) {
             ? filtered
             : classFilter.length === 0
                 ? filtered
-                : filtered.filter(item => item.class === null || classFilter.includes(item.class!))
+                : filtered.filter(item => item.class === null || classFilter.includes(item.class as ClassType))
 
     const top5: GearItem[] = [...filteredByClass].sort((a, b) => b.count - a.count).slice(0, 5)
 
-    const classLabel = (c: (typeof CLASSES_EN)[number]) =>
+    const classLabel = (c: ClassType) =>
         t(`SYS_CLASS_${c.toUpperCase()}` as const)
 
     const currentTabLabel = tabs.find(t => t.key === activeTab)?.label ?? ''
@@ -82,10 +106,7 @@ export default function GearUsageStatsClients({ data }: Props) {
                 <AnimatedTabs<TabKey>
                     tabs={tabs}
                     selected={activeTab}
-                    onSelect={(key: TabKey) => {
-                        setActiveTab(key)
-                        setClassFilter([]) // reset quand on change d’onglet
-                    }}
+                    onSelect={handleTabChange}
                     pillColor="#0ea5e9"
                     scrollable={false}
                     compact={false}
@@ -101,10 +122,10 @@ export default function GearUsageStatsClients({ data }: Props) {
                         className={`border p-1 rounded ${classFilter.length === 0 ? "bg-cyan-500" : "bg-transparent"}`}
                         aria-pressed={classFilter.length === 0}
                     >
-                        <span className="px-2 text-sm font-semibold text-white">{t('characters.common.all')}</span>
+                        <span className="px-2 text-sm font-semibold text-white">{t('filters.common.all')}</span>
                     </button>
 
-                    {CLASSES_EN.map(cl => (
+                    {CLASSES.map(cl => (
                         <button
                             key={cl}
                             onClick={() =>

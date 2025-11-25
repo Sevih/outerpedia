@@ -71,15 +71,39 @@ function extractFromGuideJSON(filePath) {
     const data = JSON.parse(content);
     const characters = new Set();
 
-    // Parcourir toutes les clés (stages: "1-10", "11-13", etc.)
-    Object.values(data).forEach(stageData => {
-      // Si c'est la nouvelle structure avec { team: [...], note: [...] }
+    function processStageData(stageData) {
+      // Si c'est la structure avec { team: [...], note: [...] }
       if (stageData.team && Array.isArray(stageData.team)) {
         extractCharactersFromArray(stageData.team).forEach(char => characters.add(char));
       }
       // Si c'est l'ancienne structure (direct array)
       else if (Array.isArray(stageData)) {
         extractCharactersFromArray(stageData).forEach(char => characters.add(char));
+      }
+      // Extraire les personnages des notes avec le format {P/CharacterName}
+      if (stageData.note && Array.isArray(stageData.note)) {
+        stageData.note.forEach(entry => {
+          if (entry.string) {
+            extractCharactersFromParseTextFormat(entry.string).forEach(char => characters.add(char));
+          }
+          if (entry.items && Array.isArray(entry.items)) {
+            entry.items.forEach(item => {
+              extractCharactersFromParseTextFormat(item).forEach(char => characters.add(char));
+            });
+          }
+        });
+      }
+    }
+
+    // Parcourir toutes les clés (stages: "1-10", "11-13", etc. ou versions: "may2025", "november2025", etc.)
+    Object.values(data).forEach(value => {
+      // Vérifier si c'est une structure versionnée (contient des sous-objets avec team ou des stages)
+      if (value && typeof value === 'object' && !Array.isArray(value) && !value.team) {
+        // C'est probablement une version contenant des stages
+        Object.values(value).forEach(stageData => processStageData(stageData));
+      } else {
+        // C'est directement un stage
+        processStageData(value);
       }
     });
 
@@ -106,6 +130,17 @@ function extractCharactersFromArray(arr) {
   }
 
   return Array.from(characters);
+}
+
+function extractCharactersFromParseTextFormat(text) {
+  const characters = [];
+  // Match {P/CharacterName} format
+  const regex = /\{P\/([^}]+)\}/g;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    characters.push(match[1].trim());
+  }
+  return characters;
 }
 
 function extractFromGuildRaidJSON(filePath, filename) {

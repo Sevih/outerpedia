@@ -6,6 +6,7 @@ import ItemStatsBlock from './ItemStatsBlock'
 import type { TenantKey } from '@/tenants/config'
 import type { ArmorSet } from '@/types/equipment'
 import { l } from '@/lib/localize'
+import { getRarityBg } from '@/utils/gear'
 
 type Lang = TenantKey
 
@@ -63,7 +64,7 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
                 {/* Image avec fond */}
                 <div className="relative w-[80px] h-[80px]">
                   <Image
-                    src="/images/ui/bg_item_leg.webp"
+                    src={getRarityBg(entry.rarity)}
                     alt="background"
                     aria-hidden="true"
                     fill

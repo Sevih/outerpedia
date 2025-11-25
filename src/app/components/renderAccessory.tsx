@@ -128,17 +128,20 @@ export default function renderAccessory(entry: Accessory, lang: Lang = 'en',t: (
       </div>
 
       {/* Stats principales (mapping PEN/HH en %) */}
-      {entry.mainStats && entry.mainStats.length > 0 && (
-        <ItemStatsBlock
-          stats={entry.mainStats.map(stat =>
-            stat === 'PEN' ? 'PEN%' : stat === 'HH' ? 'HH%' : stat
-          )}
-          substats={[]}
-          type="accessories"
-          rare={starLevel}
-          lang={lang}
-        />
-      )}
+      <ItemStatsBlock
+        stats={
+          entry.mainStats && entry.mainStats.length > 0
+            ? entry.mainStats.map(stat =>
+                stat === 'PEN' ? 'PEN%' : stat === 'HH' ? 'HH%' : stat
+              )
+            : ['PEN%', 'SPD', 'HP%', 'ATK%', 'DEF%', 'CHC', 'CHD', 'EVA', 'ACC', 'EFF', 'RES', 'HH%']
+        }
+        substats={[]}
+        type="accessories"
+        rare={starLevel}
+        rarity={entry.rarity}
+        lang={lang}
+      />
 
       {/* Effets */}
       {effect_name && (hasBase || hasT4) && (

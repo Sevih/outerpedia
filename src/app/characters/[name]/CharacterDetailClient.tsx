@@ -7,6 +7,7 @@ import classDataRaw from '@/data/class.json'
 import eeDataRaw from '@/data/ee.json'
 import rawTAGS from '@/data/tags.json'
 import parseText from '@/utils/parseText'
+import { getRarityBg } from '@/utils/gear'
 
 import type { ClassDataMap, StatKey } from '@/types/types'
 import type { ExclusiveEquipment } from '@/types/equipment'
@@ -664,7 +665,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                             id="ee"
                                             className="w-[120px] h-[120px] relative shrink-0 rounded overflow-hidden"
                                             style={{
-                                                backgroundImage: 'url(/images/ui/bg_item_leg.webp)',
+                                                backgroundImage: `url(${getRarityBg()})`,
                                                 backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
                                             }}
                                         >

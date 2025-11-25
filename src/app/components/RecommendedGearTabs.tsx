@@ -12,7 +12,7 @@ import type { AmuletForCard } from "@/app/components/AmuletMiniCard"
 import SetComboCard from "@/app/components/SetComboCard"
 import TalismanMiniCard from "./TalismanMiniCard"
 import rawStats from '@/data/stats.json' assert { type: 'json' }
-import { TenantKey } from "@/tenants/config"
+import { TenantKey, getAvailableLanguages } from "@/tenants/config"
 import { l } from "@/lib/localize"
 import Image from "next/image"
 
@@ -219,10 +219,16 @@ export default function RecommendedGearTabs({
 
   const talismanByName = useMemo(() => {
     const map = new Map<string, Talisman>()
+    const langs = getAvailableLanguages()
     talismans.forEach(t => {
-      if (t.name) map.set(t.name.trim().toLowerCase(), t)
-      if (t.name_jp) map.set(t.name_jp.trim().toLowerCase(), t)
-      if (t.name_kr) map.set(t.name_kr.trim().toLowerCase(), t)
+      // name (en) + name_jp, name_kr, name_zh...
+      for (const lang of langs) {
+        const key = lang === 'en' ? 'name' : `name_${lang}` as keyof Talisman
+        const val = t[key]
+        if (typeof val === 'string' && val.trim()) {
+          map.set(val.trim().toLowerCase(), t)
+        }
+      }
     })
     return map
   }, [talismans])

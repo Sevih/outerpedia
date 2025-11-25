@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import StarLevelItem from '@/app/components/StarLevelItem';
+import { getRarityBg } from '@/utils/gear';
 
 const highlightable = [
     { key: 'stars', label: 'Star Level: from 1★ yellow star to 6★ yellow' },
@@ -39,7 +40,7 @@ export default function EquipmentIntro() {
                     {/* Background (grayed or not) */}
                     <div className={`absolute inset-0 z-0 transition-all duration-300 ${hovered && hovered !== 'rarity' ? 'grayscale opacity-50' : ''}`}>
                         <Image
-                            src="/images/ui/bg_item_leg.webp"
+                            src={getRarityBg()}
                             alt="background"
                             fill
                             sizes="96px"

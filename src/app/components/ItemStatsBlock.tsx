@@ -16,7 +16,9 @@ interface StatsData {
 interface StatRanges {
   [type: string]: {
     [stat: string]: {
-      [rare: string]: number[]
+      [rarity: string]: {
+        [level: string]: number[]
+      }
     }
   }
 }
@@ -29,13 +31,14 @@ interface ItemStatsBlockProps {
   substats?: string[]
   type: string
   rare: number
+  rarity?: string
   lang: TenantKey
 }
 
 const getStatInfo = (code: string) => typedStatsData[code.toUpperCase()]
 
-const getStatRange = (type: string, stat: string, rare: number): [number, number] | null => {
-  const raw = typedRangesData[type]?.[stat]?.[String(rare)]
+const getStatRange = (type: string, stat: string, rarity: string, rare: number): [number, number] | null => {
+  const raw = typedRangesData[type]?.[stat]?.[rarity]?.[String(rare)]
   return raw && raw.length === 2 ? [raw[0], raw[1]] : null
 }
 
@@ -58,13 +61,13 @@ function toSysKey(codeRaw: string): string {
     .toUpperCase()
 }
 
-export default async function ItemStatsBlock({ stats, substats = [], type, rare, lang }: ItemStatsBlockProps) {
+export default async function ItemStatsBlock({ stats, substats = [], type, rare, rarity = 'legendary', lang }: ItemStatsBlockProps) {
   const { t } = await getServerI18n(lang)
 
   const renderStatRow = (statCode: string) => {
     const upper = statCode.toUpperCase()
     const info = getStatInfo(upper)
-    const range = getStatRange(type, upper, rare)
+    const range = getStatRange(type, upper, rarity, rare)
     if (!info) return null
 
     const sysKey = toSysKey(upper)
@@ -85,10 +88,10 @@ export default async function ItemStatsBlock({ stats, substats = [], type, rare,
           </div>
         </td>
         <td className="py-1 px-2 text-center text-neutral-300 w-1/3">
-          {range ? range[0] : t('items.na', { defaultValue: 'N/A' })}
+          {range ? range[0] : 'N/A'}
         </td>
         <td className="py-1 px-2 text-center text-neutral-300 w-1/3">
-          {range ? range[1] : t('items.na', { defaultValue: 'N/A' })}
+          {range ? range[1] : 'N/A'}
         </td>
       </tr>
     )

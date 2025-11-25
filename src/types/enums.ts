@@ -64,3 +64,13 @@ export const SKILL_SOURCES: { key: SkillKey; labelKey: string; labelCompactKey: 
   { key: 'DUAL_ATTACK', labelKey: 'characters.filters.sources.dualAttack', labelCompactKey: 'characters.filters.sources.dualAttackCompact' },
   { key: 'EXCLUSIVE_EQUIP', labelKey: 'characters.filters.sources.exclusiveEquip', labelCompactKey: 'characters.filters.sources.exclusiveEquipCompact' },
 ]
+
+// --- EQUIPMENT TYPES ---
+export type EquipmentInlineType =
+  | 'ee'
+  | 'talisman'
+  | 'weapon'
+  | 'amulet'
+  | 'set'
+
+export const EQUIPMENT_INLINE_TYPES: EquipmentInlineType[] = ['ee', 'talisman', 'weapon', 'amulet', 'set'] as const

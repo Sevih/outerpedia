@@ -5,6 +5,7 @@ import Image from "next/image"
 import type { AmuletMini } from "@/types/equipment"
 import rawStats from "@/data/stats.json"
 import { highlightNumbersOnly } from "@/utils/textHighlighter"
+import { getRarityBg, getRarityTextClass } from "@/utils/gear"
 
 type StatIconMap = {
   [statName: string]: {
@@ -51,7 +52,7 @@ const amuletMiniCard = ({ amulet }: { amulet: AmuletMini }) => {
         <div
           className="w-[48px] h-[48px] rounded shadow-md"
           style={{
-            backgroundImage: "url(/images/ui/bg_item_leg.webp)",
+            backgroundImage: `url(${getRarityBg(amulet.rarity)})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -96,7 +97,7 @@ const amuletMiniCard = ({ amulet }: { amulet: AmuletMini }) => {
         {/* Tooltip */}
         {(amulet.source || amulet.boss || amulet.mode || amulet.effect_name || amulet.effect_desc4) && (
           <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-max max-w-[250px] bg-gray-900 text-white text-[12px] rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow-lg pointer-events-none">
-            <p className="text-red-400 font-bold text-sm leading-tight mb-2">{amulet.name}</p>
+            <p className={`${getRarityTextClass(amulet.rarity)} font-bold text-sm leading-tight mb-2`}>{amulet.name}</p>
 
             <div className="flex justify-between items-center gap-1 mt-1 mb-1">
               {renderStatIcons()}

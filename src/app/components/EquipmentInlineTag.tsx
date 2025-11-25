@@ -9,24 +9,24 @@ import talisman from '@/data/talisman.json'
 import weapon from '@/data/weapon.json'
 import amulet from '@/data/amulet.json'
 import sets from '@/data/sets.json'
-//TODO Utiliser les enums
 
 import type { ExclusiveEquipment, Talisman, Weapon, Accessory, ArmorSet } from '@/types/equipment'
 
 import { ClassIcon } from '@/app/components/ClassIcon'
-import { ClassType } from '@/types/enums'
+import { ClassType, CLASSES, EquipmentInlineType } from '@/types/enums'
+import { getRarityBg, getRarityTextClass } from '@/utils/gear'
 
 // i18n + localize
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
 
 function isValidClass(c: unknown): c is ClassType {
-  return typeof c === 'string' && ['Striker', 'Defender', 'Ranger', 'Healer', 'Mage'].includes(c)
+  return typeof c === 'string' && (CLASSES as readonly string[]).includes(c)
 }
 
 type Props = {
   name: string
-  type: 'ee' | 'talisman' | 'weapon' | 'amulet' | 'set'
+  type: EquipmentInlineType
 }
 
 type EquipmentUnion = ExclusiveEquipment | Talisman | Weapon | Accessory | ArmorSet
@@ -50,6 +50,7 @@ export default function EquipmentInlineTag({ name, type }: Props) {
   let effectText = ''
   let subEffect = ''
   let displayName = name
+  let rarity: string | undefined
 
   let customSetTooltip: React.ReactNode = null
 
@@ -74,6 +75,7 @@ export default function EquipmentInlineTag({ name, type }: Props) {
         iconPath = `/images/characters/ex/${item.icon_effect}.webp`
         effectText = l(item, 'effect', lang)
         subEffect  = l(item, 'effect10', lang)
+        rarity = 'legendary'
       }
       break
     }
@@ -87,6 +89,7 @@ export default function EquipmentInlineTag({ name, type }: Props) {
         iconPath = `/images/equipment/${item.image}.webp`
         effectText = l(item, 'effect_desc1', lang)
         subEffect  = l(item, 'effect_desc4', lang)
+        rarity = item.rarity
       }
       break
     }
@@ -98,6 +101,7 @@ export default function EquipmentInlineTag({ name, type }: Props) {
         displayName = l(item, 'name', lang)
         iconPath = `/images/equipment/${item.image}.webp`
         subEffect  = l(item, 'effect_desc4', lang)
+        rarity = item.rarity
       }
       break
     }
@@ -110,6 +114,7 @@ export default function EquipmentInlineTag({ name, type }: Props) {
         iconPath = `/images/equipment/${item.image}.webp`
         const tier4 = l(item, 'effect_desc4', lang)
         subEffect  = tier4 ? `${t('items.tier4')}: ${tier4}` : ''
+        rarity = item.rarity
       }
       break
     }
@@ -152,6 +157,7 @@ export default function EquipmentInlineTag({ name, type }: Props) {
             )}
           </div>
         )
+        rarity = String(match.rarity)
       }
       break
     }
@@ -164,7 +170,7 @@ export default function EquipmentInlineTag({ name, type }: Props) {
       <HoverCard.Trigger asChild>
         <button
           type="button"
-          className="inline-flex items-end gap-1 align-bottom cursor-pointer underline text-red-500"
+          className={`inline-flex items-end gap-1 align-bottom cursor-pointer underline ${getRarityTextClass(rarity)}`}
         >
           <span className="inline-block w-[24px] h-[24px] relative align-bottom">
             <Image
@@ -186,7 +192,10 @@ export default function EquipmentInlineTag({ name, type }: Props) {
           sideOffset={8}
           className="z-50 px-3 py-2 rounded shadow-lg max-w-[300px] flex items-start gap-2 bg-neutral-800 outline-none"
         >
-          <div className="bg-black p-1 rounded shrink-0">
+          <div
+            className="p-1 rounded shrink-0 relative"
+            style={{ backgroundImage: `url(${getRarityBg(rarity)})`, backgroundSize: 'cover' }}
+          >
             <Image
               src={iconPath}
               alt={displayName}

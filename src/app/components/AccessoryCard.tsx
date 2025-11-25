@@ -10,6 +10,7 @@ import StatIconsRow from "@/app/components/StatIconsRow";
 import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TenantKey } from "@/tenants/config";
 import { l } from "@/lib/localize";
+import { getRarityTextClass } from "@/utils/gear";
 
 function formatEffectTextAndHighlightNum(text: string): React.ReactElement {
   if (!text) return <></>;
@@ -111,7 +112,7 @@ export default function AccessoryCard({
       </div>
 
       {/* Nom (12px) avec split sur '[' ; slug basé sur le nom EN */}
-      <h3 className="text-[12px] font-bold text-red-400 mt-1.5 leading-tight">
+      <h3 className={`text-[12px] font-bold ${getRarityTextClass(accessory.rarity)} mt-1.5 leading-tight`}>
         <Link href={`/item/accessory/${toKebabCase(accessory.name)}`}>
           <span className="hover:underline cursor-pointer">
             {displayName.includes('[') ? (
@@ -128,18 +129,20 @@ export default function AccessoryCard({
       </h3>
 
       {/* Badge effet (11px + icône 13x13) */}
-      <div className="inline-flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full text-[11px] text-white font-medium mt-1">
-        <div className="relative w-[13px] h-[13px]">
-          <Image
-            src={`/images/ui/effect/SC_Buff_Effect_Freeze.webp`}
-            alt={displayEffectName}
-            fill
-            className="object-contain"
-            sizes="13px"
-          />
+      {displayEffectName && (
+        <div className="inline-flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full text-[11px] text-white font-medium mt-1">
+          <div className="relative w-[13px] h-[13px]">
+            <Image
+              src={`/images/ui/effect/SC_Buff_Effect_Freeze.webp`}
+              alt={displayEffectName}
+              fill
+              className="object-contain"
+              sizes="13px"
+            />
+          </div>
+          <span>{displayEffectName}</span>
         </div>
-        <span>{displayEffectName}</span>
-      </div>
+      )}
 
       {/* Indicateur (10px) */}
       <div className="text-white/40 text-[10px] mt-1">{expanded ? "▲" : "▼"}</div>
@@ -147,37 +150,43 @@ export default function AccessoryCard({
       {/* Bloc étendu (11px, titres 12px) */}
       {expanded && (
         <div className="rounded-xl text-[11px] text-white/90 w-full flex flex-col gap-1">
-          {accessory.mainStats?.length > 0 && (
+          {accessory.mainStats && accessory.mainStats.length > 0 && (
             <StatIconsRow statsList={accessory.mainStats} size={18} />
           )}
 
-          <div>
-            <p className="text-cyan-400 font-semibold text-[12px]">
-              {t('items.tier0', { defaultValue: 'Tier 0' })}
-            </p>
-            <p className="leading-snug">
-              {formatEffectTextAndHighlightNum(displayDesc1)}
-            </p>
-          </div>
+          {displayDesc1 && (
+            <div>
+              <p className="text-cyan-400 font-semibold text-[12px]">
+                {t('items.tier0', { defaultValue: 'Tier 0' })}
+              </p>
+              <p className="leading-snug">
+                {formatEffectTextAndHighlightNum(displayDesc1)}
+              </p>
+            </div>
+          )}
 
-          <div>
-            <p className="text-yellow-300 font-semibold text-[12px]">
-              {t('items.tier4', { defaultValue: 'Tier 4' })}
-            </p>
-            <p className="leading-snug">
-              {formatEffectTextAndHighlightNum(displayDesc4)}
-            </p>
-          </div>
+          {displayDesc4 && (
+            <div>
+              <p className="text-yellow-300 font-semibold text-[12px]">
+                {t('items.tier4', { defaultValue: 'Tier 4' })}
+              </p>
+              <p className="leading-snug">
+                {formatEffectTextAndHighlightNum(displayDesc4)}
+              </p>
+            </div>
+          )}
 
-          <div className="mt-1">
-            <p className="text-gray-400 font-semibold text-[10px]">
-              {t('items.obtained', { defaultValue: 'Obtained :' })}
-            </p>
-            <p className="text-gray-400 text-[10px]">
-              {displaySource} <br />
-              {accessory.boss || accessory.mode}
-            </p>
-          </div>
+          {(displaySource || accessory.boss || accessory.mode) && (
+            <div className="mt-1">
+              <p className="text-gray-400 font-semibold text-[10px]">
+                {t('items.obtained', { defaultValue: 'Obtained :' })}
+              </p>
+              <p className="text-gray-400 text-[10px]">
+                {displaySource && <>{displaySource}<br /></>}
+                {accessory.boss || accessory.mode}
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>

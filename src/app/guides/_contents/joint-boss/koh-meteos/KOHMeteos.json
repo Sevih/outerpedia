@@ -1,0 +1,36 @@
+{
+    "november2025": {
+        "default": {
+            "team": []
+        }
+    },
+    "may2025": {
+        "default": {
+            "team": [
+                [
+                    "Demiurge Luna",
+                    "Regina"
+                ],
+                [
+                    "Bryn"
+                ],
+                [
+                    "Gnosis Dahlia",
+                    "Regina",
+                    "Holy Night's Blessing Dianne",
+                    "Ryu Lion"
+                ],
+                [
+                    "Monad Eva",
+                    "Omega Nadja"
+                ]
+            ],
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Any mage can be played on the leftmost position. If you don't own {P/Demiurge Luna} or {P/Regina}, try choosing a {C/Mage} with some {B/BT_ACTION_GAUGE} like {P/Roxie}."
+                }
+            ]
+        }
+    }
+}

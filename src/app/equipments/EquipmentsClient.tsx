@@ -115,7 +115,7 @@ export default function EquipmentsClient({ lang = "en" }: Props) {
     (!accessoryClassFilter || a.class === accessoryClassFilter) &&
     (!accessorySearch || a.name.toLowerCase().includes(accessorySearch.toLowerCase())) &&
     (!accessoryBossFilter || (a.boss || a.mode) === accessoryBossFilter) &&
-    (!accessoryMainStatFilter || a.mainStats.includes(accessoryMainStatFilter))
+    (!accessoryMainStatFilter || !a.mainStats || a.mainStats.includes(accessoryMainStatFilter))
   );
 
   useEffect(() => {

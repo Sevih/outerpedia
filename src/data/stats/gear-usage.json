@@ -605,6 +605,19 @@
     ]
   },
   {
+    "name": "Physical Exorcism",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 5,
+    "characters": [
+      "Edelweiss",
+      "Fatal",
+      "Gnosis Beth",
+      "Holy Night's Blessing Dianne",
+      "Notia"
+    ]
+  },
+  {
     "name": "Snow-white Embrace",
     "type": "Weapon",
     "class": "Striker",
@@ -654,18 +667,6 @@
     ]
   },
   {
-    "name": "Physical Exorcism",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 4,
-    "characters": [
-      "Edelweiss",
-      "Fatal",
-      "Holy Night's Blessing Dianne",
-      "Notia"
-    ]
-  },
-  {
     "name": "Unholy Exsultet",
     "type": "Amulet",
     "class": "Defender",
@@ -686,6 +687,17 @@
       "Fran",
       "Mero",
       "Skadi"
+    ]
+  },
+  {
+    "name": "Burning Soul",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 3,
+    "characters": [
+      "Gnosis Beth",
+      "Mero",
+      "Ryu Lion"
     ]
   },
   {
@@ -796,16 +808,6 @@
     ]
   },
   {
-    "name": "Burning Soul",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 2,
-    "characters": [
-      "Mero",
-      "Ryu Lion"
-    ]
-  },
-  {
     "name": "Charmer's Necklace",
     "type": "Amulet",
     "class": "Defender",
@@ -813,6 +815,16 @@
     "characters": [
       "Christina",
       "Omega Nadja"
+    ]
+  },
+  {
+    "name": "Effectiveness Set",
+    "type": "Set",
+    "class": null,
+    "count": 2,
+    "characters": [
+      "Gnosis Beth",
+      "Iota"
     ]
   },
   {
@@ -928,15 +940,6 @@
     ]
   },
   {
-    "name": "Effectiveness Set",
-    "type": "Set",
-    "class": null,
-    "count": 1,
-    "characters": [
-      "Iota"
-    ]
-  },
-  {
     "name": "Glorious Radiance Orb",
     "type": "Amulet",
     "class": "Striker",
@@ -1042,6 +1045,15 @@
     "count": 1,
     "characters": [
       "Nella"
+    ]
+  },
+  {
+    "name": "Steel Necklace",
+    "type": "Amulet",
+    "class": null,
+    "count": 1,
+    "characters": [
+      "Gnosis Beth"
     ]
   },
   {
@@ -1330,6 +1342,13 @@
     "name": "Sacreed Edge",
     "type": "Weapon",
     "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Steel Sword",
+    "type": "Weapon",
+    "class": null,
     "count": 0,
     "characters": []
   },

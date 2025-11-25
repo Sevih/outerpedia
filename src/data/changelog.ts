@@ -27,6 +27,55 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-11-25",
+    title: {
+      en: "Knight of Hope Meteos",
+      jp: "光明の騎士・メテウス",
+      kr: "광명의 기사 메테우스",
+      zh: "希望骑士梅特乌斯",
+    } as LString,
+    type: "update",
+    url: "/guides/joint-boss/koh-meteos",
+    content: [
+      {
+        en: "Knight of Hope Meteos joint boss guide updated for November 2025 version.",
+        jp: "光明の騎士・メテウス共同ボスガイドが2025年11月版にアップデートされました。",
+        kr: "광명의 기사 메테우스 공동 보스 가이드가 2025년 11월 버전으로 업데이트되었습니다.",
+        zh: "希望骑士梅特乌斯联合首领指南已更新至2025年11月版本。",
+      } as LString,
+    ],
+  },
+  {
+    date: "2025-11-25",
+    title: {
+      en: "Equipment Display Improvements",
+      jp: "装備表示の改善",
+      kr: "장비 표시 개선",
+      zh: "装备显示改进",
+    } as LString,
+    type: "feature",
+    content: [
+      {
+        en: "Dynamic rarity colors and backgrounds for equipment cards based on item rarity (legendary, epic, superior, normal).",
+        jp: "アイテムのレアリティに基づいた装備カードの動的なレアリティカラーと背景（レジェンダリー、エピック、スーペリア、ノーマル）。",
+        kr: "아이템 희귀도에 따른 장비 카드의 동적 희귀도 색상 및 배경(레전더리, 에픽, 슈페리어, 노멀).",
+        zh: "根据物品稀有度（传说、史诗、优秀、普通）动态显示装备卡片的稀有度颜色和背景。",
+      } as LString,
+      {
+        en: "Added stat ranges support for Epic 6-star equipment in weapon and accessory pages.",
+        jp: "武器とアクセサリーページにエピック6つ星装備のステータス範囲サポートを追加。",
+        kr: "무기 및 액세서리 페이지에 에픽 6성 장비의 스탯 범위 지원 추가.",
+        zh: "在武器和配件页面添加了史诗6星装备的属性范围支持。",
+      } as LString,
+      {
+        en: "URL sync for tabs in Gear Usage Statistics page.",
+        jp: "ギア使用統計ページのタブにURL同期を追加。",
+        kr: "장비 사용 통계 페이지의 탭에 URL 동기화 추가.",
+        zh: "装备使用统计页面的标签页URL同步。",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-11-20",
     title: {
       en: "The Frost Legion Guild Raid",

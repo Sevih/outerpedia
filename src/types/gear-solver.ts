@@ -15,7 +15,7 @@ export type ResultEntry = {
 export type GearItem = {
   name: string;
   class?: string | string[] | null;
-  mainStats?: string[];
+  mainStats?: string[] | null;
 };
 
 export type BuildData = {

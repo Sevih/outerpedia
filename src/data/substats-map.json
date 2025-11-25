@@ -3017,6 +3017,86 @@
     }
   },
   "gnosis-beth": {
+    "PvE - Speed": {
+      "weaponSub": [
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "EFF"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "EFF"
+          ]
+        },
+        {
+          "name": "Steel Necklace",
+          "mainStat": [
+            "EFF"
+          ]
+        }
+      ],
+      "sub": [
+        "EFF",
+        "SPD",
+        "ACC",
+        "CHC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "PvE - Effectiveness": {
+      "weaponSub": [
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "EFF"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "EFF"
+          ]
+        },
+        {
+          "name": "Steel Necklace",
+          "mainStat": [
+            "EFF"
+          ]
+        }
+      ],
+      "sub": [
+        "EFF",
+        "SPD",
+        "ACC",
+        "CHC"
+      ],
+      "armorSets": [
+        "Effectiveness"
+      ]
+    },
     "Speed": {
       "weaponSub": [
         {

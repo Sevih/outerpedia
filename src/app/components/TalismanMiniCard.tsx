@@ -7,6 +7,7 @@ import { l } from "@/lib/localize"
 import { useI18n } from "@/lib/contexts/I18nContext"
 import type { Talisman } from "@/types/equipment"
 import { highlightNumbersOnly } from "@/utils/textHighlighter"
+import { getRarityBg, getRarityTextClass } from "@/utils/gear"
 
 // ---- Utils ----
 function ensureWebp(path: string) {
@@ -17,14 +18,6 @@ function ensureWebp(path: string) {
 function normalizeEffectIcon(id?: string | null) {
   if (!id) return null
   return id.startsWith("TI_") ? id : `TI_Icon_UO_Talisman_${id}`
-}
-
-const rarityBgMap: Record<string, string> = {
-  legendary: "/images/ui/bg_item_leg.webp",
-  epic: "/images/ui/bg_item_epic.webp",
-  rare: "/images/ui/bg_item_rare.webp",
-  uncommon: "/images/ui/bg_item_uncommon.webp",
-  common: "/images/ui/bg_item_common.webp",
 }
 
 export default function TalismanMiniCard({ talisman }: { talisman: Talisman }) {
@@ -39,9 +32,7 @@ export default function TalismanMiniCard({ talisman }: { talisman: Talisman }) {
   const effectIconId = normalizeEffectIcon(talisman.effect_icon ?? undefined)
   const equipmentImage = ensureWebp(String(talisman.image ?? ""))
 
-  const bgUrl =
-    rarityBgMap[(talisman.rarity ?? "").toLowerCase()] ??
-    "/images/ui/bg_item_leg.webp"
+  const bgUrl = getRarityBg(talisman.rarity)
 
   const twoLineName =
     locName?.includes("[") && locName?.includes("]") && locName.split("[").length >= 2
@@ -84,7 +75,7 @@ export default function TalismanMiniCard({ talisman }: { talisman: Talisman }) {
         {/* tooltip */}
         {((talisman.source || talisman.boss || talisman.mode) || locEffectName || locTier0 || locTier4) && (
           <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-max max-w-[260px] bg-gray-900 text-white text-[12px] rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow-lg pointer-events-none">
-            <p className="text-red-400 font-bold text-sm leading-tight mb-2">
+            <p className={`${getRarityTextClass(talisman.rarity)} font-bold text-sm leading-tight mb-2`}>
               {locName}
             </p>
 

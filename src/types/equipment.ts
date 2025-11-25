@@ -149,28 +149,28 @@ export interface Accessory {
   rarity: string;                
   image: string;                 
 
-  mainStats: string[];
+  mainStats: string[] | null;
 
-  effect_name: string;
-  effect_name_jp?: string;
-  effect_name_kr?: string;
+  effect_name: string | null;
+  effect_name_jp?: string | null;
+  effect_name_kr?: string | null;
 
-  effect_desc1: string;
-  effect_desc1_jp?: string;
-  effect_desc1_kr?: string;
+  effect_desc1: string | null;
+  effect_desc1_jp?: string | null;
+  effect_desc1_kr?: string | null;
 
-  effect_desc4: string;
-  effect_desc4_jp?: string;
-  effect_desc4_kr?: string;
+  effect_desc4: string | null;
+  effect_desc4_jp?: string | null;
+  effect_desc4_kr?: string | null;
 
-  effect_icon: string;
+  effect_icon: string | null;
 
   class: string | null;
-  source: string;
-  source_jp?: string;
-  source_kr?: string;
+  source?: string | null;
+  source_jp?: string | null;
+  source_kr?: string | null;
 
-  boss: string | null;
+  boss?: string | null;
   mode?: string | null;
   level: number;
 }
@@ -185,23 +185,23 @@ export interface Weapon {
   rarity: string
   image: string
 
-  effect_name: string
-  effect_name_jp?: string
-  effect_name_kr?: string
+  effect_name: string | null
+  effect_name_jp?: string | null
+  effect_name_kr?: string | null
 
-  effect_desc1: string
-  effect_desc1_jp?: string
-  effect_desc1_kr?: string
+  effect_desc1: string | null
+  effect_desc1_jp?: string | null
+  effect_desc1_kr?: string | null
 
-  effect_desc4: string
-  effect_desc4_jp?: string
-  effect_desc4_kr?: string
+  effect_desc4: string | null
+  effect_desc4_jp?: string | null
+  effect_desc4_kr?: string | null
 
-  effect_icon: string
+  effect_icon: string | null
 
-  class: string | null
-  source: string
-  boss: string | null
+  class?: string | null
+  source?: string | null
+  boss?: string | null
   mode?: string | null
   level: number
 }

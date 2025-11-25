@@ -124,7 +124,7 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en', t: (key: 
             </div>
 
             {/* Bloc stats (exemple générique) */}
-            <ItemStatsBlock stats={['ATK']} substats={['ATK%', 'DEF%', 'HP%']} type="weapons" rare={starLevel} lang={lang} />
+            <ItemStatsBlock stats={['ATK']} substats={['ATK%', 'DEF%', 'HP%']} type="weapons" rare={starLevel} rarity={entry.rarity} lang={lang} />
 
             {/* Effets */}
             {effect_name && (hasBaseEffect || hasT4Effect) && (
@@ -155,7 +155,7 @@ export default function renderWeapon(entry: Weapon, lang: Lang = 'en', t: (key: 
             {/* Source / Boss / Mode */}
             <ItemSourceBox
                 itemname={name}
-                source={entry.source}
+                source={entry.source ?? undefined}
                 boss={entry.boss ?? undefined}
                 mode={entry.mode ?? undefined}
             />

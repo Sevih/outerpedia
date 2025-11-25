@@ -3,6 +3,7 @@
 import React from "react"
 import Image from "next/image"
 import { highlightNumbersOnly } from "@/utils/textHighlighter"
+import { getRarityBg } from "@/utils/gear"
 
 type Props = {
   name: string
@@ -11,6 +12,7 @@ type Props = {
   part: "head_chest" | "gloves_boots" | "full"
   effect_2_4?: string | null
   effect_4_4?: string | null
+  rarity?: string
 }
 
 const imageMap = {
@@ -26,6 +28,7 @@ const SetVisual = ({
   part,
   effect_2_4,
   effect_4_4,
+  rarity,
 }: Props) => {
   return (
     <div className="relative group">
@@ -35,7 +38,7 @@ const SetVisual = ({
             key={piece}
             className="relative w-[48px] h-[48px] rounded shadow-md"
             style={{
-              backgroundImage: "url(/images/ui/bg_item_leg.webp)",
+              backgroundImage: `url(${getRarityBg(rarity)})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}

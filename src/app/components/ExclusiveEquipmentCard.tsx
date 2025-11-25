@@ -9,6 +9,7 @@ import formatEffectText from "@/utils/formatText";
 import { useI18n } from "@/lib/contexts/I18nContext";
 import slugToCharJson from "@/data/_SlugToChar.json";
 import { l } from "@/lib/localize";
+import { getRarityBg } from "@/utils/gear";
 
 // --- types ---
 type Props = {
@@ -80,7 +81,7 @@ export default function ExclusiveEquipmentList({ exdata, lang = "en" }: Props) {
               {/* image */}
               <div className="relative w-[60px] h-[60px]">
                 <Image
-                  src="/images/ui/bg_item_leg.webp"
+                  src={getRarityBg()}
                   alt="background"
                   fill
                   sizes="60px"

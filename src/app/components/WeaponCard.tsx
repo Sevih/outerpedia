@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TenantKey } from "@/tenants/config";
 import { l } from "@/lib/localize";
+import { getRarityTextClass } from "@/utils/gear";
 
 
 function formatEffectTextAndHighlightNum(text: string): React.ReactElement {
@@ -122,8 +123,8 @@ export default function WeaponCard({
         )}
       </div>
 
-      {/* Nom de l’arme */}
-      <h3 className="text-[12px] font-bold text-red-400 mt-1.5 leading-tight">
+      {/* Nom de l'arme */}
+      <h3 className={`text-[12px] font-bold ${getRarityTextClass(weapon.rarity)} mt-1.5 leading-tight`}>
         <Link href={`/item/weapon/${toKebabCase(weapon.name)}`}>
           <span className="hover:underline cursor-pointer">
             {displayName.includes("[") ? (
@@ -140,18 +141,20 @@ export default function WeaponCard({
       </h3>
 
       {/* Label effet */}
-      <div className="inline-flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full text-[11px] text-white font-medium mt-1">
-        <div className="relative w-[13px] h-[13px]">
-          <Image
-            src={`/images/ui/effect/SC_Buff_Effect_Freeze.webp`}
-            alt={displayEffectName}
-            fill
-            className="object-contain"
-            sizes="13px"
-          />
+      {displayEffectName && (
+        <div className="inline-flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full text-[11px] text-white font-medium mt-1">
+          <div className="relative w-[13px] h-[13px]">
+            <Image
+              src={`/images/ui/effect/SC_Buff_Effect_Freeze.webp`}
+              alt={displayEffectName}
+              fill
+              className="object-contain"
+              sizes="13px"
+            />
+          </div>
+          <span>{displayEffectName}</span>
         </div>
-        <span>{displayEffectName}</span>
-      </div>
+      )}
 
       {/* Indicateur visuel */}
       <div className="text-white/40 text-[10px] mt-1">{expanded ? "▲" : "▼"}</div>
@@ -159,29 +162,35 @@ export default function WeaponCard({
       {/* Contenu des effets */}
       {expanded && (
         <div className="rounded-xl text-[11px] text-white/90 w-full flex flex-col gap-1">
-          <div>
-            <p className="text-cyan-400 font-semibold text-[12px]">
-              {t('items.tier0', { defaultValue: 'Tier 0' })}
-            </p>
-            <p className="leading-snug">{formatEffectTextAndHighlightNum(displayDesc1)}</p>
-          </div>
-          <div>
-            <p className="text-yellow-300 font-semibold text-[12px]">
-              {t('items.tier4', { defaultValue: 'Tier 4' })}
-            </p>
-            <p className="leading-snug">{formatEffectTextAndHighlightNum(displayDesc4)}</p>
-          </div>
+          {displayDesc1 && (
+            <div>
+              <p className="text-cyan-400 font-semibold text-[12px]">
+                {t('items.tier0', { defaultValue: 'Tier 0' })}
+              </p>
+              <p className="leading-snug">{formatEffectTextAndHighlightNum(displayDesc1)}</p>
+            </div>
+          )}
+          {displayDesc4 && (
+            <div>
+              <p className="text-yellow-300 font-semibold text-[12px]">
+                {t('items.tier4', { defaultValue: 'Tier 4' })}
+              </p>
+              <p className="leading-snug">{formatEffectTextAndHighlightNum(displayDesc4)}</p>
+            </div>
+          )}
 
           {/* Source */}
-          <div className="mt-1">
-            <p className="text-gray-400 font-semibold text-[10px]">
-              {t('items.obtained', { defaultValue: 'Obtained :' })}
-            </p>
-            <p className="text-gray-400 text-[10px]">
-              {weapon.source} <br />
-              {weapon.boss || weapon.mode}
-            </p>
-          </div>
+          {(weapon.source || weapon.boss || weapon.mode) && (
+            <div className="mt-1">
+              <p className="text-gray-400 font-semibold text-[10px]">
+                {t('items.obtained', { defaultValue: 'Obtained :' })}
+              </p>
+              <p className="text-gray-400 text-[10px]">
+                {weapon.source && <>{weapon.source}<br /></>}
+                {weapon.boss || weapon.mode}
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>
