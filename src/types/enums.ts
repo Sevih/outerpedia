@@ -74,3 +74,20 @@ export type EquipmentInlineType =
   | 'set'
 
 export const EQUIPMENT_INLINE_TYPES: EquipmentInlineType[] = ['ee', 'talisman', 'weapon', 'amulet', 'set'] as const
+
+// --- GIFTS ---
+export type GiftType =
+  | 'science'
+  | 'luxury'
+  | 'magic tool'
+  | 'craftwork'
+  | 'natural object'
+
+export const GIFTS: GiftType[] = ['science', 'luxury', 'magic tool', 'craftwork', 'natural object'] as const
+export const GIFT_LABELS = {
+  'science': 'science',
+  'luxury': 'luxury',
+  'magic tool': 'magicTool',
+  'craftwork': 'craftwork',
+  'natural object': 'naturalObject'
+} as const

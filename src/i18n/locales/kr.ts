@@ -594,6 +594,8 @@ const kr = {
   'guides.twitter.desc': '최신 공략: {list}.',
   'guides.spoilerFree.enable': '스포일러 방지 모드 활성화',
   'guides.spoilerFree.disable': '스포일러 방지 모드 비활성화',
+  'guides.al.tabs.regular': '일반 전투',
+  'guides.al.tabs.promotion': '승급 전투',
   'guides.page.h1': '전체 가이드',
   'guides.breadcrumb.home': '홈',
   'guides.jsonld.title': 'Outerplane 가이드 | Outerpedia',
@@ -833,6 +835,21 @@ const kr = {
   'core_fusion.skill_lv_max': '스킬 Lv Max\n코어 융합 패시브 Lv Max',
   'core_fusion.wip_notice': '이 코어 융합 캐릭터 페이지는 아직 개발 중입니다. 일부 정보가 불완전하거나 변경될 수 있습니다.',
   'level': 'Lv',
+
+  // Guide tips presets
+  'tips.tactical': '전술 팁',
+  'tips.strategy': '전략 팁',
+  'tips.general': '일반 전략',
+  'tips.important': '중요 사항',
+  'tips.mechanics': '보스 메카닉',
+  'tips.phase1': '페이즈 1',
+  'tips.phase2': '페이즈 2',
+
+  // Guide sections
+  'guide.recommendedCharacters': '추천 캐릭터',
+  'guide.recommendedTeam': '추천 팀',
+  'guide.combatFootage': '전투 영상',
+  'guide.runProvidedBy': '제공자',
 }
 
 export default kr

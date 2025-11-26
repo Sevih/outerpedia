@@ -13,65 +13,64 @@ export default function YoutubeEmbed({
   startTime?: number
 }) {
   const [play, setPlay] = useState(false)
-  const [thumbnailIndex, setThumbnailIndex] = useState(0)
- //console.log(videoId);
-  if (!videoId) return null
+  const [imageLoaded, setImageLoaded] = useState(false)
 
-  // Cascade de fallbacks - on commence par hqdefault qui est quasi toujours disponible
-  const thumbnailOptions = [
-    `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,     // 480x360 (quasi toujours disponible)
-    `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,     // 320x180
-    `https://img.youtube.com/vi/${videoId}/default.jpg`,       // 120x90 (toujours disponible)
-  ]
+  const cleanVideoId = videoId?.trim()
+  if (!cleanVideoId) return null
 
-  const thumbnail = thumbnailOptions[thumbnailIndex]
-
-  const handleImageError = () => {
-    // Si l'image échoue, passe à la suivante
-    if (thumbnailIndex < thumbnailOptions.length - 1) {
-      setThumbnailIndex(thumbnailIndex + 1)
-    }
-  }
+  // Utilise l'API qui teste côté serveur et redirige vers la bonne thumbnail
+  const thumbnail = `/api/youtube-thumbnail/${cleanVideoId}`
 
   return (
     <div className="w-full rounded overflow-hidden mt-6 aspect-video bg-black">
       {play ? (
         <iframe
           className="w-full h-full"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`}
+          src={`https://www.youtube.com/embed/${cleanVideoId}?autoplay=1&start=${startTime}&rel=0`}
           title={title}
           style={{ border: 'none' }}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          loading="lazy"
         />
       ) : (
         <div
           className="w-full h-full relative cursor-pointer group"
           onClick={() => setPlay(true)}
         >
+          {/* Loader */}
+          {!imageLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-neutral-900">
+              <div className="w-10 h-10 border-4 border-neutral-600 border-t-red-500 rounded-full animate-spin" />
+            </div>
+          )}
+
           <Image
-            key={thumbnail}
             src={thumbnail}
             alt={title}
             fill
-            className="object-contain"
+            className={`object-contain transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             unoptimized
-            onError={handleImageError}
+            priority
+            onLoad={() => setImageLoaded(true)}
           />
 
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-colors duration-200">
-            <div className="w-24 h-16 rounded-[12px] bg-[#FF0000] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="90"
-                height="90"
-                fill="white"
-              >
-                <polygon points="9,7 17,12 9,17" />
-              </svg>
+          {/* Play button overlay - visible seulement quand l'image est chargée */}
+          {imageLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-colors duration-200">
+              <div className="w-24 h-16 rounded-[12px] bg-[#FF0000] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="90"
+                  height="90"
+                  fill="white"
+                >
+                  <polygon points="9,7 17,12 9,17" />
+                </svg>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>

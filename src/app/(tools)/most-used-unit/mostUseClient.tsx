@@ -7,14 +7,13 @@ import Link from 'next/link'
 import { ElementIcon } from '@/app/components/ElementIcon'
 import { ClassIcon } from '@/app/components/ClassIcon'
 import { CharacterPortrait } from '@/app/components/CharacterPortrait'
-import type { ElementType } from '@/types/enums'
-import type { ClassType as classtipe } from '@/types/enums'
+import type { ElementType, ClassType, RarityType } from '@/types/enums'
+import { ELEMENTS, CLASSES, RARITIES } from '@/types/enums'
 import { toKebabCase } from '@/utils/formatText'
 import GuidesRaw from '@/data/guides/guides-ref.json'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
 import type { Localized } from '@/types/common'
-//TODO Utiliser les enums
 
 const GUIDES = GuidesRaw as unknown as Record<string, Guide>
 // Using a flexible character type that allows for missing skills property
@@ -49,13 +48,11 @@ type Guide = {
   second_image?: string
 }
 
-const ELEMENTS: (ElementType | 'All')[] = ['All', 'Fire', 'Water', 'Earth', 'Light', 'Dark']
-const CLASSES: (classtipe | 'All')[] = ['All', 'Striker', 'Defender', 'Ranger', 'Healer', 'Mage']
-const RARITIES = [1, 2, 3] as const
-type Rarity = typeof RARITIES[number]
+const ELEMENTS_WITH_ALL: (ElementType | 'All')[] = ['All', ...ELEMENTS]
+const CLASSES_WITH_ALL: (ClassType | 'All')[] = ['All', ...CLASSES]
 
-function isRarity(x: unknown): x is Rarity {
-  return RARITIES.includes(x as Rarity)
+function isRarity(x: unknown): x is RarityType {
+  return RARITIES.includes(x as RarityType)
 }
 
 
@@ -89,8 +86,8 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [elementFilter, setElementFilter] = useState<ElementType[]>([])
-  const [classFilter, setClassFilter] = useState<classtipe[]>([])
-  const [rarityFilter, setRarityFilter] = useState<Rarity[]>([])
+  const [classFilter, setClassFilter] = useState<ClassType[]>([])
+  const [rarityFilter, setRarityFilter] = useState<RarityType[]>([])
   const [includeLimited, setIncludeLimited] = useState<boolean>(false)
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
 
@@ -149,7 +146,7 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
     }
 
     if (classFilter.length > 0) {
-      filtered = filtered.filter((usage) => classFilter.includes(usage.character.Class as classtipe))
+      filtered = filtered.filter((usage) => classFilter.includes(usage.character.Class as ClassType))
     }
 
     if (rarityFilter.length > 0) {
@@ -263,20 +260,20 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
         <div className="flex justify-center gap-8 flex-wrap">
           {/* Elements */}
           <div className="flex gap-2">
-            {ELEMENTS.map((el) => (
+            {ELEMENTS_WITH_ALL.map((el) => (
               <button
                 key={el}
                 onClick={() =>
                   el === 'All'
                     ? setElementFilter([])
                     : setElementFilter((prev) =>
-                      prev.includes(el as ElementType)
-                        ? prev.filter((v) => v !== (el as ElementType))
-                        : [...prev, el as ElementType]
+                      prev.includes(el)
+                        ? prev.filter((v) => v !== el)
+                        : [...prev, el]
                     )
                 }
                 className={`flex items-center justify-center h-7 rounded border ${(el === 'All' && elementFilter.length === 0) ||
-                  (el !== 'All' && elementFilter.includes(el as ElementType))
+                  (el !== 'All' && elementFilter.includes(el))
                   ? 'bg-cyan-500'
                   : 'bg-gray-700'
                   } hover:bg-cyan-600`}
@@ -285,7 +282,7 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
                 {el === 'All' ? (
                   <span className="text-white text-sm font-bold px-2">{t('filters.common.all')}</span>
                 ) : (
-                  <ElementIcon element={el as ElementType} />
+                  <ElementIcon element={el} />
                 )}
               </button>
             ))}
@@ -293,20 +290,20 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
 
           {/* Classes */}
           <div className="flex gap-2">
-            {CLASSES.map((cl) => (
+            {CLASSES_WITH_ALL.map((cl) => (
               <button
                 key={cl}
                 onClick={() =>
                   cl === 'All'
                     ? setClassFilter([])
                     : setClassFilter((prev) =>
-                      prev.includes(cl as classtipe)
-                        ? prev.filter((v) => v !== (cl as classtipe))
-                        : [...prev, cl as classtipe]
+                      prev.includes(cl)
+                        ? prev.filter((v) => v !== cl)
+                        : [...prev, cl]
                     )
                 }
                 className={`flex items-center justify-center h-7 rounded border ${(cl === 'All' && classFilter.length === 0) ||
-                  (cl !== 'All' && classFilter.includes(cl as classtipe))
+                  (cl !== 'All' && classFilter.includes(cl))
                   ? 'bg-cyan-500'
                   : 'bg-gray-700'
                   } hover:bg-cyan-600`}
@@ -315,7 +312,7 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
                 {cl === 'All' ? (
                   <span className="text-white text-sm font-bold px-2">{t('filters.common.all')}</span>
                 ) : (
-                  <ClassIcon className={cl as classtipe} />
+                  <ClassIcon className={cl} />
                 )}
               </button>
             ))}
@@ -393,7 +390,7 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
                       {t(`SYS_ELEMENT_NAME_${usage.character.Element.toUpperCase()}`)}
                     </span>
                     <span className="flex items-center gap-1">
-                      <ClassIcon className={usage.character.Class as classtipe} size={16} />
+                      <ClassIcon className={usage.character.Class as ClassType} size={16} />
                       {t(`SYS_CLASS_${usage.character.Class.toUpperCase()}`)}
                     </span>
                   </div>

@@ -6,28 +6,26 @@ import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
 import { useTenant } from '@/lib/contexts/TenantContext';
 import { l } from '@/lib/localize';
+import type { WithLocalizedFields } from '@/types/common';
+
+type BaseEffect = {
+  name: string;
+  label: string;
+  description: string;
+  icon: string;
+  type: 'buff' | 'debuff';
+};
+
+type Effect = WithLocalizedFields<WithLocalizedFields<BaseEffect, 'label'>, 'description'>;
 
 const effectsData: Effect[] = [
   ...buffs.map((e) => ({ ...e, type: 'buff' as const })),
   ...debuffs.map((e) => ({ ...e, type: 'debuff' as const }))
 ]
 
-
 type BuffDebuffDisplayProps = {
   buffs?: string[] | string;
   debuffs?: string[] | string;
-};
-
-type Effect = {
-  name: string;
-  label_jp?: string;
-  label_kr?: string;
-  label: string;
-  description: string;
-  description_jp?: string;
-  description_kr?: string;
-  icon: string;
-  type: 'buff' | 'debuff';
 };
 
 export default function BuffDebuffDisplayMini({ buffs = [], debuffs = [] }: BuffDebuffDisplayProps) {

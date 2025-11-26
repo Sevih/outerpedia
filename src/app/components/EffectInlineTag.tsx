@@ -6,6 +6,7 @@ import type { CSSProperties } from 'react'
 import { useTenant } from '@/lib/contexts/TenantContext'
 import { l } from '@/lib/localize'
 import type { BuffName, DebuffName } from '@/types/effect-names'
+import type { WithLocalizedFields } from '@/types/common'
 import buffs from '@/data/buffs.json'
 import debuffs from '@/data/debuffs.json'
 
@@ -21,17 +22,15 @@ type Props =
       triggerStyle?: CSSProperties
     }
 
-type Effect = {
+type BaseEffect = {
   name: string
   type: 'buff' | 'debuff'
   label: string
-  label_jp?: string
-  label_kr?: string
   description: string
-  description_jp?: string
-  description_kr?: string
   icon: string
 }
+
+type Effect = WithLocalizedFields<WithLocalizedFields<BaseEffect, 'label'>, 'description'>
 
 export default function EffectInlineTag({ name, type, triggerStyle }: Props) {
   const { key: lang } = useTenant()

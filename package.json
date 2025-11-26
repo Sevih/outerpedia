@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "8.3.13",
+  "version": "8.3.15",
   "private": true,
   "scripts": {
     "dev": "node scripts/dev-with-webp.js",
@@ -32,9 +32,11 @@
     "migrate:news": "node scripts/migrate-news-to-markdown.mjs",
     "check:news": "node scripts/scrape-all-va-notices.mjs && node scripts/optimize-news-titles",
     "boss:add-buff-debuff": "node scripts/add-buff-debuff.js",
+    "boss:copy-buff-debuff": "python scripts/copy-buff-debuff.py",
     "raid:validate": "node scripts/raid/validate.js",
     "raid:migrate": "node scripts/raid/migrate.js",
-    "raid:list": "node scripts/raid/list.js"
+    "raid:list": "node scripts/raid/list.js",
+    "guide:check": "python scripts/check-guide-format.py"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",

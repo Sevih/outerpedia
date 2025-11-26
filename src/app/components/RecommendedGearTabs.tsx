@@ -221,7 +221,7 @@ export default function RecommendedGearTabs({
     const map = new Map<string, Talisman>()
     const langs = getAvailableLanguages()
     talismans.forEach(t => {
-      // name (en) + name_jp, name_kr, name_zh...
+      // name
       for (const lang of langs) {
         const key = lang === 'en' ? 'name' : `name_${lang}` as keyof Talisman
         const val = t[key]

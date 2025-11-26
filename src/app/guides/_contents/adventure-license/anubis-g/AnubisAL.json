@@ -1,0 +1,56 @@
+{
+    "anubisAL": {
+        "Recommended Team": {
+            "icon": "fire",
+            "team": [
+                [
+                    "Aer"
+                ],
+                [
+                    "Eternal",
+                    "Tamamo-no-Mae"
+                ],
+                [
+                    "Holy Night's Blessing Dianne",
+                    "Kanon"
+                ],
+                [
+                    "Tio"
+                ]
+            ],
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Typically cleared in 1-2 attempts. Verified up to stage 9."
+                }
+            ]
+        },
+        "Burn Team": {
+            "icon": "/images/ui/effect/SC_Buff_Dot_Burn.webp",
+            "team": [
+                [
+                    "Ember"
+                ],
+                [
+                    "Vlada"
+                ],
+                [
+                    "Bell Cranel",
+                    "Maxie"
+                ],
+                [
+                    "Astei",
+                    "Tio"
+                ]
+            ]
+        },
+        "Ember Team": {
+            "icon": "/images/ui/effect/SC_Buff_Dot_Burn.webp",
+            "team": [
+                [
+                    "Ember"
+                ]
+            ]
+        }
+    }
+}

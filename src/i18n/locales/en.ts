@@ -594,6 +594,8 @@ const en = {
   'guides.twitter.desc': 'Latest guides: {list}.',
   'guides.spoilerFree.enable': 'Enable Spoiler-Free Mode',
   'guides.spoilerFree.disable': 'Disable Spoiler-Free Mode',
+  'guides.al.tabs.regular': 'Regular Fight',
+  'guides.al.tabs.promotion': 'Promotion Fight',
   'guides.page.h1': 'All Guides',
   'guides.breadcrumb.home': 'Home',
   'guides.jsonld.title': 'Outerplane Guides | Outerpedia',
@@ -833,6 +835,21 @@ const en = {
   'core_fusion.skill_lv_max': 'Skill Lv Max\nCore-Fused Passive Lv Max',
   'core_fusion.wip_notice': 'This Core Fusion character page is still under development. Some information may be incomplete or subject to change.',
   'level': 'Lv',
+
+  // Guide tips presets
+  'tips.tactical': 'Tactical Tips',
+  'tips.strategy': 'Strategy Tips',
+  'tips.general': 'General Strategy',
+  'tips.important': 'Important Notes',
+  'tips.mechanics': 'Boss Mechanics',
+  'tips.phase1': 'Phase 1',
+  'tips.phase2': 'Phase 2',
+
+  // Guide sections
+  'guide.recommendedCharacters': 'Recommended Characters',
+  'guide.recommendedTeam': 'Recommended Team',
+  'guide.combatFootage': 'Combat Footage',
+  'guide.runProvidedBy': 'Run provided by',
 }
 
 export default en

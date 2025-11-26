@@ -3,6 +3,7 @@
 
 import { useState } from 'react'
 import VersionSelector from '@/app/components/VersionSelector'
+import GuideHeading from '@/app/components/GuideHeading'
 
 type Version = {
   label: string
@@ -44,9 +45,7 @@ export default function GuideTemplate({
   return (
     <div className="guide-content">
       {/* Titre principal visible */}
-      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-sky-400 border-l-4 border-sky-500 pl-4">
-        {title}
-      </h2>
+      <GuideHeading level={2}>{title}</GuideHeading>
 
       {/* Introduction si fournie */}
       {introduction && (

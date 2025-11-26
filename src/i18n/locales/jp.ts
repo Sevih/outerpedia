@@ -594,6 +594,8 @@ const jp = {
   'guides.twitter.desc': '最新ガイド一覧: {list}。',
   'guides.spoilerFree.enable': 'ネタバレ防止モードを有効化',
   'guides.spoilerFree.disable': 'ネタバレ防止モードを無効化',
+  'guides.al.tabs.regular': '通常戦闘',
+  'guides.al.tabs.promotion': '昇格戦闘',
   'guides.page.h1': 'すべてのガイド',
   'guides.breadcrumb.home': 'ホーム',
   'guides.jsonld.title': 'Outerplane 攻略ガイド | Outerpedia',
@@ -833,6 +835,21 @@ const jp = {
   'core_fusion.skill_lv_max': 'スキル Lv Max\nコアフュージョンパッシブLv Max',
   'core_fusion.wip_notice': 'このコアフュージョンキャラクターページは開発中です。一部の情報が不完全または変更される可能性があります。',
   'level': 'Lv',
+
+  // Guide tips presets
+  'tips.tactical': '戦術のヒント',
+  'tips.strategy': '攻略のコツ',
+  'tips.general': '基本戦略',
+  'tips.important': '重要な注意点',
+  'tips.mechanics': 'ボスのメカニズム',
+  'tips.phase1': 'フェーズ1',
+  'tips.phase2': 'フェーズ2',
+
+  // Guide sections
+  'guide.recommendedCharacters': 'おすすめキャラクター',
+  'guide.recommendedTeam': 'おすすめ編成',
+  'guide.combatFootage': '戦闘映像',
+  'guide.runProvidedBy': '提供者',
 }
 
 export default jp

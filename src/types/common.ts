@@ -18,12 +18,12 @@ export type LocalizedOptional = Partial<Record<TenantKey, string>>
 
 /**
  * Type utilitaire pour ajouter des variantes localisées à des champs spécifiques
- * Utilisé pour les objets avec pattern: field, field_jp, field_kr, etc.
+ * Utilisé pour les objets avec pattern: field avec suffixe
  *
  * @example
  * type MyType = { name: string, age: number }
  * type LocalizedMyType = WithLocalizedFields<MyType, 'name'>
- * // Résultat: { name: string, name_jp?: string, name_kr?: string, name_zh?: string, age: number }
+ * //
  */
 export type WithLocalizedFields<T, K extends keyof T> = T & {
   [P in Exclude<TenantKey, 'en'> as `${K & string}_${P}`]?: T[K]
@@ -34,7 +34,7 @@ export type WithLocalizedFields<T, K extends keyof T> = T & {
  * Génère une union de tous les champs base + leurs variantes localisées
  *
  * @example
- * type MyType = { name: string, name_jp?: string, name_kr?: string, age: number }
+ * type MyType = { name avec suffixe: string}
  * type LocalizedKeys = LocalizedFieldNames<MyType, 'name'>
 
  */

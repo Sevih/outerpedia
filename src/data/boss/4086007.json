@@ -21,10 +21,10 @@
   "StatBuffImmune": "ST_DEF,ST_SPEED",
   "location": {
     "dungeon": {
-      "en": "Hard League",
-      "kr": "하드 리그",
-      "jp": "ハードリーグ",
-      "zh": "困难联赛"
+      "en": "Normal League",
+      "kr": "노멀 리그",
+      "jp": "ノーマルリーグ",
+      "zh": "普通联赛"
     },
     "mode": {
       "en": "World Boss",

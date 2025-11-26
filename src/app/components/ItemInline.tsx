@@ -54,10 +54,10 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
         const iconFallback = iconBase.replace(/\.webp$/, '.png');
 
 
-        // Nom localisé via l() : gère name/name_jp/name_kr
+        // Nom localisé via l() : gère name avec suffixe
         const label = l(item, 'name', lang as Lng);
 
-        // Description : accepte soit champs plats *_jp/_kr, soit map {en,jp,kr}
+        // Description : accepte soit champs plats soit map
         const description = isLangMap(item.description)
           ? lRec(item.description, lang as Lng, { allowEmpty: true })
           : l(item, 'description', lang as Lng, { allowEmpty: true });

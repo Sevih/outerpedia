@@ -254,7 +254,7 @@ export default function PullSimClient() {
                     {kind !== 'all' && (
                         <FocusSelect
                             options={focusOptions.map(o => {
-                                const entry: SlugCharEntry | undefined = slugToChar[o.slug]; // { Fullname, Fullname_jp, Fullname_kr, ... }
+                                const entry: SlugCharEntry | undefined = slugToChar[o.slug]; // { Fullname avec suffixe ... }
                                 const enFull = entry?.Fullname ?? o.name;                  // clé pour abbrev.json
                                 const localized = entry ? l(entry, 'Fullname', lang) : o.name;
                                 const ab = abbrev[enFull];

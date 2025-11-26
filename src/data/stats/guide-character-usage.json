@@ -233,17 +233,17 @@
     "category": "adventure-license",
     "guideId": "amadeus-AL",
     "characters": [
-      "Ais Wallenstein",
       "Akari",
-      "Demiurge Luna",
-      "Demiurge Stella",
       "Dianne",
       "Drakhan",
       "Gnosis Beth",
       "Kuro",
-      "Regina",
       "Skadi",
-      "Stella"
+      "Stella",
+      "Demiurge Stella",
+      "Demiurge Luna",
+      "Regina",
+      "Ais Wallenstein"
     ]
   },
   "adventure-license/anubis-g": {
@@ -252,15 +252,15 @@
     "characters": [
       "Aer",
       "Astei",
-      "Bell Cranel",
       "Ember",
       "Eternal",
       "Holy Night's Blessing Dianne",
       "Kanon",
-      "Maxie",
       "Tamamo-no-Mae",
       "Tio",
-      "Vlada"
+      "Vlada",
+      "Bell Cranel",
+      "Maxie"
     ]
   },
   "adventure-license/ars-novaAL": {

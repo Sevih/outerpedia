@@ -66,7 +66,7 @@
     "icon": "SC_Buff_Effect_CP_down"
   },
   {
-    "name": "BT_COOL3_CHARGE",
+    "name": "BT_COOL_CHARGE",
     "category": "utility",
     "label": "Cooldown Increase",
     "label_jp": "スキルターン増加",
@@ -79,13 +79,27 @@
     "icon": "SC_Buff_Cool_Charge"
   },
   {
-    "name": "BT_COOL_CHARGE",
+    "name": "BT_COOL2_CHARGE",
     "category": "utility",
-    "group": "BT_COOL3_CHARGE",
+    "group": "BT_COOL_CHARGE",
     "label": "Cooldown Increase",
     "label_jp": "スキルターン増加",
     "label_kr": "쿨타임 증가",
     "label_zh": "冷却时间增加",
+    "description": "Increases skill cooldowns by a certain number of turns.",
+    "description_jp": "スキルターンを増加させる。",
+    "description_kr": "스킬 쿨타임을 일정 턴 증가시킵니다.",
+    "description_zh": "使技能冷却时间增加一定回合。",
+    "icon": "SC_Buff_Cool_Charge"
+  },
+  {
+    "name": "BT_COOL3_CHARGE",
+    "category": "utility",
+    "group": "BT_COOL_CHARGE",
+    "label": "Cooldown Increase",
+    "label_jp": "スキルターン増加",
+    "label_kr": "쿨타임 증가",
+    "label_zh": "冷却时间増加",
     "description": "Increases skill cooldowns by a certain number of turns.",
     "description_jp": "スキルターンを増加させる。",
     "description_kr": "스킬 쿨타임을 일정 턴 증가시킵니다.",

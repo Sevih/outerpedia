@@ -594,6 +594,8 @@ const zh = {
   'guides.twitter.desc': '最近的指南：{list}.',
   'guides.spoilerFree.enable': '启用防剧透',
   'guides.spoilerFree.disable': '禁用防剧透',
+  'guides.al.tabs.regular': '常规战斗',
+  'guides.al.tabs.promotion': '晋升战斗',
   'guides.page.h1': '全部指南',
   'guides.breadcrumb.home': '主页',
   'guides.jsonld.title': '异域战记指南 | Outerpedia',
@@ -833,6 +835,21 @@ const zh = {
   'core_fusion.skill_lv_max': '技能 Lv Max\n核心融合被动 Lv Max',
   'core_fusion.wip_notice': '此核心融合角色页面仍在开发中。部分信息可能不完整或可能会更改。',
   'level': 'Lv',
+
+  // Guide tips presets
+  'tips.tactical': '战术提示',
+  'tips.strategy': '策略提示',
+  'tips.general': '基本策略',
+  'tips.important': '重要提示',
+  'tips.mechanics': 'Boss机制',
+  'tips.phase1': '阶段1',
+  'tips.phase2': '阶段2',
+
+  // Guide sections
+  'guide.recommendedCharacters': '推荐角色',
+  'guide.recommendedTeam': '推荐队伍',
+  'guide.combatFootage': '战斗视频',
+  'guide.runProvidedBy': '提供者',
 }
 
 export default zh

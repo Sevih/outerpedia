@@ -78,11 +78,7 @@ export function Phase1View({ phase1Data }: Props) {
       {/* Right Column: Boss Data + Strategy */}
       <div className="flex flex-col gap-6 w-full">
         {/* Boss Display with skills from boss data - bossId is the full filename */}
-        <RaidBossDisplay
-          bossKey={activeBoss.bossId}
-          modeKey="guild-raid"
-          defaultBossId={activeBoss.bossId}
-        />
+        <RaidBossDisplay bossKey={activeBoss.bossId} />
 
         {/* Notes if present */}
         {activeBoss.notes && activeBoss.notes.length > 0 && activeBoss.notes.some(note => note.trim() !== '') && (

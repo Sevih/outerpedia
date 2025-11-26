@@ -44,14 +44,14 @@ export const HREFLANG: Record<TenantKey, string> = {
 
 /**
  * Retourne toutes les langues disponibles (depuis TENANTS)
- * Utiliser cette fonction au lieu de hardcoder ['en', 'jp', 'kr', 'zh']
+ * Utiliser cette fonction au lieu de hardcoder 
  */
 export function getAvailableLanguages(): TenantKey[] {
   return Object.keys(TENANTS) as TenantKey[];
 }
 
 /**
- * Retourne les codes de langue pour JSON-LD (ex: ['en', 'ja', 'ko', 'zh'])
+ * Retourne les codes de langue pour JSON-LD
  * Utilise HREFLANG au lieu de TenantKey
  */
 export function getAvailableLanguageCodes(): string[] {
@@ -60,7 +60,7 @@ export function getAvailableLanguageCodes(): string[] {
 
 /**
  * Langues pour lesquelles VA Games publie des notices live
- * Si VA Games ajoute une nouvelle langue (ex: zh), il suffit de l'ajouter ici
+ * Si VA Games ajoute une nouvelle langue  il suffit de l'ajouter ici
  */
 export const VA_AVAILABLE_LANGUAGES = ['en', 'kr', 'jp'] as const;
 export type VALanguage = typeof VA_AVAILABLE_LANGUAGES[number];

@@ -11,13 +11,13 @@ import { ElementIcon } from '@/app/components/ElementIcon'
 import { ClassIcon } from '@/app/components/ClassIcon'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import type { Character } from '@/types/character'
-import type { ClassType as classtipe, ElementType } from '@/types/enums'
+import type { ClassType, ElementType, RarityType } from '@/types/enums'
+import { ELEMENTS, CLASSES, RARITIES } from '@/types/enums'
 import type { LocalizedFieldNames } from '@/types/common'
 import tierListOverwrite from '@/data/stats/tier-list-overwrite.json'
 import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
-//TODO Utiliser les enums
 /* -------------------------------- Types -------------------------------- */
 
 type CharacterDisplay = Pick<
@@ -140,14 +140,11 @@ function matchesCharacterSearch(c: CharacterDisplay, term: string) {
     return false
 }
 
-const ELEMENTS: (ElementType | 'All')[] = ['All', 'Fire', 'Water', 'Earth', 'Light', 'Dark']
-const CLASSES: (classtipe | 'All')[] = ['All', 'Striker', 'Defender', 'Ranger', 'Healer', 'Mage']
-const RARITIES = [1, 2, 3] as const
-type Rarity = typeof RARITIES[number]
+const ELEMENTS_WITH_ALL: (ElementType | 'All')[] = ['All', ...ELEMENTS]
+const CLASSES_WITH_ALL: (ClassType | 'All')[] = ['All', ...CLASSES]
 
-
-function isRarity(x: unknown): x is Rarity {
-    return RARITIES.includes(x as Rarity)
+function isRarity(x: unknown): x is RarityType {
+    return RARITIES.includes(x as RarityType)
 }
 
 const tabColors: Record<TabKey, string> = {
@@ -203,9 +200,9 @@ export default function TierListBase({
 
     const [activeTab, setActiveTab] = useState<TabKey>('all')
     const [searchTerm, setSearchTerm] = useState('')
-    const [classFilter, setClassFilter] = useState<classtipe[]>([])
+    const [classFilter, setClassFilter] = useState<ClassType[]>([])
     const [elementFilter, setElementFilter] = useState<ElementType[]>([])
-    const [rarityFilter, setRarityFilter] = useState<(typeof RARITIES)[number][]>([])
+    const [rarityFilter, setRarityFilter] = useState<RarityType[]>([])
     const [transcendLevel, setTranscendLevel] = useState<number>(3)
 
     // Tabs i18n (dans le composant pour récupérer t())
@@ -236,12 +233,12 @@ export default function TierListBase({
         } catch { }
     }
 
-    // auto-clear “all selected” cases
+    // auto-clear "all selected" cases
     useEffect(() => {
-        if (elementFilter.length === ELEMENTS.length - 1) setElementFilter([])
+        if (elementFilter.length === ELEMENTS.length) setElementFilter([])
     }, [elementFilter])
     useEffect(() => {
-        if (classFilter.length === CLASSES.length - 1) setClassFilter([])
+        if (classFilter.length === CLASSES.length) setClassFilter([])
     }, [classFilter])
     useEffect(() => {
         if (rarityFilter.length === RARITIES.length) setRarityFilter([])
@@ -287,7 +284,7 @@ export default function TierListBase({
             (c) =>
                 matchesCharacterSearch(c, searchTerm) &&
                 (elementFilter.length === 0 || elementFilter.includes(c.Element as ElementType)) &&
-                (classFilter.length === 0 || classFilter.includes(c.Class as classtipe)) &&
+                (classFilter.length === 0 || classFilter.includes(c.Class as ClassType)) &&
                 (rarityFilter.length === 0 || (isRarity(c.Rarity) && rarityFilter.includes(c.Rarity)))
         )
 
@@ -414,27 +411,27 @@ export default function TierListBase({
                 <div className="flex flex-col items-center gap-1">
                     <p className="text-xs uppercase tracking-wide text-slate-300">{t('filters.elements')}</p>
                     <div className="flex gap-2">
-                        {ELEMENTS.map((el) => (
+                        {ELEMENTS_WITH_ALL.map((el) => (
                             <button
                                 key={el}
                                 onClick={() =>
                                     el === 'All'
                                         ? setElementFilter([])
                                         : setElementFilter((prev) =>
-                                            prev.includes(el as ElementType)
-                                                ? prev.filter((v) => v !== (el as ElementType))
-                                                : [...prev, el as ElementType]
+                                            prev.includes(el)
+                                                ? prev.filter((v) => v !== el)
+                                                : [...prev, el]
                                         )
                                 }
                                 className={`flex items-center justify-center h-7 rounded border ${(el === 'All' && elementFilter.length === 0) ||
-                                    (el !== 'All' && elementFilter.includes(el as ElementType))
+                                    (el !== 'All' && elementFilter.includes(el))
                                     ? 'bg-cyan-500'
                                     : 'bg-gray-700'
                                     } hover:bg-cyan-600`}
                                 title={String(el)}
                                 aria-pressed={
                                     (el === 'All' && elementFilter.length === 0) ||
-                                    (el !== 'All' && elementFilter.includes(el as ElementType))
+                                    (el !== 'All' && elementFilter.includes(el))
                                 }
                                 aria-label={
                                     el === 'All'
@@ -447,7 +444,7 @@ export default function TierListBase({
                                         {t('filters.common.all') ?? 'All'}
                                     </span>
                                 ) : (
-                                    <ElementIcon element={el as ElementType} />
+                                    <ElementIcon element={el} />
                                 )}
                             </button>
                         ))}
@@ -458,27 +455,27 @@ export default function TierListBase({
                 <div className="flex flex-col items-center gap-1">
                     <p className="text-xs uppercase tracking-wide text-slate-300">{t('filters.classes')}</p>
                     <div className="flex gap-2">
-                        {CLASSES.map((cl) => (
+                        {CLASSES_WITH_ALL.map((cl) => (
                             <button
                                 key={cl}
                                 onClick={() =>
                                     cl === 'All'
                                         ? setClassFilter([])
                                         : setClassFilter((prev) =>
-                                            prev.includes(cl as classtipe)
-                                                ? prev.filter((v) => v !== (cl as classtipe))
-                                                : [...prev, cl as classtipe]
+                                            prev.includes(cl)
+                                                ? prev.filter((v) => v !== cl)
+                                                : [...prev, cl]
                                         )
                                 }
                                 className={`flex items-center justify-center h-7 rounded border ${(cl === 'All' && classFilter.length === 0) ||
-                                    (cl !== 'All' && classFilter.includes(cl as classtipe))
+                                    (cl !== 'All' && classFilter.includes(cl))
                                     ? 'bg-cyan-500'
                                     : 'bg-gray-700'
                                     } hover:bg-cyan-600`}
                                 title={String(cl)}
                                 aria-pressed={
                                     (cl === 'All' && classFilter.length === 0) ||
-                                    (cl !== 'All' && classFilter.includes(cl as classtipe))
+                                    (cl !== 'All' && classFilter.includes(cl))
                                 }
                                 aria-label={
                                     cl === 'All'
@@ -491,7 +488,7 @@ export default function TierListBase({
                                         {t('filters.common.all') ?? 'All'}
                                     </span>
                                 ) : (
-                                    <ClassIcon className={cl as classtipe} />
+                                    <ClassIcon className={cl} />
                                 )}
                             </button>
                         ))}
@@ -636,7 +633,7 @@ export default function TierListBase({
 
                                                     {/* Class / Element icons */}
                                                     <div className="absolute right-2 z-30" style={{ bottom: '3.125rem' }}>
-                                                        <ClassIcon className={char.Class as classtipe} />
+                                                        <ClassIcon className={char.Class as ClassType} />
                                                     </div>
                                                     <div className="absolute right-1.5 z-30" style={{ bottom: '1.375rem' }}>
                                                         <ElementIcon element={char.Element as ElementType} />

@@ -47,6 +47,10 @@ const ICON_MAPPING: Record<string, string> = {
   'grand-calamari': 'Armor_Dark',
 };
 
+// Slugs par catégorie (basé sur ICON_MAPPING)
+const IDENTIFICATION_SLUGS = ['beatles', 'glicys', 'meteos', 'ars-nova', 'amadeus'];
+const ECOLOGY_SLUGS = ['guardian', 'tyrant', 'chimera', 'sacreed', 'grand-calamari'];
+
 // Récompenses par boss
 const BOSS_REWARDS: Record<string, string[]> = {
   // Identification missions (5 accessoires chacune) - ordre inversé pour dir="rtl"
@@ -120,21 +124,21 @@ export default function SpecialReqCardGrid({ items }: Props) {
 
   // Séparer les items par catégorie
   const { identificationItems, ecologyItems } = useMemo(() => {
-    const mappingOrder = Object.keys(ICON_MAPPING);
-
-    const sortItems = (itemsList: GuideItem[]) =>
+    const sortItems = (itemsList: GuideItem[], slugOrder: string[]) =>
       itemsList.sort((a, b) => {
-        const indexA = mappingOrder.indexOf(a.slug);
-        const indexB = mappingOrder.indexOf(b.slug);
+        const indexA = slugOrder.indexOf(a.slug);
+        const indexB = slugOrder.indexOf(b.slug);
         return indexA - indexB;
       });
 
     const identification = sortItems(
-      items.filter((item) => item.description.toLowerCase().includes('identification'))
+      items.filter((item) => IDENTIFICATION_SLUGS.includes(item.slug)),
+      IDENTIFICATION_SLUGS
     );
 
     const ecology = sortItems(
-      items.filter((item) => item.description.toLowerCase().includes('ecology study'))
+      items.filter((item) => ECOLOGY_SLUGS.includes(item.slug)),
+      ECOLOGY_SLUGS
     );
 
     return { identificationItems: identification, ecologyItems: ecology };

@@ -4,9 +4,14 @@ import { useEffect, useState, useRef, useMemo, useDeferredValue } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import type { CharacterLite, RoleType } from '@/types/types'
+import type { CharacterLite } from '@/types/types'
 import { toKebabCase } from '@/utils/formatText'
-import type { ElementType, ClassType } from '@/types/enums'
+import {
+  type ElementType, type ClassType, type RoleType, type SkillKey,
+  ELEMENTS as ELEMENTS_ENUM, CLASSES as CLASSES_ENUM, CHAIN_TYPES, CHAIN_TYPE_LABELS,
+  RARITIES as RARITIES_ENUM, ROLES, GIFTS as GIFTS_ENUM, GIFT_LABELS, SKILL_SOURCES
+} from '@/types/enums'
+import type { WithLocalizedFields } from '@/types/common'
 import { groupEffects } from '@/utils/groupEffects'
 import SearchBar from '@/app/components/SearchBar'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
@@ -18,33 +23,23 @@ import { getAvailableLanguages } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
 
-//TODO : Utiliser les enums
-
 // Type for buff/debuff data structure
-type EffectFullData = {
+type BaseEffectFullData = {
   name: string
   category?: string
   group?: string
   label: string
-  label_jp?: string
-  label_kr?: string
   description: string
-  description_jp?: string
-  description_kr?: string
   icon: string
 }
+type EffectFullData = WithLocalizedFields<WithLocalizedFields<BaseEffectFullData, 'label'>, 'description'>
 
 // Type for effect categories data structure
-type EffectCategory = {
+type BaseEffectCategory = {
   label: string
-  label_jp?: string
-  label_kr?: string
-  label_zh?: string
   description: string
-  description_jp?: string
-  description_kr?: string
-  description_zh?: string
 }
+type EffectCategory = WithLocalizedFields<WithLocalizedFields<BaseEffectCategory, 'label'>, 'description'>
 
 type EffectCategoriesData = {
   buff: Record<string, EffectCategory>
@@ -97,7 +92,7 @@ type Payload = {
   el?: string[]; cl?: string[]; r?: number[]; chain?: string[]; gift?: string[];
   buffs?: string[]; debuffs?: string[];
   logic?: 'AND' | 'OR'; q?: string; uniq?: boolean; role?: string[]; tags?: string[]; tagLogic?: 'AND' | 'OR'
-  sources?: SourceKey[]  // NEW: source filters
+  sources?: SkillKey[]
 }
 type ZPayload = {
   e?: number[]
@@ -117,81 +112,8 @@ type ZPayload = {
 }
 
 
-// ===== Constants
-const ELEMENTS = [
-  { name: 'All', value: null },
-  { name: 'Fire', value: 'Fire' },
-  { name: 'Water', value: 'Water' },
-  { name: 'Earth', value: 'Earth' },
-  { name: 'Light', value: 'Light' },
-  { name: 'Dark', value: 'Dark' },
-] as const
-
-const CLASSES = [
-  { name: 'All', value: null },
-  { name: 'Striker', value: 'Striker' },
-  { name: 'Defender', value: 'Defender' },
-  { name: 'Ranger', value: 'Ranger' },
-  { name: 'Healer', value: 'Healer' },
-  { name: 'Mage', value: 'Mage' },
-] as const
-
-const RARITIES = [
-  { label: 'All', value: null },
-  { label: 1, value: 1 },
-  { label: 2, value: 2 },
-  { label: 3, value: 3 },
-] as const
-
-const CHAINS = [
-  { name: 'All', value: null },
-  { name: 'Starter', value: 'Start' },
-  { name: 'Companion', value: 'Join' },
-  { name: 'Finisher', value: 'Finish' },
-] as const
-
-const GIFTS = [
-  { name: 'All', value: null },
-  { name: 'Science', value: 'science' },
-  { name: 'Luxury', value: 'luxury' },
-  { name: 'Magic Tool', value: 'magic tool' },
-  { name: 'Craftwork', value: 'craftwork' },
-  { name: 'Natural Object', value: 'natural object' },
-] as const
-
-// en haut du fichier, OK ici
-const ELEMENT_VALUES = ['Fire', 'Water', 'Earth', 'Light', 'Dark'] as const
-const CLASS_VALUES = ['Striker', 'Defender', 'Ranger', 'Healer', 'Mage'] as const
-
-const CHAINS_VALUES = [
-  { value: 'Start', key: 'starter' },
-  { value: 'Join', key: 'companion' },
-  { value: 'Finish', key: 'finisher' },
-] as const
-
-const GIFTS_VALUES = [
-  { value: 'science', key: 'science' },
-  { value: 'luxury', key: 'luxury' },
-  { value: 'magic tool', key: 'magicTool' },
-  { value: 'craftwork', key: 'craftwork' },
-  { value: 'natural object', key: 'naturalObject' },
-] as const
-
-type RoleSlug = 'dps' | 'support' | 'sustain'
-const ROLE_VALUES: RoleSlug[] = ['dps', 'support', 'sustain']
-const isRoleSlug = (v: unknown): v is RoleSlug =>
-  v === 'dps' || v === 'support' || v === 'sustain'
-
-// ===== Source filters
-type SourceKey = 'SKT_FIRST' | 'SKT_SECOND' | 'SKT_ULTIMATE' | 'SKT_CHAIN_PASSIVE' | 'DUAL_ATTACK' | 'EXCLUSIVE_EQUIP'
-const SOURCE_VALUES: { key: SourceKey; labelKey: string }[] = [
-  { key: 'SKT_FIRST', labelKey: 'characters.filters.sources.skill1' },
-  { key: 'SKT_SECOND', labelKey: 'characters.filters.sources.skill2' },
-  { key: 'SKT_ULTIMATE', labelKey: 'characters.filters.sources.skill3' },
-  { key: 'SKT_CHAIN_PASSIVE', labelKey: 'characters.filters.sources.chainPassive' },
-  { key: 'DUAL_ATTACK', labelKey: 'characters.filters.sources.dualAttack' },
-  { key: 'EXCLUSIVE_EQUIP', labelKey: 'characters.filters.sources.exclusiveEquip' },
-]
+// ===== Helper to check role type
+const isRoleType = (v: unknown): v is RoleType => ROLES.includes(v as RoleType)
 
 // ===== Small helpers
 const isArr = <T,>(v: T[] | undefined): v is T[] => Array.isArray(v) && v.length > 0
@@ -209,7 +131,7 @@ function charHasEffect(char: CharacterLite, filterEffect: string, type: 'buff' |
   // Direct match
   if (charEffects.includes(filterEffect)) return true
 
-  // Check if any of the character's effects belong to the same group as filterEffect
+  // Check if the character's effects belong to the same group as filterEffect
   for (const charEffect of charEffects) {
     const charGroup = effectGroupMap.get(charEffect)
     if (charGroup && charGroup === filterEffect) {
@@ -225,14 +147,14 @@ function charHasEffectFromSources(
   char: CharacterLite,
   filterEffect: string,
   type: 'buff' | 'debuff',
-  sources: SourceKey[]
+  sources: SkillKey[]
 ): boolean {
   // If no sources specified, use original function
   if (sources.length === 0) {
     return charHasEffect(char, filterEffect, type)
   }
 
-  // Check if character has the effect in any of the specified sources
+  // Check if character has the effect in the specified sources
   if (!char.effectsBySource) {
     return charHasEffect(char, filterEffect, type)
   }
@@ -294,7 +216,7 @@ function decodeZToState(z?: string): Partial<Payload> | null {
       q: raw.q,
       uniq: raw.u === 1,
       tagLogic: raw.tl === 1 ? 'AND' : 'OR',
-      sources: (raw.src ?? []) as SourceKey[],  // NEW: decode sources
+      sources: (raw.src ?? []) as SkillKey[],
     }
   } catch (e) {
     if (process.env.NODE_ENV !== 'production') console.warn('[Characters] decodeZToState failed', e)
@@ -392,7 +314,7 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
   const [rarityFilter, setRarityFilter] = useState<number[]>([])
   const [chainFilter, setChainFilter] = useState<string[]>([])
   const [giftFilter, setGiftFilter] = useState<string[]>([])
-  const [roleFilter, setRoleFilter] = useState<RoleSlug[]>([])
+  const [roleFilter, setRoleFilter] = useState<RoleType[]>([])
   // state
   const [tagFilter, setTagFilter] = useState<string[]>([])
   const [tagLogic, setTagLogic] = useState<'AND' | 'OR'>('OR') // +++
@@ -404,7 +326,7 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
   const [allDebuffs, setAllDebuffs] = useState<string[]>([])
 
   // NEW: Source filters
-  const [sourceFilter, setSourceFilter] = useState<SourceKey[]>([])
+  const [sourceFilter, setSourceFilter] = useState<SkillKey[]>([])
 
   const [showUniqueEffects, setShowUniqueEffects] = useState<boolean>(false)
   const [showFilters, setShowFilters] = useState(false)
@@ -446,27 +368,27 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
 
   const ELEMENTS_UI = useMemo(() => ([
     { name: t('filters.common.all'), value: null as string | null },
-    ...ELEMENT_VALUES.map(v => ({ name: v, value: v })),
+    ...ELEMENTS_ENUM.map(v => ({ name: v, value: v })),
   ]), [t])
 
   const CLASSES_UI = useMemo(() => ([
     { name: t('filters.common.all'), value: null as string | null },
-    ...CLASS_VALUES.map(v => ({ name: v, value: v })),
+    ...CLASSES_ENUM.map(v => ({ name: v, value: v })),
   ]), [t])
 
   const CHAINS_UI = useMemo(() => ([
     { name: t('filters.common.all'), value: null as string | null },
-    ...CHAINS_VALUES.map(x => ({ name: t(`characters.chains.${x.key}`), value: x.value })),
+    ...CHAIN_TYPES.map(v => ({ name: t(`characters.chains.${CHAIN_TYPE_LABELS[v]?.toLowerCase()}`), value: v })),
   ]), [t])
 
   const GIFTS_UI = useMemo(() => ([
     { name: t('filters.common.all'), value: null as string | null },
-    ...GIFTS_VALUES.map(x => ({ name: t(`characters.gifts.${x.key}`), value: x.value })),
+    ...GIFTS_ENUM.map(v => ({ name: t(`characters.gifts.${GIFT_LABELS[v]}`), value: v })),
   ]), [t])
 
   const ROLES_UI = useMemo(() => ([
-    { name: t('filters.common.all'), value: null as RoleSlug | null },
-    ...ROLE_VALUES.map(v => ({ name: t(`filters.roles.${v}`), value: v })),
+    { name: t('filters.common.all'), value: null as RoleType | null },
+    ...ROLES.map(v => ({ name: t(`filters.roles.${v}`), value: v })),
   ]), [t])
 
   const buffGroups = useMemo(() => {
@@ -509,7 +431,7 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
     setRawQuery(p.q ?? '')
     setEffectLogic(p.logic === 'AND' || p.logic === 'OR' ? p.logic : 'OR')
     setShowUniqueEffects(Boolean(p.uniq))
-    setRoleFilter((p.role ?? []).filter(isRoleSlug))
+    setRoleFilter((p.role ?? []).filter(isRoleType))
     setTagFilter((p.tags ?? []))
     setTagLogic(p.tagLogic === 'AND' || p.tagLogic === 'OR' ? p.tagLogic : 'OR')
     setSourceFilter(p.sources ?? [])  // NEW
@@ -548,23 +470,22 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
 
   // 3) Normalize "All"
   useEffect(() => {
-    const all = ['DPS', 'Support', 'Sustain'] as RoleType[]
-    if (roleFilter.length === all.length) setRoleFilter([])
+    if (roleFilter.length === ROLES.length) setRoleFilter([])
   }, [roleFilter])
   useEffect(() => {
-    const all = ELEMENTS.slice(1).map(e => e.value!); if (elementFilter.length === all.length) setElementFilter([])
+    if (elementFilter.length === ELEMENTS_ENUM.length) setElementFilter([])
   }, [elementFilter])
   useEffect(() => {
-    const all = CLASSES.slice(1).map(c => c.value!); if (classFilter.length === all.length) setClassFilter([])
+    if (classFilter.length === CLASSES_ENUM.length) setClassFilter([])
   }, [classFilter])
   useEffect(() => {
-    const all = RARITIES.slice(1).map(r => r.value!); if (rarityFilter.length === all.length) setRarityFilter([])
+    if (rarityFilter.length === RARITIES_ENUM.length) setRarityFilter([])
   }, [rarityFilter])
   useEffect(() => {
-    const all = CHAINS.slice(1).map(c => c.value!); if (chainFilter.length === all.length) setChainFilter([])
+    if (chainFilter.length === CHAIN_TYPES.length) setChainFilter([])
   }, [chainFilter])
   useEffect(() => {
-    const all = GIFTS.slice(1).map(g => g.value!); if (giftFilter.length === all.length) setGiftFilter([])
+    if (giftFilter.length === GIFTS_ENUM.length) setGiftFilter([])
   }, [giftFilter])
 
   // 3.5) Lazy load metadata when filters panel opens
@@ -652,7 +573,7 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
       if (!effectMatch) return false
 
       // Role matching
-      if (roleFilter.length && (!char.role || !roleFilter.includes(char.role as RoleSlug))) return false
+      if (roleFilter.length && (!char.role || !roleFilter.includes(char.role as RoleType))) return false
 
       // Tag matching
       if (tagFilter.length) {
@@ -785,7 +706,7 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
                   (r.value !== null && roleFilter.includes(r.value))
                 }
                 onClick={() => {
-                  const val = r.value; // RoleSlug | null
+                  const val = r.value; // RoleType | null
                   if (val === null) {
                     setRoleFilter([]);           // reset "All"
                     return;
@@ -845,7 +766,7 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
             <div className="flex flex-col items-center gap-2">
               <p className="text-xs text-slate-300">{t('characters.filters.sources.filterBySource')}</p>
               <div className="flex flex-wrap gap-2 justify-center">
-                {SOURCE_VALUES.map(source => (
+                {SKILL_SOURCES.map(source => (
                   <FilterPill
                     key={source.key}
                     active={sourceFilter.includes(source.key)}

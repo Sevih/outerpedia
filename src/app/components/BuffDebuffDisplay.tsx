@@ -6,6 +6,18 @@ import buffs from '@/data/buffs.json';
 import debuffs from '@/data/debuffs.json';
 import { useTenant } from '@/lib/contexts/TenantContext';
 import { l } from '@/lib/localize';
+import type { WithLocalizedFields } from '@/types/common';
+
+type BaseEffect = {
+  name: string;
+  label: string;
+  description: string;
+  icon: string;
+  type: 'buff' | 'debuff';
+  group?: string; // Group name if this effect is a variant
+};
+
+type Effect = WithLocalizedFields<WithLocalizedFields<BaseEffect, 'label'>, 'description'>;
 
 const effectsData: Effect[] = [
   ...buffs.map((e) => ({ ...e, type: 'buff' as const })),
@@ -16,19 +28,6 @@ export type BuffDebuffDisplayProps = {
   buffs?: string[] | string;
   debuffs?: string[] | string;
   hideVariants?: boolean; // Hide variant effects and show only main groups (default: true)
-};
-
-type Effect = {
-  name: string;
-  label_jp?: string;
-  label_kr?: string;
-  label: string;
-  description: string;
-  description_jp?: string;
-  description_kr?: string;
-  icon: string;
-  type: 'buff' | 'debuff';
-  group?: string; // Group name if this effect is a variant
 };
 
 export default function BuffDebuffDisplay({ buffs = [], debuffs = [], hideVariants = true }: BuffDebuffDisplayProps) {

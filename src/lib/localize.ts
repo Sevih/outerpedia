@@ -15,8 +15,7 @@ const isNonEmpty = (v: unknown): v is string =>
   typeof v === 'string' && v.trim().length > 0;
 
 /**
- * l() - Localise un champ "plat" avec suffixes `_jp` / `_kr` (EN = base).
- * Exemples: name, name_jp, name_kr  |  Fullname, Fullname_jp, Fullname_kr
+ * l() - Localise un champ "plat" avec suffixes (EN = base).
  */
 export function l<T extends object>(
   obj: T,
@@ -65,7 +64,7 @@ export function lRec(
  */
 export function makeLocalizer(lang: TenantKey) {
   return {
-    /** Pour objets plats avec suffixes (_jp/_kr) */
+    /** Pour objets plats avec suffixes */
     field<T extends Record<string, unknown>>(
       obj: T,
       baseKey: string,
@@ -73,7 +72,7 @@ export function makeLocalizer(lang: TenantKey) {
     ) {
       return l(obj, baseKey, lang, opts);
     },
-    /** Pour objets { en, jp, kr } */
+    /** Pour objets { en, .. } */
     map(rec: LangMap | string | undefined | null, opts?: Opts) {
       return lRec(rec, lang, opts);
     },
@@ -92,7 +91,7 @@ export function lSubMap<T>(
   const langSuffixes = getAvailableLanguages().filter(l => l !== 'en').join('|')
   const langPattern = new RegExp(`^(.+?)_(${langSuffixes})$`)
 
-  // collecter toutes les racines: "2" à partir de "2", "2_jp", "2_kr", "2_zh"…
+  // collecter toutes les racines
   const roots = new Set<string>()
   for (const k of keys) {
     const m = k.match(langPattern)
@@ -117,8 +116,7 @@ export function lEnhancement(
 }
 
 /**
- * lArray() - Localise un champ tableau avec suffixes `_jp` / `_kr` (EN = base).
- * Exemples: pro, pro_jp, pro_kr | con, con_jp, con_kr
+ * lArray() - Localise un champ tableau avec suffixes (EN = base).
  * Retourne un tableau vide si aucune valeur n'est trouvée.
  */
 export function lArray<T extends object>(

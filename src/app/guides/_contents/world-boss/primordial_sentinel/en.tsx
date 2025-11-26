@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useCallback } from 'react'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
@@ -9,22 +8,28 @@ import ElementInlineTag from '@/app/components/ElementInline'
 import GuideHeading from '@/app/components/GuideHeading'
 import ClassInlineTag from '@/app/components/ClassInlineTag'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import BossDisplay from '@/app/components/BossDisplay'
-import MiniBossDisplay from '@/app/components/MiniBossDisplay'
+import { WorldBossDisplay } from '@/app/components/boss'
 import PrimordialSentinelTeamsData from './PrimordialSentinel.json'
 import type { TeamData } from '@/types/team'
 
 const PrimordialSentinelTeams = PrimordialSentinelTeamsData as Record<string, TeamData>
 
-export default function PrimordialSentinelGuide() {
-  const [selectedMode, setSelectedMode] = useState('World Boss')
-  const [miniBossId, setMiniBossId] = useState('4086012')
+const primordialSentinelNovember2025 = {
+  boss1Key: 'Primordial Sentinel',
+  boss2Key: 'Glorious Sentinel',
+  boss1Ids: {
+    'Normal': '4086007',
+    'Very Hard': '4086009',
+    'Extreme': '4086011'
+  },
+  boss2Ids: {
+    'Hard': '4086008',
+    'Very Hard': '4086010',
+    'Extreme': '4086012'
+  }
+} as const
 
-  const handleBossChange = useCallback((primordialId: string) => {
-    // Primordial IDs are 4086007/4086009/4086011, Glorious IDs are +1 (4086008/4086010/4086012)
-    const gloriousId = String(Number(primordialId) + 1)
-    setMiniBossId(gloriousId)
-  }, [])
+export default function PrimordialSentinelGuide() {
 
   return (
     <GuideTemplate
@@ -37,36 +42,19 @@ export default function PrimordialSentinelGuide() {
           content: (
             <>
               <GuideHeading level={3}>Skills Overview</GuideHeading>
+              <WorldBossDisplay config={primordialSentinelNovember2025} defaultMode="Extreme" />
+
+              <GuideHeading level={3}>Recommended Characters</GuideHeading>
 
               <GuideHeading level={4}>Phase 1: Primordial Sentinel</GuideHeading>
-              <BossDisplay
-                bossKey='Primordial Sentinel'
-                modeKey='World Boss'
-                defaultBossId='4086011'
-                onModeChange={setSelectedMode}
-                onBossChange={handleBossChange}
-              />
-
-              <GuideHeading level={4}>Recommended Characters</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
                 <li><CharacterLinkCard name="Iota" /> <CharacterLinkCard name="Stella" /> : for <EffectInlineTag name='BT_ACTION_GAUGE' type='debuff' /></li>
                 <li><CharacterLinkCard name="Notia" /> <CharacterLinkCard name="Fran" /> : for <EffectInlineTag name='BT_ACTION_GAUGE' type='buff' /></li>
                 <li><CharacterLinkCard name="Valentine" /> : for both <EffectInlineTag name='BT_ACTION_GAUGE' type='buff' /> and <EffectInlineTag name='BT_ACTION_GAUGE' type='debuff' /></li>
                 <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Demiurge Delta" /> <CharacterLinkCard name="Saeran" /> <CharacterLinkCard name="Tio" /> <CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Astei" /> : <ClassInlineTag name='Healer' /> with <EffectInlineTag name='BT_ACTION_GAUGE' type='buff' /></li>
               </ul>
-              
-              <hr className="my-6 border-neutral-700" />
 
               <GuideHeading level={4}>Phase 2: Glorious Sentinel</GuideHeading>
-              <MiniBossDisplay
-                bosses={[
-                  { bossKey: 'Glorious Sentinel', defaultBossId: miniBossId }
-                ]}
-                modeKey='World Boss'
-                controlledMode={selectedMode}
-              />
-
-              <GuideHeading level={4}>Recommended Characters</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
                 <li><CharacterLinkCard name="Monad Eva" /> <CharacterLinkCard name="Viella" /> : <ClassInlineTag name='Healer' /> with <EffectInlineTag name='BT_CALL_BACKUP' type='buff' /></li>
                 <li><CharacterLinkCard name="Demiurge Luna" /> <CharacterLinkCard name="Regina" /> : <ClassInlineTag name='Mage' /> with <EffectInlineTag name='BT_ACTION_GAUGE' type='buff' /> on their S1.</li>

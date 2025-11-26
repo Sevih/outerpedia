@@ -93,6 +93,7 @@ robots.txt
 /src/data/oldguide*
 audit.txt
 .claude/
+CLAUDE.md
 templetbinaryfolder.lnk
 report.txt
 /optimizer
@@ -100,3 +101,8 @@ src/data/boss/index.json
 scripts/README-add-buff-debuff.md
 .temp/missing-partners.json
 .temp/missing-pros-cons.json
+scripts/guide-format-report.json
+scripts/completed-bosses.json
+scripts/check-guide-format.py
+scripts/completed-bosses.json
+scripts/copy-buff-debuff.py

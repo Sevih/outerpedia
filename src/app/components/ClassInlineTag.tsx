@@ -37,7 +37,7 @@ export default function ClassInlineTag({ name, subclass, notext = false }: Props
   const hasSubclass = !!(subclass && classData.subclasses?.[subclass])
   const displayKey = hasSubclass ? subclass! : name
 
-  // 🧩 Clés i18n dynamiques
+  // Clés i18n dynamiques
   const translationKey = hasSubclass
     ? `SYS_CLASS_NAME_${displayKey.toUpperCase()}`
     : `SYS_CLASS_${displayKey.toUpperCase()}`
@@ -58,7 +58,7 @@ export default function ClassInlineTag({ name, subclass, notext = false }: Props
           className="object-contain"
         />
       </span>
-      {!notext && <span>{label}</span>}
+      {!notext && <span className="text-orange-400">{label}</span>}
     </span>
   )
 }

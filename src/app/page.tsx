@@ -7,6 +7,7 @@ import HomeClient from './HomeClient'
 import NewToBox from './components/home/NewToBox'
 import HowToPlayBox from './components/home/HowToPlayBox'
 import CategoriesBox from './components/home/CategoriesBox'
+import RecentUpdates from './components/home/RecentUpdates'
 import { getServerI18n } from '@/lib/contexts/server-i18n' // ✅ chemin corrigé
 import { getTenantServer } from '@/tenants/tenant.server'
 
@@ -55,9 +56,15 @@ export default async function Home() {
       </section>
 
       {/* Corps principal */}
-      <div className="flex flex-col md:flex-row justify-between gap-8 px-4 md:px-16">
-        {/* Colonne gauche */}
-        <div className="flex flex-col gap-8 w-full md:w-3/5">
+      <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 px-4 md:px-16">
+        {/* Colonne droite - en premier sur mobile */}
+        <div className="flex w-full flex-col gap-6 md:w-2/5 md:order-2">
+          <CurrentlyPullable />
+          <PromoCodes />
+        </div>
+
+        {/* Colonne gauche - en second sur mobile */}
+        <div className="flex flex-col gap-8 w-full md:w-3/5 md:order-1">
           <section className="text-center">
             <CategoriesBox />
             <div className="mt-6">
@@ -67,12 +74,7 @@ export default async function Home() {
               <NewToBox />
             </div>
           </section>
-        </div>
-
-        {/* Colonne droite */}
-        <div className="flex w-full flex-col gap-6 md:w-2/5">
-          <CurrentlyPullable />
-          <PromoCodes />
+          <RecentUpdates />
         </div>
       </div>
 

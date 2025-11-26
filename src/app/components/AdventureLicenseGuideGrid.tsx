@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useI18n } from '@/lib/contexts/I18nContext'
 
 type GuideItem = {
     slug: string;
@@ -19,25 +20,24 @@ type Props = {
     items: GuideItem[];
 };
 
-const TABS: { key: 'regular' | 'promotion'; label: string }[] = [
-    { key: 'regular', label: 'Regular Fight' },
-    { key: 'promotion', label: 'Promotion Fight' },
+const getTabs = (t: (key: string) => string): { key: 'regular' | 'promotion'; label: string }[] => [
+    { key: 'regular', label: t('guides.al.tabs.regular') },
+    { key: 'promotion', label: t('guides.al.tabs.promotion') },
 ]
 
 export default function AdventureLicenseGuideGrid({ items }: Props) {
+    const { t } = useI18n()
     const [selected, setSelected] = useState<'regular' | 'promotion'>('regular')
+    const tabs = getTabs(t)
 
     const filteredItems = useMemo(() => {
         let list = items
 
+        // Filtrer par slug (prom- prefix) au lieu du titre localisé
         if (selected === 'promotion') {
-            list = list.filter((item) =>
-                item.title.toLowerCase().includes('promotion')
-            )
+            list = list.filter((item) => item.slug.startsWith('prom-'))
         } else {
-            list = list.filter((item) =>
-                !item.title.toLowerCase().includes('promotion')
-            )
+            list = list.filter((item) => !item.slug.startsWith('prom-'))
         }
 
         // tri alphabétique insensible à la casse
@@ -50,7 +50,7 @@ export default function AdventureLicenseGuideGrid({ items }: Props) {
         <div className="flex flex-col gap-6">
             <div className="flex justify-center mb-4">
                 <AnimatedTabs<'regular' | 'promotion'>
-                    tabs={TABS}
+                    tabs={tabs}
                     selected={selected}
                     onSelect={setSelected}
                     pillColor="#0ea5e9"

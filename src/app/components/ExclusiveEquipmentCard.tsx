@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ExclusiveEquipment } from "@/types/equipment";
 import type { TenantKey } from "@/tenants/config";
+import { getAvailableLanguages } from "@/tenants/config";
+import type { WithLocalizedFields } from "@/types/common";
 import formatEffectText from "@/utils/formatText";
 import { useI18n } from "@/lib/contexts/I18nContext";
 import slugToCharJson from "@/data/_SlugToChar.json";
@@ -17,13 +19,26 @@ type Props = {
   lang?: TenantKey;
 };
 
-type CharNameEntry = {
+type BaseCharNameEntry = {
   Fullname: string;
-  Fullname_jp?: string;
-  Fullname_kr?: string;
 };
+type CharNameEntry = WithLocalizedFields<BaseCharNameEntry, 'Fullname'>;
 type SlugToCharMap = Record<string, CharNameEntry>;
 const SLUG_TO_CHAR = slugToCharJson as SlugToCharMap;
+
+// Helper to get all localized names for search
+const getLocalizedNames = (data: ExclusiveEquipment): string[] => {
+  const names: string[] = [data.name ?? ""];
+  const langs = getAvailableLanguages().filter(lang => lang !== 'en');
+  for (const lang of langs) {
+    const key = `name_${lang}` as keyof ExclusiveEquipment;
+    const value = data[key];
+    if (typeof value === 'string') {
+      names.push(value);
+    }
+  }
+  return names;
+};
 
 // --- composant principal ---
 export default function ExclusiveEquipmentList({ exdata, lang = "en" }: Props) {
@@ -35,9 +50,7 @@ export default function ExclusiveEquipmentList({ exdata, lang = "en" }: Props) {
       Object.entries(exdata).map(([slug, data]) => ({
         slug,
         data,
-        name_en: data.name ?? "",
-        name_jp: data.name_jp ?? "",
-        name_kr: data.name_kr ?? "",
+        searchableNames: getLocalizedNames(data),
       })),
     [exdata]
   );
@@ -45,8 +58,8 @@ export default function ExclusiveEquipmentList({ exdata, lang = "en" }: Props) {
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) return entries;
-    return entries.filter(({ slug, name_en, name_jp, name_kr }) =>
-      [slug, name_en, name_jp, name_kr].some((s) => s.toLowerCase().includes(q))
+    return entries.filter(({ slug, searchableNames }) =>
+      [slug, ...searchableNames].some((s) => s.toLowerCase().includes(q))
     );
   }, [entries, search]);
 

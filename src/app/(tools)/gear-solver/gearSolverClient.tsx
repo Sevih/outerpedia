@@ -11,7 +11,7 @@ import Image from 'next/image'
 import { toKebabCase } from '@/utils/formatText';
 import GearSearchResult from '@/app/components/GearSearchResult';
 import { ResultEntry } from '@/types/gear-solver';
-//TODO Utiliser les enums
+import { CLASSES } from '@/types/enums';
 
 
 type GearType = 'weapon' | 'amulet' | 'set';
@@ -226,7 +226,7 @@ export default function GearSolverClient() {
           <div>
             <label className="block text-sm font-medium text-white mb-1">Character Class</label>
             <div className="flex flex-wrap gap-2">
-              {['Striker', 'Defender', 'Ranger', 'Healer', 'Mage'].map((cl) => (
+              {CLASSES.map((cl) => (
                 <button
                   key={cl}
                   onClick={() => setCharClass(cl)}

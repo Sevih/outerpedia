@@ -166,7 +166,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     setDownloadingImage(true)
 
     try {
-      const blob = await generateTeamImage1920x1080(team, chainOrder, notes, title, lang as 'en' | 'kr' | 'jp' | 'zh')
+      const blob = await generateTeamImage1920x1080(team, chainOrder, notes, title, lang)
 
       // Essayer de copier dans le presse-papiers
       try {

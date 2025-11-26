@@ -11,7 +11,6 @@ export interface ProsConsBase {
 
 /**
  * Type complet avec variantes localisées pour pro et con
- * Génère pro, pro_jp, pro_kr, con, con_jp, con_kr
  */
 export type ProsCons = WithLocalizedFields<
   WithLocalizedFields<ProsConsBase, 'pro'>,

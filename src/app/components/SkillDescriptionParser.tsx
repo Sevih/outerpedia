@@ -87,15 +87,21 @@ function parseElementsAndClasses(text: string): React.ReactNode[] {
     const beforeChar = match.index > 0 ? text[match.index - 1] : ' '
     const isAfterSpace = beforeChar === ' ' || beforeChar === '(' || beforeChar === '\n'
 
-    // Check if there's a capitalized word right before this match
+    // Check if there's a capitalized word right before this match (for proper nouns like "Furious Earth")
+    // But skip if the previous word is also an element/class keyword or ends with punctuation
     let isPrecededByCapitalizedWord = false
     if (isAfterSpace && match.index >= 2) {
       // Look back to find the previous word
       const textBefore = text.slice(0, match.index).trim()
       const words = textBefore.split(/\s+/)
-      const previousWord = words[words.length - 1]
+      let previousWord = words[words.length - 1]
+      // Remove trailing punctuation (comma, period, etc.)
+      previousWord = previousWord.replace(/[,.:;!?]$/, '')
       // Check if previous word starts with capital (and is not just a single char like "a")
-      if (previousWord && previousWord.length > 1 && /^[A-Z]/.test(previousWord)) {
+      // BUT don't skip if the previous word is itself an element or class keyword
+      const prevLower = previousWord.toLowerCase()
+      const isPrevKeyword = allKeywords.some(k => k.toLowerCase() === prevLower)
+      if (previousWord && previousWord.length > 1 && /^[A-Z]/.test(previousWord) && !isPrevKeyword) {
         isPrecededByCapitalizedWord = true
       }
     }

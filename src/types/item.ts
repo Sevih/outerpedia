@@ -19,6 +19,5 @@ export interface ItemBase {
 
 /**
  * Type complet avec variantes localisées pour name et description
- * Ajoute automatiquement: name_jp, name_kr, description_jp, description_kr
  */
 export type Item = WithLocalizedFields<ItemBase, 'name' | 'description'>
