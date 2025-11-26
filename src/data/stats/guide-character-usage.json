@@ -274,7 +274,8 @@
       "Francesca",
       "Gnosis Dahlia",
       "Maxwell",
-      "Nella"
+      "Nella",
+      "Sterope"
     ]
   },
   "adventure-license/beatlesAL": {
@@ -282,9 +283,16 @@
     "guideId": "beatlesAL",
     "characters": [
       "Aer",
+      "Astei",
+      "Bell Cranel",
+      "Bryn",
       "Christina",
       "Eternal",
+      "Holy Night's Blessing Dianne",
       "Kanon",
+      "Liselotte",
+      "Mero",
+      "Tio",
       "Valentine"
     ]
   },

@@ -15,25 +15,29 @@ const recommendedCharacters = [
     {
         names: ["Gnosis Dahlia", "Demiurge Astei", "Maxwell", "Francesca"],
         reason: {
-            en: "{E/Dark} DPS options for this fight."
+            en: "{E/Dark} DPS options for this fight.",
+            jp: "このボスに対する{E/Dark}DPSオプション。"
         }
     },
     {
         names: ["Demiurge Vlada", "Eliza"],
         reason: {
-            en: "{E/Dark} supports with {D/BT_REMOVE_BUFF}."
+            en: "{E/Dark} supports with {D/BT_REMOVE_BUFF}.",
+            jp: "{D/BT_REMOVE_BUFF}を持つ{E/Dark}サポート。"
         }
     },
     {
         names: ["Sterope"],
         reason: {
-            en: "Reduces {B/BT_STAT|ST_COUNTER_RATE} damage."
+            en: "Reduces {B/BT_STAT|ST_COUNTER_RATE} damage.",
+            jp: "{B/BT_STAT|ST_COUNTER_RATE}ダメージを軽減。"
         }
     },
     {
         names: ["Nella", "Demiurge Delta"],
         reason: {
-            en: "{E/Dark} healers to keep the team alive."
+            en: "{E/Dark} healers to keep the team alive.",
+            jp: "チームを生存させる{E/Dark}ヒーラー。"
         }
     }
 ]
@@ -41,25 +45,25 @@ const recommendedCharacters = [
 export default function ArsNovaGuide() {
     return (
         <GuideTemplate
-            title="Ars Nova Adventure License Guide"
-            introduction="Ars Nova Adventure License features the same skills as Special Request Stage 12. This encounter can be consistently cleared in a single attempt with the right team composition. The strategy has been verified up to stage 10."
+            title="アルス・ノーヴァ 冒険者ライセンス攻略ガイド"
+            introduction="アルス・ノーヴァ冒険者ライセンスは、スペシャルリクエストステージ12と同じスキルを持っています。適切なチーム編成で1回の挑戦で安定してクリアできます。この攻略はステージ10まで検証済みです。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: 'ガイド',
                     content: (
                         <>
                             <BossDisplay bossKey="Ars Nova" modeKey='Adventure License' defaultBossId='51000024' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips
                                 tips={[
-                                    "Same skills as Special Request Stage 12.",
-                                    "Only {E/Dark} units deal full WG damage - non-dark units deal 50% less WG damage.",
-                                    "The boss does not take WG damage when your team has 150+ CP. Keep your CP below this threshold.",
-                                    "The boss summons Inferior Cores after each attack. Each surviving core increases the boss's fixed damage by 1500.",
-                                    "Killing cores grants 15 CP each - useful for chain skills but be careful not to exceed 150 CP.",
-                                    "At 30% HP, the boss enrages for 3 turns and then uses Cantata dealing lethal damage. Defeat it or break it before Cantata triggers.",
-                                    "If the boss enrages within 4 turns of battle start, your team gains 80 CP - this can help trigger chain skills faster."
+                                    "スペシャルリクエストステージ12と同じスキルです。",
+                                    "{E/Dark}ユニットのみがフルWGダメージを与えられます。闇属性以外のユニットはWGダメージが50%減少します。",
+                                    "チームのCPが150以上の場合、ボスはWGダメージを受けません。CPをこの閾値以下に保ってください。",
+                                    "ボスは攻撃後に劣化コアを召喚します。生存しているコア1体につき、ボスの固定ダメージが1500増加します。",
+                                    "コアを倒すと15CPを獲得します。チェインスキルに有用ですが、150CPを超えないように注意してください。",
+                                    "HP30%で、ボスは3ターン狂暴化し、その後カンタータで致命的なダメージを与えます。カンタータが発動する前に倒すかブレイクしてください。",
+                                    "戦闘開始から4ターン以内にボスが狂暴化すると、チームは80CPを獲得します。これによりチェインスキルを早く発動できます。"
                                 ]}
                             />
                             <hr className="my-6 border-neutral-700" />

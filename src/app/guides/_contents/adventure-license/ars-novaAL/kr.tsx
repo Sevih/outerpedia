@@ -15,25 +15,29 @@ const recommendedCharacters = [
     {
         names: ["Gnosis Dahlia", "Demiurge Astei", "Maxwell", "Francesca"],
         reason: {
-            en: "{E/Dark} DPS options for this fight."
+            en: "{E/Dark} DPS options for this fight.",
+            kr: "이 보스에 대한 {E/Dark} DPS 옵션."
         }
     },
     {
         names: ["Demiurge Vlada", "Eliza"],
         reason: {
-            en: "{E/Dark} supports with {D/BT_REMOVE_BUFF}."
+            en: "{E/Dark} supports with {D/BT_REMOVE_BUFF}.",
+            kr: "{D/BT_REMOVE_BUFF}를 가진 {E/Dark} 서포터."
         }
     },
     {
         names: ["Sterope"],
         reason: {
-            en: "Reduces {B/BT_STAT|ST_COUNTER_RATE} damage."
+            en: "Reduces {B/BT_STAT|ST_COUNTER_RATE} damage.",
+            kr: "{B/BT_STAT|ST_COUNTER_RATE} 피해 감소."
         }
     },
     {
         names: ["Nella", "Demiurge Delta"],
         reason: {
-            en: "{E/Dark} healers to keep the team alive."
+            en: "{E/Dark} healers to keep the team alive.",
+            kr: "팀을 생존시키는 {E/Dark} 힐러."
         }
     }
 ]
@@ -41,25 +45,25 @@ const recommendedCharacters = [
 export default function ArsNovaGuide() {
     return (
         <GuideTemplate
-            title="Ars Nova Adventure License Guide"
-            introduction="Ars Nova Adventure License features the same skills as Special Request Stage 12. This encounter can be consistently cleared in a single attempt with the right team composition. The strategy has been verified up to stage 10."
+            title="아르스 노바 모험가 라이센스 공략 가이드"
+            introduction="아르스 노바 모험가 라이센스는 스페셜 리퀘스트 스테이지 12와 동일한 스킬을 가지고 있습니다. 적절한 팀 구성으로 1회 시도로 안정적으로 클리어할 수 있습니다. 이 공략은 스테이지 10까지 검증되었습니다."
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '가이드',
                     content: (
                         <>
                             <BossDisplay bossKey="Ars Nova" modeKey='Adventure License' defaultBossId='51000024' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips
                                 tips={[
-                                    "Same skills as Special Request Stage 12.",
-                                    "Only {E/Dark} units deal full WG damage - non-dark units deal 50% less WG damage.",
-                                    "The boss does not take WG damage when your team has 150+ CP. Keep your CP below this threshold.",
-                                    "The boss summons Inferior Cores after each attack. Each surviving core increases the boss's fixed damage by 1500.",
-                                    "Killing cores grants 15 CP each - useful for chain skills but be careful not to exceed 150 CP.",
-                                    "At 30% HP, the boss enrages for 3 turns and then uses Cantata dealing lethal damage. Defeat it or break it before Cantata triggers.",
-                                    "If the boss enrages within 4 turns of battle start, your team gains 80 CP - this can help trigger chain skills faster."
+                                    "스페셜 리퀘스트 스테이지 12와 동일한 스킬입니다.",
+                                    "{E/Dark} 유닛만 전체 WG 피해를 입힙니다. 암속성이 아닌 유닛은 WG 피해가 50% 감소합니다.",
+                                    "팀의 CP가 150 이상일 때 보스는 WG 피해를 받지 않습니다. CP를 이 임계값 아래로 유지하세요.",
+                                    "보스는 공격 후 열화 코어를 소환합니다. 생존한 코어마다 보스의 고정 피해가 1500 증가합니다.",
+                                    "코어를 처치하면 15 CP를 획득합니다. 체인 스킬에 유용하지만 150 CP를 초과하지 않도록 주의하세요.",
+                                    "HP 30%에서 보스는 3턴 동안 광폭화하고 칸타타로 치명적인 피해를 입힙니다. 칸타타가 발동하기 전에 처치하거나 브레이크하세요.",
+                                    "전투 시작 4턴 이내에 보스가 광폭화하면 팀이 80 CP를 획득합니다. 이를 통해 체인 스킬을 더 빨리 발동할 수 있습니다."
                                 ]}
                             />
                             <hr className="my-6 border-neutral-700" />

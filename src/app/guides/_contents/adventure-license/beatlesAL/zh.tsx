@@ -13,21 +13,24 @@ const BeatlesALTeams = BeatlesALTeamsData as Record<string, TeamData>
 
 const recommendedCharacters = [
     {
-        names: ["Aer", "Kanon","Bryn","Bell Cranel"],
+        names: ["Aer", "Kanon", "Bryn", "Bell Cranel"],
         reason: {
-            en: "{E/Fire} DPS options."
+            en: "{E/Fire} DPS options.",
+            zh: "{E/Fire}DPS选择。"
         }
     },
     {
-        names: ["Valentine", "Christina", "Eternal","Holy Night's Blessing Dianne","Mero"],
+        names: ["Valentine", "Christina", "Eternal", "Holy Night's Blessing Dianne", "Mero"],
         reason: {
-            en: "{E/Fire} supports that can help the team."
+            en: "{E/Fire} supports that can help the team.",
+            zh: "帮助队伍的{E/Fire}辅助。"
         }
     },
     {
-        names: ["Tio","Astei","Liselotte"],
+        names: ["Tio", "Astei", "Liselotte"],
         reason: {
-            en: "{E/Fire} healer to keep the team alive."
+            en: "{E/Fire} healer to keep the team alive.",
+            zh: "让队伍存活的{E/Fire}治疗者。"
         }
     }
 ]
@@ -35,12 +38,12 @@ const recommendedCharacters = [
 export default function DekrilMekrilGuide() {
     return (
         <GuideTemplate
-            title="Dek'Ril & Mek'Ril Adventure License Guide"
-            introduction="Dek'Ril & Mek'Ril Adventure License features the same skills as Special Request Stage 12. This sibling duo encounter can be consistently cleared in a single attempt with the right team composition. The strategy has been verified up to stage 9."
+            title="泰格里尔&梅格里尔 冒险执照攻略指南"
+            introduction="泰格里尔&梅格里尔冒险执照与特殊委托第12阶段拥有相同的技能。这对兄弟组合使用合适的队伍配置可以稳定地一次通关。该攻略已验证至第9阶段。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
                             <div className="space-y-4">
@@ -50,14 +53,14 @@ export default function DekrilMekrilGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips
                                 tips={[
-                                    "Same skills as Special Request Stage 12.",
-                                    "Only {E/Fire} units deal full damage - non-fire units deal reduced damage and take increased damage from both bosses.",
-                                    "Mek'Ril greatly reduces all damage taken while alive. Kill Mek'Ril first to remove this protection.",
-                                    "When Mek'Ril dies, Dek'Ril gains {B/BT_INVINCIBLE} and {B/BT_STAT|ST_ATK} for 1 turn - time your burst accordingly.",
-                                    "Dek'Ril gains {B/BT_STAT|ST_AVOID} when hit by AoE attacks. Avoid using non-chain AoE skills.",
-                                    "When Dek'Ril evades, he takes no WG damage and counterattacks with Atlas (AoE + {D/BT_DOT_POISON} + barrier).",
-                                    "At 70% HP, Dek'Ril enrages for 4 turns. When enrage ends, he uses Actaeon dealing heavy single-target damage and inflicting irremovable {D/BT_SEALED_RECEIVE_HEAL} on all enemies.",
-                                    "If Dek'Ril enrages within 2 turns of battle start, your team gains 80 CP."
+                                    "与特殊委托第12阶段技能相同。",
+                                    "只有{E/Fire}单位能造成完整伤害。非火属性单位伤害降低，且受到两个BOSS的伤害增加。",
+                                    "梅格里尔存活时，所有受到的伤害大幅降低。先击杀梅格里尔以解除这个保护。",
+                                    "梅格里尔死亡时，泰格里尔获得1回合{B/BT_INVINCIBLE}和{B/BT_STAT|ST_ATK}。请相应调整爆发时机。",
+                                    "泰格里尔被全体攻击命中时获得{B/BT_STAT|ST_AVOID}。避免使用非连锁全体技能。",
+                                    "泰格里尔回避时不受WG伤害，并用阿特拉斯反击（全体攻击 + {D/BT_DOT_POISON} + 护盾）。",
+                                    "在70%血量时，泰格里尔狂暴化4回合。狂暴化结束时，使用阿克特翁造成高额单体伤害，并对所有敌人施加无法解除的{D/BT_SEALED_RECEIVE_HEAL}。",
+                                    "如果泰格里尔在战斗开始2回合内狂暴化，队伍获得80 CP。"
                                 ]}
                             />
                             <hr className="my-6 border-neutral-700" />

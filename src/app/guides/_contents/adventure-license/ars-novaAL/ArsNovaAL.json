@@ -1,0 +1,35 @@
+{
+    "arsNovaAL": {
+        "Recommended Team": {
+            "icon": "/images/ui/effect/SC_Buff_Effect_Element_Superiority.webp",
+            "team": [
+                [
+                    "Nella",
+                    "Demiurge Delta"
+                ],
+                [
+                    "Demiurge Vlada",
+                    "Eliza",
+                    "Sterope"
+                ],
+                [
+                    "Demiurge Astei",
+                    "Francesca"
+                ],
+                [
+                    "Gnosis Dahlia",
+                    "Maxwell"
+                ]
+            ],
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Typically cleared in 1 attempt. Verified up to stage 10."
+                }
+            ],
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
+    }
+}

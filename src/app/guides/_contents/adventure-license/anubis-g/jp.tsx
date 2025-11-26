@@ -1,0 +1,85 @@
+'use client'
+
+import GuideTemplate from '@/app/components/GuideTemplate'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import CombatFootage from '@/app/components/CombatFootage'
+import BossDisplay from '@/app/components/BossDisplay'
+import AnubisALTeamsData from './AnubisAL.json'
+import type { TeamData } from '@/types/team'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import TacticalTips from '@/app/components/TacticalTips'
+
+const AnubisALTeams = AnubisALTeamsData as Record<string, TeamData>
+
+const recommendedCharacters = [
+    {
+        names: ["Holy Night's Blessing Dianne", "Kanon","Aer"],
+        reason: {
+            en: "Strong {E/Fire} DPS with excellent single-target damage.",
+            jp: "優れた単体ダメージを持つ強力な{E/Fire}DPS。"
+        }
+    },
+    {
+        names: ["Eternal", "Tamamo-no-Mae"],
+        reason: {
+            en: "{E/Fire} supports that can help sustain the team while contributing damage.",
+            jp: "ダメージを与えながらチームを維持できる{E/Fire}サポート。"
+        }
+    },
+    {
+        names: ["Tio", "Astei"],
+        reason: {
+            en: "{E/Fire} healers.",
+            jp: "{E/Fire}ヒーラー。"
+        }
+    },
+    {
+        names: "Ember",
+        reason: {
+            en: "Alternative DPS for {D/BT_DOT_BURN} strategy.",
+            jp: "{D/BT_DOT_BURN}戦略用の代替DPS。"
+        }
+    }
+]
+
+export default function AnubisGuardianGuide() {
+    return (
+        <GuideTemplate
+            title="アヌビスガーディアン 冒険者ライセンス攻略ガイド"
+            introduction="アヌビスガーディアンは、毎ターン雑魚を復活させる、自身のバフとデバフを延長する、最適なダメージを与えるには火属性ユニットが必要など、独自のメカニズムが特徴です。火属性以外のユニットはボスのデバフをすべて解除し、WGダメージが半減します。ボスはHP50%で激怒し、3ターン後に致死ダメージを与えます。適切な火属性チーム編成で通常1〜2回の挑戦でクリア可能です。"
+            defaultVersion="default"
+            versions={{
+                default: {
+                    label: 'ガイド',
+                    content: (
+                        <>
+                            <BossDisplay bossKey="Iota World's Giant God Soldier" modeKey='Adventure License' defaultBossId='51000031' />
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                tips={[
+                                    "{E/Fire}ユニットのみを使用してください。火属性以外のユニットはボスからすべてのデバフを解除し、WGダメージが50%減少します。",
+                                    "ボスは攻撃後、毎ターンすべての雑魚を復活させます。雑魚ではなくボスにダメージを集中させてください。",
+                                    "ボスへのすべてのバフとデバフは各ターン開始時に1ターン延長されます。{D/BT_DOT_BURN}スタックが非常に効果的です。",
+                                    "ボスのみが生存している場合、WGダメージは発生しません。少なくとも1体の雑魚を生かしておく必要があります。",
+                                    "HP50%で、ボスは激怒し、3ターン後に致死ダメージを与えます。素早く押し切ってください。",
+                                    "パーティの{B/BT_STAT|ST_CRITICAL_RATE}は0%に減少します。クリティカル依存のビルドは頼りにしないでください。"
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={AnubisALTeams.anubisAL} defaultStage="Recommended Team" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage
+                                videoId="fU0UUuHswKM"
+                                title="Anubis Guardian - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao"
+                                author="XuRenChao"
+                                date="22/09/2025"
+                            />
+                        </>
+                    ),
+                },
+            }}
+        />
+    )
+}

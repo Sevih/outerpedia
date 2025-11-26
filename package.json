@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "8.3.15",
+  "version": "8.3.16",
   "private": true,
   "scripts": {
     "dev": "node scripts/dev-with-webp.js",

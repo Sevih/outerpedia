@@ -15,25 +15,29 @@ const recommendedCharacters = [
     {
         names: ["Gnosis Dahlia", "Demiurge Astei", "Maxwell", "Francesca"],
         reason: {
-            en: "{E/Dark} DPS options for this fight."
+            en: "{E/Dark} DPS options for this fight.",
+            zh: "这场战斗的{E/Dark}DPS选择。"
         }
     },
     {
         names: ["Demiurge Vlada", "Eliza"],
         reason: {
-            en: "{E/Dark} supports with {D/BT_REMOVE_BUFF}."
+            en: "{E/Dark} supports with {D/BT_REMOVE_BUFF}.",
+            zh: "拥有{D/BT_REMOVE_BUFF}的{E/Dark}辅助。"
         }
     },
     {
         names: ["Sterope"],
         reason: {
-            en: "Reduces {B/BT_STAT|ST_COUNTER_RATE} damage."
+            en: "Reduces {B/BT_STAT|ST_COUNTER_RATE} damage.",
+            zh: "减少{B/BT_STAT|ST_COUNTER_RATE}伤害。"
         }
     },
     {
         names: ["Nella", "Demiurge Delta"],
         reason: {
-            en: "{E/Dark} healers to keep the team alive."
+            en: "{E/Dark} healers to keep the team alive.",
+            zh: "让队伍存活的{E/Dark}治疗者。"
         }
     }
 ]
@@ -41,25 +45,25 @@ const recommendedCharacters = [
 export default function ArsNovaGuide() {
     return (
         <GuideTemplate
-            title="Ars Nova Adventure License Guide"
-            introduction="Ars Nova Adventure License features the same skills as Special Request Stage 12. This encounter can be consistently cleared in a single attempt with the right team composition. The strategy has been verified up to stage 10."
+            title="艺术新星 冒险执照攻略指南"
+            introduction="艺术新星冒险执照与特殊委托第12阶段拥有相同的技能。使用合适的队伍配置可以稳定地一次通关。该攻略已验证至第10阶段。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
                             <BossDisplay bossKey="Ars Nova" modeKey='Adventure License' defaultBossId='51000024' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips
                                 tips={[
-                                    "Same skills as Special Request Stage 12.",
-                                    "Only {E/Dark} units deal full WG damage - non-dark units deal 50% less WG damage.",
-                                    "The boss does not take WG damage when your team has 150+ CP. Keep your CP below this threshold.",
-                                    "The boss summons Inferior Cores after each attack. Each surviving core increases the boss's fixed damage by 1500.",
-                                    "Killing cores grants 15 CP each - useful for chain skills but be careful not to exceed 150 CP.",
-                                    "At 30% HP, the boss enrages for 3 turns and then uses Cantata dealing lethal damage. Defeat it or break it before Cantata triggers.",
-                                    "If the boss enrages within 4 turns of battle start, your team gains 80 CP - this can help trigger chain skills faster."
+                                    "与特殊委托第12阶段技能相同。",
+                                    "只有{E/Dark}单位能造成完整的WG伤害。非暗属性单位WG伤害减少50%。",
+                                    "当队伍CP达到150以上时，BOSS不受WG伤害。请将CP保持在此阈值以下。",
+                                    "BOSS攻击后会召唤劣化核心。每个存活的核心会使BOSS的固定伤害增加1500。",
+                                    "击杀核心可获得15 CP。这对连锁技能有用，但注意不要超过150 CP。",
+                                    "在30%血量时，BOSS狂暴化3回合，然后施放大合唱造成致命伤害。在大合唱发动前击败或击破它。",
+                                    "如果BOSS在战斗开始4回合内狂暴化，队伍获得80 CP。这可以帮助更快触发连锁技能。"
                                 ]}
                             />
                             <hr className="my-6 border-neutral-700" />
