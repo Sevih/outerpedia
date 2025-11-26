@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useCallback } from 'react'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
@@ -7,33 +8,24 @@ import EffectInlineTag from '@/app/components/EffectInlineTag'
 import ElementInlineTag from '@/app/components/ElementInline'
 import GuideHeading from '@/app/components/GuideHeading'
 import ClassInlineTag from '@/app/components/ClassInlineTag'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import BossDisplay from '@/app/components/BossDisplay'
+import MiniBossDisplay from '@/app/components/MiniBossDisplay'
+import PrimordialSentinelTeamsData from './PrimordialSentinel.json'
+import type { TeamData } from '@/types/team'
 
-//team composition
-const teams = {
-  team1: {
-    label: 'Phase 1',
-    icon: 'ranger.webp', // Change icon as needed
-    setup: [
-      ['Iota'],
-      ['Valentine'],
-      ['Stella','Notia', 'Fran'],
-      ['Nella', 'Dianne', 'Demiurge Delta', 'Saeran', 'Tio',  'Astei']
-    ]
-  },
-  team2: {
-    label: 'Phase 2',
-    icon: 'light.webp', // Change icon as needed
-    setup: [
-      ['Monad Eva', 'Viella'],
-      ['Demiurge Luna', 'Regina'],
-      ['Drakhan', 'Gnosis Dahlia', 'Demiurge Stella', 'Akari', 'Skadi'],
-      ['Demiurge Drakhan', 'Gnosis Beth', 'Kuro', 'Demiurge Vlada', 'Gnosis Viella'],
-    ]
-  }
-}
+const PrimordialSentinelTeams = PrimordialSentinelTeamsData as Record<string, TeamData>
 
 export default function PrimordialSentinelGuide() {
+  const [selectedMode, setSelectedMode] = useState('World Boss')
+  const [miniBossId, setMiniBossId] = useState('4086012')
+
+  const handleBossChange = useCallback((primordialId: string) => {
+    // Primordial IDs are 4086007/4086009/4086011, Glorious IDs are +1 (4086008/4086010/4086012)
+    const gloriousId = String(Number(primordialId) + 1)
+    setMiniBossId(gloriousId)
+  }, [])
+
   return (
     <GuideTemplate
       title="Primordial Sentinel (Glorious Sentinel) Strategy"
@@ -46,72 +38,35 @@ export default function PrimordialSentinelGuide() {
             <>
               <GuideHeading level={3}>Skills Overview</GuideHeading>
 
-              <GuideHeading level={4}>Phase 1: Primordial Sentinel Moveset</GuideHeading>
-              <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
-                <li><strong>S1</strong>: Single, grants <EffectInlineTag name='BT_STAT|ST_CRITICAL_RATE' type='buff' /> for 2 turns.</li>
-                <li><strong>S2</strong>: AoE, reduces chain points by 5 for each target. If the target is <EffectInlineTag name='BT_DOT_LIGHTNING' type='debuff' />, additionally reduces chain points by 20 points each.</li>
-                <li><strong>S3</strong>: AoE, inflicts <EffectInlineTag name='BT_DOT_LIGHTNING' type='debuff' /> for 2 turns (ignores immunity). When scoring a critical hit, grants <EffectInlineTag name="CORE_ENERGY" type="buff" /> to the caster for 1 turn.</li>
-                <li><strong>Passive</strong>: Increases damage taken from <ElementInlineTag element='fire' /> <ElementInlineTag element='earth' /> <ElementInlineTag element='water' /> enemies.</li>
-                <li><strong>Passive</strong>: Inflicts permanent <EffectInlineTag name='BT_SEAL_BT_CALL_BACKUP_IR' type='debuff' /> on all enemies.</li>
-                <li><strong>Passive</strong>: Inflicts permanent <EffectInlineTag name='BT_STAT|ST_SPEED' type='debuff' /> on <ElementInlineTag element='light' /> <ElementInlineTag element='dark' /> enemies, greatly reduces their damage and does not take weakness gauge damage from them.</li>
-                <li><strong>Passive</strong>: Reduces damage taken from skills other than Skill Chains and Burst Skills and reduces weakness gauge damage by 50%.</li>
-                <li><strong>Passive</strong>: Grants <EffectInlineTag name="UNIQUE_DAHLIA_A" type="buff" /> to enemy team with class-specific effects:
-                  <ul className="ml-8 mt-1 space-y-1">
-                    <li><ClassInlineTag name='Striker' />: +50% Priority recovery efficiency.</li>
-                    <li><ClassInlineTag name='Mage' />: Increased damage.</li>
-                    <li><ClassInlineTag name='Defender' />: Inflicts <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> for 4 turns when performing an action.</li>
-                    <li><ClassInlineTag name='Ranger' />: Inflicts <EffectInlineTag name="BT_STAT|ST_BUFF_RESIST" type="debuff" /> for 4 turns when performing an action.</li>
-                    <li><ClassInlineTag name='Healer' />: Inflicts <EffectInlineTag name="BT_STAT|ST_SPEED" type="debuff" /> for 4 turns when performing an action.</li>
-                  </ul>
-                </li>
-                <li><strong>Passive</strong>: After using S1 and S2, when granted <EffectInlineTag name="CORE_ENERGY" type="buff" />, attacks all enemies and gains <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> for 5 turns.</li>
-              </ul>
+              <GuideHeading level={4}>Phase 1: Primordial Sentinel</GuideHeading>
+              <BossDisplay
+                bossKey='Primordial Sentinel'
+                modeKey='World Boss'
+                defaultBossId='4086011'
+                onModeChange={setSelectedMode}
+                onBossChange={handleBossChange}
+              />
 
-              <hr className="my-6 border-neutral-700" />
-
-              <GuideHeading level={4}>Phase 2: Glorious Sentinel Moveset</GuideHeading>
-              <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
-                <li><strong>S1</strong>: Single, guaranteed critical hit if the target has a debuff.</li>
-                <li><strong>S2</strong>: AoE, inflicts <EffectInlineTag name="BT_STAT|ST_ATK_IR" type="debuff" /> for 2 turns if the target has <EffectInlineTag name='BT_DOT_LIGHTNING' type='debuff' />.</li>
-                <li><strong>S3</strong>: AoE, inflicts <EffectInlineTag name='BT_DOT_LIGHTNING' type='debuff' /> for 2 turns (ignores immunity). Grants <EffectInlineTag name="CORE_ENERGY" type="buff" /> to the caster for 1 turn.</li>
-                <li><strong>Passive</strong>: Increases damage taken from <ElementInlineTag element='light' /> <ElementInlineTag element='dark' /> enemies.</li>
-                <li><strong>Passive</strong>: Inflicts permanent <EffectInlineTag name='BT_STAT|ST_SPEED' type='debuff' /> on <ElementInlineTag element='fire' /> <ElementInlineTag element='earth' /> <ElementInlineTag element='water' /> enemies, greatly reduces their damage and does not take weakness gauge damage from them.</li>
-                <li><strong>Passive</strong>: Reduces damage taken from skills other than Skill Chains, Dual Attacks and Burst Skills and does not take weakness gauge damage.</li>
-                <li><strong>Passive</strong>: Damage taken from <EffectInlineTag name='BT_DOT_CURSE' type='debuff' /> and <EffectInlineTag name='BT_FIXED_DAMAGE' type='debuff' /> does not exceed 30 000.</li>
-                <li><strong>Passive</strong>: Grants <EffectInlineTag name="UNIQUE_DAHLIA_A" type="buff" /> to enemy team with class-specific effects:
-                  <ul className="ml-8 mt-1 space-y-1">
-                    <li><ClassInlineTag name='Striker' />: Increased damage.</li>
-                    <li><ClassInlineTag name='Mage' />: +50% Priority recovery efficiency.</li>
-                    <li><ClassInlineTag name='Defender' />: Inflicts <EffectInlineTag name="BT_STAT|ST_DEF" type="debuff" /> for 4 turns when performing an action.</li>
-                    <li><ClassInlineTag name='Ranger' />: Reduces the health of the boss by 3% when performing an action.</li>
-                    <li><ClassInlineTag name='Healer' />: Inflicts <EffectInlineTag name="BT_STAT|ST_SPEED" type="debuff" /> for 4 turns when performing an action.</li>
-                  </ul>
-                </li>
-                <li><strong>Passive</strong>: After using S1 and S2, when granted <EffectInlineTag name="CORE_ENERGY" type="buff" />, attacks all enemies, gains <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> for 5 turns and fully reduces Chain Points of the enemy team.</li>
-              </ul>
-
-              <hr className="my-6 border-neutral-700" />
-
-              <GuideHeading level={3}>Strategy Tips and Team Building</GuideHeading>
-
-              <GuideHeading level={4}>General Strategy</GuideHeading>
-              <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-2">
-                <li>This entire fight revolves around priority control. In Phase 1, you can reduce the boss&apos;s priority unlike in Phase 2, so you need to abuse it as much as possible.</li>
-                <li>In Phase 2, however, the boss is immune to priority reduction, so you will need to make your characters as fast as possible.</li>
-                <li>Everything will depend on Skill Chains and CP generation, so equip your Sage and Rogue charms (don&apos;t forget your critical hit chance for Rogue).</li>
-                <li>In both phases, you want at least 1 healer for the <EffectInlineTag name="BT_STAT|ST_SPEED" type="debuff" /> thanks to the <EffectInlineTag name="UNIQUE_DAHLIA_A" type="buff" /> buff.</li>
-                <li>Quick tip : if you have <CharacterLinkCard name="Monad Eva" /> at 6 stars in your second team you can stack up CP in phase 1. Swap to Team 2 when you&apos;re close to finishing phase 1 and trigger phase 2. Monad Eva will instantly <EffectInlineTag name='BT_SEAL_ADDITIVE_ATTACK' type='debuff' /> the boss allowing you to keep the CP you built during phase 1.</li>
-              </ul>
-
-              <GuideHeading level={4}>Phase 1 Recommended Characters</GuideHeading>
+              <GuideHeading level={4}>Recommended Characters</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
                 <li><CharacterLinkCard name="Iota" /> <CharacterLinkCard name="Stella" /> : for <EffectInlineTag name='BT_ACTION_GAUGE' type='debuff' /></li>
                 <li><CharacterLinkCard name="Notia" /> <CharacterLinkCard name="Fran" /> : for <EffectInlineTag name='BT_ACTION_GAUGE' type='buff' /></li>
                 <li><CharacterLinkCard name="Valentine" /> : for both <EffectInlineTag name='BT_ACTION_GAUGE' type='buff' /> and <EffectInlineTag name='BT_ACTION_GAUGE' type='debuff' /></li>
                 <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Demiurge Delta" /> <CharacterLinkCard name="Saeran" /> <CharacterLinkCard name="Tio" /> <CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Astei" /> : <ClassInlineTag name='Healer' /> with <EffectInlineTag name='BT_ACTION_GAUGE' type='buff' /></li>
               </ul>
+              
+              <hr className="my-6 border-neutral-700" />
 
-              <GuideHeading level={4}>Phase 2 Recommended Characters</GuideHeading>
+              <GuideHeading level={4}>Phase 2: Glorious Sentinel</GuideHeading>
+              <MiniBossDisplay
+                bosses={[
+                  { bossKey: 'Glorious Sentinel', defaultBossId: miniBossId }
+                ]}
+                modeKey='World Boss'
+                controlledMode={selectedMode}
+              />
+
+              <GuideHeading level={4}>Recommended Characters</GuideHeading>
               <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-1">
                 <li><CharacterLinkCard name="Monad Eva" /> <CharacterLinkCard name="Viella" /> : <ClassInlineTag name='Healer' /> with <EffectInlineTag name='BT_CALL_BACKUP' type='buff' /></li>
                 <li><CharacterLinkCard name="Demiurge Luna" /> <CharacterLinkCard name="Regina" /> : <ClassInlineTag name='Mage' /> with <EffectInlineTag name='BT_ACTION_GAUGE' type='buff' /> on their S1.</li>
@@ -122,11 +77,20 @@ export default function PrimordialSentinelGuide() {
                 <li><CharacterLinkCard name="Akari" /> : can prevent the boss from gaining <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" />.</li>
                 <li><CharacterLinkCard name="Skadi" /> : cycles your skills CD faster with <EffectInlineTag name="BT_COOL_CHARGE" type="buff" />.</li>
               </ul>
+              <StageBasedTeamSelector teamData={PrimordialSentinelTeams.november2025} defaultStage="Phase 1" replace={{ lead: "", mid: "", tail: "" }} />
 
               <hr className="my-6 border-neutral-700" />
 
-              <GuideHeading level={3}>Team Compositions</GuideHeading>
-              <TeamTabSelector teams={teams} />
+              <GuideHeading level={3}>Strategy Tips</GuideHeading>
+
+              <GuideHeading level={4}>General Strategy</GuideHeading>
+              <ul className="list-disc list-inside text-neutral-300 mb-4 space-y-2">
+                <li>This entire fight revolves around priority control. In Phase 1, you can reduce the boss&apos;s priority unlike in Phase 2, so you need to abuse it as much as possible.</li>
+                <li>In Phase 2, however, the boss is immune to priority reduction, so you will need to make your characters as fast as possible.</li>
+                <li>Everything will depend on Skill Chains and CP generation, so equip your Sage and Rogue charms (don&apos;t forget your critical hit chance for Rogue).</li>
+                <li>In both phases, you want at least 1 healer for the <EffectInlineTag name="BT_STAT|ST_SPEED" type="debuff" /> thanks to the <EffectInlineTag name="UNIQUE_DAHLIA_A" type="buff" /> buff.</li>
+                <li>Quick tip : if you have <CharacterLinkCard name="Monad Eva" /> at 6 stars in your second team you can stack up CP in phase 1. Swap to Team 2 when you&apos;re close to finishing phase 1 and trigger phase 2. Monad Eva will instantly <EffectInlineTag name='BT_SEAL_ADDITIVE_ATTACK' type='debuff' /> the boss allowing you to keep the CP you built during phase 1.</li>
+              </ul>
 
               <hr className="my-6 border-neutral-700" />
 

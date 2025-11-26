@@ -11,6 +11,7 @@ type NoteEntry =
 type StageData = {
   team: string[][]
   note?: NoteEntry[]
+  icon?: string
 }
 
 type TeamData = {
@@ -20,7 +21,7 @@ type TeamData = {
 type Props = {
   teamData: TeamData
   defaultStage?: string
-  icon?: string
+  icon?: string // fallback icon if not specified in JSON
   replace?: { lead?: string, mid?: string, tail?: string }
 }
 
@@ -52,7 +53,7 @@ export default function StageBasedTeamSelector({ teamData, defaultStage, icon, r
   const tabsData = stages.map((stage) => ({
     key: stage,
     label: formatStageLabel(stage),
-    icon: icon
+    icon: teamData[stage].icon || icon // Use stage-specific icon from JSON, fallback to prop
   }))
 
   return (

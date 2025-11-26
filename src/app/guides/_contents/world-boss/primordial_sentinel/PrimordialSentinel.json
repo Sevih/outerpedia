@@ -1,0 +1,55 @@
+{
+    "november2025": {
+        "Phase 1": {
+            "icon": "/images/ui/effect/fire.webp",
+            "team": [
+                [
+                    "Iota"
+                ],
+                [
+                    "Valentine"
+                ],
+                [
+                    "Stella",
+                    "Notia",
+                    "Fran"
+                ],
+                [
+                    "Nella",
+                    "Dianne",
+                    "Demiurge Delta",
+                    "Saeran",
+                    "Tio",
+                    "Astei"
+                ]
+            ]
+        },
+        "Phase 2": {
+            "icon": "/images/ui/effect/light.webp",
+            "team": [
+                [
+                    "Monad Eva",
+                    "Viella"
+                ],
+                [
+                    "Demiurge Luna",
+                    "Regina"
+                ],
+                [
+                    "Drakhan",
+                    "Gnosis Dahlia",
+                    "Demiurge Stella",
+                    "Akari",
+                    "Skadi"
+                ],
+                [
+                    "Demiurge Drakhan",
+                    "Gnosis Beth",
+                    "Kuro",
+                    "Demiurge Vlada",
+                    "Gnosis Viella"
+                ]
+            ]
+        }
+    }
+}

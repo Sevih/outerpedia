@@ -5,6 +5,7 @@ type NoteEntry =
 type StageData = {
   team: string[][]
   note?: NoteEntry[]
+  icon?: string
 }
 
 export type TeamData = {
