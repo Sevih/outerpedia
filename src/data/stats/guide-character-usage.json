@@ -233,16 +233,16 @@
     "category": "adventure-license",
     "guideId": "amadeus-AL",
     "characters": [
-      "Akari",
+      "Stella",
       "Dianne",
+      "Demiurge Stella",
+      "Skadi",
+      "Akari",
       "Drakhan",
       "Gnosis Beth",
-      "Kuro",
-      "Skadi",
-      "Stella",
-      "Demiurge Stella",
       "Demiurge Luna",
       "Regina",
+      "Kuro",
       "Ais Wallenstein"
     ]
   },
@@ -251,49 +251,48 @@
     "guideId": "anubis-g",
     "characters": [
       "Aer",
-      "Astei",
-      "Ember",
       "Eternal",
+      "Tamamo-no-Mae",
       "Holy Night's Blessing Dianne",
       "Kanon",
-      "Tamamo-no-Mae",
       "Tio",
+      "Ember",
       "Vlada",
       "Bell Cranel",
-      "Maxie"
+      "Maxie",
+      "Astei"
     ]
   },
   "adventure-license/ars-novaAL": {
     "category": "adventure-license",
     "guideId": "ars-novaAL",
     "characters": [
-      "Demiurge Astei",
+      "Nella",
       "Demiurge Delta",
       "Demiurge Vlada",
       "Eliza",
+      "Sterope",
+      "Demiurge Astei",
       "Francesca",
       "Gnosis Dahlia",
-      "Maxwell",
-      "Nella",
-      "Sterope"
+      "Maxwell"
     ]
   },
   "adventure-license/beatlesAL": {
     "category": "adventure-license",
     "guideId": "beatlesAL",
     "characters": [
-      "Aer",
-      "Astei",
-      "Bell Cranel",
-      "Bryn",
+      "Valentine",
       "Christina",
-      "Eternal",
       "Holy Night's Blessing Dianne",
-      "Kanon",
+      "Eternal",
+      "Astei",
       "Liselotte",
-      "Mero",
       "Tio",
-      "Valentine"
+      "Aer",
+      "Bell Cranel",
+      "Kanon",
+      "Bryn"
     ]
   },
   "adventure-license/calamariAL": {
@@ -328,31 +327,33 @@
     "category": "adventure-license",
     "guideId": "forest-king",
     "characters": [
-      "Akari",
+      "Monad Eva",
+      "Stella",
+      "Kuro",
+      "Regina",
       "Demiurge Luna",
       "Gnosis Beth",
-      "Gnosis Nella",
-      "Kuro",
-      "Monad Eva",
-      "Regina",
-      "Stella"
+      "Akari",
+      "Gnosis Nella"
     ]
   },
   "adventure-license/fulmination": {
     "category": "adventure-license",
     "guideId": "fulmination",
     "characters": [
-      "Ame",
-      "Delta",
-      "Dianne",
-      "Drakhan",
-      "Fran",
-      "Kitsune of Eternity Tamamo-no-Mae",
-      "Marian",
       "Monad Eva",
-      "Noa",
+      "Viella",
+      "Dianne",
+      "Marian",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Drakhan",
+      "Delta",
+      "Idith",
+      "Fran",
       "Rey",
       "Rhona",
+      "Ame",
+      "Noa",
       "Ryu Lion"
     ]
   },
@@ -360,13 +361,15 @@
     "category": "adventure-license",
     "guideId": "glicysAL",
     "characters": [
-      "Ame",
-      "Charlotte",
       "Kappa",
-      "Noa",
-      "Rey",
+      "Viella",
+      "Charlotte",
       "Rhona",
-      "Ryu Lion"
+      "Fran",
+      "Rey",
+      "Ryu Lion",
+      "Ame",
+      "Noa"
     ]
   },
   "adventure-license/gustav": {
@@ -445,13 +448,13 @@
     "category": "adventure-license",
     "guideId": "meteos-AL",
     "characters": [
-      "Caren",
-      "Laplace",
       "Luna",
-      "Poolside Trickster Regina",
-      "Roxie",
+      "Veronica",
+      "Caren",
       "Tamara",
-      "Veronica"
+      "Laplace",
+      "Poolside Trickster Regina",
+      "Roxie"
     ]
   },
   "adventure-license/ppu-epsilon": {

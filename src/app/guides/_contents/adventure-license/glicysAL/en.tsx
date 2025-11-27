@@ -1,46 +1,44 @@
 'use client'
 
-import EffectInlineTag from '@/app/components/EffectInlineTag'
-import GuideHeading from '@/app/components/GuideHeading'
-import YoutubeEmbed from '@/app/components/YoutubeEmbed'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
+import GuideTemplate from '@/app/components/GuideTemplate'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import CombatFootage from '@/app/components/CombatFootage'
+import BossDisplay from '@/app/components/BossDisplay'
+import GlicysALTeamsData from './GlicysAL.json'
+import type { TeamData } from '@/types/team'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
-const teams = {
-  team1: {
-    label: 'Team 1 – Icebreaker',
-    icon: 'SC_Buff_Effect_Invincible.webp',
-    setup: [
-      ['Kappa'],
-      ['Charlotte','Rhona'],
-      ['Rey','Ryu Lion'],
-      ['Ame','Noa']
-    ]
-  }
-}
+const GlicysALTeams = GlicysALTeamsData as Record<string, TeamData>
 
 export default function GlicysGuide() {
   return (
-    <div>
-      <GuideHeading level={3}>Strategy Overview</GuideHeading>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li>Same skills as Special Request Stage 12</li>
-        <li>Gains <EffectInlineTag name="BT_INVINCIBLE_IR" type="buff" /> 1 turn and <EffectInlineTag name="BT_STAT|ST_BUFF_CHANCE_IR" type="buff" /> 3 turns at 60% HP</li>
-      </ul>
-
-      <hr className="my-6 border-neutral-700" />
-      <TeamTabSelector teams={teams} />
-      <p className="text-neutral-400 text-sm italic mb-4">
-        1 to 2 attempts. Verified up to stage 10. Starting the second attempt below 60% skips the invincibility phase.
-      </p>
-      <hr className="my-6 border-neutral-700" />
-
-      <div className="mb-4">
-        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="text-neutral-400 text-sm italic mt-2">
-          Run provided by <span className="text-white font-semibold">XuRenChao</span> (26/08/2025)
-        </p>
-        <YoutubeEmbed videoId="gufhBKd9kXw" title="Glicys - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
-      </div>
-    </div>
+    <GuideTemplate
+      title="Glicys Adventure License Guide"
+      introduction="Same skills as Special Request Stage 12. Glicys gains Invincibility for 1 turn and increased Effectiveness for 3 turns at 60% HP. Can be cleared in 1-2 attempts. Verified up to stage 10."
+      defaultVersion="default"
+      versions={{
+        default: {
+          label: 'Guide',
+          content: (
+            <>
+              <BossDisplay bossKey='Glicys' modeKey='Adventure License' defaultBossId='51000009' />
+              <hr className="my-6 border-neutral-700" />
+              <TacticalTips tips={[
+                "Glicys takes 70% reduced damage when she has no underlings. Keep at least one underling alive to deal full damage to her.",
+                "Becomes Enraged at 60% HP, gaining {B/BT_INVINCIBLE_IR} for 1 turn. Starting a second attempt below 60% HP skips the invincibility phase."
+              ]} />
+              <hr className="my-6 border-neutral-700" />
+              <RecommendedCharacterList entries={recommendedCharacters} />
+              <hr className="my-6 border-neutral-700" />
+              <StageBasedTeamSelector teamData={GlicysALTeams.glicysAL} defaultStage="Team 1 – Icebreaker" />
+              <hr className="my-6 border-neutral-700" />
+              <CombatFootage videoId="gufhBKd9kXw" title="Glicys - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="26/08/2025" />
+            </>
+          ),
+        },
+      }}
+    />
   )
 }

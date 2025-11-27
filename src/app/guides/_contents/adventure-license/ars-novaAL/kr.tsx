@@ -8,39 +8,9 @@ import ArsNovaALTeamsData from './ArsNovaAL.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
 const ArsNovaALTeams = ArsNovaALTeamsData as Record<string, TeamData>
-
-const recommendedCharacters = [
-    {
-        names: ["Gnosis Dahlia", "Demiurge Astei", "Maxwell", "Francesca"],
-        reason: {
-            en: "{E/Dark} DPS options for this fight.",
-            kr: "이 보스에 대한 {E/Dark} DPS 옵션."
-        }
-    },
-    {
-        names: ["Demiurge Vlada", "Eliza"],
-        reason: {
-            en: "{E/Dark} supports with {D/BT_REMOVE_BUFF}.",
-            kr: "{D/BT_REMOVE_BUFF}를 가진 {E/Dark} 서포터."
-        }
-    },
-    {
-        names: ["Sterope"],
-        reason: {
-            en: "Reduces {B/BT_STAT|ST_COUNTER_RATE} damage.",
-            kr: "{B/BT_STAT|ST_COUNTER_RATE} 피해 감소."
-        }
-    },
-    {
-        names: ["Nella", "Demiurge Delta"],
-        reason: {
-            en: "{E/Dark} healers to keep the team alive.",
-            kr: "팀을 생존시키는 {E/Dark} 힐러."
-        }
-    }
-]
 
 export default function ArsNovaGuide() {
     return (

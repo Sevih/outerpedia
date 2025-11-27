@@ -8,41 +8,9 @@ import AmadeusALTeamsData from './AmadeusAL.json'
 import type { TeamData } from '@/types/team'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import TacticalTips from '@/app/components/TacticalTips'
+import { recommendedCharacters } from './recommendedCharacters'
 
 const AmadeusALTeams = AmadeusALTeamsData as Record<string, TeamData>
-
-const recommendedCharacters = [
-    {
-        names: "Dianne",
-        reason: {
-            en: "Ideal as both her heals are attacks, and she can {B/BT_REMOVE_DEBUFF} without triggering the boss mechanic.",
-        }
-    },
-    {
-        names: "Kuro",
-        reason: {
-            en: "Shines with {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}. Use S3 after boss self-buffs to convert them into long debuffs."
-        }
-    },
-    {
-        names: ["Drakhan", "Gnosis Beth"],
-        reason: {
-            en: "MVPs thanks to their repeated debuffs."
-        }
-    },
-    {
-        names: "Akari",
-        reason: {
-            en: "Works even without {D/BT_SEALED} thanks to her broad debuff kit."
-        }
-    },
-    {
-        names: "Skadi",
-        reason: {
-            en: "Could be used to fill a slot as the buffs can help the team do more damage."
-        }
-    }
-]
 
 export default function AmadeusALGuide() {
     return (

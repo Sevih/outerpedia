@@ -8,46 +8,9 @@ import AmadeusALTeamsData from './AmadeusAL.json'
 import type { TeamData } from '@/types/team'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import TacticalTips from '@/app/components/TacticalTips'
+import { recommendedCharacters } from './recommendedCharacters'
 
 const AmadeusALTeams = AmadeusALTeamsData as Record<string, TeamData>
-
-const recommendedCharacters = [
-    {
-        names: "Dianne",
-        reason: {
-            en: "Ideal as both her heals are attacks, and she can {B/BT_REMOVE_DEBUFF} without triggering the boss mechanic.",
-            kr: "힐이 모두 공격이고 보스 메커니즘을 발동시키지 않고 {B/BT_REMOVE_DEBUFF}할 수 있어 이상적."
-        }
-    },
-    {
-        names: "Kuro",
-        reason: {
-            en: "Shines with {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}. Use S3 after boss self-buffs to convert them into long debuffs.",
-            kr: "{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}로 빛남. 보스 자체 버프 후 S3를 사용해 긴 디버프로 변환."
-        }
-    },
-    {
-        names: ["Drakhan", "Gnosis Beth"],
-        reason: {
-            en: "MVPs thanks to their repeated debuffs.",
-            kr: "반복적인 디버프 덕분에 MVP."
-        }
-    },
-    {
-        names: "Akari",
-        reason: {
-            en: "Works even without {D/BT_SEALED} thanks to her broad debuff kit.",
-            kr: "폭넓은 디버프 키트 덕분에 {D/BT_SEALED} 없이도 작동."
-        }
-    },
-    {
-        names: "Skadi",
-        reason: {
-            en: "Could be used to fill a slot as the buffs can help the team do more damage.",
-            kr: "버프가 팀의 딜을 높일 수 있어 슬롯 채우기로 사용 가능."
-        }
-    }
-]
 
 export default function AmadeusALGuide() {
     return (

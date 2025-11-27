@@ -1,7 +1,7 @@
 {
     "beatlesAL": {
         "Recommended Team": {
-            "icon": "/images/ui/effect/SC_Buff_Stat_CriRate.webp",
+            "icon": "SC_Buff_Stat_CriRate",
             "team": [
                 [
                     "Valentine",

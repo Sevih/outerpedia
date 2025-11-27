@@ -44,7 +44,7 @@
             ]
         },
         "Burn Team": {
-            "icon": "/images/ui/effect/SC_Buff_Dot_Burn.webp",
+            "icon": "SC_Buff_Dot_Burn",
             "team": [
                 [
                     "Ember"
@@ -63,7 +63,7 @@
             ]
         },
         "Ember Team": {
-            "icon": "/images/ui/effect/SC_Buff_Dot_Burn.webp",
+            "icon": "SC_Buff_Dot_Burn",
             "team": [
                 [
                     "Ember"

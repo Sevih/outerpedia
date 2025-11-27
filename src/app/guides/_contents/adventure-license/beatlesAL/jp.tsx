@@ -8,32 +8,9 @@ import BeatlesALTeamsData from './BeatlesAL.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
 const BeatlesALTeams = BeatlesALTeamsData as Record<string, TeamData>
-
-const recommendedCharacters = [
-    {
-        names: ["Aer", "Kanon", "Bryn", "Bell Cranel"],
-        reason: {
-            en: "{E/Fire} DPS options.",
-            jp: "{E/Fire}DPSオプション。"
-        }
-    },
-    {
-        names: ["Valentine", "Christina", "Eternal", "Holy Night's Blessing Dianne", "Mero"],
-        reason: {
-            en: "{E/Fire} supports that can help the team.",
-            jp: "チームを助ける{E/Fire}サポート。"
-        }
-    },
-    {
-        names: ["Tio", "Astei", "Liselotte"],
-        reason: {
-            en: "{E/Fire} healer to keep the team alive.",
-            jp: "チームを生存させる{E/Fire}ヒーラー。"
-        }
-    }
-]
 
 export default function DekrilMekrilGuide() {
     return (

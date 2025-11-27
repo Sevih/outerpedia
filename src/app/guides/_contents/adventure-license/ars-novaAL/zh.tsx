@@ -8,39 +8,9 @@ import ArsNovaALTeamsData from './ArsNovaAL.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
 const ArsNovaALTeams = ArsNovaALTeamsData as Record<string, TeamData>
-
-const recommendedCharacters = [
-    {
-        names: ["Gnosis Dahlia", "Demiurge Astei", "Maxwell", "Francesca"],
-        reason: {
-            en: "{E/Dark} DPS options for this fight.",
-            zh: "这场战斗的{E/Dark}DPS选择。"
-        }
-    },
-    {
-        names: ["Demiurge Vlada", "Eliza"],
-        reason: {
-            en: "{E/Dark} supports with {D/BT_REMOVE_BUFF}.",
-            zh: "拥有{D/BT_REMOVE_BUFF}的{E/Dark}辅助。"
-        }
-    },
-    {
-        names: ["Sterope"],
-        reason: {
-            en: "Reduces {B/BT_STAT|ST_COUNTER_RATE} damage.",
-            zh: "减少{B/BT_STAT|ST_COUNTER_RATE}伤害。"
-        }
-    },
-    {
-        names: ["Nella", "Demiurge Delta"],
-        reason: {
-            en: "{E/Dark} healers to keep the team alive.",
-            zh: "让队伍存活的{E/Dark}治疗者。"
-        }
-    }
-]
 
 export default function ArsNovaGuide() {
     return (

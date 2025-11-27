@@ -1,7 +1,7 @@
 {
     "arsNovaAL": {
         "Recommended Team": {
-            "icon": "/images/ui/effect/SC_Buff_Effect_Element_Superiority.webp",
+            "icon": "SC_Buff_Effect_Element_Superiority",
             "team": [
                 [
                     "Nella",

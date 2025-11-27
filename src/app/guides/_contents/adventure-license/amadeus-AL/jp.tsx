@@ -8,46 +8,9 @@ import AmadeusALTeamsData from './AmadeusAL.json'
 import type { TeamData } from '@/types/team'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import TacticalTips from '@/app/components/TacticalTips'
+import { recommendedCharacters } from './recommendedCharacters'
 
 const AmadeusALTeams = AmadeusALTeamsData as Record<string, TeamData>
-
-const recommendedCharacters = [
-    {
-        names: "Dianne",
-        reason: {
-            en: "Ideal as both her heals are attacks, and she can {B/BT_REMOVE_DEBUFF} without triggering the boss mechanic.",
-            jp: "両方の回復が攻撃であり、ボスのメカニズムを発動させずに{B/BT_REMOVE_DEBUFF}できるため理想的。"
-        }
-    },
-    {
-        names: "Kuro",
-        reason: {
-            en: "Shines with {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}. Use S3 after boss self-buffs to convert them into long debuffs.",
-            jp: "{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}で活躍。ボスの自己バフ後にS3を使用し、長時間のデバフに変換。"
-        }
-    },
-    {
-        names: ["Drakhan", "Gnosis Beth"],
-        reason: {
-            en: "MVPs thanks to their repeated debuffs.",
-            jp: "繰り返しデバフを付与できるためMVP。"
-        }
-    },
-    {
-        names: "Akari",
-        reason: {
-            en: "Works even without {D/BT_SEALED} thanks to her broad debuff kit.",
-            jp: "幅広いデバフキットのおかげで{D/BT_SEALED}なしでも機能。"
-        }
-    },
-    {
-        names: "Skadi",
-        reason: {
-            en: "Could be used to fill a slot as the buffs can help the team do more damage.",
-            jp: "バフがチームのダメージを増加させるため、スロット埋めとして使用可能。"
-        }
-    }
-]
 
 export default function AmadeusALGuide() {
     return (

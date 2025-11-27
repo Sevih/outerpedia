@@ -8,46 +8,9 @@ import AmadeusALTeamsData from './AmadeusAL.json'
 import type { TeamData } from '@/types/team'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import TacticalTips from '@/app/components/TacticalTips'
+import { recommendedCharacters } from './recommendedCharacters'
 
 const AmadeusALTeams = AmadeusALTeamsData as Record<string, TeamData>
-
-const recommendedCharacters = [
-    {
-        names: "Dianne",
-        reason: {
-            en: "Ideal as both her heals are attacks, and she can {B/BT_REMOVE_DEBUFF} without triggering the boss mechanic.",
-            zh: "理想选择，因为她的治疗都是攻击，并且可以在不触发BOSS机制的情况下{B/BT_REMOVE_DEBUFF}。"
-        }
-    },
-    {
-        names: "Kuro",
-        reason: {
-            en: "Shines with {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}. Use S3 after boss self-buffs to convert them into long debuffs.",
-            zh: "凭借{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}大放异彩。在BOSS自我增益后使用S3将其转化为长时间减益。"
-        }
-    },
-    {
-        names: ["Drakhan", "Gnosis Beth"],
-        reason: {
-            en: "MVPs thanks to their repeated debuffs.",
-            zh: "凭借持续的减益效果成为MVP。"
-        }
-    },
-    {
-        names: "Akari",
-        reason: {
-            en: "Works even without {D/BT_SEALED} thanks to her broad debuff kit.",
-            zh: "凭借丰富的减益技能组，即使没有{D/BT_SEALED}也能发挥作用。"
-        }
-    },
-    {
-        names: "Skadi",
-        reason: {
-            en: "Could be used to fill a slot as the buffs can help the team do more damage.",
-            zh: "可用于填充位置，因为增益效果可以帮助队伍造成更多伤害。"
-        }
-    }
-]
 
 export default function AmadeusALGuide() {
     return (

@@ -8,39 +8,9 @@ import AnubisALTeamsData from './AnubisAL.json'
 import type { TeamData } from '@/types/team'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import TacticalTips from '@/app/components/TacticalTips'
+import { recommendedCharacters } from './recommendedCharacters'
 
 const AnubisALTeams = AnubisALTeamsData as Record<string, TeamData>
-
-const recommendedCharacters = [
-    {
-        names: ["Holy Night's Blessing Dianne", "Kanon","Aer"],
-        reason: {
-            en: "Strong {E/Fire} DPS with excellent single-target damage.",
-            jp: "優れた単体ダメージを持つ強力な{E/Fire}DPS。"
-        }
-    },
-    {
-        names: ["Eternal", "Tamamo-no-Mae"],
-        reason: {
-            en: "{E/Fire} supports that can help sustain the team while contributing damage.",
-            jp: "ダメージを与えながらチームを維持できる{E/Fire}サポート。"
-        }
-    },
-    {
-        names: ["Tio", "Astei"],
-        reason: {
-            en: "{E/Fire} healers.",
-            jp: "{E/Fire}ヒーラー。"
-        }
-    },
-    {
-        names: "Ember",
-        reason: {
-            en: "Alternative DPS for {D/BT_DOT_BURN} strategy.",
-            jp: "{D/BT_DOT_BURN}戦略用の代替DPS。"
-        }
-    }
-]
 
 export default function AnubisGuardianGuide() {
     return (

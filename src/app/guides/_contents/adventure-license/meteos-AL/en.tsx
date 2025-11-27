@@ -1,56 +1,52 @@
 'use client'
 
-import CharacterLinkCard from '@/app/components/CharacterLinkCard'
-import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
-import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import GuideTemplate from '@/app/components/GuideTemplate'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import CombatFootage from '@/app/components/CombatFootage'
+import BossDisplay from '@/app/components/BossDisplay'
+import MeteosALTeamsData from './MeteosAL.json'
+import type { TeamData } from '@/types/team'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
-const teams = {
-  standard: {
-    label: 'Recommended Team',
-    icon: 'SC_Buff_Fire_Dmg.webp',
-    setup: [
-      ['Luna', 'Veronica', 'Caren'],
-      ['Tamara'],
-      ['Laplace'],
-      ['Poolside Trickster Regina', 'Roxie']
-    ]
-  }
-}
+const MeteosALTeams = MeteosALTeamsData as Record<string, TeamData>
 
 export default function BlazingKnightMeteosGuide() {
-  return (
-    <div>
-      <GuideHeading level={4}>Strategy Overview</GuideHeading>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li><strong>Skills:</strong> Same as Special Request stage 12</li>
-        <li><strong>Enrage:</strong> Only has the 1st enrage phase</li>
-      </ul>
-
-      <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Team Suggestions</h3>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li><CharacterLinkCard name="Luna" /> / <CharacterLinkCard name="Veronica" /> / <CharacterLinkCard name="Caren" /></li>
-        <li><CharacterLinkCard name="Tamara" /></li>
-        <li><CharacterLinkCard name="Laplace" /></li>
-        <li><CharacterLinkCard name="Poolside Trickster Regina" /> / <CharacterLinkCard name="Roxie" /></li>
-      </ul>
-
-      <p className="text-neutral-400 text-sm italic mb-4">
-        Note: Typically cleared in 1 to 2 attempts. Verified up to stage 10.
-      </p>
-
-      <hr className="my-6 border-neutral-700" />
-      <TeamTabSelector teams={teams} />
-
-      <hr className="my-6 border-neutral-700" />
-
-      <div className="mb-4">
-              <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-              <p className="text-neutral-400 text-sm italic mt-2">
-                Run provided by <span className="text-white font-semibold">XuRenChao</span> (11/08/2025)
-              </p>
-              <YoutubeEmbed videoId="Do7Vyjz3odI" title="Blazing Knight Meteos - Adventure License - Stage 10 - 1 run clear - by XuRenChao" />
-            </div>
-    </div>
-  )
+    return (
+        <GuideTemplate
+            title="Blazing Knight Meteos Adventure License Guide"
+            introduction="Blazing Knight Meteos Adventure License features the same skills as Special Request Stage 12, but only has the 1st enrage phase. Can be consistently cleared in 1 to 2 attempts with the right team composition. Verified up to stage 10."
+            defaultVersion="default"
+            versions={{
+                default: {
+                    label: 'Guide',
+                    content: (
+                        <>
+                            <BossDisplay bossKey='Blazing Knight Meteos' modeKey='Adventure License' defaultBossId='51000012' />
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                tips={[
+                                    "Reduces WG damage taken from non-{E/Water} enemies by 50%.",
+                                    "Boss deals reduced damage to targets with {B/BT_SHIELD_BASED_CASTER}.",
+                                    "Use {B/BT_REMOVE_DEBUFF} to counter {D/BT_SEALED}."
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={MeteosALTeams.meteosAL} defaultStage="Recommended Team" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage
+                                videoId="Do7Vyjz3odI"
+                                title="Blazing Knight Meteos - Adventure License - Stage 10 - 1 run clear"
+                                author="XuRenChao"
+                                date="11/08/2025"
+                            />
+                        </>
+                    ),
+                },
+            }}
+        />
+    )
 }

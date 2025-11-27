@@ -1,64 +1,54 @@
 'use client'
 
-import EffectInlineTag from '@/app/components/EffectInlineTag'
-import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
-import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import GuideTemplate from '@/app/components/GuideTemplate'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import CombatFootage from '@/app/components/CombatFootage'
+import BossDisplay from '@/app/components/BossDisplay'
+import FulminationALTeamsData from './FulminationAL.json'
+import type { TeamData } from '@/types/team'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import TacticalTips from '@/app/components/TacticalTips'
+import { recommendedCharacters } from './recommendedCharacters'
 
-const teams = {
-  standard: {
-    label: 'Curse Team',
-    icon: 'SC_Buff_Dot_Curse.webp',
-    setup: [
-      ['Monad Eva'],
-      ['Dianne'],
-      ['Marian'],
-      ['Kitsune of Eternity Tamamo-no-Mae', 'Drakhan']
-    ]
-  },
-  counter: {
-    label: 'Counter Team',
-    icon: 'SC_Buff_Counter.webp',
-    setup: [
-      ['Delta','Idith '],
-      ['Fran'],
-      ['Rey', 'Rhona'],
-      ['Ame','Noa','Ryu Lion']
-    ]
-  }
-}
+const FulminationALTeams = FulminationALTeamsData as Record<string, TeamData>
 
-export default function FulMiNationAssaultSuitGuide() {
-  return (
-    <div>
-      <GuideHeading level={4}>Strategy Overview</GuideHeading>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li><strong>Element:</strong> Water</li>
-        <li>Only takes WG damage from <strong>Counter</strong> and <strong>Revenge</strong> attacks (Delta mechanic)</li>
-        <li>Greatly reduced damage from AoE attacks</li>
-        <li>Reduces <EffectInlineTag name="BT_STAT|ST_CRITICAL_RATE" type="debuff" /> for non-Earth units</li>
-        <li><strong>S2:</strong> Deals greatly increased damage to targets without buffs</li>
-        <li><strong>S3:</strong> <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> on boss while <EffectInlineTag name="BT_STAT|ST_SPEED" type="debuff" /> your team (3 turns), ignores immunity and resilience</li>
-        <li><strong>Enrage:</strong> Inflicts <EffectInlineTag name="BT_SILENCE_IR" type="debuff" />, but usually too late to matter</li>
-        <li>Low resilience; only immune to crowd control</li>
-      </ul>
-      <p className="text-neutral-400 text-sm italic mb-4">
-        Note: Typically cleared in 1 attempt. Verified up to stage 10.
-      </p>
-      <hr className="my-6 border-neutral-700" />
-
-
-      <TeamTabSelector teams={teams} />
-
-      <hr className="my-6 border-neutral-700" />
-
-      <div className="mb-4">
-        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="text-neutral-400 text-sm italic mt-2">
-          Run provided by <span className="text-white font-semibold">XuRenChao</span> (29/07/2025)
-        </p>
-        <YoutubeEmbed videoId="lt4osbmszzY" title="Ful.Mi.NATION Assault Suit - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
-      </div>
-    </div>
-  )
+export default function FulminationALGuide() {
+    return (
+        <GuideTemplate
+            title="Vlada Assault Suit Adventure License Guide"
+            introduction="Vlada Assault Suit features a unique mechanic that only takes Weakness Gauge damage from Counter and Revenge attacks. This encounter can typically be cleared in 1 attempt with the right team composition. The strategy has been verified up to stage 10."
+            defaultVersion="default"
+            versions={{
+                default: {
+                    label: 'Guide',
+                    content: (
+                        <>
+                            <BossDisplay bossKey='Vlada Assault Suit' modeKey='Adventure License' defaultBossId='51000029' />
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                tips={[
+                                    "Only takes WG damage from Counter and Revenge attacks.",
+                                    "Greatly reduces damage from AoE attacks.",
+                                    "Reduces {D/BT_STAT|ST_CRITICAL_RATE_IR} for non-{E/Earth} units.",
+                                    "S2 deals greatly increased damage to targets without buffs.",
+                                    "S3 applies {B/BT_STAT|ST_SPEED} to boss and {D/BT_STAT|ST_SPEED} to your team, ignoring immunity and resilience."
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={FulminationALTeams.fulminationAL} defaultStage="Curse Team" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage
+                                videoId="lt4osbmszzY"
+                                title="Ful.Mi.NATION Assault Suit - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao"
+                                author="XuRenChao"
+                                date="29/07/2025"
+                            />
+                        </>
+                    ),
+                },
+            }}
+        />
+    )
 }
