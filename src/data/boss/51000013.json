@@ -49,7 +49,8 @@
         "jp": "敵単体にダメージを与える。攻撃後、味方全体に<color=#28d9ed>シールド</color>を<color=#28d9ed>2ターン</color>の間付与する。",
         "zh": "攻击敌人。攻击后,使全体友军获得<color=#28d9ed>护盾</color>,持续<color=#28d9ed>2回合</color>。"
       },
-      "icon": "Skill_First_4024001"
+      "icon": "Skill_First_4024001",
+      "buff":["BT_SHIELD_BASED_CASTER"]
     },
     {
       "name": {
@@ -65,7 +66,8 @@
         "jp": "敵単体にダメージを与え、対象の<color=#28d9ed>強化効果</color>を<color=#28d9ed>2個</color>解除する。",
         "zh": "攻击敌人,并解除目标的<color=#28d9ed>2个</color><color=#28d9ed>强化效果</color>。"
       },
-      "icon": "Skill_Second_4024001"
+      "icon": "Skill_Second_4024001",
+      "debuff":["BT_REMOVE_BUFF"]
     },
     {
       "name": {
@@ -81,7 +83,8 @@
         "jp": "敵全体にダメージを与える。対象に<color=#28d9ed>出血</color>を<color=#28d9ed>3ターン</color>の間付与し、<color=#28d9ed>【コアオーバードライブ】</color>の固定ダメージが<color=#28d9ed>1000</color>UPする。",
         "zh": "攻击全体敌人。攻击后,对目标造成<color=#28d9ed>出血</color>效果,持续<color=#28d9ed>3回合</color>,并且<color=#28d9ed>核心过载</color>的固定伤害量提升<color=#28d9ed>1000</color>。"
       },
-      "icon": "Skill_Ultimate_4024001"
+      "icon": "Skill_Ultimate_4024001",
+      "debuff":["BT_DOT_BLEED"]
     },
     {
       "name": {
@@ -97,7 +100,8 @@
         "jp": "(パッシブ効果)\\n<color=#28d9ed>出血</color>状態の敵がターン終了時、出血状態の敵全体の<color=#28d9ed>強化効果</color>の持続ターンを<color=#28d9ed>1ターン</color>DOWNさせる。\\n自分を除く味方全体が倒れた場合、受けるダメージがDOWNし、与えるダメージがUPし、WGダメージを受けない。\\n弱体効果がある対象からはWGダメージを受けなくなり、受けるダメージがDOWNする。",
         "zh": "(被动效果)\\n附带<color=#28d9ed>出血</color>效果的敌人回合结束时,使附带出血效果的全体敌人的<color=#28d9ed>强化效果</color>持续时间降低<color=#28d9ed>1回合</color>。\\n若除自身外所有友军全部死亡,则所受伤害降低,造成的伤害提升,且不会受到WG伤害。\\n不会受到来自附带弱化效果目标的WG伤害,且所受伤害降低。"
       },
-      "icon": "MT_Passive_1_Light"
+      "icon": "MT_Passive_1_Light",
+      "debuff":["BT_EXTEND_BUFF"]
     },
     {
       "name": {
@@ -113,7 +117,11 @@
         "jp": "最大HPの<color=#28d9ed>70%</color>以下になると<color=#28d9ed>【狂暴化】</color>状態に切り替わる。\\n\\n<color=#28d9ed>【狂暴化】</color>:自分に解除不可能な攻撃力UP・ダメージDOWNを3ターンの間付与する。【狂暴化】は3ターンの間持続する。\\n\\n<color=#28d9ed>【汚れた吐息】</color>:【狂暴化】終了時に発動する。\\n敵全体に致命的なダメージを与える。",
         "zh": "若生命值降至上限的<color=#28d9ed>70%</color>以下,则转换为<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法解除的攻击力提升/伤害降低效果,持续3回合。狂暴化持续3回合。\\n\\n<color=#28d9ed>肮脏的吐息</color>:狂暴化结束时发动。\\n对全体敌人造成致命伤害。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_ATK_IR"
+      ]
     },
     {
       "name": {

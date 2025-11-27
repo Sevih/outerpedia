@@ -4,38 +4,39 @@ import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
 import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
-import VladiMaxALTeamsData from './VladiMaxAL.json'
+import GustavALTeamsData from './GustavAL.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import { recommendedCharacters } from './recommendedCharacters'
 
-const VladiMaxALTeams = VladiMaxALTeamsData as Record<string, TeamData>
+const GustavALTeams = GustavALTeamsData as Record<string, TeamData>
 
-export default function HeavyFixedVladiMaxGuide() {
+export default function GustavGuide() {
     return (
         <GuideTemplate
-            title="Vladi Max Adventure License Guide"
-            introduction="Fully heals when hit by non-attack skills. Gains stacks on critical hits. Can be cleared with ETamamo carry or Rhona chain strategy. Confirmed clear up to stage 10."
+            title="구스타프 모험 라이선스 가이드"
+            introduction="고정 피해 메커니즘을 가진 오브 관리 챌린지. 1~2회 시도로 클리어 가능. 스테이지 10까지 검증됨."
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '가이드',
                     content: (
                         <>
-                            <BossDisplay bossKey='Vladi Max' modeKey='Adventure License' defaultBossId='51000030' />
+                            <BossDisplay bossKey='Gustav' modeKey='Adventure License' defaultBossId='51000013' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Fully heals when enemy uses a non-attack skill.",
-                                "Gains 2 stacks on critical hit, loses 1 on non-crit. {D/BT_KILL} if the boss plays when having 5 stacks.",
-                                "No WG damage from critical hits.",
+                                "오브는 공격 시 {D/BT_FIXED_DAMAGE}를 가한다.",
+                                "{B/BT_REMOVE_DEBUFF} 또는 {B/BT_IMMUNE}를 가진 유닛을 사용.",
+                                "보스는 오브가 처치될 때 받는 피해가 감소한다.",
+                                "오브의 반격을 최소화하기 위해 단일 대상 피해에 집중."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
-                            <StageBasedTeamSelector teamData={VladiMaxALTeams.vladiMaxAL} defaultStage="ETamamo Carry" />
+                            <StageBasedTeamSelector teamData={GustavALTeams.gustavAL} defaultStage="Standard Team" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="lpQkc37S0zo" title="Heavy Fixed Vladi Max - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="01/10/2025" />
+                            <CombatFootage videoId="U29t5k0bDfY" title="구스타프 - 모험 라이선스 - 스테이지 10 - 1회 클리어 (오토)" author="XuRenChao" date="19/08/2025" />
                         </>
                     ),
                 },

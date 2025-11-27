@@ -4,38 +4,37 @@ import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
 import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
-import VladiMaxALTeamsData from './VladiMaxAL.json'
+import CalamariALTeamsData from './CalamariAL.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import { recommendedCharacters } from './recommendedCharacters'
 
-const VladiMaxALTeams = VladiMaxALTeamsData as Record<string, TeamData>
+const CalamariALTeams = CalamariALTeamsData as Record<string, TeamData>
 
-export default function HeavyFixedVladiMaxGuide() {
+export default function CalamariALGuide() {
     return (
         <GuideTemplate
-            title="Vladi Max Adventure License Guide"
-            introduction="Fully heals when hit by non-attack skills. Gains stacks on critical hits. Can be cleared with ETamamo carry or Rhona chain strategy. Confirmed clear up to stage 10."
+            title="海怪 冒险许可证 攻略"
+            introduction="与特殊请求第12关技能相同，1-2次尝试即可通关。已验证至第10关。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '攻略',
                     content: (
                         <>
-                            <BossDisplay bossKey='Vladi Max' modeKey='Adventure License' defaultBossId='51000030' />
+                            <BossDisplay bossKey='Grand Calamari' modeKey='Adventure License' defaultBossId='51000023' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Fully heals when enemy uses a non-attack skill.",
-                                "Gains 2 stacks on critical hit, loses 1 on non-crit. {D/BT_KILL} if the boss plays when having 5 stacks.",
-                                "No WG damage from critical hits.",
+                                "首领附带强化效果时，所受WG伤害降低100%，因此请使用{D/BT_STEAL_BUFF}、{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}或{D/BT_SEALED}。",
+                                "首领受到来自{E/Light}单位的伤害提升，受到来自非{E/Light}单位的WG伤害降低。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
-                            <StageBasedTeamSelector teamData={VladiMaxALTeams.vladiMaxAL} defaultStage="ETamamo Carry" />
+                            <StageBasedTeamSelector teamData={CalamariALTeams.calamariAL} defaultStage="Recommended Team" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="lpQkc37S0zo" title="Heavy Fixed Vladi Max - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="01/10/2025" />
+                            <CombatFootage videoId="fG8M8BKCUFo" title="海怪 - 冒险许可证 - 第10关 - 1次通关（自动）" author="XuRenChao" date="08/09/2025" />
                         </>
                     ),
                 },

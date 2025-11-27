@@ -5,10 +5,10 @@ Game: **Outerplane**
 ## Status Tracking
 
 ### Converted (100% Perfect)
-- amadeus-AL, anubis-g, ars-novaAL, beatlesAL, forest-king, meteos-AL, fulmination
+- amadeus-AL, anubis-g, ars-novaAL, beatlesAL, calamariAL, forest-king, meteos-AL, fulmination, gustav, heavy-fixed-vladi-max
 
 ### Remaining
-calamariAL, chimeraAL, glicysAL, gustav, heavy-fixed-vladi-max, ksai, masterlessAL, ppu-epsilon, prom-dastei, prom-ddrakhan, prom-dstella, prom-dvlada, prom-gdahlia, prom-meva, sacreed-AL, schattermeister-Schwartz, shadowArch, toddlerAL, ziggsaron
+chimeraAL, glicysAL, ksai, masterlessAL, ppu-epsilon, prom-dastei, prom-ddrakhan, prom-dstella, prom-dvlada, prom-gdahlia, prom-meva, sacreed-AL, schattermeister-Schwartz, shadowArch, toddlerAL, ziggsaron
 
 ---
 
@@ -102,16 +102,18 @@ export const recommendedCharacters = [
         names: ["Character1", "Character2"],
         reason: {
             en: "{E/Fire} DPS options.",
-            jp: "{E/Fire} DPSオプション。",
-            kr: "{E/Fire} DPS 옵션.",
-            zh: "{E/Fire} DPS选项。"
+            jp: "",
+            kr: "",
+            zh: ""
         }
     }
 ]
 ```
 
 **Critical Rules:**
-- ALL 4 languages (en, jp, kr, zh) in one file
+- File structure includes all 4 languages (en, jp, kr, zh)
+- **Phase 1**: Only write English (`en`) - leave jp/kr/zh as empty strings `""`
+- **Phase 2**: Fill in jp/kr/zh translations
 - Export named `recommendedCharacters`
 - Import in TSX: `import { recommendedCharacters } from './recommendedCharacters'`
 
@@ -260,12 +262,21 @@ Format: `{TYPE/VALUE}`
 
 1. User provides boss ID
 2. Read `src/data/boss/{id}.json`
-3. Create `BossNameAL.json` with teams + EN notes
+3. Create `BossNameAL.json` with teams + EN notes only
 4. Read character JSONs from `src/data/char/`
-5. Create `recommendedCharacters.ts` with ALL 4 languages
+5. Create `recommendedCharacters.ts` with structure for all 4 languages BUT only fill `en` (jp/kr/zh = `""`)
 6. Create `en.tsx` with all components
 7. Verify: `python scripts/check-guide-format.py`
 8. **STOP - Wait for user validation**
+
+
+
+**IMPORTANT:** If user modified EN strings after Phase 1, fix typos before Phase 2:
+1. Typo Correction (If User Modified Strings)
+2. Read modified `en.tsx` to identify user changes
+3. Check for typos (missing punctuation, spacing issues, etc.)
+4. Apply corrections to `en.tsx`
+5. **STOP - Wait for user approval to proceed to Phase 2**
 
 ### Phase 2: Localization (After User Approval)
 
@@ -275,9 +286,11 @@ Format: `{TYPE/VALUE}`
    - `introduction`
    - `tips` in TacticalTips
    - `title` in CombatFootage
-3. Add localized notes in JSON:
+3. Fill in translations in `recommendedCharacters.ts`:
+   - Complete `jp`, `kr`, `zh` fields (currently empty strings)
+4. Add localized notes in JSON:
    - `note_jp`, `note_kr`, `note_zh`
-4. Verify: Must show 100% PERFECT score
+5. Verify: Must show 100% PERFECT score
 
 **DO NOT translate:**
 - Component structure/imports

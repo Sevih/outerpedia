@@ -4,38 +4,39 @@ import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
 import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
-import VladiMaxALTeamsData from './VladiMaxAL.json'
+import GustavALTeamsData from './GustavAL.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import { recommendedCharacters } from './recommendedCharacters'
 
-const VladiMaxALTeams = VladiMaxALTeamsData as Record<string, TeamData>
+const GustavALTeams = GustavALTeamsData as Record<string, TeamData>
 
-export default function HeavyFixedVladiMaxGuide() {
+export default function GustavGuide() {
     return (
         <GuideTemplate
-            title="Vladi Max Adventure License Guide"
-            introduction="Fully heals when hit by non-attack skills. Gains stacks on critical hits. Can be cleared with ETamamo carry or Rhona chain strategy. Confirmed clear up to stage 10."
+            title="古斯塔夫 冒险许可证 指南"
+            introduction="带有固定伤害机制的宝珠管理挑战。可在1-2次尝试中通关。已验证至第10关。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
-                            <BossDisplay bossKey='Vladi Max' modeKey='Adventure License' defaultBossId='51000030' />
+                            <BossDisplay bossKey='Gustav' modeKey='Adventure License' defaultBossId='51000013' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Fully heals when enemy uses a non-attack skill.",
-                                "Gains 2 stacks on critical hit, loses 1 on non-crit. {D/BT_KILL} if the boss plays when having 5 stacks.",
-                                "No WG damage from critical hits.",
+                                "宝珠在被攻击时造成{D/BT_FIXED_DAMAGE}。",
+                                "使用拥有{B/BT_REMOVE_DEBUFF}或{B/BT_IMMUNE}的单位。",
+                                "当宝珠被击败时,首领受到的伤害降低。",
+                                "专注于单体伤害以最小化宝珠反击。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
-                            <StageBasedTeamSelector teamData={VladiMaxALTeams.vladiMaxAL} defaultStage="ETamamo Carry" />
+                            <StageBasedTeamSelector teamData={GustavALTeams.gustavAL} defaultStage="Standard Team" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="lpQkc37S0zo" title="Heavy Fixed Vladi Max - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="01/10/2025" />
+                            <CombatFootage videoId="U29t5k0bDfY" title="古斯塔夫 - 冒险许可证 - 第10关 - 1次通关 (自动)" author="XuRenChao" date="19/08/2025" />
                         </>
                     ),
                 },

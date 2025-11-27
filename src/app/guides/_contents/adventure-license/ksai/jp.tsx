@@ -15,27 +15,27 @@ const KsaiALTeams = KsaiALTeamsData as Record<string, TeamData>
 export default function KsaiGuide() {
     return (
         <GuideTemplate
-            title="Ksai Adventure License Guide"
-            introduction="Ksai is a Fire Ranger boss that heavily favors Water units. Non-Water units suffer Attack and Defense penalties, while the entire team receives Debuff Enhancement. The DoT cap makes Curse and fixed damage strategies less effective, limiting damage to 5k per tick. This boss can be cleared in a single run with proper Water-focused team composition."
+            title="ザイ 冒険者ライセンス ガイド"
+            introduction="ザイは水属性ユニットを優遇する火属性スピード型ボスです。水属性以外のユニットは攻撃力と防御力にペナルティを受け、チーム全体が弱体促進を受けます。DoT上限により呪いと固定ダメージ戦略の効果が低く、ティック当たり5000に制限されます。適切な水属性中心のチーム構成で1回でクリアできます。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: 'ガイド',
                     content: (
                         <>
                             <BossDisplay bossKey='Ksai' modeKey='Adventure License' defaultBossId='51000028' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Non-{E/Water} units suffer {D/BT_STAT|ST_ATK_IR} and {D/BT_STAT|ST_DEF_IR} penalties.",
-                                "Team receives {D/BT_SYS_DEBUFF_ENHANCE_IR}, boss has {B/BT_SYS_BUFF_ENHANCE_IR}.",
-                                "Boss is immune to {D/BT_WG_REVERSE_HEAL} until HP drops below 70%."
+                                "{E/Water}以外のユニットは{D/BT_STAT|ST_ATK_IR}と{D/BT_STAT|ST_DEF_IR}のペナルティを受けます。",
+                                "チームは{D/BT_SYS_DEBUFF_ENHANCE_IR}を受け、ボスは{B/BT_SYS_BUFF_ENHANCE_IR}を持ちます。",
+                                "ボスのHPが70%を下回るまで{D/BT_WG_REVERSE_HEAL}に対して免疫があります。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={KsaiALTeams.ksaiAL} defaultStage="Team 1 – Reliable Clear" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="-jEcneW-N3Y" title="Ksai - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="15/09/2025" />
+                            <CombatFootage videoId="-jEcneW-N3Y" title="ザイ - 冒険者ライセンス - ステージ10 - 1回クリア (オート)" author="XuRenChao" date="15/09/2025" />
                         </>
                     ),
                 },

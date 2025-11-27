@@ -15,26 +15,26 @@ const CalamariALTeams = CalamariALTeamsData as Record<string, TeamData>
 export default function CalamariALGuide() {
     return (
         <GuideTemplate
-            title="Grand Calamari Adventure License Guide"
-            introduction="Same skills as Special Request Stage 12, can be cleared in 1-2 attempts. Verified up to stage 10."
+            title="グラン・カラマリー 冒険者ライセンス ガイド"
+            introduction="スペシャルリクエスト ステージ12と同じスキル構成で、1〜2回の挑戦でクリア可能です。ステージ10まで検証済み。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: 'ガイド',
                     content: (
                         <>
                             <BossDisplay bossKey='Grand Calamari' modeKey='Adventure License' defaultBossId='51000023' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Boss reduces WG damage taken by 100% when it has buffs active, so use {D/BT_STEAL_BUFF}, {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF} and/or {D/BT_SEALED}.",
-                                "Boss takes increased damage from {E/Light} units and reduced WG damage from non-{E/Light} units."
+                                "ボスは強化効果を持っている時、受けるWGダメージを100%DOWNさせるため、{D/BT_STEAL_BUFF}、{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}、{D/BT_SEALED}を使用してください。",
+                                "ボスは{E/Light}ユニットから受けるダメージがUPし、{E/Light}以外のユニットからのWGダメージがDOWNします。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={CalamariALTeams.calamariAL} defaultStage="Recommended Team" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="fG8M8BKCUFo" title="Grand Calamari - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="08/09/2025" />
+                            <CombatFootage videoId="fG8M8BKCUFo" title="グラン・カラマリー - 冒険者ライセンス - ステージ10 - 1回クリア (オート)" author="XuRenChao" date="08/09/2025" />
                         </>
                     ),
                 },

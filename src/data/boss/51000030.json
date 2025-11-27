@@ -49,7 +49,8 @@
         "jp": "敵単体にダメージを与える。攻撃後、対象を<color=#28d9ed>3ターン</color>の間<color=#28d9ed>挑発</color>する。",
         "zh": "攻击敌人。攻击后,对目标造成<color=#28d9ed>挑衅</color>,持续<color=#28d9ed>3回合</color>。"
       },
-      "icon": "MT_Attack_Arrow_1_Light"
+      "icon": "MT_Attack_Arrow_1_Light",
+      "debuff":["BT_AGGRO"]
     },
     {
       "name": {
@@ -65,7 +66,8 @@
         "jp": "敵全体にダメージを与える。攻撃後、対象の<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>4ターン</color>の間DOWNさせる。",
         "zh": "攻击全体敌人。攻击后,使目标的<color=#28d9ed>暴击伤害</color>降低,持续<color=#28d9ed>4回合</color>。"
       },
-      "icon": "MT_Attack_Claw_1_Light"
+      "icon": "MT_Attack_Claw_1_Light",
+      "debuff":["BT_STAT|ST_CRITICAL_DMG_RATE"]
     },
     {
       "name": {
@@ -81,7 +83,8 @@
         "jp": "<color=#28d9ed>このスキルは【固有資源:鉄と油の審判】が5個ある場合、使用できる。</color>\\n敵全体にダメージを与え、対象をすべて<color=#28d9ed>即死</color>させる。",
         "zh": "<color=#28d9ed>持有5个固有资源:铁和油的审判时可以使用。</color>\\n攻击全体敌人,并使全体目标<color=#28d9ed>即死</color>。"
       },
-      "icon": "MT_Attack_Magic_1_Light"
+      "icon": "MT_Attack_Magic_1_Light",
+      "debuff":["BT_KILL"]
     },
     {
       "name": {
@@ -97,7 +100,8 @@
         "jp": "(パッシブ効果)\\n敵の<color=#28d9ed>会心率</color>をUPさせる。この効果は解除されない。\\n会心ダメージを受けた時、<color=#28d9ed>【固有資源:鉄と油の審判】</color>を<color=#28d9ed>2個</color>獲得し、会心ダメージを受けなかった時は<color=#28d9ed>1個</color>DOWNする。\\n敵が攻撃以外のスキルを使用時、自分の<color=#28d9ed>HP</color>をすべて回復する。\\n地属性以外の敵からダメージを受けた時、WGダメージが50%DOWNし、会心ダメージを受け時はWGダメージを受けない。\\n地属性以外の敵から受けるダメージがDOWNし、与えるダメージがUPする。\\n地属性の敵から受けるダメージがUPし、与えるダメージがDOWNする。",
         "zh": "(被动效果)\\n使敌人的<color=#28d9ed>暴击率</color>提升。该效果不会被解除。\\n受到暴击时,获得<color=#28d9ed>2个</color><color=#28d9ed>固有资源:铁和油的审判</color>,但受到非暴击的攻击时,降低<color=#28d9ed>1个</color>。\\n敌人使用非攻击类技能时,恢复自身所有<color=#28d9ed>生命值</color>。\\n受到非土属性敌人攻击时,WG伤害降低50%,受到暴击时,不会受到WG伤害。\\n受到来自非土属性敌人的伤害降低,且对其造成的伤害提升。\\n受到来自土属性敌人的伤害提升,且对其造成的伤害降低。"
       },
-      "icon": "MT_Passive_1_Light"
+      "icon": "MT_Passive_1_Light",
+      "buff":["BT_STAT|ST_CRITICAL_RATE_IR"]
     },
     {
       "name": {
@@ -113,7 +117,12 @@
         "jp": "4ターンごとに<color=#28d9ed>【狂暴化】</color>状態に切り替わる。\\n\\n<color=#28d9ed>【狂暴化】</color>:自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与する。狂暴化は3ターンの間継続する。\\n\\n<color=#28d9ed>【大元帥の名において】</color>:【狂暴化】終了時に発動する。\\n敵全体を<color=#28d9ed>即死</color>させる。",
         "zh": "每4回合转换为<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法被解除的攻击力提升/伤害降低效果,持续3回合。狂暴化持续3回合。\\n\\n<color=#28d9ed>以大元帅之名</color>:狂暴化结束时发动。\\n使全体敌人<color=#28d9ed>即死</color>。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff":[
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_ATK_IR"
+      ],
+      "debuff":["BT_KILL"]
     },
     {
       "name": {

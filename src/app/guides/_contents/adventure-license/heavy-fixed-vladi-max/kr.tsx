@@ -15,27 +15,27 @@ const VladiMaxALTeams = VladiMaxALTeamsData as Record<string, TeamData>
 export default function HeavyFixedVladiMaxGuide() {
     return (
         <GuideTemplate
-            title="Vladi Max Adventure License Guide"
-            introduction="Fully heals when hit by non-attack skills. Gains stacks on critical hits. Can be cleared with ETamamo carry or Rhona chain strategy. Confirmed clear up to stage 10."
+            title="블라디 맥스 모험 라이선스 가이드"
+            introduction="공격이 아닌 스킬에 맞으면 체력이 완전히 회복됩니다. 치명타로 스택이 쌓입니다. ETamamo 단독 또는 로나 체인 전략으로 클리어 가능. 스테이지 10까지 클리어 확인됨."
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '가이드',
                     content: (
                         <>
                             <BossDisplay bossKey='Vladi Max' modeKey='Adventure License' defaultBossId='51000030' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Fully heals when enemy uses a non-attack skill.",
-                                "Gains 2 stacks on critical hit, loses 1 on non-crit. {D/BT_KILL} if the boss plays when having 5 stacks.",
-                                "No WG damage from critical hits.",
+                                "적이 공격이 아닌 스킬을 사용하면 체력이 완전히 회복됩니다.",
+                                "치명타로 2 스택 획득, 비치명타로 1 스택 감소. 5 스택 보유 시 보스가 행동하면 {D/BT_KILL}.",
+                                "치명타로는 WG 피해를 입히지 않습니다.",
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={VladiMaxALTeams.vladiMaxAL} defaultStage="ETamamo Carry" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="lpQkc37S0zo" title="Heavy Fixed Vladi Max - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="01/10/2025" />
+                            <CombatFootage videoId="lpQkc37S0zo" title="고정 포대 블라디 맥스 - 모험 라이선스 - 스테이지 10 - 1회 클리어 (오토)" author="XuRenChao" date="01/10/2025" />
                         </>
                     ),
                 },

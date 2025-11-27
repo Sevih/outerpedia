@@ -300,10 +300,17 @@
     "guideId": "calamariAL",
     "characters": [
       "Akari",
-      "Demiurge Stella",
-      "Gnosis Beth",
+      "Gnosis Nella",
+      "Alice",
+      "Edelweiss",
       "Kuro",
-      "Regina"
+      "Stella",
+      "Drakhan",
+      "Gnosis Beth",
+      "Regina",
+      "Demiurge Stella",
+      "Monad Eva",
+      "Dianne"
     ]
   },
   "adventure-license/chimeraAL": {
@@ -376,38 +383,40 @@
     "category": "adventure-license",
     "guideId": "gustav",
     "characters": [
-      "Aer",
-      "Astei",
-      "Bell Cranel",
-      "Demiurge Luna",
-      "Drakhan",
-      "Fatal",
-      "Francesca",
-      "Gnosis Dahlia",
-      "Kitsune of Eternity Tamamo-no-Mae",
-      "Marian",
-      "Maxie",
       "Monad Eva",
       "Nella",
-      "Regina",
-      "Rey",
-      "Roxie",
+      "Astei",
+      "Viella",
+      "Francesca",
+      "Aer",
       "Ryu Lion",
-      "Tamara",
-      "Vlada"
+      "Demiurge Astei",
+      "Gnosis Dahlia",
+      "Laplace",
+      "Gnosis Viella",
+      "Demiurge Luna",
+      "Regina",
+      "Drakhan",
+      "Marian",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Maxie",
+      "Vlada",
+      "Roxie"
     ]
   },
   "adventure-license/heavy-fixed-vladi-max": {
     "category": "adventure-license",
     "guideId": "heavy-fixed-vladi-max",
     "characters": [
-      "Ame",
-      "Dianne",
-      "Kappa",
       "Kitsune of Eternity Tamamo-no-Mae",
+      "Dianne",
+      "Rhona",
+      "Gnosis Nella",
+      "Kappa",
+      "Fran",
+      "Ame",
       "Noa",
       "Rey",
-      "Rhona",
       "Ryu Lion"
     ]
   },
@@ -415,15 +424,17 @@
     "category": "adventure-license",
     "guideId": "ksai",
     "characters": [
+      "Tamara",
       "Caren",
+      "Beth",
+      "Roxie",
+      "Poolside Trickster Regina",
+      "Laplace",
+      "Fortuna",
+      "Summer Knight's Dream Ember",
       "Demiurge Vlada",
       "Edelweiss",
-      "Laplace",
-      "Poolside Trickster Regina",
-      "Roxie",
-      "Sterope",
-      "Summer Knight's Dream Ember",
-      "Tamara"
+      "Sterope"
     ]
   },
   "adventure-license/masterlessAL": {

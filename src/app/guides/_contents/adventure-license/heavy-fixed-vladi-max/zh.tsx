@@ -15,27 +15,27 @@ const VladiMaxALTeams = VladiMaxALTeamsData as Record<string, TeamData>
 export default function HeavyFixedVladiMaxGuide() {
     return (
         <GuideTemplate
-            title="Vladi Max Adventure License Guide"
-            introduction="Fully heals when hit by non-attack skills. Gains stacks on critical hits. Can be cleared with ETamamo carry or Rhona chain strategy. Confirmed clear up to stage 10."
+            title="血腥麦克斯 冒险许可证指南"
+            introduction="受到非攻击技能时会完全恢复生命值。暴击时会累积层数。可通过ETamamo单人或罗娜连携策略通关。已确认通关至第10关。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
                             <BossDisplay bossKey='Vladi Max' modeKey='Adventure License' defaultBossId='51000030' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Fully heals when enemy uses a non-attack skill.",
-                                "Gains 2 stacks on critical hit, loses 1 on non-crit. {D/BT_KILL} if the boss plays when having 5 stacks.",
-                                "No WG damage from critical hits.",
+                                "敌人使用非攻击技能时会完全恢复生命值。",
+                                "暴击时获得2层数，非暴击时减少1层数。持有5层数时首领行动会造成{D/BT_KILL}。",
+                                "暴击不会造成WG伤害。",
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={VladiMaxALTeams.vladiMaxAL} defaultStage="ETamamo Carry" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="lpQkc37S0zo" title="Heavy Fixed Vladi Max - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="01/10/2025" />
+                            <CombatFootage videoId="lpQkc37S0zo" title="固定炮机布拉迪MAX - 冒险许可证 - 第10关 - 1次通关 (自动)" author="XuRenChao" date="01/10/2025" />
                         </>
                     ),
                 },

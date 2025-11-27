@@ -15,27 +15,27 @@ const VladiMaxALTeams = VladiMaxALTeamsData as Record<string, TeamData>
 export default function HeavyFixedVladiMaxGuide() {
     return (
         <GuideTemplate
-            title="Vladi Max Adventure License Guide"
-            introduction="Fully heals when hit by non-attack skills. Gains stacks on critical hits. Can be cleared with ETamamo carry or Rhona chain strategy. Confirmed clear up to stage 10."
+            title="ブラッディマックス 冒険者ライセンスガイド"
+            introduction="攻撃以外のスキルを受けるとHPが全回復する。会心ダメージでスタックが溜まる。ETamamo単騎またはロナチェーン戦略でクリア可能。ステージ10までクリア確認済み。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: 'ガイド',
                     content: (
                         <>
                             <BossDisplay bossKey='Vladi Max' modeKey='Adventure License' defaultBossId='51000030' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Fully heals when enemy uses a non-attack skill.",
-                                "Gains 2 stacks on critical hit, loses 1 on non-crit. {D/BT_KILL} if the boss plays when having 5 stacks.",
-                                "No WG damage from critical hits.",
+                                "敵が攻撃以外のスキルを使用するとHPが全回復する。",
+                                "会心ダメージで2スタック獲得、非会心で1スタック減少。5スタック時にボスが行動すると{D/BT_KILL}。",
+                                "会心ダメージではWGダメージを与えられない。",
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={VladiMaxALTeams.vladiMaxAL} defaultStage="ETamamo Carry" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="lpQkc37S0zo" title="Heavy Fixed Vladi Max - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="01/10/2025" />
+                            <CombatFootage videoId="lpQkc37S0zo" title="固定砲台ブラッディマックス - 冒険者ライセンス - ステージ10 - 1回クリア (オート)" author="XuRenChao" date="01/10/2025" />
                         </>
                     ),
                 },

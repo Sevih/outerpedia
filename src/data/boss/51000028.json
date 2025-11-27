@@ -65,7 +65,8 @@
         "jp": "(発動効果)\\n【命令:制圧】使用後、自分の残りHPが70%以上の場合、敵全体に追加攻撃を与える。攻撃後、自分の<color=#28d9ed>防御力</color>を<color=#28d9ed>4ターン</color>の間UPさせる。この効果は解除されない。",
         "zh": "(触发效果)\\n使用命令:压制后,若自身生命值为70%以上,则对全体敌人造成额外攻击。攻击后,自身<color=#28d9ed>防御力</color>提升,持续<color=#28d9ed>4回合</color>。该效果不会被解除。"
       },
-      "icon": "Skill_Second_4054001"
+      "icon": "Skill_Second_4054001",
+      "buff":["BT_STAT|ST_DEF_IR"]
     },
     {
       "name": {
@@ -81,7 +82,9 @@
         "jp": "敵全体にダメージを与え、対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。この攻撃は対象の免疫と効果抵抗を無視し、解除されない。\\n攻撃後、<color=#28d9ed>追加ターン</color>が発生する。",
         "zh": "攻击全体敌人,使目标的<color=#28d9ed>攻击力</color>降低,持续<color=#28d9ed>2回合</color>。该攻击无视目标的免疫和效果抵抗,并无法解除。\\n攻击后,触发<color=#28d9ed>额外回合</color>。"
       },
-      "icon": "Skill_Ultimate_4054001"
+      "icon": "Skill_Ultimate_4054001",
+      "buff":["BT_ADDITIVE_TURN"],
+      "debuff":["BT_STAT|ST_ATK"]
     },
     {
       "name": {
@@ -97,7 +100,9 @@
         "jp": "(パッシブ効果)\\n<color=#28d9ed>強化促進</color>を永続的に付与する。この効果は解除されない。\\n敵全体に<color=#28d9ed>弱体促進</color>を付与する。この効果は解除されない。\\n残りHPが<color=#28d9ed>70%</color>を超える場合、WGダメージを受けない。\\n<color=#28d9ed>呪い/固定ダメージ</color>のダメージはそれぞれ<color=#28d9ed>5000</color>を超えない。\\n水属性以外の敵の攻撃力/防御力がすべてDOWNする。",
         "zh": "(被动效果)\\n始终获得<color=#28d9ed>强化促进</color>效果。该效果不会被解除。\\n全体敌人始终获得<color=#28d9ed>弱化促进</color>效果。该效果不会被解除。\\n生命值超过<color=#28d9ed>70%</color>时,不会受到WG伤害。\\n<color=#28d9ed>诅咒/固定伤害</color>的伤害不会超过<color=#28d9ed>5000。</color>\\n非水属性敌人的攻击力/防御力全部降低。"
       },
-      "icon": "MT_Passive_1_Fire"
+      "icon": "MT_Passive_1_Fire",
+      "buff":["BT_SYS_BUFF_ENHANCE_IR"],
+      "debuff":["BT_SYS_DEBUFF_ENHANCE_IR","BT_STAT|ST_ATK_IR","BT_STAT|ST_DEF_IR"]
     },
     {
       "name": {
@@ -113,7 +118,12 @@
         "jp": "最大HPの<color=#28d9ed>60%</color>以下になると<color=#28d9ed>【狂暴化】</color>状態に切り替わる。\\n\\n<color=#28d9ed>【狂暴化】</color>:自分に解除不可能な攻撃力UP/ダメージDOWNを3ターンの間付与する。【狂暴化】は3ターンの間持続する。\\n\\n<color=#28d9ed>【命令:テラフォーミング】</color>:【狂暴化】終了時に発動する。\\n敵全体に致命的なダメージを与える。\\n\\n<color=#ffd732>戦闘開始時から1ターン以内に【狂暴化】した場合、敵にCPを100獲得させる。</color>",
         "zh": "若生命值降至上限的<color=#28d9ed>60%</color>以下,则转换为<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法被解除的攻击力提升/伤害降低效果,持续3回合。狂暴化持续3回合。\\n\\n<color=#28d9ed>命令:地球化</color>:狂暴化结束时发动。\\n对全体敌人造成致命伤害。\\n\\n<color=#ffd732>在1回合内陷入狂暴化状态时,恢复100CP</color>。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff": [
+        "BT_DAMGE_TAKEN",
+        "BT_STAT|ST_ATK_IR",
+        "BT_CP_CHARGE"
+      ]
     },
     {
       "name": {
