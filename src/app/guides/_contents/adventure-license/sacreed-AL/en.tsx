@@ -1,59 +1,54 @@
 'use client'
 
-import CharacterLinkCard from '@/app/components/CharacterLinkCard'
-import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
-import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import GuideTemplate from '@/app/components/GuideTemplate'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import CombatFootage from '@/app/components/CombatFootage'
+import BossDisplay from '@/app/components/BossDisplay'
+import SacreedALTeamsData from './SacreedAL.json'
+import type { TeamData } from '@/types/team'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
-const teams = {
-  standard: {
-    label: 'Recommended Team',
-    icon: 'SC_Buff_Light_Dmg.webp',
-    setup: [
-      ['Iota'],
-      ['Demiurge Vlada', 'Eliza'],
-      ['Demiurge Astei'],
-      ['Gnosis Dahlia', 'Maxwell', 'Francesca']
-    ]
-  }
-}
+const SacreedALTeams = SacreedALTeamsData as Record<string, TeamData>
 
 export default function SacreedGuardianGuide() {
-  return (
-    <div>
-      <GuideHeading level={4}>Strategy Overview</GuideHeading>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li><strong>Skills:</strong> Same as Special Request Stage 12</li>
-        <li><strong>HP:</strong> Significantly increased</li>
-        <li><strong>Speed:</strong> Lower than usual</li>
-      </ul>
-      <p className="text-neutral-400 text-sm italic mb-4">
-        Orbs might be killable (likely unintended)
-      </p>
-      <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Team Suggestions</h3>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li><CharacterLinkCard name="Iota" /></li>
-        <li><CharacterLinkCard name="Demiurge Vlada" /> / <CharacterLinkCard name="Eliza" /></li>
-        <li><CharacterLinkCard name="Demiurge Astei" /></li>
-        <li><CharacterLinkCard name="Gnosis Dahlia" /> / <CharacterLinkCard name="Maxwell" /> / <CharacterLinkCard name="Francesca" /></li>
-      </ul>
-
-      <p className="text-neutral-400 text-sm italic mb-4">
-        Note: Typically cleared in 1 to 2 attempts. Verified up to stage 10.
-      </p>
-
-      <hr className="my-6 border-neutral-700" />
-      <TeamTabSelector teams={teams} />
-
-      <hr className="my-6 border-neutral-700" />
-
-      <div className="mb-4">
-        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="text-neutral-400 text-sm italic mt-2">
-          Run provided by <span className="text-white font-semibold">XuRenChao</span> (06/10/2025)
-        </p>
-        <YoutubeEmbed videoId="1ui7TcwD7po" title="Sacreed Guardian - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
-      </div>
-    </div>
-  )
+    return (
+        <GuideTemplate
+            title="Sacreed Guardian Adventure License Guide"
+            introduction="Sacreed Guardian Adventure License features the same skills as Special Request Stage 12. The boss gains Invincibility when ending its turn with a buff, making {D/BT_REMOVE_BUFF} or {D/BT_STUN} lock essential. This encounter can be cleared in 1 to 2 attempts with the right team composition. The strategy has been verified up to stage 10."
+            defaultVersion="default"
+            versions={{
+                default: {
+                    label: 'Guide',
+                    content: (
+                        <>
+                            <div className="space-y-4">
+                                <BossDisplay bossKey='Sacreed Guardian' modeKey='Adventure License' defaultBossId='51000021' />
+                                <BossDisplay bossKey='Deformed Inferior Core' modeKey='Adventure License' defaultBossId='51000022' labelFilter={"Weekly Conquest - Sacreed Guardian"} />
+                            </div>
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                tips={[
+                                    "If the boss ends its turn with any buff, it inflicts {D/BT_STUN} on all non-{C/Healer} units and gains {B/BT_INVINCIBLE}. Use {D/BT_REMOVE_BUFF} or {D/BT_STUN} to prevent this.",
+                                    "Boss enrages every 4 turns, gaining irremovable Attack and damage reduction buffs."
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={SacreedALTeams.sacreedAL} defaultStage="Recommended Team" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage
+                                videoId="1ui7TcwD7po"
+                                title="Sacreed Guardian - Adventure License - Stage 10 - 1 run clear (Auto)"
+                                author="XuRenChao"
+                                date="06/10/2025"
+                            />
+                        </>
+                    ),
+                },
+            }}
+        />
+    )
 }

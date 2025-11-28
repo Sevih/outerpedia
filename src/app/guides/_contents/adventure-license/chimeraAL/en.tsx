@@ -1,44 +1,51 @@
 'use client'
 
-import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
-import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import GuideTemplate from '@/app/components/GuideTemplate'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import CombatFootage from '@/app/components/CombatFootage'
+import BossDisplay from '@/app/components/BossDisplay'
+import ChimeraALTeamsData from './ChimeraAL.json'
+import type { TeamData } from '@/types/team'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
-const teams = {
-  team1: {
-    label: 'Team 1 – Genetic Erasure',
-    icon: 'SC_Buff_Stat_Atk.webp',
-    setup: [
-      ["Holy Night's Blessing Dianne", 'Maxie','Liselotte','Mero'],
-      ['Eternal', 'Tamamo-no-Mae'],
-      ['Aer','Bryn','Bell Cranel'],
-      ['Kanon','Vlada']
-    ]
-  }
-}
+const ChimeraALTeams = ChimeraALTeamsData as Record<string, TeamData>
 
 export default function UnidentifiedChimeraGuide() {
-  return (
-    <div>
-      <GuideHeading level={3}>Strategy Overview</GuideHeading>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li>Same skills as Special Request Stage 12</li>
-      </ul>
-
-      <hr className="my-6 border-neutral-700" />
-      <TeamTabSelector teams={teams} />
-      <p className="text-neutral-400 text-sm italic mb-4">
-        1 attempt. Verified up to stage 10.
-      </p>
-      <hr className="my-6 border-neutral-700" />
-
-      <div className="mb-4">
-              <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-              <p className="text-neutral-400 text-sm italic mt-2">
-                Run provided by <span className="text-white font-semibold">XuRenChao</span> (25/11/2025)
-              </p>
-              <YoutubeEmbed videoId="lil6XEE0VUE" title="Unidentified Chimera - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
-            </div>
-    </div>
-  )
+    return (
+        <GuideTemplate
+            title="Unidentified Chimera Adventure License Guide"
+            introduction="Unidentified Chimera Adventure License features the same skills as Special Request Stage 12. Can be consistently cleared in 1 attempt with the right team composition. Verified up to stage 10."
+            defaultVersion="default"
+            versions={{
+                default: {
+                    label: 'Guide',
+                    content: (
+                        <>
+                            <BossDisplay bossKey='Unidentified Chimera' modeKey='Adventure License' defaultBossId='51000006' />
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                tips={[
+                                    "Boss removes 2 debuffs per turn, so avoid relying only on debuffs.",
+                                    "Critical Damage is reduced by 85% for all units."
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={ChimeraALTeams.chimeraAL} defaultStage="Recommended Team" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage
+                                videoId="lil6XEE0VUE"
+                                title="Unidentified Chimera - Adventure License - Stage 10 - 1 run clear (Auto)"
+                                author="XuRenChao"
+                                date="25/11/2025"
+                            />
+                        </>
+                    ),
+                },
+            }}
+        />
+    )
 }

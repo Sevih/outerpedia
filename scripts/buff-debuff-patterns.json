@@ -151,6 +151,11 @@
       "code": "BT_CP_CHARGE"
     },
     {
+      "pattern": "Reduces the enemy's Chain Points",
+      "type": "debuff",
+      "code": "BT_CP_CHARGE"
+    },
+    {
       "pattern": "Enraged.*reduces damage taken",
       "type": "buff",
       "code": "BT_DAMGE_TAKEN"

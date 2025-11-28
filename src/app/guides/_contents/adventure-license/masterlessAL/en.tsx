@@ -1,45 +1,44 @@
 'use client'
 
-import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
-import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import GuideTemplate from '@/app/components/GuideTemplate'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import CombatFootage from '@/app/components/CombatFootage'
+import BossDisplay from '@/app/components/BossDisplay'
+import masterlessALTeamsData from './masterlessAL.json'
+import type { TeamData } from '@/types/team'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
-const teams = {
-  team1: {
-    label: 'Team 1 – Heavy HP Clear',
-    icon: 'SC_Buff_Stat_Atk.webp',
-    setup: [
-      ["Summer Knight's Dream Ember",'Luna','Veronica'],      
-      ['Tamara','Marian'],      
-      ['Roxie','Caren','Beth','Fatal'],
-      ['Rin','Laplace','Poolside Trickster Regina']
-    ]
-  }
-}
+const masterlessALTeams = masterlessALTeamsData as Record<string, TeamData>
 
 export default function MasterlessGuardianGuide() {
-  return (
-    <div>
-      <GuideHeading level={3}>Strategy Overview</GuideHeading>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li>Same skills as Special Request Stage 12</li>
-        <li>Over double the max HP of the original version</li>
-      </ul>
-
-      <hr className="my-6 border-neutral-700" />
-      <TeamTabSelector teams={teams} />
-      <p className="text-neutral-400 text-sm italic mb-4">
-        1 to 2 attempts. Verified up to stage 8.
-      </p>
-      <hr className="my-6 border-neutral-700" />
-
-      <div className="mb-4">
-        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="text-neutral-400 text-sm italic mt-2">
-          Run provided by <span className="text-white font-semibold">XuRenChao</span> (19/08/2025)
-        </p>
-        <YoutubeEmbed videoId="MZ39RaAYiv0" title="Masterless Guardian - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao" />
-      </div>
-    </div>
-  )
+    return (
+        <GuideTemplate
+            title="Masterless Guardian Adventure License Guide"
+            introduction="Same skills as Special Request Stage 12. Can be cleared in 1-2 attempts. Verified up to stage 10."
+            defaultVersion="default"
+            versions={{
+                default: {
+                    label: 'Guide',
+                    content: (
+                        <>
+                            <BossDisplay bossKey='Masterless Guardian' modeKey='Adventure License' defaultBossId='51000001' />
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips tips={[
+                                "Boss takes no WG damage if not inflicted with a debuff.",
+                                "Mini Guardians increase boss Priority and remove 2 debuffs when attacking."
+                            ]} />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={masterlessALTeams.masterlessAL} defaultStage="Recommended Team" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage videoId="MZ39RaAYiv0" title="Masterless Guardian - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="19/08/2025" />
+                        </>
+                    ),
+                },
+            }}
+        />
+    )
 }

@@ -112,9 +112,9 @@
       "debuff": [
         "BT_DOT_LIGHTNING",
         "BT_DOT_BLEED",
-        "BT_DOT_POISON",
-        "BT_REMOVE_BUFF"
-      ]
+        "BT_DOT_POISON"
+      ],
+      "buff":["BT_REMOVE_DEBUFF"]
     },
     {
       "name": {

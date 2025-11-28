@@ -317,17 +317,20 @@
     "category": "adventure-license",
     "guideId": "chimeraAL",
     "characters": [
-      "Aer",
-      "Bell Cranel",
-      "Bryn",
-      "Eternal",
-      "Holy Night's Blessing Dianne",
-      "Kanon",
-      "Liselotte",
-      "Maxie",
-      "Mero",
       "Tamamo-no-Mae",
-      "Vlada"
+      "Liselotte",
+      "Astei",
+      "Ember",
+      "Eternal",
+      "Mero",
+      "Valentine",
+      "Aer",
+      "Bryn",
+      "Bell Cranel",
+      "Kanon",
+      "Vlada",
+      "Holy Night's Blessing Dianne",
+      "Maxie"
     ]
   },
   "adventure-license/forest-king": {
@@ -441,18 +444,21 @@
     "category": "adventure-license",
     "guideId": "masterlessAL",
     "characters": [
-      "Beth",
-      "Caren",
-      "Fatal",
-      "Laplace",
-      "Luna",
-      "Marian",
-      "Poolside Trickster Regina",
-      "Rin",
-      "Roxie",
       "Summer Knight's Dream Ember",
+      "Luna",
+      "Lyla",
+      "Ritri",
+      "Veronica",
       "Tamara",
-      "Veronica"
+      "Fortuna",
+      "Roxie",
+      "Caren",
+      "Beth",
+      "Fatal",
+      "Marian",
+      "Rin",
+      "Laplace",
+      "Poolside Trickster Regina"
     ]
   },
   "adventure-license/meteos-AL": {
@@ -472,20 +478,21 @@
     "category": "adventure-license",
     "guideId": "ppu-epsilon",
     "characters": [
-      "Akari",
-      "Demiurge Astei",
-      "Demiurge Luna",
-      "Demiurge Stella",
-      "Drakhan",
-      "Gnosis Beth",
-      "Gnosis Nella",
-      "Kuro",
-      "Maxwell",
       "Monad Eva",
-      "Stella",
-      "Sterope",
+      "Demiurge Stella",
+      "Demiurge Astei",
+      "Maxwell",
+      "Gnosis Nella",
+      "Tamara",
+      "Skadi",
       "Tamamo-no-Mae",
-      "Tamara"
+      "Demiurge Luna",
+      "Gnosis Beth",
+      "Akari",
+      "Kuro",
+      "Sterope",
+      "Stella",
+      "Drakhan"
     ]
   },
   "adventure-license/prom-dastei": {
@@ -586,71 +593,88 @@
     "category": "adventure-license",
     "guideId": "sacreed-AL",
     "characters": [
-      "Demiurge Astei",
+      "Iota",
+      "Gnosis Nella",
       "Demiurge Vlada",
       "Eliza",
+      "Omega Nadja",
+      "Demiurge Astei",
       "Francesca",
+      "Gnosis Viella",
       "Gnosis Dahlia",
-      "Iota",
       "Maxwell"
     ]
   },
-  "adventure-license/schattermeister-Schwartz": {
+  "adventure-license/schattenmeisterSchwartz": {
     "category": "adventure-license",
-    "guideId": "schattermeister-Schwartz",
+    "guideId": "schattenmeisterSchwartz",
     "characters": [
-      "Demiurge Astei",
-      "Demiurge Vlada",
-      "Gnosis Dahlia",
+      "Monad Eva",
+      "Hilde",
+      "Omega Nadja",
+      "Sterope",
       "Maxwell",
-      "Monad Eva"
+      "Demiurge Astei",
+      "Gnosis Dahlia",
+      "Demiurge Vlada",
+      "Francesca",
+      "Gnosis Viella",
+      "Sigma"
     ]
   },
   "adventure-license/shadowArch": {
     "category": "adventure-license",
     "guideId": "shadowArch",
     "characters": [
-      "Aer",
-      "Bell Cranel",
-      "Bryn",
-      "Holy Night's Blessing Dianne",
       "Kanon",
-      "Maxie",
+      "Holy Night's Blessing Dianne",
+      "Vlada",
       "Tamamo-no-Mae",
-      "Vlada"
+      "Eternal",
+      "Christina",
+      "Maxie",
+      "Bell Cranel",
+      "Aer",
+      "Bryn"
     ]
   },
   "adventure-license/toddlerAL": {
     "category": "adventure-license",
     "guideId": "toddlerAL",
     "characters": [
-      "Ame",
+      "Viella",
       "Dianne",
-      "Fran",
+      "Saeran",
       "Kappa",
-      "Kitsune of Eternity Tamamo-no-Mae",
+      "Fran",
+      "Ame",
       "Noa",
-      "Rey",
       "Ryu Lion",
-      "Saeran"
+      "Rey",
+      "Kitsune of Eternity Tamamo-no-Mae"
     ]
   },
   "adventure-license/ziggsaron": {
     "category": "adventure-license",
     "guideId": "ziggsaron",
     "characters": [
-      "Beth",
-      "Caren",
-      "Edelweiss",
-      "Ember",
-      "Fatal",
-      "Kitsune of Eternity Tamamo-no-Mae",
-      "Marian",
       "Monad Eva",
-      "Rin",
-      "Stella",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Drakhan",
+      "Marian",
       "Tamara",
-      "Veronica"
+      "Ember",
+      "Caren",
+      "Roxie",
+      "Beth",
+      "Fatal",
+      "Rin",
+      "Laplace",
+      "Poolside Trickster Regina",
+      "Luna",
+      "Summer Knight's Dream Ember",
+      "Veronica",
+      "Fortuna"
     ]
   },
   "irregular-extermination/pursuit-blockbuster": {

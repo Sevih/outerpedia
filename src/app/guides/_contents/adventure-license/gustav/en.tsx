@@ -24,6 +24,7 @@ export default function GustavGuide() {
                     content: (
                         <>
                             <BossDisplay bossKey='Gustav' modeKey='Adventure License' defaultBossId='51000013' />
+                            <BossDisplay bossKey='Spare Core' modeKey='Adventure License' defaultBossId='51000014' labelFilter={"Weekly Conquest - Gustav"} />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
                                 "Orbs deal {D/BT_FIXED_DAMAGE} when attacked.",

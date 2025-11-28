@@ -5,10 +5,25 @@ Game: **Outerplane**
 ## Status Tracking
 
 ### Converted (100% Perfect)
-- amadeus-AL, anubis-g, ars-novaAL, beatlesAL, calamariAL, forest-king, meteos-AL, fulmination, gustav, heavy-fixed-vladi-max
+- amadeus-AL, anubis-g, ars-novaAL, beatlesAL, calamariAL, forest-king, meteos-AL, fulmination, gustav, heavy-fixed-vladi-max, masterlessAL, ppu-epsilon
 
 ### Remaining
-chimeraAL, glicysAL, ksai, masterlessAL, ppu-epsilon, prom-dastei, prom-ddrakhan, prom-dstella, prom-dvlada, prom-gdahlia, prom-meva, sacreed-AL, schattermeister-Schwartz, shadowArch, toddlerAL, ziggsaron
+chimeraAL, glicysAL, ksai, prom-dastei, prom-ddrakhan, prom-dstella, prom-dvlada, prom-gdahlia, prom-meva, sacreed-AL, schattermeister-Schwartz, shadowArch, toddlerAL, ziggsaron
+
+---
+
+## Quick Reference - File Checklist
+
+For each guide, you need these files in `src/app/guides/_contents/adventure-license/{slug}/`:
+
+| File | Phase 1 | Phase 2 | Description |
+|------|---------|---------|-------------|
+| `en.tsx` | Required | Required | English guide |
+| `BossNameAL.json` | Required | Required | Teams + localized notes |
+| `recommendedCharacters.ts` | Required | Required | Character recommendations |
+| `jp.tsx` | - | Required | Japanese guide |
+| `kr.tsx` | - | Required | Korean guide |
+| `zh.tsx` | - | Required | Chinese guide |
 
 ---
 
@@ -35,7 +50,7 @@ export default function BossNameGuide() {
     return (
         <GuideTemplate
             title="Boss Name Adventure License Guide"
-            introduction="Short description, main mechanic, typical attempts. Example: Same skills as Special Request Stage 12, can be cleared in 1-2 attempts. Verified up to stage 10."
+            introduction="Short description, main mechanic, typical attempts. Supports inline tags like {E/Fire}, {P/CharName}. Example: Same skills as Special Request Stage 12, can be cleared in 1-2 attempts. Verified up to stage 10."
             defaultVersion="default"
             versions={{
                 default: {
@@ -43,6 +58,8 @@ export default function BossNameGuide() {
                     content: (
                         <>
                             <BossDisplay bossKey='Boss Name' modeKey='Adventure License' defaultBossId='51000XXX' />
+                            {/* For adds/secondary bosses, use labelFilter to show only the relevant version */}
+                            {/* <BossDisplay bossKey='Add Name' modeKey='Adventure License' defaultBossId='51000YYY' labelFilter={"Weekly Conquest - Boss Name"} /> */}
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[...]} />
                             <hr className="my-6 border-neutral-700" />
@@ -141,6 +158,71 @@ tips={[
 
 **CRITICAL:** Verify buff/debuff keys in `src/data/buffs.json` and `src/data/debuffs.json` before using `{B/...}` or `{D/...}` tags.
 
+### How to Detect Boss Class Mechanics
+
+**Step 1: Read boss JSON skills**
+Search for keywords in skill descriptions:
+- "Striker", "Defender", "Ranger", "Healer", "Mage"
+- "攻撃型", "防御型", "スピード型", "回復型", "魔法型" (Japanese)
+
+**Step 2: Identify class mechanic type**
+
+| Mechanic | Example Text |
+|----------|--------------|
+| Class bonus | "increases damage taken from Mage and Ranger enemies" |
+| Class resist | "reduces damage taken from Striker enemies" |
+| Class penalty | "reduces Critical Hit Chance for non-{Class} units" |
+
+**Example - Forest King (HAS class mechanics):**
+```
+"Greatly reduces damage taken from Striker enemies, but increases
+damage taken from Mage and Ranger enemies."
+```
+→ Mention class in recommendations: `"{E/Light} {C/Mage} and {C/Ranger} DPS options."`
+
+**Example - Meteos (NO class mechanics):**
+```
+"Reduces Weakness Gauge damage taken from non-Water enemies by 50%"
+```
+→ Only mention element: `"{E/Water} DPS options."`
+
+---
+
+### Adding Secondary Bosses (Adds)
+
+Some encounters have secondary bosses (adds) that spawn alongside the main boss. To display them:
+
+**Step 1: Find the add in boss index**
+```
+READ src/data/boss/index.json
+├── Search for add name (e.g., "Deformed Inferior Core")
+├── Look for matching mode with a label field
+└── Get the ID from that entry
+```
+
+**Step 2: Use labelFilter to show only the relevant version**
+
+The `labelFilter` prop filters which version of the add to display (some adds appear in multiple encounters).
+
+```tsx
+<div className="space-y-4">
+    <BossDisplay bossKey='Main Boss' modeKey='Adventure License' defaultBossId='51000XXX' />
+    <BossDisplay bossKey='Add Name' modeKey='Adventure License' defaultBossId='51000YYY' labelFilter={"Weekly Conquest - Main Boss"} />
+</div>
+```
+
+**Example - Sacreed Guardian with Deformed Inferior Core:**
+```tsx
+<div className="space-y-4">
+    <BossDisplay bossKey='Sacreed Guardian' modeKey='Adventure License' defaultBossId='51000021' />
+    <BossDisplay bossKey='Deformed Inferior Core' modeKey='Adventure License' defaultBossId='51000022' labelFilter={"Weekly Conquest - Sacreed Guardian"} />
+</div>
+```
+
+**Note:** Wrap multiple BossDisplay components in `<div className="space-y-4">` for proper spacing.
+
+---
+
 ### RecommendedCharacterList Procedure
 
 **CRITICAL:** Never invent reasons. All info must be verified from character JSON files.
@@ -154,7 +236,7 @@ tips={[
 
 2. **Identify boss synergies:**
    - Element: Counters boss element, avoids penalties
-   - Class: Benefits from boss class mechanics (ONLY if boss has class mechanics)
+   - Class: Benefits from boss class mechanics (ONLY if boss has class mechanics - see detection above)
    - Abilities: Immunities, cleanse, buff removal, dual attack, ignore-defense
    - Tags: Special mechanics
 
@@ -256,60 +338,170 @@ Format: `{TYPE/VALUE}`
 
 ---
 
+## Data Lookup Procedures
+
+### Finding bossKey and defaultBossId
+
+**Step 1: Find boss in index**
+```
+READ src/data/boss/index.json
+├── Search for boss name (e.g., "Forest King")
+├── Look for "Adventure License" mode
+└── Get the ID from that entry
+```
+
+**Step 2: Verify in boss JSON**
+```
+READ src/data/boss/{id}.json
+├── bossKey = Name.en field (EXACT match required)
+└── defaultBossId = id field
+```
+
+**Example:**
+```json
+// In index.json
+"Forest King": {
+    "Adventure License": [
+        { "id": "51000017", ... }
+    ]
+}
+
+// In 51000017.json
+{
+    "id": "51000017",
+    "Name": { "en": "Forest King", ... }
+}
+
+// In en.tsx
+<BossDisplay bossKey='Forest King' modeKey='Adventure License' defaultBossId='51000017' />
+```
+
+**CRITICAL:** `bossKey` must EXACTLY match `Name.en` from boss JSON. No typos, no modifications.
+
+---
+
 ## Workflow
 
 ### Phase 1: EN Version Creation
 
-1. User provides boss ID
-2. Read `src/data/boss/{id}.json`
-3. Create `BossNameAL.json` with teams + EN notes only
-4. Read character JSONs from `src/data/char/`
-5. Create `recommendedCharacters.ts` with structure for all 4 languages BUT only fill `en` (jp/kr/zh = `""`)
-6. Create `en.tsx` with all components
-7. Verify: `python scripts/check-guide-format.py`
-8. **STOP - Wait for user validation**
+**Step 1: Data Collection**
+```
+READ src/data/boss/{id}.json
+├── Extract: Name.en (for bossKey), id (for defaultBossId)
+├── Extract: Name.jp, Name.kr, Name.zh (for localized titles)
+├── Extract: Skills (for TacticalTips)
+├── Extract: BuffImmune, StatBuffImmune (for immunities)
+└── Note: Any class/element mechanics in skill descriptions
+```
 
+**Step 2: Create JSON File (`BossNameAL.json`)**
+```json
+{
+    "bossNameAL": {
+        "Stage Name": {
+            "icon": "effect_name",      // ← Name only, NO path/extension
+            "team": [["Char1"], ["Char2"]],
+            "note": [{"type": "p", "string": "EN text"}],
+            "note_jp": [],              // ← Empty array, NOT missing
+            "note_kr": [],              // ← Empty array, NOT missing
+            "note_zh": []               // ← Empty array, NOT missing
+        }
+    }
+}
+```
 
+**Step 3: Create `recommendedCharacters.ts`**
+```typescript
+export const recommendedCharacters = [
+    {
+        names: ["Character1", "Character2"],
+        reason: {
+            en: "{E/Element} DPS options.",
+            jp: "",     // ← Empty string, NOT missing
+            kr: "",     // ← Empty string, NOT missing
+            zh: ""      // ← Empty string, NOT missing
+        }
+    }
+]
+```
 
-**IMPORTANT:** If user modified EN strings after Phase 1, fix typos before Phase 2:
-1. Typo Correction (If User Modified Strings)
-2. Read modified `en.tsx` to identify user changes
-3. Check for typos (missing punctuation, spacing issues, etc.)
-4. Apply corrections to `en.tsx`
-5. **STOP - Wait for user approval to proceed to Phase 2**
+**Step 4: Create `en.tsx`**
+- Use template from File Structure Requirements
+- All 6 components in order: BossDisplay → TacticalTips → RecommendedCharacterList → StageBasedTeamSelector → CombatFootage
 
-### Phase 2: Localization (After User Approval)
+**Step 5: Verify**
+```bash
+python scripts/check-guide-format.py | grep "guide-slug"
+```
+Expected: `[PERFECT 100%] adventure-license/guide-slug (Single) +rc`
 
-1. Copy `en.tsx` → `jp.tsx`, `kr.tsx`, `zh.tsx`
-2. Translate in each file:
-   - `title` (use boss JSON + translate "Guide")
-   - `introduction`
-   - `tips` in TacticalTips
-   - `title` in CombatFootage
-3. Fill in translations in `recommendedCharacters.ts`:
-   - Complete `jp`, `kr`, `zh` fields (currently empty strings)
-4. Add localized notes in JSON:
-   - `note_jp`, `note_kr`, `note_zh`
-5. Verify: Must show 100% PERFECT score
-
-**DO NOT translate:**
-- Component structure/imports
-- Inline tags
-- Character names
-- `bossKey`, `modeKey`, `defaultBossId`
+**Step 6: STOP - Wait for User Validation**
 
 ---
 
-## Critical Rules
+### Phase 1.5: Typo Correction (If User Modified Strings)
 
-1. ALWAYS `'use client'` at top
-2. ALWAYS include all 6 components in order
-3. ALWAYS create `recommendedCharacters.ts` with 4 languages
-4. NEVER invent character abilities - verify in JSONs
-5. NEVER mention class unless boss has class mechanics
-6. ALWAYS wait for user validation before localization
-7. ALWAYS add empty `note_jp`, `note_kr`, `note_zh` arrays in JSON
-8. Icon format: name only (no path/extension)
+If the user made changes to EN strings:
+1. Read modified `en.tsx` and `BossNameAL.json`
+2. Check for typos (missing punctuation, spacing issues)
+3. Apply corrections
+4. **STOP - Wait for user approval to proceed to Phase 2**
+
+---
+
+### Phase 2: Localization (After User Approval)
+
+**Step 1: Copy TSX Files**
+```
+en.tsx → jp.tsx, kr.tsx, zh.tsx
+```
+
+**Step 2: Translate in Each TSX**
+
+| Field | Translate? | Example |
+|-------|-----------|---------|
+| `title` | YES | "Blazing Knight Meteos Adventure License Guide" → "炎の騎士メテオス アドベンチャーライセンス ガイド" |
+| `introduction` | YES | Full translation (supports inline tags like `{E/Fire}`, `{P/CharName}`) |
+| `tips` array | YES | Each tip string |
+| `CombatFootage title` | YES | Video title |
+| `bossKey` | NO | Keep English |
+| `modeKey` | NO | Keep "Adventure License" |
+| `defaultBossId` | NO | Keep ID |
+| Character names | NO | Keep English |
+| Inline tags | NO | Keep `{E/Fire}`, `{B/BT_X}` |
+
+**Step 3: Fill `recommendedCharacters.ts`**
+- Complete `jp`, `kr`, `zh` fields (currently `""`)
+
+**Step 4: Fill JSON Notes**
+- Complete `note_jp`, `note_kr`, `note_zh` arrays
+
+**Step 5: Final Verify**
+```bash
+python scripts/check-guide-format.py | grep "guide-slug"
+```
+Expected: `[PERFECT 100%] adventure-license/guide-slug (Full) +rc`
+
+---
+
+## Critical Rules Summary
+
+### ALWAYS DO
+1. `'use client'` at top of every TSX
+2. Include all 6 components in correct order
+3. Create `recommendedCharacters.ts` with all 4 language keys
+4. Add empty `note_jp`, `note_kr`, `note_zh` arrays in JSON (Phase 1)
+5. Use icon name only (no path, no extension)
+6. Verify buff/debuff keys exist in JSON files before using `{B/...}` or `{D/...}`
+7. Wait for user validation before Phase 2
+
+### NEVER DO
+1. Invent character abilities - always verify in `src/data/char/{slug}.json`
+2. Mention class unless boss has class-specific mechanics
+3. Use `label` field for buff/debuff tags (use `name` field)
+4. Use full paths in icons (`/images/ui/effect/fire.webp` → `fire`)
+5. Skip empty arrays in JSON (`note_jp: []` is required even if empty)
+6. Translate character names or inline tags
 
 ---
 
@@ -325,10 +517,161 @@ After localization: `(Full) +rc`
 
 ---
 
+## Pre-Submit Validation Checklist
+
+Before submitting Phase 1, manually verify:
+
+### JSON File Validation
+```
+□ File named `{BossName}AL.json` (NOT `teams.json`)
+□ Root key matches filename (e.g., `meteosAL` for `MeteosAL.json`)
+□ Every stage has ALL fields: icon, team, note, note_jp, note_kr, note_zh
+□ Icon is name only: "fire" ✓ | "/images/ui/effect/fire.webp" ✗
+□ note_jp, note_kr, note_zh are empty arrays `[]` (NOT missing)
+```
+
+### recommendedCharacters.ts Validation
+```
+□ File exists in same folder as en.tsx
+□ Export named `recommendedCharacters`
+□ Every entry has: names, reason.en, reason.jp, reason.kr, reason.zh
+□ reason.jp/kr/zh are empty strings `""` (NOT missing)
+□ All buff/debuff tags verified in src/data/{buffs,debuffs}.json
+```
+
+### en.tsx Validation
+```
+□ 'use client' at line 1
+□ Imports recommendedCharacters from './recommendedCharacters'
+□ All 6 components present in order
+□ bossKey matches exactly the `Name.en` field in boss JSON
+□ defaultBossId matches the boss ID for Adventure License mode
+```
+
+---
+
+## Common Mistakes - DO vs DON'T
+
+### Icon Format
+
+```json
+// ✅ CORRECT
+"icon": "fire"
+"icon": "SC_Buff_Effect_Remove_Buff"
+
+// ❌ WRONG
+"icon": "/images/ui/effect/fire.webp"
+"icon": "fire.webp"
+```
+
+### JSON Note Arrays
+
+```json
+// ✅ CORRECT - Phase 1 (empty arrays present)
+{
+    "note": [{"type": "p", "string": "EN text"}],
+    "note_jp": [],
+    "note_kr": [],
+    "note_zh": []
+}
+
+// ❌ WRONG - Missing arrays
+{
+    "note": [{"type": "p", "string": "EN text"}]
+}
+```
+
+### recommendedCharacters.ts Structure
+
+```typescript
+// ✅ CORRECT - All 4 language keys present
+{
+    names: ["Luna"],
+    reason: {
+        en: "{E/Water} support.",
+        jp: "",
+        kr: "",
+        zh: ""
+    }
+}
+
+// ❌ WRONG - Missing language keys
+{
+    names: ["Luna"],
+    reason: {
+        en: "{E/Water} support."
+    }
+}
+```
+
+### Buff/Debuff Tags
+
+```typescript
+// ✅ CORRECT - Using `name` field from JSON
+"{B/BT_REMOVE_DEBUFF}"      // name: "BT_REMOVE_DEBUFF"
+"{D/BT_STUN}"               // name: "BT_STUN"
+"{B/BT_SHIELD_BASED_CASTER}" // name: "BT_SHIELD_BASED_CASTER"
+
+// ❌ WRONG - Using label or invented keys
+"{B/Debuff Cleanse}"        // This is a label, not name
+"{D/Stun}"                  // This is a label, not name
+"{B/BT_SUPER_BUFF}"         // Invented, doesn't exist
+```
+
+### Class Mentions
+
+```typescript
+// ✅ CORRECT - Boss HAS class mechanics (e.g., Forest King)
+"{E/Light} {C/Mage} and {C/Ranger} DPS options."
+
+// ✅ CORRECT - Boss has NO class mechanics (e.g., Meteos)
+"{E/Water} DPS options."
+
+// ❌ WRONG - Mentioning class when boss has no class mechanics
+"{E/Water} {C/Mage} DPS options."  // Don't mention Mage if boss doesn't care
+```
+
+### Character Abilities
+
+```typescript
+// ✅ CORRECT - Verified from src/data/char/{slug}.json
+"Luna with {B/BT_REMOVE_DEBUFF} and {B/BT_SHIELD_BASED_CASTER}."
+
+// ❌ WRONG - Invented abilities
+"Luna with Burst Damage and Team Cleanse."  // Not verified
+
+// ✅ CORRECT - Describe in plain text if unsure about tag
+"Luna with debuff removal and shield."  // Safe fallback
+```
+
+---
+
 ## Reference Examples
 
-Perfect 100% guides:
-- `amadeus-AL` (BossNameAL.json pattern)
-- `anubis-g` (Multiple teams)
-- `forest-king` (Boss with class mechanics)
-- `meteos-AL` (Boss without class mechanics)
+Perfect 100% guides to use as templates:
+
+| Guide | Pattern | Note |
+|-------|---------|------|
+| `meteos-AL` | Standard | Boss without class mechanics |
+| `forest-king` | With class | Boss WITH class mechanics |
+| `anubis-g` | Multiple teams | Multiple team options |
+| `ppu-epsilon` | Multi-boss | Multiple BossDisplay components |
+
+---
+
+## Troubleshooting
+
+### Score not reaching 100%?
+
+1. **Missing +rc?** → Check `recommendedCharacters.ts` exists and has all 4 language keys
+2. **"Single" instead of "Full"?** → Missing jp.tsx, kr.tsx, or zh.tsx files
+3. **Invalid icons warning?** → Remove path/extension from icon values
+4. **Missing note translations?** → Add empty `note_jp: []` arrays in JSON
+
+### Common Errors
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `bossKey not found` | Typo in bossKey | Check exact `name` in boss JSON |
+| `Cannot find './recommendedCharacters'` | File missing | Create recommendedCharacters.ts |
+| `reason.jp is undefined` | Missing language key | Add `jp: ""` to reason object |

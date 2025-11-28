@@ -24,6 +24,7 @@ export default function ArsNovaGuide() {
                     content: (
                         <>
                             <BossDisplay bossKey="Ars Nova" modeKey='Adventure License' defaultBossId='51000024' />
+                            <BossDisplay bossKey='Deformed Inferior Core' modeKey='Adventure License' defaultBossId='51000025' labelFilter={"Weekly Conquest - Ars Nova"} />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips
                                 tips={[

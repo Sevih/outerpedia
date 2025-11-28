@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import VersionSelector from '@/app/components/VersionSelector'
 import GuideHeading from '@/app/components/GuideHeading'
+import parseText from '@/utils/parseText'
 
 type Version = {
   label: string
@@ -50,7 +51,7 @@ export default function GuideTemplate({
       {/* Introduction si fournie */}
       {introduction && (
         <p className="text-neutral-300 mb-6 leading-relaxed">
-          {introduction}
+          {parseText(introduction)}
         </p>
       )}
 
