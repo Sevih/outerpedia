@@ -113,7 +113,8 @@
       "debuff": [
         "BT_EXTEND_BUFF",
         "BT_EXTEND_DEBUFF",
-        "BT_STAT|ST_BUFF_CHANCE_IR"
+        "BT_STAT|ST_BUFF_CHANCE_IR",
+        "BT_RANDOM"
       ]
     },
     {
@@ -132,10 +133,12 @@
       },
       "icon": "MT_Passive_1_Dark",
       "buff": [
-        "BT_STAT|ST_CRITICAL_DMG_RATE_IR"
+        "BT_STAT|ST_CRITICAL_DMG_RATE_IR",
+        "BT_SYS_BUFF_ENHANCE_IR"
       ],
       "debuff": [
         "BT_STAT|ST_CRITICAL_RATE_IR"
+        
       ]
     },
     {
