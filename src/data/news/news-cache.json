@@ -1,6 +1,18 @@
 {
   "en": [
     {
+      "slug": "live-en-4506",
+      "title": "[Developer’s Notes] Gear Set Effect Adjustments & Monad Gate Improvements",
+      "date": "2025/11/28 1:29:29",
+      "category": "notice",
+      "excerpt": ". This is Hyun Moonsu, PD of OUTERPLANE. I would like to share the major changes coming in the upcoming update, specifically related to adjustments to Gear Set Effects and improvements to Monad Gate. ...",
+      "coverImage": "/images/news/live/en/4506-3d23893f.webp",
+      "uid": "4506",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/28/developers-notes-gear-set-effect-adjustments-monad-gate-improvements/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-4522",
       "title": "[Winners Announcement] 2.5-Year Anniversary – Show Off Your Strongest Hero Event",
       "date": "2025/11/26 8:29:30",
@@ -12174,6 +12186,18 @@
     }
   ],
   "jp": [
+    {
+      "slug": "live-jp-4502",
+      "title": "【開発者お便り】防具セットオプション調整およびモナド・ゲート改善のお知らせ",
+      "date": "2025/11/28 1:28:54",
+      "category": "notice",
+      "excerpt": "マスターの皆様、こんにちは。 『アウタープレーン』開発プロデューサーのヒョン・ムンスです。 この度、今後のアップデートで適用される防具セットオプションの調整およびモナドゲートの改善に関する主な内容をご案内させていただきます。 マスターの皆様からのフィードバックに基づき、ゲームの戦略的な奥深さと利便性を高めることに注力いたしました。 防具セットオプション調整のご案内 防具セットごとの活用度を高めるた...",
+      "coverImage": "/images/news/live/jp/4502-8c8eb6ed.webp",
+      "uid": "4502",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/28/%e3%80%90%e9%96%8b%e7%99%ba%e8%80%85%e3%81%8a%e4%be%bf%e3%82%8a%e3%80%91%e9%98%b2%e5%85%b7%e3%82%bb%e3%83%83%e3%83%88%e3%82%aa%e3%83%97%e3%82%b7%e3%83%a7%e3%83%b3%e8%aa%bf%e6%95%b4%e3%81%8a%e3%82%88/",
+      "views": 0,
+      "lang": "jp"
+    },
     {
       "slug": "live-jp-4529",
       "title": "【当選者発表】1.5周年記念「最強仲間自慢大会」",
@@ -24397,6 +24421,18 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-4499",
+      "title": "[개발자 편지] 장비 세트 효과 조정 및 모나드 게이트 개선 안내",
+      "date": "2025/11/28 1:28:42",
+      "category": "notice",
+      "excerpt": "안녕하세요, 오너님들. 아우터플레인 PD 현문수입니다. 다가오는 업데이트에 적용될 장비 세트 효과 조정 및 모나드 게이트 개선 관련 주요 내용을 안내해 드리고자 이렇게 글을 씁니다. 오너님들의 피드백을 바탕으로 게임의 전략적 깊이와 편의성을 높이는 데 집중했습니다. 장비 세트 효과 조정 안내 방어구 세트별 활용도를 높이기 위해 일부 장비 세트의 효과가 조정...",
+      "coverImage": "/images/news/live/kr/4499-08a384a2.webp",
+      "uid": "4499",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/11/28/%ea%b0%9c%eb%b0%9c%ec%9e%90-%eb%85%b8%ed%8a%b8-%ec%9e%a5%eb%b9%84-%ec%84%b8%ed%8a%b8-%ed%9a%a8%ea%b3%bc-%ec%a1%b0%ec%a0%95-%eb%b0%8f-%eb%aa%a8%eb%82%98%eb%93%9c-%ea%b2%8c%ec%9d%b4%ed%8a%b8-%ea%b0%9c/",
+      "views": 0,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-4515",
       "title": "[당첨자 발표] 2.5 주년 기념 나의 최강 영웅 자랑 이벤트",

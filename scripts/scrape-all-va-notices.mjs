@@ -6,7 +6,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
-import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -662,28 +661,7 @@ async function main() {
     console.log(`${lang.toUpperCase()}: ${count} notices`);
   }
   console.log('\nAll done!');
-
-  // Convert images to WebP
-  console.log('\n\n' + '='.repeat(60));
-  console.log('CONVERTING IMAGES TO WEBP');
-  console.log('='.repeat(60));
-
-  try {
-    const convertScriptPath = path.join(__dirname, '..', 'convert_to_webp.bat');
-    console.log(`Running: ${convertScriptPath}`);
-
-    // Execute the batch file
-    execSync(`"${convertScriptPath}"`, {
-      cwd: path.join(__dirname, '..'),
-      stdio: 'inherit', // Show output in console
-      windowsHide: false
-    });
-
-    console.log('\nWebP conversion completed!');
-  } catch (error) {
-    console.error('\nError during WebP conversion:', error.message);
-    console.error('You may need to run convert_to_webp.bat manually.');
-  }
+  console.log('\n💡 WebP conversion is handled automatically by the dev watcher (npm run dev).');
 }
 
 main().catch(console.error);
