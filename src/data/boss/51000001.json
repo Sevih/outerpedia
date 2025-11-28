@@ -49,12 +49,8 @@
         "jp": "敵単体にダメージを与える。\\n戦場に【ミニガーディアン】がいる場合、ダメージがUPする。<color=#28d9ed>【ミニガーディアン】</color>を<color=#28d9ed>2体</color>召喚する。\\n【ミニガーディアン】が攻撃時、【主を失ったガーディアン】の行動ゲージが<color=#28d9ed>20%</color>UPし、弱体効果を<color=#28d9ed>2個</color>解除する。<color=#28d9ed>【ガーディアンキャノン】</color>のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
         "zh": "攻击敌人。\\n有小型守护者存在时,伤害量提升,并召唤<color=#28d9ed>2个</color><color=#28d9ed>小型守护者</color>。\\n攻击小型守护者时,首领的行动值提升<color=#28d9ed>20%</color>,解除附带的<color=#28d9ed>2个</color>弱化效果。使<color=#28d9ed>守护者加农炮</color>的冷却时间减少<color=#28d9ed>1回合</color>。"
       },
-      "icon": "Skill_First_4044001",
-      "buff": [
-        "BT_COOL_CHARGE",
-        "BT_ACTION_GAUGE",
-        "BT_REMOVE_DEBUFF"
-      ]
+      "icon": "Skill_First_4044001"
+      
     },
     {
       "name": {
@@ -70,12 +66,7 @@
         "jp": "敵全体にダメージを与える。\\n戦場に【ミニガーディアン】がいる場合、ダメージがUPする。<color=#28d9ed>【ミニガーディアン】</color>を<color=#28d9ed>2体</color>召喚する。\\n【ミニガーディアン】が攻撃時、【主を失ったガーディアン】の行動ゲージが<color=#28d9ed>20%</color>UPし、弱体効果を<color=#28d9ed>2個</color>解除する。また、<color=#28d9ed>【ガーディアンキャノン】</color>のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
         "zh": "攻击全体敌人。\\n有小型守护者存在时,伤害量提升,并召唤<color=#28d9ed>2个</color><color=#28d9ed>小型守护者</color>。\\n攻击小型守护者时,首领的行动值提升<color=#28d9ed>20%</color>,解除附带的<color=#28d9ed>2个</color>弱化效果。使<color=#28d9ed>守护者加农炮</color>的冷却时间减少<color=#28d9ed>1回合</color>。"
       },
-      "icon": "Skill_Second_4076006",
-      "buff": [
-        "BT_COOL_CHARGE",
-        "BT_ACTION_GAUGE",
-        "BT_REMOVE_DEBUFF"
-      ]
+      "icon": "Skill_Second_4076006"
     },
     {
       "name": {

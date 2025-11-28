@@ -24,6 +24,7 @@ export default function ForestKingGuide() {
                     content: (
                         <>
                             <BossDisplay bossKey='Forest King' modeKey='Adventure License' defaultBossId='51000017' />
+                            <BossDisplay bossKey='Spare Core' modeKey='Adventure License' defaultBossId='51000018' labelFilter={"Weekly Conquest - Forest King"} />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips
                                 tips={[

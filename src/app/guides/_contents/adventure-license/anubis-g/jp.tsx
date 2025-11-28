@@ -9,6 +9,7 @@ import type { TeamData } from '@/types/team'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import TacticalTips from '@/app/components/TacticalTips'
 import { recommendedCharacters } from './recommendedCharacters'
+import MiniBossDisplay from '@/app/components/MiniBossDisplay'
 
 const AnubisALTeams = AnubisALTeamsData as Record<string, TeamData>
 
@@ -24,6 +25,14 @@ export default function AnubisGuardianGuide() {
                     content: (
                         <>
                             <BossDisplay bossKey="Iota World's Giant God Soldier" modeKey='Adventure License' defaultBossId='51000031' />
+                            <MiniBossDisplay
+                                bosses={[
+                                    { bossKey: 'Sand Soldier Khopesh', defaultBossId: '51000032' },
+                                    { bossKey: 'Sand Soldier Spear', defaultBossId: '51000033' }
+                                ]}
+                                modeKey={['Weekly Conquest - Anubis Guardian']}
+                                defaultModeKey='Weekly Conquest - Anubis Guardian'
+                            />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips
                                 tips={[

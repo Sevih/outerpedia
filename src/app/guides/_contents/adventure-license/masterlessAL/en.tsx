@@ -7,6 +7,7 @@ import BossDisplay from '@/app/components/BossDisplay'
 import masterlessALTeamsData from './masterlessAL.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
+import MiniBossDisplay from '@/app/components/MiniBossDisplay'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import { recommendedCharacters } from './recommendedCharacters'
 
@@ -24,6 +25,14 @@ export default function MasterlessGuardianGuide() {
                     content: (
                         <>
                             <BossDisplay bossKey='Masterless Guardian' modeKey='Adventure License' defaultBossId='51000001' />
+                            <MiniBossDisplay
+                                bosses={[
+                                    { bossKey: 'Dungeon Guardian Spear-Wielder', defaultBossId: '51000002' },
+                                    { bossKey: 'Mini Guardian', defaultBossId: '51000003' }
+                                ]}
+                                modeKey={['Weekly Conquest - Masterless Guardian']}
+                                defaultModeKey='Weekly Conquest - Masterless Guardian'
+                            />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
                                 "Boss takes no WG damage if not inflicted with a debuff.",
