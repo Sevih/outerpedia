@@ -869,7 +869,7 @@
     "icon": "IG_Buff_Effect_Stun_Interruption_D"
   },
   {
-    "name": "BT_SYS_DEBUFF_ENHANCE_IR",
+    "name": "BT_SYS_BUFF_ENHANCE_DOWN_IR",
     "category": "statReduction",
     "label": "Buff Impairment",
     "label_jp": "強化抑制",
@@ -879,6 +879,32 @@
     "description_jp": "ステータスを上げる強化効果の 効率が100%DOWNする。(解除不可)",
     "description_kr": "능력치를 증가시키는 강화 효과의 효율이 100% 감소합니다. (해제 불가)",
     "description_zh": "提升能力值的强化效果效率减少100%。(无法解除)",
+    "icon": "IG_Buff_Enhance_Interruption_D"
+  },
+  {
+    "name": "BT_SYS_BUFF_ENHANCE_DEBUFF_DOWN",
+    "category": "statReduction",
+    "label": "Debuff Impairment",
+    "label_jp": "弱体抑制",
+    "label_kr": "약화 감쇄",
+    "label_zh": "弱化消损",
+    "description": "Reduces the efficiency of debuff effects that decrease stats by 100%.. (Irremovable)",
+    "description_jp": "ステータスをDOWNさせる\n弱体効果の効率が100%\nDOWNする。(解除不可)",
+    "description_kr": "능력치를 감소시키는 약화 효과의 효율이 100% 감소합니다. (해제 불가)",
+    "description_zh": "降低能力值的弱化效果效率降低100%。(无法解除)",
+    "icon": "IG_Buff_Enhance_Interruption_D"
+  },
+  {
+    "name": "BT_SYS_BUFF_ENHANCE_DEBUFF_UP",
+    "category": "statReduction",
+    "label": "Debuff Enhancement",
+    "label_jp": "弱体促進",
+    "label_kr": "강화 감쇄",
+    "label_zh": "弱化促进",
+    "description": "Increases the efficiency of debuff effects that decrease stats by 100%. (Irremovable)",
+    "description_jp": "ステータスをDOWNさせる\n弱体効果の効率が100%\nUPする。(解除不可)",
+    "description_kr": "능력치를 감소시키는 약화 효과의 효율이 100% 증가됩니다. (해제 불가)",
+    "description_zh": "降低能力值的弱化效果效率提升100%。(无法解除)",
     "icon": "IG_Buff_Enhance_Interruption_D"
   },
   {

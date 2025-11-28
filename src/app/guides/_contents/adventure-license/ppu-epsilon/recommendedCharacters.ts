@@ -38,10 +38,10 @@ export const recommendedCharacters = [
     {
         names: ["Sterope"],
         reason: {
-            en: "Bring {B/BT_COOL_CHARGE} and {B/BT_STAT|ST_BUFF_CHANCE}.",
-            jp: "{B/BT_COOL_CHARGE}と{B/BT_STAT|ST_BUFF_CHANCE}を提供。",
-            kr: "{B/BT_COOL_CHARGE}와 {B/BT_STAT|ST_BUFF_CHANCE} 제공.",
-            zh: "提供{B/BT_COOL_CHARGE}和{B/BT_STAT|ST_BUFF_CHANCE}。"
+            en: "Bring {B/BT_COOL_CHARGE} {D/BT_SEALED_RECEIVE_HEAL} and {B/BT_STAT|ST_BUFF_CHANCE}.",
+            jp: "{B/BT_COOL_CHARGE} {D/BT_SEALED_RECEIVE_HEAL}と{B/BT_STAT|ST_BUFF_CHANCE}を提供。",
+            kr: "{B/BT_COOL_CHARGE} {D/BT_SEALED_RECEIVE_HEAL}와 {B/BT_STAT|ST_BUFF_CHANCE} 제공.",
+            zh: "提供{B/BT_COOL_CHARGE} {D/BT_SEALED_RECEIVE_HEAL}和{B/BT_STAT|ST_BUFF_CHANCE}。"
         }
     },
     {

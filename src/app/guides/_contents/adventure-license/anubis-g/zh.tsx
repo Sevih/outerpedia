@@ -41,7 +41,7 @@ export default function AnubisGuardianGuide() {
                                     "BOSS身上的所有增益和减益效果在每回合开始时延长1回合。{D/BT_DOT_BURN}叠加非常有效。",
                                     "当只有BOSS存活时不会造成WG伤害——你必须至少保留一只小怪存活。",
                                     "在50%血量时，BOSS进入狂暴状态，3回合后造成致命伤害。快速推进。",
-                                    "你的队伍{B/BT_STAT|ST_CRITICAL_RATE}降为0%——不要依赖暴击流。"
+                                    "你的队伍暴击率降为0%——不要依赖暴击流。"
                                 ]}
                             />
                             <hr className="my-6 border-neutral-700" />

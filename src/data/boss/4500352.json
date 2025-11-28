@@ -100,7 +100,7 @@
         "zh": "对敌人造成的伤害提高, 且对未降低<color=#28d9ed>穿透力</color>的敌人造成的伤害将额外提升。\\n赋予全体敌人<color=#28d9ed>弱化促进</color>与<color=#28d9ed>无法强化</color>。(无法解除)\\n受到的诅咒与固定伤害均无法超过<color=#28d9ed>1000</color>。"
       },
       "icon": "MT_Passive_1_Light",
-      "debuff":["BT_SYS_DEBUFF_ENHANCE_IR","IG_Buff_Effect_Sealed_Interruption_D"]
+      "debuff":["BT_SYS_BUFF_ENHANCE_DEBUFF_UP","IG_Buff_Effect_Sealed_Interruption_D"]
     },
     {
       "name": {

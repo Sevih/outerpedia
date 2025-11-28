@@ -20,10 +20,10 @@ export const recommendedCharacters = [
     {
         names: ["Omega Nadja"],
         reason: {
-            en: "Having her 4★ will automatically remove the initial {B/BT_STAT|ST_SPEED} from the boss.",
-            jp: "4★で戦闘開始時にボスの{B/BT_STAT|ST_SPEED}を自動解除。",
-            kr: "4★ 보유 시 전투 시작 시 보스의 {B/BT_STAT|ST_SPEED}를 자동 해제.",
-            zh: "拥有4★时会自动解除首领的初始{B/BT_STAT|ST_SPEED}。"
+            en: "Having her 4★ will automatically remove the initial {B/BT_STAT|ST_SPEED} from the boss but her counter will trigger the heal.",
+            jp: "4★で戦闘開始時にボスの{B/BT_STAT|ST_SPEED}を自動解除するが、カウンターで回復がトリガーされる。",
+            kr: "4★ 보유 시 전투 시작 시 보스의 {B/BT_STAT|ST_SPEED}를 자동 해제하지만, 반격이 회복을 트리거함.",
+            zh: "拥有4★时会自动解除首领的初始{B/BT_STAT|ST_SPEED}，但她的反击会触发回复。"
         }
     },
     {

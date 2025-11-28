@@ -27,7 +27,7 @@ export default function KsaiGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
                                 "Non-{E/Water} units suffer {D/BT_STAT|ST_ATK_IR} and {D/BT_STAT|ST_DEF_IR} penalties.",
-                                "Team receives {D/BT_SYS_DEBUFF_ENHANCE_IR}, boss has {B/BT_SYS_BUFF_ENHANCE_IR}.",
+                                "Team receives {D/BT_SYS_BUFF_ENHANCE_DEBUFF_UP}, boss has {B/BT_SYS_BUFF_ENHANCE_IR}.",
                                 "Boss is immune to {D/BT_WG_REVERSE_HEAL} until HP drops below 70%."
                             ]} />
                             <hr className="my-6 border-neutral-700" />

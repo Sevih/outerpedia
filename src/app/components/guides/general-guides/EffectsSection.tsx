@@ -95,7 +95,9 @@ const IGNORED_DEBUFFS = new Set<string>([
     'BT_STAT|ST_DEF_IR',
     'BT_STONE_IR',
     'BT_STUN_IR',
-    'BT_SYS_DEBUFF_ENHANCE_IR',
+    'BT_SYS_BUFF_ENHANCE_DEBUFF_UP',
+    "BT_SYS_BUFF_ENHANCE_DEBUFF_DOWN",
+    "BT_SYS_BUFF_ENHANCE_DOWN_IR",
 
     // Manual insert
     'BT_COOL3_CHARGE',

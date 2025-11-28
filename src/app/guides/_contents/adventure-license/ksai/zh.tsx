@@ -27,7 +27,7 @@ export default function KsaiGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
                                 "非{E/Water}单位会受到{D/BT_STAT|ST_ATK_IR}和{D/BT_STAT|ST_DEF_IR}惩罚。",
-                                "队伍受到{D/BT_SYS_DEBUFF_ENHANCE_IR}，首领拥有{B/BT_SYS_BUFF_ENHANCE_IR}。",
+                                "队伍受到{D/BT_SYS_BUFF_ENHANCE_DEBUFF_UP}，首领拥有{B/BT_SYS_BUFF_ENHANCE_IR}。",
                                 "首领在生命值降至70%以下之前对{D/BT_WG_REVERSE_HEAL}免疫。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />

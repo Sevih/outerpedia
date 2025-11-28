@@ -30,7 +30,8 @@ export default function GustavGuide() {
                                 "宝珠在被攻击时造成{D/BT_FIXED_DAMAGE}。",
                                 "使用拥有{B/BT_REMOVE_DEBUFF}或{B/BT_IMMUNE}的单位。",
                                 "当宝珠被击败时,首领受到的伤害降低。",
-                                "专注于单体伤害以最小化宝珠反击。"
+                                "专注于单体伤害以最小化宝珠反击。",
+                                "{D/BT_IMMEDIATELY_BURN}无视击杀宝珠时的伤害减免。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

@@ -1,6 +1,6 @@
 export const recommendedCharacters = [
     {
-        names: ["Demiurge Stella", "Gnosis Beth","Drakhan","Regina"],
+        names: ["Demiurge Stella", "Demiurge Luna","Gnosis Beth","Drakhan","Regina"],
         reason: {
             en: "{E/Light} DPS options.",
             jp: "{E/Light} DPSオプション。",

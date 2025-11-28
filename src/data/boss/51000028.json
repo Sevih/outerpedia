@@ -102,7 +102,7 @@
       },
       "icon": "MT_Passive_1_Fire",
       "buff":["BT_SYS_BUFF_ENHANCE_IR"],
-      "debuff":["BT_SYS_DEBUFF_ENHANCE_IR","BT_STAT|ST_ATK_IR","BT_STAT|ST_DEF_IR"]
+      "debuff":["BT_SYS_BUFF_ENHANCE_DEBUFF_UP","BT_STAT|ST_ATK_IR","BT_STAT|ST_DEF_IR"]
     },
     {
       "name": {

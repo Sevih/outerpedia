@@ -30,7 +30,8 @@ export default function GustavGuide() {
                                 "오브는 공격 시 {D/BT_FIXED_DAMAGE}를 가한다.",
                                 "{B/BT_REMOVE_DEBUFF} 또는 {B/BT_IMMUNE}를 가진 유닛을 사용.",
                                 "보스는 오브가 처치될 때 받는 피해가 감소한다.",
-                                "오브의 반격을 최소화하기 위해 단일 대상 피해에 집중."
+                                "오브의 반격을 최소화하기 위해 단일 대상 피해에 집중.",
+                                "{D/BT_IMMEDIATELY_BURN}는 오브를 처치할 때 피해 감소를 무시한다."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

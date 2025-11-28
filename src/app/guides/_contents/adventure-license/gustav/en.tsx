@@ -30,7 +30,8 @@ export default function GustavGuide() {
                                 "Orbs deal {D/BT_FIXED_DAMAGE} when attacked.",
                                 "Use units with {B/BT_REMOVE_DEBUFF} or {B/BT_IMMUNE}.",
                                 "Boss reduces damage taken when orbs are defeated.",
-                                "Focus on single target damage to minimize orb retaliation."
+                                "Focus on single target damage to minimize orb retaliation.",
+                                "{D/BT_IMMEDIATELY_BURN} ignores damage reduction from killing the orbs."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

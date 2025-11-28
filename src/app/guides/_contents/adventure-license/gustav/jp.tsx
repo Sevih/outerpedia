@@ -30,7 +30,8 @@ export default function GustavGuide() {
                                 "オーブは攻撃時に{D/BT_FIXED_DAMAGE}を与える。",
                                 "{B/BT_REMOVE_DEBUFF}または{B/BT_IMMUNE}を持つユニットを使用。",
                                 "ボスはオーブが倒された時、受けるダメージを減少させる。",
-                                "オーブの反撃を最小限に抑えるため、単体ダメージに集中する。"
+                                "オーブの反撃を最小限に抑えるため、単体ダメージに集中する。",
+                                "{D/BT_IMMEDIATELY_BURN}はオーブを倒した際のダメージ軽減を無視する。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

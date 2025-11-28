@@ -101,7 +101,7 @@
         "zh": "(被动效果)\\n使敌人的<color=#28d9ed>攻击力</color>增加,但<color=#28d9ed>暴击率</color>降为0。该效果不会被解除。\\n攻击后,死亡的友军全体<color=#28d9ed>复活(强化)</color>。\\n回合开始时,自身附带的<color=#28d9ed>强化效果/弱化效果</color>的持续回合提升<color=#28d9ed>1回合</color>。\\n非火属性敌人行动时,解除自身附带的所有弱化效果,所受WG伤害降低50%。\\n若除自身外所有友军全部死亡,则不会受到WG伤害。\\n受到的来自非火属性敌人的伤害降低,对其造成的伤害提升。\\n受到的来自火属性敌人的伤害增加,对其造成的伤害降低。"
       },
       "icon": "MT_Passive_1_Water",
-      "buff":["BT_STAT|ST_ATK_IR","BT_RESURRECTION","BT_EXTEND_BUFF"],
+      "buff":["BT_STAT|ST_ATK_IR","BT_RESURRECTION","BT_EXTEND_BUFF","BT_REMOVE_DEBUFF"],
       "debuff":["BT_EXTEND_DEBUFF"]
     },
     {

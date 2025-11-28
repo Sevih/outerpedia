@@ -120,7 +120,7 @@
       "icon": "MT_Passive_1_Earth",
       "debuff": [
         "BT_STUN",
-        "BT_SYS_DEBUFF_ENHANCE_IR"
+        "BT_SYS_BUFF_ENHANCE_DEBUFF_UP"
       ],
       "buff": [
         "BT_IMMUNE_IR"

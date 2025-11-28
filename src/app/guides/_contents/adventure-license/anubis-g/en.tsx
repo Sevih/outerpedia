@@ -41,7 +41,7 @@ export default function AnubisGuardianGuide() {
                                     "All buffs and debuffs on the boss are extended by 1 turn at the start of each turn. {D/BT_DOT_BURN} stacks are very effective.",
                                     "No WG damage is dealt when only the boss is alive - you must keep at least one add alive.",
                                     "At 50% HP, the boss enrages and will deal lethal damage after 3 turns. Push through quickly.",
-                                    "Your party's {B/BT_STAT|ST_CRITICAL_RATE} is reduced to 0% - don't rely on crit-based builds."
+                                    "Your party's critical hit chance is reduced to 0% - don't rely on crit-based builds."
                                 ]}
                             />
                             <hr className="my-6 border-neutral-700" />

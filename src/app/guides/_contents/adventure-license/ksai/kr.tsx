@@ -27,7 +27,7 @@ export default function KsaiGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
                                 "{E/Water}이 아닌 유닛은 {D/BT_STAT|ST_ATK_IR}와 {D/BT_STAT|ST_DEF_IR} 페널티를 받습니다.",
-                                "팀은 {D/BT_SYS_DEBUFF_ENHANCE_IR}를 받고, 보스는 {B/BT_SYS_BUFF_ENHANCE_IR}를 가집니다.",
+                                "팀은 {D/BT_SYS_BUFF_ENHANCE_DEBUFF_UP}를 받고, 보스는 {B/BT_SYS_BUFF_ENHANCE_IR}를 가집니다.",
                                 "보스 HP가 70% 미만으로 떨어질 때까지 {D/BT_WG_REVERSE_HEAL}에 대한 면역이 있습니다."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
