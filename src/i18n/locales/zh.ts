@@ -83,7 +83,7 @@ const zh = {
   'characters.filters.or': 'OR',
   'characters.filters.buffs': '增益Buff',
   'characters.filters.debuffs': '减益Debuff',
-  'characters.filters.sources.filterBySource' :'选择技能：',
+  'characters.filters.sources.filterBySource':'选择技能',
   'characters.filters.sources.skill1': '基本技能',
   'characters.filters.sources.skill2': '特殊技能',
   'characters.filters.sources.skill3': '必杀技',
@@ -143,7 +143,7 @@ const zh = {
   'characters.basestats.stage6': '阶段6 (Lv. 100)',
   "exclusive_equipment_title": "{name}的专属装备",
   "back": "后退",
-  "coming_soon": "即将来临…...",
+  "coming_soon": "敬请期待……",
   "not_available": "不可用",
   "official_video": "官方视频",
   "preferred_gift": "喜爱的礼物",
@@ -156,7 +156,7 @@ const zh = {
   "turn_s": "回合",
   "chain_dual_title": "连携与夹攻",
   "dual_attack_effect": "夹攻效果:",
-  "ee_priority": "专属装备\r\n优先级",
+  "ee_priority": "专属装备\n优先级",
   "pve_tier": "PvE强度",
   "pvp_tier": "PvP强度",
   "main_stat": "主属性：",
@@ -379,24 +379,24 @@ const zh = {
   'patchHistory.categories.media-archives': '媒体存档',
   // Legacy disclaimer
   'patchHistory.legacy.disclaimer': 'Content marked as "Legacy" was published before the VA Games service transfer (October 2025) and may contain outdated information or broken links.',
-  'patchHistory.legacy.tag': 'Legacy',
-  'patchHistory.search.placeholder': '搜索…...',
+  'patchHistory.legacy.tag': '过去Legacy',
+  'patchHistory.search.placeholder': '搜索',
   'patchHistory.search.clear': '清除',
   'patchHistory.results.noResults': '未找到',
-  'patchHistory.results.tryAdjusting': 'Try adjusting your search or filters',
-  'patchHistory.results.showing': 'Showing {count} {count, plural, one {article} other {articles}}',
+  'patchHistory.results.tryAdjusting': '请更换搜索或筛选Try adjusting your search or filters',
+  'patchHistory.results.showing': '正在显示{count} {count, plural, one {article} other {articles}}',
   'patchHistory.loadMore': '加载更多（还剩{remaining}条）',
   // SEO
-  'gearSolver.meta.title': '装备Usage Finder | Outerpedia',
+  'gearSolver.meta.title': '装备查找器 | Outerpedia',
   'gearSolver.meta.desc': 'Not sure who can use your装备? Find the best character matches from 推荐 builds.',
-  'gearSolver.og.title': '装备Usage Finder | Outerpedia',
+  'gearSolver.og.title': '装备查找器 | Outerpedia',
   'gearSolver.og.desc': 'Search which characters can use your装备 across套装, 武器, and amulets.',
   'gearSolver.og.imageAlt': 'Outerpedia装备 Usage Finder',
-  'gearSolver.twitter.title': '装备Usage Finder | Outerpedia',
+  'gearSolver.twitter.title': '装备查找器 | Outerpedia',
   'gearSolver.twitter.desc': 'Quickly discover best character matches for your装备.',
   // UI
-  'gearSolver.h1': '装备Usage Finder',
-  'gearSolver.meta.breadcrumb': '装备Usage Finder',
+  'gearSolver.h1': '装备查找器',
+  'gearSolver.meta.breadcrumb': '装备查找器',
   'gearSolver.warning':
     '⚠️ The装备 Usage Finder tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.',
   // SEO
@@ -473,10 +473,10 @@ const zh = {
 
   'tier.ui.warning.pve': '⚠️ 此节奏榜默认角色的<strong>专属装备等级Lv0</strong>，<br/>未解锁的升级将可能影响结果。本榜为<strong>PvE内容</strong>。',
   'tier.ui.warning.pvp': '⚠️ 此节奏榜默认角色为<strong>6星超越</strong>并且拥有<strong>专属装备等级Lv10的效果</strong>。<br/>未解锁的升级将可能影响结果。本榜为<strong>PvP内容</strong>。',
-  'tier.ui.warning.ee0': '⚠️ 此榜帮助您决定最先解锁的<strong>专属装备 (EE)</strong> to unlock first, based on <strong>level 0 base effects</strong> only.<br/><strong>+10 bonus effects are not considered.</strong>',
-  'tier.ui.warning.ee10': '⚠️ This ranking evaluates <strong>专属装备 (EE)</strong> including their <strong>+10 bonus effects</strong>, to guide upgrades beyond base effects.',
+  'tier.ui.warning.ee0': '⚠️ 此榜帮助您决定最先解锁的<strong>专属装备 (EE)</strong>。（仅基于<strong>等级Lv0解锁效果</strong>，不考虑<br/><strong>Lv10满级效果</strong>。）',
+  'tier.ui.warning.ee10': '⚠️此榜帮助您决定先升满级的<strong>专属装备 (EE)</strong>。（基于<strong>Lv10满级效果</strong>。）',
 
-  'tier.ui.search.placeholder': '搜索…...',
+  'tier.ui.search.placeholder': '搜索',
   'tier.ui.filter.transcend': '超越等级',
   'tier.ui.alt.star': 'star',
   'tier.ui.alt.rank': 'Rank {rank}',
@@ -493,7 +493,7 @@ const zh = {
   // --- Page texts ---
   'tierIndex.h1': '异域战记节奏榜',
   'tierIndex.lead': '选择PvE或是PvP排行。',
-  'tierIndex.card.pve.desc': '角色在全部PvE内容的表现',
+  'tierIndex.cardpve.desc': '角色在全部PvE内容的表现',
   'tierIndex.card.pvp.desc': '角色在竞技场的表现',
   'tierIndex.usage.h2': '指南最常用的角色',
   'tierIndex.usage.lead': '对于新玩家，最常用角色榜通常更实用：它可以很好表现出哪位同伴更加泛用。',
@@ -502,7 +502,7 @@ const zh = {
   'tierIndex.section.tiers.h2': '节奏榜（PvE & PvP）',
   // --- JSON-LD ---
   'tierIndex.collection.title': '异域战记节奏榜 — {monthYear}',
-  'tierIndex.collection.desc': 'Choose between PvE and PvP character rankings.',
+  'tierIndex.collection.desc': '选择PvE或是PvP排行。',
 
   'item.meta.title': '{name} | Outerpedia',
   'item.meta.desc': 'Details, stats, and effects for {name} in 异域战记.',
@@ -510,10 +510,10 @@ const zh = {
   'item.meta.ogDesc': 'Explore stats and effects for {name} on Outerpedia.',
   'item.meta.twTitle': '{name}',
   'item.meta.twDesc': 'Stats and effects for {name} in 异域战记.',
-  'weapon.intro1': "Just like other equipment, 武器 in 异域战记 have a tier and reforge system that lets you enhance their stats and unique effects. Higher-tier 武器 grant better base attributes and passives. To learn more about reforging and equipment progression, check the <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/gear'>装备Guide</a>.",
-  'weapon.intro2': "Understanding how equipment statistics work is also essential to get the most out of your装备 — the <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/stats'>Statistics & Combat Basics Guide</a> will help you master that part.",
-  'accessory.intro1': "Just like other equipment, 饰品 in 异域战记 have a tier and reforge system that lets you enhance their stats and unique effects. Higher-tier 饰品 grant better base attributes and passives. To learn more about reforging and equipment progression, check the <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/gear'>装备Guide</a>.",
-  'sets.intro1': "Just like other equipment, 套装s in 异域战记 have a tier and reforge system that lets you enhance their stats and unique effects. Higher-tier套装 grant better base attributes and passives. To learn more about reforging and equipment progression, check the <a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/gear'>装备Guide</a>.",
+  'weapon.intro1': "就像其他装备一样，武器有一个突破和重铸系统可以增强数值和独有效果。 更高突破的武器有更好的基础属性和被动技能。 有关重铸等更多机制的信息参见<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/gear'>装备</a>指南。",
+  'weapon.intro2': "了解装备的能力值同样对于充分利用装备至关重要——<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/stats'>数值与战斗基础</a>指南将帮助您掌握此部分。",
+  'accessory.intro1': "就像其他装备一样，饰品有一个突破和重铸系统可以增强数值和独有效果。 更高突破的饰品有更好的基础属性和被动技能。 有关重铸等更多机制的信息参见<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/gear'>装备</a>指南。",
+  'sets.intro1': "就像其他装备一样，套装有一个突破和重铸系统可以增强数值和独有效果。 更高突破的套装有更好的基础属性和被动技能。 有关重铸等更多机制的信息参见<a class='mb-1 text-red-400 hover:text-cyan-400 transition-colors cursor-pointer' href='/guides/general-guides/gear'>装备</a>指南。",
   // Category pages
   'guides.cat.meta.title': '{cat} | Outerpedia',
   'guides.cat.meta.desc': '{desc}',
@@ -524,33 +524,33 @@ const zh = {
   // Detail pages - CHANGEMENTS ICI
   'guides.detail.meta.title': '{guide} - {cat} | Outerpedia',  // ✅ Remplace | par -
   'guides.detail.meta.desc': 'Complete {cat} for {guide}  in 异域战记. {desc}',  // ✅ Plus descriptif
-  'guides.detail.og.title': '{guide} - {cat} Guide',  // ✅ Format optimisé
+  'guides.detail.og.title': '{guide} - {cat}指南',  // ✅ Format optimisé
   'guides.detail.og.desc': 'Complete {cat} for {guide}  in 异域战记. {desc}',  // ✅ Garde la desc simple
-  'guides.detail.tw.title': '{guide} Guide',  // ✅ Plus court pour Twitter
+  'guides.detail.tw.title': '{guide}指南',  // ✅ Plus court pour Twitter
   'guides.detail.tw.desc': 'Complete {cat} for {guide}  in 异域战记. {desc}',
 
   'equip.meta.title': '装备 – Outerpedia',
-  'equip.meta.desc': '浏览全部的equipment in 异域战记: 武器, 饰品,护身符,套装, and 专属装备.',
+  'equip.meta.desc': '浏览《异域战记》全部的装备：武器、饰品、护身符、套装和专属装备。',
   'equip.og.title': '装备 – Outerpedia',
   'equip.og.desc': '异域战记全部装备一览：武器、饰品、护身符、套装和专属装备。',
   'equip.twitter.title': '装备',
   'equip.twitter.desc': '浏览武器、饰品、护身符、套装和专属装备。',
   // --- Characters SEO ---
-  'char.meta.title': "{name} – 角色 Guide | Outerpedia",
+  'char.meta.title': "{name} – 角色指南 | Outerpedia",
   'char.meta.desc': '{element} {class} {name} — skill breakdown, upgrade优先级, ranking, 专属装备, and 推荐套装.',
-  'char.og.title': "{name} – 角色 Guide | Outerpedia",
+  'char.og.title': "{name} – 角色指南 | Outerpedia",
   'char.og.desc': '{element} {class} {name} — detailed overview, skills,装备 builds, and tier placement.',
-  'char.twitter.title': "{name} – 角色 Guide | Outerpedia",
+  'char.twitter.title': "{name} – 角色指南 | Outerpedia",
   'char.twitter.desc': '{element} {class} {name} — skills, ranking, and build recommendations.',
   //
-  'chars.meta.title': '异域战记\r\n角色数据库 {monthYear}更新 | Outerpedia',
+  'chars.meta.title': '角色数据库 {monthYear}更新 | Outerpedia',
   'chars.meta.desc': 'Discover all 异域战记 同伴 with detailed stats, skills,装备, and 专属装备. Updated {monthYear} by the EvaMains Discord community.',
-  'chars.og.title': '异域战记 角色 – Full Database Updated {monthYear} | Outerpedia',
+  'chars.og.title': '异域战记角色 – Full Database Updated {monthYear} | Outerpedia',
   'chars.og.desc': 'Discover all 异域战记 同伴 with detailed stats, skills,装备, and 专属装备. Updated {monthYear} by the EvaMains Discord community.',
   'chars.twitter.title': '异域战记 角色 – Updated {monthYear} | Outerpedia',
   'chars.twitter.desc': 'Discover all 异域战记 同伴 with detailed stats, skills,装备, and 专属装备. Updated {monthYear} by the EvaMains Discord community.',
   'chars.page.h1.short': '异域战记角色',
-  'chars.page.h1.full': '异域战记\r\n角色数据库',
+  'chars.page.h1.full': '角色数据库',
   'chars.page.updated': '{monthYear}更新',
   'chars.breadcrumb.home': '主页',
   'chars.jsonld.desc': 'Full character database: stats, skills, builds, and 专属装备. {monthYear}更新。',
@@ -567,21 +567,21 @@ const zh = {
   'seo.gameName': '异域战记',
   'seo.siteName': '异域战记',
   'seo.wiki': '异域战记维基',
-  'seo.guide': '异域战记 guide',
-  'seo.guideSuffix': 'guide',
+  'seo.guide': '异域战记指南',
+  'seo.guideSuffix': '指南',
   'seo.turnBasedRpg': '回合制 rpg',
   'seo.mobileRpg': '移动端RPG',
   'seo.characterBuilds': '角色配队',
 
   // SEO Keywords - Category Specific
-  'seo.category.adventure': 'adventure,story mode,chapter walkthrough,map,spoiler-free,stage progression,pve',
-  'seo.category.world-boss': '世界首领,boss strategy,team building,gear recommendation,extreme league,pve',
-  'seo.category.joint-boss': '联合挑战,co-op,raid score,damage optimization,team comps,pve',
-  'seo.category.adventure-license': '冒险许可证,promotion license,license levels,license quests,pve',
-  'seo.category.special-request': 'gear boss,特别委托,identification,ecology study,materials,pve',
-  'seo.category.irregular-extermination': '异形怪歼灭战,limited-time event,event boss,rewards,pve',
-  'seo.category.guild-raid': '公会突袭,co-op boss,weekly ranking,guild damage,team building,pve',
-  'seo.category.general-guides': 'beginner guide,resource management,daily routine,systems overview,tips and tricks,pve',
+  'seo.category.adventure': '冒险,故事模式,章节攻略,地图,防剧透,阶段进展,PvE',
+  'seo.category.world-boss': '世界首领,boss strategy,team building,gear recommendation,extreme league,PvE',
+  'seo.category.joint-boss': '联合挑战,合作,raid score,伤害最大化,队伍构成,PvE',
+  'seo.category.adventure-license': '冒险许可证,promotion license,license levels,license quests,PvE',
+  'seo.category.special-request': '副本首领,特别委托,查清身份,生态调查,材料,PvE',
+  'seo.category.irregular-extermination': '异形怪歼灭战,限时活动,活动首领,奖励,PvE',
+  'seo.category.guild-raid': '公会突袭,合作首领,周排名,公会伤害,队伍配置,PvE',
+  'seo.category.general-guides': '新手指南,资源管理,日常任务,系统机制概述,小技巧,PvE',
   'seo.category.skyward-tower': '通天之塔,楼层,推塔攻略,推荐队伍,PvE',
   'seo.category.monad-gate': '单子门,阶段,肉鸽,路线,地图,遗物,PvE',
 
@@ -606,11 +606,11 @@ const zh = {
   'guides.categories.general-guides.title': '一般指南',
   'guides.categories.general-guides.description': '掌握游戏基础机制：战斗、角色养成、装备以及新玩家需知。',
   'guides.categories.adventure.title': '主线故事首领指南',
-  'guides.categories.adventure.description': '击败具有挑战性的主线故事模式首领的详细策略：了解推荐队伍、关卡机制解释和阶段提示。Detailed strategies to defeat challenging Adventure bosses: recommended teams, mechanics explanation, and stage tips.',
+  'guides.categories.adventure.description': '击败具有挑战性的主线故事模式首领的详细策略：了解推荐队伍、关卡机制解释和阶段提示。',
   'guides.categories.world-boss.title': '世界首领指南',
   'guides.categories.world-boss.description': '在世界首领战极限联赛中实现SSS排名的综合策略：优化队伍设置、学习轮换技巧和伤害最大化策略。',
   'guides.categories.special-request.title': '特别委托指南',
-  'guides.categories.special-request.description': '深入解析特别委托：生态研究/查清身份。 学习成功所需的首领机制、队伍配合和关键策略。',
+  'guides.categories.special-request.description': '深入解析特别委托：生态调查/查清身份。 学习成功所需的首领机制、队伍配合和关键策略。',
   'guides.categories.skyward-tower.title': '飞天之塔指南',
   'guides.categories.skyward-tower.description': '飞天之塔逐层策略解析：了解高层塔的最佳角色、队伍配合与战术。',
   'guides.categories.joint-boss.title': '联合挑战指南',
@@ -825,15 +825,15 @@ const zh = {
   'contributors.meta.desc': '认识帮助建设Outerpedia的团队及贡献者。',
   'contributors.title': '贡献者',
   'contributors.description': '感谢所有为帮助本站(Outerpedia)成为《异域战记》社区的宝贵资源而做出贡献的人们。',
-
+  
   // Core Fusion
   'core_fusion.title': '核心融合角色',
   'core_fusion.base_character': '基础角色',
-  'core_fusion.requirements': '需求',
+  'core_fusion.requirements': '条件',
   'core_fusion.fusion_levels': '核心融合等级',
   'core_fusion.core_fusion_short': '核心融合',
   'core_fusion.skill_lv_max': '技能 Lv Max\n核心融合被动 Lv Max',
-  'core_fusion.wip_notice': '此核心融合角色页面仍在开发中。部分信息可能不完整或可能会更改。',
+  'core_fusion.wip_notice': '核心融合角色页面仍在开发中，部分信息可能不完整或更改。',
   'level': 'Lv',
 
   // Guide tips presets
@@ -849,7 +849,7 @@ const zh = {
   'guide.recommendedCharacters': '推荐角色',
   'guide.recommendedTeam': '推荐队伍',
   'guide.combatFootage': '战斗视频',
-  'guide.runProvidedBy': '提供者',
+  'guide.runProvidedBy': '提供人',
 }
 
 export default zh
