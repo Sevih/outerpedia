@@ -850,6 +850,7 @@ const zh = {
   'guide.recommendedTeam': '推荐队伍',
   'guide.combatFootage': '战斗视频',
   'guide.runProvidedBy': '提供人',
+  'guide.noVideoYet': '暂无视频。如果您有视频或知道相关视频，请在Discord上联系Eva Mains！',
 }
 
 export default zh

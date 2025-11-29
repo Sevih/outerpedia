@@ -850,6 +850,8 @@ const kr = {
   'guide.recommendedTeam': '추천 팀',
   'guide.combatFootage': '전투 영상',
   'guide.runProvidedBy': '제공자',
+  'guide.noVideoYet':
+    '아직 영상이 없습니다. 영상을 가지고 계시거나 아시는 분은 Discord에서 Eva Mains에게 연락해 주세요!',
 }
 
 export default kr

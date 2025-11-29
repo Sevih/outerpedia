@@ -253,8 +253,17 @@ function walkTSXDirectory(dir, category = '', parentDirName = '') {
           jsonCharacters = extractFromGuideJSON(jsonPath);
         }
 
-        // Combine characters from both sources
-        const allCharacters = [...new Set([...tsxCharacters, ...jsonCharacters])];
+        // Also check for associated TS files (e.g., recommendedCharacters.ts)
+        let tsCharacters = [];
+        const tsFiles = files.filter(f => f.endsWith('.ts') && !f.endsWith('.d.ts'));
+        for (const tsFile of tsFiles) {
+          const tsPath = path.join(dir, tsFile);
+          const tsExtracted = extractCharactersFromTSX(tsPath); // Same logic works for .ts files
+          tsCharacters.push(...tsExtracted);
+        }
+
+        // Combine characters from all sources
+        const allCharacters = [...new Set([...tsxCharacters, ...jsonCharacters, ...tsCharacters])];
 
         if (allCharacters.length > 0) {
           // If it's a multilingual guide (en.tsx/jp.tsx/kr.tsx), use parent directory name

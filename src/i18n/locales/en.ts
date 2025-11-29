@@ -850,6 +850,8 @@ const en = {
   'guide.recommendedTeam': 'Recommended Team',
   'guide.combatFootage': 'Combat Footage',
   'guide.runProvidedBy': 'Run provided by',
+  'guide.noVideoYet':
+    'No video available yet. If you have one or know of one, contact Eva Mains on Discord!',
 }
 
 export default en

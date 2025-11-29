@@ -6,8 +6,8 @@ import { useTenant } from '@/lib/contexts/TenantContext'
 import { getT } from '@/i18n'
 
 type Props = {
-  videoId: string
-  title: string
+  videoId?: string
+  title?: string
   author?: string
   date?: string
 }
@@ -16,16 +16,26 @@ export default function CombatFootage({ videoId, title, author, date }: Props) {
   const { key: lang } = useTenant()
   const t = getT(lang)
 
+  const hasVideo = videoId && title
+
   return (
     <div className="mb-4">
       <GuideHeading level={3}>{t('guide.combatFootage')}</GuideHeading>
-      {author && (
+      {hasVideo ? (
+        <>
+          {author && (
+            <p className="text-neutral-400 text-sm italic mt-2">
+              {t('guide.runProvidedBy')} <span className="text-white font-semibold">{author}</span>
+              {date && ` (${date})`}
+            </p>
+          )}
+          <YoutubeEmbed videoId={videoId.trim()} title={title} />
+        </>
+      ) : (
         <p className="text-neutral-400 text-sm italic mt-2">
-          {t('guide.runProvidedBy')} <span className="text-white font-semibold">{author}</span>
-          {date && ` (${date})`}
+          {t('guide.noVideoYet')}
         </p>
       )}
-      <YoutubeEmbed videoId={videoId.trim()} title={title} />
     </div>
   )
 }

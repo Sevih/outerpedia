@@ -292,7 +292,8 @@
       "Aer",
       "Bell Cranel",
       "Kanon",
-      "Bryn"
+      "Bryn",
+      "Mero"
     ]
   },
   "adventure-license/calamariAL": {
@@ -472,7 +473,9 @@
       "Tamara",
       "Laplace",
       "Poolside Trickster Regina",
-      "Roxie"
+      "Roxie",
+      "Fortuna",
+      "Summer Knight's Dream Ember"
     ]
   },
   "adventure-license/ppu-epsilon": {
@@ -501,93 +504,116 @@
     "guideId": "prom-dastei",
     "characters": [
       "Akari",
-      "Demiurge Stella",
-      "Dianne",
+      "Stella",
+      "Monad Eva",
+      "Viella",
       "Drakhan",
-      "Gnosis Nella",
       "Kitsune of Eternity Tamamo-no-Mae",
       "Marian",
-      "Monad Eva",
+      "Dianne",
       "Nella",
+      "Gnosis Nella",
+      "Tamamo-no-Mae",
+      "Fran",
+      "Demiurge Stella",
       "Ryu Lion",
-      "Stella",
-      "Sterope",
-      "Tamamo-no-Mae"
+      "Laplace",
+      "Iota"
     ]
   },
   "adventure-license/prom-ddrakhan": {
     "category": "adventure-license",
     "guideId": "prom-ddrakhan",
     "characters": [
-      "Demiurge Stella",
-      "Gnosis Nella",
+      "Drakhan",
+      "Monad Eva",
+      "Leo",
+      "Omega Nadja",
+      "Hilde",
+      "Nella",
+      "Mene",
       "Gnosis Viella",
+      "Summer Knight's Dream Ember",
+      "Gnosis Nella",
+      "Tamamo-no-Mae",
+      "Fran",
       "Iota",
       "Laplace",
-      "Leo",
-      "Mene",
-      "Monad Eva",
-      "Nella",
-      "Summer Knight's Dream Ember",
-      "Tamamo-no-Mae"
+      "Demiurge Stella",
+      "Ryu Lion"
     ]
   },
   "adventure-license/prom-dstella": {
     "category": "adventure-license",
     "guideId": "prom-dstella",
     "characters": [
+      "Monad Eva",
+      "Viella",
+      "Maxwell",
+      "Francesca",
+      "Gnosis Viella",
+      "Gnosis Dahlia",
       "Demiurge Astei",
       "Demiurge Stella",
+      "Ryu Lion",
+      "Laplace",
+      "Iota",
+      "Tamamo-no-Mae",
       "Gnosis Nella",
-      "Monad Eva",
-      "Tamamo-no-Mae"
+      "Fran"
     ]
   },
   "adventure-license/prom-dvlada": {
     "category": "adventure-license",
     "guideId": "prom-dvlada",
     "characters": [
-      "Demiurge Stella",
-      "Drakhan",
-      "Gnosis Nella",
-      "Kitsune of Eternity Tamamo-no-Mae",
-      "Marian",
-      "Monad Eva",
       "Sterope",
+      "Demiurge Vlada",
+      "Eternal",
+      "Monad Eva",
+      "Viella",
+      "Marian",
+      "Kitsune of Eternity Tamamo-no-Mae",
+      "Drakhan",
+      "Demiurge Stella",
+      "Ryu Lion",
+      "Laplace",
+      "Iota",
       "Tamamo-no-Mae",
-      "Tio"
+      "Gnosis Nella",
+      "Fran"
     ]
   },
   "adventure-license/prom-gdahlia": {
     "category": "adventure-license",
     "guideId": "prom-gdahlia",
     "characters": [
-      "Akari",
+      "Leo",
+      "Sterope",
       "Gnosis Beth",
       "Kuro",
-      "Leo",
+      "Akari",
+      "Ember",
+      "Vlada",
       "Maxie",
-      "Vlada"
+      "Bell Cranel",
+      "Monad Eva"
     ]
   },
   "adventure-license/prom-meva": {
     "category": "adventure-license",
     "guideId": "prom-meva",
     "characters": [
-      "Demiurge Delta",
-      "Demiurge Stella",
-      "Drakhan",
-      "Gnosis Nella",
-      "Hilde",
       "Iota",
-      "Kitsune of Eternity Tamamo-no-Mae",
-      "Marian",
-      "Maxwell",
+      "Tamara",
       "Monad Eva",
       "Nella",
-      "Omega Nadja",
+      "Demiurge Delta",
+      "Maxwell",
       "Tamamo-no-Mae",
-      "Tamara"
+      "Marian",
+      "Drakhan",
+      "Kitsune of Eternity Tamamo-no-Mae"
     ]
   },
   "adventure-license/sacreed-AL": {

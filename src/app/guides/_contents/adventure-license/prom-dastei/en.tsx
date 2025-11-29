@@ -1,72 +1,50 @@
 'use client'
 
-import CharacterLinkCard from '@/app/components/CharacterLinkCard'
-import GuideHeading from '@/app/components/GuideHeading'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
+import GuideTemplate from '@/app/components/GuideTemplate'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import BossDisplay from '@/app/components/BossDisplay'
+import DasteiALTeamsData from './DasteiAL.json'
+import type { TeamData } from '@/types/team'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
+import CombatFootage from '@/app/components/CombatFootage'
 
-const teams = {
-  promo: {
-    label: 'Curse Team',
-    icon: 'SC_Buff_Dot_Curse.webp',
-    setup: [
-      ['Akari'],
-      ['Stella','Monad Eva'],
-      ['Drakhan'],
-      ['Kitsune of Eternity Tamamo-no-Mae', 'Marian']
-    ]
-  },
-  prom2: {
-    label: 'Fix damage',
-    icon: 'SC_Buff_Effect_True_Dmg.webp',
-    setup: [
-      ['Akari'],
-      ['Monad Eva','Dianne','Nella',],
-      ['Gnosis Nella','Tamamo-no-Mae'],
-      ['Demiurge Stella','Ryu Lion']
-    ]
-  }
-}
+const DasteiALTeams = DasteiALTeamsData as Record<string, TeamData>
 
-export default function DemiurgeAsteiPromoGuide() {
-  return (
-    <div>
-      <GuideHeading level={3}>Strategy Overview</GuideHeading>
-      <GuideHeading level={4}>Boss Mechanics</GuideHeading>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li><strong>Skills:</strong> Same as the story version.</li>
-        <li><strong>Control Immunity:</strong> Now immune to all crowd control.</li>
-        <li><strong>Damage:</strong> Unbuffed damage is manageable (healing is not required).</li>
-        </ul>
-        <GuideHeading level={4}>Points of interest</GuideHeading>
-        <ul className='list-disc list-inside text-neutral-300 mb-4'>
-        <li><CharacterLinkCard name="Sterope" />: Absorbs 50% of damage taken by allies. Very resistant to AoE damage.</li>
-      </ul>
-
-      <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Team Suggestions</h3>
-      <ul className="list-disc list-inside text-neutral-300 mb-4">
-        <li><CharacterLinkCard name="Akari" /></li>
-        <li><CharacterLinkCard name="Stella" /></li>
-        <li><CharacterLinkCard name="Monad Eva" /> / <CharacterLinkCard name="Dianne" /> / <CharacterLinkCard name="Nella" /> : if you need more damage mitigation for D.Astei. Use Saint&apos;s Ring or Obsidian Oath on M.Eva</li>
-        <li><CharacterLinkCard name="Drakhan" /> / <CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> / <CharacterLinkCard name="Marian" /> : for a curse team</li>
-        <li><CharacterLinkCard name="Gnosis Nella" /> / <CharacterLinkCard name="Tamamo-no-Mae" /> <CharacterLinkCard name="Demiurge Stella" /> / <CharacterLinkCard name="Ryu Lion" /> : for a fixed damage team</li>
-        
-      </ul>
-
-      <p className="text-neutral-400 text-sm italic mb-4">
-        Note: Typically cleared in a single attempt. No special strategy required beyond basic survival and damage output.
-      </p>
-
-      <hr className="my-6 border-neutral-700" />
-      <TeamTabSelector teams={teams} />
-
-      <hr className="my-6 border-neutral-700" />
-
-      <div className="mb-4">
-        <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Combat Footage</h3>
-        <p className="mb-2 text-neutral-300">
-          A sample video of the promotion run will be added here soon.
-        </p>
-      </div>
-    </div>
-  )
+export default function DasteiPromotionGuide() {
+    return (
+        <GuideTemplate
+            title="Demiurge Astei Promotion Challenge Guide"
+            introduction="Senior Adventurer Promotion Challenge featuring {P/Demiurge Astei}. Applies {D/BT_STONE} and can convert it to {D/BT_STONE_IR}. Enrages at 50% HP with a team wipe after 3 turns. Use {D/BT_DOT_CURSE} or {D/BT_FIXED_DAMAGE} teams to bypass damage reduction. Typically cleared in a single attempt."
+            defaultVersion="default"
+            versions={{
+                default: {
+                    label: 'Guide',
+                    content: (
+                        <>
+                            <div className="space-y-4">
+                                <BossDisplay bossKey='Astei' modeKey='Challenge' defaultBossId='50000002' />
+                                <BossDisplay bossKey='Sterope' modeKey='Challenge' defaultBossId='50000003' />
+                            </div>
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                tips={[
+                                    "Applies {D/BT_STONE} to a random enemy at end of turn. Can convert to {D/BT_STONE_IR} for 6 turns.",
+                                    "Enrages at 50% HP. Wipes the team when Enrage ends after 3 turns.",
+                                    "Use {D/BT_DOT_CURSE} or {D/BT_FIXED_DAMAGE} to bypass the damage reduction."
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={DasteiALTeams.dasteiAL} defaultStage="Curse Team" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage />
+                        </>
+                    ),
+                },
+            }}
+        />
+    )
 }

@@ -165,6 +165,7 @@ export type DebuffName =
   | 'BT_SYS_BUFF_ENHANCE_DEBUFF_UP'
   | 'BT_WG_REVERSE_HEAL'
   | 'IG_Buff_2000020_Interruption_D'
+  | 'BT_DAMAGE_TAKEN_UP'
   | 'IG_Buff_Death_Timer_Interruption_D'
   | 'IG_Buff_Dot_Bleed_Interruption_D'
   | 'IG_Buff_Dot_Burn_Interruption_D'

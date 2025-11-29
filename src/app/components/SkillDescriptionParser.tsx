@@ -65,9 +65,12 @@ export function SkillDescription({ text }: { text: string }) {
   return <>{parts}</>
 }
 
+// Common lowercase words that can appear in proper nouns/titles
+const TITLE_CONNECTORS = ['on', 'of', 'the', 'in', 'and', 'for', 'to', 'a', 'an', 'at', 'by', 'with', 'from']
+
 /**
  * Parse text for element and class keywords, return array of nodes
- * Skips keywords that are part of proper nouns (e.g., "Furious Earth")
+ * Skips keywords that are part of proper nouns (e.g., "Furious Earth", "The People on Earth")
  */
 function parseElementsAndClasses(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = []
@@ -87,22 +90,33 @@ function parseElementsAndClasses(text: string): React.ReactNode[] {
     const beforeChar = match.index > 0 ? text[match.index - 1] : ' '
     const isAfterSpace = beforeChar === ' ' || beforeChar === '(' || beforeChar === '\n'
 
-    // Check if there's a capitalized word right before this match (for proper nouns like "Furious Earth")
-    // But skip if the previous word is also an element/class keyword or ends with punctuation
-    let isPrecededByCapitalizedWord = false
+    // Check if there's a capitalized word before this match (for proper nouns like "Furious Earth")
+    // Also handles cases like "The People on Earth" where connectors appear between capitalized words
+    let isPartOfProperNoun = false
     if (isAfterSpace && match.index >= 2) {
-      // Look back to find the previous word
+      // Look back to find all previous words in this phrase
       const textBefore = text.slice(0, match.index).trim()
       const words = textBefore.split(/\s+/)
-      let previousWord = words[words.length - 1]
-      // Remove trailing punctuation (comma, period, etc.)
-      previousWord = previousWord.replace(/[,.:;!?]$/, '')
-      // Check if previous word starts with capital (and is not just a single char like "a")
-      // BUT don't skip if the previous word is itself an element or class keyword
-      const prevLower = previousWord.toLowerCase()
-      const isPrevKeyword = allKeywords.some(k => k.toLowerCase() === prevLower)
-      if (previousWord && previousWord.length > 1 && /^[A-Z]/.test(previousWord) && !isPrevKeyword) {
-        isPrecededByCapitalizedWord = true
+
+      // Walk backwards through words to detect proper noun pattern
+      // Pattern: capitalized words with optional lowercase connectors (on, of, the, etc.)
+      for (let i = words.length - 1; i >= 0; i--) {
+        const word = words[i].replace(/[,.:;!?]$/, '')
+        const wordLower = word.toLowerCase()
+        const isKeyword = allKeywords.some(k => k.toLowerCase() === wordLower)
+
+        // If it's a connector word, continue looking back
+        if (TITLE_CONNECTORS.includes(wordLower)) {
+          continue
+        }
+
+        // If it's a capitalized word (not a keyword), we're in a proper noun
+        if (word && word.length > 1 && /^[A-Z]/.test(word) && !isKeyword) {
+          isPartOfProperNoun = true
+        }
+
+        // Stop at first non-connector word
+        break
       }
     }
 
@@ -112,7 +126,7 @@ function parseElementsAndClasses(text: string): React.ReactNode[] {
     }
 
     // Skip conversion if it's part of a proper noun
-    if (isPrecededByCapitalizedWord) {
+    if (isPartOfProperNoun) {
       parts.push(matched)
     }
     // Check if it's an element

@@ -6,6 +6,7 @@ import ClassInlineTag from '@/app/components/ClassInlineTag'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
 import WeaponInlineTag from '@/app/components/WeaponInlineTag'
 import AmuletInlineTag from '@/app/components/AmuletInlineTag'
+import TalismanInlineTag from '@/app/components/TalismanInlineTag'
 import ItemInlineDisplay from '@/app/components/ItemInline'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import type { BuffName, DebuffName } from '@/types/effect-names'
@@ -18,7 +19,8 @@ import type { BuffName, DebuffName } from '@/types/effect-names'
  * {E/Element}     -> élément
  * {P/CharacterName} -> personnage (CharacterLinkCard)
  * {I-W/WeaponName}  -> arme (weapon)
- * {I-A/AmuletName}  -> amulette (à brancher si tu as le composant)
+ * {I-A/AmuletName}  -> amulette
+ * {I-T/TalismanName} -> talisman
  * {I-I/ItemName[,ItemName2,...]} -> items (ton composant ItemInlineDisplay)
  */
 
@@ -39,8 +41,8 @@ function pushTextWithLineBreaks(
 
 
 export default function parseText(text: string): React.ReactNode[] {
-  // capture le type complet (B|D|C|E|P|I-W|I-A|I-I) puis le payload jusqu'à la }
-  const regex = /\{((?:[BDCEP])|I-(?:W|A|I))\/([^}]+)\}/g
+  // capture le type complet (B|D|C|E|P|I-W|I-A|I-T|I-I) puis le payload jusqu'à la }
+  const regex = /\{((?:[BDCEP])|I-(?:W|A|T|I))\/([^}]+)\}/g
 
   const parts: React.ReactNode[] = []
   let lastIndex = 0
@@ -69,6 +71,8 @@ export default function parseText(text: string): React.ReactNode[] {
       parts.push(<WeaponInlineTag key={`w-${index}-${name}`} name={name} />)
     } else if (type === 'I-A') {
       parts.push(<AmuletInlineTag key={`a-${index}-${name}`} name={name} />)
+    } else if (type === 'I-T') {
+      parts.push(<TalismanInlineTag key={`t-${index}-${name}`} name={name} />)
     } else if (type === 'I-I') {
       // Si ton ItemInlineDisplay accepte une liste séparée par virgules :
       parts.push(<ItemInlineDisplay key={`i-${index}-${name}`} names={name} />)

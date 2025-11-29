@@ -850,6 +850,8 @@ const jp = {
   'guide.recommendedTeam': 'おすすめ編成',
   'guide.combatFootage': '戦闘映像',
   'guide.runProvidedBy': '提供者',
+  'guide.noVideoYet':
+    '動画はまだありません。お持ちの方やご存知の方は、DiscordでEva Mainsまでご連絡ください！',
 }
 
 export default jp
