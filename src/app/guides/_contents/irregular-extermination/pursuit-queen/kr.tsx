@@ -15,19 +15,19 @@ const IrregularQueenPOTeams = IrregularQueenPOTeamsData as Record<string, TeamDa
 export default function IrregularQueenGuide() {
     return (
         <GuideTemplate
-            title="Irregular Queen Strategy Guide"
+            title="이레귤러 퀸 공략 가이드"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '가이드',
                     content: (
                         <>
                             <BossDisplay bossKey='Irregular Queen' modeKey='Pursuit Operation' defaultBossId='51202004' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Takes no Weakness Gauge damage unless debuffed but counters with S2 when inflicted with a debuff.",
-                                "Damage from {D/BT_DOT_CURSE} and Fixed Damage does not exceed 10,000.",
-                                "S2 removes {D/BT_REMOVE_BUFF}, inflicts {D/BT_AGGRO} for 3 turns, and {B/BT_REMOVE_DEBUFF} from the boss if it crits.",
+                                "약화 효과가 없으면 WG 피해를 받지 않지만, 약화 효과 피격 시 S2로 반격한다.",
+                                "{D/BT_DOT_CURSE}와 고정 피해는 10,000을 초과하지 않는다.",
+                                "S2는 {D/BT_REMOVE_BUFF}를 해제하고, 3턴 동안 {D/BT_AGGRO}를 부여하며, 치명타 시 {B/BT_REMOVE_DEBUFF}로 자신의 약화를 해제한다.",
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
@@ -35,8 +35,8 @@ export default function IrregularQueenGuide() {
                             <StageBasedTeamSelector teamData={IrregularQueenPOTeams.irregularQueenPO} defaultStage="Classic Team" />
                             <hr className="my-6 border-neutral-700" />
                             <CombatFootage videos={[
-                                { videoId: "bPwKu7gjGWg", title: "1 run public", author: "Sevih", date: "01/10/2025" },
-                                { videoId: "9Sr0YMGaro0", title: "1 run kill (Auto)", author: "XuRenChao", date: "01/10/2025" },
+                                { videoId: "bPwKu7gjGWg", title: "1회 클리어 (공개 편성)", author: "Sevih", date: "01/10/2025" },
+                                { videoId: "9Sr0YMGaro0", title: "1회 킬 (오토)", author: "XuRenChao", date: "01/10/2025" },
                             ]} />
                         </>
                     ),

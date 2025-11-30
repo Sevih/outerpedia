@@ -18,7 +18,6 @@ export default function IronStretcherGuide() {
     const [miniBossLabel, setMiniBossLabel] = useState('Iron Stretcher (Very Hard)')
 
     const handleBossChange = useCallback((bossId: string) => {
-        // Map Iron Stretcher ID to corresponding difficulty label
         const labelMap: Record<string, string> = {
             '51202001': 'Iron Stretcher (Very Hard)',
             '51201001': 'Iron Stretcher (Hard)',
@@ -29,12 +28,12 @@ export default function IronStretcherGuide() {
 
     return (
         <GuideTemplate
-            title="Iron Stretcher Strategy Guide"
-            introduction="Iron Stretcher summons an add every turn and becomes immune to WG damage while the add is alive. The boss can gain 5-turn {B/BT_INVINCIBLE}, making buff stealing and sealing essential strategies."
+            title="铁血伸张者 攻略指南"
+            introduction="铁血伸张者每回合召唤增援，增援存活时不受WG伤害。Boss使用大招可获得5回合的{B/BT_INVINCIBLE}，因此夺取Buff和封印是关键策略。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
                             <BossDisplay
@@ -51,17 +50,17 @@ export default function IronStretcherGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Summons an Irregular Machine Gun after each attack. The boss takes no WG damage while the add is alive.",
-                                "The boss gains 5-turn {B/BT_INVINCIBLE} with its Ultimate. Use {D/BT_STEAL_BUFF}, {D/BT_REMOVE_BUFF}, or {D/BT_SEALED} to counter it.",
-                                "Damage from {D/BT_DOT_CURSE} and Fixed Damage does not exceed 5,000.",
-                                "The Irregular Machine Gun inflicts {D/BT_SEALED} on all enemies for 1 turn upon death."
+                                "攻击后召唤机关枪异型怪。增援存活时，Boss不受WG伤害。",
+                                "Boss使用大招可获得5回合的{B/BT_INVINCIBLE}。使用{D/BT_STEAL_BUFF}、{D/BT_REMOVE_BUFF}或{D/BT_SEALED}来应对。",
+                                "{D/BT_DOT_CURSE}和固定伤害不超过5,000。",
+                                "机关枪异型怪死亡时，对全体敌人施加1回合的{D/BT_SEALED}。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={IronStretcherPOTeams.ironStretcherPO} defaultStage="Recommended Team" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="Enqp_g7xCqw" title="Iron Stretcher - Pursuit Operation - 1 run kill" author="Sevih" date="01/01/2025" />
+                            <CombatFootage videoId="Enqp_g7xCqw" title="铁血伸张者 - 追击歼灭战 - 1次通关" author="Sevih" date="01/01/2025" />
                         </>
                     ),
                 },

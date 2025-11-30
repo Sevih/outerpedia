@@ -1,20 +1,11 @@
 # AL Guide Conversion - AI Instructions
 
 Game: **Outerplane**
-
-## Status Tracking
-
-### Converted (100% Perfect)
-- amadeus-AL, anubis-g, ars-novaAL, beatlesAL, calamariAL, forest-king, meteos-AL, fulmination, gustav, heavy-fixed-vladi-max, masterlessAL, ppu-epsilon
-
-### Remaining
-chimeraAL, glicysAL, ksai, prom-dastei, prom-ddrakhan, prom-dstella, prom-dvlada, prom-gdahlia, prom-meva, sacreed-AL, schattermeister-Schwartz, shadowArch, toddlerAL, ziggsaron
-
 ---
 
 ## Quick Reference - File Checklist
 
-For each guide, you need these files in `src/app/guides/_contents/adventure-license/{slug}/`:
+For each guide, you need these files in `src/app/guides/_contents/{categorie}/{slug}/`:
 
 | File | Phase 1 | Phase 2 | Description |
 |------|---------|---------|-------------|
@@ -77,13 +68,13 @@ export default function BossNameGuide() {
 }
 ```
 
-### 2. `BossNameAL.json` (Teams Data)
+### 2. `BossName.json` (Teams Data)
 
 Naming: Match boss name (NOT `teams.json`)
 
 ```json
 {
-    "bossNameAL": {
+    "bossName": {
         "Recommended Team": {
             "icon": "fire",
             "team": [

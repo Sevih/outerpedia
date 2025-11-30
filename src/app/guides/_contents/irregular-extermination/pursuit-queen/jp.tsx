@@ -15,19 +15,19 @@ const IrregularQueenPOTeams = IrregularQueenPOTeamsData as Record<string, TeamDa
 export default function IrregularQueenGuide() {
     return (
         <GuideTemplate
-            title="Irregular Queen Strategy Guide"
+            title="イレギュラークイーン 攻略ガイド"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: 'ガイド',
                     content: (
                         <>
                             <BossDisplay bossKey='Irregular Queen' modeKey='Pursuit Operation' defaultBossId='51202004' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Takes no Weakness Gauge damage unless debuffed but counters with S2 when inflicted with a debuff.",
-                                "Damage from {D/BT_DOT_CURSE} and Fixed Damage does not exceed 10,000.",
-                                "S2 removes {D/BT_REMOVE_BUFF}, inflicts {D/BT_AGGRO} for 3 turns, and {B/BT_REMOVE_DEBUFF} from the boss if it crits.",
+                                "弱体効果がない場合はWGダメージを受けないが、弱体効果を付与されるとS2で反撃する。",
+                                "{D/BT_DOT_CURSE}と固定ダメージは10,000を超えない。",
+                                "S2は{D/BT_REMOVE_BUFF}を解除し、3ターンの{D/BT_AGGRO}を付与、会心時は{B/BT_REMOVE_DEBUFF}で自身の弱体を解除する。",
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
@@ -35,8 +35,8 @@ export default function IrregularQueenGuide() {
                             <StageBasedTeamSelector teamData={IrregularQueenPOTeams.irregularQueenPO} defaultStage="Classic Team" />
                             <hr className="my-6 border-neutral-700" />
                             <CombatFootage videos={[
-                                { videoId: "bPwKu7gjGWg", title: "1 run public", author: "Sevih", date: "01/10/2025" },
-                                { videoId: "9Sr0YMGaro0", title: "1 run kill (Auto)", author: "XuRenChao", date: "01/10/2025" },
+                                { videoId: "bPwKu7gjGWg", title: "1回クリア（公開編成）", author: "Sevih", date: "01/10/2025" },
+                                { videoId: "9Sr0YMGaro0", title: "1回キル（オート）", author: "XuRenChao", date: "01/10/2025" },
                             ]} />
                         </>
                     ),

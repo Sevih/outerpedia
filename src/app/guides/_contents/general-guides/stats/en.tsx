@@ -393,7 +393,23 @@ function StatsContent() {
                         {
                             key: 'pen-vs-dots',
                             title: 'Does Penetration affect DoT or true damage?',
-                            content: 'No. Penetration only affects damage that is reduced by DEF. It has no effect on fixed damage or DoTs.'
+                            content: (
+                                <>
+                                    <p>It depends on the DoT type. Some DoTs are reduced by DEF and therefore benefit from Penetration:</p>
+                                    <ul className="list-disc list-inside ml-4 mt-2">
+                                        <li><EffectInlineTag name="BT_DOT_BLEED" type="debuff" /></li>
+                                        <li><EffectInlineTag name="BT_DOT_POISON" type="debuff" /></li>
+                                        <li><EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /></li>
+                                    </ul>
+                                    <p className="mt-3">However, some DoTs ignore DEF entirely and are unaffected by Penetration:</p>
+                                    <ul className="list-disc list-inside ml-4 mt-2">
+                                        <li><EffectInlineTag name="BT_DOT_BURN" type="debuff" /></li>
+                                        <li><EffectInlineTag name="BT_DOT_CURSE" type="debuff" /></li>
+                                        <li><EffectInlineTag name="BT_DOT_2000092" type="debuff" /></li>
+                                    </ul>
+                                    <p className="mt-3">Fixed damage always ignores DEF and is unaffected by Penetration.</p>
+                                </>
+                            )
                         },
                         {
                             key: 'fixed-damage-mitigation',

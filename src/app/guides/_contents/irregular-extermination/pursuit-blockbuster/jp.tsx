@@ -15,28 +15,28 @@ const BlockbusterPOTeams = BlockbusterPOTeamsData as Record<string, TeamData>
 export default function BlockbusterPOGuide() {
     return (
         <GuideTemplate
-            title="Blockbuster Pursuit Operation Guide"
-            introduction="Blockbuster gains random buffs every turn and punishes critical hits by taking reduced damage and recovering 50% WG. Non-crit teams using {B/HEAVY_STRIKE} or strong DPS that can ignore the WG mechanic work best."
+            title="ブラックバスター 追撃殲滅戦ガイド"
+            introduction="ブラックバスターは毎ターン開始時にランダムな強化効果を獲得し、会心ダメージを受けると被ダメージが大幅に減少しWGを50%回復します。{B/HEAVY_STRIKE}を使う非会心チームか、WGメカニズムを無視できる強力なDPSが最適です。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: 'ガイド',
                     content: (
                         <>
                             <BossDisplay bossKey='Blockbuster' modeKey='Pursuit Operation' defaultBossId='51202002' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Gains a random buff at the start of each turn.",
-                                "Upon taking a critical hit, greatly reduces damage taken and recovers WG by 50%.",
-                                "Use {B/HEAVY_STRIKE} characters to avoid triggering the crit penalty.",
-                                "Prevent the boss from buffing with {D/BT_SEALED}."
+                                "毎ターン開始時にランダムな強化効果を獲得する。",
+                                "会心ダメージを受けると、被ダメージが大幅に減少しWGを50%回復する。",
+                                "{B/HEAVY_STRIKE}キャラクターを使用して会心ペナルティを回避。",
+                                "{D/BT_SEALED}でボスの強化を防ぐ。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={BlockbusterPOTeams.blockbusterPO} defaultStage="Non-Crit Team" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="pgWkc6X6VNE" title="Blockbuster - Pursuit Operation - 1 run kill" author="Sevih" date="01/01/2024" />
+                            <CombatFootage videoId="pgWkc6X6VNE" title="ブラックバスター - 追撃殲滅戦 - 1回クリア" author="Sevih" date="01/01/2024" />
                         </>
                     ),
                 },

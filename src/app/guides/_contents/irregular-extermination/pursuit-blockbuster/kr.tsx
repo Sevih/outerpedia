@@ -15,28 +15,28 @@ const BlockbusterPOTeams = BlockbusterPOTeamsData as Record<string, TeamData>
 export default function BlockbusterPOGuide() {
     return (
         <GuideTemplate
-            title="Blockbuster Pursuit Operation Guide"
-            introduction="Blockbuster gains random buffs every turn and punishes critical hits by taking reduced damage and recovering 50% WG. Non-crit teams using {B/HEAVY_STRIKE} or strong DPS that can ignore the WG mechanic work best."
+            title="블록버스터 추격 섬멸전 가이드"
+            introduction="블록버스터는 매 턴 시작 시 무작위 강화 효과를 획득하며, 치명타 피격 시 받는 피해가 크게 감소하고 WG를 50% 회복합니다. {B/HEAVY_STRIKE}를 사용하는 비치명 팀이나 WG 메커니즘을 무시할 수 있는 강력한 DPS가 가장 효과적입니다."
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '가이드',
                     content: (
                         <>
                             <BossDisplay bossKey='Blockbuster' modeKey='Pursuit Operation' defaultBossId='51202002' />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Gains a random buff at the start of each turn.",
-                                "Upon taking a critical hit, greatly reduces damage taken and recovers WG by 50%.",
-                                "Use {B/HEAVY_STRIKE} characters to avoid triggering the crit penalty.",
-                                "Prevent the boss from buffing with {D/BT_SEALED}."
+                                "매 턴 시작 시 무작위 강화 효과를 획득한다.",
+                                "치명타 피격 시 받는 피해가 크게 감소하고 WG를 50% 회복한다.",
+                                "{B/HEAVY_STRIKE} 캐릭터를 사용하여 치명 페널티를 회피.",
+                                "{D/BT_SEALED}로 보스의 강화를 방지."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={BlockbusterPOTeams.blockbusterPO} defaultStage="Non-Crit Team" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="pgWkc6X6VNE" title="Blockbuster - Pursuit Operation - 1 run kill" author="Sevih" date="01/01/2024" />
+                            <CombatFootage videoId="pgWkc6X6VNE" title="블록버스터 - 추격 섬멸전 - 1회 클리어" author="Sevih" date="01/01/2024" />
                         </>
                     ),
                 },

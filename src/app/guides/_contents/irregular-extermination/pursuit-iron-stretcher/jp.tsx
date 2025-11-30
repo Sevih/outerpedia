@@ -18,7 +18,6 @@ export default function IronStretcherGuide() {
     const [miniBossLabel, setMiniBossLabel] = useState('Iron Stretcher (Very Hard)')
 
     const handleBossChange = useCallback((bossId: string) => {
-        // Map Iron Stretcher ID to corresponding difficulty label
         const labelMap: Record<string, string> = {
             '51202001': 'Iron Stretcher (Very Hard)',
             '51201001': 'Iron Stretcher (Hard)',
@@ -29,12 +28,12 @@ export default function IronStretcherGuide() {
 
     return (
         <GuideTemplate
-            title="Iron Stretcher Strategy Guide"
-            introduction="Iron Stretcher summons an add every turn and becomes immune to WG damage while the add is alive. The boss can gain 5-turn {B/BT_INVINCIBLE}, making buff stealing and sealing essential strategies."
+            title="アイアンストレッチャー 攻略ガイド"
+            introduction="アイアンストレッチャーは毎ターン増援を召喚し、増援が生存中はWGダメージを受けない。ボスはアルティメットで5ターンの{B/BT_INVINCIBLE}を獲得するため、バフ奪取や封印が重要な戦略となる。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: 'ガイド',
                     content: (
                         <>
                             <BossDisplay
@@ -51,17 +50,17 @@ export default function IronStretcherGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Summons an Irregular Machine Gun after each attack. The boss takes no WG damage while the add is alive.",
-                                "The boss gains 5-turn {B/BT_INVINCIBLE} with its Ultimate. Use {D/BT_STEAL_BUFF}, {D/BT_REMOVE_BUFF}, or {D/BT_SEALED} to counter it.",
-                                "Damage from {D/BT_DOT_CURSE} and Fixed Damage does not exceed 5,000.",
-                                "The Irregular Machine Gun inflicts {D/BT_SEALED} on all enemies for 1 turn upon death."
+                                "攻撃後にイレギュラー機関銃を召喚する。増援が生存中、ボスはWGダメージを受けない。",
+                                "ボスはアルティメットで5ターンの{B/BT_INVINCIBLE}を獲得する。{D/BT_STEAL_BUFF}、{D/BT_REMOVE_BUFF}、または{D/BT_SEALED}で対処せよ。",
+                                "{D/BT_DOT_CURSE}と固定ダメージは5,000を超えない。",
+                                "イレギュラー機関銃は死亡時、敵全体に1ターンの{D/BT_SEALED}を付与する。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={IronStretcherPOTeams.ironStretcherPO} defaultStage="Recommended Team" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="Enqp_g7xCqw" title="Iron Stretcher - Pursuit Operation - 1 run kill" author="Sevih" date="01/01/2025" />
+                            <CombatFootage videoId="Enqp_g7xCqw" title="アイアンストレッチャー - 追撃殲滅戦 - 1回クリア" author="Sevih" date="01/01/2025" />
                         </>
                     ),
                 },
