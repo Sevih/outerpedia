@@ -199,7 +199,7 @@ const bannerTabs: BannerTab[] = [
                     <li><CharacterLinkCard name="Gnosis Dahlia" /> – <strong className='text-pink-400'>Limited</strong> Hero, released July 29, 2024 (last rerun: November 18, 2025)</li>
                     <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released October 21, 2024 (last rerun: October 23, 2025)</li>
                     <li><CharacterLinkCard name="Gnosis Nella" /> – <strong className='text-pink-400'>Limited</strong> Hero, released November 4, 2024 (last rerun: November 18, 2025)</li>
-                    <li><CharacterLinkCard name="Holy Night's Blessing Dianne" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released December 16, 2024</li>
+                    <li><CharacterLinkCard name="Holy Night's Blessing Dianne" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released December 16, 2024 (last rerun: 02 December, 2025)</li>
                     <li><CharacterLinkCard name="Ais Wallenstein" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
                     <li><CharacterLinkCard name="Bell Cranel" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
                     <li><CharacterLinkCard name="Ryu Lion" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
