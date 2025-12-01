@@ -757,6 +757,37 @@
             "string": "G.Beth's Eternal Bleeding's damage is not affected by Rhona's passive."
           }
         ]
+      },
+      "team4": {
+        "label": "1 Water",
+        "icon": "water.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Fortuna",
+            "Eternal",
+            "Demiurge Vlada",
+            "Sterope",
+            "Edelweiss"
+          ],
+          [
+            "Rhona"
+          ],
+          [
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 Water"
+        ],
+        "note": [
+          {
+            "type": "p",
+            "string": "G.Beth's Eternal Bleeding's damage is not affected by Rhona's passive."
+          }
+        ]
       }
     }
   },
@@ -1494,6 +1525,30 @@
         ],
         "conditions": [
            "1 Striker"
+        ],
+        "note": []
+      },
+      "team5": {
+        "label": "No Dark",
+        "icon": "dark.webp",
+        "setup": [
+         [
+            "Monad Eva"
+          ],
+          [
+            "Ame",
+            "Demiurge Luna"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Rey",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+           "No Dark"
         ],
         "note": []
       }
