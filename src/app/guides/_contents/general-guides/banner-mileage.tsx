@@ -219,9 +219,7 @@ const bannerTabs: BannerTab[] = [
                 </ul>
 
 
-                <p className="bg-red-700 text-white px-2 py-1 rounded-lg shadow-md text-sm text-center border border-yellow-100 flex items-center justify-center min-h-[30px] mt-4">
-                    ⚠️ At the end of the banner, all unused&nbsp;<GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} />&nbsp;will be converted into&nbsp;<GuideIconInline name="CM_Goods_Memory_Of_Star" text="Star's Memory" />&nbsp;at a 1:5 ratio.
-                </p>
+                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} /> is kept until used.</p>
                 <p className="mt-4">
                     Use 150 <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} /> to recruit the featured hero, or get 150 <GuideIconInline name="CM_Piece_Frame" text="Hero pieces" />.<br />
                     Get 15 bonus <GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /> if you already own the hero.
@@ -255,7 +253,7 @@ export default function BannerAndMileageGuide() {
             </p>
 
             <p>
-                One major advantage of this system is that <strong>mileage is retained</strong> across banners (except Limited banners).<br />
+                One major advantage of this system is that <strong>mileage is retained</strong> across banners.<br />
                 Why is that useful?<br />
                 Imagine you do a 10-recruit, get the unit, and also hit the mileage cap.
                 If you&apos;re pulling for collection, you can <strong>save your mileage</strong> for a future banner
