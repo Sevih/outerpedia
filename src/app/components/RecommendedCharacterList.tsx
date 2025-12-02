@@ -9,6 +9,12 @@ import { getT } from '@/i18n'
 import { CharacterPortrait } from '@/app/components/CharacterPortrait'
 import GuideHeading from '@/app/components/GuideHeading'
 import parseText from '@/utils/parseText'
+import type { TenantKey } from '@/tenants/config'
+
+// Presets disponibles (clés i18n)
+const TITLE_PRESETS = ['default', 'phase1', 'phase2'] as const
+
+type TitlePreset = typeof TITLE_PRESETS[number]
 
 type CharacterRecommendation = {
   names: string | string[]
@@ -16,16 +22,34 @@ type CharacterRecommendation = {
 }
 
 type Props = {
+  /** Preset key or custom LangMap for the title. Defaults to 'default' (Recommended Characters) */
+  title?: TitlePreset | LangMap
   entries: CharacterRecommendation[]
 }
 
-export default function RecommendedCharacterList({ entries }: Props) {
+function isPreset(title: TitlePreset | LangMap): title is TitlePreset {
+  return typeof title === 'string' && TITLE_PRESETS.includes(title as TitlePreset)
+}
+
+function resolveTitle(title: TitlePreset | LangMap, t: ReturnType<typeof getT>, lang: TenantKey): string {
+  if (isPreset(title)) {
+    if (title === 'default') {
+      return t('guide.recommendedCharacters')
+    }
+    return t(`tips.${title}`)
+  }
+  return lRec(title as LangMap, lang)
+}
+
+export default function RecommendedCharacterList({ title = 'default', entries }: Props) {
   const { key: lang } = useTenant()
   const t = getT(lang)
 
+  const resolvedTitle = resolveTitle(title, t, lang)
+
   return (
     <div>
-      <GuideHeading level={3}>{t('guide.recommendedCharacters')}</GuideHeading>
+      <GuideHeading level={3}>{resolvedTitle}</GuideHeading>
       <div className="flex flex-col gap-2">
       {entries.map((entry, index) => {
         const nameList = Array.isArray(entry.names) ? entry.names : [entry.names]

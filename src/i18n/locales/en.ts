@@ -852,6 +852,9 @@ const en = {
   'guide.runProvidedBy': 'Run provided by',
   'guide.noVideoYet':
     'No video available yet. If you have one or know of one, contact Eva Mains on Discord!',
+  'guide.inProgress.title': 'Guide in Progress',
+  'guide.inProgress.description':
+    'This section is currently being written. Check back soon for the full guide!',
 }
 
 export default en

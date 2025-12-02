@@ -852,6 +852,9 @@ const jp = {
   'guide.runProvidedBy': '提供者',
   'guide.noVideoYet':
     '動画はまだありません。お持ちの方やご存知の方は、DiscordでEva Mainsまでご連絡ください！',
+  'guide.inProgress.title': 'ガイド作成中',
+  'guide.inProgress.description':
+    'このセクションは現在作成中です。完成までしばらくお待ちください！',
 }
 
 export default jp

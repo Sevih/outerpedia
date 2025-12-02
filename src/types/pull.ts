@@ -25,3 +25,10 @@ export interface SlugCharEntryBase {
 export type SlugCharEntry = WithLocalizedFields<SlugCharEntryBase, 'Fullname'>
 
 export type SlugToCharMap = Record<string, SlugCharEntry>
+
+// Banner history entry (from banner.json)
+export interface BannerHistoryEntry {
+  name: string;
+  start: string;
+  end: string;
+}

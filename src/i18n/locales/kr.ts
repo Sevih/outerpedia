@@ -852,6 +852,9 @@ const kr = {
   'guide.runProvidedBy': '제공자',
   'guide.noVideoYet':
     '아직 영상이 없습니다. 영상을 가지고 계시거나 아시는 분은 Discord에서 Eva Mains에게 연락해 주세요!',
+  'guide.inProgress.title': '가이드 작성 중',
+  'guide.inProgress.description':
+    '이 섹션은 현재 작성 중입니다. 완성된 가이드를 곧 확인해 주세요!',
 }
 
 export default kr

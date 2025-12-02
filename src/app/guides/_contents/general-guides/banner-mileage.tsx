@@ -2,6 +2,7 @@ import GuideHeading from '@/app/components/GuideHeading';
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import BannerTabCards, { BannerTab } from '@/app/components/CardTabs';
 import GuideIconInline from '@/app/components/GuideIconInline';
+import LimitedHeroesList from '@/app/components/LimitedHeroesList';
 import Image from 'next/image';
 
 
@@ -194,18 +195,7 @@ const bannerTabs: BannerTab[] = [
 
                 <p className="mt-4">
                     <strong className={decoration}>List of Limited Heroes and their release dates:</strong></p>
-                <ul>
-                    <li><CharacterLinkCard name="Poolside Trickster Regina" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released July 16, 2023 (last rerun: July 01, 2025)</li>
-                    <li><CharacterLinkCard name="Gnosis Dahlia" /> – <strong className='text-pink-400'>Limited</strong> Hero, released July 29, 2024 (last rerun: November 18, 2025)</li>
-                    <li><CharacterLinkCard name="Kitsune of Eternity Tamamo-no-Mae" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released October 21, 2024 (last rerun: October 23, 2025)</li>
-                    <li><CharacterLinkCard name="Gnosis Nella" /> – <strong className='text-pink-400'>Limited</strong> Hero, released November 4, 2024 (last rerun: November 18, 2025)</li>
-                    <li><CharacterLinkCard name="Holy Night's Blessing Dianne" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released December 16, 2024 (last rerun: 02 December, 2025)</li>
-                    <li><CharacterLinkCard name="Ais Wallenstein" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
-                    <li><CharacterLinkCard name="Bell Cranel" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
-                    <li><CharacterLinkCard name="Ryu Lion" /> – <strong className='text-red-400'>Collab</strong> with DanMachi, released March 25, 2025</li>
-                    <li><CharacterLinkCard name="Omega Nadja" /> – <strong className='text-pink-400'>Limited</strong> Hero, released May 7, 2025 (last rerun: November 18, 2025)</li>
-                    <li><CharacterLinkCard name="Summer Knight's Dream Ember" /> – <strong className='text-green-400'>Seasonal</strong> Hero, released October 1, 2025</li>
-                </ul>
+                <LimitedHeroesList />
 
                 <p className="mt-4">
                     It uses 3 types of resources:

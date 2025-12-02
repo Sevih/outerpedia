@@ -851,6 +851,8 @@ const zh = {
   'guide.combatFootage': '战斗视频',
   'guide.runProvidedBy': '提供人',
   'guide.noVideoYet': '暂无视频。如果您有视频或知道相关视频，请在Discord上联系Eva Mains！',
+  'guide.inProgress.title': '攻略撰写中',
+  'guide.inProgress.description': '此部分正在撰写中，请稍后查看完整攻略！',
 }
 
 export default zh

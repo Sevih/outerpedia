@@ -69,10 +69,10 @@
       "name_jp": "トリガーハッピー",
       "name_kr": "트리거 해피",
       "name_zh": "快乐扳机",
-      "true_desc": "Attacks an enemy and increases the <color=#28d9ed>Priority</color> of the ally with the highest Attack by <color=#28d9ed>10%</color>.",
-      "true_desc_jp": "敵単体にダメージを与え、攻撃力が最も高い味方単体の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。",
-      "true_desc_kr": "적을 공격하고 공격력이 가장 높은 아군의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
-      "true_desc_zh": "攻击敌人,并使攻击力最高的友军<color=#28d9ed>行动值</color>提升\\n<color=#28d9ed>10%</color>。",
+      "true_desc": "Attacks an enemy and increases the <color=#28d9ed>Priority</color> of the ally with the highest Attack by <color=#28d9ed>10%</color>, then grants increased <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc_jp": "敵単体にダメージを与え、攻撃力が最も高い味方単体の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせた後、\\n<color=#28d9ed>スピード</color>UPを<color=#28d9ed>1ターン</color>の間付与する。",
+      "true_desc_kr": "적을 공격하고 공격력이 가장 높은 아군의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킨 뒤\\n<color=#28d9ed>1턴</color> 동안 <color=#28d9ed>속도</color> 증가를 부여합니다.",
+      "true_desc_zh": "攻击敌人,使攻击力最高的友军<color=#28d9ed>行动值</color>提升<color=#28d9ed>10%</color>后,\\n使<color=#28d9ed>速度</color>提升,持续<color=#28d9ed>1回合</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
@@ -131,7 +131,7 @@
       "cd": null,
       "buff": [
         "BT_ACTION_GAUGE",
-        "BT_CALL_BACKUP",
+        "BT_STAT|ST_SPEED",
         "BT_CALL_BACKUP_2"
       ],
       "debuff": [],
@@ -145,10 +145,10 @@
           "level": 1
         },
         "SKT_BURST_2": {
-          "effect": "Activates Dual Attack with 1 ally",
-          "effect_jp": "連携1体発生",
-          "effect_kr": "아군 1명 협공 호출",
-          "effect_zh": "呼叫1名友军发动夹攻",
+          "effect": "Increases damage\\nIncreases all allies' Speed for 1 turn",
+          "effect_jp": "ダメージUP\\n1ターンの間味方全体にスピードUP",
+          "effect_kr": "피해 증가\\n1턴 동안 아군 전체 속도 증가",
+          "effect_zh": "伤害提升\\n1回合内全体友军速度提升",
           "cost": 120,
           "level": 2
         },
@@ -170,10 +170,10 @@
       "name_jp": "ラッキー・オア・ダイ",
       "name_kr": "Lucky or Die",
       "name_zh": "Lucky or Die",
-      "true_desc": "Increases all allies' <color=#28d9ed>Critical Hit Chance</color> and <color=#28d9ed>Critical Damage</color> for <color=#28d9ed>2 turn(s)</color>. Gains an <color=#28d9ed>extra turn</color> after using this skill.",
-      "true_desc_jp": "味方全体の<color=#28d9ed>会心率</color>と<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>2ターン</color>の間UPさせる。スキル使用後、<color=#28d9ed>追加ターン</color>を獲得する。",
-      "true_desc_kr": "<color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>치명 확률</color>과 <color=#28d9ed>치명 피해</color>를 증가시킵니다. 스킬 사용 후 <color=#28d9ed>추가 턴</color>을 획득합니다.",
-      "true_desc_zh": "使全体友军的<color=#28d9ed>暴击率</color>和<color=#28d9ed>暴击伤害</color>提升,持续<color=#28d9ed>2回合</color>。使用技能后,获得<color=#28d9ed>额外回合</color>。",
+      "true_desc": "Increases <color=#28d9ed>Critical Hit Chance</color> and <color=#28d9ed>Critical Damage</color> of all allies for <color=#28d9ed>2 turn(s)</color>, then increases the <color=#28d9ed>Attack</color> of Fire allies except the caster for <color=#28d9ed>2 turn(s)</color>.\\nGrants an <color=#28d9ed>extra turn</color> after using the skill.",
+      "true_desc_jp": "味方全体の<color=#28d9ed>会心率</color>と<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>2ターン</color>の間UPさせた後、\\n自分を除く火属性の味方の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間UPさせる。\\nスキル使用後、<color=#28d9ed>追加ターン</color>を獲得する。",
+      "true_desc_kr": "<color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>치명 확률</color>과 <color=#28d9ed>치명 피해</color>를 증가시킨 뒤\\n자신을 제외한 화속성 아군의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.\\n스킬 사용 후 <color=#28d9ed>추가 턴</color>을 획득합니다.",
+      "true_desc_zh": "使全体友军的<color=#28d9ed>暴击率</color>和<color=#28d9ed>暴击伤害</color>提升,持续<color=#28d9ed>2回合</color>,\\n随后使除自身外的火属性友军<color=#28d9ed>攻击力</color>提升,持续<color=#28d9ed>2回合</color>。\\n使用技能后,获得<color=#28d9ed>额外回合</color>。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
@@ -201,19 +201,23 @@
         ],
         "4": [
           "+1 turn Increased Crit Chance duration",
-          "+1 turn Increased Crit Damage duration"
+          "+1 turn Increased Crit Damage duration",
+          "+1 turn Increased Attack duration"
         ],
         "4_jp": [
           "会心率UP+1ターン",
-          "会心ダメージUP+1ターン"
+          "会心ダメージUP+1ターン",
+          "攻撃力UP+1ターン"
         ],
         "4_kr": [
           "치명 확률 지속 +1턴",
-          "치명 피해량 지속 +1턴"
+          "치명 피해량 지속 +1턴",
+          "공격력 증가 지속 +1턴"
         ],
         "4_zh": [
           "暴击率持续时间+1回合",
-          "暴击伤害量持续时间+1回合"
+          "暴击伤害量持续时间+1回合",
+          "攻击力提升持续时间+1回合"
         ],
         "5": [
           "-1 turn Skill Cooldown"
@@ -232,6 +236,7 @@
       "buff": [
         "BT_STAT|ST_CRITICAL_RATE",
         "BT_STAT|ST_CRITICAL_DMG_RATE",
+        "BT_STAT|ST_ATK",
         "BT_ADDITIVE_TURN"
       ],
       "debuff": []
@@ -244,10 +249,10 @@
       "name_jp": "マイ・ブラッディ・バレンタイン",
       "name_kr": "마이 블러디 발렌타인",
       "name_zh": "我的血腥情人",
-      "true_desc": "Attacks all enemies and reduces the target's Priority by <color=#28d9ed>15%</color>.",
-      "true_desc_jp": "敵全体にダメージを与える。対象の行動ゲージを<color=#28d9ed>-15%</color>DOWNさせる。",
-      "true_desc_kr": "적 전체를 공격합니다. 대상의 행동 게이지를 <color=#28d9ed>-15%</color> 감소시킵니다.",
-      "true_desc_zh": "攻击全体敌人,使敌人的行动值降低<color=#28d9ed>-15%</color>。",
+      "true_desc": "Attacks all enemies.\\nReduces the target's Priority by <color=#28d9ed>15%</color>, and reduces it additionally by <color=#28d9ed>5%</color> if the target is Earth element.",
+      "true_desc_jp": "敵全体にダメージを与える。\\n対象の行動ゲージを<color=#28d9ed>-15%</color>DOWNさせ、対象が地属性の場合、\\nさらに<color=#28d9ed>-5%</color>DOWNさせる。",
+      "true_desc_kr": "적 전체를 공격합니다.\\n대상의 행동 게이지를 <color=#28d9ed>-15%</color> 감소시키며 대상이 지속성인 경우  <color=#28d9ed>-5%</color>를 추가 감소시킵니다.",
+      "true_desc_zh": "攻击全体敌人。\\n使目标的行动值降低<color=#28d9ed>-15%</color>,若目标为土属性,则额外降低<color=#28d9ed>-5%</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
@@ -290,16 +295,20 @@
           "伤害量+10%"
         ],
         "5": [
-          "-10% Priority"
+          "-5% Priority",
+          "Action Gauge Reduction Boost (Ignores Effect Resistance)"
         ],
         "5_jp": [
-          "行動ゲージ10%DOWN"
+          "行動ゲージ5%DOWN",
+          "行動ゲージ減少強化(効果抵抗無視)"
         ],
         "5_kr": [
-          "행동 게이지 -10%"
+          "행동 게이지 -5%",
+          "행동 게이지 감소 강화 (효과 저항 무시)"
         ],
         "5_zh": [
-          "行动值-10%"
+          "行动值-5%",
+          "行动条减少强化(无视效果抵抗)"
         ]
       },
       "wgr": 2,

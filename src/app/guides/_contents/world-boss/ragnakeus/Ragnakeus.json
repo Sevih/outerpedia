@@ -1,0 +1,24 @@
+{
+    "december2025": {
+        "Phase 1": {
+            "icon": "water",
+            "team": [
+                []
+            ],
+            "note": [{"type": "p", "string": "No team data available yet."}],
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "Pahse 2": {
+            "icon": "dark",
+            "team": [
+                []
+            ],
+            "note": [{"type": "p", "string": "No team data available yet."}],
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
+    }
+}
