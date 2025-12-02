@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-12-02",
+    title: {
+      en: "Ragnakeus",
+      jp: "ラグナケウス",
+      kr: "라그나케우스",
+      zh: "拉格纳凯乌斯",
+    } as LString,
+    type: "update",
+    url: "/guides/world-boss/ragnakeus",
+    content: [
+      {
+        en: "Ragnakeus world boss guide updated for December 2025 version.",
+        jp: "ラグナケウス ワールドボスガイドが2025年12月版にアップデートされました。",
+        kr: "라그나케우스 월드 보스 가이드가 2025년 12월 버전으로 업데이트되었습니다.",
+        zh: "拉格纳凯乌斯 世界首领指南已更新至2025年12月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-11-25",
     title: {
       en: "Knight of Hope Meteos",

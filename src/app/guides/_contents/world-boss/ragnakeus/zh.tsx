@@ -1,7 +1,6 @@
 'use client'
 
 import GuideTemplate from '@/app/components/GuideTemplate'
-import GuideHeading from '@/app/components/GuideHeading'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
 import CombatFootage from '@/app/components/CombatFootage'
 import { WorldBossDisplay } from '@/app/components/boss'
@@ -31,12 +30,12 @@ const ragnakeusDecember2025 = {
 export default function RagnakeusGuide() {
   return (
     <GuideTemplate
-      title="Dragon of Death Ragnakeus Strategy"
-      introduction="Dragon of Death Ragnakeus is a challenging two-phase world boss that requires precise team coordination and timing. This guide covers strategies for defeating this boss up to the Extreme League."
+      title="死亡龙拉格纳修斯 攻略指南"
+      introduction="死亡龙拉格纳修斯是一个需要精确团队配合和时机把握的两阶段世界首领。本指南涵盖了直到极限联赛的攻略策略。"
       defaultVersion="december2025"
       versions={{
         december2025: {
-          label: 'December 2025',
+          label: '2025年12月',
           content: (
             <>
               <WorldBossDisplay config={ragnakeusDecember2025} defaultMode="Extreme" />
@@ -46,28 +45,28 @@ export default function RagnakeusGuide() {
                   {
                     title: "strategy",
                     tips: [
-                      "The boss's main characteristic is its {B/BT_ACTION_GAUGE}. Fast units are recommended.",
-                      "Anything that can limit priority gain is useful: {D/BT_DOT_POISON}, {D/BT_DOT_POISON2}, the {I-W/Sacreed Edge} weapon, or {P/Demiurge Vlada} (20% reduction at 4 stars, 50% at 5 stars).",
-                      "Like most World Bosses, the best strategy is to break the boss as often as possible. Key focus areas are CP generation and Weakness Gauge damage."
+                      "首领的主要特点是{B/BT_ACTION_GAUGE}。推荐使用速度快的单位。",
+                      "任何能限制行动值增加的手段都很有用：{D/BT_DOT_POISON}、{D/BT_DOT_POISON2}、{I-W/Sacreed Edge}武器，或{P/Demiurge Vlada}（4星减少20%，5星减少50%）。",
+                      "与大多数世界首领一样，最佳策略是尽可能频繁地击破首领。CP生成和WG伤害是关键重点。"
                     ]
                   },
                   {
                     title: "phase1",
-                    tips: [                    
-                      "Bring {D/BT_SEALED}, {D/BT_STEAL_BUFF}, or {D/BT_EXTEND_BUFF} to counter boss {B/BT_STAT|ST_DEF}."
+                    tips: [
+                      "携带{D/BT_SEALED}、{D/BT_STEAL_BUFF}或{D/BT_EXTEND_BUFF}来对抗首领的{B/BT_STAT|ST_DEF}。"
                     ]
                   },
                   {
                     title: "phase2",
                     tips: [
-                      "Bring {D/BT_REMOVE_BUFF}, {D/BT_STEAL_BUFF}, or {D/BT_SEALED} to counter boss {B/BT_SHIELD_BASED_CASTER}."
+                      "携带{D/BT_REMOVE_BUFF}、{D/BT_STEAL_BUFF}或{D/BT_SEALED}来对抗首领的{B/BT_SHIELD_BASED_CASTER}。"
                     ]
                   }
                 ]}
               />
               <hr className="my-6 border-neutral-700" />
               <RecommendedCharacterList title="phase1" entries={phase1Characters} />
-              <RecommendedCharacterList title="phase2" entries={phase2Characters} />             
+              <RecommendedCharacterList title="phase2" entries={phase2Characters} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={RagnakeusTeams.december2025} defaultStage="Phase 1" />
               <hr className="my-6 border-neutral-700" />
@@ -77,14 +76,14 @@ export default function RagnakeusGuide() {
           ),
         },
         october2024: {
-          label: 'October 2024',
+          label: '2024年10月',
           content: (
             <>
               <div>
                 <div className="mb-4">
-                  <GuideHeading level={2}>Video Guide</GuideHeading>
+                  <h2 className="text-xl font-semibold mb-2">视频攻略</h2>
                   <p className="mb-2 text-neutral-300">
-                    No full written guide has been made yet. For now, we recommend watching this excellent video by <strong>Ducky</strong>:
+                    完整的攻略指南尚未制作。目前，我们推荐观看<strong>Ducky</strong>的精彩视频：
                   </p>
                 </div>
                 <hr className="my-6 border-neutral-700" />

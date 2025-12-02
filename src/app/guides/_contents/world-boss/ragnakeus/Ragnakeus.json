@@ -1,21 +1,27 @@
 {
     "december2025": {
         "Phase 1": {
-            "icon": "water",
+            "icon": "dark",
             "team": [
-                []
+                ["Viella","Saeran","Veronica"],
+                ["Notia","Laine"],
+                ["Valentine","Fran", "Tamamo-no-Mae","Caren","Poolside Trickster Regina"],
+                ["Tamara", "Ryu Lion", "Laplace","Luna", "Ame", "Christina","Noa"]
             ],
-            "note": [{"type": "p", "string": "No team data available yet."}],
+            "note": [],
             "note_jp": [],
             "note_kr": [],
             "note_zh": []
         },
-        "Pahse 2": {
-            "icon": "dark",
+        "Phase 2": {
+            "icon": "light",
             "team": [
-                []
+                ["Monad Eva", "Demiurge Delta"],
+                ["Demiurge Vlada","Gnosis Viella","Francesca", "Regina"],
+                ["Demiurge Stella", "Iota", "Stella"],
+                ["Gnosis Nella","Gnosis Beth","Akari","Demiurge Drakhan"]
             ],
-            "note": [{"type": "p", "string": "No team data available yet."}],
+            "note": [],
             "note_jp": [],
             "note_kr": [],
             "note_zh": []

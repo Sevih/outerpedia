@@ -1233,6 +1233,43 @@
       "Gnosis Viella"
     ]
   },
+  "world-boss/ragnakeus": {
+    "category": "world-boss",
+    "guideId": "ragnakeus",
+    "characters": [
+      "Viella",
+      "Saeran",
+      "Veronica",
+      "Notia",
+      "Laine",
+      "Valentine",
+      "Fran",
+      "Tamamo-no-Mae",
+      "Caren",
+      "Poolside Trickster Regina",
+      "Tamara",
+      "Ryu Lion",
+      "Laplace",
+      "Luna",
+      "Ame",
+      "Christina",
+      "Noa",
+      "Monad Eva",
+      "Demiurge Delta",
+      "Demiurge Vlada",
+      "Gnosis Viella",
+      "Francesca",
+      "Regina",
+      "Demiurge Stella",
+      "Iota",
+      "Stella",
+      "Gnosis Nella",
+      "Gnosis Beth",
+      "Akari",
+      "Demiurge Drakhan",
+      "Eliza"
+    ]
+  },
   "world-boss/venion": {
     "category": "world-boss",
     "guideId": "venion",

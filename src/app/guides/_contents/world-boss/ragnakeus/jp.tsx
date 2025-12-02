@@ -31,12 +31,12 @@ const ragnakeusDecember2025 = {
 export default function RagnakeusGuide() {
   return (
     <GuideTemplate
-      title="Dragon of Death Ragnakeus Strategy"
-      introduction="Dragon of Death Ragnakeus is a challenging two-phase world boss that requires precise team coordination and timing. This guide covers strategies for defeating this boss up to the Extreme League."
+      title="臨終の竜・ラグナケウス 攻略ガイド"
+      introduction="臨終の竜・ラグナケウスは、正確なチーム編成とタイミングが求められる2フェーズのワールドボスです。このガイドでは、エクストリームリーグまでの攻略戦略を解説します。"
       defaultVersion="december2025"
       versions={{
         december2025: {
-          label: 'December 2025',
+          label: '2025年12月',
           content: (
             <>
               <WorldBossDisplay config={ragnakeusDecember2025} defaultMode="Extreme" />
@@ -46,28 +46,28 @@ export default function RagnakeusGuide() {
                   {
                     title: "strategy",
                     tips: [
-                      "The boss's main characteristic is its {B/BT_ACTION_GAUGE}. Fast units are recommended.",
-                      "Anything that can limit priority gain is useful: {D/BT_DOT_POISON}, {D/BT_DOT_POISON2}, the {I-W/Sacreed Edge} weapon, or {P/Demiurge Vlada} (20% reduction at 4 stars, 50% at 5 stars).",
-                      "Like most World Bosses, the best strategy is to break the boss as often as possible. Key focus areas are CP generation and Weakness Gauge damage."
+                      "ボスの主な特徴は{B/BT_ACTION_GAUGE}です。速いユニットが推奨されます。",
+                      "行動ゲージ上昇を抑えるものが有効です：{D/BT_DOT_POISON}、{D/BT_DOT_POISON2}、{I-W/Sacreed Edge}武器、または{P/Demiurge Vlada}（4凸で20%減少、5凸で50%減少）。",
+                      "他のワールドボスと同様、最良の戦略はボスをできるだけ頻繁にブレイクすることです。CP生成とWGダメージが重要なポイントです。"
                     ]
                   },
                   {
                     title: "phase1",
-                    tips: [                    
-                      "Bring {D/BT_SEALED}, {D/BT_STEAL_BUFF}, or {D/BT_EXTEND_BUFF} to counter boss {B/BT_STAT|ST_DEF}."
+                    tips: [
+                      "ボスの{B/BT_STAT|ST_DEF}に対抗するため、{D/BT_SEALED}、{D/BT_STEAL_BUFF}、または{D/BT_EXTEND_BUFF}を持参してください。"
                     ]
                   },
                   {
                     title: "phase2",
                     tips: [
-                      "Bring {D/BT_REMOVE_BUFF}, {D/BT_STEAL_BUFF}, or {D/BT_SEALED} to counter boss {B/BT_SHIELD_BASED_CASTER}."
+                      "ボスの{B/BT_SHIELD_BASED_CASTER}に対抗するため、{D/BT_REMOVE_BUFF}、{D/BT_STEAL_BUFF}、または{D/BT_SEALED}を持参してください。"
                     ]
                   }
                 ]}
               />
               <hr className="my-6 border-neutral-700" />
               <RecommendedCharacterList title="phase1" entries={phase1Characters} />
-              <RecommendedCharacterList title="phase2" entries={phase2Characters} />             
+              <RecommendedCharacterList title="phase2" entries={phase2Characters} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={RagnakeusTeams.december2025} defaultStage="Phase 1" />
               <hr className="my-6 border-neutral-700" />
@@ -77,14 +77,14 @@ export default function RagnakeusGuide() {
           ),
         },
         october2024: {
-          label: 'October 2024',
+          label: '2024年10月',
           content: (
             <>
               <div>
                 <div className="mb-4">
-                  <GuideHeading level={2}>Video Guide</GuideHeading>
+                  <GuideHeading level={2}>動画ガイド</GuideHeading>
                   <p className="mb-2 text-neutral-300">
-                    No full written guide has been made yet. For now, we recommend watching this excellent video by <strong>Ducky</strong>:
+                    完全な攻略ガイドはまだ作成されていません。現時点では、<strong>Ducky</strong>による素晴らしい動画をご覧ください：
                   </p>
                 </div>
                 <hr className="my-6 border-neutral-700" />
