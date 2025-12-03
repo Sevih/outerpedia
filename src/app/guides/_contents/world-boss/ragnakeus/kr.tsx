@@ -60,7 +60,8 @@ export default function RagnakeusGuide() {
                   {
                     title: "phase2",
                     tips: [
-                      "보스의 {B/BT_SHIELD_BASED_CASTER}에 대응하기 위해 {D/BT_REMOVE_BUFF}, {D/BT_STEAL_BUFF}, 또는 {D/BT_SEALED}를 가져오세요."
+                      "보스의 {B/BT_SHIELD_BASED_CASTER}에 대응하기 위해 {D/BT_REMOVE_BUFF}, {D/BT_STEAL_BUFF}, 또는 {D/BT_SEALED}를 가져오세요.",
+                      "{E/Fire}, {E/Earth}, {E/Water}를 사용할 경우 S3 리셋을 방지하기 위해 {C/Defender}를 권장합니다."
                     ]
                   }
                 ]}
@@ -71,7 +72,12 @@ export default function RagnakeusGuide() {
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={RagnakeusTeams.december2025} defaultStage="Phase 1" />
               <hr className="my-6 border-neutral-700" />
-              <CombatFootage />
+              <CombatFootage
+                                videoId="8SU0TH6_DY4"
+                                title="Dragon of Death Ragnakeus - World Boss - SSS - Extreme League"
+                                author="Sevih"
+                                date="03/12/2025"
+                              />
 
             </>
           ),

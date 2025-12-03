@@ -93,12 +93,21 @@ export const phase2Characters = [
         }
     },
     {
-        names: ["Gnosis Nella", "Demiurge Stella", "Iota"],
+        names: ["Gnosis Nella", "Demiurge Stella", "Iota","Ryu Lion"],
         reason: {
             en: "{D/BT_FIXED_DAMAGE} Starter/Finisher options.",
             jp: "{D/BT_FIXED_DAMAGE}スターター/フィニッシャーオプション。",
             kr: "{D/BT_FIXED_DAMAGE} 스타터/피니셔 옵션.",
             zh: "{D/BT_FIXED_DAMAGE}起手/终结选项。"
+        }
+    },
+    {
+        names: ["Gnosis Nella", "Tamamo-no-Mae"],
+        reason: {
+            en: "{D/BT_COOL_CHARGE} options to stall his S2.",
+            jp: "S2を遅延させる{D/BT_COOL_CHARGE}オプション。",
+            kr: "S2를 지연시키는 {D/BT_COOL_CHARGE} 옵션.",
+            zh: "延迟S2的{D/BT_COOL_CHARGE}选项。"
         }
     },
     {

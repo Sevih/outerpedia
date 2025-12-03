@@ -60,7 +60,8 @@ export default function RagnakeusGuide() {
                   {
                     title: "phase2",
                     tips: [
-                      "Bring {D/BT_REMOVE_BUFF}, {D/BT_STEAL_BUFF}, or {D/BT_SEALED} to counter boss {B/BT_SHIELD_BASED_CASTER}."
+                      "Bring {D/BT_REMOVE_BUFF}, {D/BT_STEAL_BUFF}, or {D/BT_SEALED} to counter boss {B/BT_SHIELD_BASED_CASTER}.",
+                      "{C/Defender} recommended to prevent the S3 reset if you want to bring {E/Fire}, {E/Earth}, {E/Water}."
                     ]
                   }
                 ]}
@@ -71,7 +72,12 @@ export default function RagnakeusGuide() {
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={RagnakeusTeams.december2025} defaultStage="Phase 1" />
               <hr className="my-6 border-neutral-700" />
-              <CombatFootage />
+              <CombatFootage
+                  videoId="8SU0TH6_DY4"
+                  title="Dragon of Death Ragnakeus - World Boss - SSS - Extreme League"
+                  author="Sevih"
+                  date="03/12/2025"
+                />
 
             </>
           ),

@@ -1,6 +1,7 @@
 'use client'
 
 import GuideTemplate from '@/app/components/GuideTemplate'
+import GuideHeading from '@/app/components/GuideHeading'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
 import CombatFootage from '@/app/components/CombatFootage'
 import { WorldBossDisplay } from '@/app/components/boss'
@@ -59,7 +60,8 @@ export default function RagnakeusGuide() {
                   {
                     title: "phase2",
                     tips: [
-                      "携带{D/BT_REMOVE_BUFF}、{D/BT_STEAL_BUFF}或{D/BT_SEALED}来对抗首领的{B/BT_SHIELD_BASED_CASTER}。"
+                      "携带{D/BT_REMOVE_BUFF}、{D/BT_STEAL_BUFF}或{D/BT_SEALED}来对抗首领的{B/BT_SHIELD_BASED_CASTER}。",
+                      "如果使用{E/Fire}、{E/Earth}、{E/Water}，推荐携带{C/Defender}来防止S3重置。"
                     ]
                   }
                 ]}
@@ -70,7 +72,12 @@ export default function RagnakeusGuide() {
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={RagnakeusTeams.december2025} defaultStage="Phase 1" />
               <hr className="my-6 border-neutral-700" />
-              <CombatFootage />
+              <CombatFootage
+                                videoId="8SU0TH6_DY4"
+                                title="Dragon of Death Ragnakeus - World Boss - SSS - Extreme League"
+                                author="Sevih"
+                                date="03/12/2025"
+                              />
 
             </>
           ),
@@ -81,7 +88,7 @@ export default function RagnakeusGuide() {
             <>
               <div>
                 <div className="mb-4">
-                  <h2 className="text-xl font-semibold mb-2">视频攻略</h2>
+                  <GuideHeading level={2}>视频攻略</GuideHeading>
                   <p className="mb-2 text-neutral-300">
                     完整的攻略指南尚未制作。目前，我们推荐观看<strong>Ducky</strong>的精彩视频：
                   </p>
