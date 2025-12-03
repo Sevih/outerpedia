@@ -1499,6 +1499,25 @@
     "last_updated": "2025-06-30",
     "author": "Sevih"
   },
+  "depth1-route1": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 1 : route 1",
+      "jp": "深度1 : ルート1",
+      "kr": "깊이 1 : 루트 1",
+      "zh": "深度1：路线1"
+    },
+    "description": {
+      "en": "Map of Depth 1 : route 1 and true ending path",
+      "jp": "深度1：ルート1とトゥルーエンディングへの道",
+      "kr": "깊이 1: 루트 1 및 트루 엔딩 경로",
+      "zh": "深度1地图：路线1和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-03",
+    "author": "Sevih"
+  },
   "depth8-route2": {
     "category": "monad-gate",
     "title": {
