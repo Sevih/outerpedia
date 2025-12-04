@@ -1,15 +1,24 @@
 import { nodes, edges, routeTitle } from "@/data/monad/depth1-route1";
 import { nodeTypes } from "@/lib/monad/nodeTypes";
 import MonadGateMap from "@/app/components/guides/MonadGateMap";
+import ItemInlineDisplay from "@/app/components/ItemInline";
 
 const Deeps1Route1 = () => (
   <div className="space-y-4">
+    <div className="mt-6">
+      <h3 className="text-lg font-semibold mb-3">Rewards</h3>
+      <div className="flex items-center gap-2">
+        <ItemInlineDisplay names="Fusion-Type Core" size={32} />
+        <span className="text-zinc-400">x75</span>
+      </div>
+    </div>
     <MonadGateMap
       nodes={nodes}
       edges={edges}
       nodeTypes={nodeTypes}
       title={routeTitle}
     />
+
   </div>
 );
 

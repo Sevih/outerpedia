@@ -100,7 +100,7 @@ export const edges: MonadEdge[] = [
     { from: "N2", to: "N3", truePath: true },
     { from: "N3", to: "N4", truePath: true },
     { from: "N4", to: "N5", label: "Force our way through" },
-    { from: "N4", to: "N6", label: "Look for another way" },
+    { from: "N4", to: "N6", label: "Look for another way" , truePath: true },
     { from: "N6", to: "N7", label: "Physiognomy never lies", truePath: true },
     { from: "N6", to: "N8", label: "Trust and buy the goods (Key item : Fake ID)" },
     { from: "N5", to: "N9" },
