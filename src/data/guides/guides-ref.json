@@ -25,7 +25,7 @@
       "kr": "라그나케우스",
       "zh": "拉格纳凯乌斯"
     },
-     "description": {
+    "description": {
       "en": "Advice to reach the SSS rank in Extreme League : Skill breakdown, team composition and general advices",
       "jp": "エクストリームリーグでSSSランクを達成するためのアドバイス：スキル解説、チーム構成、全般的なアドバイス",
       "kr": "익스트림 리그에서 SSS 랭크 달성을 위한 조언: 스킬 분석, 팀 구성 및 일반 조언",
@@ -1784,5 +1784,24 @@
     "author": "Sevih",
     "second_image": "unlock-content",
     "weight": 200
+  },
+  "depth2-route1": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 2 : route 1",
+      "jp": "深度2 : ルート1",
+      "kr": "깊이 2 : 루트 1",
+      "zh": "深度2：路线1"
+    },
+    "description": {
+      "en": "Map of Depth 2 : route 1 and true ending path",
+      "jp": "深度2：ルート1とトゥルーエンディングへの道",
+      "kr": "깊이 2: 루트 1 및 트루 엔딩 경로",
+      "zh": "深度2地图：路线1和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-04",
+    "author": "Sevih"
   }
 }
