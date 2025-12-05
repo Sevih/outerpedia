@@ -1,50 +1,74 @@
 {
-    "1-10": {
-        "team": [
-            [
-                "Charlotte"
+    "glicysSpecialRequest": {
+        "1-10": {
+            "icon": "earth",
+            "team": [
+                [
+                    "Kappa",
+                    "Monad Eva",
+                    "Saeran",
+                    "Viella"
+                ],
+                [
+                    "Charlotte",
+                    "Rhona",
+                    "Fran"
+                ],
+                [
+                    "Rey",
+                    "Ryu Lion",
+                    "Delta"
+                ],
+                [
+                    "Ame",
+                    "Noa",
+                    "Kitsune of Eternity Tamamo-no-Mae"
+                ]
             ],
-            [
-                "Noa"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Don't forget you can use your friends' units to help you beat those stages."
+                }
             ],
-            [
-                "Kappa"
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "11-13": {
+            "icon": "earth",
+            "team": [
+                [
+                    "Kappa",
+                    "Monad Eva",
+                    "Saeran",
+                    "Viella"
+                ],
+                [
+                    "Charlotte",
+                    "Rhona",
+                    "Fran"
+                ],
+                [
+                    "Rey",
+                    "Ryu Lion",
+                    "Delta"
+                ],
+                [
+                    "Ame",
+                    "Noa",
+                    "Kitsune of Eternity Tamamo-no-Mae"
+                ]
             ],
-            [
-                "Ame",
-                "Monad Eva",
-                "Rey",
-                "Delta",
-                "Kitsune of Eternity Tamamo-no-Mae",
-                "Saeran"
-            ]
-        ],
-        "note": [
-            {
-                "type": "p",
-                "string": "Don't forget you can use your friends' units to help you beat those stages."
-            }
-        ]
-    },
-    "11-13": {
-        "team": [
-            [
-                "Charlotte"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Manage summoned adds carefully and avoid triggering freeze mechanics."
+                }
             ],
-            [
-                "Noa"
-            ],
-            [
-                "Kappa"
-            ],
-            [
-                "Ame",
-                "Monad Eva",
-                "Rey",
-                "Delta",
-                "Kitsune of Eternity Tamamo-no-Mae",
-                "Saeran"
-            ]
-        ]
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
     }
 }

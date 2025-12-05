@@ -1,4 +1,5 @@
 import React from 'react';
+import { sanitizeHtml } from './sanitize';
 
 export default function formatEffectText(text: string): React.ReactElement {
   const colored = text.replace(/<color=(#[0-9a-fA-F]{6})>(.*?)<\/color>/g, (_, color, content) => {
@@ -7,7 +8,10 @@ export default function formatEffectText(text: string): React.ReactElement {
 
   const withLineBreaks = colored.replace(/\\n|\\\\n/g, '<br />');
 
-  return <span dangerouslySetInnerHTML={{ __html: withLineBreaks }} />;
+  // Sanitize to prevent XSS
+  const sanitized = sanitizeHtml(withLineBreaks, ['span', 'br']);
+
+  return <span dangerouslySetInnerHTML={{ __html: sanitized }} />;
 }
 
 

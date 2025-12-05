@@ -1,32 +1,69 @@
 {
-    "1-10": {
-        "team": [
-            ["Eternal"
+    "beatlesSpecialRequest": {
+        "1-10": {
+            "icon": "fire",
+            "team": [
+                [
+                    "Valentine",
+                    "Christina",
+                    "Holy Night's Blessing Dianne",
+                    "Mero",
+                    "Monad Eva"
+                ],
+                [
+                    "Eternal",
+                    "Astei",
+                    "Liselotte",
+                    "Tio"
+                ],
+                [
+                    "Aer",
+                    "Bell Cranel"
+                ],
+                [
+                    "Kanon",
+                    "Bryn"
+                ]
             ],
-            ["Aer"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Don't forget you can use your friends' units to help you beat those stages."
+                }
             ],
-            ["Valentine"
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "11-13": {
+            "icon": "fire",
+            "team": [
+                [
+                    "Valentine",
+                    "Christina",
+                    "Holy Night's Blessing Dianne",
+                    "Mero",
+                    "Monad Eva"
+                ],
+                [
+                    "Eternal",
+                    "Astei",
+                    "Liselotte",
+                    "Tio"
+                ],
+                [
+                    "Aer",
+                    "Bell Cranel"
+                ],
+                [
+                    "Kanon",
+                    "Bryn"
+                ]
             ],
-            ["Maxie","Tamamo-no-Mae","Vlada","Kanon","Monad Eva","Tio","Mero"
-            ]
-        ],
-        "note": [
-            {
-                "type": "p",
-                "string": "Don't forget you can use your friends' units to help you beat those stages."
-            }
-        ]
-    },
-    "11-13": {
-        "team": [
-            ["Eternal"
-            ],
-            ["Aer"
-            ],
-            ["Valentine"
-            ],
-            ["Maxie","Tamamo-no-Mae","Vlada","Kanon","Monad Eva","Tio","Mero"
-            ]
-        ]
+            "note": [],
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
     }
 }

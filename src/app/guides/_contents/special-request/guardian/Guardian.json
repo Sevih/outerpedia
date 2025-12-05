@@ -1,114 +1,130 @@
 {
-    "1-10": {
-        "team": [
-            [
-                "Veronica",
-                "Christina",
-				"Ember",
-				"Tio",
-				"Lyla",
-                "Monad Eva",
-                "Ritri",
-                "Mene",
-				"Liselotte",
-                "Luna",
-				"Sterope",
-				"Laplace"
+    "guardianSpecialRequest": {
+        "1-10": {
+            "icon": "water",
+            "team": [
+                [
+                    "Veronica",
+                    "Christina",
+                    "Ember",
+                    "Tio",
+                    "Lyla",
+                    "Monad Eva",
+                    "Ritri",
+                    "Mene",
+                    "Liselotte",
+                    "Luna",
+                    "Sterope",
+                    "Laplace"
+                ],
+                [
+                    "Tamara",
+                    "Valentine",
+                    "Skadi",
+                    "Akari",
+                    "Eternal",
+                    "Edelweiss",
+                    "Maxie",
+                    "Caren",
+                    "Adelie",
+                    "Bryn",
+                    "Holy Night's Blessing Dianne"
+                ],
+                [
+                    "Rin",
+                    "Beth",
+                    "Maxwell",
+                    "Demiurge Astei",
+                    "Gnosis Dahlia",
+                    "Poolside Trickster Regina",
+                    "Summer Knight's Dream Ember"
+                ],
+                [
+                    "Roxie",
+                    "Marian",
+                    "Vlada",
+                    "Eliza",
+                    "Sigma",
+                    "Demiurge Luna",
+                    "Demiurge Stella",
+                    "Demiurge Vlada",
+                    "Gnosis Beth",
+                    "Gnosis Viella",
+                    "Bell Cranel"
+                ]
             ],
-            [
-                "Tamara",
-                "Valentine",
-                "Skadi",
-				"Akari",
-				"Eternal",
-                "Edelweiss",
-                "Maxie",
-                "Caren",
-				"Adelie",
-				"Bryn",
-				"Holy Night's Blessing Dianne"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Don't forget you can use your friends' units to help you beat those stages."
+                }
             ],
-            [
-				"Rin",
-                "Beth",                
-				"Maxwell",
-                "Demiurge Astei",
-				"Gnosis Dahlia",
-                "Poolside Trickster Regina",
-				"Summer Knight's Dream Ember"
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "11-13": {
+            "icon": "water",
+            "team": [
+                [
+                    "Veronica",
+                    "Christina",
+                    "Ember",
+                    "Tio",
+                    "Lyla",
+                    "Monad Eva",
+                    "Ritri",
+                    "Mene",
+                    "Liselotte",
+                    "Luna",
+                    "Sterope",
+                    "Laplace"
+                ],
+                [
+                    "Tamara",
+                    "Valentine",
+                    "Skadi",
+                    "Akari",
+                    "Eternal",
+                    "Edelweiss",
+                    "Maxie",
+                    "Caren",
+                    "Adelie",
+                    "Bryn",
+                    "Holy Night's Blessing Dianne"
+                ],
+                [
+                    "Rin",
+                    "Beth",
+                    "Maxwell",
+                    "Demiurge Astei",
+                    "Gnosis Dahlia",
+                    "Poolside Trickster Regina",
+                    "Summer Knight's Dream Ember"
+                ],
+                [
+                    "Roxie",
+                    "Marian",
+                    "Vlada",
+                    "Eliza",
+                    "Sigma",
+                    "Demiurge Luna",
+                    "Demiurge Stella",
+                    "Demiurge Vlada",
+                    "Gnosis Beth",
+                    "Gnosis Viella",
+                    "Bell Cranel"
+                ]
             ],
-            [
-				"Roxie",
-				"Marian",
-				"Vlada",
-				"Eliza",
-				"Sigma",
-				"Demiurge Luna",
-				"Demiurge Stella",
-				"Demiurge Vlada",
-				"Gnosis Beth",
-				"Gnosis Viella",
-				"Bell Cranel"
-            ]
-        ],
-        "note": [
-            {
-                "type": "p",
-                "string": "Don't forget you can use your friends' units to help you beat those stages."
-            }
-        ]
-    },
-    "11-13": {
-        "team": [
-            [
-                "Veronica",
-                "Christina",
-				"Ember",
-				"Tio",
-				"Lyla",
-                "Monad Eva",
-                "Ritri",
-                "Mene",
-				"Liselotte",
-                "Luna",
-				"Sterope",
-				"Laplace"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Focus on units with strong debuff application and AoE to handle minions."
+                }
             ],
-            [
-                "Tamara",
-                "Valentine",
-                "Skadi",
-				"Akari",
-				"Eternal",
-                "Edelweiss",
-                "Maxie",
-                "Caren",
-				"Adelie",
-				"Bryn",
-				"Holy Night's Blessing Dianne"
-            ],
-            [
-                "Rin",
-                "Beth",                
-				"Maxwell",
-                "Demiurge Astei",
-				"Gnosis Dahlia",
-                "Poolside Trickster Regina",
-				"Summer Knight's Dream Ember"
-            ],
-            [
-				"Roxie",
-				"Marian",
-				"Vlada",
-				"Eliza",
-				"Sigma",
-				"Demiurge Luna",
-				"Demiurge Stella",
-				"Demiurge Vlada",
-				"Gnosis Beth",
-				"Gnosis Viella",
-				"Bell Cranel"
-            ]
-        ]
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
     }
 }

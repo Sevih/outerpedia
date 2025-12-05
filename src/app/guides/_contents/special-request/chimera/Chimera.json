@@ -1,92 +1,108 @@
 {
-    "1-10": {
-        "team": [
-            [
-                "Valentine",
-                "Mero",
-                "Skadi",
-                "Tamara",
-                "Bryn",
-                "Ember"
+    "chimeraSpecialRequest": {
+        "1-10": {
+            "icon": "fire",
+            "team": [
+                [
+                    "Valentine",
+                    "Mero",
+                    "Skadi",
+                    "Tamara",
+                    "Bryn",
+                    "Ember"
+                ],
+                [
+                    "Aer",
+                    "Vlada",
+                    "Ame",
+                    "Noa",
+                    "Rey",
+                    "Maxie",
+                    "Regina",
+                    "Maxwell",
+                    "Demiurge Luna",
+                    "Demiurge Astei",
+                    "Holy Night's Blessing Dianne",
+                    "Ryu Lion",
+                    "Bell Cranel"
+                ],
+                [
+                    "Eternal",
+                    "Tamamo-no-Mae",
+                    "Rhona",
+                    "Iota",
+                    "Akari",
+                    "Gnosis Nella",
+                    "Demiurge Stella",
+                    "Hilde",
+                    "K",
+                    "Kate"
+                ],
+                [
+                    "Astei",
+                    "Monad Eva",
+                    "Liselotte",
+                    "Nella",
+                    "Tio",
+                    "Dianne",
+                    "Viella",
+                    "Demiurge Delta",
+                    "Saeran",
+                    "Mene"
+                ]
             ],
-            [
-                "Aer",
-                "Vlada",
-                "Ame",
-                "Noa",
-                "Rey",
-                "Maxie",
-                "Regina",
-                "Maxwell",
-                "Demiurge Luna",
-                "Demiurge Astei",
-                "Holy Night's Blessing Dianne",
-                "Ryu Lion",
-                "Bell Cranel"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Don't forget you can use your friends' units to help you beat those stages."
+                }
             ],
-            [
-                "Eternal",
-                "Tamamo-no-Mae",
-                "Rhona",
-                "Iota",
-                "Akari",
-                "Gnosis Nella",
-                "Demiurge Stella",
-                "Hilde",
-                "K",
-                "Kate"
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "11-13": {
+            "icon": "fire",
+            "team": [
+                [
+                    "Valentine",
+                    "Mero",
+                    "Skadi",
+                    "Bryn",
+                    "Ember"
+                ],
+                [
+                    "Aer",
+                    "Vlada",
+                    "Maxie",
+                    "Demiurge Luna",
+                    "Holy Night's Blessing Dianne",
+                    "Bell Cranel"
+                ],
+                [
+                    "Eternal",
+                    "Tamamo-no-Mae",
+                    "Iota",
+                    "Gnosis Nella"
+                ],
+                [
+                    "Demiurge Stella",
+                    "Hilde",
+                    "Kanon",
+                    "Astei",
+                    "Monad Eva",
+                    "Liselotte"
+                ]
             ],
-            [
-                "Astei",
-                "Monad Eva",
-                "Liselotte",
-                "Nella",
-                "Tio",
-                "Dianne",
-                "Viella",
-                "Demiurge Delta",
-                "Saeran",
-                "Mene"
-            ]
-        ],
-        "note": [
-            {
-                "type": "p",
-                "string": "Don't forget you can use your friends' units to help you beat those stages."
-            }
-        ]
-    },
-    "11-13": {
-        "team": [
-            [
-                "Valentine",
-                "Mero",
-                "Skadi",
-                "Bryn",
-                "Ember"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Focus on high-end {E/Fire} units for the hardest stages."
+                }
             ],
-            [
-                "Aer",
-                "Vlada",
-                "Maxie",
-                "Demiurge Luna",
-                "Holy Night's Blessing Dianne",
-                "Bell Cranel"
-            ],
-            [
-                "Eternal",
-                "Tamamo-no-Mae",
-                "Iota",
-                "Gnosis Nella"
-            ],
-            [
-                "Demiurge Stella",
-                "Hilde",
-                "Kanon",
-                "Astei",
-                "Monad Eva",
-                "Liselotte"
-            ]
-        ]
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
     }
 }

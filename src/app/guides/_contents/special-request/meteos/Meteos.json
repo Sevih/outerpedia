@@ -1,52 +1,68 @@
 {
-    "1-10": {
-        "team": [
-            [
-                "Veronica"
+    "meteosSpecialRequest": {
+        "1-10": {
+            "icon": "fire",
+            "team": [
+                [
+                    "Veronica"
+                ],
+                [
+                    "Laplace"
+                ],
+                [
+                    "Tamara"
+                ],
+                [
+                    "Poolside Trickster Regina",
+                    "Edelweiss",
+                    "Monad Eva",
+                    "Luna",
+                    "Rin",
+                    "Caren",
+                    "Beth"
+                ]
             ],
-            [
-                "Laplace"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Don't forget you can use your friends' units to help you beat those stages."
+                }
             ],
-            [
-                "Tamara"
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "11-13": {
+            "icon": "fire",
+            "team": [
+                [
+                    "Veronica"
+                ],
+                [
+                    "Laplace"
+                ],
+                [
+                    "Tamara"
+                ],
+                [
+                    "Poolside Trickster Regina",
+                    "Edelweiss",
+                    "Monad Eva",
+                    "Luna",
+                    "Rin",
+                    "Caren",
+                    "Beth"
+                ]
             ],
-            [
-                "Poolside Trickster Regina",
-                "Edelweiss",
-                "Monad Eva",
-                "Luna",
-                "Rin",
-                "Caren",
-                "Beth"
-            ]
-        ],
-        "note": [
-            {
-                "type": "p",
-                "string": "Don't forget you can use your friends' units to help you beat those stages."
-            }
-        ]
-    },
-    "11-13": {
-        "team": [
-            [
-                "Veronica"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Focus on {D/BT_SHIELD_BASED_CASTER} units and avoid letting teammates die."
+                }
             ],
-            [
-                "Laplace"
-            ],
-            [
-                "Tamara"
-            ],
-            [
-                "Poolside Trickster Regina",
-                "Edelweiss",
-                "Monad Eva",
-                "Luna",
-                "Rin",
-                "Caren",
-                "Beth"
-            ]
-        ]
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
     }
 }

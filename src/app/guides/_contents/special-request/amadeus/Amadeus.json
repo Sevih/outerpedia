@@ -1,24 +1,66 @@
 {
-    "1-10": {
-        "team": [
-            ["Gnosis Beth","Demiurge Stella","Skadi"],
-            ["Regina","Akari","Kuro"],
-            ["Dianne","Stella"],
-            ["Drakhan"]
-        ],
-        "note": [
-            {
-                "type": "p",
-                "string": "Don't forget you can use your friends' units to help you beat those stages."
-            }
-        ]
-    },
-    "11-13": {
-        "team": [
-         ["Gnosis Beth","Demiurge Stella","Skadi"],
-            ["Regina","Akari","Kuro"],
-            ["Dianne","Stella"],
-            ["Drakhan"]
-        ]
+    "amadeusSpecialRequest": {
+        "1-10": {
+            "icon": "light",
+            "team": [
+                [
+                    "Gnosis Beth",
+                    "Demiurge Stella",
+                    "Skadi"
+                ],
+                [
+                    "Regina",
+                    "Akari",
+                    "Kuro"
+                ],
+                [
+                    "Dianne",
+                    "Stella"
+                ],
+                [
+                    "Drakhan"
+                ]
+            ],
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Don't forget you can use your friends' units to help you beat those stages."
+                }
+            ],
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "11-13": {
+            "icon": "light",
+            "team": [
+                [
+                    "Gnosis Beth",
+                    "Demiurge Stella",
+                    "Skadi"
+                ],
+                [
+                    "Regina",
+                    "Akari",
+                    "Kuro"
+                ],
+                [
+                    "Dianne",
+                    "Stella"
+                ],
+                [
+                    "Drakhan"
+                ]
+            ],
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Focus on debuff application and cleansing. Avoid non-attack skills."
+                }
+            ],
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
     }
 }

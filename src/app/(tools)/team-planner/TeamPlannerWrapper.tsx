@@ -24,6 +24,7 @@ import {
   copyImageToClipboard,
   downloadImage
 } from '@/utils/canvas-team-export'
+import { sanitizeHtml } from '@/utils/sanitize'
 
 const characters = _allCharacters as CharacterLite[]
 
@@ -71,7 +72,12 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     // Convertir le Markdown basique - marked va préserver les tags HTML
     const html = marked.parse(processedNotes, { breaks: true }) as string
 
-    return html
+    // Sanitize HTML to prevent XSS attacks
+    return sanitizeHtml(html, [
+      'p', 'br', 'strong', 'em', 'u', 'a', 'ul', 'ol', 'li',
+      'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+      'blockquote', 'code', 'pre', 'span', 'div'
+    ])
   }, [viewOnly, notes])
 
   // Charger l'équipe depuis l'URL au montage

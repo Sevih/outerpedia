@@ -1,60 +1,76 @@
 {
-    "1-10": {
-        "team": [
-            [
-                "Dianne",
-                "Saeran",
-                "Shu",
-                "Monad Eva"
+    "tyrantSpecialRequest": {
+        "1-10": {
+            "icon": "dark",
+            "team": [
+                [
+                    "Dianne",
+                    "Saeran",
+                    "Shu",
+                    "Monad Eva"
+                ],
+                [
+                    "Noa",
+                    "Ame",
+                    "Rey"
+                ],
+                [
+                    "Kappa",
+                    "Charlotte",
+                    "Tamara",
+                    "Rhona"
+                ],
+                [
+                    "Ame",
+                    "Rey",
+                    "Delta"
+                ]
             ],
-            [
-                "Noa",
-                "Ame",
-                "Rey"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Don't forget you can use your friends' units to help you beat those stages."
+                }
             ],
-            [
-                "Kappa",
-                "Charlotte",
-                "Tamara",
-                "Rhona"
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "11-13": {
+            "icon": "dark",
+            "team": [
+                [
+                    "Dianne",
+                    "Saeran",
+                    "Shu",
+                    "Monad Eva"
+                ],
+                [
+                    "Noa",
+                    "Ame",
+                    "Rey"
+                ],
+                [
+                    "Kappa",
+                    "Charlotte",
+                    "Tamara",
+                    "Rhona"
+                ],
+                [
+                    "Ame",
+                    "Rey",
+                    "Delta"
+                ]
             ],
-            [
-                "Ame",
-                "Rey",
-                "Delta"
-            ]
-        ],
-        "note": [
-            {
-                "type": "p",
-                "string": "Don't forget you can use your friends' units to help you beat those stages."
-            }
-        ]
-    },
-    "11-13": {
-        "team": [
-            [
-                "Dianne",
-                "Saeran",
-                "Shu",
-                "Monad Eva"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Focus on {C/Defender} units with Defense scaling for Stage 12-13."
+                }
             ],
-            [
-                "Noa",
-                "Ame",
-                "Rey"
-            ],
-            [
-                "Kappa",
-                "Charlotte",
-                "Tamara",
-                "Rhona"
-            ],
-            [
-                "Ame",
-                "Rey",
-                "Delta"
-            ]
-        ]
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
     }
 }

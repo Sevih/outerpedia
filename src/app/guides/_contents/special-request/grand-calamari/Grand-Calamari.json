@@ -1,58 +1,74 @@
 {
-    "1-10": {
-        "team": [
-            [
-                "Akari",
-                "Gnosis Nella",
-                "Alice",
-                "Edelweiss"
+    "grandCalamariSpecialRequest": {
+        "1-10": {
+            "icon": "light",
+            "team": [
+                [
+                    "Akari",
+                    "Gnosis Nella",
+                    "Alice",
+                    "Edelweiss"
+                ],
+                [
+                    "Kuro",
+                    "Stella",
+                    "Edelweiss"
+                ],
+                [
+                    "Drakhan",
+                    "Gnosis Beth",
+                    "Regina",
+                    "Demiurge Stella"
+                ],
+                [
+                    "Monad Eva",
+                    "Dianne"
+                ]
             ],
-            [
-                "Kuro",
-                "Stella",
-                "Edelweiss"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Don't forget you can use your friends' units to help you beat those stages."
+                }
             ],
-            [
-                "Drakhan",
-                "Gnosis Beth",
-                "Regina",
-                "Demiurge Stella"
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "11-13": {
+            "icon": "light",
+            "team": [
+                [
+                    "Akari",
+                    "Gnosis Nella",
+                    "Alice",
+                    "Edelweiss"
+                ],
+                [
+                    "Kuro",
+                    "Stella",
+                    "Edelweiss"
+                ],
+                [
+                    "Drakhan",
+                    "Gnosis Beth",
+                    "Regina",
+                    "Demiurge Stella"
+                ],
+                [
+                    "Monad Eva",
+                    "Dianne"
+                ]
             ],
-            [
-                "Monad Eva",
-                "Dianne"
-            ]
-        ],
-        "note": [
-            {
-                "type": "p",
-                "string": "Don't forget you can use your friends' units to help you beat those stages."
-            }
-        ]
-    },
-    "11-13": {
-        "team": [
-            [
-                "Akari",
-                "Gnosis Nella",
-                "Alice",
-                "Edelweiss"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Focus on units with {D/BT_SEALED} and buff conversion for the hardest stages."
+                }
             ],
-            [
-                "Kuro",
-                "Stella",
-                "Edelweiss"
-            ],
-            [
-                "Drakhan",
-                "Gnosis Beth",
-                "Regina",
-                "Demiurge Stella"
-            ],
-            [
-                "Monad Eva",
-                "Dianne"
-            ]
-        ]
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
     }
 }

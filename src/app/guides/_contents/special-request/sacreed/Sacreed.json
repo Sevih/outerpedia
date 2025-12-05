@@ -1,74 +1,90 @@
 {
-    "1-10": {
-        "team": [
-            [
-                "Iota",
-                "Notia",
-                "Gnosis Nella",
-                "Dahlia",
-                "Kuro",
-                "Stella"
+    "sacreedSpecialRequest": {
+        "1-10": {
+            "icon": "earth",
+            "team": [
+                [
+                    "Iota",
+                    "Notia",
+                    "Gnosis Nella",
+                    "Dahlia",
+                    "Kuro",
+                    "Stella"
+                ],
+                [
+                    "Demiurge Vlada",
+                    "Omega Nadja",
+                    "Eliza",
+                    "Gnosis Nella",
+                    "Dahlia",
+                    "Alice",
+                    "Aer"
+                ],
+                [
+                    "Gnosis Dahlia",
+                    "Francesca",
+                    "Demiurge Astei",
+                    "Maxwell"
+                ],
+                [
+                    "Demiurge Astei",
+                    "Maxwell",
+                    "Demiurge Delta",
+                    "Nella"
+                ]
             ],
-            [
-                "Demiurge Vlada",
-                "Omega Nadja",
-                "Eliza",
-                "Gnosis Nella",
-                "Dahlia",
-                "Alice",
-                "Aer"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Don't forget you can use your friends' units to help you beat those stages."
+                }
             ],
-            [
-                "Gnosis Dahlia",
-                "Francesca",
-                "Demiurge Astei",
-                "Maxwell"
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "11-13": {
+            "icon": "earth",
+            "team": [
+                [
+                    "Iota",
+                    "Notia",
+                    "Gnosis Nella",
+                    "Dahlia",
+                    "Kuro",
+                    "Stella"
+                ],
+                [
+                    "Demiurge Vlada",
+                    "Omega Nadja",
+                    "Eliza",
+                    "Gnosis Nella",
+                    "Dahlia",
+                    "Alice",
+                    "Aer"
+                ],
+                [
+                    "Gnosis Dahlia",
+                    "Francesca",
+                    "Demiurge Astei",
+                    "Maxwell"
+                ],
+                [
+                    "Demiurge Astei",
+                    "Maxwell",
+                    "Demiurge Delta",
+                    "Nella"
+                ]
             ],
-            [
-                "Demiurge Astei",
-                "Maxwell",
-                "Demiurge Delta",
-                "Nella"
-            ]
-        ],
-        "note": [
-            {
-                "type": "p",
-                "string": "Don't forget you can use your friends' units to help you beat those stages."
-            }
-        ]
-    },
-    "11-13": {
-        "team": [
-            [
-                "Iota",
-                "Notia",
-                "Gnosis Nella",
-                "Dahlia",
-                "Kuro",
-                "Stella"
+            "note": [
+                {
+                    "type": "p",
+                    "string": "Focus on buff removal and lockdown for the hardest stages."
+                }
             ],
-            [
-                "Demiurge Vlada",
-                "Omega Nadja",
-                "Eliza",
-                "Gnosis Nella",
-                "Dahlia",
-                "Alice",
-                "Aer"
-            ],
-            [
-                "Gnosis Dahlia",
-                "Francesca",
-                "Demiurge Astei",
-                "Maxwell"
-            ],
-            [
-                "Demiurge Astei",
-                "Maxwell",
-                "Demiurge Delta",
-                "Nella"
-            ]
-        ]
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        }
     }
 }

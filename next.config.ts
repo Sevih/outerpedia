@@ -23,6 +23,16 @@ const nextConfig = {
     'kr.outerpedia.local',
     'zh.outerpedia.local',
   ],
+  webpack: (config: any, { isServer }: { isServer: boolean }) => {
+    if (!isServer) {
+      // Exclude jsdom from client bundle (it's server-only)
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        jsdom: false,
+      };
+    }
+    return config;
+  },
   images: {
 	unoptimized: true, // ✅ Désactive l'optimisation dynamique
     formats: ['image/avif', 'image/webp'],
@@ -60,6 +70,32 @@ const nextConfig = {
         {
           key: 'Permissions-Policy',
           value: 'camera=(), microphone=(), geolocation=()'
+        },
+        {
+          key: 'Strict-Transport-Security',
+          value: 'max-age=31536000; includeSubDomains'
+        },
+        {
+          key: 'X-XSS-Protection',
+          value: '1; mode=block'
+        },
+        {
+          key: 'Content-Security-Policy',
+          value: [
+            "default-src 'self'",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+            "style-src 'self' 'unsafe-inline'",
+            "img-src 'self' data: https: blob:",
+            "font-src 'self' data:",
+            "connect-src 'self'",
+            "media-src 'self' https://img.youtube.com https://cdn.discordapp.com",
+            "frame-src 'self' https://www.youtube.com",
+            "object-src 'none'",
+            "base-uri 'self'",
+            "form-action 'self'",
+            "frame-ancestors 'self'",
+            "upgrade-insecure-requests"
+          ].join('; ')
         }
       ],
     },
