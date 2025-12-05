@@ -1,19 +1,18 @@
 import DOMPurify from 'dompurify';
+import type { DOMPurify as DOMPurifyType } from 'dompurify';
 
-/**
- * Get DOMPurify instance - works in both browser and server (SSR)
- */
-function getPurify() {
-  if (typeof window !== 'undefined') {
-    // Browser environment
-    return DOMPurify;
-  } else {
-    // Server environment - use JSDOM
-    const { JSDOM } = require('jsdom');
-    const window = new JSDOM('').window;
-    // @ts-ignore - JSDOM window is compatible with DOMPurify
-    return DOMPurify(window);
-  }
+// Server-side: eagerly initialize with JSDOM at module load
+let purifyInstance: DOMPurifyType;
+
+if (typeof window !== 'undefined') {
+  // Browser environment
+  purifyInstance = DOMPurify;
+} else {
+  // Server environment - import JSDOM synchronously at module level
+  // This is fine because this code only runs once at startup on the server
+  const jsdom = await import('jsdom');
+  const dom = new jsdom.JSDOM('');
+  purifyInstance = DOMPurify(dom.window);
 }
 
 /**
@@ -24,8 +23,6 @@ function getPurify() {
  */
 export function sanitizeHtml(dirty: string, allowedTags?: string[]): string {
   if (!dirty) return '';
-
-  const purify = getPurify();
 
   const config = {
     ALLOWED_TAGS: allowedTags || [
@@ -39,7 +36,7 @@ export function sanitizeHtml(dirty: string, allowedTags?: string[]): string {
     RETURN_TRUSTED_TYPE: false,
   };
 
-  return purify.sanitize(dirty, config) as string;
+  return purifyInstance.sanitize(dirty, config) as string;
 }
 
 /**
@@ -48,8 +45,6 @@ export function sanitizeHtml(dirty: string, allowedTags?: string[]): string {
 export function sanitizeHtmlPermissive(dirty: string): string {
   if (!dirty) return '';
 
-  const purify = getPurify();
-
   const config = {
     ALLOWED_ATTR: ['href', 'title', 'class', 'id', 'src', 'alt', 'target', 'rel', 'style'],
     FORBID_TAGS: ['script', 'iframe', 'object', 'embed', 'link'],
@@ -57,5 +52,5 @@ export function sanitizeHtmlPermissive(dirty: string): string {
     RETURN_TRUSTED_TYPE: false,
   };
 
-  return purify.sanitize(dirty, config) as string;
+  return purifyInstance.sanitize(dirty, config) as string;
 }

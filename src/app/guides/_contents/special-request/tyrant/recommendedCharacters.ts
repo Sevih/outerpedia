@@ -1,38 +1,29 @@
 export const recommendedCharacters = [
     {
-        names: ["Dianne", "Saeran", "Shu", "Monad Eva"],
+        names: ["Rey", "Ryu Lion", "Ame", "Noa", "Kitsune of Eternity Tamamo-no-Mae"],
         reason: {
-            en: "{E/Dark} healers with AoE cleanse abilities.",
-            jp: "",
-            kr: "",
-            zh: ""
+            en: "{E/Earth} DPS options.",
+            jp: "{E/Earth} DPSオプション。",
+            kr: "{E/Earth} DPS 옵션.",
+            zh: "{E/Earth} DPS选项。"
         }
     },
     {
-        names: ["Noa", "Ame", "Rey"],
+        names: ["Viella", "Dianne", "Saeran"],
         reason: {
-            en: "{E/Dark} support units.",
-            jp: "",
-            kr: "",
-            zh: ""
+            en: "{C/Healer} options.",
+            jp: "{C/Healer}オプション。",
+            kr: "{C/Healer} 옵션.",
+            zh: "{C/Healer}选项。"
         }
     },
     {
-        names: ["Kappa", "Charlotte", "Tamara", "Rhona"],
+        names: ["Kappa", "Fran"],
         reason: {
-            en: "{E/Dark} DPS and {C/Defender} units (scales with Defense on Stage 12-13).",
-            jp: "",
-            kr: "",
-            zh: ""
+            en: "{E/Earth} support options.",
+            jp: "{E/Earth}サポートオプション。",
+            kr: "{E/Earth} 서포트 옵션.",
+            zh: "{E/Earth}辅助选项。"
         }
     },
-    {
-        names: ["Delta"],
-        reason: {
-            en: "{E/Dark} support and healing unit.",
-            jp: "",
-            kr: "",
-            zh: ""
-        }
-    }
 ]

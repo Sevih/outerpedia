@@ -1,38 +1,29 @@
 export const recommendedCharacters = [
     {
-        names: ["Valentine", "Mero", "Skadi", "Bryn", "Ember", "Tamara"],
+        names: ["Aer", "Bryn", "Bell Cranel", "Kanon", "Vlada", "Holy Night's Blessing Dianne", "Maxie"],
         reason: {
             en: "{E/Fire} DPS options.",
-            jp: "",
-            kr: "",
-            zh: ""
+            jp: "{E/Fire}アタッカーの選択肢。",
+            kr: "{E/Fire} DPS 옵션.",
+            zh: "{E/Fire}输出选择。"
         }
     },
     {
-        names: ["Aer", "Vlada", "Maxie", "Regina", "Maxwell", "Demiurge Luna", "Holy Night's Blessing Dianne", "Bell Cranel", "Ryu Lion", "Ame", "Noa", "Rey", "Demiurge Astei"],
+        names: ["Liselotte", "Astei"],
         reason: {
-            en: "{E/Fire} support and buffer units.",
-            jp: "",
-            kr: "",
-            zh: ""
+            en: "{E/Fire} healers.",
+            jp: "{E/Fire}ヒーラー。",
+            kr: "{E/Fire} 힐러.",
+            zh: "{E/Fire}奶妈。"
         }
     },
     {
-        names: ["Eternal", "Tamamo-no-Mae", "Iota", "Gnosis Nella", "Rhona", "Akari", "Demiurge Stella", "Hilde", "K", "Kate"],
+        names: ["Tamamo-no-Mae", "Eternal", "Mero", "Valentine"],
         reason: {
-            en: "{E/Fire} units with defensive utility and debuff support.",
-            jp: "",
-            kr: "",
-            zh: ""
-        }
-    },
-    {
-        names: ["Astei", "Monad Eva", "Liselotte", "Nella", "Tio", "Dianne", "Viella", "Demiurge Delta", "Saeran", "Mene", "Kanon"],
-        reason: {
-            en: "{E/Fire} healers and support units.",
-            jp: "",
-            kr: "",
-            zh: ""
+            en: "{E/Fire} support units.",
+            jp: "{E/Fire}サポートユニット。",
+            kr: "{E/Fire} 서포트 유닛.",
+            zh: "{E/Fire}辅助单位。"
         }
     }
 ]

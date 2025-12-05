@@ -61,7 +61,7 @@ export default function BeatlesGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={BeatlesTeams.beatlesSpecialRequest} defaultStage="1-10" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="eQmB1Uw9qL8" title="Dek'Ril & Mek'Ril Combat Footage" author="Sevih" date="01/01/2024" />
+                            <CombatFootage videoId="eQmB1Uw9qL8" title="Dek'Ril & Mek'Ril Combat Footage" author="Sevih" date="09/05/2025" />
                         </>
                     ),
                 },

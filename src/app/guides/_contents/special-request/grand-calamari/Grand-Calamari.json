@@ -18,6 +18,7 @@
                     "Drakhan",
                     "Gnosis Beth",
                     "Regina",
+                    "Demiurge Luna",
                     "Demiurge Stella"
                 ],
                 [
@@ -53,6 +54,7 @@
                     "Drakhan",
                     "Gnosis Beth",
                     "Regina",
+                    "Demiurge Luna",
                     "Demiurge Stella"
                 ],
                 [
@@ -63,7 +65,7 @@
             "note": [
                 {
                     "type": "p",
-                    "string": "Focus on units with {D/BT_SEALED} and buff conversion for the hardest stages."
+                    "string": "Focus on units with {D/BT_SEALED} and {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}."
                 }
             ],
             "note_jp": [],

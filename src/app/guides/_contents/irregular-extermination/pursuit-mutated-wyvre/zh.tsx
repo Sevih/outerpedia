@@ -34,7 +34,7 @@ export default function MutatedWyvreGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={MutatedWyvrePOTeams.mutatedWyvrePO} defaultStage="One Run Kill" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="PCgNRKFlRGI" title="变异双足飞龙 - 追击歼灭战 - 一轮击杀" author="Sevih" date="01/01/2024" />
+                            <CombatFootage videoId="PCgNRKFlRGI" title="变异双足飞龙 - 追击歼灭战 - 一轮击杀" author="Sevih" date="09/05/2025" />
                         </>
                     ),
                 },

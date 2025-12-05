@@ -16,7 +16,7 @@ export default function GlicysGuide() {
     return (
         <GuideTemplate
             title="Glicys Special Request Guide"
-            introduction="Glicys' core mechanic revolves around summoned mobs and the {D/BT_FREEZE} debuff. She summons adds that must be managed carefully, and using single-target attacks directly on the boss restores her weakness gauge until adds are killed. At 50% HP, she enters Enrage phase with increased mechanics. Can be cleared in 1-2 attempts per stage with proper add management."
+            introduction="Glicys' core mechanic revolves around summoned mobs and the {D/BT_FREEZE} debuff. She summons adds that must be managed carefully, and using single-target attacks directly on the boss restores her weakness gauge until adds are killed. At 50% HP, she enters Enrage phase with increased mechanics."
             defaultVersion="default"
             versions={{
                 default: {
@@ -40,7 +40,7 @@ export default function GlicysGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={GlicysTeams.glicysSpecialRequest} defaultStage="1-10" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="NikwWwstygo" title="Glicys Combat Footage" author="Sevih" date="01/01/2024" />
+                            <CombatFootage videoId="NikwWwstygo" title="Glicys Combat Footage" author="Sevih" date="09/05/2025" />
                         </>
                     ),
                 },

@@ -4,26 +4,22 @@
             "icon": "dark",
             "team": [
                 [
+                    "Viella",
                     "Dianne",
-                    "Saeran",
-                    "Shu",
-                    "Monad Eva"
-                ],
-                [
-                    "Noa",
-                    "Ame",
-                    "Rey"
+                    "Saeran"
                 ],
                 [
                     "Kappa",
-                    "Charlotte",
-                    "Tamara",
-                    "Rhona"
+                    "Fran"
                 ],
                 [
                     "Ame",
+                    "Noa",
+                    "Ryu Lion"
+                ],
+                [
                     "Rey",
-                    "Delta"
+                    "Kitsune of Eternity Tamamo-no-Mae"
                 ]
             ],
             "note": [
@@ -40,34 +36,25 @@
             "icon": "dark",
             "team": [
                 [
+                    "Viella",
                     "Dianne",
-                    "Saeran",
-                    "Shu",
-                    "Monad Eva"
-                ],
-                [
-                    "Noa",
-                    "Ame",
-                    "Rey"
+                    "Saeran"
                 ],
                 [
                     "Kappa",
-                    "Charlotte",
-                    "Tamara",
-                    "Rhona"
+                    "Fran"
                 ],
                 [
                     "Ame",
+                    "Noa",
+                    "Ryu Lion"
+                ],
+                [
                     "Rey",
-                    "Delta"
+                    "Kitsune of Eternity Tamamo-no-Mae"
                 ]
             ],
-            "note": [
-                {
-                    "type": "p",
-                    "string": "Focus on {C/Defender} units with Defense scaling for Stage 12-13."
-                }
-            ],
+            "note": [],
             "note_jp": [],
             "note_kr": [],
             "note_zh": []

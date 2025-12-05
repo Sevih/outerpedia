@@ -36,7 +36,7 @@ export default function BlockbusterPOGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={BlockbusterPOTeams.blockbusterPO} defaultStage="Non-Crit Team" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="pgWkc6X6VNE" title="Blockbuster - Pursuit Operation - 1 run kill" author="Sevih" date="01/01/2024" />
+                            <CombatFootage videoId="pgWkc6X6VNE" title="Blockbuster - Pursuit Operation - 1 run kill" author="Sevih" date="09/05/2025" />
                         </>
                     ),
                 },

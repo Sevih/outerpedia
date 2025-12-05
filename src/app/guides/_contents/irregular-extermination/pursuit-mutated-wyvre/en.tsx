@@ -34,7 +34,7 @@ export default function MutatedWyvreGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={MutatedWyvrePOTeams.mutatedWyvrePO} defaultStage="One Run Kill" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="PCgNRKFlRGI" title="Mutated Wyvre - Pursuit Operation - 1 run kill" author="Sevih" date="01/01/2024" />
+                            <CombatFootage videoId="PCgNRKFlRGI" title="Mutated Wyvre - Pursuit Operation - 1 run kill" author="Sevih" date="09/05/2025" />
                         </>
                     ),
                 },

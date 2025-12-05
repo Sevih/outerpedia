@@ -1,37 +1,12 @@
 {
     "sacreedSpecialRequest": {
         "1-10": {
-            "icon": "earth",
+            "icon": "dark",
             "team": [
-                [
-                    "Iota",
-                    "Notia",
-                    "Gnosis Nella",
-                    "Dahlia",
-                    "Kuro",
-                    "Stella"
-                ],
-                [
-                    "Demiurge Vlada",
-                    "Omega Nadja",
-                    "Eliza",
-                    "Gnosis Nella",
-                    "Dahlia",
-                    "Alice",
-                    "Aer"
-                ],
-                [
-                    "Gnosis Dahlia",
-                    "Francesca",
-                    "Demiurge Astei",
-                    "Maxwell"
-                ],
-                [
-                    "Demiurge Astei",
-                    "Maxwell",
-                    "Demiurge Delta",
-                    "Nella"
-                ]
+                ["Iota","Gnosis Nella"],
+                ["Demiurge Vlada", "Eliza","Omega Nadja"],
+                ["Demiurge Astei", "Francesca"],
+                ["Gnosis Viella","Gnosis Dahlia", "Maxwell"]
             ],
             "note": [
                 {
@@ -44,42 +19,17 @@
             "note_zh": []
         },
         "11-13": {
-            "icon": "earth",
+            "icon": "dark",
             "team": [
-                [
-                    "Iota",
-                    "Notia",
-                    "Gnosis Nella",
-                    "Dahlia",
-                    "Kuro",
-                    "Stella"
-                ],
-                [
-                    "Demiurge Vlada",
-                    "Omega Nadja",
-                    "Eliza",
-                    "Gnosis Nella",
-                    "Dahlia",
-                    "Alice",
-                    "Aer"
-                ],
-                [
-                    "Gnosis Dahlia",
-                    "Francesca",
-                    "Demiurge Astei",
-                    "Maxwell"
-                ],
-                [
-                    "Demiurge Astei",
-                    "Maxwell",
-                    "Demiurge Delta",
-                    "Nella"
-                ]
+               ["Iota","Gnosis Nella"],
+                ["Demiurge Vlada", "Eliza","Omega Nadja"],
+                ["Demiurge Astei", "Francesca"],
+                ["Gnosis Viella","Gnosis Dahlia", "Maxwell"]
             ],
             "note": [
                 {
                     "type": "p",
-                    "string": "Focus on buff removal and lockdown for the hardest stages."
+                    "string": ""
                 }
             ],
             "note_jp": [],

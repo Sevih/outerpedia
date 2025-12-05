@@ -1,47 +1,29 @@
 export const recommendedCharacters = [
     {
-        names: ["Veronica", "Christina", "Monad Eva", "Ritri", "Mene", "Liselotte", "Luna", "Sterope", "Laplace"],
+        names: ["Summer Knight's Dream Ember", "Luna", "Lyla", "Ritri", "Veronica"],
         reason: {
-            en: "{E/Water} support and healing units with debuff application.",
-            jp: "",
-            kr: "",
-            zh: ""
+            en: "{E/Water} options for survivability.",
+            jp: "耐久向け{E/Water}キャラ。",
+            kr: "생존을 위한 {E/Water} 옵션.",
+            zh: "{E/Water}生存向角色。"
         }
     },
     {
-        names: ["Tamara", "Valentine", "Skadi", "Akari", "Eternal", "Edelweiss", "Maxie", "Caren", "Adelie", "Bryn", "Holy Night's Blessing Dianne"],
+        names: ["Tamara", "Fortuna"],
         reason: {
-            en: "{E/Water} DPS options with AoE abilities.",
-            jp: "",
-            kr: "",
-            zh: ""
+            en: "{E/Water} support.",
+            jp: "{E/Water}サポート。",
+            kr: "{E/Water} 서포터.",
+            zh: "{E/Water}辅助。"
         }
     },
     {
-        names: ["Rin", "Beth", "Maxwell", "Demiurge Astei", "Gnosis Dahlia", "Poolside Trickster Regina", "Summer Knight's Dream Ember"],
+        names: ["Roxie", "Caren", "Beth", "Fatal", "Marian", "Rin", "Laplace", "Poolside Trickster Regina"],
         reason: {
             en: "{E/Water} DPS options.",
-            jp: "",
-            kr: "",
-            zh: ""
-        }
-    },
-    {
-        names: ["Roxie", "Marian", "Vlada", "Eliza", "Sigma", "Demiurge Luna", "Demiurge Stella", "Demiurge Vlada", "Gnosis Beth", "Gnosis Viella", "Bell Cranel"],
-        reason: {
-            en: "{E/Water} support units.",
-            jp: "",
-            kr: "",
-            zh: ""
-        }
-    },
-    {
-        names: ["Ember", "Tio", "Lyla"],
-        reason: {
-            en: "{E/Water} support units.",
-            jp: "",
-            kr: "",
-            zh: ""
+            jp: "{E/Water}アタッカー。",
+            kr: "{E/Water} 딜러 옵션.",
+            zh: "{E/Water}输出角色。"
         }
     }
 ]

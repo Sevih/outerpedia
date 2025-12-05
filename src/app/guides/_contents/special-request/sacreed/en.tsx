@@ -32,7 +32,7 @@ export default function SacreedGuardian13Guide() {
     return (
         <GuideTemplate
             title="Sacreed Guardian Special Request Guide"
-            introduction="Sacreed Guardian is immune to {D/BT_SEALED}, requiring buff removal, buff steal, or buff conversion strategies. If the boss has any buffs when taking its turn, it will stun your team and become invincible. The orb grants 3 buffs per turn and must be controlled with AoE debuffs. Can be cleared in 1-2 attempts per stage with proper buff management."
+            introduction="Sacreed Guardian is immune to {D/BT_SEALED}, requiring {D/BT_REMOVE_BUFF}, {D/BT_STEAL_BUFF} or {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}. If the boss has any buffs when taking its turn, it will stun your team and become invincible. The orb grants 3 buffs per turn and must be controlled."
             defaultVersion="default"
             versions={{
                 default: {
@@ -54,23 +54,19 @@ export default function SacreedGuardian13Guide() {
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
                                 "Immune to {D/BT_SEALED}. Use {D/BT_STEAL_BUFF}, {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}, or {D/BT_REMOVE_BUFF} instead.",
-                                "If the boss has any buffs when taking its turn, it will {D/BT_STUN} your team and gain {D/BT_INVINCIBLE}.",
-                                "Boss strips your buffs with S2 so {D/BT_IMMUNE} will not protect against the stun mechanic.",
-                                "The orb grants 3 buffs per turn. Apply AoE debuffs to disable it (all effects except {D/BT_AGGRO} work).",
-                                "Boss is vulnerable to {D/BT_STUN}, {D/BT_DOT_POISON}, {D/BT_ACTION_GAUGE} reduction, and {D/BT_AGGRO}.",
-                                "Use a fast unit to strip the boss's initial {D/BT_STAT|ST_SPEED} buff at the start of the fight.",
+                                "If the boss has any buffs when taking its turn, it will {D/BT_STUN} your team and gain {B/BT_INVINCIBLE}.",
+                                "Use a fast unit to strip the boss's initial {B/BT_STAT|ST_SPEED} buff at the start of the fight.",
                                 "{C/Healer} units can't be stunned until Stage 11.",
                                 "Healing is optional. Focus on lockdown and bursting the boss quickly before it gains buffs.",
-                                "Stage 12: Boss heals when these effects are triggered: {D/SYS_BUFF_REVENGE}, {D/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}, and {D/BT_STAT|ST_COUNTER_RATE}.",
-                                "Stage 13: Boss negates {D/SYS_BUFF_REVENGE}, {D/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}, and {D/BT_STAT|ST_COUNTER_RATE}. Characters like Demiurge Stella and Stella are immune to stun but won't trigger their passives.",
-                                "Only takes WG damage from {E/Earth} units."
+                                "Stage 12: Boss heals when these effects are triggered: {B/SYS_BUFF_REVENGE}, {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}, and {B/BT_STAT|ST_COUNTER_RATE}.",
+                                "Stage 13: Boss negates {B/SYS_BUFF_REVENGE}, {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}, and {B/BT_STAT|ST_COUNTER_RATE}."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={SacreedTeams.sacreedSpecialRequest} defaultStage="1-10" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="fLdbR9Sa7G0" title="Sacreed Guardian 13 – Clean Run Showcase" author="Sevih" date="01/01/2024" />
+                            <CombatFootage videoId="fLdbR9Sa7G0" title="Sacreed Guardian 13 – Clean Run Showcase" author="Sevih" date="09/05/2025" />
                         </>
                     ),
                 },

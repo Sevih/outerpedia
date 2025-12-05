@@ -2,25 +2,11 @@
     "meteosSpecialRequest": {
         "1-10": {
             "icon": "fire",
-            "team": [
-                [
-                    "Veronica"
-                ],
-                [
-                    "Laplace"
-                ],
-                [
-                    "Tamara"
-                ],
-                [
-                    "Poolside Trickster Regina",
-                    "Edelweiss",
-                    "Monad Eva",
-                    "Luna",
-                    "Rin",
-                    "Caren",
-                    "Beth"
-                ]
+           "team": [
+                ["Luna", "Veronica", "Caren"],
+                ["Tamara","Fortuna"],
+                ["Laplace","Rin"],
+                ["Poolside Trickster Regina", "Roxie"]
             ],
             "note": [
                 {
@@ -35,29 +21,15 @@
         "11-13": {
             "icon": "fire",
             "team": [
-                [
-                    "Veronica"
-                ],
-                [
-                    "Laplace"
-                ],
-                [
-                    "Tamara"
-                ],
-                [
-                    "Poolside Trickster Regina",
-                    "Edelweiss",
-                    "Monad Eva",
-                    "Luna",
-                    "Rin",
-                    "Caren",
-                    "Beth"
-                ]
+                ["Luna", "Veronica", "Caren"],
+                ["Tamara","Fortuna"],
+                ["Laplace","Rin"],
+                ["Poolside Trickster Regina", "Roxie"]
             ],
             "note": [
                 {
                     "type": "p",
-                    "string": "Focus on {D/BT_SHIELD_BASED_CASTER} units and avoid letting teammates die."
+                    "string": "Focus on {B/BT_SHIELD_BASED_CASTER} units and avoid letting teammates die."
                 }
             ],
             "note_jp": [],

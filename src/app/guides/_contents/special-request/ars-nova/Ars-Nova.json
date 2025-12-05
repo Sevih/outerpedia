@@ -1,34 +1,25 @@
 {
     "arsNovaSpecialRequest": {
         "1-10": {
-            "icon": "fire",
+            "icon": "dark",
             "team": [
+                [
+                    "Nella",
+                    "Demiurge Delta"
+                ],
                 [
                     "Demiurge Vlada",
                     "Eliza",
-                    "Gnosis Nella",
-                    "Francesca",
-                    "Aer",
-                    "Dahlia",
-                    "Alice"
-                ],
-                [
-                    "Nella",
-                    "Demiurge Delta",
-                    "Dianne",
-                    "Astei",
-                    "Monad Eva"
-                ],
-                [
-                    "Maxwell",
-                    "Gnosis Dahlia"
+                    "Sterope"
                 ],
                 [
                     "Demiurge Astei",
-                    "Omega Nadja",
-                    "Demiurge Stella",
-                    "Stella",
-                    "Caren"
+                    "Francesca"
+                ],
+                [
+                    "Maxwell",
+                    "Gnosis Viella",
+                    "Gnosis Dahlia"
                 ]
             ],
             "note": [
@@ -42,34 +33,25 @@
             "note_zh": []
         },
         "11-13": {
-            "icon": "fire",
+            "icon": "dark",
             "team": [
+                [
+                    "Nella",
+                    "Demiurge Delta"
+                ],
                 [
                     "Demiurge Vlada",
                     "Eliza",
-                    "Gnosis Nella",
-                    "Francesca",
-                    "Aer",
-                    "Dahlia",
-                    "Alice"
-                ],
-                [
-                    "Nella",
-                    "Demiurge Delta",
-                    "Dianne",
-                    "Astei",
-                    "Monad Eva"
-                ],
-                [
-                    "Maxwell",
-                    "Gnosis Dahlia"
+                    "Sterope"
                 ],
                 [
                     "Demiurge Astei",
-                    "Omega Nadja",
-                    "Demiurge Stella",
-                    "Stella",
-                    "Caren"
+                    "Francesca"
+                ],
+                [
+                    "Maxwell",
+                    "Gnosis Viella",
+                    "Gnosis Dahlia"
                 ]
             ],
             "note": [

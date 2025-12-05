@@ -3,22 +3,24 @@
         "1-10": {
             "icon": "light",
             "team": [
+              [
+                    "Stella",
+                    "Dianne"
+                ],
                 [
-                    "Gnosis Beth",
                     "Demiurge Stella",
-                    "Skadi"
+                    "Skadi",
+                    "Akari"
                 ],
                 [
+                    "Drakhan",
+                    "Gnosis Beth"
+                ],
+                [
+                    "Demiurge Luna",
                     "Regina",
-                    "Akari",
-                    "Kuro"
-                ],
-                [
-                    "Dianne",
-                    "Stella"
-                ],
-                [
-                    "Drakhan"
+                    "Kuro",
+                    "Ais Wallenstein"
                 ]
             ],
             "note": [
@@ -34,22 +36,24 @@
         "11-13": {
             "icon": "light",
             "team": [
+                 [
+                    "Stella",
+                    "Dianne"
+                ],
                 [
-                    "Gnosis Beth",
                     "Demiurge Stella",
-                    "Skadi"
+                    "Skadi",
+                    "Akari"
                 ],
                 [
+                    "Drakhan",
+                    "Gnosis Beth"
+                ],
+                [
+                    "Demiurge Luna",
                     "Regina",
-                    "Akari",
-                    "Kuro"
-                ],
-                [
-                    "Dianne",
-                    "Stella"
-                ],
-                [
-                    "Drakhan"
+                    "Kuro",
+                    "Ais Wallenstein"
                 ]
             ],
             "note": [

@@ -3,7 +3,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { searchNewsFullText, type NewsCategory } from '@/lib/news'
+import { searchNewsFullText } from '@/lib/news'
 import { checkRateLimit } from '@/utils/rate-limit'
 
 export const dynamic = 'force-dynamic'
