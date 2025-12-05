@@ -1,18 +1,25 @@
 import DOMPurify from 'dompurify';
 import type { DOMPurify as DOMPurifyType } from 'dompurify';
 
-// Server-side: eagerly initialize with JSDOM at module load
-let purifyInstance: DOMPurifyType;
+// Lazy-initialized purify instance
+let purifyInstance: DOMPurifyType | null = null;
 
-if (typeof window !== 'undefined') {
-  // Browser environment
-  purifyInstance = DOMPurify;
-} else {
-  // Server environment - import JSDOM synchronously at module level
-  // This is fine because this code only runs once at startup on the server
-  const jsdom = await import('jsdom');
-  const dom = new jsdom.JSDOM('');
-  purifyInstance = DOMPurify(dom.window);
+function getPurify(): DOMPurifyType {
+  if (purifyInstance) return purifyInstance;
+
+  if (typeof window !== 'undefined') {
+    // Browser environment
+    purifyInstance = DOMPurify;
+  } else {
+    // Server environment - use JSDOM
+    // Dynamic require is needed here for SSR compatibility
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { JSDOM } = require('jsdom') as typeof import('jsdom');
+    const dom = new JSDOM('');
+    purifyInstance = DOMPurify(dom.window);
+  }
+
+  return purifyInstance;
 }
 
 /**
@@ -23,6 +30,8 @@ if (typeof window !== 'undefined') {
  */
 export function sanitizeHtml(dirty: string, allowedTags?: string[]): string {
   if (!dirty) return '';
+
+  const purify = getPurify();
 
   const config = {
     ALLOWED_TAGS: allowedTags || [
@@ -36,7 +45,7 @@ export function sanitizeHtml(dirty: string, allowedTags?: string[]): string {
     RETURN_TRUSTED_TYPE: false,
   };
 
-  return purifyInstance.sanitize(dirty, config) as string;
+  return purify.sanitize(dirty, config) as string;
 }
 
 /**
@@ -45,6 +54,8 @@ export function sanitizeHtml(dirty: string, allowedTags?: string[]): string {
 export function sanitizeHtmlPermissive(dirty: string): string {
   if (!dirty) return '';
 
+  const purify = getPurify();
+
   const config = {
     ALLOWED_ATTR: ['href', 'title', 'class', 'id', 'src', 'alt', 'target', 'rel', 'style'],
     FORBID_TAGS: ['script', 'iframe', 'object', 'embed', 'link'],
@@ -52,5 +63,5 @@ export function sanitizeHtmlPermissive(dirty: string): string {
     RETURN_TRUSTED_TYPE: false,
   };
 
-  return purifyInstance.sanitize(dirty, config) as string;
+  return purify.sanitize(dirty, config) as string;
 }
