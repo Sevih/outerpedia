@@ -102,7 +102,8 @@
         {
           "hero": [
             "eliza",
-            "francesca"
+            "francesca",
+            "fortuna"
           ],
           "reason": {
             "en": "Also {C/Mage} with {I-W/Noblewoman's Guile}: More {D/BT_DOT_BLEED} uptime to enable Beth's extra effects",
@@ -286,7 +287,8 @@
             "kuro",
             "roxie",
             "maxie",
-            "ember"
+            "ember",
+            "fortuna"
           ],
           "reason": {
             "en": "{D/BT_EXTEND_DEBUFF}",

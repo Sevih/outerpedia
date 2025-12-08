@@ -253,20 +253,13 @@ export default function TierListBase({
 
         // Apply overwrites for premium/limited characters
         const charactersWithOverwrites = base.map((c) => {
-            const tags = new Set(c.tags ?? [])
-            const isPremiumOrLimited = tags.has('premium') || c.limited
+            const overwrite = applyTranscendOverwrite(c, transcendLevel)
 
-            if (isPremiumOrLimited) {
-                const overwrite = applyTranscendOverwrite(c, transcendLevel)
-
-                return {
-                    ...c,
-                    ...(overwrite.rank ? { rank: overwrite.rank } : {}),
-                    ...(overwrite.role ? { role: overwrite.role } : {})
-                }
+            return {
+                ...c,
+                ...(overwrite.rank ? { rank: overwrite.rank } : {}),
+                ...(overwrite.role ? { role: overwrite.role } : {})
             }
-
-            return c
         })
 
         // Filter by tab (role)

@@ -6,7 +6,6 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import classDataRaw from '@/data/class.json'
 import eeDataRaw from '@/data/ee.json'
 import rawTAGS from '@/data/tags.json'
-import parseText from '@/utils/parseText'
 import { getRarityBg } from '@/utils/gear'
 
 import type { ClassDataMap, StatKey } from '@/types/types'
@@ -28,19 +27,15 @@ import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import TagDisplayMini from '@/app/components/TagDisplayInline'
 import ItemInline from '@/app/components/ItemInline'
 import type { PartnerEntry } from '@/types/partners';
-import type { ProsConsMap } from '@/types/hero-content';
-import rawProsCons from '@/data/hero-pros-cons.json'
+import PartnerList from '@/app/components/PartnerList'
+import ProsConsSection, { hasProsCons } from '@/app/components/ProsConsSection'
 import type { Talisman, Accessory, Weapon, ArmorSet } from '@/types/equipment'
 
 import formatEffectText from '@/utils/formatText'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
-import abbrevData from '@/data/abbrev.json'
-import { l, lRec, lEnhancement, lArray } from '@/lib/localize'
-import type { LocalizedOptional, WithLocalizedFields } from '@/types/common'
-
-type AbbrevEntry = string | LocalizedOptional
-const abbrev = abbrevData as Record<string, AbbrevEntry>
+import { l, lEnhancement } from '@/lib/localize'
+import type { WithLocalizedFields } from '@/types/common'
 
 interface CharNameEntryBase {
     Fullname: string;
@@ -287,16 +282,8 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
     const roleBadge = getRoleBadge(character.role)
 
 
-    const prosCons = rawProsCons as ProsConsMap
-    const heroKey = toKebabCase(character.Fullname)
-    const pc = prosCons[heroKey]
-
-    // Use lArray() for array fields with localization support
-    const pros = pc ? lArray(pc, 'pro', langKey) : []
-    const cons = pc ? lArray(pc, 'con', langKey) : []
-    const hasPros = pros.length > 0
-    const hasCons = cons.length > 0
-    const hasProsCons = hasPros || hasCons
+    const heroSlug = toKebabCase(character.Fullname)
+    const showProsCons = hasProsCons(heroSlug)
 
 
     // util local (comme avant)
@@ -327,7 +314,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
         (ee || character.transcend) && { id: "ee-transcend", label: t("toc.ee_transcend", { defaultValue: "EE & Transcend" }) },
         { id: "skills", label: t("toc.skills", { defaultValue: "Skills" }) },
         // (optionnel) 
-        hasProsCons && { id: "pros-cons", label: t("toc.pros_cons", { defaultValue: "Pros & Cons" }) },
+        showProsCons && { id: "pros-cons", label: t("toc.pros_cons", { defaultValue: "Pros & Cons" }) },
 
         // hasBurn && { id: "burn", label: t("toc.burn", { defaultValue: "Burn Cards" }) },
         character.skills?.SKT_CHAIN_PASSIVE && { id: "chain-dual", label: t("toc.chain_dual", { defaultValue: "Chain & Dual" }) },
@@ -587,41 +574,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                     </div>
                 </section>
 
-                {hasProsCons && (
-                    <section id="pros-cons" className="mt-8">
-                        <h2 className="text-2xl font-bold text-white mb-4 text-center">
-                            {t('pros_cons_title', { defaultValue: 'Pros & Cons' })}
-                        </h2>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                            {hasPros && (
-                                <div className="bg-green-900/30 border border-green-600/30 rounded-lg p-4">
-                                    <h3 className="text-lg font-semibold text-green-300 mb-2">{t('pros.label')}</h3>
-                                    <ul className="list-disc list-inside space-y-1 text-gray-200">
-                                        {pros.map((p, i) => (
-                                            <li key={i}>
-                                                {parseText(p.charAt(0).toUpperCase() + p.slice(1))}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-
-                            {hasCons && (
-                                <div className="bg-red-900/30 border border-red-600/30 rounded-lg p-4">
-                                    <h3 className="text-lg font-semibold text-red-300 mb-2">{t('cons.label')}</h3>
-                                    <ul className="list-disc list-inside space-y-1 text-gray-200">
-                                        {cons.map((c, i) => (
-                                            <li key={i}>
-                                                {parseText(c.charAt(0).toUpperCase() + c.slice(1))}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                        </div>
-                    </section>
-                )}
+                {showProsCons && <ProsConsSection slug={heroSlug} />}
 
 
 
@@ -1072,63 +1025,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                 </div>
 
                 {/* Partners */}
-                {partners.length > 0 && (
-
-                    <section id="partners" className="mt-8">
-                        <h2 className="text-2xl font-bold text-white mb-4 flex justify-center gap-2">
-                            {t("partners_title", { defaultValue: "Recommended Partners" })}
-                        </h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center w-full max-w-4xl mx-auto">
-                            {partners.map((entry, i) => (
-                                <div
-                                    key={i}
-                                    className="bg-black/30 border border-white/10 rounded-lg p-3 flex items-center gap-3 hover:bg-white/5 transition"
-                                >
-                                    {entry.hero.map((slug: string) => {
-                                        const char = SLUG_TO_CHAR[slug]
-                                        const id = char?.ID
-
-                                        const charEntry = SLUG_TO_CHAR[slug]
-                                        const localizedName = charEntry ? l(charEntry, 'Fullname', langKey) : slug // affichage
-                                        const enFull = char?.Fullname ?? localizedName                   // clé pour abbrev.json (EN si possible)
-
-                                        const ab = abbrev[enFull]
-                                        const shortName = ab
-                                            ? (typeof ab === 'string' ? ab : lRec(ab, langKey))            // abrév localisée
-                                            : localizedName
-                                        return (
-                                            <Link
-                                                key={slug}
-                                                href={`/characters/${slug}`}
-                                                className="flex-shrink-0 flex flex-col items-center text-center w-[60px]"
-                                                title={localizedName}
-                                            >
-                                                <Image
-                                                    src={`/images/characters/atb/IG_Turn_${id ?? "unknown"}.webp`}
-                                                    alt={localizedName}
-                                                    width={48}
-                                                    height={48}
-                                                    className="rounded-full object-contain border border-white/10 group-hover:border-yellow-400/60 transition"
-                                                />
-                                                <span className="text-sm text-white font-semibold mt-1">{shortName}</span>
-                                            </Link>
-                                        );
-                                    })}
-
-                                    <div className="flex-1 ml-3">
-                                        <p className="text-sm text-gray-300 italic leading-snug">
-                                            {parseText(
-                                                lRec(entry.reason, langKey)?.trim() || t("no_reason_provided")
-                                            )}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                    </section>
-
-                )}
+                <PartnerList partners={partners} />
 
 
 

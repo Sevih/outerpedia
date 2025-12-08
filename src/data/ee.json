@@ -2553,7 +2553,7 @@
     "effect10_kr": "아군이 입히는 출혈 피해 50%",
     "effect10_zh": "我方造成的出血伤害 +500",
     "icon_effect": "TI_Icon_UO_Accessary_07",
-    "rank": "",
+    "rank": "B",
     "buff": [],
     "debuff": []
   },

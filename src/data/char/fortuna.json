@@ -8,8 +8,8 @@
   "Element": "Water",
   "Class": "Mage",
   "SubClass": "Enchanter",
-  "rank": null,
-  "rank_pvp": null,
+  "rank": "A",
+  "rank_pvp": "C",
   "role": "support",
   "tags": [],
   "skill_priority": {

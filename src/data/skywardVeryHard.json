@@ -641,6 +641,31 @@
           "No Mage"
         ],
         "note": []
+      },
+      "team5": {
+        "label": "1 x 2★",
+        "icon": "CM_icon_star_y.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Fran",
+            "Charlotte"
+          ],
+          [
+            "Demiurge Luna"
+          ],
+          [
+            "K",
+            "Marian",
+            "Tio"
+          ]
+        ],
+        "conditions": [
+          "1 x 2★"
+        ],
+        "note": []
       }
     }
   },
@@ -1785,6 +1810,35 @@
           "1 Defender"
         ],
         "note": []
+      },
+      "team5": {
+        "label": "1 Earth",
+        "icon": "earth.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Viella"
+          ],
+          [
+            "Demiurge Drakhan",
+            "Hilde",
+            "Christina",
+            "Kappa"
+          ],
+          [
+            "Fran",
+            "Tamamo-no-Mae",
+            "Delta"
+          ],
+          [
+            "Caren",
+            "Kanon"
+          ]
+        ],
+        "conditions": [
+          "1 Earth"
+        ],
+        "note": []
       }
     }
   },
@@ -1915,6 +1969,32 @@
         ],
         "conditions": [
           "1 Dark"
+        ],
+        "note": []
+      },
+      "team5": {
+        "label": "No Water",
+        "icon": "water.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Stella",
+            "Valentine"
+          ],
+          [
+            "Iota",
+            "Gnosis Nella"
+          ],
+          [
+            "Maxwell",
+            "Ame",
+            "Demiurge Astei"
+          ]
+        ],
+        "conditions": [
+          "No Water"
         ],
         "note": []
       }
