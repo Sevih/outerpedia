@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 
 import Header from '@/app/components/layout/Header'
 import Footer from '@/app/components/layout/Footer'
@@ -19,11 +19,11 @@ import { TenantProvider } from '@/lib/contexts/TenantContext'
 import { I18nProvider } from '@/lib/contexts/I18nContext'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 
-const inter = Inter({
-  subsets: ['latin'],
+const inter = localFont({
+  src: '../fonts/Inter-Variable.woff2',
   display: 'swap',
-  preload: true,
-  adjustFontFallback: true
+  variable: '--font-inter',
+  weight: '100 900',
 })
 
 /** Couleur d’UI pour mobile */
