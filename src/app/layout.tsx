@@ -24,6 +24,7 @@ const inter = localFont({
   display: 'swap',
   variable: '--font-inter',
   weight: '100 900',
+  preload: false,
 })
 
 /** Couleur d’UI pour mobile */
