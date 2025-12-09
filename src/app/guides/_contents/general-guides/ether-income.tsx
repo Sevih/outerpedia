@@ -39,6 +39,7 @@ const WEEKLY_SOURCES_BASE: Source[] = [
     { id: 'weekly.arena', source: 'Weekly Arena Ranking', weekly: 400, note: '35 minimum. Can go up to 1500 for rank 1.' },
     { source: 'Weekly Missions', weekly: 150 },
     { source: 'Guild Check-in', weekly: 150 },
+    { source: 'Monad Gate Weekly Missions', weekly: 250, note: '5×10 + 200 completion bonus' },
 ]
 
 const MONTHLY_SOURCES_BASE: Source[] = [
