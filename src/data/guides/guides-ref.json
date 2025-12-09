@@ -1822,5 +1822,24 @@
     "second_image": "CM_Adventure_MonadGate",
     "last_updated": "2025-12-08",
     "author": "Sevih"
+  },
+  "depth3-route1": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 3 : route 1",
+      "jp": "深度3 : ルート1",
+      "kr": "깊이 3 : 루트 1",
+      "zh": "深度3：路线1"
+    },
+    "description": {
+      "en": "Map of Depth 3 : route 1 and true ending path",
+      "jp": "深度3：ルート1とトゥルーエンディングへの道",
+      "kr": "깊이 3: 루트 1 및 트루 엔딩 경로",
+      "zh": "深度3地图：路线1和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-09",
+    "author": "Sevih"
   }
 }
