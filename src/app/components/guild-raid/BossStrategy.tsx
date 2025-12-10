@@ -5,9 +5,25 @@ import RecommendedTeam from '@/app/components/RecommendedTeamCarousel'
 import TacticalTips from '@/app/components/TacticalTips'
 import CombatFootage from '@/app/components/CombatFootage'
 import { Phase1Boss } from '@/schemas/guild-raid.schema'
+import { useTenant } from '@/lib/contexts/TenantContext'
 
 type Props = {
   boss: Phase1Boss
+}
+
+/**
+ * Resolve localized notes based on current language
+ * Falls back to English if localized version doesn't exist
+ */
+function resolveNotes(boss: Phase1Boss, lang: string): string[] | undefined {
+  if (lang !== 'en') {
+    const localizedKey = `notes_${lang}` as keyof Phase1Boss
+    const localizedNotes = boss[localizedKey] as string[] | undefined
+    if (localizedNotes && localizedNotes.length > 0) {
+      return localizedNotes
+    }
+  }
+  return boss.notes
 }
 
 /**
@@ -15,13 +31,16 @@ type Props = {
  * Displays recommended units, teams, notes, and videos
  */
 export function BossStrategy({ boss }: Props) {
+  const { key: lang } = useTenant()
+  const notes = resolveNotes(boss, lang)
+
   return (
     <div className="flex flex-col gap-6 w-full">
       {/* Strategy Tips */}
-      {boss.notes && boss.notes.length > 0 && boss.notes.some(note => note.trim() !== '') && (
+      {notes && notes.length > 0 && notes.some(note => note.trim() !== '') && (
         <TacticalTips
           title="strategy"
-          tips={boss.notes.filter(note => note.trim() !== '')}
+          tips={notes.filter(note => note.trim() !== '')}
         />
       )}
 

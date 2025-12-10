@@ -140,6 +140,9 @@ export const Phase1BossSchema = z.object({
   bossId: BossIdSchema,
   geas: GeasConfigSchema,
   notes: z.array(z.string()).optional(),
+  notes_jp: z.array(z.string()).optional(),
+  notes_kr: z.array(z.string()).optional(),
+  notes_zh: z.array(z.string()).optional(),
   recommended: z.array(CharacterRecommendationSchema).optional(),
   team: TeamCompositionSchema.optional(),
   video: VideoSchema.optional(),
@@ -199,6 +202,9 @@ export const Phase2TeamSchema = z.object({
   icon: z.string().min(1, 'Team icon filename is required (e.g., "earth.webp")'),
   setup: TeamCompositionSchema,
   note: z.array(NoteEntrySchema).optional(),
+  note_jp: z.array(NoteEntrySchema).optional(),
+  note_kr: z.array(NoteEntrySchema).optional(),
+  note_zh: z.array(NoteEntrySchema).optional(),
   'geas-active': ActiveGeasSchema.optional(),
   video: VideoSchema.optional(),
 })
@@ -209,6 +215,9 @@ export const Phase2TeamSchema = z.object({
 export const Phase2Schema = z.object({
   id: z.string().min(1, 'Boss ID is required (e.g., "440400379-B-1")'),
   overview: z.array(z.string()).min(1, 'Phase 2 must have at least one overview note'),
+  overview_jp: z.array(z.string()).optional(),
+  overview_kr: z.array(z.string()).optional(),
+  overview_zh: z.array(z.string()).optional(),
   teams: z.record(z.string(), Phase2TeamSchema).refine(
     (teams) => Object.keys(teams).length > 0,
     'Phase 2 must have at least one team strategy'

@@ -34,19 +34,39 @@
           "recommended": [
             {
               "names": "Monad Eva",
-              "reason": "{B/BT_CALL_BACKUP} and cleanses {D/BT_SILENCE}"
+              "reason": {
+                "en": "{B/BT_CALL_BACKUP} and cleanses {D/BT_SILENCE}",
+                "jp": "{B/BT_CALL_BACKUP}、{D/BT_SILENCE}を解除",
+                "kr": "{B/BT_CALL_BACKUP}, {D/BT_SILENCE} 해제",
+                "zh": "{B/BT_CALL_BACKUP}，解除{D/BT_SILENCE}"
+              }
             },
             {
               "names": "Maxwell",
-              "reason": "Standard {E/Dark} dps"
+              "reason": {
+                "en": "Standard {E/Dark} dps",
+                "jp": "標準的な{E/Dark}アタッカー",
+                "kr": "기본 {E/Dark} 딜러",
+                "zh": "标准{E/Dark}输出"
+              }
             },
             {
               "names": "Demiurge Astei",
-              "reason": "Standard {E/Dark} dps"
+              "reason": {
+                "en": "Standard {E/Dark} dps",
+                "jp": "標準的な{E/Dark}アタッカー",
+                "kr": "기본 {E/Dark} 딜러",
+                "zh": "标准{E/Dark}输出"
+              }
             },
             {
               "names": "Tamara",
-              "reason": "100% crit chance for consistent dual attacks"
+              "reason": {
+                "en": "100% crit chance for consistent dual attacks",
+                "jp": "100%クリティカルで安定したデュアルアタック",
+                "kr": "100% 치명타로 일관된 듀얼 어택",
+                "zh": "100%暴击率确保稳定协同攻击"
+              }
             }
           ],
           "team": [
@@ -104,15 +124,30 @@
           "recommended": [
             {
               "names": "Dianne",
-              "reason": "{B/BT_IMMUNE}, no non-attacks"
+              "reason": {
+                "en": "{B/BT_IMMUNE}, no non-attacks",
+                "jp": "{B/BT_IMMUNE}、非攻撃スキルなし",
+                "kr": "{B/BT_IMMUNE}, 비공격 스킬 없음",
+                "zh": "{B/BT_IMMUNE}，无非攻击技能"
+              }
             },
             {
               "names": "Skadi",
-              "reason": "{B/BT_STAT|ST_CRITICAL_RATE}, no non-attacks"
+              "reason": {
+                "en": "{B/BT_STAT|ST_CRITICAL_RATE}, no non-attacks",
+                "jp": "{B/BT_STAT|ST_CRITICAL_RATE}、非攻撃スキルなし",
+                "kr": "{B/BT_STAT|ST_CRITICAL_RATE}, 비공격 스킬 없음",
+                "zh": "{B/BT_STAT|ST_CRITICAL_RATE}，无非攻击技能"
+              }
             },
             {
               "names": "Demiurge Luna",
-              "reason": "{E/Light} dps"
+              "reason": {
+                "en": "{E/Light} dps",
+                "jp": "{E/Light}アタッカー",
+                "kr": "{E/Light} 딜러",
+                "zh": "{E/Light}输出"
+              }
             }
           ],
           "team": [
@@ -188,7 +223,25 @@
           "note": [
             {
               "type": "p",
-              "string": "Mind the No Extra Turn for DLuna S2"
+              "string": "Mind the No Extra Turn for {P/Demiurge Luna} S2"
+            }
+          ],
+          "note_jp": [
+            {
+              "type": "p",
+              "string": "{P/Demiurge Luna} S2の追加ターン無効に注意"
+            }
+          ],
+          "note_kr": [
+            {
+              "type": "p",
+              "string": "{P/Demiurge Luna} S2의 추가 턴 불가에 주의"
+            }
+          ],
+          "note_zh": [
+            {
+              "type": "p",
+              "string": "注意{P/Demiurge Luna} S2的无额外回合"
             }
           ]
         },
@@ -223,7 +276,25 @@
           "note": [
             {
               "type": "p",
-              "string": "Ember is all you need."
+              "string": "{P/Ember} is all you need."
+            }
+          ],
+          "note_jp": [
+            {
+              "type": "p",
+              "string": "{P/Ember}だけで十分です。"
+            }
+          ],
+          "note_kr": [
+            {
+              "type": "p",
+              "string": "{P/Ember}만 있으면 됩니다."
+            }
+          ],
+          "note_zh": [
+            {
+              "type": "p",
+              "string": "只需要{P/Ember}即可。"
             }
           ]
         },

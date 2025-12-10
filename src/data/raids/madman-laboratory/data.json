@@ -31,19 +31,39 @@
           "recommended": [
             {
               "names": "Rey",
-              "reason": "{C/Striker} dps {E/Earth}."
+              "reason": {
+                "en": "{C/Striker} dps {E/Earth}.",
+                "jp": "{C/Striker} {E/Earth}アタッカー。",
+                "kr": "{C/Striker} {E/Earth} 딜러.",
+                "zh": "{C/Striker} {E/Earth}输出。"
+              }
             },
             {
               "names": "Noa",
-              "reason": "{C/Striker} dps {E/Earth}."
+              "reason": {
+                "en": "{C/Striker} dps {E/Earth}.",
+                "jp": "{C/Striker} {E/Earth}アタッカー。",
+                "kr": "{C/Striker} {E/Earth} 딜러.",
+                "zh": "{C/Striker} {E/Earth}输出。"
+              }
             },
             {
               "names": "Delta",
-              "reason": "{C/Striker} dps {E/Earth}."
+              "reason": {
+                "en": "{C/Striker} dps {E/Earth}.",
+                "jp": "{C/Striker} {E/Earth}アタッカー。",
+                "kr": "{C/Striker} {E/Earth} 딜러.",
+                "zh": "{C/Striker} {E/Earth}输出。"
+              }
             },
             {
               "names": "Rhona",
-              "reason": "{C/Striker} dps {E/Earth}."
+              "reason": {
+                "en": "{C/Striker} dps {E/Earth}.",
+                "jp": "{C/Striker} {E/Earth}アタッカー。",
+                "kr": "{C/Striker} {E/Earth} 딜러.",
+                "zh": "{C/Striker} {E/Earth}输出。"
+              }
             }
           ],
           "team": [
@@ -96,11 +116,21 @@
           "recommended": [
             {
               "names": "Ryu Lion",
-              "reason": "{C/Ranger} dps {E/Earth}."
+              "reason": {
+                "en": "{C/Ranger} dps {E/Earth}.",
+                "jp": "{C/Ranger} {E/Earth}アタッカー。",
+                "kr": "{C/Ranger} {E/Earth} 딜러.",
+                "zh": "{C/Ranger} {E/Earth}输出。"
+              }
             },
             {
               "names": "Notia",
-              "reason": "{C/Ranger} sub-dps {E/Earth}."
+              "reason": {
+                "en": "{C/Ranger} sub-dps {E/Earth}.",
+                "jp": "{C/Ranger} {E/Earth}サブアタッカー。",
+                "kr": "{C/Ranger} {E/Earth} 서브딜러.",
+                "zh": "{C/Ranger} {E/Earth}副输出。"
+              }
             }
           ],
           "team": [
@@ -131,6 +161,15 @@
       "id": "440400379-B-1",
       "overview": [
         "The best way to deal with him is to chain break"
+      ],
+      "overview_jp": [
+        "最善の対処法はチェインブレイクを狙うことです"
+      ],
+      "overview_kr": [
+        "가장 좋은 대처법은 체인 브레이크를 노리는 것입니다"
+      ],
+      "overview_zh": [
+        "对付他最好的方法是进行连锁破坏"
       ],
       "teams": {
         "team1": {
@@ -185,6 +224,24 @@
             {
               "type": "p",
               "string": "Remove the ranger geas if needed."
+            }
+          ],
+          "note_jp": [
+            {
+              "type": "p",
+              "string": "必要に応じてレンジャーのギアスを外してください。"
+            }
+          ],
+          "note_kr": [
+            {
+              "type": "p",
+              "string": "필요시 레인저 기어스를 제거하세요."
+            }
+          ],
+          "note_zh": [
+            {
+              "type": "p",
+              "string": "如有需要，移除游侠誓约。"
             }
           ]
         },
@@ -241,19 +298,19 @@
           "note": [
             {
               "type": "p",
-              "string": "Speed Tuning : Maxwell > Laine > Skadi > Alice"
+              "string": "Speed Tuning : {P/Maxwell} > {P/Laine} > {P/Skadi} > {P/Alice}"
             },
             {
               "type": "p",
-              "string": "Chain Order : Alice > Laine > Maxwell > Skadi"
+              "string": "Chain Order : {P/Alice} > {P/Laine} > {P/Maxwell} > {P/Skadi}"
             },
             {
               "type": "p",
-              "string": "Maxwell S1 + Laine S3 + Skadi S2 musn't exceed 50K damage (you don't want the boss to strike you with his enrage move)"
+              "string": "{P/Maxwell} S1 + {P/Laine} S3 + {P/Skadi} S2 musn't exceed 50K damage (you don't want the boss to strike you with his enrage move)"
             },
             {
               "type": "p",
-              "string": "If playing her remove Eternal EE : you don't want her to get an extra turn"
+              "string": "If playing her remove {P/Eternal} EE : you don't want her to get an extra turn"
             },
             {
               "type": "p",
@@ -262,10 +319,103 @@
             {
               "type": "ul",
               "items": [
-                "Maxwell prio : S3 > S2 Burn Lv 2 > S1",
-                "Laine : Only S1 for getting priority",
-                "Skadi : Only S1 Burn Lv 1 exept for first break when she will use Chain attack",
-                "Alice : Use S2 once to speed down the boss then use Chain attack on the other break"
+                "{P/Maxwell} prio : S3 > S2 Burn Lv 2 > S1",
+                "{P/Laine} : Only S1 for getting priority",
+                "{P/Skadi} : Only S1 Burn Lv 1 exept for first break when she will use Chain attack",
+                "{P/Alice} : Use S2 once to speed down the boss then use Chain attack on the other break"
+              ]
+            }
+          ],
+          "note_jp": [
+            {
+              "type": "p",
+              "string": "速度調整 : {P/Maxwell} > {P/Laine} > {P/Skadi} > {P/Alice}"
+            },
+            {
+              "type": "p",
+              "string": "チェイン順序 : {P/Alice} > {P/Laine} > {P/Maxwell} > {P/Skadi}"
+            },
+            {
+              "type": "p",
+              "string": "{P/Maxwell} S1 + {P/Laine} S3 + {P/Skadi} S2のダメージは5万を超えてはいけません（ボスの激怒攻撃を受けたくない）"
+            },
+            {
+              "type": "p",
+              "string": "{P/Eternal}を使う場合はEEを外してください：追加ターンを得させたくない"
+            },
+            {
+              "type": "p",
+              "string": "ブレイクローテーション"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{P/Maxwell}優先 : S3 > S2バーンLv2 > S1",
+                "{P/Laine} : 優先権獲得のためS1のみ",
+                "{P/Skadi} : 最初のブレイク時のチェイン攻撃以外はS1バーンLv1のみ",
+                "{P/Alice} : S2を一度使ってボスの速度を下げ、他のブレイク時にチェイン攻撃"
+              ]
+            }
+          ],
+          "note_kr": [
+            {
+              "type": "p",
+              "string": "속도 튜닝 : {P/Maxwell} > {P/Laine} > {P/Skadi} > {P/Alice}"
+            },
+            {
+              "type": "p",
+              "string": "체인 순서 : {P/Alice} > {P/Laine} > {P/Maxwell} > {P/Skadi}"
+            },
+            {
+              "type": "p",
+              "string": "{P/Maxwell} S1 + {P/Laine} S3 + {P/Skadi} S2의 데미지가 5만을 초과하면 안 됩니다 (보스의 격노 공격을 받고 싶지 않음)"
+            },
+            {
+              "type": "p",
+              "string": "{P/Eternal}을 사용한다면 EE를 해제하세요: 추가 턴을 얻게 하고 싶지 않음"
+            },
+            {
+              "type": "p",
+              "string": "브레이크 로테이션"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{P/Maxwell} 우선순위 : S3 > S2 번 Lv 2 > S1",
+                "{P/Laine} : 우선권 획득을 위해 S1만 사용",
+                "{P/Skadi} : 첫 브레이크 체인 공격 외에는 S1 번 Lv 1만 사용",
+                "{P/Alice} : S2를 한 번 사용해 보스 속도를 낮추고 다른 브레이크 시 체인 공격"
+              ]
+            }
+          ],
+          "note_zh": [
+            {
+              "type": "p",
+              "string": "速度调整 : {P/Maxwell} > {P/Laine} > {P/Skadi} > {P/Alice}"
+            },
+            {
+              "type": "p",
+              "string": "连锁顺序 : {P/Alice} > {P/Laine} > {P/Maxwell} > {P/Skadi}"
+            },
+            {
+              "type": "p",
+              "string": "{P/Maxwell} S1 + {P/Laine} S3 + {P/Skadi} S2的伤害不能超过5万（你不想让Boss使用狂暴技能）"
+            },
+            {
+              "type": "p",
+              "string": "如果使用{P/Eternal}，请移除她的EE：你不想让她获得额外回合"
+            },
+            {
+              "type": "p",
+              "string": "破坏轮换"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{P/Maxwell}优先级 : S3 > S2燃烧Lv2 > S1",
+                "{P/Laine} : 只用S1获取优先权",
+                "{P/Skadi} : 除了第一次破坏时的连锁攻击外，只用S1燃烧Lv1",
+                "{P/Alice} : 使用一次S2降低Boss速度，然后在其他破坏时使用连锁攻击"
               ]
             }
           ]

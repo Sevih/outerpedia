@@ -7,11 +7,26 @@ import GeasCard from './GeasCard'
 import { resolveGeasRef } from '@/utils/geas'
 import CombatFootage from '@/app/components/CombatFootage'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
-import { Phase2Team, Phase1Boss } from '@/schemas/guild-raid.schema'
+import { Phase2Team, Phase1Boss, NoteEntry } from '@/schemas/guild-raid.schema'
 
 type TeamTabSelectorProps = {
   teams: Record<string, Phase2Team>
   bosses: Phase1Boss[]
+}
+
+/**
+ * Resolve localized note based on current language
+ * Falls back to English if localized version doesn't exist
+ */
+function resolveNote(team: Phase2Team, lang: string): NoteEntry[] | undefined {
+  if (lang !== 'en') {
+    const localizedKey = `note_${lang}` as keyof Phase2Team
+    const localizedNote = team[localizedKey] as NoteEntry[] | undefined
+    if (localizedNote && localizedNote.length > 0) {
+      return localizedNote
+    }
+  }
+  return team.note
 }
 
 
@@ -92,7 +107,7 @@ export default function TeamTabSelectorWithGeas({ teams, bosses }: TeamTabSelect
           </div>
         </div>
       )}
-      <RecommendedTeam team={selectedTeam.setup} note={selectedTeam.note} />
+      <RecommendedTeam team={selectedTeam.setup} note={resolveNote(selectedTeam, lang)} />
 
       {selectedTeam.video && (
         <CombatFootage

@@ -34,23 +34,48 @@
           "recommended": [
             {
               "names": "Veronica",
-              "reason": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
+              "reason": {
+                "en": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+                "jp": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}",
+                "kr": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+                "zh": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}"
+              }
             },
             {
               "names": "Fatal",
-              "reason": "{C/Ranger} {E/Water}"
+              "reason": {
+                "en": "{C/Ranger} {E/Water}",
+                "jp": "{C/Ranger} {E/Water}",
+                "kr": "{C/Ranger} {E/Water}",
+                "zh": "{C/Ranger} {E/Water}"
+              }
             },
             {
               "names": "Monad Eva",
-              "reason": "{C/Healer}, {B/BT_CALL_BACKUP}"
+              "reason": {
+                "en": "{C/Healer}, {B/BT_CALL_BACKUP}",
+                "jp": "{C/Healer}、{B/BT_CALL_BACKUP}",
+                "kr": "{C/Healer}, {B/BT_CALL_BACKUP}",
+                "zh": "{C/Healer}、{B/BT_CALL_BACKUP}"
+              }
             },
             {
               "names": "Maxwell",
-              "reason": "Strong damage unit"
+              "reason": {
+                "en": "Strong damage unit",
+                "jp": "高火力ユニット",
+                "kr": "강력한 딜러",
+                "zh": "高伤害单位"
+              }
             },
             {
               "names": "Demiurge Astei",
-              "reason": "Strong damage unit"
+              "reason": {
+                "en": "Strong damage unit",
+                "jp": "高火力ユニット",
+                "kr": "강력한 딜러",
+                "zh": "高伤害单位"
+              }
             }
           ],
           "team": [
@@ -111,19 +136,39 @@
           "recommended": [
             {
               "names": "Demiurge Luna",
-              "reason": "Strong damage unit"
+              "reason": {
+                "en": "Strong damage unit",
+                "jp": "高火力ユニット",
+                "kr": "강력한 딜러",
+                "zh": "高伤害单位"
+              }
             },
             {
               "names": "Poolside Trickster Regina",
-              "reason": "Strong damage unit"
+              "reason": {
+                "en": "Strong damage unit",
+                "jp": "高火力ユニット",
+                "kr": "강력한 딜러",
+                "zh": "高伤害单位"
+              }
             },
             {
               "names": "Veronica",
-              "reason": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
+              "reason": {
+                "en": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+                "jp": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}",
+                "kr": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+                "zh": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}"
+              }
             },
             {
               "names": "Fatal",
-              "reason": "{C/Ranger} {E/Water}"
+              "reason": {
+                "en": "{C/Ranger} {E/Water}",
+                "jp": "{C/Ranger} {E/Water}",
+                "kr": "{C/Ranger} {E/Water}",
+                "zh": "{C/Ranger} {E/Water}"
+              }
             }
           ],
           "team": [

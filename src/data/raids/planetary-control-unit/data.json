@@ -34,27 +34,57 @@
           "recommended": [
             {
               "names": "Astei",
-              "reason": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              "reason": {
+                "en": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "jp": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "kr": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "zh": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              }
             },
             {
               "names": "Dianne",
-              "reason": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              "reason": {
+                "en": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "jp": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "kr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "zh": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              }
             },
             {
               "names": "Maxwell",
-              "reason": "Standard {E/Dark} dps"
+              "reason": {
+                "en": "Standard {E/Dark} dps",
+                "jp": "標準的な{E/Dark}アタッカー",
+                "kr": "기본 {E/Dark} 딜러",
+                "zh": "标准{E/Dark}输出"
+              }
             },
             {
               "names": "Demiurge Astei",
-              "reason": "Standard {E/Dark} dps"
+              "reason": {
+                "en": "Standard {E/Dark} dps",
+                "jp": "標準的な{E/Dark}アタッカー",
+                "kr": "기본 {E/Dark} 딜러",
+                "zh": "标准{E/Dark}输出"
+              }
             },
             {
               "names": "Aer",
-              "reason": "Standard {E/Fire} dps"
+              "reason": {
+                "en": "Standard {E/Fire} dps",
+                "jp": "標準的な{E/Fire}アタッカー",
+                "kr": "기본 {E/Fire} 딜러",
+                "zh": "标准{E/Fire}输出"
+              }
             },
             {
               "names": "Bryn",
-              "reason": "Standard {E/Fire} dps"
+              "reason": {
+                "en": "Standard {E/Fire} dps",
+                "jp": "標準的な{E/Fire}アタッカー",
+                "kr": "기본 {E/Fire} 딜러",
+                "zh": "标准{E/Fire}输出"
+              }
             }
           ],
           "team": [
@@ -113,15 +143,30 @@
           "recommended": [
             {
               "names": "Monad Eva",
-              "reason": "{B/BT_CALL_BACKUP} and {B/BT_REMOVE_DEBUFF}"
+              "reason": {
+                "en": "{B/BT_CALL_BACKUP} and {B/BT_REMOVE_DEBUFF}",
+                "jp": "{B/BT_CALL_BACKUP}と{B/BT_REMOVE_DEBUFF}",
+                "kr": "{B/BT_CALL_BACKUP} 및 {B/BT_REMOVE_DEBUFF}",
+                "zh": "{B/BT_CALL_BACKUP}和{B/BT_REMOVE_DEBUFF}"
+              }
             },
             {
               "names": "Dianne",
-              "reason": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              "reason": {
+                "en": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "jp": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "kr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "zh": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              }
             },
             {
               "names": "Luna",
-              "reason": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}"
+              "reason": {
+                "en": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+                "jp": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+                "kr": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+                "zh": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}"
+              }
             }
           ],
           "team": [
