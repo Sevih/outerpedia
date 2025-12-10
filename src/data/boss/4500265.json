@@ -13,7 +13,7 @@
   "level": 140,
   "icons": "2000078",
   "BuffImmune": "",
-  "StatBuffImmune": "BT_STUN,BT_FREEZE,BT_STONE,BT_SILENCE,BT_AGGRO,BT_COOL_CHARGE",
+  "StatBuffImmune": "BT_STUN,BT_FREEZE,BT_STONE,BT_SILENCE,BT_AGGRO,BT_COOL_CHARGE,BT_COOL2_CHARGE,BT_COOL3_CHARGE",
   "location": {
     "dungeon": {
       "en": "Loyal Traitor",
@@ -63,10 +63,10 @@
       },
       "type": "SKT_SECOND",
       "description": {
-        "en": "Removes <color=#28d9ed>all</color> debuffs from the caster and grants <color=#28d9ed>Stealth</color> to the caster and <color=#28d9ed>Invulnerability</color> to all allies except for the caster for <color=#28d9ed>2 turn(s)</color>.",
-        "kr": "자신에게 걸려 있는 약화 효과를 <color=#28d9ed>모두</color> 제거하고 <color=#28d9ed>2턴</color> 동안 자신은 <color=#28d9ed>은신</color>, 자신을 제외한 아군 전체는 <color=#28d9ed>무적</color>을 획득합니다.",
-        "jp": "自分の弱体効果を<color=#28d9ed>すべて</color>解除し、自分に<color=#28d9ed>隠れ身</color>を、自分を除く味方全体に<color=#28d9ed>無敵</color>を<color=#28d9ed>2ターン</color>の間付与する。",
-        "zh": "解除自身附带的<color=#28d9ed>所有</color>弱化效果,并获得<color=#28d9ed>隐身</color>效果,持续<color=#28d9ed>2回合</color>。使除自身以外的全体友军获得<color=#28d9ed>无敌</color>效果。"
+        "en": "Removes <color=#28d9ed>all</color> debuffs from the caster and attacks the enemy.\\nAfter attacking, grants <color=#28d9ed>Stealth</color> to the caster and <color=#28d9ed>Invincibility</color> to all allies except the caster for <color=#28d9ed>2</color> turn(s).",
+        "kr": "자신에게 걸려 있는 약화 효과를 <color=#28d9ed>모두</color> 제거하고 적을 공격합니다.\\n공격 후 <color=#28d9ed>2턴</color> 동안 자신은 <color=#28d9ed>은신</color>, 자신을 제외한 아군 전체는 <color=#28d9ed>무적</color>을 획득합니다.",
+        "jp": "自身に付与された弱体効果を<color=#28d9ed>すべて</color>解除し、敵に攻撃する。\\n攻撃後、<color=#28d9ed>2ターン</color>の間、\\n自身には<color=#28d9ed>隠れ身</color>を、自身を除く味方全体には<color=#28d9ed>無敵</color>を付与する。",
+        "zh": "解除自身附带的<color=#28d9ed>所有</color>弱化效果,并攻击敌人。\\n攻击后,自身获得<color=#28d9ed>隐身</color>效果,除自身之外的全体友军获得<color=#28d9ed>无敌</color>效果,持续<color=#28d9ed>2</color>回合。"
       },
       "icon": "Skill_Second_2000078",
       "buff": [
@@ -106,15 +106,14 @@
       },
       "type": "SKT_MONSTER_1",
       "description": {
-        "en": "Inflicts <color=#28d9ed>Silenced</color> on Fire enemies. This effect cannot be removed.\\n\\nWhen performing an action, resurrects all allies, and every time an ally performs an action, increases duration of buffs on allies by <color=#28d9ed>1 turn</color>.\\n\\nWhen granted Stealth, increases damage, damage taken does not exceed <color=#28d9ed>100</color>, and does not take Weakness Gauge damage.",
-        "kr": "화속성 적에게 <color=#28d9ed>침묵</color>을 부여합니다. 이 효과는 해제되지 않습니다.\\n\\n행동 시 아군 전체를 부활시키며, 아군이 행동할 때마다 아군이 보유한 강화 효과의 지속 턴이 <color=#28d9ed>1턴</color> 증가합니다.\\n\\n은신 중에는 피해가 증가하며, 입는 피해가 <color=#28d9ed>100</color>을 초과하지 않고, WG 피해를 받지 않습니다.",
-        "jp": "火属性の敵に<color=#28d9ed>沈黙</color>を付与する。この効果は解除されない。\\n\\n行動時、味方全体を復活させ、味方が行動するたびに味方の強化効果の持続ターンを<color=#28d9ed>1ターン</color>増加させる。\\n\\n隠れ身状態の場合、ダメージがUPし、受けるダメージは<color=#28d9ed>100</color>を超えず、WGダメージを受けない。",
-        "zh": "对火属性敌人造成<color=#28d9ed>沉默</color>效果,该效果不会被解\\n除。\\n\\n行动时复活全体友军,且每当友军行动时,其附带的强化效果持续时间提升<color=#28d9ed>1回合</color>。\\n\\n在隐身状态下提升伤害,且所受伤害不会超过<color=#28d9ed>100</color>,不会受到WG伤害。"
+        "en": "Inflicts <color=#28d9ed>Silence</color> on Fire enemies. This effect cannot be removed.\\nWhen the caster takes an action, resurrects all allies.\\n\\nWhile under Stealth, the caster's damage dealt increases by <color=#28d9ed>100%</color>,damage taken does not exceed <color=#28d9ed>5000</color>,and the caster does not take Weakness Gauge damage.",
+        "kr": "화속성 적에게 <color=#28d9ed>침묵</color>을 부여합니다. 이 효과는 해제되지 않습니다.\\n\\n자신이 행동 시 아군 전체를 부활시킵니다.\\n\\n은신 중에는 자신이 주는 피해가 <color=#28d9ed>100%</color>증가하며, 입는 피해가 <color=#28d9ed>5000</color>을 초과하지 않고, WG 피해를 받지 않습니다.",
+        "jp": "火属性の敵に<color=#28d9ed>沈黙</color>を付与する。この効果は解除されない。\\n\\n自身が行動するたびに、味方全体を復活させる。\\n\\n隠れ身状態の間、自身の与えるダメージが<color=#28d9ed>100%</color>UPし、\n受けるダメージは<color=#28d9ed>5000</color>を超えず、\\nWGダメージを受けない。",
+        "zh": "对火属性敌人施加<color=#28d9ed>沉默</color>效果,该效果无法解除。\\n\\n自身行动时,使全体友军复活。\\n\\n处于隐身状态时,自身造成的伤害提升<color=#28d9ed>100%</color>,\\n所受到的伤害不会超过<color=#28d9ed>5000</color>,\\n且不会受到WG伤害。"
       },
       "icon": "MT_Passive_1_Water",
       "buff": [
-        "BT_RESURRECTION",
-        "BT_EXTEND_BUFF"
+        "BT_RESURRECTION"
       ],
       "debuff": [
         "BT_SILENCE_IR"

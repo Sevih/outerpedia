@@ -2,6 +2,7 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import BossDisplay from '@/app/components/BossDisplay'
+import TacticalTips from '@/app/components/TacticalTips'
 
 export default function MaxwellGuide() {
     return (
@@ -19,10 +20,10 @@ export default function MaxwellGuide() {
                                 modeKey='Story (Normal)'
                                 defaultBossId='4104007'
                             />
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Strategy Overview</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li>Killing the orb will make Maxwell drop to 3% HP. Avoid using AoE damage.</li>
-                            </ul>
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips tips={[
+                                "Killing the orb will make Maxwell drop to 3% HP. Avoid using AoE damage."
+                            ]} />
                         </>
                     ),
                 },

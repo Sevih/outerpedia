@@ -2,8 +2,9 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import BossDisplay from '@/app/components/BossDisplay'
-import EffectInlineTag from '@/app/components/EffectInlineTag'
-import CharacterLinkCard from '@/app/components/CharacterLinkCard'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
 export default function VladiMaxGuide() {
     return (
@@ -22,14 +23,12 @@ export default function VladiMaxGuide() {
                                 defaultModeKey='Story (Hard)'
                                 defaultBossId='4144004'
                             />
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advice</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li>Use characters with <EffectInlineTag name="BT_IMMUNE" type="buff" />, <EffectInlineTag name="BT_REMOVE_DEBUFF" type="buff" />.</li>
-                            </ul>
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Recommended Characters</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li><CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Astei" />: for <EffectInlineTag name="BT_IMMUNE" type="buff" /></li>
-                            </ul>
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips tips={[
+                                "Use characters with {B/BT_IMMUNE}, {B/BT_REMOVE_DEBUFF}."
+                            ]} />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
                         </>
                     ),
                 },

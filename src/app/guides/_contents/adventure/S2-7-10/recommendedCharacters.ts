@@ -1,0 +1,20 @@
+export const recommendedCharacters = [
+    {
+        names: ["Dianne", "Astei", "Nella"],
+        reason: {
+            en: "For {B/BT_IMMUNE}.",
+            jp: "{B/BT_IMMUNE}持ち。",
+            kr: "{B/BT_IMMUNE} 보유.",
+            zh: "拥有{B/BT_IMMUNE}。"
+        }
+    },
+    {
+        names: ["Akari", "Laplace"],
+        reason: {
+            en: "{D/BT_STAT|ST_ATK} to reduce burn damage.",
+            jp: "{D/BT_STAT|ST_ATK}で火傷ダメージを軽減。",
+            kr: "{D/BT_STAT|ST_ATK}로 화상 피해 감소.",
+            zh: "{D/BT_STAT|ST_ATK}减少灼烧伤害。"
+        }
+    }
+]
