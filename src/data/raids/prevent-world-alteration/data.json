@@ -33,24 +33,24 @@
           ],
           "recommended": [
             {
-              "name": "Veronica",
-              "comment": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
+              "names": "Veronica",
+              "reason": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
             },
             {
-              "name": "Fatal",
-              "comment": "{C/Ranger} {E/Water}"
+              "names": "Fatal",
+              "reason": "{C/Ranger} {E/Water}"
             },
             {
-              "name": "Monad Eva",
-              "comment": "{C/Healer}, {B/BT_CALL_BACKUP}"
+              "names": "Monad Eva",
+              "reason": "{C/Healer}, {B/BT_CALL_BACKUP}"
             },
             {
-              "name": "Maxwell",
-              "comment": "Strong damage unit"
+              "names": "Maxwell",
+              "reason": "Strong damage unit"
             },
             {
-              "name": "Demiurge Astei",
-              "comment": "Strong damage unit"
+              "names": "Demiurge Astei",
+              "reason": "Strong damage unit"
             }
           ],
           "team": [
@@ -77,7 +77,7 @@
             ]
           ],
           "video": {
-            "id": "Ru-_1L59wjI",
+            "videoId": "Ru-_1L59wjI",
             "title": "Prevent World Alteration - Geas Boss Sample Collection Terminal (Stage 3) - by Sevih"
           }
         },
@@ -110,20 +110,20 @@
           ],
           "recommended": [
             {
-              "name": "Demiurge Luna",
-              "comment": "Strong damage unit"
+              "names": "Demiurge Luna",
+              "reason": "Strong damage unit"
             },
             {
-              "name": "Poolside Trickster Regina",
-              "comment": "Strong damage unit"
+              "names": "Poolside Trickster Regina",
+              "reason": "Strong damage unit"
             },
             {
-              "name": "Veronica",
-              "comment": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
+              "names": "Veronica",
+              "reason": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
             },
             {
-              "name": "Fatal",
-              "comment": "{C/Ranger} {E/Water}"
+              "names": "Fatal",
+              "reason": "{C/Ranger} {E/Water}"
             }
           ],
           "team": [
@@ -150,7 +150,7 @@
             ]
           ],
           "video": {
-            "id": "HxYVQy9puEE",
+            "videoId": "HxYVQy9puEE",
             "title": "Prevent World Alteration - Geas Boss Strategic Defense Automaton (Stage 4) - By Sevih"
           }
         }
@@ -158,7 +158,6 @@
     },
     "phase2": {
       "id": "440600010-B-1",
-      
       "overview": [
         ""
       ],
@@ -167,7 +166,7 @@
           "label": "Water Striker",
           "icon": "water.webp",
           "video": {
-            "id": "5ieNf4f0xfg",
+            "videoId": "5ieNf4f0xfg",
             "title": "Prevent World Alteration - Planet Purification Unit Stage 5 - Water Striker Team - By Sevih"
           },
           "geas-active": [],
@@ -188,7 +187,6 @@
               "Caren",
               "Beth",
               "Rin"
-              
             ],
             [
               "Lyla",
@@ -203,7 +201,7 @@
           "label": "Water Mage",
           "icon": "water.webp",
           "video": {
-            "id": "vV2faY6DzHw",
+            "videoId": "vV2faY6DzHw",
             "title": "Prevent World Alteration - Planet Purification Unit Stage 6 - Water Mage Team - By Sevih"
           },
           "geas-active": [],
@@ -217,7 +215,7 @@
               "Roxie"
             ],
             [
-              "Laplace"              
+              "Laplace"
             ],
             [
               "Lyla",
@@ -232,7 +230,7 @@
           "label": "GBeth",
           "icon": "SC_Buff_2100092.webp",
           "video": {
-            "id": "PBTKXTwFuBg",
+            "videoId": "PBTKXTwFuBg",
             "title": "Prevent World Alteration - Planet Purification Unit Stage 11 - G.Beth Team - By Sevih"
           },
           "geas-active": [],
@@ -244,7 +242,7 @@
               "Maxie"
             ],
             [
-              "Monad Eva"              
+              "Monad Eva"
             ],
             [
               "Akari"

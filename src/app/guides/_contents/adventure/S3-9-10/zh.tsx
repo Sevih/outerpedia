@@ -9,12 +9,12 @@ import { recommendedCharacters } from './recommendedCharacters'
 export default function NellaGuide() {
     return (
         <GuideTemplate
-            title="Nella Strategy Guide"
-            introduction="Nella is an extremely challenging boss that requires high penetration to damage. It applies irremovable debuff enhancement and sealed interruption effects, and executes the entire team during enrage every 30 actions."
+            title="妮拉攻略指南"
+            introduction="妮拉是一个极具挑战性的Boss，需要高穿透才能造成伤害。她会施加不可移除的减益增强和封印中断效果，每30次行动进入狂暴并处决整个队伍。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
                             <BossDisplay
@@ -25,8 +25,8 @@ export default function NellaGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Units with innate Penetration and Penetration-based builds are required.",
-                                "Also {B/BT_REMOVE_DEBUFF} will be needed to get rid of {D/BT_STAT|ST_PIERCE_POWER_RATE} right when the boss is on the verge of breaking."
+                                "需要自带穿透的角色和穿透配装。",
+                                "在Boss即将破防时，还需要{B/BT_REMOVE_DEBUFF}来移除{D/BT_STAT|ST_PIERCE_POWER_RATE}。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

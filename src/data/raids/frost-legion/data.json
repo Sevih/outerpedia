@@ -26,24 +26,23 @@
             "5": {
               "bonus": 53,
               "malus": 59
-            }          
+            }
           },
           "notes": [
-           
             "If you can chain break him, replace the {C/Defender} with another DPS. In the footage, Kuro was chosen because she is a {E/Light} character, with decent damage, {B/BT_CP_CHARGE}, and {D/BT_MARKING}."
           ],
           "recommended": [
             {
-              "name": "Dianne",
-              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
+              "names": "Dianne",
+              "reason": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
             },
             {
-              "name": "Monad Eva",
-              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
+              "names": "Monad Eva",
+              "reason": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
             },
             {
-              "name": "Luna",
-              "comment": "{B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP} and she is a {C/Defender}"
+              "names": "Luna",
+              "reason": "{B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP} and she is a {C/Defender}"
             }
           ],
           "team": [
@@ -69,7 +68,7 @@
             ]
           ],
           "video": {
-            "id": "eQRbxgOoL9k",
+            "videoId": "eQRbxgOoL9k",
             "title": "The Frost Legion - Geas Boss Prototype EX-78 (Stage 5) by Sevih"
           }
         },
@@ -102,12 +101,12 @@
           ],
           "recommended": [
             {
-              "name": "Dianne",
-              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
+              "names": "Dianne",
+              "reason": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
             },
             {
-              "name": "Monad Eva",
-              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
+              "names": "Monad Eva",
+              "reason": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
             }
           ],
           "team": [
@@ -130,7 +129,7 @@
             ]
           ],
           "video": {
-            "id": "-z3VlH16dA4",
+            "videoId": "-z3VlH16dA4",
             "title": "The Frost Legion - Geas Boss Vlada Assault Suit (Stage 4) by Sevih"
           }
         }
@@ -146,15 +145,27 @@
           "label": "Full Dark",
           "icon": "dark.webp",
           "video": {
-            "id": "zpnej0kGURA",
+            "videoId": "zpnej0kGURA",
             "title": "The Frost Legion - Vladi Max Stage 15 - Dark Team by Sevih"
           },
           "geas-active": {
             "bonus": [
-              49,52,53,94,46
+              49,
+              52,
+              53,
+              94,
+              46
             ],
             "malus": [
-              61,60,63,57,59,65,55,96,20
+              61,
+              60,
+              63,
+              57,
+              59,
+              65,
+              55,
+              96,
+              20
             ]
           },
           "setup": [
@@ -199,7 +210,7 @@
           "label": "Classic G.Beth",
           "icon": "light.webp",
           "video": {
-            "id": "rUKAQnQmiZc",
+            "videoId": "rUKAQnQmiZc",
             "title": "The Frost Legion - Vladi Max Stage 7 - G.Beth Team by Sevih"
           },
           "geas-active": {
@@ -207,7 +218,13 @@
               64
             ],
             "malus": [
-              61,60,63,65,96,58,20
+              61,
+              60,
+              63,
+              65,
+              96,
+              58,
+              20
             ]
           },
           "setup": [
@@ -233,7 +250,7 @@
           "label": "Burn Team",
           "icon": "fire.webp",
           "video": {
-            "id": "zetrz8-fqZg",
+            "videoId": "zetrz8-fqZg",
             "title": "The Frost Legion - Vladi Max Stage 13 - Burn Team by Sevih"
           },
           "geas-active": {
@@ -241,7 +258,13 @@
               64
             ],
             "malus": [
-              61,60,63,65,55,96,58
+              61,
+              60,
+              63,
+              65,
+              55,
+              96,
+              58
             ]
           },
           "setup": [
@@ -292,7 +315,15 @@
               64
             ],
             "malus": [
-              61,60,63,57,65,55,96,58,20
+              61,
+              60,
+              63,
+              57,
+              65,
+              55,
+              96,
+              58,
+              20
             ]
           },
           "setup": [
@@ -387,7 +418,7 @@
           "label": "Safe Burn Team",
           "icon": "fire.webp",
           "video": {
-            "id": "6_Gt1jU0f4k",
+            "videoId": "6_Gt1jU0f4k",
             "title": "Gornolf Guild Raid Stage 23 - Maxie Burn Team - 21.9m Dmg - (47m score, 115% score multiplier) by Tango"
           },
           "geas-active": {
@@ -395,7 +426,11 @@
               64
             ],
             "malus": [
-              60,63,61,65,58
+              60,
+              63,
+              61,
+              65,
+              58
             ]
           },
           "setup": [
@@ -530,24 +565,23 @@
             "5": {
               "bonus": 53,
               "malus": 59
-            }          
+            }
           },
           "notes": [
-           
             "If you can chain break him, replace the {C/Defender} with another DPS. In the footage, Kuro was chosen because she is a {E/Light} character, with decent damage, {B/BT_CP_CHARGE}, and {D/BT_MARKING}."
           ],
           "recommended": [
             {
-              "name": "Dianne",
-              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
+              "names": "Dianne",
+              "reason": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
             },
             {
-              "name": "Monad Eva",
-              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
+              "names": "Monad Eva",
+              "reason": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
             },
             {
-              "name": "Luna",
-              "comment": "{B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP} and she is a {C/Defender}"
+              "names": "Luna",
+              "reason": "{B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP} and she is a {C/Defender}"
             }
           ],
           "team": [
@@ -573,7 +607,7 @@
             ]
           ],
           "video": {
-            "id": "eQRbxgOoL9k",
+            "videoId": "eQRbxgOoL9k",
             "title": "The Frost Legion - Geas Boss Prototype EX-78 (Stage 5) by Sevih"
           }
         },
@@ -606,12 +640,12 @@
           ],
           "recommended": [
             {
-              "name": "Dianne",
-              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
+              "names": "Dianne",
+              "reason": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}"
             },
             {
-              "name": "Monad Eva",
-              "comment": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
+              "names": "Monad Eva",
+              "reason": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}"
             }
           ],
           "team": [
@@ -634,7 +668,7 @@
             ]
           ],
           "video": {
-            "id": "-z3VlH16dA4",
+            "videoId": "-z3VlH16dA4",
             "title": "The Frost Legion - Geas Boss Vlada Assault Suit (Stage 4) by Sevih"
           }
         }
@@ -650,15 +684,27 @@
           "label": "Full Dark",
           "icon": "dark.webp",
           "video": {
-            "id": "zpnej0kGURA",
+            "videoId": "zpnej0kGURA",
             "title": "The Frost Legion - Vladi Max Stage 15 - Dark Team by Sevih"
           },
           "geas-active": {
             "bonus": [
-              49,52,53,94,46
+              49,
+              52,
+              53,
+              94,
+              46
             ],
             "malus": [
-              61,60,63,57,59,65,55,96,20
+              61,
+              60,
+              63,
+              57,
+              59,
+              65,
+              55,
+              96,
+              20
             ]
           },
           "setup": [
@@ -703,7 +749,7 @@
           "label": "Classic G.Beth",
           "icon": "light.webp",
           "video": {
-            "id": "rUKAQnQmiZc",
+            "videoId": "rUKAQnQmiZc",
             "title": "The Frost Legion - Vladi Max Stage 7 - G.Beth Team by Sevih"
           },
           "geas-active": {
@@ -711,7 +757,13 @@
               64
             ],
             "malus": [
-              61,60,63,65,96,58,20
+              61,
+              60,
+              63,
+              65,
+              96,
+              58,
+              20
             ]
           },
           "setup": [
@@ -737,7 +789,7 @@
           "label": "Burn Team",
           "icon": "fire.webp",
           "video": {
-            "id": "zetrz8-fqZg",
+            "videoId": "zetrz8-fqZg",
             "title": "The Frost Legion - Vladi Max Stage 13 - Burn Team by Sevih"
           },
           "geas-active": {
@@ -745,7 +797,13 @@
               64
             ],
             "malus": [
-              61,60,63,65,55,96,58
+              61,
+              60,
+              63,
+              65,
+              55,
+              96,
+              58
             ]
           },
           "setup": [
@@ -796,7 +854,15 @@
               64
             ],
             "malus": [
-              61,60,63,57,65,55,96,58,20
+              61,
+              60,
+              63,
+              57,
+              65,
+              55,
+              96,
+              58,
+              20
             ]
           },
           "setup": [

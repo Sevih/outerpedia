@@ -2,8 +2,9 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import BossDisplay from '@/app/components/BossDisplay'
-import EffectInlineTag from '@/app/components/EffectInlineTag'
-import CharacterLinkCard from '@/app/components/CharacterLinkCard'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
 export default function AbominationHunterBelialGuide() {
     return (
@@ -22,19 +23,14 @@ export default function AbominationHunterBelialGuide() {
                                 defaultModeKey='Story (Hard)'
                                 defaultBossId='4114005'
                             />
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advice</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li>Bring <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" /> and/or <EffectInlineTag name="BT_INVINCIBLE" type="buff" /> to deal with <EffectInlineTag name="BT_DOT_BURN" type="debuff" /> (make sure to apply those at the end of the second battle).</li>
-                                <li>Bring <EffectInlineTag name="BT_IMMUNE" type="buff" /> to block <EffectInlineTag name="BT_DOT_BURN" type="debuff" /> after the first <EffectInlineTag name="BT_IMMEDIATELY_2000092" type="debuff" />.</li>
-                                <li>Bring <EffectInlineTag name="BT_RESURRECTION" type="buff" /> to recover from any deaths after the first <EffectInlineTag name="BT_IMMEDIATELY_2000092" type="debuff" />.</li>
-                            </ul>
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Recommended Characters</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li><CharacterLinkCard name="Leo" /> <CharacterLinkCard name="Monad Eva" /> : for <EffectInlineTag name="BT_INVINCIBLE" type="buff" />.</li>
-                                <li><CharacterLinkCard name="Leo" /> <CharacterLinkCard name="Lyla" /> <CharacterLinkCard name="Demiurge Drakhan" /> <CharacterLinkCard name="Luna" /> <CharacterLinkCard name="Omega Nadja" /> <CharacterLinkCard name="Liselotte" />: for <EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" />.</li>
-                                <li><CharacterLinkCard name="Nella" /> : for <EffectInlineTag name="BT_RESURRECTION" type="buff" />.</li>
-                                <li><CharacterLinkCard name="Dianne" /> <CharacterLinkCard name="Nella" /> <CharacterLinkCard name="Astei" /> : for <EffectInlineTag name="BT_IMMUNE" type="buff" />.</li>
-                            </ul>
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips tips={[
+                                "Bring {B/BT_SHIELD_BASED_CASTER} and/or {B/BT_INVINCIBLE} to deal with {D/BT_DOT_BURN} (make sure to apply those at the end of the second battle).",
+                                "Bring {B/BT_IMMUNE} to block {D/BT_DOT_BURN} after the first {D/BT_IMMEDIATELY_2000092}.",
+                                "Bring {B/BT_RESURRECTION} to recover from any deaths after the first {D/BT_IMMEDIATELY_2000092}."
+                            ]} />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
                         </>
                     ),
                 },

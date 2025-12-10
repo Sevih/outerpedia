@@ -8,7 +8,6 @@ import { BossStrategy } from './BossStrategy'
 import { RaidBossDisplay } from './index'
 import { useTenant } from '@/lib/contexts/TenantContext'
 import { lRec } from '@/lib/localize'
-import parseText from '@/utils/parseText'
 import type { Localized } from '@/types/common'
 
 type Props = {
@@ -80,21 +79,7 @@ export function Phase1View({ phase1Data }: Props) {
         {/* Boss Display with skills from boss data - bossId is the full filename */}
         <RaidBossDisplay bossKey={activeBoss.bossId} />
 
-        {/* Notes if present */}
-        {activeBoss.notes && activeBoss.notes.length > 0 && activeBoss.notes.some(note => note.trim() !== '') && (
-          <div>
-            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-3">
-              Notes
-            </h3>
-            <ul className="list-disc list-inside text-neutral-300 mb-4">
-              {activeBoss.notes.filter(note => note.trim() !== '').map((note, index) => (
-                <li key={index}>{parseText(note)}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Strategy from raid data */}
+        {/* Strategy from raid data (includes recommended, team, video) */}
         <BossStrategy boss={activeBoss} />
       </div>
     </div>

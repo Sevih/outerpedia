@@ -62,15 +62,37 @@ export const GeasReferenceSchema = z.string().regex(
 )
 
 // ============================================================================
+// LOCALIZATION HELPERS
+// ============================================================================
+
+/**
+ * LangMap for localized strings (matches @/lib/localize LangMap type)
+ */
+export const LangMapSchema = z.union([
+  z.string(),
+  z.object({
+    en: z.string(),
+    jp: z.string().optional(),
+    kr: z.string().optional(),
+    zh: z.string().optional(),
+  }),
+])
+
+// ============================================================================
 // CHARACTER & TEAM SCHEMAS
 // ============================================================================
 
 /**
- * Character reference with optional comment
+ * Character recommendation with reason (compatible with RecommendedCharacterList)
+ * - names: single name or array of names for grouped characters
+ * - reason: localized explanation (LangMap)
  */
-export const CharacterReferenceSchema = z.object({
-  name: z.string().min(1, 'Character name is required'),
-  comment: z.string().optional(),
+export const CharacterRecommendationSchema = z.object({
+  names: z.union([
+    z.string().min(1, 'Character name is required'),
+    z.array(z.string().min(1, 'Character name cannot be empty')).min(1),
+  ]),
+  reason: LangMapSchema,
 })
 
 /**
@@ -86,11 +108,13 @@ export const TeamCompositionSchema = z.array(
 // ============================================================================
 
 /**
- * YouTube video embed information
+ * YouTube video embed information (compatible with CombatFootage)
  */
 export const VideoSchema = z.object({
-  id: z.string().min(1, 'YouTube video ID is required'),
+  videoId: z.string().min(1, 'YouTube video ID is required'),
   title: z.string().min(1, 'Video title is required'),
+  author: z.string().optional(),
+  date: z.string().optional(),
 })
 
 // ============================================================================
@@ -116,7 +140,7 @@ export const Phase1BossSchema = z.object({
   bossId: BossIdSchema,
   geas: GeasConfigSchema,
   notes: z.array(z.string()).optional(),
-  recommended: z.array(CharacterReferenceSchema).optional(),
+  recommended: z.array(CharacterRecommendationSchema).optional(),
   team: TeamCompositionSchema.optional(),
   video: VideoSchema.optional(),
 })
@@ -274,7 +298,7 @@ export type GeasLevel = z.infer<typeof GeasLevelSchema>
 export type GeasConfig = z.infer<typeof GeasConfigSchema>
 export type GeasReference = z.infer<typeof GeasReferenceSchema>
 export type ActiveGeas = z.infer<typeof ActiveGeasSchema>
-export type CharacterReference = z.infer<typeof CharacterReferenceSchema>
+export type CharacterRecommendation = z.infer<typeof CharacterRecommendationSchema>
 export type TeamComposition = z.infer<typeof TeamCompositionSchema>
 export type Video = z.infer<typeof VideoSchema>
 export type Phase1Boss = z.infer<typeof Phase1BossSchema>

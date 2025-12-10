@@ -4,9 +4,9 @@ import { useState } from 'react'
 import GuideTemplate from '@/app/components/GuideTemplate'
 import BossDisplay from '@/app/components/BossDisplay'
 import MiniBossDisplay from '@/app/components/MiniBossDisplay'
-import EffectInlineTag from '@/app/components/EffectInlineTag'
-import CharacterLinkCard from '@/app/components/CharacterLinkCard'
-import ElementInlineTag from '@/app/components/ElementInline'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import { recommendedCharacters } from './recommendedCharacters'
 
 export default function ReginaGuide() {
     const [selectedMode, setSelectedMode] = useState('Story (Hard)')
@@ -37,15 +37,12 @@ export default function ReginaGuide() {
                                 defaultModeKey='Story (Hard)'
                                 controlledMode={selectedMode}
                             />
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Advice</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li>Bring <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" /> to counter <EffectInlineTag name="IG_Buff_Effect_2000067_Interruption" type="buff" />.</li>
-                            </ul>
-                            <h3 className="text-lg font-bold text-sky-300 border-l-4 border-sky-500 pl-3 mb-2 mt-6">Recommended Characters</h3>
-                            <ul className="list-disc list-inside text-neutral-300 mb-4">
-                                <li><CharacterLinkCard name="Maxwell" /> <CharacterLinkCard name="Demiurge Astei" /> : <ElementInlineTag element='dark' /> DPS with high penetration.</li>
-                                <li><CharacterLinkCard name="Charlotte" /> <CharacterLinkCard name="Skadi" /> <CharacterLinkCard name="Sterope" />: for <EffectInlineTag name="BT_STAT|ST_ACCURACY" type="buff" />.</li>
-                            </ul>
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips tips={[
+                                "Bring {B/BT_STAT|ST_ACCURACY} to counter {B/IG_Buff_Effect_2000067_Interruption}."
+                            ]} />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList entries={recommendedCharacters} />
                         </>
                     ),
                 },

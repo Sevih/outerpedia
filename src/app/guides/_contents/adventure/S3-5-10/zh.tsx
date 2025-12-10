@@ -8,31 +8,30 @@ import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import { recommendedCharacters } from './recommendedCharacters'
 
-export default function HildeGuide() {
+export default function ReginaGuide() {
     const [selectedMode, setSelectedMode] = useState('Story (Hard)')
 
     return (
         <GuideTemplate
-            title="Hilde Strategy Guide"
-            introduction="Hilde is a complex boss who calls backup allies and resurrects fallen teammates. She inflicts irremovable taunt on the first ally to evade and gains full action gauge when hitting an undebuffed ally."
+            title="蕾吉娜攻略指南"
+            introduction="蕾吉娜是一个闪避型Boss，伤害随闪避属性提升。她在闪避攻击时获得强力增益，每10次敌方行动后进入狂暴状态，获得大量闪避提升。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
                             <BossDisplay
-                                bossKey='Hilde'
+                                bossKey='Regina'
                                 modeKey={['Story (Normal)', 'Story (Hard)']}
                                 defaultModeKey='Story (Hard)'
-                                defaultBossId='4500283'
-                                labelFilter={"Top Fiend Officer"}
+                                defaultBossId='4500293'
+                                labelFilter={"The Grand Escape Magic"}
                                 onModeChange={setSelectedMode}
                             />
                             <MiniBossDisplay
                                 bosses={[
-                                    { bossKey: 'Maxie', defaultBossId: '4500281' },
-                                    { bossKey: 'Roxie', defaultBossId: '4500282' }
+                                    { bossKey: 'Hilde', labelFilter: 'The Grand Escape Magic' }
                                 ]}
                                 modeKey={['Story (Normal)', 'Story (Hard)']}
                                 defaultModeKey='Story (Hard)'
@@ -40,8 +39,7 @@ export default function HildeGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Bring damage reduction character to survive heavy damage from bosses.",
-                                "Healers with healing on S1 can help if you end up getting {D/BT_AGGRO}."
+                                "带{B/BT_STAT|ST_ACCURACY}来对抗{B/IG_Buff_Effect_2000067_Interruption}。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

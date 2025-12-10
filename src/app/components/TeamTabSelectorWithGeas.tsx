@@ -5,7 +5,7 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 import RecommendedTeam from './RecommendedTeamCarousel'
 import GeasCard from './GeasCard'
 import { resolveGeasRef } from '@/utils/geas'
-import YoutubeEmbed from '@/app/components/YoutubeEmbed'
+import CombatFootage from '@/app/components/CombatFootage'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import { Phase2Team, Phase1Boss } from '@/schemas/guild-raid.schema'
 
@@ -45,7 +45,7 @@ export default function TeamTabSelectorWithGeas({ teams, bosses }: TeamTabSelect
       )}
 
       {selectedTeam['geas-active'] && (
-        <div className="mt-4">
+        <div className="mt-4 mb-4">
           <p className="text-sm font-semibold text-sky-300 mb-1">Selected Geas:</p>
           <div className="flex flex-wrap gap-2">
             {/* Render bonus geas */}
@@ -95,10 +95,12 @@ export default function TeamTabSelectorWithGeas({ teams, bosses }: TeamTabSelect
       <RecommendedTeam team={selectedTeam.setup} note={selectedTeam.note} />
 
       {selectedTeam.video && (
-        <>
-          <h4 className="text-base font-semibold text-sky-200 mt-4 mb-1">Combat Footage</h4>
-          <YoutubeEmbed videoId={selectedTeam.video.id} title={selectedTeam.video.title} />
-        </>
+        <CombatFootage
+          videoId={selectedTeam.video.videoId}
+          title={selectedTeam.video.title}
+          author={selectedTeam.video.author}
+          date={selectedTeam.video.date}
+        />
       )}
 
     </div>

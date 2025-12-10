@@ -13,12 +13,12 @@ export default function HildeGuide() {
 
     return (
         <GuideTemplate
-            title="Hilde Strategy Guide"
-            introduction="Hilde is a complex boss who calls backup allies and resurrects fallen teammates. She inflicts irremovable taunt on the first ally to evade and gains full action gauge when hitting an undebuffed ally."
+            title="힐데 공략 가이드"
+            introduction="힐데는 지원 아군을 소환하고 쓰러진 아군을 부활시키는 복잡한 보스입니다. 처음으로 회피한 아군에게 해제 불가 도발을 부여하고, 디버프가 없는 아군을 공격하면 행동 게이지가 가득 찹니다."
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '가이드',
                     content: (
                         <>
                             <BossDisplay
@@ -40,8 +40,8 @@ export default function HildeGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Bring damage reduction character to survive heavy damage from bosses.",
-                                "Healers with healing on S1 can help if you end up getting {D/BT_AGGRO}."
+                                "보스의 높은 피해를 버티기 위해 피해 감소 캐릭터를 데려가세요.",
+                                "{D/BT_AGGRO}에 걸렸을 때 S1에 힐이 있는 힐러가 도움이 됩니다."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

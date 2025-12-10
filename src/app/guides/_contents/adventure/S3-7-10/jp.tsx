@@ -6,27 +6,27 @@ import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import { recommendedCharacters } from './recommendedCharacters'
 
-export default function NellaGuide() {
+export default function AbyssalCalamityApophisGuide() {
     return (
         <GuideTemplate
-            title="Nella Strategy Guide"
-            introduction="Nella is an extremely challenging boss that requires high penetration to damage. It applies irremovable debuff enhancement and sealed interruption effects, and executes the entire team during enrage every 30 actions."
+            title="深淵の災厄アポフィス攻略ガイド"
+            introduction="深淵の災厄アポフィスは壊滅的な毒と沈黙デバフを付与する危険なボスです。デバフを受けたターゲットに大量の固定ダメージと防御無視攻撃でペナルティを与えます。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: 'ガイド',
                     content: (
                         <>
                             <BossDisplay
-                                bossKey='Nella'
+                                bossKey='Abyssal Calamity Apophis'
                                 modeKey={['Story (Normal)', 'Story (Hard)']}
                                 defaultModeKey='Story (Hard)'
-                                defaultBossId='4500352'
+                                defaultBossId='4184001'
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Units with innate Penetration and Penetration-based builds are required.",
-                                "Also {B/BT_REMOVE_DEBUFF} will be needed to get rid of {D/BT_STAT|ST_PIERCE_POWER_RATE} right when the boss is on the verge of breaking."
+                                "{D/BT_DOT_POISON_IR}を防ぐために{B/BT_IMMUNE}と{B/BT_STAT|ST_BUFF_RESIST}を持っていきましょう。",
+                                "またはボスの{D/BT_COOL3_CHARGE}への弱点を利用してS3を使わせないようにしましょう。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

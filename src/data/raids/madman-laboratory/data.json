@@ -30,20 +30,20 @@
           },
           "recommended": [
             {
-              "name": "Rey",
-              "comment": "{C/Striker} dps {E/Earth}."
+              "names": "Rey",
+              "reason": "{C/Striker} dps {E/Earth}."
             },
             {
-              "name": "Noa",
-              "comment": "{C/Striker} dps {E/Earth}."
+              "names": "Noa",
+              "reason": "{C/Striker} dps {E/Earth}."
             },
             {
-              "name": "Delta",
-              "comment": "{C/Striker} dps {E/Earth}."
+              "names": "Delta",
+              "reason": "{C/Striker} dps {E/Earth}."
             },
             {
-              "name": "Rhona",
-              "comment": "{C/Striker} dps {E/Earth}."
+              "names": "Rhona",
+              "reason": "{C/Striker} dps {E/Earth}."
             }
           ],
           "team": [
@@ -95,12 +95,12 @@
           },
           "recommended": [
             {
-              "name": "Ryu Lion",
-              "comment": "{C/Ranger} dps {E/Earth}."
+              "names": "Ryu Lion",
+              "reason": "{C/Ranger} dps {E/Earth}."
             },
             {
-              "name": "Notia",
-              "comment": "{C/Ranger} sub-dps {E/Earth}."
+              "names": "Notia",
+              "reason": "{C/Ranger} sub-dps {E/Earth}."
             }
           ],
           "team": [
@@ -137,7 +137,7 @@
           "label": "Full Earth Team",
           "icon": "earth.webp",
           "video": {
-            "id": "rfWf4ytqWW8",
+            "videoId": "rfWf4ytqWW8",
             "title": "Outerplane - The Madman's Laboratory - 11.4M Points by Sevih"
           },
           "geas-active": {
@@ -192,7 +192,7 @@
           "label": "Mage team",
           "icon": "dark.webp",
           "video": {
-            "id": "Szgkhaza1jI",
+            "videoId": "Szgkhaza1jI",
             "title": "Maxell Guild Raid with Maxwell DPS by XITangoIX"
           },
           "geas-active": {

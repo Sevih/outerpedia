@@ -178,9 +178,39 @@ versions.forEach((versionKey) => {
             })
           }
 
-          // Recommended and team are now optional (data comes from boss files)
-          if (boss.recommended && (!Array.isArray(boss.recommended) || boss.recommended.length === 0)) {
-            logWarning(`    Boss ${idx + 1} has empty 'recommended' array`)
+          // Validate recommended format (new schema: {names, reason})
+          if (boss.recommended && Array.isArray(boss.recommended)) {
+            if (boss.recommended.length === 0) {
+              logWarning(`    Boss ${idx + 1} has empty 'recommended' array`)
+            } else {
+              boss.recommended.forEach((rec, recIdx) => {
+                // Check for old format
+                if ('name' in rec || 'comment' in rec) {
+                  logError(`    Boss ${idx + 1} recommended[${recIdx}] uses old format (name/comment). Run migration script.`)
+                  hasErrors = true
+                }
+                // Check for new format
+                if (!('names' in rec)) {
+                  logError(`    Boss ${idx + 1} recommended[${recIdx}] missing 'names' field`)
+                  hasErrors = true
+                }
+                if (!('reason' in rec)) {
+                  logError(`    Boss ${idx + 1} recommended[${recIdx}] missing 'reason' field`)
+                  hasErrors = true
+                }
+              })
+            }
+          }
+
+          // Validate video format (new schema: {videoId, title})
+          if (boss.video) {
+            if ('id' in boss.video && !('videoId' in boss.video)) {
+              logError(`    Boss ${idx + 1} video uses old format (id). Run migration script.`)
+              hasErrors = true
+            }
+            if (!boss.video.videoId && !boss.video.id) {
+              logWarning(`    Boss ${idx + 1} has empty video`)
+            }
           }
 
           if (boss.team && (!Array.isArray(boss.team) || boss.team.length === 0)) {
@@ -236,9 +266,19 @@ versions.forEach((versionKey) => {
       } else {
         logSuccess(`  Phase 2: ${teamKeys.length} team strategy(ies)`)
 
-        // Validate geas references (can be either "1-3B" format or numeric ID)
+        // Validate each team
         teamKeys.forEach((teamKey) => {
           const team = version.phase2.teams[teamKey]
+
+          // Validate video format (new schema: {videoId, title})
+          if (team.video) {
+            if ('id' in team.video && !('videoId' in team.video)) {
+              logError(`    Team '${teamKey}' video uses old format (id). Run migration script.`)
+              hasErrors = true
+            }
+          }
+
+          // Validate geas references (can be either "1-3B" format or numeric ID)
           if (team['geas-active']) {
             // Validate bonus array
             if (team['geas-active'].bonus) {

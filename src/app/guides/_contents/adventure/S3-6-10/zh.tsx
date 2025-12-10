@@ -6,27 +6,27 @@ import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import { recommendedCharacters } from './recommendedCharacters'
 
-export default function NellaGuide() {
+export default function AncientFoeGuide() {
     return (
         <GuideTemplate
-            title="Nella Strategy Guide"
-            introduction="Nella is an extremely challenging boss that requires high penetration to damage. It applies irremovable debuff enhancement and sealed interruption effects, and executes the entire team during enrage every 30 actions."
+            title="远古之敌攻略指南"
+            introduction="远古之敌是一个危险的Boss，会施加诅咒减益，并能无视免疫冻结HP低于70%的目标。每10次敌方行动进入狂暴阶段获得强力增益，并施加不可移除的诅咒中断效果。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
                             <BossDisplay
-                                bossKey='Nella'
+                                bossKey='Frozen Dragon of Phantasm Harshna'
                                 modeKey={['Story (Normal)', 'Story (Hard)']}
                                 defaultModeKey='Story (Hard)'
-                                defaultBossId='4500352'
+                                defaultBossId='4286026'
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Units with innate Penetration and Penetration-based builds are required.",
-                                "Also {B/BT_REMOVE_DEBUFF} will be needed to get rid of {D/BT_STAT|ST_PIERCE_POWER_RATE} right when the boss is on the verge of breaking."
+                                "带{D/BT_SEALED}来阻止Boss获得{B/BT_STAT|ST_BUFF_CHANCE}。",
+                                "带{B/BT_IMMUNE}和{B/BT_REMOVE_DEBUFF}来应对{D/BT_DOT_CURSE}和{D/BT_FREEZE}。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

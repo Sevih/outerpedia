@@ -13,12 +13,12 @@ export default function HildeGuide() {
 
     return (
         <GuideTemplate
-            title="Hilde Strategy Guide"
-            introduction="Hilde is a complex boss who calls backup allies and resurrects fallen teammates. She inflicts irremovable taunt on the first ally to evade and gains full action gauge when hitting an undebuffed ally."
+            title="希尔德攻略指南"
+            introduction="希尔德是一个复杂的Boss，会召唤援护队友并复活倒下的队友。她会对第一个闪避的队友施加不可移除的嘲讽，并在攻击没有减益的队友时获得满行动条。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
                             <BossDisplay
@@ -40,8 +40,8 @@ export default function HildeGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Bring damage reduction character to survive heavy damage from bosses.",
-                                "Healers with healing on S1 can help if you end up getting {D/BT_AGGRO}."
+                                "带伤害减免角色来承受Boss的高伤害。",
+                                "如果你被{D/BT_AGGRO}了，S1带治疗的奶妈会很有帮助。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

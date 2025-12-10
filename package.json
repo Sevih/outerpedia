@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "8.3.50",
+  "version": "8.3.51",
   "private": true,
   "scripts": {
     "dev": "node scripts/dev-with-webp.js",
@@ -34,8 +34,6 @@
     "boss:add-buff-debuff": "node scripts/add-buff-debuff.js",
     "boss:copy-buff-debuff": "python scripts/copy-buff-debuff.py",
     "raid:validate": "node scripts/raid/validate.js",
-    "raid:migrate": "node scripts/raid/migrate.js",
-    "raid:list": "node scripts/raid/list.js",
     "guide:check": "python scripts/check-guide-format.py"
   },
   "dependencies": {

@@ -45,7 +45,7 @@
       "type": "SKT_FIRST",
       "description": {
         "en": "Attacks an enemy and activates a <color=#28d9ed>Dual Attack</color> from two allies with the highest Attack.",
-        "kr": "적을 공격하고 가장 공격력이 높은 아군 2명의 <color=#28d9ed>협공</color>을 발생시킵니다.",
+        "kr": "적을 공격하고 가장 공격력이 높은 아군 1명의 <color=#28d9ed>협공</color>을 발생시킵니다.",
         "jp": "敵単体にダメージを与え、攻撃力が最も高い味方2体に<color=#28d9ed>連携</color>を発生させる。",
         "zh": "攻击敌人,并使攻击力最高的2名友军发动<color=#28d9ed>夹攻</color>。"
       },
@@ -101,18 +101,14 @@
       },
       "type": "SKT_MONSTER_1",
       "description": {
-        "en": "When alone at the start of the turn, <color=#28d9ed>Resurrects (Greater)</color> all slain allies, then attacks.\\nWhen the caster is hit, if at least one ally is not inflicted with a <color=#28d9ed>debuff</color>, increases <color=#28d9ed>Priority</color> of the caster by <color=#28d9ed>100%</color>.\\nWhen at least one ally successfully evades, ignores Immunity and inflicts <color=#28d9ed>Taunted</color> on all enemies for <color=#28d9ed>4 turn(s)</color>. (Irremovable, can only be activated once during the battle)",
-        "kr": "턴 시작 시 혼자라면 사망한 아군 전체를 <color=#28d9ed>부활(강화)</color> 시킨 후 공격합니다.\\n자신 피격 시 아군 중 한명이라도 <color=#28d9ed>약화 효과</color>가 적용되지 않는다면 자신의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>100%</color> 증가합니다.\\n\\n아군 중 한명이라도 회피 했을 때 면역을 무시하고 적 전체를 <color=#28d9ed>4턴</color> 동안 <color=#28d9ed>도발</color>합니다. (해제 불가, 전투 중 최초 1회만 발생)",
-        "jp": "ターン開始時、戦場に自分1体のみいる場合、倒れた味方全体を<color=#28d9ed>復活(強化)</color>させた後、ダメージを与える。\\n自分が攻撃を受けた時、味方に<color=#28d9ed>弱体効果</color>が付与されなかった場合、自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>100%</color>UPする。\\n味方が回避した時、免疫を無視し、敵全体を<color=#28d9ed>4ターン</color>の間<color=#28d9ed>挑発</color>する。(解除不可、戦闘中に1度のみ発動)",
-        "zh": "回合开始时,若只剩自身存活,则使死亡的全体友军<color=#28d9ed>复活(强化)</color>后攻击。\\n自身受到攻击时,若友军中至少有1人未附带<color=#28d9ed>弱化效果</color>,则使自身<color=#28d9ed>行动值</color>提升<color=#28d9ed>100%</color>。\\n若友军中至少有1名回避时,则无视免疫效果,并对全体敌人造成<color=#28d9ed>挑衅</color>效果,持续<color=#28d9ed>4回合</color>。(无法解除,战斗中仅首次触发1次)"
+        "en": "When the caster is hit, if at least one ally is not affected by a <color=#28d9ed>debuff</color>, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>40%</color>.",
+        "kr": "자신 피격 시 아군 중 한명이라도 <color=#28d9ed>약화 효과</color>가 적용되지 않는다면 자신의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>40%</color> 증가합니다.",
+        "jp": "自分が攻撃を受けた時、味方の中に<color=#28d9ed>弱体効果</color>が付与されていない者が1人でもいる場合、自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>40%</color>UPする。",
+        "zh": "自身受到攻击时,若我方至少有1名未附带<color=#28d9ed>弱化效果</color>的队友,则使自身的<color=#28d9ed>行动值</color>提升<color=#28d9ed>40%</color>。"
       },
       "icon": "MT_Passive_1_Dark",
       "buff": [
-        "BT_ACTION_GAUGE",
-        "BT_RESURRECTION"
-      ],
-      "debuff": [
-        "BT_AGGRO_IR"
+        "BT_ACTION_GAUGE"
       ]
     },
     {
@@ -124,16 +120,20 @@
       },
       "type": "SKT_RAGE_ENTER1",
       "description": {
-        "en": "Becomes <color=#28d9ed>Enraged</color> every 4 turns, and grants an irremovable effect to the caster that increases Attack and reduces damage taken for 3 turns.\\n\\n<color=#28d9ed>Enraged Ultimate Skill</color>: Deals heavy damage to all enemies, and grants increased <color=#28d9ed>Evasion</color> to all allies for <color=#28d9ed>3 turns</color>. (Irremovable)",
-        "kr": "4턴 마다 <color=#28d9ed>광폭화</color> 상태로 전환하고, 자신에게 해제되지 않는 공격력 증가/피해 감소 효과를 3턴 동안 부여합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체에게 큰 피해를 입히고 아군 전체의 <color=#28d9ed>회피</color>가 <color=#28d9ed>3턴</color> 동안 증가합니다. (해제 불가)",
-        "jp": "4ターンごとに<color=#28d9ed>【狂暴化】</color>状態に切り替わり、自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与する。\\n\\n<color=#28d9ed>【狂暴化】と【必殺スキル】</color>:敵全体に大ダメージを与え、味方全体の<color=#28d9ed>回避</color>を<color=#28d9ed>3ターン</color>の間UPさせる(解除不可)",
-        "zh": "每4回合转化为<color=#28d9ed>狂暴化</color>状态,并使自身获得无法解除的攻击力提升/伤害降低效果,持续3回合。\\n\\n<color=#28d9ed>陷入狂暴化和必杀技</color>:对全体敌人造成巨额伤害,对全体友军造成<color=#28d9ed>回避</color>效果,持续<color=#28d9ed>3回合</color>。"
+        "en": "Every 4 turns, the caster enters the <color=#28d9ed>Enraged</color> state and gains irremovable Attack Up, Critical Hit Chance Up, and Damage Taken Down effects for <color=#28d9ed>3</color> turns.\\n<color=#28d9ed>Enraged Activation & Ultimate Skill</color>:\\nRevives all fallen allies with <color=#28d9ed>Resurrect (Enhanced)</color>,\\nthen deals heavy damage to all enemies,\\nand has a <color=#28d9ed>100%</color> chance to inflict <color=#28d9ed>Taunt</color> on all enemies for <color=#28d9ed>1</color> turns.\\n(Ignores Effect Resistance)",
+        "kr": "4턴 마다 <color=#28d9ed>광폭화</color> 상태로 전환하고, 자신에게 해제되지 않는 공격력 증가/치명 확률 증가/피해 감소 효과를 <color=#28d9ed>3턴</color> 동안 부여합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 사망한 아군 전체를 <color=#28d9ed>부활(강화)</color> 시킨 후 적 전체에게 큰 피해를 입히고 적 전체를 <color=#28d9ed>100%</color> 확률로 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>도발</color>합니다.(효과 저항 무시)",
+        "jp": "4ターンごとに<color=#28d9ed>【狂暴化】</color>状態に切り替わり、\\n自分に解除不可の 攻撃力UP/会心率UP/受けるダメージDOWNを\\n<color=#28d9ed>3ターン</color>の間付与する。\\n\\n<color=#28d9ed>【狂暴化】発動と必殺スキル</color>:\\n倒れた味方全体を<color=#28d9ed>復活(強化)</color>させた後、敵全体にダメージを与え、 <color=#28d9ed>100%</color>の確率で<color=#28d9ed>1ターン</color>の間、敵全体を<color=#28d9ed>挑発</color>する。(効果抵抗無視)",
+        "zh": "每经过4回合进入<color=#28d9ed>狂暴化</color>状态,并获得不可解除的 攻击力提升/暴击率提升/受伤减少,持续 <color=#28d9ed>3</color> 回合。\\n\\n<color=#28d9ed>进入狂暴化与必杀技</color>:\\n使所有阵亡友军 <color=#28d9ed>复活(强化)</color>,随后对全体敌人造成巨额伤害,\\n并以 <color=#28d9ed>100%</color> 的概率在 <color=#28d9ed>1</color> 回合内对全体敌人施加 <color=#28d9ed>嘲讽</color>。(无视效果抵抗)"
       },
       "icon": "MT_Boss_Rage_Common_1",
       "buff": [
         "BT_DAMGE_TAKEN",
         "BT_STAT|ST_ATK_IR",
-        "BT_STAT|ST_AVOID_IR"
+        "BT_STAT|ST_CRITICAL_RATE_IR",
+        "BT_RESURRECTION"
+      ],
+      "debuff": [
+        "BT_AGGRO"
       ]
     }
   ]

@@ -33,28 +33,28 @@
           ],
           "recommended": [
             {
-              "name": "Astei",
-              "comment": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              "names": "Astei",
+              "reason": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
             },
             {
-              "name": "Dianne",
-              "comment": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              "names": "Dianne",
+              "reason": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
             },
             {
-              "name": "Maxwell",
-              "comment": "Standard {E/Dark} dps"
+              "names": "Maxwell",
+              "reason": "Standard {E/Dark} dps"
             },
             {
-              "name": "Demiurge Astei",
-              "comment": "Standard {E/Dark} dps"
+              "names": "Demiurge Astei",
+              "reason": "Standard {E/Dark} dps"
             },
             {
-              "name": "Aer",
-              "comment": "Standard {E/Fire} dps"
+              "names": "Aer",
+              "reason": "Standard {E/Fire} dps"
             },
             {
-              "name": "Bryn",
-              "comment": "Standard {E/Fire} dps"
+              "names": "Bryn",
+              "reason": "Standard {E/Fire} dps"
             }
           ],
           "team": [
@@ -79,7 +79,7 @@
             ]
           ],
           "video": {
-            "id": "-JAndQY3BUY",
+            "videoId": "-JAndQY3BUY",
             "title": "Planetary Control Unit - Geas Boss Self-Styled Automaton (Stage 5)"
           }
         },
@@ -112,16 +112,16 @@
           ],
           "recommended": [
             {
-              "name": "Monad Eva",
-              "comment": "{B/BT_CALL_BACKUP} and {B/BT_REMOVE_DEBUFF}"
+              "names": "Monad Eva",
+              "reason": "{B/BT_CALL_BACKUP} and {B/BT_REMOVE_DEBUFF}"
             },
             {
-              "name": "Dianne",
-              "comment": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              "names": "Dianne",
+              "reason": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
             },
             {
-              "name": "Luna",
-              "comment": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}"
+              "names": "Luna",
+              "reason": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}"
             }
           ],
           "team": [
@@ -142,14 +142,14 @@
             ]
           ],
           "video": {
-            "id": "cfA5D0NQc5Y",
+            "videoId": "cfA5D0NQc5Y",
             "title": "Planetary Control Unit - Geas Boss Astral Guardian (Stage 4)"
           }
         }
       ]
     },
     "phase2": {
-    "id": "440700079-B-1",
+      "id": "440700079-B-1",
       "overview": [
         ""
       ],
@@ -158,7 +158,7 @@
           "label": "Solo Ember",
           "icon": "fire.webp",
           "video": {
-            "id": "SI41l9SNeFo",
+            "videoId": "SI41l9SNeFo",
             "title": "Planetary Control Unit - Planetary Control Unit Epsilon Stage 18 - Ember Team"
           },
           "geas-active": {
@@ -166,7 +166,13 @@
               107
             ],
             "malus": [
-              5,81,105,57,86,20,58
+              5,
+              81,
+              105,
+              57,
+              86,
+              20,
+              58
             ]
           },
           "setup": [
@@ -180,15 +186,22 @@
           "label": "Burn",
           "icon": "SC_Buff_detonate.webp",
           "video": {
-            "id": "iN21r2W2Fu4",
+            "videoId": "iN21r2W2Fu4",
             "title": "Planetary Control Unit - Planetary Control Unit Epsilon Stage 19 - Burn Team"
           },
           "geas-active": {
             "bonus": [
-              107,85,50
+              107,
+              85,
+              50
             ],
             "malus": [
-              79,81,105,106,86,87
+              79,
+              81,
+              105,
+              106,
+              86,
+              87
             ]
           },
           "setup": [
