@@ -623,6 +623,7 @@ const jp = {
   'guides.categories.irregular-extermination.description': 'イレギュラー殲滅戦モードのボス攻略：ボスのパターン、推奨チーム、各ステージの効果的な戦略を紹介。',
   'guides.categories.monad-gate.title': 'モナド・ゲートガイド',
   'guides.categories.monad-gate.description': 'モナド・ゲートのステージ攻略：真エンディングに到達するためのルート選択と戦略を紹介。',
+  'guides.categories.monad-gate.depth6Note': '深度6〜10は深度1〜5と同じルートの繰り返しです。マップは広くなりますが、選択肢は同じです。最初のルート選択を見れば、どのガイドを参照すべきか判断できます。深度5以降の進行には真エンディングに到達する必要はありません。',
 
   "legal.meta.title": "法的情報 | Outerpedia",
   "legal.meta.desc": "Outerpediaの法的免責事項、著作権、コンテンツ使用情報。Outerplaneの非営利ファンプロジェクト。",

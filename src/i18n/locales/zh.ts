@@ -623,6 +623,7 @@ const zh = {
   'guides.categories.irregular-extermination.description': '异形怪歼灭战首领指南——了解每阶段首领的模式、推荐队伍和有效对策。',
   'guides.categories.monad-gate.title': '单子门指南',
   'guides.categories.monad-gate.description': '单子门指南：真结局的推荐路线、选项以及策略。',
+  'guides.categories.monad-gate.depth6Note': '深度6-10与深度1-5的路线相同。地图更大，但选择相同。根据遇到的第一个路线选择，可以判断应该参考哪个攻略。深度5之后的进度不需要达成真结局。',
 
   "legal.meta.title": "法律条款与声明 | Outerpedia",
   "legal.meta.desc": "关于Outerpedia——《异域战记》的非商业性质粉丝项目——的法律、声明、版权、内容使用信息。",

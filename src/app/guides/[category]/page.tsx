@@ -191,7 +191,7 @@ export default async function CategoryPage({ params }: { params: Promise<Props['
       {category === 'adventure' ? (
         <AdventureGuideGrid items={filtered} />
       ) : category === 'monad-gate' ? (
-        <MonadGateGuideGrid items={filtered} />
+        <MonadGateGuideGrid items={filtered} depth6Note={t('guides.categories.monad-gate.depth6Note')} />
       ) : category === 'skyward-tower' ? (
         <SkywardTowerGuideGrid items={filtered} />
       ) : category === 'adventure-license' ? (

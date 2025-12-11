@@ -623,6 +623,7 @@ const kr = {
   'guides.categories.irregular-extermination.description': '이레귤러 섬멸전 모드의 보스 공략: 보스 패턴, 추천 팀 구성, 각 스테이지별 효율적인 전략.',
   'guides.categories.monad-gate.title': '모나드 게이트 가이드',
   'guides.categories.monad-gate.description': '모나드 게이트 스테이지 공략: 진 엔딩에 도달하기 위한 경로 선택과 전략을 안내합니다.',
+  'guides.categories.monad-gate.depth6Note': '깊이 6-10은 깊이 1-5와 동일한 경로의 반복입니다. 맵은 더 크지만 선택지는 동일합니다. 첫 번째 경로 선택을 보면 어떤 가이드를 참조해야 하는지 알 수 있습니다. 깊이 5 이후 진행에는 진 엔딩에 도달할 필요가 없습니다.',
 
   "legal.meta.title": "법적 고지 | Outerpedia",
   "legal.meta.desc": "Outerpedia의 법적 면책 조항, 저작권 및 콘텐츠 사용 정보. Outerplane 비영리 팬 프로젝트.",

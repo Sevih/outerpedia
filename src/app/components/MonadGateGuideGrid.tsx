@@ -13,9 +13,10 @@ type GuideItem = {
 
 type Props = {
   items: GuideItem[];
+  depth6Note?: string;
 };
 
-export default function MonadGateGuideGrid({ items }: Props) {
+export default function MonadGateGuideGrid({ items, depth6Note }: Props) {
   const groupedByDepth = items.reduce<Record<string, GuideItem[]>>((acc, item) => {
     const match = item.slug.match(/^depth(\d+)/i);
     const depth = match ? `Depth ${match[1]}` : 'Other';
@@ -32,6 +33,11 @@ export default function MonadGateGuideGrid({ items }: Props) {
 
   return (
     <div className="space-y-12">
+      {depth6Note && (
+        <div className="bg-zinc-800/50 border border-zinc-700 rounded-xl p-4 text-sm text-neutral-300">
+          <span className="font-semibold text-yellow-500">Note:</span> {depth6Note}
+        </div>
+      )}
       {sortedDepths.map((depth) => (
         <div key={depth}>
           <h3 className="text-xl font-bold text-white mb-4">{depth}</h3>

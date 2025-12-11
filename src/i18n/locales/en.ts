@@ -623,6 +623,7 @@ const en = {
   'guides.categories.irregular-extermination.description': 'Boss guides for the Irregular Extermination Project mode: learn boss patterns, recommended teams, and effective strategies for each stage.',
   'guides.categories.monad-gate.title': 'Monad Gate Guides',
   'guides.categories.monad-gate.description': 'Stage guides for Monad Gate: recommended paths, choices, and strategies to reach the true ending of the mode.',
+  'guides.categories.monad-gate.depth6Note': 'Depths 6-10 repeat the same paths as Depths 1-5. The map is larger but choices remain identical. You can identify which guide to follow based on the first path choice you encounter. You don\'t need to reach the true ending to progress past Depth 5.',
 
   "legal.meta.title": "Legal Notice & Disclaimer | Outerpedia",
   "legal.meta.desc": "Legal disclaimer, copyright, and content usage information for Outerpedia, a non-commercial fan project dedicated to Outerplane.",
