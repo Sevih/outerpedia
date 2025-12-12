@@ -1841,5 +1841,62 @@
     "second_image": "CM_Adventure_MonadGate",
     "last_updated": "2025-12-09",
     "author": "Sevih"
+  },
+  "depth4-route1": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 4 : route 1",
+      "jp": "深度4 : ルート1",
+      "kr": "깊이 4 : 루트 1",
+      "zh": "深度4：路线1"
+    },
+    "description": {
+      "en": "Map of Depth 4 : route 1 and true ending path",
+      "jp": "深度4：ルート1とトゥルーエンディングへの道",
+      "kr": "깊이 4: 루트 1 및 트루 엔딩 경로",
+      "zh": "深度4地图：路线1和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-12",
+    "author": "Sevih"
+  },
+  "depth4-route2": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 4 : route 2",
+      "jp": "深度4 : ルート2",
+      "kr": "깊이 4 : 루트 2",
+      "zh": "深度4：路线2"
+    },
+    "description": {
+      "en": "Map of Depth 4 : route 2 and true ending path",
+      "jp": "深度4：ルート2とトゥルーエンディングへの道",
+      "kr": "깊이 4: 루트 2 및 트루 엔딩 경로",
+      "zh": "深度4地图：路线2和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-12",
+    "author": "Sevih"
+  },
+  "depth5-route1": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 5 : route 1",
+      "jp": "深度5 : ルート1",
+      "kr": "깊이 5 : 루트 1",
+      "zh": "深度5：路线1"
+    },
+    "description": {
+      "en": "Map of Depth 5 : route 1 and true ending path",
+      "jp": "深度5：ルート1とトゥルーエンディングへの道",
+      "kr": "깊이 5: 루트 1 및 트루 엔딩 경로",
+      "zh": "深度5地图：路线1和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-12",
+    "author": "Sevih"
   }
 }
