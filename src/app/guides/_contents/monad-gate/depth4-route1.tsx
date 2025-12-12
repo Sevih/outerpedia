@@ -9,7 +9,7 @@ const Depth4Route1 = () => (
       <h3 className="text-lg font-semibold mb-3">Rewards</h3>
       <div className="flex items-center gap-2">
         <ItemInlineDisplay names="Fusion-Type Core" size={32} />
-        <span className="text-zinc-400">x75</span>
+        <span className="text-zinc-400">x90</span>
       </div>
     </div>
     <MonadGateMap

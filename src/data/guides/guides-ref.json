@@ -1480,25 +1480,6 @@
     "author": "Sevih / Shiraen",
     "weight": 550
   },
-  "depth8-route1": {
-    "category": "monad-gate",
-    "title": {
-      "en": "Depth 8 : route 1",
-      "jp": "深度8 : ルート1",
-      "kr": "깊이 8 : 루트 1",
-      "zh": "深度8：路线1"
-    },
-    "description": {
-      "en": "Map of Depth 8 : route 1 and true ending path",
-      "jp": "深度8：ルート1とトゥルーエンディングへの道",
-      "kr": "깊이 8: 루트 1 및 트루 엔딩 경로",
-      "zh": "深度8地图：路线1和真结局路径"
-    },
-    "icon": "CM_Adventure_MonadGate",
-    "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-06-30",
-    "author": "Sevih"
-  },
   "depth1-route1": {
     "category": "monad-gate",
     "title": {
@@ -1517,63 +1498,6 @@
     "second_image": "CM_Adventure_MonadGate",
     "last_updated": "2025-12-03",
     "author": "Sevih"
-  },
-  "depth8-route2": {
-    "category": "monad-gate",
-    "title": {
-      "en": "Depth 8 : route 2",
-      "jp": "深度8 : ルート2",
-      "kr": "깊이 8 : 루트 2",
-      "zh": "深度8：路线2"
-    },
-    "description": {
-      "en": "Map of Depth 8 : route 2 and true ending path",
-      "jp": "深度8：ルート2とトゥルーエンディングへの道",
-      "kr": "깊이 8: 루트 2 및 트루 엔딩 경로",
-      "zh": "深度8地图：路线2和真结局路径"
-    },
-    "icon": "CM_Adventure_MonadGate",
-    "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-06-30",
-    "author": "Sevih"
-  },
-  "depth10-route1": {
-    "category": "monad-gate",
-    "title": {
-      "en": "Depth 10 : route 1",
-      "jp": "深度10 : ルート1",
-      "kr": "깊이 10 : 루트 1",
-      "zh": "深度10：路线1"
-    },
-    "description": {
-      "en": "Map of Depth 10 : route 1 and true ending path",
-      "jp": "深度10：ルート1とトゥルーエンディングへの道",
-      "kr": "깊이 10: 루트 1 및 트루 엔딩 경로",
-      "zh": "深度10地图：路线1和真结局路径"
-    },
-    "icon": "CM_Adventure_MonadGate",
-    "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-09-05",
-    "author": "XuRenChao"
-  },
-  "depth10-route2": {
-    "category": "monad-gate",
-    "title": {
-      "en": "Depth 10 : route 2",
-      "jp": "深度10 : ルート2",
-      "kr": "깊이 10 : 루트 2",
-      "zh": "深度10：路线2"
-    },
-    "description": {
-      "en": "Map of Depth 10 : route 2 and true ending path",
-      "jp": "深度10：ルート2とトゥルーエンディングへの道",
-      "kr": "깊이 10: 루트 2 및 트루 엔딩 경로",
-      "zh": "深度10地图：路线2和真结局路径"
-    },
-    "icon": "CM_Adventure_MonadGate",
-    "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-09-05",
-    "author": "XuRenChao"
   },
   "normal": {
     "category": "skyward-tower",
@@ -1804,25 +1728,6 @@
     "last_updated": "2025-12-04",
     "author": "Sevih"
   },
-  "depth9-route1": {
-    "category": "monad-gate",
-    "title": {
-      "en": "Depth 9 : route 1",
-      "jp": "深度9 : ルート1",
-      "kr": "깊이 9 : 루트 1",
-      "zh": "深度9：路线1"
-    },
-    "description": {
-      "en": "Map of Depth 9 : route 1 and true ending path",
-      "jp": "深度9：ルート1とトゥルーエンディングへの道",
-      "kr": "깊이 9: 루트 1 및 트루 엔딩 경로",
-      "zh": "深度9地图：路线1和真结局路径"
-    },
-    "icon": "CM_Adventure_MonadGate",
-    "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-08",
-    "author": "Sevih"
-  },
   "depth3-route1": {
     "category": "monad-gate",
     "title": {
@@ -1893,6 +1798,101 @@
       "jp": "深度5：ルート1とトゥルーエンディングへの道",
       "kr": "깊이 5: 루트 1 및 트루 엔딩 경로",
       "zh": "深度5地图：路线1和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-12",
+    "author": "Sevih"
+  },
+  "depth6-route1": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 6 : route 1",
+      "jp": "深度6 : ルート1",
+      "kr": "깊이 6 : 루트 1",
+      "zh": "深度6：路线1"
+    },
+    "description": {
+      "en": "Map of Depth 6 : route 1 and true ending path",
+      "jp": "深度6：ルート1とトゥルーエンディングへの道",
+      "kr": "깊이 6: 루트 1 및 트루 엔딩 경로",
+      "zh": "深度6地图：路线1和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-12",
+    "author": "Sevih"
+  },
+  "depth6-route2": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 6 : route 2",
+      "jp": "深度6 : ルート2",
+      "kr": "깊이 6 : 루트 2",
+      "zh": "深度6：路线2"
+    },
+    "description": {
+      "en": "Map of Depth 6 : route 2 and true ending path",
+      "jp": "深度6：ルート2とトゥルーエンディングへの道",
+      "kr": "깊이 6: 루트 2 및 트루 엔딩 경로",
+      "zh": "深度6地图：路线2和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-12",
+    "author": "Sevih"
+  },
+  "depth6-route3": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 6 : route 3",
+      "jp": "深度6 : ルート3",
+      "kr": "깊이 6 : 루트 3",
+      "zh": "深度6：路线3"
+    },
+    "description": {
+      "en": "Map of Depth 6 : route 3 and true ending path",
+      "jp": "深度6：ルート3とトゥルーエンディングへの道",
+      "kr": "깊이 6: 루트 3 및 트루 엔딩 경로",
+      "zh": "深度6地图：路线3和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-12",
+    "author": "Sevih"
+  },
+  "depth6-route4": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 6 : route 4",
+      "jp": "深度6 : ルート4",
+      "kr": "깊이 6 : 루트 4",
+      "zh": "深度6：路线4"
+    },
+    "description": {
+      "en": "Map of Depth 6 : route 4 and true ending path",
+      "jp": "深度6：ルート4とトゥルーエンディングへの道",
+      "kr": "깊이 6: 루트 4 및 트루 엔딩 경로",
+      "zh": "深度6地图：路线4和真结局路径"
+    },
+    "icon": "CM_Adventure_MonadGate",
+    "second_image": "CM_Adventure_MonadGate",
+    "last_updated": "2025-12-12",
+    "author": "Sevih"
+  },
+  "depth6-route5": {
+    "category": "monad-gate",
+    "title": {
+      "en": "Depth 6 : route 5",
+      "jp": "深度6 : ルート5",
+      "kr": "깊이 6 : 루트 5",
+      "zh": "深度6：路线5"
+    },
+    "description": {
+      "en": "Map of Depth 6 : route 5 and true ending path",
+      "jp": "深度6：ルート5とトゥルーエンディングへの道",
+      "kr": "깊이 6: 루트 5 및 트루 엔딩 경로",
+      "zh": "深度6地图：路线5和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",

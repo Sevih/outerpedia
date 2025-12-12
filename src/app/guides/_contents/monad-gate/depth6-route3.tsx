@@ -1,9 +1,9 @@
-import { nodes, edges, routeTitle } from "@/data/monad/depth9-route1";
+import { nodes, edges, routeTitle } from "@/data/monad/depth6-route3";
 import { nodeTypes } from "@/lib/monad/nodeTypes";
 import MonadGateMap from "@/app/components/guides/MonadGateMap";
 import ItemInlineDisplay from "@/app/components/ItemInline";
 
-const Depth9Route1 = () => (
+const Depth6Route3 = () => (
   <div className="space-y-4">
     <div className="mt-6">
       <h3 className="text-lg font-semibold mb-3">Rewards</h3>
@@ -21,4 +21,4 @@ const Depth9Route1 = () => (
   </div>
 );
 
-export default Depth9Route1;
+export default Depth6Route3;
