@@ -929,6 +929,34 @@
           "No Light"
         ],
         "note": []
+      },
+      "team5": {
+        "label": "1 Water",
+        "icon": "water.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Viella"
+          ],
+          [
+            "Demiurge Astei",
+            "Tamamo-no-Mae",
+            "Demiurge Luna"
+          ],
+          [
+            "Caren",
+             "Maxwell"
+          ],
+          [
+            "Tamara",
+            "Fran",
+            "Valentine"
+          ]
+        ],
+        "conditions": [
+          "1 Water"
+        ],
+        "note": []
       }
     }
   },
@@ -1043,6 +1071,30 @@
         ],
         "conditions": [
           "1 Striker"
+        ],
+        "note": []
+      },
+      "team5": {
+        "label": "1 x 2★",
+        "icon": "CM_icon_star_y.webp",
+        "setup": [
+          [
+            "Tio"
+          ],
+          [
+            "Demiurge Luna",
+            "Regina"
+          ],
+          [
+            "Drakhan"
+          ],
+          [
+            "Caren",
+            "Poolside Trickster Regina"
+          ]
+        ],
+        "conditions": [
+          "1 x 2★"
         ],
         "note": []
       }
