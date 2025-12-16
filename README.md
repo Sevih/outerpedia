@@ -17,7 +17,7 @@
 - **Chinese (Simplified)**: [zh.outerpedia.com](https://zh.outerpedia.com)
 
 **Community:** [Join the EvaMains Discord](https://discord.com/invite/keGhVQWsHv)
-**Current version:** `v6.5.3`
+**Current version:** `8.4.6 : M.Ame release`
 
 ---
 
