@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-12-16",
+    title: {
+      en: "New Limited Hero: Mystic Sage Ame",
+      jp: "新限定ヒーロー：三蔵法師 あめ",
+      kr: "새로운 한정 영웅: 삼장법사 아메",
+      zh: "新限定英雄：三藏法师 亚美",
+    } as LString,
+    type: "update",
+    url: "/characters/mystic-sage-ame",
+    content: [
+      {
+        en: "Mystic Sage Ame, who deals Fixed Damage and applies Debuffs to enemies while increasing the Priority of herself and her allies.",
+        jp: "固定ダメージを与え、敵にデバフを付与しながら、自身と味方の優先度を上昇させる三蔵法師 あめが参戦します。",
+        kr: "고정 피해를 입히고 적에게 디버프를 부여하면서 자신과 아군의 우선권을 증가시키는 삼장법사 아메가 참전합니다.",
+        zh: "三藏法师 亚美造成固定伤害并对敌人施加减益效果，同时提高自身和队友的优先度。",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-12-02",
     title: {
       en: "Ragnakeus",
