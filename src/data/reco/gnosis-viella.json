@@ -2,7 +2,7 @@
   "PvE - Pen": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "HP%"
       },
       {
@@ -42,7 +42,7 @@
   "Pve - Life": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "HP%"
       },
       {
@@ -82,7 +82,7 @@
   "PvE - Pen / Life": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "HP%"
       },
       {
@@ -123,7 +123,7 @@
   "PvP - Pen/Swift": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "HP%"
       },
       {
@@ -162,7 +162,7 @@
   "PvP - Life/Swift": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "HP%"
       },
       {
@@ -201,7 +201,7 @@
   "PvP - Speed/Swift": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "HP%"
       },
       {

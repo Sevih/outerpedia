@@ -2,7 +2,7 @@
   "Speed": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "ATK%"
       }
     ],
@@ -32,7 +32,7 @@
   },"Penetration": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "ATK%"
       }
     ],
@@ -63,7 +63,7 @@
   "Critical Strike": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "ATK%"
       }
     ],

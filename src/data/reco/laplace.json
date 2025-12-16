@@ -2,7 +2,7 @@
   "Speed": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       }
     ],
@@ -32,7 +32,7 @@
   "CritDmg": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       }
     ],
@@ -62,7 +62,7 @@
   "Pene": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       }
     ],

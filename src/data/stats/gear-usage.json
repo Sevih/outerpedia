@@ -3,7 +3,7 @@
     "name": "Speed Set",
     "type": "Set",
     "class": null,
-    "count": 67,
+    "count": 68,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -17,6 +17,7 @@
       "Caren",
       "Charlotte",
       "Christina",
+      "Core Fusion Veronica",
       "Dahlia",
       "Demiurge Astei",
       "Demiurge Delta",
@@ -75,6 +76,40 @@
     ]
   },
   {
+    "name": "Swiftness Set",
+    "type": "Set",
+    "class": null,
+    "count": 26,
+    "characters": [
+      "Astei",
+      "Christina",
+      "Core Fusion Veronica",
+      "Delta",
+      "Demiurge Delta",
+      "Demiurge Drakhan",
+      "Dianne",
+      "Ember",
+      "Gnosis Dahlia",
+      "Gnosis Viella",
+      "Hilde",
+      "Iota",
+      "Kanon",
+      "Kappa",
+      "Leo",
+      "Liselotte",
+      "Mene",
+      "Monad Eva",
+      "Nella",
+      "Omega Nadja",
+      "Rhona",
+      "Saeran",
+      "Sterope",
+      "Summer Knight's Dream Ember",
+      "Veronica",
+      "Viella"
+    ]
+  },
+  {
     "name": "Immunity Set",
     "type": "Set",
     "class": null,
@@ -104,39 +139,6 @@
       "Saeran",
       "Sterope",
       "Summer Knight's Dream Ember",
-      "Viella"
-    ]
-  },
-  {
-    "name": "Swiftness Set",
-    "type": "Set",
-    "class": null,
-    "count": 25,
-    "characters": [
-      "Astei",
-      "Christina",
-      "Delta",
-      "Demiurge Delta",
-      "Demiurge Drakhan",
-      "Dianne",
-      "Ember",
-      "Gnosis Dahlia",
-      "Gnosis Viella",
-      "Hilde",
-      "Iota",
-      "Kanon",
-      "Kappa",
-      "Leo",
-      "Liselotte",
-      "Mene",
-      "Monad Eva",
-      "Nella",
-      "Omega Nadja",
-      "Rhona",
-      "Saeran",
-      "Sterope",
-      "Summer Knight's Dream Ember",
-      "Veronica",
       "Viella"
     ]
   },
@@ -225,10 +227,11 @@
     "name": "Counterattack Set",
     "type": "Set",
     "class": null,
-    "count": 14,
+    "count": 15,
     "characters": [
       "Astei",
       "Christina",
+      "Core Fusion Veronica",
       "Demiurge Stella",
       "Drakhan",
       "Ember",
@@ -266,7 +269,7 @@
     ]
   },
   {
-    "name": "Thumping Knuckle Dusters",
+    "name": "Thumping Odyssey",
     "type": "Weapon",
     "class": "Mage",
     "count": 14,
@@ -288,7 +291,7 @@
     ]
   },
   {
-    "name": "Surefire Javelin",
+    "name": "Surefire Greatsword",
     "type": "Weapon",
     "class": "Striker",
     "count": 13,
@@ -367,6 +370,24 @@
     ]
   },
   {
+    "name": "Coward's Treasure",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 10,
+    "characters": [
+      "Core Fusion Veronica",
+      "Demiurge Drakhan",
+      "Ember",
+      "Hilde",
+      "Kappa",
+      "Luna",
+      "Omega Nadja",
+      "Sterope",
+      "Summer Knight's Dream Ember",
+      "Veronica"
+    ]
+  },
+  {
     "name": "Dies Irae",
     "type": "Amulet",
     "class": "Mage",
@@ -421,23 +442,6 @@
     ]
   },
   {
-    "name": "Coward's Treasure",
-    "type": "Amulet",
-    "class": "Defender",
-    "count": 9,
-    "characters": [
-      "Demiurge Drakhan",
-      "Ember",
-      "Hilde",
-      "Kappa",
-      "Luna",
-      "Omega Nadja",
-      "Sterope",
-      "Summer Knight's Dream Ember",
-      "Veronica"
-    ]
-  },
-  {
     "name": "Noblewoman's Guile",
     "type": "Weapon",
     "class": "Mage",
@@ -488,6 +492,22 @@
     ]
   },
   {
+    "name": "Blue-Gems White Ring",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 8,
+    "characters": [
+      "Christina",
+      "Core Fusion Veronica",
+      "Demiurge Drakhan",
+      "Ember",
+      "Leo",
+      "Luna",
+      "Sterope",
+      "Veronica"
+    ]
+  },
+  {
     "name": "Life Set",
     "type": "Set",
     "class": null,
@@ -504,17 +524,18 @@
     ]
   },
   {
-    "name": "Blue-Gems White Ring",
-    "type": "Amulet",
+    "name": "Talisman of Animosities",
+    "type": "Weapon",
     "class": "Defender",
-    "count": 7,
+    "count": 8,
     "characters": [
-      "Christina",
+      "Core Fusion Veronica",
       "Demiurge Drakhan",
       "Ember",
       "Leo",
       "Luna",
       "Sterope",
+      "Summer Knight's Dream Ember",
       "Veronica"
     ]
   },
@@ -546,21 +567,6 @@
       "Idith",
       "Mero",
       "Vlada"
-    ]
-  },
-  {
-    "name": "Talisman of Animosities",
-    "type": "Weapon",
-    "class": "Defender",
-    "count": 7,
-    "characters": [
-      "Demiurge Drakhan",
-      "Ember",
-      "Leo",
-      "Luna",
-      "Sterope",
-      "Summer Knight's Dream Ember",
-      "Veronica"
     ]
   },
   {
@@ -631,6 +637,19 @@
     ]
   },
   {
+    "name": "Unholy Exsultet",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 5,
+    "characters": [
+      "Christina",
+      "Core Fusion Veronica",
+      "Kappa",
+      "Leo",
+      "Luna"
+    ]
+  },
+  {
     "name": "A Prima Vista",
     "type": "Amulet",
     "class": "Striker",
@@ -667,18 +686,6 @@
     ]
   },
   {
-    "name": "Unholy Exsultet",
-    "type": "Amulet",
-    "class": "Defender",
-    "count": 4,
-    "characters": [
-      "Christina",
-      "Kappa",
-      "Leo",
-      "Luna"
-    ]
-  },
-  {
     "name": "Briareos's Ambition [Ranger]",
     "type": "Amulet",
     "class": "Ranger",
@@ -712,7 +719,7 @@
     ]
   },
   {
-    "name": "Fire Fists",
+    "name": "Fire Grimoire",
     "type": "Weapon",
     "class": "Mage",
     "count": 3,
@@ -798,6 +805,16 @@
     ]
   },
   {
+    "name": "Briareos's Recklessness [Defender]",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 2,
+    "characters": [
+      "Core Fusion Veronica",
+      "Ember"
+    ]
+  },
+  {
     "name": "Briareos's Recklessness [Ranger]",
     "type": "Weapon",
     "class": "Ranger",
@@ -834,6 +851,26 @@
     "count": 2,
     "characters": [
       "Omega Nadja",
+      "Summer Knight's Dream Ember"
+    ]
+  },
+  {
+    "name": "Gorgon's Vanity [Defender]",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 2,
+    "characters": [
+      "Core Fusion Veronica",
+      "Ember"
+    ]
+  },
+  {
+    "name": "Gorgon's Wrath [Defender]",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 2,
+    "characters": [
+      "Core Fusion Veronica",
       "Summer Knight's Dream Ember"
     ]
   },
@@ -895,15 +932,6 @@
     ]
   },
   {
-    "name": "Briareos's Recklessness [Defender]",
-    "type": "Weapon",
-    "class": "Defender",
-    "count": 1,
-    "characters": [
-      "Ember"
-    ]
-  },
-  {
     "name": "Briareos's Recklessness [Healer]",
     "type": "Weapon",
     "class": "Healer",
@@ -949,15 +977,6 @@
     ]
   },
   {
-    "name": "Gorgon's Vanity [Defender]",
-    "type": "Amulet",
-    "class": "Defender",
-    "count": 1,
-    "characters": [
-      "Ember"
-    ]
-  },
-  {
     "name": "Gorgon's Vanity [Mage]",
     "type": "Amulet",
     "class": "Mage",
@@ -973,15 +992,6 @@
     "count": 1,
     "characters": [
       "Vlada"
-    ]
-  },
-  {
-    "name": "Gorgon's Wrath [Defender]",
-    "type": "Weapon",
-    "class": "Defender",
-    "count": 1,
-    "characters": [
-      "Summer Knight's Dream Ember"
     ]
   },
   {
@@ -1080,6 +1090,13 @@
     "characters": []
   },
   {
+    "name": "Agile Frost Sword",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
     "name": "Ambush",
     "type": "Weapon",
     "class": "Ranger",
@@ -1164,6 +1181,13 @@
     "characters": []
   },
   {
+    "name": "Fierce Frost Sword",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
     "name": "Fierce Soloist",
     "type": "Weapon",
     "class": "Ranger",
@@ -1171,9 +1195,23 @@
     "characters": []
   },
   {
+    "name": "Film Industry Unfair Contract",
+    "type": "Weapon",
+    "class": "Mage",
+    "count": 0,
+    "characters": []
+  },
+  {
     "name": "Flashy Golden Cards",
     "type": "Amulet",
     "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Gentle Frost Sword",
+    "type": "Weapon",
+    "class": "Healer",
     "count": 0,
     "characters": []
   },

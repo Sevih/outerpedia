@@ -3,7 +3,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -30,7 +30,7 @@
     "High Crit": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -57,7 +57,7 @@
     "Penetration": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -86,7 +86,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -120,7 +120,7 @@
     "High Crit": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -154,7 +154,7 @@
     "Penetration": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -188,7 +188,7 @@
     "Revenge Ais": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -313,7 +313,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -340,7 +340,7 @@
     "High Crit": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -367,7 +367,7 @@
     "Penetration": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -519,13 +519,13 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -573,13 +573,13 @@
     "Attack": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -627,13 +627,13 @@
     "Augm Attack": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -684,7 +684,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -718,7 +718,7 @@
     "High Crit": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -752,7 +752,7 @@
     "Penetration": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -788,7 +788,7 @@
     "High Crit": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -827,7 +827,7 @@
     "PvP": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -867,7 +867,7 @@
     "Penetration": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -906,7 +906,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -1262,6 +1262,129 @@
       ]
     }
   },
+  "core-fusion-veronica": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Defender]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Defender]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Gorgon's Vanity [Defender]",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "CHC",
+        "CHD",
+        "ACC",
+        "DEF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Counter": {
+      "weaponSub": [
+        {
+          "name": "Talisman of Animosities",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Defender]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Defender]",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "PEN%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Blue-Gems White Ring",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Gorgon's Vanity [Defender]",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "CHC",
+        "CHD",
+        "ACC",
+        "DEF"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Counterattack"
+      ]
+    }
+  },
   "dahlia": {
     "Speed damage": {
       "weaponSub": [
@@ -1320,7 +1443,7 @@
     "Life Swift": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "HP%"
           ]
@@ -1361,7 +1484,7 @@
     "Life Augment": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "HP%"
           ]
@@ -1402,7 +1525,7 @@
     "Swift Augment": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "HP%"
           ]
@@ -1445,7 +1568,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -1472,7 +1595,7 @@
     "High Crit": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -1499,7 +1622,7 @@
     "Penetration": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -1781,7 +1904,7 @@
     "Penetration": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -1793,7 +1916,7 @@
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -1833,7 +1956,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -1845,7 +1968,7 @@
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -1885,7 +2008,7 @@
     "Critical Strike": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -1897,7 +2020,7 @@
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -1937,7 +2060,7 @@
     "Pen mix": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -1949,7 +2072,7 @@
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -2182,7 +2305,7 @@
     "Counter": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -2216,7 +2339,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -2797,7 +2920,7 @@
           ]
         },
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -2919,7 +3042,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -2952,7 +3075,7 @@
     "Penetration": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -2985,7 +3108,7 @@
     "Critical Strike": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -3252,7 +3375,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "HP%"
           ]
@@ -3285,7 +3408,7 @@
     "Speed Immune": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "HP%"
           ]
@@ -3321,7 +3444,7 @@
     "PvE - Pen": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "HP%"
           ]
@@ -3370,7 +3493,7 @@
     "Pve - Life": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "HP%"
           ]
@@ -3419,7 +3542,7 @@
     "PvE - Pen / Life": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "HP%"
           ]
@@ -3469,7 +3592,7 @@
     "PvP - Pen/Swift": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "HP%"
           ]
@@ -3519,7 +3642,7 @@
     "PvP - Life/Swift": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "HP%"
           ]
@@ -3569,7 +3692,7 @@
     "PvP - Speed/Swift": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "HP%"
           ]
@@ -3822,7 +3945,7 @@
           ]
         },
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -3856,7 +3979,7 @@
           ]
         },
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -3890,7 +4013,7 @@
           ]
         },
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -4197,7 +4320,7 @@
           ]
         },
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%",
             "HP%"
@@ -4226,7 +4349,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -4259,7 +4382,7 @@
     "CritDmg": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -4292,7 +4415,7 @@
     "Pene": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -4778,7 +4901,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -4805,7 +4928,7 @@
     "CritDmg": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -4832,7 +4955,7 @@
     "Pene": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -5215,7 +5338,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -5248,7 +5371,7 @@
     "CritDmg": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -5281,7 +5404,7 @@
     "Pene": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -5659,7 +5782,7 @@
           ]
         },
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -5692,7 +5815,7 @@
           ]
         },
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -5725,7 +5848,7 @@
           ]
         },
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -5754,7 +5877,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -5766,7 +5889,7 @@
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -5794,7 +5917,7 @@
     "CritDmg": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -5806,7 +5929,7 @@
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -5834,7 +5957,7 @@
     "Pene": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -5846,7 +5969,7 @@
           ]
         },
         {
-          "name": "Fire Fists",
+          "name": "Fire Grimoire",
           "mainStat": [
             "ATK%"
           ]
@@ -5876,7 +5999,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -5909,7 +6032,7 @@
     "CritDmg": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -5942,7 +6065,7 @@
     "Pene": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -5977,7 +6100,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -6009,7 +6132,7 @@
     "Counter": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -6041,7 +6164,7 @@
     "Scaling": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -6159,7 +6282,7 @@
     "Aug Immu": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -6187,7 +6310,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -6214,7 +6337,7 @@
     "CritDmg": {
       "weaponSub": [
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "ATK%"
           ]
@@ -6444,7 +6567,7 @@
     "Speed": {
       "weaponSub": [
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -6961,7 +7084,7 @@
           ]
         },
         {
-          "name": "Thumping Knuckle Dusters",
+          "name": "Thumping Odyssey",
           "mainStat": [
             "HP%"
           ]
@@ -7220,7 +7343,7 @@
           ]
         },
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -7278,7 +7401,7 @@
           ]
         },
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]
@@ -7336,7 +7459,7 @@
           ]
         },
         {
-          "name": "Surefire Javelin",
+          "name": "Surefire Greatsword",
           "mainStat": [
             "ATK%"
           ]

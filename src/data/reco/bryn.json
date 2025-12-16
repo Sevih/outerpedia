@@ -2,7 +2,7 @@
   "High Crit": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -36,7 +36,7 @@
   "PvP": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -71,7 +71,7 @@
   "Penetration": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -104,7 +104,7 @@
   },"Speed": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {

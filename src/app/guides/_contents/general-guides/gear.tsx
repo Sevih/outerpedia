@@ -347,10 +347,10 @@ export default function BeginnerGuide() {
       </p>
       <p>Example comparisons:</p>
       <div className="flex flex-wrap justify-center gap-8">
-        {/* Column: Surefire Javelin */}
+        {/* Column: Surefire Greatsword */}
         <div className="flex flex-col items-center gap-4 min-w-[280px]">
           <div className="flex flex-col items-center">
-            Surefire Javelin
+            Surefire Greatsword
             <EquipmentCardInline data={{
               type: 'Weapon',
               rarity: 'legendary',

@@ -2,7 +2,7 @@
   "Aug Immu": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       }
     ],
@@ -29,7 +29,7 @@
   "Speed": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       }
     ],
@@ -55,7 +55,7 @@
   "CritDmg": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       }
     ],

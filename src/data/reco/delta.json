@@ -2,7 +2,7 @@
   "Life Swift": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "HP%"
       },
       {
@@ -36,7 +36,7 @@
   "Life Augment": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "HP%"
       },
       {
@@ -70,7 +70,7 @@
   "Swift Augment": {
     "Weapon": [
       {
-        "name": "Surefire Javelin",
+        "name": "Surefire Greatsword",
         "mainStat": "HP%"
       },
       {

@@ -2,7 +2,7 @@
   "Penetration": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -10,7 +10,7 @@
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       }
     ],
@@ -44,7 +44,7 @@
   }, "Speed": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -52,7 +52,7 @@
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       }
     ],
@@ -87,7 +87,7 @@
    "Critical Strike": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -95,7 +95,7 @@
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       }
     ],
@@ -130,7 +130,7 @@
    "Pen mix": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -138,7 +138,7 @@
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       }
     ],

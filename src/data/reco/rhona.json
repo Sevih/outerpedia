@@ -2,7 +2,7 @@
 "Speed": {
 "Weapon": [
 {
-"name": "Surefire Javelin",
+"name": "Surefire Greatsword",
 "mainStat": "ATK%"
 },
 {
@@ -28,7 +28,7 @@
 "Counter": {
 "Weapon": [
 {
-"name": "Surefire Javelin",
+"name": "Surefire Greatsword",
 "mainStat": "ATK%"
 },
 {
@@ -54,7 +54,7 @@
 "Scaling": {
 "Weapon": [
 {
-"name": "Surefire Javelin",
+"name": "Surefire Greatsword",
 "mainStat": "ATK%"
 },
 {

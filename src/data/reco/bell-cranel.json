@@ -2,11 +2,11 @@
   "Speed": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       },
       {
@@ -44,11 +44,11 @@
   "Attack": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       },
       {
@@ -86,11 +86,11 @@
   "Augm Attack": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       },
       {

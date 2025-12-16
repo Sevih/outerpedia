@@ -2,7 +2,7 @@
   "Speed": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -10,7 +10,7 @@
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       }
     ],
@@ -36,7 +36,7 @@
   "CritDmg": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -44,7 +44,7 @@
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       }
     ],
@@ -70,7 +70,7 @@
   "Pene": {
     "Weapon": [
       {
-        "name": "Thumping Knuckle Dusters",
+        "name": "Thumping Odyssey",
         "mainStat": "ATK%"
       },
       {
@@ -78,7 +78,7 @@
         "mainStat": "ATK%"
       },
       {
-        "name": "Fire Fists",
+        "name": "Fire Grimoire",
         "mainStat": "ATK%"
       }
     ],
