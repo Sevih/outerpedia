@@ -1199,5 +1199,16 @@
         "description_jp": "敵を通常スキルで\\n追加攻撃する。",
         "description_kr": "추가 공격을 입힙니다.",
         "icon": "SC_Buff_Extra_Skill"
+    },
+    {
+        "name": "IG_Buff_2000110_Interruption",
+        "category": "unique",
+        "label": "Mandala",
+        "label_jp": "曼荼羅",
+        "label_kr": "만다라",
+        "description": "Reduces the caster's Speed by 90%. When an ally takes a turn and performs an action, the caster uses Repent! on the enemy with the highest Attack.. Then, increase the caster's Priority by 40%. (Irremovable, removed when the caster's turn ends or when a Boss Break occurs)",
+        "description_jp": "自分のスピードが90%減少し、味方がターンを獲得した後、行動時に攻撃力が最も高い敵単体に「懺悔なさい!」を発動する。その後、自分の行動ゲージが40%UPする。(解除不可、ボスブレイクおよび自分のターン終了時に解除)",
+        "description_kr": "자신의 속도가 90% 감소하고, 아군이 턴을 획득하여 행동 시 참회하세요! 를 가장 공격력이 높은 적에게 사용합니다.\\n이후 자신의 행동 게이지가 40% 증가합니다.(해제 불가, 보스 브레이크 및 자신 턴 종료 시 해제)",
+        "icon": "IG_Buff_2000110_Interruption"
     }
 ]

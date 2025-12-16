@@ -2574,5 +2574,25 @@
     "rank": "",
     "buff": [],
     "debuff": []
+  },
+  "mystic-sage-ame": {
+    "name": "Lawless Immutable Ruler",
+    "name_jp": "無法不変の万物操縦",
+    "name_kr": "무법불변 만물조종",
+    "mainStat": "Accuracy (To: Dark)",
+    "mainStat_jp": "闇属性の対象の命中",
+    "mainStat_kr": "암속성 대상 명중",
+    "effect": "Increases damage dealt by allies to Bosses 50%",
+    "effect_jp": "味方がボスに与えるダメージ50%",
+    "effect_kr": "아군이 보스에게 입히는 피해 50%",
+    "effect10": "Increases Priority of the ally with the highest Attack by 25% after using <color=#28d9ed>Repent!</color> while in <color=#28d9ed>Mandala</color> state",
+    "effect10_jp": "<color=#28d9ed>曼荼羅</color>状態で<color=#28d9ed>懺悔なさい!</color>使用後、攻撃力が最も高い味方の行動ゲージ25%",
+    "effect10_kr": "<color=#28d9ed>만다라</color> 상태에서 <color=#28d9ed>참회하세요!</color> 사용 후 공격력 가장 높은 아군 행동 게이지 25%",
+    "icon_effect": "TI_Icon_UO_Accessary_07",
+    "rank": "",
+    "buff": [
+      "BT_ACTION_GAUGE"
+    ],
+    "debuff": []
   }
 }

@@ -553,7 +553,12 @@
       "offsetY": 60
     },
     "2000109": {
-      "name": " Gnosis Viella",
+      "name": "Gnosis Viella",
+      "offsetX": 30,
+      "offsetY": 60
+    },
+    "2000110": {
+      "name": "Mystic Sage Ame",
       "offsetX": 30,
       "offsetY": 60
     },
