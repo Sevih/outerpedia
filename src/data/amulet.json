@@ -1266,7 +1266,14 @@
     "effect_desc4_zh": "友军使用全体攻击后,自身行动值+10%(2回合最多触发1次)",
     "effect_icon": "TI_Icon_UO_Accessary_01",
     "class": "Defender",
-    "mainStats": [],
+    "mainStats": [
+      "HP%",
+      "EVA",
+      "EFF",
+      "CHD",
+      "PEN%",
+      "HH"
+    ],
     "source": null,
     "boss": null,
     "mode": null,

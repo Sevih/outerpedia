@@ -1104,6 +1104,13 @@
     "characters": []
   },
   {
+    "name": "Azure Memory",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 0,
+    "characters": []
+  },
+  {
     "name": "Bloody Edge",
     "type": "Weapon",
     "class": "Ranger",
