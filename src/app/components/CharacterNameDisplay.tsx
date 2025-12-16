@@ -46,6 +46,7 @@ const PREFIX_STYLES: Record<string, string> = {
   'アイズ': 'text-[18px]',
 
   'Poolside Trickster': 'text-[10px]',
+  'Mystic Sage' : 'text-xs',
   "Summer Knight's Dream": 'text-[9px]',
 }
 
@@ -60,6 +61,7 @@ const ABBR_STYLES: Record<string, string> = {
   "Tamamo-no-Mae": 'Tamamo',
   "Summer Knight's Dream": 'S.',
   'Core Fusion': 'C.F',
+  'Mystic Sage' : 'M.'
 }
 
 const NAME_STYLES: Record<string, string> = {
@@ -90,7 +92,8 @@ const PREFIX_STYLES_BIG: Record<string, string> = {
   'Kitsune of Eternity': 'text-[21px]',
   'Poolside Trickster': 'text-[21px]',
   "Summer Knight's Dream": 'text-[21px]',
-  'Core Fusion': 'text-[21px]'
+  'Core Fusion': 'text-[21px]',
+  'Mystic Sage' : 'text-[21px]'
 }
 
 const NAME_STYLES_BIG: Record<string, string> = {
