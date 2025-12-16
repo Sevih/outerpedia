@@ -1,4 +1,303 @@
 {
+  "v2": {
+    "label": "December 2025 Version",
+    "date": "2025-12-16",
+    "phase1": {
+      "bosses": [
+        {
+          "bossId": "440600105-3-1",
+          "geas": {
+            "1": {
+              "bonus": 21,
+              "malus": 5
+            },
+            "2": {
+              "bonus": 2,
+              "malus": 25
+            },
+            "3": {
+              "bonus": 100,
+              "malus": 102
+            },
+            "4": {
+              "bonus": 73,
+              "malus": 77
+            },
+            "5": {
+              "bonus": 74,
+              "malus": 67
+            }
+          },
+          "notes": [
+            ""
+          ],
+          "recommended": [
+            {
+              "names": ["Veronica","Core Fusion Veronica"],
+              "reason": {
+                "en": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+                "jp": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}",
+                "kr": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+                "zh": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}"
+              }
+            },
+            {
+              "names": "Fatal",
+              "reason": {
+                "en": "{C/Ranger} {E/Water}",
+                "jp": "{C/Ranger} {E/Water}",
+                "kr": "{C/Ranger} {E/Water}",
+                "zh": "{C/Ranger} {E/Water}"
+              }
+            },
+            {
+              "names": "Monad Eva",
+              "reason": {
+                "en": "{C/Healer}, {B/BT_CALL_BACKUP}",
+                "jp": "{C/Healer}、{B/BT_CALL_BACKUP}",
+                "kr": "{C/Healer}, {B/BT_CALL_BACKUP}",
+                "zh": "{C/Healer}、{B/BT_CALL_BACKUP}"
+              }
+            },
+            {
+              "names": "Maxwell",
+              "reason": {
+                "en": "Strong damage unit",
+                "jp": "高火力ユニット",
+                "kr": "강력한 딜러",
+                "zh": "高伤害单位"
+              }
+            },
+            {
+              "names": "Demiurge Astei",
+              "reason": {
+                "en": "Strong damage unit",
+                "jp": "高火力ユニット",
+                "kr": "강력한 딜러",
+                "zh": "高伤害单位"
+              }
+            }
+          ],
+          "team": [
+            [
+              "Fatal",
+              "Ryu Lion",
+              "Holy Night's Blessing Dianne",
+              "Maxwell"
+            ],
+            [
+              "Monad Eva",
+              "Mene"
+            ],
+            [
+              "Veronica",
+              "Tamara",
+              "Laplace"
+            ],
+            [
+              "Poolside Trickster Regina",
+              "Roxie",
+              "Demiurge Astei",
+              "Francesca"
+            ]
+          ],
+          "video": {
+            "videoId": "Ru-_1L59wjI",
+            "title": "Prevent World Alteration - Geas Boss Sample Collection Terminal (Stage 3) - by Sevih"
+          }
+        },
+        {
+          "bossId": "440600205-4-1",
+          "geas": {
+            "1": {
+              "bonus": 12,
+              "malus": 78
+            },
+            "2": {
+              "bonus": 101,
+              "malus": 20
+            },
+            "3": {
+              "bonus": 75,
+              "malus": 29
+            },
+            "4": {
+              "bonus": 76,
+              "malus": 58
+            },
+            "5": {
+              "bonus": 66,
+              "malus": 31
+            }
+          },
+          "notes": [
+            ""
+          ],
+          "recommended": [
+            {
+              "names": "Demiurge Luna",
+              "reason": {
+                "en": "Strong damage unit",
+                "jp": "高火力ユニット",
+                "kr": "강력한 딜러",
+                "zh": "高伤害单位"
+              }
+            },
+            {
+              "names": "Poolside Trickster Regina",
+              "reason": {
+                "en": "Strong damage unit",
+                "jp": "高火力ユニット",
+                "kr": "강력한 딜러",
+                "zh": "高伤害单位"
+              }
+            },
+            {
+              "names": "Veronica",
+              "reason": {
+                "en": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+                "jp": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}",
+                "kr": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+                "zh": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}"
+              }
+            },
+            {
+              "names": "Fatal",
+              "reason": {
+                "en": "{C/Ranger} {E/Water}",
+                "jp": "{C/Ranger} {E/Water}",
+                "kr": "{C/Ranger} {E/Water}",
+                "zh": "{C/Ranger} {E/Water}"
+              }
+            }
+          ],
+          "team": [
+            [
+              "Fatal",
+              "Ryu Lion",
+              "Holy Night's Blessing Dianne",
+              "Regina"
+            ],
+            [
+              "Veronica",
+              "Luna"
+            ],
+            [
+              "Tamara",
+              "Laplace",
+              "Caren"
+            ],
+            [
+              "Poolside Trickster Regina",
+              "Demiurge Luna",
+              "Roxie",
+              "Beth"
+            ]
+          ],
+          "video": {
+            "videoId": "HxYVQy9puEE",
+            "title": "Prevent World Alteration - Geas Boss Strategic Defense Automaton (Stage 4) - By Sevih"
+          }
+        }
+      ]
+    },
+    "phase2": {
+      "id": "440600010-B-1",
+      "overview": [
+        ""
+      ],
+      "teams": {
+        "team1": {
+          "label": "Water Striker",
+          "icon": "water.webp",
+          "video": {
+            "videoId": "5ieNf4f0xfg",
+            "title": "Prevent World Alteration - Planet Purification Unit Stage 5 - Water Striker Team - By Sevih"
+          },
+          "geas-active": [],
+          "setup": [
+            [
+              "Tamara",
+              "Edelweiss",
+              "Fatal"
+            ],
+            [
+              "Caren",
+              "Beth",
+              "Rin",
+              "Poolside Trickster Regina"
+            ],
+            [
+              "Poolside Trickster Regina",
+              "Caren",
+              "Beth",
+              "Rin"
+            ],
+            [
+              "Lyla",
+              "Monad Eva",
+              "Mene",
+              "Luna"
+            ]
+          ],
+          "note": []
+        },
+        "team2": {
+          "label": "Water Mage",
+          "icon": "water.webp",
+          "video": {
+            "videoId": "vV2faY6DzHw",
+            "title": "Prevent World Alteration - Planet Purification Unit Stage 6 - Water Mage Team - By Sevih"
+          },
+          "geas-active": [],
+          "setup": [
+            [
+              "Tamara",
+              "Edelweiss",
+              "Fatal"
+            ],
+            [
+              "Roxie"
+            ],
+            [
+              "Laplace"
+            ],
+            [
+              "Lyla",
+              "Monad Eva",
+              "Mene",
+              "Luna"
+            ]
+          ],
+          "note": []
+        },
+        "team3": {
+          "label": "GBeth",
+          "icon": "SC_Buff_2100092.webp",
+          "video": {
+            "videoId": "PBTKXTwFuBg",
+            "title": "Prevent World Alteration - Planet Purification Unit Stage 11 - G.Beth Team - By Sevih"
+          },
+          "geas-active": [],
+          "setup": [
+            [
+              "Gnosis Beth"
+            ],
+            [
+              "Maxie"
+            ],
+            [
+              "Monad Eva"
+            ],
+            [
+              "Akari"
+            ]
+          ],
+          "note": []
+        }
+      }
+    }
+  },
   "v1": {
     "label": "June 2025 Version",
     "date": "2025-06-18",
