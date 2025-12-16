@@ -577,7 +577,7 @@
               "items": [
                 "{P/Omega Nadja} - Passive damage reduction with shield. DO NOT use her EE (gives unwanted dmg reduction vs light and effectiveness which can cause counter into speed debuff). Might need to reset her level at lower stages.",
                 "{P/Demiurge Drakhan} - Passive damage reduction (AoE only)",
-                "{P/Hilde} - 15% damage reduction (AoE only) with inbuilt Charmer's Necklace passive",
+                "{P/Hilde} - 15% damage reduction (AoE only) with inbuilt Charmer's Golden Chalice passive",
                 "{P/Ritri} - Passive damage reduction",
                 "{P/Liselotte} with EE - Passive damage reduction with shield. Her passive speed boost (+5 at 4★ or +10 at 6★) only reduces damage if the boost puts Ember above desired speed. If you build some speed on Ember anyway, she won't reduce your damage."
               ]
@@ -593,7 +593,7 @@
             {
               "type": "ul",
               "items": [
-                "Charmer's Necklace: Any defender can hold it to help them die faster. Give enough tankiness to survive first hit but NOT second hit, so Charmer's activates on first + second hit.",
+                "Charmer's Golden Chalice: Any defender can hold it to help them die faster. Give enough tankiness to survive first hit but NOT second hit, so Charmer's activates on first + second hit.",
                 "Defenders can also hold Unholy Exulset",
                 "Healers can hold Starlight Road"
               ]

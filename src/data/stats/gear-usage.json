@@ -492,7 +492,7 @@
     ]
   },
   {
-    "name": "Blue-Gems White Ring",
+    "name": "Chalice of Longing",
     "type": "Amulet",
     "class": "Defender",
     "count": 8,
@@ -825,7 +825,7 @@
     ]
   },
   {
-    "name": "Charmer's Necklace",
+    "name": "Charmer's Golden Chalice",
     "type": "Amulet",
     "class": "Defender",
     "count": 2,
@@ -959,7 +959,7 @@
     ]
   },
   {
-    "name": "Dancer's Bracelet",
+    "name": "Dancer's Necklace",
     "type": "Amulet",
     "class": "Striker",
     "count": 1,
@@ -968,7 +968,7 @@
     ]
   },
   {
-    "name": "Glorious Radiance Orb",
+    "name": "Glorious Radiance Legacy",
     "type": "Amulet",
     "class": "Striker",
     "count": 1,
