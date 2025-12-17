@@ -214,7 +214,10 @@
             "videoId": "5ieNf4f0xfg",
             "title": "Prevent World Alteration - Planet Purification Unit Stage 5 - Water Striker Team - By Sevih"
           },
-          "geas-active": [],
+          "geas-active": {
+            "bonus": [],
+            "malus": []
+          },
           "setup": [
             [
               "Tamara",
@@ -240,36 +243,124 @@
               "Luna"
             ]
           ],
-          "note": []
+          "note": [],
+          "note_jp": [],
+          "note_kr": [],
+          "note_zh": []
         },
         "team2": {
           "label": "Water Mage",
           "icon": "water.webp",
           "video": {
-            "videoId": "vV2faY6DzHw",
-            "title": "Prevent World Alteration - Planet Purification Unit Stage 6 - Water Mage Team - By Sevih"
+            "videoId": "a69ltnKOfiI",
+            "title": "Ksai Guild Raid - Stage 14 - Mage Team - 9.35m dmg, 150% multiplier  - By Tango"
           },
-          "geas-active": [],
+          "geas-active": {
+            "bonus": [21, 100, 76],
+            "malus": [25, 67, 78, 29, 31, 20, 5]
+          },
           "setup": [
             [
-              "Tamara",
-              "Edelweiss",
-              "Fatal"
+              "Edelweiss"
             ],
             [
               "Roxie"
             ],
             [
-              "Laplace"
+              "Fortuna"
             ],
             [
-              "Lyla",
-              "Monad Eva",
-              "Mene",
-              "Luna"
+              "Core Fusion Veronica"
             ]
           ],
-          "note": []
+          "note": [
+            {
+              "type": "p",
+              "string": "{P/Roxie}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "T4 Revenge set preferred",
+                "{I-A/Gorgon's Vanity [Mage]} pen% , +10 {I-T/Executioner's Charm}",
+                "Must be 6★ for more AP and access to Burst 3 (5★ still works but you can't use Burst 3 on her last turn unless you use a Bursting set)",
+                "Needs EE+10",
+                "160 speed with {I-A/Gorgon's Vanity [Mage]} accessory. If you don't have it, you'll have to run a fast {P/Roxie} probably with Speed set over Revenge set"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Edelweiss}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{I-W/Rampaging Caracal} ideal (don't use {I-W/Barrage of Truth})",
+                "Must be able to one-shot orbs with S3 (probably needs pen% accessory to do enough damage)",
+                "6★ recommended to apply {D/BT_SEALED} early to block shield but not needed",
+                "Use {I-T/Sage's Charm} or {I-T/Rogue's Charm}",
+                "288 speed exactly (minimum to outspeed boss, but don't go faster - {P/Core Fusion Veronica} and {P/Fortuna} need to catch up turn 1 before you enrage the boss)"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Core Fusion Veronica}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Needs EE+10",
+                "Avoid using {I-A/Chalice of Longing} accessory",
+                "Use {I-T/Sage's Charm} or {I-T/Rogue's Charm}",
+                "261 speed"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Fortuna}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Needs enough HP to survive two 2-turn burns with {I-A/Queen of Prism} accessory for a shield, OR have her max HP be lower than {P/Roxie} so she gets a shield from {P/Core Fusion Veronica} later (meaning you only tank 1-turn burns)",
+                "Use {I-T/Sage's Charm} or {I-T/Rogue's Charm}",
+                "230 speed"
+              ]
+            },
+            {
+              "type": "p",
+              "string": ""
+            },
+            {
+              "type": "p",
+              "string": "General Requirements:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "134 effectiveness on {P/Fortuna}, {P/Roxie} and {P/Edelweiss}",
+                "240 accuracy on all",
+                "100% crit on everyone using {I-T/Rogue's Charm}",
+                "Minimum 4★ transcendence with max level chain skill for 6 WG damage on chain",
+                "{P/Edelweiss} ideally 6★ for extra AP on battle start, {P/Roxie} must be 5★ minimum (6★ better)"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "Speed Order: {P/Edelweiss} (288) > {P/Core Fusion Veronica} (261) > {P/Fortuna} (230) > {P/Roxie} (160)"
+            },
+            {
+              "type": "p",
+              "string": "IMPORTANT: Use the exact speeds listed above and don't deviate from them. The speed tuning is incredibly precise - even small variations can cause the run to fail due to turn order issues."
+            },
+            {
+              "type": "p",
+              "string": "TIP: Killing both orbs at the same time only counts as killing ONE orb for the Geas power boost on unit dying. It's better to kill each orb one by one whenever possible for maximum damage boost."
+            }
+          ],
+          "note_jp": [],
+          "note_kr": [],
+          "note_zh": []
         },
         "team3": {
           "label": "GBeth",
@@ -278,7 +369,10 @@
             "videoId": "PBTKXTwFuBg",
             "title": "Prevent World Alteration - Planet Purification Unit Stage 11 - G.Beth Team - By Sevih"
           },
-          "geas-active": [],
+          "geas-active": {
+            "bonus": [],
+            "malus": []
+          },
           "setup": [
             [
               "Gnosis Beth"
@@ -293,7 +387,10 @@
               "Akari"
             ]
           ],
-          "note": []
+          "note": [],
+          "note_jp": [],
+          "note_kr": [],
+          "note_zh": []
         }
       }
     }

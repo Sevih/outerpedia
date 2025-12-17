@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-12-17",
+    title: {
+      en: "Prevent World Alteration Guild Raid",
+      jp: "世界変容の阻止 ギルドレイド",
+      kr: "세계변용 저지 길드 레이드",
+      zh: "阻止世界改变 公会战",
+    } as LString,
+    type: "update",
+    url: "/guides/guild-raid/prevent-world-alteration",
+    content: [
+      {
+        en: "Prevent World Alteration guild raid updated for December 2025 version.",
+        jp: "世界変容の阻止 ギルドレイドが2025年12月版にアップデートされました。",
+        kr: "세계변용 저지 길드 레이드가 2025년 12월 버전으로 업데이트되었습니다.",
+        zh: "阻止世界改变 公会战已更新至2025年12月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-12-16",
     title: {
       en: "New Limited Hero: Mystic Sage Ame",
