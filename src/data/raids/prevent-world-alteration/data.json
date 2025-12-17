@@ -358,9 +358,261 @@
               "string": "TIP: Killing both orbs at the same time only counts as killing ONE orb for the Geas power boost on unit dying. It's better to kill each orb one by one whenever possible for maximum damage boost."
             }
           ],
-          "note_jp": [],
-          "note_kr": [],
-          "note_zh": []
+          "note_jp": [
+            {
+              "type": "p",
+              "string": "{P/Roxie}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "T4リベンジセット推奨",
+                "{I-A/Gorgon's Vanity [Mage]} 貫通%、+10 {I-T/Executioner's Charm}",
+                "6★必須（APが増え、バースト3が使用可能。5★でも動作するが、バーストセットを使わない限り最後のターンでバースト3が使えない）",
+                "EE+10必須",
+                "{I-A/Gorgon's Vanity [Mage]}アクセサリーで160速度。持っていない場合、リベンジセットではなくスピードセットで速い{P/Roxie}を使う必要あり"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Edelweiss}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{I-W/Rampaging Caracal}が理想（{I-W/Barrage of Truth}は使わない）",
+                "S3でオーブをワンショットできる必要あり（十分なダメージを出すには貫通%アクセサリーが必要な場合あり）",
+                "6★推奨（{D/BT_SEALED}を早期に付与してシールドをブロックできるが必須ではない）",
+                "{I-T/Sage's Charm}または{I-T/Rogue's Charm}を使用",
+                "288速度ちょうど（ボスより速くなる最低値だが、それ以上速くしない - {P/Core Fusion Veronica}と{P/Fortuna}がボスを激怒させる前にターン1で追いつく必要あり）"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Core Fusion Veronica}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "EE+10必須",
+                "{I-A/Chalice of Longing}アクセサリーは避ける",
+                "{I-T/Sage's Charm}または{I-T/Rogue's Charm}を使用",
+                "261速度"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Fortuna}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{I-A/Queen of Prism}アクセサリーのシールドで2ターン燃焼を2回耐えられるHP必要、または最大HPを{P/Roxie}より低くして{P/Core Fusion Veronica}から後でシールドを受ける（1ターン燃焼だけ耐える）",
+                "{I-T/Sage's Charm}または{I-T/Rogue's Charm}を使用",
+                "230速度"
+              ]
+            },
+            {
+              "type": "p",
+              "string": ""
+            },
+            {
+              "type": "p",
+              "string": "必要条件:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{P/Fortuna}、{P/Roxie}、{P/Edelweiss}に134効果命中",
+                "全員に240命中率",
+                "{I-T/Rogue's Charm}使用で全員100%クリティカル",
+                "最低4★超越、チェインスキル最大レベルで6 WGダメージ",
+                "{P/Edelweiss}は6★が理想（戦闘開始時に追加AP）、{P/Roxie}は最低5★（6★が良い）"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "速度順: {P/Edelweiss} (288) > {P/Core Fusion Veronica} (261) > {P/Fortuna} (230) > {P/Roxie} (160)"
+            },
+            {
+              "type": "p",
+              "string": "重要: 上記の速度を正確に使用し、逸脱しないこと。速度調整は非常に精密で、小さな変動でもターン順の問題で失敗する可能性あり。"
+            },
+            {
+              "type": "p",
+              "string": "ヒント: 両方のオーブを同時に倒すと、ギアスのユニット死亡パワーブーストでは1体分としかカウントされない。最大ダメージブーストのため、可能な限りオーブを1体ずつ倒す方が良い。"
+            }
+          ],
+          "note_kr": [
+            {
+              "type": "p",
+              "string": "{P/Roxie}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "T4 복수 세트 추천",
+                "{I-A/Gorgon's Vanity [Mage]} 관통%, +10 {I-T/Executioner's Charm}",
+                "6★ 필수 (AP 증가 및 버스트 3 사용 가능. 5★도 작동하지만 버스트 세트 없이는 마지막 턴에 버스트 3 사용 불가)",
+                "EE+10 필수",
+                "{I-A/Gorgon's Vanity [Mage]} 악세서리로 160 속도. 없으면 복수 세트 대신 속도 세트로 빠른 {P/Roxie} 운용 필요"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Edelweiss}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{I-W/Rampaging Caracal} 이상적 ({I-W/Barrage of Truth} 사용 금지)",
+                "S3으로 오브 원샷 가능해야 함 (충분한 데미지를 위해 관통% 악세서리 필요할 수 있음)",
+                "6★ 추천 ({D/BT_SEALED}를 일찍 적용해 실드 차단 가능하지만 필수 아님)",
+                "{I-T/Sage's Charm} 또는 {I-T/Rogue's Charm} 사용",
+                "정확히 288 속도 (보스보다 빠른 최소값이지만 더 빠르면 안 됨 - {P/Core Fusion Veronica}와 {P/Fortuna}가 보스를 격노시키기 전 턴 1에서 따라잡아야 함)"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Core Fusion Veronica}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "EE+10 필수",
+                "{I-A/Chalice of Longing} 악세서리 피하기",
+                "{I-T/Sage's Charm} 또는 {I-T/Rogue's Charm} 사용",
+                "261 속도"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Fortuna}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{I-A/Queen of Prism} 악세서리의 실드로 2턴 화상 2번을 버틸 HP 필요, 또는 최대 HP를 {P/Roxie}보다 낮게 해서 나중에 {P/Core Fusion Veronica}에게서 실드 받기 (1턴 화상만 버팀)",
+                "{I-T/Sage's Charm} 또는 {I-T/Rogue's Charm} 사용",
+                "230 속도"
+              ]
+            },
+            {
+              "type": "p",
+              "string": ""
+            },
+            {
+              "type": "p",
+              "string": "필수 조건:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{P/Fortuna}, {P/Roxie}, {P/Edelweiss}에 134 효과적중",
+                "전원 240 명중률",
+                "{I-T/Rogue's Charm} 사용으로 전원 100% 치명타",
+                "최소 4★ 초월, 체인 스킬 최대 레벨로 6 WG 데미지",
+                "{P/Edelweiss}는 6★ 이상적 (전투 시작 시 추가 AP), {P/Roxie}는 최소 5★ (6★가 더 좋음)"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "속도 순서: {P/Edelweiss} (288) > {P/Core Fusion Veronica} (261) > {P/Fortuna} (230) > {P/Roxie} (160)"
+            },
+            {
+              "type": "p",
+              "string": "중요: 위에 나열된 정확한 속도를 사용하고 벗어나지 마세요. 속도 튜닝이 매우 정밀해서 작은 변동도 턴 순서 문제로 실패할 수 있습니다."
+            },
+            {
+              "type": "p",
+              "string": "팁: 두 오브를 동시에 처치하면 기어스의 유닛 사망 파워 부스트에서 1개로만 카운트됩니다. 최대 데미지 부스트를 위해 가능하면 오브를 하나씩 처치하는 것이 좋습니다."
+            }
+          ],
+          "note_zh": [
+            {
+              "type": "p",
+              "string": "{P/Roxie}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "推荐T4复仇套装",
+                "{I-A/Gorgon's Vanity [Mage]} 穿透%，+10 {I-T/Executioner's Charm}",
+                "必须6★（更多AP并可使用爆发3。5★也能用但除非使用爆发套装否则最后一回合无法使用爆发3）",
+                "需要EE+10",
+                "使用{I-A/Gorgon's Vanity [Mage]}饰品时160速度。如果没有，需要用速度套装而非复仇套装跑快速{P/Roxie}"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Edelweiss}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{I-W/Rampaging Caracal}理想（不要用{I-W/Barrage of Truth}）",
+                "必须能用S3秒杀球（可能需要穿透%饰品才能造成足够伤害）",
+                "推荐6★（可提早施加{D/BT_SEALED}阻挡护盾但非必需）",
+                "使用{I-T/Sage's Charm}或{I-T/Rogue's Charm}",
+                "正好288速度（超过Boss的最低值，但不要更快 - {P/Core Fusion Veronica}和{P/Fortuna}需要在你激怒Boss前在回合1追上）"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Core Fusion Veronica}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "需要EE+10",
+                "避免使用{I-A/Chalice of Longing}饰品",
+                "使用{I-T/Sage's Charm}或{I-T/Rogue's Charm}",
+                "261速度"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "{P/Fortuna}:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "需要足够HP用{I-A/Queen of Prism}饰品的护盾扛住两次2回合燃烧，或者让她的最大HP低于{P/Roxie}以便之后从{P/Core Fusion Veronica}那里获得护盾（只需扛1回合燃烧）",
+                "使用{I-T/Sage's Charm}或{I-T/Rogue's Charm}",
+                "230速度"
+              ]
+            },
+            {
+              "type": "p",
+              "string": ""
+            },
+            {
+              "type": "p",
+              "string": "基本要求:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "{P/Fortuna}、{P/Roxie}和{P/Edelweiss}需要134效果命中",
+                "全员240命中率",
+                "使用{I-T/Rogue's Charm}全员100%暴击",
+                "最低4★超越，连锁技能满级获得6 WG伤害",
+                "{P/Edelweiss}理想6★（战斗开始时额外AP），{P/Roxie}最低5★（6★更好）"
+              ]
+            },
+            {
+              "type": "p",
+              "string": "速度顺序: {P/Edelweiss} (288) > {P/Core Fusion Veronica} (261) > {P/Fortuna} (230) > {P/Roxie} (160)"
+            },
+            {
+              "type": "p",
+              "string": "重要：使用上面列出的精确速度，不要偏离。速度调整非常精确 - 即使微小的变化也可能因回合顺序问题导致失败。"
+            },
+            {
+              "type": "p",
+              "string": "提示：同时击杀两个球只算击杀一个球的Geas单位死亡能量提升。为了最大伤害提升，尽可能一个一个击杀球。"
+            }
+          ]
         },
         "team3": {
           "label": "GBeth",
