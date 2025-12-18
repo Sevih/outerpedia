@@ -3,7 +3,7 @@
     "name": "Speed Set",
     "type": "Set",
     "class": null,
-    "count": 68,
+    "count": 69,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -52,6 +52,7 @@
       "Mene",
       "Mero",
       "Monad Eva",
+      "Mystic Sage Ame",
       "Nella",
       "Noa",
       "Notia",
@@ -73,6 +74,40 @@
       "Veronica",
       "Viella",
       "Vlada"
+    ]
+  },
+  {
+    "name": "Immunity Set",
+    "type": "Set",
+    "class": null,
+    "count": 26,
+    "characters": [
+      "Astei",
+      "Bryn",
+      "Caren",
+      "Christina",
+      "Demiurge Delta",
+      "Demiurge Drakhan",
+      "Demiurge Vlada",
+      "Dianne",
+      "Epsilon",
+      "Gnosis Dahlia",
+      "Gnosis Nella",
+      "Hilde",
+      "Iota",
+      "Kanon",
+      "Leo",
+      "Liselotte",
+      "Mene",
+      "Mystic Sage Ame",
+      "Nella",
+      "Notia",
+      "Omega Nadja",
+      "Roxie",
+      "Saeran",
+      "Sterope",
+      "Summer Knight's Dream Ember",
+      "Viella"
     ]
   },
   {
@@ -110,36 +145,32 @@
     ]
   },
   {
-    "name": "Immunity Set",
+    "name": "Penetration Set",
     "type": "Set",
     "class": null,
-    "count": 25,
+    "count": 21,
     "characters": [
-      "Astei",
+      "Aer",
+      "Ais Wallenstein",
+      "Ame",
+      "Beth",
       "Bryn",
-      "Caren",
-      "Christina",
-      "Demiurge Delta",
-      "Demiurge Drakhan",
-      "Demiurge Vlada",
-      "Dianne",
-      "Epsilon",
-      "Gnosis Dahlia",
-      "Gnosis Nella",
-      "Hilde",
-      "Iota",
-      "Kanon",
-      "Leo",
-      "Liselotte",
-      "Mene",
-      "Nella",
+      "Demiurge Astei",
+      "Demiurge Luna",
+      "Francesca",
+      "Gnosis Viella",
+      "Holy Night's Blessing Dianne",
+      "Laplace",
+      "Maxwell",
+      "Mero",
+      "Mystic Sage Ame",
+      "Noa",
       "Notia",
-      "Omega Nadja",
-      "Roxie",
-      "Saeran",
-      "Sterope",
-      "Summer Knight's Dream Ember",
-      "Viella"
+      "Poolside Trickster Regina",
+      "Regina",
+      "Rey",
+      "Rin",
+      "Ryu Lion"
     ]
   },
   {
@@ -168,34 +199,6 @@
       "Rey",
       "Rin",
       "Roxie"
-    ]
-  },
-  {
-    "name": "Penetration Set",
-    "type": "Set",
-    "class": null,
-    "count": 20,
-    "characters": [
-      "Aer",
-      "Ais Wallenstein",
-      "Ame",
-      "Beth",
-      "Bryn",
-      "Demiurge Astei",
-      "Demiurge Luna",
-      "Francesca",
-      "Gnosis Viella",
-      "Holy Night's Blessing Dianne",
-      "Laplace",
-      "Maxwell",
-      "Mero",
-      "Noa",
-      "Notia",
-      "Poolside Trickster Regina",
-      "Regina",
-      "Rey",
-      "Rin",
-      "Ryu Lion"
     ]
   },
   {
@@ -250,7 +253,7 @@
     "name": "Rampaging Caracal",
     "type": "Weapon",
     "class": "Ranger",
-    "count": 14,
+    "count": 15,
     "characters": [
       "Akari",
       "Charlotte",
@@ -261,6 +264,7 @@
       "Holy Night's Blessing Dianne",
       "Maxie",
       "Mero",
+      "Mystic Sage Ame",
       "Notia",
       "Skadi",
       "Stella",
@@ -312,6 +316,26 @@
     ]
   },
   {
+    "name": "Absolute Music",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 12,
+    "characters": [
+      "Akari",
+      "Charlotte",
+      "Edelweiss",
+      "Fran",
+      "Holy Night's Blessing Dianne",
+      "Maxie",
+      "Mero",
+      "Mystic Sage Ame",
+      "Ryu Lion",
+      "Skadi",
+      "Stella",
+      "Valentine"
+    ]
+  },
+  {
     "name": "Combination Simulator",
     "type": "Amulet",
     "class": "Ranger",
@@ -328,25 +352,6 @@
       "Skadi",
       "Stella",
       "Tamara",
-      "Valentine"
-    ]
-  },
-  {
-    "name": "Absolute Music",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 11,
-    "characters": [
-      "Akari",
-      "Charlotte",
-      "Edelweiss",
-      "Fran",
-      "Holy Night's Blessing Dianne",
-      "Maxie",
-      "Mero",
-      "Ryu Lion",
-      "Skadi",
-      "Stella",
       "Valentine"
     ]
   },
@@ -524,6 +529,22 @@
     ]
   },
   {
+    "name": "Revenge Set",
+    "type": "Set",
+    "class": null,
+    "count": 8,
+    "characters": [
+      "Ais Wallenstein",
+      "Demiurge Stella",
+      "Ember",
+      "Gnosis Dahlia",
+      "Idith",
+      "Mero",
+      "Mystic Sage Ame",
+      "Vlada"
+    ]
+  },
+  {
     "name": "Talisman of Animosities",
     "type": "Weapon",
     "class": "Defender",
@@ -555,21 +576,6 @@
     ]
   },
   {
-    "name": "Revenge Set",
-    "type": "Set",
-    "class": null,
-    "count": 7,
-    "characters": [
-      "Ais Wallenstein",
-      "Demiurge Stella",
-      "Ember",
-      "Gnosis Dahlia",
-      "Idith",
-      "Mero",
-      "Vlada"
-    ]
-  },
-  {
     "name": "Emblem of Dominance",
     "type": "Weapon",
     "class": "Healer",
@@ -598,6 +604,20 @@
     ]
   },
   {
+    "name": "Physical Exorcism",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 6,
+    "characters": [
+      "Edelweiss",
+      "Fatal",
+      "Gnosis Beth",
+      "Holy Night's Blessing Dianne",
+      "Mystic Sage Ame",
+      "Notia"
+    ]
+  },
+  {
     "name": "Legacy of the Dream",
     "type": "Weapon",
     "class": "Healer",
@@ -608,19 +628,6 @@
       "Dianne",
       "Nella",
       "Viella"
-    ]
-  },
-  {
-    "name": "Physical Exorcism",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 5,
-    "characters": [
-      "Edelweiss",
-      "Fatal",
-      "Gnosis Beth",
-      "Holy Night's Blessing Dianne",
-      "Notia"
     ]
   },
   {
@@ -674,6 +681,18 @@
     ]
   },
   {
+    "name": "Burning Soul",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 4,
+    "characters": [
+      "Gnosis Beth",
+      "Mero",
+      "Mystic Sage Ame",
+      "Ryu Lion"
+    ]
+  },
+  {
     "name": "Defense Set",
     "type": "Set",
     "class": null,
@@ -686,6 +705,29 @@
     ]
   },
   {
+    "name": "Heartunder's Blade",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 4,
+    "characters": [
+      "Fran",
+      "Maxie",
+      "Mero",
+      "Mystic Sage Ame"
+    ]
+  },
+  {
+    "name": "Attack Set",
+    "type": "Set",
+    "class": null,
+    "count": 3,
+    "characters": [
+      "Bell Cranel",
+      "Mystic Sage Ame",
+      "Vlada"
+    ]
+  },
+  {
     "name": "Briareos's Ambition [Ranger]",
     "type": "Amulet",
     "class": "Ranger",
@@ -694,17 +736,6 @@
       "Fran",
       "Mero",
       "Skadi"
-    ]
-  },
-  {
-    "name": "Burning Soul",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 3,
-    "characters": [
-      "Gnosis Beth",
-      "Mero",
-      "Ryu Lion"
     ]
   },
   {
@@ -752,17 +783,6 @@
     ]
   },
   {
-    "name": "Heartunder's Blade",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 3,
-    "characters": [
-      "Fran",
-      "Maxie",
-      "Mero"
-    ]
-  },
-  {
     "name": "Immortal Pride",
     "type": "Weapon",
     "class": "Healer",
@@ -782,16 +802,6 @@
       "Bryn",
       "Demiurge Luna",
       "Fortuna"
-    ]
-  },
-  {
-    "name": "Attack Set",
-    "type": "Set",
-    "class": null,
-    "count": 2,
-    "characters": [
-      "Bell Cranel",
-      "Vlada"
     ]
   },
   {
@@ -1010,6 +1020,15 @@
     "count": 1,
     "characters": [
       "Vlada"
+    ]
+  },
+  {
+    "name": "Meteor Mashers",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 1,
+    "characters": [
+      "Mystic Sage Ame"
     ]
   },
   {
@@ -1310,13 +1329,6 @@
     "name": "Megaphone of Encouragement",
     "type": "Amulet",
     "class": "Defender",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Meteor Mashers",
-    "type": "Weapon",
-    "class": "Ranger",
     "count": 0,
     "characters": []
   },

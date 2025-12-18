@@ -5210,6 +5210,257 @@
       ]
     }
   },
+  "mystic-sage-ame": {
+    "DPS pen": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Heartunder's Blade",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "SPD",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "DPS speed": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Heartunder's Blade",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "SPD",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "DPS revenge": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Heartunder's Blade",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "SPD",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
+    },
+    "Sub-DPS": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Heartunder's Blade",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "CHC",
+        "ATK",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Immu": {
+      "weaponSub": [
+        {
+          "name": "Rampaging Caracal",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Heartunder's Blade",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "SPD",
+        "CHD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Immunity",
+        "Attack"
+      ]
+    }
+  },
   "nella": {
     "Speed": {
       "weaponSub": [

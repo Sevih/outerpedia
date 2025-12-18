@@ -296,7 +296,7 @@
               "type": "ul",
               "items": [
                 "{I-W/Rampaging Caracal} ideal (don't use {I-W/Barrage of Truth})",
-                "Must be able to one-shot orbs with S3 (probably needs pen% accessory to do enough damage)",
+                "Must be able to one-shot orbs with S3. Requires T4 {I-A/Burning Soul} accessory (speed accessory not possible)",
                 "6★ recommended to apply {D/BT_SEALED} early to block shield but not needed",
                 "Use {I-T/Sage's Charm} or {I-T/Rogue's Charm}",
                 "288 speed exactly (minimum to outspeed boss, but don't go faster - {P/Core Fusion Veronica} and {P/Fortuna} need to catch up turn 1 before you enrage the boss)"
@@ -309,8 +309,7 @@
             {
               "type": "ul",
               "items": [
-                "Needs EE+10",
-                "Avoid using {I-A/Chalice of Longing} accessory",
+                "EE+10 not required, but if you have it, don't use {I-A/Chalice of Longing} accessory (both effects conflict). {I-A/Chalice of Longing} is fine without EE+10",
                 "Use {I-T/Sage's Charm} or {I-T/Rogue's Charm}",
                 "261 speed"
               ]
@@ -381,7 +380,7 @@
               "type": "ul",
               "items": [
                 "{I-W/Rampaging Caracal}が理想（{I-W/Barrage of Truth}は使わない）",
-                "S3でオーブをワンショットできる必要あり（十分なダメージを出すには貫通%アクセサリーが必要な場合あり）",
+                "S3でオーブをワンショットできる必要あり。T4 {I-A/Burning Soul}アクセサリー必須（スピードアクセサリーは不可）",
                 "6★推奨（{D/BT_SEALED}を早期に付与してシールドをブロックできるが必須ではない）",
                 "{I-T/Sage's Charm}または{I-T/Rogue's Charm}を使用",
                 "288速度ちょうど（ボスより速くなる最低値だが、それ以上速くしない - {P/Core Fusion Veronica}と{P/Fortuna}がボスを激怒させる前にターン1で追いつく必要あり）"
@@ -394,8 +393,7 @@
             {
               "type": "ul",
               "items": [
-                "EE+10必須",
-                "{I-A/Chalice of Longing}アクセサリーは避ける",
+                "EE+10は必須ではないが、持っている場合は{I-A/Chalice of Longing}アクセサリーを使わない（両方の効果が競合）。EE+10なしなら{I-A/Chalice of Longing}は使用可",
                 "{I-T/Sage's Charm}または{I-T/Rogue's Charm}を使用",
                 "261速度"
               ]
@@ -466,7 +464,7 @@
               "type": "ul",
               "items": [
                 "{I-W/Rampaging Caracal} 이상적 ({I-W/Barrage of Truth} 사용 금지)",
-                "S3으로 오브 원샷 가능해야 함 (충분한 데미지를 위해 관통% 악세서리 필요할 수 있음)",
+                "S3으로 오브 원샷 가능해야 함. T4 {I-A/Burning Soul} 악세서리 필수 (속도 악세서리 불가)",
                 "6★ 추천 ({D/BT_SEALED}를 일찍 적용해 실드 차단 가능하지만 필수 아님)",
                 "{I-T/Sage's Charm} 또는 {I-T/Rogue's Charm} 사용",
                 "정확히 288 속도 (보스보다 빠른 최소값이지만 더 빠르면 안 됨 - {P/Core Fusion Veronica}와 {P/Fortuna}가 보스를 격노시키기 전 턴 1에서 따라잡아야 함)"
@@ -479,8 +477,7 @@
             {
               "type": "ul",
               "items": [
-                "EE+10 필수",
-                "{I-A/Chalice of Longing} 악세서리 피하기",
+                "EE+10 필수 아님. 있으면 {I-A/Chalice of Longing} 악세서리 사용 금지 (효과 충돌). EE+10 없으면 {I-A/Chalice of Longing} 사용 가능",
                 "{I-T/Sage's Charm} 또는 {I-T/Rogue's Charm} 사용",
                 "261 속도"
               ]
@@ -551,7 +548,7 @@
               "type": "ul",
               "items": [
                 "{I-W/Rampaging Caracal}理想（不要用{I-W/Barrage of Truth}）",
-                "必须能用S3秒杀球（可能需要穿透%饰品才能造成足够伤害）",
+                "必须能用S3秒杀球。需要T4 {I-A/Burning Soul}饰品（不能用速度饰品）",
                 "推荐6★（可提早施加{D/BT_SEALED}阻挡护盾但非必需）",
                 "使用{I-T/Sage's Charm}或{I-T/Rogue's Charm}",
                 "正好288速度（超过Boss的最低值，但不要更快 - {P/Core Fusion Veronica}和{P/Fortuna}需要在你激怒Boss前在回合1追上）"
@@ -564,8 +561,7 @@
             {
               "type": "ul",
               "items": [
-                "需要EE+10",
-                "避免使用{I-A/Chalice of Longing}饰品",
+                "EE+10非必需。如果有EE+10，不要用{I-A/Chalice of Longing}饰品（效果冲突）。没有EE+10时可以用{I-A/Chalice of Longing}",
                 "使用{I-T/Sage's Charm}或{I-T/Rogue's Charm}",
                 "261速度"
               ]
