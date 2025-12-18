@@ -309,7 +309,7 @@
             {
               "type": "ul",
               "items": [
-                "EE+10 not required, but if you have it, don't use {I-A/Chalice of Longing} accessory (both effects conflict). {I-A/Chalice of Longing} is fine without EE+10",
+                "EE+10 not required, but if you have it, don't use {I-A/Chalice of Longing} accessory (combined priority boost can cause {P/Core Fusion Veronica} to outspeed {P/Roxie}, which breaks the run - {P/Roxie} must move first to take damage and kill orb, then {P/Core Fusion Veronica} chains and shields lowest HP). {I-A/Chalice of Longing} is fine without EE+10",
                 "Use {I-T/Sage's Charm} or {I-T/Rogue's Charm}",
                 "261 speed"
               ]
@@ -393,7 +393,7 @@
             {
               "type": "ul",
               "items": [
-                "EE+10は必須ではないが、持っている場合は{I-A/Chalice of Longing}アクセサリーを使わない（両方の効果が競合）。EE+10なしなら{I-A/Chalice of Longing}は使用可",
+                "EE+10は必須ではないが、持っている場合は{I-A/Chalice of Longing}アクセサリーを使わない（優先度ブーストの組み合わせで{P/Core Fusion Veronica}が{P/Roxie}より速くなる可能性あり。{P/Roxie}が先に動いてダメージを受けオーブを倒し、その後{P/Core Fusion Veronica}がチェインして最低HPにシールドを付与する必要あり）。EE+10なしなら{I-A/Chalice of Longing}は使用可",
                 "{I-T/Sage's Charm}または{I-T/Rogue's Charm}を使用",
                 "261速度"
               ]
@@ -477,7 +477,7 @@
             {
               "type": "ul",
               "items": [
-                "EE+10 필수 아님. 있으면 {I-A/Chalice of Longing} 악세서리 사용 금지 (효과 충돌). EE+10 없으면 {I-A/Chalice of Longing} 사용 가능",
+                "EE+10 필수 아님. 있으면 {I-A/Chalice of Longing} 악세서리 사용 금지 (우선권 부스트 합산으로 {P/Core Fusion Veronica}가 {P/Roxie}보다 빨라질 수 있음. {P/Roxie}가 먼저 움직여서 데미지 받고 오브 처치 후, {P/Core Fusion Veronica}가 체인하고 최저 HP에 실드 부여해야 함). EE+10 없으면 {I-A/Chalice of Longing} 사용 가능",
                 "{I-T/Sage's Charm} 또는 {I-T/Rogue's Charm} 사용",
                 "261 속도"
               ]
@@ -561,7 +561,7 @@
             {
               "type": "ul",
               "items": [
-                "EE+10非必需。如果有EE+10，不要用{I-A/Chalice of Longing}饰品（效果冲突）。没有EE+10时可以用{I-A/Chalice of Longing}",
+                "EE+10非必需。如果有EE+10，不要用{I-A/Chalice of Longing}饰品（优先度加成叠加可能导致{P/Core Fusion Veronica}比{P/Roxie}快，这会破坏整个流程 - {P/Roxie}必须先行动受伤并击杀球，然后{P/Core Fusion Veronica}连锁并给最低HP的角色上盾）。没有EE+10时可以用{I-A/Chalice of Longing}",
                 "使用{I-T/Sage's Charm}或{I-T/Rogue's Charm}",
                 "261速度"
               ]
