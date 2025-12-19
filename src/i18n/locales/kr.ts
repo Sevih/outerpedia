@@ -856,6 +856,40 @@ const kr = {
   'guide.inProgress.title': '가이드 작성 중',
   'guide.inProgress.description':
     '이 섹션은 현재 작성 중입니다. 완성된 가이드를 곧 확인해 주세요!',
+
+  // Monad Gate
+  'monad.rewards': '보상',
+  'monad.trueEndingChoices': '트루 엔딩 선택지',
+  'monad.ui.trueEndingPath': '트루 엔딩 루트',
+  'monad.ui.compact': '컴팩트',
+  'monad.ui.reset': '리셋',
+  'monad.ui.fullscreen': '전체화면',
+  'monad.ui.noOptions': '선택지가 없습니다.',
+  'monad.ui.required': '필요',
+  'monad.ui.unnamedPath': '(이름 없는 루트)',
+  // Node types
+  'monad.node.start': '탐사 시작 포인트',
+  'monad.node.tending': '트루 엔딩',
+  'monad.node.bending': '배드 엔딩',
+  'monad.node.nending': '노멀 엔딩',
+  'monad.node.path': '운명의 길',
+  'monad.node.relic': '유물 발굴',
+  'monad.node.moment': '정비의 시간',
+  'monad.node.combat': '교전 발생',
+  'monad.node.elite': '강적 조우',
+  'monad.node.eldritch': '미지의 영역',
+  'monad.node.pinnacle': '세계선의 정점',
+  'monad.node.final': '최종 관문',
+  'monad.node.saga': '세계선의 이야기',
+  'monad.node.unknown': '미답지역',
+  // Routes
+  'monad.route.1': '하얀 매의 나라',
+  'monad.route.2': '신성한 군도',
+  'monad.route.3': '하얀 눈과 강철의 나라',
+  'monad.route.4': '모래바람의 나라',
+  'monad.route.4.1': '모래바람의 나라 [전편]',
+  'monad.route.4.2': '모래바람의 나라 [후편]',
+  'monad.route.5': '극독의 영역',
 }
 
 export default kr

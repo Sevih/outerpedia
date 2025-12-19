@@ -1,6 +1,6 @@
 import type { MonadNode, MonadEdge } from "@/types/monad";
 
-export const routeTitle = "Deeps 2 – Route 1";
+export const routeTitleKey = "monad.route.2";
 
 export const nodes: MonadNode[] = [
     { id: "N1", x: 0, y: 0, type: "start", truePath: true },
@@ -116,8 +116,8 @@ export const nodes: MonadNode[] = [
 ];
 
 export const edges: MonadEdge[] = [
-    { from: "N4", to: "N5", label: "Use the skirmish as cover and infiltrate the dungeon (Key item: Alliance's Token)", truePath: true },
-    { from: "N4", to: "N6", label: "Look for a safer route" },
+    { from: "N4", to: "N5", label: { en: "Use the skirmish as cover and infiltrate the dungeon.", jp: "乱戦に紛れて、ダンジョンに潜入する。", kr: "난전에 숨어, 던전에 잠입한다.", zh: "藏身于混战中潜入地城。" }, need: { en: "Alliance's Token", jp: "連合の証", kr: "연합의 증표", zh: "联盟信物" }, truePath: true },
+    { from: "N4", to: "N6", label: { en: "Look for a safer route.", jp: "安全なルートを探してみる。", kr: "안전한 루트를 찾아본다.", zh: "寻找安全路缐。" } },
     { from: "N1", to: "N2", truePath: true },
     { from: "N2", to: "N3", truePath: true },
     { from: "N3", to: "N4", truePath: true },
@@ -150,9 +150,9 @@ export const edges: MonadEdge[] = [
     { from: "N26", to: "N29" },
     { from: "N28", to: "N29", truePath: true },
     { from: "N29", to: "N30", truePath: true },
-    { from: "N30", to: "N31", label: "Show the Alliance's Token", need: "Alliance's Token", truePath: true },
+    { from: "N30", to: "N31", label: { en: "Show the Alliance's Token.", jp: "連合の証を見せる。", kr: "연합의 증표를 보여준다.", zh: "出示联盟信物。" }, need: { en: "Alliance's Token", jp: "連合の証", kr: "연합의 증표", zh: "联盟信物" }, truePath: true },
     { from: "N31", to: "N33", truePath: true },
-    { from: "N30", to: "N32", label: "Prove with strength" },
+    { from: "N30", to: "N32", label: { en: "Prove with strength.", jp: "力で証明する。", kr: "힘으로 증명한다.", zh: "用力量来证明。" } },
     { from: "N32", to: "N34" },
     { from: "N33", to: "N35" },
     { from: "N33", to: "N36" },
@@ -201,8 +201,8 @@ export const edges: MonadEdge[] = [
     { from: "N66", to: "N67", truePath: true },
     { from: "N59", to: "N67" },
     { from: "N67", to: "N68", truePath: true },
-    { from: "N68", to: "N69", label: "Open the smiling Proxxon door" },
-    { from: "N68", to: "N70", label: "Open the angry Proxxon door (Key item: Key to the Stone Chamber)", truePath: true },
+    { from: "N68", to: "N69", label: { en: "Open the smiling Proxxon door.", jp: "笑っているプロソンのドアを開ける。", kr: "웃고 있는 프로손 문을 연다.", zh: "打开「笑脸的弗洛森」之门。" } },
+    { from: "N68", to: "N70", label: { en: "Open the angry Proxxon door.", jp: "怒っているプロソンのドアを開ける。", kr: "화를 내는 프로손 문을 연다.", zh: "打开「生气的弗洛森」之门。" }, need: { en: "Key to the Stone Chamber", jp: "石室の鍵", kr: "석실의 열쇠", zh: "石室钥匙" }, truePath: true },
     { from: "N70", to: "N71" },
     { from: "N70", to: "N72" },
     { from: "N70", to: "N73", truePath: true },
@@ -217,13 +217,13 @@ export const edges: MonadEdge[] = [
     { from: "N75", to: "N80", truePath: true },
     { from: "N80", to: "N81", truePath: true },
     { from: "N81", to: "N82", truePath: true },
-    { from: "N82", to: "N83", label: "Deal with the cultists" },
-    { from: "N82", to: "N84", label: "Act strategically", truePath: true },
-    { from: "N91", to: "N94", label: "Do not open it" },
-    { from: "N91", to: "N93", label: "Try forcing it open" },
-    { from: "N91", to: "N92", label: "Use the chamber's key (Key item: Elyza's Rosary)", need: "Key to the Stone Chamber", truePath: true },
-    { from: "N100", to: "N102", label: "Taunt while clearly licking the rosary", need: "Elyza's Rosary", truePath: true },
-    { from: "N100", to: "N101", label: "Use the Bane corruption to your advantage" },
+    { from: "N82", to: "N83", label: { en: "Deal with the cultists.", jp: "信奉者たちを処理する。", kr: "신봉자들을 처리한다.", zh: "清除信徒。" } },
+    { from: "N82", to: "N84", label: { en: "Act strategically.", jp: "戦略的に行動する。", kr: "전략적으로 행동한다.", zh: "策略性地行动。" }, truePath: true },
+    { from: "N91", to: "N94", label: { en: "Do not open it.", jp: "開けない。", kr: "열지 않는다.", zh: "不打开。" } },
+    { from: "N91", to: "N93", label: { en: "Try forcing it open.", jp: "力ずくで開けてみる。", kr: "힘으로 열어본다.", zh: "用力打开看看。" } },
+    { from: "N91", to: "N92", label: { en: "Use the chamber's key.", jp: "石室の鍵を使う。", kr: "석실의 열쇠를 사용한다.", zh: "使用石室的钥匙。" }, need: { en: "Key to the Stone Chamber", jp: "石室の鍵", kr: "석실의 열쇠", zh: "石室钥匙" }, truePath: true },
+    { from: "N100", to: "N102", label: { en: "Taunt while clearly licking the rosary.", jp: "ロザリオを舐めまわして挑発する。", kr: "로자리오를 선명하게 핥으며 도발한다.", zh: "明显地舔念珠,进行挑衅。" }, need: { en: "Eliza's Rosary", jp: "エリーゼのロザリオ", kr: "엘리제의 로자리오", zh: "伊莉莎的十字架" }, truePath: true },
+    { from: "N100", to: "N101", label: { en: "Use the Bane corruption to your advantage.", jp: "逆に劇毒の浸食度を利用する。", kr: "극독 침식도를 역으로 이용한다.", zh: "反向利用剧毒侵蚀度。" } },
     { from: "N83", to: "N88" },
     { from: "N88", to: "N89" },
     { from: "N89", to: "N94" },

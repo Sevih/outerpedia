@@ -1,6 +1,42 @@
 {
   "en": [
     {
+      "slug": "live-en-5275",
+      "title": "[Notice] 12/19 (Fri) Sequential Rollout Patch Notice",
+      "date": "2025/12/19 4:29:09",
+      "category": "notice",
+      "excerpt": ". We will carry out a patch for fixing issues in the game. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your un...",
+      "coverImage": "/images/news/live/en/5275-132013f5.webp",
+      "uid": "5275",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/12/19/notice-12-19-fri-sequential-rollout-patch-notice/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-5260",
+      "title": "[Outerplane] Mystic Sage Ame Special Codes✨",
+      "date": "2025/12/18 9:28:03",
+      "category": "notice",
+      "excerpt": ". To celebrate the arrival of Mystic Sage Ame, we’re excited to share a surprise codes with you! \\[Codes\\] 👉 FORAME1 👉 FORAME2 \\[Rewards\\] Limited Recruitment Ticket x10 (per coupon) Don’t miss out—...",
+      "coverImage": "/images/news/live/en/5260-16aabbb3.webp",
+      "uid": "5260",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/12/18/outerplane-mystic-sage-ame-special-coupon-%e2%9c%a8/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-5252",
+      "title": "[Notice] 12/18 (Thu) Sequential Rollout Patch Notice",
+      "date": "2025/12/18 5:21:42",
+      "category": "notice",
+      "excerpt": ". We will carry out a patch for fixing issues in the game. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your un...",
+      "coverImage": "/images/news/live/en/5275-132013f5.webp",
+      "uid": "5252",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/12/18/notice-12-18-thu-sequential-rollout-patch-notice/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-5225",
       "title": "[Event]🎉 Fan Art Contest – Final Winners Announcement",
       "date": "2025/12/16 10:53:17",
@@ -12462,6 +12498,30 @@
     }
   ],
   "jp": [
+    {
+      "slug": "live-jp-5277",
+      "title": "【お知らせ】データ更新のお知らせ(12/19)",
+      "date": "2025/12/19 4:29:37",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 12/19(金)、データ更新作業を実施いたします。 一時的に接続が不安定になる場合がございます。 より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈データ更新実施時間 : 25/12/19(金) 13...",
+      "coverImage": "/images/news/live/jp/5277-df7227e1.webp",
+      "uid": "5277",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/12/19/%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b12-19/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-5253",
+      "title": "【お知らせ】データ更新のお知らせ(12/18)",
+      "date": "2025/12/18 5:25:11",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 12/18(木)、データ更新作業を実施いたします。 一時的に接続が不安定になる場合がございます。 より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈データ更新実施時間 : 25/12/18(木) 14...",
+      "coverImage": "/images/news/live/jp/5253-62450952.webp",
+      "uid": "5253",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/12/18/%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b12-18/",
+      "views": 0,
+      "lang": "jp"
+    },
     {
       "slug": "live-jp-5232",
       "title": "🎉 ファンアートコンテスト 最終受賞作品発表",
@@ -24973,6 +25033,42 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-5273",
+      "title": "[공지] 12월 19일 (금) 무점검 패치 진행 안내",
+      "date": "2025/12/19 4:28:37",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 - 12월 19일 (금) 13:30 ~ 13:40 (KST) ※ 위 시간 내 순차적으로 적용됩니다....",
+      "coverImage": "/images/news/live/kr/5273-de568e81.webp",
+      "uid": "5273",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/12/19/%ea%b3%b5%ec%a7%80-12%ec%9b%94-19%ec%9d%bc-%ea%b8%88-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-5262",
+      "title": "✨ 아우터플레인 삼장법사 아메 등장 기념 쿠폰 ✨",
+      "date": "2025/12/18 9:29:06",
+      "category": "notice",
+      "excerpt": "안녕하세요, 오너 여러분. GM 아메입니다. 삼장법사 아메 등장을 기념하여, 깜짝 쿠폰을 공개합니다! \\[쿠폰 코드\\] 👉 FORAME1 👉 FORAME2 \\[쿠폰 보상\\] (쿠폰 1개당) 리미티드 영입 티켓 x 10 놓치지 말고 꼭 받아가세요🙌 – 쿠폰 사용 기간 : 2025년 12월 18일 ~ 2026년 3월 31일 23:59 (KST) 까지 – ...",
+      "coverImage": "/images/news/live/kr/5262-2f44023e.webp",
+      "uid": "5262",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/12/18/%e2%9c%a8-%ec%95%84%ec%9a%b0%ed%84%b0%ed%94%8c%eb%a0%88%ec%9d%b8-%ec%82%bc%ec%9e%a5%eb%b2%95%ec%82%ac-%ec%95%84%eb%a9%94-%eb%93%b1%ec%9e%a5-%ea%b8%b0%eb%85%90-%ec%bf%a0%ed%8f%b0-%e2%9c%a8/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-5251",
+      "title": "[공지] 12월 18일 (목) 무점검 패치 진행 안내",
+      "date": "2025/12/18 5:21:31",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 – 12월 18일 (목) 14:30 ~ 14:50 (KST) ※ 위 시간 내 순차적으로 적용됩니다....",
+      "coverImage": "/images/news/live/kr/5251-1876a7d0.webp",
+      "uid": "5251",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2025/12/18/%ea%b3%b5%ec%a7%80-12%ec%9b%94-18%ec%9d%bc-%eb%aa%a9-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-5220",
       "title": "[🎉이벤트] 팬아트 공모전 최종 수상작 발표",

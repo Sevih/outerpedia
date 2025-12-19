@@ -1,6 +1,6 @@
 import type { MonadNode, MonadEdge } from "@/types/monad";
 
-export const routeTitle = "New Route";
+export const routeTitleKey = "monad.route.new";
 
 export const nodes: MonadNode[] = [
   {

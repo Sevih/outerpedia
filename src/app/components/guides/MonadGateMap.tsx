@@ -4,6 +4,9 @@ import Image from "next/image";
 import type { MonadNode, MonadEdge } from "@/types/monad";
 import { nodeTypes as defaultNodeTypes, nodeColorFilters } from "@/lib/monad/nodeTypes";
 import { NodeContextPopup, PathOptionsContent } from "@/app/components/guides/monad-ui";
+import { useI18n } from "@/lib/contexts/I18nContext";
+import { useTenant } from "@/lib/contexts/TenantContext";
+import { lRec } from "@/lib/localize";
 
 const NODE_WIDTH = 200;
 const NODE_HEIGHT = 100;
@@ -31,6 +34,8 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
     onNodeClick,
     onEdgeClick,
 }) => {
+    const { t } = useI18n();
+    const { key: lang } = useTenant();
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const fullscreenRef = useRef<HTMLDivElement>(null);
@@ -61,11 +66,21 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
     }, [drag]);
 
     // Memoized layout calculations
-    const { maxX, minY, maxY } = useMemo(() => ({
+    const { minX, maxX, minY, maxY } = useMemo(() => ({
+        minX: Math.min(...nodes.map(n => n.x)),
         maxX: Math.max(...nodes.map(n => n.x)),
         minY: Math.min(...nodes.map(n => n.y)),
         maxY: Math.max(...nodes.map(n => n.y)),
     }), [nodes]);
+
+    // Calculate actual content dimensions based on node coordinates
+    const contentWidth = (maxX - minX + 1) * (nodeWidth + nodeGap) + nodeGap * 2;
+    const contentHeight = (maxY - minY + 1) * (nodeHeight + nodeGap) + nodeGap * 2;
+
+    // Get labeled true path edges for the summary
+    const labeledTruePathEdges = useMemo(() =>
+        edges.filter(edge => edge.truePath && edge.label),
+    [edges]);
 
     const nodeMap = useMemo(() =>
         new Map(nodes.map(n => [n.id, n])),
@@ -220,7 +235,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
         hasCenteredOnce.current = true;
 
         const containerHeight = containerRef.current.clientHeight;
-        const nodeCanvasX = startNode.x * (nodeWidth + nodeGap) + nodeGap;
+        const nodeCanvasX = (startNode.x - minX) * (nodeWidth + nodeGap) + nodeGap;
         const nodeCanvasY = (maxY - startNode.y) * (nodeHeight + nodeGap) + nodeGap;
         const startNodeHeight = nodeHeight - 20;
         const offsetY = (containerHeight - startNodeHeight) / 2;
@@ -228,7 +243,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             x: -nodeCanvasX,
             y: offsetY - nodeCanvasY,
         });
-    }, [nodes, maxY, nodeWidth, nodeHeight, nodeGap]);
+    }, [nodes, minX, maxY, nodeWidth, nodeHeight, nodeGap]);
 
     useEffect(() => {
         if (isFullscreen) {
@@ -253,7 +268,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                             onChange={(e) => setShowOnlyTruePath(e.target.checked)}
                             className="form-checkbox text-yellow-400"
                         />
-                        True Ending Path
+                        {t('monad.ui.trueEndingPath')}
                     </label>
                     <label className="inline-flex items-center gap-2 bg-zinc-800 px-3 py-1 rounded border border-zinc-500 shadow text-white text-sm">
                         <input
@@ -262,7 +277,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                             onChange={(e) => setCompactMode(e.target.checked)}
                             className="form-checkbox text-yellow-400"
                         />
-                        Compact
+                        {t('monad.ui.compact')}
                     </label>
                 </div>
                 <div className="flex gap-2">
@@ -270,21 +285,23 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                         className="px-3 py-1 bg-zinc-800 text-white border border-zinc-500 rounded shadow"
                         onClick={resetView}
                     >
-                        Reset
+                        {t('monad.ui.reset')}
                     </button>
                     <button
                         className="px-3 py-1 bg-zinc-800 text-white border border-zinc-500 rounded shadow"
                         onClick={toggleFullscreen}
                     >
-                        Fullscreen
+                        {t('monad.ui.fullscreen')}
                     </button>
                 </div>
             </div>
             <div
                 ref={containerRef}
-                className={`relative w-full ${isFullscreen ? 'h-[100vh]' : 'h-[600px] md:h-[1200px]'
-                    } overflow-x-auto overflow-y-hidden border bg-zinc-900 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'
+                className={`relative w-full overflow-x-auto overflow-y-hidden border bg-zinc-900 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'
                     } touch-auto select-none overscroll-none transition-all duration-300`}
+                style={{
+                    height: isFullscreen ? '100vh' : `${Math.min(Math.max(contentHeight + 80, 400), 800)}px`,
+                }}
                 onMouseDown={handleMouseDown}
                 onTouchStart={handleTouchStart}
             >
@@ -294,18 +311,17 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                     style={{
                         position: 'relative',
                         minWidth: '100%',
-                        width: `${(maxX + 1) * (nodeWidth + nodeGap)}px`,
+                        width: `${contentWidth}px`,
+                        height: `${contentHeight}px`,
                         transform: `translate(${drag.x}px, ${drag.y}px) scale(${scale})`,
                         transformOrigin: '0 0',
-                        minHeight: '200px',
                     }}
                 >
                     <svg
                         className="absolute z-0"
                         style={{
-                            width: `${(maxX + 1) * (nodeWidth + nodeGap)}px`,
-                            height: `${(Math.abs(minY) + 1 + Math.max(...nodes.map(n => n.y))) * (nodeHeight + nodeGap)}px`,
-                            minHeight: '200px',
+                            width: `${contentWidth}px`,
+                            height: `${contentHeight}px`,
                         }}
                     >
                         <defs>
@@ -320,9 +336,9 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                                 const shouldDim = showOnlyTruePath && !isTruePath;
                                 const from = getNodeById(edge.from);
                                 const to = getNodeById(edge.to);
-                                const fromX = from.x * (nodeWidth + nodeGap) + nodeWidth + nodeGap + (compactMode ? 0 : 10);
+                                const fromX = (from.x - minX) * (nodeWidth + nodeGap) + nodeWidth + nodeGap + (compactMode ? 0 : 10);
                                 const fromY = (maxY - from.y) * (nodeHeight + nodeGap) + nodeHeight / 2 + nodeGap;
-                                const toX = to.x * (nodeWidth + nodeGap) + nodeGap + (compactMode ? 0 : 27);
+                                const toX = (to.x - minX) * (nodeWidth + nodeGap) + nodeGap + (compactMode ? 0 : 27);
                                 const toY = (maxY - to.y) * (nodeHeight + nodeGap) + nodeHeight / 2 + nodeGap;
                                 const midX = fromX + (toX - fromX) / 2;
                                 return (
@@ -378,10 +394,10 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                                     setSelectedNode(node);
                                     onNodeClick?.(node.id);
                                 }}
-                                title={node.label || nodeTypes[node.type]?.label}
+                                title={node.label || t(`monad.node.${node.type}`)}
                                 className={`absolute text-white text-xs shadow ${isDimmed ? "opacity-30 grayscale" : ""} ${compactMode ? "cursor-pointer" : ""}`}
                                 style={{
-                                    left: node.x * (nodeWidth + nodeGap) + nodeGap,
+                                    left: (node.x - minX) * (nodeWidth + nodeGap) + nodeGap,
                                     top: (maxY - node.y) * (nodeHeight + nodeGap) + nodeGap,
                                     width: compactMode ? nodeWidth : nodeWidth + 40,
                                     height: nodeHeight,
@@ -441,7 +457,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                                             />
                                         </div>
                                         <div className={`ml-3 text-[11px] leading-tight text-left z-30 whitespace-pre-wrap break-words max-w-[100px] ${nodeTypes[node.type]?.textColor}`}>
-                                            <div className="font-semibold">{nodeTypes[node.type]?.label}</div>
+                                            <div className="font-semibold">{t(`monad.node.${node.type}`)}</div>
                                             {node.label && (
                                                 <div className="text-[10px] italic">{node.label}</div>
                                             )}
@@ -466,6 +482,20 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
                         showTruePath={showOnlyTruePath}
                     />
                 </NodeContextPopup>
+            )}
+            {/* True Path Choices Summary */}
+            {labeledTruePathEdges.length > 0 && (
+                <div className="mt-4 p-4 bg-zinc-800 rounded-lg border border-zinc-700">
+                    <h3 className="text-lg font-semibold mb-3 text-yellow-400">{t('monad.trueEndingChoices')}</h3>
+                    <ul className="space-y-2">
+                        {labeledTruePathEdges.map((edge, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-sm">
+                                <span className="text-yellow-400 mt-0.5">→</span>
+                                <span className="text-zinc-200">{lRec(edge.label, lang)}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             )}
         </div>
     );

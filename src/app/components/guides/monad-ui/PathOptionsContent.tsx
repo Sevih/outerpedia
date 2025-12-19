@@ -2,13 +2,15 @@
 
 import React from "react";
 import type { MonadEdge, MonadNode } from "@/types/monad";
-import { nodeTypes } from "@/lib/monad/nodeTypes";
+import { useI18n } from "@/lib/contexts/I18nContext";
+import { useTenant } from "@/lib/contexts/TenantContext";
+import { lRec } from "@/lib/localize";
 
 interface PathOptionsContentProps {
     node: MonadNode;
     edges: MonadEdge[];
     getNodeById: (id: string) => MonadNode;
-    showTruePath?: boolean; // <- doit exister
+    showTruePath?: boolean;
 }
 
 
@@ -16,18 +18,20 @@ export const PathOptionsContent: React.FC<PathOptionsContentProps> = ({
     node,
     edges,
     getNodeById,
-    showTruePath, // 👈 ajoute ceci ici
+    showTruePath,
 }) => {
+    const { t } = useI18n();
+    const { key: lang } = useTenant();
 
     const outgoing = edges
         .filter(e => e.from === node.id)
         .sort((a, b) => {
             const nodeA = getNodeById(a.to);
             const nodeB = getNodeById(b.to);
-            return nodeB.y - nodeA.y; // ordre du plus haut vers le plus bas
+            return nodeB.y - nodeA.y;
         });
 
-    if (outgoing.length === 0) return <div className="text-sm">No options available.</div>;
+    if (outgoing.length === 0) return <div className="text-sm">{t('monad.ui.noOptions')}</div>;
 
     return (
         <>
@@ -38,6 +42,9 @@ export const PathOptionsContent: React.FC<PathOptionsContentProps> = ({
                 const shouldDim = showTruePath && !isTrue;
                 const highlight = showTruePath && isTrue;
 
+                const labelText = lRec(edge.label, lang) || t('monad.ui.unnamedPath');
+                const needText = lRec(edge.need, lang);
+
                 return (
                     <div
                         key={i}
@@ -46,16 +53,16 @@ export const PathOptionsContent: React.FC<PathOptionsContentProps> = ({
                 ${highlight ? "bg-green-700 text-white border-green-500" : "bg-zinc-800 text-white border-zinc-700"}`}
                     >
                         <div className="italic">
-                            {edge.label?.trim() || "(Unnamed path)"}
+                            {labelText}
                         </div>
-                        {edge.need && (
+                        {needText && (
                             <div className="text-xs text-yellow-400 mt-1 italic">
                                 <span className="mr-1">🔒</span>
-                                Required : {edge.need}
+                                {t('monad.ui.required')} : {needText}
                             </div>
                         )}
                         <div className="text-xs text-gray-400 mt-1">
-                            → {toNode.label ?? nodeTypes[toNode.type]?.label ?? toNode.id}
+                            → {toNode.label ?? t(`monad.node.${toNode.type}`) ?? toNode.id}
                         </div>
                     </div>
                 );

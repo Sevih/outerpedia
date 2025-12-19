@@ -1483,20 +1483,20 @@
   "depth1-route1": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 1 : route 1",
-      "jp": "深度1 : ルート1",
-      "kr": "깊이 1 : 루트 1",
-      "zh": "深度1：路线1"
+      "en": "Depth 1 : Land of the White Falcon",
+      "jp": "深度1 : 白い鷹の国",
+      "kr": "깊이 1 : 하얀 매의 나라",
+      "zh": "深度1：白鹰之国"
     },
     "description": {
-      "en": "Map of Depth 1 : route 1 and true ending path",
-      "jp": "深度1：ルート1とトゥルーエンディングへの道",
-      "kr": "깊이 1: 루트 1 및 트루 엔딩 경로",
-      "zh": "深度1地图：路线1和真结局路径"
+      "en": "Map of Depth 1 : Land of the White Falcon and true ending path",
+      "jp": "深度1：白い鷹の国とトゥルーエンディングへの道",
+      "kr": "깊이 1: 하얀 매의 나라 및 트루 엔딩 경로",
+      "zh": "深度1地图：白鹰之国和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-03",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "normal": {
@@ -1712,191 +1712,191 @@
   "depth2-route1": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 2 : route 1",
-      "jp": "深度2 : ルート1",
-      "kr": "깊이 2 : 루트 1",
-      "zh": "深度2：路线1"
+      "en": "Depth 2 : Sacred Archipelago",
+      "jp": "深度2 : 聖なる群島",
+      "kr": "깊이 2 : 신성한 군도",
+      "zh": "深度2：神圣群岛"
     },
     "description": {
-      "en": "Map of Depth 2 : route 1 and true ending path",
-      "jp": "深度2：ルート1とトゥルーエンディングへの道",
-      "kr": "깊이 2: 루트 1 및 트루 엔딩 경로",
-      "zh": "深度2地图：路线1和真结局路径"
+      "en": "Map of Depth 2 : Sacred Archipelago and true ending path",
+      "jp": "深度2：聖なる群島とトゥルーエンディングへの道",
+      "kr": "깊이 2: 신성한 군도 및 트루 엔딩 경로",
+      "zh": "深度2地图：神圣群岛和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-04",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "depth3-route1": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 3 : route 1",
-      "jp": "深度3 : ルート1",
-      "kr": "깊이 3 : 루트 1",
-      "zh": "深度3：路线1"
+      "en": "Depth 3 : Land of Snow and Steel",
+      "jp": "深度3 : 白い雪と鋼の国",
+      "kr": "깊이 3 : 하얀 눈과 강철의 나라",
+      "zh": "深度3：白雪与钢铁之国"
     },
     "description": {
-      "en": "Map of Depth 3 : route 1 and true ending path",
-      "jp": "深度3：ルート1とトゥルーエンディングへの道",
-      "kr": "깊이 3: 루트 1 및 트루 엔딩 경로",
-      "zh": "深度3地图：路线1和真结局路径"
+      "en": "Map of Depth 3 : Land of Snow and Steel and true ending path",
+      "jp": "深度3：白い雪と鋼の国とトゥルーエンディングへの道",
+      "kr": "깊이 3: 하얀 눈과 강철의 나라 및 트루 엔딩 경로",
+      "zh": "深度3地图：白雪与钢铁之国和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-09",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "depth4-route1": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 4 : route 1",
-      "jp": "深度4 : ルート1",
-      "kr": "깊이 4 : 루트 1",
-      "zh": "深度4：路线1"
+      "en": "Depth 4 : Land of Sandstorms [1st Part]",
+      "jp": "深度4 : 砂風の国 [前編]",
+      "kr": "깊이 4 : 모래바람의 나라 [1부]",
+      "zh": "深度4：风沙之国 [第一部分]"
     },
     "description": {
-      "en": "Map of Depth 4 : route 1 and true ending path",
-      "jp": "深度4：ルート1とトゥルーエンディングへの道",
-      "kr": "깊이 4: 루트 1 및 트루 엔딩 경로",
-      "zh": "深度4地图：路线1和真结局路径"
+      "en": "Map of Depth 4 : Land of Sandstorms [1st Part] and true ending path",
+      "jp": "深度4：砂風の国 [前編] とトゥルーエンディングへの道",
+      "kr": "깊이 4: 모래바람의 나라 [1부] 및 트루 엔딩 경로",
+      "zh": "深度4地图：风沙之国 [第一部分] 和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-12",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "depth4-route2": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 4 : route 2",
-      "jp": "深度4 : ルート2",
-      "kr": "깊이 4 : 루트 2",
-      "zh": "深度4：路线2"
+      "en": "Depth 4 : Land of Sandstorms [2nd Part]",
+      "jp": "深度4 : 砂風の国 [後編]",
+      "kr": "깊이 4 : 모래바람의 나라 [2부]",
+      "zh": "深度4：风沙之国 [第二部分]"
     },
     "description": {
-      "en": "Map of Depth 4 : route 2 and true ending path",
-      "jp": "深度4：ルート2とトゥルーエンディングへの道",
-      "kr": "깊이 4: 루트 2 및 트루 엔딩 경로",
-      "zh": "深度4地图：路线2和真结局路径"
+      "en": "Map of Depth 4 : Land of Sandstorms [2nd Part] and true ending path",
+      "jp": "深度4：砂風の国 [後編] とトゥルーエンディングへの道",
+      "kr": "깊이 4: 모래바람의 나라 [2부] 및 트루 엔딩 경로",
+      "zh": "深度4地图：风沙之国 [第二部分] 和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-12",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "depth5-route1": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 5 : route 1",
-      "jp": "深度5 : ルート1",
-      "kr": "깊이 5 : 루트 1",
-      "zh": "深度5：路线1"
+      "en": "Depth 5 : Realm of Bane",
+      "jp": "深度5 : 劇毒の領域",
+      "kr": "깊이 5 : 극독의 영역",
+      "zh": "深度5：剧毒领域"
     },
     "description": {
-      "en": "Map of Depth 5 : route 1 and true ending path",
-      "jp": "深度5：ルート1とトゥルーエンディングへの道",
-      "kr": "깊이 5: 루트 1 및 트루 엔딩 경로",
-      "zh": "深度5地图：路线1和真结局路径"
+      "en": "Map of Depth 5 : Realm of Bane and true ending path",
+      "jp": "深度5：劇毒の領域とトゥルーエンディングへの道",
+      "kr": "깊이 5: 극독의 영역 및 트루 엔딩 경로",
+      "zh": "深度5地图：剧毒领域和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-12",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "depth6-route1": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 6 : route 1",
-      "jp": "深度6 : ルート1",
-      "kr": "깊이 6 : 루트 1",
-      "zh": "深度6：路线1"
+      "en": "Depth 6 : Land of the White Falcon",
+      "jp": "深度6 : 白い鷹の国",
+      "kr": "깊이 6 : 하얀 매의 나라",
+      "zh": "深度6：白鹰之国"
     },
     "description": {
-      "en": "Map of Depth 6 : route 1 and true ending path",
-      "jp": "深度6：ルート1とトゥルーエンディングへの道",
-      "kr": "깊이 6: 루트 1 및 트루 엔딩 경로",
-      "zh": "深度6地图：路线1和真结局路径"
+      "en": "Map of Depth 6 : Land of the White Falcon and true ending path",
+      "jp": "深度6：白い鷹の国とトゥルーエンディングへの道",
+      "kr": "깊이 6: 하얀 매의 나라 및 트루 엔딩 경로",
+      "zh": "深度6地图：白鹰之国和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-12",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "depth6-route2": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 6 : route 2",
-      "jp": "深度6 : ルート2",
-      "kr": "깊이 6 : 루트 2",
-      "zh": "深度6：路线2"
+      "en": "Depth 6 : Sacred Archipelago",
+      "jp": "深度6 : 聖なる群島",
+      "kr": "깊이 6 : 신성한 군도",
+      "zh": "深度6：神圣群岛"
     },
     "description": {
-      "en": "Map of Depth 6 : route 2 and true ending path",
-      "jp": "深度6：ルート2とトゥルーエンディングへの道",
-      "kr": "깊이 6: 루트 2 및 트루 엔딩 경로",
-      "zh": "深度6地图：路线2和真结局路径"
+      "en": "Map of Depth 6 : Sacred Archipelago and true ending path",
+      "jp": "深度6：聖なる群島とトゥルーエンディングへの道",
+      "kr": "깊이 6: 신성한 군도 및 트루 엔딩 경로",
+      "zh": "深度6地图：神圣群岛和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-12",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "depth6-route3": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 6 : route 3",
-      "jp": "深度6 : ルート3",
-      "kr": "깊이 6 : 루트 3",
-      "zh": "深度6：路线3"
+      "en": "Depth 6 : Land of Snow and Steel",
+      "jp": "深度6 : 白い雪と鋼の国",
+      "kr": "깊이 6 : 하얀 눈과 강철의 나라",
+      "zh": "深度6：白雪与钢铁之国"
     },
     "description": {
-      "en": "Map of Depth 6 : route 3 and true ending path",
-      "jp": "深度6：ルート3とトゥルーエンディングへの道",
-      "kr": "깊이 6: 루트 3 및 트루 엔딩 경로",
-      "zh": "深度6地图：路线3和真结局路径"
+      "en": "Map of Depth 6 : Land of Snow and Steel and true ending path",
+      "jp": "深度6：白い雪と鋼の国とトゥルーエンディングへの道",
+      "kr": "깊이 6: 하얀 눈과 강철의 나라 및 트루 엔딩 경로",
+      "zh": "深度6地图：白雪与钢铁之国和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-12",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "depth6-route4": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 6 : route 4",
-      "jp": "深度6 : ルート4",
-      "kr": "깊이 6 : 루트 4",
-      "zh": "深度6：路线4"
+      "en": "Depth 6 : Land of Sandstorms",
+      "jp": "深度6 : 砂風の国",
+      "kr": "깊이 6 : 모래바람의 나라",
+      "zh": "深度6：风沙之国"
     },
     "description": {
-      "en": "Map of Depth 6 : route 4 and true ending path",
-      "jp": "深度6：ルート4とトゥルーエンディングへの道",
-      "kr": "깊이 6: 루트 4 및 트루 엔딩 경로",
-      "zh": "深度6地图：路线4和真结局路径"
+      "en": "Map of Depth 6 : Land of Sandstorms and true ending path",
+      "jp": "深度6：砂風の国とトゥルーエンディングへの道",
+      "kr": "깊이 6: 모래바람의 나라 및 트루 엔딩 경로",
+      "zh": "深度6地图：风沙之国和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-12",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   },
   "depth6-route5": {
     "category": "monad-gate",
     "title": {
-      "en": "Depth 6 : route 5",
-      "jp": "深度6 : ルート5",
-      "kr": "깊이 6 : 루트 5",
-      "zh": "深度6：路线5"
+      "en": "Depth 6 : Realm of Bane",
+      "jp": "深度6 : 劇毒の領域",
+      "kr": "깊이 6 : 극독의 영역",
+      "zh": "深度6：剧毒领域"
     },
     "description": {
-      "en": "Map of Depth 6 : route 5 and true ending path",
-      "jp": "深度6：ルート5とトゥルーエンディングへの道",
-      "kr": "깊이 6: 루트 5 및 트루 엔딩 경로",
-      "zh": "深度6地图：路线5和真结局路径"
+      "en": "Map of Depth 6 : Realm of Bane and true ending path",
+      "jp": "深度6：劇毒の領域とトゥルーエンディングへの道",
+      "kr": "깊이 6: 극독의 영역 및 트루 엔딩 경로",
+      "zh": "深度6地图：剧毒领域和真结局路径"
     },
     "icon": "CM_Adventure_MonadGate",
     "second_image": "CM_Adventure_MonadGate",
-    "last_updated": "2025-12-12",
+    "last_updated": "2025-12-19",
     "author": "Sevih"
   }
 }

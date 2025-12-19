@@ -13,7 +13,7 @@ import * as defaultRoute from "./defaultRoute";
 import type { MonadNode, MonadEdge } from "@/types/monad";
 
 export const routes: Record<string, {
-  routeTitle: string;
+  routeTitleKey: string;
   nodes: MonadNode[];
   edges: MonadEdge[];
 }> = {

@@ -856,6 +856,40 @@ const en = {
   'guide.inProgress.title': 'Guide in Progress',
   'guide.inProgress.description':
     'This section is currently being written. Check back soon for the full guide!',
+
+  // Monad Gate
+  'monad.rewards': 'Rewards',
+  'monad.trueEndingChoices': 'True Ending Choices',
+  'monad.ui.trueEndingPath': 'True Ending Path',
+  'monad.ui.compact': 'Compact',
+  'monad.ui.reset': 'Reset',
+  'monad.ui.fullscreen': 'Fullscreen',
+  'monad.ui.noOptions': 'No options available.',
+  'monad.ui.required': 'Required',
+  'monad.ui.unnamedPath': '(Unnamed path)',
+  // Node types
+  'monad.node.start': 'Exploration Starting Point',
+  'monad.node.tending': 'True Ending',
+  'monad.node.bending': 'Bad Ending',
+  'monad.node.nending': 'Normal Ending',
+  'monad.node.path': 'Path of Fate',
+  'monad.node.relic': 'Relic Excavation',
+  'monad.node.moment': 'Moment of Maintenance',
+  'monad.node.combat': 'Combat Encounter',
+  'monad.node.elite': 'Encounter with Elite',
+  'monad.node.eldritch': 'Eldritch Realm',
+  'monad.node.pinnacle': 'Pinnacle of the Worldline',
+  'monad.node.final': 'Final Gateway',
+  'monad.node.saga': 'The Saga of Worldlines',
+  'monad.node.unknown': 'Unexplored Area',
+  // Routes
+  'monad.route.1': 'Land of the White Falcon',
+  'monad.route.2': 'Sacred Archipelago',
+  'monad.route.3': 'Land of Snow and Steel',
+  'monad.route.4': 'Land of Sandstorms',
+  'monad.route.4.1': 'Land of Sandstorms [1st Part]',
+  'monad.route.4.2': 'Land of Sandstorms [2nd Part]',
+  'monad.route.5': 'Realm of Bane',
 }
 
 export default en

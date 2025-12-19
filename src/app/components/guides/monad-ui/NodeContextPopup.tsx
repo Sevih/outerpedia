@@ -2,7 +2,7 @@
 
 import React from "react";
 import type { MonadNode } from "@/types/monad";
-import { nodeTypes } from "@/lib/monad/nodeTypes";
+import { useI18n } from "@/lib/contexts/I18nContext";
 
 interface NodeContextPopupProps {
   node: MonadNode;
@@ -17,11 +17,13 @@ export const NodeContextPopup: React.FC<NodeContextPopupProps> = ({
   children,
   position = 'bottom',
 }) => {
+  const { t } = useI18n();
+
   const positionClasses = {
-    bottom: "left-4 bottom-4",
+    bottom: "left-4 top-4",
     top: "left-4 top-4",
-    right: "right-4 bottom-4",
-    left: "left-4 top-1/2 -translate-y-1/2",
+    right: "right-4 top-4",
+    left: "left-4 top-4",
   };
 
   return (
@@ -30,7 +32,7 @@ export const NodeContextPopup: React.FC<NodeContextPopupProps> = ({
     >
       <div className="flex justify-between items-center mb-3">
         <div className="font-semibold text-sm">
-          {node.label ?? nodeTypes[node.type]?.label ?? node.id}
+          {node.label ?? t(`monad.node.${node.type}`) ?? node.id}
 
         </div>
         <button

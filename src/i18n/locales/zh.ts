@@ -854,6 +854,40 @@ const zh = {
   'guide.noVideoYet': '暂无视频。如果您有视频或知道相关视频，请在Discord上联系Eva Mains！',
   'guide.inProgress.title': '攻略撰写中',
   'guide.inProgress.description': '此部分攻略正在撰写中，请稍后查看。',
+
+  // Monad Gate
+  'monad.rewards': '奖励',
+  'monad.trueEndingChoices': '真结局选择',
+  'monad.ui.trueEndingPath': '真结局路线',
+  'monad.ui.compact': '紧凑',
+  'monad.ui.reset': '重置',
+  'monad.ui.fullscreen': '全屏',
+  'monad.ui.noOptions': '没有可用选项。',
+  'monad.ui.required': '需要',
+  'monad.ui.unnamedPath': '(未命名路线)',
+  // Node types
+  'monad.node.start': '探查起点',
+  'monad.node.tending': '真结局',
+  'monad.node.bending': '坏结局',
+  'monad.node.nending': '普通结局',
+  'monad.node.path': '命运之路',
+  'monad.node.relic': '挖掘遗物',
+  'monad.node.moment': '整备时刻',
+  'monad.node.combat': '发生交战',
+  'monad.node.elite': '遭遇强敌',
+  'monad.node.eldritch': '未知领域',
+  'monad.node.pinnacle': '世界缐的顶峰',
+  'monad.node.final': '最终关卡',
+  'monad.node.saga': '世界线的故事',
+  'monad.node.unknown': '未访区域',
+  // Routes
+  'monad.route.1': '白鹰之国',
+  'monad.route.2': '神圣群岛',
+  'monad.route.3': '白雪与钢铁之国',
+  'monad.route.4': '风沙之国',
+  'monad.route.4.1': '风沙之国【前篇】',
+  'monad.route.4.2': '风沙之国【后篇】',
+  'monad.route.5': '剧毒领域',
 }
 
 export default zh

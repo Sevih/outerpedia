@@ -1,6 +1,6 @@
 import type { MonadNode, MonadEdge } from "@/types/monad";
 
-export const routeTitle = "Deeps 3 – Route 1";
+export const routeTitleKey = "monad.route.3";
 
 export const nodes: MonadNode[] = [
     { id: "A", x: 0, y: 0, type: "start", truePath: true },
@@ -134,8 +134,8 @@ export const nodes: MonadNode[] = [
 ];
 
 export const edges: MonadEdge[] = [
-    { from: "N16", to: "N17", label: "Avoid the situation", truePath: true },
-    { from: "N16", to: "N18", label: "Stand and fight" },
+    { from: "N16", to: "N17", label: { en: "Avoid the situation.", jp: "状況を回避する。", kr: "상황을 회피한다.", zh: "选择回避。" }, truePath: true },
+    { from: "N16", to: "N18", label: { en: "Stand and fight.", jp: "立ち向かう。", kr: "맞서싸운다.", zh: "选择正面迎战。" } },
     { from: "A", to: "N1", truePath: true },
     { from: "N1", to: "N2", truePath: true },
     { from: "N2", to: "N3", truePath: true },
@@ -182,8 +182,8 @@ export const edges: MonadEdge[] = [
     { from: "N37", to: "N42" },
     { from: "N36", to: "N39" },
     { from: "N36", to: "N38" },
-    { from: "N45", to: "N46", label: "Target the core of an abandoned Assault Suit", truePath: true },
-    { from: "N45", to: "N47", label: "Extract antimatter from a nearby dragon carcass" },
+    { from: "N45", to: "N46", label: { en: "Target the core of an abandoned Assault Suit.", jp: "捨てられている重装機兵のコアを狙う。", kr: "버려진 중장기병의 코어를 노린다.", zh: "锁定被遗弃的重骑兵核心。" }, truePath: true },
+    { from: "N45", to: "N47", label: { en: "Extract antimatter from a nearby dragon carcass.", jp: "近くの竜の遺骸からアンチマターを抽出する。", kr: "근처 용의 유해에서 안티매터를 추출한다.", zh: "从附近的龙族遗骸中提取反物质。" } },
     { from: "N38", to: "N43" },
     { from: "N39", to: "N43" },
     { from: "N41", to: "N43" },
@@ -191,11 +191,11 @@ export const edges: MonadEdge[] = [
     { from: "N40", to: "N43", truePath: true },
     { from: "N43", to: "N44", truePath: true },
     { from: "N44", to: "N45", truePath: true },
-    { from: "N48", to: "N49", label: "Ambush the retreating Vlada", truePath: true },
+    { from: "N48", to: "N49", label: { en: "Ambush the retreating Vlada.", jp: "撤収中のヴラダを奇襲する。", kr: "철수중인 블라다를 기습한다.", zh: "突袭正在撤退的佛拉达。" }, truePath: true },
     { from: "N46", to: "N48", truePath: true },
     { from: "N47", to: "N48" },
-    { from: "N57", to: "N58", label: "Infiltrate with caution to ensure safety", truePath: true },
-    { from: "N57", to: "N59", label: "Prioritize speed and infiltrate swiftly" },
+    { from: "N57", to: "N58", label: { en: "Infiltrate with caution to ensure safety.", jp: "安全を重視して潜入", kr: "안전을 도모하여 침투", zh: "选择安全第一路线" }, truePath: true },
+    { from: "N57", to: "N59", label: { en: "Prioritize speed and infiltrate swiftly.", jp: "スピードを重視して潜入", kr: "속도를 우선하여 침투", zh: "选择最快速的路线" } },
     { from: "N49", to: "N50", truePath: true },
     { from: "N50", to: "N53", truePath: true },
     { from: "N53", to: "N54", truePath: true },
@@ -220,7 +220,7 @@ export const edges: MonadEdge[] = [
     { from: "N78", to: "N79", truePath: true },
     { from: "N79", to: "N80", truePath: true },
     { from: "N80", to: "N81", truePath: true },
-    { from: "N81", to: "N82", label: "Take a look around (Key item: New Weapon Secret Code)", truePath: true },
+    { from: "N81", to: "N82", label: { en: "...Take a look around.", jp: "......一度調べてみる。", kr: "......한번 살펴본다.", zh: "......进去看看。" }, need: { en: "New Weapon Secret Code", jp: "新兵器の秘密コード", kr: "신병기 비밀 코드", zh: "新兵器秘密代码" }, truePath: true },
     { from: "N58", to: "N74" },
     { from: "N74", to: "N84" },
     { from: "N84", to: "N85" },
@@ -254,8 +254,8 @@ export const edges: MonadEdge[] = [
     { from: "N102", to: "N95" },
     { from: "N82", to: "N90", truePath: true },
     { from: "N90", to: "N91", truePath: true },
-    { from: "N106", to: "N107", label: "Rush to help her (Key item: Sleep Gas)", truePath: true },
-    { from: "N106", to: "N108", label: "Observe the situation" },
+    { from: "N106", to: "N107", label: { en: "Rush to help her.", jp: "助けに出る。", kr: "도와주러 뛰쳐나간다.", zh: "冲出去救她。" }, need: { en: "Sleep Gas", jp: "睡眠ガス", kr: "수면 가스", zh: "安眠气体" }, truePath: true },
+    { from: "N106", to: "N108", label: { en: "Observe the situation.", jp: "状況を見守る。", kr: "상황을 지켜본다.", zh: "观察情况再说。" } },
     { from: "N91", to: "N105", truePath: true },
     { from: "N105", to: "N106", truePath: true },
     { from: "N107", to: "N110", truePath: true },
@@ -267,7 +267,7 @@ export const edges: MonadEdge[] = [
     { from: "N108", to: "N113" },
     { from: "N113", to: "N114" },
     { from: "N114", to: "N117" },
-    { from: "N116", to: "N120", label: "I have something prepared for this moment", need: "Sleep Gas", truePath: true },
+    { from: "N116", to: "N120", label: { en: "I have something prepared for this moment.", jp: "こんなこともあろうかと用意したものがある。", kr: "이때를 위해 준비한 물건이 있다.", zh: "专门为这个时候准备的东西。" }, need: { en: "Sleep Gas", jp: "睡眠ガス", kr: "수면 가스", zh: "安眠气体" }, truePath: true },
     { from: "N116", to: "N121" },
     { from: "N115", to: "N116", truePath: true },
     { from: "N92", to: "N105" },
@@ -276,8 +276,8 @@ export const edges: MonadEdge[] = [
     { from: "N125", to: "N126", truePath: true },
     { from: "N121", to: "N122" },
     { from: "N122", to: "N125" },
-    { from: "N126", to: "N127", label: "Only weapons can beat weapons", need: "New Weapon Secret Code", truePath: true },
-    { from: "N126", to: "N128", label: "Fight to the death" },
+    { from: "N126", to: "N127", label: { en: "Only weapons can beat weapons.", jp: "兵器をもって兵器を制す。", kr: "병기는 병기로 제압하는 법.", zh: "兵器就要用兵器来压制。" }, need: { en: "New Weapon Secret Code", jp: "新兵器の秘密コード", kr: "신병기 비밀 코드", zh: "新兵器秘密代码" }, truePath: true },
+    { from: "N126", to: "N128", label: { en: "Fight to the death.", jp: "必死に抵抗する。", kr: "결사항전한다.", zh: "决一死战。" } },
     { from: "N127", to: "N83", truePath: true },
     { from: "N83", to: "N129", truePath: true },
     { from: "N128", to: "N130" },

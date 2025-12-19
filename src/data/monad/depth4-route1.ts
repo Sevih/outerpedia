@@ -1,6 +1,6 @@
 import type { MonadNode, MonadEdge } from "@/types/monad";
 
-export const routeTitle = "Deeps 4 – Route 1";
+export const routeTitleKey = "monad.route.4.1";
 
 export const nodes: MonadNode[] = [
     { id: "A", x: 0, y: 0, type: "start", truePath: true },
@@ -130,8 +130,8 @@ export const nodes: MonadNode[] = [
 ];
 
 export const edges: MonadEdge[] = [
-    { from: "N10", to: "N11", label: "Quickly take down the twins", truePath: true },
-    { from: "N10", to: "N12", label: "Quickly take down the surrounding forces" },
+    { from: "N10", to: "N11", label: { en: "Quickly take down the twins.", jp: "双子を素早く制圧する。", kr: "쌍둥이들을 빠르게 제압한다.", zh: "尽快制伏双胞胎。" }, truePath: true },
+    { from: "N10", to: "N12", label: { en: "Quickly take down the surrounding forces.", jp: "周囲の兵力を素早く制圧する。", kr: "주변 병력을 빠르게 제압한다.", zh: "尽快制伏周围兵力。" } },
     { from: "A", to: "N1", truePath: true },
     { from: "N1", to: "N2", truePath: true },
     { from: "N2", to: "N3", truePath: true },
@@ -161,8 +161,8 @@ export const edges: MonadEdge[] = [
     { from: "N19", to: "N22" },
     { from: "N22", to: "N23" },
     { from: "N21", to: "N23" },
-    { from: "N24", to: "N25", label: "Ruin the convert", truePath: true },
-    { from: "N24", to: "N26", label: "Let's find another way" },
+    { from: "N24", to: "N25", label: { en: "Ruin the concert.", jp: "演奏会を台無しにする。", kr: "연주회를 망친다.", zh: "搞砸演奏会。" }, truePath: true },
+    { from: "N24", to: "N26", label: { en: "Let's find another way.", jp: "他の道を探してみよう。", kr: "다른 길을 찾아보자.", zh: "找找其他路吧。" } },
     { from: "N25", to: "N29", truePath: true },
     { from: "N29", to: "N33", truePath: true },
     { from: "N33", to: "N35", truePath: true },
@@ -200,9 +200,9 @@ export const edges: MonadEdge[] = [
     { from: "N53", to: "N54" },
     { from: "N39", to: "N53" },
     { from: "N55", to: "N56", truePath: true },
-    { from: "N56", to: "N57", label: "Join the main force in battle" },
-    { from: "N56", to: "N58", label: "Infiltrate the base as planned", truePath: true },
-    { from: "N56", to: "N59", label: "Utilize the hallucination gas", need: "Hallucination Gas" },
+    { from: "N56", to: "N57", label: { en: "Join the main force in battle", jp: "本隊の戦闘に合流する", kr: "본대의 전투에 합류", zh: "加入主力部队的战斗" } },
+    { from: "N56", to: "N58", label: { en: "Infiltrate the base as planned", jp: "作戦通りに拠点に潜入する", kr: "작전대로 거점에 잠입", zh: "依作战计划潜入据点" }, truePath: true },
+    { from: "N56", to: "N59", label: { en: "Utilize the hallucination gas.", jp: "幻覚ガスを活用する。", kr: "환각 가스를 활용. ", zh: "利用幻觉气体。" }, need: { en: "Hallucination Gas", jp: "幻覚ガス", kr: "환각 가스", zh: "幻觉气体" } },
     { from: "N58", to: "N60", truePath: true },
     { from: "N60", to: "N61", truePath: true },
     { from: "N61", to: "N62", truePath: true },
@@ -219,8 +219,8 @@ export const edges: MonadEdge[] = [
     { from: "N66", to: "N71" },
     { from: "N71", to: "N72" },
     { from: "N72", to: "N73", truePath: true },
-    { from: "N73", to: "N74", label: "Rescue the prisoners", truePath: true },
-    { from: "N73", to: "N75", label: "Prioritize the greater cause" },
+    { from: "N73", to: "N74", label: { en: "Rescue the prisoners.", jp: "捕虜を救出する。", kr: "포로를 구출한다.", zh: "救出俘虏。" }, truePath: true },
+    { from: "N73", to: "N75", label: { en: "Prioritize the greater cause.", jp: "大義を優先する。", kr: "대의를 우선한다.", zh: "优先考虑大局。" } },
     { from: "N74", to: "N78", truePath: true },
     { from: "N75", to: "N77" },
     { from: "N75", to: "N80" },
@@ -259,9 +259,9 @@ export const edges: MonadEdge[] = [
     { from: "N105", to: "N106", truePath: true },
     { from: "N106", to: "N107", truePath: true },
     { from: "N107", to: "N108", truePath: true },
-    { from: "N108", to: "N109", label: "Search for a way to calm the madness", need: "Largissimo", truePath: true },
-    { from: "N108", to: "N110", label: "Leverage the corruption levels" },
-    { from: "N108", to: "N111", label: "Fight fair and square" },
+    { from: "N108", to: "N109", label: { en: "Search for a way to calm the madness. (Key Item: Largissimo)", jp: "狂気を鎮める手段を探す。(キーアイテム:ラルギッシモ)", kr: "광기를 진정시킬 수단을 찾는다. (키 아이템 : 라르기시모)", zh: "寻找能够稳住狂气的方法。(关键物品:极缓板)" }, need: { en: "Largissimo", jp: "ラルギッシモ", kr: "라르기시모", zh: "极缓板" }, truePath: true },
+    { from: "N108", to: "N110", label: { en: "Leverage the corruption levels. (Toxic Corruption: 50% or higher)", jp: "侵食度を活用する。(劇毒侵食度50%以上)", kr: "침식도를 활용한다. (극독 침식도 50% 이상)", zh: "利用侵蚀度。(剧毒侵蚀度50%以上)" } },
+    { from: "N108", to: "N111", label: { en: "Fight fair and square.", jp: "正々堂々と戦う。", kr: "정정당당하게 싸운다.", zh: "堂堂正正地对决。" } },
     { from: "N109", to: "N112", truePath: true },
     { from: "N112", to: "N113", truePath: true },
     { from: "N113", to: "N114", truePath: true },

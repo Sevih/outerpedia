@@ -1,6 +1,6 @@
 import type { MonadNode, MonadEdge } from "@/types/monad";
 
-export const routeTitle = "Deeps 5 – Route 1";
+export const routeTitleKey = "monad.route.5";
 
 export const nodes: MonadNode[] = [
     { id: "A", x: 0, y: 0, type: "start", truePath: true },
@@ -197,10 +197,10 @@ export const nodes: MonadNode[] = [
 ];
 
 export const edges: MonadEdge[] = [
-    { from: "N5", to: "N6", label: "Recover Epsilon's Core", truePath: true },
-    { from: "N5", to: "N7", label: "Recover Ksai's Core" },
-    { from: "N15", to: "N16", label: "Call out to Delta", truePath: true },
-    { from: "N15", to: "N17", label: "...Give up" },
+    { from: "N5", to: "N6", label: { en: "Recover Epsilon's Core", jp: "イプシロンのコアを回収する", kr: "엡실론의 코어를 회수", zh: "收回艾普西隆的核心" }, truePath: true },
+    { from: "N5", to: "N7", label: { en: "Recover Ksai's Core", jp: "ザイのコアを回収する", kr: "크사이의 코어를 회수", zh: "收回科赛的核心" } },
+    { from: "N15", to: "N16", label: { en: "Call out to Delta.", jp: "デルタを呼び止める。", kr: "델타를 불러세운다.", zh: "叫住戴尔塔。" }, truePath: true },
+    { from: "N15", to: "N17", label: { en: "...Give up.", jp: "......諦める。", kr: "......단념한다.", zh: "......放弃。" } },
     { from: "A", to: "N1", truePath: true },
     { from: "N1", to: "N2", truePath: true },
     { from: "N2", to: "N3", truePath: true },
@@ -217,7 +217,7 @@ export const edges: MonadEdge[] = [
     { from: "N7", to: "N10" },
     { from: "N7", to: "N11" },
     { from: "N16", to: "N18", truePath: true },
-    { from: "N18", to: "N19", label: "Receive the broken Core", truePath: true },
+    { from: "N18", to: "N19", label: { en: "...Receive the broken Core.", jp: "......壊れたコアを受け取る。", kr: "......부서진 코어를 받는다.", zh: "......接过破损的核心。" }, truePath: true },
     { from: "N19", to: "N22", truePath: true },
     { from: "N22", to: "N23", truePath: true },
     { from: "N23", to: "N24", truePath: true },
@@ -226,9 +226,9 @@ export const edges: MonadEdge[] = [
     { from: "N21", to: "N20" },
     { from: "N26", to: "N25" },
     { from: "N25", to: "N24" },
-    { from: "N24", to: "N27", label: "I was summoned by Veronica" },
-    { from: "N24", to: "N28", label: "Eternal sent a lenghtly challenge (?)" },
-    { from: "N24", to: "N29", label: "I made a promise to Nella", truePath: true },
+    { from: "N24", to: "N27", label: { en: "I was summoned by Veronica.", jp: "ヴェロニカに呼び出されていた。", kr: "베로니카에게 호출을 받았다.", zh: "收到了维罗妮卡的传唤。" } },
+    { from: "N24", to: "N28", label: { en: "Eternal sent a lengthy challenge (?).", jp: "エターナルに長文の果たし状(?)を送られていた。", kr: "이터널이 장문의 도전장(?)을 보냈다.", zh: "伊特诺发来了长长的挑战书(?)。" } },
+    { from: "N24", to: "N29", label: { en: "I made a promise to Nella.", jp: "ネラとの約束があった。", kr: "넬라와 약속한게 있다.", zh: "和内拉约定了一个事情。" }, truePath: true },
     { from: "N27", to: "N30" },
     { from: "N27", to: "N31" },
     { from: "N29", to: "N31", truePath: true },
@@ -240,8 +240,8 @@ export const edges: MonadEdge[] = [
     { from: "N32", to: "N33" },
     { from: "N31", to: "N33", truePath: true },
     { from: "N33", to: "N34", truePath: true },
-    { from: "N34", to: "N35", label: "Go straight to the depths", truePath: true },
-    { from: "N34", to: "N36", label: "Search for a safer route" },
+    { from: "N34", to: "N35", label: { en: "Go straight to the depths.", jp: "深部へ直行する。", kr: "심부로 직행한다.", zh: "直捣核心区。" }, truePath: true },
+    { from: "N34", to: "N36", label: { en: "Search for a safer route.", jp: "安全なルートを探してみる。", kr: "안전한 루트를 탐색한다.", zh: "搜寻安全的路缐。" } },
     { from: "N35", to: "N38", truePath: true },
     { from: "N38", to: "N40", truePath: true },
     { from: "N40", to: "N43", truePath: true },
@@ -338,9 +338,9 @@ export const edges: MonadEdge[] = [
     { from: "N62", to: "N81", truePath: true },
     { from: "N81", to: "N88", truePath: true },
     { from: "N88", to: "N89", truePath: true },
-    { from: "N89", to: "N90", label: "The Battle-Hardened Knight Commander", need: "Relic of the Hero" },
-    { from: "N89", to: "N91", label: "Archdemon of Salvation", need: "Transparent Chess Piece", truePath: true },
-    { from: "N89", to: "N92", label: "Gospel of the Clouds", need: "Blind Devotion" },
+    { from: "N89", to: "N90", label: { en: "The Battle-Hardened Knight Commander", jp: "百戦錬磨の騎士団長", kr: "백전불태의 기사단장 ", zh: "百战不殆的骑士团长" }, need: { en: "Relic of the Hero", jp: "勇者の形見", kr: "용사의 유품", zh: "勇士遗物" } },
+    { from: "N89", to: "N91", label: { en: "Archdemon of Salvation ", jp: "救世の魔王", kr: "구세의 마왕", zh: "救世魔王" }, need: { en: "Transparent Chess Piece", jp: "透明なチェスの駒", kr: "투명한 체스 기물", zh: "透明棋子" }, truePath: true },
+    { from: "N89", to: "N92", label: { en: "Gospel of the Clouds", jp: "雲の福音", kr: "구름의 복음", zh: "云朵的福音" }, need: { en: "Blind Devotion", jp: "盲者の祈り", kr: "눈 먼 자의 기도", zh: "盲者的祈祷" } },
     { from: "N91", to: "N93", truePath: true },
     { from: "N93", to: "N94", truePath: true },
     { from: "N94", to: "N95", truePath: true },
@@ -446,8 +446,8 @@ export const edges: MonadEdge[] = [
     { from: "N160", to: "N167" },
     { from: "N167", to: "N168" },
     { from: "N168", to: "N170" },
-    { from: "N169", to: "N170", label: "Steel your resolve", need: "Officer Felix's Core", truePath: true },
-    { from: "N169", to: "N171", label: "Take Eva and escape the Gate" },
+    { from: "N169", to: "N170", label: { en: "Steel your resolve.", jp: "闘志を燃やす。", kr: "전의를 다진다. ", zh: "斗志昂扬。" }, need: { en: "Officer Felix's Core", jp: "看守ニャンのコア", kr: "간수냥이의 코어", zh: "看守喵核心" }, truePath: true },
+    { from: "N169", to: "N171", label: { en: "Take Eva and escape the Gate.", jp: "エヴァを連れてゲートから脱出する。", kr: "에바를 챙겨서 게이트에서 탈출한다.", zh: "带着艾娃,破门逃脱。" } },
     { from: "N158", to: "N166", truePath: true },
     { from: "N166", to: "N169", truePath: true },
     { from: "N168", to: "N172" },
