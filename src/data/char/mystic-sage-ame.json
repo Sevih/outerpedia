@@ -8,8 +8,8 @@
   "Element": "Light",
   "Class": "Ranger",
   "SubClass": "Vanguard",
-  "rank": null,
-  "rank_pvp": null,
+  "rank": "S",
+  "rank_pvp": "A",
   "role": null,
   "tags": [
     "seasonal",

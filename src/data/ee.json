@@ -2589,7 +2589,7 @@
     "effect10_jp": "<color=#28d9ed>曼荼羅</color>状態で<color=#28d9ed>懺悔なさい!</color>使用後、攻撃力が最も高い味方の行動ゲージ25%",
     "effect10_kr": "<color=#28d9ed>만다라</color> 상태에서 <color=#28d9ed>참회하세요!</color> 사용 후 공격력 가장 높은 아군 행동 게이지 25%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
-    "rank": "",
+    "rank": "A",
     "buff": [
       "BT_ACTION_GAUGE"
     ],
