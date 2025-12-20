@@ -4,11 +4,23 @@
       {
         "name": "Snow-white Embrace",
         "mainStat": "DEF%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "DEF%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "DEF%"
       }
     ],
     "Amulet": [
       {
         "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
         "mainStat": "PEN%"
       },
       {
@@ -22,7 +34,7 @@
       ]
     ],
     "SubstatPrio": "DEF>CHC>CHD>SPD>ACC",
-    "Note": "PvP:Mage'sCharm3Vanguard's Charm2\nPvE:Sage's Charm3Rogue's Charm2Executioner's Charm2", 
+    "Note": "", 
     "Talisman": [
       "Sage's Charm",
       "Rogue's Charm",
@@ -31,10 +43,18 @@
       "Vanguard's Charm"
     ]
   },
-  "Bruiser Speed": {
+  "Pen": {
     "Weapon": [
       {
+        "name": "Snow-white Embrace",
+        "mainStat": "DEF%"
+      },
+      {
         "name": "Violent Sledgehammer",
+        "mainStat": "DEF%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
         "mainStat": "DEF%"
       }
     ],
@@ -44,36 +64,7 @@
         "mainStat": "PEN%"
       },
       {
-        "name": "Clock Up",
-        "mainStat": "DEF%"
-      }
-    ],
-    "Set": [
-      [
-        { "name": "Speed", "count": 2 },
-        { "name": "Immunity", "count": 2 }
-      ]
-    ],
-    "SubstatPrio": "DEF>CHC>CHD>SPD>ACC",
-    "Note": "PvP:Mage'sCharm3Vanguard's Charm2\nPvE:Sage's Charm3Rogue's Charm2Executioner's Charm2", 
-    "Talisman": [
-      "Sage's Charm",
-      "Rogue's Charm",
-      "Executioner's Charm",
-      "Mages's Charm",
-      "Vanguard's Charm"
-    ]
-  },
-  "Bruiser Slow": {
-    "Weapon": [
-      {
-        "name": "Violent Sledgehammer",
-        "mainStat": "DEF%"
-      }
-    ],
-    "Amulet": [
-      {
-        "name": "Death's Hold",
+        "name": "Briareos's Ambition [Striker]",
         "mainStat": "PEN%"
       },
       {
@@ -83,12 +74,145 @@
     ],
     "Set": [
       [
-        { "name": "Defense", "count": 2 },
-        { "name": "Immunity", "count": 2 }
+        { "name": "Penetration", "count": 4 }
       ]
     ],
     "SubstatPrio": "DEF>CHC>CHD>SPD>ACC",
-    "Note": "PvP:Mage'sCharm3Vanguard's Charm2\nPvE:Sage's Charm3Rogue's Charm2Executioner's Charm2", 
+    "Note": "", 
+    "Talisman": [
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executioner's Charm",
+      "Mages's Charm",
+      "Vanguard's Charm"
+    ]
+  },
+  "Def": {
+    "Weapon": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStat": "DEF%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "DEF%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Defense", "count": 4 }
+      ]
+    ],
+    "SubstatPrio": "DEF>CHC>CHD>SPD>ACC",
+    "Note": "", 
+    "Talisman": [
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executioner's Charm",
+      "Mages's Charm",
+      "Vanguard's Charm"
+    ]
+  },
+  "Speed/Immu": {
+    "Weapon": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStat": "DEF%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "DEF%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Immunity", "count": 2 },
+        { "name": "Speed", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "DEF>CHC>CHD>SPD>ACC",
+    "Note": "", 
+    "Talisman": [
+      "Sage's Charm",
+      "Rogue's Charm",
+      "Executioner's Charm",
+      "Mages's Charm",
+      "Vanguard's Charm"
+    ]
+  },
+  "Def/Immu": {
+    "Weapon": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStat": "DEF%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "DEF%"
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      [
+        { "name": "Immunity", "count": 2 },
+        { "name": "Defense", "count": 2 }
+      ]
+    ],
+    "SubstatPrio": "DEF>CHC>CHD>SPD>ACC",
+    "Note": "", 
     "Talisman": [
       "Sage's Charm",
       "Rogue's Charm",
