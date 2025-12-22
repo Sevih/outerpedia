@@ -148,13 +148,14 @@
     "name": "Penetration Set",
     "type": "Set",
     "class": null,
-    "count": 21,
+    "count": 22,
     "characters": [
       "Aer",
       "Ais Wallenstein",
       "Ame",
       "Beth",
       "Bryn",
+      "Caren",
       "Demiurge Astei",
       "Demiurge Luna",
       "Francesca",
@@ -739,6 +740,17 @@
     ]
   },
   {
+    "name": "Briareos's Ambition [Striker]",
+    "type": "Amulet",
+    "class": "Striker",
+    "count": 3,
+    "characters": [
+      "Caren",
+      "Delta",
+      "Gnosis Viella"
+    ]
+  },
+  {
     "name": "Exquisite Death",
     "type": "Weapon",
     "class": "Defender",
@@ -805,16 +817,6 @@
     ]
   },
   {
-    "name": "Briareos's Ambition [Striker]",
-    "type": "Amulet",
-    "class": "Striker",
-    "count": 2,
-    "characters": [
-      "Delta",
-      "Gnosis Viella"
-    ]
-  },
-  {
     "name": "Briareos's Recklessness [Defender]",
     "type": "Weapon",
     "class": "Defender",
@@ -832,6 +834,16 @@
     "characters": [
       "Demiurge Vlada",
       "Gnosis Beth"
+    ]
+  },
+  {
+    "name": "Briareos's Recklessness [Striker]",
+    "type": "Weapon",
+    "class": "Striker",
+    "count": 2,
+    "characters": [
+      "Caren",
+      "Gnosis Viella"
     ]
   },
   {
@@ -957,15 +969,6 @@
     "count": 1,
     "characters": [
       "Demiurge Luna"
-    ]
-  },
-  {
-    "name": "Briareos's Recklessness [Striker]",
-    "type": "Weapon",
-    "class": "Striker",
-    "count": 1,
-    "characters": [
-      "Gnosis Viella"
     ]
   },
   {

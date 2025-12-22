@@ -951,11 +951,29 @@
           "mainStat": [
             "DEF%"
           ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
+          "mainStat": [
+            "DEF%"
+          ]
         }
       ],
       "amuletSub": [
         {
           "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Striker]",
           "mainStat": [
             "PEN%"
           ]
@@ -978,10 +996,22 @@
         "Speed"
       ]
     },
-    "Bruiser Speed": {
+    "Pen": {
       "weaponSub": [
         {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
           "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
           "mainStat": [
             "DEF%"
           ]
@@ -990,6 +1020,12 @@
       "amuletSub": [
         {
           "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Striker]",
           "mainStat": [
             "PEN%"
           ]
@@ -1009,14 +1045,25 @@
         "ACC"
       ],
       "armorSets": [
-        "Speed",
-        "Immunity"
+        "Penetration"
       ]
     },
-    "Bruiser Slow": {
+    "Def": {
       "weaponSub": [
         {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
           "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
           "mainStat": [
             "DEF%"
           ]
@@ -1025,6 +1072,12 @@
       "amuletSub": [
         {
           "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Striker]",
           "mainStat": [
             "PEN%"
           ]
@@ -1044,8 +1097,113 @@
         "ACC"
       ],
       "armorSets": [
-        "Defense",
-        "Immunity"
+        "Defense"
+      ]
+    },
+    "Speed/Immu": {
+      "weaponSub": [
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Immunity",
+        "Speed"
+      ]
+    },
+    "Def/Immu": {
+      "weaponSub": [
+        {
+          "name": "Snow-white Embrace",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Violent Sledgehammer",
+          "mainStat": [
+            "DEF%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Striker]",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Death's Hold",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Striker]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Clock Up",
+          "mainStat": [
+            "DEF%"
+          ]
+        }
+      ],
+      "sub": [
+        "DEF",
+        "CHC",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Immunity",
+        "Defense"
       ]
     }
   },

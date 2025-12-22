@@ -9,7 +9,12 @@
         "2000031_E"
       ]
     },
-    "note": [],
+    "note": [
+      {
+            "type": "p",
+            "string": "Max speed Tamara to Silence Valentine and then increase the CD."
+          }
+    ],
     "teams": {
       "team1": {
         "label": "No Healer",
@@ -38,10 +43,6 @@
           "No healer"
         ],
         "note": [
-          {
-            "type": "p",
-            "string": "Max speed Tamara to Silence Valentine and then increase the CD."
-          },
           {
             "type": "p",
             "string": "Using Astei or Drakhan can assist if survival's an issue with the critical hit chance debuff."
@@ -76,10 +77,6 @@
         "note": [
           {
             "type": "p",
-            "string": "Max speed Tamara to Silence Valentine and then increase the CD."
-          },
-          {
-            "type": "p",
             "string": "Using Astei or Drakhan can assist if survival's an issue with the critical hit chance debuff."
           }
         ]
@@ -109,10 +106,6 @@
           "No fire"
         ],
         "note": [
-          {
-            "type": "p",
-            "string": "Max speed Tamara to Silence Valentine and then increase the CD."
-          },
           {
             "type": "p",
             "string": "Using Drakhan can assist if survival's an issue with the critical hit chance debuff."
@@ -145,14 +138,35 @@
           "1 fire"
         ],
         "note": [
-          {
-            "type": "p",
-            "string": "Max speed Tamara to Silence Valentine and then increase the CD."
-          },
-          {
-            "type": "p",
-            "string": "Using Drakhan can assist if survival's an issue with the critical hit chance debuff."
-          }
+        ]
+      },
+      "team5": {
+        "label": "No Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva",
+            "Liselotte",
+            "Astei",
+            "Tio"
+          ],
+          [
+            "Demiurge Stella"
+          ],
+          [
+            "Tamara",
+            "Gnosis Nella"
+          ],
+          [
+            "Caren",
+            "Demiurge Luna",
+            "Drakhan"
+          ]
+        ],
+        "conditions": [
+          "No Defender"
+        ],
+        "note": [
         ]
       }
     }
@@ -1376,6 +1390,30 @@
           "No Mage"
         ],
         "note": []
+      },
+      "team4": {
+        "label": "1 Defender",
+        "icon": "defender.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Tamara"
+          ],
+          [
+            "Demiurge Drakhan",
+            "Omega Nadja",
+            "Hilde"
+          ],
+          [
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 Defender"
+        ],
+        "note": []
       }
     }
   },
@@ -1487,6 +1525,35 @@
         ],
         "conditions": [
           "1 Earth"
+        ],
+        "note": []
+      },
+      "team4": {
+        "label": "1 Striker",
+        "icon": "striker.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Akari",
+            "Stella",
+            "Fran",
+            "Cindy",
+            "Ember"
+          ],
+          [
+            "Demiurge Stella",
+            "Kanon"
+          ],
+          [
+            "Rey",
+            "Delta",
+            "Ame"
+          ]
+        ],
+        "conditions": [
+          "1 Striker"
         ],
         "note": []
       }
@@ -1722,6 +1789,32 @@
         ],
         "conditions": [
           "1 x 1★"
+        ],
+        "note": []
+      },
+      "team4": {
+        "label": "1 Mage",
+        "icon": "mage.webp",
+        "setup": [
+          [
+            "Monad Eva"
+          ],
+          [
+            "Iota",
+            "Gnosis Nella"
+          ],
+          [
+            "Akari",
+            "Kuro"
+          ],
+          [
+            "Rey",
+            "Kanon",
+            "Caren"
+          ]
+        ],
+        "conditions": [
+          "1 Mage"
         ],
         "note": []
       }
