@@ -15,20 +15,20 @@ const DeepSeaGuardianTeams = DeepSeaGuardianTeamsData as Record<string, TeamData
 export default function DeepSeaGuardianGuide() {
   return (
     <GuideTemplate
-      title="Deep Sea Guardian Joint Challenge Guide"
-      introduction="Joint Challenge boss. The boss gains {B/BT_INVINCIBLE} for 9 turns after using S3. Remove it with {D/BT_STEAL_BUFF} or {D/BT_REMOVE_BUFF}. Increased damage from {C/Striker}, reduced from AoE attacks. Enemies without buffs take {D/BT_FIXED_DAMAGE} at end of boss turn."
+      title="深海ガーディアン 共同作戦ガイド"
+      introduction="共同作戦ボス。ボスはS3使用後、9ターンの{B/BT_INVINCIBLE}を獲得します。{D/BT_STEAL_BUFF}または{D/BT_REMOVE_BUFF}で解除。{C/Striker}からのダメージ増加、AoE攻撃からは減少。バフのない敵はボスのターン終了時に{D/BT_FIXED_DAMAGE}を受けます。"
       defaultVersion="july2025"
       versions={{
         july2025: {
-          label: 'July 2025 Version',
+          label: '2025年7月版',
           content: (
             <>
               <BossDisplay bossKey='Deep Sea Guardian' modeKey='Joint Challenge' defaultBossId='4134065' />
               <hr className="my-6 border-neutral-700" />
               <TacticalTips
                 tips={[
-                  "Any character with {B/BT_INVINCIBLE} gains {B/BT_COOL_CHARGE} on their Ultimate.",
-                  "At turn end, deals 10% Max HP {D/BT_FIXED_DAMAGE} to enemies without buffs.",
+                  "{B/BT_INVINCIBLE}を持つキャラクターは必殺スキルの{B/BT_COOL_CHARGE}を獲得。",
+                  "ターン終了時、バフのない敵に最大HPの10%の{D/BT_FIXED_DAMAGE}を与える。"
                 ]}
               />
               <hr className="my-6 border-neutral-700" />
@@ -38,7 +38,7 @@ export default function DeepSeaGuardianGuide() {
               <hr className="my-6 border-neutral-700" />
               <CombatFootage
                 videoId="ScFXrrOeVNk"
-                title="Deep Sea Guardian - Joint Challenge - Very Hard"
+                title="深海ガーディアン - 共同作戦 - ベリーハード"
                 author="Sevih"
                 date="23/07/2025"
               />
@@ -46,19 +46,19 @@ export default function DeepSeaGuardianGuide() {
           ),
         },
         march2025: {
-          label: 'March 2025 Version',
+          label: '2025年3月版',
           content: (
             <>
               <BossDisplay bossKey='Deep Sea Guardian' modeKey='Joint Challenge' defaultBossId='4134065' />
               <hr className="my-6 border-neutral-700" />
               <TacticalTips
                 tips={[
-                  "Boss takes first turn and uses Ultimate immediately, stunning your whole team (ignores {B/BT_IMMUNE}).",
-                  "Applies {D/BT_DOT_LIGHTNING} and reduces AP gain (except for {C/Healer}).",
-                  "No duplicate classes in team = 50% free Resilience.",
-                  "Use ~300 Resilience to avoid constant stuns.",
-                  "{P/Demiurge Delta} with Tier 4 Saint Ring can cleanse herself and team with S3.",
-                  "Boss is fast - counter-based units are a solid damage source."
+                  "ボスが先制し、即座に必殺スキルを使用してチーム全体をスタン（{B/BT_IMMUNE}無視）。",
+                  "{D/BT_DOT_LIGHTNING}を付与し、AP獲得を減少（{C/Healer}を除く）。",
+                  "チームにクラス重複なし = 50%の無料効果抵抗。",
+                  "約300の効果抵抗でスタンを回避。",
+                  "{P/Demiurge Delta}とTier 4聖者の指輪でS3により自身とチームを解除可能。",
+                  "ボスは速い - 反撃ベースのユニットが有効なダメージソース。"
                 ]}
               />
               <hr className="my-6 border-neutral-700" />
@@ -69,12 +69,12 @@ export default function DeepSeaGuardianGuide() {
           ),
         },
         legacy2024: {
-          label: 'Legacy (2024 Video)',
+          label: 'レガシー (2024年動画)',
           content: (
             <>
               <CombatFootage
                 videoId="pHi3CcaWhn0"
-                title="Deep Sea Guardian Joint Challenge Max Score"
+                title="深海ガーディアン 共同作戦 最高スコア"
                 author="Ducky"
                 date="02/10/2024"
               />
