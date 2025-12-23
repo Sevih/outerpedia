@@ -15,24 +15,24 @@ const PrototypeEx78Teams = PrototypeEx78TeamsData as Record<string, TeamData>
 export default function PrototypeEx78Guide() {
   return (
     <GuideTemplate
-      title="Prototype EX-78 Joint Challenge Guide"
-      introduction="Joint Challenge boss. The boss prioritizes the leftmost enemy, and if the target isn't a {C/Healer}, it gains {B/BT_DAMGE_TAKEN}. Increased damage from {E/Earth} and {E/Water} enemies. Takes 100% increased WG damage from {B/BT_CALL_BACKUP}."
+      title="試作機:EX-78 共同作戦ガイド"
+      introduction="共同作戦ボス。ボスは最も左側の敵を優先し、対象が{C/Healer}でない場合、自身に{B/BT_DAMGE_TAKEN}を付与します。{E/Earth}と{E/Water}の敵からのダメージが増加。{B/BT_CALL_BACKUP}からのWGダメージが100%増加。"
       defaultVersion="october2025"
       versions={{
         october2025: {
-          label: 'October 2025 Version',
+          label: '2025年10月版',
           content: (
             <>
               <BossDisplay bossKey='Prototype EX-78' modeKey='Joint Challenge' defaultBossId='4548181' />
               <hr className="my-6 border-neutral-700" />
               <TacticalTips
                 tips={[
-                  "S1 prioritizes the leftmost enemy - place a {C/Healer} to prevent {B/BT_DAMGE_TAKEN} buff.",
-                  "Increased damage from {E/Earth} and {E/Water}, reduced from {E/Fire}, {E/Light}, {E/Dark}.",
-                  "Takes increased damage when afflicted with {D/BT_DOT_POISON}.",
-                  "When attacked by debuffed enemy, reduces their CP by 30.",
-                  "If boss has a dispellable buff, recovers 10% WG after attacking.",
-                  "Takes 100% increased WG damage from {B/BT_CALL_BACKUP}."
+                  "S1は最も左側の敵を優先 - {B/BT_DAMGE_TAKEN}バフを防ぐため{C/Healer}を配置。",
+                  "{E/Earth}と{E/Water}からのダメージ増加、{E/Fire}、{E/Light}、{E/Dark}からは減少。",
+                  "{D/BT_DOT_POISON}状態の時、受けるダメージが増加。",
+                  "弱体効果を持つ敵から攻撃されると、その敵のCPを30減少。",
+                  "ボスが解除可能なバフを持っている場合、攻撃後にWGを10%回復。",
+                  "{B/BT_CALL_BACKUP}からのWGダメージが100%増加。"
                 ]}
               />
               <hr className="my-6 border-neutral-700" />
@@ -42,7 +42,7 @@ export default function PrototypeEx78Guide() {
               <hr className="my-6 border-neutral-700" />
               <CombatFootage
                 videoId="jw0GIwox7YM"
-                title="Prototype EX-78 - Joint Challenge - (Auto) Very Hard"
+                title="試作機:EX-78 - 共同作戦 - (オート) ベリーハード"
                 author="XuRenChao"
                 date="28/10/2025"
               />
@@ -50,12 +50,12 @@ export default function PrototypeEx78Guide() {
           ),
         },
         legacy2024: {
-          label: 'Legacy (2024 Video)',
+          label: 'レガシー (2024年動画)',
           content: (
             <>
               <CombatFootage
                 videoId="UuspJgswwNQ"
-                title="Prototype EX-78 Joint Challenge Max Score"
+                title="試作機:EX-78 共同作戦 最高スコア"
                 author="Ducky"
                 date="01/12/2024"
               />
