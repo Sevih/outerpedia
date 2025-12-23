@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-12-23",
+    title: {
+      en: "Annihilator",
+      jp: "エクスタミネーター",
+      kr: "말살자",
+      zh: "歼灭者",
+    } as LString,
+    type: "update",
+    url: "/guides/joint-boss/annihilator",
+    content: [
+      {
+        en: "Annihilator joint boss guide updated for December 2025 version.",
+        jp: "エクスタミネーター共同ボスガイドが2025年12月版にアップデートされました。",
+        kr: "말살자 공동 보스 가이드가 2025년 12월 버전으로 업데이트되었습니다.",
+        zh: "歼灭者联合首领指南已更新至2025年12月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-12-17",
     title: {
       en: "Prevent World Alteration Guild Raid",
