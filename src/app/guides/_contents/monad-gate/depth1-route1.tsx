@@ -22,7 +22,7 @@ const Depth1Route1 = () => {
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
-        title={t(routeTitleKey)}
+        titleKey={routeTitleKey}
       />
     </div>
   );

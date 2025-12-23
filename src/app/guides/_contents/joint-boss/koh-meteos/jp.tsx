@@ -15,23 +15,23 @@ const KOHMeteosTeams = KOHMeteosTeamsData as Record<string, TeamData>
 export default function KOHMeteosGuide() {
   return (
     <GuideTemplate
-      title="Knight of Hope Meteos Joint Challenge Guide"
-      introduction="Joint Challenge boss. The boss prioritizes the leftmost enemy and triggers a powerful AoE attack when killing with skills or attacking non-{C/Mage} units. {E/Light} allies gain 40% bonus penetration. The boss's defense stacks each turn but resets on break."
+      title="光明の騎士・メテウス 共同作戦ガイド"
+      introduction="共同作戦ボス。ボスは最も左側の敵を優先し、スキルで敵を倒すか非{C/Mage}を攻撃すると強力なAoE攻撃を発動します。{E/Light}の味方は40%の貫通ボーナスを得ます。ボスの防御力は毎ターン増加しますが、ブレイク時にリセットされます。"
       defaultVersion="november2025"
       versions={{
         november2025: {
-          label: 'November 2025 Version',
+          label: '2025年11月版',
           content: (
             <>
               <BossDisplay bossKey='Knight of Hope Meteos' modeKey='Joint Challenge' defaultBossId='4176152' />
               <hr className="my-6 border-neutral-700" />
               <TacticalTips
                 tips={[
-                  "S1 prioritizes the leftmost enemy - place a {C/Mage} there to avoid triggering the passive AoE.",
-                  "Triggers a defense-ignoring AoE when killing with S1/S2 or attacking non-{C/Mage} with S1.",
-                  "Priority Gauge efficiency +100%, but Speed -50%.",
-                  "Non-attack skills increase critical damage taken by 100% (max 3 stacks).",
-                  "Boss defense +500 each turn, resets on break."
+                  "S1は最も左側の敵を優先 - パッシブAoEを避けるため{C/Mage}を配置。",
+                  "S1/S2で敵を倒すか、S1で非{C/Mage}を攻撃すると防御無視AoEが発動。",
+                  "行動ゲージ効率+100%、但し速度-50%。",
+                  "非攻撃スキルを使用すると受ける会心ダメージが100%増加（最大3回累積）。",
+                  "ボスの防御力は毎ターン+500、ブレイク時リセット。"
                 ]}
               />
               <hr className="my-6 border-neutral-700" />
@@ -41,7 +41,7 @@ export default function KOHMeteosGuide() {
               <hr className="my-6 border-neutral-700" />
               <CombatFootage
                 videoId="qPZzt25dKX0"
-                title="Knight of Hope Meteos - Joint Challenge - (Auto) Very Hard Mode"
+                title="光明の騎士・メテウス - 共同作戦 - (オート) ベリーハード"
                 author="XuRenChao"
                 date="15/11/2025"
               />
@@ -49,18 +49,18 @@ export default function KOHMeteosGuide() {
           ),
         },
         may2025: {
-          label: 'May 2025 Version',
+          label: '2025年5月版',
           content: (
             <>
               <BossDisplay bossKey='Knight of Hope Meteos' modeKey='Joint Challenge' defaultBossId='4176152' />
               <hr className="my-6 border-neutral-700" />
               <TacticalTips
                 tips={[
-                  "S1 prioritizes the leftmost enemy - place a {C/Mage} there to avoid triggering the passive AoE.",
-                  "Triggers a defense-ignoring AoE when killing with S1/S2 or attacking non-{C/Mage} with S1.",
-                  "Priority Gauge efficiency +100%, but Speed -50%.",
-                  "Non-attack skills increase critical damage taken by 100% (max 3 stacks).",
-                  "Boss defense +500 each turn, resets on break."
+                  "S1は最も左側の敵を優先 - パッシブAoEを避けるため{C/Mage}を配置。",
+                  "S1/S2で敵を倒すか、S1で非{C/Mage}を攻撃すると防御無視AoEが発動。",
+                  "行動ゲージ効率+100%、但し速度-50%。",
+                  "非攻撃スキルを使用すると受ける会心ダメージが100%増加（最大3回累積）。",
+                  "ボスの防御力は毎ターン+500、ブレイク時リセット。"
                 ]}
               />
               <hr className="my-6 border-neutral-700" />
@@ -70,7 +70,7 @@ export default function KOHMeteosGuide() {
               <hr className="my-6 border-neutral-700" />
               <CombatFootage
                 videoId="g3LcTpm9fMo"
-                title="Knight of Hope Meteos - Joint Challenge - Very Hard Mode"
+                title="光明の騎士・メテウス - 共同作戦 - ベリーハード"
                 author="Sevih"
                 date="15/05/2025"
               />
@@ -78,12 +78,12 @@ export default function KOHMeteosGuide() {
           ),
         },
         legacy2024: {
-          label: 'Legacy (2024 Video)',
+          label: 'レガシー (2024年動画)',
           content: (
             <>
               <CombatFootage
                 videoId="X5bL_YZ73y4"
-                title="Knight of Hope Meteos Joint Boss Max Score"
+                title="光明の騎士・メテウス 共同作戦 最高スコア"
                 author="Ducky"
                 date="01/01/2024"
               />

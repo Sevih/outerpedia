@@ -21,7 +21,7 @@ interface MonadGateMapProps {
     nodes: MonadNode[];
     edges: MonadEdge[];
     nodeTypes?: typeof defaultNodeTypes;
-    title?: string;
+    titleKey?: string;
     onNodeClick?: (id: string) => void;
     onEdgeClick?: (id: string) => void;
 }
@@ -30,7 +30,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
     nodes,
     edges,
     nodeTypes = defaultNodeTypes,
-    title,
+    titleKey,
     onNodeClick,
     onEdgeClick,
 }) => {
@@ -258,7 +258,7 @@ const MonadGateMap: React.FC<MonadGateMapProps> = ({
             ref={fullscreenRef}
             className={`z-[9999] ${isFullscreen ? "fixed inset-0 bg-black" : "relative"}`}
         >
-            {title && <h2 className="text-lg font-bold mb-2">{title}</h2>}
+            {titleKey && <h2 className="text-lg font-bold mb-2">{t(titleKey)}</h2>}
             <div className="absolute top-10 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex flex-wrap gap-2">
                     <label className="inline-flex items-center gap-2 bg-zinc-800 px-3 py-1 rounded border border-zinc-500 shadow text-white text-sm">
