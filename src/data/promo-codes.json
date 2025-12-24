@@ -265,5 +265,32 @@
     },
     "start": "2025-12-17",
     "end": "2025-12-31"
+  },
+
+
+    {
+    "code": "ALLSTONES20",
+    "description": {
+      "Transistone (Total)": "10"
+    },
+    "start": "2025-12-24",
+    "end": "???"
+  },
+  {
+    "code": "SINGSTONES10",
+    "description": {
+      "Transistone (Individual)": "10"
+    },
+    "start": "2025-12-24",
+    "end": "???"
+  },
+  {
+    "code": "MAIDTAMARA",
+    "description": {
+      "Battle Maid Tamara": "1",
+      "Ether": "500"
+    },
+    "start": "2025-12-24",
+    "end": "???"
   }
 ]

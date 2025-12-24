@@ -2008,5 +2008,17 @@
     "description_kr": "[발렌타인]이 착용할 수 있는 코스튬입니다.",
     "description_zh": "【瓦伦塔茵】可穿戴的皮肤。",
     "icon": "TI_Costume_Clothes_2000012_03"
+  },
+  {
+  "name": "Battle Maid Tamara",
+  "name_jp": "戦闘メイド タマラ",
+  "name_kr": "전투 메이드 타마라",
+  "name_zh": "战斗女仆塔玛拉",
+    "rarity": "epic",
+  "description": "This is a costume that can be worn by Tamara.",
+  "description_jp": "【タマラ】のスキンです。\\nスキンは【仲間】→【スキン】で装備でき\\n【スキン】ボタンは仲間のスキンがある場合のみ表示されます。",
+  "description_kr": "[타마라]가 착용할 수 있는 코스튬입니다.",
+  "description_zh": "【塔玛拉】可穿戴的皮肤。",
+    "icon": "TI_Costume_Clothes_2000060_02"
   }
 ]
