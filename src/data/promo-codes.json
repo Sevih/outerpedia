@@ -309,4 +309,47 @@
     "start": "2025-12-24",
     "end": "???"
   }
+
+
+  ,
+  {
+    "code": "ADIEU2025",
+    "description": {
+      "Ether": "1500"
+    },
+    "start": "2025-12-25",
+    "end": "???"
+  },
+  {
+    "code": "HELLO2026",
+    "description": {
+     "Ether": "1500"
+    },
+    "start": "2025-12-25",
+    "end": "???"
+  },
+  {
+    "code": "XMASWITHVA",
+    "description": {
+       "Transistone (Individual)": "10"
+    },
+    "start": "2025-12-25",
+    "end": "???"
+  },
+  {
+    "code": "XMASWITHM9",
+    "description": {
+      "Ether": "3000"
+    },
+    "start": "2025-12-25",
+    "end": "???"
+  },
+  {
+    "code": "XMASGIFT",
+    "description": {
+       "Call of the Demiurge (Event)": "100"
+    },
+    "start": "2025-12-25",
+    "end": "???"
+  }
 ] 
