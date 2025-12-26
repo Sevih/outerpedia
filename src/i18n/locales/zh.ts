@@ -331,9 +331,9 @@ const zh = {
 
 
   //SEO
-  'gearUsage.meta.title': '异域战记装备使用数据 – {monthYear} | Outerpedia',
+  'gearUsage.meta.title': '装备使用统计 – {monthYear} | Outerpedia',
   'gearUsage.meta.desc': '发现EvaMains discord服务器最推荐的《异域战记》武器、饰品和套装。{monthYear}更新。',
-  'gearUsage.og.title': '异域战记装备使用统计 – {monthYear} | Outerpedia',
+  'gearUsage.og.title': '装备使用统计 – {monthYear} | Outerpedia',
   'gearUsage.og.desc': '查看EvaMains社区最常推荐的武器、饰品和套装。{monthYear}更新。',
   'gearUsage.og.imageAlt': '装备使用统计 – Outerpedia',
   'gearUsage.twitter.title': '异域战记装备使用情况 – {monthYear} | Outerpedia',
@@ -442,9 +442,9 @@ const zh = {
   'pullSim.webapp.name': '抽卡模拟器',
   'pullSim.webapp.desc': 'A 免费web tool to simulate 异域战记 gacha pulls with招募积分 and招募池 rules.',
   // SEO
-  'tierPve.meta.title': '异域战记 PvE 节奏榜 — {monthYear} Update | Outerpedia',
+  'tierPve.meta.title': 'PvE 节奏榜 – {monthYear} | Outerpedia',
   'tierPve.meta.desc': 'Discover the best characters ranked for PvE in 异域战记. Updated for {monthYear}, curated by the EvaMains Discord community.',
-  'tierPve.og.title': '异域战记 PvE 节奏榜 — {monthYear} Update | Outerpedia',
+  'tierPve.og.title': 'PvE 节奏榜 – {monthYear} | Outerpedia',
   'tierPve.og.desc': 'Latest 异域战记 character PvE rankings as of {monthYear}, curated by the EvaMains community.',
   'tierPve.og.imageAlt': 'Outerpedia PvE 节奏榜',
   'tierPve.twitter.title': '异域战记 PvE 节奏榜 — {monthYear} | Outerpedia',
@@ -454,9 +454,9 @@ const zh = {
   'tierPve.itemList.title': '异域战记 PvE 节奏榜 — {monthYear}',
   'tierPve.itemList.desc': 'Discover the best characters in 异域战记 sorted by 打手, 辅助, and 长线. Curated by the EvaMains community.',
   // --- SEO (PvP 节奏榜) ---
-  'tierPvp.meta.title': '异域战记 PvP 节奏榜 — {monthYear} Update | Outerpedia',
+  'tierPvp.meta.title': 'PvP 节奏榜 – {monthYear} | Outerpedia',
   'tierPvp.meta.desc': 'Discover the best characters ranked for PvP in 异域战记. Updated for {monthYear}, curated by the EvaMains Discord community.',
-  'tierPvp.og.title': '异域战记 PvP 节奏榜 — {monthYear} Update | Outerpedia',
+  'tierPvp.og.title': 'PvP 节奏榜 – {monthYear} | Outerpedia',
   'tierPvp.og.desc': 'Latest 异域战记 character PvP rankings as of {monthYear}, curated by the EvaMains community.',
   'tierPvp.og.imageAlt': 'Outerpedia PvP 节奏榜',
   'tierPvp.twitter.title': '异域战记 PvP 节奏榜 — {monthYear} | Outerpedia',
@@ -482,9 +482,9 @@ const zh = {
   'tier.ui.alt.rank': 'Rank {rank}',
   'tier.ui.alt.letter': 'Letter {rank}',
   // --- SEO (节奏榜 index) ---
-  'tierIndex.meta.title': '异域战记 节奏榜 — {monthYear} Update | Outerpedia',
+  'tierIndex.meta.title': '节奏榜 – {monthYear} | Outerpedia',
   'tierIndex.meta.desc': 'Discover the best characters ranked in 异域战记. Updated for {monthYear}, curated by the EvaMains Discord community.',
-  'tierIndex.og.title': '异域战记 节奏榜 — {monthYear} Update | Outerpedia',
+  'tierIndex.og.title': '节奏榜 – {monthYear} | Outerpedia',
   'tierIndex.og.desc': 'Latest 异域战记 character rankings as of {monthYear}, curated by the EvaMains community.',
   'tierIndex.og.imageAlt': 'Outerpedia节奏榜',
   'tierIndex.twitter.title': '异域战记节奏榜 — {monthYear} | Outerpedia',
@@ -545,7 +545,7 @@ const zh = {
   //
   'chars.meta.title': '角色数据库 {monthYear}更新 | Outerpedia',
   'chars.meta.desc': 'Discover all 异域战记 同伴 with detailed stats, skills,装备, and 专属装备. Updated {monthYear} by the EvaMains Discord community.',
-  'chars.og.title': '异域战记角色 – Full Database Updated {monthYear} | Outerpedia',
+  'chars.og.title': '角色数据库 – {monthYear} | Outerpedia',
   'chars.og.desc': 'Discover all 异域战记 同伴 with detailed stats, skills,装备, and 专属装备. Updated {monthYear} by the EvaMains Discord community.',
   'chars.twitter.title': '异域战记 角色 – Updated {monthYear} | Outerpedia',
   'chars.twitter.desc': 'Discover all 异域战记 同伴 with detailed stats, skills,装备, and 专属装备. Updated {monthYear} by the EvaMains Discord community.',

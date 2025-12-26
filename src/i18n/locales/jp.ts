@@ -331,9 +331,9 @@ const jp = {
 
 
   //SEO
-  'gearUsage.meta.title': 'アウタープレーン 装備使用統計 – {monthYear} | Outerpedia',
+  'gearUsage.meta.title': '装備使用統計 – {monthYear} | Outerpedia',
   'gearUsage.meta.desc': 'EvaMains Discordコミュニティが作成したビルドにおける、最も推奨される武器・アクセサリー・セットを確認できます。{monthYear} 更新。',
-  'gearUsage.og.title': 'アウタープレーン 装備使用統計 – {monthYear} | Outerpedia',
+  'gearUsage.og.title': '装備使用統計 – {monthYear} | Outerpedia',
   'gearUsage.og.desc': 'EvaMainsコミュニティの推奨ビルドで最も頻繁に使用されている武器・アクセサリー・セットを確認しましょう。{monthYear} 更新。',
   'gearUsage.og.imageAlt': '装備使用統計 – Outerpedia',
   'gearUsage.twitter.title': 'アウタープレーン 装備使用統計 – {monthYear} | Outerpedia',
@@ -442,9 +442,9 @@ const jp = {
   'pullSim.webapp.name': 'ガチャシミュレーター',
   'pullSim.webapp.desc': 'マイレージとバナールールを再現した、アウタープレーン用の無料ガチャシミュレーター。',
   // SEO
-  'tierPve.meta.title': 'アウタープレーン PvE ティアリスト — {monthYear} 更新 | Outerpedia',
+  'tierPve.meta.title': 'PvE ティアリスト – {monthYear} | Outerpedia',
   'tierPve.meta.desc': '{monthYear} 時点のPvE最強キャラランキング。EvaMainsコミュニティ監修。',
-  'tierPve.og.title': 'アウタープレーン PvE ティアリスト — {monthYear} 更新 | Outerpedia',
+  'tierPve.og.title': 'PvE ティアリスト – {monthYear} | Outerpedia',
   'tierPve.og.desc': '{monthYear} 時点のPvEキャラ評価。EvaMainsコミュニティ監修。',
   'tierPve.og.imageAlt': 'Outerpedia PvE ティアリスト',
   'tierPve.twitter.title': 'アウタープレーン PvE ティアリスト — {monthYear} | Outerpedia',
@@ -454,9 +454,9 @@ const jp = {
   'tierPve.itemList.title': 'アウタープレーン PvE ティアリスト — {monthYear}',
   'tierPve.itemList.desc': 'DPS・サポート・サステインの役割別に最適なキャラを紹介。EvaMainsコミュニティ監修。',
   // --- SEO (PvP Tier List) ---
-  'tierPvp.meta.title': 'アウタープレーン PvP ティアリスト — {monthYear} 更新 | Outerpedia',
+  'tierPvp.meta.title': 'PvP ティアリスト – {monthYear} | Outerpedia',
   'tierPvp.meta.desc': '{monthYear} 時点のPvP最強キャラランキング。EvaMainsコミュニティ監修。',
-  'tierPvp.og.title': 'アウタープレーン PvP ティアリスト — {monthYear} 更新 | Outerpedia',
+  'tierPvp.og.title': 'PvP ティアリスト – {monthYear} | Outerpedia',
   'tierPvp.og.desc': '{monthYear} 時点のPvPキャラ評価。EvaMainsコミュニティ監修。',
   'tierPvp.og.imageAlt': 'Outerpedia PvP ティアリスト',
   'tierPvp.twitter.title': 'アウタープレーン PvP ティアリスト — {monthYear} | Outerpedia',
@@ -482,9 +482,9 @@ const jp = {
   'tier.ui.alt.rank': 'ランク {rank}',
   'tier.ui.alt.letter': '文字 {rank}',
   // --- SEO (Tier List index) ---
-  'tierIndex.meta.title': 'アウタープレーン ティアリスト — {monthYear} 更新 | Outerpedia',
+  'tierIndex.meta.title': 'ティアリスト – {monthYear} | Outerpedia',
   'tierIndex.meta.desc': '{monthYear} 時点のキャラランキング。EvaMainsコミュニティ監修。',
-  'tierIndex.og.title': 'アウタープレーン ティアリスト — {monthYear} 更新 | Outerpedia',
+  'tierIndex.og.title': 'ティアリスト – {monthYear} | Outerpedia',
   'tierIndex.og.desc': '{monthYear} 時点の最新キャラ評価。EvaMainsコミュニティ監修。',
   'tierIndex.og.imageAlt': 'Outerpedia ティアリスト',
   'tierIndex.twitter.title': 'アウタープレーン ティアリスト — {monthYear} | Outerpedia',
@@ -543,9 +543,9 @@ const jp = {
   'char.twitter.title': "{name} – キャラクターガイド | Outerpedia",
   'char.twitter.desc': '{element}属性・{class}クラスの{name}のスキルやビルド情報。',
   //
-  'chars.meta.title': 'アウタープレーン キャラクター一覧 — {monthYear} 更新 | Outerpedia',
+  'chars.meta.title': 'キャラクター一覧 – {monthYear} | Outerpedia',
   'chars.meta.desc': '全ヒーローのステータス・スキル・装備・専用装備をチェック。{monthYear} 更新（EvaMains Discord）。',
-  'chars.og.title': 'アウタープレーン キャラクター一覧 — {monthYear} 更新 | Outerpedia',
+  'chars.og.title': 'キャラクター一覧 – {monthYear} | Outerpedia',
   'chars.og.desc': '全ヒーローのステータス・スキル・装備・専用装備をチェック。{monthYear} 更新（EvaMains Discord）。',
   'chars.twitter.title': 'キャラクター一覧 — {monthYear} 更新 | Outerpedia',
   'chars.twitter.desc': '全ヒーローのステータス・スキル・装備・専用装備をチェック。{monthYear} 更新（EvaMains Discord）。',

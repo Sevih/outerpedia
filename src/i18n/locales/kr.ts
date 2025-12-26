@@ -331,9 +331,9 @@ const kr = {
 
 
   //SEO
-  'gearUsage.meta.title': '아우터플레인 장비 사용 통계 – {monthYear} | Outerpedia',
+  'gearUsage.meta.title': '장비 사용 통계 – {monthYear} | Outerpedia',
   'gearUsage.meta.desc': 'EvaMains 디스코드 커뮤니티가 제작한 빌드에서 가장 추천되는 무기, 장신구, 세트를 확인하세요. {monthYear} 업데이트.',
-  'gearUsage.og.title': '아우터플레인 장비 사용 통계 – {monthYear} | Outerpedia',
+  'gearUsage.og.title': '장비 사용 통계 – {monthYear} | Outerpedia',
   'gearUsage.og.desc': 'EvaMains 커뮤니티의 추천 빌드에서 가장 자주 사용되는 무기, 장신구, 세트를 확인해보세요. {monthYear} 업데이트.',
   'gearUsage.og.imageAlt': '장비 사용 통계 – Outerpedia',
   'gearUsage.twitter.title': '아우터플레인 장비 사용 통계 – {monthYear} | Outerpedia',
@@ -442,9 +442,9 @@ const kr = {
   'pullSim.webapp.name': '뽑기 시뮬레이터',
   'pullSim.webapp.desc': '마일리지 및 배너 규칙을 반영한 무료 웹 기반 뽑기 시뮬레이터.',
   //seo
-  'tierPve.meta.title': '아우터플레인 PvE 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+  'tierPve.meta.title': 'PvE 티어 리스트 – {monthYear} | Outerpedia',
   'tierPve.meta.desc': '{monthYear} 기준 PvE 최강 캐릭터 랭킹. EvaMains 디스코드 커뮤니티가 큐레이션했습니다.',
-  'tierPve.og.title': '아우터플레인 PvE 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+  'tierPve.og.title': 'PvE 티어 리스트 – {monthYear} | Outerpedia',
   'tierPve.og.desc': '{monthYear} 기준 PvE 캐릭터 평가. EvaMains 커뮤니티 큐레이션.',
   'tierPve.og.imageAlt': 'Outerpedia PvE 티어 리스트',
   'tierPve.twitter.title': '아우터플레인 PvE 티어 리스트 — {monthYear} | Outerpedia',
@@ -454,9 +454,9 @@ const kr = {
   'tierPve.itemList.title': '아우터플레인 PvE 티어 리스트 — {monthYear}',
   'tierPve.itemList.desc': 'DPS·서포트·지속(생존) 역할별로 최고의 캐릭터를 소개합니다. EvaMains 커뮤니티 큐레이션.',
   // --- SEO (PvP 티어 리스트) ---
-  'tierPvp.meta.title': '아우터플레인 PvP 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+  'tierPvp.meta.title': 'PvP 티어 리스트 – {monthYear} | Outerpedia',
   'tierPvp.meta.desc': '{monthYear} 기준 PvP 최강 캐릭터 랭킹. EvaMains 디스코드 커뮤니티가 큐레이션했습니다.',
-  'tierPvp.og.title': '아우터플레인 PvP 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+  'tierPvp.og.title': 'PvP 티어 리스트 – {monthYear} | Outerpedia',
   'tierPvp.og.desc': '{monthYear} 기준 PvP 캐릭터 평가. EvaMains 커뮤니티 큐레이션.',
   'tierPvp.og.imageAlt': 'Outerpedia PvP 티어 리스트',
   'tierPvp.twitter.title': '아우터플레인 PvP 티어 리스트 — {monthYear} | Outerpedia',
@@ -482,9 +482,9 @@ const kr = {
   'tier.ui.alt.rank': '랭크 {rank}',
   'tier.ui.alt.letter': '문자 {rank}',
   // --- SEO (티어 리스트 인덱스) ---
-  'tierIndex.meta.title': '아우터플레인 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+  'tierIndex.meta.title': '티어 리스트 – {monthYear} | Outerpedia',
   'tierIndex.meta.desc': '{monthYear} 기준 캐릭터 랭킹. EvaMains 디스코드 커뮤니티 큐레이션.',
-  'tierIndex.og.title': '아우터플레인 티어 리스트 — {monthYear} 업데이트 | Outerpedia',
+  'tierIndex.og.title': '티어 리스트 – {monthYear} | Outerpedia',
   'tierIndex.og.desc': '{monthYear} 기준 최신 캐릭터 평가. EvaMains 커뮤니티 큐레이션.',
   'tierIndex.og.imageAlt': 'Outerpedia 티어 리스트',
   'tierIndex.twitter.title': '아우터플레인 티어 리스트 — {monthYear} | Outerpedia',
@@ -543,9 +543,9 @@ const kr = {
   'char.twitter.title': "{name} – 캐릭터 가이드 | Outerpedia",
   'char.twitter.desc': '{element} 속성 {class} 클래스 {name} — 스킬, 랭킹, 빌드 추천.',
   //
-  'chars.meta.title': '아우터플레인 캐릭터 데이터베이스 — {monthYear} 업데이트 | Outerpedia',
+  'chars.meta.title': '캐릭터 데이터베이스 – {monthYear} | Outerpedia',
   'chars.meta.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',
-  'chars.og.title': '아우터플레인 캐릭터 — {monthYear} 업데이트 | Outerpedia',
+  'chars.og.title': '캐릭터 – {monthYear} | Outerpedia',
   'chars.og.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',
   'chars.twitter.title': '캐릭터 목록 — {monthYear} 업데이트 | Outerpedia',
   'chars.twitter.desc': '전체 영웅 스탯/스킬/장비/전용 장비를 확인하세요. {monthYear} 업데이트.',

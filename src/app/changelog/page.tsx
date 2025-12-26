@@ -30,7 +30,7 @@ export default async function ChangelogPage() {
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-white mb-8 text-center relative">
-        <span className="relative z-10">Changelog</span>
+        <span className="relative z-10">Outerpedia Changelog</span>
         <span className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-24 h-1 bg-cyan-600 opacity-70 rounded" />
       </h1>
 

@@ -82,6 +82,11 @@ export default function GearUsageStatsClients({ data }: Props) {
 
     return (
         <div className="p-4 max-w-5xl mx-auto">
+            {/* H1 */}
+            <h1 className="text-3xl font-bold text-center mb-4">
+                {t('gearUsage.h1') ?? 'Outerplane Gear Usage Statistics'}
+            </h1>
+
             {/* Notice */}
             <p className="text-red-500 font-semibold bg-red-100 border border-red-300 rounded px-4 py-2 text-center dark:bg-red-900/20 dark:border-red-700">
                 {t('gear.notice.line1')} <br />

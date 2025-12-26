@@ -32,7 +32,7 @@ const en = {
   'titles.main.main': 'Outerplane Tier List, Character Builds, Guides & Database',
   'titles.main.desc': 'A fan-made wiki for Outerplane. Explore builds, gear, utilities, tier list, and strategy guides.',
   'titles.main.pull': 'Currently Pullable',
-  'titles.main.coupon': 'Coupon Codes',
+  'titles.main.coupon': 'Outerplane Coupon Codes',
   'titles.main.changetitle': 'Latest Outerpedia Updates & Features',
   'titles.main.tochangelog': 'View full changelog',
   'changelog.meta.title': 'Changelog | Outerpedia',
@@ -306,7 +306,7 @@ const en = {
   'fullList': 'Full List of',
   'mostUsed': 'Most Used',
   //pullsim
-  'pullSim.title': 'Pull Simulator',
+  'pullSim.title': 'Outerplane Pull Simulator',
   'pullSim.bannerFocus.title': 'Banner & Focus',
   'pullSim.bannerFocus.subtitle': 'Select your banner; set a 3★ focus when applicable.',
   'pullSim.banner': 'Banner',
@@ -331,9 +331,10 @@ const en = {
 
 
   //SEO
-  'gearUsage.meta.title': 'Outerplane Gear Usage Statistics – {monthYear} | Outerpedia',
+  'gearUsage.h1': 'Outerplane Gear Usage Statistics',
+  'gearUsage.meta.title': 'Gear Usage Stats – {monthYear} | Outerpedia',
   'gearUsage.meta.desc': 'Discover the most recommended weapons, amulets and sets in Outerplane builds curated by the EvaMains Discord. Updated for {monthYear}.',
-  'gearUsage.og.title': 'Outerplane Gear Usage Statistics – {monthYear} | Outerpedia',
+  'gearUsage.og.title': 'Gear Usage Stats – {monthYear} | Outerpedia',
   'gearUsage.og.desc': 'See which weapons, amulets and sets are most frequently recommended in builds curated by the EvaMains community. Updated for {monthYear}.',
   'gearUsage.og.imageAlt': 'Gear Usage Statistics – Outerpedia',
   'gearUsage.twitter.title': 'Outerplane Gear Usage – {monthYear} | Outerpedia',
@@ -355,7 +356,7 @@ const en = {
   'patchHistory.twitter.title': 'Patch History — Updates & Dev Letters | Outerpedia',
   'patchHistory.twitter.desc': 'Track Outerplane updates across patch notes and developer letters.',
   // UI
-  'patchHistory.h1': 'Patch History',
+  'patchHistory.h1': 'Outerplane Patch History',
   'patchHistory.meta.breadcrumb': 'Patch History',
   'patchHistory.intro': 'Browse all Outerplane patch notes, developer letters, and compendium entries — searchable and sorted by date.',
   'patchHistory.collection.name': 'Patch History',
@@ -395,7 +396,7 @@ const en = {
   'gearSolver.twitter.title': 'Gear Usage Finder | Outerpedia',
   'gearSolver.twitter.desc': 'Quickly discover best character matches for your gear.',
   // UI
-  'gearSolver.h1': 'Gear Usage Finder',
+  'gearSolver.h1': 'Outerplane Gear Usage Finder',
   'gearSolver.meta.breadcrumb': 'Gear Usage Finder',
   'gearSolver.warning':
     '⚠️ The Gear Usage Finder tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer.',
@@ -442,9 +443,9 @@ const en = {
   'pullSim.webapp.name': 'Pull Simulator',
   'pullSim.webapp.desc': 'A free web tool to simulate Outerplane gacha pulls with mileage and banner rules.',
   // SEO
-  'tierPve.meta.title': 'Outerplane PvE Tier List — {monthYear} Update | Outerpedia',
+  'tierPve.meta.title': 'Outerplane PvE Tier List – {monthYear} | Outerpedia',
   'tierPve.meta.desc': 'Discover the best characters ranked for PvE in Outerplane. Updated for {monthYear}, curated by the EvaMains Discord community.',
-  'tierPve.og.title': 'Outerplane PvE Tier List — {monthYear} Update | Outerpedia',
+  'tierPve.og.title': 'Outerplane PvE Tier List – {monthYear} | Outerpedia',
   'tierPve.og.desc': 'Latest Outerplane character PvE rankings as of {monthYear}, curated by the EvaMains community.',
   'tierPve.og.imageAlt': 'Outerpedia PvE Tier List',
   'tierPve.twitter.title': 'Outerplane PvE Tier List — {monthYear} | Outerpedia',
@@ -454,9 +455,9 @@ const en = {
   'tierPve.itemList.title': 'Outerplane PvE Tier List — {monthYear}',
   'tierPve.itemList.desc': 'Discover the best characters in Outerplane sorted by DPS, Support, and Sustain. Curated by the EvaMains community.',
   // --- SEO (PvP Tier List) ---
-  'tierPvp.meta.title': 'Outerplane PvP Tier List — {monthYear} Update | Outerpedia',
+  'tierPvp.meta.title': 'Outerplane PvP Tier List – {monthYear} | Outerpedia',
   'tierPvp.meta.desc': 'Discover the best characters ranked for PvP in Outerplane. Updated for {monthYear}, curated by the EvaMains Discord community.',
-  'tierPvp.og.title': 'Outerplane PvP Tier List — {monthYear} Update | Outerpedia',
+  'tierPvp.og.title': 'Outerplane PvP Tier List – {monthYear} | Outerpedia',
   'tierPvp.og.desc': 'Latest Outerplane character PvP rankings as of {monthYear}, curated by the EvaMains community.',
   'tierPvp.og.imageAlt': 'Outerpedia PvP Tier List',
   'tierPvp.twitter.title': 'Outerplane PvP Tier List — {monthYear} | Outerpedia',
@@ -466,8 +467,8 @@ const en = {
   'tierPvp.itemList.title': 'Outerplane PvP Tier List — {monthYear}',
   'tierPvp.itemList.desc': 'Discover the best PvP characters in Outerplane by role and performance. Curated by the EvaMains community.',
   // --- TierListBase UI ---
-  'tier.ui.title.pve': 'Tier List - PvE',
-  'tier.ui.title.pvp': 'Tier List - PvP',
+  'tier.ui.title.pve': 'Outerplane PvE Tier List',
+  'tier.ui.title.pvp': 'Outerplane PvP Tier List',
   'tier.ui.title.ee0': 'Exclusive Equipment Priority (+0)',
   'tier.ui.title.ee10': 'Exclusive Equipment Priority (+10)',
 
@@ -482,9 +483,9 @@ const en = {
   'tier.ui.alt.rank': 'Rank {rank}',
   'tier.ui.alt.letter': 'Letter {rank}',
   // --- SEO (Tier List index) ---
-  'tierIndex.meta.title': 'Outerplane Tier List — {monthYear} Update | Outerpedia',
+  'tierIndex.meta.title': 'Outerplane Tier Lists – {monthYear} | Outerpedia',
   'tierIndex.meta.desc': 'Discover the best characters ranked in Outerplane. Updated for {monthYear}, curated by the EvaMains Discord community.',
-  'tierIndex.og.title': 'Outerplane Tier List — {monthYear} Update | Outerpedia',
+  'tierIndex.og.title': 'Outerplane Tier Lists – {monthYear} | Outerpedia',
   'tierIndex.og.desc': 'Latest Outerplane character rankings as of {monthYear}, curated by the EvaMains community.',
   'tierIndex.og.imageAlt': 'Outerpedia Tier List',
   'tierIndex.twitter.title': 'Outerplane Tier List — {monthYear} | Outerpedia',
@@ -543,9 +544,9 @@ const en = {
   'char.twitter.title': "{name} – Character Guide | Outerpedia",
   'char.twitter.desc': '{element} {class} {name} — skills, ranking, and build recommendations.',
   //
-  'chars.meta.title': 'Outerplane Characters – Database Updated {monthYear} | Outerpedia',
+  'chars.meta.title': 'Outerplane Characters – {monthYear} | Outerpedia',
   'chars.meta.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
-  'chars.og.title': 'Outerplane Characters – Full Database Updated {monthYear} | Outerpedia',
+  'chars.og.title': 'Outerplane Characters Database – {monthYear} | Outerpedia',
   'chars.og.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
   'chars.twitter.title': 'Outerplane Characters – Updated {monthYear} | Outerpedia',
   'chars.twitter.desc': 'Discover all Outerplane heroes with detailed stats, skills, gear, and exclusive equipment. Updated {monthYear} by the EvaMains Discord community.',
@@ -596,18 +597,18 @@ const en = {
   'guides.spoilerFree.disable': 'Disable Spoiler-Free Mode',
   'guides.al.tabs.regular': 'Regular Fight',
   'guides.al.tabs.promotion': 'Promotion Fight',
-  'guides.page.h1': 'All Guides',
+  'guides.page.h1': 'Outerplane Guides',
   'guides.breadcrumb.home': 'Home',
   'guides.jsonld.title': 'Outerplane Guides | Outerpedia',
   'guides.jsonld.desc.prefix': 'Browse all strategy guides for Outerplane: ',
   'guides.jsonld.desc.suffix': '. Updated regularly with boss tips, adventure help, and event walkthroughs.',
 
   // Guide Categories
-  'guides.categories.general-guides.title': 'General Guides',
+  'guides.categories.general-guides.title': 'Outerplane General Guides',
   'guides.categories.general-guides.description': 'Master game fundamentals: combat mechanics, character progression, equipment systems, and essential beginner tips for new players.',
   'guides.categories.adventure.title': 'Adventure Boss Guides',
   'guides.categories.adventure.description': 'Detailed strategies to defeat challenging Adventure bosses: recommended teams, mechanics explanation, and stage tips.',
-  'guides.categories.world-boss.title': 'World Boss Guides',
+  'guides.categories.world-boss.title': 'Outerplane World Boss Guides',
   'guides.categories.world-boss.description': 'Comprehensive strategies to achieve SSS rank in Extreme League World Boss battles: optimal team setups, rotation timing, and damage maximization.',
   'guides.categories.special-request.title': 'Special Request Guides',
   'guides.categories.special-request.description': 'In-depth strategies for Special Request missions: Ecology Study and Identification. Learn boss mechanics, team synergies, and key tactics for success.',
@@ -615,13 +616,13 @@ const en = {
   'guides.categories.skyward-tower.description': 'Floor-by-floor strategies to climb Skyward Tower: optimal characters, team synergies, and tactics for higher floors.',
   'guides.categories.joint-boss.title': 'Joint Challenge Guides',
   'guides.categories.joint-boss.description': 'Score higher in Joint Challenge battles with advanced strategies: best team compositions, skill timing, and synergy tips for top rankings.',
-  'guides.categories.guild-raid.title': 'Guild Raid Guides',
+  'guides.categories.guild-raid.title': 'Outerplane Guild Raid Guides',
   'guides.categories.guild-raid.description': 'Comprehensive strategies for Guild Raids: boss mechanics, optimal team setups, and damage-maximizing tactics to achieve the highest raid scores.',
   'guides.categories.adventure-license.title': 'Adventure License Guides',
   'guides.categories.adventure-license.description': 'Guides for all Adventure License battles, including Promotion Fights: learn enemy mechanics, team recommendations, and strategies for every stage.',
   'guides.categories.irregular-extermination.title': 'Irregular Extermination Guides',
   'guides.categories.irregular-extermination.description': 'Boss guides for the Irregular Extermination Project mode: learn boss patterns, recommended teams, and effective strategies for each stage.',
-  'guides.categories.monad-gate.title': 'Monad Gate Guides',
+  'guides.categories.monad-gate.title': 'Outerplane Monad Gate Guides',
   'guides.categories.monad-gate.description': 'Stage guides for Monad Gate: recommended paths, choices, and strategies to reach the true ending of the mode.',
   'guides.categories.monad-gate.depth6Note': 'Depths 6-10 repeat the same paths as Depths 1-5. The map is larger but choices remain identical. You can identify which guide to follow based on the first path choice you encounter. You don\'t need to reach the true ending to progress past Depth 5.',
 
@@ -824,7 +825,7 @@ const en = {
   // Contributors page
   'contributors.meta.title': 'Contributors | Outerpedia',
   'contributors.meta.desc': 'Meet the team and contributors who helped build Outerpedia.',
-  'contributors.title': 'Contributors',
+  'contributors.title': 'Outerpedia Contributors',
   'contributors.description': 'Thank you to everyone who has contributed to making Outerpedia a valuable resource for the Outerplane community.',
 
   // Core Fusion

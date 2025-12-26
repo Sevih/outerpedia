@@ -272,9 +272,9 @@ export default function RecommendedGearTabs({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Weapons */}
           <div>
-            <h4 className="text-xl font-semibold text-zinc-100 text-center mb-3">
+            <h3 className="text-xl font-semibold text-zinc-100 text-center mb-3">
               {t("weapons", { defaultValue: "Weapons" })}
-            </h4>
+            </h3>
             <div className="flex flex-col items-center gap-6">
               {weaponMinis.map((weapon, idx) => (
                 <WeaponMiniCard key={`${weapon.name}-${idx}`} weapon={weapon} />
@@ -283,9 +283,9 @@ export default function RecommendedGearTabs({
           </div>
           {/* Accessories */}
           <div>
-            <h4 className="text-xl font-semibold text-zinc-100 text-center mb-3">
+            <h3 className="text-xl font-semibold text-zinc-100 text-center mb-3">
               {t("accessories", { defaultValue: "Accessories" })}
-            </h4>
+            </h3>
             <div className="flex flex-col items-center gap-6">
               {amuletMinis.map((amulet, idx) => (
                 <AmuletMiniCard key={`${amulet.name}-${idx}`} amulet={amulet} />
@@ -294,9 +294,9 @@ export default function RecommendedGearTabs({
           </div>
           {/* Sets */}
           <div>
-            <h4 className="text-xl font-semibold text-zinc-100 text-center mb-3">
+            <h3 className="text-xl font-semibold text-zinc-100 text-center mb-3">
               {t("sets", { defaultValue: "Sets" })}
-            </h4>
+            </h3>
             {/* Rangée horizontale de combos, comme sur la capture */}
             <div className="flex flex-wrap justify-center gap-3">
               {setCombos.map((combo, idx) => (
@@ -321,9 +321,9 @@ export default function RecommendedGearTabs({
           {/* Talismans */}
           {talismanMinis.length > 0 && (
             <div className="flex flex-col items-center">
-              <h5 className="text-lg font-semibold text-zinc-100 text-center mb-2">
+              <h4 className="text-lg font-semibold text-zinc-100 text-center mb-2">
                 {t("talisman", { defaultValue: "Talismans" })}
-              </h5>
+              </h4>
               <div className="flex flex-col items-center gap-6">
                 {talismanMinis.map((talisman, idx) => (
                   <TalismanMiniCard key={`${talisman.name}-${idx}`} talisman={talisman} />
@@ -344,9 +344,9 @@ export default function RecommendedGearTabs({
           {/* Notes */}
           {currentBuild.Note && (
             <div className="flex flex-col items-center">
-              <h5 className="text-lg font-semibold text-zinc-100 mb-2">
+              <h4 className="text-lg font-semibold text-zinc-100 mb-2">
                 {t("notes", { defaultValue: "Notes" })}
-              </h5>
+              </h4>
               <div className="text-gray-300 text-base space-y-3">
                 {currentBuild.Note.split("\n").map((line, i) => {
                   const idx = line.indexOf(":")
