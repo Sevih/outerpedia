@@ -1,0 +1,30 @@
+{
+  "december2025": {
+        "Phase 1": {
+            "icon": "light",
+            "team": [
+                ["Viella","Gnosis Viella"],
+                ["Core Fusion Veronica","Tamamo-no-Mae", "Regina" ],
+                ["Gnosis Dahlia", "Delta", "Demiurge Stella"],
+                ["Hilde","Omega Nadja"]
+            ],
+            "note": [],
+            "note_jp": [],
+            "note_kr": [],
+            "note_zh": []
+        },
+        "Phase 2": {
+            "icon": "light",
+            "team": [
+                ["Monad Eva"],
+                ["Valentine", "Luna", "Laine", "Viella"],
+                ["Demiurge Vlada", "Tamara", "Ryu Lion"],
+                ["Notia", "Mystic Sage Ame","Holy Night's Blessing Dianne"]
+            ],
+            "note": [{"type": "p", "string": "If you struggle with damage, place a {C/Defender} in the front slot to reduce the number of {D/BT_DOT_CURSE} applied to your team."}],
+            "note_jp": [{"type": "p", "string": "ダメージに苦戦する場合は、{C/Defender}を前列に配置してチームへの{D/BT_DOT_CURSE}付与数を減らしましょう。"}],
+            "note_kr": [{"type": "p", "string": "피해량이 부족하다면 {C/Defender}를 전열에 배치하여 팀에 적용되는 {D/BT_DOT_CURSE} 수를 줄이세요."}],
+            "note_zh": [{"type": "p", "string": "如果伤害不足，将{C/Defender}放在前排以减少对队伍施加的{D/BT_DOT_CURSE}数量。"}]
+        }
+  }
+}

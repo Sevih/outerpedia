@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2025-12-31",
+    title: {
+      en: "Drakhan",
+      jp: "ドレイカーン",
+      kr: "드레이칸",
+      zh: "德雷坎",
+    } as LString,
+    type: "update",
+    url: "/guides/world-boss/drakhan",
+    content: [
+      {
+        en: "Drakhan world boss guide updated for December 2025 version.",
+        jp: "ドレイカーン ワールドボスガイドが2025年12月版にアップデートされました。",
+        kr: "드레이칸 월드 보스 가이드가 2025년 12월 버전으로 업데이트되었습니다.",
+        zh: "德雷坎 世界首领指南已更新至2025年12月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2025-12-23",
     title: {
       en: "Annihilator",

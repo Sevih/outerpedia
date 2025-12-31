@@ -1161,6 +1161,33 @@
       "Tamara"
     ]
   },
+  "world-boss/drakhan": {
+    "category": "world-boss",
+    "guideId": "drakhan",
+    "characters": [
+      "Drakhan",
+      "Viella",
+      "Gnosis Viella",
+      "Core Fusion Veronica",
+      "Tamamo-no-Mae",
+      "Regina",
+      "Gnosis Dahlia",
+      "Delta",
+      "Demiurge Stella",
+      "Hilde",
+      "Omega Nadja",
+      "Monad Eva",
+      "Valentine",
+      "Luna",
+      "Laine",
+      "Demiurge Vlada",
+      "Tamara",
+      "Ryu Lion",
+      "Notia",
+      "Mystic Sage Ame",
+      "Holy Night's Blessing Dianne"
+    ]
+  },
   "world-boss/harshna": {
     "category": "world-boss",
     "guideId": "harshna",
