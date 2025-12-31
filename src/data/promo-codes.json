@@ -351,5 +351,13 @@
     },
     "start": "2025-12-25",
     "end": "???"
+  },
+  {
+    "code": "TRANSTOTAL20",
+    "description": {
+       "Transistone (Total)": "20"
+    },
+    "start": "2025-12-31",
+    "end": "???"
   }
 ] 
