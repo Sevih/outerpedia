@@ -64,5 +64,14 @@ export const phase2Characters = [
             kr: "4성부터 행동 게이지 증가 효율 20% 감소 (5성에서 50%).",
             zh: "从4星开始，降低行动值增加效率20%（5星时50%）。"
         }
+    },
+    {
+        names: ["Core Fusion Veronica"],
+        reason: {
+            en: "{C/Defender} option for the front slot.",
+            jp: "前列スロット用の{C/Defender}オプション。",
+            kr: "전열 슬롯용 {C/Defender} 옵션.",
+            zh: "前排位置的{C/Defender}选项。"
+        }
     }
 ]

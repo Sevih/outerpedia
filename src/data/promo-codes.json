@@ -248,7 +248,7 @@
       "Limited Recruitment Ticket": "10"
     },
     "start": "2025-12-17",
-    "end": "2025-12-31"
+    "end": "2026-03-31"
   },
   {
     "code": "FORAME2",
@@ -256,7 +256,7 @@
       "Limited Recruitment Ticket": "10"
     },
     "start": "2025-12-17",
-    "end": "2025-12-31"
+    "end": "2026-03-31"
   },
   {
     "code": "FORAME3",
@@ -264,7 +264,7 @@
       "Limited Recruitment Ticket": "10"
     },
     "start": "2025-12-17",
-    "end": "2025-12-31"
+    "end": "2026-03-31"
   },
 
 
@@ -274,7 +274,7 @@
       "Transistone (Total)": "20"
     },
     "start": "2025-12-24",
-    "end": "???"
+    "end": "2026-03-31"
   },
   {
     "code": "SINGSTONES10",
@@ -282,7 +282,7 @@
       "Transistone (Individual)": "10"
     },
     "start": "2025-12-24",
-    "end": "???"
+    "end": "2026-03-31"
   },
   {
     "code": "MAIDTAMARA",
@@ -291,7 +291,7 @@
       "Ether": "500"
     },
     "start": "2025-12-24",
-    "end": "???"
+    "end": "2026-03-31"
   },
   {
     "code": "XMASEVE2025",
@@ -299,7 +299,7 @@
       "Limited Recruitment Ticket": "10"
     },
     "start": "2025-12-24",
-    "end": "???"
+    "end": "2026-03-31"
   },
   {
     "code": "MERRYEVE2025",
@@ -307,7 +307,7 @@
       "Limited Recruitment Ticket": "10"
     },
     "start": "2025-12-24",
-    "end": "???"
+    "end": "2026-03-31"
   }
 
 
@@ -318,7 +318,7 @@
       "Ether": "1500"
     },
     "start": "2025-12-25",
-    "end": "???"
+    "end": "2026-03-31"
   },
   {
     "code": "HELLO2026",
@@ -326,7 +326,7 @@
      "Ether": "1500"
     },
     "start": "2025-12-25",
-    "end": "???"
+    "end": "2026-03-31"
   },
   {
     "code": "XMASWITHVA",
@@ -334,7 +334,7 @@
        "Transistone (Individual)": "10"
     },
     "start": "2025-12-25",
-    "end": "???"
+    "end": "2026-03-31"
   },
   {
     "code": "XMASWITHM9",
@@ -342,7 +342,7 @@
       "Ether": "3000"
     },
     "start": "2025-12-25",
-    "end": "???"
+    "end": "2026-03-31"
   },
   {
     "code": "XMASGIFT",
@@ -350,7 +350,7 @@
        "Call of the Demiurge (Event)": "100"
     },
     "start": "2025-12-25",
-    "end": "???"
+    "end": "2026-03-31"
   },
   {
     "code": "TRANSTOTAL20",
@@ -358,6 +358,6 @@
        "Transistone (Total)": "20"
     },
     "start": "2025-12-31",
-    "end": "???"
+    "end": "2026-03-31"
   }
 ] 
