@@ -67,6 +67,9 @@ const kr = {
   'characters.filters.reset': '필터 초기화',
   'characters.filters.copy': '공유 링크 복사',
   'characters.filters.copied': '복사됨!',
+  'characters.filters.unitType': '유닛 타입',
+  'characters.unitType.normal': '일반',
+  'characters.unitType.coreFusion': '코어 퓨전',
   'characters.loading': '캐릭터 불러오는 중...',
   'characters.title': 'Outerplane 전체 캐릭터 데이터베이스',
   'characters.common.matches': '{count, plural, one {#개 일치} other {#개 일치}}',
@@ -890,6 +893,12 @@ const kr = {
   'monad.route.4.1': '모래바람의 나라 [전편]',
   'monad.route.4.2': '모래바람의 나라 [후편]',
   'monad.route.5': '극독의 영역',
+
+  // StatCard component
+  'component.statCard.buff': '+버프',
+  'component.statCard.debuff': '-디버프',
+  'component.statCard.associatedBuffs': '관련 버프',
+  'component.statCard.associatedDebuffs': '관련 디버프',
 }
 
 export default kr

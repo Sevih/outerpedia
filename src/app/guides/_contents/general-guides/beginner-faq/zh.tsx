@@ -415,7 +415,7 @@ export default function BeginnerFAQ() {
                 <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/30 border border-slate-700 rounded-xl p-6 space-y-3">
                   <h4 className="text-lg font-semibold text-rose-300">有技能按生命/防御/速度/闪避缩放的英雄，应该专注那个属性吗？</h4>
                   <p className=" leading-relaxed">
-                    这里要注意的关键词是<strong className='underline'>"代替攻击力"</strong>。
+                    这里要注意的关键词是<strong className='underline'>&quot;代替攻击力&quot;</strong>。
                     如果技能只说伤害随某属性等比增加，伤害计算仍然主要使用攻击力。
                     比例属性作为额外倍率，但通常太小不值得作为主要关注点。
                   </p>

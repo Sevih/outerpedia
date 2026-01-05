@@ -67,6 +67,9 @@ const jp = {
   'characters.filters.reset': 'フィルターをリセット',
   'characters.filters.copy': '共有リンクをコピー',
   'characters.filters.copied': 'コピーしました！',
+  'characters.filters.unitType': 'ユニットタイプ',
+  'characters.unitType.normal': '通常',
+  'characters.unitType.coreFusion': 'コアフュージョン',
   'characters.loading': 'キャラクターを読み込み中...',
   'characters.title': 'Outerplane キャラクター完全データベース',
   'characters.common.matches': '{count, plural, one {# 件一致} other {# 件一致}}',
@@ -890,6 +893,12 @@ const jp = {
   'monad.route.4.1': '砂風の国【前編】',
   'monad.route.4.2': '砂風の国【後編】',
   'monad.route.5': '劇毒の領域',
+
+  // StatCard component
+  'component.statCard.buff': '+バフ',
+  'component.statCard.debuff': '-デバフ',
+  'component.statCard.associatedBuffs': '関連バフ',
+  'component.statCard.associatedDebuffs': '関連デバフ',
 }
 
 export default jp

@@ -67,6 +67,9 @@ const en = {
   'characters.filters.reset': 'Reset filters',
   'characters.filters.copy': 'Copy share link',
   'characters.filters.copied': 'Copied!',
+  'characters.filters.unitType': 'Unit Type',
+  'characters.unitType.normal': 'Normal',
+  'characters.unitType.coreFusion': 'Core Fusion',
   'characters.loading': 'Loading characters...',
   'characters.title': 'Outerplane Full Characters Database',
   'characters.common.matches': '{count, plural, one {# match} other {# matches}}',
@@ -891,6 +894,12 @@ const en = {
   'monad.route.4.1': 'Land of Sandstorms [1st Part]',
   'monad.route.4.2': 'Land of Sandstorms [2nd Part]',
   'monad.route.5': 'Realm of Bane',
+
+  // StatCard component
+  'component.statCard.buff': '+Buff',
+  'component.statCard.debuff': '-Debuff',
+  'component.statCard.associatedBuffs': 'Associated Buffs',
+  'component.statCard.associatedDebuffs': 'Associated Debuffs',
 }
 
 export default en

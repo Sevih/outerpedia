@@ -67,6 +67,9 @@ const zh = {
   'characters.filters.reset': '清空筛选',
   'characters.filters.copy': '复制分享链接',
   'characters.filters.copied': '已复制！',
+  'characters.filters.unitType': '单位类型',
+  'characters.unitType.normal': '普通',
+  'characters.unitType.coreFusion': '核心融合',
   'characters.loading': '角色加载中……',
   'characters.title': '异域战记完整角色图鉴',
   'characters.common.matches': '{count, plural, one {# 个匹配} other {# 个匹配}}',
@@ -888,6 +891,12 @@ const zh = {
   'monad.route.4.1': '风沙之国【前篇】',
   'monad.route.4.2': '风沙之国【后篇】',
   'monad.route.5': '剧毒领域',
+
+  // StatCard component
+  'component.statCard.buff': '+增益',
+  'component.statCard.debuff': '-减益',
+  'component.statCard.associatedBuffs': '相关增益',
+  'component.statCard.associatedDebuffs': '相关减益',
 }
 
 export default zh

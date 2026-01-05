@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import stats from '@/data/stats.json'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
+import { useI18n } from '@/lib/contexts/I18nContext'
 import type { BuffName, DebuffName } from '@/types/effect-names'
 
 type StatKey = keyof typeof stats
@@ -20,6 +21,7 @@ type StatCardProps = {
 
 export default function StatCard({ abbr, desc, details, effect }: StatCardProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useI18n()
   const stat = stats[abbr]
 
   if (!stat) return null
@@ -66,12 +68,12 @@ export default function StatCard({ abbr, desc, details, effect }: StatCardProps)
               <div className="hidden sm:flex items-center gap-1">
                 {effect.buff && effect.buff.length > 0 && (
                   <span className="px-2 py-0.5 text-xs rounded-full bg-sky-900/50 text-sky-300 border border-sky-700/50">
-                    +Buff
+                    {t('component.statCard.buff')}
                   </span>
                 )}
                 {effect.debuff && effect.debuff.length > 0 && (
                   <span className="px-2 py-0.5 text-xs rounded-full bg-red-900/50 text-red-300 border border-red-700/50">
-                    -Debuff
+                    {t('component.statCard.debuff')}
                   </span>
                 )}
               </div>
@@ -100,7 +102,7 @@ export default function StatCard({ abbr, desc, details, effect }: StatCardProps)
             <div className="flex flex-wrap gap-4 py-2">
               {effect.buff && effect.buff.length > 0 && (
                 <div className="space-y-1">
-                  <span className="text-xs text-sky-400 uppercase tracking-wider">Associated Buffs</span>
+                  <span className="text-xs text-sky-400 uppercase tracking-wider">{t('component.statCard.associatedBuffs')}</span>
                   <div className="flex flex-wrap gap-1">
                     {effect.buff.map((e) => (
                       <EffectInlineTag key={e} name={e} type="buff" />
@@ -110,7 +112,7 @@ export default function StatCard({ abbr, desc, details, effect }: StatCardProps)
               )}
               {effect.debuff && effect.debuff.length > 0 && (
                 <div className="space-y-1">
-                  <span className="text-xs text-red-400 uppercase tracking-wider">Associated Debuffs</span>
+                  <span className="text-xs text-red-400 uppercase tracking-wider">{t('component.statCard.associatedDebuffs')}</span>
                   <div className="flex flex-wrap gap-1">
                     {effect.debuff.map((e) => (
                       <EffectInlineTag key={e} name={e} type="debuff" />
