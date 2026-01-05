@@ -3,19 +3,25 @@
 import Image from 'next/image'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import tags from '@/data/tags.json'
+import { useI18n } from '@/lib/contexts/I18nContext'
+import { l } from '@/lib/localize'
+import type { WithLocalizedFields } from '@/types/common'
 
-type Tag = {
+type BaseTag = {
   label: string
   image: string
   desc: string
   type: string
 }
 
+type Tag = WithLocalizedFields<WithLocalizedFields<BaseTag, 'label'>, 'desc'>
+
 type TagDisplayMiniProps = {
   tags?: string[] | string
 }
 
 export default function TagDisplayMini({ tags: input = [] }: TagDisplayMiniProps) {
+  const { lang } = useI18n()
   const normalized = Array.isArray(input) ? input : input ? [input] : []
 
   const tagList: Array<{ key: string; def: Tag }> = normalized
@@ -26,6 +32,8 @@ export default function TagDisplayMini({ tags: input = [] }: TagDisplayMiniProps
     .filter((v): v is { key: string; def: Tag } => !!v)
 
   const renderTag = ({ key, def }: { key: string; def: Tag }, idx: number) => {
+    const localizedLabel = l(def, 'label', lang)
+    const localizedDesc = l(def, 'desc', lang)
 
     return (
       <Tooltip.Provider delayDuration={1} skipDelayDuration={0} disableHoverableContent={false} key={`${key}-${idx}`}>
@@ -34,7 +42,7 @@ export default function TagDisplayMini({ tags: input = [] }: TagDisplayMiniProps
             <div className="flex items-center p-0 rounded cursor-pointer mr-1 mb-1">
               <Image
                 src={def.image}
-                alt={def.label}
+                alt={localizedLabel}
                 width={24}
                 height={24}
                 style={{ width: 24, height: 24 }}
@@ -43,7 +51,7 @@ export default function TagDisplayMini({ tags: input = [] }: TagDisplayMiniProps
                   e.currentTarget.style.display = 'none'
                 }}
               />
-              <p className='pl-1'>{def.label}</p>
+              <p className='pl-1'>{localizedLabel}</p>
             </div>
           </Tooltip.Trigger>
 
@@ -56,7 +64,7 @@ export default function TagDisplayMini({ tags: input = [] }: TagDisplayMiniProps
               <div className="relative w-[28px] h-[28px] p-1 rounded shrink-0">
                 <Image
                   src={def.image}
-                  alt={def.label}
+                  alt={localizedLabel}
                   fill
                   sizes="28px"
                   className="object-contain"
@@ -64,7 +72,7 @@ export default function TagDisplayMini({ tags: input = [] }: TagDisplayMiniProps
               </div>
 
               <div className="flex flex-col">
-                <span className="text-white text-xs leading-snug whitespace-pre-line">{def.desc}</span>
+                <span className="text-white text-xs leading-snug whitespace-pre-line">{localizedDesc}</span>
               </div>
               <Tooltip.Arrow className="fill-gray-700" />
             </Tooltip.Content>

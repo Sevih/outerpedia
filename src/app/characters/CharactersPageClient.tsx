@@ -85,7 +85,8 @@ const TagDisplayMini = dynamic(() => import('@/app/components/TagDisplayMini').t
 const ElementIcon = dynamic(() => import('@/app/components/ElementIcon').then(m => m.ElementIcon))
 const ClassIcon = dynamic(() => import('@/app/components/ClassIcon').then(m => m.ClassIcon))
 
-type TagMeta = { label: string; image: string; desc: string; type: string }
+type BaseTagMeta = { label: string; image: string; desc: string; type: string }
+type TagMeta = WithLocalizedFields<WithLocalizedFields<BaseTagMeta, 'label'>, 'desc'>
 
 // ===== Types
 type Payload = {
@@ -893,7 +894,7 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
                             return (
                               <FilterPill
                                 key={key}
-                                title={meta.desc}
+                                title={l(meta, 'desc', langue)}
                                 active={active}
                                 onClick={() =>
                                   setTagFilter(prev =>
