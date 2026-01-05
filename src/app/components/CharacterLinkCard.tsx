@@ -18,9 +18,10 @@ const characterNameMap: Record<string, string> = {
 
 type Props = {
   name: string; // alias ou Fullname
+  icon?: boolean; //icone ou pas 
 };
 
-export default function CharacterInlineTag({ name }: Props) {
+export default function CharacterInlineTag({ name, icon = true }: Props) {
   const { key: lang } = useTenant();
 
   // Recherche du personnage correspondant à l'alias
@@ -36,24 +37,40 @@ export default function CharacterInlineTag({ name }: Props) {
 
   return (
     <>
-      <Link
-        href={`/characters/${slug}`}
-        className="inline-block w-[50px] h-[50px] relative align-bottom mr-1"
-      >
-        <Image
-          src={imagePath}
-          alt={localizedName}
-          sizes="50px"
-          fill
-          className="object-contain"
-        />
-      </Link>
-      <Link
-        href={`/characters/${slug}`}
-        className="text-sky-400 hover:text-sky-300 underline-offset-2 hover:underline transition-colors"
-      >
-        {localizedName}
-      </Link>
+
+      {icon && (
+        <>
+          <Link
+            href={`/characters/${slug}`}
+            className="inline-block w-[50px] h-[50px] relative align-bottom mr-1"
+          >
+            <Image
+              src={imagePath}
+              alt={localizedName}
+              sizes="50px"
+              fill
+              className="object-contain"
+            />
+          </Link>
+          <Link
+            href={`/characters/${slug}`}
+            className="text-sky-400 hover:text-sky-300 underline-offset-2 hover:underline transition-colors"
+          >
+            {localizedName}
+          </Link>
+        </>
+      )}
+
+      {!icon && (
+        <Link
+          href={`/characters/${slug}`}
+          className="text-sky-400 hover:text-sky-300 underline-offset-2 hover:underline transition-colors"
+        >
+          {localizedName}
+        </Link>
+      )}
+
+
     </>
   );
 }

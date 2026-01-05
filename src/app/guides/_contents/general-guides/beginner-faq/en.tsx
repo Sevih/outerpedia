@@ -426,7 +426,7 @@ export default function BeginnerFAQ() {
                         <CharacterLinkCard name="Delta" /> <span className="text-xs">(HP instead of ATK)</span>
                       </p>
                       <p className="text-sm "><SkillInline character='Delta' skill='S1' /><SkillInline character='Delta' skill='S2' /><SkillInline character='Delta' skill='S3' /></p>
-                      <p>Delta&apos;s skills scale proportional to Max Health instead of <StatInlineTag name="ATK" />: Focus on <StatInlineTag name="HP" /></p>
+                      <p><CharacterLinkCard name="Delta" icon={false} />&apos;s skills scale proportional to Max Health instead of <StatInlineTag name="ATK" />: Focus on <StatInlineTag name="HP" /></p>
                     </div>
 
                     <div className="p-4 bg-amber-900/20 border border-amber-500/30 rounded-lg">
@@ -434,12 +434,12 @@ export default function BeginnerFAQ() {
                         <CharacterLinkCard name="Demiurge Stella" /> <span className="text-xs">(HP bonus)</span>
                       </p>
                       <p className="text-sm "><SkillInline character='Demiurge Stella' skill='S1' /><SkillInline character='Demiurge Stella' skill='S2' /><SkillInline character='Demiurge Stella' skill='S3' /></p>
-                      <p className="text-sm ">Demiurge Stella&apos;s skills scale proportional to Max Health: Still goes for <StatInlineTag name="ATK" /> to increase damage, <StatInlineTag name="HP" /> is a bonus.</p>
+                      <p className="text-sm "><CharacterLinkCard name="Demiurge Stella" icon={false} />&apos;s skills scale proportional to Max Health: Still goes for <StatInlineTag name="ATK" /> to increase damage, <StatInlineTag name="HP" /> is a bonus.</p>
                     </div>
                   </div>
                   <div className="p-3 bg-purple-900/10 border-l-4 border-purple-500 rounded">
                     <p className="text-sm font-semibold text-purple-300 mb-1">
-                      Against bosses that set your <StatInlineTag name="ATK" /> to 0 (Like Shichifuja&apos;s Shadow in Skyward Tower Hard): Delta can deal damage normally. Demiurge Stella&apos;s damage will reduce to single digits.
+                      Against bosses that set your <StatInlineTag name="ATK" /> to 0 (Like Shichifuja&apos;s Shadow in Skyward Tower Hard): <CharacterLinkCard name="Delta" icon={false} /> can deal damage normally. <CharacterLinkCard name="Demiurge Stella" icon={false} />&apos;s damage will reduce to single digits.
                     </p>
                   </div>
                 </div>
