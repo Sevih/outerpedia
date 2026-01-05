@@ -11,32 +11,29 @@ import GuideHeading from '@/app/components/GuideHeading'
 import EffectInlineTag from '@/app/components/EffectInlineTag'
 import StatInlineTag from '@/app/components/StatInlineTag'
 import Accordion from '@/app/components/ui/Accordion'
-import StatBlock from '@/app/components/guides/StatBlock'
+import StatCard, { StatGroup } from '@/app/components/guides/StatCard'
 import SkillInline from '@/app/components/SkillInline'
 import GuideIconInline from '@/app/components/GuideIconInline'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import ClassInlineTag from '@/app/components/ClassInlineTag'
-import { BuffsSection, DebuffsSection } from '@/app/components/guides/general-guides/EffectsSection'
 
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
 
 export default function BasicStatsGuide() {
-    const [selected, setSelected] = useState<'stats' | 'combat' | 'buffs' | 'debuffs'>('stats')
+    const [selected, setSelected] = useState<'stats' | 'combat' | 'faq'>('stats')
 
     const tabs = [
         { key: 'stats' as const, label: 'Basic Stats' },
         { key: 'combat' as const, label: 'Combat Basics' },
-        { key: 'buffs' as const, label: 'Buffs' },
-        { key: 'debuffs' as const, label: 'Debuffs' }
+        { key: 'faq' as const, label: 'FAQ' }
     ]
 
     const content = {
         stats: <StatsContent />,
         combat: <CombatBasicsContent />,
-        buffs: <BuffsContent />,
-        debuffs: <DebuffsContent />
+        faq: <FAQContent />
     }
 
     return (
@@ -48,7 +45,7 @@ export default function BasicStatsGuide() {
 
             {/* Introduction */}
             <p className="text-neutral-300 mb-6 leading-relaxed">
-                A comprehensive guide covering stats, combat mechanics, buffs, and debuffs in Outerplane.
+                A comprehensive guide covering stats and combat mechanics in Outerplane.
             </p>
 
             {/* Onglets animés */}
@@ -76,268 +73,246 @@ export default function BasicStatsGuide() {
 
 function StatsContent() {
     return (
-        <div className="space-y-12">
-            {/* Main Stats Section */}
-            <section className="space-y-8">
-                <GuideHeading level={2}>Core Stats</GuideHeading>
+        <div className="space-y-8">
+            <GuideHeading level={2}>Core Stats</GuideHeading>
 
-                <div className="space-y-8">
-                    {/* Offensive Stats */}
-                    <div className="space-y-6">
-                        <h3 className="text-xl font-bold text-red-400 border-l-4 border-red-500 pl-4">Offensive Stats</h3>
+            {/* Offensive Stats */}
+            <StatGroup title="Offensive Stats" color="red">
+                <StatCard
+                    abbr="ATK"
+                    desc="The higher your attack, the more damage you deal to enemies."
+                    effect={{
+                        buff: ["BT_STAT|ST_ATK"],
+                        debuff: ["BT_STAT|ST_ATK"]
+                    }}
+                    details={
+                        <>
+                            <p>Attack directly increases the raw damage dealt by your skills. However, some skills scale with other stats or ignore Attack entirely.</p>
+                            <p className="mt-2">Some DoTs (damage over time) are impacted by attack:</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li><EffectInlineTag name="BT_DOT_BURN" type="debuff" /></li>
+                                <li><EffectInlineTag name="BT_DOT_BLEED" type="debuff" /></li>
+                                <li><EffectInlineTag name="BT_DOT_POISON" type="debuff" /></li>
+                                <li><EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /></li>
+                            </ul>
+                        </>
+                    }
+                />
 
-                        <StatBlock
-                            title="Attack"
-                            abbr="ATK"
-                            desc="The higher your attack, the more damage you deal to enemies."
-                            effect={{
-                                buff: ["BT_STAT|ST_ATK"],
-                                debuff: ["BT_STAT|ST_ATK"]
-                            }}
-                            text={
-                                <>
-                                    <p>Attack directly increases the raw damage dealt by your skills. However, some skills scale with other stats or ignore Attack entirely.</p>
-                                    <p className="mt-2">Some DoTs (damage over time) are impacted by attack:</p>
-                                    <ul className="list-disc list-inside ml-4 mt-2">
-                                        <li><EffectInlineTag name="BT_DOT_BURN" type="debuff" /></li>
-                                        <li><EffectInlineTag name="BT_DOT_BLEED" type="debuff" /></li>
-                                        <li><EffectInlineTag name="BT_DOT_POISON" type="debuff" /></li>
-                                        <li><EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /></li>
-                                    </ul>
-                                </>
-                            }
-                        />
+                <StatCard
+                    abbr="CHC"
+                    desc="Chance for a critical hit to occur. When a critical hit occurs, the damage dealt is increased according to critical damage."
+                    effect={{
+                        buff: ["BT_STAT|ST_CRITICAL_RATE"],
+                        debuff: ["BT_STAT|ST_CRITICAL_RATE"]
+                    }}
+                    details={
+                        <>
+                            <p>By default, most characters start with a low base Crit Chance and must build it through gear, buffs, quirks, or passives. Reaching 100% Crit Chance guarantees that every eligible attack will crit.</p>
+                            <p className="mt-3 font-semibold">Important notes:</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li>Crit Chance is capped at 100% — any excess is wasted.</li>
+                                <li>Healing and Shielding cannot crit.</li>
+                                <li>Skills with <EffectInlineTag name="HEAVY_STRIKE" type="buff" triggerStyle={{ verticalAlign: 'middle', marginTop: '-6px' }} /> effect cannot crit like <SkillInline character="Kitsune of Eternity Tamamo-no-Mae" skill="S1" />.</li>
+                                <li>Damage over Time effects cannot crit.</li>
+                            </ul>
+                        </>
+                    }
+                />
 
-                        <StatBlock
-                            title="Crit Chance"
-                            abbr="CHC"
-                            desc="Chance for a critical hit to occur. When a critical hit occurs, the damage dealt is increased according to critical damage."
-                            effect={{
-                                buff: ["BT_STAT|ST_CRITICAL_RATE"],
-                                debuff: ["BT_STAT|ST_CRITICAL_RATE"]
-                            }}
-                            text={
-                                <>
-                                    <p>By default, most characters start with a low base Crit Chance and must build it through gear, buffs, quirks, or passives. Reaching 100% Crit Chance guarantees that every eligible attack will crit.</p>
-                                    <p className="mt-3 font-semibold">Important notes:</p>
-                                    <ul className="list-disc list-inside ml-4 mt-2">
-                                        <li>Crit Chance is capped at 100% — any excess is wasted.</li>
-                                        <li>Healing and Shielding cannot crit.</li>
-                                        <li>Skills with <EffectInlineTag name="HEAVY_STRIKE" type="buff" triggerStyle={{ verticalAlign: 'middle', marginTop: '-6px' }} /> effect cannot crit like <SkillInline character="Kitsune of Eternity Tamamo-no-Mae" skill="S1" />.</li>
-                                        <li>Damage over Time effects cannot crit.</li>
-                                    </ul>
-                                </>
-                            }
-                        />
+                <StatCard
+                    abbr="CHD"
+                    desc="Increase Damage upon scoring a critical hit."
+                    effect={{
+                        buff: ["BT_STAT|ST_CRITICAL_DMG_RATE"],
+                        debuff: ["BT_STAT|ST_CRITICAL_DMG_RATE"]
+                    }}
+                    details={
+                        <>
+                            <p>Crit Damage determines how much bonus damage is applied when you land a critical hit. The formula typically multiplies your base damage by a percentage defined by your Crit Dmg stat.</p>
+                            <p className="mt-2">All units start with a base Crit Damage of <strong>150%</strong>.</p>
+                            <p className="mt-2 text-yellow-400">Investing in Crit Damage isn&apos;t worthwhile if your Crit Chance is low.</p>
+                        </>
+                    }
+                />
 
-                        <StatBlock
-                            title="Crit Dmg"
-                            abbr="CHD"
-                            desc="Increase Damage upon scoring a critical hit."
-                            effect={{
-                                buff: ["BT_STAT|ST_CRITICAL_DMG_RATE"],
-                                debuff: ["BT_STAT|ST_CRITICAL_DMG_RATE"]
-                            }}
-                            text={
-                                <>
-                                    <p>Crit Damage determines how much bonus damage is applied when you land a critical hit. The formula typically multiplies your base damage by a percentage defined by your Crit Dmg stat.</p>
-                                    <p className="mt-2">All units start with a base Crit Damage of <strong>150%</strong>.</p>
-                                    <p className="mt-2 text-yellow-400">Investing in Crit Damage isn&apos;t worthwhile if your Crit Chance is low.</p>
-                                </>
-                            }
-                        />
+                <StatCard
+                    abbr="PEN"
+                    desc="Penetration lets you ignore a portion of the target's Defense."
+                    effect={{
+                        buff: ["BT_STAT|ST_PIERCE_POWER_RATE"],
+                        debuff: ["BT_STAT|ST_PIERCE_POWER_RATE"]
+                    }}
+                    details={
+                        <>
+                            <p>Penetration ignores a percentage of the enemy&apos;s Defense (DEF) when calculating how much damage your attacks deal. The higher your PEN, the less DEF is counted in the damage reduction formula.</p>
+                            <p className="mt-2">For example, if your target has <strong>2000 DEF</strong> and you have <strong>20% PEN</strong>, it will behave as if they only had <strong>1600 DEF</strong>.</p>
+                            <p className="mt-2">Penetration becomes more valuable against tanky enemies with high DEF.</p>
+                            <p className="mt-3 text-sm text-yellow-400">
+                                <strong>Note:</strong> If the enemy has 0 defense (like in joint battle), penetration becomes useless.
+                            </p>
+                        </>
+                    }
+                />
+            </StatGroup>
 
-                        <StatBlock
-                            title="Penetration"
-                            abbr="PEN"
-                            desc="Penetration lets you ignore a portion of the target's Defense"
-                            effect={{
-                                buff: ["BT_STAT|ST_PIERCE_POWER_RATE"],
-                                debuff: []
-                            }}
-                            text={
-                                <>
-                                    <p>Penetration ignores a percentage of the enemy&apos;s Defense (DEF) when calculating how much damage your attacks deal. The higher your PEN, the less DEF is counted in the damage reduction formula.</p>
-                                    <p className="mt-2">For example, if your target has <strong>2000 DEF</strong> and you have <strong>20% PEN</strong>, it will behave as if they only had <strong>1600 DEF</strong>. This means your attacks will deal more damage.</p>
-                                    <p className="mt-2">Penetration becomes more valuable against tanky enemies with high DEF.</p>
-                                    <p className="mt-3 text-sm text-yellow-400">
-                                        <strong>Note:</strong> Penetration removes a portion of the target&apos;s DEF, so the damage boost is not linear. The more DEF the enemy has, the more your PEN will matter. If the enemy has 0 defense (like in joint battle), penetration becomes useless.
-                                    </p>
-                                </>
-                            }
-                        />
-                    </div>
+            {/* Defensive Stats */}
+            <StatGroup title="Defensive Stats" color="blue">
+                <StatCard
+                    abbr="HP"
+                    desc="You can no longer participate in combat once your Health falls below zero."
+                    details={
+                        <>
+                            <p>Health represents the total amount of damage a unit can take before being defeated. Once HP reaches 0, the unit is immediately removed from combat.</p>
+                            <p className="mt-2">Like Attack, some skills scale with HP, such as <SkillInline character="Demiurge Drakhan" skill="S1" />.</p>
+                            <p className="mt-3">You can replenish HP with healing skills, and protect it with buffs like:</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li><EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" /></li>
+                                <li><EffectInlineTag name="BT_INVINCIBLE" type="buff" /></li>
+                                <li><EffectInlineTag name="BT_UNDEAD" type="buff" /></li>
+                            </ul>
+                        </>
+                    }
+                />
 
-                    {/* Defensive Stats */}
-                    <div className="space-y-6">
-                        <h3 className="text-xl font-bold text-blue-400 border-l-4 border-blue-500 pl-4">Defensive Stats</h3>
+                <StatCard
+                    abbr="DEF"
+                    desc="The higher your defense, the less damage you take from enemies."
+                    effect={{
+                        buff: ["BT_STAT|ST_DEF"],
+                        debuff: ["BT_STAT|ST_DEF"]
+                    }}
+                    details={
+                        <>
+                            <p>Defense reduces the amount of damage taken from most sources. Some skills scale with defense like <SkillInline character="Caren" skill="S3" />.</p>
+                            <p className="mt-3">However, some in-game mechanics can partially or completely ignore DEF, such as:</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li><EffectInlineTag name="BT_DOT_BURN" type="debuff" /></li>
+                                <li><EffectInlineTag name="BT_STAT|ST_PIERCE_POWER_RATE" type="buff" /></li>
+                                <li><EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /></li>
+                            </ul>
+                        </>
+                    }
+                />
+            </StatGroup>
 
-                        <StatBlock
-                            title="Health"
-                            abbr="HP"
-                            desc="You can no longer participate in combat once your Health falls below zero."
-                            effect={{
-                                buff: [],
-                                debuff: []
-                            }}
-                            text={
-                                <>
-                                    <p>Health represents the total amount of damage a unit can take before being defeated. Once HP reaches 0, the unit is immediately removed from combat.</p>
-                                    <p className="mt-2">Like Attack, some skills scale with HP, such as <SkillInline character="Demiurge Drakhan" skill="S1" />.</p>
-                                    <p className="mt-3">You can replenish HP with healing skills, and protect it with buffs like:</p>
-                                    <ul className="list-disc list-inside ml-4 mt-2">
-                                        <li><EffectInlineTag name="BT_SHIELD_BASED_CASTER" type="buff" /></li>
-                                        <li><EffectInlineTag name="BT_INVINCIBLE" type="buff" /></li>
-                                        <li><EffectInlineTag name="BT_UNDEAD" type="buff" /></li>
-                                    </ul>
-                                </>
-                            }
-                        />
+            {/* Utility Stats */}
+            <StatGroup title="Utility Stats" color="green">
+                <StatCard
+                    abbr="SPD"
+                    desc="The higher the speed, the more often you can act."
+                    effect={{
+                        buff: ["BT_STAT|ST_SPEED"],
+                        debuff: ["BT_STAT|ST_SPEED"]
+                    }}
+                    details={
+                        <>
+                            <p>Speed determines how quickly a unit&apos;s turn comes. The higher the SPD, the more frequently a unit can act during combat.</p>
+                            <p className="mt-2">Like Attack, some skills scale with SPD, such as <SkillInline character="Stella" skill="S2" />.</p>
+                            <p className="mt-3 text-yellow-400">Further details are provided in the <strong>Combat Basics</strong> section, since Speed is directly linked to the concept of &ldquo;Priority&rdquo;.</p>
+                        </>
+                    }
+                />
+            </StatGroup>
 
-                        <StatBlock
-                            title="Defense"
-                            abbr="DEF"
-                            desc="The higher your defense, the less damage you take from enemies."
-                            effect={{
-                                buff: ["BT_STAT|ST_DEF"],
-                                debuff: ["BT_STAT|ST_DEF"]
-                            }}
-                            text={
-                                <>
-                                    <p>Defense reduces the amount of damage taken from most sources. Some skills scale with defense like <SkillInline character="Caren" skill="S3" />.</p>
-                                    <p className="mt-3">However, some in-game mechanics can partially or completely ignore DEF, such as:</p>
-                                    <ul className="list-disc list-inside ml-4 mt-2">
-                                        <li><EffectInlineTag name="BT_DOT_BURN" type="debuff" /></li>
-                                        <li><EffectInlineTag name="BT_STAT|ST_PIERCE_POWER_RATE" type="buff" /></li>
-                                        <li><EffectInlineTag name="BT_FIXED_DAMAGE" type="debuff" /></li>
-                                    </ul>
-                                </>
-                            }
-                        />
-                    </div>
+            {/* Hit & Evasion */}
+            <StatGroup title="Hit & Evasion" color="purple">
+                <StatCard
+                    abbr="ACC"
+                    desc="Increases the chance of successfully landing an attack on an enemy."
+                    effect={{
+                        buff: ["BT_STAT|ST_ACCURACY"],
+                        debuff: ["BT_STAT|ST_ACCURACY"]
+                    }}
+                    details={
+                        <>
+                            <p>When your Accuracy is higher than the target&apos;s Evasion, your attacks have a 100% chance to succeed.</p>
+                            <p className="mt-3 font-semibold">Important notes:</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li>Countered by <StatInlineTag name="EVA" />.</li>
+                                <li>A miss results in -50% damage and cannot crit.</li>
+                                <li>Certain content (like bosses or PvP) may require high Accuracy.</li>
+                                <li>Some skills apply their debuff before the hit, bypassing ACC/EVA checks.</li>
+                            </ul>
+                        </>
+                    }
+                />
 
-                    {/* Utility Stats */}
-                    <div className="space-y-6">
-                        <h3 className="text-xl font-bold text-green-400 border-l-4 border-green-500 pl-4">Utility Stats</h3>
+                <StatCard
+                    abbr="EVA"
+                    desc="Increases the chance of evading an enemy's attack. Missed attacks deal -50% damage and can't crit."
+                    effect={{
+                        buff: ["BT_STAT|ST_AVOID"],
+                        debuff: ["BT_STAT|ST_AVOID"]
+                    }}
+                    details={
+                        <>
+                            <p>Countered by <StatInlineTag name="ACC" />, Evasion increases the chance to avoid enemy attacks. The evasion rate caps at <strong>25%</strong>, which is reached when your Evasion stat is at least <strong>+40</strong> higher than the enemy&apos;s Accuracy.</p>
+                            <p className="mt-3 font-semibold">On miss:</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li>Damage is reduced by 50%</li>
+                                <li>No Critical Hits can occur</li>
+                                <li>Debuffs will not be applied</li>
+                            </ul>
+                        </>
+                    }
+                />
+            </StatGroup>
 
-                        <StatBlock
-                            title="Speed"
-                            abbr="SPD"
-                            desc="The higher the speed, the more often you can act."
-                            effect={{
-                                buff: ["BT_STAT|ST_SPEED"],
-                                debuff: ["BT_STAT|ST_SPEED"]
-                            }}
-                            text={
-                                <>
-                                    <p>Speed determines how quickly a unit&apos;s turn comes. The higher the SPD, the more frequently a unit can act during combat. This stat directly affects action order and overall tempo.</p>
-                                    <p className="mt-2">Like Attack, some skills scale with SPD, such as <SkillInline character="Stella" skill="S2" />.</p>
-                                    <p className="mt-2">Certain mechanics directly manipulate turn order or interact with SPD.</p>
-                                    <p className="mt-3 text-yellow-400">Further details are provided in the <strong>Combat Basics</strong> section, since Speed is directly linked to the concept of &ldquo;Priority&rdquo;.</p>
-                                </>
-                            }
-                        />
-                    </div>
+            {/* Effectiveness & Resilience */}
+            <StatGroup title="Effectiveness & Resilience" color="amber">
+                <StatCard
+                    abbr="EFF"
+                    desc="The higher the Effectiveness, the lower the chance the target has to resist debuffs."
+                    effect={{
+                        buff: ["BT_STAT|ST_BUFF_CHANCE"],
+                        debuff: ["BT_STAT|ST_BUFF_CHANCE"]
+                    }}
+                    details={
+                        <>
+                            <p>Effectiveness increases the chance of successfully applying debuffs and is countered by <StatInlineTag name="RES" />.</p>
+                            <p className="mt-2">If your Effectiveness is equal to or higher than the enemy&apos;s Resilience, the base chance to apply a debuff is 100%.</p>
+                            <p className="mt-2">Some skills can scale with Effectiveness, such as <CharacterLinkCard name="Gnosis Beth" icon={false} />&apos;s <EffectInlineTag name="BT_DOT_2000092" type="debuff" />.</p>
+                        </>
+                    }
+                />
 
-                    {/* Hit & Evasion */}
-                    <div className="space-y-6">
-                        <h3 className="text-xl font-bold text-purple-400 border-l-4 border-purple-500 pl-4">Hit & Evasion</h3>
+                <StatCard
+                    abbr="RES"
+                    desc="The higher the Resilience, the higher the chance to resist debuffs."
+                    effect={{
+                        buff: ["BT_STAT|ST_BUFF_RESIST"],
+                        debuff: ["BT_STAT|ST_BUFF_RESIST"]
+                    }}
+                    details={
+                        <>
+                            <p>Resilience reduces the chance of receiving debuffs and is countered by <StatInlineTag name="EFF" />. You can be immune to debuff with the <EffectInlineTag name="BT_IMMUNE" type="buff" /> buff.</p>
+                            <p className="mt-3">When your RES is higher than the enemy&apos;s EFF:</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li>RES − EFF = 0 → 100% chance</li>
+                                <li>RES − EFF = 100 → 50%</li>
+                                <li>RES − EFF = 300 → 25%</li>
+                                <li>RES − EFF = 900 → 10%</li>
+                            </ul>
+                            <p className="mt-3 text-yellow-400">Note: Some skills bypass the resilience check like <SkillInline character="Drakhan" skill="S2" />.</p>
+                        </>
+                    }
+                />
+            </StatGroup>
+        </div>
+    )
+}
 
-                        <StatBlock
-                            title="Accuracy"
-                            abbr="ACC"
-                            desc="Increases the chance of successfully landing an attack on an enemy. When the caster's Accuracy is higher than the target's Evasion, the caster's attacks have a 100% chance to succeed."
-                            effect={{
-                                buff: ["BT_STAT|ST_ACCURACY"],
-                                debuff: ["BT_STAT|ST_ACCURACY"]
-                            }}
-                            text={
-                                <>
-                                    <p>It is especially important for units that rely on status effects to control enemies.</p>
-                                    <p className="mt-2">Accuracy is compared directly against the target&apos;s Evasion. If your ACC is higher, the effect or hit is guaranteed to succeed.</p>
-                                    <p className="mt-3 font-semibold">Important notes:</p>
-                                    <ul className="list-disc list-inside ml-4 mt-2">
-                                        <li>Countered by <StatInlineTag name="EVA" />.</li>
-                                        <li>A miss results in -50% damage and cannot crit.</li>
-                                        <li>Certain content (like bosses or PvP) may require high Accuracy to overcome enemy evasion or mechanics.</li>
-                                        <li>Some skills apply their debuff before the hit, these are not subject to accuracy/evasion checks.</li>
-                                    </ul>
-                                </>
-                            }
-                        />
+// ============================================================================
+// FAQ CONTENT
+// ============================================================================
 
-                        <StatBlock
-                            title="Evasion"
-                            abbr="EVA"
-                            desc="Increases the chance of evading an enemy's attack. When an attack misses, damage is reduced by 50% and debuffs and critical hits will not land."
-                            effect={{
-                                buff: ["BT_STAT|ST_AVOID"],
-                                debuff: ["BT_STAT|ST_AVOID"]
-                            }}
-                            text={
-                                <>
-                                    <p>Countered by <StatInlineTag name="ACC" />, Evasion increases the chance to avoid enemy attacks. The evasion rate caps at <strong>25%</strong>, which is reached when your Evasion stat is at least <strong>+40</strong> higher than the enemy&apos;s Accuracy.</p>
-                                    <p className="mt-3 font-semibold">Important notes:</p>
-                                    <ul className="list-disc list-inside ml-4 mt-2">
-                                        <li>Damage is reduced by 50% on miss.</li>
-                                        <li>No Critical Hits can occur.</li>
-                                        <li>Debuffs will not be applied.</li>
-                                    </ul>
-                                </>
-                            }
-                        />
-                    </div>
-
-                    {/* Effectiveness & Resilience */}
-                    <div className="space-y-6">
-                        <h3 className="text-xl font-bold text-amber-400 border-l-4 border-amber-500 pl-4">Effectiveness & Resilience</h3>
-
-                        <StatBlock
-                            title="Effectiveness"
-                            abbr="EFF"
-                            desc="The higher the Effectiveness, the lower the chance the target has to resist debuffs."
-                            effect={{
-                                buff: ["BT_STAT|ST_BUFF_CHANCE"],
-                                debuff: ["BT_STAT|ST_BUFF_CHANCE"]
-                            }}
-                            text={
-                                <>
-                                    <p>Effectiveness increases the chance of successfully applying debuffs and is countered by <StatInlineTag name="RES" />.</p>
-                                    <p className="mt-2">If your Effectiveness is equal to or higher than the enemy&apos;s Resilience, the base chance to apply a debuff is 100%.</p>
-                                    <p className="mt-2">Some skills can scale with Effectiveness, such as Gnosis Beth&apos;s <EffectInlineTag name="BT_DOT_2000092" type="debuff" />.</p>
-                                </>
-                            }
-                        />
-
-                        <StatBlock
-                            title="Resilience"
-                            abbr="RES"
-                            desc="The higher the Resilience, the higher the chance to resist debuffs."
-                            effect={{
-                                buff: ["BT_STAT|ST_BUFF_RESIST"],
-                                debuff: ["BT_STAT|ST_BUFF_RESIST"]
-                            }}
-                            text={
-                                <>
-                                    <p>Resilience reduces the chance of receiving debuffs and is countered by <StatInlineTag name="EFF" />. It is especially important on PvP units and bosses to avoid being crowd-controlled or stat-reduced. You can be immune to debuff by providing your team the <EffectInlineTag name="BT_IMMUNE" type="buff" /> buff.</p>
-                                    <p className="mt-3">When your RES is higher than the enemy&apos;s EFF, the chance for them to successfully apply a debuff decreases.</p>
-                                    <ul className="list-disc list-inside ml-4 mt-2">
-                                        <li>RES − EFF = 0 → 100% chance</li>
-                                        <li>RES − EFF = 100 → 50%</li>
-                                        <li>RES − EFF = 300 → 25%</li>
-                                        <li>RES − EFF = 900 → 10%</li>
-                                    </ul>
-                                    <p className="mt-3 text-yellow-400">Note: Some skills bypass the resilience check like <SkillInline character="Drakhan" skill="S2" />.</p>
-                                </>
-                            }
-                        />
-                    </div>
-                </div>
-            </section>
-
-            {/* FAQ Section */}
-            <section className="space-y-6">
-                <GuideHeading level={2}>Frequently Asked Questions</GuideHeading>
+function FAQContent() {
+    return (
+        <div className="space-y-8">
+            {/* Critical Hits & DoTs */}
+            <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-red-400">Critical Hits & DoTs</h4>
                 <Accordion
                     items={[
                         {
@@ -360,6 +335,36 @@ function StatsContent() {
                             title: 'Do DoTs scale with Attack?',
                             content: 'Yes. Some DoTs scale with the caster\'s ATK stat, though the scaling ratio is usually lower than for direct damage.'
                         },
+                        {
+                            key: 'pen-vs-dots',
+                            title: 'Does Penetration affect DoT or true damage?',
+                            content: (
+                                <>
+                                    <p>It depends on the DoT type. Some DoTs are reduced by DEF and therefore benefit from Penetration:</p>
+                                    <ul className="list-disc list-inside ml-4 mt-2">
+                                        <li><EffectInlineTag name="BT_DOT_BLEED" type="debuff" /></li>
+                                        <li><EffectInlineTag name="BT_DOT_POISON" type="debuff" /></li>
+                                        <li><EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /></li>
+                                    </ul>
+                                    <p className="mt-3">However, some DoTs ignore DEF entirely and are unaffected by Penetration:</p>
+                                    <ul className="list-disc list-inside ml-4 mt-2">
+                                        <li><EffectInlineTag name="BT_DOT_BURN" type="debuff" /></li>
+                                        <li><EffectInlineTag name="BT_DOT_CURSE" type="debuff" /></li>
+                                        <li><EffectInlineTag name="BT_DOT_2000092" type="debuff" /></li>
+                                    </ul>
+                                    <p className="mt-3">Fixed damage always ignores DEF and is unaffected by Penetration.</p>
+                                </>
+                            )
+                        }
+                    ]}
+                />
+            </div>
+
+            {/* Hit, Miss & Debuff Application */}
+            <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-purple-400">Hit, Miss & Debuff Application</h4>
+                <Accordion
+                    items={[
                         {
                             key: 'acc-vs-eva',
                             title: 'How does Accuracy vs Evasion work?',
@@ -384,45 +389,42 @@ function StatsContent() {
                             key: 'eff-res-formula',
                             title: 'Is there a minimum debuff success chance?',
                             content: 'No. The success chance depends on the difference between the attacker\'s Effectiveness (EFF) and the target\'s Resilience (RES). If EFF ≥ RES, the success chance is 100%. Otherwise, the chance decreases with a lower bound that depends on how much RES exceeds EFF. For example, a RES − EFF difference of 300 leads to a 25% chance, and a difference of 900 leads to only 10%.'
-                        },
+                        }
+                    ]}
+                />
+            </div>
+
+            {/* Defense & Penetration */}
+            <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-blue-400">Defense & Penetration</h4>
+                <Accordion
+                    items={[
                         {
                             key: 'pen-vs-high-def',
                             title: 'Is Penetration more effective against high DEF?',
                             content: 'Yes. The more DEF the enemy has, the greater the damage gain from Penetration, since it reduces the effective DEF used in the damage formula.'
                         },
                         {
-                            key: 'pen-vs-dots',
-                            title: 'Does Penetration affect DoT or true damage?',
-                            content: (
-                                <>
-                                    <p>It depends on the DoT type. Some DoTs are reduced by DEF and therefore benefit from Penetration:</p>
-                                    <ul className="list-disc list-inside ml-4 mt-2">
-                                        <li><EffectInlineTag name="BT_DOT_BLEED" type="debuff" /></li>
-                                        <li><EffectInlineTag name="BT_DOT_POISON" type="debuff" /></li>
-                                        <li><EffectInlineTag name="BT_DOT_LIGHTNING" type="debuff" /></li>
-                                    </ul>
-                                    <p className="mt-3">However, some DoTs ignore DEF entirely and are unaffected by Penetration:</p>
-                                    <ul className="list-disc list-inside ml-4 mt-2">
-                                        <li><EffectInlineTag name="BT_DOT_BURN" type="debuff" /></li>
-                                        <li><EffectInlineTag name="BT_DOT_CURSE" type="debuff" /></li>
-                                        <li><EffectInlineTag name="BT_DOT_2000092" type="debuff" /></li>
-                                    </ul>
-                                    <p className="mt-3">Fixed damage always ignores DEF and is unaffected by Penetration.</p>
-                                </>
-                            )
-                        },
-                        {
                             key: 'fixed-damage-mitigation',
                             title: 'Can Defense reduce fixed damage?',
                             content: 'No. Fixed damage ignores DEF. Only shields or invincibility can prevent it.'
-                        },
+                        }
+                    ]}
+                />
+            </div>
+
+            {/* Stat Scaling */}
+            <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-green-400">Stat Scaling</h4>
+                <Accordion
+                    items={[
                         {
                             key: 'dual-scaling',
                             title: 'Can skills scale with more than one stat?',
                             content: (
                                 <>
                                     <p>Not exactly. Outerplane does not currently feature skills that use two stats evenly (e.g., 50% ATK + 50% HP). What is often referred to as &ldquo;dual-scaling&rdquo; is actually <strong>secondary scaling</strong> — a main stat (usually ATK), with a minor bonus from another stat like HP, SPD, or EVA.</p>
-                                    <p className="mt-2">For example, some skills primarily scale with ATK but gain a bonus from the caster&apos;s Max HP or Speed. <SkillInline character="Regina" skill="S3" /> includes minor scaling with Evasion, and D. Stella has partial scaling from HP.</p>
+                                    <p className="mt-2">For example, some skills primarily scale with ATK but gain a bonus from the caster&apos;s Max HP or Speed. <SkillInline character="Regina" skill="S3" /> includes minor scaling with Evasion, and <CharacterLinkCard name="Demiurge Stella" icon={false} /> has partial scaling from HP.</p>
                                     <p className="mt-2">These secondary scalings are usually small and should not be the focus of gear building. There are also skills that use a stat other than ATK entirely — such as HP-based or DEF-based damage.</p>
                                 </>
                             )
@@ -441,7 +443,91 @@ function StatsContent() {
                                     <p className="mt-2">The wording is important: &ldquo;instead of&rdquo; replaces ATK scaling, while without it means additional scaling.</p>
                                 </>
                             )
+                        }
+                    ]}
+                />
+            </div>
+
+            {/* Speed & Priority */}
+            <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-cyan-400">Speed & Priority</h4>
+                <Accordion
+                    items={[
+                        {
+                            key: 'speed-formula',
+                            title: 'How is speed calculated?',
+                            content: (
+                                <>
+                                    <p>The base formula used to calculate speed in <strong>Outerplane</strong> is:</p>
+                                    <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit mt-2">
+                                        SPD = Base SPD + Gear SPD + (Base SPD × Set Effect %)
+                                    </p>
+                                    <ul className="list-disc list-inside mt-3">
+                                        <li><strong>Base SPD:</strong> The character&apos;s innate, unmodified speed.</li>
+                                        <li><strong>Gear SPD:</strong> Flat speed gained from equipped gear.</li>
+                                        <li>
+                                            <strong>Set Effect:</strong>
+                                            <ul className="list-disc list-inside ml-4 mt-1">
+                                                <li>0 if no Speed set equipped</li>
+                                                <li>0.12 (12%) if 2-piece Speed set</li>
+                                                <li>0.25 (25%) if 4-piece Speed set</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </>
+                            )
                         },
+                        {
+                            key: 'priority-formula',
+                            title: 'How is turn 1 priority calculated?',
+                            content: (
+                                <>
+                                    <p>The formula used to calculate initial priority at the start of battle:</p>
+                                    <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit mt-2">
+                                        Priority = (SPD + Ally Speed transcend bonus + (SPD × Buff %)) × 100 / (Top SPD + Top SPD team Ally Speed transcend bonus + (Top SPD × Buff %))
+                                    </p>
+                                    <ul className="list-disc list-inside mt-3">
+                                        <li><strong>SPD:</strong> Total speed of the unit, as calculated above.</li>
+                                        <li><strong>Top SPD:</strong> Highest SPD among all units (used as divisor).</li>
+                                        <li><strong>Ally Speed transcend bonus:</strong> Speed from transcendence.</li>
+                                        <li>
+                                            <strong>Buff:</strong>
+                                            <ul className="list-disc list-inside ml-4 mt-1">
+                                                <li>0 if no buff speed</li>
+                                                <li>0.3 (30%) if buff speed</li>
+                                                <li>-0.3 (-30%) if malus speed</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </>
+                            )
+                        },
+                        {
+                            key: 'max-speed',
+                            title: 'Max theoretical speed',
+                            content: (
+                                <>
+                                    <p>The maximum theoretical speed is:</p>
+                                    <ul className="list-disc list-inside mt-2">
+                                        <li><strong>Base speed:</strong> 154 hit by <ClassInlineTag name="Ranger" /></li>
+                                        <li><strong>Gear SPD:</strong> 138 (18 per piece + 48 from Accessory)</li>
+                                        <li><strong>Set SPD:</strong> 38 (on a 154 character)</li>
+                                        <li><strong>Ally Speed transcend bonus:</strong> 30 (<CharacterLinkCard name="Dianne" icon={false} /> + <CharacterLinkCard name="Mene" icon={false} /> + <CharacterLinkCard name="Demiurge Delta" icon={false} />)</li>
+                                    </ul>
+                                    <p className="mt-3">Leading to a grand total of: <strong>360</strong> (468 including the speed buff)</p>
+                                    <p className="mt-2"><CharacterLinkCard name="Ryu Lion" icon={false} /> can go further with her 4 star transcend bonus: <strong>370</strong> (481 with speed buff)</p>
+                                </>
+                            )
+                        }
+                    ]}
+                />
+            </div>
+
+            {/* Formulas & Calculations */}
+            <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-amber-400">Formulas & Calculations</h4>
+                <Accordion
+                    items={[
                         {
                             key: 'formula',
                             title: 'How calculations are done',
@@ -460,19 +546,19 @@ function StatsContent() {
                                         </a>
                                     </p>
 
-                                    <h4 className="font-semibold mt-4">🛡️ Defense Mitigation</h4>
+                                    <h4 className="font-semibold mt-4">Defense Mitigation</h4>
                                     <p><strong>Formula:</strong> <code>f(DEF) = 1000 / (1000 + DEF)</code></p>
                                     <p className="mt-2">This formula determines how much damage is reduced by defense. As DEF increases, the effect of each additional point diminishes (diminishing returns).</p>
                                     <p className="mt-2">Effective Health (EHP) can be derived from it:</p>
                                     <p className="mt-1"><strong>Effective HP:</strong> <code>EHP = HP + (HP × DEF / 1000)</code></p>
 
-                                    <h4 className="font-semibold mt-4">🎯 Accuracy vs Evasion</h4>
+                                    <h4 className="font-semibold mt-4">Accuracy vs Evasion</h4>
                                     <p>If <code>EVA - ACC ≤ 0</code>, then chance to evade = 0%.</p>
                                     <p className="mt-2">Otherwise:</p>
                                     <p className="mt-1"><strong>Formula:</strong> <code>Ratio = min(25%, 1000 / (100 + (EVA - ACC)))</code></p>
                                     <p className="mt-2">This means evasion caps at 25% when your EVA exceeds enemy ACC by 40 or more. Additional EVA beyond this gives no further miss chance.</p>
 
-                                    <h4 className="font-semibold mt-4">🧪 Effectiveness vs Resilience</h4>
+                                    <h4 className="font-semibold mt-4">Effectiveness vs Resilience</h4>
                                     <p>If <code>EFF ≥ RES</code>, the debuff success chance is 100%.</p>
                                     <p className="mt-2">Otherwise, the chance to apply a debuff is calculated using:</p>
                                     <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit mt-2">
@@ -513,7 +599,7 @@ function StatsContent() {
                         }
                     ]}
                 />
-            </section>
+            </div>
         </div>
     )
 }
@@ -700,13 +786,13 @@ function CombatBasicsContent() {
 
                     <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4 mt-4">
                         <p className="font-semibold text-purple-300">Example:</p>
-                        <p className="mt-2">Tamara: 300 SPD → 100% priority</p>
-                        <p>Dahlia: 280 SPD → 93% (280 × 100 / 300)</p>
-                        <p className="mt-2">Normally, Tamara would go first.</p>
-                        <p className="mt-2">But if Dahlia starts with a <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> (e.g., from her EE), her effective SPD becomes:</p>
+                        <p className="mt-2"><CharacterLinkCard name="Tamara" icon={false} />: 300 SPD → 100% priority</p>
+                        <p><CharacterLinkCard name="Dahlia" icon={false} />: 280 SPD → 93% (280 × 100 / 300)</p>
+                        <p className="mt-2">Normally, <CharacterLinkCard name="Tamara" icon={false} /> would go first.</p>
+                        <p className="mt-2">But if <CharacterLinkCard name="Dahlia" icon={false} /> starts with a <EffectInlineTag name="BT_STAT|ST_SPEED" type="buff" /> (e.g., from her EE), her effective SPD becomes:</p>
                         <p>280 × 1.3 = 364 → 100% priority</p>
-                        <p>Tamara: 300 SPD → <strong>82%</strong> (300 × 100 / 364)</p>
-                        <p className="mt-2">→ <strong>Dahlia will act first.</strong></p>
+                        <p><CharacterLinkCard name="Tamara" icon={false} />: 300 SPD → <strong>82%</strong> (300 × 100 / 364)</p>
+                        <p className="mt-2">→ <strong><CharacterLinkCard name="Dahlia" icon={false} /> will act first.</strong></p>
                     </div>
 
                     <p className="mt-4">Some transcendence perks also grant <StatInlineTag name="SPD" /> bonuses to the entire team, such as with <CharacterLinkCard name="Mene" /> or <CharacterLinkCard name="Demiurge Delta" />.</p>
@@ -743,96 +829,7 @@ function CombatBasicsContent() {
                 </div>
             </section>
 
-            {/* FAQ */}
-            <section className="space-y-6">
-                <GuideHeading level={2}>Frequently Asked Questions</GuideHeading>
-                <Accordion
-                    items={[
-                        {
-                            key: 'speed-formula',
-                            title: 'How is speed calculated?',
-                            content: (
-                                <>
-                                    <p>The base formula used to calculate speed in <strong>Outerplane</strong> is:</p>
-                                    <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit mt-2">
-                                        SPD = Base SPD + Gear SPD + (Base SPD × Set Effect %)
-                                    </p>
-                                    <ul className="list-disc list-inside mt-3">
-                                        <li><strong>Base SPD:</strong> The character&apos;s innate, unmodified speed.</li>
-                                        <li><strong>Gear SPD:</strong> Flat speed gained from equipped gear.</li>
-                                        <li>
-                                            <strong>Set Effect:</strong>
-                                            <ul className="list-disc list-inside ml-4 mt-1">
-                                                <li>0 if no Speed set equipped</li>
-                                                <li>0.12 (12%) if 2-piece Speed set</li>
-                                                <li>0.25 (25%) if 4-piece Speed set</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </>
-                            )
-                        },
-                        {
-                            key: 'priority-formula',
-                            title: 'How is turn 1 priority calculated?',
-                            content: (
-                                <>
-                                    <p>The formula used to calculate initial priority at the start of battle:</p>
-                                    <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit mt-2">
-                                        Priority = (SPD + Ally Speed transcend bonus + (SPD × Buff %)) × 100 / (Top SPD + Top SPD team Ally Speed transcend bonus + (Top SPD × Buff %))
-                                    </p>
-                                    <ul className="list-disc list-inside mt-3">
-                                        <li><strong>SPD:</strong> Total speed of the unit, as calculated above.</li>
-                                        <li><strong>Top SPD:</strong> Highest SPD among all units (used as divisor).</li>
-                                        <li><strong>Ally Speed transcend bonus:</strong> Speed from transcendence.</li>
-                                        <li>
-                                            <strong>Buff:</strong>
-                                            <ul className="list-disc list-inside ml-4 mt-1">
-                                                <li>0 if no buff speed</li>
-                                                <li>0.3 (30%) if buff speed</li>
-                                                <li>-0.3 (-30%) if malus speed</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </>
-                            )
-                        },
-                        {
-                            key: 'max-speed',
-                            title: 'Max theoretical speed',
-                            content: (
-                                <>
-                                    <p>The maximum theoretical speed is:</p>
-                                    <ul className="list-disc list-inside mt-2">
-                                        <li><strong>Base speed:</strong> 154 hit by <ClassInlineTag name="Ranger" /></li>
-                                        <li><strong>Gear SPD:</strong> 138 (18 per piece + 48 from Accessory)</li>
-                                        <li><strong>Set SPD:</strong> 38 (on a 154 character)</li>
-                                        <li><strong>Ally Speed transcend bonus:</strong> 30 (Dianne + Mene + Demiurge Delta)</li>
-                                    </ul>
-                                    <p className="mt-3">Leading to a grand total of: <strong>360</strong> (468 including the speed buff)</p>
-                                    <p className="mt-2">Ryu Lion can go further with her 4 star transcend bonus: <strong>370</strong> (481 with speed buff)</p>
-                                </>
-                            )
-                        }
-                    ]}
-                />
-            </section>
         </div>
     )
 }
 
-// ============================================================================
-// BUFFS CONTENT
-// ============================================================================
-
-function BuffsContent() {
-    return <BuffsSection />
-}
-
-// ============================================================================
-// DEBUFFS CONTENT
-// ============================================================================
-
-function DebuffsContent() {
-    return <DebuffsSection />
-}
