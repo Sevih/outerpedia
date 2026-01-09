@@ -15,10 +15,15 @@ export const freeHeroesSources = [
             {
                 names: ["Mene"],
                 reason: { en: "Guaranteed from missions." }
-            },
+            }
+        ]
+    },
+    {
+        source: { en: "New User Missions \n All Around Mirsha I" },
+        entries: [
             {
                 names: ["Alice", "Eliza", "Francesca", "Leo", "Maxwell", "Rhona", "Rin", "Saeran", "Valentine"],
-                reason: { en: "From {I-I/3★ Hero Selection Ticket} reward." }
+                reason: { en: "{I-I/3★ Hero Selection Ticket}. \n 1 for complete all 30 missions \n 1 for Season 1 Hardmode Adventure 10-7 clear." }
             }
         ]
     },
@@ -28,12 +33,6 @@ export const freeHeroesSources = [
             {
                 names: ["Veronica"],
                 reason: { en: "Clear Season 1 Normal Adventure 2-3." }
-            },
-            {
-                names: ["Alice", "Eliza", "Francesca", "Leo", "Maxwell", "Rhona", "Rin", "Saeran", "Valentine"],
-                reason: {
-                    en: "From {I-I/3★ Hero Selection Ticket} — Clear Season 1 Hardmode Adventure 10-7."
-                }
             }
         ]
     },

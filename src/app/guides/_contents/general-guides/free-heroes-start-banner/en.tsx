@@ -1,21 +1,23 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import Link from 'next/link'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import GuideHeading from '@/app/components/GuideHeading'
-import { CharacterPortrait } from '@/app/components/CharacterPortrait'
 import { useTenant } from '@/lib/contexts/TenantContext'
-import { l, lRec } from '@/lib/localize'
-import { toKebabCase } from '@/utils/formatText'
+import { lRec } from '@/lib/localize'
 import parseText from '@/utils/parseText'
 import { useSearchParams } from "next/navigation"
-import allCharacters from '@/data/_allCharacters.json'
+import { customBannerPicks } from './recommendedCharacters'
 import {
-    freeHeroesSources,
-    customBannerPicks
-} from './recommendedCharacters'
-type TabKey = "free" | "custom";
+    mapNamesToChars,
+    CharacterGrid,
+    renderWithLineBreaks,
+    freeHeroNames,
+    flattenedFreeHeroesEntries,
+    getNotInCustomBannerChars
+} from './helpers'
+
+type TabKey = "free" | "custom"
 
 export default function FreeHeroesStartBannerGuide() {
     const searchParams = useSearchParams();
@@ -80,15 +82,6 @@ export default function FreeHeroesStartBannerGuide() {
 function FreeHeroesContent() {
     const { key: lang } = useTenant()
 
-    // Flatten all entries with their source for the table
-    const flattenedEntries = freeHeroesSources.flatMap(source =>
-        source.entries.map(entry => ({
-            source: source.source,
-            names: Array.isArray(entry.names) ? entry.names : [entry.names],
-            reason: entry.reason
-        }))
-    )
-
     return (
         <div className="space-y-6">
             <table className="w-auto mx-auto border border-gray-600 rounded-md text-center border-collapse">
@@ -100,46 +93,17 @@ function FreeHeroesContent() {
                     </tr>
                 </thead>
                 <tbody>
-                    {flattenedEntries.map((entry, index) => {
-                        const characters = entry.names.map(name => {
-                            const char = allCharacters.find(c => c.Fullname === name)
-                            if (!char) return null
-                            return {
-                                char,
-                                localizedName: l(char, 'Fullname', lang),
-                                slug: toKebabCase(char.Fullname)
-                            }
-                        }).filter(Boolean) as { char: typeof allCharacters[0], localizedName: string, slug: string }[]
-
+                    {flattenedFreeHeroesEntries.map((entry, index) => {
+                        const characters = mapNamesToChars(entry.names, lang)
                         return (
                             <tr key={index} className={`border-b border-slate-600 ${index % 2 === 0 ? 'bg-slate-800/30' : ''}`}>
                                 <td className="py-3 px-4 align-middle border-r border-slate-600">
                                     <span className="font-medium text-neutral-200">
-                                        {lRec(entry.source, lang)}
+                                        {renderWithLineBreaks(lRec(entry.source, lang))}
                                     </span>
                                 </td>
                                 <td className="py-3 px-4 align-middle border-r border-slate-600">
-                                    <div className="grid grid-cols-3 gap-1 w-fit">
-                                        {characters.map(({ char, localizedName, slug }) => (
-                                            <Link
-                                                key={char.ID}
-                                                href={`/characters/${slug}`}
-                                                className="relative hover:z-10 transition-transform hover:scale-105"
-                                                title={localizedName}
-                                            >
-                                                <div className="relative w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]">
-                                                    <CharacterPortrait
-                                                        characterId={char.ID}
-                                                        characterName={localizedName}
-                                                        size={80}
-                                                        className="rounded-lg border-2 border-gray-600 bg-gray-900"
-                                                        showIcons
-                                                        showStars
-                                                    />
-                                                </div>
-                                            </Link>
-                                        ))}
-                                    </div>
+                                    <CharacterGrid characters={characters} />
                                 </td>
                                 <td className="py-3 px-4 align-middle text-sm text-neutral-300">
                                     {parseText(lRec(entry.reason, lang))}
@@ -153,41 +117,10 @@ function FreeHeroesContent() {
     )
 }
 
-// Set of free hero names for quick lookup
-const freeHeroNames = new Set(
-    freeHeroesSources.flatMap(source =>
-        source.entries.flatMap(entry =>
-            Array.isArray(entry.names) ? entry.names : [entry.names]
-        )
-    )
-)
-
-// Set of custom banner hero names
-const customBannerNames = new Set(
-    customBannerPicks.flatMap(entry =>
-        Array.isArray(entry.names) ? entry.names : [entry.names]
-    )
-)
-
 function CustomBannerContent() {
     const { key: lang } = useTenant()
 
-    // Compute heroes not yet in custom banner dynamically
-    const notInCustomBannerChars = useMemo(() => {
-        return allCharacters
-            .filter(c => c.Rarity === 3)
-            .filter(c => !c.limited)
-            .filter(c => !c.tags?.includes('collab'))
-            .filter(c => !c.tags?.includes('premium'))
-            .filter(c => !c.Fullname.startsWith('Core Fusion'))
-            .filter(c => !customBannerNames.has(c.Fullname))
-            .filter(c => !freeHeroNames.has(c.Fullname))
-            .map(c => ({
-                char: c,
-                localizedName: l(c, 'Fullname', lang),
-                slug: toKebabCase(c.Fullname)
-            }))
-    }, [lang])
+    const notInCustomBannerChars = useMemo(() => getNotInCustomBannerChars(lang), [lang])
 
     return (
         <div className="space-y-6">
@@ -212,80 +145,16 @@ function CustomBannerContent() {
                 <tbody>
                     {customBannerPicks.map((entry, index) => {
                         const names = Array.isArray(entry.names) ? entry.names : [entry.names]
-
-                        const freeChars = names
-                            .filter(name => freeHeroNames.has(name))
-                            .map(name => {
-                                const char = allCharacters.find(c => c.Fullname === name)
-                                if (!char) return null
-                                return {
-                                    char,
-                                    localizedName: l(char, 'Fullname', lang),
-                                    slug: toKebabCase(char.Fullname)
-                                }
-                            })
-                            .filter(Boolean) as { char: typeof allCharacters[0], localizedName: string, slug: string }[]
-
-                        const notFreeChars = names
-                            .filter(name => !freeHeroNames.has(name))
-                            .map(name => {
-                                const char = allCharacters.find(c => c.Fullname === name)
-                                if (!char) return null
-                                return {
-                                    char,
-                                    localizedName: l(char, 'Fullname', lang),
-                                    slug: toKebabCase(char.Fullname)
-                                }
-                            })
-                            .filter(Boolean) as { char: typeof allCharacters[0], localizedName: string, slug: string }[]
+                        const freeChars = mapNamesToChars(names.filter(name => freeHeroNames.has(name)), lang)
+                        const notFreeChars = mapNamesToChars(names.filter(name => !freeHeroNames.has(name)), lang)
 
                         return (
                             <tr key={index} className={`border-b border-slate-600 ${index % 2 === 0 ? 'bg-slate-800/30' : ''}`}>
                                 <td className="py-3 px-4 align-middle border-r border-slate-600">
-                                    <div className="grid grid-cols-3 gap-1 w-fit">
-                                        {freeChars.map(({ char, localizedName, slug }) => (
-                                            <Link
-                                                key={char.ID}
-                                                href={`/characters/${slug}`}
-                                                className="relative hover:z-10 transition-transform hover:scale-105"
-                                                title={localizedName}
-                                            >
-                                                <div className="relative w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]">
-                                                    <CharacterPortrait
-                                                        characterId={char.ID}
-                                                        characterName={localizedName}
-                                                        size={80}
-                                                        className="rounded-lg border-2 border-gray-600 bg-gray-900"
-                                                        showIcons
-                                                        showStars
-                                                    />
-                                                </div>
-                                            </Link>
-                                        ))}
-                                    </div>
+                                    <CharacterGrid characters={freeChars} />
                                 </td>
                                 <td className="py-3 px-4 align-middle border-r border-slate-600">
-                                    <div className="grid grid-cols-3 gap-1 w-fit">
-                                        {notFreeChars.map(({ char, localizedName, slug }) => (
-                                            <Link
-                                                key={char.ID}
-                                                href={`/characters/${slug}`}
-                                                className="relative hover:z-10 transition-transform hover:scale-105"
-                                                title={localizedName}
-                                            >
-                                                <div className="relative w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]">
-                                                    <CharacterPortrait
-                                                        characterId={char.ID}
-                                                        characterName={localizedName}
-                                                        size={80}
-                                                        className="rounded-lg border-2 border-gray-600 bg-gray-900"
-                                                        showIcons
-                                                        showStars
-                                                    />
-                                                </div>
-                                            </Link>
-                                        ))}
-                                    </div>
+                                    <CharacterGrid characters={notFreeChars} />
                                 </td>
                                 <td className="py-3 px-4 align-middle text-sm text-neutral-300">
                                     {parseText(lRec(entry.reason, lang))}
@@ -302,26 +171,8 @@ function CustomBannerContent() {
                     <p className="text-neutral-400 text-sm mb-4">
                         These heroes are too recent to be in the custom banner pool (~3.5 months after release).
                     </p>
-                    <div className="grid grid-cols-4 gap-2 w-fit mx-auto">
-                        {notInCustomBannerChars.map(({ char, localizedName, slug }) => (
-                            <Link
-                                key={char.ID}
-                                href={`/characters/${slug}`}
-                                className="relative hover:z-10 transition-transform hover:scale-105"
-                                title={localizedName}
-                            >
-                                <div className="relative w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]">
-                                    <CharacterPortrait
-                                        characterId={char.ID}
-                                        characterName={localizedName}
-                                        size={80}
-                                        className="rounded-lg border-2 border-gray-600 bg-gray-900"
-                                        showIcons
-                                        showStars
-                                    />
-                                </div>
-                            </Link>
-                        ))}
+                    <div className="flex justify-center">
+                        <CharacterGrid characters={notInCustomBannerChars} cols={4} />
                     </div>
                 </div>
             )}
