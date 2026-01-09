@@ -359,5 +359,13 @@
     },
     "start": "2025-12-31",
     "end": "2026-03-31"
+  },
+  {
+    "code": "M9FOR2026",
+    "description": {
+       "Call of the Demiurge (Event)": "100"
+    },
+    "start": "2026-01-09",
+    "end": "2026-03-31"
   }
 ] 
