@@ -23,7 +23,7 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Alice", "Eliza", "Francesca", "Leo", "Maxwell", "Rhona", "Rin", "Saeran", "Valentine"],
-                reason: { en: "{I-I/3★ Hero Selection Ticket}. \n 1 for complete all 30 missions \n 1 for Season 1 Hardmode Adventure 10-7 clear." }
+                reason: { en: "{I-I/3★ Hero Selection Ticket}. \n 1 for completing all 30 missions \n 1 for Season 1 Hardmode Adventure 10-7 clear." }
             }
         ]
     },
