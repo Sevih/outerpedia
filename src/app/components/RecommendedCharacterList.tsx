@@ -61,8 +61,11 @@ function resolveTitle(title: TitlePreset | LangMap, t: ReturnType<typeof getT>, 
 export default function RecommendedCharacterList({ title = 'default', entries }: Props) {
   const { key: lang } = useTenant()
   const t = getT(lang)
+  const isSmScreen = useIsSmScreen()
 
   const resolvedTitle = title !== false ? resolveTitle(title, t, lang) : null
+  const size = isSmScreen ? 80 : 50
+  const zoom = isSmScreen ? 0.6 : 0.4
 
   return (
     <div>
@@ -90,10 +93,6 @@ export default function RecommendedCharacterList({ title = 'default', entries }:
               </div>
             )
           }
-
-          const isSmScreen = useIsSmScreen()
-          const size = isSmScreen ? 80 : 50
-          const zoom = isSmScreen ? 0.6 : 0.4
 
           return (
             <div key={index} className="flex items-center gap-3 p-2 rounded-lg bg-neutral-800/50 hover:bg-neutral-800 transition-colors">
