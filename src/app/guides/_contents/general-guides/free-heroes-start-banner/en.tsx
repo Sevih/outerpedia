@@ -115,7 +115,7 @@ function FreeHeroesContent() {
                                     {isPickOne && (
                                         <div className="text-center mb-2">
                                             <span className="text-amber-400 font-bold text-lg" style={{ textShadow: '0 0 10px rgba(251, 191, 36, 0.8), 0 0 20px rgba(251, 191, 36, 0.4)' }}>
-                                                Pick one
+                                                Choose one
                                             </span>
                                         </div>
                                     )}
