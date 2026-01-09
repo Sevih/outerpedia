@@ -10,6 +10,7 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Ame", "Rin", "Rey", "Vlada"],
+                pickType: "one",
                 reason: {
                     en: "All solid choices, just pick the one you prefer.",
                     jp: "どれも優秀。好きなキャラを選ぼう。",
@@ -29,6 +30,7 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Mene"],
+                pickType: "all",
                 reason: {
                     en: "Guaranteed from missions.",
                     jp: "ミッションで確定入手。",
@@ -48,6 +50,7 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Alice", "Eliza", "Francesca", "Leo", "Maxwell", "Rhona", "Rin", "Saeran", "Valentine"],
+                pickType: "one",
                 reason: {
                     en: "{I-I/3★ Hero Selection Ticket}. \n 1 for completing all 30 missions \n 1 for Season 1 Hardmode Adventure 10 clear.",
                     jp: "{I-I/3★ Hero Selection Ticket}。 \n 30ミッション全クリアで1枚 \n シーズン1ハード冒険10クリアで1枚。",
@@ -67,6 +70,7 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Veronica"],
+                pickType: "all",
                 reason: {
                     en: "Clear Season 1 Normal Adventure 2-3.",
                     jp: "シーズン1 ノーマル冒険2-3クリア。",
@@ -86,6 +90,7 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Fatal"],
+                pickType: "all",
                 reason: {
                     en: "Clear Season 3 1-13: The Identity of the Relic.",
                     jp: "シーズン3 1-13クリア：遺物の正体。",
@@ -105,6 +110,7 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Sigma"],
+                pickType: "all",
                 reason: {
                     en: "Clear Skyward Tower Floor 100.",
                     jp: "飛天の塔100階クリア。",
@@ -124,6 +130,7 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Stella"],
+                pickType: "all",
                 reason: {
                     en: "10 {I-I/Hero Piece} per week for 700 {I-I/Friendship Point}.",
                     jp: "毎週10 {I-I/Hero Piece}、700 {I-I/Friendship Point}で購入可能。",
@@ -143,6 +150,7 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Ame", "Dahlia", "Epsilon", "Drakhan"],
+                pickType: "all",
                 reason: {
                     en: "10 {I-I/Hero Piece} per week for 300 {I-I/Guild Coins}.",
                     jp: "毎週10 {I-I/Hero Piece}、300 {I-I/Guild Coins}で購入可能。",
@@ -162,20 +170,22 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Dianne", "Drakhan", "Akari"],
+                pickType: "all",
                 reason: {
-                    en: "{E/Light} Starter — recommended choice.",
-                    jp: "{E/Light}スターター — おすすめ。",
-                    kr: "{E/Light} 스타터 — 추천.",
-                    zh: "{E/Light}新手包 - 推荐。"
+                    en: "{E/Light} Starter — recommended choice. \n Get all heroes, mutually exclusive with {E/Dark} Starter.",
+                    jp: "{E/Light}スターター — おすすめ。 \n 全員入手、{E/Dark}スターターとは排他。",
+                    kr: "{E/Light} 스타터 — 추천。 \n 모두 획득、{E/Dark} 스타터와 배타적。",
+                    zh: "{E/Light}新手包 - 推荐。 \n 获得全部角色，与{E/Dark}新手包互斥。"
                 }
             },
             {
                 names: ["Nella", "Hilde", "Iota"],
+                pickType: "all",
                 reason: {
-                    en: "{E/Dark} Starter.",
-                    jp: "{E/Dark}スターター。",
-                    kr: "{E/Dark} 스타터.",
-                    zh: "{E/Dark}新手包。"
+                    en: "{E/Dark} Starter. \n Get all heroes, mutually exclusive with {E/Light} Starter.",
+                    jp: "{E/Dark}スターター。 \n 全員入手、{E/Light}スターターとは排他。",
+                    kr: "{E/Dark} 스타터。 \n 모두 획득、{E/Light} 스타터와 배타적。",
+                    zh: "{E/Dark}新手包。 \n 获得全部角色，与{E/Light}新手包互斥。"
                 }
             }
         ]
@@ -190,19 +200,21 @@ export const freeHeroesSources = [
         entries: [
             {
                 names: ["Eternal", "Noa", "Laplace"],
+                pickType: "all",
                 reason: {
                     en: "Challenge! Special Request: Identification.",
                     jp: "挑戦! 特別依頼:識別。",
-                    kr: "도전! 특별의뢰 : 식별.",
+                    kr: "도전! 특별의뢰 : 식별。",
                     zh: "挑战!特别委托:鉴定。"
                 }
             },
             {
                 names: ["Aer", "Kappa", "Beth"],
+                pickType: "all",
                 reason: {
                     en: "Challenge! Special Request: Ecology Study.",
                     jp: "挑戦! 特別依頼:生態調査。",
-                    kr: "도전! 특별의뢰 : 생태 조사.",
+                    kr: "도전! 특별의뢰 : 생태 조사。",
                     zh: "挑战!特别委托:生态调查。"
                 }
             }

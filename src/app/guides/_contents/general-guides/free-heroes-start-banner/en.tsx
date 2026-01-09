@@ -60,7 +60,7 @@ export default function FreeHeroesStartBannerGuide() {
             </p>
 
             <p className="text-red-500 font-semibold bg-red-100 border border-red-300 rounded px-4 py-2 text-sm mb-6">
-                Avoid picking duplicates — <strong>always choose characters you don&apos;t already own</strong>. If your in-game recommendations look different, it&apos;s because we&apos;ve already excluded heroes you&apos;ll unlock for free elsewhere.
+                Avoid picking duplicates — <strong>always choose characters you do not already own</strong>. If your in-game recommendations look different, it is because we have already excluded heroes available from guaranteed sources (missions, story progression).
             </p>
 
             <div className="flex justify-center mb-6">
@@ -84,6 +84,10 @@ function FreeHeroesContent() {
 
     return (
         <div className="space-y-6">
+            <p className="text-neutral-400 text-sm italic">
+                Guild Shop heroes take 5+ weeks to unlock. Prioritize getting them from the Custom Banner for early progression, then use Guild Shop for transcendence.
+            </p>
+
             <table className="w-auto mx-auto border border-gray-600 rounded-md text-center border-collapse">
                 <thead>
                     <tr className="border-b-2 border-slate-500">
@@ -95,6 +99,8 @@ function FreeHeroesContent() {
                 <tbody>
                     {flattenedFreeHeroesEntries.map((entry, index) => {
                         const characters = mapNamesToChars(entry.names, lang)
+                        const isPickOne = entry.pickType === 'one'
+
                         return (
                             <tr key={index} className={`border-b border-slate-600 ${index % 2 === 0 ? 'bg-slate-800/30' : ''}`}>
                                 <td className="py-3 px-4 align-middle border-r border-slate-600">
@@ -106,6 +112,13 @@ function FreeHeroesContent() {
                                     <CharacterGrid characters={characters} />
                                 </td>
                                 <td className="py-3 px-4 align-middle text-sm text-neutral-300">
+                                    {isPickOne && (
+                                        <div className="text-center mb-2">
+                                            <span className="text-amber-400 font-bold text-lg" style={{ textShadow: '0 0 10px rgba(251, 191, 36, 0.8), 0 0 20px rgba(251, 191, 36, 0.4)' }}>
+                                                Pick one
+                                            </span>
+                                        </div>
+                                    )}
                                     {parseText(lRec(entry.reason, lang))}
                                 </td>
                             </tr>
@@ -137,8 +150,8 @@ function CustomBannerContent() {
             <table className="w-auto mx-auto border border-gray-600 rounded-md text-center border-collapse">
                 <thead>
                     <tr className="border-b-2 border-slate-500">
-                        <th className="text-center py-3 px-4 text-sky-400 font-semibold border-r border-slate-600">Free</th>
-                        <th className="text-center py-3 px-4 text-sky-400 font-semibold border-r border-slate-600">Not Free</th>
+                        <th className="text-center py-3 px-4 text-sky-400 font-semibold border-r border-slate-600">Recommended</th>
+                        <th className="text-center py-3 px-4 text-sky-400 font-semibold border-r border-slate-600">Available for free</th>
                         <th className="text-center py-3 px-4 text-sky-400 font-semibold">Details</th>
                     </tr>
                 </thead>
@@ -151,10 +164,10 @@ function CustomBannerContent() {
                         return (
                             <tr key={index} className={`border-b border-slate-600 ${index % 2 === 0 ? 'bg-slate-800/30' : ''}`}>
                                 <td className="py-3 px-4 align-middle border-r border-slate-600">
-                                    <CharacterGrid characters={freeChars} />
+                                    <CharacterGrid characters={notFreeChars} />
                                 </td>
                                 <td className="py-3 px-4 align-middle border-r border-slate-600">
-                                    <CharacterGrid characters={notFreeChars} />
+                                    <CharacterGrid characters={freeChars} />
                                 </td>
                                 <td className="py-3 px-4 align-middle text-sm text-neutral-300">
                                     {parseText(lRec(entry.reason, lang))}

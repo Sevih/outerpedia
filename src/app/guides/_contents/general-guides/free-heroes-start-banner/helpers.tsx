@@ -48,7 +48,8 @@ export const flattenedFreeHeroesEntries = freeHeroesSources.flatMap(source =>
     source.entries.map(entry => ({
         source: source.source,
         names: Array.isArray(entry.names) ? entry.names : [entry.names],
-        reason: entry.reason
+        reason: entry.reason,
+        pickType: entry.pickType
     }))
 )
 
