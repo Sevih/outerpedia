@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { CharacterPortrait } from '@/app/components/CharacterPortrait'
 import { l } from '@/lib/localize'
@@ -5,6 +8,22 @@ import { toKebabCase } from '@/utils/formatText'
 import allCharacters from '@/data/_allCharacters.json'
 import { freeHeroesSources, customBannerPicks } from './recommendedCharacters'
 import type { TenantKey } from '@/tenants/config'
+
+// Hook for responsive size detection (sm breakpoint = 640px)
+function useIsSmScreen() {
+    const [isSmScreen, setIsSmScreen] = useState(false)
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(min-width: 640px)')
+        setIsSmScreen(mediaQuery.matches)
+
+        const handler = (e: MediaQueryListEvent) => setIsSmScreen(e.matches)
+        mediaQuery.addEventListener('change', handler)
+        return () => mediaQuery.removeEventListener('change', handler)
+    }, [])
+
+    return isSmScreen
+}
 
 export type CharData = { char: typeof allCharacters[0], localizedName: string, slug: string }
 
@@ -74,30 +93,28 @@ export function mapNamesToChars(names: string[], lang: TenantKey): CharData[] {
         .filter(Boolean) as CharData[]
 }
 
-// Reusable grid of character portraits
-const GRID_COLS: Record<number, string> = {
-    3: 'grid-cols-3',
-    4: 'grid-cols-4',
-}
 
 export function CharacterGrid({ characters, cols = 3 }: { characters: CharData[], cols?: number }) {
+    const isSmScreen = useIsSmScreen()
+    const size = isSmScreen ? 70 : 50
+    const zoom = isSmScreen ? 0.55 : 0.4
     return (
-        <div className={`grid ${GRID_COLS[cols] || 'grid-cols-3'} gap-1 w-fit`}>
+        <div className={`grid grid-cols-1 sm:grid-cols-${cols} gap-1 w-fit`}>
             {characters.map(({ char, localizedName, slug }) => (
                 <Link
                     key={char.ID}
                     href={`/characters/${slug}`}
-                    className="relative hover:z-10 transition-transform hover:scale-105"
+                    className="relative hover:z-10 transition-transform hover:scale-105 mr-0.5"
                     title={localizedName}
                 >
-                    <div className="relative w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]">
+                    <div className="relative w-[50px] h-[50px] sm:w-[70px] sm:h-[70px]">
                         <CharacterPortrait
                             characterId={char.ID}
                             characterName={localizedName}
-                            size={80}
+                            size={size}
+                            zoom={zoom}
                             className="rounded-lg border-2 border-gray-600 bg-gray-900"
                             showIcons
-                            showStars
                         />
                     </div>
                 </Link>

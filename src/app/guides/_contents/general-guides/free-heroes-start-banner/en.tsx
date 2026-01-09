@@ -172,7 +172,7 @@ function CustomBannerContent() {
                         These heroes are too recent to be in the custom banner pool (~3.5 months after release).
                     </p>
                     <div className="flex justify-center">
-                        <CharacterGrid characters={notInCustomBannerChars} cols={4} />
+                        <CharacterGrid characters={notInCustomBannerChars} />
                     </div>
                 </div>
             )}
