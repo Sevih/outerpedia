@@ -144,10 +144,10 @@ export const freeHeroesSources = [
             {
                 names: ["Ame", "Dahlia", "Epsilon", "Drakhan"],
                 reason: {
-                    en: "10 {I-I/Hero Piece} per week for 300 {I-I/Guild Coin}.",
-                    jp: "毎週10 {I-I/Hero Piece}、300 {I-I/Guild Coin}で購入可能。",
-                    kr: "매주 10 {I-I/Hero Piece}, 300 {I-I/Guild Coin}으로 구매 가능.",
-                    zh: "每周10个{I-I/Hero Piece}，300 {I-I/Guild Coin}购买。"
+                    en: "10 {I-I/Hero Piece} per week for 300 {I-I/Guild Coins}.",
+                    jp: "毎週10 {I-I/Hero Piece}、300 {I-I/Guild Coins}で購入可能。",
+                    kr: "매주 10 {I-I/Hero Piece}, 300 {I-I/Guild Coins}으로 구매 가능.",
+                    zh: "每周10个{I-I/Hero Piece}，300 {I-I/Guild Coins}购买。"
                 }
             }
         ]
