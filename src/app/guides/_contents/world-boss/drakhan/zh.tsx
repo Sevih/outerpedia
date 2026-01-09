@@ -61,6 +61,8 @@ export default function DrakhanGuide() {
                     title: "phase2",
                     tips: [
                       "速度快的单位至关重要。使用{D/BT_DOT_POISON}或{D/BT_DOT_POISON2}来限制首领的行动值增加。",
+                      "当首领偷取增益时，效果会增加100%并转化为减益。例如，被偷取的+30% {B/BT_STAT|ST_SPEED}会变成-60% {D/BT_STAT|ST_SPEED}。",
+                      "至少带一名{E/Light}英雄。{P/Gnosis Beth}是个不错的选择，因为她有行动值增加机制。",
                       "保持所有单位的增益效果，以防止首领恢复其WG。",
                       "将{C/Defender}放在前排以减少对队伍施加的{D/BT_DOT_CURSE}数量。",
                       "避免使用{C/Striker}和{C/Mage}单位，因为它们会永久处于{D/BT_SILENCE_IR}状态。"

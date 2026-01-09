@@ -61,6 +61,8 @@ export default function DrakhanGuide() {
                     title: "phase2",
                     tips: [
                       "速いユニットが必須です。{D/BT_DOT_POISON}または{D/BT_DOT_POISON2}でボスの行動ゲージ上昇を制限しましょう。",
+                      "ボスがバフを奪うと、効果が100%増加してデバフに変換されます。例えば、奪われた+30%の{B/BT_STAT|ST_SPEED}は-60%の{D/BT_STAT|ST_SPEED}になります。",
+                      "{E/Light}ヒーローを少なくとも1人入れましょう。{P/Gnosis Beth}は行動ゲージ上昇メカニクスを持つ良い選択肢です。",
                       "ボスのWG回復を防ぐため、全ユニットにバフを維持してください。",
                       "チームへの{D/BT_DOT_CURSE}付与数を減らすため、{C/Defender}を前列に配置しましょう。",
                       "{C/Striker}と{C/Mage}ユニットは永続的に{D/BT_SILENCE_IR}状態になるため避けてください。"

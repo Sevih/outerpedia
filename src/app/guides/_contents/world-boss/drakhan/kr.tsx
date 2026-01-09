@@ -61,6 +61,8 @@ export default function DrakhanGuide() {
                     title: "phase2",
                     tips: [
                       "빠른 유닛이 필수입니다. {D/BT_DOT_POISON} 또는 {D/BT_DOT_POISON2}로 보스의 행동 게이지 증가를 제한하세요.",
+                      "보스가 버프를 훔치면 효과가 100% 증가하고 디버프로 변환됩니다. 예를 들어, 훔친 +30% {B/BT_STAT|ST_SPEED}는 -60% {D/BT_STAT|ST_SPEED}가 됩니다.",
+                      "{E/Light} 영웅을 최소 1명 포함하세요. {P/Gnosis Beth}는 행동 게이지 증가 메커니즘으로 좋은 선택입니다.",
                       "보스의 WG 회복을 방지하기 위해 모든 유닛에 버프를 유지하세요.",
                       "팀에 적용되는 {D/BT_DOT_CURSE} 수를 줄이기 위해 {C/Defender}를 전열에 배치하세요.",
                       "{C/Striker}와 {C/Mage} 유닛은 영구적으로 {D/BT_SILENCE_IR} 상태가 되므로 피하세요."

@@ -61,6 +61,8 @@ export default function DrakhanGuide() {
                     title: "phase2",
                     tips: [
                       "Fast units are essential. Bring {D/BT_DOT_POISON} or {D/BT_DOT_POISON2} to limit boss priority gain.",
+                      "When the boss steals buffs, it increases their effect by 100% and converts them to debuffs. For example, a stolen +30% {B/BT_STAT|ST_SPEED} becomes a -60% {D/BT_STAT|ST_SPEED}.",
+                      "Bring at least one {E/Light} hero. {P/Gnosis Beth} is a good option for her priority increase mechanics.",
                       "Keep buffs active on all your units to prevent the boss restoring its weakness gauge.",
                       "Place a {C/Defender} in the front slot to reduce the number of {D/BT_DOT_CURSE} applied to your team.",
                       "Avoid {C/Striker} and {C/Mage} units as they are permanently {D/BT_SILENCE_IR}."
