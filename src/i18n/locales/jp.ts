@@ -334,6 +334,7 @@ const jp = {
 
 
   //SEO
+  'gearUsage.h1': 'アウタープレイン 装備使用統計',
   'gearUsage.meta.title': '装備使用統計 – {monthYear} | Outerpedia',
   'gearUsage.meta.desc': 'EvaMains Discordコミュニティが作成したビルドにおける、最も推奨される武器・アクセサリー・セットを確認できます。{monthYear} 更新。',
   'gearUsage.og.title': '装備使用統計 – {monthYear} | Outerpedia',
@@ -899,6 +900,9 @@ const jp = {
   'component.statCard.debuff': '-デバフ',
   'component.statCard.associatedBuffs': '関連バフ',
   'component.statCard.associatedDebuffs': '関連デバフ',
+
+  //banner
+  'banner.custom' : "カスタムスカウト"
 }
 
 export default jp

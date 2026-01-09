@@ -2010,15 +2010,51 @@
     "icon": "TI_Costume_Clothes_2000012_03"
   },
   {
-  "name": "Battle Maid Tamara",
-  "name_jp": "戦闘メイド タマラ",
-  "name_kr": "전투 메이드 타마라",
-  "name_zh": "战斗女仆塔玛拉",
+    "name": "Battle Maid Tamara",
+    "name_jp": "戦闘メイド タマラ",
+    "name_kr": "전투 메이드 타마라",
+    "name_zh": "战斗女仆塔玛拉",
     "rarity": "epic",
-  "description": "This is a costume that can be worn by Tamara.",
-  "description_jp": "【タマラ】のスキンです。\\nスキンは【仲間】→【スキン】で装備でき\\n【スキン】ボタンは仲間のスキンがある場合のみ表示されます。",
-  "description_kr": "[타마라]가 착용할 수 있는 코스튬입니다.",
-  "description_zh": "【塔玛拉】可穿戴的皮肤。",
+    "description": "This is a costume that can be worn by Tamara.",
+    "description_jp": "【タマラ】のスキンです。\\nスキンは【仲間】→【スキン】で装備でき\\n【スキン】ボタンは仲間のスキンがある場合のみ表示されます。",
+    "description_kr": "[타마라]가 착용할 수 있는 코스튬입니다.",
+    "description_zh": "【塔玛拉】可穿戴的皮肤。",
     "icon": "TI_Costume_Clothes_2000060_02"
+  },
+  {
+    "name": "3★ Hero Selection Ticket",
+    "name_jp": "★3仲間スカウト選択チケット",
+    "name_kr": "3성 동료 선택권",
+    "name_zh": "3星同伴选择券",
+    "rarity": "normal",
+    "description": "You can select and recruit one 3★ hero. Some heroes not included.",
+    "description_jp": "一部を除く★3の仲間から1体を選択して獲得できる。",
+    "description_kr": "3성 동료 중 한명을 선택해 영입할 수 있습니다. 일부 동료는 제외됩니다.",
+    "description_zh": "可选择招募1名3星同伴,部分同伴除外。",
+    "icon": "TI_CharacterCard_03"
+  },
+  {
+    "name": "Guild Coins",
+    "name_jp": "ギルドコイン",
+    "name_kr": "길드 코인",
+    "name_zh": "公会币",
+    "rarity": "normal",
+    "description": "Coins issued from a Guild. It can be exchanged for goods at the Guild Shop.",
+    "description_jp": "ギルドで発行されるコイン。ギルドショップでアイテムと交換できる。",
+    "description_kr": "길드에서 발행하는 코인. 길드 상점에서 원하는 물건으로 교환할 수 있습니다.",
+    "description_zh": "公会发行的硬币。\\n可在公会商店兑换成想要的物品。",
+    "icon": "CM_Goods_Guild_Coin"
+  },
+  {
+    "name": "Hero Piece",
+  "name_jp": "仲間のピース",
+  "name_kr": "동료 조각",
+  "name_zh": "同伴碎片",
+    "rarity": "legendary",
+    "description": "A piece that contains the power of a unit. Collect 250 to unlock the unit or 150 to transcend them.",
+  "description_jp": "仲間の力が込められたピース。250個集めると仲間を解放、150個で超越できます。",
+  "description_kr": "동료의 힘이 담긴 조각. 250개를 모으면 동료를 해금하고, 150개로 초월할 수 있습니다.",
+  "description_zh": "蕴含同伴之力的碎片。收集250个可解锁同伴，150个可进行超越。",
+    "icon": "CM_Piece_Frame"
   }
 ]

@@ -900,6 +900,9 @@ const en = {
   'component.statCard.debuff': '-Debuff',
   'component.statCard.associatedBuffs': 'Associated Buffs',
   'component.statCard.associatedDebuffs': 'Associated Debuffs',
+
+  //banner
+  'banner.custom' : "Custom Recruit"
 }
 
 export default en

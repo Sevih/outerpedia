@@ -334,6 +334,7 @@ const kr = {
 
 
   //SEO
+  'gearUsage.h1': '아웃터플레인 장비 사용 통계',
   'gearUsage.meta.title': '장비 사용 통계 – {monthYear} | Outerpedia',
   'gearUsage.meta.desc': 'EvaMains 디스코드 커뮤니티가 제작한 빌드에서 가장 추천되는 무기, 장신구, 세트를 확인하세요. {monthYear} 업데이트.',
   'gearUsage.og.title': '장비 사용 통계 – {monthYear} | Outerpedia',
@@ -899,6 +900,9 @@ const kr = {
   'component.statCard.debuff': '-디버프',
   'component.statCard.associatedBuffs': '관련 버프',
   'component.statCard.associatedDebuffs': '관련 디버프',
+
+  //banner
+  'banner.custom' : "커스텀 동료 영입"
 }
 
 export default kr

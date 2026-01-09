@@ -22,8 +22,8 @@ type CharacterRecommendation = {
 }
 
 type Props = {
-  /** Preset key or custom LangMap for the title. Defaults to 'default' (Recommended Characters) */
-  title?: TitlePreset | LangMap
+  /** Preset key, custom LangMap, or false to hide the title. Defaults to 'default' (Recommended Characters) */
+  title?: TitlePreset | LangMap | false
   entries: CharacterRecommendation[]
 }
 
@@ -45,11 +45,11 @@ export default function RecommendedCharacterList({ title = 'default', entries }:
   const { key: lang } = useTenant()
   const t = getT(lang)
 
-  const resolvedTitle = resolveTitle(title, t, lang)
+  const resolvedTitle = title !== false ? resolveTitle(title, t, lang) : null
 
   return (
     <div>
-      <GuideHeading level={3}>{resolvedTitle}</GuideHeading>
+      {resolvedTitle && <GuideHeading level={3}>{resolvedTitle}</GuideHeading>}
       <div className="flex flex-col gap-2">
       {entries.map((entry, index) => {
         const nameList = Array.isArray(entry.names) ? entry.names : [entry.names]

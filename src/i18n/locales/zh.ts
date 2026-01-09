@@ -334,6 +334,7 @@ const zh = {
 
 
   //SEO
+  'gearUsage.h1': '异域战记 装备使用统计',
   'gearUsage.meta.title': '装备使用统计 – {monthYear} | Outerpedia',
   'gearUsage.meta.desc': '发现EvaMains discord服务器最推荐的《异域战记》武器、饰品和套装。{monthYear}更新。',
   'gearUsage.og.title': '装备使用统计 – {monthYear} | Outerpedia',
@@ -897,6 +898,9 @@ const zh = {
   'component.statCard.debuff': '-减益',
   'component.statCard.associatedBuffs': '相关增益',
   'component.statCard.associatedDebuffs': '相关减益',
+
+  //banner
+  'banner.custom' : "自定义招募"
 }
 
 export default zh
