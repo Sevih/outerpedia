@@ -900,7 +900,21 @@ const zh = {
   'component.statCard.associatedDebuffs': '相关减益',
 
   //banner
-  'banner.custom' : "自定义招募"
+  'banner.custom' : "自定义招募",
+
+  // Banner guide components
+  'banner.rates.specialFeature': '特点:',
+  'banner.rates.freePull': '每日1次免费招募',
+  'banner.rewards.title': '重复获得时',
+  'banner.rewards.rarity': '稀有度',
+  'banner.resources.title': '可使用资源',
+  'banner.resources.perRecruit': '每次招募',
+  'banner.resources.grants': '获得',
+  'banner.resources.noMileage': '不计入里程',
+  'banner.mileage.keptUntilUse': '会保留直到使用。',
+  'banner.mileage.exchangeOptions': '交换选项:',
+  'banner.mileage.featuredHero': 'UP英雄',
+  'banner.mileage.ownedBonus': '如已拥有该英雄，额外获得15个',
 }
 
 export default zh

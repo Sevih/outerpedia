@@ -1,12 +1,13 @@
 import GuideHeading from '@/app/components/GuideHeading';
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import BannerTabCards, { BannerTab } from '@/app/components/CardTabs';
-import GuideIconInline from '@/app/components/GuideIconInline';
 import LimitedHeroesList from '@/app/components/LimitedHeroesList';
 import Image from 'next/image';
+import BannerRates from '@/app/components/guides/BannerRates';
+import BannerRewards from '@/app/components/guides/BannerRewards';
+import BannerResources from '@/app/components/guides/BannerResources';
+import MileageInfo from '@/app/components/guides/MileageInfo';
 
-
-const decoration = "text-yellow-400 underline";
 const star = <span className={`relative align-middle inline-flex w-[15px] h-[15px]`}>
     <Image
         src={`/images/ui/CM_icon_star_y.webp`}
@@ -27,46 +28,60 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_PickUp',
         badgePosition: '-top-4 -right-4',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>커스텀 픽업 모집</GuideHeading>
-                <p>3{star} 배출 확률: 2.5%</p>
-                <p>2{star} 배출 확률: 19%</p>
-                <p>1{star} 배출 확률: 78.5%</p>
-                <p className="mt-4"><span className={decoration}>특징</span>: 10연 모집 시 2{star} 이상 영웅 1체 이상 확정.</p>
-                <p className='mt-4'><span className={decoration}>1일 1회 무료 모집</span></p>
-                <p className='mt-4'>이미 보유한 영웅을 획득할 경우:</p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text='범용 조각' /></span>: 2{star}는 1개, 3{star}는 15개</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text='영웅 조각' /></span>: 1{star}는 5개, 2{star}는 10개, 3{star}는 150개</li>
-                </ul>
 
-                <p className='mt-2'>
-                    이 배너는 상시 운영됩니다.<br /> 최대 3명의 캐릭터를 선택하여 픽업 대상으로 지정할 수 있습니다. <br />예를 들어
-                    <CharacterLinkCard name="Alice" />, <CharacterLinkCard name="Eliza" />, <CharacterLinkCard name="Francesca" />를 선택하면 이 3명 외에는 3{star}가 배출되지 않습니다.</p>
-                <p className='mt-4'>
-                    사용 가능한 재화는 3종류:</p>
-                <ul>
-                    <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text='특별 모집권 (이벤트)' /></span>: 1장당 1회 모집, 마일리지 미적용
-                    </li>
-                    <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text='특별 모집권' /></span>: 1장당 1회 모집, <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='커스텀 마일리지' size={25} /> 1 적립
-                    </li>
-                    <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text='에테르' /></span>: 150당 1회 모집, <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='커스텀 마일리지' size={25} /> 1 적립
-                    </li>
-                </ul>
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 2.5 },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 78.5 },
+                    ]}
+                    specialFeature="10연 모집 시 2★ 이상 영웅 1체 이상 확정"
+                    freePull={true}
+                />
 
-                <p className='mt-4'>
-                    이 배너에서 <GuideIconInline name="TI_Item_Cristal_Cash" text='에테르' /> 사용은 권장되지 않습니다
-                </p>
-                <p className='mt-4'>
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='커스텀 마일리지' size={25} />는 사용할 때까지 유지됩니다.
-                </p>
-                <p className='mt-4'>
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='커스텀 마일리지' size={25} /> 200개로 픽업 영웅을 획득하거나, <GuideIconInline name="CM_Piece_Frame" text='영웅 조각' /> 150개와 교환할 수 있습니다.<br />
-                    이미 보유 중인 경우 <GuideIconInline name="GC_Item_Piece" text='범용 조각' /> 15개가 추가로 지급됩니다.
-                </p>
+                <div>
+                    <p className="text-gray-200 mb-3">
+                        이 배너는 상시 운영됩니다. 최대 3명의 캐릭터를 선택하여 픽업 대상으로 지정할 수 있습니다.
+                    </p>
+                    <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
+                        <p className="text-sm text-gray-300">
+                            <span className="font-semibold text-yellow-400">예시:</span> <CharacterLinkCard name="Alice" />, <CharacterLinkCard name="Eliza" />, <CharacterLinkCard name="Francesca" />를 선택하면 이 3명 외에는 3{star}가 배출되지 않습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
+
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Special Recruitment Ticket (Event)',
+                            cost: 1,
+                            mileageItem: null,
+                        },
+                        {
+                            items: 'Special Recruitment Ticket',
+                            cost: 1,
+                            mileageItem: 'Custom Mileage',
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 150,
+                            mileageItem: 'Custom Mileage',
+                        },
+                    ]}
+                    warning="이 배너에서 에테르 사용은 권장되지 않습니다"
+                />
+
+                <MileageInfo mileageItem="Custom Mileage" cost={200} />
             </div>
         )
     },
@@ -77,40 +92,55 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_New',
         badgePosition: '-top-4 -right-4',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>픽업 모집</GuideHeading>
-                <p>3{star} 픽업 배출 확률: 1.25%</p>
-                <p>3{star} 비픽업 배출 확률: 1.25%</p>
-                <p>2{star} 배출 확률: 19%</p>
-                <p>1{star} 배출 확률: 78.5%</p>
-                <p className="mt-4"><span className={decoration}>특징</span>: 10연 모집 시 2{star} 이상 영웅 1체 이상 확정.</p>
-                <p className="mt-4">
-                    중복 획득 시:</p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="범용 조각" /></span>: 2{star}는 1개, 3{star}는 15개</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="영웅 조각" /></span>: 1{star}는 5개, 2{star}는 10개, 3{star}는 50개 (배너 영웅은 150개)</li>
-                </ul>
 
-                <p className="mt-2">
-                    이 배너는 기간 한정으로, 보통 2주간 운영됩니다.
-                </p>
-                <p className="mt-4">
-                    사용 가능한 재화는 3종류:</p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text="특별 모집권 (이벤트)" /></span>: 1장당 1회 모집, 마일리지 미적용</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text="특별 모집권" /></span>: 1장당 1회 모집, <GuideIconInline name="CM_Icon_Recruit_Mileage" text="마일리지" size={25} /> 1 적립</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="에테르" /></span>: 150당 1회 모집, <GuideIconInline name="CM_Icon_Recruit_Mileage" text="마일리지" size={25} /> 1 적립</li>
-                </ul>
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 1.25, label: 'focus' },
+                        { stars: 3, rate: 1.25, label: 'non-focus' },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 78.5 },
+                    ]}
+                    specialFeature="10연 모집 시 2★ 이상 영웅 1체 이상 확정"
+                />
 
-                <p className='mt-4'>
-                    이 배너에서 <GuideIconInline name="TI_Item_Cristal_Cash" text='에테르' /> 사용은 권장되지 않습니다
-                </p>
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage" text="마일리지" size={25} />는 사용할 때까지 유지됩니다.</p>
-                <p className="mt-4">
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage" text="마일리지" size={25} /> 200개로 픽업 영웅을 획득하거나, <GuideIconInline name="CM_Piece_Frame" text="영웅 조각" /> 150개와 교환할 수 있습니다.<br />
-                    이미 보유 중인 경우 <GuideIconInline name="GC_Item_Piece" text="범용 조각" /> 15개가 추가로 지급됩니다.
-                </p>
+                <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
+                    <p className="text-sm text-gray-300">
+                        이 배너는 기간 한정으로, 보통 <span className="font-semibold text-yellow-400">2주간</span> 운영됩니다.
+                    </p>
+                </div>
 
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
+
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Special Recruitment Ticket (Event)',
+                            cost: 1,
+                            mileageItem: null,
+                        },
+                        {
+                            items: 'Special Recruitment Ticket',
+                            cost: 1,
+                            mileageItem: 'Mileage',
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 150,
+                            mileageItem: 'Mileage',
+                        },
+                    ]}
+                    warning="이 배너에서 에테르 사용은 권장되지 않습니다"
+                />
+
+                <MileageInfo mileageItem="Mileage" cost={200} />
             </div>
         ),
     },
@@ -121,40 +151,62 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_Premium',
         badgePosition: '-top-4 -right-4',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>프리미엄 모집</GuideHeading>
-                <p>3{star} 픽업 배출 확률: 1.25%</p>
-                <p>3{star} 비픽업 배출 확률: 2.5%</p>
-                <p className="ml-10 text-gray-400">데미우르고스 영웅의 배출 확률은 일반 비픽업 3{star}의 약 절반입니다</p>
-                <p>2{star} 배출 확률: 19%</p>
-                <p>1{star} 배출 확률: 77.25%</p>
-                <p className="mt-4"><span className={decoration}>1일 1회 무료 모집</span></p>
-                <p className="mt-4">
-                    중복 획득 시:
-                </p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="범용 조각" /></span>: 2{star}는 1개, 3{star}는 15개</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="영웅 조각" /></span>: 1{star}는 5개, 2{star}는 10개, 3{star}는 50개 (배너 영웅은 150개)</li>
-                </ul>
 
-                <p className="mt-2">
-                    이 배너는 상시 운영되며, 데미우르고스 영웅을 획득할 수 있는 유일한 일반적인 방법입니다 (데미우르고스 계약 등의 이벤트 제외).<br />
-                    이 영웅들은 매우 강력하지만 배출 확률도 매우 낮습니다. 데미우르고스 영웅은 초월의 효과가 크지만, 기본 3{star}에서도 강력한 영웅들이 있습니다.
-                </p>
-                <p className="mt-4">
-                    사용 가능한 재화는 3종류:
-                </p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001_NonMileage" text="데미우르고스의 부름 (이벤트)" /></span>: 10개당 1회 모집, 마일리지 미적용</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001" text="데미우르고스의 부름" /></span>: 10개당 1회 모집, <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="거짓 신의 증표" size={25} /> 1 적립</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="에테르" /></span>: 225당 1회 모집, <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="거짓 신의 증표" size={25} /> 1 적립</li>
-                </ul>
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 1.25, label: 'focus' },
+                        {
+                            stars: 3,
+                            rate: 2.5,
+                            label: 'non-focus',
+                            subtext: '데미우르고스 영웅의 배출 확률은 일반 비픽업 3★의 약 절반입니다'
+                        },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 77.25 },
+                    ]}
+                    freePull={true}
+                />
 
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="거짓 신의 증표" size={25} />는 사용할 때까지 유지됩니다.</p>
-                <p className="mt-4">
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="거짓 신의 증표" size={25} /> 200개로 픽업 영웅을 획득하거나, <GuideIconInline name="CM_Piece_Frame" text="영웅 조각" /> 150개와 교환할 수 있습니다.<br />
-                    이미 보유 중인 경우 <GuideIconInline name="GC_Item_Piece" text="범용 조각" /> 15개가 추가로 지급됩니다.
-                </p>
+                <div className="bg-purple-900/20 border border-purple-700/50 rounded-lg p-3">
+                    <p className="text-sm text-purple-200">
+                        <span className="font-semibold">상시 배너</span> - 데미우르고스 영웅을 획득할 수 있는 유일한 일반적인 방법입니다 (데미우르고스 계약 등의 이벤트 제외).
+                    </p>
+                    <p className="text-xs text-purple-300 mt-2">
+                        이 영웅들은 매우 강력하지만 배출 확률도 매우 낮습니다. 데미우르고스 영웅은 초월의 효과가 크지만, 기본 3{star}에서도 강력한 영웅들이 있습니다.
+                    </p>
+                </div>
+
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
+
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Call of the Demiurge (Event)',
+                            cost: 10,
+                            mileageItem: null,
+                        },
+                        {
+                            items: 'Call of the Demiurge',
+                            cost: 10,
+                            mileageItem: "False God's Proof",
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 225,
+                            mileageItem: "False God's Proof",
+                        },
+                    ]}
+                />
+
+                <MileageInfo mileageItem="False God's Proof" cost={200} />
             </div>
         ),
     },
@@ -165,65 +217,81 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_Seasonal',
         badgePosition: '-top-1 right-0 ',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>한정 모집</GuideHeading>
-                <p>3{star} 픽업 배출 확률: 1.25%</p>
-                <p>3{star} 비픽업 배출 확률: 1.25%</p>
-                <p>2{star} 배출 확률: 19%</p>
-                <p>1{star} 배출 확률: 78.5%</p>
-                <p className="mt-4"><span className={decoration}>특징</span>: 10연 모집 시 2{star} 이상 영웅 1체 이상 확정.</p>
-                <p className="mt-4">
-                    중복 획득 시:
-                </p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="범용 조각" /></span>: 2{star}는 1개, 3{star}는 15개</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="영웅 조각" /></span>: 1{star}는 5개, 2{star}는 10개, 3{star}는 150개</li>
-                </ul>
 
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 1.25, label: 'focus' },
+                        { stars: 3, rate: 1.25, label: 'non-focus' },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 78.5 },
+                    ]}
+                    specialFeature="10연 모집 시 2★ 이상 영웅 1체 이상 확정"
+                />
 
-                <p className="mt-2">
-                    이 배너는 기간 한정으로, 한정 영웅을 획득할 수 있는 유일한 방법입니다. 3가지 카테고리로 나뉩니다:</p>
-                <ul>
-                    <li><strong className='text-pink-400'>한정</strong>: 기간 한정 일반 영웅</li>
-                    <li><strong className='text-green-400'>시즌</strong>: 할로윈, 크리스마스 등 시즌 이벤트 관련 영웅</li>
-                    <li><strong className='text-red-400'>콜라보</strong>: 다른 작품과의 콜라보 영웅. 복각 가능성이 가장 낮음</li>
-                </ul>
-                <p className="mt-2">
-                    이 배너는 보통 2~4주간 운영됩니다.<br />
-                    데미우르고스 영웅과 마찬가지로, 한정 영웅은 (대체로) 매우 강력하며, 높은 초월 단계에서 가장 강력한 능력이 해금됩니다.
-                </p>
+                <div className="space-y-3">
+                    <div className="bg-pink-900/20 border border-pink-700/50 rounded-lg p-3">
+                        <p className="text-sm text-pink-200 mb-3">
+                            <span className="font-semibold">기간 한정 배너</span> - 한정 영웅을 획득할 수 있는 유일한 방법입니다.
+                        </p>
+                        <div className="space-y-2 text-xs">
+                            <div className="flex items-start gap-2">
+                                <span className="font-semibold text-pink-400 min-w-[70px]">한정:</span>
+                                <span className="text-pink-200">기간 한정 일반 영웅</span>
+                            </div>
+                            <div className="flex items-start gap-2">
+                                <span className="font-semibold text-green-400 min-w-[70px]">시즌:</span>
+                                <span className="text-pink-200">할로윈, 크리스마스 등 시즌 이벤트 관련 영웅</span>
+                            </div>
+                            <div className="flex items-start gap-2">
+                                <span className="font-semibold text-red-400 min-w-[70px]">콜라보:</span>
+                                <span className="text-pink-200">다른 작품과의 콜라보 영웅. 복각 가능성이 가장 낮음</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
+                        <p className="text-xs text-gray-300">
+                            이 배너는 보통 <span className="font-semibold text-yellow-400">2~4주간</span> 운영됩니다. 데미우르고스 영웅과 마찬가지로, 한정 영웅은 (대체로) 매우 강력하며, 높은 초월 단계에서 가장 강력한 능력이 해금됩니다.
+                        </p>
+                    </div>
+                </div>
 
-                <p className="mt-4">
-                    <strong className={decoration}>한정 영웅 목록 및 출시일:</strong></p>
-                <LimitedHeroesList />
+                <div>
+                    <p className="text-sm font-semibold text-yellow-400 mb-2">한정 영웅 목록 및 출시일:</p>
+                    <LimitedHeroesList />
+                </div>
 
-                <p className="mt-4">
-                    사용 가능한 재화는 3종류:
-                </p>
-                <ul>
-                    <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Ticket_Recruit_06" text="한정 모집권 (이벤트)" />
-                        </span>: 1장당 1회 모집, 마일리지 미적용 (이 아이템은 존재하지만 아직 사용된 적 없음)
-                    </li>
-                    <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Ticket_Recruit_05" text="한정 모집권" />
-                        </span>: 1장당 1회 모집, <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="한정 마일리지" size={25} /> 1 적립
-                    </li>
-                    <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Cristal_Cash" text="에테르" />
-                        </span>: 150당 1회 모집, <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="한정 마일리지" size={25} /> 1 적립
-                    </li>
-                </ul>
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
 
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Limited Recruitment Ticket (Event)',
+                            cost: 1,
+                            mileageItem: null,
+                            note: '이 아이템은 존재하지만 아직 사용된 적 없음'
+                        },
+                        {
+                            items: 'Limited Recruitment Ticket',
+                            cost: 1,
+                            mileageItem: 'Limited Mileage',
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 150,
+                            mileageItem: 'Limited Mileage',
+                        },
+                    ]}
+                />
 
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="한정 마일리지" size={25} />는 사용할 때까지 유지됩니다.</p>
-                <p className="mt-4">
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="한정 마일리지" size={25} /> 150개로 픽업 영웅을 획득하거나, <GuideIconInline name="CM_Piece_Frame" text="영웅 조각" /> 150개와 교환할 수 있습니다.<br />
-                    이미 보유 중인 경우 <GuideIconInline name="GC_Item_Piece" text="범용 조각" /> 15개가 추가로 지급됩니다.
-                </p>
+                <MileageInfo mileageItem="Limited Mileage" cost={150} />
             </div>
         ),
 
@@ -242,7 +310,7 @@ export default function BannerAndMileageGuide() {
             </p>
 
             <p>
-                Outerplane은 <span className={decoration}>마일리지 시스템</span>을 사용합니다.
+                Outerplane은 <span className="text-yellow-400 underline">마일리지 시스템</span>을 사용합니다.
                 천장 카운터와 달리, 마일리지는 필요한 포인트를 모으면
                 <strong> 픽업 영웅을 직접 획득</strong>할 수 있습니다.
             </p>

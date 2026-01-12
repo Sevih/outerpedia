@@ -1,12 +1,13 @@
 import GuideHeading from '@/app/components/GuideHeading';
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import BannerTabCards, { BannerTab } from '@/app/components/CardTabs';
-import GuideIconInline from '@/app/components/GuideIconInline';
 import LimitedHeroesList from '@/app/components/LimitedHeroesList';
 import Image from 'next/image';
+import BannerRates from '@/app/components/guides/BannerRates';
+import BannerRewards from '@/app/components/guides/BannerRewards';
+import BannerResources from '@/app/components/guides/BannerResources';
+import MileageInfo from '@/app/components/guides/MileageInfo';
 
-
-const decoration = "text-yellow-400 underline";
 const star = <span className={`relative align-middle inline-flex w-[15px] h-[15px]`}>
     <Image
         src={`/images/ui/CM_icon_star_y.webp`}
@@ -27,46 +28,60 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_PickUp',
         badgePosition: '-top-4 -right-4',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>カスタムピックアップ募集</GuideHeading>
-                <p>3{star}排出率：2.5%</p>
-                <p>2{star}排出率：19%</p>
-                <p>1{star}排出率：78.5%</p>
-                <p className="mt-4"><span className={decoration}>特徴</span>：10連募集で2{star}以上のヒーローが1体以上確定。</p>
-                <p className='mt-4'><span className={decoration}>1日1回無料募集</span></p>
-                <p className='mt-4'>既に所持しているヒーローを引いた場合：</p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text='汎用ピース' /></span>：2{star}で1個、3{star}で15個</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text='ヒーローピース' /></span>：1{star}で5個、2{star}で10個、3{star}で150個</li>
-                </ul>
 
-                <p className='mt-2'>
-                    このバナーは常設です。<br />最大3体のキャラクターを選択してピックアップ対象にできます。<br />例えば
-                    <CharacterLinkCard name="Alice" />、<CharacterLinkCard name="Eliza" />、<CharacterLinkCard name="Francesca" />を選択すると、3{star}はこの3体以外排出されません。</p>
-                <p className='mt-4'>
-                    使用できるリソースは3種類：</p>
-                <ul>
-                    <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text='特別募集チケット（イベント）' /></span>：1枚で1回募集、マイレージ加算なし
-                    </li>
-                    <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text='特別募集チケット' /></span>：1枚で1回募集、<GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='カスタムマイレージ' size={25} />が1加算
-                    </li>
-                    <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text='エーテル' /></span>：150で1回募集、<GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='カスタムマイレージ' size={25} />が1加算
-                    </li>
-                </ul>
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 2.5 },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 78.5 },
+                    ]}
+                    specialFeature="10連募集で2★以上のヒーローが1体以上確定"
+                    freePull={true}
+                />
 
-                <p className='mt-4'>
-                    このバナーで<GuideIconInline name="TI_Item_Cristal_Cash" text='エーテル' />を使用することは推奨されません
-                </p>
-                <p className='mt-4'>
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='カスタムマイレージ' size={25} />は使用するまで保持されます。
-                </p>
-                <p className='mt-4'>
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='カスタムマイレージ' size={25} />を200貯めると、ピックアップヒーローを獲得、または<GuideIconInline name="CM_Piece_Frame" text='ヒーローピース' />150個と交換できます。<br />
-                    既に所持している場合は<GuideIconInline name="GC_Item_Piece" text='汎用ピース' />15個が追加で獲得できます。
-                </p>
+                <div>
+                    <p className="text-gray-200 mb-3">
+                        このバナーは常設です。最大3体のキャラクターを選択してピックアップ対象にできます。
+                    </p>
+                    <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
+                        <p className="text-sm text-gray-300">
+                            <span className="font-semibold text-yellow-400">例：</span> <CharacterLinkCard name="Alice" />、<CharacterLinkCard name="Eliza" />、<CharacterLinkCard name="Francesca" />を選択すると、3{star}はこの3体以外排出されません。
+                        </p>
+                    </div>
+                </div>
+
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
+
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Special Recruitment Ticket (Event)',
+                            cost: 1,
+                            mileageItem: null,
+                        },
+                        {
+                            items: 'Special Recruitment Ticket',
+                            cost: 1,
+                            mileageItem: 'Custom Mileage',
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 150,
+                            mileageItem: 'Custom Mileage',
+                        },
+                    ]}
+                    warning="このバナーでエーテルを使用することは推奨されません"
+                />
+
+                <MileageInfo mileageItem="Custom Mileage" cost={200} />
             </div>
         )
     },
@@ -77,40 +92,55 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_New',
         badgePosition: '-top-4 -right-4',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>ピックアップ募集</GuideHeading>
-                <p>3{star}ピックアップ排出率：1.25%</p>
-                <p>3{star}その他排出率：1.25%</p>
-                <p>2{star}排出率：19%</p>
-                <p>1{star}排出率：78.5%</p>
-                <p className="mt-4"><span className={decoration}>特徴</span>：10連募集で2{star}以上のヒーローが1体以上確定。</p>
-                <p className="mt-4">
-                    重複時の獲得：</p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="汎用ピース" /></span>：2{star}で1個、3{star}で15個</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="ヒーローピース" /></span>：1{star}で5個、2{star}で10個、3{star}で50個（バナーヒーローの場合は150個）</li>
-                </ul>
 
-                <p className="mt-2">
-                    このバナーは期間限定で、通常2週間開催されます。
-                </p>
-                <p className="mt-4">
-                    使用できるリソースは3種類：</p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text="特別募集チケット（イベント）" /></span>：1枚で1回募集、マイレージ加算なし</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text="特別募集チケット" /></span>：1枚で1回募集、<GuideIconInline name="CM_Icon_Recruit_Mileage" text="マイレージ" size={25} />が1加算</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="エーテル" /></span>：150で1回募集、<GuideIconInline name="CM_Icon_Recruit_Mileage" text="マイレージ" size={25} />が1加算</li>
-                </ul>
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 1.25, label: 'focus' },
+                        { stars: 3, rate: 1.25, label: 'non-focus' },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 78.5 },
+                    ]}
+                    specialFeature="10連募集で2★以上のヒーローが1体以上確定"
+                />
 
-                <p className='mt-4'>
-                    このバナーで<GuideIconInline name="TI_Item_Cristal_Cash" text='エーテル' />を使用することは推奨されません
-                </p>
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage" text="マイレージ" size={25} />は使用するまで保持されます。</p>
-                <p className="mt-4">
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage" text="マイレージ" size={25} />を200貯めると、ピックアップヒーローを獲得、または<GuideIconInline name="CM_Piece_Frame" text="ヒーローピース" />150個と交換できます。<br />
-                    既に所持している場合は<GuideIconInline name="GC_Item_Piece" text="汎用ピース" />15個が追加で獲得できます。
-                </p>
+                <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
+                    <p className="text-sm text-gray-300">
+                        このバナーは期間限定で、通常<span className="font-semibold text-yellow-400">2週間</span>開催されます。
+                    </p>
+                </div>
 
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
+
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Special Recruitment Ticket (Event)',
+                            cost: 1,
+                            mileageItem: null,
+                        },
+                        {
+                            items: 'Special Recruitment Ticket',
+                            cost: 1,
+                            mileageItem: 'Mileage',
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 150,
+                            mileageItem: 'Mileage',
+                        },
+                    ]}
+                    warning="このバナーでエーテルを使用することは推奨されません"
+                />
+
+                <MileageInfo mileageItem="Mileage" cost={200} />
             </div>
         ),
     },
@@ -121,40 +151,62 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_Premium',
         badgePosition: '-top-4 -right-4',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>プレミアム募集</GuideHeading>
-                <p>3{star}ピックアップ排出率：1.25%</p>
-                <p>3{star}その他排出率：2.5%</p>
-                <p className="ml-10 text-gray-400">デミウルゴスヒーローの排出率は通常の3{star}の約半分です</p>
-                <p>2{star}排出率：19%</p>
-                <p>1{star}排出率：77.25%</p>
-                <p className="mt-4"><span className={decoration}>1日1回無料募集</span></p>
-                <p className="mt-4">
-                    重複時の獲得：
-                </p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="汎用ピース" /></span>：2{star}で1個、3{star}で15個</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="ヒーローピース" /></span>：1{star}で5個、2{star}で10個、3{star}で50個（バナーヒーローの場合は150個）</li>
-                </ul>
 
-                <p className="mt-2">
-                    これは常設バナーで、デミウルゴスヒーローを獲得できる唯一の通常手段です（デミウルゴス契約などのイベントを除く）。<br />
-                    これらのヒーローは非常に強力ですが、排出率も非常に低いです。デミウルゴスヒーローは超越の恩恵が大きいですが、3{star}の状態でも強力なヒーローもいます。
-                </p>
-                <p className="mt-4">
-                    使用できるリソースは3種類：
-                </p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001_NonMileage" text="デミウルゴスの呼び声（イベント）" /></span>：10個で1回募集、マイレージ加算なし</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001" text="デミウルゴスの呼び声" /></span>：10個で1回募集、<GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="偽神の証" size={25} />が1加算</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="エーテル" /></span>：225で1回募集、<GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="偽神の証" size={25} />が1加算</li>
-                </ul>
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 1.25, label: 'focus' },
+                        {
+                            stars: 3,
+                            rate: 2.5,
+                            label: 'non-focus',
+                            subtext: 'デミウルゴスヒーローの排出率は通常の3★の約半分です'
+                        },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 77.25 },
+                    ]}
+                    freePull={true}
+                />
 
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="偽神の証" size={25} />は使用するまで保持されます。</p>
-                <p className="mt-4">
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="偽神の証" size={25} />を200貯めると、ピックアップヒーローを獲得、または<GuideIconInline name="CM_Piece_Frame" text="ヒーローピース" />150個と交換できます。<br />
-                    既に所持している場合は<GuideIconInline name="GC_Item_Piece" text="汎用ピース" />15個が追加で獲得できます。
-                </p>
+                <div className="bg-purple-900/20 border border-purple-700/50 rounded-lg p-3">
+                    <p className="text-sm text-purple-200">
+                        <span className="font-semibold">常設バナー</span> - デミウルゴスヒーローを獲得できる唯一の通常手段です（デミウルゴス契約などのイベントを除く）。
+                    </p>
+                    <p className="text-xs text-purple-300 mt-2">
+                        これらのヒーローは非常に強力ですが、排出率も非常に低いです。デミウルゴスヒーローは超越の恩恵が大きいですが、3{star}の状態でも強力なヒーローもいます。
+                    </p>
+                </div>
+
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
+
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Call of the Demiurge (Event)',
+                            cost: 10,
+                            mileageItem: null,
+                        },
+                        {
+                            items: 'Call of the Demiurge',
+                            cost: 10,
+                            mileageItem: "False God's Proof",
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 225,
+                            mileageItem: "False God's Proof",
+                        },
+                    ]}
+                />
+
+                <MileageInfo mileageItem="False God's Proof" cost={200} />
             </div>
         ),
     },
@@ -165,65 +217,81 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_Seasonal',
         badgePosition: '-top-1 right-0 ',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>限定募集</GuideHeading>
-                <p>3{star}ピックアップ排出率：1.25%</p>
-                <p>3{star}その他排出率：1.25%</p>
-                <p>2{star}排出率：19%</p>
-                <p>1{star}排出率：78.5%</p>
-                <p className="mt-4"><span className={decoration}>特徴</span>：10連募集で2{star}以上のヒーローが1体以上確定。</p>
-                <p className="mt-4">
-                    重複時の獲得：
-                </p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="汎用ピース" /></span>：2{star}で1個、3{star}で15個</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="ヒーローピース" /></span>：1{star}で5個、2{star}で10個、3{star}で150個</li>
-                </ul>
 
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 1.25, label: 'focus' },
+                        { stars: 3, rate: 1.25, label: 'non-focus' },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 78.5 },
+                    ]}
+                    specialFeature="10連募集で2★以上のヒーローが1体以上確定"
+                />
 
-                <p className="mt-2">
-                    このバナーは期間限定で、限定ヒーローを獲得できる唯一の手段です。3つのカテゴリーに分かれています：</p>
-                <ul>
-                    <li><strong className='text-pink-400'>限定</strong>：期間限定の通常ヒーロー</li>
-                    <li><strong className='text-green-400'>シーズン</strong>：ハロウィンやクリスマスなどの季節イベントに関連するヒーロー</li>
-                    <li><strong className='text-red-400'>コラボ</strong>：他作品とのコラボヒーロー。復刻の可能性が最も低い</li>
-                </ul>
-                <p className="mt-2">
-                    このバナーは通常2〜4週間開催されます。<br />
-                    デミウルゴスヒーローと同様に、限定ヒーローは（通常）非常に強力で、高い超越レベルで最強の能力が解放されます。
-                </p>
+                <div className="space-y-3">
+                    <div className="bg-pink-900/20 border border-pink-700/50 rounded-lg p-3">
+                        <p className="text-sm text-pink-200 mb-3">
+                            <span className="font-semibold">期間限定バナー</span> - 限定ヒーローを獲得できる唯一の手段です。
+                        </p>
+                        <div className="space-y-2 text-xs">
+                            <div className="flex items-start gap-2">
+                                <span className="font-semibold text-pink-400 min-w-[70px]">限定:</span>
+                                <span className="text-pink-200">期間限定の通常ヒーロー</span>
+                            </div>
+                            <div className="flex items-start gap-2">
+                                <span className="font-semibold text-green-400 min-w-[70px]">シーズン:</span>
+                                <span className="text-pink-200">ハロウィンやクリスマスなどの季節イベントに関連するヒーロー</span>
+                            </div>
+                            <div className="flex items-start gap-2">
+                                <span className="font-semibold text-red-400 min-w-[70px]">コラボ:</span>
+                                <span className="text-pink-200">他作品とのコラボヒーロー。復刻の可能性が最も低い</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
+                        <p className="text-xs text-gray-300">
+                            このバナーは通常<span className="font-semibold text-yellow-400">2〜4週間</span>開催されます。デミウルゴスヒーローと同様に、限定ヒーローは（通常）非常に強力で、高い超越レベルで最強の能力が解放されます。
+                        </p>
+                    </div>
+                </div>
 
-                <p className="mt-4">
-                    <strong className={decoration}>限定ヒーロー一覧とリリース日：</strong></p>
-                <LimitedHeroesList />
+                <div>
+                    <p className="text-sm font-semibold text-yellow-400 mb-2">限定ヒーロー一覧とリリース日:</p>
+                    <LimitedHeroesList />
+                </div>
 
-                <p className="mt-4">
-                    使用できるリソースは3種類：
-                </p>
-                <ul>
-                    <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Ticket_Recruit_06" text="限定募集チケット（イベント）" />
-                        </span>：1枚で1回募集、マイレージ加算なし（このアイテムは存在しますがまだ使用されていません）
-                    </li>
-                    <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Ticket_Recruit_05" text="限定募集チケット" />
-                        </span>：1枚で1回募集、<GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="限定マイレージ" size={25} />が1加算
-                    </li>
-                    <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Cristal_Cash" text="エーテル" />
-                        </span>：150で1回募集、<GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="限定マイレージ" size={25} />が1加算
-                    </li>
-                </ul>
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
 
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Limited Recruitment Ticket (Event)',
+                            cost: 1,
+                            mileageItem: null,
+                            note: 'このアイテムは存在しますがまだ使用されていません'
+                        },
+                        {
+                            items: 'Limited Recruitment Ticket',
+                            cost: 1,
+                            mileageItem: 'Limited Mileage',
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 150,
+                            mileageItem: 'Limited Mileage',
+                        },
+                    ]}
+                />
 
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="限定マイレージ" size={25} />は使用するまで保持されます。</p>
-                <p className="mt-4">
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="限定マイレージ" size={25} />を150貯めると、ピックアップヒーローを獲得、または<GuideIconInline name="CM_Piece_Frame" text="ヒーローピース" />150個と交換できます。<br />
-                    既に所持している場合は<GuideIconInline name="GC_Item_Piece" text="汎用ピース" />15個が追加で獲得できます。
-                </p>
+                <MileageInfo mileageItem="Limited Mileage" cost={150} />
             </div>
         ),
 
@@ -242,7 +310,7 @@ export default function BannerAndMileageGuide() {
             </p>
 
             <p>
-                Outerplaneは<span className={decoration}>マイレージシステム</span>を採用しています。
+                Outerplaneは<span className="text-yellow-400 underline">マイレージシステム</span>を採用しています。
                 天井カウンターとは異なり、マイレージは必要なポイントを集めると
                 <strong>ピックアップヒーローを直接獲得</strong>できます。
             </p>

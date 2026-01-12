@@ -902,7 +902,21 @@ const jp = {
   'component.statCard.associatedDebuffs': '関連デバフ',
 
   //banner
-  'banner.custom' : "カスタムスカウト"
+  'banner.custom' : "カスタムスカウト",
+
+  // Banner guide components
+  'banner.rates.specialFeature': '特徴:',
+  'banner.rates.freePull': '1日1回無料募集',
+  'banner.rewards.title': '重複時の獲得',
+  'banner.rewards.rarity': 'レアリティ',
+  'banner.resources.title': '使用できるリソース',
+  'banner.resources.perRecruit': '1回募集あたり',
+  'banner.resources.grants': '獲得',
+  'banner.resources.noMileage': 'マイレージ加算なし',
+  'banner.mileage.keptUntilUse': 'は使用するまで保持されます。',
+  'banner.mileage.exchangeOptions': '交換オプション:',
+  'banner.mileage.featuredHero': 'ピックアップヒーロー',
+  'banner.mileage.ownedBonus': '既に所持している場合は15個追加で獲得できます',
 }
 
 export default jp

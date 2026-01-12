@@ -1,12 +1,13 @@
 import GuideHeading from '@/app/components/GuideHeading';
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import BannerTabCards, { BannerTab } from '@/app/components/CardTabs';
-import GuideIconInline from '@/app/components/GuideIconInline';
 import LimitedHeroesList from '@/app/components/LimitedHeroesList';
 import Image from 'next/image';
+import BannerRates from '@/app/components/guides/BannerRates';
+import BannerRewards from '@/app/components/guides/BannerRewards';
+import BannerResources from '@/app/components/guides/BannerResources';
+import MileageInfo from '@/app/components/guides/MileageInfo';
 
-
-const decoration = "text-yellow-400 underline";
 const star = <span className={`relative align-middle inline-flex w-[15px] h-[15px]`}>
     <Image
         src={`/images/ui/CM_icon_star_y.webp`}
@@ -27,46 +28,60 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_PickUp',
         badgePosition: '-top-4 -right-4',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>自选UP招募</GuideHeading>
-                <p>3{star}掉率：2.5%</p>
-                <p>2{star}掉率：19%</p>
-                <p>1{star}掉率：78.5%</p>
-                <p className="mt-4"><span className={decoration}>特点</span>：10连招募保底至少1个2{star}以上英雄。</p>
-                <p className='mt-4'><span className={decoration}>每日1次免费招募</span></p>
-                <p className='mt-4'>获得已拥有的英雄时：</p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text='通用碎片' /></span>：2{star}获得1个，3{star}获得15个</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text='英雄碎片' /></span>：1{star}获得5个，2{star}获得10个，3{star}获得150个</li>
-                </ul>
 
-                <p className='mt-2'>
-                    此卡池常驻开放。<br />你可以选择最多3个角色作为UP目标。<br />例如选择
-                    <CharacterLinkCard name="Alice" />、<CharacterLinkCard name="Eliza" />和<CharacterLinkCard name="Francesca" />后，3{star}只会出这3个角色。</p>
-                <p className='mt-4'>
-                    可使用3种资源：</p>
-                <ul>
-                    <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text='特别招募券（活动）' /></span>：1张1次招募，不计入里程
-                    </li>
-                    <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text='特别招募券' /></span>：1张1次招募，获得1<GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='自选里程' size={25} />
-                    </li>
-                    <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text='以太' /></span>：150个1次招募，获得1<GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='自选里程' size={25} />
-                    </li>
-                </ul>
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 2.5 },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 78.5 },
+                    ]}
+                    specialFeature="10连招募保底至少1个2★以上英雄"
+                    freePull={true}
+                />
 
-                <p className='mt-4'>
-                    不建议在此卡池使用<GuideIconInline name="TI_Item_Cristal_Cash" text='以太' />
-                </p>
-                <p className='mt-4'>
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='自选里程' size={25} />会保留直到使用。
-                </p>
-                <p className='mt-4'>
-                    积累200<GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='自选里程' size={25} />可获取UP英雄，或兑换150<GuideIconInline name="CM_Piece_Frame" text='英雄碎片' /><br />
-                    如已拥有该英雄，额外获得15<GuideIconInline name="GC_Item_Piece" text='通用碎片' />。
-                </p>
+                <div>
+                    <p className="text-gray-200 mb-3">
+                        此卡池常驻开放。你可以选择最多3个角色作为UP目标。
+                    </p>
+                    <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
+                        <p className="text-sm text-gray-300">
+                            <span className="font-semibold text-yellow-400">例如：</span> 选择<CharacterLinkCard name="Alice" />、<CharacterLinkCard name="Eliza" />和<CharacterLinkCard name="Francesca" />后，3{star}只会出这3个角色。
+                        </p>
+                    </div>
+                </div>
+
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
+
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Special Recruitment Ticket (Event)',
+                            cost: 1,
+                            mileageItem: null,
+                        },
+                        {
+                            items: 'Special Recruitment Ticket',
+                            cost: 1,
+                            mileageItem: 'Custom Mileage',
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 150,
+                            mileageItem: 'Custom Mileage',
+                        },
+                    ]}
+                    warning="不建议在此卡池使用以太"
+                />
+
+                <MileageInfo mileageItem="Custom Mileage" cost={200} />
             </div>
         )
     },
@@ -77,40 +92,55 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_New',
         badgePosition: '-top-4 -right-4',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>UP招募</GuideHeading>
-                <p>3{star}UP掉率：1.25%</p>
-                <p>3{star}非UP掉率：1.25%</p>
-                <p>2{star}掉率：19%</p>
-                <p>1{star}掉率：78.5%</p>
-                <p className="mt-4"><span className={decoration}>特点</span>：10连招募保底至少1个2{star}以上英雄。</p>
-                <p className="mt-4">
-                    重复获得时：</p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="通用碎片" /></span>：2{star}获得1个，3{star}获得15个</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="英雄碎片" /></span>：1{star}获得5个，2{star}获得10个，3{star}获得50个（卡池UP英雄获得150个）</li>
-                </ul>
 
-                <p className="mt-2">
-                    此卡池为限时开放，通常持续2周。
-                </p>
-                <p className="mt-4">
-                    可使用3种资源：</p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text="特别招募券（活动）" /></span>：1张1次招募，不计入里程</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text="特别招募券" /></span>：1张1次招募，获得1<GuideIconInline name="CM_Icon_Recruit_Mileage" text="里程" size={25} /></li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="以太" /></span>：150个1次招募，获得1<GuideIconInline name="CM_Icon_Recruit_Mileage" text="里程" size={25} /></li>
-                </ul>
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 1.25, label: 'focus' },
+                        { stars: 3, rate: 1.25, label: 'non-focus' },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 78.5 },
+                    ]}
+                    specialFeature="10连招募保底至少1个2★以上英雄"
+                />
 
-                <p className='mt-4'>
-                    不建议在此卡池使用<GuideIconInline name="TI_Item_Cristal_Cash" text='以太' />
-                </p>
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage" text="里程" size={25} />会保留直到使用。</p>
-                <p className="mt-4">
-                    积累200<GuideIconInline name="CM_Icon_Recruit_Mileage" text="里程" size={25} />可获取UP英雄，或兑换150<GuideIconInline name="CM_Piece_Frame" text="英雄碎片" />。<br />
-                    如已拥有该英雄，额外获得15<GuideIconInline name="GC_Item_Piece" text="通用碎片" />。
-                </p>
+                <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
+                    <p className="text-sm text-gray-300">
+                        此卡池为限时开放，通常持续<span className="font-semibold text-yellow-400">2周</span>。
+                    </p>
+                </div>
 
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
+
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Special Recruitment Ticket (Event)',
+                            cost: 1,
+                            mileageItem: null,
+                        },
+                        {
+                            items: 'Special Recruitment Ticket',
+                            cost: 1,
+                            mileageItem: 'Mileage',
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 150,
+                            mileageItem: 'Mileage',
+                        },
+                    ]}
+                    warning="不建议在此卡池使用以太"
+                />
+
+                <MileageInfo mileageItem="Mileage" cost={200} />
             </div>
         ),
     },
@@ -121,40 +151,62 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_Premium',
         badgePosition: '-top-4 -right-4',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>精选招募</GuideHeading>
-                <p>3{star}UP掉率：1.25%</p>
-                <p>3{star}非UP掉率：2.5%</p>
-                <p className="ml-10 text-gray-400">造物主英雄的掉率约为普通非UP 3{star}的一半</p>
-                <p>2{star}掉率：19%</p>
-                <p>1{star}掉率：77.25%</p>
-                <p className="mt-4"><span className={decoration}>每日1次免费招募</span></p>
-                <p className="mt-4">
-                    重复获得时：
-                </p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="通用碎片" /></span>：2{star}获得1个，3{star}获得15个</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="英雄碎片" /></span>：1{star}获得5个，2{star}获得10个，3{star}获得50个（卡池UP英雄获得150个）</li>
-                </ul>
 
-                <p className="mt-2">
-                    此卡池常驻开放，是获取造物主英雄的唯一常规途径（除造物主契约等活动外）。<br />
-                    这些英雄非常强力但掉率极低。造物主英雄从超越中获益更多，但有些在基础3{star}时就很强。
-                </p>
-                <p className="mt-4">
-                    可使用3种资源：
-                </p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001_NonMileage" text="造物主的呼唤（活动）" /></span>：10个1次招募，不计入里程</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001" text="造物主的呼唤" /></span>：10个1次招募，获得1<GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="伪神之证" size={25} /></li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="以太" /></span>：225个1次招募，获得1<GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="伪神之证" size={25} /></li>
-                </ul>
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 1.25, label: 'focus' },
+                        {
+                            stars: 3,
+                            rate: 2.5,
+                            label: 'non-focus',
+                            subtext: '造物主英雄的掉率约为普通非UP 3★的一半'
+                        },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 77.25 },
+                    ]}
+                    freePull={true}
+                />
 
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="伪神之证" size={25} />会保留直到使用。</p>
-                <p className="mt-4">
-                    积累200<GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="伪神之证" size={25} />可获取UP英雄，或兑换150<GuideIconInline name="CM_Piece_Frame" text="英雄碎片" />。<br />
-                    如已拥有该英雄，额外获得15<GuideIconInline name="GC_Item_Piece" text="通用碎片" />。
-                </p>
+                <div className="bg-purple-900/20 border border-purple-700/50 rounded-lg p-3">
+                    <p className="text-sm text-purple-200">
+                        <span className="font-semibold">常驻卡池</span> - 是获取造物主英雄的唯一常规途径（除造物主契约等活动外）。
+                    </p>
+                    <p className="text-xs text-purple-300 mt-2">
+                        这些英雄非常强力但掉率极低。造物主英雄从超越中获益更多，但有些在基础3{star}时就很强。
+                    </p>
+                </div>
+
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
+
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Call of the Demiurge (Event)',
+                            cost: 10,
+                            mileageItem: null,
+                        },
+                        {
+                            items: 'Call of the Demiurge',
+                            cost: 10,
+                            mileageItem: "False God's Proof",
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 225,
+                            mileageItem: "False God's Proof",
+                        },
+                    ]}
+                />
+
+                <MileageInfo mileageItem="False God's Proof" cost={200} />
             </div>
         ),
     },
@@ -165,65 +217,81 @@ const bannerTabs: BannerTab[] = [
         badgeImg: 'CM_Recruit_Tag_Seasonal',
         badgePosition: '-top-1 right-0 ',
         content: (
-            <div>
+            <div className="space-y-6">
                 <GuideHeading>限定招募</GuideHeading>
-                <p>3{star}UP掉率：1.25%</p>
-                <p>3{star}非UP掉率：1.25%</p>
-                <p>2{star}掉率：19%</p>
-                <p>1{star}掉率：78.5%</p>
-                <p className="mt-4"><span className={decoration}>特点</span>：10连招募保底至少1个2{star}以上英雄。</p>
-                <p className="mt-4">
-                    重复获得时：
-                </p>
-                <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="通用碎片" /></span>：2{star}获得1个，3{star}获得15个</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="英雄碎片" /></span>：1{star}获得5个，2{star}获得10个，3{star}获得150个</li>
-                </ul>
 
+                <BannerRates
+                    rates={[
+                        { stars: 3, rate: 1.25, label: 'focus' },
+                        { stars: 3, rate: 1.25, label: 'non-focus' },
+                        { stars: 2, rate: 19 },
+                        { stars: 1, rate: 78.5 },
+                    ]}
+                    specialFeature="10连招募保底至少1个2★以上英雄"
+                />
 
-                <p className="mt-2">
-                    此卡池为限时开放，是获取限定英雄的唯一途径。分为3个类别：</p>
-                <ul>
-                    <li><strong className='text-pink-400'>限定</strong>：常规限时英雄</li>
-                    <li><strong className='text-green-400'>季节</strong>：与万圣节、圣诞节等年度活动相关的英雄</li>
-                    <li><strong className='text-red-400'>联动</strong>：与其他作品联动的英雄，复刻可能性最低</li>
-                </ul>
-                <p className="mt-2">
-                    此卡池通常持续2至4周。<br />
-                    与造物主英雄类似，限定英雄（通常）非常强力，其最强能力在高超越等级解锁。
-                </p>
+                <div className="space-y-3">
+                    <div className="bg-pink-900/20 border border-pink-700/50 rounded-lg p-3">
+                        <p className="text-sm text-pink-200 mb-3">
+                            <span className="font-semibold">限时卡池</span> - 是获取限定英雄的唯一途径。
+                        </p>
+                        <div className="space-y-2 text-xs">
+                            <div className="flex items-start gap-2">
+                                <span className="font-semibold text-pink-400 min-w-[70px]">限定:</span>
+                                <span className="text-pink-200">常规限时英雄</span>
+                            </div>
+                            <div className="flex items-start gap-2">
+                                <span className="font-semibold text-green-400 min-w-[70px]">季节:</span>
+                                <span className="text-pink-200">与万圣节、圣诞节等年度活动相关的英雄</span>
+                            </div>
+                            <div className="flex items-start gap-2">
+                                <span className="font-semibold text-red-400 min-w-[70px]">联动:</span>
+                                <span className="text-pink-200">与其他作品联动的英雄，复刻可能性最低</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
+                        <p className="text-xs text-gray-300">
+                            此卡池通常持续<span className="font-semibold text-yellow-400">2至4周</span>。与造物主英雄类似，限定英雄（通常）非常强力，其最强能力在高超越等级解锁。
+                        </p>
+                    </div>
+                </div>
 
-                <p className="mt-4">
-                    <strong className={decoration}>限定英雄列表及发布日期：</strong></p>
-                <LimitedHeroesList />
+                <div>
+                    <p className="text-sm font-semibold text-yellow-400 mb-2">限定英雄列表及发布日期:</p>
+                    <LimitedHeroesList />
+                </div>
 
-                <p className="mt-4">
-                    可使用3种资源：
-                </p>
-                <ul>
-                    <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Ticket_Recruit_06" text="限定招募券（活动）" />
-                        </span>：1张1次招募，不计入里程（此道具存在但尚未使用过）
-                    </li>
-                    <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Ticket_Recruit_05" text="限定招募券" />
-                        </span>：1张1次招募，获得1<GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="限定里程" size={25} />
-                    </li>
-                    <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Cristal_Cash" text="以太" />
-                        </span>：150个1次招募，获得1<GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="限定里程" size={25} />
-                    </li>
-                </ul>
+                <BannerRewards
+                    rewards={[
+                        { stars: 1, wildcard: 0, heroPiece: 5 },
+                        { stars: 2, wildcard: 1, heroPiece: 10 },
+                        { stars: 3, wildcard: 15, heroPiece: 150 },
+                    ]}
+                />
 
+                <BannerResources
+                    resources={[
+                        {
+                            items: 'Limited Recruitment Ticket (Event)',
+                            cost: 1,
+                            mileageItem: null,
+                            note: '此道具存在但尚未使用过'
+                        },
+                        {
+                            items: 'Limited Recruitment Ticket',
+                            cost: 1,
+                            mileageItem: 'Limited Mileage',
+                        },
+                        {
+                            items: ['Free Ether', 'Ether'],
+                            cost: 150,
+                            mileageItem: 'Limited Mileage',
+                        },
+                    ]}
+                />
 
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="限定里程" size={25} />会保留直到使用。</p>
-                <p className="mt-4">
-                    积累150<GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="限定里程" size={25} />可获取UP英雄，或兑换150<GuideIconInline name="CM_Piece_Frame" text="英雄碎片" />。<br />
-                    如已拥有该英雄，额外获得15<GuideIconInline name="GC_Item_Piece" text="通用碎片" />。
-                </p>
+                <MileageInfo mileageItem="Limited Mileage" cost={150} />
             </div>
         ),
 
@@ -242,7 +310,7 @@ export default function BannerAndMileageGuide() {
             </p>
 
             <p>
-                Outerplane采用<span className={decoration}>里程系统</span>。
+                Outerplane采用<span className="text-yellow-400 underline">里程系统</span>。
                 与天井计数器不同，里程允许你在积累足够点数后
                 <strong>直接获取</strong>UP英雄。
             </p>

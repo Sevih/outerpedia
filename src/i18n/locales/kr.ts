@@ -902,7 +902,21 @@ const kr = {
   'component.statCard.associatedDebuffs': '관련 디버프',
 
   //banner
-  'banner.custom' : "커스텀 동료 영입"
+  'banner.custom' : "커스텀 동료 영입",
+
+  // Banner guide components
+  'banner.rates.specialFeature': '특징:',
+  'banner.rates.freePull': '1일 1회 무료 모집',
+  'banner.rewards.title': '중복 획득 시',
+  'banner.rewards.rarity': '등급',
+  'banner.resources.title': '사용 가능한 재화',
+  'banner.resources.perRecruit': '1회 모집당',
+  'banner.resources.grants': '획득',
+  'banner.resources.noMileage': '마일리지 미적용',
+  'banner.mileage.keptUntilUse': '는 사용할 때까지 유지됩니다.',
+  'banner.mileage.exchangeOptions': '교환 옵션:',
+  'banner.mileage.featuredHero': '픽업 영웅',
+  'banner.mileage.ownedBonus': '이미 보유 중인 경우 15개가 추가로 지급됩니다',
 }
 
 export default kr

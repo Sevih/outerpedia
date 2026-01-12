@@ -902,7 +902,21 @@ const en = {
   'component.statCard.associatedDebuffs': 'Associated Debuffs',
 
   //banner
-  'banner.custom' : "Custom Recruit"
+  'banner.custom' : "Custom Recruit",
+
+  // Banner guide components
+  'banner.rates.specialFeature': 'Special feature:',
+  'banner.rates.freePull': '1 free pull per day',
+  'banner.rewards.title': 'Duplicates give',
+  'banner.rewards.rarity': 'Rarity',
+  'banner.resources.title': 'Resources',
+  'banner.resources.perRecruit': 'per recruit',
+  'banner.resources.grants': 'Grants',
+  'banner.resources.noMileage': 'No mileage',
+  'banner.mileage.keptUntilUse': 'is kept until you decide to use it.',
+  'banner.mileage.exchangeOptions': 'Exchange options:',
+  'banner.mileage.featuredHero': 'Featured hero',
+  'banner.mileage.ownedBonus': 'If you already own the hero, you get 15 additional',
 }
 
 export default en
