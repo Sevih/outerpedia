@@ -908,7 +908,6 @@ const en = {
   'banner.rates.specialFeature': 'Special feature:',
   'banner.rates.freePull': '1 free pull per day',
   'banner.rewards.title': 'Duplicates give',
-  'banner.rewards.rarity': 'Rarity',
   'banner.resources.title': 'Resources',
   'banner.resources.perRecruit': 'per recruit',
   'banner.resources.grants': 'Grants',

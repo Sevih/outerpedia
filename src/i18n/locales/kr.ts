@@ -908,7 +908,6 @@ const kr = {
   'banner.rates.specialFeature': '특징:',
   'banner.rates.freePull': '1일 1회 무료 모집',
   'banner.rewards.title': '중복 획득 시',
-  'banner.rewards.rarity': '등급',
   'banner.resources.title': '사용 가능한 재화',
   'banner.resources.perRecruit': '1회 모집당',
   'banner.resources.grants': '획득',

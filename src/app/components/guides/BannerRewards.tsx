@@ -38,7 +38,7 @@ export default function BannerRewards({ rewards, title }: Props) {
         <table className="w-full text-sm">
           <thead className="bg-neutral-800/70">
             <tr className="border-b border-neutral-700/50">
-              <th className="px-3 py-2 text-left text-gray-300 font-semibold">{t('banner.rewards.rarity')}</th>
+              <th className="px-3 py-2 text-left text-gray-300 font-semibold">{t('filters.rarity')}</th>
               <th className="px-3 py-2 text-left text-gray-300 font-semibold">
                 <ItemInlineDisplay names="Wildcard Pieces" />
               </th>
