@@ -167,7 +167,7 @@ const textOnlyShops: Partial<Record<ShopKey, React.ReactNode>> = {
             </p>
             <p>
                 <ItemInlineDisplay names={["Intermediate Skill Manual"]} /> for{' '}
-                <ItemInlineDisplay names={["Ether"]} /> is fine if discounted and you
+                <ItemInlineDisplay names={["Free Ether"]} /> is fine if discounted and you
                 really need them.
             </p>
             <p>
@@ -184,7 +184,7 @@ const textOnlyShops: Partial<Record<ShopKey, React.ReactNode>> = {
             </p>
             <p>
                 Purchasing <ItemInlineDisplay names={["Special Recruitment Ticket"]} /> with{' '}
-                <ItemInlineDisplay names={["Ether"]} /> is ill-advised due to expenses that come from Premium/Limited banners and Precise crafting.</p>
+                <ItemInlineDisplay names={["Free Ether"]} /> is ill-advised due to expenses that come from Premium/Limited banners and Precise crafting.</p>
 
             <p>
                 <ItemInlineDisplay names={["Potentium (Armor)"]} /> /{' '}
@@ -331,105 +331,105 @@ const data: Record<ShopKey, ShopItem[]> = {
             name: 'Gold',
             priority: 'A',
             gives: { amount: 10000, unit: 'Gold' },
-            costs: [{ currency: 'Guild Coin', amount: 20 }],
+            costs: [{ currency: 'Guild Coins', amount: 20 }],
             limit: { count: 5, period: 'Daily' },
         },
         {
             name: '[Guild] Upgrade Stone Chest',
             priority: 'B',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 15 }],
+            costs: [{ currency: 'Guild Coins', amount: 15 }],
             limit: { count: 3, period: 'Daily' },
         },
         {
             name: 'Epic Quality Present Selection Chest',
             priority: 'B',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 50 }],
+            costs: [{ currency: 'Guild Coins', amount: 50 }],
             limit: { count: 1, period: 'Daily' },
         },
         {
             name: 'Steak Dish',
             priority: 'C',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 45 }],
+            costs: [{ currency: 'Guild Coins', amount: 45 }],
             limit: { count: 1, period: 'Daily' },
         },
         {
             name: 'Sandwich',
             priority: 'C',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 10 }],
+            costs: [{ currency: 'Guild Coins', amount: 10 }],
             limit: { count: 5, period: 'Daily' },
         },
         {
             name: 'Cake Slice',
             priority: 'C',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 15 }],
+            costs: [{ currency: 'Guild Coins', amount: 15 }],
             limit: { count: 3, period: 'Daily' },
         },
         {
             name: 'Prosciutto',
             priority: 'C',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 30 }],
+            costs: [{ currency: 'Guild Coins', amount: 30 }],
             limit: { count: 2, period: 'Daily' },
         },
         {
             name: 'Gold',
             priority: 'A',
             gives: { amount: 50000, unit: 'Gold' },
-            costs: [{ currency: 'Guild Coin', amount: 50 }],
+            costs: [{ currency: 'Guild Coins', amount: 50 }],
             limit: { count: 10, period: 'Weekly' },
         },
         {
             name: 'Basic Skill Manual',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 100 }],
+            costs: [{ currency: 'Guild Coins', amount: 100 }],
             limit: { count: 3, period: 'Weekly' },
         },
         {
             name: 'Intermediate Skill Manual',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 150 }],
+            costs: [{ currency: 'Guild Coins', amount: 150 }],
             limit: { count: 2, period: 'Weekly' },
         },
         {
             name: 'Professional Skill Manual',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 300 }],
+            costs: [{ currency: 'Guild Coins', amount: 300 }],
             limit: { count: 1, period: 'Weekly' },
         },
         {
             name: '[Guild] 3★ Hero Piece Selection Chest',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 300 }],
+            costs: [{ currency: 'Guild Coins', amount: 300 }],
             limit: { count: 5, period: 'Weekly' },
         },
         {
             name: 'Stage 3 Gem Chest',
             priority: 'B',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 150 }],
+            costs: [{ currency: 'Guild Coins', amount: 150 }],
             limit: { count: 5, period: 'Weekly' },
         },
         {
             name: '[Guild] Epic-Legendary Accessory Chest',
             priority: 'A',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 100 }],
+            costs: [{ currency: 'Guild Coins', amount: 100 }],
             limit: { count: 3, period: 'Weekly' },
         },
         {
             name: '[Guild] Enhancement Toolbox',
             priority: 'C',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Guild Coin', amount: 30 }],
+            costs: [{ currency: 'Guild Coins', amount: 30 }],
             limit: { count: 10, period: 'Weekly' },
         }
     ],
@@ -517,63 +517,63 @@ const data: Record<ShopKey, ShopItem[]> = {
             name: 'Gold',
             priority: 'S',
             gives: { amount: 10000, unit: '' },
-            costs: [{ currency: 'Friend Point', amount: 25 }],
+            costs: [{ currency: 'Friendship Point', amount: 25 }],
             limit: { count: 1, period: 'Daily' },
         },
         {
             name: 'Apprentice\'s Hammer Chest',
             priority: 'C',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Friend Point', amount: 30 }],
+            costs: [{ currency: 'Friendship Point', amount: 30 }],
             limit: { count: 3, period: 'Daily' },
         },
         {
             name: 'Upgrade Stone Piece Selection Chest',
             priority: 'A',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Friend Point', amount: 50 }],
+            costs: [{ currency: 'Friendship Point', amount: 50 }],
             limit: { count: 1, period: 'Daily' },
         },
         {
             name: '1-2★ Hero Piece Random Exchange Ticket',
             priority: 'B',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Friend Point', amount: 100 }],
+            costs: [{ currency: 'Friendship Point', amount: 100 }],
             limit: { count: 1, period: 'Weekly' },
         },
         {
             name: 'Arena Ticket',
             priority: 'A',
             gives: { amount: 5, unit: '' },
-            costs: [{ currency: 'Friend Point', amount: 200 }],
+            costs: [{ currency: 'Friendship Point', amount: 200 }],
             limit: { count: 1, period: 'Daily' },
         },
         {
             name: '3★ Hero Piece Selective Exchange Ticket',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Friend Point', amount: 700 }],
+            costs: [{ currency: 'Friendship Point', amount: 700 }],
             limit: { count: 1, period: 'Weekly' },
         },
         {
             name: 'Upgrade Stone Fragment Selection Chest',
             priority: 'C',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Friend Point', amount: 30 }],
+            costs: [{ currency: 'Friendship Point', amount: 30 }],
             limit: { count: 3, period: 'Daily' },
         },
         {
             name: 'Upgrade Stone Selection Chest',
             priority: 'A',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Friend Point', amount: 500 }],
+            costs: [{ currency: 'Friendship Point', amount: 500 }],
             limit: { count: 1, period: 'Weekly' },
         },
         {
             name: 'Stamina',
             priority: 'S',
             gives: { amount: 30, unit: '' },
-            costs: [{ currency: 'Friend Point', amount: 50 }],
+            costs: [{ currency: 'Friendship Point', amount: 50 }],
             limit: { count: 2, period: 'Daily' },
         }
     ],
@@ -1044,7 +1044,7 @@ const data: Record<ShopKey, ShopItem[]> = {
             limit: { count: 1, period: 'Monthly' },
         },
         {
-            name: 'Ether',
+            name: 'Free Ether',
             priority: 'S',
             gives: { amount: 1, unit: '' },
             costs: [{ currency: 'Automaton Coin', amount: 5 }],
@@ -1535,39 +1535,39 @@ const data: Record<ShopKey, ShopItem[]> = {
             name: 'Gold',
             priority: 'C',
             gives: { amount: 50000, unit: '' },
-            costs: [{ currency: 'Ether', amount: 60 }]
+            costs: [{ currency: 'Free Ether', amount: 60 }]
         },
         {
             name: 'Gold',
             priority: 'C',
             gives: { amount: 550000, unit: '' },
-            costs: [{ currency: 'Ether', amount: 600 }]
+            costs: [{ currency: 'Free Ether', amount: 600 }]
         },
         {
             name: 'Gold',
             priority: 'C',
             gives: { amount: 2000000, unit: '' },
-            costs: [{ currency: 'Ether', amount: 1800 }]
+            costs: [{ currency: 'Free Ether', amount: 1800 }]
         },
         {
             name: 'Stamina',
             priority: 'C',
             gives: { amount: 60, unit: '' },
-            costs: [{ currency: 'Ether', amount: 60 }],
+            costs: [{ currency: 'Free Ether', amount: 60 }],
             limit: { count: 25, period: 'Daily' }
         },
         {
             name: 'Effectium',
             priority: 'C',
             gives: { amount: 50, unit: '' },
-            costs: [{ currency: 'Ether', amount: 50 }],
+            costs: [{ currency: 'Free Ether', amount: 50 }],
             limit: { count: 10, period: 'Daily' }
         },
         {
             name: 'Arena Ticket',
             priority: 'C',
             gives: { amount: 5, unit: '' },
-            costs: [{ currency: 'Ether', amount: 50 }],
+            costs: [{ currency: 'Free Ether', amount: 50 }],
         }
     ],
 
