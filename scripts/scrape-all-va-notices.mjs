@@ -542,7 +542,7 @@ async function scrapeLanguage(lang) {
   let pageCount = 0;
   const allEntries = [];
 
-  // Step 1: Collect all entries from list pages (no limit, scrape everything)
+  // Step 1: Collect entries from list pages until we find a page with no new articles
   while (currentUrl) {
     pageCount++;
     logWithLang(lang, `Page ${pageCount}`);
@@ -552,7 +552,23 @@ async function scrapeLanguage(lang) {
       const entries = parseListPage(html);
 
       logWithLang(lang, `Found ${entries.length} entries on page ${pageCount}`);
+
+      // Check how many new articles we have on this page
+      let newArticlesOnPage = 0;
+      for (const entry of entries) {
+        if (!shouldSkipArticle(entry.uid, entry.title, config.dataDir)) {
+          newArticlesOnPage++;
+        }
+      }
+
+      logWithLang(lang, `New articles on page ${pageCount}: ${newArticlesOnPage}/${entries.length}`);
       allEntries.push(...entries);
+
+      // If this page has no new articles, stop crawling
+      if (newArticlesOnPage === 0 && entries.length > 0) {
+        logWithLang(lang, `⚡ No new articles on page ${pageCount}, stopping pagination`);
+        break;
+      }
 
       // Check for next page
       const nextUrl = hasNextPage(html, config.url);
@@ -567,7 +583,7 @@ async function scrapeLanguage(lang) {
     }
   }
 
-  logWithLang(lang, `✓ Found ${allEntries.length} total entries`);
+  logWithLang(lang, `✓ Found ${allEntries.length} total entries across ${pageCount} pages`);
 
   // Step 2: Extract and save each notice
   let savedCount = 0;

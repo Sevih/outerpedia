@@ -1,6 +1,18 @@
 {
   "en": [
     {
+      "slug": "live-en-5652",
+      "title": "[Update] 1/13 (Tue) Patch Note",
+      "date": "2026/01/12 6:00:00",
+      "category": "notice",
+      "excerpt": "Dear Master, We would like to inform you of the in-game update scheduled for 1/13 (Tue). You can check the updated content in the game after maintenance is completed. Please refer to the details below...",
+      "coverImage": "/images/news/live/en/5652-004663c8.webp",
+      "uid": "5652",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/12/updateen/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-5624",
       "title": "[Notice] 1/8(Thu) Sequential Rollout Patch Notice",
       "date": "2026/01/08 3:02:56",
@@ -12750,6 +12762,18 @@
     }
   ],
   "jp": [
+    {
+      "slug": "live-jp-5657",
+      "title": "1/13(火)アップデート内容のお知らせ",
+      "date": "2026/01/12 6:00:00",
+      "category": "notice",
+      "excerpt": "美ジュアル戦略RPG 『アウタープレーン』 こんにちは！GMあめです。 1/13(火) のアップデート内容を案内いたします。 アップデート内容は、メンテナンス終了後にゲーム内でご確認いただけます。 詳細につきましては、下記をご覧ください。 * 1. イベントダンジョン「ロボットはチョコの味を知らない」復刻 ・ イベントダンジョン「ロボットはチョコの味を知らない」が再開されます。 ・ 以前「ロボット...",
+      "coverImage": "/images/news/live/jp/5657-808e6dfe.webp",
+      "uid": "5657",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/12/0113_update_jp/",
+      "views": 0,
+      "lang": "jp"
+    },
     {
       "slug": "live-jp-5626",
       "title": "【お知らせ】データ更新のお知らせ(1/8)",
@@ -25537,6 +25561,18 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-5639",
+      "title": "1/13(화) 업데이트 안내",
+      "date": "2026/01/12 6:00:00",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 1/13 (화) 진행될 게임 내 업데이트 사항을 안내해 드립니다. 업데이트 내용은 점검 후 게임 내에서 확인하실 수 있습니다. 자세한 내용은 아래를 확인해 주시기 바랍니다. 1. 이벤트 던전 \\[로봇은 초콜릿의 맛을 모른다\\] 재 오픈 - 기존에 진행하였던 \\[로봇은 초콜릿의 맛을 모른다\\] 이벤트 던전이 재 오픈 됩니다. -...",
+      "coverImage": "/images/news/live/kr/5639-700f4588.webp",
+      "uid": "5639",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/12/260113_update_kr/",
+      "views": 0,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-5622",
       "title": "[공지] 1/8(목) 무점검 패치 진행 안내",

@@ -42,7 +42,17 @@ export default function ItemInlineDisplay({ names, text = true, size = 25 }: Pro
 
   // Recherche par "name" canon EN
   const itemList = normalized
-    .map((name) => items.find((item) => item.name === name))
+    .map((name) => {
+      const item = items.find((item) => item.name === name);
+      if (!item) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error(`Item not found: "${name}"`);
+          throw new Error(`Item not found: "${name}"`);
+        }
+        return null;
+      }
+      return item;
+    })
     .filter((item): item is Item => !!item);
 
   return (

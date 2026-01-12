@@ -60,7 +60,7 @@ export default function BeginnerFAQ() {
                           <span>한정</span>
                         </div>
                         <p className="text-sm ">
-                          <ItemInlineDisplay names={'Ether'} />는 한정 영웅(시즌, 페스티벌, 콜라보 배너)에 우선적으로 사용합니다. 다른 영웅보다 반드시 강하지는 않지만, 배너 기간에만 획득 가능하며 특정 컨텐츠를 더 쉽게 클리어할 수 있습니다. 배너 진행 중 최소 3성으로 확보하세요.
+                          <ItemInlineDisplay names={'Free Ether'} />는 한정 영웅(시즌, 페스티벌, 콜라보 배너)에 우선적으로 사용합니다. 다른 영웅보다 반드시 강하지는 않지만, 배너 기간에만 획득 가능하며 특정 컨텐츠를 더 쉽게 클리어할 수 있습니다. 배너 진행 중 최소 3성으로 확보하세요.
                         </p>
                       </div>
 

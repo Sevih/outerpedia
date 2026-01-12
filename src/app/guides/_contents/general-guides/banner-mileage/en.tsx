@@ -1,9 +1,9 @@
 import GuideHeading from '@/app/components/GuideHeading';
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import BannerTabCards, { BannerTab } from '@/app/components/CardTabs';
-import GuideIconInline from '@/app/components/GuideIconInline';
 import LimitedHeroesList from '@/app/components/LimitedHeroesList';
 import Image from 'next/image';
+import ItemInlineDisplay from '@/app/components/ItemInline';
 
 
 const decoration = "text-yellow-400 underline";
@@ -36,8 +36,8 @@ const bannerTabs: BannerTab[] = [
                 <p className='mt-4'><span className={decoration}>1 free pull per day</span></p>
                 <p className='mt-4'>Pulling a hero you already own will gives you</p>
                 <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text='Wildcard pieces' /></span> : 1 for a 2{star} and 15 for a 3{star}</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text='Hero pieces' /></span> : 5 for a 1{star}, 10 for a 2{star} and 150 for a 3{star}</li>
+                    <li><ItemInlineDisplay names='Wildcard Pieces' /> : 1 for a 2{star} and 15 for a 3{star}</li>
+                    <li><ItemInlineDisplay names='Hero Piece' /> : 5 for a 1{star}, 10 for a 2{star} and 150 for a 3{star}</li>
                 </ul>
 
                 <p className='mt-2'>
@@ -47,25 +47,25 @@ const bannerTabs: BannerTab[] = [
                     It uses 3 types of ressources :</p>
                 <ul>
                     <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text='Special Recruitement Ticket (Event)' /></span> : 1 for 1 unit, does not add to mileage count
+                        <ItemInlineDisplay names='Special Recruitment Ticket (Event)' /> : 1 for 1 unit, does not add to mileage count
                     </li>
                     <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text='Special Recruitement Ticket' /></span> : 1 for 1 unit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='Custom Mileage' size={25} />
+                        <ItemInlineDisplay names='Special Recruitment Ticket' /> : 1 for 1 unit, grants 1 <ItemInlineDisplay names='Custom Mileage' />
                     </li>
                     <li>
-                        <span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text='Ether' /></span> : 150 for 1 unit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='Custom Mileage' size={25} />
+                        <ItemInlineDisplay names={"Free Ether"} /> and <ItemInlineDisplay names={"Ether"} /> : 150 for 1 unit, grants 1 <ItemInlineDisplay names='Custom Mileage' />
                     </li>
                 </ul>
 
                 <p className='mt-4'>
-                    It&apos;s not recommended to use <GuideIconInline name="TI_Item_Cristal_Cash" text='Ether' /> on this banner
+                    It&apos;s not recommended to use <ItemInlineDisplay names='Ether' /> on this banner
                 </p>
                 <p className='mt-4'>
-                    <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='Custom Mileage' size={25} /> are kept until you decide to use them.
+                    <ItemInlineDisplay names='Custom Mileage' /> are kept until you decide to use them.
                 </p>
                 <p className='mt-4'>
-                    Use 200 <GuideIconInline name="CM_Icon_Recruit_Mileage_Element" text='Custom Mileage' size={25} /> to recruit the featured hero, or get 150 <GuideIconInline name="CM_Piece_Frame" text='Hero pieces' /><br />
-                    Gain 15 additionnal <GuideIconInline name="GC_Item_Piece" text='Wildcard pieces' /> if you already own the hero.
+                    Use 200 <ItemInlineDisplay names='Custom Mileage' /> to recruit the featured hero, or get 150 <ItemInlineDisplay names='Hero Piece' /><br />
+                    Gain 15 additionnal <ItemInlineDisplay names='Wildcard Pieces' /> if you already own the hero.
                 </p>
             </div>
         )
@@ -87,8 +87,8 @@ const bannerTabs: BannerTab[] = [
                 <p className="mt-4">
                     Duplicates give:</p>
                 <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /></span>: 1 for a 2{star}, 15 for a 3{star}</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="Hero pieces" /></span>: 5 for a 1{star}, 10 for a 2{star}, 50 for a 3{star} (150 if it&apos;s the banner unit)</li>
+                    <li><ItemInlineDisplay names="Wildcard Pieces" />: 1 for a 2{star}, 15 for a 3{star}</li>
+                    <li><ItemInlineDisplay names="Hero Piece" />: 5 for a 1{star}, 10 for a 2{star}, 50 for a 3{star} (150 if it&apos;s the banner unit)</li>
                 </ul>
 
                 <p className="mt-2">
@@ -97,18 +97,18 @@ const bannerTabs: BannerTab[] = [
                 <p className="mt-4">
                     It uses 3 types of resources:</p>
                 <ul>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_04" text="Special Recruitment Ticket (Event)" /></span>: 1 per recruit, does not add to mileage count</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Ticket_Recruit_02" text="Special Recruitment Ticket" /></span>: 1 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage" text="Mileage" size={25} /></li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="Ether" /></span>: 150 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage" text="Mileage" size={25} /></li>
+                    <li><ItemInlineDisplay names="Special Recruitment Ticket (Event)" />: 1 per recruit, does not add to mileage count</li>
+                    <li><ItemInlineDisplay names="Special Recruitment Ticket" />: 1 per recruit, grants 1 <ItemInlineDisplay names="Mileage" /></li>
+                    <li><ItemInlineDisplay names={"Free Ether"} /> and <ItemInlineDisplay names={"Ether"} />: 150 per recruit, grants 1 <ItemInlineDisplay names="Mileage" /></li>
                 </ul>
 
                 <p className='mt-4'>
-                    It&apos;s not recommended to use <GuideIconInline name="TI_Item_Cristal_Cash" text='Ether' /> on this banner
+                    It&apos;s not recommended to use <ItemInlineDisplay names='Ether' /> on this banner
                 </p>
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage" text="Mileage" size={25} /> is kept until used.</p>
+                <p className="mt-4"><ItemInlineDisplay names="Mileage" /> is kept until used.</p>
                 <p className="mt-4">
-                    Use 200 <GuideIconInline name="CM_Icon_Recruit_Mileage" text="Mileage" size={25} /> to recruit the featured hero, or get 150 <GuideIconInline name="CM_Piece_Frame" text="Hero pieces" />.<br />
-                    Get 15 bonus <GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /> if you already own the hero.
+                    Use 200 <ItemInlineDisplay names="Mileage" /> to recruit the featured hero, or get 150 <ItemInlineDisplay names="Hero Piece" />.<br />
+                    Get 15 bonus <ItemInlineDisplay names="Wildcard Pieces" /> if you already own the hero.
                 </p>
 
             </div>
@@ -133,8 +133,8 @@ const bannerTabs: BannerTab[] = [
                     Duplicates give:
                 </p>
                 <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /></span>: 1 for a 2{star}, 15 for a 3{star}</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="Hero pieces" /></span>: 5 for a 1{star}, 10 for a 2{star}, 50 for a 3{star} (150 if it&apos;s the banner unit)</li>
+                    <li><ItemInlineDisplay names="Wildcard Pieces" />: 1 for a 2{star}, 15 for a 3{star}</li>
+                    <li><ItemInlineDisplay names="Hero Piece" />: 5 for a 1{star}, 10 for a 2{star}, 50 for a 3{star} (150 if it&apos;s the banner unit)</li>
                 </ul>
 
                 <p className="mt-2">
@@ -145,15 +145,15 @@ const bannerTabs: BannerTab[] = [
                     It uses 3 types of resources:
                 </p>
                 <ul>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001_NonMileage" text="Call of the Demiurge (Event)" /></span>: 10 per recruit, does not add to mileage count</li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Recruit_Special_001" text="Call of the Demiurge" /></span>: 10 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /></li>
-                    <li><span className={decoration}><GuideIconInline name="TI_Item_Cristal_Cash" text="Ether" /></span>: 225 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /></li>
+                    <li><ItemInlineDisplay names="Call of the Demiurge (Event)" />: 10 per recruit, does not add to mileage count</li>
+                    <li><ItemInlineDisplay names="Call of the Demiurge" />: 10 per recruit, grants 1 <ItemInlineDisplay names="False God's Proof" /></li>
+                    <li><ItemInlineDisplay names={"Free Ether"} /> and <ItemInlineDisplay names={"Ether"} />: 225 per recruit, grants 1 <ItemInlineDisplay names="False God's Proof" /></li>
                 </ul>
 
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /> is kept until used.</p>
+                <p className="mt-4"><ItemInlineDisplay names="False God's Proof" /> is kept until used.</p>
                 <p className="mt-4">
-                    Use 200 <GuideIconInline name="CM_Icon_Recruit_Mileage_Special_001" text="False God's Proof" size={25} /> to recruit the featured hero, or get 150 <GuideIconInline name="CM_Piece_Frame" text="Hero pieces" />.<br />
-                    Get 15 bonus <GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /> if you already own the hero.
+                    Use 200 <ItemInlineDisplay names="False God's Proof" /> to recruit the featured hero, or get 150 <ItemInlineDisplay names="Hero Piece" />.<br />
+                    Get 15 bonus <ItemInlineDisplay names="Wildcard Pieces" /> if you already own the hero.
                 </p>
             </div>
         ),
@@ -176,8 +176,8 @@ const bannerTabs: BannerTab[] = [
                     Duplicates give:
                 </p>
                 <ul>
-                    <li><span className={decoration}><GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /></span>: 1 for a 2{star}, 15 for a 3{star}</li>
-                    <li><span className={decoration}><GuideIconInline name="CM_Piece_Frame" text="Hero pieces" /></span>: 5 for a 1{star}, 10 for a 2{star}, 150 for a 3{star}</li>
+                    <li><ItemInlineDisplay names="Wildcard Pieces" />: 1 for a 2{star}, 15 for a 3{star}</li>
+                    <li><ItemInlineDisplay names="Hero Piece" />: 5 for a 1{star}, 10 for a 2{star}, 150 for a 3{star}</li>
                 </ul>
 
 
@@ -202,27 +202,21 @@ const bannerTabs: BannerTab[] = [
                 </p>
                 <ul>
                     <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Ticket_Recruit_06" text="Limited Recruitment Ticket (event)" />
-                        </span>: 1 per recruit, does not add to mileage count (this item exist but hasn&apos;t been used yet)
+                        <ItemInlineDisplay names="Limited Recruitment Ticket (Event)" />: 1 per recruit, does not add to mileage count (this item exist but hasn&apos;t been used yet)
                     </li>
                     <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Ticket_Recruit_05" text="Limited Recruitment Ticket" />
-                        </span>: 1 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} />
+                        <ItemInlineDisplay names="Limited Recruitment Ticket" />: 1 per recruit, grants 1 <ItemInlineDisplay names="Limited Mileage" />
                     </li>
                     <li>
-                        <span className={decoration}>
-                            <GuideIconInline name="TI_Item_Cristal_Cash" text="Ether" />
-                        </span>: 150 per recruit, grants 1 <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} />
+                        <ItemInlineDisplay names={"Free Ether"} /> and <ItemInlineDisplay names={"Ether"} />: 150 per recruit, grants 1 <ItemInlineDisplay names="Limited Mileage" />
                     </li>
                 </ul>
 
 
-                <p className="mt-4"><GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} /> is kept until used.</p>
+                <p className="mt-4"><ItemInlineDisplay names="Limited Mileage" /> is kept until used.</p>
                 <p className="mt-4">
-                    Use 150 <GuideIconInline name="CM_Icon_Recruit_Mileage_Seasonal" text="Limited Mileage" size={25} /> to recruit the featured hero, or get 150 <GuideIconInline name="CM_Piece_Frame" text="Hero pieces" />.<br />
-                    Get 15 bonus <GuideIconInline name="GC_Item_Piece" text="Wildcard pieces" /> if you already own the hero.
+                    Use 150 <ItemInlineDisplay names="Limited Mileage" /> to recruit the featured hero, or get 150 <ItemInlineDisplay names="Hero Piece" />.<br />
+                    Get 15 bonus <ItemInlineDisplay names="Wildcard Pieces" /> if you already own the hero.
                 </p>
             </div>
         ),

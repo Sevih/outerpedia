@@ -60,7 +60,7 @@ export default function BeginnerFAQ() {
                           <span>Limited</span>
                         </div>
                         <p className="text-sm ">
-                          <ItemInlineDisplay names={'Ether'} /> goes to Limited heroes (Seasonal, Festival, Collab banners) as a priority. They don&apos;t necessarily stand above other heroes, but they are only available during their banner and can make certain fights easier. Collect at least at 3-star when their banner is up.
+                          <ItemInlineDisplay names={'Free Ether'} /> goes to Limited heroes (Seasonal, Festival, Collab banners) as a priority. They don&apos;t necessarily stand above other heroes, but they are only available during their banner and can make certain fights easier. Collect at least at 3-star when their banner is up.
                         </p>
                       </div>
 

@@ -2,7 +2,7 @@
   {
     "code": "OUTERNOTE9",
     "description": {
-      "Ether": "1000"
+      "Free Ether": "1000"
     },
     "start": "2024-11-01",
     "end": "2024-11-29"
@@ -26,7 +26,7 @@
   {
     "code": "SAVIOROFMIRSHA",
     "description": {
-      "Ether": "500"
+      "Free Ether": "500"
     },
     "start": "2024-11-14",
     "end": "2024-12-02"
@@ -42,7 +42,7 @@
   {
     "code": "GODSAVENELLA",
     "description": {
-      "Ether": "500"
+      "Free Ether": "500"
     },
     "start": "2024-11-26",
     "end": "2024-12-02"
@@ -74,7 +74,7 @@
   {
     "code": "OUTERNOTE10",
     "description": {
-      "Ether": "1000"
+      "Free Ether": "1000"
     },
     "start": "2024-12-13",
     "end": "2025-01-13"
@@ -98,7 +98,7 @@
   {
     "code": "OUTERNOTE11",
     "description": {
-      "Ether": "500"
+      "Free Ether": "500"
     },
     "start": "2025-01-23",
     "end": "2025-02-23"
@@ -106,7 +106,7 @@
   {
     "code": "1STCOLLAB",
     "description": {
-      "Ether": "1500"
+      "Free Ether": "1500"
     },
     "start": "2025-03-19",
     "end": "2025-04-07"
@@ -114,7 +114,7 @@
   {
     "code": "MAYSPECIAL",
     "description": {
-      "Ether": "1000"
+      "Free Ether": "1000"
     },
     "start": "2025-04-28",
     "end": "2025-05-05"
@@ -122,7 +122,7 @@
   {
     "code": "OUTERNOTE12",
     "description": {
-      "Ether": "500"
+      "Free Ether": "500"
     },
     "start": "2025-04-30",
     "end": "2025-05-28"
@@ -138,7 +138,7 @@
   {
     "code": "OUTERNOTE13",
     "description": {
-      "Ether": "500"
+      "Free Ether": "500"
     },
     "start": "2025-07-11",
     "end": "2025-08-10"
@@ -146,7 +146,7 @@
   {
     "code": "MAJOR9",
     "description": {
-      "Ether": "1500"
+      "Free Ether": "1500"
     },
     "start": "2025-09-23",
     "end": "2025-12-31"
@@ -194,7 +194,7 @@
   {
     "code": "MONADMATSURI",
     "description": {
-      "Ether": "1500",
+      "Free Ether": "1500",
       "Stamina": "200",
       "Gold": "1 000 000"
     },
@@ -204,7 +204,7 @@
   {
     "code": "OUTERLETTER1",
     "description": {
-      "Ether": "500"
+      "Free Ether": "500"
     },
     "start": "2025-11-12",
     "end": "2025-12-11"
@@ -229,7 +229,7 @@
   {
     "code": "ARCALIVE",
     "description": {
-      "Ether": "1500"
+      "Free Ether": "1500"
     },
     "start": "2025-11-21",
     "end": "2026-03-31"
@@ -237,7 +237,7 @@
   {
     "code": "OUTERLETTER2ND",
     "description": {
-      "Ether": "500"
+      "Free Ether": "500"
     },
     "start": "2025-11-28",
     "end": "2025-12-28"
@@ -288,7 +288,7 @@
     "code": "MAIDTAMARA",
     "description": {
       "Battle Maid Tamara": "1",
-      "Ether": "500"
+      "Free Ether": "500"
     },
     "start": "2025-12-24",
     "end": "2026-03-31"
@@ -315,7 +315,7 @@
   {
     "code": "ADIEU2025",
     "description": {
-      "Ether": "1500"
+      "Free Ether": "1500"
     },
     "start": "2025-12-25",
     "end": "2026-03-31"
@@ -323,7 +323,7 @@
   {
     "code": "HELLO2026",
     "description": {
-     "Ether": "1500"
+     "Free Ether": "1500"
     },
     "start": "2025-12-25",
     "end": "2026-03-31"
@@ -339,7 +339,7 @@
   {
     "code": "XMASWITHM9",
     "description": {
-      "Ether": "3000"
+      "Free Ether": "3000"
     },
     "start": "2025-12-25",
     "end": "2026-03-31"

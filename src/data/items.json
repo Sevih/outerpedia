@@ -884,6 +884,18 @@
     "description_jp": "メルシャ全域でたまに発見される貴重な財貨。特別な用途に使われる。",
     "description_kr": "메르샤 전역에서 드물게 발견되는 귀한 재화. 특별한 곳에 사용됩니다.",
     "description_zh": "在弥乐沙全域较为稀有的珍贵货币。\\n可用于特殊用途。",
+    "icon": "TI_Item_Cristal_Cash"
+  },
+  {
+    "name": "Free Ether",
+    "name_jp": "エーテル",
+    "name_kr": "에테르",
+    "name_zh": "以太",
+    "rarity": "normal",
+    "description": "A rare resource that can occasionally be found all over Mirsha. Can be used for special purposes.",
+    "description_jp": "メルシャ全域でたまに発見される貴重な財貨。特別な用途に使われる。",
+    "description_kr": "메르샤 전역에서 드물게 발견되는 귀한 재화. 특별한 곳에 사용됩니다.",
+    "description_zh": "在弥乐沙全域较为稀有的珍贵货币。\\n可用于特殊用途。",
     "icon": "TI_Item_Cristal"
   },
   {
@@ -897,6 +909,18 @@
     "description_kr": "리미티드 영입을 이용할 수 있는 티켓입니다. 1장으로 1회 영입을 이용할 수 있습니다.",
     "description_zh": "可进行限定招募的票券。1张可进行1次招募。",
     "icon": "TI_Item_Ticket_Recruit_05"
+  },
+    {
+    "name": "Limited Recruitment Ticket (Event)",
+    "name_jp": "リミテッドスカウトチケット",
+    "name_kr": "리미티드 영입 티켓",
+    "name_zh": "限定招募券",
+    "rarity": "epic",
+  "description": "A ticket used for limited recruitment. Each ticket will recruit one hero.\\nUsing this ticket does not provide any mileage rewards.",
+  "description_jp": "リミテッドスカウトで仲間をスカウトできるチケット。チケット1枚につきスカウトを1回行える。\\nこのチケットは交換Ptに変換されません。",
+  "description_kr": "리미티드 영입을 이용할 수 있는 티켓입니다. 1장으로 1회 영입을 이용할 수 있습니다.\\n이 티켓은 마일리지가 적립되지 않습니다.",
+  "description_zh": "可进行限定招募的票券。1张可进行1次招募。\\n该票券不累积积分。",
+    "icon": "TI_Item_Ticket_Recruit_06"
   },
   {
     "name": "Call of the Demiurge (Event)",
@@ -1231,18 +1255,7 @@
     "description_kr": "각종 보석",
     "description_zh": "各种宝石"
   },
-  {
-    "name": "Wildcard Pieces",
-    "name_jp": "ピース",
-    "name_kr": "공용 조각",
-    "name_zh": "通用碎片",
-    "rarity": "legendary",
-    "description": "A piece with the ability to contain someone's power. It can be exchanged for Hero Pieces of your choice at the Pieces Shop.",
-    "description_jp": "誰かの力を込めることができるピース。ショップで仲間のピースと交換できる。",
-    "description_kr": "누군가의 힘을 담아낼 수 있는 조각입니다. 조각 상점에서 원하는 동료의 조각으로 교환할 수 있습니다.",
-    "description_zh": "蕴藏着某个人力量的碎片。\\n可在碎片商店兑换所需同伴的碎片。",
-    "icon": "CM_Piece_Frame"
-  },
+
   {
     "name": "Cosmetic",
     "name_jp": "コスメティック",
@@ -2050,11 +2063,74 @@
   "name_jp": "仲間のピース",
   "name_kr": "동료 조각",
   "name_zh": "同伴碎片",
-    "rarity": "legendary",
+    "rarity": "normal",
     "description": "A piece that contains the power of a unit. Collect 250 to unlock the unit or 150 to transcend them.",
   "description_jp": "仲間の力が込められたピース。250個集めると仲間を解放、150個で超越できます。",
   "description_kr": "동료의 힘이 담긴 조각. 250개를 모으면 동료를 해금하고, 150개로 초월할 수 있습니다.",
   "description_zh": "蕴含同伴之力的碎片。收集250个可解锁同伴，150个可进行超越。",
     "icon": "CM_Piece_Frame"
+  },
+   {
+  "name": "Wildcard Pieces",
+  "name_jp": "ピース",
+  "name_kr": "공용 조각",
+  "name_zh": "通用碎片",
+    "rarity": "normal",
+  "description": "A piece with the ability to contain someone's power. It can be exchanged for Hero Pieces of your choice at the Pieces Shop.",
+  "description_jp": "誰かの力を込めることができるピース。ショップで仲間のピースと交換できる。",
+  "description_kr": "누군가의 힘을 담아낼 수 있는 조각입니다. 조각 상점에서 원하는 동료의 조각으로 교환할 수 있습니다.",
+  "description_zh": "蕴藏着某个人力量的碎片。\\n可在碎片商店兑换所需同伴的碎片。",
+    "icon": "CM_Goods_Piece"
+  },
+  {
+  "name": "Custom Mileage",
+  "name_jp": "カスタム仲間交換Pt",
+  "name_kr": "커스텀 마일리지",
+  "name_zh": "自选积分",
+    "rarity": "normal",
+  "description": "Custom Mileage can be obtained by recruiting. You can use Custom Mileage to recruit certain Heroes.",
+  "description_jp": "スカウトを行うと、【カスタム仲間交換Pt】を獲得でき、カスタム仲間交換Ptを消費して選択内の仲間から1体を獲得できます。",
+  "description_kr": "영입 시, 커스텀 마일리지를 획득하며 커스텀 마일리지를 사용하여 선택 영입을 할 수 있습니다.",
+  "description_zh": "招募时,将获得自选积分,并可以使用自选积分进行指定招募。",
+    "icon": "TI_Item_Mileage_Element"
+  },
+   {
+  "name": "Mileage",
+  "name_jp": "仲間交換Pt",
+  "name_kr": "마일리지",
+  "name_zh": "积分",
+    "rarity": "normal",
+  "description": "This resource can be obtained via recruiting.\\n\\nIt can be used to select and recruit specific heroes during their special recruitment period.",
+  "description_jp": "【スカウト】で獲得できるアイテムです。\\n\\nプレミアスカウト期間中、特定の仲間を選択スカウトできます。",
+  "description_kr": "영입을 통해 획득할 수 있는 재화입니다. \\n\\n특별 영입 기간 동안 특정 동료를 선택 영입하는데 사용됩니다.",
+  "description_zh": "该货币可通过招募获得。\\n\\n可在特别招募期间,用于招募特定同伴。",
+    "icon": "TI_Item_Mileage"
+  },
+   {
+
+  "name": "False God's Proof",
+  "name_jp": "偽りの神の証",
+  "name_kr": "거짓된 신의 증명",
+  "name_zh": "伪神的证明",
+    "rarity": "normal",
+  "description": "You can obtain False God's Proof through Demiurge recruitment and they are used to select and recruit specific heroes.",
+  "description_jp": "デミウルゴススカウトで【偽りの神の証】を獲得し、仲間交換ができます。",
+  "description_kr": "데미우르고스 영입을 통해 거짓된 신의 증명을 획득하여 선택 영입을 할 수 있습니다.",
+  "description_zh": "可通过创世之神招募获得伪神的证明,并以此进行指定招募。",
+    "icon": "CM_Icon_Recruit_Mileage_Special_001"
+  },
+   {
+
+  "name": "Limited Mileage",
+  "name_jp": "リミテッド交換pt",
+  "name_kr": "리미티드 마일리지",
+  "name_zh": "限定积分",
+    "rarity": "normal",
+  "description": "You can earn Limited Mileage through Seasonal Recruitment and use it for Mileage Recruit.\\n<color=#cc5656>Limited Mileage is retained even after the recruitment period ends.</color>",
+  "description_jp": "限定スカウトでリミテッド交換ptを獲得し、仲間交換に使用できます。\\n<color=#cc5656>リミテッド交換ptはスカウト期間が終了しても保持されます。</color>",
+  "description_kr": "시즈널 영입을 통해 리미티드 마일리지를 획득하여 선택 영입을 할 수 있습니다.\\n<color=#cc5656>리미티드 마일리지는 영입 기간이 종료되어도 유지됩니다.</color>",
+  "description_zh": "可通过季节招募获取<color=#cc5656>限定积分</color>,并用于指定招募。\\n<color=#cc5656>限定积分在招募期结束后仍会保留。</color>",
+    "icon": "TI_Item_Mileage_Seasonal"
   }
+   
 ]

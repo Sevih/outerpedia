@@ -60,7 +60,7 @@ export default function BeginnerFAQ() {
                           <span>限定</span>
                         </div>
                         <p className="text-sm ">
-                          <ItemInlineDisplay names={'Ether'} />优先用于限定英雄（季节、节日、联动卡池）。他们不一定比其他英雄强，但只能在卡池期间获得，可以让某些战斗更轻松。在卡池期间至少确保3星。
+                          <ItemInlineDisplay names={'Free Ether'} />优先用于限定英雄（季节、节日、联动卡池）。他们不一定比其他英雄强，但只能在卡池期间获得，可以让某些战斗更轻松。在卡池期间至少确保3星。
                         </p>
                       </div>
 
