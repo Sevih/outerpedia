@@ -2594,5 +2594,23 @@
       "BT_ACTION_GAUGE"
     ],
     "debuff": []
+  },
+  "core-fusion-lisha": {
+    "name": "The Supreme Witch's Companion",
+    "name_jp": "大魔女の親友",
+    "name_kr": "대마녀의 단짝",
+    "mainStat": "Accuracy (To: Earth)",
+    "mainStat_jp": "地属性の対象の命中",
+    "mainStat_kr": "지속성 대상 명중",
+    "effect": "Increases Damage Dealt of Mage type allies (excluding self) by <color=#28d9ed>50%</color>",
+    "effect_jp": "自分を除く魔法型味方のダメージ<color=#28d9ed>50%</color>UP",
+    "effect_kr": "자신을 제외한 마법형 아군의 피해량 <color=#28d9ed>50%</color> 증가",
+    "effect10": "When a Mage type ally takes an action, increases own Attack by 7% (Stacks up to 5 times)",
+    "effect10_jp": "味方の魔法型仲間が行動時、自分の攻撃力7% UP(最大5回累積)",
+    "effect10_kr": "아군 마법형 동료 행동 시, 자신의 공격력 7% (최대 5회 누적)",
+    "icon_effect": "TI_Icon_UO_Accessary_07",
+    "rank": "",
+    "buff": [],
+    "debuff": []
   }
 }

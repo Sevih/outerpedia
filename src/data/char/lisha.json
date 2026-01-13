@@ -11,7 +11,7 @@
   "rank": "B",
   "role": "dps",
   "tags": [
-    "ignore-defense"
+    "ignore-defense","free"
   ],
   "skill_priority": {
     "First": {
@@ -384,5 +384,7 @@
         "BT_STAT|ST_ACCURACY"
       ]
     }
-  }
+  },
+  "hasCoreFusion": true,
+  "coreFusionId": "2700005"
 }
