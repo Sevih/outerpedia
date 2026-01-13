@@ -226,6 +226,19 @@
       "Regina"
     ]
   },
+  "adventure/S4-1-10": {
+    "category": "adventure",
+    "guideId": "S4-1-10",
+    "characters": [
+      "Caren",
+      "Core Fusion Veronica",
+      "Dahlia",
+      "Fortuna",
+      "Mene",
+      "Snow",
+      "Veronica"
+    ]
+  },
   "adventure-license/amadeus-AL": {
     "category": "adventure-license",
     "guideId": "amadeus-AL",
