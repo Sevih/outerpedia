@@ -691,14 +691,14 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                 <div className="flex gap-4">
                                     {/* EE Priority */}
                                     <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
-                                        <p className="font-semibold text-white mb-2">{t('ee_priority')}</p>
+                                        <p className="font-semibold text-white mb-2 text-center">{t('ee_priority')}</p>
                                         {ee?.rank ? (
                                             <Image src={`/images/ui/IG_Event_Rank_${ee.rank}.webp`} alt={`EE Rank ${ee.rank}`} width={32} height={32} style={{ width: 32, height: 32 }} className="object-contain" />
                                         ) : <p className="text-gray-400 italic text-center">Coming soon...</p>}
                                     </div>
                                     {/* PvE */}
                                     <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
-                                        <p className="font-semibold text-white mb-2">{t('pve_tier')}</p>
+                                        <p className="font-semibold text-white mb-2 text-center">{t('pve_tier')}</p>
                                         {character.rank ? (() => {
                                             const effectiveRank = character.Rarity <= 2 ? demoteOnce(character.rank) : character.rank;
                                             return <Image src={`/images/ui/IG_Event_Rank_${effectiveRank}.webp`} alt={`Rank ${effectiveRank}`} width={32} height={32} style={{ width: 32, height: 32 }} className="object-contain" />;
@@ -706,7 +706,7 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
                                     </div>
                                     {/* PvP */}
                                     <div className="border border-gray-600 rounded-md p-4 w-[122px] h-[100px] flex flex-col justify-center items-center">
-                                        <p className="font-semibold text-white mb-2">{t('pvp_tier')}</p>
+                                        <p className="font-semibold text-white mb-2 text-center">{t('pvp_tier')}</p>
                                         {character.rank_pvp ? (
                                             <Image src={`/images/ui/IG_Event_Rank_${character.rank_pvp}.webp`} alt={`Rank ${character.rank_pvp}`} width={32} height={32} style={{ width: 32, height: 32 }} className="object-contain" />
                                         ) : <p className="text-gray-400 italic text-center">{t('not_available')}</p>}

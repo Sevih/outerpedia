@@ -1,15 +1,27 @@
 'use client'
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo, useState, Fragment, createElement, type ReactNode } from 'react'
 import type { TenantKey } from '@/tenants/config'
 
 export type Lng = TenantKey
 type Messages = Record<string, string>
 
 // ---- Types de t() avec surcharge : t(key) ou t(key, values) ----
+// Note: t() returns string when no \n, ReactNode otherwise - typed as string for compatibility
 type TValues = Record<string, unknown>
-type TFunction = {
+export type TFunction = {
   (key: string): string
   (key: string, values: TValues): string
+}
+
+/**
+ * Converts \n in a string to <br /> elements for JSX rendering
+ */
+function nl2jsx(text: string): ReactNode {
+  if (!text.includes('\n')) return text
+  const parts = text.split('\n')
+  return parts.map((line, i) =>
+    createElement(Fragment, { key: i }, line, i < parts.length - 1 && createElement('br'))
+  )
 }
 
 // ---- Contexte ----
@@ -64,8 +76,7 @@ export function I18nProvider({
   const t: TFunction = useMemo(() => {
     const dict = messages || {}
 
-    // Implémentation avec surcharge réelle
-    const translate = ((key: string, values?: TValues) => {
+    const getRaw = (key: string, values?: TValues): string => {
       const template = dict[key]
 
       // En développement, on crash si la clé n'existe pas
@@ -81,6 +92,10 @@ export function I18nProvider({
         return formatICU(template, values)
       }
       return template
+    }
+
+    const translate = ((key: string, values?: TValues) => {
+      return nl2jsx(getRaw(key, values))
     }) as TFunction
 
     return translate
