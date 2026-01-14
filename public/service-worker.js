@@ -1,6 +1,6 @@
 // /public/service-worker.js
 
-const CACHE_NAME = 'outerpedia-cache-v8.6.2';
+const CACHE_NAME = 'outerpedia-cache-v8.6.3';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -36,6 +36,11 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+
+  // Ignore external domains (Cloudflare, etc.)
+  if (url.origin !== self.location.origin) {
+    return;
+  }
 
   if (url.pathname.startsWith('/_next/') || url.pathname.startsWith('/api/')) {
     return;
