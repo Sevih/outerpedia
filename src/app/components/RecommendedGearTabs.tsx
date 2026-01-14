@@ -270,24 +270,24 @@ export default function RecommendedGearTabs({
       )}
       <div className="rounded-xl border border-zinc-700/60 bg-zinc-900/40 p-5">
         {/* ---- Disposition 3 colonnes comme ta capture ---- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Weapons */}
-          <div>
+          <div className="flex flex-col items-center">
             <h3 className="text-xl font-semibold text-zinc-100 text-center mb-3">
               {t("weapons", { defaultValue: "Weapons" })}
             </h3>
-            <div className={`grid gap-3 justify-items-center ${weaponMinis.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+            <div className={`grid gap-x-3 gap-y-3 justify-items-center ${weaponMinis.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
               {weaponMinis.map((weapon, idx) => (
                 <WeaponMiniCard key={`${weapon.name}-${idx}`} weapon={weapon} />
               ))}
             </div>
           </div>
           {/* Accessories */}
-          <div>
+          <div className="flex flex-col items-center">
             <h3 className="text-xl font-semibold text-zinc-100 text-center mb-3">
               {t("accessories", { defaultValue: "Accessories" })}
             </h3>
-            <div className={`grid gap-3 justify-items-center ${amuletMinis.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+            <div className={`grid gap-x-3 gap-y-3 justify-items-center ${amuletMinis.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
               {amuletMinis.map((amulet, idx) => (
                 <AmuletMiniCard key={`${amulet.name}-${idx}`} amulet={amulet} />
               ))}
@@ -325,7 +325,7 @@ export default function RecommendedGearTabs({
               <h4 className="text-lg font-semibold text-zinc-100 text-center mb-2">
                 {t("talisman", { defaultValue: "Talismans" })}
               </h4>
-              <div className="flex flex-col items-center gap-6">
+              <div className={`grid gap-x-1 gap-y-3 justify-items-center ${talismanMinis.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
                 {talismanMinis.map((talisman, idx) => (
                   <TalismanMiniCard key={`${talisman.name}-${idx}`} talisman={talisman} />
                 ))}
