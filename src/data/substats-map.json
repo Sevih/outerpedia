@@ -1420,6 +1420,251 @@
       ]
     }
   },
+  "core-fusion-lisha": {
+    "Attack": {
+      "weaponSub": [
+        {
+          "name": "Thumping Odyssey",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Gorgon's Vanity [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Attack"
+      ]
+    },
+    "Critical Strike": {
+      "weaponSub": [
+        {
+          "name": "Thumping Odyssey",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Gorgon's Vanity [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Critical Strike"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Thumping Odyssey",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Gorgon's Vanity [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Pen combos": {
+      "weaponSub": [
+        {
+          "name": "Thumping Odyssey",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Spirit of Unification",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Queen of Prism",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Gorgon's Vanity [Mage]",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration",
+        "Attack",
+        "Penetration",
+        "Critical Strike",
+        "Penetration",
+        "Augmentation",
+        "Penetration",
+        "Speed"
+      ]
+    },
+    "Pen": {
+      "weaponSub": [
+        {
+          "name": "Thumping Odyssey",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Memento Mori",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "CHD",
+        "SPD",
+        "ACC"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    }
+  },
   "core-fusion-veronica": {
     "Speed": {
       "weaponSub": [

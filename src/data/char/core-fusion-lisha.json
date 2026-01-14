@@ -390,13 +390,13 @@
   "role": null,
   "skill_priority": {
     "First": {
-      "prio": 0
+      "prio": 3
     },
     "Second": {
-      "prio": 0
+      "prio": 2
     },
     "Ultimate": {
-      "prio": 0
+      "prio": 1
     }
   },
   "fusionType": "core-fusion",

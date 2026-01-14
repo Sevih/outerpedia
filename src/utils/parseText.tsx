@@ -9,6 +9,7 @@ import AmuletInlineTag from '@/app/components/AmuletInlineTag'
 import TalismanInlineTag from '@/app/components/TalismanInlineTag'
 import ItemInlineDisplay from '@/app/components/ItemInline'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
+import EeInlineTag from '@/app/components/EeInlineTag'
 import type { BuffName, DebuffName } from '@/types/effect-names'
 
 /**
@@ -18,6 +19,7 @@ import type { BuffName, DebuffName } from '@/types/effect-names'
  * {C/ClassName}   -> classe
  * {E/Element}     -> élément
  * {P/CharacterName} -> personnage (CharacterLinkCard)
+ * {EE/EEName}     -> exclusive equipment (texte pour l'instant)
  * {I-W/WeaponName}  -> arme (weapon)
  * {I-A/AmuletName}  -> amulette
  * {I-T/TalismanName} -> talisman
@@ -41,8 +43,8 @@ function pushTextWithLineBreaks(
 
 
 export default function parseText(text: string): React.ReactNode[] {
-  // capture le type complet (B|D|C|E|P|I-W|I-A|I-T|I-I) puis le payload jusqu'à la }
-  const regex = /\{((?:[BDCEP])|I-(?:W|A|T|I))\/([^}]+)\}/g
+  // capture le type complet (B|D|C|E|P|EE|I-W|I-A|I-T|I-I) puis le payload jusqu'à la }
+  const regex = /\{((?:[BDCEP])|EE|I-(?:W|A|T|I))\/([^}]+)\}/g
 
   const parts: React.ReactNode[] = []
   let lastIndex = 0
@@ -92,6 +94,8 @@ export default function parseText(text: string): React.ReactNode[] {
           type="debuff"
         />
       )
+    } else if (type === 'EE') {
+      parts.push(<EeInlineTag key={`ee-${index}-${name}`} name={name} />)
     } else {
       // fallback (ne devrait pas arriver)
       parts.push(full)

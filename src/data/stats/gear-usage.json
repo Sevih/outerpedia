@@ -3,7 +3,7 @@
     "name": "Speed Set",
     "type": "Set",
     "class": null,
-    "count": 69,
+    "count": 70,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -17,6 +17,7 @@
       "Caren",
       "Charlotte",
       "Christina",
+      "Core Fusion Lisha",
       "Core Fusion Veronica",
       "Dahlia",
       "Demiurge Astei",
@@ -148,7 +149,7 @@
     "name": "Penetration Set",
     "type": "Set",
     "class": null,
-    "count": 22,
+    "count": 23,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -156,6 +157,7 @@
       "Beth",
       "Bryn",
       "Caren",
+      "Core Fusion Lisha",
       "Demiurge Astei",
       "Demiurge Luna",
       "Francesca",
@@ -178,13 +180,14 @@
     "name": "Critical Strike Set",
     "type": "Set",
     "class": null,
-    "count": 20,
+    "count": 21,
     "characters": [
       "Aer",
       "Ais Wallenstein",
       "Ame",
       "Beth",
       "Bryn",
+      "Core Fusion Lisha",
       "Demiurge Astei",
       "Demiurge Luna",
       "Edelweiss",
@@ -277,11 +280,12 @@
     "name": "Thumping Odyssey",
     "type": "Weapon",
     "class": "Mage",
-    "count": 14,
+    "count": 15,
     "characters": [
       "Ame",
       "Bell Cranel",
       "Bryn",
+      "Core Fusion Lisha",
       "Demiurge Astei",
       "Demiurge Luna",
       "Fortuna",
@@ -354,6 +358,25 @@
       "Stella",
       "Tamara",
       "Valentine"
+    ]
+  },
+  {
+    "name": "Spirit of Unification",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 11,
+    "characters": [
+      "Ame",
+      "Bell Cranel",
+      "Bryn",
+      "Core Fusion Lisha",
+      "Demiurge Astei",
+      "Demiurge Luna",
+      "Fortuna",
+      "Laplace",
+      "Maxwell",
+      "Regina",
+      "Roxie"
     ]
   },
   {
@@ -430,20 +453,19 @@
     ]
   },
   {
-    "name": "Spirit of Unification",
-    "type": "Amulet",
-    "class": "Mage",
-    "count": 10,
+    "name": "Augmentation Set",
+    "type": "Set",
+    "class": null,
+    "count": 9,
     "characters": [
-      "Ame",
       "Bell Cranel",
       "Bryn",
-      "Demiurge Astei",
-      "Demiurge Luna",
-      "Fortuna",
-      "Laplace",
-      "Maxwell",
-      "Regina",
+      "Core Fusion Lisha",
+      "Delta",
+      "Demiurge Vlada",
+      "Epsilon",
+      "Kanon",
+      "Notia",
       "Roxie"
     ]
   },
@@ -479,22 +501,6 @@
       "Nella",
       "Saeran",
       "Viella"
-    ]
-  },
-  {
-    "name": "Augmentation Set",
-    "type": "Set",
-    "class": null,
-    "count": 8,
-    "characters": [
-      "Bell Cranel",
-      "Bryn",
-      "Delta",
-      "Demiurge Vlada",
-      "Epsilon",
-      "Kanon",
-      "Notia",
-      "Roxie"
     ]
   },
   {
@@ -670,6 +676,18 @@
     ]
   },
   {
+    "name": "Attack Set",
+    "type": "Set",
+    "class": null,
+    "count": 4,
+    "characters": [
+      "Bell Cranel",
+      "Core Fusion Lisha",
+      "Mystic Sage Ame",
+      "Vlada"
+    ]
+  },
+  {
     "name": "Barrage of Truth",
     "type": "Weapon",
     "class": "Ranger",
@@ -718,14 +736,15 @@
     ]
   },
   {
-    "name": "Attack Set",
-    "type": "Set",
-    "class": null,
-    "count": 3,
+    "name": "Queen of Prism",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 4,
     "characters": [
-      "Bell Cranel",
-      "Mystic Sage Ame",
-      "Vlada"
+      "Bryn",
+      "Core Fusion Lisha",
+      "Demiurge Luna",
+      "Fortuna"
     ]
   },
   {
@@ -806,14 +825,24 @@
     ]
   },
   {
-    "name": "Queen of Prism",
+    "name": "Memento Mori",
     "type": "Amulet",
     "class": "Mage",
     "count": 3,
     "characters": [
-      "Bryn",
-      "Demiurge Luna",
-      "Fortuna"
+      "Bell Cranel",
+      "Core Fusion Lisha",
+      "Laplace"
+    ]
+  },
+  {
+    "name": "Briareos's Ambition [Mage]",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 2,
+    "characters": [
+      "Core Fusion Lisha",
+      "Demiurge Luna"
     ]
   },
   {
@@ -887,6 +916,16 @@
     ]
   },
   {
+    "name": "Gorgon's Vanity [Mage]",
+    "type": "Amulet",
+    "class": "Mage",
+    "count": 2,
+    "characters": [
+      "Core Fusion Lisha",
+      "Fortuna"
+    ]
+  },
+  {
     "name": "Gorgon's Wrath [Defender]",
     "type": "Weapon",
     "class": "Defender",
@@ -917,16 +956,6 @@
     ]
   },
   {
-    "name": "Memento Mori",
-    "type": "Amulet",
-    "class": "Mage",
-    "count": 2,
-    "characters": [
-      "Bell Cranel",
-      "Laplace"
-    ]
-  },
-  {
     "name": "Accuracy Set",
     "type": "Set",
     "class": null,
@@ -942,15 +971,6 @@
     "count": 1,
     "characters": [
       "Demiurge Delta"
-    ]
-  },
-  {
-    "name": "Briareos's Ambition [Mage]",
-    "type": "Amulet",
-    "class": "Mage",
-    "count": 1,
-    "characters": [
-      "Demiurge Luna"
     ]
   },
   {
@@ -987,15 +1007,6 @@
     "count": 1,
     "characters": [
       "Rhona"
-    ]
-  },
-  {
-    "name": "Gorgon's Vanity [Mage]",
-    "type": "Amulet",
-    "class": "Mage",
-    "count": 1,
-    "characters": [
-      "Fortuna"
     ]
   },
   {

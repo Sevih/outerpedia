@@ -15,6 +15,7 @@ import rawStats from '@/data/stats.json' assert { type: 'json' }
 import { TenantKey, getAvailableLanguages } from "@/tenants/config"
 import { l } from "@/lib/localize"
 import Image from "next/image"
+import parseText from "@/utils/parseText"
 
 type GearReference = { name: string; mainStat: string; usage?: string }
 type SubstatPriority = {
@@ -275,7 +276,7 @@ export default function RecommendedGearTabs({
             <h3 className="text-xl font-semibold text-zinc-100 text-center mb-3">
               {t("weapons", { defaultValue: "Weapons" })}
             </h3>
-            <div className="flex flex-col items-center gap-6">
+            <div className={`grid gap-3 justify-items-center ${weaponMinis.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
               {weaponMinis.map((weapon, idx) => (
                 <WeaponMiniCard key={`${weapon.name}-${idx}`} weapon={weapon} />
               ))}
@@ -286,7 +287,7 @@ export default function RecommendedGearTabs({
             <h3 className="text-xl font-semibold text-zinc-100 text-center mb-3">
               {t("accessories", { defaultValue: "Accessories" })}
             </h3>
-            <div className="flex flex-col items-center gap-6">
+            <div className={`grid gap-3 justify-items-center ${amuletMinis.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
               {amuletMinis.map((amulet, idx) => (
                 <AmuletMiniCard key={`${amulet.name}-${idx}`} amulet={amulet} />
               ))}
@@ -353,6 +354,12 @@ export default function RecommendedGearTabs({
                   const label = idx >= 0 ? line.slice(0, idx).trim() : ""
                   const rest = idx >= 0 ? line.slice(idx + 1).trim() : line.trim()
                   const entries = extractCharmRatings(rest)
+
+                  // Si la ligne contient des inline tags {.../...}, utiliser parseText
+                  const hasInlineTags = /\{[A-Z-]+\/[^}]+\}/.test(line)
+                  if (hasInlineTags) {
+                    return <p key={i}>{parseText(line)}</p>
+                  }
 
                   if (entries.length === 0) return <p key={i}>{line}</p>
 
