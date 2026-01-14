@@ -8,9 +8,9 @@ import abbrevData from '@/data/abbrev.json';
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l, lRec } from '@/lib/localize'
 import { getAvailableLanguages } from '@/tenants/config'
+import type { Localized } from '@/types/common'
 
-
-type AbbrevEntry = string | { en: string; jp?: string; kr?: string };
+type AbbrevEntry = string | Localized;
 const abbrev = abbrevData as Record<string, AbbrevEntry>;
 // Alias possibles
 

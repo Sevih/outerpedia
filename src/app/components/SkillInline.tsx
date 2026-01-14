@@ -7,8 +7,9 @@ import { toKebabCase } from "@/utils/formatText"
 import abbrevData from '@/data/abbrev.json'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l, lRec,lEnhancement } from '@/lib/localize'
+import type { Localized } from '@/types/common'
 
-type AbbrevEntry = string | { en: string; jp?: string; kr?: string }
+type AbbrevEntry = string | Localized
 const abbrev = abbrevData as Record<string, AbbrevEntry>
 
 type Props = {

@@ -62,13 +62,13 @@
       },
       "type": "SKT_SECOND",
       "description": {
-        "en": "Attacks all enemies.\\n\\nInflicts <color=#28d9ed>Burn</color> on all enemies for <color=#28d9ed>2 turns</color>.\\n\\nDamage dealt to targets with <color=#28d9ed>Burn</color> is increased.",
-        "kr": "적 전체를 공격합니다.\\n\\n적 전체에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다.\\n\\n<color=#28d9ed>화상</color>을 보유한 대상에 대한 피해량이 증가합니다.",
-        "jp": "敵全体を攻撃する。\\n\\n敵全体に<color=#28d9ed>2ターン</color>の間<color=#28d9ed>火傷</color>を付与する。\\n\\n<color=#28d9ed>火傷</color>を保有する対象への与ダメージが増加する。",
-        "zh": "攻击全体敌人。\\n\\n对所有敌人施加<color=#28d9ed>2回合</color>的<color=#28d9ed>灼烧</color>。\\n\\n对持有<color=#28d9ed>灼烧</color>的目标造成的伤害增加。"
+        "en": "Attacks all enemies.\\n\\nInflicts <color=#28d9ed>Burn</color> on all enemies for <color=#28d9ed>3 turns</color>,\\nand additionally inflicts <color=#28d9ed>Burn</color> for <color=#28d9ed>3 turns</color> on targets without <color=#28d9ed>Buffs</color>. (Ignores Immunity, cannot be dispelled)\\n\\nDamage dealt to targets with <color=#28d9ed>Burn</color> is increased.",
+        "kr": "적 전체를 공격합니다.\\n\\n적 전체에게 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>화상</color>을 부여하고\\n<color=#28d9ed>강화 효과</color>가 없는 대상에게 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>화상</color>을 추가로 부여합니다. (면역 무시, 해제 불가)\\n\\n<color=#28d9ed>화상</color>을 보유한 대상에 대한 피해량이 증가합니다.",
+        "jp": "敵全体を攻撃する。\\n\\n敵全体に<color=#28d9ed>3ターン</color>の間<color=#28d9ed>火傷</color>を付与し、\\n<color=#28d9ed>強化効果</color>を持たない対象には<color=#28d9ed>3ターン</color>の間、追加で<color=#28d9ed>火傷</color>を付与する。(免疫無視、解除不可)\\n\\n<color=#28d9ed>火傷</color>を保有する対象への与ダメージが増加する。",
+        "zh": "攻击全体敌人。\\n\\n对所有敌人施加<color=#28d9ed>3回合</color>的<color=#28d9ed>灼烧</color>,\\n并对没有<color=#28d9ed>强化效果</color>的目标额外施加<color=#28d9ed>3回合</color>的<color=#28d9ed>灼烧</color>。(无视免疫,不可解除)\\n\\n对持有<color=#28d9ed>灼烧</color>的目标造成的伤害增加。"
       },
       "icon": "Skill_Second_4014006",
-      "debuff":["BT_DOT_BURN"]
+      "debuff":["BT_DOT_BURN","BT_DOT_BURN_IR"]
     },
     {
       "name": {
@@ -79,14 +79,15 @@
       },
       "type": "SKT_ULTIMATE",
       "description": {
-        "en": "Attacks all enemies.\\n\\nInflicts <color=#28d9ed>Burn</color> for <color=#28d9ed>3 turns</color> on targets without <color=#28d9ed>Buffs</color>.\\n\\nDamage dealt to targets with <color=#28d9ed>Burn</color> is increased.",
-        "kr": "적 전체를 공격합니다.\\n\\n<color=#28d9ed>강화 효과</color>가 없는 대상에게 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다.\\n\\n<color=#28d9ed>화상</color>을 보유한 대상에 대한 피해량이 증가합니다.",
-        "jp": "敵全体を攻撃する。\\n\\n<color=#28d9ed>強化効果</color>を持たない対象に、<color=#28d9ed>3ターン</color>の間<color=#28d9ed>火傷</color>を付与する。\\n\\n<color=#28d9ed>火傷</color>を保有する対象への与ダメージが増加する。",
-        "zh": "攻击全体敌人。\\n\\n对没有<color=#28d9ed>强化效果</color>的目标施加<color=#28d9ed>3回合</color>的<color=#28d9ed>灼烧</color>。\\n\\n对持有<color=#28d9ed>灼烧</color>的目标造成的伤害增加。"
+        "en": "Before attacking, reduces the duration of <color=#28d9ed>Buffs</color> on all enemies by <color=#28d9ed>1 turn</color>, then attacks all enemies.\\n\\nInflicts <color=#28d9ed>Burn</color> for <color=#28d9ed>3 turns</color> on targets without <color=#28d9ed>Buffs</color>. (Ignores Immunity, cannot be dispelled)\\n\\nDamage dealt to targets with <color=#28d9ed>Burn</color> is increased.",
+        "kr": "공격 전 적 전체의 <color=#28d9ed>강화 효과</color> 지속 시간을 <color=#28d9ed>1턴</color> 감소시키고, 적 전체를 공격합니다.\\n\\n<color=#28d9ed>강화 효과</color>가 없는 대상에게 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다. (면역 무시, 해제 불가)\\n\\n<color=#28d9ed>화상</color>을 보유한 대상에 대한 피해량이 증가합니다.",
+        "jp": "攻撃前に敵全体の<color=#28d9ed>強化効果</color>の持続時間を<color=#28d9ed>1ターン</color>減少させ、その後敵全体を攻撃する。\\n\\n<color=#28d9ed>強化効果</color>を持たない対象に、<color=#28d9ed>3ターン</color>の間<color=#28d9ed>火傷</color>を付与する。(免疫無視、解除不可)\\n\\n<color=#28d9ed>火傷</color>を保有する対象への与ダメージが増加する。",
+        "zh": "攻击前使所有敌人的<color=#28d9ed>强化效果</color>持续时间减少<color=#28d9ed>1回合</color>,随后攻击全体敌人。\\n\\n对没有<color=#28d9ed>强化效果</color>的目标施加<color=#28d9ed>3回合</color>的<color=#28d9ed>灼烧</color>。(无视免疫,不可解除)\\n\\n对持有<color=#28d9ed>灼烧</color>的目标造成的伤害增加。"
       },
       "icon": "Skill_Ultimate_4014006",
       "debuff": [
-        "BT_DOT_BURN"
+        "BT_EXTEND_BUFF",
+        "BT_DOT_BURN_IR"
       ]
     },
     {
@@ -117,15 +118,16 @@
       },
       "type": "SKT_MONSTER_1",
       "description": {
-        "en": "(Passive)\\nIf the caster does not have <color=#28d9ed>Freeze</color>, damage taken is reduced by <color=#28d9ed>100%</color>.\\n\\nAt the end of the turn, removes <color=#28d9ed>1</color> <color=#28d9ed>Debuff</color>.\\n\\nWhen hit, the Action Gauge increases by <color=#28d9ed>10%</color>.",
-        "kr": "(패시브 효과)\\n<color=#28d9ed>빙결</color> 효과가 없는 상태라면 받는 피해가 <color=#28d9ed>100%</color> 감소합니다.\\n\\n턴 종료 시 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>1개</color> 해제합니다.\\n\\n피격 시 행동 게이지가 <color=#28d9ed>10%</color> 증가합니다.",
-        "jp": "(パッシブ効果)\\n<color=#28d9ed>凍結</color>状態でない場合、受けるダメージが<color=#28d9ed>100%</color>減少する。\\n\\nターン終了時、<color=#28d9ed>弱体効果</color>を<color=#28d9ed>1個</color>解除する。\\n\\n被弾時、行動ゲージが<color=#28d9ed>10%</color>増加する。",
-        "zh": "(被动效果)\\n若自身未处于<color=#28d9ed>冰冻</color>状态,受到的伤害减少<color=#28d9ed>100%</color>。\\n\\n每回合结束时,解除<color=#28d9ed>1个</color><color=#28d9ed>弱化效果</color>。\\n\\n受到攻击时,行动条提升<color=#28d9ed>10%</color>。"
+        "en": "(Passive)\\nIf the caster does not have <color=#28d9ed>Freeze</color>, damage taken is reduced by <color=#28d9ed>200%</color>.\\n\\nAt the start of each turn, removes <color=#28d9ed>1</color> <color=#28d9ed>Debuff</color>.\\nIf the caster is <color=#28d9ed>Frozen</color> at the start of the turn, the duration of <color=#28d9ed>Debuffs</color> is reduced by <color=#28d9ed>1 turn</color>.\\n\\nWhen hit, the Action Gauge increases by <color=#28d9ed>25%</color>.\\nDamage dealt by the caster's <color=#28d9ed>Burn</color> is increased by <color=#28d9ed>50%</color>.",
+        "kr": "(패시브 효과)\\n<color=#28d9ed>빙결</color> 효과가 없는 상태라면 받는 피해가 <color=#28d9ed>200%</color> 감소합니다.\\n\\n턴 시작 시 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>1개</color> 해제하며\\n턴 시작 시 자신이 <color=#28d9ed>빙결</color> 상태라면 <color=#28d9ed>약화 효과</color>의 지속 시간을 <color=#28d9ed>1턴</color> 감소시킵니다.\\n\\n피격 시 행동 게이지가 <color=#28d9ed>25%</color> 증가합니다.\\n자신이 입히는 <color=#28d9ed>화상</color>의 피해가 <color=#28d9ed>50%</color> 증가합니다.",
+        "jp": "(パッシブ効果)\\n<color=#28d9ed>凍結</color>状態でない場合、受けるダメージが<color=#28d9ed>200%</color>減少する。\\n\\nターン開始時、<color=#28d9ed>弱体効果</color>を<color=#28d9ed>1個</color>解除する。\\nターン開始時に自身が<color=#28d9ed>凍結</color>状態の場合、<color=#28d9ed>弱体効果</color>の持続時間を<color=#28d9ed>1ターン</color>減少させる。\\n\\n被弾時、行動ゲージが<color=#28d9ed>25%</color>増加する。\\n自身が付与する<color=#28d9ed>火傷</color>のダメージが<color=#28d9ed>50%</color>増加する。",
+        "zh": "(被动效果)\\n若自身未处于<color=#28d9ed>冰冻</color>状态,受到的伤害减少<color=#28d9ed>200%</color>。\\n\\n每回合开始时,解除<color=#28d9ed>1个</color><color=#28d9ed>弱化效果</color>。\\n若回合开始时自身处于<color=#28d9ed>冰冻</color>状态,<color=#28d9ed>弱化效果</color>的持续时间减少<color=#28d9ed>1回合</color>。\\n\\n受到攻击时,行动条提升<color=#28d9ed>25%</color>。\\n自身施加的<color=#28d9ed>灼烧</color>伤害增加<color=#28d9ed>50%</color>。"
       },
       "icon": "MT_Passive_1_Fire",
       "buff": [
         "BT_REMOVE_DEBUFF",
-        "BT_ACTION_GAUGE"
+        "BT_ACTION_GAUGE",
+        "BT_EXTEND_DEBUFF"
       ]
     },
     {

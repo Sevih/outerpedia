@@ -12,9 +12,10 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 import { l, lRec } from '@/lib/localize'
 import slugToCharRaw from '@/data/_SlugToChar.json'
 import type { SlugToCharMap, SlugCharEntry } from '@/types/pull'
+import type { Localized } from '@/types/common'
 const slugToChar = slugToCharRaw as SlugToCharMap
 
-type AbbrevEntry = string | { en: string; jp?: string; kr?: string };
+type AbbrevEntry = string | Localized;
 const abbrev = abbrevData as Record<string, AbbrevEntry>;
 
 function getMileageCost(kind: Kind): number {

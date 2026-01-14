@@ -66,7 +66,7 @@
 
 
 ### Technical Features
-- Lightning Fast - Static generation with ISR, CDN optimized
+- Lightning Fast - Static generation with ISR, Cloudflare CDN with global edge network
 - Fully Multilingual - Type-safe i18n support (EN, JP, KR, ZH) with subdomain-based routing
 - PWA Support - Install as an app with offline capabilities
 - Modern UI - Tailwind CSS 4.1 with custom animations (Framer Motion 12.18)
@@ -264,12 +264,15 @@ Outerpedia is optimized for search engines with:
 
 ## Performance Optimizations
 
+- **Cloudflare CDN**: Global content delivery network for reduced latency worldwide
 - **ISR (Incremental Static Regeneration)**: For guides and character pages
 - **React Server Components**: Reduced client-side JavaScript
 - **Image Optimization**: WebP/AVIF formats
 - **Code Splitting**: Automatic route-based splitting
 - **Service Worker**: PWA support with offline capabilities
 - **Font Loading**: Optimized Google Fonts with `display: swap`
+- **HTTP/3 & Early Hints**: Modern protocol optimizations
+- **Brotli Compression**: Automatic content compression via CDN
 
 ---
 

@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
 
 /**
  * Schema for Guild Raid data structure
@@ -67,16 +68,51 @@ export const GeasReferenceSchema = z.string().regex(
 
 /**
  * LangMap for localized strings (matches @/lib/localize LangMap type)
+ * Built dynamically from available languages in tenant config
  */
+const buildLocalizedObjectSchema = () => {
+  const languages = getAvailableLanguages()
+  const shape: Record<string, z.ZodTypeAny> = {}
+  for (const lang of languages) {
+    shape[lang] = lang === 'en' ? z.string() : z.string().optional()
+  }
+  return z.object(shape as { en: z.ZodString } & Record<Exclude<TenantKey, 'en'>, z.ZodOptional<z.ZodString>>)
+}
+
 export const LangMapSchema = z.union([
   z.string(),
-  z.object({
-    en: z.string(),
-    jp: z.string().optional(),
-    kr: z.string().optional(),
-    zh: z.string().optional(),
-  }),
+  buildLocalizedObjectSchema(),
 ])
+
+/**
+ * Helper to build localized suffix fields (field_jp, field_kr, field_zh)
+ * Used with spread after defining the base field separately
+ * Example: { notes: z.array(...), ...buildLocalizedSuffixFields('notes', z.array(...)) }
+ */
+const buildLocalizedSuffixFields = <T extends z.ZodTypeAny>(fieldName: string, schema: T) => {
+  const languages = getAvailableLanguages()
+  const shape: Record<string, z.ZodOptional<T>> = {}
+  for (const lang of languages) {
+    if (lang !== 'en') {
+      shape[`${fieldName}_${lang}`] = schema.optional()
+    }
+  }
+  return shape
+}
+
+/**
+ * Helper to build all localized field schemas (field + field_jp, field_kr, field_zh)
+ * All fields are optional - used when the base field doesn't need validation
+ */
+const buildLocalizedFields = <T extends z.ZodTypeAny>(fieldName: string, schema: T) => {
+  const languages = getAvailableLanguages()
+  const shape: Record<string, z.ZodOptional<T>> = {}
+  for (const lang of languages) {
+    const key = lang === 'en' ? fieldName : `${fieldName}_${lang}`
+    shape[key] = schema.optional()
+  }
+  return shape
+}
 
 // ============================================================================
 // CHARACTER & TEAM SCHEMAS
@@ -139,10 +175,7 @@ export const BossIdSchema = z.string().regex(
 export const Phase1BossSchema = z.object({
   bossId: BossIdSchema,
   geas: GeasConfigSchema,
-  notes: z.array(z.string()).optional(),
-  notes_jp: z.array(z.string()).optional(),
-  notes_kr: z.array(z.string()).optional(),
-  notes_zh: z.array(z.string()).optional(),
+  ...buildLocalizedFields('notes', z.array(z.string())),
   recommended: z.array(CharacterRecommendationSchema).optional(),
   team: TeamCompositionSchema.optional(),
   video: VideoSchema.optional(),
@@ -201,10 +234,7 @@ export const Phase2TeamSchema = z.object({
   label: z.string().min(1, 'Team strategy label is required'),
   icon: z.string().min(1, 'Team icon filename is required (e.g., "earth.webp")'),
   setup: TeamCompositionSchema,
-  note: z.array(NoteEntrySchema).optional(),
-  note_jp: z.array(NoteEntrySchema).optional(),
-  note_kr: z.array(NoteEntrySchema).optional(),
-  note_zh: z.array(NoteEntrySchema).optional(),
+  ...buildLocalizedFields('note', z.array(NoteEntrySchema)),
   'geas-active': ActiveGeasSchema.optional(),
   video: VideoSchema.optional(),
 })
@@ -215,9 +245,7 @@ export const Phase2TeamSchema = z.object({
 export const Phase2Schema = z.object({
   id: z.string().min(1, 'Boss ID is required (e.g., "440400379-B-1")'),
   overview: z.array(z.string()).min(1, 'Phase 2 must have at least one overview note'),
-  overview_jp: z.array(z.string()).optional(),
-  overview_kr: z.array(z.string()).optional(),
-  overview_zh: z.array(z.string()).optional(),
+  ...buildLocalizedSuffixFields('overview', z.array(z.string())),
   teams: z.record(z.string(), Phase2TeamSchema).refine(
     (teams) => Object.keys(teams).length > 0,
     'Phase 2 must have at least one team strategy'

@@ -1,8 +1,8 @@
 import type { TenantKey } from '@/tenants/config'
+import type { Localized } from '@/types/common'
 
-
-// --- types/helpers localisation (comme montré précédemment) ---
-type LString = string | { en: string; jp?: string; kr?: string; zh?: string };
+// Type pour les chaînes localisées (string simple ou objet Localized)
+type LString = string | Localized;
 const resolveL = (s: LString, key: TenantKey) =>
   typeof s === 'string' ? s : (s[key] ?? s.en);
 const toLines = (v: string | string[]) =>
@@ -26,6 +26,25 @@ type RawEntry = {
 
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
+  {
+    date: "2025-01-14",
+    title: {
+      en: "Three Cries (Post-nerf)",
+      jp: "三つの鳴き声（ナーフ後）",
+      kr: "세 울음소리 (너프 후)",
+      zh: "三声啼哭（削弱后）",
+    } as LString,
+    type: "update",
+    url: "/guides/adventure/S4-1-10",
+    content: [
+      {
+        en: "Three Cries boss guide updated with post-nerf skill data.",
+        jp: "三つの鳴き声ボスガイドがナーフ後のスキルデータで更新されました。",
+        kr: "세 울음소리 보스 가이드가 너프 후 스킬 데이터로 업데이트되었습니다.",
+        zh: "三声啼哭Boss指南已更新削弱后的技能数据。",
+      } as LString,
+    ],
+  },
   {
     date: "2025-12-31",
     title: {

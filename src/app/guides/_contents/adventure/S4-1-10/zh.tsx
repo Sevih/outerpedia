@@ -27,9 +27,9 @@ export default function NellaGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
                                 "在对Boss释放之前尽可能积累更多的连锁点数",
-                                "在其S2/S3攻击前准备好增益效果以防止{D/BT_DOT_BURN_IR}",
+                                "在其S2/S3攻击前准备好增益效果以防止{D/BT_DOT_BURN}",
                                 "在发动所有连锁攻击并打破Boss前先施加{D/BT_FREEZE}",
-                                "调整队伍速度，使所有单位在开始连锁攻击前达到100%优先级。这可以防止Boss尽管从受击中获得行动条仍能插入行动（每次受击获得25%）",
+                                "调整队伍速度，使所有单位在开始连锁攻击前达到100%优先级。这可以防止Boss尽管从受击中获得行动条仍能插入行动（每次受击获得20%）",
                                 "{I-T/Sage's Charm} +10如果由连锁中的最后一个单位装备，可使连锁攻击伤害增加50%",
                                 "避免使用{E/Light}和{E/Dark}单位以防止Boss清除自身弱化效果"
                             ]} />
