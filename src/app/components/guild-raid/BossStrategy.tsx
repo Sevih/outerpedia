@@ -23,7 +23,7 @@ function resolveNotes(boss: Phase1Boss, lang: string): string[] | undefined {
       return localizedNotes
     }
   }
-  return boss.notes
+  return (boss as { notes?: string[] }).notes
 }
 
 /**

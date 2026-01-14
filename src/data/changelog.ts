@@ -26,6 +26,25 @@ type RawEntry = {
 
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
+    {
+    date: "2026-01-14",
+    title: {
+      en: "Dignity of the Golden Kingdom",
+      jp: "黄金なる王国の威容",
+      kr: "황금 왕국의 위용",
+      zh: "黄金王国的威严",
+    } as LString,
+    type: "update",
+    url:"/guides/guild-raid/dignity-of-the-golden-kingdom",
+    content: [
+      {
+        en: "Dignity of the Golden Kingdom Guild Raid Guide updated for January 2026 version.",
+        jp: "黄金なる王国の威容 ギルドレイドガイドが2026年1月版にアップデートされました。",
+        kr: "황금 왕국의 위용 길드 레이드 가이드가 2026년 1월 버전으로 업데이트되었습니다.",
+        zh: "黄金王国的威严 公会战指南已更新至2026年1月版本。",
+      } as LString,
+    ],
+  },
   {
     date: "2025-01-14",
     title: {

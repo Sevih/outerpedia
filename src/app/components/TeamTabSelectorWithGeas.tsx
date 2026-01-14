@@ -26,7 +26,7 @@ function resolveNote(team: Phase2Team, lang: string): NoteEntry[] | undefined {
       return localizedNote
     }
   }
-  return team.note
+  return (team as { note?: NoteEntry[] }).note
 }
 
 
