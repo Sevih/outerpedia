@@ -375,5 +375,13 @@
     },
     "start": "2026-01-11",
     "end": "2026-03-31"
+  },
+  {
+    "code": "WELCOMELETTJOMI",
+    "description": {
+       "Special Recruitment Ticket (Event)": "10"
+    },
+    "start": "2026-01-15",
+    "end": "2026-03-31"
   }
 ] 
