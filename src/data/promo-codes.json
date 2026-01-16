@@ -383,5 +383,13 @@
     },
     "start": "2026-01-15",
     "end": "2026-03-31"
+  },
+  {
+    "code": "HAPPY2026JAN",
+    "description": {
+       "Special Recruitment Ticket (Event)": "10"
+    },
+    "start": "2026-01-15",
+    "end": "2026-03-31"
   }
 ] 
