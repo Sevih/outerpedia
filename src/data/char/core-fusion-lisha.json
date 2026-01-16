@@ -385,9 +385,9 @@
     }
   },
   "Chain_Type": "Join",
-  "rank": null,
-  "rank_pvp": null,
-  "role": null,
+  "rank": "B",
+  "rank_pvp": "C",
+  "role": "dps",
   "skill_priority": {
     "First": {
       "prio": 3
