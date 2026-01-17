@@ -2023,6 +2023,18 @@
     "icon": "TI_Costume_Clothes_2000012_03"
   },
   {
+  "name": "Office Lady Valentine",
+  "name_jp": "OL バレンタイン",
+  "name_kr": "OL 발렌타인",
+  "name_zh": "OL瓦伦塔茵",
+    "rarity": "epic",
+    "description": "This is a costume that can be worn by Valentine.",
+    "description_jp": "【バレンタイン】のスキンです。\nスキンは【仲間】→【スキン】で装備でき\n【スキン】ボタンは仲間のスキンがある場合のみ表示されます。",
+    "description_kr": "[발렌타인]이 착용할 수 있는 코스튬입니다.",
+    "description_zh": "【瓦伦塔茵】可穿戴的皮肤。",
+    "icon": "TI_Costume_Clothes_2000012_02"
+  },
+  {
     "name": "Battle Maid Tamara",
     "name_jp": "戦闘メイド タマラ",
     "name_kr": "전투 메이드 타마라",

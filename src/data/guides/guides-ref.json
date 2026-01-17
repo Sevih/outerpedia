@@ -1917,5 +1917,24 @@
     "last_updated": "2026-01-13",
     "author": "XuRenChao",
     "second_image": "S4-1-10-2"
+  },
+  "roadmap-2026": {
+    "category": "general-guides",
+    "title": {
+      "en": "2026 Roadmap",
+      "jp": "2026年ロードマップ",
+      "kr": "2026 로드맵",
+      "zh": "2026路线图"
+    },
+    "description": {
+      "en": "Summary of the January 2026 Offline Meeting: new characters, Core Fusion plans, RTA, Dimension Singularity and more.",
+      "jp": "2026年1月オフラインミーティングのまとめ：新キャラクター、コアフュージョン計画、RTA、次元特異点など。",
+      "kr": "2026년 1월 오프라인 미팅 요약: 신규 캐릭터, 코어 퓨전 계획, RTA, 차원 특이점 등.",
+      "zh": "2026年1月线下会议总结：新角色、核心融合计划、RTA、维度奇点等。"
+    },
+    "icon": "roadmap-2026",
+    "second_image": "roadmap-2026",
+    "last_updated": "2026-01-17",
+    "author": "NewWorld"
   }
 }

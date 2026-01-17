@@ -391,5 +391,15 @@
     },
     "start": "2026-01-15",
     "end": "2026-03-31"
+  },
+  {
+    "code": "OLVALENTINE",
+    "description": {
+       "Office Lady Valentine": "1",
+       "Call of the Demiurge": "100",
+       "Free Ether": "500"
+    },
+    "start": "2026-01-17",
+    "end": "2026-05-31"
   }
 ] 

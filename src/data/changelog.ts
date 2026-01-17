@@ -26,6 +26,25 @@ type RawEntry = {
 
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
+  {
+    date: "2026-01-17",
+    title: {
+      en: "2026 Roadmap Guide",
+      jp: "2026年ロードマップガイド",
+      kr: "2026 로드맵 가이드",
+      zh: "2026路线图指南",
+    } as LString,
+    type: "feature",
+    url: "/guides/general-guides/roadmap-2026",
+    content: [
+      {
+        en: "Summary of the January 2026 Offline Meeting: development direction, quarterly roadmap, new characters (Monad Iota, Premine, Eris, Gnosis Domine), Core Fusion plans, RTA, Dimension Singularity, and coupon code.",
+        jp: "2026年1月オフラインミーティングの概要：開発方針、四半期ロードマップ、新キャラクター（モナド・イオタ、プレミン、エリス、グノーシス・ドミネ）、コア融合計画、RTA、次元特異点、クーポンコード。",
+        kr: "2026년 1월 오프라인 미팅 요약: 개발 방향, 분기별 로드맵, 신규 캐릭터(모나드 이오타, 프레민, 에리스, 그노시스 도미네), 코어 융합 계획, RTA, 차원 특이점, 쿠폰 코드.",
+        zh: "2026年1月线下会议摘要：开发方向、季度路线图、新角色（单子·伊奥塔、普雷明、厄里斯、诺希斯·多米涅）、核心融合计划、RTA、次元奇点、优惠码。",
+      } as LString,
+    ],
+  },
     {
     date: "2026-01-14",
     title: {
