@@ -61,7 +61,7 @@ export const LABELS = {
     rtaRules: { en: "RTA Rules", jp: "RTAルール", kr: "RTA 규칙", zh: "RTA规则" },
     validUntil: { en: "Valid until", jp: "有効期限:", kr: "유효 기간:", zh: "有效期至" },
     translationBy: { en: "Translation by @NewWorld", jp: "翻訳: @NewWorld", kr: "번역: @NewWorld", zh: "翻译: @NewWorld" },
-    source: { en: "Source: Outerplane Offline Meeting (January 17, 2026)", jp: "出典: アウタープレイン オフラインミーティング (2026年1月17日)", kr: "출처: 아우터플레인 오프라인 미팅 (2026년 1월 17일)", zh: "来源: Outerplane 线下会议 (2026年1月17日)" },
+    source: { en: "Source: Outerplane Offline Meeting (January 17, 2026)", jp: "出典: アウタープレイン オフラインミーティング (2026年1月17日)", kr: "출처: 아우터플레인 오프라인 미팅 (2026년 1월 17일)", zh: "来源: Outerplane 线下见面会 (2026年1月17日)" },
     coreFusionDesc: {
         en: "Starting from Lisha in January, 1 per month. Goal: About 10 or more Core Fusion Characters per year.",
         jp: "1月のリシャを皮切りに、毎月1キャラ。目標：年間10キャラ以上のコア融合。",
@@ -127,7 +127,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         coreFusions: ["Lisha"],
         balance: [
             { en: "Demiurge Astei", jp: "デミウルゴス・アステイ", kr: "데미우르고스 아스테이", zh: "创世之神 奥斯黛" },
-            { en: "Removing Accuracy and Evasion stats", jp: "命中率と回避率の削除", kr: "명중률과 회피율 스탯 제거", zh: "移除命中和闪避能力值" }
+            { en: "Removing Accuracy and Evasion stats", jp: "命中率と回避率の削除", kr: "명중률과 회피율 스탯 제거", zh: "移除能力值的命中和闪避" }
         ],
         content: [
             { en: "Season 4 Chapter 1", jp: "シーズン4 チャプター1", kr: "시즌 4 챕터 1", zh: "第4季第1章" },
@@ -152,7 +152,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
     },
     {
         month: { en: "March", jp: "3月", kr: "3월", zh: "3月" },
-        newCharacters: [{ en: "Classic 3★ Eris", jp: "クラシック3★ エリス", kr: "클래식 3★ 에리스", zh: "经典3★艾瑞斯" }],
+        newCharacters: [{ en: "Classic 3★ Eris", jp: "クラシック3★ エリス", kr: "클래식 3★ 에리스", zh: "普池3★厄莉斯" }],
         coreFusions: ["Notia"],
         balance: [{ en: "Demiurge Vlada", jp: "デミウルゴス・ヴラダ", kr: "데미우르고스 블라다", zh: "创世之神 布拉达" }],
         content: [
@@ -186,7 +186,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         balance: [{ en: "Dark Type characters (No demiurge or limited)", jp: "闇属性キャラ（デミウルゴス・限定除く）", kr: "어둠 속성 캐릭터 (데미우르고스/한정 제외)", zh: "暗属性角色（除创世神/限定）" }],
         content: [
             { en: "Event Story", jp: "イベントストーリー", kr: "이벤트 스토리", zh: "活动剧情" },
-            { en: "RTA Official Release", jp: "RTA正式リリース", kr: "RTA 정식 출시", zh: "RTA正式发布" },
+            { en: "RTA Official Release", jp: "RTA正式リリース", kr: "RTA 정식 출시", zh: "RTA正式上线" },
             { en: "Premium Gacha Effects enhancing", jp: "プレミアムガチャ演出強化", kr: "프리미엄 가챠 연출 강화", zh: "创世神抽卡特效改进" },
             { en: "User Suggestions", jp: "ユーザー要望", kr: "유저 건의사항", zh: "用户建议" }
         ],
@@ -194,7 +194,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
     },
     {
         month: { en: "June", jp: "6月", kr: "6월", zh: "6月" },
-        newCharacters: [{ en: "Classic 3★ Character", jp: "クラシック3★キャラクター", kr: "클래식 3★ 캐릭터", zh: "经典3★角色" }],
+        newCharacters: [{ en: "Classic 3★ Character", jp: "クラシック3★キャラクター", kr: "클래식 3★ 캐릭터", zh: "普池3★角色" }],
         coreFusions: ["Rin"],
         content: [
             { en: "Story Mode Very Hard Difficulty", jp: "ストーリーモード超高難易度", kr: "스토리 모드 매우 어려움 난이도", zh: "剧情模式超难难度" },
