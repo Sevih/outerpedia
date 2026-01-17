@@ -71,9 +71,9 @@ export const LABELS = {
     quarterlyOverview: { en: "Quarterly Overview", jp: "四半期概要", kr: "분기별 개요", zh: "季度概览" },
     janMar: { en: "Jan - Mar", jp: "1月〜3月", kr: "1월 - 3월", zh: "1月-3月" },
     aprJul: { en: "Apr - Jul", jp: "4月〜7月", kr: "4월 - 7월", zh: "4月-7月" },
-    cfSnowNotia: { en: "CF Snow & Notia", jp: "CF スノウ & ノティア", kr: "CF 스노우 & 노티아", zh: "CF 雪 & 诺蒂亚" },
+    cfSnowNotia: { en: "CF Snow & Notia", jp: "CF スノウ & ノティア", kr: "CF 스노우 & 노티아", zh: "核心融合 雪诺 & 诺缇亚" },
     dimensionSingularity: { en: "Dimension Singularity", jp: "次元特異点", kr: "차원 특이점", zh: "次元奇点" },
-    rtaOverview: { en: "RTA Overview", jp: "RTA概要", kr: "RTA 개요", zh: "RTA概览" },
+    rtaOverview: { en: "RTA Overview", jp: "RTA概要", kr: "RTA 개요", zh: "RTA(实时对战)概览" },
 } as const;
 
 // Data
@@ -84,34 +84,34 @@ export const ROADMAP_QUARTERS: RoadmapQuarter[] = [
         items: [
             { en: "Content cleanup", jp: "コンテンツ整理", kr: "콘텐츠 정리", zh: "内容清理" },
             { en: "Season 4 Chapter 1-2", jp: "シーズン4 チャプター1-2", kr: "시즌 4 챕터 1-2", zh: "第4季第1-2章" },
-            { en: "RTA Beta Test", jp: "RTAベータテスト", kr: "RTA 베타 테스트", zh: "RTA测试版" },
+            { en: "RTA Beta Test", jp: "RTAベータテスト", kr: "RTA 베타 테스트", zh: "RTA B测" },
             { en: "GUI Renewal", jp: "GUI刷新", kr: "GUI 개편", zh: "GUI更新" }
         ]
     },
     {
         quarter: "Q2",
-        title: { en: "3rd Anniversary, Contents clean up & better up, New PVE, Subculture taste", jp: "3周年、コンテンツ整理＆改善、新PVE、サブカルテイスト強化", kr: "3주년, 콘텐츠 정리 및 개선, 신규 PVE, 서브컬처 테이스트 강화", zh: "3周年、内容清理与优化、新PVE、亚文化风格增强" },
+        title: { en: "3rd Anniversary, Contents clean up & better up, New PVE, Subculture taste", jp: "3周年、コンテンツ整理＆改善、新PVE、サブカルテイスト強化", kr: "3주년, 콘텐츠 정리 및 개선, 신규 PVE, 서브컬처 테이스트 강화", zh: "3周年、内容清理与优化、新PVE、亚文化风味" },
         items: [
             { en: "3rd Anniversary", jp: "3周年", kr: "3주년", zh: "3周年" },
             { en: "Contents clean up & better up", jp: "コンテンツ整理＆改善", kr: "콘텐츠 정리 및 개선", zh: "内容清理与优化" },
             { en: "Growth expansion", jp: "成長拡張", kr: "성장 확장", zh: "成长扩展" },
             { en: "New PVE content", jp: "新PVEコンテンツ", kr: "신규 PVE 콘텐츠", zh: "新PVE内容" },
-            { en: "Enhancing Subculture taste", jp: "サブカルテイスト強化", kr: "서브컬처 테이스트 강화", zh: "亚文化风格增强" }
+            { en: "Enhancing Subculture taste", jp: "サブカルテイスト強化", kr: "서브컬처 테이스트 강화", zh: "亚文化风味提升" }
         ]
     },
     {
         quarter: "Q3",
-        title: { en: "OP 2.0, Story Renewal, Steam Release", jp: "OP 2.0、ストーリーリニューアル、Steam配信", kr: "OP 2.0, 스토리 리뉴얼, Steam 출시", zh: "OP 2.0、剧情更新、Steam发布" },
+        title: { en: "OP 2.0, Story Renewal, Steam Release", jp: "OP 2.0、ストーリーリニューアル、Steam配信", kr: "OP 2.0, 스토리 리뉴얼, Steam 출시", zh: "OP 2.0、故事更新、上线Steam" },
         items: [
             { en: "Outerplane 2.0", jp: "アウタープレイン 2.0", kr: "아우터플레인 2.0", zh: "Outerplane 2.0" },
             { en: "Story Renewal", jp: "ストーリーリニューアル", kr: "스토리 리뉴얼", zh: "剧情更新" },
-            { en: "Visual fixes", jp: "ビジュアル修正", kr: "비주얼 수정", zh: "视觉修复" },
-            { en: "Steam Release", jp: "Steam配信", kr: "Steam 출시", zh: "Steam发布" }
+            { en: "Visual fixes", jp: "ビジュアル修正", kr: "비주얼 수정", zh: "视觉图像修复" },
+            { en: "Steam Release", jp: "Steam配信", kr: "Steam 출시", zh: "上线Steam" }
         ]
     },
     {
         quarter: "Q4",
-        title: { en: "3.5 Anniversary, New Story Expansion", jp: "3.5周年、新ストーリー拡張", kr: "3.5주년, 신규 스토리 확장", zh: "3.5周年、新剧情扩展" },
+        title: { en: "3.5 Anniversary, New Story Expansion", jp: "3.5周年、新ストーリー拡張", kr: "3.5주년, 신규 스토리 확장", zh: "3.5周年、主线新剧情扩展" },
         items: [
             { en: "3.5 Anniversary", jp: "3.5周年", kr: "3.5주년", zh: "3.5周年" },
             { en: "New Story Expansion", jp: "新ストーリー拡張", kr: "신규 스토리 확장", zh: "新剧情扩展" },
@@ -123,11 +123,11 @@ export const ROADMAP_QUARTERS: RoadmapQuarter[] = [
 export const MONTHLY_UPDATES: MonthlyUpdate[] = [
     {
         month: { en: "January", jp: "1月", kr: "1월", zh: "1月" },
-        newCharacters: [{ en: "Monad Iota (New Demiurge)", jp: "モナド・イオタ（新デミウルゴス）", kr: "모나드 이오타 (신규 데미우르고스)", zh: "莫纳德·伊奥塔（新神匠）" }],
+        newCharacters: [{ en: "Monad Iota (New Demiurge)", jp: "モナド・イオタ（新デミウルゴス）", kr: "모나드 이오타 (신규 데미우르고스)", zh: "单子·佑妲（新创世之神）" }],
         coreFusions: ["Lisha"],
         balance: [
-            { en: "Demiurge Astei", jp: "デミウルゴス・アステイ", kr: "데미우르고스 아스테이", zh: "神匠阿斯泰" },
-            { en: "Removing Accuracy and Evasion stats", jp: "命中率と回避率の削除", kr: "명중률과 회피율 스탯 제거", zh: "移除命中率和闪避属性" }
+            { en: "Demiurge Astei", jp: "デミウルゴス・アステイ", kr: "데미우르고스 아스테이", zh: "创世之神 奥斯黛" },
+            { en: "Removing Accuracy and Evasion stats", jp: "命中率と回避率の削除", kr: "명중률과 회피율 스탯 제거", zh: "移除命中和闪避能力值" }
         ],
         content: [
             { en: "Season 4 Chapter 1", jp: "シーズン4 チャプター1", kr: "시즌 4 챕터 1", zh: "第4季第1章" },
@@ -137,9 +137,9 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
     },
     {
         month: { en: "February", jp: "2月", kr: "2월", zh: "2月" },
-        newCharacters: [{ en: "Classic 3★ Premine (Freemine)", jp: "クラシック3★ プリマイン（フリーマイン）", kr: "클래식 3★ 프리마인 (프리마인)", zh: "经典3★普雷迈恩（自由矿）" }],
+        newCharacters: [{ en: "Classic 3★ Premine (Freemine)", jp: "クラシック3★ プリマイン（フリーマイン）", kr: "클래식 3★ 프리마인 (프리마인)", zh: "普池3★普莉玛茵（弗莉玛茵）" }],
         coreFusions: ["Snow"],
-        balance: [{ en: "Demiurge Drakan", jp: "デミウルゴス・ドラカン", kr: "데미우르고스 드라칸", zh: "神匠德拉坎" }],
+        balance: [{ en: "Demiurge Drakan", jp: "デミウルゴス・ドラカン", kr: "데미우르고스 드라칸", zh: "创世之神 德雷坎" }],
         content: [
             { en: "Season 4 Chapter 2", jp: "シーズン4 チャプター2", kr: "시즌 4 챕터 2", zh: "第4季第2章" },
             { en: "Event Story: Chocolate, Sweet Temptation!", jp: "イベントストーリー: チョコレート、甘い誘惑!", kr: "이벤트 스토리: 초콜릿, 달콤한 유혹!", zh: "活动剧情：巧克力，甜蜜诱惑！" },
@@ -152,12 +152,12 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
     },
     {
         month: { en: "March", jp: "3月", kr: "3월", zh: "3月" },
-        newCharacters: [{ en: "Classic 3★ Eris", jp: "クラシック3★ エリス", kr: "클래식 3★ 에리스", zh: "经典3★厄里斯" }],
+        newCharacters: [{ en: "Classic 3★ Eris", jp: "クラシック3★ エリス", kr: "클래식 3★ 에리스", zh: "经典3★艾瑞斯" }],
         coreFusions: ["Notia"],
-        balance: [{ en: "Demiurge Vlada", jp: "デミウルゴス・ヴラダ", kr: "데미우르고스 블라다", zh: "神匠弗拉达" }],
+        balance: [{ en: "Demiurge Vlada", jp: "デミウルゴス・ヴラダ", kr: "데미우르고스 블라다", zh: "创世之神 布拉达" }],
         content: [
-            { en: "Event Story: Class E Health Teacher", jp: "イベントストーリー: E組の保健教師", kr: "이벤트 스토리: E반 보건 선생님", zh: "活动剧情：E班保健老师" },
-            { en: "RTA Beta Test", jp: "RTAベータテスト", kr: "RTA 베타 테스트", zh: "RTA测试版" },
+            { en: "Event Story: Class E Health Teacher", jp: "イベントストーリー: E組の保健教師", kr: "이벤트 스토리: E반 보건 선생님", zh: "活动剧情：E班的保健老师" },
+            { en: "RTA Beta Test", jp: "RTAベータテスト", kr: "RTA 베타 테스트", zh: "RTA B测" },
             { en: "Contents Fix 2", jp: "コンテンツ修正2", kr: "콘텐츠 수정 2", zh: "内容修复2" },
             { en: "GUI Renewal", jp: "GUI刷新", kr: "GUI 개편", zh: "GUI更新" },
             { en: "User Suggestions", jp: "ユーザー要望", kr: "유저 건의사항", zh: "用户建议" }
@@ -166,9 +166,9 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
     },
     {
         month: { en: "April", jp: "4月", kr: "4월", zh: "4月" },
-        newCharacters: [{ en: "Gnosis Domine (New Demiurge)", jp: "グノーシス・ドミネ（新デミウルゴス）", kr: "그노시스 도미네 (신규 데미우르고스)", zh: "诺西斯·多米内（新神匠）" }],
+        newCharacters: [{ en: "Gnosis Domine (New Demiurge)", jp: "グノーシス・ドミネ（新デミウルゴス）", kr: "그노시스 도미네 (신규 데미우르고스)", zh: "诺西斯·多蜜涅（新创世神）" }],
         coreFusions: ["Eternal"],
-        balance: [{ en: "Light Type characters (No demiurge or limited)", jp: "光属性キャラ（デミウルゴス・限定除く）", kr: "빛 속성 캐릭터 (데미우르고스/한정 제외)", zh: "光属性角色（非神匠/限定）" }],
+        balance: [{ en: "Light Type characters (No demiurge or limited)", jp: "光属性キャラ（デミウルゴス・限定除く）", kr: "빛 속성 캐릭터 (데미우르고스/한정 제외)", zh: "光属性角色（除创世神/限定）" }],
         content: [
             { en: "Event Story: Promised Land", jp: "イベントストーリー: 約束の地", kr: "이벤트 스토리: 약속의 땅", zh: "活动剧情：应许之地" },
             { en: "New PVE Content: Dimension Singularity", jp: "新PVEコンテンツ: 次元特異点", kr: "신규 PVE 콘텐츠: 차원 특이점", zh: "新PVE内容：次元奇点" },
@@ -183,11 +183,11 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         month: { en: "May", jp: "5月", kr: "5월", zh: "5月" },
         newCharacters: [{ en: "Anniversary Limited Character", jp: "周年限定キャラクター", kr: "주년 한정 캐릭터", zh: "周年限定角色" }],
         coreFusions: ["Epsilon"],
-        balance: [{ en: "Dark Type characters (No demiurge or limited)", jp: "闇属性キャラ（デミウルゴス・限定除く）", kr: "어둠 속성 캐릭터 (데미우르고스/한정 제외)", zh: "暗属性角色（非神匠/限定）" }],
+        balance: [{ en: "Dark Type characters (No demiurge or limited)", jp: "闇属性キャラ（デミウルゴス・限定除く）", kr: "어둠 속성 캐릭터 (데미우르고스/한정 제외)", zh: "暗属性角色（除创世神/限定）" }],
         content: [
             { en: "Event Story", jp: "イベントストーリー", kr: "이벤트 스토리", zh: "活动剧情" },
             { en: "RTA Official Release", jp: "RTA正式リリース", kr: "RTA 정식 출시", zh: "RTA正式发布" },
-            { en: "Premium Gacha Effects enhancing", jp: "プレミアムガチャ演出強化", kr: "프리미엄 가챠 연출 강화", zh: "高级抽卡特效增强" },
+            { en: "Premium Gacha Effects enhancing", jp: "プレミアムガチャ演出強化", kr: "프리미엄 가챠 연출 강화", zh: "创世神抽卡特效改进" },
             { en: "User Suggestions", jp: "ユーザー要望", kr: "유저 건의사항", zh: "用户建议" }
         ],
         highlights: [{ en: "3rd Anniversary", jp: "3周年", kr: "3주년", zh: "3周年" }]
@@ -208,12 +208,12 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         month: { en: "July", jp: "7月", kr: "7월", zh: "7月" },
         newCharacters: [
             { en: "Seasonal Limited Character", jp: "シーズン限定キャラクター", kr: "시즌 한정 캐릭터", zh: "季节限定角色" },
-            { en: "Classic 3★ Character", jp: "クラシック3★キャラクター", kr: "클래식 3★ 캐릭터", zh: "经典3★角色" }
+            { en: "Classic 3★ Character", jp: "クラシック3★キャラクター", kr: "클래식 3★ 캐릭터", zh: "普池3★角色" }
         ],
         content: [
             { en: "Story Renewal", jp: "ストーリーリニューアル", kr: "스토리 리뉴얼", zh: "剧情更新" },
             { en: "Steam Launching", jp: "Steam配信開始", kr: "Steam 출시", zh: "Steam上线" },
-            { en: "Event Story: Automaton of the Horizon", jp: "イベントストーリー: 地平線のオートマトン", kr: "이벤트 스토리: 지평선의 오토마톤", zh: "活动剧情：地平线的自动机" }
+            { en: "Event Story: Automaton of the Horizon", jp: "イベントストーリー: 地平線のオートマトン", kr: "이벤트 스토리: 지평선의 오토마톤", zh: "活动剧情：地平线的自动人偶" }
         ],
         highlights: [{ en: "Steam Release", jp: "Steam配信", kr: "Steam 출시", zh: "Steam发布" }]
     }
@@ -228,7 +228,7 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
         bgColor: "bg-purple-900/20",
         textColor: "text-purple-300",
         pve: { en: "Various buff to Dark Type allies, Exclusive Hard CC (Stun, Freeze, etc.), Combination attack and Penetration buff to Dark Type Allies", jp: "闇属性味方への各種バフ、専用ハードCC（スタン、凍結など）、闘属性味方への連携攻撃と貫通バフ", kr: "어둠 속성 아군에게 다양한 버프, 전용 하드 CC(기절, 빙결 등), 어둠 속성 아군에게 연계 공격 및 관통 버프", zh: "对暗属性队友的各种增益，专属硬控（眩晕、冰冻等），对暗属性队友的连携攻击和穿透增益" },
-        pvp: { en: "Strengthen Dark Type Allies and weaken enemies using Exclusive Hard CC, The fastest char along with Demiurge Vlada", jp: "専用ハードCCで闇属性味方を強化し敵を弱体化、デミウルゴス・ヴラダと並ぶ最速キャラ", kr: "전용 하드 CC로 어둠 속성 아군 강화 및 적 약화, 데미우르고스 블라다와 함께 가장 빠른 캐릭터", zh: "使用专属硬控强化暗属性队友并削弱敌人，与神匠弗拉达并列最快角色" },
+        pvp: { en: "Strengthen Dark Type Allies and weaken enemies using Exclusive Hard CC, The fastest char along with Demiurge Vlada", jp: "専用ハードCCで闇属性味方を強化し敵を弱体化、デミウルゴス・ヴラダと並ぶ最速キャラ", kr: "전용 하드 CC로 어둠 속성 아군 강화 및 적 약화, 데미우르고스 블라다와 함께 가장 빠른 캐릭터", zh: "使用专属硬控强化暗属性队友并削弱敌人，与创世之神布拉达并列最快的角色" },
         images: ["demi-iota.webp", "demi-iota-2.webp"]
     },
     {
@@ -238,7 +238,7 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
         borderColor: "border-blue-700/50",
         bgColor: "bg-blue-900/20",
         textColor: "text-blue-300",
-        pve: { en: "Immunity & Shield, Combination attack and Shielded allies dmg increase, When hit applies debuff \"Freeze\" and turn gauge increase", jp: "免疫＆シールド、連携攻撃とシールド味方のダメージ増加、被弾時「凍結」デバフ付与とターンゲージ増加", kr: "면역 & 쉴드, 연계 공격 및 쉴드 아군 데미지 증가, 피격 시 \"빙결\" 디버프 부여 및 턴 게이지 증가", zh: "免疫与护盾，连携攻击和护盾队友伤害增加，受击时施加\"冰冻\"减益并增加行动条" },
+        pve: { en: "Immunity & Shield, Combination attack and Shielded allies dmg increase, When hit applies debuff \"Freeze\" and turn gauge increase", jp: "免疫＆シールド、連携攻撃とシールド味方のダメージ増加、被弾時「凍結」デバフ付与とターンゲージ増加", kr: "면역 & 쉴드, 연계 공격 및 쉴드 아군 데미지 증가, 피격 시 \"빙결\" 디버프 부여 및 턴 게이지 증가", zh: "免疫与护盾，连携攻击和使拥有护盾的队友伤害增加，受击时施加\"冰冻\"减益并增加行动条" },
         pvp: { en: "Joker pick from When hit \"Freeze\" Debuff", jp: "被弾時「凍結」デバフによるジョーカーピック", kr: "피격 시 \"빙결\" 디버프로 조커 픽", zh: "受击时\"冰冻\"减益的万能选择" },
         images: ["premine.webp"]
     },
@@ -249,7 +249,7 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
         borderColor: "border-red-700/50",
         bgColor: "bg-red-900/20",
         textColor: "text-red-300",
-        pve: { en: "VS Irregular Monsters char, Many debuffs and debuff number count DMG increase, Fire Type Attacker allies buff", jp: "VS不規則モンスター特化、多数のデバフとデバフ数に応じたダメージ増加、火属性アタッカー味方へのバフ", kr: "VS 불규칙 몬스터 특화, 다수의 디버프 및 디버프 수에 따른 데미지 증가, 화 속성 공격수 아군 버프", zh: "对战不规则怪物特化，多重减益和减益数量伤害加成，火属性攻击者队友增益" },
+        pve: { en: "VS Irregular Monsters char, Many debuffs and debuff number count DMG increase, Fire Type Attacker allies buff", jp: "VS不規則モンスター特化、多数のデバフとデバフ数に応じたダメージ増加、火属性アタッカー味方へのバフ", kr: "VS 불규칙 몬스터 특화, 다수의 디버프 및 디버프 수에 따른 데미지 증가, 화 속성 공격수 아군 버프", zh: "对战异形怪特化角色，多重减益和靠减益数量叠加的伤害加成，火属性攻击型队友增益" },
         pvp: { en: "Counter Attack block debuff joker pick", jp: "反撃ブロックデバフによるジョーカーピック", kr: "반격 차단 디버프로 조커 픽", zh: "反击封锁减益的万能选择" },
         images: ["eris.webp"]
     },
@@ -262,7 +262,7 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
         textColor: "text-purple-300",
         pve: { en: "", jp: "", kr: "", zh: "" },
         pvp: { en: "", jp: "", kr: "", zh: "" },
-        note: { en: "New Demiurge coming in April", jp: "4月登場の新デミウルゴス", kr: "4월 출시 예정 신규 데미우르고스", zh: "4月推出的新神匠" },
+        note: { en: "New Demiurge coming in April", jp: "4月登場の新デミウルゴス", kr: "4월 출시 예정 신규 데미우르고스", zh: "4月推出的新创世神" },
         images: ["gnosis-domine.webp"]
     }
 ];
@@ -277,18 +277,18 @@ export const CORE_FUSION_CHARS: CoreFusionChar[] = [
 ];
 
 export const DIMENSION_SINGULARITY_FEATURES: LangMap[] = [
-    { en: "A singularity observed from the Monad Gate", jp: "モナドゲートから観測された特異点", kr: "모나드 게이트에서 관측된 특이점", zh: "从莫纳德之门观测到的奇点" },
-    { en: "3 days rotating Ranked Dungeon", jp: "3日ローテーションのランクダンジョン", kr: "3일 로테이션 랭크 던전", zh: "3天轮换排名地下城" },
-    { en: "Highest Difficulty, New Boss (Nornil)", jp: "最高難易度、新ボス（ノルニル）", kr: "최고 난이도, 신규 보스 (노르닐)", zh: "最高难度，新Boss（诺尼尔）" },
+    { en: "A singularity observed from the Monad Gate", jp: "モナドゲートから観測された特異点", kr: "모나드 게이트에서 관측된 특이점", zh: "从单子门观测到的奇点" },
+    { en: "3 days rotating Ranked Dungeon", jp: "3日ローテーションのランクダンジョン", kr: "3일 로테이션 랭크 던전", zh: "3天轮换的排位地堡" },
+    { en: "Highest Difficulty, New Boss (Nornil)", jp: "最高難易度、新ボス（ノルニル）", kr: "최고 난이도, 신규 보스 (노르닐)", zh: "最高难度，新Boss（诺妮尔）" },
     { en: "Growth cap max breakthrough ingredients", jp: "成長上限突破素材", kr: "성장 상한 돌파 재료", zh: "成长上限突破材料" },
     { en: "Expansion Gifts ingredients", jp: "拡張ギフト素材", kr: "확장 선물 재료", zh: "扩展礼物材料" },
-    { en: "New equipment growth ingredients farming available", jp: "新装備成長素材のファーミング可能", kr: "신규 장비 성장 재료 파밍 가능", zh: "可获取新装备成长材料" }
+    { en: "New equipment growth ingredients farming available", jp: "新装備成長素材のファーミング可能", kr: "신규 장비 성장 재료 파밍 가능", zh: "新装备成长材料开放获取" }
 ];
 
 export const TACTICS_LEAGUE_RULES: LangMap[] = [
     { en: "5 days a week", jp: "週5日", kr: "주 5일", zh: "每周5天" },
     { en: "All characters & Equipments are borrowed", jp: "全キャラ＆装備は借用", kr: "모든 캐릭터 & 장비 대여", zh: "所有角色和装备为借用" },
-    { en: "Growth cap to a certain point", jp: "成長上限が一定", kr: "성장 상한 고정", zh: "成长上限固定" },
+    { en: "Growth cap to a certain point", jp: "成長上限が一定", kr: "성장 상한 고정", zh: "成长上限为固定值" },
     { en: "Certain stats are set max caps", jp: "特定ステータスに上限設定", kr: "특정 스탯 상한 설정", zh: "特定属性设有上限" },
     { en: "Dupe character picks available", jp: "重複キャラピック可能", kr: "중복 캐릭터 픽 가능", zh: "可选择重复角色" }
 ];
@@ -302,14 +302,14 @@ export const MASTERS_LEAGUE_RULES: LangMap[] = [
 
 export const RTA_GENERAL_RULES: LangMap[] = [
     { en: "Set a leader before battle (Leader Character gets a buff)", jp: "バトル前にリーダーを設定（リーダーキャラにバフ）", kr: "전투 전 리더 설정 (리더 캐릭터 버프 획득)", zh: "战斗前设置队长（队长角色获得增益）" },
-    { en: "Global Ban & Penalty when more than 2 Demiurge & Limited characters are placed in the team", jp: "デミウルゴス＆限定キャラが2体以上でグローバルBAN＆ペナルティ", kr: "데미우르고스 & 한정 캐릭터 2명 이상 시 글로벌 밴 & 페널티", zh: "队伍中超过2名神匠和限定角色时受到全局禁止和惩罚" },
+    { en: "Global Ban & Penalty when more than 2 Demiurge & Limited characters are placed in the team", jp: "デミウルゴス＆限定キャラが2体以上でグローバルBAN＆ペナルティ", kr: "데미우르고스 & 한정 캐릭터 2명 이상 시 글로벌 밴 & 페널티", zh: "队伍中超过2名创世神和限定角色时受到全局禁选和惩罚" },
     { en: "Prizes for the league (All): Ether & Costumes", jp: "リーグ報酬（全員）: エーテル＆コスチューム", kr: "리그 보상 (전원): 에테르 & 코스튬", zh: "联赛奖励（全员）：以太和服装" },
-    { en: "Prizes for the league (Rank): Titles, Profile Border, Season Rank", jp: "リーグ報酬（ランク）: 称号、プロフィール枠、シーズンランク", kr: "리그 보상 (랭크): 칭호, 프로필 테두리, 시즌 랭크", zh: "联赛奖励（排名）：称号、头像框、赛季排名" }
+    { en: "Prizes for the league (Rank): Titles, Profile Border, Season Rank", jp: "リーグ報酬（ランク）: 称号、プロフィール枠、シーズンランク", kr: "리그 보상 (랭크): 칭호, 프로필 테두리, 시즌 랭크", zh: "联赛奖励（排位）：称号、头像框、赛季排名" }
 ];
 
 export const DEMIURGE_LIMITED_PLANS: { label: LangMap; text: LangMap }[] = [
     {
-        label: { en: "New Demiurge (Premium):", jp: "新デミウルゴス（プレミアム）:", kr: "신규 데미우르고스 (프리미엄):", zh: "新神匠（高级）：" },
+        label: { en: "New Demiurge (Premium):", jp: "新デミウルゴス（プレミアム）:", kr: "신규 데미우르고스 (프리미엄):", zh: "新创世之神：" },
         text: { en: "4 characters per year, One every 3 months", jp: "年4キャラ、3ヶ月に1体", kr: "연간 4캐릭터, 3개월마다 1명", zh: "每年4名角色，每3个月1名" }
     },
     {
@@ -317,20 +317,20 @@ export const DEMIURGE_LIMITED_PLANS: { label: LangMap; text: LangMap }[] = [
         text: { en: "2 Seasonal & 1 Anniversary → 3 per year", jp: "季節2体＋周年1体 → 年3体", kr: "시즌 2명 & 주년 1명 → 연간 3명", zh: "2名季节限定+1名周年限定→每年3名" }
     },
     {
-        label: { en: "Seasonal Chars Re-run:", jp: "季節キャラ復刻:", kr: "시즌 캐릭터 복각:", zh: "季节角色复刻：" },
+        label: { en: "Seasonal Chars BokGak:", jp: "季節キャラ復刻:", kr: "시즌 캐릭터 복각:", zh: "季限角色复刻：" },
         text: { en: "Before new Season Limited Char comes", jp: "新シーズン限定キャラ登場前", kr: "신규 시즌 한정 캐릭터 출시 전", zh: "新季节限定角色推出前" }
     },
     {
-        label: { en: "Fest. Limited (O. Nadja, G. Dahlia, G. Nella):", jp: "フェス限定（O.ナジャ、G.ダリア、G.ネラ）:", kr: "페스 한정 (O.나쟈, G.달리아, G.넬라):", zh: "节日限定（O.娜佳、G.大丽、G.妮拉）：" },
-        text: { en: "Anniversary & 0.5 Anniversary Re-run", jp: "周年＆0.5周年復刻", kr: "주년 & 0.5주년 복각", zh: "周年和半周年复刻" }
+        label: { en: "Fest. Limited (O. Nadja, G. Dahlia, G. Nella):", jp: "フェス限定（O.ナジャ、G.ダリア、G.ネラ）:", kr: "페스 한정 (O.나쟈, G.달리아, G.넬라):", zh: "Fes限定（奥米伽 纳吉娅、诺希斯 达利娅、诺希斯 内拉）：" },
+        text: { en: "Anniversary & 0.5 Anniversary BokGak", jp: "周年＆0.5周年復刻", kr: "주년 & 0.5주년 복각", zh: "周年和半周年复刻" }
     }
 ];
 
 export const COUPON_DATA = {
     code: "OLVALENTINE",
     rewards: [
-        { en: "OL Valentine skin", jp: "OLバレンタインスキン", kr: "OL 발렌타인 스킨", zh: "OL情人节皮肤" },
-        { en: "100 Demiurge Calls", jp: "デミウルゴス召喚100回", kr: "데미우르고스 소환 100회", zh: "100次神匠召唤" },
+        { en: "OL Valentine skin", jp: "OLバレンタインスキン", kr: "OL 발렌타인 스킨", zh: "OL瓦伦塔茵皮肤" },
+        { en: "100 Demiurge Calls", jp: "デミウルゴス召喚100回", kr: "데미우르고스 소환 100회", zh: "100迪米哥乌斯的召唤" },
         { en: "500 Ethers", jp: "エーテル500個", kr: "에테르 500개", zh: "500以太" }
     ] as LangMap[],
     expiry: { en: "May 31, 2026 11:59 KST", jp: "2026年5月31日 23:59 KST", kr: "2026년 5월 31일 오후 11:59 KST", zh: "2026年5月31日 23:59 KST" } as LangMap
@@ -339,7 +339,7 @@ export const COUPON_DATA = {
 export const DEVELOPMENT_DIRECTIONS: LangMap[] = [
     { en: "Play fatigue decrease", jp: "プレイ疲労の軽減", kr: "플레이 피로도 감소", zh: "减少游戏疲劳" },
     { en: "Long-term Play Persistence enhancing", jp: "長期プレイ継続性の強化", kr: "장기 플레이 지속성 강화", zh: "增强长期游戏持续性" },
-    { en: "Early Story and Visual fix", jp: "序盤ストーリーとビジュアルの修正", kr: "초반 스토리 및 비주얼 수정", zh: "修复早期剧情和视觉效果" },
+    { en: "Early Story and Visual fix", jp: "序盤ストーリーとビジュアルの修正", kr: "초반 스토리 및 비주얼 수정", zh: "修复早期剧情和视觉修正" },
     { en: "Subculture Taste Enhancing", jp: "サブカルテイスト強化", kr: "서브컬처 테이스트 강화", zh: "增强亚文化风格" },
     { en: "Platform Expanding for user experience supplementation", jp: "ユーザー体験補完のためのプラットフォーム拡張", kr: "사용자 경험 보완을 위한 플랫폼 확장", zh: "扩展平台以补充用户体验" }
 ];
