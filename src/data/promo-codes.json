@@ -401,5 +401,13 @@
     },
     "start": "2026-01-17",
     "end": "2026-05-31"
+  },
+  {
+    "code": "M9FORYOU ",
+    "description": {
+       "Call of the Demiurge (Event)": "100"
+    },
+    "start": "2026-01-18",
+    "end": "2026-05-31"
   }
 ] 
