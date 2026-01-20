@@ -37,9 +37,9 @@ export default function DeepSeaGuardianGuide() {
               <StageBasedTeamSelector teamData={DeepSeaGuardianTeams.january2026} defaultStage="Recommended Team" />
               <hr className="my-6 border-neutral-700" />
               <CombatFootage
-                videoId="gUftoMcz8ws"
-                title="심해 가디언 - 합동 챌린지 - 베리 하드"
-                author="Sevih"
+                videoId="pOZr8AVgIi8"
+                title="심해 가디언 - 합동 챌린지 - 베리 하드 (Auto) - by XuRenChao"
+                author="XuRenChao"
                 date="20/01/2026"
               />
             </>
