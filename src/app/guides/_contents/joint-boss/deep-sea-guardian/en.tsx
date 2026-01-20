@@ -8,7 +8,7 @@ import DeepSeaGuardianTeamsData from './DeepSeaGuardianJC.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
-import { recommendedCharactersJuly, recommendedCharactersMarch } from './recommendedCharacters'
+import { recommendedCharactersJan26, recommendedCharactersJuly, recommendedCharactersMarch } from './recommendedCharacters'
 
 const DeepSeaGuardianTeams = DeepSeaGuardianTeamsData as Record<string, TeamData>
 
@@ -17,8 +17,34 @@ export default function DeepSeaGuardianGuide() {
     <GuideTemplate
       title="Deep Sea Guardian Joint Challenge Guide"
       introduction="Joint Challenge boss. The boss gains {B/BT_INVINCIBLE} for 9 turns after using S3. Remove it with {D/BT_STEAL_BUFF} or {D/BT_REMOVE_BUFF}. Increased damage from {C/Striker}, reduced from AoE attacks. Enemies without buffs take {D/BT_FIXED_DAMAGE} at end of boss turn."
-      defaultVersion="july2025"
+      defaultVersion="january2026"
       versions={{
+        january2026: {
+          label: 'January 2026 Version',
+          content: (
+            <>
+              <BossDisplay bossKey='Deep Sea Guardian' modeKey='Joint Challenge' defaultBossId='4134065' />
+              <hr className="my-6 border-neutral-700" />
+              <TacticalTips
+                tips={[
+                  "Any character with {B/BT_INVINCIBLE} gains {B/BT_COOL_CHARGE} on their Ultimate.",
+                  "At turn end, deals 10% Max HP {D/BT_FIXED_DAMAGE} to enemies without buffs.",
+                ]}
+              />
+              <hr className="my-6 border-neutral-700" />
+              <RecommendedCharacterList entries={recommendedCharactersJan26} />
+              <hr className="my-6 border-neutral-700" />
+              <StageBasedTeamSelector teamData={DeepSeaGuardianTeams.january2026} defaultStage="Recommended Team" />
+              <hr className="my-6 border-neutral-700" />
+              <CombatFootage
+                videoId="ScFXrrOeVNk"
+                title="Deep Sea Guardian - Joint Challenge - Very Hard"
+                author="Sevih"
+                date="23/07/2025"
+              />
+            </>
+          ),
+        },
         july2025: {
           label: 'July 2025 Version',
           content: (
