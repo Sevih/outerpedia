@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-01-20",
+    title: {
+      en: "Deep Sea Guardian",
+      jp: "深海ガーディアン",
+      kr: "심해 가디언",
+      zh: "深海守护者",
+    } as LString,
+    type: "update",
+    url: "/guides/joint-boss/deep-sea-guardian",
+    content: [
+      {
+        en: "Deep Sea Guardian joint boss guide updated for January 2026 version.",
+        jp: "深海ガーディアン共同ボスガイドが2026年1月版にアップデートされました。",
+        kr: "심해 가디언 공동 보스 가이드가 2026년 1월 버전으로 업데이트되었습니다.",
+        zh: "深海守护者联合首领指南已更新至2026年1月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-01-17",
     title: {
       en: "2026 Roadmap Guide",

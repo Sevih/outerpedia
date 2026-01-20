@@ -8,7 +8,7 @@ import DeepSeaGuardianTeamsData from './DeepSeaGuardianJC.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
-import { recommendedCharactersJuly, recommendedCharactersMarch } from './recommendedCharacters'
+import { recommendedCharactersJan26, recommendedCharactersJuly, recommendedCharactersMarch } from './recommendedCharacters'
 
 const DeepSeaGuardianTeams = DeepSeaGuardianTeamsData as Record<string, TeamData>
 
@@ -17,8 +17,34 @@ export default function DeepSeaGuardianGuide() {
     <GuideTemplate
       title="深海守护者联合挑战攻略"
       introduction="联合挑战首领。首领使用S3后获得9回合{B/BT_INVINCIBLE}。使用{D/BT_STEAL_BUFF}或{D/BT_REMOVE_BUFF}解除。受到{C/Striker}伤害增加，AoE攻击减少。无增益的敌人在首领回合结束时受到{D/BT_FIXED_DAMAGE}。"
-      defaultVersion="july2025"
+      defaultVersion="january2026"
       versions={{
+        january2026: {
+          label: '2026年1月版本',
+          content: (
+            <>
+              <BossDisplay bossKey='Deep Sea Guardian' modeKey='Joint Challenge' defaultBossId='4134065' />
+              <hr className="my-6 border-neutral-700" />
+              <TacticalTips
+                tips={[
+                  "拥有{B/BT_INVINCIBLE}的角色其必杀技获得{B/BT_COOL_CHARGE}。",
+                  "回合结束时，对无增益的敌人造成最大生命值10%的{D/BT_FIXED_DAMAGE}。"
+                ]}
+              />
+              <hr className="my-6 border-neutral-700" />
+              <RecommendedCharacterList entries={recommendedCharactersJan26} />
+              <hr className="my-6 border-neutral-700" />
+              <StageBasedTeamSelector teamData={DeepSeaGuardianTeams.january2026} defaultStage="Recommended Team" />
+              <hr className="my-6 border-neutral-700" />
+              <CombatFootage
+                videoId="gUftoMcz8ws"
+                title="深海守护者 - 联合挑战 - 极难"
+                author="Sevih"
+                date="20/01/2026"
+              />
+            </>
+          ),
+        },
         july2025: {
           label: '2025年7月版本',
           content: (

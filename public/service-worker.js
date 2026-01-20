@@ -1,6 +1,6 @@
 // /public/service-worker.js
 
-const CACHE_NAME = 'outerpedia-cache-v8.6.14';
+const CACHE_NAME = 'outerpedia-cache-v8.6.15';
 const urlsToCache = [
   '/',
   '/manifest.json',

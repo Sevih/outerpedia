@@ -8,7 +8,7 @@ import DeepSeaGuardianTeamsData from './DeepSeaGuardianJC.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
-import { recommendedCharactersJuly, recommendedCharactersMarch } from './recommendedCharacters'
+import { recommendedCharactersJan26, recommendedCharactersJuly, recommendedCharactersMarch } from './recommendedCharacters'
 
 const DeepSeaGuardianTeams = DeepSeaGuardianTeamsData as Record<string, TeamData>
 
@@ -17,8 +17,34 @@ export default function DeepSeaGuardianGuide() {
     <GuideTemplate
       title="심해 가디언 합동 챌린지 가이드"
       introduction="합동 챌린지 보스. 보스는 S3 사용 후 9턴 동안 {B/BT_INVINCIBLE}을 획득합니다. {D/BT_STEAL_BUFF} 또는 {D/BT_REMOVE_BUFF}로 해제. {C/Striker}에게 받는 피해 증가, AoE 공격에게는 감소. 버프가 없는 적은 보스 턴 종료 시 {D/BT_FIXED_DAMAGE}를 받습니다."
-      defaultVersion="july2025"
+      defaultVersion="january2026"
       versions={{
+        january2026: {
+          label: '2026년 1월 버전',
+          content: (
+            <>
+              <BossDisplay bossKey='Deep Sea Guardian' modeKey='Joint Challenge' defaultBossId='4134065' />
+              <hr className="my-6 border-neutral-700" />
+              <TacticalTips
+                tips={[
+                  "{B/BT_INVINCIBLE}을 가진 캐릭터는 필살기에 {B/BT_COOL_CHARGE}를 획득.",
+                  "턴 종료 시, 버프가 없는 적에게 최대 HP 10%의 {D/BT_FIXED_DAMAGE}를 가함."
+                ]}
+              />
+              <hr className="my-6 border-neutral-700" />
+              <RecommendedCharacterList entries={recommendedCharactersJan26} />
+              <hr className="my-6 border-neutral-700" />
+              <StageBasedTeamSelector teamData={DeepSeaGuardianTeams.january2026} defaultStage="Recommended Team" />
+              <hr className="my-6 border-neutral-700" />
+              <CombatFootage
+                videoId="gUftoMcz8ws"
+                title="심해 가디언 - 합동 챌린지 - 베리 하드"
+                author="Sevih"
+                date="20/01/2026"
+              />
+            </>
+          ),
+        },
         july2025: {
           label: '2025년 7월 버전',
           content: (

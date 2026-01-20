@@ -8,7 +8,7 @@ import DeepSeaGuardianTeamsData from './DeepSeaGuardianJC.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
-import { recommendedCharactersJuly, recommendedCharactersMarch } from './recommendedCharacters'
+import { recommendedCharactersJan26, recommendedCharactersJuly, recommendedCharactersMarch } from './recommendedCharacters'
 
 const DeepSeaGuardianTeams = DeepSeaGuardianTeamsData as Record<string, TeamData>
 
@@ -17,8 +17,34 @@ export default function DeepSeaGuardianGuide() {
     <GuideTemplate
       title="深海ガーディアン 共同作戦ガイド"
       introduction="共同作戦ボス。ボスはS3使用後、9ターンの{B/BT_INVINCIBLE}を獲得します。{D/BT_STEAL_BUFF}または{D/BT_REMOVE_BUFF}で解除。{C/Striker}からのダメージ増加、AoE攻撃からは減少。バフのない敵はボスのターン終了時に{D/BT_FIXED_DAMAGE}を受けます。"
-      defaultVersion="july2025"
+      defaultVersion="january2026"
       versions={{
+        january2026: {
+          label: '2026年1月版',
+          content: (
+            <>
+              <BossDisplay bossKey='Deep Sea Guardian' modeKey='Joint Challenge' defaultBossId='4134065' />
+              <hr className="my-6 border-neutral-700" />
+              <TacticalTips
+                tips={[
+                  "{B/BT_INVINCIBLE}を持つキャラクターは必殺スキルの{B/BT_COOL_CHARGE}を獲得。",
+                  "ターン終了時、バフのない敵に最大HPの10%の{D/BT_FIXED_DAMAGE}を与える。"
+                ]}
+              />
+              <hr className="my-6 border-neutral-700" />
+              <RecommendedCharacterList entries={recommendedCharactersJan26} />
+              <hr className="my-6 border-neutral-700" />
+              <StageBasedTeamSelector teamData={DeepSeaGuardianTeams.january2026} defaultStage="Recommended Team" />
+              <hr className="my-6 border-neutral-700" />
+              <CombatFootage
+                videoId="gUftoMcz8ws"
+                title="深海ガーディアン - 共同作戦 - ベリーハード"
+                author="Sevih"
+                date="20/01/2026"
+              />
+            </>
+          ),
+        },
         july2025: {
           label: '2025年7月版',
           content: (
