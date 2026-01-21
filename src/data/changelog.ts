@@ -27,6 +27,36 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-01-21",
+    title: {
+      en: "Interface Improvements",
+      jp: "インターフェース改善",
+      kr: "인터페이스 개선",
+      zh: "界面改进",
+    } as LString,
+    type: "feature",
+    content: [
+      {
+        en: "Improved display of character cards across the site: tier lists, team recommendations, and guide pages now share a unified, cleaner look.",
+        jp: "サイト全体のキャラクターカード表示を改善：ティアリスト、チーム推奨、ガイドページで統一されたデザインになりました。",
+        kr: "사이트 전체의 캐릭터 카드 표시 개선: 티어 리스트, 팀 추천, 가이드 페이지가 통일된 디자인으로 변경되었습니다.",
+        zh: "改进了整个网站的角色卡片显示：tier榜、队伍推荐和指南页面现在采用统一、更简洁的外观。",
+      } as LString,
+      {
+        en: "Better mobile experience: team grids now display properly on small screens, and the \"Most Used Units\" page no longer has overlapping text.",
+        jp: "モバイル体験の向上：チームグリッドが小さい画面でも正しく表示され、「最も使用されるユニット」ページのテキストが重ならなくなりました。",
+        kr: "모바일 경험 개선: 팀 그리드가 작은 화면에서도 올바르게 표시되고, \"가장 많이 사용되는 유닛\" 페이지의 텍스트 겹침이 해결되었습니다.",
+        zh: "改善移动端体验：队伍网格现在在小屏幕上正常显示，「最常用单位」页面不再有文字重叠问题。",
+      } as LString,
+      {
+        en: "Homepage redesign: Discord link is now a separate banner, and a message displays when no character banner is active.",
+        jp: "ホームページのリデザイン：Discordリンクが独立したバナーになり、キャラクターバナーがない時はメッセージが表示されます。",
+        kr: "홈페이지 리디자인: Discord 링크가 별도 배너로 분리되었고, 캐릭터 배너가 없을 때 메시지가 표시됩니다.",
+        zh: "首页重新设计：Discord链接现在是独立横幅，当没有角色卡池时会显示提示信息。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-01-20",
     title: {
       en: "Deep Sea Guardian",

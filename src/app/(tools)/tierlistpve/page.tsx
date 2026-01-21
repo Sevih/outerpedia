@@ -65,7 +65,7 @@ export default async function PvETierList() {
         ]}
       />
       <Suspense fallback={<div>Loading...</div>}>
-      <TierListBase characters={characters} langue={langKey} />
+      <TierListBase characters={characters} />
       </Suspense>
     </>
   )

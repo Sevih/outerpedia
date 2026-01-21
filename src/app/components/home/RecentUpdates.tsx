@@ -23,24 +23,24 @@ export default function RecentUpdates() {
         <span className="absolute left-1/2 -bottom-1 h-1 w-24 -translate-x-1/2 rounded bg-cyan-600 opacity-70" />
       </h2>
 
-      <div className="relative space-y-8 border-l border-gray-700 pl-6">
+      <div className="relative space-y-6 md:space-y-8 border-l-2 md:border-l border-gray-600 pl-4 md:pl-6 ml-1 md:ml-0">
         {recentChanges.map((entry, index) => (
           <div
             key={index}
             className="relative rounded-xl border border-gray-700 bg-gray-800/50 p-4"
           >
-            <span className="absolute left-[-11px] top-5 h-3 w-3 rounded-full border-2 border-white bg-cyan-500" />
+            <span className="absolute left-[-13px] md:left-[-11px] top-5 h-4 w-4 md:h-3 md:w-3 rounded-full border-2 border-white bg-cyan-500" />
 
             <div className="mb-1 flex items-center justify-between text-sm text-gray-400">
               <span className="font-mono">{entry.date}</span>
               <span
-                className={`uppercase text-xs font-bold px-2 py-0.5 rounded bg-opacity-20 ${entry.type === 'feature'
-                    ? 'bg-green-800 text-green-100'
+                className={`uppercase text-xs font-bold px-2 py-0.5 rounded ${entry.type === 'feature'
+                    ? 'bg-green-800/50 text-green-100'
                     : entry.type === 'update'
-                      ? 'bg-blue-800 text-blue-100'
+                      ? 'bg-blue-800/50 text-blue-100'
                       : entry.type === 'fix'
-                        ? 'bg-red-800 text-red-100'
-                        : 'bg-gray-800 text-gray-100'
+                        ? 'bg-red-800/50 text-red-100'
+                        : 'bg-gray-800/50 text-gray-100'
                   }`}
               >
                 {entry.type.toUpperCase()}
@@ -49,7 +49,7 @@ export default function RecentUpdates() {
 
             {entry.url ? (
               <Link href={entry.url}>
-                <div className="mb-1 text-lg font-semibold text-red-400 hover:text-cyan-400 transition-colors cursor-pointer">
+                <div className="mb-1 text-lg font-semibold text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer">
                   {entry.title}
                 </div>
               </Link>
@@ -75,9 +75,6 @@ export default function RecentUpdates() {
         >{t('titles.main.tochangelog')} →
         </Link>
       </div>
-      <h2 className="sr-only">
-        Outerpedia Outerplane database changelog and feature log
-      </h2>
     </section>
   )
 }

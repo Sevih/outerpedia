@@ -5,12 +5,12 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
-import { CharacterNameDisplay } from '@/app/components/CharacterNameDisplay'
 import { toKebabCase } from '@/utils/formatText'
 import { ElementIcon } from '@/app/components/ElementIcon'
 import { ClassIcon } from '@/app/components/ClassIcon'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import EeDisplayMini from '@/app/components/eeDisplayMini'
+import CharacterCard from '@/app/components/CharacterCard'
 import type { Character, ExclusiveEquipment } from '@/types/character'
 import type { CharacterLite } from '@/types/types'
 import type { ClassType, ElementType, RarityType } from '@/types/enums'
@@ -46,11 +46,6 @@ type TabItem = {
     value: TabKey
     icon: string
     color?: string
-}
-
-type RecruitBadge = {
-    src: string
-    altKey: string
 }
 
 /* ------------------------------ Data helpers ---------------------------- */
@@ -136,28 +131,6 @@ const RANKS_EE = ['S', 'A', 'B', 'C', 'D'] as const
 function demoteOnce(rank: string): PveRank {
     const i = RANKS_PVE.indexOf((rank as PveRank) ?? 'E')
     return RANKS_PVE[Math.min(i < 0 ? RANKS_PVE.length - 1 : i + 1, RANKS_PVE.length - 1)]
-}
-
-function getRecruitBadge(char: CharacterDisplay): RecruitBadge | null {
-    const tags = new Set(char.tags ?? [])
-
-    // Priorité : Collab > Seasonal > Premium > Free > Limited (fallback)
-    if (tags.has('collab')) {
-        return { src: "/images/ui/CM_Recruit_Tag_Collab.webp", altKey: 'collab' }
-    }
-    if (tags.has('seasonal')) {
-        return { src: "/images/ui/CM_Recruit_Tag_Seasonal.webp", altKey: 'seasonal' }
-    }
-    if (tags.has('premium')) {
-        return { src: "/images/ui/CM_Recruit_Tag_Premium.webp", altKey: 'premium' }
-    }
-    if (tags.has('free')) {
-        return { src: "/images/ui/CM_Recruit_Tag_Free.webp", altKey: 'free' }
-    }
-    if (char.limited) {
-        return { src: "/images/ui/CM_Recruit_Tag_Fes.webp", altKey: 'limited' }
-    }
-    return null
 }
 
 /* ---------------------------- Localized fields -------------------------- */
@@ -560,42 +533,18 @@ export default function TierListBase({
                                             }
 
                                             return (
-                                                <Link
-                                                    key={slug || char!.ID}
-                                                    href={`/characters/${slug}`}
-                                                    className="w-[120px] text-center shadow hover:shadow-lg transition relative overflow-visible"
-                                                >
-                                                    <div className="relative w-[121px] h-[232px]">
-                                                        <div className="relative" style={{ width: '120px', height: '231px' }}>
-                                                            {(() => {
-                                                                const badge = getRecruitBadge(char!)
-                                                                return badge ? (
-                                                                    <Image
-                                                                        src={badge.src}
-                                                                        alt={badge.altKey}
-                                                                        width={75}
-                                                                        height={30}
-                                                                        className="absolute top-1 left-1 z-30 object-contain"
-                                                                        style={{ width: 75, height: 30 }}
-                                                                    />
-                                                                ) : null
-                                                            })()}
-
-                                                            <Image
-                                                                src={`/images/characters/portrait/CT_${char!.ID}.webp`}
-                                                                alt={char!.Fullname}
-                                                                width={120}
-                                                                height={231}
-                                                                className="object-cover rounded"
-                                                                priority={mode !== 'ee0' && ['dps', 'all'].includes(activeTab) && index <= 7}
-                                                            />
-                                                        </div>
-
+                                                <div key={slug || char!.ID} className="text-center w-[100px] lg:w-[120px]">
+                                                    <div className="relative">
+                                                        <CharacterCard
+                                                            name={char!.Fullname}
+                                                            responsive
+                                                            priority={mode !== 'ee0' && ['dps', 'all'].includes(activeTab) && index <= 7}
+                                                        />
                                                         {/* EE badge */}
                                                         {ee && (
                                                             <div
-                                                                className="absolute left-1 w-[48px] h-[48px] z-30 bg-black/50 rounded"
-                                                                style={{ top: '2rem' }} // remplace bottom-xx non standard
+                                                                className="absolute left-1 w-[40px] h-[40px] z-50 bg-black/50 rounded"
+                                                                style={{ top: '2rem' }}
                                                             >
                                                                 <EeDisplayMini
                                                                     ee={ee}
@@ -604,43 +553,14 @@ export default function TierListBase({
                                                                 />
                                                             </div>
                                                         )}
-
-                                                        {/* Stars */}
-                                                        <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
-                                                            {Array(char!.Rarity)
-                                                                .fill(0)
-                                                                .map((_, i) => (
-                                                                    <Image
-                                                                        key={i}
-                                                                        src="/images/ui/star.webp"
-                                                                        alt={t('tier.ui.alt.star') ?? 'star'}
-                                                                        width={20}
-                                                                        height={20}
-                                                                        style={{ width: 20, height: 20 }}
-                                                                    />
-                                                                ))}
-                                                        </div>
-
-                                                        {/* Class / Element icons */}
-                                                        <div className="absolute right-2 z-30" style={{ bottom: '3.125rem' }}>
-                                                            <ClassIcon className={char!.Class as ClassType} />
-                                                        </div>
-                                                        <div className="absolute right-1.5 z-30" style={{ bottom: '1.375rem' }}>
-                                                            <ElementIcon element={char!.Element as ElementType} />
-                                                        </div>
-
-                                                        <CharacterNameDisplay
-                                                            fullname={l(char!, 'Fullname', langue)}
-                                                        />
                                                     </div>
-
                                                     {/* EE name */}
                                                     {ee && (
-                                                        <div className="mt-1 text-xs text-white font-semibold line-clamp-2">
+                                                        <div className="mt-1 text-xs text-white font-semibold line-clamp-2 w-full">
                                                             {l(ee, 'name', langue)}
                                                         </div>
                                                     )}
-                                                </Link>
+                                                </div>
                                             )
                                         })}
                                 </div>

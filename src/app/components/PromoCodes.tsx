@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import promoCodes from '@/data/promo-codes.json'
-import { Copy } from 'lucide-react'
+import { Copy, Ticket } from 'lucide-react'
 import Accordion from '@/app/components/ui/Accordion'
 import Link from 'next/link'
 import ItemInlineDisplay from './ItemInline'
@@ -46,51 +46,71 @@ export default function PromoCodes() {
   if (validCodes.length === 0) return null
 
   return (
-    <section className="px-4 md:px-16 mb-12">
-      <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-        <span className="text-xl">🎁</span>{' '}
-        <Link href="/coupons" className="underline text-cyan-400">
-          {t('titles.main.coupon')}
-        </Link>
-      </h2>
-
-      <div className="bg-gray-900 rounded-xl p-4 divide-y divide-white/10 space-y-2">
-        {validCodes.map(({ code, description }) => (
-          <div key={code} className="pt-2">
-            <div className="flex justify-between items-center">
-              <span className="font-mono font-semibold text-white">{code}</span>
-              <button
-                onClick={() => copyToClipboard(code)}
-                className="text-cyan-400 hover:text-cyan-300 text-sm flex items-center gap-1"
-              >
-                <Copy size={16} />
-                {copied === code ? t('coupon.copied') : t('coupon.copy')}
-              </button>
-            </div>
-            <ul className="mt-1 text-sm text-gray-300 space-y-1">
-              {Object.entries(description).map(([key, value]) => (
-                <li key={key}>→ <strong><ItemInlineDisplay names={key} /></strong>: {value}</li>
-              ))}
-            </ul>
+    <section>
+      {/* Version compacte mobile */}
+      <Link
+        href="/coupons"
+        className="md:hidden flex items-center justify-between bg-gradient-to-r from-cyan-900/50 to-cyan-800/30 border border-cyan-700/50 rounded-xl p-4 hover:border-cyan-500/50 transition-colors"
+      >
+        <div className="flex items-center gap-3">
+          <div className="bg-cyan-600/20 p-2 rounded-lg">
+            <Ticket className="w-5 h-5 text-cyan-400" />
           </div>
-        ))}
-      </div>
+          <div>
+            <div className="font-semibold text-white">{t('titles.main.coupon')}</div>
+            <div className="text-sm text-cyan-400">
+              {t('home.promoCodes.active', { count: validCodes.length })}
+            </div>
+          </div>
+        </div>
+        <span className="text-cyan-400 text-xl">&rarr;</span>
+      </Link>
 
-      <Accordion
-        items={[
-          {
-            key: 'redeem',
-            title: t('coupon.redeem.title'),
-            content: (
-              <ul className="list-disc list-inside mt-2">
-                <li dangerouslySetInnerHTML={{ __html: t('coupon.redeem.android') }} />
-                <li dangerouslySetInnerHTML={{ __html: t('coupon.redeem.ios') }} />
+      {/* Version complète desktop */}
+      <div className="hidden md:block">
+        <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+          <Link href="/coupons" className="underline text-cyan-400">
+            {t('titles.main.coupon')}
+          </Link>
+        </h2>
+
+        <div className="bg-gray-900 rounded-xl p-4 divide-y divide-white/10 space-y-2">
+          {validCodes.map(({ code, description }) => (
+            <div key={code} className="pt-2">
+              <div className="flex justify-between items-center">
+                <span className="font-mono font-semibold text-white">{code}</span>
+                <button
+                  onClick={() => copyToClipboard(code)}
+                  className="text-cyan-400 hover:text-cyan-300 text-sm flex items-center gap-1"
+                >
+                  <Copy size={16} />
+                  {copied === code ? t('coupon.copied') : t('coupon.copy')}
+                </button>
+              </div>
+              <ul className="mt-1 text-sm text-gray-300 space-y-1">
+                {Object.entries(description).map(([key, value]) => (
+                  <li key={key}>→ <strong><ItemInlineDisplay names={key} /></strong>: {value}</li>
+                ))}
               </ul>
-            )
-          }
-        ]}
-      />
+            </div>
+          ))}
+        </div>
 
+        <Accordion
+          items={[
+            {
+              key: 'redeem',
+              title: t('coupon.redeem.title'),
+              content: (
+                <ul className="list-disc list-inside mt-2">
+                  <li dangerouslySetInnerHTML={{ __html: t('coupon.redeem.android') }} />
+                  <li dangerouslySetInnerHTML={{ __html: t('coupon.redeem.ios') }} />
+                </ul>
+              )
+            }
+          ]}
+        />
+      </div>
     </section>
   )
 }

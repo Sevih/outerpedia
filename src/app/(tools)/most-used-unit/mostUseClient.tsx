@@ -369,41 +369,43 @@ export default function MostUsedClient({ charactersData, guideUsageData }: MostU
 
                 {/* Character Info */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <Link
                       href={`/characters/${characterSlug}`}
                       onClick={(e) => e.stopPropagation()}
-                      className="text-lg font-semibold truncate hover:text-cyan-400 transition-colors"
+                      className="text-lg font-semibold truncate hover:text-cyan-400 transition-colors max-w-[120px] sm:max-w-none"
                     >
                       {getCharName(usage.character)}
                     </Link>
                     {usage.character.limited && (
-                      <span className="px-2 py-0.5 text-xs bg-purple-600 rounded-full">{t('mostUsedUnit.badge.limited')}</span>
+                      <span className="px-2 py-0.5 text-xs bg-purple-600 rounded-full whitespace-nowrap">{t('mostUsedUnit.badge.limited')}</span>
                     )}
                     {usage.character.tags?.includes('free') && (
-                      <span className="px-2 py-0.5 text-xs bg-green-600 rounded-full">{t('mostUsedUnit.badge.free')}</span>
+                      <span className="px-2 py-0.5 text-xs bg-green-600 rounded-full whitespace-nowrap">{t('mostUsedUnit.badge.free')}</span>
                     )}
                   </div>
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
+                  <div className="flex items-center gap-1 sm:gap-3 text-sm text-gray-400">
                     <span className="flex items-center gap-1">
-                      <ElementIcon element={usage.character.Element as ElementType} size={16} />
-                      {t(`SYS_ELEMENT_NAME_${usage.character.Element.toUpperCase()}`)}
+                      <ElementIcon element={usage.character.Element as ElementType} size={20} />
+                      <span className="hidden sm:inline">{t(`SYS_ELEMENT_NAME_${usage.character.Element.toUpperCase()}`)}</span>
                     </span>
                     <span className="flex items-center gap-1">
-                      <ClassIcon className={usage.character.Class as ClassType} size={16} />
-                      {t(`SYS_CLASS_${usage.character.Class.toUpperCase()}`)}
+                      <ClassIcon className={usage.character.Class as ClassType} size={20} />
+                      <span className="hidden sm:inline">{t(`SYS_CLASS_${usage.character.Class.toUpperCase()}`)}</span>
                     </span>
                   </div>
                 </div>
 
                 {/* Usage Count */}
-                <div className="text-3xl font-bold text-cyan-400">
-                  {countInCategory(usage, selectedCategory, guideUsageData)}
-                </div>
-                <div className="text-xs text-gray-500">
-                  {countInCategory(usage, selectedCategory, guideUsageData) === 1
-                    ? t('mostUsedUnit.count.guide')
-                    : t('mostUsedUnit.count.guides')}
+                <div className="flex flex-col items-center flex-shrink-0">
+                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">
+                    {countInCategory(usage, selectedCategory, guideUsageData)}
+                  </div>
+                  <div className="text-xs text-gray-500 whitespace-nowrap">
+                    {countInCategory(usage, selectedCategory, guideUsageData) === 1
+                      ? t('mostUsedUnit.count.guide')
+                      : t('mostUsedUnit.count.guides')}
+                  </div>
                 </div>
 
 

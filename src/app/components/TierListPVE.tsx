@@ -5,17 +5,17 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
-import { CharacterNameDisplay } from '@/app/components/CharacterNameDisplay'
 import { toKebabCase } from '@/utils/formatText'
 import { ElementIcon } from '@/app/components/ElementIcon'
 import { ClassIcon } from '@/app/components/ClassIcon'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
+import CharacterCard from '@/app/components/CharacterCard'
 import type { Character } from '@/types/character'
 import type { ClassType, ElementType, RarityType } from '@/types/enums'
 import { ELEMENTS, CLASSES, RARITIES } from '@/types/enums'
 import type { LocalizedFieldNames } from '@/types/common'
 import tierListOverwrite from '@/data/stats/tier-list-overwrite.json'
-import { getAvailableLanguages, type TenantKey } from '@/tenants/config'
+import { getAvailableLanguages } from '@/tenants/config'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { l } from '@/lib/localize'
 /* -------------------------------- Types -------------------------------- */
@@ -28,7 +28,6 @@ type CharacterDisplay = Pick<
 
 type TierListBaseProps = {
     characters?: CharacterDisplay[]
-    langue: TenantKey
 }
 
 type TabKey = 'all' | 'dps' | 'support' | 'sustain'
@@ -38,11 +37,6 @@ type TabItem = {
     value: TabKey
     icon: string
     color?: string
-}
-
-type RecruitBadge = {
-    src: string
-    altKey: string
 }
 
 /* ------------------------------ Data helpers ---------------------------- */
@@ -162,28 +156,6 @@ function demoteOnce(rank: string): PveRank {
     return RANKS_PVE[Math.min(i < 0 ? RANKS_PVE.length - 1 : i + 1, RANKS_PVE.length - 1)]
 }
 
-function getRecruitBadge(char: CharacterDisplay): RecruitBadge | null {
-    const tags = new Set(char.tags ?? [])
-
-    // Priorité : Collab > Seasonal > Premium > Free > Limited (fallback)
-    if (tags.has('collab')) {
-        return { src: "/images/ui/CM_Recruit_Tag_Collab.webp", altKey: 'collab' }
-    }
-    if (tags.has('seasonal')) {
-        return { src: "/images/ui/CM_Recruit_Tag_Seasonal.webp", altKey: 'seasonal' }
-    }
-    if (tags.has('premium')) {
-        return { src: "/images/ui/CM_Recruit_Tag_Premium.webp", altKey: 'premium' }
-    }
-    if (tags.has('free')) {
-        return { src: "/images/ui/CM_Recruit_Tag_Free.webp", altKey: 'free' }
-    }
-    if (char.limited) {
-        return { src: "/images/ui/CM_Recruit_Tag_Fes.webp", altKey: 'limited' }
-    }
-    return null
-}
-
 /* ---------------------------- Localized fields -------------------------- */
 
 // Removed: use l() from @/lib/localize instead
@@ -192,7 +164,6 @@ function getRecruitBadge(char: CharacterDisplay): RecruitBadge | null {
 
 export default function TierListBase({
     characters = [],
-    langue = 'en',
 }: TierListBaseProps) {
     const { t } = useI18n()
     const searchParams = useSearchParams()
@@ -573,72 +544,15 @@ export default function TierListBase({
                                 </div>
 
                                 <div className="flex flex-wrap justify-center gap-6">
-                                    {(entries as CharacterDisplay[]).map((char, index) => {
-                                        const slug = toKebabCase(char.Fullname)
-
-                                        return (
-                                            <Link
-                                                key={char.ID}
-                                                href={`/characters/${slug}`}
-                                                className="w-[120px] text-center shadow hover:shadow-lg transition relative overflow-visible"
-                                            >
-                                                <div className="relative w-[121px] h-[232px]">
-                                                    <div className="relative" style={{ width: '120px', height: '231px' }}>
-                                                        {(() => {
-                                                            const badge = getRecruitBadge(char)
-                                                            return badge ? (
-                                                                <Image
-                                                                    src={badge.src}
-                                                                    alt={badge.altKey}
-                                                                    width={75}
-                                                                    height={30}
-                                                                    className="absolute top-1 left-1 z-30 object-contain"
-                                                                    style={{ width: 75, height: 30 }}
-                                                                />
-                                                            ) : null
-                                                        })()}
-
-                                                        <Image
-                                                            src={`/images/characters/portrait/CT_${char.ID}.webp`}
-                                                            alt={char.Fullname}
-                                                            width={120}
-                                                            height={231}
-                                                            className="object-cover rounded"
-                                                            priority={['dps', 'all'].includes(activeTab) && index <= 7}
-                                                        />
-                                                    </div>
-
-                                                    {/* Stars - Transcend Level */}
-                                                    <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
-                                                        {Array(transcendLevel)
-                                                            .fill(0)
-                                                            .map((_, i) => (
-                                                                <Image
-                                                                    key={i}
-                                                                    src="/images/ui/star.webp"
-                                                                    alt={t('tier.ui.alt.star') ?? 'star'}
-                                                                    width={20}
-                                                                    height={20}
-                                                                    style={{ width: 20, height: 20 }}
-                                                                />
-                                                            ))}
-                                                    </div>
-
-                                                    {/* Class / Element icons */}
-                                                    <div className="absolute right-2 z-30" style={{ bottom: '3.125rem' }}>
-                                                        <ClassIcon className={char.Class as ClassType} />
-                                                    </div>
-                                                    <div className="absolute right-1.5 z-30" style={{ bottom: '1.375rem' }}>
-                                                        <ElementIcon element={char.Element as ElementType} />
-                                                    </div>
-
-                                                    <CharacterNameDisplay
-                                                        fullname={l(char, 'Fullname', langue)}
-                                                    />
-                                                </div>
-                                            </Link>
-                                        )
-                                    })}
+                                    {(entries as CharacterDisplay[]).map((char, index) => (
+                                        <CharacterCard
+                                            key={char.ID}
+                                            name={char.Fullname}
+                                            responsive
+                                            starsOverride={transcendLevel}
+                                            priority={['dps', 'all'].includes(activeTab) && index <= 7}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         )

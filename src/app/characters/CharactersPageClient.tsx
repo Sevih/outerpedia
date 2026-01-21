@@ -2,10 +2,8 @@
 
 import { useEffect, useState, useRef, useMemo, useDeferredValue } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import type { CharacterLite } from '@/types/types'
-import { toKebabCase } from '@/utils/formatText'
 import {
   type ElementType, type ClassType, type RoleType, type SkillKey,
   ELEMENTS as ELEMENTS_ENUM, CLASSES as CLASSES_ENUM, CHAIN_TYPES, CHAIN_TYPE_LABELS,
@@ -14,6 +12,7 @@ import {
 import type { WithLocalizedFields } from '@/types/common'
 import { groupEffects } from '@/utils/groupEffects'
 import SearchBar from '@/app/components/SearchBar'
+import CharacterCard from '@/app/components/CharacterCard'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import LZString from 'lz-string'
 import { EL, CL, CH, GF, EL_INV, CL_INV, CH_INV, GF_INV } from '@/data/filterCodes'
@@ -46,31 +45,6 @@ type EffectCategoriesData = {
   debuff: Record<string, EffectCategory>
 }
 
-type RecruitBadge = { src: string; altKey: string }
-
-function getRecruitBadge(char: CharacterLite): RecruitBadge | null {
-  const tags = new Set(char.tags ?? [])
-
-  // Priorité : Collab > Seasonal > Premium > Limited (fallback)
-  if (tags.has('collab')) {
-    return { src: "/images/ui/CM_Recruit_Tag_Collab.webp", altKey: 'collab' }
-  }
-  if (tags.has('seasonal')) {
-    return { src: "/images/ui/CM_Recruit_Tag_Seasonal.webp", altKey: 'seasonal' }
-  }
-  if (tags.has('premium')) {
-    return { src: "/images/ui/CM_Recruit_Tag_Premium.webp", altKey: 'premium' }
-  }
-  if (tags.has('free')) {
-    return { src: "/images/ui/CM_Recruit_Tag_Free.webp", altKey: 'free' }
-  }
-  if (char.limited) {
-    return { src: "/images/ui/CM_Recruit_Tag_Fes.webp", altKey: 'limited' }
-  }
-  return null
-}
-
-
 // ===== Helpers for effect lookup
 const buffToId: Record<string, number> = effectsIndex.buffs
 const debuffToId: Record<string, number> = effectsIndex.debuffs
@@ -79,7 +53,6 @@ const idToDebuff = Object.fromEntries(Object.entries(debuffToId).map(([k, v]) =>
 
 
 // ===== Dynamic components
-const CharacterNameDisplay = dynamic(() => import('@/app/components/CharacterNameDisplay').then(m => m.CharacterNameDisplay))
 const BuffDebuffDisplayMini = dynamic(() => import('@/app/components/BuffDebuffDisplayMini').then(m => m.default))
 const TagDisplayMini = dynamic(() => import('@/app/components/TagDisplayMini').then(m => m.default))
 const ElementIcon = dynamic(() => import('@/app/components/ElementIcon').then(m => m.ElementIcon))
@@ -256,17 +229,6 @@ function FilterPill({
       className={`${cls} focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400`} type="button">
       {children}
     </button>
-  )
-}
-
-
-function StarIcons({ count, size = 20 }: { count: number; size?: number }) {
-  return (
-    <div className="flex -space-y-1 flex-col items-end">
-      {Array.from({ length: count }).map((_, i) => (
-        <Image key={i} src="/images/ui/star.webp" alt="star" width={size} height={size} style={{ width: size, height: size }} />
-      ))}
-    </div>
   )
 }
 
@@ -958,56 +920,15 @@ export default function CharactersPage({ langue, initialCharacters }: ClientProp
         </div>
 
         {/* Cards */}
-        <div className="flex flex-wrap justify-center gap-6">
-          {filtered.map((char, index) => {
-            const isPriority = index <= 5
-            const badge = getRecruitBadge(char)
-            return (
-              <Link
-                href={`/characters/${toKebabCase(char.Fullname.toLowerCase())}`}
-                prefetch={false}
-                key={char.ID}
-                className="relative w-[120px] h-[231px] text-center shadow hover:shadow-lg transition overflow-hidden rounded"
-              >
-                {badge && (
-                  <Image
-                    src={badge.src}
-                    alt={badge.altKey}
-                    width={0}
-                    height={0}
-                    sizes={`75px`}
-                    className={`absolute w-[75px] h-[30px]  top-1 left-1 z-30 object-contain drop-shadow-md`}
-                  />
-                )}
-
-                <Image
-                  src={`/images/characters/portrait/CT_${char.ID}.webp`}
-                  alt={char.Fullname}
-                  width={120}
-                  height={231}
-                  style={{ width: 120, height: 231 }}
-                  className="object-cover rounded"
-                  priority={isPriority}
-                  loading={isPriority ? undefined : 'lazy'}
-                  unoptimized
-                />
-
-                <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1">
-                  <StarIcons count={char.Rarity} size={20} />
-                </div>
-
-                <div className="absolute bottom-12.5 right-2 z-30">
-                  <ClassIcon className={char.Class as ClassType} />
-                </div>
-
-                <div className="absolute bottom-5.5 right-1.5 z-30">
-                  <ElementIcon element={char.Element as ElementType} />
-                </div>
-
-                <CharacterNameDisplay fullname={l(char, 'Fullname', langue)} />
-              </Link>
-            )
-          })}
+        <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
+          {filtered.map((char, index) => (
+            <CharacterCard
+              key={char.ID}
+              name={char.Fullname}
+              responsive
+              priority={index <= 5}
+            />
+          ))}
         </div>
       </div>
     </div>

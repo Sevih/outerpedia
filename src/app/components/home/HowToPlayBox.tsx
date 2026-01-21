@@ -12,7 +12,7 @@ export default function HowToPlayBox() {
       <div className="flex items-center gap-4 mb-4">
         <div className="relative h-16 w-16 flex-shrink-0">
           <Image
-            src="/images/ui/nav/CM_Lobby_Button_Recruitment.png"
+            src="/images/ui/nav/CM_Lobby_Button_Recruitment.webp"
             alt="How to Play"
             fill
             sizes="64px"

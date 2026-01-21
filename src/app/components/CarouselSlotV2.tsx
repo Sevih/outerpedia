@@ -3,25 +3,8 @@
 import { useKeenSlider, KeenSliderPlugin } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import { useState } from 'react'
-import allCharacters from '@/data/_allCharacters.json'
-import type { ElementType, ClassType } from '@/types/enums'
-import { CharacterNameDisplay } from '@/app/components/CharacterNameDisplay'
-import { ElementIcon } from '@/app/components/ElementIcon'
-import { ClassIcon } from '@/app/components/ClassIcon'
-import Link from 'next/link'
-import { toKebabCase } from '@/utils/formatText'
 import Image from 'next/image'
-import { l } from '@/lib/localize'
-import { useTenant } from '@/lib/contexts/TenantContext'
-import type { TenantKey } from '@/tenants/config'
-
-function getCharacterData(name: string) {
-  return allCharacters.find((char) => char.Fullname === name)
-}
-
-function rarityToStars(rarity: number): number[] {
-  return Array.from({ length: rarity })
-}
+import CharacterCard, { findCharacter } from '@/app/components/CharacterCard'
 
 type Props = {
   characters: string[]
@@ -95,7 +78,6 @@ const carousel: KeenSliderPlugin = (slider) => {
 }
 
 export default function CarouselSlotV2({ characters }: Props) {
-  const { key } = useTenant()
   const [isAnimating, setIsAnimating] = useState(false)
 
   const [sliderRef, instanceRef] = useKeenSlider(
@@ -123,56 +105,18 @@ export default function CarouselSlotV2({ characters }: Props) {
       <div className="scene">
         <div ref={sliderRef} className="carousel keen-slider">
           {characters.map((name, idx) => {
-            const data = getCharacterData(name)
-            if (!data?.ID) return null
-
-            const slug = toKebabCase(data.Fullname)
-            const namelocalized = data ? l(data, 'Fullname', key as TenantKey) : name
+            const char = findCharacter(name)
+            if (!char?.ID) return null
 
             return (
               <div key={`${name}-${idx}`} className="carousel__cell">
-                <div className="relative w-full h-full">
-                  <Link
-                    href={`/characters/${slug}`}
-                    prefetch={false}
-                    className="absolute inset-0 z-40"
-                  >
-                    <span className="sr-only">{data.Fullname}</span>
-                  </Link>
-
-                  <Image
-                    src={`/images/characters/portrait/CT_${data.ID}.webp`}
-                    alt={data.Fullname}
-                    width={120}
-                    height={231}
-                    loading="lazy"
-                  />
-
-                  <div className="absolute top-4 right-1 z-30 flex flex-col items-end -space-y-1 overlay-fade">
-                    {rarityToStars(data.Rarity).map((_, i) => (
-                      <Image
-                        key={i}
-                        src="/images/ui/star.webp"
-                        alt="star"
-                        width={20}
-                        height={20}
-                        style={{ width: 20, height: 20 }}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="absolute bottom-12.5 right-2 z-30 h-6 w-6">
-                    <ClassIcon className={data.Class as ClassType} />
-                  </div>
-
-                  <div className="absolute bottom-5.5 right-1.5 z-30 h-6 w-6">
-                    <ElementIcon element={data.Element as ElementType} />
-                  </div>
-
-                  <div className="absolute bottom-0 left-0 w-full overlay-fade z-30">
-                    <CharacterNameDisplay fullname={namelocalized} />
-                  </div>
-                </div>
+                <CharacterCard
+                  name={name}
+                  size="md"
+                  asContent
+                  responsive
+                  showLimited={false}
+                />
               </div>
             )
           })}

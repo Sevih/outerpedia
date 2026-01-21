@@ -14,20 +14,13 @@ export default function RecommendedTeamCarousel({ team, note }: Props) {
   if (!team || team.length === 0) return null
 
   return (
-    <div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 200px))',
-          justifyContent: 'center', // pour centrer les lignes incomplètes
-          gap: '13px',              // ou utilise Tailwind `gap-8`
-          maxWidth: '100%',
-          margin: '0 auto'
-        }}
-      >
-        {team.map((candidates, index) => (
-          <CarouselSlotV2 key={`${index}-${candidates.join(',')}`} characters={candidates} />
-        ))}
+    <>
+      <div className='w-full flex justify-center overflow-x-hidden'>
+        <div className='grid justify-items-center min-w-[412px] gap-y-3 gap-x-0 lg:gap-x-3' style={{ gridTemplateColumns: 'repeat(auto-fit, 200px)', maxWidth: '850px', justifyContent: 'center' }}>
+          {team.map((candidates, index) => (
+            <CarouselSlotV2 key={`${index}-${candidates.join(',')}`} characters={candidates} />
+          ))}
+        </div>
       </div>
       {note && (
         <div className="mb-4">
@@ -50,7 +43,6 @@ export default function RecommendedTeamCarousel({ team, note }: Props) {
           })}
         </div>
       )}
-
-    </div>
+    </>
   )
 }
