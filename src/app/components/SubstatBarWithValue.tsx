@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import stats from '@/data/stats.json';
+import { useI18n } from '@/lib/contexts/I18nContext';
 
 const statValues: Record<string, string[]> = {
   ATK: ['40', '80', '120', '160', '200', '240'],
@@ -23,10 +26,20 @@ type SubstatSegmentProps = {
   orange: number;
 };
 
+
+
+function toSysKey(stat: string): string {
+  const base = stat.replace('%', '');
+  const suffix = stat.includes('%') ? '_PERCENT' : '';
+  return `SYS_STAT_${base}${suffix}`;
+}
+
 export default function SubstatBarWithValue({ stat, yellow, orange }: SubstatSegmentProps) {
+  const { t } = useI18n();
   const total = Math.min(yellow + orange, 6);
   const value = statValues[stat]?.[total - 1] ?? '?';
   const statMeta = stats[stat];
+  const label = t(toSysKey(stat), { defaultValue: statMeta.label });
 
   return (
     <div className="w-fit">
@@ -35,12 +48,12 @@ export default function SubstatBarWithValue({ stat, yellow, orange }: SubstatSeg
         <span className="inline-flex items-center gap-1 text-white">
           <Image
             src={`/images/ui/effect/${statMeta.icon}`}
-            alt={statMeta.label}
+            alt={label}
             width={18}
             height={18}
             className="object-contain"
           />
-          {statMeta.label}
+          {label}
         </span>
         <span className="text-white text-sm">{value}</span>
       </div>

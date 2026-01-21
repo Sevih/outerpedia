@@ -3,34 +3,32 @@ import Image from 'next/image';
 import StarLevelItem from '@/app/components/StarLevelItem';
 import { getRarityBg } from '@/utils/gear';
 
-const highlightable = [
-    { key: 'stars', label: 'Star Level: from 1★ yellow star to 6★ yellow' },
-    { key: 'reforge', label: 'Reforge Level: from 1★ orange to 6★ orange' },
-    { key: 'rarity', label: 'Grade: Normal, Superior, Epic, Legendary' },
-    { key: 'upgrade', label: 'Upgrade Level: from 0 to +10' },
-    { key: 'tier', label: 'Breakthrough: from T0 to T4' },
-    { key: 'set', label: 'Set Effect or Unique Effect' },
-    { key: 'class', label: 'Class restriction (Legendary weapons & accessories)' }
-];
+export type EquipmentPropertyKey = 'stars' | 'reforge' | 'rarity' | 'upgrade' | 'tier' | 'set' | 'class'
+
+const PROPERTY_KEYS: EquipmentPropertyKey[] = ['stars', 'reforge', 'rarity', 'upgrade', 'tier', 'set', 'class']
 
 function OverlayBox({ className = '' }: { className?: string }) {
     return <div className={`absolute z-40 animate-pulse border-2 border-white rounded bg-yellow-300/30 ${className}`} />;
 }
 
-export default function EquipmentIntro() {
+type EquipmentIntroProps = {
+    labels: Record<EquipmentPropertyKey, string>
+}
+
+export default function EquipmentIntro({ labels }: EquipmentIntroProps) {
     const [hovered, setHovered] = useState<string | null>(null);
 
     return (
         <div className="flex gap-4">
             <ul className="list-disc list-inside space-y-1">
-                {highlightable.map(({ key, label }) => (
+                {PROPERTY_KEYS.map((key) => (
                     <li
                         key={key}
                         className="cursor-pointer transition-opacity"
                         onMouseEnter={() => setHovered(key)}
                         onMouseLeave={() => setHovered(null)}
                     >
-                        {label}
+                        {labels[key]}
                     </li>
                 ))}
             </ul>
