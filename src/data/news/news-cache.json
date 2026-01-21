@@ -1,6 +1,54 @@
 {
   "en": [
     {
+      "slug": "live-en-5934",
+      "title": "[Notice] 1/20(Tue) Sequential Rollout Patch Notice",
+      "date": "2026/01/20 5:21:12",
+      "category": "notice",
+      "excerpt": ". We will carry out a patch for fixing issues in the game. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your un...",
+      "coverImage": "/images/news/live/en/5934-b456d118.webp",
+      "uid": "5934",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/20/notice-1-20tue-sequential-rollout-patch-notice-2/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-5916",
+      "title": "🎉 [Event] Bunny Girl Costume Vote",
+      "date": "2026/01/20 3:01:15",
+      "category": "notice",
+      "excerpt": "Cast your vote for the Bunny Girl costume 🐰✨ When the total number of votes across all regions reaches 1,000, code will be revealed! 🗳️ How to Participate – Vote on the event post on X during the ev...",
+      "coverImage": "/images/news/live/en/5916-6f63ebb3.webp",
+      "uid": "5916",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/20/%f0%9f%8e%89-event-bunny-girl-costume-vote/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-5893",
+      "title": "[Event] Gnosis Viella Costume Video Share Event",
+      "date": "2026/01/20 1:16:43",
+      "category": "event",
+      "excerpt": "Gnosis Viella costume has arrived—let’s spread the word! ✨ Gnosis Viella (VA. Harumi Sakurai) Autograph Giveaway is underway! Like & Repost your chance to win! Share her intro video on SNS for a chanc...",
+      "coverImage": "/images/news/live/en/5893-035923c8.webp",
+      "uid": "5893",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/20/event-gnosis-viella-costume-video-share-event/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-5906",
+      "title": "[Notice] 1/20(Tue) Sequential Rollout Patch Notice",
+      "date": "2026/01/19 11:55:00",
+      "category": "notice",
+      "excerpt": ". We will carry out a patch for fixing issues in the game. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your un...",
+      "coverImage": "/images/news/live/en/5934-b456d118.webp",
+      "uid": "5906",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/19/notice-1-20tue-sequential-rollout-patch-notice/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-5876",
       "title": "[Notice] 1/15(Thu) Sequential Rollout Patch Notice",
       "date": "2026/01/15 8:49:55",
@@ -12906,6 +12954,54 @@
     }
   ],
   "jp": [
+    {
+      "slug": "live-jp-5936",
+      "title": "【お知らせ】データ更新のお知らせ(1/20)",
+      "date": "2026/01/20 5:22:20",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 1/20(火)、データ更新作業を実施いたします。 一時的に接続が不安定になる場合がございます。 より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈データ更新実施時間 : 1/20(火) 14:20 ~...",
+      "coverImage": "/images/news/live/jp/5936-62450952.webp",
+      "uid": "5936",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/20/%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b1-20-2/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-5918",
+      "title": "【イベント】 バニーガールスキン投票イベント",
+      "date": "2026/01/20 3:01:44",
+      "category": "notice",
+      "excerpt": "こんにちは、マスター様！ GMあめです😊 一番お気に入りのバニーガールスキンに投票してください！🐰✨ 総投票数が1,000件を達成すると、報酬クーポンが公開されます！ 🗳️ 参加方法 1.イベント期間中、X(旧Twitter)のイベントポストにて投票に参加 2.リンク：https://x.com/OP\\_TWT\\_JP/status/2013445060591776070 🎁 イベント報酬...",
+      "coverImage": "/images/news/live/jp/5918-924a13dd.webp",
+      "uid": "5918",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/20/%e3%80%90%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e3%80%91-%e3%83%90%e3%83%8b%e3%83%bc%e3%82%ac%e3%83%bc%e3%83%ab%e3%82%b9%e3%82%ad%e3%83%b3%e6%8a%95%e7%a5%a8%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-5896",
+      "title": "【ポニーガールだぴょん・ビエラ】リポスト＆ファローキャンペーン開催🎉",
+      "date": "2026/01/20 1:17:15",
+      "category": "notice",
+      "excerpt": "マスターの皆様、こんにちは！GMあめです。 🎁【ポニーガールだぴょん・ビエラ】リポスト＆ファローキャンペーン開催！ 「グノーシス・ビエラ」役#櫻井浩美さんのサイン色紙やグッズを抽選で1名様にプレゼント！ 【キャンペーン開催期間】 2026/01/20（火）~ 2026/01/27（火）23:59 (JST) 【応募方法 (参加条件)】 1．キャンペーン投稿をリポスト (https://x.com...",
+      "coverImage": "/images/news/live/jp/5896-053514cf.webp",
+      "uid": "5896",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/20/%e3%80%90%e3%83%9d%e3%83%8b%e3%83%bc%e3%82%ac%e3%83%bc%e3%83%ab%e3%81%a0%e3%81%b4%e3%82%87%e3%82%93%e3%83%bb%e3%83%93%e3%82%a8%e3%83%a9%e3%80%91%e3%83%aa%e3%83%9d%e3%82%b9%e3%83%88%ef%bc%86%e3%83%95/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-5908",
+      "title": "【お知らせ】データ更新のお知らせ(1/20)",
+      "date": "2026/01/19 11:55:00",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 1/20(火)、データ更新作業を実施いたします。 一時的に接続が不安定になる場合がございます。 より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈データ更新実施時間 : 1/20(火) 09:00 ~...",
+      "coverImage": "/images/news/live/jp/5936-62450952.webp",
+      "uid": "5908",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/19/%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b1-20/",
+      "views": 0,
+      "lang": "jp"
+    },
     {
       "slug": "live-jp-5878",
       "title": "【お知らせ】データ更新のお知らせ(1/15)",
@@ -25849,6 +25945,54 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-5932",
+      "title": "[공지] 1/20(화) 무점검 패치 진행 안내",
+      "date": "2026/01/20 5:20:35",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 - 1/20(화) 14:20 ~ 14:50(KST) ※ 위 시간 내 순차적으로 적용됩니다. ◈ 내용...",
+      "coverImage": "/images/news/live/kr/5932-77b1f27b.webp",
+      "uid": "5932",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/20/%ea%b3%b5%ec%a7%80-1-20%ed%99%94-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4-2/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-5913",
+      "title": "🎉 [이벤트] 바니걸 코스튬 투표 이벤트",
+      "date": "2026/01/20 3:00:38",
+      "category": "notice",
+      "excerpt": "안녕하세요, 오너 여러분! GM 아메입니다 😊 가장 마음에 드는 바니걸 코스튬 투표에 투표해주세요! 🐰✨ 전체 투표 수가 1,000회 이상 달성되면 보상 쿠폰이 공개됩니다! 🗳️ 이벤트 참여 방법 – 이벤트 기간 동안 X 이벤트 게시물에서 투표 참여 링크: https://x.com/OP\\_TWT\\_KR/status/2013446377150599339 ...",
+      "coverImage": "/images/news/live/kr/5913-a60d5111.webp",
+      "uid": "5913",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/20/%f0%9f%8e%89-%ec%9d%b4%eb%b2%a4%ed%8a%b8-%eb%b0%94%eb%8b%88%ea%b1%b8-%ec%bd%94%ec%8a%a4%ed%8a%ac-%ed%88%ac%ed%91%9c-%ec%9d%b4%eb%b2%a4%ed%8a%b8/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-5889",
+      "title": "[🎉이벤트] 그노시스 비엘라 코스튬 영상 공유 이벤트",
+      "date": "2026/01/20 1:17:44",
+      "category": "notice",
+      "excerpt": "안녕하세요, GM 아메입니다! 💫 ‘그노시스 비엘라’의 성우 송하림님이 직접 사인한 ✨사인지✨를 받을 수 있는 기회! ‘그노시스 비엘라’의 매력을 세상에 널리 알려주세요! SNS에 영상을 공유해주신 오너님들 중 추첨을 통해 #성우송하림 님의 사인지를 드립니다! 🎟 📌 이벤트 참여 방법 1) 이벤트 게시글 재게시 (https://x.com/OP\\_TWT...",
+      "coverImage": "/images/news/live/kr/5889-93f2082d.webp",
+      "uid": "5889",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/20/%f0%9f%8e%89%ec%9d%b4%eb%b2%a4%ed%8a%b8-%ea%b7%b8%eb%85%b8%ec%8b%9c%ec%8a%a4-%eb%b9%84%ec%97%98%eb%9d%bc-%ec%bd%94%ec%8a%a4%ed%8a%ac-%ec%98%81%ec%83%81-%ea%b3%b5%ec%9c%a0-%ec%9d%b4%eb%b2%a4%ed%8a%b8/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-5900",
+      "title": "[공지] 1/20(화) 무점검 패치 진행 안내",
+      "date": "2026/01/19 11:55:00",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 - 1/20(화) 09:00 ~ 09:20(KST) ※ 위 시간 내 순차적으로 적용됩니다. ◈ 내용...",
+      "coverImage": "/images/news/live/kr/5900-f3f60013.webp",
+      "uid": "5900",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/19/%ea%b3%b5%ec%a7%80-1-20%ed%99%94-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-5869",
       "title": "[공지] 1/15(목) 무점검 패치 진행 안내",
