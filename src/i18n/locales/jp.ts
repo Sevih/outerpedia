@@ -532,6 +532,9 @@ const jp = {
   'guides.detail.og.desc': 'Outerplaneの{guide}の完全な{cat}。{desc}',
   'guides.detail.tw.title': '{guide}ガイド',
   'guides.detail.tw.desc': 'Outerplaneの{guide}の完全な{cat}。{desc}',
+  'guides.detail.intro': 'このガイドでは、Outerplaneの{guide}について解説します。',
+  'guides.detail.discordBefore': '追加の攻略法や提案がありましたら、',
+  'guides.detail.discordAfter': 'で共有してください。',
 
   'equip.meta.title': '装備一覧 – Outerpedia',
   'equip.meta.desc': '『アウタープレーン』の全装備を一覧表示：武器・アクセサリー・タリスマン・セット・専用装備。',

@@ -532,6 +532,9 @@ const zh = {
   'guides.detail.og.desc': '{guide}在异域战记中的完整{cat}。{desc}',  // ✅ Garde la desc simple
   'guides.detail.tw.title': '{guide}指南',  // ✅ Plus court pour Twitter
   'guides.detail.tw.desc': '{guide}在异域战记中的完整{cat}。{desc}',
+  'guides.detail.intro': '本指南涵盖异域战记中的{guide}。',
+  'guides.detail.discordBefore': '如果您有更多攻略或建议，请在',
+  'guides.detail.discordAfter': '分享。',
 
   'equip.meta.title': '装备 – Outerpedia',
   'equip.meta.desc': '浏览《异域战记》全部的装备：武器、饰品、护身符、套装和专属装备。',

@@ -532,6 +532,9 @@ const en = {
   'guides.detail.og.desc': 'Complete {cat} for {guide}  in Outerplane. {desc}',  // ✅ Garde la desc simple
   'guides.detail.tw.title': '{guide} Guide',  // ✅ Plus court pour Twitter
   'guides.detail.tw.desc': 'Complete {cat} for {guide}  in Outerplane. {desc}',
+  'guides.detail.intro': 'This guide covers {guide} in Outerplane.',
+  'guides.detail.discordBefore': 'If you have additional strategies or suggestions, share them on ',
+  'guides.detail.discordAfter': '.',
 
   'equip.meta.title': 'Equipments – Outerpedia',
   'equip.meta.desc': 'Browse all equipment in Outerplane: weapons, accessories, talismans, sets, and exclusive equipment.',

@@ -532,6 +532,9 @@ const kr = {
   'guides.detail.og.desc': 'Outerplane의 {guide}에 대한 완전한 {cat}. {desc}',
   'guides.detail.tw.title': '{guide} 가이드',
   'guides.detail.tw.desc': 'Outerplane의 {guide}에 대한 완전한 {cat}. {desc}',
+  'guides.detail.intro': '이 가이드는 Outerplane의 {guide}에 대해 다룹니다.',
+  'guides.detail.discordBefore': '추가 공략이나 제안이 있으시면 ',
+  'guides.detail.discordAfter': '에서 공유해 주세요.',
 
   'equip.meta.title': '장비 목록 – Outerpedia',
   'equip.meta.desc': '아우터플레인의 모든 장비를 한 곳에서 확인하세요: 무기, 액세서리, 탈리스만, 세트, 전용 장비.',

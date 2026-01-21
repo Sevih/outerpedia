@@ -223,10 +223,10 @@ export default async function GuidePage({ params }: Props) {
       {/* Texte introductif */}
       <div className="text-sm text-gray-300 max-w-3xl mt-2 m-auto text-center mb-4">
         <p className="mb-2">
-          This guide covers <strong>{guideTitle}</strong> in Outerplane.
+          {t('guides.detail.intro', { guide: guideTitle })}
         </p>
         <p>
-          If you have additional strategies or suggestions, share them on{' '}
+          {t('guides.detail.discordBefore')}
           <Link
             href="https://discord.com/invite/keGhVQWsHv"
             target="_blank"
@@ -235,7 +235,7 @@ export default async function GuidePage({ params }: Props) {
           >
             EvaMains Discord
           </Link>
-          .
+          {t('guides.detail.discordAfter')}
         </p>
       </div>
 
