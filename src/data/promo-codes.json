@@ -409,5 +409,13 @@
     },
     "start": "2026-01-18",
     "end": "2026-05-31"
+  },
+  {
+    "code": "OUTERLETTERJAN",
+    "description": {
+       "Free Ether": "500"
+    },
+    "start": "2026-01-22",
+    "end": "2026-02-28"
   }
 ] 
