@@ -718,6 +718,7 @@
         "icon": "healer.webp",
         "setup": [
           [
+            "Stella",
             "Kuro",
             "Dahlia",
             "Fran"

@@ -317,12 +317,12 @@ export const DEMIURGE_LIMITED_PLANS: { label: LangMap; text: LangMap }[] = [
         text: { en: "2 Seasonal & 1 Anniversary → 3 per year", jp: "季節2体＋周年1体 → 年3体", kr: "시즌 2명 & 주년 1명 → 연간 3명", zh: "2名季节限定+1名周年限定→每年3名" }
     },
     {
-        label: { en: "Seasonal Chars BokGak:", jp: "季節キャラ復刻:", kr: "시즌 캐릭터 복각:", zh: "季限角色复刻：" },
+        label: { en: "Seasonal Chars Rerun:", jp: "季節キャラ復刻:", kr: "시즌 캐릭터 복각:", zh: "季限角色复刻：" },
         text: { en: "Before new Season Limited Char comes", jp: "新シーズン限定キャラ登場前", kr: "신규 시즌 한정 캐릭터 출시 전", zh: "新季节限定角色推出前" }
     },
     {
         label: { en: "Fest. Limited (O. Nadja, G. Dahlia, G. Nella):", jp: "フェス限定（O.ナジャ、G.ダリア、G.ネラ）:", kr: "페스 한정 (O.나쟈, G.달리아, G.넬라):", zh: "Fes限定（奥米伽 纳吉娅、诺希斯 达利娅、诺希斯 内拉）：" },
-        text: { en: "Anniversary & 0.5 Anniversary BokGak", jp: "周年＆0.5周年復刻", kr: "주년 & 0.5주년 복각", zh: "周年和半周年复刻" }
+        text: { en: "Anniversary & 0.5 Anniversary Rerun", jp: "周年＆0.5周年復刻", kr: "주년 & 0.5주년 복각", zh: "周年和半周年复刻" }
     }
 ];
 

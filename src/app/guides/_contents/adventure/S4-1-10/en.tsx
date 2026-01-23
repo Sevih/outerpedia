@@ -30,7 +30,6 @@ export default function NellaGuide() {
                                 "Have a Buff prepared before its S2/S3 attack to prevent {D/BT_DOT_BURN}",
                                 "{D/BT_FREEZE} it before you initiate all of the Chain Attacks and break it",
                                 "Tune your team's speed so all units reach 100% Priority before starting Chain Attacks. This prevents the boss from cutting in despite gaining action gauge from hits (it gains 20% per hit)",
-                                "{I-T/Sage's Charm} +10 increases Chain Attack damage by 50% if worn by the last unit in the chain",
                                 "Avoid using {E/Light} and {E/Dark} units to prevent the boss from cleansing itself"
                             ]} />
                             <hr className="my-6 border-neutral-700" />

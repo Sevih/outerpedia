@@ -116,6 +116,12 @@ export const ProgressTracker = {
         needsUpdate = true
       }
 
+      // Ensure hasCompletedElementalTower exists (migration from old settings)
+      if (settings.hasCompletedElementalTower === undefined) {
+        settings.hasCompletedElementalTower = false
+        needsUpdate = true
+      }
+
       if (needsUpdate) {
         this.saveSettings(settings)
       }
@@ -139,6 +145,7 @@ export const ProgressTracker = {
       hasTerminusSupportPack: false,
       hasVeronicaPremiumPack: false,
       adventureLicenseCombatsPerStage: 2,
+      hasCompletedElementalTower: false,
     }
   },
 
@@ -250,6 +257,21 @@ export const ProgressTracker = {
   },
 
   /**
+   * Toggle Elemental Tower completion (permanent content that never resets)
+   * When enabled, removes elemental-tower from display and calculations
+   */
+  toggleElementalTowerCompletion(): void {
+    const settings = this.getSettings()
+    settings.hasCompletedElementalTower = !settings.hasCompletedElementalTower
+    this.saveSettings(settings)
+
+    // Sync progress to add/remove the task
+    const progress = this.getProgress()
+    this.syncProgressWithSettings(progress, settings)
+    this.saveProgress(progress)
+  },
+
+  /**
    * Get maxCount for a task, considering settings
    */
   getTaskMaxCount(taskId: string, type: 'daily' | 'weekly' | 'monthly'): number | undefined {
@@ -289,9 +311,15 @@ export const ProgressTracker = {
 
     // Sync daily tasks
     const currentDailyIds = Object.keys(progress.daily)
-    const enabledDailyIds = settings.enabledTasks.daily
+    // Filter out elemental-tower if marked as completed
+    const enabledDailyIds = settings.enabledTasks.daily.filter(
+      (id) => {
+        if (id === 'elemental-tower' && settings.hasCompletedElementalTower) return false
+        return true
+      }
+    )
 
-    // Remove disabled tasks
+    // Remove disabled tasks (and filtered tasks)
     currentDailyIds.forEach((id) => {
       if (!enabledDailyIds.includes(id)) {
         delete progress.daily[id]
@@ -408,8 +436,16 @@ export const ProgressTracker = {
     const now = Date.now()
     const settings = this.getSettings()
 
+    // Filter out elemental-tower if marked as completed
+    const enabledDailyIds = settings.enabledTasks.daily.filter(
+      (id) => {
+        if (id === 'elemental-tower' && settings.hasCompletedElementalTower) return false
+        return true
+      }
+    )
+
     const daily: Record<string, TaskProgress> = {}
-    settings.enabledTasks.daily.forEach((id) => {
+    enabledDailyIds.forEach((id) => {
       const maxCount = this.getTaskMaxCount(id, 'daily')
       daily[id] = {
         id,
@@ -603,8 +639,13 @@ export const ProgressTracker = {
     const diff = timestamp - Date.now()
     if (diff <= 0) return '0h 0m'
 
-    const hours = Math.floor(diff / 3600000)
+    const days = Math.floor(diff / 86400000)
+    const hours = Math.floor((diff % 86400000) / 3600000)
     const minutes = Math.floor((diff % 3600000) / 60000)
+
+    if (days > 0) {
+      return `${days}d ${hours}h ${minutes}m`
+    }
     return `${hours}h ${minutes}m`
   },
 

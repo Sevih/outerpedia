@@ -65,7 +65,7 @@ const HEADINGS = {
         zh: "RTA（实时竞技场）"
     },
     demiurgePlans: {
-        en: "Demiurge/Limited/BokGak Plans",
+        en: "Demiurge/Limited/Rerun Plans",
         jp: "デミウルゴス/限定/復刻計画",
         kr: "데미우르고스/한정/복각 계획",
         zh: "神匠/限定/复刻计划"
