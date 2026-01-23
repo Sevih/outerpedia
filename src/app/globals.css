@@ -51,6 +51,9 @@ body>* {
   z-index: 1;
 }
 
+footer{
+  z-index: -1;
+}
 /* Portal root for modals - must be above everything */
 #portal-root {
   position: relative;
