@@ -122,6 +122,12 @@ export const ProgressTracker = {
         needsUpdate = true
       }
 
+      // Ensure displayMode exists (migration from old settings)
+      if (settings.displayMode === undefined) {
+        settings.displayMode = 'tabs'
+        needsUpdate = true
+      }
+
       if (needsUpdate) {
         this.saveSettings(settings)
       }
@@ -146,6 +152,7 @@ export const ProgressTracker = {
       hasVeronicaPremiumPack: false,
       adventureLicenseCombatsPerStage: 2,
       hasCompletedElementalTower: false,
+      displayMode: 'tabs',
     }
   },
 
@@ -268,6 +275,140 @@ export const ProgressTracker = {
     // Sync progress to add/remove the task
     const progress = this.getProgress()
     this.syncProgressWithSettings(progress, settings)
+    this.saveProgress(progress)
+  },
+
+  /**
+   * Set display mode (tabs or single-page)
+   */
+  setDisplayMode(mode: 'tabs' | 'single-page'): void {
+    const settings = this.getSettings()
+    settings.displayMode = mode
+    this.saveSettings(settings)
+  },
+
+  /**
+   * Toggle all sweepable content (Challenge Content Sweep All)
+   * Includes: Bounty Hunter, Bandit Chase, Upgrade Stone, Doppelganger, Special Requests
+   * If all are completed → reset to 0, otherwise → complete all
+   */
+  toggleAllSweepContent(): void {
+    const progress = this.getProgress()
+    const sweepableTasks = [
+      'bounty-hunter',
+      'bandit-chase',
+      'upgrade-stone-retrieval',
+      'defeat-doppelganger',
+      'special-request-ecology',
+      'special-request-identification',
+    ]
+
+    // Check if all sweepable tasks are completed
+    const existingTasks = sweepableTasks.filter((taskId) => progress.daily[taskId])
+    const allCompleted = existingTasks.length > 0 && existingTasks.every((taskId) => progress.daily[taskId].completed)
+
+    sweepableTasks.forEach((taskId) => {
+      if (progress.daily[taskId]) {
+        if (allCompleted) {
+          // Reset all
+          progress.daily[taskId].count = 0
+          progress.daily[taskId].completed = false
+        } else {
+          // Complete all
+          const maxCount = progress.daily[taskId].maxCount ?? 0
+          progress.daily[taskId].count = maxCount
+          progress.daily[taskId].completed = true
+        }
+        progress.daily[taskId].lastUpdated = Date.now()
+      }
+    })
+
+    this.saveProgress(progress)
+  },
+
+  /**
+   * Toggle all shop purchases for a given type
+   * If all are completed → reset to 0, otherwise → complete all
+   */
+  toggleAllShopPurchases(type: 'daily' | 'weekly' | 'monthly'): void {
+    const progress = this.getProgress()
+    const definitions = type === 'daily'
+      ? DAILY_TASK_DEFINITIONS
+      : type === 'weekly'
+      ? WEEKLY_TASK_DEFINITIONS
+      : MONTHLY_TASK_DEFINITIONS
+    const taskProgress = type === 'daily'
+      ? progress.daily
+      : type === 'weekly'
+      ? progress.weekly
+      : progress.monthly
+
+    // Get all shop tasks for this type
+    const shopTaskIds = Object.entries(definitions)
+      .filter(([, def]) => def.category === 'shop')
+      .map(([taskId]) => taskId)
+      .filter((taskId) => taskProgress[taskId])
+
+    // Check if all shop tasks are completed
+    const allCompleted = shopTaskIds.length > 0 && shopTaskIds.every((taskId) => taskProgress[taskId].completed)
+
+    shopTaskIds.forEach((taskId) => {
+      if (allCompleted) {
+        // Reset all
+        taskProgress[taskId].count = 0
+        taskProgress[taskId].completed = false
+      } else {
+        // Complete all
+        const maxCount = taskProgress[taskId].maxCount ?? 0
+        taskProgress[taskId].count = maxCount
+        taskProgress[taskId].completed = true
+      }
+      taskProgress[taskId].lastUpdated = Date.now()
+    })
+
+    this.saveProgress(progress)
+  },
+
+  /**
+   * Toggle all craft items for a given type
+   * If all are completed → reset to 0, otherwise → complete all
+   */
+  toggleAllCraftItems(type: 'daily' | 'weekly' | 'monthly'): void {
+    const progress = this.getProgress()
+    const definitions = type === 'daily'
+      ? DAILY_TASK_DEFINITIONS
+      : type === 'weekly'
+      ? WEEKLY_TASK_DEFINITIONS
+      : MONTHLY_TASK_DEFINITIONS
+    const taskProgress = type === 'daily'
+      ? progress.daily
+      : type === 'weekly'
+      ? progress.weekly
+      : progress.monthly
+
+    // Get all craft tasks for this type
+    const craftTaskIds = Object.entries(definitions)
+      .filter(([, def]) => def.category === 'craft')
+      .map(([taskId]) => taskId)
+      .filter((taskId) => taskProgress[taskId])
+
+    // Check if all craft tasks are completed
+    const allCompleted = craftTaskIds.length > 0 && craftTaskIds.every((taskId) => taskProgress[taskId].completed)
+
+    craftTaskIds.forEach((taskId) => {
+      if (allCompleted) {
+        // Reset all
+        taskProgress[taskId].count = 0
+        taskProgress[taskId].completed = false
+      } else {
+        // Complete all
+        const maxCount = taskProgress[taskId].maxCount ?? 0
+        taskProgress[taskId].count = maxCount
+        taskProgress[taskId].completed = true
+      }
+      taskProgress[taskId].lastUpdated = Date.now()
+    })
+
     this.saveProgress(progress)
   },
 

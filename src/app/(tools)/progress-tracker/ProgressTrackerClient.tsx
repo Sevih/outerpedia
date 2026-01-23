@@ -13,6 +13,7 @@ import {
 import ItemInlineDisplay from '@/app/components/ItemInline'
 
 type TabType = 'daily' | 'weekly' | 'monthly'
+type SettingsTabType = 'display' | 'game' | 'content' | 'craft' | 'shop'
 
 export function ProgressTrackerClient() {
   const { t } = useI18n()
@@ -24,6 +25,7 @@ export function ProgressTrackerClient() {
   const [importData, setImportData] = useState('')
   const [importError, setImportError] = useState('')
   const [activeTab, setActiveTab] = useState<TabType>('daily')
+  const [settingsTab, setSettingsTab] = useState<SettingsTabType>('display')
   const lastClickTime = useRef<number>(0)
 
   // Debounce helper to prevent double-clicks
@@ -161,6 +163,26 @@ export function ProgressTrackerClient() {
     setProgress(ProgressTracker.getProgress())
   }
 
+  const handleSetDisplayMode = (mode: 'tabs' | 'single-page') => {
+    ProgressTracker.setDisplayMode(mode)
+    setSettings(ProgressTracker.getSettings())
+  }
+
+  const handleSweepAll = () => {
+    ProgressTracker.toggleAllSweepContent()
+    setProgress(ProgressTracker.getProgress())
+  }
+
+  const handleToggleAllShop = (type: 'daily' | 'weekly' | 'monthly') => {
+    ProgressTracker.toggleAllShopPurchases(type)
+    setProgress(ProgressTracker.getProgress())
+  }
+
+  const handleToggleAllCraft = (type: 'daily' | 'weekly' | 'monthly') => {
+    ProgressTracker.toggleAllCraftItems(type)
+    setProgress(ProgressTracker.getProgress())
+  }
+
   const stats = ProgressTracker.getStats(progress)
   const dailyResetTime = ProgressTracker.getNextDailyReset()
   const weeklyResetTime = ProgressTracker.getNextWeeklyReset()
@@ -229,71 +251,177 @@ export function ProgressTrackerClient() {
         </button>
       </div>
 
-      {/* Tab Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <TabCard
-          label={t('progress.daily')}
-          completed={stats.dailyCompleted}
-          total={stats.dailyTotal}
-          percent={stats.dailyPercent}
-          resetTime={ProgressTracker.formatTimeUntil(dailyResetTime)}
-          resetLabel={t('progress.resetsIn')}
-          isActive={activeTab === 'daily'}
-          onClick={() => setActiveTab('daily')}
-        />
-        <TabCard
-          label={t('progress.weekly')}
-          completed={stats.weeklyCompleted}
-          total={stats.weeklyTotal}
-          percent={stats.weeklyPercent}
-          resetTime={ProgressTracker.formatTimeUntil(weeklyResetTime)}
-          resetLabel={t('progress.resetsIn')}
-          isActive={activeTab === 'weekly'}
-          onClick={() => setActiveTab('weekly')}
-        />
-        <TabCard
-          label={t('progress.monthly')}
-          completed={stats.monthlyCompleted}
-          total={stats.monthlyTotal}
-          percent={stats.monthlyPercent}
-          resetTime={ProgressTracker.formatTimeUntil(monthlyResetTime)}
-          resetLabel={t('progress.resetsIn')}
-          isActive={activeTab === 'monthly'}
-          onClick={() => setActiveTab('monthly')}
-        />
-      </div>
+      {/* Tab Cards - clickable in tabs mode, static summary in single-page mode */}
+      {settings?.displayMode === 'tabs' ? (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <TabCard
+            label={t('progress.daily')}
+            completed={stats.dailyCompleted}
+            total={stats.dailyTotal}
+            percent={stats.dailyPercent}
+            resetTime={ProgressTracker.formatTimeUntil(dailyResetTime)}
+            resetLabel={t('progress.resetsIn')}
+            isActive={activeTab === 'daily'}
+            onClick={() => setActiveTab('daily')}
+          />
+          <TabCard
+            label={t('progress.weekly')}
+            completed={stats.weeklyCompleted}
+            total={stats.weeklyTotal}
+            percent={stats.weeklyPercent}
+            resetTime={ProgressTracker.formatTimeUntil(weeklyResetTime)}
+            resetLabel={t('progress.resetsIn')}
+            isActive={activeTab === 'weekly'}
+            onClick={() => setActiveTab('weekly')}
+          />
+          <TabCard
+            label={t('progress.monthly')}
+            completed={stats.monthlyCompleted}
+            total={stats.monthlyTotal}
+            percent={stats.monthlyPercent}
+            resetTime={ProgressTracker.formatTimeUntil(monthlyResetTime)}
+            resetLabel={t('progress.resetsIn')}
+            isActive={activeTab === 'monthly'}
+            onClick={() => setActiveTab('monthly')}
+          />
+        </div>
+      ) : (
+        /* Single-page mode: summary bar */
+        <div className="flex flex-wrap gap-4 p-4 bg-gray-800/50 rounded-lg">
+          <SummaryBadge
+            label={t('progress.daily')}
+            completed={stats.dailyCompleted}
+            total={stats.dailyTotal}
+            percent={stats.dailyPercent}
+            resetTime={ProgressTracker.formatTimeUntil(dailyResetTime)}
+          />
+          <SummaryBadge
+            label={t('progress.weekly')}
+            completed={stats.weeklyCompleted}
+            total={stats.weeklyTotal}
+            percent={stats.weeklyPercent}
+            resetTime={ProgressTracker.formatTimeUntil(weeklyResetTime)}
+          />
+          <SummaryBadge
+            label={t('progress.monthly')}
+            completed={stats.monthlyCompleted}
+            total={stats.monthlyTotal}
+            percent={stats.monthlyPercent}
+            resetTime={ProgressTracker.formatTimeUntil(monthlyResetTime)}
+          />
+        </div>
+      )}
 
       {/* Task List */}
-      <section>
-        {activeTab === 'daily' && (
-          <TaskListByCategory
-            progress={progress.daily}
-            definitions={DAILY_TASK_DEFINITIONS}
-            type="daily"
-            onIncrement={handleIncrement}
-            onToggle={handleToggleCompletion}
-            t={t}
-          />
-        )}
-        {activeTab === 'weekly' && (
-          <TaskListByCategory
-            progress={progress.weekly}
-            definitions={WEEKLY_TASK_DEFINITIONS}
-            type="weekly"
-            onIncrement={handleIncrement}
-            onToggle={handleToggleCompletion}
-            t={t}
-          />
-        )}
-        {activeTab === 'monthly' && (
-          <TaskListByCategory
-            progress={progress.monthly || {}}
-            definitions={MONTHLY_TASK_DEFINITIONS}
-            type="monthly"
-            onIncrement={handleIncrement}
-            onToggle={handleToggleCompletion}
-            t={t}
-          />
+      <section className="space-y-8">
+        {/* Tabs mode: show only active tab */}
+        {settings?.displayMode === 'tabs' ? (
+          <>
+            {activeTab === 'daily' && (
+              <TaskListByCategory
+                progress={progress.daily}
+                definitions={DAILY_TASK_DEFINITIONS}
+                type="daily"
+                onIncrement={handleIncrement}
+                onToggle={handleToggleCompletion}
+                onSweepAll={handleSweepAll}
+                onToggleAllShop={handleToggleAllShop}
+                onToggleAllCraft={handleToggleAllCraft}
+                t={t}
+              />
+            )}
+            {activeTab === 'weekly' && (
+              <TaskListByCategory
+                progress={progress.weekly}
+                definitions={WEEKLY_TASK_DEFINITIONS}
+                type="weekly"
+                onIncrement={handleIncrement}
+                onToggle={handleToggleCompletion}
+                onToggleAllShop={handleToggleAllShop}
+                onToggleAllCraft={handleToggleAllCraft}
+                t={t}
+              />
+            )}
+            {activeTab === 'monthly' && (
+              <TaskListByCategory
+                progress={progress.monthly || {}}
+                definitions={MONTHLY_TASK_DEFINITIONS}
+                type="monthly"
+                onIncrement={handleIncrement}
+                onToggle={handleToggleCompletion}
+                onToggleAllShop={handleToggleAllShop}
+                onToggleAllCraft={handleToggleAllCraft}
+                t={t}
+              />
+            )}
+          </>
+        ) : (
+          /* Single-page mode: show all sections */
+          <>
+            {/* Daily Section */}
+            <div>
+              <SectionHeader
+                label={t('progress.daily')}
+                completed={stats.dailyCompleted}
+                total={stats.dailyTotal}
+                resetTime={ProgressTracker.formatTimeUntil(dailyResetTime)}
+                resetLabel={t('progress.resetsIn')}
+              />
+              <TaskListByCategory
+                progress={progress.daily}
+                definitions={DAILY_TASK_DEFINITIONS}
+                type="daily"
+                onIncrement={handleIncrement}
+                onToggle={handleToggleCompletion}
+                onSweepAll={handleSweepAll}
+                onToggleAllShop={handleToggleAllShop}
+                onToggleAllCraft={handleToggleAllCraft}
+                t={t}
+              />
+            </div>
+
+            {/* Weekly Section */}
+            <div>
+              <SectionHeader
+                label={t('progress.weekly')}
+                completed={stats.weeklyCompleted}
+                total={stats.weeklyTotal}
+                resetTime={ProgressTracker.formatTimeUntil(weeklyResetTime)}
+                resetLabel={t('progress.resetsIn')}
+              />
+              <TaskListByCategory
+                progress={progress.weekly}
+                definitions={WEEKLY_TASK_DEFINITIONS}
+                type="weekly"
+                onIncrement={handleIncrement}
+                onToggle={handleToggleCompletion}
+                onToggleAllShop={handleToggleAllShop}
+                onToggleAllCraft={handleToggleAllCraft}
+                t={t}
+              />
+            </div>
+
+            {/* Monthly Section */}
+            <div>
+              <SectionHeader
+                label={t('progress.monthly')}
+                completed={stats.monthlyCompleted}
+                total={stats.monthlyTotal}
+                resetTime={ProgressTracker.formatTimeUntil(monthlyResetTime)}
+                resetLabel={t('progress.resetsIn')}
+              />
+              <TaskListByCategory
+                progress={progress.monthly || {}}
+                definitions={MONTHLY_TASK_DEFINITIONS}
+                type="monthly"
+                onIncrement={handleIncrement}
+                onToggle={handleToggleCompletion}
+                onToggleAllShop={handleToggleAllShop}
+                onToggleAllCraft={handleToggleAllCraft}
+                t={t}
+              />
+            </div>
+          </>
         )}
       </section>
 
@@ -362,163 +490,155 @@ export function ProgressTrackerClient() {
           onClick={() => setShowSettingsModal(false)}
         >
           <div className="bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-xl font-bold mb-6">{t('progress.settingsTitle')}</h3>
+            <h3 className="text-xl font-bold mb-4">{t('progress.settingsTitle')}</h3>
 
-            {/* Game Configuration Section */}
-            <div className="mb-6">
-              <h4 className="text-base font-semibold mb-4 text-cyan-400">{t('progress.gameConfiguration')}</h4>
-              <div className="space-y-3">
-
-              {/* Terminus Support Pack Toggle */}
-              <div className="p-4 bg-gray-700 rounded-lg">
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={settings.hasTerminusSupportPack}
-                    onChange={handleToggleTerminusPack}
-                    className="w-5 h-5 rounded border-gray-600 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
-                  />
-                  <div className="flex-1">
-                    <span className="font-medium">{t('progress.terminusSupportPack')}</span>
-                    <p className="text-sm text-gray-400 mt-1">
-                      {t('progress.terminusSupportPackDesc')}
-                    </p>
-                  </div>
-                </label>
-              </div>
-
-              {/* Veronica Premium Pack Toggle */}
-              <div className="p-4 bg-gray-700 rounded-lg">
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={settings.hasVeronicaPremiumPack}
-                    onChange={handleToggleVeronicaPack}
-                    className="w-5 h-5 rounded border-gray-600 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
-                  />
-                  <div className="flex-1">
-                    <span className="font-medium">{t('progress.veronicaPremiumPack')}</span>
-                    <p className="text-sm text-gray-400 mt-1">
-                      {t('progress.veronicaPremiumPackDesc')}
-                    </p>
-                  </div>
-                </label>
-              </div>
-
-              {/* Adventure License Section */}
-              <div className="p-4 bg-gray-700 rounded-lg">
-                <div className="mb-3">
-                  <span className="font-medium">{t('progress.adventureLicense')}</span>
-                  <p className="text-sm text-gray-400 mt-1">
-                    {t('progress.adventureLicenseDesc')}
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <label className="flex items-center gap-3 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="adventureLicense"
-                      checked={settings.adventureLicenseCombatsPerStage === 2}
-                      onChange={() => handleAdventureLicenseChange(2)}
-                      className="w-4 h-4 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
-                    />
-                    <span className="text-sm">{t('progress.adventureLicenseCombats2')}</span>
-                  </label>
-                  <label className="flex items-center gap-3 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="adventureLicense"
-                      checked={settings.adventureLicenseCombatsPerStage === 3}
-                      onChange={() => handleAdventureLicenseChange(3)}
-                      className="w-4 h-4 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
-                    />
-                    <span className="text-sm">{t('progress.adventureLicenseCombats3')}</span>
-                  </label>
-                  <label className="flex items-center gap-3 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="adventureLicense"
-                      checked={settings.adventureLicenseCombatsPerStage === 4}
-                      onChange={() => handleAdventureLicenseChange(4)}
-                      className="w-4 h-4 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
-                    />
-                    <span className="text-sm">{t('progress.adventureLicenseCombats4')}</span>
-                  </label>
-                </div>
-              </div>
-
-              {/* Elemental Tower Completion Toggle */}
-              <div className="p-4 bg-gray-700 rounded-lg">
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={settings.hasCompletedElementalTower}
-                    onChange={handleToggleElementalTowerCompletion}
-                    className="w-5 h-5 rounded border-gray-600 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
-                  />
-                  <div className="flex-1">
-                    <span className="font-medium">{t('progress.elementalTowerCompleted')}</span>
-                    <p className="text-sm text-gray-400 mt-1">
-                      {t('progress.elementalTowerCompletedDesc')}
-                    </p>
-                  </div>
-                </label>
-              </div>
+            {/* Settings Tabs */}
+            <div className="flex gap-2 mb-6 border-b border-gray-700 pb-2">
+              {(['display', 'game', 'content', 'craft', 'shop'] as SettingsTabType[]).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setSettingsTab(tab)}
+                  className={`px-4 py-2 rounded-t text-sm font-medium transition ${
+                    settingsTab === tab
+                      ? 'bg-gray-700 text-white'
+                      : 'text-gray-400 hover:text-gray-200'
+                  }`}
+                >
+                  {t(`progress.settings.tab.${tab}`)}
+                </button>
+              ))}
             </div>
-          </div>
 
-          {/* Optional Content Section (non-shop tasks) */}
-            {(Object.values(DAILY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category !== 'shop').length > 0 ||
-              Object.values(WEEKLY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category !== 'shop').length > 0 ||
-              Object.values(MONTHLY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category !== 'shop').length > 0) && (
-              <div className="mb-6">
-                <h4 className="text-base font-semibold mb-4 text-cyan-400">{t('progress.optionalContent')}</h4>
-                <p className="text-sm text-gray-400 mb-4">{t('progress.optionalContentDesc')}</p>
+            {/* Display Tab */}
+            {settingsTab === 'display' && (
+              <div className="space-y-4">
+                <div className="p-4 bg-gray-700 rounded-lg">
+                  <div className="mb-3">
+                    <span className="font-medium">{t('progress.displayMode')}</span>
+                    <p className="text-sm text-gray-400 mt-1">{t('progress.displayModeDesc')}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleSetDisplayMode('tabs')}
+                      className={`flex-1 px-4 py-2 rounded transition ${
+                        settings.displayMode === 'tabs'
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-600 text-gray-300 hover:bg-gray-500'
+                      }`}
+                    >
+                      {t('progress.displayModeTabs')}
+                    </button>
+                    <button
+                      onClick={() => handleSetDisplayMode('single-page')}
+                      className={`flex-1 px-4 py-2 rounded transition ${
+                        settings.displayMode === 'single-page'
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-600 text-gray-300 hover:bg-gray-500'
+                      }`}
+                    >
+                      {t('progress.displayModeSinglePage')}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Game Tab */}
+            {settingsTab === 'game' && (
+              <div className="space-y-3">
+                {/* Terminus Support Pack Toggle */}
+                <div className="p-4 bg-gray-700 rounded-lg">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={settings.hasTerminusSupportPack}
+                      onChange={handleToggleTerminusPack}
+                      className="w-5 h-5 rounded border-gray-600 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
+                    />
+                    <div className="flex-1">
+                      <span className="font-medium">{t('progress.terminusSupportPack')}</span>
+                      <p className="text-sm text-gray-400 mt-1">{t('progress.terminusSupportPackDesc')}</p>
+                    </div>
+                  </label>
+                </div>
+
+                {/* Veronica Premium Pack Toggle */}
+                <div className="p-4 bg-gray-700 rounded-lg">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={settings.hasVeronicaPremiumPack}
+                      onChange={handleToggleVeronicaPack}
+                      className="w-5 h-5 rounded border-gray-600 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
+                    />
+                    <div className="flex-1">
+                      <span className="font-medium">{t('progress.veronicaPremiumPack')}</span>
+                      <p className="text-sm text-gray-400 mt-1">{t('progress.veronicaPremiumPackDesc')}</p>
+                    </div>
+                  </label>
+                </div>
+
+                {/* Adventure License Section */}
+                <div className="p-4 bg-gray-700 rounded-lg">
+                  <div className="mb-3">
+                    <span className="font-medium">{t('progress.adventureLicense')}</span>
+                    <p className="text-sm text-gray-400 mt-1">{t('progress.adventureLicenseDesc')}</p>
+                  </div>
+                  <div className="space-y-2">
+                    {([2, 3, 4] as const).map((n) => (
+                      <label key={n} className="flex items-center gap-3 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="adventureLicense"
+                          checked={settings.adventureLicenseCombatsPerStage === n}
+                          onChange={() => handleAdventureLicenseChange(n)}
+                          className="w-4 h-4 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
+                        />
+                        <span className="text-sm">{t(`progress.adventureLicenseCombats${n}`)}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Elemental Tower Completion Toggle */}
+                <div className="p-4 bg-gray-700 rounded-lg">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={settings.hasCompletedElementalTower}
+                      onChange={handleToggleElementalTowerCompletion}
+                      className="w-5 h-5 rounded border-gray-600 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
+                    />
+                    <div className="flex-1">
+                      <span className="font-medium">{t('progress.elementalTowerCompleted')}</span>
+                      <p className="text-sm text-gray-400 mt-1">{t('progress.elementalTowerCompletedDesc')}</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {/* Content Tab - Optional non-shop tasks */}
+            {settingsTab === 'content' && (
+              <div className="space-y-6">
+                <p className="text-sm text-gray-400">{t('progress.optionalContentDesc')}</p>
 
                 {/* Daily Optional Content */}
                 {Object.values(DAILY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category !== 'shop').length > 0 && (
-                  <div className="mb-4">
-                    <p className="text-sm font-medium mb-2">{t('progress.dailyTasks')}</p>
-                    <div className="space-y-2">
+                  <div>
+                    <p className="text-sm font-medium mb-2 text-cyan-400">{t('progress.dailyTasks')}</p>
+                    <div className="space-y-1">
                       {Object.values(DAILY_TASK_DEFINITIONS)
                         .filter((def) => !def.permanent && def.category !== 'shop')
                         .map((def) => (
-                          <label
-                            key={def.id}
-                            className="flex items-center gap-3 p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-650 transition"
-                          >
+                          <label key={def.id} className="flex items-center gap-3 p-2 bg-gray-700 rounded cursor-pointer hover:bg-gray-650 transition">
                             <input
                               type="checkbox"
                               checked={settings.enabledTasks.daily.includes(def.id)}
                               onChange={() => handleToggleTaskEnabled(def.id, 'daily')}
-                              className="w-5 h-5 rounded border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
+                              className="w-4 h-4 rounded border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
                             />
-                            <span className="flex-1">{t(def.labelKey)}</span>
-                          </label>
-                        ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Weekly Optional Content */}
-                {Object.values(WEEKLY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category !== 'shop').length > 0 && (
-                  <div className="mb-4">
-                    <p className="text-sm font-medium mb-2">{t('progress.weeklyTasks')}</p>
-                    <div className="space-y-2">
-                      {Object.values(WEEKLY_TASK_DEFINITIONS)
-                        .filter((def) => !def.permanent && def.category !== 'shop')
-                        .map((def) => (
-                          <label
-                            key={def.id}
-                            className="flex items-center gap-3 p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-650 transition"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={settings.enabledTasks.weekly.includes(def.id)}
-                              onChange={() => handleToggleTaskEnabled(def.id, 'weekly')}
-                              className="w-5 h-5 rounded border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
-                            />
-                            <span className="flex-1">{t(def.labelKey)}</span>
+                            <span className="flex-1 text-sm">{t(def.labelKey)}</span>
                           </label>
                         ))}
                     </div>
@@ -528,97 +648,74 @@ export function ProgressTrackerClient() {
                 {/* Monthly Optional Content */}
                 {Object.values(MONTHLY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category !== 'shop').length > 0 && (
                   <div>
-                    <p className="text-sm font-medium mb-2">{t('progress.monthlyTasks')}</p>
-                    <div className="space-y-2">
+                    <p className="text-sm font-medium mb-2 text-cyan-400">{t('progress.monthlyTasks')}</p>
+                    <div className="space-y-1">
                       {Object.values(MONTHLY_TASK_DEFINITIONS)
                         .filter((def) => !def.permanent && def.category !== 'shop')
                         .map((def) => (
-                          <label
-                            key={def.id}
-                            className="flex items-center gap-3 p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-650 transition"
-                          >
+                          <label key={def.id} className="flex items-center gap-3 p-2 bg-gray-700 rounded cursor-pointer hover:bg-gray-650 transition">
                             <input
                               type="checkbox"
                               checked={settings.enabledTasks.monthly.includes(def.id)}
                               onChange={() => handleToggleTaskEnabled(def.id, 'monthly')}
-                              className="w-5 h-5 rounded border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
+                              className="w-4 h-4 rounded border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
                             />
-                            <span className="flex-1">{t(def.labelKey)}</span>
+                            <span className="flex-1 text-sm">{t(def.labelKey)}</span>
                           </label>
                         ))}
                     </div>
                   </div>
                 )}
+
+                {/* Danger Zone */}
+                <div className="p-4 border border-red-500/30 rounded-lg">
+                  <h4 className="text-base font-semibold mb-2 text-red-400">{t('progress.dangerZone')}</h4>
+                  <p className="text-sm text-gray-400 mb-3">{t('progress.clearDataDesc')}</p>
+                  <button
+                    onClick={() => {
+                      if (window.confirm(t('progress.clearDataConfirm'))) {
+                        localStorage.clear()
+                        window.location.reload()
+                      }
+                    }}
+                    className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 rounded transition"
+                  >
+                    {t('progress.clearData')}
+                  </button>
+                </div>
               </div>
             )}
 
-          {/* Optional Shop Items Section */}
-            {(Object.values(DAILY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category === 'shop').length > 0 ||
-              Object.values(WEEKLY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category === 'shop').length > 0 ||
-              Object.values(MONTHLY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category === 'shop').length > 0) && (
-              <div className="mb-6">
-                <h4 className="text-base font-semibold mb-4 text-yellow-400">{t('progress.optionalShop')}</h4>
-                <p className="text-sm text-gray-400 mb-4">{t('progress.optionalShopDesc')}</p>
+            {/* Craft Tab - All craft items toggleable */}
+            {settingsTab === 'craft' && (
+              <div className="space-y-6">
+                <p className="text-sm text-gray-400">{t('progress.craftSettingsDesc')}</p>
 
-                {/* Daily Optional Shop */}
-                {Object.values(DAILY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category === 'shop').length > 0 && (
-                  <div className="mb-4">
-                    <p className="text-sm font-medium mb-2">{t('progress.dailyTasks')}</p>
-                    <div className="space-y-2">
-                      {Object.values(DAILY_TASK_DEFINITIONS)
-                        .filter((def) => !def.permanent && def.category === 'shop')
-                        .map((def) => (
-                          <label
-                            key={def.id}
-                            className="flex items-center gap-3 p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-650 transition"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={settings.enabledTasks.daily.includes(def.id)}
-                              onChange={() => handleToggleTaskEnabled(def.id, 'daily')}
-                              className="w-5 h-5 rounded border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
-                            />
-                            <span className="flex-1 flex items-center justify-between gap-2">
-                              <span className="inline-flex items-center gap-1">
-                                {def.shopItemQuantity && <span className="text-gray-300">{def.shopItemQuantity} x</span>}
-                                <ItemInlineDisplay names={def.shopItemKey!} size={18} />
-                              </span>
-                              {def.shopSubcategory && (
-                                <span className="text-xs text-gray-500">{t(def.shopSubcategory)}</span>
-                              )}
-                            </span>
-                          </label>
-                        ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Weekly Optional Shop */}
-                {Object.values(WEEKLY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category === 'shop').length > 0 && (
-                  <div className="mb-4">
-                    <p className="text-sm font-medium mb-2">{t('progress.weeklyTasks')}</p>
-                    <div className="space-y-2">
+                {/* Weekly Craft Items */}
+                {Object.values(WEEKLY_TASK_DEFINITIONS).filter((def) => def.category === 'craft').length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium mb-2 text-orange-400">{t('progress.weeklyTasks')}</p>
+                    <div className="space-y-1">
                       {Object.values(WEEKLY_TASK_DEFINITIONS)
-                        .filter((def) => !def.permanent && def.category === 'shop')
+                        .filter((def) => def.category === 'craft')
                         .map((def) => (
-                          <label
-                            key={def.id}
-                            className="flex items-center gap-3 p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-650 transition"
-                          >
+                          <label key={def.id} className="flex items-center gap-3 p-2 bg-gray-700 rounded cursor-pointer hover:bg-gray-650 transition">
                             <input
                               type="checkbox"
                               checked={settings.enabledTasks.weekly.includes(def.id)}
                               onChange={() => handleToggleTaskEnabled(def.id, 'weekly')}
-                              className="w-5 h-5 rounded border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
+                              className="w-4 h-4 rounded border-gray-600 text-orange-500 focus:ring-orange-500 focus:ring-offset-0 cursor-pointer"
                             />
-                            <span className="flex-1 flex items-center justify-between gap-2">
-                              <span className="inline-flex items-center gap-1">
-                                {def.shopItemQuantity && <span className="text-gray-300">{def.shopItemQuantity} x</span>}
-                                <ItemInlineDisplay names={def.shopItemKey!} size={18} />
-                              </span>
-                              {def.shopSubcategory && (
-                                <span className="text-xs text-gray-500">{t(def.shopSubcategory)}</span>
+                            <span className="flex-1 flex items-center justify-between gap-2 text-sm">
+                              {def.shopItemKey ? (
+                                <span className="inline-flex items-center gap-1">
+                                  {def.shopItemQuantity && <span className="text-gray-300">{def.shopItemQuantity} x</span>}
+                                  <ItemInlineDisplay names={def.shopItemKey} size={16} />
+                                </span>
+                              ) : (
+                                <span>{t(def.labelKey)}</span>
                               )}
+                              {def.shopCategory && <span className="text-xs text-gray-500">{t(def.shopCategory)}</span>}
                             </span>
                           </label>
                         ))}
@@ -626,32 +723,31 @@ export function ProgressTrackerClient() {
                   </div>
                 )}
 
-                {/* Monthly Optional Shop */}
-                {Object.values(MONTHLY_TASK_DEFINITIONS).filter((def) => !def.permanent && def.category === 'shop').length > 0 && (
+                {/* Monthly Craft Items */}
+                {Object.values(MONTHLY_TASK_DEFINITIONS).filter((def) => def.category === 'craft').length > 0 && (
                   <div>
-                    <p className="text-sm font-medium mb-2">{t('progress.monthlyTasks')}</p>
-                    <div className="space-y-2">
+                    <p className="text-sm font-medium mb-2 text-orange-400">{t('progress.monthlyTasks')}</p>
+                    <div className="space-y-1">
                       {Object.values(MONTHLY_TASK_DEFINITIONS)
-                        .filter((def) => !def.permanent && def.category === 'shop')
+                        .filter((def) => def.category === 'craft')
                         .map((def) => (
-                          <label
-                            key={def.id}
-                            className="flex items-center gap-3 p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-650 transition"
-                          >
+                          <label key={def.id} className="flex items-center gap-3 p-2 bg-gray-700 rounded cursor-pointer hover:bg-gray-650 transition">
                             <input
                               type="checkbox"
                               checked={settings.enabledTasks.monthly.includes(def.id)}
                               onChange={() => handleToggleTaskEnabled(def.id, 'monthly')}
-                              className="w-5 h-5 rounded border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
+                              className="w-4 h-4 rounded border-gray-600 text-orange-500 focus:ring-orange-500 focus:ring-offset-0 cursor-pointer"
                             />
-                            <span className="flex-1 flex items-center justify-between gap-2">
-                              <span className="inline-flex items-center gap-1">
-                                {def.shopItemQuantity && <span className="text-gray-300">{def.shopItemQuantity} x</span>}
-                                <ItemInlineDisplay names={def.shopItemKey!} size={18} />
-                              </span>
-                              {def.shopSubcategory && (
-                                <span className="text-xs text-gray-500">{t(def.shopSubcategory)}</span>
+                            <span className="flex-1 flex items-center justify-between gap-2 text-sm">
+                              {def.shopItemKey ? (
+                                <span className="inline-flex items-center gap-1">
+                                  {def.shopItemQuantity && <span className="text-gray-300">{def.shopItemQuantity} x</span>}
+                                  <ItemInlineDisplay names={def.shopItemKey} size={16} />
+                                </span>
+                              ) : (
+                                <span>{t(def.labelKey)}</span>
                               )}
+                              {def.shopCategory && <span className="text-xs text-gray-500">{t(def.shopCategory)}</span>}
                             </span>
                           </label>
                         ))}
@@ -661,26 +757,112 @@ export function ProgressTrackerClient() {
               </div>
             )}
 
-            {/* Danger Zone */}
-            <div className="mb-6 p-4 border border-red-500/30 rounded-lg">
-              <h4 className="text-base font-semibold mb-2 text-red-400">{t('progress.dangerZone')}</h4>
-              <p className="text-sm text-gray-400 mb-3">{t('progress.clearDataDesc')}</p>
-              <button
-                onClick={() => {
-                  if (window.confirm(t('progress.clearDataConfirm'))) {
-                    localStorage.clear()
-                    window.location.reload()
-                  }
-                }}
-                className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 rounded transition"
-              >
-                {t('progress.clearData')}
-              </button>
-            </div>
+            {/* Shop Tab - All shop items toggleable */}
+            {settingsTab === 'shop' && (
+              <div className="space-y-6">
+                <p className="text-sm text-gray-400">{t('progress.shopSettingsDesc')}</p>
+
+                {/* Daily Shop Items */}
+                {Object.values(DAILY_TASK_DEFINITIONS).filter((def) => def.category === 'shop').length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium mb-2 text-yellow-400">{t('progress.dailyTasks')}</p>
+                    <div className="space-y-1">
+                      {Object.values(DAILY_TASK_DEFINITIONS)
+                        .filter((def) => def.category === 'shop')
+                        .map((def) => (
+                          <label key={def.id} className="flex items-center gap-3 p-2 bg-gray-700 rounded cursor-pointer hover:bg-gray-650 transition">
+                            <input
+                              type="checkbox"
+                              checked={settings.enabledTasks.daily.includes(def.id)}
+                              onChange={() => handleToggleTaskEnabled(def.id, 'daily')}
+                              className="w-4 h-4 rounded border-gray-600 text-yellow-500 focus:ring-yellow-500 focus:ring-offset-0 cursor-pointer"
+                            />
+                            <span className="flex-1 flex items-center justify-between gap-2 text-sm">
+                              {def.shopItemKey ? (
+                                <span className="inline-flex items-center gap-1">
+                                  {def.shopItemQuantity && <span className="text-gray-300">{def.shopItemQuantity} x</span>}
+                                  <ItemInlineDisplay names={def.shopItemKey} size={16} />
+                                </span>
+                              ) : (
+                                <span>{t(def.labelKey)}</span>
+                              )}
+                              {def.shopSubcategory && <span className="text-xs text-gray-500">{t(def.shopSubcategory)}</span>}
+                            </span>
+                          </label>
+                        ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Weekly Shop Items */}
+                {Object.values(WEEKLY_TASK_DEFINITIONS).filter((def) => def.category === 'shop').length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium mb-2 text-yellow-400">{t('progress.weeklyTasks')}</p>
+                    <div className="space-y-1">
+                      {Object.values(WEEKLY_TASK_DEFINITIONS)
+                        .filter((def) => def.category === 'shop')
+                        .map((def) => (
+                          <label key={def.id} className="flex items-center gap-3 p-2 bg-gray-700 rounded cursor-pointer hover:bg-gray-650 transition">
+                            <input
+                              type="checkbox"
+                              checked={settings.enabledTasks.weekly.includes(def.id)}
+                              onChange={() => handleToggleTaskEnabled(def.id, 'weekly')}
+                              className="w-4 h-4 rounded border-gray-600 text-yellow-500 focus:ring-yellow-500 focus:ring-offset-0 cursor-pointer"
+                            />
+                            <span className="flex-1 flex items-center justify-between gap-2 text-sm">
+                              {def.shopItemKey ? (
+                                <span className="inline-flex items-center gap-1">
+                                  {def.shopItemQuantity && <span className="text-gray-300">{def.shopItemQuantity} x</span>}
+                                  <ItemInlineDisplay names={def.shopItemKey} size={16} />
+                                </span>
+                              ) : (
+                                <span>{t(def.labelKey)}</span>
+                              )}
+                              {def.shopSubcategory && <span className="text-xs text-gray-500">{t(def.shopSubcategory)}</span>}
+                            </span>
+                          </label>
+                        ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Monthly Shop Items */}
+                {Object.values(MONTHLY_TASK_DEFINITIONS).filter((def) => def.category === 'shop').length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium mb-2 text-yellow-400">{t('progress.monthlyTasks')}</p>
+                    <div className="space-y-1">
+                      {Object.values(MONTHLY_TASK_DEFINITIONS)
+                        .filter((def) => def.category === 'shop')
+                        .map((def) => (
+                          <label key={def.id} className="flex items-center gap-3 p-2 bg-gray-700 rounded cursor-pointer hover:bg-gray-650 transition">
+                            <input
+                              type="checkbox"
+                              checked={settings.enabledTasks.monthly.includes(def.id)}
+                              onChange={() => handleToggleTaskEnabled(def.id, 'monthly')}
+                              className="w-4 h-4 rounded border-gray-600 text-yellow-500 focus:ring-yellow-500 focus:ring-offset-0 cursor-pointer"
+                            />
+                            <span className="flex-1 flex items-center justify-between gap-2 text-sm">
+                              {def.shopItemKey ? (
+                                <span className="inline-flex items-center gap-1">
+                                  {def.shopItemQuantity && <span className="text-gray-300">{def.shopItemQuantity} x</span>}
+                                  <ItemInlineDisplay names={def.shopItemKey} size={16} />
+                                </span>
+                              ) : (
+                                <span>{t(def.labelKey)}</span>
+                              )}
+                              {def.shopSubcategory && <span className="text-xs text-gray-500">{t(def.shopSubcategory)}</span>}
+                            </span>
+                          </label>
+                        ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             <button
               onClick={() => setShowSettingsModal(false)}
-              className="w-full px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded transition"
+              className="w-full mt-6 px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded transition"
             >
               {t('progress.close')}
             </button>
@@ -771,6 +953,9 @@ function TaskListByCategory({
   type,
   onIncrement,
   onToggle,
+  onSweepAll,
+  onToggleAllShop,
+  onToggleAllCraft,
   t,
 }: {
   progress: Record<string, TaskProgress>
@@ -778,6 +963,9 @@ function TaskListByCategory({
   type: 'daily' | 'weekly' | 'monthly'
   onIncrement: (taskId: string, type: 'daily' | 'weekly' | 'monthly') => void
   onToggle: (taskId: string, type: 'daily' | 'weekly' | 'monthly') => void
+  onSweepAll?: () => void
+  onToggleAllShop?: (type: 'daily' | 'weekly' | 'monthly') => void
+  onToggleAllCraft?: (type: 'daily' | 'weekly' | 'monthly') => void
   t: (key: string) => string
 }) {
   if (Object.keys(progress).length === 0) {
@@ -785,10 +973,11 @@ function TaskListByCategory({
   }
 
   // Group tasks by category
-  const categories: TaskCategory[] = ['task', 'recurring', 'shop']
+  const categories: TaskCategory[] = ['task', 'recurring', 'craft', 'shop']
   const tasksByCategory: Record<TaskCategory, [string, TaskProgress][]> = {
     task: [],
     recurring: [],
+    craft: [],
     shop: [],
   }
 
@@ -805,6 +994,11 @@ function TaskListByCategory({
     'progress.shop.arena-shop': 'TI_Item_PVP_Medal',
     'progress.shop.joint-challenge': 'TI_Item_BossEvent_Coin_01',
     'progress.shop.guild-shop': 'CM_Goods_Guild_Coin',
+    'progress.shop.archdemon-ruins': 'TI_Item_Remains',
+    'progress.shop.world-boss': 'TI_Item_World_Boss',
+    'progress.shop.skyward': 'TI_Item_Tower_Coin_01',
+    'progress.shop.adventure-license': 'TI_Licence',
+    'progress.shop.survey-hub': 'survey-contributions',
   }
 
   // Build shop hierarchy
@@ -831,6 +1025,7 @@ function TaskListByCategory({
   const categoryConfig: Record<TaskCategory, { labelKey: string; color: string }> = {
     task: { labelKey: 'progress.category.tasks', color: 'text-gray-400' },
     recurring: { labelKey: 'progress.category.recurring', color: 'text-purple-400' },
+    craft: { labelKey: 'progress.category.craft', color: 'text-orange-400' },
     shop: { labelKey: 'progress.category.shop', color: 'text-yellow-400' },
   }
 
@@ -846,16 +1041,97 @@ function TaskListByCategory({
           ? ` (${def.resetIntervalDays}${t('progress.daysShort')})`
           : ''
 
-        // Special rendering for shop category
-        if (category === 'shop') {
+        // Special rendering for craft category
+        if (category === 'craft') {
+          // Group craft tasks by shopCategory (e.g., Kate's Workshop)
+          const craftGroups: Record<string, [string, TaskProgress][]> = {}
+          tasks.forEach(([key, task]) => {
+            const def = definitions[key]
+            const groupKey = def?.shopCategory || 'progress.craft.other'
+            if (!craftGroups[groupKey]) {
+              craftGroups[groupKey] = []
+            }
+            craftGroups[groupKey].push([key, task])
+          })
+
           return (
             <div key={category}>
-              {/* Shop Category Header */}
+              {/* Craft Category Header with Complete All button */}
               <div className="flex items-center gap-2 mb-2">
                 <span className={`text-sm font-medium ${config.color}`}>
                   {t(config.labelKey)}
                 </span>
                 <div className="flex-1 h-px bg-gray-700" />
+                {onToggleAllCraft && (
+                  <button
+                    onClick={() => onToggleAllCraft(type)}
+                    className="text-xs px-2 py-1 bg-orange-600/20 hover:bg-orange-600/40 text-orange-400 rounded transition"
+                  >
+                    {t('progress.completeAll')}
+                  </button>
+                )}
+              </div>
+
+              {/* Craft Groups */}
+              <div className="space-y-3">
+                {Object.entries(craftGroups).map(([groupKey, groupTasks]) => {
+                  const firstDef = definitions[groupTasks[0]?.[0]]
+                  return (
+                    <div key={groupKey} className="bg-gray-800/50 rounded-lg p-3">
+                      {/* Craft Group Header */}
+                      <div className="flex items-center gap-1.5 text-sm font-medium text-orange-400 mb-2">
+                        {firstDef?.icon && (
+                          <Image
+                            src={`/images/item/${firstDef.icon}.webp`}
+                            alt=""
+                            width={18}
+                            height={18}
+                            className="object-contain"
+                          />
+                        )}
+                        {t(groupKey)}
+                      </div>
+                      {/* Craft Items */}
+                      <div className="space-y-1 pl-3 border-l-2 border-orange-400/30">
+                        {groupTasks.map(([key, task]) => (
+                          <TaskItem
+                            key={key}
+                            task={task}
+                            labelKey={`progress.task.${key}`}
+                            onRowClick={() => onIncrement(key, type)}
+                            onCheckboxChange={() => onToggle(key, type)}
+                            t={t}
+                            compact
+                            definition={definitions[key]}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )
+        }
+
+        // Special rendering for shop category
+        if (category === 'shop') {
+          return (
+            <div key={category}>
+              {/* Shop Category Header with Complete All button */}
+              <div className="flex items-center gap-2 mb-2">
+                <span className={`text-sm font-medium ${config.color}`}>
+                  {t(config.labelKey)}
+                </span>
+                <div className="flex-1 h-px bg-gray-700" />
+                {onToggleAllShop && (
+                  <button
+                    onClick={() => onToggleAllShop(type)}
+                    className="text-xs px-2 py-1 bg-yellow-600/20 hover:bg-yellow-600/40 text-yellow-400 rounded transition"
+                  >
+                    {t('progress.completeAll')}
+                  </button>
+                )}
               </div>
 
               {/* Shop Hierarchy */}
@@ -930,6 +1206,14 @@ function TaskListByCategory({
           )
         }
 
+        // Check if this category has sweepable content (only for daily tasks)
+        const sweepableTasks = [
+          'bounty-hunter', 'bandit-chase', 'upgrade-stone-retrieval',
+          'defeat-doppelganger', 'special-request-ecology', 'special-request-identification'
+        ]
+        const hasSweepableTasks = category === 'task' && type === 'daily' &&
+          tasks.some(([key]) => sweepableTasks.includes(key))
+
         return (
           <div key={category}>
             {/* Category Header */}
@@ -938,6 +1222,14 @@ function TaskListByCategory({
                 {t(config.labelKey)}{resetInfo}
               </span>
               <div className="flex-1 h-px bg-gray-700" />
+              {hasSweepableTasks && onSweepAll && (
+                <button
+                  onClick={onSweepAll}
+                  className="text-xs px-2 py-1 bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-400 rounded transition"
+                >
+                  {t('progress.sweepAll')}
+                </button>
+              )}
             </div>
 
             {/* Tasks */}
@@ -1024,6 +1316,97 @@ function TaskItem({
           {task.count ?? 0}/{task.maxCount}
         </span>
       )}
+    </div>
+  )
+}
+
+// Summary badge for single-page mode
+function SummaryBadge({
+  label,
+  completed,
+  total,
+  percent,
+  resetTime,
+}: {
+  label: string
+  completed: number
+  total: number
+  percent: number
+  resetTime: string
+}) {
+  const colors = getProgressColor(percent)
+
+  return (
+    <div className="flex items-center gap-3 flex-1 min-w-[200px]">
+      <div className="flex-1">
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-sm font-medium text-gray-300">{label}</span>
+          <span className="text-xs text-gray-400">{completed}/{total}</span>
+        </div>
+        <div className="w-full bg-gray-700 rounded-full h-1.5">
+          <div
+            className={`${colors.bar} h-1.5 rounded-full transition-all`}
+            style={{ width: `${percent}%` }}
+          />
+        </div>
+        <div className="text-xs text-gray-500 mt-1">{resetTime}</div>
+      </div>
+    </div>
+  )
+}
+
+// Section header for single-page mode
+function SectionHeader({
+  label,
+  completed,
+  total,
+  resetTime,
+  resetLabel,
+}: {
+  label: string
+  completed: number
+  total: number
+  resetTime: string
+  resetLabel: string
+}) {
+  const percent = total > 0 ? Math.round((completed / total) * 100) : 0
+  const colors = getProgressColor(percent)
+
+  return (
+    <div className={`flex items-center gap-4 p-4 mb-4 rounded-lg bg-gray-800 border-l-4 ${colors.border}`}>
+      <div className="flex-1">
+        <div className="flex items-center justify-between">
+          <span className="text-lg font-semibold">{label}</span>
+          <span className="text-sm text-gray-400">{completed}/{total}</span>
+        </div>
+        <div className="text-xs text-gray-500 mt-1">{resetLabel}: {resetTime}</div>
+      </div>
+      <div className="w-16 h-16 relative">
+        <svg className="w-full h-full transform -rotate-90">
+          <circle
+            cx="32"
+            cy="32"
+            r="28"
+            stroke="currentColor"
+            strokeWidth="4"
+            fill="none"
+            className="text-gray-700"
+          />
+          <circle
+            cx="32"
+            cy="32"
+            r="28"
+            stroke="currentColor"
+            strokeWidth="4"
+            fill="none"
+            strokeDasharray={`${percent * 1.76} 176`}
+            className={colors.bar.replace('bg-', 'text-')}
+          />
+        </svg>
+        <span className="absolute inset-0 flex items-center justify-center text-sm font-bold">
+          {percent}%
+        </span>
+      </div>
     </div>
   )
 }

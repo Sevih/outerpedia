@@ -697,8 +697,8 @@ const data: Record<ShopKey, ShopItem[]> = {
             name: 'Transistone (Total)',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Star\'s Memory', amount: 75 }],
-            limit: { count: 2, period: 'Monthly' },
+            costs: [{ currency: 'Star\'s Memory', amount: 50 }],
+            limit: { count: 4, period: 'Weekly' },
         },
         {
             name: 'Stamina',
@@ -774,8 +774,8 @@ const data: Record<ShopKey, ShopItem[]> = {
             name: 'Transistone (Individual)',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Star\'s Memory', amount: 100 }],
-            limit: { count: 2, period: 'Monthly' },
+            costs: [{ currency: 'Star\'s Memory', amount: 75 }],
+            limit: { count: 4, period: 'Monthly' },
         },
 
     ],

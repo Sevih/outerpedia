@@ -1158,7 +1158,7 @@
     "description_jp": "情報収集が必要な区域の調査に貢献したPt。\\n冒険支援所でアイテムと交換できる。",
     "description_kr": "정보 수집이 필요한 구역 조사에 기여한 포인트입니다.\\n조사 지원소에서 물품으로 교환할 수 있습니다.",
     "description_zh": "用于调查需要收集情报区域的点数。\\n可在调查支援所兑换成物品。",
-    "icon": "TI_Licence"
+    "icon": "survey-contributions"
   },
   {
     "name": "Automaton Coin",
