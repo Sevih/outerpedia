@@ -323,7 +323,7 @@ export default function ServiceTransferGuide() {
             <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-4 space-y-1 text-amber-100 text-sm">
               <p><strong><ItemInlineDisplay names="“New Beginning” Title" /></strong> – 1 less Stamina in Adventure / Special Request / Skyward Tower</p>
               <p><strong><ItemInlineDisplay names="“New Beginning” Profile Frame" /></strong></p>
-              <p><strong>1 <ItemInlineDisplay names="Oath of Determination" /></strong> – set Trust Level to 10</p>
+              <p><strong>1 <ItemInlineDisplay names="Oath of Determination" /></strong> – set Affinity Level to 10</p>
               <p><strong>1 <ItemInlineDisplay names="Book of Evolution" /></strong> – set Upgrade Stage to 6</p>
               <p><strong>1 <ItemInlineDisplay names="Unlimited Restaurant Voucher" /></strong> – level hero to 100</p>
               <p><strong>1 <ItemInlineDisplay names="Demiurge Selection Ticket" /></strong> – choose Stella, Astei, Drakhan, Vlada, or Monad Eva</p>

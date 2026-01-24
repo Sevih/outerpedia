@@ -143,11 +143,11 @@ export default function HeroGrowthGuide() {
                 Note: you need 1 dupe to proceed each step. So with a <StarLevel levelLabel="3" size={12} /> base you need 1 + 6 copy to reach for <StarLevel levelLabel="6" size={12} />.
             </p>
 
-            <GuideHeading level={3} >Trust (Friendship)</GuideHeading>
+            <GuideHeading level={3} >Affinity (Friendship)</GuideHeading>
             <p>
-                Increasing a hero&apos;s trust level unlocks their Exclusive Equipment at level 10.<br />
-                You can give them any gift, but each heroes gots his preferred ones (you can check gift preference in <strong>Hero → Trust Level</strong> top-left box).<br />
-                You can also give them Upgrade Stones matching their element. 170 000 total trust points are needed for level 10.
+                Increasing a hero&apos;s affinity level unlocks their Exclusive Equipment at level 10.<br />
+                You can give them any gift, but each heroes gots his preferred ones (you can check gift preference in <strong>Hero → Affinity Level</strong> top-left box).<br />
+                You can also give them Upgrade Stones matching their element. 170 000 total affinity points are needed for level 10.
             </p>
             <ul>
                 <li><ItemInlineDisplay names='Light Upgrade Stone Fragment' /> +5 </li>
@@ -160,7 +160,7 @@ export default function HeroGrowthGuide() {
                 <li><ItemInlineDisplay names='Dungeon Core Fragment' text={false} /><ItemInlineDisplay names="Noble's Ceremonial Sword" text={false} /><ItemInlineDisplay names='Magic Textbook' text={false} /><ItemInlineDisplay names='Dreamcatcher' text={false} /><ItemInlineDisplay names='Leaf of World Tree' text={false} /> +1 000 (Bonus: +500)</li>
             </ul>
             <p>
-                The <ItemInlineDisplay names="Oath of Determination" /> maxes trust to level 10 (event/cash shop only).
+                The <ItemInlineDisplay names="Oath of Determination" /> maxes affinity to level 10 (event/cash shop only).
             </p>
 
             <GuideHeading level={3} >Skill Upgrade</GuideHeading>
@@ -219,7 +219,7 @@ export default function HeroGrowthGuide() {
                 Found under <strong>Hero → Special Gear</strong>. There are two types: <strong>Exclusive Equipment (EE)</strong> and <strong>Talismans</strong>.
             </p>
             <p>
-                <strong>EE</strong> is unlocked via Trust and grants a passive stat, a condition-based AP gain, a passive skill, and gem slots.
+                <strong>EE</strong> is unlocked via Affinity and grants a passive stat, a condition-based AP gain, a passive skill, and gem slots.
                 It can be enhanced with:
             </p>
             <ul>

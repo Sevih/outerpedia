@@ -257,10 +257,10 @@ export default function BeginnerFAQ() {
                       <div className="p-3 bg-purple-900/10 border-l-4 border-purple-500 rounded">
                         <p className="text-sm font-semibold text-purple-300 mb-1">Exclusive Equipment</p>
                         <p className="text-sm ">
-                          Heroes&apos; Exclusive Equipment is gained by reaching Trust level 10.<br />
+                          Heroes&apos; Exclusive Equipment is gained by reaching Affinity level 10.<br />
                           Gifts can be obtained via the Black Market Expedition in the base, and farmed in Story boss stages marked by a daily entry limit.<br />
                           Irregular Extermination Project: Pursuit Operations also give gifts when clearing bosses.
-                          <br />You can get an Oath of Determination to instant max out Trust via certain events,
+                          <br />You can get an Oath of Determination to instant max out Affinity via certain events,
                         </p>
                       </div>
                       <div className="p-3 bg-indigo-900/10 border-l-4 border-indigo-500 rounded">
