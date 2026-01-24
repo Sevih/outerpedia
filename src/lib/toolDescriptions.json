@@ -47,7 +47,6 @@
   },
   "progress-tracker": {
     "icon": "nav/CM_Lobby_Button_Misson.webp",
-    "order": 1100,
-    "hide": true
+    "order": 1100
   }
 }

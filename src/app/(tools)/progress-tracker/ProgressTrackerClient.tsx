@@ -191,7 +191,7 @@ export function ProgressTrackerClient() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
+      <div className="text-center">
         <h1 className="text-3xl font-bold mb-2">{t('tool.progress-tracker.name')}</h1>
         <p className="text-gray-400">{t('tool.progress-tracker.description')}</p>
       </div>
@@ -989,6 +989,7 @@ function TaskListByCategory({
 
   // Shop icons mapping (subcategory/tab key -> icon filename)
   const shopIcons: Record<string, string> = {
+    'progress.shop.general': 'TI_Item_Credit',
     'progress.shop.star-memory': 'TI_Item_Memory_Of_Star',
     'progress.shop.friendship-point': 'TI_Item_FriendPoint',
     'progress.shop.arena-shop': 'TI_Item_PVP_Medal',

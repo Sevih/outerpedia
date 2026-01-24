@@ -767,7 +767,7 @@ const zh = {
   'tool.team-planner.name': '模拟队伍配置',
   'tool.team-planner.description': '使用自定义规则和限制为《异域战记》构建和验证队伍。适用于飞天之塔、公会突袭、世界首领等。',
   'tool.progress-tracker.name': '进度追踪器',
-  'tool.progress-tracker.description': '追踪《异域战记》的每日、每周和每月任务。所有数据本地存储在您的设备上。',
+  'tool.progress-tracker.description': '追踪您的《异域战记》进度：每日/每周/每月任务、商店购买和制作。',
 
   // Progress Tracker
   'progress.daily': '每日进度',
@@ -848,6 +848,7 @@ const zh = {
   'progress.shop.resource-shop': '货币商店',
   'progress.shop.daily-weekly-monthly': '每日/每周/每月',
   'progress.shop.contents': '主题',
+  'progress.shop.general': '普通',
   'progress.shop.event-shop': '活动商店',
   'progress.shop.joint-challenge': '合作挑战',
   'progress.shop.friendship-point': '友情点数',
@@ -862,6 +863,8 @@ const zh = {
   'progress.shop.skyward': '飞天之塔',
   'progress.shop.adventure-license': '冒险许可证商店',
   'progress.shop.survey-hub': '调查支援所',
+  'progress.shop.supply-module': '物资补给器',
+  'progress.shop.rico-secret': '黎可的秘密商店',
   'progress.craft.kates-workshop': '凯特工坊',
   'progress.daysShort': '天',
   'progress.dangerZone': '危险区域',

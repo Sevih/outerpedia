@@ -198,12 +198,38 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = {
     category: 'shop',
     labelKey: '', // Not used when shopItemKey is set
     permanent: true,
-    maxCount: 5,
+    maxCount: 1,
     shopCategory: 'progress.shop.contents',
     shopSubcategory: 'progress.shop.friendship-point',
     shopItemKey: 'Arena Ticket',
-    shopItemQuantity: 1,
+    shopItemQuantity: 5,
   },
+  // Content > General
+  'shop-general-gold': {
+    id: 'shop-general-gold',
+    type: 'daily',
+    category: 'shop',
+    labelKey: '',
+    permanent: true,
+    maxCount: 1,
+    shopCategory: 'progress.shop.contents',
+    shopSubcategory: 'progress.shop.general',
+    shopItemKey: 'Gold',
+    shopItemQuantity: 50000,
+  },
+  'shop-general-effectium': {
+    id: 'shop-general-effectium',
+    type: 'daily',
+    category: 'shop',
+    labelKey: '',
+    permanent: true,
+    maxCount: 1,
+    shopCategory: 'progress.shop.contents',
+    shopSubcategory: 'progress.shop.general',
+    shopItemKey: 'Effectium',
+    shopItemQuantity: 100,
+  },
+  // Content > Arena Shop
   'shop-arena-stamina': {
     id: 'shop-arena-stamina',
     type: 'daily',
@@ -393,6 +419,43 @@ export const WEEKLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = {
     shopTab: 'progress.shop.joint-challenge',
     shopItemKey: 'Stage 5 Random Gem Chest',
     shopItemQuantity: 1,
+  },
+  // Content > General
+  'shop-weekly-general-gold': {
+    id: 'shop-weekly-general-gold',
+    type: 'weekly',
+    category: 'shop',
+    labelKey: '',
+    permanent: true,
+    maxCount: 1,
+    shopCategory: 'progress.shop.contents',
+    shopSubcategory: 'progress.shop.general',
+    shopItemKey: 'Gold',
+    shopItemQuantity: 70000,
+  },
+  'shop-weekly-general-intermediate-manual': {
+    id: 'shop-weekly-general-intermediate-manual',
+    type: 'weekly',
+    category: 'shop',
+    labelKey: '',
+    permanent: true,
+    maxCount: 1,
+    shopCategory: 'progress.shop.contents',
+    shopSubcategory: 'progress.shop.general',
+    shopItemKey: 'Intermediate Skill Manual',
+    shopItemQuantity: 2,
+  },
+  'shop-weekly-general-basic-manual': {
+    id: 'shop-weekly-general-basic-manual',
+    type: 'weekly',
+    category: 'shop',
+    labelKey: '',
+    permanent: true,
+    maxCount: 1,
+    shopCategory: 'progress.shop.contents',
+    shopSubcategory: 'progress.shop.general',
+    shopItemKey: 'Basic Skill Manual',
+    shopItemQuantity: 5,
   },
   // Content > Friendship Point
   'shop-weekly-fp-hero-piece': {
@@ -1006,18 +1069,40 @@ export function getAllMonthlyTaskIds(): string[] {
 // Helper to get only permanent task IDs (auto-enabled by default)
 export function getPermanentDailyTaskIds(): string[] {
   return Object.values(DAILY_TASK_DEFINITIONS)
-    .filter((def) => def.permanent)
+    .filter((def) => def.permanent && def.category !== 'craft' && def.category !== 'shop')
     .map((def) => def.id)
 }
 
 export function getPermanentWeeklyTaskIds(): string[] {
   return Object.values(WEEKLY_TASK_DEFINITIONS)
-    .filter((def) => def.permanent)
+    .filter((def) => def.permanent && def.category !== 'craft' && def.category !== 'shop')
     .map((def) => def.id)
 }
 
 export function getPermanentMonthlyTaskIds(): string[] {
   return Object.values(MONTHLY_TASK_DEFINITIONS)
-    .filter((def) => def.permanent)
+    .filter((def) => def.permanent && def.category !== 'craft' && def.category !== 'shop')
+    .map((def) => def.id)
+}
+
+// Get default enabled craft task IDs (for new users, but can be disabled)
+export function getDefaultCraftTaskIds(): string[] {
+  return [
+    ...Object.values(DAILY_TASK_DEFINITIONS),
+    ...Object.values(WEEKLY_TASK_DEFINITIONS),
+    ...Object.values(MONTHLY_TASK_DEFINITIONS),
+  ]
+    .filter((def) => def.permanent && def.category === 'craft')
+    .map((def) => def.id)
+}
+
+// Get default enabled shop task IDs (for new users, but can be disabled)
+export function getDefaultShopTaskIds(): string[] {
+  return [
+    ...Object.values(DAILY_TASK_DEFINITIONS),
+    ...Object.values(WEEKLY_TASK_DEFINITIONS),
+    ...Object.values(MONTHLY_TASK_DEFINITIONS),
+  ]
+    .filter((def) => def.permanent && def.category === 'shop')
     .map((def) => def.id)
 }

@@ -767,7 +767,7 @@ const kr = {
   'tool.team-planner.name': '팀 플래너',
   'tool.team-planner.description': '맞춤 규칙 및 제한으로 Outerplane 팀을 구축하고 검증하세요. 비상의 탑, 길드 레이드, 월드 보스 등에 완벽합니다.',
   'tool.progress-tracker.name': '진행률 추적기',
-  'tool.progress-tracker.description': 'Outerplane의 일일, 주간 및 월간 미션을 추적하세요. 모든 데이터는 기기에 로컬로 저장됩니다.',
+  'tool.progress-tracker.description': 'Outerplane 진행 상황 추적: 일일/주간/월간 작업, 상점 구매, 제작.',
 
   // Progress Tracker
   'progress.daily': '일일 진행률',
@@ -848,6 +848,7 @@ const kr = {
   'progress.shop.resource-shop': '재화 상점',
   'progress.shop.daily-weekly-monthly': '일간/주간/월간',
   'progress.shop.contents': '컨텐츠',
+  'progress.shop.general': '일반',
   'progress.shop.event-shop': '이벤트 상점',
   'progress.shop.joint-challenge': '합동 챌린지',
   'progress.shop.friendship-point': '우정 포인트',
@@ -862,6 +863,8 @@ const kr = {
   'progress.shop.skyward': '비천의 탑',
   'progress.shop.adventure-license': '모험 라이선스 상점',
   'progress.shop.survey-hub': '조사 지원소',
+  'progress.shop.supply-module': '물자 보급기',
+  'progress.shop.rico-secret': '리코의 비밀 상점',
   'progress.craft.kates-workshop': '케이트 공방',
   'progress.daysShort': '일',
   'progress.dangerZone': '위험 구역',

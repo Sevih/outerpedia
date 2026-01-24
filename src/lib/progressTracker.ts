@@ -9,6 +9,8 @@ import {
   getPermanentDailyTaskIds,
   getPermanentWeeklyTaskIds,
   getPermanentMonthlyTaskIds,
+  getDefaultCraftTaskIds,
+  getDefaultShopTaskIds,
 } from './taskDefinitions'
 
 const STORAGE_KEY = 'outerplane:progress'
@@ -139,14 +141,22 @@ export const ProgressTracker = {
   },
 
   /**
-   * Create default settings (only permanent tasks enabled)
+   * Create default settings (permanent tasks + default craft/shop enabled)
    */
   createDefaultSettings(): UserSettings {
+    const craftIds = getDefaultCraftTaskIds()
+    const shopIds = getDefaultShopTaskIds()
+
+    // Split craft/shop IDs by type
+    const dailyCraftShop = [...craftIds, ...shopIds].filter((id) => DAILY_TASK_DEFINITIONS[id])
+    const weeklyCraftShop = [...craftIds, ...shopIds].filter((id) => WEEKLY_TASK_DEFINITIONS[id])
+    const monthlyCraftShop = [...craftIds, ...shopIds].filter((id) => MONTHLY_TASK_DEFINITIONS[id])
+
     return {
       enabledTasks: {
-        daily: getPermanentDailyTaskIds(),
-        weekly: getPermanentWeeklyTaskIds(),
-        monthly: getPermanentMonthlyTaskIds(),
+        daily: [...getPermanentDailyTaskIds(), ...dailyCraftShop],
+        weekly: [...getPermanentWeeklyTaskIds(), ...weeklyCraftShop],
+        monthly: [...getPermanentMonthlyTaskIds(), ...monthlyCraftShop],
       },
       hasTerminusSupportPack: false,
       hasVeronicaPremiumPack: false,

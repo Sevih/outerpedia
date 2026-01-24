@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-01-24",
+    title: {
+      en: "Progress Tracker",
+      jp: "進捗トラッカー",
+      kr: "진행률 추적기",
+      zh: "进度追踪器",
+    } as LString,
+    type: "feature",
+    url: "/progress-tracker",
+    content: [
+      {
+        en: "New tool to track your daily, weekly, and monthly tasks, shop purchases, and crafts in Outerplane.",
+        jp: "Outerplaneのデイリー/ウィークリー/マンスリータスク、ショップ購入、クラフトを追跡する新しいツール。",
+        kr: "Outerplane의 일일/주간/월간 작업, 상점 구매, 제작을 추적하는 새로운 도구.",
+        zh: "追踪《异域战记》每日/每周/每月任务、商店购买和制作的新工具。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-01-21",
     title: {
       en: "Interface Improvements",

@@ -767,7 +767,7 @@ const en = {
   'tool.team-planner.name': 'Team Planner',
   'tool.team-planner.description': 'Build and validate teams for Outerplane with custom rules and restrictions. Perfect for Skyward Tower, Guild Raids, World Bosses, and more.',
   'tool.progress-tracker.name': 'Progress Tracker',
-  'tool.progress-tracker.description': 'Track your daily, weekly, and monthly missions in Outerplane. All data stored locally on your device.',
+  'tool.progress-tracker.description': 'Track your Outerplane progress: daily/weekly/monthly tasks, shop purchases, and crafts.',
 
   // Progress Tracker
   'progress.daily': 'Daily Progress',
@@ -848,6 +848,7 @@ const en = {
   'progress.shop.resource-shop': 'Resource Shop',
   'progress.shop.daily-weekly-monthly': 'Daily/Weekly/Monthly',
   'progress.shop.contents': 'Contents',
+  'progress.shop.general': 'General',
   'progress.shop.event-shop': 'Event Shop',
   'progress.shop.joint-challenge': 'Joint Challenge',
   'progress.shop.friendship-point': 'Friendship Point',
@@ -862,6 +863,8 @@ const en = {
   'progress.shop.skyward': 'Skyward Tower',
   'progress.shop.adventure-license': 'Adventure License Shop',
   'progress.shop.survey-hub': 'Survey Hub',
+  'progress.shop.supply-module': 'Supply Module',
+  'progress.shop.rico-secret': "Rico's Secret Shop",
   'progress.craft.kates-workshop': "Kate's Workshop",
   'progress.daysShort': 'd',
   'progress.dangerZone': 'Danger Zone',

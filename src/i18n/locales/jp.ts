@@ -767,7 +767,7 @@ const jp = {
   'tool.team-planner.name': 'チームプランナー',
   'tool.team-planner.description': 'カスタムルールと制限を使用してOuterplaneのチームを構築・検証します。飛天の塔、ギルドレイド、ワールドボスなどに最適。',
   'tool.progress-tracker.name': '進捗トラッカー',
-  'tool.progress-tracker.description': 'Outerplaneのデイリー、ウィークリー、マンスリーミッションを追跡します。すべてのデータはデバイスにローカル保存されます。',
+  'tool.progress-tracker.description': 'Outerplaneの進捗を追跡：デイリー/ウィークリー/マンスリータスク、ショップ購入、クラフト。',
 
   // Progress Tracker
   'progress.daily': 'デイリー進捗',
@@ -848,6 +848,7 @@ const jp = {
   'progress.shop.resource-shop': '財貨ショップ',
   'progress.shop.daily-weekly-monthly': 'デイリー/ウィークリー/マンスリー',
   'progress.shop.contents': 'コンテンツ',
+  'progress.shop.general': '一般',
   'progress.shop.event-shop': 'イベントショップ',
   'progress.shop.joint-challenge': '合同チャレンジ',
   'progress.shop.friendship-point': 'フレンドPt',
@@ -862,6 +863,8 @@ const jp = {
   'progress.shop.skyward': '飛天の塔',
   'progress.shop.adventure-license': '冒険者ライセンスショップ',
   'progress.shop.survey-hub': '調査支援所',
+  'progress.shop.supply-module': 'サプライモジュール',
+  'progress.shop.rico-secret': 'リコの秘密の店',
   'progress.craft.kates-workshop': 'ケイトの鍛冶工房',
   'progress.daysShort': '日',
   'progress.dangerZone': '危険ゾーン',
