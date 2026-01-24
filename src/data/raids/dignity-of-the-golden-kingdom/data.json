@@ -471,9 +471,96 @@
               "string": "Replace {P/Core Fusion Veronica} with {P/Omega Nadja} for better turn 1 survivability (use min speed, hoping for speed debuff proc). If using {P/Omega Nadja}, disable the counter geas. Regular {P/Veronica} also works."
             }
           ],
-          "note_jp": [],
-          "note_kr": [],
-          "note_zh": []
+          "note_jp": [
+            {
+              "type": "p",
+              "string": "ターン15で怒りのアルティメットを使う前にボスをブレイクしてください。生存のためにギアス15（味方の最大HP-30%）を外すか、{P/Omega Nadja}を使用してください。"
+            },
+            {
+              "type": "p",
+              "string": "ターン順：{P/Core Fusion Veronica}（252速度）> {P/Maxie}（238速度）> {P/Roxie}（221速度）> {P/Vlada}（95速度）。ターン順を守れば調整の余地があります。"
+            },
+            {
+              "type": "p",
+              "string": "{P/Maxie}：T4リベンジセット、{I-W/Heartunder's Blade}、{I-T/Executioner's Charm}+10、EE+0以上、5-6*超越。"
+            },
+            {
+              "type": "p",
+              "string": "{P/Roxie}：2pcイミュニティセット、{I-A/Dies Irae}、{I-T/Executioner's Charm}+10、EE+10、5-6*超越。"
+            },
+            {
+              "type": "p",
+              "string": "{P/Vlada}：T4リベンジセット、速度を下げるために{I-W/Phantasm Necrosis}。{I-T/Rogue's Charm}"
+            },
+            {
+              "type": "p",
+              "string": "{P/Core Fusion Veronica}：スピードセット、{I-T/Rogue's Charm}。EE+10で遅いビルドにしてチェインスキルを早め、チームAPをブースト可能。"
+            },
+            {
+              "type": "p",
+              "string": "{P/Core Fusion Veronica}を{P/Omega Nadja}に置き換えるとターン1の生存率が上がります（最低速度で速度デバフを期待）。{P/Omega Nadja}使用時はカウンターギアスを無効に。通常の{P/Veronica}でも可。"
+            }
+          ],
+          "note_kr": [
+            {
+              "type": "p",
+              "string": "턴 15에서 분노 궁극기를 사용하기 전에 보스를 브레이크하세요. 생존을 위해 기어스 15(아군 최대 체력 -30%)를 제거하거나 {P/Omega Nadja}를 사용하세요."
+            },
+            {
+              "type": "p",
+              "string": "턴 순서: {P/Core Fusion Veronica}(252 속도) > {P/Maxie}(238 속도) > {P/Roxie}(221 속도) > {P/Vlada}(95 속도). 턴 순서만 지키면 조정 여지가 있습니다."
+            },
+            {
+              "type": "p",
+              "string": "{P/Maxie}: T4 리벤지 세트, {I-W/Heartunder's Blade}, {I-T/Executioner's Charm} +10, EE+0 이상, 5-6* 초월."
+            },
+            {
+              "type": "p",
+              "string": "{P/Roxie}: 2pc 면역 세트, {I-A/Dies Irae}, {I-T/Executioner's Charm} +10, EE+10, 5-6* 초월."
+            },
+            {
+              "type": "p",
+              "string": "{P/Vlada}: T4 리벤지 세트, 속도를 낮추기 위해 {I-W/Phantasm Necrosis}. {I-T/Rogue's Charm}"
+            },
+            {
+              "type": "p",
+              "string": "{P/Core Fusion Veronica}: 스피드 세트, {I-T/Rogue's Charm}. EE+10으로 느린 빌드를 사용해 체인 스킬을 빨리 쓰고 팀 AP를 부스트 가능."
+            },
+            {
+              "type": "p",
+              "string": "{P/Core Fusion Veronica}를 {P/Omega Nadja}로 교체하면 턴 1 생존율이 높아집니다(최저 속도로 속도 디버프 기대). {P/Omega Nadja} 사용 시 카운터 기어스를 비활성화하세요. 일반 {P/Veronica}도 가능합니다."
+            }
+          ],
+          "note_zh": [
+            {
+              "type": "p",
+              "string": "在第15回合狂暴大招前打破Boss。为了生存可以移除契约15（友军最大生命值-30%）或使用{P/Omega Nadja}。"
+            },
+            {
+              "type": "p",
+              "string": "回合顺序：{P/Core Fusion Veronica}(252速度) > {P/Maxie}(238速度) > {P/Roxie}(221速度) > {P/Vlada}(95速度)。只要保持回合顺序就有调整空间。"
+            },
+            {
+              "type": "p",
+              "string": "{P/Maxie}：T4复仇套装，{I-W/Heartunder's Blade}，{I-T/Executioner's Charm}+10，EE+0以上，5-6*超越。"
+            },
+            {
+              "type": "p",
+              "string": "{P/Roxie}：2件免疫套装，{I-A/Dies Irae}，{I-T/Executioner's Charm}+10，EE+10，5-6*超越。"
+            },
+            {
+              "type": "p",
+              "string": "{P/Vlada}：T4复仇套装，使用{I-W/Phantasm Necrosis}降低速度。{I-T/Rogue's Charm}"
+            },
+            {
+              "type": "p",
+              "string": "{P/Core Fusion Veronica}：速度套装，{I-T/Rogue's Charm}。可用EE+10慢速配装提前使用连携技并提升团队AP。"
+            },
+            {
+              "type": "p",
+              "string": "将{P/Core Fusion Veronica}替换为{P/Omega Nadja}可提高第1回合生存率（最低速度期待速度减益触发）。使用{P/Omega Nadja}时禁用反击契约。普通{P/Veronica}也可以。"
+            }
+          ]
         }
       }
     }

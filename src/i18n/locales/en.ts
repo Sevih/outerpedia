@@ -52,6 +52,7 @@ const en = {
   'coupon.redeem.android': '<strong>For Android devices:</strong> you can redeem it in-game by going into <strong>Settings &gt; Account &gt; Enter Coupon</strong>.',
   'coupon.redeem.ios': '<strong>For iOS devices:</strong> you can redeem it <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">here</a> and make sure to remember your <a href="/images/guides/member_info.webp" target="_blank" class="underline text-cyan-400">Member Info</a>.',
   'general.endsin': 'Ends in',
+  'general.details': 'Details',
 
   //community event
   "events.history.desc_active": "Browse all Outerplane events (active: {active}, total: {total}).",
@@ -607,6 +608,8 @@ const en = {
   'guides.spoilerFree.disable': 'Disable Spoiler-Free Mode',
   'guides.al.tabs.regular': 'Regular Fight',
   'guides.al.tabs.promotion': 'Promotion Fight',
+  'guides.premium-limited.tabs.premium': 'Premium',
+  'guides.premium-limited.tabs.limited': 'Limited',
   'guides.page.h1': 'Outerplane Guides',
   'guides.breadcrumb.home': 'Home',
   'guides.jsonld.title': 'Outerplane Guides | Outerpedia',

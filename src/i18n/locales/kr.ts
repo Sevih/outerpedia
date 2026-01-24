@@ -52,6 +52,7 @@ const kr = {
   'coupon.redeem.android': '<strong>안드로이드 기기:</strong> 게임 내 <strong>설정 &gt; 계정 &gt; 쿠폰 입력</strong> 메뉴에서 입력할 수 있습니다.',
   'coupon.redeem.ios': '<strong>iOS 기기:</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">여기</a>에서 입력하고, <a href="/images/guides/member_info.webp" target="_blank" class="underline text-cyan-400">회원 정보</a>를 확인하세요.',
   'general.endsin': '종료까지',
+  'general.details': '상세 정보',
 
   //community event
   "events.history.desc_active": "Outerplane 이벤트 목록 (진행 중: {active}, 전체: {total})",
@@ -607,6 +608,8 @@ const kr = {
   'guides.spoilerFree.disable': '스포일러 방지 모드 비활성화',
   'guides.al.tabs.regular': '일반 전투',
   'guides.al.tabs.promotion': '승급 전투',
+  'guides.premium-limited.tabs.premium': '프리미엄',
+  'guides.premium-limited.tabs.limited': '페스티벌',
   'guides.page.h1': '전체 가이드',
   'guides.breadcrumb.home': '홈',
   'guides.jsonld.title': 'Outerplane 가이드 | Outerpedia',

@@ -1,54 +1,185 @@
 "use client"
 
-import { useMemo, useState, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
-import GuideHeading from "@/app/components/GuideHeading"
-import { AnimatedTabs } from "@/app/components/AnimatedTabs"
-import type { ReactNode } from "react"
+import { type ReactNode } from "react"
+import Link from "next/link"
+import Image from "next/image"
 import { toKebabCase } from "@/utils/formatText"
-import DATA from "@/data/premium_limited_data.json"
 import ElementInlineTag from "@/app/components/ElementInline"
 import ClassInlineTag from "@/app/components/ClassInlineTag"
-import type { CharacterLite } from "@/types/types"
 import StarLevel from "@/app/components/StarLevel"
-import Link from "next/link"
-import type { ElementType, ClassType } from "@/types/enums"
 import TranscendInline from "@/app/components/TranscendInline"
-import Image from "next/image"
 import { RecoTrans } from "@/app/components/GlowCardTrans"
 import { CharacterPortrait } from "@/app/components/CharacterPortrait"
+import type { CharacterLite } from "@/types/types"
+import type { WithLocalizedFields } from "@/types/common"
+import type { ElementType, ClassType } from "@/types/enums"
+import type { TenantKey } from "@/tenants/config"
+import { l, lRec} from "@/lib/localize"
+import ALL_CHARACTERS from "@/data/_allCharacters.json"
+import CharacterInlineTag from "@/app/components/CharacterLinkCard"
+
+/* ===================== Character Index ===================== */
+export const CHARACTER_INDEX: Record<string, CharacterLite> = Object.fromEntries(
+    (ALL_CHARACTERS as CharacterLite[]).map(c => [toKebabCase(c.Fullname), c])
+)
 
 /* ===================== Types ===================== */
-type Impact = { pve: string; pvp: string }
-export interface HeroReview {
+export type Impact = { pve: string; pvp: string }
+
+interface BaseHeroReview {
     name: string
     review: string
     recommended_pve: string
     recommended_pvp: string
     impact: Record<"3" | "4" | "5" | "6", Impact>
 }
+
+export type HeroReview = WithLocalizedFields<BaseHeroReview, 'review'>
+
 export interface PremiumLimitedData {
     Premium: HeroReview[]
     Limited: HeroReview[]
 }
-interface Entry { name: string; stars: number; op: ">" | ">=" | null }
 
-type TabKey = "Premium" | "Limited"
-interface TabDef { key: TabKey; label: string; icon: string }
+export interface Entry {
+    name: string
+    stars: number
+    op: ">" | ">=" | null
+}
 
-/* ===================== Constantes ===================== */
-const TABS: TabDef[] = [
-    { key: "Premium", label: "Premium", icon: "/images/ui/tags/premium.webp" },
-    { key: "Limited", label: "Limited", icon: "/images/ui/tags/limited.webp" },
+export type TabKey = "Premium" | "Limited"
+
+export interface TabDef {
+    key: TabKey
+    label: string
+    icon: string
+}
+
+/* ===================== Tab Config ===================== */
+export const TAB_CONFIG: { key: TabKey; i18nKey: string; icon: string }[] = [
+    { key: "Premium", i18nKey: "guides.premium-limited.tabs.premium", icon: "/images/ui/tags/premium.webp" },
+    { key: "Limited", i18nKey: "guides.premium-limited.tabs.limited", icon: "/images/ui/tags/limited.webp" },
 ]
 
-/* ===================== UI bits ===================== */
+export function getTabs(t: (key: string) => string): TabDef[] {
+    return TAB_CONFIG.map(tab => ({
+        key: tab.key,
+        label: t(tab.i18nKey),
+        icon: tab.icon
+    }))
+}
+
+/* ===================== Priority Data ===================== */
+export const PREMIUM_ORDER_1ST: Entry[] = [
+    { name: "Monad Eva", stars: 3, op: null },
+    { name: "Demiurge Stella", stars: 3, op: null },
+    { name: "Demiurge Luna", stars: 3, op: null },
+]
+
+export const PREMIUM_ORDER_2ND: Entry[] = [
+    { name: "Demiurge Astei", stars: 3, op: null },
+    { name: "Gnosis Beth", stars: 3, op: null },
+    { name: "Gnosis Viella", stars: 3, op: null },
+    { name: "Demiurge Vlada", stars: 3, op: null },
+]
+
+export const PREMIUM_ORDER_3RD: Entry[] = [
+    { name: "Demiurge Drakhan", stars: 3, op: null },
+    { name: "Demiurge Delta", stars: 3, op: null },
+]
+
+export const TRANSCEND_PRIORITY: Entry[] = [
+    { name: "Monad Eva", stars: 5, op: null },
+    { name: "Gnosis Beth", stars: 4, op: null },
+    { name: "Demiurge Vlada", stars: 5, op: null },
+    { name: "Demiurge Luna", stars: 6, op: null },
+]
+
+/* ===================== Localized Labels ===================== */
+export const LABELS = {
+    title: {
+        en: "Premium & Limited — Reviews & Transcendence Sweetspots",
+        jp: "プレミアム＆限定 — レビュー＆超越スイートスポット",
+        kr: "프리미엄 & 한정 — 리뷰 & 초월 스위트스팟",
+        zh: "高级与限定 — 评测与超越甜点"
+    },
+    intro: {
+        en: "Quick recommendations for Premium and Limited banners. See PvE/PvP targets and the key transcendence sweetspots (3★→6★) for each hero.",
+        jp: "プレミアムおよび限定バナーのおすすめガイド。各ヒーローのPvE/PvP目標と重要な超越スイートスポット（3★→6★）をご覧ください。",
+        kr: "프리미엄 및 한정 배너 추천 가이드입니다. 각 영웅의 PvE/PvP 목표와 주요 초월 스위트스팟(3★→6★)을 확인하세요.",
+        zh: "高级和限定卡池快速推荐指南。查看每位英雄的PvE/PvP目标和关键超越甜点（3★→6★）。"
+    },
+    recommendedChoices: {
+        en: "Recommended Choices",
+        jp: "おすすめの選択",
+        kr: "추천 선택",
+        zh: "推荐选择"
+    },
+    priority1st: {
+        en: "1st Priority",
+        jp: "第1優先",
+        kr: "1순위",
+        zh: "第一优先"
+    },
+    priority2nd: {
+        en: "2nd Priority",
+        jp: "第2優先",
+        kr: "2순위",
+        zh: "第二优先"
+    },
+    priority3rd: {
+        en: "3rd Priority",
+        jp: "第3優先",
+        kr: "3순위",
+        zh: "第三优先"
+    },
+    transcendPriority: {
+        en: "Transcendence Priority",
+        jp: "超越優先順位",
+        kr: "초월 우선순위",
+        zh: "超越优先级"
+    },
+    transcendFocusNote: {
+        en: "Focus on transcending these heroes first for maximum impact.",
+        jp: "最大の効果を得るため、まずこれらのヒーローの超越を優先してください。",
+        kr: "최대 효과를 위해 이 영웅들의 초월을 먼저 집중하세요.",
+        zh: "为获得最大效果，请优先超越这些英雄。"
+    },
+    recommendedTargets: {
+        en: "Recommended targets",
+        jp: "推奨目標",
+        kr: "추천 목표",
+        zh: "推荐目标"
+    },
+    transcendImpact: {
+        en: "Transcendence impact",
+        jp: "超越の影響",
+        kr: "초월 영향",
+        zh: "超越影响"
+    },
+    colStar: {
+        en: "★",
+        jp: "★",
+        kr: "★",
+        zh: "★"
+    },
+    noEntries: {
+        en: "No entries for {tab} yet. Add them to data/premium_limited_data.json.",
+        jp: "{tab}のエントリはまだありません。data/premium_limited_data.jsonに追加してください。",
+        kr: "{tab}에 대한 항목이 아직 없습니다. data/premium_limited_data.json에 추가하세요.",
+        zh: "{tab}暂无条目。请添加到data/premium_limited_data.json。"
+    },
+} as const
+
+/* ===================== UI Components ===================== */
+
 interface CharacterCardProps {
     char?: CharacterLite
     stars: number
     isPriority?: boolean
 }
-function CharacterCard({ char, stars, isPriority = false }: CharacterCardProps) {
+
+export function CharacterCard({ char, stars, isPriority = false }: CharacterCardProps) {
     const slug = char ? toKebabCase(char.Fullname.toLowerCase()) : null
     const href = slug ? `/characters/${slug}` : "#"
     return (
@@ -68,7 +199,6 @@ function CharacterCard({ char, stars, isPriority = false }: CharacterCardProps) 
                         priority={isPriority}
                         showIcons={true}
                     />
-                    {/* Rarity Stars */}
                     <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 flex justify-center items-center -space-x-1">
                         {Array(stars)
                             .fill(0)
@@ -84,9 +214,7 @@ function CharacterCard({ char, stars, isPriority = false }: CharacterCardProps) 
                     </div>
                 </div>
             ) : (
-                <div
-                    className="w-[80px] h-[80px] flex items-center justify-center bg-gray-800/50 rounded-lg border-2 border-gray-600 text-xs text-gray-400"
-                >
+                <div className="w-[80px] h-[80px] flex items-center justify-center bg-gray-800/50 rounded-lg border-2 border-gray-600 text-xs text-gray-400">
                     ?
                 </div>
             )}
@@ -94,7 +222,7 @@ function CharacterCard({ char, stars, isPriority = false }: CharacterCardProps) 
     )
 }
 
-function Badge({ children }: { children: ReactNode }) {
+export function Badge({ children }: { children: ReactNode }) {
     return (
         <span className="rounded-full border border-white/10 bg-black/20 px-2 py-0.5 text-[11px] uppercase tracking-wide">
             {children}
@@ -102,14 +230,59 @@ function Badge({ children }: { children: ReactNode }) {
     )
 }
 
-function ImpactTable({ impact }: { impact: HeroReview["impact"] }) {
+export function Stars({ count }: { count: number }) {
+    return (
+        <span className="inline-flex gap-[1px] align-middle">
+            {Array.from({ length: count }).map((_, i) => (
+                <Image
+                    key={i}
+                    src="/images/ui/CM_icon_star_y.webp"
+                    alt="★"
+                    width={16}
+                    height={16}
+                    className="object-contain"
+                />
+            ))}
+        </span>
+    )
+}
+
+export function TargetDisplay({ value }: { value: string }) {
+    if (!value) return <span>—</span>
+
+    const parts = value.match(/\d+(?:\s*\([^)]*\))?|[^\d]+/g) || []
+
+    return (
+        <div className="text-sm text-gray-200 space-y-1 text-center">
+            {parts.map((part, idx) => {
+                const num = parseInt(part, 10)
+                if (!isNaN(num)) {
+                    const extra = part.replace(/^\d+\s*/, '')
+                    return (
+                        <div key={idx}>
+                            <Stars count={num} /> {extra}
+                        </div>
+                    )
+                }
+                return <div key={idx}>{part.trim()}</div>
+            })}
+        </div>
+    )
+}
+
+interface ImpactTableProps {
+    impact: HeroReview["impact"]
+    lang: TenantKey
+}
+
+export function ImpactTable({ impact, lang }: ImpactTableProps) {
     const rows = ["3", "4", "5", "6"] as const
     return (
         <div className="overflow-x-auto">
             <table className="w-full text-sm">
                 <thead>
                     <tr className="text-left opacity-80">
-                        <th className="py-1 pr-2">★</th>
+                        <th className="py-1 pr-2">{lRec(LABELS.colStar, lang)}</th>
                         <th className="py-1 pr-2">PvE</th>
                         <th className="py-1 pr-2">PvP</th>
                     </tr>
@@ -128,41 +301,13 @@ function ImpactTable({ impact }: { impact: HeroReview["impact"] }) {
     )
 }
 
-/* ===================== Premium pulling order ===================== */
-const PREMIUM_ORDER_1ST: Entry[] = [
-    { name: "Monad Eva", stars: 3, op: null },
-    { name: "Demiurge Stella", stars: 3, op: null },
-    { name: "Demiurge Luna", stars: 3, op: null },
-]
-
-const PREMIUM_ORDER_2ND: Entry[] = [
-    { name: "Demiurge Astei", stars: 3, op: null },
-    { name: "Gnosis Beth", stars: 3, op: null },
-    { name: "Gnosis Viella", stars: 3, op: null },
-    { name: "Demiurge Vlada", stars: 3, op: null },
-]
-
-const PREMIUM_ORDER_3RD: Entry[] = [
-    { name: "Demiurge Drakhan", stars: 3, op: null },
-    { name: "Demiurge Delta", stars: 3, op: null },
-]
-
-const TRANSCEND_PRIORITY: Entry[] = [
-    { name: "Monad Eva", stars: 5, op: null },
-    { name: "Gnosis Beth", stars: 4, op: null },
-    { name: "Demiurge Vlada", stars: 5, op: null },
-    { name: "Demiurge Luna", stars: 6, op: null },
-]
-
-function PremiumPriorityRow({
-    title,
-    entries,
-    charIndex,
-}: {
+interface PremiumPriorityRowProps {
     title: string
     entries: Entry[]
     charIndex: Record<string, CharacterLite>
-}) {
+}
+
+export function PremiumPriorityRow({ title, entries, charIndex }: PremiumPriorityRowProps) {
     return (
         <div className="space-y-2">
             <h4 className="text-sm font-semibold tracking-wide opacity-90 text-center">{title}</h4>
@@ -176,31 +321,38 @@ function PremiumPriorityRow({
     )
 }
 
-function PremiumPullingOrder({ charIndex }: { charIndex: Record<string, CharacterLite> }) {
+interface PremiumPullingOrderProps {
+    charIndex: Record<string, CharacterLite>
+    lang: TenantKey
+}
+
+export function PremiumPullingOrder({ charIndex, lang }: PremiumPullingOrderProps) {
     return (
         <section className="rounded-2xl border border-white/10 p-6 bg-white/5 space-y-6">
-            <h3 className="text-center text-xl font-semibold tracking-wide">Recommended Choices</h3>
+            <h3 className="text-center text-xl font-semibold tracking-wide">{lRec(LABELS.recommendedChoices, lang)}</h3>
 
             <div className="space-y-5">
                 <PremiumPriorityRow
-                    title="1st Priority"
+                    title={lRec(LABELS.priority1st, lang)}
                     entries={PREMIUM_ORDER_1ST}
                     charIndex={charIndex}
                 />
                 <PremiumPriorityRow
-                    title="2nd Priority"
+                    title={lRec(LABELS.priority2nd, lang)}
                     entries={PREMIUM_ORDER_2ND}
                     charIndex={charIndex}
                 />
                 <PremiumPriorityRow
-                    title="3rd Priority"
+                    title={lRec(LABELS.priority3rd, lang)}
                     entries={PREMIUM_ORDER_3RD}
                     charIndex={charIndex}
                 />
             </div>
 
             <div className="border-t border-white/10 pt-5 mt-5">
-                <h4 className="text-sm font-semibold tracking-wide opacity-90 mb-2 text-center">Transcendence Priority</h4>
+                <h4 className="text-sm font-semibold tracking-wide opacity-90 mb-2 text-center">
+                    {lRec(LABELS.transcendPriority, lang)}
+                </h4>
                 <div className="flex flex-wrap items-center justify-center gap-3">
                     {TRANSCEND_PRIORITY.map((e, i) => {
                         const char = charIndex[toKebabCase(e.name)]
@@ -208,60 +360,20 @@ function PremiumPullingOrder({ charIndex }: { charIndex: Record<string, Characte
                     })}
                 </div>
                 <p className="text-xs opacity-70 mt-3 text-center">
-                    Focus on transcending these heroes first for maximum impact.
+                    {lRec(LABELS.transcendFocusNote, lang)}
                 </p>
             </div>
         </section>
     )
 }
 
-
-function Stars({ count }: { count: number }) {
-  return (
-    <span className="inline-flex gap-[1px] align-middle">
-      {Array.from({ length: count }).map((_, i) => (
-        <Image
-          key={i}
-          src="/images/ui/CM_icon_star_y.webp"
-          alt="★"
-          width={16}
-          height={16}
-          className="object-contain"
-        />
-      ))}
-    </span>
-  )
+interface HeroCardProps {
+    h: HeroReview
+    char?: CharacterLite
+    lang: TenantKey
 }
 
-export function TargetDisplay({ value }: { value: string }) {
-  if (!value) return <span>—</span>
-
-  // On split par motifs "nombre + optionnel (…)" 
-  // ex: "5 (support) 6 (dps)" → ["5 (support)", "6 (dps)"]
-  const parts = value.match(/\d+(?:\s*\([^)]*\))?|[^\d]+/g) || []
-
-  return (
-    <div className="text-sm text-gray-200 space-y-1 text-center">
-      {parts.map((part, idx) => {
-        const num = parseInt(part, 10)
-        if (!isNaN(num)) {
-          // retire le nombre pour extraire la mention éventuelle
-          const extra = part.replace(/^\d+\s*/, '')
-          return (
-            <div key={idx}>
-              <Stars count={num} /> {extra}
-            </div>
-          )
-        }
-        return <div key={idx}>{part.trim()}</div>
-      })}
-    </div>
-  )
-}
-
-
-/* ===================== Hero Card ===================== */
-function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
+export function HeroCard({ h, char, lang }: HeroCardProps) {
     const element = char?.Element as ElementType | undefined
     const cls = char?.Class as ClassType | undefined
     const sub = char?.SubClass || "—"
@@ -310,18 +422,12 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
                         )
                     )}
 
-                    {href ? (
-                        <Link
-                            href={href}
-                            prefetch={false}
-                            className="underline underline-offset-4 decoration-blue-400 text-blue-400 hover:text-red-400 hover:decoration-red-400"
-                            title={`Open ${name} character page`}
-                        >
-                            {name}
-                        </Link>
-                    ) : (
-                        <span>{name}</span>
-                    )}
+                    <span
+                        className="underline underline-offset-4 decoration-blue-400 text-blue-400 hover:text-red-400 hover:decoration-red-400"
+                        title={`Open ${name} character page`}
+                    >
+                        <CharacterInlineTag name={name} icon={false} />
+                    </span>
 
                     {char?.limited && specialTag && (
                         <Image
@@ -345,21 +451,14 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
                 </div>
             </header>
 
-            <p className="mt-3 mb-4 whitespace-pre-line text-sm text-gray-200">{h.review}</p>
+            <p className="mt-3 mb-4 whitespace-pre-line text-sm text-gray-200">{l(h, 'review', lang)}</p>
 
             <div className="grid gap-4">
-                {/* Ligne 1 */}
                 <div className="grid gap-4 md:grid-cols-2">
-                    {/* Targets */}
                     <div className="max-w-4xl w-full rounded border border-gray-800 p-4">
-                        <h3 className="m-0 text-sm opacity-80 text-center mb-4">Recommended targets</h3>
+                        <h3 className="m-0 text-sm opacity-80 text-center mb-4">{lRec(LABELS.recommendedTargets, lang)}</h3>
 
-                        <div className="
-      grid grid-cols-1 md:grid-cols-2 gap-8
-      items-stretch
-      divide-y md:divide-y-0 md:divide-x divide-gray-800
-    ">
-                            {/* PvE */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch divide-y md:divide-y-0 md:divide-x divide-gray-800">
                             <div className="flex flex-col items-center justify-center px-4">
                                 <RecoTrans
                                     title="PvE"
@@ -369,7 +468,6 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
                                 />
                             </div>
 
-                            {/* PvP */}
                             <div className="flex flex-col items-center justify-center px-4">
                                 <RecoTrans
                                     title="PvP"
@@ -381,17 +479,13 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
                         </div>
                     </div>
 
-                    {/* Impact */}
                     <div className="rounded-md border border-gray-800 p-3">
-                        <h3 className="m-0 text-sm opacity-80">Transcendence impact</h3>
-                        <ImpactTable impact={h.impact} />
+                        <h3 className="m-0 text-sm opacity-80">{lRec(LABELS.transcendImpact, lang)}</h3>
+                        <ImpactTable impact={h.impact} lang={lang} />
                     </div>
                 </div>
 
-
-                {/* Ligne 2 */}
                 <div className="grid gap-4 md:grid-cols-3">
-                    {/* Trans 4 */}
                     <div className="rounded-md border border-gray-800 p-3">
                         <TranscendInline
                             character={char?.Fullname ?? h.name}
@@ -399,7 +493,6 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
                         />
                     </div>
 
-                    {/* Trans 5 */}
                     <div className="rounded-md border border-gray-800 p-3">
                         <TranscendInline
                             character={char?.Fullname ?? h.name}
@@ -407,7 +500,6 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
                         />
                     </div>
 
-                    {/* Trans 6 */}
                     <div className="rounded-md border border-gray-800 p-3">
                         <TranscendInline
                             character={char?.Fullname ?? h.name}
@@ -416,86 +508,6 @@ function HeroCard({ h, char }: { h: HeroReview; char?: CharacterLite }) {
                     </div>
                 </div>
             </div>
-
-
         </section>
-    )
-}
-
-
-/* ===================== Page ===================== */
-const Intro = () => (
-    <p className="text-sm text-gray-300 leading-relaxed">
-        Quick recommendations for Premium and Limited banners. See PvE/PvP targets and the key transcendence sweetspots (3★→6★) for each hero.
-    </p>
-)
-
-export default function PremiumLimitedGuide() {
-    const searchParams = useSearchParams()
-    const tabParam = searchParams.get("tab") as TabKey | null
-
-    // 👉 index des persos construit depuis l’API
-    const [charIndex, setCharIndex] = useState<Record<string, CharacterLite>>({})
-
-    useEffect(() => {
-        const fetchCharacters = async () => {
-            const res = await fetch("/api/characters-lite")
-            if (!res.ok) return
-            const data: CharacterLite[] = await res.json()
-            setCharIndex(Object.fromEntries(data.map(c => [toKebabCase(c.Fullname), c])))
-        }
-        fetchCharacters()
-    }, [])
-
-    // State d’onglet (option B : URL cosmétique)
-    const [selected, setSelected] = useState<TabKey>("Premium")
-    useEffect(() => {
-        if (tabParam === "Premium" || tabParam === "Limited") setSelected(tabParam)
-        else if (tabParam == null) setSelected("Premium")
-    }, [tabParam])
-
-    const handleTabChange = (key: TabKey) => {
-        setSelected(key)
-        const params = new URLSearchParams(window.location.search)
-        if (key === "Premium") params.delete("tab")
-        else params.set("tab", key)
-        const qs = params.toString()
-        const newUrl = `${window.location.pathname}${qs ? `?${qs}` : ""}`
-        window.history.replaceState(null, "", newUrl)
-    }
-
-    const sorted = useMemo(() => {
-        const list = (DATA as PremiumLimitedData)[selected] ?? []
-        return [...list].sort((a, b) => a.name.localeCompare(b.name))
-    }, [selected])
-
-
-    return (
-        <div className="space-y-6">
-            <GuideHeading>Premium & Limited — Reviews & Transcendence Sweetspots</GuideHeading>
-
-            <Intro />
-
-            <div className="flex justify-center mb-4">
-                <AnimatedTabs tabs={TABS} selected={selected} onSelect={handleTabChange} pillColor="#8b5cf6" />
-            </div>
-
-            {selected === "Premium" && (
-                <PremiumPullingOrder charIndex={charIndex} />
-            )}
-
-            {sorted.length === 0 ? (
-                <div className="rounded-md border border-gray-700 p-6 text-sm text-gray-300">
-                    No entries for <strong>{selected}</strong> yet. Add them to <code>data/premium_limited_data.json</code>.
-                </div>
-            ) : (
-                <div className="grid gap-6">
-                    {sorted.map((h) => {
-                        const char = charIndex[toKebabCase(h.name)]
-                        return <HeroCard key={h.name} h={h} char={char} />
-                    })}
-                </div>
-            )}
-        </div>
     )
 }

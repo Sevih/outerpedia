@@ -52,6 +52,7 @@ const jp = {
   'coupon.redeem.android': '<strong>Android端末の場合：</strong> ゲーム内の <strong>設定 &gt; アカウント &gt; クーポン入力</strong> から入力できます。',
   'coupon.redeem.ios': '<strong>iOS端末の場合：</strong> <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">こちら</a> で入力し、<a href="/images/guides/member_info.webp" target="_blank" class="underline text-cyan-400">会員情報</a> を確認してください。',
   'general.endsin': '終了まで',
+  'general.details': '詳細',
 
   //community event
   "events.history.desc_active": "Outerplane のイベント一覧（開催中: {active}、合計: {total}）",
@@ -607,6 +608,8 @@ const jp = {
   'guides.spoilerFree.disable': 'ネタバレ防止モードを無効化',
   'guides.al.tabs.regular': '通常戦闘',
   'guides.al.tabs.promotion': '昇格戦闘',
+  'guides.premium-limited.tabs.premium': 'プレミアム',
+  'guides.premium-limited.tabs.limited': 'フェス',
   'guides.page.h1': 'すべてのガイド',
   'guides.breadcrumb.home': 'ホーム',
   'guides.jsonld.title': 'Outerplane 攻略ガイド | Outerpedia',

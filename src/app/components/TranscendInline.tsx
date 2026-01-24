@@ -3,6 +3,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { toKebabCase } from '@/utils/formatText'
+import { useTenant } from '@/lib/contexts/TenantContext'
+import { l } from '@/lib/localize'
+import type { TenantKey } from '@/tenants/config'
 
 /* ===================== Types ===================== */
 export type TransMap = Record<string, string | null>
@@ -56,8 +59,8 @@ function sanitizeTransText(input: string) {
   const rAtkDefHp = /^ATK DEF HP \+\d+%$/i
   return input
     .split('\n')
-    .map(l => l.trim())
-    .filter(l => l && !rAtkDefHp.test(l))
+    .map(line => line.trim())
+    .filter(line => line && !rAtkDefHp.test(line))
     .join('\n')
 }
 
@@ -90,19 +93,24 @@ export function TranscendList({
   transcendData,
   className = '',
   levels,
+  lang,
 }: {
   transcendData: TransMap
   className?: string
   levels?: string[]
+  lang?: TenantKey
 }) {
+  const { key: tenantLang } = useTenant()
+  const activeLang = lang ?? tenantLang
+
   const steps = useMemo(
     () =>
       ORDER.filter(s => {
         if (levels && !levels.includes(s.key)) return false
-        const v = transcendData[s.key]
+        const v = l(transcendData, s.key, activeLang) || transcendData[s.key]
         return typeof v === 'string' && v.trim().length > 0
       }),
-    [transcendData, levels]
+    [transcendData, levels, activeLang]
   )
 
   if (steps.length === 0) return null
@@ -110,12 +118,8 @@ export function TranscendList({
   return (
     <div className={`bg-[#1a1c28] border border-gray-700 p-4 space-y-3 text-white ${className}`}>
       {steps.map(({ key, label }) => {
-        const raw = transcendData[key] ?? ''
-        let clean = sanitizeTransText(stripColorTags(raw || ''))
-
-        if (key === "5_1") {
-          clean = `Burst Lv3 Unlocked\n${clean}`
-        }
+        const raw = l(transcendData, key, activeLang) || transcendData[key] || ''
+        const clean = sanitizeTransText(stripColorTags(raw))
 
         if (!clean) return null
 

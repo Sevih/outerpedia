@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useI18n } from '@/lib/contexts/I18nContext'
 
 export type AccordionItem = {
   key: string
@@ -14,6 +15,7 @@ type AccordionProps = {
 }
 
 export default function Accordion({ items, multiple = false }: AccordionProps) {
+  const { t } = useI18n()
   const [openKeys, setOpenKeys] = useState<string[]>([])
 
   const toggle = (key: string) => {
@@ -34,7 +36,7 @@ export default function Accordion({ items, multiple = false }: AccordionProps) {
           >
             {title}
             <span className="ml-2 flex items-center gap-1 text-sm text-gray-400">
-              Details
+              {t('general.details')}
               <svg
                 className={`w-4 h-4 transition-transform duration-200 ${openKeys.includes(key) ? 'rotate-90' : ''}`}
                 fill="none"

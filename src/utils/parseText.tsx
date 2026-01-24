@@ -10,15 +10,21 @@ import TalismanInlineTag from '@/app/components/TalismanInlineTag'
 import ItemInlineDisplay from '@/app/components/ItemInline'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import EeInlineTag from '@/app/components/EeInlineTag'
+import StatInlineTag from '@/app/components/StatInlineTag'
 import type { BuffName, DebuffName } from '@/types/effect-names'
+import type stats from '@/data/stats.json'
+
+type StatName = keyof typeof stats
 
 /**
  * Tags supportés :
  * {B/EffectName}  -> buff
  * {D/EffectName}  -> debuff
- * {C/ClassName}   -> classe
+ * {S/StatName}    -> stat (ex: {S/ATK}, {S/SPEED})
+ * {C/ClassName}   -> classe (ex: {C/ATTACKER} ou {C/ATTACKER|VANGUARD} pour subclass)
  * {E/Element}     -> élément
- * {P/CharacterName} -> personnage (CharacterLinkCard)
+ * {P/CharacterName} -> personnage (CharacterLinkCard avec icône)
+ * {P-I/CharacterName} -> personnage (CharacterLinkCard sans icône)
  * {EE/EEName}     -> exclusive equipment (texte pour l'instant)
  * {I-W/WeaponName}  -> arme (weapon)
  * {I-A/AmuletName}  -> amulette
@@ -43,8 +49,8 @@ function pushTextWithLineBreaks(
 
 
 export default function parseText(text: string): React.ReactNode[] {
-  // capture le type complet (B|D|C|E|P|EE|I-W|I-A|I-T|I-I) puis le payload jusqu'à la }
-  const regex = /\{((?:[BDCEP])|EE|I-(?:W|A|T|I))\/([^}]+)\}/g
+  // capture le type complet (B|D|S|C|E|P|P-I|EE|I-W|I-A|I-T|I-I) puis le payload jusqu'à la }
+  const regex = /\{((?:[BDSCE])|P(?:-I)?|EE|I-(?:W|A|T|I))\/([^}]+)\}/g
 
   const parts: React.ReactNode[] = []
   let lastIndex = 0
@@ -66,9 +72,19 @@ export default function parseText(text: string): React.ReactNode[] {
     if (type === 'E') {
       parts.push(<ElementInlineTag key={`e-${index}-${name}`} element={name} />)
     } else if (type === 'C') {
-      parts.push(<ClassInlineTag key={`c-${index}-${name}`} name={name} />)
+      // Support subclass avec syntaxe {C/CLASS|SUBCLASS}
+      const [className, subclass] = name.split('|')
+      parts.push(
+        <ClassInlineTag
+          key={`c-${index}-${name}`}
+          name={className}
+          subclass={subclass}
+        />
+      )
     } else if (type === 'P') {
       parts.push(<CharacterLinkCard key={`p-${index}-${name}`} name={name} />)
+    } else if (type === 'P-I') {
+      parts.push(<CharacterLinkCard key={`pi-${index}-${name}`} name={name} icon={false} />)
     } else if (type === 'I-W') {
       parts.push(<WeaponInlineTag key={`w-${index}-${name}`} name={name} />)
     } else if (type === 'I-A') {
@@ -96,6 +112,8 @@ export default function parseText(text: string): React.ReactNode[] {
       )
     } else if (type === 'EE') {
       parts.push(<EeInlineTag key={`ee-${index}-${name}`} name={name} />)
+    } else if (type === 'S') {
+      parts.push(<StatInlineTag key={`s-${index}-${name}`} name={name as StatName} />)
     } else {
       // fallback (ne devrait pas arriver)
       parts.push(full)

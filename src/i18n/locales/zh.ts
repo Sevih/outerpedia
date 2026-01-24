@@ -52,6 +52,7 @@ const zh = {
   'coupon.redeem.android': '<strong>Android 设备：</strong> 可以通过游戏内<strong>设置 &gt; 账号 &gt; 输入优惠券</strong>进行兑换。',
   'coupon.redeem.ios': '<strong>iOS 设备：</strong> 前往<a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" class="underline text-cyan-400">这里</a> 并确保您已记住<a href="/images/guides/member_info.webp" target="_blank" class="underline text-cyan-400">会员信息</a>.',
   'general.endsin': '剩余时间',
+  'general.details': '详情',
 
   //community event
   "events.history.desc_active": "浏览异域战记的全部活动 (开展中：{active}, 全部：{total}).",
@@ -607,6 +608,8 @@ const zh = {
   'guides.spoilerFree.disable': '禁用防剧透',
   'guides.al.tabs.regular': '常规战斗',
   'guides.al.tabs.promotion': '晋升战斗',
+  'guides.premium-limited.tabs.premium': '高级',
+  'guides.premium-limited.tabs.limited': '限定',
   'guides.page.h1': '全部攻略',
   'guides.breadcrumb.home': '主页',
   'guides.jsonld.title': '异域战记攻略 | Outerpedia',
