@@ -85,7 +85,7 @@ export const LangMapSchema = z.union([
 ])
 
 /**
- * Helper to build localized suffix fields (field_jp, field_kr, field_zh)
+ * Helper to build localized suffix fields
  * Used with spread after defining the base field separately
  * Example: { notes: z.array(...), ...buildLocalizedSuffixFields('notes', z.array(...)) }
  */
@@ -101,7 +101,7 @@ const buildLocalizedSuffixFields = <T extends z.ZodTypeAny>(fieldName: string, s
 }
 
 /**
- * Helper to build all localized field schemas (field + field_jp, field_kr, field_zh)
+ * Helper to build all localized field schemas 
  * All fields are optional - used when the base field doesn't need validation
  */
 const buildLocalizedFields = <T extends z.ZodTypeAny>(fieldName: string, schema: T) => {

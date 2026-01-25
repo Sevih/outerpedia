@@ -799,6 +799,12 @@ const zh = {
   'progress.optionalContentDesc': '为当前开放的活动启用任务',
   'progress.optionalShop': '商店购买选择',
   'progress.optionalShopDesc': '启用您想要追踪的商店物品',
+  'progress.preciseCraft': '精密制作',
+  'progress.preciseCraftItem': '精密制作（30天冷却）',
+  'progress.preciseCraftTimerDesc': '如果您最近已制作，请设置剩余天数。',
+  'progress.daysRemaining': '天剩余',
+  'progress.availableIn': '可用时间',
+  'progress.availableNow': '现在可用！',
 
   // Progress Tracker Tasks
   'progress.task.free-recruit-custom': '免费自定义招募',

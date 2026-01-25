@@ -71,7 +71,7 @@ type CharacterMap = Record<string, CharacterLite>
 
 /**
  * Construit un ItemList pour la page EE Priority (+0).
- * - name/effect choisis selon la langue (name_jp/kr, effect_jp/kr)
+ * - name/effect choisis selon la langue 
  * - description nettoyée (sans <color>)
  */
 export function itemListLd(

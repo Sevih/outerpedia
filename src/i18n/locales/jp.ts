@@ -799,6 +799,12 @@ const jp = {
   'progress.optionalContentDesc': '現在開催中のイベントのタスクを有効にしてください',
   'progress.optionalShop': 'オプションショップ購入',
   'progress.optionalShopDesc': '追跡したいオプションのショップアイテムを有効にしてください',
+  'progress.preciseCraft': '精密作成',
+  'progress.preciseCraftItem': '精密作成（30日クールダウン）',
+  'progress.preciseCraftTimerDesc': '最近作成した場合は残り日数を設定してください。',
+  'progress.daysRemaining': '日残り',
+  'progress.availableIn': '利用可能まで',
+  'progress.availableNow': '利用可能！',
 
   // Progress Tracker Tasks
   'progress.task.free-recruit-custom': '無料カスタムスカウト',

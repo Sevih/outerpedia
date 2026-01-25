@@ -799,6 +799,12 @@ const en = {
   'progress.optionalContentDesc': 'Enable tasks for events that are currently active',
   'progress.optionalShop': 'Optional Shop Purchases',
   'progress.optionalShopDesc': 'Enable optional shop items you want to track',
+  'progress.preciseCraft': 'Precise Craft',
+  'progress.preciseCraftItem': 'Precise Craft (30-day cooldown)',
+  'progress.preciseCraftTimerDesc': 'Set remaining days if you already crafted recently.',
+  'progress.daysRemaining': 'days remaining',
+  'progress.availableIn': 'Available in',
+  'progress.availableNow': 'Available now!',
 
   // Progress Tracker Tasks
   'progress.task.free-recruit-custom': 'Free Custom Recruit',

@@ -799,6 +799,12 @@ const kr = {
   'progress.optionalContentDesc': '현재 활성화된 이벤트의 작업을 활성화하세요',
   'progress.optionalShop': '선택적 상점 구매',
   'progress.optionalShopDesc': '추적하고 싶은 선택적 상점 아이템을 활성화하세요',
+  'progress.preciseCraft': '정밀 제작',
+  'progress.preciseCraftItem': '정밀 제작 (30일 쿨다운)',
+  'progress.preciseCraftTimerDesc': '최근에 제작한 경우 남은 일수를 설정하세요.',
+  'progress.daysRemaining': '일 남음',
+  'progress.availableIn': '이용 가능까지',
+  'progress.availableNow': '지금 이용 가능!',
 
   // Progress Tracker Tasks
   'progress.task.free-recruit-custom': '무료 커스텀 동료 영입',

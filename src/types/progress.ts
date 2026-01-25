@@ -14,10 +14,15 @@ export interface TaskProgress {
   lastUpdated: number
 }
 
+export interface PreciseCraftProgress {
+  completedAt: number | null // Timestamp when last crafted, null if never
+}
+
 export interface UserProgress {
   daily: Record<DailyTaskType, TaskProgress>
   weekly: Record<WeeklyTaskType, TaskProgress>
   monthly: Record<MonthlyTaskType, TaskProgress>
+  preciseCraft: PreciseCraftProgress
   lastDailyReset: number
   lastWeeklyReset: number
   lastMonthlyReset: number

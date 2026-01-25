@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { ProgressTracker } from '@/lib/progressTracker'
-import type { UserProgress, TaskProgress, UserSettings, TaskDefinition, TaskCategory } from '@/types/progress'
+import type { UserProgress, TaskProgress, UserSettings, TaskDefinition, TaskCategory, PreciseCraftProgress } from '@/types/progress'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import {
   DAILY_TASK_DEFINITIONS,
@@ -186,6 +186,16 @@ export function ProgressTrackerClient() {
     setProgress(ProgressTracker.getProgress())
   }
 
+  const handleTogglePreciseCraft = () => {
+    ProgressTracker.togglePreciseCraft()
+    setProgress(ProgressTracker.getProgress())
+  }
+
+  const handleSetPreciseCraftTimer = (daysRemaining: number) => {
+    ProgressTracker.setPreciseCraftTimer(daysRemaining)
+    setProgress(ProgressTracker.getProgress())
+  }
+
   const stats = ProgressTracker.getStats(progress)
   const dailyResetTime = ProgressTracker.getNextDailyReset()
   const weeklyResetTime = ProgressTracker.getNextWeeklyReset()
@@ -346,16 +356,23 @@ export function ProgressTrackerClient() {
               />
             )}
             {activeTab === 'monthly' && (
-              <TaskListByCategory
-                progress={progress.monthly || {}}
-                definitions={MONTHLY_TASK_DEFINITIONS}
-                type="monthly"
-                onIncrement={handleIncrement}
-                onToggle={handleToggleCompletion}
-                onToggleAllShop={handleToggleAllShop}
-                onToggleAllCraft={handleToggleAllCraft}
-                t={t}
-              />
+              <>
+                <TaskListByCategory
+                  progress={progress.monthly || {}}
+                  definitions={MONTHLY_TASK_DEFINITIONS}
+                  type="monthly"
+                  onIncrement={handleIncrement}
+                  onToggle={handleToggleCompletion}
+                  onToggleAllShop={handleToggleAllShop}
+                  onToggleAllCraft={handleToggleAllCraft}
+                  t={t}
+                />
+                <PreciseCraftSection
+                  preciseCraft={progress.preciseCraft}
+                  onToggle={handleTogglePreciseCraft}
+                  t={t}
+                />
+              </>
             )}
           </>
         ) : (
@@ -421,6 +438,11 @@ export function ProgressTrackerClient() {
                 onToggle={handleToggleCompletion}
                 onToggleAllShop={handleToggleAllShop}
                 onToggleAllCraft={handleToggleAllCraft}
+                t={t}
+              />
+              <PreciseCraftSection
+                preciseCraft={progress.preciseCraft}
+                onToggle={handleTogglePreciseCraft}
                 t={t}
               />
             </div>
@@ -696,6 +718,32 @@ export function ProgressTrackerClient() {
             {settingsTab === 'craft' && (
               <div className="space-y-6">
                 <p className="text-sm text-gray-400">{t('progress.craftSettingsDesc')}</p>
+
+                {/* Precise Craft Timer Setting */}
+                <div className="p-4 bg-purple-900/20 border border-purple-500/30 rounded-lg">
+                  <p className="text-sm font-medium mb-3 text-purple-400">{t('progress.preciseCraft')}</p>
+                  <p className="text-xs text-gray-400 mb-3">{t('progress.preciseCraftTimerDesc')}</p>
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="number"
+                      min="0"
+                      max="30"
+                      defaultValue={
+                        progress.preciseCraft.completedAt
+                          ? Math.max(0, Math.ceil((progress.preciseCraft.completedAt + 30 * 24 * 60 * 60 * 1000 - Date.now()) / (24 * 60 * 60 * 1000)))
+                          : 0
+                      }
+                      onChange={(e) => {
+                        const days = parseInt(e.target.value, 10)
+                        if (!isNaN(days) && days >= 0 && days <= 30) {
+                          handleSetPreciseCraftTimer(days)
+                        }
+                      }}
+                      className="w-20 px-3 py-2 bg-gray-700 border border-gray-600 rounded text-center text-white focus:border-purple-500 focus:outline-none"
+                    />
+                    <span className="text-sm text-gray-400">{t('progress.daysRemaining')}</span>
+                  </div>
+                </div>
 
                 {/* Weekly Craft Items */}
                 {Object.values(WEEKLY_TASK_DEFINITIONS).filter((def) => def.category === 'craft').length > 0 && (
@@ -1414,6 +1462,77 @@ function SectionHeader({
         <span className="absolute inset-0 flex items-center justify-center text-sm font-bold">
           {percent}%
         </span>
+      </div>
+    </div>
+  )
+}
+
+// Precise Craft section (30-day timer)
+function PreciseCraftSection({
+  preciseCraft,
+  onToggle,
+  t,
+}: {
+  preciseCraft: PreciseCraftProgress
+  onToggle: () => void
+  t: (key: string) => string
+}) {
+  const isAvailable = ProgressTracker.isPreciseCraftAvailable()
+  const nextAvailableTime = ProgressTracker.getNextPreciseCraftTime()
+  const isCompleted = preciseCraft.completedAt !== null && !isAvailable
+
+  return (
+    <div className="mt-6">
+      <div className="flex items-center gap-2 mb-3">
+        <div className="relative w-6 h-6">
+          <Image
+            src="/images/ui/nav/CM_Agit_Crafting.webp"
+            alt="Precise Craft"
+            fill
+            sizes="24px"
+            className="object-contain"
+          />
+        </div>
+        <h3 className="text-lg font-semibold text-purple-400">{t('progress.preciseCraft')}</h3>
+      </div>
+      <div
+        className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all ${
+          isCompleted
+            ? 'bg-gray-800/30 opacity-60'
+            : isAvailable
+            ? 'bg-purple-900/20 hover:bg-purple-900/30 border border-purple-500/30'
+            : 'bg-gray-800/50'
+        }`}
+        onClick={onToggle}
+      >
+        <div
+          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+            isCompleted
+              ? 'border-purple-500 bg-purple-500'
+              : 'border-gray-500'
+          }`}
+        >
+          {isCompleted && (
+            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          )}
+        </div>
+        <div className="flex-1">
+          <span className={isCompleted ? 'text-gray-400 line-through' : 'text-gray-200'}>
+            {t('progress.preciseCraftItem')}
+          </span>
+          {nextAvailableTime && (
+            <div className="text-xs text-gray-500 mt-1">
+              {t('progress.availableIn')}: {ProgressTracker.formatTimeUntil(nextAvailableTime)}
+            </div>
+          )}
+          {isAvailable && preciseCraft.completedAt === null && (
+            <div className="text-xs text-purple-400 mt-1">
+              {t('progress.availableNow')}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

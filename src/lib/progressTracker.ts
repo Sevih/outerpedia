@@ -38,6 +38,11 @@ export const ProgressTracker = {
     try {
       const progress: UserProgress = JSON.parse(stored)
 
+      // Migration: ensure preciseCraft exists
+      if (!progress.preciseCraft) {
+        progress.preciseCraft = { completedAt: null }
+      }
+
       // Sync progress with current settings (in case new tasks were added)
       const settings = this.getSettings()
       this.syncProgressWithSettings(progress, settings)
@@ -423,6 +428,72 @@ export const ProgressTracker = {
   },
 
   /**
+   * Toggle precise craft completion
+   * When completed, sets completedAt to current time
+   * When uncompleted, sets completedAt to null
+   */
+  togglePreciseCraft(): void {
+    const progress = this.getProgress()
+    if (progress.preciseCraft.completedAt === null) {
+      // Mark as completed
+      progress.preciseCraft.completedAt = Date.now()
+    } else {
+      // Reset
+      progress.preciseCraft.completedAt = null
+    }
+    this.saveProgress(progress)
+  },
+
+  /**
+   * Check if precise craft is available (30 days have passed since last craft)
+   */
+  isPreciseCraftAvailable(): boolean {
+    const progress = this.getProgress()
+    if (progress.preciseCraft.completedAt === null) {
+      return true
+    }
+    const thirtyDaysMs = 30 * 24 * 60 * 60 * 1000
+    return Date.now() >= progress.preciseCraft.completedAt + thirtyDaysMs
+  },
+
+  /**
+   * Get next precise craft available time
+   * Returns null if already available
+   */
+  getNextPreciseCraftTime(): number | null {
+    const progress = this.getProgress()
+    if (progress.preciseCraft.completedAt === null) {
+      return null
+    }
+    const thirtyDaysMs = 30 * 24 * 60 * 60 * 1000
+    const nextAvailable = progress.preciseCraft.completedAt + thirtyDaysMs
+    if (Date.now() >= nextAvailable) {
+      return null
+    }
+    return nextAvailable
+  },
+
+  /**
+   * Set precise craft timer by specifying days remaining
+   * Calculates the completedAt timestamp based on days remaining until available
+   */
+  setPreciseCraftTimer(daysRemaining: number): void {
+    const progress = this.getProgress()
+    if (daysRemaining <= 0) {
+      // Available now
+      progress.preciseCraft.completedAt = null
+    } else {
+      // Calculate when it was completed based on days remaining
+      // completedAt + 30 days = now + daysRemaining
+      // completedAt = now + daysRemaining - 30 days
+      const thirtyDaysMs = 30 * 24 * 60 * 60 * 1000
+      const daysRemainingMs = daysRemaining * 24 * 60 * 60 * 1000
+      progress.preciseCraft.completedAt = Date.now() + daysRemainingMs - thirtyDaysMs
+    }
+    this.saveProgress(progress)
+  },
+
+  /**
    * Get maxCount for a task, considering settings
    */
   getTaskMaxCount(taskId: string, type: 'daily' | 'weekly' | 'monthly'): number | undefined {
@@ -635,6 +706,7 @@ export const ProgressTracker = {
       daily: daily as Record<DailyTaskType, TaskProgress>,
       weekly: weekly as Record<WeeklyTaskType, TaskProgress>,
       monthly: monthly as Record<MonthlyTaskType, TaskProgress>,
+      preciseCraft: { completedAt: null },
       lastDailyReset: now,
       lastWeeklyReset: now,
       lastMonthlyReset: now,
@@ -945,8 +1017,10 @@ export const ProgressTracker = {
     const weeklyCompleted = weeklyTasks.filter((t) => t.completed).length
     const weeklyTotal = weeklyTasks.length
 
-    const monthlyCompleted = monthlyTasks.filter((t) => t.completed).length
-    const monthlyTotal = monthlyTasks.length
+    // Include precise craft in monthly stats (completed if in cooldown, not completed if available)
+    const preciseCraftCompleted = !this.isPreciseCraftAvailable() ? 1 : 0
+    const monthlyCompleted = monthlyTasks.filter((t) => t.completed).length + preciseCraftCompleted
+    const monthlyTotal = monthlyTasks.length + 1
 
     return {
       dailyCompleted,
