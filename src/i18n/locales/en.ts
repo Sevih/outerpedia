@@ -131,7 +131,7 @@ const en = {
   'home.newTo.links.gear': 'Gear',
   'home.newTo.links.gear.desc': '— how equipment works and how to upgrade it.',
   'home.newTo.links.growth': 'Hero Growth',
-  'home.newTo.links.growth.desc': '— leveling, transcendence, trust, and more.',
+  'home.newTo.links.growth.desc': '— leveling, transcendence, affinity, and more.',
   'home.newTo.footer': 'Perfect for first-time players',
   'home.categories.title': 'Categories',
   'home.categories.desc': 'Discover categories to help you build teams, optimize gear, and master Outerplane content.',

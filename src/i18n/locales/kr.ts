@@ -131,7 +131,7 @@ const kr = {
   'home.newTo.links.gear': '장비',
   'home.newTo.links.gear.desc': '— 장비의 작동 원리와 강화 방법.',
   'home.newTo.links.growth': '영웅 성장',
-  'home.newTo.links.growth.desc': '— 레벨업, 초월, 친밀도 등.',
+  'home.newTo.links.growth.desc': '— 레벨업, 초월, 애정도 등.',
   'home.newTo.footer': '처음 플레이하는 유저에게 적합',
   'home.categories.title': '카테고리',
   'home.categories.desc': '팀을 구성하고 장비를 최적화하며 Outerplane 콘텐츠를 마스터하는 데 도움이 되는 카테고리를 확인하세요.',

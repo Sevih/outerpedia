@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { ProgressTracker } from '@/lib/progressTracker'
 import type { UserProgress, TaskProgress, UserSettings, TaskDefinition, TaskCategory } from '@/types/progress'
@@ -26,6 +27,7 @@ export function ProgressTrackerClient() {
   const [importError, setImportError] = useState('')
   const [activeTab, setActiveTab] = useState<TabType>('daily')
   const [settingsTab, setSettingsTab] = useState<SettingsTabType>('display')
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null)
   const lastClickTime = useRef<number>(0)
 
   // Debounce helper to prevent double-clicks
@@ -41,6 +43,7 @@ export function ProgressTrackerClient() {
     setMounted(true)
     setProgress(ProgressTracker.getProgress())
     setSettings(ProgressTracker.getSettings())
+    setPortalElement(document.getElementById('portal-root'))
   }, [])
 
   // Auto-refresh timer every minute to update countdown
@@ -426,9 +429,10 @@ export function ProgressTrackerClient() {
       </section>
 
       {/* Export/Import Modal */}
-      {showExportModal && (
+      {showExportModal && portalElement && createPortal(
         <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/50 flex items-center justify-center p-4"
+          style={{ zIndex: 99999 }}
           onClick={() => {
             setShowExportModal(false)
             setImportData('')
@@ -480,25 +484,27 @@ export function ProgressTrackerClient() {
               {t('progress.close')}
             </button>
           </div>
-        </div>
+        </div>,
+        portalElement
       )}
 
       {/* Settings Modal */}
-      {showSettingsModal && settings && (
+      {showSettingsModal && settings && portalElement && createPortal(
         <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/50 flex items-center justify-center p-4"
+          style={{ zIndex: 99999 }}
           onClick={() => setShowSettingsModal(false)}
         >
           <div className="bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-xl font-bold mb-4">{t('progress.settingsTitle')}</h3>
 
             {/* Settings Tabs */}
-            <div className="flex gap-2 mb-6 border-b border-gray-700 pb-2">
+            <div className="flex gap-0.5 md:gap-2 mb-6 border-b border-gray-700 pb-2">
               {(['display', 'game', 'content', 'craft', 'shop'] as SettingsTabType[]).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setSettingsTab(tab)}
-                  className={`px-4 py-2 rounded-t text-sm font-medium transition ${
+                  className={`px-2 md:px-4 py-1.5 md:py-2 rounded-t text-xs md:text-sm font-medium transition ${
                     settingsTab === tab
                       ? 'bg-gray-700 text-white'
                       : 'text-gray-400 hover:text-gray-200'
@@ -867,7 +873,8 @@ export function ProgressTrackerClient() {
               {t('progress.close')}
             </button>
           </div>
-        </div>
+        </div>,
+        portalElement
       )}
     </div>
   )
