@@ -1,6 +1,30 @@
 {
   "en": [
     {
+      "slug": "live-en-6003",
+      "title": "[Maintenance] 01/26 (Mon) Update Maintenance",
+      "date": "2026/01/26 9:00:00",
+      "category": "maintenance",
+      "excerpt": "We would like to inform you of the in-game update scheduled for 01/16(Mon). You can check the updated content in the game after maintenance is completed. Please refer to the details below for more inf...",
+      "coverImage": "/images/news/live/en/6003-040c4f45.webp",
+      "uid": "6003",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/26/maintenance-01-26-mon-update-maintenance/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-5968",
+      "title": "[Update] 1/27 (Tue) Patch Note",
+      "date": "2026/01/26 6:00:00",
+      "category": "notice",
+      "excerpt": "Dear Master, We would like to inform you of the in-game update scheduled for 1/27 (Tue). You can check the updated content in the game after maintenance is completed. Please refer to the details below...",
+      "coverImage": "/images/news/live/en/5968-69177316.webp",
+      "uid": "5968",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/26/pn/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-5943",
       "title": "Developer’s Note: Adjustment to Accuracy / Evasion / Heals When Hit Stats",
       "date": "2026/01/22 5:09:33",
@@ -12966,6 +12990,30 @@
     }
   ],
   "jp": [
+    {
+      "slug": "live-jp-6007",
+      "title": "📣1/27 (火) アップデート内容のお知らせ",
+      "date": "2026/01/26 9:00:00",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 1/27(火)にコンテンツ更新のため、メンテナンスを実施いたします。 詳しくは下記内容をご確認ください。 ◈メンテナンス予定実施時間 1/27 (火) 8:30 ~ 13:30 (JST) ◈メンテナンスの内容 1. 新規デミウルゴス仲間「モナドイオータ」ピックアップ対象追加 2.新規...",
+      "coverImage": "/images/news/live/jp/6007-3851576a.webp",
+      "uid": "6007",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/26/%f0%9f%93%a31-27-%e7%81%ab-%e3%82%a2%e3%83%83%e3%83%97%e3%83%87%e3%83%bc%e3%83%88%e5%86%85%e5%ae%b9%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-5991",
+      "title": "1/27(火)アップデート内容のお知らせ",
+      "date": "2026/01/26 6:00:00",
+      "category": "notice",
+      "excerpt": "こんにちは！GMあめです。 1/27(火) のアップデート内容を案内いたします。 アップデート内容は、メンテナンス終了後にゲーム内でご確認いただけます。 詳細につきましては、下記をご覧ください。 1. 新規デミウルゴス仲間【モナド・イオータ】登場 ・敵の攻撃パターンを遮り、味方全体に強化効果をあ与える【モナドイオータ】が登場します。 \\# 名前：モナド・イオータ \\# 属性：闇属性 \\# 戦闘タイ...",
+      "coverImage": "/images/news/live/jp/5991-fad46954.webp",
+      "uid": "5991",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/26/0127_update_jp/",
+      "views": 0,
+      "lang": "jp"
+    },
     {
       "slug": "live-jp-5951",
       "title": "【開発者ノート】命中・回避・被撃時回復ステータスの調整に関するご案内",
@@ -25969,6 +26017,30 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-6001",
+      "title": "[점검] 1/27 (화) 업데이트 점검 안내",
+      "date": "2026/01/26 9:00:00",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 1/27 (화) 업데이트 점검이 예정되어 안내드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 점검 일정 1/27 (화) 8:30 ~ 13:30 (KST) ◈ 내용 1. 신규 동료 – \\[모나드 요타\\] 2. 신규 이벤트 던전 \\[태양, 그 빛은 영원하리.\\] 3. 복각 이벤트 던전 \\[엣셉흐 초코 스쿼드\\] 4....",
+      "coverImage": "/images/news/live/kr/6001-98c60744.webp",
+      "uid": "6001",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/26/%ec%a0%90%ea%b2%80-1-27-%ed%99%94-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%a0%90%ea%b2%80-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-5974",
+      "title": "1/27(화) 업데이트 안내",
+      "date": "2026/01/26 6:00:00",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 1/27 (화) 진행될 게임 내 업데이트 사항을 안내해 드립니다. 업데이트 내용은 점검 후 게임 내에서 확인하실 수 있습니다. 자세한 내용은 아래를 확인해 주시기 바랍니다. 1. 신규 데미우르고스 동료 \\[모나드 요타\\] 등장 - 적들의 공격 패턴을 차단하고, 아군 전체에게는 버프를 부여하는 \\[모나드 요타\\]가 합류합니다. ...",
+      "coverImage": "/images/news/live/kr/5974-d3b3a5de.webp",
+      "uid": "5974",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/26/260127_update_kr/",
+      "views": 0,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-5946",
       "title": "[개발자 편지] 명중 / 회피 / 피격 시 회복 스탯 조정 안내",
