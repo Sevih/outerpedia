@@ -293,13 +293,13 @@
       "en": "Promotion : Demiurge Vlada",
       "jp": "昇級チャレンジ : デミウルゴス ヴラダ",
       "kr": "승급 챌린지 : 데미우르고스 블라다",
-      "zh": "晋升挑战：造物主弗拉达"
+      "zh": "晋升挑战：创世之神 布拉达"
     },
     "description": {
       "en": "Tips and advice to succeed against Demiurge Vlada",
       "jp": "デミウルゴス ヴラダを成功させるためのヒントとアドバイス",
       "kr": "데미우르고스 블라다를 성공시키기 위한 팁과 조언",
-      "zh": "成功挑战造物主弗拉达的提示和建议"
+      "zh": "成功挑战创世之神 布拉达的提示和建议"
     },
     "icon": "prom-dvlada",
     "last_updated": "2025-11-29",
@@ -312,13 +312,13 @@
       "en": "Promotion : Gnosis Dahlia",
       "jp": "昇級チャレンジ : グノーシス ダリア",
       "kr": "승급 챌린지 : 그노시스 달리아",
-      "zh": "晋升挑战：灵知达利亚"
+      "zh": "晋升挑战：诺希斯 达利娅"
     },
     "description": {
       "en": "Tips and advice to succeed against Gnosis Dahlia",
       "jp": "グノーシス ダリアを成功させるためのヒントとアドバイス",
       "kr": "그노시스 달리아를 성공시키기 위한 팁과 조언",
-      "zh": "成功挑战灵知达利亚的提示和建议"
+      "zh": "成功挑战诺希斯 达利娅的提示和建议"
     },
     "icon": "prom-gdahlia",
     "last_updated": "2025-11-29",
@@ -331,13 +331,13 @@
       "en": "Promotion : Monad Eva",
       "jp": "昇級チャレンジ : モナド エヴァ",
       "kr": "승급 챌린지 : 모나드 에바",
-      "zh": "晋升挑战：单子伊娃"
+      "zh": "晋升挑战：单子 艾娃"
     },
     "description": {
       "en": "Tips and advice to succeed against Monad Eva",
       "jp": "モナド エヴァを成功させるためのヒントとアドバイス",
       "kr": "모나드 에바를 성공시키기 위한 팁과 조언",
-      "zh": "成功挑战单子伊娃的提示和建议"
+      "zh": "成功挑战单子 艾娃的提示和建议"
     },
     "icon": "prom-meva",
     "last_updated": "2025-11-29",
@@ -350,13 +350,13 @@
       "en": "Promotion : Demiurge Drakhan",
       "jp": "昇級チャレンジ : デミウルゴス ドレイカーン",
       "kr": "승급 챌린지 : 데미우르고스 드레이칸",
-      "zh": "晋升挑战：造物主德雷坎"
+      "zh": "晋升挑战：创世之神 德雷坎"
     },
     "description": {
       "en": "Tips and advice to succeed against Demiurge Drakhan",
       "jp": "デミウルゴス ドレイカーンを成功させるためのヒントとアドバイス",
       "kr": "데미우르고스 드레이칸을 성공시키기 위한 팁과 조언",
-      "zh": "成功挑战造物主德雷坎的提示和建议"
+      "zh": "成功挑战创世之神 德雷坎的提示和建议"
     },
     "icon": "prom-ddrakhan",
     "last_updated": "2025-11-29",
@@ -369,13 +369,13 @@
       "en": "Promotion : Demiurge Astei",
       "jp": "昇級チャレンジ : デミウルゴス アステ",
       "kr": "승급 챌린지 : 데미우르고스 아스테",
-      "zh": "晋升挑战：造物主阿斯特"
+      "zh": "晋升挑战：创世之神 奥斯黛"
     },
     "description": {
       "en": "Tips and advice to succeed against Demiurge Astei",
       "jp": "デミウルゴス アステを成功させるためのヒントとアドバイス",
       "kr": "데미우르고스 아스테를 성공시키기 위한 팁과 조언",
-      "zh": "成功挑战造物主阿斯特的提示和建议"
+      "zh": "成功挑战创世之神 奥斯黛的提示和建议"
     },
     "icon": "prom-dastei",
     "last_updated": "2025-11-29",
@@ -388,13 +388,13 @@
       "en": "Promotion : Demiurge Stella",
       "jp": "昇級チャレンジ : デミウルゴス ステラ",
       "kr": "승급 챌린지 : 데미우르고스 스텔라",
-      "zh": "晋升挑战：造物主斯特拉"
+      "zh": "晋升挑战：创世之神 斯黛拉"
     },
     "description": {
       "en": "Tips and advice to succeed against Demiurge Stella",
       "jp": "デミウルゴス ステラを成功させるためのヒントとアドバイス",
       "kr": "데미우르고스 스텔라를 성공시키기 위한 팁과 조언",
-      "zh": "成功挑战造物主斯特拉的提示和建议"
+      "zh": "成功挑战创世之神 斯黛拉的提示和建议"
     },
     "icon": "prom-dstella",
     "last_updated": "2025-11-29",
@@ -540,13 +540,13 @@
       "en": "Ksai",
       "jp": "ザイ",
       "kr": "크사이",
-      "zh": "克赛"
+      "zh": "科赛"
     },
     "description": {
       "en": "Guide and advice to clear the Weekly Conquest - Ksai",
       "jp": "ウィークリー討伐 - ザイ クリアガイドとアドバイス",
       "kr": "주간토벌 - 크사이 클리어 가이드 및 조언",
-      "zh": "周常征服 - 克赛通关指南和建议"
+      "zh": "周常征服 - 科赛通关指南和建议"
     },
     "icon": "ksai",
     "last_updated": "2025-11-29",
@@ -730,13 +730,13 @@
       "en": "Planet Purification Unit Epsilon",
       "jp": "イプシロン",
       "kr": "엡실론",
-      "zh": "行星净化装置艾普西隆"
+      "zh": "行星净化装置埃普西隆"
     },
     "description": {
       "en": "Guide and advice to clear the Weekly Conquest - Planet Purification Unit Epsilon",
       "jp": "ウィークリー討伐 - イプシロン クリアガイドとアドバイス",
       "kr": "주간토벌 - 엡실론 클리어 가이드 및 조언",
-      "zh": "周常征服 - 行星净化装置艾普西隆通关指南和建议"
+      "zh": "周常征服 - 行星净化装置埃普西隆通关指南和建议"
     },
     "icon": "ppu-epsilon",
     "last_updated": "2025-11-29",
@@ -877,7 +877,7 @@
       "en": "Pursuit : Irregular Queen",
       "jp": "追撃 : イレギュラークイーン",
       "kr": "추격 : 이레귤러 퀸",
-      "zh": "追击：异常女王"
+      "zh": "追击：异形怪女王"
     },
     "description": {
       "en": "Boss strategy guide",
@@ -896,7 +896,7 @@
       "en": "Pursuit : Blockbuster",
       "jp": "追撃 : ブラックバスター",
       "kr": "추격 : 블록버스터",
-      "zh": "追击：巨型破坏者"
+      "zh": "追击：破坏猛兽"
     },
     "description": {
       "en": "Boss strategy guide",
@@ -915,7 +915,7 @@
       "en": "Pursuit : Iron Stretcher",
       "jp": "追撃 : アイアンストレッチャー",
       "kr": "추격 : 아이언 스트레쳐",
-      "zh": "追击：钢铁担架"
+      "zh": "追击：铁血伸张者"
     },
     "description": {
       "en": "Boss strategy guide",
@@ -934,7 +934,7 @@
       "en": "Pursuit : Mutated Wyvre",
       "jp": "追撃 : 変異したワイブル",
       "kr": "추격 : 변이된 와이브르",
-      "zh": "追击：变异飞龙"
+      "zh": "追击：变异双足飞龙"
     },
     "description": {
       "en": "Boss strategy guide",
@@ -1025,13 +1025,13 @@
       "en": "Free Heroes & Starter Banners",
       "jp": "無料ヒーロー&スターターバナー",
       "kr": "무료 영웅 & 스타터 배너",
-      "zh": "免费英雄和新手横幅"
+      "zh": "免费同伴和新手卡池"
     },
     "description": {
       "en": "Learn which heroes you'll get for free in Outerplane and how to make the best choices from the start",
       "jp": "Outerplaneで無料で入手できるヒーローと、最初から最適な選択をする方法を学びましょう。",
       "kr": "Outerplane에서 무료로 받을 수 있는 영웅과 시작부터 최선의 선택을 하는 방법을 배우세요.",
-      "zh": "了解在Outerplane中可以免费获得哪些英雄，以及如何从一开始做出最佳选择"
+      "zh": "了解可以在异域战记免费获得的同伴，以及如何做出最佳选择"
     },
     "icon": "T_Chat_Emoticon_08",
     "last_updated": "2026-09-01",
@@ -1051,7 +1051,7 @@
       "en": "Common questions asked by new players — covers heroes, gear, progression, and resource management",
       "jp": "新規プレイヤーからよく寄せられる質問 — ヒーロー、装備、進行、リソース管理について",
       "kr": "신규 플레이어가 자주 묻는 질문 — 영웅, 장비, 진행 및 리소스 관리에 대해",
-      "zh": "新玩家常见问题 — 涵盖英雄、装备、进度和资源管理"
+      "zh": "新玩家常见问题 — 同伴、装备、进度和资源管理等"
     },
     "icon": "T_Chat_Emoticon_08",
     "last_updated": "2025-11-02",
@@ -1071,7 +1071,7 @@
       "en": "Learn how to efficiently spend your stamina daily in Outerplane with this step-by-step guide.",
       "jp": "この手順ガイドで、Outerplane の毎日のスタミナを効率よく使う方法を学びましょう。",
       "kr": "이 단계별 가이드로 Outerplane에서 매일 스태미나를 효율적으로 사용하는 법을 알아보세요.",
-      "zh": "通过这份分步指南，了解如何在Outerplane中高效地每日消耗体力"
+      "zh": "通过这份分步指南，了解每日如何在异域战记中高效地消耗体力"
     },
     "icon": "T_Chat_Emoticon_04",
     "last_updated": "2025-05-13",
@@ -1085,13 +1085,13 @@
       "en": "Banners & Mileage System",
       "jp": "バナー&マイレージシステム",
       "kr": "배너 & 마일리지 시스템",
-      "zh": "横幅和里程系统"
+      "zh": "卡池和指定招募"
     },
     "description": {
       "en": "Understand the banner types and the mileage system in Outerplane to optimize your summons.",
       "jp": "Outerplaneのバナータイプとマイレージシステムを理解して、召喚を最適化しましょう。",
       "kr": "Outerplane의 배너 유형과 마일리지 시스템을 이해하고 소환을 최적화하세요.",
-      "zh": "了解Outerplane中的横幅类型和里程系统，优化你的召唤"
+      "zh": "了解异域战记中的卡池类型和指定招募系统以优化您的抽取"
     },
     "icon": "myth",
     "last_updated": "2025-05-25",
@@ -1405,13 +1405,13 @@
       "en": "Hero Growth",
       "jp": "ヒーロー育成",
       "kr": "영웅 육성",
-      "zh": "英雄成长"
+      "zh": "同伴成长"
     },
     "description": {
       "en": "A complete breakdown of how to power up your heroes efficiently, from leveling and upgrades to transcendence, gear, skills, and affinity.",
       "jp": "レベリング、アップグレード、超越、装備、スキル、信頼まで、ヒーローを効率的に強化する方法の完全ガイド。",
       "kr": "레벨링, 업그레이드, 초월, 장비, 스킬, 신뢰도까지 영웅을 효율적으로 강화하는 방법에 대한 완전 가이드.",
-      "zh": "从升级和强化到超越、装备、技能和信任，如何高效提升英雄实力的完整指南"
+      "zh": "从升级强化到超越、装备、技能和亲密度，如何高效提升同伴实力的完整指南"
     },
     "icon": "heroes-growth",
     "second_image": "heroes-growth-2",
@@ -1431,7 +1431,7 @@
       "en": "A guide to gear types, upgrades, and how to make your equipment stronger.",
       "jp": "装備タイプ、アップグレード、装備を強化する方法のガイド。",
       "kr": "장비 유형, 업그레이드 및 장비를 강화하는 방법에 대한 가이드.",
-      "zh": "装备类型、升级以及如何使装备更强大的指南"
+      "zh": "讲解装备类型、升级以及如何使其更强大的指南"
     },
     "icon": "gear",
     "second_image": "gear-2",
@@ -1445,13 +1445,13 @@
       "en": "Quirk System",
       "jp": "ギフトシステム",
       "kr": "기프트 시스템",
-      "zh": "特质系统"
+      "zh": "天赋系统"
     },
     "description": {
       "en": "Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials.",
       "jp": "ギフトシステムでヒーローを効率的に強化する方法：アップグレードパス、推奨優先順位、必要素材。",
       "kr": "기프트 시스템으로 영웅을 효율적으로 강화하는 방법: 업그레이드 경로, 추천 우선순위, 필요 재료.",
-      "zh": "了解如何通过特质系统高效强化英雄：升级路径、推荐优先级和所需材料"
+      "zh": "如何通过天赋系统高效强化同伴：了解加点路径、推荐优先级和所需的材料"
     },
     "icon": "quirk",
     "second_image": "quirk-2",
@@ -1466,13 +1466,13 @@
       "en": "Statistics & Combat Basics",
       "jp": "統計と戦闘の基本",
       "kr": "스탯 및 전투 기초",
-      "zh": "属性与战斗基础"
+      "zh": "能力值与战斗基础"
     },
     "description": {
       "en": "Learn about character statistics, damage calculation, and combat mechanics in Outerplane.",
       "jp": "Outerplaneのキャラクターステータス、ダメージ計算、戦闘メカニクスについて学ぶ。",
       "kr": "아우터플레인의 캐릭터 스탯, 데미지 계산 및 전투 메커니즘을 배우세요.",
-      "zh": "了解Outerplane中的角色属性、伤害计算和战斗机制"
+      "zh": "了解异域战记的角色能力值、伤害计算和战斗机制"
     },
     "icon": "stats",
     "second_image": "stats",
@@ -1511,7 +1511,7 @@
       "en": "Ascend the 100 floors of the Skyward Tower — an epic journey that will test your endurance and versatility.",
       "jp": "飛天の塔の100階を登る ― 持久力と適応力を試す壮大な旅。",
       "kr": "비천의 탑 100층을 오르세요 - 지구력과 다재다능함을 시험하는 서사적 여정.",
-      "zh": "攀登飞天之塔的100层——一段考验你的耐力和多才多艺的史诗旅程"
+      "zh": "攀登飞天之塔的100层——一段考验你的耐力和对同伴了解的史诗旅程"
     },
     "icon": "normal",
     "last_updated": "2025-08-23",
@@ -1529,7 +1529,7 @@
       "en": "Face 30 relentless floors packed with tougher enemies and tactical challenges. Precision and strategy are key.",
       "jp": "より強力な敵と戦術的な挑戦が詰まった30階に挑む。精度と戦略が鍵。",
       "kr": "더 강력한 적과 전술적 도전이 가득한 30층에 도전하세요. 정확성과 전략이 핵심입니다.",
-      "zh": "面对充满强敌和战术挑战的30层。精准度和策略是关键"
+      "zh": "面对充满了强敌和挑战的30层，精确和策略是关键。"
     },
     "icon": "hard",
     "last_updated": "2025-11-01",
@@ -1541,13 +1541,13 @@
       "en": "Very Hard",
       "jp": "ベリーハード",
       "kr": "베리 하드",
-      "zh": "非常困难"
+      "zh": "极难"
     },
     "description": {
       "en": "Only the most elite teams will survive the top 20 brutal floors.",
       "jp": "最も精鋭のチームだけが最上層20階の過酷な試練を生き残る。",
       "kr": "가장 엘리트 팀만이 최상층 20층의 잔인한 시련에서 살아남을 것입니다.",
-      "zh": "只有最精英的队伍才能在最顶层的20层残酷楼层中生存"
+      "zh": "只有最精英的队伍能够在最残酷的20层中生存"
     },
     "icon": "very-hard",
     "last_updated": "2026-01-22",
@@ -1559,13 +1559,13 @@
       "en": "Timegated Resources Guide",
       "jp": "時間制限リソースガイド",
       "kr": "시간 제한 자원 가이드",
-      "zh": "时间限制资源指南"
+      "zh": "有限资源指南"
     },
     "description": {
       "en": "Complete guide to Outerplane's timegated resources — skill books, transistones, special gear materials, and glunite sources.",
       "jp": "Outerplaneの時間制限リソースの完全ガイド — スキルブック、トランジストーン、特殊装備素材、グルナイト源。",
       "kr": "Outerplane의 시간 제한 자원 완전 가이드 — 스킬북, 트랜지스톤, 특수 장비 재료, 글루나이트 소스.",
-      "zh": "Outerplane时间限制资源完整指南——技能书、转换石、特殊装备材料和格鲁奈特来源"
+      "zh": "异域战记有限类资源完整指南——技能书、转换石、特殊装备材料和格鲁矿石来源"
     },
     "icon": "timegate-resource",
     "second_image": "timegate-resource2",
@@ -1603,7 +1603,7 @@
       "en": "Outerplane shop guide with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely.",
       "jp": "Outerplaneショップガイド：購入優先順位 — 購入すべきアイテム、スキップすべきもの、通貨の賢い使い方。",
       "kr": "Outerplane 상점 가이드: 구매 우선순위 — 구매해야 할 아이템, 건너뛸 것, 화폐를 현명하게 사용하는 방법.",
-      "zh": "Outerplane商店指南及购买优先级——最佳购买物品、应跳过的物品以及如何明智地使用货币"
+      "zh": "Outerplane商店指南及购买优先级——最佳购买物品、应跳过的物品以及如何明智地购买"
     },
     "icon": "shop-purchase-priorities",
     "second_image": "shop-purchase-priorities2",
@@ -1617,13 +1617,13 @@
       "en": "Premium & Limited Guide",
       "jp": "プレミアム&期間限定ガイド",
       "kr": "프리미엄 & 한정 가이드",
-      "zh": "高级和限定指南"
+      "zh": "创世之神和限定指南"
     },
     "description": {
       "en": "Pull priorities, PvE/PvP recommendations, and key transcendence sweetspots (3★→6★) for Premium and Limited heroes in Outerplane.",
       "jp": "Outerplaneのプレミアムと期間限定ヒーローの召喚優先順位、PvE/PvP推奨、重要な超越スイートスポット（3★→6★）。",
       "kr": "Outerplane의 프리미엄 및 한정 영웅에 대한 뽑기 우선순위, PvE/PvP 추천, 주요 초월 스위트스팟 (3★→6★).",
-      "zh": "Outerplane高级和限定英雄的抽取优先级、PvE/PvP推荐以及关键超越甜蜜点（3★→6★）"
+      "zh": "异域战记创世之神和限定同伴的抽取优先级、PVE/PVP推荐以及超越等级关键点（3★→6★）"
     },
     "icon": "premium-limited",
     "second_image": "premium-limited2",
@@ -1643,7 +1643,7 @@
       "en": "Overview of all regular and variable sources of Ether in Outerplane, with daily, weekly, and monthly totals.",
       "jp": "Outerplaneのエーテルの定期的および変動的な供給源の概要（日次、週次、月次の合計付き）。",
       "kr": "Outerplane의 에테르에 대한 정기적 및 변동 소스 개요（일일, 주간, 월간 합계 포함）。",
-      "zh": "Outerplane中所有常规和变动以太来源的概览，包含每日、每周和每月总计"
+      "zh": "异域战记中所有常规和不定期获得的以太来源概览，包含每日、每周和每月总计。"
     },
     "icon": "ether-income",
     "second_image": "ether-income2",
@@ -1701,7 +1701,7 @@
       "en": "List of all game modes and features with their unlock conditions and short explanations.",
       "jp": "すべてのゲームモードと機能のリスト、そのアンロック条件と簡単な説明。",
       "kr": "모든 게임 모드 및 기능 목록과 잠금 해제 조건 및 간단한 설명.",
-      "zh": "所有游戏模式和功能的列表，包含解锁条件和简短说明"
+      "zh": "包含解锁条件和简短说明的所有游戏模式和功能特性的列表，"
     },
     "icon": "unlock-content",
     "last_updated": "2025-10-03",
@@ -1930,7 +1930,7 @@
       "en": "Summary of the January 2026 Offline Meeting: new characters, Core Fusion plans, RTA, Dimension Singularity and more.",
       "jp": "2026年1月オフラインミーティングのまとめ：新キャラクター、コアフュージョン計画、RTA、次元特異点など。",
       "kr": "2026년 1월 오프라인 미팅 요약: 신규 캐릭터, 코어 퓨전 계획, RTA, 차원 특이점 등.",
-      "zh": "2026年1月线下会议总结：新角色、核心融合计划、RTA、维度奇点等。"
+      "zh": "2026年1月线下会议总结：新角色、核心融合计划、实时竞技、次元奇点等。"
     },
     "icon": "roadmap-2026",
     "second_image": "roadmap-2026",
