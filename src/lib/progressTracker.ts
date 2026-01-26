@@ -19,9 +19,9 @@ const CURRENT_VERSION = 1
 
 // Outerplane reset times (aligned with game server resets)
 // Daily reset: 00:00 UTC (1h du matin en France UTC+1, 2h en UTC+2)
-// Weekly reset: Tuesday 00:00 UTC (Mardi 1h du matin en France UTC+1, 2h en UTC+2)
+// Weekly reset: Monday 00:00 UTC (Lundi 1h du matin en France UTC+1, 2h en UTC+2)
 const DAILY_RESET_HOUR_UTC = 0
-const WEEKLY_RESET_DAY = 2 // Tuesday (0 = Sunday, 1 = Monday, 2 = Tuesday)
+const WEEKLY_RESET_DAY = 1 // Monday (0 = Sunday, 1 = Monday, 2 = Tuesday)
 
 export const ProgressTracker = {
   /**
@@ -735,15 +735,15 @@ export const ProgressTracker = {
       needsSave = true
     }
 
-    // Check if weekly reset has passed (Tuesday 00:00 UTC)
-    const currentWeekTuesday = new Date(now)
-    currentWeekTuesday.setUTCHours(DAILY_RESET_HOUR_UTC, 0, 0, 0)
-    const currentDay = currentWeekTuesday.getUTCDay()
-    const daysToSubtract = currentDay < 2 ? currentDay + 5 : currentDay - 2 // Get to Tuesday
-    currentWeekTuesday.setUTCDate(currentWeekTuesday.getUTCDate() - daysToSubtract)
+    // Check if weekly reset has passed (Monday 00:00 UTC)
+    const currentWeekMonday = new Date(now)
+    currentWeekMonday.setUTCHours(DAILY_RESET_HOUR_UTC, 0, 0, 0)
+    const currentDay = currentWeekMonday.getUTCDay()
+    const daysToSubtract = (currentDay - WEEKLY_RESET_DAY + 7) % 7 // Get to Monday
+    currentWeekMonday.setUTCDate(currentWeekMonday.getUTCDate() - daysToSubtract)
 
-    // If we're past this week's Tuesday reset and last reset was before this Tuesday
-    if (now >= currentWeekTuesday && progress.lastWeeklyReset < currentWeekTuesday.getTime()) {
+    // If we're past this week's Monday reset and last reset was before this Monday
+    if (now >= currentWeekMonday && progress.lastWeeklyReset < currentWeekMonday.getTime()) {
       Object.values(progress.weekly).forEach((task) => {
         task.completed = false
         task.count = task.maxCount ? 0 : undefined
@@ -800,36 +800,36 @@ export const ProgressTracker = {
   },
 
   /**
-   * Calculate next weekly reset time (Tuesday 00:00 UTC)
-   * Returns the next occurrence of Tuesday 00:00 UTC from now
+   * Calculate next weekly reset time (Monday 00:00 UTC)
+   * Returns the next occurrence of Monday 00:00 UTC from now
    */
   getNextWeeklyReset(): number {
     const now = new Date()
 
-    // Start from now and find next Tuesday 00:00 UTC
+    // Start from now and find next Monday 00:00 UTC
     const next = new Date(now)
     const currentDay = now.getUTCDay()
 
-    // Calculate days until next Tuesday (2 = Tuesday)
-    let daysUntilTuesday = (WEEKLY_RESET_DAY - currentDay + 7) % 7
+    // Calculate days until next Monday (1 = Monday)
+    let daysUntilMonday = (WEEKLY_RESET_DAY - currentDay + 7) % 7
 
-    // If it's 0, it means we're on Tuesday
-    if (daysUntilTuesday === 0) {
+    // If it's 0, it means we're on Monday
+    if (daysUntilMonday === 0) {
       // Check if we're before or after the reset time today
       const todayReset = new Date(now)
       todayReset.setUTCHours(DAILY_RESET_HOUR_UTC, 0, 0, 0)
 
       if (now < todayReset) {
-        // We're on Tuesday but before the reset, use today
+        // We're on Monday but before the reset, use today
         return todayReset.getTime()
       } else {
-        // We're on Tuesday after the reset, go to next Tuesday
-        daysUntilTuesday = 7
+        // We're on Monday after the reset, go to next Monday
+        daysUntilMonday = 7
       }
     }
 
-    // Set to the target Tuesday at 00:00 UTC
-    next.setUTCDate(next.getUTCDate() + daysUntilTuesday)
+    // Set to the target Monday at 00:00 UTC
+    next.setUTCDate(next.getUTCDate() + daysUntilMonday)
     next.setUTCHours(DAILY_RESET_HOUR_UTC, 0, 0, 0)
 
     return next.getTime()
