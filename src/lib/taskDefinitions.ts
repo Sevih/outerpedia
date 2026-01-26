@@ -556,18 +556,6 @@ export const WEEKLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = {
     shopItemKey: 'Professional Skill Manual',
     shopItemQuantity: 1,
   },
-  'shop-weekly-starmem-glunite': {
-    id: 'shop-weekly-starmem-glunite',
-    type: 'weekly',
-    category: 'shop',
-    labelKey: '',
-    permanent: true,
-    maxCount: 1,
-    shopCategory: 'progress.shop.contents',
-    shopSubcategory: 'progress.shop.star-memory',
-    shopItemKey: 'Refined Glunite',
-    shopItemQuantity: 1,
-  },
   'shop-weekly-starmem-ticket': {
     id: 'shop-weekly-starmem-ticket',
     type: 'weekly',
@@ -1024,6 +1012,19 @@ export const MONTHLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = {
     shopCategory: 'progress.shop.contents',
     shopSubcategory: 'progress.shop.skyward',
     shopItemKey: 'Special Recruitment Ticket (Event)',
+    shopItemQuantity: 1,
+  },
+  // Content > Star Memory
+  'shop-monthly-starmem-glunite': {
+    id: 'shop-monthly-starmem-glunite',
+    type: 'monthly',
+    category: 'shop',
+    labelKey: '',
+    permanent: true,
+    maxCount: 1,
+    shopCategory: 'progress.shop.contents',
+    shopSubcategory: 'progress.shop.star-memory',
+    shopItemKey: 'Refined Glunite',
     shopItemQuantity: 1,
   },
   // Kate's Workshop (Craft)
