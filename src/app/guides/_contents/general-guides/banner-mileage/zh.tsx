@@ -161,7 +161,7 @@ const bannerTabs: BannerTab[] = [
                             stars: 3,
                             rate: 2.5,
                             label: 'non-focus',
-                            subtext: '造物主英雄的掉率约为普通非UP 3★的一半'
+                            subtext: '创世之神同伴的掉率约为普通非UP 3★同伴的一半'
                         },
                         { stars: 2, rate: 19 },
                         { stars: 1, rate: 77.25 },
@@ -171,10 +171,10 @@ const bannerTabs: BannerTab[] = [
 
                 <div className="bg-purple-900/20 border border-purple-700/50 rounded-lg p-3">
                     <p className="text-sm text-purple-200">
-                        <span className="font-semibold">常驻卡池</span> - 是获取造物主英雄的唯一常规途径（除造物主契约等活动外）。
+                        <span className="font-semibold">常驻卡池</span> - 是获取创世之神同伴的唯一常规途径（除创世之神契约等活动外）。
                     </p>
                     <p className="text-xs text-purple-300 mt-2">
-                        这些英雄非常强力但掉率极低。造物主英雄从超越中获益更多，但有些在基础3{star}时就很强。
+                        这些同伴非常强力但掉率极低：她们的超越获益更多，部分在基础3{star}时就很强。
                     </p>
                 </div>
 
@@ -233,32 +233,32 @@ const bannerTabs: BannerTab[] = [
                 <div className="space-y-3">
                     <div className="bg-pink-900/20 border border-pink-700/50 rounded-lg p-3">
                         <p className="text-sm text-pink-200 mb-3">
-                            <span className="font-semibold">限时卡池</span> - 是获取限定英雄的唯一途径。
+                            <span className="font-semibold">限时卡池</span> - 是获取限定同伴的唯一途径。
                         </p>
                         <div className="space-y-2 text-xs">
                             <div className="flex items-start gap-2">
                                 <span className="font-semibold text-pink-400 min-w-[70px]">限定:</span>
-                                <span className="text-pink-200">常规限时英雄</span>
+                                <span className="text-pink-200">常规限时同伴</span>
                             </div>
                             <div className="flex items-start gap-2">
-                                <span className="font-semibold text-green-400 min-w-[70px]">季节:</span>
-                                <span className="text-pink-200">与万圣节、圣诞节等年度活动相关的英雄</span>
+                                <span className="font-semibold text-green-400 min-w-[70px]">季节：</span>
+                                <span className="text-pink-200">与万圣节、圣诞节等年度活动相关的同伴</span>
                             </div>
                             <div className="flex items-start gap-2">
                                 <span className="font-semibold text-red-400 min-w-[70px]">联动:</span>
-                                <span className="text-pink-200">与其他作品联动的英雄，复刻可能性最低</span>
+                                <span className="text-pink-200">与其他作品联动的同伴，复刻可能性最低</span>
                             </div>
                         </div>
                     </div>
                     <div className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-3">
                         <p className="text-xs text-gray-300">
-                            此卡池通常持续<span className="font-semibold text-yellow-400">2至4周</span>。与造物主英雄类似，限定英雄（通常）非常强力，其最强能力在高超越等级解锁。
+                            此卡池通常持续<span className="font-semibold text-yellow-400">2至4周</span>。与创世之神同伴类似，限定同伴（通常）非常强力。其最强能力在最高超越等级解锁。
                         </p>
                     </div>
                 </div>
 
                 <div>
-                    <p className="text-sm font-semibold text-yellow-400 mb-2">限定英雄列表及发布日期:</p>
+                    <p className="text-sm font-semibold text-yellow-400 mb-2">限定列表列表及发布日期:</p>
                     <LimitedHeroesList />
                 </div>
 
@@ -304,28 +304,28 @@ export default function BannerAndMileageGuide() {
     return (
         <div className="space-y-6">
             <p>
-                与大多数抽卡游戏一样，Outerplane拥有多个卡池的招募系统，
+                与大多数抽卡游戏一样，异域战记拥有多个卡池的招募系统，
                 每个卡池使用不同的资源。
-                本指南将介绍卡池和里程系统的运作方式。
+                本指南将介绍卡池和指定招募系统的运作方式。
             </p>
 
             <p>
-                Outerplane采用<span className="text-yellow-400 underline">里程系统</span>。
-                与天井计数器不同，里程允许你在积累足够点数后
-                <strong>直接获取</strong>UP英雄。
+                Outerplane采用<span className="text-yellow-400 underline">指定招募系统</span>。
+                与保底计数不同，指定招募允许你在积累足够点数后
+                <strong>直接获取</strong>UP同伴。
             </p>
 
             <p>
-                每次招募<strong>（活动券除外）</strong>可获得1点里程。
-                达到所需数量后，可用里程兑换卡池英雄。
+                每次招募<strong>（活动券除外）</strong>可获得1点点数。
+                达到所需数量后，可指定招募卡池同伴。
             </p>
 
             <p>
-                此系统的一大优势是<strong>里程在卡池间保留</strong>。<br />
+                此系统的一大优势是<strong>点数在卡池间保留</strong>。<br />
                 这有什么用？<br />
-                假设你10连抽到了英雄，同时也达到了里程上限。
-                如果你是为了收集而抽，可以<strong>保留里程</strong>
-                用于未来更感兴趣的英雄卡池，或更高效地确保下一个目标。
+                假设您满足指定招募的最后10连抽到了同伴。
+                如果是为了收集，便可以<strong>保留点数</strong>
+                用于未来更感兴趣的同伴卡池，高效地保证下一个目标。
             </p>
 
 
