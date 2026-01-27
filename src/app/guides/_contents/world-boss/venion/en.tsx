@@ -83,7 +83,13 @@ export default function VenionGuide() {
               <RecommendedCharacterList title="phase2" entries={phase2Characters} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={VenionTeams.january2026} defaultStage="Light and Dark" />
-              {/** Manque le combat footage */}
+              <hr className="my-6 border-neutral-700" />
+              <CombatFootage
+                videoId="8YNWM3dErpo"
+                title="Venion - World Boss - SSS - Extreme League"
+                author="Sevih"
+                date="27/01/2026"
+              />
             </>
           ),
         },
