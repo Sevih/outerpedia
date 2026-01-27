@@ -25,11 +25,10 @@
   "gift": "Science",
   "VoiceActor": "VA. Reba Buhr",
   "VoiceActor_jp": "CV. 田村ゆかり",
-  "VoiceActor_kr": "CV.이다은",
+  "VoiceActor_kr": "CV. 이다은",
   "VoiceActor_zh": "CV. 田村由加莉",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": "ATK DEF HP +5%",
     "2_jp": "ATK DEF HP +5%",
     "2_kr": "ATK DEF HP +5%",
@@ -137,10 +136,10 @@
       "name_jp": "勇猛のコンチェルト",
       "name_kr": "용맹의 콘체르토",
       "name_zh": "勇猛协奏曲",
-      "true_desc": "Attacks all enemies and has a <color=#28d9ed>70%</color> chance to reduce the target's <color=#28d9ed>Evasion</color> for <color=#28d9ed>2 turn(s)</color>.",
-      "true_desc_jp": "敵全体にダメージを与え、<color=#28d9ed>70%</color>の確率で対象の<color=#28d9ed>回避</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
-      "true_desc_kr": "적 전체를 공격하고 <color=#28d9ed>70%</color> 확률로 대상의 <color=#28d9ed>회피</color>를 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
-      "true_desc_zh": "攻击全体敌人,并有<color=#28d9ed>70%</color>的几率使目标的<color=#28d9ed>回避</color>降低,持续<color=#28d9ed>2回合</color>。",
+      "true_desc": "Attacks all enemies and has a <color=#28d9ed>70%</color> chance to decrease the target's <color=#28d9ed>Attack</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_jp": "敵全体にダメージを与え、<color=#28d9ed>70%</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
+      "true_desc_kr": "적 전체를 공격하고 <color=#28d9ed>70%</color> 확률로 대상의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+      "true_desc_zh": "攻击全体敌人,并有<color=#28d9ed>70%</color>的概率使目标的<color=#28d9ed>攻击力</color>降低,持续<color=#28d9ed>2回合</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
@@ -199,11 +198,11 @@
           "效果触发几率+15%"
         ]
       },
-      "wgr": 1,
       "cd": "3",
+      "wgr": 1,
       "buff": [],
       "debuff": [
-        "BT_STAT|ST_AVOID"
+        "BT_STAT|ST_ATK"
       ]
     },
     "SKT_ULTIMATE": {
@@ -272,8 +271,8 @@
           "效果触发几率+20%"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [],
       "debuff": [
         "BT_STUN"

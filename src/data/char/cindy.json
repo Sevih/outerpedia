@@ -25,11 +25,10 @@
   "gift": "Luxury",
   "VoiceActor": "VA. Kelsey Maher",
   "VoiceActor_jp": "CV. 木村珠莉",
-  "VoiceActor_kr": "CV.김하루",
+  "VoiceActor_kr": "CV. 김하루",
   "VoiceActor_zh": "CV. 木村珠莉",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": "ATK DEF HP +5%",
     "2_jp": "ATK DEF HP +5%",
     "2_kr": "ATK DEF HP +5%",
@@ -131,10 +130,10 @@
       "name_jp": "シャイニークリスタル",
       "name_kr": "샤인 크리스탈",
       "name_zh": "闪耀水晶",
-      "true_desc": "Increases all allies' <color=#28d9ed>Attack</color> and <color=#28d9ed>Accuracy</color> for <color=#28d9ed>1 turn(s)</color>.",
-      "true_desc_jp": "味方全体の<color=#28d9ed>攻撃力</color>と<color=#28d9ed>命中</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
-      "true_desc_kr": "<color=#28d9ed>1턴</color> 동안 아군 전체의 <color=#28d9ed>공격력</color>과 <color=#28d9ed>명중</color>을 증가시킵니다.",
-      "true_desc_zh": "使全体友军的<color=#28d9ed>攻击力</color>和<color=#28d9ed>命中</color>提升,持续<color=#28d9ed>1回合</color>。",
+      "true_desc": "Increases <color=#28d9ed>Attack</color> and <color=#28d9ed>Speed</color> of all allies for <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc_jp": "<color=#28d9ed>1ターン</color>の間、味方全体の<color=#28d9ed>攻撃力</color>と<color=#28d9ed>スピード</color>をUPさせる。",
+      "true_desc_kr": "<color=#28d9ed>1턴</color> 동안 아군 전체의 <color=#28d9ed>공격력</color>과 <color=#28d9ed>속도</color>를 증가시킵니다.",
+      "true_desc_zh": "使我方全体的<color=#28d9ed>攻击力</color>和<color=#28d9ed>速度</color>提升,持续<color=#28d9ed>1回合</color>。",
       "enhancement": {
         "2": [
           "-1 turn Skill Cooldown"
@@ -188,7 +187,7 @@
       "cd": "6",
       "buff": [
         "BT_STAT|ST_ATK",
-        "BT_STAT|ST_ACCURACY"
+        "BT_STAT|ST_SPEED"
       ],
       "debuff": []
     },
@@ -262,8 +261,8 @@
           "伤害量+15%"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [
         "BT_EXTEND_BUFF",
         "BT_STAT|ST_SPEED"

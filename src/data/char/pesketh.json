@@ -25,11 +25,10 @@
   "gift": "Magic Tool",
   "VoiceActor": "VA. Todd Haberkorn",
   "VoiceActor_jp": "CV. 野上翔",
-  "VoiceActor_kr": "CV.이상호",
+  "VoiceActor_kr": "CV. 이상호",
   "VoiceActor_zh": "CV. 野上翔",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": "ATK DEF HP +5%",
     "2_jp": "ATK DEF HP +5%",
     "2_kr": "ATK DEF HP +5%",
@@ -195,8 +194,8 @@
           "冷却时间-1回合"
         ]
       },
-      "wgr": 1,
       "cd": "4",
+      "wgr": 1,
       "buff": [
         "BT_COOL3_CHARGE"
       ],
@@ -272,20 +271,20 @@
           "伤害量+10%"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [
-        "BT_STAT|ST_AVOID"
+        "BT_STAT|ST_SPEED"
       ],
       "debuff": [
         "BT_STEAL_BUFF"
       ],
       "burnEffect": {
         "SKT_BURST_1": {
-          "effect": "Increases Evasion for 1 turn",
-          "effect_jp": "1ターンの間回避UP",
-          "effect_kr": "1턴 동안 회피 증가",
-          "effect_zh": "1回合内回避提升",
+          "effect": "Increases Speed for 1 turn",
+          "effect_jp": "1ターンの間スピードUP",
+          "effect_kr": "1턴 동안 속도 증가",
+          "effect_zh": "速度提升,持续1回合",
           "cost": 80,
           "level": 1
         },
@@ -298,10 +297,10 @@
           "level": 2
         },
         "SKT_BURST_3": {
-          "effect": "Increases Evasion Increase duration by 1 turn",
-          "effect_jp": "回避UP+1ターン",
-          "effect_kr": "회피 증가 +1턴",
-          "effect_zh": "回避提升+1回合",
+          "effect": "Increases Speed for 2 turns",
+          "effect_jp": "2ターンの間スピードUP",
+          "effect_kr": "2턴 동안 속도 증가",
+          "effect_zh": "2回合内速度提升",
           "cost": 160,
           "level": 3
         }
