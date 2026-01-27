@@ -25,11 +25,10 @@
   "gift": "Natural Object",
   "VoiceActor": "VA. Ryan Bartley",
   "VoiceActor_jp": "CV. 諏訪彩花",
-  "VoiceActor_kr": "CV.차영희",
+  "VoiceActor_kr": "CV. 차영희",
   "VoiceActor_zh": "CV. 诹访彩花",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": "ATK DEF HP +5%",
     "2_jp": "ATK DEF HP +5%",
     "2_kr": "ATK DEF HP +5%",
@@ -137,10 +136,10 @@
       "name_jp": "眠気さそい",
       "name_kr": "자도자도 졸려요",
       "name_zh": "越睡越困",
-      "true_desc": "Has a <color=#28d9ed>70%</color> chance to reduce all enemies' <color=#28d9ed>Speed</color> and <color=#28d9ed>Accuracy</color> for <color=#28d9ed>2 turn(s)</color>.",
-      "true_desc_jp": "<color=#28d9ed>70%</color>の確率で敵全体の<color=#28d9ed>スピード</color>と<color=#28d9ed>命中</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
-      "true_desc_kr": "<color=#28d9ed>70%</color> 확률로 적 전체의 <color=#28d9ed>속도</color>와 <color=#28d9ed>명중</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
-      "true_desc_zh": "有<color=#28d9ed>70%</color>的几率使全体敌人的<color=#28d9ed>速度</color>和<color=#28d9ed>命中</color>降低,持续<color=#28d9ed>2回合</color>。",
+      "true_desc": "Has a <color=#28d9ed>70%</color> chance to decrease <color=#28d9ed>Speed</color> and <color=#28d9ed>Critical Hit Chance</color> of all enemies for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_jp": "<color=#28d9ed>70%</color>の確率で敵全体の<color=#28d9ed>スピード</color>と<color=#28d9ed>会心率</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
+      "true_desc_kr": "<color=#28d9ed>70%</color> 확률로 적 전체의 <color=#28d9ed>속도</color>와 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+      "true_desc_zh": "有<color=#28d9ed>70%</color>的概率使全体敌人的<color=#28d9ed>速度</color>和<color=#28d9ed>暴击率</color>降低,持续<color=#28d9ed>2回合</color>。",
       "enhancement": {
         "2": [
           "+15% effect chance"
@@ -194,7 +193,7 @@
       "cd": "4",
       "buff": [],
       "debuff": [
-        "BT_STAT|ST_ACCURACY",
+        "BT_STAT|ST_CRITICAL_RATE",
         "BT_STAT|ST_SPEED"
       ]
     },
@@ -268,8 +267,8 @@
           "效果触发几率+15%"
         ]
       },
-      "wgr": 2,
       "cd": "4",
+      "wgr": 2,
       "buff": [
         "BT_COOL_CHARGE"
       ],

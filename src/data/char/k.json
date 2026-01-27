@@ -244,10 +244,10 @@
       "name_jp": "レイジングストーム",
       "name_kr": "레이징 스톰",
       "name_zh": "肆虐风暴",
-      "true_desc": "Attacks all enemies and has a <color=#28d9ed>70%</color> chance to inflict Reduced <color=#28d9ed>Accuracy</color> for <color=#28d9ed>2 turn(s)</color>.\\n\\nWhen attacking an <color=#ffd732>Irregular Monster</color>, increases damage dealt and reduces skill cooldowns of allies (excluding caster) by <color=#28d9ed>1 turn(s)</color>.",
-      "true_desc_jp": "敵全体にダメージを与え、<color=#28d9ed>70%</color>の確率で対象の<color=#28d9ed>命中</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。\\n\\n<color=#ffd732>イレギュラーモンスター</color>を攻撃時、与えるダメージがUPし、自分を除く味方のスキルターンを<color=#28d9ed>1ターン</color>DOWNさせる。",
-      "true_desc_kr": "적 전체를 공격하고 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 대상의 <color=#28d9ed>명중</color>을 감소시킵니다.\\n\\n<color=#ffd732>이레귤러 몬스터</color> 공격 시 피해량이 증가하고 자신을 제외한 아군의 스킬 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
-      "true_desc_zh": "攻击全体敌人,并有<color=#28d9ed>70%</color>的几率使目标的<color=#28d9ed>命中</color>降低,持续<color=#28d9ed>2回合</color>。\\n\\n攻击<color=#ffd732>异型怪</color>时,伤害量提升,并使除自身外友军的技能冷却时间减少<color=#28d9ed>1回合</color>。",
+      "true_desc": "Attacks all enemies and has a <color=#28d9ed>70%</color> chance to decrease the target's <color=#28d9ed>Attack</color> for <color=#28d9ed>2 turn(s)</color>.\\n\\nIncreases damage dealt when attacking an <color=#ffd732>Irregular Monster</color>, and decreases Skill Cooldown of allies (excluding self) by <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc_jp": "敵全体にダメージを与え、<color=#28d9ed>70%</color>の確率で<color=#28d9ed>2ターン</color>の間、対象の<color=#28d9ed>攻撃力</color>をDOWNさせる。\\n\\n<color=#ffd732>イレギュラーモンスター</color>への攻撃時、与えるダメージがUPし、自分を除く味方のスキルターンが<color=#28d9ed>1ターン</color>減少する。",
+      "true_desc_kr": "적 전체를 공격하고 <color=#28d9ed>70%</color> 확률로 <color=#28d9ed>2턴</color> 동안 대상의 <color=#28d9ed>공격력</color>을 감소시킵니다.\\n\\n<color=#ffd732>이레귤러 몬스터</color> 공격 시 피해량이 증가하고 자신을 제외한 아군의 스킬 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
+      "true_desc_zh": "攻击全体敌人,并有<color=#28d9ed>70%</color>的概率使目标的<color=#28d9ed>攻击力</color>降低,持续<color=#28d9ed>2回合</color>。\\n\\n攻击<color=#ffd732>异型怪</color>时伤害量提升,并使除自身外我军的技能冷却时间减少<color=#28d9ed>1回合</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
@@ -312,7 +312,7 @@
         "BT_COOL_CHARGE"
       ],
       "debuff": [
-        "BT_STAT|ST_ACCURACY"
+        "BT_STAT|ST_ATK"
       ]
     },
     "SKT_CHAIN_PASSIVE": {

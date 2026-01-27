@@ -598,18 +598,18 @@
     "mainStat_jp": "水属性の対象の効果命中",
     "mainStat_kr": "수속성 대상 효과 적중",
     "mainStat_zh": "水属性效果命中",
-    "effect": "When using <color=#28d9ed>Still Drowsy</color>, increases the Evasion of the wearer for 1 turn(s)",
-    "effect_jp": "<color=#28d9ed>【眠気さそい】</color>使用時、自分の回避が1ターンの間UPする。",
-    "effect_kr": "<color=#28d9ed>자도자도 졸려요</color> 사용 시 1턴 동안 자신의 회피 증가",
-    "effect_zh": "使用<color=#28d9ed>越睡越困</color>时,使自身回避提升,持续\\n1回合",
-    "effect10": "When using <color=#28d9ed>Still Drowsy</color>, increases the Evasion of the wearer for 2 turn(s)",
-    "effect10_jp": "<color=#28d9ed>【眠気さそい】</color>使用時、自分の回避が2ターンの間UPする。",
-    "effect10_kr": "<color=#28d9ed>자도자도 졸려요</color> 사용 시 2턴 동안 자신의 회피 증가",
-    "effect10_zh": "使用<color=#28d9ed>越睡越困</color>时,使自身回避提升,持续2回合",
+    "effect": "When using <color=#28d9ed>Always Sleepy</color>, increases own Speed for 1 turn(s)",
+    "effect_jp": "<color=#28d9ed>眠気さそい</color>使用時、1ターンの間自分のスピードUP",
+    "effect_kr": "<color=#28d9ed>자도자도 졸려요</color> 사용 시 1턴 동안 자신의 속도 증가",
+    "effect_zh": "使用<color=#28d9ed>睡不够</color>时,自身速度提升,持续1回合",
+    "effect10": "When using <color=#28d9ed>Always Sleepy</color>, increases own Speed for 2 turn(s)",
+    "effect10_jp": "<color=#28d9ed>眠気さそい</color>使用時、2ターンの間自分のスピードUP",
+    "effect10_kr": "<color=#28d9ed>자도자도 졸려요</color> 사용 시 2턴 동안 자신의 속도 증가",
+    "effect10_zh": "使用<color=#28d9ed>睡不够</color>时,自身速度提升,持续2回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
     "buff": [
-      "BT_STAT|ST_AVOID"
+      "BT_STAT|ST_SPEED"
     ],
     "debuff": []
   },
