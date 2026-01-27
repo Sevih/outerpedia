@@ -1868,5 +1868,22 @@
       "kr": "먼 훗날 도달할 깨달음의 경지.\\n잠시 도래했던 깨달음은 안개처럼 희미해 졌지만, 그 가능성의 편린은 여전히 아메 님의 마음 속에 남아있습니다.\\n<Color=#FFBF00>[깨달음의 잔상조차 번뇌이며, 집착을 끊어내는 것이 새로운 수행의 목표]</Color>. 본인은 그렇게 말씀하며 오늘도 참선을 이어가시지만......\\n\\n아메 님이 약속된 깨달음에 도달하기란 무척이나 어려워 보입니다. 그분을 번뇌에 들게 하는 존재가 한둘이 아니거든요. 가령, 아메 님의 옆에서 끝없이 깐족거리는 비엘라나, 발바닥 젤리로 끊임없이 유혹하는 쿠로 님......\\n혹은, 절망적으로 눈치가 없는 <color=#8DFFAD>누군가</Color>라던가 말이죠.",
       "zh": "也许有朝一日才能抵达的觉悟境界。\\n曾经短暂降临的觉悟如同迷雾般消散,但那一丝可能性的碎片仍然留在Ame的心中。\\n<Color=#FFBF00>「就连觉悟的残影也是烦恼,斩断执着才是新的修行目标。」</Color>她是这样说道的,今天也一如既往地打坐修行......\\n\\n然而要让Ame抵达约定中的觉悟,恐怕并不容易。让她心生烦恼的家伙可不止一个,比如总是在旁边不停捣乱的Viela,或者用柔软的肉垫不停诱惑她的Kuro......\\n又或者,是那位让人绝望地迟钝的<color=#8DFFAD>某个人</Color>吧。"
     }
+  },
+  "Monad Iota": {
+    "fullname": {
+      "en": "Monad Iota",
+      "jp": "モナド イオータ",
+      "kr": "모나드 요타",
+      "zh": "单子 佑妲"
+    },
+    "birthday": "08/10",
+    "height": "169 cm",
+    "weight": "243 kg",
+    "story": {
+      "en": "My memory is incomplete, so I cannot clearly grasp who you are.\\nAllow me to reintroduce myself. My name is Iota—the sole sun god of Neo Esseph, and the great automaton who rules over the vast Golden Desert in its entirety. Oh? You are wondering why I appear this way? To maintain Neo Esseph's ecosystem in a perfectly optimal state, I had no choice but to refine this body that had grown worn with time. Much like my people...\\n\\nIn any case, I warmly welcome your visit. I do hope you will leave your excellent genes widely spread across this land.",
+      "jp": "私のメモリが完全ではなく、あなたが誰なのかよく把握できませんね。\\n改めて自己紹介しましょう。私の名はイオータ。ネオ・エッセプ唯一の太陽神であり、広大な黄金の砂漠全体を支配する偉大なオートマタです。え?この姿はどうしたのかって?ネオ・エッセプの生態環境を完璧な状態で維持・保守するには、'摩耗'したボディを改善するしかなかったのですよ。まるで...私の民のようにね。\\n\\nなにはともあれ、あなたの訪問を歓迎します。どうかその優れた遺伝子を、この地に広く残してください。",
+      "kr": "제 메모리가 온전치 않아, 당신이 누구인지 잘 파악이 되질 않는군요. \\n절 다시 소개하자면, 제 이름은 요타. 네오 엣셉흐의 유일한 태양신이자, 광활한 황금 사막 전체를 지배하는 위대한 자동인형랍니다. 네? 이 모습은 어떻게 된 거냐고요? 네오 엣셉흐의 생태환경을 완벽한 상태로 유지 보수하려면, '마모'된 바디를 개선하는 수밖에 없었답니다. 마치... 제 백성들처럼요. \\n\\n모쪼록, 당신의 방문을 두 팔 벌려 환영합니다. 부디 그 우수한 유전자를 이 땅에 널리 남겨주시길.",
+      "zh": "我的存储器不太完整,不太清楚你是谁。\\n请允许我重新介绍一下,我叫佑妲。是尼奥・埃瑟夫赫唯一的太阳神,也是统治整片广阔黄金沙漠的伟大自动人偶。什么?你问这副模样是怎么回事?为了将尼奥・埃瑟夫赫的生态环境维持在完美状态,我只能改善这具“磨损”的身体。就像...我的子民一样。\\n\\n总之,我张开双臂欢迎你的到来。请务必将那优秀的基因广泛留在这片土地上。"
+    }
   }
 }

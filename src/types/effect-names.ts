@@ -180,3 +180,4 @@ export type DebuffName =
   | 'BT_DOT_POISON2'
   | 'BT_KILL_UNDER_HP_RATE'
   | 'BT_KILL'
+  | 'BT_GOLDEN_CURSE'
