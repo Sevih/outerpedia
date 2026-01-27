@@ -454,19 +454,19 @@
     "mainStat_jp": "光属性の対象の命中",
     "mainStat_kr": "명속성 대상 명중",
     "mainStat_zh": "光属性命中",
-    "effect": "When using Sanctuary for All, increases the duration of Doll Garden's Caretaker by <color=#28d9ed>1</color> turn(s)",
-    "effect_jp": "【万物にありては安息】使用時、【箱庭の主】を<color=#28d9ed>1ターン</color>の間付与する。",
-    "effect_kr": "만물에게 안식을 사용 시 모형 정원의 관리자 <color=#28d9ed>1</color>턴",
-    "effect_zh": "使用赋予万物安息时,模型庄园的管理者<color=#28d9ed>1</color>回合",
-    "effect10": "After using <color=#28d9ed>The People on Earth</color>, grants increased Accuracy for 1 turn(s)",
-    "effect10_jp": "<color=#28d9ed>【地にありては者】</color>使用後、命中が1ターンの間UPする。",
-    "effect10_kr": "<color=#28d9ed>땅에는 인간이</color> 사용 후 명중 1턴",
-    "effect10_zh": "使用<color=#28d9ed>地上有人类</color>后,命中1回合",
+    "effect": "When using <color=#28d9ed>Sanctuary for All</color>, increases the duration of <color=#28d9ed>Doll Garden's Caretaker</color> by 1 turn(s)",
+    "effect_jp": "<color=#28d9ed>【万物にありては安息】</color>使用時、 <color=#28d9ed>【箱庭の主】</color>を1ターンの間付与する。",
+    "effect_kr": "<color=#28d9ed>만물에게 안식을</color> 사용 시 <color=#28d9ed>모형 정원의 관리자</color> 1턴",
+    "effect_zh": "使用赋予<color=#28d9ed>万物安息</color>时,<color=#28d9ed>模型庄园的管理者</color>1回合",
+    "effect10": "When using <color=#28d9ed>Sanctuary for All</color>, AP +30",
+    "effect10_jp": "<color=#28d9ed>万物への安息</color>使用時、AP +30",
+    "effect10_kr": "<color=#28d9ed>만물에게 안식을</color> 사용 시 AP +30",
+    "effect10_zh": "使用<color=#28d9ed>万物安息</color>时,AP +30",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
     "buff": [
       "IG_Buff_2000059_Interruption",
-      "BT_STAT|ST_ACCURACY"
+      "BT_AP_CHARGE"
     ],
     "debuff": []
   },

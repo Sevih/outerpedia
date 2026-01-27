@@ -31,35 +31,30 @@
   "video": "orOhHJzO9qA",
   "VoiceActor": "VA. Kayli Mills",
   "VoiceActor_jp": "CV. 柚木涼香",
-  "VoiceActor_kr": "CV. Kayli Mills",
+  "VoiceActor_kr": "CV. 김예림",
   "VoiceActor_zh": "CV. 柚木凉香",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": null,
-    "2_zh": null,
     "3": "ATK DEF HP +10%",
     "3_jp": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
     "3_zh": "ATK DEF HP +10%",
-    "4_1": "ATK DEF HP +16%\n+6% Ally Critical Hit Chance\n+25 Action Points at the start of battle\n+1 Chain Passive Weakness Gauge reduction",
-    "4_1_jp": "ATK DEF HP +16%\n味方の会心率+6%\n戦闘開始時、AP+25\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n아군 치명 확률 +6%\n입장 시 AP +25\n체인 패시브의 WG 감소량 +1",
-    "4_1_zh": "ATK DEF HP +16%\n友军暴击率+6%\n入场时,AP+25\n连携被动技能的WG降低量+1",
+    "4_1": "ATK DEF HP +16%\nAlly Critical Hit Chance +6%\nAP +50 upon entry\nChain Passive WG Reduction +1",
+    "4_1_jp": "ATK DEF HP +16%\n味方の会心率+6%\n戦闘開始時、AP+50\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n아군 치명 확률 +6%\n입장 시 AP +50\n체인 패시브의 WG 감소량 +1",
+    "4_1_zh": "ATK DEF HP +16%\n我方暴击率+6%\n入场时AP+50\n连携被动WG减少量+1",
     "4_2": "ATK DEF HP +19%",
-    "4_2_zh": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
-    "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发技能\n入场时AP+25",
+    "5_1": "ATK DEF HP +22%\nUnlocks Burst Level 3\nDoll Garden's Caretaker +1 turn upon entry",
+    "5_1_jp": "ATK DEF HP +22%\nバースト3段階解放\n戦闘開始時、箱庭の主+1ターン",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 모형 정원의 관리자 +1턴",
+    "5_1_zh": "ATK DEF HP +22%\n解锁爆裂3阶段\n入场时模型庄园的管理者+1回合",
     "5_2": "ATK DEF HP +25%",
-    "5_2_zh": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "5_3_zh": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\nIncreases all attack damage\n(Proportional to target's Max Health)",
-    "6_jp": "ATK DEF HP +30%\nすべてのスキルダメージUP\n(対象のHPが高いほどダメージUP)",
-    "6_kr": "ATK DEF HP +30%\n모든 공격 피해 증가\n(대상 최대 체력 비례)",
-    "6_zh": "ATK DEF HP +30%\n所有攻击伤害提升\n(根据目标生命值上限等比)"
+    "6": "ATK DEF HP +30%\nIncreases damage of all attacks (Proportional to target's Max Health)\nImmunity +1 turn upon entry",
+    "6_jp": "ATK DEF HP +30%\nすべての攻撃ダメージ増加(対象の最大HPに比例)\n戦闘開始時、免疫+1ターン",
+    "6_kr": "ATK DEF HP +30%\n모든 공격 피해 증가(대상 최대 체력 비례)\n입장 시 면역 +1턴",
+    "6_zh": "ATK DEF HP +30%\n所有攻击伤害提升(根据目标生命值上限)\n入场时免疫+1回合"
   },
   "skills": {
     "SKT_FIRST": {
@@ -116,23 +111,28 @@
           "伤害量+15%"
         ],
         "5": [
-          "+20% damage"
+          "+20% damage",
+          "Sanctuary for All Cooldown -1 turn"
         ],
         "5_jp": [
-          "ダメージ+20%"
+          "ダメージ+20%",
+          "万物に安息をのスキルターン-1ターン"
         ],
         "5_kr": [
-          "피해량 +20%"
+          "피해량 +20%",
+          "만물에게 안식을 쿨타임 -1턴"
         ],
         "5_zh": [
-          "伤害量+20%"
+          "伤害量+20%",
+          "赐万物安息冷却时间-1回合"
         ]
       },
       "wgr": 1,
       "cd": null,
       "buff": [
+        "BT_COOL3_CHARGE",
         "IG_Buff_2000059_Interruption",
-        "BT_COOL_CHARGE"
+        "BT_STAT|ST_SPEED"
       ],
       "debuff": [],
       "burnEffect": {
@@ -153,10 +153,10 @@
           "level": 2
         },
         "SKT_BURST_3": {
-          "effect": "Resets all skill cooldowns",
-          "effect_jp": "全スキルの\\nスキルターン\\n初期化",
-          "effect_kr": "모든 스킬 쿨타임 초기화",
-          "effect_zh": "所有技能冷却时间重置",
+          "effect": "Resets cooldown of Sanctuary for All\\nSpeed +1 turn",
+          "effect_jp": "万物に安息をのスキルターン初期化\\nスピード+1ターン",
+          "effect_kr": "만물에게 안식을 쿨타임 초기화\\n속도 +1턴",
+          "effect_zh": "重置赐万物安息冷却时间\\n速度+1回合",
           "cost": 160,
           "level": 3
         }
@@ -250,10 +250,10 @@
       "name_jp": "万物にありては安息",
       "name_kr": "만물에게 안식을",
       "name_zh": "赋予万物安息",
-      "true_desc": "Attacks all enemies. This skill ignores <color=#28d9ed>30%</color> of the target's Defense and deals damage inversely proportional to the number of targets.\\nThe damage of the skill increases every time someone dies.",
-      "true_desc_jp": "敵全体にダメージを与える。このスキルは対象の防御力を<color=#28d9ed>30%</color>貫通し、対象の数が少ないほど与えるダメージがUPする。\\n倒れた敵の数に応じて、与えるダメージがUPする。",
-      "true_desc_kr": "적 전체를 공격합니다. 이 스킬은 대상의 방어력을 <color=#28d9ed>30%</color> 무시하며, 대상의 수가 적을수록 피해가 증가합니다.\\n이 스킬의 피해량은 사망자가 발생할 때마다 증가합니다.",
-      "true_desc_zh": "攻击全体敌人。该技能无视目标<color=#28d9ed>30%</color>的防御力,目标数量越少,则该技能的伤害越高。\\n每次出现死亡者时,该技能的伤害量就会提升。",
+      "true_desc": "Attacks all enemies.\\nThis skill ignores <color=#28d9ed>30%</color> of targets' Defense, deals more damage when fewer enemies remain (up to 60%),\\nand increases damage by <color=#28d9ed>5%</color> each time an enemy is defeated.",
+      "true_desc_jp": "敵全体にダメージを与える。\\nこのスキルは対象の防御力を<color=#28d9ed>30%</color>無視し、対象数が少ないほどダメージが増加する(最大60%)。\\nまた、敵が倒れるたびにダメージが<color=#28d9ed>5%</color>増加する。",
+      "true_desc_kr": "적 전체를 공격합니다.\\n이 스킬은 대상의 방어력을 <color=#28d9ed>30%</color> 무시하며 대상의 수가 적을수록 피해가 증가하고(최대 60%)\\n사망자가 발생할 때마다 피해가 <color=#28d9ed>5%</color> 증가합니다.",
+      "true_desc_zh": "攻击全体敌人。\\n该技能无视目标<color=#28d9ed>30%</color>防御力,敌人数量越少伤害越高(最多60%),\\n且每当有敌人死亡时,伤害提高<color=#28d9ed>5%</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
@@ -308,8 +308,8 @@
           "伤害量+20%"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [],
       "debuff": []
     },

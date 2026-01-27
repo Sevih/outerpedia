@@ -25,11 +25,10 @@
   "gift": "Luxury",
   "VoiceActor": "VA. Faye Mata",
   "VoiceActor_jp": "CV. 結木梢",
-  "VoiceActor_kr": "CV.윤은서",
+  "VoiceActor_kr": "CV. 윤은서",
   "VoiceActor_zh": "CV. 结木梢",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": "ATK DEF HP +5%",
     "2_jp": "ATK DEF HP +5%",
     "2_kr": "ATK DEF HP +5%",
@@ -151,16 +150,16 @@
           "使用技能时命中提升+2回合"
         ],
         "3": [
-          "+15% Hit Chance"
+          "Increases Effectiveness Chance +15%"
         ],
         "3_jp": [
-          "命中UPの確率+15%"
+          "効果命中発動確率増加+15%"
         ],
         "3_kr": [
-          "명중 발동 확률 증가 +15%"
+          "효과 적중 발동 확률 증가 +15%"
         ],
         "3_zh": [
-          "命中触发几率提升+15%"
+          "效果命中发动概率提升+15%"
         ],
         "4": [
           "-1 turn Skill Cooldown"
@@ -175,22 +174,23 @@
           "冷却时间-1回合"
         ],
         "5": [
-          "+20% Hit Chance"
+          "Increases Effectiveness Chance +20%"
         ],
         "5_jp": [
-          "命中UPの確率+20%"
+          "効果命中発動確率増加+20%"
         ],
         "5_kr": [
-          "명중 발동 확률 증가 +20%"
+          "효과 적중 발동 확률 증가 +20%"
         ],
         "5_zh": [
-          "命中触发几率+20%"
+          "效果命中发动概率提升+20%"
         ]
       },
-      "wgr": 4,
       "cd": "4",
+      "wgr": 4,
       "buff": [
-        "BT_STAT|ST_ACCURACY"
+        "BT_HEAL_BASED_TARGET",
+        "BT_STAT|ST_BUFF_CHANCE"
       ],
       "debuff": []
     },
@@ -264,8 +264,8 @@
           "冷却时间-1回合"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [
         "BT_STAT|ST_BUFF_CHANCE"
       ],
