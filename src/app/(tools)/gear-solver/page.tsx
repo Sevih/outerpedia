@@ -6,12 +6,15 @@ import Link from 'next/link'
 import GearSolverWrapper from './GearSolverWrapper'
 
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd } from './jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/gear-solver',
     titleKey: 'gearSolver.meta.title',
@@ -31,10 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'EvaMains',
     ],
     image: {
-      // Règle projet: PNG pour metadata, WEBP en page
-      url: 'https://outerpedia.com/images/ui/nav/gear-solver.png',
-      width: 150,
-      height: 150,
+      ...getToolOgImage('gear-solver', domain),
       altKey: 'gearSolver.og.imageAlt',
       altFallback: 'Gear Usage Finder — Outerpedia',
     },

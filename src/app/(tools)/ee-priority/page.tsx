@@ -8,6 +8,7 @@ import { toKebabCase } from '@/utils/formatText'
 import type { CharacterLite } from '@/types/types'
 import { Suspense } from 'react'
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd, itemListLd } from './jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
@@ -18,6 +19,8 @@ const characterMap = Object.fromEntries(
 )
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/ee-priority',
     titleKey: 'eePriority.meta.title',
@@ -35,10 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'Tier List',
     ],
     image: {
-      // Règle projet: PNG pour metadata
-      url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Shop.png',
-      width: 150,
-      height: 150,
+      ...getToolOgImage('ee-priority', domain),
       altKey: 'eePriority.og.imageAlt',
       altFallback: 'Exclusive Equipment Priority — Outerpedia',
     },

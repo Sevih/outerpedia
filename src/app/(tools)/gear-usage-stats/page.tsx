@@ -4,6 +4,7 @@ import GearUsageStatsClients from './gear-usage-statsClients'
 import { getMonthYear } from '@/utils/getMonthYear'
 import { getTenantServer } from '@/tenants/tenant.server'
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd } from './jsonld'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
@@ -20,6 +21,8 @@ const data = rawData as GearItem[]
 const monthYear = getMonthYear()
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/gear-usage-stats',
     titleKey: 'gearUsage.meta.title',
@@ -31,13 +34,10 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: [
       'Outerplane',
       'Outerpedia',
-      // si tu as des clés localisées pour keywords, tu peux les récupérer côté client
-      // sinon, laisse en EN – c’est OK pour SEO
       'Gear Stats', 'Gear Usage', 'Weapons', 'Amulets', 'Sets', 'EvaMains',
     ],
     image: {
-      url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Btn_StepUp.png',
-      width: 150, height: 150,
+      ...getToolOgImage('gear-usage-stats', domain),
       altKey: 'gearUsage.og.imageAlt',
       altFallback: 'Gear Usage Statistics – Outerpedia',
     },

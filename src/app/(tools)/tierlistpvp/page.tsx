@@ -6,6 +6,7 @@ import TierListBase from '@/app/components/TierListBase'
 import { toKebabCase } from '@/utils/formatText'
 import { Suspense } from 'react'
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd, tierItemListLd } from './jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
@@ -14,6 +15,8 @@ import { getServerI18n } from '@/lib/contexts/server-i18n'
 const monthYear = getMonthYear()
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/tierlistpvp',
     titleKey: 'tierPvp.meta.title',
@@ -24,10 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitterDescKey: 'tierPvp.twitter.desc',
     keywords: ['Outerplane', 'Tier List', 'PvP', 'Best Characters', 'EvaMains', monthYear],
     image: {
-      // PNG en metadata (règle projet)
-      url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png',
-      width: 150,
-      height: 150,
+      ...getToolOgImage('tierlistpvp', domain),
       altKey: 'tierPvp.og.imageAlt',
       altFallback: 'Outerpedia PvP Tier List',
     },

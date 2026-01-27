@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import NewsPageClient from './page-client'
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd, collectionPageLd } from './jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
@@ -14,6 +15,8 @@ import { getVALanguage } from '@/tenants/config'
 const NEWS_CACHE_PATH = path.join(process.cwd(), 'src', 'data', 'news', 'news-cache.json')
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/patch-history',
     titleKey: 'patchHistory.meta.title',
@@ -33,9 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'Outerpedia',
     ],
     image: {
-      url: 'https://outerpedia.com/images/ui/nav/tool_default.png',
-      width: 150,
-      height: 150,
+      ...getToolOgImage('patch-history', domain),
       altKey: 'patchHistory.og.imageAlt',
       altFallback: 'Patch History — Outerpedia',
     },

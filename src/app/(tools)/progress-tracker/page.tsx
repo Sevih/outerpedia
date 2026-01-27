@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
+import { getTenantServer } from '@/tenants/tenant.server'
 import { ProgressTrackerClient } from './ProgressTrackerClient'
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/progress-tracker',
     titleKey: 'tool.progress-tracker.name',
@@ -19,9 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'checklist',
     ],
     image: {
-      url: '/images/ui/nav/CM_Lobby_Button_Misson.webp',
-      width: 150,
-      height: 150,
+      ...getToolOgImage('progress-tracker', domain),
       altFallback: 'Outerplane Progress Tracker',
     },
   })

@@ -4,6 +4,7 @@ import charactersDataRaw from '@/data/_allCharacters.json'
 import MostUsedClient from './mostUseClient'
 import { getTenantServer } from '@/tenants/tenant.server'
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd } from './jsonld'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
@@ -14,6 +15,8 @@ type CharacterData = Omit<Character, 'skills'> & { skills?: Character['skills'] 
 const charactersData = charactersDataRaw as unknown as CharacterData[]
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/most-used-unit',
     titleKey: 'mostUsedUnit.meta.title',
@@ -32,9 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'Meta Characters',
     ],
     image: {
-      url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png',
-      width: 150,
-      height: 150,
+      ...getToolOgImage('most-used-unit', domain),
       altKey: 'mostUsedUnit.og.imageAlt',
       altFallback: 'Most Used Units - Outerpedia',
     },

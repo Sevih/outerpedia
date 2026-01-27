@@ -4,6 +4,7 @@ import promoCodes from '@/data/promo-codes.json'
 import CopyButton from '@/app/components/ui/CopyButton'
 import ItemInlineDisplay from '@/app/components/ItemInline'
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd, couponsListLd } from './jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
@@ -33,6 +34,8 @@ function getStatus(code: PromoCode): 'active' | 'expired' | 'upcoming' {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/coupons',
     titleKey: 'coupons.meta.title',
@@ -50,11 +53,8 @@ export async function generateMetadata(): Promise<Metadata> {
       'outerplane redeem code',
       'outerplane rewards',
     ],
-    // garde ton visuel actuel (tu pourras passer en .png si tu as un équivalent)
     image: {
-      url: 'https://outerpedia.com/images/ui/og_home.jpg',
-      width: 1200,
-      height: 630,
+      ...getToolOgImage('coupons', domain),
       altKey: 'coupons.og.imageAlt',
       altFallback: 'Outerpedia Coupon Codes',
     },

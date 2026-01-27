@@ -2,12 +2,15 @@ import type { Metadata } from 'next'
 import PullSimClient from './pullSimClient'
 
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd, webAppLd } from './jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/pull-sim',
     titleKey: 'pullSim.meta.title',
@@ -27,11 +30,8 @@ export async function generateMetadata(): Promise<Metadata> {
       'Limited',
       'Outerpedia',
     ],
-    // Règle projet: PNG pour metadata (WEBP seulement in-page)
     image: {
-      url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Recruitment.png',
-      width: 150,
-      height: 150,
+      ...getToolOgImage('pull-sim', domain),
       altKey: 'pullSim.og.imageAlt',
       altFallback: 'Pull Simulator — Outerpedia',
     },

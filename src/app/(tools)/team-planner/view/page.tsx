@@ -6,12 +6,15 @@ import Link from 'next/link'
 import TeamPlannerWrapper from '../TeamPlannerWrapper'
 
 import { createPageMetadata } from '@/lib/seo'
+import { getToolOgImage } from '@/lib/getToolMeta'
 import JsonLd from '@/app/components/JsonLd'
 import { websiteLd, breadcrumbLd, webPageLd, softwareApplicationLd } from '@/lib/seo/team-planner-jsonld'
 import { getTenantServer } from '@/tenants/tenant.server'
 import { getServerI18n } from '@/lib/contexts/server-i18n'
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { domain } = await getTenantServer()
+
   return createPageMetadata({
     path: '/team-planner/view',
     titleKey: 'teamPlanner.meta.title',
@@ -34,10 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'Character Selection',
     ],
     image: {
-      // Règle projet: PNG pour metadata, WEBP en page
-      url: 'https://outerpedia.com/images/ui/nav/CM_Lobby_Button_Misson.png',
-      width: 150,
-      height: 150,
+      ...getToolOgImage('team-planner', domain),
       altKey: 'teamPlanner.og.imageAlt',
       altFallback: 'Team Planner — Outerpedia',
     },
