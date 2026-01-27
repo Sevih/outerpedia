@@ -27,15 +27,13 @@
   },
   "Chain_Type": "Join",
   "gift": "Magic Tool",
-  "VoiceActor": "VA. Kaylie Mills",
+  "VoiceActor": "VA. Kayli Mills",
   "VoiceActor_jp": "CV. 黒沢ともよ",
-  "VoiceActor_kr": "CV.강은애",
+  "VoiceActor_kr": "CV. 강은애",
   "VoiceActor_zh": "CV. 黑泽朋世",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": null,
-    "2_zh": null,
     "3": "ATK DEF HP +10%",
     "3_jp": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
@@ -45,15 +43,12 @@
     "4_1_kr": "ATK DEF HP +16%\n아군 효과 적중 +3%\n체인 패시브의 WG 감소량 +1",
     "4_1_zh": "ATK DEF HP +16%\n友军效果命中+3%\n连携被动技能的WG降低量+1",
     "4_2": "ATK DEF HP +19%",
-    "4_2_zh": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
     "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发",
     "5_2": "ATK DEF HP +25%",
-    "5_2_zh": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "5_3_zh": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+3% Ally Team Effectiveness\n+25 Action Points at battle start",
     "6_jp": "ATK DEF HP +30%\n味方の効果命中+3%\n戦闘開始時、AP+25",
     "6_kr": "ATK DEF HP +30%\n아군 효과 적중 +3%\n입장 시 AP +25",
@@ -68,10 +63,10 @@
       "name_jp": "ヤマネのヒゲ",
       "name_kr": "산쥐의 수염",
       "name_zh": "山鼠胡须",
-      "true_desc": "Attacks an enemy and has a <color=#28d9ed>70%</color> chance to increase <color=#28d9ed>Evasion</color> for <color=#28d9ed>1 turn(s)</color>.",
-      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>70%</color>の確率で自分の<color=#28d9ed>回避</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
-      "true_desc_kr": "적을 공격하고 <color=#28d9ed>70%</color> 확률로 자신의 <color=#28d9ed>회피</color>를 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
-      "true_desc_zh": "攻击敌人,并有<color=#28d9ed>70%</color>的几率使自身<color=#28d9ed>回避</color>提升,持续<color=#28d9ed>1回合</color>。",
+      "true_desc": "Attacks an enemy and has a <color=#28d9ed>70%</color> chance to increase the caster's <color=#28d9ed>Effectiveness</color> for <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>70%</color>の確率で自分の<color=#28d9ed>効果命中</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
+      "true_desc_kr": "적을 공격하고 <color=#28d9ed>70%</color> 확률로 자신의 <color=#28d9ed>효과 적중</color>을 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
+      "true_desc_zh": "攻击敌人,并有<color=#28d9ed>70%</color>的概率使自身的<color=#28d9ed>效果命中</color>提升,持续<color=#28d9ed>1回合</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
@@ -133,7 +128,7 @@
       "wgr": 1,
       "cd": null,
       "buff": [
-        "BT_STAT|ST_AVOID"
+        "BT_STAT|ST_BUFF_CHANCE"
       ],
       "debuff": []
     },
@@ -207,8 +202,8 @@
           "强化解除效果触发几率+15%"
         ]
       },
-      "wgr": 1,
       "cd": "4",
+      "wgr": 1,
       "buff": [
         "BT_ACTION_GAUGE",
         "BT_COOL3_CHARGE"
@@ -315,8 +310,8 @@
           "效果触发几率+15%"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [],
       "debuff": [
         "BT_SEALED",
@@ -331,10 +326,10 @@
       "name_jp": "チェーンパッシブ",
       "name_kr": "체인 패시브",
       "name_zh": "连携被动",
-      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, removes <color=#28d9ed>1 buff(s)</color> from all enemies.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to increase <color=#28d9ed>Evasion</color> for <color=#28d9ed>2 turn(s)</color>.",
-      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、敵全体の強化効果を<color=#28d9ed>1個</color>解除する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>100%</color>の確率で<color=#28d9ed>回避</color>が<color=#28d9ed>2ターン</color>の間UPする。",
-      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 적 전체의 강화 효과를 <color=#28d9ed>1개</color> 해제합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>100%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>회피</color>가 증가합니다.",
-      "true_desc_zh": "<color=#ffd732>连携技能自由顺序效果</color>:攻击后,解除全体敌人的<color=#28d9ed>1个</color>强化效果。\\n\\n<color=#ffd732>夹攻效果</color>:攻击后,有<color=#28d9ed>100%</color>的几率使<color=#28d9ed>回避</color>提升,持续<color=#28d9ed>2回合</color>。",
+      "true_desc": "<color=#ffd732>Chain Companion Effect</color>: After attacking, removes <color=#28d9ed>1</color> <color=#28d9ed>Buffs</color> from all enemies.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, has a <color=#28d9ed>100%</color> chance to increase <color=#28d9ed>Effectiveness</color> for <color=#28d9ed>2 turn(s)</color>.",
+      "true_desc_jp": "<color=#ffd732>チェーン効果(汎用)</color>:攻撃後、敵全体の強化効果を<color=#28d9ed>1つ</color>解除する。\\n\\n<color=#ffd732>連携効果</color>:攻撃後、<color=#28d9ed>100%</color>の確率で<color=#28d9ed>2ターン</color>の間<color=#28d9ed>効果命中</color>がUPする。",
+      "true_desc_kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 적 전체의 강화 효과를 <color=#28d9ed>1개</color> 해제합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>100%</color> 확률로 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>효과 적중</color>이 증가합니다.",
+      "true_desc_zh": "<color=#ffd732>连携技能自由顺序效果</color>:攻击后,解除全体敌人<color=#28d9ed>1个</color>强化效果。\\n\\n<color=#ffd732>夹攻效果</color>:攻击后,有<color=#28d9ed>100%</color>的概率使<color=#28d9ed>效果命中</color>提升,持续<color=#28d9ed>2回合</color>。",
       "enhancement": {
         "2": [
           "+5% Dual Attack and Skill Chain damage",
@@ -401,7 +396,7 @@
         "BT_REMOVE_BUFF"
       ],
       "dual_buff": [
-        "BT_STAT|ST_AVOID"
+        "BT_STAT|ST_BUFF_CHANCE"
       ]
     }
   }

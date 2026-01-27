@@ -30,13 +30,11 @@
   "video": "6ahyMvY4StE",
   "VoiceActor": "VA. Ashely Biski",
   "VoiceActor_jp": "CV. 五十嵐裕美",
-  "VoiceActor_kr": "CV. Ashely Biski",
+  "VoiceActor_kr": "CV. 유영",
   "VoiceActor_zh": "CV. 五十岚裕美",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": null,
-    "2_zh": null,
     "3": "ATK DEF HP +10%",
     "3_jp": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
@@ -46,15 +44,12 @@
     "4_1_kr": "ATK DEF HP +16%\n아군 방어력 +5%\n체인 패시브의 WG 감소량 +1",
     "4_1_zh": "ATK DEF HP +16%\n友军防御力+5%\n连携被动技能的WG降低量+1",
     "4_2": "ATK DEF HP +19%",
-    "4_2_zh": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
     "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发",
     "5_2": "ATK DEF HP +25%",
-    "5_2_zh": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "5_3_zh": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+5% Ally Team Defense\n+25 Action Points at battle start",
     "6_jp": "ATK DEF HP +30%\n味方の防御力+5%\n戦闘開始時、AP+25",
     "6_kr": "ATK DEF HP +30%\n아군 방어력 +5%\n입장 시 AP +25",
@@ -69,10 +64,10 @@
       "name_jp": "スーパー殺戮マシーン",
       "name_kr": "슈퍼 멋진 살인 기계",
       "name_zh": "超酷杀人机器",
-      "true_desc": "Attacks two enemies and has a <color=#28d9ed>20%</color> chance to grant increased <color=#28d9ed>Accuracy</color> to the caster for <color=#28d9ed>1 turn(s)</color>.\\n\\nIf the target has a <color=#28d9ed>barrier</color>, damage dealt increases.",
-      "true_desc_jp": "敵2体にダメージを与える。<color=#28d9ed>20%</color>の確率で自分の<color=#28d9ed>命中</color>が<color=#28d9ed>1ターン</color>の間UPする。\\n\\nこのスキルは対象が<color=#28d9ed>シールド</color>状態の場合、ダメージがUPする。",
-      "true_desc_kr": "적 2인을 공격하고 <color=#28d9ed>20%</color> 확률로 자신의 <color=#28d9ed>명중</color>이 <color=#28d9ed>1턴</color> 동안 증가합니다.\\n\\n이 스킬은 대상이 <color=#28d9ed>실드</color>를 보유하고 있을 때 피해가 증가합니다.",
-      "true_desc_zh": "攻击2名敌人,并有<color=#28d9ed>20%</color>的几率使自身的<color=#28d9ed>命中</color>效果提升,持续<color=#28d9ed>1回合</color>。\\n\\n该技能目标附带<color=#28d9ed>护盾</color>效果时,伤害提升。",
+      "true_desc": "Attacks 2 enemies and has a <color=#28d9ed>20%</color> chance to increase own <color=#28d9ed>Defense</color> for <color=#28d9ed>1 turn(s)</color>.\\n\\nDamage dealt increases if the target has a <color=#28d9ed>Barrier</color>.",
+      "true_desc_jp": "敵2体にダメージを与え、<color=#28d9ed>20%</color>の確率で自分の<color=#28d9ed>防御力</color>が<color=#28d9ed>1ターン</color>の間UPする。\\n\\nこのスキルは対象が<color=#28d9ed>シールド</color>を保有している場合、ダメージがUPする。",
+      "true_desc_kr": "적 2인을 공격하고 <color=#28d9ed>20%</color> 확률로 자신의 <color=#28d9ed>방어력</color>이 <color=#28d9ed>1턴</color> 동안 증가합니다.\\n\\n이 스킬은 대상이 <color=#28d9ed>실드</color>를 보유하고 있을 때 피해가 증가합니다.",
+      "true_desc_zh": "攻击2名敌人,并有<color=#28d9ed>20%</color>的概率使自身的<color=#28d9ed>防御力</color>提升,持续<color=#28d9ed>1回合</color>。\\n\\n若目标持有<color=#28d9ed>护盾</color>,该技能伤害提升。",
       "enhancement": {
         "2": [
           "+10% damage",
@@ -134,7 +129,7 @@
       "wgr": 1,
       "cd": null,
       "buff": [
-        "BT_STAT|ST_ACCURACY"
+        "BT_STAT|ST_DEF"
       ],
       "debuff": []
     },
@@ -312,8 +307,8 @@
           "伤害量+10%"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [
         "BT_AP_CHARGE",
         "BT_INVINCIBLE"

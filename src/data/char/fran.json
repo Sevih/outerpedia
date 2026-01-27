@@ -26,13 +26,11 @@
   "gift": "Luxury",
   "VoiceActor": "VA. Caitlin Rowe",
   "VoiceActor_jp": "CV. 山岡ゆり",
-  "VoiceActor_kr": "CV. Caitlin Rowe",
+  "VoiceActor_kr": "CV. 미소",
   "VoiceActor_zh": "CV. 山冈百合",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": null,
-    "2_zh": null,
     "3": "ATK DEF HP +10%",
     "3_jp": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
@@ -42,15 +40,12 @@
     "4_1_kr": "ATK DEF HP +16%\n아군 명중 +2%\n체인 패시브의 WG 감소량 +1",
     "4_1_zh": "ATK DEF HP +16%\n友军命中+2%\n连携被动技能的WG降低量+1",
     "4_2": "ATK DEF HP +19%",
-    "4_2_zh": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
     "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发",
     "5_2": "ATK DEF HP +25%",
-    "5_2_zh": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "5_3_zh": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start",
     "6_jp": "ATK DEF HP +30%\n味方の命中+2%\n戦闘開始時、AP+25",
     "6_kr": "ATK DEF HP +30%\n아군 명중 +2%\n입장 시 AP +25",
@@ -166,10 +161,10 @@
       "name_jp": "興奮チャージ",
       "name_kr": "도파민 충전",
       "name_zh": "补充多巴胺",
-      "true_desc": "Attacks an enemy, and increases all allies' <color=#28d9ed>Accuracy</color> and <color=#28d9ed>Effectiveness</color> for <color=#28d9ed>2 turn(s)</color>.\\nAfter attacking, increases the Priority Gauge of the ally with the highest Max Health by <color=#28d9ed>20%</color>.",
-      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>2ターン</color>の間味方全体の<color=#28d9ed>命中</color>と<color=#28d9ed>効果命中</color>をUPさせる。\\n攻撃後、最大HPが最も高い味方の行動ゲージを<color=#28d9ed>20%</color> の間UPさせる。",
-      "true_desc_kr": "적을 공격하고, <color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>명중</color>과 <color=#28d9ed>효과 적중</color>을 증가시킵니다.\\n공격 후 최대 체력이 가장 높은 아군의 행동 게이지를 <color=#28d9ed>20%</color> 증가시킵니다.",
-      "true_desc_zh": "攻击敌人,使全体友军的<color=#28d9ed>命中</color>和<color=#28d9ed>效果命中</color>增加,持续<color=#28d9ed>2回合</color>。\\n攻击后,使生命值上限最高的友军行动值增加\\n<color=#28d9ed>20%</color>。",
+      "true_desc": "Attacks an enemy and increases <color=#28d9ed>Speed</color> and <color=#28d9ed>Effectiveness</color> of all allies for <color=#28d9ed>2 turn(s)</color>.\\nAfter attacking, increases <color=#28d9ed>Action Gauge</color> of the ally with the highest Max Health by <color=#28d9ed>20%</color>.",
+      "true_desc_jp": "敵単体にダメージを与え、<color=#28d9ed>2ターン</color>の間、味方全体の<color=#28d9ed>スピード</color>と<color=#28d9ed>効果命中</color>をUPさせる。\\n攻撃後、最大HPが最も高い味方の行動ゲージを<color=#28d9ed>20%</color>UPさせる。",
+      "true_desc_kr": "적을 공격하고, <color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>속도</color>와 <color=#28d9ed>효과 적중</color>을 증가시킵니다.\\n공격 후 최대 체력이 가장 높은 아군의 행동 게이지를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "true_desc_zh": "攻击敌人,并使我方全体的<color=#28d9ed>速度</color>和<color=#28d9ed>效果命中</color>提升,持续<color=#28d9ed>2回合</color>。\\n攻击后,使生命值上限最高的我方<color=#28d9ed>行动值</color>增加<color=#28d9ed>20%</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
@@ -224,10 +219,10 @@
           "效果持续时间+1回合"
         ]
       },
-      "wgr": 1,
       "cd": "4",
+      "wgr": 1,
       "buff": [
-        "BT_STAT|ST_ACCURACY",
+        "BT_STAT|ST_SPEED",
         "BT_STAT|ST_BUFF_CHANCE",
         "BT_ACTION_GAUGE"
       ],
@@ -303,8 +298,8 @@
           "效果持续时间+1回合"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [
         "BT_STAT|ST_COUNTER_RATE",
         "BT_SHIELD_BASED_TARGET"

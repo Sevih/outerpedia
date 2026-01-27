@@ -31,13 +31,11 @@
   "video": "zlmBL-U6xEI",
   "VoiceActor": "VA. Sam Slade",
   "VoiceActor_jp": "CV. 久保ユリカ",
-  "VoiceActor_kr": "CV. Sam Slade",
+  "VoiceActor_kr": "CV. 권다예",
   "VoiceActor_zh": "CV. 久保由利香",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": null,
-    "2_zh": null,
     "3": "ATK DEF HP +10%",
     "3_jp": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
@@ -47,15 +45,12 @@
     "4_1_kr": "ATK DEF HP +16%\n아군 치명 확률 +6%\n체인 패시브의 WG 감소량 +1\n치명 피해 +50%",
     "4_1_zh": "ATK DEF HP +16%\n友军暴击率+6%\n连携被动技能的WG降低量+1\n暴击伤害+50%",
     "4_2": "ATK DEF HP +19%",
-    "4_2_zh": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start",
     "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
     "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
     "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发\n入场时AP+25",
     "5_2": "ATK DEF HP +25%",
-    "5_2_zh": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "5_3_zh": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n30% Penetration\n+100% The Moonlight Heralding Dawn's damage",
     "6_jp": "ATK DEF HP +30%\n貫通力+30%\n【黎明を裂く月光】のダメージ+100%",
     "6_kr": "ATK DEF HP +30%\n관통력 +30%\n여명을 여는 달빛의 피해 +100%",
@@ -133,7 +128,7 @@
       "buff": [
         "BT_ACTION_GAUGE",
         "BT_STAT|ST_ATK",
-        "BT_STAT|ST_ACCURACY",
+        "BT_STAT|ST_CRITICAL_RATE",
         "BT_UNDEAD"
       ],
       "debuff": [],
@@ -147,10 +142,10 @@
           "level": 1
         },
         "SKT_BURST_2": {
-          "effect": "(Common) Increases Damage\\n+2 Accuracy Turns before attacking",
-          "effect_jp": "(共通)ダメージUP\\n攻撃の前に命中UP+2ターン",
-          "effect_kr": "(공통) 피해 증가\\n공격 전 명중 +2턴",
-          "effect_zh": "(通用)伤害提升\\n攻击前命中+2回合",
+          "effect": "(Common) Damage Increase\\nCritical Hit Chance +2 turns before attacking",
+          "effect_jp": "(共通) ダメージ増加\\n攻撃前、会心率UP+2ターン",
+          "effect_kr": "(공통) 피해 증가\\n공격 전 치명 확률 +2턴",
+          "effect_zh": "(通用) 伤害提升\\n攻击前暴击率提升+2回合",
           "cost": 150,
           "level": 2
         },
@@ -306,8 +301,8 @@
           "伤害量+20%"
         ]
       },
-      "wgr": 2,
       "cd": "6",
+      "wgr": 2,
       "buff": [
         "BT_INVINCIBLE",
         "BT_ACTION_GAUGE",

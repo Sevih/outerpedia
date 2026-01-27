@@ -27,13 +27,11 @@
   "video": "kmCeAt86rjI",
   "VoiceActor": "VA. Lily Pichu",
   "VoiceActor_jp": "CV. 水橋かおり",
-  "VoiceActor_kr": "CV. Lily Pichu",
+  "VoiceActor_kr": "CV. 혜원",
   "VoiceActor_zh": "CV. 水桥香织",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": null,
-    "2_zh": null,
     "3": "ATK DEF HP +10%",
     "3_jp": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
@@ -43,15 +41,12 @@
     "4_1_kr": "ATK DEF HP +16%\n아군 명중 +2%\n체인 패시브의 WG 감소량 +1",
     "4_1_zh": "ATK DEF HP +16%\n友军命中+2%\n连携被动技能的WG降低量+1",
     "4_2": "ATK DEF HP +19%",
-    "4_2_zh": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked",
     "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁",
     "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금",
     "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发",
     "5_2": "ATK DEF HP +25%",
-    "5_2_zh": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "5_3_zh": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\n+2% Ally Team Accuracy\n+25 Action Points at battle start",
     "6_jp": "ATK DEF HP +30%\n味方の命中+2%\n戦闘開始時、AP+25",
     "6_kr": "ATK DEF HP +30%\n아군 명중 +2%\n입장 시 AP +25",
@@ -128,7 +123,7 @@
       "cd": null,
       "buff": [
         "BT_COOL3_CHARGE",
-        "BT_STAT|ST_CRITICAL_DMG_RATE"
+        "BT_ADDITIVE_TURN"
       ],
       "debuff": [],
       "burnEffect": {
@@ -149,10 +144,10 @@
           "level": 2
         },
         "SKT_BURST_3": {
-          "effect": "+3 turns increased Critical Damage on allies",
-          "effect_jp": "会心ダメージUP+3ターン\\n(味方全体)",
-          "effect_kr": "아군 팀 치명 피해 증가 +3턴",
-          "effect_zh": "友军暴击伤害提升+3回合",
+          "effect": "Gains an extra turn",
+          "effect_jp": "追加ターン発生",
+          "effect_kr": "추가 턴 발생",
+          "effect_zh": "触发额外回合",
           "cost": 120,
           "level": 3
         }
@@ -240,10 +235,10 @@
       "name_jp": "犯人はあなたです!",
       "name_kr": "범인은 바로 당신!",
       "name_zh": "犯人就是你!",
-      "true_desc": "Attacks all enemies without <color=#28d9ed>missing</color>, and grants increased Accuracy to all allies for <color=#28d9ed>2 turn(s)</color>.",
-      "true_desc_jp": "敵全体にダメージを与え、味方全体の命中を<color=#28d9ed>2ターン</color>の間UPさせる。このスキルは<color=#28d9ed>ミスヒット</color>しない。",
-      "true_desc_kr": "적 전체를 <color=#28d9ed>빗나감</color> 없이 공격하고, 아군 전체는 <color=#28d9ed>2턴</color> 동안 명중이 증가합니다.",
-      "true_desc_zh": "攻击全体敌人,不会发生<color=#28d9ed>闪避</color>,并使全体友军的命中提升,持续<color=#28d9ed>2回合</color>。",
+      "true_desc": "Attacks all enemies and increases <color=#28d9ed>Critical Damage</color> of all allies for <color=#28d9ed>2 turn(s)</color>.\\nAfter using the skill, decreases cooldown of <color=#28d9ed>Thinking Time</color> by <color=#28d9ed>1 turn(s)</color>.",
+      "true_desc_jp": "敵全体にダメージを与え、<color=#28d9ed>2ターン</color>の間、味方全体の<color=#28d9ed>会心ダメージ</color>をUPさせる。\\nスキル使用後、<color=#28d9ed>シンキング・タイム</color>のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+      "true_desc_kr": "적 전체를 공격하고 <color=#28d9ed>2턴</color> 동안 아군 전체의 <color=#28d9ed>치명 피해</color>를 증가시킵니다.\\n스킬 사용 후 <color=#28d9ed>씽킹 타임</color> 스킬의 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+      "true_desc_zh": "攻击全体敌人,并使我方全体的<color=#28d9ed>暴击伤害</color>提升,持续<color=#28d9ed>2回合</color>。\\n使用技能后,使<color=#28d9ed>思考时间</color>技能的冷却时间减少<color=#28d9ed>1回合</color>。",
       "enhancement": {
         "2": [
           "+10% damage",
@@ -302,10 +297,11 @@
           "冷却时间-1回合"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [
-        "BT_STAT|ST_ACCURACY",
+        "BT_COOL2_CHARGE",
+        "BT_STAT|ST_CRITICAL_DMG_RATE",
         "BT_STAT|ST_CRITICAL_RATE"
       ],
       "debuff": []

@@ -86,10 +86,10 @@
         "label_jp": "強化効果プレゼント",
         "label_kr": "강화 효과 선물",
         "label_zh": "强化效果赠礼",
-        "description": "Grants removable buff(s) granted to the caster to the specific target.\\nBuffs available for gifting Attack, Defense, Speed, Critical Hit Chance, Critical Damage, Accuracy, Evasion, Effectiveness, Resilience, Penetration",
-        "description_jp": "自分の持つ、解除可能な強化効果を 特定の対象に付与する。\\nプレゼントできる強化効果: 攻撃力、防御力、スピード、 会心率、会心ダメージ、命中、 回避、効果命中、効果抵抗、貫通 力",
-        "description_kr": "자신이 보유한 해제 가능한 강화 효과를 특정 대상에게 부여합니다.\\n선물 가능한 강화 효과 공격력, 방어력, 속도, 치명 확률, 치명 피해, 명중, 회피, 효과 적중, 효과 저항, 관통력\",",
-        "description_zh": "使特定目标获得自身附带的可解除强化效果。\\n\\n可赠送的强化效果\\n攻击力、防御力、速度、暴击率、暴击伤害、命中、\\n回避、效果命中、效果抵抗、穿透力",
+        "description": "Grants removable buff(s) granted to the caster to the specific target.\\nBuffs available for gifting: Attack, Defense, Speed, Critical Hit Chance, Critical Damage, Effectiveness, Resilience, Penetration",
+        "description_jp": "自分の持つ、解除可能な強化効果を特定の対象に付与する。\\nプレゼントできる強化効果: 攻撃力、防御力、スピード、会心率、会心ダメージ、効果命中、効果抵抗、貫通力",
+        "description_kr": "자신이 보유한 해제 가능한 강화 효과를 특정 대상에게 부여합니다.\\n선물 가능한 강화 효과: 공격력, 방어력, 속도, 치명 확률, 치명 피해, 효과 적중, 효과 저항, 관통력",
+        "description_zh": "使特定目标获得自身附带的可解除强化效果。\\n可赠送的强化效果: 攻击力、防御力、速度、暴击率、暴击伤害、效果命中、效果抵抗、穿透力",
         "icon": "IG_Buff_2000093_Interruption"
     },
     {
@@ -298,10 +298,10 @@
         "label_jp": "ランダムのステータスUP効果",
         "label_kr": "무작위 능력치 증가 효과",
         "label_zh": "随机能力值提升效果",
-        "description": "Grants random increased stat effect(s) to the bearer for 2 turns. \nAttack, Critical Damage, Accuracy, Speed",
-        "description_jp": "自分にランダム強化効果を 2ターンの間付与する。\n攻撃力、会心ダメージ、命中、 スピード",
-        "description_kr": "자신에게 2턴 동안 무작위 능력치 증가 효과를 부여합니다.\n공격력, 치명 피해, 명중, 속도",
-        "description_zh": "自身获得随机能力值提升效果,持续2回合。\\n攻击力、防御力、速度、暴击率、暴击伤害",
+        "description": "Grants random increased stat effect(s) to the bearer for 2 turns. \nAttack, Critical Damage, Crit Hit Chance, Speed",
+        "description_jp": "自分にランダム強化効果を 2ターンの間付与する。\n攻撃力、会心ダメージ、会心率、スピード",
+        "description_kr": "자신에게 2턴 동안 무작위 능력치 증가 효과를 부여합니다.\n공격력, 치명 피해, 치명 확률, 속도",
+        "description_zh": "自身获得随机能力值提升效果,持续2回合。\n攻击力、暴击伤害、暴击率、速度",
         "icon": "IG_Buff_Effect_Random_Buff"
     },
     {

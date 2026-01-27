@@ -30,19 +30,17 @@
     "mainStat_jp": "地属性の対象の命中",
     "mainStat_kr": "지속성 대상 명중",
     "mainStat_zh": "土属性命中",
-    "effect": "Increases Accuracy for <color=#28d9ed>2</color> turn(s) when using To the Beach?",
-    "effect_jp": "【みんなもサーフィンしよっ!】使用時、命中が<color=#28d9ed>2</color>ターンの間UPする。",
-    "effect_kr": "여름으로 가는 물? 사용 시 명중 <color=#28d9ed>2</color>턴",
-    "effect_zh": "使用冲向夏天时,命中<color=#28d9ed>2</color>回合",
-    "effect10": "Increases Accuracy for <color=#28d9ed>3</color> turn(s) when using To the Beach?",
-    "effect10_jp": "【みんなもサーフィンしよっ!】使用時、命中が<color=#28d9ed>3</color>ターンの間UPする。",
-    "effect10_kr": "여름으로 가는 물? 사용 시 명중 <color=#28d9ed>3</color>턴",
-    "effect10_zh": "使用冲向夏天时,命中<color=#28d9ed>3</color>回合",
+    "effect": "Penetration <color=#28d9ed>+20%</color> when using <color=#28d9ed>To the Beach?</color>",
+    "effect_jp": "<color=#28d9ed>みんなもサーフィンしよっ!</color>使用時、貫通力<color=#28d9ed>+20%</color>",
+    "effect_kr": "<color=#28d9ed>여름으로 가는 물?</color> 사용 시 관통력 <color=#28d9ed>+20%</color>",
+    "effect_zh": "使用<color=#28d9ed>冲向夏天</color>时,穿透力<color=#28d9ed>+20%</color>",
+    "effect10": "Penetration <color=#28d9ed>+20%</color> when using <color=#28d9ed>Gone Surfing!</color>",
+    "effect10_jp": "<color=#28d9ed>ハデに決めちゃうし!</color>使用時、貫通力<color=#28d9ed>+20%</color>",
+    "effect10_kr": "<color=#28d9ed>다들 서핑하러 갔대!</color> 사용 시 관통력 <color=#28d9ed>+20%</color>",
+    "effect10_zh": "使用<color=#28d9ed>大家都去冲浪了!</color>时,穿透力<color=#28d9ed>+20%</color>",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_STAT|ST_ACCURACY"
-    ],
+    "buff": [],
     "debuff": []
   },
   "ais-wallenstein": {
