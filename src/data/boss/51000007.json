@@ -12,7 +12,7 @@
   "element": "Earth",
   "level": 100,
   "icons": "4076003",
-  "BuffImmune": "BT_STUN,BT_FREEZE,BT_STONE,BT_AGGRO,BT_SILENCE,BT_ACTION_GAUGE,BT_SEALED",
+  "BuffImmune": "BT_GOLDEN_CURSE,BT_STUN,BT_FREEZE,BT_STONE,BT_AGGRO,BT_SILENCE,BT_ACTION_GAUGE,BT_SEALED",
   "StatBuffImmune": "ST_SPEED",
   "location": {
     "dungeon": {

@@ -12,7 +12,7 @@
   "element": "Fire",
   "level": 100,
   "icons": "4076006",
-  "BuffImmune": "BT_STUN,BT_FREEZE,BT_STONE,BT_AGGRO,BT_SILENCE,BT_SEALED,BT_ACTION_GAUGE",
+  "BuffImmune": "BT_GOLDEN_CURSE,BT_STUN,BT_FREEZE,BT_STONE,BT_AGGRO,BT_SILENCE,BT_SEALED,BT_ACTION_GAUGE",
   "StatBuffImmune": "ST_ACCURACY",
   "location": {
     "dungeon": {
@@ -50,7 +50,6 @@
         "zh": "攻击敌人。\\n有小型守护者存在时,伤害量提升,并召唤<color=#28d9ed>2个</color><color=#28d9ed>小型守护者</color>。\\n攻击小型守护者时,首领的行动值提升<color=#28d9ed>20%</color>,解除附带的<color=#28d9ed>2个</color>弱化效果。使<color=#28d9ed>守护者加农炮</color>的冷却时间减少<color=#28d9ed>1回合</color>。"
       },
       "icon": "Skill_First_4044001"
-      
     },
     {
       "name": {

@@ -105,6 +105,29 @@ export const ProgressTracker = {
         }
       })
 
+      // Remove obsolete tasks that no longer exist in definitions
+      const validDailyIds = Object.keys(DAILY_TASK_DEFINITIONS)
+      const validWeeklyIds = Object.keys(WEEKLY_TASK_DEFINITIONS)
+      const validMonthlyIds = Object.keys(MONTHLY_TASK_DEFINITIONS)
+
+      const filteredDaily = settings.enabledTasks.daily.filter((id) => validDailyIds.includes(id))
+      if (filteredDaily.length !== settings.enabledTasks.daily.length) {
+        settings.enabledTasks.daily = filteredDaily
+        needsUpdate = true
+      }
+
+      const filteredWeekly = settings.enabledTasks.weekly.filter((id) => validWeeklyIds.includes(id))
+      if (filteredWeekly.length !== settings.enabledTasks.weekly.length) {
+        settings.enabledTasks.weekly = filteredWeekly
+        needsUpdate = true
+      }
+
+      const filteredMonthly = settings.enabledTasks.monthly.filter((id) => validMonthlyIds.includes(id))
+      if (filteredMonthly.length !== settings.enabledTasks.monthly.length) {
+        settings.enabledTasks.monthly = filteredMonthly
+        needsUpdate = true
+      }
+
       // Ensure hasTerminusSupportPack exists (migration from old settings)
       if (settings.hasTerminusSupportPack === undefined) {
         settings.hasTerminusSupportPack = false

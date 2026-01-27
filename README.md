@@ -17,7 +17,7 @@
 - **Chinese (Simplified)**: [zh.outerpedia.com](https://zh.outerpedia.com)
 
 **Community:** [Join the EvaMains Discord](https://discord.com/invite/keGhVQWsHv)
-**Current version:** `8.4.46 : Core Fusion Lisha release`
+**Current version:** `8.6.34 : Monad Iota release`
 
 ---
 

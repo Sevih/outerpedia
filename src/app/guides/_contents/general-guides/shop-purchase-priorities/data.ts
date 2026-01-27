@@ -504,57 +504,6 @@ export const shopData: Record<ShopKey, ShopItem[]> = {
             limit: { count: 50, period: 'Monthly' },
         },
     ],
-    arch: [
-        {
-            name: 'Epic Reforge Catalyst',
-            priority: 'C',
-            gives: { amount: 20, unit: '' },
-            costs: [{ currency: 'Archdemon\'s Trace', amount: 60 }],
-            limit: { count: 10, period: 'Weekly' },
-        },
-        {
-            name: 'Artisan\'s Hammer',
-            priority: 'C',
-            gives: { amount: 10, unit: '' },
-            costs: [{ currency: 'Archdemon\'s Trace', amount: 80 }],
-            limit: { count: 10, period: 'Weekly' },
-        },
-        {
-            name: 'Refined Glunite',
-            priority: 'A',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Archdemon\'s Trace', amount: 800 }],
-            limit: { count: 1, period: 'Weekly' },
-        },
-        {
-            name: '6★ Talisman Selection Chest',
-            priority: 'S',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Archdemon\'s Trace', amount: 2000 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: 'Legendary Reforge Catalyst',
-            priority: 'C',
-            gives: { amount: 10, unit: '' },
-            costs: [{ currency: 'Archdemon\'s Trace', amount: 80 }],
-            limit: { count: 10, period: 'Weekly' },
-        },
-        {
-            name: 'Glunite',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Archdemon\'s Trace', amount: 150 }],
-            limit: { count: 3, period: 'Weekly' },
-        },
-        {
-            name: '5★ Random Talisman Chest',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Archdemon\'s Trace', amount: 800 }],
-            limit: { count: 1, period: 'Weekly' },
-        },
-    ],
     worldboss: [
         {
             name: 'Steak Dish',
@@ -612,169 +561,6 @@ export const shopData: Record<ShopKey, ShopItem[]> = {
             costs: [{ currency: 'World Boss Token', amount: 300 }],
             limit: { count: 2, period: 'Monthly' },
         },
-    ],
-    skyward: [
-        {
-            name: '5★ Epic Weapon',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 45 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: '5★ Epic Accessory',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 45 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: '5★ Epic Helmet Selection Chest',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 25 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: '5★ Epic Gloves Selection Chest',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 25 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: '5★ Epic Boots Selection Chest',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 25 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: '5★ Epic Armor Selection Chest',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 25 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: 'Basic Skill Manual',
-            priority: 'S',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 30 }],
-            limit: { count: 25, period: 'Monthly' },
-        },
-        {
-            name: 'Artisan\'s Hammer',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 20 }],
-            limit: { count: 50, period: 'Monthly' },
-        },
-        {
-            name: 'Stage 4 Gem Chest',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 150 }],
-            limit: { count: 5, period: 'Monthly' },
-        },
-        {
-            name: 'Potentium (Armor)',
-            priority: 'A',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 150 }],
-            limit: { count: 10, period: 'Monthly' },
-        },
-        {
-            name: 'Potentium (Weapon/Accessory)',
-            priority: 'A',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 200 }],
-            limit: { count: 5, period: 'Monthly' },
-        },
-        {
-            name: '10% Legendary Abrasive',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 50 }],
-            limit: { count: 30, period: 'Monthly' },
-        },
-        {
-            name: 'Professional Skill Manual',
-            priority: 'S',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 250 }],
-            limit: { count: 5, period: 'Monthly' },
-        },
-        {
-            name: 'Steak Dish',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 50 }],
-            limit: { count: 20, period: 'Monthly' },
-        },
-        {
-            name: 'Time Rewinder',
-            priority: 'A',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 3000 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: 'Special Recruitment Ticket (Event)',
-            priority: 'S',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 75 }],
-            limit: { count: 30, period: 'Monthly' },
-        },
-        {
-            name: 'Gear Crafting Material Selection Chest (Normal)',
-            priority: 'A',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 5 }],
-            limit: { count: 100, period: 'Monthly' },
-        },
-        {
-            name: 'Gear Crafting Material Selection Chest (Superior)',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 15 }],
-            limit: { count: 20, period: 'Monthly' },
-        },
-        {
-            name: 'Gold',
-            priority: 'S',
-            gives: { amount: 15000, unit: '' },
-            costs: [{ currency: 'Free', amount: 0 }],
-            limit: { count: 1, period: 'Daily' },
-        },
-        {
-            name: 'Intermediate Skill Manual',
-            priority: 'S',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 70 }],
-            limit: { count: 20, period: 'Monthly' },
-        },
-        {
-            name: 'Transistone (Total)',
-            priority: 'S',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 1500 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: 'Transistone (Individual)',
-            priority: 'S',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 1750 }],
-            limit: { count: 1, period: 'Monthly' },
-        },
-        {
-            name: 'Free Ether',
-            priority: 'S',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Automaton Coin', amount: 5 }],
-            limit: { count: 500, period: 'Monthly' },
-        }
     ],
     al: [
         {
@@ -865,249 +651,186 @@ export const shopData: Record<ShopKey, ShopItem[]> = {
     ],
     survey: [
         {
-            name: '5★ Legendary Weapon Selection Chest',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 475 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: '5★ Legendary Accessory Selection Chest',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 475 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Etheric Helmet of Attack',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 240 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Etheric Gloves of Attack',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 240 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Etheric Armor of Attack',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 240 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Etheric Boots of Attack',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 240 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Etheric Helmet of Critical Hit',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 240 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Etheric Gloves of Critical Hit',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 240 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Etheric Armor of Critical Hit',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 240 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Etheric Boots of Critical Hit',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 240 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Epic Reforge Catalyst',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 20 }],
-            limit: { count: 5, period: 'Weekly' }
-        },
-        {
-            name: 'Superior Quality Present Chest',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 15 }],
-            limit: { count: 3, period: 'Weekly' }
-        },
-        {
-            name: 'Intermediate Skill Manual',
+            name: 'Free Ether',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 250 }],
-            limit: { count: 2, period: 'Weekly' }
+            costs: [{ currency: 'Survey Points', amount: 10 }],
+            limit: { count: 500, period: 'Monthly' }
         },
         {
-            name: '10% Legendary Abrasive',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 300 }],
-            limit: { count: 1, period: 'Weekly' }
-        },
-        {
-            name: 'Master\'s Hammer',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 10 }],
-            limit: { count: 5, period: 'Weekly' }
-        },
-        {
-            name: 'Basic Skill Manual',
+            name: 'Special Recruitment Ticket (Event)',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 150 }],
-            limit: { count: 3, period: 'Weekly' }
+            costs: [{ currency: 'Survey Points', amount: 100 }],
+            limit: { count: 30, period: 'Monthly' }
         },
         {
-            name: '30% Epic Abrasive',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 100 }],
-            limit: { count: 2, period: 'Weekly' }
-        },
-        {
-            name: 'Glunite',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 150 }],
-            limit: { count: 3, period: 'Weekly' }
-        },
-        {
-            name: 'Prosciutto',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 20 }],
-            limit: { count: 20, period: 'Weekly' }
-        },
-        {
-            name: 'Legendary Reforge Catalyst',
-            priority: 'C',
-            gives: { amount: 10, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 100 }],
-            limit: { count: 5, period: 'Weekly' }
-        },
-        {
-            name: 'Epic Quality Present Selection Chest',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 75 }],
-            limit: { count: 3, period: 'Weekly' }
-        },
-        {
-            name: 'Artisan\'s Hammer',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 50 }],
-            limit: { count: 5, period: 'Weekly' }
-        },
-        {
-            name: '6★ Legendary Helmet Selection Chest',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 750 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: '6★ Legendary Armor Selection Chest',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 750 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: '6★ Legendary Gloves Selection Chest',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 750 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: '6★ Legendary Boots Selection Chest',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 750 }],
-            limit: { count: 2, period: 'One-time' }
-        },
-        {
-            name: 'Professional Skill Manual',
+            name: 'Transistone (Individual)',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 500 }],
-            limit: { count: 1, period: 'Weekly' }
+            costs: [{ currency: 'Survey Points', amount: 500 }],
+            limit: { count: 2, period: 'Monthly' }
+        },
+        {
+            name: 'Transistone (Total)',
+            priority: 'S',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 400 }],
+            limit: { count: 2, period: 'Monthly' }
         },
         {
             name: 'Refined Glunite',
             priority: 'S',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 750 }],
-            limit: { count: 1, period: 'Weekly' }
+            costs: [{ currency: 'Survey Points', amount: 150 }],
+            limit: { count: 5, period: 'Monthly' }
+        },
+        {
+            name: 'Basic Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 5 }],
+            limit: { count: 40, period: 'Monthly' }
+        },
+        {
+            name: 'Intermediate Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 20 }],
+            limit: { count: 25, period: 'Monthly' }
+        },
+        {
+            name: 'Professional Skill Manual',
+            priority: 'S',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 50 }],
+            limit: { count: 9, period: 'Monthly' }
+        },
+        {
+            name: 'Stage 4 Gem Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 50 }],
+            limit: { count: 5, period: 'Monthly' }
+        },
+        {
+            name: 'Legendary Reforge Catalyst',
+            priority: 'C',
+            gives: { amount: 10, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 20 }],
+            limit: { count: 20, period: 'Monthly' }
+        },
+        {
+            name: 'Superior Quality Present Chest',
+            priority: 'C',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 1 }],
+            limit: { count: 200, period: 'Monthly' }
+        },
+        {
+            name: 'Artisan\'s Hammer',
+            priority: 'C',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 5 }],
+            limit: { count: 30, period: 'Monthly' }
+        },
+        {
+            name: 'Steak Dish',
+            priority: 'C',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 5 }],
+            limit: { count: 100, period: 'Monthly' }
         },
         {
             name: 'Potentium (Weapon/Accessory)',
             priority: 'A',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 3500 }],
-            limit: { count: 1, period: 'Monthly' }
-        },
-        {
-            name: 'Cake Slice',
-            priority: 'C',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 10 }],
-            limit: { count: 40, period: 'Weekly' }
-        },
-        {
-            name: 'Stage 2 Random Gem Chest',
-            priority: 'B',
-            gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 150 }],
-            limit: { count: 3, period: 'Weekly' }
+            costs: [{ currency: 'Survey Points', amount: 15 }],
+            limit: { count: 10, period: 'Monthly' }
         },
         {
             name: 'Potentium (Armor)',
             priority: 'A',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 3000 }],
+            costs: [{ currency: 'Survey Points', amount: 10 }],
+            limit: { count: 15, period: 'Monthly' }
+        },
+        {
+            name: '10% Legendary Abrasive',
+            priority: 'C',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 20 }],
+            limit: { count: 5, period: 'Monthly' }
+        },
+        {
+            name: 'Time Rewinder',
+            priority: 'A',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 150 }],
             limit: { count: 1, period: 'Monthly' }
         },
         {
-            name: 'Gold',
+            name: '5★ Random Talisman Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 300 }],
+            limit: { count: 4, period: 'Monthly' }
+        },
+        {
+            name: '6★ Talisman Selection Chest',
             priority: 'S',
-            gives: { amount: 30000, unit: '' },
-            costs: [{ currency: 'free', amount: 0 }],
-            limit: { count: 1, period: 'Daily' }
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 1500 }],
+            limit: { count: 1, period: 'Monthly' }
         },
         {
             name: '6★ Legendary Weapon Selection Chest',
             priority: 'A',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 1350 }],
+            costs: [{ currency: 'Survey Points', amount: 750 }],
             limit: { count: 2, period: 'One-time' }
         },
         {
             name: '6★ Legendary Accessory Selection Chest',
             priority: 'A',
             gives: { amount: 1, unit: '' },
-            costs: [{ currency: 'Survey Contributions', amount: 1350 }],
+            costs: [{ currency: 'Survey Points', amount: 750 }],
             limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Helmet Selection Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 450 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Armor Selection Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 450 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Gloves Selection Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 450 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: '6★ Legendary Boots Selection Chest',
+            priority: 'B',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 450 }],
+            limit: { count: 2, period: 'One-time' }
+        },
+        {
+            name: 'Sigma Piece',
+            priority: 'S',
+            gives: { amount: 1, unit: '' },
+            costs: [{ currency: 'Survey Points', amount: 1 }],
+            limit: { count: 900, period: 'One-time' }
         }
     ],
     event: [

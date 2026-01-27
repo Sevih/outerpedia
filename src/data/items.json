@@ -1149,10 +1149,10 @@
     "icon": "TI_Licence"
   },
   {
-    "name": "Survey Contributions",
-    "name_jp": "調査貢献度",
-    "name_kr": "조사 기여도",
-    "name_zh": "调查贡献值",
+    "name": "Survey Points",
+    "name_jp": "調査Pt",
+    "name_kr": "조사 포인트",
+    "name_zh": "调查点数",
     "rarity": "normal",
     "description": "Points acquired for contributing information to areas that needed to be surveyed.\\nSurvey points can be exchanged for items at the Survey Hub.",
     "description_jp": "情報収集が必要な区域の調査に貢献したPt。\\n冒険支援所でアイテムと交換できる。",
@@ -1962,6 +1962,18 @@
     "icon": "TI_Armor_Box02"
   },
   {
+    "name": "6★ Legendary Chest Armor Selection Chest",
+    "name_jp": "★6アーマー選択ボックス【レジェンド】",
+    "name_kr": "6성 전설 갑옷 선택 상자",
+    "name_zh": "6星传说盔甲选择箱",
+    "rarity": "legendary",
+    "description": "Select and obtain one 6★ legendary chest armor. The equipment provided will have fixed stats.",
+    "description_jp": "★6レジェンドアーマーの中から1個を選択して獲得できる。オプションはすべて固定された状態で提供されます。",
+    "description_kr": "6성 전설 갑옷 중 한가지를 선택하여 얻습니다. 제공되는 장비는 고정된 옵션으로 제공됩니다.",
+    "description_zh": "可选择并获得1个6星传说级别盔甲。所提供的装备将附带固定属性。",
+    "icon": "TI_Armor_Box02"
+  },
+  {
     "name": "6★ Legendary Armor Selection Chest",
     "name_jp": "★6防具選択ボックス【レジェンド】",
     "name_kr": "6성 전설 방어구 선택 상자",
@@ -2075,6 +2087,18 @@
     "name_kr": "동료 조각",
     "name_zh": "同伴碎片",
     "rarity": "normal",
+    "description": "A piece that contains the power of a unit. Collect 250 to unlock the unit or 150 to transcend them.",
+    "description_jp": "仲間の力が込められたピース。250個集めると仲間を解放、150個で超越できます。",
+    "description_kr": "동료의 힘이 담긴 조각. 250개를 모으면 동료를 해금하고, 150개로 초월할 수 있습니다.",
+    "description_zh": "蕴含同伴之力的碎片。收集250个可解锁同伴，150个可进行超越。",
+    "icon": "CM_Piece_Frame"
+  },
+    {
+  "name": "Sigma Piece",
+  "name_jp": "シグマのピース",
+  "name_kr": "시그마의 조각",
+  "name_zh": "西格玛碎片",
+    "rarity": "legendary",
     "description": "A piece that contains the power of a unit. Collect 250 to unlock the unit or 150 to transcend them.",
     "description_jp": "仲間の力が込められたピース。250個集めると仲間を解放、150個で超越できます。",
     "description_kr": "동료의 힘이 담긴 조각. 250개를 모으면 동료를 해금하고, 150개로 초월할 수 있습니다.",

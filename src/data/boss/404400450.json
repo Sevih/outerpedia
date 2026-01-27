@@ -44,15 +44,15 @@
       },
       "type": "SKT_FIRST",
       "description": {
-        "en": "Grants all allies increased <color=#28d9ed>Attack, Evasion,</color> and <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn(s)</color>.",
-        "kr": "<color=#28d9ed>1턴</color> 동안 아군 전체의 <color=#28d9ed>공격력, 회피, 속도</color>가 증가합니다.",
-        "jp": "味方全体の<color=#28d9ed>攻撃力・回避・スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
-        "zh": "使全体友军的<color=#28d9ed>攻击力、回避、速度</color>提升,持续<color=#28d9ed>1回合</color>。"
+        "en": "Increases all allies' <color=#28d9ed>Attack</color>, <color=#28d9ed>Effectiveness</color>, and <color=#28d9ed>Speed</color> for <color=#28d9ed>1</color> turns.",
+        "kr": "<color=#28d9ed>1턴</color> 동안 아군 전체의 <color=#28d9ed>공격력, 효과 적중, 속도</color>가 증가합니다.",
+        "jp": "味方全体の<color=#28d9ed>攻撃力</color>、<color=#28d9ed>効果命中</color>、<color=#28d9ed>スピード</color>が<color=#28d9ed>1</color>ターンの間UPする。",
+        "zh": "在<color=#28d9ed>1</color>回合内提高全体友军的<color=#28d9ed>攻击力</color>、<color=#28d9ed>效果命中</color>和<color=#28d9ed>速度</color>。"
       },
       "icon": "MT_Attack_Magic_1_Light",
       "buff": [
         "BT_STAT|ST_ATK",
-        "BT_STAT|ST_AVOID",
+        "BT_STAT|ST_BUFF_CHANCE",
         "BT_STAT|ST_SPEED"
       ]
     }

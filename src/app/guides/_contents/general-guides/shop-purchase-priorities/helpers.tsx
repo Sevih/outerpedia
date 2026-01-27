@@ -20,9 +20,7 @@ export type ShopKey =
     | 'friend'
     | 'arena'
     | 'stars'
-    | 'arch'
     | 'worldboss'
-    | 'skyward'
     | 'al'
     | 'survey'
     | 'resource'
@@ -62,9 +60,7 @@ export const SHOP_TAB_CONFIG: { key: ShopKey; i18nKey: string; icon: string }[] 
     { key: 'friend', i18nKey: 'progress.shop.friendship-point', icon: '/images/ui/shop_friend.webp' },
     { key: 'arena', i18nKey: 'progress.shop.arena-shop', icon: '/images/ui/shop_arena.webp' },
     { key: 'stars', i18nKey: 'progress.shop.star-memory', icon: '/images/ui/shop_stars.webp' },
-    { key: 'arch', i18nKey: 'progress.shop.archdemon-ruins', icon: '/images/ui/shop_arch.webp' },
     { key: 'worldboss', i18nKey: 'progress.shop.world-boss', icon: '/images/ui/shop_worldboss.webp' },
-    { key: 'skyward', i18nKey: 'progress.shop.skyward', icon: '/images/ui/shop_skyward.webp' },
     { key: 'al', i18nKey: 'progress.shop.adventure-license', icon: '/images/ui/shop_al.webp' },
     { key: 'survey', i18nKey: 'progress.shop.survey-hub', icon: '/images/ui/shop_survey.webp' },
     { key: 'resource', i18nKey: 'progress.shop.resource-shop', icon: '/images/ui/shop_resource.webp' }
@@ -176,9 +172,7 @@ export const shopNotes: Record<ShopKey, LangMap | null> = {
     friend: null,
     arena: null,
     stars: null,
-    arch: null,
     worldboss: null,
-    skyward: null,
     al: null,
     survey: null,
     resource: null,

@@ -1050,9 +1050,7 @@ function TaskListByCategory({
     'progress.shop.arena-shop': 'TI_Item_PVP_Medal',
     'progress.shop.joint-challenge': 'TI_Item_BossEvent_Coin_01',
     'progress.shop.guild-shop': 'CM_Goods_Guild_Coin',
-    'progress.shop.archdemon-ruins': 'TI_Item_Remains',
     'progress.shop.world-boss': 'TI_Item_World_Boss',
-    'progress.shop.skyward': 'TI_Item_Tower_Coin_01',
     'progress.shop.adventure-license': 'TI_Licence',
     'progress.shop.survey-hub': 'survey-contributions',
   }
