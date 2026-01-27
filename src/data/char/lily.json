@@ -23,13 +23,12 @@
   },
   "Chain_Type": "Join",
   "gift": "Craftwork",
-  "VoiceActor": "VA. Brenna Larson",
+  "VoiceActor": "VA. Brenna Larsen",
   "VoiceActor_jp": "CV. 春野杏",
-  "VoiceActor_kr": "CV.성예원",
+  "VoiceActor_kr": "CV. 성예원",
   "VoiceActor_zh": "CV. 春野杏",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": "ATK DEF HP +5%",
     "2_jp": "ATK DEF HP +5%",
     "2_kr": "ATK DEF HP +5%",
@@ -203,8 +202,8 @@
           "效果触发几率+15%"
         ]
       },
-      "wgr": 1,
       "cd": "4",
+      "wgr": 1,
       "buff": [
         "BT_CALL_BACKUP",
         "BT_ACTION_GAUGE"
@@ -311,8 +310,8 @@
           "效果触发几率+15%"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [],
       "debuff": [
         "BT_STAT|ST_ATK"

@@ -1354,19 +1354,19 @@
     "mainStat_jp": "火属性の対象の効果命中",
     "mainStat_kr": "화속성 대상 효과 적중",
     "mainStat_zh": "火属性效果命中",
-    "effect": "When using Bear Hunt, has a 40% chance to decrease the Evasion of all enemies for 1 turn(s).",
-    "effect_jp": "【クマさんを捕まえるアロー】使用時、40%の確率で敵全体の回避を1ターンの間DOWNさせる。",
-    "effect_kr": "곰잡이 사용 시 40% 확률로 1턴 동안 적 전체의 회피 감소",
-    "effect_zh": "使用猎熊者时,有40%的几率使全体敌人\\n的回避降低,持续1回合",
-    "effect10": "When using Bear Hunt, has a 70% chance to decrease the Evasion of all enemies for 1 turn(s).",
-    "effect10_jp": "【クマさんを捕まえるアロー】使用時、70%の確率で敵全体の回避を1ターンの間DOWNさせる。",
-    "effect10_kr": "곰잡이 사용 시 70% 확률로 1턴 동안 적 전체의 회피 감소",
-    "effect10_zh": "使用猎熊者时,有70%的几率使全体敌人的回避降低,持续1回合",
+    "effect": "When using Bear Hunt, decreases Speed of all enemies for 1 turn(s) with a 40% chance",
+    "effect_jp": "クマさんを捕まえるアロー使用時、40%の確率で1ターンの間、敵全体のスピードDOWN",
+    "effect_kr": "곰잡이 사용 시 40% 확률로 1턴 동안 적 전체의 속도 감소",
+    "effect_zh": "使用猎熊者时,有40%的概率使全体敌人的速度降低,持续1回合",
+    "effect10": "When using Bear Hunt, decreases Speed of all enemies for 1 turn(s) with a 70% chance",
+    "effect10_jp": "クマさんを捕まえるアロー使用時、70%の確率で1ターンの間、敵全体のスピードDOWN",
+    "effect10_kr": "곰잡이 사용 시 70% 확률로 1턴 동안 적 전체의 속도 감소",
+    "effect10_zh": "使用猎熊者时,有70%的概率使全体敌人的速度降低,持续1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "D",
     "buff": [],
     "debuff": [
-      "BT_STAT|ST_AVOID"
+      "BT_STAT|ST_SPEED"
     ]
   },
   "lisha": {
