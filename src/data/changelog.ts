@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-01-27",
+    title: {
+      en: "New Demiurge Hero: Monad Iota",
+      jp: "新デミウルゴヒーロー：モナド イオータ",
+      kr: "새로운 데미우르고 영웅: 모나드 요타",
+      zh: "新的造物主英雄：单子 佑妲",
+    } as LString,
+    type: "update",
+    url: "/characters/monad-iota",
+    content: [
+      {
+        en: "Monad Iota joins the roster, disrupting enemy attack patterns and providing powerful buffs to all allies.",
+        jp: "モナド イオータが参戦。敵の攻撃パターンを妨害し、味方全員に強力なバフを付与します。",
+        kr: "모나드 요타가 참전합니다. 적의 공격 패턴을 방해하고 모든 아군에게 강력한 버프를 제공합니다.",
+        zh: "单子 佑妲加入战场，干扰敌人的攻击模式并为所有队友提供强力增益。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-01-24",
     title: {
       en: "Progress Tracker",
