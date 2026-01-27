@@ -24,7 +24,7 @@ export function getToolRoutes(t?: (key: string) => string) {
 
       const slug = dir.name;
       const metadata = TOOL_METADATA[slug] ?? {
-        icon: "tool_default.png",
+        icon: "CM_Guild_NoticeBoard.png",
         order: 999,
       };
       if (metadata.hide) return null;
