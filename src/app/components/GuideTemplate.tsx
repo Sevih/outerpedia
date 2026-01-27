@@ -16,6 +16,8 @@ type GuideTemplateProps = {
   title: string
   /** Description introductive du guide */
   introduction?: string
+  /** Disclaimer/avertissement affiché en bannière (ex: "Guide en cours de mise à jour") */
+  disclaimer?: string
   /** Versions disponibles du guide */
   versions: Record<string, Version>
   /** Version par défaut sélectionnée */
@@ -36,6 +38,7 @@ type GuideTemplateProps = {
 export default function GuideTemplate({
   title,
   introduction,
+  disclaimer,
   versions,
   defaultVersion = 'default',
   beforeVersions,
@@ -47,6 +50,16 @@ export default function GuideTemplate({
     <div className="guide-content">
       {/* Titre principal visible */}
       <GuideHeading level={2}>{title}</GuideHeading>
+
+      {/* Disclaimer/avertissement si fourni */}
+      {disclaimer && (
+        <div className="mb-6 p-4 bg-yellow-900/30 border border-yellow-600/50 rounded-lg">
+          <p className="text-yellow-300 text-sm flex items-center gap-2">
+            <span className="text-yellow-500">⚠</span>
+            {disclaimer}
+          </p>
+        </div>
+      )}
 
       {/* Introduction si fournie */}
       {introduction && (

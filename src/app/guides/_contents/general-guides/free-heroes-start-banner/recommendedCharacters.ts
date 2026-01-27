@@ -270,16 +270,16 @@ export const customBannerPicks = [
         }
     },
     {
-        names: ["Astei", "Liselotte"],
+        names: ["Astei", "Liselotte", "Viella"],
         reason: {
-            en: "Pure healers.",
-            jp: "純ヒーラー。",
-            kr: "순수 힐러.",
-            zh: "纯治疗角色。"
+            en: "Healers.",
+            jp: "ヒーラー。",
+            kr: "힐러.",
+            zh: "治疗角色。"
         }
     },
     {
-        names: ["Drakhan", "Regina", "Caren", "Vlada", "Maxie"],
+        names: ["Drakhan", "Regina", "Caren", "Vlada", "Maxie","Fortuna"],
         reason: {
             en: "DPS with special use cases.",
             jp: "特定用途向けDPS。",

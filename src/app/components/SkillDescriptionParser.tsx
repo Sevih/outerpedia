@@ -90,33 +90,25 @@ function parseElementsAndClasses(text: string): React.ReactNode[] {
     const beforeChar = match.index > 0 ? text[match.index - 1] : ' '
     const isAfterSpace = beforeChar === ' ' || beforeChar === '(' || beforeChar === '\n'
 
-    // Check if there's a capitalized word before this match (for proper nouns like "Furious Earth")
-    // Also handles cases like "The People on Earth" where connectors appear between capitalized words
+    // Check if there's a capitalized word DIRECTLY before this match (for proper nouns like "Furious Earth")
+    // Only considers the immediately preceding word - connectors break the chain
     let isPartOfProperNoun = false
     if (isAfterSpace && match.index >= 2) {
-      // Look back to find all previous words in this phrase
+      // Look at the word directly before this match
       const textBefore = text.slice(0, match.index).trim()
       const words = textBefore.split(/\s+/)
 
-      // Walk backwards through words to detect proper noun pattern
-      // Pattern: capitalized words with optional lowercase connectors (on, of, the, etc.)
-      for (let i = words.length - 1; i >= 0; i--) {
-        const word = words[i].replace(/[,.:;!?]$/, '')
-        const wordLower = word.toLowerCase()
-        const isKeyword = allKeywords.some(k => k.toLowerCase() === wordLower)
+      if (words.length > 0) {
+        const prevWord = words[words.length - 1].replace(/[,.:;!?\-/]+$/, '')
+        const prevWordLower = prevWord.toLowerCase()
+        const isKeyword = allKeywords.some(k => k.toLowerCase() === prevWordLower)
 
-        // If it's a connector word, continue looking back
-        if (TITLE_CONNECTORS.includes(wordLower)) {
-          continue
-        }
-
-        // If it's a capitalized word (not a keyword), we're in a proper noun
-        if (word && word.length > 1 && /^[A-Z]/.test(word) && !isKeyword) {
+        // Only consider it a proper noun if the DIRECTLY preceding word is capitalized
+        // and is NOT a connector (of, the, on, etc.) and NOT a keyword
+        if (prevWord && prevWord.length > 1 && /^[A-Z]/.test(prevWord) &&
+            !isKeyword && !TITLE_CONNECTORS.includes(prevWordLower)) {
           isPartOfProperNoun = true
         }
-
-        // Stop at first non-connector word
-        break
       }
     }
 

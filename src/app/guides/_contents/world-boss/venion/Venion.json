@@ -1,0 +1,47 @@
+{
+    "january2026": {
+        "Light and Dark": {
+            "icon": "light",
+            "team": [
+                ["Gnosis Dahlia", "Regina", "Monad Eva"],
+                ["Drakhan", "Demiurge Stella", "Demiurge Astei"],
+                ["Demiurge Luna", "Maxwell", "Demiurge Astei"],
+                ["Monad Eva", "Drakhan", "Demiurge Stella", "Demiurge Astei", "Demiurge Luna", "Maxwell"]
+            ],
+            "note": []
+        },
+        "Fire Water Earth": {
+            "icon": "fire",
+            "team": [
+                ["Tamara", "Tamamo-no-Mae"],
+                ["Veronica", "Mene"],
+                ["Caren", "Kanon"],
+                ["Lyla", "Mene", "Laplace"]
+            ],
+            "note": []
+        }
+    },
+    "june2025": {
+        "Light and Dark": {
+            "icon": "light",
+            "team": [
+                ["Gnosis Dahlia", "Regina", "Monad Eva"],
+                ["Drakhan", "Demiurge Stella", "Demiurge Astei"],
+                ["Demiurge Luna", "Maxwell", "Demiurge Astei"],
+                ["Monad Eva", "Drakhan", "Demiurge Stella", "Demiurge Astei", "Demiurge Luna", "Maxwell"]
+            ],
+            "note": []
+        },
+        "Fire Water Earth": {
+            "icon": "fire",
+            "team": [
+                ["Tamara", "Tamamo-no-Mae"],
+                ["Veronica", "Mene"],
+                ["Caren", "Kanon"],
+                ["Lyla", "Mene", "Laplace"]
+            ],
+            "note": []
+        }
+    },
+    "legacy2024": {}
+}

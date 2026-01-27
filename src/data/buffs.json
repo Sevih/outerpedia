@@ -1095,7 +1095,7 @@
         "description_jp": "MG-102開拓砲が発動した後、 光・闇属性の敵の行動ゲージが 80%のみ回復する。(解除不可)",
         "description_kr": "MG-102 개척포 사용 후 명/암속성 적의 행동 게이지는 80%만 회복 됩니다. (해제 불가)",
         "description_zh": "使用MG-102开拓炮后,\\n光属性/暗属性敌人的行动值\\n仅恢复80%。(无法解除)",
-        "icon": "IG_Buff_Effect_4086013_A_Interruption"
+        "icon": "IG_Buff_Effect_4086013_B_Interruption"
     },
     {
         "name": "UNIQUE_VENION_C",
@@ -1121,7 +1121,7 @@
         "description_jp": "ターン開始時、火・水・地属性の敵の スキルターンが1ターン増加する。 緊急プロトコル:撲滅が発動した後、 光・闇属性の敵を即死させる。 (解除不可)",
         "description_kr": "턴 시작 시 화/수/지속성 적의 스킬 쿨타임이 1턴 증가합니다. 긴급 프로토콜 : 박멸 사용 시 명/암속성 적을 즉사시킵니다. (해제 불가)",
         "description_zh": "回合开始时,火属性/水属性/土属性敌人\\n的技能冷却时间增加1回合。\\n使用紧急协议:消灭时,\\n光属性/暗属性敌人即死。(无法解除)",
-        "icon": "IG_Buff_Effect_4086014_A_Interruption"
+        "icon": "IG_Buff_Effect_4086014_B_Interruption"
     },
     {
         "name": "UNIQUE_VENION_E",

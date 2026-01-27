@@ -1309,22 +1309,22 @@
     "guideId": "venion",
     "characters": [
       "Caren",
-      "Demiurge Astei",
       "Demiurge Luna",
-      "Demiurge Stella",
       "Drakhan",
       "Gnosis Dahlia",
       "Kanon",
       "Laplace",
-      "Lyla",
-      "Maxwell",
-      "Mene",
       "Monad Eva",
       "Regina",
       "Ryu Lion",
       "Tamamo-no-Mae",
       "Tamara",
-      "Veronica"
+      "Veronica",
+      "Demiurge Stella",
+      "Demiurge Astei",
+      "Maxwell",
+      "Mene",
+      "Lyla"
     ]
   },
   "guild-raid/madman-laboratory": {
