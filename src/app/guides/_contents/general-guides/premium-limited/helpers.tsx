@@ -17,6 +17,7 @@ import type { TenantKey } from "@/tenants/config"
 import { l, lRec} from "@/lib/localize"
 import ALL_CHARACTERS from "@/data/_allCharacters.json"
 import CharacterInlineTag from "@/app/components/CharacterLinkCard"
+import parseText from "@/utils/parseText"
 
 /* ===================== Character Index ===================== */
 export const CHARACTER_INDEX: Record<string, CharacterLite> = Object.fromEntries(
@@ -86,6 +87,7 @@ export const PREMIUM_ORDER_2ND: Entry[] = [
 export const PREMIUM_ORDER_3RD: Entry[] = [
     { name: "Demiurge Drakhan", stars: 3, op: null },
     { name: "Demiurge Delta", stars: 3, op: null },
+    { name: "Demiurge Vlada", stars: 3, op: null },
 ]
 
 export const TRANSCEND_PRIORITY: Entry[] = [
@@ -451,7 +453,7 @@ export function HeroCard({ h, char, lang }: HeroCardProps) {
                 </div>
             </header>
 
-            <p className="mt-3 mb-4 whitespace-pre-line text-sm text-gray-200">{l(h, 'review', lang)}</p>
+            <p className="mt-3 mb-4 whitespace-pre-line text-sm text-gray-200">{parseText(l(h, 'review', lang))}</p>
 
             <div className="grid gap-4">
                 <div className="grid gap-4 md:grid-cols-2">

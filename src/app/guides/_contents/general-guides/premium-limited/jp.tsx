@@ -44,9 +44,13 @@ export default function PremiumLimitedGuide() {
         window.history.replaceState(null, "", newUrl)
     }
 
-    const sorted = useMemo(() => {
+    const entries = useMemo(() => {
         const list = (DATA as PremiumLimitedData)[selected] ?? []
-        return [...list].sort((a, b) => a.name.localeCompare(b.name))
+        return [...list].sort((a, b) => {
+            const idA = Number(CHARACTER_INDEX[toKebabCase(a.name)]?.ID) || 0
+            const idB = Number(CHARACTER_INDEX[toKebabCase(b.name)]?.ID) || 0
+            return idB - idA
+        })
     }, [selected])
 
     return (
@@ -65,13 +69,13 @@ export default function PremiumLimitedGuide() {
                 <PremiumPullingOrder charIndex={CHARACTER_INDEX} lang={LANG} />
             )}
 
-            {sorted.length === 0 ? (
+            {entries.length === 0 ? (
                 <div className="rounded-md border border-gray-700 p-6 text-sm text-gray-300">
                     {lRec(LABELS.noEntries, LANG).replace("{tab}", selected)}
                 </div>
             ) : (
                 <div className="grid gap-6">
-                    {sorted.map((h) => {
+                    {entries.map((h) => {
                         const char = CHARACTER_INDEX[toKebabCase(h.name)]
                         return <HeroCard key={h.name} h={h} char={char} lang={LANG} />
                     })}

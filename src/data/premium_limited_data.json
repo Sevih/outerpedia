@@ -1,6 +1,30 @@
 {
   "Premium": [
     {
+      "name": "Monad Iota",
+      "review": "A support in line with {E/Dark}'s selfish nature. She boosts {E/Dark} allies' damage more than other elements, and wants as many in the team as possible to ready her skill 3 faster. 5-star completes her support arsenal, giving {E/Dark} access to the full array of damage increasing buffs and debuffs. However, for other elements there are more accessible options available, who also work for Dark as long as there is no element restriction. Her skill 3 has a unique {D/BT_STUN} effect against Light enemies ({D/BT_GOLDEN_CURSE}), which can bypass the regular Stun Immunity. Her 4-star and 6-star transcends allow her to set a new speed limit alongside Demiurge Vlada. This makes her a highly valuable pick for Arena. The accessibility of alternatives in PvE reduces her urgency here.",
+      "recommended_pve": "3 to 5",
+      "recommended_pvp": "6",
+      "impact": {
+        "3": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "1",
+          "pvp": "3"
+        },
+        "5": {
+          "pve": "2",
+          "pvp": "3"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "5"
+        }
+      }
+    },
+    {
       "name": "Demiurge Stella",
       "review": "Sturdy aoe dps with a fixed damage chain finisher. She does everything she needs to at 3-star, so her transcends are mostly a stat bonus. Her burst 3 is very expensive, the barrier at 6-star will rarely show its worth in pve and may be a negative in arena against certain teams.",
       "review_jp": "固定ダメージチェーンフィニッシャーを持つ頑丈な範囲DPS。3つ星で必要なことはすべてこなせるため、超越は主にステータスボーナスとなる。バースト3は非常に高コストで、6つ星のバリアはPvEではほとんど価値を発揮せず、アリーナでは特定のチームに対してマイナスになる場合がある。",
@@ -9,10 +33,22 @@
       "recommended_pve": "4",
       "recommended_pvp": "5 to 6",
       "impact": {
-        "3": { "pve": "4", "pvp": "3" },
-        "4": { "pve": "2", "pvp": "2" },
-        "5": { "pve": "2", "pvp": "2" },
-        "6": { "pve": "1", "pvp": "2" }
+        "3": {
+          "pve": "4",
+          "pvp": "3"
+        },
+        "4": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "2"
+        }
       }
     },
     {
@@ -24,10 +60,22 @@
       "recommended_pve": "Any",
       "recommended_pvp": "5",
       "impact": {
-        "3": { "pve": "3", "pvp": "4" },
-        "4": { "pve": "2", "pvp": "2" },
-        "5": { "pve": "3", "pvp": "3" },
-        "6": { "pve": "3", "pvp": "2" }
+        "3": {
+          "pve": "3",
+          "pvp": "4"
+        },
+        "4": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "3"
+        },
+        "6": {
+          "pve": "3",
+          "pvp": "2"
+        }
       }
     },
     {
@@ -39,10 +87,22 @@
       "recommended_pve": "3",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "2", "pvp": "2" },
-        "4": { "pve": "1", "pvp": "2" },
-        "5": { "pve": "1", "pvp": "2" },
-        "6": { "pve": "1", "pvp": "3" }
+        "3": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "1",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "1",
+          "pvp": "2"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "3"
+        }
       }
     },
     {
@@ -54,10 +114,22 @@
       "recommended_pve": "5",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "3", "pvp": "3" },
-        "4": { "pve": "2", "pvp": "1" },
-        "5": { "pve": "3", "pvp": "1" },
-        "6": { "pve": "1", "pvp": "4" }
+        "3": {
+          "pve": "3",
+          "pvp": "3"
+        },
+        "4": {
+          "pve": "2",
+          "pvp": "1"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "1"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "4"
+        }
       }
     },
     {
@@ -69,10 +141,22 @@
       "recommended_pve": "5",
       "recommended_pvp": "5 to 6",
       "impact": {
-        "3": { "pve": "5", "pvp": "2" },
-        "4": { "pve": "4", "pvp": "3" },
-        "5": { "pve": "5", "pvp": "4" },
-        "6": { "pve": "1", "pvp": "4" }
+        "3": {
+          "pve": "5",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "4",
+          "pvp": "3"
+        },
+        "5": {
+          "pve": "5",
+          "pvp": "4"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "4"
+        }
       }
     },
     {
@@ -84,10 +168,22 @@
       "recommended_pve": "4",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "3", "pvp": "1" },
-        "4": { "pve": "5", "pvp": "1" },
-        "5": { "pve": "3", "pvp": "1" },
-        "6": { "pve": "4", "pvp": "5" }
+        "3": {
+          "pve": "3",
+          "pvp": "1"
+        },
+        "4": {
+          "pve": "5",
+          "pvp": "1"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "1"
+        },
+        "6": {
+          "pve": "4",
+          "pvp": "5"
+        }
       }
     },
     {
@@ -99,10 +195,22 @@
       "recommended_pve": "3",
       "recommended_pvp": "5 to 6",
       "impact": {
-        "3": { "pve": "2", "pvp": "2" },
-        "4": { "pve": "1", "pvp": "2" },
-        "5": { "pve": "1", "pvp": "3" },
-        "6": { "pve": "2", "pvp": "3" }
+        "3": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "1",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "1",
+          "pvp": "3"
+        },
+        "6": {
+          "pve": "2",
+          "pvp": "3"
+        }
       }
     },
     {
@@ -114,10 +222,22 @@
       "recommended_pve": "Any",
       "recommended_pvp": "Any",
       "impact": {
-        "3": { "pve": "4", "pvp": "4" },
-        "4": { "pve": "4", "pvp": "4" },
-        "5": { "pve": "4", "pvp": "4" },
-        "6": { "pve": "4", "pvp": "4" }
+        "3": {
+          "pve": "4",
+          "pvp": "4"
+        },
+        "4": {
+          "pve": "4",
+          "pvp": "4"
+        },
+        "5": {
+          "pve": "4",
+          "pvp": "4"
+        },
+        "6": {
+          "pve": "4",
+          "pvp": "4"
+        }
       }
     },
     {
@@ -129,10 +249,22 @@
       "recommended_pve": "Any",
       "recommended_pvp": "4 to 6",
       "impact": {
-        "3": { "pve": "3", "pvp": "2" },
-        "4": { "pve": "2", "pvp": "5" },
-        "5": { "pve": "3", "pvp": "4" },
-        "6": { "pve": "3", "pvp": "3" }
+        "3": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "2",
+          "pvp": "5"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "4"
+        },
+        "6": {
+          "pve": "3",
+          "pvp": "3"
+        }
       }
     }
   ],
@@ -146,10 +278,22 @@
       "recommended_pve": "4",
       "recommended_pvp": "Any",
       "impact": {
-        "3": { "pve": "4", "pvp": "3" },
-        "4": { "pve": "4", "pvp": "2" },
-        "5": { "pve": "3", "pvp": "2" },
-        "6": { "pve": "3", "pvp": "3" }
+        "3": {
+          "pve": "4",
+          "pvp": "3"
+        },
+        "4": {
+          "pve": "4",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "6": {
+          "pve": "3",
+          "pvp": "3"
+        }
       }
     },
     {
@@ -161,10 +305,22 @@
       "recommended_pve": "4",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "5", "pvp": "1" },
-        "4": { "pve": "5", "pvp": "1" },
-        "5": { "pve": "1", "pvp": "1" },
-        "6": { "pve": "2", "pvp": "2" }
+        "3": {
+          "pve": "5",
+          "pvp": "1"
+        },
+        "4": {
+          "pve": "5",
+          "pvp": "1"
+        },
+        "5": {
+          "pve": "1",
+          "pvp": "1"
+        },
+        "6": {
+          "pve": "2",
+          "pvp": "2"
+        }
       }
     },
     {
@@ -176,10 +332,22 @@
       "recommended_pve": "5 (support) 6 (dps)",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "4", "pvp": "3" },
-        "4": { "pve": "3", "pvp": "3" },
-        "5": { "pve": "4", "pvp": "3" },
-        "6": { "pve": "5", "pvp": "4" }
+        "3": {
+          "pve": "4",
+          "pvp": "3"
+        },
+        "4": {
+          "pve": "3",
+          "pvp": "3"
+        },
+        "5": {
+          "pve": "4",
+          "pvp": "3"
+        },
+        "6": {
+          "pve": "5",
+          "pvp": "4"
+        }
       }
     },
     {
@@ -191,10 +359,22 @@
       "recommended_pve": "Any",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "3", "pvp": "2" },
-        "4": { "pve": "3", "pvp": "2" },
-        "5": { "pve": "3", "pvp": "1" },
-        "6": { "pve": "4", "pvp": "4" }
+        "3": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "1"
+        },
+        "6": {
+          "pve": "4",
+          "pvp": "4"
+        }
       }
     },
     {
@@ -206,10 +386,22 @@
       "recommended_pve": "4",
       "recommended_pvp": "Any",
       "impact": {
-        "3": { "pve": "4", "pvp": "5" },
-        "4": { "pve": "4", "pvp": "1" },
-        "5": { "pve": "3", "pvp": "1" },
-        "6": { "pve": "1", "pvp": "4" }
+        "3": {
+          "pve": "4",
+          "pvp": "5"
+        },
+        "4": {
+          "pve": "4",
+          "pvp": "1"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "1"
+        },
+        "6": {
+          "pve": "1",
+          "pvp": "4"
+        }
       }
     },
     {
@@ -221,10 +413,22 @@
       "recommended_pve": "4 to 5",
       "recommended_pvp": "4 to 6",
       "impact": {
-        "3": { "pve": "3", "pvp": "3" },
-        "4": { "pve": "3", "pvp": "5" },
-        "5": { "pve": "4", "pvp": "4" },
-        "6": { "pve": "2", "pvp": "5" }
+        "3": {
+          "pve": "3",
+          "pvp": "3"
+        },
+        "4": {
+          "pve": "3",
+          "pvp": "5"
+        },
+        "5": {
+          "pve": "4",
+          "pvp": "4"
+        },
+        "6": {
+          "pve": "2",
+          "pvp": "5"
+        }
       }
     },
     {
@@ -236,10 +440,22 @@
       "recommended_pve": "Any",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "5", "pvp": "3" },
-        "4": { "pve": "4", "pvp": "2" },
-        "5": { "pve": "4", "pvp": "2" },
-        "6": { "pve": "2", "pvp": "5" }
+        "3": {
+          "pve": "5",
+          "pvp": "3"
+        },
+        "4": {
+          "pve": "4",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "4",
+          "pvp": "2"
+        },
+        "6": {
+          "pve": "2",
+          "pvp": "5"
+        }
       }
     },
     {
@@ -251,10 +467,22 @@
       "recommended_pve": "4",
       "recommended_pvp": "4",
       "impact": {
-        "3": { "pve": "4", "pvp": "1" },
-        "4": { "pve": "4", "pvp": "1" },
-        "5": { "pve": "1", "pvp": "1" },
-        "6": { "pve": "3", "pvp": "1" }
+        "3": {
+          "pve": "4",
+          "pvp": "1"
+        },
+        "4": {
+          "pve": "4",
+          "pvp": "1"
+        },
+        "5": {
+          "pve": "1",
+          "pvp": "1"
+        },
+        "6": {
+          "pve": "3",
+          "pvp": "1"
+        }
       }
     },
     {
@@ -266,10 +494,22 @@
       "recommended_pve": "6",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "1", "pvp": "1" },
-        "4": { "pve": "2", "pvp": "2" },
-        "5": { "pve": "2", "pvp": "1" },
-        "6": { "pve": "2", "pvp": "1" }
+        "3": {
+          "pve": "1",
+          "pvp": "1"
+        },
+        "4": {
+          "pve": "2",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "2",
+          "pvp": "1"
+        },
+        "6": {
+          "pve": "2",
+          "pvp": "1"
+        }
       }
     },
     {
@@ -281,10 +521,22 @@
       "recommended_pve": "Any",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "4", "pvp": "1" },
-        "4": { "pve": "3", "pvp": "2" },
-        "5": { "pve": "3", "pvp": "2" },
-        "6": { "pve": "4", "pvp": "4" }
+        "3": {
+          "pve": "4",
+          "pvp": "1"
+        },
+        "4": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "6": {
+          "pve": "4",
+          "pvp": "4"
+        }
       }
     },
     {
@@ -296,10 +548,22 @@
       "recommended_pve": "4 to 5",
       "recommended_pvp": "6",
       "impact": {
-        "3": { "pve": "3", "pvp": "2" },
-        "4": { "pve": "4", "pvp": "3" },
-        "5": { "pve": "4", "pvp": "2" },
-        "6": { "pve": "2", "pvp": "4" }
+        "3": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "4",
+          "pvp": "3"
+        },
+        "5": {
+          "pve": "4",
+          "pvp": "2"
+        },
+        "6": {
+          "pve": "2",
+          "pvp": "4"
+        }
       }
     }
   ]

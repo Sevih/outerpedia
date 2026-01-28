@@ -194,5 +194,20 @@
         "con": [
             "Debuffs duration decrease needs her to Revenge, and may not always be enough to remove them"
         ]
-    }
+    },
+      "akari": {
+    "pro": [
+      "excellent PvP-oriented opener and control unit",
+      "prevents reaction skills like {B/BT_STAT|ST_COUNTER_RATE} or {B/SYS_BUFF_REVENGE} from triggering when using Saikashuu Gunnery",
+      "provides high utility with {D/BT_STAT|ST_DEF},{D/BT_STAT|ST_ATK},{D/BT_STAT|ST_BUFF_RESIST} and {D/BT_SEALED} debuffs",
+      "can extend existing debuffs, making her a great partner for units with debuff Inducing skills ",
+      "effective against bosses that rely on buffs by applying {D/BT_SEALED}"
+    ],
+    "con": [
+      "primarily focused on PvP and High-End PvE, offering less value in general PvE progression",
+      "requires a specific team setup to maximize her debuff extension capabilities",
+      "requires Effectiveness to land debuffs consistently",
+      "requires max skill upgrades for debuffs to land consistently"
+    ]
+  }
 }
