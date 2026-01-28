@@ -46,11 +46,7 @@ export default function PremiumLimitedGuide() {
 
     const entries = useMemo(() => {
         const list = (DATA as PremiumLimitedData)[selected] ?? []
-        return [...list].sort((a, b) => {
-            const idA = Number(CHARACTER_INDEX[toKebabCase(a.name)]?.ID) || 0
-            const idB = Number(CHARACTER_INDEX[toKebabCase(b.name)]?.ID) || 0
-            return idB - idA
-        })
+        return [...list].sort((a, b) => a.name.localeCompare(b.name))
     }, [selected])
 
     return (

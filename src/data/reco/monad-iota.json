@@ -29,7 +29,7 @@
         { "name": "Speed", "count": 4 }
       ]
     ],
-    "SubstatPrio": "SPD>ACC>CHC>ATK>CHD",
+    "SubstatPrio": "SPD>EFF>CHC>ATK>CHD",
     "Note": "",
     "Talisman": [
       "Rogue's Charm",
@@ -67,10 +67,9 @@
         { "name": "Speed", "count": 4 }
       ]
     ],
-    "SubstatPrio": "SPD>ACC>CHC>ATK>CHD",
+    "SubstatPrio": "SPD>EFF>CHC>ATK>CHD",
     "Note": "",
     "Talisman": [
-      "Rogue's Charm",
       "Mage's Charm",
       "Assassin's Charm"
     ]

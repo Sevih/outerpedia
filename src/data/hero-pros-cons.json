@@ -195,19 +195,51 @@
             "Debuffs duration decrease needs her to Revenge, and may not always be enough to remove them"
         ]
     },
-      "akari": {
-    "pro": [
-      "excellent PvP-oriented opener and control unit",
-      "prevents reaction skills like {B/BT_STAT|ST_COUNTER_RATE} or {B/SYS_BUFF_REVENGE} from triggering when using Saikashuu Gunnery",
-      "provides high utility with {D/BT_STAT|ST_DEF},{D/BT_STAT|ST_ATK},{D/BT_STAT|ST_BUFF_RESIST} and {D/BT_SEALED} debuffs",
-      "can extend existing debuffs, making her a great partner for units with debuff Inducing skills ",
-      "effective against bosses that rely on buffs by applying {D/BT_SEALED}"
-    ],
-    "con": [
-      "primarily focused on PvP and High-End PvE, offering less value in general PvE progression",
-      "requires a specific team setup to maximize her debuff extension capabilities",
-      "requires Effectiveness to land debuffs consistently",
-      "requires max skill upgrades for debuffs to land consistently"
-    ]
-  }
+    "akari": {
+        "pro": [
+            "excellent PvP-oriented opener and control unit",
+            "prevents reaction skills like {B/BT_STAT|ST_COUNTER_RATE} or {B/SYS_BUFF_REVENGE} from triggering when using Saikashuu Gunnery",
+            "provides high utility with {D/BT_STAT|ST_DEF},{D/BT_STAT|ST_ATK},{D/BT_STAT|ST_BUFF_RESIST} and {D/BT_SEALED} debuffs",
+            "can extend existing debuffs, making her a great partner for units with debuff Inducing skills ",
+            "effective against bosses that rely on buffs by applying {D/BT_SEALED}"
+        ],
+        "con": [
+            "primarily focused on PvP and High-End PvE, offering less value in general PvE progression",
+            "requires a specific team setup to maximize her debuff extension capabilities",
+            "requires Effectiveness to land debuffs consistently",
+            "requires max skill upgrades for debuffs to land consistently"
+        ]
+    },
+    "alice": {
+        "pro": [
+            "excellent utility mage with the ability to strip all buffs from enemies using {D/BT_REMOVE_BUFF}",
+            "provides consistent {D/BT_SEALED} to prevent enemies from regaining buffs",
+            "great for countering shield-heavy or immunity-reliant teams in PvP",
+            "valuable in specific PvE content like World Boss or Guild Raid where buff removal is mandatory",
+            "can boost own priority with her 2nd Skill(Hatter's Teacup), Providing a smooth transition to her 3rd skill (Alice In Wonderland)",
+            "can boost earth allies outgoing damage with {D/IG_Buff_2000020_Interruption_D}",
+            "If the enemy unit is of the water element her 2nd Skill(Hatter's Teacup) does an additional effect of{D/BT_STAT|ST_SPEED}  "
+        ],
+        "con": [
+            "highly dependent on effectiveness to ensure her debuffs and strips land",
+            "requires max skill upgrades for debuffs to land consistently",
+            "2nd Skill(Hatter's Teacup) is dependent on the number of units for the priority boost effect",
+            "doesn't block reaction skills such as {B/BT_STAT|ST_COUNTER_RATE} or {B/SYS_BUFF_REVENGE} from triggering"
+        ]
+    },
+    "dahlia": {
+        "pro": [
+            "powerful crowd control with {D/BT_FREEZE} and {D/BT_STAT|ST_SPEED} reduction",
+            "3rd skill(Diamond Dust) prevents enemy reaction skills such as {B/BT_STAT|ST_COUNTER_RATE}, {B/SYS_BUFF_REVENGE} and {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}",
+            "2nd Skill(Absolute Zero) strips buffs from enemies, making her effective against units with buffs",
+            "high base speed along with EE allows her to contest the first turn in PvP",
+            "can boost own priority with 1st skill(Icicle Lance) ensuring a fast cycle between skill"
+        ],
+        "con": [
+            "requires extremely high Speed gear to function as an opener in PvP",
+            "niche pick in PvE due to a lot of bosses having innate immunity against CC",
+            "Low sustain damage, offering less value in general PvE progression",
+            "requires max skill upgrades for debuffs to land consistently"
+        ]
+    }
 }
