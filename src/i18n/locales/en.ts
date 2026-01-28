@@ -820,6 +820,7 @@ const en = {
   'progress.task.defeat-doppelganger': 'Defeat the Doppelgänger',
   'progress.task.special-request-ecology': 'Special Request: Ecology Study',
   'progress.task.special-request-identification': 'Special Request: Identification',
+  'progress.task.story-hard': 'Story (Hard)',
   'progress.task.elemental-tower': 'Elemental Tower',
   'progress.task.memorial-match': 'Memorial Match',
   'progress.task.ad-stamina': 'Ad Stamina',

@@ -820,6 +820,7 @@ const zh = {
   'progress.task.defeat-doppelganger': '击退二重身',
   'progress.task.special-request-ecology': '特别委托：生态调查',
   'progress.task.special-request-identification': '特别委托：查清身份',
+  'progress.task.story-hard': '故事（困难）',
   'progress.task.elemental-tower': '元素之塔',
   'progress.task.memorial-match': '纪念赛',
   'progress.task.ad-stamina': '广告体力',

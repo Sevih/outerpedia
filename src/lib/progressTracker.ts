@@ -327,7 +327,7 @@ export const ProgressTracker = {
 
   /**
    * Toggle all sweepable content (Challenge Content Sweep All)
-   * Includes: Bounty Hunter, Bandit Chase, Upgrade Stone, Doppelganger, Special Requests, Memorial Match
+   * Includes: Bounty Hunter, Bandit Chase, Upgrade Stone, Doppelganger, Special Requests, Memorial Match, Story Hard
    * If all are completed → reset to 0, otherwise → complete all
    */
   toggleAllSweepContent(): void {
@@ -340,6 +340,7 @@ export const ProgressTracker = {
       'special-request-ecology',
       'special-request-identification',
       'memorial-match',
+      'story-hard',
     ]
 
     // Check if all sweepable tasks are completed

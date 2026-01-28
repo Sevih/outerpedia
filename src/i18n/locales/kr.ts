@@ -820,6 +820,7 @@ const kr = {
   'progress.task.defeat-doppelganger': '도플갱어 퇴치',
   'progress.task.special-request-ecology': '특별 의뢰 : 생태 조사',
   'progress.task.special-request-identification': '특별 의뢰 : 정체 규명',
+  'progress.task.story-hard': '스토리 (하드)',
   'progress.task.elemental-tower': '엘레멘탈 타워',
   'progress.task.memorial-match': '메모리얼 대전',
   'progress.task.ad-stamina': '광고 스태미나',

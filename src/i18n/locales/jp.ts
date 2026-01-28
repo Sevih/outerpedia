@@ -820,6 +820,7 @@ const jp = {
   'progress.task.defeat-doppelganger': '自己像幻視退治',
   'progress.task.special-request-ecology': '特別依頼:生態調査',
   'progress.task.special-request-identification': '特別依頼:正体究明',
+  'progress.task.story-hard': 'ストーリー(ハード)',
   'progress.task.elemental-tower': 'エレメンタルタワー',
   'progress.task.memorial-match': 'メモリアル対戦',
   'progress.task.ad-stamina': '広告スタミナ',
