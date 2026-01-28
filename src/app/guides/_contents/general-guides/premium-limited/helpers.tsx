@@ -87,7 +87,7 @@ export const PREMIUM_ORDER_2ND: Entry[] = [
 export const PREMIUM_ORDER_3RD: Entry[] = [
     { name: "Demiurge Drakhan", stars: 3, op: null },
     { name: "Demiurge Delta", stars: 3, op: null },
-    { name: "Demiurge Vlada", stars: 3, op: null },
+    { name: "Monad Iota", stars: 3, op: null },
 ]
 
 export const TRANSCEND_PRIORITY: Entry[] = [

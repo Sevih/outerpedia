@@ -571,6 +571,11 @@
       "name": "Core Fusion Veronica",
       "offsetX": 30,
       "offsetY": 60
+    },
+    "2000111": {
+      "name": "Monad Iota",
+      "offsetX": 30,
+      "offsetY": 60
     }
   }
 }
