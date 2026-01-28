@@ -6,27 +6,9 @@ export type GearReference = {
   usage?: string
 }
 
-type BaseExclusiveEquipment = {
-  name: string
-  mainStat: string
-  effect: string
-  effect10?: string
-  icon_effect?: string
-  rank?: string
-  buff?: string[]
-  debuff?: string[]
-}
-
-export type ExclusiveEquipment = WithLocalizedFields<
-  WithLocalizedFields<
-    WithLocalizedFields<
-      WithLocalizedFields<BaseExclusiveEquipment, 'name'>,
-      'mainStat'
-    >,
-    'effect'
-  >,
-  'effect10'
->
+// ExclusiveEquipment is defined in @/types/character.ts (single source of truth)
+// Re-exported here for backwards compatibility with existing imports
+export type { ExclusiveEquipment, ExclusiveEquipmentBase } from './character'
 
 
 export type RecommendedGearSet = {

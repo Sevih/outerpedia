@@ -1,5 +1,6 @@
 // src/types/types.ts
 import type { WithLocalizedFields } from '@/types/common'
+import type { RoleType } from '@/types/enums'
 
 export type StatBlock = {
   atk: number
@@ -32,15 +33,8 @@ export type ClassDataMap = {
   [className: string]: ClassData
 }
 
-export interface ExclusiveEquipment {
-  name: string
-  mainStat: string
-  effect: string
-  effect10?: string
-  icon_effect: string // icône de l'effet, pas de l'équipement
-  rank?: string
-}
-
+// ExclusiveEquipment is defined in @/types/character.ts (single source of truth)
+// Import from there or from @/types/equipment.ts which re-exports it
 
 type EffectType = 'buff' | 'debuff'
 
@@ -70,7 +64,8 @@ export interface SkillLite {
   [key: string]: string[] | string | undefined
 }
 
-export type RoleType = 'DPS' | 'Support' | 'Sustain'
+// RoleType is defined in @/types/enums.ts (lowercase: 'dps' | 'support' | 'sustain')
+// Import from there instead of redefining here
 
 export type EffectsBySource = {
   SKT_FIRST: { buff: string[]; debuff: string[] }

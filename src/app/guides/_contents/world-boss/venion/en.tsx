@@ -38,7 +38,6 @@ export default function VenionGuide() {
     <GuideTemplate
       title="Walking Fortress Vault Venion World Boss Guide"
       introduction="Venion is a two-phase world boss that requires adapting your team composition based on the boss's buff state. This guide covers strategies for defeating this boss up to the Extreme League."
-      disclaimer="This guide is currently being updated for the January 2026 version."
       defaultVersion="january2026"
       versions={{
         january2026: {

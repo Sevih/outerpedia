@@ -184,7 +184,7 @@ function getEEText(
     base: 'effect' | 'effect10',
     langKey: TenantKey
 ): string | undefined {
-    const value = l(ee as Record<string, unknown>, base, langKey);
+    const value = l(ee as unknown as Record<string, unknown>, base, langKey);
     return typeof value === 'string' ? value : undefined; // évite buff/debuff (string[])
 }
 

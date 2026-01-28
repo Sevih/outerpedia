@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
 import eeRaw from '@/data/ee.json'
-import type { ExclusiveEquipment } from '@/types/character'
-import type { Character } from '@/types/character'
+import type { ExclusiveEquipment, Character } from '@/types/character'
+import type { RoleType } from '@/types/enums'
 import { getAvailableLanguages } from '@/tenants/config'
 
 const eeData: Record<string, ExclusiveEquipment> = eeRaw
@@ -48,8 +48,6 @@ function extractBuffsAndDebuffs(character: Character) {
     debuff: Array.from(debuffs),
   }
 }
-
-type RoleType = 'DPS' | 'Support' | 'Sustain'
 
 function isNonEmptyString(x: unknown): x is string {
   return typeof x === 'string' && x.trim().length > 0

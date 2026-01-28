@@ -3,7 +3,7 @@
     "name": "Speed Set",
     "type": "Set",
     "class": null,
-    "count": 70,
+    "count": 71,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -53,6 +53,7 @@
       "Mene",
       "Mero",
       "Monad Eva",
+      "Monad Iota",
       "Mystic Sage Ame",
       "Nella",
       "Noa",
@@ -300,6 +301,48 @@
     ]
   },
   {
+    "name": "Absolute Music",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 13,
+    "characters": [
+      "Akari",
+      "Charlotte",
+      "Edelweiss",
+      "Fran",
+      "Holy Night's Blessing Dianne",
+      "Maxie",
+      "Mero",
+      "Monad Iota",
+      "Mystic Sage Ame",
+      "Ryu Lion",
+      "Skadi",
+      "Stella",
+      "Valentine"
+    ]
+  },
+  {
+    "name": "Combination Simulator",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 13,
+    "characters": [
+      "Akari",
+      "Demiurge Vlada",
+      "Eliza",
+      "Fatal",
+      "Fran",
+      "Gnosis Beth",
+      "Mero",
+      "Monad Iota",
+      "Ryu Lion",
+      "Skadi",
+      "Stella",
+      "Tamara",
+      "Valentine"
+    ]
+  },
+  {
     "name": "Surefire Greatsword",
     "type": "Weapon",
     "class": "Striker",
@@ -318,46 +361,6 @@
       "Rhona",
       "Sofia",
       "Vlada"
-    ]
-  },
-  {
-    "name": "Absolute Music",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 12,
-    "characters": [
-      "Akari",
-      "Charlotte",
-      "Edelweiss",
-      "Fran",
-      "Holy Night's Blessing Dianne",
-      "Maxie",
-      "Mero",
-      "Mystic Sage Ame",
-      "Ryu Lion",
-      "Skadi",
-      "Stella",
-      "Valentine"
-    ]
-  },
-  {
-    "name": "Combination Simulator",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 12,
-    "characters": [
-      "Akari",
-      "Demiurge Vlada",
-      "Eliza",
-      "Fatal",
-      "Fran",
-      "Gnosis Beth",
-      "Mero",
-      "Ryu Lion",
-      "Skadi",
-      "Stella",
-      "Tamara",
-      "Valentine"
     ]
   },
   {
@@ -700,6 +703,18 @@
     ]
   },
   {
+    "name": "Briareos's Ambition [Ranger]",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 4,
+    "characters": [
+      "Fran",
+      "Mero",
+      "Monad Iota",
+      "Skadi"
+    ]
+  },
+  {
     "name": "Burning Soul",
     "type": "Amulet",
     "class": "Ranger",
@@ -721,6 +736,18 @@
       "Kanon",
       "Kappa",
       "Liselotte"
+    ]
+  },
+  {
+    "name": "Gorgon's Wrath [Ranger]",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 4,
+    "characters": [
+      "Demiurge Vlada",
+      "Mero",
+      "Monad Iota",
+      "Skadi"
     ]
   },
   {
@@ -748,17 +775,6 @@
     ]
   },
   {
-    "name": "Briareos's Ambition [Ranger]",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 3,
-    "characters": [
-      "Fran",
-      "Mero",
-      "Skadi"
-    ]
-  },
-  {
     "name": "Briareos's Ambition [Striker]",
     "type": "Amulet",
     "class": "Striker",
@@ -767,6 +783,17 @@
       "Caren",
       "Delta",
       "Gnosis Viella"
+    ]
+  },
+  {
+    "name": "Briareos's Recklessness [Ranger]",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 3,
+    "characters": [
+      "Demiurge Vlada",
+      "Gnosis Beth",
+      "Monad Iota"
     ]
   },
   {
@@ -798,17 +825,6 @@
     "count": 3,
     "characters": [
       "Fran",
-      "Mero",
-      "Skadi"
-    ]
-  },
-  {
-    "name": "Gorgon's Wrath [Ranger]",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 3,
-    "characters": [
-      "Demiurge Vlada",
       "Mero",
       "Skadi"
     ]
@@ -853,16 +869,6 @@
     "characters": [
       "Core Fusion Veronica",
       "Ember"
-    ]
-  },
-  {
-    "name": "Briareos's Recklessness [Ranger]",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 2,
-    "characters": [
-      "Demiurge Vlada",
-      "Gnosis Beth"
     ]
   },
   {
@@ -956,6 +962,16 @@
     ]
   },
   {
+    "name": "Meteor Mashers",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 2,
+    "characters": [
+      "Monad Iota",
+      "Mystic Sage Ame"
+    ]
+  },
+  {
     "name": "Accuracy Set",
     "type": "Set",
     "class": null,
@@ -1034,15 +1050,6 @@
     "count": 1,
     "characters": [
       "Vlada"
-    ]
-  },
-  {
-    "name": "Meteor Mashers",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 1,
-    "characters": [
-      "Mystic Sage Ame"
     ]
   },
   {

@@ -11,6 +11,7 @@ import ItemInlineDisplay from '@/app/components/ItemInline'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import EeInlineTag from '@/app/components/EeInlineTag'
 import StatInlineTag from '@/app/components/StatInlineTag'
+import SetInlineTag from '@/app/components/SetInlineTag'
 import type { BuffName, DebuffName } from '@/types/effect-names'
 import type stats from '@/data/stats.json'
 
@@ -30,6 +31,7 @@ type StatName = keyof typeof stats
  * {I-A/AmuletName}  -> amulette
  * {I-T/TalismanName} -> talisman
  * {I-I/ItemName[,ItemName2,...]} -> items (ton composant ItemInlineDisplay)
+ * {AS/SetName}      -> armor set (ex: {AS/Attack} ou {AS/Attack Set})
  */
 
 // Insère des <br /> pour chaque retour à la ligne trouvé dans `text`
@@ -49,8 +51,8 @@ function pushTextWithLineBreaks(
 
 
 export default function parseText(text: string): React.ReactNode[] {
-  // capture le type complet (B|D|S|C|E|P|P-I|EE|I-W|I-A|I-T|I-I) puis le payload jusqu'à la }
-  const regex = /\{((?:[BDSCE])|P(?:-I)?|EE|I-(?:W|A|T|I))\/([^}]+)\}/g
+  // capture le type complet (B|D|S|C|E|P|P-I|EE|I-W|I-A|I-T|I-I|AS) puis le payload jusqu'à la }
+  const regex = /\{((?:[BDSCE])|P(?:-I)?|EE|AS|I-(?:W|A|T|I))\/([^}]+)\}/g
 
   const parts: React.ReactNode[] = []
   let lastIndex = 0
@@ -114,6 +116,8 @@ export default function parseText(text: string): React.ReactNode[] {
       parts.push(<EeInlineTag key={`ee-${index}-${name}`} name={name} />)
     } else if (type === 'S') {
       parts.push(<StatInlineTag key={`s-${index}-${name}`} name={name as StatName} />)
+    } else if (type === 'AS') {
+      parts.push(<SetInlineTag key={`as-${index}-${name}`} name={name} />)
     } else {
       // fallback (ne devrait pas arriver)
       parts.push(full)

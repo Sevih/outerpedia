@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-01-28",
+    title: {
+      en: "Walking Fortress Vault Venion",
+      jp: "歩行要塞バルトベニオン",
+      kr: "보행요새 발트베니온",
+      zh: "移动要塞瓦尔特贝尼翁",
+    } as LString,
+    type: "update",
+    url: "/guides/world-boss/venion",
+    content: [
+      {
+        en: "Walking Fortress Vault Venion world boss guide updated for January 2026 version.",
+        jp: "歩行要塞バルトベニオン ワールドボスガイドが2026年1月版にアップデートされました。",
+        kr: "보행요새 발트베니온 월드 보스 가이드가 2026년 1월 버전으로 업데이트되었습니다.",
+        zh: "移动要塞瓦尔特贝尼翁 世界首领指南已更新至2026年1月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-01-27",
     title: {
       en: "New Demiurge Hero: Monad Iota",

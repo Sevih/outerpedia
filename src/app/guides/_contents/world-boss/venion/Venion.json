@@ -3,10 +3,10 @@
         "Light and Dark": {
             "icon": "light",
             "team": [
-                ["Gnosis Dahlia", "Regina", "Monad Eva"],
+                ["Gnosis Dahlia", "Regina"],
                 ["Drakhan", "Demiurge Stella", "Demiurge Astei"],
                 ["Demiurge Luna", "Maxwell", "Demiurge Astei"],
-                ["Monad Eva", "Drakhan", "Demiurge Stella", "Demiurge Astei", "Demiurge Luna", "Maxwell"]
+                ["Monad Eva","Demiurge Drakhan", "Drakhan", "Demiurge Stella", "Demiurge Astei", "Demiurge Luna", "Maxwell"]
             ],
             "note": []
         },

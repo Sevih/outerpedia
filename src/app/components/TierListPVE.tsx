@@ -11,7 +11,7 @@ import { ClassIcon } from '@/app/components/ClassIcon'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import CharacterCard from '@/app/components/CharacterCard'
 import type { Character } from '@/types/character'
-import type { ClassType, ElementType, RarityType } from '@/types/enums'
+import type { ClassType, ElementType, RarityType, RoleType } from '@/types/enums'
 import { ELEMENTS, CLASSES, RARITIES } from '@/types/enums'
 import type { LocalizedFieldNames } from '@/types/common'
 import tierListOverwrite from '@/data/stats/tier-list-overwrite.json'
@@ -43,7 +43,6 @@ type TabItem = {
 
 /* ------------------------------ Overwrite Types ---------------------------- */
 
-type RoleType = 'dps' | 'support' | 'sustain'
 type RankType = 'S' | 'A' | 'B' | 'C' | 'D' | 'E'
 
 type TranscendLevelOverwrite = {

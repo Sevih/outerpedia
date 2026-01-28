@@ -1,7 +1,6 @@
 // src/types/characters-extra.ts
 import type { CharacterLite } from '@/types/types'
-
-export type RoleType = 'DPS' | 'Support' | 'Sustain'
+import type { RoleType } from '@/types/enums'
 
 export type CharacterLiteExt = CharacterLite & {
   role?: RoleType

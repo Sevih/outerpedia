@@ -5613,6 +5613,106 @@
       ]
     }
   },
+  "monad-iota": {
+    "Speed PvE": {
+      "weaponSub": [
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Absolute Music",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "CHC",
+        "ATK",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Speed PvP": {
+      "weaponSub": [
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        },
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%",
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Ranger]",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "ACC",
+        "CHC",
+        "ATK",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
   "mystic-sage-ame": {
     "DPS pen": {
       "weaponSub": [

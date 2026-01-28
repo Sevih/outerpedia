@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import CompactRecommendedTeamCarousel from './CompactRecommendedTeamCarousel'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
-import type { NoteEntry } from "@/types/skyward"
+import type { NoteEntry } from "@/types/team"
 
 type TeamDef = {
   label: string
