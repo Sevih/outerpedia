@@ -22,8 +22,8 @@ export function hasProsCons(slug: string): boolean {
 
 function ListItem({ children, type }: { children: ReactNode; type: 'pro' | 'con' }) {
   return (
-    <li className="flex items-center justify-center gap-2 py-1.5">
-      <span className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${
+    <li className="flex items-start gap-2 py-1.5">
+      <span className={`flex-shrink-0 w-5 h-5 mt-0.5 rounded-full flex items-center justify-center ${
         type === 'pro'
           ? 'bg-emerald-500/20 text-emerald-400'
           : 'bg-rose-500/20 text-rose-400'

@@ -752,9 +752,27 @@ export const ProgressTracker = {
 
     // If we're past today's reset time and the last reset was before today's reset
     if (now >= todayResetTime && progress.lastDailyReset < todayResetTime.getTime()) {
-      Object.values(progress.daily).forEach((task) => {
-        task.completed = false
-        task.count = task.maxCount ? 0 : undefined
+      Object.entries(progress.daily).forEach(([taskId, task]) => {
+        const def = DAILY_TASK_DEFINITIONS[taskId]
+
+        // For recurring tasks with resetIntervalDays, check if enough days have passed
+        if (def?.resetIntervalDays && task.completed) {
+          const completedTime = task.lastUpdated
+          const resetAfterTime = new Date(completedTime)
+          // Reset after N daily resets from completion
+          resetAfterTime.setUTCHours(DAILY_RESET_HOUR_UTC, 0, 0, 0)
+          resetAfterTime.setUTCDate(resetAfterTime.getUTCDate() + def.resetIntervalDays)
+
+          if (now.getTime() >= resetAfterTime.getTime()) {
+            task.completed = false
+            task.count = task.maxCount ? 0 : undefined
+          }
+          // Don't reset if not enough days have passed
+        } else {
+          // Regular daily tasks reset every day
+          task.completed = false
+          task.count = task.maxCount ? 0 : undefined
+        }
       })
       progress.lastDailyReset = Date.now()
       needsSave = true
@@ -878,6 +896,28 @@ export const ProgressTracker = {
     }
 
     return next.getTime()
+  },
+
+  /**
+   * Calculate next reset time for a recurring task
+   * Returns null if task is not completed or not a recurring task
+   */
+  getNextRecurringTaskReset(taskId: string): number | null {
+    const progress = this.getProgress()
+    const task = progress.daily[taskId]
+    const def = DAILY_TASK_DEFINITIONS[taskId]
+
+    if (!task || !def?.resetIntervalDays || !task.completed) {
+      return null
+    }
+
+    const completedTime = task.lastUpdated
+    const resetAfterTime = new Date(completedTime)
+    // Reset after N daily resets from completion
+    resetAfterTime.setUTCHours(DAILY_RESET_HOUR_UTC, 0, 0, 0)
+    resetAfterTime.setUTCDate(resetAfterTime.getUTCDate() + def.resetIntervalDays)
+
+    return resetAfterTime.getTime()
   },
 
   /**

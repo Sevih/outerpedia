@@ -39,7 +39,7 @@
     "effect10_kr": "<color=#28d9ed>다들 서핑하러 갔대!</color> 사용 시 관통력 <color=#28d9ed>+20%</color>",
     "effect10_zh": "使用<color=#28d9ed>大家都去冲浪了!</color>时,穿透力<color=#28d9ed>+20%</color>",
     "icon_effect": "TI_Icon_UO_Accessary_07",
-    "rank": "B",
+    "rank": "A",
     "buff": [],
     "debuff": []
   },

@@ -79,12 +79,16 @@
     },
     "vlada": {
         "pro": [
+            "3rd skill(Apocalypse Now) resets everytime a enemy unit dies, perfect for wave clearing",
+            "2nd skill(Paths Of Glory) detonates {D/BT_DOT_BURN} with increase damage(50%), 20% more if the enemy unit is earth",
+            "all skills ignore target's resilience",
             "easy to build with attack stat",
-            "can detonate {D/BT_DOT_BURN}",
-            "her ultimate resets if it kills an enemy"
+            "benefits from teammates who can extend {D/BT_DOT_BURN}"
         ],
         "con": [
-            "benefits from teammates who can extend {D/BT_DOT_BURN} duration"
+            "dependant solely on attack stat",
+            "doesn't block reaction skills such as {B/BT_STAT|ST_COUNTER_RATE}, {B/SYS_BUFF_REVENGE} and {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}",
+            "{D/BT_DOT_BURN} stacks disappear if the unit dies"
         ]
     },
     "rey": {
@@ -240,6 +244,28 @@
             "niche pick in PvE due to a lot of bosses having innate immunity against CC",
             "Low sustain damage, offering less value in general PvE progression",
             "requires max skill upgrades for debuffs to land consistently"
+        ]
+    },
+    "ais-wallenstein": {
+        "pro": [
+            "high single-target damage output, especially against Bosses",
+            "damage scales significantly as her HP decreases, making her a strong comeback unit"
+        ],
+        "con": [
+            "risky playstyle that requires her to be at low Health to maximize potential",
+            "limited availability as a collaboration unit, making her impossible to obtain or upgrade for new players"
+        ]
+    },
+    "adelie": {
+        "pro": [
+            "effective for clearing story waves due to AoE on her second skill",
+            "good low-investment option for new players lacking 3-star DPS units"
+        ],
+        "con": [
+            "low base stats as a 2-star unit make her fall off in late-game content",
+            "lacks the burst damage or utility of top-tier strikers",
+            "requires a specific kill condition or setup to trigger her cooldown reset reliably",
+            "very squishy and easy to one-shot in PvP environments"
         ]
     }
 }

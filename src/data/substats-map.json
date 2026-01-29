@@ -5654,7 +5654,7 @@
       ],
       "sub": [
         "SPD",
-        "ACC",
+        "EFF",
         "CHC",
         "ATK",
         "CHD"
@@ -5703,7 +5703,7 @@
       ],
       "sub": [
         "SPD",
-        "ACC",
+        "EFF",
         "CHC",
         "ATK",
         "CHD"

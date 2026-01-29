@@ -1288,16 +1288,23 @@ function TaskListByCategory({
 
             {/* Tasks */}
             <div className="space-y-2">
-              {tasks.map(([key, task]) => (
-                <TaskItem
-                  key={key}
-                  task={task}
-                  labelKey={`progress.task.${key}`}
-                  onRowClick={() => onIncrement(key, type)}
-                  onCheckboxChange={() => onToggle(key, type)}
-                  t={t}
-                />
-              ))}
+              {tasks.map(([key, task]) => {
+                const def = definitions[key]
+                const nextResetTime = def?.resetIntervalDays
+                  ? ProgressTracker.getNextRecurringTaskReset(key)
+                  : null
+                return (
+                  <TaskItem
+                    key={key}
+                    task={task}
+                    labelKey={`progress.task.${key}`}
+                    onRowClick={() => onIncrement(key, type)}
+                    onCheckboxChange={() => onToggle(key, type)}
+                    t={t}
+                    nextResetTime={nextResetTime}
+                  />
+                )
+              })}
             </div>
           </div>
         )
@@ -1314,6 +1321,7 @@ function TaskItem({
   t,
   compact = false,
   definition,
+  nextResetTime,
 }: {
   task: TaskProgress
   labelKey: string
@@ -1322,6 +1330,7 @@ function TaskItem({
   t: (key: string) => string
   compact?: boolean
   definition?: TaskDefinition
+  nextResetTime?: number | null
 }) {
   // Determine label content: ItemInlineDisplay for shop items with item key, otherwise translated label
   const renderLabel = () => {
@@ -1368,6 +1377,11 @@ function TaskItem({
       {task.maxCount !== undefined && (
         <span className="text-sm text-gray-400">
           {task.count ?? 0}/{task.maxCount}
+        </span>
+      )}
+      {nextResetTime && task.completed && (
+        <span className="text-xs text-purple-400">
+          {ProgressTracker.formatTimeUntil(nextResetTime)}
         </span>
       )}
     </div>
