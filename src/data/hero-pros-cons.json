@@ -79,8 +79,8 @@
     },
     "vlada": {
         "pro": [
-            "3rd skill(Apocalypse Now) resets everytime a enemy unit dies, perfect for wave clearing",
-            "2nd skill(Paths Of Glory) detonates {D/BT_DOT_BURN} with increase damage(50%), 20% more if the enemy unit is earth",
+            "{SK/Vlada|S3} resets everytime a enemy unit dies, perfect for wave clearing",
+            "{SK/Vlada|S2} detonates {D/BT_DOT_BURN} with increase damage(50%), 20% more if the enemy unit is earth",
             "all skills ignore target's resilience",
             "easy to build with attack stat",
             "benefits from teammates who can extend {D/BT_DOT_BURN}"
@@ -127,7 +127,7 @@
         "pro": [
             "Can give the whole team {B/BT_SHIELD_BASED_CASTER}",
             "Strong chain finisher",
-            "Her Grand Blue Punishment will do more damage with more debuffs on the target"
+            "{SK/Laplace|S3} will do more damage with more debuffs on the target"
         ],
         "con": [
             "Dependent on teammates to apply debuffs for high bonus damage"
@@ -220,22 +220,22 @@
             "provides consistent {D/BT_SEALED} to prevent enemies from regaining buffs",
             "great for countering shield-heavy or immunity-reliant teams in PvP",
             "valuable in specific PvE content like World Boss or Guild Raid where buff removal is mandatory",
-            "can boost own priority with her 2nd Skill(Hatter's Teacup), Providing a smooth transition to her 3rd skill (Alice In Wonderland)",
+            "can boost own priority with {SK/Alice|S2}, Providing a smooth transition to {SK/Alice|S3}",
             "can boost earth allies outgoing damage with {D/IG_Buff_2000020_Interruption_D}",
-            "If the enemy unit is of the water element her 2nd Skill(Hatter's Teacup) does an additional effect of{D/BT_STAT|ST_SPEED}  "
+            "If the enemy unit is {E/Water}, {SK/Alice|S2} does an additional effect of {D/BT_STAT|ST_SPEED}  "
         ],
         "con": [
             "highly dependent on effectiveness to ensure her debuffs and strips land",
             "requires max skill upgrades for debuffs to land consistently",
-            "2nd Skill(Hatter's Teacup) is dependent on the number of units for the priority boost effect",
+            "{SK/Alice|S2} is dependent on the number of units for the priority boost effect",
             "doesn't block reaction skills such as {B/BT_STAT|ST_COUNTER_RATE} or {B/SYS_BUFF_REVENGE} from triggering"
         ]
     },
     "dahlia": {
         "pro": [
             "powerful crowd control with {D/BT_FREEZE} and {D/BT_STAT|ST_SPEED} reduction",
-            "3rd skill(Diamond Dust) prevents enemy reaction skills such as {B/BT_STAT|ST_COUNTER_RATE}, {B/SYS_BUFF_REVENGE} and {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}",
-            "2nd Skill(Absolute Zero) strips buffs from enemies, making her effective against units with buffs",
+            "{SK/Dahlia|S3} prevents enemy reaction skills such as {B/BT_STAT|ST_COUNTER_RATE}, {B/SYS_BUFF_REVENGE} and {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK}",
+            "{SK/Dahlia|S2} strips buffs from enemies, making her effective against units with buffs",
             "high base speed along with EE allows her to contest the first turn in PvP",
             "can boost own priority with 1st skill(Icicle Lance) ensuring a fast cycle between skill"
         ],

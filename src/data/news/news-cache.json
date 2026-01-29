@@ -1,6 +1,42 @@
 {
   "en": [
     {
+      "slug": "live-en-6165",
+      "title": "[Developer’s Note] January 27 Update – Direction for Improvements to Monad Iota",
+      "date": "2026/01/29 9:30:00",
+      "category": "notice",
+      "excerpt": "This is Hyun Moon-soo, PD of OUTERPLANE. Following the January 27th update that introduced our new hero, Monad Iota, we have been taking very seriously the criticism and disappointment many of you hav...",
+      "coverImage": "/images/news/live/en/6165-6379d122.webp",
+      "uid": "6165",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/29/dne/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-6135",
+      "title": "✨Monad Iota Special Code✨",
+      "date": "2026/01/28 12:50:54",
+      "category": "notice",
+      "excerpt": ". To celebrate the arrival of Monad Iota, we’re excited to share a surprise code with you! \\[Code\\] 👉 MONADIOTA \\[Rewards\\] 1,500 Ether (Free) \\[Valid Period\\] until 2026/05/31(Sun) 14:59 (UTC) \\[How...",
+      "coverImage": "/images/news/live/en/6135-52b80cf5.webp",
+      "uid": "6135",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/28/%e2%9c%a8monad-iota-special-code%e2%9c%a8/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-6126",
+      "title": "[Notice] 1/28(Wed) Sequential Rollout Patch Notice",
+      "date": "2026/01/28 7:25:00",
+      "category": "notice",
+      "excerpt": ". We will carry out a patch for fixing issues in the game. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your un...",
+      "coverImage": "/images/news/live/en/6126-97a7e8e2.webp",
+      "uid": "6126",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/28/notice-1-28wed-sequential-rollout-patch-notice/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-6085",
       "title": "[Push Event] (01/27 – 2/9)",
       "date": "2026/01/27 10:30:00",
@@ -74,7 +110,7 @@
     },
     {
       "slug": "live-en-6016",
-      "title": "[Issues] Known Issues (1/27 Maintenance) (Added on 07:55 UTC)",
+      "title": "[Issues] Known Issues (1/27 Maintenance) (Added on 1/28 at 02:00 UTC)",
       "date": "2026/01/27 4:30:00",
       "category": "issues",
       "excerpt": ", We would like to inform you about several issues that have been identified. Our apologies for the trouble while we work on fixing these issues. 1. When attempting an Irregular Pursuit Operation Swee...",
@@ -13087,6 +13123,42 @@
   ],
   "jp": [
     {
+      "slug": "live-jp-6168",
+      "title": "【開発者ノート】「モナド・イオータ」の改善方針について",
+      "date": "2026/01/29 9:30:13",
+      "category": "notice",
+      "excerpt": "こんにちは。『アウタープレーン』PDのヒョン・ムンスです。 去る1月27日のアップデートにて新たに合流した仲間、「モナド・イオータ」につきまして、 多くのマスター様よりいただいている厳しいご指摘や残念に思われる声を、重く受け止めております。 先日の懇談会にて先行公開されたキャラクターであるだけに、マスターの皆様の期待も大きかったことと存じますが、性能やクオリティの面でご満足いただける姿をお見せでき...",
+      "coverImage": "/images/news/live/jp/6168-07c00702.webp",
+      "uid": "6168",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/29/outerletter_260129_jp/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-6139",
+      "title": "✨モナド・イオータ登場記念スペシャルクーポン公開 ✨",
+      "date": "2026/01/28 12:52:16",
+      "category": "notice",
+      "excerpt": "マスターの皆様、こんにちは！ GMあめです。 新仲間「モナド・イオータ」の登場を記念して、 今すぐ使えるスペシャルクーポンをお届けします！🎁 🎟️ クーポンコードはこちら！ 👉 MONADIOTA 🎁 クーポン報酬 1,500 エーテル(無償) 📅 使用期間 2026年 5月 31日(火) 23:59 (JST) まで ※期限が切れる前に必ずお受け取りください！ ✍️ 入力方法 1️⃣ ...",
+      "coverImage": "/images/news/live/jp/6139-a2461ad9.webp",
+      "uid": "6139",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/28/%e2%9c%a8%e3%83%a2%e3%83%8a%e3%83%89%e3%83%bb%e3%82%a4%e3%82%aa%e3%83%bc%e3%82%bf%e7%99%bb%e5%a0%b4%e8%a8%98%e5%bf%b5%e3%82%b9%e3%83%9a%e3%82%b7%e3%83%a3%e3%83%ab%e3%82%af%e3%83%bc%e3%83%9d%e3%83%b3/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-6129",
+      "title": "【お知らせ】データ更新のお知らせ(1/28)",
+      "date": "2026/01/28 7:25:00",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 1/28(水)、データ更新作業を実施いたします。 一時的に接続が不安定になる場合がございます。 より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈データ更新実施時間 : 1/28(水) 16:30 ~...",
+      "coverImage": "/images/news/live/jp/6129-62450952.webp",
+      "uid": "6129",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/28/%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b1-28/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
       "slug": "live-jp-6087",
       "title": "【ログイン報酬】 (01/27 – 2/9)",
       "date": "2026/01/27 10:30:00",
@@ -13136,7 +13208,7 @@
     },
     {
       "slug": "live-jp-6020",
-      "title": "【不具合】現在確認されている不具合について (1/27)(1/27 18:40 追記)",
+      "title": "【不具合】現在確認されている不具合について (1/27)(1/28 11:00 追記)",
       "date": "2026/01/27 4:30:00",
       "category": "notice",
       "excerpt": "いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。 「アウタープレーン」運営チームです。 大変ご不便をおかけして申し訳ございません。 現在確認されている不具合についてご案内いたします。 1.保有している活力よりも消費活力が上回る状態で「イレギュラー追撃殲滅戦」のスキップを行った際、エラーメッセージが表示される不具合 → 現在、本現象について調査を行っております。 2\\. ゲ...",
@@ -26174,6 +26246,42 @@
   ],
   "kr": [
     {
+      "slug": "live-kr-6174",
+      "title": "[개발자 편지] ‘모나드 요타’ 개선 방향 안내",
+      "date": "2026/01/29 9:30:00",
+      "category": "notice",
+      "excerpt": "안녕하세요, 오너님들. 아우터플레인 PD 현문수입니다. 지난 1월 27일 업데이트를 통해 새롭게 합류한 동료, ‘모나드 요타’와 관련하여 많은 오너님들께서 보내주시는 따끔한 질책과 아쉬움의 목소리를 무겁게 받아들였습니다. 지난 간담회에서 미리 공개되었던 캐릭터인 만큼 오너님들의 기대 또한 크셨을 텐데, 성능과 퀄리티 면에서 만족스러운 모습을 보여드리지 못해...",
+      "coverImage": "/images/news/live/kr/6174-43920cb1.webp",
+      "uid": "6174",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/29/outerletter_260129_kr/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-6132",
+      "title": "✨ 아우터플레인 모나드 요타 등장 기념 쿠폰 ✨",
+      "date": "2026/01/28 12:49:02",
+      "category": "notice",
+      "excerpt": "안녕하세요, 오너 여러분. GM 아메입니다. 모나드 요타 등장을 기념하여, 깜짝 쿠폰을 공개합니다! 🎟️쿠폰 코드 👉 MONADIOTA 🎁 쿠폰 보상 1,500 무료 에테르 놓치지 말고 꼭 받아가세요🙌 - 쿠폰 사용 기간 : 2026년 5월 31일 23:59 (KST) 까지 - 쿠폰 입력 방법 : 게임 내 설정 > 계정 > 쿠폰 등록 https://...",
+      "coverImage": "/images/news/live/kr/6132-4f8f20ed.webp",
+      "uid": "6132",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/28/%e2%9c%a8-%ec%95%84%ec%9a%b0%ed%84%b0%ed%94%8c%eb%a0%88%ec%9d%b8-%eb%aa%a8%eb%82%98%eb%93%9c-%ec%9a%94%ed%83%80-%eb%93%b1%ec%9e%a5-%ea%b8%b0%eb%85%90-%ec%bf%a0%ed%8f%b0-%e2%9c%a8/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-6124",
+      "title": "[공지] 1/28(수) 무점검 패치 진행 안내",
+      "date": "2026/01/28 7:25:00",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 - 1/28(수) 16:30 ~ 16:50(KST) ※ 위 시간 내 순차적으로 적용됩니다. ◈ 내용...",
+      "coverImage": "/images/news/live/kr/6124-1876a7d0.webp",
+      "uid": "6124",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/28/%ea%b3%b5%ec%a7%80-1-28%ec%88%98-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
       "slug": "live-kr-6083",
       "title": "[접속 보상 이벤트 (01/27 – 2/9)]",
       "date": "2026/01/27 10:30:00",
@@ -26223,7 +26331,7 @@
     },
     {
       "slug": "live-kr-6014",
-      "title": "[이슈] 1/27 업데이트 이후 확인된 현상 (1/27 18:40 추가)",
+      "title": "[이슈] 1/27 업데이트 이후 확인된 현상 (1/28 11:00 추가)",
       "date": "2026/01/27 4:30:00",
       "category": "notice",
       "excerpt": "안녕하세요. GM 아메입니다. 현재 확인된 현상에 대해 안내 드립니다. 게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다. 1\\. 행동력이 부족할 때 이레귤러 추격 섬멸전 소탕 시도 시, ‘잘못된 요청입니다’ 알림이 표시되는 현상 → 해당 현상 확인 중에 있습니다. 2\\. 게임에 재접속할 때마다 1번 로비 프리셋으로 자동 적용되는 현상 → 해당 현상 확...",

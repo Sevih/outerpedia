@@ -11,10 +11,10 @@ export const phase1Characters = [
     {
         names: ["Regina"],
         reason: {
-            en: "A nice alternative to {P-I/Gnosis Dahlia}.",
-            jp: "{P-I/Gnosis Dahlia}の代替として優秀。",
-            kr: "{P-I/Gnosis Dahlia}의 좋은 대안.",
-            zh: "{P-I/Gnosis Dahlia}的优秀替代。"
+            en: "A nice alternative to {P/Gnosis Dahlia}.",
+            jp: "{P/Gnosis Dahlia}の代替として優秀。",
+            kr: "{P/Gnosis Dahlia}의 좋은 대안.",
+            zh: "{P/Gnosis Dahlia}的优秀替代。"
         }
     },
     {
@@ -38,19 +38,19 @@ export const phase1Characters = [
     {
         names: ["Demiurge Drakhan"],
         reason: {
-            en: "Alternative to {P-I/Monad Eva}. Her {B/BT_SHIELD_BASED_CASTER} buff and the {C/Defender} bonus from {B/UNIQUE_DAHLIA_A} provide survivability (even more when paired with a {AS/Counterattack} set). Also provides a {B/BT_STAT|ST_PIERCE_POWER_RATE} buff.",
-            jp: "{P-I/Monad Eva}の代替。{B/BT_SHIELD_BASED_CASTER}バフと{B/UNIQUE_DAHLIA_A}の{C/Defender}ボーナスで生存性を向上（{AS/Counterattack}セットと組み合わせるとさらに効果的）。{B/BT_STAT|ST_PIERCE_POWER_RATE}バフも付与。",
-            kr: "{P-I/Monad Eva}의 대안. {B/BT_SHIELD_BASED_CASTER} 버프와 {B/UNIQUE_DAHLIA_A}의 {C/Defender} 보너스로 생존력 제공({AS/Counterattack} 세트와 함께 사용 시 더욱 효과적). {B/BT_STAT|ST_PIERCE_POWER_RATE} 버프도 제공.",
-            zh: "{P-I/Monad Eva}的替代。她的{B/BT_SHIELD_BASED_CASTER}增益和{B/UNIQUE_DAHLIA_A}的{C/Defender}奖励提供生存能力（与{AS/Counterattack}套装搭配效果更佳）。还提供{B/BT_STAT|ST_PIERCE_POWER_RATE}增益。"
+            en: "Alternative to {P/Monad Eva}. Her {B/BT_SHIELD_BASED_CASTER} buff and the {C/Defender} bonus from {B/UNIQUE_DAHLIA_A} provide survivability (even more when paired with a {AS/Counterattack} set). Also provides a {B/BT_STAT|ST_PIERCE_POWER_RATE} buff.",
+            jp: "{P/Monad Eva}の代替。{B/BT_SHIELD_BASED_CASTER}バフと{B/UNIQUE_DAHLIA_A}の{C/Defender}ボーナスで生存性を向上（{AS/Counterattack}セットと組み合わせるとさらに効果的）。{B/BT_STAT|ST_PIERCE_POWER_RATE}バフも付与。",
+            kr: "{P/Monad Eva}의 대안. {B/BT_SHIELD_BASED_CASTER} 버프와 {B/UNIQUE_DAHLIA_A}의 {C/Defender} 보너스로 생존력 제공({AS/Counterattack} 세트와 함께 사용 시 더욱 효과적). {B/BT_STAT|ST_PIERCE_POWER_RATE} 버프도 제공.",
+            zh: "{P/Monad Eva}的替代。她的{B/BT_SHIELD_BASED_CASTER}增益和{B/UNIQUE_DAHLIA_A}的{C/Defender}奖励提供生存能力（与{AS/Counterattack}套装搭配效果更佳）。还提供{B/BT_STAT|ST_PIERCE_POWER_RATE}增益。"
         }
     },
     {
         names: ["Monad Eva"],
         reason: {
-            en: "Strong as always. She can be put in first position if you don't have {P-I/Gnosis Dahlia} or {P-I/Regina}.",
-            jp: "相変わらず強力。{P-I/Gnosis Dahlia}や{P-I/Regina}がいない場合は最左に配置可能。",
-            kr: "여전히 강력함. {P-I/Gnosis Dahlia}나 {P-I/Regina}가 없다면 맨 왼쪽에 배치 가능.",
-            zh: "一如既往地强力。如果没有{P-I/Gnosis Dahlia}或{P-I/Regina}，可以放在最左边。"
+            en: "Strong as always. She can be put in first position if you don't have {P/Gnosis Dahlia} or {P/Regina}.",
+            jp: "相変わらず強力。{P/Gnosis Dahlia}や{P/Regina}がいない場合は最左に配置可能。",
+            kr: "여전히 강력함. {P/Gnosis Dahlia}나 {P/Regina}가 없다면 맨 왼쪽에 배치 가능.",
+            zh: "一如既往地强力。如果没有{P/Gnosis Dahlia}或{P/Regina}，可以放在最左边。"
         }
     }
 ]
@@ -68,19 +68,19 @@ export const phase2Characters = [
     {
         names: ["Veronica"],
         reason: {
-            en: "Will give a {B/BT_STAT|ST_DEF} to {P-I/Caren} that'll increase her damage.",
-            jp: "{P-I/Caren}に{B/BT_STAT|ST_DEF}を付与してダメージを増加。",
-            kr: "{P-I/Caren}에게 {B/BT_STAT|ST_DEF}를 부여하여 데미지 증가.",
-            zh: "为{P-I/Caren}提供{B/BT_STAT|ST_DEF}以增加伤害。"
+            en: "Will give a {B/BT_STAT|ST_DEF} to {P/Caren} that'll increase her damage.",
+            jp: "{P/Caren}に{B/BT_STAT|ST_DEF}を付与してダメージを増加。",
+            kr: "{P/Caren}에게 {B/BT_STAT|ST_DEF}를 부여하여 데미지 증가.",
+            zh: "为{P/Caren}提供{B/BT_STAT|ST_DEF}以增加伤害。"
         }
     },
     {
         names: ["Kanon"],
         reason: {
-            en: "Alternative to {P-I/Caren}.",
-            jp: "{P-I/Caren}の代替。",
-            kr: "{P-I/Caren}의 대안.",
-            zh: "{P-I/Caren}的替代。"
+            en: "Alternative to {P/Caren}.",
+            jp: "{P/Caren}の代替。",
+            kr: "{P/Caren}의 대안.",
+            zh: "{P/Caren}的替代。"
         }
     },
     {
