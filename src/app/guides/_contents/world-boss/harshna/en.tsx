@@ -6,42 +6,85 @@ import YoutubeEmbed from '@/app/components/YoutubeEmbed'
 import GuideHeading from '@/app/components/GuideHeading'
 import ClassInlineTag from '@/app/components/ClassInlineTag'
 import ElementInlineTag from '@/app/components/ElementInline'
-import TeamTabSelector from '@/app/components/TeamTabSelector'
 import CharacterLinkCard from '@/app/components/CharacterLinkCard'
 import StatInlineTag from '@/app/components/StatInlineTag'
+import { WorldBossDisplay } from '@/app/components/boss'
+import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
+import CombatFootage from '@/app/components/CombatFootage'
+import TacticalTips from '@/app/components/TacticalTips'
+import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
+import HarshnaTeamsData from './Harshna.json'
+import type { TeamData } from '@/types/team'
+import { phase1Characters, phase2Characters } from './recommendedCharacters'
 
-const teams = {
-  team1: {
-    label: 'No Debuff Team',
-    icon: 'SC_Buff_Effect_Cleanse.webp',
-    setup: [      
-      ['Demiurge Drakhan','Leo','Kappa'],
-      ['Rey','Ame', 'Ryu Lion'],
-      ['Valentine', 'Fran', 'Charlotte', 'Dianne', 'Nella', 'Astei'],
-      ['Demiurge Luna', 'Maxwell', 'Regina', 'Demiurge Astei'],
-    ]
+const HarshnaTeams = HarshnaTeamsData as Record<string, TeamData>
+
+const harshnaFebruary2026 = {
+  boss1Key: 'Revenant Dragon Harshna',
+  boss2Key: 'Frozen Dragon of Phantasm Harshna',
+  boss1Ids: {
+    'Normal': '4086025',
+    'Very Hard': '4086027',
+    'Extreme': '4086029'
   },
-  team2: {
-    label: 'Ranger Team',
-    icon: 'ranger.webp',
-    setup: [
-      ['Gnosis Beth','Bell Cranel','Vlada'],
-      ['Notia','Akari','Tamara'],
-      ['Roxie', 'Ember', 'Maxie','Fran'],
-      ['Monad Eva'],
-    ]
+  boss2Ids: {
+    'Hard': '4086026',
+    'Very Hard': '4086028',
+    'Extreme': '4086030'
   }
-}
+} as const
 
 export default function HarshnaGuide() {
   return (
     <GuideTemplate
       title="Harshna World Boss Strategy"
       introduction="Your first team should avoid having debuffs, otherwise you'll give the boss many extra turns. You should run a Defender to apply Defense Down for 4 turns. Your second team needs debuffs. You don't have to run a team that uses debuff as DPS (like a burn comp or gbeth). Just make sure you can maintain at least one debuff."
-      defaultVersion="default"
+      defaultVersion="july2025"
       versions={{
-        default: {
-          label: 'July 2025 Version',
+        february2026: {
+          label: 'February 2026',
+          hidden:true,
+          content: (
+            <>
+              <WorldBossDisplay config={harshnaFebruary2026} defaultMode="Extreme" />
+              <hr className="my-6 border-neutral-700" />
+              <TacticalTips
+                sections={[
+                  {
+                    title: "phase1",
+                    tips: [
+                      "Your first team should avoid having debuffs, otherwise you'll give the boss many extra turns.",
+                      "You should run a {C/Defender} to apply {D/BT_STAT|ST_DEF_IR} for 4 turns."
+                    ]
+                  },
+                  {
+                    title: "phase2",
+                    tips: [
+                      "Your second team needs debuffs. You don't have to run a team that uses debuff as DPS (like a burn comp or {P/Gnosis Beth}). Just make sure you can maintain at least one debuff.",
+                      "Any {C/Ranger} with {I-W/Rampaging Caracal} equipped can do the job.",
+                      "Any good AoE {C/Mage} can do it too with {I-W/Noblewoman's Guile}."
+                    ]
+                  }
+                ]}
+              />
+              <hr className="my-6 border-neutral-700" />
+              <RecommendedCharacterList title="phase1" entries={phase1Characters} />
+              <RecommendedCharacterList title="phase2" entries={phase2Characters} />
+              <hr className="my-6 border-neutral-700" />
+              <StageBasedTeamSelector teamData={HarshnaTeams.february2026} defaultStage="No Debuff Team" />
+              <hr className="my-6 border-neutral-700" />
+              <CombatFootage
+                videoId="13vcQM1kMEg"
+                title="Harshna - World Boss - SSS - Extreme League"
+                author="Sevih"
+                date="01/07/2025"
+              />
+            </>
+          ),
+        },
+
+        july2025: {
+          label: 'July 2025',
           content: (
             <>
               <GuideHeading level={3}>Strategy Overview</GuideHeading>
@@ -113,7 +156,7 @@ export default function HarshnaGuide() {
                 <li><CharacterLinkCard name="Fran" />: <EffectInlineTag name="BT_ACTION_GAUGE" type="buff" /> <EffectInlineTag name="BT_STAT|ST_COUNTER_RATE" type="buff" /> and <EffectInlineTag name="BT_EXTEND_BUFF" type="buff" /> (be sure to use it after the boss&apos;s S2).</li>
               </ul>
               <hr className="my-6 border-neutral-700" />
-              <TeamTabSelector teams={teams} />
+              <StageBasedTeamSelector teamData={HarshnaTeams.july2025} defaultStage="No Debuff Team" />
               <hr className="my-6 border-neutral-700" />
               <YoutubeEmbed videoId="13vcQM1kMEg" title="Harshna - World Boss - SSS - Extreme League by Sevih" />
             </>
