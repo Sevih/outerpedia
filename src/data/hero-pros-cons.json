@@ -267,5 +267,29 @@
             "requires a specific kill condition or setup to trigger her cooldown reset reliably",
             "very squishy and easy to one-shot in PvP environments"
         ]
+    },
+    "gnosis-dahlia": {
+        "pro": [
+            "top-tier striker with massive single-target burst potential",
+            "possesses a passive damage cap that prevents her from being one-shot by nuke skills",
+            "punishes enemy critical hits by triggering a counterattack"
+            
+        ],
+        "con": [
+            "heavily reliant on her passive, making her useless against units that prevents reaction skills from triggering",
+            "requires 100% crit rate to fully utilize EE",
+            "requires max transcendance to unlock full potential" 
+        ]
+    },
+    "hanbyul-lee": {
+        "pro": [
+            "grants {B/BT_STAT|ST_DEF} to the entire team, significantly increasing survivability",
+            "{SK/Hanbyul Lee|S1} allows her to push team priority combined with {SK/Hanbyul Lee|S2} or {B/BT_STAT|ST_COUNTER_RATE}, which can continuously trigger priority pushes"
+        ],
+        "con": [
+            "reliant on enemies attacking her to maximize her counter-based utility",
+            "can struggle against enemies that strip buffs or inflict {D/BT_SEALED}",
+            "{SK/Hanbyul Lee|S3} has only 80% chance to land taunt at max level"
+        ]
     }
 }
