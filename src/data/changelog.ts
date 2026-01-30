@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-01-30",
+    title: {
+      en: "Wallpapers Gallery",
+      jp: "壁紙ギャラリー",
+      kr: "배경화면 갤러리",
+      zh: "壁纸画廊",
+    } as LString,
+    type: "feature",
+    url: "/wallpapers",
+    content: [
+      {
+        en: "Browse and download official Outerplane artworks and wallpapers. Assets provided with approval from Major9 and VAGames for personal use.",
+        jp: "Outerplaneの公式アートワークと壁紙を閲覧・ダウンロードできます。Major9とVAGamesの許可を得て、個人使用目的で提供されています。",
+        kr: "아우터플레인 공식 아트워크와 배경화면을 탐색하고 다운로드하세요. Major9와 VAGames의 승인을 받아 개인 사용 목적으로 제공됩니다.",
+        zh: "浏览并下载官方异界之门艺术作品和壁纸。这些素材已获得Major9和VAGames的许可，仅供个人使用。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-01-28",
     title: {
       en: "Walking Fortress Vault Venion",

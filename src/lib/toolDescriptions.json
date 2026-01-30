@@ -51,7 +51,6 @@
   },
   "wallpapers": {
     "icon": "nav/CM_Lobby_Button_Recruitment.webp",
-    "order": 1200,
-    "hide":true
+    "order": 1200
   }
 }
