@@ -1051,6 +1051,56 @@ const zh = {
   'banner.mileage.exchangeOptions': '交换选项：',
   'banner.mileage.featuredHero': 'PICKUP同伴',
   'banner.mileage.ownedBonus': '如已拥有该同伴，额外获得15个',
+
+  // Timegate Resources Guide
+  'timegate.badge.mission': '任务',
+  'timegate.source.irregular-infiltration-floor-3': '异型怪渗透歼灭战第3层',
+  'timegate.source.arena-weekly-reward': '每周游戏奖励',
+  'timegate.source.weekly-mission': '每周任务',
+  'timegate.source.irregular-extermination-point': '异型怪歼灭战 - 点数兑换所',
+  'timegate.headers.source': '获取途径',
+  'timegate.headers.weekly': '每周',
+  'timegate.headers.monthly': '每月',
+  'timegate.headers.total': '总计',
+  'timegate.headers.grandTotal': '月度总计',
+  'timegate.tabs.books': '技能教材',
+  'timegate.tabs.transistones': '转换石',
+  'timegate.tabs.special': '特殊装备',
+  'timegate.tabs.glunite': '格鲁矿石',
+
+  // Content Unlock Guide - Game Modes
+  'content.base': '基地',
+  'content.event-dungeon': '活动暗堡',
+  'content.archdemon-deeps': '魔王遗迹:深界',
+  'content.archdemon-corridor': '魔王遗迹:无限回廊',
+  'content.special-request-ecology': '挑战!特别委托:生态调查',
+  'content.special-request-identification': '挑战!特别委托:查清身份',
+  'content.arena': '竞技场',
+  'content.synchro-room': '同步空间',
+  'content.terminus-isle': '灭亡之岛',
+  'content.quirk': '天赋',
+  'content.irregular-extermination': '异型怪歼灭战',
+
+  // Content Unlock Guide - Table Headers
+  'unlock-guide.header.game-mode': '游戏模式',
+  'unlock-guide.header.unlock-condition': '解锁条件',
+  'unlock-guide.header.description': '描述',
+
+  // Content Unlock Guide - Dungeon Names
+  'dungeon.prisoners': '囚犯',
+  'dungeon.gathering-supplies': '物资补给',
+  'dungeon.finding-blacksmith': '拉拢铁匠',
+  'dungeon.her-name-is-alpha': '其名为阿尔法',
+  'dungeon.commanders-sophistry': '团长的诡辩',
+  'dungeon.onwards-to-magnolia': '向着麦格诺里亚',
+  'dungeon.temporary-truce': '临时休战',
+  'dungeon.pass': '通过',
+  'dungeon.laplace-magnolia': '拉普拉丝·麦格诺里亚',
+  'dungeon.unjust-fight': '不讲仁义的战斗',
+  'dungeon.puppet': '提线木偶',
+  'dungeon.responsibility-of-guilty': '掠夺者的责任感',
+  'dungeon.automatons-wish': '机械人偶的心愿',
+  'dungeon.unchanging': '一切都没有变',
 }
 
 export default zh
