@@ -51,11 +51,10 @@ function LightbulbIcon({ className }: { className?: string }) {
 
 function TipList({ tips, lang }: { tips: (string | LangMap)[]; lang: TenantKey }) {
   return (
-    <ul className="space-y-2">
+    <ul className="space-y-2 list-disc list-inside marker:text-sky-400">
       {tips.map((tip, index) => (
-        <li key={index} className="flex gap-2 text-neutral-300">
-          <span className="text-sky-400 mt-1 shrink-0">•</span>
-          <span>{parseText(lRec(tip, lang))}</span>
+        <li key={index} className="text-neutral-300">
+          {parseText(lRec(tip, lang))}
         </li>
       ))}
     </ul>

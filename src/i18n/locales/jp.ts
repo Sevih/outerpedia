@@ -1053,6 +1053,56 @@ const jp = {
   'banner.mileage.exchangeOptions': '交換オプション:',
   'banner.mileage.featuredHero': 'ピックアップヒーロー',
   'banner.mileage.ownedBonus': '既に所持している場合は15個追加で獲得できます',
+
+  // Timegate Resources Guide
+  'timegate.badge.mission': 'ミッション',
+  'timegate.source.irregular-infiltration-floor-3': 'イレギュラー侵入殲滅戦フロア3',
+  'timegate.source.arena-weekly-reward': 'ウィークリープレイ報酬',
+  'timegate.source.weekly-mission': 'ウィークリー',
+  'timegate.source.irregular-extermination-point': 'イレギュラー殲滅戦 - ポイント交換所',
+  'timegate.headers.source': '獲得先',
+  'timegate.headers.weekly': 'ウィークリー',
+  'timegate.headers.monthly': 'マンスリー',
+  'timegate.headers.total': '合計',
+  'timegate.headers.grandTotal': '月間合計',
+  'timegate.tabs.books': 'スキル教本',
+  'timegate.tabs.transistones': 'トランストーン',
+  'timegate.tabs.special': '特殊装備',
+  'timegate.tabs.glunite': 'グルーナイト',
+
+  // Content Unlock Guide - Game Modes
+  'content.base': 'アジト',
+  'content.event-dungeon': 'イベントダンジョン',
+  'content.archdemon-deeps': '魔王の遺跡:深界',
+  'content.archdemon-corridor': '魔王の遺跡:無限の回廊',
+  'content.special-request-ecology': '挑戦! 特別依頼:生態調査',
+  'content.special-request-identification': '挑戦! 特別依頼:正体究明',
+  'content.arena': 'アリーナ',
+  'content.synchro-room': 'シンクロルーム',
+  'content.terminus-isle': 'テルミナス島',
+  'content.quirk': 'ギフト',
+  'content.irregular-extermination': 'イレギュラー殲滅戦',
+
+  // Content Unlock Guide - Table Headers
+  'unlock-guide.header.game-mode': 'ゲームモード',
+  'unlock-guide.header.unlock-condition': '解放条件',
+  'unlock-guide.header.description': '説明',
+
+  // Content Unlock Guide - Dungeon Names
+  'dungeon.prisoners': '受刑者',
+  'dungeon.gathering-supplies': '物資補給',
+  'dungeon.finding-blacksmith': '鍛冶屋の姉御',
+  'dungeon.her-name-is-alpha': 'その名はアルファ',
+  'dungeon.commanders-sophistry': '騎士団長の詭弁',
+  'dungeon.onwards-to-magnolia': 'マグノリアを目指して',
+  'dungeon.temporary-truce': '一時休戦',
+  'dungeon.pass': '合格',
+  'dungeon.laplace-magnolia': 'ラプラス・マグノリア',
+  'dungeon.unjust-fight': '仁義なき戦い',
+  'dungeon.puppet': '操り人形',
+  'dungeon.responsibility-of-guilty': '奪った者の責任感',
+  'dungeon.automatons-wish': 'オートマタの願い',
+  'dungeon.unchanging': '何も変わってなどない',
 }
 
 export default jp

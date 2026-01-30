@@ -1053,6 +1053,56 @@ const kr = {
   'banner.mileage.exchangeOptions': '교환 옵션:',
   'banner.mileage.featuredHero': '픽업 영웅',
   'banner.mileage.ownedBonus': '이미 보유 중인 경우 15개가 추가로 지급됩니다',
+
+  // Timegate Resources Guide
+  'timegate.badge.mission': '미션',
+  'timegate.source.irregular-infiltration-floor-3': '이레귤러 침투 섬멸전 플로어 3',
+  'timegate.source.arena-weekly-reward': '주간 플레이 보상',
+  'timegate.source.weekly-mission': '주간 미션',
+  'timegate.source.irregular-extermination-point': '이레귤러 섬멸전 - 포인트 교환소',
+  'timegate.headers.source': '획득처',
+  'timegate.headers.weekly': '주간',
+  'timegate.headers.monthly': '월간',
+  'timegate.headers.total': '합계',
+  'timegate.headers.grandTotal': '월간 총합',
+  'timegate.tabs.books': '스킬 교본',
+  'timegate.tabs.transistones': '트랜스톤',
+  'timegate.tabs.special': '특수 장비',
+  'timegate.tabs.glunite': '글루나이트',
+
+  // Content Unlock Guide - Game Modes
+  'content.base': '아지트',
+  'content.event-dungeon': '이벤트 던전',
+  'content.archdemon-deeps': '마왕의 유적: 심계',
+  'content.archdemon-corridor': '마왕의 유적: 무한의 회랑',
+  'content.special-request-ecology': '도전! 특별의뢰 : 생태 조사',
+  'content.special-request-identification': '도전! 특별의뢰 : 정체 규명',
+  'content.arena': '결투장',
+  'content.synchro-room': '싱크로 룸',
+  'content.terminus-isle': '멸망의 섬',
+  'content.quirk': '기프트',
+  'content.irregular-extermination': '이레귤러 섬멸전',
+
+  // Content Unlock Guide - Table Headers
+  'unlock-guide.header.game-mode': '게임 모드',
+  'unlock-guide.header.unlock-condition': '해금 조건',
+  'unlock-guide.header.description': '설명',
+
+  // Content Unlock Guide - Dungeon Names
+  'dungeon.prisoners': '수감자',
+  'dungeon.gathering-supplies': '물자 보급',
+  'dungeon.finding-blacksmith': '대장장이 확보',
+  'dungeon.her-name-is-alpha': '그 이름은 알파',
+  'dungeon.commanders-sophistry': '단장의 궤변',
+  'dungeon.onwards-to-magnolia': '매그놀리아를 향해',
+  'dungeon.temporary-truce': '일시 휴전',
+  'dungeon.pass': '합격',
+  'dungeon.laplace-magnolia': '라플라스 매그놀리아',
+  'dungeon.unjust-fight': '인의 없는 싸움',
+  'dungeon.puppet': '꼭두각시',
+  'dungeon.responsibility-of-guilty': '빼앗은 자의 책임감',
+  'dungeon.automatons-wish': '자동인형의 바람',
+  'dungeon.unchanging': '아무것도 변한 것 없이',
 }
 
 export default kr

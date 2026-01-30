@@ -1053,6 +1053,56 @@ const en = {
   'banner.mileage.exchangeOptions': 'Exchange options:',
   'banner.mileage.featuredHero': 'Featured hero',
   'banner.mileage.ownedBonus': 'If you already own the hero, you get 15 additional',
+
+  // Timegate Resources Guide
+  'timegate.badge.mission': 'Mission',
+  'timegate.source.irregular-infiltration-floor-3': 'Irregular Infiltration Operation Floor 3',
+  'timegate.source.arena-weekly-reward': 'Weekly Play Reward',
+  'timegate.source.weekly-mission': 'Weekly Mission',
+  'timegate.source.irregular-extermination-point': 'Irregular Extermination Project - Point Exchange',
+  'timegate.headers.source': 'Source',
+  'timegate.headers.weekly': 'Weekly',
+  'timegate.headers.monthly': 'Monthly',
+  'timegate.headers.total': 'Total',
+  'timegate.headers.grandTotal': 'Grand Total Monthly',
+  'timegate.tabs.books': 'Skill Manual',
+  'timegate.tabs.transistones': 'Transistone',
+  'timegate.tabs.special': 'Special Gear',
+  'timegate.tabs.glunite': 'Glunite',
+
+  // Content Unlock Guide - Game Modes
+  'content.base': 'Base',
+  'content.event-dungeon': 'Event Dungeon',
+  'content.archdemon-deeps': "The Archdemon's Ruins: The Deeps",
+  'content.archdemon-corridor': "The Archdemon's Ruins: The Infinite Corridor",
+  'content.special-request-ecology': 'Challenge! Special Request: Ecology Study',
+  'content.special-request-identification': 'Challenge! Special Request: Identification',
+  'content.arena': 'Arena',
+  'content.synchro-room': 'Synchro Room',
+  'content.terminus-isle': 'Terminus Isle',
+  'content.quirk': 'Quirk',
+  'content.irregular-extermination': 'Irregular Extermination Project',
+
+  // Content Unlock Guide - Table Headers
+  'unlock-guide.header.game-mode': 'Game Mode',
+  'unlock-guide.header.unlock-condition': 'Unlock Condition',
+  'unlock-guide.header.description': 'Description',
+
+  // Content Unlock Guide - Dungeon Names
+  'dungeon.prisoners': 'Prisoners',
+  'dungeon.gathering-supplies': 'Gathering Supplies',
+  'dungeon.finding-blacksmith': 'Finding Blacksmith',
+  'dungeon.her-name-is-alpha': 'Her Name is Alpha',
+  'dungeon.commanders-sophistry': "The Commander's Sophistry",
+  'dungeon.onwards-to-magnolia': 'Onwards to Magnolia',
+  'dungeon.temporary-truce': 'A Temporary Truce',
+  'dungeon.pass': 'Pass',
+  'dungeon.laplace-magnolia': 'Laplace Magnolia',
+  'dungeon.unjust-fight': 'An Unjust Fight',
+  'dungeon.puppet': 'Puppet',
+  'dungeon.responsibility-of-guilty': 'The Responsibility of the Guilty',
+  'dungeon.automatons-wish': "An Automaton's Wish",
+  'dungeon.unchanging': 'Unchanging',
 }
 
 export default en

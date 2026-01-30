@@ -1,7 +1,7 @@
 'use client'
 
 type Props = {
-    versions: Record<string, { label: string }>
+    versions: Record<string, { label: string; hidden?: boolean }>
     selected: string
     onSelect: (key: string) => void
   }
@@ -16,11 +16,13 @@ export default function VersionSelector({ versions, selected, onSelect }: Props)
         onChange={(e) => onSelect(e.target.value)}
         className="bg-neutral-800 text-white border border-neutral-600 px-2 py-1 rounded"
       >
-        {Object.entries(versions).map(([key, v]) => (
-          <option key={key} value={key}>
-            {v.label}
-          </option>
-        ))}
+        {Object.entries(versions)
+          .filter(([, v]) => !v.hidden)
+          .map(([key, v]) => (
+            <option key={key} value={key}>
+              {v.label}
+            </option>
+          ))}
       </select>
     </div>
   )

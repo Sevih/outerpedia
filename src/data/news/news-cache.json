@@ -1,6 +1,30 @@
 {
   "en": [
     {
+      "slug": "live-en-6228",
+      "title": "[Notice] 1/30(Friday) Sequencial Rolling Patch",
+      "date": "2026/01/30 10:03:09",
+      "category": "notice",
+      "excerpt": ". We will carry out a patch for fixing issues in the game. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your un...",
+      "coverImage": "/images/news/live/en/6228-4573a6b8.webp",
+      "uid": "6228",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/30/notice-1-30friday-sequencial-rolling-patch/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-6217",
+      "title": "[Notice] 1/30 Friendly Match Server Maintenance",
+      "date": "2026/01/30 8:01:54",
+      "category": "notice",
+      "excerpt": ". We will carry out a Friendly Match Server maintenance. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your unde...",
+      "coverImage": "/images/news/live/en/6217-512a73b4.webp",
+      "uid": "6217",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/30/notice-1-30-friendly-match-server-maintenance/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-6165",
       "title": "[Developer’s Note] January 27 Update – Direction for Improvements to Monad Iota",
       "date": "2026/01/29 9:30:00",
@@ -13122,6 +13146,29 @@
     }
   ],
   "jp": [
+    {
+      "slug": "live-jp-6232",
+      "title": "【お知らせ】フレンドサーバーメンテナンスのお知らせ(1/30)",
+      "date": "2026/01/30 10:00:44",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 1/30(金)、フレンドサーバーメンテナンス作業を実施いたします。 一時的にフレンド対戦はご利用できません より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈データ更新実施時間 : 1/30(金) 1...",
+      "coverImage": "/images/news/live/jp/6232-496016df.webp",
+      "uid": "6232",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/30/%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%95%e3%83%ac%e3%83%b3%e3%83%89%e3%82%b5%e3%83%bc%e3%83%90%e3%83%bc%e3%83%a1%e3%83%b3%e3%83%86%e3%83%8a%e3%83%b3%e3%82%b9%e3%81%ae%e3%81%8a-2/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-6214",
+      "title": "【お知らせ】フレンド対戦サーバーメンテナンスのお知らせ(1/30)",
+      "date": "2026/01/30 8:00:34",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 1/30(金)、フレンド対戦サーバーメンテナンス作業を実施いたします。 一時的にフレンド対戦はご利用できません より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈メンテナンス実施時間 : 1/30(金...",
+      "uid": "6214",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/30/%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%95%e3%83%ac%e3%83%b3%e3%83%89%e3%82%b5%e3%83%bc%e3%83%90%e3%83%bc%e3%83%a1%e3%83%b3%e3%83%86%e3%83%8a%e3%83%b3%e3%82%b9%e3%81%ae%e3%81%8a/",
+      "views": 0,
+      "lang": "jp"
+    },
     {
       "slug": "live-jp-6168",
       "title": "【開発者ノート】「モナド・イオータ」の改善方針について",
@@ -26245,6 +26292,30 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-6225",
+      "title": "[공지] 1/30(금) 무점검 패치 진행 안내",
+      "date": "2026/01/30 10:01:41",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 - 1/30(금) 19:00 ~ 19:10(KST) ※ 위 시간 내 순차적으로 적용됩니다. ◈ 내용...",
+      "coverImage": "/images/news/live/kr/6225-045d8a8a.webp",
+      "uid": "6225",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/30/%ea%b3%b5%ec%a7%80-1-30%ea%b8%88-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-6212",
+      "title": "[공지] 1/30(금) 친선 대전 서버 점검",
+      "date": "2026/01/30 8:02:29",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 친선 대전 서버 점검 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 - 1/30(금) 16:50 ~ 17:00(KST) ※ 위 시간 내 순차적으로 적용됩니다. ◈ 내용 1. 글로벌1 서버...",
+      "coverImage": "/images/news/live/kr/6212-f9df38c6.webp",
+      "uid": "6212",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/01/30/%ea%b3%b5%ec%a7%80-1-30%ea%b8%88-%ec%b9%9c%ec%84%a0-%eb%8c%80%ec%a0%84-%ec%84%9c%eb%b2%84-%ec%a0%90%ea%b2%80/",
+      "views": 0,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-6174",
       "title": "[개발자 편지] ‘모나드 요타’ 개선 방향 안내",

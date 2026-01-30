@@ -9,6 +9,7 @@ import parseText from '@/utils/parseText'
 type Version = {
   label: string
   content: React.ReactNode
+  hidden?: boolean
 }
 
 type GuideTemplateProps = {
@@ -76,7 +77,7 @@ export default function GuideTemplate({
       )}
 
       {/* Sélecteur de versions */}
-      {Object.keys(versions).length > 1 && (
+      {Object.values(versions).filter(v => !v.hidden).length > 1 && (
         <VersionSelector
           versions={versions}
           selected={selected}
