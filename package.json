@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "10.0.8",
+  "version": "10.0.9",
   "private": true,
   "scripts": {
     "dev": "node scripts/dev-with-webp.js",
@@ -35,7 +35,8 @@
     "boss:copy-buff-debuff": "python scripts/copy-buff-debuff.py",
     "raid:validate": "node scripts/raid/validate.js",
     "guide:check": "python scripts/check-guide-format.py",
-    "gen:wallpapers": "powershell -ExecutionPolicy Bypass -File datamine/filter-wallpapers.ps1 && powershell -ExecutionPolicy Bypass -File datamine/copy-to-public.ps1"
+    "gen:wallpapers": "python scripts/check-wallpaper-duplicates.py && node scripts/generateWallpapers.js",
+    "gen:wallpapers:full": "powershell -ExecutionPolicy Bypass -File datamine/filter-wallpapers.ps1 && powershell -ExecutionPolicy Bypass -File datamine/copy-to-public.ps1 && npm run gen:wallpapers"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",

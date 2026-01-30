@@ -3,7 +3,7 @@
     "name": "Speed Set",
     "type": "Set",
     "class": null,
-    "count": 71,
+    "count": 72,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -66,6 +66,7 @@
       "Roxie",
       "Ryu Lion",
       "Saeran",
+      "Sigma",
       "Skadi",
       "Sofia",
       "Stella",
@@ -150,7 +151,7 @@
     "name": "Penetration Set",
     "type": "Set",
     "class": null,
-    "count": 23,
+    "count": 24,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -174,14 +175,15 @@
       "Regina",
       "Rey",
       "Rin",
-      "Ryu Lion"
+      "Ryu Lion",
+      "Sigma"
     ]
   },
   {
     "name": "Critical Strike Set",
     "type": "Set",
     "class": null,
-    "count": 21,
+    "count": 22,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -203,7 +205,8 @@
       "Regina",
       "Rey",
       "Rin",
-      "Roxie"
+      "Roxie",
+      "Sigma"
     ]
   },
   {
@@ -301,6 +304,28 @@
     ]
   },
   {
+    "name": "Combination Simulator",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 14,
+    "characters": [
+      "Akari",
+      "Demiurge Vlada",
+      "Eliza",
+      "Fatal",
+      "Fran",
+      "Gnosis Beth",
+      "Mero",
+      "Monad Iota",
+      "Ryu Lion",
+      "Sigma",
+      "Skadi",
+      "Stella",
+      "Tamara",
+      "Valentine"
+    ]
+  },
+  {
     "name": "Absolute Music",
     "type": "Amulet",
     "class": "Ranger",
@@ -318,27 +343,6 @@
       "Ryu Lion",
       "Skadi",
       "Stella",
-      "Valentine"
-    ]
-  },
-  {
-    "name": "Combination Simulator",
-    "type": "Amulet",
-    "class": "Ranger",
-    "count": 13,
-    "characters": [
-      "Akari",
-      "Demiurge Vlada",
-      "Eliza",
-      "Fatal",
-      "Fran",
-      "Gnosis Beth",
-      "Mero",
-      "Monad Iota",
-      "Ryu Lion",
-      "Skadi",
-      "Stella",
-      "Tamara",
       "Valentine"
     ]
   },
@@ -402,6 +406,24 @@
     ]
   },
   {
+    "name": "Augmentation Set",
+    "type": "Set",
+    "class": null,
+    "count": 10,
+    "characters": [
+      "Bell Cranel",
+      "Bryn",
+      "Core Fusion Lisha",
+      "Delta",
+      "Demiurge Vlada",
+      "Epsilon",
+      "Kanon",
+      "Notia",
+      "Roxie",
+      "Sigma"
+    ]
+  },
+  {
     "name": "Coward's Treasure",
     "type": "Amulet",
     "class": "Defender",
@@ -453,23 +475,6 @@
       "Sterope",
       "Summer Knight's Dream Ember",
       "Veronica"
-    ]
-  },
-  {
-    "name": "Augmentation Set",
-    "type": "Set",
-    "class": null,
-    "count": 9,
-    "characters": [
-      "Bell Cranel",
-      "Bryn",
-      "Core Fusion Lisha",
-      "Delta",
-      "Demiurge Vlada",
-      "Epsilon",
-      "Kanon",
-      "Notia",
-      "Roxie"
     ]
   },
   {
@@ -586,6 +591,21 @@
     ]
   },
   {
+    "name": "Physical Exorcism",
+    "type": "Amulet",
+    "class": "Ranger",
+    "count": 7,
+    "characters": [
+      "Edelweiss",
+      "Fatal",
+      "Gnosis Beth",
+      "Holy Night's Blessing Dianne",
+      "Mystic Sage Ame",
+      "Notia",
+      "Sigma"
+    ]
+  },
+  {
     "name": "Emblem of Dominance",
     "type": "Weapon",
     "class": "Healer",
@@ -614,17 +634,42 @@
     ]
   },
   {
-    "name": "Physical Exorcism",
+    "name": "Attack Set",
+    "type": "Set",
+    "class": null,
+    "count": 5,
+    "characters": [
+      "Bell Cranel",
+      "Core Fusion Lisha",
+      "Mystic Sage Ame",
+      "Sigma",
+      "Vlada"
+    ]
+  },
+  {
+    "name": "Burning Soul",
     "type": "Amulet",
     "class": "Ranger",
-    "count": 6,
+    "count": 5,
     "characters": [
-      "Edelweiss",
-      "Fatal",
       "Gnosis Beth",
-      "Holy Night's Blessing Dianne",
+      "Mero",
       "Mystic Sage Ame",
-      "Notia"
+      "Ryu Lion",
+      "Sigma"
+    ]
+  },
+  {
+    "name": "Gorgon's Wrath [Ranger]",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 5,
+    "characters": [
+      "Demiurge Vlada",
+      "Mero",
+      "Monad Iota",
+      "Sigma",
+      "Skadi"
     ]
   },
   {
@@ -679,18 +724,6 @@
     ]
   },
   {
-    "name": "Attack Set",
-    "type": "Set",
-    "class": null,
-    "count": 4,
-    "characters": [
-      "Bell Cranel",
-      "Core Fusion Lisha",
-      "Mystic Sage Ame",
-      "Vlada"
-    ]
-  },
-  {
     "name": "Barrage of Truth",
     "type": "Weapon",
     "class": "Ranger",
@@ -715,15 +748,15 @@
     ]
   },
   {
-    "name": "Burning Soul",
-    "type": "Amulet",
+    "name": "Briareos's Recklessness [Ranger]",
+    "type": "Weapon",
     "class": "Ranger",
     "count": 4,
     "characters": [
+      "Demiurge Vlada",
       "Gnosis Beth",
-      "Mero",
-      "Mystic Sage Ame",
-      "Ryu Lion"
+      "Monad Iota",
+      "Sigma"
     ]
   },
   {
@@ -736,18 +769,6 @@
       "Kanon",
       "Kappa",
       "Liselotte"
-    ]
-  },
-  {
-    "name": "Gorgon's Wrath [Ranger]",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 4,
-    "characters": [
-      "Demiurge Vlada",
-      "Mero",
-      "Monad Iota",
-      "Skadi"
     ]
   },
   {
@@ -783,17 +804,6 @@
       "Caren",
       "Delta",
       "Gnosis Viella"
-    ]
-  },
-  {
-    "name": "Briareos's Recklessness [Ranger]",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 3,
-    "characters": [
-      "Demiurge Vlada",
-      "Gnosis Beth",
-      "Monad Iota"
     ]
   },
   {
@@ -849,6 +859,17 @@
       "Bell Cranel",
       "Core Fusion Lisha",
       "Laplace"
+    ]
+  },
+  {
+    "name": "Meteor Mashers",
+    "type": "Weapon",
+    "class": "Ranger",
+    "count": 3,
+    "characters": [
+      "Monad Iota",
+      "Mystic Sage Ame",
+      "Sigma"
     ]
   },
   {
@@ -959,16 +980,6 @@
     "characters": [
       "Bryn",
       "Regina"
-    ]
-  },
-  {
-    "name": "Meteor Mashers",
-    "type": "Weapon",
-    "class": "Ranger",
-    "count": 2,
-    "characters": [
-      "Monad Iota",
-      "Mystic Sage Ame"
     ]
   },
   {

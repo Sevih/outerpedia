@@ -7263,6 +7263,221 @@
       ]
     }
   },
+  "sigma": {
+    "Atk Mix": {
+      "weaponSub": [
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "EFF",
+        "SPD",
+        "CHD"
+      ],
+      "armorSets": [
+        "Attack",
+        "Critical Strike",
+        "Attack",
+        "Penetration",
+        "Attack",
+        "Augmentation"
+      ]
+    },
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "EFF",
+        "SPD",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Pen": {
+      "weaponSub": [
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "CHC",
+        "ATK",
+        "EFF",
+        "SPD",
+        "CHD"
+      ],
+      "armorSets": [
+        "Penetration"
+      ]
+    },
+    "Support": {
+      "weaponSub": [
+        {
+          "name": "Meteor Mashers",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Ranger]",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Combination Simulator",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Burning Soul",
+          "mainStat": [
+            "PEN%"
+          ]
+        },
+        {
+          "name": "Physical Exorcism",
+          "mainStat": [
+            "PEN%"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "EFF",
+        "CHC",
+        "ATK",
+        "CHD"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    }
+  },
   "skadi": {
     "Speed": {
       "weaponSub": [
