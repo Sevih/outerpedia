@@ -23,6 +23,7 @@ const scripts = [
   { name: 'News Cache', cmd: 'node scripts/generateNewsCache.js' },
   { name: 'Validate Effects', cmd: 'node scripts/validate-effects.js' },
   { name: 'Boss Index', cmd: 'node scripts/generateBossIndex.js' },
+  { name: 'Wallpapers', cmd: 'node scripts/generateWallpapers.js' },
 ];
 
 console.log('🚀 Préparation du build...\n');
@@ -152,6 +153,12 @@ function extractSummary(output, scriptName) {
   if (scriptName === 'Boss Index') {
     const match = output.match(/Total de boss: (\d+)/);
     if (match) return `${match[1]} boss`;
+  }
+
+  // Wallpapers
+  if (scriptName === 'Wallpapers') {
+    const match = output.match(/with (\d+) images/);
+    if (match) return `${match[1]} images`;
   }
 
   return '';

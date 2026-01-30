@@ -771,6 +771,8 @@ const zh = {
   'tool.team-planner.description': '使用自定义规则和限制组建和验证队伍。适用于飞天之塔、公会突袭、世界首领等模式。',
   'tool.progress-tracker.name': '进度追踪器',
   'tool.progress-tracker.description': '追踪您的异域战记进度：日常/周常/月常，包括任务、制作和商店购买。',
+  'tool.wallpapers.name': '壁纸',
+  'tool.wallpapers.description': '浏览并下载官方异界之门艺术作品和壁纸。',
 
   // Progress Tracker
   'progress.daily': '每日进度',
@@ -1101,6 +1103,20 @@ const zh = {
   'dungeon.responsibility-of-guilty': '掠夺者的责任感',
   'dungeon.automatons-wish': '机械人偶的心愿',
   'dungeon.unchanging': '一切都没有变',
+
+  // Wallpapers
+  'wallpapers.title': '壁纸',
+  'wallpapers.description': '浏览并下载官方异界之门艺术作品。点击任意图片可预览并下载。',
+  'wallpapers.download': '下载PNG',
+  'wallpapers.categories.Art': '造物主艺术',
+  'wallpapers.categories.Banner': '横幅',
+  'wallpapers.categories.Full:Events': '活动',
+  'wallpapers.categories.Full:Scenario': '剧情',
+  'wallpapers.categories.Full:Others': '其他',
+  'wallpapers.categories.HeroFullArt': '英雄',
+  'wallpapers.disclaimer.line1': '这些素材已获得发行商（Major9）和开发商（VAGames）的许可，仅供个人使用。',
+  'wallpapers.disclaimer.line2': '如需其他用途，请通过官方支持申请许可：',
+  'wallpapers.contactLink': '官方支持',
 }
 
 export default zh

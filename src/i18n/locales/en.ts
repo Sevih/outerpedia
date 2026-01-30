@@ -771,6 +771,8 @@ const en = {
   'tool.team-planner.description': 'Build and validate teams for Outerplane with custom rules and restrictions. Perfect for Skyward Tower, Guild Raids, World Bosses, and more.',
   'tool.progress-tracker.name': 'Progress Tracker',
   'tool.progress-tracker.description': 'Track your Outerplane progress: daily/weekly/monthly tasks, shop purchases, and crafts.',
+  'tool.wallpapers.name': 'Wallpapers',
+  'tool.wallpapers.description': 'Browse and download official Outerplane artworks and wallpapers.',
 
   // Progress Tracker
   'progress.daily': 'Daily Progress',
@@ -1103,6 +1105,20 @@ const en = {
   'dungeon.responsibility-of-guilty': 'The Responsibility of the Guilty',
   'dungeon.automatons-wish': "An Automaton's Wish",
   'dungeon.unchanging': 'Unchanging',
+
+  // Wallpapers
+  'wallpapers.title': 'Wallpapers',
+  'wallpapers.description': 'Browse and download official Outerplane artworks. Click on any image to preview and download.',
+  'wallpapers.download': 'Download PNG',
+  'wallpapers.categories.Art': 'Demiurge Art',
+  'wallpapers.categories.Banner': 'Banners',
+  'wallpapers.categories.Full:Events': 'Events',
+  'wallpapers.categories.Full:Scenario': 'Scenario',
+  'wallpapers.categories.Full:Others': 'Others',
+  'wallpapers.categories.HeroFullArt': 'Heroes',
+  'wallpapers.disclaimer.line1': 'These assets are provided for personal use only, with approval from the publisher (Major9) and developers (VAGames).',
+  'wallpapers.disclaimer.line2': 'For any other use, please request permission via',
+  'wallpapers.contactLink': 'Official Support',
 }
 
 export default en

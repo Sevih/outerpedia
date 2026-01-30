@@ -771,6 +771,8 @@ const jp = {
   'tool.team-planner.description': 'カスタムルールと制限を使用してOuterplaneのチームを構築・検証します。飛天の塔、ギルドレイド、ワールドボスなどに最適。',
   'tool.progress-tracker.name': '進捗トラッカー',
   'tool.progress-tracker.description': 'Outerplaneの進捗を追跡：デイリー/ウィークリー/マンスリータスク、ショップ購入、クラフト。',
+  'tool.wallpapers.name': '壁紙',
+  'tool.wallpapers.description': 'アウタープレインの公式アートワークと壁紙を閲覧・ダウンロード。',
 
   // Progress Tracker
   'progress.daily': 'デイリー進捗',
@@ -1103,6 +1105,20 @@ const jp = {
   'dungeon.responsibility-of-guilty': '奪った者の責任感',
   'dungeon.automatons-wish': 'オートマタの願い',
   'dungeon.unchanging': '何も変わってなどない',
+
+  // Wallpapers
+  'wallpapers.title': '壁紙',
+  'wallpapers.description': 'アウタープレインの公式アートワークを閲覧・ダウンロードできます。画像をクリックしてプレビューとダウンロードができます。',
+  'wallpapers.download': 'PNGをダウンロード',
+  'wallpapers.categories.Art': 'デミウルゴスアート',
+  'wallpapers.categories.Banner': 'バナー',
+  'wallpapers.categories.Full:Events': 'イベント',
+  'wallpapers.categories.Full:Scenario': 'シナリオ',
+  'wallpapers.categories.Full:Others': 'その他',
+  'wallpapers.categories.HeroFullArt': 'ヒーロー',
+  'wallpapers.disclaimer.line1': 'これらの素材は、パブリッシャー（Major9）および開発者（VAGames）の許可を得て、個人使用目的でのみ提供されています。',
+  'wallpapers.disclaimer.line2': 'その他の使用については、こちらからお問い合わせください：',
+  'wallpapers.contactLink': '公式サポート',
 }
 
 export default jp

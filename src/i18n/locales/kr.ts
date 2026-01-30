@@ -771,6 +771,8 @@ const kr = {
   'tool.team-planner.description': '맞춤 규칙 및 제한으로 Outerplane 팀을 구축하고 검증하세요. 비상의 탑, 길드 레이드, 월드 보스 등에 완벽합니다.',
   'tool.progress-tracker.name': '진행률 추적기',
   'tool.progress-tracker.description': 'Outerplane 진행 상황 추적: 일일/주간/월간 작업, 상점 구매, 제작.',
+  'tool.wallpapers.name': '배경화면',
+  'tool.wallpapers.description': '아우터플레인 공식 아트워크 및 배경화면을 탐색하고 다운로드하세요.',
 
   // Progress Tracker
   'progress.daily': '일일 진행률',
@@ -1103,6 +1105,20 @@ const kr = {
   'dungeon.responsibility-of-guilty': '빼앗은 자의 책임감',
   'dungeon.automatons-wish': '자동인형의 바람',
   'dungeon.unchanging': '아무것도 변한 것 없이',
+
+  // Wallpapers
+  'wallpapers.title': '배경화면',
+  'wallpapers.description': '아우터플레인 공식 아트워크를 탐색하고 다운로드하세요. 이미지를 클릭하면 미리보기 및 다운로드가 가능합니다.',
+  'wallpapers.download': 'PNG 다운로드',
+  'wallpapers.categories.Art': '데미우르고스 아트',
+  'wallpapers.categories.Banner': '배너',
+  'wallpapers.categories.Full:Events': '이벤트',
+  'wallpapers.categories.Full:Scenario': '시나리오',
+  'wallpapers.categories.Full:Others': '기타',
+  'wallpapers.categories.HeroFullArt': '영웅',
+  'wallpapers.disclaimer.line1': '이 자료는 퍼블리셔(Major9)와 개발사(VAGames)의 승인을 받아 개인 사용 목적으로만 제공됩니다.',
+  'wallpapers.disclaimer.line2': '기타 용도는 공식 지원을 통해 허가를 요청해 주세요:',
+  'wallpapers.contactLink': '공식 지원',
 }
 
 export default kr
