@@ -1116,6 +1116,7 @@ const en = {
   'wallpapers.categories.Full:Scenario': 'Scenario',
   'wallpapers.categories.Full:Others': 'Others',
   'wallpapers.categories.HeroFullArt': 'Heroes',
+  'wallpapers.categories.Cutin': 'Cutin',
   'wallpapers.disclaimer.line1': 'These assets are provided for personal use only, with approval from the publisher (Major9) and developers (VAGames).',
   'wallpapers.disclaimer.line2': 'For any other use, please request permission via',
   'wallpapers.contactLink': 'Official Support',

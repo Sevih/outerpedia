@@ -1116,6 +1116,7 @@ const jp = {
   'wallpapers.categories.Full:Scenario': 'シナリオ',
   'wallpapers.categories.Full:Others': 'その他',
   'wallpapers.categories.HeroFullArt': 'ヒーロー',
+  'wallpapers.categories.Cutin': 'カットイン',
   'wallpapers.disclaimer.line1': 'これらの素材は、パブリッシャー（Major9）および開発者（VAGames）の許可を得て、個人使用目的でのみ提供されています。',
   'wallpapers.disclaimer.line2': 'その他の使用については、こちらからお問い合わせください：',
   'wallpapers.contactLink': '公式サポート',

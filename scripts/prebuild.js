@@ -23,7 +23,7 @@ const scripts = [
   { name: 'News Cache', cmd: 'node scripts/generateNewsCache.js' },
   { name: 'Validate Effects', cmd: 'node scripts/validate-effects.js' },
   { name: 'Boss Index', cmd: 'node scripts/generateBossIndex.js' },
-  { name: 'Wallpapers', cmd: 'node scripts/generateWallpapers.js' },
+  { name: 'Wallpapers', cmd: 'node scripts/wallpapers.js json' },
 ];
 
 console.log('🚀 Préparation du build...\n');

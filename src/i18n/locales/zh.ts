@@ -1114,6 +1114,7 @@ const zh = {
   'wallpapers.categories.Full:Scenario': '剧情',
   'wallpapers.categories.Full:Others': '其他',
   'wallpapers.categories.HeroFullArt': '英雄',
+  'wallpapers.categories.Cutin': '特写',
   'wallpapers.disclaimer.line1': '这些素材已获得发行商（Major9）和开发商（VAGames）的许可，仅供个人使用。',
   'wallpapers.disclaimer.line2': '如需其他用途，请通过官方支持申请许可：',
   'wallpapers.contactLink': '官方支持',

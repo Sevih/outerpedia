@@ -291,5 +291,19 @@
             "can struggle against enemies that strip buffs or inflict {D/BT_SEALED}",
             "{SK/Hanbyul Lee|S3} has only 80% chance to land taunt at max level"
         ]
+    },
+    "christina": {
+        "pro": [
+            "specialized tank designed to counter teams that rely on non-attack skills",
+            "{SK/Christina|S1} the ability to {D/BT_REMOVE_BUFF}",
+            "{SK/Christina|S3} prevents enemies reaction skills and from re-applying buffs by inflicting {D/BT_SEALED}",
+            "increases team damage output and team survibility when enemies use non-attack skills",
+            "generates Chain Points for the team, helping to cycle chain breaks faster"
+        ],
+        "con": [
+            "extremely niche usage, value drops significantly if the enemy team attacks directly without using non-attack skills or the enemy prevents/blocks {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK} ",
+            "overshadowed by more versatile defenders for general PvE content progression",
+            "EE is required to consistently hit debuffs due to having low base effectiveness stat"
+        ]
     }
 }

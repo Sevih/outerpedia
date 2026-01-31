@@ -1116,6 +1116,7 @@ const kr = {
   'wallpapers.categories.Full:Scenario': '시나리오',
   'wallpapers.categories.Full:Others': '기타',
   'wallpapers.categories.HeroFullArt': '영웅',
+  'wallpapers.categories.Cutin': '컷인',
   'wallpapers.disclaimer.line1': '이 자료는 퍼블리셔(Major9)와 개발사(VAGames)의 승인을 받아 개인 사용 목적으로만 제공됩니다.',
   'wallpapers.disclaimer.line2': '기타 용도는 공식 지원을 통해 허가를 요청해 주세요:',
   'wallpapers.contactLink': '공식 지원',

@@ -7,7 +7,7 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import WallpaperLightbox from '@/app/components/WallpaperLightbox'
 
-type Category = 'Art' | 'Banner' | 'Full:Events' | 'Full:Scenario' | 'Full:Others' | 'HeroFullArt'
+type Category = 'Art' | 'Banner' | 'Cutin' | 'Full:Events' | 'Full:Scenario' | 'Full:Others' | 'HeroFullArt'
 type ImageEntry = { f: string; w: number; h: number }
 type WallpapersData = Record<Category, ImageEntry[]>
 
@@ -15,7 +15,7 @@ interface Props {
   data: WallpapersData
 }
 
-const CATEGORIES: Category[] = ['HeroFullArt', 'Full:Scenario', 'Full:Events', 'Full:Others', 'Banner', 'Art']
+const CATEGORIES: Category[] = ['HeroFullArt', 'Cutin', 'Full:Scenario', 'Full:Events', 'Full:Others', 'Banner', 'Art']
 
 function isValidCategory(value: string | null): value is Category {
   return value !== null && CATEGORIES.includes(value as Category)
