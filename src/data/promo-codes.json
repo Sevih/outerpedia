@@ -433,5 +433,13 @@
     },
     "start": "2026-01-29",
     "end": "2026-03-01"
+  },
+  {
+    "code": "OUTERPLANEXINKYUNG",
+    "description": {
+       "Free Ether": "1000"
+    },
+    "start": "2026-01-31",
+    "end": "2026-03-01"
   }
 ] 
