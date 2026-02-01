@@ -373,13 +373,13 @@ export default function BeginnerFAQ() {
                         <p className="text-sm font-semibold text-orange-300">2. 탐험</p>
                       </div>
                       <div className="p-3 bg-yellow-900/10 border-l-4 border-yellow-500 rounded">
-                        <p className="text-sm font-semibold text-yellow-300">3. 보급 모듈</p>
+                        <p className="text-sm font-semibold text-yellow-300">3. 싱크로 룸</p>
                       </div>
                       <div className="p-3 bg-lime-900/10 border-l-4 border-lime-500 rounded">
                         <p className="text-sm font-semibold text-lime-300">4. 케이트의 공방</p>
                       </div>
                       <div className="p-3 bg-green-900/10 border-l-4 border-green-500 rounded">
-                        <p className="text-sm font-semibold text-green-300">5. 싱크로 룸</p>
+                        <p className="text-sm font-semibold text-green-300">5. 보급 모듈</p>
                       </div>
                       <p className=" text-sm"><strong>퀴크 & 정밀 제작</strong>은 열리면 해금하세요 (시즌 1 스테이지 9-5 클리어).</p>
                     </div>

@@ -373,13 +373,13 @@ export default function BeginnerFAQ() {
                         <p className="text-sm font-semibold text-orange-300">2. 探検</p>
                       </div>
                       <div className="p-3 bg-yellow-900/10 border-l-4 border-yellow-500 rounded">
-                        <p className="text-sm font-semibold text-yellow-300">3. 補給モジュール</p>
+                        <p className="text-sm font-semibold text-yellow-300">3. シンクロルーム</p>
                       </div>
                       <div className="p-3 bg-lime-900/10 border-l-4 border-lime-500 rounded">
                         <p className="text-sm font-semibold text-lime-300">4. ケイトの工房</p>
                       </div>
                       <div className="p-3 bg-green-900/10 border-l-4 border-green-500 rounded">
-                        <p className="text-sm font-semibold text-green-300">5. シンクロルーム</p>
+                        <p className="text-sm font-semibold text-green-300">5. 補給モジュール</p>
                       </div>
                       <p className=" text-sm"><strong>クワーク＆精密クラフト</strong>は開放されたら解放しましょう（シーズン1ステージ9-5クリア）。</p>
                     </div>

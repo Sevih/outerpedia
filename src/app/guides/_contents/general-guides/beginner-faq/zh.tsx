@@ -373,13 +373,13 @@ export default function BeginnerFAQ() {
                         <p className="text-sm font-semibold text-orange-300">2. 探险</p>
                       </div>
                       <div className="p-3 bg-yellow-900/10 border-l-4 border-yellow-500 rounded">
-                        <p className="text-sm font-semibold text-yellow-300">3. 补给模块</p>
+                        <p className="text-sm font-semibold text-yellow-300">3. 同步室</p>
                       </div>
                       <div className="p-3 bg-lime-900/10 border-l-4 border-lime-500 rounded">
                         <p className="text-sm font-semibold text-lime-300">4. 凯特工坊</p>
                       </div>
                       <div className="p-3 bg-green-900/10 border-l-4 border-green-500 rounded">
-                        <p className="text-sm font-semibold text-green-300">5. 同步室</p>
+                        <p className="text-sm font-semibold text-green-300">5. 补给模块</p>
                       </div>
                       <p className=" text-sm"><strong>特质和精密制作</strong>开放后解锁（通关第一季9-5关）。</p>
                     </div>
