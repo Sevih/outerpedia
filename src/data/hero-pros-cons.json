@@ -273,12 +273,11 @@
             "top-tier striker with massive single-target burst potential",
             "possesses a passive damage cap that prevents her from being one-shot by nuke skills",
             "punishes enemy critical hits by triggering a counterattack"
-            
         ],
         "con": [
             "heavily reliant on her passive, making her useless against units that prevents reaction skills from triggering",
             "requires 100% crit rate to fully utilize EE",
-            "requires max transcendance to unlock full potential" 
+            "requires max transcendance to unlock full potential"
         ]
     },
     "hanbyul-lee": {
@@ -304,6 +303,20 @@
             "extremely niche usage, value drops significantly if the enemy team attacks directly without using non-attack skills or the enemy prevents/blocks {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK} ",
             "overshadowed by more versatile defenders for general PvE content progression",
             "EE is required to consistently hit debuffs due to having low base effectiveness stat"
+        ]
+    },
+    "hilde": {
+        "pro": [
+            "{SK/Hilde|Passive} Has innate immunity to {D/BT_STUN} allows her to act consistently against control teams",
+            "{SK/Hilde|Passive} significantly reduces damage taken by allies from AoE attacks, making her a strong anti-cleave unit",
+            "{SK/Hilde|Passive} protects fragile allies by absorbing redirected damage",
+            "{SK/Hilde|Passive} disrupts enemy momentum with reaction skills that can inflict {D/BT_STONE} when hit"
+        ],
+        "con": [
+            "reaction skills may not trigger against bosses/units that are immune to reactions or use non-attack skills",
+            "offers low offensive pressure compared to other bruiser tanks",
+            "vulnerable to {D/BT_SEALED} or Fixed Damage which bypasses her mitigation",
+            "{SK/Hilde|S1} primarily effective in PvP, less efficient for general PvE progression due to bosses/Enemies always have a higher HP"
         ]
     }
 }

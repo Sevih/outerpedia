@@ -3100,6 +3100,57 @@
       "armorSets": [
         "Revenge"
       ]
+    },
+    "Guild Raid": {
+      "weaponSub": [
+        {
+          "name": "Token of the Supreme Witch",
+          "mainStat": [
+            "ATK%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Gorgon's Vanity [Defender]",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Unholy Exsultet",
+          "mainStat": [
+            "ATK%"
+          ]
+        },
+        {
+          "name": "Coward's Treasure",
+          "mainStat": [
+            "EFF"
+          ]
+        },
+        {
+          "name": "Fool's Dawn",
+          "mainStat": [
+            "EFF"
+          ]
+        },
+        {
+          "name": "Steel Necklace",
+          "mainStat": [
+            "EFF"
+          ]
+        }
+      ],
+      "sub": [
+        "EFF",
+        "ATK",
+        "HP",
+        "DEF"
+      ],
+      "armorSets": [
+        "Revenge"
+      ]
     }
   },
   "epsilon": {

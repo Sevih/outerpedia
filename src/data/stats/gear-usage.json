@@ -634,6 +634,20 @@
     ]
   },
   {
+    "name": "Unholy Exsultet",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 6,
+    "characters": [
+      "Christina",
+      "Core Fusion Veronica",
+      "Ember",
+      "Kappa",
+      "Leo",
+      "Luna"
+    ]
+  },
+  {
     "name": "Attack Set",
     "type": "Set",
     "class": null,
@@ -696,19 +710,6 @@
       "Poolside Trickster Regina",
       "Rey",
       "Rin"
-    ]
-  },
-  {
-    "name": "Unholy Exsultet",
-    "type": "Amulet",
-    "class": "Defender",
-    "count": 5,
-    "characters": [
-      "Christina",
-      "Core Fusion Veronica",
-      "Kappa",
-      "Leo",
-      "Luna"
     ]
   },
   {
@@ -829,6 +830,17 @@
     ]
   },
   {
+    "name": "Fool's Dawn",
+    "type": "Amulet",
+    "class": "Defender",
+    "count": 3,
+    "characters": [
+      "Ember",
+      "Omega Nadja",
+      "Summer Knight's Dream Ember"
+    ]
+  },
+  {
     "name": "Gorgon's Vanity [Ranger]",
     "type": "Amulet",
     "class": "Ranger",
@@ -923,16 +935,6 @@
     ]
   },
   {
-    "name": "Fool's Dawn",
-    "type": "Amulet",
-    "class": "Defender",
-    "count": 2,
-    "characters": [
-      "Omega Nadja",
-      "Summer Knight's Dream Ember"
-    ]
-  },
-  {
     "name": "Gorgon's Vanity [Defender]",
     "type": "Amulet",
     "class": "Defender",
@@ -980,6 +982,16 @@
     "characters": [
       "Bryn",
       "Regina"
+    ]
+  },
+  {
+    "name": "Steel Necklace",
+    "type": "Amulet",
+    "class": null,
+    "count": 2,
+    "characters": [
+      "Ember",
+      "Gnosis Beth"
     ]
   },
   {
@@ -1109,21 +1121,21 @@
     ]
   },
   {
-    "name": "Steel Necklace",
-    "type": "Amulet",
-    "class": null,
-    "count": 1,
-    "characters": [
-      "Gnosis Beth"
-    ]
-  },
-  {
     "name": "Sublime Melody",
     "type": "Weapon",
     "class": "Mage",
     "count": 1,
     "characters": [
       "Fortuna"
+    ]
+  },
+  {
+    "name": "Token of the Supreme Witch",
+    "type": "Weapon",
+    "class": "Defender",
+    "count": 1,
+    "characters": [
+      "Ember"
     ]
   },
   {
@@ -1445,13 +1457,6 @@
     "name": "The Power of Science",
     "type": "Weapon",
     "class": "Striker",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Token of the Supreme Witch",
-    "type": "Weapon",
-    "class": "Defender",
     "count": 0,
     "characters": []
   },
