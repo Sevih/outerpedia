@@ -929,10 +929,8 @@ export const ProgressTracker = {
    * Returns 1-4 based on current UTC date
    */
   getVHTCurrentUnlockedPhase(): number {
-    // TODO: Remove test override
-    const dayOfMonth = 19 // Test: simulate 19th of month (phase 3 unlocked)
-    // const now = new Date()
-    // const dayOfMonth = now.getUTCDate()
+    const now = new Date()
+    const dayOfMonth = now.getUTCDate()
 
     if (dayOfMonth >= 22) return 4
     if (dayOfMonth >= 15) return 3
