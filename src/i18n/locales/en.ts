@@ -807,6 +807,8 @@ const en = {
   'progress.daysRemaining': 'days remaining',
   'progress.availableIn': 'Available in',
   'progress.availableNow': 'Available now!',
+  'progress.vht.floors': 'Floors',
+  'progress.vht.nextUnlock': 'Next floors unlock in',
 
   // Progress Tracker Tasks
   'progress.task.free-recruit-custom': 'Free Custom Recruit',

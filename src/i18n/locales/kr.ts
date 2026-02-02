@@ -807,6 +807,8 @@ const kr = {
   'progress.daysRemaining': '일 남음',
   'progress.availableIn': '이용 가능까지',
   'progress.availableNow': '지금 이용 가능!',
+  'progress.vht.floors': '층',
+  'progress.vht.nextUnlock': '다음 층 해금까지',
 
   // Progress Tracker Tasks
   'progress.task.free-recruit-custom': '무료 커스텀 동료 영입',

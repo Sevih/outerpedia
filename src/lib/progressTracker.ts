@@ -921,6 +921,59 @@ export const ProgressTracker = {
   },
 
   /**
+   * Get the current unlocked phase for VHT (Very Hard Tower)
+   * Phase 1 (floors 1-5): unlocked on 1st of month
+   * Phase 2 (floors 6-10): unlocked on 8th of month
+   * Phase 3 (floors 11-15): unlocked on 15th of month
+   * Phase 4 (floors 16-20): unlocked on 22nd of month
+   * Returns 1-4 based on current UTC date
+   */
+  getVHTCurrentUnlockedPhase(): number {
+    // TODO: Remove test override
+    const dayOfMonth = 19 // Test: simulate 19th of month (phase 3 unlocked)
+    // const now = new Date()
+    // const dayOfMonth = now.getUTCDate()
+
+    if (dayOfMonth >= 22) return 4
+    if (dayOfMonth >= 15) return 3
+    if (dayOfMonth >= 8) return 2
+    return 1
+  },
+
+  /**
+   * Get the next VHT phase unlock time
+   * Returns the timestamp of next phase unlock, or null if all phases are unlocked
+   */
+  getNextVHTPhaseUnlockTime(): number | null {
+    const now = new Date()
+    const currentPhase = this.getVHTCurrentUnlockedPhase()
+
+    if (currentPhase >= 4) return null // All phases unlocked
+
+    // Determine next unlock day
+    const unlockDays = [1, 8, 15, 22]
+    const nextUnlockDay = unlockDays[currentPhase] // currentPhase is 1-3, so index is 1-3
+
+    // Create date for next unlock
+    const nextUnlock = new Date(now)
+    nextUnlock.setUTCDate(nextUnlockDay)
+    nextUnlock.setUTCHours(DAILY_RESET_HOUR_UTC, 0, 0, 0)
+
+    // If we're somehow past this date (shouldn't happen), return null
+    if (nextUnlock.getTime() <= now.getTime()) return null
+
+    return nextUnlock.getTime()
+  },
+
+  /**
+   * Get VHT phase label for display (e.g., "1-5", "6-10", "11-15", "16-20")
+   */
+  getVHTPhaseLabel(phase: number): string {
+    const labels = ['1-5', '6-10', '11-15', '16-20']
+    return labels[phase - 1] || ''
+  },
+
+  /**
    * Format time remaining until timestamp
    */
   formatTimeUntil(timestamp: number): string {

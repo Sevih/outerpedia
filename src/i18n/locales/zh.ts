@@ -807,6 +807,8 @@ const zh = {
   'progress.daysRemaining': '天剩余',
   'progress.availableIn': '可用时间',
   'progress.availableNow': '现在可用！',
+  'progress.vht.floors': '层',
+  'progress.vht.nextUnlock': '下一层解锁时间',
 
   // Progress Tracker Tasks
   'progress.task.free-recruit-custom': '免费自定义招募',

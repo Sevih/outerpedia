@@ -807,6 +807,8 @@ const jp = {
   'progress.daysRemaining': '日残り',
   'progress.availableIn': '利用可能まで',
   'progress.availableNow': '利用可能！',
+  'progress.vht.floors': '階',
+  'progress.vht.nextUnlock': '次の階層解禁まで',
 
   // Progress Tracker Tasks
   'progress.task.free-recruit-custom': '無料カスタムスカウト',

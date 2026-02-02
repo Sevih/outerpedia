@@ -75,12 +75,28 @@ export function ProgressTrackerClient() {
 
       if (!task || task.maxCount === undefined) return
 
-      // If task is completed (count === maxCount), reset to 0
-      // Otherwise increment by 1
-      if (task.count === task.maxCount) {
-        ProgressTracker.updateTaskCount(taskId, type, 0)
+      // Special handling for VHT: limit increment to current unlocked phase
+      const def = type === 'monthly' ? MONTHLY_TASK_DEFINITIONS[taskId] : null
+      const isVHT = def?.hasProgressiveUnlock
+
+      if (isVHT) {
+        const unlockedPhase = ProgressTracker.getVHTCurrentUnlockedPhase()
+        const currentCount = task.count ?? 0
+
+        // If at or above unlocked phase, reset to 0
+        if (currentCount >= unlockedPhase) {
+          ProgressTracker.updateTaskCount(taskId, type, 0)
+        } else {
+          // Increment but cap at unlocked phase
+          ProgressTracker.updateTaskCount(taskId, type, Math.min(currentCount + 1, unlockedPhase))
+        }
       } else {
-        ProgressTracker.incrementTaskCount(taskId, type)
+        // Normal behavior
+        if (task.count === task.maxCount) {
+          ProgressTracker.updateTaskCount(taskId, type, 0)
+        } else {
+          ProgressTracker.incrementTaskCount(taskId, type)
+        }
       }
 
       setProgress(ProgressTracker.getProgress())
@@ -99,11 +115,23 @@ export function ProgressTrackerClient() {
 
       if (!task || task.maxCount === undefined) return
 
-      // Toggle between 0 and maxCount
-      if (task.completed) {
-        ProgressTracker.updateTaskCount(taskId, type, 0)
+      // Special handling for VHT: toggle between 0 and unlockedPhase (not maxCount)
+      const def = type === 'monthly' ? MONTHLY_TASK_DEFINITIONS[taskId] : null
+      if (def?.hasProgressiveUnlock) {
+        const unlockedPhase = ProgressTracker.getVHTCurrentUnlockedPhase()
+        const currentCount = task.count ?? 0
+        if (currentCount >= unlockedPhase) {
+          ProgressTracker.updateTaskCount(taskId, type, 0)
+        } else {
+          ProgressTracker.updateTaskCount(taskId, type, unlockedPhase)
+        }
       } else {
-        ProgressTracker.updateTaskCount(taskId, type, task.maxCount)
+        // Normal behavior: toggle between 0 and maxCount
+        if (task.completed) {
+          ProgressTracker.updateTaskCount(taskId, type, 0)
+        } else {
+          ProgressTracker.updateTaskCount(taskId, type, task.maxCount)
+        }
       }
 
       setProgress(ProgressTracker.getProgress())
@@ -1293,6 +1321,21 @@ function TaskListByCategory({
                 const nextResetTime = def?.resetIntervalDays
                   ? ProgressTracker.getNextRecurringTaskReset(key)
                   : null
+
+                // Special rendering for VHT (progressive unlock)
+                if (def?.hasProgressiveUnlock) {
+                  return (
+                    <VHTTaskItem
+                      key={key}
+                      task={task}
+                      labelKey={`progress.task.${key}`}
+                      onRowClick={() => onIncrement(key, type)}
+                      onCheckboxChange={() => onToggle(key, type)}
+                      t={t}
+                    />
+                  )
+                }
+
                 return (
                   <TaskItem
                     key={key}
@@ -1383,6 +1426,81 @@ function TaskItem({
         <span className="text-xs text-purple-400">
           {ProgressTracker.formatTimeUntil(nextResetTime)}
         </span>
+      )}
+    </div>
+  )
+}
+
+// VHT (Very Hard Tower) Task Item with progressive phase unlock
+function VHTTaskItem({
+  task,
+  labelKey,
+  onRowClick,
+  onCheckboxChange,
+  t,
+}: {
+  task: TaskProgress
+  labelKey: string
+  onRowClick: () => void
+  onCheckboxChange: () => void
+  t: (key: string) => string
+}) {
+  const unlockedPhase = ProgressTracker.getVHTCurrentUnlockedPhase()
+  const nextUnlockTime = ProgressTracker.getNextVHTPhaseUnlockTime()
+  const currentCount = task.count ?? 0
+
+  // Checkbox is checked when all unlocked phases are completed
+  const isFullyCompleted = currentCount >= unlockedPhase
+
+  // Get max floor available based on unlocked phase (5, 10, 15, or 20)
+  const maxFloorAvailable = unlockedPhase * 5
+
+  return (
+    <div
+      className="p-4 bg-gray-800 rounded-lg select-none cursor-pointer hover:bg-gray-750 transition group"
+      onClick={onRowClick}
+    >
+      {/* Main row - similar to TaskItem */}
+      <div className="flex items-center gap-3">
+        {/* Checkbox - completes all unlocked phases or resets */}
+        <input
+          type="checkbox"
+          checked={isFullyCompleted}
+          onChange={(e) => {
+            e.stopPropagation()
+            onCheckboxChange()
+          }}
+          onClick={(e) => e.stopPropagation()}
+          onTouchEnd={(e) => e.stopPropagation()}
+          className="w-5 h-5 rounded border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
+        />
+
+        {/* Label */}
+        <span className={`flex-1 ${isFullyCompleted ? 'line-through text-gray-500' : 'text-gray-100'} group-hover:text-white transition`}>
+          {t(labelKey)}
+        </span>
+
+        {/* Floors available indicator */}
+        <span className="text-xs text-cyan-400/80">
+          {t('progress.vht.floors')} 1-{maxFloorAvailable}
+        </span>
+
+        {/* Counter */}
+        <span className="text-sm text-gray-400 min-w-[32px] text-right">
+          {currentCount}/{task.maxCount}
+        </span>
+      </div>
+
+      {/* Next unlock timer - compact inline */}
+      {nextUnlockTime && (
+        <div className="flex items-center gap-1.5 mt-2 ml-8 text-xs text-amber-400/80">
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>
+            {t('progress.vht.nextUnlock')}: {ProgressTracker.formatTimeUntil(nextUnlockTime)}
+          </span>
+        </div>
       )}
     </div>
   )

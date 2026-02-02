@@ -757,7 +757,8 @@ export const MONTHLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = {
     category: 'task',
     labelKey: 'progress.task.skyward-tower-vhard-20',
     permanent: true,
-    maxCount: 1,
+    maxCount: 4, // 4 phases of 5 floors each, unlocked on 1st, 8th, 15th, 22nd of month
+    hasProgressiveUnlock: true, // Special handling for VHT progressive unlock
   },
   // Irregular Extermination
   'irregular-floor-3': {

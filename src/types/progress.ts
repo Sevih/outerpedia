@@ -47,6 +47,8 @@ export interface TaskDefinition {
   shopTab?: string // Optional i18n key for shop tab
   shopItemKey?: string // Item key from items.json for ItemInlineDisplay (e.g., 'Stamina')
   shopItemQuantity?: number // Quantity to display (e.g., 50 for "50 x Stamina")
+  // Progressive unlock (VHT-style: phases unlock on specific days of the month)
+  hasProgressiveUnlock?: boolean // If true, count is limited by current unlocked phase
 }
 
 export interface UserSettings {
