@@ -36,25 +36,17 @@ export default async function Home() {
   return (
     <>
       {/* HERO */}
-      <div className="relative w-full rounded-xl overflow-hidden mb-2 min-h-[240px] md:min-h-[280px] bg-zinc-900">
+      <div className="relative w-full rounded-xl overflow-hidden mb-2 aspect-[21/9] max-h-[100px] md:max-h-[320px]">
         <Image
-          src="/images/ui/og_home_no_text.webp"
+          src="/images/outerpedia_2k_21-9.webp"
           alt="Outerpedia - Outerplane Tier List, Characters & Gear"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-95"
+          className="object-cover object-center"
         />
-        {/* Overlay + Title */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-3 py-4 md:px-6 md:py-8">
-          <h1 className="homepage-title homepage-title-responsive">
-            {t('titles.main.main')}
-          </h1>
-
-          <p className="mt-2 text-gray-300 max-w-sm md:max-w-xl text-xs md:text-sm leading-snug md:leading-relaxed px-2">
-            {t('titles.main.desc')}
-          </p>
-        </div>
+        {/* SEO h1 - visually hidden */}
+        <h1 className="sr-only">{t('titles.main.main')}</h1>
       </div>
 
       {/* Intro text - hidden on mobile */}

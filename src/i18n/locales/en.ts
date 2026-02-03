@@ -1112,6 +1112,7 @@ const en = {
   'wallpapers.title': 'Wallpapers',
   'wallpapers.description': 'Browse and download official Outerplane artworks. Click on any image to preview and download.',
   'wallpapers.download': 'Download PNG',
+  'wallpapers.categories.Outerpedia': 'Outerpedia',
   'wallpapers.categories.Art': 'Demiurge Art',
   'wallpapers.categories.Banner': 'Banners',
   'wallpapers.categories.Full:Events': 'Events',

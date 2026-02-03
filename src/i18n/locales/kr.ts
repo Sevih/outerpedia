@@ -1112,6 +1112,7 @@ const kr = {
   'wallpapers.title': '배경화면',
   'wallpapers.description': '아우터플레인 공식 아트워크를 탐색하고 다운로드하세요. 이미지를 클릭하면 미리보기 및 다운로드가 가능합니다.',
   'wallpapers.download': 'PNG 다운로드',
+  'wallpapers.categories.Outerpedia': 'Outerpedia',
   'wallpapers.categories.Art': '데미우르고스 아트',
   'wallpapers.categories.Banner': '배너',
   'wallpapers.categories.Full:Events': '이벤트',

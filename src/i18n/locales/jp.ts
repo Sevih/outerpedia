@@ -1112,6 +1112,7 @@ const jp = {
   'wallpapers.title': '壁紙',
   'wallpapers.description': 'アウタープレインの公式アートワークを閲覧・ダウンロードできます。画像をクリックしてプレビューとダウンロードができます。',
   'wallpapers.download': 'PNGをダウンロード',
+  'wallpapers.categories.Outerpedia': 'Outerpedia',
   'wallpapers.categories.Art': 'デミウルゴスアート',
   'wallpapers.categories.Banner': 'バナー',
   'wallpapers.categories.Full:Events': 'イベント',

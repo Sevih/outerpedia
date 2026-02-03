@@ -1110,6 +1110,7 @@ const zh = {
   'wallpapers.title': '壁纸',
   'wallpapers.description': '浏览并下载异域战记官方艺术作品。点击任意图片即可预览并下载。',
   'wallpapers.download': '下载',
+  'wallpapers.categories.Outerpedia': 'Outerpedia',
   'wallpapers.categories.Art': '创世之神招募',
   'wallpapers.categories.Banner': '横幅',
   'wallpapers.categories.Full:Events': '活动CG',

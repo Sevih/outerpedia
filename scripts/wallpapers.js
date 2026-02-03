@@ -442,6 +442,18 @@ function generateJson() {
     totalCount += allFiles.length;
   }
 
+  // Add Outerpedia images (stored in /images/, not /images/download/)
+  const outerpediaDir = path.join(PROJECT_ROOT, 'public', 'images');
+  const outerpediaFiles = [
+    { f: 'outerpedia_8k_16-9', w: 7680, h: 4320 },
+    { f: 'outerpedia_2k_21-9', w: 2560, h: 1080 },
+    { f: 'outerpedia_mobile', w: 1080, h: 1920 },
+    { f: 'outerpedia_square', w: 1080, h: 1080 },
+  ].filter(img => fs.existsSync(path.join(outerpediaDir, `${img.f}.png`)));
+
+  result['Outerpedia'] = outerpediaFiles;
+  totalCount += outerpediaFiles.length;
+
   fs.writeFileSync(JSON_OUTPUT, JSON.stringify(result, null, 2));
   console.log(`Generated wallpapers.json with ${totalCount} images`);
 }

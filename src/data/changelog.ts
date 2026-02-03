@@ -27,6 +27,24 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-02-03",
+    title: {
+      en: "Official Recognition from OUTERPLANE Developers",
+      jp: "OUTERPLANEの開発チームからの公式認定",
+      kr: "OUTERPLANE 개발팀의 공식 인정",
+      zh: "OUTERPLANE开发团队的官方认可",
+    } as LString,
+    type: "feature",
+    content: [
+      {
+        en: "Outerpedia has been officially recognized by the OUTERPLANE development team! A special coupon code **OUTERPEDIA** has been created to celebrate our community resource. Thank you to all users for your support!",
+        jp: "OuterpediaがOUTERPLANE開発チームから公式に認定されました！コミュニティリソースを記念して、特別クーポンコード「**OUTERPEDIA**」が作成されました。ご支援いただいた皆様、ありがとうございます！",
+        kr: "Outerpedia가 OUTERPLANE 개발팀으로부터 공식 인정을 받았습니다! 커뮤니티 리소스를 기념하여 특별 쿠폰 코드 **OUTERPEDIA**가 생성되었습니다. 지원해 주신 모든 분들께 감사드립니다!",
+        zh: "Outerpedia已获得OUTERPLANE开发团队的官方认可！为庆祝我们的社区资源，特别优惠码「**OUTERPEDIA**」已创建。感谢所有用户的支持！",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-01-30",
     title: {
       en: "Wallpapers Gallery",

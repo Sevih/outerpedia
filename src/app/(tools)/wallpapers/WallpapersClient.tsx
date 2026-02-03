@@ -7,7 +7,7 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 import { AnimatedTabs } from '@/app/components/AnimatedTabs'
 import WallpaperLightbox from '@/app/components/WallpaperLightbox'
 
-type Category = 'Art' | 'Banner' | 'Cutin' | 'Full:Events' | 'Full:Scenario' | 'Full:Others' | 'HeroFullArt'
+type Category = 'Outerpedia' | 'Art' | 'Banner' | 'Cutin' | 'Full:Events' | 'Full:Scenario' | 'Full:Others' | 'HeroFullArt'
 type ImageEntry = { f: string; w: number; h: number }
 type WallpapersData = Record<Category, ImageEntry[]>
 
@@ -15,7 +15,7 @@ interface Props {
   data: WallpapersData
 }
 
-const CATEGORIES: Category[] = ['HeroFullArt', 'Cutin', 'Full:Scenario', 'Full:Events', 'Full:Others', 'Banner', 'Art']
+const CATEGORIES: Category[] = ['Outerpedia', 'HeroFullArt', 'Cutin', 'Full:Scenario', 'Full:Events', 'Full:Others', 'Banner', 'Art']
 
 function isValidCategory(value: string | null): value is Category {
   return value !== null && CATEGORIES.includes(value as Category)
@@ -33,7 +33,7 @@ export default function WallpapersClient({ data }: Props) {
   const searchParams = useSearchParams()
 
   const categoryFromUrl = searchParams.get('cat')
-  const selectedCategory: Category = isValidCategory(categoryFromUrl) ? categoryFromUrl : 'HeroFullArt'
+  const selectedCategory: Category = isValidCategory(categoryFromUrl) ? categoryFromUrl : 'Outerpedia'
 
   const setSelectedCategory = useCallback((cat: Category) => {
     router.replace(`?cat=${cat}`, { scroll: false })
@@ -52,6 +52,15 @@ export default function WallpapersClient({ data }: Props) {
   )
 
   const images = useMemo(() => {
+    if (selectedCategory === 'Outerpedia') {
+      return (data[selectedCategory] ?? []).map((entry) => ({
+        filename: entry.f,
+        width: entry.w,
+        height: entry.h,
+        src: `/images/${entry.f}.webp`,
+        downloadSrc: `/images/${entry.f}.png`,
+      }))
+    }
     const folder = getFolderName(selectedCategory)
     return (data[selectedCategory] ?? []).map((entry) => ({
       filename: entry.f,

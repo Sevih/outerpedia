@@ -2592,5 +2592,27 @@
       "w": 2048,
       "h": 1024
     }
+  ],
+  "Outerpedia": [
+    {
+      "f": "outerpedia_8k_16-9",
+      "w": 7680,
+      "h": 4320
+    },
+    {
+      "f": "outerpedia_2k_21-9",
+      "w": 2560,
+      "h": 1080
+    },
+    {
+      "f": "outerpedia_mobile",
+      "w": 1080,
+      "h": 1920
+    },
+    {
+      "f": "outerpedia_square",
+      "w": 1080,
+      "h": 1080
+    }
   ]
 }
