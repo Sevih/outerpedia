@@ -307,10 +307,10 @@
     },
     "hilde": {
         "pro": [
-            "{SK/Hilde|Passive} Has innate immunity to {D/BT_STUN} allows her to act consistently against control teams",
-            "{SK/Hilde|Passive} significantly reduces damage taken by allies from AoE attacks, making her a strong anti-cleave unit",
-            "{SK/Hilde|Passive} protects fragile allies by absorbing redirected damage",
-            "{SK/Hilde|Passive} disrupts enemy momentum with reaction skills that can inflict {D/BT_STONE} when hit"
+            "{SK/Hilde|S2} Has innate immunity to {D/BT_STUN} allows her to act consistently against control teams",
+            "{SK/Hilde|S2} significantly reduces damage taken by allies from AoE attacks, making her a strong anti-cleave unit",
+            "{SK/Hilde|S2} protects fragile allies by absorbing redirected damage",
+            "{SK/Hilde|S2} disrupts enemy momentum with reaction skills that can inflict {D/BT_STONE} when hit"
         ],
         "con": [
             "reaction skills may not trigger against bosses/units that are immune to reactions or use non-attack skills",
