@@ -17,23 +17,14 @@ html {
   scroll-behavior: smooth;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  /* assombrit l'image */
-  z-index: 0;
-  pointer-events: none;
-}
-
 body {
-  background-image: url('/images/background_compressed.webp');
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('/images/background_compressed.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-
 }
 
 body.fullscreen-mode {
@@ -46,14 +37,6 @@ body.fullscreen-mode #__next {
 }
 
 
-body>* {
-  position: relative;
-  z-index: 1;
-}
-
-footer{
-  z-index: 1;
-}
 /* Portal root for modals - must be above everything */
 #portal-root {
   position: relative;
