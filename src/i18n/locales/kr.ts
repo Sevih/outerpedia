@@ -773,6 +773,8 @@ const kr = {
   'tool.progress-tracker.description': 'Outerplane 진행 상황 추적: 일일/주간/월간 작업, 상점 구매, 제작.',
   'tool.wallpapers.name': '배경화면',
   'tool.wallpapers.description': '아우터플레인 공식 아트워크 및 배경화면을 탐색하고 다운로드하세요.',
+  'tool.ost.name': '사운드트랙',
+  'tool.ost.description': '아우터플레인 공식 OST를 듣고 다운로드하세요.',
 
   // Progress Tracker
   'progress.daily': '일일 진행률',
@@ -1123,6 +1125,11 @@ const kr = {
   'wallpapers.disclaimer.line1': '이 자료는 퍼블리셔(Major9)와 개발사(VAGames)의 승인을 받아 개인 사용 목적으로만 제공됩니다.',
   'wallpapers.disclaimer.line2': '기타 용도는 공식 지원을 통해 허가를 요청해 주세요:',
   'wallpapers.contactLink': '공식 지원',
+
+  // OST
+  'ost.title': '사운드트랙',
+  'ost.download': '다운로드',
+  'ost.selectTrack': '트랙 선택',
 }
 
 export default kr

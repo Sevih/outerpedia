@@ -773,6 +773,8 @@ const jp = {
   'tool.progress-tracker.description': 'Outerplaneの進捗を追跡：デイリー/ウィークリー/マンスリータスク、ショップ購入、クラフト。',
   'tool.wallpapers.name': '壁紙',
   'tool.wallpapers.description': 'アウタープレインの公式アートワークと壁紙を閲覧・ダウンロード。',
+  'tool.ost.name': 'サウンドトラック',
+  'tool.ost.description': 'アウタープレインの公式OSTを試聴・ダウンロード。',
 
   // Progress Tracker
   'progress.daily': 'デイリー進捗',
@@ -1123,6 +1125,11 @@ const jp = {
   'wallpapers.disclaimer.line1': 'これらの素材は、パブリッシャー（Major9）および開発者（VAGames）の許可を得て、個人使用目的でのみ提供されています。',
   'wallpapers.disclaimer.line2': 'その他の使用については、こちらからお問い合わせください：',
   'wallpapers.contactLink': '公式サポート',
+
+  // OST
+  'ost.title': 'サウンドトラック',
+  'ost.download': 'ダウンロード',
+  'ost.selectTrack': '曲を選択',
 }
 
 export default jp

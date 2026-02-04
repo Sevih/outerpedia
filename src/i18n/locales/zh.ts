@@ -773,6 +773,8 @@ const zh = {
   'tool.progress-tracker.description': '追踪您的异域战记进度：日常/周常/月常，包括任务、制作和商店购买。',
   'tool.wallpapers.name': '壁纸',
   'tool.wallpapers.description': '浏览并下载异域战记官方艺术作品和壁纸。',
+  'tool.ost.name': '原声带',
+  'tool.ost.description': '收听并下载异域战记官方原声音乐。',
 
   // Progress Tracker
   'progress.daily': '每日进度',
@@ -1121,6 +1123,11 @@ const zh = {
   'wallpapers.disclaimer.line1': '这些素材已获得发行商（Major9）和开发商（VAGames）的许可，仅供个人使用。',
   'wallpapers.disclaimer.line2': '如需其他用途，请通过官方支持申请许可：',
   'wallpapers.contactLink': '官方支持',
+
+  // OST
+  'ost.title': '原声带',
+  'ost.download': '下载',
+  'ost.selectTrack': '选择曲目',
 }
 
 export default zh

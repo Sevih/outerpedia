@@ -22,11 +22,11 @@ type Props = {
 }
 
 const skillMap: Record<Props['skill'], string> = {
-  S1: 'SKT_FIRST',
-  S2: 'SKT_SECOND',
-  S3: 'SKT_ULTIMATE',
-  Passive: 'SKT_CHAIN_PASSIVE',
-  Chain: 'SKT_CHAIN_PASSIVE',
+  S1: 'SKT_FIRST',  // aka S1
+  S2: 'SKT_SECOND', // aka S2
+  S3: 'SKT_ULTIMATE', // aka S3
+  Passive: 'SKT_CHAIN_PASSIVE', // aka Chain attack
+  Chain: 'SKT_CHAIN_PASSIVE', // aka Dual attack
 }
 
 function formatColorTags(input: string) {

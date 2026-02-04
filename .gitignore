@@ -41,6 +41,7 @@ src/app/api/admin/
 /build
 /public/sitemap.xml
 /public/sitemaps*
+/public/audio/AudioClip*
 TODO.md
 /src/data/_allCharacters.json
 /src/data/_SlugToChar.json
