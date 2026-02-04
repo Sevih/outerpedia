@@ -1130,6 +1130,9 @@ const kr = {
   'ost.title': '사운드트랙',
   'ost.download': '다운로드',
   'ost.selectTrack': '트랙 선택',
+  'ost.disclaimer.line1': '이 사운드트랙은 개발사(VAGames)의 승인을 받아 개인용 비상업적 목적으로만 제공됩니다.',
+  'ost.disclaimer.line2': '권리자의 요청에 따라 삭제될 수 있습니다.',
+  'ost.keyboardShortcuts': '키보드 단축키',
 }
 
 export default kr

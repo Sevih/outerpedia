@@ -1128,6 +1128,9 @@ const zh = {
   'ost.title': '原声带',
   'ost.download': '下载',
   'ost.selectTrack': '选择曲目',
+  'ost.disclaimer.line1': '这些原声带已获得开发商（VAGames）的许可，仅供个人非商业使用。',
+  'ost.disclaimer.line2': '此内容可能会应权利人要求删除。',
+  'ost.keyboardShortcuts': '键盘快捷键',
 }
 
 export default zh

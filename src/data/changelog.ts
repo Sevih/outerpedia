@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-02-04",
+    title: {
+      en: "Soundtrack Player",
+      jp: "サウンドトラックプレイヤー",
+      kr: "사운드트랙 플레이어",
+      zh: "原声带播放器",
+    } as LString,
+    type: "feature",
+    url: "/ost",
+    content: [
+      {
+        en: "Enjoy Outerplane's BGM directly on Outerpedia! Stream or download your favorite tracks.",
+        jp: "OuterplaneのBGMをOuterpediaで楽しもう！お気に入りの曲をストリーミングまたはダウンロードできます。",
+        kr: "Outerplane의 BGM을 Outerpedia에서 즐기세요! 좋아하는 트랙을 스트리밍하거나 다운로드하세요.",
+        zh: "在Outerpedia上欣赏Outerplane的BGM！流媒体播放或下载您喜欢的曲目。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-02-03",
     title: {
       en: "Official Recognition from OUTERPLANE Developers",

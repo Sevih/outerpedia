@@ -1130,6 +1130,9 @@ const jp = {
   'ost.title': 'サウンドトラック',
   'ost.download': 'ダウンロード',
   'ost.selectTrack': '曲を選択',
+  'ost.disclaimer.line1': 'これらのサウンドトラックは、開発者（VAGames）の許可を得て、個人使用・非営利目的でのみ提供されています。',
+  'ost.disclaimer.line2': '権利者からの要請により削除される場合があります。',
+  'ost.keyboardShortcuts': 'キーボードショートカット',
 }
 
 export default jp
