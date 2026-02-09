@@ -55,23 +55,22 @@ export default function ImageLightbox({ src, alt, className = '', thumbnailClass
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 cursor-pointer"
                     onClick={closeLightbox}
                 >
-                    <button
-                        className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-50"
-                        onClick={closeLightbox}
-                        aria-label="Close"
-                    >
-                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                    <div className="relative w-[90vw] h-[90vh]" onClick={(e) => e.stopPropagation()}>
-                        <Image
+                    <div className="relative" onClick={(e) => e.stopPropagation()}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                             src={src}
                             alt={alt}
-                            fill
-                            className="object-contain"
-                            sizes="90vw"
+                            className="max-w-[90vw] max-h-[90vh] object-contain"
                         />
+                        <button
+                            className="absolute top-2 right-2 text-white/70 hover:text-white transition-colors z-10 p-2 bg-black/50 rounded-full"
+                            onClick={closeLightbox}
+                            aria-label="Close"
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             )}
