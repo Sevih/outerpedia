@@ -8,8 +8,8 @@
   "Element": "Dark",
   "Class": "Ranger",
   "SubClass": "Tactician",
-  "rank": null,
-  "rank_pvp": null,
+  "rank": "A",
+  "rank_pvp": "S",
   "role": "support",
   "tags": [
     "premium",

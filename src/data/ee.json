@@ -2629,7 +2629,7 @@
     "effect10_kr": "암속성 아군 행동 종료 후 <color=#28d9ed>고유 자원 : 검은 태양</color> 1개 획득",
     "effect10_zh": "暗属性我方行动结束后,获得1个<color=#28d9ed>固有资源:黑太阳</color>",
     "icon_effect": "TI_Icon_UO_Accessary_07",
-    "rank": "",
+    "rank": "A",
     "buff": [],
     "debuff": [
       "BT_COOL_CHARGE"
