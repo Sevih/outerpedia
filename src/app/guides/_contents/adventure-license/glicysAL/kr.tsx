@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import GlicysALTeamsData from './GlicysAL.json'
 import type { TeamData } from '@/types/team'
@@ -33,8 +32,6 @@ export default function GlicysGuide() {
               <RecommendedCharacterList entries={recommendedCharacters} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={GlicysALTeams.glicysAL} defaultStage="Team 1 – Icebreaker" />
-              <hr className="my-6 border-neutral-700" />
-              <CombatFootage videoId="gufhBKd9kXw" title="Glicys - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="26/08/2025" />
             </>
           ),
         },

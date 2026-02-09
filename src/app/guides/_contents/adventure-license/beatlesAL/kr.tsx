@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import BeatlesALTeamsData from './BeatlesAL.json'
 import type { TeamData } from '@/types/team'
@@ -44,13 +43,6 @@ export default function DekrilMekrilGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={BeatlesALTeams.beatlesAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="mx8ml6X_RZI"
-                                title="Dek'ril & Mek'ril - Adventure License - Stage 10 - 1 run clear (Auto)"
-                                author="XuRenChao"
-                                date="19/08/2025"
-                            />
                         </>
                     ),
                 },

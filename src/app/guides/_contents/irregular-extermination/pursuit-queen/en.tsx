@@ -36,7 +36,6 @@ export default function IrregularQueenGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <CombatFootage videos={[
                                 { videoId: "bPwKu7gjGWg", title: "1 run public", author: "Sevih", date: "01/10/2025" },
-                                { videoId: "9Sr0YMGaro0", title: "1 run kill (Auto)", author: "XuRenChao", date: "01/10/2025" },
                             ]} />
                         </>
                     ),

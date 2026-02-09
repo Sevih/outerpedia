@@ -5,7 +5,6 @@ import BossDisplay from '@/app/components/BossDisplay'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
 import { recommendedCharacters } from './recommendedCharacters'
-import CombatFootage from '@/app/components/CombatFootage'
 
 export default function NellaGuide() {
     return (
@@ -34,13 +33,6 @@ export default function NellaGuide() {
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="i2ok2KIpvsQ"
-                                title="Three Cries - Story Hard 4-1-10 clear (Auto) - by XuRenChao"
-                                author="XuRenChao"
-                                date="13/01/2025"
-                            />
                         </>
                     ),
                 },

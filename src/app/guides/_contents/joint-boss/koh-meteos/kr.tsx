@@ -38,13 +38,6 @@ export default function KOHMeteosGuide() {
               <RecommendedCharacterList entries={recommendedCharactersNov} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={KOHMeteosTeams.november2025} defaultStage="Recommended Team" />
-              <hr className="my-6 border-neutral-700" />
-              <CombatFootage
-                videoId="qPZzt25dKX0"
-                title="광명의 기사 메테우스 - 합동 챌린지 - (오토) 베리 하드"
-                author="XuRenChao"
-                date="15/11/2025"
-              />
             </>
           ),
         },

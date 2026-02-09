@@ -39,13 +39,6 @@ export default function PrototypeEx78Guide() {
               <RecommendedCharacterList entries={recommendedCharactersOct} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={PrototypeEx78Teams.october2025} defaultStage="Recommended Team" />
-              <hr className="my-6 border-neutral-700" />
-              <CombatFootage
-                videoId="jw0GIwox7YM"
-                title="EX-78示范机 - 联合挑战 - (自动) 极难"
-                author="XuRenChao"
-                date="28/10/2025"
-              />
             </>
           ),
         },

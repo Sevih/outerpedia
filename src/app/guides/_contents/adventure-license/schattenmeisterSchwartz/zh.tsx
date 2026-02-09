@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import SchattenmeisterSchwartzALTeamsData from './SchattenmeisterSchwartzAL.json'
 import type { TeamData } from '@/types/team'
@@ -38,13 +37,6 @@ export default function SchattenmeisterSchwartzGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={SchattenmeisterSchwartzALTeams.schattenmeisterSchwartzAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="glWpGZRH4xc"
-                                title="夜影团长施瓦兹 - 冒险许可证 - 第10阶段 - 1次通关 (自动)"
-                                author="XuRenChao"
-                                date="01/09/2025"
-                            />
                         </>
                     ),
                 },

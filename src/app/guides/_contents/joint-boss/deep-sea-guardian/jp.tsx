@@ -35,13 +35,6 @@ export default function DeepSeaGuardianGuide() {
               <RecommendedCharacterList entries={recommendedCharactersJan26} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={DeepSeaGuardianTeams.january2026} defaultStage="Recommended Team" />
-              <hr className="my-6 border-neutral-700" />
-              <CombatFootage
-                videoId="pOZr8AVgIi8"
-                title="深海ガーディアン - 共同作戦 - ベリーハード (Auto) - by XuRenChao"
-                author="XuRenChao"
-                date="20/01/2026"
-              />
             </>
           ),
         },

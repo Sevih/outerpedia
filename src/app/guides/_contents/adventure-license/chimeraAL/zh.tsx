@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import ChimeraALTeamsData from './ChimeraAL.json'
 import type { TeamData } from '@/types/team'
@@ -35,13 +34,6 @@ export default function UnidentifiedChimeraGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={ChimeraALTeams.chimeraAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="lil6XEE0VUE"
-                                title="未知的奇美拉 - 冒险许可证 - 第10阶段 - 1次通关 (自动)"
-                                author="XuRenChao"
-                                date="25/11/2025"
-                            />
                         </>
                     ),
                 },

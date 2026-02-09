@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import FulminationALTeamsData from './FulminationAL.json'
 import type { TeamData } from '@/types/team'
@@ -38,13 +37,6 @@ export default function FulminationALGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={FulminationALTeams.fulminationAL} defaultStage="Curse Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="lt4osbmszzY"
-                                title="Ful.Mi.NATION Assault Suit - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao"
-                                author="XuRenChao"
-                                date="29/07/2025"
-                            />
                         </>
                     ),
                 },

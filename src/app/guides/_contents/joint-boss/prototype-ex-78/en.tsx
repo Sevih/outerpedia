@@ -39,13 +39,6 @@ export default function PrototypeEx78Guide() {
               <RecommendedCharacterList entries={recommendedCharactersOct} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={PrototypeEx78Teams.october2025} defaultStage="Recommended Team" />
-              <hr className="my-6 border-neutral-700" />
-              <CombatFootage
-                videoId="jw0GIwox7YM"
-                title="Prototype EX-78 - Joint Challenge - (Auto) Very Hard"
-                author="XuRenChao"
-                date="28/10/2025"
-              />
             </>
           ),
         },

@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import KsaiALTeamsData from './KsaiAL.json'
 import type { TeamData } from '@/types/team'
@@ -34,8 +33,6 @@ export default function KsaiGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={KsaiALTeams.ksaiAL} defaultStage="Team 1 – Reliable Clear" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="-jEcneW-N3Y" title="科赛 - 冒险许可证 - 第10关 - 1次通关 (自动)" author="XuRenChao" date="15/09/2025" />
                         </>
                     ),
                 },

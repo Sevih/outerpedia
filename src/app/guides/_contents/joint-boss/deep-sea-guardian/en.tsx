@@ -35,13 +35,6 @@ export default function DeepSeaGuardianGuide() {
               <RecommendedCharacterList entries={recommendedCharactersJan26} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={DeepSeaGuardianTeams.january2026} defaultStage="Recommended Team" />
-              <hr className="my-6 border-neutral-700" />
-              <CombatFootage
-                videoId="pOZr8AVgIi8"
-                title="Deep Sea Guardian - Joint Challenge - Very Hard Mode (Auto) - by XuRenChao"
-                author="XuRenChao"
-                date="20/01/2026"
-              />
             </>
           ),
         },

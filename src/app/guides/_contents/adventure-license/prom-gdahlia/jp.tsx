@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import DahliaALTeamsData from './DahliaAL.json'
 import type { TeamData } from '@/types/team'
@@ -36,13 +35,6 @@ export default function DahliaGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={DahliaALTeams.dahliaAL} defaultStage="G.Beth Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="iOvGnQDYaCE"
-                                title="ダリア - アドベンチャーライセンス：昇級チャレンジ"
-                                author="XuRenChao"
-                                date="25/08/2025"
-                            />
                         </>
                     ),
                 },

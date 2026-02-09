@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import SacreedALTeamsData from './SacreedAL.json'
 import type { TeamData } from '@/types/team'
@@ -38,13 +37,6 @@ export default function SacreedGuardianGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={SacreedALTeams.sacreedAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="1ui7TcwD7po"
-                                title="圣科利德守护者 - 冒险许可证 - 第10关 - 1次通关 (自动)"
-                                author="XuRenChao"
-                                date="06/10/2025"
-                            />
                         </>
                     ),
                 },

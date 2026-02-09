@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import masterlessALTeamsData from './masterlessAL.json'
 import type { TeamData } from '@/types/team'
@@ -42,8 +41,6 @@ export default function MasterlessGuardianGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={masterlessALTeams.masterlessAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="MZ39RaAYiv0" title="主なきガーディアン - 冒険免許 - ステージ10 - 1回クリア (オート)" author="XuRenChao" date="19/08/2025" />
                         </>
                     ),
                 },

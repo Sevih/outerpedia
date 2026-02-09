@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import AmadeusALTeamsData from './AmadeusAL.json'
 import type { TeamData } from '@/types/team'
@@ -37,13 +36,6 @@ export default function AmadeusALGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={AmadeusALTeams.amadeusAL} defaultStage="Recommended Team" replace={{ lead: "", mid: "", tail: "" }} />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="EJNnAhVZPkY"
-                                title="Amadeus - Adventure License - Stage 10 - 1 run clear (Auto) - by XuRenChao"
-                                author="XuRenChao"
-                                date="08/09/2025"
-                            />
                         </>
                     ),
                 },

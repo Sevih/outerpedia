@@ -38,13 +38,6 @@ export default function KOHMeteosGuide() {
               <RecommendedCharacterList entries={recommendedCharactersNov} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={KOHMeteosTeams.november2025} defaultStage="Recommended Team" />
-              <hr className="my-6 border-neutral-700" />
-              <CombatFootage
-                videoId="qPZzt25dKX0"
-                title="光明の騎士・メテウス - 共同作戦 - (オート) ベリーハード"
-                author="XuRenChao"
-                date="15/11/2025"
-              />
             </>
           ),
         },

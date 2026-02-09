@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import ppuEpsilonALTeamsData from './ppuEpsilonAL.json'
 import type { TeamData } from '@/types/team'
@@ -40,13 +39,6 @@ export default function PpuEpsilonGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={ppuEpsilonALTeams.ppuEpsilonAL} defaultStage="Classic Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="X-ZpolvLR5I"
-                                title="惑星浄化ユニット イプシロン - 冒険者ライセンス - 10段階 - 1回クリア (オート)"
-                                author="XuRenChao"
-                                date="01/10/2025"
-                            />
                         </>
                     ),
                 },

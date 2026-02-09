@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import ToddlerALTeamsData from './ToddlerAL.json'
 import type { TeamData } from '@/types/team'
@@ -36,8 +35,6 @@ export default function TyrantToddlerGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={ToddlerALTeams.toddlerAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="i7HvX6Gzic8" title="타일런트 유생체 - 모험 라이선스 - 스테이지 10 - 1회 클리어" author="XuRenChao" date="11/08/2025" />
                         </>
                     ),
                 },

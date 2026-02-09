@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import EvaALTeamsData from './EvaAL.json'
 import type { TeamData } from '@/types/team'
@@ -40,13 +39,6 @@ export default function MonadEvaPromotionGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={EvaALTeams.evaAL} defaultStage="Fixed Damage Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="AOhLXfgLUzM"
-                                title="モナド・エヴァ - 昇級チャレンジ"
-                                author="XuRenChao"
-                                date="09/06/2025"
-                            />
                         </>
                     ),
                 },

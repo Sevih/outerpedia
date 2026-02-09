@@ -36,7 +36,6 @@ export default function IrregularQueenGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <CombatFootage videos={[
                                 { videoId: "bPwKu7gjGWg", title: "1회 클리어 (공개 편성)", author: "Sevih", date: "01/10/2025" },
-                                { videoId: "9Sr0YMGaro0", title: "1회 킬 (오토)", author: "XuRenChao", date: "01/10/2025" },
                             ]} />
                         </>
                     ),

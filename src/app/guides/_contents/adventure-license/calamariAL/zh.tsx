@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import CalamariALTeamsData from './CalamariAL.json'
 import type { TeamData } from '@/types/team'
@@ -33,8 +32,6 @@ export default function CalamariALGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={CalamariALTeams.calamariAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="fG8M8BKCUFo" title="海怪 - 冒险许可证 - 第10关 - 1次通关（自动）" author="XuRenChao" date="08/09/2025" />
                         </>
                     ),
                 },

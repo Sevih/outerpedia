@@ -39,13 +39,6 @@ export default function PrototypeEx78Guide() {
               <RecommendedCharacterList entries={recommendedCharactersOct} />
               <hr className="my-6 border-neutral-700" />
               <StageBasedTeamSelector teamData={PrototypeEx78Teams.october2025} defaultStage="Recommended Team" />
-              <hr className="my-6 border-neutral-700" />
-              <CombatFootage
-                videoId="jw0GIwox7YM"
-                title="試作機:EX-78 - 共同作戦 - (オート) ベリーハード"
-                author="XuRenChao"
-                date="28/10/2025"
-              />
             </>
           ),
         },

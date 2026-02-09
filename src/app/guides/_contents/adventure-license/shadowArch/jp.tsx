@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import ShadowArchALTeamsData from './ShadowArchAL.json'
 import type { TeamData } from '@/types/team'
@@ -37,13 +36,6 @@ export default function ShadowOfTheArchdemonGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={ShadowArchALTeams.shadowArchAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="bRSHzurhoV0"
-                                title="魔王の隻影 - 冒険者ライセンス - ステージ10 - 1回クリア (オート)"
-                                author="XuRenChao"
-                                date="26/08/2024"
-                            />
                         </>
                     ),
                 },

@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import MeteosALTeamsData from './MeteosAL.json'
 import type { TeamData } from '@/types/team'
@@ -36,13 +35,6 @@ export default function BlazingKnightMeteosGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={MeteosALTeams.meteosAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="Do7Vyjz3odI"
-                                title="Blazing Knight Meteos - Adventure License - Stage 10 - 1 run clear"
-                                author="XuRenChao"
-                                date="11/08/2025"
-                            />
                         </>
                     ),
                 },

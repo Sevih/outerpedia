@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import VladiMaxALTeamsData from './VladiMaxAL.json'
 import type { TeamData } from '@/types/team'
@@ -34,8 +33,6 @@ export default function HeavyFixedVladiMaxGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={VladiMaxALTeams.vladiMaxAL} defaultStage="ETamamo Carry" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="lpQkc37S0zo" title="고정 포대 블라디 맥스 - 모험 라이선스 - 스테이지 10 - 1회 클리어 (오토)" author="XuRenChao" date="01/10/2025" />
                         </>
                     ),
                 },

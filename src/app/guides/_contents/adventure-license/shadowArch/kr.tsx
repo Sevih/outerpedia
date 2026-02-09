@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import ShadowArchALTeamsData from './ShadowArchAL.json'
 import type { TeamData } from '@/types/team'
@@ -37,13 +36,6 @@ export default function ShadowOfTheArchdemonGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={ShadowArchALTeams.shadowArchAL} defaultStage="Recommended Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="bRSHzurhoV0"
-                                title="마왕의 그림자 - 모험 라이선스 - 스테이지 10 - 1회 클리어 (오토)"
-                                author="XuRenChao"
-                                date="26/08/2024"
-                            />
                         </>
                     ),
                 },

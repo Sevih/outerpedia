@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import ZiggsaronALTeamsData from './ZiggsaronAL.json'
 import type { TeamData } from '@/types/team'
@@ -35,8 +34,6 @@ export default function RavenousWolfKingZiggsaronGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={ZiggsaronALTeams.ziggsaronAL} defaultStage="No Ranger" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="Nlt72xRKMpo" title="齐格萨龙 - 冒险许可证 - 第10关 - 1次通关 (自动)" author="XuRenChao" date="19/08/2025" />
                         </>
                     ),
                 },

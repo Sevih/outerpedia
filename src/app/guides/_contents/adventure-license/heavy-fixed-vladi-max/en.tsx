@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import VladiMaxALTeamsData from './VladiMaxAL.json'
 import type { TeamData } from '@/types/team'
@@ -34,8 +33,6 @@ export default function HeavyFixedVladiMaxGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={VladiMaxALTeams.vladiMaxAL} defaultStage="ETamamo Carry" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="lpQkc37S0zo" title="Heavy Fixed Vladi Max - Adventure License - Stage 10 - 1 run clear (Auto)" author="XuRenChao" date="01/10/2025" />
                         </>
                     ),
                 },

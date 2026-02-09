@@ -2,7 +2,6 @@
 
 import GuideTemplate from '@/app/components/GuideTemplate'
 import StageBasedTeamSelector from '@/app/components/StageBasedTeamSelector'
-import CombatFootage from '@/app/components/CombatFootage'
 import BossDisplay from '@/app/components/BossDisplay'
 import GustavALTeamsData from './GustavAL.json'
 import type { TeamData } from '@/types/team'
@@ -37,8 +36,6 @@ export default function GustavGuide() {
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={GustavALTeams.gustavAL} defaultStage="Standard Team" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="U29t5k0bDfY" title="古斯塔夫 - 冒险许可证 - 第10关 - 1次通关 (自动)" author="XuRenChao" date="19/08/2025" />
                         </>
                     ),
                 },
