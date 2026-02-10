@@ -14,7 +14,7 @@ export default function ReginaGuide() {
     return (
         <GuideTemplate
             title="蕾吉娜攻略指南"
-            introduction="蕾吉娜是一个闪避型Boss，伤害随闪避属性提升。她在闪避攻击时获得强力增益，每10次敌方行动后进入狂暴状态，获得大量闪避提升。"
+            introduction="蕾吉娜是一个暴击时造成巨大伤害的Boss。每10次敌方行动后进入狂暴状态，获得强力增益。"
             defaultVersion="default"
             versions={{
                 default: {

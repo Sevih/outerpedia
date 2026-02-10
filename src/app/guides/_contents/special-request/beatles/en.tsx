@@ -27,7 +27,7 @@ export default function BeatlesGuide() {
     return (
         <GuideTemplate
             title="Dek'Ril & Mek'Ril Special Request Guide"
-            introduction="This boss's main gimmick is evasion. If you use AoE skills that aren't chain skills, it will gain an evasion buff. Characters that can inflict {D/BT_STAT|ST_AVOID} are recommended, along with single-target DPS."
+            introduction="If you use AoE skills that aren't chain skills, this boss will gain {B/BT_STAT|ST_DEF} buffs. Characters that can inflict {D/BT_REMOVE_BUFF} or {D/BT_STEAL_BUFF} are highly recommended, along with single-target DPS."
             defaultVersion="default"
             versions={{
                 default: {

@@ -10,7 +10,7 @@ export default function TyrantGuide() {
     return (
         <GuideTemplate
             title="Betrayed Deshret Strategy Guide"
-            introduction="Betrayed Deshret is an accuracy-focused boss that punishes teams with low accuracy. Fire element characters with accuracy buffs or debuffs are essential to overcome this challenge."
+            introduction="Betrayed Deshret punishes teams that use AoE skills. Bring single-target Fire DPS to overcome this challenge."
             defaultVersion="default"
             versions={{
                 default: {

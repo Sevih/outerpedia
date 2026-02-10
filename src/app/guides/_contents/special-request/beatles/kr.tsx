@@ -27,7 +27,7 @@ export default function BeatlesGuide() {
     return (
         <GuideTemplate
             title="데크릴 & 메크릴 특수의뢰 공략 가이드"
-            introduction="이 보스의 주요 기믹은 회피입니다. 체인 스킬이 아닌 AoE 스킬을 사용하면 회피 버프를 획득합니다. {D/BT_STAT|ST_AVOID}를 부여할 수 있는 캐릭터와 단일 대상 DPS를 추천합니다."
+            introduction="체인 스킬이 아닌 AoE 스킬을 사용하면 보스가 {B/BT_STAT|ST_DEF} 버프를 획득합니다. {D/BT_REMOVE_BUFF}나 {D/BT_STEAL_BUFF}를 부여할 수 있는 캐릭터와 단일 대상 DPS를 추천합니다."
             defaultVersion="default"
             versions={{
                 default: {

@@ -14,7 +14,7 @@ export default function ReginaGuide() {
     return (
         <GuideTemplate
             title="레지나 공략 가이드"
-            introduction="레지나는 회피 스탯에 따라 피해가 증가하는 회피형 보스입니다. 공격을 회피하면 강력한 버프를 얻고, 적의 행동 10회마다 격노하여 대량의 회피율을 얻습니다."
+            introduction="레지나는 치명타 시 큰 피해를 주는 보스입니다. 적의 행동 10회마다 격노하여 강력한 버프를 얻습니다."
             defaultVersion="default"
             versions={{
                 default: {

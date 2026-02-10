@@ -14,7 +14,7 @@ export default function ReginaGuide() {
     return (
         <GuideTemplate
             title="Regina Strategy Guide"
-            introduction="Regina is an evasive boss whose damage scales with her evasion stat. She gains powerful buffs when dodging attacks and enrages every 10 enemy actions, gaining massive evasion boosts."
+            introduction="Regina is a boss that deals significantly more damage when she lands critical hits. She enrages every 10 enemy actions, gaining powerful buffs."
             defaultVersion="default"
             versions={{
                 default: {

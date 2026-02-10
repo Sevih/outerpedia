@@ -10,7 +10,7 @@ export default function TyrantGuide() {
     return (
         <GuideTemplate
             title="배신당한 데쉬렛 공략 가이드"
-            introduction="배신당한 데쉬렛은 명중률에 초점을 맞춘 보스로, 낮은 명중률의 팀을 처벌합니다. 명중 버프나 디버프를 가진 화염 속성 캐릭터가 이 도전을 극복하는 데 필수적입니다."
+            introduction="배신당한 데쉬렛은 광역 스킬을 사용하는 팀을 처벌하는 보스입니다. 단일 대상 화염 속성 딜러로 도전하세요."
             defaultVersion="default"
             versions={{
                 default: {

@@ -10,7 +10,7 @@ export default function TyrantGuide() {
     return (
         <GuideTemplate
             title="被背叛的德舍雷特攻略指南"
-            introduction="被背叛的德舍雷特是一个注重命中率的Boss，会惩罚低命中率的队伍。拥有命中增益或减益的火属性角色是克服这个挑战的关键。"
+            introduction="被背叛的德舍雷特会惩罚使用群体技能的队伍。带上单体火属性输出角色来应对挑战。"
             defaultVersion="default"
             versions={{
                 default: {

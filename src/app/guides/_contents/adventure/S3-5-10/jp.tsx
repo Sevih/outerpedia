@@ -14,7 +14,7 @@ export default function ReginaGuide() {
     return (
         <GuideTemplate
             title="レジーナ攻略ガイド"
-            introduction="レジーナは回避ステータスに応じてダメージが増加する回避型ボスです。攻撃を回避すると強力なバフを獲得し、敵の行動10回ごとに激怒して大幅な回避率アップを得ます。"
+            introduction="レジーナはクリティカル発動時に大ダメージを与えるボスです。敵の行動10回ごとに激怒し、強力なバフを獲得します。"
             defaultVersion="default"
             versions={{
                 default: {

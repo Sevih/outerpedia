@@ -10,7 +10,7 @@ export default function TyrantGuide() {
     return (
         <GuideTemplate
             title="裏切られたデシュレト攻略ガイド"
-            introduction="裏切られたデシュレトは命中率に焦点を当てたボスで、低命中率のチームを罰します。このチャレンジを克服するには、命中バフやデバフを持つ火属性キャラクターが必須です。"
+            introduction="裏切られたデシュレトはAoEスキルを使うチームを罰するボスです。単体攻撃の火属性DPSで挑みましょう。"
             defaultVersion="default"
             versions={{
                 default: {

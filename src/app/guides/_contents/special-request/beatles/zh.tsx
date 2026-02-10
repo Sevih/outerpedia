@@ -27,7 +27,7 @@ export default function BeatlesGuide() {
     return (
         <GuideTemplate
             title="德克里尔&梅克里尔特殊委托攻略指南"
-            introduction="该BOSS的核心机制是闪避。如果使用非连锁的AoE技能，BOSS会获得闪避增益。推荐能施加{D/BT_STAT|ST_AVOID}的角色和单体DPS。"
+            introduction="如果使用非连锁的AoE技能，BOSS会获得{B/BT_STAT|ST_DEF}增益。推荐能施加{D/BT_REMOVE_BUFF}或{D/BT_STEAL_BUFF}的角色和单体DPS。"
             defaultVersion="default"
             versions={{
                 default: {

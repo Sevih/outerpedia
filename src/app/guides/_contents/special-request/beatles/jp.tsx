@@ -27,7 +27,7 @@ export default function BeatlesGuide() {
     return (
         <GuideTemplate
             title="デクリル＆メクリル特殊依頼攻略ガイド"
-            introduction="このボスの主要ギミックは回避です。チェインスキル以外のAoEスキルを使用すると回避バフを獲得します。{D/BT_STAT|ST_AVOID}を付与できるキャラクターと単体DPSがおすすめです。"
+            introduction="チェインスキル以外のAoEスキルを使用するとボスが{B/BT_STAT|ST_DEF}バフを獲得します。{D/BT_REMOVE_BUFF}や{D/BT_STEAL_BUFF}を付与できるキャラクターと単体DPSがおすすめです。"
             defaultVersion="default"
             versions={{
                 default: {
