@@ -8,7 +8,7 @@
     },
     "amulet": {
       "mainStats": {
-        "options": ["ACC","EVA","LS","ATK%","RES","CC","SPD","DEF%","EFF","CHD","PEN","HP%"]
+        "options": ["DMG UP","DMG RED","CDMG RED","ATK%","RES","CC","SPD","DEF%","EFF","CHD","PEN","HP%"]
       },
       "subStatNumber": 4
     },
@@ -26,13 +26,13 @@
     },
     "gloves": {
       "mainStats": {
-        "fixed": ["ACC", "DEF"]
+        "fixed": ["EFF", "DEF"]
       },
       "subStatNumber": 4
     },
     "boots": {
       "mainStats": {
-        "fixed": ["EVA", "HP%"]
+        "fixed": ["RES", "HP%"]
       },
       "subStatNumber": 4
     }

@@ -55,8 +55,8 @@ export default function renderSet(entry: ArmorSet, lang: Lang = 'en', t: (key: s
             const slotStatsMap: Record<typeof slot, string[]> = {
               Helmet: ['HP%'],
               Armor: ['DEF'],
-              Gloves: ['ACC', 'DEF'],
-              Shoes: ['EVA', 'HP%'],
+              Gloves: ['EFF', 'DEF'],
+              Shoes: ['RES', 'HP%'],
             }
 
             return (

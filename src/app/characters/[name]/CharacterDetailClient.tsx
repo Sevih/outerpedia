@@ -261,14 +261,6 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
     const classInfo = classData[character.Class as keyof typeof classData]
     const subclassInfo = classInfo?.subclasses?.[character.SubClass as keyof typeof classInfo.subclasses]
     const baseStats = subclassInfo?.[`stats${character.Rarity}`]
-    const statLabels = [
-        t('SYS_STAT_HP'),
-        t('SYS_STAT_DEF'),
-        t('SYS_STAT_EVA'),
-        t('SYS_STAT_ACC'),
-        t('SYS_STAT_SPD'),
-        t('SYS_STAT_ATK'),
-    ]
 
 
     const ee = eeData[toKebabCase(character.Fullname)]
@@ -521,55 +513,21 @@ export default function CharacterDetailClient({ character, slug, langKey, recoDa
 
 
                             {/* Statistiques + descriptions de classe + base stats */}
-                            <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">
-                                <div className="relative p-2 rounded text-sm w-fit h-fit">
-                                    {subclassInfo?.image ? (
-                                        <div className="relative mx-auto">
-                                            <Image
-                                                src={subclassInfo.image}
-                                                alt={character.SubClass}
-                                                width={200}
-                                                height={200}
-                                                style={{ width: 200, height: 200 }}
-                                                className="object-contain"
-                                            />
-                                            {statLabels.map((label, index) => {
-                                                const angle = (index / statLabels.length) * 2 * Math.PI - Math.PI / 2
-                                                let labelRadius = 120
-                                                if (label === t('SYS_STAT_HP') || label === t('SYS_STAT_ACC')) labelRadius = 110
-                                                const x = 100 + Math.cos(angle) * labelRadius
-                                                const y = 100 + Math.sin(angle) * labelRadius
-                                                return (
-                                                    <div
-                                                        key={index}
-                                                        className="absolute text-[12px] text-center text-white whitespace-nowrap"
-                                                        style={{ left: `${x}px`, top: `${y}px`, transform: 'translate(-50%, -50%)' }}
-                                                    >
-                                                        {label}
-                                                    </div>
-                                                )
-                                            })}
-                                        </div>
-                                    ) : (
-                                        <p>{t('no_subclass_image')}</p>
-                                    )}
-                                </div>
-
-                                <div className="flex flex-col gap-4 w-fit">
-                                    <div className="p-2 rounded text-sm">
-                                        <p className="font-semibold">
-                                            {t('class_effects_details', { class: t(`SYS_CLASS_${character.Class.toUpperCase()}`) })}
-                                        </p>
-                                        <p className="whitespace-pre-line">
-                                            {t(`SYS_CLASS_PASSIVE_${character.Class.toUpperCase()}`, {
-                                                defaultValue: t('no_class_description')
-                                            }).replace(/([。\.])\s*/g, '$1\n')}
-                                        </p>
+                            <div className="mt-2 p-2 rounded">
+                                <div className="p-2 rounded text-sm">
+                                    <p className="font-semibold">
+                                        {t('class_effects_details', { class: t(`SYS_CLASS_${character.Class.toUpperCase()}`) })}
+                                    </p>
+                                    <p className="whitespace-pre-line">
+                                        {t(`SYS_CLASS_PASSIVE_${character.Class.toUpperCase()}`, {
+                                            defaultValue: t('no_class_description')
+                                        }).replace(/([。\.])\s*/g, '$1\n')}
+                                    </p>
 
 
-                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </section>

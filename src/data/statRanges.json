@@ -59,6 +59,16 @@
     },
     "HH%": {
       "legendary": { "6": [6, 36], "5": [4.5, 27] }
+    },
+    "DMG UP": {
+      "legendary": { "6": [10.8, 64.8], "5": [8.1, 48.6] },
+      "epic": { "6": [9.7, 58.2] }
+    },
+    "DMG RED": {
+      "legendary": { "6": [13, 78]}
+    },
+    "CDMG RED": {
+        "legendary": { "6": [13, 78]}
     }
   },
   "Helmet": {
@@ -72,16 +82,16 @@
     }
   },
   "Gloves": {
-    "ACC": {
-      "legendary": { "6": [16, 96] }
+    "EFF": {
+      "legendary": { "6": [10, 60] }
     },
     "DEF": {
       "legendary": { "6": [40, 240] }
     }
   },
   "Shoes": {
-    "EVA": {
-      "legendary": { "6": [15, 90] }
+    "RES": {
+      "legendary": { "6": [10, 50] }
     },
     "HP%": {
       "legendary": { "6": [4, 24] }

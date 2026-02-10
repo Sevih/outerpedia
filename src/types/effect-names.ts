@@ -40,6 +40,7 @@ export type BuffName =
   | 'BT_STAT|ST_ATK'
   | 'BT_STAT|ST_ATK_IR'
   | 'BT_STAT|ST_AVOID'
+  | 'SYS_BUFF_AVOID_UP'
   | 'BT_STAT|ST_AVOID_IR'
   | 'BT_STAT|ST_BUFF_CHANCE'
   | 'BT_STAT|ST_BUFF_CHANCE_IR'

@@ -449,5 +449,13 @@
     },
     "start": "2026-02-03",
     "end": "2026-05-01"
+  },
+  {
+    "code": "OUTERLETTERFEB",
+    "description": {
+       "Free Ether": "500"
+    },
+    "start": "2026-02-10",
+    "end": "2026-03-10"
   }
 ] 

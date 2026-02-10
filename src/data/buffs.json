@@ -508,14 +508,14 @@
     {
         "name": "SYS_BUFF_AVOID_UP",
         "category": "utility",
-   "label": "Miss Rate Up",
-  "label_jp": "ミスヒット発生率UP",
-  "label_kr": "빗나감 확률 증가",
-  "label_zh": "未命中率提升",
-  "description": "Increases the target's Miss rate by 15%. When a Miss occurs, damage is reduced by 50%, and debuffs and critical hits do not occur.",
-  "description_jp": "対象のミスヒット発生率が15%増加します。ミスヒット発生時、ダメージが50%減少し、弱体効果および会心は発生しません。",
-  "description_kr": "대상의 빗나감 확률이 15% 증가합니다. 빗나감 발생 시 피해량이 50% 감소하며, 약화 효과와 치명타가 발생하지 않습니다.",
-  "description_zh": "目标的未命中率提升15%。发生未命中时,伤害降低50%,且不会触发弱化效果与暴击。",
+        "label": "Miss Rate Up",
+        "label_jp": "ミスヒット発生率UP",
+        "label_kr": "빗나감 확률 증가",
+        "label_zh": "未命中率提升",
+        "description": "Increases the target's Miss rate by 15%. When a Miss occurs, damage is reduced by 50%, and debuffs and critical hits do not occur.",
+        "description_jp": "対象のミスヒット発生率が15%増加します。ミスヒット発生時、ダメージが50%減少し、弱体効果および会心は発生しません。",
+        "description_kr": "대상의 빗나감 확률이 15% 증가합니다. 빗나감 발생 시 피해량이 50% 감소하며, 약화 효과와 치명타가 발생하지 않습니다.",
+        "description_zh": "目标的未命中率提升15%。发生未命中时,伤害降低50%,且不会触发弱化效果与暴击。",
         "icon": "SC_Buff_Stat_Avoid"
     },
     {

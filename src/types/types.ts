@@ -9,8 +9,8 @@ export type StatBlock = {
   spd: number
   chc: number
   chd: number
-  acc: number
-  eva: number
+  "DMG UP": number
+  "DMG RED": number
   eff: number
   res: number
 }
