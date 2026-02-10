@@ -120,7 +120,7 @@
         ],
         "con": [
             "Wants max skills to apply debuffs consistently",
-            "Can only apply {D/BT_SEALED_RECEIVE_HEAL} {D/BT_STAT|ST_AVOID} against {E/Earth} enemies"
+            "Can only apply {D/BT_STAT|ST_ATK} against {E/Earth} enemies"
         ]
     },
     "laplace": {
@@ -135,7 +135,7 @@
     },
     "aer": {
         "pro": [
-            "Can {D/BT_REMOVE_BUFF} all enemy buffs, ignoring evasion and resilience",
+            "Can {D/BT_REMOVE_BUFF} all enemy buffs, ignoring resilience",
             "Very strong against Earth element bosses"
         ],
         "con": [
