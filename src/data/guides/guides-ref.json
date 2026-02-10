@@ -1936,5 +1936,24 @@
     "second_image": "roadmap-2026",
     "last_updated": "2026-01-17",
     "author": "Sevih / 뉴월드"
+  },
+    "S4-2-10": {
+    "category": "adventure",
+    "title": {
+      "en": "S4 Hard : Sanctuary Defense",
+      "jp": "シーズン4(ハード) : 聖所防衛戦",
+      "kr": "시즌 4 하드 : 성소 방어전",
+      "zh": "S4 困难：圣所防御战"
+    },
+    "description": {
+      "en": "Boss strategy guide.",
+      "jp": "ボス攻略ガイド。",
+      "kr": "보스 전략 가이드.",
+      "zh": "首领攻略指南"
+    },
+    "icon": "S4-2-10",
+    "last_updated": "2026-01-13",
+    "author": "Sevih",
+    "second_image": "S4-2-10-2"
   }
 }

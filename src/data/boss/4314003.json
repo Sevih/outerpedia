@@ -54,7 +54,8 @@
         "jp": "敵単体にダメージを与え、<color=#28d9ed>3ターン</color>の間<color=#28d9ed>シールド</color>を獲得する。\\n自分の<color=#28d9ed>攻撃力</color>が高いほどシールド量がUPする。",
         "zh": "攻击敌人并获得<color=#28d9ed>护盾</color>,持续<color=#28d9ed>3回合</color>。\\n护盾量随自身<color=#28d9ed>攻击力</color>的提升而增加。"
       },
-      "icon": "Skill_First_4044001"
+      "icon": "Skill_First_4044001",
+      "buff":["BT_SHIELD_BASED_CASTER"]
     },
     {
       "name": {
@@ -70,7 +71,9 @@
         "jp": "敵全体にダメージを与える。\\n対象の<color=#28d9ed>貫通力</color>、<color=#28d9ed>攻撃力</color>、<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>3ターン</color>の間DOWNさせる。\\n攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。",
         "zh": "攻击全体敌人。\\n使目标的<color=#28d9ed>穿透</color>、<color=#28d9ed>攻击力</color>、<color=#28d9ed>暴击伤害</color>降低,持续<color=#28d9ed>3回合</color>。\\n攻击后,自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>20%</color>。"
       },
-      "icon": "Skill_Second_4044001"
+      "icon": "Skill_Second_4044001",
+    "debuff":["BT_STAT|ST_ATK","BT_STAT|ST_CRITICAL_DMG_RATE","BT_STAT|ST_PIERCE_POWER_RATE"],
+    "buff":["BT_ACTION_GAUGE"]
     },
     {
       "name": {
@@ -86,7 +89,8 @@
         "jp": "スキル使用前、敵全体の強化効果を解除した後、敵全体にダメージを与える。\\n自分の<color=#28d9ed>貫通力</color>、<color=#28d9ed>会心率</color>、<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>3ターン</color>の間UPさせる。\\n攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。",
         "zh": "使用技能前解除全体敌人的强化效果,随后攻击全体敌人。\\n使自身的<color=#28d9ed>穿透</color>、<color=#28d9ed>暴击率</color>、<color=#28d9ed>暴击伤害</color>提升,持续<color=#28d9ed>3回合</color>。\\n攻击后,自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>20%</color>。"
       },
-      "icon": "Skill_Ultimate_4044001"
+      "icon": "Skill_Ultimate_4044001",
+    "buff":["BT_STAT|ST_CRITICAL_RATE","BT_STAT|ST_CRITICAL_DMG_RATE","BT_STAT|ST_PIERCE_POWER_RATE","BT_ACTION_GAUGE"]
     },
     {
       "name": {
@@ -118,7 +122,8 @@
         "jp": "(パッシブ効果) すべての攻撃は対象の防御力を<color=#28d9ed>30%</color>無視し、<color=#28d9ed>再現:竜の波動</color>で獲得した<color=#28d9ed>強化</color>効果が多いほど、対象の防御力を追加で最大<color=#28d9ed>30%</color>無視する。\\n敵の行動終了時、対象が保有する<color=#28d9ed>弱体</color>効果が多いほど、自分の<color=#28d9ed>行動ゲージ</color>を最大<color=#28d9ed>30%</color>UPさせる。",
         "zh": "(被动效果) 所有攻击无视目标<color=#28d9ed>30%</color>的防御力,并根据<color=#28d9ed>再现:龙之波动</color>获得的<color=#28d9ed>强化</color>效果数量,额外无视目标最多<color=#28d9ed>30%</color>的防御力。\\n敌方行动结束时,根据目标持有的<color=#28d9ed>弱化</color>效果数量,使自身<color=#28d9ed>行动值</color>最多提升<color=#28d9ed>30%</color>。"
       },
-      "icon": "MT_Passive_1_Light"
+      "icon": "MT_Passive_1_Light",
+      "buff":["BT_ACTION_GAUGE"]
     },
     {
       "name": {
@@ -134,7 +139,8 @@
         "jp": "敵が7回行動するたびに<color=#28d9ed>【狂暴化】</color>状態に切り替わる。\\n\\n<color=#28d9ed>【狂暴化】</color>:自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与する。【狂暴化】は3ターンの間継続する。\\n\\n<color=#28d9ed>【進化:竜の怒り】</color>:【狂暴化】終了時に使用する。\\n敵全体に大ダメージを与える。",
         "zh": "敌人每行动7次,则进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>陷入狂暴化</color>:使自身获得无法解除的攻击力提升/伤害降低效果,持续3回合。狂暴化持续3回合。\\n\\n<color=#28d9ed>进化:龙之怒</color>:狂暴化结束时发动。\\n对全体敌人造成巨额伤害。"
       },
-      "icon": "MT_Boss_Rage_Common_1"
+      "icon": "MT_Boss_Rage_Common_1",
+      "buff":["BT_DAMGE_TAKEN","BT_STAT|ST_ATK_IR"]
     },
     {
       "name": {

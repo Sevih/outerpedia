@@ -29,6 +29,25 @@ export const oldChangelog = [
   {
     date: "2026-02-10",
     title: {
+      en: "S4 Ep.2 : Sanctuary Defense",
+      jp: "S4 Ep.2 : 聖所防衛戦",
+      kr: "S4 Ep.2 : 성소 방어전",
+      zh: "S4 Ep.2 : 圣所防御战",
+    } as LString,
+    type: "update",
+    url: "/guides/adventure/S4-2-10",
+    content: [
+      {
+        en: "Final boss guide of Season 4 Episode 2 is now available.",
+        jp: "シーズン4 エピソード2の最終ボスガイドが公開されました。",
+        kr: "시즌 4 에피소드 2 최종 보스 가이드가 공개되었습니다.",
+        zh: "第4赛季第2章最终Boss指南现已推出。",
+      } as LString,
+    ],
+  },
+  {
+    date: "2026-02-10",
+    title: {
       en: "New Hero: Primine",
       jp: "新ヒーロー：プリミネ",
       kr: "신규 영웅: 프리미네",

@@ -161,8 +161,9 @@
     "category": "adventure",
     "guideId": "S3-5-10",
     "characters": [
-      "Charlotte",
       "Demiurge Astei",
+      "Fran",
+      "Hilde",
       "Maxwell",
       "Skadi",
       "Sterope"
@@ -237,6 +238,20 @@
       "Mene",
       "Snow",
       "Veronica"
+    ]
+  },
+  "adventure/S4-2-10": {
+    "category": "adventure",
+    "guideId": "S4-2-10",
+    "characters": [
+      "Aer",
+      "Demiurge Vlada",
+      "Francesca",
+      "Kappa",
+      "Monad Iota",
+      "Regina",
+      "Stella",
+      "Viella"
     ]
   },
   "adventure-license/amadeus-AL": {
