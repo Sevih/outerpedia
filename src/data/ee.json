@@ -2634,5 +2634,29 @@
     "debuff": [
       "BT_COOL_CHARGE"
     ]
+  },
+  "primine": {
+    "name": "Lete",
+    "name_jp": "レーテ",
+    "name_kr": "레테",
+    "name_zh": "莱特",
+    "mainStat": "Reduces Fire Damage Taken",
+    "mainStat_jp": "火属性の対象の受ける ダメージDOWN",
+    "mainStat_kr": "화속성 대상 받는 피해 감소",
+    "mainStat_zh": "火属性所受伤害降低",
+    "effect": "Allies with a Barrier: Damage dealt 30%",
+    "effect_jp": "シールドを保有する味方のダメージ 30%",
+    "effect_kr": "실드를 보유한 아군이 입히는 피해 30%",
+    "effect_zh": "持有护盾的我方造成的伤害 30%",
+    "effect10": "When an ally team member is hit: 5% Priority to self",
+    "effect10_jp": "味方がダメージを受けた時、味方全体の行動ゲージ5%",
+    "effect10_kr": "아군 팀 피격 시 자신 행동 게이지 5%",
+    "effect10_zh": "我方队伍被攻击时,自身行动槽增加 5%",
+    "icon_effect": "TI_Icon_UO_Accessary_07",
+    "rank": "",
+    "buff": [
+      "BT_ACTION_GAUGE"
+    ],
+    "debuff": []
   }
 }

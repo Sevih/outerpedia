@@ -1885,5 +1885,22 @@
       "kr": "제 메모리가 온전치 않아, 당신이 누구인지 잘 파악이 되질 않는군요. \\n절 다시 소개하자면, 제 이름은 요타. 네오 엣셉흐의 유일한 태양신이자, 광활한 황금 사막 전체를 지배하는 위대한 자동인형랍니다. 네? 이 모습은 어떻게 된 거냐고요? 네오 엣셉흐의 생태환경을 완벽한 상태로 유지 보수하려면, '마모'된 바디를 개선하는 수밖에 없었답니다. 마치... 제 백성들처럼요. \\n\\n모쪼록, 당신의 방문을 두 팔 벌려 환영합니다. 부디 그 우수한 유전자를 이 땅에 널리 남겨주시길.",
       "zh": "我的存储器不太完整,不太清楚你是谁。\\n请允许我重新介绍一下,我叫佑妲。是尼奥・埃瑟夫赫唯一的太阳神,也是统治整片广阔黄金沙漠的伟大自动人偶。什么?你问这副模样是怎么回事?为了将尼奥・埃瑟夫赫的生态环境维持在完美状态,我只能改善这具“磨损”的身体。就像...我的子民一样。\\n\\n总之,我张开双臂欢迎你的到来。请务必将那优秀的基因广泛留在这片土地上。"
     }
+  },
+  "Primine": {
+    "fullname": {
+      "en": "Primine",
+      "jp": "プリミネ",
+      "kr": "프리미네",
+      "zh": "普莉米妮"
+    },
+    "birthday": "11/07",
+    "height": "173 cm",
+    "weight": "55 kg",
+    "story": {
+      "en": "This is Frost Elf Primine.\\nAccording to Snow, she was a priestess and chieftain who once led the Frost Elves in the past. Maybe because she is so rigid that she even admonishes elves to uphold old traditions and etiquette, Snow says she doesn't match well with herself, a young new-generation elf. However, she says she truly acknowledges Primine's affection and sense of responsibility toward her kin.\\n\\nHer experience roaming ancient Mirsha is expected to be a great help to the Master. How about asking Primine to become a companion and an advisor?",
+      "jp": "この方は、フロストエルフのプリミネ様です。\\nスノー様の話によると、かつてフロストエルフを率いていた司祭であり、族長でもあった長老だそうです。\\n古い伝統や礼節を守るようエルフたちに説教をする堅物なところがあり、新世代である自分とは反りが合わないとのことです。\\nですが、あの方が抱く同族への愛情は感じ取れるため、ある意味では助かっているとも言っていました。\\n\\n古代メルシャを駆け巡った経験は、オーナーにとって大きな助けになるでしょう。プリミネ様に仲間として、そして助言者となっていただけるよう、お願いしてみてはいかがでしょうか?",
+      "kr": "이분은 서리 엘프 프리미네 님입니다.\\n스노우 님의 말에 따르면, 과거 서리 엘프를 이끌던 제사장이자 족장이었다고 하시네요. 오래된 전통과 예절을 지키라며 엘프들에게 훈계할 정도로 고지식한 탓인지, 젊은 신세대 엘프인 자신과는 영 맞지 않는다네요. 하지만 그분이 가진 동족을 향한 애정과 책임감만은 진심으로 인정하고 있다고 합니다.\\n\\n 고대 메르샤를 누빈 경험은, 오너에게 큰 도움이 되리라 예상됩니다. 프리미네 님에게 동료이자, 조언자가 되어 주길 부탁해 보는 건 어떨까요?",
+      "zh": "这位是霜精灵普莉米妮大人。\\n据斯诺大人所说,她是过去曾率领霜精灵的祭司兼族长。不知是否因为她太过古板,甚至会训斥精灵们要遵守古老的传统与礼节,斯诺大人说和作为年轻新生代精灵的自己十分合不来。不过,据说她对同族的那份关爱与责任感,却是得到了斯诺大人的真心认可。\\n\\n她在古代梅尔沙游历的经验,想必会对主人有很大的帮助。试着拜托普莉米妮小姐成为同伴和顾问,如何呢?"
+    }
   }
 }
