@@ -29,9 +29,9 @@
                     "string": "Don't forget you can use your friends' units to help you beat those stages."
                 }
             ],
-            "note_jp": [],
-            "note_kr": [],
-            "note_zh": []
+            "note_jp": [{"type":"p","string":"フレンドのユニットを使ってステージをクリアすることもできます。"}],
+            "note_kr": [{"type":"p","string":"친구의 유닛을 사용하여 스테이지를 클리어할 수 있다는 것을 잊지 마세요."}],
+            "note_zh": [{"type":"p","string":"别忘了可以使用好友的角色来帮助通关。"}]
         },
         "11-13": {
             "icon": "light",
@@ -62,9 +62,9 @@
                     "string": "Focus on debuff application and cleansing. Avoid non-attack skills."
                 }
             ],
-            "note_jp": [],
-            "note_kr": [],
-            "note_zh": []
+            "note_jp": [{"type":"p","string":"デバフの付与とクレンズに集中しましょう。非攻撃スキルは避けてください。"}],
+            "note_kr": [{"type":"p","string":"디버프 부여와 클렌즈에 집중하세요. 비공격 스킬은 피하세요."}],
+            "note_zh": [{"type":"p","string":"专注于施加减益和净化。避免使用非攻击技能。"}]
         }
     }
 }

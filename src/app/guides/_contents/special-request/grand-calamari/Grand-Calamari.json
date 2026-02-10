@@ -32,9 +32,24 @@
                     "string": "Don't forget you can use your friends' units to help you beat those stages."
                 }
             ],
-            "note_jp": [],
-            "note_kr": [],
-            "note_zh": []
+            "note_jp": [
+                {
+                    "type": "p",
+                    "string": "フレンドのユニットを使ってステージをクリアすることもできます。"
+                }
+            ],
+            "note_kr": [
+                {
+                    "type": "p",
+                    "string": "친구의 유닛을 사용하여 스테이지를 클리어할 수 있다는 것을 잊지 마세요."
+                }
+            ],
+            "note_zh": [
+                {
+                    "type": "p",
+                    "string": "别忘了可以使用好友的角色来帮助通关。"
+                }
+            ]
         },
         "11-13": {
             "icon": "light",
@@ -68,9 +83,24 @@
                     "string": "Focus on units with {D/BT_SEALED} and {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}."
                 }
             ],
-            "note_jp": [],
-            "note_kr": [],
-            "note_zh": []
+            "note_jp": [
+                {
+                    "type": "p",
+                    "string": "{D/BT_SEALED}と{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}を持つユニットに集中しましょう。"
+                }
+            ],
+            "note_kr": [
+                {
+                    "type": "p",
+                    "string": "{D/BT_SEALED}과 {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}를 가진 유닛에 집중하세요."
+                }
+            ],
+            "note_zh": [
+                {
+                    "type": "p",
+                    "string": "专注于拥有{D/BT_SEALED}和{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}的角色。"
+                }
+            ]
         }
     }
 }

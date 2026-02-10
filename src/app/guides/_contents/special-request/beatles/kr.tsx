@@ -26,12 +26,12 @@ export default function BeatlesGuide() {
 
     return (
         <GuideTemplate
-            title="Dek'Ril & Mek'Ril Special Request Guide"
-            introduction="This boss's main gimmick is evasion. If you use AoE skills that aren't chain skills, it will gain an evasion buff. Characters that can inflict {D/BT_STAT|ST_AVOID} are recommended, along with single-target DPS."
+            title="데크릴 & 메크릴 특수의뢰 공략 가이드"
+            introduction="이 보스의 주요 기믹은 회피입니다. 체인 스킬이 아닌 AoE 스킬을 사용하면 회피 버프를 획득합니다. {D/BT_STAT|ST_AVOID}를 부여할 수 있는 캐릭터와 단일 대상 DPS를 추천합니다."
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '가이드',
                     content: (
                         <>
                             <BossDisplay
@@ -49,19 +49,19 @@ export default function BeatlesGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "If you use AoE skills that aren't chain skills, boss gains an {B/BT_STAT|ST_DEF}.",
-                                "If a character is afflicted with {D/BT_DOT_POISON}, the boss will counterattacks just after he played.",
-                                "Main boss (right side) is the only one attacking. The left boss constantly buffs {B/BT_STAT|ST_ATK}.",
-                                "If the left boss is killed, main boss gains {B/BT_INVINCIBLE} and {B/BT_STAT|ST_ATK}.",
-                                "Characters that can inflict {D/BT_STAT|BT_REMOVE_BUFF} or {D/BT_STAT|BT_STEAL_BUFF} are highly recommended.",
-                                "Focus on single-target DPS to avoid triggering {B/BT_STAT|ST_DEF}."
+                                "체인 스킬이 아닌 AoE 스킬을 사용하면 보스에게 {B/BT_STAT|ST_DEF}이 부여됩니다.",
+                                "캐릭터가 {D/BT_DOT_POISON}에 걸린 경우, 보스는 행동 직후 반격합니다.",
+                                "메인 보스(오른쪽)만 공격합니다. 왼쪽 보스는 지속적으로 {B/BT_STAT|ST_ATK}를 버프합니다.",
+                                "왼쪽 보스를 처치하면 메인 보스가 {B/BT_INVINCIBLE}과 {B/BT_STAT|ST_ATK}를 획득합니다.",
+                                "{D/BT_STAT|BT_REMOVE_BUFF}이나 {D/BT_STAT|BT_STEAL_BUFF}를 부여할 수 있는 캐릭터를 강력히 추천합니다.",
+                                "{B/BT_STAT|ST_DEF} 발동을 피하기 위해 단일 대상 DPS에 집중하세요."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={BeatlesTeams.beatlesSpecialRequest} defaultStage="1-10" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="eQmB1Uw9qL8" title="Dek'Ril & Mek'Ril Combat Footage" author="Sevih" date="09/05/2025" />
+                            <CombatFootage videoId="eQmB1Uw9qL8" title="데크릴 & 메크릴 전투 영상" author="Sevih" date="09/05/2025" />
                         </>
                     ),
                 },

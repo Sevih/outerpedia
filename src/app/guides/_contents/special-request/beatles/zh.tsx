@@ -26,12 +26,12 @@ export default function BeatlesGuide() {
 
     return (
         <GuideTemplate
-            title="Dek'Ril & Mek'Ril Special Request Guide"
-            introduction="This boss's main gimmick is evasion. If you use AoE skills that aren't chain skills, it will gain an evasion buff. Characters that can inflict {D/BT_STAT|ST_AVOID} are recommended, along with single-target DPS."
+            title="德克里尔&梅克里尔特殊委托攻略指南"
+            introduction="该BOSS的核心机制是闪避。如果使用非连锁的AoE技能，BOSS会获得闪避增益。推荐能施加{D/BT_STAT|ST_AVOID}的角色和单体DPS。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: '指南',
                     content: (
                         <>
                             <BossDisplay
@@ -49,19 +49,19 @@ export default function BeatlesGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "If you use AoE skills that aren't chain skills, boss gains an {B/BT_STAT|ST_DEF}.",
-                                "If a character is afflicted with {D/BT_DOT_POISON}, the boss will counterattacks just after he played.",
-                                "Main boss (right side) is the only one attacking. The left boss constantly buffs {B/BT_STAT|ST_ATK}.",
-                                "If the left boss is killed, main boss gains {B/BT_INVINCIBLE} and {B/BT_STAT|ST_ATK}.",
-                                "Characters that can inflict {D/BT_STAT|BT_REMOVE_BUFF} or {D/BT_STAT|BT_STEAL_BUFF} are highly recommended.",
-                                "Focus on single-target DPS to avoid triggering {B/BT_STAT|ST_DEF}."
+                                "使用非连锁的AoE技能会给BOSS提供{B/BT_STAT|ST_DEF}。",
+                                "角色被{D/BT_DOT_POISON}影响时，BOSS会在行动后立即反击。",
+                                "主BOSS（右侧）是唯一攻击的。左侧BOSS持续增益{B/BT_STAT|ST_ATK}。",
+                                "如果左侧BOSS被击杀，主BOSS获得{B/BT_INVINCIBLE}和{B/BT_STAT|ST_ATK}。",
+                                "强烈推荐能施加{D/BT_STAT|BT_REMOVE_BUFF}或{D/BT_STAT|BT_STEAL_BUFF}的角色。",
+                                "集中单体DPS以避免触发{B/BT_STAT|ST_DEF}。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={BeatlesTeams.beatlesSpecialRequest} defaultStage="1-10" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="eQmB1Uw9qL8" title="Dek'Ril & Mek'Ril Combat Footage" author="Sevih" date="09/05/2025" />
+                            <CombatFootage videoId="eQmB1Uw9qL8" title="德克里尔&梅克里尔战斗录像" author="Sevih" date="09/05/2025" />
                         </>
                     ),
                 },

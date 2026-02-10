@@ -28,9 +28,24 @@
                     "string": "Don't forget you can use your friends' units to help you beat those stages."
                 }
             ],
-            "note_jp": [],
-            "note_kr": [],
-            "note_zh": []
+            "note_jp": [
+                {
+                    "type": "p",
+                    "string": "フレンドのユニットを使ってステージをクリアすることもできます。"
+                }
+            ],
+            "note_kr": [
+                {
+                    "type": "p",
+                    "string": "친구의 유닛을 사용하여 스테이지를 클리어할 수 있다는 것을 잊지 마세요."
+                }
+            ],
+            "note_zh": [
+                {
+                    "type": "p",
+                    "string": "别忘了可以使用好友的角色来帮助通关。"
+                }
+            ]
         },
         "11-13": {
             "icon": "dark",
@@ -60,9 +75,24 @@
                     "string": "Focus on buff removal and AoE damage to handle core adds."
                 }
             ],
-            "note_jp": [],
-            "note_kr": [],
-            "note_zh": []
+            "note_jp": [
+                {
+                    "type": "p",
+                    "string": "バフ除去とAoEダメージでコアを処理することに集中しましょう。"
+                }
+            ],
+            "note_kr": [
+                {
+                    "type": "p",
+                    "string": "버프 제거와 AoE 데미지로 코어를 처리하는 데 집중하세요."
+                }
+            ],
+            "note_zh": [
+                {
+                    "type": "p",
+                    "string": "专注于移除增益和AoE伤害来处理核心召唤物。"
+                }
+            ]
         }
     }
 }

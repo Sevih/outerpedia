@@ -26,12 +26,12 @@ export default function BeatlesGuide() {
 
     return (
         <GuideTemplate
-            title="Dek'Ril & Mek'Ril Special Request Guide"
-            introduction="This boss's main gimmick is evasion. If you use AoE skills that aren't chain skills, it will gain an evasion buff. Characters that can inflict {D/BT_STAT|ST_AVOID} are recommended, along with single-target DPS."
+            title="デクリル＆メクリル特殊依頼攻略ガイド"
+            introduction="このボスの主要ギミックは回避です。チェインスキル以外のAoEスキルを使用すると回避バフを獲得します。{D/BT_STAT|ST_AVOID}を付与できるキャラクターと単体DPSがおすすめです。"
             defaultVersion="default"
             versions={{
                 default: {
-                    label: 'Guide',
+                    label: 'ガイド',
                     content: (
                         <>
                             <BossDisplay
@@ -49,19 +49,19 @@ export default function BeatlesGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "If you use AoE skills that aren't chain skills, boss gains an {B/BT_STAT|ST_DEF}.",
-                                "If a character is afflicted with {D/BT_DOT_POISON}, the boss will counterattacks just after he played.",
-                                "Main boss (right side) is the only one attacking. The left boss constantly buffs {B/BT_STAT|ST_ATK}.",
-                                "If the left boss is killed, main boss gains {B/BT_INVINCIBLE} and {B/BT_STAT|ST_ATK}.",
-                                "Characters that can inflict {D/BT_STAT|BT_REMOVE_BUFF} or {D/BT_STAT|BT_STEAL_BUFF} are highly recommended.",
-                                "Focus on single-target DPS to avoid triggering {B/BT_STAT|ST_DEF}."
+                                "チェインスキル以外のAoEスキルを使用するとボスに{B/BT_STAT|ST_DEF}が付与されます。",
+                                "キャラクターが{D/BT_DOT_POISON}を受けている場合、ボスは行動直後に反撃します。",
+                                "メインボス（右側）のみが攻撃します。左側のボスは常に{B/BT_STAT|ST_ATK}をバフします。",
+                                "左側のボスを倒すと、メインボスが{B/BT_INVINCIBLE}と{B/BT_STAT|ST_ATK}を獲得します。",
+                                "{D/BT_STAT|BT_REMOVE_BUFF}や{D/BT_STAT|BT_STEAL_BUFF}を付与できるキャラクターが強く推奨されます。",
+                                "{B/BT_STAT|ST_DEF}の発動を避けるため、単体DPSに集中しましょう。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={BeatlesTeams.beatlesSpecialRequest} defaultStage="1-10" />
                             <hr className="my-6 border-neutral-700" />
-                            <CombatFootage videoId="eQmB1Uw9qL8" title="Dek'Ril & Mek'Ril Combat Footage" author="Sevih" date="09/05/2025" />
+                            <CombatFootage videoId="eQmB1Uw9qL8" title="デクリル＆メクリル戦闘映像" author="Sevih" date="09/05/2025" />
                         </>
                     ),
                 },
