@@ -34,32 +34,28 @@
   "VoiceActor_zh": "CV. Saori Hayami",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": null,
-    "2_zh": null,
     "3": "ATK DEF HP +10%",
     "3_jp": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
     "3_zh": "ATK DEF HP +10%",
-    "4_1": "ATK DEF HP +16%\n+2 Ally Team Speed each turn (Max 5 stacks)\n+1 Chain Passive Weakness Gauge damage",
-    "4_1_jp": "ATK DEF HP +16%\n毎ターン味方のスピード+2(最大5回累積)\nチェーンパッシブのWGダメージ+1",
-    "4_1_kr": "ATK DEF HP +16%\n매 턴 아군 속도 +2 (최대 5회 누적)\n체인 패시브의 WG 감소량 +1",
-    "4_1_zh": "ATK DEF HP +16%\n每回合友军速度+2(最多叠加5次)\n连携被动的WG降低量+1",
+    "4_1": "ATK DEF HP +16%\n+2 Ally Team Speed each turn  (Max 5 stacks, same effect cannot stack)\n+1 Chain Passive Weakness Gauge damage",
+    "4_1_jp": "ATK DEF HP +16%\n毎ターン味方のスピード+2\n(最大5回累積,同じ効果重複不可)\nチェーンパッシブのWGダメージ+1",
+    "4_1_kr": "ATK DEF HP +16%\n매 턴 아군 속도 +2 (최대 5회 누적, 같은 효과 중첩 불가)\n체인 패시브의 WG 감소량 +1",
+    "4_1_zh": "ATK DEF HP +16%\n每回合友军速度+2\n(最多叠加5次/相同效果不可叠加)\n连携被动的WG降低量+1",
     "4_2": "ATK DEF HP +19%",
-    "4_2_zh": "ATK DEF HP +19%",
     "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start",
     "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25",
     "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25",
     "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发技能\n入场时AP+25",
     "5_2": "ATK DEF HP +25%",
-    "5_2_zh": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "5_3_zh": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\nAt the start of battle, grants increased Speed for 1 turn\n+50 Accuracy",
-    "6_jp": "ATK DEF HP +30%\n戦闘開始時、スピードUP+1ターン\n命中+50",
-    "6_kr": "ATK DEF HP +30%\n전투 입장 시 속도 증가 +1턴\n명중 +50",
-    "6_zh": "ATK DEF HP +30%\n战斗开始时速度提升+1回合\n命中+50"
+    "6": "ATK DEF HP +30%\nUpon entering battle, Speed Increase +1 turn\nDamage Increase +5%",
+    "6_jp": "ATK DEF HP +30%\n戦闘開始時、スピードUP+1ターン\nダメージ+5%",
+    "6_kr": "ATK DEF HP +30%\n전투 입장 시 속도 증가 +1턴\n피해 증가 +5%",
+    "6_zh": "ATK DEF HP +30%\n战斗开始时速度提升+1回合\n造成伤害提升5%"
   },
+  "limited": true,
   "skills": {
     "SKT_FIRST": {
       "NameIDSymbol": "9701",
@@ -138,6 +134,7 @@
       "wgr": 1,
       "cd": null,
       "buff": [
+        "BT_STAT",
         "BT_COOL3_CHARGE",
         "BT_ACTION_GAUGE"
       ],
@@ -245,10 +242,11 @@
           "效果触发几率+15%"
         ]
       },
-      "wgr": 1,
       "cd": "3",
+      "wgr": 1,
       "buff": [
-        "BT_STAT|ST_SPEED","BT_EXTRA_ATTACK_ON_TURN_END"
+        "BT_STAT|ST_SPEED",
+        "BT_EXTRA_ATTACK_ON_TURN_END"
       ],
       "debuff": []
     },
@@ -322,8 +320,8 @@
           "行动值+10%"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [
         "BT_ACTION_GAUGE"
       ],
@@ -407,6 +405,5 @@
         "BT_REVERSE_HEAL_BASED_TARGET"
       ]
     }
-  },
-  "limited": true
+  }
 }

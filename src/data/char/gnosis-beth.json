@@ -30,13 +30,11 @@
   "video": "zHV45UmIrKc",
   "VoiceActor": "VA. Kimberly Woods",
   "VoiceActor_jp": "CV. 戸松遥",
-  "VoiceActor_kr": "CV. Kimberly Woods",
+  "VoiceActor_kr": "CV. 윤아영",
   "VoiceActor_zh": "CV. 户松遥",
   "transcend": {
     "1": null,
-    "1_zh": null,
     "2": null,
-    "2_zh": null,
     "3": "ATK DEF HP +10%",
     "3_jp": "ATK DEF HP +10%",
     "3_kr": "ATK DEF HP +10%",
@@ -46,15 +44,12 @@
     "4_1_kr": "ATK DEF HP +16%\n영원한 출혈 보유 대상에게 자신이 받는 피해 감소\n영원한 출혈의 피해 +50%\n체인 패시브의 WG 감소량 +1",
     "4_1_zh": "ATK DEF HP +16%\n降低来自附带永恒出血目标的伤害\n永恒出血伤害+50%\n连锁被动效果WG降低量+1",
     "4_2": "ATK DEF HP +19%",
-    "4_2_zh": "ATK DEF HP +19%",
-    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start\n+4% Ally Team Accuracy",
-    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25\n味方の命中+4%",
-    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25\n아군 명중 +4%",
-    "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发\n入场时AP+25\n友军命中+4%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\n+25 Action Points at battle start\n+4% Ally Team Damage Increase",
+    "5_1_jp": "ATK DEF HP +22%\nバーストスキル3段階解禁\n戦闘開始時、AP+25\n味方の与ダメUP+4%",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +25\n아군 피해 증가 +4%",
+    "5_1_zh": "ATK DEF HP +22%\n解锁3阶爆发\n入场时AP+25\n友军造成伤害提升+4%",
     "5_2": "ATK DEF HP +25%",
-    "5_2_zh": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "5_3_zh": "ATK DEF HP +28%",
     "6": "ATK DEF HP +30%\nAlways granted Retribution's Dominion\nAt the start of battle, inflicts Eternal Bleeding on all enemies for 2 turn(s). (Ignores Immunity and Resilience)",
     "6_jp": "ATK DEF HP +30%\n【懲罰の領域】常時付与\n戦闘開始時、敵全体に\n【絶えざる出血】+2ターン付与\n(免疫と効果抵抗無視)",
     "6_kr": "ATK DEF HP +30%\n징벌의 영역 상시 보유\n전투 시작 시 적 전체에게 영원한 출혈 +2턴 부여 (면역 및 효과 저항 무시)",
@@ -238,8 +233,8 @@
           "效果持续时间+1回合"
         ]
       },
-      "wgr": 1,
       "cd": "4",
+      "wgr": 1,
       "buff": [
         "BT_STEALTHED"
       ],
@@ -321,8 +316,8 @@
           "爆发伤害+25%"
         ]
       },
-      "wgr": 2,
       "cd": "5",
+      "wgr": 2,
       "buff": [
         "IG_Buff_2000092_Interruption"
       ],
