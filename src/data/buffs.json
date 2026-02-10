@@ -948,10 +948,10 @@
         "label_jp": "レジーナワールド",
         "label_kr": "레지나의 세계",
         "label_zh": "蕾吉纳的世界",
-        "description": "Greatly reduces damage taken from enemies that are not granted increased Accuracy. (Unstackable, Irremovable)",
-        "description_jp": "命中UP状態ではない敵から受ける\\nダメージが大幅にDOWNする。\\n(回数累積不可・解除不可)",
-        "description_kr": "명중이 증가하지 않은 적에게 받는 피해가 크게 감소합니다. (횟수 누적 불가, 해제 불가)",
-        "description_zh": "命中未提升敌人带来的伤害大幅降低。\\n(无法叠加、无法解除)",
+        "description": "Greatly reduces damage taken from enemies that are not granted increased Effectiveness. (Unstackable, Irremovable)",
+        "description_jp": "効果命中UP状態ではない敵から受ける\\nダメージが大幅にDOWNする。\\n(回数累積不可・解除不可)",
+        "description_kr": "효과 적중이 증가하지 않은 적에게 받는 피해가 크게 감소합니다. (횟수 누적 불가, 해제 불가)",
+        "description_zh": "受到未持有[效果命中提升]状态的敌人的伤害大幅降低。\\n(无法叠加、无法解除)",
         "icon": "IG_Buff_Effect_2000067_Interruption"
     },
     {
