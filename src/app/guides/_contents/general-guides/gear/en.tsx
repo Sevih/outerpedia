@@ -180,7 +180,7 @@ const TEXTS = {
     priorityDescriptions: {
       weapons: 'Unique skills, highest priority for Legendary',
       accessories: 'Unique skills, main stat matters for DPS',
-      gloves: 'Accuracy main stat important for certain content',
+      gloves: 'Effectiveness main stat useful for debuffers',
       otherArmor: 'Epic is viable, focus on substats over rarity'
     }
   },
@@ -196,7 +196,7 @@ const TEXTS = {
       q: 'Should I only aim for Legendary gear?',
       a1: 'No! Epic gear is a strong alternative, especially on armor.',
       a2: 'It is cheaper to upgrade and the maximum stats are just 1 reforge lower than Legendary.',
-      a3: 'Weapons and Accessories have unique skills, so you would prefer looking for Legendary gear here, followed by Gloves for Accuracy.'
+      a3: 'Weapons and Accessories have unique skills, so you would prefer looking for Legendary gear here, followed by Gloves for Effectiveness on debuffers.'
     },
     sixVsFive: {
       q: 'Is 6-star gear always better than 5-star legendary gear?',
