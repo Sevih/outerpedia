@@ -78,28 +78,6 @@
         "BT_ACTION_GAUGE",
         "BT_STAT|ST_BUFF_CHANCE"
       ]
-    },
-    {
-      "name": {
-        "en": "Twin Tornado!",
-        "kr": "트윈 토네이도!",
-        "jp": "ツイントルネード!",
-        "zh": "双子龙卷风!"
-      },
-      "type": "SKT_ULTIMATE",
-      "description": {
-        "en": "Inflicts <color=#28d9ed>Shocked</color> once on all enemies for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies. Damage dealt increases proportionally to the number of debuffs inflicted on the target. This skill always has elemental advantage.",
-        "kr": "적 전체에게 <color=#28d9ed>2턴</color> 동안 지속되는 <color=#28d9ed>감전</color>을 1회 부여하고 공격합니다. 이 공격은 대상의 약화 효과가 많을수록 피해가 증가합니다. 이 스킬은 항상 유리한 상성으로 적용됩니다.",
-        "jp": "敵全体に感電1個を2ターンの間付与し、ダメージを与える。この攻撃は対象の弱体効果の数に応じてダメージがUPする。このスキルは有利属性の攻撃判定になる。",
-        "zh": "对全体敌人造成1次<color=#28d9ed>触电</color>效果,持续<color=#28d9ed>2回合</color>,并攻击。目标附带的弱化效果越多,则该攻击的伤害越高。该技能总是以优势属性施展。"
-      },
-      "icon": "Skill_Ultimate_2000082",
-      "buff": [
-        "BT_DMG_ELEMENT_SUPERIORITY"
-      ],
-      "debuff": [
-        "BT_DOT_LIGHTNING"
-      ]
     }
   ]
 }
