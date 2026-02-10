@@ -215,45 +215,52 @@ function StatsContent() {
                 />
             </StatGroup>
 
-            {/* 命中 & 闪避 */}
-            <StatGroup title="命中 & 闪避" color="purple">
+            {/* 伤害修正 */}
+            <StatGroup title="伤害修正" color="purple">
                 <StatCard
-                    abbr="ACC"
-                    desc="增加攻击成功命中敌人的概率。"
-                    effect={{
-                        buff: ["BT_STAT|ST_ACCURACY"],
-                        debuff: ["BT_STAT|ST_ACCURACY"]
-                    }}
+                    abbr="DMG UP"
+                    desc="攻击时造成的伤害增加。"
                     details={
                         <>
-                            <p>当命中高于目标闪避时，攻击100%命中。</p>
-                            <p className="mt-3 font-semibold">重要事项：</p>
+                            <p>伤害增加提升攻击时造成的伤害。该属性与自身的暴击伤害（发生暴击时）<strong>相加</strong>，并与敌方的暴击伤害减免及受到伤害减少一起计算。</p>
+                            <p className="mt-3 font-semibold">运作方式：</p>
                             <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>被<StatInlineTag name="EVA" />对抗。</li>
-                                <li>未命中时伤害-50%，且不会暴击。</li>
-                                <li>特定内容（如Boss或PvP）可能需要高命中。</li>
-                                <li>部分技能在命中前施加减益，绕过命中/闪避检定。</li>
+                                <li>非暴击时：DMG UP是该层唯一的加成。</li>
+                                <li>暴击时：DMG UP与<StatInlineTag name="CHD" />相加后，与敌方的<StatInlineTag name="DMG RED" />和<StatInlineTag name="CDMG RED" />比较。</li>
                             </ul>
+
                         </>
                     }
                 />
 
                 <StatCard
-                    abbr="EVA"
-                    desc="增加闪避敌人攻击的概率。未命中的攻击伤害-50%，且不会暴击。"
-                    effect={{
-                        buff: ["BT_STAT|ST_AVOID"],
-                        debuff: ["BT_STAT|ST_AVOID"]
-                    }}
+                    abbr="DMG RED"
+                    desc="受到攻击时承受的伤害减少。"
                     details={
                         <>
-                            <p>被<StatInlineTag name="ACC" />对抗的闪避增加躲避敌人攻击的概率。闪避率上限为<strong>25%</strong>，当闪避比敌人命中高<strong>+40</strong>以上时达到。</p>
-                            <p className="mt-3 font-semibold">未命中时：</p>
+                            <p>受到伤害减少降低被攻击时承受的伤害。该属性与自身的暴击伤害减免（被暴击时）<strong>相加</strong>，并与敌方的暴击伤害及伤害增加一起计算。</p>
+                            <p className="mt-3 font-semibold">运作方式：</p>
                             <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>伤害减少50%</li>
-                                <li>不会暴击</li>
-                                <li>不会施加减益</li>
+                                <li>非暴击时：DMG RED是该层唯一的减免。</li>
+                                <li>暴击时：DMG RED与<StatInlineTag name="CDMG RED" />相加后，与敌方的<StatInlineTag name="CHD" />和<StatInlineTag name="DMG UP" />比较。</li>
                             </ul>
+
+                        </>
+                    }
+                />
+
+                <StatCard
+                    abbr="CDMG RED"
+                    desc="被暴击时受到的伤害减少。"
+                    details={
+                        <>
+                            <p>暴击伤害减免降低敌方暴击命中时的额外伤害。该属性与自身的受到伤害减少<strong>相加</strong>，并与敌方的暴击伤害及伤害增加一起计算。</p>
+                            <p className="mt-3 font-semibold">运作方式：</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li>仅在被暴击时生效。</li>
+                                <li>与<StatInlineTag name="DMG RED" />相加，形成对敌方<StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />的总防御修正。</li>
+                            </ul>
+
                         </>
                     }
                 />
@@ -360,30 +367,35 @@ function FAQContent() {
                 />
             </div>
 
-            {/* 命中、未命中 & 减益施加 */}
+            {/* 伤害修正 */}
             <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-purple-400">命中、未命中 & 减益施加</h4>
+                <h4 className="text-lg font-semibold text-purple-400">伤害修正</h4>
                 <Accordion
                     items={[
                         {
-                            key: 'acc-vs-eva',
-                            title: '命中 vs 闪避如何运作？',
-                            content: '比较你的ACC和敌人的EVA。ACC更高则100%命中。更低则根据差值增加未命中概率。'
+                            key: 'dmg-up-vs-chd',
+                            title: 'DMG UP和暴击伤害有什么区别？',
+                            content: 'DMG UP无论是否暴击都适用于所有攻击。暴击伤害仅在暴击时生效。暴击时，两个值相加后与敌方防御修正（DMG RED + CDMG RED）比较。'
                         },
                         {
-                            key: 'acc-vs-eff',
-                            title: '命中和效果命中有什么区别？',
-                            content: '命中决定攻击对闪避的成功率（攻击是否命中？），效果命中决定减益对效果抵抗的成功率。'
+                            key: 'dmg-red-vs-cdmg-red',
+                            title: 'DMG RED和CDMG RED有什么区别？',
+                            content: 'DMG RED减少所有受到的伤害，CDMG RED仅减少暴击伤害。被暴击时，两个值相加以对抗敌方的CHD + DMG UP。'
+                        },
+                        {
+                            key: 'dmg-additive',
+                            title: '加算计算如何运作？',
+                            content: '攻击方：DMG UP与暴击伤害相加（暴击时）。防御方：DMG RED与CDMG RED相加（暴击时）。攻击方总计与防御方总计比较，决定最终伤害修正。'
                         },
                         {
                             key: 'debuff-on-miss',
-                            title: '攻击未命中时会施加减益吗？',
-                            content: '不会。被闪避时不会施加减益。但部分特殊技能在命中前或独立施加减益。'
-                        },
-                        {
-                            key: 'guaranteed-debuffs',
-                            title: '有技能即使未命中也能施加减益吗？',
-                            content: '有。部分技能在造成伤害前或不依赖命中检定施加减益。通常在技能描述中会说明。'
+                            title: '攻击未命中会怎样？',
+                            content: (
+                                <>
+                                    <p>未命中时，攻击伤害<strong>减少50%</strong>，且不会触发减益和暴击。</p>
+                                    <p className="mt-2">通过<EffectInlineTag name="SYS_BUFF_AVOID_UP" type="buff" />等效果使未命中率提升15%，可导致未命中发生。</p>
+                                </>
+                            )
                         },
                         {
                             key: 'eff-res-formula',
@@ -423,8 +435,8 @@ function FAQContent() {
                             title: '技能可以依赖多个属性吗？',
                             content: (
                                 <>
-                                    <p>严格来说不能。Outerplane目前没有均匀使用两个属性的技能（如50% ATK + 50% HP）。所谓的&quot;双重依赖&quot;实际上是<strong>次要依赖</strong>——主属性（通常是ATK）加上HP、SPD、EVA等的次要加成。</p>
-                                    <p className="mt-2">例如，部分技能以ATK为主，并从施放者的最大HP或速度获得加成。<SkillInline character="Regina" skill="S3" />包含闪避的轻微依赖，<CharacterLinkCard name="Demiurge Stella" icon={false} />有HP的部分依赖。</p>
+                                    <p>严格来说不能。Outerplane目前没有均匀使用两个属性的技能（如50% ATK + 50% HP）。所谓的&quot;双重依赖&quot;实际上是<strong>次要依赖</strong>——主属性（通常是ATK）加上HP或SPD等的次要加成。</p>
+                                    <p className="mt-2">例如，部分技能以ATK为主，并从施放者的最大HP或速度获得加成。<CharacterLinkCard name="Demiurge Stella" icon={false} />有HP的部分依赖。</p>
                                     <p className="mt-2">这些次要依赖通常较小，不应成为装备配置的重点。也有技能完全依赖ATK以外的属性（如基于HP或DEF的伤害）。</p>
                                 </>
                             )
@@ -552,12 +564,6 @@ function FAQContent() {
                                     <p className="mt-2">有效生命值(EHP)可由此推导：</p>
                                     <p className="mt-1"><strong>有效HP：</strong> <code>EHP = HP + (HP × DEF / 1000)</code></p>
 
-                                    <h4 className="font-semibold mt-4">命中 vs 闪避</h4>
-                                    <p>如果<code>EVA - ACC ≤ 0</code>，闪避概率 = 0%。</p>
-                                    <p className="mt-2">否则：</p>
-                                    <p className="mt-1"><strong>公式：</strong> <code>概率 = min(25%, 1000 / (100 + (EVA - ACC)))</code></p>
-                                    <p className="mt-2">这意味着当EVA超过敌人ACC 40以上时，闪避率固定在25%。超过此值的EVA不影响未命中概率。</p>
-
                                     <h4 className="font-semibold mt-4">效果命中 vs 效果抵抗</h4>
                                     <p>如果<code>EFF ≥ RES</code>，减益成功概率为100%。</p>
                                     <p className="mt-2">否则，减益施加概率计算如下：</p>
@@ -580,7 +586,7 @@ function FAQContent() {
                                         <li><strong>属性</strong>：0.8（克制）、1（中立）、1.2（被克制）</li>
                                         <li><strong>技能</strong>：技能倍率</li>
                                         <li><strong>ATK</strong>：单位的主要依赖属性（根据技能/角色可能是HP、DEF等）</li>
-                                        <li><strong>修正</strong>：包括暴击伤害、额外伤害%、次要依赖（HP、闪避等）、爆发伤害效果</li>
+                                        <li><strong>修正</strong>：包括DMG UP、暴击伤害（暴击时）、次要依赖（HP等）、爆发伤害效果 — 被敌方DMG RED及CDMG RED（暴击时）减免</li>
                                         <li><strong>PEN%</strong>：穿透</li>
                                     </ul>
                                     <p className="text-sm text-gray-500 mt-4">

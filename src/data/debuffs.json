@@ -567,10 +567,10 @@
         "label_jp": "強化逆転",
         "label_kr": "강화 역전",
         "label_zh": "强化逆转",
-        "description": "Increased stat effects granted to the target become reduced stat effects. Increased stat effects: Attack, Defense, Speed, Critical Hit Chance, Critical Damage, Accuracy, Evasion, Effectiveness, Resilience",
-        "description_jp": "対象に付与されたステータスUP 効果をDOWN効果に変える。 ステータスUP効果:攻撃力、 防御力、スピード、会心率、 会心ダメージ、命中、回避、効果 命中、効果抵抗",
-        "description_kr": "대상에게 걸린 능력치 증가 효과를 감소 효과로 변경합니다. 능력치 증가 효과 공격력, 방어력, 속도, 치명 확률, 치명 피해, 명중, 회피, 효과 적중, 효과 저항",
-        "description_zh": "目标所附带的能力值提升效果\\n变更为降低效果。\\n\\n能力值提升效果\\n攻击力、防御力、速度、暴击率、暴击伤害、\\n命中、回避、效果命中、效果抵抗",
+        "description": "Increased stat effects granted to the target become reduced stat effects. Increased stat effects: Attack, Defense, Speed, Critical Hit Chance, Critical Damage, Effectiveness, Resilience",
+        "description_jp": "対象に付与されたステータスUP 効果をDOWN効果に変える。 ステータスUP効果:攻撃力、 防御力、スピード、会心率、 会心ダメージ、効果命中、効果抵抗",
+        "description_kr": "대상에게 걸린 능력치 증가 효과를 감소 효과로 변경합니다. 능력치 증가 효과 공격력, 방어력, 속도, 치명 확률, 치명 피해, 효과 적중, 효과 저항",
+        "description_zh": "目标所附带的能力值提升效果\\n变更为降低效果。\\n\\n能力值提升效果\\n攻击力、防御力、速度、暴击率、暴击伤害、\\n效果命中、效果抵抗",
         "icon": "IG_Buff_Effect_Remove_Buff"
     },
     {

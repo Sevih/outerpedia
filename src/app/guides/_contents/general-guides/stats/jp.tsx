@@ -215,45 +215,52 @@ function StatsContent() {
                 />
             </StatGroup>
 
-            {/* 命中＆回避 */}
-            <StatGroup title="命中＆回避" color="purple">
+            {/* ダメージ修正 */}
+            <StatGroup title="ダメージ修正" color="purple">
                 <StatCard
-                    abbr="ACC"
-                    desc="敵への攻撃成功確率を上昇させます。"
-                    effect={{
-                        buff: ["BT_STAT|ST_ACCURACY"],
-                        debuff: ["BT_STAT|ST_ACCURACY"]
-                    }}
+                    abbr="DMG UP"
+                    desc="攻撃時に与えるダメージが増加します。"
                     details={
                         <>
-                            <p>命中が対象の回避より高い場合、攻撃は100%成功します。</p>
-                            <p className="mt-3 font-semibold">重要な注意点：</p>
+                            <p>ダメージ増加は攻撃時に与えるダメージを上昇させます。このステータスは自身の会心ダメージ（会心発生時）と<strong>加算</strong>され、敵の会心ダメージ減少および被ダメージ減少と共に計算されます。</p>
+                            <p className="mt-3 font-semibold">仕組み：</p>
                             <ul className="list-disc list-inside ml-4 mt-2">
-                                <li><StatInlineTag name="EVA" />で対抗されます。</li>
-                                <li>ミス時はダメージ-50%、クリティカル不可。</li>
-                                <li>特定のコンテンツ（ボスやPvPなど）では高い命中が必要な場合があります。</li>
-                                <li>一部のスキルはヒット前にデバフを付与し、命中/回避チェックを回避します。</li>
+                                <li>非クリティカル時：DMG UPがこの層の唯一のボーナス。</li>
+                                <li>クリティカル時：DMG UPが<StatInlineTag name="CHD" />に加算され、敵の<StatInlineTag name="DMG RED" />と<StatInlineTag name="CDMG RED" />と比較されます。</li>
                             </ul>
+
                         </>
                     }
                 />
 
                 <StatCard
-                    abbr="EVA"
-                    desc="敵の攻撃を回避する確率を上昇させます。ミスした攻撃はダメージ-50%、クリティカル不可。"
-                    effect={{
-                        buff: ["BT_STAT|ST_AVOID"],
-                        debuff: ["BT_STAT|ST_AVOID"]
-                    }}
+                    abbr="DMG RED"
+                    desc="被弾時に受けるダメージが減少します。"
                     details={
                         <>
-                            <p><StatInlineTag name="ACC" />で対抗される回避は、敵の攻撃を避ける確率を上げます。回避率の上限は<strong>25%</strong>で、回避が敵の命中より<strong>+40</strong>以上高い場合に達成されます。</p>
-                            <p className="mt-3 font-semibold">ミス時：</p>
+                            <p>被ダメージ減少は被弾時に受けるダメージを軽減します。このステータスは自身の会心ダメージ減少（会心被弾時）と<strong>加算</strong>され、敵の会心ダメージおよびダメージ増加と共に計算されます。</p>
+                            <p className="mt-3 font-semibold">仕組み：</p>
                             <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>ダメージが50%減少</li>
-                                <li>クリティカルヒット不可</li>
-                                <li>デバフが付与されない</li>
+                                <li>非クリティカル時：DMG REDがこの層の唯一の軽減。</li>
+                                <li>クリティカル時：DMG REDが<StatInlineTag name="CDMG RED" />に加算され、敵の<StatInlineTag name="CHD" />と<StatInlineTag name="DMG UP" />と比較されます。</li>
                             </ul>
+
+                        </>
+                    }
+                />
+
+                <StatCard
+                    abbr="CDMG RED"
+                    desc="会心被弾時に受けるダメージが減少します。"
+                    details={
+                        <>
+                            <p>会心ダメージ減少は敵の会心ヒットから受けるボーナスダメージを軽減します。このステータスは自身の被ダメージ減少と<strong>加算</strong>され、敵の会心ダメージおよびダメージ増加と共に計算されます。</p>
+                            <p className="mt-3 font-semibold">仕組み：</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li>会心被弾時のみ発動。</li>
+                                <li><StatInlineTag name="DMG RED" />に加算され、敵の<StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />に対する総防御修正値を形成。</li>
+                            </ul>
+
                         </>
                     }
                 />
@@ -360,30 +367,35 @@ function FAQContent() {
                 />
             </div>
 
-            {/* 命中、ミス＆デバフ付与 */}
+            {/* ダメージ修正 */}
             <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-purple-400">命中、ミス＆デバフ付与</h4>
+                <h4 className="text-lg font-semibold text-purple-400">ダメージ修正</h4>
                 <Accordion
                     items={[
                         {
-                            key: 'acc-vs-eva',
-                            title: '命中vs回避はどう機能しますか？',
-                            content: 'あなたのACCと敵のEVAを比較します。ACCが高ければ100%命中。低ければ、差に応じてミス確率が上がります。'
+                            key: 'dmg-up-vs-chd',
+                            title: 'DMG UPとクリダメの違いは？',
+                            content: 'DMG UPはクリティカルかどうかに関わらず全ての攻撃に適用されます。クリダメはクリティカルヒット時のみ適用。クリティカル時、両方の値が加算されてから敵の防御修正値（DMG RED + CDMG RED）と比較されます。'
                         },
                         {
-                            key: 'acc-vs-eff',
-                            title: '命中と効果命中の違いは？',
-                            content: '命中は回避に対する攻撃成功確率（攻撃が当たるか？）を決定し、効果命中は効果抵抗に対するデバフ成功確率を決定します。'
+                            key: 'dmg-red-vs-cdmg-red',
+                            title: 'DMG REDとCDMG REDの違いは？',
+                            content: 'DMG REDは全ての受けるダメージを軽減し、CDMG REDはクリティカルヒットからのダメージのみ軽減します。クリティカル被弾時、両方の値が加算されて敵のCHD + DMG UPに対抗します。'
+                        },
+                        {
+                            key: 'dmg-additive',
+                            title: '加算計算はどう機能しますか？',
+                            content: '攻撃側：DMG UPがクリダメに加算（クリティカル時）。防御側：DMG REDがCDMG REDに加算（クリティカル時）。攻撃側の合計が防御側の合計と比較され、最終的なダメージ修正が決定されます。'
                         },
                         {
                             key: 'debuff-on-miss',
-                            title: '攻撃がミスした場合、デバフは付与されますか？',
-                            content: 'いいえ。回避でミスした場合、デバフは付与されません。ただし、一部の特殊スキルはヒット前または独立してデバフを付与します。'
-                        },
-                        {
-                            key: 'guaranteed-debuffs',
-                            title: 'ミスしてもデバフを付与するスキルはありますか？',
-                            content: 'はい。一部のスキルはダメージを与える前、または命中チェックに依存せずにデバフを付与します。通常、説明に明記されています。'
+                            title: '攻撃がミスした場合どうなりますか？',
+                            content: (
+                                <>
+                                    <p>ミス発生時、攻撃のダメージが<strong>50%減少</strong>し、デバフもクリティカルも発生しません。</p>
+                                    <p className="mt-2"><EffectInlineTag name="SYS_BUFF_AVOID_UP" type="buff" />などの効果により、ミス率が15%上昇することでミスが発生します。</p>
+                                </>
+                            )
                         },
                         {
                             key: 'eff-res-formula',
@@ -423,8 +435,8 @@ function FAQContent() {
                             title: 'スキルは複数のステータスに依存できますか？',
                             content: (
                                 <>
-                                    <p>正確には違います。Outerplaneには現在、2つのステータスを均等に使うスキル（例：50% ATK + 50% HP）はありません。「デュアルスケーリング」と呼ばれるものは実際には<strong>副次依存</strong>です — メインステータス（通常ATK）に、HP、SPD、EVAなどの副次ボーナスが加わります。</p>
-                                    <p className="mt-2">例えば、一部のスキルはATKをメインに、術者の最大HPや速度からボーナスを得ます。<SkillInline character="Regina" skill="S3" />は回避の軽微な依存を含み、<CharacterLinkCard name="Demiurge Stella" icon={false} />はHPからの部分依存を持ちます。</p>
+                                    <p>正確には違います。Outerplaneには現在、2つのステータスを均等に使うスキル（例：50% ATK + 50% HP）はありません。「デュアルスケーリング」と呼ばれるものは実際には<strong>副次依存</strong>です — メインステータス（通常ATK）に、HPやSPDなどの副次ボーナスが加わります。</p>
+                                    <p className="mt-2">例えば、一部のスキルはATKをメインに、術者の最大HPや速度からボーナスを得ます。<CharacterLinkCard name="Demiurge Stella" icon={false} />はHPからの部分依存を持ちます。</p>
                                     <p className="mt-2">これらの副次依存は通常小さく、装備構築の焦点にすべきではありません。ATK以外のステータスに完全に依存するスキル（HP依存やDEF依存ダメージなど）もあります。</p>
                                 </>
                             )
@@ -552,12 +564,6 @@ function FAQContent() {
                                     <p className="mt-2">有効HP（EHP）はここから導出できます：</p>
                                     <p className="mt-1"><strong>有効HP：</strong> <code>EHP = HP + (HP × DEF / 1000)</code></p>
 
-                                    <h4 className="font-semibold mt-4">命中vs回避</h4>
-                                    <p><code>EVA - ACC ≤ 0</code>の場合、回避確率 = 0%。</p>
-                                    <p className="mt-2">それ以外：</p>
-                                    <p className="mt-1"><strong>計算式：</strong> <code>確率 = min(25%, 1000 / (100 + (EVA - ACC)))</code></p>
-                                    <p className="mt-2">つまり、EVAが敵のACCを40以上超えると回避率は25%で頭打ち。それ以上のEVAはミス確率に影響しません。</p>
-
                                     <h4 className="font-semibold mt-4">効果命中vs効果抵抗</h4>
                                     <p><code>EFF ≥ RES</code>の場合、デバフ成功確率は100%。</p>
                                     <p className="mt-2">それ以外、デバフ付与確率は以下で計算：</p>
@@ -580,7 +586,7 @@ function FAQContent() {
                                         <li><strong>属性</strong>：0.8（不利）、1（中立）、1.2（有利）</li>
                                         <li><strong>スキル</strong>：スキル倍率</li>
                                         <li><strong>ATK</strong>：ユニットのメイン依存ステータス（スキル/キャラによってHP、DEFなども可）</li>
-                                        <li><strong>修正値</strong>：クリダメ、ボーナスダメージ%、副次依存（HP、回避など）、バーストダメージ効果を含む</li>
+                                        <li><strong>修正値</strong>：DMG UP、クリダメ（クリティカル時）、副次依存（HPなど）、バーストダメージ効果を含む — 敵のDMG REDおよびCDMG RED（クリティカル時）で軽減</li>
                                         <li><strong>PEN%</strong>：貫通</li>
                                     </ul>
                                     <p className="text-sm text-gray-500 mt-4">

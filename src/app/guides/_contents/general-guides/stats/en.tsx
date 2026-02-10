@@ -215,45 +215,52 @@ function StatsContent() {
                 />
             </StatGroup>
 
-            {/* Hit & Evasion */}
-            <StatGroup title="Hit & Evasion" color="purple">
+            {/* Damage Modifiers */}
+            <StatGroup title="Damage Modifiers" color="purple">
                 <StatCard
-                    abbr="ACC"
-                    desc="Increases the chance of successfully landing an attack on an enemy."
-                    effect={{
-                        buff: ["BT_STAT|ST_ACCURACY"],
-                        debuff: ["BT_STAT|ST_ACCURACY"]
-                    }}
+                    abbr="DMG UP"
+                    desc="Increases damage dealt when attacking."
                     details={
                         <>
-                            <p>When your Accuracy is higher than the target&apos;s Evasion, your attacks have a 100% chance to succeed.</p>
-                            <p className="mt-3 font-semibold">Important notes:</p>
+                            <p>Damage Increase boosts the damage you deal when attacking. This stat is <strong>additive</strong> with your Critical Damage (when a critical hit occurs), and the combined value is then calculated against the enemy&apos;s Critical Damage Reduction and Damage Taken Reduction.</p>
+                            <p className="mt-3 font-semibold">How it works:</p>
                             <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>Countered by <StatInlineTag name="EVA" />.</li>
-                                <li>A miss results in -50% damage and cannot crit.</li>
-                                <li>Certain content (like bosses or PvP) may require high Accuracy.</li>
-                                <li>Some skills apply their debuff before the hit, bypassing ACC/EVA checks.</li>
+                                <li>On a non-crit hit: DMG UP is the sole bonus in this layer.</li>
+                                <li>On a crit hit: DMG UP is added to your <StatInlineTag name="CHD" /> before being compared to the enemy&apos;s <StatInlineTag name="DMG RED" /> and <StatInlineTag name="CDMG RED" />.</li>
                             </ul>
+                            
                         </>
                     }
                 />
 
                 <StatCard
-                    abbr="EVA"
-                    desc="Increases the chance of evading an enemy's attack. Missed attacks deal -50% damage and can't crit."
-                    effect={{
-                        buff: ["BT_STAT|ST_AVOID"],
-                        debuff: ["BT_STAT|ST_AVOID"]
-                    }}
+                    abbr="DMG RED"
+                    desc="Reduces damage taken when hit."
                     details={
                         <>
-                            <p>Countered by <StatInlineTag name="ACC" />, Evasion increases the chance to avoid enemy attacks. The evasion rate caps at <strong>25%</strong>, which is reached when your Evasion stat is at least <strong>+40</strong> higher than the enemy&apos;s Accuracy.</p>
-                            <p className="mt-3 font-semibold">On miss:</p>
+                            <p>Damage Reduction lowers the damage you take when hit. This stat is <strong>additive</strong> with your Critical Damage Reduction (when critically hit), and the combined value is then calculated against the enemy&apos;s Critical Damage and Damage Increase.</p>
+                            <p className="mt-3 font-semibold">How it works:</p>
                             <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>Damage is reduced by 50%</li>
-                                <li>No Critical Hits can occur</li>
-                                <li>Debuffs will not be applied</li>
+                                <li>On a non-crit hit: DMG RED is the sole reduction in this layer.</li>
+                                <li>On a crit hit: DMG RED is added to your <StatInlineTag name="CDMG RED" /> before being compared to the enemy&apos;s <StatInlineTag name="CHD" /> and <StatInlineTag name="DMG UP" />.</li>
                             </ul>
+                            
+                        </>
+                    }
+                />
+
+                <StatCard
+                    abbr="CDMG RED"
+                    desc="Reduces damage taken when critically hit."
+                    details={
+                        <>
+                            <p>Critical Damage Reduction reduces the bonus damage you take from enemy critical hits. This stat is <strong>additive</strong> with your Damage Taken Reduction, and the combined value is calculated against the enemy&apos;s Critical Damage and Damage Increase.</p>
+                            <p className="mt-3 font-semibold">How it works:</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li>Only activates when you are critically hit.</li>
+                                <li>Added to your <StatInlineTag name="DMG RED" /> to form your total defensive modifier against the enemy&apos;s <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />.</li>
+                            </ul>
+                            
                         </>
                     }
                 />
@@ -360,30 +367,35 @@ function FAQContent() {
                 />
             </div>
 
-            {/* Hit, Miss & Debuff Application */}
+            {/* Damage Modifiers */}
             <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-purple-400">Hit, Miss & Debuff Application</h4>
+                <h4 className="text-lg font-semibold text-purple-400">Damage Modifiers</h4>
                 <Accordion
                     items={[
                         {
-                            key: 'acc-vs-eva',
-                            title: 'How does Accuracy vs Evasion work?',
-                            content: 'Your ACC is compared to the enemy\'s EVA. If your ACC is higher, you have a 100% chance to hit. If lower, the chance to miss increases based on the gap.'
+                            key: 'dmg-up-vs-chd',
+                            title: 'What\'s the difference between DMG UP and Crit Damage?',
+                            content: 'DMG UP applies on every attack regardless of whether it crits. Crit Damage only applies when a critical hit occurs. On a crit, both values are added together before being compared to the enemy\'s defensive modifiers (DMG RED + CDMG RED).'
                         },
                         {
-                            key: 'acc-vs-eff',
-                            title: 'What\'s the difference between Accuracy and Effectiveness?',
-                            content: 'Accuracy determines hit chance vs Evasion (can your attack land?), while Effectiveness determines whether debuffs succeed vs Resilience.'
+                            key: 'dmg-red-vs-cdmg-red',
+                            title: 'What\'s the difference between DMG RED and CDMG RED?',
+                            content: 'DMG RED reduces all incoming damage, while CDMG RED only reduces damage from critical hits. When you are critically hit, both values are added together to counter the enemy\'s CHD + DMG UP.'
+                        },
+                        {
+                            key: 'dmg-additive',
+                            title: 'How does the additive calculation work?',
+                            content: 'On the attacker\'s side, DMG UP is added to Crit Damage (on crit). On the defender\'s side, DMG RED is added to CDMG RED (on crit). The attacker\'s total is then compared against the defender\'s total to determine the final damage modifier.'
                         },
                         {
                             key: 'debuff-on-miss',
-                            title: 'Do debuffs apply if the attack misses?',
-                            content: 'No. If an attack misses due to Evasion, it cannot apply debuffs. However, some special skills apply debuffs before or independently of the hit.'
-                        },
-                        {
-                            key: 'guaranteed-debuffs',
-                            title: 'Are there skills that apply debuffs even if the hit misses?',
-                            content: 'Yes. Certain skills apply debuffs before dealing damage or without relying on Accuracy checks. These usually state it clearly in their description.'
+                            title: 'What happens when an attack misses?',
+                            content: (
+                                <>
+                                    <p>When a miss occurs, the attack deals <strong>50% reduced damage</strong>, and neither debuffs nor critical hits can occur.</p>
+                                    <p className="mt-2">A miss can occur when the attacker is affected by effects like <EffectInlineTag name="SYS_BUFF_AVOID_UP" type="buff" />, which increases the miss rate by 15%.</p>
+                                </>
+                            )
                         },
                         {
                             key: 'eff-res-formula',
@@ -423,8 +435,8 @@ function FAQContent() {
                             title: 'Can skills scale with more than one stat?',
                             content: (
                                 <>
-                                    <p>Not exactly. Outerplane does not currently feature skills that use two stats evenly (e.g., 50% ATK + 50% HP). What is often referred to as &ldquo;dual-scaling&rdquo; is actually <strong>secondary scaling</strong> — a main stat (usually ATK), with a minor bonus from another stat like HP, SPD, or EVA.</p>
-                                    <p className="mt-2">For example, some skills primarily scale with ATK but gain a bonus from the caster&apos;s Max HP or Speed. <SkillInline character="Regina" skill="S3" /> includes minor scaling with Evasion, and <CharacterLinkCard name="Demiurge Stella" icon={false} /> has partial scaling from HP.</p>
+                                    <p>Not exactly. Outerplane does not currently feature skills that use two stats evenly (e.g., 50% ATK + 50% HP). What is often referred to as &ldquo;dual-scaling&rdquo; is actually <strong>secondary scaling</strong> — a main stat (usually ATK), with a minor bonus from another stat like HP or SPD.</p>
+                                    <p className="mt-2">For example, some skills primarily scale with ATK but gain a bonus from the caster&apos;s Max HP or Speed. <CharacterLinkCard name="Demiurge Stella" icon={false} /> has partial scaling from HP.</p>
                                     <p className="mt-2">These secondary scalings are usually small and should not be the focus of gear building. There are also skills that use a stat other than ATK entirely — such as HP-based or DEF-based damage.</p>
                                 </>
                             )
@@ -552,12 +564,6 @@ function FAQContent() {
                                     <p className="mt-2">Effective Health (EHP) can be derived from it:</p>
                                     <p className="mt-1"><strong>Effective HP:</strong> <code>EHP = HP + (HP × DEF / 1000)</code></p>
 
-                                    <h4 className="font-semibold mt-4">Accuracy vs Evasion</h4>
-                                    <p>If <code>EVA - ACC ≤ 0</code>, then chance to evade = 0%.</p>
-                                    <p className="mt-2">Otherwise:</p>
-                                    <p className="mt-1"><strong>Formula:</strong> <code>Ratio = min(25%, 1000 / (100 + (EVA - ACC)))</code></p>
-                                    <p className="mt-2">This means evasion caps at 25% when your EVA exceeds enemy ACC by 40 or more. Additional EVA beyond this gives no further miss chance.</p>
-
                                     <h4 className="font-semibold mt-4">Effectiveness vs Resilience</h4>
                                     <p>If <code>EFF ≥ RES</code>, the debuff success chance is 100%.</p>
                                     <p className="mt-2">Otherwise, the chance to apply a debuff is calculated using:</p>
@@ -580,7 +586,7 @@ function FAQContent() {
                                         <li><strong>Elemental</strong>: 0.8 (disadvantage), 1 (neutral), or 1.2 (advantage)</li>
                                         <li><strong>Skill</strong>: Skill multiplier</li>
                                         <li><strong>ATK</strong>: Your unit&apos;s main scaling stat (can also be HP, DEF, etc. depending on the skill/character)</li>
-                                        <li><strong>Modifiers</strong>: Includes Crit Dmg, bonus damage %, secondary scalings (like HP or Evasion), and burst damage effects</li>
+                                        <li><strong>Modifiers</strong>: Includes DMG UP, Crit Dmg (on crit), secondary scalings (like HP), and burst damage effects — reduced by the enemy&apos;s DMG RED and CDMG RED (on crit)</li>
                                         <li><strong>PEN%</strong>: Penetration</li>
                                     </ul>
                                     <p className="text-sm text-gray-500 mt-4">

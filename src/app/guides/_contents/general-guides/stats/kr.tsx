@@ -215,45 +215,52 @@ function StatsContent() {
                 />
             </StatGroup>
 
-            {/* 명중 & 회피 */}
-            <StatGroup title="명중 & 회피" color="purple">
+            {/* 데미지 보정 */}
+            <StatGroup title="데미지 보정" color="purple">
                 <StatCard
-                    abbr="ACC"
-                    desc="적에게 공격을 성공적으로 적중시킬 확률을 증가시킵니다."
-                    effect={{
-                        buff: ["BT_STAT|ST_ACCURACY"],
-                        debuff: ["BT_STAT|ST_ACCURACY"]
-                    }}
+                    abbr="DMG UP"
+                    desc="공격 시 주는 피해량이 증가합니다."
                     details={
                         <>
-                            <p>명중이 대상의 회피보다 높으면 공격은 100% 성공합니다.</p>
-                            <p className="mt-3 font-semibold">중요 사항:</p>
+                            <p>피해 증가는 공격 시 주는 데미지를 높입니다. 이 스탯은 자신의 치명타 데미지(치명 발생 시)와 <strong>합산</strong>되어, 적의 치명 피해 감소 및 받는 피해 감소와 함께 계산됩니다.</p>
+                            <p className="mt-3 font-semibold">작동 방식:</p>
                             <ul className="list-disc list-inside ml-4 mt-2">
-                                <li><StatInlineTag name="EVA" />로 대응됩니다.</li>
-                                <li>미스 시 데미지 -50%, 치명타 불가.</li>
-                                <li>특정 콘텐츠(보스나 PvP 등)에서는 높은 명중이 필요할 수 있습니다.</li>
-                                <li>일부 스킬은 히트 전에 디버프를 부여하여 명중/회피 체크를 우회합니다.</li>
+                                <li>비치명 시: DMG UP이 이 층의 유일한 보너스.</li>
+                                <li>치명 시: DMG UP이 <StatInlineTag name="CHD" />에 합산되어 적의 <StatInlineTag name="DMG RED" />와 <StatInlineTag name="CDMG RED" />와 비교됩니다.</li>
                             </ul>
+
                         </>
                     }
                 />
 
                 <StatCard
-                    abbr="EVA"
-                    desc="적의 공격을 회피할 확률을 증가시킵니다. 미스된 공격은 데미지 -50%, 치명타 불가."
-                    effect={{
-                        buff: ["BT_STAT|ST_AVOID"],
-                        debuff: ["BT_STAT|ST_AVOID"]
-                    }}
+                    abbr="DMG RED"
+                    desc="피격 시 받는 피해량이 감소합니다."
                     details={
                         <>
-                            <p><StatInlineTag name="ACC" />로 대응되는 회피는 적의 공격을 피할 확률을 높입니다. 회피율 상한은 <strong>25%</strong>이며, 회피가 적의 명중보다 <strong>+40</strong> 이상 높을 때 달성됩니다.</p>
-                            <p className="mt-3 font-semibold">미스 시:</p>
+                            <p>받는 피해 감소는 피격 시 받는 데미지를 줄입니다. 이 스탯은 자신의 치명 피해 감소(치명 피격 시)와 <strong>합산</strong>되어, 적의 치명 피해 및 피해 증가와 함께 계산됩니다.</p>
+                            <p className="mt-3 font-semibold">작동 방식:</p>
                             <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>데미지 50% 감소</li>
-                                <li>치명타 불가</li>
-                                <li>디버프 부여 불가</li>
+                                <li>비치명 시: DMG RED가 이 층의 유일한 감소.</li>
+                                <li>치명 시: DMG RED가 <StatInlineTag name="CDMG RED" />에 합산되어 적의 <StatInlineTag name="CHD" />와 <StatInlineTag name="DMG UP" />과 비교됩니다.</li>
                             </ul>
+
+                        </>
+                    }
+                />
+
+                <StatCard
+                    abbr="CDMG RED"
+                    desc="치명 피격 시 받는 피해가 감소합니다."
+                    details={
+                        <>
+                            <p>치명 피해 감소는 적의 치명타로 받는 보너스 데미지를 줄입니다. 이 스탯은 자신의 받는 피해 감소와 <strong>합산</strong>되어, 적의 치명 피해 및 피해 증가와 함께 계산됩니다.</p>
+                            <p className="mt-3 font-semibold">작동 방식:</p>
+                            <ul className="list-disc list-inside ml-4 mt-2">
+                                <li>치명 피격 시에만 발동.</li>
+                                <li><StatInlineTag name="DMG RED" />에 합산되어 적의 <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />에 대한 총 방어 보정치를 형성.</li>
+                            </ul>
+
                         </>
                     }
                 />
@@ -360,30 +367,35 @@ function FAQContent() {
                 />
             </div>
 
-            {/* 명중, 미스 & 디버프 부여 */}
+            {/* 데미지 보정 */}
             <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-purple-400">명중, 미스 & 디버프 부여</h4>
+                <h4 className="text-lg font-semibold text-purple-400">데미지 보정</h4>
                 <Accordion
                     items={[
                         {
-                            key: 'acc-vs-eva',
-                            title: '명중 vs 회피는 어떻게 작동하나요?',
-                            content: '당신의 ACC와 적의 EVA를 비교합니다. ACC가 높으면 100% 명중. 낮으면 차이에 따라 미스 확률이 증가합니다.'
+                            key: 'dmg-up-vs-chd',
+                            title: 'DMG UP과 치명타 데미지의 차이는?',
+                            content: 'DMG UP은 치명 여부와 관계없이 모든 공격에 적용됩니다. 치명타 데미지는 치명 발생 시에만 적용. 치명 시 두 값이 합산된 후 적의 방어 보정치(DMG RED + CDMG RED)와 비교됩니다.'
                         },
                         {
-                            key: 'acc-vs-eff',
-                            title: '명중과 효과 적중의 차이는?',
-                            content: '명중은 회피에 대한 공격 성공 확률(공격이 맞는가?)을 결정하고, 효과 적중은 효과 저항에 대한 디버프 성공 확률을 결정합니다.'
+                            key: 'dmg-red-vs-cdmg-red',
+                            title: 'DMG RED와 CDMG RED의 차이는?',
+                            content: 'DMG RED는 모든 받는 데미지를 감소시키고, CDMG RED는 치명타 데미지만 감소시킵니다. 치명 피격 시 두 값이 합산되어 적의 CHD + DMG UP에 대항합니다.'
+                        },
+                        {
+                            key: 'dmg-additive',
+                            title: '합산 계산은 어떻게 작동하나요?',
+                            content: '공격 측: DMG UP이 치명타 데미지에 합산(치명 시). 방어 측: DMG RED가 CDMG RED에 합산(치명 시). 공격 측 합계가 방어 측 합계와 비교되어 최종 데미지 보정이 결정됩니다.'
                         },
                         {
                             key: 'debuff-on-miss',
-                            title: '공격이 미스하면 디버프가 부여되나요?',
-                            content: '아니요. 회피로 미스하면 디버프가 부여되지 않습니다. 단, 일부 특수 스킬은 히트 전이나 독립적으로 디버프를 부여합니다.'
-                        },
-                        {
-                            key: 'guaranteed-debuffs',
-                            title: '미스해도 디버프를 부여하는 스킬이 있나요?',
-                            content: '네. 일부 스킬은 데미지를 주기 전이나 명중 체크에 의존하지 않고 디버프를 부여합니다. 보통 설명에 명시되어 있습니다.'
+                            title: '공격이 미스하면 어떻게 되나요?',
+                            content: (
+                                <>
+                                    <p>미스 발생 시 공격 데미지가 <strong>50% 감소</strong>하며, 디버프와 치명타 모두 발생하지 않습니다.</p>
+                                    <p className="mt-2"><EffectInlineTag name="SYS_BUFF_AVOID_UP" type="buff" /> 등의 효과로 빗나감 확률이 15% 증가하여 미스가 발생할 수 있습니다.</p>
+                                </>
+                            )
                         },
                         {
                             key: 'eff-res-formula',
@@ -423,8 +435,8 @@ function FAQContent() {
                             title: '스킬이 여러 스탯에 의존할 수 있나요?',
                             content: (
                                 <>
-                                    <p>정확히는 아닙니다. Outerplane에는 현재 두 스탯을 균등하게 사용하는 스킬(예: 50% ATK + 50% HP)이 없습니다. &quot;듀얼 스케일링&quot;이라고 불리는 것은 실제로 <strong>부차 의존</strong>입니다 — 메인 스탯(보통 ATK)에 HP, SPD, EVA 등의 부차 보너스가 추가됩니다.</p>
-                                    <p className="mt-2">예를 들어, 일부 스킬은 ATK를 메인으로 시전자의 최대 HP나 속도에서 보너스를 얻습니다. <SkillInline character="Regina" skill="S3" />는 회피의 경미한 의존을 포함하고, <CharacterLinkCard name="Demiurge Stella" icon={false} />는 HP에서 부분 의존을 가집니다.</p>
+                                    <p>정확히는 아닙니다. Outerplane에는 현재 두 스탯을 균등하게 사용하는 스킬(예: 50% ATK + 50% HP)이 없습니다. &quot;듀얼 스케일링&quot;이라고 불리는 것은 실제로 <strong>부차 의존</strong>입니다 — 메인 스탯(보통 ATK)에 HP나 SPD 등의 부차 보너스가 추가됩니다.</p>
+                                    <p className="mt-2">예를 들어, 일부 스킬은 ATK를 메인으로 시전자의 최대 HP나 속도에서 보너스를 얻습니다. <CharacterLinkCard name="Demiurge Stella" icon={false} />는 HP에서 부분 의존을 가집니다.</p>
                                     <p className="mt-2">이러한 부차 의존은 보통 작으며 장비 구성의 초점이 되어서는 안 됩니다. ATK 외의 스탯에 완전히 의존하는 스킬(HP 기반이나 DEF 기반 데미지 등)도 있습니다.</p>
                                 </>
                             )
@@ -552,12 +564,6 @@ function FAQContent() {
                                     <p className="mt-2">유효 HP(EHP)는 여기서 도출할 수 있습니다:</p>
                                     <p className="mt-1"><strong>유효 HP:</strong> <code>EHP = HP + (HP × DEF / 1000)</code></p>
 
-                                    <h4 className="font-semibold mt-4">명중 vs 회피</h4>
-                                    <p><code>EVA - ACC ≤ 0</code>이면 회피 확률 = 0%.</p>
-                                    <p className="mt-2">그 외:</p>
-                                    <p className="mt-1"><strong>공식:</strong> <code>확률 = min(25%, 1000 / (100 + (EVA - ACC)))</code></p>
-                                    <p className="mt-2">즉, EVA가 적의 ACC를 40 이상 초과하면 회피율은 25%에서 멈춥니다. 그 이상의 EVA는 미스 확률에 영향을 주지 않습니다.</p>
-
                                     <h4 className="font-semibold mt-4">효과 적중 vs 효과 저항</h4>
                                     <p><code>EFF ≥ RES</code>면 디버프 성공 확률은 100%.</p>
                                     <p className="mt-2">그 외, 디버프 부여 확률은 다음으로 계산:</p>
@@ -580,7 +586,7 @@ function FAQContent() {
                                         <li><strong>속성</strong>: 0.8 (불리), 1 (중립), 1.2 (유리)</li>
                                         <li><strong>스킬</strong>: 스킬 배율</li>
                                         <li><strong>ATK</strong>: 유닛의 메인 의존 스탯 (스킬/캐릭터에 따라 HP, DEF 등도 가능)</li>
-                                        <li><strong>수정치</strong>: 치명타 데미지, 보너스 데미지%, 부차 의존(HP, 회피 등), 버스트 데미지 효과 포함</li>
+                                        <li><strong>수정치</strong>: DMG UP, 치명타 데미지(치명 시), 부차 의존(HP 등), 버스트 데미지 효과 포함 — 적의 DMG RED 및 CDMG RED(치명 시)로 감소</li>
                                         <li><strong>PEN%</strong>: 관통</li>
                                     </ul>
                                     <p className="text-sm text-gray-500 mt-4">
