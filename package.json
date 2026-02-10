@@ -48,7 +48,9 @@
     "boss:copy-buff-debuff": "python scripts/copy-buff-debuff.py",
     "raid:validate": "node scripts/raid/validate.js",
     "//9": "=== GUIDES ===",
-    "guide:check": "python scripts/check-guide-format.py"
+    "guide:check": "python scripts/check-guide-format.py",
+    "//10": "=== BGM ===",
+    "bgm:merge": "python scripts/merge_bgm_intros.py"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.11",

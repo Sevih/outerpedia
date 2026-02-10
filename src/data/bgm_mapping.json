@@ -354,7 +354,7 @@
     "file": "Event_00025",
     "name": "Event - Moonlight at World's End",
     "name_jp": "Event - Moonlight at World's End",
-    "name_kr": "Event - Chasing the End",
+    "name_kr": "Event - Moonlight at World's End",
     "name_zh": "Event - Moonlight at World's End",
     "size": 0.95,
     "duration": 41.6
@@ -370,10 +370,10 @@
   },
   {
     "file": "Event_00027",
-    "name": "Event - The Sun, shining forever",
-    "name_jp": "Event - The Sun, shining forever",
-    "name_kr": "Event - The Sun, shining forever",
-    "name_zh": "Event - The Sun, shining forever",
+    "name": "Event - Festival and Secret Recipe",
+    "name_jp": "Event - Festival and Secret Recipe",
+    "name_kr": "Event - Festival and Secret Recipe",
+    "name_zh": "Event - Festival and Secret Recipe",
     "size": 1.24,
     "duration": 54.2
   },
@@ -397,9 +397,21 @@
   },
   {
     "file": "Event_00030",
-    "name": "Event 00030",
+    "name": "Event - The Sun, Everlasting Light",
+    "name_jp": "Event - The Sun, Everlasting Light",
+    "name_kr": "Event - The Sun, Everlasting Light",
+    "name_zh": "Event - The Sun, Everlasting Light",
     "size": 2.32,
     "duration": 101.4
+  },
+  {
+    "file": "Event_00031",
+    "name": "Event - The Chocolate Fever",
+    "name_jp": "Event - The Chocolate Fever",
+    "name_kr": "Event - The Chocolate Fever",
+    "name_zh": "Event - The Chocolate Fever",
+    "size": 0.77,
+    "duration": 33.8
   },
   {
     "file": "Gacha_BGM",
