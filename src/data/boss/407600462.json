@@ -49,17 +49,17 @@
       },
       "type": "SKT_FIRST",
       "description": {
-        "en": "Increases <color=#28d9ed>Dek'Ril</color>'s <color=#28d9ed>Evasion</color> for <color=#28d9ed>2 turn(s)</color> and inflicts <color=#28d9ed>Marked</color> on the caster for <color=#28d9ed>1 turn(s)</color>.",
-        "kr": "<color=#28d9ed>2턴</color> 동안 <color=#28d9ed>데그릴</color>의 <color=#28d9ed>회피</color>를 증가시키고, 자신에게는 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>표식</color>을 부여합니다.",
-        "jp": "<color=#28d9ed>【デグリル】</color>の<color=#28d9ed>回避</color>を<color=#28d9ed>2ターン</color>の間UPさせ、自分には<color=#28d9ed>標的</color>を<color=#28d9ed>1ターン</color>の間付与する。",
-        "zh": "使<color=#28d9ed>泰格里尔</color>的<color=#28d9ed>回避</color>提升,持续<color=#28d9ed>2回合</color>,并对自身造成<color=#28d9ed>标记</color>效果,持续<color=#28d9ed>1回合</color>。"
+        "en": "Increases <color=#28d9ed>Dek'Ril</color>'s <color=#28d9ed>Attack</color> for <color=#28d9ed>2 turn(s)</color>, and grants <color=#28d9ed>Marked</color> to self for <color=#28d9ed>1 turn(s)</color>.",
+        "kr": "<color=#28d9ed>2턴</color> 동안 <color=#28d9ed>데그릴</color>의 <color=#28d9ed>공격력</color>을 증가시키고, 자신에게는 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>표식</color>을 부여합니다.",
+        "jp": "<color=#28d9ed>【デグリル】</color>の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間UPさせ、自分には<color=#28d9ed>標的</color>を<color=#28d9ed>1ターン</color>の間付与する。",
+        "zh": "使<color=#28d9ed>泰格里尔</color>的<color=#28d9ed>攻击力</color>提升,持续<color=#28d9ed>2回合</color>,并对自身造成<color=#28d9ed>标记</color>效果,持续<color=#28d9ed>1回合</color>。"
       },
       "icon": "MT_Attack_Claw_1_Earth",
-      "buff": [
-        "BT_STAT|ST_AVOID"
-      ],
       "debuff": [
         "BT_MARKING"
+      ],
+      "buff": [
+        "BT_STAT|ST_ATK"
       ]
     },
     {
