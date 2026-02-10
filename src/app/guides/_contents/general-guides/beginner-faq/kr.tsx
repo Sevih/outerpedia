@@ -413,7 +413,7 @@ export default function BeginnerFAQ() {
                 <h3 className="text-2xl font-bold text-rose-400 border-l-4 border-rose-500 pl-4">고급 팁</h3>
 
                 <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/30 border border-slate-700 rounded-xl p-6 space-y-3">
-                  <h4 className="text-lg font-semibold text-rose-300">HP/방어/속도/회피로 스케일하는 스킬을 가진 영웅은 그 스탯에 집중해야 하나요?</h4>
+                  <h4 className="text-lg font-semibold text-rose-300">HP/방어/속도로 스케일하는 스킬을 가진 영웅은 그 스탯에 집중해야 하나요?</h4>
                   <p className=" leading-relaxed">
                     여기서 주목해야 할 키워드는 <strong className='underline'>&quot;공격력 대신&quot;</strong>입니다.
                     스킬이 특정 스탯에 비례해서 데미지가 증가한다고만 쓰여 있으면, 데미지 계산에는 여전히 주로 공격력을 사용합니다.

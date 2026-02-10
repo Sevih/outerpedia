@@ -413,7 +413,7 @@ export default function BeginnerFAQ() {
                 <h3 className="text-2xl font-bold text-rose-400 border-l-4 border-rose-500 pl-4">Advanced Tips</h3>
 
                 <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/30 border border-slate-700 rounded-xl p-6 space-y-3">
-                  <h4 className="text-lg font-semibold text-rose-300">My hero has skills that scale with health/defense/speed/evasion, should I focus on that then?</h4>
+                  <h4 className="text-lg font-semibold text-rose-300">My hero has skills that scale with health/defense/speed, should I focus on that then?</h4>
                   <p className=" leading-relaxed">
                     The key words to look for here are <strong className='underline'>&quot;instead of Attack&quot;</strong>.
                     When a skill only says its damage increases proportional to a stat, it will still mainly use Attack for its damage calculation.

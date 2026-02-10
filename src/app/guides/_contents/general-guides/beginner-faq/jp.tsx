@@ -413,7 +413,7 @@ export default function BeginnerFAQ() {
                 <h3 className="text-2xl font-bold text-rose-400 border-l-4 border-rose-500 pl-4">上級者向けTips</h3>
 
                 <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/30 border border-slate-700 rounded-xl p-6 space-y-3">
-                  <h4 className="text-lg font-semibold text-rose-300">HP/防御/速度/回避でスケールするスキルを持つヒーローは、そのステータスに集中すべきですか？</h4>
+                  <h4 className="text-lg font-semibold text-rose-300">HP/防御/速度でスケールするスキルを持つヒーローは、そのステータスに集中すべきですか？</h4>
                   <p className=" leading-relaxed">
                     ここで注目すべきキーワードは<strong className='underline'>「攻撃力の代わりに」</strong>です。
                     スキルがあるステータスに比例してダメージが増加するとだけ書いてある場合、ダメージ計算には依然として主に攻撃力を使用します。
