@@ -937,20 +937,6 @@ export const shopData: Record<ShopKey, ShopItem[]> = {
     ],
     resource: [
         {
-            name: 'Gold',
-            priority: 'S',
-            gives: { amount: 10000, unit: '' },
-            costs: [{ currency: 'free', amount: 0 }],
-            limit: { count: 1, period: 'Daily' }
-        },
-        {
-            name: 'Gold',
-            priority: 'S',
-            gives: { amount: 30000, unit: '' },
-            costs: [{ currency: 'free', amount: 0 }],
-            limit: { count: 1, period: 'Weekly' }
-        },
-        {
             name: 'Basic Skill Manual',
             priority: 'S',
             gives: { amount: 1, unit: '' },

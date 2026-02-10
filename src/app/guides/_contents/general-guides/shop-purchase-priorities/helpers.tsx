@@ -63,7 +63,7 @@ export const SHOP_TAB_CONFIG: { key: ShopKey; i18nKey: string; icon: string }[] 
     { key: 'worldboss', i18nKey: 'progress.shop.world-boss', icon: '/images/ui/shop_worldboss.webp' },
     { key: 'al', i18nKey: 'progress.shop.adventure-license', icon: '/images/ui/shop_al.webp' },
     { key: 'survey', i18nKey: 'progress.shop.survey-hub', icon: '/images/ui/shop_survey.webp' },
-    { key: 'resource', i18nKey: 'progress.shop.resource-shop', icon: '/images/ui/shop_resource.webp' }
+    { key: 'resource', i18nKey: 'progress.shop.general', icon: '/images/ui/shop_resource.webp' }
 ]
 
 // Function to get tabs with translated labels
