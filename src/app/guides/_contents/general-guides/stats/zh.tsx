@@ -583,7 +583,7 @@ function FAQContent() {
                                         伤害 = 属性 × 技能 × ATK × 修正 × (1000 / (1000 + (1 − PEN%) × DEF))
                                     </p>
                                     <ul className="list-disc list-inside mt-3">
-                                        <li><strong>属性</strong>：0.8（克制）、1（中立）、1.2（被克制）</li>
+                                        <li><strong>属性</strong>：0.8（被克制）、1（中立）、1.2（克制）</li>
                                         <li><strong>技能</strong>：技能倍率</li>
                                         <li><strong>ATK</strong>：单位的主要依赖属性（根据技能/角色可能是HP、DEF等）</li>
                                         <li><strong>修正</strong>：包括DMG UP、暴击伤害（暴击时）、次要依赖（HP等）、爆发伤害效果 — 被敌方DMG RED及CDMG RED（暴击时）减免</li>
