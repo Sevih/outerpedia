@@ -53,7 +53,7 @@ export default function BeatlesGuide() {
                                 "キャラクターが{D/BT_DOT_POISON}を受けている場合、ボスは行動直後に反撃します。",
                                 "メインボス（右側）のみが攻撃します。左側のボスは常に{B/BT_STAT|ST_ATK}をバフします。",
                                 "左側のボスを倒すと、メインボスが{B/BT_INVINCIBLE}と{B/BT_STAT|ST_ATK}を獲得します。",
-                                "{D/BT_STAT|BT_REMOVE_BUFF}や{D/BT_STAT|BT_STEAL_BUFF}を付与できるキャラクターが強く推奨されます。",
+                                "{D/BT_REMOVE_BUFF}や{D/BT_STEAL_BUFF}を付与できるキャラクターが強く推奨されます。",
                                 "{B/BT_STAT|ST_DEF}の発動を避けるため、単体DPSに集中しましょう。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />

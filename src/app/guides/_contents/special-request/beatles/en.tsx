@@ -53,7 +53,7 @@ export default function BeatlesGuide() {
                                 "If a character is afflicted with {D/BT_DOT_POISON}, the boss will counterattacks just after he played.",
                                 "Main boss (right side) is the only one attacking. The left boss constantly buffs {B/BT_STAT|ST_ATK}.",
                                 "If the left boss is killed, main boss gains {B/BT_INVINCIBLE} and {B/BT_STAT|ST_ATK}.",
-                                "Characters that can inflict {D/BT_STAT|BT_REMOVE_BUFF} or {D/BT_STAT|BT_STEAL_BUFF} are highly recommended.",
+                                "Characters that can inflict {D/BT_REMOVE_BUFF} or {D/BT_STEAL_BUFF} are highly recommended.",
                                 "Focus on single-target DPS to avoid triggering {B/BT_STAT|ST_DEF}."
                             ]} />
                             <hr className="my-6 border-neutral-700" />

@@ -53,7 +53,7 @@ export default function BeatlesGuide() {
                                 "角色被{D/BT_DOT_POISON}影响时，BOSS会在行动后立即反击。",
                                 "主BOSS（右侧）是唯一攻击的。左侧BOSS持续增益{B/BT_STAT|ST_ATK}。",
                                 "如果左侧BOSS被击杀，主BOSS获得{B/BT_INVINCIBLE}和{B/BT_STAT|ST_ATK}。",
-                                "强烈推荐能施加{D/BT_STAT|BT_REMOVE_BUFF}或{D/BT_STAT|BT_STEAL_BUFF}的角色。",
+                                "强烈推荐能施加{D/BT_REMOVE_BUFF}或{D/BT_STEAL_BUFF}的角色。",
                                 "集中单体DPS以避免触发{B/BT_STAT|ST_DEF}。"
                             ]} />
                             <hr className="my-6 border-neutral-700" />

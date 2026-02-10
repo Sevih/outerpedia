@@ -29,14 +29,12 @@ export default function DekrilMekrilGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips
                                 tips={[
-                                    "与特殊委托第12阶段技能相同。",
-                                    "只有{E/Fire}单位能造成完整伤害。非火属性单位伤害降低，且受到两个BOSS的伤害增加。",
-                                    "梅格里尔存活时，所有受到的伤害大幅降低。先击杀梅格里尔以解除这个保护。",
-                                    "梅格里尔死亡时，泰格里尔获得1回合{B/BT_INVINCIBLE}和{B/BT_STAT|ST_ATK}。请相应调整爆发时机。",
-                                    "泰格里尔被全体攻击命中时获得{B/BT_STAT|ST_AVOID}。避免使用非连锁全体技能。",
-                                    "泰格里尔回避时不受WG伤害，并用阿特拉斯反击（全体攻击 + {D/BT_DOT_POISON} + 护盾）。",
-                                    "在70%血量时，泰格里尔狂暴化4回合。狂暴化结束时，使用阿克特翁造成高额单体伤害，并对所有敌人施加无法解除的{D/BT_SEALED_RECEIVE_HEAL}。",
-                                    "如果泰格里尔在战斗开始2回合内狂暴化，队伍获得80 CP。"
+                                    "使用非连锁的AoE技能会给BOSS提供{B/BT_STAT|ST_DEF}。",
+                                    "角色被{D/BT_DOT_POISON}影响时，BOSS会在行动后立即反击。",
+                                    "主BOSS（右侧）是唯一攻击的。左侧BOSS持续增益{B/BT_STAT|ST_ATK}。",
+                                    "如果左侧BOSS被击杀，主BOSS获得{B/BT_INVINCIBLE}和{B/BT_STAT|ST_ATK}。",
+                                    "强烈推荐能施加{D/BT_REMOVE_BUFF}或{D/BT_STEAL_BUFF}的角色。",
+                                    "集中单体DPS以避免触发{B/BT_STAT|ST_DEF}。"
                                 ]}
                             />
                             <hr className="my-6 border-neutral-700" />

@@ -29,14 +29,12 @@ export default function DekrilMekrilGuide() {
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips
                                 tips={[
-                                    "Same skills as Special Request Stage 12.",
-                                    "Only {E/Fire} units deal full damage - non-fire units deal reduced damage and take increased damage from both bosses.",
-                                    "Mek'Ril greatly reduces all damage taken while alive. Kill Mek'Ril first to remove this protection.",
-                                    "When Mek'Ril dies, Dek'Ril gains {B/BT_INVINCIBLE} and {B/BT_STAT|ST_ATK} for 1 turn - time your burst accordingly.",
-                                    "Dek'Ril gains {B/BT_STAT|ST_AVOID} when hit by AoE attacks. Avoid using non-chain AoE skills.",
-                                    "When Dek'Ril evades, he takes no WG damage and counterattacks with Atlas (AoE + {D/BT_DOT_POISON} + barrier).",
-                                    "At 70% HP, Dek'Ril enrages for 4 turns. When enrage ends, he uses Actaeon dealing heavy single-target damage and inflicting irremovable {D/BT_SEALED_RECEIVE_HEAL} on all enemies.",
-                                    "If Dek'Ril enrages within 2 turns of battle start, your team gains 80 CP."
+                                    "If you use AoE skills that aren't chain skills, boss gains an {B/BT_STAT|ST_DEF}.",
+                                    "If a character is afflicted with {D/BT_DOT_POISON}, the boss will counterattacks just after he played.",
+                                    "Main boss (right side) is the only one attacking. The left boss constantly buffs {B/BT_STAT|ST_ATK}.",
+                                    "If the left boss is killed, main boss gains {B/BT_INVINCIBLE} and {B/BT_STAT|ST_ATK}.",
+                                    "Characters that can inflict {D/BT_REMOVE_BUFF} or {D/BT_STEAL_BUFF} are highly recommended.",
+                                    "Focus on single-target DPS to avoid triggering {B/BT_STAT|ST_DEF}."
                                 ]}
                             />
                             <hr className="my-6 border-neutral-700" />
