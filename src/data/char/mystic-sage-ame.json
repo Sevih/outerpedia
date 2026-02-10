@@ -10,7 +10,7 @@
   "SubClass": "Vanguard",
   "rank": "S",
   "rank_pvp": "A",
-  "role":  "dps",
+  "role": "dps",
   "tags": [
     "seasonal",
     "ignore-defense"
@@ -29,7 +29,7 @@
   "Chain_Type": "Finish",
   "gift": "Craftwork",
   "video": "YjRLI-bxF2U",
-  "VoiceActor": "VA. Rena Maeda",
+  "VoiceActor": "VA. Lizzie Freeman",
   "VoiceActor_jp": "CV. 前田玲奈",
   "VoiceActor_kr": "CV. 김하루",
   "VoiceActor_zh": "CV. 前田玲奈",
@@ -41,7 +41,7 @@
     "3_kr": "ATK DEF HP +10%",
     "3_zh": "ATK DEF HP +10%",
     "4_1": "ATK DEF HP +16%\nAlly Speed +2 every turn (Max 5 stacks, same effect cannot stack)\nReduces Skill Cooldown of the ally with the highest Attack by 1 turn after using Repent! in Mandala state\nChain Passive WG Reduction +1",
-    "4_1_jp": "ATK DEF HP +16%\n毎ターン味方のスピード+2\n(最大5回累積、同じ効果重複不可)\n曼荼羅状態で懺悔なさい!使用後、攻撃力が最も高い味方のスキルターン-1ターン\nチェーンパッシブのWG減少量+1",
+    "4_1_jp": "ATK DEF HP +16%\n毎ターン味方のスピード+2\n(最大5回累積、同じ効果重複不可)\n曼荼羅状態で懺悔なさい!使用後、攻撃力が最も高い味方のスキルターン-1ターン\nチェーンパッシブのWGダメージ+1",
     "4_1_kr": "ATK DEF HP +16%\n매 턴 아군 속도 +2 (최대 5회 누적, 같은 효과 중첩 불가)\n만다라 상태에서 참회하세요! 사용 후 공격력 가장 높은 아군 스킬 쿨타임 -1턴\n체인 패시브의 WG 감소량 +1",
     "4_1_zh": "ATK DEF HP +16%\n每回合友军速度+2(最多叠加5次/相同效果不可叠加)\n曼荼罗状态下使用忏悔吧!后,攻击力最高的友军技能冷却时间-1回合\n连锁被动的WG减少量+1",
     "4_2": "ATK DEF HP +19%",
@@ -51,7 +51,7 @@
     "5_1_zh": "ATK DEF HP +22%\n解锁爆发第3阶段\n入场时AP+50\n每回合友军攻击力+7%(最多叠加5次)",
     "5_2": "ATK DEF HP +25%",
     "5_3": "ATK DEF HP +28%",
-    "6": "ATK DEF HP +30%\nAlly Damage Dealt +10% every turn (Max 5 stacks)\nEnemy cannot Counterattack/Revenge/Swift Response immediately after attack",
+    "6": "ATK DEF HP +30%\nAlly Damage Dealt +10% every turn (Max 5 stacks)\nRight after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response.",
     "6_jp": "ATK DEF HP +30%\n毎ターン味方の与えるダメージ+10%(最大5回累積)\n攻撃直後、敵は反撃/復讐/迅速対応不可",
     "6_kr": "ATK DEF HP +30%\n매 턴 아군 피해량 증가 +10% (최대 5회 누적)\n공격 직후 적의 반격/복수/신속 대응 불가",
     "6_zh": "ATK DEF HP +30%\n每回合友军伤害量+10%(最多叠加5次)\n攻击后敌人无法进行反击/复仇/迅速应对"
@@ -143,7 +143,7 @@
       "name_zh": "说法时间",
       "true_desc": "(Passive Effect) The caster is unaffected by <color=#28d9ed>Stunned</color>, and enters battle with <color=#28d9ed>Immortality</color> for <color=#28d9ed>1 turn(s)</color>.\\n\\n(Active Effect) Increases the <color=#28d9ed>Priority</color> of all allies except the caster by <color=#28d9ed>10%</color>, grants the caster <color=#28d9ed>Immortality</color> for <color=#28d9ed>1 turn(s)</color>, and applies <color=#28d9ed>Mandala</color> to the caster for <color=#28d9ed>1 turn(s)</color>.\\nIf there is an enemy with WG, reduces their <color=#28d9ed>WG</color> by <color=#28d9ed>2</color>.",
       "true_desc_jp": "(パッシブ効果) <color=#28d9ed>スタン</color>の影響を受けず、戦闘開始時、<color=#28d9ed>1ターン</color>の間<color=#28d9ed>不死</color>状態になる。\\n\\n(アクティブ効果) 自分を除く味方全体の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>増加させ、自分は<color=#28d9ed>1ターン</color>の間<color=#28d9ed>不死</color>状態になり、自分に<color=#28d9ed>曼荼羅</color>を<color=#28d9ed>1ターン</color>の間付与する。\\nスキル使用中、WGを持つ敵がいる場合、対象の<color=#28d9ed>WG</color>を<color=#28d9ed>2</color>DOWNさせる。",
-      "true_desc_kr": "(패시브 효과) <color=#28d9ed>스턴</color>의 영향을 받지 않으며, 전투 입장 시 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>불사</color> 상태가 됩니다.\\n\\n(엑티브 효과) 자신을 제외한 아군 전체의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>10%</color> 증가하고, 자신은 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>불사</color> 상태가 되며 자신에게 <color=#28d9ed>만다라</color>를 <color=#28d9ed>1턴</color> 동안 발생시킵니다.\\n스킬 시전 중 WG를 보유한 적이 있다면 대상의 <color=#28d9ed>WG</color>를 <color=#28d9ed>2</color> 감소시킵니다.",
+      "true_desc_kr": "(패시브 효과) <color=#28d9ed>스턴</color>의 영향을 받지 않으며, 전투 입장 시 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>불사</color> 상태가 됩니다.\\n\\n(액티브 효과) 자신을 제외한 아군 전체의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>10%</color> 증가하고, 자신은 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>불사</color> 상태가 되며 자신에게 <color=#28d9ed>만다라</color>를 <color=#28d9ed>1턴</color> 동안 발생시킵니다.\\n스킬 시전 중 WG를 보유한 적이 있다면 대상의 <color=#28d9ed>WG</color>를 <color=#28d9ed>2</color> 감소시킵니다.",
       "true_desc_zh": "(被动效果) 不受<color=#28d9ed>晕眩</color>影响,进入战斗时,进入<color=#28d9ed>不死</color>状态,持续<color=#28d9ed>1回合</color>。\\n\\n(主动效果) 使除自身外全体友军的<color=#28d9ed>行动值</color>增加<color=#28d9ed>10%</color>,自身进入<color=#28d9ed>不死</color>状态,持续<color=#28d9ed>1回合</color>,并赋予自身<color=#28d9ed>曼荼罗</color>效果,持续<color=#28d9ed>1回合</color>。\\n施展技能时,若存在持有WG的敌人,则使目标的<color=#28d9ed>WG</color>减少<color=#28d9ed>2</color>。",
       "enhancement": {
         "2": [
@@ -243,7 +243,7 @@
       "name_kr": "묘래신장",
       "name_zh": "猫来神掌",
       "true_desc": "Before attacking, has a <color=#28d9ed>85%</color> chance to decrease all enemies' <color=#28d9ed>Action Points</color> by <color=#28d9ed>30</color> and <color=#28d9ed>Defense</color> for <color=#28d9ed>2 turn(s)</color>, then attacks all enemies. (Ignores Resilience)\\n\\nThis attack ignores <color=#28d9ed>30%</color> of the target's Defense, restores <color=#28d9ed>10</color> <color=#28d9ed>Chain Points</color>, and grants an <color=#28d9ed>Extra Turn</color>.",
-      "true_desc_jp": "攻撃前にそれぞれ<color=#28d9ed>85%</color>の確率で敵全体の<color=#28d9ed>AP</color>を<color=#28d9ed>30</color>、<color=#28d9ed>防御力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせた後、敵全体を攻撃する。(効果抵抗無視)\\n\\nこの攻撃は敵の防御力を<color=#28d9ed>30%</color>無視し、攻撃後に<color=#28d9ed>CP</color>を<color=#28d9ed>10</color>回復し、<color=#28d9ed>追加ターン</color>を獲得する。",
+      "true_desc_jp": "攻撃前にそれぞれ<color=#28d9ed>85%</color>の確率で敵全体の<color=#28d9ed>AP</color>を<color=#28d9ed>30</color>、<color=#28d9ed>防御力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせた後、敵全体にダメージを与える。(効果抵抗無視)\\n\\nこの攻撃は敵の防御力を<color=#28d9ed>30%</color>無視し、攻撃後に<color=#28d9ed>CP</color>を<color=#28d9ed>10</color>回復し、<color=#28d9ed>追加ターン</color>を獲得する。",
       "true_desc_kr": "공격 전 각 <color=#28d9ed>85%</color> 확률로 적 전체의 <color=#28d9ed>AP</color>를 <color=#28d9ed>30</color>,  <color=#28d9ed>방어력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킨 뒤 적 전체를 공격합니다.(효과 저항 무시)\\n\\n해당 공격은 적의 방어력을 <color=#28d9ed>30%</color> 무시하며 공격 후 <color=#28d9ed>CP</color>를 <color=#28d9ed>10</color> 회복하고 <color=#28d9ed>추가 턴</color>을 획득합니다.",
       "true_desc_zh": "攻击前,各有<color=#28d9ed>85%</color>的几率使全体敌人的<color=#28d9ed>AP</color>减少<color=#28d9ed>30</color>、<color=#28d9ed>防御力</color>降低,持续<color=#28d9ed>2回合</color>,随后攻击全体敌人。(无视效果抵抗)\\n\\n该攻击无视敌人<color=#28d9ed>30%</color>的防御力,攻击后恢复<color=#28d9ed>10</color>点<color=#28d9ed>CP</color>,并获得<color=#28d9ed>额外回合</color>。",
       "enhancement": {
