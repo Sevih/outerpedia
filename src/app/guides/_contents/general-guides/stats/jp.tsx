@@ -238,12 +238,12 @@ function StatsContent() {
                     desc="被弾時に受けるダメージが減少します。"
                     details={
                         <>
-                            <p>被ダメージ減少は被弾時に受けるダメージを軽減します。このステータスは自身の会心ダメージ減少（会心被弾時）と<strong>加算</strong>され、敵の会心ダメージおよびダメージ増加と共に計算されます。</p>
-                            <p className="mt-3 font-semibold">仕組み：</p>
-                            <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>非クリティカル時：DMG REDがこの層の唯一の軽減。</li>
-                                <li>クリティカル時：DMG REDが<StatInlineTag name="CDMG RED" />に加算され、敵の<StatInlineTag name="CHD" />と<StatInlineTag name="DMG UP" />と比較されます。</li>
-                            </ul>
+                            <p>被ダメージ減少は受けるダメージを割合で軽減します。この軽減はダメージ計算において防御力（DEF）<strong>より前</strong>に適用されます。</p>
+                            <p className="mt-3 font-semibold">例：</p>
+                            <p className="mt-1"><strong>DMG RED 30%</strong>で1000ダメージを受けた場合、DEF計算前に<strong>700</strong>に軽減されます。</p>
+                            <p className="mt-3 font-semibold">クリティカル被弾時：</p>
+                            <p className="mt-1">DMG REDは<StatInlineTag name="CDMG RED" />に加算され、敵の<StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />に対する総防御修正値を形成します。</p>
+                            <p className="mt-3 text-sm text-yellow-400"><strong>注意：</strong>これは最終ダメージ軽減とは異なります。計算方法が違います。</p>
 
                         </>
                     }
@@ -254,12 +254,11 @@ function StatsContent() {
                     desc="会心被弾時に受けるダメージが減少します。"
                     details={
                         <>
-                            <p>会心ダメージ減少は敵の会心ヒットから受けるボーナスダメージを軽減します。このステータスは自身の被ダメージ減少と<strong>加算</strong>され、敵の会心ダメージおよびダメージ増加と共に計算されます。</p>
-                            <p className="mt-3 font-semibold">仕組み：</p>
-                            <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>会心被弾時のみ発動。</li>
-                                <li><StatInlineTag name="DMG RED" />に加算され、敵の<StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />に対する総防御修正値を形成。</li>
-                            </ul>
+                            <p>会心ダメージ減少は、会心被弾時に敵の有効<StatInlineTag name="CHD" />を直接減少させます。</p>
+                            <p className="mt-3 font-semibold">例：</p>
+                            <p className="mt-1">敵の<strong>CHD 300%</strong>に対して<strong>CDMG RED 150%</strong>を持つ場合、受ける会心ダメージは300%ではなく<strong>150%</strong>に減少します。</p>
+                            <p className="mt-3 font-semibold">クリティカル被弾時：</p>
+                            <p className="mt-1">CDMG REDは<StatInlineTag name="DMG RED" />に加算され、敵の<StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />に対する総防御修正値を形成します。</p>
 
                         </>
                     }

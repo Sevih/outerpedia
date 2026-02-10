@@ -238,12 +238,12 @@ function StatsContent() {
                     desc="受到攻击时承受的伤害减少。"
                     details={
                         <>
-                            <p>受到伤害减少降低被攻击时承受的伤害。该属性与自身的暴击伤害减免（被暴击时）<strong>相加</strong>，并与敌方的暴击伤害及伤害增加一起计算。</p>
-                            <p className="mt-3 font-semibold">运作方式：</p>
-                            <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>非暴击时：DMG RED是该层唯一的减免。</li>
-                                <li>暴击时：DMG RED与<StatInlineTag name="CDMG RED" />相加后，与敌方的<StatInlineTag name="CHD" />和<StatInlineTag name="DMG UP" />比较。</li>
-                            </ul>
+                            <p>受到伤害减少按比例降低所有受到的伤害。该减免在伤害计算中于防御力（DEF）<strong>之前</strong>生效。</p>
+                            <p className="mt-3 font-semibold">示例：</p>
+                            <p className="mt-1"><strong>DMG RED 30%</strong>时受到1000伤害，在DEF计算前减少至<strong>700</strong>。</p>
+                            <p className="mt-3 font-semibold">被暴击时：</p>
+                            <p className="mt-1">DMG RED与<StatInlineTag name="CDMG RED" />相加，形成对敌方<StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />的总防御修正。</p>
+                            <p className="mt-3 text-sm text-yellow-400"><strong>注意：</strong>这与最终伤害减免不同，两者的计算方式有区别。</p>
 
                         </>
                     }
@@ -254,12 +254,11 @@ function StatsContent() {
                     desc="被暴击时受到的伤害减少。"
                     details={
                         <>
-                            <p>暴击伤害减免降低敌方暴击命中时的额外伤害。该属性与自身的受到伤害减少<strong>相加</strong>，并与敌方的暴击伤害及伤害增加一起计算。</p>
-                            <p className="mt-3 font-semibold">运作方式：</p>
-                            <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>仅在被暴击时生效。</li>
-                                <li>与<StatInlineTag name="DMG RED" />相加，形成对敌方<StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />的总防御修正。</li>
-                            </ul>
+                            <p>暴击伤害减免在被暴击时直接降低敌方的有效<StatInlineTag name="CHD" />。</p>
+                            <p className="mt-3 font-semibold">示例：</p>
+                            <p className="mt-1">敌方<strong>CHD 300%</strong>，你拥有<strong>CDMG RED 150%</strong>时，受到的暴击伤害从300%降至<strong>150%</strong>。</p>
+                            <p className="mt-3 font-semibold">被暴击时：</p>
+                            <p className="mt-1">CDMG RED与<StatInlineTag name="DMG RED" />相加，形成对敌方<StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />的总防御修正。</p>
 
                         </>
                     }

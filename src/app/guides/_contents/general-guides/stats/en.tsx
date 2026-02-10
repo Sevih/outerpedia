@@ -238,12 +238,12 @@ function StatsContent() {
                     desc="Reduces damage taken when hit."
                     details={
                         <>
-                            <p>Damage Reduction lowers the damage you take when hit. This stat is <strong>additive</strong> with your Critical Damage Reduction (when critically hit), and the combined value is then calculated against the enemy&apos;s Critical Damage and Damage Increase.</p>
-                            <p className="mt-3 font-semibold">How it works:</p>
-                            <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>On a non-crit hit: DMG RED is the sole reduction in this layer.</li>
-                                <li>On a crit hit: DMG RED is added to your <StatInlineTag name="CDMG RED" /> before being compared to the enemy&apos;s <StatInlineTag name="CHD" /> and <StatInlineTag name="DMG UP" />.</li>
-                            </ul>
+                            <p>Damage Reduction reduces all damage taken by a flat percentage. This reduction is applied <strong>before</strong> Defense in the damage formula.</p>
+                            <p className="mt-3 font-semibold">Example:</p>
+                            <p className="mt-1">If you have <strong>30% DMG RED</strong> and receive 1000 damage, it is reduced to <strong>700</strong> before DEF is factored in.</p>
+                            <p className="mt-3 font-semibold">On a crit hit:</p>
+                            <p className="mt-1">DMG RED is added to your <StatInlineTag name="CDMG RED" /> to form your total defensive modifier against the enemy&apos;s <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />.</p>
+                            <p className="mt-3 text-sm text-yellow-400"><strong>Note:</strong> This is not the same as Final Damage Reduction — they are calculated differently.</p>
                             
                         </>
                     }
@@ -254,12 +254,11 @@ function StatsContent() {
                     desc="Reduces damage taken when critically hit."
                     details={
                         <>
-                            <p>Critical Damage Reduction reduces the bonus damage you take from enemy critical hits. This stat is <strong>additive</strong> with your Damage Taken Reduction, and the combined value is calculated against the enemy&apos;s Critical Damage and Damage Increase.</p>
-                            <p className="mt-3 font-semibold">How it works:</p>
-                            <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>Only activates when you are critically hit.</li>
-                                <li>Added to your <StatInlineTag name="DMG RED" /> to form your total defensive modifier against the enemy&apos;s <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />.</li>
-                            </ul>
+                            <p>Critical Damage Reduction directly reduces the enemy&apos;s effective <StatInlineTag name="CHD" /> when you are critically hit.</p>
+                            <p className="mt-3 font-semibold">Example:</p>
+                            <p className="mt-1">If the enemy has <strong>300% CHD</strong> and you have <strong>150% CDMG RED</strong>, the effective critical damage you receive is reduced to <strong>150%</strong> instead of 300%.</p>
+                            <p className="mt-3 font-semibold">On a crit hit:</p>
+                            <p className="mt-1">CDMG RED is added to your <StatInlineTag name="DMG RED" /> to form your total defensive modifier against the enemy&apos;s <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />.</p>
                             
                         </>
                     }

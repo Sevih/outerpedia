@@ -238,12 +238,12 @@ function StatsContent() {
                     desc="피격 시 받는 피해량이 감소합니다."
                     details={
                         <>
-                            <p>받는 피해 감소는 피격 시 받는 데미지를 줄입니다. 이 스탯은 자신의 치명 피해 감소(치명 피격 시)와 <strong>합산</strong>되어, 적의 치명 피해 및 피해 증가와 함께 계산됩니다.</p>
-                            <p className="mt-3 font-semibold">작동 방식:</p>
-                            <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>비치명 시: DMG RED가 이 층의 유일한 감소.</li>
-                                <li>치명 시: DMG RED가 <StatInlineTag name="CDMG RED" />에 합산되어 적의 <StatInlineTag name="CHD" />와 <StatInlineTag name="DMG UP" />과 비교됩니다.</li>
-                            </ul>
+                            <p>받는 피해 감소는 받는 데미지를 비율로 줄입니다. 이 감소는 데미지 계산에서 방어력(DEF) <strong>이전에</strong> 적용됩니다.</p>
+                            <p className="mt-3 font-semibold">예시:</p>
+                            <p className="mt-1"><strong>DMG RED 30%</strong>일 때 1000 데미지를 받으면, DEF 계산 전에 <strong>700</strong>으로 감소됩니다.</p>
+                            <p className="mt-3 font-semibold">치명 피격 시:</p>
+                            <p className="mt-1">DMG RED가 <StatInlineTag name="CDMG RED" />에 합산되어 적의 <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />에 대한 총 방어 보정치를 형성합니다.</p>
+                            <p className="mt-3 text-sm text-yellow-400"><strong>참고:</strong> 이것은 최종 데미지 감소와는 다릅니다. 계산 방식이 다릅니다.</p>
 
                         </>
                     }
@@ -254,12 +254,11 @@ function StatsContent() {
                     desc="치명 피격 시 받는 피해가 감소합니다."
                     details={
                         <>
-                            <p>치명 피해 감소는 적의 치명타로 받는 보너스 데미지를 줄입니다. 이 스탯은 자신의 받는 피해 감소와 <strong>합산</strong>되어, 적의 치명 피해 및 피해 증가와 함께 계산됩니다.</p>
-                            <p className="mt-3 font-semibold">작동 방식:</p>
-                            <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>치명 피격 시에만 발동.</li>
-                                <li><StatInlineTag name="DMG RED" />에 합산되어 적의 <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />에 대한 총 방어 보정치를 형성.</li>
-                            </ul>
+                            <p>치명 피해 감소는 치명 피격 시 적의 유효 <StatInlineTag name="CHD" />를 직접 감소시킵니다.</p>
+                            <p className="mt-3 font-semibold">예시:</p>
+                            <p className="mt-1">적의 <strong>CHD 300%</strong>에 대해 <strong>CDMG RED 150%</strong>를 가지고 있으면, 받는 치명 데미지가 300%가 아닌 <strong>150%</strong>로 감소합니다.</p>
+                            <p className="mt-3 font-semibold">치명 피격 시:</p>
+                            <p className="mt-1">CDMG RED가 <StatInlineTag name="DMG RED" />에 합산되어 적의 <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />에 대한 총 방어 보정치를 형성합니다.</p>
 
                         </>
                     }
