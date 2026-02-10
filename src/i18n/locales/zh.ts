@@ -252,10 +252,12 @@ const zh = {
   'SYS_STAT_HH_PERCENT': '受到攻击时恢复(%)',
   'SYS_STAT_EVA': '回避',
   'SYS_STAT_ACC': '命中',
-  'SYS_STAT_DMG_PERCENTUP': '造成伤害提升',
+  'SYS_STAT_DMG_PERCENTUP': '造成伤害提升 %',
   'SYS_STAT_DMG_UP': '造成伤害提升',
   'SYS_STAT_DMG_RED': '受伤害降低',
   'SYS_STAT_CDMG_RED': '受暴击伤害降低',
+  'SYS_STAT_DMG_PERCENTRED': '受伤害降低 %',
+  'SYS_STAT_CDMG_PERCENTRED': '受暴击伤害降低 %',
   'SYS_PVE_RAID_B': '特别委托：查清身份',
   'SYS_PVE_RAID_A': '特别委托：生态调查',
   "equipments_tabs.weapon": "武器",
@@ -977,7 +979,7 @@ const zh = {
   'contributors.meta.desc': '认识帮助建设Outerpedia的团队及贡献者。',
   'contributors.title': '贡献者',
   'contributors.description': '感谢所有做出贡献的人们，你们帮助本站(Outerpedia)成为了异域战记社区的宝贵资源。',
-  
+
   // Core Fusion
   'core_fusion.title': '核心融合角色',
   'core_fusion.base_character': '融合前角色',
@@ -1047,7 +1049,7 @@ const zh = {
   'component.statCard.associatedDebuffs': '相关减益',
 
   //banner
-  'banner.custom' : "自定义招募",
+  'banner.custom': "自定义招募",
 
   // Banner guide components
   'banner.rates.specialFeature': '特点：',

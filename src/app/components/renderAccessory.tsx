@@ -132,9 +132,9 @@ export default function renderAccessory(entry: Accessory, lang: Lang = 'en',t: (
         stats={
           entry.mainStats && entry.mainStats.length > 0
             ? entry.mainStats.map(stat =>
-                stat === 'PEN' ? 'PEN%' : stat === 'HH' ? 'HH%' : stat
+                ['PEN', 'HH'].includes(stat) ? `${stat}%` : stat
               )
-            : ['PEN%', 'SPD', 'HP%', 'ATK%', 'DEF%', 'CHC', 'CHD', 'EVA', 'ACC', 'EFF', 'RES', 'HH%']
+            : ['PEN%', 'SPD', 'HP%', 'ATK%', 'DEF%', 'CHC', 'CHD', 'DMG UP', 'DMG RED', 'CDMG RED', 'EFF', 'RES', 'HH%']
         }
         substats={[]}
         type="accessories"

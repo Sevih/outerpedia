@@ -55,7 +55,7 @@ const ECOLOGY_SLUGS = ['guardian', 'tyrant', 'chimera', 'sacreed', 'grand-calama
 const BOSS_REWARDS: Record<string, string[]> = {
   // Identification missions (5 accessoires chacune) - ordre inversé pour dir="rtl"
   'beatles': [
-    'ACC', 'EVA', 'HH', 'ATK%'
+    'DMG UP', 'DMG RED', 'CDMG RED', 'ATK%'
   ],
   'glicys': [
     'DEF%', 'SPD', 'CHC', 'RES'
@@ -64,10 +64,10 @@ const BOSS_REWARDS: Record<string, string[]> = {
     'EFF', 'CHD', 'PEN%', 'HP%'
   ],
   'ars-nova': [
-    'HP%', 'EVA', 'EFF', 'CHD', 'PEN', 'HH'
+    'HP%', 'DMG RED', 'EFF', 'CHD', 'PEN', 'CDMG RED'
   ],
   'amadeus': [
-    'DEF%', 'ACC', 'RES', 'CHC', 'SPD', 'ATK%'
+    'DEF%', 'DMG UP', 'RES', 'CHC', 'SPD', 'ATK%'
   ],
 
   // Ecology Study missions (4 récompenses chacune) - ordre inversé pour dir="rtl"
@@ -109,7 +109,7 @@ export default function SpecialReqCardGrid({ items }: Props) {
 
   // Fonction helper pour obtenir la clé i18n d'une stat
   const getStatI18nKey = (stat: string): string => {
-    const normalizedStat = stat.replace('%', '_PERCENT').toUpperCase();
+    const normalizedStat = stat.replace('%', '_PERCENT').replace(/ /g, '_').toUpperCase();
     return `SYS_STAT_${normalizedStat}`;
   };
 

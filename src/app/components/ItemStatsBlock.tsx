@@ -49,6 +49,12 @@ const SPECIAL_MAP: Record<string, string> = {
   'EFFECTIVENESS': 'SYS_STAT_EFF',
   'RESISTANCE': 'SYS_STAT_RES',
   'SPEED': 'SYS_STAT_SPD',
+  'DMG UP': 'SYS_STAT_DMG_UP',
+  'DMG UP%': 'SYS_STAT_DMG_PERCENTUP',
+  'DMG RED': 'SYS_STAT_DMG_RED',
+  'DMG RED%': 'SYS_STAT_DMG_PERCENTRED',
+  'CDMG RED': 'SYS_STAT_CDMG_RED',
+  'CDMG RED%': 'SYS_STAT_CDMG_PERCENTRED',
 }
 
 function toSysKey(codeRaw: string): string {
@@ -71,7 +77,11 @@ export default async function ItemStatsBlock({ stats, substats = [], type, rare,
     if (!info) return null
 
     const sysKey = toSysKey(upper)
-    const label = t(sysKey, { defaultValue: upper })
+    const baseLabel = t(sysKey, { defaultValue: upper })
+    const alwaysPercent = ['DMG UP', 'DMG RED', 'CDMG RED']
+    const label = alwaysPercent.includes(upper.replace('%', '').trim()) && !baseLabel.includes('%')
+      ? `${baseLabel} %`
+      : baseLabel
 
     return (
       <tr key={upper} className="border-t border-white/10">

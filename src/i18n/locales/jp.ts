@@ -252,10 +252,12 @@ const jp = {
   'SYS_STAT_HH_PERCENT': '被ダメージ回復%',
   'SYS_STAT_EVA': '回避',
   'SYS_STAT_ACC': '命中',
-  'SYS_STAT_DMG_PERCENTUP': '与ダメUP',
+  'SYS_STAT_DMG_PERCENTUP': '与ダメUP %',
   'SYS_STAT_DMG_UP': '与ダメUP',
   'SYS_STAT_DMG_RED': '被ダメDOWN',
   'SYS_STAT_CDMG_RED': '被会心ダメDOWN',
+  'SYS_STAT_DMG_PERCENTRED': '被ダメDOWN %',
+  'SYS_STAT_CDMG_PERCENTRED': '被会心ダメDOWN %',
   'SYS_PVE_RAID_B': '特別依頼:正体究明',
   'SYS_PVE_RAID_A': '特別依頼:生態調査',
   "equipments_tabs.weapon": "武器",
@@ -1049,7 +1051,7 @@ const jp = {
   'component.statCard.associatedDebuffs': '関連デバフ',
 
   //banner
-  'banner.custom' : "カスタムスカウト",
+  'banner.custom': "カスタムスカウト",
 
   // Banner guide components
   'banner.rates.specialFeature': '特徴:',

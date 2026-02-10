@@ -18,7 +18,10 @@
     "EVA": { "label": "Evasion", "icon": "CM_Stat_Icon_AVOID.webp" },
     "ACC": { "label": "Accuracy", "icon": "CM_Stat_Icon_ACCURACY.webp" },
     "DMG UP": { "label": "Damage Increase", "icon": "CM_Stat_Icon_DMG_INCREASE.webp" },
+    "DMG UP%": { "label": "Damage Increase %", "icon": "CM_Stat_Icon_DMG_INCREASE.webp" },
     "DMG RED": { "label": "Damage Reduction", "icon": "CM_Stat_Icon_ENEMY_DMG_REDUCE.webp" },
-    "CDMG RED": { "label": "Crit Damage Reduction", "icon": "CM_Stat_Icon_ENEMY_CRITICAL_DMG_REDUCE.webp" }
+    "DMG RED%": { "label": "Damage Reduction %", "icon": "CM_Stat_Icon_ENEMY_DMG_REDUCE.webp" },
+    "CDMG RED": { "label": "Crit Damage Reduction", "icon": "CM_Stat_Icon_ENEMY_CRITICAL_DMG_REDUCE.webp" },
+    "CDMG RED%": { "label": "Crit Damage Reduction %", "icon": "CM_Stat_Icon_ENEMY_CRITICAL_DMG_REDUCE.webp" }
   }
   

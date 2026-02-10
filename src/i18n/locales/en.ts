@@ -252,10 +252,12 @@ const en = {
   'SYS_STAT_HH_PERCENT': 'Heals when Hit %',
   'SYS_STAT_EVA': 'Evasion',
   'SYS_STAT_ACC': 'Accuracy',
-  'SYS_STAT_DMG_PERCENTUP': "Damage Increase",
+  'SYS_STAT_DMG_PERCENTUP': "Damage Increase %",
   'SYS_STAT_DMG_UP': "Damage Increase",
   'SYS_STAT_DMG_RED': "Damage Reduction",
   'SYS_STAT_CDMG_RED': "Crit Damage Reduction",
+  'SYS_STAT_DMG_PERCENTRED': "Damage Reduction %",
+  'SYS_STAT_CDMG_PERCENTRED': "Crit Damage Reduction %",
   'SYS_PVE_RAID_B': 'Special Request: Identification',
   'SYS_PVE_RAID_A': 'Special Request: Ecology Study',
   "equipments_tabs.weapon": "Weapons",
@@ -1049,7 +1051,7 @@ const en = {
   'component.statCard.associatedDebuffs': 'Associated Debuffs',
 
   //banner
-  'banner.custom' : "Custom Recruit",
+  'banner.custom': "Custom Recruit",
 
   // Banner guide components
   'banner.rates.specialFeature': 'Special feature:',
