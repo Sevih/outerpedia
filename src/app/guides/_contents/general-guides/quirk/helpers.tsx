@@ -179,10 +179,10 @@ export const LABELS = {
         zh: "需要主节点5点才能解锁所有子节点（{ICON_AL}除外，需要9级）。",
     },
     howP3: {
-        en: "Some nodes are more valuable than others. You can skip early nodes like {C/Healer}, {C/Defender}, {C/Ranger} ({C/Ranger|Tactician}), {S/EVA} and {S/RES} quirks.",
-        jp: "一部のノードは他より価値があります。{C/Healer}、{C/Defender}、{C/Ranger}（{C/Ranger|Tactician}）、{S/EVA}、{S/RES}のギフトは序盤ではスキップできます。",
-        kr: "일부 노드는 다른 것보다 가치가 높습니다. {C/Healer}, {C/Defender}, {C/Ranger} ({C/Ranger|Tactician}), {S/EVA}, {S/RES} 기프트는 초반에 스킵할 수 있습니다.",
-        zh: "某些节点比其他节点更有价值。可以跳过{C/Healer}、{C/Defender}、{C/Ranger}（{C/Ranger|Tactician}）、{S/EVA}和{S/RES}等早期天赋。",
+        en: "Some nodes are more valuable than others. You can skip early nodes like {C/Healer}, {C/Defender}, {C/Ranger} ({C/Ranger|Tactician}), {S/DMG RED} and {S/RES} quirks.",
+        jp: "一部のノードは他より価値があります。{C/Healer}、{C/Defender}、{C/Ranger}（{C/Ranger|Tactician}）、{S/DMG RED}、{S/RES}のギフトは序盤ではスキップできます。",
+        kr: "일부 노드는 다른 것보다 가치가 높습니다. {C/Healer}, {C/Defender}, {C/Ranger} ({C/Ranger|Tactician}), {S/DMG RED}, {S/RES} 기프트는 초반에 스킵할 수 있습니다.",
+        zh: "某些节点比其他节点更有价值。可以跳过{C/Healer}、{C/Defender}、{C/Ranger}（{C/Ranger|Tactician}）、{S/DMG RED}和{S/RES}等早期天赋。",
     },
     howP4: {
         en: "You can reset quirk investments using {I-I/Free Ether}, refunding all materials spent.",
@@ -217,10 +217,10 @@ export const LABELS = {
     },
     // Early game example
     exampleIntro: {
-        en: "Let's take a common early team: {P/Valentine} {P/Aer} {P/Monad Eva} {P/Drakhan}.",
-        jp: "序盤の一般的なチームを例にしましょう：{P/Valentine} {P/Aer} {P/Monad Eva} {P/Drakhan}。",
-        kr: "초반의 일반적인 팀을 예로 들어봅시다: {P/Valentine} {P/Aer} {P/Monad Eva} {P/Drakhan}.",
-        zh: "以常见的前期队伍为例：{P/Valentine} {P/Aer} {P/Monad Eva} {P/Drakhan}。",
+        en: "Let's take a common early team: {P/Valentine}, {P/Aer}, {P/Monad Eva}, {P/Drakhan}.",
+        jp: "序盤の一般的なチームを例にしましょう：{P/Valentine}、{P/Aer}、{P/Monad Eva}、{P/Drakhan}。",
+        kr: "초반의 일반적인 팀을 예로 들어봅시다: {P/Valentine}, {P/Aer}, {P/Monad Eva}, {P/Drakhan}.",
+        zh: "以常见的前期队伍为例：{P/Valentine}、{P/Aer}、{P/Monad Eva}、{P/Drakhan}。",
     },
     exampleP1: {
         en: "After unlocking boss quirks, prioritize the {C/Striker} tree — especially the left path, which benefits Attackers like {P/Aer} and {P/Drakhan}.",
@@ -301,11 +301,11 @@ export const LABELS = {
         kr: "{C/Ranger|Tactician} ({C/Ranger} 서브클래스)",
         zh: "{C/Ranger|Tactician}（{C/Ranger}子职业）",
     },
-    faqSkipEvasion: {
-        en: "{S/EVA} and {S/RES} effects",
-        jp: "{S/EVA}と{S/RES}効果",
-        kr: "{S/EVA}와 {S/RES} 효과",
-        zh: "{S/EVA}和{S/RES}效果",
+    faqSkipDmgRed: {
+        en: "{S/DMG RED} and {S/RES} effects",
+        jp: "{S/DMG RED}と{S/RES}効果",
+        kr: "{S/DMG RED}와 {S/RES} 효과",
+        zh: "{S/DMG RED}和{S/RES}效果",
     },
     faqMaterialsTitle: {
         en: "What materials do I need to upgrade Quirks?",
@@ -361,7 +361,7 @@ export function getQuirkFaq(lang: TenantKey): FAQItem[] {
                         <li>{parseText(lRec(LABELS.faqSkipHealers, lang))}</li>
                         <li>{parseText(lRec(LABELS.faqSkipDefenders, lang))}</li>
                         <li>{parseText(lRec(LABELS.faqSkipTactician, lang))}</li>
-                        <li>{parseText(lRec(LABELS.faqSkipEvasion, lang))}</li>
+                        <li>{parseText(lRec(LABELS.faqSkipDmgRed, lang))}</li>
                     </ul>
                 </>
             ),
