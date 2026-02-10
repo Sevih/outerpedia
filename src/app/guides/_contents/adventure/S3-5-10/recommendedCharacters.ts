@@ -9,12 +9,12 @@ export const recommendedCharacters = [
         }
     },
     {
-        names: ["Charlotte", "Skadi", "Sterope"],
+        names: ["Fran", "Skadi", "Sterope", "Hilde"],
         reason: {
-            en: "For {B/BT_STAT|ST_ACCURACY}.",
-            jp: "{B/BT_STAT|ST_ACCURACY}持ち。",
-            kr: "{B/BT_STAT|ST_ACCURACY} 보유.",
-            zh: "拥有{B/BT_STAT|ST_ACCURACY}。"
+            en: "For {B/BT_STAT|ST_BUFF_CHANCE}.",
+            jp: "{B/BT_STAT|ST_BUFF_CHANCE}持ち。",
+            kr: "{B/BT_STAT|ST_BUFF_CHANCE} 보유.",
+            zh: "拥有{B/BT_STAT|ST_BUFF_CHANCE}。"
         }
     }
 ]

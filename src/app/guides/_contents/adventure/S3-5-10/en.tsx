@@ -39,7 +39,7 @@ export default function ReginaGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "Bring {B/BT_STAT|ST_ACCURACY} to counter {B/IG_Buff_Effect_2000067_Interruption}."
+                                "Bring {B/BT_STAT|ST_BUFF_CHANCE} to counter {B/IG_Buff_Effect_2000067_Interruption}."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />

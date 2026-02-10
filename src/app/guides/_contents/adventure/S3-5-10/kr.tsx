@@ -39,7 +39,7 @@ export default function ReginaGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                "{B/IG_Buff_Effect_2000067_Interruption}에 대응하기 위해 {B/BT_STAT|ST_ACCURACY}를 가져가세요."
+                                "{B/IG_Buff_Effect_2000067_Interruption}에 대응하기 위해 {B/BT_STAT|ST_BUFF_CHANCE}를 가져가세요."
                             ]} />
                             <hr className="my-6 border-neutral-700" />
                             <RecommendedCharacterList entries={recommendedCharacters} />
