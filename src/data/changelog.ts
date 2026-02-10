@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-02-10",
+    title: {
+      en: "New Hero: Primine",
+      jp: "新ヒーロー：プリミネ",
+      kr: "신규 영웅: 프리미네",
+      zh: "新英雄：普莉米妮",
+    } as LString,
+    type: "update",
+    url: "/characters/primine",
+    content: [
+      {
+        en: "Primine joins the roster—dealing reliable damage through Dual Attacks while protecting allies with Shields and Immunity.",
+        jp: "プリミネが参戦。デュアルアタックで安定したダメージを与えながら、シールドと免疫で味方を守ります。",
+        kr: "프리미네가 참전합니다. 이중 공격으로 안정적인 피해를 입히면서 보호막과 면역으로 아군을 보호합니다.",
+        zh: "普莉米妮加入战场，通过双重攻击造成稳定伤害，同时以护盾和免疫保护队友。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-02-04",
     title: {
       en: "Soundtrack Player",
