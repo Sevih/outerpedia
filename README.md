@@ -1,7 +1,7 @@
-![Next.js](https://img.shields.io/badge/Next.js-15.5-blue?logo=nextdotjs)
+![Next.js](https://img.shields.io/badge/Next.js-15.5.9-blue?logo=nextdotjs)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?logo=typescript)
 ![React](https://img.shields.io/badge/React-19.0-61dafb?logo=react)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1-38bdf8?logo=tailwindcss)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.4-38bdf8?logo=tailwindcss)
 
 # Outerpedia
 
@@ -17,13 +17,12 @@
 - **Chinese (Simplified)**: [zh.outerpedia.com](https://zh.outerpedia.com)
 
 **Community:** [Join the EvaMains Discord](https://discord.com/invite/keGhVQWsHv)
-**Current version:** `11.0.1 : Primine release | Accuracy patch`
 
 ---
 
 ## Features
 
-### Character Database (107+ Characters)
+### Character Database (114 Characters)
 - Complete character information including stats, skills, and abilities
 - Detailed skill descriptions with cooldowns and wave gain rates
 - Exclusive Equipment (EE) data with effects and ranks
@@ -46,15 +45,14 @@
 - Evaluation based on 6-star transcended characters with level 0 EE
 - Filtering by element, class, and role
 
-### Guides (70+ Guides)
-- **Categories**: General, Adventure, World Boss, Guild Raid, Tower, Event, Conquest, and more
+### Guides (90+ Guides)
+- **Categories**: Adventure, Adventure License, General, Guild Raid, Irregular Extermination, Joint Boss, Monad Gate, Skyward Tower, Special Request, World Boss
 - Comprehensive how-to-play guides
 - Boss strategies and team compositions
 - Event walkthroughs
-- Service transfer guides
 - All guides support multi-language content
 
-### Utility Tools (13 Tools)
+### Utility Tools (14 Tools)
 1. **Pull Simulator** - Gacha/banner simulation
 2. **Gear Solver** - Equipment optimization tool
 3. **EE Priority Calculator** - Exclusive Equipment upgrade planning
@@ -63,13 +61,17 @@
 6. **Interactive Tier Lists** - PvE & PvP rankings with filtering
 7. **Coupon Codes** - Active coupon code manager with copy functionality
 8. **Patch History** - Version changelog tracking
-
+9. **Team Planner** - Team composition builder with chain logic and image export
+10. **Progress Tracker** - Player progression tracking
+11. **Event Calendar** - Upcoming and ongoing events
+12. **OST Player** - In-game music player
+13. **Wallpapers** - Character wallpaper gallery
 
 ### Technical Features
 - Lightning Fast - Static generation with ISR, Cloudflare CDN with global edge network
 - Fully Multilingual - Type-safe i18n support (EN, JP, KR, ZH) with subdomain-based routing
 - PWA Support - Install as an app with offline capabilities
-- Modern UI - Tailwind CSS 4.1 with custom animations (Framer Motion 12.18)
+- Modern UI - Tailwind CSS 4.1 with custom animations (Framer Motion)
 - SEO Optimized - Dynamic meta tags, JSON-LD, hreflang tags, multi-language sitemaps
 - Accessible - ARIA labels, semantic HTML, keyboard navigation
 
@@ -80,10 +82,10 @@
 ### Core Technologies
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| [Next.js](https://nextjs.org/) | 15.5.4 | App Router, RSC, ISR |
+| [Next.js](https://nextjs.org/) | 15.5.9 | App Router, RSC, ISR |
 | [React](https://react.dev/) | 19.0 | UI Framework |
 | [TypeScript](https://www.typescriptlang.org/) | 5.9 | Type Safety (Strict Mode) |
-| [Tailwind CSS](https://tailwindcss.com/) | 4.1.4 | Utility-First Styling |
+| [Tailwind CSS](https://tailwindcss.com/) | 4.1.4 | Utility-First Styling (CSS-based config) |
 | [Framer Motion](https://www.framer.com/motion/) | 12.18 | Animations |
 
 ### UI Components & Libraries
@@ -92,6 +94,7 @@
 - **Recharts** - Data visualization
 - **Keen Slider** - Touch slider component
 - **Markdown-it** / **Marked** - Markdown rendering
+- **Zod** - Schema validation
 
 ### Development Tools
 - **ESLint** - Linting with Next.js config
@@ -107,10 +110,10 @@
 Outerpedia features a **type-safe, subdomain-based multi-tenant architecture** designed for scalability and minimal friction when adding new languages.
 
 ### Supported Languages
-- **English** (`en`) - Default (Complete)
-- **Japanese** (`jp`) - Work in Progress
-- **Korean** (`kr`) - Work in Progress
-- **Chinese Simplified** (`zh`) - Work in Progress
+- **English** (`en`) - Default
+- **Japanese** (`jp`)
+- **Korean** (`kr`)
+- **Chinese Simplified** (`zh`)
 
 ### How It Works
 
@@ -184,24 +187,53 @@ The app will be available at:
 ### Development Scripts
 
 ```bash
-npm run dev              # Start development server
-npm run build            # Full production build (includes all generation scripts)
+# Core
+npm run dev              # Start development server (with WebP watcher)
+npm run build            # Full production build (prebuild + next build)
 npm run start            # Start production server
 npm run lint             # Run ESLint
 
-# Data generation
+# Data generation (run automatically via prebuild)
 npm run generate:allchar       # Index all character files
 npm run generate:slugToChar    # Create URL slug mappings
 npm run generate:gear-stats    # Calculate gear usage statistics
+npm run generate:gear-submap   # Generate substat mappings
 npm run generate:guide-chars   # Extract recommended characters per guide
 npm run gen:events             # Generate event registry
 npm run gen:pool               # Generate banner/gacha pool data
 npm run build:effects          # Build effect icon index
+npm run gen:effect-types       # Generate effect type definitions
+npm run gen:news-cache         # Generate news article cache
 
-# Utilities
-npm run sitemap                # Generate sitemap for all languages
-npm run seo-check              # Audit SEO configuration
-npm run commit                 # Git commit with changelog generation
+# Wallpapers (from datamine)
+npm run gen:wallpapers         # Regenerate wallpaper JSON
+npm run gen:wallpapers:full    # Extract + dedupe + copy wallpapers
+npm run gen:wallpapers:scan    # Dry run (preview only)
+npm run gen:wallpapers:check   # Find duplicates in public/
+
+# Validation
+npm run guide:check            # Analyze guide format and localization
+npm run raid:validate          # Validate raid data
+npm run validate:effects       # Validate effect references
+npm run validate:build         # Check build output integrity
+
+# SEO
+npm run seo:audit              # Audit SEO configuration
+
+# News
+npm run check:news             # Scrape VA notices + optimize titles
+
+# Boss / Raid
+npm run boss:add-buff-debuff   # Add buff/debuff data to boss
+npm run boss:copy-buff-debuff  # Copy buff/debuff between bosses
+
+# BGM
+npm run bgm:merge              # Merge BGM intro data
+
+# Git
+npm run commit                 # Git commit (no changelog)
+npm run commit:fast            # Git commit (skip build)
+npm run commit:dry             # Dry run (preview commit)
 ```
 
 ---
@@ -226,7 +258,12 @@ This executes:
 9. Generate pool data
 10. Build substat mapping
 11. Build effect index
-12. Next.js production build
+12. Generate effect types
+13. Generate news cache
+14. Validate effects
+15. Generate boss index
+16. Generate wallpaper metadata
+17. Next.js production build
 
 ---
 
@@ -236,15 +273,23 @@ Base path: `/api`
 
 | Endpoint | Method | Purpose |
 |----------|--------|---------|
-| `/characters` | GET | Fetch all 107 characters |
+| `/characters` | GET | Fetch all characters |
 | `/characters-lite` | GET | Lightweight character list (no skills) |
 | `/pull-sim` | GET/POST | Pull simulator gacha logic |
 | `/pull-sim/chars` | GET | Characters available for pulling |
-| `/reco/[name]` | GET | Character recommendations (dynamic) |
+| `/reco/[name]` | GET | Character gear recommendations |
 | `/tenant` | GET | Current tenant info (lang, domain) |
+| `/team/save` | POST | Save team composition |
+| `/team/[id]` | GET | Retrieve saved team |
+| `/news/search` | GET | Search news articles |
+| `/youtube-thumbnail/[videoId]` | GET | Proxy YouTube thumbnails |
 | `/admin/status` | GET | Admin dashboard status |
-| `/admin/assets/*` | POST | Asset management operations |
+| `/admin/assets/*` | POST | Asset management (verify, download, copy) |
 | `/admin/run-script` | POST | Execute build scripts |
+| `/admin/list-available` | GET | List available characters |
+| `/admin/buffs-verify` | GET | Verify buff/debuff data |
+| `/admin/raw-files` | GET | Access raw data files |
+| `/admin/monad-route` | GET | Monad gate route data |
 
 ---
 
@@ -282,40 +327,37 @@ Outerpedia is optimized for search engines with:
 outerpedia/
 ├── src/
 │   ├── app/                      # Next.js App Router
-│   │   ├── (tools)/             # Utility tools (13 total)
+│   │   ├── (tools)/             # Utility tools (14 total)
 │   │   ├── admin/               # Administrative pages
-│   │   ├── api/                 # API routes (14 endpoints)
+│   │   ├── api/                 # API routes (19 endpoints)
 │   │   ├── characters/          # Character pages
 │   │   ├── equipments/          # Equipment pages
-│   │   ├── guides/              # Guide system
+│   │   ├── guides/              # Guide system (90+ guides)
 │   │   ├── tierlist/            # Tier list pages
 │   │   ├── changelog/           # Update log
 │   │   └── layout.tsx           # Root layout
 │   │
-│   ├── components/              # 121 React components
+│   ├── components/              # 179 React components
 │   │   ├── layout/              # Header, Footer
 │   │   ├── guides/              # Guide-specific components
+│   │   ├── boss/                # Boss display components
+│   │   ├── guild-raid/          # Guild raid components
 │   │   └── ...
 │   │
 │   ├── data/                    # Game data (JSON)
-│   │   ├── char/                # 107 character files
-│   │   ├── guides/              # Guide categories
+│   │   ├── char/                # 114 character files
+│   │   ├── boss/                # Boss data files
+│   │   ├── raids/               # Guild raid data
+│   │   ├── reco/                # Gear recommendations
 │   │   ├── _allCharacters.json  # Generated character index
-│   │   ├── amulet.json          # Equipment data
 │   │   └── ...
 │   │
 │   ├── i18n/                    # Internationalization
-│   │   ├── locales/             # Translation files
-│   │   │   ├── en.ts            # English (~42KB)
-│   │   │   ├── jp.ts            # Japanese (~46KB)
-│   │   │   ├── kr.ts            # Korean (~43KB)
-│   │   │   └── zh.ts            # Chinese (in progress)
+│   │   ├── locales/             # Translation files (EN, JP, KR, ZH)
 │   │   └── index.ts             # Message loader
 │   │
 │   ├── lib/                     # Utilities & helpers
-│   │   ├── contexts/            # React contexts
-│   │   │   ├── I18nContext.tsx  # Client i18n
-│   │   │   └── server-i18n.ts   # Server i18n
+│   │   ├── contexts/            # React contexts (i18n, tenant)
 │   │   ├── localize.ts          # Localization helpers
 │   │   ├── seo.ts               # SEO utilities
 │   │   └── ...
@@ -327,14 +369,14 @@ outerpedia/
 │   ├── types/                   # TypeScript definitions
 │   │   ├── character.ts
 │   │   ├── equipment.ts
+│   │   ├── team-planner.ts
 │   │   └── ...
 │   │
 │   └── utils/                   # Utility functions
 │
-├── scripts/                     # Build & maintenance scripts
-│   ├── generateAllCharacters.js
-│   ├── generateEventRegistry.js
-│   ├── generateSitemap.cjs
+├── scripts/                     # Build & maintenance scripts (38 files)
+│   ├── prebuild.js              # Orchestrates all pre-build steps
+│   ├── generateAllCharacters.ts
 │   └── ...
 │
 ├── public/                      # Static assets
@@ -342,7 +384,6 @@ outerpedia/
 │   ├── event/
 │   └── manifest.json            # PWA manifest
 │
-├── .env.local                   # Development config
 ├── next.config.ts               # Next.js configuration
 ├── tsconfig.json                # TypeScript strict config
 ├── tailwind.config.js           # Tailwind CSS config
@@ -378,24 +419,17 @@ Join the [EvaMains Discord](https://discord.com/invite/keGhVQWsHv) to discuss co
 ## Roadmap
 
 ### Completed
-- 107 characters with full data
-- 70+ guides across 10+ categories
-- 13 utility tools
-- 4-language support (EN, JP, KR, ZH)
-- SEO optimization
+- 114 characters with full data
+- 90+ guides across 10 categories
+- 14 utility tools
+- 4-language support with complete translations (EN, JP, KR, ZH)
+- Type-safe i18n with subdomain-based routing
+- SEO optimization (JSON-LD, hreflang, sitemaps)
 - PWA capabilities
-- Type-safe i18n system
-
-### In Progress
-- Japanese, Korean, and Chinese translations
-- Clickable stats in guide text
-- Project health dashboard
-
-### Future Plans
-- Additional language support
-- Community voting system
-- User-generated content moderation
-- Real-time event notifications
+- Team planner with image export
+- Guild raid system with Geas
+- News aggregation system
+- OST player and wallpaper gallery
 
 ---
 
