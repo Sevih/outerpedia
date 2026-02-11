@@ -3,7 +3,7 @@
     "name": "Speed Set",
     "type": "Set",
     "class": null,
-    "count": 72,
+    "count": 73,
     "characters": [
       "Aer",
       "Ais Wallenstein",
@@ -59,6 +59,7 @@
       "Noa",
       "Notia",
       "Poolside Trickster Regina",
+      "Primine",
       "Regina",
       "Rey",
       "Rhona",
@@ -77,6 +78,41 @@
       "Veronica",
       "Viella",
       "Vlada"
+    ]
+  },
+  {
+    "name": "Swiftness Set",
+    "type": "Set",
+    "class": null,
+    "count": 27,
+    "characters": [
+      "Astei",
+      "Christina",
+      "Core Fusion Veronica",
+      "Delta",
+      "Demiurge Delta",
+      "Demiurge Drakhan",
+      "Dianne",
+      "Ember",
+      "Gnosis Dahlia",
+      "Gnosis Viella",
+      "Hilde",
+      "Iota",
+      "Kanon",
+      "Kappa",
+      "Leo",
+      "Liselotte",
+      "Mene",
+      "Monad Eva",
+      "Nella",
+      "Omega Nadja",
+      "Primine",
+      "Rhona",
+      "Saeran",
+      "Sterope",
+      "Summer Knight's Dream Ember",
+      "Veronica",
+      "Viella"
     ]
   },
   {
@@ -110,40 +146,6 @@
       "Saeran",
       "Sterope",
       "Summer Knight's Dream Ember",
-      "Viella"
-    ]
-  },
-  {
-    "name": "Swiftness Set",
-    "type": "Set",
-    "class": null,
-    "count": 26,
-    "characters": [
-      "Astei",
-      "Christina",
-      "Core Fusion Veronica",
-      "Delta",
-      "Demiurge Delta",
-      "Demiurge Drakhan",
-      "Dianne",
-      "Ember",
-      "Gnosis Dahlia",
-      "Gnosis Viella",
-      "Hilde",
-      "Iota",
-      "Kanon",
-      "Kappa",
-      "Leo",
-      "Liselotte",
-      "Mene",
-      "Monad Eva",
-      "Nella",
-      "Omega Nadja",
-      "Rhona",
-      "Saeran",
-      "Sterope",
-      "Summer Knight's Dream Ember",
-      "Veronica",
       "Viella"
     ]
   },
@@ -238,7 +240,7 @@
     "name": "Counterattack Set",
     "type": "Set",
     "class": null,
-    "count": 15,
+    "count": 16,
     "characters": [
       "Astei",
       "Christina",
@@ -252,6 +254,7 @@
       "Luna",
       "Monad Eva",
       "Omega Nadja",
+      "Primine",
       "Rhona",
       "Summer Knight's Dream Ember",
       "Veronica"
@@ -478,6 +481,24 @@
     ]
   },
   {
+    "name": "Resurrection Token",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 10,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Dianne",
+      "Liselotte",
+      "Mene",
+      "Monad Eva",
+      "Nella",
+      "Primine",
+      "Saeran",
+      "Viella"
+    ]
+  },
+  {
     "name": "Noblewoman's Guile",
     "type": "Weapon",
     "class": "Mage",
@@ -492,23 +513,6 @@
       "Kitsune of Eternity Tamamo-no-Mae",
       "Kuro",
       "Tamamo-no-Mae"
-    ]
-  },
-  {
-    "name": "Resurrection Token",
-    "type": "Amulet",
-    "class": "Healer",
-    "count": 9,
-    "characters": [
-      "Astei",
-      "Demiurge Delta",
-      "Dianne",
-      "Liselotte",
-      "Mene",
-      "Monad Eva",
-      "Nella",
-      "Saeran",
-      "Viella"
     ]
   },
   {
@@ -591,6 +595,21 @@
     ]
   },
   {
+    "name": "Emblem of Dominance",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 7,
+    "characters": [
+      "Dianne",
+      "Liselotte",
+      "Mene",
+      "Monad Eva",
+      "Primine",
+      "Saeran",
+      "Viella"
+    ]
+  },
+  {
     "name": "Physical Exorcism",
     "type": "Amulet",
     "class": "Ranger",
@@ -603,20 +622,6 @@
       "Mystic Sage Ame",
       "Notia",
       "Sigma"
-    ]
-  },
-  {
-    "name": "Emblem of Dominance",
-    "type": "Weapon",
-    "class": "Healer",
-    "count": 6,
-    "characters": [
-      "Dianne",
-      "Liselotte",
-      "Mene",
-      "Monad Eva",
-      "Saeran",
-      "Viella"
     ]
   },
   {

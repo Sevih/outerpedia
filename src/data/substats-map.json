@@ -6678,6 +6678,61 @@
       ]
     }
   },
+  "primine": {
+    "Speed": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF"
+      ],
+      "armorSets": [
+        "Speed"
+      ]
+    },
+    "Swift Counter": {
+      "weaponSub": [
+        {
+          "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        }
+      ],
+      "amuletSub": [
+        {
+          "name": "Resurrection Token",
+          "mainStat": [
+            "SPD"
+          ]
+        }
+      ],
+      "sub": [
+        "SPD",
+        "HP",
+        "DEF"
+      ],
+      "armorSets": [
+        "Swiftness",
+        "Counterattack"
+      ]
+    }
+  },
   "regina": {
     "Speed": {
       "weaponSub": [
