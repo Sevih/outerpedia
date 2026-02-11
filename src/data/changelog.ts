@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-02-11",
+    title: {
+      en: "Planetary Control Unit",
+      jp: "惑星制御ユニット",
+      kr: "행성 제어 유닛",
+      zh: "行星控制单元",
+    } as LString,
+    type: "update",
+    url: "/guides/guild-raid/planetary-control-unit",
+    content: [
+      {
+        en: "Planetary Control Unit Guild Raid Guide updated for February 2026 version.",
+        jp: "惑星制御ユニット ギルドレイドガイドが2026年2月版にアップデートされました。",
+        kr: "행성 제어 유닛 길드 레이드 가이드가 2026년 2월 버전으로 업데이트되었습니다.",
+        zh: "行星控制单元 公会战指南已更新至2026年2月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-02-10",
     title: {
       en: "S4 Ep.2 : Sanctuary Defense",
