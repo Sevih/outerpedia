@@ -2660,7 +2660,7 @@
     "effect10_kr": "아군 팀 피격 시 자신 행동 게이지 5%",
     "effect10_zh": "我方队伍被攻击时,自身行动槽增加 5%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
-    "rank": "",
+    "rank": "B",
     "buff": [
       "BT_ACTION_GAUGE"
     ],
