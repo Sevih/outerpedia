@@ -12,6 +12,8 @@ import { Phase2Team, Phase1Boss, NoteEntry } from '@/schemas/guild-raid.schema'
 type TeamTabSelectorProps = {
   teams: Record<string, Phase2Team>
   bosses: Phase1Boss[]
+  defaultTeam?: string
+  onTeamChange?: (key: string) => void
 }
 
 /**
@@ -31,10 +33,16 @@ function resolveNote(team: Phase2Team, lang: string): NoteEntry[] | undefined {
 
 
 
-export default function TeamTabSelectorWithGeas({ teams, bosses }: TeamTabSelectorProps) {
+export default function TeamTabSelectorWithGeas({ teams, bosses, defaultTeam, onTeamChange }: TeamTabSelectorProps) {
   const { lang } = useI18n()
   const teamKeys  = Object.keys(teams)
-  const [selected, setSelected] = useState(teamKeys [0])
+  const initialTeam = defaultTeam && teamKeys.includes(defaultTeam) ? defaultTeam : teamKeys[0]
+  const [selected, setSelected] = useState(initialTeam)
+
+  const handleSelect = (key: string) => {
+    setSelected(key)
+    onTeamChange?.(key)
+  }
 
   const showTabs = teamKeys .length > 1
   const selectedTeam = teams[selected]
@@ -52,7 +60,7 @@ export default function TeamTabSelectorWithGeas({ teams, bosses }: TeamTabSelect
           <AnimatedTabs
             tabs={tabList}
             selected={selected}
-            onSelect={setSelected}
+            onSelect={handleSelect}
             pillColor="#0ea5e9"
             compact
           />

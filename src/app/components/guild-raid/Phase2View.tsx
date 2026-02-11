@@ -9,6 +9,8 @@ import { useTenant } from '@/lib/contexts/TenantContext'
 type Props = {
   phase2Data: Phase2
   phase1Bosses: Phase1Boss[]
+  defaultTeam?: string
+  onTeamChange?: (key: string) => void
 }
 
 /**
@@ -30,7 +32,7 @@ function resolveOverview(phase2Data: Phase2, lang: string): string[] {
  * Phase 2 View - Main Boss
  * Displays boss overview and team strategies
  */
-export function Phase2View({ phase2Data, phase1Bosses }: Props) {
+export function Phase2View({ phase2Data, phase1Bosses, defaultTeam, onTeamChange }: Props) {
   const { key: lang } = useTenant()
   const overview = resolveOverview(phase2Data, lang)
 
@@ -52,6 +54,8 @@ export function Phase2View({ phase2Data, phase1Bosses }: Props) {
       <TeamTabSelectorWithGeas
         teams={phase2Data.teams}
         bosses={phase1Bosses}
+        defaultTeam={defaultTeam}
+        onTeamChange={onTeamChange}
       />
     </div>
   )

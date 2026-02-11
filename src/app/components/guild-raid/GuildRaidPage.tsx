@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useI18n } from '@/lib/contexts/I18nContext'
 import { GuildRaidData } from '@/schemas/guild-raid.schema'
 import VersionSelector from '@/app/components/VersionSelector'
@@ -26,9 +27,37 @@ export function GuildRaidPage({ data, defaultVersion }: Props) {
     ? defaultVersion
     : versionKeys[0]
 
+  const searchParams = useSearchParams()
+  const phaseParam = searchParams.get('phase') as 'phase1' | 'phase2' | null
+  const teamParam = searchParams.get('team')
+
   const [selectedVersion, setSelectedVersion] = useState(initialVersion)
-  const [currentPhase, setCurrentPhase] = useState<'phase1' | 'phase2'>('phase1')
+  const [currentPhase, setCurrentPhase] = useState<'phase1' | 'phase2'>(
+    phaseParam === 'phase2' ? 'phase2' : 'phase1'
+  )
   const [phase2BossName, setPhase2BossName] = useState<string>('')
+
+  const updateURL = (updates: Record<string, string | null>) => {
+    const params = new URLSearchParams(window.location.search)
+    for (const [key, value] of Object.entries(updates)) {
+      if (value === null) params.delete(key)
+      else params.set(key, value)
+    }
+    const qs = params.toString()
+    window.history.replaceState(null, '', `${window.location.pathname}${qs ? `?${qs}` : ''}`)
+  }
+
+  const handlePhaseChange = (phase: 'phase1' | 'phase2') => {
+    setCurrentPhase(phase)
+    updateURL({
+      phase: phase === 'phase1' ? null : phase,
+      team: null,
+    })
+  }
+
+  const handleTeamChange = (key: string) => {
+    updateURL({ team: key })
+  }
 
   const version = data[selectedVersion]
 
@@ -59,7 +88,7 @@ export function GuildRaidPage({ data, defaultVersion }: Props) {
       {/* Phase Navigation Tabs */}
       <PhaseNavigator
         currentPhase={currentPhase}
-        onPhaseChange={setCurrentPhase}
+        onPhaseChange={handlePhaseChange}
         phase2BossName={phase2BossName}
       />
 
@@ -72,6 +101,8 @@ export function GuildRaidPage({ data, defaultVersion }: Props) {
         <Phase2View
           phase2Data={version.phase2}
           phase1Bosses={version.phase1.bosses}
+          defaultTeam={teamParam ?? undefined}
+          onTeamChange={handleTeamChange}
         />
       )}
     </div>

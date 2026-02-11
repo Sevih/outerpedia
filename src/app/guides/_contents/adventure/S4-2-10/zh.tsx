@@ -10,7 +10,7 @@ export default function MutatedWyvreGuide() {
     return (
         <GuideTemplate
             title="变异双足飞龙攻略指南"
-            introduction="变异双足飞龙是一个围绕增益效果战斗的Boss。它拥有的增益越多，造成的伤害越高，受到的伤害越低。集中移除它的增益来削弱它。"
+            introduction="与变异双足飞龙的战斗围绕着增益效果，它拥有的增益越多就造成越高的伤害且受到的伤害也越低。因此策略是集中移除它的增益来削弱它。"
             defaultVersion="default"
             versions={{
                 default: {
@@ -25,7 +25,7 @@ export default function MutatedWyvreGuide() {
                             />
                             <hr className="my-6 border-neutral-700" />
                             <TacticalTips tips={[
-                                'Boss容易受到异常猎人的攻击（如{P/Caren}和{P/Rey}）。',
+                                'Boss在异型怪猎人前更脆弱（如{P/Caren}和{P/Rey}）。',
                                 '{D/BT_REMOVE_BUFF}和{B/BT_IMMUNE}是应对它的关键。'
                             ]} />
                             <hr className="my-6 border-neutral-700" />

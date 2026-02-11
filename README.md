@@ -17,7 +17,7 @@
 - **Chinese (Simplified)**: [zh.outerpedia.com](https://zh.outerpedia.com)
 
 **Community:** [Join the EvaMains Discord](https://discord.com/invite/keGhVQWsHv)
-**Current version:** `8.6.34 : Monad Iota release`
+**Current version:** `11.0.1 : Primine release | Accuracy patch`
 
 ---
 

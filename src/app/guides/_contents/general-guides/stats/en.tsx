@@ -222,13 +222,17 @@ function StatsContent() {
                     desc="Increases damage dealt when attacking."
                     details={
                         <>
-                            <p>Damage Increase boosts the damage you deal when attacking. This stat is <strong>additive</strong> with your Critical Damage (when a critical hit occurs), and the combined value is then calculated against the enemy&apos;s Critical Damage Reduction and Damage Taken Reduction.</p>
+                            <p>Damage Increase boosts the damage you deal when attacking. It is part of an <strong>additive system</strong> where all increase-type and reduction-type effects are summed, then subtracted from each other — not multiplied independently.</p>
+                            <p className="mt-3 font-semibold">Additive formula:</p>
+                            <p className="text-sm font-mono bg-black/40 p-2 rounded border border-white/10 w-fit mt-2">
+                                (CHD + DMG UP + Skill/Equip DMG UP) − (CDMG RED + DMG RED + Skill/Equip DMG RED) = Final modifier
+                            </p>
                             <p className="mt-3 font-semibold">How it works:</p>
                             <ul className="list-disc list-inside ml-4 mt-2">
-                                <li>On a non-crit hit: DMG UP is the sole bonus in this layer.</li>
-                                <li>On a crit hit: DMG UP is added to your <StatInlineTag name="CHD" /> before being compared to the enemy&apos;s <StatInlineTag name="DMG RED" /> and <StatInlineTag name="CDMG RED" />.</li>
+                                <li>On a non-crit hit: <StatInlineTag name="DMG UP" /> (+ any skill/equip bonuses) is opposed by the enemy&apos;s <StatInlineTag name="DMG RED" /> (+ their skill/equip reductions).</li>
+                                <li>On a crit hit: <StatInlineTag name="DMG UP" /> is added to your <StatInlineTag name="CHD" />, and the enemy adds their <StatInlineTag name="CDMG RED" /> to their <StatInlineTag name="DMG RED" />. Both totals are then compared.</li>
                             </ul>
-                            
+                            <p className="mt-3 text-sm text-yellow-400"><strong>Note:</strong> Damage Increase from quirks, skills, and equipment effects are all part of this same additive pool.</p>
                         </>
                     }
                 />
@@ -238,13 +242,12 @@ function StatsContent() {
                     desc="Reduces damage taken when hit."
                     details={
                         <>
-                            <p>Damage Reduction reduces all damage taken by a flat percentage. This reduction is applied <strong>before</strong> Defense in the damage formula.</p>
-                            <p className="mt-3 font-semibold">Example:</p>
-                            <p className="mt-1">If you have <strong>30% DMG RED</strong> and receive 1000 damage, it is reduced to <strong>700</strong> before DEF is factored in.</p>
+                            <p>Damage Reduction is <strong>not</strong> a standalone flat percentage reduction. It is part of the same additive system as <StatInlineTag name="DMG UP" /> — it is subtracted from the attacker&apos;s total Damage Increase group. This layer is calculated <strong>before</strong> Defense.</p>
+                            <p className="mt-3 font-semibold">Example (non-crit):</p>
+                            <p className="mt-1">If the attacker has <strong>50% DMG UP</strong> and you have <strong>30% DMG RED</strong>, the net modifier is <strong>+20%</strong> damage increase (not a flat 30% reduction).</p>
                             <p className="mt-3 font-semibold">On a crit hit:</p>
-                            <p className="mt-1">DMG RED is added to your <StatInlineTag name="CDMG RED" /> to form your total defensive modifier against the enemy&apos;s <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />.</p>
-                            <p className="mt-3 text-sm text-yellow-400"><strong>Note:</strong> This is not the same as Final Damage Reduction — they are calculated differently.</p>
-                            
+                            <p className="mt-1"><StatInlineTag name="DMG RED" /> is added to your <StatInlineTag name="CDMG RED" /> to oppose the enemy&apos;s <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />.</p>
+                            <p className="mt-3 text-sm text-yellow-400"><strong>Note:</strong> This is not the same as Final Damage Reduction, which is applied separately after Defense.</p>
                         </>
                     }
                 />
@@ -254,12 +257,11 @@ function StatsContent() {
                     desc="Reduces damage taken when critically hit."
                     details={
                         <>
-                            <p>Critical Damage Reduction directly reduces the enemy&apos;s effective <StatInlineTag name="CHD" /> when you are critically hit.</p>
+                            <p>Critical Damage Reduction only activates when you are critically hit. It is added to your <StatInlineTag name="DMG RED" /> to form the total defensive pool, which is subtracted from the attacker&apos;s offensive pool (<StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />).</p>
                             <p className="mt-3 font-semibold">Example:</p>
-                            <p className="mt-1">If the enemy has <strong>300% CHD</strong> and you have <strong>150% CDMG RED</strong>, the effective critical damage you receive is reduced to <strong>150%</strong> instead of 300%.</p>
-                            <p className="mt-3 font-semibold">On a crit hit:</p>
-                            <p className="mt-1">CDMG RED is added to your <StatInlineTag name="DMG RED" /> to form your total defensive modifier against the enemy&apos;s <StatInlineTag name="CHD" /> + <StatInlineTag name="DMG UP" />.</p>
-                            
+                            <p className="mt-1">If the enemy has <strong>300% CHD</strong> + <strong>30% DMG UP</strong> and you have <strong>150% CDMG RED</strong> + <strong>20% DMG RED</strong>:</p>
+                            <p className="mt-1">(300 + 30) − (150 + 20) = <strong>+160%</strong> effective damage modifier.</p>
+                            <p className="mt-3 text-sm text-yellow-400"><strong>Note:</strong> CDMG RED has no effect on non-crit hits.</p>
                         </>
                     }
                 />
@@ -374,17 +376,22 @@ function FAQContent() {
                         {
                             key: 'dmg-up-vs-chd',
                             title: 'What\'s the difference between DMG UP and Crit Damage?',
-                            content: 'DMG UP applies on every attack regardless of whether it crits. Crit Damage only applies when a critical hit occurs. On a crit, both values are added together before being compared to the enemy\'s defensive modifiers (DMG RED + CDMG RED).'
+                            content: 'DMG UP applies on every attack regardless of whether it crits. Crit Damage only applies when a critical hit occurs. On a crit, both are added together (along with any skill/equipment DMG UP bonuses) before being compared to the enemy\'s defensive pool (DMG RED + CDMG RED + their skill/equipment reductions). All sources are additive within their respective group.'
                         },
                         {
                             key: 'dmg-red-vs-cdmg-red',
                             title: 'What\'s the difference between DMG RED and CDMG RED?',
-                            content: 'DMG RED reduces all incoming damage, while CDMG RED only reduces damage from critical hits. When you are critically hit, both values are added together to counter the enemy\'s CHD + DMG UP.'
+                            content: 'DMG RED opposes the attacker\'s DMG UP on every hit — it is subtracted from their Damage Increase total, not applied as a flat percentage. CDMG RED only activates on critical hits. When critically hit, both DMG RED and CDMG RED are summed to counter the attacker\'s CHD + DMG UP.'
                         },
                         {
                             key: 'dmg-additive',
                             title: 'How does the additive calculation work?',
-                            content: 'On the attacker\'s side, DMG UP is added to Crit Damage (on crit). On the defender\'s side, DMG RED is added to CDMG RED (on crit). The attacker\'s total is then compared against the defender\'s total to determine the final damage modifier.'
+                            content: 'All increase-type effects (CHD on crit, DMG UP, skill/equip DMG UP) are summed into one group. All reduction-type effects (CDMG RED on crit, DMG RED, skill/equip DMG RED) are summed into another. The final modifier is: (Total Increase) − (Total Reduction). This result is then applied before Defense and Final Damage modifiers.'
+                        },
+                        {
+                            key: 'dmg-red-cap',
+                            title: 'Is there a cap on Damage Reduction?',
+                            content: 'Currently, there is no cap — meaning extreme DMG RED stacking can reduce boss damage by up to 99% in some cases. However, an upcoming update will introduce a cap of approximately 60–70% on the maximum damage that can be reduced via the DMG RED/CDMG RED system. Defense and Final Damage Reduction will not be affected by this cap.'
                         },
                         {
                             key: 'debuff-on-miss',
@@ -585,7 +592,7 @@ function FAQContent() {
                                         <li><strong>Elemental</strong>: 0.8 (disadvantage), 1 (neutral), or 1.2 (advantage)</li>
                                         <li><strong>Skill</strong>: Skill multiplier</li>
                                         <li><strong>ATK</strong>: Your unit&apos;s main scaling stat (can also be HP, DEF, etc. depending on the skill/character)</li>
-                                        <li><strong>Modifiers</strong>: Includes DMG UP, Crit Dmg (on crit), secondary scalings (like HP), and burst damage effects — reduced by the enemy&apos;s DMG RED and CDMG RED (on crit)</li>
+                                        <li><strong>Modifiers</strong>: Additive pool of (CHD on crit + DMG UP + skill/equip DMG UP) minus (CDMG RED on crit + DMG RED + skill/equip DMG RED). May also include secondary scalings (like HP) and burst damage effects</li>
                                         <li><strong>PEN%</strong>: Penetration</li>
                                     </ul>
                                     <p className="text-sm text-gray-500 mt-4">

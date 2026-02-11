@@ -25,7 +25,7 @@ type SkillType = 'S1' | 'S2' | 'S3' | 'Passive' | 'Chain'
  * Tags supportés :
  * {B/EffectName}  -> buff
  * {D/EffectName}  -> debuff
- * {S/StatName}    -> stat (ex: {S/ATK}, {S/SPEED})
+ * {S/StatName}    -> stat (ex: {S/ATK}, {S/SPD})
  * {C/ClassName}   -> classe (ex: {C/Mage} ou {C/Mage|Wizard} pour subclass)
  * {E/Element}     -> élément
  * {P/CharacterName} -> personnage

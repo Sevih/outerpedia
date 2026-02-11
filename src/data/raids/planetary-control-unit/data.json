@@ -1,4 +1,385 @@
 {
+  "v2": {
+    "label": "February 2026 Version",
+    "date": "2026-02-10",
+    "phase1": {
+      "bosses": [
+        {
+          "bossId": "440700174-11-1",
+          "geas": {
+            "1": {
+              "bonus": 79,
+              "malus": 5
+            },
+            "2": {
+              "bonus": 2,
+              "malus": 81
+            },
+            "3": {
+              "bonus": 44,
+              "malus": 105
+            },
+            "4": {
+              "bonus": 107,
+              "malus": 57
+            },
+            "5": {
+              "bonus": 49,
+              "malus": 106
+            }
+          },
+          "notes": [
+            ""
+          ],
+          "recommended": [
+            {
+              "names": "Astei",
+              "reason": {
+                "en": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "jp": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "kr": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "zh": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              }
+            },
+            {
+              "names": "Dianne",
+              "reason": {
+                "en": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "jp": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "kr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "zh": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              }
+            },
+            {
+              "names": "Maxwell",
+              "reason": {
+                "en": "Standard {E/Dark} dps",
+                "jp": "標準的な{E/Dark}アタッカー",
+                "kr": "기본 {E/Dark} 딜러",
+                "zh": "标准{E/Dark}输出"
+              }
+            },
+            {
+              "names": "Demiurge Astei",
+              "reason": {
+                "en": "Standard {E/Dark} dps",
+                "jp": "標準的な{E/Dark}アタッカー",
+                "kr": "기본 {E/Dark} 딜러",
+                "zh": "标准{E/Dark}输出"
+              }
+            },
+            {
+              "names": "Aer",
+              "reason": {
+                "en": "Standard {E/Fire} dps",
+                "jp": "標準的な{E/Fire}アタッカー",
+                "kr": "기본 {E/Fire} 딜러",
+                "zh": "标准{E/Fire}输出"
+              }
+            },
+            {
+              "names": "Bryn",
+              "reason": {
+                "en": "Standard {E/Fire} dps",
+                "jp": "標準的な{E/Fire}アタッカー",
+                "kr": "기본 {E/Fire} 딜러",
+                "zh": "标准{E/Fire}输出"
+              }
+            }
+          ],
+          "team": [
+            [
+              "Astei",
+              "Dianne",
+              "Liselotte"
+            ],
+            [
+              "Maxwell",
+              "Bryn",
+              "Francesca"
+            ],
+            [
+              "Demiurge Astei",
+              "Demiurge Luna",
+              "Aer"
+            ],
+            [
+              "Luna",
+              "Ember"
+            ]
+          ],
+          "video": {
+            "videoId": "-JAndQY3BUY",
+            "title": "Planetary Control Unit - Geas Boss Self-Styled Automaton (Stage 5)"
+          }
+        },
+        {
+          "bossId": "440700274-6-1",
+          "geas": {
+            "1": {
+              "bonus": 85,
+              "malus": 86
+            },
+            "2": {
+              "bonus": 54,
+              "malus": 20
+            },
+            "3": {
+              "bonus": 50,
+              "malus": 87
+            },
+            "4": {
+              "bonus": 76,
+              "malus": 58
+            },
+            "5": {
+              "bonus": 66,
+              "malus": 45
+            }
+          },
+          "notes": [
+            ""
+          ],
+          "recommended": [
+            {
+              "names": "Monad Eva",
+              "reason": {
+                "en": "{B/BT_CALL_BACKUP} and {B/BT_REMOVE_DEBUFF}",
+                "jp": "{B/BT_CALL_BACKUP}と{B/BT_REMOVE_DEBUFF}",
+                "kr": "{B/BT_CALL_BACKUP} 및 {B/BT_REMOVE_DEBUFF}",
+                "zh": "{B/BT_CALL_BACKUP}和{B/BT_REMOVE_DEBUFF}"
+              }
+            },
+            {
+              "names": "Dianne",
+              "reason": {
+                "en": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "jp": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "kr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+                "zh": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+              }
+            },
+            {
+              "names": "Luna",
+              "reason": {
+                "en": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+                "jp": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+                "kr": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+                "zh": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}"
+              }
+            }
+          ],
+          "team": [
+            [
+              "Luna"
+            ],
+            [
+              "Drakhan",
+              "Demiurge Stella"
+            ],
+            [
+              "Regina",
+              "Demiurge Luna"
+            ],
+            [
+              "Monad Eva",
+              "Dianne"
+            ]
+          ],
+          "video": {
+            "videoId": "cfA5D0NQc5Y",
+            "title": "Planetary Control Unit - Geas Boss Astral Guardian (Stage 4)"
+          }
+        }
+      ]
+    },
+    "phase2": {
+      "id": "440700079-B-1",
+      "overview": [
+        ""
+      ],
+      "teams": {
+        "team1": {
+          "label": "Solo Ember",
+          "icon": "fire.webp",
+          "video": {
+            "videoId": "BNpf_bOsTzg",
+            "title": "Planetary Control Unit Epsilon Raid - Solo Ember, 9.68m dmg, 210% multiplier",
+            "author": "Tango"
+          },
+          "geas-active": {
+            "bonus": [
+              44,
+              85,
+              107
+            ],
+            "malus": [
+              5,
+              81,
+              105,
+              57,
+              106,
+              86,
+              20,
+              87,
+              58
+            ]
+          },
+          "setup": [
+            [
+              "Ember"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "T4 {AS/Revenge} and {I-T/Vanguard's Charm}, stack {S/ATK}. The geas that gives 150 {S/EFF} is doubled by her EE so you only need around 218 {S/EFF}, easily achieved by glove slot alone."
+            },
+            {
+              "type": "p",
+              "string": "Use S3 whenever possible unless you need the shield to survive. If the boss doesn't drop you below 50% on your first turn, use burst 1 after."
+            },
+            {
+              "type": "p",
+              "string": "Must be solo (no other units in the team) because the boss hits much harder if she gets a kill."
+            },
+            {
+              "type": "p",
+              "string": "If you overkill the boss, you can turn off the {E/Fire} ATK+ geas for more points."
+            }
+          ]
+        },
+        "team2": {
+          "label": "Burn Team",
+          "icon": "SC_Buff_detonate.webp",
+          "video": {
+            "videoId": "xhTt8Ecj_28",
+            "title": "Planetary Control Unit Epsilon Raid - Burn Team, 23.88m dmg, 110% multiplier (50.15m points)",
+            "author": "Tango"
+          },
+          "geas-active": {
+            "bonus": [
+              44,
+              50,
+              107
+            ],
+            "malus": [
+              86,
+              106,
+              87,
+              81,
+              105,
+              5
+            ]
+          },
+          "setup": [
+            [
+              "Maxie"
+            ],
+            [
+              "Roxie"
+            ],
+            [
+              "Akari"
+            ],
+            [
+              "Vlada"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Break the boss on turn 15 before she uses her S3 nuke. If you do, it's 0 damage taken, meaning it scales into higher stages with no issues."
+            },
+            {
+              "type": "p",
+              "string": "Turn order: {P/Akari} (294 {S/SPD}) > {P/Maxie} (276 {S/SPD}) > {P/Roxie} (263 {S/SPD}) > {P/Vlada} (126 {S/SPD}). Lots of flexibility as long as {P/Maxie} and {P/Roxie} are fast enough and {P/Akari} outspeeds the boss."
+            },
+            {
+              "type": "p",
+              "string": "{P/Maxie}: 276 {S/SPD}, T4 {I-W/Heartunder's Blade}, {I-T/Executioner's Charm} +10, 6* transcendence, EE+0 minimum."
+            },
+            {
+              "type": "p",
+              "string": "{P/Roxie}: 263 {S/SPD}, T4 {I-A/Dies Irae}, {I-T/Executioner's Charm} +10, 6* transcendence, EE+10 minimum."
+            },
+            {
+              "type": "p",
+              "string": "{P/Vlada}: 126 {S/SPD}, any AP Boosting charm, stack {S/ATK}. Use {I-W/Phantasm Necrosis} to go below base {S/SPD}. Can be min {S/SPD} (96) but at 126, she moves as early as possible while only getting 2 turns, giving her S3 burns more opportunities to be extended."
+            },
+            {
+              "type": "p",
+              "string": "{P/Akari}: 294 {S/SPD}, EE+0, 518+ {S/EFF} or 259+ with T4 {I-W/Briareos's Recklessness [Ranger]}. If you have 259+ {S/EFF} on both {P/Roxie} and {P/Maxie}, you can skip the resilience down. 6* transcendence with 2 {AS/Bursting} optional for turn 1 burst 2 to nullify defence buff."
+            },
+            {
+              "type": "p",
+              "string": "If you overkill the boss, you can turn off the {E/Fire} ATK+ geas for more points."
+            }
+          ]
+        },
+        "team3": {
+          "label": "Mero + Claire",
+          "icon": "fire.webp",
+          "video": {
+            "videoId": "MQdqPgT6LpU",
+            "title": "Planetary Control Unit Epsilon Raid - Solo Mero - 4.12m Dmg, 195% multiplier",
+            "author": "Tango"
+          },
+          "geas-active": {
+            "bonus": [
+              44,
+              107
+            ],
+            "malus": [
+              5,
+              81,
+              105,
+              106,
+              86,
+              20,
+              87,
+              58,
+              45
+            ]
+          },
+          "setup": [
+            [
+              "Mero"
+            ],
+            [
+              "Claire"
+            ]
+          ],
+          "note": [
+            {
+              "type": "p",
+              "string": "Alternative easy team similar to Solo Ember, though it scores less points than the other 2 teams."
+            },
+            {
+              "type": "p",
+              "string": "{P/Mero}: min {S/SPD}, T4 {I-W/Heartunder's Blade}, T4 {AS/Revenge}, 268+ {S/EFF} (otherwise turn on the +150 {S/EFF} geas). Turn on the resilience +50/200 geas if you can reach enough {S/EFF} for those too."
+            },
+            {
+              "type": "p",
+              "string": "{P/Claire}: T4 {I-A/Resurrection Token}, 6* transcendence, {I-T/Vanguard's Charm} and 2 {AS/Bursting} to burst 2 on her first turn. Must be slower than {P/Mero}. 6* transcendence, {I-T/Vanguard's Charm} +10 and EE+5 should also be enough AP without a burst set."
+            },
+            {
+              "type": "p",
+              "string": "The other 2 teammates should just be talisman holders that die before they can move. {C/Defender}s can hold {I-A/Charmer's Golden Chalice} to die easier if necessary."
+            },
+            {
+              "type": "p",
+              "string": "{P/Mero} should start with S3 then spam S2 whenever possible (don't use burst 2+). If you can't S2, switch to S3 then back to S2."
+            },
+            {
+              "type": "p",
+              "string": "If you overkill the boss, you can turn off the {E/Fire} ATK+ geas for more points."
+            }
+          ]
+        }
+      }
+    }
+  },
   "v1": {
     "label": "August 2025 Version",
     "date": "2025-08-13",

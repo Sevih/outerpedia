@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 
 type Props = {
   currentPhase: 'phase1' | 'phase2'
@@ -13,16 +13,17 @@ type Props = {
  * Animated tab selector for Phase 1 and Phase 2
  */
 export function PhaseNavigator({ currentPhase, onPhaseChange, phase2BossName }: Props) {
-  const tabRef = useRef<HTMLButtonElement | null>(null)
   const indicatorRef = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    if (tabRef.current && indicatorRef.current) {
-      const { offsetLeft, offsetWidth } = tabRef.current
+  const positionIndicator = (el: HTMLButtonElement | null) => {
+    if (!el || !indicatorRef.current) return
+    requestAnimationFrame(() => {
+      if (!indicatorRef.current) return
+      const { offsetLeft, offsetWidth } = el
       indicatorRef.current.style.transform = `translateX(${offsetLeft}px)`
       indicatorRef.current.style.width = `${offsetWidth}px`
-    }
-  }, [currentPhase])
+    })
+  }
 
   const phases = [
     { key: 'phase1' as const, label: 'Phase 1 : Geas Bosses' },
@@ -41,7 +42,7 @@ export function PhaseNavigator({ currentPhase, onPhaseChange, phase2BossName }: 
             key={key}
             onClick={() => onPhaseChange(key)}
             ref={(el) => {
-              if (currentPhase === key) tabRef.current = el
+              if (currentPhase === key) positionIndicator(el)
             }}
             className={`relative z-10 px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200
               ${currentPhase === key ? 'text-white' : 'text-white/70'}`}
