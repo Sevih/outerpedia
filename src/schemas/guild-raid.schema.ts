@@ -207,10 +207,67 @@ export const NoteListSchema = z.object({
   items: z.array(z.string().min(1, 'List item cannot be empty')).min(1, 'List must have at least one item'),
 })
 
+export const NoteTurnOrderSchema = z.object({
+  type: z.literal('turn-order'),
+  order: z.array(z.object({
+    character: z.string().min(1),
+    speed: z.number(),
+  })).min(1, 'Turn order must have at least one character'),
+  note: z.string().optional(),
+})
+
 export const NoteEntrySchema = z.discriminatedUnion('type', [
   NoteParagraphSchema,
   NoteListSchema,
+  NoteTurnOrderSchema,
 ])
+
+/**
+ * Requirement stats (typed keys, all optional)
+ */
+export const RequirementStatsSchema = z.object({
+  spd: z.string().optional(),
+  eff: z.string().optional(),
+  atk: z.string().optional(),
+  def: z.string().optional(),
+  hp: z.string().optional(),
+  chc: z.string().optional(),
+  chd: z.string().optional(),
+  trans: z.string().optional(),
+})
+
+/**
+ * Requirement equipment (typed keys, all optional)
+ */
+export const RequirementEquipmentSchema = z.object({
+  weapon: z.array(z.string()).optional(),
+  amulet: z.array(z.string()).optional(),
+  talisman: z.array(z.string()).optional(),
+  set: z.array(z.string()).optional(),
+  ee: z.array(z.string()).optional(),
+})
+
+/**
+ * Single requirement entry for a character
+ */
+export const RequirementEntrySchema = z.object({
+  character: z.string().min(1),
+  items: z.array(z.string()).optional(),
+  stats: RequirementStatsSchema.optional(),
+  equipment: RequirementEquipmentSchema.optional(),
+  prio: z.array(z.string()).optional(),
+  notes: z.array(z.string()).optional(),
+  ...buildLocalizedSuffixFields('notes', z.array(z.string())),
+})
+
+/**
+ * Requirements data block with localized note
+ */
+export const RequirementsDataSchema = z.object({
+  entries: z.array(RequirementEntrySchema).min(1, 'Requirements must have at least one entry'),
+  note: z.string().optional(),
+  ...buildLocalizedSuffixFields('note', z.string()),
+})
 
 /**
  * Active geas configuration for Phase 2 teams
@@ -235,6 +292,7 @@ export const Phase2TeamSchema = z.object({
   icon: z.string().min(1, 'Team icon filename is required (e.g., "earth.webp")'),
   setup: TeamCompositionSchema,
   ...buildLocalizedFields('note', z.array(NoteEntrySchema)),
+  requirements: RequirementsDataSchema.optional(),
   'geas-active': ActiveGeasSchema.optional(),
   video: VideoSchema.optional(),
 })

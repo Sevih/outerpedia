@@ -2,15 +2,18 @@
 
 import CarouselSlotV2 from './CarouselSlotV2'
 import parseText from '@/utils/parseText'
-import type { NoteEntry } from '@/types/team'
+import TurnOrderDisplay from './TurnOrderDisplay'
+import RequirementsList from './RequirementsList'
+import type { NoteEntry, RequirementsData } from '@/types/team'
 
 type Props = {
   team: string[][]
   note?: NoteEntry[]
+  requirements?: RequirementsData
 }
 
 
-export default function RecommendedTeamCarousel({ team, note }: Props) {
+export default function RecommendedTeamCarousel({ team, note, requirements }: Props) {
   if (!team || team.length === 0) return null
 
   return (
@@ -39,9 +42,16 @@ export default function RecommendedTeamCarousel({ team, note }: Props) {
               )
             }
 
+            if (entry.type === 'turn-order') {
+              return <TurnOrderDisplay key={idx} order={entry.order} note={entry.note} />
+            }
+
             return null
           })}
         </div>
+      )}
+      {requirements && (
+        <RequirementsList data={requirements} />
       )}
     </>
   )

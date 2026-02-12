@@ -86,6 +86,7 @@ export default function StageBasedTeamSelector({ teamData, defaultStage, icon, r
       <RecommendedTeamCarousel
         team={currentStageData.team}
         note={resolveNote(currentStageData, lang)}
+        requirements={currentStageData.requirements}
       />
     </div>
   )

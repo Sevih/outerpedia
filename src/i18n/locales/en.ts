@@ -1010,6 +1010,10 @@ const en = {
   'guide.inProgress.description':
     'This section is currently being written. Check back soon for the full guide!',
 
+  // Requirements
+  'requirements.title': 'Requirements & Turn Order',
+  'requirements.prio': 'Prio',
+
   // Monad Gate
   'monad.rewards': 'Rewards',
   'monad.trueEndingChoices': 'True Ending Choices',

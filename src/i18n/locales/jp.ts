@@ -1010,6 +1010,10 @@ const jp = {
   'guide.inProgress.description':
     'このセクションは現在作成中です。完成までしばらくお待ちください！',
 
+  // Requirements
+  'requirements.title': '装備要件 & ターンオーダー',
+  'requirements.prio': '優先',
+
   // Monad Gate
   'monad.rewards': '報酬',
   'monad.trueEndingChoices': 'トゥルーエンディング選択肢',

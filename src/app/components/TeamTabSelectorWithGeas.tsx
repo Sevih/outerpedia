@@ -115,7 +115,7 @@ export default function TeamTabSelectorWithGeas({ teams, bosses, defaultTeam, on
           </div>
         </div>
       )}
-      <RecommendedTeam team={selectedTeam.setup} note={resolveNote(selectedTeam, lang)} />
+      <RecommendedTeam team={selectedTeam.setup} note={resolveNote(selectedTeam, lang)} requirements={selectedTeam.requirements} />
 
       {selectedTeam.video && (
         <CombatFootage

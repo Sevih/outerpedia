@@ -1010,6 +1010,10 @@ const kr = {
   'guide.inProgress.description':
     '이 섹션은 현재 작성 중입니다. 완성된 가이드를 곧 확인해 주세요!',
 
+  // Requirements
+  'requirements.title': '장비 요구사항 & 턴 오더',
+  'requirements.prio': '우선순위',
+
   // Monad Gate
   'monad.rewards': '보상',
   'monad.trueEndingChoices': '트루 엔딩 선택지',

@@ -6682,7 +6682,31 @@
     "Speed": {
       "weaponSub": [
         {
+          "name": "Iron Messiah",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
           "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Royal Stinger",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
           "mainStat": [
             "HP%"
           ]
@@ -6694,21 +6718,65 @@
           "mainStat": [
             "SPD"
           ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Healer]",
+          "mainStat": [
+            "DMG RED"
+          ]
+        },
+        {
+          "name": "Saint's Ring",
+          "mainStat": [
+            "DMG RED"
+          ]
         }
       ],
       "sub": [
         "SPD",
         "HP",
-        "DEF"
+        "DEF",
+        "DMG RED",
+        "RES"
       ],
       "armorSets": [
         "Speed"
       ]
     },
-    "Swift Counter": {
+    "Swift-mix": {
       "weaponSub": [
         {
+          "name": "Iron Messiah",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
           "name": "Emblem of Dominance",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Royal Stinger",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Briareos's Recklessness [Healer]",
+          "mainStat": [
+            "HP%"
+          ]
+        },
+        {
+          "name": "Gorgon's Wrath [Healer]",
           "mainStat": [
             "HP%"
           ]
@@ -6720,16 +6788,42 @@
           "mainStat": [
             "SPD"
           ]
+        },
+        {
+          "name": "Obsidian Oath",
+          "mainStat": [
+            "SPD"
+          ]
+        },
+        {
+          "name": "Briareos's Ambition [Healer]",
+          "mainStat": [
+            "DMG RED"
+          ]
+        },
+        {
+          "name": "Saint's Ring",
+          "mainStat": [
+            "DMG RED"
+          ]
         }
       ],
       "sub": [
         "SPD",
         "HP",
-        "DEF"
+        "DEF",
+        "DMG RED",
+        "RES"
       ],
       "armorSets": [
         "Swiftness",
-        "Counterattack"
+        "Speed",
+        "Swiftness",
+        "Counterattack",
+        "Swiftness",
+        "Immunity",
+        "Swiftness",
+        "Life"
       ]
     }
   },

@@ -81,6 +81,41 @@
     ]
   },
   {
+    "name": "Immunity Set",
+    "type": "Set",
+    "class": null,
+    "count": 27,
+    "characters": [
+      "Astei",
+      "Bryn",
+      "Caren",
+      "Christina",
+      "Demiurge Delta",
+      "Demiurge Drakhan",
+      "Demiurge Vlada",
+      "Dianne",
+      "Epsilon",
+      "Gnosis Dahlia",
+      "Gnosis Nella",
+      "Hilde",
+      "Iota",
+      "Kanon",
+      "Leo",
+      "Liselotte",
+      "Mene",
+      "Mystic Sage Ame",
+      "Nella",
+      "Notia",
+      "Omega Nadja",
+      "Primine",
+      "Roxie",
+      "Saeran",
+      "Sterope",
+      "Summer Knight's Dream Ember",
+      "Viella"
+    ]
+  },
+  {
     "name": "Swiftness Set",
     "type": "Set",
     "class": null,
@@ -112,40 +147,6 @@
       "Sterope",
       "Summer Knight's Dream Ember",
       "Veronica",
-      "Viella"
-    ]
-  },
-  {
-    "name": "Immunity Set",
-    "type": "Set",
-    "class": null,
-    "count": 26,
-    "characters": [
-      "Astei",
-      "Bryn",
-      "Caren",
-      "Christina",
-      "Demiurge Delta",
-      "Demiurge Drakhan",
-      "Demiurge Vlada",
-      "Dianne",
-      "Epsilon",
-      "Gnosis Dahlia",
-      "Gnosis Nella",
-      "Hilde",
-      "Iota",
-      "Kanon",
-      "Leo",
-      "Liselotte",
-      "Mene",
-      "Mystic Sage Ame",
-      "Nella",
-      "Notia",
-      "Omega Nadja",
-      "Roxie",
-      "Saeran",
-      "Sterope",
-      "Summer Knight's Dream Ember",
       "Viella"
     ]
   },
@@ -499,6 +500,23 @@
     ]
   },
   {
+    "name": "Life Set",
+    "type": "Set",
+    "class": null,
+    "count": 9,
+    "characters": [
+      "Christina",
+      "Delta",
+      "Gnosis Viella",
+      "Hilde",
+      "Liselotte",
+      "Nella",
+      "Omega Nadja",
+      "Primine",
+      "Summer Knight's Dream Ember"
+    ]
+  },
+  {
     "name": "Noblewoman's Guile",
     "type": "Weapon",
     "class": "Mage",
@@ -529,22 +547,6 @@
       "Luna",
       "Sterope",
       "Veronica"
-    ]
-  },
-  {
-    "name": "Life Set",
-    "type": "Set",
-    "class": null,
-    "count": 8,
-    "characters": [
-      "Christina",
-      "Delta",
-      "Gnosis Viella",
-      "Hilde",
-      "Liselotte",
-      "Nella",
-      "Omega Nadja",
-      "Summer Knight's Dream Ember"
     ]
   },
   {
@@ -610,6 +612,21 @@
     ]
   },
   {
+    "name": "Obsidian Oath",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 7,
+    "characters": [
+      "Astei",
+      "Demiurge Delta",
+      "Dianne",
+      "Liselotte",
+      "Primine",
+      "Saeran",
+      "Viella"
+    ]
+  },
+  {
     "name": "Physical Exorcism",
     "type": "Amulet",
     "class": "Ranger",
@@ -622,20 +639,6 @@
       "Mystic Sage Ame",
       "Notia",
       "Sigma"
-    ]
-  },
-  {
-    "name": "Obsidian Oath",
-    "type": "Amulet",
-    "class": "Healer",
-    "count": 6,
-    "characters": [
-      "Astei",
-      "Demiurge Delta",
-      "Dianne",
-      "Liselotte",
-      "Saeran",
-      "Viella"
     ]
   },
   {
@@ -857,6 +860,17 @@
     ]
   },
   {
+    "name": "Gorgon's Wrath [Healer]",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 3,
+    "characters": [
+      "Demiurge Delta",
+      "Liselotte",
+      "Primine"
+    ]
+  },
+  {
     "name": "Immortal Pride",
     "type": "Weapon",
     "class": "Healer",
@@ -890,6 +904,16 @@
     ]
   },
   {
+    "name": "Briareos's Ambition [Healer]",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 2,
+    "characters": [
+      "Demiurge Delta",
+      "Primine"
+    ]
+  },
+  {
     "name": "Briareos's Ambition [Mage]",
     "type": "Amulet",
     "class": "Mage",
@@ -907,6 +931,16 @@
     "characters": [
       "Core Fusion Veronica",
       "Ember"
+    ]
+  },
+  {
+    "name": "Briareos's Recklessness [Healer]",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 2,
+    "characters": [
+      "Liselotte",
+      "Primine"
     ]
   },
   {
@@ -970,16 +1004,6 @@
     ]
   },
   {
-    "name": "Gorgon's Wrath [Healer]",
-    "type": "Weapon",
-    "class": "Healer",
-    "count": 2,
-    "characters": [
-      "Demiurge Delta",
-      "Liselotte"
-    ]
-  },
-  {
     "name": "Last Hope",
     "type": "Weapon",
     "class": "Mage",
@@ -987,6 +1011,26 @@
     "characters": [
       "Bryn",
       "Regina"
+    ]
+  },
+  {
+    "name": "Royal Stinger",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 2,
+    "characters": [
+      "Liselotte",
+      "Primine"
+    ]
+  },
+  {
+    "name": "Saint's Ring",
+    "type": "Amulet",
+    "class": "Healer",
+    "count": 2,
+    "characters": [
+      "Primine",
+      "Saeran"
     ]
   },
   {
@@ -1006,24 +1050,6 @@
     "count": 1,
     "characters": [
       "Iota"
-    ]
-  },
-  {
-    "name": "Briareos's Ambition [Healer]",
-    "type": "Amulet",
-    "class": "Healer",
-    "count": 1,
-    "characters": [
-      "Demiurge Delta"
-    ]
-  },
-  {
-    "name": "Briareos's Recklessness [Healer]",
-    "type": "Weapon",
-    "class": "Healer",
-    "count": 1,
-    "characters": [
-      "Liselotte"
     ]
   },
   {
@@ -1081,30 +1107,21 @@
     ]
   },
   {
+    "name": "Iron Messiah",
+    "type": "Weapon",
+    "class": "Healer",
+    "count": 1,
+    "characters": [
+      "Primine"
+    ]
+  },
+  {
     "name": "Phantasm Necrosis",
     "type": "Weapon",
     "class": "Striker",
     "count": 1,
     "characters": [
       "Vlada"
-    ]
-  },
-  {
-    "name": "Royal Stinger",
-    "type": "Weapon",
-    "class": "Healer",
-    "count": 1,
-    "characters": [
-      "Liselotte"
-    ]
-  },
-  {
-    "name": "Saint's Ring",
-    "type": "Amulet",
-    "class": "Healer",
-    "count": 1,
-    "characters": [
-      "Saeran"
     ]
   },
   {
@@ -1329,13 +1346,6 @@
     "name": "Innocent Play",
     "type": "Amulet",
     "class": "Striker",
-    "count": 0,
-    "characters": []
-  },
-  {
-    "name": "Iron Messiah",
-    "type": "Weapon",
-    "class": "Healer",
     "count": 0,
     "characters": []
   },

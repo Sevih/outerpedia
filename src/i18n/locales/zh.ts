@@ -1008,6 +1008,10 @@ const zh = {
   'guide.inProgress.title': '攻略撰写中',
   'guide.inProgress.description': '此部分攻略正在撰写中，请稍后查看。',
 
+  // Requirements
+  'requirements.title': '装备需求 & 行动顺序',
+  'requirements.prio': '优先',
+
   // Monad Gate
   'monad.rewards': '奖励',
   'monad.trueEndingChoices': '真结局选择',
