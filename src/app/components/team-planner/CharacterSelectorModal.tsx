@@ -16,19 +16,10 @@ import type {
 } from '@/types/team-planner'
 import FilterBar from '@/app/components/FilterBar'
 import CharacterGrid from '@/app/components/CharacterGrid'
+import { getEffectGroupMap } from '@/lib/team-planner/effectGroupMap'
 
-// Build effect group map once at module level
-const effectGroupMap = new Map<string, string>()
-const buildEffectGroupMap = () => {
-  if (effectGroupMap.size === 0) {
-    ;[...buffs, ...debuffs].forEach((effect: EffectWithGroup) => {
-      if (effect.group) {
-        effectGroupMap.set(effect.name, effect.group)
-      }
-    })
-  }
-  return effectGroupMap
-}
+// Use shared effect group map
+const buildEffectGroupMap = () => getEffectGroupMap()
 
 export default function CharacterSelectorModal({
   isOpen,
@@ -37,6 +28,7 @@ export default function CharacterSelectorModal({
   characters,
   selectedPosition,
   excludeCharacterIds = [],
+  relevanceMap,
 }: CharacterSelectorModalProps) {
   const { t } = useI18n()
   const [searchTerm, setSearchTerm] = useState('')
@@ -426,6 +418,7 @@ export default function CharacterSelectorModal({
               onSelect(characterId, characterName)
               onClose()
             }}
+            relevanceMap={relevanceMap}
           />
         </div>
       </div>

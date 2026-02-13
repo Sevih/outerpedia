@@ -98,6 +98,7 @@ export interface CharacterSelectorModalProps {
   characters: CharacterLite[]
   selectedPosition: number
   excludeCharacterIds?: string[]
+  relevanceMap?: CharacterRelevanceMap
 }
 
 export interface ChainEffectIconsProps {
@@ -116,6 +117,7 @@ export interface EncodedTeamData {
   chainOrder: number[]
   notes: string
   title?: string
+  bossPresetId?: string
 }
 
 // ============================================================================
@@ -216,11 +218,19 @@ export interface Rule {
 export interface BossPreset {
   id: string
   name: string
-  category: 'skyward_tower' | 'guild_raid' | 'world_boss' | 'irregular' | 'special_request' | 'story' | 'custom'
+  category: 'skyward_tower' | 'guild_raid' | 'world_boss' | 'irregular' | 'special_request' | 'joint_challenge' | 'adventure_license' | 'story' | 'custom'
   difficulty?: 'normal' | 'hard' | 'very_hard' | 'hell' | 'nightmare'
   description?: string
   rules: Rule[]
   imageUrl?: string
+  /** Boss JSON file ID (links to src/data/boss/{bossId}.json) */
+  bossId?: string
+  /** Localized boss name from JSON */
+  bossName?: { en: string; kr?: string; jp?: string; zh?: string }
+  /** Boss element (Fire, Water, Earth, Light, Dark) */
+  element?: string
+  /** Boss class (Striker, Defender, Ranger, Healer, Mage) */
+  bossClass?: string
 }
 
 /**
@@ -280,3 +290,32 @@ export interface RuleMetadata {
   minValue?: number
   maxValue?: number
 }
+
+// ============================================================================
+// Rule Validation Types
+// ============================================================================
+
+/**
+ * Per-rule validation status after checking against team composition
+ */
+export interface RuleStatus {
+  rule: Rule
+  passed: boolean
+  /** Character IDs that satisfy this rule (for require_*) or violate it (for forbid_*) */
+  matchedBy: string[]
+  severity: 'error' | 'warning' | 'info'
+  metadata: RuleMetadata
+}
+
+/**
+ * Relevance data for a character relative to unfulfilled rules
+ */
+export interface CharacterRelevance {
+  satisfiesRules: RuleType[]
+  score: number
+}
+
+/**
+ * Map of characterId → relevance data for character selector integration
+ */
+export type CharacterRelevanceMap = Map<string, CharacterRelevance>

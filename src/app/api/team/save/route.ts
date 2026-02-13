@@ -10,6 +10,7 @@ const teamSchema = z.object({
   chainOrder: z.string().max(100, 'Chain order too large'),
   notes: z.string().max(10000, 'Notes too large').optional(),
   title: z.string().max(200, 'Title too long').optional(),
+  bossPresetId: z.string().max(100, 'Boss preset ID too long').optional(),
 })
 
 export async function POST(request: NextRequest) {
@@ -31,15 +32,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { team, chainOrder, notes, title } = validation.data
+    const { team, chainOrder, notes, title, bossPresetId } = validation.data
 
     // Generate a short unique ID (8 characters)
     const id = nanoid(8)
 
     // Save team data to MySQL
     await pool.execute(
-      'INSERT INTO teams (id, team, chain_order, notes, title) VALUES (?, ?, ?, ?, ?)',
-      [id, team, chainOrder, notes || '', title || '']
+      'INSERT INTO teams (id, team, chain_order, notes, title, boss_preset_id) VALUES (?, ?, ?, ?, ?, ?)',
+      [id, team, chainOrder, notes || '', title || '', bossPresetId || '']
     )
 
     return NextResponse.json({ id }, { status: 201 })

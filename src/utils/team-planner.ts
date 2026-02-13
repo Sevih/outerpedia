@@ -89,7 +89,7 @@ export function getAverageCPPerTurn(team: TeamSlot[]): number {
  * Utilise toujours l'API shortener pour générer un ID court
  * Format: s:shortId
  */
-export async function encodeTeamToURL(team: TeamSlot[], chainOrder: number[], notes: string, title: string = ''): Promise<string> {
+export async function encodeTeamToURL(team: TeamSlot[], chainOrder: number[], notes: string, title: string = '', bossPresetId: string | null = null): Promise<string> {
   const teamIds = team.map(slot => slot.characterId || '').join(',')
   const chainOrderStr = chainOrder.join(',')
 
@@ -98,7 +98,7 @@ export async function encodeTeamToURL(team: TeamSlot[], chainOrder: number[], no
     const response = await fetch('/api/team/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ team: teamIds, chainOrder: chainOrderStr, notes, title })
+      body: JSON.stringify({ team: teamIds, chainOrder: chainOrderStr, notes, title, bossPresetId: bossPresetId || '' })
     })
 
     if (!response.ok) {
@@ -112,7 +112,8 @@ export async function encodeTeamToURL(team: TeamSlot[], chainOrder: number[], no
     // Fallback to inline encoding if API fails
     const encodedNotes = notes ? btoa(encodeURIComponent(notes)) : ''
     const encodedTitle = title ? btoa(encodeURIComponent(title)) : ''
-    return `${teamIds}|${chainOrderStr}|${encodedNotes}|${encodedTitle}`
+    const encodedBoss = bossPresetId ? btoa(bossPresetId) : ''
+    return `${teamIds}|${chainOrderStr}|${encodedNotes}|${encodedTitle}|${encodedBoss}`
   }
 }
 
@@ -137,7 +138,7 @@ export async function decodeTeamFromURL(encoded: string): Promise<EncodedTeamDat
         }
 
         const data = await response.json()
-        const { team: teamIds, chainOrder: chainOrderStr, notes, title } = data
+        const { team: teamIds, chainOrder: chainOrderStr, notes, title, bossPresetId } = data
 
         // Parse team IDs
         const characterIds = teamIds.split(',')
@@ -159,7 +160,7 @@ export async function decodeTeamFromURL(encoded: string): Promise<EncodedTeamDat
           }
         })
 
-        return { team, chainOrder: chainOrderArr, notes: notes || '', title: title || '' }
+        return { team, chainOrder: chainOrderArr, notes: notes || '', title: title || '', bossPresetId: bossPresetId || undefined }
       } catch (error) {
         console.error('Error loading team from API:', error)
         return null
@@ -168,7 +169,7 @@ export async function decodeTeamFromURL(encoded: string): Promise<EncodedTeamDat
 
     // Original inline format
     const parts = encoded.split('|')
-    const [teamPart, chainPart, notesPart, titlePart] = parts
+    const [teamPart, chainPart, notesPart, titlePart, bossPart] = parts
 
     if (!teamPart || !chainPart) return null
 
@@ -191,8 +192,9 @@ export async function decodeTeamFromURL(encoded: string): Promise<EncodedTeamDat
 
     const notes = notesPart ? decodeURIComponent(atob(notesPart)) : ''
     const title = titlePart ? decodeURIComponent(atob(titlePart)) : ''
+    const bossPresetId = bossPart ? atob(bossPart) : undefined
 
-    return { team, chainOrder: chainOrderArr, notes, title }
+    return { team, chainOrder: chainOrderArr, notes, title, bossPresetId }
   } catch {
     return null
   }

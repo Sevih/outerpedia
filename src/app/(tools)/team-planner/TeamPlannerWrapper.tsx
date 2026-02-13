@@ -8,6 +8,8 @@ import { marked } from 'marked'
 import { CharacterPortrait } from '@/app/components/CharacterPortrait'
 import CharacterSelectorModal from '@/app/components/team-planner/CharacterSelectorModal'
 import ChainEffectIcons from '@/app/components/team-planner/ChainEffectIcons'
+import BossSelector from '@/app/components/team-planner/BossSelector'
+import RuleStatusDisplay from '@/app/components/team-planner/RuleStatusDisplay'
 import NotesEditor from '@/app/components/NotesEditor'
 import _allCharacters from '@/data/_allCharacters.json'
 import type { CharacterLite } from '@/types/types'
@@ -20,6 +22,9 @@ import {
   encodeTeamToURL,
   decodeTeamFromURL
 } from '@/utils/team-planner'
+import { BOSS_PRESETS, getPresetById } from '@/lib/team-planner/bossPresets'
+import { validateTeam } from '@/lib/team-planner/validateTeam'
+import { computeCharacterRelevance } from '@/lib/team-planner/characterRelevance'
 import {
   generateTeamImage1920x1080,
   copyImageToClipboard,
@@ -51,6 +56,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
   const [imageCopied, setImageCopied] = useState(false)
   const [title, setTitle] = useState('')
   const [notes, setNotes] = useState('')
+  const [selectedBossPresetId, setSelectedBossPresetId] = useState<string | null>(null)
 
   // Parse Markdown notes to HTML for view-only mode avec support des tags custom
   const formattedNotes = useMemo(() => {
@@ -85,6 +91,28 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     ])
   }, [viewOnly, notes])
 
+  // Boss preset & validation
+  const activePreset = useMemo(
+    () => selectedBossPresetId ? getPresetById(selectedBossPresetId) : null,
+    [selectedBossPresetId]
+  )
+
+  const ruleStatuses = useMemo(
+    () => activePreset ? validateTeam(team, activePreset.rules, characters) : [],
+    [team, activePreset]
+  )
+
+  const relevanceMap = useMemo(
+    () => {
+      if (ruleStatuses.length === 0) return undefined
+      const excludeIds = team
+        .filter(s => s.characterId !== null)
+        .map(s => s.characterId as string)
+      return computeCharacterRelevance(characters, ruleStatuses, excludeIds)
+    },
+    [ruleStatuses, team]
+  )
+
   // Charger l'équipe depuis l'URL au montage
   useEffect(() => {
     const loadTeam = async () => {
@@ -96,6 +124,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
           setChainOrder(decoded.chainOrder)
           setNotes(decoded.notes)
           setTitle(decoded.title || '')
+          if (decoded.bossPresetId) setSelectedBossPresetId(decoded.bossPresetId)
         }
       }
     }
@@ -154,7 +183,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     if (!hasAnyCharacter) return
 
     // Créer l'URL avec les notes et titre inclus, pointant vers la page view-only
-    const encoded = await encodeTeamToURL(team, chainOrder, notes, title)
+    const encoded = await encodeTeamToURL(team, chainOrder, notes, title, selectedBossPresetId)
     const baseUrl = window.location.origin + '/team-planner/view'
     const shareUrl = `${baseUrl}?team=${encoded}`
 
@@ -537,19 +566,50 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
       )}
 
       {/* Rules & Restrictions */}
-      <section className="bg-gray-800 rounded-lg shadow-md p-6 border border-gray-700">
-        <h2 className="text-2xl font-bold mb-4 text-white">{t('teamPlanner.rulesRestrictions')}</h2>
-        <p className="text-gray-400">
-          {t('teamPlanner.rulesPlaceholder')}
-        </p>
-      </section>
-
-      {/* Validation Results */}
-      <section className="bg-gray-800 rounded-lg shadow-md p-6 border border-gray-700">
-        <h2 className="text-2xl font-bold mb-4 text-white">{t('teamPlanner.validationResults')}</h2>
-        <p className="text-gray-400">
-          {t('teamPlanner.validationPlaceholder')}
-        </p>
+      <section className="bg-gray-800 rounded-lg shadow-md p-4 sm:p-6 border border-gray-700">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">{t('teamPlanner.rulesRestrictions')}</h2>
+        {!viewOnly && (
+          <BossSelector
+            selectedPresetId={selectedBossPresetId}
+            onSelectPreset={(preset) => setSelectedBossPresetId(preset?.id ?? null)}
+            presets={BOSS_PRESETS}
+          />
+        )}
+        {viewOnly && activePreset && (
+          <div className="flex items-center gap-2 mb-2">
+            {activePreset.imageUrl && (
+              <span className="relative w-8 h-8 flex-shrink-0">
+                <Image
+                  src={activePreset.imageUrl}
+                  alt=""
+                  fill
+                  sizes="32px"
+                  className="object-contain rounded"
+                />
+              </span>
+            )}
+            {activePreset.element && (
+              <span className="relative w-5 h-5 flex-shrink-0">
+                <Image
+                  src={`/images/ui/elem/${activePreset.element.toLowerCase()}.webp`}
+                  alt={activePreset.element}
+                  fill
+                  sizes="20px"
+                  className="object-contain"
+                />
+              </span>
+            )}
+            <span className="text-gray-300">
+              {activePreset.bossName
+                ? (activePreset.bossName[lang as keyof typeof activePreset.bossName] || activePreset.bossName.en)
+                : activePreset.name}
+            </span>
+          </div>
+        )}
+        {!activePreset && (
+          <p className="text-gray-500 text-sm">{t('teamPlanner.rulesPlaceholder')}</p>
+        )}
+        <RuleStatusDisplay ruleStatuses={ruleStatuses} />
       </section>
 
       {/* Character Selection Modal */}
@@ -563,6 +623,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
           .filter(slot => slot.characterId !== null && slot.position !== selectedPosition)
           .map(slot => slot.characterId as string)
         }
+        relevanceMap={relevanceMap}
       />
     </div>
   )

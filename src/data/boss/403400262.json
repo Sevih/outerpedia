@@ -141,5 +141,10 @@
   },
   "icons": "4034002",
   "BuffImmune": "",
-  "StatBuffImmune": "BT_FREEZE,BT_ACTION_GAUGE,BT_SEALED,BT_DOT_CURSE,BT_DOT_BLEED,BT_DOT_POISON,BT_DOT_LIGHTNING"
+  "StatBuffImmune": "BT_FREEZE,BT_ACTION_GAUGE,BT_SEALED,BT_DOT_CURSE,BT_DOT_BLEED,BT_DOT_POISON,BT_DOT_LIGHTNING",
+  "presetRules": [
+    { "type": "bonus_fire" },
+    { "type": "require_crit_damage_buff" },
+    { "type": "require_defense_break" }
+  ]
 }

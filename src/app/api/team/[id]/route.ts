@@ -7,6 +7,7 @@ interface TeamRow extends RowDataPacket {
   chain_order: string
   notes: string
   title: string
+  boss_preset_id: string
   created_at: Date
 }
 
@@ -23,7 +24,7 @@ export async function GET(
 
     // Query team from MySQL
     const [rows] = await pool.execute<TeamRow[]>(
-      'SELECT team, chain_order, notes, title, created_at FROM teams WHERE id = ?',
+      'SELECT team, chain_order, notes, title, boss_preset_id, created_at FROM teams WHERE id = ?',
       [id]
     )
 
@@ -38,6 +39,7 @@ export async function GET(
       chainOrder: teamData.chain_order,
       notes: teamData.notes,
       title: teamData.title || '',
+      bossPresetId: teamData.boss_preset_id || '',
       createdAt: teamData.created_at
     }, { status: 200 })
   } catch (error) {
