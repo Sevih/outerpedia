@@ -2093,11 +2093,11 @@
     "description_zh": "蕴含同伴之力的碎片。收集250个可解锁同伴，150个可进行超越。",
     "icon": "CM_Piece_Frame"
   },
-    {
-  "name": "Sigma Piece",
-  "name_jp": "シグマのピース",
-  "name_kr": "시그마의 조각",
-  "name_zh": "西格玛碎片",
+  {
+    "name": "Sigma Piece",
+    "name_jp": "シグマのピース",
+    "name_kr": "시그마의 조각",
+    "name_zh": "西格玛碎片",
     "rarity": "legendary",
     "description": "A piece that contains the power of a unit. Collect 250 to unlock the unit or 150 to transcend them.",
     "description_jp": "仲間の力が込められたピース。250個集めると仲間を解放、150個で超越できます。",
@@ -2212,5 +2212,17 @@
     "description_kr": "정밀 제작의 제작 횟수를 1회 증가시킵니다.",
     "description_zh": "精密制作次数增加1次。",
     "icon": "TI_Precision_Chip"
+  },
+  {
+    "name": "New Year's Revelry Ame",
+    "name_jp": "新年の挨拶 あめ",
+    "name_kr": "신년 맞이 아메",
+    "name_zh": "迎新年亚美",
+    "rarity": "epic",
+    "description": "This is a costume that can be worn by Ame.",
+    "description_jp": "【あめ】のスキンです。\\nスキンは【仲間】→【スキン】で装備でき\\n【スキン】ボタンは仲間のスキンがある場合のみ表示されます。",
+    "description_kr": "[아메]가 착용할 수 있는 코스튬입니다.",
+    "description_zh": "【亚美】可穿戴的皮肤。",
+    "icon": "TI_Costume_Clothes_2000065_03"
   }
 ]

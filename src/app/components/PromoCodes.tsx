@@ -26,7 +26,7 @@ export default function PromoCodes() {
       const start = new Date(c.start)
       const end = c.end === '???' ? null : new Date(c.end)
       return start <= today && (end === null || today <= end)
-    })
+    }).sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime())
     setValidCodes(
       filtered.map(code => ({
         ...code,

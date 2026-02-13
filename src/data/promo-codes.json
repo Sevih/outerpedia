@@ -457,5 +457,14 @@
     },
     "start": "2026-02-10",
     "end": "2026-03-10"
+  },
+  {
+    "code": "HAPPYNEW2026",
+    "description": {
+       "Free Ether": "1500",
+       "New Year's Revelry Ame": "1"
+    },
+    "start": "2026-02-13",
+    "end": "2026-04-31"
   }
 ] 
