@@ -1,6 +1,30 @@
 {
   "en": [
     {
+      "slug": "live-en-6502",
+      "title": "[Notice] 2/13(Fri) Sequential Rolling Patch",
+      "date": "2026/02/13 4:00:46",
+      "category": "notice",
+      "excerpt": ". We will carry out a patch for fixing issues in the game. Please note that players may experience some server instability during this time, but players can continue to play. We kindly ask for your un...",
+      "coverImage": "/images/news/live/en/6502-f83d616e.webp",
+      "uid": "6502",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/02/13/260213_data_patch_en/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
+      "slug": "live-en-6492",
+      "title": "[Notice] Apple App Store New Package Purchases Available",
+      "date": "2026/02/12 1:13:06",
+      "category": "notice",
+      "excerpt": "Dear Master, We’re pleased to inform you that the review process for the new package products on the Apple App Store (iOS) has been completed, and the new packages are now available for purchase as no...",
+      "coverImage": "/images/news/live/en/6492-cbbabcc5.webp",
+      "uid": "6492",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/02/12/notice-apple-app-store-new-package-purchases-available/",
+      "views": 0,
+      "lang": "en"
+    },
+    {
       "slug": "live-en-6474",
       "title": "[Notice] Damage Increase/Reduction Stat Mechanics and Upcoming Improvements",
       "date": "2026/02/11 12:00:00",
@@ -13303,6 +13327,30 @@
   ],
   "jp": [
     {
+      "slug": "live-jp-6504",
+      "title": "【お知らせ】データ更新作業のお知らせ(2/13)",
+      "date": "2026/02/13 4:00:14",
+      "category": "notice",
+      "excerpt": "いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。 『アウタープレーン』運営チームです。 2/13(金)、データ更新作業を実施いたします。 一時的に接続が不安定になる場合がございます。 より快適なサービス提供のための対応となりますので、 マスター様のご理解とご協力をお願いいたします。 詳細内容は下記をご確認ください。 ◈データ更新実施時間 : 2/13(金) 14:00 ~...",
+      "coverImage": "/images/news/live/jp/6504-a430a619.webp",
+      "uid": "6504",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/02/13/260213_data_patch_jp/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-6495",
+      "title": "【お知らせ】iOS(App Store)における新規商品の販売開始について",
+      "date": "2026/02/12 1:16:34",
+      "category": "notice",
+      "excerpt": "こんにちは。『アウタープレーン』運営チームです。 iOS(App Store)における新規商品の審査が完了いたしました。 これにより、現在は対象の新規パッケージ商品を正常にご購入いただけます。 今後もより安定したサービスを提供できるよう、尽力してまいります。 今後とも『アウタープレーン』をよろしくお願いいたします。 『アウタープレーン』運営チーム",
+      "coverImage": "/images/news/live/jp/6495-5c0a28e0.webp",
+      "uid": "6495",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/02/12/%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91iosapp-store%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e6%96%b0%e8%a6%8f%e5%95%86%e5%93%81%e3%81%ae%e8%b2%a9%e5%a3%b2%e9%96%8b%e5%a7%8b%e3%81%ab/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
       "slug": "live-jp-6477",
       "title": "【お知らせ】「与ダメUP」および「被ダメDOWN」ステータスの適用仕様および改善予定について",
       "date": "2026/02/11 12:00:48",
@@ -13323,6 +13371,18 @@
       "coverImage": "/images/news/live/jp/6477-5c0a28e0.webp",
       "uid": "6462",
       "url": "https://annoucements.outerplane.vagames.co.kr/2026/02/10/notice-compensation-for-misinformation-regarding-survey-points_jp/",
+      "views": 0,
+      "lang": "jp"
+    },
+    {
+      "slug": "live-jp-6453",
+      "title": "【ログイン報酬】 (02/10 – 02/24)",
+      "date": "2026/02/10 6:30:22",
+      "category": "notice",
+      "excerpt": "マスターの皆様、こんにちは！ GM あめです。 毎日決まった時間にログインするだけで、特別なプレゼントがもらえるチャンス！ 忘れずにログインして、豪華報酬をぜひお受け取りください🎉 ■開催期間 📅2026/02/10（火) ～ 2026/02/24（月) ■参加方法 イベント期間中、指定された時間帯にログインするだけで報酬が自動で配布されます！ ■イベント報酬 日時 曜日 受取期限 報酬 2/...",
+      "coverImage": "/images/news/live/jp/6453-9492cfe2.webp",
+      "uid": "6453",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/02/10/push_jp/",
       "views": 0,
       "lang": "jp"
     },
@@ -26580,6 +26640,30 @@
     }
   ],
   "kr": [
+    {
+      "slug": "live-kr-6500",
+      "title": "[공지] 2/13(금) 무점검 패치 진행 안내",
+      "date": "2026/02/13 4:00:38",
+      "category": "notice",
+      "excerpt": "안녕하세요. GM 아메입니다. 게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다. 패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다. 자세한 내용은 아래에서 확인해 주시기 바랍니다. ◈ 패치 진행 일정 - 2/13(금) 14:00 ~ 14:10(KST) ※ 위 시간 내 순차적으로 적용됩니다. ◈ 내용...",
+      "coverImage": "/images/news/live/kr/6500-d2c9035c.webp",
+      "uid": "6500",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/02/13/260213_data_patch_kr/",
+      "views": 0,
+      "lang": "kr"
+    },
+    {
+      "slug": "live-kr-6497",
+      "title": "[공지] 애플 앱스토어 신규 패키지 상품 구매 가능 안내",
+      "date": "2026/02/12 1:16:58",
+      "category": "notice",
+      "excerpt": "안녕하세요, 오너 여러분. 아우터플레인 운영팀입니다. 애플 앱스토어(iOS) 신규 패키지 상품에 대한 검수가 완료되어 현재 신규 패키지 상품을 정상적으로 구매하실 수 있습니다. 앞으로 더욱 안정적인 서비스 제공을 위해 노력하겠습니다. 감사합니다. 아우터플레인 운영팀 드림",
+      "coverImage": "/images/news/live/kr/6497-6ff3fe55.webp",
+      "uid": "6497",
+      "url": "https://annoucements.outerplane.vagames.co.kr/2026/02/12/%ea%b3%b5%ec%a7%80-%ec%95%a0%ed%94%8c-%ec%95%b1%ec%8a%a4%ed%86%a0%ec%96%b4-%ec%8b%a0%ea%b7%9c-%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%83%81%ed%92%88-%ea%b5%ac%eb%a7%a4-%ea%b0%80%eb%8a%a5-%ec%95%88%eb%82%b4/",
+      "views": 0,
+      "lang": "kr"
+    },
     {
       "slug": "live-kr-6479",
       "title": "[안내] 피해 증가/감소 스탯 적용 메커니즘 및 개선 예정 사항 안내",
