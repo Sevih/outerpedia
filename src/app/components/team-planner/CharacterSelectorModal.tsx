@@ -367,7 +367,7 @@ export default function CharacterSelectorModal({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
           <h2 className="text-lg font-semibold text-white">
-            Position {selectedPosition}
+            {t('teamPlanner.modal.position')} {selectedPosition}
           </h2>
           <button
             onClick={onClose}
@@ -383,7 +383,7 @@ export default function CharacterSelectorModal({
         <div className="p-4 border-b border-gray-700">
           <input
             type="text"
-            placeholder="Search by name..."
+            placeholder={t('teamPlanner.modal.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full px-4 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500"

@@ -48,6 +48,43 @@ export function calculateCPPerTurn(elementCount: number): number {
 }
 
 /**
+ * Calcule le CP par tour d'un personnage en fonction de son équipe
+ * @param team - L'équipe complète
+ * @param characterId - ID du personnage
+ * @returns CP par tour (0 si pas de personnage, 4/6/7/8 sinon)
+ */
+export function getCharacterCPPerTurn(team: TeamSlot[], characterId: string | null): number {
+  if (!characterId) return 0
+
+  const character = characters.find(c => c.ID === characterId)
+  if (!character?.Element) return 4
+
+  const sameElementCount = team.filter(t => {
+    if (!t.characterId) return false
+    const char = characters.find(c => c.ID === t.characterId)
+    return char?.Element === character.Element
+  }).length
+
+  return calculateCPPerTurn(sameElementCount)
+}
+
+/**
+ * Calcule la moyenne des CP par tour de l'équipe
+ * @param team - L'équipe complète
+ * @returns Moyenne des CP par tour (0 si aucun personnage)
+ */
+export function getAverageCPPerTurn(team: TeamSlot[]): number {
+  const activeSlots = team.filter(t => t.characterId !== null)
+  if (activeSlots.length === 0) return 0
+
+  const totalCP = activeSlots.reduce((sum, slot) => {
+    return sum + getCharacterCPPerTurn(team, slot.characterId)
+  }, 0)
+
+  return totalCP / activeSlots.length
+}
+
+/**
  * Encode l'état de l'équipe dans une chaîne URL-safe
  * Utilise toujours l'API shortener pour générer un ID court
  * Format: s:shortId

@@ -221,12 +221,12 @@ export const RULE_METADATA: Record<RuleType, RuleMetadata> = {
   },
 
   // ===== CLASS RESTRICTIONS =====
-  forbid_attacker: {
-    type: 'forbid_attacker',
+  forbid_striker: {
+    type: 'forbid_striker',
     category: 'class_restrictions',
-    label: 'No Attacker',
-    description: 'Attacker class characters are forbidden',
-    icon: 'class/attacker',
+    label: 'No Striker',
+    description: 'Striker class characters are forbidden',
+    icon: 'class/striker',
   },
   forbid_defender: {
     type: 'forbid_defender',
@@ -242,12 +242,19 @@ export const RULE_METADATA: Record<RuleType, RuleMetadata> = {
     description: 'Ranger class characters are forbidden',
     icon: 'class/ranger',
   },
-  forbid_supporter: {
-    type: 'forbid_supporter',
+  forbid_healer: {
+    type: 'forbid_healer',
     category: 'class_restrictions',
-    label: 'No Supporter',
-    description: 'Supporter class characters are forbidden',
-    icon: 'class/supporter',
+    label: 'No Healer',
+    description: 'Healer class characters are forbidden',
+    icon: 'class/healer',
+  },
+  forbid_mage: {
+    type: 'forbid_mage',
+    category: 'class_restrictions',
+    label: 'No Mage',
+    description: 'Mage class characters are forbidden',
+    icon: 'class/mage',
   },
 
   // ===== TEAM CONSTRAINTS =====
@@ -335,10 +342,11 @@ export const RULES_BY_CATEGORY = {
     'bonus_dark',
   ] as RuleType[],
   class_restrictions: [
-    'forbid_attacker',
+    'forbid_striker',
     'forbid_defender',
     'forbid_ranger',
-    'forbid_supporter',
+    'forbid_healer',
+    'forbid_mage',
   ] as RuleType[],
   team_constraints: [
     'max_same_element',

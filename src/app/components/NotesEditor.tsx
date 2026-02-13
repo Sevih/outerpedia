@@ -160,7 +160,7 @@ export default function NotesEditor({
   }
 
   return (
-    <section className="mt-8 pt-6 border-t border-gray-700">
+    <div>
       <h3 className="text-lg sm:text-xl font-bold mb-4 text-white">{t('teamPlanner.notes.title')}</h3>
 
       {/* Formatting Toolbar */}
@@ -286,6 +286,6 @@ export default function NotesEditor({
       <p className="mt-2 text-xs text-gray-500">
         {t('teamPlanner.notes.help')}
       </p>
-    </section>
+    </div>
   )
 }

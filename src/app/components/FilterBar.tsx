@@ -115,15 +115,15 @@ export default function FilterBar({
       {/* Header - Always visible */}
       <div className="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-700/30 transition-colors" onClick={onToggleFiltersExpanded}>
         <div className="flex items-center gap-2">
-          <h3 className="text-sm font-semibold text-gray-300">Filters</h3>
+          <h3 className="text-sm font-semibold text-gray-300">{t('teamPlanner.filters.title')}</h3>
           {hasActiveFilters && (
             <span className="px-1.5 py-0.5 text-[10px] bg-cyan-600 text-white rounded-full">
-              Active
+              {t('teamPlanner.filters.active')}
             </span>
           )}
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-400">{filteredCount} found</span>
+          <span className="text-xs text-gray-400">{filteredCount} {t('teamPlanner.filters.found')}</span>
           <svg
             className={`w-4 h-4 text-gray-400 transition-transform ${isFiltersExpanded ? 'rotate-180' : ''}`}
             fill="none"
@@ -227,7 +227,7 @@ export default function FilterBar({
           <div className="mt-2 pt-2 border-t border-gray-700 space-y-1.5">
             {/* Buff Logic - Always visible */}
             <div className="flex items-center justify-center gap-2">
-              <label className="text-[10px] uppercase tracking-wide text-slate-300 whitespace-nowrap">Buff Logic</label>
+              <label className="text-[10px] uppercase tracking-wide text-slate-300 whitespace-nowrap">{t('teamPlanner.filters.buffLogic')}</label>
 
               {/* Toggle Switch */}
               <button
@@ -255,7 +255,7 @@ export default function FilterBar({
 
             {/* Source Filter */}
             <div className="flex items-center justify-center gap-2">
-              <label className="text-[10px] uppercase tracking-wide text-slate-300 whitespace-nowrap">Source</label>
+              <label className="text-[10px] uppercase tracking-wide text-slate-300 whitespace-nowrap">{t('teamPlanner.filters.source')}</label>
               <div className="flex gap-1 flex-wrap justify-center">
                 {SKILL_SOURCES.map(source => (
                   <FilterPill
@@ -271,7 +271,7 @@ export default function FilterBar({
             </div>
 
             <div className="flex items-center justify-center gap-2">
-              <label className="text-[10px] uppercase tracking-wide text-slate-300 whitespace-nowrap">Effects</label>
+              <label className="text-[10px] uppercase tracking-wide text-slate-300 whitespace-nowrap">{t('teamPlanner.filters.effects')}</label>
 
               {/* Custom dropdown with icons */}
               <div className="relative flex-1 max-w-xs effect-dropdown-container">
@@ -280,7 +280,7 @@ export default function FilterBar({
                   onClick={onToggleEffectDropdown}
                   className="w-full px-2 py-1 text-[11px] bg-gray-900 border border-gray-600 rounded text-white text-left focus:outline-none focus:border-cyan-500 flex items-center justify-between"
                 >
-                  <span>+ Add effect...</span>
+                  <span>{t('teamPlanner.filters.addEffect')}</span>
                   <svg className={`w-3 h-3 transition-transform ${isEffectDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -301,7 +301,7 @@ export default function FilterBar({
                   onClick={onClearFilters}
                   className="px-2 py-1 text-[11px] text-cyan-400 hover:text-cyan-300 hover:bg-cyan-900/20 rounded transition-colors whitespace-nowrap"
                 >
-                  Clear All
+                  {t('teamPlanner.filters.clearAll')}
                 </button>
               )}
             </div>

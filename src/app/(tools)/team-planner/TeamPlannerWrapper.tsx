@@ -15,7 +15,8 @@ import { useI18n } from '@/lib/contexts/I18nContext'
 import type { TeamSlot, TeamPlannerWrapperProps } from '@/types/team-planner'
 import {
   isValidChainPosition,
-  calculateCPPerTurn,
+  getCharacterCPPerTurn,
+  getAverageCPPerTurn,
   encodeTeamToURL,
   decodeTeamFromURL
 } from '@/utils/team-planner'
@@ -39,7 +40,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     { position: 4, characterId: null, characterName: null },
   ])
 
-  // Ordre de la skill chain (indices des positions, pas les positions elles-mêmes)
+  // Ordre de la skill chain (positions 1-4, correspondant à TeamSlot.position)
   const [chainOrder, setChainOrder] = useState<number[]>([1, 2, 3, 4])
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -58,15 +59,19 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     // Parser les tags custom et les convertir directement en HTML
     let processedNotes = notes
 
-    // Convertir <size=X>text</size> en HTML spans
-    processedNotes = processedNotes.replace(/<size=(\d+)>([^<]*)<\/size>/g, (_match, size, text) => {
-      // On échappe les caractères markdown pour éviter qu'ils soient interprétés
-      return `<span style="font-size: ${size}px">${text}</span>`
+    // Process inner tags first to support nesting (e.g. <size=24><color=#fff>text</color></size>)
+
+    // Convertir <color=X>text</color> en HTML spans (validate color to prevent CSS injection)
+    processedNotes = processedNotes.replace(/<color=([^>]+)>([\s\S]*?)<\/color>/g, (_match, color, text) => {
+      const isValidColor = /^#[0-9a-fA-F]{3,8}$/.test(color)
+        || /^[a-zA-Z]+$/.test(color)
+        || /^(rgb|hsl)a?\([\d\s%,.\/]+\)$/.test(color)
+      return isValidColor ? `<span style="color: ${color}">${text}</span>` : text
     })
 
-    // Convertir <color=X>text</color> en HTML spans
-    processedNotes = processedNotes.replace(/<color=([^>]+)>([^<]*)<\/color>/g, (_match, color, text) => {
-      return `<span style="color: ${color}">${text}</span>`
+    // Convertir <size=X>text</size> en HTML spans
+    processedNotes = processedNotes.replace(/<size=(\d+)>([\s\S]*?)<\/size>/g, (_match, size, text) => {
+      return `<span style="font-size: ${size}px">${text}</span>`
     })
 
     // Convertir le Markdown basique - marked va préserver les tags HTML
@@ -153,9 +158,6 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     const baseUrl = window.location.origin + '/team-planner/view'
     const shareUrl = `${baseUrl}?team=${encoded}`
 
-    console.log('Sharing team with title:', title, 'notes:', notes)
-    console.log('Encoded URL:', shareUrl)
-
     try {
       await navigator.clipboard.writeText(shareUrl)
       setShareSuccess(true)
@@ -192,34 +194,6 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
     }
   }
 
-  // Calculer le CP par tour pour un personnage donné
-  const getCharacterCPPerTurn = (characterId: string | null): number => {
-    if (!characterId) return 0
-
-    const character = characters.find(c => c.ID === characterId)
-    if (!character?.Element) return 4
-
-    const sameElementCount = team.filter(t => {
-      if (!t.characterId) return false
-      const char = characters.find(c => c.ID === t.characterId)
-      return char?.Element === character.Element
-    }).length
-
-    return calculateCPPerTurn(sameElementCount)
-  }
-
-  // Calculer la moyenne des CP par tour de l'équipe
-  const getAverageCPPerTurn = (): number => {
-    const activeSlots = team.filter(t => t.characterId !== null)
-    if (activeSlots.length === 0) return 0
-
-    const totalCP = activeSlots.reduce((sum, slot) => {
-      return sum + getCharacterCPPerTurn(slot.characterId)
-    }, 0)
-
-    return totalCP / activeSlots.length
-  }
-
   const renderCharacterSlot = (position: number) => {
     const slot = team.find(s => s.position === position)
     if (!slot) return null
@@ -230,7 +204,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
       : null
 
     // Calculer le CP par tour basé sur le nombre de personnages du même élément
-    const cpPerTurn = getCharacterCPPerTurn(slot.characterId)
+    const cpPerTurn = getCharacterCPPerTurn(team, slot.characterId)
 
     return (
       <div className={`relative flex-shrink-0 ${viewOnly ? '' : 'cursor-pointer group'}`}>
@@ -322,14 +296,14 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
       {!viewOnly && (
         <section className="bg-gray-800 rounded-lg shadow-md p-4 sm:p-6 border border-gray-700">
           <label htmlFor="team-title" className="block text-sm font-semibold text-gray-300 mb-2">
-            Team Name
+            {t('teamPlanner.teamName')}
           </label>
           <input
             id="team-title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="e.g., Skyward Tower F100, Fire Mono Team, etc."
+            placeholder={t('teamPlanner.teamNamePlaceholder')}
             maxLength={100}
             className="w-full px-4 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
           />
@@ -359,7 +333,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
-                  <span>Edit</span>
+                  <span>{t('teamPlanner.edit')}</span>
                 </Link>
               ) : (
                 <button
@@ -371,14 +345,14 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Copied!</span>
+                      <span>{t('teamPlanner.copied')}</span>
                     </>
                   ) : (
                     <>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                       </svg>
-                      <span>Share</span>
+                      <span>{t('teamPlanner.share')}</span>
                     </>
                   )}
                 </button>
@@ -396,14 +370,14 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
                     <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
-                    <span className="hidden sm:inline">Generating...</span>
+                    <span className="hidden sm:inline">{t('teamPlanner.generating')}</span>
                   </>
                 ) : imageCopied ? (
                   <>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span className="hidden sm:inline">Copied!</span>
+                    <span className="hidden sm:inline">{t('teamPlanner.copied')}</span>
                     <span className="sm:hidden">✓</span>
                   </>
                 ) : (
@@ -411,8 +385,8 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <span className="hidden sm:inline">Copy Image</span>
-                    <span className="sm:hidden">Image</span>
+                    <span className="hidden sm:inline">{t('teamPlanner.copyImage')}</span>
+                    <span className="sm:hidden">{t('teamPlanner.image')}</span>
                   </>
                 )}
               </button>
@@ -446,7 +420,7 @@ export default function TeamPlannerWrapper({ viewOnly = false }: TeamPlannerWrap
             {/* Center decoration with Average CP */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gray-900/30 border border-gray-700/50 flex flex-col items-center justify-center gap-1">
               <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">{t('teamPlanner.averageCPTurn')}</span>
-              <span className="text-xl sm:text-2xl font-bold text-cyan-400">{getAverageCPPerTurn().toFixed(1)}</span>
+              <span className="text-xl sm:text-2xl font-bold text-cyan-400">{getAverageCPPerTurn(team).toFixed(1)}</span>
             </div>
           </div>
 

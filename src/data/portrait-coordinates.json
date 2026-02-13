@@ -576,6 +576,12 @@
       "name": "Monad Iota",
       "offsetX": 30,
       "offsetY": 60
+    },
+    
+    "2000113": {
+      "name": "Primine",
+      "offsetX": 30,
+      "offsetY": 60
     }
   }
 }

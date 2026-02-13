@@ -4,6 +4,7 @@ import type { TeamSlot } from '@/types/team-planner'
 import type { CharacterLite } from '@/types/types'
 import type { TenantKey } from '@/tenants/config'
 import { getT } from '@/i18n'
+import { getCharacterCPPerTurn, getAverageCPPerTurn } from '@/utils/team-planner'
 import _allCharacters from '@/data/_allCharacters.json'
 import portraitCoordinates from '@/data/portrait-coordinates.json'
 
@@ -20,44 +21,6 @@ function loadImage(src: string): Promise<HTMLImageElement> {
     img.onerror = reject
     img.src = src
   })
-}
-
-/**
- * Calcule le CP par tour pour un personnage en fonction du nombre d'alliés du même élément
- */
-function calculateCPPerTurn(team: TeamSlot[], characterId: string | null): number {
-  if (!characterId) return 0
-
-  const character = characters.find(c => c.ID === characterId)
-  if (!character?.Element) return 4
-
-  const sameElementCount = team.filter(t => {
-    if (!t.characterId) return false
-    const char = characters.find(c => c.ID === t.characterId)
-    return char?.Element === character.Element
-  }).length
-
-  switch (sameElementCount) {
-    case 1: return 4
-    case 2: return 6
-    case 3: return 7
-    case 4: return 8
-    default: return 4
-  }
-}
-
-/**
- * Calcule la moyenne des CP par tour de l'équipe
- */
-function getAverageCPPerTurn(team: TeamSlot[]): number {
-  const activeSlots = team.filter(t => t.characterId !== null)
-  if (activeSlots.length === 0) return 0
-
-  const totalCP = activeSlots.reduce((sum, slot) => {
-    return sum + calculateCPPerTurn(team, slot.characterId)
-  }, 0)
-
-  return totalCP / activeSlots.length
 }
 
 /**
@@ -214,7 +177,7 @@ async function drawCrossCharacter(
     }
 
     // CP per turn (sous le portrait)
-    const cpPerTurn = calculateCPPerTurn(team, slot.characterId)
+    const cpPerTurn = getCharacterCPPerTurn(team, slot.characterId)
     const t = getT(lang)
     ctx.font = 'bold 14px Arial'
     ctx.textAlign = 'center'

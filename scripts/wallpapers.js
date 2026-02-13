@@ -23,7 +23,7 @@ const OUTPUT_DIR = path.join(PROJECT_ROOT, 'public', 'images', 'download');
 const JSON_OUTPUT = path.join(PROJECT_ROOT, 'src', 'data', 'wallpapers.json');
 
 // Minimum width to include
-const MIN_WIDTH = 500;
+const MIN_WIDTH = 250;
 
 // Categories with their matching rules (order matters - first match wins)
 const CATEGORIES = [
@@ -82,6 +82,7 @@ const EXCLUDE_PATTERNS = [
   /^T_Core/,
   /^T_Light/,
   /^T_Nebula/,
+  /^T_Banner_/,
 ];
 
 // Path patterns to exclude

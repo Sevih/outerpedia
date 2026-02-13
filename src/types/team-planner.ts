@@ -83,8 +83,8 @@ export interface EffectData {
 }
 
 export interface GroupedEffects {
-  buffs: Record<string, EffectData[]> | Map<string, EffectData[]>
-  debuffs: Record<string, EffectData[]> | Map<string, EffectData[]>
+  buffs: Record<string, EffectData[]>
+  debuffs: Record<string, EffectData[]>
 }
 
 // ============================================================================
@@ -174,10 +174,11 @@ export type RuleType =
   | 'bonus_dark'
 
   // Restrictions de classe
-  | 'forbid_attacker'
+  | 'forbid_striker'
   | 'forbid_defender'
   | 'forbid_ranger'
-  | 'forbid_supporter'
+  | 'forbid_healer'
+  | 'forbid_mage'
 
   // Contraintes d'équipe
   | 'max_same_element'

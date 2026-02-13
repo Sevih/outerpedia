@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import TeamPlannerWrapper from '../TeamPlannerWrapper'
+import ClientWrapper from '../ClientWrapper'
 
 import { createPageMetadata } from '@/lib/seo'
 import { getToolOgImage } from '@/lib/getToolMeta'
@@ -84,7 +84,7 @@ export default async function Page() {
         ]}
       />
 
-      <TeamPlannerWrapper viewOnly={true} />
+      <ClientWrapper viewOnly={true} />
     </main>
   )
 }

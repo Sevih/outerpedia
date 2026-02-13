@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       [id, team, chainOrder, notes || '', title || '']
     )
 
-    return NextResponse.json({ id }, { status: 200 })
+    return NextResponse.json({ id }, { status: 201 })
   } catch (error) {
     console.error('Error saving team:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
