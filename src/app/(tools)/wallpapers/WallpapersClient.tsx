@@ -81,6 +81,8 @@ export default function WallpapersClient({ data }: Props) {
     [images]
   )
 
+  const isPortrait = selectedCategory === 'HeroFullArt' || selectedCategory === 'Cutin'
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">{t('wallpapers.title')}</h1>
@@ -120,19 +122,26 @@ export default function WallpapersClient({ data }: Props) {
       </div>
 
       {/* Gallery grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+      <div className={
+        isPortrait
+          ? 'grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4'
+          : 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4'
+      }>
         {images.map((img, index) => (
           <button
             key={img.filename}
-            className="relative aspect-video bg-neutral-900 rounded-lg overflow-hidden border border-neutral-700 hover:border-sky-500 transition-all hover:scale-[1.02] group"
+            className={`relative ${isPortrait ? 'aspect-[3/4]' : 'aspect-video'} bg-neutral-900 rounded-lg overflow-hidden border border-neutral-700 hover:border-sky-500 transition-all hover:scale-[1.02] group`}
             onClick={() => setLightboxIndex(index)}
           >
             <Image
               src={img.src}
               alt={img.filename}
               fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-              className="object-cover"
+              sizes={isPortrait
+                ? '(max-width: 640px) 33vw, (max-width: 1024px) 25vw, 16vw'
+                : '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw'
+              }
+              className={isPortrait ? 'object-contain' : 'object-cover'}
               loading="lazy"
             />
             {/* Resolution badge */}
