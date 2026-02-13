@@ -51,8 +51,13 @@ export default async function ToolsPage() {
           <Link
             key={tool.href}
             href={tool.href}
-            className="block rounded-2xl border p-6 hover:shadow-lg transition bg-card hover:bg-muted/20"
+            className={`relative block rounded-2xl border p-6 hover:shadow-lg transition bg-card hover:bg-muted/20 ${tool.hidden ? 'opacity-50 border-dashed' : ''}`}
           >
+            {tool.hidden && (
+              <span className="absolute top-2 right-2 bg-yellow-600 text-white text-xs font-bold px-2 py-0.5 rounded">
+                HIDDEN
+              </span>
+            )}
             <div className="flex items-center gap-4">
               <div className="shrink-0">
                 <Image

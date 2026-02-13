@@ -1129,9 +1129,11 @@
         "label": "Golden Curse",
         "label_jp": "黄金の呪い",
         "label_kr": "황금의 저주",
-        "description": "Restricts the target's actions and increases damage taken by 30%.\\nRemoved when the caster dies.\\nOnly the debuff with the longest duration among Frozen, Petrified, Stunned, and Golden Curse can be inflicted at the same time.\\nWhen the effect duration ends or is removed, inflicts Reduced Attack on the target for 1 turn.\\n(Reduced Attack effects are irremovable)",
-        "description_jp": "対象の行動を制限し、受けるダメージを30%増加させる。\\nスキル使用者が死亡すると解除される。\\n凍結、石化、スタン、黄金の呪いのうち、\\n最も持続ターンが長い効果1つのみ適用される。\\n持続ターン終了または解除時、\\n対象の攻撃力を1ターンの間減少させる。\\n(攻撃力減少効果は解除不可)",
-        "description_kr": "대상의 행동을 제한하고 받는 피해를 30% 증가시킵니다.\\n시전자가 사망 시 해제됩니다.\\n빙결, 석화, 스턴, 황금의 저주 중 가장 지속 시간이 긴 효과 1종만 적용됩니다.\\n지속 시간 종료 혹은 해제 시 대상의 공격력을 1턴 동안 감소시킵니다.\\n(공격력 감소 효과는 해제 불가)",
+        "label_zh": "黄金诅咒",
+        "description": "Restricts the target's actions and increases damage taken by 30%.\\nRemoved when the caster dies.\\nOnly 1 effect with the longest duration among Frozen, Petrified, Stunned, and Golden Curse is applied.\\nWhen the duration ends or when removed, decreases the target's Attack for 1 turn.\\nIf the target is Light attribute, additionally decreases Critical Damage for 2 turns.\\n(Attack Decrease and Critical Damage Decrease effects are irremovable)",
+        "description_jp": "対象の行動を制限し、敵から受けるダメージを30%UPさせる。\\nスキル使用者が倒れると解除される。\\n凍結、石化、スタン、黄金の呪いのうち、最も持続ターンが長い効果1個のみ適用される。\\n持続ターン終了または解除時、対象の攻撃力を1ターンの間DOWNさせる。\\n対象が光属性の場合、追加で会心ダメージを2ターンの間DOWNさせる。\\n(攻撃力DOWNおよび会心ダメージDOWN効果は解除不可)",
+        "description_kr": "대상의 행동을 제한하고 받는 피해를 30% 증가시킵니다.\\n시전자가 사망 시 해제됩니다.\\n빙결, 석화, 스턴, 황금의 저주 중 가장 지속 시간이 긴 효과 1종만 적용됩니다.\\n지속 시간 종료 혹은 해제 시 대상의 공격력을 1턴 동안 감소시킵니다.\\n대상이 명속성인 경우 추가로 치명 피해를 2턴 동안 감소시킵니다.\\n(공격력 감소 및 치명 피해 감소 효과는 해제 불가)",
+        "description_zh": "限制目标行动,并使受到的伤害提升30%。\\n施法者死亡时解除。\\n冰冻、石化、眩晕、黄金诅咒中,仅生效持续时间最长的1种效果。\\n持续时间结束或解除时,使目标的攻击力降低1回合。\\n若目标为光属性,额外使暴击伤害降低2回合。\\n(攻击力降低及暴击伤害降低效果无法解除)",
         "icon": "IG_Buff_Effect_Golden_Curse"
     }
 ]

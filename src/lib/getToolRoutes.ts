@@ -13,7 +13,16 @@ const TOOL_METADATA: Record<
 
 const TOOLS_ROOT = path.join(process.cwd(), "src/app/(tools)");
 
+export type ToolRoute = {
+  name: string;
+  description: string;
+  icon: string;
+  href: string;
+  hidden?: boolean;
+};
+
 export function getToolRoutes(t?: (key: string) => string) {
+  const isDev = process.env.NODE_ENV === "development";
   const entries = fs.readdirSync(TOOLS_ROOT, { withFileTypes: true });
 
   const routes = entries
@@ -27,7 +36,7 @@ export function getToolRoutes(t?: (key: string) => string) {
         icon: "CM_Guild_NoticeBoard.png",
         order: 999,
       };
-      if (metadata.hide) return null;
+      if (metadata.hide && !isDev) return null;
 
       // Use i18n if t function is provided, otherwise fallback to slug
       const name = t ? t(`tool.${slug}.name`) : slug.charAt(0).toUpperCase() + slug.slice(1);
@@ -35,12 +44,15 @@ export function getToolRoutes(t?: (key: string) => string) {
 
       let href = `/${slug}`;
       if (slug === "event") href = `/${slug}/history`;
-      // Retourne un tuple [order, routeSansOrder]
-      return [metadata.order, { name, description, icon: metadata.icon, href }] as const;
+
+      const route: ToolRoute = { name, description, icon: metadata.icon, href };
+      if (metadata.hide) route.hidden = true;
+
+      return [metadata.order, route] as const;
     })
-    .filter((x): x is readonly [number, { name: string; description: string; icon: string; href: string }] => x !== null)
+    .filter((x): x is readonly [number, ToolRoute] => x !== null)
     .sort((a, b) => a[0] - b[0])
-    .map(([, route]) => route); // <- plus de 'order' ici
+    .map(([, route]) => route);
 
   return routes;
 }
