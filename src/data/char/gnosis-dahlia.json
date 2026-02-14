@@ -146,7 +146,9 @@
           "effect_kr": "강화 공격 확정 발생\\n관통력 30% 증가",
           "effect_zh": "强化攻击必定触发\\n穿透力提升30%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -154,7 +156,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Gains an extra turn",
@@ -162,9 +166,13 @@
           "effect_kr": "추가 턴 발생",
           "effect_zh": "触发额外回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "9002",
@@ -231,7 +239,9 @@
       "buff": [
         "BT_RUN_FIRST_SKILL_ON_TURN_END_DEFENDER"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "9003",
@@ -312,7 +322,9 @@
       "buff": [
         "IG_Buff_2000090_Interruption"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "9004",
@@ -393,7 +405,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   },
   "limited": true

@@ -123,7 +123,9 @@
       "buff": [
         "BT_SHIELD_BASED_CASTER"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "3602",
@@ -201,7 +203,9 @@
         "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK",
         "BT_REMOVE_DEBUFF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "3603",
@@ -284,7 +288,9 @@
           "effect_kr": "하나도 안 아픈 주사 쿨타임 -1턴",
           "effect_zh": "完全不痛的注射冷却时间-1回合",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases target's Action Points by 75",
@@ -292,7 +298,9 @@
           "effect_kr": "대상 AP +75",
           "effect_zh": "目标AP+75",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Gains Immunity for 1 turn",
@@ -300,9 +308,13 @@
           "effect_kr": "1턴 동안 면역",
           "effect_zh": "1回合内免疫",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "3604",
@@ -381,7 +393,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_SHIELD_BASED_CASTER"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

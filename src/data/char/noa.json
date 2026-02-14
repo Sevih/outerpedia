@@ -141,7 +141,9 @@
           "effect_kr": "버스트 스킬의 치명 확률 +100%",
           "effect_zh": "爆发技能暴击率+100%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Reduces Noa Kaizer X Cooldown by 2 turns",
@@ -149,7 +151,9 @@
           "effect_kr": "노아 카이저X 쿨타임 -2턴",
           "effect_zh": "诺雅凯撒X冷却时间-2回合",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Resets Noa Kaizer X Cooldown",
@@ -157,9 +161,13 @@
           "effect_kr": "노아 카이저X 쿨타임 초기화",
           "effect_zh": "重置诺雅凯撒X冷却时间",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "2202",
@@ -231,7 +239,9 @@
       "buff": [
         "BT_EXTRA_ATTACK_ON_TURN_END"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "2203",
@@ -308,7 +318,9 @@
       "buff": [
         "BT_STAT|ST_CRITICAL_RATE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "2204",
@@ -387,7 +399,11 @@
         "BT_CP_CHARGE"
       ],
       "debuff": [],
-      "dual_buff": []
+      "dual_buff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

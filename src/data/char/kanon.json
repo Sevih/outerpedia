@@ -134,7 +134,9 @@
           "effect_kr": "자신 치명 확률 증가 +1턴",
           "effect_zh": "自身暴击率提升+1回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Recovers Health of the caster by 20%",
@@ -142,7 +144,9 @@
           "effect_kr": "자신의 체력 20% 회복",
           "effect_zh": "自身生命值恢复20%",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Increases Immortality duration by 1 turn",
@@ -150,9 +154,13 @@
           "effect_kr": "불사 효과 +1턴",
           "effect_zh": "不死效果+1回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "7102",
@@ -232,7 +240,9 @@
         "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER",
         "BT_SHIELD_BASED_CASTER"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "7103",
@@ -306,7 +316,9 @@
         "BT_STAT|ST_DEF",
         "BT_COOL2_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "7104",
@@ -384,7 +396,11 @@
       "buff": [
         "BT_STAT|ST_DEF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

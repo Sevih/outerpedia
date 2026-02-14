@@ -123,7 +123,9 @@
       "buff": [],
       "debuff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "302",
@@ -208,7 +210,9 @@
           "effect_kr": "빙결 확률 +30%",
           "effect_zh": "冰冻几率 +30%",
           "cost": 100,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases Frozen duration by 1 turn",
@@ -216,7 +220,9 @@
           "effect_kr": "빙결 지속 +1턴",
           "effect_zh": "冰冻持续时间+1回合",
           "cost": 150,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Increases damage",
@@ -224,9 +230,13 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 200,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "303",
@@ -299,7 +309,9 @@
       "buff": [],
       "debuff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "304",
@@ -378,7 +390,11 @@
         "BT_CP_CHARGE"
       ],
       "debuff": [],
-      "dual_buff": []
+      "dual_buff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

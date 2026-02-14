@@ -133,7 +133,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases the chance to reduce cooldown by 80%",
@@ -141,7 +143,9 @@
           "effect_kr": "쿨타임 감소 발동 확률 +80%",
           "effect_zh": "冷却时间减少触发几率+80%",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Gains an extra turn",
@@ -149,9 +153,13 @@
           "effect_kr": "추가 턴 발생",
           "effect_zh": "触发额外回合",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "6602",
@@ -225,7 +233,9 @@
         "BT_STAT|ST_ATK",
         "BT_ACTION_GAUGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "6603",
@@ -304,7 +314,9 @@
         "BT_STAT|ST_CRITICAL_DMG_RATE",
         "BT_STAT|ST_CRITICAL_RATE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "6604",
@@ -385,7 +397,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

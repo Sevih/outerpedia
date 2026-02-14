@@ -148,7 +148,9 @@
           "effect_kr": "속도 감소 발생 확률 +50%",
           "effect_zh": "速度降低触发几率+50%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Grants Irregular Infection to the enemy with the highest Speed for 1 turn (Ignores Immunity, Irremovable)",
@@ -156,7 +158,9 @@
           "effect_kr": "가장 빠른 적에게 이레귤러 감염증 +1턴 (면역 무시, 해제 불가)",
           "effect_zh": "对最快的敌人施加1回合的异型怪感染症(无视免疫、无法解除)",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases Skill Range (All)\\nGrants Barrier to all allies for 2 turns (Proportional to caster's Health)",
@@ -164,9 +168,13 @@
           "effect_kr": "<color=#FFBF00>강화 공격</color>\\n스킬 범위 확대(전체)\\n아군 전체 실드 +2턴 (자신 체력 비례)",
           "effect_zh": "<color=#FFBF00>强化攻击</color>\\n技能范围扩大(全体)\\n全体友军护盾+2回合(自身生命值比例)",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "10202",
@@ -240,10 +248,14 @@
       },
       "wgr": 1,
       "cd": "3",
-      "buff": ["BT_EXTRA_ATTACK_ON_TURN_END"],
+      "buff": [
+        "BT_EXTRA_ATTACK_ON_TURN_END"
+      ],
       "debuff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "10203",
@@ -330,7 +342,9 @@
         "IG_Buff_Effect_2000102_Interruption_D",
         "BT_REVERSE_HEAL_BASED_TARGET",
         "BT_EXTEND_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "10204",
@@ -411,7 +425,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_STAT|ST_SPEED"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   },
   "limited": true

@@ -131,7 +131,9 @@
       "buff": [],
       "debuff": [
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "6402",
@@ -219,7 +221,9 @@
           "effect_kr": "대상 치명 확률 감소 +1턴",
           "effect_zh": "目标暴击率降低+1回合",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "+1 turn Unbuffable on target",
@@ -227,7 +231,9 @@
           "effect_kr": "대상 강화 불가 +1턴",
           "effect_zh": "目标无法强化+1回合",
           "cost": 80,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Changes skill effect order\\n(Debuff duration increase applies last)",
@@ -235,9 +241,13 @@
           "effect_kr": "약화 지속 증가 순서 교체\\n(가장 마지막에 적용)",
           "effect_zh": "变更弱化持续时间增加的顺序\\n(将在最后生效)",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "6403",
@@ -317,7 +327,9 @@
       "debuff": [
         "BT_SEALED",
         "BT_STAT|ST_DEF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "6404",
@@ -398,7 +410,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

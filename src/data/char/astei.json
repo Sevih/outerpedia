@@ -129,7 +129,9 @@
       "buff": [
         "BT_REMOVE_DEBUFF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "5802",
@@ -208,7 +210,9 @@
           "effect_kr": "대상 AP +25",
           "effect_zh": "目标AP+25",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Include the caster in healing targets",
@@ -216,7 +220,9 @@
           "effect_kr": "체력 회복 대상에 자신 포함",
           "effect_zh": "生命值恢复对象包含自身",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "+2 turns Immunity for all allies\\nRemoves 1 debuff",
@@ -224,9 +230,13 @@
           "effect_kr": "아군 전체 면역 +2턴\\n약화 효과 1개 해제",
           "effect_zh": "全体友军免疫+2回合\\n解除1个弱化效果",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "5803",
@@ -296,7 +306,9 @@
       ],
       "debuff": [
         "BT_STAT|ST_CRITICAL_RATE"
-      ]
+      ],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "5804",
@@ -375,7 +387,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_DOT_CURSE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

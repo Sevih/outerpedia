@@ -120,7 +120,9 @@
       "wgr": 1,
       "cd": null,
       "buff": [],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "3102",
@@ -189,7 +191,9 @@
         "BT_STAT|ST_ATK",
         "BT_STAT|ST_SPEED"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "3103",
@@ -275,7 +279,9 @@
           "effect_kr": "1턴 동안 속도 증가",
           "effect_zh": "速度提升,持续1回合",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -283,7 +289,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Increases Speed Increase duration by 1 turn",
@@ -291,9 +299,13 @@
           "effect_kr": "속도 증가 지속 +1턴",
           "effect_zh": "速度提升持续回合+1",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "3104",
@@ -371,7 +383,11 @@
       "buff": [
         "BT_AP_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

@@ -131,7 +131,9 @@
       ],
       "debuff": [
         "BT_REVERSE_HEAL_BASED_TARGET"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "11002",
@@ -214,7 +216,9 @@
           "effect_kr": "WG 감소량 +1",
           "effect_zh": "WG降低量+1",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Ally Priority +10% (Excluding self)\\nAlly Attack +1 turn",
@@ -222,7 +226,9 @@
           "effect_kr": "아군 행동 게이지 +10% (자신 제외)\\n아군 공격력 +1턴",
           "effect_zh": "友军行动值+10%(自身除外)\\n友军攻击力+1回合",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Resets Cooldown of Sacred Paw\\n+10 Chain Points Recovery",
@@ -230,9 +236,13 @@
           "effect_kr": "묘래신장의 쿨타임 초기화\\nCP +10 회복",
           "effect_zh": "重置猫来神掌的冷却时间\\nCP恢复+10",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "11003",
@@ -321,7 +331,9 @@
       "debuff": [
         "BT_STAT|ST_DEF",
         "BT_AP_CHARGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "11004",
@@ -402,7 +414,11 @@
       ],
       "dual_debuff": [
         "BT_REVERSE_HEAL_BASED_TARGET"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

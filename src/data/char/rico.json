@@ -122,7 +122,9 @@
       "buff": [],
       "debuff": [
         "BT_COOL3_CHARGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "4602",
@@ -192,7 +194,9 @@
         "BT_HEAL_BASED_TARGET",
         "BT_STAT|ST_BUFF_CHANCE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "4603",
@@ -279,7 +283,9 @@
           "effect_kr": "공격 후 효과 적중 증가 +1턴",
           "effect_zh": "攻击后,效果命中提升+1回合",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases Effectiveness Increase duration by +1 turn",
@@ -287,7 +293,9 @@
           "effect_kr": "효과 적중 증가 지속 +1턴",
           "effect_zh": "效果命中提升+1回合",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Increases Effectiveness Increase duration before attacking",
@@ -295,9 +303,13 @@
           "effect_kr": "공격 전 효과 적중 증가로 변경",
           "effect_zh": "攻击前变更为效果命中提升",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "4604",
@@ -378,7 +390,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_REMOVE_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

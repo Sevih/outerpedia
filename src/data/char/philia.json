@@ -122,7 +122,9 @@
       "buff": [],
       "debuff": [
         "BT_DOT_LIGHTNING"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "1802",
@@ -204,7 +206,9 @@
           "effect_kr": "감전 100% 발생",
           "effect_zh": "100%触发触电",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -212,7 +216,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Increases damage",
@@ -220,9 +226,13 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "1803",
@@ -297,7 +307,9 @@
       ],
       "debuff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "1804",
@@ -378,7 +390,11 @@
       ],
       "dual_debuff": [
         "BT_DOT_LIGHTNING"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

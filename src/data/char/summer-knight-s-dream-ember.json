@@ -145,7 +145,9 @@
           "effect_kr": "강화 해제 강화\\n(효과 저항 무시)\\n(발동 확률 +50%)",
           "effect_zh": "强化解除强化\\n发动概率+50%\\n(无视效果抵抗)",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -153,7 +155,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Replaces with Empowered Skill\\nAttack range expanded\\nAzure Will +1",
@@ -161,9 +165,13 @@
           "effect_kr": "강화 스킬로 교체\\n공격 범위 확대\\n푸른 열정 +1",
           "effect_zh": "替换为强化技能\\n攻击范围扩大\\n「蓝色热情」+1",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "10602",
@@ -246,7 +254,9 @@
         "BT_STAT|ST_DEF",
         "BT_ACTION_GAUGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "10603",
@@ -322,7 +332,9 @@
       "debuff": [
         "BT_REVERSE_HEAL_BASED_CASTER",
         "BT_REVERSE_HEAL_BASED_TARGET"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "10604",
@@ -403,7 +415,11 @@
       ],
       "dual_debuff": [
         "BT_REMOVE_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

@@ -144,7 +144,9 @@
           "effect_kr": "피해 증가\\n표식 발동 확률 +25%",
           "effect_zh": "伤害提升\\n标记触发几率+25%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Adds 2% of the target's Max Health as fixed damage",
@@ -152,7 +154,9 @@
           "effect_kr": "대상 최대 체력 2%의 고정 피해 추가",
           "effect_zh": "附加目标生命值上限2%的固定伤害",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Resets Soulslayer Role-Play! Cooldown",
@@ -160,9 +164,13 @@
           "effect_kr": "영참사 놀이! 쿨타임 초기화",
           "effect_zh": "灵斩师游戏!冷却时间重置",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "7902",
@@ -233,7 +241,9 @@
       ],
       "debuff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "7903",
@@ -320,7 +330,9 @@
         "BT_STATBUFF_CONVERT_TO_STATDEBUFF",
         "BT_EXTEND_DEBUFF",
         "BT_REVERSE_HEAL_BASED_TARGET"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "7904",
@@ -401,7 +413,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_MARKING"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

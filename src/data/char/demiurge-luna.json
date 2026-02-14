@@ -139,7 +139,9 @@
           "effect_kr": "(백야) 공격 후 공격력 +1턴\\n(극야) 공격 후 자신 행동 게이지 +20%",
           "effect_zh": "(极昼)攻击后,攻击力+1回合\\n(极夜)攻击后,自身行动值+20%",
           "cost": 100,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "(Common) Damage Increase\\nCritical Hit Chance +2 turns before attacking",
@@ -147,7 +149,9 @@
           "effect_kr": "(공통) 피해 증가\\n공격 전 치명 확률 +2턴",
           "effect_zh": "(通用) 伤害提升\\n攻击前暴击率提升+2回合",
           "cost": 150,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\nIncreases Damage\\nAfter Attack, Immortality for 1 turn\\nAttacks all enemies",
@@ -155,9 +159,13 @@
           "effect_kr": "강화 스킬로 교체\\n피해 증가\\n공격 후 불사 +1턴\\n적 전체 공격",
           "effect_zh": "转化为强化技能\\n伤害提升\\n攻击后不死+1回合\\n攻击全体敌人",
           "cost": 200,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "11902",
@@ -233,7 +241,9 @@
         "BT_EXTEND_BUFF",
         "IG_Buff_Effect_2000120_Interruption"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "11903",
@@ -308,7 +318,12 @@
         "BT_ACTION_GAUGE",
         "BT_COOL_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": [
+        "mono",
+        "multi"
+      ]
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "11904",
@@ -390,7 +405,11 @@
       "dual_buff": [
         "BT_ACTION_GAUGE",
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

@@ -128,7 +128,9 @@
           "effect_kr": "피해 증가\\nWG 감소량+1",
           "effect_zh": "伤害提升\\nWG降低量+1",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+30% Taunt activation chance (Ignores Resilience)",
@@ -136,7 +138,9 @@
           "effect_kr": "도발 발동 확률 증가 +30%(효과 저항 무시)",
           "effect_zh": "挑衅触发几率+30%(无视效果抵抗)",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Activates Dual Attack with 2 allies",
@@ -144,9 +148,13 @@
           "effect_kr": "아군 2명 협공 호출",
           "effect_zh": "呼叫2名友军发动夹攻",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "3752",
@@ -231,7 +239,9 @@
       ],
       "debuff": [
         "BT_AGGRO"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "3753",
@@ -307,7 +317,9 @@
       ],
       "debuff": [
         "BT_REMOVE_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "3754",
@@ -388,7 +400,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_AGGRO"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   },
   "Chain_Type": "Finish",

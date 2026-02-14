@@ -132,7 +132,9 @@
       "buff": [
         "BT_ACTION_GAUGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "7402",
@@ -218,7 +220,9 @@
           "effect_kr": "아군 전체의 행동 게이지 증가\\n가장 빠른 아군 AP +25",
           "effect_zh": "全体友军行动值提升\\n速度最快的友军AP+25",
           "cost": 100,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases Sustained Recovery duration by 1 turn",
@@ -226,7 +230,9 @@
           "effect_kr": "지속 회복 +1턴",
           "effect_zh": "持续恢复+1回合",
           "cost": 150,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\n+2 Weakness Gauge Damage\\n+50 Action Points to all allies",
@@ -234,9 +240,13 @@
           "effect_kr": "강화 스킬로 교체\\nWG 피해량 +2\\n 아군 전체 AP +50",
           "effect_zh": "替换为强化技能\\nWG伤害量+2\\n全体友军AP+50",
           "cost": 200,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "7403",
@@ -314,7 +324,9 @@
         "BT_REMOVE_DEBUFF",
         "BT_IMMUNE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "7404",
@@ -395,7 +407,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

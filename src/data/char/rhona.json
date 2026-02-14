@@ -131,7 +131,9 @@
       "buff": [
         "HEAVY_STRIKE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "duo"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "802",
@@ -222,7 +224,9 @@
           "effect_kr": "2턴 동안 방어력 증가 \\n회복량 +10%",
           "effect_zh": "2回合内提升防御力\\n恢复量+10%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -230,7 +234,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\n-2 <color=#FFBF00>End of the World</color> Cooldown\\n+2 Weakness Gauge damage",
@@ -238,9 +244,13 @@
           "effect_kr": "강화 스킬로 교체\\n<color=#FFBF00>엔드 오브 월드</color>의 쿨타임 -2\\nWG 피해 +2",
           "effect_zh": "转化为强化技能\\n减少<color=#FFBF00>世界末日</color>的冷却时间-2回合\\nWG伤害+2",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "803",
@@ -316,7 +326,9 @@
       ],
       "debuff": [
         "BT_STAT|ST_DEF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "804",
@@ -397,7 +409,11 @@
       "debuff": [],
       "dual_buff": [
         "HEAVY_STRIKE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

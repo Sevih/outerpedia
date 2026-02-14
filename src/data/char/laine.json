@@ -122,7 +122,9 @@
       "buff": [
         "BT_ACTION_GAUGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "2902",
@@ -207,7 +209,9 @@
           "effect_kr": "1턴 동안 아군 공격력 증가",
           "effect_zh": "提升友军攻击力,持续1回合",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -215,7 +219,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Increases Attack Increase duration by 1 turn",
@@ -223,9 +229,13 @@
           "effect_kr": "공격력 증가 지속 +1턴",
           "effect_zh": "攻击力提升持续时间+1回合",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "2903",
@@ -302,7 +312,9 @@
       "buff": [],
       "debuff": [
         "BT_DOT_POISON"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "2904",
@@ -383,7 +395,11 @@
       ],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

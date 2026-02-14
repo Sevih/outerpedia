@@ -131,7 +131,9 @@
           "effect_kr": "아군 1명 협공 호출",
           "effect_zh": "呼叫1名友军发动夹攻",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -139,7 +141,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Increases damage",
@@ -147,9 +151,13 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "1002",
@@ -221,7 +229,9 @@
       "buff": [
         "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "1003",
@@ -298,7 +308,9 @@
       "buff": [
         "BT_STAT|ST_DEF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "1004",
@@ -379,7 +391,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_STAT|ST_DEF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

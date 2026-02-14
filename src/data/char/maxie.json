@@ -141,7 +141,9 @@
           "effect_kr": "화상 1턴 추가 부여",
           "effect_zh": "烧伤额外+1回合",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Resets Together as One Cooldown",
@@ -149,7 +151,9 @@
           "effect_kr": "둘이서 하나 쿨타임 초기화",
           "effect_zh": "两人同心冷却时间重置",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Together as One guaranteed activation\\n+1 turn debuff duration",
@@ -157,9 +161,13 @@
           "effect_kr": "둘이서 하나 반드시 발동\\n약화 효과 1턴 증가",
           "effect_zh": "必触发两人同心\\n弱化效果增加1回合",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "8102",
@@ -231,9 +239,12 @@
       "cd": "4",
       "buff": [
         "BT_ACTION_GAUGE",
-        "BT_AP_CHARGE","BT_EXTRA_ATTACK_ON_TURN_END"
+        "BT_AP_CHARGE",
+        "BT_EXTRA_ATTACK_ON_TURN_END"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "8103",
@@ -313,7 +324,9 @@
       ],
       "debuff": [
         "BT_DOT_BURN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "8104",
@@ -394,7 +407,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

@@ -132,7 +132,9 @@
       "buff": [],
       "debuff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "6902",
@@ -220,7 +222,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 100,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases Speed for 1 turn",
@@ -228,7 +232,9 @@
           "effect_kr": "1턴 동안 속도 증가",
           "effect_zh": "速度提升,持续1回合",
           "cost": 150,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Increases Immortality duration by 1 turn",
@@ -236,9 +242,13 @@
           "effect_kr": "불사 효과 +1턴",
           "effect_zh": "不死效果+1回合",
           "cost": 200,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "6903",
@@ -317,7 +327,9 @@
       ],
       "debuff": [
         "BT_STUN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "6904",
@@ -398,7 +410,11 @@
       ],
       "dual_debuff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

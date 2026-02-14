@@ -128,7 +128,9 @@
       "buff": [
         "BT_ACTION_GAUGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "9302",
@@ -216,7 +218,9 @@
           "effect_kr": "추가 턴 발생",
           "effect_zh": "触发额外回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -224,7 +228,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "<color=#FFBF00>Enhanced Attack</color>\\nActivates Gift of Buffs for 1 turn\\nAfter gifting, grants increased Penetration for 2 turns",
@@ -232,9 +238,13 @@
           "effect_kr": "<color=#FFBF00>강화 공격</color>\\n강화 효과 선물 +1턴 발동\\n선물 후 관통력 증가 +2턴",
           "effect_zh": "<color=#FFBF00>强化攻击</color>\\n触发强化效果赠礼+1回合\\n赠礼后穿透力提升+2回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "9303",
@@ -311,7 +321,9 @@
         "BT_DMG_OWNER_TEAM_BUFF",
         "BT_CASTER_COPY_BUFF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "9304",
@@ -392,7 +404,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

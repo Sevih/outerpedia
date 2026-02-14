@@ -127,7 +127,9 @@
       "buff": [],
       "debuff": [
         "BT_DOT_BURN"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "402",
@@ -214,7 +216,9 @@
           "effect_kr": "추가 턴 발생",
           "effect_zh": "触发额外回合",
           "cost": 100,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Burned Chance +10%",
@@ -222,7 +226,9 @@
           "effect_kr": "화상 발생 확률 +10%",
           "effect_zh": "烧伤触发几率+10%",
           "cost": 150,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Increases damage (Burned targets)",
@@ -230,9 +236,13 @@
           "effect_kr": "피해 증가(화상 대상)",
           "effect_zh": "伤害提升(烧伤目标)",
           "cost": 200,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "403",
@@ -303,7 +313,9 @@
       "wgr": 2,
       "cd": "3",
       "buff": [],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "404",
@@ -384,7 +396,11 @@
       ],
       "dual_debuff": [
         "BT_DOT_BURN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

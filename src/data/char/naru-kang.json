@@ -122,7 +122,9 @@
       "buff": [],
       "debuff": [
         "BT_STUN"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "2402",
@@ -209,7 +211,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -217,7 +221,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Reduces Cyclone Change! Cooldown by 2 turns",
@@ -225,9 +231,13 @@
           "effect_kr": "사이클론 체인지! 쿨타임 -2턴",
           "effect_zh": "旋风变换!冷却时间-2回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "2403",
@@ -300,7 +310,9 @@
         "BT_INVINCIBLE",
         "BT_IMMUNE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "2404",
@@ -381,7 +393,11 @@
       ],
       "dual_debuff": [
         "BT_STUN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

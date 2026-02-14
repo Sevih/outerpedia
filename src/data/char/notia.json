@@ -140,7 +140,9 @@
           "effect_kr": "매서운 공세 +1턴\\n공격 대상에게 중독 +2턴",
           "effect_zh": "猛烈攻势+1回合\\n对攻击目标造成中毒+2回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -148,7 +150,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\nTargets all enemies and increases damage dealt",
@@ -156,9 +160,13 @@
           "effect_kr": "강화 스킬로 교체\\n공격 범위 확대 및 피해 증가",
           "effect_zh": "转化为强化技能\\n扩大攻击范围,且伤害提升",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "5602",
@@ -232,12 +240,16 @@
       },
       "wgr": 1,
       "cd": "4",
-      "buff": ["BT_EXTRA_ATTACK_ON_TURN_END"],
+      "buff": [
+        "BT_EXTRA_ATTACK_ON_TURN_END"
+      ],
       "debuff": [
         "BT_SILENCE",
         "BT_DOT_POISON",
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "5603",
@@ -315,7 +327,9 @@
         "IG_Buff_2000056_Interruption",
         "BT_ACTION_GAUGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "5604",
@@ -396,7 +410,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

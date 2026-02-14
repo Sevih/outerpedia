@@ -136,7 +136,9 @@
       "buff": [],
       "debuff": [
         "BT_DOT_CURSE"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "6202",
@@ -229,7 +231,9 @@
           "effect_kr": "대상 치명 확률 감소 +2턴",
           "effect_zh": "目标暴击率降低+2回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+1 Weakness Gauge damage",
@@ -237,7 +241,9 @@
           "effect_kr": "WG 감소량 +1",
           "effect_zh": "WG降低量+1",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nIncreased damage (Additional increased damage dealt to Dark element enemies)",
@@ -245,9 +251,13 @@
           "effect_kr": "강화 스킬로 교체\\n피해 증가 (암속성 적에게는 추가로 피해 증가)",
           "effect_zh": "转化为强化技能\\n伤害提升(对暗属性敌人\\n造成的额外伤害提升)",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "6203",
@@ -324,7 +334,9 @@
       "buff": [],
       "debuff": [
         "BT_STAT|ST_CRITICAL_RATE"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "6204",
@@ -402,7 +414,11 @@
       "buff": [
         "BT_STAT|ST_ATK"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

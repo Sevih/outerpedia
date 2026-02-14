@@ -144,7 +144,9 @@
           "effect_kr": "피해 증가\\n화상 지속 +1턴",
           "effect_zh": "伤害提升\\n烧伤持续+1回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+1 Burned effect",
@@ -152,7 +154,9 @@
           "effect_kr": "화상 +1개",
           "effect_zh": "烧伤+1层",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases damage\\nApplies Irremovable to Burned",
@@ -160,9 +164,13 @@
           "effect_kr": "<color=#FFBF00>강화 공격</color>\\n피해 증가\\n화상이 해제불가로 변경",
           "effect_zh": "<color=#FFBF00>强化攻击</color>\\n伤害提升\\n变更为无法解除烧伤",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "9502",
@@ -238,7 +246,9 @@
         "BT_COOL3_CHARGE",
         "GRACE_OF_THE_VIRGIN_GODDESS"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "9503",
@@ -321,7 +331,9 @@
       ],
       "debuff": [
         "IG_Buff_Dot_Burn_Interruption_D"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "9504",
@@ -396,14 +408,17 @@
       "wgr": 3,
       "wgr_dual": 1,
       "cd": null,
-      "buff": [
-      ],
+      "buff": [],
       "debuff": [
         "IG_Buff_Dot_Burn_Interruption_D"
       ],
       "dual_debuff": [
         "IG_Buff_Dot_Burn_Interruption_D"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

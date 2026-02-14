@@ -137,7 +137,9 @@
           "effect_kr": "아군 전체의 행동 게이지 증가\\n행동 게이지 +10%",
           "effect_zh": "全体友军行动值提升\\n行动值+10%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage\\nIncreases all allies' Speed for 1 turn",
@@ -145,7 +147,9 @@
           "effect_kr": "피해 증가\\n1턴 동안 아군 전체 속도 증가",
           "effect_zh": "伤害提升\\n1回合内全体友军速度提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Activates Dual Attack with 2 allies",
@@ -153,9 +157,13 @@
           "effect_kr": "아군 2명 협공 호출",
           "effect_zh": "呼叫2名友军发动夹攻",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "1202",
@@ -234,7 +242,9 @@
         "BT_STAT|ST_ATK",
         "BT_ADDITIVE_TURN"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "1203",
@@ -311,7 +321,9 @@
       "buff": [],
       "debuff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "1204",
@@ -392,7 +404,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

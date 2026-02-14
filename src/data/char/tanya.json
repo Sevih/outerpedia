@@ -123,7 +123,9 @@
       "buff": [
         "BT_STAT|ST_DEF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "1602",
@@ -208,7 +210,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases the chance to inflict Stunned by 15%",
@@ -216,7 +220,9 @@
           "effect_kr": "스턴 발생 확률 +15%",
           "effect_zh": "晕眩触发几率+15%",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Increases Stunned duration by 1 turn",
@@ -224,9 +230,13 @@
           "effect_kr": "스턴 지속 +1턴",
           "effect_zh": "晕眩持续+1回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "1603",
@@ -303,7 +313,9 @@
       "buff": [],
       "debuff": [
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "1604",
@@ -381,7 +393,11 @@
       "buff": [
         "BT_STAT|ST_DEF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

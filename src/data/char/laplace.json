@@ -132,7 +132,9 @@
       "buff": [],
       "debuff": [
         "BT_STAT|ST_SPEED"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "4402",
@@ -220,7 +222,9 @@
           "effect_kr": "피해량 증가\\n실드 강화",
           "effect_zh": "伤害量提升\\n护盾强化",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -228,7 +232,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Removes all debuffs from the caster",
@@ -236,9 +242,13 @@
           "effect_kr": "자신의 모든 약화 효과 해제",
           "effect_zh": "解除自身的所有弱化效果",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "4403",
@@ -312,7 +322,9 @@
         "BT_ADDITIVE_TURN",
         "BT_STAT|ST_BUFF_CHANCE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "4404",
@@ -393,7 +405,11 @@
       ],
       "dual_debuff": [
         "BT_STAT|ST_SPEED"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

@@ -123,7 +123,9 @@
       "buff": [],
       "debuff": [
         "BT_DOT_CURSE"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "1402",
@@ -209,7 +211,9 @@
           "effect_kr": "방어력 감소 발생 확률 +20%",
           "effect_zh": "防御力降低发生率+20%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Inflicts 1 additional stack of Cursed",
@@ -217,7 +221,9 @@
           "effect_kr": "저주 1개 추가 발생",
           "effect_zh": "额外触发1次诅咒",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Inflicts 1 additional stack of Cursed",
@@ -225,9 +231,13 @@
           "effect_kr": "저주 1개 추가 발생",
           "effect_zh": "额外触发1次诅咒",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "1403",
@@ -304,7 +314,9 @@
       "buff": [],
       "debuff": [
         "BT_DOT_CURSE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "1404",
@@ -385,7 +397,11 @@
       ],
       "dual_debuff": [
         "BT_DOT_CURSE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

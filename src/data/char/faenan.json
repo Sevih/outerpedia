@@ -121,7 +121,9 @@
       "wgr": 1,
       "cd": null,
       "buff": [],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "2702",
@@ -203,7 +205,9 @@
           "effect_kr": "아군 전체에게 효과 적용",
           "effect_zh": "对全体友军发动效果",
           "cost": 100,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Enhances Heal (Amount)",
@@ -211,7 +215,9 @@
           "effect_kr": "회복 강화(회복량)",
           "effect_zh": "强化恢复(恢复量)",
           "cost": 150,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Target Action Points +50",
@@ -219,9 +225,13 @@
           "effect_kr": "대상 AP +50",
           "effect_zh": "目标AP+50",
           "cost": 200,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "2703",
@@ -297,7 +307,9 @@
       "buff": [
         "BT_IMMUNE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "2704",
@@ -374,7 +386,11 @@
       "cd": null,
       "buff": [],
       "debuff": [],
-      "dual_buff": []
+      "dual_buff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

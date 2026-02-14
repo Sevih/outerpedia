@@ -130,7 +130,9 @@
       "buff": [
         "BT_STAT|ST_BUFF_CHANCE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "2002",
@@ -220,7 +222,9 @@
           "effect_kr": "피해 증가\\n앨리스 인 원더랜드 쿨타임 -1턴",
           "effect_zh": "伤害提升\\n爱丽丝梦游仙境冷却时间-1回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Enhances Buff Removal\\n(Ignores Resilience)",
@@ -228,7 +232,9 @@
           "effect_kr": "강화 해제 강화\\n(효과 저항 무시)",
           "effect_zh": "强化解除强化\\n(无视效果抵抗)",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nResets Alice In Wonderland! Cooldown",
@@ -236,9 +242,13 @@
           "effect_kr": "강화 스킬로 교체\\n앨리스 인 원더랜드 쿨타임 초기화",
           "effect_zh": "转化为强化技能\\n重置爱丽丝梦游仙境冷却时间",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "2003",
@@ -316,7 +326,9 @@
       "debuff": [
         "BT_SEALED",
         "IG_Buff_2000020_Interruption_D"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "2004",
@@ -397,7 +409,11 @@
       ],
       "dual_buff": [
         "BT_STAT|ST_BUFF_CHANCE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

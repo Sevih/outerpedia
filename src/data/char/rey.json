@@ -133,7 +133,9 @@
       "buff": [
         "BT_AP_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "8702",
@@ -220,7 +222,9 @@
           "effect_kr": "피해 증가\\n펄스 전개 쿨타임 -2턴",
           "effect_zh": "伤害提升\\n能量释放冷却时间-2回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+1 Weakness Gauge damage",
@@ -228,7 +232,9 @@
           "effect_kr": "WG 감소량 +1",
           "effect_zh": "WG降低量+1",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\nExpands attack range\\nResets skill cooldown of Faster than Bullets!",
@@ -236,9 +242,13 @@
           "effect_kr": "강화 스킬로 교체\\n공격 범위 확대\\n총알보다 빠르게! 쿨타임 초기화",
           "effect_zh": "转化为强化技能\\n扩大攻击范围\\n重置快如子弹!冷却时间",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "8703",
@@ -318,7 +328,9 @@
       ],
       "debuff": [
         "BT_SEALED_RESURRECTION"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "8704",
@@ -399,7 +411,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_AP_CHARGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

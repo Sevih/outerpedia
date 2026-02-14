@@ -141,7 +141,9 @@
           "effect_kr": "아군 전체에게 효과 적용",
           "effect_zh": "对全体友军发动效果",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Health Recovery +15%\\nTarget Action Points +50 (Excluding the caster)",
@@ -149,7 +151,9 @@
           "effect_kr": "체력 회복량 +15%\\n대상 AP +50 (자신 제외)",
           "effect_zh": "生命值恢复量+15%\\n目标AP+50(自身除外)",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Attack\\n+2 turns Immunity for all allies",
@@ -157,9 +161,13 @@
           "effect_kr": "강화 공격으로 변경\\n아군 전체 면역 +2턴",
           "effect_zh": "变更为强化攻击\\n全体友军免疫+2回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "8302",
@@ -229,7 +237,9 @@
         "BT_ACTION_GAUGE",
         "BT_AP_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "8303",
@@ -300,7 +310,9 @@
         "BT_RESURRECTION",
         "BT_IMMUNE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "8304",
@@ -379,7 +391,11 @@
         "BT_CONTINU_HEAL"
       ],
       "debuff": [],
-      "dual_buff": []
+      "dual_buff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

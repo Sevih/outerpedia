@@ -139,7 +139,9 @@
           "effect_kr": "아군 실드 추가(방어력 비례)",
           "effect_zh": "增加友军护盾(与防御力成正比)",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "After attacking, activates Exile",
@@ -147,7 +149,9 @@
           "effect_kr": "공격 후 추방 발동",
           "effect_zh": "攻击后发动驱逐",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nPenetration increased.",
@@ -155,9 +159,13 @@
           "effect_kr": "강화 스킬로 교체\\n관통력 증가",
           "effect_zh": "转化为强化技能\\n穿透力提升",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "7702",
@@ -232,11 +240,14 @@
       "cd": "6",
       "wgr": 920,
       "buff": [
-        "BT_STAT|ST_DEF","BT_EXTRA_ATTACK_ON_TURN_END"
+        "BT_STAT|ST_DEF",
+        "BT_EXTRA_ATTACK_ON_TURN_END"
       ],
       "debuff": [
         "BT_REVERSE_HEAL_BASED_CASTER"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "7703",
@@ -315,7 +326,9 @@
       ],
       "debuff": [
         "BT_REMOVE_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "7704",
@@ -393,7 +406,11 @@
       "buff": [
         "BT_STAT|ST_DEF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

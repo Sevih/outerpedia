@@ -135,7 +135,9 @@
           "effect_kr": "추가타의 WG 피해량 +1\\n피해 증가",
           "effect_zh": "额外攻击的WG伤害量+1\\n伤害提升",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases Speed for 1 turn",
@@ -143,7 +145,9 @@
           "effect_kr": "1턴 동안 속도 증가",
           "effect_zh": "速度提升,持续1回合",
           "cost": 80,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\n5 Stacks of Divine Retribution",
@@ -151,9 +155,13 @@
           "effect_kr": "강화 스킬로 교체\\n신의 천벌 5회 누적",
           "effect_zh": "转化为强化技能\\n降下神罚叠加5次",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "5702",
@@ -221,7 +229,9 @@
       "debuff": [
         "BT_SEALED_RECEIVE_HEAL",
         "BT_EXTEND_BUFF"
-      ]
+      ],
+      "offensive": false,
+      "target": null
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "5703",
@@ -293,7 +303,9 @@
       ],
       "debuff": [
         "BT_SEALED_RECEIVE_HEAL"
-      ]
+      ],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "5704",
@@ -371,7 +383,11 @@
       "buff": [
         "BT_COOL_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

@@ -125,7 +125,9 @@
       "buff": [],
       "debuff": [
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "902",
@@ -207,7 +209,9 @@
           "effect_kr": "대상 AP +50",
           "effect_zh": "目标AP+50",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Effects are applied to all allies",
@@ -215,7 +219,9 @@
           "effect_kr": "아군 전체에게 효과 적용",
           "effect_zh": "对全体友军发动效果",
           "cost": 160,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Reduces Healing. Cooldown by 2 turns",
@@ -223,9 +229,13 @@
           "effect_kr": "치유합니다. 쿨타임 -2턴",
           "effect_zh": "治愈。冷却时间-2回合",
           "cost": 200,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "903",
@@ -302,7 +312,9 @@
       "buff": [
         "BT_SHIELD_BASED_CASTER"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "904",
@@ -383,7 +395,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

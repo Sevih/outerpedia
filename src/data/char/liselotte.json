@@ -137,7 +137,9 @@
           "effect_kr": "아군 전체에게 효과 적용",
           "effect_zh": "对全体友军发动效果",
           "cost": 70,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Target AP +50 (excluding the caster)",
@@ -145,7 +147,9 @@
           "effect_kr": "대상 AP +50 (자신 제외)",
           "effect_zh": "目标AP+50(自身除外)",
           "cost": 105,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "+2 turns of Barrier (proportional to target Health)",
@@ -153,9 +157,13 @@
           "effect_kr": "실드 추가 +2턴(대상 체력 비례)",
           "effect_zh": "额外护盾+2回合(根据目标生命值等比)",
           "cost": 140,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "9802",
@@ -222,9 +230,12 @@
       "cd": "4",
       "buff": [
         "BT_SHIELD_BASED_TARGET",
-        "BT_STAT|ST_DEF","BT_EXTRA_ATTACK_ON_TURN_END"
+        "BT_STAT|ST_DEF",
+        "BT_EXTRA_ATTACK_ON_TURN_END"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "9803",
@@ -293,7 +304,9 @@
         "BT_REMOVE_DEBUFF",
         "BT_COOL_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "9804",
@@ -372,7 +385,11 @@
         "BT_SHIELD_BASED_TARGET"
       ],
       "debuff": [],
-      "dual_buff": []
+      "dual_buff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

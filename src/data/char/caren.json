@@ -146,7 +146,9 @@
           "effect_kr": "대상 치명 피해 -2턴(대상 효과 저항 무시)\\n피해 증가",
           "effect_zh": "目标暴击伤害-2回合\\n(无视目标效果抵抗)\\n伤害提升",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "duo"
         },
         "SKT_BURST_2": {
           "effect": "Increases Penetration by 30%",
@@ -154,7 +156,9 @@
           "effect_kr": "관통력 30% 증가",
           "effect_zh": "穿透力提升30%",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "duo"
         },
         "SKT_BURST_3": {
           "effect": "<color=#FFBF00>Enhanced Attack</color>\\nIncreases Damage\\nRight after using this skill, does not trigger Counterattack, Revenge, or Agile Response",
@@ -162,9 +166,13 @@
           "effect_kr": "<color=#FFBF00>강화 공격</color>\\n피해 증가\\n해당 스킬 직후 반격/복수/신속 대응 불가",
           "effect_zh": "<color=#FFBF00>强化攻击</color>\\n伤害提升\\n该技能后不会触发反击/复仇/迅速应对",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "duo"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "8902",
@@ -240,7 +248,9 @@
       ],
       "debuff": [
         "BT_STEAL_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "8903",
@@ -317,7 +327,9 @@
       "buff": [
         "BT_COOL_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "8904",
@@ -395,7 +407,11 @@
       "buff": [
         "BT_COOL3_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

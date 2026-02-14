@@ -123,7 +123,9 @@
       "buff": [
         "BT_STAT|ST_SPEED"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "5002",
@@ -190,7 +192,9 @@
       "buff": [
         "BT_COOL3_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "5003",
@@ -267,7 +271,9 @@
           "effect_kr": "속도 증가 지속 +1턴",
           "effect_zh": "速度提升持续回合+1",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases Speed for 2 turns",
@@ -275,7 +281,9 @@
           "effect_kr": "2턴 동안 속도 증가",
           "effect_zh": "2回合内速度提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Target Action Points +50",
@@ -283,9 +291,13 @@
           "effect_kr": "대상 AP +50",
           "effect_zh": "目标AP+50",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "5004",
@@ -366,7 +378,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_STAT|ST_SPEED"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

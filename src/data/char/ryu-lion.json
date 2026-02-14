@@ -148,7 +148,9 @@
           "effect_kr": "대상 강화 불가 +2턴 (대상 저항 무시)",
           "effect_zh": "目标无法强化+2回合(无视目标抵抗)",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -156,7 +158,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "+100% Priority",
@@ -164,9 +168,13 @@
           "effect_kr": "행동 게이지 +100%",
           "effect_zh": "行动值+100%",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "9702",
@@ -248,7 +256,9 @@
         "BT_STAT|ST_SPEED",
         "BT_EXTRA_ATTACK_ON_TURN_END"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "9703",
@@ -325,7 +335,9 @@
       "buff": [
         "BT_ACTION_GAUGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "9704",
@@ -403,7 +415,11 @@
       "buff": [],
       "debuff": [
         "BT_REVERSE_HEAL_BASED_TARGET"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

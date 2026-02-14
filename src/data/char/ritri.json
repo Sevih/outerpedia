@@ -127,7 +127,9 @@
       "buff": [
         "BT_REMOVE_DEBUFF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "4802",
@@ -192,7 +194,9 @@
         ]
       },
       "buff": [],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": null
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "4803",
@@ -278,7 +282,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -286,7 +292,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "+50% Priority",
@@ -294,9 +302,13 @@
           "effect_kr": "행동 게이지 +50%",
           "effect_zh": "行动值+50%",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "4804",
@@ -377,7 +389,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_REMOVE_DEBUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

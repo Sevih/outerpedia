@@ -145,7 +145,9 @@
           "effect_kr": "피해 증가\\n대상 방어력 -2턴",
           "effect_zh": "伤害提升\\n目标防御力-2回合",
           "cost": 50,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage\\n+60% Cooldown Increase Chance",
@@ -153,7 +155,9 @@
           "effect_kr": "피해 증가\\n쿨타임 증가 확률 +60%",
           "effect_zh": "伤害提升\\n冷却时间增加几率+60%",
           "cost": 75,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\nTargets all enemies and increases damage dealt",
@@ -161,9 +165,13 @@
           "effect_kr": "강화 스킬로 교체\\n공격 범위 확대 및 피해 증가",
           "effect_zh": "转化为强化技能\\n扩大攻击范围,且伤害提升",
           "cost": 100,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "7502",
@@ -242,7 +250,9 @@
         "BT_SEAL_COUNTER",
         "BT_EXTRA_ATTACK_ON_TURN_END"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "7503",
@@ -324,7 +334,9 @@
       "debuff": [
         "BT_REMOVE_BUFF",
         "BT_SEALED_RECEIVE_HEAL"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "7504",
@@ -405,7 +417,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_COOL3_CHARGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

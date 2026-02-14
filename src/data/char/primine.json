@@ -133,7 +133,9 @@
           "effect_kr": "회복 효과 아군 전체 적용",
           "effect_zh": "恢复效果适用于全体友军",
           "cost": 70,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Target AP +50 (excluding the caster)",
@@ -141,7 +143,9 @@
           "effect_kr": "대상 AP +50 (자신 제외)",
           "effect_zh": "目标AP+50(自身除外)",
           "cost": 105,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Grants Immunity to all allies +1 turn\\nRemoves 1 debuff from all allies",
@@ -149,9 +153,13 @@
           "effect_kr": "아군 전체 면역 +1턴\\n아군 전체 약화 효과 1개 해제",
           "effect_zh": "全体友军免疫+1回合\\n解除全体友军1个弱化效果",
           "cost": 140,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "11302",
@@ -223,7 +231,9 @@
       ],
       "debuff": [
         "BT_FREEZE"
-      ]
+      ],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "11303",
@@ -296,7 +306,9 @@
       ],
       "debuff": [
         "BT_SILENCE"
-      ]
+      ],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "11304",
@@ -377,7 +389,11 @@
       ],
       "dual_buff": [
         "BT_HEAL_BASED_CASTER"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

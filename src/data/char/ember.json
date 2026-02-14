@@ -141,7 +141,9 @@
           "effect_kr": "공격 전 찬란한 의지 +1턴",
           "effect_zh": "攻击前璀璨之志+1回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Grants barrier (proportional to Attack)",
@@ -149,7 +151,9 @@
           "effect_kr": "실드 추가(공격력 비례)",
           "effect_zh": "生成护盾(与攻击力成正比)",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "+1 turn debuff duration",
@@ -157,9 +161,13 @@
           "effect_kr": "약화 효과 지속 시간 +1턴",
           "effect_zh": "弱化效果持续时间+1回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "9402",
@@ -226,7 +234,9 @@
       "buff": [],
       "debuff": [
         "BT_DOT_BURN"
-      ]
+      ],
+      "offensive": false,
+      "target": null
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "9403",
@@ -307,7 +317,9 @@
       "debuff": [
         "BT_BURN_ENHANCE",
         "BT_DOT_BURN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "9404",
@@ -388,7 +400,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_MARKING"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

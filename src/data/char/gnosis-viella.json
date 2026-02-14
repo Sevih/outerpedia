@@ -143,7 +143,9 @@
           "effect_kr": "피해 증가\\n공격 전 대상 방어력 감소 +2턴(효과 저항 무시)",
           "effect_zh": "伤害提升\\n攻击前,对目标施加防御力降低2回合(无视效果抵抗)",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Detonates Poison and Corrosive Poison\\n+100% Damage of Detonation",
@@ -151,7 +153,9 @@
           "effect_kr": "중독 및 산성독 폭발\\n폭발에 의한 피해 +100%",
           "effect_zh": "中毒或酸性毒液爆炸\\n爆炸造成的伤害+100%",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\nTargets all enemies\\nRemove 1 Buff from the target before Attack",
@@ -159,9 +163,13 @@
           "effect_kr": "강화 스킬로 교체\\n적 전체 공격\\n공격 전 대상 강화 효과 1개 해제",
           "effect_zh": "替换为强化技能\\n攻击范围扩大\\n攻击前,解除目标1个强化效果",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "10902",
@@ -249,7 +257,9 @@
       "debuff": [
         "BT_STUN",
         "BT_DOT_POISON2"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "10903",
@@ -331,7 +341,9 @@
         "IG_Buff_Effect_2000109_Interruption_D",
         "BT_DOT_POISON2",
         "BT_REMOVE_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "10904",
@@ -412,7 +424,11 @@
       ],
       "dual_debuff": [
         "BT_DOT_POISON"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

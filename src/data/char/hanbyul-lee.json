@@ -129,7 +129,9 @@
       "buff": [
         "BT_ACTION_GAUGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "2102",
@@ -209,7 +211,9 @@
           "effect_kr": "자신의 체력 15% 회복",
           "effect_zh": "自身生命值恢复15%",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Grants Counterattack +2 turns to ally with highest attack",
@@ -217,7 +221,9 @@
           "effect_kr": "가장 공격력이 높은 아군 반격 +2턴",
           "effect_zh": "攻击力最高的友军\\n反击+2回合",
           "cost": 100,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Extends the caster's buffs by 1 turn\\nGrants an extra turn",
@@ -225,9 +231,13 @@
           "effect_kr": "자신의 강화 효과 +1턴\\n추가 턴 발생",
           "effect_zh": "自身强化效果+1回合\\n获得额外回合",
           "cost": 140,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "2103",
@@ -310,7 +320,9 @@
       ],
       "debuff": [
         "BT_AGGRO"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "2104",
@@ -389,7 +401,11 @@
         "BT_DMG_TARGET_BREAK"
       ],
       "debuff": [],
-      "dual_buff": []
+      "dual_buff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

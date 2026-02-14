@@ -123,7 +123,9 @@
       "buff": [
         "BT_STAT|ST_ATK"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "1702",
@@ -201,7 +203,9 @@
           "effect_kr": "아군 전체에게 효과 적용",
           "effect_zh": "对全体友军发动效果",
           "cost": 120,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Target Action Points +25",
@@ -209,7 +213,9 @@
           "effect_kr": "대상 AP +25",
           "effect_zh": "目标AP+25",
           "cost": 160,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Removes 1 additional debuff",
@@ -217,9 +223,13 @@
           "effect_kr": "약화 해제 수량 +1",
           "effect_zh": "弱化解除数量+1",
           "cost": 200,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "1703",
@@ -293,7 +303,9 @@
         "BT_SHIELD_BASED_CASTER",
         "BT_CONTINU_HEAL"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "1704",
@@ -374,7 +386,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

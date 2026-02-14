@@ -126,7 +126,9 @@
       "buff": [
         "BT_COOL3_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "3302",
@@ -207,7 +209,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -215,7 +219,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Increases Penetration by 30%",
@@ -223,9 +229,13 @@
           "effect_kr": "관통력 30% 증가",
           "effect_zh": "穿透力提升30%",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "3303",
@@ -298,7 +308,9 @@
       "buff": [
         "BT_STAT|ST_ATK"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "3304",
@@ -379,7 +391,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_COOL3_CHARGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

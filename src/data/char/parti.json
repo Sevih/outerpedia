@@ -130,7 +130,9 @@
           "effect_kr": "화상 100% 발생",
           "effect_zh": "100%触发烧伤",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -138,7 +140,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Enhances Burned\\n(Ignores Resilience)",
@@ -146,9 +150,13 @@
           "effect_kr": "화상 강화\\n(효과 저항 무시)",
           "effect_zh": "强化烧伤\\n(无视效果抵抗)",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "3202",
@@ -226,7 +234,9 @@
         "BT_ADDITIVE_ATTACK_ON_EVENT",
         "BT_STAT|ST_ATK"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "3203",
@@ -299,7 +309,9 @@
       "buff": [],
       "debuff": [
         "BT_IMMEDIATELY_BURN"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "3204",
@@ -380,7 +392,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_DOT_BURN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

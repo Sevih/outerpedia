@@ -152,7 +152,9 @@
           "effect_kr": "저주 1개 추가 발생 (해제 불가)\\n효과 발동 확률 +20%",
           "effect_zh": "额外触发1次诅咒(无法解除)\\n效果触发几率+20%",
           "cost": 120,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Inflicts 1 additional Cursed (Irremovable)",
@@ -160,7 +162,9 @@
           "effect_kr": "저주 1개 추가 발생 (해제 불가)",
           "effect_zh": "额外触发1次诅咒(无法解除)",
           "cost": 180,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\nTargets all enemies\\nResets all skill cooldowns of the caster\\nExtra Turn",
@@ -168,9 +172,13 @@
           "effect_kr": "강화 스킬로 교체\\n공격 범위 확대\\n자신의 모든 스킬 쿨타임 초기화\\n추가 턴",
           "effect_zh": "转化为强化技能\\n扩大攻击范围\\n自身的所有技能冷却时间重置\\n额外回合",
           "cost": 300,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "8602",
@@ -254,7 +262,9 @@
       ],
       "debuff": [
         "IG_Buff_Dot_Curse_Interruption_D"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "8603",
@@ -335,7 +345,9 @@
       "debuff": [
         "BT_IMMEDIATELY_CURSE",
         "BT_AP_CHARGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "8604",
@@ -421,7 +433,11 @@
       ],
       "dual_buff": [
         "HEAVY_STRIKE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   },
   "limited": true

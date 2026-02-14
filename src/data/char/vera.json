@@ -126,15 +126,23 @@
       "debuff": [],
       "burnEffect": {
         "SKT_BURST_1": {
-          "effect_zh": "伤害提升"
+          "effect_zh": "伤害提升",
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
-          "effect_zh": "伤害提升"
+          "effect_zh": "伤害提升",
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
-          "effect_zh": "暗黑魔焰舞冷却时间-2回合"
+          "effect_zh": "暗黑魔焰舞冷却时间-2回合",
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "202",
@@ -207,7 +215,9 @@
       "buff": [
         "BT_EXTRA_ATTACK_ON_TURN_END"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "203",
@@ -305,7 +315,9 @@
           "cost": 160,
           "level": 3
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "204",
@@ -386,7 +398,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_STAT|ST_CRITICAL_RATE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

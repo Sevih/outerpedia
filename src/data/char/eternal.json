@@ -131,7 +131,9 @@
       "buff": [],
       "debuff": [
         "BT_STAT|ST_DEF"
-      ]
+      ],
+      "offensive": true,
+      "target": "duo"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "4302",
@@ -221,7 +223,9 @@
           "effect_kr": "단일 공격으로 변경\\n피해량 대폭 증가\\n스킬 사용 전 효과 적중 +2턴",
           "effect_zh": "变更为单体攻击\\n伤害量大幅提升\\n施展技能前,效果命中提升+2回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -229,7 +233,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\nRemoves Buffs ▶ Steals Buff",
@@ -237,9 +243,13 @@
           "effect_kr": "강화 스킬로 교체\\n강화 해제 ▶ 강화 효과 강탈",
           "effect_zh": "转化为强化技能\\n强化解除 ▶ 夺取强化效果",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "duo"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "4303",
@@ -313,13 +323,14 @@
       },
       "cd": "5",
       "wgr": 2,
-      "buff": [
-      ],
+      "buff": [],
       "debuff": [
         "BT_STAT|ST_DEF",
         "BT_STAT|ST_SPEED",
         "BT_SEALED_RECEIVE_HEAL"
-      ]
+      ],
+      "offensive": true,
+      "target": "duo"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "4304",
@@ -400,7 +411,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_STAT|ST_DEF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

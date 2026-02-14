@@ -144,7 +144,9 @@
           "effect_kr": "아군 1명 협공 호출",
           "effect_zh": "呼叫1名友军发动夹攻",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+1 Weakness Gauge damage",
@@ -152,7 +154,9 @@
           "effect_kr": "WG 감소량 +1",
           "effect_zh": "WG降低量+1",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Inflicts Marked on the target before attacking for 2 turns",
@@ -160,9 +164,13 @@
           "effect_kr": "공격 전 대상에게 표식 +2턴",
           "effect_zh": "攻击前对目标施加标记+2回合",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "10102",
@@ -242,7 +250,9 @@
       ],
       "debuff": [
         "BT_STAT|ST_DEF"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "10103",
@@ -321,7 +331,9 @@
         "BT_STAT|ST_BUFF_CHANCE",
         "BT_COOL_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "10104",
@@ -402,7 +414,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

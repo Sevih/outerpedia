@@ -132,7 +132,9 @@
       "buff": [],
       "debuff": [
         "BT_DOT_BLEED"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "1502",
@@ -217,7 +219,9 @@
           "effect_kr": "추가타 확정 발생\\n행동 게이지 +50%",
           "effect_zh": "额外攻击必定触发\\n行动值+50%",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -225,7 +229,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Recovering Priority changes to gaining an extra turn",
@@ -233,9 +239,13 @@
           "effect_kr": "행동 게이지 회복이 추가 턴으로 변경",
           "effect_zh": "行动值恢复变更为额外回合",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "1503",
@@ -312,7 +322,9 @@
       "buff": [],
       "debuff": [
         "BT_REMOVE_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "1504",
@@ -393,7 +405,11 @@
       ],
       "dual_debuff": [
         "BT_DOT_BLEED"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

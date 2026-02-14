@@ -142,7 +142,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+1 Weakness Gauge damage",
@@ -150,7 +152,9 @@
           "effect_kr": "WG 감소량 +1",
           "effect_zh": "WG降低量+1",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\nRemoves all debuffs from the caster\\nIncreases damage",
@@ -158,9 +162,13 @@
           "effect_kr": "강화 스킬로 교체\\n자신의 약화 효과 모두 해제\\n피해 증가",
           "effect_zh": "转化为强化技能\\n解除自身所有弱化效果\\n伤害提升",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "9902",
@@ -239,7 +247,9 @@
         "BT_STAT|ST_COUNTER_RATE",
         "SYS_BUFF_REVENGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "9903",
@@ -316,7 +326,9 @@
       "buff": [
         "BT_STAT|ST_COUNTER_RATE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "9904",
@@ -394,7 +406,11 @@
       "buff": [
         "BT_STAT|ST_COUNTER_RATE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

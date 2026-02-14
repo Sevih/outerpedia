@@ -130,7 +130,9 @@
         "BT_CALL_BACKUP_2",
         "BT_WG_DMG"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "11102",
@@ -219,7 +221,9 @@
           "effect_kr": "검은 태양 추가 획득 +1\\nWG 감소량 +1",
           "effect_zh": "额外获得黑太阳+1\\nWG减少量+1",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Gains additional Black Sun +2\\nDamage Increase",
@@ -227,7 +231,9 @@
           "effect_kr": "검은 태양 추가 획득 +2\\n피해 증가",
           "effect_zh": "额外获得黑太阳+2\\n伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Extra Turn\\nIncreases All Allies' Attack +3 turns",
@@ -235,9 +241,13 @@
           "effect_kr": "추가 턴\\n아군 전체 공격력 증가 +3턴",
           "effect_zh": "额外回合\\n全体我方攻击力提升+3回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "11103",
@@ -314,7 +324,9 @@
         "BT_STAT|ST_ATK_IR",
         "BT_STAT|ST_CRITICAL_DMG_RATE_IR",
         "BT_STAT|ST_DEF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "11104",
@@ -395,7 +407,11 @@
       ],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

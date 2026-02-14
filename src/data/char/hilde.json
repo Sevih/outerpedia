@@ -138,7 +138,9 @@
           "effect_kr": "협공 확정 호출",
           "effect_zh": "百分百触发夹攻",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+3 turns increased Effectiveness on allies",
@@ -146,7 +148,9 @@
           "effect_kr": "아군 전체 효과 적중 증가 +3턴",
           "effect_zh": "全体友军效果命中提升+3回合",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Activates Dual Attack with 2 allies",
@@ -154,9 +158,13 @@
           "effect_kr": "아군 2명 협공 호출",
           "effect_zh": "呼叫2名友军发动夹攻",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "8802",
@@ -235,7 +243,9 @@
       ],
       "debuff": [
         "BT_STONE"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "8803",
@@ -308,7 +318,9 @@
       "buff": [],
       "debuff": [
         "BT_EXTEND_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "8804",
@@ -386,7 +398,11 @@
       "buff": [
         "BT_STAT|ST_BUFF_CHANCE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

@@ -144,7 +144,9 @@
           "effect_kr": "공격 전 효과 적중 증가 +3턴",
           "effect_zh": "攻击前,效果命中提升,持续3回合。",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Activates Dual Attack with 1 ally",
@@ -152,7 +154,9 @@
           "effect_kr": "아군 1명 협공 호출",
           "effect_zh": "呼叫1名友军发动夹攻",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "-2 turns on all skill cooldowns",
@@ -160,9 +164,13 @@
           "effect_kr": "모든 스킬 쿨타임 -2턴",
           "effect_zh": "所有技能的冷却时间-2回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "6102",
@@ -237,7 +245,9 @@
       ],
       "debuff": [
         "BT_EXTEND_BUFF"
-      ]
+      ],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "6103",
@@ -317,7 +327,9 @@
       "debuff": [
         "BT_SEALED",
         "BT_REMOVE_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "6104",
@@ -398,7 +410,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_REMOVE_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

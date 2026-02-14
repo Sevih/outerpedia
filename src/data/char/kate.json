@@ -127,7 +127,9 @@
       "buff": [
         "BT_STAT|ST_BUFF_CHANCE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "3002",
@@ -209,7 +211,9 @@
         "BT_SHIELD_BASED_CASTER",
         "BT_STAT|ST_BUFF_RESIST"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "3003",
@@ -294,7 +298,9 @@
           "effect_kr": "스턴 발생 확률 +15%",
           "effect_zh": "晕眩触发几率+15%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -302,7 +308,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Increases Stunned duration by 1 turn",
@@ -310,9 +318,13 @@
           "effect_kr": "스턴 지속 +1턴",
           "effect_zh": "晕眩持续+1回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "3004",
@@ -393,7 +405,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_STAT|ST_BUFF_CHANCE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

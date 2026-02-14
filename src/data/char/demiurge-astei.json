@@ -142,7 +142,9 @@
           "effect_kr": "모형 정원의 관리자 +1턴\\n피해 증가",
           "effect_zh": "获得模型庄园的管理者+1回合\\n伤害提升",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -150,7 +152,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Resets cooldown of Sanctuary for All\\nSpeed +1 turn",
@@ -158,9 +162,13 @@
           "effect_kr": "만물에게 안식을 쿨타임 초기화\\n속도 +1턴",
           "effect_zh": "重置赐万物安息冷却时间\\n速度+1回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "5902",
@@ -240,7 +248,9 @@
       ],
       "debuff": [
         "IG_Buff_Death_Timer_Interruption_D"
-      ]
+      ],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "5903",
@@ -311,7 +321,9 @@
       "cd": "5",
       "wgr": 2,
       "buff": [],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "5904",
@@ -392,7 +404,11 @@
       ],
       "dual_buff": [
         "BT_STAT|ST_SPEED"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

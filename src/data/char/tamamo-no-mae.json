@@ -134,7 +134,9 @@
           "effect_kr": "방어력 감소 발생 확률 +50%",
           "effect_zh": "防御力降低发生率+50%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Enhances Reduced Defense\\n(Ignores Resilience)",
@@ -142,7 +144,9 @@
           "effect_kr": "방어력 감소 강화\\n(효과 저항 무시)",
           "effect_zh": "强化防御力降低\\n(无视效果抵抗)",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nReduces Eternal Enlightenment cooldown by 2 turns",
@@ -150,9 +154,13 @@
           "effect_kr": "강화 스킬로 교체\\n구경열반 삼세요호 쿨타임 -2턴",
           "effect_zh": "转化为强化技能\\n究竟涅槃三世妖狐冷却时间-2回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "8002",
@@ -228,7 +236,9 @@
       "debuff": [
         "BT_REMOVE_BUFF",
         "BT_STAT|ST_BUFF_RESIST"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "8003",
@@ -312,7 +322,9 @@
       ],
       "debuff": [
         "BT_COOL_CHARGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "8004",
@@ -390,7 +402,11 @@
       "buff": [],
       "debuff": [
         "BT_REVERSE_HEAL_BASED_TARGET"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

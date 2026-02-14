@@ -116,7 +116,9 @@
       "buff": [
         "BT_STAT|ST_ATK"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "552",
@@ -205,7 +207,9 @@
           "effect_kr": "WG 피해 +1",
           "effect_zh": "WG伤害+1",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "duo"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -213,7 +217,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "duo"
         },
         "SKT_BURST_3": {
           "effect": "Changes to Enhanced Skill\\nIncreases damage\\nExtra turn",
@@ -221,9 +227,13 @@
           "effect_kr": "강화 스킬로 교체\\n피해 증가\\n추가 턴",
           "effect_zh": "转化为强化技能\\n伤害提升\\n额外回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "duo"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "553",
@@ -300,7 +310,9 @@
       "buff": [
         "BT_STAT|ST_CRITICAL_DMG_RATE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "554",
@@ -381,7 +393,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   },
   "Chain_Type": "Join",

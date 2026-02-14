@@ -128,7 +128,9 @@
       "buff": [
         "BT_ADDITIVE_TURN"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "8502",
@@ -216,7 +218,9 @@
           "effect_kr": "강화 공격으로 변경 \\n피해 증가",
           "effect_zh": "变更为强化攻击\\n伤害提升",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+1 turn increased Penetration after attacking",
@@ -224,7 +228,9 @@
           "effect_kr": "공격 후 관통력 증가 +1턴",
           "effect_zh": "攻击后穿透力提升+1回合",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Gains an extra turn",
@@ -232,9 +238,13 @@
           "effect_kr": "추가 턴 발생",
           "effect_zh": "触发额外回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "8503",
@@ -309,7 +319,9 @@
       ],
       "debuff": [
         "BT_RESOURCE_DOWN"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "8504",
@@ -390,7 +402,11 @@
       ],
       "dual_buff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   },
   "limited": true

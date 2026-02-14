@@ -141,7 +141,9 @@
           "effect_kr": "적 전체 공격\\n피해 증가",
           "effect_zh": "攻击全体敌人\\n伤害提升",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -149,7 +151,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nPenetration increased.",
@@ -157,9 +161,13 @@
           "effect_kr": "강화 스킬로 교체\\n관통력 증가",
           "effect_zh": "转化为强化技能\\n穿透力提升",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "duo"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "3902",
@@ -237,7 +245,9 @@
         "SYS_BUFF_REVENGE",
         "BT_EXTEND_DEBUFF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "3903",
@@ -310,7 +320,9 @@
       "buff": [],
       "debuff": [
         "BT_STEAL_BUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "3904",
@@ -391,7 +403,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_ACTION_GAUGE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

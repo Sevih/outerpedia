@@ -142,7 +142,9 @@
           "effect_kr": "협공 확정 호출\\n피해 증가",
           "effect_zh": "百分百触发夹攻\\n伤害提升",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Increases the chance to inflict Taunted by 30%",
@@ -150,7 +152,9 @@
           "effect_kr": "도발 발동 확률 +30%",
           "effect_zh": "挑衅触发几率+30%",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Activates Dual Attack with 2 allies",
@@ -158,9 +162,13 @@
           "effect_kr": "아군 2명 협공 호출",
           "effect_zh": "呼叫2名友军发动夹攻",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "3702",
@@ -232,7 +240,9 @@
         "BT_REMOVE_DEBUFF",
         "BT_SHIELD_BASED_CASTER"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "3703",
@@ -309,7 +319,9 @@
       "debuff": [
         "BT_REMOVE_BUFF",
         "BT_AGGRO"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "3704",
@@ -390,7 +402,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_AGGRO"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   },
   "hasCoreFusion": true,

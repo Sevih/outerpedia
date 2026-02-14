@@ -136,7 +136,9 @@
       "buff": [],
       "debuff": [
         "BT_DOT_BURN"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "7302",
@@ -220,7 +222,9 @@
           "effect_kr": "피해 증가\\n지속성 대상 폭발 강화",
           "effect_zh": "伤害提升\\n土属性目标爆发强化",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases Burned duration by 2 turns when detonating",
@@ -228,7 +232,9 @@
           "effect_kr": "폭발 시 화상 +2턴 추가",
           "effect_zh": "爆发时烧伤额外+2回合",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nReduces Apocalypse Now cooldown by 2 turns",
@@ -236,9 +242,13 @@
           "effect_kr": "강화 스킬로 교체\\n지옥의 묵시록 쿨타임 -2턴",
           "effect_zh": "转化为强化技能\\n地狱启示录冷却时间-2回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "7303",
@@ -314,7 +324,9 @@
       ],
       "debuff": [
         "BT_DOT_BURN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "7304",
@@ -395,7 +407,11 @@
       ],
       "dual_debuff": [
         "BT_DOT_BURN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

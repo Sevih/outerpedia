@@ -125,7 +125,9 @@
       "wgr": 1,
       "cd": null,
       "buff": [],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "4702",
@@ -199,7 +201,9 @@
         "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK",
         "BT_CONTINU_HEAL"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "4703",
@@ -278,7 +282,9 @@
           "effect_kr": "실드 추가 (대상 체력 비례)",
           "effect_zh": "额外护盾(根据目标生命值等比)",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Enhances barrier strength",
@@ -286,7 +292,9 @@
           "effect_kr": "실드 강화",
           "effect_zh": "护盾强化",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Target Action Points +50",
@@ -294,9 +302,13 @@
           "effect_kr": "대상 AP +50",
           "effect_zh": "目标AP+50",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "4704",
@@ -375,7 +387,11 @@
         "BT_CONTINU_HEAL"
       ],
       "debuff": [],
-      "dual_buff": []
+      "dual_buff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

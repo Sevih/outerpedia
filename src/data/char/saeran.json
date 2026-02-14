@@ -135,8 +135,9 @@
       "buff": [
         "BT_REMOVE_DEBUFF"
       ],
-      "debuff": [
-      ]
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "2302",
@@ -216,7 +217,9 @@
           "effect_kr": "체력 회복량 +15%\\n대상 AP +25",
           "effect_zh": "生命值恢复量+15%\\n目标AP +25",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": false,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Removes all debuffs from the target",
@@ -224,7 +227,9 @@
           "effect_kr": "대상의 모든 약화 효과 해제",
           "effect_zh": "解除目标的全部弱化效果",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": false,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Grants Revival (1 turn)",
@@ -232,9 +237,13 @@
           "effect_kr": "소생 부여 (1턴)",
           "effect_zh": "施加复苏(1回合)",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": false,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "2303",
@@ -314,7 +323,9 @@
         "BT_STAT|ST_ATK",
         "BT_REMOVE_DEBUFF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "2304",
@@ -395,7 +406,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_REMOVE_DEBUFF"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

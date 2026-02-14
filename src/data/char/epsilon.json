@@ -131,7 +131,9 @@
       "buff": [
         "BT_STAT|ST_DEF"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "duo"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "7002",
@@ -217,7 +219,9 @@
           "effect_kr": "피해 증가\\n강화 효과 해제 수량 +1",
           "effect_zh": "伤害提升\\n解除强化效果数量+1",
           "cost": 90,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "+1 buff removed",
@@ -225,7 +229,9 @@
           "effect_kr": "강화 효과 해제 수량 +1",
           "effect_zh": "强化效果解除数量+1",
           "cost": 130,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nIncreases damage\\nRecovers 20% Health",
@@ -233,9 +239,13 @@
           "effect_kr": "강화 스킬로 교체\\n피해 증가\\n체력 20% 회복",
           "effect_zh": "转化为强化技能\\n伤害提升\\n生命值恢复20%",
           "cost": 180,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "7003",
@@ -313,7 +323,9 @@
         "BT_AP_CHARGE",
         "BT_INVINCIBLE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "7004",
@@ -391,7 +403,11 @@
       "buff": [
         "BT_DMG_TARGET_BREAK"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

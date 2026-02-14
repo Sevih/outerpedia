@@ -133,7 +133,9 @@
       "buff": [
         "BT_STAT|ST_ATK"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "7802",
@@ -216,7 +218,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+1 turn Stealth duration",
@@ -224,7 +228,9 @@
           "effect_kr": "은신 지속 +1턴",
           "effect_zh": "隐身效果+1回合",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Increases Penetration by 30%",
@@ -232,9 +238,13 @@
           "effect_kr": "관통력 30% 증가",
           "effect_zh": "穿透力提升30%",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "7803",
@@ -312,7 +322,9 @@
       ],
       "debuff": [
         "BT_SEALED_RESURRECTION"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "7804",
@@ -393,7 +405,11 @@
       "debuff": [],
       "dual_buff": [
         "BT_STAT|ST_ATK"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

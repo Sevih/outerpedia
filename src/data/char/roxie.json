@@ -140,7 +140,9 @@
           "effect_kr": "감전 발생 확률 +50%\\n감전 2턴 추가 발생",
           "effect_zh": "触电触发几率+50%\\n额外造成2回合触电效果",
           "cost": 70,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "+1 turn debuff duration",
@@ -148,7 +150,9 @@
           "effect_kr": "약화 효과 지속 시간 +1턴",
           "effect_zh": "弱化效果持续时间+1回合",
           "cost": 105,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "<color=#FFBF00>Enhanced Attack</color>\\nResets all skill cooldowns\\nHelp Me, Sis guaranteed activation",
@@ -156,9 +160,13 @@
           "effect_kr": "<color=#FFBF00>강화 공격</color>\\n모든 스킬 쿨타임 초기화\\n도와줘, 언니! 반드시 발동",
           "effect_zh": "<color=#FFBF00>强化攻击</color>\\n重置所有技能冷却时间\\n必定触发姐姐帮我!",
           "cost": 140,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "8202",
@@ -229,10 +237,13 @@
       "wgr": 1,
       "cd": "4",
       "buff": [
-        "BT_ACTION_GAUGE","BT_EXTRA_ATTACK_ON_TURN_END",
+        "BT_ACTION_GAUGE",
+        "BT_EXTRA_ATTACK_ON_TURN_END",
         "BT_STAT|ST_BUFF_CHANCE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "8203",
@@ -307,7 +318,9 @@
       ],
       "debuff": [
         "BT_DOT_LIGHTNING"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "8204",
@@ -388,7 +401,11 @@
       ],
       "dual_debuff": [
         "BT_DOT_LIGHTNING"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

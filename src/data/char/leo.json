@@ -140,7 +140,9 @@
           "effect_kr": "대상 1턴 동안 도발\\n피해 증가",
           "effect_zh": "挑衅目标1回合\\n伤害提升",
           "cost": 120,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Enhances Taunted\\n(Ignores Resilience)",
@@ -148,7 +150,9 @@
           "effect_kr": "도발 강화\\n(효과 저항 무시)",
           "effect_zh": "强化挑衅\\n(无视效果抵抗)",
           "cost": 160,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nTargets all enemies and deals additional damage proportional to Defense",
@@ -156,9 +160,13 @@
           "effect_kr": "강화 스킬로 교체\\n공격 범위 확대 및 방어 비례 피해 추가",
           "effect_zh": "转化为强化技能\\n扩大攻击范围,\\n且根据防御等比造成额外伤害",
           "cost": 200,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "4202",
@@ -228,7 +236,9 @@
         "BT_STAT|ST_DEF",
         "BT_SHIELD_BASED_CASTER"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "4203",
@@ -306,7 +316,9 @@
         "BT_INVINCIBLE",
         "BT_STAT|ST_BUFF_RESIST"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "4204",
@@ -384,7 +396,11 @@
       "buff": [
         "BT_COOL_CHARGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

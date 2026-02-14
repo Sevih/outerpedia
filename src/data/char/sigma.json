@@ -135,7 +135,9 @@
       "buff": [],
       "debuff": [
         "BT_STUN"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "5202",
@@ -227,7 +229,9 @@
           "effect_kr": "피해 증가\\n반격 확률 증가",
           "effect_zh": "伤害提升\\n反击率提升",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Increases damage",
@@ -235,7 +239,9 @@
           "effect_kr": "피해 증가",
           "effect_zh": "伤害提升",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Increases Penetration by 30%",
@@ -243,9 +249,13 @@
           "effect_kr": "관통력 30% 증가",
           "effect_zh": "穿透力提升30%",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "5203",
@@ -328,7 +338,9 @@
       ],
       "debuff": [
         "BT_DOT_LIGHTNING"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "5204",
@@ -409,7 +421,11 @@
       "debuff": [],
       "dual_debuff": [
         "BT_STUN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

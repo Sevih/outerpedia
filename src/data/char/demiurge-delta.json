@@ -147,7 +147,9 @@
           "effect_kr": "아군 회복 대상 AP +70",
           "effect_zh": "友军恢复目标AP+70",
           "cost": 60,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Grants increased Resilience to ally healing target for 2 turns",
@@ -155,7 +157,9 @@
           "effect_kr": "아군 회복 대상 효과 저항 +2턴",
           "effect_zh": "友军恢复目标效果抵抗+2回合",
           "cost": 90,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Resets cooldown of ally healing target",
@@ -163,9 +167,13 @@
           "effect_kr": "아군 회복 대상 쿨타임 초기화",
           "effect_zh": "重置友军恢复目标的冷却时间",
           "cost": 120,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "10002",
@@ -234,7 +242,9 @@
         "BT_REMOVE_DEBUFF",
         "BT_ACTION_GAUGE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "10003",
@@ -304,7 +314,9 @@
         "IG_Buff_Effect_2000100_Interruption",
         "BT_ADDITIVE_TURN"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "10004",
@@ -383,7 +395,11 @@
       "debuff": [
         "BT_WG_REVERSE_HEAL"
       ],
-      "dual_buff": []
+      "dual_buff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }

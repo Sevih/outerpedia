@@ -133,7 +133,9 @@
         "BT_STAT|ST_BUFF_CHANCE",
         "HEAVY_STRIKE"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "duo"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "9102",
@@ -232,7 +234,9 @@
           "effect_kr": "대상 방어력 -2턴",
           "effect_zh": "目标防御力-2回合",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_2": {
           "effect": "Reduces buff duration of the target by 2 turns before attacking",
@@ -240,7 +244,9 @@
           "effect_kr": "대상 강화 효과 지속 -2턴 후 공격",
           "effect_zh": "目标强化效果持续-2回合后攻击",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "multi"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nInflicts Stunned on the target for 1 turn",
@@ -248,9 +254,13 @@
           "effect_kr": "강화 스킬로 교체\\n대상 스턴 +1턴",
           "effect_zh": "转化为强化技能\\n目标晕眩+1回合",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "multi"
         }
-      }
+      },
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "9103",
@@ -339,7 +349,9 @@
       "debuff": [
         "BT_REMOVE_BUFF",
         "BT_STUN"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "9104",
@@ -423,7 +435,11 @@
       "dual_buff": [
         "BT_STAT|ST_BUFF_CHANCE",
         "HEAVY_STRIKE"
-      ]
+      ],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   },
   "limited": true

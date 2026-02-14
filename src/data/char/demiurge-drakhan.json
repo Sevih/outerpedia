@@ -142,7 +142,9 @@
           "effect_kr": "관통력 30% 증가",
           "effect_zh": "穿透力提升30%",
           "cost": 80,
-          "level": 1
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_2": {
           "effect": "Damage dealt increases proportional to missing Health",
@@ -150,7 +152,9 @@
           "effect_kr": "잃은 체력에 비례하여 피해 증가",
           "effect_zh": "伤害随损失生命值提升",
           "cost": 120,
-          "level": 2
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
         },
         "SKT_BURST_3": {
           "effect": "Changed to Enhanced Skill\\nResets cooldown of Dragon Ruler's Breath",
@@ -158,9 +162,13 @@
           "effect_kr": "강화 스킬로 교체\\n용왕의 숨결 쿨타임 초기화",
           "effect_zh": "转化为强化技能\\n重置龙王吐息冷却时间",
           "cost": 160,
-          "level": 3
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
         }
-      }
+      },
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_SECOND": {
       "NameIDSymbol": "6302",
@@ -231,7 +239,9 @@
         "BT_STAT|ST_PIERCE_POWER_RATE",
         "BT_ADDITIVE_TURN"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": false,
+      "target": "multi"
     },
     "SKT_ULTIMATE": {
       "NameIDSymbol": "6303",
@@ -308,7 +318,9 @@
       "buff": [],
       "debuff": [
         "BT_SEALED_RESURRECTION"
-      ]
+      ],
+      "offensive": true,
+      "target": "mono"
     },
     "SKT_CHAIN_PASSIVE": {
       "NameIDSymbol": "6304",
@@ -386,7 +398,11 @@
       "buff": [
         "BT_DMG_ELEMENT_SUPERIORITY"
       ],
-      "debuff": []
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "dual_offensive": true,
+      "dual_target": "mono"
     }
   }
 }
