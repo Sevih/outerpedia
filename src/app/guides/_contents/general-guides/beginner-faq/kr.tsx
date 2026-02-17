@@ -67,7 +67,7 @@ export default function BeginnerFAQ() {
                       <div className="p-4 bg-amber-900/20 border border-amber-500/30 rounded-lg space-y-2">
                         <h5 className="font-semibold text-amber-300">프리미엄</h5>
                         <p className="text-sm ">
-                          프리미엄 배너에서는 7일마다 픽업 대상을 변경할 수 있습니다. 처음 시작하는 경우, 현재 픽업 영웅을 뽑은 후 변경하는 것이 좋습니다.
+                          프리미엄 배너에서는 언제든지 픽업 대상을 변경할 수 있습니다.
                           추천 순서는 <Link href="/guides/general-guides/premium-limited" className="text-blue-400 underline">전용 가이드</Link>를 참고하세요.
                         </p>
                       </div>

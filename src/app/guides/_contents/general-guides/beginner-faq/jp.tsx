@@ -67,7 +67,7 @@ export default function BeginnerFAQ() {
                       <div className="p-4 bg-amber-900/20 border border-amber-500/30 rounded-lg space-y-2">
                         <h5 className="font-semibold text-amber-300">プレミアム</h5>
                         <p className="text-sm ">
-                          プレミアムバナーでは7日ごとにピックアップ対象を変更できます。始めたばかりの場合は、現在のピックアップヒーローを引いてから変更するのがおすすめです。
+                          プレミアムバナーではいつでもピックアップ対象を変更できます。
                           推奨順序は<Link href="/guides/general-guides/premium-limited" className="text-blue-400 underline">専用ガイド</Link>をご覧ください。
                         </p>
                       </div>

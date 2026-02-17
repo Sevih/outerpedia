@@ -67,7 +67,7 @@ export default function BeginnerFAQ() {
                       <div className="p-4 bg-amber-900/20 border border-amber-500/30 rounded-lg space-y-2">
                         <h5 className="font-semibold text-amber-300">精选</h5>
                         <p className="text-sm ">
-                          精选卡池每7天可以更换一次UP目标。刚开始时，可以先抽当前UP英雄再更换。
+                          精选卡池可以随时更换UP目标。
                           推荐顺序请参阅<Link href="/guides/general-guides/premium-limited" className="text-blue-400 underline">专用指南</Link>。
                         </p>
                       </div>

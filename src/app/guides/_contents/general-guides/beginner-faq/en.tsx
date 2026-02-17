@@ -67,7 +67,7 @@ export default function BeginnerFAQ() {
                       <div className="p-4 bg-amber-900/20 border border-amber-500/30 rounded-lg space-y-2">
                         <h5 className="font-semibold text-amber-300">Premium</h5>
                         <p className="text-sm ">
-                          The Premium banner lets you change your rate up target once per 7 days. When starting out, you can roll for the current rate up hero before changing.
+                          The Premium banner lets you change your rate up target at any time.
                           Our recommended order is listed in the <Link href="/guides/general-guides/premium-limited" className="text-blue-400 underline">dedicated guide</Link>.
                         </p>
                       </div>
