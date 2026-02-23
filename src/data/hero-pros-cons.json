@@ -318,5 +318,21 @@
             "vulnerable to {D/BT_SEALED} or Fixed Damage which bypasses her mitigation",
             "{SK/Hilde|S1} primarily effective in PvP, less efficient for general PvE progression due to bosses/Enemies always have a higher HP"
         ]
+    },
+    "demiurge-drakhan": {
+        "pro": [
+            "provides unparalleled team protection by absorbing 35% of ally damage through her buff {B/IG_Buff_2000063_Interruption}",
+            "{SK/demiurge-drakhan|S2} grants massive {B/BT_SHIELD_BASED_CASTER}, {B/BT_STAT|ST_PIERCE_POWER_RATE}, and {B/BT_STAT|ST_DEF} to all allies",
+            "Good against units with revive-based abilities/accessory with anti-resurrection mechanics on her Burst and {SK/demiurge-drakhan|S3} skill",
+            "Excellent turn cycling with her transcendance passive now granting a massive 25% Priority push when an ally critically hits (at 4-star)",
+            "Exclusive Equipment provides team healing on a critical hit",
+            "Strong PvE presence with increased Weakness Gauge reduction on her {SK/demiurge-drakhan|S1} and {SK/demiurge-drakhan|Chain}"
+        ],
+        "con": [
+            "absorbing 35% of ally damage makes her extremely susceptible to dying quickly against heavy AoE cleave teams if her Max HP isn't exceptionally high",
+            "requires heavy investment, specifically her Level 10 Exclusive Equipment, to unlock her massive +35% Max Health boost",
+            "still heavily countered by units that inflict {D/BT_SEALED}, which prevents her team-wide barrier setup",
+            "because she requires stacking immense amounts of Max HP, she is naturally vulnerable to enemies whose damage scales against the target's Max Health"
+        ]
     }
 }
