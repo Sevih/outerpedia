@@ -334,5 +334,18 @@
             "still heavily countered by units that inflict {D/BT_SEALED}, which prevents her team-wide barrier setup",
             "because she requires stacking immense amounts of Max HP, she is naturally vulnerable to enemies whose damage scales against the target's Max Health"
         ]
+    },
+    "cindy": {
+        "pro": [
+            "excellent buffer who provides team-wide {B/BT_STAT|ST_ATK} and {B/BT_STAT|ST_SPEED} buffs",
+            "high base Speed allows her to act first and set up cleave teams effectively",
+            "Great support with the ability to {B/BT_EXTEND_BUFF}",
+            "great low-investment 2-star support unit for early to mid-game progression"
+        ],
+        "con": [
+            "lower base stats as a 2-star unit make her very squishy",
+            "overshadowed in the late-game by premium 3-star buffers who offer more utility",
+            "provides no defensive mitigation or healing, making her strictly an offensive support"
+        ]
     }
 }
