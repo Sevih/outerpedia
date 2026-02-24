@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-02-24",
+    title: {
+      en: "Shichifuja",
+      jp: "七歩蛇",
+      kr: "시치후샤",
+      zh: "七步蛇",
+    } as LString,
+    type: "update",
+    url: "/guides/joint-boss/shichifuja",
+    content: [
+      {
+        en: "Shichifuja Joint Challenge Guide updated for February 2026 version.",
+        jp: "七歩蛇 共同作戦ガイドが2026年2月版にアップデートされました。",
+        kr: "시치후샤 합동 챌린지 가이드가 2026년 2월 버전으로 업데이트되었습니다.",
+        zh: "七步蛇联合挑战攻略已更新至2026年2月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-02-11",
     title: {
       en: "Planetary Control Unit",
