@@ -236,7 +236,7 @@ export default function BeginnerFAQ() {
                       <div className="p-3 bg-cyan-900/10 border-l-4 border-cyan-500 rounded">
                         <p className="text-sm font-semibold text-cyan-300 mb-1">防具优先</p>
                         <p className="text-sm ">
-                          <GuideIconInline name="IG_Turn_4034002" text="不明嵌合体" size={30} />是防具的首要目标。速度、反击、暴击、（命中）套装适用于任何职业。神圣守护者的穿透套装对输出更强，但这个BOSS不提供对其他职业通用的套装。
+                          <GuideIconInline name="IG_Turn_4034002" text="不明嵌合体" size={30} />是防具的首要目标。速度、反击、暴击、开战防壁套装适用于任何职业。神圣守护者的穿透套装对输出更强，但这个BOSS不提供对其他职业通用的套装。
                         </p>
                       </div>
 

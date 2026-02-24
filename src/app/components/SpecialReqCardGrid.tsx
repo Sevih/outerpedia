@@ -73,7 +73,7 @@ const BOSS_REWARDS: Record<string, string[]> = {
   // Ecology Study missions (4 récompenses chacune) - ordre inversé pour dir="rtl"
   'guardian': [
     'Set_Enchant_05', // Effectiveness Set
-    'Set_Enchant_09', // Evasion Set
+    'Set_Enchant_24', // Mitigation Set
     'Set_Enchant_13', // Critical Hit Set
     'Set_Enchant_01', // Attack Set
   ],
@@ -86,7 +86,7 @@ const BOSS_REWARDS: Record<string, string[]> = {
   'chimera': [
     'Set_Enchant_04', // Critical Strike Set
     'Set_Enchant_15', // Speed Set
-    'Set_Enchant_08', // Accuracy Set
+    'Set_Enchant_23', // Fortification set
     'Set_Enchant_07', // Counterattack Set
   ],
   'sacreed': [

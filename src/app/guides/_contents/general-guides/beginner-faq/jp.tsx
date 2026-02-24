@@ -236,7 +236,7 @@ export default function BeginnerFAQ() {
                       <div className="p-3 bg-cyan-900/10 border-l-4 border-cyan-500 rounded">
                         <p className="text-sm font-semibold text-cyan-300 mb-1">防具優先</p>
                         <p className="text-sm ">
-                          <GuideIconInline name="IG_Turn_4034002" text="正体不明のキメラ" size={30} />が防具の最初のターゲットです。速度、反撃、クリティカル、（命中）セットはどの役割にも使えます。聖なる守護者の貫通セットはアタッカーにより強力ですが、このボスは他の役割に汎用的に使えるセットを提供しません。
+                          <GuideIconInline name="IG_Turn_4034002" text="正体不明のキメラ" size={30} />が防具の最初のターゲットです。速度、反撃、クリティカル、鉄壁セットはどの役割にも使えます。聖なる守護者の貫通セットはアタッカーにより強力ですが、このボスは他の役割に汎用的に使えるセットを提供しません。
                         </p>
                       </div>
 

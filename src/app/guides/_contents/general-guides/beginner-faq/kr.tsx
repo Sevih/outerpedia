@@ -236,7 +236,7 @@ export default function BeginnerFAQ() {
                       <div className="p-3 bg-cyan-900/10 border-l-4 border-cyan-500 rounded">
                         <p className="text-sm font-semibold text-cyan-300 mb-1">방어구 우선</p>
                         <p className="text-sm ">
-                          <GuideIconInline name="IG_Turn_4034002" text="정체불명의 키메라" size={30} />가 방어구의 첫 타겟입니다. 속도, 반격, 치명타, (명중) 세트는 어떤 역할에도 사용할 수 있습니다. 성스러운 수호자의 관통 세트가 딜러에게 더 강력하지만, 이 보스는 다른 역할에 범용적으로 사용할 수 있는 세트를 제공하지 않습니다.
+                          <GuideIconInline name="IG_Turn_4034002" text="정체불명의 키메라" size={30} />가 방어구의 첫 타겟입니다. 속도, 반격, 치명타, 개전 방벽 세트는 어떤 역할에도 사용할 수 있습니다. 성스러운 수호자의 관통 세트가 딜러에게 더 강력하지만, 이 보스는 다른 역할에 범용적으로 사용할 수 있는 세트를 제공하지 않습니다.
                         </p>
                       </div>
 

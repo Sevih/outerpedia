@@ -236,7 +236,7 @@ export default function BeginnerFAQ() {
                       <div className="p-3 bg-cyan-900/10 border-l-4 border-cyan-500 rounded">
                         <p className="text-sm font-semibold text-cyan-300 mb-1">Armor Priority</p>
                         <p className="text-sm ">
-                          <GuideIconInline name="IG_Turn_4034002" text="Unidentified Chimera" size={30} /> is the first focus for armor, as her sets, Speed, Counterattack, Critical Strike, (accuracy) offer something for any role. Penetration set from Sacreed Guardian would be stronger for damage dealers, but this boss doesn&apos;t offer sets that are generally useful for other roles.
+                          <GuideIconInline name="IG_Turn_4034002" text="Unidentified Chimera" size={30} /> is the first focus for armor, as her sets, Speed, Counterattack, Critical Strike, Fortification offer something for any role. Penetration set from Sacreed Guardian would be stronger for damage dealers, but this boss doesn&apos;t offer sets that are generally useful for other roles.
                         </p>
                       </div>
 
