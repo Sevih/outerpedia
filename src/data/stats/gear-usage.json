@@ -1044,15 +1044,6 @@
     ]
   },
   {
-    "name": "Accuracy Set",
-    "type": "Set",
-    "class": null,
-    "count": 1,
-    "characters": [
-      "Iota"
-    ]
-  },
-  {
     "name": "Briareos's Recklessness [Mage]",
     "type": "Weapon",
     "class": "Mage",
@@ -1266,13 +1257,6 @@
     "characters": []
   },
   {
-    "name": "Evasion Set",
-    "type": "Set",
-    "class": null,
-    "count": 0,
-    "characters": []
-  },
-  {
     "name": "Fierce Frost Sword",
     "type": "Weapon",
     "class": "Striker",
@@ -1297,6 +1281,13 @@
     "name": "Flashy Golden Cards",
     "type": "Amulet",
     "class": "Striker",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Fortification set",
+    "type": "Set",
+    "class": null,
     "count": 0,
     "characters": []
   },
@@ -1395,6 +1386,13 @@
     "name": "Middle School Girl Invincibility",
     "type": "Weapon",
     "class": "Ranger",
+    "count": 0,
+    "characters": []
+  },
+  {
+    "name": "Mitigation set",
+    "type": "Set",
+    "class": null,
     "count": 0,
     "characters": []
   },

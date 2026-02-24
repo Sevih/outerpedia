@@ -4457,40 +4457,6 @@
         "Swiftness",
         "Effectiveness"
       ]
-    },
-    "PvE - accu": {
-      "weaponSub": [
-        {
-          "name": "Noblewoman's Guile",
-          "mainStat": [
-            "ATK%"
-          ]
-        },
-        {
-          "name": "Thumping Odyssey",
-          "mainStat": [
-            "ATK%"
-          ]
-        }
-      ],
-      "amuletSub": [
-        {
-          "name": "Dies Irae",
-          "mainStat": [
-            "SPD"
-          ]
-        }
-      ],
-      "sub": [
-        "ACC",
-        "EFF",
-        "SPD",
-        "ATK"
-      ],
-      "armorSets": [
-        "Swiftness",
-        "Accuracy"
-      ]
     }
   },
   "kanon": {
