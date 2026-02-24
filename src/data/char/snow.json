@@ -396,5 +396,7 @@
       "dual_offensive": true,
       "dual_target": "mono"
     }
-  }
+  },
+  "hasCoreFusion": true,
+  "coreFusionId": "2700003"
 }
