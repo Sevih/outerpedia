@@ -2224,5 +2224,17 @@
     "description_kr": "[아메]가 착용할 수 있는 코스튬입니다.",
     "description_zh": "【亚美】可穿戴的皮肤。",
     "icon": "TI_Costume_Clothes_2000065_03"
+  },
+  {
+    "name": "Summer Island Eliza",
+    "name_jp": "サマーアイランド エリーゼ",
+    "name_kr": "서머 아일랜드 엘리제",
+    "name_zh": "夏日海岛伊莉莎",
+    "rarity": "epic",
+    "description": "This is a costume that can be worn by Eliza.",
+    "description_jp": "【エリーゼ】のスキンです。\\nスキンは【仲間】→【スキン】で装備でき\\n【スキン】ボタンは仲間のスキンがある場合のみ表示されます。",
+    "description_kr": "[엘리제]가 착용할 수 있는 코스튬입니다.",
+    "description_zh": "【伊莉莎】可穿戴的皮肤。",
+    "icon": "TI_Costume_Clothes_2000035_02"
   }
 ]
