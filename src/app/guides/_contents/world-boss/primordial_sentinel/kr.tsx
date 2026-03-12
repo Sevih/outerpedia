@@ -33,8 +33,53 @@ export default function PrimordialSentinelGuide() {
         <GuideTemplate
             title="시원의 파수꾼 (영광의 파수꾼) 공략 가이드"
             introduction="시원의 파수꾼은 정밀한 팀 조율과 타이밍이 필요한 2페이즈 월드 보스입니다. 이 가이드는 익스트림 리그까지의 공략 전략을 다룹니다."
-            defaultVersion="november2025"
+            disclaimer="이 가이드는 2026년 3월 버전으로 업데이트 중입니다."
+            defaultVersion="march2026"
             versions={{
+                march2026: {
+                    label: '2026년 3월',
+                    content: (
+                        <>
+                            <WorldBossDisplay config={primordialSentinelNovember2025} defaultMode="Extreme" />
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                sections={[
+                                    {
+                                        title: "strategy",
+                                        tips: [
+                                            "이 전투는 행동 순서 제어가 전부입니다. 페이즈 1에서는 행동 순서 감소를 최대한 활용하세요.",
+                                            "페이즈 2에서는 보스가 행동 순서 감소에 면역이므로 캐릭터를 최대한 빠르게 만들어야 합니다.",
+                                            "스킬 체인과 CP 생성을 위해 현자와 로그 부적을 장착하세요 (로그의 치명타 확률을 잊지 마세요).",
+                                            "양 페이즈에서 {B/UNIQUE_DAHLIA_A} 버프로 인한 {D/BT_STAT|ST_SPEED}를 위해 최소 1명의 힐러를 편성하세요."
+                                        ]
+                                    },
+                                    {
+                                        title: "phase2",
+                                        tips: [
+                                            "팀 2에 6성 {P/Monad Eva}가 있다면 페이즈 1에서 CP를 쌓은 후 끝날 무렵 팀 2로 교체할 수 있습니다.",
+                                            "{P/Monad Eva}가 즉시 보스에게 {D/BT_SEAL_ADDITIVE_ATTACK}를 부여하여 페이즈 1에서 쌓은 CP를 유지할 수 있습니다."
+                                        ]
+                                    }
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList title="phase1" entries={phase1Characters} />
+                            <RecommendedCharacterList title="phase2" entries={phase2Characters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={PrimordialSentinelTeams.march2026} defaultStage="Phase 1" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage
+                                videoId="4me_DqMftbs"
+                                title="시원의 파수꾼 - 월드 보스 - SSS - 익스트림 리그"
+                                author="Unknown"
+                                date="01/11/2025"
+                            />
+                            <p className="mt-2 text-neutral-400 text-sm">
+                                참고: 이 영상은 SSS 익스트림 클리어를 보여줍니다. 동일한 전략을 낮은 난이도에도 적용할 수 있지만 일부 보스 메커니즘이 약화되거나 비활성화될 수 있습니다. 익스트림 리그 이전에는 점수가 무제한이 아니므로 페이즈 1에서 체인 포인트를 쌓는 데 덜 집중해도 됩니다.
+                            </p>
+                        </>
+                    ),
+                },
                 november2025: {
                     label: '2025년 11월',
                     content: (

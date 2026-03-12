@@ -33,8 +33,53 @@ export default function PrimordialSentinelGuide() {
         <GuideTemplate
             title="始源守卫（荣耀守卫）攻略指南"
             introduction="始源守卫是一个需要精确团队配合和时机把控的双阶段世界Boss。本指南涵盖了直到极限联赛的攻略策略。"
-            defaultVersion="november2025"
+            disclaimer="本指南正在更新为2026年3月版本。"
+            defaultVersion="march2026"
             versions={{
+                march2026: {
+                    label: '2026年3月',
+                    content: (
+                        <>
+                            <WorldBossDisplay config={primordialSentinelNovember2025} defaultMode="Extreme" />
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                sections={[
+                                    {
+                                        title: "strategy",
+                                        tips: [
+                                            "整场战斗围绕行动顺序控制展开。在第一阶段，尽可能利用行动顺序减少。",
+                                            "在第二阶段，Boss免疫行动顺序减少，因此需要让角色尽可能快。",
+                                            "装备贤者和盗贼护符以获得技能连锁和CP生成（别忘了盗贼的暴击率）。",
+                                            "在两个阶段中，至少带一名治疗师，通过{B/UNIQUE_DAHLIA_A}buff来获得{D/BT_STAT|ST_SPEED}。"
+                                        ]
+                                    },
+                                    {
+                                        title: "phase2",
+                                        tips: [
+                                            "如果队伍2中有6星{P/Monad Eva}，可以在第一阶段积累CP，然后在接近结束时切换到队伍2。",
+                                            "{P/Monad Eva}会立即给Boss上{D/BT_SEAL_ADDITIVE_ATTACK}，让你保留在第一阶段积累的CP。"
+                                        ]
+                                    }
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList title="phase1" entries={phase1Characters} />
+                            <RecommendedCharacterList title="phase2" entries={phase2Characters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={PrimordialSentinelTeams.march2026} defaultStage="Phase 1" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage
+                                videoId="4me_DqMftbs"
+                                title="始源守卫 - 世界Boss - SSS - 极限联赛"
+                                author="Unknown"
+                                date="01/11/2025"
+                            />
+                            <p className="mt-2 text-neutral-400 text-sm">
+                                注意：此视频展示的是SSS极限通关。相同的策略可以应用于较低难度，但某些Boss机制可能会被削弱或禁用。由于极限联赛之前分数不是无限的，因此在第一阶段不需要太专注于积累连锁点数。
+                            </p>
+                        </>
+                    ),
+                },
                 november2025: {
                     label: '2025年11月',
                     content: (

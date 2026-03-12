@@ -33,8 +33,53 @@ export default function PrimordialSentinelGuide() {
         <GuideTemplate
             title="Primordial Sentinel (Glorious Sentinel) Strategy"
             introduction="The Primordial Sentinel is a challenging two-phase world boss that requires precise team coordination and timing. This guide covers strategies for defeating this boss up to the Extreme League."
-            defaultVersion="november2025"
+            disclaimer="This guide is currently being updated for the March 2026 version."
+            defaultVersion="march2026"
             versions={{
+                march2026: {
+                    label: 'March 2026',
+                    content: (
+                        <>
+                            <WorldBossDisplay config={primordialSentinelNovember2025} defaultMode="Extreme" />
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                sections={[
+                                    {
+                                        title: "strategy",
+                                        tips: [
+                                            "This entire fight revolves around priority control. In Phase 1, abuse priority reduction as much as possible.",
+                                            "In Phase 2, the boss is immune to priority reduction - make your characters as fast as possible.",
+                                            "Equip Sage and Rogue charms for Skill Chains and CP generation (don't forget critical hit chance for Rogue).",
+                                            "In both phases, bring at least 1 healer for the {D/BT_STAT|ST_SPEED} thanks to the {B/UNIQUE_DAHLIA_A} buff."
+                                        ]
+                                    },
+                                    {
+                                        title: "phase2",
+                                        tips: [
+                                            "If you have {P/Monad Eva} at 6 stars in Team 2, you can stack CP in Phase 1 then swap to Team 2 near the end.",
+                                            "{P/Monad Eva} will instantly {D/BT_SEAL_ADDITIVE_ATTACK} the boss, allowing you to keep the CP you built during Phase 1."
+                                        ]
+                                    }
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList title="phase1" entries={phase1Characters} />
+                            <RecommendedCharacterList title="phase2" entries={phase2Characters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={PrimordialSentinelTeams.march2026} defaultStage="Phase 1" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage
+                                videoId="4me_DqMftbs"
+                                title="Primordial Sentinel - World Boss - SSS - Extreme League"
+                                author="Unknown"
+                                date="01/11/2025"
+                            />
+                            <p className="mt-2 text-neutral-400 text-sm">
+                                Note: This video showcases an SSS Extreme clear. The same strategy can be applied to lower difficulties, but certain boss mechanics may be weakened or disabled. As the score is not unlimited before Extreme League, this requires less focus on building chain points in phase 1.
+                            </p>
+                        </>
+                    ),
+                },
                 november2025: {
                     label: 'November 2025',
                     content: (

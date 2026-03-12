@@ -33,8 +33,53 @@ export default function PrimordialSentinelGuide() {
         <GuideTemplate
             title="始原の番人（栄光の番人）攻略ガイド"
             introduction="始原の番人は、チームの連携とタイミングが重要な2フェーズ制のワールドボスです。このガイドでは、エクストリームリーグまでの攻略方法を解説します。"
-            defaultVersion="november2025"
+            disclaimer="このガイドは2026年3月版に更新中です。"
+            defaultVersion="march2026"
             versions={{
+                march2026: {
+                    label: '2026年3月',
+                    content: (
+                        <>
+                            <WorldBossDisplay config={primordialSentinelNovember2025} defaultMode="Extreme" />
+                            <hr className="my-6 border-neutral-700" />
+                            <TacticalTips
+                                sections={[
+                                    {
+                                        title: "strategy",
+                                        tips: [
+                                            "この戦闘は行動順制御が全てです。フェーズ1では、行動順減少を最大限活用しましょう。",
+                                            "フェーズ2では、ボスは行動順減少に免疫があるため、キャラクターをできるだけ速くする必要があります。",
+                                            "スキルチェーンとCP生成のために賢者とローグのチャームを装備しましょう（ローグの会心率を忘れずに）。",
+                                            "両フェーズで、{B/UNIQUE_DAHLIA_A}バフによる{D/BT_STAT|ST_SPEED}のために、少なくとも1人のヒーラーを編成しましょう。"
+                                        ]
+                                    },
+                                    {
+                                        title: "phase2",
+                                        tips: [
+                                            "チーム2に6凸の{P/Monad Eva}がいる場合、フェーズ1でCPを貯めてから終盤でチーム2に切り替えられます。",
+                                            "{P/Monad Eva}が即座にボスに{D/BT_SEAL_ADDITIVE_ATTACK}を付与し、フェーズ1で貯めたCPを維持できます。"
+                                        ]
+                                    }
+                                ]}
+                            />
+                            <hr className="my-6 border-neutral-700" />
+                            <RecommendedCharacterList title="phase1" entries={phase1Characters} />
+                            <RecommendedCharacterList title="phase2" entries={phase2Characters} />
+                            <hr className="my-6 border-neutral-700" />
+                            <StageBasedTeamSelector teamData={PrimordialSentinelTeams.march2026} defaultStage="Phase 1" />
+                            <hr className="my-6 border-neutral-700" />
+                            <CombatFootage
+                                videoId="4me_DqMftbs"
+                                title="始原の番人 - ワールドボス - SSS - エクストリームリーグ"
+                                author="Unknown"
+                                date="01/11/2025"
+                            />
+                            <p className="mt-2 text-neutral-400 text-sm">
+                                注：この動画はSSSエクストリームクリアを紹介しています。同じ戦略は低難易度にも適用できますが、一部のボスメカニクスが弱体化または無効化されている場合があります。エクストリームリーグ以前はスコアが無制限ではないため、フェーズ1でのチェーンポイント蓄積にそれほど集中する必要はありません。
+                            </p>
+                        </>
+                    ),
+                },
                 november2025: {
                     label: '2025年11月',
                     content: (
