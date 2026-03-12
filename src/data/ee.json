@@ -62,9 +62,7 @@
     "effect10_zh": "受到攻击时,行动值50%(2回合仅能发动1次)",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "akari": {
@@ -87,9 +85,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
     "buff": [],
-    "debuff": [
-      "BT_EXTEND_DEBUFF"
-    ]
+    "debuff": ["BT_EXTEND_DEBUFF"]
   },
   "alice": {
     "name": "The Book of Folk and Tall Tales",
@@ -110,9 +106,7 @@
     "effect10_zh": "自身效果命中+100%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_STAT|ST_SPEED"
-    ],
+    "buff": ["BT_STAT|ST_SPEED"],
     "debuff": []
   },
   "alpha": {
@@ -134,9 +128,7 @@
     "effect10_zh": "击杀敌人时,效果命中1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_STAT|ST_BUFF_CHANCE"
-    ],
+    "buff": ["BT_STAT|ST_BUFF_CHANCE"],
     "debuff": []
   },
   "ame": {
@@ -180,9 +172,7 @@
     "effect10_zh": "友军受到攻击时,行动值8%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "bell-cranel": {
@@ -226,9 +216,7 @@
     "effect10_zh": "自身效果命中+100%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "bleu": {
@@ -250,9 +238,7 @@
     "effect10_zh": "使用<color=#28d9ed>水球</color>击杀敌人时,有1000的几率获得额外回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "D",
-    "buff": [
-      "BT_ADDITIVE_TURN"
-    ],
+    "buff": ["BT_ADDITIVE_TURN"],
     "debuff": []
   },
   "bryn": {
@@ -318,10 +304,7 @@
     "effect10_zh": "使用思考时间时,魔法型友军AP20",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_AP_CHARGE",
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_AP_CHARGE", "BT_ACTION_GAUGE"],
     "debuff": []
   },
   "christina": {
@@ -344,9 +327,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
     "buff": [],
-    "debuff": [
-      "BT_EXTEND_BUFF"
-    ]
+    "debuff": ["BT_EXTEND_BUFF"]
   },
   "cindy": {
     "name": "Receptionist's Essentials",
@@ -367,9 +348,7 @@
     "effect10_zh": "使用<color=#28d9ed>风暴水晶</color>时,根据自身的速度等比提升伤害(最多100%)",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "claire": {
@@ -391,10 +370,7 @@
     "effect10_zh": "使用<color=#28d9ed>君往何处</color>时,自身的暴击率1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_COOL_CHARGE",
-      "BT_STAT|ST_CRITICAL_RATE"
-    ],
+    "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_CRITICAL_RATE"],
     "debuff": []
   },
   "dahlia": {
@@ -416,9 +392,7 @@
     "effect10_zh": "用<color=#28d9ed>冰凌枪</color>攻击附带冰冻效果的目标时, 伤害提升",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_STAT|ST_SPEED"
-    ],
+    "buff": ["BT_STAT|ST_SPEED"],
     "debuff": []
   },
   "delta": {
@@ -462,10 +436,7 @@
     "effect10_zh": "使用<color=#28d9ed>万物安息</color>时,AP +30",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "IG_Buff_2000059_Interruption",
-      "BT_AP_CHARGE"
-    ],
+    "buff": ["IG_Buff_2000059_Interruption", "BT_AP_CHARGE"],
     "debuff": []
   },
   "demiurge-delta": {
@@ -487,10 +458,7 @@
     "effect10_zh": "使用<color=#28d9ed>代码:逆转</color>时,全体友军效果抵抗2回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_REMOVE_DEBUFF",
-      "BT_STAT|ST_BUFF_RESIST"
-    ],
+    "buff": ["BT_REMOVE_DEBUFF", "BT_STAT|ST_BUFF_RESIST"],
     "debuff": []
   },
   "demiurge-drakhan": {
@@ -534,9 +502,7 @@
     "effect10_zh": "使用<color=#28d9ed>无悯之神</color>时,AP+30",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_AP_CHARGE"
-    ],
+    "buff": ["BT_AP_CHARGE"],
     "debuff": []
   },
   "demiurge-vlada": {
@@ -580,9 +546,7 @@
     "effect10_zh": "攻击命中时,全体友军的行动值<color=#28d9ed>+8%</color>(1回合仅能触发1次)",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "dolly": {
@@ -604,9 +568,7 @@
     "effect10_zh": "使用<color=#28d9ed>睡不够</color>时,自身速度提升,持续2回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_STAT|ST_SPEED"
-    ],
+    "buff": ["BT_STAT|ST_SPEED"],
     "debuff": []
   },
   "drakhan": {
@@ -628,12 +590,8 @@
     "effect10_zh": "使用<color=#28d9ed>楚霸王暴龙流星黑焰拳</color>前,对目标施加诅咒2回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
-    "debuff": [
-      "BT_DOT_CURSE"
-    ]
+    "buff": ["BT_ACTION_GAUGE"],
+    "debuff": ["BT_DOT_CURSE"]
   },
   "edelweiss": {
     "name": "Ninja Scroll",
@@ -654,9 +612,7 @@
     "effect10_zh": "使用<color=#28d9ed>忍者龙卷风之术</color>时,隐身1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_STEALTHED"
-    ],
+    "buff": ["BT_STEALTHED"],
     "debuff": []
   },
   "eliza": {
@@ -679,9 +635,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
     "buff": [],
-    "debuff": [
-      "IG_Buff_Dot_Bleed_Interruption_D"
-    ]
+    "debuff": ["IG_Buff_Dot_Bleed_Interruption_D"]
   },
   "ember": {
     "name": "Rocinante",
@@ -702,9 +656,7 @@
     "effect10_zh": "使用<color=#28d9ed>燃烧吧,如同烈焰!</color>后,全体友军攻击力2回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_STAT|ST_ATK"
-    ],
+    "buff": ["BT_STAT|ST_ATK"],
     "debuff": []
   },
   "epsilon": {
@@ -726,12 +678,8 @@
     "effect10_zh": "使用<color=#28d9ed>世界属于我们</color>时,全体目标的AP60",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
-    "debuff": [
-      "BT_AP_CHARGE"
-    ]
+    "buff": ["BT_ACTION_GAUGE"],
+    "debuff": ["BT_AP_CHARGE"]
   },
   "eternal": {
     "name": "Death's Notes",
@@ -752,9 +700,7 @@
     "effect10_zh": "自身效果命中+100%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_ADDITIVE_TURN"
-    ],
+    "buff": ["BT_ADDITIVE_TURN"],
     "debuff": []
   },
   "eva": {
@@ -776,9 +722,7 @@
     "effect10_zh": "<color=#28d9ed>形成结界。</color>使用时,使<color=#28d9ed>治愈。</color>的冷却时间重置",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_COOL_CHARGE"
-    ],
+    "buff": ["BT_COOL_CHARGE"],
     "debuff": []
   },
   "faenan": {
@@ -800,9 +744,7 @@
     "effect10_zh": "使用<color=#28d9ed>月之庇护</color>时,使<color=#28d9ed>治愈祈祷</color>的冷却时间减少1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_COOL2_CHARGE"
-    ],
+    "buff": ["BT_COOL2_CHARGE"],
     "debuff": []
   },
   "fatal": {
@@ -868,9 +810,7 @@
     "effect10_zh": "受到暴击时AP 20",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_AP_CHARGE"
-    ],
+    "buff": ["BT_AP_CHARGE"],
     "debuff": []
   },
   "francesca": {
@@ -892,12 +832,8 @@
     "effect10_zh": "<color=#28d9ed>九寸钉</color>使用后目标的<color=#28d9ed>出血</color>效果全部<color=#28d9ed>爆发</color>",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_ADDITIVE_TURN"
-    ],
-    "debuff": [
-      "BT_IMMEDIATELY_BLEED"
-    ]
+    "buff": ["BT_ADDITIVE_TURN"],
+    "debuff": ["BT_IMMEDIATELY_BLEED"]
   },
   "gnosis-beth": {
     "name": "Everlasting Grudge",
@@ -918,9 +854,7 @@
     "effect10_zh": "使用<color=#28d9ed>血刃惩戒</color>后,不会触发敌人反击、复仇、迅速应对",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_SEAL_COUNTER"
-    ],
+    "buff": ["BT_SEAL_COUNTER"],
     "debuff": []
   },
   "gnosis-dahlia": {
@@ -942,9 +876,7 @@
     "effect10_zh": "<color=#28d9ed>末日凛冬</color>的伤害量30%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_SHIELD_BASED_CASTER"
-    ],
+    "buff": ["BT_SHIELD_BASED_CASTER"],
     "debuff": []
   },
   "gnosis-nella": {
@@ -965,9 +897,7 @@
     "effect10_zh": "对首领使用<color=#28d9ed>救世戒律</color>时,所有技能的冷却时间-1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_COOL_CHARGE"
-    ],
+    "buff": ["BT_COOL_CHARGE"],
     "debuff": []
   },
   "guizam": {
@@ -1011,9 +941,7 @@
     "effect10_zh": "受到攻击时,使自身行动值15%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "hilde": {
@@ -1057,9 +985,7 @@
     "effect10_zh": "对首领造成的伤害1",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_AP_CHARGE"
-    ],
+    "buff": ["BT_AP_CHARGE"],
     "debuff": []
   },
   "idith": {
@@ -1081,9 +1007,7 @@
     "effect10_zh": "使用<color=#28d9ed>嫉恶如仇</color>时,有100%的几率解除自身的2个弱化效果",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "D",
-    "buff": [
-      "BT_REMOVE_DEBUFF"
-    ],
+    "buff": ["BT_REMOVE_DEBUFF"],
     "debuff": []
   },
   "iota": {
@@ -1105,9 +1029,7 @@
     "effect10_zh": "自身效果命中+100%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_UNDEAD"
-    ],
+    "buff": ["BT_UNDEAD"],
     "debuff": []
   },
   "iris": {
@@ -1127,10 +1049,7 @@
     "effect10_kr": "<color=#28d9ed>엘레멘탈 버스트</color>로 화상 대상 공격 시 1턴 동안 각각 80% 확률로 공격력과 방어력 증가",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_STAT|ST_ATK",
-      "BT_STAT|ST_DEF"
-    ],
+    "buff": ["BT_STAT|ST_ATK", "BT_STAT|ST_DEF"],
     "debuff": []
   },
   "k": {
@@ -1153,9 +1072,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
     "buff": [],
-    "debuff": [
-      "BT_REMOVE_BUFF"
-    ]
+    "debuff": ["BT_REMOVE_BUFF"]
   },
   "kanon": {
     "name": "Burning Fighting Spirit",
@@ -1177,9 +1094,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
     "buff": [],
-    "debuff": [
-      "BT_WG_REVERSE_HEAL"
-    ]
+    "debuff": ["BT_WG_REVERSE_HEAL"]
   },
   "kappa": {
     "name": "Guardian's Qualification",
@@ -1244,9 +1159,7 @@
     "effect10_zh": "使用<color=#28d9ed>蝴蝶啊,撕咬吧!</color>时,AP20",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_AP_CHARGE"
-    ],
+    "buff": ["BT_AP_CHARGE"],
     "debuff": []
   },
   "kuro": {
@@ -1290,9 +1203,7 @@
     "effect10_zh": "使用<color=#28d9ed>破坏文明吧</color>攻击持有附带中毒效果的目标时,使全体友军的强化效果+1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "D",
-    "buff": [
-      "BT_EXTEND_BUFF"
-    ],
+    "buff": ["BT_EXTEND_BUFF"],
     "debuff": []
   },
   "laplace": {
@@ -1314,9 +1225,7 @@
     "effect10_zh": "使用<color=#28d9ed>碧蓝之惩</color>时,AP50",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "D",
-    "buff": [
-      "BT_AP_CHARGE"
-    ],
+    "buff": ["BT_AP_CHARGE"],
     "debuff": []
   },
   "leo": {
@@ -1361,9 +1270,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "D",
     "buff": [],
-    "debuff": [
-      "BT_STAT|ST_SPEED"
-    ]
+    "debuff": ["BT_STAT|ST_SPEED"]
   },
   "lisha": {
     "name": "Cleaning Brush",
@@ -1428,9 +1335,7 @@
     "effect10_zh": "<color=#28d9ed>万众一心</color>发动时,使全体友军获得护盾,持续2回合(目标生命值的20%)",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_SHIELD_BASED_CASTER"
-    ],
+    "buff": ["BT_SHIELD_BASED_CASTER"],
     "debuff": []
   },
   "marian": {
@@ -1452,9 +1357,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
     "buff": [],
-    "debuff": [
-      "BT_DOT_CURSE"
-    ]
+    "debuff": ["BT_DOT_CURSE"]
   },
   "maxie": {
     "name": "Scarlet Disaster",
@@ -1475,12 +1378,8 @@
     "effect10_zh": "进入战斗时,攻击力提升1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_STAT|ST_ATK"
-    ],
-    "debuff": [
-      "BT_DOT_BURN"
-    ]
+    "buff": ["BT_STAT|ST_ATK"],
+    "debuff": ["BT_DOT_BURN"]
   },
   "maxwell": {
     "name": "Agateram",
@@ -1522,9 +1421,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
     "buff": [],
-    "debuff": [
-      "BT_WG_REVERSE_HEAL"
-    ]
+    "debuff": ["BT_WG_REVERSE_HEAL"]
   },
   "mero": {
     "name": "The Great Communicator",
@@ -1589,9 +1486,7 @@
     "effect10_zh": "使用<color=#28d9ed>台风横踢</color>击杀敌人时,恢复自身的生命值50%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_COOL2_CHARGE"
-    ],
+    "buff": ["BT_COOL2_CHARGE"],
     "debuff": []
   },
   "nella": {
@@ -1613,9 +1508,7 @@
     "effect10_zh": "生命值越低,速度越高",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_AP_CHARGE"
-    ],
+    "buff": ["BT_AP_CHARGE"],
     "debuff": []
   },
   "noa": {
@@ -1659,10 +1552,7 @@
     "effect10_zh": "使用<color=#28d9ed>敏捷帮手</color>后,自身行动值20%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "S",
-    "buff": [
-      "BT_ACTION_GAUGE",
-      "IG_Buff_2000056_Interruption"
-    ],
+    "buff": ["BT_ACTION_GAUGE", "IG_Buff_2000056_Interruption"],
     "debuff": []
   },
   "orox": {
@@ -1706,9 +1596,7 @@
     "effect10_zh": "使用<color=#28d9ed>精致餐饮</color>时,使自身攻击力提升,持续2回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_STAT|ST_ATK"
-    ],
+    "buff": ["BT_STAT|ST_ATK"],
     "debuff": []
   },
   "pesketh": {
@@ -1731,9 +1619,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
     "buff": [],
-    "debuff": [
-      "BT_STEAL_BUFF"
-    ]
+    "debuff": ["BT_STEAL_BUFF"]
   },
   "philia": {
     "name": "Lie Detector",
@@ -1755,10 +1641,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "D",
     "buff": [],
-    "debuff": [
-      "BT_DOT_LIGHTNING",
-      "BT_STUN"
-    ]
+    "debuff": ["BT_DOT_LIGHTNING", "BT_STUN"]
   },
   "poolside-trickster-regina": {
     "name": "Regina's All-Purpose Tube",
@@ -1797,10 +1680,7 @@
     "effect10_kr": "<color=#28d9ed>체크메이트예요</color> 발동 시 자신의 행동 게이지 20%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_REMOVE_DEBUFF",
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_REMOVE_DEBUFF", "BT_ACTION_GAUGE"],
     "debuff": []
   },
   "rey": {
@@ -1865,9 +1745,7 @@
     "effect10_zh": "自身效果命中+50%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "rin": {
@@ -1911,9 +1789,7 @@
     "effect10_zh": "受到攻击时,有80%的几率使<color=#28d9ed>哐!哐!哐!当!</color>的冷却时间<color=#28d9ed>-1回合</color>",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_COOL2_CHARGE"
-    ],
+    "buff": ["BT_COOL2_CHARGE"],
     "debuff": []
   },
   "roxie": {
@@ -1935,12 +1811,8 @@
     "effect10_zh": "使用姐姐帮我!时,目标行动值<color=#28d9ed>-20%</color>",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_EXTEND_BUFF"
-    ],
-    "debuff": [
-      "BT_ACTION_GAUGE"
-    ]
+    "buff": ["BT_EXTEND_BUFF"],
+    "debuff": ["BT_ACTION_GAUGE"]
   },
   "ryu-lion": {
     "name": "Alf's Justitia",
@@ -1983,9 +1855,7 @@
     "effect10_zh": "使用<color=#28d9ed>庇佑降临</color>时,使全体友军的行动值20%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "shu": {
@@ -2007,12 +1877,8 @@
     "effect10_zh": "使用<color=#28d9ed>跟随节奏!</color>时,有30%的几率使<color=#28d9ed>派对时间到了!</color>的冷却时间减少1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_COOL2_CHARGE"
-    ],
-    "debuff": [
-      "BT_WG_REVERSE_HEAL"
-    ]
+    "buff": ["BT_COOL2_CHARGE"],
+    "debuff": ["BT_WG_REVERSE_HEAL"]
   },
   "sigma": {
     "name": "Modded Assault Weapon",
@@ -2034,9 +1900,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "D",
     "buff": [],
-    "debuff": [
-      "BT_STUN"
-    ]
+    "debuff": ["BT_STUN"]
   },
   "skadi": {
     "name": "Damage and Loss",
@@ -2057,9 +1921,7 @@
     "effect10_zh": "使用<color=#28d9ed>光电箭齐射</color>时,AP 50",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_AP_CHARGE"
-    ],
+    "buff": ["BT_AP_CHARGE"],
     "debuff": []
   },
   "snow": {
@@ -2082,9 +1944,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
     "buff": [],
-    "debuff": [
-      "BT_FREEZE"
-    ]
+    "debuff": ["BT_FREEZE"]
   },
   "sofia": {
     "name": "Tempest",
@@ -2128,9 +1988,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
     "buff": [],
-    "debuff": [
-      "BT_ACTION_GAUGE"
-    ]
+    "debuff": ["BT_ACTION_GAUGE"]
   },
   "sterope": {
     "name": "Thunderer",
@@ -2174,9 +2032,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
     "buff": [],
-    "debuff": [
-      "BT_STAT|ST_DEF"
-    ]
+    "debuff": ["BT_STAT|ST_DEF"]
   },
   "tamara": {
     "name": "No.62's Punishment",
@@ -2197,9 +2053,7 @@
     "effect10_zh": "自身效果命中+100%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_AP_CHARGE"
-    ],
+    "buff": ["BT_AP_CHARGE"],
     "debuff": []
   },
   "tanya": {
@@ -2221,9 +2075,7 @@
     "effect10_zh": "自身效果命中+50%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
-    "buff": [
-      "BT_IMMUNE"
-    ],
+    "buff": ["BT_IMMUNE"],
     "debuff": []
   },
   "tio": {
@@ -2245,9 +2097,7 @@
     "effect10_zh": "使用爆发技能时,使自身的生命值恢复15%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "valentine": {
@@ -2269,9 +2119,7 @@
     "effect10_zh": "火属性友军速度+10",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_CALL_BACKUP"
-    ],
+    "buff": ["BT_CALL_BACKUP"],
     "debuff": []
   },
   "vera": {
@@ -2338,9 +2186,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
     "buff": [],
-    "debuff": [
-      "BT_DOT_BURN"
-    ]
+    "debuff": ["BT_DOT_BURN"]
   },
   "yuri": {
     "name": "Shieldwall",
@@ -2362,9 +2208,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "C",
     "buff": [],
-    "debuff": [
-      "BT_AGGRO"
-    ]
+    "debuff": ["BT_AGGRO"]
   },
   "omega-nadja": {
     "name": "Path of Endless Hunger",
@@ -2407,10 +2251,7 @@
     "effect10_zh": "使用破晓之月时目标无法反击",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_ACTION_GAUGE",
-      "BT_SEAL_COUNTER"
-    ],
+    "buff": ["BT_ACTION_GAUGE", "BT_SEAL_COUNTER"],
     "debuff": []
   },
   "liselotte": {
@@ -2454,10 +2295,7 @@
     "effect10_zh": "使用<color=#28d9ed>隐藏活动</color>时,全体友军强化效果持续时间1回合",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "D",
-    "buff": [
-      "BT_EXTEND_BUFF",
-      "BT_SEAL_COUNTER"
-    ],
+    "buff": ["BT_EXTEND_BUFF", "BT_SEAL_COUNTER"],
     "debuff": []
   },
   "summer-knight-s-dream-ember": {
@@ -2523,9 +2361,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
     "buff": [],
-    "debuff": [
-      "BT_DOT_POISON2"
-    ]
+    "debuff": ["BT_DOT_POISON2"]
   },
   "fortuna": {
     "name": "Omertà",
@@ -2589,9 +2425,7 @@
     "effect10_zh": "<color=#28d9ed>曼荼罗</color>状态下使用<color=#28d9ed>忏悔吧!</color>后,攻击力最高的友军行动值25%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "core-fusion-lisha": {
@@ -2636,9 +2470,7 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "A",
     "buff": [],
-    "debuff": [
-      "BT_COOL_CHARGE"
-    ]
+    "debuff": ["BT_COOL_CHARGE"]
   },
   "primine": {
     "name": "Lete",
@@ -2659,9 +2491,7 @@
     "effect10_zh": "我方队伍被攻击时,自身行动槽增加 5%",
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "B",
-    "buff": [
-      "BT_ACTION_GAUGE"
-    ],
+    "buff": ["BT_ACTION_GAUGE"],
     "debuff": []
   },
   "core-fusion-snow": {
@@ -2684,6 +2514,28 @@
     "icon_effect": "TI_Icon_UO_Accessary_07",
     "rank": "",
     "buff": [],
+    "debuff": []
+  },
+  "eris": {
+    "name": "Power & Ambition",
+    "name_jp": "Power & Ambition",
+    "name_kr": "Power & Ambition",
+    "name_zh": "权力与野心",
+    "mainStat": "DMG Increase vs Earth",
+    "mainStat_jp": "地属性対象の ダメージUP",
+    "mainStat_kr": "지속성 대상 피해 증가",
+    "mainStat_zh": "对土属性目标造成 伤害提升",
+    "effect": "Increases <color=#28d9ed>Crit DMG</color> of all <color=#28d9ed>Striker</color> allies by <color=#28d9ed>+50%</color>.",
+    "effect_jp": "攻撃型の味方全体の会心ダメージ<color=#28d9ed>+50%</color>",
+    "effect_kr": "공격형 아군 전체 치명 피해 <color=#28d9ed>+50%</color>",
+    "effect_zh": "全体<color=#28d9ed>攻击型</color>友军的<color=#28d9ed>暴击伤害</color><color=#28d9ed>+50%</color>。",
+    "effect10": "After using <color=#28d9ed>Ruthless Performance Review</color>, enemies cannot Counter/Revenge/Swift Response.",
+    "effect10_jp": "<color=#28d9ed>【残酷な業績評価】</color>使用後、敵の反撃/復讐/迅速対応は使用不可",
+    "effect10_kr": "<color=#28d9ed>잔혹한 고과 평가</color> 사용 직후 적 반격/복수/신속대응 불가",
+    "effect10_zh": "使用<color=#28d9ed>残酷绩效评估</color>后,敌人无法触发反击/复仇/迅速反应。",
+    "icon_effect": "TI_Icon_UO_Accessary_07",
+    "rank": "",
+    "buff": ["BT_SEAL_COUNTER"],
     "debuff": []
   }
 }

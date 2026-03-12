@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-03-12",
+    title: {
+      en: "New Character — Eris",
+      jp: "新キャラクター — エリス",
+      kr: "신규 캐릭터 — 에리스",
+      zh: "新角色 — 艾理斯",
+    } as LString,
+    type: "update",
+    url: "/characters/eris",
+    content: [
+      {
+        en: "The Irregular Hunter Eris, who inflicts debuffs on enemies and deals powerful damage to debuffed enemies, joins the roster.",
+        jp: "イレギュラーハンター エリスが参戦。敵にデバフを付与し、デバフ状態の敵に強力なダメージを与えます。",
+        kr: "이레귤러 헌터 에리스가 참전합니다. 적에게 디버프를 부여하고, 디버프 상태의 적에게 강력한 피해를 입힙니다.",
+        zh: "异常猎人艾理斯加入战场，对敌人施加减益效果并对处于减益状态的敌人造成强力伤害。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-02-24",
     title: {
       en: "Shichifuja",
