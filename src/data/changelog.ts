@@ -35,7 +35,7 @@ export const oldChangelog = [
       zh: "始源守卫",
     } as LString,
     type: "update",
-    url: "/guides/world-boss/primordial-sentinel",
+    url: "/guides/world-boss/primordial_sentinel",
     content: [
       {
         en: "Primordial Sentinel World Boss Guide updated for March 2026 version.",
