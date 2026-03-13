@@ -369,17 +369,14 @@ export default function BeginnerFAQ() {
                       <div className="p-3 bg-red-900/10 border-l-4 border-red-500 rounded">
                         <p className="text-sm font-semibold text-red-300">1. Antiparticle Generator <span className="text-sm text-gray-400">Max this first!</span></p>
                       </div>
-                      <div className="p-3 bg-orange-900/10 border-l-4 border-orange-500 rounded">
-                        <p className="text-sm font-semibold text-orange-300">2. Expedition</p>
-                      </div>
                       <div className="p-3 bg-yellow-900/10 border-l-4 border-yellow-500 rounded">
-                        <p className="text-sm font-semibold text-yellow-300">3. Synchro Room</p>
+                        <p className="text-sm font-semibold text-yellow-300">2. Synchro Room</p>
                       </div>
                       <div className="p-3 bg-lime-900/10 border-l-4 border-lime-500 rounded">
-                        <p className="text-sm font-semibold text-lime-300">4. Kate&apos;s Workshop</p>
+                        <p className="text-sm font-semibold text-lime-300">3. Kate&apos;s Workshop</p>
                       </div>
                       <div className="p-3 bg-green-900/10 border-l-4 border-green-500 rounded">
-                        <p className="text-sm font-semibold text-green-300">5. Supply Module</p>
+                        <p className="text-sm font-semibold text-green-300">4. Supply Module</p>
                       </div>
                       <p className=" text-sm">Unlock <strong>Quirks & Precise Crafting</strong> when they are opened (Clear Season 1 stage 9-5).</p>
                     </div>

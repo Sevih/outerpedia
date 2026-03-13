@@ -44,19 +44,20 @@ export default function PrimordialSentinelGuide() {
                             <TacticalTips
                                 sections={[
                                     {
-                                        title: "strategy",
+                                        title: "phase1",
                                         tips: [
-                                            "整场战斗围绕行动顺序控制展开。在第一阶段，尽可能利用行动顺序减少。",
-                                            "在第二阶段，Boss免疫行动顺序减少，因此需要让角色尽可能快。",
+                                            "尽可能利用行动顺序增减来最大化回合数。",
                                             "装备贤者和盗贼护符以获得技能连锁和CP生成（别忘了盗贼的暴击率）。",
-                                            "在两个阶段中，至少带一名治疗师，通过{B/UNIQUE_DAHLIA_A}buff来获得{D/BT_STAT|ST_SPEED}。"
+                                            "在两个阶段中，至少带一名治疗师，通过{B/UNIQUE_DAHLIA_A}buff来获得{D/BT_STAT|ST_SPEED}。",
+                                            "有2种方法可以保留第一阶段积累的连锁点数 - 请参阅下方的阶段过渡部分。"
                                         ]
                                     },
                                     {
-                                        title: "phase2",
+                                        title: { en: "Phase Transition", jp: "フェーズ移行", kr: "페이즈 전환", zh: "阶段过渡" },
                                         tips: [
-                                            "如果队伍2中有6星{P/Monad Eva}，可以在第一阶段积累CP，然后在接近结束时切换到队伍2。",
-                                            "{P/Monad Eva}会立即给Boss上{D/BT_SEAL_ADDITIVE_ATTACK}，让你保留在第一阶段积累的CP。"
+                                            "如果有6星{P/Monad Eva}：她的存在就会给Boss施加{D/BT_SEAL_ADDITIVE_ATTACK}，阻止Boss的额外攻击夺走你所有的CP。你可以在阶段转换前切换到队伍2（最安全），也可以在转换后切换——但转换后切换需要你的队伍足够快，能在Boss之前行动（推荐{AS/Swiftness}或行动顺序提升）。",
+                                            "没有6星{P/Monad Eva}的情况：确保队伍2中至少有1名{E/Fire}、{E/Water}或{E/Earth}属性角色。",
+                                            "在接近第二阶段阈值（120万伤害）时切换到队伍2。让Boss行动，然后将其推入第二阶段。Boss再次行动并获得{B/CORE_ENERGY}增益——在他下次行动前击破他以移除增益，避免夺走CP的额外攻击。"
                                         ]
                                     }
                                 ]}

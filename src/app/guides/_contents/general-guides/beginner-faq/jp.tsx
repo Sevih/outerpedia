@@ -369,17 +369,14 @@ export default function BeginnerFAQ() {
                       <div className="p-3 bg-red-900/10 border-l-4 border-red-500 rounded">
                         <p className="text-sm font-semibold text-red-300">1. 反粒子ジェネレーター <span className="text-sm text-gray-400">最優先で最大に！</span></p>
                       </div>
-                      <div className="p-3 bg-orange-900/10 border-l-4 border-orange-500 rounded">
-                        <p className="text-sm font-semibold text-orange-300">2. 探検</p>
-                      </div>
                       <div className="p-3 bg-yellow-900/10 border-l-4 border-yellow-500 rounded">
-                        <p className="text-sm font-semibold text-yellow-300">3. シンクロルーム</p>
+                        <p className="text-sm font-semibold text-yellow-300">2. シンクロルーム</p>
                       </div>
                       <div className="p-3 bg-lime-900/10 border-l-4 border-lime-500 rounded">
-                        <p className="text-sm font-semibold text-lime-300">4. ケイトの工房</p>
+                        <p className="text-sm font-semibold text-lime-300">3. ケイトの工房</p>
                       </div>
                       <div className="p-3 bg-green-900/10 border-l-4 border-green-500 rounded">
-                        <p className="text-sm font-semibold text-green-300">5. 補給モジュール</p>
+                        <p className="text-sm font-semibold text-green-300">4. 補給モジュール</p>
                       </div>
                       <p className=" text-sm"><strong>クワーク＆精密クラフト</strong>は開放されたら解放しましょう（シーズン1ステージ9-5クリア）。</p>
                     </div>

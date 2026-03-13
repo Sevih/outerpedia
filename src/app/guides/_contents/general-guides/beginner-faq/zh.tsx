@@ -369,17 +369,14 @@ export default function BeginnerFAQ() {
                       <div className="p-3 bg-red-900/10 border-l-4 border-red-500 rounded">
                         <p className="text-sm font-semibold text-red-300">1. 反粒子发生器 <span className="text-sm text-gray-400">优先升满！</span></p>
                       </div>
-                      <div className="p-3 bg-orange-900/10 border-l-4 border-orange-500 rounded">
-                        <p className="text-sm font-semibold text-orange-300">2. 探险</p>
-                      </div>
                       <div className="p-3 bg-yellow-900/10 border-l-4 border-yellow-500 rounded">
-                        <p className="text-sm font-semibold text-yellow-300">3. 同步室</p>
+                        <p className="text-sm font-semibold text-yellow-300">2. 同步室</p>
                       </div>
                       <div className="p-3 bg-lime-900/10 border-l-4 border-lime-500 rounded">
-                        <p className="text-sm font-semibold text-lime-300">4. 凯特工坊</p>
+                        <p className="text-sm font-semibold text-lime-300">3. 凯特工坊</p>
                       </div>
                       <div className="p-3 bg-green-900/10 border-l-4 border-green-500 rounded">
-                        <p className="text-sm font-semibold text-green-300">5. 补给模块</p>
+                        <p className="text-sm font-semibold text-green-300">4. 补给模块</p>
                       </div>
                       <p className=" text-sm"><strong>特质和精密制作</strong>开放后解锁（通关第一季9-5关）。</p>
                     </div>

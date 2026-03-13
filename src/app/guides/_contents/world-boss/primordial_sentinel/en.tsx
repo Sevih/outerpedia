@@ -44,19 +44,20 @@ export default function PrimordialSentinelGuide() {
                             <TacticalTips
                                 sections={[
                                     {
-                                        title: "strategy",
+                                        title: "phase1",
                                         tips: [
-                                            "This entire fight revolves around priority control. In Phase 1, abuse priority reduction as much as possible.",
-                                            "In Phase 2, the boss is immune to priority reduction - make your characters as fast as possible.",
+                                            "Abuse priority gain and reduction as much as possible to maximize your turns.",
                                             "Equip Sage and Rogue charms for Skill Chains and CP generation (don't forget critical hit chance for Rogue).",
-                                            "In both phases, bring at least 1 healer for the {D/BT_STAT|ST_SPEED} thanks to the {B/UNIQUE_DAHLIA_A} buff."
+                                            "In both phases, bring at least 1 healer for the {D/BT_STAT|ST_SPEED} thanks to the {B/UNIQUE_DAHLIA_A} buff.",
+                                            "You have 2 ways to keep the Chain Points you accumulated during Phase 1 — see the Transition section below."
                                         ]
                                     },
                                     {
-                                        title: "phase2",
+                                        title: { en: "Phase Transition", jp: "フェーズ移行", kr: "페이즈 전환", zh: "阶段过渡" },
                                         tips: [
-                                            "If you have {P/Monad Eva} at 6 stars in Team 2, you can stack CP in Phase 1 then swap to Team 2 near the end.",
-                                            "{P/Monad Eva} will instantly {D/BT_SEAL_ADDITIVE_ATTACK} the boss, allowing you to keep the CP you built during Phase 1."
+                                            "If you have {P/Monad Eva} at 6 stars: her mere presence will apply {D/BT_SEAL_ADDITIVE_ATTACK} to the boss, preventing his extra attack that removes all your CP. You can swap to Team 2 before the transition (safest) or after it — but swapping after requires your team to be fast enough to act before the boss ({AS/Swiftness} or priority boost recommended).",
+                                            "Without {P/Monad Eva} 6 stars: make sure you have at least 1 {E/Fire}, {E/Water} or {E/Earth} character in Team 2.",
+                                            "Swap to Team 2 near the Phase 2 threshold (1.2M damage). Let the boss play, then push him into Phase 2. The boss plays again and gains his buff {B/CORE_ENERGY} — break him before his next turn to remove the buff and avoid his extra attack that strips your CP."
                                         ]
                                     }
                                 ]}
