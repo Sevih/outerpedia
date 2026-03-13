@@ -33,7 +33,6 @@ export default function PrimordialSentinelGuide() {
         <GuideTemplate
             title="始源守卫（荣耀守卫）攻略指南"
             introduction="始源守卫是一个需要精确团队配合和时机把控的双阶段世界Boss。本指南涵盖了直到极限联赛的攻略策略。"
-            disclaimer="本指南正在更新为2026年3月版本。"
             defaultVersion="march2026"
             versions={{
                 march2026: {

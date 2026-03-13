@@ -8,7 +8,7 @@ import PrimordialSentinelTeamsData from './PrimordialSentinel.json'
 import type { TeamData } from '@/types/team'
 import TacticalTips from '@/app/components/TacticalTips'
 import RecommendedCharacterList from '@/app/components/RecommendedCharacterList'
-import { phase1Characters, phase2Characters } from './recommendedCharacters'
+import { phase1Characters, phase2Characters, phase1Characters03, phase2Characters03 } from './recommendedCharacters'
 import GuideHeading from '@/app/components/GuideHeading'
 
 const PrimordialSentinelTeams = PrimordialSentinelTeamsData as Record<string, TeamData>
@@ -33,7 +33,6 @@ export default function PrimordialSentinelGuide() {
         <GuideTemplate
             title="Primordial Sentinel (Glorious Sentinel) Strategy"
             introduction="The Primordial Sentinel is a challenging two-phase world boss that requires precise team coordination and timing. This guide covers strategies for defeating this boss up to the Extreme League."
-            disclaimer="This guide is currently being updated for the March 2026 version."
             defaultVersion="march2026"
             versions={{
                 march2026: {
@@ -63,20 +62,10 @@ export default function PrimordialSentinelGuide() {
                                 ]}
                             />
                             <hr className="my-6 border-neutral-700" />
-                            <RecommendedCharacterList title="phase1" entries={phase1Characters} />
-                            <RecommendedCharacterList title="phase2" entries={phase2Characters} />
+                            <RecommendedCharacterList title="phase1" entries={phase1Characters03} />
+                            <RecommendedCharacterList title="phase2" entries={phase2Characters03} />
                             <hr className="my-6 border-neutral-700" />
                             <StageBasedTeamSelector teamData={PrimordialSentinelTeams.march2026} defaultStage="Phase 1" />
-                            <hr className="my-6 border-neutral-700" />
-                            <CombatFootage
-                                videoId="4me_DqMftbs"
-                                title="Primordial Sentinel - World Boss - SSS - Extreme League"
-                                author="Unknown"
-                                date="01/11/2025"
-                            />
-                            <p className="mt-2 text-neutral-400 text-sm">
-                                Note: This video showcases an SSS Extreme clear. The same strategy can be applied to lower difficulties, but certain boss mechanics may be weakened or disabled. As the score is not unlimited before Extreme League, this requires less focus on building chain points in phase 1.
-                            </p>
                         </>
                     ),
                 },
@@ -115,7 +104,7 @@ export default function PrimordialSentinelGuide() {
                             <CombatFootage
                                 videoId="4me_DqMftbs"
                                 title="Primordial Sentinel - World Boss - SSS - Extreme League"
-                                author="Unknown"
+                                author="Sevih"
                                 date="01/11/2025"
                             />
                             <p className="mt-2 text-neutral-400 text-sm">

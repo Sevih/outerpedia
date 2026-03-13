@@ -33,7 +33,6 @@ export default function PrimordialSentinelGuide() {
         <GuideTemplate
             title="始原の番人（栄光の番人）攻略ガイド"
             introduction="始原の番人は、チームの連携とタイミングが重要な2フェーズ制のワールドボスです。このガイドでは、エクストリームリーグまでの攻略方法を解説します。"
-            disclaimer="このガイドは2026年3月版に更新中です。"
             defaultVersion="march2026"
             versions={{
                 march2026: {

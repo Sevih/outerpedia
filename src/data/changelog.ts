@@ -27,6 +27,25 @@ type RawEntry = {
 // Ancienne version brute avec type explicite (const + types littéraux)
 export const oldChangelog = [
   {
+    date: "2026-03-13",
+    title: {
+      en: "Primordial Sentinel",
+      jp: "始原の番人",
+      kr: "시원의 파수꾼",
+      zh: "始源守卫",
+    } as LString,
+    type: "update",
+    url: "/guides/world-boss/primordial-sentinel",
+    content: [
+      {
+        en: "Primordial Sentinel World Boss Guide updated for March 2026 version.",
+        jp: "始原の番人 ワールドボスガイドが2026年3月版にアップデートされました。",
+        kr: "시원의 파수꾼 월드 보스 가이드가 2026년 3월 버전으로 업데이트되었습니다.",
+        zh: "始源守卫世界Boss攻略已更新至2026年3月版本。",
+      } as LString,
+    ],
+  },
+  {
     date: "2026-03-12",
     title: {
       en: "New Character — Eris",

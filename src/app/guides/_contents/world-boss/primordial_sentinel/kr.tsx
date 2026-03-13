@@ -33,7 +33,6 @@ export default function PrimordialSentinelGuide() {
         <GuideTemplate
             title="시원의 파수꾼 (영광의 파수꾼) 공략 가이드"
             introduction="시원의 파수꾼은 정밀한 팀 조율과 타이밍이 필요한 2페이즈 월드 보스입니다. 이 가이드는 익스트림 리그까지의 공략 전략을 다룹니다."
-            disclaimer="이 가이드는 2026년 3월 버전으로 업데이트 중입니다."
             defaultVersion="march2026"
             versions={{
                 march2026: {

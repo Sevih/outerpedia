@@ -1,6 +1,6 @@
 {
   "name": "outerpedia-clean",
-  "version": "11.0.29",
+  "version": "11.0.30",
   "private": true,
   "scripts": {
     "//1": "=== CORE ===",
