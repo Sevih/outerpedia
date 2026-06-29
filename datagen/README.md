@@ -91,6 +91,20 @@ synchronisé via R2 (à brancher en Phase 3).
 
 ---
 
+## Récupérer les données du jeu (depuis LDPlayer)
+
+Les bundles + il2cpp viennent du dossier `files` du jeu, sur une instance
+**LDPlayer** (Android), via `adb`. Pour les rapatrier dans `.gamedata/files/` :
+
+```bash
+pnpm datagen:pull          # bundles + il2cpp
+pnpm datagen:pull il2cpp   # un sous-dossier précis
+```
+
+Prérequis : LDPlayer lancé + Outerplane installé. Source dans l'émulateur :
+`/sdcard/Android/data/com.smilegate.outerplane.stove.google/files/`.
+Chemin de l'adb surchargeable via `ADB_PATH` (défaut : LDPlayer9).
+
 ## État
 
 🚧 Structure posée. Prochaines étapes : wrapper d'extraction, puis le parser

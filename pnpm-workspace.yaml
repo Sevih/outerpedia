@@ -2,6 +2,7 @@
 # build (sharp = images, unrs-resolver = résolveur ESLint, lefthook = binaire des
 # git hooks). Le reste reste bloqué par défaut (protection supply-chain).
 allowBuilds:
+  esbuild: true
   lefthook: true
   sharp: true
   unrs-resolver: true

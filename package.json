@@ -15,6 +15,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "datagen:pull": "tsx datagen/extract/pull-gamedata.ts",
     "prepare": "lefthook install || true"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "prettier": "^3",
     "prettier-plugin-tailwindcss": "^0.6",
     "tailwindcss": "^4",
+    "tsx": "^4.22.4",
     "typescript": "^5",
     "vitest": "^4.1.9"
   }
