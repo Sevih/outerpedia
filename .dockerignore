@@ -1,0 +1,28 @@
+# Contexte de build Docker : on exclut l'inutile et le lourd.
+.git
+.gitattributes
+
+# Dépendances et sorties (régénérées dans l'image)
+node_modules
+.next
+out
+build
+*.tsbuildinfo
+next-env.d.ts
+coverage
+
+# Secrets
+.env
+.env.*
+
+# Éditeurs / outils
+.vscode
+.idea
+
+# Docs (inutiles dans l'image)
+*.md
+
+# Divers
+*.log
+Dockerfile
+.dockerignore

@@ -29,9 +29,9 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [x] Scaffold Next.js (App Router) + React 19 + TS + Tailwind 4
 - [x] Config de base : `output: standalone`, headers de sécurité (portés de V2)
 - [ ] Config i18n portée (en, fr, jp, kr, zh — 4 officielles + fr communautaire)
-- [ ] Dockerfile multi-stage + `.dockerignore`
-- [ ] CI : lint + typecheck + build sur PR
-- [ ] CD : build → GHCR → déploiement VPS (un « hello world » en ligne)
+- [x] Dockerfile multi-stage + `.dockerignore`
+- [x] CI : lint + typecheck + build sur PR
+- [ ] CD : build → GHCR (✅) → déploiement VPS (un « hello world » en ligne)
 - [ ] Hooks pre-commit (lint-staged)
 
 ## Phase 2 — Architecture données & pipeline
