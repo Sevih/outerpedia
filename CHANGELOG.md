@@ -18,5 +18,8 @@ et le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 - Hooks Git (lefthook) : format + lint en pre-commit, typecheck en pre-push.
 - Socle de tests (Vitest) + smoke test.
 - Déploiement automatique sur le VPS via SSH (job `deploy` après build image).
+- Atelier de données `datagen/` : pull depuis LDPlayer (incrémental, `datagen:pull`),
+  extraction AssetStudioModCLI (`datagen:extract`), conversion `.bytes → JSON` en TS
+  testée (`datagen:convert`, remplace les scripts python).
 
 [Non publié]: https://github.com/Sevih/outerpedia/commits/main
