@@ -101,6 +101,10 @@ pnpm datagen:pull          # bundles + il2cpp
 pnpm datagen:pull il2cpp   # un sous-dossier précis
 ```
 
+**Incrémental** : ne tire que les fichiers nouveaux/modifiés (comparaison
+chemin + taille, récursive) et supprime en local ceux qui n'existent plus côté
+jeu. Un 2e lancement sans MAJ du jeu ne transfère rien.
+
 Prérequis : LDPlayer lancé + Outerplane installé. Source dans l'émulateur :
 `/sdcard/Android/data/com.smilegate.outerplane.stove.google/files/`.
 Chemin de l'adb surchargeable via `ADB_PATH` (défaut : LDPlayer9).
