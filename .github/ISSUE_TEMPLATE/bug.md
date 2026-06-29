@@ -1,7 +1,7 @@
 ---
 name: Bug
 about: Signaler un comportement incorrect
-title: "[Bug] "
+title: '[Bug] '
 labels: bug
 ---
 

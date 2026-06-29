@@ -1,0 +1,6 @@
+# Réglages pnpm. Autorise ces dépendances de confiance à exécuter leur script de
+# build (sharp = images, unrs-resolver = résolveur ESLint). Le reste reste bloqué
+# par défaut (protection supply-chain).
+allowBuilds:
+  sharp: true
+  unrs-resolver: true

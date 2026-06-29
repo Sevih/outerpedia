@@ -1,7 +1,7 @@
 ---
 name: Tâche
 about: Une tâche de dev / refacto / chantier de la roadmap
-title: "[Tâche] "
+title: '[Tâche] '
 labels: task
 ---
 

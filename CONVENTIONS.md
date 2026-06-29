@@ -13,6 +13,7 @@ Types : `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `build`, `ci`,
 `chore`, `style`.
 
 Exemples :
+
 ```
 feat(tierlist): add share-by-link feature
 fix(i18n): correct broken key in jp locale
@@ -40,8 +41,13 @@ Un commit = un changement cohérent. Les messages alimentent le CHANGELOG.
 
 ## i18n
 
-- Langues : `en`, `jp`, `kr`, `zh` — définies dans **une seule source** de vérité.
-  Ne jamais coder en dur la liste des langues ailleurs.
+- Langues : `en`, `fr`, `jp`, `kr`, `zh` — définies dans **une seule source** de
+  vérité (`LANGUAGES`). Ne jamais coder en dur la liste des langues ailleurs.
+- Distinction **officiel vs communautaire** (`isOfficial`) :
+  - **officielles** (`en`, `jp`, `kr`, `zh`) : le jeu fournit les données → contenu
+    de jeu traduit (noms, skills, items).
+  - **communautaire** (`fr`) : UI traduite, mais **pas** de données de jeu →
+    fallback sur EN pour le contenu de jeu.
 - Fichiers de locale : **alignement par ligne** (mêmes clés/commentaires aux
   mêmes numéros de ligne dans les 4 langues).
 - Pas de clés i18n dupliquées — vérifier avant d'en créer.

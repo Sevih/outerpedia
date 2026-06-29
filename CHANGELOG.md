@@ -8,7 +8,10 @@ et le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 ## [Non publié]
 
 ### Ajouté
+
 - Fondations du projet V3 : README, ROADMAP, conventions, hygiène de dépôt
   (templates, Dependabot, editorconfig, nvmrc).
+- Socle technique : app Next.js 16 (App Router) + React 19 + TS + Tailwind 4,
+  config (output standalone, headers de sécurité), ESLint + Prettier, pnpm.
 
 [Non publié]: https://github.com/Sevih/outerpedia/commits/main

@@ -12,27 +12,30 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 ---
 
 ## Phase 0 — Fondations projet
+
 > Le repo « comme un vrai projet ».
 
 - [x] Repo privé + git init
 - [x] README, ROADMAP, CHANGELOG, CONVENTIONS, CLAUDE.md
 - [x] `.nvmrc` (Node 24), `.editorconfig`, `.gitignore`, `.gitattributes`
 - [x] Templates issues / PR, Dependabot
-- [ ] Créer le repo privé GitHub + push
+- [x] Créer le repo privé GitHub + push
 - [ ] Créer les milestones (un par phase)
 
 ## Phase 1 — Socle technique
+
 > Une app Next vide qui se déploie de bout en bout (valide l'infra tôt).
 
-- [ ] Scaffold Next.js (App Router) + React 19 + TS + Tailwind 4
-- [ ] Config de base : `output: standalone`, headers de sécurité (portés de V2)
-- [ ] Mise en place i18n (en / jp / kr / zh)
+- [x] Scaffold Next.js (App Router) + React 19 + TS + Tailwind 4
+- [x] Config de base : `output: standalone`, headers de sécurité (portés de V2)
+- [ ] Config i18n portée (en, fr, jp, kr, zh — 4 officielles + fr communautaire)
 - [ ] Dockerfile multi-stage + `.dockerignore`
 - [ ] CI : lint + typecheck + build sur PR
 - [ ] CD : build → GHCR → déploiement VPS (un « hello world » en ligne)
 - [ ] Hooks pre-commit (lint-staged)
 
 ## Phase 2 — Architecture données & pipeline
+
 > Le gros gain de simplicité (l'objectif maintenance).
 
 - [ ] **Séparer** « génération de données » (local, python + datamine, manuel)
@@ -42,6 +45,7 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [ ] Tests des transforms de données
 
 ## Phase 3 — Assets (images)
+
 > Alléger le repo définitivement.
 
 - [ ] Sortir les ~20k images du repo → **Cloudflare R2 + CDN**
@@ -49,6 +53,7 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [ ] Repo allégé (de ~4 Go à quasi rien)
 
 ## Phase 4 — Portage de l'application
+
 > Amener le code, domaine par domaine, en nettoyant.
 
 - [ ] Personnages / data access layer
@@ -60,6 +65,7 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [ ] Suppression du code mort au passage
 
 ## Phase 5 — Parité & bascule
+
 > V3 == V2, puis on switch.
 
 - [ ] Vérification de parité fonctionnelle V3 vs V2
@@ -71,10 +77,10 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 
 ## Décisions d'architecture (résumé)
 
-| Sujet | Décision |
-|---|---|
-| Hébergement | VPS OVH (Ubuntu 26.04), Docker, Cloudflare devant |
-| Déploiement | CI/CD GitHub Actions → image GHCR → le serveur tire l'image |
-| Build | **Jamais de python** ; consomme des données déjà générées et committées |
-| Images | Hors repo, sur Cloudflare R2 + CDN |
-| Infra serveur | Décrite dans le repo séparé `sevih-tool` (Infrastructure-as-Code) |
+| Sujet         | Décision                                                                |
+| ------------- | ----------------------------------------------------------------------- |
+| Hébergement   | VPS OVH (Ubuntu 26.04), Docker, Cloudflare devant                       |
+| Déploiement   | CI/CD GitHub Actions → image GHCR → le serveur tire l'image             |
+| Build         | **Jamais de python** ; consomme des données déjà générées et committées |
+| Images        | Hors repo, sur Cloudflare R2 + CDN                                      |
+| Infra serveur | Décrite dans le repo séparé `sevih-tool` (Infrastructure-as-Code)       |
