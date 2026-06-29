@@ -17,6 +17,7 @@
     "test:watch": "vitest",
     "datagen:pull": "tsx datagen/extract/pull-gamedata.ts",
     "datagen:extract": "tsx datagen/extract/extract.ts",
+    "datagen:convert": "tsx datagen/templates/convert.ts",
     "prepare": "lefthook install || true"
   },
   "dependencies": {
