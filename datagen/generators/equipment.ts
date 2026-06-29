@@ -21,6 +21,7 @@ import { bool, groupBy, indexBy, loadTable, num, numf, splitCsv } from '../lib/t
 import { loadTextIndex, resolveText } from '../lib/text';
 import { slugEnum } from '../lib/enums';
 import { buffValuesAt, fillPlaceholders, loadBuffIndex, type BuffValues } from '../lib/buff';
+import { formatStatValue } from '../lib/stats';
 import { GAME_LANGS, type LangDict } from '../lib/lang';
 
 type Row = ReturnType<typeof loadTable>[number];
@@ -38,6 +39,27 @@ export interface Option {
 export interface BreakLimit {
   factors: number[];
   prices: number[];
+}
+
+/** Effet de set pour un nombre de pièces, null si aucun. Soit une stat, soit un buff. */
+export interface SetEffect {
+  stat?: string; // slug du StatType (atk, def…)
+  value?: string; // valeur formatée (ex. "30%")
+  buff?: string; // BuffID (effet basé sur un buff — résolution à venir)
+  level?: number; // BuffLevel
+}
+
+/** Un tier de set : bonus 2 pièces / 4 pièces. */
+export interface SetTier {
+  '2p': SetEffect | null;
+  '4p': SetEffect | null;
+}
+
+/** Un set d'armure : nom + icône + bonus par tier (index 0 = base, 1 = enchanté). */
+export interface GameSet {
+  name: LangDict;
+  icon: string;
+  tiers: SetTier[];
 }
 
 /** Passif (Unique Option) : template + valeurs par niveau, résolu via fillPlaceholders. */
@@ -67,11 +89,12 @@ export interface GearItem extends Identity {
   breakLimit: string | null; // ref → breakLimits
 }
 
-/** Armure (helmet/armor/gloves/shoes) : gear stat pur. */
+/** Armure (helmet/armor/gloves/shoes) : gear stat pur + set. */
 export interface ArmorItem extends Identity {
   main: string[];
   sub: string | null;
   breakLimit: string | null;
+  set: string | null; // ref → sets
 }
 
 /** Talisman : options à base de buffs + passif. */
@@ -98,6 +121,7 @@ export interface EquipmentData {
   pools: Record<string, Option[]>;
   passives: Record<string, Passive>;
   breakLimits: Record<string, BreakLimit>;
+  sets: Record<string, GameSet>;
   // glossaires : slug d'enum → libellé localisé réel du jeu (slug ≠ terme du jeu, ex. unique→Legendary)
   grades: Record<string, LangDict>;
   classes: Record<string, LangDict>;
@@ -124,6 +148,20 @@ function resolveGroup(byGroup: Map<string, Row[]>, groupId: string): Option[] {
     weight: num(o.Rate) / 100,
     ...(o.BuffID ? { buff: o.BuffID } : {}),
   }));
+}
+
+/** Effet de set pour un nombre de pièces (2P/4P) sur une ligne tier, null si aucun. */
+function setEffect(row: Row, piece: '2P' | '4P'): SetEffect | null {
+  const stat = row[`StatType_${piece}`];
+  if (stat && stat !== 'ST_NONE') {
+    return {
+      stat: slugEnum(stat),
+      value: formatStatValue(row[`ApplyingType_${piece}`] ?? '', num(row[`OptionValue_${piece}`])),
+    };
+  }
+  const buff = row[`BuffID_${piece}`];
+  if (buff) return { buff, level: num(row[`BuffLevel_${piece}`]) || undefined };
+  return null;
 }
 
 /** Placeholders réellement présents dans un template → clés de valeurs à conserver. */
@@ -173,7 +211,9 @@ export function buildEquipment(): EquipmentData {
   const skill = loadTextIndex('TextSkill');
   const system = loadTextIndex('TextSystem');
   const optByGroup = groupBy(loadTable('ItemOptionTemplet'), 'GroupID');
-  const specById = indexBy(loadTable('ItemSpecialOptionTemplet'), 'ID');
+  const specRows = loadTable('ItemSpecialOptionTemplet');
+  const specById = indexBy(specRows, 'ID');
+  const specByGroup = groupBy(specRows, 'GroupID');
   const buffsByID = loadBuffIndex();
 
   const breakByStarGrade = new Map<string, Row>();
@@ -193,6 +233,7 @@ export function buildEquipment(): EquipmentData {
     pools: {},
     passives: {},
     breakLimits: {},
+    sets: {},
     grades: {},
     classes: {},
   };
@@ -231,6 +272,22 @@ export function buildEquipment(): EquipmentData {
       };
     }
     return key;
+  };
+
+  const resolveSetRef = (r: Row): string | null => {
+    const sid = splitCsv(r.SetOptionID)[0];
+    const row = sid ? specById.get(sid) : undefined;
+    if (!row) return null;
+    const groupId = row.GroupID;
+    if (!(groupId in data.sets)) {
+      const tierRows = (specByGroup.get(groupId) ?? []).sort((a, b) => num(a.Level) - num(b.Level));
+      data.sets[groupId] = {
+        name: resolveText(text, row.NameID),
+        icon: row.IconName ?? '',
+        tiers: tierRows.map((t) => ({ '2p': setEffect(t, '2P'), '4p': setEffect(t, '4P') })),
+      };
+    }
+    return groupId;
   };
 
   for (const r of rows) {
@@ -290,6 +347,7 @@ export function buildEquipment(): EquipmentData {
         main,
         sub,
         breakLimit: resolveBreakRef(r),
+        set: resolveSetRef(r),
       };
     }
   }
