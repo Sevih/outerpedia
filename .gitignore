@@ -1,0 +1,31 @@
+# Dépendances
+/node_modules
+/.pnp
+.pnp.*
+
+# Build / sorties (régénérées)
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# Secrets / variables d'environnement (seul .env.example est versionné)
+.env
+.env.*
+!.env.example
+
+# Tests / couverture
+/coverage
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/

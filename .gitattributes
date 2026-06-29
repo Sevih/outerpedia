@@ -1,0 +1,19 @@
+# Normalisation des fins de ligne : LF dans le dépôt (édition Windows OK).
+* text=auto eol=lf
+
+# Fichiers exécutés sous Linux : LF obligatoire.
+*.sh        text eol=lf
+*.ts        text eol=lf
+*.tsx       text eol=lf
+Dockerfile  text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+
+# Binaires : aucune conversion.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
