@@ -139,15 +139,39 @@ const SLOT: Record<string, keyof EquipmentData> = {
   ITS_EQUIP_EXCLUSIVE: 'ee',
 };
 
-function resolveGroup(byGroup: Map<string, Row[]>, groupId: string): Option[] {
+const optMode = (applying: string | undefined): Option['mode'] =>
+  applying === 'OAT_RATE' ? 'rate' : applying === 'OAT_ADD' ? 'flat' : 'none';
+
+function resolveGroup(
+  byGroup: Map<string, Row[]>,
+  buffsByID: ReturnType<typeof loadBuffIndex>,
+  groupId: string,
+): Option[] {
   const rows = byGroup.get(groupId) ?? [];
-  return rows.map((o) => ({
-    stat: slugEnum(o.StatType),
-    mode: o.ApplyingType === 'OAT_RATE' ? 'rate' : o.ApplyingType === 'OAT_ADD' ? 'flat' : 'none',
-    value: num(o.OptionValue),
-    weight: num(o.Rate) / 100,
-    ...(o.BuffID ? { buff: o.BuffID } : {}),
-  }));
+  return rows.map((o) => {
+    const ownStat = o.StatType && o.StatType !== 'ST_NONE';
+    // Option purement buff (ooparts) : pas de stat propre → on lit la stat du buff (niveau 1).
+    // Si l'option a déjà sa stat (ex. EE ST_HIT_AP), on la garde et on conserve juste la réf buff.
+    if (o.BuffID && !ownStat) {
+      const id = o.BuffID.split(',')[0].trim();
+      const levels = buffsByID.get(id) ?? [];
+      const b = levels.find((r) => r.Level === '1') ?? levels[0];
+      return {
+        stat: slugEnum(b?.StatType),
+        mode: optMode(b?.ApplyingType),
+        value: num(b?.Value),
+        weight: num(o.Rate) / 100,
+        buff: o.BuffID,
+      };
+    }
+    return {
+      stat: slugEnum(o.StatType),
+      mode: optMode(o.ApplyingType),
+      value: num(o.OptionValue),
+      weight: num(o.Rate) / 100,
+      ...(o.BuffID ? { buff: o.BuffID } : {}),
+    };
+  });
 }
 
 /** Effet de set pour un nombre de pièces (2P/4P) sur une ligne tier, null si aucun. */
@@ -239,7 +263,7 @@ export function buildEquipment(): EquipmentData {
   };
 
   const ensurePool = (g: string) => {
-    if (g && !(g in data.pools)) data.pools[g] = resolveGroup(optByGroup, g);
+    if (g && !(g in data.pools)) data.pools[g] = resolveGroup(optByGroup, buffsByID, g);
   };
 
   // glossaires : résout le libellé localisé réel (slug ≠ terme du jeu)
