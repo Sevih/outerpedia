@@ -17,5 +17,6 @@ et le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 - CI/CD GitHub Actions : checks (lint/typecheck/build) + build & push image GHCR.
 - Hooks Git (lefthook) : format + lint en pre-commit, typecheck en pre-push.
 - Socle de tests (Vitest) + smoke test.
+- Déploiement automatique sur le VPS via SSH (job `deploy` après build image).
 
 [Non publié]: https://github.com/Sevih/outerpedia/commits/main

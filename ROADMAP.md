@@ -31,8 +31,7 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [ ] Config i18n portée (en, fr, jp, kr, zh — 4 officielles + fr communautaire)
 - [x] Dockerfile multi-stage + `.dockerignore`
 - [x] CI : lint + typecheck + build sur PR
-- [x] CD : build → GHCR → déploiement VPS manuel (« hello world » en ligne via IP)
-      _(auto-deploy Actions→VPS = amélioration future)_
+- [x] CD : build → GHCR → **déploiement auto** sur le VPS via SSH (push → en ligne)
 - [x] Hooks pre-commit + pre-push (lefthook)
 - [x] Socle de tests (Vitest)
 
