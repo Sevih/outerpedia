@@ -2,9 +2,12 @@
  * pull-gamedata — synchronise le dossier `files` du jeu depuis une instance
  * LDPlayer (Android) vers `.gamedata/files/`, en INCRÉMENTAL et RÉCURSIF.
  *
- * On ne tire que les fichiers nouveaux/modifiés (comparaison chemin+taille), et
- * on supprime en local ceux qui n'existent plus côté jeu. Les bundles ont des
- * noms = hash de contenu, donc « même nom = même contenu » → diff fiable.
+ * Détection des changements (fiable) :
+ *  - dossiers "content-addressed" (bundles) : le nom EST le hash du contenu, donc
+ *    un fichier modifié change de nom → forcément re-tiré (signature = taille).
+ *  - autres dossiers (il2cpp...) : signature = md5 du contenu → un changement à
+ *    taille identique est quand même détecté (peu de fichiers → rapide).
+ * On supprime aussi en local les fichiers qui n'existent plus côté jeu.
  *
  * Prérequis : LDPlayer lancé, Outerplane installé (idéalement à jour).
  *
@@ -15,7 +18,8 @@
  * Le chemin de l'adb LDPlayer peut être surchargé via ADB_PATH.
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 
 const ADB = process.env.ADB_PATH ?? 'C:\\LDPlayer\\LDPlayer9\\adb.exe';
@@ -25,6 +29,10 @@ const LOCAL = resolve('.gamedata/files');
 
 // Sous-dossiers source réellement utiles (on ignore promos / cookies / cache).
 const DEFAULT_SUBDIRS = ['bundles', 'il2cpp'];
+
+// Dossiers dont les noms = hash de contenu : la comparaison par nom+taille suffit.
+// Les autres sont comparés par md5 (contenu) pour ne rater aucun changement.
+const CONTENT_ADDRESSED = new Set(['bundles']);
 
 // Au-delà de ce nombre de fichiers à tirer, un pull complet du dossier (1 seul
 // transfert) est plus rapide que des pulls fichier par fichier.
@@ -54,39 +62,62 @@ function pickDevice(): string {
   return lines.find((d) => d.startsWith('emulator-')) ?? lines[0];
 }
 
-/** { chemin relatif → taille } des fichiers d'un dossier distant, RÉCURSIF (ls -lR). */
-function remoteFiles(serial: string, baseDir: string): Map<string, number> {
-  const map = new Map<string, number>();
+/** Signatures distantes { chemin relatif → signature } (taille ou md5). */
+function remoteSignatures(serial: string, baseDir: string, useHash: boolean): Map<string, string> {
+  const map = new Map<string, string>();
+  if (useHash) {
+    // md5 récursif via toybox : "hash  ./chemin/relatif"
+    const out = capture([
+      '-s',
+      serial,
+      'shell',
+      `cd ${baseDir} && find . -type f -exec md5sum {} +`,
+    ]);
+    for (const line of out.split(/\r?\n/)) {
+      const m = line.match(/^([0-9a-f]{32})\s+\.\/(.+)$/);
+      if (m) map.set(m[2], m[1]);
+    }
+    return map;
+  }
+  // taille récursive via ls -lR
   const out = capture(['-s', serial, 'shell', `ls -lR ${baseDir}`]);
   let curDir = '';
   for (const raw of out.split(/\r?\n/)) {
     const line = raw.trimEnd();
     if (!line) continue;
     if (line.endsWith(':')) {
-      curDir = line.slice(0, -1); // en-tête de section "chemin:"
+      curDir = line.slice(0, -1);
       continue;
     }
     if (line.startsWith('total ')) continue;
-    if (!line.startsWith('-')) continue; // fichiers réguliers uniquement
+    if (!line.startsWith('-')) continue;
     const parts = line.split(/\s+/);
     if (parts.length < 8) continue;
-    const size = Number(parts[4]);
+    const size = parts[4];
     const name = parts.slice(7).join(' ');
     const rel = `${curDir}/${name}`.slice(baseDir.length + 1);
-    if (rel && Number.isFinite(size)) map.set(rel, size);
+    if (rel) map.set(rel, size);
   }
   return map;
 }
 
-/** { chemin relatif → taille } des fichiers d'un dossier local, RÉCURSIF. */
-function localFiles(baseDir: string): Map<string, number> {
-  const map = new Map<string, number>();
+/** Signatures locales { chemin relatif → signature } (taille ou md5), récursif. */
+function localSignatures(baseDir: string, useHash: boolean): Map<string, string> {
+  const map = new Map<string, string>();
   if (!existsSync(baseDir)) return map;
   const walk = (dir: string, prefix: string) => {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
-      if (entry.isDirectory()) walk(join(dir, entry.name), rel);
-      else if (entry.isFile()) map.set(rel, statSync(join(dir, entry.name)).size);
+      const abs = join(dir, entry.name);
+      if (entry.isDirectory()) walk(abs, rel);
+      else if (entry.isFile()) {
+        map.set(
+          rel,
+          useHash
+            ? createHash('md5').update(readFileSync(abs)).digest('hex')
+            : String(statSync(abs).size),
+        );
+      }
     }
   };
   walk(baseDir, '');
@@ -107,18 +138,19 @@ try {
 }
 
 for (const sub of subdirs) {
+  const useHash = !CONTENT_ADDRESSED.has(sub);
   const remoteDir = `${REMOTE}/${sub}`;
   const localDir = join(LOCAL, sub);
   mkdirSync(localDir, { recursive: true });
 
-  const remote = remoteFiles(serial, remoteDir);
-  const local = localFiles(localDir);
+  const remote = remoteSignatures(serial, remoteDir, useHash);
+  const local = localSignatures(localDir, useHash);
 
-  const toPull = [...remote].filter(([rel, size]) => local.get(rel) !== size).map(([rel]) => rel);
+  const toPull = [...remote].filter(([rel, sig]) => local.get(rel) !== sig).map(([rel]) => rel);
   const toDelete = [...local.keys()].filter((rel) => !remote.has(rel));
 
   if (toPull.length === 0 && toDelete.length === 0) {
-    console.log(`✓ ${sub} : à jour (${remote.size} fichiers)`);
+    console.log(`✓ ${sub} : à jour (${remote.size} fichiers${useHash ? ', md5' : ''})`);
     continue;
   }
   console.log(`↻ ${sub} : ${toPull.length} à tirer, ${toDelete.length} à supprimer`);
