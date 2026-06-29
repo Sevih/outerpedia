@@ -31,7 +31,8 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [ ] Config i18n portée (en, fr, jp, kr, zh — 4 officielles + fr communautaire)
 - [x] Dockerfile multi-stage + `.dockerignore`
 - [x] CI : lint + typecheck + build sur PR
-- [ ] CD : build → GHCR (✅) → déploiement VPS (un « hello world » en ligne)
+- [x] CD : build → GHCR → déploiement VPS manuel (« hello world » en ligne via IP)
+      _(auto-deploy Actions→VPS = amélioration future)_
 - [ ] Hooks pre-commit (lint-staged)
 
 ## Phase 2 — Architecture données & pipeline
