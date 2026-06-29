@@ -1,6 +1,7 @@
 # Réglages pnpm. Autorise ces dépendances de confiance à exécuter leur script de
-# build (sharp = images, unrs-resolver = résolveur ESLint). Le reste reste bloqué
-# par défaut (protection supply-chain).
+# build (sharp = images, unrs-resolver = résolveur ESLint, lefthook = binaire des
+# git hooks). Le reste reste bloqué par défaut (protection supply-chain).
 allowBuilds:
+  lefthook: true
   sharp: true
   unrs-resolver: true

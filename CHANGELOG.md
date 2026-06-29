@@ -15,5 +15,7 @@ et le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
   config (output standalone, headers de sécurité), ESLint + Prettier, pnpm.
 - Dockerfile multi-stage (pnpm, standalone, non-root) + `.dockerignore`.
 - CI/CD GitHub Actions : checks (lint/typecheck/build) + build & push image GHCR.
+- Hooks Git (lefthook) : format + lint en pre-commit, typecheck en pre-push.
+- Socle de tests (Vitest) + smoke test.
 
 [Non publié]: https://github.com/Sevih/outerpedia/commits/main

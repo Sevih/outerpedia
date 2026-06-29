@@ -33,7 +33,8 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [x] CI : lint + typecheck + build sur PR
 - [x] CD : build → GHCR → déploiement VPS manuel (« hello world » en ligne via IP)
       _(auto-deploy Actions→VPS = amélioration future)_
-- [ ] Hooks pre-commit (lint-staged)
+- [x] Hooks pre-commit + pre-push (lefthook)
+- [x] Socle de tests (Vitest)
 
 ## Phase 2 — Architecture données & pipeline
 
