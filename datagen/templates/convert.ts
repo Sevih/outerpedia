@@ -21,8 +21,12 @@ let ok = 0;
 const errors: string[] = [];
 for (const file of files) {
   try {
-    const { rows } = parseBytes(readFileSync(join(IN, file)));
-    writeFileSync(join(OUT, `${basename(file, '.bytes')}.json`), JSON.stringify(rows, null, 2));
+    const name = basename(file, '.bytes');
+    // format auto-descriptif : on garde les COLONNES (depuis l'en-tête) avec les lignes.
+    // Les lignes restent creuses (champs vides omis) ; `columns` donne le schéma complet
+    // → ne JAMAIS déduire les colonnes depuis row[0].
+    const parsed = parseBytes(readFileSync(join(IN, file)));
+    writeFileSync(join(OUT, `${name}.json`), JSON.stringify(parsed, null, 2));
     ok += 1;
   } catch (e) {
     errors.push(`${file} : ${(e as Error).message}`);
