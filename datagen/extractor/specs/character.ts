@@ -59,6 +59,25 @@ export interface StatRange {
   max: number;
 }
 
+/** Un palier de core-fusion (CharacterFusionLevelTemplet). */
+export interface FusionLevel {
+  level: number;
+  /** Matériau requis (id item) + quantité pour ce palier. */
+  item: string;
+  cost: number;
+  /** Niveau atteint par compétence (skillId → niveau) à ce palier. */
+  skillLevels: Record<string, number>;
+}
+
+/** Détail de progression d'une core-fusion (porté par l'entité fusion). */
+export interface FusionInfo {
+  /** Groupe de fusion (FusionGroupID). */
+  group: string;
+  /** Transcendance prérequise sur la base (CharacterTransStar). */
+  transStar: number;
+  levels: FusionLevel[];
+}
+
 /** Un personnage jouable (source unique, référence skills/ee/sets par id). */
 export interface Character {
   id: string;
@@ -94,6 +113,8 @@ export interface Character {
   coreFusion?: string;
   /** Sur une entité core-fusion : id du personnage de base dont elle dérive. */
   originalCharacter?: string;
+  /** Sur une entité core-fusion : détail de progression (paliers, coûts). */
+  fusion?: FusionInfo;
 }
 
 /** Glossaire générique slug → libellé localisé. */
@@ -122,6 +143,10 @@ interface CharacterAux {
   fusionByBase: Map<string, string>;
   /** core-fusion → id de sa base. */
   baseByFusion: Map<string, string>;
+  /** core-fusion → { group, transStar } (CharacterFusionTemplet). */
+  fusionMetaByChar: Map<string, { group: string; transStar: number }>;
+  /** FusionGroupID → lignes de paliers (CharacterFusionLevelTemplet). */
+  fusionLevelsByGroup: Map<string, Row[]>;
   /** id cible → ids des apparences qui l'empruntent. */
   appearancesOf: Map<string, string[]>;
   glossaries: CharacterGlossaries;
@@ -190,6 +215,27 @@ const characterSchema: Schema = {
     appearances: { kind: 'array', of: { kind: 'string' }, optional: true },
     coreFusion: { kind: 'string', optional: true },
     originalCharacter: { kind: 'string', optional: true },
+    fusion: {
+      kind: 'object',
+      optional: true,
+      fields: {
+        group: { kind: 'string' },
+        transStar: { kind: 'number', int: true, min: 0 },
+        levels: {
+          kind: 'array',
+          minItems: 1,
+          of: {
+            kind: 'object',
+            fields: {
+              level: { kind: 'number', int: true, min: 1 },
+              item: { kind: 'string' },
+              cost: { kind: 'number', int: true, min: 0 },
+              skillLevels: { kind: 'record', of: { kind: 'number', int: true } },
+            },
+          },
+        },
+      },
+    },
   },
 };
 
@@ -255,10 +301,22 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       if (slug) gifts[slug] ??= resolveText(tsys, `SYS_${r.PresentTypeLike}`);
     }
 
-    // Liens core-fusion (table dédiée) : base ↔ évolution.
+    // Liens core-fusion (table dédiée) : base ↔ évolution + méta + paliers.
     const fusion = loadTable('CharacterFusionTemplet');
     const fusionByBase = new Map(fusion.map((f) => [f.CharacterID, f.ChangeCharID]));
     const baseByFusion = new Map(fusion.map((f) => [f.ChangeCharID, f.CharacterID]));
+    const fusionMetaByChar = new Map(
+      fusion.map((f) => [
+        f.ChangeCharID,
+        { group: f.FusionGroupID, transStar: num(f.CharacterTransStar) },
+      ]),
+    );
+    const fusionLevelsByGroup = new Map<string, Row[]>();
+    for (const r of loadTable('CharacterFusionLevelTemplet')) {
+      const list = fusionLevelsByGroup.get(r.FusionGroupID);
+      if (list) list.push(r);
+      else fusionLevelsByGroup.set(r.FusionGroupID, [r]);
+    }
 
     // Apparences : toute ligne CT_PC sans identité propre est un skin de sa cible.
     const appearancesOf = new Map<string, string[]>();
@@ -278,6 +336,8 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       giftById,
       fusionByBase,
       baseByFusion,
+      fusionMetaByChar,
+      fusionLevelsByGroup,
       appearancesOf,
       glossaries: { elements, classes, subClasses, statScales, gifts },
     };
@@ -328,6 +388,27 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     if (fusion) char.coreFusion = fusion;
     const base = aux.baseByFusion.get(r.ID);
     if (base) char.originalCharacter = base;
+    const fusionMeta = aux.fusionMetaByChar.get(r.ID);
+    if (fusionMeta) {
+      const levels: FusionLevel[] = (aux.fusionLevelsByGroup.get(fusionMeta.group) ?? [])
+        .map((lr) => {
+          // Skill_N_Level → niveau de la N-ième compétence de CETTE fusion (r.Skill_N).
+          const skillLevels: Record<string, number> = {};
+          for (let i = 1; i <= 23; i++) {
+            const lvl = lr[`Skill_${i}_Level`];
+            const skillId = r[`Skill_${i}`];
+            if (lvl && skillId) skillLevels[skillId] = num(lvl);
+          }
+          return {
+            level: num(lr.FusionLevel),
+            item: lr.RequireItemID,
+            cost: num(lr.RequireItemValue),
+            skillLevels,
+          };
+        })
+        .sort((a, b) => a.level - b.level);
+      char.fusion = { group: fusionMeta.group, transStar: fusionMeta.transStar, levels };
+    }
 
     return char;
   },
@@ -373,10 +454,10 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       limited: 'curated',
       // Extrait dans un dataset partagé (transcend.json), pas par perso.
       transcend: 'extracted', // CharacterTranscendentTemplet → byStar + overrides
-      // Donnée de jeu qu'on DEVRAIT extraire, pas encore.
-      fusionType: 'todo', // détail de progression (CharacterFusionLevelTemplet)
-      fusionRequirements: 'todo',
-      costPerLevel: 'todo',
+      // Détail core-fusion porté par l'entité fusion (champ `fusion`).
+      fusionType: 'extracted', // = l'entité est une fusion (originalCharacter présent)
+      fusionRequirements: 'extracted', // fusion.transStar + somme des coûts
+      costPerLevel: 'extracted', // fusion.levels[].cost
     },
   },
 };
