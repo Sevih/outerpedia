@@ -231,6 +231,8 @@ export interface ResolvedEffect {
   category: EffectCategory;
   /** Type brut conservé (traçabilité, jamais perdu). */
   type: string;
+  /** Id du buff source (relie une desc de skill `[Buff_*_<id>]` à son effet). */
+  buff?: string;
   /** Cible (slug minuscule de `TargetType`, ex. `enemy_team`). */
   target: string;
   /** Stat affectée (slug) si applicable. */
@@ -266,6 +268,7 @@ export function resolveEffect(row: Row): ResolvedEffect {
     type,
     target: (row.TargetType ?? '').toLowerCase(),
   };
+  if (row.BuffID) eff.buff = row.BuffID;
 
   if (stat) {
     eff.stat = stat;
@@ -279,5 +282,21 @@ export function resolveEffect(row: Row): ResolvedEffect {
   if (row.ToolTipID) eff.tooltip = row.ToolTipID;
   else if (row.CreateText) eff.label = stripTextSymbol(row.CreateText);
 
+  return eff;
+}
+
+/** Partie INVARIANTE par niveau d'un effet (sans les scalaires value/rate/turn). */
+export type EffectShape = Omit<ResolvedEffect, 'value' | 'rate' | 'turn'>;
+
+/**
+ * Structure d'un effet, sans les valeurs qui scalent (value/rate/turn).
+ * Pour les compétences : la forme est stockée UNE fois, les nombres vivent dans
+ * les `vars` par niveau (cf. `skillBuffVars`).
+ */
+export function effectShape(row: Row): EffectShape {
+  const eff = resolveEffect(row);
+  delete eff.value;
+  delete eff.rate;
+  delete eff.turn;
   return eff;
 }

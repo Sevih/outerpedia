@@ -163,3 +163,82 @@ export function resolvePlaceholders(
 ): string {
   return fillPlaceholders(text, buffValuesAt(buffsByID, buffIdStr, level), color);
 }
+
+// --- placeholders de COMPÉTENCE (primitive #5) -------------------------------
+// Les descriptions de skills utilisent un format distinct de l'équipement :
+// chaque placeholder embarque l'id COMPLET du buff visé —
+//   [Buff_C_<id>] = chance d'application (CreateRate, %)
+//   [Buff_V_<id>] = valeur (per-mille /10 si applicable, sinon entier absolu)
+//   [Buff_T_<id>] = durée en tours (TurnDuration)
+// Les niveaux d'un buff de skill sont creux (1,3,5…) : on retombe sur le niveau
+// défini le plus proche INFÉRIEUR ou égal à celui demandé.
+
+/** Ligne d'un buff au niveau ≤ demandé le plus proche (`undefined` si aucune). */
+export function buffRowAtLevel(
+  buffsByID: Map<string, Row[]>,
+  buffId: string,
+  level: number,
+): Row | undefined {
+  const rows = buffsByID.get(buffId.trim());
+  if (!rows?.length) return undefined;
+  let best: Row | undefined;
+  let bestLv = -1;
+  for (const r of rows) {
+    const lv = num(r.Level) || 1;
+    if (lv <= level && lv > bestLv) {
+      best = r;
+      bestLv = lv;
+    }
+  }
+  return (
+    best ??
+    rows.find((r) => (num(r.Level) || 1) === Math.min(...rows.map((x) => num(x.Level) || 1)))
+  );
+}
+
+/** Valeurs de placeholder d'un buff de skill à un niveau : chance / valeur / tours. */
+export interface SkillBuffVars {
+  /** Chance d'application (CreateRate/10, incl. 100%) — `[Buff_C_<id>]`. */
+  c?: string;
+  /** Valeur (magnitude absolue, per-mille /10 si applicable) — `[Buff_V_<id>]`. */
+  v?: string;
+  /** Durée en tours (TurnDuration) — `[Buff_T_<id>]`. */
+  t?: string;
+}
+
+/**
+ * Valeurs résolues d'un buff de skill au niveau demandé (clés absentes si nulles).
+ * Sert À LA FOIS la desc (`[Buff_C/V/T_<id>]`) et les nombres des chips d'effet —
+ * une seule source par niveau, pas de duplication.
+ */
+export function skillBuffVars(
+  buffsByID: Map<string, Row[]>,
+  buffId: string,
+  level: number,
+): SkillBuffVars {
+  const b = buffRowAtLevel(buffsByID, buffId, level);
+  if (!b) return {};
+  const out: SkillBuffVars = {};
+  if (num(b.CreateRate) > 0) out.c = `${num(b.CreateRate) / 10}%`;
+  if (num(b.Value) !== 0) out.v = fmtValue(b);
+  if (fmtTurn(b) !== '?') out.t = fmtTurn(b);
+  return out;
+}
+
+/**
+ * Remplit les placeholders `[Buff_C/V/T_<id>]` d'une description de compétence,
+ * avec les valeurs des buffs visés AU NIVEAU demandé. Les balises `<color=…>`
+ * du template source sont conservées telles quelles (donnée canonique).
+ * `?` si la valeur n'existe pas.
+ */
+export function resolveSkillPlaceholders(
+  template: string,
+  buffsByID: Map<string, Row[]>,
+  level: number,
+): string {
+  return template.replace(/\[Buff_([CVT])_(.+?)\]/g, (_m, kind: string, buffId: string) => {
+    const vars = skillBuffVars(buffsByID, buffId, level);
+    const val = kind === 'C' ? vars.c : kind === 'T' ? vars.t : vars.v;
+    return val ?? '?';
+  });
+}

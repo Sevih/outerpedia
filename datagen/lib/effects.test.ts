@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   classifyCategory,
   classifyFamily,
+  effectShape,
   resolveEffect,
   statSlug,
   type EffectFamily,
@@ -159,5 +160,34 @@ describe('resolveEffect', () => {
     } as Row);
     expect(eff.category).toBe('cc');
     expect(eff.rate).toBe('30%');
+  });
+});
+
+describe('effectShape', () => {
+  it('garde la structure, retire value/rate/turn (scalaires par niveau)', () => {
+    const shape = effectShape({
+      Type: 'BT_STAT',
+      StatType: 'ST_ATK',
+      ApplyingType: 'OAT_RATE',
+      Value: '-300',
+      CreateRate: '700',
+      TurnDuration: '2',
+      TargetType: 'ENEMY',
+      BuffDebuffType: 'DEBUFF',
+      IsDebuff: 'True',
+      BuffID: '2000001_3_1',
+    } as Row);
+    expect(shape).toEqual({
+      family: 'stat',
+      category: 'debuff',
+      type: 'BT_STAT',
+      target: 'enemy',
+      buff: '2000001_3_1',
+      stat: 'atk',
+      mode: 'down',
+    });
+    expect('value' in shape).toBe(false);
+    expect('rate' in shape).toBe(false);
+    expect('turn' in shape).toBe(false);
   });
 });
