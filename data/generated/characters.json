@@ -4263,6 +4263,7 @@
       "kr": "데미우르고스",
       "zh": "创世之神"
     },
+    "showNickName": true,
     "subClass": "bruiser",
     "chainType": "finish",
     "gift": "present_01",
@@ -4749,6 +4750,7 @@
       "kr": "데미우르고스",
       "zh": "创世之神"
     },
+    "showNickName": true,
     "subClass": "wizard",
     "chainType": "start",
     "gift": "present_01",
@@ -5056,6 +5058,7 @@
       "kr": "데미우르고스",
       "zh": "创世之神"
     },
+    "showNickName": true,
     "subClass": "sweeper",
     "chainType": "join",
     "gift": "present_01",
@@ -5958,6 +5961,7 @@
       "kr": "데미우르고스",
       "zh": "创世之神"
     },
+    "showNickName": true,
     "subClass": "vanguard",
     "chainType": "join",
     "gift": "present_03",
@@ -6635,6 +6639,7 @@
       "kr": "모나드",
       "zh": "单子"
     },
+    "showNickName": true,
     "subClass": "sage",
     "chainType": "start",
     "gift": "present_01",
@@ -6711,6 +6716,7 @@
       "kr": "풀장의 트릭스터",
       "zh": "泳池魔术师"
     },
+    "showNickName": true,
     "subClass": "attacker",
     "chainType": "finish",
     "gift": "present_04",
@@ -6785,6 +6791,7 @@
       "kr": "삼세요호",
       "zh": "三世妖狐"
     },
+    "showNickName": true,
     "subClass": "wizard",
     "chainType": "start",
     "gift": "present_02",
@@ -7086,6 +7093,7 @@
       "kr": "그노시스",
       "zh": "诺希斯"
     },
+    "showNickName": true,
     "subClass": "attacker",
     "chainType": "finish",
     "gift": "present_03",
@@ -7161,6 +7169,7 @@
       "kr": "그노시스",
       "zh": "诺希斯"
     },
+    "showNickName": true,
     "subClass": "enchanter",
     "chainType": "start",
     "gift": "present_03",
@@ -7236,6 +7245,7 @@
       "kr": "그노시스",
       "zh": "诺希斯"
     },
+    "showNickName": true,
     "subClass": "tactician",
     "chainType": "join",
     "gift": "present_04",
@@ -7310,6 +7320,7 @@
       "kr": "성야의 축복",
       "zh": "圣诞夜的祝福"
     },
+    "showNickName": true,
     "subClass": "vanguard",
     "chainType": "join",
     "gift": "present_02",
@@ -7834,6 +7845,7 @@
       "kr": "데미우르고스",
       "zh": "创世之神"
     },
+    "showNickName": true,
     "subClass": "reliever",
     "chainType": "finish",
     "gift": "present_01",
@@ -7984,6 +7996,7 @@
       "kr": "오메가",
       "zh": "奥米伽"
     },
+    "showNickName": true,
     "subClass": "phalanx",
     "chainType": "join",
     "gift": "present_05",
@@ -8208,6 +8221,7 @@
       "kr": "청운의 꿈",
       "zh": "青云之梦"
     },
+    "showNickName": true,
     "subClass": "sweeper",
     "chainType": "join",
     "gift": "present_05",
@@ -8432,6 +8446,7 @@
       "kr": "그노시스",
       "zh": "诺希斯"
     },
+    "showNickName": true,
     "subClass": "bruiser",
     "chainType": "join",
     "gift": "present_05",
@@ -8508,6 +8523,7 @@
       "kr": "삼장법사",
       "zh": "三藏法师"
     },
+    "showNickName": true,
     "subClass": "vanguard",
     "chainType": "finish",
     "gift": "present_04",
@@ -8582,6 +8598,7 @@
       "kr": "모나드",
       "zh": "单子"
     },
+    "showNickName": true,
     "subClass": "tactician",
     "chainType": "join",
     "gift": "present_01",
@@ -8657,6 +8674,7 @@
       "kr": "그노시스",
       "zh": "诺希斯"
     },
+    "showNickName": true,
     "subClass": "enchanter",
     "chainType": "join",
     "gift": "present_03",
@@ -8807,6 +8825,7 @@
       "kr": "미드나이트 러시",
       "zh": "午夜狂潮"
     },
+    "showNickName": true,
     "subClass": "bruiser",
     "chainType": "join",
     "gift": "present_02",
@@ -9032,6 +9051,7 @@
       "kr": "데미우르고스",
       "zh": "创世之神"
     },
+    "showNickName": true,
     "subClass": "wizard",
     "chainType": "join",
     "gift": "present_01",

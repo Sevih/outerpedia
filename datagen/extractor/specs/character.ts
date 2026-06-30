@@ -84,6 +84,11 @@ export interface Character {
   name: LangDict;
   /** Titre/épithète (« The Lone Avenger »). */
   nickname?: LangDict;
+  /**
+   * Le jeu affiche le nickname EN PRÉFIXE du nom (CharacterExtraTemplet.ShowNickName)
+   * → nom complet « Demiurge Stella ». Le front compose `nickname + name`.
+   */
+  showNickName?: boolean;
   /** Rareté de base (étoiles, BasicStar). */
   rarity: number;
   /** Slugs stables (libellés dans les glossaires). */
@@ -139,6 +144,8 @@ interface CharacterAux {
   chainSeqById: Map<string, string>;
   /** id perso → type de cadeau préféré (TrustTemplet.PresentTypeLike). */
   giftById: Map<string, string>;
+  /** ids dont le nickname s'affiche en préfixe (CharacterExtraTemplet). */
+  showNickNameIds: Set<string>;
   /** base → id de sa core-fusion (CharacterFusionTemplet). */
   fusionByBase: Map<string, string>;
   /** core-fusion → id de sa base. */
@@ -199,6 +206,7 @@ const characterSchema: Schema = {
     id: { kind: 'string' },
     name: { kind: 'langDict' },
     nickname: { kind: 'langDict', optional: true },
+    showNickName: { kind: 'boolean', optional: true },
     rarity: { kind: 'number', int: true, min: 0 },
     element: { kind: 'string' },
     class: { kind: 'string' },
@@ -301,6 +309,13 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       if (slug) gifts[slug] ??= resolveText(tsys, `SYS_${r.PresentTypeLike}`);
     }
 
+    // Affichage du nickname en préfixe du nom (« Demiurge Stella »).
+    const showNickNameIds = new Set(
+      loadTable('CharacterExtraTemplet')
+        .filter((r) => r.ShowNickName === 'True')
+        .map((r) => r.CharacterID),
+    );
+
     // Liens core-fusion (table dédiée) : base ↔ évolution + méta + paliers.
     const fusion = loadTable('CharacterFusionTemplet');
     const fusionByBase = new Map(fusion.map((f) => [f.CharacterID, f.ChangeCharID]));
@@ -334,6 +349,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       eeByChar,
       chainSeqById,
       giftById,
+      showNickNameIds,
       fusionByBase,
       baseByFusion,
       fusionMetaByChar,
@@ -360,6 +376,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     };
     const nick = resolveText(aux.tchar, r.NickNameID);
     if (nick.en) char.nickname = nick;
+    if (aux.showNickNameIds.has(r.ID)) char.showNickName = true;
     const subClass = r.SubClass && r.SubClass !== 'NONE' ? r.SubClass.toLowerCase() : undefined;
     if (subClass) char.subClass = subClass;
     const seq = aux.chainSeqById.get(r.ID);
