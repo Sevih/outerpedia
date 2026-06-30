@@ -6,7 +6,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "pnpm clean && next dev",
+    "dev": "pnpm clean:all && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
