@@ -32,9 +32,18 @@ const securityHeaders = [
   },
 ];
 
+// Pages/routes suffixées `.dev.*` ne sont reconnues qu'en développement →
+// l'admin local n'est PAS buildé en prod (ni son code, ni le runtime datagen
+// qu'il importe). Voir src/app/admin/*.dev.tsx.
+const isDev = process.env.NODE_ENV !== 'production';
+const base = ['tsx', 'ts', 'jsx', 'js'];
+const pageExtensions = isDev ? [...base.map((e) => `dev.${e}`), ...base] : base;
+
 const nextConfig: NextConfig = {
   // Standalone output -> minimal production image for Docker.
   output: 'standalone',
+
+  pageExtensions,
 
   env: {
     NEXT_PUBLIC_APP_VERSION: version,

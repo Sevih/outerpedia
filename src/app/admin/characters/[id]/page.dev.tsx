@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { Route } from 'next';
 import { notFound } from 'next/navigation';
 import { CharacterCuratedEditor } from '@/components/admin/CharacterCuratedEditor';
 import { getCharacter } from '@/lib/data/characters';
@@ -13,7 +14,10 @@ export default async function AdminCharacterEdit({ params }: { params: Promise<{
   return (
     <div className="space-y-5">
       <div>
-        <Link href="/admin/characters" className="text-content-subtle hover:text-content text-sm">
+        <Link
+          href={'/admin/characters' as Route}
+          className="text-content-subtle hover:text-content text-sm"
+        >
           ← Personnages
         </Link>
         <h1 className="text-content-strong mt-1 text-xl font-semibold">

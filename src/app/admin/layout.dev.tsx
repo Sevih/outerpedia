@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { Route } from 'next';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { assertDevOnly } from '@/lib/admin/guard';
 
@@ -11,14 +12,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="bg-surface-base text-content min-h-screen">
       <header className="border-line-subtle bg-surface-raised border-b">
         <div className="mx-auto flex max-w-5xl items-center gap-4 px-6 py-3">
-          <Link href="/admin" className="text-content-strong font-semibold">
+          <Link href={'/admin' as Route} className="text-content-strong font-semibold">
             Admin
           </Link>
           <span className="bg-warn/15 text-warn rounded px-2 py-0.5 text-xs font-medium">
             local · dev only
           </span>
           <Link
-            href="/admin/characters"
+            href={'/admin/characters' as Route}
             className="text-content-muted hover:text-content-strong text-sm"
           >
             Personnages

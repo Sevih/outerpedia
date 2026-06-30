@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { Route } from 'next';
 
 export default function AdminHome() {
   return (
@@ -10,7 +11,7 @@ export default function AdminHome() {
         </p>
       </div>
       <Link
-        href="/admin/characters"
+        href={'/admin/characters' as Route}
         className="border-line bg-surface-raised hover:border-accent block rounded-lg border p-4 transition"
       >
         <div className="text-content-strong font-medium">Personnages</div>
