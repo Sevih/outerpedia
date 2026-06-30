@@ -142,6 +142,16 @@ function ownIdentity(r: Row): boolean {
   return r.NameID === `${r.ID}_Name`;
 }
 
+/**
+ * Nettoie un nom de doubleur : sentinelle « 0 » (pas de doublage) → vide, et
+ * retire le préfixe d'usage (`VA. ` anglais, `CV.` jp/kr) → nom nu, le front
+ * réaffiche le préfixe s'il veut.
+ */
+function cleanVoiceActor(v: string | undefined): string {
+  if (!v || v === '0') return '';
+  return v.replace(/^(VA|CV)\.\s*/, '').trim();
+}
+
 /** Extrait les stats non nulles (paires _Min/_Max) en valeurs brutes. */
 function extractStats(r: Row): Record<string, StatRange> {
   const out: Record<string, StatRange> = {};
@@ -301,10 +311,10 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     // sentinelle « 0 » (= pas de doublage pour cette langue).
     const cv = resolveText(aux.tchar, r.CVNameID);
     const va: LangDict = {
-      en: cv.en === '0' ? '' : cv.en,
-      jp: cv.jp === '0' ? '' : cv.jp,
-      kr: cv.kr === '0' ? '' : cv.kr,
-      zh: cv.zh === '0' ? '' : cv.zh,
+      en: cleanVoiceActor(cv.en),
+      jp: cleanVoiceActor(cv.jp),
+      kr: cleanVoiceActor(cv.kr),
+      zh: cleanVoiceActor(cv.zh),
     };
     if (va.en || va.jp || va.kr || va.zh) char.voiceActor = va;
     const ee = aux.eeByChar.get(r.ID);

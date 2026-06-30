@@ -72,9 +72,9 @@
     "chainType": "finish",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Alejandro Saab",
-      "jp": "CV.斉藤壮馬",
-      "kr": "CV.김영선",
+      "en": "Alejandro Saab",
+      "jp": "斉藤壮馬",
+      "kr": "김영선",
       "zh": ""
     },
     "ee": "2000001",
@@ -154,9 +154,9 @@
     "chainType": "join",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Mela Lee",
-      "jp": "CV.長妻樹里",
-      "kr": "CV.성예원",
+      "en": "Mela Lee",
+      "jp": "長妻樹里",
+      "kr": "성예원",
       "zh": ""
     },
     "ee": "2000002",
@@ -235,9 +235,9 @@
     "chainType": "finish",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Erin Yvette",
-      "jp": "CV.阿澄佳奈",
-      "kr": "CV.김가령",
+      "en": "Erin Yvette",
+      "jp": "阿澄佳奈",
+      "kr": "김가령",
       "zh": ""
     },
     "ee": "2000003",
@@ -317,9 +317,9 @@
     "chainType": "join",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Courtney Lin",
-      "jp": "CV.芹澤優",
-      "kr": "CV.김도희",
+      "en": "Courtney Lin",
+      "jp": "芹澤優",
+      "kr": "김도희",
       "zh": ""
     },
     "ee": "2000004",
@@ -398,9 +398,9 @@
     "chainType": "start",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Jeannie Tirado",
-      "jp": "CV.安済知佳",
-      "kr": "CV.여윤미",
+      "en": "Jeannie Tirado",
+      "jp": "安済知佳",
+      "kr": "여윤미",
       "zh": ""
     },
     "ee": "2000005",
@@ -480,9 +480,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. Jenny Yokobori",
-      "jp": "CV.中恵光城",
-      "kr": "CV.김윤채",
+      "en": "Jenny Yokobori",
+      "jp": "中恵光城",
+      "kr": "김윤채",
       "zh": ""
     },
     "ee": "2000006",
@@ -560,9 +560,9 @@
     "chainType": "join",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Reba Buhr",
-      "jp": "CV.田村ゆかり",
-      "kr": "CV.이다은",
+      "en": "Reba Buhr",
+      "jp": "田村ゆかり",
+      "kr": "이다은",
       "zh": ""
     },
     "ee": "2000007",
@@ -641,9 +641,9 @@
     "chainType": "start",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Judy Alice Lee",
-      "jp": "CV.明坂聡美",
-      "kr": "CV.이보희",
+      "en": "Judy Alice Lee",
+      "jp": "明坂聡美",
+      "kr": "이보희",
       "zh": ""
     },
     "ee": "2000008",
@@ -722,9 +722,9 @@
     "chainType": "finish",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Courtney Lin",
-      "jp": "CV.小倉唯",
-      "kr": "CV.이새아",
+      "en": "Courtney Lin",
+      "jp": "小倉唯",
+      "kr": "이새아",
       "zh": ""
     },
     "ee": "2000009",
@@ -803,9 +803,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. G.K. Bowes",
-      "jp": "CV.櫻庭有紗",
-      "kr": "CV.윤은서",
+      "en": "G.K. Bowes",
+      "jp": "櫻庭有紗",
+      "kr": "윤은서",
       "zh": ""
     },
     "ee": "2000010",
@@ -883,9 +883,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. Brenna Larson",
-      "jp": "CV.春野杏",
-      "kr": "CV.성예원",
+      "en": "Brenna Larson",
+      "jp": "春野杏",
+      "kr": "성예원",
       "zh": ""
     },
     "ee": "2000011",
@@ -964,9 +964,9 @@
     "chainType": "finish",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Allegra Clark",
-      "jp": "CV.甲斐田裕子",
-      "kr": "CV.안영미",
+      "en": "Allegra Clark",
+      "jp": "甲斐田裕子",
+      "kr": "안영미",
       "zh": ""
     },
     "ee": "2000012",
@@ -1045,9 +1045,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Ryan Bartley",
-      "jp": "CV.諏訪彩花",
-      "kr": "CV.차영희",
+      "en": "Ryan Bartley",
+      "jp": "諏訪彩花",
+      "kr": "차영희",
       "zh": ""
     },
     "ee": "2000013",
@@ -1125,9 +1125,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. AmaLee",
-      "jp": "CV.桑原由気",
-      "kr": "CV.신온유",
+      "en": "AmaLee",
+      "jp": "桑原由気",
+      "kr": "신온유",
       "zh": ""
     },
     "ee": "2000014",
@@ -1206,9 +1206,9 @@
     "chainType": "finish",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Kirsten Day",
-      "jp": "CV.ゆかな",
-      "kr": "CV.이새벽",
+      "en": "Kirsten Day",
+      "jp": "ゆかな",
+      "kr": "이새벽",
       "zh": ""
     },
     "ee": "2000015",
@@ -1287,9 +1287,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. Jeannie Tirado",
-      "jp": "CV.山本希望",
-      "kr": "CV.박시윤",
+      "en": "Jeannie Tirado",
+      "jp": "山本希望",
+      "kr": "박시윤",
       "zh": ""
     },
     "ee": "2000016",
@@ -1368,9 +1368,9 @@
     "chainType": "join",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Allegra Clark",
-      "jp": "CV.優木かな",
-      "kr": "CV.김도희",
+      "en": "Allegra Clark",
+      "jp": "優木かな",
+      "kr": "김도희",
       "zh": ""
     },
     "ee": "2000017",
@@ -1448,9 +1448,9 @@
     "chainType": "join",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Marieve Herington",
-      "jp": "CV.牧野由依",
-      "kr": "CV.이은조",
+      "en": "Marieve Herington",
+      "jp": "牧野由依",
+      "kr": "이은조",
       "zh": ""
     },
     "ee": "2000018",
@@ -1528,9 +1528,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. Val Rodriguez",
-      "jp": "CV.本渡楓",
-      "kr": "CV.김연우",
+      "en": "Val Rodriguez",
+      "jp": "本渡楓",
+      "kr": "김연우",
       "zh": ""
     },
     "ee": "2000019",
@@ -1609,9 +1609,9 @@
     "chainType": "join",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Kaylie Mills",
-      "jp": "CV.黒沢ともよ",
-      "kr": "CV.강은애",
+      "en": "Kaylie Mills",
+      "jp": "黒沢ともよ",
+      "kr": "강은애",
       "zh": ""
     },
     "ee": "2000020",
@@ -1690,9 +1690,9 @@
     "chainType": "finish",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Sarah Williams",
-      "jp": "CV.鬼頭明里",
-      "kr": "CV.장예나",
+      "en": "Sarah Williams",
+      "jp": "鬼頭明里",
+      "kr": "장예나",
       "zh": ""
     },
     "ee": "2000021",
@@ -1771,9 +1771,9 @@
     "chainType": "finish",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Xanthe Huynh",
-      "jp": "CV.加藤英美里",
-      "kr": "CV.방연지",
+      "en": "Xanthe Huynh",
+      "jp": "加藤英美里",
+      "kr": "방연지",
       "zh": ""
     },
     "ee": "2000022",
@@ -1853,9 +1853,9 @@
     "chainType": "finish",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Brianna Knickerbocker",
-      "jp": "CV.伊藤静",
-      "kr": "CV.강시현",
+      "en": "Brianna Knickerbocker",
+      "jp": "伊藤静",
+      "kr": "강시현",
       "zh": ""
     },
     "ee": "2000023",
@@ -1934,9 +1934,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. Brenna Larson",
-      "jp": "CV.鷲見友美ジェナ",
-      "kr": "CV.김예림",
+      "en": "Brenna Larson",
+      "jp": "鷲見友美ジェナ",
+      "kr": "김예림",
       "zh": ""
     },
     "ee": "2000024",
@@ -2014,9 +2014,9 @@
     "chainType": "start",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Kimberly Woods",
-      "jp": "CV.戸松遥",
-      "kr": "CV.윤아영",
+      "en": "Kimberly Woods",
+      "jp": "戸松遥",
+      "kr": "윤아영",
       "zh": ""
     },
     "ee": "2000025",
@@ -2095,9 +2095,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. AmaLee",
-      "jp": "CV.青山吉能",
-      "kr": "CV.김예림",
+      "en": "AmaLee",
+      "jp": "青山吉能",
+      "kr": "김예림",
       "zh": ""
     },
     "ee": "2000026",
@@ -2175,9 +2175,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. Skyler Davenport",
-      "jp": "CV.秦佐和子",
-      "kr": "CV.김유림",
+      "en": "Skyler Davenport",
+      "jp": "秦佐和子",
+      "kr": "김유림",
       "zh": ""
     },
     "ee": "2000027",
@@ -2255,9 +2255,9 @@
     "chainType": "join",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Brent Mukai",
-      "jp": "CV.森川智之",
-      "kr": "CV.곽윤상",
+      "en": "Brent Mukai",
+      "jp": "森川智之",
+      "kr": "곽윤상",
       "zh": ""
     },
     "ee": "2000028",
@@ -2335,9 +2335,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Alexis Tipton",
-      "jp": "CV.三宅華也",
-      "kr": "CV.이보용",
+      "en": "Alexis Tipton",
+      "jp": "三宅華也",
+      "kr": "이보용",
       "zh": ""
     },
     "ee": "2000029",
@@ -2415,9 +2415,9 @@
     "chainType": "join",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Shelby Young",
-      "jp": "CV.加隈亜衣",
-      "kr": "CV.비주언",
+      "en": "Shelby Young",
+      "jp": "加隈亜衣",
+      "kr": "비주언",
       "zh": ""
     },
     "ee": "2000030",
@@ -2495,9 +2495,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Kelsey Maher",
-      "jp": "CV.木村珠莉",
-      "kr": "CV.김하루",
+      "en": "Kelsey Maher",
+      "jp": "木村珠莉",
+      "kr": "김하루",
       "zh": ""
     },
     "ee": "2000031",
@@ -2575,9 +2575,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Jennifer Losi",
-      "jp": "CV.髙橋ミナミ",
-      "kr": "CV.허예은",
+      "en": "Jennifer Losi",
+      "jp": "髙橋ミナミ",
+      "kr": "허예은",
       "zh": ""
     },
     "ee": "2000032",
@@ -2655,9 +2655,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Corina Boettger",
-      "jp": "CV.吉田有里",
-      "kr": "CV.박하진",
+      "en": "Corina Boettger",
+      "jp": "吉田有里",
+      "kr": "박하진",
       "zh": ""
     },
     "ee": "2000033",
@@ -2735,9 +2735,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Faye Mata",
-      "jp": "CV.大津愛理",
-      "kr": "CV.가빈",
+      "en": "Faye Mata",
+      "jp": "大津愛理",
+      "kr": "가빈",
       "zh": ""
     },
     "ee": "2000034",
@@ -2815,9 +2815,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Laura Post",
-      "jp": "CV.中原麻衣",
-      "kr": "CV.정유정",
+      "en": "Laura Post",
+      "jp": "中原麻衣",
+      "kr": "정유정",
       "zh": ""
     },
     "ee": "2000035",
@@ -2896,9 +2896,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. Kristen McGuire",
-      "jp": "CV.三浦千幸",
-      "kr": "CV.강새봄",
+      "en": "Kristen McGuire",
+      "jp": "三浦千幸",
+      "kr": "강새봄",
       "zh": ""
     },
     "ee": "2000036",
@@ -2977,9 +2977,9 @@
     "chainType": "finish",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. Shelby Young",
-      "jp": "CV.佐藤利奈",
-      "kr": "CV.곽규미",
+      "en": "Shelby Young",
+      "jp": "佐藤利奈",
+      "kr": "곽규미",
       "zh": ""
     },
     "ee": "2000037",
@@ -3059,9 +3059,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Stephanie Panisello",
-      "jp": "CV.首藤志奈",
-      "kr": "CV.김아롱",
+      "en": "Stephanie Panisello",
+      "jp": "首藤志奈",
+      "kr": "김아롱",
       "zh": ""
     },
     "ee": "2000038",
@@ -3140,9 +3140,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Laura Post",
-      "jp": "CV.田中理恵",
-      "kr": "CV.박지윤",
+      "en": "Laura Post",
+      "jp": "田中理恵",
+      "kr": "박지윤",
       "zh": ""
     },
     "ee": "2000039",
@@ -3221,9 +3221,9 @@
     "chainType": "join",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Kaylie Mills",
+      "en": "Kaylie Mills",
       "jp": "",
-      "kr": "CV.유영",
+      "kr": "유영",
       "zh": ""
     },
     "ee": "2000040",
@@ -3301,9 +3301,9 @@
     "chainType": "join",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Todd Haberkorn",
-      "jp": "CV.野上翔",
-      "kr": "CV.이상호",
+      "en": "Todd Haberkorn",
+      "jp": "野上翔",
+      "kr": "이상호",
       "zh": ""
     },
     "ee": "2000041",
@@ -3381,9 +3381,9 @@
     "chainType": "start",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Aleks Le",
-      "jp": "CV.逢坂良太",
-      "kr": "CV.정의한",
+      "en": "Aleks Le",
+      "jp": "逢坂良太",
+      "kr": "정의한",
       "zh": ""
     },
     "ee": "2000042",
@@ -3461,9 +3461,9 @@
     "chainType": "start",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Jeannie Tirado",
-      "jp": "CV.石見舞菜香",
-      "kr": "CV.장미",
+      "en": "Jeannie Tirado",
+      "jp": "石見舞菜香",
+      "kr": "장미",
       "zh": ""
     },
     "ee": "2000043",
@@ -3544,9 +3544,9 @@
     "chainType": "finish",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Elizabeth Maxwell",
-      "jp": "CV.井上喜久子",
-      "kr": "CV.조경이",
+      "en": "Elizabeth Maxwell",
+      "jp": "井上喜久子",
+      "kr": "조경이",
       "zh": ""
     },
     "ee": "2000044",
@@ -3625,9 +3625,9 @@
     "chainType": "join",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Todd Haberkorn",
-      "jp": "CV.大桃陽介",
-      "kr": "CV.김민주",
+      "en": "Todd Haberkorn",
+      "jp": "大桃陽介",
+      "kr": "김민주",
       "zh": ""
     },
     "ee": "2000045",
@@ -3705,9 +3705,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Faye Mata",
-      "jp": "CV.結木梢",
-      "kr": "CV.윤은서",
+      "en": "Faye Mata",
+      "jp": "結木梢",
+      "kr": "윤은서",
       "zh": ""
     },
     "ee": "2000046",
@@ -3785,9 +3785,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Stephanie Southerland",
-      "jp": "CV.渕上舞",
-      "kr": "CV.김나율",
+      "en": "Stephanie Southerland",
+      "jp": "渕上舞",
+      "kr": "김나율",
       "zh": ""
     },
     "ee": "2000047",
@@ -3865,9 +3865,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. Stephanie Panisello",
-      "jp": "CV.高森奈津美",
-      "kr": "CV.김아롱",
+      "en": "Stephanie Panisello",
+      "jp": "高森奈津美",
+      "kr": "김아롱",
       "zh": ""
     },
     "ee": "2000048",
@@ -3945,9 +3945,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. Brent Mukai",
-      "jp": "CV.柴田あいばん",
-      "kr": "CV.김민주",
+      "en": "Brent Mukai",
+      "jp": "柴田あいばん",
+      "kr": "김민주",
       "zh": ""
     },
     "ee": "2000049",
@@ -4025,9 +4025,9 @@
     "chainType": "join",
     "gift": "present_03",
     "voiceActor": {
-      "en": "VA. Todd Haberkorn",
-      "jp": "CV.野々井爽",
-      "kr": "CV.이상호",
+      "en": "Todd Haberkorn",
+      "jp": "野々井爽",
+      "kr": "이상호",
       "zh": ""
     },
     "ee": "2000050",
@@ -4105,9 +4105,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. Alejandro Saab",
-      "jp": "CV.根津大輔",
-      "kr": "CV.곽윤상",
+      "en": "Alejandro Saab",
+      "jp": "根津大輔",
+      "kr": "곽윤상",
       "zh": ""
     },
     "ee": "2000051",
@@ -4186,9 +4186,9 @@
     "chainType": "finish",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Stephanie Southerland",
-      "jp": "CV.長谷川育美",
-      "kr": "CV.이명호",
+      "en": "Stephanie Southerland",
+      "jp": "長谷川育美",
+      "kr": "이명호",
       "zh": ""
     },
     "ee": "2000052",
@@ -4267,9 +4267,9 @@
     "chainType": "finish",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. Laura Post",
-      "jp": "CV.田中理恵",
-      "kr": "CV.박지윤",
+      "en": "Laura Post",
+      "jp": "田中理恵",
+      "kr": "박지윤",
       "zh": ""
     },
     "ee": "2000053",
@@ -4348,9 +4348,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. None",
-      "jp": "CV.메네 성우 이름",
-      "kr": "CV.메네 성우 이름",
+      "en": "None",
+      "jp": "메네 성우 이름",
+      "kr": "메네 성우 이름",
       "zh": ""
     },
     "ee": "2000054",
@@ -4429,9 +4429,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "VA. None",
-      "jp": "CV.아에르 성우 이름",
-      "kr": "CV.아에르 성우 이름",
+      "en": "None",
+      "jp": "아에르 성우 이름",
+      "kr": "아에르 성우 이름",
       "zh": ""
     },
     "ee": "2000055",
@@ -4510,9 +4510,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. None",
-      "jp": "CV.노티아 성우 이름",
-      "kr": "CV.노티아 성우 이름",
+      "en": "None",
+      "jp": "노티아 성우 이름",
+      "kr": "노티아 성우 이름",
       "zh": ""
     },
     "ee": "2000056",
@@ -4592,9 +4592,9 @@
     "chainType": "start",
     "gift": "present_01",
     "voiceActor": {
-      "en": "VA. None",
-      "jp": "CV.스테로페 성우 이름",
-      "kr": "CV.스테로페 성우 이름",
+      "en": "None",
+      "jp": "스테로페 성우 이름",
+      "kr": "스테로페 성우 이름",
       "zh": ""
     },
     "ee": "2000057",
@@ -4672,9 +4672,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "VA. None",
-      "jp": "CV.아스테 성우 이름",
-      "kr": "CV.아스테 성우 이름",
+      "en": "None",
+      "jp": "아스테 성우 이름",
+      "kr": "아스테 성우 이름",
       "zh": ""
     },
     "ee": "2000058",
@@ -4828,9 +4828,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "VA. None",
-      "jp": "CV.타마라 성우 이름",
-      "kr": "CV.타마라 성우 이름",
+      "en": "None",
+      "jp": "타마라 성우 이름",
+      "kr": "타마라 성우 이름",
       "zh": ""
     },
     "ee": "2000060",
