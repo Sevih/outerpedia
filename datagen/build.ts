@@ -21,7 +21,7 @@ import type {
   ItemsFile,
   SkillsFile,
 } from './contracts';
-import { buildCharacters } from './generators/characters';
+import { buildCharacters } from './extractor/specs/character';
 import { buildEquipment } from './generators/equipment';
 import { buildItems } from './generators/items';
 import { buildSkills } from './generators/skills';

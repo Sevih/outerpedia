@@ -19,7 +19,7 @@ export type {
   StatusEffect,
 } from '../lib/effects';
 export type { SkillBuffVars } from '../lib/buff';
-export type { Character, StatRange } from '../generators/characters';
+export type { Character, StatRange } from '../extractor/specs/character';
 export type { Skill, SkillLevel } from '../generators/skills';
 export type { Item } from '../generators/items';
 export type {
@@ -38,7 +38,7 @@ export type {
 
 import type { LangDict } from '../lib/lang';
 import type { StatusEffect } from '../lib/effects';
-import type { Character } from '../generators/characters';
+import type { Character } from '../extractor/specs/character';
 import type { Skill } from '../generators/skills';
 import type { Item } from '../generators/items';
 import type {
