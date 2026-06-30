@@ -1,0 +1,1954 @@
+{
+  "2000001": {
+    "name": {
+      "en": "Monomolecular Blade",
+      "jp": "単分子ブレード",
+      "kr": "단분자 블레이드",
+      "zh": "单分子剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000001",
+    "craftable": false,
+    "character": "2000001",
+    "trustLevel": 10,
+    "options": ["2000001"],
+    "passive": "2000001"
+  },
+  "2000002": {
+    "name": {
+      "en": "Blade of Destiny",
+      "jp": "牙双冥剣",
+      "kr": "데스티니 블레이드",
+      "zh": "命运之剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000002",
+    "craftable": false,
+    "character": "2000002",
+    "trustLevel": 10,
+    "options": ["2000002"],
+    "passive": "2000002"
+  },
+  "2000003": {
+    "name": {
+      "en": "Glacial Bow",
+      "jp": "グレイシャルボウ",
+      "kr": "글레이셜 보우",
+      "zh": "冰河之弓"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000003",
+    "craftable": false,
+    "character": "2000003",
+    "trustLevel": 10,
+    "options": ["2000003"],
+    "passive": "2000003"
+  },
+  "2000004": {
+    "name": {
+      "en": "Reptilia Z-Power",
+      "jp": "パワーレプティリアZ",
+      "kr": "파워 랩티리아Z",
+      "zh": "强力拉普提里亚Z"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000004",
+    "craftable": false,
+    "character": "2000004",
+    "trustLevel": 10,
+    "options": ["2000004"],
+    "passive": "2000004"
+  },
+  "2000005": {
+    "name": {
+      "en": "Cleaning Brush",
+      "jp": "お掃除ブラシ",
+      "kr": "물청소 브러시",
+      "zh": "清洁刷"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000005",
+    "craftable": false,
+    "character": "2000005",
+    "trustLevel": 10,
+    "options": ["2000005"],
+    "passive": "2000005"
+  },
+  "2000006": {
+    "name": {
+      "en": "Tempest",
+      "jp": "颯爽",
+      "kr": "질풍",
+      "zh": "疾风"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000006",
+    "craftable": false,
+    "character": "2000006",
+    "trustLevel": 10,
+    "options": ["2000006"],
+    "passive": "2000006"
+  },
+  "2000007": {
+    "name": {
+      "en": "Nostalgic Music Box",
+      "jp": "偲びのオルゴール",
+      "kr": "추억의 오르골",
+      "zh": "怀旧音乐盒"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000007",
+    "craftable": false,
+    "character": "2000007",
+    "trustLevel": 10,
+    "options": ["2000007"],
+    "passive": "2000007"
+  },
+  "2000008": {
+    "name": {
+      "en": "Sword of Sorrows",
+      "jp": "悲悼のつるぎ",
+      "kr": "슬픔의 칼날",
+      "zh": "悲伤之刃"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000008",
+    "craftable": false,
+    "character": "2000008",
+    "trustLevel": 10,
+    "options": ["2000008"],
+    "passive": "2000008"
+  },
+  "2000009": {
+    "name": {
+      "en": "Prism Lens",
+      "jp": "プリズムレンズ",
+      "kr": "프리즘 렌즈",
+      "zh": "三棱镜"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000009",
+    "craftable": false,
+    "character": "2000009",
+    "trustLevel": 10,
+    "options": ["2000009"],
+    "passive": "2000009"
+  },
+  "2000010": {
+    "name": {
+      "en": "Trust",
+      "jp": "信の剣",
+      "kr": "신뢰",
+      "zh": "信任"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000010",
+    "craftable": false,
+    "character": "2000010",
+    "trustLevel": 10,
+    "options": ["2000010"],
+    "passive": "2000010"
+  },
+  "2000011": {
+    "name": {
+      "en": "Hand Ballista",
+      "jp": "ハンディバリスタ",
+      "kr": "핸디 발리스타",
+      "zh": "便携式弩炮"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000011",
+    "craftable": false,
+    "character": "2000011",
+    "trustLevel": 10,
+    "options": ["2000011"],
+    "passive": "2000011"
+  },
+  "2000012": {
+    "name": {
+      "en": "Jackpot",
+      "jp": "ジャックポット",
+      "kr": "잭팟",
+      "zh": "头等奖"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000012",
+    "craftable": false,
+    "character": "2000012",
+    "trustLevel": 10,
+    "options": ["2000012"],
+    "passive": "2000012"
+  },
+  "2000013": {
+    "name": {
+      "en": "Bedtime Snuggle Buddy",
+      "jp": "夢の抱き枕",
+      "kr": "꿈나라 여행 친구",
+      "zh": "梦之旅伴"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000013",
+    "craftable": false,
+    "character": "2000013",
+    "trustLevel": 10,
+    "options": ["2000013"],
+    "passive": "2000013"
+  },
+  "2000014": {
+    "name": {
+      "en": "Master's Gift",
+      "jp": "ご主人様の贈り物",
+      "kr": "주인님의 선물",
+      "zh": "主人的礼物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000014",
+    "craftable": false,
+    "character": "2000014",
+    "trustLevel": 10,
+    "options": ["2000014"],
+    "passive": "2000014"
+  },
+  "2000015": {
+    "name": {
+      "en": "Iron Claws of Calamity",
+      "jp": "閃撃の鉤爪",
+      "kr": "섬격철조",
+      "zh": "闪击铁爪"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000015",
+    "craftable": false,
+    "character": "2000015",
+    "trustLevel": 10,
+    "options": ["2000015"],
+    "passive": "2000015"
+  },
+  "2000016": {
+    "name": {
+      "en": "Knight's Special Great Sword",
+      "jp": "誂えた騎士の剣",
+      "kr": "기사단 특주 대검",
+      "zh": "骑士团特制巨剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000016",
+    "craftable": false,
+    "character": "2000016",
+    "trustLevel": 10,
+    "options": ["2000016"],
+    "passive": "2000016"
+  },
+  "2000017": {
+    "name": {
+      "en": "Baptismal Icon",
+      "jp": "洗礼用の聖火",
+      "kr": "세례용 성화",
+      "zh": "洗礼圣火"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000017",
+    "craftable": false,
+    "character": "2000017",
+    "trustLevel": 10,
+    "options": ["2000017"],
+    "passive": "2000017"
+  },
+  "2000018": {
+    "name": {
+      "en": "Lie Detector",
+      "jp": "ライ♥ディテクター",
+      "kr": "거짓말 탐지기",
+      "zh": "测谎仪"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000018",
+    "craftable": false,
+    "character": "2000018",
+    "trustLevel": 10,
+    "options": ["2000018"],
+    "passive": "2000018"
+  },
+  "2000019": {
+    "name": {
+      "en": "Setsuna",
+      "jp": "セツナ",
+      "kr": "세츠나",
+      "zh": "刹那"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000019",
+    "craftable": false,
+    "character": "2000019",
+    "trustLevel": 10,
+    "options": ["2000019"],
+    "passive": "2000019"
+  },
+  "2000020": {
+    "name": {
+      "en": "The Book of Folk and Tall Tales",
+      "jp": "メルヘンテイルズ",
+      "kr": "메르헨 테일즈",
+      "zh": "童话故事"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000020",
+    "craftable": false,
+    "character": "2000020",
+    "trustLevel": 10,
+    "options": ["2000020"],
+    "passive": "2000020"
+  },
+  "2000021": {
+    "name": {
+      "en": "The \"Joy\" Bringer",
+      "jp": "ハッピーメーカー",
+      "kr": "해피 메이커",
+      "zh": "欢乐制造者"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000021",
+    "craftable": false,
+    "character": "2000021",
+    "trustLevel": 10,
+    "options": ["2000021"],
+    "passive": "2000021"
+  },
+  "2000022": {
+    "name": {
+      "en": "Super Genius's Toolkit",
+      "jp": "スーパー天才専用工具",
+      "kr": "슈퍼 천재 전용 공구 세트",
+      "zh": "超级天才专用工套装"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000022",
+    "craftable": false,
+    "character": "2000022",
+    "trustLevel": 10,
+    "options": ["2000022"],
+    "passive": "2000022"
+  },
+  "2000023": {
+    "name": {
+      "en": "Cloud Relic",
+      "jp": "クラウドレリック",
+      "kr": "클라우드 렐릭",
+      "zh": "云之遗迹"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000023",
+    "craftable": false,
+    "character": "2000023",
+    "trustLevel": 10,
+    "options": ["2000023"],
+    "passive": "2000023"
+  },
+  "2000024": {
+    "name": {
+      "en": "Cyclone Changer",
+      "jp": "サイクロン・チェンジャー",
+      "kr": "사이클론 체인저",
+      "zh": "旋风变换器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000024",
+    "craftable": false,
+    "character": "2000024",
+    "trustLevel": 10,
+    "options": ["2000024"],
+    "passive": "2000024"
+  },
+  "2000025": {
+    "name": {
+      "en": "Demonic Twin",
+      "jp": "デモニックツイン",
+      "kr": "데모닉 트윈",
+      "zh": "恶魔双子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000025",
+    "craftable": false,
+    "character": "2000025",
+    "trustLevel": 10,
+    "options": ["2000025"],
+    "passive": "2000025"
+  },
+  "2000026": {
+    "name": {
+      "en": "Shieldwall",
+      "jp": "シールドウォール",
+      "kr": "실드월",
+      "zh": "盾墙"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000026",
+    "craftable": false,
+    "character": "2000026",
+    "trustLevel": 10,
+    "options": ["2000026"],
+    "passive": "2000026"
+  },
+  "2000027": {
+    "name": {
+      "en": "Saint's Staff",
+      "jp": "聖者の杖",
+      "kr": "성자의 지팡이",
+      "zh": "圣者之杖"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000027",
+    "craftable": false,
+    "character": "2000027",
+    "trustLevel": 10,
+    "options": ["2000027"],
+    "passive": "2000027"
+  },
+  "2000028": {
+    "name": {
+      "en": "Agateram",
+      "jp": "アガートラム",
+      "kr": "아가트람",
+      "zh": "银色手臂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000028",
+    "craftable": false,
+    "character": "2000028",
+    "trustLevel": 10,
+    "options": ["2000028"],
+    "passive": "2000028"
+  },
+  "2000029": {
+    "name": {
+      "en": "Bag of Rare Seeds",
+      "jp": "希少種子のポッケ",
+      "kr": "희귀 종자 주머니",
+      "zh": "一袋稀有种子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000029",
+    "craftable": false,
+    "character": "2000029",
+    "trustLevel": 10,
+    "options": ["2000029"],
+    "passive": "2000029"
+  },
+  "2000030": {
+    "name": {
+      "en": "The Blacksmith's Devotion",
+      "jp": "鍛冶屋の信念",
+      "kr": "대장장이의 신념",
+      "zh": "铁匠的信念"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000030",
+    "craftable": false,
+    "character": "2000030",
+    "trustLevel": 10,
+    "options": ["2000030"],
+    "passive": "2000030"
+  },
+  "2000031": {
+    "name": {
+      "en": "Receptionist's Essentials",
+      "jp": "受付嬢の必需品",
+      "kr": "접수원의 필수품",
+      "zh": "接收员的必需品"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000031",
+    "craftable": false,
+    "character": "2000031",
+    "trustLevel": 10,
+    "options": ["2000031"],
+    "passive": "2000031"
+  },
+  "2000032": {
+    "name": {
+      "en": "Secret Cooking Utensils",
+      "jp": "秘伝の調理道具",
+      "kr": "비전 요리 기구",
+      "zh": "独门烹饪道具"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000032",
+    "craftable": false,
+    "character": "2000032",
+    "trustLevel": 10,
+    "options": ["2000032"],
+    "passive": "2000032"
+  },
+  "2000033": {
+    "name": {
+      "en": "Titanic Anchor",
+      "jp": "タイタンアンカー",
+      "kr": "타이탄 앵커",
+      "zh": "泰坦船锚"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000033",
+    "craftable": false,
+    "character": "2000033",
+    "trustLevel": 10,
+    "options": ["2000033"],
+    "passive": "2000033"
+  },
+  "2000034": {
+    "name": {
+      "en": "Hati",
+      "jp": "ハティ",
+      "kr": "하티",
+      "zh": "哈提"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000034",
+    "craftable": false,
+    "character": "2000034",
+    "trustLevel": 10,
+    "options": ["2000034"],
+    "passive": "2000034"
+  },
+  "2000035": {
+    "name": {
+      "en": "Crimson Holy Grail",
+      "jp": "鮮血の聖杯",
+      "kr": "선혈빛 성배",
+      "zh": "血光圣杯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000035",
+    "craftable": false,
+    "character": "2000035",
+    "trustLevel": 10,
+    "options": ["2000035"],
+    "passive": "2000035"
+  },
+  "2000036": {
+    "name": {
+      "en": "Perfect Medical Bag",
+      "jp": "万能往診カバン",
+      "kr": "만능 왕진 가방",
+      "zh": "万能出诊包"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000036",
+    "craftable": false,
+    "character": "2000036",
+    "trustLevel": 10,
+    "options": ["2000036"],
+    "passive": "2000036"
+  },
+  "2000037": {
+    "name": {
+      "en": "Elysion",
+      "jp": "エリシオン",
+      "kr": "엘리시온",
+      "zh": "极乐世界"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000037",
+    "craftable": false,
+    "character": "2000037",
+    "trustLevel": 10,
+    "options": ["2000037"],
+    "passive": "2000037"
+  },
+  "2000038": {
+    "name": {
+      "en": "Love and Peace",
+      "jp": "ラブ＆ピース",
+      "kr": "러브 앤 피스",
+      "zh": "爱与和平"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000038",
+    "craftable": false,
+    "character": "2000038",
+    "trustLevel": 10,
+    "options": ["2000038"],
+    "passive": "2000038"
+  },
+  "2000039": {
+    "name": {
+      "en": "Sidewinder",
+      "jp": "サイドワインダー",
+      "kr": "사이드 와인더",
+      "zh": "响尾蛇"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000039",
+    "craftable": false,
+    "character": "2000039",
+    "trustLevel": 10,
+    "options": ["2000039"],
+    "passive": "2000039"
+  },
+  "2000040": {
+    "name": {
+      "en": "The Great Communicator",
+      "jp": "立派な対話手段",
+      "kr": "훌륭한 대화수단",
+      "zh": "绝佳谈判"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000040",
+    "craftable": false,
+    "character": "2000040",
+    "trustLevel": 10,
+    "options": ["2000040"],
+    "passive": "2000040"
+  },
+  "2000041": {
+    "name": {
+      "en": "Hidden Glove",
+      "jp": "シークレットガントレット",
+      "kr": "히든 글러브",
+      "zh": "隐藏手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000041",
+    "craftable": false,
+    "character": "2000041",
+    "trustLevel": 10,
+    "options": ["2000041"],
+    "passive": "2000041"
+  },
+  "2000042": {
+    "name": {
+      "en": "Song of Oblivion",
+      "jp": "忘却の歌",
+      "kr": "망각의 노래",
+      "zh": "忘却之歌"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000042",
+    "craftable": false,
+    "character": "2000042",
+    "trustLevel": 10,
+    "options": ["2000042"],
+    "passive": "2000042"
+  },
+  "2000043": {
+    "name": {
+      "en": "Death's Notes",
+      "jp": "死亡予定者リスト",
+      "kr": "사망 예정자 리스트",
+      "zh": "将死之人名单"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000043",
+    "craftable": false,
+    "character": "2000043",
+    "trustLevel": 10,
+    "options": ["2000043"],
+    "passive": "2000043"
+  },
+  "2000044": {
+    "name": {
+      "en": "Dean's Authority",
+      "jp": "学長の権能",
+      "kr": "학장의 권능",
+      "zh": "院长的权力"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000044",
+    "craftable": false,
+    "character": "2000044",
+    "trustLevel": 10,
+    "options": ["2000044"],
+    "passive": "2000044"
+  },
+  "2000045": {
+    "name": {
+      "en": "Magnolia Student ID",
+      "jp": "マグノリア学生証",
+      "kr": "매그놀리아 학생증",
+      "zh": "麦格诺里亚学生证"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000045",
+    "craftable": false,
+    "character": "2000045",
+    "trustLevel": 10,
+    "options": ["2000045"],
+    "passive": "2000045"
+  },
+  "2000046": {
+    "name": {
+      "en": "Automatic Bowgun",
+      "jp": "オートマチックボウガン",
+      "kr": "오토매틱 보우건",
+      "zh": "自动手弩"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000046",
+    "craftable": false,
+    "character": "2000046",
+    "trustLevel": 10,
+    "options": ["2000046"],
+    "passive": "2000046"
+  },
+  "2000047": {
+    "name": {
+      "en": "Victim Sanctuary",
+      "jp": "スタースクライング",
+      "kr": "빅팀 생추어리",
+      "zh": "牺牲者圣域"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000047",
+    "craftable": false,
+    "character": "2000047",
+    "trustLevel": 10,
+    "options": ["2000047"],
+    "passive": "2000047"
+  },
+  "2000048": {
+    "name": {
+      "en": "Paw-er Smasher",
+      "jp": "プニプニハンマー",
+      "kr": "개발살",
+      "zh": "扑杀"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000048",
+    "craftable": false,
+    "character": "2000048",
+    "trustLevel": 10,
+    "options": ["2000048"],
+    "passive": "2000048"
+  },
+  "2000049": {
+    "name": {
+      "en": "Master of Pursuit",
+      "jp": "追撃の名手",
+      "kr": "추격의 명수",
+      "zh": "追击高手"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000049",
+    "craftable": false,
+    "character": "2000049",
+    "trustLevel": 10,
+    "options": ["2000049"],
+    "passive": "2000049"
+  },
+  "2000050": {
+    "name": {
+      "en": "Iron Fan of Ferocity",
+      "jp": "閃撃の鉄扇",
+      "kr": "섬격철선",
+      "zh": "闪击铁扇"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000050",
+    "craftable": false,
+    "character": "2000050",
+    "trustLevel": 10,
+    "options": ["2000050"],
+    "passive": "2000050"
+  },
+  "2000051": {
+    "name": {
+      "en": "O.P.B.",
+      "jp": "O.P.B",
+      "kr": "O.P.B",
+      "zh": "O.P.B"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000051",
+    "craftable": false,
+    "character": "2000051",
+    "trustLevel": 10,
+    "options": ["2000051"],
+    "passive": "2000051"
+  },
+  "2000052": {
+    "name": {
+      "en": "Modded Assault Weapon",
+      "jp": "アドオン：バトルウェポン",
+      "kr": "배틀 웨폰 애드온",
+      "zh": "战争武器附加物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000052",
+    "craftable": false,
+    "character": "2000052",
+    "trustLevel": 10,
+    "options": ["2000052"],
+    "passive": "2000052"
+  },
+  "2000053": {
+    "name": {
+      "en": "Ksai's Core",
+      "jp": "ザイのコア",
+      "kr": "크사이의 코어",
+      "zh": "科赛的核心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000053",
+    "craftable": false,
+    "character": "2000053",
+    "trustLevel": 10,
+    "options": ["2000053"],
+    "passive": "2000053"
+  },
+  "2000054": {
+    "name": {
+      "en": "Finn the Shark",
+      "jp": "アオイ",
+      "kr": "샥스핀",
+      "zh": "鲨士比"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000054",
+    "craftable": false,
+    "character": "2000054",
+    "trustLevel": 10,
+    "options": ["2000054"],
+    "passive": "2000054"
+  },
+  "2000055": {
+    "name": {
+      "en": "Super Board",
+      "jp": "スーパーボード",
+      "kr": "슈퍼 보드",
+      "zh": "超级冲浪板"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000055",
+    "craftable": false,
+    "character": "2000055",
+    "trustLevel": 10,
+    "options": ["2000055"],
+    "passive": "2000055"
+  },
+  "2000056": {
+    "name": {
+      "en": "Earth's Grace",
+      "jp": "大地の恩恵",
+      "kr": "대지의 은혜",
+      "zh": "土之恩惠"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000056",
+    "craftable": false,
+    "character": "2000056",
+    "trustLevel": 10,
+    "options": ["2000056"],
+    "passive": "2000056"
+  },
+  "2000057": {
+    "name": {
+      "en": "Thunderer",
+      "jp": "サンダラー",
+      "kr": "썬더러",
+      "zh": "雷霆者"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000057",
+    "craftable": false,
+    "character": "2000057",
+    "trustLevel": 10,
+    "options": ["2000057"],
+    "passive": "2000057"
+  },
+  "2000058": {
+    "name": {
+      "en": "Divine Warmth",
+      "jp": "神のぬくもり",
+      "kr": "신의 온기",
+      "zh": "神之温煦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000058",
+    "craftable": false,
+    "character": "2000058",
+    "trustLevel": 10,
+    "options": ["2000058"],
+    "passive": "2000058"
+  },
+  "2000059": {
+    "name": {
+      "en": "Blind Devotion",
+      "jp": "盲者の祈り",
+      "kr": "눈 먼자의 기도",
+      "zh": "盲者的祈祷"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000059",
+    "craftable": false,
+    "character": "2000059",
+    "trustLevel": 10,
+    "options": ["2000059"],
+    "passive": "2000059"
+  },
+  "2000060": {
+    "name": {
+      "en": "No.62's Punishment",
+      "jp": "No.62：タイム・レペント",
+      "kr": "No.62 참회의 준비",
+      "zh": "No.62忏悔之准备"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000060",
+    "craftable": false,
+    "character": "2000060",
+    "trustLevel": 10,
+    "options": ["2000060"],
+    "passive": "2000060"
+  },
+  "2000061": {
+    "name": {
+      "en": "Love Is War",
+      "jp": "恋は戦争",
+      "kr": "사랑은 전쟁",
+      "zh": "爱情是战争"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000061",
+    "craftable": false,
+    "character": "2000061",
+    "trustLevel": 10,
+    "options": ["2000061"],
+    "passive": "2000061"
+  },
+  "2000062": {
+    "name": {
+      "en": "Royal Fang",
+      "jp": "我が牙",
+      "kr": "짐의 송곳니",
+      "zh": "朕的利齿"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000062",
+    "craftable": false,
+    "character": "2000062",
+    "trustLevel": 10,
+    "options": ["2000062"],
+    "passive": "2000062"
+  },
+  "2000063": {
+    "name": {
+      "en": "Ancestral Spirit",
+      "jp": "先祖の魂",
+      "kr": "선조들의 혼",
+      "zh": "先祖之魂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000063",
+    "craftable": false,
+    "character": "2000063",
+    "trustLevel": 10,
+    "options": ["2000063"],
+    "passive": "2000063"
+  },
+  "2000064": {
+    "name": {
+      "en": "Juzumaru Tsunetsugu",
+      "jp": "数珠丸恒次",
+      "kr": "쥬즈마루 츠네츠구",
+      "zh": "数珠丸恒次"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000064",
+    "craftable": false,
+    "character": "2000064",
+    "trustLevel": 10,
+    "options": ["2000064"],
+    "passive": "2000064"
+  },
+  "2000065": {
+    "name": {
+      "en": "Secret Sword, Teru Teru Bouzu",
+      "jp": "秘剣テルテルボウズ",
+      "kr": "비검 테루테루보우즈",
+      "zh": "飞剑晴天娃娃"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000065",
+    "craftable": false,
+    "character": "2000065",
+    "trustLevel": 10,
+    "options": ["2000065"],
+    "passive": "2000065"
+  },
+  "2000066": {
+    "name": {
+      "en": "Detective's Emblem",
+      "jp": "名探偵のしるし",
+      "kr": "명탐정의 상징",
+      "zh": "名侦探的象征"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000066",
+    "craftable": false,
+    "character": "2000066",
+    "trustLevel": 10,
+    "options": ["2000066"],
+    "passive": "2000066"
+  },
+  "2000067": {
+    "name": {
+      "en": "Harry Houdini",
+      "jp": "ハリー・フディー二",
+      "kr": "해리 후디니",
+      "zh": "哈里·胡迪尼"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000067",
+    "craftable": false,
+    "character": "2000067",
+    "trustLevel": 10,
+    "options": ["2000067"],
+    "passive": "2000067"
+  },
+  "2000068": {
+    "name": {
+      "en": "Full Strength",
+      "jp": "必死のあがき",
+      "kr": "안간힘",
+      "zh": "竭尽全力"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000068",
+    "craftable": false,
+    "character": "2000068",
+    "trustLevel": 10,
+    "options": ["2000068"],
+    "passive": "2000068"
+  },
+  "2000069": {
+    "name": {
+      "en": "Scepter of the Golden King",
+      "jp": "黄金王の王笏",
+      "kr": "황금왕의 왕홀",
+      "zh": "黄金王的权杖"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000069",
+    "craftable": false,
+    "character": "2000069",
+    "trustLevel": 10,
+    "options": ["2000069"],
+    "passive": "2000069"
+  },
+  "2000070": {
+    "name": {
+      "en": "Ksai's Spare Core",
+      "jp": "ザイの予備コア",
+      "kr": "크사이의 예비 코어",
+      "zh": "科赛的预备核心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000070",
+    "craftable": false,
+    "character": "2000070",
+    "trustLevel": 10,
+    "options": ["2000070"],
+    "passive": "2000070"
+  },
+  "2000071": {
+    "name": {
+      "en": "Burning Fighting Spirit",
+      "jp": "燃えたぎる闘志",
+      "kr": "타오르는 투지",
+      "zh": "燃烧的斗志"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000071",
+    "craftable": false,
+    "character": "2000071",
+    "trustLevel": 10,
+    "options": ["2000071"],
+    "passive": "2000071"
+  },
+  "2000072": {
+    "name": {
+      "en": "Ninja Scroll",
+      "jp": "ニンジャのニンポー帳",
+      "kr": "닌자의 인법첩",
+      "zh": "忍者的忍术秘籍"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000072",
+    "craftable": false,
+    "character": "2000072",
+    "trustLevel": 10,
+    "options": ["2000072"],
+    "passive": "2000072"
+  },
+  "2000073": {
+    "name": {
+      "en": "Adaptable Gatling",
+      "jp": "可変式ガトリング",
+      "kr": "가변형 개틀링",
+      "zh": "可变加特林"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000073",
+    "craftable": false,
+    "character": "2000073",
+    "trustLevel": 10,
+    "options": ["2000073"],
+    "passive": "2000073"
+  },
+  "2000074": {
+    "name": {
+      "en": "Innocent Love",
+      "jp": "イノセント・ラブ",
+      "kr": "이노센트 러브",
+      "zh": "永恒之爱"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000074",
+    "craftable": false,
+    "character": "2000074",
+    "trustLevel": 10,
+    "options": ["2000074"],
+    "passive": "2000074"
+  },
+  "2000075": {
+    "name": {
+      "en": "Adaptable Twin Blades",
+      "jp": "可変式翼",
+      "kr": "가변형 쌍익",
+      "zh": "可变双翼"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000075",
+    "craftable": false,
+    "character": "2000075",
+    "trustLevel": 10,
+    "options": ["2000075"],
+    "passive": "2000075"
+  },
+  "2000076": {
+    "name": {
+      "en": "Exceptional Aura",
+      "jp": "とてつもないオーラ",
+      "kr": "독보적인 오라",
+      "zh": "独特光环"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000076",
+    "craftable": false,
+    "character": "2000076",
+    "trustLevel": 10,
+    "options": ["2000076"],
+    "passive": "2000076"
+  },
+  "2000077": {
+    "name": {
+      "en": "Guardian's Qualification",
+      "jp": "守護者の資格",
+      "kr": "수호자의 자격",
+      "zh": "守护者的资格"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000077",
+    "craftable": false,
+    "character": "2000077",
+    "trustLevel": 10,
+    "options": ["2000077"],
+    "passive": "2000077"
+  },
+  "2000078": {
+    "name": {
+      "en": "Eclipse",
+      "jp": "エクリプス",
+      "kr": "이클립스",
+      "zh": "日食"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000078",
+    "craftable": false,
+    "character": "2000078",
+    "trustLevel": 10,
+    "options": ["2000078"],
+    "passive": "2000078"
+  },
+  "2000079": {
+    "name": {
+      "en": "Onimaru Kunitsuna",
+      "jp": "鬼丸国綱",
+      "kr": "오니마루 쿠니츠나",
+      "zh": "鬼丸国纲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000079",
+    "craftable": false,
+    "character": "2000079",
+    "trustLevel": 10,
+    "options": ["2000079"],
+    "passive": "2000079"
+  },
+  "2000080": {
+    "name": {
+      "en": "Lycoris and Butterfly",
+      "jp": "彼岸胡蝶",
+      "kr": "석산호접",
+      "zh": "石蒜蝴蝶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000080",
+    "craftable": false,
+    "character": "2000080",
+    "trustLevel": 10,
+    "options": ["2000080"],
+    "passive": "2000080"
+  },
+  "2000081": {
+    "name": {
+      "en": "Scarlet Disaster",
+      "jp": "スカーレットディザスター",
+      "kr": "스칼렛 디재스터",
+      "zh": "猩红浩劫"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000081",
+    "craftable": false,
+    "character": "2000081",
+    "trustLevel": 10,
+    "options": ["2000081"],
+    "passive": "2000081"
+  },
+  "2000082": {
+    "name": {
+      "en": "Sapphire Disaster",
+      "jp": "サファイアディザスター",
+      "kr": "사파이어 디재스터",
+      "zh": "蓝萤浩劫"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000082",
+    "craftable": false,
+    "character": "2000082",
+    "trustLevel": 10,
+    "options": ["2000082"],
+    "passive": "2000082"
+  },
+  "2000083": {
+    "name": {
+      "en": "Royal Lord",
+      "jp": "ロイヤルロード",
+      "kr": "로열 로드",
+      "zh": "皇家权杖"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000083",
+    "craftable": false,
+    "character": "2000083",
+    "trustLevel": 10,
+    "options": ["2000083"],
+    "passive": "2000083"
+  },
+  "2000084": {
+    "name": {
+      "en": "Partner's Will",
+      "jp": "同伴者の意志",
+      "kr": "동반자의 의지",
+      "zh": "同伴的意志"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000084",
+    "craftable": false,
+    "character": "2000084",
+    "trustLevel": 10,
+    "options": ["2000084"],
+    "passive": "2000084"
+  },
+  "2000085": {
+    "name": {
+      "en": "Regina's All-Purpose Tube",
+      "jp": "レジーナの万能浮き輪",
+      "kr": "레지나의 만능 튜브",
+      "zh": "蕾吉纳的万能游泳圈"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000085",
+    "craftable": false,
+    "character": "2000085",
+    "trustLevel": 10,
+    "options": ["2000085"],
+    "passive": "2000085"
+  },
+  "2000086": {
+    "name": {
+      "en": "Withering Flower",
+      "jp": "花無十日紅",
+      "kr": "화무십일홍",
+      "zh": "花无十日红"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000086",
+    "craftable": false,
+    "character": "2000086",
+    "trustLevel": 10,
+    "options": ["2000086"],
+    "passive": "2000086"
+  },
+  "2000087": {
+    "name": {
+      "en": "Sonic Blade",
+      "jp": "ソニックブレード",
+      "kr": "소닉 블레이드",
+      "zh": "疾速之刃"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000087",
+    "craftable": false,
+    "character": "2000087",
+    "trustLevel": 10,
+    "options": ["2000087"],
+    "passive": "2000087"
+  },
+  "2000088": {
+    "name": {
+      "en": "Hound",
+      "jp": "ハウンド",
+      "kr": "하운드",
+      "zh": "哈恩德"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000088",
+    "craftable": false,
+    "character": "2000088",
+    "trustLevel": 10,
+    "options": ["2000088"],
+    "passive": "2000088"
+  },
+  "2000089": {
+    "name": {
+      "en": "Logos",
+      "jp": "ロゴス",
+      "kr": "로고스",
+      "zh": "洛格斯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000089",
+    "craftable": false,
+    "character": "2000089",
+    "trustLevel": 10,
+    "options": ["2000089"],
+    "passive": "2000089"
+  },
+  "2000090": {
+    "name": {
+      "en": "Deadly Ice",
+      "jp": "デッドリーアイス",
+      "kr": "데들리 아이스",
+      "zh": "致命冰霜"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000090",
+    "craftable": false,
+    "character": "2000090",
+    "trustLevel": 10,
+    "options": ["2000090"],
+    "passive": "2000090"
+  },
+  "2000091": {
+    "name": {
+      "en": "True Salvation",
+      "jp": "真の救い",
+      "kr": "진정한 구원",
+      "zh": "真正的救赎"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000091",
+    "craftable": false,
+    "character": "2000091",
+    "trustLevel": 10,
+    "options": ["2000091"],
+    "passive": "2000091"
+  },
+  "2000092": {
+    "name": {
+      "en": "Everlasting Grudge",
+      "jp": "尽きぬ怨み",
+      "kr": "마르지 않는 앙심",
+      "zh": "积怨未消"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000092",
+    "craftable": false,
+    "character": "2000092",
+    "trustLevel": 10,
+    "options": ["2000092"],
+    "passive": "2000092"
+  },
+  "2000093": {
+    "name": {
+      "en": "Earnest Love",
+      "jp": "熱烈な愛",
+      "kr": "열렬한 사랑",
+      "zh": "炽热的爱"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000093",
+    "craftable": false,
+    "character": "2000093",
+    "trustLevel": 10,
+    "options": ["2000093"],
+    "passive": "2000093"
+  },
+  "2000094": {
+    "name": {
+      "en": "Rocinante",
+      "jp": "ロシナンテ",
+      "kr": "로시난테",
+      "zh": "罗西南特"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000094",
+    "craftable": false,
+    "character": "2000094",
+    "trustLevel": 10,
+    "options": ["2000094"],
+    "passive": "2000094"
+  },
+  "2000095": {
+    "name": {
+      "en": "Hestia Knife",
+      "jp": "ヘスティア・ナイフ",
+      "kr": "헤스티아 나이프",
+      "zh": "赫斯缇雅之刃"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000095",
+    "craftable": false,
+    "character": "2000095",
+    "trustLevel": 10,
+    "options": ["2000095"],
+    "passive": "2000095"
+  },
+  "2000096": {
+    "name": {
+      "en": "Desperate",
+      "jp": "デスペレート",
+      "kr": "데스퍼러트",
+      "zh": "绝望之剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000096",
+    "craftable": false,
+    "character": "2000096",
+    "trustLevel": 10,
+    "options": ["2000096"],
+    "passive": "2000096"
+  },
+  "2000097": {
+    "name": {
+      "en": "Alf's Justitia",
+      "jp": "アルヴス・ユースティティア",
+      "kr": "알브스 유스티티아",
+      "zh": "精灵正义女神"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000097",
+    "craftable": false,
+    "character": "2000097",
+    "trustLevel": 10,
+    "options": ["2000097"],
+    "passive": "2000097"
+  },
+  "2000098": {
+    "name": {
+      "en": "Astra Soteria",
+      "jp": "アストラ・ソテリア",
+      "kr": "아스트라 소테리아",
+      "zh": "星辰庇佑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000098",
+    "craftable": false,
+    "character": "2000098",
+    "trustLevel": 10,
+    "options": ["2000098"],
+    "passive": "2000098"
+  },
+  "2000099": {
+    "name": {
+      "en": "Gleipnir",
+      "jp": "グレイプニル",
+      "kr": "글레이프니르",
+      "zh": "格莱夫尼尔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000099",
+    "craftable": false,
+    "character": "2000099",
+    "trustLevel": 10,
+    "options": ["2000099"],
+    "passive": "2000099"
+  },
+  "2000100": {
+    "name": {
+      "en": "Wax Wings",
+      "jp": "蝋の翼",
+      "kr": "밀랍날개",
+      "zh": "蜡翼"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000100",
+    "craftable": false,
+    "character": "2000100",
+    "trustLevel": 10,
+    "options": ["2000100"],
+    "passive": "2000100"
+  },
+  "2000101": {
+    "name": {
+      "en": "Damage and Loss",
+      "jp": "ダメージ・アンド・ロス",
+      "kr": "피해와 손실",
+      "zh": "伤害与损失"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000101",
+    "craftable": false,
+    "character": "2000101",
+    "trustLevel": 10,
+    "options": ["2000101"],
+    "passive": "2000101"
+  },
+  "2000102": {
+    "name": {
+      "en": "Path of Endless Hunger",
+      "jp": "果てない飢えの道",
+      "kr": "끝없는 허기의 길",
+      "zh": "无尽饥荒之路"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000102",
+    "craftable": false,
+    "character": "2000102",
+    "trustLevel": 10,
+    "options": ["2000102"],
+    "passive": "2000102"
+  },
+  "2000103": {
+    "name": {
+      "en": "Machiavelli",
+      "jp": "マキャベリ",
+      "kr": "마키아벨리",
+      "zh": "马基雅维利"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000103",
+    "craftable": false,
+    "character": "2000103",
+    "trustLevel": 10,
+    "options": ["2000103"],
+    "passive": "2000103"
+  },
+  "2000105": {
+    "name": {
+      "en": "Miracle Machine",
+      "jp": "ミラクルマシーン",
+      "kr": "미라클 머신",
+      "zh": "奇迹机器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000105",
+    "craftable": false,
+    "character": "2000105",
+    "trustLevel": 10,
+    "options": ["2000105"],
+    "passive": "2000105"
+  },
+  "2000106": {
+    "name": {
+      "en": "Bouncy Master",
+      "jp": "ぷるるん師匠",
+      "kr": "탱탱한 스승님",
+      "zh": "彈彈師父"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000106",
+    "craftable": false,
+    "character": "2000106",
+    "trustLevel": 10,
+    "options": ["2000106"],
+    "passive": "2000106"
+  },
+  "2000107": {
+    "name": {
+      "en": "Omertà",
+      "jp": "オメルタ",
+      "kr": "오메르타",
+      "zh": "沉默守則（Omertà）"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000107",
+    "craftable": false,
+    "character": "2000107",
+    "trustLevel": 10,
+    "options": ["2000107"],
+    "passive": "2000107"
+  },
+  "2000108": {
+    "name": {
+      "en": "Mortician's Coffin",
+      "jp": "葬儀屋の棺",
+      "kr": "장의사의 관",
+      "zh": "殯葬師之棺"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000108",
+    "craftable": false,
+    "character": "2000108",
+    "trustLevel": 10,
+    "options": ["2000108"],
+    "passive": "2000108"
+  },
+  "2000109": {
+    "name": {
+      "en": "Innate Malice",
+      "jp": "天賦の悪意",
+      "kr": "천부의 악의",
+      "zh": "天赋的恶意"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000109",
+    "craftable": false,
+    "character": "2000109",
+    "trustLevel": 10,
+    "options": ["2000109"],
+    "passive": "2000109"
+  },
+  "2000110": {
+    "name": {
+      "en": "Lawless Immutable Ruler",
+      "jp": "無法不変の万物操縦",
+      "kr": "무법불변 만물조종",
+      "zh": "无法不变 万物操纵"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000110",
+    "craftable": false,
+    "character": "2000110",
+    "trustLevel": 10,
+    "options": ["2000110"],
+    "passive": "2000110"
+  },
+  "2000111": {
+    "name": {
+      "en": "Eternal Sun",
+      "jp": "永遠の太陽",
+      "kr": "무궁한 태양",
+      "zh": "无尽的太阳"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000111",
+    "craftable": false,
+    "character": "2000111",
+    "trustLevel": 10,
+    "options": ["2000111"],
+    "passive": "2000111"
+  },
+  "2000112": {
+    "name": {
+      "en": "Primordial Gargantua",
+      "jp": "原初のガルガンテュア",
+      "kr": "태초의 가르강틔아",
+      "zh": "太初的卡冈图亚"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000112",
+    "craftable": false,
+    "character": "2000112",
+    "trustLevel": 10,
+    "options": ["2000112"],
+    "passive": "2000112"
+  },
+  "2000113": {
+    "name": {
+      "en": "Lete",
+      "jp": "レーテ",
+      "kr": "레테",
+      "zh": "莱特"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000113",
+    "craftable": false,
+    "character": "2000113",
+    "trustLevel": 10,
+    "options": ["2000113"],
+    "passive": "2000113"
+  },
+  "2000114": {
+    "name": {
+      "en": "Midnight Rose",
+      "jp": "ミッドナイトローズ",
+      "kr": "미드나이트 로즈",
+      "zh": "午夜玫瑰"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000114",
+    "craftable": false,
+    "character": "2000114",
+    "trustLevel": 10,
+    "options": ["2000114"],
+    "passive": "2000114"
+  },
+  "2000116": {
+    "name": {
+      "en": "Sound of Silence",
+      "jp": "沈黙の音",
+      "kr": "침묵의 소리",
+      "zh": "寂静之声"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000116",
+    "craftable": false,
+    "character": "2000116",
+    "trustLevel": 10,
+    "options": ["2000116"],
+    "passive": "2000116"
+  },
+  "2000117": {
+    "name": {
+      "en": "Power & Ambition",
+      "jp": "Power & Ambition",
+      "kr": "Power & Ambition",
+      "zh": "权力与野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000117",
+    "craftable": false,
+    "character": "2000117",
+    "trustLevel": 10,
+    "options": ["2000117"],
+    "passive": "2000117"
+  },
+  "2000119": {
+    "name": {
+      "en": "King's Wisdom",
+      "jp": "王の知恵",
+      "kr": "왕의 지혜",
+      "zh": "王的智慧"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000119",
+    "craftable": false,
+    "character": "2000119",
+    "trustLevel": 10,
+    "options": ["2000119"],
+    "passive": "2000119"
+  },
+  "2700003": {
+    "name": {
+      "en": "Frost Nova",
+      "jp": "フロストノヴァ",
+      "kr": "프로스트 노바",
+      "zh": "冰霜新星"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2700003",
+    "craftable": false,
+    "character": "2700003",
+    "trustLevel": 10,
+    "options": ["2700003"],
+    "passive": "2700003"
+  },
+  "2700005": {
+    "name": {
+      "en": "The Supreme Witch's Companion",
+      "jp": "大魔女の親友",
+      "kr": "대마녀의 단짝",
+      "zh": "大魔女的挚友"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2700005",
+    "craftable": false,
+    "character": "2700005",
+    "trustLevel": 10,
+    "options": ["2700005"],
+    "passive": "2700005"
+  },
+  "2700037": {
+    "name": {
+      "en": "Asphodel",
+      "jp": "アスフォデル",
+      "kr": "아스포델",
+      "zh": "阿斯福德尔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2700037",
+    "craftable": false,
+    "character": "2700037",
+    "trustLevel": 10,
+    "options": ["2700037"],
+    "passive": "2700037"
+  },
+  "2700043": {
+    "name": {
+      "en": "Broken Providence",
+      "jp": "壊れた摂理",
+      "kr": "망가진 섭리",
+      "zh": "残破的天道"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2700043",
+    "craftable": false,
+    "character": "2700043",
+    "trustLevel": 10,
+    "options": ["2700043"],
+    "passive": "2700043"
+  },
+  "2700056": {
+    "name": {
+      "en": "Resolve of Earth",
+      "jp": "大地の決意",
+      "kr": "대지의 결의",
+      "zh": "大地的决意"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2700056",
+    "craftable": false,
+    "character": "2700056",
+    "trustLevel": 10,
+    "options": ["2700056"],
+    "passive": "2700056"
+  },
+  "2700070": {
+    "name": {
+      "en": "Annual Defense Budget",
+      "jp": "年間国防予算",
+      "kr": "1년치 국방 예산",
+      "zh": "一年的国防预算"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2700070",
+    "craftable": false,
+    "character": "2700070",
+    "trustLevel": 10,
+    "options": ["2700070"],
+    "passive": "2700070"
+  }
+}

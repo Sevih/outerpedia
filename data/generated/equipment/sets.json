@@ -1,0 +1,737 @@
+{
+  "1": {
+    "name": {
+      "en": "Attack Set",
+      "jp": "攻撃セット",
+      "kr": "공격 세트",
+      "zh": "攻击套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_01",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "atk",
+          "value": "30%"
+        },
+        "4p": {
+          "stat": "atk",
+          "value": "20%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "atk",
+          "value": "35%"
+        },
+        "4p": {
+          "stat": "atk",
+          "value": "25%"
+        }
+      }
+    ]
+  },
+  "2": {
+    "name": {
+      "en": "Defense Set",
+      "jp": "防御セット",
+      "kr": "방어 세트",
+      "zh": "防御套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_02",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "def",
+          "value": "25%"
+        },
+        "4p": {
+          "stat": "def",
+          "value": "15%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "def",
+          "value": "30%"
+        },
+        "4p": {
+          "stat": "def",
+          "value": "20%"
+        }
+      }
+    ]
+  },
+  "3": {
+    "name": {
+      "en": "Life Set",
+      "jp": "生命セット",
+      "kr": "생명 세트",
+      "zh": "生命套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_03",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "hp",
+          "value": "30%"
+        },
+        "4p": {
+          "stat": "hp",
+          "value": "20%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "hp",
+          "value": "35%"
+        },
+        "4p": {
+          "stat": "hp",
+          "value": "25%"
+        }
+      }
+    ]
+  },
+  "4": {
+    "name": {
+      "en": "Critical Hit Set",
+      "jp": "会心セット",
+      "kr": "치명 세트",
+      "zh": "暴击套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_13",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "critical_rate",
+          "value": "150"
+        },
+        "4p": {
+          "stat": "critical_rate",
+          "value": "100"
+        }
+      },
+      {
+        "2p": {
+          "stat": "critical_rate",
+          "value": "180"
+        },
+        "4p": {
+          "stat": "critical_rate",
+          "value": "120"
+        }
+      }
+    ]
+  },
+  "5": {
+    "name": {
+      "en": "Effectiveness Set",
+      "jp": "効果命中セット",
+      "kr": "적중 세트",
+      "zh": "效果命中套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_05",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "buff_chance",
+          "value": "18%"
+        },
+        "4p": {
+          "stat": "buff_chance",
+          "value": "12%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "buff_chance",
+          "value": "22%"
+        },
+        "4p": {
+          "stat": "buff_chance",
+          "value": "16%"
+        }
+      }
+    ]
+  },
+  "6": {
+    "name": {
+      "en": "Resilience Set",
+      "jp": "抵抗セット",
+      "kr": "저항 세트",
+      "zh": "抵抗套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_06",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "buff_resist",
+          "value": "18%"
+        },
+        "4p": {
+          "stat": "buff_resist",
+          "value": "12%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "buff_resist",
+          "value": "22%"
+        },
+        "4p": {
+          "stat": "buff_resist",
+          "value": "16%"
+        }
+      }
+    ]
+  },
+  "7": {
+    "name": {
+      "en": "Counterattack Set",
+      "jp": "反撃セット",
+      "kr": "반격 세트",
+      "zh": "反击套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_07",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "counter_rate",
+          "value": "120"
+        },
+        "4p": {
+          "stat": "counter_rate",
+          "value": "80"
+        }
+      },
+      {
+        "2p": {
+          "stat": "counter_rate",
+          "value": "150"
+        },
+        "4p": {
+          "stat": "counter_rate",
+          "value": "100"
+        }
+      }
+    ]
+  },
+  "8": {
+    "name": {
+      "en": "Fortification set",
+      "jp": "鉄壁セット",
+      "kr": "개전 방벽 세트",
+      "zh": "开战防壁"
+    },
+    "icon": "TI_Icon_Set_Enchant_23",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_23_GROUP_1",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": 400
+            },
+            {
+              "type": "stat",
+              "stat": "speed",
+              "mode": "rate",
+              "value": -300
+            }
+          ]
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_23_GROUP_2",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": 400
+            },
+            {
+              "type": "stat",
+              "stat": "speed",
+              "mode": "rate",
+              "value": -300
+            }
+          ]
+        },
+        "4p": null
+      }
+    ]
+  },
+  "9": {
+    "name": {
+      "en": "Mitigation set",
+      "jp": "無力化セット",
+      "kr": "무력화 세트",
+      "zh": "失效套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_24",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "e_cri_dmg_reduce",
+          "value": "250"
+        },
+        "4p": {
+          "stat": "e_cri_dmg_reduce",
+          "value": "200"
+        }
+      },
+      {
+        "2p": {
+          "stat": "e_cri_dmg_reduce",
+          "value": "380"
+        },
+        "4p": {
+          "stat": "e_cri_dmg_reduce",
+          "value": "270"
+        }
+      }
+    ]
+  },
+  "10": {
+    "name": {
+      "en": "Lifesteal Set",
+      "jp": "吸収セット",
+      "kr": "흡혈 세트",
+      "zh": "吸血套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_10",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "vampiric",
+          "value": "100"
+        },
+        "4p": {
+          "stat": "vampiric",
+          "value": "50"
+        }
+      },
+      {
+        "2p": {
+          "stat": "vampiric",
+          "value": "120"
+        },
+        "4p": {
+          "stat": "vampiric",
+          "value": "70"
+        }
+      }
+    ]
+  },
+  "11": {
+    "name": {
+      "en": "Penetration Set",
+      "jp": "貫通セット",
+      "kr": "관통 세트",
+      "zh": "穿透套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_11",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "stat": "pierce_power_rate",
+          "value": "200"
+        }
+      },
+      {
+        "2p": {
+          "stat": "pierce_power_rate",
+          "value": "110"
+        },
+        "4p": {
+          "stat": "pierce_power_rate",
+          "value": "90"
+        }
+      }
+    ]
+  },
+  "12": {
+    "name": {
+      "en": "Critical Strike Set",
+      "jp": "極大化セット",
+      "kr": "극대화 세트",
+      "zh": "暴伤套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_04",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "critical_dmg_rate",
+          "value": "200"
+        },
+        "4p": {
+          "stat": "critical_dmg_rate",
+          "value": "150"
+        }
+      },
+      {
+        "2p": {
+          "stat": "critical_dmg_rate",
+          "value": "330"
+        },
+        "4p": {
+          "stat": "critical_dmg_rate",
+          "value": "220"
+        }
+      }
+    ]
+  },
+  "13": {
+    "name": {
+      "en": "Speed Set",
+      "jp": "速度セット",
+      "kr": "속도 세트",
+      "zh": "速度套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_15",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "stat": "speed",
+          "value": "25%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "speed",
+          "value": "13%"
+        },
+        "4p": {
+          "stat": "speed",
+          "value": "12%"
+        }
+      }
+    ]
+  },
+  "14": {
+    "name": {
+      "en": "Bursting Set",
+      "jp": "炸裂セット",
+      "kr": "버스트 세트",
+      "zh": "爆发套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_14",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "stat": "enter_ap",
+          "value": "25"
+        }
+      },
+      {
+        "2p": {
+          "stat": "enter_ap",
+          "value": "15"
+        },
+        "4p": {
+          "stat": "enter_ap",
+          "value": "10"
+        }
+      }
+    ]
+  },
+  "15": {
+    "name": {
+      "en": "Revenge Set",
+      "jp": "復讐セット",
+      "kr": "복수 세트",
+      "zh": "复仇套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_16",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_15",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "atk",
+              "mode": "rate",
+              "value": 1600
+            }
+          ]
+        }
+      },
+      {
+        "2p": null,
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_15",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "atk",
+              "mode": "rate",
+              "value": 1600
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "16": {
+    "name": {
+      "en": "Patience Set",
+      "jp": "忍耐セット",
+      "kr": "인내 세트",
+      "zh": "忍耐套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_17",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_16",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "def",
+              "mode": "rate",
+              "value": 1600
+            }
+          ]
+        }
+      },
+      {
+        "2p": null,
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_16",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "def",
+              "mode": "rate",
+              "value": 1600
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "17": {
+    "name": {
+      "en": "Pulverization Set",
+      "jp": "粉砕セット",
+      "kr": "분쇄 세트",
+      "zh": "粉碎套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_18",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_17",
+          "effects": [
+            {
+              "type": "dmg_target_break",
+              "mode": "rate",
+              "value": 350
+            }
+          ]
+        },
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_17_1",
+          "effects": [
+            {
+              "type": "dmg_target_break",
+              "mode": "rate",
+              "value": 250
+            }
+          ]
+        }
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_17",
+          "effects": [
+            {
+              "type": "dmg_target_break",
+              "mode": "rate",
+              "value": 350
+            }
+          ]
+        },
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_17",
+          "effects": [
+            {
+              "type": "dmg_target_break",
+              "mode": "rate",
+              "value": 350
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "18": {
+    "name": {
+      "en": "Immunity Set",
+      "jp": "免疫セット",
+      "kr": "면역 세트",
+      "zh": "免疫套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_19",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_18",
+          "effects": [
+            {
+              "type": "immune",
+              "mode": "none",
+              "value": 0
+            }
+          ]
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_18",
+          "effects": [
+            {
+              "type": "immune",
+              "mode": "none",
+              "value": 0
+            }
+          ]
+        },
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_18_1",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": 300
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "19": {
+    "name": {
+      "en": "Swiftness Set",
+      "jp": "機敏セット",
+      "kr": "기민 세트",
+      "zh": "敏捷套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_20",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_19",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "speed",
+              "mode": "rate",
+              "value": 1000
+            }
+          ]
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_19",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "speed",
+              "mode": "rate",
+              "value": 1000
+            }
+          ]
+        },
+        "4p": null
+      }
+    ]
+  },
+  "20": {
+    "name": {
+      "en": "Weakness Set",
+      "jp": "弱点セット",
+      "kr": "약점 세트",
+      "zh": "弱点套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_21",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_20",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": -250
+            }
+          ]
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_20",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": -250
+            }
+          ]
+        },
+        "4p": null
+      }
+    ]
+  },
+  "21": {
+    "name": {
+      "en": "Augmentation Set",
+      "jp": "増強セット",
+      "kr": "증강 세트",
+      "zh": "加强套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_22",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_21",
+          "effects": [
+            {
+              "type": "dmg",
+              "mode": "rate",
+              "value": 200
+            }
+          ]
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_21",
+          "effects": [
+            {
+              "type": "dmg",
+              "mode": "rate",
+              "value": 200
+            }
+          ]
+        },
+        "4p": null
+      }
+    ]
+  }
+}

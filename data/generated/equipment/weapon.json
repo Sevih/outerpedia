@@ -1,0 +1,5816 @@
+{
+  "1": {
+    "name": {
+      "en": "Ordinary Sword",
+      "jp": "普通のソード",
+      "kr": "흔한 검",
+      "zh": "常见的剑"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["1", "1001"],
+    "sub": "101",
+    "passive": null,
+    "breakLimit": "1|normal"
+  },
+  "2": {
+    "name": {
+      "en": "Fine Sword",
+      "jp": "高級なソード",
+      "kr": "고급 검",
+      "zh": "高级剑"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2", "1002"],
+    "sub": "101",
+    "passive": null,
+    "breakLimit": "1|magic"
+  },
+  "3": {
+    "name": {
+      "en": "Steel Sword",
+      "jp": "鋼鉄の剣",
+      "kr": "강철 검",
+      "zh": "钢铁剑"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["3", "1003"],
+    "sub": "101",
+    "passive": null,
+    "breakLimit": "1|rare"
+  },
+  "4": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1001",
+    "breakLimit": "1|unique"
+  },
+  "5": {
+    "name": {
+      "en": "Talisman of Animosities",
+      "jp": "怨念宿せし呪具",
+      "kr": "원념 서린 주구",
+      "zh": "怨念之符"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1002",
+    "breakLimit": "1|unique"
+  },
+  "6": {
+    "name": {
+      "en": "Heartunder's Blade",
+      "jp": "ハートアンダーブレード",
+      "kr": "하트언더블레이드",
+      "zh": "心下之刃"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1003",
+    "breakLimit": "1|unique"
+  },
+  "7": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1004",
+    "breakLimit": "1|unique"
+  },
+  "8": {
+    "name": {
+      "en": "Royal Stinger",
+      "jp": "ロイヤルスティンガー",
+      "kr": "로얄 스팅거",
+      "zh": "皇家刺客"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1005",
+    "breakLimit": "1|unique"
+  },
+  "9": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1006",
+    "breakLimit": "1|unique"
+  },
+  "10": {
+    "name": {
+      "en": "Force Field Generator",
+      "jp": "フォースフィールドジェネレーター",
+      "kr": "포스필드 제너레이터",
+      "zh": "力场生成器"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1007",
+    "breakLimit": "1|unique"
+  },
+  "11": {
+    "name": {
+      "en": "Rampaging Caracal",
+      "jp": "飛び跳ねるカラカル",
+      "kr": "날뛰는 카라칼",
+      "zh": "狂暴野猫"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1008",
+    "breakLimit": "1|unique"
+  },
+  "12": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1009",
+    "breakLimit": "1|unique"
+  },
+  "13": {
+    "name": {
+      "en": "Emblem of Dominance",
+      "jp": "最強の象徴",
+      "kr": "최강의 상징",
+      "zh": "最强的象征"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1010",
+    "breakLimit": "1|unique"
+  },
+  "14": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1011",
+    "breakLimit": "1|unique"
+  },
+  "15": {
+    "name": {
+      "en": "Token of the Supreme Witch",
+      "jp": "大魔女の証",
+      "kr": "대마녀의 증표",
+      "zh": "大魔女的信物"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1012",
+    "breakLimit": "1|unique"
+  },
+  "16": {
+    "name": {
+      "en": "Meteor Mashers",
+      "jp": "貫く流星",
+      "kr": "꿰뚫는 유성",
+      "zh": "穿透流星"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1013",
+    "breakLimit": "1|unique"
+  },
+  "17": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1014",
+    "breakLimit": "1|unique"
+  },
+  "18": {
+    "name": {
+      "en": "Iron Messiah",
+      "jp": "鋼鉄の救世主",
+      "kr": "강철의 구세주",
+      "zh": "钢铁救世主"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1015",
+    "breakLimit": "1|unique"
+  },
+  "19": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1016",
+    "breakLimit": "1|unique"
+  },
+  "20": {
+    "name": {
+      "en": "God Hand Crush",
+      "jp": "ゴッドハンドクラッシュ",
+      "kr": "갓 핸드 크러쉬",
+      "zh": "神拳粉碎"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1017",
+    "breakLimit": "1|unique"
+  },
+  "21": {
+    "name": {
+      "en": "Legacy of the Dream",
+      "jp": "ドリームレガシー",
+      "kr": "꿈의 유산",
+      "zh": "神梦遗礼"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1018",
+    "breakLimit": "1|unique"
+  },
+  "22": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1019",
+    "breakLimit": "1|unique"
+  },
+  "23": {
+    "name": {
+      "en": "Barrage of Truth",
+      "jp": "真・貫突スラッシャー",
+      "kr": "진리의 맹공",
+      "zh": "真理的猛攻"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1020",
+    "breakLimit": "1|unique"
+  },
+  "24": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1021",
+    "breakLimit": "1|unique"
+  },
+  "25": {
+    "name": {
+      "en": "Exquisite Death",
+      "jp": "エクスクィジット・デスブレード",
+      "kr": "정교한 죽음",
+      "zh": "精妙之死"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1022",
+    "breakLimit": "1|unique"
+  },
+  "26": {
+    "name": {
+      "en": "Immortal Pride",
+      "jp": "プライド・オブ・イモータル",
+      "kr": "프라이드 of 이모탈",
+      "zh": "不朽之血"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1023",
+    "breakLimit": "1|unique"
+  },
+  "27": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1024",
+    "breakLimit": "1|unique"
+  },
+  "28": {
+    "name": {
+      "en": "Fierce Soloist",
+      "jp": "フィアス・ソリスター",
+      "kr": "맹렬한 독주가",
+      "zh": "猛烈的独奏家"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Weapon_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["4", "1004"],
+    "sub": "101",
+    "passive": "1025",
+    "breakLimit": "1|unique"
+  },
+  "151": {
+    "name": {
+      "en": "Ordinary Sword",
+      "jp": "普通のソード",
+      "kr": "흔한 검",
+      "zh": "常见的剑"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["5", "1011"],
+    "sub": "102",
+    "passive": null,
+    "breakLimit": "2|normal"
+  },
+  "152": {
+    "name": {
+      "en": "Fine Sword",
+      "jp": "高級なソード",
+      "kr": "고급 검",
+      "zh": "高级剑"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["6", "1012"],
+    "sub": "102",
+    "passive": null,
+    "breakLimit": "2|magic"
+  },
+  "153": {
+    "name": {
+      "en": "Steel Sword",
+      "jp": "鋼鉄の剣",
+      "kr": "강철 검",
+      "zh": "钢铁剑"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["7", "1013"],
+    "sub": "102",
+    "passive": null,
+    "breakLimit": "2|rare"
+  },
+  "154": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1001",
+    "breakLimit": "2|unique"
+  },
+  "155": {
+    "name": {
+      "en": "Talisman of Animosities",
+      "jp": "怨念宿せし呪具",
+      "kr": "원념 서린 주구",
+      "zh": "怨念之符"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1002",
+    "breakLimit": "2|unique"
+  },
+  "156": {
+    "name": {
+      "en": "Heartunder's Blade",
+      "jp": "ハートアンダーブレード",
+      "kr": "하트언더블레이드",
+      "zh": "心下之刃"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1003",
+    "breakLimit": "2|unique"
+  },
+  "157": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1004",
+    "breakLimit": "2|unique"
+  },
+  "158": {
+    "name": {
+      "en": "Royal Stinger",
+      "jp": "ロイヤルスティンガー",
+      "kr": "로얄 스팅거",
+      "zh": "皇家刺客"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1005",
+    "breakLimit": "2|unique"
+  },
+  "159": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1006",
+    "breakLimit": "2|unique"
+  },
+  "160": {
+    "name": {
+      "en": "Force Field Generator",
+      "jp": "フォースフィールドジェネレーター",
+      "kr": "포스필드 제너레이터",
+      "zh": "力场生成器"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1007",
+    "breakLimit": "2|unique"
+  },
+  "161": {
+    "name": {
+      "en": "Rampaging Caracal",
+      "jp": "飛び跳ねるカラカル",
+      "kr": "날뛰는 카라칼",
+      "zh": "狂暴野猫"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1008",
+    "breakLimit": "2|unique"
+  },
+  "162": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1009",
+    "breakLimit": "2|unique"
+  },
+  "163": {
+    "name": {
+      "en": "Emblem of Dominance",
+      "jp": "最強の象徴",
+      "kr": "최강의 상징",
+      "zh": "最强的象征"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1010",
+    "breakLimit": "2|unique"
+  },
+  "164": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1011",
+    "breakLimit": "2|unique"
+  },
+  "165": {
+    "name": {
+      "en": "Token of the Supreme Witch",
+      "jp": "大魔女の証",
+      "kr": "대마녀의 증표",
+      "zh": "大魔女的信物"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1012",
+    "breakLimit": "2|unique"
+  },
+  "166": {
+    "name": {
+      "en": "Meteor Mashers",
+      "jp": "貫く流星",
+      "kr": "꿰뚫는 유성",
+      "zh": "穿透流星"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1013",
+    "breakLimit": "2|unique"
+  },
+  "167": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1014",
+    "breakLimit": "2|unique"
+  },
+  "168": {
+    "name": {
+      "en": "Iron Messiah",
+      "jp": "鋼鉄の救世主",
+      "kr": "강철의 구세주",
+      "zh": "钢铁救世主"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1015",
+    "breakLimit": "2|unique"
+  },
+  "169": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1016",
+    "breakLimit": "2|unique"
+  },
+  "170": {
+    "name": {
+      "en": "God Hand Crush",
+      "jp": "ゴッドハンドクラッシュ",
+      "kr": "갓 핸드 크러쉬",
+      "zh": "神拳粉碎"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1017",
+    "breakLimit": "2|unique"
+  },
+  "171": {
+    "name": {
+      "en": "Legacy of the Dream",
+      "jp": "ドリームレガシー",
+      "kr": "꿈의 유산",
+      "zh": "神梦遗礼"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1018",
+    "breakLimit": "2|unique"
+  },
+  "172": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1019",
+    "breakLimit": "2|unique"
+  },
+  "173": {
+    "name": {
+      "en": "Barrage of Truth",
+      "jp": "真・貫突スラッシャー",
+      "kr": "진리의 맹공",
+      "zh": "真理的猛攻"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1020",
+    "breakLimit": "2|unique"
+  },
+  "174": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1021",
+    "breakLimit": "2|unique"
+  },
+  "175": {
+    "name": {
+      "en": "Exquisite Death",
+      "jp": "エクスクィジット・デスブレード",
+      "kr": "정교한 죽음",
+      "zh": "精妙之死"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1022",
+    "breakLimit": "2|unique"
+  },
+  "176": {
+    "name": {
+      "en": "Immortal Pride",
+      "jp": "プライド・オブ・イモータル",
+      "kr": "프라이드 of 이모탈",
+      "zh": "不朽之血"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1023",
+    "breakLimit": "2|unique"
+  },
+  "177": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1024",
+    "breakLimit": "2|unique"
+  },
+  "178": {
+    "name": {
+      "en": "Fierce Soloist",
+      "jp": "フィアス・ソリスター",
+      "kr": "맹렬한 독주가",
+      "zh": "猛烈的独奏家"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Weapon_02_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["8", "1014"],
+    "sub": "102",
+    "passive": "1025",
+    "breakLimit": "2|unique"
+  },
+  "301": {
+    "name": {
+      "en": "Ordinary Sword",
+      "jp": "普通のソード",
+      "kr": "흔한 검",
+      "zh": "常见的剑"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["9", "1021"],
+    "sub": "103",
+    "passive": null,
+    "breakLimit": "3|normal"
+  },
+  "302": {
+    "name": {
+      "en": "Fine Sword",
+      "jp": "高級なソード",
+      "kr": "고급 검",
+      "zh": "高级剑"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["10", "1022"],
+    "sub": "103",
+    "passive": null,
+    "breakLimit": "3|magic"
+  },
+  "303": {
+    "name": {
+      "en": "Steel Sword",
+      "jp": "鋼鉄の剣",
+      "kr": "강철 검",
+      "zh": "钢铁剑"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["11", "1023"],
+    "sub": "103",
+    "passive": null,
+    "breakLimit": "3|rare"
+  },
+  "304": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1001",
+    "breakLimit": "3|unique"
+  },
+  "305": {
+    "name": {
+      "en": "Talisman of Animosities",
+      "jp": "怨念宿せし呪具",
+      "kr": "원념 서린 주구",
+      "zh": "怨念之符"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1002",
+    "breakLimit": "3|unique"
+  },
+  "306": {
+    "name": {
+      "en": "Heartunder's Blade",
+      "jp": "ハートアンダーブレード",
+      "kr": "하트언더블레이드",
+      "zh": "心下之刃"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1003",
+    "breakLimit": "3|unique"
+  },
+  "307": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1004",
+    "breakLimit": "3|unique"
+  },
+  "308": {
+    "name": {
+      "en": "Royal Stinger",
+      "jp": "ロイヤルスティンガー",
+      "kr": "로얄 스팅거",
+      "zh": "皇家刺客"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1005",
+    "breakLimit": "3|unique"
+  },
+  "309": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1006",
+    "breakLimit": "3|unique"
+  },
+  "310": {
+    "name": {
+      "en": "Force Field Generator",
+      "jp": "フォースフィールドジェネレーター",
+      "kr": "포스필드 제너레이터",
+      "zh": "力场生成器"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1007",
+    "breakLimit": "3|unique"
+  },
+  "311": {
+    "name": {
+      "en": "Rampaging Caracal",
+      "jp": "飛び跳ねるカラカル",
+      "kr": "날뛰는 카라칼",
+      "zh": "狂暴野猫"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1008",
+    "breakLimit": "3|unique"
+  },
+  "312": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1009",
+    "breakLimit": "3|unique"
+  },
+  "313": {
+    "name": {
+      "en": "Emblem of Dominance",
+      "jp": "最強の象徴",
+      "kr": "최강의 상징",
+      "zh": "最强的象征"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1010",
+    "breakLimit": "3|unique"
+  },
+  "314": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1011",
+    "breakLimit": "3|unique"
+  },
+  "315": {
+    "name": {
+      "en": "Token of the Supreme Witch",
+      "jp": "大魔女の証",
+      "kr": "대마녀의 증표",
+      "zh": "大魔女的信物"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1012",
+    "breakLimit": "3|unique"
+  },
+  "316": {
+    "name": {
+      "en": "Meteor Mashers",
+      "jp": "貫く流星",
+      "kr": "꿰뚫는 유성",
+      "zh": "穿透流星"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1013",
+    "breakLimit": "3|unique"
+  },
+  "317": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1014",
+    "breakLimit": "3|unique"
+  },
+  "318": {
+    "name": {
+      "en": "Iron Messiah",
+      "jp": "鋼鉄の救世主",
+      "kr": "강철의 구세주",
+      "zh": "钢铁救世主"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1015",
+    "breakLimit": "3|unique"
+  },
+  "319": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1016",
+    "breakLimit": "3|unique"
+  },
+  "320": {
+    "name": {
+      "en": "God Hand Crush",
+      "jp": "ゴッドハンドクラッシュ",
+      "kr": "갓 핸드 크러쉬",
+      "zh": "神拳粉碎"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1017",
+    "breakLimit": "3|unique"
+  },
+  "321": {
+    "name": {
+      "en": "Legacy of the Dream",
+      "jp": "ドリームレガシー",
+      "kr": "꿈의 유산",
+      "zh": "神梦遗礼"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1018",
+    "breakLimit": "3|unique"
+  },
+  "322": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1019",
+    "breakLimit": "3|unique"
+  },
+  "323": {
+    "name": {
+      "en": "Barrage of Truth",
+      "jp": "真・貫突スラッシャー",
+      "kr": "진리의 맹공",
+      "zh": "真理的猛攻"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1020",
+    "breakLimit": "3|unique"
+  },
+  "324": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1021",
+    "breakLimit": "3|unique"
+  },
+  "325": {
+    "name": {
+      "en": "Exquisite Death",
+      "jp": "エクスクィジット・デスブレード",
+      "kr": "정교한 죽음",
+      "zh": "精妙之死"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1022",
+    "breakLimit": "3|unique"
+  },
+  "326": {
+    "name": {
+      "en": "Immortal Pride",
+      "jp": "プライド・オブ・イモータル",
+      "kr": "프라이드 of 이모탈",
+      "zh": "不朽之血"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1023",
+    "breakLimit": "3|unique"
+  },
+  "327": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1024",
+    "breakLimit": "3|unique"
+  },
+  "328": {
+    "name": {
+      "en": "Fierce Soloist",
+      "jp": "フィアス・ソリスター",
+      "kr": "맹렬한 독주가",
+      "zh": "猛烈的独奏家"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Weapon_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["12", "1024"],
+    "sub": "103",
+    "passive": "1025",
+    "breakLimit": "3|unique"
+  },
+  "451": {
+    "name": {
+      "en": "Ordinary Sword",
+      "jp": "普通のソード",
+      "kr": "흔한 검",
+      "zh": "常见的剑"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["13", "1031"],
+    "sub": "104",
+    "passive": null,
+    "breakLimit": "4|normal"
+  },
+  "452": {
+    "name": {
+      "en": "Fine Sword",
+      "jp": "高級なソード",
+      "kr": "고급 검",
+      "zh": "高级剑"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["14", "1032"],
+    "sub": "104",
+    "passive": null,
+    "breakLimit": "4|magic"
+  },
+  "453": {
+    "name": {
+      "en": "Steel Sword",
+      "jp": "鋼鉄の剣",
+      "kr": "강철 검",
+      "zh": "钢铁剑"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["15", "1033"],
+    "sub": "104",
+    "passive": null,
+    "breakLimit": "4|rare"
+  },
+  "454": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1001",
+    "breakLimit": "4|unique"
+  },
+  "455": {
+    "name": {
+      "en": "Talisman of Animosities",
+      "jp": "怨念宿せし呪具",
+      "kr": "원념 서린 주구",
+      "zh": "怨念之符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1002",
+    "breakLimit": "4|unique"
+  },
+  "456": {
+    "name": {
+      "en": "Heartunder's Blade",
+      "jp": "ハートアンダーブレード",
+      "kr": "하트언더블레이드",
+      "zh": "心下之刃"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1003",
+    "breakLimit": "4|unique"
+  },
+  "457": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1004",
+    "breakLimit": "4|unique"
+  },
+  "458": {
+    "name": {
+      "en": "Royal Stinger",
+      "jp": "ロイヤルスティンガー",
+      "kr": "로얄 스팅거",
+      "zh": "皇家刺客"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1005",
+    "breakLimit": "4|unique"
+  },
+  "459": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1006",
+    "breakLimit": "4|unique"
+  },
+  "460": {
+    "name": {
+      "en": "Force Field Generator",
+      "jp": "フォースフィールドジェネレーター",
+      "kr": "포스필드 제너레이터",
+      "zh": "力场生成器"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1007",
+    "breakLimit": "4|unique"
+  },
+  "461": {
+    "name": {
+      "en": "Rampaging Caracal",
+      "jp": "飛び跳ねるカラカル",
+      "kr": "날뛰는 카라칼",
+      "zh": "狂暴野猫"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1008",
+    "breakLimit": "4|unique"
+  },
+  "462": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1009",
+    "breakLimit": "4|unique"
+  },
+  "463": {
+    "name": {
+      "en": "Emblem of Dominance",
+      "jp": "最強の象徴",
+      "kr": "최강의 상징",
+      "zh": "最强的象征"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1010",
+    "breakLimit": "4|unique"
+  },
+  "464": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1011",
+    "breakLimit": "4|unique"
+  },
+  "465": {
+    "name": {
+      "en": "Token of the Supreme Witch",
+      "jp": "大魔女の証",
+      "kr": "대마녀의 증표",
+      "zh": "大魔女的信物"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1012",
+    "breakLimit": "4|unique"
+  },
+  "466": {
+    "name": {
+      "en": "Meteor Mashers",
+      "jp": "貫く流星",
+      "kr": "꿰뚫는 유성",
+      "zh": "穿透流星"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1013",
+    "breakLimit": "4|unique"
+  },
+  "467": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1014",
+    "breakLimit": "4|unique"
+  },
+  "468": {
+    "name": {
+      "en": "Iron Messiah",
+      "jp": "鋼鉄の救世主",
+      "kr": "강철의 구세주",
+      "zh": "钢铁救世主"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1015",
+    "breakLimit": "4|unique"
+  },
+  "469": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1016",
+    "breakLimit": "4|unique"
+  },
+  "470": {
+    "name": {
+      "en": "God Hand Crush",
+      "jp": "ゴッドハンドクラッシュ",
+      "kr": "갓 핸드 크러쉬",
+      "zh": "神拳粉碎"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1017",
+    "breakLimit": "4|unique"
+  },
+  "471": {
+    "name": {
+      "en": "Legacy of the Dream",
+      "jp": "ドリームレガシー",
+      "kr": "꿈의 유산",
+      "zh": "神梦遗礼"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1018",
+    "breakLimit": "4|unique"
+  },
+  "472": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1019",
+    "breakLimit": "4|unique"
+  },
+  "473": {
+    "name": {
+      "en": "Barrage of Truth",
+      "jp": "真・貫突スラッシャー",
+      "kr": "진리의 맹공",
+      "zh": "真理的猛攻"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1020",
+    "breakLimit": "4|unique"
+  },
+  "474": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1021",
+    "breakLimit": "4|unique"
+  },
+  "475": {
+    "name": {
+      "en": "Exquisite Death",
+      "jp": "エクスクィジット・デスブレード",
+      "kr": "정교한 죽음",
+      "zh": "精妙之死"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1022",
+    "breakLimit": "4|unique"
+  },
+  "476": {
+    "name": {
+      "en": "Immortal Pride",
+      "jp": "プライド・オブ・イモータル",
+      "kr": "프라이드 of 이모탈",
+      "zh": "不朽之血"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1023",
+    "breakLimit": "4|unique"
+  },
+  "477": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1024",
+    "breakLimit": "4|unique"
+  },
+  "478": {
+    "name": {
+      "en": "Fierce Soloist",
+      "jp": "フィアス・ソリスター",
+      "kr": "맹렬한 독주가",
+      "zh": "猛烈的独奏家"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1025",
+    "breakLimit": "4|unique"
+  },
+  "479": {
+    "name": {
+      "en": "Guide Cane-Sword",
+      "jp": "盲人の仕込み刀",
+      "kr": "맹인의 지팡이칼",
+      "zh": "盲人拐杖刀"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Weapon_04_Product",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["16", "1034"],
+    "sub": "104",
+    "passive": "1026",
+    "breakLimit": "4|unique"
+  },
+  "601": {
+    "name": {
+      "en": "Ordinary Sword",
+      "jp": "普通のソード",
+      "kr": "흔한 검",
+      "zh": "常见的剑"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["17", "1041"],
+    "sub": "105",
+    "passive": null,
+    "breakLimit": "5|normal"
+  },
+  "602": {
+    "name": {
+      "en": "Fine Sword",
+      "jp": "高級なソード",
+      "kr": "고급 검",
+      "zh": "高级剑"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["18", "1042"],
+    "sub": "105",
+    "passive": null,
+    "breakLimit": "5|magic"
+  },
+  "603": {
+    "name": {
+      "en": "Steel Sword",
+      "jp": "鋼鉄の剣",
+      "kr": "강철 검",
+      "zh": "钢铁剑"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["19", "1043"],
+    "sub": "105",
+    "passive": null,
+    "breakLimit": "5|rare"
+  },
+  "604": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1001",
+    "breakLimit": "5|unique"
+  },
+  "605": {
+    "name": {
+      "en": "Talisman of Animosities",
+      "jp": "怨念宿せし呪具",
+      "kr": "원념 서린 주구",
+      "zh": "怨念之符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1002",
+    "breakLimit": "5|unique"
+  },
+  "606": {
+    "name": {
+      "en": "Heartunder's Blade",
+      "jp": "ハートアンダーブレード",
+      "kr": "하트언더블레이드",
+      "zh": "心下之刃"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1003",
+    "breakLimit": "5|unique"
+  },
+  "607": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1004",
+    "breakLimit": "5|unique"
+  },
+  "608": {
+    "name": {
+      "en": "Royal Stinger",
+      "jp": "ロイヤルスティンガー",
+      "kr": "로얄 스팅거",
+      "zh": "皇家刺客"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1005",
+    "breakLimit": "5|unique"
+  },
+  "609": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1006",
+    "breakLimit": "5|unique"
+  },
+  "610": {
+    "name": {
+      "en": "Force Field Generator",
+      "jp": "フォースフィールドジェネレーター",
+      "kr": "포스필드 제너레이터",
+      "zh": "力场生成器"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1007",
+    "breakLimit": "5|unique"
+  },
+  "611": {
+    "name": {
+      "en": "Rampaging Caracal",
+      "jp": "飛び跳ねるカラカル",
+      "kr": "날뛰는 카라칼",
+      "zh": "狂暴野猫"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1008",
+    "breakLimit": "5|unique"
+  },
+  "612": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1009",
+    "breakLimit": "5|unique"
+  },
+  "613": {
+    "name": {
+      "en": "Emblem of Dominance",
+      "jp": "最強の象徴",
+      "kr": "최강의 상징",
+      "zh": "最强的象征"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1010",
+    "breakLimit": "5|unique"
+  },
+  "614": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1011",
+    "breakLimit": "5|unique"
+  },
+  "615": {
+    "name": {
+      "en": "Token of the Supreme Witch",
+      "jp": "大魔女の証",
+      "kr": "대마녀의 증표",
+      "zh": "大魔女的信物"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1012",
+    "breakLimit": "5|unique"
+  },
+  "616": {
+    "name": {
+      "en": "Meteor Mashers",
+      "jp": "貫く流星",
+      "kr": "꿰뚫는 유성",
+      "zh": "穿透流星"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1013",
+    "breakLimit": "5|unique"
+  },
+  "617": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1014",
+    "breakLimit": "5|unique"
+  },
+  "618": {
+    "name": {
+      "en": "Iron Messiah",
+      "jp": "鋼鉄の救世主",
+      "kr": "강철의 구세주",
+      "zh": "钢铁救世主"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1015",
+    "breakLimit": "5|unique"
+  },
+  "619": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1016",
+    "breakLimit": "5|unique"
+  },
+  "620": {
+    "name": {
+      "en": "God Hand Crush",
+      "jp": "ゴッドハンドクラッシュ",
+      "kr": "갓 핸드 크러쉬",
+      "zh": "神拳粉碎"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1017",
+    "breakLimit": "5|unique"
+  },
+  "621": {
+    "name": {
+      "en": "Legacy of the Dream",
+      "jp": "ドリームレガシー",
+      "kr": "꿈의 유산",
+      "zh": "神梦遗礼"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1018",
+    "breakLimit": "5|unique"
+  },
+  "622": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1019",
+    "breakLimit": "5|unique"
+  },
+  "623": {
+    "name": {
+      "en": "Barrage of Truth",
+      "jp": "真・貫突スラッシャー",
+      "kr": "진리의 맹공",
+      "zh": "真理的猛攻"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1020",
+    "breakLimit": "5|unique"
+  },
+  "624": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1021",
+    "breakLimit": "5|unique"
+  },
+  "625": {
+    "name": {
+      "en": "Exquisite Death",
+      "jp": "エクスクィジット・デスブレード",
+      "kr": "정교한 죽음",
+      "zh": "精妙之死"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1022",
+    "breakLimit": "5|unique"
+  },
+  "626": {
+    "name": {
+      "en": "Immortal Pride",
+      "jp": "プライド・オブ・イモータル",
+      "kr": "프라이드 of 이모탈",
+      "zh": "不朽之血"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1023",
+    "breakLimit": "5|unique"
+  },
+  "627": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1024",
+    "breakLimit": "5|unique"
+  },
+  "628": {
+    "name": {
+      "en": "Fierce Soloist",
+      "jp": "フィアス・ソリスター",
+      "kr": "맹렬한 독주가",
+      "zh": "猛烈的独奏家"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": "1025",
+    "breakLimit": "5|unique"
+  },
+  "629": {
+    "name": {
+      "en": "Necromancer's Amulet",
+      "jp": "死霊術師の御守り",
+      "kr": "사령술사의 부적",
+      "zh": "死灵术士之符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["25", "1061"],
+    "sub": "105",
+    "passive": "4001",
+    "breakLimit": "5|unique"
+  },
+  "630": {
+    "name": {
+      "en": "High School Girl Invincibility",
+      "jp": "JKはムテキだし",
+      "kr": "여고생은 무적",
+      "zh": "青春无敌"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["26", "1062"],
+    "sub": "105",
+    "passive": "4002",
+    "breakLimit": "5|unique"
+  },
+  "631": {
+    "name": {
+      "en": "Bloody Edge",
+      "jp": "ブラッディエッジ",
+      "kr": "블러디 엣지",
+      "zh": "血色利刃"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["27", "1063"],
+    "sub": "105",
+    "passive": "4003",
+    "breakLimit": "5|unique"
+  },
+  "632": {
+    "name": {
+      "en": "Sacreed Edge",
+      "jp": "セイクリッドエッジ",
+      "kr": "세이크리드 엣지",
+      "zh": "圣科利德刀锋"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["28", "1064"],
+    "sub": "105",
+    "passive": "4004",
+    "breakLimit": "5|unique"
+  },
+  "633": {
+    "name": {
+      "en": "Ceremonial Blade",
+      "jp": "礼装用の飾り剣",
+      "kr": "예장용 장식검",
+      "zh": "礼服专用装饰剑"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["28", "1064"],
+    "sub": "105",
+    "passive": "4005",
+    "breakLimit": "5|unique"
+  },
+  "634": {
+    "name": {
+      "en": "The Power of Science",
+      "jp": "科学の力",
+      "kr": "과학의 힘",
+      "zh": "科学的力量"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["28", "1064"],
+    "sub": "105",
+    "passive": "4006",
+    "breakLimit": "5|unique"
+  },
+  "635": {
+    "name": {
+      "en": "Kon-Chiki-Chin♪",
+      "jp": "こんちきちん♪",
+      "kr": "콘치키칭♪",
+      "zh": "动次嗒次♪"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["28", "1064"],
+    "sub": "105",
+    "passive": "4009",
+    "breakLimit": "5|unique"
+  },
+  "636": {
+    "name": {
+      "en": "Middle School Girl Invincibility",
+      "jp": "JCもムテキ!",
+      "kr": "여중생도 무적!",
+      "zh": "女初中生也无敌！"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["28", "1064"],
+    "sub": "105",
+    "passive": "4010",
+    "breakLimit": "5|unique"
+  },
+  "637": {
+    "name": {
+      "en": "Cradle's Key",
+      "jp": "揺籃の鍵",
+      "kr": "요람의 열쇠",
+      "zh": "摇篮钥匙"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["28", "1064"],
+    "sub": "106",
+    "passive": "4013",
+    "breakLimit": "5|unique"
+  },
+  "638": {
+    "name": {
+      "en": "Turn Delicious",
+      "jp": "【おいしくなれ】",
+      "kr": "맛있어져라",
+      "zh": "变得更帅气吧"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["27", "1063"],
+    "sub": "106",
+    "passive": "4015",
+    "breakLimit": "5|unique"
+  },
+  "639": {
+    "name": {
+      "en": "Campus Guardian",
+      "jp": "【校内の守護者】",
+      "kr": "교내의 수호자",
+      "zh": "校内守护者"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["27", "1063"],
+    "sub": "106",
+    "passive": "4016",
+    "breakLimit": "5|unique"
+  },
+  "640": {
+    "name": {
+      "en": "Radiant Spear of Dawn",
+      "jp": "黎明のいなせな槍",
+      "kr": "여명의 멋쟁이 창",
+      "zh": "黎明酷炫标枪"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["27", "1063"],
+    "sub": "105",
+    "passive": "4021",
+    "breakLimit": "5|unique"
+  },
+  "641": {
+    "name": {
+      "en": "Winter of Hubris",
+      "jp": "傲慢な冬",
+      "kr": "오만한 겨울",
+      "zh": "傲慢寒冬"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["27", "1063"],
+    "sub": "105",
+    "passive": "4022",
+    "breakLimit": "5|unique"
+  },
+  "642": {
+    "name": {
+      "en": "Masamune",
+      "jp": "マサムネ",
+      "kr": "마사무네",
+      "zh": "正宗"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["27", "1063"],
+    "sub": "105",
+    "passive": "4023",
+    "breakLimit": "5|unique"
+  },
+  "643": {
+    "name": {
+      "en": "Ambush",
+      "jp": "アンブッシュ",
+      "kr": "엠부쉬",
+      "zh": "伏击"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["27", "1063"],
+    "sub": "105",
+    "passive": "4024",
+    "breakLimit": "5|unique"
+  },
+  "644": {
+    "name": {
+      "en": "Power of Archmonides",
+      "jp": "アクモニデスの権能",
+      "kr": "아크모니데스의 권세",
+      "zh": "阿克摩涅迪斯的权势"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["20", "1063"],
+    "sub": "105",
+    "passive": "4027",
+    "breakLimit": "5|unique"
+  },
+  "645": {
+    "name": {
+      "en": "Fierce Frost Sword",
+      "jp": "猛烈な霜の剣",
+      "kr": "맹렬한 서리 검",
+      "zh": "猛烈霜刃"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_04_Product",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["20", "1044"],
+    "sub": "106",
+    "passive": "1038",
+    "breakLimit": "5|unique"
+  },
+  "646": {
+    "name": {
+      "en": "Sturdy Frost Sword",
+      "jp": "堅固な霜の剣",
+      "kr": "견고한 서리 검",
+      "zh": "坚韧霜刃"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_04_Product",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["20", "1044"],
+    "sub": "106",
+    "passive": "1039",
+    "breakLimit": "5|unique"
+  },
+  "647": {
+    "name": {
+      "en": "Agile Frost Sword",
+      "jp": "機敏な霜の剣",
+      "kr": "기민한 서리 검",
+      "zh": "敏捷霜刃"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_04_Product",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["20", "1044"],
+    "sub": "106",
+    "passive": "1040",
+    "breakLimit": "5|unique"
+  },
+  "648": {
+    "name": {
+      "en": "Clever Frost Sword",
+      "jp": "鋭敏な霜の剣",
+      "kr": "영민한 서리 검",
+      "zh": "睿智霜刃"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_04_Product",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["20", "1044"],
+    "sub": "106",
+    "passive": "1041",
+    "breakLimit": "5|unique"
+  },
+  "649": {
+    "name": {
+      "en": "Gentle Frost Sword",
+      "jp": "温厚な霜の剣",
+      "kr": "온유한 서리 검",
+      "zh": "温柔霜刃"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_04_Product",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["20", "1044"],
+    "sub": "106",
+    "passive": "1042",
+    "breakLimit": "5|unique"
+  },
+  "650": {
+    "name": {
+      "en": "Hunter Blade Ver. 1.0",
+      "jp": "ハンターブレード Ver.1.0",
+      "kr": "헌터 블레이드 Ver 1.0",
+      "zh": "猎人之刃 Ver.1.0"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["30", "1066"],
+    "sub": "105",
+    "passive": null,
+    "breakLimit": "5|unique"
+  },
+  "652": {
+    "name": {
+      "en": "Hunter Blade Ver. 2.0",
+      "jp": "ハンターブレード Ver.2.0",
+      "kr": "헌터 블레이드 Ver 2.0",
+      "zh": "猎人之刃 Ver.2.0"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["30", "1068"],
+    "sub": "105",
+    "passive": null,
+    "breakLimit": "5|unique"
+  },
+  "653": {
+    "name": {
+      "en": "Ether Blade",
+      "jp": "エーテルブレイド",
+      "kr": "에테르 블레이드",
+      "zh": "以太之剑"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Weapon_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["20", "1044"],
+    "sub": "105",
+    "passive": null,
+    "breakLimit": "5|unique"
+  },
+  "654": {
+    "name": {
+      "en": "Blazing Sun",
+      "jp": "灼けつく陽光",
+      "kr": "뙤약볕",
+      "zh": "烈日"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1043",
+    "breakLimit": "6|unique"
+  },
+  "655": {
+    "name": {
+      "en": "Film Industry Unfair Contract",
+      "jp": "映画界の不当契約書",
+      "kr": "영화계 불공정계약서",
+      "zh": "影視業不公平合約書"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1044",
+    "breakLimit": "6|unique"
+  },
+  "751": {
+    "name": {
+      "en": "Ordinary Sword",
+      "jp": "普通のソード",
+      "kr": "흔한 검",
+      "zh": "常见的剑"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["21", "1051"],
+    "sub": "106",
+    "passive": null,
+    "breakLimit": "6|normal"
+  },
+  "752": {
+    "name": {
+      "en": "Fine Sword",
+      "jp": "高級なソード",
+      "kr": "고급 검",
+      "zh": "高级剑"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["22", "1052"],
+    "sub": "106",
+    "passive": null,
+    "breakLimit": "6|magic"
+  },
+  "753": {
+    "name": {
+      "en": "Steel Sword",
+      "jp": "鋼鉄の剣",
+      "kr": "강철 검",
+      "zh": "钢铁剑"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["23", "1053"],
+    "sub": "106",
+    "passive": null,
+    "breakLimit": "6|rare"
+  },
+  "754": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": true,
+    "classLimit": "attacker",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1001",
+    "breakLimit": "6|unique"
+  },
+  "755": {
+    "name": {
+      "en": "Talisman of Animosities",
+      "jp": "怨念宿せし呪具",
+      "kr": "원념 서린 주구",
+      "zh": "怨念之符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1002",
+    "breakLimit": "6|unique"
+  },
+  "756": {
+    "name": {
+      "en": "Heartunder's Blade",
+      "jp": "ハートアンダーブレード",
+      "kr": "하트언더블레이드",
+      "zh": "心下之刃"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1003",
+    "breakLimit": "6|unique"
+  },
+  "757": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1004",
+    "breakLimit": "6|unique"
+  },
+  "758": {
+    "name": {
+      "en": "Royal Stinger",
+      "jp": "ロイヤルスティンガー",
+      "kr": "로얄 스팅거",
+      "zh": "皇家刺客"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": true,
+    "classLimit": "priest",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1005",
+    "breakLimit": "6|unique"
+  },
+  "759": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": true,
+    "classLimit": "attacker",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1006",
+    "breakLimit": "6|unique"
+  },
+  "760": {
+    "name": {
+      "en": "Force Field Generator",
+      "jp": "フォースフィールドジェネレーター",
+      "kr": "포스필드 제너레이터",
+      "zh": "力场生成器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1007",
+    "breakLimit": "6|unique"
+  },
+  "761": {
+    "name": {
+      "en": "Rampaging Caracal",
+      "jp": "飛び跳ねるカラカル",
+      "kr": "날뛰는 카라칼",
+      "zh": "狂暴野猫"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1008",
+    "breakLimit": "6|unique"
+  },
+  "762": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1009",
+    "breakLimit": "6|unique"
+  },
+  "763": {
+    "name": {
+      "en": "Emblem of Dominance",
+      "jp": "最強の象徴",
+      "kr": "최강의 상징",
+      "zh": "最强的象征"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": true,
+    "classLimit": "priest",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1010",
+    "breakLimit": "6|unique"
+  },
+  "764": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": true,
+    "classLimit": "attacker",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1011",
+    "breakLimit": "6|unique"
+  },
+  "765": {
+    "name": {
+      "en": "Token of the Supreme Witch",
+      "jp": "大魔女の証",
+      "kr": "대마녀의 증표",
+      "zh": "大魔女的信物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1012",
+    "breakLimit": "6|unique"
+  },
+  "766": {
+    "name": {
+      "en": "Meteor Mashers",
+      "jp": "貫く流星",
+      "kr": "꿰뚫는 유성",
+      "zh": "穿透流星"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1013",
+    "breakLimit": "6|unique"
+  },
+  "767": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1014",
+    "breakLimit": "6|unique"
+  },
+  "768": {
+    "name": {
+      "en": "Iron Messiah",
+      "jp": "鋼鉄の救世主",
+      "kr": "강철의 구세주",
+      "zh": "钢铁救世主"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": true,
+    "classLimit": "priest",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1015",
+    "breakLimit": "6|unique"
+  },
+  "769": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": true,
+    "classLimit": "attacker",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1016",
+    "breakLimit": "6|unique"
+  },
+  "770": {
+    "name": {
+      "en": "God Hand Crush",
+      "jp": "ゴッドハンドクラッシュ",
+      "kr": "갓 핸드 크러쉬",
+      "zh": "神拳粉碎"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1017",
+    "breakLimit": "6|unique"
+  },
+  "771": {
+    "name": {
+      "en": "Legacy of the Dream",
+      "jp": "ドリームレガシー",
+      "kr": "꿈의 유산",
+      "zh": "神梦遗礼"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": true,
+    "classLimit": "priest",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1018",
+    "breakLimit": "6|unique"
+  },
+  "772": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1019",
+    "breakLimit": "6|unique"
+  },
+  "773": {
+    "name": {
+      "en": "Barrage of Truth",
+      "jp": "真・貫突スラッシャー",
+      "kr": "진리의 맹공",
+      "zh": "真理的猛攻"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1020",
+    "breakLimit": "6|unique"
+  },
+  "774": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": true,
+    "classLimit": "attacker",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1021",
+    "breakLimit": "6|unique"
+  },
+  "775": {
+    "name": {
+      "en": "Exquisite Death",
+      "jp": "エクスクィジット・デスブレード",
+      "kr": "정교한 죽음",
+      "zh": "精妙之死"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1022",
+    "breakLimit": "6|unique"
+  },
+  "776": {
+    "name": {
+      "en": "Immortal Pride",
+      "jp": "プライド・オブ・イモータル",
+      "kr": "프라이드 of 이모탈",
+      "zh": "不朽之血"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": true,
+    "classLimit": "priest",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1023",
+    "breakLimit": "6|unique"
+  },
+  "777": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1024",
+    "breakLimit": "6|unique"
+  },
+  "778": {
+    "name": {
+      "en": "Fierce Soloist",
+      "jp": "フィアス・ソリスター",
+      "kr": "맹렬한 독주가",
+      "zh": "猛烈的独奏家"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1025",
+    "breakLimit": "6|unique"
+  },
+  "779": {
+    "name": {
+      "en": "Ether Blade",
+      "jp": "エーテルブレイド",
+      "kr": "에테르 블레이드",
+      "zh": "以太之剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["29", "1065"],
+    "sub": "106",
+    "passive": null,
+    "breakLimit": "6|unique"
+  },
+  "780": {
+    "name": {
+      "en": "Adventurer's Sword",
+      "jp": "冒険者の剣",
+      "kr": "모험가의 검",
+      "zh": "冒险家之剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1027",
+    "breakLimit": "6|unique"
+  },
+  "781": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Weapon_01",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1028",
+    "breakLimit": "6|unique"
+  },
+  "782": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1029",
+    "breakLimit": "6|unique"
+  },
+  "783": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1030",
+    "breakLimit": "6|unique"
+  },
+  "784": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage_IR_01",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1031",
+    "breakLimit": "6|unique"
+  },
+  "785": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest_IR_01",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1032",
+    "breakLimit": "6|unique"
+  },
+  "786": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Weapon_02",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1033",
+    "breakLimit": "6|unique"
+  },
+  "787": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_02",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1034",
+    "breakLimit": "6|unique"
+  },
+  "788": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger_IR_02",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1035",
+    "breakLimit": "6|unique"
+  },
+  "789": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1036",
+    "breakLimit": "6|unique"
+  },
+  "790": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest_IR_02",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passive": "1037",
+    "breakLimit": "6|unique"
+  },
+  "92001": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1001",
+    "breakLimit": "6|unique"
+  },
+  "92002": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1001",
+    "breakLimit": "6|unique"
+  },
+  "92003": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1001",
+    "breakLimit": "6|unique"
+  },
+  "92011": {
+    "name": {
+      "en": "Talisman of Animosities",
+      "jp": "怨念宿せし呪具",
+      "kr": "원념 서린 주구",
+      "zh": "怨念之符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1002",
+    "breakLimit": "6|unique"
+  },
+  "92012": {
+    "name": {
+      "en": "Talisman of Animosities",
+      "jp": "怨念宿せし呪具",
+      "kr": "원념 서린 주구",
+      "zh": "怨念之符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1002",
+    "breakLimit": "6|unique"
+  },
+  "92013": {
+    "name": {
+      "en": "Talisman of Animosities",
+      "jp": "怨念宿せし呪具",
+      "kr": "원념 서린 주구",
+      "zh": "怨念之符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1002",
+    "breakLimit": "6|unique"
+  },
+  "92021": {
+    "name": {
+      "en": "Heartunder's Blade",
+      "jp": "ハートアンダーブレード",
+      "kr": "하트언더블레이드",
+      "zh": "心下之刃"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1003",
+    "breakLimit": "6|unique"
+  },
+  "92022": {
+    "name": {
+      "en": "Heartunder's Blade",
+      "jp": "ハートアンダーブレード",
+      "kr": "하트언더블레이드",
+      "zh": "心下之刃"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1003",
+    "breakLimit": "6|unique"
+  },
+  "92023": {
+    "name": {
+      "en": "Heartunder's Blade",
+      "jp": "ハートアンダーブレード",
+      "kr": "하트언더블레이드",
+      "zh": "心下之刃"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1003",
+    "breakLimit": "6|unique"
+  },
+  "92031": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1004",
+    "breakLimit": "6|unique"
+  },
+  "92032": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1004",
+    "breakLimit": "6|unique"
+  },
+  "92033": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1004",
+    "breakLimit": "6|unique"
+  },
+  "92041": {
+    "name": {
+      "en": "Royal Stinger",
+      "jp": "ロイヤルスティンガー",
+      "kr": "로얄 스팅거",
+      "zh": "皇家刺客"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1005",
+    "breakLimit": "6|unique"
+  },
+  "92042": {
+    "name": {
+      "en": "Royal Stinger",
+      "jp": "ロイヤルスティンガー",
+      "kr": "로얄 스팅거",
+      "zh": "皇家刺客"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1005",
+    "breakLimit": "6|unique"
+  },
+  "92043": {
+    "name": {
+      "en": "Royal Stinger",
+      "jp": "ロイヤルスティンガー",
+      "kr": "로얄 스팅거",
+      "zh": "皇家刺客"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1005",
+    "breakLimit": "6|unique"
+  },
+  "92051": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1006",
+    "breakLimit": "6|unique"
+  },
+  "92052": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1006",
+    "breakLimit": "6|unique"
+  },
+  "92053": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1006",
+    "breakLimit": "6|unique"
+  },
+  "92061": {
+    "name": {
+      "en": "Force Field Generator",
+      "jp": "フォースフィールドジェネレーター",
+      "kr": "포스필드 제너레이터",
+      "zh": "力场生成器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1007",
+    "breakLimit": "6|unique"
+  },
+  "92062": {
+    "name": {
+      "en": "Force Field Generator",
+      "jp": "フォースフィールドジェネレーター",
+      "kr": "포스필드 제너레이터",
+      "zh": "力场生成器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1007",
+    "breakLimit": "6|unique"
+  },
+  "92063": {
+    "name": {
+      "en": "Force Field Generator",
+      "jp": "フォースフィールドジェネレーター",
+      "kr": "포스필드 제너레이터",
+      "zh": "力场生成器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1007",
+    "breakLimit": "6|unique"
+  },
+  "92071": {
+    "name": {
+      "en": "Rampaging Caracal",
+      "jp": "飛び跳ねるカラカル",
+      "kr": "날뛰는 카라칼",
+      "zh": "狂暴野猫"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1008",
+    "breakLimit": "6|unique"
+  },
+  "92072": {
+    "name": {
+      "en": "Rampaging Caracal",
+      "jp": "飛び跳ねるカラカル",
+      "kr": "날뛰는 카라칼",
+      "zh": "狂暴野猫"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1008",
+    "breakLimit": "6|unique"
+  },
+  "92073": {
+    "name": {
+      "en": "Rampaging Caracal",
+      "jp": "飛び跳ねるカラカル",
+      "kr": "날뛰는 카라칼",
+      "zh": "狂暴野猫"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1008",
+    "breakLimit": "6|unique"
+  },
+  "92081": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1009",
+    "breakLimit": "6|unique"
+  },
+  "92082": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1009",
+    "breakLimit": "6|unique"
+  },
+  "92083": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1009",
+    "breakLimit": "6|unique"
+  },
+  "92091": {
+    "name": {
+      "en": "Emblem of Dominance",
+      "jp": "最強の象徴",
+      "kr": "최강의 상징",
+      "zh": "最强的象征"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1010",
+    "breakLimit": "6|unique"
+  },
+  "92092": {
+    "name": {
+      "en": "Emblem of Dominance",
+      "jp": "最強の象徴",
+      "kr": "최강의 상징",
+      "zh": "最强的象征"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1010",
+    "breakLimit": "6|unique"
+  },
+  "92093": {
+    "name": {
+      "en": "Emblem of Dominance",
+      "jp": "最強の象徴",
+      "kr": "최강의 상징",
+      "zh": "最强的象征"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1010",
+    "breakLimit": "6|unique"
+  },
+  "92101": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1011",
+    "breakLimit": "6|unique"
+  },
+  "92102": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1011",
+    "breakLimit": "6|unique"
+  },
+  "92103": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1011",
+    "breakLimit": "6|unique"
+  },
+  "92111": {
+    "name": {
+      "en": "Token of the Supreme Witch",
+      "jp": "大魔女の証",
+      "kr": "대마녀의 증표",
+      "zh": "大魔女的信物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1012",
+    "breakLimit": "6|unique"
+  },
+  "92112": {
+    "name": {
+      "en": "Token of the Supreme Witch",
+      "jp": "大魔女の証",
+      "kr": "대마녀의 증표",
+      "zh": "大魔女的信物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1012",
+    "breakLimit": "6|unique"
+  },
+  "92113": {
+    "name": {
+      "en": "Token of the Supreme Witch",
+      "jp": "大魔女の証",
+      "kr": "대마녀의 증표",
+      "zh": "大魔女的信物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1012",
+    "breakLimit": "6|unique"
+  },
+  "92121": {
+    "name": {
+      "en": "Meteor Mashers",
+      "jp": "貫く流星",
+      "kr": "꿰뚫는 유성",
+      "zh": "穿透流星"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1013",
+    "breakLimit": "6|unique"
+  },
+  "92122": {
+    "name": {
+      "en": "Meteor Mashers",
+      "jp": "貫く流星",
+      "kr": "꿰뚫는 유성",
+      "zh": "穿透流星"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1013",
+    "breakLimit": "6|unique"
+  },
+  "92123": {
+    "name": {
+      "en": "Meteor Mashers",
+      "jp": "貫く流星",
+      "kr": "꿰뚫는 유성",
+      "zh": "穿透流星"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1013",
+    "breakLimit": "6|unique"
+  },
+  "92131": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1014",
+    "breakLimit": "6|unique"
+  },
+  "92132": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1014",
+    "breakLimit": "6|unique"
+  },
+  "92133": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1014",
+    "breakLimit": "6|unique"
+  },
+  "92141": {
+    "name": {
+      "en": "Iron Messiah",
+      "jp": "鋼鉄の救世主",
+      "kr": "강철의 구세주",
+      "zh": "钢铁救世主"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1015",
+    "breakLimit": "6|unique"
+  },
+  "92142": {
+    "name": {
+      "en": "Iron Messiah",
+      "jp": "鋼鉄の救世主",
+      "kr": "강철의 구세주",
+      "zh": "钢铁救世主"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1015",
+    "breakLimit": "6|unique"
+  },
+  "92143": {
+    "name": {
+      "en": "Iron Messiah",
+      "jp": "鋼鉄の救世主",
+      "kr": "강철의 구세주",
+      "zh": "钢铁救世主"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1015",
+    "breakLimit": "6|unique"
+  },
+  "92151": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1016",
+    "breakLimit": "6|unique"
+  },
+  "92152": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1016",
+    "breakLimit": "6|unique"
+  },
+  "92153": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1016",
+    "breakLimit": "6|unique"
+  },
+  "92161": {
+    "name": {
+      "en": "God Hand Crush",
+      "jp": "ゴッドハンドクラッシュ",
+      "kr": "갓 핸드 크러쉬",
+      "zh": "神拳粉碎"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1017",
+    "breakLimit": "6|unique"
+  },
+  "92162": {
+    "name": {
+      "en": "God Hand Crush",
+      "jp": "ゴッドハンドクラッシュ",
+      "kr": "갓 핸드 크러쉬",
+      "zh": "神拳粉碎"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1017",
+    "breakLimit": "6|unique"
+  },
+  "92163": {
+    "name": {
+      "en": "God Hand Crush",
+      "jp": "ゴッドハンドクラッシュ",
+      "kr": "갓 핸드 크러쉬",
+      "zh": "神拳粉碎"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1017",
+    "breakLimit": "6|unique"
+  },
+  "92171": {
+    "name": {
+      "en": "Barrage of Truth",
+      "jp": "真・貫突スラッシャー",
+      "kr": "진리의 맹공",
+      "zh": "真理的猛攻"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1020",
+    "breakLimit": "6|unique"
+  },
+  "92172": {
+    "name": {
+      "en": "Barrage of Truth",
+      "jp": "真・貫突スラッシャー",
+      "kr": "진리의 맹공",
+      "zh": "真理的猛攻"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1020",
+    "breakLimit": "6|unique"
+  },
+  "92173": {
+    "name": {
+      "en": "Barrage of Truth",
+      "jp": "真・貫突スラッシャー",
+      "kr": "진리의 맹공",
+      "zh": "真理的猛攻"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1020",
+    "breakLimit": "6|unique"
+  },
+  "92181": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1019",
+    "breakLimit": "6|unique"
+  },
+  "92182": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1019",
+    "breakLimit": "6|unique"
+  },
+  "92183": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1019",
+    "breakLimit": "6|unique"
+  },
+  "92191": {
+    "name": {
+      "en": "Legacy of the Dream",
+      "jp": "ドリームレガシー",
+      "kr": "꿈의 유산",
+      "zh": "神梦遗礼"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1018",
+    "breakLimit": "6|unique"
+  },
+  "92192": {
+    "name": {
+      "en": "Legacy of the Dream",
+      "jp": "ドリームレガシー",
+      "kr": "꿈의 유산",
+      "zh": "神梦遗礼"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1018",
+    "breakLimit": "6|unique"
+  },
+  "92193": {
+    "name": {
+      "en": "Legacy of the Dream",
+      "jp": "ドリームレガシー",
+      "kr": "꿈의 유산",
+      "zh": "神梦遗礼"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1018",
+    "breakLimit": "6|unique"
+  },
+  "92201": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1021",
+    "breakLimit": "6|unique"
+  },
+  "92202": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1021",
+    "breakLimit": "6|unique"
+  },
+  "92203": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1021",
+    "breakLimit": "6|unique"
+  },
+  "92211": {
+    "name": {
+      "en": "Exquisite Death",
+      "jp": "エクスクィジット・デスブレード",
+      "kr": "정교한 죽음",
+      "zh": "精妙之死"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1022",
+    "breakLimit": "6|unique"
+  },
+  "92212": {
+    "name": {
+      "en": "Exquisite Death",
+      "jp": "エクスクィジット・デスブレード",
+      "kr": "정교한 죽음",
+      "zh": "精妙之死"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1022",
+    "breakLimit": "6|unique"
+  },
+  "92213": {
+    "name": {
+      "en": "Exquisite Death",
+      "jp": "エクスクィジット・デスブレード",
+      "kr": "정교한 죽음",
+      "zh": "精妙之死"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1022",
+    "breakLimit": "6|unique"
+  },
+  "92221": {
+    "name": {
+      "en": "Fierce Soloist",
+      "jp": "フィアス・ソリスター",
+      "kr": "맹렬한 독주가",
+      "zh": "猛烈的独奏家"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1025",
+    "breakLimit": "6|unique"
+  },
+  "92222": {
+    "name": {
+      "en": "Fierce Soloist",
+      "jp": "フィアス・ソリスター",
+      "kr": "맹렬한 독주가",
+      "zh": "猛烈的独奏家"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1025",
+    "breakLimit": "6|unique"
+  },
+  "92223": {
+    "name": {
+      "en": "Fierce Soloist",
+      "jp": "フィアス・ソリスター",
+      "kr": "맹렬한 독주가",
+      "zh": "猛烈的独奏家"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1025",
+    "breakLimit": "6|unique"
+  },
+  "92231": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1024",
+    "breakLimit": "6|unique"
+  },
+  "92232": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1024",
+    "breakLimit": "6|unique"
+  },
+  "92233": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1024",
+    "breakLimit": "6|unique"
+  },
+  "92241": {
+    "name": {
+      "en": "Immortal Pride",
+      "jp": "プライド・オブ・イモータル",
+      "kr": "프라이드 of 이모탈",
+      "zh": "不朽之血"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1023",
+    "breakLimit": "6|unique"
+  },
+  "92242": {
+    "name": {
+      "en": "Immortal Pride",
+      "jp": "プライド・オブ・イモータル",
+      "kr": "프라이드 of 이모탈",
+      "zh": "不朽之血"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1023",
+    "breakLimit": "6|unique"
+  },
+  "92243": {
+    "name": {
+      "en": "Immortal Pride",
+      "jp": "プライド・オブ・イモータル",
+      "kr": "프라이드 of 이모탈",
+      "zh": "不朽之血"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1023",
+    "breakLimit": "6|unique"
+  },
+  "92251": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Weapon_01",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1028",
+    "breakLimit": "6|unique"
+  },
+  "92252": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Weapon_01",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1028",
+    "breakLimit": "6|unique"
+  },
+  "92253": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Weapon_01",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1028",
+    "breakLimit": "6|unique"
+  },
+  "92261": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1029",
+    "breakLimit": "6|unique"
+  },
+  "92262": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1029",
+    "breakLimit": "6|unique"
+  },
+  "92263": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1029",
+    "breakLimit": "6|unique"
+  },
+  "92271": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1030",
+    "breakLimit": "6|unique"
+  },
+  "92272": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1030",
+    "breakLimit": "6|unique"
+  },
+  "92273": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1030",
+    "breakLimit": "6|unique"
+  },
+  "92281": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage_IR_01",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1031",
+    "breakLimit": "6|unique"
+  },
+  "92282": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage_IR_01",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1031",
+    "breakLimit": "6|unique"
+  },
+  "92283": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage_IR_01",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1031",
+    "breakLimit": "6|unique"
+  },
+  "92291": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest_IR_01",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1032",
+    "breakLimit": "6|unique"
+  },
+  "92292": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest_IR_01",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1032",
+    "breakLimit": "6|unique"
+  },
+  "92293": {
+    "name": {
+      "en": "Briareos's Recklessness",
+      "jp": "ブリアレオスの蛮勇",
+      "kr": "브리아레오스의 만용",
+      "zh": "布里亚雷奥斯的傲慢"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest_IR_01",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1032",
+    "breakLimit": "6|unique"
+  },
+  "92301": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Weapon_02",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1033",
+    "breakLimit": "6|unique"
+  },
+  "92302": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Weapon_02",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1033",
+    "breakLimit": "6|unique"
+  },
+  "92303": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Weapon_02",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1033",
+    "breakLimit": "6|unique"
+  },
+  "92311": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_02",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1034",
+    "breakLimit": "6|unique"
+  },
+  "92312": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_02",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1034",
+    "breakLimit": "6|unique"
+  },
+  "92313": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Defender_IR_02",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1034",
+    "breakLimit": "6|unique"
+  },
+  "92321": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger_IR_02",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1035",
+    "breakLimit": "6|unique"
+  },
+  "92322": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger_IR_02",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1035",
+    "breakLimit": "6|unique"
+  },
+  "92323": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Ranger_IR_02",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1035",
+    "breakLimit": "6|unique"
+  },
+  "92331": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1036",
+    "breakLimit": "6|unique"
+  },
+  "92332": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1036",
+    "breakLimit": "6|unique"
+  },
+  "92333": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1036",
+    "breakLimit": "6|unique"
+  },
+  "92341": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest_IR_02",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11001"],
+    "sub": "11121",
+    "passive": "1037",
+    "breakLimit": "6|unique"
+  },
+  "92342": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest_IR_02",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11002"],
+    "sub": "11122",
+    "passive": "1037",
+    "breakLimit": "6|unique"
+  },
+  "92343": {
+    "name": {
+      "en": "Gorgon's Wrath",
+      "jp": "ゴルゴンの憎悪",
+      "kr": "고르곤의 증오",
+      "zh": "戈尔贡的憎恶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Priest_IR_02",
+    "craftable": false,
+    "classLimit": "priest",
+    "main": ["24", "11003"],
+    "sub": "11123",
+    "passive": "1037",
+    "breakLimit": "6|unique"
+  },
+  "93351": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1001",
+    "breakLimit": "6|unique"
+  },
+  "93352": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1001",
+    "breakLimit": "6|unique"
+  },
+  "93353": {
+    "name": {
+      "en": "Surefire Greatsword",
+      "jp": "アブソートグレートソード",
+      "kr": "필중의 대검",
+      "zh": "必中大剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1001",
+    "breakLimit": "6|unique"
+  },
+  "93361": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1006",
+    "breakLimit": "6|unique"
+  },
+  "93362": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1006",
+    "breakLimit": "6|unique"
+  },
+  "93363": {
+    "name": {
+      "en": "Twin B",
+      "jp": "ツインB",
+      "kr": "트윈 B",
+      "zh": "双生B"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1006",
+    "breakLimit": "6|unique"
+  },
+  "93371": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1011",
+    "breakLimit": "6|unique"
+  },
+  "93372": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1011",
+    "breakLimit": "6|unique"
+  },
+  "93373": {
+    "name": {
+      "en": "Violent Sledgehammer",
+      "jp": "バイオレンススレッジ",
+      "kr": "바이올런스 슬레지",
+      "zh": "暴力巨锤"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1011",
+    "breakLimit": "6|unique"
+  },
+  "93381": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1016",
+    "breakLimit": "6|unique"
+  },
+  "93382": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1016",
+    "breakLimit": "6|unique"
+  },
+  "93383": {
+    "name": {
+      "en": "Snow-white Embrace",
+      "jp": "エンジェルエンブレイス",
+      "kr": "순백의 포옹",
+      "zh": "纯白之拥"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1016",
+    "breakLimit": "6|unique"
+  },
+  "93391": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1021",
+    "breakLimit": "6|unique"
+  },
+  "93392": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1021",
+    "breakLimit": "6|unique"
+  },
+  "93393": {
+    "name": {
+      "en": "Phantasm Necrosis",
+      "jp": "ムゲン・ネクロシス",
+      "kr": "몽환의 네크로시스",
+      "zh": "梦幻死亡"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "attacker",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1021",
+    "breakLimit": "6|unique"
+  },
+  "93451": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1004",
+    "breakLimit": "6|unique"
+  },
+  "93452": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1004",
+    "breakLimit": "6|unique"
+  },
+  "93453": {
+    "name": {
+      "en": "Fire Grimoire",
+      "jp": "フレイムグリモワール",
+      "kr": "파이어 그리모어",
+      "zh": "炎之魔导书"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1004",
+    "breakLimit": "6|unique"
+  },
+  "93461": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1009",
+    "breakLimit": "6|unique"
+  },
+  "93462": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1009",
+    "breakLimit": "6|unique"
+  },
+  "93463": {
+    "name": {
+      "en": "Noblewoman's Guile",
+      "jp": "貴婦人の趣味",
+      "kr": "귀부인의 취미",
+      "zh": "贵妇的爱好"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1009",
+    "breakLimit": "6|unique"
+  },
+  "93471": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1014",
+    "breakLimit": "6|unique"
+  },
+  "93472": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1014",
+    "breakLimit": "6|unique"
+  },
+  "93473": {
+    "name": {
+      "en": "Thumping Odyssey",
+      "jp": "マグナムオデッセイ",
+      "kr": "매그넘 오디세이",
+      "zh": "麦格农奥德赛"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1014",
+    "breakLimit": "6|unique"
+  },
+  "93481": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1019",
+    "breakLimit": "6|unique"
+  },
+  "93482": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1019",
+    "breakLimit": "6|unique"
+  },
+  "93483": {
+    "name": {
+      "en": "Last Hope",
+      "jp": "イチルノゾミ",
+      "kr": "라스트 호프",
+      "zh": "最终希望"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1019",
+    "breakLimit": "6|unique"
+  },
+  "93491": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11001"],
+    "sub": "11243",
+    "passive": "1024",
+    "breakLimit": "6|unique"
+  },
+  "93492": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11002"],
+    "sub": "11243",
+    "passive": "1024",
+    "breakLimit": "6|unique"
+  },
+  "93493": {
+    "name": {
+      "en": "Sublime Melody",
+      "jp": "神々の旋律",
+      "kr": "형용할 수 없는 선율",
+      "zh": "不可名状的旋律"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "11003"],
+    "sub": "11243",
+    "passive": "1024",
+    "breakLimit": "6|unique"
+  }
+}

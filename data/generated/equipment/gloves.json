@@ -1,0 +1,8658 @@
+{
+  "7001": {
+    "name": {
+      "en": "Ordinary Gloves of Attack",
+      "jp": "攻撃の普及型ガントレット",
+      "kr": "공격의 보급형 장갑",
+      "zh": "普通攻击手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "1"
+  },
+  "7002": {
+    "name": {
+      "en": "Fine Gloves of Attack",
+      "jp": "攻撃の高級型ガントレット",
+      "kr": "공격의 고급형 장갑",
+      "zh": "上等攻击手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "1"
+  },
+  "7003": {
+    "name": {
+      "en": "Steel Gloves of Attack",
+      "jp": "攻撃の鋼鉄ガントレット",
+      "kr": "공격의 강철 장갑",
+      "zh": "钢铁攻击手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "1"
+  },
+  "7004": {
+    "name": {
+      "en": "Etheric Gloves of Attack",
+      "jp": "攻撃のエーテルガントレット",
+      "kr": "공격의 에테르 장갑",
+      "zh": "以太攻击手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "1"
+  },
+  "7005": {
+    "name": {
+      "en": "Ordinary Gloves of Attack",
+      "jp": "攻撃の普及型ガントレット",
+      "kr": "공격의 보급형 장갑",
+      "zh": "普通攻击手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "1"
+  },
+  "7006": {
+    "name": {
+      "en": "Fine Gloves of Attack",
+      "jp": "攻撃の高級型ガントレット",
+      "kr": "공격의 고급형 장갑",
+      "zh": "上等攻击手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "1"
+  },
+  "7007": {
+    "name": {
+      "en": "Steel Gloves of Attack",
+      "jp": "攻撃の鋼鉄ガントレット",
+      "kr": "공격의 강철 장갑",
+      "zh": "钢铁攻击手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "1"
+  },
+  "7008": {
+    "name": {
+      "en": "Etheric Gloves of Attack",
+      "jp": "攻撃のエーテルガントレット",
+      "kr": "공격의 에테르 장갑",
+      "zh": "以太攻击手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "1"
+  },
+  "7009": {
+    "name": {
+      "en": "Ordinary Gloves of Attack",
+      "jp": "攻撃の普及型ガントレット",
+      "kr": "공격의 보급형 장갑",
+      "zh": "普通攻击手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "1"
+  },
+  "7010": {
+    "name": {
+      "en": "Fine Gloves of Attack",
+      "jp": "攻撃の高級型ガントレット",
+      "kr": "공격의 고급형 장갑",
+      "zh": "上等攻击手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "1"
+  },
+  "7011": {
+    "name": {
+      "en": "Steel Gloves of Attack",
+      "jp": "攻撃の鋼鉄ガントレット",
+      "kr": "공격의 강철 장갑",
+      "zh": "钢铁攻击手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "1"
+  },
+  "7012": {
+    "name": {
+      "en": "Etheric Gloves of Attack",
+      "jp": "攻撃のエーテルガントレット",
+      "kr": "공격의 에테르 장갑",
+      "zh": "以太攻击手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "1"
+  },
+  "7013": {
+    "name": {
+      "en": "Ordinary Gloves of Attack",
+      "jp": "攻撃の普及型ガントレット",
+      "kr": "공격의 보급형 장갑",
+      "zh": "普通攻击手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "1"
+  },
+  "7014": {
+    "name": {
+      "en": "Fine Gloves of Attack",
+      "jp": "攻撃の高級型ガントレット",
+      "kr": "공격의 고급형 장갑",
+      "zh": "上等攻击手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "1"
+  },
+  "7015": {
+    "name": {
+      "en": "Steel Gloves of Attack",
+      "jp": "攻撃の鋼鉄ガントレット",
+      "kr": "공격의 강철 장갑",
+      "zh": "钢铁攻击手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "1"
+  },
+  "7016": {
+    "name": {
+      "en": "Etheric Gloves of Attack",
+      "jp": "攻撃のエーテルガントレット",
+      "kr": "공격의 에테르 장갑",
+      "zh": "以太攻击手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "1"
+  },
+  "7017": {
+    "name": {
+      "en": "Ordinary Gloves of Attack",
+      "jp": "攻撃の普及型ガントレット",
+      "kr": "공격의 보급형 장갑",
+      "zh": "普通攻击手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "1"
+  },
+  "7018": {
+    "name": {
+      "en": "Fine Gloves of Attack",
+      "jp": "攻撃の高級型ガントレット",
+      "kr": "공격의 고급형 장갑",
+      "zh": "上等攻击手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "1"
+  },
+  "7019": {
+    "name": {
+      "en": "Steel Gloves of Attack",
+      "jp": "攻撃の鋼鉄ガントレット",
+      "kr": "공격의 강철 장갑",
+      "zh": "钢铁攻击手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "1"
+  },
+  "7020": {
+    "name": {
+      "en": "Etheric Gloves of Attack",
+      "jp": "攻撃のエーテルガントレット",
+      "kr": "공격의 에테르 장갑",
+      "zh": "以太攻击手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "1"
+  },
+  "7021": {
+    "name": {
+      "en": "Ordinary Gloves of Attack",
+      "jp": "攻撃の普及型ガントレット",
+      "kr": "공격의 보급형 장갑",
+      "zh": "普通攻击手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "1"
+  },
+  "7022": {
+    "name": {
+      "en": "Fine Gloves of Attack",
+      "jp": "攻撃の高級型ガントレット",
+      "kr": "공격의 고급형 장갑",
+      "zh": "上等攻击手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "1"
+  },
+  "7023": {
+    "name": {
+      "en": "Steel Gloves of Attack",
+      "jp": "攻撃の鋼鉄ガントレット",
+      "kr": "공격의 강철 장갑",
+      "zh": "钢铁攻击手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "1"
+  },
+  "7024": {
+    "name": {
+      "en": "Etheric Gloves of Attack",
+      "jp": "攻撃のエーテルガントレット",
+      "kr": "공격의 에테르 장갑",
+      "zh": "以太攻击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "7025": {
+    "name": {
+      "en": "Ordinary Gloves of Defense",
+      "jp": "防御の普及型ガントレット",
+      "kr": "방어의 보급형 장갑",
+      "zh": "普通防御手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "2"
+  },
+  "7026": {
+    "name": {
+      "en": "Fine Gloves of Defense",
+      "jp": "防御の高級型ガントレット",
+      "kr": "방어의 고급형 장갑",
+      "zh": "上等防御手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "2"
+  },
+  "7027": {
+    "name": {
+      "en": "Steel Gloves of Defense",
+      "jp": "防御の鋼鉄ガントレット",
+      "kr": "방어의 강철 장갑",
+      "zh": "钢铁防御手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "2"
+  },
+  "7028": {
+    "name": {
+      "en": "Etheric Gloves of Defense",
+      "jp": "防御のエーテルガントレット",
+      "kr": "방어의 에테르 장갑",
+      "zh": "以太防御手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "2"
+  },
+  "7029": {
+    "name": {
+      "en": "Ordinary Gloves of Defense",
+      "jp": "防御の普及型ガントレット",
+      "kr": "방어의 보급형 장갑",
+      "zh": "普通防御手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "2"
+  },
+  "7030": {
+    "name": {
+      "en": "Fine Gloves of Defense",
+      "jp": "防御の高級型ガントレット",
+      "kr": "방어의 고급형 장갑",
+      "zh": "上等防御手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "2"
+  },
+  "7031": {
+    "name": {
+      "en": "Steel Gloves of Defense",
+      "jp": "防御の鋼鉄ガントレット",
+      "kr": "방어의 강철 장갑",
+      "zh": "钢铁防御手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "2"
+  },
+  "7032": {
+    "name": {
+      "en": "Etheric Gloves of Defense",
+      "jp": "防御のエーテルガントレット",
+      "kr": "방어의 에테르 장갑",
+      "zh": "以太防御手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "2"
+  },
+  "7033": {
+    "name": {
+      "en": "Ordinary Gloves of Defense",
+      "jp": "防御の普及型ガントレット",
+      "kr": "방어의 보급형 장갑",
+      "zh": "普通防御手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "2"
+  },
+  "7034": {
+    "name": {
+      "en": "Fine Gloves of Defense",
+      "jp": "防御の高級型ガントレット",
+      "kr": "방어의 고급형 장갑",
+      "zh": "上等防御手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "2"
+  },
+  "7035": {
+    "name": {
+      "en": "Steel Gloves of Defense",
+      "jp": "防御の鋼鉄ガントレット",
+      "kr": "방어의 강철 장갑",
+      "zh": "钢铁防御手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "2"
+  },
+  "7036": {
+    "name": {
+      "en": "Etheric Gloves of Defense",
+      "jp": "防御のエーテルガントレット",
+      "kr": "방어의 에테르 장갑",
+      "zh": "以太防御手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "2"
+  },
+  "7037": {
+    "name": {
+      "en": "Ordinary Gloves of Defense",
+      "jp": "防御の普及型ガントレット",
+      "kr": "방어의 보급형 장갑",
+      "zh": "普通防御手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "2"
+  },
+  "7038": {
+    "name": {
+      "en": "Fine Gloves of Defense",
+      "jp": "防御の高級型ガントレット",
+      "kr": "방어의 고급형 장갑",
+      "zh": "上等防御手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "2"
+  },
+  "7039": {
+    "name": {
+      "en": "Steel Gloves of Defense",
+      "jp": "防御の鋼鉄ガントレット",
+      "kr": "방어의 강철 장갑",
+      "zh": "钢铁防御手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "2"
+  },
+  "7040": {
+    "name": {
+      "en": "Etheric Gloves of Defense",
+      "jp": "防御のエーテルガントレット",
+      "kr": "방어의 에테르 장갑",
+      "zh": "以太防御手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "2"
+  },
+  "7041": {
+    "name": {
+      "en": "Ordinary Gloves of Defense",
+      "jp": "防御の普及型ガントレット",
+      "kr": "방어의 보급형 장갑",
+      "zh": "普通防御手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "2"
+  },
+  "7042": {
+    "name": {
+      "en": "Fine Gloves of Defense",
+      "jp": "防御の高級型ガントレット",
+      "kr": "방어의 고급형 장갑",
+      "zh": "上等防御手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "2"
+  },
+  "7043": {
+    "name": {
+      "en": "Steel Gloves of Defense",
+      "jp": "防御の鋼鉄ガントレット",
+      "kr": "방어의 강철 장갑",
+      "zh": "钢铁防御手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "2"
+  },
+  "7044": {
+    "name": {
+      "en": "Etheric Gloves of Defense",
+      "jp": "防御のエーテルガントレット",
+      "kr": "방어의 에테르 장갑",
+      "zh": "以太防御手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "2"
+  },
+  "7045": {
+    "name": {
+      "en": "Ordinary Gloves of Defense",
+      "jp": "防御の普及型ガントレット",
+      "kr": "방어의 보급형 장갑",
+      "zh": "普通防御手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "2"
+  },
+  "7046": {
+    "name": {
+      "en": "Fine Gloves of Defense",
+      "jp": "防御の高級型ガントレット",
+      "kr": "방어의 고급형 장갑",
+      "zh": "上等防御手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "2"
+  },
+  "7047": {
+    "name": {
+      "en": "Steel Gloves of Defense",
+      "jp": "防御の鋼鉄ガントレット",
+      "kr": "방어의 강철 장갑",
+      "zh": "钢铁防御手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "2"
+  },
+  "7048": {
+    "name": {
+      "en": "Etheric Gloves of Defense",
+      "jp": "防御のエーテルガントレット",
+      "kr": "방어의 에테르 장갑",
+      "zh": "以太防御手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "7049": {
+    "name": {
+      "en": "Ordinary Gloves of Life",
+      "jp": "生命の普及型ガントレット",
+      "kr": "생명의 보급형 장갑",
+      "zh": "普通生命手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "3"
+  },
+  "7050": {
+    "name": {
+      "en": "Fine Gloves of Life",
+      "jp": "生命の高級型ガントレット",
+      "kr": "생명의 고급형 장갑",
+      "zh": "上等生命手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "3"
+  },
+  "7051": {
+    "name": {
+      "en": "Steel Gloves of Life",
+      "jp": "生命の鋼鉄ガントレット",
+      "kr": "생명의 강철 장갑",
+      "zh": "钢铁生命手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "3"
+  },
+  "7052": {
+    "name": {
+      "en": "Etheric Gloves of Life",
+      "jp": "生命のエーテルガントレット",
+      "kr": "생명의 에테르 장갑",
+      "zh": "以太生命手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "3"
+  },
+  "7053": {
+    "name": {
+      "en": "Ordinary Gloves of Life",
+      "jp": "生命の普及型ガントレット",
+      "kr": "생명의 보급형 장갑",
+      "zh": "普通生命手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "3"
+  },
+  "7054": {
+    "name": {
+      "en": "Fine Gloves of Life",
+      "jp": "生命の高級型ガントレット",
+      "kr": "생명의 고급형 장갑",
+      "zh": "上等生命手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "3"
+  },
+  "7055": {
+    "name": {
+      "en": "Steel Gloves of Life",
+      "jp": "生命の鋼鉄ガントレット",
+      "kr": "생명의 강철 장갑",
+      "zh": "钢铁生命手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "3"
+  },
+  "7056": {
+    "name": {
+      "en": "Etheric Gloves of Life",
+      "jp": "生命のエーテルガントレット",
+      "kr": "생명의 에테르 장갑",
+      "zh": "以太生命手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "3"
+  },
+  "7057": {
+    "name": {
+      "en": "Ordinary Gloves of Life",
+      "jp": "生命の普及型ガントレット",
+      "kr": "생명의 보급형 장갑",
+      "zh": "普通生命手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "3"
+  },
+  "7058": {
+    "name": {
+      "en": "Fine Gloves of Life",
+      "jp": "生命の高級型ガントレット",
+      "kr": "생명의 고급형 장갑",
+      "zh": "上等生命手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "3"
+  },
+  "7059": {
+    "name": {
+      "en": "Steel Gloves of Life",
+      "jp": "生命の鋼鉄ガントレット",
+      "kr": "생명의 강철 장갑",
+      "zh": "钢铁生命手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "3"
+  },
+  "7060": {
+    "name": {
+      "en": "Etheric Gloves of Life",
+      "jp": "生命のエーテルガントレット",
+      "kr": "생명의 에테르 장갑",
+      "zh": "以太生命手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "3"
+  },
+  "7061": {
+    "name": {
+      "en": "Ordinary Gloves of Life",
+      "jp": "生命の普及型ガントレット",
+      "kr": "생명의 보급형 장갑",
+      "zh": "普通生命手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "3"
+  },
+  "7062": {
+    "name": {
+      "en": "Fine Gloves of Life",
+      "jp": "生命の高級型ガントレット",
+      "kr": "생명의 고급형 장갑",
+      "zh": "上等生命手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "3"
+  },
+  "7063": {
+    "name": {
+      "en": "Steel Gloves of Life",
+      "jp": "生命の鋼鉄ガントレット",
+      "kr": "생명의 강철 장갑",
+      "zh": "钢铁生命手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "3"
+  },
+  "7064": {
+    "name": {
+      "en": "Etheric Gloves of Life",
+      "jp": "生命のエーテルガントレット",
+      "kr": "생명의 에테르 장갑",
+      "zh": "以太生命手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "3"
+  },
+  "7065": {
+    "name": {
+      "en": "Ordinary Gloves of Life",
+      "jp": "生命の普及型ガントレット",
+      "kr": "생명의 보급형 장갑",
+      "zh": "普通生命手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "3"
+  },
+  "7066": {
+    "name": {
+      "en": "Fine Gloves of Life",
+      "jp": "生命の高級型ガントレット",
+      "kr": "생명의 고급형 장갑",
+      "zh": "上等生命手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "3"
+  },
+  "7067": {
+    "name": {
+      "en": "Steel Gloves of Life",
+      "jp": "生命の鋼鉄ガントレット",
+      "kr": "생명의 강철 장갑",
+      "zh": "钢铁生命手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "3"
+  },
+  "7068": {
+    "name": {
+      "en": "Etheric Gloves of Life",
+      "jp": "生命のエーテルガントレット",
+      "kr": "생명의 에테르 장갑",
+      "zh": "以太生命手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "3"
+  },
+  "7069": {
+    "name": {
+      "en": "Ordinary Gloves of Life",
+      "jp": "生命の普及型ガントレット",
+      "kr": "생명의 보급형 장갑",
+      "zh": "普通生命手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "3"
+  },
+  "7070": {
+    "name": {
+      "en": "Fine Gloves of Life",
+      "jp": "生命の高級型ガントレット",
+      "kr": "생명의 고급형 장갑",
+      "zh": "上等生命手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "3"
+  },
+  "7071": {
+    "name": {
+      "en": "Steel Gloves of Life",
+      "jp": "生命の鋼鉄ガントレット",
+      "kr": "생명의 강철 장갑",
+      "zh": "钢铁生命手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "3"
+  },
+  "7072": {
+    "name": {
+      "en": "Etheric Gloves of Life",
+      "jp": "生命のエーテルガントレット",
+      "kr": "생명의 에테르 장갑",
+      "zh": "以太生命手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "7073": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Hit",
+      "jp": "会心の普及型ガントレット",
+      "kr": "치명의 보급형 장갑",
+      "zh": "普通暴击手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "4"
+  },
+  "7074": {
+    "name": {
+      "en": "Fine Gloves of Critical Hit",
+      "jp": "会心の高級型ガントレット",
+      "kr": "치명의 고급형 장갑",
+      "zh": "上等暴击手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "4"
+  },
+  "7075": {
+    "name": {
+      "en": "Steel Gloves of Critical Hit",
+      "jp": "会心の鋼鉄ガントレット",
+      "kr": "치명의 강철 장갑",
+      "zh": "钢铁暴击手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "4"
+  },
+  "7076": {
+    "name": {
+      "en": "Etheric Gloves of Critical Hit",
+      "jp": "会心のエーテルガントレット",
+      "kr": "치명의 에테르 장갑",
+      "zh": "以太暴击手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "4"
+  },
+  "7077": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Hit",
+      "jp": "会心の普及型ガントレット",
+      "kr": "치명의 보급형 장갑",
+      "zh": "普通暴击手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "4"
+  },
+  "7078": {
+    "name": {
+      "en": "Fine Gloves of Critical Hit",
+      "jp": "会心の高級型ガントレット",
+      "kr": "치명의 고급형 장갑",
+      "zh": "上等暴击手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "4"
+  },
+  "7079": {
+    "name": {
+      "en": "Steel Gloves of Critical Hit",
+      "jp": "会心の鋼鉄ガントレット",
+      "kr": "치명의 강철 장갑",
+      "zh": "钢铁暴击手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "4"
+  },
+  "7080": {
+    "name": {
+      "en": "Etheric Gloves of Critical Hit",
+      "jp": "会心のエーテルガントレット",
+      "kr": "치명의 에테르 장갑",
+      "zh": "以太暴击手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "4"
+  },
+  "7081": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Hit",
+      "jp": "会心の普及型ガントレット",
+      "kr": "치명의 보급형 장갑",
+      "zh": "普通暴击手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "4"
+  },
+  "7082": {
+    "name": {
+      "en": "Fine Gloves of Critical Hit",
+      "jp": "会心の高級型ガントレット",
+      "kr": "치명의 고급형 장갑",
+      "zh": "上等暴击手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "4"
+  },
+  "7083": {
+    "name": {
+      "en": "Steel Gloves of Critical Hit",
+      "jp": "会心の鋼鉄ガントレット",
+      "kr": "치명의 강철 장갑",
+      "zh": "钢铁暴击手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "4"
+  },
+  "7084": {
+    "name": {
+      "en": "Etheric Gloves of Critical Hit",
+      "jp": "会心のエーテルガントレット",
+      "kr": "치명의 에테르 장갑",
+      "zh": "以太暴击手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "4"
+  },
+  "7085": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Hit",
+      "jp": "会心の普及型ガントレット",
+      "kr": "치명의 보급형 장갑",
+      "zh": "普通暴击手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "4"
+  },
+  "7086": {
+    "name": {
+      "en": "Fine Gloves of Critical Hit",
+      "jp": "会心の高級型ガントレット",
+      "kr": "치명의 고급형 장갑",
+      "zh": "上等暴击手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "4"
+  },
+  "7087": {
+    "name": {
+      "en": "Steel Gloves of Critical Hit",
+      "jp": "会心の鋼鉄ガントレット",
+      "kr": "치명의 강철 장갑",
+      "zh": "钢铁暴击手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "4"
+  },
+  "7088": {
+    "name": {
+      "en": "Etheric Gloves of Critical Hit",
+      "jp": "会心のエーテルガントレット",
+      "kr": "치명의 에테르 장갑",
+      "zh": "以太暴击手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "4"
+  },
+  "7089": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Hit",
+      "jp": "会心の普及型ガントレット",
+      "kr": "치명의 보급형 장갑",
+      "zh": "普通暴击手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "4"
+  },
+  "7090": {
+    "name": {
+      "en": "Fine Gloves of Critical Hit",
+      "jp": "会心の高級型ガントレット",
+      "kr": "치명의 고급형 장갑",
+      "zh": "上等暴击手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "4"
+  },
+  "7091": {
+    "name": {
+      "en": "Steel Gloves of Critical Hit",
+      "jp": "会心の鋼鉄ガントレット",
+      "kr": "치명의 강철 장갑",
+      "zh": "钢铁暴击手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "4"
+  },
+  "7092": {
+    "name": {
+      "en": "Etheric Gloves of Critical Hit",
+      "jp": "会心のエーテルガントレット",
+      "kr": "치명의 에테르 장갑",
+      "zh": "以太暴击手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "4"
+  },
+  "7093": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Hit",
+      "jp": "会心の普及型ガントレット",
+      "kr": "치명의 보급형 장갑",
+      "zh": "普通暴击手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "4"
+  },
+  "7094": {
+    "name": {
+      "en": "Fine Gloves of Critical Hit",
+      "jp": "会心の高級型ガントレット",
+      "kr": "치명의 고급형 장갑",
+      "zh": "上等暴击手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "4"
+  },
+  "7095": {
+    "name": {
+      "en": "Steel Gloves of Critical Hit",
+      "jp": "会心の鋼鉄ガントレット",
+      "kr": "치명의 강철 장갑",
+      "zh": "钢铁暴击手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "4"
+  },
+  "7096": {
+    "name": {
+      "en": "Etheric Gloves of Critical Hit",
+      "jp": "会心のエーテルガントレット",
+      "kr": "치명의 에테르 장갑",
+      "zh": "以太暴击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "7097": {
+    "name": {
+      "en": "Ordinary Gloves of Effectiveness",
+      "jp": "効果命中の普及型ガントレット",
+      "kr": "적중의 보급형 장갑",
+      "zh": "普通效果命中手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "5"
+  },
+  "7098": {
+    "name": {
+      "en": "Fine Gloves of Effectiveness",
+      "jp": "効果命中の高級型ガントレット",
+      "kr": "적중의 고급형 장갑",
+      "zh": "上等效果命中手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "5"
+  },
+  "7099": {
+    "name": {
+      "en": "Steel Gloves of Effectiveness",
+      "jp": "効果命中の鋼鉄ガントレット",
+      "kr": "적중의 강철 장갑",
+      "zh": "钢铁效果命中手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "5"
+  },
+  "7100": {
+    "name": {
+      "en": "Etheric Gloves of Effectiveness",
+      "jp": "効果命中のエーテルガントレット",
+      "kr": "적중의 에테르 장갑",
+      "zh": "以太效果命中手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "5"
+  },
+  "7101": {
+    "name": {
+      "en": "Ordinary Gloves of Effectiveness",
+      "jp": "効果命中の普及型ガントレット",
+      "kr": "적중의 보급형 장갑",
+      "zh": "普通效果命中手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "5"
+  },
+  "7102": {
+    "name": {
+      "en": "Fine Gloves of Effectiveness",
+      "jp": "効果命中の高級型ガントレット",
+      "kr": "적중의 고급형 장갑",
+      "zh": "上等效果命中手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "5"
+  },
+  "7103": {
+    "name": {
+      "en": "Steel Gloves of Effectiveness",
+      "jp": "効果命中の鋼鉄ガントレット",
+      "kr": "적중의 강철 장갑",
+      "zh": "钢铁效果命中手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "5"
+  },
+  "7104": {
+    "name": {
+      "en": "Etheric Gloves of Effectiveness",
+      "jp": "効果命中のエーテルガントレット",
+      "kr": "적중의 에테르 장갑",
+      "zh": "以太效果命中手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "5"
+  },
+  "7105": {
+    "name": {
+      "en": "Ordinary Gloves of Effectiveness",
+      "jp": "効果命中の普及型ガントレット",
+      "kr": "적중의 보급형 장갑",
+      "zh": "普通效果命中手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "5"
+  },
+  "7106": {
+    "name": {
+      "en": "Fine Gloves of Effectiveness",
+      "jp": "効果命中の高級型ガントレット",
+      "kr": "적중의 고급형 장갑",
+      "zh": "上等效果命中手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "5"
+  },
+  "7107": {
+    "name": {
+      "en": "Steel Gloves of Effectiveness",
+      "jp": "効果命中の鋼鉄ガントレット",
+      "kr": "적중의 강철 장갑",
+      "zh": "钢铁效果命中手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "5"
+  },
+  "7108": {
+    "name": {
+      "en": "Etheric Gloves of Effectiveness",
+      "jp": "効果命中のエーテルガントレット",
+      "kr": "적중의 에테르 장갑",
+      "zh": "以太效果命中手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "5"
+  },
+  "7109": {
+    "name": {
+      "en": "Ordinary Gloves of Effectiveness",
+      "jp": "効果命中の普及型ガントレット",
+      "kr": "적중의 보급형 장갑",
+      "zh": "普通效果命中手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "5"
+  },
+  "7110": {
+    "name": {
+      "en": "Fine Gloves of Effectiveness",
+      "jp": "効果命中の高級型ガントレット",
+      "kr": "적중의 고급형 장갑",
+      "zh": "上等效果命中手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "5"
+  },
+  "7111": {
+    "name": {
+      "en": "Steel Gloves of Effectiveness",
+      "jp": "効果命中の鋼鉄ガントレット",
+      "kr": "적중의 강철 장갑",
+      "zh": "钢铁效果命中手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "5"
+  },
+  "7112": {
+    "name": {
+      "en": "Etheric Gloves of Effectiveness",
+      "jp": "効果命中のエーテルガントレット",
+      "kr": "적중의 에테르 장갑",
+      "zh": "以太效果命中手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "5"
+  },
+  "7113": {
+    "name": {
+      "en": "Ordinary Gloves of Effectiveness",
+      "jp": "効果命中の普及型ガントレット",
+      "kr": "적중의 보급형 장갑",
+      "zh": "普通效果命中手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "5"
+  },
+  "7114": {
+    "name": {
+      "en": "Fine Gloves of Effectiveness",
+      "jp": "効果命中の高級型ガントレット",
+      "kr": "적중의 고급형 장갑",
+      "zh": "上等效果命中手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "5"
+  },
+  "7115": {
+    "name": {
+      "en": "Steel Gloves of Effectiveness",
+      "jp": "効果命中の鋼鉄ガントレット",
+      "kr": "적중의 강철 장갑",
+      "zh": "钢铁效果命中手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "5"
+  },
+  "7116": {
+    "name": {
+      "en": "Etheric Gloves of Effectiveness",
+      "jp": "効果命中のエーテルガントレット",
+      "kr": "적중의 에테르 장갑",
+      "zh": "以太效果命中手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "5"
+  },
+  "7117": {
+    "name": {
+      "en": "Ordinary Gloves of Effectiveness",
+      "jp": "効果命中の普及型ガントレット",
+      "kr": "적중의 보급형 장갑",
+      "zh": "普通效果命中手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "5"
+  },
+  "7118": {
+    "name": {
+      "en": "Fine Gloves of Effectiveness",
+      "jp": "効果命中の高級型ガントレット",
+      "kr": "적중의 고급형 장갑",
+      "zh": "上等效果命中手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "5"
+  },
+  "7119": {
+    "name": {
+      "en": "Steel Gloves of Effectiveness",
+      "jp": "効果命中の鋼鉄ガントレット",
+      "kr": "적중의 강철 장갑",
+      "zh": "钢铁效果命中手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "5"
+  },
+  "7120": {
+    "name": {
+      "en": "Etheric Gloves of Effectiveness",
+      "jp": "効果命中のエーテルガントレット",
+      "kr": "적중의 에테르 장갑",
+      "zh": "以太效果命中手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "7121": {
+    "name": {
+      "en": "Ordinary Gloves of Resilience",
+      "jp": "抵抗の普及型ガントレット",
+      "kr": "저항의 보급형 장갑",
+      "zh": "普通抵抗手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "6"
+  },
+  "7122": {
+    "name": {
+      "en": "Fine Gloves of Resilience",
+      "jp": "抵抗の高級型ガントレット",
+      "kr": "저항의 고급형 장갑",
+      "zh": "上等抵抗手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "6"
+  },
+  "7123": {
+    "name": {
+      "en": "Steel Gloves of Resilience",
+      "jp": "抵抗の鋼鉄ガントレット",
+      "kr": "저항의 강철 장갑",
+      "zh": "钢铁抵抗手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "6"
+  },
+  "7124": {
+    "name": {
+      "en": "Etheric Gloves of Resilience",
+      "jp": "抵抗のエーテルガントレット",
+      "kr": "저항의 에테르 장갑",
+      "zh": "以太抵抗手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "6"
+  },
+  "7125": {
+    "name": {
+      "en": "Ordinary Gloves of Resilience",
+      "jp": "抵抗の普及型ガントレット",
+      "kr": "저항의 보급형 장갑",
+      "zh": "普通抵抗手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "6"
+  },
+  "7126": {
+    "name": {
+      "en": "Fine Gloves of Resilience",
+      "jp": "抵抗の高級型ガントレット",
+      "kr": "저항의 고급형 장갑",
+      "zh": "上等抵抗手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "6"
+  },
+  "7127": {
+    "name": {
+      "en": "Steel Gloves of Resilience",
+      "jp": "抵抗の鋼鉄ガントレット",
+      "kr": "저항의 강철 장갑",
+      "zh": "钢铁抵抗手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "6"
+  },
+  "7128": {
+    "name": {
+      "en": "Etheric Gloves of Resilience",
+      "jp": "抵抗のエーテルガントレット",
+      "kr": "저항의 에테르 장갑",
+      "zh": "以太抵抗手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "6"
+  },
+  "7129": {
+    "name": {
+      "en": "Ordinary Gloves of Resilience",
+      "jp": "抵抗の普及型ガントレット",
+      "kr": "저항의 보급형 장갑",
+      "zh": "普通抵抗手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "6"
+  },
+  "7130": {
+    "name": {
+      "en": "Fine Gloves of Resilience",
+      "jp": "抵抗の高級型ガントレット",
+      "kr": "저항의 고급형 장갑",
+      "zh": "上等抵抗手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "6"
+  },
+  "7131": {
+    "name": {
+      "en": "Steel Gloves of Resilience",
+      "jp": "抵抗の鋼鉄ガントレット",
+      "kr": "저항의 강철 장갑",
+      "zh": "钢铁抵抗手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "6"
+  },
+  "7132": {
+    "name": {
+      "en": "Etheric Gloves of Resilience",
+      "jp": "抵抗のエーテルガントレット",
+      "kr": "저항의 에테르 장갑",
+      "zh": "以太抵抗手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "6"
+  },
+  "7133": {
+    "name": {
+      "en": "Ordinary Gloves of Resilience",
+      "jp": "抵抗の普及型ガントレット",
+      "kr": "저항의 보급형 장갑",
+      "zh": "普通抵抗手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "6"
+  },
+  "7134": {
+    "name": {
+      "en": "Fine Gloves of Resilience",
+      "jp": "抵抗の高級型ガントレット",
+      "kr": "저항의 고급형 장갑",
+      "zh": "上等抵抗手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "6"
+  },
+  "7135": {
+    "name": {
+      "en": "Steel Gloves of Resilience",
+      "jp": "抵抗の鋼鉄ガントレット",
+      "kr": "저항의 강철 장갑",
+      "zh": "钢铁抵抗手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "6"
+  },
+  "7136": {
+    "name": {
+      "en": "Etheric Gloves of Resilience",
+      "jp": "抵抗のエーテルガントレット",
+      "kr": "저항의 에테르 장갑",
+      "zh": "以太抵抗手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "6"
+  },
+  "7137": {
+    "name": {
+      "en": "Ordinary Gloves of Resilience",
+      "jp": "抵抗の普及型ガントレット",
+      "kr": "저항의 보급형 장갑",
+      "zh": "普通抵抗手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "6"
+  },
+  "7138": {
+    "name": {
+      "en": "Fine Gloves of Resilience",
+      "jp": "抵抗の高級型ガントレット",
+      "kr": "저항의 고급형 장갑",
+      "zh": "上等抵抗手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "6"
+  },
+  "7139": {
+    "name": {
+      "en": "Steel Gloves of Resilience",
+      "jp": "抵抗の鋼鉄ガントレット",
+      "kr": "저항의 강철 장갑",
+      "zh": "钢铁抵抗手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "6"
+  },
+  "7140": {
+    "name": {
+      "en": "Etheric Gloves of Resilience",
+      "jp": "抵抗のエーテルガントレット",
+      "kr": "저항의 에테르 장갑",
+      "zh": "以太抵抗手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "6"
+  },
+  "7141": {
+    "name": {
+      "en": "Ordinary Gloves of Resilience",
+      "jp": "抵抗の普及型ガントレット",
+      "kr": "저항의 보급형 장갑",
+      "zh": "普通抵抗手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "6"
+  },
+  "7142": {
+    "name": {
+      "en": "Fine Gloves of Resilience",
+      "jp": "抵抗の高級型ガントレット",
+      "kr": "저항의 고급형 장갑",
+      "zh": "上等抵抗手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "6"
+  },
+  "7143": {
+    "name": {
+      "en": "Steel Gloves of Resilience",
+      "jp": "抵抗の鋼鉄ガントレット",
+      "kr": "저항의 강철 장갑",
+      "zh": "钢铁抵抗手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "6"
+  },
+  "7144": {
+    "name": {
+      "en": "Etheric Gloves of Resilience",
+      "jp": "抵抗のエーテルガントレット",
+      "kr": "저항의 에테르 장갑",
+      "zh": "以太抵抗手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "7145": {
+    "name": {
+      "en": "Ordinary Gloves of Counterattack",
+      "jp": "反撃の普及型ガントレット",
+      "kr": "반격의 보급형 장갑",
+      "zh": "普通反击手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "7"
+  },
+  "7146": {
+    "name": {
+      "en": "Fine Gloves of Counterattack",
+      "jp": "反撃の高級型ガントレット",
+      "kr": "반격의 고급형 장갑",
+      "zh": "上等反击手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "7"
+  },
+  "7147": {
+    "name": {
+      "en": "Steel Gloves of Counterattack",
+      "jp": "反撃の鋼鉄ガントレット",
+      "kr": "반격의 강철 장갑",
+      "zh": "钢铁反击手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "7"
+  },
+  "7148": {
+    "name": {
+      "en": "Etheric Gloves of Counterattack",
+      "jp": "反撃のエーテルガントレット",
+      "kr": "반격의 에테르 장갑",
+      "zh": "以太反击手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "7"
+  },
+  "7149": {
+    "name": {
+      "en": "Ordinary Gloves of Counterattack",
+      "jp": "反撃の普及型ガントレット",
+      "kr": "반격의 보급형 장갑",
+      "zh": "普通反击手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "7"
+  },
+  "7150": {
+    "name": {
+      "en": "Fine Gloves of Counterattack",
+      "jp": "反撃の高級型ガントレット",
+      "kr": "반격의 고급형 장갑",
+      "zh": "上等反击手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "7"
+  },
+  "7151": {
+    "name": {
+      "en": "Steel Gloves of Counterattack",
+      "jp": "反撃の鋼鉄ガントレット",
+      "kr": "반격의 강철 장갑",
+      "zh": "钢铁反击手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "7"
+  },
+  "7152": {
+    "name": {
+      "en": "Etheric Gloves of Counterattack",
+      "jp": "反撃のエーテルガントレット",
+      "kr": "반격의 에테르 장갑",
+      "zh": "以太反击手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "7"
+  },
+  "7153": {
+    "name": {
+      "en": "Ordinary Gloves of Counterattack",
+      "jp": "反撃の普及型ガントレット",
+      "kr": "반격의 보급형 장갑",
+      "zh": "普通反击手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "7"
+  },
+  "7154": {
+    "name": {
+      "en": "Fine Gloves of Counterattack",
+      "jp": "反撃の高級型ガントレット",
+      "kr": "반격의 고급형 장갑",
+      "zh": "上等反击手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "7"
+  },
+  "7155": {
+    "name": {
+      "en": "Steel Gloves of Counterattack",
+      "jp": "反撃の鋼鉄ガントレット",
+      "kr": "반격의 강철 장갑",
+      "zh": "钢铁反击手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "7"
+  },
+  "7156": {
+    "name": {
+      "en": "Etheric Gloves of Counterattack",
+      "jp": "反撃のエーテルガントレット",
+      "kr": "반격의 에테르 장갑",
+      "zh": "以太反击手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "7"
+  },
+  "7157": {
+    "name": {
+      "en": "Ordinary Gloves of Counterattack",
+      "jp": "反撃の普及型ガントレット",
+      "kr": "반격의 보급형 장갑",
+      "zh": "普通反击手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "7"
+  },
+  "7158": {
+    "name": {
+      "en": "Fine Gloves of Counterattack",
+      "jp": "反撃の高級型ガントレット",
+      "kr": "반격의 고급형 장갑",
+      "zh": "上等反击手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "7"
+  },
+  "7159": {
+    "name": {
+      "en": "Steel Gloves of Counterattack",
+      "jp": "反撃の鋼鉄ガントレット",
+      "kr": "반격의 강철 장갑",
+      "zh": "钢铁反击手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "7"
+  },
+  "7160": {
+    "name": {
+      "en": "Etheric Gloves of Counterattack",
+      "jp": "反撃のエーテルガントレット",
+      "kr": "반격의 에테르 장갑",
+      "zh": "以太反击手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "7"
+  },
+  "7161": {
+    "name": {
+      "en": "Ordinary Gloves of Counterattack",
+      "jp": "反撃の普及型ガントレット",
+      "kr": "반격의 보급형 장갑",
+      "zh": "普通反击手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "7"
+  },
+  "7162": {
+    "name": {
+      "en": "Fine Gloves of Counterattack",
+      "jp": "反撃の高級型ガントレット",
+      "kr": "반격의 고급형 장갑",
+      "zh": "上等反击手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "7"
+  },
+  "7163": {
+    "name": {
+      "en": "Steel Gloves of Counterattack",
+      "jp": "反撃の鋼鉄ガントレット",
+      "kr": "반격의 강철 장갑",
+      "zh": "钢铁反击手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "7"
+  },
+  "7164": {
+    "name": {
+      "en": "Etheric Gloves of Counterattack",
+      "jp": "反撃のエーテルガントレット",
+      "kr": "반격의 에테르 장갑",
+      "zh": "以太反击手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "7"
+  },
+  "7165": {
+    "name": {
+      "en": "Ordinary Gloves of Counterattack",
+      "jp": "反撃の普及型ガントレット",
+      "kr": "반격의 보급형 장갑",
+      "zh": "普通反击手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "7"
+  },
+  "7166": {
+    "name": {
+      "en": "Fine Gloves of Counterattack",
+      "jp": "反撃の高級型ガントレット",
+      "kr": "반격의 고급형 장갑",
+      "zh": "上等反击手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "7"
+  },
+  "7167": {
+    "name": {
+      "en": "Steel Gloves of Counterattack",
+      "jp": "反撃の鋼鉄ガントレット",
+      "kr": "반격의 강철 장갑",
+      "zh": "钢铁反击手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "7"
+  },
+  "7168": {
+    "name": {
+      "en": "Etheric Gloves of Counterattack",
+      "jp": "反撃のエーテルガントレット",
+      "kr": "반격의 에테르 장갑",
+      "zh": "以太反击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "7169": {
+    "name": {
+      "en": "Ordinary Gloves of Fortification",
+      "jp": "鉄壁の普及型ガントレット",
+      "kr": "개전 방벽의 보급형 장갑",
+      "zh": "普通开战防壁手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "8"
+  },
+  "7170": {
+    "name": {
+      "en": "Fine Gloves of Fortification",
+      "jp": "鉄壁の高級型ガントレット",
+      "kr": "개전 방벽의 고급형 장갑",
+      "zh": "上等开战防壁手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "8"
+  },
+  "7171": {
+    "name": {
+      "en": "Steel Gloves of Fortification",
+      "jp": "鉄壁の鋼鉄ガントレット",
+      "kr": "개전 방벽의 강철 장갑",
+      "zh": "钢铁开战防壁手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "8"
+  },
+  "7172": {
+    "name": {
+      "en": "Etheric Gloves of Fortification",
+      "jp": "鉄壁のエーテルガントレット",
+      "kr": "개전 방벽의 에테르 장갑",
+      "zh": "以太开战防壁手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "8"
+  },
+  "7173": {
+    "name": {
+      "en": "Ordinary Gloves of Fortification",
+      "jp": "鉄壁の普及型ガントレット",
+      "kr": "개전 방벽의 보급형 장갑",
+      "zh": "普通开战防壁手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "8"
+  },
+  "7174": {
+    "name": {
+      "en": "Fine Gloves of Fortification",
+      "jp": "鉄壁の高級型ガントレット",
+      "kr": "개전 방벽의 고급형 장갑",
+      "zh": "上等开战防壁手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "8"
+  },
+  "7175": {
+    "name": {
+      "en": "Steel Gloves of Fortification",
+      "jp": "鉄壁の鋼鉄ガントレット",
+      "kr": "개전 방벽의 강철 장갑",
+      "zh": "钢铁开战防壁手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "8"
+  },
+  "7176": {
+    "name": {
+      "en": "Etheric Gloves of Fortification",
+      "jp": "鉄壁のエーテルガントレット",
+      "kr": "개전 방벽의 에테르 장갑",
+      "zh": "以太开战防壁手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "8"
+  },
+  "7177": {
+    "name": {
+      "en": "Ordinary Gloves of Fortification",
+      "jp": "鉄壁の普及型ガントレット",
+      "kr": "개전 방벽의 보급형 장갑",
+      "zh": "普通开战防壁手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "8"
+  },
+  "7178": {
+    "name": {
+      "en": "Fine Gloves of Fortification",
+      "jp": "鉄壁の高級型ガントレット",
+      "kr": "개전 방벽의 고급형 장갑",
+      "zh": "上等开战防壁手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "8"
+  },
+  "7179": {
+    "name": {
+      "en": "Steel Gloves of Fortification",
+      "jp": "鉄壁の鋼鉄ガントレット",
+      "kr": "개전 방벽의 강철 장갑",
+      "zh": "钢铁开战防壁手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "8"
+  },
+  "7180": {
+    "name": {
+      "en": "Etheric Gloves of Fortification",
+      "jp": "鉄壁のエーテルガントレット",
+      "kr": "개전 방벽의 에테르 장갑",
+      "zh": "以太开战防壁手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "8"
+  },
+  "7181": {
+    "name": {
+      "en": "Ordinary Gloves of Fortification",
+      "jp": "鉄壁の普及型ガントレット",
+      "kr": "개전 방벽의 보급형 장갑",
+      "zh": "普通开战防壁手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "8"
+  },
+  "7182": {
+    "name": {
+      "en": "Fine Gloves of Fortification",
+      "jp": "鉄壁の高級型ガントレット",
+      "kr": "개전 방벽의 고급형 장갑",
+      "zh": "上等开战防壁手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "8"
+  },
+  "7183": {
+    "name": {
+      "en": "Steel Gloves of Fortification",
+      "jp": "鉄壁の鋼鉄ガントレット",
+      "kr": "개전 방벽의 강철 장갑",
+      "zh": "钢铁开战防壁手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "8"
+  },
+  "7184": {
+    "name": {
+      "en": "Etheric Gloves of Fortification",
+      "jp": "鉄壁のエーテルガントレット",
+      "kr": "개전 방벽의 에테르 장갑",
+      "zh": "以太开战防壁手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "8"
+  },
+  "7185": {
+    "name": {
+      "en": "Ordinary Gloves of Fortification",
+      "jp": "鉄壁の普及型ガントレット",
+      "kr": "개전 방벽의 보급형 장갑",
+      "zh": "普通开战防壁手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "8"
+  },
+  "7186": {
+    "name": {
+      "en": "Fine Gloves of Fortification",
+      "jp": "鉄壁の高級型ガントレット",
+      "kr": "개전 방벽의 고급형 장갑",
+      "zh": "上等开战防壁手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "8"
+  },
+  "7187": {
+    "name": {
+      "en": "Steel Gloves of Fortification",
+      "jp": "鉄壁の鋼鉄ガントレット",
+      "kr": "개전 방벽의 강철 장갑",
+      "zh": "钢铁开战防壁手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "8"
+  },
+  "7188": {
+    "name": {
+      "en": "Etheric Gloves of Fortification",
+      "jp": "鉄壁のエーテルガントレット",
+      "kr": "개전 방벽의 에테르 장갑",
+      "zh": "以太开战防壁手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "8"
+  },
+  "7189": {
+    "name": {
+      "en": "Ordinary Gloves of Fortification",
+      "jp": "鉄壁の普及型ガントレット",
+      "kr": "개전 방벽의 보급형 장갑",
+      "zh": "普通开战防壁手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "8"
+  },
+  "7190": {
+    "name": {
+      "en": "Fine Gloves of Fortification",
+      "jp": "鉄壁の高級型ガントレット",
+      "kr": "개전 방벽의 고급형 장갑",
+      "zh": "上等开战防壁手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "8"
+  },
+  "7191": {
+    "name": {
+      "en": "Steel Gloves of Fortification",
+      "jp": "鉄壁の鋼鉄ガントレット",
+      "kr": "개전 방벽의 강철 장갑",
+      "zh": "钢铁开战防壁手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "8"
+  },
+  "7192": {
+    "name": {
+      "en": "Etheric Gloves of Fortification",
+      "jp": "鉄壁のエーテルガントレット",
+      "kr": "개전 방벽의 에테르 장갑",
+      "zh": "以太开战防壁手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "7193": {
+    "name": {
+      "en": "Ordinary Gloves of Mitigation",
+      "jp": "無力化の普及型ガントレット",
+      "kr": "무력화의 보급형 장갑",
+      "zh": "普通失效手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "9"
+  },
+  "7194": {
+    "name": {
+      "en": "Fine Gloves of Mitigation",
+      "jp": "無力化の高級型ガントレット",
+      "kr": "무력화의 고급형 장갑",
+      "zh": "上等失效手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "9"
+  },
+  "7195": {
+    "name": {
+      "en": "Steel Gloves of Mitigation",
+      "jp": "無力化の鋼鉄ガントレット",
+      "kr": "무력화의 강철 장갑",
+      "zh": "钢铁失效手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "9"
+  },
+  "7196": {
+    "name": {
+      "en": "Etheric Gloves of Mitigation",
+      "jp": "無力化のエーテルガントレット",
+      "kr": "무력화의 에테르 장갑",
+      "zh": "以太失效手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "9"
+  },
+  "7197": {
+    "name": {
+      "en": "Ordinary Gloves of Mitigation",
+      "jp": "無力化の普及型ガントレット",
+      "kr": "무력화의 보급형 장갑",
+      "zh": "普通失效手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "9"
+  },
+  "7198": {
+    "name": {
+      "en": "Fine Gloves of Mitigation",
+      "jp": "無力化の高級型ガントレット",
+      "kr": "무력화의 고급형 장갑",
+      "zh": "上等失效手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "9"
+  },
+  "7199": {
+    "name": {
+      "en": "Steel Gloves of Mitigation",
+      "jp": "無力化の鋼鉄ガントレット",
+      "kr": "무력화의 강철 장갑",
+      "zh": "钢铁失效手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "9"
+  },
+  "7200": {
+    "name": {
+      "en": "Etheric Gloves of Mitigation",
+      "jp": "無力化のエーテルガントレット",
+      "kr": "무력화의 에테르 장갑",
+      "zh": "以太失效手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "9"
+  },
+  "7201": {
+    "name": {
+      "en": "Ordinary Gloves of Mitigation",
+      "jp": "無力化の普及型ガントレット",
+      "kr": "무력화의 보급형 장갑",
+      "zh": "普通失效手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "9"
+  },
+  "7202": {
+    "name": {
+      "en": "Fine Gloves of Mitigation",
+      "jp": "無力化の高級型ガントレット",
+      "kr": "무력화의 고급형 장갑",
+      "zh": "上等失效手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "9"
+  },
+  "7203": {
+    "name": {
+      "en": "Steel Gloves of Mitigation",
+      "jp": "無力化の鋼鉄ガントレット",
+      "kr": "무력화의 강철 장갑",
+      "zh": "钢铁失效手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "9"
+  },
+  "7204": {
+    "name": {
+      "en": "Etheric Gloves of Mitigation",
+      "jp": "無力化のエーテルガントレット",
+      "kr": "무력화의 에테르 장갑",
+      "zh": "以太失效手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "9"
+  },
+  "7205": {
+    "name": {
+      "en": "Ordinary Gloves of Mitigation",
+      "jp": "無力化の普及型ガントレット",
+      "kr": "무력화의 보급형 장갑",
+      "zh": "普通失效手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "9"
+  },
+  "7206": {
+    "name": {
+      "en": "Fine Gloves of Mitigation",
+      "jp": "無力化の高級型ガントレット",
+      "kr": "무력화의 고급형 장갑",
+      "zh": "上等失效手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "9"
+  },
+  "7207": {
+    "name": {
+      "en": "Steel Gloves of Mitigation",
+      "jp": "無力化の鋼鉄ガントレット",
+      "kr": "무력화의 강철 장갑",
+      "zh": "钢铁失效手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "9"
+  },
+  "7208": {
+    "name": {
+      "en": "Etheric Gloves of Mitigation",
+      "jp": "無力化のエーテルガントレット",
+      "kr": "무력화의 에테르 장갑",
+      "zh": "以太失效手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "9"
+  },
+  "7209": {
+    "name": {
+      "en": "Ordinary Gloves of Mitigation",
+      "jp": "無力化の普及型ガントレット",
+      "kr": "무력화의 보급형 장갑",
+      "zh": "普通失效手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "9"
+  },
+  "7210": {
+    "name": {
+      "en": "Fine Gloves of Mitigation",
+      "jp": "無力化の高級型ガントレット",
+      "kr": "무력화의 고급형 장갑",
+      "zh": "上等失效手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "9"
+  },
+  "7211": {
+    "name": {
+      "en": "Steel Gloves of Mitigation",
+      "jp": "無力化の鋼鉄ガントレット",
+      "kr": "무력화의 강철 장갑",
+      "zh": "钢铁失效手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "9"
+  },
+  "7212": {
+    "name": {
+      "en": "Etheric Gloves of Mitigation",
+      "jp": "無力化のエーテルガントレット",
+      "kr": "무력화의 에테르 장갑",
+      "zh": "以太失效手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "9"
+  },
+  "7213": {
+    "name": {
+      "en": "Ordinary Gloves of Mitigation",
+      "jp": "無力化の普及型ガントレット",
+      "kr": "무력화의 보급형 장갑",
+      "zh": "普通失效手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "9"
+  },
+  "7214": {
+    "name": {
+      "en": "Fine Gloves of Mitigation",
+      "jp": "無力化の高級型ガントレット",
+      "kr": "무력화의 고급형 장갑",
+      "zh": "上等失效手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "9"
+  },
+  "7215": {
+    "name": {
+      "en": "Steel Gloves of Mitigation",
+      "jp": "無力化の鋼鉄ガントレット",
+      "kr": "무력화의 강철 장갑",
+      "zh": "钢铁失效手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "9"
+  },
+  "7216": {
+    "name": {
+      "en": "Etheric Gloves of Mitigation",
+      "jp": "無力化のエーテルガントレット",
+      "kr": "무력화의 에테르 장갑",
+      "zh": "以太失效手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "7217": {
+    "name": {
+      "en": "Ordinary Gloves of Lifesteal",
+      "jp": "吸収の普及型ガントレット",
+      "kr": "흡혈의 보급형 장갑",
+      "zh": "普通吸血手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "10"
+  },
+  "7218": {
+    "name": {
+      "en": "Fine Gloves of Lifesteal",
+      "jp": "吸収の高級型ガントレット",
+      "kr": "흡혈의 고급형 장갑",
+      "zh": "上等吸血手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "10"
+  },
+  "7219": {
+    "name": {
+      "en": "Steel Gloves of Lifesteal",
+      "jp": "吸収の鋼鉄ガントレット",
+      "kr": "흡혈의 강철 장갑",
+      "zh": "钢铁吸血手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "10"
+  },
+  "7220": {
+    "name": {
+      "en": "Etheric Gloves of Lifesteal",
+      "jp": "吸収のエーテルガントレット",
+      "kr": "흡혈의 에테르 장갑",
+      "zh": "以太吸血手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "10"
+  },
+  "7221": {
+    "name": {
+      "en": "Ordinary Gloves of Lifesteal",
+      "jp": "吸収の普及型ガントレット",
+      "kr": "흡혈의 보급형 장갑",
+      "zh": "普通吸血手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "10"
+  },
+  "7222": {
+    "name": {
+      "en": "Fine Gloves of Lifesteal",
+      "jp": "吸収の高級型ガントレット",
+      "kr": "흡혈의 고급형 장갑",
+      "zh": "上等吸血手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "10"
+  },
+  "7223": {
+    "name": {
+      "en": "Steel Gloves of Lifesteal",
+      "jp": "吸収の鋼鉄ガントレット",
+      "kr": "흡혈의 강철 장갑",
+      "zh": "钢铁吸血手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "10"
+  },
+  "7224": {
+    "name": {
+      "en": "Etheric Gloves of Lifesteal",
+      "jp": "吸収のエーテルガントレット",
+      "kr": "흡혈의 에테르 장갑",
+      "zh": "以太吸血手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "10"
+  },
+  "7225": {
+    "name": {
+      "en": "Ordinary Gloves of Lifesteal",
+      "jp": "吸収の普及型ガントレット",
+      "kr": "흡혈의 보급형 장갑",
+      "zh": "普通吸血手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "10"
+  },
+  "7226": {
+    "name": {
+      "en": "Fine Gloves of Lifesteal",
+      "jp": "吸収の高級型ガントレット",
+      "kr": "흡혈의 고급형 장갑",
+      "zh": "上等吸血手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "10"
+  },
+  "7227": {
+    "name": {
+      "en": "Steel Gloves of Lifesteal",
+      "jp": "吸収の鋼鉄ガントレット",
+      "kr": "흡혈의 강철 장갑",
+      "zh": "钢铁吸血手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "10"
+  },
+  "7228": {
+    "name": {
+      "en": "Etheric Gloves of Lifesteal",
+      "jp": "吸収のエーテルガントレット",
+      "kr": "흡혈의 에테르 장갑",
+      "zh": "以太吸血手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "10"
+  },
+  "7229": {
+    "name": {
+      "en": "Ordinary Gloves of Lifesteal",
+      "jp": "吸収の普及型ガントレット",
+      "kr": "흡혈의 보급형 장갑",
+      "zh": "普通吸血手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "10"
+  },
+  "7230": {
+    "name": {
+      "en": "Fine Gloves of Lifesteal",
+      "jp": "吸収の高級型ガントレット",
+      "kr": "흡혈의 고급형 장갑",
+      "zh": "上等吸血手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "10"
+  },
+  "7231": {
+    "name": {
+      "en": "Steel Gloves of Lifesteal",
+      "jp": "吸収の鋼鉄ガントレット",
+      "kr": "흡혈의 강철 장갑",
+      "zh": "钢铁吸血手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "10"
+  },
+  "7232": {
+    "name": {
+      "en": "Etheric Gloves of Lifesteal",
+      "jp": "吸収のエーテルガントレット",
+      "kr": "흡혈의 에테르 장갑",
+      "zh": "以太吸血手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "10"
+  },
+  "7233": {
+    "name": {
+      "en": "Ordinary Gloves of Lifesteal",
+      "jp": "吸収の普及型ガントレット",
+      "kr": "흡혈의 보급형 장갑",
+      "zh": "普通吸血手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "10"
+  },
+  "7234": {
+    "name": {
+      "en": "Fine Gloves of Lifesteal",
+      "jp": "吸収の高級型ガントレット",
+      "kr": "흡혈의 고급형 장갑",
+      "zh": "上等吸血手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "10"
+  },
+  "7235": {
+    "name": {
+      "en": "Steel Gloves of Lifesteal",
+      "jp": "吸収の鋼鉄ガントレット",
+      "kr": "흡혈의 강철 장갑",
+      "zh": "钢铁吸血手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "10"
+  },
+  "7236": {
+    "name": {
+      "en": "Etheric Gloves of Lifesteal",
+      "jp": "吸収のエーテルガントレット",
+      "kr": "흡혈의 에테르 장갑",
+      "zh": "以太吸血手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "10"
+  },
+  "7237": {
+    "name": {
+      "en": "Ordinary Gloves of Lifesteal",
+      "jp": "吸収の普及型ガントレット",
+      "kr": "흡혈의 보급형 장갑",
+      "zh": "普通吸血手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "10"
+  },
+  "7238": {
+    "name": {
+      "en": "Fine Gloves of Lifesteal",
+      "jp": "吸収の高級型ガントレット",
+      "kr": "흡혈의 고급형 장갑",
+      "zh": "上等吸血手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "10"
+  },
+  "7239": {
+    "name": {
+      "en": "Steel Gloves of Lifesteal",
+      "jp": "吸収の鋼鉄ガントレット",
+      "kr": "흡혈의 강철 장갑",
+      "zh": "钢铁吸血手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "10"
+  },
+  "7240": {
+    "name": {
+      "en": "Etheric Gloves of Lifesteal",
+      "jp": "吸収のエーテルガントレット",
+      "kr": "흡혈의 에테르 장갑",
+      "zh": "以太吸血手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "7241": {
+    "name": {
+      "en": "Ordinary Gloves of Penetration",
+      "jp": "貫通の普及型ガントレット",
+      "kr": "관통의 보급형 장갑",
+      "zh": "普通穿透手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "11"
+  },
+  "7242": {
+    "name": {
+      "en": "Fine Gloves of Penetration",
+      "jp": "貫通の高級型ガントレット",
+      "kr": "관통의 고급형 장갑",
+      "zh": "上等穿透手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "11"
+  },
+  "7243": {
+    "name": {
+      "en": "Steel Gloves of Penetration",
+      "jp": "貫通の鋼鉄ガントレット",
+      "kr": "관통의 강철 장갑",
+      "zh": "钢铁穿透手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "11"
+  },
+  "7244": {
+    "name": {
+      "en": "Etheric Gloves of Penetration",
+      "jp": "貫通のエーテルガントレット",
+      "kr": "관통의 에테르 장갑",
+      "zh": "以太穿透手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "11"
+  },
+  "7245": {
+    "name": {
+      "en": "Ordinary Gloves of Penetration",
+      "jp": "貫通の普及型ガントレット",
+      "kr": "관통의 보급형 장갑",
+      "zh": "普通穿透手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "11"
+  },
+  "7246": {
+    "name": {
+      "en": "Fine Gloves of Penetration",
+      "jp": "貫通の高級型ガントレット",
+      "kr": "관통의 고급형 장갑",
+      "zh": "上等穿透手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "11"
+  },
+  "7247": {
+    "name": {
+      "en": "Steel Gloves of Penetration",
+      "jp": "貫通の鋼鉄ガントレット",
+      "kr": "관통의 강철 장갑",
+      "zh": "钢铁穿透手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "11"
+  },
+  "7248": {
+    "name": {
+      "en": "Etheric Gloves of Penetration",
+      "jp": "貫通のエーテルガントレット",
+      "kr": "관통의 에테르 장갑",
+      "zh": "以太穿透手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "11"
+  },
+  "7249": {
+    "name": {
+      "en": "Ordinary Gloves of Penetration",
+      "jp": "貫通の普及型ガントレット",
+      "kr": "관통의 보급형 장갑",
+      "zh": "普通穿透手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "11"
+  },
+  "7250": {
+    "name": {
+      "en": "Fine Gloves of Penetration",
+      "jp": "貫通の高級型ガントレット",
+      "kr": "관통의 고급형 장갑",
+      "zh": "上等穿透手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "11"
+  },
+  "7251": {
+    "name": {
+      "en": "Steel Gloves of Penetration",
+      "jp": "貫通の鋼鉄ガントレット",
+      "kr": "관통의 강철 장갑",
+      "zh": "钢铁穿透手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "11"
+  },
+  "7252": {
+    "name": {
+      "en": "Etheric Gloves of Penetration",
+      "jp": "貫通のエーテルガントレット",
+      "kr": "관통의 에테르 장갑",
+      "zh": "以太穿透手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "11"
+  },
+  "7253": {
+    "name": {
+      "en": "Ordinary Gloves of Penetration",
+      "jp": "貫通の普及型ガントレット",
+      "kr": "관통의 보급형 장갑",
+      "zh": "普通穿透手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "11"
+  },
+  "7254": {
+    "name": {
+      "en": "Fine Gloves of Penetration",
+      "jp": "貫通の高級型ガントレット",
+      "kr": "관통의 고급형 장갑",
+      "zh": "上等穿透手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "11"
+  },
+  "7255": {
+    "name": {
+      "en": "Steel Gloves of Penetration",
+      "jp": "貫通の鋼鉄ガントレット",
+      "kr": "관통의 강철 장갑",
+      "zh": "钢铁穿透手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "11"
+  },
+  "7256": {
+    "name": {
+      "en": "Etheric Gloves of Penetration",
+      "jp": "貫通のエーテルガントレット",
+      "kr": "관통의 에테르 장갑",
+      "zh": "以太穿透手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "11"
+  },
+  "7257": {
+    "name": {
+      "en": "Ordinary Gloves of Penetration",
+      "jp": "貫通の普及型ガントレット",
+      "kr": "관통의 보급형 장갑",
+      "zh": "普通穿透手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "11"
+  },
+  "7258": {
+    "name": {
+      "en": "Fine Gloves of Penetration",
+      "jp": "貫通の高級型ガントレット",
+      "kr": "관통의 고급형 장갑",
+      "zh": "上等穿透手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "11"
+  },
+  "7259": {
+    "name": {
+      "en": "Steel Gloves of Penetration",
+      "jp": "貫通の鋼鉄ガントレット",
+      "kr": "관통의 강철 장갑",
+      "zh": "钢铁穿透手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "11"
+  },
+  "7260": {
+    "name": {
+      "en": "Etheric Gloves of Penetration",
+      "jp": "貫通のエーテルガントレット",
+      "kr": "관통의 에테르 장갑",
+      "zh": "以太穿透手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "11"
+  },
+  "7261": {
+    "name": {
+      "en": "Ordinary Gloves of Penetration",
+      "jp": "貫通の普及型ガントレット",
+      "kr": "관통의 보급형 장갑",
+      "zh": "普通穿透手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "11"
+  },
+  "7262": {
+    "name": {
+      "en": "Fine Gloves of Penetration",
+      "jp": "貫通の高級型ガントレット",
+      "kr": "관통의 고급형 장갑",
+      "zh": "上等穿透手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "11"
+  },
+  "7263": {
+    "name": {
+      "en": "Steel Gloves of Penetration",
+      "jp": "貫通の鋼鉄ガントレット",
+      "kr": "관통의 강철 장갑",
+      "zh": "钢铁穿透手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "11"
+  },
+  "7264": {
+    "name": {
+      "en": "Etheric Gloves of Penetration",
+      "jp": "貫通のエーテルガントレット",
+      "kr": "관통의 에테르 장갑",
+      "zh": "以太穿透手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "7265": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Strike",
+      "jp": "極大化の普及型ガントレット",
+      "kr": "극대화의 보급형 장갑",
+      "zh": "普通暴伤手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "12"
+  },
+  "7266": {
+    "name": {
+      "en": "Fine Gloves of Critical Strike",
+      "jp": "極大化の高級型ガントレット",
+      "kr": "극대화의 고급형 장갑",
+      "zh": "上等暴伤手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "12"
+  },
+  "7267": {
+    "name": {
+      "en": "Steel Gloves of Critical Strike",
+      "jp": "極大化の鋼鉄ガントレット",
+      "kr": "극대화의 강철 장갑",
+      "zh": "钢铁暴伤手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "12"
+  },
+  "7268": {
+    "name": {
+      "en": "Etheric Gloves of Critical Strike",
+      "jp": "極大化のエーテルガントレット",
+      "kr": "극대화의 에테르 장갑",
+      "zh": "以太暴伤手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "12"
+  },
+  "7269": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Strike",
+      "jp": "極大化の普及型ガントレット",
+      "kr": "극대화의 보급형 장갑",
+      "zh": "普通暴伤手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "12"
+  },
+  "7270": {
+    "name": {
+      "en": "Fine Gloves of Critical Strike",
+      "jp": "極大化の高級型ガントレット",
+      "kr": "극대화의 고급형 장갑",
+      "zh": "上等暴伤手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "12"
+  },
+  "7271": {
+    "name": {
+      "en": "Steel Gloves of Critical Strike",
+      "jp": "極大化の鋼鉄ガントレット",
+      "kr": "극대화의 강철 장갑",
+      "zh": "钢铁暴伤手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "12"
+  },
+  "7272": {
+    "name": {
+      "en": "Etheric Gloves of Critical Strike",
+      "jp": "極大化のエーテルガントレット",
+      "kr": "극대화의 에테르 장갑",
+      "zh": "以太暴伤手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "12"
+  },
+  "7273": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Strike",
+      "jp": "極大化の普及型ガントレット",
+      "kr": "극대화의 보급형 장갑",
+      "zh": "普通暴伤手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "12"
+  },
+  "7274": {
+    "name": {
+      "en": "Fine Gloves of Critical Strike",
+      "jp": "極大化の高級型ガントレット",
+      "kr": "극대화의 고급형 장갑",
+      "zh": "上等暴伤手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "12"
+  },
+  "7275": {
+    "name": {
+      "en": "Steel Gloves of Critical Strike",
+      "jp": "極大化の鋼鉄ガントレット",
+      "kr": "극대화의 강철 장갑",
+      "zh": "钢铁暴伤手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "12"
+  },
+  "7276": {
+    "name": {
+      "en": "Etheric Gloves of Critical Strike",
+      "jp": "極大化のエーテルガントレット",
+      "kr": "극대화의 에테르 장갑",
+      "zh": "以太暴伤手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "12"
+  },
+  "7277": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Strike",
+      "jp": "極大化の普及型ガントレット",
+      "kr": "극대화의 보급형 장갑",
+      "zh": "普通暴伤手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "12"
+  },
+  "7278": {
+    "name": {
+      "en": "Fine Gloves of Critical Strike",
+      "jp": "極大化の高級型ガントレット",
+      "kr": "극대화의 고급형 장갑",
+      "zh": "上等暴伤手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "12"
+  },
+  "7279": {
+    "name": {
+      "en": "Steel Gloves of Critical Strike",
+      "jp": "極大化の鋼鉄ガントレット",
+      "kr": "극대화의 강철 장갑",
+      "zh": "钢铁暴伤手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "12"
+  },
+  "7280": {
+    "name": {
+      "en": "Etheric Gloves of Critical Strike",
+      "jp": "極大化のエーテルガントレット",
+      "kr": "극대화의 에테르 장갑",
+      "zh": "以太暴伤手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "12"
+  },
+  "7281": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Strike",
+      "jp": "極大化の普及型ガントレット",
+      "kr": "극대화의 보급형 장갑",
+      "zh": "普通暴伤手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "12"
+  },
+  "7282": {
+    "name": {
+      "en": "Fine Gloves of Critical Strike",
+      "jp": "極大化の高級型ガントレット",
+      "kr": "극대화의 고급형 장갑",
+      "zh": "上等暴伤手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "12"
+  },
+  "7283": {
+    "name": {
+      "en": "Steel Gloves of Critical Strike",
+      "jp": "極大化の鋼鉄ガントレット",
+      "kr": "극대화의 강철 장갑",
+      "zh": "钢铁暴伤手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "12"
+  },
+  "7284": {
+    "name": {
+      "en": "Etheric Gloves of Critical Strike",
+      "jp": "極大化のエーテルガントレット",
+      "kr": "극대화의 에테르 장갑",
+      "zh": "以太暴伤手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "12"
+  },
+  "7285": {
+    "name": {
+      "en": "Ordinary Gloves of Critical Strike",
+      "jp": "極大化の普及型ガントレット",
+      "kr": "극대화의 보급형 장갑",
+      "zh": "普通暴伤手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "12"
+  },
+  "7286": {
+    "name": {
+      "en": "Fine Gloves of Critical Strike",
+      "jp": "極大化の高級型ガントレット",
+      "kr": "극대화의 고급형 장갑",
+      "zh": "上等暴伤手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "12"
+  },
+  "7287": {
+    "name": {
+      "en": "Steel Gloves of Critical Strike",
+      "jp": "極大化の鋼鉄ガントレット",
+      "kr": "극대화의 강철 장갑",
+      "zh": "钢铁暴伤手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "12"
+  },
+  "7288": {
+    "name": {
+      "en": "Etheric Gloves of Critical Strike",
+      "jp": "極大化のエーテルガントレット",
+      "kr": "극대화의 에테르 장갑",
+      "zh": "以太暴伤手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "7289": {
+    "name": {
+      "en": "Ordinary Gloves of Speed",
+      "jp": "速度の普及型ガントレット",
+      "kr": "속도의 보급형 장갑",
+      "zh": "普通速度手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "13"
+  },
+  "7290": {
+    "name": {
+      "en": "Fine Gloves of Speed",
+      "jp": "速度の高級型ガントレット",
+      "kr": "속도의 고급형 장갑",
+      "zh": "上等速度手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "13"
+  },
+  "7291": {
+    "name": {
+      "en": "Steel Gloves of Speed",
+      "jp": "速度の鋼鉄ガントレット",
+      "kr": "속도의 강철 장갑",
+      "zh": "钢铁速度手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "13"
+  },
+  "7292": {
+    "name": {
+      "en": "Etheric Gloves of Speed",
+      "jp": "速度のエーテルガントレット",
+      "kr": "속도의 에테르 장갑",
+      "zh": "以太速度手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "13"
+  },
+  "7293": {
+    "name": {
+      "en": "Ordinary Gloves of Speed",
+      "jp": "速度の普及型ガントレット",
+      "kr": "속도의 보급형 장갑",
+      "zh": "普通速度手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "13"
+  },
+  "7294": {
+    "name": {
+      "en": "Fine Gloves of Speed",
+      "jp": "速度の高級型ガントレット",
+      "kr": "속도의 고급형 장갑",
+      "zh": "上等速度手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "13"
+  },
+  "7295": {
+    "name": {
+      "en": "Steel Gloves of Speed",
+      "jp": "速度の鋼鉄ガントレット",
+      "kr": "속도의 강철 장갑",
+      "zh": "钢铁速度手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "13"
+  },
+  "7296": {
+    "name": {
+      "en": "Etheric Gloves of Speed",
+      "jp": "速度のエーテルガントレット",
+      "kr": "속도의 에테르 장갑",
+      "zh": "以太速度手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "13"
+  },
+  "7297": {
+    "name": {
+      "en": "Ordinary Gloves of Speed",
+      "jp": "速度の普及型ガントレット",
+      "kr": "속도의 보급형 장갑",
+      "zh": "普通速度手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "13"
+  },
+  "7298": {
+    "name": {
+      "en": "Fine Gloves of Speed",
+      "jp": "速度の高級型ガントレット",
+      "kr": "속도의 고급형 장갑",
+      "zh": "上等速度手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "13"
+  },
+  "7299": {
+    "name": {
+      "en": "Steel Gloves of Speed",
+      "jp": "速度の鋼鉄ガントレット",
+      "kr": "속도의 강철 장갑",
+      "zh": "钢铁速度手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "13"
+  },
+  "7300": {
+    "name": {
+      "en": "Etheric Gloves of Speed",
+      "jp": "速度のエーテルガントレット",
+      "kr": "속도의 에테르 장갑",
+      "zh": "以太速度手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "13"
+  },
+  "7301": {
+    "name": {
+      "en": "Ordinary Gloves of Speed",
+      "jp": "速度の普及型ガントレット",
+      "kr": "속도의 보급형 장갑",
+      "zh": "普通速度手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "13"
+  },
+  "7302": {
+    "name": {
+      "en": "Fine Gloves of Speed",
+      "jp": "速度の高級型ガントレット",
+      "kr": "속도의 고급형 장갑",
+      "zh": "上等速度手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "13"
+  },
+  "7303": {
+    "name": {
+      "en": "Steel Gloves of Speed",
+      "jp": "速度の鋼鉄ガントレット",
+      "kr": "속도의 강철 장갑",
+      "zh": "钢铁速度手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "13"
+  },
+  "7304": {
+    "name": {
+      "en": "Etheric Gloves of Speed",
+      "jp": "速度のエーテルガントレット",
+      "kr": "속도의 에테르 장갑",
+      "zh": "以太速度手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "13"
+  },
+  "7305": {
+    "name": {
+      "en": "Ordinary Gloves of Speed",
+      "jp": "速度の普及型ガントレット",
+      "kr": "속도의 보급형 장갑",
+      "zh": "普通速度手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "13"
+  },
+  "7306": {
+    "name": {
+      "en": "Fine Gloves of Speed",
+      "jp": "速度の高級型ガントレット",
+      "kr": "속도의 고급형 장갑",
+      "zh": "上等速度手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "13"
+  },
+  "7307": {
+    "name": {
+      "en": "Steel Gloves of Speed",
+      "jp": "速度の鋼鉄ガントレット",
+      "kr": "속도의 강철 장갑",
+      "zh": "钢铁速度手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "13"
+  },
+  "7308": {
+    "name": {
+      "en": "Etheric Gloves of Speed",
+      "jp": "速度のエーテルガントレット",
+      "kr": "속도의 에테르 장갑",
+      "zh": "以太速度手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "13"
+  },
+  "7309": {
+    "name": {
+      "en": "Ordinary Gloves of Speed",
+      "jp": "速度の普及型ガントレット",
+      "kr": "속도의 보급형 장갑",
+      "zh": "普通速度手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "13"
+  },
+  "7310": {
+    "name": {
+      "en": "Fine Gloves of Speed",
+      "jp": "速度の高級型ガントレット",
+      "kr": "속도의 고급형 장갑",
+      "zh": "上等速度手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "13"
+  },
+  "7311": {
+    "name": {
+      "en": "Steel Gloves of Speed",
+      "jp": "速度の鋼鉄ガントレット",
+      "kr": "속도의 강철 장갑",
+      "zh": "钢铁速度手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "13"
+  },
+  "7312": {
+    "name": {
+      "en": "Etheric Gloves of Speed",
+      "jp": "速度のエーテルガントレット",
+      "kr": "속도의 에테르 장갑",
+      "zh": "以太速度手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "7313": {
+    "name": {
+      "en": "Ordinary Gloves of Bursting",
+      "jp": "炸裂の普及型ガントレット",
+      "kr": "버스트의 보급형 장갑",
+      "zh": "普通爆发手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "14"
+  },
+  "7314": {
+    "name": {
+      "en": "Fine Gloves of Bursting",
+      "jp": "炸裂の高級型ガントレット",
+      "kr": "버스트의 고급형 장갑",
+      "zh": "上等爆发手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "14"
+  },
+  "7315": {
+    "name": {
+      "en": "Steel Gloves of Bursting",
+      "jp": "炸裂の鋼鉄ガントレット",
+      "kr": "버스트의 강철 장갑",
+      "zh": "钢铁爆发手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "14"
+  },
+  "7316": {
+    "name": {
+      "en": "Etheric Gloves of Bursting",
+      "jp": "炸裂のエーテルガントレット",
+      "kr": "버스트의 에테르 장갑",
+      "zh": "以太爆发手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "14"
+  },
+  "7317": {
+    "name": {
+      "en": "Ordinary Gloves of Bursting",
+      "jp": "炸裂の普及型ガントレット",
+      "kr": "버스트의 보급형 장갑",
+      "zh": "普通爆发手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "14"
+  },
+  "7318": {
+    "name": {
+      "en": "Fine Gloves of Bursting",
+      "jp": "炸裂の高級型ガントレット",
+      "kr": "버스트의 고급형 장갑",
+      "zh": "上等爆发手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "14"
+  },
+  "7319": {
+    "name": {
+      "en": "Steel Gloves of Bursting",
+      "jp": "炸裂の鋼鉄ガントレット",
+      "kr": "버스트의 강철 장갑",
+      "zh": "钢铁爆发手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "14"
+  },
+  "7320": {
+    "name": {
+      "en": "Etheric Gloves of Bursting",
+      "jp": "炸裂のエーテルガントレット",
+      "kr": "버스트의 에테르 장갑",
+      "zh": "以太爆发手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "14"
+  },
+  "7321": {
+    "name": {
+      "en": "Ordinary Gloves of Bursting",
+      "jp": "炸裂の普及型ガントレット",
+      "kr": "버스트의 보급형 장갑",
+      "zh": "普通爆发手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "14"
+  },
+  "7322": {
+    "name": {
+      "en": "Fine Gloves of Bursting",
+      "jp": "炸裂の高級型ガントレット",
+      "kr": "버스트의 고급형 장갑",
+      "zh": "上等爆发手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "14"
+  },
+  "7323": {
+    "name": {
+      "en": "Steel Gloves of Bursting",
+      "jp": "炸裂の鋼鉄ガントレット",
+      "kr": "버스트의 강철 장갑",
+      "zh": "钢铁爆发手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "14"
+  },
+  "7324": {
+    "name": {
+      "en": "Etheric Gloves of Bursting",
+      "jp": "炸裂のエーテルガントレット",
+      "kr": "버스트의 에테르 장갑",
+      "zh": "以太爆发手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "14"
+  },
+  "7325": {
+    "name": {
+      "en": "Ordinary Gloves of Bursting",
+      "jp": "炸裂の普及型ガントレット",
+      "kr": "버스트의 보급형 장갑",
+      "zh": "普通爆发手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "14"
+  },
+  "7326": {
+    "name": {
+      "en": "Fine Gloves of Bursting",
+      "jp": "炸裂の高級型ガントレット",
+      "kr": "버스트의 고급형 장갑",
+      "zh": "上等爆发手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "14"
+  },
+  "7327": {
+    "name": {
+      "en": "Steel Gloves of Bursting",
+      "jp": "炸裂の鋼鉄ガントレット",
+      "kr": "버스트의 강철 장갑",
+      "zh": "钢铁爆发手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "14"
+  },
+  "7328": {
+    "name": {
+      "en": "Etheric Gloves of Bursting",
+      "jp": "炸裂のエーテルガントレット",
+      "kr": "버스트의 에테르 장갑",
+      "zh": "以太爆发手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "14"
+  },
+  "7329": {
+    "name": {
+      "en": "Ordinary Gloves of Bursting",
+      "jp": "炸裂の普及型ガントレット",
+      "kr": "버스트의 보급형 장갑",
+      "zh": "普通爆发手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "14"
+  },
+  "7330": {
+    "name": {
+      "en": "Fine Gloves of Bursting",
+      "jp": "炸裂の高級型ガントレット",
+      "kr": "버스트의 고급형 장갑",
+      "zh": "上等爆发手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "14"
+  },
+  "7331": {
+    "name": {
+      "en": "Steel Gloves of Bursting",
+      "jp": "炸裂の鋼鉄ガントレット",
+      "kr": "버스트의 강철 장갑",
+      "zh": "钢铁爆发手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "14"
+  },
+  "7332": {
+    "name": {
+      "en": "Etheric Gloves of Bursting",
+      "jp": "炸裂のエーテルガントレット",
+      "kr": "버스트의 에테르 장갑",
+      "zh": "以太爆发手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "14"
+  },
+  "7333": {
+    "name": {
+      "en": "Ordinary Gloves of Bursting",
+      "jp": "炸裂の普及型ガントレット",
+      "kr": "버스트의 보급형 장갑",
+      "zh": "普通爆发手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "14"
+  },
+  "7334": {
+    "name": {
+      "en": "Fine Gloves of Bursting",
+      "jp": "炸裂の高級型ガントレット",
+      "kr": "버스트의 고급형 장갑",
+      "zh": "上等爆发手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "14"
+  },
+  "7335": {
+    "name": {
+      "en": "Steel Gloves of Bursting",
+      "jp": "炸裂の鋼鉄ガントレット",
+      "kr": "버스트의 강철 장갑",
+      "zh": "钢铁爆发手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "14"
+  },
+  "7336": {
+    "name": {
+      "en": "Etheric Gloves of Bursting",
+      "jp": "炸裂のエーテルガントレット",
+      "kr": "버스트의 에테르 장갑",
+      "zh": "以太爆发手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "7337": {
+    "name": {
+      "en": "Ordinary Gloves of Revenge",
+      "jp": "復讐の普及型ガントレット",
+      "kr": "복수의 보급형 장갑",
+      "zh": "普通复仇手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "15"
+  },
+  "7338": {
+    "name": {
+      "en": "Fine Gloves of Revenge",
+      "jp": "復讐の高級型ガントレット",
+      "kr": "복수의 고급형 장갑",
+      "zh": "上等复仇手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "15"
+  },
+  "7339": {
+    "name": {
+      "en": "Steel Gloves of Revenge",
+      "jp": "復讐の鋼鉄ガントレット",
+      "kr": "복수의 강철 장갑",
+      "zh": "钢铁复仇手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "15"
+  },
+  "7340": {
+    "name": {
+      "en": "Etheric Gloves of Revenge",
+      "jp": "復讐のエーテルガントレット",
+      "kr": "복수의 에테르 장갑",
+      "zh": "以太复仇手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "15"
+  },
+  "7341": {
+    "name": {
+      "en": "Ordinary Gloves of Revenge",
+      "jp": "復讐の普及型ガントレット",
+      "kr": "복수의 보급형 장갑",
+      "zh": "普通复仇手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "15"
+  },
+  "7342": {
+    "name": {
+      "en": "Fine Gloves of Revenge",
+      "jp": "復讐の高級型ガントレット",
+      "kr": "복수의 고급형 장갑",
+      "zh": "上等复仇手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "15"
+  },
+  "7343": {
+    "name": {
+      "en": "Steel Gloves of Revenge",
+      "jp": "復讐の鋼鉄ガントレット",
+      "kr": "복수의 강철 장갑",
+      "zh": "钢铁复仇手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "15"
+  },
+  "7344": {
+    "name": {
+      "en": "Etheric Gloves of Revenge",
+      "jp": "復讐のエーテルガントレット",
+      "kr": "복수의 에테르 장갑",
+      "zh": "以太复仇手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "15"
+  },
+  "7345": {
+    "name": {
+      "en": "Ordinary Gloves of Revenge",
+      "jp": "復讐の普及型ガントレット",
+      "kr": "복수의 보급형 장갑",
+      "zh": "普通复仇手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "15"
+  },
+  "7346": {
+    "name": {
+      "en": "Fine Gloves of Revenge",
+      "jp": "復讐の高級型ガントレット",
+      "kr": "복수의 고급형 장갑",
+      "zh": "上等复仇手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "15"
+  },
+  "7347": {
+    "name": {
+      "en": "Steel Gloves of Revenge",
+      "jp": "復讐の鋼鉄ガントレット",
+      "kr": "복수의 강철 장갑",
+      "zh": "钢铁复仇手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "15"
+  },
+  "7348": {
+    "name": {
+      "en": "Etheric Gloves of Revenge",
+      "jp": "復讐のエーテルガントレット",
+      "kr": "복수의 에테르 장갑",
+      "zh": "以太复仇手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "15"
+  },
+  "7349": {
+    "name": {
+      "en": "Ordinary Gloves of Revenge",
+      "jp": "復讐の普及型ガントレット",
+      "kr": "복수의 보급형 장갑",
+      "zh": "普通复仇手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "15"
+  },
+  "7350": {
+    "name": {
+      "en": "Fine Gloves of Revenge",
+      "jp": "復讐の高級型ガントレット",
+      "kr": "복수의 고급형 장갑",
+      "zh": "上等复仇手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "15"
+  },
+  "7351": {
+    "name": {
+      "en": "Steel Gloves of Revenge",
+      "jp": "復讐の鋼鉄ガントレット",
+      "kr": "복수의 강철 장갑",
+      "zh": "钢铁复仇手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "15"
+  },
+  "7352": {
+    "name": {
+      "en": "Etheric Gloves of Revenge",
+      "jp": "復讐のエーテルガントレット",
+      "kr": "복수의 에테르 장갑",
+      "zh": "以太复仇手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "15"
+  },
+  "7353": {
+    "name": {
+      "en": "Ordinary Gloves of Revenge",
+      "jp": "復讐の普及型ガントレット",
+      "kr": "복수의 보급형 장갑",
+      "zh": "普通复仇手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "15"
+  },
+  "7354": {
+    "name": {
+      "en": "Fine Gloves of Revenge",
+      "jp": "復讐の高級型ガントレット",
+      "kr": "복수의 고급형 장갑",
+      "zh": "上等复仇手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "15"
+  },
+  "7355": {
+    "name": {
+      "en": "Steel Gloves of Revenge",
+      "jp": "復讐の鋼鉄ガントレット",
+      "kr": "복수의 강철 장갑",
+      "zh": "钢铁复仇手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "15"
+  },
+  "7356": {
+    "name": {
+      "en": "Etheric Gloves of Revenge",
+      "jp": "復讐のエーテルガントレット",
+      "kr": "복수의 에테르 장갑",
+      "zh": "以太复仇手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "15"
+  },
+  "7357": {
+    "name": {
+      "en": "Ordinary Gloves of Revenge",
+      "jp": "復讐の普及型ガントレット",
+      "kr": "복수의 보급형 장갑",
+      "zh": "普通复仇手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "15"
+  },
+  "7358": {
+    "name": {
+      "en": "Fine Gloves of Revenge",
+      "jp": "復讐の高級型ガントレット",
+      "kr": "복수의 고급형 장갑",
+      "zh": "上等复仇手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "15"
+  },
+  "7359": {
+    "name": {
+      "en": "Steel Gloves of Revenge",
+      "jp": "復讐の鋼鉄ガントレット",
+      "kr": "복수의 강철 장갑",
+      "zh": "钢铁复仇手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "15"
+  },
+  "7360": {
+    "name": {
+      "en": "Etheric Gloves of Revenge",
+      "jp": "復讐のエーテルガントレット",
+      "kr": "복수의 에테르 장갑",
+      "zh": "以太复仇手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "7361": {
+    "name": {
+      "en": "Ordinary Gloves of Patience",
+      "jp": "忍耐の普及型ガントレット",
+      "kr": "인내의 보급형 장갑",
+      "zh": "普通忍耐手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "16"
+  },
+  "7362": {
+    "name": {
+      "en": "Fine Gloves of Patience",
+      "jp": "忍耐の高級型ガントレット",
+      "kr": "인내의 고급형 장갑",
+      "zh": "上等忍耐手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "16"
+  },
+  "7363": {
+    "name": {
+      "en": "Steel Gloves of Patience",
+      "jp": "忍耐の鋼鉄ガントレット",
+      "kr": "인내의 강철 장갑",
+      "zh": "钢铁忍耐手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "16"
+  },
+  "7364": {
+    "name": {
+      "en": "Etheric Gloves of Patience",
+      "jp": "忍耐のエーテルガントレット",
+      "kr": "인내의 에테르 장갑",
+      "zh": "以太忍耐手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "16"
+  },
+  "7365": {
+    "name": {
+      "en": "Ordinary Gloves of Patience",
+      "jp": "忍耐の普及型ガントレット",
+      "kr": "인내의 보급형 장갑",
+      "zh": "普通忍耐手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "16"
+  },
+  "7366": {
+    "name": {
+      "en": "Fine Gloves of Patience",
+      "jp": "忍耐の高級型ガントレット",
+      "kr": "인내의 고급형 장갑",
+      "zh": "上等忍耐手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "16"
+  },
+  "7367": {
+    "name": {
+      "en": "Steel Gloves of Patience",
+      "jp": "忍耐の鋼鉄ガントレット",
+      "kr": "인내의 강철 장갑",
+      "zh": "钢铁忍耐手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "16"
+  },
+  "7368": {
+    "name": {
+      "en": "Etheric Gloves of Patience",
+      "jp": "忍耐のエーテルガントレット",
+      "kr": "인내의 에테르 장갑",
+      "zh": "以太忍耐手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "16"
+  },
+  "7369": {
+    "name": {
+      "en": "Ordinary Gloves of Patience",
+      "jp": "忍耐の普及型ガントレット",
+      "kr": "인내의 보급형 장갑",
+      "zh": "普通忍耐手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "16"
+  },
+  "7370": {
+    "name": {
+      "en": "Fine Gloves of Patience",
+      "jp": "忍耐の高級型ガントレット",
+      "kr": "인내의 고급형 장갑",
+      "zh": "上等忍耐手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "16"
+  },
+  "7371": {
+    "name": {
+      "en": "Steel Gloves of Patience",
+      "jp": "忍耐の鋼鉄ガントレット",
+      "kr": "인내의 강철 장갑",
+      "zh": "钢铁忍耐手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "16"
+  },
+  "7372": {
+    "name": {
+      "en": "Etheric Gloves of Patience",
+      "jp": "忍耐のエーテルガントレット",
+      "kr": "인내의 에테르 장갑",
+      "zh": "以太忍耐手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "16"
+  },
+  "7373": {
+    "name": {
+      "en": "Ordinary Gloves of Patience",
+      "jp": "忍耐の普及型ガントレット",
+      "kr": "인내의 보급형 장갑",
+      "zh": "普通忍耐手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "16"
+  },
+  "7374": {
+    "name": {
+      "en": "Fine Gloves of Patience",
+      "jp": "忍耐の高級型ガントレット",
+      "kr": "인내의 고급형 장갑",
+      "zh": "上等忍耐手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "16"
+  },
+  "7375": {
+    "name": {
+      "en": "Steel Gloves of Patience",
+      "jp": "忍耐の鋼鉄ガントレット",
+      "kr": "인내의 강철 장갑",
+      "zh": "钢铁忍耐手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "16"
+  },
+  "7376": {
+    "name": {
+      "en": "Etheric Gloves of Patience",
+      "jp": "忍耐のエーテルガントレット",
+      "kr": "인내의 에테르 장갑",
+      "zh": "以太忍耐手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "16"
+  },
+  "7377": {
+    "name": {
+      "en": "Ordinary Gloves of Patience",
+      "jp": "忍耐の普及型ガントレット",
+      "kr": "인내의 보급형 장갑",
+      "zh": "普通忍耐手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "16"
+  },
+  "7378": {
+    "name": {
+      "en": "Fine Gloves of Patience",
+      "jp": "忍耐の高級型ガントレット",
+      "kr": "인내의 고급형 장갑",
+      "zh": "上等忍耐手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "16"
+  },
+  "7379": {
+    "name": {
+      "en": "Steel Gloves of Patience",
+      "jp": "忍耐の鋼鉄ガントレット",
+      "kr": "인내의 강철 장갑",
+      "zh": "钢铁忍耐手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "16"
+  },
+  "7380": {
+    "name": {
+      "en": "Etheric Gloves of Patience",
+      "jp": "忍耐のエーテルガントレット",
+      "kr": "인내의 에테르 장갑",
+      "zh": "以太忍耐手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "16"
+  },
+  "7381": {
+    "name": {
+      "en": "Ordinary Gloves of Patience",
+      "jp": "忍耐の普及型ガントレット",
+      "kr": "인내의 보급형 장갑",
+      "zh": "普通忍耐手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "16"
+  },
+  "7382": {
+    "name": {
+      "en": "Fine Gloves of Patience",
+      "jp": "忍耐の高級型ガントレット",
+      "kr": "인내의 고급형 장갑",
+      "zh": "上等忍耐手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "16"
+  },
+  "7383": {
+    "name": {
+      "en": "Steel Gloves of Patience",
+      "jp": "忍耐の鋼鉄ガントレット",
+      "kr": "인내의 강철 장갑",
+      "zh": "钢铁忍耐手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "16"
+  },
+  "7384": {
+    "name": {
+      "en": "Etheric Gloves of Patience",
+      "jp": "忍耐のエーテルガントレット",
+      "kr": "인내의 에테르 장갑",
+      "zh": "以太忍耐手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "7385": {
+    "name": {
+      "en": "Ordinary Gloves of Pulverization",
+      "jp": "粉砕の普及型ガントレット",
+      "kr": "분쇄의 보급형 장갑",
+      "zh": "普通粉碎手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "17"
+  },
+  "7386": {
+    "name": {
+      "en": "Fine Gloves of Pulverization",
+      "jp": "粉砕の高級型ガントレット",
+      "kr": "분쇄의 고급형 장갑",
+      "zh": "上等粉碎手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "17"
+  },
+  "7387": {
+    "name": {
+      "en": "Steel Gloves of Pulverization",
+      "jp": "粉砕の鋼鉄ガントレット",
+      "kr": "분쇄의 강철 장갑",
+      "zh": "钢铁粉碎手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "17"
+  },
+  "7388": {
+    "name": {
+      "en": "Etheric Gloves of Pulverization",
+      "jp": "粉砕のエーテルガントレット",
+      "kr": "분쇄의 에테르 장갑",
+      "zh": "以太粉碎手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "17"
+  },
+  "7389": {
+    "name": {
+      "en": "Ordinary Gloves of Pulverization",
+      "jp": "粉砕の普及型ガントレット",
+      "kr": "분쇄의 보급형 장갑",
+      "zh": "普通粉碎手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "17"
+  },
+  "7390": {
+    "name": {
+      "en": "Fine Gloves of Pulverization",
+      "jp": "粉砕の高級型ガントレット",
+      "kr": "분쇄의 고급형 장갑",
+      "zh": "上等粉碎手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "17"
+  },
+  "7391": {
+    "name": {
+      "en": "Steel Gloves of Pulverization",
+      "jp": "粉砕の鋼鉄ガントレット",
+      "kr": "분쇄의 강철 장갑",
+      "zh": "钢铁粉碎手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "17"
+  },
+  "7392": {
+    "name": {
+      "en": "Etheric Gloves of Pulverization",
+      "jp": "粉砕のエーテルガントレット",
+      "kr": "분쇄의 에테르 장갑",
+      "zh": "以太粉碎手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "17"
+  },
+  "7393": {
+    "name": {
+      "en": "Ordinary Gloves of Pulverization",
+      "jp": "粉砕の普及型ガントレット",
+      "kr": "분쇄의 보급형 장갑",
+      "zh": "普通粉碎手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "17"
+  },
+  "7394": {
+    "name": {
+      "en": "Fine Gloves of Pulverization",
+      "jp": "粉砕の高級型ガントレット",
+      "kr": "분쇄의 고급형 장갑",
+      "zh": "上等粉碎手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "17"
+  },
+  "7395": {
+    "name": {
+      "en": "Steel Gloves of Pulverization",
+      "jp": "粉砕の鋼鉄ガントレット",
+      "kr": "분쇄의 강철 장갑",
+      "zh": "钢铁粉碎手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "17"
+  },
+  "7396": {
+    "name": {
+      "en": "Etheric Gloves of Pulverization",
+      "jp": "粉砕のエーテルガントレット",
+      "kr": "분쇄의 에테르 장갑",
+      "zh": "以太粉碎手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "17"
+  },
+  "7397": {
+    "name": {
+      "en": "Ordinary Gloves of Pulverization",
+      "jp": "粉砕の普及型ガントレット",
+      "kr": "분쇄의 보급형 장갑",
+      "zh": "普通粉碎手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "17"
+  },
+  "7398": {
+    "name": {
+      "en": "Fine Gloves of Pulverization",
+      "jp": "粉砕の高級型ガントレット",
+      "kr": "분쇄의 고급형 장갑",
+      "zh": "上等粉碎手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "17"
+  },
+  "7399": {
+    "name": {
+      "en": "Steel Gloves of Pulverization",
+      "jp": "粉砕の鋼鉄ガントレット",
+      "kr": "분쇄의 강철 장갑",
+      "zh": "钢铁粉碎手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "17"
+  },
+  "7400": {
+    "name": {
+      "en": "Etheric Gloves of Pulverization",
+      "jp": "粉砕のエーテルガントレット",
+      "kr": "분쇄의 에테르 장갑",
+      "zh": "以太粉碎手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "17"
+  },
+  "7401": {
+    "name": {
+      "en": "Ordinary Gloves of Pulverization",
+      "jp": "粉砕の普及型ガントレット",
+      "kr": "분쇄의 보급형 장갑",
+      "zh": "普通粉碎手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "17"
+  },
+  "7402": {
+    "name": {
+      "en": "Fine Gloves of Pulverization",
+      "jp": "粉砕の高級型ガントレット",
+      "kr": "분쇄의 고급형 장갑",
+      "zh": "上等粉碎手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "17"
+  },
+  "7403": {
+    "name": {
+      "en": "Steel Gloves of Pulverization",
+      "jp": "粉砕の鋼鉄ガントレット",
+      "kr": "분쇄의 강철 장갑",
+      "zh": "钢铁粉碎手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "17"
+  },
+  "7404": {
+    "name": {
+      "en": "Etheric Gloves of Pulverization",
+      "jp": "粉砕のエーテルガントレット",
+      "kr": "분쇄의 에테르 장갑",
+      "zh": "以太粉碎手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "17"
+  },
+  "7405": {
+    "name": {
+      "en": "Ordinary Gloves of Pulverization",
+      "jp": "粉砕の普及型ガントレット",
+      "kr": "분쇄의 보급형 장갑",
+      "zh": "普通粉碎手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "17"
+  },
+  "7406": {
+    "name": {
+      "en": "Fine Gloves of Pulverization",
+      "jp": "粉砕の高級型ガントレット",
+      "kr": "분쇄의 고급형 장갑",
+      "zh": "上等粉碎手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "17"
+  },
+  "7407": {
+    "name": {
+      "en": "Steel Gloves of Pulverization",
+      "jp": "粉砕の鋼鉄ガントレット",
+      "kr": "분쇄의 강철 장갑",
+      "zh": "钢铁粉碎手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "17"
+  },
+  "7408": {
+    "name": {
+      "en": "Etheric Gloves of Pulverization",
+      "jp": "粉砕のエーテルガントレット",
+      "kr": "분쇄의 에테르 장갑",
+      "zh": "以太粉碎手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "17"
+  },
+  "7409": {
+    "name": {
+      "en": "Ordinary Gloves of Immunity",
+      "jp": "免疫の普及型ガントレット",
+      "kr": "면역의 보급형 장갑",
+      "zh": "普通免疫手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "18"
+  },
+  "7410": {
+    "name": {
+      "en": "Fine Gloves of Immunity",
+      "jp": "免疫の高級型ガントレット",
+      "kr": "면역의 고급형 장갑",
+      "zh": "上等免疫手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "18"
+  },
+  "7411": {
+    "name": {
+      "en": "Steel Gloves of Immunity",
+      "jp": "免疫の鋼鉄ガントレット",
+      "kr": "면역의 강철 장갑",
+      "zh": "钢铁免疫手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "18"
+  },
+  "7412": {
+    "name": {
+      "en": "Etheric Gloves of Immunity",
+      "jp": "免疫のエーテルガントレット",
+      "kr": "면역의 에테르 장갑",
+      "zh": "以太免疫手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "18"
+  },
+  "7413": {
+    "name": {
+      "en": "Ordinary Gloves of Immunity",
+      "jp": "免疫の普及型ガントレット",
+      "kr": "면역의 보급형 장갑",
+      "zh": "普通免疫手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "18"
+  },
+  "7414": {
+    "name": {
+      "en": "Fine Gloves of Immunity",
+      "jp": "免疫の高級型ガントレット",
+      "kr": "면역의 고급형 장갑",
+      "zh": "上等免疫手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "18"
+  },
+  "7415": {
+    "name": {
+      "en": "Steel Gloves of Immunity",
+      "jp": "免疫の鋼鉄ガントレット",
+      "kr": "면역의 강철 장갑",
+      "zh": "钢铁免疫手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "18"
+  },
+  "7416": {
+    "name": {
+      "en": "Etheric Gloves of Immunity",
+      "jp": "免疫のエーテルガントレット",
+      "kr": "면역의 에테르 장갑",
+      "zh": "以太免疫手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "18"
+  },
+  "7417": {
+    "name": {
+      "en": "Ordinary Gloves of Immunity",
+      "jp": "免疫の普及型ガントレット",
+      "kr": "면역의 보급형 장갑",
+      "zh": "普通免疫手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "18"
+  },
+  "7418": {
+    "name": {
+      "en": "Fine Gloves of Immunity",
+      "jp": "免疫の高級型ガントレット",
+      "kr": "면역의 고급형 장갑",
+      "zh": "上等免疫手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "18"
+  },
+  "7419": {
+    "name": {
+      "en": "Steel Gloves of Immunity",
+      "jp": "免疫の鋼鉄ガントレット",
+      "kr": "면역의 강철 장갑",
+      "zh": "钢铁免疫手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "18"
+  },
+  "7420": {
+    "name": {
+      "en": "Etheric Gloves of Immunity",
+      "jp": "免疫のエーテルガントレット",
+      "kr": "면역의 에테르 장갑",
+      "zh": "以太免疫手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "18"
+  },
+  "7421": {
+    "name": {
+      "en": "Ordinary Gloves of Immunity",
+      "jp": "免疫の普及型ガントレット",
+      "kr": "면역의 보급형 장갑",
+      "zh": "普通免疫手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "18"
+  },
+  "7422": {
+    "name": {
+      "en": "Fine Gloves of Immunity",
+      "jp": "免疫の高級型ガントレット",
+      "kr": "면역의 고급형 장갑",
+      "zh": "上等免疫手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "18"
+  },
+  "7423": {
+    "name": {
+      "en": "Steel Gloves of Immunity",
+      "jp": "免疫の鋼鉄ガントレット",
+      "kr": "면역의 강철 장갑",
+      "zh": "钢铁免疫手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "18"
+  },
+  "7424": {
+    "name": {
+      "en": "Etheric Gloves of Immunity",
+      "jp": "免疫のエーテルガントレット",
+      "kr": "면역의 에테르 장갑",
+      "zh": "以太免疫手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "18"
+  },
+  "7425": {
+    "name": {
+      "en": "Ordinary Gloves of Immunity",
+      "jp": "免疫の普及型ガントレット",
+      "kr": "면역의 보급형 장갑",
+      "zh": "普通免疫手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "18"
+  },
+  "7426": {
+    "name": {
+      "en": "Fine Gloves of Immunity",
+      "jp": "免疫の高級型ガントレット",
+      "kr": "면역의 고급형 장갑",
+      "zh": "上等免疫手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "18"
+  },
+  "7427": {
+    "name": {
+      "en": "Steel Gloves of Immunity",
+      "jp": "免疫の鋼鉄ガントレット",
+      "kr": "면역의 강철 장갑",
+      "zh": "钢铁免疫手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "18"
+  },
+  "7428": {
+    "name": {
+      "en": "Etheric Gloves of Immunity",
+      "jp": "免疫のエーテルガントレット",
+      "kr": "면역의 에테르 장갑",
+      "zh": "以太免疫手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "18"
+  },
+  "7429": {
+    "name": {
+      "en": "Ordinary Gloves of Immunity",
+      "jp": "免疫の普及型ガントレット",
+      "kr": "면역의 보급형 장갑",
+      "zh": "普通免疫手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "18"
+  },
+  "7430": {
+    "name": {
+      "en": "Fine Gloves of Immunity",
+      "jp": "免疫の高級型ガントレット",
+      "kr": "면역의 고급형 장갑",
+      "zh": "上等免疫手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "18"
+  },
+  "7431": {
+    "name": {
+      "en": "Steel Gloves of Immunity",
+      "jp": "免疫の鋼鉄ガントレット",
+      "kr": "면역의 강철 장갑",
+      "zh": "钢铁免疫手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "18"
+  },
+  "7432": {
+    "name": {
+      "en": "Etheric Gloves of Immunity",
+      "jp": "免疫のエーテルガントレット",
+      "kr": "면역의 에테르 장갑",
+      "zh": "以太免疫手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "7433": {
+    "name": {
+      "en": "Ordinary Gloves of Swiftness",
+      "jp": "機敏の普及型ガントレット",
+      "kr": "기민의 보급형 장갑",
+      "zh": "普通敏捷手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "19"
+  },
+  "7434": {
+    "name": {
+      "en": "Fine Gloves of Swiftness",
+      "jp": "機敏の高級型ガントレット",
+      "kr": "기민의 고급형 장갑",
+      "zh": "上等敏捷手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "19"
+  },
+  "7435": {
+    "name": {
+      "en": "Steel Gloves of Swiftness",
+      "jp": "機敏の鋼鉄ガントレット",
+      "kr": "기민의 강철 장갑",
+      "zh": "钢铁敏捷手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "19"
+  },
+  "7436": {
+    "name": {
+      "en": "Etheric Gloves of Swiftness",
+      "jp": "機敏のエーテルガントレット",
+      "kr": "기민의 에테르 장갑",
+      "zh": "以太敏捷手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "19"
+  },
+  "7437": {
+    "name": {
+      "en": "Ordinary Gloves of Swiftness",
+      "jp": "機敏の普及型ガントレット",
+      "kr": "기민의 보급형 장갑",
+      "zh": "普通敏捷手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "19"
+  },
+  "7438": {
+    "name": {
+      "en": "Fine Gloves of Swiftness",
+      "jp": "機敏の高級型ガントレット",
+      "kr": "기민의 고급형 장갑",
+      "zh": "上等敏捷手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "19"
+  },
+  "7439": {
+    "name": {
+      "en": "Steel Gloves of Swiftness",
+      "jp": "機敏の鋼鉄ガントレット",
+      "kr": "기민의 강철 장갑",
+      "zh": "钢铁敏捷手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "19"
+  },
+  "7440": {
+    "name": {
+      "en": "Etheric Gloves of Swiftness",
+      "jp": "機敏のエーテルガントレット",
+      "kr": "기민의 에테르 장갑",
+      "zh": "以太敏捷手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "19"
+  },
+  "7441": {
+    "name": {
+      "en": "Ordinary Gloves of Swiftness",
+      "jp": "機敏の普及型ガントレット",
+      "kr": "기민의 보급형 장갑",
+      "zh": "普通敏捷手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "19"
+  },
+  "7442": {
+    "name": {
+      "en": "Fine Gloves of Swiftness",
+      "jp": "機敏の高級型ガントレット",
+      "kr": "기민의 고급형 장갑",
+      "zh": "上等敏捷手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "19"
+  },
+  "7443": {
+    "name": {
+      "en": "Steel Gloves of Swiftness",
+      "jp": "機敏の鋼鉄ガントレット",
+      "kr": "기민의 강철 장갑",
+      "zh": "钢铁敏捷手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "19"
+  },
+  "7444": {
+    "name": {
+      "en": "Etheric Gloves of Swiftness",
+      "jp": "機敏のエーテルガントレット",
+      "kr": "기민의 에테르 장갑",
+      "zh": "以太敏捷手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "19"
+  },
+  "7445": {
+    "name": {
+      "en": "Ordinary Gloves of Swiftness",
+      "jp": "機敏の普及型ガントレット",
+      "kr": "기민의 보급형 장갑",
+      "zh": "普通敏捷手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "19"
+  },
+  "7446": {
+    "name": {
+      "en": "Fine Gloves of Swiftness",
+      "jp": "機敏の高級型ガントレット",
+      "kr": "기민의 고급형 장갑",
+      "zh": "上等敏捷手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "19"
+  },
+  "7447": {
+    "name": {
+      "en": "Steel Gloves of Swiftness",
+      "jp": "機敏の鋼鉄ガントレット",
+      "kr": "기민의 강철 장갑",
+      "zh": "钢铁敏捷手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "19"
+  },
+  "7448": {
+    "name": {
+      "en": "Etheric Gloves of Swiftness",
+      "jp": "機敏のエーテルガントレット",
+      "kr": "기민의 에테르 장갑",
+      "zh": "以太敏捷手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "19"
+  },
+  "7449": {
+    "name": {
+      "en": "Ordinary Gloves of Swiftness",
+      "jp": "機敏の普及型ガントレット",
+      "kr": "기민의 보급형 장갑",
+      "zh": "普通敏捷手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "19"
+  },
+  "7450": {
+    "name": {
+      "en": "Fine Gloves of Swiftness",
+      "jp": "機敏の高級型ガントレット",
+      "kr": "기민의 고급형 장갑",
+      "zh": "上等敏捷手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "19"
+  },
+  "7451": {
+    "name": {
+      "en": "Steel Gloves of Swiftness",
+      "jp": "機敏の鋼鉄ガントレット",
+      "kr": "기민의 강철 장갑",
+      "zh": "钢铁敏捷手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "19"
+  },
+  "7452": {
+    "name": {
+      "en": "Etheric Gloves of Swiftness",
+      "jp": "機敏のエーテルガントレット",
+      "kr": "기민의 에테르 장갑",
+      "zh": "以太敏捷手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "19"
+  },
+  "7453": {
+    "name": {
+      "en": "Ordinary Gloves of Swiftness",
+      "jp": "機敏の普及型ガントレット",
+      "kr": "기민의 보급형 장갑",
+      "zh": "普通敏捷手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "19"
+  },
+  "7454": {
+    "name": {
+      "en": "Fine Gloves of Swiftness",
+      "jp": "機敏の高級型ガントレット",
+      "kr": "기민의 고급형 장갑",
+      "zh": "上等敏捷手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "19"
+  },
+  "7455": {
+    "name": {
+      "en": "Steel Gloves of Swiftness",
+      "jp": "機敏の鋼鉄ガントレット",
+      "kr": "기민의 강철 장갑",
+      "zh": "钢铁敏捷手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "19"
+  },
+  "7456": {
+    "name": {
+      "en": "Etheric Gloves of Swiftness",
+      "jp": "機敏のエーテルガントレット",
+      "kr": "기민의 에테르 장갑",
+      "zh": "以太敏捷手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "19"
+  },
+  "7457": {
+    "name": {
+      "en": "Ordinary Gloves of Weakness",
+      "jp": "弱点の普及型ガントレット",
+      "kr": "약점의 보급형 장갑",
+      "zh": "普通弱点手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "20"
+  },
+  "7458": {
+    "name": {
+      "en": "Fine Gloves of Weakness",
+      "jp": "弱点の高級型ガントレット",
+      "kr": "약점의 고급형 장갑",
+      "zh": "上等弱点手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "20"
+  },
+  "7459": {
+    "name": {
+      "en": "Steel Gloves of Weakness",
+      "jp": "弱点の鋼鉄ガントレット",
+      "kr": "약점의 강철 장갑",
+      "zh": "钢铁弱点手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "20"
+  },
+  "7460": {
+    "name": {
+      "en": "Etheric Gloves of Weakness",
+      "jp": "弱点のエーテルガントレット",
+      "kr": "약점의 에테르 장갑",
+      "zh": "以太弱点手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "20"
+  },
+  "7461": {
+    "name": {
+      "en": "Ordinary Gloves of Weakness",
+      "jp": "弱点の普及型ガントレット",
+      "kr": "약점의 보급형 장갑",
+      "zh": "普通弱点手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "20"
+  },
+  "7462": {
+    "name": {
+      "en": "Fine Gloves of Weakness",
+      "jp": "弱点の高級型ガントレット",
+      "kr": "약점의 고급형 장갑",
+      "zh": "上等弱点手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "20"
+  },
+  "7463": {
+    "name": {
+      "en": "Steel Gloves of Weakness",
+      "jp": "弱点の鋼鉄ガントレット",
+      "kr": "약점의 강철 장갑",
+      "zh": "钢铁弱点手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "20"
+  },
+  "7464": {
+    "name": {
+      "en": "Etheric Gloves of Weakness",
+      "jp": "弱点のエーテルガントレット",
+      "kr": "약점의 에테르 장갑",
+      "zh": "以太弱点手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "20"
+  },
+  "7465": {
+    "name": {
+      "en": "Ordinary Gloves of Weakness",
+      "jp": "弱点の普及型ガントレット",
+      "kr": "약점의 보급형 장갑",
+      "zh": "普通弱点手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "20"
+  },
+  "7466": {
+    "name": {
+      "en": "Fine Gloves of Weakness",
+      "jp": "弱点の高級型ガントレット",
+      "kr": "약점의 고급형 장갑",
+      "zh": "上等弱点手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "20"
+  },
+  "7467": {
+    "name": {
+      "en": "Steel Gloves of Weakness",
+      "jp": "弱点の鋼鉄ガントレット",
+      "kr": "약점의 강철 장갑",
+      "zh": "钢铁弱点手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "20"
+  },
+  "7468": {
+    "name": {
+      "en": "Etheric Gloves of Weakness",
+      "jp": "弱点のエーテルガントレット",
+      "kr": "약점의 에테르 장갑",
+      "zh": "以太弱点手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "20"
+  },
+  "7469": {
+    "name": {
+      "en": "Ordinary Gloves of Weakness",
+      "jp": "弱点の普及型ガントレット",
+      "kr": "약점의 보급형 장갑",
+      "zh": "普通弱点手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "20"
+  },
+  "7470": {
+    "name": {
+      "en": "Fine Gloves of Weakness",
+      "jp": "弱点の高級型ガントレット",
+      "kr": "약점의 고급형 장갑",
+      "zh": "上等弱点手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "20"
+  },
+  "7471": {
+    "name": {
+      "en": "Steel Gloves of Weakness",
+      "jp": "弱点の鋼鉄ガントレット",
+      "kr": "약점의 강철 장갑",
+      "zh": "钢铁弱点手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "20"
+  },
+  "7472": {
+    "name": {
+      "en": "Etheric Gloves of Weakness",
+      "jp": "弱点のエーテルガントレット",
+      "kr": "약점의 에테르 장갑",
+      "zh": "以太弱点手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "20"
+  },
+  "7473": {
+    "name": {
+      "en": "Ordinary Gloves of Weakness",
+      "jp": "弱点の普及型ガントレット",
+      "kr": "약점의 보급형 장갑",
+      "zh": "普通弱点手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "20"
+  },
+  "7474": {
+    "name": {
+      "en": "Fine Gloves of Weakness",
+      "jp": "弱点の高級型ガントレット",
+      "kr": "약점의 고급형 장갑",
+      "zh": "上等弱点手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "20"
+  },
+  "7475": {
+    "name": {
+      "en": "Steel Gloves of Weakness",
+      "jp": "弱点の鋼鉄ガントレット",
+      "kr": "약점의 강철 장갑",
+      "zh": "钢铁弱点手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "20"
+  },
+  "7476": {
+    "name": {
+      "en": "Etheric Gloves of Weakness",
+      "jp": "弱点のエーテルガントレット",
+      "kr": "약점의 에테르 장갑",
+      "zh": "以太弱点手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "20"
+  },
+  "7477": {
+    "name": {
+      "en": "Ordinary Gloves of Weakness",
+      "jp": "弱点の普及型ガントレット",
+      "kr": "약점의 보급형 장갑",
+      "zh": "普通弱点手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "20"
+  },
+  "7478": {
+    "name": {
+      "en": "Fine Gloves of Weakness",
+      "jp": "弱点の高級型ガントレット",
+      "kr": "약점의 고급형 장갑",
+      "zh": "上等弱点手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "20"
+  },
+  "7479": {
+    "name": {
+      "en": "Steel Gloves of Weakness",
+      "jp": "弱点の鋼鉄ガントレット",
+      "kr": "약점의 강철 장갑",
+      "zh": "钢铁弱点手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "20"
+  },
+  "7480": {
+    "name": {
+      "en": "Etheric Gloves of Weakness",
+      "jp": "弱点のエーテルガントレット",
+      "kr": "약점의 에테르 장갑",
+      "zh": "以太弱点手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "20"
+  },
+  "7481": {
+    "name": {
+      "en": "Ordinary Gloves of Augmentation",
+      "jp": "増強の普及型ガントレット",
+      "kr": "증강의 보급형 장갑",
+      "zh": "普通加强手套"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5001", "5025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "21"
+  },
+  "7482": {
+    "name": {
+      "en": "Fine Gloves of Augmentation",
+      "jp": "増強の高級型ガントレット",
+      "kr": "증강의 고급형 장갑",
+      "zh": "上等加强手套"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5002", "5026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "21"
+  },
+  "7483": {
+    "name": {
+      "en": "Steel Gloves of Augmentation",
+      "jp": "増強の鋼鉄ガントレット",
+      "kr": "증강의 강철 장갑",
+      "zh": "钢铁加强手套"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5003", "5027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "21"
+  },
+  "7484": {
+    "name": {
+      "en": "Etheric Gloves of Augmentation",
+      "jp": "増強のエーテルガントレット",
+      "kr": "증강의 에테르 장갑",
+      "zh": "以太加强手套"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Gloves_01",
+    "craftable": false,
+    "main": ["5004", "5028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "21"
+  },
+  "7485": {
+    "name": {
+      "en": "Ordinary Gloves of Augmentation",
+      "jp": "増強の普及型ガントレット",
+      "kr": "증강의 보급형 장갑",
+      "zh": "普通加强手套"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5005", "5029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "21"
+  },
+  "7486": {
+    "name": {
+      "en": "Fine Gloves of Augmentation",
+      "jp": "増強の高級型ガントレット",
+      "kr": "증강의 고급형 장갑",
+      "zh": "上等加强手套"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5006", "5030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "21"
+  },
+  "7487": {
+    "name": {
+      "en": "Steel Gloves of Augmentation",
+      "jp": "増強の鋼鉄ガントレット",
+      "kr": "증강의 강철 장갑",
+      "zh": "钢铁加强手套"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5007", "5031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "21"
+  },
+  "7488": {
+    "name": {
+      "en": "Etheric Gloves of Augmentation",
+      "jp": "増強のエーテルガントレット",
+      "kr": "증강의 에테르 장갑",
+      "zh": "以太加强手套"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Gloves_02",
+    "craftable": false,
+    "main": ["5008", "5032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "21"
+  },
+  "7489": {
+    "name": {
+      "en": "Ordinary Gloves of Augmentation",
+      "jp": "増強の普及型ガントレット",
+      "kr": "증강의 보급형 장갑",
+      "zh": "普通加强手套"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5009", "5033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "21"
+  },
+  "7490": {
+    "name": {
+      "en": "Fine Gloves of Augmentation",
+      "jp": "増強の高級型ガントレット",
+      "kr": "증강의 고급형 장갑",
+      "zh": "上等加强手套"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5010", "5034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "21"
+  },
+  "7491": {
+    "name": {
+      "en": "Steel Gloves of Augmentation",
+      "jp": "増強の鋼鉄ガントレット",
+      "kr": "증강의 강철 장갑",
+      "zh": "钢铁加强手套"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5011", "5035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "21"
+  },
+  "7492": {
+    "name": {
+      "en": "Etheric Gloves of Augmentation",
+      "jp": "増強のエーテルガントレット",
+      "kr": "증강의 에테르 장갑",
+      "zh": "以太加强手套"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Gloves_03",
+    "craftable": false,
+    "main": ["5012", "5036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "21"
+  },
+  "7493": {
+    "name": {
+      "en": "Ordinary Gloves of Augmentation",
+      "jp": "増強の普及型ガントレット",
+      "kr": "증강의 보급형 장갑",
+      "zh": "普通加强手套"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5013", "5037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "21"
+  },
+  "7494": {
+    "name": {
+      "en": "Fine Gloves of Augmentation",
+      "jp": "増強の高級型ガントレット",
+      "kr": "증강의 고급형 장갑",
+      "zh": "上等加强手套"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5014", "5038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "21"
+  },
+  "7495": {
+    "name": {
+      "en": "Steel Gloves of Augmentation",
+      "jp": "増強の鋼鉄ガントレット",
+      "kr": "증강의 강철 장갑",
+      "zh": "钢铁加强手套"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5015", "5039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "21"
+  },
+  "7496": {
+    "name": {
+      "en": "Etheric Gloves of Augmentation",
+      "jp": "増強のエーテルガントレット",
+      "kr": "증강의 에테르 장갑",
+      "zh": "以太加强手套"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Gloves_04",
+    "craftable": false,
+    "main": ["5016", "5040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "21"
+  },
+  "7497": {
+    "name": {
+      "en": "Ordinary Gloves of Augmentation",
+      "jp": "増強の普及型ガントレット",
+      "kr": "증강의 보급형 장갑",
+      "zh": "普通加强手套"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5017", "5041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "21"
+  },
+  "7498": {
+    "name": {
+      "en": "Fine Gloves of Augmentation",
+      "jp": "増強の高級型ガントレット",
+      "kr": "증강의 고급형 장갑",
+      "zh": "上等加强手套"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5018", "5042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "21"
+  },
+  "7499": {
+    "name": {
+      "en": "Steel Gloves of Augmentation",
+      "jp": "増強の鋼鉄ガントレット",
+      "kr": "증강의 강철 장갑",
+      "zh": "钢铁加强手套"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5019", "5043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "21"
+  },
+  "7500": {
+    "name": {
+      "en": "Etheric Gloves of Augmentation",
+      "jp": "増強のエーテルガントレット",
+      "kr": "증강의 에테르 장갑",
+      "zh": "以太加强手套"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Gloves_05",
+    "craftable": false,
+    "main": ["5020", "5044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "21"
+  },
+  "7501": {
+    "name": {
+      "en": "Ordinary Gloves of Augmentation",
+      "jp": "増強の普及型ガントレット",
+      "kr": "증강의 보급형 장갑",
+      "zh": "普通加强手套"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5021", "5045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "21"
+  },
+  "7502": {
+    "name": {
+      "en": "Fine Gloves of Augmentation",
+      "jp": "増強の高級型ガントレット",
+      "kr": "증강의 고급형 장갑",
+      "zh": "上等加强手套"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5022", "5046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "21"
+  },
+  "7503": {
+    "name": {
+      "en": "Steel Gloves of Augmentation",
+      "jp": "増強の鋼鉄ガントレット",
+      "kr": "증강의 강철 장갑",
+      "zh": "钢铁加强手套"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5023", "5047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "21"
+  },
+  "7504": {
+    "name": {
+      "en": "Etheric Gloves of Augmentation",
+      "jp": "増強のエーテルガントレット",
+      "kr": "증강의 에테르 장갑",
+      "zh": "以太加强手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": true,
+    "main": ["5024", "5048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "21"
+  },
+  "7506": {
+    "name": {
+      "en": "Etheric Gloves of Attack",
+      "jp": "攻撃のエーテルガントレット",
+      "kr": "공격의 에테르 장갑",
+      "zh": "以太攻击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5049", "5050"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94201": {
+    "name": {
+      "en": "Etheric Gloves of Attack",
+      "jp": "攻撃のエーテルガントレット",
+      "kr": "공격의 에테르 장갑",
+      "zh": "以太攻击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12001",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94202": {
+    "name": {
+      "en": "Etheric Gloves of Defense",
+      "jp": "防御のエーテルガントレット",
+      "kr": "방어의 에테르 장갑",
+      "zh": "以太防御手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12002",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "94203": {
+    "name": {
+      "en": "Etheric Gloves of Life",
+      "jp": "生命のエーテルガントレット",
+      "kr": "생명의 에테르 장갑",
+      "zh": "以太生命手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12003",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "94204": {
+    "name": {
+      "en": "Etheric Gloves of Critical Hit",
+      "jp": "会心のエーテルガントレット",
+      "kr": "치명의 에테르 장갑",
+      "zh": "以太暴击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12004",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "94205": {
+    "name": {
+      "en": "Etheric Gloves of Effectiveness",
+      "jp": "効果命中のエーテルガントレット",
+      "kr": "적중의 에테르 장갑",
+      "zh": "以太效果命中手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12005",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "94206": {
+    "name": {
+      "en": "Etheric Gloves of Resilience",
+      "jp": "抵抗のエーテルガントレット",
+      "kr": "저항의 에테르 장갑",
+      "zh": "以太抵抗手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12006",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "94207": {
+    "name": {
+      "en": "Etheric Gloves of Counterattack",
+      "jp": "反撃のエーテルガントレット",
+      "kr": "반격의 에테르 장갑",
+      "zh": "以太反击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12007",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "94208": {
+    "name": {
+      "en": "Etheric Gloves of Fortification",
+      "jp": "鉄壁のエーテルガントレット",
+      "kr": "개전 방벽의 에테르 장갑",
+      "zh": "以太开战防壁手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12008",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "94209": {
+    "name": {
+      "en": "Etheric Gloves of Mitigation",
+      "jp": "無力化のエーテルガントレット",
+      "kr": "무력화의 에테르 장갑",
+      "zh": "以太失效手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12009",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "94210": {
+    "name": {
+      "en": "Etheric Gloves of Lifesteal",
+      "jp": "吸収のエーテルガントレット",
+      "kr": "흡혈의 에테르 장갑",
+      "zh": "以太吸血手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12010",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "94211": {
+    "name": {
+      "en": "Etheric Gloves of Penetration",
+      "jp": "貫通のエーテルガントレット",
+      "kr": "관통의 에테르 장갑",
+      "zh": "以太穿透手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12011",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "94212": {
+    "name": {
+      "en": "Etheric Gloves of Critical Strike",
+      "jp": "極大化のエーテルガントレット",
+      "kr": "극대화의 에테르 장갑",
+      "zh": "以太暴伤手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12012",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "94213": {
+    "name": {
+      "en": "Etheric Gloves of Speed",
+      "jp": "速度のエーテルガントレット",
+      "kr": "속도의 에테르 장갑",
+      "zh": "以太速度手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12013",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "94214": {
+    "name": {
+      "en": "Etheric Gloves of Bursting",
+      "jp": "炸裂のエーテルガントレット",
+      "kr": "버스트의 에테르 장갑",
+      "zh": "以太爆发手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12014",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "94215": {
+    "name": {
+      "en": "Etheric Gloves of Revenge",
+      "jp": "復讐のエーテルガントレット",
+      "kr": "복수의 에테르 장갑",
+      "zh": "以太复仇手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12015",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "94216": {
+    "name": {
+      "en": "Etheric Gloves of Patience",
+      "jp": "忍耐のエーテルガントレット",
+      "kr": "인내의 에테르 장갑",
+      "zh": "以太忍耐手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12016",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "94218": {
+    "name": {
+      "en": "Etheric Gloves of Immunity",
+      "jp": "免疫のエーテルガントレット",
+      "kr": "면역의 에테르 장갑",
+      "zh": "以太免疫手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12017",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "94219": {
+    "name": {
+      "en": "Etheric Gloves of Swiftness",
+      "jp": "機敏のエーテルガントレット",
+      "kr": "기민의 에테르 장갑",
+      "zh": "以太敏捷手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12018",
+    "breakLimit": "6|unique",
+    "set": "19"
+  },
+  "94601": {
+    "name": {
+      "en": "Etheric Gloves of Attack",
+      "jp": "攻撃のエーテルガントレット",
+      "kr": "공격의 에테르 장갑",
+      "zh": "以太攻击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94602": {
+    "name": {
+      "en": "Etheric Gloves of Defense",
+      "jp": "防御のエーテルガントレット",
+      "kr": "방어의 에테르 장갑",
+      "zh": "以太防御手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "94603": {
+    "name": {
+      "en": "Etheric Gloves of Life",
+      "jp": "生命のエーテルガントレット",
+      "kr": "생명의 에테르 장갑",
+      "zh": "以太生命手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "94604": {
+    "name": {
+      "en": "Etheric Gloves of Critical Hit",
+      "jp": "会心のエーテルガントレット",
+      "kr": "치명의 에테르 장갑",
+      "zh": "以太暴击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "94605": {
+    "name": {
+      "en": "Etheric Gloves of Effectiveness",
+      "jp": "効果命中のエーテルガントレット",
+      "kr": "적중의 에테르 장갑",
+      "zh": "以太效果命中手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "94606": {
+    "name": {
+      "en": "Etheric Gloves of Resilience",
+      "jp": "抵抗のエーテルガントレット",
+      "kr": "저항의 에테르 장갑",
+      "zh": "以太抵抗手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "94607": {
+    "name": {
+      "en": "Etheric Gloves of Counterattack",
+      "jp": "反撃のエーテルガントレット",
+      "kr": "반격의 에테르 장갑",
+      "zh": "以太反击手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "94608": {
+    "name": {
+      "en": "Etheric Gloves of Fortification",
+      "jp": "鉄壁のエーテルガントレット",
+      "kr": "개전 방벽의 에테르 장갑",
+      "zh": "以太开战防壁手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "94609": {
+    "name": {
+      "en": "Etheric Gloves of Mitigation",
+      "jp": "無力化のエーテルガントレット",
+      "kr": "무력화의 에테르 장갑",
+      "zh": "以太失效手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "94610": {
+    "name": {
+      "en": "Etheric Gloves of Lifesteal",
+      "jp": "吸収のエーテルガントレット",
+      "kr": "흡혈의 에테르 장갑",
+      "zh": "以太吸血手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "94611": {
+    "name": {
+      "en": "Etheric Gloves of Penetration",
+      "jp": "貫通のエーテルガントレット",
+      "kr": "관통의 에테르 장갑",
+      "zh": "以太穿透手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "94612": {
+    "name": {
+      "en": "Etheric Gloves of Critical Strike",
+      "jp": "極大化のエーテルガントレット",
+      "kr": "극대화의 에테르 장갑",
+      "zh": "以太暴伤手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "94613": {
+    "name": {
+      "en": "Etheric Gloves of Speed",
+      "jp": "速度のエーテルガントレット",
+      "kr": "속도의 에테르 장갑",
+      "zh": "以太速度手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "94614": {
+    "name": {
+      "en": "Etheric Gloves of Bursting",
+      "jp": "炸裂のエーテルガントレット",
+      "kr": "버스트의 에테르 장갑",
+      "zh": "以太爆发手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "94615": {
+    "name": {
+      "en": "Etheric Gloves of Revenge",
+      "jp": "復讐のエーテルガントレット",
+      "kr": "복수의 에테르 장갑",
+      "zh": "以太复仇手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "94616": {
+    "name": {
+      "en": "Etheric Gloves of Patience",
+      "jp": "忍耐のエーテルガントレット",
+      "kr": "인내의 에테르 장갑",
+      "zh": "以太忍耐手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "94617": {
+    "name": {
+      "en": "Etheric Gloves of Immunity",
+      "jp": "免疫のエーテルガントレット",
+      "kr": "면역의 에테르 장갑",
+      "zh": "以太免疫手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "94618": {
+    "name": {
+      "en": "Etheric Gloves of Swiftness",
+      "jp": "機敏のエーテルガントレット",
+      "kr": "기민의 에테르 장갑",
+      "zh": "以太敏捷手套"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Gloves_06",
+    "craftable": false,
+    "main": ["5024", "5048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "19"
+  }
+}

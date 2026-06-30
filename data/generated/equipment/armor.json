@@ -1,0 +1,8658 @@
+{
+  "5001": {
+    "name": {
+      "en": "Ordinary Chest Armor of Attack",
+      "jp": "攻撃の普及型アーマー",
+      "kr": "공격의 보급형 갑옷",
+      "zh": "普通攻击盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "1"
+  },
+  "5002": {
+    "name": {
+      "en": "Fine Chest Armor of Attack",
+      "jp": "攻撃の高級型アーマー",
+      "kr": "공격의 고급형 갑옷",
+      "zh": "上等攻击盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "1"
+  },
+  "5003": {
+    "name": {
+      "en": "Steel Chest Armor of Attack",
+      "jp": "攻撃の鋼鉄アーマー",
+      "kr": "공격의 강철 갑옷",
+      "zh": "钢铁攻击盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "1"
+  },
+  "5004": {
+    "name": {
+      "en": "Etheric Chest Armor of Attack",
+      "jp": "攻撃のエーテルアーマー",
+      "kr": "공격의 에테르 갑옷",
+      "zh": "以太攻击盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "1"
+  },
+  "5005": {
+    "name": {
+      "en": "Ordinary Chest Armor of Attack",
+      "jp": "攻撃の普及型アーマー",
+      "kr": "공격의 보급형 갑옷",
+      "zh": "普通攻击盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "1"
+  },
+  "5006": {
+    "name": {
+      "en": "Fine Chest Armor of Attack",
+      "jp": "攻撃の高級型アーマー",
+      "kr": "공격의 고급형 갑옷",
+      "zh": "上等攻击盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "1"
+  },
+  "5007": {
+    "name": {
+      "en": "Steel Chest Armor of Attack",
+      "jp": "攻撃の鋼鉄アーマー",
+      "kr": "공격의 강철 갑옷",
+      "zh": "钢铁攻击盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "1"
+  },
+  "5008": {
+    "name": {
+      "en": "Etheric Chest Armor of Attack",
+      "jp": "攻撃のエーテルアーマー",
+      "kr": "공격의 에테르 갑옷",
+      "zh": "以太攻击盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "1"
+  },
+  "5009": {
+    "name": {
+      "en": "Ordinary Chest Armor of Attack",
+      "jp": "攻撃の普及型アーマー",
+      "kr": "공격의 보급형 갑옷",
+      "zh": "普通攻击盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "1"
+  },
+  "5010": {
+    "name": {
+      "en": "Fine Chest Armor of Attack",
+      "jp": "攻撃の高級型アーマー",
+      "kr": "공격의 고급형 갑옷",
+      "zh": "上等攻击盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "1"
+  },
+  "5011": {
+    "name": {
+      "en": "Steel Chest Armor of Attack",
+      "jp": "攻撃の鋼鉄アーマー",
+      "kr": "공격의 강철 갑옷",
+      "zh": "钢铁攻击盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "1"
+  },
+  "5012": {
+    "name": {
+      "en": "Etheric Chest Armor of Attack",
+      "jp": "攻撃のエーテルアーマー",
+      "kr": "공격의 에테르 갑옷",
+      "zh": "以太攻击盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "1"
+  },
+  "5013": {
+    "name": {
+      "en": "Ordinary Chest Armor of Attack",
+      "jp": "攻撃の普及型アーマー",
+      "kr": "공격의 보급형 갑옷",
+      "zh": "普通攻击盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "1"
+  },
+  "5014": {
+    "name": {
+      "en": "Fine Chest Armor of Attack",
+      "jp": "攻撃の高級型アーマー",
+      "kr": "공격의 고급형 갑옷",
+      "zh": "上等攻击盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "1"
+  },
+  "5015": {
+    "name": {
+      "en": "Steel Chest Armor of Attack",
+      "jp": "攻撃の鋼鉄アーマー",
+      "kr": "공격의 강철 갑옷",
+      "zh": "钢铁攻击盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "1"
+  },
+  "5016": {
+    "name": {
+      "en": "Etheric Chest Armor of Attack",
+      "jp": "攻撃のエーテルアーマー",
+      "kr": "공격의 에테르 갑옷",
+      "zh": "以太攻击盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "1"
+  },
+  "5017": {
+    "name": {
+      "en": "Ordinary Chest Armor of Attack",
+      "jp": "攻撃の普及型アーマー",
+      "kr": "공격의 보급형 갑옷",
+      "zh": "普通攻击盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "1"
+  },
+  "5018": {
+    "name": {
+      "en": "Fine Chest Armor of Attack",
+      "jp": "攻撃の高級型アーマー",
+      "kr": "공격의 고급형 갑옷",
+      "zh": "上等攻击盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "1"
+  },
+  "5019": {
+    "name": {
+      "en": "Steel Chest Armor of Attack",
+      "jp": "攻撃の鋼鉄アーマー",
+      "kr": "공격의 강철 갑옷",
+      "zh": "钢铁攻击盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "1"
+  },
+  "5020": {
+    "name": {
+      "en": "Etheric Chest Armor of Attack",
+      "jp": "攻撃のエーテルアーマー",
+      "kr": "공격의 에테르 갑옷",
+      "zh": "以太攻击盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "1"
+  },
+  "5021": {
+    "name": {
+      "en": "Ordinary Chest Armor of Attack",
+      "jp": "攻撃の普及型アーマー",
+      "kr": "공격의 보급형 갑옷",
+      "zh": "普通攻击盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "1"
+  },
+  "5022": {
+    "name": {
+      "en": "Fine Chest Armor of Attack",
+      "jp": "攻撃の高級型アーマー",
+      "kr": "공격의 고급형 갑옷",
+      "zh": "上等攻击盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "1"
+  },
+  "5023": {
+    "name": {
+      "en": "Steel Chest Armor of Attack",
+      "jp": "攻撃の鋼鉄アーマー",
+      "kr": "공격의 강철 갑옷",
+      "zh": "钢铁攻击盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "1"
+  },
+  "5024": {
+    "name": {
+      "en": "Etheric Chest Armor of Attack",
+      "jp": "攻撃のエーテルアーマー",
+      "kr": "공격의 에테르 갑옷",
+      "zh": "以太攻击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "5025": {
+    "name": {
+      "en": "Ordinary Chest Armor of Defense",
+      "jp": "防御の普及型アーマー",
+      "kr": "방어의 보급형 갑옷",
+      "zh": "普通防御盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "2"
+  },
+  "5026": {
+    "name": {
+      "en": "Fine Chest Armor of Defense",
+      "jp": "防御の高級型アーマー",
+      "kr": "방어의 고급형 갑옷",
+      "zh": "上等防御盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "2"
+  },
+  "5027": {
+    "name": {
+      "en": "Steel Chest Armor of Defense",
+      "jp": "防御の鋼鉄アーマー",
+      "kr": "방어의 강철 갑옷",
+      "zh": "钢铁防御盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "2"
+  },
+  "5028": {
+    "name": {
+      "en": "Etheric Chest Armor of Defense",
+      "jp": "防御のエーテルアーマー",
+      "kr": "방어의 에테르 갑옷",
+      "zh": "以太防御盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "2"
+  },
+  "5029": {
+    "name": {
+      "en": "Ordinary Chest Armor of Defense",
+      "jp": "防御の普及型アーマー",
+      "kr": "방어의 보급형 갑옷",
+      "zh": "普通防御盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "2"
+  },
+  "5030": {
+    "name": {
+      "en": "Fine Chest Armor of Defense",
+      "jp": "防御の高級型アーマー",
+      "kr": "방어의 고급형 갑옷",
+      "zh": "上等防御盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "2"
+  },
+  "5031": {
+    "name": {
+      "en": "Steel Chest Armor of Defense",
+      "jp": "防御の鋼鉄アーマー",
+      "kr": "방어의 강철 갑옷",
+      "zh": "钢铁防御盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "2"
+  },
+  "5032": {
+    "name": {
+      "en": "Etheric Chest Armor of Defense",
+      "jp": "防御のエーテルアーマー",
+      "kr": "방어의 에테르 갑옷",
+      "zh": "以太防御盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "2"
+  },
+  "5033": {
+    "name": {
+      "en": "Ordinary Chest Armor of Defense",
+      "jp": "防御の普及型アーマー",
+      "kr": "방어의 보급형 갑옷",
+      "zh": "普通防御盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "2"
+  },
+  "5034": {
+    "name": {
+      "en": "Fine Chest Armor of Defense",
+      "jp": "防御の高級型アーマー",
+      "kr": "방어의 고급형 갑옷",
+      "zh": "上等防御盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "2"
+  },
+  "5035": {
+    "name": {
+      "en": "Steel Chest Armor of Defense",
+      "jp": "防御の鋼鉄アーマー",
+      "kr": "방어의 강철 갑옷",
+      "zh": "钢铁防御盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "2"
+  },
+  "5036": {
+    "name": {
+      "en": "Etheric Chest Armor of Defense",
+      "jp": "防御のエーテルアーマー",
+      "kr": "방어의 에테르 갑옷",
+      "zh": "以太防御盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "2"
+  },
+  "5037": {
+    "name": {
+      "en": "Ordinary Chest Armor of Defense",
+      "jp": "防御の普及型アーマー",
+      "kr": "방어의 보급형 갑옷",
+      "zh": "普通防御盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "2"
+  },
+  "5038": {
+    "name": {
+      "en": "Fine Chest Armor of Defense",
+      "jp": "防御の高級型アーマー",
+      "kr": "방어의 고급형 갑옷",
+      "zh": "上等防御盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "2"
+  },
+  "5039": {
+    "name": {
+      "en": "Steel Chest Armor of Defense",
+      "jp": "防御の鋼鉄アーマー",
+      "kr": "방어의 강철 갑옷",
+      "zh": "钢铁防御盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "2"
+  },
+  "5040": {
+    "name": {
+      "en": "Etheric Chest Armor of Defense",
+      "jp": "防御のエーテルアーマー",
+      "kr": "방어의 에테르 갑옷",
+      "zh": "以太防御盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "2"
+  },
+  "5041": {
+    "name": {
+      "en": "Ordinary Chest Armor of Defense",
+      "jp": "防御の普及型アーマー",
+      "kr": "방어의 보급형 갑옷",
+      "zh": "普通防御盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "2"
+  },
+  "5042": {
+    "name": {
+      "en": "Fine Chest Armor of Defense",
+      "jp": "防御の高級型アーマー",
+      "kr": "방어의 고급형 갑옷",
+      "zh": "上等防御盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "2"
+  },
+  "5043": {
+    "name": {
+      "en": "Steel Chest Armor of Defense",
+      "jp": "防御の鋼鉄アーマー",
+      "kr": "방어의 강철 갑옷",
+      "zh": "钢铁防御盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "2"
+  },
+  "5044": {
+    "name": {
+      "en": "Etheric Chest Armor of Defense",
+      "jp": "防御のエーテルアーマー",
+      "kr": "방어의 에테르 갑옷",
+      "zh": "以太防御盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "2"
+  },
+  "5045": {
+    "name": {
+      "en": "Ordinary Chest Armor of Defense",
+      "jp": "防御の普及型アーマー",
+      "kr": "방어의 보급형 갑옷",
+      "zh": "普通防御盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "2"
+  },
+  "5046": {
+    "name": {
+      "en": "Fine Chest Armor of Defense",
+      "jp": "防御の高級型アーマー",
+      "kr": "방어의 고급형 갑옷",
+      "zh": "上等防御盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "2"
+  },
+  "5047": {
+    "name": {
+      "en": "Steel Chest Armor of Defense",
+      "jp": "防御の鋼鉄アーマー",
+      "kr": "방어의 강철 갑옷",
+      "zh": "钢铁防御盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "2"
+  },
+  "5048": {
+    "name": {
+      "en": "Etheric Chest Armor of Defense",
+      "jp": "防御のエーテルアーマー",
+      "kr": "방어의 에테르 갑옷",
+      "zh": "以太防御盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "5049": {
+    "name": {
+      "en": "Ordinary Chest Armor of Life",
+      "jp": "生命の普及型アーマー",
+      "kr": "생명의 보급형 갑옷",
+      "zh": "普通生命盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "3"
+  },
+  "5050": {
+    "name": {
+      "en": "Fine Chest Armor of Life",
+      "jp": "生命の高級型アーマー",
+      "kr": "생명의 고급형 갑옷",
+      "zh": "上等生命盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "3"
+  },
+  "5051": {
+    "name": {
+      "en": "Steel Chest Armor of Life",
+      "jp": "生命の鋼鉄アーマー",
+      "kr": "생명의 강철 갑옷",
+      "zh": "钢铁生命盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "3"
+  },
+  "5052": {
+    "name": {
+      "en": "Etheric Chest Armor of Life",
+      "jp": "生命のエーテルアーマー",
+      "kr": "생명의 에테르 갑옷",
+      "zh": "以太生命盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "3"
+  },
+  "5053": {
+    "name": {
+      "en": "Ordinary Chest Armor of Life",
+      "jp": "生命の普及型アーマー",
+      "kr": "생명의 보급형 갑옷",
+      "zh": "普通生命盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "3"
+  },
+  "5054": {
+    "name": {
+      "en": "Fine Chest Armor of Life",
+      "jp": "生命の高級型アーマー",
+      "kr": "생명의 고급형 갑옷",
+      "zh": "上等生命盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "3"
+  },
+  "5055": {
+    "name": {
+      "en": "Steel Chest Armor of Life",
+      "jp": "生命の鋼鉄アーマー",
+      "kr": "생명의 강철 갑옷",
+      "zh": "钢铁生命盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "3"
+  },
+  "5056": {
+    "name": {
+      "en": "Etheric Chest Armor of Life",
+      "jp": "生命のエーテルアーマー",
+      "kr": "생명의 에테르 갑옷",
+      "zh": "以太生命盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "3"
+  },
+  "5057": {
+    "name": {
+      "en": "Ordinary Chest Armor of Life",
+      "jp": "生命の普及型アーマー",
+      "kr": "생명의 보급형 갑옷",
+      "zh": "普通生命盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "3"
+  },
+  "5058": {
+    "name": {
+      "en": "Fine Chest Armor of Life",
+      "jp": "生命の高級型アーマー",
+      "kr": "생명의 고급형 갑옷",
+      "zh": "上等生命盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "3"
+  },
+  "5059": {
+    "name": {
+      "en": "Steel Chest Armor of Life",
+      "jp": "生命の鋼鉄アーマー",
+      "kr": "생명의 강철 갑옷",
+      "zh": "钢铁生命盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "3"
+  },
+  "5060": {
+    "name": {
+      "en": "Etheric Chest Armor of Life",
+      "jp": "生命のエーテルアーマー",
+      "kr": "생명의 에테르 갑옷",
+      "zh": "以太生命盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "3"
+  },
+  "5061": {
+    "name": {
+      "en": "Ordinary Chest Armor of Life",
+      "jp": "生命の普及型アーマー",
+      "kr": "생명의 보급형 갑옷",
+      "zh": "普通生命盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "3"
+  },
+  "5062": {
+    "name": {
+      "en": "Fine Chest Armor of Life",
+      "jp": "生命の高級型アーマー",
+      "kr": "생명의 고급형 갑옷",
+      "zh": "上等生命盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "3"
+  },
+  "5063": {
+    "name": {
+      "en": "Steel Chest Armor of Life",
+      "jp": "生命の鋼鉄アーマー",
+      "kr": "생명의 강철 갑옷",
+      "zh": "钢铁生命盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "3"
+  },
+  "5064": {
+    "name": {
+      "en": "Etheric Chest Armor of Life",
+      "jp": "生命のエーテルアーマー",
+      "kr": "생명의 에테르 갑옷",
+      "zh": "以太生命盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "3"
+  },
+  "5065": {
+    "name": {
+      "en": "Ordinary Chest Armor of Life",
+      "jp": "生命の普及型アーマー",
+      "kr": "생명의 보급형 갑옷",
+      "zh": "普通生命盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "3"
+  },
+  "5066": {
+    "name": {
+      "en": "Fine Chest Armor of Life",
+      "jp": "生命の高級型アーマー",
+      "kr": "생명의 고급형 갑옷",
+      "zh": "上等生命盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "3"
+  },
+  "5067": {
+    "name": {
+      "en": "Steel Chest Armor of Life",
+      "jp": "生命の鋼鉄アーマー",
+      "kr": "생명의 강철 갑옷",
+      "zh": "钢铁生命盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "3"
+  },
+  "5068": {
+    "name": {
+      "en": "Etheric Chest Armor of Life",
+      "jp": "生命のエーテルアーマー",
+      "kr": "생명의 에테르 갑옷",
+      "zh": "以太生命盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "3"
+  },
+  "5069": {
+    "name": {
+      "en": "Ordinary Chest Armor of Life",
+      "jp": "生命の普及型アーマー",
+      "kr": "생명의 보급형 갑옷",
+      "zh": "普通生命盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "3"
+  },
+  "5070": {
+    "name": {
+      "en": "Fine Chest Armor of Life",
+      "jp": "生命の高級型アーマー",
+      "kr": "생명의 고급형 갑옷",
+      "zh": "上等生命盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "3"
+  },
+  "5071": {
+    "name": {
+      "en": "Steel Chest Armor of Life",
+      "jp": "生命の鋼鉄アーマー",
+      "kr": "생명의 강철 갑옷",
+      "zh": "钢铁生命盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "3"
+  },
+  "5072": {
+    "name": {
+      "en": "Etheric Chest Armor of Life",
+      "jp": "生命のエーテルアーマー",
+      "kr": "생명의 에테르 갑옷",
+      "zh": "以太生命盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "5073": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Hit",
+      "jp": "会心の普及型アーマー",
+      "kr": "치명의 보급형 갑옷",
+      "zh": "普通暴击盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "4"
+  },
+  "5074": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Hit",
+      "jp": "会心の高級型アーマー",
+      "kr": "치명의 고급형 갑옷",
+      "zh": "上等暴击盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "4"
+  },
+  "5075": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Hit",
+      "jp": "会心の鋼鉄アーマー",
+      "kr": "치명의 강철 갑옷",
+      "zh": "钢铁暴击盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "4"
+  },
+  "5076": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Hit",
+      "jp": "会心のエーテルアーマー",
+      "kr": "치명의 에테르 갑옷",
+      "zh": "以太暴击盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "4"
+  },
+  "5077": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Hit",
+      "jp": "会心の普及型アーマー",
+      "kr": "치명의 보급형 갑옷",
+      "zh": "普通暴击盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "4"
+  },
+  "5078": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Hit",
+      "jp": "会心の高級型アーマー",
+      "kr": "치명의 고급형 갑옷",
+      "zh": "上等暴击盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "4"
+  },
+  "5079": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Hit",
+      "jp": "会心の鋼鉄アーマー",
+      "kr": "치명의 강철 갑옷",
+      "zh": "钢铁暴击盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "4"
+  },
+  "5080": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Hit",
+      "jp": "会心のエーテルアーマー",
+      "kr": "치명의 에테르 갑옷",
+      "zh": "以太暴击盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "4"
+  },
+  "5081": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Hit",
+      "jp": "会心の普及型アーマー",
+      "kr": "치명의 보급형 갑옷",
+      "zh": "普通暴击盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "4"
+  },
+  "5082": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Hit",
+      "jp": "会心の高級型アーマー",
+      "kr": "치명의 고급형 갑옷",
+      "zh": "上等暴击盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "4"
+  },
+  "5083": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Hit",
+      "jp": "会心の鋼鉄アーマー",
+      "kr": "치명의 강철 갑옷",
+      "zh": "钢铁暴击盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "4"
+  },
+  "5084": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Hit",
+      "jp": "会心のエーテルアーマー",
+      "kr": "치명의 에테르 갑옷",
+      "zh": "以太暴击盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "4"
+  },
+  "5085": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Hit",
+      "jp": "会心の普及型アーマー",
+      "kr": "치명의 보급형 갑옷",
+      "zh": "普通暴击盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "4"
+  },
+  "5086": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Hit",
+      "jp": "会心の高級型アーマー",
+      "kr": "치명의 고급형 갑옷",
+      "zh": "上等暴击盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "4"
+  },
+  "5087": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Hit",
+      "jp": "会心の鋼鉄アーマー",
+      "kr": "치명의 강철 갑옷",
+      "zh": "钢铁暴击盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "4"
+  },
+  "5088": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Hit",
+      "jp": "会心のエーテルアーマー",
+      "kr": "치명의 에테르 갑옷",
+      "zh": "以太暴击盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "4"
+  },
+  "5089": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Hit",
+      "jp": "会心の普及型アーマー",
+      "kr": "치명의 보급형 갑옷",
+      "zh": "普通暴击盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "4"
+  },
+  "5090": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Hit",
+      "jp": "会心の高級型アーマー",
+      "kr": "치명의 고급형 갑옷",
+      "zh": "上等暴击盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "4"
+  },
+  "5091": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Hit",
+      "jp": "会心の鋼鉄アーマー",
+      "kr": "치명의 강철 갑옷",
+      "zh": "钢铁暴击盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "4"
+  },
+  "5092": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Hit",
+      "jp": "会心のエーテルアーマー",
+      "kr": "치명의 에테르 갑옷",
+      "zh": "以太暴击盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "4"
+  },
+  "5093": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Hit",
+      "jp": "会心の普及型アーマー",
+      "kr": "치명의 보급형 갑옷",
+      "zh": "普通暴击盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "4"
+  },
+  "5094": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Hit",
+      "jp": "会心の高級型アーマー",
+      "kr": "치명의 고급형 갑옷",
+      "zh": "上等暴击盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "4"
+  },
+  "5095": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Hit",
+      "jp": "会心の鋼鉄アーマー",
+      "kr": "치명의 강철 갑옷",
+      "zh": "钢铁暴击盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "4"
+  },
+  "5096": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Hit",
+      "jp": "会心のエーテルアーマー",
+      "kr": "치명의 에테르 갑옷",
+      "zh": "以太暴击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "5097": {
+    "name": {
+      "en": "Ordinary Chest Armor of Effectiveness",
+      "jp": "効果命中の普及型アーマー",
+      "kr": "적중의 보급형 갑옷",
+      "zh": "普通效果命中盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "5"
+  },
+  "5098": {
+    "name": {
+      "en": "Fine Chest Armor of Effectiveness",
+      "jp": "効果命中の高級型アーマー",
+      "kr": "적중의 고급형 갑옷",
+      "zh": "上等效果命中盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "5"
+  },
+  "5099": {
+    "name": {
+      "en": "Steel Chest Armor of Effectiveness",
+      "jp": "効果命中の鋼鉄アーマー",
+      "kr": "적중의 강철 갑옷",
+      "zh": "钢铁效果命中盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "5"
+  },
+  "5100": {
+    "name": {
+      "en": "Etheric Chest Armor of Effectiveness",
+      "jp": "効果命中のエーテルアーマー",
+      "kr": "적중의 에테르 갑옷",
+      "zh": "以太效果命中盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "5"
+  },
+  "5101": {
+    "name": {
+      "en": "Ordinary Chest Armor of Effectiveness",
+      "jp": "効果命中の普及型アーマー",
+      "kr": "적중의 보급형 갑옷",
+      "zh": "普通效果命中盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "5"
+  },
+  "5102": {
+    "name": {
+      "en": "Fine Chest Armor of Effectiveness",
+      "jp": "効果命中の高級型アーマー",
+      "kr": "적중의 고급형 갑옷",
+      "zh": "上等效果命中盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "5"
+  },
+  "5103": {
+    "name": {
+      "en": "Steel Chest Armor of Effectiveness",
+      "jp": "効果命中の鋼鉄アーマー",
+      "kr": "적중의 강철 갑옷",
+      "zh": "钢铁效果命中盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "5"
+  },
+  "5104": {
+    "name": {
+      "en": "Etheric Chest Armor of Effectiveness",
+      "jp": "効果命中のエーテルアーマー",
+      "kr": "적중의 에테르 갑옷",
+      "zh": "以太效果命中盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "5"
+  },
+  "5105": {
+    "name": {
+      "en": "Ordinary Chest Armor of Effectiveness",
+      "jp": "効果命中の普及型アーマー",
+      "kr": "적중의 보급형 갑옷",
+      "zh": "普通效果命中盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "5"
+  },
+  "5106": {
+    "name": {
+      "en": "Fine Chest Armor of Effectiveness",
+      "jp": "効果命中の高級型アーマー",
+      "kr": "적중의 고급형 갑옷",
+      "zh": "上等效果命中盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "5"
+  },
+  "5107": {
+    "name": {
+      "en": "Steel Chest Armor of Effectiveness",
+      "jp": "効果命中の鋼鉄アーマー",
+      "kr": "적중의 강철 갑옷",
+      "zh": "钢铁效果命中盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "5"
+  },
+  "5108": {
+    "name": {
+      "en": "Etheric Chest Armor of Effectiveness",
+      "jp": "効果命中のエーテルアーマー",
+      "kr": "적중의 에테르 갑옷",
+      "zh": "以太效果命中盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "5"
+  },
+  "5109": {
+    "name": {
+      "en": "Ordinary Chest Armor of Effectiveness",
+      "jp": "効果命中の普及型アーマー",
+      "kr": "적중의 보급형 갑옷",
+      "zh": "普通效果命中盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "5"
+  },
+  "5110": {
+    "name": {
+      "en": "Fine Chest Armor of Effectiveness",
+      "jp": "効果命中の高級型アーマー",
+      "kr": "적중의 고급형 갑옷",
+      "zh": "上等效果命中盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "5"
+  },
+  "5111": {
+    "name": {
+      "en": "Steel Chest Armor of Effectiveness",
+      "jp": "効果命中の鋼鉄アーマー",
+      "kr": "적중의 강철 갑옷",
+      "zh": "钢铁效果命中盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "5"
+  },
+  "5112": {
+    "name": {
+      "en": "Etheric Chest Armor of Effectiveness",
+      "jp": "効果命中のエーテルアーマー",
+      "kr": "적중의 에테르 갑옷",
+      "zh": "以太效果命中盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "5"
+  },
+  "5113": {
+    "name": {
+      "en": "Ordinary Chest Armor of Effectiveness",
+      "jp": "効果命中の普及型アーマー",
+      "kr": "적중의 보급형 갑옷",
+      "zh": "普通效果命中盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "5"
+  },
+  "5114": {
+    "name": {
+      "en": "Fine Chest Armor of Effectiveness",
+      "jp": "効果命中の高級型アーマー",
+      "kr": "적중의 고급형 갑옷",
+      "zh": "上等效果命中盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "5"
+  },
+  "5115": {
+    "name": {
+      "en": "Steel Chest Armor of Effectiveness",
+      "jp": "効果命中の鋼鉄アーマー",
+      "kr": "적중의 강철 갑옷",
+      "zh": "钢铁效果命中盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "5"
+  },
+  "5116": {
+    "name": {
+      "en": "Etheric Chest Armor of Effectiveness",
+      "jp": "効果命中のエーテルアーマー",
+      "kr": "적중의 에테르 갑옷",
+      "zh": "以太效果命中盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "5"
+  },
+  "5117": {
+    "name": {
+      "en": "Ordinary Chest Armor of Effectiveness",
+      "jp": "効果命中の普及型アーマー",
+      "kr": "적중의 보급형 갑옷",
+      "zh": "普通效果命中盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "5"
+  },
+  "5118": {
+    "name": {
+      "en": "Fine Chest Armor of Effectiveness",
+      "jp": "効果命中の高級型アーマー",
+      "kr": "적중의 고급형 갑옷",
+      "zh": "上等效果命中盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "5"
+  },
+  "5119": {
+    "name": {
+      "en": "Steel Chest Armor of Effectiveness",
+      "jp": "効果命中の鋼鉄アーマー",
+      "kr": "적중의 강철 갑옷",
+      "zh": "钢铁效果命中盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "5"
+  },
+  "5120": {
+    "name": {
+      "en": "Etheric Chest Armor of Effectiveness",
+      "jp": "効果命中のエーテルアーマー",
+      "kr": "적중의 에테르 갑옷",
+      "zh": "以太效果命中盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "5121": {
+    "name": {
+      "en": "Ordinary Chest Armor of Resilience",
+      "jp": "抵抗の普及型アーマー",
+      "kr": "저항의 보급형 갑옷",
+      "zh": "普通抵抗盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "6"
+  },
+  "5122": {
+    "name": {
+      "en": "Fine Chest Armor of Resilience",
+      "jp": "抵抗の高級型アーマー",
+      "kr": "저항의 고급형 갑옷",
+      "zh": "上等抵抗盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "6"
+  },
+  "5123": {
+    "name": {
+      "en": "Steel Chest Armor of Resilience",
+      "jp": "抵抗の鋼鉄アーマー",
+      "kr": "저항의 강철 갑옷",
+      "zh": "钢铁抵抗盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "6"
+  },
+  "5124": {
+    "name": {
+      "en": "Etheric Chest Armor of Resilience",
+      "jp": "抵抗のエーテルアーマー",
+      "kr": "저항의 에테르 갑옷",
+      "zh": "以太抵抗盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "6"
+  },
+  "5125": {
+    "name": {
+      "en": "Ordinary Chest Armor of Resilience",
+      "jp": "抵抗の普及型アーマー",
+      "kr": "저항의 보급형 갑옷",
+      "zh": "普通抵抗盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "6"
+  },
+  "5126": {
+    "name": {
+      "en": "Fine Chest Armor of Resilience",
+      "jp": "抵抗の高級型アーマー",
+      "kr": "저항의 고급형 갑옷",
+      "zh": "上等抵抗盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "6"
+  },
+  "5127": {
+    "name": {
+      "en": "Steel Chest Armor of Resilience",
+      "jp": "抵抗の鋼鉄アーマー",
+      "kr": "저항의 강철 갑옷",
+      "zh": "钢铁抵抗盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "6"
+  },
+  "5128": {
+    "name": {
+      "en": "Etheric Chest Armor of Resilience",
+      "jp": "抵抗のエーテルアーマー",
+      "kr": "저항의 에테르 갑옷",
+      "zh": "以太抵抗盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "6"
+  },
+  "5129": {
+    "name": {
+      "en": "Ordinary Chest Armor of Resilience",
+      "jp": "抵抗の普及型アーマー",
+      "kr": "저항의 보급형 갑옷",
+      "zh": "普通抵抗盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "6"
+  },
+  "5130": {
+    "name": {
+      "en": "Fine Chest Armor of Resilience",
+      "jp": "抵抗の高級型アーマー",
+      "kr": "저항의 고급형 갑옷",
+      "zh": "上等抵抗盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "6"
+  },
+  "5131": {
+    "name": {
+      "en": "Steel Chest Armor of Resilience",
+      "jp": "抵抗の鋼鉄アーマー",
+      "kr": "저항의 강철 갑옷",
+      "zh": "钢铁抵抗盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "6"
+  },
+  "5132": {
+    "name": {
+      "en": "Etheric Chest Armor of Resilience",
+      "jp": "抵抗のエーテルアーマー",
+      "kr": "저항의 에테르 갑옷",
+      "zh": "以太抵抗盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "6"
+  },
+  "5133": {
+    "name": {
+      "en": "Ordinary Chest Armor of Resilience",
+      "jp": "抵抗の普及型アーマー",
+      "kr": "저항의 보급형 갑옷",
+      "zh": "普通抵抗盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "6"
+  },
+  "5134": {
+    "name": {
+      "en": "Fine Chest Armor of Resilience",
+      "jp": "抵抗の高級型アーマー",
+      "kr": "저항의 고급형 갑옷",
+      "zh": "上等抵抗盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "6"
+  },
+  "5135": {
+    "name": {
+      "en": "Steel Chest Armor of Resilience",
+      "jp": "抵抗の鋼鉄アーマー",
+      "kr": "저항의 강철 갑옷",
+      "zh": "钢铁抵抗盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "6"
+  },
+  "5136": {
+    "name": {
+      "en": "Etheric Chest Armor of Resilience",
+      "jp": "抵抗のエーテルアーマー",
+      "kr": "저항의 에테르 갑옷",
+      "zh": "以太抵抗盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "6"
+  },
+  "5137": {
+    "name": {
+      "en": "Ordinary Chest Armor of Resilience",
+      "jp": "抵抗の普及型アーマー",
+      "kr": "저항의 보급형 갑옷",
+      "zh": "普通抵抗盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "6"
+  },
+  "5138": {
+    "name": {
+      "en": "Fine Chest Armor of Resilience",
+      "jp": "抵抗の高級型アーマー",
+      "kr": "저항의 고급형 갑옷",
+      "zh": "上等抵抗盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "6"
+  },
+  "5139": {
+    "name": {
+      "en": "Steel Chest Armor of Resilience",
+      "jp": "抵抗の鋼鉄アーマー",
+      "kr": "저항의 강철 갑옷",
+      "zh": "钢铁抵抗盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "6"
+  },
+  "5140": {
+    "name": {
+      "en": "Etheric Chest Armor of Resilience",
+      "jp": "抵抗のエーテルアーマー",
+      "kr": "저항의 에테르 갑옷",
+      "zh": "以太抵抗盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "6"
+  },
+  "5141": {
+    "name": {
+      "en": "Ordinary Chest Armor of Resilience",
+      "jp": "抵抗の普及型アーマー",
+      "kr": "저항의 보급형 갑옷",
+      "zh": "普通抵抗盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "6"
+  },
+  "5142": {
+    "name": {
+      "en": "Fine Chest Armor of Resilience",
+      "jp": "抵抗の高級型アーマー",
+      "kr": "저항의 고급형 갑옷",
+      "zh": "上等抵抗盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "6"
+  },
+  "5143": {
+    "name": {
+      "en": "Steel Chest Armor of Resilience",
+      "jp": "抵抗の鋼鉄アーマー",
+      "kr": "저항의 강철 갑옷",
+      "zh": "钢铁抵抗盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "6"
+  },
+  "5144": {
+    "name": {
+      "en": "Etheric Chest Armor of Resilience",
+      "jp": "抵抗のエーテルアーマー",
+      "kr": "저항의 에테르 갑옷",
+      "zh": "以太抵抗盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "5145": {
+    "name": {
+      "en": "Ordinary Chest Armor of Counterattack",
+      "jp": "反撃の普及型アーマー",
+      "kr": "반격의 보급형 갑옷",
+      "zh": "普通反击盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "7"
+  },
+  "5146": {
+    "name": {
+      "en": "Fine Chest Armor of Counterattack",
+      "jp": "反撃の高級型アーマー",
+      "kr": "반격의 고급형 갑옷",
+      "zh": "上等反击盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "7"
+  },
+  "5147": {
+    "name": {
+      "en": "Steel Chest Armor of Counterattack",
+      "jp": "反撃の鋼鉄アーマー",
+      "kr": "반격의 강철 갑옷",
+      "zh": "钢铁反击盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "7"
+  },
+  "5148": {
+    "name": {
+      "en": "Etheric Chest Armor of Counterattack",
+      "jp": "反撃のエーテルアーマー",
+      "kr": "반격의 에테르 갑옷",
+      "zh": "以太反击盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "7"
+  },
+  "5149": {
+    "name": {
+      "en": "Ordinary Chest Armor of Counterattack",
+      "jp": "反撃の普及型アーマー",
+      "kr": "반격의 보급형 갑옷",
+      "zh": "普通反击盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "7"
+  },
+  "5150": {
+    "name": {
+      "en": "Fine Chest Armor of Counterattack",
+      "jp": "反撃の高級型アーマー",
+      "kr": "반격의 고급형 갑옷",
+      "zh": "上等反击盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "7"
+  },
+  "5151": {
+    "name": {
+      "en": "Steel Chest Armor of Counterattack",
+      "jp": "反撃の鋼鉄アーマー",
+      "kr": "반격의 강철 갑옷",
+      "zh": "钢铁反击盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "7"
+  },
+  "5152": {
+    "name": {
+      "en": "Etheric Chest Armor of Counterattack",
+      "jp": "反撃のエーテルアーマー",
+      "kr": "반격의 에테르 갑옷",
+      "zh": "以太反击盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "7"
+  },
+  "5153": {
+    "name": {
+      "en": "Ordinary Chest Armor of Counterattack",
+      "jp": "反撃の普及型アーマー",
+      "kr": "반격의 보급형 갑옷",
+      "zh": "普通反击盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "7"
+  },
+  "5154": {
+    "name": {
+      "en": "Fine Chest Armor of Counterattack",
+      "jp": "反撃の高級型アーマー",
+      "kr": "반격의 고급형 갑옷",
+      "zh": "上等反击盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "7"
+  },
+  "5155": {
+    "name": {
+      "en": "Steel Chest Armor of Counterattack",
+      "jp": "反撃の鋼鉄アーマー",
+      "kr": "반격의 강철 갑옷",
+      "zh": "钢铁反击盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "7"
+  },
+  "5156": {
+    "name": {
+      "en": "Etheric Chest Armor of Counterattack",
+      "jp": "反撃のエーテルアーマー",
+      "kr": "반격의 에테르 갑옷",
+      "zh": "以太反击盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "7"
+  },
+  "5157": {
+    "name": {
+      "en": "Ordinary Chest Armor of Counterattack",
+      "jp": "反撃の普及型アーマー",
+      "kr": "반격의 보급형 갑옷",
+      "zh": "普通反击盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "7"
+  },
+  "5158": {
+    "name": {
+      "en": "Fine Chest Armor of Counterattack",
+      "jp": "反撃の高級型アーマー",
+      "kr": "반격의 고급형 갑옷",
+      "zh": "上等反击盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "7"
+  },
+  "5159": {
+    "name": {
+      "en": "Steel Chest Armor of Counterattack",
+      "jp": "反撃の鋼鉄アーマー",
+      "kr": "반격의 강철 갑옷",
+      "zh": "钢铁反击盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "7"
+  },
+  "5160": {
+    "name": {
+      "en": "Etheric Chest Armor of Counterattack",
+      "jp": "反撃のエーテルアーマー",
+      "kr": "반격의 에테르 갑옷",
+      "zh": "以太反击盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "7"
+  },
+  "5161": {
+    "name": {
+      "en": "Ordinary Chest Armor of Counterattack",
+      "jp": "反撃の普及型アーマー",
+      "kr": "반격의 보급형 갑옷",
+      "zh": "普通反击盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "7"
+  },
+  "5162": {
+    "name": {
+      "en": "Fine Chest Armor of Counterattack",
+      "jp": "反撃の高級型アーマー",
+      "kr": "반격의 고급형 갑옷",
+      "zh": "上等反击盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "7"
+  },
+  "5163": {
+    "name": {
+      "en": "Steel Chest Armor of Counterattack",
+      "jp": "反撃の鋼鉄アーマー",
+      "kr": "반격의 강철 갑옷",
+      "zh": "钢铁反击盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "7"
+  },
+  "5164": {
+    "name": {
+      "en": "Etheric Chest Armor of Counterattack",
+      "jp": "反撃のエーテルアーマー",
+      "kr": "반격의 에테르 갑옷",
+      "zh": "以太反击盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "7"
+  },
+  "5165": {
+    "name": {
+      "en": "Ordinary Chest Armor of Counterattack",
+      "jp": "反撃の普及型アーマー",
+      "kr": "반격의 보급형 갑옷",
+      "zh": "普通反击盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "7"
+  },
+  "5166": {
+    "name": {
+      "en": "Fine Chest Armor of Counterattack",
+      "jp": "反撃の高級型アーマー",
+      "kr": "반격의 고급형 갑옷",
+      "zh": "上等反击盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "7"
+  },
+  "5167": {
+    "name": {
+      "en": "Steel Chest Armor of Counterattack",
+      "jp": "反撃の鋼鉄アーマー",
+      "kr": "반격의 강철 갑옷",
+      "zh": "钢铁反击盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "7"
+  },
+  "5168": {
+    "name": {
+      "en": "Etheric Chest Armor of Counterattack",
+      "jp": "反撃のエーテルアーマー",
+      "kr": "반격의 에테르 갑옷",
+      "zh": "以太反击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "5169": {
+    "name": {
+      "en": "Ordinary Chest Armor of Fortification",
+      "jp": "鉄壁の普及型アーマー",
+      "kr": "개전 방벽의 보급형 갑옷",
+      "zh": "普通开战防壁盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "8"
+  },
+  "5170": {
+    "name": {
+      "en": "Fine Chest Armor of Fortification",
+      "jp": "鉄壁の高級型アーマー",
+      "kr": "개전 방벽의 고급형 갑옷",
+      "zh": "上等开战防壁盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "8"
+  },
+  "5171": {
+    "name": {
+      "en": "Steel Chest Armor of Fortification",
+      "jp": "鉄壁の鋼鉄アーマー",
+      "kr": "개전 방벽의 강철 갑옷",
+      "zh": "钢铁开战防壁盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "8"
+  },
+  "5172": {
+    "name": {
+      "en": "Etheric Chest Armor of Fortification",
+      "jp": "鉄壁のエーテルアーマー",
+      "kr": "개전 방벽의 에테르 갑옷",
+      "zh": "以太开战防壁盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "8"
+  },
+  "5173": {
+    "name": {
+      "en": "Ordinary Chest Armor of Fortification",
+      "jp": "鉄壁の普及型アーマー",
+      "kr": "개전 방벽의 보급형 갑옷",
+      "zh": "普通开战防壁盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "8"
+  },
+  "5174": {
+    "name": {
+      "en": "Fine Chest Armor of Fortification",
+      "jp": "鉄壁の高級型アーマー",
+      "kr": "개전 방벽의 고급형 갑옷",
+      "zh": "上等开战防壁盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "8"
+  },
+  "5175": {
+    "name": {
+      "en": "Steel Chest Armor of Fortification",
+      "jp": "鉄壁の鋼鉄アーマー",
+      "kr": "개전 방벽의 강철 갑옷",
+      "zh": "钢铁开战防壁盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "8"
+  },
+  "5176": {
+    "name": {
+      "en": "Etheric Chest Armor of Fortification",
+      "jp": "鉄壁のエーテルアーマー",
+      "kr": "개전 방벽의 에테르 갑옷",
+      "zh": "以太开战防壁盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "8"
+  },
+  "5177": {
+    "name": {
+      "en": "Ordinary Chest Armor of Fortification",
+      "jp": "鉄壁の普及型アーマー",
+      "kr": "개전 방벽의 보급형 갑옷",
+      "zh": "普通开战防壁盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "8"
+  },
+  "5178": {
+    "name": {
+      "en": "Fine Chest Armor of Fortification",
+      "jp": "鉄壁の高級型アーマー",
+      "kr": "개전 방벽의 고급형 갑옷",
+      "zh": "上等开战防壁盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "8"
+  },
+  "5179": {
+    "name": {
+      "en": "Steel Chest Armor of Fortification",
+      "jp": "鉄壁の鋼鉄アーマー",
+      "kr": "개전 방벽의 강철 갑옷",
+      "zh": "钢铁开战防壁盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "8"
+  },
+  "5180": {
+    "name": {
+      "en": "Etheric Chest Armor of Fortification",
+      "jp": "鉄壁のエーテルアーマー",
+      "kr": "개전 방벽의 에테르 갑옷",
+      "zh": "以太开战防壁盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "8"
+  },
+  "5181": {
+    "name": {
+      "en": "Ordinary Chest Armor of Fortification",
+      "jp": "鉄壁の普及型アーマー",
+      "kr": "개전 방벽의 보급형 갑옷",
+      "zh": "普通开战防壁盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "8"
+  },
+  "5182": {
+    "name": {
+      "en": "Fine Chest Armor of Fortification",
+      "jp": "鉄壁の高級型アーマー",
+      "kr": "개전 방벽의 고급형 갑옷",
+      "zh": "上等开战防壁盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "8"
+  },
+  "5183": {
+    "name": {
+      "en": "Steel Chest Armor of Fortification",
+      "jp": "鉄壁の鋼鉄アーマー",
+      "kr": "개전 방벽의 강철 갑옷",
+      "zh": "钢铁开战防壁盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "8"
+  },
+  "5184": {
+    "name": {
+      "en": "Etheric Chest Armor of Fortification",
+      "jp": "鉄壁のエーテルアーマー",
+      "kr": "개전 방벽의 에테르 갑옷",
+      "zh": "以太开战防壁盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "8"
+  },
+  "5185": {
+    "name": {
+      "en": "Ordinary Chest Armor of Fortification",
+      "jp": "鉄壁の普及型アーマー",
+      "kr": "개전 방벽의 보급형 갑옷",
+      "zh": "普通开战防壁盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "8"
+  },
+  "5186": {
+    "name": {
+      "en": "Fine Chest Armor of Fortification",
+      "jp": "鉄壁の高級型アーマー",
+      "kr": "개전 방벽의 고급형 갑옷",
+      "zh": "上等开战防壁盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "8"
+  },
+  "5187": {
+    "name": {
+      "en": "Steel Chest Armor of Fortification",
+      "jp": "鉄壁の鋼鉄アーマー",
+      "kr": "개전 방벽의 강철 갑옷",
+      "zh": "钢铁开战防壁盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "8"
+  },
+  "5188": {
+    "name": {
+      "en": "Etheric Chest Armor of Fortification",
+      "jp": "鉄壁のエーテルアーマー",
+      "kr": "개전 방벽의 에테르 갑옷",
+      "zh": "以太开战防壁盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "8"
+  },
+  "5189": {
+    "name": {
+      "en": "Ordinary Chest Armor of Fortification",
+      "jp": "鉄壁の普及型アーマー",
+      "kr": "개전 방벽의 보급형 갑옷",
+      "zh": "普通开战防壁盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "8"
+  },
+  "5190": {
+    "name": {
+      "en": "Fine Chest Armor of Fortification",
+      "jp": "鉄壁の高級型アーマー",
+      "kr": "개전 방벽의 고급형 갑옷",
+      "zh": "上等开战防壁盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "8"
+  },
+  "5191": {
+    "name": {
+      "en": "Steel Chest Armor of Fortification",
+      "jp": "鉄壁の鋼鉄アーマー",
+      "kr": "개전 방벽의 강철 갑옷",
+      "zh": "钢铁开战防壁盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "8"
+  },
+  "5192": {
+    "name": {
+      "en": "Etheric Chest Armor of Fortification",
+      "jp": "鉄壁のエーテルアーマー",
+      "kr": "개전 방벽의 에테르 갑옷",
+      "zh": "以太开战防壁盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "5193": {
+    "name": {
+      "en": "Ordinary Chest Armor of Mitigation",
+      "jp": "無力化の普及型アーマー",
+      "kr": "무력화의 보급형 갑옷",
+      "zh": "普通失效盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "9"
+  },
+  "5194": {
+    "name": {
+      "en": "Fine Chest Armor of Mitigation",
+      "jp": "無力化の高級型アーマー",
+      "kr": "무력화의 고급형 갑옷",
+      "zh": "上等失效盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "9"
+  },
+  "5195": {
+    "name": {
+      "en": "Steel Chest Armor of Mitigation",
+      "jp": "無力化の鋼鉄アーマー",
+      "kr": "무력화의 강철 갑옷",
+      "zh": "钢铁失效盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "9"
+  },
+  "5196": {
+    "name": {
+      "en": "Etheric Chest Armor of Mitigation",
+      "jp": "無力化のエーテルアーマー",
+      "kr": "무력화의 에테르 갑옷",
+      "zh": "以太失效盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "9"
+  },
+  "5197": {
+    "name": {
+      "en": "Ordinary Chest Armor of Mitigation",
+      "jp": "無力化の普及型アーマー",
+      "kr": "무력화의 보급형 갑옷",
+      "zh": "普通失效盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "9"
+  },
+  "5198": {
+    "name": {
+      "en": "Fine Chest Armor of Mitigation",
+      "jp": "無力化の高級型アーマー",
+      "kr": "무력화의 고급형 갑옷",
+      "zh": "上等失效盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "9"
+  },
+  "5199": {
+    "name": {
+      "en": "Steel Chest Armor of Mitigation",
+      "jp": "無力化の鋼鉄アーマー",
+      "kr": "무력화의 강철 갑옷",
+      "zh": "钢铁失效盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "9"
+  },
+  "5200": {
+    "name": {
+      "en": "Etheric Chest Armor of Mitigation",
+      "jp": "無力化のエーテルアーマー",
+      "kr": "무력화의 에테르 갑옷",
+      "zh": "以太失效盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "9"
+  },
+  "5201": {
+    "name": {
+      "en": "Ordinary Chest Armor of Mitigation",
+      "jp": "無力化の普及型アーマー",
+      "kr": "무력화의 보급형 갑옷",
+      "zh": "普通失效盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "9"
+  },
+  "5202": {
+    "name": {
+      "en": "Fine Chest Armor of Mitigation",
+      "jp": "無力化の高級型アーマー",
+      "kr": "무력화의 고급형 갑옷",
+      "zh": "上等失效盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "9"
+  },
+  "5203": {
+    "name": {
+      "en": "Steel Chest Armor of Mitigation",
+      "jp": "無力化の鋼鉄アーマー",
+      "kr": "무력화의 강철 갑옷",
+      "zh": "钢铁失效盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "9"
+  },
+  "5204": {
+    "name": {
+      "en": "Etheric Chest Armor of Mitigation",
+      "jp": "無力化のエーテルアーマー",
+      "kr": "무력화의 에테르 갑옷",
+      "zh": "以太失效盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "9"
+  },
+  "5205": {
+    "name": {
+      "en": "Ordinary Chest Armor of Mitigation",
+      "jp": "無力化の普及型アーマー",
+      "kr": "무력화의 보급형 갑옷",
+      "zh": "普通失效盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "9"
+  },
+  "5206": {
+    "name": {
+      "en": "Fine Chest Armor of Mitigation",
+      "jp": "無力化の高級型アーマー",
+      "kr": "무력화의 고급형 갑옷",
+      "zh": "上等失效盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "9"
+  },
+  "5207": {
+    "name": {
+      "en": "Steel Chest Armor of Mitigation",
+      "jp": "無力化の鋼鉄アーマー",
+      "kr": "무력화의 강철 갑옷",
+      "zh": "钢铁失效盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "9"
+  },
+  "5208": {
+    "name": {
+      "en": "Etheric Chest Armor of Mitigation",
+      "jp": "無力化のエーテルアーマー",
+      "kr": "무력화의 에테르 갑옷",
+      "zh": "以太失效盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "9"
+  },
+  "5209": {
+    "name": {
+      "en": "Ordinary Chest Armor of Mitigation",
+      "jp": "無力化の普及型アーマー",
+      "kr": "무력화의 보급형 갑옷",
+      "zh": "普通失效盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "9"
+  },
+  "5210": {
+    "name": {
+      "en": "Fine Chest Armor of Mitigation",
+      "jp": "無力化の高級型アーマー",
+      "kr": "무력화의 고급형 갑옷",
+      "zh": "上等失效盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "9"
+  },
+  "5211": {
+    "name": {
+      "en": "Steel Chest Armor of Mitigation",
+      "jp": "無力化の鋼鉄アーマー",
+      "kr": "무력화의 강철 갑옷",
+      "zh": "钢铁失效盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "9"
+  },
+  "5212": {
+    "name": {
+      "en": "Etheric Chest Armor of Mitigation",
+      "jp": "無力化のエーテルアーマー",
+      "kr": "무력화의 에테르 갑옷",
+      "zh": "以太失效盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "9"
+  },
+  "5213": {
+    "name": {
+      "en": "Ordinary Chest Armor of Mitigation",
+      "jp": "無力化の普及型アーマー",
+      "kr": "무력화의 보급형 갑옷",
+      "zh": "普通失效盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "9"
+  },
+  "5214": {
+    "name": {
+      "en": "Fine Chest Armor of Mitigation",
+      "jp": "無力化の高級型アーマー",
+      "kr": "무력화의 고급형 갑옷",
+      "zh": "上等失效盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "9"
+  },
+  "5215": {
+    "name": {
+      "en": "Steel Chest Armor of Mitigation",
+      "jp": "無力化の鋼鉄アーマー",
+      "kr": "무력화의 강철 갑옷",
+      "zh": "钢铁失效盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "9"
+  },
+  "5216": {
+    "name": {
+      "en": "Etheric Chest Armor of Mitigation",
+      "jp": "無力化のエーテルアーマー",
+      "kr": "무력화의 에테르 갑옷",
+      "zh": "以太失效盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "5217": {
+    "name": {
+      "en": "Ordinary Chest Armor of Lifesteal",
+      "jp": "吸収の普及型アーマー",
+      "kr": "흡혈의 보급형 갑옷",
+      "zh": "普通吸血盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "10"
+  },
+  "5218": {
+    "name": {
+      "en": "Fine Chest Armor of Lifesteal",
+      "jp": "吸収の高級型アーマー",
+      "kr": "흡혈의 고급형 갑옷",
+      "zh": "上等吸血盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "10"
+  },
+  "5219": {
+    "name": {
+      "en": "Steel Chest Armor of Lifesteal",
+      "jp": "吸収の鋼鉄アーマー",
+      "kr": "흡혈의 강철 갑옷",
+      "zh": "钢铁吸血盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "10"
+  },
+  "5220": {
+    "name": {
+      "en": "Etheric Chest Armor of Lifesteal",
+      "jp": "吸収のエーテルアーマー",
+      "kr": "흡혈의 에테르 갑옷",
+      "zh": "以太吸血盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "10"
+  },
+  "5221": {
+    "name": {
+      "en": "Ordinary Chest Armor of Lifesteal",
+      "jp": "吸収の普及型アーマー",
+      "kr": "흡혈의 보급형 갑옷",
+      "zh": "普通吸血盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "10"
+  },
+  "5222": {
+    "name": {
+      "en": "Fine Chest Armor of Lifesteal",
+      "jp": "吸収の高級型アーマー",
+      "kr": "흡혈의 고급형 갑옷",
+      "zh": "上等吸血盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "10"
+  },
+  "5223": {
+    "name": {
+      "en": "Steel Chest Armor of Lifesteal",
+      "jp": "吸収の鋼鉄アーマー",
+      "kr": "흡혈의 강철 갑옷",
+      "zh": "钢铁吸血盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "10"
+  },
+  "5224": {
+    "name": {
+      "en": "Etheric Chest Armor of Lifesteal",
+      "jp": "吸収のエーテルアーマー",
+      "kr": "흡혈의 에테르 갑옷",
+      "zh": "以太吸血盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "10"
+  },
+  "5225": {
+    "name": {
+      "en": "Ordinary Chest Armor of Lifesteal",
+      "jp": "吸収の普及型アーマー",
+      "kr": "흡혈의 보급형 갑옷",
+      "zh": "普通吸血盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "10"
+  },
+  "5226": {
+    "name": {
+      "en": "Fine Chest Armor of Lifesteal",
+      "jp": "吸収の高級型アーマー",
+      "kr": "흡혈의 고급형 갑옷",
+      "zh": "上等吸血盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "10"
+  },
+  "5227": {
+    "name": {
+      "en": "Steel Chest Armor of Lifesteal",
+      "jp": "吸収の鋼鉄アーマー",
+      "kr": "흡혈의 강철 갑옷",
+      "zh": "钢铁吸血盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "10"
+  },
+  "5228": {
+    "name": {
+      "en": "Etheric Chest Armor of Lifesteal",
+      "jp": "吸収のエーテルアーマー",
+      "kr": "흡혈의 에테르 갑옷",
+      "zh": "以太吸血盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "10"
+  },
+  "5229": {
+    "name": {
+      "en": "Ordinary Chest Armor of Lifesteal",
+      "jp": "吸収の普及型アーマー",
+      "kr": "흡혈의 보급형 갑옷",
+      "zh": "普通吸血盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "10"
+  },
+  "5230": {
+    "name": {
+      "en": "Fine Chest Armor of Lifesteal",
+      "jp": "吸収の高級型アーマー",
+      "kr": "흡혈의 고급형 갑옷",
+      "zh": "上等吸血盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "10"
+  },
+  "5231": {
+    "name": {
+      "en": "Steel Chest Armor of Lifesteal",
+      "jp": "吸収の鋼鉄アーマー",
+      "kr": "흡혈의 강철 갑옷",
+      "zh": "钢铁吸血盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "10"
+  },
+  "5232": {
+    "name": {
+      "en": "Etheric Chest Armor of Lifesteal",
+      "jp": "吸収のエーテルアーマー",
+      "kr": "흡혈의 에테르 갑옷",
+      "zh": "以太吸血盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "10"
+  },
+  "5233": {
+    "name": {
+      "en": "Ordinary Chest Armor of Lifesteal",
+      "jp": "吸収の普及型アーマー",
+      "kr": "흡혈의 보급형 갑옷",
+      "zh": "普通吸血盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "10"
+  },
+  "5234": {
+    "name": {
+      "en": "Fine Chest Armor of Lifesteal",
+      "jp": "吸収の高級型アーマー",
+      "kr": "흡혈의 고급형 갑옷",
+      "zh": "上等吸血盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "10"
+  },
+  "5235": {
+    "name": {
+      "en": "Steel Chest Armor of Lifesteal",
+      "jp": "吸収の鋼鉄アーマー",
+      "kr": "흡혈의 강철 갑옷",
+      "zh": "钢铁吸血盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "10"
+  },
+  "5236": {
+    "name": {
+      "en": "Etheric Chest Armor of Lifesteal",
+      "jp": "吸収のエーテルアーマー",
+      "kr": "흡혈의 에테르 갑옷",
+      "zh": "以太吸血盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "10"
+  },
+  "5237": {
+    "name": {
+      "en": "Ordinary Chest Armor of Lifesteal",
+      "jp": "吸収の普及型アーマー",
+      "kr": "흡혈의 보급형 갑옷",
+      "zh": "普通吸血盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "10"
+  },
+  "5238": {
+    "name": {
+      "en": "Fine Chest Armor of Lifesteal",
+      "jp": "吸収の高級型アーマー",
+      "kr": "흡혈의 고급형 갑옷",
+      "zh": "上等吸血盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "10"
+  },
+  "5239": {
+    "name": {
+      "en": "Steel Chest Armor of Lifesteal",
+      "jp": "吸収の鋼鉄アーマー",
+      "kr": "흡혈의 강철 갑옷",
+      "zh": "钢铁吸血盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "10"
+  },
+  "5240": {
+    "name": {
+      "en": "Etheric Chest Armor of Lifesteal",
+      "jp": "吸収のエーテルアーマー",
+      "kr": "흡혈의 에테르 갑옷",
+      "zh": "以太吸血盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "5241": {
+    "name": {
+      "en": "Ordinary Chest Armor of Penetration",
+      "jp": "貫通の普及型アーマー",
+      "kr": "관통의 보급형 갑옷",
+      "zh": "普通穿透盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "11"
+  },
+  "5242": {
+    "name": {
+      "en": "Fine Chest Armor of Penetration",
+      "jp": "貫通の高級型アーマー",
+      "kr": "관통의 고급형 갑옷",
+      "zh": "上等穿透盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "11"
+  },
+  "5243": {
+    "name": {
+      "en": "Steel Chest Armor of Penetration",
+      "jp": "貫通の鋼鉄アーマー",
+      "kr": "관통의 강철 갑옷",
+      "zh": "钢铁穿透盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "11"
+  },
+  "5244": {
+    "name": {
+      "en": "Etheric Chest Armor of Penetration",
+      "jp": "貫通のエーテルアーマー",
+      "kr": "관통의 에테르 갑옷",
+      "zh": "以太穿透盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "11"
+  },
+  "5245": {
+    "name": {
+      "en": "Ordinary Chest Armor of Penetration",
+      "jp": "貫通の普及型アーマー",
+      "kr": "관통의 보급형 갑옷",
+      "zh": "普通穿透盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "11"
+  },
+  "5246": {
+    "name": {
+      "en": "Fine Chest Armor of Penetration",
+      "jp": "貫通の高級型アーマー",
+      "kr": "관통의 고급형 갑옷",
+      "zh": "上等穿透盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "11"
+  },
+  "5247": {
+    "name": {
+      "en": "Steel Chest Armor of Penetration",
+      "jp": "貫通の鋼鉄アーマー",
+      "kr": "관통의 강철 갑옷",
+      "zh": "钢铁穿透盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "11"
+  },
+  "5248": {
+    "name": {
+      "en": "Etheric Chest Armor of Penetration",
+      "jp": "貫通のエーテルアーマー",
+      "kr": "관통의 에테르 갑옷",
+      "zh": "以太穿透盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "11"
+  },
+  "5249": {
+    "name": {
+      "en": "Ordinary Chest Armor of Penetration",
+      "jp": "貫通の普及型アーマー",
+      "kr": "관통의 보급형 갑옷",
+      "zh": "普通穿透盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "11"
+  },
+  "5250": {
+    "name": {
+      "en": "Fine Chest Armor of Penetration",
+      "jp": "貫通の高級型アーマー",
+      "kr": "관통의 고급형 갑옷",
+      "zh": "上等穿透盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "11"
+  },
+  "5251": {
+    "name": {
+      "en": "Steel Chest Armor of Penetration",
+      "jp": "貫通の鋼鉄アーマー",
+      "kr": "관통의 강철 갑옷",
+      "zh": "钢铁穿透盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "11"
+  },
+  "5252": {
+    "name": {
+      "en": "Etheric Chest Armor of Penetration",
+      "jp": "貫通のエーテルアーマー",
+      "kr": "관통의 에테르 갑옷",
+      "zh": "以太穿透盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "11"
+  },
+  "5253": {
+    "name": {
+      "en": "Ordinary Chest Armor of Penetration",
+      "jp": "貫通の普及型アーマー",
+      "kr": "관통의 보급형 갑옷",
+      "zh": "普通穿透盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "11"
+  },
+  "5254": {
+    "name": {
+      "en": "Fine Chest Armor of Penetration",
+      "jp": "貫通の高級型アーマー",
+      "kr": "관통의 고급형 갑옷",
+      "zh": "上等穿透盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "11"
+  },
+  "5255": {
+    "name": {
+      "en": "Steel Chest Armor of Penetration",
+      "jp": "貫通の鋼鉄アーマー",
+      "kr": "관통의 강철 갑옷",
+      "zh": "钢铁穿透盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "11"
+  },
+  "5256": {
+    "name": {
+      "en": "Etheric Chest Armor of Penetration",
+      "jp": "貫通のエーテルアーマー",
+      "kr": "관통의 에테르 갑옷",
+      "zh": "以太穿透盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "11"
+  },
+  "5257": {
+    "name": {
+      "en": "Ordinary Chest Armor of Penetration",
+      "jp": "貫通の普及型アーマー",
+      "kr": "관통의 보급형 갑옷",
+      "zh": "普通穿透盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "11"
+  },
+  "5258": {
+    "name": {
+      "en": "Fine Chest Armor of Penetration",
+      "jp": "貫通の高級型アーマー",
+      "kr": "관통의 고급형 갑옷",
+      "zh": "上等穿透盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "11"
+  },
+  "5259": {
+    "name": {
+      "en": "Steel Chest Armor of Penetration",
+      "jp": "貫通の鋼鉄アーマー",
+      "kr": "관통의 강철 갑옷",
+      "zh": "钢铁穿透盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "11"
+  },
+  "5260": {
+    "name": {
+      "en": "Etheric Chest Armor of Penetration",
+      "jp": "貫通のエーテルアーマー",
+      "kr": "관통의 에테르 갑옷",
+      "zh": "以太穿透盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "11"
+  },
+  "5261": {
+    "name": {
+      "en": "Ordinary Chest Armor of Penetration",
+      "jp": "貫通の普及型アーマー",
+      "kr": "관통의 보급형 갑옷",
+      "zh": "普通穿透盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "11"
+  },
+  "5262": {
+    "name": {
+      "en": "Fine Chest Armor of Penetration",
+      "jp": "貫通の高級型アーマー",
+      "kr": "관통의 고급형 갑옷",
+      "zh": "上等穿透盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "11"
+  },
+  "5263": {
+    "name": {
+      "en": "Steel Chest Armor of Penetration",
+      "jp": "貫通の鋼鉄アーマー",
+      "kr": "관통의 강철 갑옷",
+      "zh": "钢铁穿透盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "11"
+  },
+  "5264": {
+    "name": {
+      "en": "Etheric Chest Armor of Penetration",
+      "jp": "貫通のエーテルアーマー",
+      "kr": "관통의 에테르 갑옷",
+      "zh": "以太穿透盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "5265": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Strike",
+      "jp": "極大化の普及型アーマー",
+      "kr": "극대화의 보급형 갑옷",
+      "zh": "普通暴伤盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "12"
+  },
+  "5266": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Strike",
+      "jp": "極大化の高級型アーマー",
+      "kr": "극대화의 고급형 갑옷",
+      "zh": "上等暴伤盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "12"
+  },
+  "5267": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Strike",
+      "jp": "極大化の鋼鉄アーマー",
+      "kr": "극대화의 강철 갑옷",
+      "zh": "钢铁暴伤盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "12"
+  },
+  "5268": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Strike",
+      "jp": "極大化のエーテルアーマー",
+      "kr": "극대화의 에테르 갑옷",
+      "zh": "以太暴伤盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "12"
+  },
+  "5269": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Strike",
+      "jp": "極大化の普及型アーマー",
+      "kr": "극대화의 보급형 갑옷",
+      "zh": "普通暴伤盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "12"
+  },
+  "5270": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Strike",
+      "jp": "極大化の高級型アーマー",
+      "kr": "극대화의 고급형 갑옷",
+      "zh": "上等暴伤盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "12"
+  },
+  "5271": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Strike",
+      "jp": "極大化の鋼鉄アーマー",
+      "kr": "극대화의 강철 갑옷",
+      "zh": "钢铁暴伤盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "12"
+  },
+  "5272": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Strike",
+      "jp": "極大化のエーテルアーマー",
+      "kr": "극대화의 에테르 갑옷",
+      "zh": "以太暴伤盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "12"
+  },
+  "5273": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Strike",
+      "jp": "極大化の普及型アーマー",
+      "kr": "극대화의 보급형 갑옷",
+      "zh": "普通暴伤盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "12"
+  },
+  "5274": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Strike",
+      "jp": "極大化の高級型アーマー",
+      "kr": "극대화의 고급형 갑옷",
+      "zh": "上等暴伤盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "12"
+  },
+  "5275": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Strike",
+      "jp": "極大化の鋼鉄アーマー",
+      "kr": "극대화의 강철 갑옷",
+      "zh": "钢铁暴伤盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "12"
+  },
+  "5276": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Strike",
+      "jp": "極大化のエーテルアーマー",
+      "kr": "극대화의 에테르 갑옷",
+      "zh": "以太暴伤盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "12"
+  },
+  "5277": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Strike",
+      "jp": "極大化の普及型アーマー",
+      "kr": "극대화의 보급형 갑옷",
+      "zh": "普通暴伤盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "12"
+  },
+  "5278": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Strike",
+      "jp": "極大化の高級型アーマー",
+      "kr": "극대화의 고급형 갑옷",
+      "zh": "上等暴伤盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "12"
+  },
+  "5279": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Strike",
+      "jp": "極大化の鋼鉄アーマー",
+      "kr": "극대화의 강철 갑옷",
+      "zh": "钢铁暴伤盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "12"
+  },
+  "5280": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Strike",
+      "jp": "極大化のエーテルアーマー",
+      "kr": "극대화의 에테르 갑옷",
+      "zh": "以太暴伤盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "12"
+  },
+  "5281": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Strike",
+      "jp": "極大化の普及型アーマー",
+      "kr": "극대화의 보급형 갑옷",
+      "zh": "普通暴伤盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "12"
+  },
+  "5282": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Strike",
+      "jp": "極大化の高級型アーマー",
+      "kr": "극대화의 고급형 갑옷",
+      "zh": "上等暴伤盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "12"
+  },
+  "5283": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Strike",
+      "jp": "極大化の鋼鉄アーマー",
+      "kr": "극대화의 강철 갑옷",
+      "zh": "钢铁暴伤盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "12"
+  },
+  "5284": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Strike",
+      "jp": "極大化のエーテルアーマー",
+      "kr": "극대화의 에테르 갑옷",
+      "zh": "以太暴伤盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "12"
+  },
+  "5285": {
+    "name": {
+      "en": "Ordinary Chest Armor of Critical Strike",
+      "jp": "極大化の普及型アーマー",
+      "kr": "극대화의 보급형 갑옷",
+      "zh": "普通暴伤盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "12"
+  },
+  "5286": {
+    "name": {
+      "en": "Fine Chest Armor of Critical Strike",
+      "jp": "極大化の高級型アーマー",
+      "kr": "극대화의 고급형 갑옷",
+      "zh": "上等暴伤盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "12"
+  },
+  "5287": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Strike",
+      "jp": "極大化の鋼鉄アーマー",
+      "kr": "극대화의 강철 갑옷",
+      "zh": "钢铁暴伤盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "12"
+  },
+  "5288": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Strike",
+      "jp": "極大化のエーテルアーマー",
+      "kr": "극대화의 에테르 갑옷",
+      "zh": "以太暴伤盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "5289": {
+    "name": {
+      "en": "Ordinary Chest Armor of Speed",
+      "jp": "速度の普及型アーマー",
+      "kr": "속도의 보급형 갑옷",
+      "zh": "普通速度盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "13"
+  },
+  "5290": {
+    "name": {
+      "en": "Fine Chest Armor of Speed",
+      "jp": "速度の高級型アーマー",
+      "kr": "속도의 고급형 갑옷",
+      "zh": "上等速度盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "13"
+  },
+  "5291": {
+    "name": {
+      "en": "Steel Chest Armor of Speed",
+      "jp": "速度の鋼鉄アーマー",
+      "kr": "속도의 강철 갑옷",
+      "zh": "钢铁速度盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "13"
+  },
+  "5292": {
+    "name": {
+      "en": "Etheric Chest Armor of Speed",
+      "jp": "速度のエーテルアーマー",
+      "kr": "속도의 에테르 갑옷",
+      "zh": "以太速度盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "13"
+  },
+  "5293": {
+    "name": {
+      "en": "Ordinary Chest Armor of Speed",
+      "jp": "速度の普及型アーマー",
+      "kr": "속도의 보급형 갑옷",
+      "zh": "普通速度盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "13"
+  },
+  "5294": {
+    "name": {
+      "en": "Fine Chest Armor of Speed",
+      "jp": "速度の高級型アーマー",
+      "kr": "속도의 고급형 갑옷",
+      "zh": "上等速度盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "13"
+  },
+  "5295": {
+    "name": {
+      "en": "Steel Chest Armor of Speed",
+      "jp": "速度の鋼鉄アーマー",
+      "kr": "속도의 강철 갑옷",
+      "zh": "钢铁速度盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "13"
+  },
+  "5296": {
+    "name": {
+      "en": "Etheric Chest Armor of Speed",
+      "jp": "速度のエーテルアーマー",
+      "kr": "속도의 에테르 갑옷",
+      "zh": "以太速度盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "13"
+  },
+  "5297": {
+    "name": {
+      "en": "Ordinary Chest Armor of Speed",
+      "jp": "速度の普及型アーマー",
+      "kr": "속도의 보급형 갑옷",
+      "zh": "普通速度盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "13"
+  },
+  "5298": {
+    "name": {
+      "en": "Fine Chest Armor of Speed",
+      "jp": "速度の高級型アーマー",
+      "kr": "속도의 고급형 갑옷",
+      "zh": "上等速度盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "13"
+  },
+  "5299": {
+    "name": {
+      "en": "Steel Chest Armor of Speed",
+      "jp": "速度の鋼鉄アーマー",
+      "kr": "속도의 강철 갑옷",
+      "zh": "钢铁速度盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "13"
+  },
+  "5300": {
+    "name": {
+      "en": "Etheric Chest Armor of Speed",
+      "jp": "速度のエーテルアーマー",
+      "kr": "속도의 에테르 갑옷",
+      "zh": "以太速度盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "13"
+  },
+  "5301": {
+    "name": {
+      "en": "Ordinary Chest Armor of Speed",
+      "jp": "速度の普及型アーマー",
+      "kr": "속도의 보급형 갑옷",
+      "zh": "普通速度盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "13"
+  },
+  "5302": {
+    "name": {
+      "en": "Fine Chest Armor of Speed",
+      "jp": "速度の高級型アーマー",
+      "kr": "속도의 고급형 갑옷",
+      "zh": "上等速度盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "13"
+  },
+  "5303": {
+    "name": {
+      "en": "Steel Chest Armor of Speed",
+      "jp": "速度の鋼鉄アーマー",
+      "kr": "속도의 강철 갑옷",
+      "zh": "钢铁速度盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "13"
+  },
+  "5304": {
+    "name": {
+      "en": "Etheric Chest Armor of Speed",
+      "jp": "速度のエーテルアーマー",
+      "kr": "속도의 에테르 갑옷",
+      "zh": "以太速度盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "13"
+  },
+  "5305": {
+    "name": {
+      "en": "Ordinary Chest Armor of Speed",
+      "jp": "速度の普及型アーマー",
+      "kr": "속도의 보급형 갑옷",
+      "zh": "普通速度盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "13"
+  },
+  "5306": {
+    "name": {
+      "en": "Fine Chest Armor of Speed",
+      "jp": "速度の高級型アーマー",
+      "kr": "속도의 고급형 갑옷",
+      "zh": "上等速度盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "13"
+  },
+  "5307": {
+    "name": {
+      "en": "Steel Chest Armor of Speed",
+      "jp": "速度の鋼鉄アーマー",
+      "kr": "속도의 강철 갑옷",
+      "zh": "钢铁速度盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "13"
+  },
+  "5308": {
+    "name": {
+      "en": "Etheric Chest Armor of Speed",
+      "jp": "速度のエーテルアーマー",
+      "kr": "속도의 에테르 갑옷",
+      "zh": "以太速度盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "13"
+  },
+  "5309": {
+    "name": {
+      "en": "Ordinary Chest Armor of Speed",
+      "jp": "速度の普及型アーマー",
+      "kr": "속도의 보급형 갑옷",
+      "zh": "普通速度盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "13"
+  },
+  "5310": {
+    "name": {
+      "en": "Fine Chest Armor of Speed",
+      "jp": "速度の高級型アーマー",
+      "kr": "속도의 고급형 갑옷",
+      "zh": "上等速度盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "13"
+  },
+  "5311": {
+    "name": {
+      "en": "Steel Chest Armor of Speed",
+      "jp": "速度の鋼鉄アーマー",
+      "kr": "속도의 강철 갑옷",
+      "zh": "钢铁速度盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "13"
+  },
+  "5312": {
+    "name": {
+      "en": "Etheric Chest Armor of Speed",
+      "jp": "速度のエーテルアーマー",
+      "kr": "속도의 에테르 갑옷",
+      "zh": "以太速度盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "5313": {
+    "name": {
+      "en": "Ordinary Chest Armor of Bursting",
+      "jp": "炸裂の普及型アーマー",
+      "kr": "버스트의 보급형 갑옷",
+      "zh": "普通爆发盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "14"
+  },
+  "5314": {
+    "name": {
+      "en": "Fine Chest Armor of Bursting",
+      "jp": "炸裂の高級型アーマー",
+      "kr": "버스트의 고급형 갑옷",
+      "zh": "上等爆发盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "14"
+  },
+  "5315": {
+    "name": {
+      "en": "Steel Chest Armor of Bursting",
+      "jp": "炸裂の鋼鉄アーマー",
+      "kr": "버스트의 강철 갑옷",
+      "zh": "钢铁爆发盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "14"
+  },
+  "5316": {
+    "name": {
+      "en": "Etheric Chest Armor of Bursting",
+      "jp": "炸裂のエーテルアーマー",
+      "kr": "버스트의 에테르 갑옷",
+      "zh": "以太爆发盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "14"
+  },
+  "5317": {
+    "name": {
+      "en": "Ordinary Chest Armor of Bursting",
+      "jp": "炸裂の普及型アーマー",
+      "kr": "버스트의 보급형 갑옷",
+      "zh": "普通爆发盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "14"
+  },
+  "5318": {
+    "name": {
+      "en": "Fine Chest Armor of Bursting",
+      "jp": "炸裂の高級型アーマー",
+      "kr": "버스트의 고급형 갑옷",
+      "zh": "上等爆发盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "14"
+  },
+  "5319": {
+    "name": {
+      "en": "Steel Chest Armor of Bursting",
+      "jp": "炸裂の鋼鉄アーマー",
+      "kr": "버스트의 강철 갑옷",
+      "zh": "钢铁爆发盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "14"
+  },
+  "5320": {
+    "name": {
+      "en": "Etheric Chest Armor of Bursting",
+      "jp": "炸裂のエーテルアーマー",
+      "kr": "버스트의 에테르 갑옷",
+      "zh": "以太爆发盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "14"
+  },
+  "5321": {
+    "name": {
+      "en": "Ordinary Chest Armor of Bursting",
+      "jp": "炸裂の普及型アーマー",
+      "kr": "버스트의 보급형 갑옷",
+      "zh": "普通爆发盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "14"
+  },
+  "5322": {
+    "name": {
+      "en": "Fine Chest Armor of Bursting",
+      "jp": "炸裂の高級型アーマー",
+      "kr": "버스트의 고급형 갑옷",
+      "zh": "上等爆发盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "14"
+  },
+  "5323": {
+    "name": {
+      "en": "Steel Chest Armor of Bursting",
+      "jp": "炸裂の鋼鉄アーマー",
+      "kr": "버스트의 강철 갑옷",
+      "zh": "钢铁爆发盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "14"
+  },
+  "5324": {
+    "name": {
+      "en": "Etheric Chest Armor of Bursting",
+      "jp": "炸裂のエーテルアーマー",
+      "kr": "버스트의 에테르 갑옷",
+      "zh": "以太爆发盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "14"
+  },
+  "5325": {
+    "name": {
+      "en": "Ordinary Chest Armor of Bursting",
+      "jp": "炸裂の普及型アーマー",
+      "kr": "버스트의 보급형 갑옷",
+      "zh": "普通爆发盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "14"
+  },
+  "5326": {
+    "name": {
+      "en": "Fine Chest Armor of Bursting",
+      "jp": "炸裂の高級型アーマー",
+      "kr": "버스트의 고급형 갑옷",
+      "zh": "上等爆发盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "14"
+  },
+  "5327": {
+    "name": {
+      "en": "Steel Chest Armor of Bursting",
+      "jp": "炸裂の鋼鉄アーマー",
+      "kr": "버스트의 강철 갑옷",
+      "zh": "钢铁爆发盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "14"
+  },
+  "5328": {
+    "name": {
+      "en": "Etheric Chest Armor of Bursting",
+      "jp": "炸裂のエーテルアーマー",
+      "kr": "버스트의 에테르 갑옷",
+      "zh": "以太爆发盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "14"
+  },
+  "5329": {
+    "name": {
+      "en": "Ordinary Chest Armor of Bursting",
+      "jp": "炸裂の普及型アーマー",
+      "kr": "버스트의 보급형 갑옷",
+      "zh": "普通爆发盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "14"
+  },
+  "5330": {
+    "name": {
+      "en": "Fine Chest Armor of Bursting",
+      "jp": "炸裂の高級型アーマー",
+      "kr": "버스트의 고급형 갑옷",
+      "zh": "上等爆发盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "14"
+  },
+  "5331": {
+    "name": {
+      "en": "Steel Chest Armor of Bursting",
+      "jp": "炸裂の鋼鉄アーマー",
+      "kr": "버스트의 강철 갑옷",
+      "zh": "钢铁爆发盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "14"
+  },
+  "5332": {
+    "name": {
+      "en": "Etheric Chest Armor of Bursting",
+      "jp": "炸裂のエーテルアーマー",
+      "kr": "버스트의 에테르 갑옷",
+      "zh": "以太爆发盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "14"
+  },
+  "5333": {
+    "name": {
+      "en": "Ordinary Chest Armor of Bursting",
+      "jp": "炸裂の普及型アーマー",
+      "kr": "버스트의 보급형 갑옷",
+      "zh": "普通爆发盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "14"
+  },
+  "5334": {
+    "name": {
+      "en": "Fine Chest Armor of Bursting",
+      "jp": "炸裂の高級型アーマー",
+      "kr": "버스트의 고급형 갑옷",
+      "zh": "上等爆发盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "14"
+  },
+  "5335": {
+    "name": {
+      "en": "Steel Chest Armor of Bursting",
+      "jp": "炸裂の鋼鉄アーマー",
+      "kr": "버스트의 강철 갑옷",
+      "zh": "钢铁爆发盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "14"
+  },
+  "5336": {
+    "name": {
+      "en": "Etheric Chest Armor of Bursting",
+      "jp": "炸裂のエーテルアーマー",
+      "kr": "버스트의 에테르 갑옷",
+      "zh": "以太爆发盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "5337": {
+    "name": {
+      "en": "Ordinary Chest Armor of Revenge",
+      "jp": "復讐の普及型アーマー",
+      "kr": "복수의 보급형 갑옷",
+      "zh": "普通复仇盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "15"
+  },
+  "5338": {
+    "name": {
+      "en": "Fine Chest Armor of Revenge",
+      "jp": "復讐の高級型アーマー",
+      "kr": "복수의 고급형 갑옷",
+      "zh": "上等复仇盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "15"
+  },
+  "5339": {
+    "name": {
+      "en": "Steel Chest Armor of Revenge",
+      "jp": "復讐の鋼鉄アーマー",
+      "kr": "복수의 강철 갑옷",
+      "zh": "钢铁复仇盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "15"
+  },
+  "5340": {
+    "name": {
+      "en": "Etheric Chest Armor of Revenge",
+      "jp": "復讐のエーテルアーマー",
+      "kr": "복수의 에테르 갑옷",
+      "zh": "以太复仇盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "15"
+  },
+  "5341": {
+    "name": {
+      "en": "Ordinary Chest Armor of Revenge",
+      "jp": "復讐の普及型アーマー",
+      "kr": "복수의 보급형 갑옷",
+      "zh": "普通复仇盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "15"
+  },
+  "5342": {
+    "name": {
+      "en": "Fine Chest Armor of Revenge",
+      "jp": "復讐の高級型アーマー",
+      "kr": "복수의 고급형 갑옷",
+      "zh": "上等复仇盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "15"
+  },
+  "5343": {
+    "name": {
+      "en": "Steel Chest Armor of Revenge",
+      "jp": "復讐の鋼鉄アーマー",
+      "kr": "복수의 강철 갑옷",
+      "zh": "钢铁复仇盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "15"
+  },
+  "5344": {
+    "name": {
+      "en": "Etheric Chest Armor of Revenge",
+      "jp": "復讐のエーテルアーマー",
+      "kr": "복수의 에테르 갑옷",
+      "zh": "以太复仇盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "15"
+  },
+  "5345": {
+    "name": {
+      "en": "Ordinary Chest Armor of Revenge",
+      "jp": "復讐の普及型アーマー",
+      "kr": "복수의 보급형 갑옷",
+      "zh": "普通复仇盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "15"
+  },
+  "5346": {
+    "name": {
+      "en": "Fine Chest Armor of Revenge",
+      "jp": "復讐の高級型アーマー",
+      "kr": "복수의 고급형 갑옷",
+      "zh": "上等复仇盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "15"
+  },
+  "5347": {
+    "name": {
+      "en": "Steel Chest Armor of Revenge",
+      "jp": "復讐の鋼鉄アーマー",
+      "kr": "복수의 강철 갑옷",
+      "zh": "钢铁复仇盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "15"
+  },
+  "5348": {
+    "name": {
+      "en": "Etheric Chest Armor of Revenge",
+      "jp": "復讐のエーテルアーマー",
+      "kr": "복수의 에테르 갑옷",
+      "zh": "以太复仇盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "15"
+  },
+  "5349": {
+    "name": {
+      "en": "Ordinary Chest Armor of Revenge",
+      "jp": "復讐の普及型アーマー",
+      "kr": "복수의 보급형 갑옷",
+      "zh": "普通复仇盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "15"
+  },
+  "5350": {
+    "name": {
+      "en": "Fine Chest Armor of Revenge",
+      "jp": "復讐の高級型アーマー",
+      "kr": "복수의 고급형 갑옷",
+      "zh": "上等复仇盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "15"
+  },
+  "5351": {
+    "name": {
+      "en": "Steel Chest Armor of Revenge",
+      "jp": "復讐の鋼鉄アーマー",
+      "kr": "복수의 강철 갑옷",
+      "zh": "钢铁复仇盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "15"
+  },
+  "5352": {
+    "name": {
+      "en": "Etheric Chest Armor of Revenge",
+      "jp": "復讐のエーテルアーマー",
+      "kr": "복수의 에테르 갑옷",
+      "zh": "以太复仇盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "15"
+  },
+  "5353": {
+    "name": {
+      "en": "Ordinary Chest Armor of Revenge",
+      "jp": "復讐の普及型アーマー",
+      "kr": "복수의 보급형 갑옷",
+      "zh": "普通复仇盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "15"
+  },
+  "5354": {
+    "name": {
+      "en": "Fine Chest Armor of Revenge",
+      "jp": "復讐の高級型アーマー",
+      "kr": "복수의 고급형 갑옷",
+      "zh": "上等复仇盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "15"
+  },
+  "5355": {
+    "name": {
+      "en": "Steel Chest Armor of Revenge",
+      "jp": "復讐の鋼鉄アーマー",
+      "kr": "복수의 강철 갑옷",
+      "zh": "钢铁复仇盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "15"
+  },
+  "5356": {
+    "name": {
+      "en": "Etheric Chest Armor of Revenge",
+      "jp": "復讐のエーテルアーマー",
+      "kr": "복수의 에테르 갑옷",
+      "zh": "以太复仇盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "15"
+  },
+  "5357": {
+    "name": {
+      "en": "Ordinary Chest Armor of Revenge",
+      "jp": "復讐の普及型アーマー",
+      "kr": "복수의 보급형 갑옷",
+      "zh": "普通复仇盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "15"
+  },
+  "5358": {
+    "name": {
+      "en": "Fine Chest Armor of Revenge",
+      "jp": "復讐の高級型アーマー",
+      "kr": "복수의 고급형 갑옷",
+      "zh": "上等复仇盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "15"
+  },
+  "5359": {
+    "name": {
+      "en": "Steel Chest Armor of Revenge",
+      "jp": "復讐の鋼鉄アーマー",
+      "kr": "복수의 강철 갑옷",
+      "zh": "钢铁复仇盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "15"
+  },
+  "5360": {
+    "name": {
+      "en": "Etheric Chest Armor of Revenge",
+      "jp": "復讐のエーテルアーマー",
+      "kr": "복수의 에테르 갑옷",
+      "zh": "以太复仇盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "5361": {
+    "name": {
+      "en": "Ordinary Chest Armor of Patience",
+      "jp": "忍耐の普及型アーマー",
+      "kr": "인내의 보급형 갑옷",
+      "zh": "普通忍耐盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "16"
+  },
+  "5362": {
+    "name": {
+      "en": "Fine Chest Armor of Patience",
+      "jp": "忍耐の高級型アーマー",
+      "kr": "인내의 고급형 갑옷",
+      "zh": "上等忍耐盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "16"
+  },
+  "5363": {
+    "name": {
+      "en": "Steel Chest Armor of Patience",
+      "jp": "忍耐の鋼鉄アーマー",
+      "kr": "인내의 강철 갑옷",
+      "zh": "钢铁忍耐盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "16"
+  },
+  "5364": {
+    "name": {
+      "en": "Etheric Chest Armor of Patience",
+      "jp": "忍耐のエーテルアーマー",
+      "kr": "인내의 에테르 갑옷",
+      "zh": "以太忍耐盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "16"
+  },
+  "5365": {
+    "name": {
+      "en": "Ordinary Chest Armor of Patience",
+      "jp": "忍耐の普及型アーマー",
+      "kr": "인내의 보급형 갑옷",
+      "zh": "普通忍耐盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "16"
+  },
+  "5366": {
+    "name": {
+      "en": "Fine Chest Armor of Patience",
+      "jp": "忍耐の高級型アーマー",
+      "kr": "인내의 고급형 갑옷",
+      "zh": "上等忍耐盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "16"
+  },
+  "5367": {
+    "name": {
+      "en": "Steel Chest Armor of Patience",
+      "jp": "忍耐の鋼鉄アーマー",
+      "kr": "인내의 강철 갑옷",
+      "zh": "钢铁忍耐盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "16"
+  },
+  "5368": {
+    "name": {
+      "en": "Etheric Chest Armor of Patience",
+      "jp": "忍耐のエーテルアーマー",
+      "kr": "인내의 에테르 갑옷",
+      "zh": "以太忍耐盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "16"
+  },
+  "5369": {
+    "name": {
+      "en": "Ordinary Chest Armor of Patience",
+      "jp": "忍耐の普及型アーマー",
+      "kr": "인내의 보급형 갑옷",
+      "zh": "普通忍耐盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "16"
+  },
+  "5370": {
+    "name": {
+      "en": "Fine Chest Armor of Patience",
+      "jp": "忍耐の高級型アーマー",
+      "kr": "인내의 고급형 갑옷",
+      "zh": "上等忍耐盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "16"
+  },
+  "5371": {
+    "name": {
+      "en": "Steel Chest Armor of Patience",
+      "jp": "忍耐の鋼鉄アーマー",
+      "kr": "인내의 강철 갑옷",
+      "zh": "钢铁忍耐盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "16"
+  },
+  "5372": {
+    "name": {
+      "en": "Etheric Chest Armor of Patience",
+      "jp": "忍耐のエーテルアーマー",
+      "kr": "인내의 에테르 갑옷",
+      "zh": "以太忍耐盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "16"
+  },
+  "5373": {
+    "name": {
+      "en": "Ordinary Chest Armor of Patience",
+      "jp": "忍耐の普及型アーマー",
+      "kr": "인내의 보급형 갑옷",
+      "zh": "普通忍耐盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "16"
+  },
+  "5374": {
+    "name": {
+      "en": "Fine Chest Armor of Patience",
+      "jp": "忍耐の高級型アーマー",
+      "kr": "인내의 고급형 갑옷",
+      "zh": "上等忍耐盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "16"
+  },
+  "5375": {
+    "name": {
+      "en": "Steel Chest Armor of Patience",
+      "jp": "忍耐の鋼鉄アーマー",
+      "kr": "인내의 강철 갑옷",
+      "zh": "钢铁忍耐盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "16"
+  },
+  "5376": {
+    "name": {
+      "en": "Etheric Chest Armor of Patience",
+      "jp": "忍耐のエーテルアーマー",
+      "kr": "인내의 에테르 갑옷",
+      "zh": "以太忍耐盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "16"
+  },
+  "5377": {
+    "name": {
+      "en": "Ordinary Chest Armor of Patience",
+      "jp": "忍耐の普及型アーマー",
+      "kr": "인내의 보급형 갑옷",
+      "zh": "普通忍耐盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "16"
+  },
+  "5378": {
+    "name": {
+      "en": "Fine Chest Armor of Patience",
+      "jp": "忍耐の高級型アーマー",
+      "kr": "인내의 고급형 갑옷",
+      "zh": "上等忍耐盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "16"
+  },
+  "5379": {
+    "name": {
+      "en": "Steel Chest Armor of Patience",
+      "jp": "忍耐の鋼鉄アーマー",
+      "kr": "인내의 강철 갑옷",
+      "zh": "钢铁忍耐盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "16"
+  },
+  "5380": {
+    "name": {
+      "en": "Etheric Chest Armor of Patience",
+      "jp": "忍耐のエーテルアーマー",
+      "kr": "인내의 에테르 갑옷",
+      "zh": "以太忍耐盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "16"
+  },
+  "5381": {
+    "name": {
+      "en": "Ordinary Chest Armor of Patience",
+      "jp": "忍耐の普及型アーマー",
+      "kr": "인내의 보급형 갑옷",
+      "zh": "普通忍耐盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "16"
+  },
+  "5382": {
+    "name": {
+      "en": "Fine Chest Armor of Patience",
+      "jp": "忍耐の高級型アーマー",
+      "kr": "인내의 고급형 갑옷",
+      "zh": "上等忍耐盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "16"
+  },
+  "5383": {
+    "name": {
+      "en": "Steel Chest Armor of Patience",
+      "jp": "忍耐の鋼鉄アーマー",
+      "kr": "인내의 강철 갑옷",
+      "zh": "钢铁忍耐盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "16"
+  },
+  "5384": {
+    "name": {
+      "en": "Etheric Chest Armor of Patience",
+      "jp": "忍耐のエーテルアーマー",
+      "kr": "인내의 에테르 갑옷",
+      "zh": "以太忍耐盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "5385": {
+    "name": {
+      "en": "Ordinary Chest Armor of Pulverization",
+      "jp": "粉砕の普及型アーマー",
+      "kr": "분쇄의 보급형 갑옷",
+      "zh": "普通粉碎盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "17"
+  },
+  "5386": {
+    "name": {
+      "en": "Fine Chest Armor of Pulverization",
+      "jp": "粉砕の高級型アーマー",
+      "kr": "분쇄의 고급형 갑옷",
+      "zh": "上等粉碎盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "17"
+  },
+  "5387": {
+    "name": {
+      "en": "Steel Chest Armor of Pulverization",
+      "jp": "粉砕の鋼鉄アーマー",
+      "kr": "분쇄의 강철 갑옷",
+      "zh": "钢铁粉碎盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "17"
+  },
+  "5388": {
+    "name": {
+      "en": "Etheric Chest Armor of Pulverization",
+      "jp": "粉砕のエーテルアーマー",
+      "kr": "분쇄의 에테르 갑옷",
+      "zh": "以太粉碎盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "17"
+  },
+  "5389": {
+    "name": {
+      "en": "Ordinary Chest Armor of Pulverization",
+      "jp": "粉砕の普及型アーマー",
+      "kr": "분쇄의 보급형 갑옷",
+      "zh": "普通粉碎盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "17"
+  },
+  "5390": {
+    "name": {
+      "en": "Fine Chest Armor of Pulverization",
+      "jp": "粉砕の高級型アーマー",
+      "kr": "분쇄의 고급형 갑옷",
+      "zh": "上等粉碎盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "17"
+  },
+  "5391": {
+    "name": {
+      "en": "Steel Chest Armor of Pulverization",
+      "jp": "粉砕の鋼鉄アーマー",
+      "kr": "분쇄의 강철 갑옷",
+      "zh": "钢铁粉碎盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "17"
+  },
+  "5392": {
+    "name": {
+      "en": "Etheric Chest Armor of Pulverization",
+      "jp": "粉砕のエーテルアーマー",
+      "kr": "분쇄의 에테르 갑옷",
+      "zh": "以太粉碎盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "17"
+  },
+  "5393": {
+    "name": {
+      "en": "Ordinary Chest Armor of Pulverization",
+      "jp": "粉砕の普及型アーマー",
+      "kr": "분쇄의 보급형 갑옷",
+      "zh": "普通粉碎盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "17"
+  },
+  "5394": {
+    "name": {
+      "en": "Fine Chest Armor of Pulverization",
+      "jp": "粉砕の高級型アーマー",
+      "kr": "분쇄의 고급형 갑옷",
+      "zh": "上等粉碎盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "17"
+  },
+  "5395": {
+    "name": {
+      "en": "Steel Chest Armor of Pulverization",
+      "jp": "粉砕の鋼鉄アーマー",
+      "kr": "분쇄의 강철 갑옷",
+      "zh": "钢铁粉碎盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "17"
+  },
+  "5396": {
+    "name": {
+      "en": "Etheric Chest Armor of Pulverization",
+      "jp": "粉砕のエーテルアーマー",
+      "kr": "분쇄의 에테르 갑옷",
+      "zh": "以太粉碎盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "17"
+  },
+  "5397": {
+    "name": {
+      "en": "Ordinary Chest Armor of Pulverization",
+      "jp": "粉砕の普及型アーマー",
+      "kr": "분쇄의 보급형 갑옷",
+      "zh": "普通粉碎盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "17"
+  },
+  "5398": {
+    "name": {
+      "en": "Fine Chest Armor of Pulverization",
+      "jp": "粉砕の高級型アーマー",
+      "kr": "분쇄의 고급형 갑옷",
+      "zh": "上等粉碎盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "17"
+  },
+  "5399": {
+    "name": {
+      "en": "Steel Chest Armor of Pulverization",
+      "jp": "粉砕の鋼鉄アーマー",
+      "kr": "분쇄의 강철 갑옷",
+      "zh": "钢铁粉碎盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "17"
+  },
+  "5400": {
+    "name": {
+      "en": "Etheric Chest Armor of Pulverization",
+      "jp": "粉砕のエーテルアーマー",
+      "kr": "분쇄의 에테르 갑옷",
+      "zh": "以太粉碎盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "17"
+  },
+  "5401": {
+    "name": {
+      "en": "Ordinary Chest Armor of Pulverization",
+      "jp": "粉砕の普及型アーマー",
+      "kr": "분쇄의 보급형 갑옷",
+      "zh": "普通粉碎盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "17"
+  },
+  "5402": {
+    "name": {
+      "en": "Fine Chest Armor of Pulverization",
+      "jp": "粉砕の高級型アーマー",
+      "kr": "분쇄의 고급형 갑옷",
+      "zh": "上等粉碎盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "17"
+  },
+  "5403": {
+    "name": {
+      "en": "Steel Chest Armor of Pulverization",
+      "jp": "粉砕の鋼鉄アーマー",
+      "kr": "분쇄의 강철 갑옷",
+      "zh": "钢铁粉碎盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "17"
+  },
+  "5404": {
+    "name": {
+      "en": "Etheric Chest Armor of Pulverization",
+      "jp": "粉砕のエーテルアーマー",
+      "kr": "분쇄의 에테르 갑옷",
+      "zh": "以太粉碎盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "17"
+  },
+  "5405": {
+    "name": {
+      "en": "Ordinary Chest Armor of Pulverization",
+      "jp": "粉砕の普及型アーマー",
+      "kr": "분쇄의 보급형 갑옷",
+      "zh": "普通粉碎盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "17"
+  },
+  "5406": {
+    "name": {
+      "en": "Fine Chest Armor of Pulverization",
+      "jp": "粉砕の高級型アーマー",
+      "kr": "분쇄의 고급형 갑옷",
+      "zh": "上等粉碎盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "17"
+  },
+  "5407": {
+    "name": {
+      "en": "Steel Chest Armor of Pulverization",
+      "jp": "粉砕の鋼鉄アーマー",
+      "kr": "분쇄의 강철 갑옷",
+      "zh": "钢铁粉碎盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "17"
+  },
+  "5408": {
+    "name": {
+      "en": "Etheric Chest Armor of Pulverization",
+      "jp": "粉砕のエーテルアーマー",
+      "kr": "분쇄의 에테르 갑옷",
+      "zh": "以太粉碎盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "17"
+  },
+  "5409": {
+    "name": {
+      "en": "Ordinary Chest Armor of Immunity",
+      "jp": "免疫の普及型アーマー",
+      "kr": "면역의 보급형 갑옷",
+      "zh": "普通免疫盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "18"
+  },
+  "5410": {
+    "name": {
+      "en": "Fine Chest Armor of Immunity",
+      "jp": "免疫の高級型アーマー",
+      "kr": "면역의 고급형 갑옷",
+      "zh": "上等免疫盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "18"
+  },
+  "5411": {
+    "name": {
+      "en": "Steel Chest Armor of Immunity",
+      "jp": "免疫の鋼鉄アーマー",
+      "kr": "면역의 강철 갑옷",
+      "zh": "钢铁免疫盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "18"
+  },
+  "5412": {
+    "name": {
+      "en": "Etheric Chest Armor of Immunity",
+      "jp": "免疫のエーテルアーマー",
+      "kr": "면역의 에테르 갑옷",
+      "zh": "以太免疫盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "18"
+  },
+  "5413": {
+    "name": {
+      "en": "Ordinary Chest Armor of Immunity",
+      "jp": "免疫の普及型アーマー",
+      "kr": "면역의 보급형 갑옷",
+      "zh": "普通免疫盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "18"
+  },
+  "5414": {
+    "name": {
+      "en": "Fine Chest Armor of Immunity",
+      "jp": "免疫の高級型アーマー",
+      "kr": "면역의 고급형 갑옷",
+      "zh": "上等免疫盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "18"
+  },
+  "5415": {
+    "name": {
+      "en": "Steel Chest Armor of Immunity",
+      "jp": "免疫の鋼鉄アーマー",
+      "kr": "면역의 강철 갑옷",
+      "zh": "钢铁免疫盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "18"
+  },
+  "5416": {
+    "name": {
+      "en": "Etheric Chest Armor of Immunity",
+      "jp": "免疫のエーテルアーマー",
+      "kr": "면역의 에테르 갑옷",
+      "zh": "以太免疫盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "18"
+  },
+  "5417": {
+    "name": {
+      "en": "Ordinary Chest Armor of Immunity",
+      "jp": "免疫の普及型アーマー",
+      "kr": "면역의 보급형 갑옷",
+      "zh": "普通免疫盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "18"
+  },
+  "5418": {
+    "name": {
+      "en": "Fine Chest Armor of Immunity",
+      "jp": "免疫の高級型アーマー",
+      "kr": "면역의 고급형 갑옷",
+      "zh": "上等免疫盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "18"
+  },
+  "5419": {
+    "name": {
+      "en": "Steel Chest Armor of Immunity",
+      "jp": "免疫の鋼鉄アーマー",
+      "kr": "면역의 강철 갑옷",
+      "zh": "钢铁免疫盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "18"
+  },
+  "5420": {
+    "name": {
+      "en": "Etheric Chest Armor of Immunity",
+      "jp": "免疫のエーテルアーマー",
+      "kr": "면역의 에테르 갑옷",
+      "zh": "以太免疫盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "18"
+  },
+  "5421": {
+    "name": {
+      "en": "Ordinary Chest Armor of Immunity",
+      "jp": "免疫の普及型アーマー",
+      "kr": "면역의 보급형 갑옷",
+      "zh": "普通免疫盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "18"
+  },
+  "5422": {
+    "name": {
+      "en": "Fine Chest Armor of Immunity",
+      "jp": "免疫の高級型アーマー",
+      "kr": "면역의 고급형 갑옷",
+      "zh": "上等免疫盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "18"
+  },
+  "5423": {
+    "name": {
+      "en": "Steel Chest Armor of Immunity",
+      "jp": "免疫の鋼鉄アーマー",
+      "kr": "면역의 강철 갑옷",
+      "zh": "钢铁免疫盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "18"
+  },
+  "5424": {
+    "name": {
+      "en": "Etheric Chest Armor of Immunity",
+      "jp": "免疫のエーテルアーマー",
+      "kr": "면역의 에테르 갑옷",
+      "zh": "以太免疫盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "18"
+  },
+  "5425": {
+    "name": {
+      "en": "Ordinary Chest Armor of Immunity",
+      "jp": "免疫の普及型アーマー",
+      "kr": "면역의 보급형 갑옷",
+      "zh": "普通免疫盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "18"
+  },
+  "5426": {
+    "name": {
+      "en": "Fine Chest Armor of Immunity",
+      "jp": "免疫の高級型アーマー",
+      "kr": "면역의 고급형 갑옷",
+      "zh": "上等免疫盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "18"
+  },
+  "5427": {
+    "name": {
+      "en": "Steel Chest Armor of Immunity",
+      "jp": "免疫の鋼鉄アーマー",
+      "kr": "면역의 강철 갑옷",
+      "zh": "钢铁免疫盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "18"
+  },
+  "5428": {
+    "name": {
+      "en": "Etheric Chest Armor of Immunity",
+      "jp": "免疫のエーテルアーマー",
+      "kr": "면역의 에테르 갑옷",
+      "zh": "以太免疫盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "18"
+  },
+  "5429": {
+    "name": {
+      "en": "Ordinary Chest Armor of Immunity",
+      "jp": "免疫の普及型アーマー",
+      "kr": "면역의 보급형 갑옷",
+      "zh": "普通免疫盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "18"
+  },
+  "5430": {
+    "name": {
+      "en": "Fine Chest Armor of Immunity",
+      "jp": "免疫の高級型アーマー",
+      "kr": "면역의 고급형 갑옷",
+      "zh": "上等免疫盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "18"
+  },
+  "5431": {
+    "name": {
+      "en": "Steel Chest Armor of Immunity",
+      "jp": "免疫の鋼鉄アーマー",
+      "kr": "면역의 강철 갑옷",
+      "zh": "钢铁免疫盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "18"
+  },
+  "5432": {
+    "name": {
+      "en": "Etheric Chest Armor of Immunity",
+      "jp": "免疫のエーテルアーマー",
+      "kr": "면역의 에테르 갑옷",
+      "zh": "以太免疫盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "5433": {
+    "name": {
+      "en": "Ordinary Chest Armor of Swiftness",
+      "jp": "機敏の普及型アーマー",
+      "kr": "기민의 보급형 갑옷",
+      "zh": "普通敏捷盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "19"
+  },
+  "5434": {
+    "name": {
+      "en": "Fine Chest Armor of Swiftness",
+      "jp": "機敏の高級型アーマー",
+      "kr": "기민의 고급형 갑옷",
+      "zh": "上等敏捷盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "19"
+  },
+  "5435": {
+    "name": {
+      "en": "Steel Chest Armor of Swiftness",
+      "jp": "機敏の鋼鉄アーマー",
+      "kr": "기민의 강철 갑옷",
+      "zh": "钢铁敏捷盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "19"
+  },
+  "5436": {
+    "name": {
+      "en": "Etheric Chest Armor of Swiftness",
+      "jp": "機敏のエーテルアーマー",
+      "kr": "기민의 에테르 갑옷",
+      "zh": "以太敏捷盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "19"
+  },
+  "5437": {
+    "name": {
+      "en": "Ordinary Chest Armor of Swiftness",
+      "jp": "機敏の普及型アーマー",
+      "kr": "기민의 보급형 갑옷",
+      "zh": "普通敏捷盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "19"
+  },
+  "5438": {
+    "name": {
+      "en": "Fine Chest Armor of Swiftness",
+      "jp": "機敏の高級型アーマー",
+      "kr": "기민의 고급형 갑옷",
+      "zh": "上等敏捷盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "19"
+  },
+  "5439": {
+    "name": {
+      "en": "Steel Chest Armor of Swiftness",
+      "jp": "機敏の鋼鉄アーマー",
+      "kr": "기민의 강철 갑옷",
+      "zh": "钢铁敏捷盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "19"
+  },
+  "5440": {
+    "name": {
+      "en": "Etheric Chest Armor of Swiftness",
+      "jp": "機敏のエーテルアーマー",
+      "kr": "기민의 에테르 갑옷",
+      "zh": "以太敏捷盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "19"
+  },
+  "5441": {
+    "name": {
+      "en": "Ordinary Chest Armor of Swiftness",
+      "jp": "機敏の普及型アーマー",
+      "kr": "기민의 보급형 갑옷",
+      "zh": "普通敏捷盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "19"
+  },
+  "5442": {
+    "name": {
+      "en": "Fine Chest Armor of Swiftness",
+      "jp": "機敏の高級型アーマー",
+      "kr": "기민의 고급형 갑옷",
+      "zh": "上等敏捷盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "19"
+  },
+  "5443": {
+    "name": {
+      "en": "Steel Chest Armor of Swiftness",
+      "jp": "機敏の鋼鉄アーマー",
+      "kr": "기민의 강철 갑옷",
+      "zh": "钢铁敏捷盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "19"
+  },
+  "5444": {
+    "name": {
+      "en": "Etheric Chest Armor of Swiftness",
+      "jp": "機敏のエーテルアーマー",
+      "kr": "기민의 에테르 갑옷",
+      "zh": "以太敏捷盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "19"
+  },
+  "5445": {
+    "name": {
+      "en": "Ordinary Chest Armor of Swiftness",
+      "jp": "機敏の普及型アーマー",
+      "kr": "기민의 보급형 갑옷",
+      "zh": "普通敏捷盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "19"
+  },
+  "5446": {
+    "name": {
+      "en": "Fine Chest Armor of Swiftness",
+      "jp": "機敏の高級型アーマー",
+      "kr": "기민의 고급형 갑옷",
+      "zh": "上等敏捷盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "19"
+  },
+  "5447": {
+    "name": {
+      "en": "Steel Chest Armor of Swiftness",
+      "jp": "機敏の鋼鉄アーマー",
+      "kr": "기민의 강철 갑옷",
+      "zh": "钢铁敏捷盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "19"
+  },
+  "5448": {
+    "name": {
+      "en": "Etheric Chest Armor of Swiftness",
+      "jp": "機敏のエーテルアーマー",
+      "kr": "기민의 에테르 갑옷",
+      "zh": "以太敏捷盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "19"
+  },
+  "5449": {
+    "name": {
+      "en": "Ordinary Chest Armor of Swiftness",
+      "jp": "機敏の普及型アーマー",
+      "kr": "기민의 보급형 갑옷",
+      "zh": "普通敏捷盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "19"
+  },
+  "5450": {
+    "name": {
+      "en": "Fine Chest Armor of Swiftness",
+      "jp": "機敏の高級型アーマー",
+      "kr": "기민의 고급형 갑옷",
+      "zh": "上等敏捷盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "19"
+  },
+  "5451": {
+    "name": {
+      "en": "Steel Chest Armor of Swiftness",
+      "jp": "機敏の鋼鉄アーマー",
+      "kr": "기민의 강철 갑옷",
+      "zh": "钢铁敏捷盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "19"
+  },
+  "5452": {
+    "name": {
+      "en": "Etheric Chest Armor of Swiftness",
+      "jp": "機敏のエーテルアーマー",
+      "kr": "기민의 에테르 갑옷",
+      "zh": "以太敏捷盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "19"
+  },
+  "5453": {
+    "name": {
+      "en": "Ordinary Chest Armor of Swiftness",
+      "jp": "機敏の普及型アーマー",
+      "kr": "기민의 보급형 갑옷",
+      "zh": "普通敏捷盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "19"
+  },
+  "5454": {
+    "name": {
+      "en": "Fine Chest Armor of Swiftness",
+      "jp": "機敏の高級型アーマー",
+      "kr": "기민의 고급형 갑옷",
+      "zh": "上等敏捷盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "19"
+  },
+  "5455": {
+    "name": {
+      "en": "Steel Chest Armor of Swiftness",
+      "jp": "機敏の鋼鉄アーマー",
+      "kr": "기민의 강철 갑옷",
+      "zh": "钢铁敏捷盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "19"
+  },
+  "5456": {
+    "name": {
+      "en": "Etheric Chest Armor of Swiftness",
+      "jp": "機敏のエーテルアーマー",
+      "kr": "기민의 에테르 갑옷",
+      "zh": "以太敏捷盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "19"
+  },
+  "5457": {
+    "name": {
+      "en": "Ordinary Chest Armor of Weakness",
+      "jp": "弱点の普及型アーマー",
+      "kr": "약점의 보급형 갑옷",
+      "zh": "普通弱点盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "20"
+  },
+  "5458": {
+    "name": {
+      "en": "Fine Chest Armor of Weakness",
+      "jp": "弱点の高級型アーマー",
+      "kr": "약점의 고급형 갑옷",
+      "zh": "上等弱点盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "20"
+  },
+  "5459": {
+    "name": {
+      "en": "Steel Chest Armor of Weakness",
+      "jp": "弱点の鋼鉄アーマー",
+      "kr": "약점의 강철 갑옷",
+      "zh": "钢铁弱点盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "20"
+  },
+  "5460": {
+    "name": {
+      "en": "Etheric Chest Armor of Weakness",
+      "jp": "弱点のエーテルアーマー",
+      "kr": "약점의 에테르 갑옷",
+      "zh": "以太弱点盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "20"
+  },
+  "5461": {
+    "name": {
+      "en": "Ordinary Chest Armor of Weakness",
+      "jp": "弱点の普及型アーマー",
+      "kr": "약점의 보급형 갑옷",
+      "zh": "普通弱点盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "20"
+  },
+  "5462": {
+    "name": {
+      "en": "Fine Chest Armor of Weakness",
+      "jp": "弱点の高級型アーマー",
+      "kr": "약점의 고급형 갑옷",
+      "zh": "上等弱点盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "20"
+  },
+  "5463": {
+    "name": {
+      "en": "Steel Chest Armor of Weakness",
+      "jp": "弱点の鋼鉄アーマー",
+      "kr": "약점의 강철 갑옷",
+      "zh": "钢铁弱点盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "20"
+  },
+  "5464": {
+    "name": {
+      "en": "Etheric Chest Armor of Weakness",
+      "jp": "弱点のエーテルアーマー",
+      "kr": "약점의 에테르 갑옷",
+      "zh": "以太弱点盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "20"
+  },
+  "5465": {
+    "name": {
+      "en": "Ordinary Chest Armor of Weakness",
+      "jp": "弱点の普及型アーマー",
+      "kr": "약점의 보급형 갑옷",
+      "zh": "普通弱点盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "20"
+  },
+  "5466": {
+    "name": {
+      "en": "Fine Chest Armor of Weakness",
+      "jp": "弱点の高級型アーマー",
+      "kr": "약점의 고급형 갑옷",
+      "zh": "上等弱点盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "20"
+  },
+  "5467": {
+    "name": {
+      "en": "Steel Chest Armor of Weakness",
+      "jp": "弱点の鋼鉄アーマー",
+      "kr": "약점의 강철 갑옷",
+      "zh": "钢铁弱点盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "20"
+  },
+  "5468": {
+    "name": {
+      "en": "Etheric Chest Armor of Weakness",
+      "jp": "弱点のエーテルアーマー",
+      "kr": "약점의 에테르 갑옷",
+      "zh": "以太弱点盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "20"
+  },
+  "5469": {
+    "name": {
+      "en": "Ordinary Chest Armor of Weakness",
+      "jp": "弱点の普及型アーマー",
+      "kr": "약점의 보급형 갑옷",
+      "zh": "普通弱点盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "20"
+  },
+  "5470": {
+    "name": {
+      "en": "Fine Chest Armor of Weakness",
+      "jp": "弱点の高級型アーマー",
+      "kr": "약점의 고급형 갑옷",
+      "zh": "上等弱点盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "20"
+  },
+  "5471": {
+    "name": {
+      "en": "Steel Chest Armor of Weakness",
+      "jp": "弱点の鋼鉄アーマー",
+      "kr": "약점의 강철 갑옷",
+      "zh": "钢铁弱点盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "20"
+  },
+  "5472": {
+    "name": {
+      "en": "Etheric Chest Armor of Weakness",
+      "jp": "弱点のエーテルアーマー",
+      "kr": "약점의 에테르 갑옷",
+      "zh": "以太弱点盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "20"
+  },
+  "5473": {
+    "name": {
+      "en": "Ordinary Chest Armor of Weakness",
+      "jp": "弱点の普及型アーマー",
+      "kr": "약점의 보급형 갑옷",
+      "zh": "普通弱点盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "20"
+  },
+  "5474": {
+    "name": {
+      "en": "Fine Chest Armor of Weakness",
+      "jp": "弱点の高級型アーマー",
+      "kr": "약점의 고급형 갑옷",
+      "zh": "上等弱点盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "20"
+  },
+  "5475": {
+    "name": {
+      "en": "Steel Chest Armor of Weakness",
+      "jp": "弱点の鋼鉄アーマー",
+      "kr": "약점의 강철 갑옷",
+      "zh": "钢铁弱点盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "20"
+  },
+  "5476": {
+    "name": {
+      "en": "Etheric Chest Armor of Weakness",
+      "jp": "弱点のエーテルアーマー",
+      "kr": "약점의 에테르 갑옷",
+      "zh": "以太弱点盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "20"
+  },
+  "5477": {
+    "name": {
+      "en": "Ordinary Chest Armor of Weakness",
+      "jp": "弱点の普及型アーマー",
+      "kr": "약점의 보급형 갑옷",
+      "zh": "普通弱点盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "20"
+  },
+  "5478": {
+    "name": {
+      "en": "Fine Chest Armor of Weakness",
+      "jp": "弱点の高級型アーマー",
+      "kr": "약점의 고급형 갑옷",
+      "zh": "上等弱点盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "20"
+  },
+  "5479": {
+    "name": {
+      "en": "Steel Chest Armor of Weakness",
+      "jp": "弱点の鋼鉄アーマー",
+      "kr": "약점의 강철 갑옷",
+      "zh": "钢铁弱点盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "20"
+  },
+  "5480": {
+    "name": {
+      "en": "Etheric Chest Armor of Weakness",
+      "jp": "弱点のエーテルアーマー",
+      "kr": "약점의 에테르 갑옷",
+      "zh": "以太弱点盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "20"
+  },
+  "5481": {
+    "name": {
+      "en": "Ordinary Chest Armor of Augmentation",
+      "jp": "増強の普及型アーマー",
+      "kr": "증강의 보급형 갑옷",
+      "zh": "普通加强盔甲"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "21"
+  },
+  "5482": {
+    "name": {
+      "en": "Fine Chest Armor of Augmentation",
+      "jp": "増強の高級型アーマー",
+      "kr": "증강의 고급형 갑옷",
+      "zh": "高级加强盔甲"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "21"
+  },
+  "5483": {
+    "name": {
+      "en": "Steel Chest Armor of Augmentation",
+      "jp": "増強の鋼鉄アーマー",
+      "kr": "증강의 강철 갑옷",
+      "zh": "钢铁加强盔甲"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "21"
+  },
+  "5484": {
+    "name": {
+      "en": "Etheric Chest Armor of Augmentation",
+      "jp": "増強のエーテルアーマー",
+      "kr": "증강의 에테르 갑옷",
+      "zh": "以太加强盔甲"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Armor_01",
+    "craftable": false,
+    "main": ["4004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "21"
+  },
+  "5485": {
+    "name": {
+      "en": "Ordinary Chest Armor of Augmentation",
+      "jp": "増強の普及型アーマー",
+      "kr": "증강의 보급형 갑옷",
+      "zh": "普通加强盔甲"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "21"
+  },
+  "5486": {
+    "name": {
+      "en": "Fine Chest Armor of Augmentation",
+      "jp": "増強の高級型アーマー",
+      "kr": "증강의 고급형 갑옷",
+      "zh": "高级加强盔甲"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "21"
+  },
+  "5487": {
+    "name": {
+      "en": "Steel Chest Armor of Augmentation",
+      "jp": "増強の鋼鉄アーマー",
+      "kr": "증강의 강철 갑옷",
+      "zh": "钢铁加强盔甲"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "21"
+  },
+  "5488": {
+    "name": {
+      "en": "Etheric Chest Armor of Augmentation",
+      "jp": "増強のエーテルアーマー",
+      "kr": "증강의 에테르 갑옷",
+      "zh": "以太加强盔甲"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Armor_02",
+    "craftable": false,
+    "main": ["4008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "21"
+  },
+  "5489": {
+    "name": {
+      "en": "Ordinary Chest Armor of Augmentation",
+      "jp": "増強の普及型アーマー",
+      "kr": "증강의 보급형 갑옷",
+      "zh": "普通加强盔甲"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "21"
+  },
+  "5490": {
+    "name": {
+      "en": "Fine Chest Armor of Augmentation",
+      "jp": "増強の高級型アーマー",
+      "kr": "증강의 고급형 갑옷",
+      "zh": "高级加强盔甲"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "21"
+  },
+  "5491": {
+    "name": {
+      "en": "Steel Chest Armor of Augmentation",
+      "jp": "増強の鋼鉄アーマー",
+      "kr": "증강의 강철 갑옷",
+      "zh": "钢铁加强盔甲"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "21"
+  },
+  "5492": {
+    "name": {
+      "en": "Etheric Chest Armor of Augmentation",
+      "jp": "増強のエーテルアーマー",
+      "kr": "증강의 에테르 갑옷",
+      "zh": "以太加强盔甲"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Armor_03",
+    "craftable": false,
+    "main": ["4012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "21"
+  },
+  "5493": {
+    "name": {
+      "en": "Ordinary Chest Armor of Augmentation",
+      "jp": "増強の普及型アーマー",
+      "kr": "증강의 보급형 갑옷",
+      "zh": "普通加强盔甲"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "21"
+  },
+  "5494": {
+    "name": {
+      "en": "Fine Chest Armor of Augmentation",
+      "jp": "増強の高級型アーマー",
+      "kr": "증강의 고급형 갑옷",
+      "zh": "高级加强盔甲"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "21"
+  },
+  "5495": {
+    "name": {
+      "en": "Steel Chest Armor of Augmentation",
+      "jp": "増強の鋼鉄アーマー",
+      "kr": "증강의 강철 갑옷",
+      "zh": "钢铁加强盔甲"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "21"
+  },
+  "5496": {
+    "name": {
+      "en": "Etheric Chest Armor of Augmentation",
+      "jp": "増強のエーテルアーマー",
+      "kr": "증강의 에테르 갑옷",
+      "zh": "以太加强盔甲"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Armor_04",
+    "craftable": false,
+    "main": ["4016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "21"
+  },
+  "5497": {
+    "name": {
+      "en": "Ordinary Chest Armor of Augmentation",
+      "jp": "増強の普及型アーマー",
+      "kr": "증강의 보급형 갑옷",
+      "zh": "普通加强盔甲"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "21"
+  },
+  "5498": {
+    "name": {
+      "en": "Fine Chest Armor of Augmentation",
+      "jp": "増強の高級型アーマー",
+      "kr": "증강의 고급형 갑옷",
+      "zh": "高级加强盔甲"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "21"
+  },
+  "5499": {
+    "name": {
+      "en": "Steel Chest Armor of Augmentation",
+      "jp": "増強の鋼鉄アーマー",
+      "kr": "증강의 강철 갑옷",
+      "zh": "钢铁加强盔甲"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "21"
+  },
+  "5500": {
+    "name": {
+      "en": "Etheric Chest Armor of Augmentation",
+      "jp": "増強のエーテルアーマー",
+      "kr": "증강의 에테르 갑옷",
+      "zh": "以太加强盔甲"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Armor_05",
+    "craftable": false,
+    "main": ["4020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "21"
+  },
+  "5501": {
+    "name": {
+      "en": "Ordinary Chest Armor of Augmentation",
+      "jp": "増強の普及型アーマー",
+      "kr": "증강의 보급형 갑옷",
+      "zh": "普通加强盔甲"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "21"
+  },
+  "5502": {
+    "name": {
+      "en": "Fine Chest Armor of Augmentation",
+      "jp": "増強の高級型アーマー",
+      "kr": "증강의 고급형 갑옷",
+      "zh": "高级加强盔甲"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "21"
+  },
+  "5503": {
+    "name": {
+      "en": "Steel Chest Armor of Augmentation",
+      "jp": "増強の鋼鉄アーマー",
+      "kr": "증강의 강철 갑옷",
+      "zh": "钢铁加强盔甲"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "21"
+  },
+  "5504": {
+    "name": {
+      "en": "Etheric Chest Armor of Augmentation",
+      "jp": "増強のエーテルアーマー",
+      "kr": "증강의 에테르 갑옷",
+      "zh": "以太加强盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": true,
+    "main": ["4024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "21"
+  },
+  "5506": {
+    "name": {
+      "en": "Etheric Chest Armor of Attack",
+      "jp": "攻撃のエーテルアーマー",
+      "kr": "공격의 에테르 갑옷",
+      "zh": "以太攻击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4025"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94101": {
+    "name": {
+      "en": "Etheric Chest Armor of Attack",
+      "jp": "攻撃のエーテルアーマー",
+      "kr": "공격의 에테르 갑옷",
+      "zh": "以太攻击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12001",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94102": {
+    "name": {
+      "en": "Etheric Chest Armor of Defense",
+      "jp": "防御のエーテルアーマー",
+      "kr": "방어의 에테르 갑옷",
+      "zh": "以太防御盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12002",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "94103": {
+    "name": {
+      "en": "Etheric Chest Armor of Life",
+      "jp": "生命のエーテルアーマー",
+      "kr": "생명의 에테르 갑옷",
+      "zh": "以太生命盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12003",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "94104": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Hit",
+      "jp": "会心のエーテルアーマー",
+      "kr": "치명의 에테르 갑옷",
+      "zh": "以太暴击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12004",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "94105": {
+    "name": {
+      "en": "Etheric Chest Armor of Effectiveness",
+      "jp": "効果命中のエーテルアーマー",
+      "kr": "적중의 에테르 갑옷",
+      "zh": "以太效果命中盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12005",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "94106": {
+    "name": {
+      "en": "Etheric Chest Armor of Resilience",
+      "jp": "抵抗のエーテルアーマー",
+      "kr": "저항의 에테르 갑옷",
+      "zh": "以太抵抗盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12006",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "94107": {
+    "name": {
+      "en": "Etheric Chest Armor of Counterattack",
+      "jp": "反撃のエーテルアーマー",
+      "kr": "반격의 에테르 갑옷",
+      "zh": "以太反击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12007",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "94108": {
+    "name": {
+      "en": "Etheric Chest Armor of Fortification",
+      "jp": "鉄壁のエーテルアーマー",
+      "kr": "개전 방벽의 에테르 갑옷",
+      "zh": "以太开战防壁盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12008",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "94109": {
+    "name": {
+      "en": "Etheric Chest Armor of Mitigation",
+      "jp": "無力化のエーテルアーマー",
+      "kr": "무력화의 에테르 갑옷",
+      "zh": "以太失效盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12009",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "94110": {
+    "name": {
+      "en": "Etheric Chest Armor of Lifesteal",
+      "jp": "吸収のエーテルアーマー",
+      "kr": "흡혈의 에테르 갑옷",
+      "zh": "以太吸血盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12010",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "94111": {
+    "name": {
+      "en": "Etheric Chest Armor of Penetration",
+      "jp": "貫通のエーテルアーマー",
+      "kr": "관통의 에테르 갑옷",
+      "zh": "以太穿透盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12011",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "94112": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Strike",
+      "jp": "極大化のエーテルアーマー",
+      "kr": "극대화의 에테르 갑옷",
+      "zh": "以太暴伤盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12012",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "94113": {
+    "name": {
+      "en": "Etheric Chest Armor of Speed",
+      "jp": "速度のエーテルアーマー",
+      "kr": "속도의 에테르 갑옷",
+      "zh": "以太速度盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12013",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "94114": {
+    "name": {
+      "en": "Etheric Chest Armor of Bursting",
+      "jp": "炸裂のエーテルアーマー",
+      "kr": "버스트의 에테르 갑옷",
+      "zh": "以太爆发盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12014",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "94115": {
+    "name": {
+      "en": "Etheric Chest Armor of Revenge",
+      "jp": "復讐のエーテルアーマー",
+      "kr": "복수의 에테르 갑옷",
+      "zh": "以太复仇盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12015",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "94116": {
+    "name": {
+      "en": "Etheric Chest Armor of Patience",
+      "jp": "忍耐のエーテルアーマー",
+      "kr": "인내의 에테르 갑옷",
+      "zh": "以太忍耐盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12016",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "94118": {
+    "name": {
+      "en": "Etheric Chest Armor of Immunity",
+      "jp": "免疫のエーテルアーマー",
+      "kr": "면역의 에테르 갑옷",
+      "zh": "以太免疫盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12017",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "94119": {
+    "name": {
+      "en": "Etheric Chest Armor of Swiftness",
+      "jp": "機敏のエーテルアーマー",
+      "kr": "기민의 에테르 갑옷",
+      "zh": "以太敏捷盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12018",
+    "breakLimit": "6|unique",
+    "set": "19"
+  },
+  "94501": {
+    "name": {
+      "en": "Etheric Chest Armor of Attack",
+      "jp": "攻撃のエーテルアーマー",
+      "kr": "공격의 에테르 갑옷",
+      "zh": "以太攻击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94502": {
+    "name": {
+      "en": "Etheric Chest Armor of Defense",
+      "jp": "防御のエーテルアーマー",
+      "kr": "방어의 에테르 갑옷",
+      "zh": "以太防御盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "94503": {
+    "name": {
+      "en": "Etheric Chest Armor of Life",
+      "jp": "生命のエーテルアーマー",
+      "kr": "생명의 에테르 갑옷",
+      "zh": "以太生命盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "94504": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Hit",
+      "jp": "会心のエーテルアーマー",
+      "kr": "치명의 에테르 갑옷",
+      "zh": "以太暴击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "94505": {
+    "name": {
+      "en": "Etheric Chest Armor of Effectiveness",
+      "jp": "効果命中のエーテルアーマー",
+      "kr": "적중의 에테르 갑옷",
+      "zh": "以太效果命中盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "94506": {
+    "name": {
+      "en": "Etheric Chest Armor of Resilience",
+      "jp": "抵抗のエーテルアーマー",
+      "kr": "저항의 에테르 갑옷",
+      "zh": "以太抵抗盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "94507": {
+    "name": {
+      "en": "Etheric Chest Armor of Counterattack",
+      "jp": "反撃のエーテルアーマー",
+      "kr": "반격의 에테르 갑옷",
+      "zh": "以太反击盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "94508": {
+    "name": {
+      "en": "Etheric Chest Armor of Fortification",
+      "jp": "鉄壁のエーテルアーマー",
+      "kr": "개전 방벽의 에테르 갑옷",
+      "zh": "以太开战防壁盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "94509": {
+    "name": {
+      "en": "Etheric Chest Armor of Mitigation",
+      "jp": "無力化のエーテルアーマー",
+      "kr": "무력화의 에테르 갑옷",
+      "zh": "以太失效盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "94510": {
+    "name": {
+      "en": "Etheric Chest Armor of Lifesteal",
+      "jp": "吸収のエーテルアーマー",
+      "kr": "흡혈의 에테르 갑옷",
+      "zh": "以太吸血盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "94511": {
+    "name": {
+      "en": "Etheric Chest Armor of Penetration",
+      "jp": "貫通のエーテルアーマー",
+      "kr": "관통의 에테르 갑옷",
+      "zh": "以太穿透盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "94512": {
+    "name": {
+      "en": "Etheric Chest Armor of Critical Strike",
+      "jp": "極大化のエーテルアーマー",
+      "kr": "극대화의 에테르 갑옷",
+      "zh": "以太暴伤盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "94513": {
+    "name": {
+      "en": "Etheric Chest Armor of Speed",
+      "jp": "速度のエーテルアーマー",
+      "kr": "속도의 에테르 갑옷",
+      "zh": "以太速度盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "94514": {
+    "name": {
+      "en": "Etheric Chest Armor of Bursting",
+      "jp": "炸裂のエーテルアーマー",
+      "kr": "버스트의 에테르 갑옷",
+      "zh": "以太爆发盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "94515": {
+    "name": {
+      "en": "Etheric Chest Armor of Revenge",
+      "jp": "復讐のエーテルアーマー",
+      "kr": "복수의 에테르 갑옷",
+      "zh": "以太复仇盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "94516": {
+    "name": {
+      "en": "Etheric Chest Armor of Patience",
+      "jp": "忍耐のエーテルアーマー",
+      "kr": "인내의 에테르 갑옷",
+      "zh": "以太忍耐盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "94517": {
+    "name": {
+      "en": "Etheric Chest Armor of Immunity",
+      "jp": "免疫のエーテルアーマー",
+      "kr": "면역의 에테르 갑옷",
+      "zh": "以太免疫盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "94518": {
+    "name": {
+      "en": "Etheric Chest Armor of Swiftness",
+      "jp": "機敏のエーテルアーマー",
+      "kr": "기민의 에테르 갑옷",
+      "zh": "以太敏捷盔甲"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "19"
+  }
+}

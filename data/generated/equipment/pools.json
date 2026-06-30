@@ -1,0 +1,9982 @@
+{
+  "1": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 18,
+      "weight": 100
+    }
+  ],
+  "2": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 21,
+      "weight": 100
+    }
+  ],
+  "3": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 27,
+      "weight": 100
+    }
+  ],
+  "4": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 30,
+      "weight": 100
+    }
+  ],
+  "5": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 36,
+      "weight": 100
+    }
+  ],
+  "6": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 42,
+      "weight": 100
+    }
+  ],
+  "7": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 54,
+      "weight": 100
+    }
+  ],
+  "8": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 60,
+      "weight": 100
+    }
+  ],
+  "9": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 54,
+      "weight": 100
+    }
+  ],
+  "10": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 63,
+      "weight": 100
+    }
+  ],
+  "11": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 81,
+      "weight": 100
+    }
+  ],
+  "12": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 90,
+      "weight": 100
+    }
+  ],
+  "13": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 72,
+      "weight": 100
+    }
+  ],
+  "14": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 84,
+      "weight": 100
+    }
+  ],
+  "15": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 108,
+      "weight": 100
+    }
+  ],
+  "16": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 120,
+      "weight": 100
+    }
+  ],
+  "17": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 90,
+      "weight": 100
+    }
+  ],
+  "18": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 105,
+      "weight": 100
+    }
+  ],
+  "19": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 135,
+      "weight": 100
+    }
+  ],
+  "20": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 150,
+      "weight": 100
+    }
+  ],
+  "21": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 120,
+      "weight": 100
+    }
+  ],
+  "22": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 140,
+      "weight": 100
+    }
+  ],
+  "23": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 180,
+      "weight": 100
+    }
+  ],
+  "24": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 200,
+      "weight": 100
+    }
+  ],
+  "25": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 140,
+      "weight": 100
+    }
+  ],
+  "26": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 140,
+      "weight": 100
+    }
+  ],
+  "27": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 140,
+      "weight": 100
+    }
+  ],
+  "28": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 140,
+      "weight": 100
+    }
+  ],
+  "29": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 190,
+      "weight": 100
+    }
+  ],
+  "30": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 150,
+      "weight": 100
+    }
+  ],
+  "101": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 9,
+      "weight": 7.69,
+      "factor": 9,
+      "max": 54
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 11,
+      "weight": 7.69,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "hp",
+      "mode": "flat",
+      "value": 33,
+      "weight": 7.69,
+      "factor": 33,
+      "max": 198
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 14,
+      "weight": 7.69,
+      "factor": 14,
+      "max": 84
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 14,
+      "weight": 7.69,
+      "factor": 14,
+      "max": 84
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 11,
+      "weight": 7.7,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 11,
+      "weight": 7.7,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 7.7,
+      "factor": 1,
+      "max": 6
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 18,
+      "weight": 0,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 18,
+      "weight": 0,
+      "factor": 18,
+      "max": 108
+    }
+  ],
+  "102": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 9,
+      "weight": 7.69,
+      "factor": 9,
+      "max": 54
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 11,
+      "weight": 7.69,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "hp",
+      "mode": "flat",
+      "value": 33,
+      "weight": 7.69,
+      "factor": 33,
+      "max": 198
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 14,
+      "weight": 7.69,
+      "factor": 14,
+      "max": 84
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 14,
+      "weight": 7.69,
+      "factor": 14,
+      "max": 84
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 11,
+      "weight": 7.7,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 11,
+      "weight": 7.7,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 7.7,
+      "factor": 1,
+      "max": 6
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 18,
+      "weight": 0,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 11,
+      "weight": 0,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 0,
+      "factor": 1,
+      "max": 6
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 14,
+      "weight": 0,
+      "factor": 14,
+      "max": 84
+    }
+  ],
+  "103": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 9,
+      "weight": 7.69,
+      "factor": 9,
+      "max": 54
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 11,
+      "weight": 7.69,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "hp",
+      "mode": "flat",
+      "value": 33,
+      "weight": 7.69,
+      "factor": 33,
+      "max": 198
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 14,
+      "weight": 7.69,
+      "factor": 14,
+      "max": 84
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 14,
+      "weight": 7.69,
+      "factor": 14,
+      "max": 84
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 11,
+      "weight": 7.7,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 11,
+      "weight": 7.7,
+      "factor": 11,
+      "max": 66
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 7.7,
+      "factor": 1,
+      "max": 6
+    }
+  ],
+  "104": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 15,
+      "weight": 7.69,
+      "factor": 15,
+      "max": 90
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "hp",
+      "mode": "flat",
+      "value": 55,
+      "weight": 7.69,
+      "factor": 55,
+      "max": 330
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 23,
+      "weight": 7.69,
+      "factor": 23,
+      "max": 138
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 23,
+      "weight": 7.69,
+      "factor": 23,
+      "max": 138
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 19,
+      "weight": 7.7,
+      "factor": 19,
+      "max": 114
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 19,
+      "weight": 7.7,
+      "factor": 19,
+      "max": 114
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 7.7,
+      "factor": 2,
+      "max": 12
+    }
+  ],
+  "105": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 15,
+      "weight": 7.69,
+      "factor": 15,
+      "max": 90
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 18,
+      "weight": 7.69,
+      "factor": 18,
+      "max": 108
+    },
+    {
+      "stat": "hp",
+      "mode": "flat",
+      "value": 55,
+      "weight": 7.69,
+      "factor": 55,
+      "max": 330
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 23,
+      "weight": 7.69,
+      "factor": 23,
+      "max": 138
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 23,
+      "weight": 7.69,
+      "factor": 23,
+      "max": 138
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 19,
+      "weight": 7.7,
+      "factor": 19,
+      "max": 114
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 19,
+      "weight": 7.7,
+      "factor": 19,
+      "max": 114
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 7.7,
+      "factor": 2,
+      "max": 12
+    }
+  ],
+  "106": [
+    {
+      "stat": "atk",
+      "mode": "flat",
+      "value": 40,
+      "weight": 7.69,
+      "factor": 40,
+      "max": 240
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 40,
+      "weight": 7.69,
+      "factor": 40,
+      "max": 240
+    },
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 40,
+      "weight": 7.69,
+      "factor": 40,
+      "max": 240
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 40,
+      "weight": 7.69,
+      "factor": 40,
+      "max": 240
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 20,
+      "weight": 7.69,
+      "factor": 20,
+      "max": 120
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 24,
+      "weight": 7.69,
+      "factor": 24,
+      "max": 144
+    },
+    {
+      "stat": "hp",
+      "mode": "flat",
+      "value": 73,
+      "weight": 7.69,
+      "factor": 73,
+      "max": 438
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 30,
+      "weight": 7.69,
+      "factor": 30,
+      "max": 180
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 40,
+      "weight": 7.69,
+      "factor": 40,
+      "max": 240
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 25,
+      "weight": 7.7,
+      "factor": 25,
+      "max": 150
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 25,
+      "weight": 7.7,
+      "factor": 25,
+      "max": 150
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 3,
+      "weight": 7.7,
+      "factor": 3,
+      "max": 18
+    }
+  ],
+  "1001": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 9,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 9,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 7,
+      "weight": 33.34
+    }
+  ],
+  "1002": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 11,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 11,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 8,
+      "weight": 33.34
+    }
+  ],
+  "1003": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 14,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 14,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 11,
+      "weight": 33.34
+    }
+  ],
+  "1004": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 15,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 15,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 12,
+      "weight": 33.34
+    }
+  ],
+  "1011": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 18,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 18,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 14,
+      "weight": 33.34
+    }
+  ],
+  "1012": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 21,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 21,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 17,
+      "weight": 33.34
+    }
+  ],
+  "1013": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 27,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 27,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 22,
+      "weight": 33.34
+    }
+  ],
+  "1014": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 30,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 30,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 24,
+      "weight": 33.34
+    }
+  ],
+  "1021": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 27,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 27,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 22,
+      "weight": 33.34
+    }
+  ],
+  "1022": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 32,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 32,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 25,
+      "weight": 33.34
+    }
+  ],
+  "1023": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 41,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 41,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 32,
+      "weight": 33.34
+    }
+  ],
+  "1024": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 45,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 45,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 36,
+      "weight": 33.34
+    }
+  ],
+  "1031": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 36,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 36,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 29,
+      "weight": 33.34
+    }
+  ],
+  "1032": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 42,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 42,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 34,
+      "weight": 33.34
+    }
+  ],
+  "1033": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 54,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 54,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 43,
+      "weight": 33.34
+    }
+  ],
+  "1034": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 60,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 60,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 48,
+      "weight": 33.34
+    }
+  ],
+  "1041": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 45,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 45,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 36,
+      "weight": 33.34
+    }
+  ],
+  "1042": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 53,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 53,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 42,
+      "weight": 33.34
+    }
+  ],
+  "1043": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 68,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 68,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 54,
+      "weight": 33.34
+    }
+  ],
+  "1044": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 75,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 75,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 60,
+      "weight": 33.34
+    }
+  ],
+  "1051": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 60,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 60,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 48,
+      "weight": 33.34
+    }
+  ],
+  "1052": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 70,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 70,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 56,
+      "weight": 33.34
+    }
+  ],
+  "1053": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 90,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 90,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 72,
+      "weight": 33.34
+    }
+  ],
+  "1054": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100,
+      "weight": 33.33
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 100,
+      "weight": 33.33
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 80,
+      "weight": 33.34
+    }
+  ],
+  "1061": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 60,
+      "weight": 100
+    }
+  ],
+  "1062": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 60,
+      "weight": 100
+    }
+  ],
+  "1063": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 60,
+      "weight": 100
+    }
+  ],
+  "1064": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 70,
+      "weight": 100
+    }
+  ],
+  "1065": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 76,
+      "weight": 100
+    }
+  ],
+  "1066": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 75,
+      "weight": 100
+    }
+  ],
+  "1068": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 60,
+      "weight": 100
+    }
+  ],
+  "2001": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 2,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 10,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 5,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 12,
+      "weight": 25
+    }
+  ],
+  "2002": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 2,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 11,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 6,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 14,
+      "weight": 25
+    }
+  ],
+  "2003": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 3,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 15,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 8,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 18,
+      "weight": 25
+    }
+  ],
+  "2004": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 3,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 16,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 20,
+      "weight": 25
+    }
+  ],
+  "2011": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 4,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 19,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 11,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 23,
+      "weight": 25
+    }
+  ],
+  "2012": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 4,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 23,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 13,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 27,
+      "weight": 25
+    }
+  ],
+  "2013": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 6,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 29,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 16,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 35,
+      "weight": 25
+    }
+  ],
+  "2014": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 6,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 32,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 18,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 39,
+      "weight": 25
+    }
+  ],
+  "2021": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 6,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 29,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 16,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 35,
+      "weight": 25
+    }
+  ],
+  "2022": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 7,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 34,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 19,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 41,
+      "weight": 25
+    }
+  ],
+  "2023": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 8,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 44,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 24,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 53,
+      "weight": 25
+    }
+  ],
+  "2024": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 49,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 27,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 59,
+      "weight": 25
+    }
+  ],
+  "2031": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 7,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 39,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 22,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 47,
+      "weight": 25
+    }
+  ],
+  "2032": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 45,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 25,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 55,
+      "weight": 25
+    }
+  ],
+  "2033": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 11,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 58,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 32,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 70,
+      "weight": 25
+    }
+  ],
+  "2034": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 12,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 65,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 36,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 78,
+      "weight": 25
+    }
+  ],
+  "2041": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 49,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 27,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 59,
+      "weight": 25
+    }
+  ],
+  "2042": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 11,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 57,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 32,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 68,
+      "weight": 25
+    }
+  ],
+  "2043": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 14,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 73,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 41,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 88,
+      "weight": 25
+    }
+  ],
+  "2044": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 16,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 81,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 45,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 98,
+      "weight": 25
+    }
+  ],
+  "2051": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 12,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 65,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 36,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 78,
+      "weight": 25
+    }
+  ],
+  "2052": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 15,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 76,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 42,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 91,
+      "weight": 25
+    }
+  ],
+  "2053": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 19,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 97,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 54,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 117,
+      "weight": 25
+    }
+  ],
+  "2054": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 21,
+      "weight": 25
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 108,
+      "weight": 25
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 130,
+      "weight": 25
+    }
+  ],
+  "2101": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 2,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 7,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 12,
+      "weight": 25
+    }
+  ],
+  "2102": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 2,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 8,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 14,
+      "weight": 25
+    }
+  ],
+  "2103": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 3,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 11,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 18,
+      "weight": 25
+    }
+  ],
+  "2104": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 3,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 12,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 20,
+      "weight": 25
+    }
+  ],
+  "2111": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 4,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 14,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 23,
+      "weight": 25
+    }
+  ],
+  "2112": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 4,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 17,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 27,
+      "weight": 25
+    }
+  ],
+  "2113": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 6,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 22,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 35,
+      "weight": 25
+    }
+  ],
+  "2114": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 6,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 24,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 39,
+      "weight": 25
+    }
+  ],
+  "2121": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 6,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 22,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 35,
+      "weight": 25
+    }
+  ],
+  "2122": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 7,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 25,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 3,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 41,
+      "weight": 25
+    }
+  ],
+  "2123": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 8,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 32,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 3,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 53,
+      "weight": 25
+    }
+  ],
+  "2124": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 36,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 4,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 59,
+      "weight": 25
+    }
+  ],
+  "2131": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 7,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 29,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 3,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 47,
+      "weight": 25
+    }
+  ],
+  "2132": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 34,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 3,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 55,
+      "weight": 25
+    }
+  ],
+  "2133": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 11,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 43,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 4,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 70,
+      "weight": 25
+    }
+  ],
+  "2134": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 12,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 48,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 5,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 78,
+      "weight": 25
+    }
+  ],
+  "2141": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 36,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 4,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 59,
+      "weight": 25
+    }
+  ],
+  "2142": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 11,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 42,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 4,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 68,
+      "weight": 25
+    }
+  ],
+  "2143": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 14,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 54,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 5,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 88,
+      "weight": 25
+    }
+  ],
+  "2144": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 16,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 6,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 98,
+      "weight": 25
+    }
+  ],
+  "2151": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 12,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 48,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 5,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 78,
+      "weight": 25
+    }
+  ],
+  "2152": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 15,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 56,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 6,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 91,
+      "weight": 25
+    }
+  ],
+  "2153": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 19,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 7,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 117,
+      "weight": 25
+    }
+  ],
+  "2154": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 21,
+      "weight": 25
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 80,
+      "weight": 25
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 8,
+      "weight": 25
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 130,
+      "weight": 25
+    }
+  ],
+  "2201": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 10,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 12,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 12,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 12,
+      "weight": 25
+    }
+  ],
+  "2202": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 11,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 14,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 14,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 14,
+      "weight": 25
+    }
+  ],
+  "2203": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 15,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 18,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 18,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 18,
+      "weight": 25
+    }
+  ],
+  "2204": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 16,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 20,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 20,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 20,
+      "weight": 25
+    }
+  ],
+  "2211": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 19,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 23,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 23,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 23,
+      "weight": 25
+    }
+  ],
+  "2212": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 23,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 27,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 27,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 27,
+      "weight": 25
+    }
+  ],
+  "2213": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 29,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 35,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 35,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 35,
+      "weight": 25
+    }
+  ],
+  "2214": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 32,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 39,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 39,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 39,
+      "weight": 25
+    }
+  ],
+  "2221": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 29,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 35,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 35,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 35,
+      "weight": 25
+    }
+  ],
+  "2222": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 34,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 41,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 41,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 41,
+      "weight": 25
+    }
+  ],
+  "2223": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 44,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 53,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 53,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 53,
+      "weight": 25
+    }
+  ],
+  "2224": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 49,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 59,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 59,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 59,
+      "weight": 25
+    }
+  ],
+  "2231": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 39,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 47,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 47,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 47,
+      "weight": 25
+    }
+  ],
+  "2232": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 45,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 55,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 55,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 55,
+      "weight": 25
+    }
+  ],
+  "2233": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 58,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 70,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 70,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 70,
+      "weight": 25
+    }
+  ],
+  "2234": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 65,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 78,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 78,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 78,
+      "weight": 25
+    }
+  ],
+  "2241": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 49,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 59,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 59,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 59,
+      "weight": 25
+    }
+  ],
+  "2242": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 57,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 68,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 68,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 68,
+      "weight": 25
+    }
+  ],
+  "2243": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 73,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 88,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 88,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 88,
+      "weight": 25
+    }
+  ],
+  "2244": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 81,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 98,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 98,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 98,
+      "weight": 25
+    }
+  ],
+  "2251": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 65,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 78,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 78,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 78,
+      "weight": 25
+    }
+  ],
+  "2252": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 76,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 91,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 91,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 91,
+      "weight": 25
+    }
+  ],
+  "2253": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 97,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 117,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 117,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 117,
+      "weight": 25
+    }
+  ],
+  "2254": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 108,
+      "weight": 25
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 130,
+      "weight": 25
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 130,
+      "weight": 25
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 130,
+      "weight": 25
+    }
+  ],
+  "2301": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 12,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 12,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 2,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 10,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 5,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 12,
+      "weight": 16.66
+    }
+  ],
+  "2302": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 14,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 14,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 2,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 11,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 6,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 14,
+      "weight": 16.66
+    }
+  ],
+  "2303": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 18,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 18,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 3,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 15,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 8,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 18,
+      "weight": 16.66
+    }
+  ],
+  "2304": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 20,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 20,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 3,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 16,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 9,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 20,
+      "weight": 16.66
+    }
+  ],
+  "2311": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 23,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 23,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 4,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 19,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 11,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 23,
+      "weight": 16.66
+    }
+  ],
+  "2312": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 27,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 27,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 4,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 23,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 13,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 27,
+      "weight": 16.66
+    }
+  ],
+  "2313": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 35,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 35,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 6,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 29,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 16,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 35,
+      "weight": 16.66
+    }
+  ],
+  "2314": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 39,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 39,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 6,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 32,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 18,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 39,
+      "weight": 16.66
+    }
+  ],
+  "2321": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 35,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 35,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 6,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 29,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 16,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 35,
+      "weight": 16.66
+    }
+  ],
+  "2322": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 41,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 41,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 7,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 34,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 19,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 41,
+      "weight": 16.66
+    }
+  ],
+  "2323": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 53,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 53,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 8,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 44,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 24,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 53,
+      "weight": 16.66
+    }
+  ],
+  "2324": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 59,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 59,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 9,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 49,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 27,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 59,
+      "weight": 16.66
+    }
+  ],
+  "2331": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 47,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 47,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 7,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 39,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 22,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 47,
+      "weight": 16.66
+    }
+  ],
+  "2332": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 55,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 55,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 9,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 45,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 25,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 55,
+      "weight": 16.66
+    }
+  ],
+  "2333": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 70,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 70,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 11,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 58,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 32,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 70,
+      "weight": 16.66
+    }
+  ],
+  "2334": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 78,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 78,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 12,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 65,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 36,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 78,
+      "weight": 16.66
+    }
+  ],
+  "2341": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 59,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 59,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 9,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 49,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 27,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 59,
+      "weight": 16.66
+    }
+  ],
+  "2342": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 68,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 68,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 11,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 57,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 32,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 68,
+      "weight": 16.66
+    }
+  ],
+  "2343": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 88,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 88,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 14,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 73,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 41,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 88,
+      "weight": 16.66
+    }
+  ],
+  "2344": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 98,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 98,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 16,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 81,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 45,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 98,
+      "weight": 16.66
+    }
+  ],
+  "2351": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 78,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 78,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 12,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 65,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 36,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 78,
+      "weight": 16.66
+    }
+  ],
+  "2352": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 91,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 91,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 15,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 76,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 42,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 91,
+      "weight": 16.66
+    }
+  ],
+  "2353": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 117,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 117,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 19,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 97,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 54,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 117,
+      "weight": 16.66
+    }
+  ],
+  "2354": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 130,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 130,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 21,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 108,
+      "weight": 16.67
+    },
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 60,
+      "weight": 16.67
+    },
+    {
+      "stat": "e_cri_dmg_reduce",
+      "mode": "flat",
+      "value": 130,
+      "weight": 16.66
+    }
+  ],
+  "2401": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 12,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 10,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 2,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 7,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 12,
+      "weight": 16.66
+    }
+  ],
+  "2402": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 14,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 11,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 2,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 8,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 14,
+      "weight": 16.66
+    }
+  ],
+  "2403": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 18,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 15,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 3,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 11,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 18,
+      "weight": 16.66
+    }
+  ],
+  "2404": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 20,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 16,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 3,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 12,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 20,
+      "weight": 16.66
+    }
+  ],
+  "2411": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 23,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 19,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 4,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 14,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 1,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 23,
+      "weight": 16.66
+    }
+  ],
+  "2412": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 27,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 23,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 4,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 17,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 27,
+      "weight": 16.66
+    }
+  ],
+  "2413": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 35,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 29,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 6,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 22,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 35,
+      "weight": 16.66
+    }
+  ],
+  "2414": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 39,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 32,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 6,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 24,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 39,
+      "weight": 16.66
+    }
+  ],
+  "2421": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 35,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 29,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 6,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 22,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 2,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 35,
+      "weight": 16.66
+    }
+  ],
+  "2422": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 41,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 34,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 7,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 25,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 3,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 41,
+      "weight": 16.66
+    }
+  ],
+  "2423": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 53,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 44,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 8,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 32,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 3,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 53,
+      "weight": 16.66
+    }
+  ],
+  "2424": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 59,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 49,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 9,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 36,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 4,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 59,
+      "weight": 16.66
+    }
+  ],
+  "2431": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 47,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 39,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 7,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 29,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 3,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 47,
+      "weight": 16.66
+    }
+  ],
+  "2432": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 55,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 45,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 9,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 34,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 3,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 55,
+      "weight": 16.66
+    }
+  ],
+  "2433": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 70,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 58,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 11,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 43,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 4,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 70,
+      "weight": 16.66
+    }
+  ],
+  "2434": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 78,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 65,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 12,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 48,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 5,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 78,
+      "weight": 16.66
+    }
+  ],
+  "2441": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 59,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 49,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 9,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 36,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 4,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 59,
+      "weight": 16.66
+    }
+  ],
+  "2442": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 68,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 57,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 11,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 42,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 4,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 68,
+      "weight": 16.66
+    }
+  ],
+  "2443": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 88,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 73,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 14,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 54,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 5,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 88,
+      "weight": 16.66
+    }
+  ],
+  "2444": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 98,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 81,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 16,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 60,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 6,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 98,
+      "weight": 16.66
+    }
+  ],
+  "2451": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 78,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 65,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 12,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 48,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 5,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 78,
+      "weight": 16.66
+    }
+  ],
+  "2452": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 91,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 76,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 15,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 56,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 6,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 91,
+      "weight": 16.66
+    }
+  ],
+  "2453": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 117,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 97,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 19,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 7,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 117,
+      "weight": 16.66
+    }
+  ],
+  "2454": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 130,
+      "weight": 16.66
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 108,
+      "weight": 16.67
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 21,
+      "weight": 16.67
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 80,
+      "weight": 16.67
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 8,
+      "weight": 16.67
+    },
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 130,
+      "weight": 16.66
+    }
+  ],
+  "2455": [
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 58,
+      "weight": 100
+    }
+  ],
+  "2456": [
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 6,
+      "weight": 100
+    }
+  ],
+  "3001": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 11,
+      "weight": 100
+    }
+  ],
+  "3002": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 13,
+      "weight": 100
+    }
+  ],
+  "3003": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 16,
+      "weight": 100
+    }
+  ],
+  "3004": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 18,
+      "weight": 100
+    }
+  ],
+  "3005": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 22,
+      "weight": 100
+    }
+  ],
+  "3006": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 25,
+      "weight": 100
+    }
+  ],
+  "3007": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 32,
+      "weight": 100
+    }
+  ],
+  "3008": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 36,
+      "weight": 100
+    }
+  ],
+  "3009": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 32,
+      "weight": 100
+    }
+  ],
+  "3010": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 38,
+      "weight": 100
+    }
+  ],
+  "3011": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 49,
+      "weight": 100
+    }
+  ],
+  "3012": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 54,
+      "weight": 100
+    }
+  ],
+  "3013": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 43,
+      "weight": 100
+    }
+  ],
+  "3014": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 50,
+      "weight": 100
+    }
+  ],
+  "3015": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 65,
+      "weight": 100
+    }
+  ],
+  "3016": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 72,
+      "weight": 100
+    }
+  ],
+  "3017": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 54,
+      "weight": 100
+    }
+  ],
+  "3018": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 63,
+      "weight": 100
+    }
+  ],
+  "3019": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 81,
+      "weight": 100
+    }
+  ],
+  "3020": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 90,
+      "weight": 100
+    }
+  ],
+  "3021": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 72,
+      "weight": 100
+    }
+  ],
+  "3022": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 84,
+      "weight": 100
+    }
+  ],
+  "3023": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 108,
+      "weight": 100
+    }
+  ],
+  "3024": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 120,
+      "weight": 100
+    }
+  ],
+  "3025": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 105,
+      "weight": 100
+    }
+  ],
+  "4001": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 9,
+      "weight": 100
+    }
+  ],
+  "4002": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 11,
+      "weight": 100
+    }
+  ],
+  "4003": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 14,
+      "weight": 100
+    }
+  ],
+  "4004": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 15,
+      "weight": 100
+    }
+  ],
+  "4005": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 18,
+      "weight": 100
+    }
+  ],
+  "4006": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 21,
+      "weight": 100
+    }
+  ],
+  "4007": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 27,
+      "weight": 100
+    }
+  ],
+  "4008": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 30,
+      "weight": 100
+    }
+  ],
+  "4009": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 27,
+      "weight": 100
+    }
+  ],
+  "4010": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 32,
+      "weight": 100
+    }
+  ],
+  "4011": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 41,
+      "weight": 100
+    }
+  ],
+  "4012": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 45,
+      "weight": 100
+    }
+  ],
+  "4013": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 36,
+      "weight": 100
+    }
+  ],
+  "4014": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 42,
+      "weight": 100
+    }
+  ],
+  "4015": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 54,
+      "weight": 100
+    }
+  ],
+  "4016": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 60,
+      "weight": 100
+    }
+  ],
+  "4017": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 45,
+      "weight": 100
+    }
+  ],
+  "4018": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 53,
+      "weight": 100
+    }
+  ],
+  "4019": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 68,
+      "weight": 100
+    }
+  ],
+  "4020": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 75,
+      "weight": 100
+    }
+  ],
+  "4021": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 60,
+      "weight": 100
+    }
+  ],
+  "4022": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 70,
+      "weight": 100
+    }
+  ],
+  "4023": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 90,
+      "weight": 100
+    }
+  ],
+  "4024": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 100,
+      "weight": 100
+    }
+  ],
+  "4025": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 90,
+      "weight": 100
+    }
+  ],
+  "5001": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 1,
+      "weight": 100
+    }
+  ],
+  "5002": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 1,
+      "weight": 100
+    }
+  ],
+  "5003": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 1,
+      "weight": 100
+    }
+  ],
+  "5004": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 2,
+      "weight": 100
+    }
+  ],
+  "5005": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 2,
+      "weight": 100
+    }
+  ],
+  "5006": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 2,
+      "weight": 100
+    }
+  ],
+  "5007": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 3,
+      "weight": 100
+    }
+  ],
+  "5008": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 3,
+      "weight": 100
+    }
+  ],
+  "5009": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 3,
+      "weight": 100
+    }
+  ],
+  "5010": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 3,
+      "weight": 100
+    }
+  ],
+  "5011": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "5012": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "5013": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "5014": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "5015": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "5016": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 6,
+      "weight": 100
+    }
+  ],
+  "5017": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "5018": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "5019": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 7,
+      "weight": 100
+    }
+  ],
+  "5020": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 8,
+      "weight": 100
+    }
+  ],
+  "5021": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 6,
+      "weight": 100
+    }
+  ],
+  "5022": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 7,
+      "weight": 100
+    }
+  ],
+  "5023": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 9,
+      "weight": 100
+    }
+  ],
+  "5024": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 10,
+      "weight": 100
+    }
+  ],
+  "5025": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "5026": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "5027": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "5028": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 6,
+      "weight": 100
+    }
+  ],
+  "5029": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 7,
+      "weight": 100
+    }
+  ],
+  "5030": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 8,
+      "weight": 100
+    }
+  ],
+  "5031": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 11,
+      "weight": 100
+    }
+  ],
+  "5032": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 12,
+      "weight": 100
+    }
+  ],
+  "5033": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 11,
+      "weight": 100
+    }
+  ],
+  "5034": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 13,
+      "weight": 100
+    }
+  ],
+  "5035": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 16,
+      "weight": 100
+    }
+  ],
+  "5036": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 18,
+      "weight": 100
+    }
+  ],
+  "5037": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 14,
+      "weight": 100
+    }
+  ],
+  "5038": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 17,
+      "weight": 100
+    }
+  ],
+  "5039": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 22,
+      "weight": 100
+    }
+  ],
+  "5040": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 24,
+      "weight": 100
+    }
+  ],
+  "5041": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 18,
+      "weight": 100
+    }
+  ],
+  "5042": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 21,
+      "weight": 100
+    }
+  ],
+  "5043": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 27,
+      "weight": 100
+    }
+  ],
+  "5044": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 30,
+      "weight": 100
+    }
+  ],
+  "5045": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 24,
+      "weight": 100
+    }
+  ],
+  "5046": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 28,
+      "weight": 100
+    }
+  ],
+  "5047": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 36,
+      "weight": 100
+    }
+  ],
+  "5048": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 40,
+      "weight": 100
+    }
+  ],
+  "5049": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 9,
+      "weight": 100
+    }
+  ],
+  "5050": [
+    {
+      "stat": "def",
+      "mode": "flat",
+      "value": 35,
+      "weight": 100
+    }
+  ],
+  "6001": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 1,
+      "weight": 100
+    }
+  ],
+  "6002": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 1,
+      "weight": 100
+    }
+  ],
+  "6003": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 1,
+      "weight": 100
+    }
+  ],
+  "6004": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 2,
+      "weight": 100
+    }
+  ],
+  "6005": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 2,
+      "weight": 100
+    }
+  ],
+  "6006": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 2,
+      "weight": 100
+    }
+  ],
+  "6007": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 3,
+      "weight": 100
+    }
+  ],
+  "6008": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 3,
+      "weight": 100
+    }
+  ],
+  "6009": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 3,
+      "weight": 100
+    }
+  ],
+  "6010": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 3,
+      "weight": 100
+    }
+  ],
+  "6011": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "6012": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "6013": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "6014": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "6015": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "6016": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 6,
+      "weight": 100
+    }
+  ],
+  "6017": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "6018": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "6019": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 7,
+      "weight": 100
+    }
+  ],
+  "6020": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 8,
+      "weight": 100
+    }
+  ],
+  "6021": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 6,
+      "weight": 100
+    }
+  ],
+  "6022": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 7,
+      "weight": 100
+    }
+  ],
+  "6023": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 9,
+      "weight": 100
+    }
+  ],
+  "6024": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 10,
+      "weight": 100
+    }
+  ],
+  "6025": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "6026": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 4,
+      "weight": 100
+    }
+  ],
+  "6027": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 5,
+      "weight": 100
+    }
+  ],
+  "6028": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 6,
+      "weight": 100
+    }
+  ],
+  "6029": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 7,
+      "weight": 100
+    }
+  ],
+  "6030": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 8,
+      "weight": 100
+    }
+  ],
+  "6031": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 11,
+      "weight": 100
+    }
+  ],
+  "6032": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 12,
+      "weight": 100
+    }
+  ],
+  "6033": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 11,
+      "weight": 100
+    }
+  ],
+  "6034": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 13,
+      "weight": 100
+    }
+  ],
+  "6035": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 16,
+      "weight": 100
+    }
+  ],
+  "6036": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 18,
+      "weight": 100
+    }
+  ],
+  "6037": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 14,
+      "weight": 100
+    }
+  ],
+  "6038": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 17,
+      "weight": 100
+    }
+  ],
+  "6039": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 22,
+      "weight": 100
+    }
+  ],
+  "6040": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 24,
+      "weight": 100
+    }
+  ],
+  "6041": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 18,
+      "weight": 100
+    }
+  ],
+  "6042": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 21,
+      "weight": 100
+    }
+  ],
+  "6043": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 27,
+      "weight": 100
+    }
+  ],
+  "6044": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 30,
+      "weight": 100
+    }
+  ],
+  "6045": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 24,
+      "weight": 100
+    }
+  ],
+  "6046": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 28,
+      "weight": 100
+    }
+  ],
+  "6047": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 36,
+      "weight": 100
+    }
+  ],
+  "6048": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 40,
+      "weight": 100
+    }
+  ],
+  "6049": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 9,
+      "weight": 100
+    }
+  ],
+  "6050": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 35,
+      "weight": 100
+    }
+  ],
+  "10000": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 80,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_ATK_4"
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 80,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_DEF_4"
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_HP_4"
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 48,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_4"
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 64,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_4"
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 77,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_4"
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 64,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_4"
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 48,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_4"
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 48,
+      "weight": 11.12,
+      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_4"
+    }
+  ],
+  "10001": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_ATK_5"
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 100,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_DEF_5"
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 120,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_HP_5"
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 60,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_5"
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 80,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_5"
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 96,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_5"
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 80,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_5"
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 60,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_5"
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 60,
+      "weight": 11.12,
+      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_5"
+    }
+  ],
+  "10002": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 120,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_ATK_6"
+    },
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 120,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_DEF_6"
+    },
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 140,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_HP_6"
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_6"
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 96,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_6"
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 115,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_6"
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 96,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_6"
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 72,
+      "weight": 11.11,
+      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_6"
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 72,
+      "weight": 11.12,
+      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_6"
+    }
+  ],
+  "11001": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100,
+      "weight": 100
+    }
+  ],
+  "11002": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 80,
+      "weight": 100
+    }
+  ],
+  "11003": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 100,
+      "weight": 100
+    }
+  ],
+  "11011": [
+    {
+      "stat": "buff_chance",
+      "mode": "flat",
+      "value": 21,
+      "weight": 100
+    }
+  ],
+  "11012": [
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 108,
+      "weight": 100
+    }
+  ],
+  "11013": [
+    {
+      "stat": "pierce_power_rate",
+      "mode": "flat",
+      "value": 60,
+      "weight": 100
+    }
+  ],
+  "11014": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 130,
+      "weight": 100
+    }
+  ],
+  "11015": [
+    {
+      "stat": "buff_resist",
+      "mode": "flat",
+      "value": 21,
+      "weight": 100
+    }
+  ],
+  "11016": [
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 80,
+      "weight": 100
+    }
+  ],
+  "11017": [
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 8,
+      "weight": 100
+    }
+  ],
+  "11018": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 130,
+      "weight": 100
+    }
+  ],
+  "11019": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 108,
+      "weight": 100
+    }
+  ],
+  "11020": [
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 130,
+      "weight": 100
+    }
+  ],
+  "11022": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 130,
+      "weight": 100
+    }
+  ],
+  "11121": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11122": [
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 25,
+      "max": 72
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11123": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11231": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11232": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11233": [
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 75,
+      "weight": 25,
+      "max": 75
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11234": [
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 75,
+      "weight": 25,
+      "max": 75
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11235": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11236": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11237": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11238": [
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 75,
+      "weight": 25,
+      "max": 75
+    }
+  ],
+  "11239": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 75,
+      "weight": 25,
+      "max": 75
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "11243": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 25,
+      "max": 72
+    },
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 75,
+      "weight": 25,
+      "max": 75
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12001": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12002": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12003": [
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 25,
+      "max": 72
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12004": [],
+  "12005": [
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 75,
+      "weight": 25,
+      "max": 75
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12006": [
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 75,
+      "weight": 25,
+      "max": 75
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12007": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12008": [
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 25,
+      "max": 72
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12009": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12010": [],
+  "12011": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12012": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12013": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12014": [
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 75,
+      "weight": 25,
+      "max": 75
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12015": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12016": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12017": [
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 25,
+      "max": 72
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12018": [
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 25,
+      "max": 72
+    },
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 90,
+      "weight": 25,
+      "max": 90
+    },
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 120,
+      "weight": 25,
+      "max": 120
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "12019": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 60,
+      "weight": 25,
+      "max": 60
+    },
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 25,
+      "max": 72
+    },
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 75,
+      "weight": 25,
+      "max": 75
+    },
+    {
+      "stat": "speed",
+      "mode": "flat",
+      "value": 9,
+      "weight": 25,
+      "max": 9
+    }
+  ],
+  "13001": [
+    {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 120,
+      "weight": 100,
+      "buff": "BID_ITEM_STAT_OOPARTS_ATK_6"
+    }
+  ],
+  "13002": [
+    {
+      "stat": "def",
+      "mode": "rate",
+      "value": 120,
+      "weight": 100,
+      "buff": "BID_ITEM_STAT_OOPARTS_DEF_6"
+    }
+  ],
+  "13003": [
+    {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 140,
+      "weight": 100,
+      "buff": "BID_ITEM_STAT_OOPARTS_HP_6"
+    }
+  ],
+  "13004": [
+    {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 72,
+      "weight": 100,
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_6"
+    }
+  ],
+  "13005": [
+    {
+      "stat": "critical_dmg_rate",
+      "mode": "flat",
+      "value": 96,
+      "weight": 100,
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_6"
+    }
+  ],
+  "13006": [
+    {
+      "stat": "dmg_reduce_rate",
+      "mode": "flat",
+      "value": 115,
+      "weight": 100,
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_6"
+    }
+  ],
+  "13007": [
+    {
+      "stat": "dmg_boost",
+      "mode": "flat",
+      "value": 96,
+      "weight": 100,
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_6"
+    }
+  ],
+  "13008": [
+    {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 72,
+      "weight": 100,
+      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_6"
+    }
+  ],
+  "13009": [
+    {
+      "stat": "buff_resist",
+      "mode": "rate",
+      "value": 72,
+      "weight": 100,
+      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_6"
+    }
+  ],
+  "2000001": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000002": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000003": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000004": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000005": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000006": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000007": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000008": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000009": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000010": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000011": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000012": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000013": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000014": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000015": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000016": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000017": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000018": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000019": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000020": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000021": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000022": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000023": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000024": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000025": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000026": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000027": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000028": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000029": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000030": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000031": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000032": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000033": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000034": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000035": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000036": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000037": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000038": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000039": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000040": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000041": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000042": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000043": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000044": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000045": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000046": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000047": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000048": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "critical_rate",
+          "mode": "flat",
+          "value": 150
+        }
+      ]
+    }
+  ],
+  "2000049": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000050": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000051": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000052": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000053": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000054": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000055": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000056": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000057": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000058": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000059": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000060": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "critical_rate",
+          "mode": "flat",
+          "value": 150
+        }
+      ]
+    }
+  ],
+  "2000061": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000062": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000063": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000064": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000065": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000066": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000067": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "critical_rate",
+          "mode": "flat",
+          "value": 150
+        }
+      ]
+    }
+  ],
+  "2000068": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000069": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000070": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000071": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000072": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000073": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000074": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000075": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000076": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000077": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_EARTH",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "critical_rate",
+          "mode": "flat",
+          "value": 150
+        }
+      ]
+    }
+  ],
+  "2000078": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000079": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000080": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000081": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000082": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "critical_rate",
+          "mode": "flat",
+          "value": 150
+        }
+      ]
+    }
+  ],
+  "2000083": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000084": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000085": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000086": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000087": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000088": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000089": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000090": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000091": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000092": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000093": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000094": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000095": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000096": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000097": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000098": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000099": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000100": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000101": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000102": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000103": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000105": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000106": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000107": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000108": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000109": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000110": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000111": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000112": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2000113": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000114": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000116": [
+    {
+      "stat": "hit_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "factor": 1,
+      "max": 10,
+      "effects": [
+        {
+          "type": "dmg_reduce",
+          "stat": "dmg_reduce_rate",
+          "mode": "rate",
+          "value": 200
+        }
+      ]
+    }
+  ],
+  "2000117": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2000119": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2700003": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2700005": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2700037": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2700043": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ]
+    }
+  ],
+  "2700056": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ],
+  "2700070": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ]
+    }
+  ]
+}
