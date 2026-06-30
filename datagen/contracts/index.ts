@@ -21,6 +21,7 @@ export type {
 export type { SkillBuffVars } from '../lib/buff';
 export type { Character, StatRange } from '../extractor/specs/character';
 export type { TranscendStep, TranscendData } from '../extractor/transcend';
+export type { CharacterCurated, CuratedRole, SkillPriority } from '../curated/character';
 export type { Skill, SkillLevel } from '../generators/skills';
 export type { Item } from '../generators/items';
 export type {

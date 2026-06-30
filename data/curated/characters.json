@@ -1,0 +1,1430 @@
+{
+  "2000001": {
+    "rank": "C",
+    "role": "support",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "PueXtFsRHI0"
+  },
+  "2000002": {
+    "rank": "C",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    }
+  },
+  "2000003": {
+    "rank": "D",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "K6sQsTbvzZ0"
+  },
+  "2000004": {
+    "rank": "C",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    }
+  },
+  "2000005": {
+    "rank": "C",
+    "role": "dps",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "iZGdQVbS-8k"
+  },
+  "2000006": {
+    "rank": "C",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000007": {
+    "rank": "E",
+    "role": "support",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    }
+  },
+  "2000008": {
+    "rank": "B",
+    "rankPvp": "B",
+    "role": "dps",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000009": {
+    "rank": "C",
+    "role": "sustain",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000010": {
+    "rank": "D",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000011": {
+    "rank": "D",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000012": {
+    "rank": "S",
+    "rankPvp": "A",
+    "role": "support",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "U3aSzg_kYxo"
+  },
+  "2000013": {
+    "rank": "B",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000014": {
+    "rank": "A",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000015": {
+    "rank": "C",
+    "rankPvp": "D",
+    "role": "dps",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "-QjB2wYAhpk"
+  },
+  "2000016": {
+    "rank": "E",
+    "role": "dps",
+    "skillPriority": {
+      "first": 1,
+      "second": 2,
+      "ultimate": 3
+    }
+  },
+  "2000017": {
+    "rank": "D",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000018": {
+    "rank": "E",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000019": {
+    "rank": "A",
+    "rankPvp": "C",
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "FSHheOc6AkI"
+  },
+  "2000020": {
+    "rank": "B",
+    "rankPvp": "B",
+    "role": "support",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000021": {
+    "rank": "C",
+    "rankPvp": "C",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "TAmYHXMoGJQ"
+  },
+  "2000022": {
+    "rank": "C",
+    "rankPvp": "C",
+    "role": "dps",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 2,
+      "second": 1,
+      "ultimate": 3
+    }
+  },
+  "2000023": {
+    "rank": "B",
+    "rankPvp": "C",
+    "role": "sustain",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000024": {
+    "rank": "C",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000025": {
+    "rank": "A",
+    "rankPvp": "D",
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "EbAuKJyOzJE"
+  },
+  "2000026": {
+    "rank": "D",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000027": {
+    "rank": "B",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000028": {
+    "rank": "S",
+    "rankPvp": "C",
+    "role": "dps",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 2,
+      "second": 1,
+      "ultimate": 3
+    }
+  },
+  "2000029": {
+    "rank": "E",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000030": {
+    "rank": "C",
+    "role": "support",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    }
+  },
+  "2000031": {
+    "rank": "C",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000032": {
+    "rank": "C",
+    "role": "dps",
+    "skillPriority": {
+      "first": 1,
+      "second": 3,
+      "ultimate": 2
+    }
+  },
+  "2000033": {
+    "rank": "D",
+    "role": "dps",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000034": {
+    "rank": "E",
+    "role": "dps",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000035": {
+    "rank": "C",
+    "rankPvp": "D",
+    "role": "support",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "QBBZaePTff4"
+  },
+  "2000036": {
+    "rank": "A",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000037": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "sustain",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "znqtUpXMza8"
+  },
+  "2000038": {
+    "rank": "D",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000039": {
+    "rank": "A",
+    "rankPvp": "B",
+    "role": "support",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "gpJqG0hrrKc"
+  },
+  "2000040": {
+    "rank": "A",
+    "rankPvp": "B",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "JOkL3JeB3iw"
+  },
+  "2000041": {
+    "rank": "C",
+    "role": "support",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    }
+  },
+  "2000042": {
+    "rank": "C",
+    "rankPvp": "B",
+    "role": "sustain",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000043": {
+    "rank": "A",
+    "rankPvp": "D",
+    "role": "support",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "NsrNhKUjELE"
+  },
+  "2000044": {
+    "rank": "B",
+    "rankPvp": "D",
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "QCt2TCasjDA"
+  },
+  "2000045": {
+    "rank": "E",
+    "role": "dps",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    }
+  },
+  "2000046": {
+    "rank": "E",
+    "role": "support",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    }
+  },
+  "2000047": {
+    "rank": "B",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    }
+  },
+  "2000048": {
+    "rank": "C",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    }
+  },
+  "2000049": {
+    "rank": "E",
+    "role": "dps",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000050": {
+    "rank": "D",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    }
+  },
+  "2000051": {
+    "rank": "E",
+    "role": "dps",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000052": {
+    "rank": "D",
+    "rankPvp": "D",
+    "role": "support",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000053": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "dps",
+    "tags": ["premium", "ignore-defense"],
+    "skillPriority": {
+      "first": 2,
+      "second": 1,
+      "ultimate": 3
+    },
+    "video": "UBgH1dn4Z_g"
+  },
+  "2000054": {
+    "rank": "B",
+    "rankPvp": "A",
+    "role": "sustain",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "3WCXBVQRQls"
+  },
+  "2000055": {
+    "rank": "S",
+    "rankPvp": "C",
+    "role": "dps",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "X1IylquwEHY"
+  },
+  "2000056": {
+    "rank": "B",
+    "rankPvp": "A",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "nFY3ash9VM8"
+  },
+  "2000057": {
+    "rank": "B",
+    "rankPvp": "B",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "VRSsXgkMdJ8"
+  },
+  "2000058": {
+    "rank": "A",
+    "rankPvp": "D",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "2bwlrUTxOHQ"
+  },
+  "2000059": {
+    "rank": "S",
+    "rankPvp": "S",
+    "role": "dps",
+    "tags": ["premium", "ignore-defense"],
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "orOhHJzO9qA",
+    "rankByTranscend": {
+      "3": "A",
+      "4": "A",
+      "5": "A",
+      "6": "S"
+    }
+  },
+  "2000060": {
+    "rank": "S",
+    "rankPvp": "A",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "gLI0SmnPCoQ"
+  },
+  "2000061": {
+    "rank": "B",
+    "rankPvp": "B",
+    "role": "support",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "gDEGZ-48v8U"
+  },
+  "2000062": {
+    "rank": "S",
+    "rankPvp": "C",
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "v1yjw3zD89g"
+  },
+  "2000063": {
+    "rank": "S",
+    "rankPvp": "A",
+    "role": "sustain",
+    "tags": ["premium", "ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "zz0OHkP8y0I"
+  },
+  "2000064": {
+    "rank": "S",
+    "rankPvp": "A",
+    "role": "support",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "obLIo0FuAIo"
+  },
+  "2000065": {
+    "rank": "S",
+    "rankPvp": "B",
+    "role": "dps",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "JKHIYrgk3xY"
+  },
+  "2000066": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "kmCeAt86rjI"
+  },
+  "2000067": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "dps",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "C_z5A8XMF60"
+  },
+  "2000068": {
+    "rank": "B",
+    "rankPvp": "S",
+    "role": "support",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "rfsYrJKYSRg"
+  },
+  "2000069": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "support",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "YrJ06rEKPFY"
+  },
+  "2000070": {
+    "rank": "D",
+    "rankPvp": "B",
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "6ahyMvY4StE"
+  },
+  "2000071": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "Cc6PF35TP08"
+  },
+  "2000072": {
+    "rank": "B",
+    "rankPvp": "C",
+    "role": "sustain",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "XFkW_wEwvUQ"
+  },
+  "2000073": {
+    "rank": "A",
+    "rankPvp": "D",
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "xpFNW3RJKkE"
+  },
+  "2000074": {
+    "rank": "S",
+    "rankPvp": "B",
+    "role": "sustain",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "iRbqK7agxug"
+  },
+  "2000075": {
+    "rank": "A",
+    "rankPvp": "S",
+    "role": "support",
+    "tags": ["premium"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "sh1x_uf-Cjo",
+    "rankByTranscend": {
+      "3": "B",
+      "4": "B",
+      "5": "A",
+      "6": "A"
+    }
+  },
+  "2000076": {
+    "rank": "B",
+    "rankPvp": "C",
+    "role": "dps",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "xSs46l7wgQc"
+  },
+  "2000077": {
+    "rank": "B",
+    "rankPvp": "B",
+    "role": "support",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "XFySE1Ajg60"
+  },
+  "2000078": {
+    "rank": "B",
+    "rankPvp": "D",
+    "role": "dps",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "kW0h_1-SYv4"
+  },
+  "2000079": {
+    "rank": "B",
+    "rankPvp": "S",
+    "role": "support",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "OniW6CZHBXg"
+  },
+  "2000080": {
+    "rank": "A",
+    "rankPvp": "D",
+    "role": "support",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "9z9o9U0oSsU"
+  },
+  "2000081": {
+    "rank": "A",
+    "rankPvp": "B",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "BjBL3AKtwsA",
+    "rankByTranscend": {
+      "3": "B",
+      "4": "B",
+      "5": "A",
+      "6": "A"
+    }
+  },
+  "2000082": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "lyNQ73PBPZg"
+  },
+  "2000083": {
+    "rank": "S",
+    "rankPvp": "S",
+    "role": "sustain",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "jmzEGK9lfS8"
+  },
+  "2000084": {
+    "rank": "S",
+    "rankPvp": "S",
+    "role": "sustain",
+    "tags": ["premium"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "xmzgtcPHmT4",
+    "rankByTranscend": {
+      "3": "A",
+      "4": "A",
+      "5": "S",
+      "6": "S"
+    }
+  },
+  "2000085": {
+    "rank": "S",
+    "rankPvp": "A",
+    "role": "dps",
+    "tags": ["seasonal", "ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "7IzjF4jYNaU",
+    "limited": true
+  },
+  "2000086": {
+    "rank": "S",
+    "rankPvp": "B",
+    "role": "dps",
+    "tags": ["seasonal", "ignore-defense"],
+    "skillPriority": {
+      "first": 2,
+      "second": 1,
+      "ultimate": 3
+    },
+    "video": "Va3W2CmrnMU",
+    "limited": true
+  },
+  "2000087": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "dps",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "NbkIux5uYro"
+  },
+  "2000088": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "sustain",
+    "tags": ["ignore-defense", "free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "XzXM4OJev0I"
+  },
+  "2000089": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "dps",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "n_5zHyzmVVQ"
+  },
+  "2000090": {
+    "rank": "A",
+    "rankPvp": "S",
+    "role": "dps",
+    "tags": ["limited", "ignore-defense"],
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "zwJUawe5X0g",
+    "rankByTranscend": {
+      "3": "B",
+      "4": "A",
+      "5": "A",
+      "6": "A"
+    },
+    "limited": true
+  },
+  "2000091": {
+    "rank": "S",
+    "rankPvp": "S",
+    "role": "support",
+    "tags": ["limited", "ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "dwaGHaRFY98",
+    "limited": true
+  },
+  "2000092": {
+    "rank": "A",
+    "rankPvp": "S",
+    "role": "dps",
+    "tags": ["premium"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "zHV45UmIrKc",
+    "rankByTranscend": {
+      "3": "B",
+      "4": "A",
+      "5": "A",
+      "6": "A"
+    }
+  },
+  "2000093": {
+    "rank": "S",
+    "rankPvp": "A",
+    "role": "dps",
+    "tags": ["seasonal"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "zvgoCGKtIfo",
+    "rankByTranscend": {
+      "3": "A",
+      "4": "A",
+      "5": "S",
+      "6": "S"
+    },
+    "roleByTranscend": {
+      "3": "support",
+      "4": "support",
+      "5": "support",
+      "6": "dps"
+    },
+    "limited": true
+  },
+  "2000094": {
+    "rank": "A",
+    "rankPvp": "C",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "3_azE5ZfgBo"
+  },
+  "2000095": {
+    "rank": "S",
+    "rankPvp": "B",
+    "role": "dps",
+    "tags": ["collab"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "limited": true
+  },
+  "2000096": {
+    "rank": "B",
+    "rankPvp": "B",
+    "role": "dps",
+    "tags": ["collab", "ignore-defense"],
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "rankByTranscend": {
+      "3": "D",
+      "4": "C",
+      "5": "C",
+      "6": "B"
+    },
+    "limited": true
+  },
+  "2000097": {
+    "rank": "S",
+    "rankPvp": "S",
+    "role": "dps",
+    "tags": ["collab", "ignore-defense"],
+    "skillPriority": {
+      "first": 1,
+      "second": 2,
+      "ultimate": 3
+    },
+    "limited": true
+  },
+  "2000098": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000099": {
+    "rank": "D",
+    "rankPvp": "C",
+    "role": "dps",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    },
+    "video": "A8eKlpmjKJI"
+  },
+  "2000100": {
+    "rank": "A",
+    "rankPvp": "S",
+    "role": "sustain",
+    "tags": ["premium"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "uswwN1IKlFI",
+    "rankByTranscend": {
+      "3": "B",
+      "4": "B",
+      "5": "B",
+      "6": "A"
+    }
+  },
+  "2000101": {
+    "rank": "S",
+    "rankPvp": "B",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "tMQOsjlpCRM"
+  },
+  "2000102": {
+    "rank": "A",
+    "rankPvp": "S",
+    "role": "sustain",
+    "tags": ["limited"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "rLmf9_q9ikc",
+    "rankByTranscend": {
+      "3": "B",
+      "4": "B",
+      "5": "A",
+      "6": "A"
+    },
+    "limited": true
+  },
+  "2000103": {
+    "rank": "S",
+    "rankPvp": "C",
+    "role": "support",
+    "skillPriority": {
+      "first": 1,
+      "second": 2,
+      "ultimate": 3
+    },
+    "video": "3S8Omrhap5k"
+  },
+  "2000105": {
+    "rank": "A",
+    "rankPvp": "C",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
+  "2000106": {
+    "rank": "A",
+    "rankPvp": "S",
+    "role": "support",
+    "tags": ["seasonal"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "XDHBkfCI8Sk",
+    "limited": true
+  },
+  "2000107": {
+    "rank": "A",
+    "rankPvp": "C",
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "Q7fCc5re3a4"
+  },
+  "2000108": {
+    "rank": "A",
+    "rankPvp": "B",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "tNURIsVrAC0"
+  },
+  "2000109": {
+    "rank": "A",
+    "rankPvp": "S",
+    "role": "dps",
+    "tags": ["premium", "ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "jb5Myn4eVzc",
+    "rankByTranscend": {
+      "3": "B",
+      "4": "A",
+      "5": "A",
+      "6": "A"
+    }
+  },
+  "2000110": {
+    "rank": "S",
+    "rankPvp": "S",
+    "role": "dps",
+    "tags": ["seasonal", "ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "YjRLI-bxF2U",
+    "rankByTranscend": {
+      "3": "A",
+      "4": "A",
+      "5": "S",
+      "6": "S"
+    },
+    "limited": true
+  },
+  "2000111": {
+    "rank": "A",
+    "rankPvp": "S",
+    "role": "support",
+    "tags": ["premium", "ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "6RsCcgPEosw",
+    "rankByTranscend": {
+      "3": "B",
+      "4": "B",
+      "5": "A",
+      "6": "A"
+    }
+  },
+  "2000112": {
+    "rank": "A",
+    "rankPvp": "S",
+    "role": "dps",
+    "tags": ["premium", "ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "1SyNDPO9zzY"
+  },
+  "2000113": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "hYJ1yGhb1zk"
+  },
+  "2000114": {
+    "rank": "S",
+    "rankPvp": "S",
+    "role": "dps",
+    "tags": ["limited", "ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "S4MwD507dS8",
+    "rankByTranscend": {
+      "3": "A",
+      "4": "A",
+      "5": "S",
+      "6": "S"
+    },
+    "limited": true
+  },
+  "2000116": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "sustain",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "LQpYEN4C0RQ"
+  },
+  "2000117": {
+    "rank": "A",
+    "rankPvp": "B",
+    "role": "dps",
+    "tags": ["ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "video": "fIA18JntBdI"
+  },
+  "2000119": {
+    "rank": "S",
+    "rankPvp": "S",
+    "role": "dps",
+    "tags": ["premium", "ignore-defense"],
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    },
+    "video": "zlmBL-U6xEI"
+  },
+  "2700003": {
+    "rank": "C",
+    "role": "support",
+    "tags": ["ignore-defense", "core-fusion"],
+    "skillPriority": {
+      "first": 0,
+      "second": 0,
+      "ultimate": 0
+    }
+  },
+  "2700005": {
+    "rank": "B",
+    "role": "dps",
+    "tags": ["ignore-defense", "core-fusion", "free"],
+    "skillPriority": {
+      "first": 0,
+      "second": 0,
+      "ultimate": 0
+    }
+  },
+  "2700037": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "sustain",
+    "tags": ["ignore-defense", "core-fusion", "free"],
+    "skillPriority": {
+      "first": 0,
+      "second": 0,
+      "ultimate": 0
+    }
+  },
+  "2700043": {
+    "rank": "A",
+    "rankPvp": "B",
+    "role": "support",
+    "tags": ["core-fusion"]
+  },
+  "2700056": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "dps",
+    "tags": ["core-fusion"],
+    "skillPriority": {
+      "first": 1,
+      "second": 2,
+      "ultimate": 3
+    }
+  },
+  "2700070": {
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "dps",
+    "tags": ["core-fusion"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  }
+}

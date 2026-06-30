@@ -20,7 +20,8 @@
     "datagen:convert": "tsx datagen/templates/convert.ts",
     "datagen:build": "tsx datagen/build.ts",
     "prepare": "lefthook install || true",
-    "datagen:extract-entity": "tsx datagen/extractor/run.ts"
+    "datagen:extract-entity": "tsx datagen/extractor/run.ts",
+    "datagen:seed-curated": "tsx datagen/curated/seed.ts"
   },
   "dependencies": {
     "next": "16.1.7",
