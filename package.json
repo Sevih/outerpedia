@@ -23,7 +23,8 @@
     "datagen:extract-entity": "tsx datagen/extractor/run.ts",
     "datagen:seed-curated": "tsx datagen/curated/seed.ts",
     "clean": "node -e \"for(const f of ['.next'])require('fs').rmSync(f,{recursive:true,force:true})\"",
-    "clean:all": "node -e \"for(const f of ['.next','node_modules'])require('fs').rmSync(f,{recursive:true,force:true})\" && pnpm install"
+    "clean:all": "node -e \"for(const f of ['.next','node_modules'])require('fs').rmSync(f,{recursive:true,force:true})\" && pnpm install",
+    "datagen:coherence": "tsx datagen/extractor/coherence.ts"
   },
   "dependencies": {
     "next": "16.1.7",
