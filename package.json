@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
@@ -18,6 +18,7 @@
     "datagen:pull": "tsx datagen/extract/pull-gamedata.ts",
     "datagen:extract": "tsx datagen/extract/extract.ts",
     "datagen:convert": "tsx datagen/templates/convert.ts",
+    "datagen:build": "tsx datagen/build.ts",
     "prepare": "lefthook install || true"
   },
   "dependencies": {

@@ -252,4 +252,5 @@ function main(): void {
   console.log(`staging: ${OUT}`);
 }
 
-main();
+// Exécution directe uniquement (importable sans effet de bord par l'orchestrateur).
+if (process.argv[1] && process.argv[1].endsWith('skills.ts')) main();
