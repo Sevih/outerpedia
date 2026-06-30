@@ -69,6 +69,8 @@ export interface Skill {
   /** Famille de skill (slug de SkillType : first/second/ultimate/class_passive…). */
   type: string;
   subType: SkillSubType;
+  /** Inflige des dégâts (ou attaque en chaîne) — vs support/heal/buff. */
+  offensive: boolean;
   /** Cible (slug minuscule de TargetTeamType) si applicable. */
   target?: string;
   /** Portée (slug minuscule de RangeType) si applicable. */
@@ -129,13 +131,17 @@ export function buildSkills(): SkillData {
 
     const maxLevel = num(lvlRows[lvlRows.length - 1]?.SkillLevel) || lvlRows.length || 1;
 
+    const type = slugEnum(s.SkillType ?? '');
+    const levels = lvlRows.map((r) => buildLevel(r, buffs, tskill, mainOnSkill));
     const skill: Skill = {
       id,
       name: resolveText(tskill, s.NameID),
-      type: slugEnum(s.SkillType ?? ''),
+      type,
       subType: subTypeOf(s.SkillSubType),
+      // Offensif = inflige des dégâts, ou attaque en chaîne (toujours offensive).
+      offensive: levels.some((l) => (l.damageFactor ?? 0) > 0) || type === 'chain_passive',
       maxLevel,
-      levels: lvlRows.map((r) => buildLevel(r, buffs, tskill, mainOnSkill)),
+      levels,
     };
     if (desc && desc.en) skill.desc = desc;
     const target = slugTeam(s.TargetTeamType);

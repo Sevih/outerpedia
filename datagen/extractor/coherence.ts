@@ -159,6 +159,19 @@ function categoryCoverage() {
       skinOk++;
   }
 
+  // skill.offensive : cohérence vs V2 (offensive embarqué par skill).
+  const S = tryLoad('data/generated/skills.json') as Record<string, Dict>;
+  let offOk = 0,
+    offSeen = 0;
+  for (const o of Object.values(V2)) {
+    for (const sk of Object.values((o.skills as Record<string, Dict>) ?? {})) {
+      const id = String(sk.NameIDSymbol ?? '');
+      if (sk.offensive === undefined || !S[id]) continue;
+      offSeen++;
+      if (S[id].offensive === sk.offensive) offOk++;
+    }
+  }
+
   // Profils : couverture + cohérence de valeurs vs V2.
   const v3Profiles = Object.values(C).filter((c) => c.profile).length;
   let profOk = 0,
@@ -195,7 +208,11 @@ function categoryCoverage() {
     },
     { name: 'pros-cons', v2Count: Object.keys(prosCons).length, status: '✍️ CURÉ — manquant' },
     { name: 'reco (gear)', v2Count: recoDir, status: '✍️ CURÉ — manquant' },
-    { name: 'skill.offensive', v2Count: -1, status: '🔴 MANQUANT — flag par skill (à confirmer)' },
+    {
+      name: 'skill.offensive',
+      v2Count: offSeen,
+      status: `✅ EXTRAIT — ${offOk}/${offSeen} cohérents (dmg||chain)`,
+    },
   ];
 
   console.log('\n━━━ 2. COUVERTURE DES CATÉGORIES ━━━');
