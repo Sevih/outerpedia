@@ -1,16 +1,171 @@
 @import 'tailwindcss';
 
+/*
+ * Thème par CLASSE (`.dark` sur <html>, piloté par next-themes) — pas par
+ * `prefers-color-scheme`. On redéclare la variante `dark:` en conséquence.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * TOKENS SÉMANTIQUES — l'unique source des couleurs de l'UI.
+ * Aucun composant ne doit utiliser de gris Tailwind en dur (bg-zinc-800…) :
+ * uniquement ces tokens, qui basculent automatiquement clair/sombre.
+ *
+ *   :root  = thème CLAIR (nouveau, miroir).
+ *   .dark  = thème SOMBRE (identique à l'apparence actuelle).
+ *
+ * Les variables brutes (sans préfixe --color-) portent les valeurs par thème ;
+ * le bloc `@theme inline` plus bas les expose à Tailwind en utilitaires.
+ */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  /* Surfaces (du fond au premier plan) */
+  --surface-base: #f4f5f7;
+  --surface-raised: #ffffff;
+  --surface-overlay: #eef0f3;
+  --surface-sunken: #e4e7eb;
+
+  /* Contenu (texte, du plus fort au plus discret) */
+  --content-strong: #18181b;
+  --content: #3f3f46;
+  --content-muted: #52525b;
+  --content-subtle: #71717a;
+
+  /* Lignes */
+  --line-subtle: #e4e7eb;
+  --line: #d4d8dd;
+  --line-strong: #b8bec6;
+  --ring: #0e7490;
+
+  /* Accent / états */
+  --accent: #0891b2;
+  --accent-fg: #ffffff;
+  --success: #15803d;
+  --warn: #b45309;
+  --danger: #b91c1c;
+
+  /* Tokens métier — teintes claires assombries pour le contraste sur fond clair */
+  --fire: #ff6b6b;
+  --water: #4dabf7;
+  --earth: #51cf66;
+  --light: #f59f00;
+  --dark-elem: #cc5de8;
+  --klass: #fb923c;
+  --rarity-1: #9ca3af;
+  --rarity-2: #3b82f6;
+  --rarity-3: #ef4444;
+  --item-normal: #9ca3af;
+  --item-superior: #16a34a;
+  --item-epic: #2563eb;
+  --item-legendary: #dc2626;
+  --role-dps: #e11d48;
+  --role-support: #0284c7;
+  --role-sustain: #059669;
+  --buff: #0ea5e9;
+  --debuff: #dc2626;
+  --chain-start: #16a34a;
+  --chain-join: #ca8a04;
+  --chain-finish: #dc2626;
+  --stat: #b45309;
+  --highlight: #0e7490;
+
+  /* Voile du fond de page */
+  --page-veil: rgba(255, 255, 255, 0.55);
 }
 
+.dark {
+  --surface-base: #0a0a0a;
+  --surface-raised: #18181b;
+  --surface-overlay: #27272a;
+  --surface-sunken: #000000;
+
+  --content-strong: #fafafa;
+  --content: #d4d4d8;
+  --content-muted: #a1a1aa;
+  --content-subtle: #71717a;
+
+  --line-subtle: #27272a;
+  --line: #404040;
+  --line-strong: #52525b;
+  --ring: #22d3ee;
+
+  --accent: #22d3ee;
+  --accent-fg: #0a0a0a;
+  --success: #4ade80;
+  --warn: #fbbf24;
+  --danger: #f87171;
+
+  /* Tokens métier — teintes vives d'origine (apparence actuelle) */
+  --light: #ffe066;
+  --rarity-1: #e5e7eb;
+  --rarity-2: #93c5fd;
+  --rarity-3: #f87171;
+  --item-normal: #e5e7eb;
+  --item-superior: #4ade80;
+  --item-epic: #93c5fd;
+  --item-legendary: #f87171;
+  --buff: #38bdf8;
+  --debuff: #f87171;
+  --chain-start: #4ade80;
+  --chain-join: #facc15;
+  --chain-finish: #f87171;
+  --stat: #fbbf24;
+  --highlight: #22d3ee;
+
+  --page-veil: rgba(0, 0, 0, 0.4);
+}
+
+/*
+ * Exposition à Tailwind : génère `bg-surface-base`, `text-content-muted`,
+ * `border-line`, `text-fire`, `bg-buff`, etc. (utilitaires théminés).
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-surface-base: var(--surface-base);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-surface-sunken: var(--surface-sunken);
+
+  --color-content-strong: var(--content-strong);
+  --color-content: var(--content);
+  --color-content-muted: var(--content-muted);
+  --color-content-subtle: var(--content-subtle);
+
+  --color-line-subtle: var(--line-subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ring: var(--ring);
+
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-success: var(--success);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+
+  --color-fire: var(--fire);
+  --color-water: var(--water);
+  --color-earth: var(--earth);
+  --color-light: var(--light);
+  --color-dark-elem: var(--dark-elem);
+  --color-class: var(--klass);
+  --color-rarity-1: var(--rarity-1);
+  --color-rarity-2: var(--rarity-2);
+  --color-rarity-3: var(--rarity-3);
+  --color-item-normal: var(--item-normal);
+  --color-item-superior: var(--item-superior);
+  --color-item-epic: var(--item-epic);
+  --color-item-legendary: var(--item-legendary);
+  --color-role-dps: var(--role-dps);
+  --color-role-support: var(--role-support);
+  --color-role-sustain: var(--role-sustain);
+  --color-buff: var(--buff);
+  --color-debuff: var(--debuff);
+  --color-chain-start: var(--chain-start);
+  --color-chain-join: var(--chain-join);
+  --color-chain-finish: var(--chain-finish);
+  --color-stat: var(--stat);
+  --color-highlight: var(--highlight);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--surface-base);
+  color: var(--content);
 }
