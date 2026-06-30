@@ -60,6 +60,16 @@ function fmtTurn(buff: Row): string {
   return /^\d+$/.test(buff.TurnDuration ?? '') ? buff.TurnDuration! : '?';
 }
 
+/** Vrai si la valeur de cette ligne de buff est en per-mille (×10 → %). Exposé pour le classifier. */
+export function isPermilleRow(buff: Row): boolean {
+  return isPermille(buff);
+}
+
+/** Magnitude formatée d'une ligne de buff (per-mille → %, sinon entier absolu). Exposé pour le classifier. */
+export function formatRowValue(buff: Row): string {
+  return fmtValue(buff);
+}
+
 /**
  * Trouve la ligne d'un buff à un niveau donné.
  * `buffIdStr` peut être un CSV de plusieurs buffs ; `index` choisit lequel
