@@ -259,6 +259,38 @@
     "avoid_add_cap": "percent",
     "avoid_subtract_cap": "percent"
   },
+  "gifts": {
+    "present_01": {
+      "en": "Science",
+      "jp": "科学",
+      "kr": "과학",
+      "zh": "科学"
+    },
+    "present_02": {
+      "en": "Luxury",
+      "jp": "贅沢な品",
+      "kr": "사치품",
+      "zh": "奢侈品"
+    },
+    "present_03": {
+      "en": "Magic Tool",
+      "jp": "魔道具",
+      "kr": "마도구",
+      "zh": "魔法道具"
+    },
+    "present_04": {
+      "en": "Craftwork",
+      "jp": "工芸品",
+      "kr": "공예품",
+      "zh": "工艺品"
+    },
+    "present_05": {
+      "en": "Natural Object",
+      "jp": "自然物",
+      "kr": "자연물",
+      "zh": "自然物件"
+    }
+  },
   "statusEffects": {
     "1": {
       "id": "1",

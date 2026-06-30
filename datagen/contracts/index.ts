@@ -78,6 +78,8 @@ export interface Glossaries {
   subClasses: Record<string, SubClassEntry>;
   /** Échelle d'affichage par stat (front formate, damage-calc utilise le brut). */
   statScales: Record<string, StatScale>;
+  /** Types de cadeau préféré (slug → libellé). */
+  gifts: Record<string, LangDict>;
   /** Effets de statut nommés (« Burned »…), réf par les effets de skill/équip. */
   statusEffects: Record<string, StatusEffect>;
 }

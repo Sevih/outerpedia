@@ -55,6 +55,7 @@ function main(): void {
     elements: characters.glossaries.elements,
     subClasses: characters.glossaries.subClasses,
     statScales: characters.glossaries.statScales,
+    gifts: characters.glossaries.gifts,
     statusEffects,
   };
 

@@ -69,6 +69,14 @@
       "zh": "孤独的复仇者"
     },
     "subClass": "sweeper",
+    "chainType": "finish",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Alejandro Saab",
+      "jp": "CV.斉藤壮馬",
+      "kr": "CV.김영선",
+      "zh": "0"
+    },
     "ee": "2000001",
     "recommendedSets": ["3", "2", "7"],
     "appearances": ["2010001", "2400001", "2300001", "2500001", "2600001"]
@@ -143,6 +151,14 @@
       "zh": "边界上的异乡人"
     },
     "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Mela Lee",
+      "jp": "CV.長妻樹里",
+      "kr": "CV.성예원",
+      "zh": "0"
+    },
     "ee": "2000002",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -216,6 +232,14 @@
       "zh": "怕热的冰霜精灵"
     },
     "subClass": "tactician",
+    "chainType": "finish",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Erin Yvette",
+      "jp": "CV.阿澄佳奈",
+      "kr": "CV.김가령",
+      "zh": "0"
+    },
     "ee": "2000003",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2300003", "2500003", "2600003"],
@@ -290,6 +314,14 @@
       "zh": "魔法学院优等生"
     },
     "subClass": "enchanter",
+    "chainType": "join",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Courtney Lin",
+      "jp": "CV.芹澤優",
+      "kr": "CV.김도희",
+      "zh": "0"
+    },
     "ee": "2000004",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2010004"]
@@ -363,6 +395,14 @@
       "zh": "洞察魔力之眼"
     },
     "subClass": "wizard",
+    "chainType": "start",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Jeannie Tirado",
+      "jp": "CV.安済知佳",
+      "kr": "CV.여윤미",
+      "zh": "0"
+    },
     "ee": "2000005",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010005", "2300005", "2500005"],
@@ -437,6 +477,14 @@
       "zh": "优雅贵妇"
     },
     "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. Jenny Yokobori",
+      "jp": "CV.中恵光城",
+      "kr": "CV.김윤채",
+      "zh": "0"
+    },
     "ee": "2000006",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -509,6 +557,14 @@
       "zh": "神秘少女"
     },
     "subClass": "enchanter",
+    "chainType": "join",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Reba Buhr",
+      "jp": "CV.田村ゆかり",
+      "kr": "CV.이다은",
+      "zh": "0"
+    },
     "ee": "2000007",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2010007"]
@@ -582,6 +638,14 @@
       "zh": "丧失记忆的漂流者"
     },
     "subClass": "bruiser",
+    "chainType": "start",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Judy Alice Lee",
+      "jp": "CV.明坂聡美",
+      "kr": "CV.이보희",
+      "zh": "0"
+    },
     "ee": "2000008",
     "recommendedSets": ["1", "3", "7"]
   },
@@ -655,6 +719,14 @@
       "zh": "忠诚的机械人偶"
     },
     "subClass": "reliever",
+    "chainType": "finish",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Courtney Lin",
+      "jp": "CV.小倉唯",
+      "kr": "CV.이새아",
+      "zh": "0"
+    },
     "ee": "2000009",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010009", "2300009", "2500009"]
@@ -728,6 +800,14 @@
       "zh": "充满荣誉感的骑士"
     },
     "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. G.K. Bowes",
+      "jp": "CV.櫻庭有紗",
+      "kr": "CV.윤은서",
+      "zh": "0"
+    },
     "ee": "2000010",
     "recommendedSets": ["1", "3", "7"]
   },
@@ -800,6 +880,14 @@
       "zh": "小小弓弩手"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. Brenna Larson",
+      "jp": "CV.春野杏",
+      "kr": "CV.성예원",
+      "zh": "0"
+    },
     "ee": "2000011",
     "recommendedSets": ["13", "3", "5"]
   },
@@ -873,6 +961,14 @@
       "zh": "赌棍之首"
     },
     "subClass": "tactician",
+    "chainType": "finish",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Allegra Clark",
+      "jp": "CV.甲斐田裕子",
+      "kr": "CV.안영미",
+      "zh": "0"
+    },
     "ee": "2000012",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2010012", "2020012", "2030012"]
@@ -946,6 +1042,14 @@
       "zh": "睡美人"
     },
     "subClass": "enchanter",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Ryan Bartley",
+      "jp": "CV.諏訪彩花",
+      "kr": "CV.차영희",
+      "zh": "0"
+    },
     "ee": "2000013",
     "recommendedSets": ["5", "13", "1"]
   },
@@ -1018,6 +1122,14 @@
       "zh": "等待的地缚灵"
     },
     "subClass": "enchanter",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. AmaLee",
+      "jp": "CV.桑原由気",
+      "kr": "CV.신온유",
+      "zh": "0"
+    },
     "ee": "2000014",
     "recommendedSets": ["5", "13", "1"]
   },
@@ -1091,6 +1203,14 @@
       "zh": "嗜血战斗狂"
     },
     "subClass": "attacker",
+    "chainType": "finish",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Kirsten Day",
+      "jp": "CV.ゆかな",
+      "kr": "CV.이새벽",
+      "zh": "0"
+    },
     "ee": "2000015",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2400015", "2500015"]
@@ -1164,6 +1284,14 @@
       "zh": "忠诚的护卫骑士"
     },
     "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. Jeannie Tirado",
+      "jp": "CV.山本希望",
+      "kr": "CV.박시윤",
+      "zh": "0"
+    },
     "ee": "2000016",
     "recommendedSets": ["1", "3", "7"],
     "appearances": ["2400016"]
@@ -1237,6 +1365,14 @@
       "zh": "黑色圣书的主人"
     },
     "subClass": "sage",
+    "chainType": "join",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Allegra Clark",
+      "jp": "CV.優木かな",
+      "kr": "CV.김도희",
+      "zh": "0"
+    },
     "ee": "2000017",
     "recommendedSets": ["3", "13", "9"]
   },
@@ -1309,6 +1445,14 @@
       "zh": "陷入爱河的少女"
     },
     "subClass": "wizard",
+    "chainType": "join",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Marieve Herington",
+      "jp": "CV.牧野由依",
+      "kr": "CV.이은조",
+      "zh": "0"
+    },
     "ee": "2000018",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -1381,6 +1525,14 @@
       "zh": "百鬼夜行的讨伐者"
     },
     "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. Val Rodriguez",
+      "jp": "CV.本渡楓",
+      "kr": "CV.김연우",
+      "zh": "0"
+    },
     "ee": "2000019",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010019", "2020019", "2030019"]
@@ -1454,6 +1606,14 @@
       "zh": "魔法学院的武装图书管理员"
     },
     "subClass": "enchanter",
+    "chainType": "join",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Kaylie Mills",
+      "jp": "CV.黒沢ともよ",
+      "kr": "CV.강은애",
+      "zh": "0"
+    },
     "ee": "2000020",
     "recommendedSets": ["5", "13", "1"]
   },
@@ -1527,6 +1687,14 @@
       "zh": "闪耀的小天使"
     },
     "subClass": "phalanx",
+    "chainType": "finish",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Sarah Williams",
+      "jp": "CV.鬼頭明里",
+      "kr": "CV.장예나",
+      "zh": "0"
+    },
     "ee": "2000021",
     "recommendedSets": ["3", "2", "13"]
   },
@@ -1600,6 +1768,14 @@
       "zh": "科学遗产的末裔"
     },
     "subClass": "attacker",
+    "chainType": "finish",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Xanthe Huynh",
+      "jp": "CV.加藤英美里",
+      "kr": "CV.방연지",
+      "zh": "0"
+    },
     "ee": "2000022",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010022", "2020022"]
@@ -1674,6 +1850,14 @@
       "zh": "光的引导者"
     },
     "subClass": "reliever",
+    "chainType": "finish",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Brianna Knickerbocker",
+      "jp": "CV.伊藤静",
+      "kr": "CV.강시현",
+      "zh": "0"
+    },
     "ee": "2000023",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010023", "2020023"]
@@ -1747,6 +1931,14 @@
       "zh": "小小英雄"
     },
     "subClass": "sweeper",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. Brenna Larson",
+      "jp": "CV.鷲見友美ジェナ",
+      "kr": "CV.김예림",
+      "zh": "0"
+    },
     "ee": "2000024",
     "recommendedSets": ["3", "2", "7"]
   },
@@ -1819,6 +2011,14 @@
       "zh": "魔王的可爱眷属"
     },
     "subClass": "attacker",
+    "chainType": "start",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Kimberly Woods",
+      "jp": "CV.戸松遥",
+      "kr": "CV.윤아영",
+      "zh": "0"
+    },
     "ee": "2000025",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010025", "2020025"]
@@ -1892,6 +2092,14 @@
       "zh": "绝对的悲观主义"
     },
     "subClass": "phalanx",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. AmaLee",
+      "jp": "CV.青山吉能",
+      "kr": "CV.김예림",
+      "zh": "0"
+    },
     "ee": "2000026",
     "recommendedSets": ["3", "2", "13"]
   },
@@ -1964,6 +2172,14 @@
       "zh": "充满好奇心的祭司"
     },
     "subClass": "sage",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. Skyler Davenport",
+      "jp": "CV.秦佐和子",
+      "kr": "CV.김유림",
+      "zh": "0"
+    },
     "ee": "2000027",
     "recommendedSets": ["3", "13", "9"]
   },
@@ -2036,6 +2252,14 @@
       "zh": "异端魔法师"
     },
     "subClass": "wizard",
+    "chainType": "join",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Brent Mukai",
+      "jp": "CV.森川智之",
+      "kr": "CV.곽윤상",
+      "zh": "0"
+    },
     "ee": "2000028",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -2108,6 +2332,14 @@
       "zh": "守林人"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Alexis Tipton",
+      "jp": "CV.三宅華也",
+      "kr": "CV.이보용",
+      "zh": "0"
+    },
     "ee": "2000029",
     "recommendedSets": ["13", "3", "5"]
   },
@@ -2180,6 +2412,14 @@
       "zh": "焰火铁匠"
     },
     "subClass": "phalanx",
+    "chainType": "join",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Shelby Young",
+      "jp": "CV.加隈亜衣",
+      "kr": "CV.비주언",
+      "zh": "0"
+    },
     "ee": "2000030",
     "recommendedSets": ["3", "2", "13"]
   },
@@ -2252,6 +2492,14 @@
       "zh": "冒险家协会接待员"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Kelsey Maher",
+      "jp": "CV.木村珠莉",
+      "kr": "CV.김하루",
+      "zh": "0"
+    },
     "ee": "2000031",
     "recommendedSets": ["13", "3", "5"]
   },
@@ -2324,6 +2572,14 @@
       "zh": "美味追寻者"
     },
     "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Jennifer Losi",
+      "jp": "CV.髙橋ミナミ",
+      "kr": "CV.허예은",
+      "zh": "0"
+    },
     "ee": "2000032",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -2396,6 +2652,14 @@
       "zh": "可爱的船长"
     },
     "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Corina Boettger",
+      "jp": "CV.吉田有里",
+      "kr": "CV.박하진",
+      "zh": "0"
+    },
     "ee": "2000033",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -2468,6 +2732,14 @@
       "zh": "孤狼"
     },
     "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Faye Mata",
+      "jp": "CV.大津愛理",
+      "kr": "CV.가빈",
+      "zh": "0"
+    },
     "ee": "2000034",
     "recommendedSets": ["1", "3", "7"]
   },
@@ -2540,6 +2812,14 @@
       "zh": "鲜血魔王"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Laura Post",
+      "jp": "CV.中原麻衣",
+      "kr": "CV.정유정",
+      "zh": "0"
+    },
     "ee": "2000035",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2010035"]
@@ -2613,6 +2893,14 @@
       "zh": "亲切的治疗师"
     },
     "subClass": "reliever",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. Kristen McGuire",
+      "jp": "CV.三浦千幸",
+      "kr": "CV.강새봄",
+      "zh": "0"
+    },
     "ee": "2000036",
     "recommendedSets": ["3", "13", "9"]
   },
@@ -2686,6 +2974,14 @@
       "zh": "无敌的骑士团长"
     },
     "subClass": "sweeper",
+    "chainType": "finish",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. Shelby Young",
+      "jp": "CV.佐藤利奈",
+      "kr": "CV.곽규미",
+      "zh": "0"
+    },
     "ee": "2000037",
     "recommendedSets": ["3", "2", "7"],
     "appearances": ["2010037", "2020037", "2030037", "2500037", "2600037"],
@@ -2760,6 +3056,14 @@
       "zh": "潜力虚拟DJ"
     },
     "subClass": "sage",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Stephanie Panisello",
+      "jp": "CV.首藤志奈",
+      "kr": "CV.김아롱",
+      "zh": "0"
+    },
     "ee": "2000038",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2500038"]
@@ -2833,6 +3137,14 @@
       "zh": "耀眼的才能"
     },
     "subClass": "vanguard",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Laura Post",
+      "jp": "CV.田中理恵",
+      "kr": "CV.박지윤",
+      "zh": "0"
+    },
     "ee": "2000039",
     "recommendedSets": ["13", "1", "7"],
     "appearances": ["2010039", "2020039", "2400039"]
@@ -2906,6 +3218,14 @@
       "zh": "活跳尸"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Kaylie Mills",
+      "jp": "0",
+      "kr": "CV.유영",
+      "zh": "0"
+    },
     "ee": "2000040",
     "recommendedSets": ["13", "3", "5"]
   },
@@ -2978,6 +3298,14 @@
       "zh": "可疑的情报商"
     },
     "subClass": "vanguard",
+    "chainType": "join",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Todd Haberkorn",
+      "jp": "CV.野上翔",
+      "kr": "CV.이상호",
+      "zh": "0"
+    },
     "ee": "2000041",
     "recommendedSets": ["13", "1", "7"]
   },
@@ -3050,6 +3378,14 @@
       "zh": "正义的勇士"
     },
     "subClass": "phalanx",
+    "chainType": "start",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Aleks Le",
+      "jp": "CV.逢坂良太",
+      "kr": "CV.정의한",
+      "zh": "0"
+    },
     "ee": "2000042",
     "recommendedSets": ["3", "2", "13"]
   },
@@ -3122,6 +3458,14 @@
       "zh": "异国的死灵术士"
     },
     "subClass": "enchanter",
+    "chainType": "start",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Jeannie Tirado",
+      "jp": "CV.石見舞菜香",
+      "kr": "CV.장미",
+      "zh": "0"
+    },
     "ee": "2000043",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2010043"],
@@ -3197,6 +3541,14 @@
       "zh": "麦格诺里亚第43任院长"
     },
     "subClass": "wizard",
+    "chainType": "finish",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Elizabeth Maxwell",
+      "jp": "CV.井上喜久子",
+      "kr": "CV.조경이",
+      "zh": "0"
+    },
     "ee": "2000044",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010044"]
@@ -3270,6 +3622,14 @@
       "zh": "努力派少年魔法师"
     },
     "subClass": "wizard",
+    "chainType": "join",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Todd Haberkorn",
+      "jp": "CV.大桃陽介",
+      "kr": "CV.김민주",
+      "zh": "0"
+    },
     "ee": "2000045",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -3342,6 +3702,14 @@
       "zh": "开朗的守财奴"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Faye Mata",
+      "jp": "CV.結木梢",
+      "kr": "CV.윤은서",
+      "zh": "0"
+    },
     "ee": "2000046",
     "recommendedSets": ["13", "3", "5"]
   },
@@ -3414,6 +3782,14 @@
       "zh": "观星巫女"
     },
     "subClass": "reliever",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Stephanie Southerland",
+      "jp": "CV.渕上舞",
+      "kr": "CV.김나율",
+      "zh": "0"
+    },
     "ee": "2000047",
     "recommendedSets": ["3", "13", "9"]
   },
@@ -3486,6 +3862,14 @@
       "zh": "忠直的护卫骑士"
     },
     "subClass": "phalanx",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. Stephanie Panisello",
+      "jp": "CV.高森奈津美",
+      "kr": "CV.김아롱",
+      "zh": "0"
+    },
     "ee": "2000048",
     "recommendedSets": ["3", "2", "13"]
   },
@@ -3558,6 +3942,14 @@
       "zh": "闪击会的突击队长"
     },
     "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. Brent Mukai",
+      "jp": "CV.柴田あいばん",
+      "kr": "CV.김민주",
+      "zh": "0"
+    },
     "ee": "2000049",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -3630,6 +4022,14 @@
       "zh": "闪击会组长"
     },
     "subClass": "reliever",
+    "chainType": "join",
+    "gift": "present_03",
+    "voiceActor": {
+      "en": "VA. Todd Haberkorn",
+      "jp": "CV.野々井爽",
+      "kr": "CV.이상호",
+      "zh": "0"
+    },
     "ee": "2000050",
     "recommendedSets": ["3", "13", "9"]
   },
@@ -3702,6 +4102,14 @@
       "zh": "横行无阻的野牛"
     },
     "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. Alejandro Saab",
+      "jp": "CV.根津大輔",
+      "kr": "CV.곽윤상",
+      "zh": "0"
+    },
     "ee": "2000051",
     "recommendedSets": ["1", "3", "7"]
   },
@@ -3775,6 +4183,14 @@
       "zh": "憧憬苍空的人偶"
     },
     "subClass": "vanguard",
+    "chainType": "finish",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Stephanie Southerland",
+      "jp": "CV.長谷川育美",
+      "kr": "CV.이명호",
+      "zh": "0"
+    },
     "ee": "2000052",
     "recommendedSets": ["13", "1", "7"]
   },
@@ -3848,6 +4264,14 @@
       "zh": "创世之神"
     },
     "subClass": "bruiser",
+    "chainType": "finish",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. Laura Post",
+      "jp": "CV.田中理恵",
+      "kr": "CV.박지윤",
+      "zh": "0"
+    },
     "ee": "2000053",
     "recommendedSets": ["1", "3", "7"],
     "appearances": ["2010053"]
@@ -3921,6 +4345,14 @@
       "zh": "失眠的小修女"
     },
     "subClass": "sage",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. None",
+      "jp": "CV.메네 성우 이름",
+      "kr": "CV.메네 성우 이름",
+      "zh": "0"
+    },
     "ee": "2000054",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010054"]
@@ -3994,6 +4426,14 @@
       "zh": "懒鬼冲浪骑士"
     },
     "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "VA. None",
+      "jp": "CV.아에르 성우 이름",
+      "kr": "CV.아에르 성우 이름",
+      "zh": "0"
+    },
     "ee": "2000055",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010055"]
@@ -4067,6 +4507,14 @@
       "zh": "土之圣骑士"
     },
     "subClass": "vanguard",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. None",
+      "jp": "CV.노티아 성우 이름",
+      "kr": "CV.노티아 성우 이름",
+      "zh": "0"
+    },
     "ee": "2000056",
     "recommendedSets": ["13", "1", "7"],
     "appearances": ["2010056", "2020056"],
@@ -4141,6 +4589,14 @@
       "zh": "圣科利德雷之使徒"
     },
     "subClass": "sweeper",
+    "chainType": "start",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "VA. None",
+      "jp": "CV.스테로페 성우 이름",
+      "kr": "CV.스테로페 성우 이름",
+      "zh": "0"
+    },
     "ee": "2000057",
     "recommendedSets": ["3", "2", "7"]
   },
@@ -4213,6 +4669,14 @@
       "zh": "圣科利德大主教"
     },
     "subClass": "reliever",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "VA. None",
+      "jp": "CV.아스테 성우 이름",
+      "kr": "CV.아스테 성우 이름",
+      "zh": "0"
+    },
     "ee": "2000058",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010058"]
@@ -4286,6 +4750,8 @@
       "zh": "创世之神"
     },
     "subClass": "wizard",
+    "chainType": "start",
+    "gift": "present_01",
     "ee": "2000059",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2020059"]
@@ -4359,6 +4825,14 @@
       "zh": "编号猎人"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "VA. None",
+      "jp": "CV.타마라 성우 이름",
+      "kr": "CV.타마라 성우 이름",
+      "zh": "0"
+    },
     "ee": "2000060",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2010060", "2020060", "2030060"]
@@ -4433,6 +4907,8 @@
       "zh": "优秀的政治军官"
     },
     "subClass": "phalanx",
+    "chainType": "finish",
+    "gift": "present_02",
     "ee": "2000061",
     "recommendedSets": ["3", "2", "13"],
     "appearances": ["2010061", "2020061"]
@@ -4506,6 +4982,8 @@
       "zh": "无畏族之王"
     },
     "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_03",
     "ee": "2000062",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010062"]
@@ -4579,6 +5057,8 @@
       "zh": "创世之神"
     },
     "subClass": "sweeper",
+    "chainType": "join",
+    "gift": "present_01",
     "ee": "2000063",
     "recommendedSets": ["3", "2", "7"],
     "appearances": ["2010063"]
@@ -4652,6 +5132,8 @@
       "zh": "难波的亡命之徒"
     },
     "subClass": "tactician",
+    "chainType": "start",
+    "gift": "present_03",
     "ee": "2000064",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2010064", "2020064"]
@@ -4726,6 +5208,8 @@
       "zh": "匆匆而过的雨"
     },
     "subClass": "wizard",
+    "chainType": "finish",
+    "gift": "present_05",
     "ee": "2000065",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010065", "2020065", "2030065", "2040065", "2050065"]
@@ -4800,6 +5284,8 @@
       "zh": "渴望案件的懵侦探"
     },
     "subClass": "tactician",
+    "chainType": "finish",
+    "gift": "present_04",
     "ee": "2000066",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2010066", "2020066"]
@@ -4874,6 +5360,8 @@
       "zh": "你的专属魔术师"
     },
     "subClass": "wizard",
+    "chainType": "finish",
+    "gift": "present_04",
     "ee": "2000067",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -4946,6 +5434,8 @@
       "zh": "傲慢魔王"
     },
     "subClass": "enchanter",
+    "chainType": "start",
+    "gift": "present_03",
     "ee": "2000068",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2010068", "2020068"]
@@ -5020,6 +5510,8 @@
       "zh": "无心之王"
     },
     "subClass": "enchanter",
+    "chainType": "finish",
+    "gift": "present_01",
     "ee": "2000069",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2010069", "2020069"]
@@ -5093,6 +5585,8 @@
       "zh": "超酷杀人机器"
     },
     "subClass": "bruiser",
+    "chainType": "start",
+    "gift": "present_02",
     "ee": "2000070",
     "recommendedSets": ["1", "3", "7"],
     "coreFusion": "2700070"
@@ -5166,6 +5660,8 @@
       "zh": "烈焰角斗士"
     },
     "subClass": "bruiser",
+    "chainType": "start",
+    "gift": "present_03",
     "ee": "2000071",
     "recommendedSets": ["2", "16", "7"],
     "appearances": ["2010071", "2020071", "2030071"]
@@ -5239,6 +5735,8 @@
       "zh": "迅雷疾风的低级忍者"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_04",
     "ee": "2000072",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2010072"]
@@ -5312,6 +5810,8 @@
       "zh": "钢铁之心"
     },
     "subClass": "attacker",
+    "chainType": "start",
+    "gift": "present_01",
     "ee": "2000073",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -5384,6 +5884,8 @@
       "zh": "准备万全的新娘"
     },
     "subClass": "sage",
+    "chainType": "start",
+    "gift": "present_02",
     "ee": "2000074",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010074", "2020074", "2030074"]
@@ -5457,6 +5959,8 @@
       "zh": "创世之神"
     },
     "subClass": "vanguard",
+    "chainType": "join",
+    "gift": "present_03",
     "ee": "2000075",
     "recommendedSets": ["13", "1", "7"],
     "appearances": ["2010075", "2020075"]
@@ -5530,6 +6034,8 @@
       "zh": "终极偶像"
     },
     "subClass": "wizard",
+    "chainType": "start",
+    "gift": "present_02",
     "ee": "2000076",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010076", "2020076"]
@@ -5603,6 +6109,8 @@
       "zh": "沙漠统治者"
     },
     "subClass": "sweeper",
+    "chainType": "join",
+    "gift": "present_01",
     "ee": "2000077",
     "recommendedSets": ["3", "2", "7"],
     "appearances": ["2010077", "2020077"]
@@ -5677,6 +6185,8 @@
       "zh": "异国暗杀者"
     },
     "subClass": "vanguard",
+    "chainType": "finish",
+    "gift": "present_04",
     "ee": "2000078",
     "recommendedSets": ["13", "1", "7"]
   },
@@ -5750,6 +6260,8 @@
       "zh": "幸运的黑猫"
     },
     "subClass": "enchanter",
+    "chainType": "finish",
+    "gift": "present_05",
     "ee": "2000079",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2010079", "2020079"]
@@ -5823,6 +6335,8 @@
       "zh": "倾国妖狐"
     },
     "subClass": "enchanter",
+    "chainType": "start",
+    "gift": "present_03",
     "ee": "2000080",
     "recommendedSets": ["3", "2", "13"],
     "appearances": ["2010080"]
@@ -5897,6 +6411,8 @@
       "zh": "自由双胞胎"
     },
     "subClass": "vanguard",
+    "chainType": "finish",
+    "gift": "present_02",
     "ee": "2000081",
     "recommendedSets": ["13", "1", "7"],
     "appearances": ["2010081"]
@@ -5970,6 +6486,8 @@
       "zh": "虐待狂双胞胎"
     },
     "subClass": "wizard",
+    "chainType": "start",
+    "gift": "present_05",
     "ee": "2000082",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010082"]
@@ -6043,6 +6561,8 @@
       "zh": "魔王梦想家"
     },
     "subClass": "reliever",
+    "chainType": "start",
+    "gift": "present_03",
     "ee": "2000083",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010083"]
@@ -6116,6 +6636,8 @@
       "zh": "单子"
     },
     "subClass": "sage",
+    "chainType": "start",
+    "gift": "present_01",
     "ee": "2000084",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010084", "2030084", "2020084"]
@@ -6190,6 +6712,8 @@
       "zh": "泳池魔术师"
     },
     "subClass": "attacker",
+    "chainType": "finish",
+    "gift": "present_04",
     "ee": "2000085",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -6262,6 +6786,8 @@
       "zh": "三世妖狐"
     },
     "subClass": "wizard",
+    "chainType": "start",
+    "gift": "present_02",
     "ee": "2000086",
     "recommendedSets": ["1", "5", "13"]
   },
@@ -6334,6 +6860,8 @@
       "zh": "乐观的后辈"
     },
     "subClass": "attacker",
+    "chainType": "start",
+    "gift": "present_05",
     "ee": "2000087",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010087", "2030087", "2020087"]
@@ -6408,6 +6936,8 @@
       "zh": "腼腆的战斗女仆"
     },
     "subClass": "phalanx",
+    "chainType": "finish",
+    "gift": "present_04",
     "ee": "2000088",
     "recommendedSets": ["3", "2", "13"],
     "appearances": ["2010088"]
@@ -6481,6 +7011,8 @@
       "zh": "记忆者"
     },
     "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_01",
     "ee": "2000089",
     "recommendedSets": ["1", "3", "7"],
     "appearances": ["2010089", "2100089"]
@@ -6555,6 +7087,8 @@
       "zh": "诺希斯"
     },
     "subClass": "attacker",
+    "chainType": "finish",
+    "gift": "present_03",
     "ee": "2000090",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010090"]
@@ -6628,6 +7162,8 @@
       "zh": "诺希斯"
     },
     "subClass": "enchanter",
+    "chainType": "start",
+    "gift": "present_03",
     "ee": "2000091",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2010091"]
@@ -6701,6 +7237,8 @@
       "zh": "诺希斯"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_04",
     "ee": "2000092",
     "recommendedSets": ["13", "5", "20"]
   },
@@ -6773,6 +7311,8 @@
       "zh": "圣诞夜的祝福"
     },
     "subClass": "vanguard",
+    "chainType": "join",
+    "gift": "present_02",
     "ee": "2000093",
     "recommendedSets": ["13", "1", "7"]
   },
@@ -6846,6 +7386,8 @@
       "zh": "红焰骑士"
     },
     "subClass": "sweeper",
+    "chainType": "finish",
+    "gift": "present_05",
     "ee": "2000094",
     "recommendedSets": ["3", "2", "7"],
     "appearances": ["2010094"]
@@ -6919,6 +7461,8 @@
       "zh": "白兔脚"
     },
     "subClass": "wizard",
+    "chainType": "join",
+    "gift": "present_04",
     "ee": "2000095",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -6991,6 +7535,8 @@
       "zh": "剑姬"
     },
     "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_05",
     "ee": "2000096",
     "recommendedSets": ["1", "12", "13"]
   },
@@ -7064,6 +7610,8 @@
       "zh": "疾风"
     },
     "subClass": "vanguard",
+    "chainType": "finish",
+    "gift": "present_01",
     "ee": "2000097",
     "recommendedSets": ["13", "1", "7"]
   },
@@ -7137,6 +7685,8 @@
       "zh": "一流魔法师"
     },
     "subClass": "sage",
+    "chainType": "finish",
+    "gift": "present_03",
     "ee": "2000098",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010098"]
@@ -7210,6 +7760,8 @@
       "zh": "自称机械人偶"
     },
     "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_01",
     "ee": "2000099",
     "recommendedSets": ["1", "3", "7"]
   },
@@ -7283,6 +7835,8 @@
       "zh": "创世之神"
     },
     "subClass": "reliever",
+    "chainType": "finish",
+    "gift": "present_01",
     "ee": "2000100",
     "recommendedSets": ["3", "13", "9"]
   },
@@ -7356,6 +7910,8 @@
       "zh": "巧舌如箭"
     },
     "subClass": "tactician",
+    "chainType": "finish",
+    "gift": "present_04",
     "ee": "2000101",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2010101"]
@@ -7429,6 +7985,8 @@
       "zh": "奥米伽"
     },
     "subClass": "phalanx",
+    "chainType": "join",
+    "gift": "present_05",
     "ee": "2000102",
     "recommendedSets": ["3", "2", "13"]
   },
@@ -7502,6 +8060,8 @@
       "zh": "追月骑士"
     },
     "subClass": "phalanx",
+    "chainType": "finish",
+    "gift": "present_02",
     "ee": "2000103",
     "recommendedSets": ["3", "2", "13"]
   },
@@ -7574,6 +8134,8 @@
       "zh": "天才玩家"
     },
     "subClass": "tactician",
+    "chainType": "start",
+    "gift": "present_02",
     "ee": "2000105",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2010105"]
@@ -7647,6 +8209,8 @@
       "zh": "青云之梦"
     },
     "subClass": "sweeper",
+    "chainType": "join",
+    "gift": "present_05",
     "ee": "2000106",
     "recommendedSets": ["3", "2", "7"]
   },
@@ -7719,6 +8283,8 @@
       "zh": "冷酷执行者"
     },
     "subClass": "enchanter",
+    "chainType": "join",
+    "gift": "present_02",
     "ee": "2000107",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2010107"]
@@ -7792,6 +8358,8 @@
       "zh": "剧毒魔王"
     },
     "subClass": "sage",
+    "chainType": "start",
+    "gift": "present_05",
     "ee": "2000108",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010108"]
@@ -7865,6 +8433,8 @@
       "zh": "诺希斯"
     },
     "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_05",
     "ee": "2000109",
     "recommendedSets": ["3", "1", "11"],
     "appearances": ["2010109"]
@@ -7939,6 +8509,8 @@
       "zh": "三藏法师"
     },
     "subClass": "vanguard",
+    "chainType": "finish",
+    "gift": "present_04",
     "ee": "2000110",
     "recommendedSets": ["13", "1", "11"]
   },
@@ -8011,6 +8583,8 @@
       "zh": "单子"
     },
     "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_01",
     "ee": "2000111",
     "recommendedSets": ["13", "3", "5"],
     "appearances": ["2010111"]
@@ -8084,6 +8658,8 @@
       "zh": "诺希斯"
     },
     "subClass": "enchanter",
+    "chainType": "join",
+    "gift": "present_03",
     "ee": "2000112",
     "recommendedSets": ["2", "11", "7"],
     "appearances": ["2010112", "2020112"]
@@ -8157,6 +8733,8 @@
       "zh": "岁月的流浪者"
     },
     "subClass": "reliever",
+    "chainType": "start",
+    "gift": "present_05",
     "ee": "2000113",
     "recommendedSets": ["3", "13", "9"],
     "appearances": ["2010113"]
@@ -8230,6 +8808,8 @@
       "zh": "午夜狂潮"
     },
     "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_02",
     "ee": "2000114",
     "recommendedSets": ["3", "11", "10"],
     "appearances": ["2010114"]
@@ -8303,6 +8883,8 @@
       "zh": "后巷的达芬奇"
     },
     "subClass": "sweeper",
+    "chainType": "join",
+    "gift": "present_04",
     "ee": "2000116",
     "recommendedSets": ["2", "3", "7"],
     "appearances": ["2010116"]
@@ -8376,6 +8958,8 @@
       "zh": "被选中的狼"
     },
     "subClass": "attacker",
+    "chainType": "start",
+    "gift": "present_02",
     "ee": "2000117",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010117", "2020117"]
@@ -8449,6 +9033,8 @@
       "zh": "创世之神"
     },
     "subClass": "wizard",
+    "chainType": "join",
+    "gift": "present_01",
     "ee": "2000119",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2000120"]
@@ -8523,6 +9109,8 @@
       "zh": "雪山之眼"
     },
     "subClass": "tactician",
+    "chainType": "start",
+    "gift": "present_02",
     "ee": "2700003",
     "recommendedSets": ["13", "3", "5"],
     "originalCharacter": "2000003"
@@ -8597,6 +9185,8 @@
       "zh": "大魔女的继承者"
     },
     "subClass": "wizard",
+    "chainType": "join",
+    "gift": "present_03",
     "ee": "2700005",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2710005"],
@@ -8673,6 +9263,8 @@
       "zh": "决战的骑士团长"
     },
     "subClass": "sweeper",
+    "chainType": "join",
+    "gift": "present_04",
     "ee": "2700037",
     "recommendedSets": ["3", "2", "7"],
     "appearances": ["2710037", "2720037", "2730037"],
@@ -8748,6 +9340,8 @@
       "zh": "死亡引路者"
     },
     "subClass": "enchanter",
+    "chainType": "join",
+    "gift": "present_05",
     "ee": "2700043",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2710043"],
@@ -8823,6 +9417,8 @@
       "zh": "圣科利德的大地"
     },
     "subClass": "vanguard",
+    "chainType": "start",
+    "gift": "present_05",
     "ee": "2700056",
     "recommendedSets": ["13", "1", "7"],
     "appearances": ["2710056", "2720056"],
@@ -8898,6 +9494,8 @@
       "zh": "超无情战斗兵器"
     },
     "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_02",
     "ee": "2700070",
     "recommendedSets": ["1", "3", "7"],
     "originalCharacter": "2000070"

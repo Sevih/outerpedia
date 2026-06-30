@@ -72,10 +72,16 @@ export interface Character {
   class: string;
   subClass?: string;
   race: string;
+  /** Position dans l'attaque en chaîne (ChainCombinationTemplet.Sequence). */
+  chainType?: 'start' | 'join' | 'finish';
+  /** Type de cadeau préféré (slug ; libellé dans le glossaire `gifts`). */
+  gift?: string;
   /** Icône de portrait (FaceIconID). */
   icon: string;
   /** Réfs vers le catalogue de compétences (Skill_1..23 non vides). */
   skills: string[];
+  /** Doubleur localisé (CVNameID résolu), si renseigné. */
+  voiceActor?: LangDict;
   /** Réf vers l'équipement exclusif (EE), si le perso en a un. */
   ee?: string;
   /** Sets recommandés (réfs GroupID de set), si présents. */
@@ -99,6 +105,8 @@ export interface CharacterGlossaries {
   classes: Glossary;
   subClasses: Record<string, { name: LangDict; desc?: LangDict }>;
   statScales: Record<string, StatScale>;
+  /** Types de cadeau (slug → libellé), réf par `Character.gift`. */
+  gifts: Glossary;
 }
 
 /** Contexte partagé pré-calculé une fois pour tout le lot. */
@@ -106,6 +114,10 @@ interface CharacterAux {
   tchar: Map<string, LangDict>;
   tsys: Map<string, LangDict>;
   eeByChar: Map<string, string>;
+  /** id perso → Sequence d'attaque en chaîne (ChainCombinationTemplet). */
+  chainSeqById: Map<string, string>;
+  /** id perso → type de cadeau préféré (TrustTemplet.PresentTypeLike). */
+  giftById: Map<string, string>;
   /** base → id de sa core-fusion (CharacterFusionTemplet). */
   fusionByBase: Map<string, string>;
   /** core-fusion → id de sa base. */
@@ -157,8 +169,11 @@ const characterSchema: Schema = {
     class: { kind: 'string' },
     subClass: { kind: 'string', optional: true },
     race: { kind: 'string' },
+    chainType: { kind: 'string', enum: ['start', 'join', 'finish'], optional: true },
+    gift: { kind: 'string', optional: true },
     icon: { kind: 'string' },
     skills: { kind: 'array', of: { kind: 'string' }, minItems: 1 },
+    voiceActor: { kind: 'langDict', optional: true },
     ee: { kind: 'string', optional: true },
     recommendedSets: { kind: 'array', of: { kind: 'string' }, optional: true },
     stats: { kind: 'record', of: statRangeSchema },
@@ -216,6 +231,20 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     const statScales: Record<string, StatScale> = {};
     for (const d of STAT_DEFS) statScales[d.slug] = d.scale;
 
+    // Attaque en chaîne : Sequence par perso (0=Start, 1/2=Join, 3=Finish).
+    const chainSeqById = new Map(
+      loadTable('ChainCombinationTemplet').map((r) => [r.ID, r.Sequence]),
+    );
+
+    // Cadeau préféré : TrustTemplet.PresentTypeLike (ITS_PRESENT_0X) + glossaire.
+    const trust = loadTable('TrustTemplet');
+    const giftById = new Map(trust.map((r) => [r.ID, r.PresentTypeLike]));
+    const gifts: Glossary = {};
+    for (const r of trust) {
+      const slug = slugAfter(r.PresentTypeLike, 'ITS_');
+      if (slug) gifts[slug] ??= resolveText(tsys, `SYS_${r.PresentTypeLike}`);
+    }
+
     // Liens core-fusion (table dédiée) : base ↔ évolution.
     const fusion = loadTable('CharacterFusionTemplet');
     const fusionByBase = new Map(fusion.map((f) => [f.CharacterID, f.ChangeCharID]));
@@ -235,10 +264,12 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       tchar,
       tsys,
       eeByChar,
+      chainSeqById,
+      giftById,
       fusionByBase,
       baseByFusion,
       appearancesOf,
-      glossaries: { elements, classes, subClasses, statScales },
+      glossaries: { elements, classes, subClasses, statScales, gifts },
     };
   },
 
@@ -261,6 +292,12 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     if (nick.en) char.nickname = nick;
     const subClass = r.SubClass && r.SubClass !== 'NONE' ? r.SubClass.toLowerCase() : undefined;
     if (subClass) char.subClass = subClass;
+    const seq = aux.chainSeqById.get(r.ID);
+    if (seq !== undefined) char.chainType = seq === '0' ? 'start' : seq === '3' ? 'finish' : 'join';
+    const gift = aux.giftById.get(r.ID);
+    if (gift) char.gift = slugAfter(gift, 'ITS_');
+    const cv = resolveText(aux.tchar, r.CVNameID);
+    if (cv.en) char.voiceActor = cv;
     const ee = aux.eeByChar.get(r.ID);
     if (ee) char.ee = ee;
     const sets = splitCsv(r.RecommandSetOptionID ?? '');
@@ -295,6 +332,12 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       Class: 'extracted',
       SubClass: 'extracted',
       skills: 'extracted', // réf vers le catalogue skills (généré à part)
+      Chain_Type: 'extracted', // ChainCombinationTemplet.Sequence
+      gift: 'extracted', // TrustTemplet.PresentTypeLike
+      VoiceActor: 'extracted', // CVNameID
+      VoiceActor_jp: 'extracted',
+      VoiceActor_kr: 'extracted',
+      VoiceActor_zh: 'extracted',
       // Core-fusion : lien base ↔ évolution (CharacterFusionTemplet).
       hasCoreFusion: 'extracted', // dérivable de coreFusion
       coreFusionId: 'extracted', // = coreFusion (sur la base)
@@ -310,13 +353,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       role_by_transcend: 'curated',
       limited: 'curated',
       // Donnée de jeu qu'on DEVRAIT extraire, pas encore.
-      Chain_Type: 'todo',
-      gift: 'todo',
-      VoiceActor: 'todo',
-      VoiceActor_jp: 'todo',
-      VoiceActor_kr: 'todo',
-      VoiceActor_zh: 'todo',
-      transcend: 'todo',
+      transcend: 'todo', // CharacterTranscendentTemplet (table partagée)
       fusionType: 'todo', // détail de progression (CharacterFusionLevelTemplet)
       fusionRequirements: 'todo',
       costPerLevel: 'todo',
