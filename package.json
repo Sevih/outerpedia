@@ -6,7 +6,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "pnpm clean && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -21,7 +21,9 @@
     "datagen:build": "tsx datagen/build.ts",
     "prepare": "lefthook install || true",
     "datagen:extract-entity": "tsx datagen/extractor/run.ts",
-    "datagen:seed-curated": "tsx datagen/curated/seed.ts"
+    "datagen:seed-curated": "tsx datagen/curated/seed.ts",
+    "clean": "node -e \"for(const f of ['.next'])require('fs').rmSync(f,{recursive:true,force:true})\"",
+    "clean:all": "node -e \"for(const f of ['.next','node_modules'])require('fs').rmSync(f,{recursive:true,force:true})\" && pnpm install"
   },
   "dependencies": {
     "next": "16.1.7",
