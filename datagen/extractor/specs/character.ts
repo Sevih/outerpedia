@@ -20,6 +20,16 @@ import type { Schema } from '../core/validate';
 /** Échelle d'affichage d'une stat. */
 export type StatScale = 'flat' | 'percent';
 
+/** Position dans l'attaque en chaîne. */
+export type ChainType = 'start' | 'join' | 'finish';
+
+/** BuffCreateType du buff de chaîne (`CHAIN_<rôle>_…`) → position. */
+const CHAIN_ROLE: Record<string, ChainType> = {
+  STARTER: 'start',
+  STRIKER: 'join',
+  FINISHER: 'finish',
+};
+
 /**
  * Colonnes de stats de CharacterTemplet (paires _Min/_Max) → slug + échelle.
  * `percent` = valeur per-mille (÷10 pour un %) ; `flat` = entier brut.
@@ -96,8 +106,8 @@ export interface Character {
   class: string;
   subClass?: string;
   race: string;
-  /** Position dans l'attaque en chaîne (ChainCombinationTemplet.Sequence). */
-  chainType?: 'start' | 'join' | 'finish';
+  /** Position dans l'attaque en chaîne (BuffTemplet `<id>_chain*`.BuffCreateType). */
+  chainType?: ChainType;
   /** Type de cadeau préféré (slug ; libellé dans le glossaire `gifts`). */
   gift?: string;
   /** Icône de portrait (FaceIconID). */
@@ -140,8 +150,8 @@ interface CharacterAux {
   tchar: Map<string, LangDict>;
   tsys: Map<string, LangDict>;
   eeByChar: Map<string, string>;
-  /** id perso → Sequence d'attaque en chaîne (ChainCombinationTemplet). */
-  chainSeqById: Map<string, string>;
+  /** id perso → position d'attaque en chaîne (BuffTemplet, buff `_chain`). */
+  chainTypeById: Map<string, ChainType>;
   /** id perso → type de cadeau préféré (TrustTemplet.PresentTypeLike). */
   giftById: Map<string, string>;
   /** ids dont le nickname s'affiche en préfixe (CharacterExtraTemplet). */
@@ -295,10 +305,15 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     const statScales: Record<string, StatScale> = {};
     for (const d of STAT_DEFS) statScales[d.slug] = d.scale;
 
-    // Attaque en chaîne : Sequence par perso (0=Start, 1/2=Join, 3=Finish).
-    const chainSeqById = new Map(
-      loadTable('ChainCombinationTemplet').map((r) => [r.ID, r.Sequence]),
-    );
+    // Attaque en chaîne : le buff `<id>_chain*` porte le rôle dans BuffCreateType
+    // (CHAIN_STARTER/STRIKER/FINISHER). Source fiable (≠ ChainCombination.Sequence).
+    const chainTypeById = new Map<string, ChainType>();
+    for (const b of loadTable('BuffTemplet')) {
+      const m = /^(\d+)_chain/.exec(b.BuffID ?? '');
+      if (!m || chainTypeById.has(m[1])) continue;
+      const role = /CHAIN_(STARTER|STRIKER|FINISHER)_/.exec(b.BuffCreateType ?? '');
+      if (role) chainTypeById.set(m[1], CHAIN_ROLE[role[1]]);
+    }
 
     // Cadeau préféré : TrustTemplet.PresentTypeLike (ITS_PRESENT_0X) + glossaire.
     const trust = loadTable('TrustTemplet');
@@ -347,7 +362,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       tchar,
       tsys,
       eeByChar,
-      chainSeqById,
+      chainTypeById,
       giftById,
       showNickNameIds,
       fusionByBase,
@@ -379,8 +394,8 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     if (aux.showNickNameIds.has(r.ID)) char.showNickName = true;
     const subClass = r.SubClass && r.SubClass !== 'NONE' ? r.SubClass.toLowerCase() : undefined;
     if (subClass) char.subClass = subClass;
-    const seq = aux.chainSeqById.get(r.ID);
-    if (seq !== undefined) char.chainType = seq === '0' ? 'start' : seq === '3' ? 'finish' : 'join';
+    const chainType = aux.chainTypeById.get(r.ID);
+    if (chainType) char.chainType = chainType;
     const gift = aux.giftById.get(r.ID);
     if (gift) char.gift = slugAfter(gift, 'ITS_');
     // Doubleur PAR LANGUE de doublage (en=VA anglais, jp=seiyuu, …), pas une
@@ -449,7 +464,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       Class: 'extracted',
       SubClass: 'extracted',
       skills: 'extracted', // réf vers le catalogue skills (généré à part)
-      Chain_Type: 'extracted', // ChainCombinationTemplet.Sequence
+      Chain_Type: 'extracted', // BuffTemplet <id>_chain*.BuffCreateType (CHAIN_role)
       gift: 'extracted', // TrustTemplet.PresentTypeLike
       VoiceActor: 'extracted', // CVNameID
       VoiceActor_jp: 'extracted',

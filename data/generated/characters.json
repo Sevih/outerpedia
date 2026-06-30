@@ -3458,7 +3458,7 @@
       "zh": "异国的死灵术士"
     },
     "subClass": "enchanter",
-    "chainType": "start",
+    "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
       "en": "Jeannie Tirado",
@@ -5663,7 +5663,7 @@
       "zh": "烈焰角斗士"
     },
     "subClass": "bruiser",
-    "chainType": "start",
+    "chainType": "join",
     "gift": "present_03",
     "ee": "2000071",
     "recommendedSets": ["2", "16", "7"],
@@ -9129,7 +9129,7 @@
       "zh": "雪山之眼"
     },
     "subClass": "tactician",
-    "chainType": "start",
+    "chainType": "join",
     "gift": "present_02",
     "ee": "2700003",
     "recommendedSets": ["13", "3", "5"],
@@ -9415,7 +9415,7 @@
       "zh": "决战的骑士团长"
     },
     "subClass": "sweeper",
-    "chainType": "join",
+    "chainType": "finish",
     "gift": "present_04",
     "ee": "2700037",
     "recommendedSets": ["3", "2", "7"],
@@ -9701,7 +9701,7 @@
       "zh": "圣科利德的大地"
     },
     "subClass": "vanguard",
-    "chainType": "start",
+    "chainType": "join",
     "gift": "present_05",
     "ee": "2700056",
     "recommendedSets": ["13", "1", "7"],
