@@ -296,8 +296,17 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     if (seq !== undefined) char.chainType = seq === '0' ? 'start' : seq === '3' ? 'finish' : 'join';
     const gift = aux.giftById.get(r.ID);
     if (gift) char.gift = slugAfter(gift, 'ITS_');
+    // Doubleur PAR LANGUE de doublage (en=VA anglais, jp=seiyuu, …), pas une
+    // traduction. Nouvel objet (ne pas partager le dict caché) + nettoyage du
+    // sentinelle « 0 » (= pas de doublage pour cette langue).
     const cv = resolveText(aux.tchar, r.CVNameID);
-    if (cv.en) char.voiceActor = cv;
+    const va: LangDict = {
+      en: cv.en === '0' ? '' : cv.en,
+      jp: cv.jp === '0' ? '' : cv.jp,
+      kr: cv.kr === '0' ? '' : cv.kr,
+      zh: cv.zh === '0' ? '' : cv.zh,
+    };
+    if (va.en || va.jp || va.kr || va.zh) char.voiceActor = va;
     const ee = aux.eeByChar.get(r.ID);
     if (ee) char.ee = ee;
     const sets = splitCsv(r.RecommandSetOptionID ?? '');
