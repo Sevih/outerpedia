@@ -82,6 +82,12 @@ export interface Character {
   recommendedSets?: string[];
   /** Stats de base par slug (valeurs brutes ; échelle dans `statScales`). */
   stats: Record<string, StatRange>;
+  /** Ids des apparences (skins) qui empruntent l'identité de ce perso. */
+  appearances?: string[];
+  /** Sur une base qui a une évolution : id de l'entité core-fusion. */
+  coreFusion?: string;
+  /** Sur une entité core-fusion : id du personnage de base dont elle dérive. */
+  originalCharacter?: string;
 }
 
 /** Glossaire générique slug → libellé localisé. */
@@ -100,6 +106,12 @@ interface CharacterAux {
   tchar: Map<string, LangDict>;
   tsys: Map<string, LangDict>;
   eeByChar: Map<string, string>;
+  /** base → id de sa core-fusion (CharacterFusionTemplet). */
+  fusionByBase: Map<string, string>;
+  /** core-fusion → id de sa base. */
+  baseByFusion: Map<string, string>;
+  /** id cible → ids des apparences qui l'empruntent. */
+  appearancesOf: Map<string, string[]>;
   glossaries: CharacterGlossaries;
 }
 
@@ -107,6 +119,15 @@ interface CharacterAux {
 function slugAfter(v: string | undefined, prefix: string): string {
   if (!v) return '';
   return (v.startsWith(prefix) ? v.slice(prefix.length) : v).toLowerCase();
+}
+
+/**
+ * Identité propre : le `NameID` d'une ligne est `<ID>_Name`. Les apparences
+ * (skins) empruntent au contraire le `NameID` de leur base (`2000005_Name` sur
+ * l'id `2010005`) → c'est ce qui les distingue d'un vrai perso/évolution.
+ */
+function ownIdentity(r: Row): boolean {
+  return r.NameID === `${r.ID}_Name`;
 }
 
 /** Extrait les stats non nulles (paires _Min/_Max) en valeurs brutes. */
@@ -141,6 +162,9 @@ const characterSchema: Schema = {
     ee: { kind: 'string', optional: true },
     recommendedSets: { kind: 'array', of: { kind: 'string' }, optional: true },
     stats: { kind: 'record', of: statRangeSchema },
+    appearances: { kind: 'array', of: { kind: 'string' }, optional: true },
+    coreFusion: { kind: 'string', optional: true },
+    originalCharacter: { kind: 'string', optional: true },
   },
 };
 
@@ -148,7 +172,14 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
   id: 'character',
 
   select() {
-    return loadTable('CharacterTemplet').filter((r) => r.Type === 'CT_PC');
+    // Entités réelles uniquement : bases visibles (roster) + core-fusions.
+    // Les apparences (skins) empruntent une identité → exclues (cf. ownIdentity).
+    const fusionIds = new Set(loadTable('CharacterFusionTemplet').map((r) => r.ChangeCharID));
+    return loadTable('CharacterTemplet').filter(
+      (r) =>
+        r.Type === 'CT_PC' &&
+        ((ownIdentity(r) && r.ShowMainPage === 'true') || fusionIds.has(r.ID)),
+    );
   },
 
   prepare(rows) {
@@ -185,7 +216,30 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     const statScales: Record<string, StatScale> = {};
     for (const d of STAT_DEFS) statScales[d.slug] = d.scale;
 
-    return { tchar, tsys, eeByChar, glossaries: { elements, classes, subClasses, statScales } };
+    // Liens core-fusion (table dédiée) : base ↔ évolution.
+    const fusion = loadTable('CharacterFusionTemplet');
+    const fusionByBase = new Map(fusion.map((f) => [f.CharacterID, f.ChangeCharID]));
+    const baseByFusion = new Map(fusion.map((f) => [f.ChangeCharID, f.CharacterID]));
+
+    // Apparences : toute ligne CT_PC sans identité propre est un skin de sa cible.
+    const appearancesOf = new Map<string, string[]>();
+    for (const r of loadTable('CharacterTemplet')) {
+      if (r.Type !== 'CT_PC' || ownIdentity(r)) continue;
+      const target = r.NameID.replace(/_Name$/, '');
+      const list = appearancesOf.get(target);
+      if (list) list.push(r.ID);
+      else appearancesOf.set(target, [r.ID]);
+    }
+
+    return {
+      tchar,
+      tsys,
+      eeByChar,
+      fusionByBase,
+      baseByFusion,
+      appearancesOf,
+      glossaries: { elements, classes, subClasses, statScales },
+    };
   },
 
   map(r, aux) {
@@ -212,6 +266,13 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     const sets = splitCsv(r.RecommandSetOptionID ?? '');
     if (sets.length) char.recommendedSets = sets;
 
+    const appearances = aux.appearancesOf.get(r.ID);
+    if (appearances?.length) char.appearances = appearances;
+    const fusion = aux.fusionByBase.get(r.ID);
+    if (fusion) char.coreFusion = fusion;
+    const base = aux.baseByFusion.get(r.ID);
+    if (base) char.originalCharacter = base;
+
     return char;
   },
 
@@ -234,12 +295,20 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       Class: 'extracted',
       SubClass: 'extracted',
       skills: 'extracted', // réf vers le catalogue skills (généré à part)
+      // Core-fusion : lien base ↔ évolution (CharacterFusionTemplet).
+      hasCoreFusion: 'extracted', // dérivable de coreFusion
+      coreFusionId: 'extracted', // = coreFusion (sur la base)
+      originalCharacter: 'extracted', // = originalCharacter (sur la fusion)
       // Connaissance humaine → data/curated, pas l'extraction.
       rank: 'curated',
       role: 'curated',
       tags: 'curated',
       skill_priority: 'curated',
       video: 'curated',
+      rank_pvp: 'curated',
+      rank_by_transcend: 'curated',
+      role_by_transcend: 'curated',
+      limited: 'curated',
       // Donnée de jeu qu'on DEVRAIT extraire, pas encore.
       Chain_Type: 'todo',
       gift: 'todo',
@@ -248,6 +317,9 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       VoiceActor_kr: 'todo',
       VoiceActor_zh: 'todo',
       transcend: 'todo',
+      fusionType: 'todo', // détail de progression (CharacterFusionLevelTemplet)
+      fusionRequirements: 'todo',
+      costPerLevel: 'todo',
     },
   },
 };
