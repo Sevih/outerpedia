@@ -371,8 +371,9 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       rank_by_transcend: 'curated',
       role_by_transcend: 'curated',
       limited: 'curated',
+      // Extrait dans un dataset partagé (transcend.json), pas par perso.
+      transcend: 'extracted', // CharacterTranscendentTemplet → byStar + overrides
       // Donnée de jeu qu'on DEVRAIT extraire, pas encore.
-      transcend: 'todo', // CharacterTranscendentTemplet (table partagée)
       fusionType: 'todo', // détail de progression (CharacterFusionLevelTemplet)
       fusionRequirements: 'todo',
       costPerLevel: 'todo',

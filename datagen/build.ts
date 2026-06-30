@@ -20,8 +20,10 @@ import type {
   Glossaries,
   ItemsFile,
   SkillsFile,
+  TranscendFile,
 } from './contracts';
 import { buildCharacters } from './extractor/specs/character';
+import { buildTranscend } from './extractor/transcend';
 import { buildEquipment } from './generators/equipment';
 import { buildItems } from './generators/items';
 import { buildSkills } from './generators/skills';
@@ -43,6 +45,7 @@ function main(): void {
 
   // 1) Entités.
   const characters = buildCharacters();
+  const transcend = buildTranscend();
   const { skills } = buildSkills();
   const equipment = buildEquipment();
   const items = buildItems();
@@ -61,10 +64,12 @@ function main(): void {
 
   // 3) Écriture (types vérifiés contre les contrats).
   const charactersFile: CharactersFile = characters.characters;
+  const transcendFile: TranscendFile = transcend;
   const skillsFile: SkillsFile = skills;
   const itemsFile: ItemsFile = items;
 
   writeJson('characters.json', charactersFile);
+  writeJson('transcend.json', transcendFile);
   writeJson('skills.json', skillsFile);
   writeJson('items.json', itemsFile);
   writeJson('glossaries.json', glossaries);

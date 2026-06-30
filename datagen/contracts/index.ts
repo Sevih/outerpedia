@@ -20,6 +20,7 @@ export type {
 } from '../lib/effects';
 export type { SkillBuffVars } from '../lib/buff';
 export type { Character, StatRange } from '../extractor/specs/character';
+export type { TranscendStep, TranscendData } from '../extractor/transcend';
 export type { Skill, SkillLevel } from '../generators/skills';
 export type { Item } from '../generators/items';
 export type {
@@ -39,6 +40,7 @@ export type {
 import type { LangDict } from '../lib/lang';
 import type { StatusEffect } from '../lib/effects';
 import type { Character } from '../extractor/specs/character';
+import type { TranscendData } from '../extractor/transcend';
 import type { Skill } from '../generators/skills';
 import type { Item } from '../generators/items';
 import type {
@@ -86,6 +88,8 @@ export interface Glossaries {
 
 /** `data/generated/characters.json` */
 export type CharactersFile = Record<string, Character>;
+/** `data/generated/transcend.json` (barème partagé + overrides) */
+export type TranscendFile = TranscendData;
 /** `data/generated/skills.json` */
 export type SkillsFile = Record<string, Skill>;
 /** `data/generated/items.json` */
