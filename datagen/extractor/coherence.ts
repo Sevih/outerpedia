@@ -147,6 +147,11 @@ function categoryCoverage() {
     }
   })();
 
+  // Curé : videos + pros-cons (data/curated, seedé depuis legacy par slug).
+  const curated = tryLoad('data/curated/characters.json') as Record<string, Dict>;
+  const curVideos = Object.values(curated).filter((c) => c.videos).length;
+  const curPros = Object.values(curated).filter((c) => c.prosCons).length;
+
   // Skins : couverture + cohérence vs V2 (character-skins.json).
   const v3Costumes = Object.values(C).filter((c) => Array.isArray(c.costumes)).length;
   let skinOk = 0,
@@ -205,10 +210,18 @@ function categoryCoverage() {
     {
       name: 'videos (liste youtube)',
       v2Count: Object.keys(videos).length,
-      status: '✍️ CURÉ — V3 a un champ video simple',
+      status: `✅ CURÉ — ${curVideos} dans data/curated (seedé)`,
     },
-    { name: 'pros-cons', v2Count: Object.keys(prosCons).length, status: '✍️ CURÉ — manquant' },
-    { name: 'reco (gear)', v2Count: recoDir, status: '✍️ CURÉ — manquant' },
+    {
+      name: 'pros-cons',
+      v2Count: Object.keys(prosCons).length,
+      status: `✅ CURÉ — ${curPros} dans data/curated (seedé)`,
+    },
+    {
+      name: 'reco (gear)',
+      v2Count: recoDir,
+      status: '🟠 CURÉ — différé (système codé, à traiter avec le gear)',
+    },
     {
       name: 'skill.offensive',
       v2Count: offSeen,

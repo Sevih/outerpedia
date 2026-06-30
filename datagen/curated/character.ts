@@ -23,6 +23,23 @@ export interface SkillPriority {
   ultimate?: number;
 }
 
+/** Texte curé localisé (langues de jeu + fr communautaire), partiel. */
+export type LocalizedText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
+
+/** Référence vidéo curée (riche). */
+export interface VideoRef {
+  platform: string;
+  id: string;
+  title?: string;
+  author?: string;
+}
+
+/** Points forts / faibles curés (texte localisé, placeholders de buff conservés). */
+export interface ProsCons {
+  pros?: LocalizedText[];
+  cons?: LocalizedText[];
+}
+
 /** Contenu curé d'un personnage (tout optionnel : on ne stocke que le connu). */
 export interface CharacterCurated {
   /** Tier PvE (S, A, B…). */
@@ -43,6 +60,10 @@ export interface CharacterCurated {
   roleByTranscend?: Record<string, string>;
   /** Personnage à obtention limitée. */
   limited?: boolean;
+  /** Vidéos (liste curée, riche : titre/auteur). */
+  videos?: VideoRef[];
+  /** Points forts / faibles. */
+  prosCons?: ProsCons;
 }
 
 export const characterCuratedSchema: Schema = {
@@ -65,6 +86,27 @@ export const characterCuratedSchema: Schema = {
     rankByTranscend: { kind: 'record', of: { kind: 'string' }, optional: true },
     roleByTranscend: { kind: 'record', of: { kind: 'string' }, optional: true },
     limited: { kind: 'boolean', optional: true },
+    videos: {
+      kind: 'array',
+      optional: true,
+      of: {
+        kind: 'object',
+        fields: {
+          platform: { kind: 'string' },
+          id: { kind: 'string' },
+          title: { kind: 'string', optional: true },
+          author: { kind: 'string', optional: true },
+        },
+      },
+    },
+    prosCons: {
+      kind: 'object',
+      optional: true,
+      fields: {
+        pros: { kind: 'array', optional: true, of: { kind: 'record', of: { kind: 'string' } } },
+        cons: { kind: 'array', optional: true, of: { kind: 'record', of: { kind: 'string' } } },
+      },
+    },
   },
 };
 
@@ -82,6 +124,8 @@ function compact(c: CharacterCurated): CharacterCurated {
   if (c.roleByTranscend && Object.keys(c.roleByTranscend).length)
     out.roleByTranscend = c.roleByTranscend;
   if (c.limited) out.limited = c.limited;
+  if (c.videos?.length) out.videos = c.videos;
+  if (c.prosCons && (c.prosCons.pros?.length || c.prosCons.cons?.length)) out.prosCons = c.prosCons;
   return out;
 }
 
@@ -124,6 +168,35 @@ export function seedFromLegacy(
     const issues = validate(curated, characterCuratedSchema, `curated[${id}]`);
     if (issues.length) throw new Error(`${issues[0].path} — ${issues[0].message}`);
     if (Object.keys(curated).length) out[id] = curated;
+  }
+
+  // videos + pros-cons : fichiers séparés, clés par SLUG → résoudre en ID.
+  const root = resolve(legacyDir, '..'); // data/legacy
+  const readJson = (p: string): Record<string, unknown> => {
+    try {
+      return JSON.parse(readFileSync(p, 'utf8')) as Record<string, unknown>;
+    } catch {
+      return {};
+    }
+  };
+  const slugToId = readJson(resolve(root, 'generated/characters-slug-to-id.json')) as Record<
+    string,
+    string
+  >;
+  const merge = (id: string, patch: Partial<CharacterCurated>): void => {
+    const cur = compact({ ...(out[id] ?? {}), ...patch });
+    const issues = validate(cur, characterCuratedSchema, `curated[${id}]`);
+    if (issues.length) throw new Error(`${issues[0].path} — ${issues[0].message}`);
+    out[id] = cur;
+  };
+  for (const [slug, list] of Object.entries(readJson(resolve(root, 'character-videos.json')))) {
+    const id = slugToId[slug];
+    if (id) merge(id, { videos: list as VideoRef[] });
+  }
+  for (const [slug, pc] of Object.entries(readJson(resolve(root, 'pros-cons.json')))) {
+    const id = slugToId[slug];
+    const p = pc as ProsCons;
+    if (id) merge(id, { prosCons: { pros: p.pros, cons: p.cons } });
   }
   return out;
 }

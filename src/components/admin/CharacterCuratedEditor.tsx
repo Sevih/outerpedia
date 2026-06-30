@@ -39,6 +39,9 @@ export function CharacterCuratedEditor({ id, initial }: { id: string; initial: C
 
   function build(): CharacterCurated | { error: string } {
     const c: CharacterCurated = {};
+    // Champs pas encore éditables ici : préservés tels quels (évite la perte).
+    if (initial.videos) c.videos = initial.videos;
+    if (initial.prosCons) c.prosCons = initial.prosCons;
     if (rank.trim()) c.rank = rank.trim();
     if (rankPvp.trim()) c.rankPvp = rankPvp.trim();
     if (role) c.role = role as CuratedRole;
@@ -182,6 +185,15 @@ export function CharacterCuratedEditor({ id, initial }: { id: string; initial: C
           />
         </div>
       </section>
+
+      {(initial.videos || initial.prosCons) && (
+        <p className="text-content-subtle text-xs">
+          Contenu curé additionnel préservé (édition à venir) :{' '}
+          {initial.videos ? `${initial.videos.length} vidéo(s)` : ''}
+          {initial.videos && initial.prosCons ? ' · ' : ''}
+          {initial.prosCons ? 'pros/cons' : ''}
+        </p>
+      )}
 
       <div className="flex items-center gap-3">
         <button
