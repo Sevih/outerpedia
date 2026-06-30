@@ -1,0 +1,28 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStat": "ATK%/HP%"
+      },
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%/HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Dies Irae",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$sdps",
+    "Note": "PvP : {I-T/Mage's Charm}",
+    "Talisman": [
+      "$elemcritAP"
+    ]
+  }
+}

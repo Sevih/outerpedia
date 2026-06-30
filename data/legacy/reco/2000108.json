@@ -1,0 +1,54 @@
+{
+  "PvE": {
+    "Weapon": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Obsidian Oath",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "PvP": {
+    "Weapon": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "i2sw2"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  }
+}

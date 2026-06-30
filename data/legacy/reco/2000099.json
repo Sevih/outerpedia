@@ -1,0 +1,92 @@
+{
+  "Life Swift": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "hp2sw2"
+    ],
+    "SubstatPrio": "HP>CHC>CHD>SPD",
+    "Note": "",
+    "Talisman": [
+      "$rs"
+    ]
+  },
+  "Life Augment": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "hp2ag2"
+    ],
+    "SubstatPrio": "HP>CHC>CHD>SPD",
+    "Note": "",
+    "Talisman": [
+      "$rs"
+    ]
+  },
+  "Swift Augment": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "ag2sw2"
+    ],
+    "SubstatPrio": "HP>CHC>CHD>SPD",
+    "Note": "",
+    "Talisman": [
+      "$rs"
+    ]
+  }
+}

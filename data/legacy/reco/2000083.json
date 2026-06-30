@@ -1,0 +1,92 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Legacy of the Dream",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Starlight Road",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Swift Immu": {
+    "Weapon": [
+      {
+        "name": "Legacy of the Dream",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Starlight Road",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "i2sw2"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Swift Life": {
+    "Weapon": [
+      {
+        "name": "Legacy of the Dream",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Starlight Road",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "hp2sw2"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  }
+}

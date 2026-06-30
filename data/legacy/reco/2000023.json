@@ -1,0 +1,62 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Saint's Ring",
+        "mainStat": "DMG RED%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Swift Immu": {
+    "Weapon": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Saint's Ring",
+        "mainStat": "DMG RED%"
+      }
+    ],
+    "Set": [
+      "i2sw2"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  }
+}

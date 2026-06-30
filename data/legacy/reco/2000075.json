@@ -1,0 +1,54 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$sdps",
+    "Note": "PvP : {I-T/Mage's Charm}",
+    "Talisman": [
+      "$elemcritAP"
+    ]
+  },
+  "Augment Immune": {
+    "Weapon": [
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "ag2i2"
+    ],
+    "SubstatPrio": "$sdps",
+    "Note": "PvP : {I-T/Mage's Charm}",
+    "Talisman": [
+      "$elemcritAP"
+    ]
+  }
+}

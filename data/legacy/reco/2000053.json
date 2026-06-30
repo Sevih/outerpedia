@@ -1,0 +1,46 @@
+{
+  "Counter": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "ct4"
+    ],
+    "SubstatPrio": "ATK>CHC>CHD>HP",
+    "Note": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Revenge": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "r4"
+    ],
+    "SubstatPrio": "ATK>CHC>CHD>HP",
+    "Note": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

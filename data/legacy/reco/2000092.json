@@ -1,0 +1,84 @@
+{
+  "PvE - Speed": {
+    "Weapon": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%/HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Burning Soul",
+        "mainStat": "EFF"
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStat": "EFF"
+      },
+      {
+        "name": "Steel Necklace",
+        "mainStat": "EFF"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "EFF>SPD>CHC",
+    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "Talisman": [
+      "$CPplusVang"
+    ]
+  },
+  "PvE - Effectiveness": {
+    "Weapon": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%/HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Burning Soul",
+        "mainStat": "EFF"
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStat": "EFF"
+      },
+      {
+        "name": "Steel Necklace",
+        "mainStat": "EFF"
+      }
+    ],
+    "Set": [
+      "eff4"
+    ],
+    "SubstatPrio": "EFF>SPD>CHC",
+    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "Talisman": [
+      "$CPplusVang"
+    ]
+  },
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%/HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$speedEff",
+    "Note": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+    "Talisman": [
+      "$msv"
+    ]
+  }
+}

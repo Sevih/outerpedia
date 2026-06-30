@@ -1,0 +1,179 @@
+{
+  "Attack": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Gorgon's Vanity [Mage]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      "a4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Critical Strike": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Gorgon's Vanity [Mage]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      "chd4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Gorgon's Vanity [Mage]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Pen combos": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Gorgon's Vanity [Mage]",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      "p2s2",
+      "p2a2",
+      "p2ag2",
+      "p2chd2"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Pen": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      "p4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

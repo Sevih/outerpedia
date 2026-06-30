@@ -1,0 +1,80 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStat": "ATK%"
+      }      
+    ],
+    "Amulet": [
+      {
+        "name": "Glorious Radiance Legacy",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "ATK>SPD>HP",
+    "Note": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}",
+    "Talisman": [
+      "$s"
+    ]
+  },
+  "Counter": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStat": "ATK%"
+      }  
+    ],
+    "Amulet": [
+      {
+        "name": "Glorious Radiance Legacy",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "ct4"
+    ],
+    "SubstatPrio": "ATK>SPD>HP",
+    "Note": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}",
+    "Talisman": [
+      "$s"
+    ]
+  },
+  "Scaling": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStat": "ATK%"
+      }  
+    ],
+    "Amulet": [
+      {
+        "name": "Glorious Radiance Legacy",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "ct2sw2"
+    ],
+    "SubstatPrio": "ATK>SPD>HP",
+    "Note": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}",
+    "Talisman": [
+      "$s"
+    ]
+  }
+}

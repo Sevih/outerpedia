@@ -1,0 +1,46 @@
+{
+  "Speed PVE": {
+    "Weapon": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Absolute Music",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$speedEff",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Speed PVP": {
+    "Weapon": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$speedEff",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

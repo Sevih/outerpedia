@@ -1,0 +1,80 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$sdps",
+    "Note": "Clock up if you want Turn cycling Bleed Team",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "High Crit": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "chd4"
+    ],
+    "SubstatPrio": "$sdps",
+    "Note": "Clock up if you want Turn cycling Bleed Team",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Penetration": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "p4"
+    ],
+    "SubstatPrio": "$sdps",
+    "Note": "Clock up if you want Turn cycling Bleed Team",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

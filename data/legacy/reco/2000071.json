@@ -1,0 +1,106 @@
+{
+  "Augment Swift": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      "ag2sw2"
+    ],
+    "SubstatPrio": "$dpsDef",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Augment Defense": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      "ag2def2"
+    ],
+    "SubstatPrio": "$dpsDef",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Swift Immu": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      "i2sw2"
+    ],
+    "SubstatPrio": "$dpsDef",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Counter": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      "ct4"
+    ],
+    "SubstatPrio": "$dpsDef",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

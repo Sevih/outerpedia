@@ -1,0 +1,92 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "A Prima Vista",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "PvP: {I-T/Vanguard's Charm}",
+    "Talisman": [
+      "$CPplusVang"
+    ]
+  },
+  "Revenge": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "A Prima Vista",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "r4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "PvP: {I-T/Vanguard's Charm}",
+    "Talisman": [
+      "$CPplusVang"
+    ]
+  },
+  "Swift Immune": {
+    "Weapon": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "A Prima Vista",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "i2sw2"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "PvP: {I-T/Vanguard's Charm}",
+    "Talisman": [
+      "$CPplusVang"
+    ]
+  }
+}

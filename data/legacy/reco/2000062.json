@@ -1,0 +1,54 @@
+{
+  "Counter": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "A Prima Vista",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "ct4"
+    ],
+    "SubstatPrio": "$sdps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "A Prima Vista",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$sdps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

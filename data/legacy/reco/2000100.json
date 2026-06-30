@@ -1,0 +1,116 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Obsidian Oath",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Briareos's Ambition [Healer]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Speed Swift": {
+    "Weapon": [
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Obsidian Oath",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Briareos's Ambition [Healer]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "s2sw2"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Immune Swift": {
+    "Weapon": [
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Obsidian Oath",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Briareos's Ambition [Healer]",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "i2sw2"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  }
+}

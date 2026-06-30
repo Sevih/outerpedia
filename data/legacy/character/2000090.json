@@ -1,0 +1,507 @@
+{
+  "ID": "2000090",
+  "Fullname": "Gnosis Dahlia",
+  "Fullname_jp": "グノーシス ダリア",
+  "Fullname_kr": "그노시스 달리아",
+  "Fullname_zh": "诺希斯 达利娅",
+  "Rarity": 3,
+  "Element": "Dark",
+  "Class": "Striker",
+  "SubClass": "Attacker",
+  "rank": "A",
+  "rank_pvp": "S",
+  "role": "dps",
+  "limited": true,
+  "rank_by_transcend": {
+    "3": "B",
+    "4": "A",
+    "5": "A",
+    "6": "A"
+  },
+  "tags": [
+    "limited",
+    "ignore-defense"
+  ],
+  "skill_priority": {
+    "First": {
+      "prio": 2
+    },
+    "Second": {
+      "prio": 3
+    },
+    "Ultimate": {
+      "prio": 1
+    }
+  },
+  "Chain_Type": "Finish",
+  "gift": "Magic Tool",
+  "video": "zwJUawe5X0g",
+  "VoiceActor": "VA. Amber Lee Connors",
+  "VoiceActor_jp": "CV. 山崎はるか",
+  "VoiceActor_kr": "CV. 강새봄",
+  "VoiceActor_zh": "CV. 山崎遥",
+  "transcend": {
+    "3": "ATK DEF HP +10%\nBurst Level 2 Unlocked",
+    "6": "ATK DEF HP +30%\nPermanently holds Domain of Arrogance\nDMG dealt to boss increases +50%",
+    "4_1": "ATK DEF HP +16%\nWhen Terminal Winter defeats an enemy, reduces the cooldown of Terminal Winter by 2 turns \n+8% Ally Team Critical Damage\n+1 Chain Passive Weakness Gauge damage",
+    "4_2": "ATK DEF HP +19%",
+    "5_1": "ATK DEF HP +22%\nBurst Level 3 Unlocked\nAP +50 upon entering\nRecovers own Health by 10% when Cold-Blooded Torture is used (including Burst)",
+    "5_2": "ATK DEF HP +25%",
+    "5_3": "ATK DEF HP +28%",
+    "3_jp": "ATK DEF HP +10%\nバーストスキル2段階解禁",
+    "4_1_jp": "ATK DEF HP +16%\n【フィンブルウィンター】で敵を倒した時、\n当該スキルのターンを2ターン減少\n味方の会心ダメージ+8%\nチェーンパッシブのWGダメージ+1",
+    "5_1_jp": "ATK DEF HP +22%\nバースト3段階解放\n戦闘開始時、AP+50\n【ルースレストーチャー】使用時、自分のHP 10%回復（バースト含む）",
+    "6_jp": "ATK DEF HP +30%\n【傲慢の領域】常時付与\nボス対象のダメージ+50%",
+    "3_kr": "ATK DEF HP +10%\n버스트 2단계 해금",
+    "4_1_kr": "ATK DEF HP +16%\n최후의 겨울로 적 처치 시 해당 스킬 쿨타임 -2턴\n아군 치명 피해 +8%\n체인 패시브의 WG 감소량 +1",
+    "5_1_kr": "ATK DEF HP +22%\n버스트 3단계 해금\n입장 시 AP +50\n냉혹한 고문 사용 시 자신 체력 10% 회복(버스트 포함)",
+    "6_kr": "ATK DEF HP +30%\n오만의 영역 상시 보유\n보스 대상 피해 증가 +50%",
+    "3_zh": "ATK DEF HP +10%\n解锁2阶爆发",
+    "4_1_zh": "ATK DEF HP +16%\n使用末日凛冬击杀敌人时，\n该技能冷却时间-2回合\n友军暴击伤害+8%\n连携被动效果的WG降低量+1",
+    "5_1_zh": "ATK DEF HP +22%\n爆发第3阶段解锁\n进入时AP+50\n使用严刑拷打时恢复自身生命值10%（含爆发）",
+    "6_zh": "ATK DEF HP +30%\n永久持有傲慢领域\n对首领造成的伤害增加+50%"
+  },
+  "skills": {
+    "SKT_FIRST": {
+      "NameIDSymbol": "9001",
+      "IconName": "Skill_First_2000090",
+      "SkillType": "SKT_FIRST",
+      "name": "Cold-Blooded Torture",
+      "name_jp": "ルースレストーチャー",
+      "name_kr": "냉혹한 고문",
+      "name_zh": "严刑拷打",
+      "true_desc_levels": {
+        "1": "Attacks an enemy.\\nHas a <color=#28d9ed>15%</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>20%</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack.",
+        "2": "Attacks an enemy.\\nHas a <color=#28d9ed>15%</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>20%</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack.",
+        "3": "Attacks an enemy.\\nHas a <color=#28d9ed>25%</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>20%</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack.",
+        "4": "Attacks an enemy.\\nHas a <color=#28d9ed>25%</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>20%</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack.",
+        "5": "Attacks an enemy.\\nHas a <color=#28d9ed>35%</color> chance to activate an <color=#28d9ed>enhanced attack</color>. After activating an enhanced attack, increases <color=#28d9ed>Priority</color> of <color=#28d9ed>all allies</color> by <color=#28d9ed>20%</color>.\\nWhen granted <color=#28d9ed>Hubris's Dominion</color>, doubles activation chance of activating an enhanced attack.",
+        "1_jp": "敵単体にダメージを与える。\\n<color=#28d9ed>15%</color>の確率で、<color=#28d9ed>強化攻撃</color>が発生する。強化攻撃後、<color=#28d9ed>味方全体</color>の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。\\n<color=#28d9ed>【傲慢の領域】</color>がある場合、強化攻撃の発生率が2倍になる。",
+        "2_jp": "敵単体にダメージを与える。\\n<color=#28d9ed>15%</color>の確率で、<color=#28d9ed>強化攻撃</color>が発生する。強化攻撃後、<color=#28d9ed>味方全体</color>の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。\\n<color=#28d9ed>【傲慢の領域】</color>がある場合、強化攻撃の発生率が2倍になる。",
+        "3_jp": "敵単体にダメージを与える。\\n<color=#28d9ed>25%</color>の確率で、<color=#28d9ed>強化攻撃</color>が発生する。強化攻撃後、<color=#28d9ed>味方全体</color>の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。\\n<color=#28d9ed>【傲慢の領域】</color>がある場合、強化攻撃の発生率が2倍になる。",
+        "4_jp": "敵単体にダメージを与える。\\n<color=#28d9ed>25%</color>の確率で、<color=#28d9ed>強化攻撃</color>が発生する。強化攻撃後、<color=#28d9ed>味方全体</color>の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。\\n<color=#28d9ed>【傲慢の領域】</color>がある場合、強化攻撃の発生率が2倍になる。",
+        "5_jp": "敵単体にダメージを与える。\\n<color=#28d9ed>35%</color>の確率で、<color=#28d9ed>強化攻撃</color>が発生する。強化攻撃後、<color=#28d9ed>味方全体</color>の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>UPさせる。\\n<color=#28d9ed>【傲慢の領域】</color>がある場合、強化攻撃の発生率が2倍になる。",
+        "1_kr": "적을 공격합니다.\\n<color=#28d9ed>15%</color> 확률로 <color=#28d9ed>강화 공격</color>이 발생합니다. 강화 공격 후에는 <color=#28d9ed>아군 전체</color>의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.\\n<color=#28d9ed>오만의 영역</color> 보유 시 강화 공격의 발동 확률이 2배가 됩니다.",
+        "2_kr": "적을 공격합니다.\\n<color=#28d9ed>15%</color> 확률로 <color=#28d9ed>강화 공격</color>이 발생합니다. 강화 공격 후에는 <color=#28d9ed>아군 전체</color>의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.\\n<color=#28d9ed>오만의 영역</color> 보유 시 강화 공격의 발동 확률이 2배가 됩니다.",
+        "3_kr": "적을 공격합니다.\\n<color=#28d9ed>25%</color> 확률로 <color=#28d9ed>강화 공격</color>이 발생합니다. 강화 공격 후에는 <color=#28d9ed>아군 전체</color>의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.\\n<color=#28d9ed>오만의 영역</color> 보유 시 강화 공격의 발동 확률이 2배가 됩니다.",
+        "4_kr": "적을 공격합니다.\\n<color=#28d9ed>25%</color> 확률로 <color=#28d9ed>강화 공격</color>이 발생합니다. 강화 공격 후에는 <color=#28d9ed>아군 전체</color>의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.\\n<color=#28d9ed>오만의 영역</color> 보유 시 강화 공격의 발동 확률이 2배가 됩니다.",
+        "5_kr": "적을 공격합니다.\\n<color=#28d9ed>35%</color> 확률로 <color=#28d9ed>강화 공격</color>이 발생합니다. 강화 공격 후에는 <color=#28d9ed>아군 전체</color>의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.\\n<color=#28d9ed>오만의 영역</color> 보유 시 강화 공격의 발동 확률이 2배가 됩니다.",
+        "1_zh": "攻击敌人。\\n<color=#28d9ed>有15%</color>的几率触发<color=#28d9ed>强化攻击</color>。强化攻击后，<color=#28d9ed>全体友军</color>的<color=#28d9ed>行动值</color>提升<color=#28d9ed>20%</color>。\\n附带<color=#28d9ed>傲慢领域</color>时，强化攻击的触发几率为2倍。",
+        "2_zh": "攻击敌人。\\n<color=#28d9ed>有15%</color>的几率触发<color=#28d9ed>强化攻击</color>。强化攻击后，<color=#28d9ed>全体友军</color>的<color=#28d9ed>行动值</color>提升<color=#28d9ed>20%</color>。\\n附带<color=#28d9ed>傲慢领域</color>时，强化攻击的触发几率为2倍。",
+        "3_zh": "攻击敌人。\\n<color=#28d9ed>有25%</color>的几率触发<color=#28d9ed>强化攻击</color>。强化攻击后，<color=#28d9ed>全体友军</color>的<color=#28d9ed>行动值</color>提升<color=#28d9ed>20%</color>。\\n附带<color=#28d9ed>傲慢领域</color>时，强化攻击的触发几率为2倍。",
+        "4_zh": "攻击敌人。\\n<color=#28d9ed>有25%</color>的几率触发<color=#28d9ed>强化攻击</color>。强化攻击后，<color=#28d9ed>全体友军</color>的<color=#28d9ed>行动值</color>提升<color=#28d9ed>20%</color>。\\n附带<color=#28d9ed>傲慢领域</color>时，强化攻击的触发几率为2倍。",
+        "5_zh": "攻击敌人。\\n<color=#28d9ed>有35%</color>的几率触发<color=#28d9ed>强化攻击</color>。强化攻击后，<color=#28d9ed>全体友军</color>的<color=#28d9ed>行动值</color>提升<color=#28d9ed>20%</color>。\\n附带<color=#28d9ed>傲慢领域</color>时，强化攻击的触发几率为2倍。"
+      },
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% effect chance"
+        ],
+        "4": [
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "+10% effect chance",
+          "+10% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "3_jp": [
+          "効果発生率+10%"
+        ],
+        "4_jp": [
+          "WGダメージ+1"
+        ],
+        "5_jp": [
+          "効果発生率+10%",
+          "ダメージ+10%"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_kr": [
+          "효과 발동 확률 +10%"
+        ],
+        "4_kr": [
+          "WG 감소량 +1"
+        ],
+        "5_kr": [
+          "효과 발동 확률 +10%",
+          "피해량 +10%"
+        ],
+        "2_zh": [
+          "伤害量+10%",
+          "WG降低量+1"
+        ],
+        "3_zh": [
+          "效果触发几率+10%"
+        ],
+        "4_zh": [
+          "WG降低量+1"
+        ],
+        "5_zh": [
+          "效果触发几率+10%",
+          "伤害量+10%"
+        ]
+      },
+      "wgr": 1,
+      "cd": null,
+      "buff": [
+        "BT_ACTION_GAUGE",
+        "BT_ADDITIVE_TURN",
+        "BT_COOL3_CHARGE"
+      ],
+      "debuff": [],
+      "offensive": true,
+      "target": "mono",
+      "burnEffect": {
+        "SKT_BURST_1": {
+          "effect": "Activates an enhanced attack\\nIncreases Penetration by 30%",
+          "effect_jp": "強化攻撃が確定で発動\\n貫通力30%UP",
+          "effect_kr": "강화 공격 확정 발생\\n관통력 30% 증가",
+          "effect_zh": "强化攻击必定触发\\n穿透力提升30%",
+          "cost": 80,
+          "level": 1,
+          "offensive": true,
+          "target": "mono"
+        },
+        "SKT_BURST_2": {
+          "effect": "Increases damage",
+          "effect_jp": "ダメージUP",
+          "effect_kr": "피해 증가",
+          "effect_zh": "伤害提升",
+          "cost": 120,
+          "level": 2,
+          "offensive": true,
+          "target": "mono"
+        },
+        "SKT_BURST_3": {
+          "effect": "Extra Turn\\nTerminal Winter Cooldown Reset",
+          "effect_jp": "追加ターン\\n【フィンブルウィンター】スキルターン初期化",
+          "effect_kr": "추가 턴\\n최후의 겨울 쿨타임 초기화",
+          "effect_zh": "额外回合\\n末日凛冬冷却时间重置",
+          "cost": 160,
+          "level": 3,
+          "offensive": true,
+          "target": "mono"
+        }
+      }
+    },
+    "SKT_SECOND": {
+      "NameIDSymbol": "9002",
+      "IconName": "Skill_Second_2000090",
+      "SkillType": "SKT_SECOND",
+      "name": "Untouchable One",
+      "name_jp": "アンタッチャブル・ワン",
+      "name_kr": "언터쳐블 원",
+      "name_zh": "触不可及",
+      "true_desc_levels": {
+        "1": "(Passive Effect) When hit, grants the caster a Barrier proportional to the caster's Attack for <color=#28d9ed>1 turn</color> and increases the caster's Priority by <color=#28d9ed>10%</color>. While holding <color=#28d9ed>Hubris's Dominion</color>, damage suffered in a single attack does not exceed <color=#28d9ed>95%</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks / Excludes DoT)\\n\\n(Triggered Effect) Activates an enhanced <color=#28d9ed>Cold-Blooded Torture</color> on the enemy with the highest Attack under the following conditions.\\n<color=#28d9ed>1. When an ally, including the caster, scores a critical hit, activates it as an Additional Attack.</color>\\n<color=#28d9ed>2. When the caster takes a critical hit, counterattacks the attacker.</color>",
+        "2": "(Passive Effect) When hit, grants the caster a Barrier proportional to the caster's Attack for <color=#28d9ed>1 turn</color> and increases the caster's Priority by <color=#28d9ed>10%</color>. While holding <color=#28d9ed>Hubris's Dominion</color>, damage suffered in a single attack does not exceed <color=#28d9ed>95%</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks / Excludes DoT)\\n\\n(Triggered Effect) Activates an enhanced <color=#28d9ed>Cold-Blooded Torture</color> on the enemy with the highest Attack under the following conditions.\\n<color=#28d9ed>1. When an ally, including the caster, scores a critical hit, activates it as an Additional Attack.</color>\\n<color=#28d9ed>2. When the caster takes a critical hit, counterattacks the attacker.</color>",
+        "3": "(Passive Effect) When hit, grants the caster a Barrier proportional to the caster's Attack for <color=#28d9ed>1 turn</color> and increases the caster's Priority by <color=#28d9ed>10%</color>. While holding <color=#28d9ed>Hubris's Dominion</color>, damage suffered in a single attack does not exceed <color=#28d9ed>85%</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks / Excludes DoT)\\n\\n(Triggered Effect) Activates an enhanced <color=#28d9ed>Cold-Blooded Torture</color> on the enemy with the highest Attack under the following conditions.\\n<color=#28d9ed>1. When an ally, including the caster, scores a critical hit, activates it as an Additional Attack.</color>\\n<color=#28d9ed>2. When the caster takes a critical hit, counterattacks the attacker.</color>",
+        "4": "(Passive Effect) When hit, grants the caster a Barrier proportional to the caster's Attack for <color=#28d9ed>1 turn</color> and increases the caster's Priority by <color=#28d9ed>15%</color>. While holding <color=#28d9ed>Hubris's Dominion</color>, damage suffered in a single attack does not exceed <color=#28d9ed>85%</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks / Excludes DoT)\\n\\n(Triggered Effect) Activates an enhanced <color=#28d9ed>Cold-Blooded Torture</color> on the enemy with the highest Attack under the following conditions.\\n<color=#28d9ed>1. When an ally, including the caster, scores a critical hit, activates it as an Additional Attack.</color>\\n<color=#28d9ed>2. When the caster takes a critical hit, counterattacks the attacker.</color>",
+        "5": "(Passive Effect) When hit, grants the caster a Barrier proportional to the caster's Attack for <color=#28d9ed>1 turn</color> and increases the caster's Priority by <color=#28d9ed>15%</color>. While holding <color=#28d9ed>Hubris's Dominion</color>, damage suffered in a single attack does not exceed <color=#28d9ed>70%</color> of the caster's Max Health. (Includes Dual Attacks and Additional Attacks / Excludes DoT)\\n\\n(Triggered Effect) Activates an enhanced <color=#28d9ed>Cold-Blooded Torture</color> on the enemy with the highest Attack under the following conditions.\\n<color=#28d9ed>1. When an ally, including the caster, scores a critical hit, activates it as an Additional Attack.</color>\\n<color=#28d9ed>2. When the caster takes a critical hit, counterattacks the attacker.</color>",
+        "1_jp": "(パッシブ効果) ダメージを受けた場合、自分にシールドを<color=#28d9ed>1ターン</color>（自分の攻撃力比例）の間付与し、行動ゲージを<color=#28d9ed>10%</color>増加させる。<color=#28d9ed>【傲慢の領域】</color>がある場合、一度に受けるダメージは自分の最大HPの<color=#28d9ed>95%</color>を超えない。（連携・追加攻撃も含む / 継続ダメージを除く）\\n\\n(発動効果) 条件に応じて強化された<color=#28d9ed>【ルースレストーチャー】</color>を最も攻撃力の高い敵に使用する。\\n\\n<color=#28d9ed>1. 味方が会心攻撃時（自分含む）追加攻撃を使用</color>\\n<color=#28d9ed>2. 自分が会心ダメージを受けた場合、対象に反撃</color>",
+        "2_jp": "(パッシブ効果) ダメージを受けた場合、自分にシールドを<color=#28d9ed>1ターン</color>（自分の攻撃力比例）の間付与し、行動ゲージを<color=#28d9ed>10%</color>増加させる。<color=#28d9ed>【傲慢の領域】</color>がある場合、一度に受けるダメージは自分の最大HPの<color=#28d9ed>95%</color>を超えない。（連携・追加攻撃も含む / 継続ダメージを除く）\\n\\n(発動効果) 条件に応じて強化された<color=#28d9ed>【ルースレストーチャー】</color>を最も攻撃力の高い敵に使用する。\\n\\n<color=#28d9ed>1. 味方が会心攻撃時（自分含む）追加攻撃を使用</color>\\n<color=#28d9ed>2. 自分が会心ダメージを受けた場合、対象に反撃</color>",
+        "3_jp": "(パッシブ効果) ダメージを受けた場合、自分にシールドを<color=#28d9ed>1ターン</color>（自分の攻撃力比例）の間付与し、行動ゲージを<color=#28d9ed>10%</color>増加させる。<color=#28d9ed>【傲慢の領域】</color>がある場合、一度に受けるダメージは自分の最大HPの<color=#28d9ed>85%</color>を超えない。（連携・追加攻撃も含む / 継続ダメージを除く）\\n\\n(発動効果) 条件に応じて強化された<color=#28d9ed>【ルースレストーチャー】</color>を最も攻撃力の高い敵に使用する。\\n\\n<color=#28d9ed>1. 味方が会心攻撃時（自分含む）追加攻撃を使用</color>\\n<color=#28d9ed>2. 自分が会心ダメージを受けた場合、対象に反撃</color>",
+        "4_jp": "(パッシブ効果) ダメージを受けた場合、自分にシールドを<color=#28d9ed>1ターン</color>（自分の攻撃力比例）の間付与し、行動ゲージを<color=#28d9ed>15%</color>増加させる。<color=#28d9ed>【傲慢の領域】</color>がある場合、一度に受けるダメージは自分の最大HPの<color=#28d9ed>85%</color>を超えない。（連携・追加攻撃も含む / 継続ダメージを除く）\\n\\n(発動効果) 条件に応じて強化された<color=#28d9ed>【ルースレストーチャー】</color>を最も攻撃力の高い敵に使用する。\\n\\n<color=#28d9ed>1. 味方が会心攻撃時（自分含む）追加攻撃を使用</color>\\n<color=#28d9ed>2. 自分が会心ダメージを受けた場合、対象に反撃</color>",
+        "5_jp": "(パッシブ効果) ダメージを受けた場合、自分にシールドを<color=#28d9ed>1ターン</color>（自分の攻撃力比例）の間付与し、行動ゲージを<color=#28d9ed>15%</color>増加させる。<color=#28d9ed>【傲慢の領域】</color>がある場合、一度に受けるダメージは自分の最大HPの<color=#28d9ed>70%</color>を超えない。（連携・追加攻撃も含む / 継続ダメージを除く）\\n\\n(発動効果) 条件に応じて強化された<color=#28d9ed>【ルースレストーチャー】</color>を最も攻撃力の高い敵に使用する。\\n\\n<color=#28d9ed>1. 味方が会心攻撃時（自分含む）追加攻撃を使用</color>\\n<color=#28d9ed>2. 自分が会心ダメージを受けた場合、対象に反撃</color>",
+        "1_kr": "(패시브 효과) 피격 시 자신에게 실드를 <color=#28d9ed>1턴</color>(자신 공격력 비례) 동안 부여하고 행동 게이지가 <color=#28d9ed>10%</color> 증가합니다. <color=#28d9ed>오만의 영역</color> 보유 시 한번에 받는 피해는 자신 최대 체력의 <color=#28d9ed>95%</color>를 초과하지 않습니다. (협공 및 추가타 포함 / 지속 피해 제외)\\n\\n(발동 효과) 조건에 따라 강화된 <color=#28d9ed>냉혹한 고문</color>을 가장 공격력이 높은 적에게 사용합니다.\\n\\n<color=#28d9ed>1. 아군이 치명 공격 시(자신 포함) 추가타 사용</color>\\n<color=#28d9ed>2. 자신이 치명 공격 피격 시 대상에게 반격</color>",
+        "2_kr": "(패시브 효과) 피격 시 자신에게 실드를 <color=#28d9ed>1턴</color>(자신 공격력 비례) 동안 부여하고 행동 게이지가 <color=#28d9ed>10%</color> 증가합니다. <color=#28d9ed>오만의 영역</color> 보유 시 한번에 받는 피해는 자신 최대 체력의 <color=#28d9ed>95%</color>를 초과하지 않습니다. (협공 및 추가타 포함 / 지속 피해 제외)\\n\\n(발동 효과) 조건에 따라 강화된 <color=#28d9ed>냉혹한 고문</color>을 가장 공격력이 높은 적에게 사용합니다.\\n\\n<color=#28d9ed>1. 아군이 치명 공격 시(자신 포함) 추가타 사용</color>\\n<color=#28d9ed>2. 자신이 치명 공격 피격 시 대상에게 반격</color>",
+        "3_kr": "(패시브 효과) 피격 시 자신에게 실드를 <color=#28d9ed>1턴</color>(자신 공격력 비례) 동안 부여하고 행동 게이지가 <color=#28d9ed>10%</color> 증가합니다. <color=#28d9ed>오만의 영역</color> 보유 시 한번에 받는 피해는 자신 최대 체력의 <color=#28d9ed>85%</color>를 초과하지 않습니다. (협공 및 추가타 포함 / 지속 피해 제외)\\n\\n(발동 효과) 조건에 따라 강화된 <color=#28d9ed>냉혹한 고문</color>을 가장 공격력이 높은 적에게 사용합니다.\\n\\n<color=#28d9ed>1. 아군이 치명 공격 시(자신 포함) 추가타 사용</color>\\n<color=#28d9ed>2. 자신이 치명 공격 피격 시 대상에게 반격</color>",
+        "4_kr": "(패시브 효과) 피격 시 자신에게 실드를 <color=#28d9ed>1턴</color>(자신 공격력 비례) 동안 부여하고 행동 게이지가 <color=#28d9ed>15%</color> 증가합니다. <color=#28d9ed>오만의 영역</color> 보유 시 한번에 받는 피해는 자신 최대 체력의 <color=#28d9ed>85%</color>를 초과하지 않습니다. (협공 및 추가타 포함 / 지속 피해 제외)\\n\\n(발동 효과) 조건에 따라 강화된 <color=#28d9ed>냉혹한 고문</color>을 가장 공격력이 높은 적에게 사용합니다.\\n\\n<color=#28d9ed>1. 아군이 치명 공격 시(자신 포함) 추가타 사용</color>\\n<color=#28d9ed>2. 자신이 치명 공격 피격 시 대상에게 반격</color>",
+        "5_kr": "(패시브 효과) 피격 시 자신에게 실드를 <color=#28d9ed>1턴</color>(자신 공격력 비례) 동안 부여하고 행동 게이지가 <color=#28d9ed>15%</color> 증가합니다. <color=#28d9ed>오만의 영역</color> 보유 시 한번에 받는 피해는 자신 최대 체력의 <color=#28d9ed>70%</color>를 초과하지 않습니다. (협공 및 추가타 포함 / 지속 피해 제외)\\n\\n(발동 효과) 조건에 따라 강화된 <color=#28d9ed>냉혹한 고문</color>을 가장 공격력이 높은 적에게 사용합니다.\\n\\n<color=#28d9ed>1. 아군이 치명 공격 시(자신 포함) 추가타 사용</color>\\n<color=#28d9ed>2. 자신이 치명 공격 피격 시 대상에게 반격</color>",
+        "1_zh": "(被动效果) 被攻击时，对自身附加<color=#28d9ed>1回合</color>的护盾（按自身攻击力计算），行动值增加<color=#28d9ed>10%</color>。持有<color=#28d9ed>傲慢领域</color>时，一次受到的伤害不超过自身最大生命值的<color=#28d9ed>95%</color>。（包含夹攻及追加攻击 / 持续伤害除外）\\n\\n(发动效果) 根据条件对攻击力最高的敌人使用强化版<color=#28d9ed>严刑拷打</color>。\\n\\n<color=#28d9ed>1. 我方发动暴击时（含自身）使用追加攻击</color>\\n<color=#28d9ed>2. 自身被暴击时对目标进行反击</color>",
+        "2_zh": "(被动效果) 被攻击时，对自身附加<color=#28d9ed>1回合</color>的护盾（按自身攻击力计算），行动值增加<color=#28d9ed>10%</color>。持有<color=#28d9ed>傲慢领域</color>时，一次受到的伤害不超过自身最大生命值的<color=#28d9ed>95%</color>。（包含夹攻及追加攻击 / 持续伤害除外）\\n\\n(发动效果) 根据条件对攻击力最高的敌人使用强化版<color=#28d9ed>严刑拷打</color>。\\n\\n<color=#28d9ed>1. 我方发动暴击时（含自身）使用追加攻击</color>\\n<color=#28d9ed>2. 自身被暴击时对目标进行反击</color>",
+        "3_zh": "(被动效果) 被攻击时，对自身附加<color=#28d9ed>1回合</color>的护盾（按自身攻击力计算），行动值增加<color=#28d9ed>10%</color>。持有<color=#28d9ed>傲慢领域</color>时，一次受到的伤害不超过自身最大生命值的<color=#28d9ed>85%</color>。（包含夹攻及追加攻击 / 持续伤害除外）\\n\\n(发动效果) 根据条件对攻击力最高的敌人使用强化版<color=#28d9ed>严刑拷打</color>。\\n\\n<color=#28d9ed>1. 我方发动暴击时（含自身）使用追加攻击</color>\\n<color=#28d9ed>2. 自身被暴击时对目标进行反击</color>",
+        "4_zh": "(被动效果) 被攻击时，对自身附加<color=#28d9ed>1回合</color>的护盾（按自身攻击力计算），行动值增加<color=#28d9ed>15%</color>。持有<color=#28d9ed>傲慢领域</color>时，一次受到的伤害不超过自身最大生命值的<color=#28d9ed>85%</color>。（包含夹攻及追加攻击 / 持续伤害除外）\\n\\n(发动效果) 根据条件对攻击力最高的敌人使用强化版<color=#28d9ed>严刑拷打</color>。\\n\\n<color=#28d9ed>1. 我方发动暴击时（含自身）使用追加攻击</color>\\n<color=#28d9ed>2. 自身被暴击时对目标进行反击</color>",
+        "5_zh": "(被动效果) 被攻击时，对自身附加<color=#28d9ed>1回合</color>的护盾（按自身攻击力计算），行动值增加<color=#28d9ed>15%</color>。持有<color=#28d9ed>傲慢领域</color>时，一次受到的伤害不超过自身最大生命值的<color=#28d9ed>70%</color>。（包含夹攻及追加攻击 / 持续伤害除外）\\n\\n(发动效果) 根据条件对攻击力最高的敌人使用强化版<color=#28d9ed>严刑拷打</color>。\\n\\n<color=#28d9ed>1. 我方发动暴击时（含自身）使用追加攻击</color>\\n<color=#28d9ed>2. 自身被暴击时对目标进行反击</color>"
+      },
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "-10% Health Limit"
+        ],
+        "4": [
+          "+5% Priority",
+          "+1 Weakness Gauge damage"
+        ],
+        "5": [
+          "Health Condition -15%",
+          "+10% damage"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "3_jp": [
+          "HPの条件-10%"
+        ],
+        "4_jp": [
+          "行動ゲージ5%UP",
+          "WGダメージ+1"
+        ],
+        "5_jp": [
+          "HPの条件-15%",
+          "ダメージ+10%"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_kr": [
+          "체력 조건 -10%"
+        ],
+        "4_kr": [
+          "행동 게이지 +5%",
+          "WG 감소량 +1"
+        ],
+        "5_kr": [
+          "체력 조건 -15%",
+          "피해량 +10%"
+        ],
+        "2_zh": [
+          "伤害量+10%",
+          "WG降低量+1"
+        ],
+        "3_zh": [
+          "生命值条件-10%"
+        ],
+        "4_zh": [
+          "行动值+5%",
+          "WG降低量+1"
+        ],
+        "5_zh": [
+          "生命值条件-15%",
+          "伤害量+10%"
+        ]
+      },
+      "wgr": 1,
+      "cd": 2,
+      "buff": [
+        "BT_COUNTERATTACK",
+        "BT_ACTION_GAUGE",
+        "BT_BARRIER",
+        "BT_ADDITIVE_ATTACK"
+      ],
+      "debuff": [],
+      "offensive": true,
+      "target": "mono"
+    },
+    "SKT_ULTIMATE": {
+      "NameIDSymbol": "9003",
+      "IconName": "Skill_Ultimate_2000090",
+      "SkillType": "SKT_ULTIMATE",
+      "name": "Terminal Winter",
+      "name_jp": "フィンブルウィンター",
+      "name_kr": "최후의 겨울",
+      "name_zh": "末日凛冬",
+      "true_desc_levels": {
+        "1": "Attacks all enemies.\\nAfter attacking, gains <color=#28d9ed>Hubris’s Dominion</color> for <color=#28d9ed>1 turn</color> and increases the caster’s Attack for <color=#28d9ed>1 turn</color>.",
+        "2": "Attacks all enemies.\\nAfter attacking, gains <color=#28d9ed>Hubris’s Dominion</color> for <color=#28d9ed>1 turn</color> and increases the caster’s Attack for <color=#28d9ed>1 turn</color>.",
+        "3": "Attacks all enemies.\\nAfter attacking, gains <color=#28d9ed>Hubris’s Dominion</color> for <color=#28d9ed>1 turn</color> and increases the caster’s Attack for <color=#28d9ed>1 turn</color>.",
+        "4": "Attacks all enemies.\\nAfter attacking, gains <color=#28d9ed>Hubris’s Dominion</color> for <color=#28d9ed>2 turn</color> and increases the caster’s Attack for <color=#28d9ed>2 turn</color>.",
+        "5": "Attacks all enemies. After attacking, gains <color=#28d9ed>Hubris’s Dominion</color> for <color=#28d9ed>2 turns</color> and increases the caster’s Attack for <color=#28d9ed>2 turns</color>. This attack <color=#28d9ed>ignores all Defense</color> of the enemy with the highest Max Health.",
+        "1_jp": "敵全体にダメージを与える。攻撃後、自分に<color=#28d9ed>【傲慢の領域】</color><color=#28d9ed>1ターン</color>の間付与し、自分の攻撃力を<color=#28d9ed>1ターン</color>の間UPさせる。",
+        "2_jp": "敵全体にダメージを与える。攻撃後、自分に<color=#28d9ed>【傲慢の領域】</color><color=#28d9ed>1ターン</color>の間付与し、自分の攻撃力を<color=#28d9ed>1ターン</color>の間UPさせる。",
+        "3_jp": "敵全体にダメージを与える。攻撃後、自分に<color=#28d9ed>【傲慢の領域】</color><color=#28d9ed>1ターン</color>の間付与し、自分の攻撃力を<color=#28d9ed>1ターン</color>の間UPさせる。",
+        "4_jp": "敵全体にダメージを与える。攻撃後、自分に<color=#28d9ed>【傲慢の領域】</color><color=#28d9ed>2ターン</color>の間付与し、自分の攻撃力を<color=#28d9ed>2ターン</color>の間UPさせる。",
+        "5_jp": "敵全体にダメージを与える。攻撃後、自分に<color=#28d9ed>【傲慢の領域】</color>を<color=#28d9ed>2ターン</color>の間付与し、自分の攻撃力を<color=#28d9ed>2ターン</color>の間UPさせる。\\nこの攻撃は最大HPが最も高い敵の<color=#28d9ed>防御力</color>を<color=#28d9ed>すべて無視</color>する。",
+        "1_kr": "적 전체를 공격합니다. 공격 후 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>오만의 영역</color>을 획득하고 자신의 공격력이 <color=#28d9ed>1턴</color> 동안 증가합니다.",
+        "2_kr": "적 전체를 공격합니다. 공격 후 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>오만의 영역</color>을 획득하고 자신의 공격력이 <color=#28d9ed>1턴</color> 동안 증가합니다.",
+        "3_kr": "적 전체를 공격합니다. 공격 후 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>오만의 영역</color>을 획득하고 자신의 공격력이 <color=#28d9ed>1턴</color> 동안 증가합니다.",
+        "4_kr": "적 전체를 공격합니다. 공격 후 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>오만의 영역</color>을 획득하고 자신의 공격력이 <color=#28d9ed>2턴</color> 동안 증가합니다.",
+        "5_kr": "적 전체를 공격합니다. 공격 후 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>오만의 영역</color>을 획득하고 자신의 공격력이 <color=#28d9ed>2턴</color> 동안 증가합니다.\\n이 공격은 최대 체력이 가장 높은 적의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>모두 무시</color> 합니다.",
+        "1_zh": "攻击全体敌人。攻击后获得<color=#28d9ed>1回合</color>的<color=#28d9ed>傲慢领域</color>，自身攻击力在<color=#28d9ed>1回合</color>内提升。",
+        "2_zh": "攻击全体敌人。攻击后获得<color=#28d9ed>1回合</color>的<color=#28d9ed>傲慢领域</color>，自身攻击力在<color=#28d9ed>1回合</color>内提升。",
+        "3_zh": "攻击全体敌人。攻击后获得<color=#28d9ed>1回合</color>的<color=#28d9ed>傲慢领域</color>，自身攻击力在<color=#28d9ed>1回合</color>内提升。",
+        "4_zh": "攻击全体敌人。攻击后获得<color=#28d9ed>2回合</color>的<color=#28d9ed>傲慢领域</color>，自身攻击力在<color=#28d9ed>2回合</color>内提升。",
+        "5_zh": "攻击全体敌人。攻击后获得<color=#28d9ed>2回合</color>的<color=#28d9ed>傲慢领域</color>，自身攻击力在<color=#28d9ed>2回合</color>内提升。\\n此攻击<color=#28d9ed>完全无视</color>最大生命值最高的敌人的<color=#28d9ed>防御力</color>。"
+      },
+      "enhancement": {
+        "2": [
+          "+10% damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+10% damage",
+          "-1 turn Skill Cooldown"
+        ],
+        "4": [
+          "+1 turn effect duration"
+        ],
+        "5": [
+          "+10% damage",
+          "Ignores the Defense of the enemy with the highest Max Health"
+        ],
+        "2_jp": [
+          "ダメージ+10%",
+          "WGダメージ+1"
+        ],
+        "3_jp": [
+          "ダメージ+10%",
+          "スキルターン-1ターン"
+        ],
+        "4_jp": [
+          "効果ターン+1ターン"
+        ],
+        "5_jp": [
+          "ダメージ+10%",
+          "最大HPが最も高い敵単体の防御力無視"
+        ],
+        "2_kr": [
+          "피해량 +10%",
+          "WG 감소량 +1"
+        ],
+        "3_kr": [
+          "피해량 +10%",
+          "스킬 쿨타임 -1턴"
+        ],
+        "4_kr": [
+          "효과 지속 +1턴"
+        ],
+        "5_kr": [
+          "피해량 +10%",
+          "가장 최대 체력이 높은 적의 방어력 무시"
+        ],
+        "2_zh": [
+          "伤害量+10%",
+          "WG降低量+1"
+        ],
+        "3_zh": [
+          "伤害量+10%",
+          "冷却时间-1回合"
+        ],
+        "4_zh": [
+          "效果持续时间+1回合"
+        ],
+        "5_zh": [
+          "伤害量+10%",
+          "无视生命值上限最高敌人的防御力"
+        ]
+      },
+      "wgr": 2,
+      "cd": 5,
+      "buff": [
+        "HUBRISS_DOMINION",
+        "BT_STAT|ST_ATK"
+      ],
+      "debuff": [],
+      "offensive": true,
+      "target": "multi"
+    },
+    "SKT_CHAIN_PASSIVE": {
+      "NameIDSymbol": "9004",
+      "IconName": "Skill_ChainPassive_Dark_Finish",
+      "SkillType": "SKT_CHAIN_PASSIVE",
+      "name": "Chain Passive",
+      "name_jp": "チェーンパッシブ",
+      "name_kr": "체인 패시브",
+      "name_zh": "连携被动",
+      "true_desc_levels": {
+        "1": "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>10%</color>.",
+        "2": "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>10%</color>.",
+        "3": "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>10%</color>.",
+        "4": "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>10%</color>.",
+        "5": "<color=#ffd732>Chain Finish Effect</color>: After attacking, recovers <color=#28d9ed>25</color> Chain Points.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases <color=#28d9ed>Priority</color> by <color=#28d9ed>10%</color>.",
+        "1_jp": "<color=#ffd732>チェーン効果(トドメ)</color>：攻撃後、CPを<color=#28d9ed>25</color>回復する。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。",
+        "2_jp": "<color=#ffd732>チェーン効果(トドメ)</color>：攻撃後、CPを<color=#28d9ed>25</color>回復する。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。",
+        "3_jp": "<color=#ffd732>チェーン効果(トドメ)</color>：攻撃後、CPを<color=#28d9ed>25</color>回復する。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。",
+        "4_jp": "<color=#ffd732>チェーン効果(トドメ)</color>：攻撃後、CPを<color=#28d9ed>25</color>回復する。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。",
+        "5_jp": "<color=#ffd732>チェーン効果(トドメ)</color>：攻撃後、CPを<color=#28d9ed>25</color>回復する。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>10%</color>UPさせる。",
+        "1_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
+        "2_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
+        "3_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
+        "4_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
+        "5_kr": "<color=#ffd732>체인 피니시 효과</color> : 공격 후 <color=#28d9ed>25</color>의 CP를 회복합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>10%</color> 증가시킵니다.",
+        "1_zh": "<color=#ffd732>连携收尾效果</color>：攻击后，CP恢复<color=#28d9ed>25</color>。\\n\\n<color=#ffd732>夹攻效果</color>：攻击后，<color=#28d9ed>行动值</color>提升<color=#28d9ed>10%</color>。",
+        "2_zh": "<color=#ffd732>连携收尾效果</color>：攻击后，CP恢复<color=#28d9ed>25</color>。\\n\\n<color=#ffd732>夹攻效果</color>：攻击后，<color=#28d9ed>行动值</color>提升<color=#28d9ed>10%</color>。",
+        "3_zh": "<color=#ffd732>连携收尾效果</color>：攻击后，CP恢复<color=#28d9ed>25</color>。\\n\\n<color=#ffd732>夹攻效果</color>：攻击后，<color=#28d9ed>行动值</color>提升<color=#28d9ed>10%</color>。",
+        "4_zh": "<color=#ffd732>连携收尾效果</color>：攻击后，CP恢复<color=#28d9ed>25</color>。\\n\\n<color=#ffd732>夹攻效果</color>：攻击后，<color=#28d9ed>行动值</color>提升<color=#28d9ed>10%</color>。",
+        "5_zh": "<color=#ffd732>连携收尾效果</color>：攻击后，CP恢复<color=#28d9ed>25</color>。\\n\\n<color=#ffd732>夹攻效果</color>：攻击后，<color=#28d9ed>行动值</color>提升<color=#28d9ed>10%</color>。"
+      },
+      "enhancement": {
+        "2": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "3": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "4": [
+          "+5% Dual Attack and Skill Chain damage"
+        ],
+        "5": [
+          "+5% Dual Attack and Skill Chain damage",
+          "+1 Weakness Gauge damage"
+        ],
+        "2_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "3_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "4_jp": [
+          "チェーンスキルと連携ダメージ+5%"
+        ],
+        "5_jp": [
+          "チェーンスキルと連携ダメージ+5%",
+          "WGダメージ+1"
+        ],
+        "2_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "3_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "4_kr": [
+          "협공/스킬 체인 피해량 +5%"
+        ],
+        "5_kr": [
+          "협공/스킬 체인 피해량 +5%",
+          "WG 감소량 +1"
+        ],
+        "2_zh": [
+          "夹攻/连携技能伤害量+5%",
+          "WG降低量+1"
+        ],
+        "3_zh": [
+          "夹攻/连携技能伤害量+5%"
+        ],
+        "4_zh": [
+          "夹攻/连携技能伤害量+5%"
+        ],
+        "5_zh": [
+          "夹攻/连携技能伤害量+5%",
+          "WG降低量+1"
+        ]
+      },
+      "wgr": 3,
+      "cd": null,
+      "buff": [
+        "BT_CP_CHARGE"
+      ],
+      "debuff": [],
+      "offensive": true,
+      "target": "multi",
+      "wgr_dual": 1,
+      "dual_offensive": true,
+      "dual_target": "mono",
+      "dual_buff": [
+        "BT_ACTION_GAUGE"
+      ],
+      "dual_debuff": []
+    }
+  }
+}

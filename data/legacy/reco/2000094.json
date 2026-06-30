@@ -1,0 +1,192 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%/HP%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "EFF/HP%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "EFF>ATK>HP>SPD",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Swift Counter": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "EFF/HP%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "ct2sw2"
+    ],
+    "SubstatPrio": "EFF>ATK>HP>SPD",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Counterattack": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "EFF/HP%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "ct4"
+    ],
+    "SubstatPrio": "EFF>ATK>HP>SPD",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Revenge": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStat": "ATK%/SPD"
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "EFF/HP%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "r4"
+    ],
+    "SubstatPrio": "EFF>ATK>HP>SPD",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Guild Raid": {
+    "Weapon": [
+      {
+        "name": "Token of the Supreme Witch",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "EFF"
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStat": "EFF"
+      },
+      {
+        "name": "Steel Necklace",
+        "mainStat": "EFF"
+      }
+    ],
+    "Set": [
+      "r4"
+    ],
+    "SubstatPrio": "EFF>ATK>HP>DEF",
+    "Note": "Effectiveness (until target's Resilience). Minimal speed.",
+    "Talisman": [
+      "$v"
+    ]
+  }
+}
