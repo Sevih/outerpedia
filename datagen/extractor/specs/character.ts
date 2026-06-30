@@ -448,6 +448,15 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       else fusionLevelsByGroup.set(r.FusionGroupID, [r]);
     }
 
+    // Profil de la fusion : birthday/taille/poids de la base + histoire PROPRE
+    // (FusionCompleteDescID = SYS_ACHIEVE_PROFILE_<fusionId>).
+    for (const f of fusion) {
+      const story = resolveText(tsys, f.FusionCompleteDescID);
+      const prof: CharacterProfile = { ...(profileById.get(f.CharacterID) ?? {}) };
+      if (story.en) prof.story = story;
+      if (Object.keys(prof).length) profileById.set(f.ChangeCharID, prof);
+    }
+
     // Apparences : toute ligne CT_PC sans identité propre est un skin de sa cible.
     const appearancesOf = new Map<string, string[]>();
     for (const r of loadTable('CharacterTemplet')) {

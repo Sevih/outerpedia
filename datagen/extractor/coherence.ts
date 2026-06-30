@@ -199,7 +199,8 @@ function categoryCoverage() {
     {
       name: 'stats détaillées par palier',
       v2Count: Object.keys(stats).length,
-      status: '🟠 REPR. DIFFÉRENTE — V3 = base+transcend (à recouper)',
+      status:
+        '🟢 OK — V3 = base+transcend ; passif premium = effet skill class_passive (BT_STAT_PREMIUM)',
     },
     {
       name: 'videos (liste youtube)',
