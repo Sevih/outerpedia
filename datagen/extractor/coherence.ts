@@ -149,11 +149,24 @@ function categoryCoverage() {
 
   const v3HasAppearances = Object.values(C).filter((c) => Array.isArray(c.appearances)).length;
 
+  // Profils : couverture + cohérence de valeurs vs V2.
+  const v3Profiles = Object.values(C).filter((c) => c.profile).length;
+  let profOk = 0,
+    profSeen = 0;
+  for (const [id, vp] of Object.entries(profiles as Record<string, Dict>)) {
+    const p = C[id]?.profile as Dict | undefined;
+    if (!p) continue;
+    profSeen++;
+    const heightOk = !vp.height || p.height === parseInt(String(vp.height), 10);
+    const bdayOk = !vp.birthday || p.birthday === vp.birthday;
+    if (heightOk && bdayOk) profOk++;
+  }
+
   const cats: Category[] = [
     {
       name: 'profils (birthday/height/weight/story)',
       v2Count: Object.keys(profiles).length,
-      status: '🔴 MANQUANT — extractible (ArchiveCharacterProfileTemplet)',
+      status: `✅ EXTRAIT — V3 ${v3Profiles} persos, valeurs ${profOk}/${profSeen} cohérentes`,
     },
     {
       name: 'skins (nom + icône costume)',

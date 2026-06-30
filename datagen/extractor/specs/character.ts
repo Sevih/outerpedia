@@ -69,6 +69,18 @@ export interface StatRange {
   max: number;
 }
 
+/** Profil de personnage (donnée d'archive). Valeurs brutes : le front formate. */
+export interface CharacterProfile {
+  /** Anniversaire « MM/DD » (depuis Birth AAAAMMJJ). */
+  birthday?: string;
+  /** Taille en cm. */
+  height?: number;
+  /** Poids en kg (omis si « secret »). */
+  weight?: number;
+  /** Histoire/lore localisée. */
+  story?: LangDict;
+}
+
 /** Un palier de core-fusion (CharacterFusionLevelTemplet). */
 export interface FusionLevel {
   level: number;
@@ -116,6 +128,8 @@ export interface Character {
   skills: string[];
   /** Doubleur localisé (CVNameID résolu), si renseigné. */
   voiceActor?: LangDict;
+  /** Profil d'archive (anniversaire, taille, poids, histoire). */
+  profile?: CharacterProfile;
   /** Réf vers l'équipement exclusif (EE), si le perso en a un. */
   ee?: string;
   /** Sets recommandés (réfs GroupID de set), si présents. */
@@ -156,6 +170,8 @@ interface CharacterAux {
   giftById: Map<string, string>;
   /** ids dont le nickname s'affiche en préfixe (CharacterExtraTemplet). */
   showNickNameIds: Set<string>;
+  /** id perso → profil d'archive (ArchiveCharacterProfileTemplet). */
+  profileById: Map<string, CharacterProfile>;
   /** base → id de sa core-fusion (CharacterFusionTemplet). */
   fusionByBase: Map<string, string>;
   /** core-fusion → id de sa base. */
@@ -227,6 +243,16 @@ const characterSchema: Schema = {
     icon: { kind: 'string' },
     skills: { kind: 'array', of: { kind: 'string' }, minItems: 1 },
     voiceActor: { kind: 'langDict', optional: true },
+    profile: {
+      kind: 'object',
+      optional: true,
+      fields: {
+        birthday: { kind: 'string', optional: true },
+        height: { kind: 'number', int: true, optional: true },
+        weight: { kind: 'number', int: true, optional: true },
+        story: { kind: 'langDict', optional: true },
+      },
+    },
     ee: { kind: 'string', optional: true },
     recommendedSets: { kind: 'array', of: { kind: 'string' }, optional: true },
     stats: { kind: 'record', of: statRangeSchema },
@@ -331,6 +357,21 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
         .map((r) => r.CharacterID),
     );
 
+    // Profils d'archive : anniversaire (Birth AAAAMMJJ), taille, poids, histoire.
+    const profileById = new Map<string, CharacterProfile>();
+    for (const r of loadTable('ArchiveCharacterProfileTemplet')) {
+      const prof: CharacterProfile = {};
+      if (/^\d{8}$/.test(r.Birth ?? ''))
+        prof.birthday = `${r.Birth.slice(4, 6)}/${r.Birth.slice(6, 8)}`;
+      const h = num(r.Height);
+      if (h > 0) prof.height = h;
+      const w = num(r.Weight);
+      if (w > 0) prof.weight = w;
+      const story = resolveText(tsys, r.ProfileScenario);
+      if (story.en) prof.story = story;
+      if (Object.keys(prof).length) profileById.set(r.CharacterID, prof);
+    }
+
     // Liens core-fusion (table dédiée) : base ↔ évolution + méta + paliers.
     const fusion = loadTable('CharacterFusionTemplet');
     const fusionByBase = new Map(fusion.map((f) => [f.CharacterID, f.ChangeCharID]));
@@ -365,6 +406,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       chainTypeById,
       giftById,
       showNickNameIds,
+      profileById,
       fusionByBase,
       baseByFusion,
       fusionMetaByChar,
@@ -409,6 +451,8 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       zh: cleanVoiceActor(cv.zh),
     };
     if (va.en || va.jp || va.kr || va.zh) char.voiceActor = va;
+    const profile = aux.profileById.get(r.ID);
+    if (profile) char.profile = profile;
     const ee = aux.eeByChar.get(r.ID);
     if (ee) char.ee = ee;
     const sets = splitCsv(r.RecommandSetOptionID ?? '');
