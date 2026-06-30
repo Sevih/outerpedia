@@ -18,26 +18,26 @@
  * le bloc `@theme inline` plus bas les expose à Tailwind en utilitaires.
  */
 :root {
-  /* Surfaces (du fond au premier plan) */
-  --surface-base: #f4f5f7;
-  --surface-raised: #ffffff;
-  --surface-overlay: #eef0f3;
-  --surface-sunken: #e4e7eb;
+  /* Surfaces (du fond au premier plan) — bleu-ardoise clair */
+  --surface-base: #eef2f8;
+  --surface-raised: #f8fafc;
+  --surface-overlay: #e2e8f0;
+  --surface-sunken: #dbe2ec;
 
-  /* Contenu (texte, du plus fort au plus discret) */
-  --content-strong: #18181b;
-  --content: #3f3f46;
-  --content-muted: #52525b;
-  --content-subtle: #71717a;
+  /* Contenu (texte, du plus fort au plus discret) — slate */
+  --content-strong: #0f172a;
+  --content: #334155;
+  --content-muted: #475569;
+  --content-subtle: #64748b;
 
-  /* Lignes */
-  --line-subtle: #e4e7eb;
-  --line: #d4d8dd;
-  --line-strong: #b8bec6;
-  --ring: #0e7490;
+  /* Lignes — slate */
+  --line-subtle: #e2e8f0;
+  --line: #cbd5e1;
+  --line-strong: #94a3b8;
+  --ring: #0284c7;
 
-  /* Accent / états */
-  --accent: #0891b2;
+  /* Accent / états — bleu */
+  --accent: #0284c7;
   --accent-fg: #ffffff;
   --success: #15803d;
   --warn: #b45309;
@@ -73,23 +73,27 @@
 }
 
 .dark {
-  --surface-base: #0a0a0a;
-  --surface-raised: #18181b;
-  --surface-overlay: #27272a;
-  --surface-sunken: #000000;
+  /* Surfaces — bleu-ardoise profond (navy) */
+  --surface-base: #0b1120;
+  --surface-raised: #131c2e;
+  --surface-overlay: #1e293b;
+  --surface-sunken: #070b14;
 
-  --content-strong: #fafafa;
-  --content: #d4d4d8;
-  --content-muted: #a1a1aa;
-  --content-subtle: #71717a;
+  /* Contenu — slate clair */
+  --content-strong: #f1f5f9;
+  --content: #cbd5e1;
+  --content-muted: #94a3b8;
+  --content-subtle: #64748b;
 
-  --line-subtle: #27272a;
-  --line: #404040;
-  --line-strong: #52525b;
-  --ring: #22d3ee;
+  /* Lignes — slate */
+  --line-subtle: #1e293b;
+  --line: #334155;
+  --line-strong: #475569;
+  --ring: #38bdf8;
 
-  --accent: #22d3ee;
-  --accent-fg: #0a0a0a;
+  /* Accent / états — bleu ciel */
+  --accent: #38bdf8;
+  --accent-fg: #0b1120;
   --success: #4ade80;
   --warn: #fbbf24;
   --danger: #f87171;
