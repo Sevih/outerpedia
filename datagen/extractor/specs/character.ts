@@ -81,6 +81,24 @@ export interface CharacterProfile {
   story?: LangDict;
 }
 
+/** Un costume/skin (CostumeTemplet). */
+export interface Costume {
+  id: string;
+  /** Id du modèle d'apparence (ModelNameID). */
+  model: string;
+  name: LangDict;
+  /** Icône de costume (SpriteCostumeIcon). */
+  icon: string;
+  /** Rareté (slug : normal/magic/rare). */
+  grade: string;
+  /** Provenance (slug : shop/event_shop/world_boss_shop/battlepass…), si connue. */
+  source?: string;
+  /** Modèle équivalent pour la core-fusion (FusionModelNameID), si présent. */
+  fusionModel?: string;
+  /** Ordre d'affichage. */
+  sort: number;
+}
+
 /** Un palier de core-fusion (CharacterFusionLevelTemplet). */
 export interface FusionLevel {
   level: number;
@@ -136,8 +154,10 @@ export interface Character {
   recommendedSets?: string[];
   /** Stats de base par slug (valeurs brutes ; échelle dans `statScales`). */
   stats: Record<string, StatRange>;
-  /** Ids des apparences (skins) qui empruntent l'identité de ce perso. */
+  /** Ids des apparences (modèles alternés) qui empruntent l'identité de ce perso. */
   appearances?: string[];
+  /** Costumes/skins obtenables (CostumeTemplet), avec nom et icône. */
+  costumes?: Costume[];
   /** Sur une base qui a une évolution : id de l'entité core-fusion. */
   coreFusion?: string;
   /** Sur une entité core-fusion : id du personnage de base dont elle dérive. */
@@ -172,6 +192,8 @@ interface CharacterAux {
   showNickNameIds: Set<string>;
   /** id perso → profil d'archive (ArchiveCharacterProfileTemplet). */
   profileById: Map<string, CharacterProfile>;
+  /** id perso → costumes (CostumeTemplet). */
+  costumesByChar: Map<string, Costume[]>;
   /** base → id de sa core-fusion (CharacterFusionTemplet). */
   fusionByBase: Map<string, string>;
   /** core-fusion → id de sa base. */
@@ -257,6 +279,23 @@ const characterSchema: Schema = {
     recommendedSets: { kind: 'array', of: { kind: 'string' }, optional: true },
     stats: { kind: 'record', of: statRangeSchema },
     appearances: { kind: 'array', of: { kind: 'string' }, optional: true },
+    costumes: {
+      kind: 'array',
+      optional: true,
+      of: {
+        kind: 'object',
+        fields: {
+          id: { kind: 'string' },
+          model: { kind: 'string' },
+          name: { kind: 'langDict' },
+          icon: { kind: 'string' },
+          grade: { kind: 'string' },
+          source: { kind: 'string', optional: true },
+          fusionModel: { kind: 'string', optional: true },
+          sort: { kind: 'number', int: true },
+        },
+      },
+    },
     coreFusion: { kind: 'string', optional: true },
     originalCharacter: { kind: 'string', optional: true },
     fusion: {
@@ -372,6 +411,26 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       if (Object.keys(prof).length) profileById.set(r.CharacterID, prof);
     }
 
+    // Costumes/skins (CostumeTemplet), groupés par perso et ordonnés.
+    const costumesByChar = new Map<string, Costume[]>();
+    for (const r of loadTable('CostumeTemplet')) {
+      const cos: Costume = {
+        id: r.ID,
+        model: r.ModelNameID,
+        name: resolveText(tchar, r.CostumeName),
+        icon: r.SpriteCostumeIcon,
+        grade: slugAfter(r.ItemGrade, 'IG_'),
+        sort: num(r.Sort),
+      };
+      const source = slugAfter(r.CostumePurchaseType, 'CPT_');
+      if (source && source !== 'none') cos.source = source;
+      if (r.FusionModelNameID) cos.fusionModel = r.FusionModelNameID;
+      const list = costumesByChar.get(r.CharacterID);
+      if (list) list.push(cos);
+      else costumesByChar.set(r.CharacterID, [cos]);
+    }
+    for (const list of costumesByChar.values()) list.sort((a, b) => a.sort - b.sort);
+
     // Liens core-fusion (table dédiée) : base ↔ évolution + méta + paliers.
     const fusion = loadTable('CharacterFusionTemplet');
     const fusionByBase = new Map(fusion.map((f) => [f.CharacterID, f.ChangeCharID]));
@@ -407,6 +466,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       giftById,
       showNickNameIds,
       profileById,
+      costumesByChar,
       fusionByBase,
       baseByFusion,
       fusionMetaByChar,
@@ -460,6 +520,8 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
 
     const appearances = aux.appearancesOf.get(r.ID);
     if (appearances?.length) char.appearances = appearances;
+    const costumes = aux.costumesByChar.get(r.ID);
+    if (costumes?.length) char.costumes = costumes;
     const fusion = aux.fusionByBase.get(r.ID);
     if (fusion) char.coreFusion = fusion;
     const base = aux.baseByFusion.get(r.ID);

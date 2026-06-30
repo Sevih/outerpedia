@@ -90,7 +90,23 @@
     },
     "ee": "2000001",
     "recommendedSets": ["3", "2", "7"],
-    "appearances": ["2010001", "2400001", "2300001", "2500001", "2600001"]
+    "appearances": ["2010001", "2400001", "2300001", "2500001", "2600001"],
+    "costumes": [
+      {
+        "id": "66",
+        "model": "2010001",
+        "name": {
+          "en": "Unchanging Heart K",
+          "jp": "変わらぬ想い・ケイ",
+          "kr": "변치 않는 마음 케이",
+          "zh": "永不变心·凯伊"
+        },
+        "icon": "TI_Costume_Clothes_2000001_02",
+        "grade": "rare",
+        "sort": 1,
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000002": {
     "id": "2000002",
@@ -368,7 +384,24 @@
     },
     "ee": "2000004",
     "recommendedSets": ["5", "13", "1"],
-    "appearances": ["2010004"]
+    "appearances": ["2010004"],
+    "costumes": [
+      {
+        "id": "16",
+        "model": "2010004",
+        "name": {
+          "en": "Adorable Witch Iris",
+          "jp": "おしゃれな魔女・アイリス",
+          "kr": "깜찍한 마녀 아이리스",
+          "zh": "可爱的魔女艾尔丽斯"
+        },
+        "icon": "TI_Costume_Clothes_2000004_02",
+        "grade": "normal",
+        "sort": 1,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000005": {
     "id": "2000005",
@@ -461,6 +494,23 @@
     "ee": "2000005",
     "recommendedSets": ["1", "12", "13"],
     "appearances": ["2010005", "2300005", "2500005"],
+    "costumes": [
+      {
+        "id": "18",
+        "model": "2010005",
+        "name": {
+          "en": "Adorable Witch Lisha",
+          "jp": "おしゃれな魔女・リーシャ",
+          "kr": "깜찍한 마녀 리샤",
+          "zh": "可爱的魔女莉莎"
+        },
+        "icon": "TI_Costume_Clothes_2000005_02",
+        "grade": "normal",
+        "sort": 1,
+        "source": "event_shop",
+        "fusionModel": "2710005"
+      }
+    ],
     "coreFusion": "2700005"
   },
   "2000006": {
@@ -644,7 +694,24 @@
     },
     "ee": "2000007",
     "recommendedSets": ["5", "13", "1"],
-    "appearances": ["2010007"]
+    "appearances": ["2010007"],
+    "costumes": [
+      {
+        "id": "5",
+        "model": "2010007",
+        "name": {
+          "en": "Summer Island Alpha",
+          "jp": "サマーアイランド・アルファ",
+          "kr": "서머 아일랜드 알파",
+          "zh": "夏日海岛阿尔法"
+        },
+        "icon": "TI_Costume_Clothes_2000007_02",
+        "grade": "normal",
+        "sort": 1,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000008": {
     "id": "2000008",
@@ -828,7 +895,23 @@
     },
     "ee": "2000009",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010009", "2300009", "2500009"]
+    "appearances": ["2010009", "2300009", "2500009"],
+    "costumes": [
+      {
+        "id": "31",
+        "model": "2010009",
+        "name": {
+          "en": "Fondly Waiting Eva",
+          "jp": "貴方を待っていたエヴァ",
+          "kr": "당신을 기다려온 에바",
+          "zh": "等待你的艾娃"
+        },
+        "icon": "TI_Costume_Clothes_2000009_02",
+        "grade": "normal",
+        "sort": 1,
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000010": {
     "id": "2000010",
@@ -1103,7 +1186,54 @@
     },
     "ee": "2000012",
     "recommendedSets": ["13", "3", "5"],
-    "appearances": ["2010012", "2020012", "2030012"]
+    "appearances": ["2010012", "2020012", "2030012"],
+    "costumes": [
+      {
+        "id": "11",
+        "model": "2010012",
+        "name": {
+          "en": "Office Lady Valentine",
+          "jp": "OLスーツ・バレンタイン",
+          "kr": "OL 발렌타인",
+          "zh": "OL瓦伦塔茵"
+        },
+        "icon": "TI_Costume_Clothes_2000012_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "17",
+        "model": "2020012",
+        "name": {
+          "en": "Ghost Bride Valentine",
+          "jp": "ゴースト花嫁・バレンタイン",
+          "kr": "유령 신부 발렌타인",
+          "zh": "幽灵新娘瓦伦塔茵"
+        },
+        "icon": "TI_Costume_Clothes_2000012_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "40",
+        "model": "2030012",
+        "name": {
+          "en": "Bourgeois Summer Valentine",
+          "jp": "資本主義の夏・バレンタイン",
+          "kr": "자본주의적 여름 발렌타인",
+          "zh": "资本主义的夏天瓦伦塔茵"
+        },
+        "icon": "TI_Costume_Clothes_2000012_04",
+        "grade": "rare",
+        "sort": 3,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000013": {
     "id": "2000013",
@@ -1743,7 +1873,53 @@
     },
     "ee": "2000019",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010019", "2020019", "2030019"]
+    "appearances": ["2010019", "2020019", "2030019"],
+    "costumes": [
+      {
+        "id": "1",
+        "model": "2010019",
+        "name": {
+          "en": "Shutendouji Rin",
+          "jp": "酒呑童子・リン",
+          "kr": "슈텐도지 린",
+          "zh": "酒吞童子琳"
+        },
+        "icon": "TI_Costume_Clothes_2000019_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "50",
+        "model": "2020019",
+        "name": {
+          "en": "Soulslayer of Apocalypse A Rin",
+          "jp": "黙示録の霊斬士A・リン",
+          "kr": "묵시록의 영참사 A 린",
+          "zh": "启示录灵斩师A-琳"
+        },
+        "icon": "TI_Costume_Clothes_2000019_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "event_shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "77",
+        "model": "2030019",
+        "name": {
+          "en": "Bountiful Day Rin",
+          "jp": "豊穣の日・リン",
+          "kr": "풍양의 날 린",
+          "zh": "丰饶之日的琳"
+        },
+        "icon": "TI_Costume_Clothes_2000019_04",
+        "grade": "rare",
+        "sort": 3,
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000020": {
     "id": "2000020",
@@ -2019,7 +2195,24 @@
     },
     "ee": "2000022",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010022", "2020022"]
+    "appearances": ["2010022", "2020022"],
+    "costumes": [
+      {
+        "id": "4",
+        "model": "2010022",
+        "name": {
+          "en": "De-spectacled Noa",
+          "jp": "視野全開・ノア",
+          "kr": "시력교정 노아",
+          "zh": "好视力诺雅"
+        },
+        "icon": "TI_Costume_Clothes_2000022_02",
+        "grade": "normal",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000023": {
     "id": "2000023",
@@ -2112,7 +2305,39 @@
     },
     "ee": "2000023",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010023", "2020023"]
+    "appearances": ["2010023", "2020023"],
+    "costumes": [
+      {
+        "id": "3",
+        "model": "2010023",
+        "name": {
+          "en": "Summer Island Saeran",
+          "jp": "サマーアイランド・セイラン",
+          "kr": "서머 아일랜드 세이란",
+          "zh": "夏日海岛萨伊蓝"
+        },
+        "icon": "TI_Costume_Clothes_2000023_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "29",
+        "model": "2020023",
+        "name": {
+          "en": "Full Speed Ahead Saint Saeran",
+          "jp": "走る聖女様・セイラン",
+          "kr": "달려라 성녀님 세이란",
+          "zh": "奔跑吧！圣女大人萨伊蓝"
+        },
+        "icon": "TI_Costume_Clothes_2000023_03",
+        "grade": "normal",
+        "sort": 2,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000024": {
     "id": "2000024",
@@ -2295,7 +2520,39 @@
     },
     "ee": "2000025",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010025", "2020025"]
+    "appearances": ["2010025", "2020025"],
+    "costumes": [
+      {
+        "id": "6",
+        "model": "2010025",
+        "name": {
+          "en": "Summer Island Beth",
+          "jp": "サマーアイランド・ベス",
+          "kr": "서머 아일랜드 베스",
+          "zh": "夏日海岛贝丝"
+        },
+        "icon": "TI_Costume_Clothes_2000025_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "20",
+        "model": "2020025",
+        "name": {
+          "en": "Merry Holidays Beth",
+          "jp": "ハッピークリスマス・ベス",
+          "kr": "해피 크리스마스 베스",
+          "zh": "圣诞快乐贝丝"
+        },
+        "icon": "TI_Costume_Clothes_2000025_03",
+        "grade": "normal",
+        "sort": 2,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000026": {
     "id": "2000026",
@@ -3206,7 +3463,24 @@
     },
     "ee": "2000035",
     "recommendedSets": ["13", "3", "5"],
-    "appearances": ["2010035"]
+    "appearances": ["2010035"],
+    "costumes": [
+      {
+        "id": "7",
+        "model": "2010035",
+        "name": {
+          "en": "Summer Island Eliza",
+          "jp": "サマーアイランド・エリーゼ",
+          "kr": "서머 아일랜드 엘리제",
+          "zh": "夏日海岛伊莉莎"
+        },
+        "icon": "TI_Costume_Clothes_2000035_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000036": {
     "id": "2000036",
@@ -3391,6 +3665,53 @@
     "ee": "2000037",
     "recommendedSets": ["3", "2", "7"],
     "appearances": ["2010037", "2020037", "2030037", "2500037", "2600037"],
+    "costumes": [
+      {
+        "id": "2",
+        "model": "2010037",
+        "name": {
+          "en": "Dark Admiral Veronica",
+          "jp": "黒き提督・ヴェロニカ",
+          "kr": "검은 제독 베로니카",
+          "zh": "玄青提督维罗妮卡"
+        },
+        "icon": "TI_Costume_Clothes_2000037_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "2710037"
+      },
+      {
+        "id": "8",
+        "model": "2020037",
+        "name": {
+          "en": "Summer Island Veronica",
+          "jp": "サマーアイランド・ヴェロニカ",
+          "kr": "서머 아일랜드 베로니카",
+          "zh": "夏日海岛维罗妮卡"
+        },
+        "icon": "TI_Costume_Clothes_2000037_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "2720037"
+      },
+      {
+        "id": "76",
+        "model": "2030037",
+        "name": {
+          "en": "Bountiful Day Veronica",
+          "jp": "豊穣の日・ヴェロニカ",
+          "kr": "풍양의 날 베로니카",
+          "zh": "丰饶之日的维罗妮卡"
+        },
+        "icon": "TI_Costume_Clothes_2000037_04",
+        "grade": "rare",
+        "sort": 3,
+        "source": "event_shop",
+        "fusionModel": "2730037"
+      }
+    ],
     "coreFusion": "2700037"
   },
   "2000038": {
@@ -3575,7 +3896,39 @@
     },
     "ee": "2000039",
     "recommendedSets": ["13", "1", "7"],
-    "appearances": ["2010039", "2020039", "2400039"]
+    "appearances": ["2010039", "2020039", "2400039"],
+    "costumes": [
+      {
+        "id": "9",
+        "model": "2010039",
+        "name": {
+          "en": "Summer Island Stella",
+          "jp": "サマーアイランド・ステラ",
+          "kr": "서머 아일랜드 스텔라",
+          "zh": "夏日海岛斯黛拉"
+        },
+        "icon": "TI_Costume_Clothes_2000039_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "30",
+        "model": "2020039",
+        "name": {
+          "en": "Full Speed Ahead Princess Stella",
+          "jp": "走る王女様・ステラ",
+          "kr": "달려라 왕녀님 스텔라",
+          "zh": "奔跑吧！王女大人斯黛拉"
+        },
+        "icon": "TI_Costume_Clothes_2000039_03",
+        "grade": "normal",
+        "sort": 2,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000040": {
     "id": "2000040",
@@ -3941,6 +4294,23 @@
     "ee": "2000043",
     "recommendedSets": ["5", "13", "1"],
     "appearances": ["2010043"],
+    "costumes": [
+      {
+        "id": "15",
+        "model": "2010043",
+        "name": {
+          "en": "Bunny Croupier Eternal",
+          "jp": "バニーディーラー・エターナル",
+          "kr": "바니 딜러 이터널",
+          "zh": "兔女郎庄家伊特诺"
+        },
+        "icon": "TI_Costume_Clothes_2000043_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "2710043"
+      }
+    ],
     "coreFusion": "2700043"
   },
   "2000044": {
@@ -4034,7 +4404,24 @@
     },
     "ee": "2000044",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010044"]
+    "appearances": ["2010044"],
+    "costumes": [
+      {
+        "id": "10",
+        "model": "2010044",
+        "name": {
+          "en": "Summer Island Laplace",
+          "jp": "サマーアイランド・ラプラス",
+          "kr": "서머 아일랜드 라플라스",
+          "zh": "夏日海岛拉普拉丝"
+        },
+        "icon": "TI_Costume_Clothes_2000044_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000045": {
     "id": "2000045",
@@ -4856,7 +5243,23 @@
     },
     "ee": "2000053",
     "recommendedSets": ["1", "3", "7"],
-    "appearances": ["2010053"]
+    "appearances": ["2010053"],
+    "costumes": [
+      {
+        "id": "80",
+        "model": "2010053",
+        "name": {
+          "en": "Undefeated Villainess Stella",
+          "jp": "無敗の悪女・ステラ",
+          "kr": "불패의 악녀 스텔라",
+          "zh": "不败的恶女斯黛拉"
+        },
+        "icon": "TI_Costume_Clothes_2000053_02",
+        "grade": "magic",
+        "sort": 1,
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000054": {
     "id": "2000054",
@@ -4948,7 +5351,24 @@
     },
     "ee": "2000054",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010054"]
+    "appearances": ["2010054"],
+    "costumes": [
+      {
+        "id": "37",
+        "model": "2010054",
+        "name": {
+          "en": "Poolside Sloth Mene",
+          "jp": "プールのナマケモノ・メネ",
+          "kr": "풀장의 나무늘보 메네",
+          "zh": "泳池里的树懒麦尼"
+        },
+        "icon": "TI_Costume_Clothes_2000054_02",
+        "grade": "normal",
+        "sort": 1,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000055": {
     "id": "2000055",
@@ -5040,7 +5460,24 @@
     },
     "ee": "2000055",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010055"]
+    "appearances": ["2010055"],
+    "costumes": [
+      {
+        "id": "28",
+        "model": "2010055",
+        "name": {
+          "en": "Trainer Aer",
+          "jp": "トレーナー・アエル",
+          "kr": "트레이너 아에르",
+          "zh": "教练艾耶尔"
+        },
+        "icon": "TI_Costume_Clothes_2000055_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000056": {
     "id": "2000056",
@@ -5133,6 +5570,37 @@
     "ee": "2000056",
     "recommendedSets": ["13", "1", "7"],
     "appearances": ["2010056", "2020056"],
+    "costumes": [
+      {
+        "id": "25",
+        "model": "2010056",
+        "name": {
+          "en": "White Chocolate Notia",
+          "jp": "ホワイトチョコ・ノティア",
+          "kr": "화이트 초콜릿 노티아",
+          "zh": "白巧克力诺缇亚"
+        },
+        "icon": "TI_Costume_Clothes_2000056_02",
+        "grade": "normal",
+        "sort": 1,
+        "fusionModel": "2710056"
+      },
+      {
+        "id": "38",
+        "model": "2020056",
+        "name": {
+          "en": "Depraved Summer Notia",
+          "jp": "破廉恥な夏・ノティア",
+          "kr": "파렴치한 여름 노티아",
+          "zh": "无耻的夏天诺缇亚"
+        },
+        "icon": "TI_Costume_Clothes_2000056_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "2720056"
+      }
+    ],
     "coreFusion": "2700056"
   },
   "2000057": {
@@ -5316,7 +5784,24 @@
     },
     "ee": "2000058",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010058"]
+    "appearances": ["2010058"],
+    "costumes": [
+      {
+        "id": "12",
+        "model": "2010058",
+        "name": {
+          "en": "Holy Flame Astei",
+          "jp": "聖なる炎・アステ",
+          "kr": "신성한 불꽃 아스테",
+          "zh": "神圣火花奥斯黛"
+        },
+        "icon": "TI_Costume_Clothes_2000058_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000059": {
     "id": "2000059",
@@ -5402,7 +5887,24 @@
     },
     "ee": "2000059",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2020059"]
+    "appearances": ["2020059"],
+    "costumes": [
+      {
+        "id": "67",
+        "model": "2020059",
+        "name": {
+          "en": "Garden Exile Astei",
+          "jp": "庭園追放・アステ",
+          "kr": "정원 추방 아스테",
+          "zh": "逐出乐园·奥斯黛"
+        },
+        "icon": "TI_Costume_Clothes_2000059_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000060": {
     "id": "2000060",
@@ -5494,7 +5996,53 @@
     },
     "ee": "2000060",
     "recommendedSets": ["13", "3", "5"],
-    "appearances": ["2010060", "2020060", "2030060"]
+    "appearances": ["2010060", "2020060", "2030060"],
+    "costumes": [
+      {
+        "id": "13",
+        "model": "2010060",
+        "name": {
+          "en": "Battle Maid Tamara",
+          "jp": "戦闘メイド・タマラ",
+          "kr": "전투 메이드 타마라",
+          "zh": "战斗女仆塔玛拉"
+        },
+        "icon": "TI_Costume_Clothes_2000060_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "55",
+        "model": "2020060",
+        "name": {
+          "en": "Reindeer Combatant Tamara",
+          "jp": "トナカイ戦闘員・タマラ",
+          "kr": "순록 전투원 타마라",
+          "zh": "驯鹿战斗人员塔玛拉"
+        },
+        "icon": "TI_Costume_Clothes_2000060_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop_asset_normal",
+        "fusionModel": "0"
+      },
+      {
+        "id": "90",
+        "model": "2030060",
+        "name": {
+          "en": "Go-Go Curry Tamara",
+          "jp": "ゴーゴーカレー・タマラ",
+          "kr": "고고카레 타마라",
+          "zh": "咖喱加油·塔玛拉"
+        },
+        "icon": "TI_Costume_Clothes_2000060_04",
+        "grade": "rare",
+        "sort": 3,
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000061": {
     "id": "2000061",
@@ -5581,7 +6129,39 @@
     },
     "ee": "2000061",
     "recommendedSets": ["3", "2", "13"],
-    "appearances": ["2010061", "2020061"]
+    "appearances": ["2010061", "2020061"],
+    "costumes": [
+      {
+        "id": "27",
+        "model": "2010061",
+        "name": {
+          "en": "Discipline Committee Member Christina",
+          "jp": "風紀委員・クリスティーナ",
+          "kr": "풍기위원 크리스티나",
+          "zh": "风纪委员克莉丝提娜"
+        },
+        "icon": "TI_Costume_Clothes_2000061_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "71",
+        "model": "2020061",
+        "name": {
+          "en": "Utopia Survivor Christina",
+          "jp": "ユートピアの生き残り・クリスティーナ",
+          "kr": "유토피아의 생존자 크리스티나",
+          "zh": "乌托邦的幸存者·克莉丝提娜"
+        },
+        "icon": "TI_Costume_Clothes_2000061_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000062": {
     "id": "2000062",
@@ -5667,7 +6247,24 @@
     },
     "ee": "2000062",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010062"]
+    "appearances": ["2010062"],
+    "costumes": [
+      {
+        "id": "19",
+        "model": "2010062",
+        "name": {
+          "en": "Dark Dragon? Drakhan",
+          "jp": "暗黒魔竜? ドレイカーン",
+          "kr": "암흑마룡? 드레이칸",
+          "zh": "暗黑魔龙？德雷坎"
+        },
+        "icon": "TI_Costume_Clothes_2000062_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000063": {
     "id": "2000063",
@@ -5753,7 +6350,24 @@
     },
     "ee": "2000063",
     "recommendedSets": ["3", "2", "7"],
-    "appearances": ["2010063"]
+    "appearances": ["2010063"],
+    "costumes": [
+      {
+        "id": "36",
+        "model": "2010063",
+        "name": {
+          "en": "Indomitable Dragon Drakhan",
+          "jp": "不敗の竜・ドレイカーン",
+          "kr": "불패의 용 드레이칸",
+          "zh": "不败之龙德雷坎"
+        },
+        "icon": "TI_Costume_Clothes_2000063_02",
+        "grade": "magic",
+        "sort": 1,
+        "source": "world_boss_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000064": {
     "id": "2000064",
@@ -5839,7 +6453,39 @@
     },
     "ee": "2000064",
     "recommendedSets": ["13", "3", "5"],
-    "appearances": ["2010064", "2020064"]
+    "appearances": ["2010064", "2020064"],
+    "costumes": [
+      {
+        "id": "32",
+        "model": "2010064",
+        "name": {
+          "en": "Fresh and Warm Akari",
+          "jp": "ぽかぽかのアカリ",
+          "kr": "따끈따끈 아카리",
+          "zh": "暖洋洋的阿卡莉"
+        },
+        "icon": "TI_Costume_Clothes_2000064_02",
+        "grade": "normal",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "46",
+        "model": "2020064",
+        "name": {
+          "en": "Definitely Not A Soulslayer Akari",
+          "jp": "これじゃない霊斬士・アカリ",
+          "kr": "나 영참사 아니다 아카리",
+          "zh": "我不是灵斩师-阿卡莉"
+        },
+        "icon": "TI_Costume_Clothes_2000064_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000065": {
     "id": "2000065",
@@ -5926,7 +6572,99 @@
     },
     "ee": "2000065",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010065", "2020065", "2030065", "2040065", "2050065"]
+    "appearances": ["2010065", "2020065", "2030065", "2040065", "2050065"],
+    "costumes": [
+      {
+        "id": "23",
+        "model": "2000065",
+        "name": {
+          "en": "Ame",
+          "jp": "あめ",
+          "kr": "아메",
+          "zh": "亚美"
+        },
+        "icon": "TI_Costume_Clothes_2000065_01",
+        "grade": "normal",
+        "sort": 0,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "14",
+        "model": "2010065",
+        "name": {
+          "en": "Inari Ame",
+          "jp": "稲荷のあめ",
+          "kr": "이나리 아메",
+          "zh": "稻荷亚美"
+        },
+        "icon": "TI_Costume_Clothes_2000065_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "22",
+        "model": "2020065",
+        "name": {
+          "en": "New Year's Revelry Ame",
+          "jp": "新年の挨拶・あめ",
+          "kr": "신년맞이 아메",
+          "zh": "迎新年亚美"
+        },
+        "icon": "TI_Costume_Clothes_2000065_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "47",
+        "model": "2030065",
+        "name": {
+          "en": "Soulslayer of Apocalypse B Ame",
+          "jp": "黙示録の霊斬士B・あめ",
+          "kr": "묵시록의 영참사 B 아메",
+          "zh": "启示录灵斩师B-亚美"
+        },
+        "icon": "TI_Costume_Clothes_2000065_04",
+        "grade": "rare",
+        "sort": 3,
+        "source": "event_shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "73",
+        "model": "2040065",
+        "name": {
+          "en": "Ame, Wandering Soul of Utopia",
+          "jp": "ユートピアの放浪客・あめ",
+          "kr": "유토피아의 방랑객 아메",
+          "zh": "乌托邦的流浪者亚美"
+        },
+        "icon": "TI_Costume_Clothes_2000065_05",
+        "grade": "rare",
+        "sort": 5,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "79",
+        "model": "2050065",
+        "name": {
+          "en": "Bountiful Day Ame",
+          "jp": "豊穣の日・あめ",
+          "kr": "풍양의 날 아메",
+          "zh": "丰饶之日的亚美"
+        },
+        "icon": "TI_Costume_Clothes_2000065_06",
+        "grade": "rare",
+        "sort": 6,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000066": {
     "id": "2000066",
@@ -6013,7 +6751,39 @@
     },
     "ee": "2000066",
     "recommendedSets": ["13", "3", "5"],
-    "appearances": ["2010066", "2020066"]
+    "appearances": ["2010066", "2020066"],
+    "costumes": [
+      {
+        "id": "24",
+        "model": "2010066",
+        "name": {
+          "en": "Maid Detective Charlotte",
+          "jp": "探偵メイド・シャーロット",
+          "kr": "탐정 메이드 샬롯",
+          "zh": "侦探女仆夏洛特"
+        },
+        "icon": "TI_Costume_Clothes_2000066_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "56",
+        "model": "2020066",
+        "name": {
+          "en": "Reindeer Detective Charlotte",
+          "jp": "トナカイ探偵・シャーロット",
+          "kr": "순록 탐정 샬롯",
+          "zh": "驯鹿侦探夏洛特"
+        },
+        "icon": "TI_Costume_Clothes_2000066_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000067": {
     "id": "2000067",
@@ -6185,7 +6955,39 @@
     },
     "ee": "2000068",
     "recommendedSets": ["5", "13", "1"],
-    "appearances": ["2010068", "2020068"]
+    "appearances": ["2010068", "2020068"],
+    "costumes": [
+      {
+        "id": "21",
+        "model": "2010068",
+        "name": {
+          "en": "Merry Holidays Dahlia",
+          "jp": "ハッピークリスマス・ダリア",
+          "kr": "해피 크리스마스 달리아",
+          "zh": "圣诞快乐达利娅"
+        },
+        "icon": "TI_Costume_Clothes_2000068_02",
+        "grade": "normal",
+        "sort": 1,
+        "source": "event_shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "35",
+        "model": "2020068",
+        "name": {
+          "en": "Uninvited Summer Guest Dahlia",
+          "jp": "夏の招かざる客・ダリア",
+          "kr": "여름의 불청객 달리아",
+          "zh": "夏日不速之客达利娅"
+        },
+        "icon": "TI_Costume_Clothes_2000068_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000069": {
     "id": "2000069",
@@ -6272,7 +7074,39 @@
     },
     "ee": "2000069",
     "recommendedSets": ["5", "13", "1"],
-    "appearances": ["2010069", "2020069"]
+    "appearances": ["2010069", "2020069"],
+    "costumes": [
+      {
+        "id": "26",
+        "model": "2010069",
+        "name": {
+          "en": "Milk Chocolate Iota",
+          "jp": "ミルクチョコ・イオータ",
+          "kr": "밀크 초콜릿 요타",
+          "zh": "牛奶巧克力佑妲"
+        },
+        "icon": "TI_Costume_Clothes_2000069_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "39",
+        "model": "2020069",
+        "name": {
+          "en": "Eseph Functional Wear Iota",
+          "jp": "エッセプの機能服・イオータ",
+          "kr": "엣셉흐의 기능복 요타",
+          "zh": "埃瑟夫赫的功能服佑妲"
+        },
+        "icon": "TI_Costume_Clothes_2000069_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000070": {
     "id": "2000070",
@@ -6444,7 +7278,53 @@
     },
     "ee": "2000071",
     "recommendedSets": ["2", "16", "7"],
-    "appearances": ["2010071", "2020071", "2030071"]
+    "appearances": ["2010071", "2020071", "2030071"],
+    "costumes": [
+      {
+        "id": "49",
+        "model": "2010071",
+        "name": {
+          "en": "Warden of Apocalypse Kanon",
+          "jp": "地獄の看守長・カノン",
+          "kr": "지옥의 간수장 카논",
+          "zh": "地狱看守长-卡农"
+        },
+        "icon": "TI_Costume_Clothes_2000071_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "69",
+        "model": "2020071",
+        "name": {
+          "en": "Pirate Captain Kanon of Utopia",
+          "jp": "ユートピアの海賊船長・カノン",
+          "kr": "유토피아의 해적 선장 카논",
+          "zh": "乌托邦的海盗船长卡农"
+        },
+        "icon": "TI_Costume_Clothes_2000071_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "89",
+        "model": "2030071",
+        "name": {
+          "en": "Go-Go Curry Kanon",
+          "jp": "ゴーゴーカレー・カノン",
+          "kr": "고고카레 카논",
+          "zh": "咖喱加油·卡農"
+        },
+        "icon": "TI_Costume_Clothes_2000071_04",
+        "grade": "rare",
+        "sort": 3,
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000072": {
     "id": "2000072",
@@ -6530,7 +7410,24 @@
     },
     "ee": "2000072",
     "recommendedSets": ["13", "3", "5"],
-    "appearances": ["2010072"]
+    "appearances": ["2010072"],
+    "costumes": [
+      {
+        "id": "51",
+        "model": "2010072",
+        "name": {
+          "en": "Ninja of Apocalypse Edelweiss",
+          "jp": "黙示録のニンジャ・エーデルバイス",
+          "kr": "묵시록의 닌자 에델바이스",
+          "zh": "启示录忍者-艾妲尔薇斯"
+        },
+        "icon": "TI_Costume_Clothes_2000072_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000073": {
     "id": "2000073",
@@ -6701,7 +7598,53 @@
     },
     "ee": "2000074",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010074", "2020074", "2030074"]
+    "appearances": ["2010074", "2020074", "2030074"],
+    "costumes": [
+      {
+        "id": "44",
+        "model": "2010074",
+        "name": {
+          "en": "Fireworks of Love Dianne",
+          "jp": "愛の炎・ダイアン",
+          "kr": "사랑의 불꽃 다이안",
+          "zh": "爱之火花黛安"
+        },
+        "icon": "TI_Costume_Clothes_2000074_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "72",
+        "model": "2020074",
+        "name": {
+          "en": "Utopia Bride Dianne",
+          "jp": "ユートピアの新妻・ダイアン",
+          "kr": "유토피아의 새색시 다이안",
+          "zh": "乌托邦新娘·黛安"
+        },
+        "icon": "TI_Costume_Clothes_2000074_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "94",
+        "model": "2030074",
+        "name": {
+          "en": "Lovely Spy Dianne",
+          "jp": "愛らしいスパイ・ダイアン",
+          "kr": "사랑스러운 스파이 다이안",
+          "zh": "可爱间谍·黛安"
+        },
+        "icon": "TI_Costume_Clothes_2000074_04",
+        "grade": "rare",
+        "sort": 3,
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000075": {
     "id": "2000075",
@@ -6787,7 +7730,39 @@
     },
     "ee": "2000075",
     "recommendedSets": ["13", "1", "7"],
-    "appearances": ["2010075", "2020075"]
+    "appearances": ["2010075", "2020075"],
+    "costumes": [
+      {
+        "id": "54",
+        "model": "2010075",
+        "name": {
+          "en": "Maid Vlada of the Reversed World",
+          "jp": "逆転世界のメイド・ヴラダ",
+          "kr": "역전세계의 메이드 블라다",
+          "zh": "颠倒世界的女仆布拉达"
+        },
+        "icon": "TI_Costume_Clothes_2000075_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "70",
+        "model": "2020075",
+        "name": {
+          "en": "First Vacation Vlada",
+          "jp": "初めてのバカンス・ヴラダ",
+          "kr": "첫 바캉스 블라다",
+          "zh": "初次度假·弗拉达"
+        },
+        "icon": "TI_Costume_Clothes_2000075_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000076": {
     "id": "2000076",
@@ -6873,7 +7848,39 @@
     },
     "ee": "2000076",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010076", "2020076"]
+    "appearances": ["2010076", "2020076"],
+    "costumes": [
+      {
+        "id": "43",
+        "model": "2010076",
+        "name": {
+          "en": "Blushing Bride Bryn",
+          "jp": "私たち結婚しました・ブリン",
+          "kr": "우리 결혼했어요 브린",
+          "zh": "我们结婚了布琳"
+        },
+        "icon": "TI_Costume_Clothes_2000076_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "59",
+        "model": "2020076",
+        "name": {
+          "en": "I'm the Idol! Bryn",
+          "jp": "アイドルだぴょん・ブリン",
+          "kr": "아이돌이다 뿅 브린",
+          "zh": "是偶像哟布琳"
+        },
+        "icon": "TI_Costume_Clothes_2000076_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000077": {
     "id": "2000077",
@@ -6959,7 +7966,39 @@
     },
     "ee": "2000077",
     "recommendedSets": ["3", "2", "7"],
-    "appearances": ["2010077", "2020077"]
+    "appearances": ["2010077", "2020077"],
+    "costumes": [
+      {
+        "id": "58",
+        "model": "2010077",
+        "name": {
+          "en": "Goddess of Fortune Kappa",
+          "jp": "幸運の女神・カッパ",
+          "kr": "행운의 여신 카파",
+          "zh": "幸运女神卡帕"
+        },
+        "icon": "TI_Costume_Clothes_2000077_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "60",
+        "model": "2020077",
+        "name": {
+          "en": "I'm the Great General! Kappa",
+          "jp": "大将軍だぴょん・カッパ",
+          "kr": "대장군이다 뿅 카파",
+          "zh": "是大将军哟卡帕"
+        },
+        "icon": "TI_Costume_Clothes_2000077_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000078": {
     "id": "2000078",
@@ -7132,7 +8171,39 @@
     },
     "ee": "2000079",
     "recommendedSets": ["5", "13", "1"],
-    "appearances": ["2010079", "2020079"]
+    "appearances": ["2010079", "2020079"],
+    "costumes": [
+      {
+        "id": "33",
+        "model": "2010079",
+        "name": {
+          "en": "Hot Spring's Specialty Kuro",
+          "jp": "温泉の看板猫・クロ",
+          "kr": "온천의 명물 쿠로",
+          "zh": "温泉名物小黑"
+        },
+        "icon": "TI_Costume_Clothes_2000079_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "48",
+        "model": "2020079",
+        "name": {
+          "en": "Kitty of Apocalypse Kuro",
+          "jp": "黙示録の猫・クロ",
+          "kr": "묵시록의 고양이 쿠로",
+          "zh": "启示录之猫-小黑"
+        },
+        "icon": "TI_Costume_Clothes_2000079_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000080": {
     "id": "2000080",
@@ -7218,7 +8289,24 @@
     },
     "ee": "2000080",
     "recommendedSets": ["3", "2", "13"],
-    "appearances": ["2010080"]
+    "appearances": ["2010080"],
+    "costumes": [
+      {
+        "id": "34",
+        "model": "2010080",
+        "name": {
+          "en": "Suspicious Hot Spring's Tamamo-no-Mae",
+          "jp": "不思議な温泉のタマモノマエ",
+          "kr": "수상한 온천의 타마모노마에",
+          "zh": "可疑温泉的玉藻前"
+        },
+        "icon": "TI_Costume_Clothes_2000080_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000081": {
     "id": "2000081",
@@ -7305,7 +8393,24 @@
     },
     "ee": "2000081",
     "recommendedSets": ["13", "1", "7"],
-    "appearances": ["2010081"]
+    "appearances": ["2010081"],
+    "costumes": [
+      {
+        "id": "41",
+        "model": "2010081",
+        "name": {
+          "en": "Desert Rampage Maxie",
+          "jp": "砂漠のいたずらっ娘・マキシー",
+          "kr": "사막의 난동꾼 맥시",
+          "zh": "沙漠暴徒麦克茜"
+        },
+        "icon": "TI_Costume_Clothes_2000081_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000082": {
     "id": "2000082",
@@ -7391,7 +8496,24 @@
     },
     "ee": "2000082",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010082"]
+    "appearances": ["2010082"],
+    "costumes": [
+      {
+        "id": "42",
+        "model": "2010082",
+        "name": {
+          "en": "Desert Provocation Roxie",
+          "jp": "砂漠の暴れっ娘・ロキシー",
+          "kr": "사막의 어그로꾼 록시",
+          "zh": "沙漠挑衅者萝克茜"
+        },
+        "icon": "TI_Costume_Clothes_2000082_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000083": {
     "id": "2000083",
@@ -7477,7 +8599,24 @@
     },
     "ee": "2000083",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010083"]
+    "appearances": ["2010083"],
+    "costumes": [
+      {
+        "id": "52",
+        "model": "2010083",
+        "name": {
+          "en": "The Belle of the Ball Nella",
+          "jp": "舞踏会の女王・ネラ",
+          "kr": "무도회의 여왕 넬라",
+          "zh": "舞会女王内拉"
+        },
+        "icon": "TI_Costume_Clothes_2000083_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000084": {
     "id": "2000084",
@@ -7563,7 +8702,53 @@
     },
     "ee": "2000084",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010084", "2030084", "2020084"]
+    "appearances": ["2010084", "2030084", "2020084"],
+    "costumes": [
+      {
+        "id": "45",
+        "model": "2010084",
+        "name": {
+          "en": "Midsummer Memories Eva",
+          "jp": "真夏の思い出・エヴァ",
+          "kr": "한여름의 추억 에바",
+          "zh": "仲夏夜的回忆艾娃"
+        },
+        "icon": "TI_Costume_Clothes_2000084_02",
+        "grade": "normal",
+        "sort": 1,
+        "source": "event_shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "65",
+        "model": "2030084",
+        "name": {
+          "en": "One and Only Wish Eva",
+          "jp": "たった一つの願い・エヴァ",
+          "kr": "하나뿐인 소원 에바",
+          "zh": "唯一的心愿·艾娃"
+        },
+        "icon": "TI_Costume_Clothes_2000084_03",
+        "grade": "rare",
+        "sort": 2,
+        "fusionModel": "0"
+      },
+      {
+        "id": "74",
+        "model": "2020084",
+        "name": {
+          "en": "Eva's Long-Awaited Vacation",
+          "jp": "待望のバカンス・エヴァ",
+          "kr": "소원하던 바캉스 에바",
+          "zh": "期盼已久的假期·艾娃"
+        },
+        "icon": "TI_Costume_Clothes_2000084_04",
+        "grade": "rare",
+        "sort": 3,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000085": {
     "id": "2000085",
@@ -7822,7 +9007,52 @@
     },
     "ee": "2000087",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010087", "2030087", "2020087"]
+    "appearances": ["2010087", "2030087", "2020087"],
+    "costumes": [
+      {
+        "id": "53",
+        "model": "2010087",
+        "name": {
+          "en": "Cheerful Guest Rey",
+          "jp": "お祝い上手のお客さん・レイ",
+          "kr": "발랄한 축하객 레이",
+          "zh": "活泼的佳宾雷伊"
+        },
+        "icon": "TI_Costume_Clothes_2000087_02",
+        "grade": "rare",
+        "sort": 1,
+        "fusionModel": "0"
+      },
+      {
+        "id": "91",
+        "model": "2020087",
+        "name": {
+          "en": "Go-Go Curry Rey",
+          "jp": "ゴーゴーカレー・レイ",
+          "kr": "고고카레 레이",
+          "zh": "咖喱加油·蕾伊"
+        },
+        "icon": "TI_Costume_Clothes_2000087_03",
+        "grade": "rare",
+        "sort": 2,
+        "fusionModel": "0"
+      },
+      {
+        "id": "93",
+        "model": "2030087",
+        "name": {
+          "en": "Ace Accomplice Rey",
+          "jp": "ソウルパートナー・レイ",
+          "kr": "영혼의 파트너 레이",
+          "zh": "灵魂伙伴·蕾伊"
+        },
+        "icon": "TI_Costume_Clothes_2000087_04",
+        "grade": "rare",
+        "sort": 3,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000088": {
     "id": "2000088",
@@ -7909,7 +9139,24 @@
     },
     "ee": "2000088",
     "recommendedSets": ["3", "2", "13"],
-    "appearances": ["2010088"]
+    "appearances": ["2010088"],
+    "costumes": [
+      {
+        "id": "64",
+        "model": "2010088",
+        "name": {
+          "en": "Marching Star Hilde",
+          "jp": "マーチングスター・ヒルデ",
+          "kr": "마칭 스타 힐데",
+          "zh": "行进之星希尔德"
+        },
+        "icon": "TI_Costume_Clothes_2000088_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000089": {
     "id": "2000089",
@@ -7995,7 +9242,24 @@
     },
     "ee": "2000089",
     "recommendedSets": ["1", "3", "7"],
-    "appearances": ["2010089", "2100089"]
+    "appearances": ["2010089", "2100089"],
+    "costumes": [
+      {
+        "id": "57",
+        "model": "2010089",
+        "name": {
+          "en": "Cozy Winter Night Caren",
+          "jp": "ほのかに灯る冬の宵・カレン",
+          "kr": "따뜻한 겨울밤 카렌",
+          "zh": "温暖冬夜卡伦"
+        },
+        "icon": "TI_Costume_Clothes_2000089_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000090": {
     "id": "2000090",
@@ -8083,7 +9347,24 @@
     },
     "ee": "2000090",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010090"]
+    "appearances": ["2010090"],
+    "costumes": [
+      {
+        "id": "82",
+        "model": "2010090",
+        "name": {
+          "en": "Holy Night's Archdemon Dahlia",
+          "jp": "聖夜の魔王 ダリア",
+          "kr": "성야의 마왕 달리아",
+          "zh": "圣夜魔王 达利娅"
+        },
+        "icon": "TI_Costume_Clothes_2000090_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000091": {
     "id": "2000091",
@@ -8170,7 +9451,24 @@
     },
     "ee": "2000091",
     "recommendedSets": ["5", "13", "1"],
-    "appearances": ["2010091"]
+    "appearances": ["2010091"],
+    "costumes": [
+      {
+        "id": "63",
+        "model": "2010091",
+        "name": {
+          "en": "Undefeated Leader Nella",
+          "jp": "不敗の指導者・ネラ",
+          "kr": "불패의 지도자 넬라",
+          "zh": "不败的领袖内拉"
+        },
+        "icon": "TI_Costume_Clothes_2000091_02",
+        "grade": "magic",
+        "sort": 1,
+        "source": "world_boss_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000092": {
     "id": "2000092",
@@ -8429,7 +9727,24 @@
     },
     "ee": "2000094",
     "recommendedSets": ["3", "2", "7"],
-    "appearances": ["2010094"]
+    "appearances": ["2010094"],
+    "costumes": [
+      {
+        "id": "61",
+        "model": "2010094",
+        "name": {
+          "en": "I'm the Delivery Knight! Ember",
+          "jp": "配達騎士だぴょん・エンバー",
+          "kr": "택배기사다 뿅 엠버",
+          "zh": "是快递骑士哟炎珀"
+        },
+        "icon": "TI_Costume_Clothes_2000094_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000095": {
     "id": "2000095",
@@ -8772,7 +10087,24 @@
     },
     "ee": "2000098",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010098"]
+    "appearances": ["2010098"],
+    "costumes": [
+      {
+        "id": "68",
+        "model": "2010098",
+        "name": {
+          "en": "Eternal Oath Liselotte",
+          "jp": "永遠の誓い・リーゼロッテ",
+          "kr": "영원한 맹세 리젤로테",
+          "zh": "永恒誓约莉婕洛特"
+        },
+        "icon": "TI_Costume_Clothes_2000098_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000099": {
     "id": "2000099",
@@ -9029,7 +10361,24 @@
     },
     "ee": "2000101",
     "recommendedSets": ["13", "3", "5"],
-    "appearances": ["2010101"]
+    "appearances": ["2010101"],
+    "costumes": [
+      {
+        "id": "62",
+        "model": "2010101",
+        "name": {
+          "en": "Unfinished Youth Skadi",
+          "jp": "青春リベンジ・スカディ",
+          "kr": "못다 한 청춘 스카디",
+          "zh": "未完的青春斯卡蒂"
+        },
+        "icon": "TI_Costume_Clothes_2000101_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000102": {
     "id": "2000102",
@@ -9287,7 +10636,24 @@
     },
     "ee": "2000105",
     "recommendedSets": ["13", "3", "5"],
-    "appearances": ["2010105"]
+    "appearances": ["2010105"],
+    "costumes": [
+      {
+        "id": "78",
+        "model": "2010105",
+        "name": {
+          "en": "Bountiful Day Fran",
+          "jp": "豊穣の日・フラン",
+          "kr": "풍양의 날 프랑",
+          "zh": "丰饶之日的芙蓢"
+        },
+        "icon": "TI_Costume_Clothes_2000105_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "event_shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000106": {
     "id": "2000106",
@@ -9459,7 +10825,24 @@
     },
     "ee": "2000107",
     "recommendedSets": ["5", "13", "1"],
-    "appearances": ["2010107"]
+    "appearances": ["2010107"],
+    "costumes": [
+      {
+        "id": "81",
+        "model": "2010107",
+        "name": {
+          "en": "Festival Safety Manager Fortuna",
+          "jp": "フェスガード・フォルトゥナ",
+          "kr": "축제 안전 관리자 포르투나",
+          "zh": "祭典安全管理员·福尔图娜"
+        },
+        "icon": "TI_Costume_Clothes_2000107_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000108": {
     "id": "2000108",
@@ -9545,7 +10928,24 @@
     },
     "ee": "2000108",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010108"]
+    "appearances": ["2010108"],
+    "costumes": [
+      {
+        "id": "75",
+        "model": "2010108",
+        "name": {
+          "en": "Fatal Bunny Girl Viella",
+          "jp": "致命的なバニーガール・ビエラ",
+          "kr": "치명적인 바니걸 비엘라",
+          "zh": "致命兔女郎比埃拉"
+        },
+        "icon": "TI_Costume_Clothes_2000108_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000109": {
     "id": "2000109",
@@ -9632,7 +11032,24 @@
     },
     "ee": "2000109",
     "recommendedSets": ["3", "1", "11"],
-    "appearances": ["2010109"]
+    "appearances": ["2010109"],
+    "costumes": [
+      {
+        "id": "83",
+        "model": "2010109",
+        "name": {
+          "en": "Pony Girl Viella",
+          "jp": "ポニーガールだぴょん ビエラ",
+          "kr": "포니걸이다 뿅 비엘라",
+          "zh": "马尾少女 薇厄拉"
+        },
+        "icon": "TI_Costume_Clothes_2000109_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000110": {
     "id": "2000110",
@@ -9806,7 +11223,24 @@
     },
     "ee": "2000111",
     "recommendedSets": ["13", "3", "5"],
-    "appearances": ["2010111"]
+    "appearances": ["2010111"],
+    "costumes": [
+      {
+        "id": "84",
+        "model": "2010111",
+        "name": {
+          "en": "Goddess of Fortune Iota",
+          "jp": "幸運の主神イオータ",
+          "kr": "행운의 주신 요타",
+          "zh": "幸运之神·佑妲"
+        },
+        "icon": "TI_Costume_Clothes_2000111_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000112": {
     "id": "2000112",
@@ -9893,7 +11327,38 @@
     },
     "ee": "2000112",
     "recommendedSets": ["2", "11", "7"],
-    "appearances": ["2010112", "2020112"]
+    "appearances": ["2010112", "2020112"],
+    "costumes": [
+      {
+        "id": "88",
+        "model": "2010112",
+        "name": {
+          "en": "Spring Reverie",
+          "jp": "春うららかな夢",
+          "kr": "화사한 봄의 꿈",
+          "zh": "绚烂的春之梦"
+        },
+        "icon": "TI_Costume_Clothes_2000112_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "87",
+        "model": "2020112",
+        "name": {
+          "en": "Pilgrim",
+          "jp": "巡礼者",
+          "kr": "순례자",
+          "zh": "朝圣者"
+        },
+        "icon": "TI_Costume_Clothes_2000112_03",
+        "grade": "rare",
+        "sort": 2,
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000113": {
     "id": "2000113",
@@ -9979,7 +11444,24 @@
     },
     "ee": "2000113",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010113"]
+    "appearances": ["2010113"],
+    "costumes": [
+      {
+        "id": "85",
+        "model": "2010113",
+        "name": {
+          "en": "Bittersweet Maid Primine",
+          "jp": "ビタースイートメイド・プリミネ",
+          "kr": "비터스윗 메이드 프리미네",
+          "zh": "苦甜女仆 普莉米妮"
+        },
+        "icon": "TI_Costume_Clothes_2000113_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000114": {
     "id": "2000114",
@@ -10066,7 +11548,24 @@
     },
     "ee": "2000114",
     "recommendedSets": ["3", "11", "10"],
-    "appearances": ["2010114"]
+    "appearances": ["2010114"],
+    "costumes": [
+      {
+        "id": "95",
+        "model": "2010114",
+        "name": {
+          "en": "Alluring Scarlet Skadi",
+          "jp": "魅惑のスカーレット・スカディ",
+          "kr": "매혹적인 스칼렛 스카디",
+          "zh": "魅惑深红·斯卡蒂"
+        },
+        "icon": "TI_Costume_Clothes_2000114_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000116": {
     "id": "2000116",
@@ -10152,7 +11651,24 @@
     },
     "ee": "2000116",
     "recommendedSets": ["2", "3", "7"],
-    "appearances": ["2010116"]
+    "appearances": ["2010116"],
+    "costumes": [
+      {
+        "id": "98",
+        "model": "2010116",
+        "name": {
+          "en": "Sunny Afternoon Anarky",
+          "jp": "爽やかな午後の陽射し・アナーキ",
+          "kr": "산뜻한 오후 햇살 아나키",
+          "zh": "清爽午后阳光·阿娜奇"
+        },
+        "icon": "TI_Costume_Clothes_2000116_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "battlepass",
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000117": {
     "id": "2000117",
@@ -10238,7 +11754,38 @@
     },
     "ee": "2000117",
     "recommendedSets": ["1", "12", "13"],
-    "appearances": ["2010117", "2020117"]
+    "appearances": ["2010117", "2020117"],
+    "costumes": [
+      {
+        "id": "86",
+        "model": "2010117",
+        "name": {
+          "en": "Great Instructor Eris",
+          "jp": "グレートティーチャー・エリス",
+          "kr": "그레이트 티쳐 에리스",
+          "zh": "伟大的教师艾里斯"
+        },
+        "icon": "TI_Costume_Clothes_2000117_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "fusionModel": "0"
+      },
+      {
+        "id": "92",
+        "model": "2020117",
+        "name": {
+          "en": "Lethal Spy Eris",
+          "jp": "危険なスパイ・エリス",
+          "kr": "위험한 스파이 에리스",
+          "zh": "危险间谍·艾理斯"
+        },
+        "icon": "TI_Costume_Clothes_2000117_03",
+        "grade": "rare",
+        "sort": 2,
+        "fusionModel": "0"
+      }
+    ]
   },
   "2000119": {
     "id": "2000119",

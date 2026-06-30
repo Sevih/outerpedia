@@ -147,7 +147,17 @@ function categoryCoverage() {
     }
   })();
 
-  const v3HasAppearances = Object.values(C).filter((c) => Array.isArray(c.appearances)).length;
+  // Skins : couverture + cohérence vs V2 (character-skins.json).
+  const v3Costumes = Object.values(C).filter((c) => Array.isArray(c.costumes)).length;
+  let skinOk = 0,
+    skinSeen = 0;
+  for (const [id, list] of Object.entries(skins as Record<string, Dict[]>)) {
+    const cos = C[id]?.costumes as Dict[] | undefined;
+    if (!cos) continue;
+    skinSeen++;
+    if (cos.length === list.length && (cos[0]?.name as Dict)?.en === (list[0]?.name as Dict)?.en)
+      skinOk++;
+  }
 
   // Profils : couverture + cohérence de valeurs vs V2.
   const v3Profiles = Object.values(C).filter((c) => c.profile).length;
@@ -171,7 +181,7 @@ function categoryCoverage() {
     {
       name: 'skins (nom + icône costume)',
       v2Count: Object.keys(skins).length,
-      status: `🟠 PARTIEL — V3 a appearances[] sur ${v3HasAppearances} persos, sans détails (CostumeTemplet)`,
+      status: `✅ EXTRAIT — V3 ${v3Costumes} persos, ${skinOk}/${skinSeen} cohérents (costumes)`,
     },
     {
       name: 'stats détaillées par palier',
