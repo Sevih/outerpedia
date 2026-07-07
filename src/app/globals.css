@@ -171,8 +171,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image:
-    linear-gradient(var(--page-veil), var(--page-veil)), url('/images/background_compressed.webp');
+  background-image: linear-gradient(var(--page-veil), var(--page-veil)), var(--bg-page);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -182,9 +181,7 @@ body::before {
    l'image paysage 2752×1536 serait sinon zoomée ~3× pour couvrir. */
 @media (orientation: portrait) {
   body::before {
-    background-image:
-      linear-gradient(var(--page-veil), var(--page-veil)),
-      url('/images/background_compressed_portrait.webp');
+    background-image: linear-gradient(var(--page-veil), var(--page-veil)), var(--bg-page-portrait);
   }
 }
 
@@ -228,7 +225,7 @@ body::before {
     font-weight: 700;
     &::after {
       height: 4px;
-      background-image: url('/images/ui/common/CM_Result_Victory_Bg.webp');
+      background-image: var(--hr-h1);
     }
   }
 
@@ -238,7 +235,7 @@ body::before {
     font-weight: 700;
     &::after {
       height: 3px;
-      background-image: url('/images/ui/common/CM_Result_Victory_Line.webp');
+      background-image: var(--hr-h2);
     }
   }
 
@@ -248,7 +245,7 @@ body::before {
     font-weight: 600;
     &::after {
       height: 3px;
-      background-image: url('/images/ui/common/CM_Gradation_Bg.webp');
+      background-image: var(--hr-h3);
       filter: brightness(0.9) sepia(1) saturate(3) hue-rotate(-5deg);
     }
   }
@@ -259,7 +256,7 @@ body::before {
     font-weight: 600;
     &::after {
       height: 2px;
-      background-image: url('/images/ui/common/CM_Gauge_CharacterInfo.webp');
+      background-image: var(--hr-h4);
     }
   }
 
@@ -269,7 +266,7 @@ body::before {
     font-weight: 600;
     &::after {
       height: 2px;
-      background-image: url('/images/ui/common/CM_Gauge_AccountInfo.webp');
+      background-image: var(--hr-h5);
     }
   }
 }
@@ -290,7 +287,7 @@ body::before {
     width: 100%;
     height: 3px;
     pointer-events: none;
-    background-image: url('/images/ui/common/CM_Result_Victory_Line.webp');
+    background-image: var(--hr-h2);
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: 100% 100%;

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 import { getBaseUrl } from '@/lib/seo';
+import { cssBackgroundVars } from '@/lib/images';
 import './globals.css';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
@@ -25,7 +26,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   // Thème unique (sombre, apparence V2) — pas de provider de thème.
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${paybooc.variable}`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${paybooc.variable}`}
+      // Fonds décoratifs → base R2 (globals.css les lit en var — cf. cssBackgroundVars).
+      style={cssBackgroundVars as React.CSSProperties}
+    >
       <body className="antialiased">
         {children}
         <div id="portal-root" />

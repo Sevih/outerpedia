@@ -81,6 +81,23 @@ export const img = {
   coreFusionTag: () => `${BASE}/images/ui/tags/CT_Core_Icon.webp`,
 };
 
+/**
+ * Fonds décoratifs référencés par `globals.css` (page + traits de titres). En
+ * CSS on ne peut pas concaténer `var()` dans un `url()`, donc on injecte la
+ * valeur `url(...)` COMPLÈTE (base R2 en prod, relatif en dev) comme variables
+ * CSS sur `<html>` — le CSS ne référence plus que `var(--bg-*)`. Sans ça, les
+ * `url('/images/...')` relatifs tapent le domaine du site (404) au lieu de R2.
+ */
+export const cssBackgroundVars: Record<`--${string}`, string> = {
+  '--bg-page': `url('${BASE}/images/background_compressed.webp')`,
+  '--bg-page-portrait': `url('${BASE}/images/background_compressed_portrait.webp')`,
+  '--hr-h1': `url('${BASE}/images/ui/common/CM_Result_Victory_Bg.webp')`,
+  '--hr-h2': `url('${BASE}/images/ui/common/CM_Result_Victory_Line.webp')`,
+  '--hr-h3': `url('${BASE}/images/ui/common/CM_Gradation_Bg.webp')`,
+  '--hr-h4': `url('${BASE}/images/ui/common/CM_Gauge_CharacterInfo.webp')`,
+  '--hr-h5': `url('${BASE}/images/ui/common/CM_Gauge_AccountInfo.webp')`,
+};
+
 /** Grade slug → suffixe du sprite de cadre TI_Slot_*. */
 const SLOT_FRAME: Record<string, string> = {
   normal: 'Normal',
