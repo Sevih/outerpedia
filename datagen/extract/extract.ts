@@ -1,0 +1,86 @@
+/**
+ * extract — lance AssetStudioModCLI sur les bundles pour en sortir :
+ *   - les .bytes (templates + textes)  → .gamedata/extracted/bytes/
+ *   - les images (sprite/tex2d)        → .gamedata/extracted/images/
+ *
+ * Étape locale (l'outil .NET n'est pas réécrit en TS, juste piloté proprement).
+ * Le convert (.bytes → templates typés) viendra ensuite, en TS.
+ *
+ * Usage :
+ *   pnpm datagen:extract           # bytes + images
+ *   pnpm datagen:extract bytes     # uniquement les .bytes
+ *   pnpm datagen:extract images    # uniquement les images
+ *
+ * Chemin de l'outil surchargeable via ASTUDIO_CLI.
+ */
+import { execFileSync } from 'node:child_process';
+import { mkdirSync } from 'node:fs';
+import { cpus } from 'node:os';
+import { resolve } from 'node:path';
+
+const ROOT = resolve('.gamedata');
+const CLI =
+  process.env.ASTUDIO_CLI ?? resolve(ROOT, 'tools/AssetStudioModCLI/AssetStudioModCLI.exe');
+const BUNDLES = resolve(ROOT, 'files/bundles');
+const OUT_BYTES = resolve(ROOT, 'extracted/bytes');
+const OUT_IMAGES = resolve(ROOT, 'extracted/images');
+
+function cli(args: string[]): void {
+  execFileSync(CLI, args, { stdio: 'inherit' });
+}
+
+/** .bytes = templates (Templet) + textes (Text*), à plat. */
+function extractBytes(): void {
+  console.log('↻ extraction des .bytes (templates + textes)...');
+  mkdirSync(OUT_BYTES, { recursive: true });
+  cli([
+    BUNDLES,
+    '-m',
+    'export',
+    '-t',
+    'textAsset',
+    '-g',
+    'none',
+    '-r',
+    '-o',
+    OUT_BYTES,
+    '--log-level',
+    'warning',
+    '--filter-by-name',
+    'Templet|^Text',
+    '--filter-with-regex',
+  ]);
+}
+
+/** Images sprite/tex2d des UI/ressources (hors FX). */
+function extractImages(): void {
+  console.log('↻ extraction des images (sprite/tex2d)...');
+  mkdirSync(OUT_IMAGES, { recursive: true });
+  const maxTasks = Math.min(Math.max(cpus().length - 4, 1), 16);
+  cli([
+    BUNDLES,
+    '-m',
+    'export',
+    '-t',
+    'sprite,tex2d',
+    '-g',
+    'containerFull',
+    '-r',
+    '-o',
+    OUT_IMAGES,
+    '--max-export-tasks',
+    String(maxTasks),
+    '--log-level',
+    'warning',
+    '--filter-by-container',
+    'assets/editor/resources/(sprite|texture|prefabs/ui)|assets/art/ui/',
+    '--filter-by-name',
+    '^(?!T_FX_)',
+    '--filter-with-regex',
+  ]);
+}
+
+const what = process.argv[2] ?? 'all';
+if (what === 'bytes' || what === 'all') extractBytes();
+if (what === 'images' || what === 'all') extractImages();
+console.log('✅ Extraction terminée.');

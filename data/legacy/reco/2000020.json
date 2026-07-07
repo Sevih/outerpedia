@@ -1,0 +1,28 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStat": "ATK%/HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Search and Destroy",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Dies Irae",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$speedEff",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

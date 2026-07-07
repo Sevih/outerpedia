@@ -1,0 +1,62 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "SPD>ATK>CHC>CHD>HP",
+    "Note": "",
+    "Talisman": [
+      "$CPplusVang"
+    ]
+  },
+  "Swift Counter": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "ct2sw2"
+    ],
+    "SubstatPrio": "SPD>ATK>CHC>CHD>HP",
+    "Note": "",
+    "Talisman": [
+      "$CPplusVang"
+    ]
+  }
+}

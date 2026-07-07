@@ -1,0 +1,46 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Swift Counter": {
+    "Weapon": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Resurrection Token",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "ct2sw2"
+    ],
+    "SubstatPrio": "$heal",
+    "Note": "",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  }
+}

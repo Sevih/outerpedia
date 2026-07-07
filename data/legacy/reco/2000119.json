@@ -1,0 +1,158 @@
+{
+  "Penetration": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "p4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Critical Strike": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "chd4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Pen mix": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "p2s2",
+      "p2a2",
+      "p2chd2",
+      "p2ag2",
+      "p2i2"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

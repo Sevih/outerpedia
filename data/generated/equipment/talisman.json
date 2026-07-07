@@ -1,0 +1,2014 @@
+{
+  "10001": {
+    "name": {
+      "en": "Executioner's Charm",
+      "jp": "処刑人のタリスマン",
+      "kr": "처형인의 탈리스만",
+      "zh": "刽子手的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_01",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10002": {
+    "name": {
+      "en": "Gladiator's Charm",
+      "jp": "剣闘士のタリスマン",
+      "kr": "검투사의 탈리스만",
+      "zh": "剑斗士的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_02",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10003": {
+    "name": {
+      "en": "Rogue's Charm",
+      "jp": "盗賊のタリスマン",
+      "kr": "도적의 탈리스만",
+      "zh": "盗贼的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_03",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10004": {
+    "name": {
+      "en": "Sage's Charm",
+      "jp": "賢者のタリスマン",
+      "kr": "현자의 탈리스만",
+      "zh": "贤者的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_04",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10005": {
+    "name": {
+      "en": "Prophet's Charm",
+      "jp": "予言者のタリスマン",
+      "kr": "예언자의 탈리스만",
+      "zh": "预言者的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_05",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10006": {
+    "name": {
+      "en": "Saint's Charm",
+      "jp": "聖者のタリスマン",
+      "kr": "성자의 탈리스만",
+      "zh": "圣者的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_06",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10007": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10008": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10009": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10010": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10011": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["10000"],
+    "passives": [
+      {
+        "id": "3011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10101": {
+    "name": {
+      "en": "Executioner's Charm",
+      "jp": "処刑人のタリスマン",
+      "kr": "처형인의 탈리스만",
+      "zh": "刽子手的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_01",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10102": {
+    "name": {
+      "en": "Gladiator's Charm",
+      "jp": "剣闘士のタリスマン",
+      "kr": "검투사의 탈리스만",
+      "zh": "剑斗士的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_02",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10103": {
+    "name": {
+      "en": "Rogue's Charm",
+      "jp": "盗賊のタリスマン",
+      "kr": "도적의 탈리스만",
+      "zh": "盗贼的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_03",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10104": {
+    "name": {
+      "en": "Sage's Charm",
+      "jp": "賢者のタリスマン",
+      "kr": "현자의 탈리스만",
+      "zh": "贤者的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_04",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10105": {
+    "name": {
+      "en": "Prophet's Charm",
+      "jp": "予言者のタリスマン",
+      "kr": "예언자의 탈리스만",
+      "zh": "预言者的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_05",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10106": {
+    "name": {
+      "en": "Saint's Charm",
+      "jp": "聖者のタリスマン",
+      "kr": "성자의 탈리스만",
+      "zh": "圣者的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_06",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10107": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10108": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10109": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10110": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10111": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10201": {
+    "name": {
+      "en": "Executioner's Charm",
+      "jp": "処刑人のタリスマン",
+      "kr": "처형인의 탈리스만",
+      "zh": "刽子手的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_01",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3023",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3123",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
+  },
+  "10202": {
+    "name": {
+      "en": "Gladiator's Charm",
+      "jp": "剣闘士のタリスマン",
+      "kr": "검투사의 탈리스만",
+      "zh": "剑斗士的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_02",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3024",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3124",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
+  },
+  "10203": {
+    "name": {
+      "en": "Rogue's Charm",
+      "jp": "盗賊のタリスマン",
+      "kr": "도적의 탈리스만",
+      "zh": "盗贼的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_03",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3025",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3125",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
+  },
+  "10204": {
+    "name": {
+      "en": "Sage's Charm",
+      "jp": "賢者のタリスマン",
+      "kr": "현자의 탈리스만",
+      "zh": "贤者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_04",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3026",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3126",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
+  },
+  "10205": {
+    "name": {
+      "en": "Prophet's Charm",
+      "jp": "予言者のタリスマン",
+      "kr": "예언자의 탈리스만",
+      "zh": "预言者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_05",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3027",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3127",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
+  },
+  "10206": {
+    "name": {
+      "en": "Saint's Charm",
+      "jp": "聖者のタリスマン",
+      "kr": "성자의 탈리스만",
+      "zh": "圣者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_06",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3028",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3128",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
+  },
+  "10207": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10208": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10209": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10210": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10211": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "10996": {
+    "name": {
+      "en": "Powerful Adventurer's Talisman",
+      "jp": "強力な冒険者のタリスマン",
+      "kr": "강력한 모험가의 탈리스만",
+      "zh": "强力冒险家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "5002",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "5102",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "AP"
+  },
+  "10997": {
+    "name": {
+      "en": "Sharp Adventurer's Talisman",
+      "jp": "鋭敏な冒険者のタリスマン",
+      "kr": "예리한 모험가의 탈리스만",
+      "zh": "敏锐冒险家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_03",
+    "craftable": false,
+    "options": ["10002"],
+    "passives": [
+      {
+        "id": "5001",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "5101",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
+  },
+  "10998": {
+    "name": {
+      "en": "Talisman of Hubris",
+      "jp": "傲慢のタリスマン",
+      "kr": "오만의 탈리스만",
+      "zh": "傲慢的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_Fes",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "10999": {
+    "name": {
+      "en": "Progenitor's Charm",
+      "jp": "祈願者のタリスマン",
+      "kr": "기원자의 탈리스만",
+      "zh": "祈愿者的护身符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Talisman_1st_Anniversary",
+    "craftable": false,
+    "options": ["10001"],
+    "passives": [
+      {
+        "id": "3034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
+  },
+  "95001": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["13001"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95002": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["13001"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95003": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["13001"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95004": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["13001"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95005": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["13001"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95011": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["13002"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95012": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["13002"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95013": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["13002"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95014": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["13002"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95015": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["13002"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95021": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["13003"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95022": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["13003"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95023": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["13003"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95024": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["13003"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95025": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["13003"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95031": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["13004"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95032": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["13004"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95033": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["13004"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95034": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["13004"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95035": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["13004"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95041": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["13005"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95042": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["13005"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95043": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["13005"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95044": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["13005"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95045": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["13005"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95051": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["13006"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95052": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["13006"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95053": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["13006"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95054": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["13006"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95055": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["13006"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95061": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["13007"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95062": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["13007"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95063": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["13007"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95064": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["13007"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95065": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["13007"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95071": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["13008"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95072": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["13008"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95073": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["13008"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95074": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["13008"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95075": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["13008"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95081": {
+    "name": {
+      "en": "Tactician's Charm",
+      "jp": "戦術家のタリスマン",
+      "kr": "전술가의 탈리스만",
+      "zh": "战略家的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_07",
+    "craftable": false,
+    "options": ["13009"],
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95082": {
+    "name": {
+      "en": "Assassin's Charm",
+      "jp": "暗殺者のタリスマン",
+      "kr": "암살자의 탈리스만",
+      "zh": "刺客的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_08",
+    "craftable": false,
+    "options": ["13009"],
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95083": {
+    "name": {
+      "en": "Mage's Charm",
+      "jp": "魔法使いのタリスマン",
+      "kr": "마법사의 탈리스만",
+      "zh": "魔法师的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_09",
+    "craftable": false,
+    "options": ["13009"],
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95084": {
+    "name": {
+      "en": "Vanguard's Charm",
+      "jp": "先鋒隊のタリスマン",
+      "kr": "선봉대의 탈리스만",
+      "zh": "先锋队的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_10",
+    "craftable": false,
+    "options": ["13009"],
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  },
+  "95085": {
+    "name": {
+      "en": "Undertaker's Charm",
+      "jp": "葬儀師のタリスマン",
+      "kr": "장의사의 탈리스만",
+      "zh": "送葬者的护身符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Talisman_11",
+    "craftable": false,
+    "options": ["13009"],
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
+  }
+}

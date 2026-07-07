@@ -1,0 +1,156 @@
+{
+  "Atk Mix": {
+    "Weapon": [
+      {
+        "name": "Meteor Mashers",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Burning Soul",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "a2chd2",
+      "a2p2",
+      "a2ag2"
+    ],
+    "SubstatPrio": "$dpsEFF",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Meteor Mashers",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Burning Soul",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dpsEFF",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Pen": {
+    "Weapon": [
+      {
+        "name": "Meteor Mashers",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Burning Soul",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "p4"
+    ],
+    "SubstatPrio": "$dpsEFF",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Support": {
+    "Weapon": [
+      {
+        "name": "Meteor Mashers",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Burning Soul",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dpsEFF",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

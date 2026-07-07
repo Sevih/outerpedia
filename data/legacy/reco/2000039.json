@@ -1,0 +1,28 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Absolute Music",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "SPD>ATK>CHC>EFF",
+    "Note": "{I-A/Combination Simulator} for PvP\n{I-A/Absolute Music} for PvE",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

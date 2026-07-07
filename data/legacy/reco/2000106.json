@@ -1,0 +1,206 @@
+{
+  "Life Swift": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "hp2sw2"
+    ],
+    "SubstatPrio": "$tankDpsHP",
+    "Note": "",
+    "Talisman": [
+      "$v"
+    ]
+  },
+  "HP immune": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "hp2i2"
+    ],
+    "SubstatPrio": "$tankDpsHP",
+    "Note": "",
+    "Talisman": [
+      "$v"
+    ]
+  },
+  "HP counter": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "ct2hp2"
+    ],
+    "SubstatPrio": "$tankDpsHP",
+    "Note": "",
+    "Talisman": [
+      "$v"
+    ]
+  },
+  "Full HP": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "hp4"
+    ],
+    "SubstatPrio": "$tankDpsHP",
+    "Note": "",
+    "Talisman": [
+      "$v"
+    ]
+  },
+  "Counter": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "ct4"
+    ],
+    "SubstatPrio": "$tankDpsHP",
+    "Note": "",
+    "Talisman": [
+      "$v"
+    ]
+  },
+  "Immune": {
+    "Weapon": [
+      {
+        "name": "Force Field Generator",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStat": "HP%"
+      }
+    ],
+    "Set": [
+      "i4"
+    ],
+    "SubstatPrio": "$tankDpsHP",
+    "Note": "",
+    "Talisman": [
+      "$v"
+    ]
+  }
+}

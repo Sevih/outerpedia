@@ -1,0 +1,68 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$mrs"
+    ]
+  },
+  "CritDmg": {
+    "Weapon": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "chd4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$mrs"
+    ]
+  },
+  "Pen": {
+    "Weapon": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      }
+    ],
+    "Set": [
+      "p4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$mrs"
+    ]
+  }
+}

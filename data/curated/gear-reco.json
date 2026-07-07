@@ -1,0 +1,7925 @@
+{
+  "2000006": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%/CHD"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2000008": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1031",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "ATK>SPD>HP",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}"
+      }
+    },
+    {
+      "name": "Counter",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1031",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "ATK>SPD>HP",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}"
+      }
+    },
+    {
+      "name": "Scaling",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1031",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "ct2sw2"
+        }
+      ],
+      "substats": "ATK>SPD>HP",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}"
+      }
+    }
+  ],
+  "2000010": [
+    {
+      "name": "Scaling",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%/CHD"
+        },
+        {
+          "id": "1036",
+          "mainStat": "DEF%/RES"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "ATK>CHC>CHD>HP=DEF"
+    }
+  ],
+  "2000012": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "Critical Hit chance up to 50%\nCombination Simulator for PvP\nAbsolute Music for PvE"
+      }
+    }
+  ],
+  "2000015": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Critical Strike",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2000019": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$mrs"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$mrs"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$mrs"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2000020": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%/HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1018",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$speedEff"
+    }
+  ],
+  "2000022": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$critAP"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "You only need 50% Critical Hit Chance thanks to Noa Kaizer X"
+      }
+    },
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$critAP"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "You only need 50% Critical Hit Chance thanks to Noa Kaizer X"
+      }
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$critAP"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "You only need 50% Critical Hit Chance thanks to Noa Kaizer X"
+      }
+    }
+  ],
+  "2000023": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1024",
+          "mainStat": "DMG RED%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Swift Immu",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1024",
+          "mainStat": "DMG RED%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$heal"
+    }
+  ],
+  "2000025": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "Clock up if you want Turn cycling Bleed Team"
+      }
+    },
+    {
+      "name": "High Crit",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "Clock up if you want Turn cycling Bleed Team"
+      }
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "Clock up if you want Turn cycling Bleed Team"
+      }
+    }
+  ],
+  "2000028": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$critAP"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$critAP"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$critAP"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2000035": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "631",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>ATK>CHC>CHD>DMG UP%"
+    },
+    {
+      "name": "Swift Mix",
+      "weapons": [
+        {
+          "id": "631",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s2sw2"
+        },
+        {
+          "preset": "sw2a2"
+        }
+      ],
+      "substats": "SPD>ATK>CHC>CHD>DMG UP%"
+    }
+  ],
+  "2000037": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "5",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>ATK>CHC>CHD>HP"
+    },
+    {
+      "name": "Swift Counter",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "5",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "ct2sw2"
+        }
+      ],
+      "substats": "SPD>ATK>CHC>CHD>HP"
+    }
+  ],
+  "2000039": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>ATK>CHC>EFF",
+      "note": {
+        "en": "{I-A/Combination Simulator} for PvP\n{I-A/Absolute Music} for PvE"
+      }
+    }
+  ],
+  "2000040": [
+    {
+      "name": "Support",
+      "weapons": [
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1800",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$rs"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps"
+    },
+    {
+      "name": "DPS Revenge",
+      "weapons": [
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$rsv"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "$sdps"
+    },
+    {
+      "name": "DPS Pen",
+      "weapons": [
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$rsv"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$sdps"
+    },
+    {
+      "name": "Dimensional Singularity",
+      "weapons": [
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1795",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "CHC>ATK>CHD>DMG UP%",
+      "note": {
+        "en": "You don't want speed."
+      }
+    }
+  ],
+  "2000042": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$tankHP"
+    },
+    {
+      "name": "Swift Immu",
+      "weapons": [
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$tankHP"
+    }
+  ],
+  "2000043": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%/HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dpsEFF"
+    }
+  ],
+  "2000044": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    }
+  ],
+  "2000052": [
+    {
+      "name": "Atk Mix",
+      "weapons": [
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "783",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "a2chd2"
+        },
+        {
+          "preset": "a2p2"
+        },
+        {
+          "preset": "a2ag2"
+        }
+      ],
+      "substats": "$dpsEFF"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "783",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dpsEFF"
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "783",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dpsEFF"
+    },
+    {
+      "name": "Support",
+      "weapons": [
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "783",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dpsEFF"
+    }
+  ],
+  "2000053": [
+    {
+      "name": "Counter",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "ATK>CHC>CHD>HP",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Revenge",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "ATK>CHC>CHD>HP",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+      }
+    }
+  ],
+  "2000054": [
+    {
+      "name": "Swift Immu",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal"
+    }
+  ],
+  "2000055": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$ru"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "High Crit",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$ru"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$ru"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2000056": [
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Immu Aug",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ag2i2"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    }
+  ],
+  "2000057": [
+    {
+      "name": "Support Speed",
+      "weapons": [
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$speedHPEff",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Support Swift Immu",
+      "weapons": [
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$speedHPEff",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "SubDPS Speed",
+      "weapons": [
+        {
+          "id": "5",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "10",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "SubDPS Swift Immu",
+      "weapons": [
+        {
+          "id": "5",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "10",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+      }
+    }
+  ],
+  "2000058": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "26",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Immunity",
+      "weapons": [
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "26",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Counterattack",
+      "weapons": [
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "26",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "$heal"
+    }
+  ],
+  "2000059": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} or {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "High Crit",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} or {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} or {I-T/Vanguard's Charm}"
+      }
+    }
+  ],
+  "2000060": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>CHC>EFF",
+      "note": {
+        "en": "Critical Hit Chance up to 50%"
+      }
+    }
+  ],
+  "2000061": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "HP>DEF>SPD>EFF"
+    },
+    {
+      "name": "Scale Immune",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "HP>DEF>SPD>EFF"
+    },
+    {
+      "name": "Scale Life",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "HP>DEF>SPD>EFF"
+    },
+    {
+      "name": "Counter",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "HP>DEF>SPD>EFF"
+    }
+  ],
+  "2000062": [
+    {
+      "name": "Counter",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1036",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "$sdps"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1036",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps"
+    }
+  ],
+  "2000063": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$tankDpsHP",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "Swift Immune",
+      "weapons": [
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$tankDpsHP",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Assassin's Charm}"
+      }
+    }
+  ],
+  "2000064": [
+    {
+      "name": "Speed PVE",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$speedEff"
+    },
+    {
+      "name": "Speed PVP",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$speedEff"
+    }
+  ],
+  "2000065": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "High Crit",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2000066": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps"
+    }
+  ],
+  "2000067": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "22",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "22",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "22",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    }
+  ],
+  "2000068": [
+    {
+      "name": "Speed damage",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$speedEff"
+    },
+    {
+      "name": "Speed Tanky",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$speedEff"
+    }
+  ],
+  "2000069": [
+    {
+      "name": "PvP",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "EFF>SPD>ATK"
+    },
+    {
+      "name": "PvE - effi",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "eff2sw2"
+        }
+      ],
+      "substats": "EFF>SPD>ATK"
+    }
+  ],
+  "2000070": [
+    {
+      "name": "Augment Immune",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ag2i2"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Counter Immune",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "i2ct2"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "High Crit",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2000071": [
+    {
+      "name": "Augment Swift",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ag2sw2"
+        }
+      ],
+      "substats": "$dpsDef"
+    },
+    {
+      "name": "Augment Defense",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ag2def2"
+        }
+      ],
+      "substats": "$dpsDef"
+    },
+    {
+      "name": "Swift Immu",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$dpsDef"
+    },
+    {
+      "name": "Counter",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "$dpsDef"
+    }
+  ],
+  "2000072": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "Absolute Music for PvE\nPhysical Exorcism for PvP"
+      }
+    },
+    {
+      "name": "High Crit",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "Absolute Music for PvE\nPhysical Exorcism for PvP"
+      }
+    }
+  ],
+  "2000073": [
+    {
+      "name": "Atk",
+      "weapons": [
+        {
+          "id": "786",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "24",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1798",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1036",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1020",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "a4"
+        }
+      ],
+      "substats": "ATK>SPD>CHC>CHD"
+    },
+    {
+      "name": "Revenge",
+      "weapons": [
+        {
+          "id": "786",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "24",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1798",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1036",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1020",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "ATK>SPD>CHC>CHD"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "786",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "24",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1798",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1036",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1020",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "ATK>SPD>CHC>CHD"
+    }
+  ],
+  "2000074": [
+    {
+      "name": "PvE",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "PvP",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$heal"
+    }
+  ],
+  "2000075": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "783",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$elemcritAP"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Augment Immune",
+      "weapons": [
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "783",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$elemcritAP"],
+      "sets": [
+        {
+          "preset": "ag2i2"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    }
+  ],
+  "2000076": [
+    {
+      "name": "High Crit",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "22",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "PvP",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "22",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ag2i2"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "In high level PvP she is very hard to use due to the inability to access her s3 on turn one"
+      }
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "22",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "22",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2000077": [
+    {
+      "name": "Swift Defense",
+      "weapons": [
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1037",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "def2sw2"
+        }
+      ],
+      "substats": "$dpsDef"
+    },
+    {
+      "name": "Swift Counter",
+      "weapons": [
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1037",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ct2sw2"
+        }
+      ],
+      "substats": "$dpsDef"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1037",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dpsDef"
+    }
+  ],
+  "2000078": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps"
+    },
+    {
+      "name": "High Crit",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$sdps"
+    }
+  ],
+  "2000079": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%/HP%"
+        },
+        {
+          "id": "17",
+          "mainStat": "ATK%/HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$elemcritAP"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    }
+  ],
+  "2000080": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "17",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$s"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$speedHPEff"
+    }
+  ],
+  "2000081": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD/ATK%"
+        }
+      ],
+      "talismans": ["$critAP"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>ATK>EFF>CHC"
+    }
+  ],
+  "2000082": [
+    {
+      "name": "Aug Immu",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$elemcritAP"],
+      "sets": [
+        {
+          "preset": "ag2i2"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$elemcritAP"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$elemcritAP"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    }
+  ],
+  "2000083": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "26",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1033",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Swift Immu",
+      "weapons": [
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "26",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1033",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Swift Life",
+      "weapons": [
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "26",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1033",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "$heal"
+    }
+  ],
+  "2000084": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Swift Counter",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "ct2sw2"
+        }
+      ],
+      "substats": "$heal"
+    }
+  ],
+  "2000085": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    }
+  ],
+  "2000086": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "784",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "ATK%/SPD"
+        }
+      ],
+      "talismans": ["$sme"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>ATK>EFF>HP=DEF>DMG UP%>DMG RED%"
+    },
+    {
+      "name": "Mix Speed",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "784",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "ATK%/SPD"
+        }
+      ],
+      "talismans": ["$sme"],
+      "sets": [
+        {
+          "preset": "s2sw2"
+        }
+      ],
+      "substats": "SPD>ATK>EFF>HP=DEF>DMG UP%>DMG RED%"
+    }
+  ],
+  "2000087": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    }
+  ],
+  "2000088": [
+    {
+      "name": "Scaling",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$sstv"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$tankSDpsHP",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "HP immune",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$sstv"],
+      "sets": [
+        {
+          "preset": "hp2i2"
+        }
+      ],
+      "substats": "$tankSDpsHP",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "HP scaling",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$sstv"],
+      "sets": [
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "$tankSDpsHP",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm}"
+      }
+    }
+  ],
+  "2000089": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dpsDef"
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dpsDef"
+    },
+    {
+      "name": "Def",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "def4"
+        }
+      ],
+      "substats": "$dpsDef"
+    },
+    {
+      "name": "Speed/Immu",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "s2i2"
+        }
+      ],
+      "substats": "$dpsDef"
+    },
+    {
+      "name": "Def/Immu",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "i2def2"
+        }
+      ],
+      "substats": "$dpsDef"
+    }
+  ],
+  "2000090": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1036",
+          "mainStat": "ATK%/SPD"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP: {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "Revenge",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1036",
+          "mainStat": "ATK%/SPD"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP: {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "Swift Immune",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1036",
+          "mainStat": "ATK%/SPD"
+        },
+        {
+          "id": "1015",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP: {I-T/Vanguard's Charm}"
+      }
+    }
+  ],
+  "2000091": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "12",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$speedHPEff",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "Speed Immune",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "12",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s2i2"
+        }
+      ],
+      "substats": "$speedHPEff",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Vanguard's Charm}"
+      }
+    }
+  ],
+  "2000092": [
+    {
+      "name": "PvE - Speed",
+      "weapons": [
+        {
+          "id": "783",
+          "mainStat": "ATK%/HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1035",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1007",
+          "mainStat": "EFF"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "EFF>SPD>CHC",
+      "note": {
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+      }
+    },
+    {
+      "name": "PvE - Effectiveness",
+      "weapons": [
+        {
+          "id": "783",
+          "mainStat": "ATK%/HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1035",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1007",
+          "mainStat": "EFF"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "eff4"
+        }
+      ],
+      "substats": "EFF>SPD>CHC",
+      "note": {
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+      }
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "783",
+          "mainStat": "ATK%/HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$msv"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$speedEff",
+      "note": {
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+      }
+    }
+  ],
+  "2000093": [
+    {
+      "name": "DPS",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$aem"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$sdps"
+    },
+    {
+      "name": "Support-DPS",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$aem"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps"
+    }
+  ],
+  "2000094": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "ATK%/HP%"
+        },
+        {
+          "id": "5",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "782",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1799",
+          "mainStat": "ATK%/SPD"
+        },
+        {
+          "id": "1011",
+          "mainStat": "EFF/HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "EFF>ATK>HP>SPD"
+    },
+    {
+      "name": "Swift Counter",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "5",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "782",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1799",
+          "mainStat": "ATK%/SPD"
+        },
+        {
+          "id": "1011",
+          "mainStat": "EFF/HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "ct2sw2"
+        }
+      ],
+      "substats": "EFF>ATK>HP>SPD"
+    },
+    {
+      "name": "Counterattack",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "5",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "782",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1799",
+          "mainStat": "ATK%/SPD"
+        },
+        {
+          "id": "1011",
+          "mainStat": "EFF/HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "EFF>ATK>HP>SPD"
+    },
+    {
+      "name": "Revenge",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "5",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "782",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1799",
+          "mainStat": "ATK%/SPD"
+        },
+        {
+          "id": "1011",
+          "mainStat": "EFF/HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "EFF>ATK>HP>SPD"
+    },
+    {
+      "name": "Guild Raid",
+      "weapons": [
+        {
+          "id": "15",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1799",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1037",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1011",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1032",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1007",
+          "mainStat": "EFF"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "EFF>ATK>HP>DEF",
+      "note": {
+        "en": "Effectiveness (until target's Resilience). Minimal speed."
+      }
+    }
+  ],
+  "2000095": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "789",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1039",
+          "mainStat": "ATK%/SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "ATK>SPD>CHC>EFF>CHD",
+      "note": {
+        "en": "Once his Exclusive Equipment is lv 10 you can ignore the Effectiveness"
+      }
+    },
+    {
+      "name": "Attack",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "789",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1039",
+          "mainStat": "ATK%/SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "a4"
+        }
+      ],
+      "substats": "ATK>SPD>CHC>EFF>CHD",
+      "note": {
+        "en": "Once his Exclusive Equipment is lv 10 you can ignore the Effectiveness"
+      }
+    },
+    {
+      "name": "Augm Attack",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "789",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1039",
+          "mainStat": "ATK%/SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "a2ag2"
+        }
+      ],
+      "substats": "ATK>SPD>CHC>EFF>CHD",
+      "note": {
+        "en": "Once his Exclusive Equipment is lv 10 you can ignore the Effectiveness"
+      }
+    }
+  ],
+  "2000096": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "High Crit",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Revenge Ais",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2000097": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "PvP : {I-T/Assassin's Charm}"
+      }
+    }
+  ],
+  "2000098": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "8",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "13",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "785",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "790",
+          "mainStat": "HP%/DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "Swift Immu",
+      "weapons": [
+        {
+          "id": "8",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "13",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "785",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "790",
+          "mainStat": "HP%/DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$heal",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "Swift Speed",
+      "weapons": [
+        {
+          "id": "8",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "13",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "785",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "790",
+          "mainStat": "HP%/DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s2sw2"
+        }
+      ],
+      "substats": "$heal",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm}"
+      }
+    },
+    {
+      "name": "Life Def",
+      "weapons": [
+        {
+          "id": "8",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "13",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "785",
+          "mainStat": "HP%/DEF%"
+        },
+        {
+          "id": "790",
+          "mainStat": "HP%/DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "hp2def2"
+        }
+      ],
+      "substats": "$heal",
+      "note": {
+        "en": "PvP : {I-T/Vanguard's Charm}"
+      }
+    }
+  ],
+  "2000099": [
+    {
+      "name": "Life Swift",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$rs"],
+      "sets": [
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "HP>CHC>CHD>SPD"
+    },
+    {
+      "name": "Life Augment",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$rs"],
+      "sets": [
+        {
+          "preset": "hp2ag2"
+        }
+      ],
+      "substats": "HP>CHC>CHD>SPD"
+    },
+    {
+      "name": "Swift Augment",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$rs"],
+      "sets": [
+        {
+          "preset": "ag2sw2"
+        }
+      ],
+      "substats": "HP>CHC>CHD>SPD"
+    }
+  ],
+  "2000100": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "790",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "26",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1797",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Speed Swift",
+      "weapons": [
+        {
+          "id": "790",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "26",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1797",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s2sw2"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Immune Swift",
+      "weapons": [
+        {
+          "id": "790",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "26",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1797",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$heal"
+    }
+  ],
+  "2000101": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1800",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "Critical Hit Chance only up to 50%"
+      }
+    }
+  ],
+  "2000102": [
+    {
+      "name": "Scaling",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$tankDpsHPEFF"
+    },
+    {
+      "name": "HP immune",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "hp2i2"
+        }
+      ],
+      "substats": "$tankDpsHPEFF"
+    },
+    {
+      "name": "HP scaling",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "$tankDpsHPEFF"
+    },
+    {
+      "name": "HP Counter",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "ct2hp2"
+        }
+      ],
+      "substats": "$tankDpsHPEFF"
+    },
+    {
+      "name": "Counter",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%/EFF"
+        },
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "$tankDpsHPEFF"
+    }
+  ],
+  "2000103": [
+    {
+      "name": "Speedy",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$sstv"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>HP>CHC>ATK>CHD"
+    },
+    {
+      "name": "Counter",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$sstv"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "SPD>HP>CHC>ATK>CHD"
+    }
+  ],
+  "2000105": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%/HP%/DEF%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%/HP%/DEF%"
+        },
+        {
+          "id": "23",
+          "mainStat": "ATK%/HP%/DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1800",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$rs"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>>CHC>ATK=CHD=HP"
+    }
+  ],
+  "2000106": [
+    {
+      "name": "Life Swift",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "787",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "$tankDpsHP"
+    },
+    {
+      "name": "HP immune",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "787",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "hp2i2"
+        }
+      ],
+      "substats": "$tankDpsHP"
+    },
+    {
+      "name": "HP counter",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "787",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "ct2hp2"
+        }
+      ],
+      "substats": "$tankDpsHP"
+    },
+    {
+      "name": "Full HP",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "787",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "hp4"
+        }
+      ],
+      "substats": "$tankDpsHP"
+    },
+    {
+      "name": "Counter",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "787",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "$tankDpsHP"
+    },
+    {
+      "name": "Immune",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "787",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1032",
+          "mainStat": "HP%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "i4"
+        }
+      ],
+      "substats": "$tankDpsHP"
+    }
+  ],
+  "2000107": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "27",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1801",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1013",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1034",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$erst"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dpsEFF",
+      "note": {
+        "en": "Effectiveness until ~270 or target reached"
+      }
+    }
+  ],
+  "2000108": [
+    {
+      "name": "PvE",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "21",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "PvP",
+      "weapons": [
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "$heal"
+    }
+  ],
+  "2000109": [
+    {
+      "name": "PvE - Pen",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dpsHPEff",
+      "note": {
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+      }
+    },
+    {
+      "name": "Pve - Life",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "hp4"
+        }
+      ],
+      "substats": "$dpsHPEff",
+      "note": {
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+      }
+    },
+    {
+      "name": "PvE - Pen / Life",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "p2hp2"
+        }
+      ],
+      "substats": "$dpsHPEff",
+      "note": {
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+      }
+    },
+    {
+      "name": "PvP - Pen/Swift",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$mv"],
+      "sets": [
+        {
+          "preset": "p2sw2"
+        }
+      ],
+      "substats": "$dpsHPEff"
+    },
+    {
+      "name": "PvP - Life/Swift",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$mv"],
+      "sets": [
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "$dpsHPEff"
+    },
+    {
+      "name": "PvP - Speed/Swift",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$mv"],
+      "sets": [
+        {
+          "preset": "s2sw2"
+        }
+      ],
+      "substats": "$dpsHPEff"
+    }
+  ],
+  "2000110": [
+    {
+      "name": "DPS pen",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1040",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "DPS speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1040",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "DPS revenge",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1040",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$aemrs"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "$sdps"
+    },
+    {
+      "name": "DPS attack",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1040",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "a4"
+        }
+      ],
+      "substats": "$critAtkspd",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "Sub-DPS",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}"
+      }
+    },
+    {
+      "name": "Immu",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1040",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "i2a2"
+        }
+      ],
+      "substats": "$sdps",
+      "note": {
+        "en": "You can pair {AS/Immunity} with {AS/Augmentation} or {AS/Critical Strike} as well"
+      }
+    }
+  ],
+  "2000111": [
+    {
+      "name": "Speed PvE",
+      "weapons": [
+        {
+          "id": "783",
+          "mainStat": "ATK%/HP%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%/HP%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%/HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dpsEFF"
+    },
+    {
+      "name": "Speed PvP",
+      "weapons": [
+        {
+          "id": "783",
+          "mainStat": "ATK%/HP%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%/HP%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%/HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$am"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dpsEFF"
+    }
+  ],
+  "2000112": [
+    {
+      "name": "Pen Def",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1034",
+          "mainStat": "PEN%/EFF"
+        },
+        {
+          "id": "1039",
+          "mainStat": "DEF%/SPD"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%/EFF"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "p2def2"
+        }
+      ],
+      "substats": "DEF%>EFF>CHC>HP%=SPD=CHD=DMG RED%>DMG UP%"
+    },
+    {
+      "name": "Pen Immu",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1034",
+          "mainStat": "PEN%/EFF"
+        },
+        {
+          "id": "1039",
+          "mainStat": "DEF%/SPD"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%/EFF"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "i2def2"
+        }
+      ],
+      "substats": "DEF%>EFF>CHC>HP%=SPD=CHD=DMG RED%>DMG UP%"
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1034",
+          "mainStat": "PEN%/EFF"
+        },
+        {
+          "id": "1039",
+          "mainStat": "DEF%/SPD"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%/EFF"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "DEF%>EFF>CHC>HP%=SPD=CHD=DMG RED%>DMG UP%"
+    },
+    {
+      "name": "Patience",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1034",
+          "mainStat": "PEN%/EFF"
+        },
+        {
+          "id": "1039",
+          "mainStat": "DEF%/SPD"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%/EFF"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "pat4"
+        }
+      ],
+      "substats": "DEF%>EFF>CHC>HP%=SPD=CHD=DMG RED%>DMG UP%"
+    }
+  ],
+  "2000113": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "18",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "8",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "785",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "790",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1797",
+          "mainStat": "DMG RED%"
+        },
+        {
+          "id": "1024",
+          "mainStat": "DMG RED%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$heal"
+    },
+    {
+      "name": "Swift-mix",
+      "weapons": [
+        {
+          "id": "18",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "13",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "8",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "785",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "790",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1019",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1038",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1797",
+          "mainStat": "DMG RED%"
+        },
+        {
+          "id": "1024",
+          "mainStat": "DMG RED%"
+        }
+      ],
+      "talismans": ["$noCritCp"],
+      "sets": [
+        {
+          "preset": "s2sw2"
+        },
+        {
+          "preset": "ct2sw2"
+        },
+        {
+          "preset": "i2sw2"
+        },
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "$heal"
+    }
+  ],
+  "2000114": [
+    {
+      "name": "PvE - Pen",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "780",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "CHC>HP>SPD>CHD>DMG UP%"
+    },
+    {
+      "name": "PvE - Life",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "780",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "hp4"
+        }
+      ],
+      "substats": "CHC>HP>SPD>CHD>DMG UP%"
+    },
+    {
+      "name": "PvE - Pen Life",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "780",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "p2hp2"
+        }
+      ],
+      "substats": "CHC>HP>SPD>CHD>DMG UP%"
+    },
+    {
+      "name": "PvP - Pen swift",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "780",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "p2sw2"
+        }
+      ],
+      "substats": "CHC>HP>SPD>CHD>DMG UP%"
+    },
+    {
+      "name": "PvP - HP swift",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "780",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "781",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%/HP%"
+        }
+      ],
+      "talismans": ["$v"],
+      "sets": [
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "CHC>HP>SPD>CHD>DMG UP%"
+    }
+  ],
+  "2000116": [
+    {
+      "name": "Patience",
+      "weapons": [
+        {
+          "id": "787",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "5",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1799",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "1037",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1794",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "pat4"
+        }
+      ],
+      "substats": "DEF>CHC>CHD>SPD=HP=DMG RED%>DMG UP%"
+    },
+    {
+      "name": "Defense mix",
+      "weapons": [
+        {
+          "id": "787",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "5",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1799",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "1037",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1794",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "p2def2"
+        },
+        {
+          "preset": "def2sw2"
+        },
+        {
+          "preset": "i2def2"
+        }
+      ],
+      "substats": "$dpsDef"
+    }
+  ],
+  "2000117": [
+    {
+      "name": "Attack",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "786",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "9",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1798",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1020",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "a4"
+        }
+      ],
+      "substats": "$dps2"
+    },
+    {
+      "name": "Revenge",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "786",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "9",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1798",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1020",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "$dps2"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "786",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "9",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1798",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1020",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps2"
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "4",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "786",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "9",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1798",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "1020",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps2"
+    }
+  ],
+  "2000119": [
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "784",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "784",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Critical Strike",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "784",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Pen mix",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "784",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p2s2"
+        },
+        {
+          "preset": "p2a2"
+        },
+        {
+          "preset": "p2chd2"
+        },
+        {
+          "preset": "p2ag2"
+        },
+        {
+          "preset": "p2i2"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
+  "2700003": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>CHC>ATK>EFF>CHD=DMG UP%"
+    }
+  ],
+  "2700005": [
+    {
+      "name": "Attack",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1801",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "a4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+      }
+    },
+    {
+      "name": "Critical Strike",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1801",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+      }
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1801",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+      }
+    },
+    {
+      "name": "Pen combos",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1801",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p2s2"
+        },
+        {
+          "preset": "p2a2"
+        },
+        {
+          "preset": "p2ag2"
+        },
+        {
+          "preset": "p2chd2"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+      }
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+      }
+    }
+  ],
+  "2700037": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "787",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "782",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1799",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$tankDpsHP"
+    },
+    {
+      "name": "Swift Counter",
+      "weapons": [
+        {
+          "id": "5",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "787",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "782",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1011",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1799",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "ct2sw2"
+        }
+      ],
+      "substats": "$tankDpsHP"
+    }
+  ],
+  "2700043": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "12",
+          "mainStat": "ATK%/HP%"
+        },
+        {
+          "id": "17",
+          "mainStat": "ATK%/HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1039",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1018",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1796",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1013",
+          "mainStat": "EFF"
+        },
+        {
+          "id": "1007",
+          "mainStat": "EFF"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dpsEFF"
+    }
+  ],
+  "2700056": [
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Immu Aug",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "ag2i2"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "11",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps",
+      "note": {
+        "en": "PvP : {I-T/Mage's Charm}"
+      }
+    }
+  ],
+  "2700070": [
+    {
+      "name": "Pen Def",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "p2def2"
+        }
+      ],
+      "substats": "CHC>DEF>CHD>SPD>DMG UP%>DMG RED%>HP"
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "CHC>DEF>CHD>SPD>DMG UP%>DMG RED%>HP"
+    },
+    {
+      "name": "Def",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "def4"
+        }
+      ],
+      "substats": "CHC>DEF>CHD>SPD>DMG UP%>DMG RED%>HP"
+    },
+    {
+      "name": "Patience",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "pat4"
+        }
+      ],
+      "substats": "CHC>DEF>CHD>SPD>DMG UP%>DMG RED%>HP"
+    },
+    {
+      "name": "Immu Mix (PvP)",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "14",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "781",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1015",
+          "mainStat": "DEF%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "i2def2"
+        },
+        {
+          "preset": "s2i2"
+        },
+        {
+          "preset": "p2i2"
+        },
+        {
+          "preset": "i2sw2"
+        }
+      ],
+      "substats": "CHC>DEF>CHD>SPD>DMG UP%>DMG RED%>HP"
+    }
+  ]
+}

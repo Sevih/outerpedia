@@ -1,0 +1,8658 @@
+{
+  "3001": {
+    "name": {
+      "en": "Ordinary Helmet of Attack",
+      "jp": "攻撃の普及型ヘルム",
+      "kr": "공격의 보급형 투구",
+      "zh": "普通攻击头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "1"
+  },
+  "3002": {
+    "name": {
+      "en": "Fine Helmet of Attack",
+      "jp": "攻撃の高級型ヘルム",
+      "kr": "공격의 고급형 투구",
+      "zh": "上等攻击头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "1"
+  },
+  "3003": {
+    "name": {
+      "en": "Steel Helmet of Attack",
+      "jp": "攻撃の鋼鉄ヘルム",
+      "kr": "공격의 강철 투구",
+      "zh": "钢铁攻击头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "1"
+  },
+  "3004": {
+    "name": {
+      "en": "Etheric Helmet of Attack",
+      "jp": "攻撃のエーテルヘルム",
+      "kr": "공격의 에테르 투구",
+      "zh": "以太攻击头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "1"
+  },
+  "3005": {
+    "name": {
+      "en": "Ordinary Helmet of Attack",
+      "jp": "攻撃の普及型ヘルム",
+      "kr": "공격의 보급형 투구",
+      "zh": "普通攻击头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "1"
+  },
+  "3006": {
+    "name": {
+      "en": "Fine Helmet of Attack",
+      "jp": "攻撃の高級型ヘルム",
+      "kr": "공격의 고급형 투구",
+      "zh": "上等攻击头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "1"
+  },
+  "3007": {
+    "name": {
+      "en": "Steel Helmet of Attack",
+      "jp": "攻撃の鋼鉄ヘルム",
+      "kr": "공격의 강철 투구",
+      "zh": "钢铁攻击头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "1"
+  },
+  "3008": {
+    "name": {
+      "en": "Etheric Helmet of Attack",
+      "jp": "攻撃のエーテルヘルム",
+      "kr": "공격의 에테르 투구",
+      "zh": "以太攻击头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "1"
+  },
+  "3009": {
+    "name": {
+      "en": "Ordinary Helmet of Attack",
+      "jp": "攻撃の普及型ヘルム",
+      "kr": "공격의 보급형 투구",
+      "zh": "普通攻击头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "1"
+  },
+  "3010": {
+    "name": {
+      "en": "Fine Helmet of Attack",
+      "jp": "攻撃の高級型ヘルム",
+      "kr": "공격의 고급형 투구",
+      "zh": "上等攻击头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "1"
+  },
+  "3011": {
+    "name": {
+      "en": "Steel Helmet of Attack",
+      "jp": "攻撃の鋼鉄ヘルム",
+      "kr": "공격의 강철 투구",
+      "zh": "钢铁攻击头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "1"
+  },
+  "3012": {
+    "name": {
+      "en": "Etheric Helmet of Attack",
+      "jp": "攻撃のエーテルヘルム",
+      "kr": "공격의 에테르 투구",
+      "zh": "以太攻击头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "1"
+  },
+  "3013": {
+    "name": {
+      "en": "Ordinary Helmet of Attack",
+      "jp": "攻撃の普及型ヘルム",
+      "kr": "공격의 보급형 투구",
+      "zh": "普通攻击头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "1"
+  },
+  "3014": {
+    "name": {
+      "en": "Fine Helmet of Attack",
+      "jp": "攻撃の高級型ヘルム",
+      "kr": "공격의 고급형 투구",
+      "zh": "上等攻击头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "1"
+  },
+  "3015": {
+    "name": {
+      "en": "Steel Helmet of Attack",
+      "jp": "攻撃の鋼鉄ヘルム",
+      "kr": "공격의 강철 투구",
+      "zh": "钢铁攻击头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "1"
+  },
+  "3016": {
+    "name": {
+      "en": "Etheric Helmet of Attack",
+      "jp": "攻撃のエーテルヘルム",
+      "kr": "공격의 에테르 투구",
+      "zh": "以太攻击头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "1"
+  },
+  "3017": {
+    "name": {
+      "en": "Ordinary Helmet of Attack",
+      "jp": "攻撃の普及型ヘルム",
+      "kr": "공격의 보급형 투구",
+      "zh": "普通攻击头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "1"
+  },
+  "3018": {
+    "name": {
+      "en": "Fine Helmet of Attack",
+      "jp": "攻撃の高級型ヘルム",
+      "kr": "공격의 고급형 투구",
+      "zh": "上等攻击头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "1"
+  },
+  "3019": {
+    "name": {
+      "en": "Steel Helmet of Attack",
+      "jp": "攻撃の鋼鉄ヘルム",
+      "kr": "공격의 강철 투구",
+      "zh": "钢铁攻击头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "1"
+  },
+  "3020": {
+    "name": {
+      "en": "Etheric Helmet of Attack",
+      "jp": "攻撃のエーテルヘルム",
+      "kr": "공격의 에테르 투구",
+      "zh": "以太攻击头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "1"
+  },
+  "3021": {
+    "name": {
+      "en": "Ordinary Helmet of Attack",
+      "jp": "攻撃の普及型ヘルム",
+      "kr": "공격의 보급형 투구",
+      "zh": "普通攻击头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "1"
+  },
+  "3022": {
+    "name": {
+      "en": "Fine Helmet of Attack",
+      "jp": "攻撃の高級型ヘルム",
+      "kr": "공격의 고급형 투구",
+      "zh": "上等攻击头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "1"
+  },
+  "3023": {
+    "name": {
+      "en": "Steel Helmet of Attack",
+      "jp": "攻撃の鋼鉄ヘルム",
+      "kr": "공격의 강철 투구",
+      "zh": "钢铁攻击头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "1"
+  },
+  "3024": {
+    "name": {
+      "en": "Etheric Helmet of Attack",
+      "jp": "攻撃のエーテルヘルム",
+      "kr": "공격의 에테르 투구",
+      "zh": "以太攻击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "3025": {
+    "name": {
+      "en": "Ordinary Helmet of Defense",
+      "jp": "防御の普及型ヘルム",
+      "kr": "방어의 보급형 투구",
+      "zh": "普通防御头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "2"
+  },
+  "3026": {
+    "name": {
+      "en": "Fine Helmet of Defense",
+      "jp": "防御の高級型ヘルム",
+      "kr": "방어의 고급형 투구",
+      "zh": "上等防御头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "2"
+  },
+  "3027": {
+    "name": {
+      "en": "Steel Helmet of Defense",
+      "jp": "防御の鋼鉄ヘルム",
+      "kr": "방어의 강철 투구",
+      "zh": "钢铁防御头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "2"
+  },
+  "3028": {
+    "name": {
+      "en": "Etheric Helmet of Defense",
+      "jp": "防御のエーテルヘルム",
+      "kr": "방어의 에테르 투구",
+      "zh": "以太防御头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "2"
+  },
+  "3029": {
+    "name": {
+      "en": "Ordinary Helmet of Defense",
+      "jp": "防御の普及型ヘルム",
+      "kr": "방어의 보급형 투구",
+      "zh": "普通防御头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "2"
+  },
+  "3030": {
+    "name": {
+      "en": "Fine Helmet of Defense",
+      "jp": "防御の高級型ヘルム",
+      "kr": "방어의 고급형 투구",
+      "zh": "上等防御头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "2"
+  },
+  "3031": {
+    "name": {
+      "en": "Steel Helmet of Defense",
+      "jp": "防御の鋼鉄ヘルム",
+      "kr": "방어의 강철 투구",
+      "zh": "钢铁防御头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "2"
+  },
+  "3032": {
+    "name": {
+      "en": "Etheric Helmet of Defense",
+      "jp": "防御のエーテルヘルム",
+      "kr": "방어의 에테르 투구",
+      "zh": "以太防御头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "2"
+  },
+  "3033": {
+    "name": {
+      "en": "Ordinary Helmet of Defense",
+      "jp": "防御の普及型ヘルム",
+      "kr": "방어의 보급형 투구",
+      "zh": "普通防御头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "2"
+  },
+  "3034": {
+    "name": {
+      "en": "Fine Helmet of Defense",
+      "jp": "防御の高級型ヘルム",
+      "kr": "방어의 고급형 투구",
+      "zh": "上等防御头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "2"
+  },
+  "3035": {
+    "name": {
+      "en": "Steel Helmet of Defense",
+      "jp": "防御の鋼鉄ヘルム",
+      "kr": "방어의 강철 투구",
+      "zh": "钢铁防御头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "2"
+  },
+  "3036": {
+    "name": {
+      "en": "Etheric Helmet of Defense",
+      "jp": "防御のエーテルヘルム",
+      "kr": "방어의 에테르 투구",
+      "zh": "以太防御头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "2"
+  },
+  "3037": {
+    "name": {
+      "en": "Ordinary Helmet of Defense",
+      "jp": "防御の普及型ヘルム",
+      "kr": "방어의 보급형 투구",
+      "zh": "普通防御头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "2"
+  },
+  "3038": {
+    "name": {
+      "en": "Fine Helmet of Defense",
+      "jp": "防御の高級型ヘルム",
+      "kr": "방어의 고급형 투구",
+      "zh": "上等防御头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "2"
+  },
+  "3039": {
+    "name": {
+      "en": "Steel Helmet of Defense",
+      "jp": "防御の鋼鉄ヘルム",
+      "kr": "방어의 강철 투구",
+      "zh": "钢铁防御头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "2"
+  },
+  "3040": {
+    "name": {
+      "en": "Etheric Helmet of Defense",
+      "jp": "防御のエーテルヘルム",
+      "kr": "방어의 에테르 투구",
+      "zh": "以太防御头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "2"
+  },
+  "3041": {
+    "name": {
+      "en": "Ordinary Helmet of Defense",
+      "jp": "防御の普及型ヘルム",
+      "kr": "방어의 보급형 투구",
+      "zh": "普通防御头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "2"
+  },
+  "3042": {
+    "name": {
+      "en": "Fine Helmet of Defense",
+      "jp": "防御の高級型ヘルム",
+      "kr": "방어의 고급형 투구",
+      "zh": "上等防御头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "2"
+  },
+  "3043": {
+    "name": {
+      "en": "Steel Helmet of Defense",
+      "jp": "防御の鋼鉄ヘルム",
+      "kr": "방어의 강철 투구",
+      "zh": "钢铁防御头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "2"
+  },
+  "3044": {
+    "name": {
+      "en": "Etheric Helmet of Defense",
+      "jp": "防御のエーテルヘルム",
+      "kr": "방어의 에테르 투구",
+      "zh": "以太防御头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "2"
+  },
+  "3045": {
+    "name": {
+      "en": "Ordinary Helmet of Defense",
+      "jp": "防御の普及型ヘルム",
+      "kr": "방어의 보급형 투구",
+      "zh": "普通防御头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "2"
+  },
+  "3046": {
+    "name": {
+      "en": "Fine Helmet of Defense",
+      "jp": "防御の高級型ヘルム",
+      "kr": "방어의 고급형 투구",
+      "zh": "上等防御头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "2"
+  },
+  "3047": {
+    "name": {
+      "en": "Steel Helmet of Defense",
+      "jp": "防御の鋼鉄ヘルム",
+      "kr": "방어의 강철 투구",
+      "zh": "钢铁防御头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "2"
+  },
+  "3048": {
+    "name": {
+      "en": "Etheric Helmet of Defense",
+      "jp": "防御のエーテルヘルム",
+      "kr": "방어의 에테르 투구",
+      "zh": "以太防御头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "3049": {
+    "name": {
+      "en": "Ordinary Helmet of Life",
+      "jp": "生命の普及型ヘルム",
+      "kr": "생명의 보급형 투구",
+      "zh": "普通生命头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "3"
+  },
+  "3050": {
+    "name": {
+      "en": "Fine Helmet of Life",
+      "jp": "生命の高級型ヘルム",
+      "kr": "생명의 고급형 투구",
+      "zh": "上等生命头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "3"
+  },
+  "3051": {
+    "name": {
+      "en": "Steel Helmet of Life",
+      "jp": "生命の鋼鉄ヘルム",
+      "kr": "생명의 강철 투구",
+      "zh": "钢铁生命头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "3"
+  },
+  "3052": {
+    "name": {
+      "en": "Etheric Helmet of Life",
+      "jp": "生命のエーテルヘルム",
+      "kr": "생명의 에테르 투구",
+      "zh": "以太生命头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "3"
+  },
+  "3053": {
+    "name": {
+      "en": "Ordinary Helmet of Life",
+      "jp": "生命の普及型ヘルム",
+      "kr": "생명의 보급형 투구",
+      "zh": "普通生命头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "3"
+  },
+  "3054": {
+    "name": {
+      "en": "Fine Helmet of Life",
+      "jp": "生命の高級型ヘルム",
+      "kr": "생명의 고급형 투구",
+      "zh": "上等生命头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "3"
+  },
+  "3055": {
+    "name": {
+      "en": "Steel Helmet of Life",
+      "jp": "生命の鋼鉄ヘルム",
+      "kr": "생명의 강철 투구",
+      "zh": "钢铁生命头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "3"
+  },
+  "3056": {
+    "name": {
+      "en": "Etheric Helmet of Life",
+      "jp": "生命のエーテルヘルム",
+      "kr": "생명의 에테르 투구",
+      "zh": "以太生命头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "3"
+  },
+  "3057": {
+    "name": {
+      "en": "Ordinary Helmet of Life",
+      "jp": "生命の普及型ヘルム",
+      "kr": "생명의 보급형 투구",
+      "zh": "普通生命头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "3"
+  },
+  "3058": {
+    "name": {
+      "en": "Fine Helmet of Life",
+      "jp": "生命の高級型ヘルム",
+      "kr": "생명의 고급형 투구",
+      "zh": "上等生命头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "3"
+  },
+  "3059": {
+    "name": {
+      "en": "Steel Helmet of Life",
+      "jp": "生命の鋼鉄ヘルム",
+      "kr": "생명의 강철 투구",
+      "zh": "钢铁生命头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "3"
+  },
+  "3060": {
+    "name": {
+      "en": "Etheric Helmet of Life",
+      "jp": "生命のエーテルヘルム",
+      "kr": "생명의 에테르 투구",
+      "zh": "以太生命头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "3"
+  },
+  "3061": {
+    "name": {
+      "en": "Ordinary Helmet of Life",
+      "jp": "生命の普及型ヘルム",
+      "kr": "생명의 보급형 투구",
+      "zh": "普通生命头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "3"
+  },
+  "3062": {
+    "name": {
+      "en": "Fine Helmet of Life",
+      "jp": "生命の高級型ヘルム",
+      "kr": "생명의 고급형 투구",
+      "zh": "上等生命头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "3"
+  },
+  "3063": {
+    "name": {
+      "en": "Steel Helmet of Life",
+      "jp": "生命の鋼鉄ヘルム",
+      "kr": "생명의 강철 투구",
+      "zh": "钢铁生命头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "3"
+  },
+  "3064": {
+    "name": {
+      "en": "Etheric Helmet of Life",
+      "jp": "生命のエーテルヘルム",
+      "kr": "생명의 에테르 투구",
+      "zh": "以太生命头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "3"
+  },
+  "3065": {
+    "name": {
+      "en": "Ordinary Helmet of Life",
+      "jp": "生命の普及型ヘルム",
+      "kr": "생명의 보급형 투구",
+      "zh": "普通生命头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "3"
+  },
+  "3066": {
+    "name": {
+      "en": "Fine Helmet of Life",
+      "jp": "生命の高級型ヘルム",
+      "kr": "생명의 고급형 투구",
+      "zh": "上等生命头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "3"
+  },
+  "3067": {
+    "name": {
+      "en": "Steel Helmet of Life",
+      "jp": "生命の鋼鉄ヘルム",
+      "kr": "생명의 강철 투구",
+      "zh": "钢铁生命头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "3"
+  },
+  "3068": {
+    "name": {
+      "en": "Etheric Helmet of Life",
+      "jp": "生命のエーテルヘルム",
+      "kr": "생명의 에테르 투구",
+      "zh": "以太生命头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "3"
+  },
+  "3069": {
+    "name": {
+      "en": "Ordinary Helmet of Life",
+      "jp": "生命の普及型ヘルム",
+      "kr": "생명의 보급형 투구",
+      "zh": "普通生命头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "3"
+  },
+  "3070": {
+    "name": {
+      "en": "Fine Helmet of Life",
+      "jp": "生命の高級型ヘルム",
+      "kr": "생명의 고급형 투구",
+      "zh": "上等生命头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "3"
+  },
+  "3071": {
+    "name": {
+      "en": "Steel Helmet of Life",
+      "jp": "生命の鋼鉄ヘルム",
+      "kr": "생명의 강철 투구",
+      "zh": "钢铁生命头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "3"
+  },
+  "3072": {
+    "name": {
+      "en": "Etheric Helmet of Life",
+      "jp": "生命のエーテルヘルム",
+      "kr": "생명의 에테르 투구",
+      "zh": "以太生命头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "3073": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Hit",
+      "jp": "会心の普及型ヘルム",
+      "kr": "치명의 보급형 투구",
+      "zh": "普通暴击头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "4"
+  },
+  "3074": {
+    "name": {
+      "en": "Fine Helmet of Critical Hit",
+      "jp": "会心の高級型ヘルム",
+      "kr": "치명의 고급형 투구",
+      "zh": "上等暴击头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "4"
+  },
+  "3075": {
+    "name": {
+      "en": "Steel Helmet of Critical Hit",
+      "jp": "会心の鋼鉄ヘルム",
+      "kr": "치명의 강철 투구",
+      "zh": "钢铁暴击头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "4"
+  },
+  "3076": {
+    "name": {
+      "en": "Etheric Helmet of Critical Hit",
+      "jp": "会心のエーテルヘルム",
+      "kr": "치명의 에테르 투구",
+      "zh": "以太暴击头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "4"
+  },
+  "3077": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Hit",
+      "jp": "会心の普及型ヘルム",
+      "kr": "치명의 보급형 투구",
+      "zh": "普通暴击头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "4"
+  },
+  "3078": {
+    "name": {
+      "en": "Fine Helmet of Critical Hit",
+      "jp": "会心の高級型ヘルム",
+      "kr": "치명의 고급형 투구",
+      "zh": "上等暴击头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "4"
+  },
+  "3079": {
+    "name": {
+      "en": "Steel Helmet of Critical Hit",
+      "jp": "会心の鋼鉄ヘルム",
+      "kr": "치명의 강철 투구",
+      "zh": "钢铁暴击头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "4"
+  },
+  "3080": {
+    "name": {
+      "en": "Etheric Helmet of Critical Hit",
+      "jp": "会心のエーテルヘルム",
+      "kr": "치명의 에테르 투구",
+      "zh": "以太暴击头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "4"
+  },
+  "3081": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Hit",
+      "jp": "会心の普及型ヘルム",
+      "kr": "치명의 보급형 투구",
+      "zh": "普通暴击头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "4"
+  },
+  "3082": {
+    "name": {
+      "en": "Fine Helmet of Critical Hit",
+      "jp": "会心の高級型ヘルム",
+      "kr": "치명의 고급형 투구",
+      "zh": "上等暴击头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "4"
+  },
+  "3083": {
+    "name": {
+      "en": "Steel Helmet of Critical Hit",
+      "jp": "会心の鋼鉄ヘルム",
+      "kr": "치명의 강철 투구",
+      "zh": "钢铁暴击头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "4"
+  },
+  "3084": {
+    "name": {
+      "en": "Etheric Helmet of Critical Hit",
+      "jp": "会心のエーテルヘルム",
+      "kr": "치명의 에테르 투구",
+      "zh": "以太暴击头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "4"
+  },
+  "3085": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Hit",
+      "jp": "会心の普及型ヘルム",
+      "kr": "치명의 보급형 투구",
+      "zh": "普通暴击头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "4"
+  },
+  "3086": {
+    "name": {
+      "en": "Fine Helmet of Critical Hit",
+      "jp": "会心の高級型ヘルム",
+      "kr": "치명의 고급형 투구",
+      "zh": "上等暴击头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "4"
+  },
+  "3087": {
+    "name": {
+      "en": "Steel Helmet of Critical Hit",
+      "jp": "会心の鋼鉄ヘルム",
+      "kr": "치명의 강철 투구",
+      "zh": "钢铁暴击头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "4"
+  },
+  "3088": {
+    "name": {
+      "en": "Etheric Helmet of Critical Hit",
+      "jp": "会心のエーテルヘルム",
+      "kr": "치명의 에테르 투구",
+      "zh": "以太暴击头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "4"
+  },
+  "3089": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Hit",
+      "jp": "会心の普及型ヘルム",
+      "kr": "치명의 보급형 투구",
+      "zh": "普通暴击头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "4"
+  },
+  "3090": {
+    "name": {
+      "en": "Fine Helmet of Critical Hit",
+      "jp": "会心の高級型ヘルム",
+      "kr": "치명의 고급형 투구",
+      "zh": "上等暴击头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "4"
+  },
+  "3091": {
+    "name": {
+      "en": "Steel Helmet of Critical Hit",
+      "jp": "会心の鋼鉄ヘルム",
+      "kr": "치명의 강철 투구",
+      "zh": "钢铁暴击头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "4"
+  },
+  "3092": {
+    "name": {
+      "en": "Etheric Helmet of Critical Hit",
+      "jp": "会心のエーテルヘルム",
+      "kr": "치명의 에테르 투구",
+      "zh": "以太暴击头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "4"
+  },
+  "3093": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Hit",
+      "jp": "会心の普及型ヘルム",
+      "kr": "치명의 보급형 투구",
+      "zh": "普通暴击头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "4"
+  },
+  "3094": {
+    "name": {
+      "en": "Fine Helmet of Critical Hit",
+      "jp": "会心の高級型ヘルム",
+      "kr": "치명의 고급형 투구",
+      "zh": "上等暴击头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "4"
+  },
+  "3095": {
+    "name": {
+      "en": "Steel Helmet of Critical Hit",
+      "jp": "会心の鋼鉄ヘルム",
+      "kr": "치명의 강철 투구",
+      "zh": "钢铁暴击头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "4"
+  },
+  "3096": {
+    "name": {
+      "en": "Etheric Helmet of Critical Hit",
+      "jp": "会心のエーテルヘルム",
+      "kr": "치명의 에테르 투구",
+      "zh": "以太暴击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "3097": {
+    "name": {
+      "en": "Ordinary Helmet of Effectiveness",
+      "jp": "効果命中の普及型ヘルム",
+      "kr": "적중의 보급형 투구",
+      "zh": "普通效果命中头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "5"
+  },
+  "3098": {
+    "name": {
+      "en": "Fine Helmet of Effectiveness",
+      "jp": "効果命中の高級型ヘルム",
+      "kr": "적중의 고급형 투구",
+      "zh": "上等效果命中头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "5"
+  },
+  "3099": {
+    "name": {
+      "en": "Steel Helmet of Effectiveness",
+      "jp": "効果命中の鋼鉄ヘルム",
+      "kr": "적중의 강철 투구",
+      "zh": "钢铁效果命中头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "5"
+  },
+  "3100": {
+    "name": {
+      "en": "Etheric Helmet of Effectiveness",
+      "jp": "効果命中のエーテルヘルム",
+      "kr": "적중의 에테르 투구",
+      "zh": "以太效果命中头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "5"
+  },
+  "3101": {
+    "name": {
+      "en": "Ordinary Helmet of Effectiveness",
+      "jp": "効果命中の普及型ヘルム",
+      "kr": "적중의 보급형 투구",
+      "zh": "普通效果命中头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "5"
+  },
+  "3102": {
+    "name": {
+      "en": "Fine Helmet of Effectiveness",
+      "jp": "効果命中の高級型ヘルム",
+      "kr": "적중의 고급형 투구",
+      "zh": "上等效果命中头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "5"
+  },
+  "3103": {
+    "name": {
+      "en": "Steel Helmet of Effectiveness",
+      "jp": "効果命中の鋼鉄ヘルム",
+      "kr": "적중의 강철 투구",
+      "zh": "钢铁效果命中头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "5"
+  },
+  "3104": {
+    "name": {
+      "en": "Etheric Helmet of Effectiveness",
+      "jp": "効果命中のエーテルヘルム",
+      "kr": "적중의 에테르 투구",
+      "zh": "以太效果命中头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "5"
+  },
+  "3105": {
+    "name": {
+      "en": "Ordinary Helmet of Effectiveness",
+      "jp": "効果命中の普及型ヘルム",
+      "kr": "적중의 보급형 투구",
+      "zh": "普通效果命中头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "5"
+  },
+  "3106": {
+    "name": {
+      "en": "Fine Helmet of Effectiveness",
+      "jp": "効果命中の高級型ヘルム",
+      "kr": "적중의 고급형 투구",
+      "zh": "上等效果命中头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "5"
+  },
+  "3107": {
+    "name": {
+      "en": "Steel Helmet of Effectiveness",
+      "jp": "効果命中の鋼鉄ヘルム",
+      "kr": "적중의 강철 투구",
+      "zh": "钢铁效果命中头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "5"
+  },
+  "3108": {
+    "name": {
+      "en": "Etheric Helmet of Effectiveness",
+      "jp": "効果命中のエーテルヘルム",
+      "kr": "적중의 에테르 투구",
+      "zh": "以太效果命中头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "5"
+  },
+  "3109": {
+    "name": {
+      "en": "Ordinary Helmet of Effectiveness",
+      "jp": "効果命中の普及型ヘルム",
+      "kr": "적중의 보급형 투구",
+      "zh": "普通效果命中头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "5"
+  },
+  "3110": {
+    "name": {
+      "en": "Fine Helmet of Effectiveness",
+      "jp": "効果命中の高級型ヘルム",
+      "kr": "적중의 고급형 투구",
+      "zh": "上等效果命中头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "5"
+  },
+  "3111": {
+    "name": {
+      "en": "Steel Helmet of Effectiveness",
+      "jp": "効果命中の鋼鉄ヘルム",
+      "kr": "적중의 강철 투구",
+      "zh": "钢铁效果命中头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "5"
+  },
+  "3112": {
+    "name": {
+      "en": "Etheric Helmet of Effectiveness",
+      "jp": "効果命中のエーテルヘルム",
+      "kr": "적중의 에테르 투구",
+      "zh": "以太效果命中头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "5"
+  },
+  "3113": {
+    "name": {
+      "en": "Ordinary Helmet of Effectiveness",
+      "jp": "効果命中の普及型ヘルム",
+      "kr": "적중의 보급형 투구",
+      "zh": "普通效果命中头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "5"
+  },
+  "3114": {
+    "name": {
+      "en": "Fine Helmet of Effectiveness",
+      "jp": "効果命中の高級型ヘルム",
+      "kr": "적중의 고급형 투구",
+      "zh": "上等效果命中头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "5"
+  },
+  "3115": {
+    "name": {
+      "en": "Steel Helmet of Effectiveness",
+      "jp": "効果命中の鋼鉄ヘルム",
+      "kr": "적중의 강철 투구",
+      "zh": "钢铁效果命中头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "5"
+  },
+  "3116": {
+    "name": {
+      "en": "Etheric Helmet of Effectiveness",
+      "jp": "効果命中のエーテルヘルム",
+      "kr": "적중의 에테르 투구",
+      "zh": "以太效果命中头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "5"
+  },
+  "3117": {
+    "name": {
+      "en": "Ordinary Helmet of Effectiveness",
+      "jp": "効果命中の普及型ヘルム",
+      "kr": "적중의 보급형 투구",
+      "zh": "普通效果命中头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "5"
+  },
+  "3118": {
+    "name": {
+      "en": "Fine Helmet of Effectiveness",
+      "jp": "効果命中の高級型ヘルム",
+      "kr": "적중의 고급형 투구",
+      "zh": "上等效果命中头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "5"
+  },
+  "3119": {
+    "name": {
+      "en": "Steel Helmet of Effectiveness",
+      "jp": "効果命中の鋼鉄ヘルム",
+      "kr": "적중의 강철 투구",
+      "zh": "钢铁效果命中头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "5"
+  },
+  "3120": {
+    "name": {
+      "en": "Etheric Helmet of Effectiveness",
+      "jp": "効果命中のエーテルヘルム",
+      "kr": "적중의 에테르 투구",
+      "zh": "以太效果命中头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "3121": {
+    "name": {
+      "en": "Ordinary Helmet of Resilience",
+      "jp": "抵抗の普及型ヘルム",
+      "kr": "저항의 보급형 투구",
+      "zh": "普通抵抗头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "6"
+  },
+  "3122": {
+    "name": {
+      "en": "Fine Helmet of Resilience",
+      "jp": "抵抗の高級型ヘルム",
+      "kr": "저항의 고급형 투구",
+      "zh": "上等抵抗头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "6"
+  },
+  "3123": {
+    "name": {
+      "en": "Steel Helmet of Resilience",
+      "jp": "抵抗の鋼鉄ヘルム",
+      "kr": "저항의 강철 투구",
+      "zh": "钢铁抵抗头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "6"
+  },
+  "3124": {
+    "name": {
+      "en": "Etheric Helmet of Resilience",
+      "jp": "抵抗のエーテルヘルム",
+      "kr": "저항의 에테르 투구",
+      "zh": "以太抵抗头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "6"
+  },
+  "3125": {
+    "name": {
+      "en": "Ordinary Helmet of Resilience",
+      "jp": "抵抗の普及型ヘルム",
+      "kr": "저항의 보급형 투구",
+      "zh": "普通抵抗头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "6"
+  },
+  "3126": {
+    "name": {
+      "en": "Fine Helmet of Resilience",
+      "jp": "抵抗の高級型ヘルム",
+      "kr": "저항의 고급형 투구",
+      "zh": "上等抵抗头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "6"
+  },
+  "3127": {
+    "name": {
+      "en": "Steel Helmet of Resilience",
+      "jp": "抵抗の鋼鉄ヘルム",
+      "kr": "저항의 강철 투구",
+      "zh": "钢铁抵抗头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "6"
+  },
+  "3128": {
+    "name": {
+      "en": "Etheric Helmet of Resilience",
+      "jp": "抵抗のエーテルヘルム",
+      "kr": "저항의 에테르 투구",
+      "zh": "以太抵抗头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "6"
+  },
+  "3129": {
+    "name": {
+      "en": "Ordinary Helmet of Resilience",
+      "jp": "抵抗の普及型ヘルム",
+      "kr": "저항의 보급형 투구",
+      "zh": "普通抵抗头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "6"
+  },
+  "3130": {
+    "name": {
+      "en": "Fine Helmet of Resilience",
+      "jp": "抵抗の高級型ヘルム",
+      "kr": "저항의 고급형 투구",
+      "zh": "上等抵抗头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "6"
+  },
+  "3131": {
+    "name": {
+      "en": "Steel Helmet of Resilience",
+      "jp": "抵抗の鋼鉄ヘルム",
+      "kr": "저항의 강철 투구",
+      "zh": "钢铁抵抗头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "6"
+  },
+  "3132": {
+    "name": {
+      "en": "Etheric Helmet of Resilience",
+      "jp": "抵抗のエーテルヘルム",
+      "kr": "저항의 에테르 투구",
+      "zh": "以太抵抗头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "6"
+  },
+  "3133": {
+    "name": {
+      "en": "Ordinary Helmet of Resilience",
+      "jp": "抵抗の普及型ヘルム",
+      "kr": "저항의 보급형 투구",
+      "zh": "普通抵抗头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "6"
+  },
+  "3134": {
+    "name": {
+      "en": "Fine Helmet of Resilience",
+      "jp": "抵抗の高級型ヘルム",
+      "kr": "저항의 고급형 투구",
+      "zh": "上等抵抗头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "6"
+  },
+  "3135": {
+    "name": {
+      "en": "Steel Helmet of Resilience",
+      "jp": "抵抗の鋼鉄ヘルム",
+      "kr": "저항의 강철 투구",
+      "zh": "钢铁抵抗头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "6"
+  },
+  "3136": {
+    "name": {
+      "en": "Etheric Helmet of Resilience",
+      "jp": "抵抗のエーテルヘルム",
+      "kr": "저항의 에테르 투구",
+      "zh": "以太抵抗头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "6"
+  },
+  "3137": {
+    "name": {
+      "en": "Ordinary Helmet of Resilience",
+      "jp": "抵抗の普及型ヘルム",
+      "kr": "저항의 보급형 투구",
+      "zh": "普通抵抗头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "6"
+  },
+  "3138": {
+    "name": {
+      "en": "Fine Helmet of Resilience",
+      "jp": "抵抗の高級型ヘルム",
+      "kr": "저항의 고급형 투구",
+      "zh": "上等抵抗头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "6"
+  },
+  "3139": {
+    "name": {
+      "en": "Steel Helmet of Resilience",
+      "jp": "抵抗の鋼鉄ヘルム",
+      "kr": "저항의 강철 투구",
+      "zh": "钢铁抵抗头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "6"
+  },
+  "3140": {
+    "name": {
+      "en": "Etheric Helmet of Resilience",
+      "jp": "抵抗のエーテルヘルム",
+      "kr": "저항의 에테르 투구",
+      "zh": "以太抵抗头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "6"
+  },
+  "3141": {
+    "name": {
+      "en": "Ordinary Helmet of Resilience",
+      "jp": "抵抗の普及型ヘルム",
+      "kr": "저항의 보급형 투구",
+      "zh": "普通抵抗头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "6"
+  },
+  "3142": {
+    "name": {
+      "en": "Fine Helmet of Resilience",
+      "jp": "抵抗の高級型ヘルム",
+      "kr": "저항의 고급형 투구",
+      "zh": "上等抵抗头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "6"
+  },
+  "3143": {
+    "name": {
+      "en": "Steel Helmet of Resilience",
+      "jp": "抵抗の鋼鉄ヘルム",
+      "kr": "저항의 강철 투구",
+      "zh": "钢铁抵抗头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "6"
+  },
+  "3144": {
+    "name": {
+      "en": "Etheric Helmet of Resilience",
+      "jp": "抵抗のエーテルヘルム",
+      "kr": "저항의 에테르 투구",
+      "zh": "以太抵抗头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "3145": {
+    "name": {
+      "en": "Ordinary Helmet of Counterattack",
+      "jp": "反撃の普及型ヘルム",
+      "kr": "반격의 보급형 투구",
+      "zh": "普通反击头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "7"
+  },
+  "3146": {
+    "name": {
+      "en": "Fine Helmet of Counterattack",
+      "jp": "反撃の高級型ヘルム",
+      "kr": "반격의 고급형 투구",
+      "zh": "上等反击头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "7"
+  },
+  "3147": {
+    "name": {
+      "en": "Steel Helmet of Counterattack",
+      "jp": "反撃の鋼鉄ヘルム",
+      "kr": "반격의 강철 투구",
+      "zh": "钢铁反击头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "7"
+  },
+  "3148": {
+    "name": {
+      "en": "Etheric Helmet of Counterattack",
+      "jp": "反撃のエーテルヘルム",
+      "kr": "반격의 에테르 투구",
+      "zh": "以太反击头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "7"
+  },
+  "3149": {
+    "name": {
+      "en": "Ordinary Helmet of Counterattack",
+      "jp": "反撃の普及型ヘルム",
+      "kr": "반격의 보급형 투구",
+      "zh": "普通反击头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "7"
+  },
+  "3150": {
+    "name": {
+      "en": "Fine Helmet of Counterattack",
+      "jp": "反撃の高級型ヘルム",
+      "kr": "반격의 고급형 투구",
+      "zh": "上等反击头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "7"
+  },
+  "3151": {
+    "name": {
+      "en": "Steel Helmet of Counterattack",
+      "jp": "反撃の鋼鉄ヘルム",
+      "kr": "반격의 강철 투구",
+      "zh": "钢铁反击头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "7"
+  },
+  "3152": {
+    "name": {
+      "en": "Etheric Helmet of Counterattack",
+      "jp": "反撃のエーテルヘルム",
+      "kr": "반격의 에테르 투구",
+      "zh": "以太反击头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "7"
+  },
+  "3153": {
+    "name": {
+      "en": "Ordinary Helmet of Counterattack",
+      "jp": "反撃の普及型ヘルム",
+      "kr": "반격의 보급형 투구",
+      "zh": "普通反击头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "7"
+  },
+  "3154": {
+    "name": {
+      "en": "Fine Helmet of Counterattack",
+      "jp": "反撃の高級型ヘルム",
+      "kr": "반격의 고급형 투구",
+      "zh": "上等反击头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "7"
+  },
+  "3155": {
+    "name": {
+      "en": "Steel Helmet of Counterattack",
+      "jp": "反撃の鋼鉄ヘルム",
+      "kr": "반격의 강철 투구",
+      "zh": "钢铁反击头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "7"
+  },
+  "3156": {
+    "name": {
+      "en": "Etheric Helmet of Counterattack",
+      "jp": "反撃のエーテルヘルム",
+      "kr": "반격의 에테르 투구",
+      "zh": "以太反击头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "7"
+  },
+  "3157": {
+    "name": {
+      "en": "Ordinary Helmet of Counterattack",
+      "jp": "反撃の普及型ヘルム",
+      "kr": "반격의 보급형 투구",
+      "zh": "普通反击头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "7"
+  },
+  "3158": {
+    "name": {
+      "en": "Fine Helmet of Counterattack",
+      "jp": "反撃の高級型ヘルム",
+      "kr": "반격의 고급형 투구",
+      "zh": "上等反击头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "7"
+  },
+  "3159": {
+    "name": {
+      "en": "Steel Helmet of Counterattack",
+      "jp": "反撃の鋼鉄ヘルム",
+      "kr": "반격의 강철 투구",
+      "zh": "钢铁反击头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "7"
+  },
+  "3160": {
+    "name": {
+      "en": "Etheric Helmet of Counterattack",
+      "jp": "反撃のエーテルヘルム",
+      "kr": "반격의 에테르 투구",
+      "zh": "以太反击头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "7"
+  },
+  "3161": {
+    "name": {
+      "en": "Ordinary Helmet of Counterattack",
+      "jp": "反撃の普及型ヘルム",
+      "kr": "반격의 보급형 투구",
+      "zh": "普通反击头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "7"
+  },
+  "3162": {
+    "name": {
+      "en": "Fine Helmet of Counterattack",
+      "jp": "反撃の高級型ヘルム",
+      "kr": "반격의 고급형 투구",
+      "zh": "上等反击头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "7"
+  },
+  "3163": {
+    "name": {
+      "en": "Steel Helmet of Counterattack",
+      "jp": "反撃の鋼鉄ヘルム",
+      "kr": "반격의 강철 투구",
+      "zh": "钢铁反击头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "7"
+  },
+  "3164": {
+    "name": {
+      "en": "Etheric Helmet of Counterattack",
+      "jp": "反撃のエーテルヘルム",
+      "kr": "반격의 에테르 투구",
+      "zh": "以太反击头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "7"
+  },
+  "3165": {
+    "name": {
+      "en": "Ordinary Helmet of Counterattack",
+      "jp": "反撃の普及型ヘルム",
+      "kr": "반격의 보급형 투구",
+      "zh": "普通反击头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "7"
+  },
+  "3166": {
+    "name": {
+      "en": "Fine Helmet of Counterattack",
+      "jp": "反撃の高級型ヘルム",
+      "kr": "반격의 고급형 투구",
+      "zh": "上等反击头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "7"
+  },
+  "3167": {
+    "name": {
+      "en": "Steel Helmet of Counterattack",
+      "jp": "反撃の鋼鉄ヘルム",
+      "kr": "반격의 강철 투구",
+      "zh": "钢铁反击头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "7"
+  },
+  "3168": {
+    "name": {
+      "en": "Etheric Helmet of Counterattack",
+      "jp": "反撃のエーテルヘルム",
+      "kr": "반격의 에테르 투구",
+      "zh": "以太反击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "3169": {
+    "name": {
+      "en": "Ordinary Helmet of Fortification",
+      "jp": "鉄壁の普及型ヘルム",
+      "kr": "개전 방벽의 보급형 투구",
+      "zh": "普通开战防壁头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "8"
+  },
+  "3170": {
+    "name": {
+      "en": "Fine Helmet of Fortification",
+      "jp": "鉄壁の高級型ヘルム",
+      "kr": "개전 방벽의 고급형 투구",
+      "zh": "上等开战防壁头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "8"
+  },
+  "3171": {
+    "name": {
+      "en": "Steel Helmet of Fortification",
+      "jp": "鉄壁の鋼鉄ヘルム",
+      "kr": "개전 방벽의 강철 투구",
+      "zh": "钢铁开战防壁头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "8"
+  },
+  "3172": {
+    "name": {
+      "en": "Etheric Helmet of Fortification",
+      "jp": "鉄壁のエーテルヘルム",
+      "kr": "개전 방벽의 에테르 투구",
+      "zh": "以太开战防壁头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "8"
+  },
+  "3173": {
+    "name": {
+      "en": "Ordinary Helmet of Fortification",
+      "jp": "鉄壁の普及型ヘルム",
+      "kr": "개전 방벽의 보급형 투구",
+      "zh": "普通开战防壁头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "8"
+  },
+  "3174": {
+    "name": {
+      "en": "Fine Helmet of Fortification",
+      "jp": "鉄壁の高級型ヘルム",
+      "kr": "개전 방벽의 고급형 투구",
+      "zh": "上等开战防壁头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "8"
+  },
+  "3175": {
+    "name": {
+      "en": "Steel Helmet of Fortification",
+      "jp": "鉄壁の鋼鉄ヘルム",
+      "kr": "개전 방벽의 강철 투구",
+      "zh": "钢铁开战防壁头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "8"
+  },
+  "3176": {
+    "name": {
+      "en": "Etheric Helmet of Fortification",
+      "jp": "鉄壁のエーテルヘルム",
+      "kr": "개전 방벽의 에테르 투구",
+      "zh": "以太开战防壁头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "8"
+  },
+  "3177": {
+    "name": {
+      "en": "Ordinary Helmet of Fortification",
+      "jp": "鉄壁の普及型ヘルム",
+      "kr": "개전 방벽의 보급형 투구",
+      "zh": "普通开战防壁头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "8"
+  },
+  "3178": {
+    "name": {
+      "en": "Fine Helmet of Fortification",
+      "jp": "鉄壁の高級型ヘルム",
+      "kr": "개전 방벽의 고급형 투구",
+      "zh": "上等开战防壁头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "8"
+  },
+  "3179": {
+    "name": {
+      "en": "Steel Helmet of Fortification",
+      "jp": "鉄壁の鋼鉄ヘルム",
+      "kr": "개전 방벽의 강철 투구",
+      "zh": "钢铁开战防壁头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "8"
+  },
+  "3180": {
+    "name": {
+      "en": "Etheric Helmet of Fortification",
+      "jp": "鉄壁のエーテルヘルム",
+      "kr": "개전 방벽의 에테르 투구",
+      "zh": "以太开战防壁头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "8"
+  },
+  "3181": {
+    "name": {
+      "en": "Ordinary Helmet of Fortification",
+      "jp": "鉄壁の普及型ヘルム",
+      "kr": "개전 방벽의 보급형 투구",
+      "zh": "普通开战防壁头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "8"
+  },
+  "3182": {
+    "name": {
+      "en": "Fine Helmet of Fortification",
+      "jp": "鉄壁の高級型ヘルム",
+      "kr": "개전 방벽의 고급형 투구",
+      "zh": "上等开战防壁头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "8"
+  },
+  "3183": {
+    "name": {
+      "en": "Steel Helmet of Fortification",
+      "jp": "鉄壁の鋼鉄ヘルム",
+      "kr": "개전 방벽의 강철 투구",
+      "zh": "钢铁开战防壁头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "8"
+  },
+  "3184": {
+    "name": {
+      "en": "Etheric Helmet of Fortification",
+      "jp": "鉄壁のエーテルヘルム",
+      "kr": "개전 방벽의 에테르 투구",
+      "zh": "以太开战防壁头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "8"
+  },
+  "3185": {
+    "name": {
+      "en": "Ordinary Helmet of Fortification",
+      "jp": "鉄壁の普及型ヘルム",
+      "kr": "개전 방벽의 보급형 투구",
+      "zh": "普通开战防壁头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "8"
+  },
+  "3186": {
+    "name": {
+      "en": "Fine Helmet of Fortification",
+      "jp": "鉄壁の高級型ヘルム",
+      "kr": "개전 방벽의 고급형 투구",
+      "zh": "上等开战防壁头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "8"
+  },
+  "3187": {
+    "name": {
+      "en": "Steel Helmet of Fortification",
+      "jp": "鉄壁の鋼鉄ヘルム",
+      "kr": "개전 방벽의 강철 투구",
+      "zh": "钢铁开战防壁头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "8"
+  },
+  "3188": {
+    "name": {
+      "en": "Etheric Helmet of Fortification",
+      "jp": "鉄壁のエーテルヘルム",
+      "kr": "개전 방벽의 에테르 투구",
+      "zh": "以太开战防壁头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "8"
+  },
+  "3189": {
+    "name": {
+      "en": "Ordinary Helmet of Fortification",
+      "jp": "鉄壁の普及型ヘルム",
+      "kr": "개전 방벽의 보급형 투구",
+      "zh": "普通开战防壁头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "8"
+  },
+  "3190": {
+    "name": {
+      "en": "Fine Helmet of Fortification",
+      "jp": "鉄壁の高級型ヘルム",
+      "kr": "개전 방벽의 고급형 투구",
+      "zh": "上等开战防壁头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "8"
+  },
+  "3191": {
+    "name": {
+      "en": "Steel Helmet of Fortification",
+      "jp": "鉄壁の鋼鉄ヘルム",
+      "kr": "개전 방벽의 강철 투구",
+      "zh": "钢铁开战防壁头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "8"
+  },
+  "3192": {
+    "name": {
+      "en": "Etheric Helmet of Fortification",
+      "jp": "鉄壁のエーテルヘルム",
+      "kr": "개전 방벽의 에테르 투구",
+      "zh": "以太开战防壁头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "3193": {
+    "name": {
+      "en": "Ordinary Helmet of Mitigation",
+      "jp": "無力化の普及型ヘルム",
+      "kr": "무력화의 보급형 투구",
+      "zh": "普通失效头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "9"
+  },
+  "3194": {
+    "name": {
+      "en": "Fine Helmet of Mitigation",
+      "jp": "無力化の高級型ヘルム",
+      "kr": "무력화의 고급형 투구",
+      "zh": "上等失效头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "9"
+  },
+  "3195": {
+    "name": {
+      "en": "Steel Helmet of Mitigation",
+      "jp": "無力化の鋼鉄ヘルム",
+      "kr": "무력화의 강철 투구",
+      "zh": "钢铁失效头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "9"
+  },
+  "3196": {
+    "name": {
+      "en": "Etheric Helmet of Mitigation",
+      "jp": "無力化のエーテルヘルム",
+      "kr": "무력화의 에테르 투구",
+      "zh": "以太失效头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "9"
+  },
+  "3197": {
+    "name": {
+      "en": "Ordinary Helmet of Mitigation",
+      "jp": "無力化の普及型ヘルム",
+      "kr": "무력화의 보급형 투구",
+      "zh": "普通失效头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "9"
+  },
+  "3198": {
+    "name": {
+      "en": "Fine Helmet of Mitigation",
+      "jp": "無力化の高級型ヘルム",
+      "kr": "무력화의 고급형 투구",
+      "zh": "上等失效头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "9"
+  },
+  "3199": {
+    "name": {
+      "en": "Steel Helmet of Mitigation",
+      "jp": "無力化の鋼鉄ヘルム",
+      "kr": "무력화의 강철 투구",
+      "zh": "钢铁失效头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "9"
+  },
+  "3200": {
+    "name": {
+      "en": "Etheric Helmet of Mitigation",
+      "jp": "無力化のエーテルヘルム",
+      "kr": "무력화의 에테르 투구",
+      "zh": "以太失效头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "9"
+  },
+  "3201": {
+    "name": {
+      "en": "Ordinary Helmet of Mitigation",
+      "jp": "無力化の普及型ヘルム",
+      "kr": "무력화의 보급형 투구",
+      "zh": "普通失效头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "9"
+  },
+  "3202": {
+    "name": {
+      "en": "Fine Helmet of Mitigation",
+      "jp": "無力化の高級型ヘルム",
+      "kr": "무력화의 고급형 투구",
+      "zh": "上等失效头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "9"
+  },
+  "3203": {
+    "name": {
+      "en": "Steel Helmet of Mitigation",
+      "jp": "無力化の鋼鉄ヘルム",
+      "kr": "무력화의 강철 투구",
+      "zh": "钢铁失效头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "9"
+  },
+  "3204": {
+    "name": {
+      "en": "Etheric Helmet of Mitigation",
+      "jp": "無力化のエーテルヘルム",
+      "kr": "무력화의 에테르 투구",
+      "zh": "以太失效头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "9"
+  },
+  "3205": {
+    "name": {
+      "en": "Ordinary Helmet of Mitigation",
+      "jp": "無力化の普及型ヘルム",
+      "kr": "무력화의 보급형 투구",
+      "zh": "普通失效头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "9"
+  },
+  "3206": {
+    "name": {
+      "en": "Fine Helmet of Mitigation",
+      "jp": "無力化の高級型ヘルム",
+      "kr": "무력화의 고급형 투구",
+      "zh": "上等失效头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "9"
+  },
+  "3207": {
+    "name": {
+      "en": "Steel Helmet of Mitigation",
+      "jp": "無力化の鋼鉄ヘルム",
+      "kr": "무력화의 강철 투구",
+      "zh": "钢铁失效头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "9"
+  },
+  "3208": {
+    "name": {
+      "en": "Etheric Helmet of Mitigation",
+      "jp": "無力化のエーテルヘルム",
+      "kr": "무력화의 에테르 투구",
+      "zh": "以太失效头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "9"
+  },
+  "3209": {
+    "name": {
+      "en": "Ordinary Helmet of Mitigation",
+      "jp": "無力化の普及型ヘルム",
+      "kr": "무력화의 보급형 투구",
+      "zh": "普通失效头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "9"
+  },
+  "3210": {
+    "name": {
+      "en": "Fine Helmet of Mitigation",
+      "jp": "無力化の高級型ヘルム",
+      "kr": "무력화의 고급형 투구",
+      "zh": "上等失效头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "9"
+  },
+  "3211": {
+    "name": {
+      "en": "Steel Helmet of Mitigation",
+      "jp": "無力化の鋼鉄ヘルム",
+      "kr": "무력화의 강철 투구",
+      "zh": "钢铁失效头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "9"
+  },
+  "3212": {
+    "name": {
+      "en": "Etheric Helmet of Mitigation",
+      "jp": "無力化のエーテルヘルム",
+      "kr": "무력화의 에테르 투구",
+      "zh": "以太失效头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "9"
+  },
+  "3213": {
+    "name": {
+      "en": "Ordinary Helmet of Mitigation",
+      "jp": "無力化の普及型ヘルム",
+      "kr": "무력화의 보급형 투구",
+      "zh": "普通失效头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "9"
+  },
+  "3214": {
+    "name": {
+      "en": "Fine Helmet of Mitigation",
+      "jp": "無力化の高級型ヘルム",
+      "kr": "무력화의 고급형 투구",
+      "zh": "上等失效头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "9"
+  },
+  "3215": {
+    "name": {
+      "en": "Steel Helmet of Mitigation",
+      "jp": "無力化の鋼鉄ヘルム",
+      "kr": "무력화의 강철 투구",
+      "zh": "钢铁失效头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "9"
+  },
+  "3216": {
+    "name": {
+      "en": "Etheric Helmet of Mitigation",
+      "jp": "無力化のエーテルヘルム",
+      "kr": "무력화의 에테르 투구",
+      "zh": "以太失效头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "3217": {
+    "name": {
+      "en": "Ordinary Helmet of Lifesteal",
+      "jp": "吸収の普及型ヘルム",
+      "kr": "흡혈의 보급형 투구",
+      "zh": "普通吸血头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "10"
+  },
+  "3218": {
+    "name": {
+      "en": "Fine Helmet of Lifesteal",
+      "jp": "吸収の高級型ヘルム",
+      "kr": "흡혈의 고급형 투구",
+      "zh": "上等吸血头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "10"
+  },
+  "3219": {
+    "name": {
+      "en": "Steel Helmet of Lifesteal",
+      "jp": "吸収の鋼鉄ヘルム",
+      "kr": "흡혈의 강철 투구",
+      "zh": "钢铁吸血头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "10"
+  },
+  "3220": {
+    "name": {
+      "en": "Etheric Helmet of Lifesteal",
+      "jp": "吸収のエーテルヘルム",
+      "kr": "흡혈의 에테르 투구",
+      "zh": "以太吸血头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "10"
+  },
+  "3221": {
+    "name": {
+      "en": "Ordinary Helmet of Lifesteal",
+      "jp": "吸収の普及型ヘルム",
+      "kr": "흡혈의 보급형 투구",
+      "zh": "普通吸血头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "10"
+  },
+  "3222": {
+    "name": {
+      "en": "Fine Helmet of Lifesteal",
+      "jp": "吸収の高級型ヘルム",
+      "kr": "흡혈의 고급형 투구",
+      "zh": "上等吸血头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "10"
+  },
+  "3223": {
+    "name": {
+      "en": "Steel Helmet of Lifesteal",
+      "jp": "吸収の鋼鉄ヘルム",
+      "kr": "흡혈의 강철 투구",
+      "zh": "钢铁吸血头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "10"
+  },
+  "3224": {
+    "name": {
+      "en": "Etheric Helmet of Lifesteal",
+      "jp": "吸収のエーテルヘルム",
+      "kr": "흡혈의 에테르 투구",
+      "zh": "以太吸血头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "10"
+  },
+  "3225": {
+    "name": {
+      "en": "Ordinary Helmet of Lifesteal",
+      "jp": "吸収の普及型ヘルム",
+      "kr": "흡혈의 보급형 투구",
+      "zh": "普通吸血头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "10"
+  },
+  "3226": {
+    "name": {
+      "en": "Fine Helmet of Lifesteal",
+      "jp": "吸収の高級型ヘルム",
+      "kr": "흡혈의 고급형 투구",
+      "zh": "上等吸血头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "10"
+  },
+  "3227": {
+    "name": {
+      "en": "Steel Helmet of Lifesteal",
+      "jp": "吸収の鋼鉄ヘルム",
+      "kr": "흡혈의 강철 투구",
+      "zh": "钢铁吸血头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "10"
+  },
+  "3228": {
+    "name": {
+      "en": "Etheric Helmet of Lifesteal",
+      "jp": "吸収のエーテルヘルム",
+      "kr": "흡혈의 에테르 투구",
+      "zh": "以太吸血头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "10"
+  },
+  "3229": {
+    "name": {
+      "en": "Ordinary Helmet of Lifesteal",
+      "jp": "吸収の普及型ヘルム",
+      "kr": "흡혈의 보급형 투구",
+      "zh": "普通吸血头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "10"
+  },
+  "3230": {
+    "name": {
+      "en": "Fine Helmet of Lifesteal",
+      "jp": "吸収の高級型ヘルム",
+      "kr": "흡혈의 고급형 투구",
+      "zh": "上等吸血头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "10"
+  },
+  "3231": {
+    "name": {
+      "en": "Steel Helmet of Lifesteal",
+      "jp": "吸収の鋼鉄ヘルム",
+      "kr": "흡혈의 강철 투구",
+      "zh": "钢铁吸血头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "10"
+  },
+  "3232": {
+    "name": {
+      "en": "Etheric Helmet of Lifesteal",
+      "jp": "吸収のエーテルヘルム",
+      "kr": "흡혈의 에테르 투구",
+      "zh": "以太吸血头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "10"
+  },
+  "3233": {
+    "name": {
+      "en": "Ordinary Helmet of Lifesteal",
+      "jp": "吸収の普及型ヘルム",
+      "kr": "흡혈의 보급형 투구",
+      "zh": "普通吸血头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "10"
+  },
+  "3234": {
+    "name": {
+      "en": "Fine Helmet of Lifesteal",
+      "jp": "吸収の高級型ヘルム",
+      "kr": "흡혈의 고급형 투구",
+      "zh": "上等吸血头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "10"
+  },
+  "3235": {
+    "name": {
+      "en": "Steel Helmet of Lifesteal",
+      "jp": "吸収の鋼鉄ヘルム",
+      "kr": "흡혈의 강철 투구",
+      "zh": "钢铁吸血头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "10"
+  },
+  "3236": {
+    "name": {
+      "en": "Etheric Helmet of Lifesteal",
+      "jp": "吸収のエーテルヘルム",
+      "kr": "흡혈의 에테르 투구",
+      "zh": "以太吸血头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "10"
+  },
+  "3237": {
+    "name": {
+      "en": "Ordinary Helmet of Lifesteal",
+      "jp": "吸収の普及型ヘルム",
+      "kr": "흡혈의 보급형 투구",
+      "zh": "普通吸血头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "10"
+  },
+  "3238": {
+    "name": {
+      "en": "Fine Helmet of Lifesteal",
+      "jp": "吸収の高級型ヘルム",
+      "kr": "흡혈의 고급형 투구",
+      "zh": "上等吸血头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "10"
+  },
+  "3239": {
+    "name": {
+      "en": "Steel Helmet of Lifesteal",
+      "jp": "吸収の鋼鉄ヘルム",
+      "kr": "흡혈의 강철 투구",
+      "zh": "钢铁吸血头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "10"
+  },
+  "3240": {
+    "name": {
+      "en": "Etheric Helmet of Lifesteal",
+      "jp": "吸収のエーテルヘルム",
+      "kr": "흡혈의 에테르 투구",
+      "zh": "以太吸血头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "3241": {
+    "name": {
+      "en": "Ordinary Helmet of Penetration",
+      "jp": "貫通の普及型ヘルム",
+      "kr": "관통의 보급형 투구",
+      "zh": "普通穿透头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "11"
+  },
+  "3242": {
+    "name": {
+      "en": "Fine Helmet of Penetration",
+      "jp": "貫通の高級型ヘルム",
+      "kr": "관통의 고급형 투구",
+      "zh": "上等穿透头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "11"
+  },
+  "3243": {
+    "name": {
+      "en": "Steel Helmet of Penetration",
+      "jp": "貫通の鋼鉄ヘルム",
+      "kr": "관통의 강철 투구",
+      "zh": "钢铁穿透头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "11"
+  },
+  "3244": {
+    "name": {
+      "en": "Etheric Helmet of Penetration",
+      "jp": "貫通のエーテルヘルム",
+      "kr": "관통의 에테르 투구",
+      "zh": "以太穿透头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "11"
+  },
+  "3245": {
+    "name": {
+      "en": "Ordinary Helmet of Penetration",
+      "jp": "貫通の普及型ヘルム",
+      "kr": "관통의 보급형 투구",
+      "zh": "普通穿透头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "11"
+  },
+  "3246": {
+    "name": {
+      "en": "Fine Helmet of Penetration",
+      "jp": "貫通の高級型ヘルム",
+      "kr": "관통의 고급형 투구",
+      "zh": "上等穿透头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "11"
+  },
+  "3247": {
+    "name": {
+      "en": "Steel Helmet of Penetration",
+      "jp": "貫通の鋼鉄ヘルム",
+      "kr": "관통의 강철 투구",
+      "zh": "钢铁穿透头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "11"
+  },
+  "3248": {
+    "name": {
+      "en": "Etheric Helmet of Penetration",
+      "jp": "貫通のエーテルヘルム",
+      "kr": "관통의 에테르 투구",
+      "zh": "以太穿透头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "11"
+  },
+  "3249": {
+    "name": {
+      "en": "Ordinary Helmet of Penetration",
+      "jp": "貫通の普及型ヘルム",
+      "kr": "관통의 보급형 투구",
+      "zh": "普通穿透头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "11"
+  },
+  "3250": {
+    "name": {
+      "en": "Fine Helmet of Penetration",
+      "jp": "貫通の高級型ヘルム",
+      "kr": "관통의 고급형 투구",
+      "zh": "上等穿透头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "11"
+  },
+  "3251": {
+    "name": {
+      "en": "Steel Helmet of Penetration",
+      "jp": "貫通の鋼鉄ヘルム",
+      "kr": "관통의 강철 투구",
+      "zh": "钢铁穿透头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "11"
+  },
+  "3252": {
+    "name": {
+      "en": "Etheric Helmet of Penetration",
+      "jp": "貫通のエーテルヘルム",
+      "kr": "관통의 에테르 투구",
+      "zh": "以太穿透头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "11"
+  },
+  "3253": {
+    "name": {
+      "en": "Ordinary Helmet of Penetration",
+      "jp": "貫通の普及型ヘルム",
+      "kr": "관통의 보급형 투구",
+      "zh": "普通穿透头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "11"
+  },
+  "3254": {
+    "name": {
+      "en": "Fine Helmet of Penetration",
+      "jp": "貫通の高級型ヘルム",
+      "kr": "관통의 고급형 투구",
+      "zh": "上等穿透头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "11"
+  },
+  "3255": {
+    "name": {
+      "en": "Steel Helmet of Penetration",
+      "jp": "貫通の鋼鉄ヘルム",
+      "kr": "관통의 강철 투구",
+      "zh": "钢铁穿透头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "11"
+  },
+  "3256": {
+    "name": {
+      "en": "Etheric Helmet of Penetration",
+      "jp": "貫通のエーテルヘルム",
+      "kr": "관통의 에테르 투구",
+      "zh": "以太穿透头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "11"
+  },
+  "3257": {
+    "name": {
+      "en": "Ordinary Helmet of Penetration",
+      "jp": "貫通の普及型ヘルム",
+      "kr": "관통의 보급형 투구",
+      "zh": "普通穿透头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "11"
+  },
+  "3258": {
+    "name": {
+      "en": "Fine Helmet of Penetration",
+      "jp": "貫通の高級型ヘルム",
+      "kr": "관통의 고급형 투구",
+      "zh": "上等穿透头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "11"
+  },
+  "3259": {
+    "name": {
+      "en": "Steel Helmet of Penetration",
+      "jp": "貫通の鋼鉄ヘルム",
+      "kr": "관통의 강철 투구",
+      "zh": "钢铁穿透头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "11"
+  },
+  "3260": {
+    "name": {
+      "en": "Etheric Helmet of Penetration",
+      "jp": "貫通のエーテルヘルム",
+      "kr": "관통의 에테르 투구",
+      "zh": "以太穿透头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "11"
+  },
+  "3261": {
+    "name": {
+      "en": "Ordinary Helmet of Penetration",
+      "jp": "貫通の普及型ヘルム",
+      "kr": "관통의 보급형 투구",
+      "zh": "普通穿透头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "11"
+  },
+  "3262": {
+    "name": {
+      "en": "Fine Helmet of Penetration",
+      "jp": "貫通の高級型ヘルム",
+      "kr": "관통의 고급형 투구",
+      "zh": "上等穿透头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "11"
+  },
+  "3263": {
+    "name": {
+      "en": "Steel Helmet of Penetration",
+      "jp": "貫通の鋼鉄ヘルム",
+      "kr": "관통의 강철 투구",
+      "zh": "钢铁穿透头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "11"
+  },
+  "3264": {
+    "name": {
+      "en": "Etheric Helmet of Penetration",
+      "jp": "貫通のエーテルヘルム",
+      "kr": "관통의 에테르 투구",
+      "zh": "以太穿透头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "3265": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Strike",
+      "jp": "極大化の普及型ヘルム",
+      "kr": "극대화의 보급형 투구",
+      "zh": "普通暴伤头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "12"
+  },
+  "3266": {
+    "name": {
+      "en": "Fine Helmet of Critical Strike",
+      "jp": "極大化の高級型ヘルム",
+      "kr": "극대화의 고급형 투구",
+      "zh": "上等暴伤头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "12"
+  },
+  "3267": {
+    "name": {
+      "en": "Steel Helmet of Critical Strike",
+      "jp": "極大化の鋼鉄ヘルム",
+      "kr": "극대화의 강철 투구",
+      "zh": "钢铁暴伤头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "12"
+  },
+  "3268": {
+    "name": {
+      "en": "Etheric Helmet of Critical Strike",
+      "jp": "極大化のエーテルヘルム",
+      "kr": "극대화의 에테르 투구",
+      "zh": "以太暴伤头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "12"
+  },
+  "3269": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Strike",
+      "jp": "極大化の普及型ヘルム",
+      "kr": "극대화의 보급형 투구",
+      "zh": "普通暴伤头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "12"
+  },
+  "3270": {
+    "name": {
+      "en": "Fine Helmet of Critical Strike",
+      "jp": "極大化の高級型ヘルム",
+      "kr": "극대화의 고급형 투구",
+      "zh": "上等暴伤头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "12"
+  },
+  "3271": {
+    "name": {
+      "en": "Steel Helmet of Critical Strike",
+      "jp": "極大化の鋼鉄ヘルム",
+      "kr": "극대화의 강철 투구",
+      "zh": "钢铁暴伤头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "12"
+  },
+  "3272": {
+    "name": {
+      "en": "Etheric Helmet of Critical Strike",
+      "jp": "極大化のエーテルヘルム",
+      "kr": "극대화의 에테르 투구",
+      "zh": "以太暴伤头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "12"
+  },
+  "3273": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Strike",
+      "jp": "極大化の普及型ヘルム",
+      "kr": "극대화의 보급형 투구",
+      "zh": "普通暴伤头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "12"
+  },
+  "3274": {
+    "name": {
+      "en": "Fine Helmet of Critical Strike",
+      "jp": "極大化の高級型ヘルム",
+      "kr": "극대화의 고급형 투구",
+      "zh": "上等暴伤头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "12"
+  },
+  "3275": {
+    "name": {
+      "en": "Steel Helmet of Critical Strike",
+      "jp": "極大化の鋼鉄ヘルム",
+      "kr": "극대화의 강철 투구",
+      "zh": "钢铁暴伤头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "12"
+  },
+  "3276": {
+    "name": {
+      "en": "Etheric Helmet of Critical Strike",
+      "jp": "極大化のエーテルヘルム",
+      "kr": "극대화의 에테르 투구",
+      "zh": "以太暴伤头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "12"
+  },
+  "3277": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Strike",
+      "jp": "極大化の普及型ヘルム",
+      "kr": "극대화의 보급형 투구",
+      "zh": "普通暴伤头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "12"
+  },
+  "3278": {
+    "name": {
+      "en": "Fine Helmet of Critical Strike",
+      "jp": "極大化の高級型ヘルム",
+      "kr": "극대화의 고급형 투구",
+      "zh": "上等暴伤头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "12"
+  },
+  "3279": {
+    "name": {
+      "en": "Steel Helmet of Critical Strike",
+      "jp": "極大化の鋼鉄ヘルム",
+      "kr": "극대화의 강철 투구",
+      "zh": "钢铁暴伤头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "12"
+  },
+  "3280": {
+    "name": {
+      "en": "Etheric Helmet of Critical Strike",
+      "jp": "極大化のエーテルヘルム",
+      "kr": "극대화의 에테르 투구",
+      "zh": "以太暴伤头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "12"
+  },
+  "3281": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Strike",
+      "jp": "極大化の普及型ヘルム",
+      "kr": "극대화의 보급형 투구",
+      "zh": "普通暴伤头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "12"
+  },
+  "3282": {
+    "name": {
+      "en": "Fine Helmet of Critical Strike",
+      "jp": "極大化の高級型ヘルム",
+      "kr": "극대화의 고급형 투구",
+      "zh": "上等暴伤头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "12"
+  },
+  "3283": {
+    "name": {
+      "en": "Steel Helmet of Critical Strike",
+      "jp": "極大化の鋼鉄ヘルム",
+      "kr": "극대화의 강철 투구",
+      "zh": "钢铁暴伤头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "12"
+  },
+  "3284": {
+    "name": {
+      "en": "Etheric Helmet of Critical Strike",
+      "jp": "極大化のエーテルヘルム",
+      "kr": "극대화의 에테르 투구",
+      "zh": "以太暴伤头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "12"
+  },
+  "3285": {
+    "name": {
+      "en": "Ordinary Helmet of Critical Strike",
+      "jp": "極大化の普及型ヘルム",
+      "kr": "극대화의 보급형 투구",
+      "zh": "普通暴伤头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "12"
+  },
+  "3286": {
+    "name": {
+      "en": "Fine Helmet of Critical Strike",
+      "jp": "極大化の高級型ヘルム",
+      "kr": "극대화의 고급형 투구",
+      "zh": "上等暴伤头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "12"
+  },
+  "3287": {
+    "name": {
+      "en": "Steel Helmet of Critical Strike",
+      "jp": "極大化の鋼鉄ヘルム",
+      "kr": "극대화의 강철 투구",
+      "zh": "钢铁暴伤头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "12"
+  },
+  "3288": {
+    "name": {
+      "en": "Etheric Helmet of Critical Strike",
+      "jp": "極大化のエーテルヘルム",
+      "kr": "극대화의 에테르 투구",
+      "zh": "以太暴伤头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "3289": {
+    "name": {
+      "en": "Ordinary Helmet of Speed",
+      "jp": "速度の普及型ヘルム",
+      "kr": "속도의 보급형 투구",
+      "zh": "普通速度头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "13"
+  },
+  "3290": {
+    "name": {
+      "en": "Fine Helmet of Speed",
+      "jp": "速度の高級型ヘルム",
+      "kr": "속도의 고급형 투구",
+      "zh": "上等速度头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "13"
+  },
+  "3291": {
+    "name": {
+      "en": "Steel Helmet of Speed",
+      "jp": "速度の鋼鉄ヘルム",
+      "kr": "속도의 강철 투구",
+      "zh": "钢铁速度头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "13"
+  },
+  "3292": {
+    "name": {
+      "en": "Etheric Helmet of Speed",
+      "jp": "速度のエーテルヘルム",
+      "kr": "속도의 에테르 투구",
+      "zh": "以太速度头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "13"
+  },
+  "3293": {
+    "name": {
+      "en": "Ordinary Helmet of Speed",
+      "jp": "速度の普及型ヘルム",
+      "kr": "속도의 보급형 투구",
+      "zh": "普通速度头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "13"
+  },
+  "3294": {
+    "name": {
+      "en": "Fine Helmet of Speed",
+      "jp": "速度の高級型ヘルム",
+      "kr": "속도의 고급형 투구",
+      "zh": "上等速度头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "13"
+  },
+  "3295": {
+    "name": {
+      "en": "Steel Helmet of Speed",
+      "jp": "速度の鋼鉄ヘルム",
+      "kr": "속도의 강철 투구",
+      "zh": "钢铁速度头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "13"
+  },
+  "3296": {
+    "name": {
+      "en": "Etheric Helmet of Speed",
+      "jp": "速度のエーテルヘルム",
+      "kr": "속도의 에테르 투구",
+      "zh": "以太速度头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "13"
+  },
+  "3297": {
+    "name": {
+      "en": "Ordinary Helmet of Speed",
+      "jp": "速度の普及型ヘルム",
+      "kr": "속도의 보급형 투구",
+      "zh": "普通速度头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "13"
+  },
+  "3298": {
+    "name": {
+      "en": "Fine Helmet of Speed",
+      "jp": "速度の高級型ヘルム",
+      "kr": "속도의 고급형 투구",
+      "zh": "上等速度头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "13"
+  },
+  "3299": {
+    "name": {
+      "en": "Steel Helmet of Speed",
+      "jp": "速度の鋼鉄ヘルム",
+      "kr": "속도의 강철 투구",
+      "zh": "钢铁速度头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "13"
+  },
+  "3300": {
+    "name": {
+      "en": "Etheric Helmet of Speed",
+      "jp": "速度のエーテルヘルム",
+      "kr": "속도의 에테르 투구",
+      "zh": "以太速度头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "13"
+  },
+  "3301": {
+    "name": {
+      "en": "Ordinary Helmet of Speed",
+      "jp": "速度の普及型ヘルム",
+      "kr": "속도의 보급형 투구",
+      "zh": "普通速度头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "13"
+  },
+  "3302": {
+    "name": {
+      "en": "Fine Helmet of Speed",
+      "jp": "速度の高級型ヘルム",
+      "kr": "속도의 고급형 투구",
+      "zh": "上等速度头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "13"
+  },
+  "3303": {
+    "name": {
+      "en": "Steel Helmet of Speed",
+      "jp": "速度の鋼鉄ヘルム",
+      "kr": "속도의 강철 투구",
+      "zh": "钢铁速度头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "13"
+  },
+  "3304": {
+    "name": {
+      "en": "Etheric Helmet of Speed",
+      "jp": "速度のエーテルヘルム",
+      "kr": "속도의 에테르 투구",
+      "zh": "以太速度头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "13"
+  },
+  "3305": {
+    "name": {
+      "en": "Ordinary Helmet of Speed",
+      "jp": "速度の普及型ヘルム",
+      "kr": "속도의 보급형 투구",
+      "zh": "普通速度头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "13"
+  },
+  "3306": {
+    "name": {
+      "en": "Fine Helmet of Speed",
+      "jp": "速度の高級型ヘルム",
+      "kr": "속도의 고급형 투구",
+      "zh": "上等速度头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "13"
+  },
+  "3307": {
+    "name": {
+      "en": "Steel Helmet of Speed",
+      "jp": "速度の鋼鉄ヘルム",
+      "kr": "속도의 강철 투구",
+      "zh": "钢铁速度头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "13"
+  },
+  "3308": {
+    "name": {
+      "en": "Etheric Helmet of Speed",
+      "jp": "速度のエーテルヘルム",
+      "kr": "속도의 에테르 투구",
+      "zh": "以太速度头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "13"
+  },
+  "3309": {
+    "name": {
+      "en": "Ordinary Helmet of Speed",
+      "jp": "速度の普及型ヘルム",
+      "kr": "속도의 보급형 투구",
+      "zh": "普通速度头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "13"
+  },
+  "3310": {
+    "name": {
+      "en": "Fine Helmet of Speed",
+      "jp": "速度の高級型ヘルム",
+      "kr": "속도의 고급형 투구",
+      "zh": "上等速度头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "13"
+  },
+  "3311": {
+    "name": {
+      "en": "Steel Helmet of Speed",
+      "jp": "速度の鋼鉄ヘルム",
+      "kr": "속도의 강철 투구",
+      "zh": "钢铁速度头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "13"
+  },
+  "3312": {
+    "name": {
+      "en": "Etheric Helmet of Speed",
+      "jp": "速度のエーテルヘルム",
+      "kr": "속도의 에테르 투구",
+      "zh": "以太速度头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "3313": {
+    "name": {
+      "en": "Ordinary Helmet of Bursting",
+      "jp": "炸裂の普及型ヘルム",
+      "kr": "버스트의 보급형 투구",
+      "zh": "普通爆发头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "14"
+  },
+  "3314": {
+    "name": {
+      "en": "Fine Helmet of Bursting",
+      "jp": "炸裂の高級型ヘルム",
+      "kr": "버스트의 고급형 투구",
+      "zh": "上等爆发头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "14"
+  },
+  "3315": {
+    "name": {
+      "en": "Steel Helmet of Bursting",
+      "jp": "炸裂の鋼鉄ヘルム",
+      "kr": "버스트의 강철 투구",
+      "zh": "钢铁爆发头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "14"
+  },
+  "3316": {
+    "name": {
+      "en": "Etheric Helmet of Bursting",
+      "jp": "炸裂のエーテルヘルム",
+      "kr": "버스트의 에테르 투구",
+      "zh": "以太爆发头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "14"
+  },
+  "3317": {
+    "name": {
+      "en": "Ordinary Helmet of Bursting",
+      "jp": "炸裂の普及型ヘルム",
+      "kr": "버스트의 보급형 투구",
+      "zh": "普通爆发头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "14"
+  },
+  "3318": {
+    "name": {
+      "en": "Fine Helmet of Bursting",
+      "jp": "炸裂の高級型ヘルム",
+      "kr": "버스트의 고급형 투구",
+      "zh": "上等爆发头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "14"
+  },
+  "3319": {
+    "name": {
+      "en": "Steel Helmet of Bursting",
+      "jp": "炸裂の鋼鉄ヘルム",
+      "kr": "버스트의 강철 투구",
+      "zh": "钢铁爆发头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "14"
+  },
+  "3320": {
+    "name": {
+      "en": "Etheric Helmet of Bursting",
+      "jp": "炸裂のエーテルヘルム",
+      "kr": "버스트의 에테르 투구",
+      "zh": "以太爆发头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "14"
+  },
+  "3321": {
+    "name": {
+      "en": "Ordinary Helmet of Bursting",
+      "jp": "炸裂の普及型ヘルム",
+      "kr": "버스트의 보급형 투구",
+      "zh": "普通爆发头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "14"
+  },
+  "3322": {
+    "name": {
+      "en": "Fine Helmet of Bursting",
+      "jp": "炸裂の高級型ヘルム",
+      "kr": "버스트의 고급형 투구",
+      "zh": "上等爆发头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "14"
+  },
+  "3323": {
+    "name": {
+      "en": "Steel Helmet of Bursting",
+      "jp": "炸裂の鋼鉄ヘルム",
+      "kr": "버스트의 강철 투구",
+      "zh": "钢铁爆发头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "14"
+  },
+  "3324": {
+    "name": {
+      "en": "Etheric Helmet of Bursting",
+      "jp": "炸裂のエーテルヘルム",
+      "kr": "버스트의 에테르 투구",
+      "zh": "以太爆发头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "14"
+  },
+  "3325": {
+    "name": {
+      "en": "Ordinary Helmet of Bursting",
+      "jp": "炸裂の普及型ヘルム",
+      "kr": "버스트의 보급형 투구",
+      "zh": "普通爆发头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "14"
+  },
+  "3326": {
+    "name": {
+      "en": "Fine Helmet of Bursting",
+      "jp": "炸裂の高級型ヘルム",
+      "kr": "버스트의 고급형 투구",
+      "zh": "上等爆发头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "14"
+  },
+  "3327": {
+    "name": {
+      "en": "Steel Helmet of Bursting",
+      "jp": "炸裂の鋼鉄ヘルム",
+      "kr": "버스트의 강철 투구",
+      "zh": "钢铁爆发头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "14"
+  },
+  "3328": {
+    "name": {
+      "en": "Etheric Helmet of Bursting",
+      "jp": "炸裂のエーテルヘルム",
+      "kr": "버스트의 에테르 투구",
+      "zh": "以太爆发头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "14"
+  },
+  "3329": {
+    "name": {
+      "en": "Ordinary Helmet of Bursting",
+      "jp": "炸裂の普及型ヘルム",
+      "kr": "버스트의 보급형 투구",
+      "zh": "普通爆发头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "14"
+  },
+  "3330": {
+    "name": {
+      "en": "Fine Helmet of Bursting",
+      "jp": "炸裂の高級型ヘルム",
+      "kr": "버스트의 고급형 투구",
+      "zh": "上等爆发头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "14"
+  },
+  "3331": {
+    "name": {
+      "en": "Steel Helmet of Bursting",
+      "jp": "炸裂の鋼鉄ヘルム",
+      "kr": "버스트의 강철 투구",
+      "zh": "钢铁爆发头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "14"
+  },
+  "3332": {
+    "name": {
+      "en": "Etheric Helmet of Bursting",
+      "jp": "炸裂のエーテルヘルム",
+      "kr": "버스트의 에테르 투구",
+      "zh": "以太爆发头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "14"
+  },
+  "3333": {
+    "name": {
+      "en": "Ordinary Helmet of Bursting",
+      "jp": "炸裂の普及型ヘルム",
+      "kr": "버스트의 보급형 투구",
+      "zh": "普通爆发头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "14"
+  },
+  "3334": {
+    "name": {
+      "en": "Fine Helmet of Bursting",
+      "jp": "炸裂の高級型ヘルム",
+      "kr": "버스트의 고급형 투구",
+      "zh": "上等爆发头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "14"
+  },
+  "3335": {
+    "name": {
+      "en": "Steel Helmet of Bursting",
+      "jp": "炸裂の鋼鉄ヘルム",
+      "kr": "버스트의 강철 투구",
+      "zh": "钢铁爆发头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "14"
+  },
+  "3336": {
+    "name": {
+      "en": "Etheric Helmet of Bursting",
+      "jp": "炸裂のエーテルヘルム",
+      "kr": "버스트의 에테르 투구",
+      "zh": "以太爆发头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "3337": {
+    "name": {
+      "en": "Ordinary Helmet of Revenge",
+      "jp": "復讐の普及型ヘルム",
+      "kr": "복수의 보급형 투구",
+      "zh": "普通复仇头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "15"
+  },
+  "3338": {
+    "name": {
+      "en": "Fine Helmet of Revenge",
+      "jp": "復讐の高級型ヘルム",
+      "kr": "복수의 고급형 투구",
+      "zh": "上等复仇头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "15"
+  },
+  "3339": {
+    "name": {
+      "en": "Steel Helmet of Revenge",
+      "jp": "復讐の鋼鉄ヘルム",
+      "kr": "복수의 강철 투구",
+      "zh": "钢铁复仇头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "15"
+  },
+  "3340": {
+    "name": {
+      "en": "Etheric Helmet of Revenge",
+      "jp": "復讐のエーテルヘルム",
+      "kr": "복수의 에테르 투구",
+      "zh": "以太复仇头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "15"
+  },
+  "3341": {
+    "name": {
+      "en": "Ordinary Helmet of Revenge",
+      "jp": "復讐の普及型ヘルム",
+      "kr": "복수의 보급형 투구",
+      "zh": "普通复仇头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "15"
+  },
+  "3342": {
+    "name": {
+      "en": "Fine Helmet of Revenge",
+      "jp": "復讐の高級型ヘルム",
+      "kr": "복수의 고급형 투구",
+      "zh": "上等复仇头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "15"
+  },
+  "3343": {
+    "name": {
+      "en": "Steel Helmet of Revenge",
+      "jp": "復讐の鋼鉄ヘルム",
+      "kr": "복수의 강철 투구",
+      "zh": "钢铁复仇头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "15"
+  },
+  "3344": {
+    "name": {
+      "en": "Etheric Helmet of Revenge",
+      "jp": "復讐のエーテルヘルム",
+      "kr": "복수의 에테르 투구",
+      "zh": "以太复仇头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "15"
+  },
+  "3345": {
+    "name": {
+      "en": "Ordinary Helmet of Revenge",
+      "jp": "復讐の普及型ヘルム",
+      "kr": "복수의 보급형 투구",
+      "zh": "普通复仇头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "15"
+  },
+  "3346": {
+    "name": {
+      "en": "Fine Helmet of Revenge",
+      "jp": "復讐の高級型ヘルム",
+      "kr": "복수의 고급형 투구",
+      "zh": "上等复仇头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "15"
+  },
+  "3347": {
+    "name": {
+      "en": "Steel Helmet of Revenge",
+      "jp": "復讐の鋼鉄ヘルム",
+      "kr": "복수의 강철 투구",
+      "zh": "钢铁复仇头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "15"
+  },
+  "3348": {
+    "name": {
+      "en": "Etheric Helmet of Revenge",
+      "jp": "復讐のエーテルヘルム",
+      "kr": "복수의 에테르 투구",
+      "zh": "以太复仇头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "15"
+  },
+  "3349": {
+    "name": {
+      "en": "Ordinary Helmet of Revenge",
+      "jp": "復讐の普及型ヘルム",
+      "kr": "복수의 보급형 투구",
+      "zh": "普通复仇头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "15"
+  },
+  "3350": {
+    "name": {
+      "en": "Fine Helmet of Revenge",
+      "jp": "復讐の高級型ヘルム",
+      "kr": "복수의 고급형 투구",
+      "zh": "上等复仇头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "15"
+  },
+  "3351": {
+    "name": {
+      "en": "Steel Helmet of Revenge",
+      "jp": "復讐の鋼鉄ヘルム",
+      "kr": "복수의 강철 투구",
+      "zh": "钢铁复仇头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "15"
+  },
+  "3352": {
+    "name": {
+      "en": "Etheric Helmet of Revenge",
+      "jp": "復讐のエーテルヘルム",
+      "kr": "복수의 에테르 투구",
+      "zh": "以太复仇头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "15"
+  },
+  "3353": {
+    "name": {
+      "en": "Ordinary Helmet of Revenge",
+      "jp": "復讐の普及型ヘルム",
+      "kr": "복수의 보급형 투구",
+      "zh": "普通复仇头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "15"
+  },
+  "3354": {
+    "name": {
+      "en": "Fine Helmet of Revenge",
+      "jp": "復讐の高級型ヘルム",
+      "kr": "복수의 고급형 투구",
+      "zh": "上等复仇头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "15"
+  },
+  "3355": {
+    "name": {
+      "en": "Steel Helmet of Revenge",
+      "jp": "復讐の鋼鉄ヘルム",
+      "kr": "복수의 강철 투구",
+      "zh": "钢铁复仇头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "15"
+  },
+  "3356": {
+    "name": {
+      "en": "Etheric Helmet of Revenge",
+      "jp": "復讐のエーテルヘルム",
+      "kr": "복수의 에테르 투구",
+      "zh": "以太复仇头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "15"
+  },
+  "3357": {
+    "name": {
+      "en": "Ordinary Helmet of Revenge",
+      "jp": "復讐の普及型ヘルム",
+      "kr": "복수의 보급형 투구",
+      "zh": "普通复仇头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "15"
+  },
+  "3358": {
+    "name": {
+      "en": "Fine Helmet of Revenge",
+      "jp": "復讐の高級型ヘルム",
+      "kr": "복수의 고급형 투구",
+      "zh": "上等复仇头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "15"
+  },
+  "3359": {
+    "name": {
+      "en": "Steel Helmet of Revenge",
+      "jp": "復讐の鋼鉄ヘルム",
+      "kr": "복수의 강철 투구",
+      "zh": "钢铁复仇头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "15"
+  },
+  "3360": {
+    "name": {
+      "en": "Etheric Helmet of Revenge",
+      "jp": "復讐のエーテルヘルム",
+      "kr": "복수의 에테르 투구",
+      "zh": "以太复仇头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "3361": {
+    "name": {
+      "en": "Ordinary Helmet of Patience",
+      "jp": "忍耐の普及型ヘルム",
+      "kr": "인내의 보급형 투구",
+      "zh": "普通忍耐头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "16"
+  },
+  "3362": {
+    "name": {
+      "en": "Fine Helmet of Patience",
+      "jp": "忍耐の高級型ヘルム",
+      "kr": "인내의 고급형 투구",
+      "zh": "上等忍耐头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "16"
+  },
+  "3363": {
+    "name": {
+      "en": "Steel Helmet of Patience",
+      "jp": "忍耐の鋼鉄ヘルム",
+      "kr": "인내의 강철 투구",
+      "zh": "钢铁忍耐头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "16"
+  },
+  "3364": {
+    "name": {
+      "en": "Etheric Helmet of Patience",
+      "jp": "忍耐のエーテルヘルム",
+      "kr": "인내의 에테르 투구",
+      "zh": "以太忍耐头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "16"
+  },
+  "3365": {
+    "name": {
+      "en": "Ordinary Helmet of Patience",
+      "jp": "忍耐の普及型ヘルム",
+      "kr": "인내의 보급형 투구",
+      "zh": "普通忍耐头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "16"
+  },
+  "3366": {
+    "name": {
+      "en": "Fine Helmet of Patience",
+      "jp": "忍耐の高級型ヘルム",
+      "kr": "인내의 고급형 투구",
+      "zh": "上等忍耐头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "16"
+  },
+  "3367": {
+    "name": {
+      "en": "Steel Helmet of Patience",
+      "jp": "忍耐の鋼鉄ヘルム",
+      "kr": "인내의 강철 투구",
+      "zh": "钢铁忍耐头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "16"
+  },
+  "3368": {
+    "name": {
+      "en": "Etheric Helmet of Patience",
+      "jp": "忍耐のエーテルヘルム",
+      "kr": "인내의 에테르 투구",
+      "zh": "以太忍耐头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "16"
+  },
+  "3369": {
+    "name": {
+      "en": "Ordinary Helmet of Patience",
+      "jp": "忍耐の普及型ヘルム",
+      "kr": "인내의 보급형 투구",
+      "zh": "普通忍耐头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "16"
+  },
+  "3370": {
+    "name": {
+      "en": "Fine Helmet of Patience",
+      "jp": "忍耐の高級型ヘルム",
+      "kr": "인내의 고급형 투구",
+      "zh": "上等忍耐头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "16"
+  },
+  "3371": {
+    "name": {
+      "en": "Steel Helmet of Patience",
+      "jp": "忍耐の鋼鉄ヘルム",
+      "kr": "인내의 강철 투구",
+      "zh": "钢铁忍耐头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "16"
+  },
+  "3372": {
+    "name": {
+      "en": "Etheric Helmet of Patience",
+      "jp": "忍耐のエーテルヘルム",
+      "kr": "인내의 에테르 투구",
+      "zh": "以太忍耐头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "16"
+  },
+  "3373": {
+    "name": {
+      "en": "Ordinary Helmet of Patience",
+      "jp": "忍耐の普及型ヘルム",
+      "kr": "인내의 보급형 투구",
+      "zh": "普通忍耐头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "16"
+  },
+  "3374": {
+    "name": {
+      "en": "Fine Helmet of Patience",
+      "jp": "忍耐の高級型ヘルム",
+      "kr": "인내의 고급형 투구",
+      "zh": "上等忍耐头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "16"
+  },
+  "3375": {
+    "name": {
+      "en": "Steel Helmet of Patience",
+      "jp": "忍耐の鋼鉄ヘルム",
+      "kr": "인내의 강철 투구",
+      "zh": "钢铁忍耐头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "16"
+  },
+  "3376": {
+    "name": {
+      "en": "Etheric Helmet of Patience",
+      "jp": "忍耐のエーテルヘルム",
+      "kr": "인내의 에테르 투구",
+      "zh": "以太忍耐头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "16"
+  },
+  "3377": {
+    "name": {
+      "en": "Ordinary Helmet of Patience",
+      "jp": "忍耐の普及型ヘルム",
+      "kr": "인내의 보급형 투구",
+      "zh": "普通忍耐头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "16"
+  },
+  "3378": {
+    "name": {
+      "en": "Fine Helmet of Patience",
+      "jp": "忍耐の高級型ヘルム",
+      "kr": "인내의 고급형 투구",
+      "zh": "上等忍耐头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "16"
+  },
+  "3379": {
+    "name": {
+      "en": "Steel Helmet of Patience",
+      "jp": "忍耐の鋼鉄ヘルム",
+      "kr": "인내의 강철 투구",
+      "zh": "钢铁忍耐头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "16"
+  },
+  "3380": {
+    "name": {
+      "en": "Etheric Helmet of Patience",
+      "jp": "忍耐のエーテルヘルム",
+      "kr": "인내의 에테르 투구",
+      "zh": "以太忍耐头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "16"
+  },
+  "3381": {
+    "name": {
+      "en": "Ordinary Helmet of Patience",
+      "jp": "忍耐の普及型ヘルム",
+      "kr": "인내의 보급형 투구",
+      "zh": "普通忍耐头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "16"
+  },
+  "3382": {
+    "name": {
+      "en": "Fine Helmet of Patience",
+      "jp": "忍耐の高級型ヘルム",
+      "kr": "인내의 고급형 투구",
+      "zh": "上等忍耐头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "16"
+  },
+  "3383": {
+    "name": {
+      "en": "Steel Helmet of Patience",
+      "jp": "忍耐の鋼鉄ヘルム",
+      "kr": "인내의 강철 투구",
+      "zh": "钢铁忍耐头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "16"
+  },
+  "3384": {
+    "name": {
+      "en": "Etheric Helmet of Patience",
+      "jp": "忍耐のエーテルヘルム",
+      "kr": "인내의 에테르 투구",
+      "zh": "以太忍耐头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "3385": {
+    "name": {
+      "en": "Ordinary Helmet of Pulverization",
+      "jp": "粉砕の普及型ヘルム",
+      "kr": "분쇄의 보급형 투구",
+      "zh": "普通粉碎头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "17"
+  },
+  "3386": {
+    "name": {
+      "en": "Fine Helmet of Pulverization",
+      "jp": "粉砕の高級型ヘルム",
+      "kr": "분쇄의 고급형 투구",
+      "zh": "上等粉碎头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "17"
+  },
+  "3387": {
+    "name": {
+      "en": "Steel Helmet of Pulverization",
+      "jp": "粉砕の鋼鉄ヘルム",
+      "kr": "분쇄의 강철 투구",
+      "zh": "钢铁粉碎头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "17"
+  },
+  "3388": {
+    "name": {
+      "en": "Etheric Helmet of Pulverization",
+      "jp": "粉砕のエーテルヘルム",
+      "kr": "분쇄의 에테르 투구",
+      "zh": "以太粉碎头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "17"
+  },
+  "3389": {
+    "name": {
+      "en": "Ordinary Helmet of Pulverization",
+      "jp": "粉砕の普及型ヘルム",
+      "kr": "분쇄의 보급형 투구",
+      "zh": "普通粉碎头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "17"
+  },
+  "3390": {
+    "name": {
+      "en": "Fine Helmet of Pulverization",
+      "jp": "粉砕の高級型ヘルム",
+      "kr": "분쇄의 고급형 투구",
+      "zh": "上等粉碎头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "17"
+  },
+  "3391": {
+    "name": {
+      "en": "Steel Helmet of Pulverization",
+      "jp": "粉砕の鋼鉄ヘルム",
+      "kr": "분쇄의 강철 투구",
+      "zh": "钢铁粉碎头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "17"
+  },
+  "3392": {
+    "name": {
+      "en": "Etheric Helmet of Pulverization",
+      "jp": "粉砕のエーテルヘルム",
+      "kr": "분쇄의 에테르 투구",
+      "zh": "以太粉碎头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "17"
+  },
+  "3393": {
+    "name": {
+      "en": "Ordinary Helmet of Pulverization",
+      "jp": "粉砕の普及型ヘルム",
+      "kr": "분쇄의 보급형 투구",
+      "zh": "普通粉碎头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "17"
+  },
+  "3394": {
+    "name": {
+      "en": "Fine Helmet of Pulverization",
+      "jp": "粉砕の高級型ヘルム",
+      "kr": "분쇄의 고급형 투구",
+      "zh": "上等粉碎头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "17"
+  },
+  "3395": {
+    "name": {
+      "en": "Steel Helmet of Pulverization",
+      "jp": "粉砕の鋼鉄ヘルム",
+      "kr": "분쇄의 강철 투구",
+      "zh": "钢铁粉碎头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "17"
+  },
+  "3396": {
+    "name": {
+      "en": "Etheric Helmet of Pulverization",
+      "jp": "粉砕のエーテルヘルム",
+      "kr": "분쇄의 에테르 투구",
+      "zh": "以太粉碎头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "17"
+  },
+  "3397": {
+    "name": {
+      "en": "Ordinary Helmet of Pulverization",
+      "jp": "粉砕の普及型ヘルム",
+      "kr": "분쇄의 보급형 투구",
+      "zh": "普通粉碎头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "17"
+  },
+  "3398": {
+    "name": {
+      "en": "Fine Helmet of Pulverization",
+      "jp": "粉砕の高級型ヘルム",
+      "kr": "분쇄의 고급형 투구",
+      "zh": "上等粉碎头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "17"
+  },
+  "3399": {
+    "name": {
+      "en": "Steel Helmet of Pulverization",
+      "jp": "粉砕の鋼鉄ヘルム",
+      "kr": "분쇄의 강철 투구",
+      "zh": "钢铁粉碎头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "17"
+  },
+  "3400": {
+    "name": {
+      "en": "Etheric Helmet of Pulverization",
+      "jp": "粉砕のエーテルヘルム",
+      "kr": "분쇄의 에테르 투구",
+      "zh": "以太粉碎头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "17"
+  },
+  "3401": {
+    "name": {
+      "en": "Ordinary Helmet of Pulverization",
+      "jp": "粉砕の普及型ヘルム",
+      "kr": "분쇄의 보급형 투구",
+      "zh": "普通粉碎头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "17"
+  },
+  "3402": {
+    "name": {
+      "en": "Fine Helmet of Pulverization",
+      "jp": "粉砕の高級型ヘルム",
+      "kr": "분쇄의 고급형 투구",
+      "zh": "上等粉碎头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "17"
+  },
+  "3403": {
+    "name": {
+      "en": "Steel Helmet of Pulverization",
+      "jp": "粉砕の鋼鉄ヘルム",
+      "kr": "분쇄의 강철 투구",
+      "zh": "钢铁粉碎头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "17"
+  },
+  "3404": {
+    "name": {
+      "en": "Etheric Helmet of Pulverization",
+      "jp": "粉砕のエーテルヘルム",
+      "kr": "분쇄의 에테르 투구",
+      "zh": "以太粉碎头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "17"
+  },
+  "3405": {
+    "name": {
+      "en": "Ordinary Helmet of Pulverization",
+      "jp": "粉砕の普及型ヘルム",
+      "kr": "분쇄의 보급형 투구",
+      "zh": "普通粉碎头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "17"
+  },
+  "3406": {
+    "name": {
+      "en": "Fine Helmet of Pulverization",
+      "jp": "粉砕の高級型ヘルム",
+      "kr": "분쇄의 고급형 투구",
+      "zh": "上等粉碎头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "17"
+  },
+  "3407": {
+    "name": {
+      "en": "Steel Helmet of Pulverization",
+      "jp": "粉砕の鋼鉄ヘルム",
+      "kr": "분쇄의 강철 투구",
+      "zh": "钢铁粉碎头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "17"
+  },
+  "3408": {
+    "name": {
+      "en": "Etheric Helmet of Pulverization",
+      "jp": "粉砕のエーテルヘルム",
+      "kr": "분쇄의 에테르 투구",
+      "zh": "以太粉碎头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "17"
+  },
+  "3409": {
+    "name": {
+      "en": "Ordinary Helmet of Immunity",
+      "jp": "免疫の普及型ヘルム",
+      "kr": "면역의 보급형 투구",
+      "zh": "普通免疫头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "18"
+  },
+  "3410": {
+    "name": {
+      "en": "Fine Helmet of Immunity",
+      "jp": "免疫の高級型ヘルム",
+      "kr": "면역의 고급형 투구",
+      "zh": "上等免疫头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "18"
+  },
+  "3411": {
+    "name": {
+      "en": "Steel Helmet of Immunity",
+      "jp": "免疫の鋼鉄ヘルム",
+      "kr": "면역의 강철 투구",
+      "zh": "钢铁免疫头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "18"
+  },
+  "3412": {
+    "name": {
+      "en": "Etheric Helmet of Immunity",
+      "jp": "免疫のエーテルヘルム",
+      "kr": "면역의 에테르 투구",
+      "zh": "以太免疫头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "18"
+  },
+  "3413": {
+    "name": {
+      "en": "Ordinary Helmet of Immunity",
+      "jp": "免疫の普及型ヘルム",
+      "kr": "면역의 보급형 투구",
+      "zh": "普通免疫头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "18"
+  },
+  "3414": {
+    "name": {
+      "en": "Fine Helmet of Immunity",
+      "jp": "免疫の高級型ヘルム",
+      "kr": "면역의 고급형 투구",
+      "zh": "上等免疫头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "18"
+  },
+  "3415": {
+    "name": {
+      "en": "Steel Helmet of Immunity",
+      "jp": "免疫の鋼鉄ヘルム",
+      "kr": "면역의 강철 투구",
+      "zh": "钢铁免疫头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "18"
+  },
+  "3416": {
+    "name": {
+      "en": "Etheric Helmet of Immunity",
+      "jp": "免疫のエーテルヘルム",
+      "kr": "면역의 에테르 투구",
+      "zh": "以太免疫头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "18"
+  },
+  "3417": {
+    "name": {
+      "en": "Ordinary Helmet of Immunity",
+      "jp": "免疫の普及型ヘルム",
+      "kr": "면역의 보급형 투구",
+      "zh": "普通免疫头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "18"
+  },
+  "3418": {
+    "name": {
+      "en": "Fine Helmet of Immunity",
+      "jp": "免疫の高級型ヘルム",
+      "kr": "면역의 고급형 투구",
+      "zh": "上等免疫头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "18"
+  },
+  "3419": {
+    "name": {
+      "en": "Steel Helmet of Immunity",
+      "jp": "免疫の鋼鉄ヘルム",
+      "kr": "면역의 강철 투구",
+      "zh": "钢铁免疫头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "18"
+  },
+  "3420": {
+    "name": {
+      "en": "Etheric Helmet of Immunity",
+      "jp": "免疫のエーテルヘルム",
+      "kr": "면역의 에테르 투구",
+      "zh": "以太免疫头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "18"
+  },
+  "3421": {
+    "name": {
+      "en": "Ordinary Helmet of Immunity",
+      "jp": "免疫の普及型ヘルム",
+      "kr": "면역의 보급형 투구",
+      "zh": "普通免疫头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "18"
+  },
+  "3422": {
+    "name": {
+      "en": "Fine Helmet of Immunity",
+      "jp": "免疫の高級型ヘルム",
+      "kr": "면역의 고급형 투구",
+      "zh": "上等免疫头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "18"
+  },
+  "3423": {
+    "name": {
+      "en": "Steel Helmet of Immunity",
+      "jp": "免疫の鋼鉄ヘルム",
+      "kr": "면역의 강철 투구",
+      "zh": "钢铁免疫头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "18"
+  },
+  "3424": {
+    "name": {
+      "en": "Etheric Helmet of Immunity",
+      "jp": "免疫のエーテルヘルム",
+      "kr": "면역의 에테르 투구",
+      "zh": "以太免疫头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "18"
+  },
+  "3425": {
+    "name": {
+      "en": "Ordinary Helmet of Immunity",
+      "jp": "免疫の普及型ヘルム",
+      "kr": "면역의 보급형 투구",
+      "zh": "普通免疫头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "18"
+  },
+  "3426": {
+    "name": {
+      "en": "Fine Helmet of Immunity",
+      "jp": "免疫の高級型ヘルム",
+      "kr": "면역의 고급형 투구",
+      "zh": "上等免疫头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "18"
+  },
+  "3427": {
+    "name": {
+      "en": "Steel Helmet of Immunity",
+      "jp": "免疫の鋼鉄ヘルム",
+      "kr": "면역의 강철 투구",
+      "zh": "钢铁免疫头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "18"
+  },
+  "3428": {
+    "name": {
+      "en": "Etheric Helmet of Immunity",
+      "jp": "免疫のエーテルヘルム",
+      "kr": "면역의 에테르 투구",
+      "zh": "以太免疫头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "18"
+  },
+  "3429": {
+    "name": {
+      "en": "Ordinary Helmet of Immunity",
+      "jp": "免疫の普及型ヘルム",
+      "kr": "면역의 보급형 투구",
+      "zh": "普通免疫头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "18"
+  },
+  "3430": {
+    "name": {
+      "en": "Fine Helmet of Immunity",
+      "jp": "免疫の高級型ヘルム",
+      "kr": "면역의 고급형 투구",
+      "zh": "上等免疫头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "18"
+  },
+  "3431": {
+    "name": {
+      "en": "Steel Helmet of Immunity",
+      "jp": "免疫の鋼鉄ヘルム",
+      "kr": "면역의 강철 투구",
+      "zh": "钢铁免疫头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "18"
+  },
+  "3432": {
+    "name": {
+      "en": "Etheric Helmet of Immunity",
+      "jp": "免疫のエーテルヘルム",
+      "kr": "면역의 에테르 투구",
+      "zh": "以太免疫头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "3433": {
+    "name": {
+      "en": "Ordinary Helmet of Swiftness",
+      "jp": "機敏の普及型ヘルム",
+      "kr": "기민의 보급형 투구",
+      "zh": "普通敏捷头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "19"
+  },
+  "3434": {
+    "name": {
+      "en": "Fine Helmet of Swiftness",
+      "jp": "機敏の高級型ヘルム",
+      "kr": "기민의 고급형 투구",
+      "zh": "上等敏捷头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "19"
+  },
+  "3435": {
+    "name": {
+      "en": "Steel Helmet of Swiftness",
+      "jp": "機敏の鋼鉄ヘルム",
+      "kr": "기민의 강철 투구",
+      "zh": "钢铁敏捷头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "19"
+  },
+  "3436": {
+    "name": {
+      "en": "Etheric Helmet of Swiftness",
+      "jp": "機敏のエーテルヘルム",
+      "kr": "기민의 에테르 투구",
+      "zh": "以太敏捷头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "19"
+  },
+  "3437": {
+    "name": {
+      "en": "Ordinary Helmet of Swiftness",
+      "jp": "機敏の普及型ヘルム",
+      "kr": "기민의 보급형 투구",
+      "zh": "普通敏捷头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "19"
+  },
+  "3438": {
+    "name": {
+      "en": "Fine Helmet of Swiftness",
+      "jp": "機敏の高級型ヘルム",
+      "kr": "기민의 고급형 투구",
+      "zh": "上等敏捷头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "19"
+  },
+  "3439": {
+    "name": {
+      "en": "Steel Helmet of Swiftness",
+      "jp": "機敏の鋼鉄ヘルム",
+      "kr": "기민의 강철 투구",
+      "zh": "钢铁敏捷头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "19"
+  },
+  "3440": {
+    "name": {
+      "en": "Etheric Helmet of Swiftness",
+      "jp": "機敏のエーテルヘルム",
+      "kr": "기민의 에테르 투구",
+      "zh": "以太敏捷头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "19"
+  },
+  "3441": {
+    "name": {
+      "en": "Ordinary Helmet of Swiftness",
+      "jp": "機敏の普及型ヘルム",
+      "kr": "기민의 보급형 투구",
+      "zh": "普通敏捷头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "19"
+  },
+  "3442": {
+    "name": {
+      "en": "Fine Helmet of Swiftness",
+      "jp": "機敏の高級型ヘルム",
+      "kr": "기민의 고급형 투구",
+      "zh": "上等敏捷头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "19"
+  },
+  "3443": {
+    "name": {
+      "en": "Steel Helmet of Swiftness",
+      "jp": "機敏の鋼鉄ヘルム",
+      "kr": "기민의 강철 투구",
+      "zh": "钢铁敏捷头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "19"
+  },
+  "3444": {
+    "name": {
+      "en": "Etheric Helmet of Swiftness",
+      "jp": "機敏のエーテルヘルム",
+      "kr": "기민의 에테르 투구",
+      "zh": "以太敏捷头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "19"
+  },
+  "3445": {
+    "name": {
+      "en": "Ordinary Helmet of Swiftness",
+      "jp": "機敏の普及型ヘルム",
+      "kr": "기민의 보급형 투구",
+      "zh": "普通敏捷头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "19"
+  },
+  "3446": {
+    "name": {
+      "en": "Fine Helmet of Swiftness",
+      "jp": "機敏の高級型ヘルム",
+      "kr": "기민의 고급형 투구",
+      "zh": "上等敏捷头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "19"
+  },
+  "3447": {
+    "name": {
+      "en": "Steel Helmet of Swiftness",
+      "jp": "機敏の鋼鉄ヘルム",
+      "kr": "기민의 강철 투구",
+      "zh": "钢铁敏捷头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "19"
+  },
+  "3448": {
+    "name": {
+      "en": "Etheric Helmet of Swiftness",
+      "jp": "機敏のエーテルヘルム",
+      "kr": "기민의 에테르 투구",
+      "zh": "以太敏捷头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "19"
+  },
+  "3449": {
+    "name": {
+      "en": "Ordinary Helmet of Swiftness",
+      "jp": "機敏の普及型ヘルム",
+      "kr": "기민의 보급형 투구",
+      "zh": "普通敏捷头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "19"
+  },
+  "3450": {
+    "name": {
+      "en": "Fine Helmet of Swiftness",
+      "jp": "機敏の高級型ヘルム",
+      "kr": "기민의 고급형 투구",
+      "zh": "上等敏捷头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "19"
+  },
+  "3451": {
+    "name": {
+      "en": "Steel Helmet of Swiftness",
+      "jp": "機敏の鋼鉄ヘルム",
+      "kr": "기민의 강철 투구",
+      "zh": "钢铁敏捷头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "19"
+  },
+  "3452": {
+    "name": {
+      "en": "Etheric Helmet of Swiftness",
+      "jp": "機敏のエーテルヘルム",
+      "kr": "기민의 에테르 투구",
+      "zh": "以太敏捷头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "19"
+  },
+  "3453": {
+    "name": {
+      "en": "Ordinary Helmet of Swiftness",
+      "jp": "機敏の普及型ヘルム",
+      "kr": "기민의 보급형 투구",
+      "zh": "普通敏捷头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "19"
+  },
+  "3454": {
+    "name": {
+      "en": "Fine Helmet of Swiftness",
+      "jp": "機敏の高級型ヘルム",
+      "kr": "기민의 고급형 투구",
+      "zh": "上等敏捷头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "19"
+  },
+  "3455": {
+    "name": {
+      "en": "Steel Helmet of Swiftness",
+      "jp": "機敏の鋼鉄ヘルム",
+      "kr": "기민의 강철 투구",
+      "zh": "钢铁敏捷头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "19"
+  },
+  "3456": {
+    "name": {
+      "en": "Etheric Helmet of Swiftness",
+      "jp": "機敏のエーテルヘルム",
+      "kr": "기민의 에테르 투구",
+      "zh": "以太敏捷头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "19"
+  },
+  "3457": {
+    "name": {
+      "en": "Ordinary Helmet of Weakness",
+      "jp": "弱点の普及型ヘルム",
+      "kr": "약점의 보급형 투구",
+      "zh": "普通弱点头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "20"
+  },
+  "3458": {
+    "name": {
+      "en": "Fine Helmet of Weakness",
+      "jp": "弱点の高級型ヘルム",
+      "kr": "약점의 고급형 투구",
+      "zh": "上等弱点头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "20"
+  },
+  "3459": {
+    "name": {
+      "en": "Steel Helmet of Weakness",
+      "jp": "弱点の鋼鉄ヘルム",
+      "kr": "약점의 강철 투구",
+      "zh": "钢铁弱点头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "20"
+  },
+  "3460": {
+    "name": {
+      "en": "Etheric Helmet of Weakness",
+      "jp": "弱点のエーテルヘルム",
+      "kr": "약점의 에테르 투구",
+      "zh": "以太弱点头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "20"
+  },
+  "3461": {
+    "name": {
+      "en": "Ordinary Helmet of Weakness",
+      "jp": "弱点の普及型ヘルム",
+      "kr": "약점의 보급형 투구",
+      "zh": "普通弱点头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "20"
+  },
+  "3462": {
+    "name": {
+      "en": "Fine Helmet of Weakness",
+      "jp": "弱点の高級型ヘルム",
+      "kr": "약점의 고급형 투구",
+      "zh": "上等弱点头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "20"
+  },
+  "3463": {
+    "name": {
+      "en": "Steel Helmet of Weakness",
+      "jp": "弱点の鋼鉄ヘルム",
+      "kr": "약점의 강철 투구",
+      "zh": "钢铁弱点头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "20"
+  },
+  "3464": {
+    "name": {
+      "en": "Etheric Helmet of Weakness",
+      "jp": "弱点のエーテルヘルム",
+      "kr": "약점의 에테르 투구",
+      "zh": "以太弱点头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "20"
+  },
+  "3465": {
+    "name": {
+      "en": "Ordinary Helmet of Weakness",
+      "jp": "弱点の普及型ヘルム",
+      "kr": "약점의 보급형 투구",
+      "zh": "普通弱点头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "20"
+  },
+  "3466": {
+    "name": {
+      "en": "Fine Helmet of Weakness",
+      "jp": "弱点の高級型ヘルム",
+      "kr": "약점의 고급형 투구",
+      "zh": "上等弱点头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "20"
+  },
+  "3467": {
+    "name": {
+      "en": "Steel Helmet of Weakness",
+      "jp": "弱点の鋼鉄ヘルム",
+      "kr": "약점의 강철 투구",
+      "zh": "钢铁弱点头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "20"
+  },
+  "3468": {
+    "name": {
+      "en": "Etheric Helmet of Weakness",
+      "jp": "弱点のエーテルヘルム",
+      "kr": "약점의 에테르 투구",
+      "zh": "以太弱点头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "20"
+  },
+  "3469": {
+    "name": {
+      "en": "Ordinary Helmet of Weakness",
+      "jp": "弱点の普及型ヘルム",
+      "kr": "약점의 보급형 투구",
+      "zh": "普通弱点头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "20"
+  },
+  "3470": {
+    "name": {
+      "en": "Fine Helmet of Weakness",
+      "jp": "弱点の高級型ヘルム",
+      "kr": "약점의 고급형 투구",
+      "zh": "上等弱点头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "20"
+  },
+  "3471": {
+    "name": {
+      "en": "Steel Helmet of Weakness",
+      "jp": "弱点の鋼鉄ヘルム",
+      "kr": "약점의 강철 투구",
+      "zh": "钢铁弱点头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "20"
+  },
+  "3472": {
+    "name": {
+      "en": "Etheric Helmet of Weakness",
+      "jp": "弱点のエーテルヘルム",
+      "kr": "약점의 에테르 투구",
+      "zh": "以太弱点头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "20"
+  },
+  "3473": {
+    "name": {
+      "en": "Ordinary Helmet of Weakness",
+      "jp": "弱点の普及型ヘルム",
+      "kr": "약점의 보급형 투구",
+      "zh": "普通弱点头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "20"
+  },
+  "3474": {
+    "name": {
+      "en": "Fine Helmet of Weakness",
+      "jp": "弱点の高級型ヘルム",
+      "kr": "약점의 고급형 투구",
+      "zh": "上等弱点头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "20"
+  },
+  "3475": {
+    "name": {
+      "en": "Steel Helmet of Weakness",
+      "jp": "弱点の鋼鉄ヘルム",
+      "kr": "약점의 강철 투구",
+      "zh": "钢铁弱点头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "20"
+  },
+  "3476": {
+    "name": {
+      "en": "Etheric Helmet of Weakness",
+      "jp": "弱点のエーテルヘルム",
+      "kr": "약점의 에테르 투구",
+      "zh": "以太弱点头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "20"
+  },
+  "3477": {
+    "name": {
+      "en": "Ordinary Helmet of Weakness",
+      "jp": "弱点の普及型ヘルム",
+      "kr": "약점의 보급형 투구",
+      "zh": "普通弱点头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "20"
+  },
+  "3478": {
+    "name": {
+      "en": "Fine Helmet of Weakness",
+      "jp": "弱点の高級型ヘルム",
+      "kr": "약점의 고급형 투구",
+      "zh": "上等弱点头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "20"
+  },
+  "3479": {
+    "name": {
+      "en": "Steel Helmet of Weakness",
+      "jp": "弱点の鋼鉄ヘルム",
+      "kr": "약점의 강철 투구",
+      "zh": "钢铁弱点头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "20"
+  },
+  "3480": {
+    "name": {
+      "en": "Etheric Helmet of Weakness",
+      "jp": "弱点のエーテルヘルム",
+      "kr": "약점의 에테르 투구",
+      "zh": "以太弱点头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "20"
+  },
+  "3481": {
+    "name": {
+      "en": "Ordinary Helmet of Augmentation",
+      "jp": "増強の普及型ヘルム",
+      "kr": "증강의 보급형 투구",
+      "zh": "普通加强头盔"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3001"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "21"
+  },
+  "3482": {
+    "name": {
+      "en": "Fine Helmet of Augmentation",
+      "jp": "増強の高級型ヘルム",
+      "kr": "증강의 고급형 투구",
+      "zh": "上等加强头盔"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3002"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "21"
+  },
+  "3483": {
+    "name": {
+      "en": "Steel Helmet of Augmentation",
+      "jp": "増強の鋼鉄ヘルム",
+      "kr": "증강의 강철 투구",
+      "zh": "钢铁加强头盔"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3003"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "21"
+  },
+  "3484": {
+    "name": {
+      "en": "Etheric Helmet of Augmentation",
+      "jp": "増強のエーテルヘルム",
+      "kr": "증강의 에테르 투구",
+      "zh": "以太加强头盔"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Helmet_01",
+    "craftable": false,
+    "main": ["3004"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "21"
+  },
+  "3485": {
+    "name": {
+      "en": "Ordinary Helmet of Augmentation",
+      "jp": "増強の普及型ヘルム",
+      "kr": "증강의 보급형 투구",
+      "zh": "普通加强头盔"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3005"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "21"
+  },
+  "3486": {
+    "name": {
+      "en": "Fine Helmet of Augmentation",
+      "jp": "増強の高級型ヘルム",
+      "kr": "증강의 고급형 투구",
+      "zh": "上等加强头盔"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3006"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "21"
+  },
+  "3487": {
+    "name": {
+      "en": "Steel Helmet of Augmentation",
+      "jp": "増強の鋼鉄ヘルム",
+      "kr": "증강의 강철 투구",
+      "zh": "钢铁加强头盔"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3007"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "21"
+  },
+  "3488": {
+    "name": {
+      "en": "Etheric Helmet of Augmentation",
+      "jp": "増強のエーテルヘルム",
+      "kr": "증강의 에테르 투구",
+      "zh": "以太加强头盔"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Helmet_02",
+    "craftable": false,
+    "main": ["3008"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "21"
+  },
+  "3489": {
+    "name": {
+      "en": "Ordinary Helmet of Augmentation",
+      "jp": "増強の普及型ヘルム",
+      "kr": "증강의 보급형 투구",
+      "zh": "普通加强头盔"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3009"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "21"
+  },
+  "3490": {
+    "name": {
+      "en": "Fine Helmet of Augmentation",
+      "jp": "増強の高級型ヘルム",
+      "kr": "증강의 고급형 투구",
+      "zh": "上等加强头盔"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3010"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "21"
+  },
+  "3491": {
+    "name": {
+      "en": "Steel Helmet of Augmentation",
+      "jp": "増強の鋼鉄ヘルム",
+      "kr": "증강의 강철 투구",
+      "zh": "钢铁加强头盔"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3011"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "21"
+  },
+  "3492": {
+    "name": {
+      "en": "Etheric Helmet of Augmentation",
+      "jp": "増強のエーテルヘルム",
+      "kr": "증강의 에테르 투구",
+      "zh": "以太加强头盔"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Helmet_03",
+    "craftable": false,
+    "main": ["3012"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "21"
+  },
+  "3493": {
+    "name": {
+      "en": "Ordinary Helmet of Augmentation",
+      "jp": "増強の普及型ヘルム",
+      "kr": "증강의 보급형 투구",
+      "zh": "普通加强头盔"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3013"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "21"
+  },
+  "3494": {
+    "name": {
+      "en": "Fine Helmet of Augmentation",
+      "jp": "増強の高級型ヘルム",
+      "kr": "증강의 고급형 투구",
+      "zh": "上等加强头盔"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3014"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "21"
+  },
+  "3495": {
+    "name": {
+      "en": "Steel Helmet of Augmentation",
+      "jp": "増強の鋼鉄ヘルム",
+      "kr": "증강의 강철 투구",
+      "zh": "钢铁加强头盔"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3015"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "21"
+  },
+  "3496": {
+    "name": {
+      "en": "Etheric Helmet of Augmentation",
+      "jp": "増強のエーテルヘルム",
+      "kr": "증강의 에테르 투구",
+      "zh": "以太加强头盔"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Helmet_04",
+    "craftable": false,
+    "main": ["3016"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "21"
+  },
+  "3497": {
+    "name": {
+      "en": "Ordinary Helmet of Augmentation",
+      "jp": "増強の普及型ヘルム",
+      "kr": "증강의 보급형 투구",
+      "zh": "普通加强头盔"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3017"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "21"
+  },
+  "3498": {
+    "name": {
+      "en": "Fine Helmet of Augmentation",
+      "jp": "増強の高級型ヘルム",
+      "kr": "증강의 고급형 투구",
+      "zh": "上等加强头盔"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3018"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "21"
+  },
+  "3499": {
+    "name": {
+      "en": "Steel Helmet of Augmentation",
+      "jp": "増強の鋼鉄ヘルム",
+      "kr": "증강의 강철 투구",
+      "zh": "钢铁加强头盔"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3019"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "21"
+  },
+  "3500": {
+    "name": {
+      "en": "Etheric Helmet of Augmentation",
+      "jp": "増強のエーテルヘルム",
+      "kr": "증강의 에테르 투구",
+      "zh": "以太加强头盔"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Helmet_05",
+    "craftable": false,
+    "main": ["3020"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "21"
+  },
+  "3501": {
+    "name": {
+      "en": "Ordinary Helmet of Augmentation",
+      "jp": "増強の普及型ヘルム",
+      "kr": "증강의 보급형 투구",
+      "zh": "普通加强头盔"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3021"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "21"
+  },
+  "3502": {
+    "name": {
+      "en": "Fine Helmet of Augmentation",
+      "jp": "増強の高級型ヘルム",
+      "kr": "증강의 고급형 투구",
+      "zh": "上等加强头盔"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3022"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "21"
+  },
+  "3503": {
+    "name": {
+      "en": "Steel Helmet of Augmentation",
+      "jp": "増強の鋼鉄ヘルム",
+      "kr": "증강의 강철 투구",
+      "zh": "钢铁加强头盔"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "21"
+  },
+  "3504": {
+    "name": {
+      "en": "Etheric Helmet of Augmentation",
+      "jp": "増強のエーテルヘルム",
+      "kr": "증강의 에테르 투구",
+      "zh": "以太加强头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": true,
+    "main": ["3024"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "21"
+  },
+  "3506": {
+    "name": {
+      "en": "Etheric Helmet of Attack",
+      "jp": "攻撃のエーテルヘルム",
+      "kr": "공격의 에테르 투구",
+      "zh": "以太攻击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3025"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94001": {
+    "name": {
+      "en": "Etheric Helmet of Attack",
+      "jp": "攻撃のエーテルヘルム",
+      "kr": "공격의 에테르 투구",
+      "zh": "以太攻击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12001",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94002": {
+    "name": {
+      "en": "Etheric Helmet of Defense",
+      "jp": "防御のエーテルヘルム",
+      "kr": "방어의 에테르 투구",
+      "zh": "以太防御头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12002",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "94003": {
+    "name": {
+      "en": "Etheric Helmet of Life",
+      "jp": "生命のエーテルヘルム",
+      "kr": "생명의 에테르 투구",
+      "zh": "以太生命头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12003",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "94004": {
+    "name": {
+      "en": "Etheric Helmet of Critical Hit",
+      "jp": "会心のエーテルヘルム",
+      "kr": "치명의 에테르 투구",
+      "zh": "以太暴击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12004",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "94005": {
+    "name": {
+      "en": "Etheric Helmet of Effectiveness",
+      "jp": "効果命中のエーテルヘルム",
+      "kr": "적중의 에테르 투구",
+      "zh": "以太效果命中头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12005",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "94006": {
+    "name": {
+      "en": "Etheric Helmet of Resilience",
+      "jp": "抵抗のエーテルヘルム",
+      "kr": "저항의 에테르 투구",
+      "zh": "以太抵抗头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12006",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "94007": {
+    "name": {
+      "en": "Etheric Helmet of Counterattack",
+      "jp": "反撃のエーテルヘルム",
+      "kr": "반격의 에테르 투구",
+      "zh": "以太反击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12007",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "94008": {
+    "name": {
+      "en": "Etheric Helmet of Fortification",
+      "jp": "鉄壁のエーテルヘルム",
+      "kr": "개전 방벽의 에테르 투구",
+      "zh": "以太开战防壁头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12008",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "94009": {
+    "name": {
+      "en": "Etheric Helmet of Mitigation",
+      "jp": "無力化のエーテルヘルム",
+      "kr": "무력화의 에테르 투구",
+      "zh": "以太失效头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12009",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "94010": {
+    "name": {
+      "en": "Etheric Helmet of Lifesteal",
+      "jp": "吸収のエーテルヘルム",
+      "kr": "흡혈의 에테르 투구",
+      "zh": "以太吸血头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12010",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "94011": {
+    "name": {
+      "en": "Etheric Helmet of Penetration",
+      "jp": "貫通のエーテルヘルム",
+      "kr": "관통의 에테르 투구",
+      "zh": "以太穿透头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12011",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "94012": {
+    "name": {
+      "en": "Etheric Helmet of Critical Strike",
+      "jp": "極大化のエーテルヘルム",
+      "kr": "극대화의 에테르 투구",
+      "zh": "以太暴伤头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12012",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "94013": {
+    "name": {
+      "en": "Etheric Helmet of Speed",
+      "jp": "速度のエーテルヘルム",
+      "kr": "속도의 에테르 투구",
+      "zh": "以太速度头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12013",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "94014": {
+    "name": {
+      "en": "Etheric Helmet of Bursting",
+      "jp": "炸裂のエーテルヘルム",
+      "kr": "버스트의 에테르 투구",
+      "zh": "以太爆发头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12014",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "94015": {
+    "name": {
+      "en": "Etheric Helmet of Revenge",
+      "jp": "復讐のエーテルヘルム",
+      "kr": "복수의 에테르 투구",
+      "zh": "以太复仇头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12015",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "94016": {
+    "name": {
+      "en": "Etheric Helmet of Patience",
+      "jp": "忍耐のエーテルヘルム",
+      "kr": "인내의 에테르 투구",
+      "zh": "以太忍耐头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12016",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "94018": {
+    "name": {
+      "en": "Etheric Helmet of Immunity",
+      "jp": "免疫のエーテルヘルム",
+      "kr": "면역의 에테르 투구",
+      "zh": "以太免疫头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12017",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "94019": {
+    "name": {
+      "en": "Etheric Helmet of Swiftness",
+      "jp": "機敏のエーテルヘルム",
+      "kr": "기민의 에테르 투구",
+      "zh": "以太敏捷头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12018",
+    "breakLimit": "6|unique",
+    "set": "19"
+  },
+  "94401": {
+    "name": {
+      "en": "Etheric Helmet of Attack",
+      "jp": "攻撃のエーテルヘルム",
+      "kr": "공격의 에테르 투구",
+      "zh": "以太攻击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94402": {
+    "name": {
+      "en": "Etheric Helmet of Defense",
+      "jp": "防御のエーテルヘルム",
+      "kr": "방어의 에테르 투구",
+      "zh": "以太防御头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "94403": {
+    "name": {
+      "en": "Etheric Helmet of Life",
+      "jp": "生命のエーテルヘルム",
+      "kr": "생명의 에테르 투구",
+      "zh": "以太生命头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "94404": {
+    "name": {
+      "en": "Etheric Helmet of Critical Hit",
+      "jp": "会心のエーテルヘルム",
+      "kr": "치명의 에테르 투구",
+      "zh": "以太暴击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "94405": {
+    "name": {
+      "en": "Etheric Helmet of Effectiveness",
+      "jp": "効果命中のエーテルヘルム",
+      "kr": "적중의 에테르 투구",
+      "zh": "以太效果命中头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "94406": {
+    "name": {
+      "en": "Etheric Helmet of Resilience",
+      "jp": "抵抗のエーテルヘルム",
+      "kr": "저항의 에테르 투구",
+      "zh": "以太抵抗头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "94407": {
+    "name": {
+      "en": "Etheric Helmet of Counterattack",
+      "jp": "反撃のエーテルヘルム",
+      "kr": "반격의 에테르 투구",
+      "zh": "以太反击头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "94408": {
+    "name": {
+      "en": "Etheric Helmet of Fortification",
+      "jp": "鉄壁のエーテルヘルム",
+      "kr": "개전 방벽의 에테르 투구",
+      "zh": "以太开战防壁头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "94409": {
+    "name": {
+      "en": "Etheric Helmet of Mitigation",
+      "jp": "無力化のエーテルヘルム",
+      "kr": "무력화의 에테르 투구",
+      "zh": "以太失效头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "94410": {
+    "name": {
+      "en": "Etheric Helmet of Lifesteal",
+      "jp": "吸収のエーテルヘルム",
+      "kr": "흡혈의 에테르 투구",
+      "zh": "以太吸血头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "94411": {
+    "name": {
+      "en": "Etheric Helmet of Penetration",
+      "jp": "貫通のエーテルヘルム",
+      "kr": "관통의 에테르 투구",
+      "zh": "以太穿透头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "94412": {
+    "name": {
+      "en": "Etheric Helmet of Critical Strike",
+      "jp": "極大化のエーテルヘルム",
+      "kr": "극대화의 에테르 투구",
+      "zh": "以太暴伤头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "94413": {
+    "name": {
+      "en": "Etheric Helmet of Speed",
+      "jp": "速度のエーテルヘルム",
+      "kr": "속도의 에테르 투구",
+      "zh": "以太速度头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "94414": {
+    "name": {
+      "en": "Etheric Helmet of Bursting",
+      "jp": "炸裂のエーテルヘルム",
+      "kr": "버스트의 에테르 투구",
+      "zh": "以太爆发头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "94415": {
+    "name": {
+      "en": "Etheric Helmet of Revenge",
+      "jp": "復讐のエーテルヘルム",
+      "kr": "복수의 에테르 투구",
+      "zh": "以太复仇头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "94416": {
+    "name": {
+      "en": "Etheric Helmet of Patience",
+      "jp": "忍耐のエーテルヘルム",
+      "kr": "인내의 에테르 투구",
+      "zh": "以太忍耐头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "94417": {
+    "name": {
+      "en": "Etheric Helmet of Immunity",
+      "jp": "免疫のエーテルヘルム",
+      "kr": "면역의 에테르 투구",
+      "zh": "以太免疫头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "94418": {
+    "name": {
+      "en": "Etheric Helmet of Swiftness",
+      "jp": "機敏のエーテルヘルム",
+      "kr": "기민의 에테르 투구",
+      "zh": "以太敏捷头盔"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Helmet_06",
+    "craftable": false,
+    "main": ["3024"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "19"
+  }
+}

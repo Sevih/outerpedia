@@ -1,0 +1,80 @@
+{
+  "Swift Defense": {
+    "Weapon": [
+      {
+        "name": "Exquisite Death",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      "def2sw2"
+    ],
+    "SubstatPrio": "$dpsDef",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Swift Counter": {
+    "Weapon": [
+      {
+        "name": "Exquisite Death",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      "ct2sw2"
+    ],
+    "SubstatPrio": "$dpsDef",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Exquisite Death",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStat": "DEF%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dpsDef",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

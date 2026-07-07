@@ -1,0 +1,80 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Penetration": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "p4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Critical Strike": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "chd4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

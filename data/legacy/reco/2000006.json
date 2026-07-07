@@ -1,0 +1,28 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Death's Hold",
+        "mainStat": "PEN%/CHD"
+      },
+      {
+        "name": "Clock Up",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

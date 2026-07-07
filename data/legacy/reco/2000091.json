@@ -1,0 +1,54 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Noblewoman's Guile",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Dies Irae",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$speedHPEff",
+    "Note": "PvP : {I-T/Assassin's Charm} or {I-T/Vanguard's Charm}",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Speed Immune": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Noblewoman's Guile",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Dies Irae",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s2i2"
+    ],
+    "SubstatPrio": "$speedHPEff",
+    "Note": "PvP : {I-T/Assassin's Charm} or {I-T/Vanguard's Charm}",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Dies Irae",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$speedHPEff",
+    "Talisman": [
+      "$s"
+    ]
+  }
+}

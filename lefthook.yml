@@ -5,13 +5,18 @@ pre-commit:
   parallel: true
   commands:
     # Formate les fichiers indexés, puis ré-indexe les corrections.
+    # data/legacy/ = snapshot V2 figé : jamais reformaté/linté.
     format:
       glob: '*.{ts,tsx,js,mjs,json,css,md,yml,yaml}'
+      exclude:
+        - 'data/legacy/**'
       run: pnpm prettier --write {staged_files}
       stage_fixed: true
     # Lint uniquement les fichiers TS/TSX indexés.
     lint:
       glob: '*.{ts,tsx}'
+      exclude:
+        - 'data/legacy/**'
       run: pnpm eslint {staged_files}
 
 pre-push:

@@ -1,0 +1,138 @@
+/**
+ * Helpers d'images + couleurs (partagés admin ET public).
+ *
+ * Source = NOS assets extraits du jeu : en dev, `/images/*` est servi depuis
+ * `.assets-staging/` (route dev) ; en prod, NEXT_PUBLIC_IMG_BASE pointe le
+ * bucket R2 (img.outerpedia.com). Plus aucune référence à la prod V2.
+ */
+const BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
+
+const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+
+export const img = {
+  /** Portrait cadré (vignette/header). */
+  portrait: (id: string) => `${BASE}/images/characters/portrait/CT_${id}.webp`,
+  /** Corps entier (grand visuel). */
+  full: (id: string) => `${BASE}/images/characters/full/IMG_${id}.webp`,
+  /** Icône de visage (listes). */
+  face: (id: string) => `${BASE}/images/characters/faceicon/FI_${id}.webp`,
+  /** Variante PNG (og:image — les aperçus Discord/OG préfèrent le PNG). */
+  facePng: (id: string) => `${BASE}/images/characters/faceicon/FI_${id}.png`,
+  /** Icône d'ordre de tour (barre ATB en combat). */
+  atb: (id: string) => `${BASE}/images/characters/atb/IG_Turn_${id}.webp`,
+  /** Icône d'élément (slug → CamelCase ; sprites IG_Turn_Element_*). */
+  element: (el: string) => `${BASE}/images/ui/elem/IG_Turn_Element_${cap(el)}.webp`,
+  /** Icône de classe (slug → CamelCase ; sprites IG_Turn_Class_*, clé = slug). */
+  klass: (cl: string) => `${BASE}/images/ui/class/IG_Turn_Class_${cap(cl)}.webp`,
+  /** Icône de compétence (nom d'icône brut du jeu). */
+  skill: (icon: string) => `${BASE}/images/characters/skills/${icon}.webp`,
+  /** Icône d'attaque en chaîne (élément + type, slugs → CamelCase). */
+  chain: (element: string, chainType: string) =>
+    `${BASE}/images/characters/chain/Skill_ChainPassive_${cap(element)}_${cap(chainType)}.webp`,
+  /** Icône d'équipement exclusif (par id de perso). */
+  ee: (id: string) => `${BASE}/images/characters/ee/${id}.webp`,
+  /** Variante PNG (og:image des pages détail EE). */
+  eePng: (id: string) => `${BASE}/images/characters/ee/${id}.png`,
+  /** Icône de sous-classe (slug → CamelCase). */
+  subClass: (sc: string) => `${BASE}/images/ui/class/CM_Sub_Class_${cap(sc)}.webp`,
+  /** Étoile de rareté (jaune). */
+  star: () => `${BASE}/images/ui/star/CM_icon_star_y.webp`,
+  /** Étoile Singularity (item ascendé). */
+  starSingularity: () => `${BASE}/images/ui/star/CM_Star_Singularity.webp`,
+  /** Icône de tag éditorial (premium/limited/…). */
+  tag: (slug: string) => `${BASE}/images/ui/tags/${slug}.webp`,
+  /** Icône d'effet (nom d'icône du glossaire). */
+  effect: (icon: string) => `${BASE}/images/ui/effect/${icon}.webp`,
+  /** Carte de burst 1..3 (fond du jeu). */
+  burstCard: (level: 1 | 2 | 3) => `${BASE}/images/ui/skills/IG_Button_Burst_0${level}.webp`,
+  /** Badge burst posé sur l'icône du skill burstable. */
+  burstBadge: () => `${BASE}/images/ui/skills/CM_Skill_Icon_Burst.webp`,
+  /** Flèche de priorité de skills. */
+  chainArrow: () => `${BASE}/images/ui/nav/IG_Chain_Arrow.webp`,
+  /** Icône de rang (SSS..D). */
+  rank: (rank: string) => `${BASE}/images/ui/rank/IG_Event_Rank_${rank}.webp`,
+  /** Icône d'équipement (arme/amulette/talisman, nom de sprite du jeu). */
+  equipment: (icon: string) => `${BASE}/images/equipment/${icon}.webp`,
+  /** Variante PNG (og:image des pages détail équipement). */
+  equipmentPng: (icon: string) => `${BASE}/images/equipment/${icon}.png`,
+  /** Cadre de rareté d'une tuile d'item (grade slug : normal/magic/rare/unique). */
+  slotFrame: (grade: string) =>
+    `${BASE}/images/ui/bg/TI_Slot_${SLOT_FRAME[grade] ?? 'Normal'}.webp`,
+  /** Portrait d'un boss (`MT_*`, sources d'obtention d'équipement). */
+  boss: (icon: string) => `${BASE}/images/ui/boss/${icon}.webp`,
+  /** Icône de l'or (coûts d'ascension). */
+  gold: () => `${BASE}/images/items/CM_Goods_Gold.webp`,
+  /** Icône d'item générique (gifts, pièces de rappel…). */
+  item: (icon: string) => `${BASE}/images/items/${icon}.webp`,
+  /** Étoile de transcendance (sprite CM_icon_star_* — voir STAR_SPRITE). */
+  transcendStar: (sprite: string) => `${BASE}/images/ui/star/${sprite}.webp`,
+  /** Onglet d'évolution (sélecteur de paliers de stats). */
+  evoTab: (selected: boolean) =>
+    `${BASE}/images/ui/evo/CM_Evolution_Tab${selected ? '_Select' : ''}.webp`,
+  /** Icône de stat (sprite CM_Stat_Icon_* — voir STAT_ICON dans lib/stats). */
+  statIcon: (sprite: string) => `${BASE}/images/ui/stat/${sprite}.webp`,
+  /** Icône du Combat Power (fiche perso, section Stats). */
+  power: () => `${BASE}/images/ui/stat/CM_Icon_Power.webp`,
+  /** Fond sombre des étoiles de rareté (cartes de persos). */
+  starSlot: () => `${BASE}/images/ui/star/CM_Character_Thumbnail_Star_Slot.webp`,
+  /** Badge de recrutement (premium/limited/…) sur les cartes. */
+  recruitTag: (tag: string) => `${BASE}/images/ui/recruit/${RECRUIT_TAG_SPRITE[tag]}.webp`,
+  /** Icône core-fusion (cartes de persos). */
+  coreFusionTag: () => `${BASE}/images/ui/tags/CT_Core_Icon.webp`,
+};
+
+/** Grade slug → suffixe du sprite de cadre TI_Slot_*. */
+const SLOT_FRAME: Record<string, string> = {
+  normal: 'Normal',
+  magic: 'Magic',
+  rare: 'Rare',
+  unique: 'Unique',
+  singularity: 'Singularity',
+};
+
+/** Tag éditorial → sprite de badge de recrutement (ordre V2 : premier trouvé). */
+export const RECRUIT_TAG_SPRITE: Record<string, string> = {
+  collab: 'CM_Recruit_Tag_Collab',
+  seasonal: 'CM_Recruit_Tag_Seasonal',
+  premium: 'CM_Recruit_Tag_Premium',
+  free: 'CM_Recruit_Tag_Free',
+  limited: 'CM_Recruit_Tag_Fes',
+};
+
+/** Couleur de texte par grade d'item (tokens item-* : mêmes teintes que la V2). */
+export const GRADE_TEXT: Record<string, string> = {
+  normal: 'text-item-normal',
+  magic: 'text-item-superior',
+  rare: 'text-item-epic',
+  unique: 'text-item-legendary',
+};
+
+/** Couleur de texte par élément (tokens sémantiques, pas de couleur en dur). */
+export const ELEMENT_TEXT: Record<string, string> = {
+  fire: 'text-fire',
+  water: 'text-water',
+  earth: 'text-earth',
+  light: 'text-light',
+  dark: 'text-dark-elem',
+};
+
+/** Pastille (bg+texte) par type de chaîne. */
+export const CHAIN_PILL: Record<string, string> = {
+  start: 'bg-chain-start/15 text-chain-start',
+  join: 'bg-chain-join/15 text-chain-join',
+  finish: 'bg-chain-finish/15 text-chain-finish',
+};
+
+/** Pastille (bg+texte) par rôle curé. */
+export const ROLE_PILL: Record<string, string> = {
+  dps: 'bg-role-dps/15 text-role-dps',
+  support: 'bg-role-support/15 text-role-support',
+  sustain: 'bg-role-sustain/15 text-role-sustain',
+};
+
+/** Badge plein par rôle (header de fiche, apparence V2). */
+export const ROLE_BG: Record<string, string> = {
+  dps: 'bg-role-dps/70',
+  support: 'bg-role-support/70',
+  sustain: 'bg-role-sustain/70',
+};

@@ -1,0 +1,10595 @@
+[
+  {
+    "characterId": "2000006",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "CHD"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000008",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Glorious Radiance Legacy",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "SPD",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2000008",
+    "buildName": "Counter",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Glorious Radiance Legacy",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "SPD",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2000008",
+    "buildName": "Scaling",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Glorious Radiance Legacy",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "SPD",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2000010",
+    "buildName": "Scaling",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "CHD"
+        ]
+      },
+      {
+        "name": "A Prima Vista",
+        "mainStats": [
+          "DEF%",
+          "RES"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "HP",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000012",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000015",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000015",
+    "buildName": "Penetration",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000015",
+    "buildName": "Critical Strike",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000019",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000019",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000019",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000020",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Search and Destroy",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000022",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000022",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000022",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000023",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Saint's Ring",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000023",
+    "buildName": "Swift Immu",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Saint's Ring",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000025",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000025",
+    "buildName": "High Crit",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000025",
+    "buildName": "Penetration",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000028",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000028",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000028",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000035",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Bloody Edge",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000035",
+    "buildName": "Swift Mix",
+    "weapons": [
+      {
+        "name": "Bloody Edge",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set",
+      "Swiftness Set",
+      "Attack Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000037",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2000037",
+    "buildName": "Swift Counter",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2000039",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000040",
+    "buildName": "Support",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Ranger]",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Ranger]",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000040",
+    "buildName": "DPS Revenge",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000040",
+    "buildName": "DPS Pen",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000040",
+    "buildName": "Dimensional Singularity",
+    "weapons": [
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Briareos's Ambition [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000042",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "CDMG RED%"
+    ]
+  },
+  {
+    "characterId": "2000042",
+    "buildName": "Swift Immu",
+    "weapons": [
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "CDMG RED%"
+    ]
+  },
+  {
+    "characterId": "2000043",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF",
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000044",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000044",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000044",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000052",
+    "buildName": "Atk Mix",
+    "weapons": [
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Attack Set",
+      "Critical Strike Set",
+      "Penetration Set",
+      "Augmentation Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF",
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000052",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF",
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000052",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF",
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000052",
+    "buildName": "Support",
+    "weapons": [
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF",
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000053",
+    "buildName": "Counter",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2000053",
+    "buildName": "Revenge",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2000054",
+    "buildName": "Swift Immu",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000054",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000055",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000055",
+    "buildName": "High Crit",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000055",
+    "buildName": "Penetration",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000056",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000056",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000056",
+    "buildName": "Immu Aug",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Augmentation Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000056",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000057",
+    "buildName": "Support Speed",
+    "weapons": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000057",
+    "buildName": "Support Swift Immu",
+    "weapons": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000057",
+    "buildName": "SubDPS Speed",
+    "weapons": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000057",
+    "buildName": "SubDPS Swift Immu",
+    "weapons": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000058",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000058",
+    "buildName": "Immunity",
+    "weapons": [
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000058",
+    "buildName": "Counterattack",
+    "weapons": [
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000059",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000059",
+    "buildName": "High Crit",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000059",
+    "buildName": "Penetration",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000060",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "CHC",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000061",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Charmer's Golden Chalice",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "DEF",
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000061",
+    "buildName": "Scale Immune",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Charmer's Golden Chalice",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "DEF",
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000061",
+    "buildName": "Scale Life",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Charmer's Golden Chalice",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "DEF",
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000061",
+    "buildName": "Counter",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Charmer's Golden Chalice",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "DEF",
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000062",
+    "buildName": "Counter",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "A Prima Vista",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000062",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "A Prima Vista",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000063",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%",
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000063",
+    "buildName": "Swift Immune",
+    "weapons": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%",
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000064",
+    "buildName": "Speed PVE",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000064",
+    "buildName": "Speed PVP",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000065",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000065",
+    "buildName": "High Crit",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000065",
+    "buildName": "Penetration",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000066",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000067",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Last Hope",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000067",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Last Hope",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000067",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Last Hope",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000068",
+    "buildName": "Speed damage",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000068",
+    "buildName": "Speed Tanky",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000069",
+    "buildName": "PvP",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "EFF",
+      "SPD",
+      "ATK"
+    ]
+  },
+  {
+    "characterId": "2000069",
+    "buildName": "PvE - effi",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Effectiveness Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "EFF",
+      "SPD",
+      "ATK"
+    ]
+  },
+  {
+    "characterId": "2000070",
+    "buildName": "Augment Immune",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Augmentation Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000070",
+    "buildName": "Counter Immune",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000070",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000070",
+    "buildName": "High Crit",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000071",
+    "buildName": "Augment Swift",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Augmentation Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000071",
+    "buildName": "Augment Defense",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Augmentation Set",
+      "Defense Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000071",
+    "buildName": "Swift Immu",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000071",
+    "buildName": "Counter",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000072",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Barrage of Truth",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000072",
+    "buildName": "High Crit",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Barrage of Truth",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000073",
+    "buildName": "Atk",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Phantasm Necrosis",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "A Prima Vista",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Dancer's Necklace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Attack Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "SPD",
+      "CHC",
+      "CHD"
+    ]
+  },
+  {
+    "characterId": "2000073",
+    "buildName": "Revenge",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Phantasm Necrosis",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "A Prima Vista",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Dancer's Necklace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "SPD",
+      "CHC",
+      "CHD"
+    ]
+  },
+  {
+    "characterId": "2000073",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Phantasm Necrosis",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "A Prima Vista",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Dancer's Necklace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "SPD",
+      "CHC",
+      "CHD"
+    ]
+  },
+  {
+    "characterId": "2000074",
+    "buildName": "PvE",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000074",
+    "buildName": "PvP",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000075",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000075",
+    "buildName": "Augment Immune",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Augmentation Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000076",
+    "buildName": "High Crit",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Last Hope",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000076",
+    "buildName": "PvP",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Last Hope",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Augmentation Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000076",
+    "buildName": "Penetration",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Last Hope",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000076",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Last Hope",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000077",
+    "buildName": "Swift Defense",
+    "weapons": [
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Swiftness Set",
+      "Defense Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000077",
+    "buildName": "Swift Counter",
+    "weapons": [
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000077",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000078",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000078",
+    "buildName": "High Crit",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000079",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000080",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000081",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD",
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "EFF",
+      "CHC"
+    ]
+  },
+  {
+    "characterId": "2000082",
+    "buildName": "Aug Immu",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Augmentation Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000082",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000082",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000083",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Starlight Road",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000083",
+    "buildName": "Swift Immu",
+    "weapons": [
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Starlight Road",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000083",
+    "buildName": "Swift Life",
+    "weapons": [
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Starlight Road",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000084",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000084",
+    "buildName": "Swift Counter",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000085",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000085",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000085",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000086",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "EFF",
+      "HP",
+      "DEF",
+      "DMG UP%",
+      "DMG RED%"
+    ]
+  },
+  {
+    "characterId": "2000086",
+    "buildName": "Mix Speed",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "EFF",
+      "HP",
+      "DEF",
+      "DMG UP%",
+      "DMG RED%"
+    ]
+  },
+  {
+    "characterId": "2000087",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000087",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000087",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000088",
+    "buildName": "Scaling",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "CHC",
+      "CHD",
+      "DMG RED%"
+    ]
+  },
+  {
+    "characterId": "2000088",
+    "buildName": "HP immune",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "CHC",
+      "CHD",
+      "DMG RED%"
+    ]
+  },
+  {
+    "characterId": "2000088",
+    "buildName": "HP scaling",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "CHC",
+      "CHD",
+      "DMG RED%"
+    ]
+  },
+  {
+    "characterId": "2000089",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000089",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000089",
+    "buildName": "Def",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Defense Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000089",
+    "buildName": "Speed/Immu",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000089",
+    "buildName": "Def/Immu",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Defense Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000090",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "A Prima Vista",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000090",
+    "buildName": "Revenge",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "A Prima Vista",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000090",
+    "buildName": "Swift Immune",
+    "weapons": [
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "A Prima Vista",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000091",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000091",
+    "buildName": "Speed Immune",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000092",
+    "buildName": "PvE - Speed",
+    "weapons": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Steel Necklace",
+        "mainStats": [
+          "EFF"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "EFF",
+      "SPD",
+      "CHC"
+    ]
+  },
+  {
+    "characterId": "2000092",
+    "buildName": "PvE - Effectiveness",
+    "weapons": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Steel Necklace",
+        "mainStats": [
+          "EFF"
+        ]
+      }
+    ],
+    "sets": [
+      "Effectiveness Set"
+    ],
+    "substatPrio": [
+      "EFF",
+      "SPD",
+      "CHC"
+    ]
+  },
+  {
+    "characterId": "2000092",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF"
+    ]
+  },
+  {
+    "characterId": "2000093",
+    "buildName": "DPS",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Barrage of Truth",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000093",
+    "buildName": "Support-DPS",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Barrage of Truth",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000094",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "EFF",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "EFF",
+      "ATK",
+      "HP",
+      "SPD"
+    ]
+  },
+  {
+    "characterId": "2000094",
+    "buildName": "Swift Counter",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "EFF",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "EFF",
+      "ATK",
+      "HP",
+      "SPD"
+    ]
+  },
+  {
+    "characterId": "2000094",
+    "buildName": "Counterattack",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "EFF",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "EFF",
+      "ATK",
+      "HP",
+      "SPD"
+    ]
+  },
+  {
+    "characterId": "2000094",
+    "buildName": "Revenge",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "EFF",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "EFF",
+      "ATK",
+      "HP",
+      "SPD"
+    ]
+  },
+  {
+    "characterId": "2000094",
+    "buildName": "Guild Raid",
+    "weapons": [
+      {
+        "name": "Token of the Supreme Witch",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Steel Necklace",
+        "mainStats": [
+          "EFF"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "EFF",
+      "ATK",
+      "HP",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000095",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Mage]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "SPD",
+      "CHC",
+      "EFF",
+      "CHD"
+    ]
+  },
+  {
+    "characterId": "2000095",
+    "buildName": "Attack",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Mage]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Attack Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "SPD",
+      "CHC",
+      "EFF",
+      "CHD"
+    ]
+  },
+  {
+    "characterId": "2000095",
+    "buildName": "Augm Attack",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Mage]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "ATK%",
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Attack Set",
+      "Augmentation Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "SPD",
+      "CHC",
+      "EFF",
+      "CHD"
+    ]
+  },
+  {
+    "characterId": "2000096",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000096",
+    "buildName": "High Crit",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000096",
+    "buildName": "Penetration",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000096",
+    "buildName": "Revenge Ais",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000097",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Barrage of Truth",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000097",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Barrage of Truth",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000098",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Royal Stinger",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Healer]",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000098",
+    "buildName": "Swift Immu",
+    "weapons": [
+      {
+        "name": "Royal Stinger",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Healer]",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000098",
+    "buildName": "Swift Speed",
+    "weapons": [
+      {
+        "name": "Royal Stinger",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Healer]",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000098",
+    "buildName": "Life Def",
+    "weapons": [
+      {
+        "name": "Royal Stinger",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Healer]",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStats": [
+          "HP%",
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Defense Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000099",
+    "buildName": "Life Swift",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "CHC",
+      "CHD",
+      "SPD"
+    ]
+  },
+  {
+    "characterId": "2000099",
+    "buildName": "Life Augment",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Augmentation Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "CHC",
+      "CHD",
+      "SPD"
+    ]
+  },
+  {
+    "characterId": "2000099",
+    "buildName": "Swift Augment",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Augmentation Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "CHC",
+      "CHD",
+      "SPD"
+    ]
+  },
+  {
+    "characterId": "2000100",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000100",
+    "buildName": "Speed Swift",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000100",
+    "buildName": "Immune Swift",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Immortal Pride",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000101",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Ranger]",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Ranger]",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000102",
+    "buildName": "Scaling",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Charmer's Golden Chalice",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "EFF",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000102",
+    "buildName": "HP immune",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Charmer's Golden Chalice",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "EFF",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000102",
+    "buildName": "HP scaling",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Charmer's Golden Chalice",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "EFF",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000102",
+    "buildName": "HP Counter",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Charmer's Golden Chalice",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set",
+      "Life Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "EFF",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000102",
+    "buildName": "Counter",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Charmer's Golden Chalice",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "EFF",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000103",
+    "buildName": "Speedy",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "ATK",
+      "CHD"
+    ]
+  },
+  {
+    "characterId": "2000103",
+    "buildName": "Counter",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "ATK",
+      "CHD"
+    ]
+  },
+  {
+    "characterId": "2000105",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%",
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%",
+          "HP%",
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Barrage of Truth",
+        "mainStats": [
+          "ATK%",
+          "HP%",
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Ranger]",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Ranger]",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "CHC",
+      "ATK",
+      "CHD",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2000106",
+    "buildName": "Life Swift",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000106",
+    "buildName": "HP immune",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000106",
+    "buildName": "HP counter",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set",
+      "Life Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000106",
+    "buildName": "Full HP",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000106",
+    "buildName": "Counter",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000106",
+    "buildName": "Immune",
+    "weapons": [
+      {
+        "name": "Force Field Generator",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Fool's Dawn",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2000107",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Sublime Melody",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Mage]",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF",
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000108",
+    "buildName": "PvE",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Legacy of the Dream",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000108",
+    "buildName": "PvP",
+    "weapons": [
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000109",
+    "buildName": "PvE - Pen",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "CHC",
+      "CHD",
+      "EFF",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000109",
+    "buildName": "Pve - Life",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "CHC",
+      "CHD",
+      "EFF",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000109",
+    "buildName": "PvE - Pen / Life",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set",
+      "Life Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "CHC",
+      "CHD",
+      "EFF",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000109",
+    "buildName": "PvP - Pen/Swift",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "CHC",
+      "CHD",
+      "EFF",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000109",
+    "buildName": "PvP - Life/Swift",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "CHC",
+      "CHD",
+      "EFF",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000109",
+    "buildName": "PvP - Speed/Swift",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "HP",
+      "CHC",
+      "CHD",
+      "EFF",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000110",
+    "buildName": "DPS pen",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000110",
+    "buildName": "DPS speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000110",
+    "buildName": "DPS revenge",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000110",
+    "buildName": "DPS attack",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Attack Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "ATK",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000110",
+    "buildName": "Sub-DPS",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000110",
+    "buildName": "Immu",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Burning Soul",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Attack Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "ATK",
+      "CHC",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000111",
+    "buildName": "Speed PvE",
+    "weapons": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF",
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000111",
+    "buildName": "Speed PvP",
+    "weapons": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Ranger]",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF",
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000112",
+    "buildName": "Pen Def",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "DEF%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%",
+          "EFF"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set",
+      "Defense Set"
+    ],
+    "substatPrio": [
+      "DEF%",
+      "EFF",
+      "CHC",
+      "HP%",
+      "SPD",
+      "CHD",
+      "DMG RED%",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000112",
+    "buildName": "Pen Immu",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "DEF%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%",
+          "EFF"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Defense Set"
+    ],
+    "substatPrio": [
+      "DEF%",
+      "EFF",
+      "CHC",
+      "HP%",
+      "SPD",
+      "CHD",
+      "DMG RED%",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000112",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "DEF%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%",
+          "EFF"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "DEF%",
+      "EFF",
+      "CHC",
+      "HP%",
+      "SPD",
+      "CHD",
+      "DMG RED%",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000112",
+    "buildName": "Patience",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%",
+          "EFF"
+        ]
+      },
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "DEF%",
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%",
+          "EFF"
+        ]
+      }
+    ],
+    "sets": [
+      "Patience Set"
+    ],
+    "substatPrio": [
+      "DEF%",
+      "EFF",
+      "CHC",
+      "HP%",
+      "SPD",
+      "CHD",
+      "DMG RED%",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000113",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Iron Messiah",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Royal Stinger",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Healer]",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      },
+      {
+        "name": "Saint's Ring",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000113",
+    "buildName": "Swift-mix",
+    "weapons": [
+      {
+        "name": "Iron Messiah",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Emblem of Dominance",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Royal Stinger",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Healer]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Resurrection Token",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Obsidian Oath",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Healer]",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      },
+      {
+        "name": "Saint's Ring",
+        "mainStats": [
+          "DMG RED%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set",
+      "Swiftness Set",
+      "Counterattack Set",
+      "Immunity Set",
+      "Life Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "DEF",
+      "DMG RED%",
+      "RES"
+    ]
+  },
+  {
+    "characterId": "2000114",
+    "buildName": "PvE - Pen",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Adventurer's Sword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "HP",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000114",
+    "buildName": "PvE - Life",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Adventurer's Sword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "HP",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000114",
+    "buildName": "PvE - Pen Life",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Adventurer's Sword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set",
+      "Life Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "HP",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000114",
+    "buildName": "PvP - Pen swift",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Adventurer's Sword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "HP",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000114",
+    "buildName": "PvP - HP swift",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Adventurer's Sword",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      }
+    ],
+    "sets": [
+      "Life Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "HP",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000116",
+    "buildName": "Patience",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Defender]",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Patience Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "HP",
+      "DMG RED%",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000116",
+    "buildName": "Defense mix",
+    "weapons": [
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Exquisite Death",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Defender]",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set",
+      "Defense Set",
+      "Swiftness Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "DEF",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000117",
+    "buildName": "Attack",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Twin B",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Dancer's Necklace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Attack Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000117",
+    "buildName": "Revenge",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Twin B",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Dancer's Necklace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Revenge Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000117",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Twin B",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Dancer's Necklace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000117",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Surefire Greatsword",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Twin B",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Striker]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Dancer's Necklace",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "SPD",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000119",
+    "buildName": "Penetration",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000119",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000119",
+    "buildName": "Critical Strike",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2000119",
+    "buildName": "Pen mix",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Mage]",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Fire Grimoire",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set",
+      "Speed Set",
+      "Attack Set",
+      "Critical Strike Set",
+      "Augmentation Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700003",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Heartunder's Blade",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStats": [
+          "ATK%"
+        ]
+      },
+      {
+        "name": "Barrage of Truth",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Combination Simulator",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Absolute Music",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Ranger]",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "CHC",
+      "ATK",
+      "EFF",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700005",
+    "buildName": "Attack",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Attack Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700005",
+    "buildName": "Critical Strike",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700005",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700005",
+    "buildName": "Pen combos",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Queen of Prism",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Mage]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set",
+      "Speed Set",
+      "Attack Set",
+      "Augmentation Set",
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700005",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Memento Mori",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700037",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2700037",
+    "buildName": "Swift Counter",
+    "weapons": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Gorgon's Wrath [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Defender]",
+        "mainStats": [
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Coward's Treasure",
+        "mainStats": [
+          "PEN%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Unholy Exsultet",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Gorgon's Vanity [Defender]",
+        "mainStats": [
+          "SPD"
+        ]
+      }
+    ],
+    "sets": [
+      "Counterattack Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "HP",
+      "CHC",
+      "CHD",
+      "DMG UP%",
+      "DEF"
+    ]
+  },
+  {
+    "characterId": "2700043",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Noblewoman's Guile",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      },
+      {
+        "name": "Thumping Odyssey",
+        "mainStats": [
+          "ATK%",
+          "HP%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Dies Irae",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Search and Destroy",
+        "mainStats": [
+          "SPD"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Mage]",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Spirit of Unification",
+        "mainStats": [
+          "EFF"
+        ]
+      },
+      {
+        "name": "Steel Necklace",
+        "mainStats": [
+          "EFF"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "SPD",
+      "EFF",
+      "CHC",
+      "ATK",
+      "CHD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700056",
+    "buildName": "CritDmg",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Critical Strike Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700056",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700056",
+    "buildName": "Immu Aug",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Augmentation Set",
+      "Immunity Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700056",
+    "buildName": "Speed",
+    "weapons": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStats": [
+          "ATK%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Physical Exorcism",
+        "mainStats": [
+          "PEN%"
+        ]
+      }
+    ],
+    "sets": [
+      "Speed Set"
+    ],
+    "substatPrio": [
+      "ATK",
+      "CHC",
+      "CHD",
+      "SPD",
+      "DMG UP%"
+    ]
+  },
+  {
+    "characterId": "2700070",
+    "buildName": "Pen Def",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set",
+      "Defense Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "DEF",
+      "CHD",
+      "SPD",
+      "DMG UP%",
+      "DMG RED%",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2700070",
+    "buildName": "Pen",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Penetration Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "DEF",
+      "CHD",
+      "SPD",
+      "DMG UP%",
+      "DMG RED%",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2700070",
+    "buildName": "Def",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Defense Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "DEF",
+      "CHD",
+      "SPD",
+      "DMG UP%",
+      "DMG RED%",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2700070",
+    "buildName": "Patience",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Patience Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "DEF",
+      "CHD",
+      "SPD",
+      "DMG UP%",
+      "DMG RED%",
+      "HP"
+    ]
+  },
+  {
+    "characterId": "2700070",
+    "buildName": "Immu Mix (PvP)",
+    "weapons": [
+      {
+        "name": "Snow-white Embrace",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Violent Sledgehammer",
+        "mainStats": [
+          "DEF%"
+        ]
+      },
+      {
+        "name": "Briareos's Recklessness [Striker]",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "amulets": [
+      {
+        "name": "Death's Hold",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Briareos's Ambition [Striker]",
+        "mainStats": [
+          "PEN%"
+        ]
+      },
+      {
+        "name": "Clock Up",
+        "mainStats": [
+          "DEF%"
+        ]
+      }
+    ],
+    "sets": [
+      "Immunity Set",
+      "Defense Set",
+      "Speed Set",
+      "Penetration Set",
+      "Swiftness Set"
+    ],
+    "substatPrio": [
+      "CHC",
+      "DEF",
+      "CHD",
+      "SPD",
+      "DMG UP%",
+      "DMG RED%",
+      "HP"
+    ]
+  }
+]

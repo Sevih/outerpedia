@@ -1,0 +1,80 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "PvP : {I-T/Assassin's Charm}",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "CritDmg": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      "chd4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "PvP : {I-T/Assassin's Charm}",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Pen": {
+    "Weapon": [
+      {
+        "name": "Thumping Odyssey",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Spirit of Unification",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Memento Mori",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Set": [
+      "p4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "PvP : {I-T/Assassin's Charm}",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}

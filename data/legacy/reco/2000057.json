@@ -1,0 +1,122 @@
+{
+  "Support Speed": {
+    "Weapon": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$speedHPEff",
+    "Note": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "Support Swift Immu": {
+    "Weapon": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStat": "HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "HP%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "i2sw2"
+    ],
+    "SubstatPrio": "$speedHPEff",
+    "Note": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+    "Talisman": [
+      "$noCritCp"
+    ]
+  },
+  "SubDPS Speed": {
+    "Weapon": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+    "Talisman": [
+      "$CPplusVang"
+    ]
+  },
+  "SubDPS Swift Immu": {
+    "Weapon": [
+      {
+        "name": "Talisman of Animosities",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Force Field Generator",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Coward's Treasure",
+        "mainStat": "PEN%"
+      },
+      {
+        "name": "Chalice of Longing",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "i2sw2"
+    ],
+    "SubstatPrio": "$dps",
+    "Note": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+    "Talisman": [
+      "$CPplusVang"
+    ]
+  }
+}

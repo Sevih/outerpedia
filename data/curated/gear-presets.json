@@ -1,0 +1,419 @@
+{
+  "talismans": {
+    "aem": ["10008", "10001", "10009"],
+    "aemrs": ["10008", "10001", "10009", "10003", "10004"],
+    "aer": ["10008", "10001", "10003"],
+    "aerv": ["10008", "10001", "10003", "10010"],
+    "aesv": ["10008", "10001", "10004", "10010"],
+    "aet": ["10008", "10001", "10007"],
+    "am": ["10008", "10009"],
+    "ats": ["10008", "10007", "10004"],
+    "CPdps": ["10004", "10003", "10001"],
+    "CPplusAssa": ["10008", "10004", "10003", "10001"],
+    "CPplusVang": ["10010", "10004", "10003", "10001"],
+    "critAP": ["10001", "10009", "10003"],
+    "elemcritAP": ["10004", "10009", "10003"],
+    "em": ["10001", "10009"],
+    "emrsv": ["10001", "10009", "10003", "10004", "10010"],
+    "emruv": ["10001", "10009", "10003", "10011", "10010"],
+    "emrv": ["10001", "10009", "10003", "10010"],
+    "emv": ["10001", "10009", "10010"],
+    "erst": ["10001", "10003", "10004", "10007"],
+    "erv": ["10001", "10003", "10010"],
+    "esv": ["10001", "10004", "10010"],
+    "ev": ["10001", "10010"],
+    "mrs": ["10009", "10003", "10004"],
+    "mrsv": ["10009", "10003", "10004", "10010"],
+    "msv": ["10009", "10004", "10010"],
+    "mv": ["10009", "10010"],
+    "noCritCp": ["10004", "10010"],
+    "rs": ["10003", "10004"],
+    "rsv": ["10003", "10004", "10010"],
+    "ru": ["10003", "10011"],
+    "s": ["10004"],
+    "sme": ["10009", "10004", "10001"],
+    "sstv": ["10004", "10006", "10010"],
+    "st": ["10006"],
+    "v": ["10010"]
+  },
+  "sets": {
+    "a2ag2": [
+      {
+        "set": "1",
+        "count": 2
+      },
+      {
+        "set": "21",
+        "count": 2
+      }
+    ],
+    "a2chd2": [
+      {
+        "set": "1",
+        "count": 2
+      },
+      {
+        "set": "12",
+        "count": 2
+      }
+    ],
+    "a2p2": [
+      {
+        "set": "1",
+        "count": 2
+      },
+      {
+        "set": "11",
+        "count": 2
+      }
+    ],
+    "a4": [
+      {
+        "set": "1",
+        "count": 4
+      }
+    ],
+    "ag2def2": [
+      {
+        "set": "21",
+        "count": 2
+      },
+      {
+        "set": "2",
+        "count": 2
+      }
+    ],
+    "ag2i2": [
+      {
+        "set": "21",
+        "count": 2
+      },
+      {
+        "set": "18",
+        "count": 2
+      }
+    ],
+    "ag2sw2": [
+      {
+        "set": "21",
+        "count": 2
+      },
+      {
+        "set": "19",
+        "count": 2
+      }
+    ],
+    "chd4": [
+      {
+        "set": "12",
+        "count": 4
+      }
+    ],
+    "ct2hp2": [
+      {
+        "set": "7",
+        "count": 2
+      },
+      {
+        "set": "3",
+        "count": 2
+      }
+    ],
+    "ct2sw2": [
+      {
+        "set": "7",
+        "count": 2
+      },
+      {
+        "set": "19",
+        "count": 2
+      }
+    ],
+    "ct4": [
+      {
+        "set": "7",
+        "count": 4
+      }
+    ],
+    "def2sw2": [
+      {
+        "set": "19",
+        "count": 2
+      },
+      {
+        "set": "2",
+        "count": 2
+      }
+    ],
+    "def4": [
+      {
+        "set": "2",
+        "count": 4
+      }
+    ],
+    "eff2sw2": [
+      {
+        "set": "5",
+        "count": 2
+      },
+      {
+        "set": "19",
+        "count": 2
+      }
+    ],
+    "eff4": [
+      {
+        "set": "5",
+        "count": 4
+      }
+    ],
+    "hp2ag2": [
+      {
+        "set": "3",
+        "count": 2
+      },
+      {
+        "set": "21",
+        "count": 2
+      }
+    ],
+    "hp2def2": [
+      {
+        "set": "3",
+        "count": 2
+      },
+      {
+        "set": "2",
+        "count": 2
+      }
+    ],
+    "hp2i2": [
+      {
+        "set": "3",
+        "count": 2
+      },
+      {
+        "set": "18",
+        "count": 2
+      }
+    ],
+    "hp2sw2": [
+      {
+        "set": "3",
+        "count": 2
+      },
+      {
+        "set": "19",
+        "count": 2
+      }
+    ],
+    "hp4": [
+      {
+        "set": "3",
+        "count": 4
+      }
+    ],
+    "i2a2": [
+      {
+        "set": "18",
+        "count": 2
+      },
+      {
+        "set": "1",
+        "count": 2
+      }
+    ],
+    "i2ct2": [
+      {
+        "set": "18",
+        "count": 2
+      },
+      {
+        "set": "7",
+        "count": 2
+      }
+    ],
+    "i2def2": [
+      {
+        "set": "18",
+        "count": 2
+      },
+      {
+        "set": "2",
+        "count": 2
+      }
+    ],
+    "i2sw2": [
+      {
+        "set": "18",
+        "count": 2
+      },
+      {
+        "set": "19",
+        "count": 2
+      }
+    ],
+    "i4": [
+      {
+        "set": "18",
+        "count": 4
+      }
+    ],
+    "p2a2": [
+      {
+        "set": "11",
+        "count": 2
+      },
+      {
+        "set": "1",
+        "count": 2
+      }
+    ],
+    "p2ag2": [
+      {
+        "set": "11",
+        "count": 2
+      },
+      {
+        "set": "21",
+        "count": 2
+      }
+    ],
+    "p2chd2": [
+      {
+        "set": "11",
+        "count": 2
+      },
+      {
+        "set": "12",
+        "count": 2
+      }
+    ],
+    "p2def2": [
+      {
+        "set": "11",
+        "count": 2
+      },
+      {
+        "set": "2",
+        "count": 2
+      }
+    ],
+    "p2hp2": [
+      {
+        "set": "11",
+        "count": 2
+      },
+      {
+        "set": "3",
+        "count": 2
+      }
+    ],
+    "p2i2": [
+      {
+        "set": "18",
+        "count": 2
+      },
+      {
+        "set": "11",
+        "count": 2
+      }
+    ],
+    "p2s2": [
+      {
+        "set": "11",
+        "count": 2
+      },
+      {
+        "set": "13",
+        "count": 2
+      }
+    ],
+    "p2sw2": [
+      {
+        "set": "11",
+        "count": 2
+      },
+      {
+        "set": "19",
+        "count": 2
+      }
+    ],
+    "p4": [
+      {
+        "set": "11",
+        "count": 4
+      }
+    ],
+    "pat4": [
+      {
+        "set": "16",
+        "count": 4
+      }
+    ],
+    "r4": [
+      {
+        "set": "15",
+        "count": 4
+      }
+    ],
+    "s2i2": [
+      {
+        "set": "18",
+        "count": 2
+      },
+      {
+        "set": "13",
+        "count": 2
+      }
+    ],
+    "s2sw2": [
+      {
+        "set": "13",
+        "count": 2
+      },
+      {
+        "set": "19",
+        "count": 2
+      }
+    ],
+    "s4": [
+      {
+        "set": "13",
+        "count": 4
+      }
+    ],
+    "sw2a2": [
+      {
+        "set": "1",
+        "count": 2
+      },
+      {
+        "set": "19",
+        "count": 2
+      }
+    ]
+  },
+  "substats": {
+    "critAtkspd": "CHC>ATK>SPD>CHD>DMG UP%",
+    "dps": "ATK>CHC>CHD>SPD>DMG UP%",
+    "dps2": "ATK>CHC>SPD>CHD>DMG UP%",
+    "dpsDef": "DEF>CHC>CHD>SPD>DMG UP%",
+    "dpsEFF": "SPD>EFF>CHC>ATK>CHD>DMG UP%",
+    "dpsHP": "HP>CHC>CHD>SPD>DMG UP%",
+    "dpsHPEff": "HP>CHC>CHD>EFF>SPD>DMG UP%",
+    "heal": "SPD>HP>DEF=DMG RED%=RES",
+    "sdps": "SPD>ATK>CHC>CHD>DMG UP%",
+    "speedEff": "SPD>EFF",
+    "speedHPEff": "SPD>HP>EFF",
+    "subDpsCrit": "SPD>CHC>ATK>CHD>DMG UP%",
+    "tankDef": "SPD>DEF>HP>DMG RED%=CDMG RED%>",
+    "tankDpsDef": "SPD>DEF>CHC>CHD>DMG UP%>HP",
+    "tankDpsDefEFF": "SPD>DEF>CHC=EFF>CHD>DMG UP%>HP",
+    "tankDpsHP": "SPD>HP>CHC>CHD>DMG UP%>DEF",
+    "tankDpsHPEFF": "SPD>HP>CHC=EFF>CHD>DMG UP%>DEF",
+    "tankHP": "SPD>HP>DEF>DMG RED%=CDMG RED%>",
+    "tankSDpsDef": "SPD>DEF>HP>CHC>CHD>DMG RED%",
+    "tankSDpsHP": "SPD>HP>DEF>CHC>CHD>DMG RED%"
+  }
+}

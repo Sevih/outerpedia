@@ -1,0 +1,70 @@
+{
+  "Speed PvE": {
+    "Weapon": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%/HP%"
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStat": "ATK%/HP%"
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStat": "ATK%/HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Absolute Music",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dpsEFF",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  },
+  "Speed PvP": {
+    "Weapon": [
+      {
+        "name": "Briareos's Recklessness [Ranger]",
+        "mainStat": "ATK%/HP%"
+      },
+      {
+        "name": "Gorgon's Wrath [Ranger]",
+        "mainStat": "ATK%/HP%"
+      },
+      {
+        "name": "Meteor Mashers",
+        "mainStat": "ATK%/HP%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Combination Simulator",
+        "mainStat": "SPD"
+      },
+      {
+        "name": "Briareos's Ambition [Ranger]",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$dpsEFF",
+    "Note": "",
+    "Talisman": [
+      "$am"
+    ]
+  }
+}

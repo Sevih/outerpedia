@@ -1,0 +1,9075 @@
+{
+  "1001": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2001"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|normal"
+  },
+  "1002": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2101"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|normal"
+  },
+  "1003": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2201"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|normal"
+  },
+  "1004": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2002"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|magic"
+  },
+  "1005": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2102"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|magic"
+  },
+  "1006": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2202"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|magic"
+  },
+  "1007": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2003"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|rare"
+  },
+  "1008": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2103"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|rare"
+  },
+  "1009": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2203"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|rare"
+  },
+  "1010": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2004"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1011": {
+    "name": {
+      "en": "Coward's Treasure",
+      "jp": "卑怯者の宝物",
+      "kr": "비겁한 자의 보물",
+      "zh": "卑劣者的宝物"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2004"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1012": {
+    "name": {
+      "en": "Burning Soul",
+      "jp": "熱き魂",
+      "kr": "뜨거운 영혼",
+      "zh": "炙热灵魂"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2004"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1013": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2004"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1014": {
+    "name": {
+      "en": "Overdrive",
+      "jp": "オーバードライブ",
+      "kr": "오버 드라이브",
+      "zh": "极速热血"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2004"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1015": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2104"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1016": {
+    "name": {
+      "en": "Blue-Gems White Ring",
+      "jp": "ブルーアイズ・ホワイトリング",
+      "kr": "블루 아이즈 화이트 링",
+      "zh": "蓝石皎环"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2104"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1017": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2104"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1018": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2104"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1019": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2104"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1020": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2204"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1021": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2204"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1022": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2204"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1023": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2204"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1024": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2204"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1025": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2301"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|normal"
+  },
+  "1026": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2401"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|normal"
+  },
+  "1027": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2302"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|magic"
+  },
+  "1028": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2402"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|magic"
+  },
+  "1029": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2303"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|rare"
+  },
+  "1030": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2403"],
+    "sub": "101",
+    "passives": [],
+    "breakLimit": "1|rare"
+  },
+  "1031": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2304"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1032": {
+    "name": {
+      "en": "Fool's Dawn",
+      "jp": "夜明けのフォルド",
+      "kr": "풀드의 새벽",
+      "zh": "弗特的黎明"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2304"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1033": {
+    "name": {
+      "en": "Starlight Road",
+      "jp": "スターライト・ロード",
+      "kr": "스타라이트 로드",
+      "zh": "星光大道"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2304"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1034": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2304"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1035": {
+    "name": {
+      "en": "Physical Exorcism",
+      "jp": "フィジカルエクソシズム",
+      "kr": "피지컬 엑소시즘",
+      "zh": "除灵案件"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2304"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1036": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2404"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1037": {
+    "name": {
+      "en": "Unholy Exsultet",
+      "jp": "祝福なき典礼玉",
+      "kr": "언홀리 엑술떼",
+      "zh": "罪恶逾越颂"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2404"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1038": {
+    "name": {
+      "en": "Obsidian Oath",
+      "jp": "ダークヘルパー",
+      "kr": "어둠의 헌신",
+      "zh": "黑暗献身"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2404"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1039": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2404"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1040": {
+    "name": {
+      "en": "Absolute Music",
+      "jp": "絶対音楽",
+      "kr": "앱솔루트 뮤직",
+      "zh": "无标题音乐"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Accessary_01_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2404"],
+    "sub": "101",
+    "passives": [
+      {
+        "id": "2025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "1|unique"
+  },
+  "1151": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2011"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|normal"
+  },
+  "1152": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2111"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|normal"
+  },
+  "1153": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2211"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|normal"
+  },
+  "1154": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2012"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|magic"
+  },
+  "1155": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2112"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|magic"
+  },
+  "1156": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2212"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|magic"
+  },
+  "1157": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2013"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|rare"
+  },
+  "1158": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2113"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|rare"
+  },
+  "1159": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2213"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|rare"
+  },
+  "1160": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2014"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1161": {
+    "name": {
+      "en": "Coward's Treasure",
+      "jp": "卑怯者の宝物",
+      "kr": "비겁한 자의 보물",
+      "zh": "卑劣者的宝物"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2014"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1162": {
+    "name": {
+      "en": "Burning Soul",
+      "jp": "熱き魂",
+      "kr": "뜨거운 영혼",
+      "zh": "炙热灵魂"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2014"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1163": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2014"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1164": {
+    "name": {
+      "en": "Overdrive",
+      "jp": "オーバードライブ",
+      "kr": "오버 드라이브",
+      "zh": "极速热血"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2014"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1165": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2114"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1166": {
+    "name": {
+      "en": "Chalice of Longing",
+      "jp": "渇望の杯",
+      "kr": "갈망의 잔",
+      "zh": "渴望之杯"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2114"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1167": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2114"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1168": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2114"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1169": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2114"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1170": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2214"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1171": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2214"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1172": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2214"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1173": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2214"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1174": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2214"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1175": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2311"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|normal"
+  },
+  "1176": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2411"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|normal"
+  },
+  "1177": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2312"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|magic"
+  },
+  "1178": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2412"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|magic"
+  },
+  "1179": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2313"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|rare"
+  },
+  "1180": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2413"],
+    "sub": "102",
+    "passives": [],
+    "breakLimit": "2|rare"
+  },
+  "1181": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2314"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1182": {
+    "name": {
+      "en": "Fool's Dawn",
+      "jp": "夜明けのフォルド",
+      "kr": "풀드의 새벽",
+      "zh": "弗特的黎明"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2314"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1183": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2314"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1184": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2314"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1185": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Priest",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2314"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1186": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2414"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1187": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2414"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1188": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2414"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1189": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2414"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1190": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Accessary_02_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2414"],
+    "sub": "102",
+    "passives": [
+      {
+        "id": "2025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "2|unique"
+  },
+  "1301": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2021"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|normal"
+  },
+  "1302": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2121"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|normal"
+  },
+  "1303": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2221"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|normal"
+  },
+  "1304": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2022"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|magic"
+  },
+  "1305": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2122"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|magic"
+  },
+  "1306": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2222"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|magic"
+  },
+  "1307": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2023"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|rare"
+  },
+  "1308": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2123"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|rare"
+  },
+  "1309": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2223"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|rare"
+  },
+  "1310": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2024"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1311": {
+    "name": {
+      "en": "Coward's Treasure",
+      "jp": "卑怯者の宝物",
+      "kr": "비겁한 자의 보물",
+      "zh": "卑劣者的宝物"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2024"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1312": {
+    "name": {
+      "en": "Burning Soul",
+      "jp": "熱き魂",
+      "kr": "뜨거운 영혼",
+      "zh": "炙热灵魂"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2024"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1313": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2024"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1314": {
+    "name": {
+      "en": "Overdrive",
+      "jp": "オーバードライブ",
+      "kr": "오버 드라이브",
+      "zh": "极速热血"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2024"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1315": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2124"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1316": {
+    "name": {
+      "en": "Chalice of Longing",
+      "jp": "渇望の杯",
+      "kr": "갈망의 잔",
+      "zh": "渴望之杯"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2124"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1317": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2124"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1318": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2124"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1319": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2124"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1320": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2224"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1321": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2224"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1322": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2224"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1323": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2224"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1324": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2224"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1325": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2321"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|normal"
+  },
+  "1326": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2421"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|normal"
+  },
+  "1327": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2322"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|magic"
+  },
+  "1328": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2422"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|magic"
+  },
+  "1329": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2323"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|rare"
+  },
+  "1330": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2423"],
+    "sub": "103",
+    "passives": [],
+    "breakLimit": "3|rare"
+  },
+  "1331": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2324"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1332": {
+    "name": {
+      "en": "Fool's Dawn",
+      "jp": "夜明けのフォルド",
+      "kr": "풀드의 새벽",
+      "zh": "弗特的黎明"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2324"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1333": {
+    "name": {
+      "en": "Starlight Road",
+      "jp": "スターライト・ロード",
+      "kr": "스타라이트 로드",
+      "zh": "星光大道"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2324"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1334": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2324"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1335": {
+    "name": {
+      "en": "Physical Exorcism",
+      "jp": "フィジカルエクソシズム",
+      "kr": "피지컬 엑소시즘",
+      "zh": "除灵案件"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2324"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1336": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2424"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1337": {
+    "name": {
+      "en": "Unholy Exsultet",
+      "jp": "祝福なき典礼玉",
+      "kr": "언홀리 엑술떼",
+      "zh": "罪恶逾越颂"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2424"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1338": {
+    "name": {
+      "en": "Obsidian Oath",
+      "jp": "ダークヘルパー",
+      "kr": "어둠의 헌신",
+      "zh": "黑暗献身"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2424"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1339": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2424"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1340": {
+    "name": {
+      "en": "Absolute Music",
+      "jp": "絶対音楽",
+      "kr": "앱솔루트 뮤직",
+      "zh": "无标题音乐"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Accessary_03_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2424"],
+    "sub": "103",
+    "passives": [
+      {
+        "id": "2025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "3|unique"
+  },
+  "1451": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2031"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|normal"
+  },
+  "1452": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2131"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|normal"
+  },
+  "1453": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2231"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|normal"
+  },
+  "1454": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2032"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|magic"
+  },
+  "1455": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2132"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|magic"
+  },
+  "1456": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2232"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|magic"
+  },
+  "1457": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2033"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|rare"
+  },
+  "1458": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2133"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|rare"
+  },
+  "1459": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2233"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|rare"
+  },
+  "1460": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2034"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1461": {
+    "name": {
+      "en": "Coward's Treasure",
+      "jp": "卑怯者の宝物",
+      "kr": "비겁한 자의 보물",
+      "zh": "卑劣者的宝物"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2034"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1462": {
+    "name": {
+      "en": "Burning Soul",
+      "jp": "熱き魂",
+      "kr": "뜨거운 영혼",
+      "zh": "炙热灵魂"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2034"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1463": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2034"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1464": {
+    "name": {
+      "en": "Overdrive",
+      "jp": "オーバードライブ",
+      "kr": "오버 드라이브",
+      "zh": "极速热血"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2034"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1465": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2134"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1466": {
+    "name": {
+      "en": "Chalice of Longing",
+      "jp": "渇望の杯",
+      "kr": "갈망의 잔",
+      "zh": "渴望之杯"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2134"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1467": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2134"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1468": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2134"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1469": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2134"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1470": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2234"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1471": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2234"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1472": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2234"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1473": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2234"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1474": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2234"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1475": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2331"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|normal"
+  },
+  "1476": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2431"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|normal"
+  },
+  "1477": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2332"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|magic"
+  },
+  "1478": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2432"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|magic"
+  },
+  "1479": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2333"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|rare"
+  },
+  "1480": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2433"],
+    "sub": "104",
+    "passives": [],
+    "breakLimit": "4|rare"
+  },
+  "1481": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2334"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1482": {
+    "name": {
+      "en": "Fool's Dawn",
+      "jp": "夜明けのフォルド",
+      "kr": "풀드의 새벽",
+      "zh": "弗特的黎明"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2334"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1483": {
+    "name": {
+      "en": "Starlight Road",
+      "jp": "スターライト・ロード",
+      "kr": "스타라이트 로드",
+      "zh": "星光大道"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2334"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1484": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2334"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1485": {
+    "name": {
+      "en": "Physical Exorcism",
+      "jp": "フィジカルエクソシズム",
+      "kr": "피지컬 엑소시즘",
+      "zh": "除灵案件"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2334"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1486": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2434"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1487": {
+    "name": {
+      "en": "Unholy Exsultet",
+      "jp": "祝福なき典礼玉",
+      "kr": "언홀리 엑술떼",
+      "zh": "罪恶逾越颂"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2434"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1488": {
+    "name": {
+      "en": "Obsidian Oath",
+      "jp": "ダークヘルパー",
+      "kr": "어둠의 헌신",
+      "zh": "黑暗献身"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2434"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1489": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2434"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1490": {
+    "name": {
+      "en": "Absolute Music",
+      "jp": "絶対音楽",
+      "kr": "앱솔루트 뮤직",
+      "zh": "无标题音乐"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2434"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1491": {
+    "name": {
+      "en": "Grand Tour",
+      "jp": "グランドツアー",
+      "kr": "그랜드 투어",
+      "zh": "盛大旅行"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Accessary_04_Product",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2204"],
+    "sub": "104",
+    "passives": [
+      {
+        "id": "2026",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "4|unique"
+  },
+  "1601": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2041"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|normal"
+  },
+  "1602": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2141"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|normal"
+  },
+  "1603": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2241"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|normal"
+  },
+  "1604": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2042"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|magic"
+  },
+  "1605": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2142"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|magic"
+  },
+  "1606": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2242"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|magic"
+  },
+  "1607": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2043"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|rare"
+  },
+  "1608": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2143"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|rare"
+  },
+  "1609": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2243"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|rare"
+  },
+  "1610": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2044"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1611": {
+    "name": {
+      "en": "Coward's Treasure",
+      "jp": "卑怯者の宝物",
+      "kr": "비겁한 자의 보물",
+      "zh": "卑劣者的宝物"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2044"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1612": {
+    "name": {
+      "en": "Burning Soul",
+      "jp": "熱き魂",
+      "kr": "뜨거운 영혼",
+      "zh": "炙热灵魂"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2044"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1613": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2044"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1614": {
+    "name": {
+      "en": "Overdrive",
+      "jp": "オーバードライブ",
+      "kr": "오버 드라이브",
+      "zh": "极速热血"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2044"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1615": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2144"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1616": {
+    "name": {
+      "en": "Chalice of Longing",
+      "jp": "渇望の杯",
+      "kr": "갈망의 잔",
+      "zh": "渴望之杯"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2144"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1617": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2144"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1618": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2144"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1619": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2144"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1620": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2244"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1621": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2244"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1622": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2244"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1623": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2244"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1624": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2244"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1625": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2341"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|normal"
+  },
+  "1626": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2441"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|normal"
+  },
+  "1627": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2342"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|magic"
+  },
+  "1628": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2442"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|magic"
+  },
+  "1629": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2343"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|rare"
+  },
+  "1630": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2443"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|rare"
+  },
+  "1631": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1632": {
+    "name": {
+      "en": "Fool's Dawn",
+      "jp": "夜明けのフォルド",
+      "kr": "풀드의 새벽",
+      "zh": "弗特的黎明"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1633": {
+    "name": {
+      "en": "Starlight Road",
+      "jp": "スターライト・ロード",
+      "kr": "스타라이트 로드",
+      "zh": "星光大道"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1634": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1635": {
+    "name": {
+      "en": "Physical Exorcism",
+      "jp": "フィジカルエクソシズム",
+      "kr": "피지컬 엑소시즘",
+      "zh": "除灵案件"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1636": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2444"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1637": {
+    "name": {
+      "en": "Unholy Exsultet",
+      "jp": "祝福なき典礼玉",
+      "kr": "언홀리 엑술떼",
+      "zh": "罪恶逾越颂"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2444"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1638": {
+    "name": {
+      "en": "Obsidian Oath",
+      "jp": "ダークヘルパー",
+      "kr": "어둠의 헌신",
+      "zh": "黑暗献身"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2444"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1639": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2444"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1640": {
+    "name": {
+      "en": "Absolute Music",
+      "jp": "絶対音楽",
+      "kr": "앱솔루트 뮤직",
+      "zh": "无标题音乐"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2444"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "2025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1641": {
+    "name": {
+      "en": "Operating System",
+      "jp": "オペレーティングシステム",
+      "kr": "오퍼레이팅 시스템",
+      "zh": "操作系统"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2044"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "4007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1642": {
+    "name": {
+      "en": "Megaphone of Encouragement",
+      "jp": "激励のメガホン",
+      "kr": "독려용 메가폰",
+      "zh": "鼓励用扩音器"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2044"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "4008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1643": {
+    "name": {
+      "en": "Eternal Glacier",
+      "jp": "永遠の氷河",
+      "kr": "영원의 빙하",
+      "zh": "永恒冰河"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2044"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "4011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1644": {
+    "name": {
+      "en": "Innocent Play",
+      "jp": "無邪気な遊び",
+      "kr": "악의 없는 놀이",
+      "zh": "无恶意游戏"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2044"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "4012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1645": {
+    "name": {
+      "en": "Church of Nepos Scripture",
+      "jp": "ネフォス教の経典",
+      "kr": "네포스교 경전",
+      "zh": "内泊斯教经书"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2344"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1646": {
+    "name": {
+      "en": "Princess's Resolve",
+      "jp": "王女の努力",
+      "kr": "왕녀의 노력",
+      "zh": "王女的努力"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2444"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1647": {
+    "name": {
+      "en": "Hierarch's Resolve",
+      "jp": "神官の努力",
+      "kr": "신관의 노력",
+      "zh": "神官的努力"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2344"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1648": {
+    "name": {
+      "en": "Killing Stone Fragment",
+      "jp": "殺生石の欠片",
+      "kr": "살생석의 조각",
+      "zh": "杀生石碎片"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "4019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1649": {
+    "name": {
+      "en": "Flashy Golden Cards",
+      "jp": "黄金のカードデッキ",
+      "kr": "황금 카드뭉치",
+      "zh": "黄金卡组"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "4020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1650": {
+    "name": {
+      "en": "Kirisame",
+      "jp": "キリサメ",
+      "kr": "키리사메",
+      "zh": "雾雨"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2144"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "4025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1651": {
+    "name": {
+      "en": "Ikazuchi",
+      "jp": "イカヅチ",
+      "kr": "이카즈치",
+      "zh": "雷"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "4026",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1652": {
+    "name": {
+      "en": "Expansion of Archmonides",
+      "jp": "アクモニデスの膨張",
+      "kr": "아크모니데스의 팽창",
+      "zh": "阿克摩涅迪斯的膨胀"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_02",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [
+      {
+        "id": "4028",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1653": {
+    "name": {
+      "en": "Fierce Frost Talisman",
+      "jp": "猛烈な霜の護符",
+      "kr": "맹렬한 서리 호부",
+      "zh": "猛烈冰霜护符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_04_Product",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2244"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4029",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1654": {
+    "name": {
+      "en": "Sturdy Frost Talisman",
+      "jp": "堅固な霜の護符",
+      "kr": "견고한 서리 호부",
+      "zh": "坚韧冰霜护符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_04_Product",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2344"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4030",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1655": {
+    "name": {
+      "en": "Agile Frost Talisman",
+      "jp": "機敏な霜の護符",
+      "kr": "기민한 서리 호부",
+      "zh": "敏捷冰霜护符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_04_Product",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2144"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1656": {
+    "name": {
+      "en": "Clever Frost Talisman",
+      "jp": "鋭敏な霜の護符",
+      "kr": "영민한 서리 호부",
+      "zh": "睿智冰霜护符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_04_Product",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2044"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4032",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1657": {
+    "name": {
+      "en": "Gentle Frost Talisman",
+      "jp": "温厚な霜の護符",
+      "kr": "온유한 서리 호부",
+      "zh": "温柔冰霜护符"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_04_Product",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2444"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4033",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "5|unique"
+  },
+  "1658": {
+    "name": {
+      "en": "Hunter Amulet Ver. 1.0",
+      "jp": "ハンターアミュレット Ver.1.0",
+      "kr": "헌터 아뮬렛 Ver 1.0",
+      "zh": "猎人护符 Ver.1.0"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2456"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|unique"
+  },
+  "1660": {
+    "name": {
+      "en": "Hunter Amulet Ver. 2.0",
+      "jp": "ハンターアミュレット Ver.2.0",
+      "kr": "헌터 아뮬렛 Ver 2.0",
+      "zh": "猎人护符 Ver.2.0"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2344"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|unique"
+  },
+  "1661": {
+    "name": {
+      "en": "Ether Amulet",
+      "jp": "エーテルアミュレット",
+      "kr": "에테르 아뮬렛",
+      "zh": "以太守护"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Accessary_05",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2144"],
+    "sub": "105",
+    "passives": [],
+    "breakLimit": "5|unique"
+  },
+  "1662": {
+    "name": {
+      "en": "Azure Memory",
+      "jp": "蒼の記憶",
+      "kr": "쪽빛 추억",
+      "zh": "靛藍回憶"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4044",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1663": {
+    "name": {
+      "en": "Tome of Perish-and-Rebirth",
+      "jp": "滅びと新生の書",
+      "kr": "구멸신생의 서",
+      "zh": "毀滅新生之書"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4045",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1751": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2051"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|normal"
+  },
+  "1752": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2151"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|normal"
+  },
+  "1753": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2251"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|normal"
+  },
+  "1754": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2052"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|magic"
+  },
+  "1755": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2152"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|magic"
+  },
+  "1756": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2252"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|magic"
+  },
+  "1757": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2053"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|rare"
+  },
+  "1758": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2153"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|rare"
+  },
+  "1759": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2253"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|rare"
+  },
+  "1760": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": true,
+    "classLimit": "striker",
+    "main": ["2054"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1761": {
+    "name": {
+      "en": "Coward's Treasure",
+      "jp": "卑怯者の宝物",
+      "kr": "비겁한 자의 보물",
+      "zh": "卑劣者的宝物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["2054"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1762": {
+    "name": {
+      "en": "Burning Soul",
+      "jp": "熱き魂",
+      "kr": "뜨거운 영혼",
+      "zh": "炙热灵魂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["2054"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1763": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["2054"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1764": {
+    "name": {
+      "en": "Overdrive",
+      "jp": "オーバードライブ",
+      "kr": "오버 드라이브",
+      "zh": "极速热血"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": true,
+    "classLimit": "healer",
+    "main": ["2054"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1765": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": true,
+    "classLimit": "striker",
+    "main": ["2154"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1766": {
+    "name": {
+      "en": "Chalice of Longing",
+      "jp": "渇望の杯",
+      "kr": "갈망의 잔",
+      "zh": "渴望之杯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["2154"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1767": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["2154"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1768": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["2154"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1769": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": true,
+    "classLimit": "healer",
+    "main": ["2154"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1770": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": true,
+    "classLimit": "striker",
+    "main": ["2254"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1771": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["2254"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1772": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["2254"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1773": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["2254"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1774": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": true,
+    "classLimit": "healer",
+    "main": ["2254"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1775": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2351"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|normal"
+  },
+  "1776": {
+    "name": {
+      "en": "Ordinary Necklace",
+      "jp": "普通の首飾り",
+      "kr": "흔한 목걸이",
+      "zh": "常见的项链"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2451"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|normal"
+  },
+  "1777": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2352"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|magic"
+  },
+  "1778": {
+    "name": {
+      "en": "Fine Necklace",
+      "jp": "高級な首飾り",
+      "kr": "고급 목걸이",
+      "zh": "高级项链"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2452"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|magic"
+  },
+  "1779": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2353"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|rare"
+  },
+  "1780": {
+    "name": {
+      "en": "Steel Necklace",
+      "jp": "鋼鉄の首飾り",
+      "kr": "강철 목걸이",
+      "zh": "钢铁项链"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2453"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|rare"
+  },
+  "1781": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": true,
+    "classLimit": "striker",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1782": {
+    "name": {
+      "en": "Fool's Dawn",
+      "jp": "夜明けのフォルド",
+      "kr": "풀드의 새벽",
+      "zh": "弗特的黎明"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1783": {
+    "name": {
+      "en": "Starlight Road",
+      "jp": "スターライト・ロード",
+      "kr": "스타라이트 로드",
+      "zh": "星光大道"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": true,
+    "classLimit": "healer",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1784": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1785": {
+    "name": {
+      "en": "Physical Exorcism",
+      "jp": "フィジカルエクソシズム",
+      "kr": "피지컬 엑소시즘",
+      "zh": "除灵案件"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1786": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": true,
+    "classLimit": "striker",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1787": {
+    "name": {
+      "en": "Unholy Exsultet",
+      "jp": "祝福なき典礼玉",
+      "kr": "언홀리 엑술떼",
+      "zh": "罪恶逾越颂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": true,
+    "classLimit": "defender",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1788": {
+    "name": {
+      "en": "Obsidian Oath",
+      "jp": "ダークヘルパー",
+      "kr": "어둠의 헌신",
+      "zh": "黑暗献身"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": true,
+    "classLimit": "healer",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1789": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": true,
+    "classLimit": "mage",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1790": {
+    "name": {
+      "en": "Absolute Music",
+      "jp": "絶対音楽",
+      "kr": "앱솔루트 뮤직",
+      "zh": "无标题音乐"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": true,
+    "classLimit": "ranger",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1791": {
+    "name": {
+      "en": "Ether Amulet",
+      "jp": "エーテルアミュレット",
+      "kr": "에테르 아뮬렛",
+      "zh": "以太守护"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2455"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|unique"
+  },
+  "1792": {
+    "name": {
+      "en": "Adventurer's Necklace",
+      "jp": "冒険者の首飾り",
+      "kr": "모험가의 목걸이",
+      "zh": "冒险家项链"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2026",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1793": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Accessary_01",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2029",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1794": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2030",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1795": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1796": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_01",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2032",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1797": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest_IR_01",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2033",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1798": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Accessary_02",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1799": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_02",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1800": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_02",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2036",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1801": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "1802": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest_IR_02",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2038",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93001": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93002": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11014"],
+    "sub": "11237",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93003": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11012"],
+    "sub": "11239",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93011": {
+    "name": {
+      "en": "Coward's Treasure",
+      "jp": "卑怯者の宝物",
+      "kr": "비겁한 자의 보물",
+      "zh": "卑劣者的宝物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93012": {
+    "name": {
+      "en": "Coward's Treasure",
+      "jp": "卑怯者の宝物",
+      "kr": "비겁한 자의 보물",
+      "zh": "卑劣者的宝物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11014"],
+    "sub": "11237",
+    "passives": [
+      {
+        "id": "2002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93013": {
+    "name": {
+      "en": "Coward's Treasure",
+      "jp": "卑怯者の宝物",
+      "kr": "비겁한 자의 보물",
+      "zh": "卑劣者的宝物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11011"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93021": {
+    "name": {
+      "en": "Burning Soul",
+      "jp": "熱き魂",
+      "kr": "뜨거운 영혼",
+      "zh": "炙热灵魂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93022": {
+    "name": {
+      "en": "Burning Soul",
+      "jp": "熱き魂",
+      "kr": "뜨거운 영혼",
+      "zh": "炙热灵魂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11014"],
+    "sub": "11237",
+    "passives": [
+      {
+        "id": "2003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93023": {
+    "name": {
+      "en": "Burning Soul",
+      "jp": "熱き魂",
+      "kr": "뜨거운 영혼",
+      "zh": "炙热灵魂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11012"],
+    "sub": "11239",
+    "passives": [
+      {
+        "id": "2003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93031": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93032": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11014"],
+    "sub": "11237",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93033": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11012"],
+    "sub": "11239",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93041": {
+    "name": {
+      "en": "Overdrive",
+      "jp": "オーバードライブ",
+      "kr": "오버 드라이브",
+      "zh": "极速热血"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11014"],
+    "sub": "11237",
+    "passives": [
+      {
+        "id": "2005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93042": {
+    "name": {
+      "en": "Overdrive",
+      "jp": "オーバードライブ",
+      "kr": "오버 드라이브",
+      "zh": "极速热血"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93043": {
+    "name": {
+      "en": "Overdrive",
+      "jp": "オーバードライブ",
+      "kr": "오버 드라이브",
+      "zh": "极速热血"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11011"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93051": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93052": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11018"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93053": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11016"],
+    "sub": "11235",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93061": {
+    "name": {
+      "en": "Chalice of Longing",
+      "jp": "渇望の杯",
+      "kr": "갈망의 잔",
+      "zh": "渴望之杯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11018"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93062": {
+    "name": {
+      "en": "Chalice of Longing",
+      "jp": "渇望の杯",
+      "kr": "갈망의 잔",
+      "zh": "渴望之杯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11017"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93063": {
+    "name": {
+      "en": "Chalice of Longing",
+      "jp": "渇望の杯",
+      "kr": "갈망의 잔",
+      "zh": "渴望之杯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11015"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93071": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93072": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11018"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93073": {
+    "name": {
+      "en": "Combination Simulator",
+      "jp": "コンビネーションシミュレーター",
+      "kr": "콤비네이션 시뮬레이터",
+      "zh": "组合模拟器"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11015"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93081": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93082": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11018"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93083": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11016"],
+    "sub": "11235",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93091": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93092": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11015"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93093": {
+    "name": {
+      "en": "Resurrection Token",
+      "jp": "復活の証",
+      "kr": "부활의 증표",
+      "zh": "复活的信物"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11018"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93101": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11019"],
+    "sub": "11236",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93102": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11020"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93103": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11022"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93111": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11020"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93112": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11019"],
+    "sub": "11236",
+    "passives": [
+      {
+        "id": "2012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93113": {
+    "name": {
+      "en": "Charmer's Golden Chalice",
+      "jp": "美人の黄金杯",
+      "kr": "가인의 황금잔",
+      "zh": "佳人黄金杯"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11022"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93121": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11019"],
+    "sub": "11236",
+    "passives": [
+      {
+        "id": "2013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93122": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11020"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93123": {
+    "name": {
+      "en": "Clear Mind",
+      "jp": "クリアマインド",
+      "kr": "클리어 마인드",
+      "zh": "澄明心智"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11022"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93131": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11019"],
+    "sub": "11236",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93132": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11020"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93133": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11022"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93141": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11020"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93142": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11019"],
+    "sub": "11236",
+    "passives": [
+      {
+        "id": "2015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93143": {
+    "name": {
+      "en": "Saint's Ring",
+      "jp": "聖女の指輪",
+      "kr": "성녀의 반지",
+      "zh": "圣女之戒"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11022"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93151": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93152": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11014"],
+    "sub": "11237",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93153": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11011"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93161": {
+    "name": {
+      "en": "Fool's Dawn",
+      "jp": "夜明けのフォルド",
+      "kr": "풀드의 새벽",
+      "zh": "弗特的黎明"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11014"],
+    "sub": "11237",
+    "passives": [
+      {
+        "id": "2017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93162": {
+    "name": {
+      "en": "Fool's Dawn",
+      "jp": "夜明けのフォルド",
+      "kr": "풀드의 새벽",
+      "zh": "弗特的黎明"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93163": {
+    "name": {
+      "en": "Fool's Dawn",
+      "jp": "夜明けのフォルド",
+      "kr": "풀드의 새벽",
+      "zh": "弗特的黎明"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11020"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93171": {
+    "name": {
+      "en": "Physical Exorcism",
+      "jp": "フィジカルエクソシズム",
+      "kr": "피지컬 엑소시즘",
+      "zh": "除灵案件"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93172": {
+    "name": {
+      "en": "Physical Exorcism",
+      "jp": "フィジカルエクソシズム",
+      "kr": "피지컬 엑소시즘",
+      "zh": "除灵案件"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11012"],
+    "sub": "11239",
+    "passives": [
+      {
+        "id": "2020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93173": {
+    "name": {
+      "en": "Physical Exorcism",
+      "jp": "フィジカルエクソシズム",
+      "kr": "피지컬 엑소시즘",
+      "zh": "除灵案件"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11011"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93181": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93182": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11014"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93183": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11011"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93191": {
+    "name": {
+      "en": "Starlight Road",
+      "jp": "スターライト・ロード",
+      "kr": "스타라이트 로드",
+      "zh": "星光大道"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11014"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93192": {
+    "name": {
+      "en": "Starlight Road",
+      "jp": "スターライト・ロード",
+      "kr": "스타라이트 로드",
+      "zh": "星光大道"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11020"],
+    "sub": "11232",
+    "passives": [
+      {
+        "id": "2018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93193": {
+    "name": {
+      "en": "Starlight Road",
+      "jp": "スターライト・ロード",
+      "kr": "스타라이트 로드",
+      "zh": "星光大道"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11011"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93201": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11018"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93202": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93203": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11015"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93211": {
+    "name": {
+      "en": "Unholy Exsultet",
+      "jp": "祝福なき典礼玉",
+      "kr": "언홀리 엑술떼",
+      "zh": "罪恶逾越颂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11018"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93212": {
+    "name": {
+      "en": "Unholy Exsultet",
+      "jp": "祝福なき典礼玉",
+      "kr": "언홀리 엑술떼",
+      "zh": "罪恶逾越颂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93213": {
+    "name": {
+      "en": "Unholy Exsultet",
+      "jp": "祝福なき典礼玉",
+      "kr": "언홀리 엑술떼",
+      "zh": "罪恶逾越颂"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11015"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93221": {
+    "name": {
+      "en": "Absolute Music",
+      "jp": "絶対音楽",
+      "kr": "앱솔루트 뮤직",
+      "zh": "无标题音乐"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11022"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93222": {
+    "name": {
+      "en": "Absolute Music",
+      "jp": "絶対音楽",
+      "kr": "앱솔루트 뮤직",
+      "zh": "无标题音乐"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93223": {
+    "name": {
+      "en": "Absolute Music",
+      "jp": "絶対音楽",
+      "kr": "앱솔루트 뮤직",
+      "zh": "无标题音乐"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11015"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93231": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93232": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93233": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11022"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93241": {
+    "name": {
+      "en": "Obsidian Oath",
+      "jp": "ダークヘルパー",
+      "kr": "어둠의 헌신",
+      "zh": "黑暗献身"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11018"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93242": {
+    "name": {
+      "en": "Obsidian Oath",
+      "jp": "ダークヘルパー",
+      "kr": "어둠의 헌신",
+      "zh": "黑暗献身"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11017"],
+    "sub": "11238",
+    "passives": [
+      {
+        "id": "2023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93243": {
+    "name": {
+      "en": "Obsidian Oath",
+      "jp": "ダークヘルパー",
+      "kr": "어둠의 헌신",
+      "zh": "黑暗献身"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11015"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93251": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Accessary_01",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11022"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2029",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93252": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Accessary_01",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11018"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2029",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93253": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Accessary_01",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11014"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2029",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93261": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11022"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2030",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93262": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11014"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2030",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93263": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_01",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11018"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2030",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93271": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11017"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93272": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11022"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93273": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11019"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93281": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_01",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11013"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2032",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93282": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_01",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11017"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2032",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93283": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_01",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11022"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2032",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93291": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest_IR_01",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11018"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2033",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93292": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest_IR_01",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11014"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2033",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93293": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest_IR_01",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11022"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2033",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93301": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Accessary_02",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11018"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93302": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Accessary_02",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11017"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93303": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Irregular_Accessary_02",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11022"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93311": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_02",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11018"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93312": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_02",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11017"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93313": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Defender_IR_02",
+    "craftable": false,
+    "classLimit": "defender",
+    "main": ["11015"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93321": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_02",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11017"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2036",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93322": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_02",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11022"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2036",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93323": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_02",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["11015"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2036",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93331": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11018"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93332": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11017"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93333": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11022"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93341": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest_IR_02",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11018"],
+    "sub": "11231",
+    "passives": [
+      {
+        "id": "2038",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93342": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest_IR_02",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11017"],
+    "sub": "11234",
+    "passives": [
+      {
+        "id": "2038",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93343": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Priest_IR_02",
+    "craftable": false,
+    "classLimit": "healer",
+    "main": ["11015"],
+    "sub": "11233",
+    "passives": [
+      {
+        "id": "2038",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93401": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11013"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93402": {
+    "name": {
+      "en": "Death's Hold",
+      "jp": "チョークスリーパー",
+      "kr": "초크 슬리퍼",
+      "zh": "绝命扣押"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11014"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93411": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11017"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93412": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11018"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93413": {
+    "name": {
+      "en": "Clock Up",
+      "jp": "クロックアップ",
+      "kr": "클락 업",
+      "zh": "疾行"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11015"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93421": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11019"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93422": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11020"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93423": {
+    "name": {
+      "en": "Dancer's Necklace",
+      "jp": "踊り子の首飾り",
+      "kr": "무희의 목걸이",
+      "zh": "舞娘项链"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11022"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93431": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11013"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93432": {
+    "name": {
+      "en": "Glorious Radiance Legacy",
+      "jp": "ホマレの遺産",
+      "kr": "영광의 유산",
+      "zh": "荣耀遗产"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11014"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93441": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11019"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93442": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11017"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93443": {
+    "name": {
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["11022"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93501": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11013"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93502": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11014"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93503": {
+    "name": {
+      "en": "Spirit of Unification",
+      "jp": "結束の精神",
+      "kr": "결속의 정신",
+      "zh": "团结之心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11011"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93511": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11017"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93512": {
+    "name": {
+      "en": "Search and Destroy",
+      "jp": "見敵必殺",
+      "kr": "견적필살",
+      "zh": "见敌必杀"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11018"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93521": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11019"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93522": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11020"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93523": {
+    "name": {
+      "en": "Memento Mori",
+      "jp": "メメント・モリ",
+      "kr": "메멘토 모리",
+      "zh": "向死而生"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11022"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93531": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11013"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93532": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11014"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93533": {
+    "name": {
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11011"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93541": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11013"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93542": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11017"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "93543": {
+    "name": {
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["11019"],
+    "sub": "11243",
+    "passives": [
+      {
+        "id": "2024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9921795": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9921801": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9931795": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9931801": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9941795": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9941801": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9951795": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9951801": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9961795": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9961801": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9971795": {
+    "name": {
+      "en": "Briareos's Ambition",
+      "jp": "ブリアレオスの野望",
+      "kr": "브리아레오스의 야욕",
+      "zh": "布里亚雷奥斯的野心"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Ranger_IR_01",
+    "craftable": false,
+    "classLimit": "ranger",
+    "main": ["2454"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "9971801": {
+    "name": {
+      "en": "Gorgon's Vanity",
+      "jp": "ゴルゴンの虚夢",
+      "kr": "고르곤의 허몽",
+      "zh": "戈尔贡的幻梦"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06_Mage_IR_02",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["2354"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "2037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  }
+}

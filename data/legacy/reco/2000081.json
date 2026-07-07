@@ -1,0 +1,28 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Heartunder's Blade",
+        "mainStat": "ATK%"
+      },
+      {
+        "name": "Rampaging Caracal",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Absolute Music",
+        "mainStat": "SPD/ATK%"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "SPD>ATK>EFF>CHC",
+    "Note": "",
+    "Talisman": [
+      "$critAP"
+    ]
+  }
+}

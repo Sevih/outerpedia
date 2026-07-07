@@ -31,8 +31,7 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [ ] Config i18n portée (en, fr, jp, kr, zh — 4 officielles + fr communautaire)
 - [x] Dockerfile multi-stage + `.dockerignore`
 - [x] CI : lint + typecheck + build sur PR
-- [x] CD : build → GHCR → déploiement VPS manuel (« hello world » en ligne via IP)
-      _(auto-deploy Actions→VPS = amélioration future)_
+- [x] CD : build → GHCR → **déploiement auto** sur le VPS via SSH (push → en ligne)
 - [x] Hooks pre-commit + pre-push (lefthook)
 - [x] Socle de tests (Vitest)
 
@@ -40,11 +39,15 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 
 > Le gros gain de simplicité (l'objectif maintenance).
 
-- [ ] **Séparer** « génération de données » (local, python + datamine, manuel)
-      du « build site » (CI, déterministe, **sans python**)
-- [ ] Données générées **committées** comme artefacts (le build les consomme)
-- [ ] Pipeline réorganisé, documenté, étapes claires
-- [ ] Tests des transforms de données
+- [x] Atelier `datagen/` : architecture + 3 zones (lib / data committé / .gamedata local)
+- [x] **Pull** auto des données du jeu depuis LDPlayer (adb, incrémental, `datagen:pull`)
+- [x] **Extract** des `.bytes` via AssetStudioModCLI wrappé (`datagen:extract`)
+- [x] **Convert** `.bytes → JSON` en TS (parser testé, remplace python, `datagen:convert`)
+- [ ] Couche 1 : templates **typés** (types TS + coercition sur le JSON parsé)
+- [ ] Couche 2 : **primitives partagées** (résolution Text\*, ID↔nom↔slug, normalisation, stats)
+- [ ] Couche 3 : **générateurs** (porter les ~30 scripts py/ts → TS, factorisés)
+- [ ] Couche 4 : **contrats de sortie** typés · Couche 5 : **orchestrateur**
+- [ ] Données générées **committées** comme artefacts (le build les consomme, **sans python**)
 
 ## Phase 3 — Assets (images)
 

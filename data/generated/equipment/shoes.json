@@ -1,0 +1,8658 @@
+{
+  "9001": {
+    "name": {
+      "en": "Ordinary Boots of Attack",
+      "jp": "攻撃の普及型ブーツ",
+      "kr": "공격의 보급형 신발",
+      "zh": "普通攻击鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "1"
+  },
+  "9002": {
+    "name": {
+      "en": "Fine Boots of Attack",
+      "jp": "攻撃の高級型ブーツ",
+      "kr": "공격의 고급형 신발",
+      "zh": "上等攻击鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "1"
+  },
+  "9003": {
+    "name": {
+      "en": "Steel Boots of Attack",
+      "jp": "攻撃の鋼鉄ブーツ",
+      "kr": "공격의 강철 신발",
+      "zh": "钢铁攻击鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "1"
+  },
+  "9004": {
+    "name": {
+      "en": "Etheric Boots of Attack",
+      "jp": "攻撃のエーテルブーツ",
+      "kr": "공격의 에테르 신발",
+      "zh": "以太攻击鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "1"
+  },
+  "9005": {
+    "name": {
+      "en": "Ordinary Boots of Attack",
+      "jp": "攻撃の普及型ブーツ",
+      "kr": "공격의 보급형 신발",
+      "zh": "普通攻击鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "1"
+  },
+  "9006": {
+    "name": {
+      "en": "Fine Boots of Attack",
+      "jp": "攻撃の高級型ブーツ",
+      "kr": "공격의 고급형 신발",
+      "zh": "上等攻击鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "1"
+  },
+  "9007": {
+    "name": {
+      "en": "Steel Boots of Attack",
+      "jp": "攻撃の鋼鉄ブーツ",
+      "kr": "공격의 강철 신발",
+      "zh": "钢铁攻击鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "1"
+  },
+  "9008": {
+    "name": {
+      "en": "Etheric Boots of Attack",
+      "jp": "攻撃のエーテルブーツ",
+      "kr": "공격의 에테르 신발",
+      "zh": "以太攻击鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "1"
+  },
+  "9009": {
+    "name": {
+      "en": "Ordinary Boots of Attack",
+      "jp": "攻撃の普及型ブーツ",
+      "kr": "공격의 보급형 신발",
+      "zh": "普通攻击鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "1"
+  },
+  "9010": {
+    "name": {
+      "en": "Fine Boots of Attack",
+      "jp": "攻撃の高級型ブーツ",
+      "kr": "공격의 고급형 신발",
+      "zh": "上等攻击鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "1"
+  },
+  "9011": {
+    "name": {
+      "en": "Steel Boots of Attack",
+      "jp": "攻撃の鋼鉄ブーツ",
+      "kr": "공격의 강철 신발",
+      "zh": "钢铁攻击鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "1"
+  },
+  "9012": {
+    "name": {
+      "en": "Etheric Boots of Attack",
+      "jp": "攻撃のエーテルブーツ",
+      "kr": "공격의 에테르 신발",
+      "zh": "以太攻击鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "1"
+  },
+  "9013": {
+    "name": {
+      "en": "Ordinary Boots of Attack",
+      "jp": "攻撃の普及型ブーツ",
+      "kr": "공격의 보급형 신발",
+      "zh": "普通攻击鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "1"
+  },
+  "9014": {
+    "name": {
+      "en": "Fine Boots of Attack",
+      "jp": "攻撃の高級型ブーツ",
+      "kr": "공격의 고급형 신발",
+      "zh": "上等攻击鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "1"
+  },
+  "9015": {
+    "name": {
+      "en": "Steel Boots of Attack",
+      "jp": "攻撃の鋼鉄ブーツ",
+      "kr": "공격의 강철 신발",
+      "zh": "钢铁攻击鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "1"
+  },
+  "9016": {
+    "name": {
+      "en": "Etheric Boots of Attack",
+      "jp": "攻撃のエーテルブーツ",
+      "kr": "공격의 에테르 신발",
+      "zh": "以太攻击鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "1"
+  },
+  "9017": {
+    "name": {
+      "en": "Ordinary Boots of Attack",
+      "jp": "攻撃の普及型ブーツ",
+      "kr": "공격의 보급형 신발",
+      "zh": "普通攻击鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "1"
+  },
+  "9018": {
+    "name": {
+      "en": "Fine Boots of Attack",
+      "jp": "攻撃の高級型ブーツ",
+      "kr": "공격의 고급형 신발",
+      "zh": "上等攻击鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "1"
+  },
+  "9019": {
+    "name": {
+      "en": "Steel Boots of Attack",
+      "jp": "攻撃の鋼鉄ブーツ",
+      "kr": "공격의 강철 신발",
+      "zh": "钢铁攻击鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "1"
+  },
+  "9020": {
+    "name": {
+      "en": "Etheric Boots of Attack",
+      "jp": "攻撃のエーテルブーツ",
+      "kr": "공격의 에테르 신발",
+      "zh": "以太攻击鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "1"
+  },
+  "9021": {
+    "name": {
+      "en": "Ordinary Boots of Attack",
+      "jp": "攻撃の普及型ブーツ",
+      "kr": "공격의 보급형 신발",
+      "zh": "普通攻击鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "1"
+  },
+  "9022": {
+    "name": {
+      "en": "Fine Boots of Attack",
+      "jp": "攻撃の高級型ブーツ",
+      "kr": "공격의 고급형 신발",
+      "zh": "上等攻击鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "1"
+  },
+  "9023": {
+    "name": {
+      "en": "Steel Boots of Attack",
+      "jp": "攻撃の鋼鉄ブーツ",
+      "kr": "공격의 강철 신발",
+      "zh": "钢铁攻击鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "1"
+  },
+  "9024": {
+    "name": {
+      "en": "Etheric Boots of Attack",
+      "jp": "攻撃のエーテルブーツ",
+      "kr": "공격의 에테르 신발",
+      "zh": "以太攻击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "9025": {
+    "name": {
+      "en": "Ordinary Boots of Defense",
+      "jp": "防御の普及型ブーツ",
+      "kr": "방어의 보급형 신발",
+      "zh": "普通防御鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "2"
+  },
+  "9026": {
+    "name": {
+      "en": "Fine Boots of Defense",
+      "jp": "防御の高級型ブーツ",
+      "kr": "방어의 고급형 신발",
+      "zh": "上等防御鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "2"
+  },
+  "9027": {
+    "name": {
+      "en": "Steel Boots of Defense",
+      "jp": "防御の鋼鉄ブーツ",
+      "kr": "방어의 강철 신발",
+      "zh": "钢铁防御鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "2"
+  },
+  "9028": {
+    "name": {
+      "en": "Etheric Boots of Defense",
+      "jp": "防御のエーテルブーツ",
+      "kr": "방어의 에테르 신발",
+      "zh": "以太防御鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "2"
+  },
+  "9029": {
+    "name": {
+      "en": "Ordinary Boots of Defense",
+      "jp": "防御の普及型ブーツ",
+      "kr": "방어의 보급형 신발",
+      "zh": "普通防御鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "2"
+  },
+  "9030": {
+    "name": {
+      "en": "Fine Boots of Defense",
+      "jp": "防御の高級型ブーツ",
+      "kr": "방어의 고급형 신발",
+      "zh": "上等防御鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "2"
+  },
+  "9031": {
+    "name": {
+      "en": "Steel Boots of Defense",
+      "jp": "防御の鋼鉄ブーツ",
+      "kr": "방어의 강철 신발",
+      "zh": "钢铁防御鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "2"
+  },
+  "9032": {
+    "name": {
+      "en": "Etheric Boots of Defense",
+      "jp": "防御のエーテルブーツ",
+      "kr": "방어의 에테르 신발",
+      "zh": "以太防御鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "2"
+  },
+  "9033": {
+    "name": {
+      "en": "Ordinary Boots of Defense",
+      "jp": "防御の普及型ブーツ",
+      "kr": "방어의 보급형 신발",
+      "zh": "普通防御鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "2"
+  },
+  "9034": {
+    "name": {
+      "en": "Fine Boots of Defense",
+      "jp": "防御の高級型ブーツ",
+      "kr": "방어의 고급형 신발",
+      "zh": "上等防御鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "2"
+  },
+  "9035": {
+    "name": {
+      "en": "Steel Boots of Defense",
+      "jp": "防御の鋼鉄ブーツ",
+      "kr": "방어의 강철 신발",
+      "zh": "钢铁防御鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "2"
+  },
+  "9036": {
+    "name": {
+      "en": "Etheric Boots of Defense",
+      "jp": "防御のエーテルブーツ",
+      "kr": "방어의 에테르 신발",
+      "zh": "以太防御鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "2"
+  },
+  "9037": {
+    "name": {
+      "en": "Ordinary Boots of Defense",
+      "jp": "防御の普及型ブーツ",
+      "kr": "방어의 보급형 신발",
+      "zh": "普通防御鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "2"
+  },
+  "9038": {
+    "name": {
+      "en": "Fine Boots of Defense",
+      "jp": "防御の高級型ブーツ",
+      "kr": "방어의 고급형 신발",
+      "zh": "上等防御鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "2"
+  },
+  "9039": {
+    "name": {
+      "en": "Steel Boots of Defense",
+      "jp": "防御の鋼鉄ブーツ",
+      "kr": "방어의 강철 신발",
+      "zh": "钢铁防御鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "2"
+  },
+  "9040": {
+    "name": {
+      "en": "Etheric Boots of Defense",
+      "jp": "防御のエーテルブーツ",
+      "kr": "방어의 에테르 신발",
+      "zh": "以太防御鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "2"
+  },
+  "9041": {
+    "name": {
+      "en": "Ordinary Boots of Defense",
+      "jp": "防御の普及型ブーツ",
+      "kr": "방어의 보급형 신발",
+      "zh": "普通防御鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "2"
+  },
+  "9042": {
+    "name": {
+      "en": "Fine Boots of Defense",
+      "jp": "防御の高級型ブーツ",
+      "kr": "방어의 고급형 신발",
+      "zh": "上等防御鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "2"
+  },
+  "9043": {
+    "name": {
+      "en": "Steel Boots of Defense",
+      "jp": "防御の鋼鉄ブーツ",
+      "kr": "방어의 강철 신발",
+      "zh": "钢铁防御鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "2"
+  },
+  "9044": {
+    "name": {
+      "en": "Etheric Boots of Defense",
+      "jp": "防御のエーテルブーツ",
+      "kr": "방어의 에테르 신발",
+      "zh": "以太防御鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "2"
+  },
+  "9045": {
+    "name": {
+      "en": "Ordinary Boots of Defense",
+      "jp": "防御の普及型ブーツ",
+      "kr": "방어의 보급형 신발",
+      "zh": "普通防御鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "2"
+  },
+  "9046": {
+    "name": {
+      "en": "Fine Boots of Defense",
+      "jp": "防御の高級型ブーツ",
+      "kr": "방어의 고급형 신발",
+      "zh": "上等防御鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "2"
+  },
+  "9047": {
+    "name": {
+      "en": "Steel Boots of Defense",
+      "jp": "防御の鋼鉄ブーツ",
+      "kr": "방어의 강철 신발",
+      "zh": "钢铁防御鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "2"
+  },
+  "9048": {
+    "name": {
+      "en": "Etheric Boots of Defense",
+      "jp": "防御のエーテルブーツ",
+      "kr": "방어의 에테르 신발",
+      "zh": "以太防御鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "9049": {
+    "name": {
+      "en": "Ordinary Boots of Life",
+      "jp": "生命の普及型ブーツ",
+      "kr": "생명의 보급형 신발",
+      "zh": "普通生命鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "3"
+  },
+  "9050": {
+    "name": {
+      "en": "Fine Boots of Life",
+      "jp": "生命の高級型ブーツ",
+      "kr": "생명의 고급형 신발",
+      "zh": "上等生命鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "3"
+  },
+  "9051": {
+    "name": {
+      "en": "Steel Boots of Life",
+      "jp": "生命の鋼鉄ブーツ",
+      "kr": "생명의 강철 신발",
+      "zh": "钢铁生命鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "3"
+  },
+  "9052": {
+    "name": {
+      "en": "Etheric Boots of Life",
+      "jp": "生命のエーテルブーツ",
+      "kr": "생명의 에테르 신발",
+      "zh": "以太生命鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "3"
+  },
+  "9053": {
+    "name": {
+      "en": "Ordinary Boots of Life",
+      "jp": "生命の普及型ブーツ",
+      "kr": "생명의 보급형 신발",
+      "zh": "普通生命鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "3"
+  },
+  "9054": {
+    "name": {
+      "en": "Fine Boots of Life",
+      "jp": "生命の高級型ブーツ",
+      "kr": "생명의 고급형 신발",
+      "zh": "上等生命鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "3"
+  },
+  "9055": {
+    "name": {
+      "en": "Steel Boots of Life",
+      "jp": "生命の鋼鉄ブーツ",
+      "kr": "생명의 강철 신발",
+      "zh": "钢铁生命鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "3"
+  },
+  "9056": {
+    "name": {
+      "en": "Etheric Boots of Life",
+      "jp": "生命のエーテルブーツ",
+      "kr": "생명의 에테르 신발",
+      "zh": "以太生命鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "3"
+  },
+  "9057": {
+    "name": {
+      "en": "Ordinary Boots of Life",
+      "jp": "生命の普及型ブーツ",
+      "kr": "생명의 보급형 신발",
+      "zh": "普通生命鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "3"
+  },
+  "9058": {
+    "name": {
+      "en": "Fine Boots of Life",
+      "jp": "生命の高級型ブーツ",
+      "kr": "생명의 고급형 신발",
+      "zh": "上等生命鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "3"
+  },
+  "9059": {
+    "name": {
+      "en": "Steel Boots of Life",
+      "jp": "生命の鋼鉄ブーツ",
+      "kr": "생명의 강철 신발",
+      "zh": "钢铁生命鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "3"
+  },
+  "9060": {
+    "name": {
+      "en": "Etheric Boots of Life",
+      "jp": "生命のエーテルブーツ",
+      "kr": "생명의 에테르 신발",
+      "zh": "以太生命鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "3"
+  },
+  "9061": {
+    "name": {
+      "en": "Ordinary Boots of Life",
+      "jp": "生命の普及型ブーツ",
+      "kr": "생명의 보급형 신발",
+      "zh": "普通生命鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "3"
+  },
+  "9062": {
+    "name": {
+      "en": "Fine Boots of Life",
+      "jp": "生命の高級型ブーツ",
+      "kr": "생명의 고급형 신발",
+      "zh": "上等生命鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "3"
+  },
+  "9063": {
+    "name": {
+      "en": "Steel Boots of Life",
+      "jp": "生命の鋼鉄ブーツ",
+      "kr": "생명의 강철 신발",
+      "zh": "钢铁生命鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "3"
+  },
+  "9064": {
+    "name": {
+      "en": "Etheric Boots of Life",
+      "jp": "生命のエーテルブーツ",
+      "kr": "생명의 에테르 신발",
+      "zh": "以太生命鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "3"
+  },
+  "9065": {
+    "name": {
+      "en": "Ordinary Boots of Life",
+      "jp": "生命の普及型ブーツ",
+      "kr": "생명의 보급형 신발",
+      "zh": "普通生命鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "3"
+  },
+  "9066": {
+    "name": {
+      "en": "Fine Boots of Life",
+      "jp": "生命の高級型ブーツ",
+      "kr": "생명의 고급형 신발",
+      "zh": "上等生命鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "3"
+  },
+  "9067": {
+    "name": {
+      "en": "Steel Boots of Life",
+      "jp": "生命の鋼鉄ブーツ",
+      "kr": "생명의 강철 신발",
+      "zh": "钢铁生命鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "3"
+  },
+  "9068": {
+    "name": {
+      "en": "Etheric Boots of Life",
+      "jp": "生命のエーテルブーツ",
+      "kr": "생명의 에테르 신발",
+      "zh": "以太生命鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "3"
+  },
+  "9069": {
+    "name": {
+      "en": "Ordinary Boots of Life",
+      "jp": "生命の普及型ブーツ",
+      "kr": "생명의 보급형 신발",
+      "zh": "普通生命鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "3"
+  },
+  "9070": {
+    "name": {
+      "en": "Fine Boots of Life",
+      "jp": "生命の高級型ブーツ",
+      "kr": "생명의 고급형 신발",
+      "zh": "上等生命鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "3"
+  },
+  "9071": {
+    "name": {
+      "en": "Steel Boots of Life",
+      "jp": "生命の鋼鉄ブーツ",
+      "kr": "생명의 강철 신발",
+      "zh": "钢铁生命鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "3"
+  },
+  "9072": {
+    "name": {
+      "en": "Etheric Boots of Life",
+      "jp": "生命のエーテルブーツ",
+      "kr": "생명의 에테르 신발",
+      "zh": "以太生命鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "9073": {
+    "name": {
+      "en": "Ordinary Boots of Critical Hit",
+      "jp": "会心の普及型ブーツ",
+      "kr": "치명의 보급형 신발",
+      "zh": "普通暴击鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "4"
+  },
+  "9074": {
+    "name": {
+      "en": "Fine Boots of Critical Hit",
+      "jp": "会心の高級型ブーツ",
+      "kr": "치명의 고급형 신발",
+      "zh": "上等暴击鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "4"
+  },
+  "9075": {
+    "name": {
+      "en": "Steel Boots of Critical Hit",
+      "jp": "会心の鋼鉄ブーツ",
+      "kr": "치명의 강철 신발",
+      "zh": "钢铁暴击鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "4"
+  },
+  "9076": {
+    "name": {
+      "en": "Etheric Boots of Critical Hit",
+      "jp": "会心のエーテルブーツ",
+      "kr": "치명의 에테르 신발",
+      "zh": "以太暴击鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "4"
+  },
+  "9077": {
+    "name": {
+      "en": "Ordinary Boots of Critical Hit",
+      "jp": "会心の普及型ブーツ",
+      "kr": "치명의 보급형 신발",
+      "zh": "普通暴击鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "4"
+  },
+  "9078": {
+    "name": {
+      "en": "Fine Boots of Critical Hit",
+      "jp": "会心の高級型ブーツ",
+      "kr": "치명의 고급형 신발",
+      "zh": "上等暴击鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "4"
+  },
+  "9079": {
+    "name": {
+      "en": "Steel Boots of Critical Hit",
+      "jp": "会心の鋼鉄ブーツ",
+      "kr": "치명의 강철 신발",
+      "zh": "钢铁暴击鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "4"
+  },
+  "9080": {
+    "name": {
+      "en": "Etheric Boots of Critical Hit",
+      "jp": "会心のエーテルブーツ",
+      "kr": "치명의 에테르 신발",
+      "zh": "以太暴击鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "4"
+  },
+  "9081": {
+    "name": {
+      "en": "Ordinary Boots of Critical Hit",
+      "jp": "会心の普及型ブーツ",
+      "kr": "치명의 보급형 신발",
+      "zh": "普通暴击鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "4"
+  },
+  "9082": {
+    "name": {
+      "en": "Fine Boots of Critical Hit",
+      "jp": "会心の高級型ブーツ",
+      "kr": "치명의 고급형 신발",
+      "zh": "上等暴击鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "4"
+  },
+  "9083": {
+    "name": {
+      "en": "Steel Boots of Critical Hit",
+      "jp": "会心の鋼鉄ブーツ",
+      "kr": "치명의 강철 신발",
+      "zh": "钢铁暴击鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "4"
+  },
+  "9084": {
+    "name": {
+      "en": "Etheric Boots of Critical Hit",
+      "jp": "会心のエーテルブーツ",
+      "kr": "치명의 에테르 신발",
+      "zh": "以太暴击鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "4"
+  },
+  "9085": {
+    "name": {
+      "en": "Ordinary Boots of Critical Hit",
+      "jp": "会心の普及型ブーツ",
+      "kr": "치명의 보급형 신발",
+      "zh": "普通暴击鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "4"
+  },
+  "9086": {
+    "name": {
+      "en": "Fine Boots of Critical Hit",
+      "jp": "会心の高級型ブーツ",
+      "kr": "치명의 고급형 신발",
+      "zh": "上等暴击鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "4"
+  },
+  "9087": {
+    "name": {
+      "en": "Steel Boots of Critical Hit",
+      "jp": "会心の鋼鉄ブーツ",
+      "kr": "치명의 강철 신발",
+      "zh": "钢铁暴击鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "4"
+  },
+  "9088": {
+    "name": {
+      "en": "Etheric Boots of Critical Hit",
+      "jp": "会心のエーテルブーツ",
+      "kr": "치명의 에테르 신발",
+      "zh": "以太暴击鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "4"
+  },
+  "9089": {
+    "name": {
+      "en": "Ordinary Boots of Critical Hit",
+      "jp": "会心の普及型ブーツ",
+      "kr": "치명의 보급형 신발",
+      "zh": "普通暴击鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "4"
+  },
+  "9090": {
+    "name": {
+      "en": "Fine Boots of Critical Hit",
+      "jp": "会心の高級型ブーツ",
+      "kr": "치명의 고급형 신발",
+      "zh": "上等暴击鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "4"
+  },
+  "9091": {
+    "name": {
+      "en": "Steel Boots of Critical Hit",
+      "jp": "会心の鋼鉄ブーツ",
+      "kr": "치명의 강철 신발",
+      "zh": "钢铁暴击鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "4"
+  },
+  "9092": {
+    "name": {
+      "en": "Etheric Boots of Critical Hit",
+      "jp": "会心のエーテルブーツ",
+      "kr": "치명의 에테르 신발",
+      "zh": "以太暴击鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "4"
+  },
+  "9093": {
+    "name": {
+      "en": "Ordinary Boots of Critical Hit",
+      "jp": "会心の普及型ブーツ",
+      "kr": "치명의 보급형 신발",
+      "zh": "普通暴击鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "4"
+  },
+  "9094": {
+    "name": {
+      "en": "Fine Boots of Critical Hit",
+      "jp": "会心の高級型ブーツ",
+      "kr": "치명의 고급형 신발",
+      "zh": "上等暴击鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "4"
+  },
+  "9095": {
+    "name": {
+      "en": "Steel Boots of Critical Hit",
+      "jp": "会心の鋼鉄ブーツ",
+      "kr": "치명의 강철 신발",
+      "zh": "钢铁暴击鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "4"
+  },
+  "9096": {
+    "name": {
+      "en": "Etheric Boots of Critical Hit",
+      "jp": "会心のエーテルブーツ",
+      "kr": "치명의 에테르 신발",
+      "zh": "以太暴击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "9097": {
+    "name": {
+      "en": "Ordinary Boots of Effectiveness",
+      "jp": "効果命中の普及型ブーツ",
+      "kr": "적중의 보급형 신발",
+      "zh": "普通效果命中鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "5"
+  },
+  "9098": {
+    "name": {
+      "en": "Fine Boots of Effectiveness",
+      "jp": "効果命中の高級型ブーツ",
+      "kr": "적중의 고급형 신발",
+      "zh": "上等效果命中鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "5"
+  },
+  "9099": {
+    "name": {
+      "en": "Steel Boots of Effectiveness",
+      "jp": "効果命中の鋼鉄ブーツ",
+      "kr": "적중의 강철 신발",
+      "zh": "钢铁效果命中鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "5"
+  },
+  "9100": {
+    "name": {
+      "en": "Etheric Boots of Effectiveness",
+      "jp": "効果命中のエーテルブーツ",
+      "kr": "적중의 에테르 신발",
+      "zh": "以太效果命中鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "5"
+  },
+  "9101": {
+    "name": {
+      "en": "Ordinary Boots of Effectiveness",
+      "jp": "効果命中の普及型ブーツ",
+      "kr": "적중의 보급형 신발",
+      "zh": "普通效果命中鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "5"
+  },
+  "9102": {
+    "name": {
+      "en": "Fine Boots of Effectiveness",
+      "jp": "効果命中の高級型ブーツ",
+      "kr": "적중의 고급형 신발",
+      "zh": "上等效果命中鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "5"
+  },
+  "9103": {
+    "name": {
+      "en": "Steel Boots of Effectiveness",
+      "jp": "効果命中の鋼鉄ブーツ",
+      "kr": "적중의 강철 신발",
+      "zh": "钢铁效果命中鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "5"
+  },
+  "9104": {
+    "name": {
+      "en": "Etheric Boots of Effectiveness",
+      "jp": "効果命中のエーテルブーツ",
+      "kr": "적중의 에테르 신발",
+      "zh": "以太效果命中鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "5"
+  },
+  "9105": {
+    "name": {
+      "en": "Ordinary Boots of Effectiveness",
+      "jp": "効果命中の普及型ブーツ",
+      "kr": "적중의 보급형 신발",
+      "zh": "普通效果命中鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "5"
+  },
+  "9106": {
+    "name": {
+      "en": "Fine Boots of Effectiveness",
+      "jp": "効果命中の高級型ブーツ",
+      "kr": "적중의 고급형 신발",
+      "zh": "上等效果命中鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "5"
+  },
+  "9107": {
+    "name": {
+      "en": "Steel Boots of Effectiveness",
+      "jp": "効果命中の鋼鉄ブーツ",
+      "kr": "적중의 강철 신발",
+      "zh": "钢铁效果命中鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "5"
+  },
+  "9108": {
+    "name": {
+      "en": "Etheric Boots of Effectiveness",
+      "jp": "効果命中のエーテルブーツ",
+      "kr": "적중의 에테르 신발",
+      "zh": "以太效果命中鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "5"
+  },
+  "9109": {
+    "name": {
+      "en": "Ordinary Boots of Effectiveness",
+      "jp": "効果命中の普及型ブーツ",
+      "kr": "적중의 보급형 신발",
+      "zh": "普通效果命中鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "5"
+  },
+  "9110": {
+    "name": {
+      "en": "Fine Boots of Effectiveness",
+      "jp": "効果命中の高級型ブーツ",
+      "kr": "적중의 고급형 신발",
+      "zh": "上等效果命中鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "5"
+  },
+  "9111": {
+    "name": {
+      "en": "Steel Boots of Effectiveness",
+      "jp": "効果命中の鋼鉄ブーツ",
+      "kr": "적중의 강철 신발",
+      "zh": "钢铁效果命中鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "5"
+  },
+  "9112": {
+    "name": {
+      "en": "Etheric Boots of Effectiveness",
+      "jp": "効果命中のエーテルブーツ",
+      "kr": "적중의 에테르 신발",
+      "zh": "以太效果命中鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "5"
+  },
+  "9113": {
+    "name": {
+      "en": "Ordinary Boots of Effectiveness",
+      "jp": "効果命中の普及型ブーツ",
+      "kr": "적중의 보급형 신발",
+      "zh": "普通效果命中鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "5"
+  },
+  "9114": {
+    "name": {
+      "en": "Fine Boots of Effectiveness",
+      "jp": "効果命中の高級型ブーツ",
+      "kr": "적중의 고급형 신발",
+      "zh": "上等效果命中鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "5"
+  },
+  "9115": {
+    "name": {
+      "en": "Steel Boots of Effectiveness",
+      "jp": "効果命中の鋼鉄ブーツ",
+      "kr": "적중의 강철 신발",
+      "zh": "钢铁效果命中鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "5"
+  },
+  "9116": {
+    "name": {
+      "en": "Etheric Boots of Effectiveness",
+      "jp": "効果命中のエーテルブーツ",
+      "kr": "적중의 에테르 신발",
+      "zh": "以太效果命中鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "5"
+  },
+  "9117": {
+    "name": {
+      "en": "Ordinary Boots of Effectiveness",
+      "jp": "効果命中の普及型ブーツ",
+      "kr": "적중의 보급형 신발",
+      "zh": "普通效果命中鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "5"
+  },
+  "9118": {
+    "name": {
+      "en": "Fine Boots of Effectiveness",
+      "jp": "効果命中の高級型ブーツ",
+      "kr": "적중의 고급형 신발",
+      "zh": "上等效果命中鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "5"
+  },
+  "9119": {
+    "name": {
+      "en": "Steel Boots of Effectiveness",
+      "jp": "効果命中の鋼鉄ブーツ",
+      "kr": "적중의 강철 신발",
+      "zh": "钢铁效果命中鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "5"
+  },
+  "9120": {
+    "name": {
+      "en": "Etheric Boots of Effectiveness",
+      "jp": "効果命中のエーテルブーツ",
+      "kr": "적중의 에테르 신발",
+      "zh": "以太效果命中鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "9121": {
+    "name": {
+      "en": "Ordinary Boots of Resilience",
+      "jp": "抵抗の普及型ブーツ",
+      "kr": "저항의 보급형 신발",
+      "zh": "普通抵抗鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "6"
+  },
+  "9122": {
+    "name": {
+      "en": "Fine Boots of Resilience",
+      "jp": "抵抗の高級型ブーツ",
+      "kr": "저항의 고급형 신발",
+      "zh": "上等抵抗鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "6"
+  },
+  "9123": {
+    "name": {
+      "en": "Steel Boots of Resilience",
+      "jp": "抵抗の鋼鉄ブーツ",
+      "kr": "저항의 강철 신발",
+      "zh": "钢铁抵抗鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "6"
+  },
+  "9124": {
+    "name": {
+      "en": "Etheric Boots of Resilience",
+      "jp": "抵抗のエーテルブーツ",
+      "kr": "저항의 에테르 신발",
+      "zh": "以太抵抗鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "6"
+  },
+  "9125": {
+    "name": {
+      "en": "Ordinary Boots of Resilience",
+      "jp": "抵抗の普及型ブーツ",
+      "kr": "저항의 보급형 신발",
+      "zh": "普通抵抗鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "6"
+  },
+  "9126": {
+    "name": {
+      "en": "Fine Boots of Resilience",
+      "jp": "抵抗の高級型ブーツ",
+      "kr": "저항의 고급형 신발",
+      "zh": "上等抵抗鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "6"
+  },
+  "9127": {
+    "name": {
+      "en": "Steel Boots of Resilience",
+      "jp": "抵抗の鋼鉄ブーツ",
+      "kr": "저항의 강철 신발",
+      "zh": "钢铁抵抗鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "6"
+  },
+  "9128": {
+    "name": {
+      "en": "Etheric Boots of Resilience",
+      "jp": "抵抗のエーテルブーツ",
+      "kr": "저항의 에테르 신발",
+      "zh": "以太抵抗鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "6"
+  },
+  "9129": {
+    "name": {
+      "en": "Ordinary Boots of Resilience",
+      "jp": "抵抗の普及型ブーツ",
+      "kr": "저항의 보급형 신발",
+      "zh": "普通抵抗鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "6"
+  },
+  "9130": {
+    "name": {
+      "en": "Fine Boots of Resilience",
+      "jp": "抵抗の高級型ブーツ",
+      "kr": "저항의 고급형 신발",
+      "zh": "上等抵抗鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "6"
+  },
+  "9131": {
+    "name": {
+      "en": "Steel Boots of Resilience",
+      "jp": "抵抗の鋼鉄ブーツ",
+      "kr": "저항의 강철 신발",
+      "zh": "钢铁抵抗鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "6"
+  },
+  "9132": {
+    "name": {
+      "en": "Etheric Boots of Resilience",
+      "jp": "抵抗のエーテルブーツ",
+      "kr": "저항의 에테르 신발",
+      "zh": "以太抵抗鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "6"
+  },
+  "9133": {
+    "name": {
+      "en": "Ordinary Boots of Resilience",
+      "jp": "抵抗の普及型ブーツ",
+      "kr": "저항의 보급형 신발",
+      "zh": "普通抵抗鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "6"
+  },
+  "9134": {
+    "name": {
+      "en": "Fine Boots of Resilience",
+      "jp": "抵抗の高級型ブーツ",
+      "kr": "저항의 고급형 신발",
+      "zh": "上等抵抗鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "6"
+  },
+  "9135": {
+    "name": {
+      "en": "Steel Boots of Resilience",
+      "jp": "抵抗の鋼鉄ブーツ",
+      "kr": "저항의 강철 신발",
+      "zh": "钢铁抵抗鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "6"
+  },
+  "9136": {
+    "name": {
+      "en": "Etheric Boots of Resilience",
+      "jp": "抵抗のエーテルブーツ",
+      "kr": "저항의 에테르 신발",
+      "zh": "以太抵抗鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "6"
+  },
+  "9137": {
+    "name": {
+      "en": "Ordinary Boots of Resilience",
+      "jp": "抵抗の普及型ブーツ",
+      "kr": "저항의 보급형 신발",
+      "zh": "普通抵抗鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "6"
+  },
+  "9138": {
+    "name": {
+      "en": "Fine Boots of Resilience",
+      "jp": "抵抗の高級型ブーツ",
+      "kr": "저항의 고급형 신발",
+      "zh": "上等抵抗鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "6"
+  },
+  "9139": {
+    "name": {
+      "en": "Steel Boots of Resilience",
+      "jp": "抵抗の鋼鉄ブーツ",
+      "kr": "저항의 강철 신발",
+      "zh": "钢铁抵抗鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "6"
+  },
+  "9140": {
+    "name": {
+      "en": "Etheric Boots of Resilience",
+      "jp": "抵抗のエーテルブーツ",
+      "kr": "저항의 에테르 신발",
+      "zh": "以太抵抗鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "6"
+  },
+  "9141": {
+    "name": {
+      "en": "Ordinary Boots of Resilience",
+      "jp": "抵抗の普及型ブーツ",
+      "kr": "저항의 보급형 신발",
+      "zh": "普通抵抗鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "6"
+  },
+  "9142": {
+    "name": {
+      "en": "Fine Boots of Resilience",
+      "jp": "抵抗の高級型ブーツ",
+      "kr": "저항의 고급형 신발",
+      "zh": "上等抵抗鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "6"
+  },
+  "9143": {
+    "name": {
+      "en": "Steel Boots of Resilience",
+      "jp": "抵抗の鋼鉄ブーツ",
+      "kr": "저항의 강철 신발",
+      "zh": "钢铁抵抗鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "6"
+  },
+  "9144": {
+    "name": {
+      "en": "Etheric Boots of Resilience",
+      "jp": "抵抗のエーテルブーツ",
+      "kr": "저항의 에테르 신발",
+      "zh": "以太抵抗鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "9145": {
+    "name": {
+      "en": "Ordinary Boots of Counterattack",
+      "jp": "反撃の普及型ブーツ",
+      "kr": "반격의 보급형 신발",
+      "zh": "普通反击鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "7"
+  },
+  "9146": {
+    "name": {
+      "en": "Fine Boots of Counterattack",
+      "jp": "反撃の高級型ブーツ",
+      "kr": "반격의 고급형 신발",
+      "zh": "上等反击鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "7"
+  },
+  "9147": {
+    "name": {
+      "en": "Steel Boots of Counterattack",
+      "jp": "反撃の鋼鉄ブーツ",
+      "kr": "반격의 강철 신발",
+      "zh": "钢铁反击鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "7"
+  },
+  "9148": {
+    "name": {
+      "en": "Etheric Boots of Counterattack",
+      "jp": "反撃のエーテルブーツ",
+      "kr": "반격의 에테르 신발",
+      "zh": "以太反击鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "7"
+  },
+  "9149": {
+    "name": {
+      "en": "Ordinary Boots of Counterattack",
+      "jp": "反撃の普及型ブーツ",
+      "kr": "반격의 보급형 신발",
+      "zh": "普通反击鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "7"
+  },
+  "9150": {
+    "name": {
+      "en": "Fine Boots of Counterattack",
+      "jp": "反撃の高級型ブーツ",
+      "kr": "반격의 고급형 신발",
+      "zh": "上等反击鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "7"
+  },
+  "9151": {
+    "name": {
+      "en": "Steel Boots of Counterattack",
+      "jp": "反撃の鋼鉄ブーツ",
+      "kr": "반격의 강철 신발",
+      "zh": "钢铁反击鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "7"
+  },
+  "9152": {
+    "name": {
+      "en": "Etheric Boots of Counterattack",
+      "jp": "反撃のエーテルブーツ",
+      "kr": "반격의 에테르 신발",
+      "zh": "以太反击鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "7"
+  },
+  "9153": {
+    "name": {
+      "en": "Ordinary Boots of Counterattack",
+      "jp": "反撃の普及型ブーツ",
+      "kr": "반격의 보급형 신발",
+      "zh": "普通反击鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "7"
+  },
+  "9154": {
+    "name": {
+      "en": "Fine Boots of Counterattack",
+      "jp": "反撃の高級型ブーツ",
+      "kr": "반격의 고급형 신발",
+      "zh": "上等反击鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "7"
+  },
+  "9155": {
+    "name": {
+      "en": "Steel Boots of Counterattack",
+      "jp": "反撃の鋼鉄ブーツ",
+      "kr": "반격의 강철 신발",
+      "zh": "钢铁反击鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "7"
+  },
+  "9156": {
+    "name": {
+      "en": "Etheric Boots of Counterattack",
+      "jp": "反撃のエーテルブーツ",
+      "kr": "반격의 에테르 신발",
+      "zh": "以太反击鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "7"
+  },
+  "9157": {
+    "name": {
+      "en": "Ordinary Boots of Counterattack",
+      "jp": "反撃の普及型ブーツ",
+      "kr": "반격의 보급형 신발",
+      "zh": "普通反击鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "7"
+  },
+  "9158": {
+    "name": {
+      "en": "Fine Boots of Counterattack",
+      "jp": "反撃の高級型ブーツ",
+      "kr": "반격의 고급형 신발",
+      "zh": "上等反击鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "7"
+  },
+  "9159": {
+    "name": {
+      "en": "Steel Boots of Counterattack",
+      "jp": "反撃の鋼鉄ブーツ",
+      "kr": "반격의 강철 신발",
+      "zh": "钢铁反击鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "7"
+  },
+  "9160": {
+    "name": {
+      "en": "Etheric Boots of Counterattack",
+      "jp": "反撃のエーテルブーツ",
+      "kr": "반격의 에테르 신발",
+      "zh": "以太反击鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "7"
+  },
+  "9161": {
+    "name": {
+      "en": "Ordinary Boots of Counterattack",
+      "jp": "反撃の普及型ブーツ",
+      "kr": "반격의 보급형 신발",
+      "zh": "普通反击鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "7"
+  },
+  "9162": {
+    "name": {
+      "en": "Fine Boots of Counterattack",
+      "jp": "反撃の高級型ブーツ",
+      "kr": "반격의 고급형 신발",
+      "zh": "上等反击鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "7"
+  },
+  "9163": {
+    "name": {
+      "en": "Steel Boots of Counterattack",
+      "jp": "反撃の鋼鉄ブーツ",
+      "kr": "반격의 강철 신발",
+      "zh": "钢铁反击鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "7"
+  },
+  "9164": {
+    "name": {
+      "en": "Etheric Boots of Counterattack",
+      "jp": "反撃のエーテルブーツ",
+      "kr": "반격의 에테르 신발",
+      "zh": "以太反击鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "7"
+  },
+  "9165": {
+    "name": {
+      "en": "Ordinary Boots of Counterattack",
+      "jp": "反撃の普及型ブーツ",
+      "kr": "반격의 보급형 신발",
+      "zh": "普通反击鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "7"
+  },
+  "9166": {
+    "name": {
+      "en": "Fine Boots of Counterattack",
+      "jp": "反撃の高級型ブーツ",
+      "kr": "반격의 고급형 신발",
+      "zh": "上等反击鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "7"
+  },
+  "9167": {
+    "name": {
+      "en": "Steel Boots of Counterattack",
+      "jp": "反撃の鋼鉄ブーツ",
+      "kr": "반격의 강철 신발",
+      "zh": "钢铁反击鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "7"
+  },
+  "9168": {
+    "name": {
+      "en": "Etheric Boots of Counterattack",
+      "jp": "反撃のエーテルブーツ",
+      "kr": "반격의 에테르 신발",
+      "zh": "以太反击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "9169": {
+    "name": {
+      "en": "Ordinary Boots of Fortification",
+      "jp": "鉄壁の普及型ブーツ",
+      "kr": "개전 방벽의 보급형 신발",
+      "zh": "普通开战防壁鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "8"
+  },
+  "9170": {
+    "name": {
+      "en": "Fine Boots of Fortification",
+      "jp": "鉄壁の高級型ブーツ",
+      "kr": "개전 방벽의 고급형 신발",
+      "zh": "上等开战防壁鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "8"
+  },
+  "9171": {
+    "name": {
+      "en": "Steel Boots of Fortification",
+      "jp": "鉄壁の鋼鉄ブーツ",
+      "kr": "개전 방벽의 강철 신발",
+      "zh": "钢铁开战防壁鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "8"
+  },
+  "9172": {
+    "name": {
+      "en": "Etheric Boots of Fortification",
+      "jp": "鉄壁のエーテルブーツ",
+      "kr": "개전 방벽의 에테르 신발",
+      "zh": "以太开战防壁鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "8"
+  },
+  "9173": {
+    "name": {
+      "en": "Ordinary Boots of Fortification",
+      "jp": "鉄壁の普及型ブーツ",
+      "kr": "개전 방벽의 보급형 신발",
+      "zh": "普通开战防壁鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "8"
+  },
+  "9174": {
+    "name": {
+      "en": "Fine Boots of Fortification",
+      "jp": "鉄壁の高級型ブーツ",
+      "kr": "개전 방벽의 고급형 신발",
+      "zh": "上等开战防壁鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "8"
+  },
+  "9175": {
+    "name": {
+      "en": "Steel Boots of Fortification",
+      "jp": "鉄壁の鋼鉄ブーツ",
+      "kr": "개전 방벽의 강철 신발",
+      "zh": "钢铁开战防壁鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "8"
+  },
+  "9176": {
+    "name": {
+      "en": "Etheric Boots of Fortification",
+      "jp": "鉄壁のエーテルブーツ",
+      "kr": "개전 방벽의 에테르 신발",
+      "zh": "以太开战防壁鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "8"
+  },
+  "9177": {
+    "name": {
+      "en": "Ordinary Boots of Fortification",
+      "jp": "鉄壁の普及型ブーツ",
+      "kr": "개전 방벽의 보급형 신발",
+      "zh": "普通开战防壁鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "8"
+  },
+  "9178": {
+    "name": {
+      "en": "Fine Boots of Fortification",
+      "jp": "鉄壁の高級型ブーツ",
+      "kr": "개전 방벽의 고급형 신발",
+      "zh": "上等开战防壁鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "8"
+  },
+  "9179": {
+    "name": {
+      "en": "Steel Boots of Fortification",
+      "jp": "鉄壁の鋼鉄ブーツ",
+      "kr": "개전 방벽의 강철 신발",
+      "zh": "钢铁开战防壁鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "8"
+  },
+  "9180": {
+    "name": {
+      "en": "Etheric Boots of Fortification",
+      "jp": "鉄壁のエーテルブーツ",
+      "kr": "개전 방벽의 에테르 신발",
+      "zh": "以太开战防壁鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "8"
+  },
+  "9181": {
+    "name": {
+      "en": "Ordinary Boots of Fortification",
+      "jp": "鉄壁の普及型ブーツ",
+      "kr": "개전 방벽의 보급형 신발",
+      "zh": "普通开战防壁鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "8"
+  },
+  "9182": {
+    "name": {
+      "en": "Fine Boots of Fortification",
+      "jp": "鉄壁の高級型ブーツ",
+      "kr": "개전 방벽의 고급형 신발",
+      "zh": "上等开战防壁鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "8"
+  },
+  "9183": {
+    "name": {
+      "en": "Steel Boots of Fortification",
+      "jp": "鉄壁の鋼鉄ブーツ",
+      "kr": "개전 방벽의 강철 신발",
+      "zh": "钢铁开战防壁鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "8"
+  },
+  "9184": {
+    "name": {
+      "en": "Etheric Boots of Fortification",
+      "jp": "鉄壁のエーテルブーツ",
+      "kr": "개전 방벽의 에테르 신발",
+      "zh": "以太开战防壁鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "8"
+  },
+  "9185": {
+    "name": {
+      "en": "Ordinary Boots of Fortification",
+      "jp": "鉄壁の普及型ブーツ",
+      "kr": "개전 방벽의 보급형 신발",
+      "zh": "普通开战防壁鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "8"
+  },
+  "9186": {
+    "name": {
+      "en": "Fine Boots of Fortification",
+      "jp": "鉄壁の高級型ブーツ",
+      "kr": "개전 방벽의 고급형 신발",
+      "zh": "上等开战防壁鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "8"
+  },
+  "9187": {
+    "name": {
+      "en": "Steel Boots of Fortification",
+      "jp": "鉄壁の鋼鉄ブーツ",
+      "kr": "개전 방벽의 강철 신발",
+      "zh": "钢铁开战防壁鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "8"
+  },
+  "9188": {
+    "name": {
+      "en": "Etheric Boots of Fortification",
+      "jp": "鉄壁のエーテルブーツ",
+      "kr": "개전 방벽의 에테르 신발",
+      "zh": "以太开战防壁鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "8"
+  },
+  "9189": {
+    "name": {
+      "en": "Ordinary Boots of Fortification",
+      "jp": "鉄壁の普及型ブーツ",
+      "kr": "개전 방벽의 보급형 신발",
+      "zh": "普通开战防壁鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "8"
+  },
+  "9190": {
+    "name": {
+      "en": "Fine Boots of Fortification",
+      "jp": "鉄壁の高級型ブーツ",
+      "kr": "개전 방벽의 고급형 신발",
+      "zh": "上等开战防壁鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "8"
+  },
+  "9191": {
+    "name": {
+      "en": "Steel Boots of Fortification",
+      "jp": "鉄壁の鋼鉄ブーツ",
+      "kr": "개전 방벽의 강철 신발",
+      "zh": "钢铁开战防壁鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "8"
+  },
+  "9192": {
+    "name": {
+      "en": "Etheric Boots of Fortification",
+      "jp": "鉄壁のエーテルブーツ",
+      "kr": "개전 방벽의 에테르 신발",
+      "zh": "以太开战防壁鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "9193": {
+    "name": {
+      "en": "Ordinary Boots of Mitigation",
+      "jp": "無力化の普及型ブーツ",
+      "kr": "무력화의 보급형 신발",
+      "zh": "普通失效鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "9"
+  },
+  "9194": {
+    "name": {
+      "en": "Fine Boots of Mitigation",
+      "jp": "無力化の高級型ブーツ",
+      "kr": "무력화의 고급형 신발",
+      "zh": "上等失效鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "9"
+  },
+  "9195": {
+    "name": {
+      "en": "Steel Boots of Mitigation",
+      "jp": "無力化の鋼鉄ブーツ",
+      "kr": "무력화의 강철 신발",
+      "zh": "钢铁失效鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "9"
+  },
+  "9196": {
+    "name": {
+      "en": "Etheric Boots of Mitigation",
+      "jp": "無力化のエーテルブーツ",
+      "kr": "무력화의 에테르 신발",
+      "zh": "以太失效鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "9"
+  },
+  "9197": {
+    "name": {
+      "en": "Ordinary Boots of Mitigation",
+      "jp": "無力化の普及型ブーツ",
+      "kr": "무력화의 보급형 신발",
+      "zh": "普通失效鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "9"
+  },
+  "9198": {
+    "name": {
+      "en": "Fine Boots of Mitigation",
+      "jp": "無力化の高級型ブーツ",
+      "kr": "무력화의 고급형 신발",
+      "zh": "上等失效鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "9"
+  },
+  "9199": {
+    "name": {
+      "en": "Steel Boots of Mitigation",
+      "jp": "無力化の鋼鉄ブーツ",
+      "kr": "무력화의 강철 신발",
+      "zh": "钢铁失效鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "9"
+  },
+  "9200": {
+    "name": {
+      "en": "Etheric Boots of Mitigation",
+      "jp": "無力化のエーテルブーツ",
+      "kr": "무력화의 에테르 신발",
+      "zh": "以太失效鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "9"
+  },
+  "9201": {
+    "name": {
+      "en": "Ordinary Boots of Mitigation",
+      "jp": "無力化の普及型ブーツ",
+      "kr": "무력화의 보급형 신발",
+      "zh": "普通失效鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "9"
+  },
+  "9202": {
+    "name": {
+      "en": "Fine Boots of Mitigation",
+      "jp": "無力化の高級型ブーツ",
+      "kr": "무력화의 고급형 신발",
+      "zh": "上等失效鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "9"
+  },
+  "9203": {
+    "name": {
+      "en": "Steel Boots of Mitigation",
+      "jp": "無力化の鋼鉄ブーツ",
+      "kr": "무력화의 강철 신발",
+      "zh": "钢铁失效鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "9"
+  },
+  "9204": {
+    "name": {
+      "en": "Etheric Boots of Mitigation",
+      "jp": "無力化のエーテルブーツ",
+      "kr": "무력화의 에테르 신발",
+      "zh": "以太失效鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "9"
+  },
+  "9205": {
+    "name": {
+      "en": "Ordinary Boots of Mitigation",
+      "jp": "無力化の普及型ブーツ",
+      "kr": "무력화의 보급형 신발",
+      "zh": "普通失效鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "9"
+  },
+  "9206": {
+    "name": {
+      "en": "Fine Boots of Mitigation",
+      "jp": "無力化の高級型ブーツ",
+      "kr": "무력화의 고급형 신발",
+      "zh": "上等失效鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "9"
+  },
+  "9207": {
+    "name": {
+      "en": "Steel Boots of Mitigation",
+      "jp": "無力化の鋼鉄ブーツ",
+      "kr": "무력화의 강철 신발",
+      "zh": "钢铁失效鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "9"
+  },
+  "9208": {
+    "name": {
+      "en": "Etheric Boots of Mitigation",
+      "jp": "無力化のエーテルブーツ",
+      "kr": "무력화의 에테르 신발",
+      "zh": "以太失效鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "9"
+  },
+  "9209": {
+    "name": {
+      "en": "Ordinary Boots of Mitigation",
+      "jp": "無力化の普及型ブーツ",
+      "kr": "무력화의 보급형 신발",
+      "zh": "普通失效鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "9"
+  },
+  "9210": {
+    "name": {
+      "en": "Fine Boots of Mitigation",
+      "jp": "無力化の高級型ブーツ",
+      "kr": "무력화의 고급형 신발",
+      "zh": "上等失效鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "9"
+  },
+  "9211": {
+    "name": {
+      "en": "Steel Boots of Mitigation",
+      "jp": "無力化の鋼鉄ブーツ",
+      "kr": "무력화의 강철 신발",
+      "zh": "钢铁失效鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "9"
+  },
+  "9212": {
+    "name": {
+      "en": "Etheric Boots of Mitigation",
+      "jp": "無力化のエーテルブーツ",
+      "kr": "무력화의 에테르 신발",
+      "zh": "以太失效鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "9"
+  },
+  "9213": {
+    "name": {
+      "en": "Ordinary Boots of Mitigation",
+      "jp": "無力化の普及型ブーツ",
+      "kr": "무력화의 보급형 신발",
+      "zh": "普通失效鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "9"
+  },
+  "9214": {
+    "name": {
+      "en": "Fine Boots of Mitigation",
+      "jp": "無力化の高級型ブーツ",
+      "kr": "무력화의 고급형 신발",
+      "zh": "上等失效鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "9"
+  },
+  "9215": {
+    "name": {
+      "en": "Steel Boots of Mitigation",
+      "jp": "無力化の鋼鉄ブーツ",
+      "kr": "무력화의 강철 신발",
+      "zh": "钢铁失效鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "9"
+  },
+  "9216": {
+    "name": {
+      "en": "Etheric Boots of Mitigation",
+      "jp": "無力化のエーテルブーツ",
+      "kr": "무력화의 에테르 신발",
+      "zh": "以太失效鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "9217": {
+    "name": {
+      "en": "Ordinary Boots of Lifesteal",
+      "jp": "吸収の普及型ブーツ",
+      "kr": "흡혈의 보급형 신발",
+      "zh": "普通吸血鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "10"
+  },
+  "9218": {
+    "name": {
+      "en": "Fine Boots of Lifesteal",
+      "jp": "吸収の高級型ブーツ",
+      "kr": "흡혈의 고급형 신발",
+      "zh": "上等吸血鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "10"
+  },
+  "9219": {
+    "name": {
+      "en": "Steel Boots of Lifesteal",
+      "jp": "吸収の鋼鉄ブーツ",
+      "kr": "흡혈의 강철 신발",
+      "zh": "钢铁吸血鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "10"
+  },
+  "9220": {
+    "name": {
+      "en": "Etheric Boots of Lifesteal",
+      "jp": "吸収のエーテルブーツ",
+      "kr": "흡혈의 에테르 신발",
+      "zh": "以太吸血鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "10"
+  },
+  "9221": {
+    "name": {
+      "en": "Ordinary Boots of Lifesteal",
+      "jp": "吸収の普及型ブーツ",
+      "kr": "흡혈의 보급형 신발",
+      "zh": "普通吸血鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "10"
+  },
+  "9222": {
+    "name": {
+      "en": "Fine Boots of Lifesteal",
+      "jp": "吸収の高級型ブーツ",
+      "kr": "흡혈의 고급형 신발",
+      "zh": "上等吸血鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "10"
+  },
+  "9223": {
+    "name": {
+      "en": "Steel Boots of Lifesteal",
+      "jp": "吸収の鋼鉄ブーツ",
+      "kr": "흡혈의 강철 신발",
+      "zh": "钢铁吸血鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "10"
+  },
+  "9224": {
+    "name": {
+      "en": "Etheric Boots of Lifesteal",
+      "jp": "吸収のエーテルブーツ",
+      "kr": "흡혈의 에테르 신발",
+      "zh": "以太吸血鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "10"
+  },
+  "9225": {
+    "name": {
+      "en": "Ordinary Boots of Lifesteal",
+      "jp": "吸収の普及型ブーツ",
+      "kr": "흡혈의 보급형 신발",
+      "zh": "普通吸血鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "10"
+  },
+  "9226": {
+    "name": {
+      "en": "Fine Boots of Lifesteal",
+      "jp": "吸収の高級型ブーツ",
+      "kr": "흡혈의 고급형 신발",
+      "zh": "上等吸血鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "10"
+  },
+  "9227": {
+    "name": {
+      "en": "Steel Boots of Lifesteal",
+      "jp": "吸収の鋼鉄ブーツ",
+      "kr": "흡혈의 강철 신발",
+      "zh": "钢铁吸血鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "10"
+  },
+  "9228": {
+    "name": {
+      "en": "Etheric Boots of Lifesteal",
+      "jp": "吸収のエーテルブーツ",
+      "kr": "흡혈의 에테르 신발",
+      "zh": "以太吸血鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "10"
+  },
+  "9229": {
+    "name": {
+      "en": "Ordinary Boots of Lifesteal",
+      "jp": "吸収の普及型ブーツ",
+      "kr": "흡혈의 보급형 신발",
+      "zh": "普通吸血鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "10"
+  },
+  "9230": {
+    "name": {
+      "en": "Fine Boots of Lifesteal",
+      "jp": "吸収の高級型ブーツ",
+      "kr": "흡혈의 고급형 신발",
+      "zh": "上等吸血鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "10"
+  },
+  "9231": {
+    "name": {
+      "en": "Steel Boots of Lifesteal",
+      "jp": "吸収の鋼鉄ブーツ",
+      "kr": "흡혈의 강철 신발",
+      "zh": "钢铁吸血鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "10"
+  },
+  "9232": {
+    "name": {
+      "en": "Etheric Boots of Lifesteal",
+      "jp": "吸収のエーテルブーツ",
+      "kr": "흡혈의 에테르 신발",
+      "zh": "以太吸血鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "10"
+  },
+  "9233": {
+    "name": {
+      "en": "Ordinary Boots of Lifesteal",
+      "jp": "吸収の普及型ブーツ",
+      "kr": "흡혈의 보급형 신발",
+      "zh": "普通吸血鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "10"
+  },
+  "9234": {
+    "name": {
+      "en": "Fine Boots of Lifesteal",
+      "jp": "吸収の高級型ブーツ",
+      "kr": "흡혈의 고급형 신발",
+      "zh": "上等吸血鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "10"
+  },
+  "9235": {
+    "name": {
+      "en": "Steel Boots of Lifesteal",
+      "jp": "吸収の鋼鉄ブーツ",
+      "kr": "흡혈의 강철 신발",
+      "zh": "钢铁吸血鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "10"
+  },
+  "9236": {
+    "name": {
+      "en": "Etheric Boots of Lifesteal",
+      "jp": "吸収のエーテルブーツ",
+      "kr": "흡혈의 에테르 신발",
+      "zh": "以太吸血鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "10"
+  },
+  "9237": {
+    "name": {
+      "en": "Ordinary Boots of Lifesteal",
+      "jp": "吸収の普及型ブーツ",
+      "kr": "흡혈의 보급형 신발",
+      "zh": "普通吸血鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "10"
+  },
+  "9238": {
+    "name": {
+      "en": "Fine Boots of Lifesteal",
+      "jp": "吸収の高級型ブーツ",
+      "kr": "흡혈의 고급형 신발",
+      "zh": "上等吸血鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "10"
+  },
+  "9239": {
+    "name": {
+      "en": "Steel Boots of Lifesteal",
+      "jp": "吸収の鋼鉄ブーツ",
+      "kr": "흡혈의 강철 신발",
+      "zh": "钢铁吸血鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "10"
+  },
+  "9240": {
+    "name": {
+      "en": "Etheric Boots of Lifesteal",
+      "jp": "吸収のエーテルブーツ",
+      "kr": "흡혈의 에테르 신발",
+      "zh": "以太吸血鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "9241": {
+    "name": {
+      "en": "Ordinary Boots of Penetration",
+      "jp": "貫通の普及型ブーツ",
+      "kr": "관통의 보급형 신발",
+      "zh": "普通穿透鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "11"
+  },
+  "9242": {
+    "name": {
+      "en": "Fine Boots of Penetration",
+      "jp": "貫通の高級型ブーツ",
+      "kr": "관통의 고급형 신발",
+      "zh": "上等穿透鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "11"
+  },
+  "9243": {
+    "name": {
+      "en": "Steel Boots of Penetration",
+      "jp": "貫通の鋼鉄ブーツ",
+      "kr": "관통의 강철 신발",
+      "zh": "钢铁穿透鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "11"
+  },
+  "9244": {
+    "name": {
+      "en": "Etheric Boots of Penetration",
+      "jp": "貫通のエーテルブーツ",
+      "kr": "관통의 에테르 신발",
+      "zh": "以太穿透鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "11"
+  },
+  "9245": {
+    "name": {
+      "en": "Ordinary Boots of Penetration",
+      "jp": "貫通の普及型ブーツ",
+      "kr": "관통의 보급형 신발",
+      "zh": "普通穿透鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "11"
+  },
+  "9246": {
+    "name": {
+      "en": "Fine Boots of Penetration",
+      "jp": "貫通の高級型ブーツ",
+      "kr": "관통의 고급형 신발",
+      "zh": "上等穿透鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "11"
+  },
+  "9247": {
+    "name": {
+      "en": "Steel Boots of Penetration",
+      "jp": "貫通の鋼鉄ブーツ",
+      "kr": "관통의 강철 신발",
+      "zh": "钢铁穿透鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "11"
+  },
+  "9248": {
+    "name": {
+      "en": "Etheric Boots of Penetration",
+      "jp": "貫通のエーテルブーツ",
+      "kr": "관통의 에테르 신발",
+      "zh": "以太穿透鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "11"
+  },
+  "9249": {
+    "name": {
+      "en": "Ordinary Boots of Penetration",
+      "jp": "貫通の普及型ブーツ",
+      "kr": "관통의 보급형 신발",
+      "zh": "普通穿透鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "11"
+  },
+  "9250": {
+    "name": {
+      "en": "Fine Boots of Penetration",
+      "jp": "貫通の高級型ブーツ",
+      "kr": "관통의 고급형 신발",
+      "zh": "上等穿透鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "11"
+  },
+  "9251": {
+    "name": {
+      "en": "Steel Boots of Penetration",
+      "jp": "貫通の鋼鉄ブーツ",
+      "kr": "관통의 강철 신발",
+      "zh": "钢铁穿透鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "11"
+  },
+  "9252": {
+    "name": {
+      "en": "Etheric Boots of Penetration",
+      "jp": "貫通のエーテルブーツ",
+      "kr": "관통의 에테르 신발",
+      "zh": "以太穿透鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "11"
+  },
+  "9253": {
+    "name": {
+      "en": "Ordinary Boots of Penetration",
+      "jp": "貫通の普及型ブーツ",
+      "kr": "관통의 보급형 신발",
+      "zh": "普通穿透鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "11"
+  },
+  "9254": {
+    "name": {
+      "en": "Fine Boots of Penetration",
+      "jp": "貫通の高級型ブーツ",
+      "kr": "관통의 고급형 신발",
+      "zh": "上等穿透鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "11"
+  },
+  "9255": {
+    "name": {
+      "en": "Steel Boots of Penetration",
+      "jp": "貫通の鋼鉄ブーツ",
+      "kr": "관통의 강철 신발",
+      "zh": "钢铁穿透鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "11"
+  },
+  "9256": {
+    "name": {
+      "en": "Etheric Boots of Penetration",
+      "jp": "貫通のエーテルブーツ",
+      "kr": "관통의 에테르 신발",
+      "zh": "以太穿透鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "11"
+  },
+  "9257": {
+    "name": {
+      "en": "Ordinary Boots of Penetration",
+      "jp": "貫通の普及型ブーツ",
+      "kr": "관통의 보급형 신발",
+      "zh": "普通穿透鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "11"
+  },
+  "9258": {
+    "name": {
+      "en": "Fine Boots of Penetration",
+      "jp": "貫通の高級型ブーツ",
+      "kr": "관통의 고급형 신발",
+      "zh": "上等穿透鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "11"
+  },
+  "9259": {
+    "name": {
+      "en": "Steel Boots of Penetration",
+      "jp": "貫通の鋼鉄ブーツ",
+      "kr": "관통의 강철 신발",
+      "zh": "钢铁穿透鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "11"
+  },
+  "9260": {
+    "name": {
+      "en": "Etheric Boots of Penetration",
+      "jp": "貫通のエーテルブーツ",
+      "kr": "관통의 에테르 신발",
+      "zh": "以太穿透鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "11"
+  },
+  "9261": {
+    "name": {
+      "en": "Ordinary Boots of Penetration",
+      "jp": "貫通の普及型ブーツ",
+      "kr": "관통의 보급형 신발",
+      "zh": "普通穿透鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "11"
+  },
+  "9262": {
+    "name": {
+      "en": "Fine Boots of Penetration",
+      "jp": "貫通の高級型ブーツ",
+      "kr": "관통의 고급형 신발",
+      "zh": "上等穿透鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "11"
+  },
+  "9263": {
+    "name": {
+      "en": "Steel Boots of Penetration",
+      "jp": "貫通の鋼鉄ブーツ",
+      "kr": "관통의 강철 신발",
+      "zh": "钢铁穿透鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "11"
+  },
+  "9264": {
+    "name": {
+      "en": "Etheric Boots of Penetration",
+      "jp": "貫通のエーテルブーツ",
+      "kr": "관통의 에테르 신발",
+      "zh": "以太穿透鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "9265": {
+    "name": {
+      "en": "Ordinary Boots of Critical Strike",
+      "jp": "極大化の普及型ブーツ",
+      "kr": "극대화의 보급형 신발",
+      "zh": "普通暴伤鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "12"
+  },
+  "9266": {
+    "name": {
+      "en": "Fine Boots of Critical Strike",
+      "jp": "極大化の高級型ブーツ",
+      "kr": "극대화의 고급형 신발",
+      "zh": "上等暴伤鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "12"
+  },
+  "9267": {
+    "name": {
+      "en": "Steel Boots of Critical Strike",
+      "jp": "極大化の鋼鉄ブーツ",
+      "kr": "극대화의 강철 신발",
+      "zh": "钢铁暴伤鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "12"
+  },
+  "9268": {
+    "name": {
+      "en": "Etheric Boots of Critical Strike",
+      "jp": "極大化のエーテルブーツ",
+      "kr": "극대화의 에테르 신발",
+      "zh": "以太暴伤鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "12"
+  },
+  "9269": {
+    "name": {
+      "en": "Ordinary Boots of Critical Strike",
+      "jp": "極大化の普及型ブーツ",
+      "kr": "극대화의 보급형 신발",
+      "zh": "普通暴伤鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "12"
+  },
+  "9270": {
+    "name": {
+      "en": "Fine Boots of Critical Strike",
+      "jp": "極大化の高級型ブーツ",
+      "kr": "극대화의 고급형 신발",
+      "zh": "上等暴伤鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "12"
+  },
+  "9271": {
+    "name": {
+      "en": "Steel Boots of Critical Strike",
+      "jp": "極大化の鋼鉄ブーツ",
+      "kr": "극대화의 강철 신발",
+      "zh": "钢铁暴伤鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "12"
+  },
+  "9272": {
+    "name": {
+      "en": "Etheric Boots of Critical Strike",
+      "jp": "極大化のエーテルブーツ",
+      "kr": "극대화의 에테르 신발",
+      "zh": "以太暴伤鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "12"
+  },
+  "9273": {
+    "name": {
+      "en": "Ordinary Boots of Critical Strike",
+      "jp": "極大化の普及型ブーツ",
+      "kr": "극대화의 보급형 신발",
+      "zh": "普通暴伤鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "12"
+  },
+  "9274": {
+    "name": {
+      "en": "Fine Boots of Critical Strike",
+      "jp": "極大化の高級型ブーツ",
+      "kr": "극대화의 고급형 신발",
+      "zh": "上等暴伤鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "12"
+  },
+  "9275": {
+    "name": {
+      "en": "Steel Boots of Critical Strike",
+      "jp": "極大化の鋼鉄ブーツ",
+      "kr": "극대화의 강철 신발",
+      "zh": "钢铁暴伤鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "12"
+  },
+  "9276": {
+    "name": {
+      "en": "Etheric Boots of Critical Strike",
+      "jp": "極大化のエーテルブーツ",
+      "kr": "극대화의 에테르 신발",
+      "zh": "以太暴伤鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "12"
+  },
+  "9277": {
+    "name": {
+      "en": "Ordinary Boots of Critical Strike",
+      "jp": "極大化の普及型ブーツ",
+      "kr": "극대화의 보급형 신발",
+      "zh": "普通暴伤鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "12"
+  },
+  "9278": {
+    "name": {
+      "en": "Fine Boots of Critical Strike",
+      "jp": "極大化の高級型ブーツ",
+      "kr": "극대화의 고급형 신발",
+      "zh": "上等暴伤鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "12"
+  },
+  "9279": {
+    "name": {
+      "en": "Steel Boots of Critical Strike",
+      "jp": "極大化の鋼鉄ブーツ",
+      "kr": "극대화의 강철 신발",
+      "zh": "钢铁暴伤鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "12"
+  },
+  "9280": {
+    "name": {
+      "en": "Etheric Boots of Critical Strike",
+      "jp": "極大化のエーテルブーツ",
+      "kr": "극대화의 에테르 신발",
+      "zh": "以太暴伤鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "12"
+  },
+  "9281": {
+    "name": {
+      "en": "Ordinary Boots of Critical Strike",
+      "jp": "極大化の普及型ブーツ",
+      "kr": "극대화의 보급형 신발",
+      "zh": "普通暴伤鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "12"
+  },
+  "9282": {
+    "name": {
+      "en": "Fine Boots of Critical Strike",
+      "jp": "極大化の高級型ブーツ",
+      "kr": "극대화의 고급형 신발",
+      "zh": "上等暴伤鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "12"
+  },
+  "9283": {
+    "name": {
+      "en": "Steel Boots of Critical Strike",
+      "jp": "極大化の鋼鉄ブーツ",
+      "kr": "극대화의 강철 신발",
+      "zh": "钢铁暴伤鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "12"
+  },
+  "9284": {
+    "name": {
+      "en": "Etheric Boots of Critical Strike",
+      "jp": "極大化のエーテルブーツ",
+      "kr": "극대화의 에테르 신발",
+      "zh": "以太暴伤鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "12"
+  },
+  "9285": {
+    "name": {
+      "en": "Ordinary Boots of Critical Strike",
+      "jp": "極大化の普及型ブーツ",
+      "kr": "극대화의 보급형 신발",
+      "zh": "普通暴伤鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "12"
+  },
+  "9286": {
+    "name": {
+      "en": "Fine Boots of Critical Strike",
+      "jp": "極大化の高級型ブーツ",
+      "kr": "극대화의 고급형 신발",
+      "zh": "上等暴伤鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "12"
+  },
+  "9287": {
+    "name": {
+      "en": "Steel Boots of Critical Strike",
+      "jp": "極大化の鋼鉄ブーツ",
+      "kr": "극대화의 강철 신발",
+      "zh": "钢铁暴伤鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "12"
+  },
+  "9288": {
+    "name": {
+      "en": "Etheric Boots of Critical Strike",
+      "jp": "極大化のエーテルブーツ",
+      "kr": "극대화의 에테르 신발",
+      "zh": "以太暴伤鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "9289": {
+    "name": {
+      "en": "Ordinary Boots of Speed",
+      "jp": "速度の普及型ブーツ",
+      "kr": "속도의 보급형 신발",
+      "zh": "普通速度鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "13"
+  },
+  "9290": {
+    "name": {
+      "en": "Fine Boots of Speed",
+      "jp": "速度の高級型ブーツ",
+      "kr": "속도의 고급형 신발",
+      "zh": "上等速度鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "13"
+  },
+  "9291": {
+    "name": {
+      "en": "Steel Boots of Speed",
+      "jp": "速度の鋼鉄ブーツ",
+      "kr": "속도의 강철 신발",
+      "zh": "钢铁速度鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "13"
+  },
+  "9292": {
+    "name": {
+      "en": "Etheric Boots of Speed",
+      "jp": "速度のエーテルブーツ",
+      "kr": "속도의 에테르 신발",
+      "zh": "以太速度鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "13"
+  },
+  "9293": {
+    "name": {
+      "en": "Ordinary Boots of Speed",
+      "jp": "速度の普及型ブーツ",
+      "kr": "속도의 보급형 신발",
+      "zh": "普通速度鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "13"
+  },
+  "9294": {
+    "name": {
+      "en": "Fine Boots of Speed",
+      "jp": "速度の高級型ブーツ",
+      "kr": "속도의 고급형 신발",
+      "zh": "上等速度鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "13"
+  },
+  "9295": {
+    "name": {
+      "en": "Steel Boots of Speed",
+      "jp": "速度の鋼鉄ブーツ",
+      "kr": "속도의 강철 신발",
+      "zh": "钢铁速度鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "13"
+  },
+  "9296": {
+    "name": {
+      "en": "Etheric Boots of Speed",
+      "jp": "速度のエーテルブーツ",
+      "kr": "속도의 에테르 신발",
+      "zh": "以太速度鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "13"
+  },
+  "9297": {
+    "name": {
+      "en": "Ordinary Boots of Speed",
+      "jp": "速度の普及型ブーツ",
+      "kr": "속도의 보급형 신발",
+      "zh": "普通速度鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "13"
+  },
+  "9298": {
+    "name": {
+      "en": "Fine Boots of Speed",
+      "jp": "速度の高級型ブーツ",
+      "kr": "속도의 고급형 신발",
+      "zh": "上等速度鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "13"
+  },
+  "9299": {
+    "name": {
+      "en": "Steel Boots of Speed",
+      "jp": "速度の鋼鉄ブーツ",
+      "kr": "속도의 강철 신발",
+      "zh": "钢铁速度鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "13"
+  },
+  "9300": {
+    "name": {
+      "en": "Etheric Boots of Speed",
+      "jp": "速度のエーテルブーツ",
+      "kr": "속도의 에테르 신발",
+      "zh": "以太速度鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "13"
+  },
+  "9301": {
+    "name": {
+      "en": "Ordinary Boots of Speed",
+      "jp": "速度の普及型ブーツ",
+      "kr": "속도의 보급형 신발",
+      "zh": "普通速度鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "13"
+  },
+  "9302": {
+    "name": {
+      "en": "Fine Boots of Speed",
+      "jp": "速度の高級型ブーツ",
+      "kr": "속도의 고급형 신발",
+      "zh": "上等速度鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "13"
+  },
+  "9303": {
+    "name": {
+      "en": "Steel Boots of Speed",
+      "jp": "速度の鋼鉄ブーツ",
+      "kr": "속도의 강철 신발",
+      "zh": "钢铁速度鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "13"
+  },
+  "9304": {
+    "name": {
+      "en": "Etheric Boots of Speed",
+      "jp": "速度のエーテルブーツ",
+      "kr": "속도의 에테르 신발",
+      "zh": "以太速度鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "13"
+  },
+  "9305": {
+    "name": {
+      "en": "Ordinary Boots of Speed",
+      "jp": "速度の普及型ブーツ",
+      "kr": "속도의 보급형 신발",
+      "zh": "普通速度鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "13"
+  },
+  "9306": {
+    "name": {
+      "en": "Fine Boots of Speed",
+      "jp": "速度の高級型ブーツ",
+      "kr": "속도의 고급형 신발",
+      "zh": "上等速度鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "13"
+  },
+  "9307": {
+    "name": {
+      "en": "Steel Boots of Speed",
+      "jp": "速度の鋼鉄ブーツ",
+      "kr": "속도의 강철 신발",
+      "zh": "钢铁速度鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "13"
+  },
+  "9308": {
+    "name": {
+      "en": "Etheric Boots of Speed",
+      "jp": "速度のエーテルブーツ",
+      "kr": "속도의 에테르 신발",
+      "zh": "以太速度鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "13"
+  },
+  "9309": {
+    "name": {
+      "en": "Ordinary Boots of Speed",
+      "jp": "速度の普及型ブーツ",
+      "kr": "속도의 보급형 신발",
+      "zh": "普通速度鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "13"
+  },
+  "9310": {
+    "name": {
+      "en": "Fine Boots of Speed",
+      "jp": "速度の高級型ブーツ",
+      "kr": "속도의 고급형 신발",
+      "zh": "上等速度鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "13"
+  },
+  "9311": {
+    "name": {
+      "en": "Steel Boots of Speed",
+      "jp": "速度の鋼鉄ブーツ",
+      "kr": "속도의 강철 신발",
+      "zh": "钢铁速度鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "13"
+  },
+  "9312": {
+    "name": {
+      "en": "Etheric Boots of Speed",
+      "jp": "速度のエーテルブーツ",
+      "kr": "속도의 에테르 신발",
+      "zh": "以太速度鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "9313": {
+    "name": {
+      "en": "Ordinary Boots of Bursting",
+      "jp": "炸裂の普及型ブーツ",
+      "kr": "버스트의 보급형 신발",
+      "zh": "普通爆发鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "14"
+  },
+  "9314": {
+    "name": {
+      "en": "Fine Boots of Bursting",
+      "jp": "炸裂の高級型ブーツ",
+      "kr": "버스트의 고급형 신발",
+      "zh": "上等爆发鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "14"
+  },
+  "9315": {
+    "name": {
+      "en": "Steel Boots of Bursting",
+      "jp": "炸裂の鋼鉄ブーツ",
+      "kr": "버스트의 강철 신발",
+      "zh": "钢铁爆发鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "14"
+  },
+  "9316": {
+    "name": {
+      "en": "Etheric Boots of Bursting",
+      "jp": "炸裂のエーテルブーツ",
+      "kr": "버스트의 에테르 신발",
+      "zh": "以太爆发鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "14"
+  },
+  "9317": {
+    "name": {
+      "en": "Ordinary Boots of Bursting",
+      "jp": "炸裂の普及型ブーツ",
+      "kr": "버스트의 보급형 신발",
+      "zh": "普通爆发鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "14"
+  },
+  "9318": {
+    "name": {
+      "en": "Fine Boots of Bursting",
+      "jp": "炸裂の高級型ブーツ",
+      "kr": "버스트의 고급형 신발",
+      "zh": "上等爆发鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "14"
+  },
+  "9319": {
+    "name": {
+      "en": "Steel Boots of Bursting",
+      "jp": "炸裂の鋼鉄ブーツ",
+      "kr": "버스트의 강철 신발",
+      "zh": "钢铁爆发鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "14"
+  },
+  "9320": {
+    "name": {
+      "en": "Etheric Boots of Bursting",
+      "jp": "炸裂のエーテルブーツ",
+      "kr": "버스트의 에테르 신발",
+      "zh": "以太爆发鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "14"
+  },
+  "9321": {
+    "name": {
+      "en": "Ordinary Boots of Bursting",
+      "jp": "炸裂の普及型ブーツ",
+      "kr": "버스트의 보급형 신발",
+      "zh": "普通爆发鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "14"
+  },
+  "9322": {
+    "name": {
+      "en": "Fine Boots of Bursting",
+      "jp": "炸裂の高級型ブーツ",
+      "kr": "버스트의 고급형 신발",
+      "zh": "上等爆发鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "14"
+  },
+  "9323": {
+    "name": {
+      "en": "Steel Boots of Bursting",
+      "jp": "炸裂の鋼鉄ブーツ",
+      "kr": "버스트의 강철 신발",
+      "zh": "钢铁爆发鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "14"
+  },
+  "9324": {
+    "name": {
+      "en": "Etheric Boots of Bursting",
+      "jp": "炸裂のエーテルブーツ",
+      "kr": "버스트의 에테르 신발",
+      "zh": "以太爆发鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "14"
+  },
+  "9325": {
+    "name": {
+      "en": "Ordinary Boots of Bursting",
+      "jp": "炸裂の普及型ブーツ",
+      "kr": "버스트의 보급형 신발",
+      "zh": "普通爆发鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "14"
+  },
+  "9326": {
+    "name": {
+      "en": "Fine Boots of Bursting",
+      "jp": "炸裂の高級型ブーツ",
+      "kr": "버스트의 고급형 신발",
+      "zh": "上等爆发鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "14"
+  },
+  "9327": {
+    "name": {
+      "en": "Steel Boots of Bursting",
+      "jp": "炸裂の鋼鉄ブーツ",
+      "kr": "버스트의 강철 신발",
+      "zh": "钢铁爆发鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "14"
+  },
+  "9328": {
+    "name": {
+      "en": "Etheric Boots of Bursting",
+      "jp": "炸裂のエーテルブーツ",
+      "kr": "버스트의 에테르 신발",
+      "zh": "以太爆发鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "14"
+  },
+  "9329": {
+    "name": {
+      "en": "Ordinary Boots of Bursting",
+      "jp": "炸裂の普及型ブーツ",
+      "kr": "버스트의 보급형 신발",
+      "zh": "普通爆发鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "14"
+  },
+  "9330": {
+    "name": {
+      "en": "Fine Boots of Bursting",
+      "jp": "炸裂の高級型ブーツ",
+      "kr": "버스트의 고급형 신발",
+      "zh": "上等爆发鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "14"
+  },
+  "9331": {
+    "name": {
+      "en": "Steel Boots of Bursting",
+      "jp": "炸裂の鋼鉄ブーツ",
+      "kr": "버스트의 강철 신발",
+      "zh": "钢铁爆发鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "14"
+  },
+  "9332": {
+    "name": {
+      "en": "Etheric Boots of Bursting",
+      "jp": "炸裂のエーテルブーツ",
+      "kr": "버스트의 에테르 신발",
+      "zh": "以太爆发鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "14"
+  },
+  "9333": {
+    "name": {
+      "en": "Ordinary Boots of Bursting",
+      "jp": "炸裂の普及型ブーツ",
+      "kr": "버스트의 보급형 신발",
+      "zh": "普通爆发鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "14"
+  },
+  "9334": {
+    "name": {
+      "en": "Fine Boots of Bursting",
+      "jp": "炸裂の高級型ブーツ",
+      "kr": "버스트의 고급형 신발",
+      "zh": "上等爆发鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "14"
+  },
+  "9335": {
+    "name": {
+      "en": "Steel Boots of Bursting",
+      "jp": "炸裂の鋼鉄ブーツ",
+      "kr": "버스트의 강철 신발",
+      "zh": "钢铁爆发鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "14"
+  },
+  "9336": {
+    "name": {
+      "en": "Etheric Boots of Bursting",
+      "jp": "炸裂のエーテルブーツ",
+      "kr": "버스트의 에테르 신발",
+      "zh": "以太爆发鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "9337": {
+    "name": {
+      "en": "Ordinary Boots of Revenge",
+      "jp": "復讐の普及型ブーツ",
+      "kr": "복수의 보급형 신발",
+      "zh": "普通复仇鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "15"
+  },
+  "9338": {
+    "name": {
+      "en": "Fine Boots of Revenge",
+      "jp": "復讐の高級型ブーツ",
+      "kr": "복수의 고급형 신발",
+      "zh": "上等复仇鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "15"
+  },
+  "9339": {
+    "name": {
+      "en": "Steel Boots of Revenge",
+      "jp": "復讐の鋼鉄ブーツ",
+      "kr": "복수의 강철 신발",
+      "zh": "钢铁复仇鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "15"
+  },
+  "9340": {
+    "name": {
+      "en": "Etheric Boots of Revenge",
+      "jp": "復讐のエーテルブーツ",
+      "kr": "복수의 에테르 신발",
+      "zh": "以太复仇鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "15"
+  },
+  "9341": {
+    "name": {
+      "en": "Ordinary Boots of Revenge",
+      "jp": "復讐の普及型ブーツ",
+      "kr": "복수의 보급형 신발",
+      "zh": "普通复仇鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "15"
+  },
+  "9342": {
+    "name": {
+      "en": "Fine Boots of Revenge",
+      "jp": "復讐の高級型ブーツ",
+      "kr": "복수의 고급형 신발",
+      "zh": "上等复仇鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "15"
+  },
+  "9343": {
+    "name": {
+      "en": "Steel Boots of Revenge",
+      "jp": "復讐の鋼鉄ブーツ",
+      "kr": "복수의 강철 신발",
+      "zh": "钢铁复仇鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "15"
+  },
+  "9344": {
+    "name": {
+      "en": "Etheric Boots of Revenge",
+      "jp": "復讐のエーテルブーツ",
+      "kr": "복수의 에테르 신발",
+      "zh": "以太复仇鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "15"
+  },
+  "9345": {
+    "name": {
+      "en": "Ordinary Boots of Revenge",
+      "jp": "復讐の普及型ブーツ",
+      "kr": "복수의 보급형 신발",
+      "zh": "普通复仇鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "15"
+  },
+  "9346": {
+    "name": {
+      "en": "Fine Boots of Revenge",
+      "jp": "復讐の高級型ブーツ",
+      "kr": "복수의 고급형 신발",
+      "zh": "上等复仇鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "15"
+  },
+  "9347": {
+    "name": {
+      "en": "Steel Boots of Revenge",
+      "jp": "復讐の鋼鉄ブーツ",
+      "kr": "복수의 강철 신발",
+      "zh": "钢铁复仇鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "15"
+  },
+  "9348": {
+    "name": {
+      "en": "Etheric Boots of Revenge",
+      "jp": "復讐のエーテルブーツ",
+      "kr": "복수의 에테르 신발",
+      "zh": "以太复仇鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "15"
+  },
+  "9349": {
+    "name": {
+      "en": "Ordinary Boots of Revenge",
+      "jp": "復讐の普及型ブーツ",
+      "kr": "복수의 보급형 신발",
+      "zh": "普通复仇鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "15"
+  },
+  "9350": {
+    "name": {
+      "en": "Fine Boots of Revenge",
+      "jp": "復讐の高級型ブーツ",
+      "kr": "복수의 고급형 신발",
+      "zh": "上等复仇鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "15"
+  },
+  "9351": {
+    "name": {
+      "en": "Steel Boots of Revenge",
+      "jp": "復讐の鋼鉄ブーツ",
+      "kr": "복수의 강철 신발",
+      "zh": "钢铁复仇鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "15"
+  },
+  "9352": {
+    "name": {
+      "en": "Etheric Boots of Revenge",
+      "jp": "復讐のエーテルブーツ",
+      "kr": "복수의 에테르 신발",
+      "zh": "以太复仇鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "15"
+  },
+  "9353": {
+    "name": {
+      "en": "Ordinary Boots of Revenge",
+      "jp": "復讐の普及型ブーツ",
+      "kr": "복수의 보급형 신발",
+      "zh": "普通复仇鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "15"
+  },
+  "9354": {
+    "name": {
+      "en": "Fine Boots of Revenge",
+      "jp": "復讐の高級型ブーツ",
+      "kr": "복수의 고급형 신발",
+      "zh": "上等复仇鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "15"
+  },
+  "9355": {
+    "name": {
+      "en": "Steel Boots of Revenge",
+      "jp": "復讐の鋼鉄ブーツ",
+      "kr": "복수의 강철 신발",
+      "zh": "钢铁复仇鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "15"
+  },
+  "9356": {
+    "name": {
+      "en": "Etheric Boots of Revenge",
+      "jp": "復讐のエーテルブーツ",
+      "kr": "복수의 에테르 신발",
+      "zh": "以太复仇鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "15"
+  },
+  "9357": {
+    "name": {
+      "en": "Ordinary Boots of Revenge",
+      "jp": "復讐の普及型ブーツ",
+      "kr": "복수의 보급형 신발",
+      "zh": "普通复仇鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "15"
+  },
+  "9358": {
+    "name": {
+      "en": "Fine Boots of Revenge",
+      "jp": "復讐の高級型ブーツ",
+      "kr": "복수의 고급형 신발",
+      "zh": "上等复仇鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "15"
+  },
+  "9359": {
+    "name": {
+      "en": "Steel Boots of Revenge",
+      "jp": "復讐の鋼鉄ブーツ",
+      "kr": "복수의 강철 신발",
+      "zh": "钢铁复仇鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "15"
+  },
+  "9360": {
+    "name": {
+      "en": "Etheric Boots of Revenge",
+      "jp": "復讐のエーテルブーツ",
+      "kr": "복수의 에테르 신발",
+      "zh": "以太复仇鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "9361": {
+    "name": {
+      "en": "Ordinary Boots of Patience",
+      "jp": "忍耐の普及型ブーツ",
+      "kr": "인내의 보급형 신발",
+      "zh": "普通忍耐鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "16"
+  },
+  "9362": {
+    "name": {
+      "en": "Fine Boots of Patience",
+      "jp": "忍耐の高級型ブーツ",
+      "kr": "인내의 고급형 신발",
+      "zh": "高级忍耐鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "16"
+  },
+  "9363": {
+    "name": {
+      "en": "Steel Boots of Patience",
+      "jp": "忍耐の鋼鉄ブーツ",
+      "kr": "인내의 강철 신발",
+      "zh": "钢铁忍耐鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "16"
+  },
+  "9364": {
+    "name": {
+      "en": "Etheric Boots of Patience",
+      "jp": "忍耐のエーテルブーツ",
+      "kr": "인내의 에테르 신발",
+      "zh": "以太忍耐鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "16"
+  },
+  "9365": {
+    "name": {
+      "en": "Ordinary Boots of Patience",
+      "jp": "忍耐の普及型ブーツ",
+      "kr": "인내의 보급형 신발",
+      "zh": "普通忍耐鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "16"
+  },
+  "9366": {
+    "name": {
+      "en": "Fine Boots of Patience",
+      "jp": "忍耐の高級型ブーツ",
+      "kr": "인내의 고급형 신발",
+      "zh": "高级忍耐鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "16"
+  },
+  "9367": {
+    "name": {
+      "en": "Steel Boots of Patience",
+      "jp": "忍耐の鋼鉄ブーツ",
+      "kr": "인내의 강철 신발",
+      "zh": "钢铁忍耐鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "16"
+  },
+  "9368": {
+    "name": {
+      "en": "Etheric Boots of Patience",
+      "jp": "忍耐のエーテルブーツ",
+      "kr": "인내의 에테르 신발",
+      "zh": "以太忍耐鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "16"
+  },
+  "9369": {
+    "name": {
+      "en": "Ordinary Boots of Patience",
+      "jp": "忍耐の普及型ブーツ",
+      "kr": "인내의 보급형 신발",
+      "zh": "普通忍耐鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "16"
+  },
+  "9370": {
+    "name": {
+      "en": "Fine Boots of Patience",
+      "jp": "忍耐の高級型ブーツ",
+      "kr": "인내의 고급형 신발",
+      "zh": "高级忍耐鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "16"
+  },
+  "9371": {
+    "name": {
+      "en": "Steel Boots of Patience",
+      "jp": "忍耐の鋼鉄ブーツ",
+      "kr": "인내의 강철 신발",
+      "zh": "钢铁忍耐鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "16"
+  },
+  "9372": {
+    "name": {
+      "en": "Etheric Boots of Patience",
+      "jp": "忍耐のエーテルブーツ",
+      "kr": "인내의 에테르 신발",
+      "zh": "以太忍耐鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "16"
+  },
+  "9373": {
+    "name": {
+      "en": "Ordinary Boots of Patience",
+      "jp": "忍耐の普及型ブーツ",
+      "kr": "인내의 보급형 신발",
+      "zh": "普通忍耐鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "16"
+  },
+  "9374": {
+    "name": {
+      "en": "Fine Boots of Patience",
+      "jp": "忍耐の高級型ブーツ",
+      "kr": "인내의 고급형 신발",
+      "zh": "高级忍耐鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "16"
+  },
+  "9375": {
+    "name": {
+      "en": "Steel Boots of Patience",
+      "jp": "忍耐の鋼鉄ブーツ",
+      "kr": "인내의 강철 신발",
+      "zh": "钢铁忍耐鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "16"
+  },
+  "9376": {
+    "name": {
+      "en": "Etheric Boots of Patience",
+      "jp": "忍耐のエーテルブーツ",
+      "kr": "인내의 에테르 신발",
+      "zh": "以太忍耐鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "16"
+  },
+  "9377": {
+    "name": {
+      "en": "Ordinary Boots of Patience",
+      "jp": "忍耐の普及型ブーツ",
+      "kr": "인내의 보급형 신발",
+      "zh": "普通忍耐鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "16"
+  },
+  "9378": {
+    "name": {
+      "en": "Fine Boots of Patience",
+      "jp": "忍耐の高級型ブーツ",
+      "kr": "인내의 고급형 신발",
+      "zh": "高级忍耐鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "16"
+  },
+  "9379": {
+    "name": {
+      "en": "Steel Boots of Patience",
+      "jp": "忍耐の鋼鉄ブーツ",
+      "kr": "인내의 강철 신발",
+      "zh": "钢铁忍耐鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "16"
+  },
+  "9380": {
+    "name": {
+      "en": "Etheric Boots of Patience",
+      "jp": "忍耐のエーテルブーツ",
+      "kr": "인내의 에테르 신발",
+      "zh": "以太忍耐鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "16"
+  },
+  "9381": {
+    "name": {
+      "en": "Ordinary Boots of Patience",
+      "jp": "忍耐の普及型ブーツ",
+      "kr": "인내의 보급형 신발",
+      "zh": "普通忍耐鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "16"
+  },
+  "9382": {
+    "name": {
+      "en": "Fine Boots of Patience",
+      "jp": "忍耐の高級型ブーツ",
+      "kr": "인내의 고급형 신발",
+      "zh": "高级忍耐鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "16"
+  },
+  "9383": {
+    "name": {
+      "en": "Steel Boots of Patience",
+      "jp": "忍耐の鋼鉄ブーツ",
+      "kr": "인내의 강철 신발",
+      "zh": "钢铁忍耐鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "16"
+  },
+  "9384": {
+    "name": {
+      "en": "Etheric Boots of Patience",
+      "jp": "忍耐のエーテルブーツ",
+      "kr": "인내의 에테르 신발",
+      "zh": "以太忍耐鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "9385": {
+    "name": {
+      "en": "Ordinary Boots of Pulverization",
+      "jp": "粉砕の普及型ブーツ",
+      "kr": "분쇄의 보급형 신발",
+      "zh": "普通粉碎鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "17"
+  },
+  "9386": {
+    "name": {
+      "en": "Fine Boots of Pulverization",
+      "jp": "粉砕の高級型ブーツ",
+      "kr": "분쇄의 고급형 신발",
+      "zh": "高级粉碎鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "17"
+  },
+  "9387": {
+    "name": {
+      "en": "Steel Boots of Pulverization",
+      "jp": "粉砕の鋼鉄ブーツ",
+      "kr": "분쇄의 강철 신발",
+      "zh": "钢铁粉碎鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "17"
+  },
+  "9388": {
+    "name": {
+      "en": "Etheric Boots of Pulverization",
+      "jp": "粉砕のエーテルブーツ",
+      "kr": "분쇄의 에테르 신발",
+      "zh": "以太粉碎鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "17"
+  },
+  "9389": {
+    "name": {
+      "en": "Ordinary Boots of Pulverization",
+      "jp": "粉砕の普及型ブーツ",
+      "kr": "분쇄의 보급형 신발",
+      "zh": "普通粉碎鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "17"
+  },
+  "9390": {
+    "name": {
+      "en": "Fine Boots of Pulverization",
+      "jp": "粉砕の高級型ブーツ",
+      "kr": "분쇄의 고급형 신발",
+      "zh": "高级粉碎鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "17"
+  },
+  "9391": {
+    "name": {
+      "en": "Steel Boots of Pulverization",
+      "jp": "粉砕の鋼鉄ブーツ",
+      "kr": "분쇄의 강철 신발",
+      "zh": "钢铁粉碎鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "17"
+  },
+  "9392": {
+    "name": {
+      "en": "Etheric Boots of Pulverization",
+      "jp": "粉砕のエーテルブーツ",
+      "kr": "분쇄의 에테르 신발",
+      "zh": "以太粉碎鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "17"
+  },
+  "9393": {
+    "name": {
+      "en": "Ordinary Boots of Pulverization",
+      "jp": "粉砕の普及型ブーツ",
+      "kr": "분쇄의 보급형 신발",
+      "zh": "普通粉碎鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "17"
+  },
+  "9394": {
+    "name": {
+      "en": "Fine Boots of Pulverization",
+      "jp": "粉砕の高級型ブーツ",
+      "kr": "분쇄의 고급형 신발",
+      "zh": "高级粉碎鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "17"
+  },
+  "9395": {
+    "name": {
+      "en": "Steel Boots of Pulverization",
+      "jp": "粉砕の鋼鉄ブーツ",
+      "kr": "분쇄의 강철 신발",
+      "zh": "钢铁粉碎鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "17"
+  },
+  "9396": {
+    "name": {
+      "en": "Etheric Boots of Pulverization",
+      "jp": "粉砕のエーテルブーツ",
+      "kr": "분쇄의 에테르 신발",
+      "zh": "以太粉碎鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "17"
+  },
+  "9397": {
+    "name": {
+      "en": "Ordinary Boots of Pulverization",
+      "jp": "粉砕の普及型ブーツ",
+      "kr": "분쇄의 보급형 신발",
+      "zh": "普通粉碎鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "17"
+  },
+  "9398": {
+    "name": {
+      "en": "Fine Boots of Pulverization",
+      "jp": "粉砕の高級型ブーツ",
+      "kr": "분쇄의 고급형 신발",
+      "zh": "高级粉碎鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "17"
+  },
+  "9399": {
+    "name": {
+      "en": "Steel Boots of Pulverization",
+      "jp": "粉砕の鋼鉄ブーツ",
+      "kr": "분쇄의 강철 신발",
+      "zh": "钢铁粉碎鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "17"
+  },
+  "9400": {
+    "name": {
+      "en": "Etheric Boots of Pulverization",
+      "jp": "粉砕のエーテルブーツ",
+      "kr": "분쇄의 에테르 신발",
+      "zh": "以太粉碎鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "17"
+  },
+  "9401": {
+    "name": {
+      "en": "Ordinary Boots of Pulverization",
+      "jp": "粉砕の普及型ブーツ",
+      "kr": "분쇄의 보급형 신발",
+      "zh": "普通粉碎鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "17"
+  },
+  "9402": {
+    "name": {
+      "en": "Fine Boots of Pulverization",
+      "jp": "粉砕の高級型ブーツ",
+      "kr": "분쇄의 고급형 신발",
+      "zh": "高级粉碎鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "17"
+  },
+  "9403": {
+    "name": {
+      "en": "Steel Boots of Pulverization",
+      "jp": "粉砕の鋼鉄ブーツ",
+      "kr": "분쇄의 강철 신발",
+      "zh": "钢铁粉碎鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "17"
+  },
+  "9404": {
+    "name": {
+      "en": "Etheric Boots of Pulverization",
+      "jp": "粉砕のエーテルブーツ",
+      "kr": "분쇄의 에테르 신발",
+      "zh": "以太粉碎鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "17"
+  },
+  "9405": {
+    "name": {
+      "en": "Ordinary Boots of Pulverization",
+      "jp": "粉砕の普及型ブーツ",
+      "kr": "분쇄의 보급형 신발",
+      "zh": "普通粉碎鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "17"
+  },
+  "9406": {
+    "name": {
+      "en": "Fine Boots of Pulverization",
+      "jp": "粉砕の高級型ブーツ",
+      "kr": "분쇄의 고급형 신발",
+      "zh": "高级粉碎鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "17"
+  },
+  "9407": {
+    "name": {
+      "en": "Steel Boots of Pulverization",
+      "jp": "粉砕の鋼鉄ブーツ",
+      "kr": "분쇄의 강철 신발",
+      "zh": "钢铁粉碎鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "17"
+  },
+  "9408": {
+    "name": {
+      "en": "Etheric Boots of Pulverization",
+      "jp": "粉砕のエーテルブーツ",
+      "kr": "분쇄의 에테르 신발",
+      "zh": "以太粉碎鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "17"
+  },
+  "9409": {
+    "name": {
+      "en": "Ordinary Boots of Immunity",
+      "jp": "免疫の普及型ブーツ",
+      "kr": "면역의 보급형 신발",
+      "zh": "普通免疫鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "18"
+  },
+  "9410": {
+    "name": {
+      "en": "Fine Boots of Immunity",
+      "jp": "免疫の高級型ブーツ",
+      "kr": "면역의 고급형 신발",
+      "zh": "上等免疫鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "18"
+  },
+  "9411": {
+    "name": {
+      "en": "Steel Boots of Immunity",
+      "jp": "免疫の鋼鉄ブーツ",
+      "kr": "면역의 강철 신발",
+      "zh": "钢铁免疫鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "18"
+  },
+  "9412": {
+    "name": {
+      "en": "Etheric Boots of Immunity",
+      "jp": "免疫のエーテルブーツ",
+      "kr": "면역의 에테르 신발",
+      "zh": "以太免疫鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "18"
+  },
+  "9413": {
+    "name": {
+      "en": "Ordinary Boots of Immunity",
+      "jp": "免疫の普及型ブーツ",
+      "kr": "면역의 보급형 신발",
+      "zh": "普通免疫鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "18"
+  },
+  "9414": {
+    "name": {
+      "en": "Fine Boots of Immunity",
+      "jp": "免疫の高級型ブーツ",
+      "kr": "면역의 고급형 신발",
+      "zh": "上等免疫鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "18"
+  },
+  "9415": {
+    "name": {
+      "en": "Steel Boots of Immunity",
+      "jp": "免疫の鋼鉄ブーツ",
+      "kr": "면역의 강철 신발",
+      "zh": "钢铁免疫鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "18"
+  },
+  "9416": {
+    "name": {
+      "en": "Etheric Boots of Immunity",
+      "jp": "免疫のエーテルブーツ",
+      "kr": "면역의 에테르 신발",
+      "zh": "以太免疫鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "18"
+  },
+  "9417": {
+    "name": {
+      "en": "Ordinary Boots of Immunity",
+      "jp": "免疫の普及型ブーツ",
+      "kr": "면역의 보급형 신발",
+      "zh": "普通免疫鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "18"
+  },
+  "9418": {
+    "name": {
+      "en": "Fine Boots of Immunity",
+      "jp": "免疫の高級型ブーツ",
+      "kr": "면역의 고급형 신발",
+      "zh": "上等免疫鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "18"
+  },
+  "9419": {
+    "name": {
+      "en": "Steel Boots of Immunity",
+      "jp": "免疫の鋼鉄ブーツ",
+      "kr": "면역의 강철 신발",
+      "zh": "钢铁免疫鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "18"
+  },
+  "9420": {
+    "name": {
+      "en": "Etheric Boots of Immunity",
+      "jp": "免疫のエーテルブーツ",
+      "kr": "면역의 에테르 신발",
+      "zh": "以太免疫鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "18"
+  },
+  "9421": {
+    "name": {
+      "en": "Ordinary Boots of Immunity",
+      "jp": "免疫の普及型ブーツ",
+      "kr": "면역의 보급형 신발",
+      "zh": "普通免疫鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "18"
+  },
+  "9422": {
+    "name": {
+      "en": "Fine Boots of Immunity",
+      "jp": "免疫の高級型ブーツ",
+      "kr": "면역의 고급형 신발",
+      "zh": "上等免疫鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "18"
+  },
+  "9423": {
+    "name": {
+      "en": "Steel Boots of Immunity",
+      "jp": "免疫の鋼鉄ブーツ",
+      "kr": "면역의 강철 신발",
+      "zh": "钢铁免疫鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "18"
+  },
+  "9424": {
+    "name": {
+      "en": "Etheric Boots of Immunity",
+      "jp": "免疫のエーテルブーツ",
+      "kr": "면역의 에테르 신발",
+      "zh": "以太免疫鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "18"
+  },
+  "9425": {
+    "name": {
+      "en": "Ordinary Boots of Immunity",
+      "jp": "免疫の普及型ブーツ",
+      "kr": "면역의 보급형 신발",
+      "zh": "普通免疫鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "18"
+  },
+  "9426": {
+    "name": {
+      "en": "Fine Boots of Immunity",
+      "jp": "免疫の高級型ブーツ",
+      "kr": "면역의 고급형 신발",
+      "zh": "上等免疫鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "18"
+  },
+  "9427": {
+    "name": {
+      "en": "Steel Boots of Immunity",
+      "jp": "免疫の鋼鉄ブーツ",
+      "kr": "면역의 강철 신발",
+      "zh": "钢铁免疫鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "18"
+  },
+  "9428": {
+    "name": {
+      "en": "Etheric Boots of Immunity",
+      "jp": "免疫のエーテルブーツ",
+      "kr": "면역의 에테르 신발",
+      "zh": "以太免疫鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "18"
+  },
+  "9429": {
+    "name": {
+      "en": "Ordinary Boots of Immunity",
+      "jp": "免疫の普及型ブーツ",
+      "kr": "면역의 보급형 신발",
+      "zh": "普通免疫鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "18"
+  },
+  "9430": {
+    "name": {
+      "en": "Fine Boots of Immunity",
+      "jp": "免疫の高級型ブーツ",
+      "kr": "면역의 고급형 신발",
+      "zh": "上等免疫鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "18"
+  },
+  "9431": {
+    "name": {
+      "en": "Steel Boots of Immunity",
+      "jp": "免疫の鋼鉄ブーツ",
+      "kr": "면역의 강철 신발",
+      "zh": "钢铁免疫鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "18"
+  },
+  "9432": {
+    "name": {
+      "en": "Etheric Boots of Immunity",
+      "jp": "免疫のエーテルブーツ",
+      "kr": "면역의 에테르 신발",
+      "zh": "以太免疫鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "9433": {
+    "name": {
+      "en": "Ordinary Boots of Swiftness",
+      "jp": "機敏の普及型ブーツ",
+      "kr": "기민의 보급형 신발",
+      "zh": "普通敏捷鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "19"
+  },
+  "9434": {
+    "name": {
+      "en": "Fine Boots of Swiftness",
+      "jp": "機敏の高級型ブーツ",
+      "kr": "기민의 고급형 신발",
+      "zh": "上等敏捷鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "19"
+  },
+  "9435": {
+    "name": {
+      "en": "Steel Boots of Swiftness",
+      "jp": "機敏の鋼鉄ブーツ",
+      "kr": "기민의 강철 신발",
+      "zh": "钢铁敏捷鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "19"
+  },
+  "9436": {
+    "name": {
+      "en": "Etheric Boots of Swiftness",
+      "jp": "機敏のエーテルブーツ",
+      "kr": "기민의 에테르 신발",
+      "zh": "以太敏捷鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "19"
+  },
+  "9437": {
+    "name": {
+      "en": "Ordinary Boots of Swiftness",
+      "jp": "機敏の普及型ブーツ",
+      "kr": "기민의 보급형 신발",
+      "zh": "普通敏捷鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "19"
+  },
+  "9438": {
+    "name": {
+      "en": "Fine Boots of Swiftness",
+      "jp": "機敏の高級型ブーツ",
+      "kr": "기민의 고급형 신발",
+      "zh": "上等敏捷鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "19"
+  },
+  "9439": {
+    "name": {
+      "en": "Steel Boots of Swiftness",
+      "jp": "機敏の鋼鉄ブーツ",
+      "kr": "기민의 강철 신발",
+      "zh": "钢铁敏捷鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "19"
+  },
+  "9440": {
+    "name": {
+      "en": "Etheric Boots of Swiftness",
+      "jp": "機敏のエーテルブーツ",
+      "kr": "기민의 에테르 신발",
+      "zh": "以太敏捷鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "19"
+  },
+  "9441": {
+    "name": {
+      "en": "Ordinary Boots of Swiftness",
+      "jp": "機敏の普及型ブーツ",
+      "kr": "기민의 보급형 신발",
+      "zh": "普通敏捷鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "19"
+  },
+  "9442": {
+    "name": {
+      "en": "Fine Boots of Swiftness",
+      "jp": "機敏の高級型ブーツ",
+      "kr": "기민의 고급형 신발",
+      "zh": "上等敏捷鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "19"
+  },
+  "9443": {
+    "name": {
+      "en": "Steel Boots of Swiftness",
+      "jp": "機敏の鋼鉄ブーツ",
+      "kr": "기민의 강철 신발",
+      "zh": "钢铁敏捷鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "19"
+  },
+  "9444": {
+    "name": {
+      "en": "Etheric Boots of Swiftness",
+      "jp": "機敏のエーテルブーツ",
+      "kr": "기민의 에테르 신발",
+      "zh": "以太敏捷鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "19"
+  },
+  "9445": {
+    "name": {
+      "en": "Ordinary Boots of Swiftness",
+      "jp": "機敏の普及型ブーツ",
+      "kr": "기민의 보급형 신발",
+      "zh": "普通敏捷鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "19"
+  },
+  "9446": {
+    "name": {
+      "en": "Fine Boots of Swiftness",
+      "jp": "機敏の高級型ブーツ",
+      "kr": "기민의 고급형 신발",
+      "zh": "上等敏捷鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "19"
+  },
+  "9447": {
+    "name": {
+      "en": "Steel Boots of Swiftness",
+      "jp": "機敏の鋼鉄ブーツ",
+      "kr": "기민의 강철 신발",
+      "zh": "钢铁敏捷鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "19"
+  },
+  "9448": {
+    "name": {
+      "en": "Etheric Boots of Swiftness",
+      "jp": "機敏のエーテルブーツ",
+      "kr": "기민의 에테르 신발",
+      "zh": "以太敏捷鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "19"
+  },
+  "9449": {
+    "name": {
+      "en": "Ordinary Boots of Swiftness",
+      "jp": "機敏の普及型ブーツ",
+      "kr": "기민의 보급형 신발",
+      "zh": "普通敏捷鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "19"
+  },
+  "9450": {
+    "name": {
+      "en": "Fine Boots of Swiftness",
+      "jp": "機敏の高級型ブーツ",
+      "kr": "기민의 고급형 신발",
+      "zh": "上等敏捷鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "19"
+  },
+  "9451": {
+    "name": {
+      "en": "Steel Boots of Swiftness",
+      "jp": "機敏の鋼鉄ブーツ",
+      "kr": "기민의 강철 신발",
+      "zh": "钢铁敏捷鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "19"
+  },
+  "9452": {
+    "name": {
+      "en": "Etheric Boots of Swiftness",
+      "jp": "機敏のエーテルブーツ",
+      "kr": "기민의 에테르 신발",
+      "zh": "以太敏捷鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "19"
+  },
+  "9453": {
+    "name": {
+      "en": "Ordinary Boots of Swiftness",
+      "jp": "機敏の普及型ブーツ",
+      "kr": "기민의 보급형 신발",
+      "zh": "普通敏捷鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "19"
+  },
+  "9454": {
+    "name": {
+      "en": "Fine Boots of Swiftness",
+      "jp": "機敏の高級型ブーツ",
+      "kr": "기민의 고급형 신발",
+      "zh": "上等敏捷鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "19"
+  },
+  "9455": {
+    "name": {
+      "en": "Steel Boots of Swiftness",
+      "jp": "機敏の鋼鉄ブーツ",
+      "kr": "기민의 강철 신발",
+      "zh": "钢铁敏捷鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "19"
+  },
+  "9456": {
+    "name": {
+      "en": "Etheric Boots of Swiftness",
+      "jp": "機敏のエーテルブーツ",
+      "kr": "기민의 에테르 신발",
+      "zh": "以太敏捷鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "19"
+  },
+  "9457": {
+    "name": {
+      "en": "Ordinary Boots of Weakness",
+      "jp": "弱点の普及型ブーツ",
+      "kr": "약점의 보급형 신발",
+      "zh": "普通弱点鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "20"
+  },
+  "9458": {
+    "name": {
+      "en": "Fine Boots of Weakness",
+      "jp": "弱点の高級型ブーツ",
+      "kr": "약점의 고급형 신발",
+      "zh": "上等弱点鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "20"
+  },
+  "9459": {
+    "name": {
+      "en": "Steel Boots of Weakness",
+      "jp": "弱点の鋼鉄ブーツ",
+      "kr": "약점의 강철 신발",
+      "zh": "钢铁弱点鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "20"
+  },
+  "9460": {
+    "name": {
+      "en": "Etheric Boots of Weakness",
+      "jp": "弱点のエーテルブーツ",
+      "kr": "약점의 에테르 신발",
+      "zh": "以太弱点鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "20"
+  },
+  "9461": {
+    "name": {
+      "en": "Ordinary Boots of Weakness",
+      "jp": "弱点の普及型ブーツ",
+      "kr": "약점의 보급형 신발",
+      "zh": "普通弱点鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "20"
+  },
+  "9462": {
+    "name": {
+      "en": "Fine Boots of Weakness",
+      "jp": "弱点の高級型ブーツ",
+      "kr": "약점의 고급형 신발",
+      "zh": "上等弱点鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "20"
+  },
+  "9463": {
+    "name": {
+      "en": "Steel Boots of Weakness",
+      "jp": "弱点の鋼鉄ブーツ",
+      "kr": "약점의 강철 신발",
+      "zh": "钢铁弱点鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "20"
+  },
+  "9464": {
+    "name": {
+      "en": "Etheric Boots of Weakness",
+      "jp": "弱点のエーテルブーツ",
+      "kr": "약점의 에테르 신발",
+      "zh": "以太弱点鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "20"
+  },
+  "9465": {
+    "name": {
+      "en": "Ordinary Boots of Weakness",
+      "jp": "弱点の普及型ブーツ",
+      "kr": "약점의 보급형 신발",
+      "zh": "普通弱点鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "20"
+  },
+  "9466": {
+    "name": {
+      "en": "Fine Boots of Weakness",
+      "jp": "弱点の高級型ブーツ",
+      "kr": "약점의 고급형 신발",
+      "zh": "上等弱点鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "20"
+  },
+  "9467": {
+    "name": {
+      "en": "Steel Boots of Weakness",
+      "jp": "弱点の鋼鉄ブーツ",
+      "kr": "약점의 강철 신발",
+      "zh": "钢铁弱点鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "20"
+  },
+  "9468": {
+    "name": {
+      "en": "Etheric Boots of Weakness",
+      "jp": "弱点のエーテルブーツ",
+      "kr": "약점의 에테르 신발",
+      "zh": "以太弱点鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "20"
+  },
+  "9469": {
+    "name": {
+      "en": "Ordinary Boots of Weakness",
+      "jp": "弱点の普及型ブーツ",
+      "kr": "약점의 보급형 신발",
+      "zh": "普通弱点鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "20"
+  },
+  "9470": {
+    "name": {
+      "en": "Fine Boots of Weakness",
+      "jp": "弱点の高級型ブーツ",
+      "kr": "약점의 고급형 신발",
+      "zh": "上等弱点鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "20"
+  },
+  "9471": {
+    "name": {
+      "en": "Steel Boots of Weakness",
+      "jp": "弱点の鋼鉄ブーツ",
+      "kr": "약점의 강철 신발",
+      "zh": "钢铁弱点鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "20"
+  },
+  "9472": {
+    "name": {
+      "en": "Etheric Boots of Weakness",
+      "jp": "弱点のエーテルブーツ",
+      "kr": "약점의 에테르 신발",
+      "zh": "以太弱点鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "20"
+  },
+  "9473": {
+    "name": {
+      "en": "Ordinary Boots of Weakness",
+      "jp": "弱点の普及型ブーツ",
+      "kr": "약점의 보급형 신발",
+      "zh": "普通弱点鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "20"
+  },
+  "9474": {
+    "name": {
+      "en": "Fine Boots of Weakness",
+      "jp": "弱点の高級型ブーツ",
+      "kr": "약점의 고급형 신발",
+      "zh": "上等弱点鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "20"
+  },
+  "9475": {
+    "name": {
+      "en": "Steel Boots of Weakness",
+      "jp": "弱点の鋼鉄ブーツ",
+      "kr": "약점의 강철 신발",
+      "zh": "钢铁弱点鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "20"
+  },
+  "9476": {
+    "name": {
+      "en": "Etheric Boots of Weakness",
+      "jp": "弱点のエーテルブーツ",
+      "kr": "약점의 에테르 신발",
+      "zh": "以太弱点鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "20"
+  },
+  "9477": {
+    "name": {
+      "en": "Ordinary Boots of Weakness",
+      "jp": "弱点の普及型ブーツ",
+      "kr": "약점의 보급형 신발",
+      "zh": "普通弱点鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "20"
+  },
+  "9478": {
+    "name": {
+      "en": "Fine Boots of Weakness",
+      "jp": "弱点の高級型ブーツ",
+      "kr": "약점의 고급형 신발",
+      "zh": "上等弱点鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "20"
+  },
+  "9479": {
+    "name": {
+      "en": "Steel Boots of Weakness",
+      "jp": "弱点の鋼鉄ブーツ",
+      "kr": "약점의 강철 신발",
+      "zh": "钢铁弱点鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "20"
+  },
+  "9480": {
+    "name": {
+      "en": "Etheric Boots of Weakness",
+      "jp": "弱点のエーテルブーツ",
+      "kr": "약점의 에테르 신발",
+      "zh": "以太弱点鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "20"
+  },
+  "9481": {
+    "name": {
+      "en": "Ordinary Boots of Augmentation",
+      "jp": "増強の普及型ブーツ",
+      "kr": "증강의 보급형 신발",
+      "zh": "普通加强鞋子"
+    },
+    "grade": "normal",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6001", "6025"],
+    "sub": "101",
+    "breakLimit": "1|normal",
+    "set": "21"
+  },
+  "9482": {
+    "name": {
+      "en": "Fine Boots of Augmentation",
+      "jp": "増強の高級型ブーツ",
+      "kr": "증강의 고급형 신발",
+      "zh": "上等加强鞋子"
+    },
+    "grade": "magic",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6002", "6026"],
+    "sub": "101",
+    "breakLimit": "1|magic",
+    "set": "21"
+  },
+  "9483": {
+    "name": {
+      "en": "Steel Boots of Augmentation",
+      "jp": "増強の鋼鉄ブーツ",
+      "kr": "증강의 강철 신발",
+      "zh": "钢铁加强鞋子"
+    },
+    "grade": "rare",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6003", "6027"],
+    "sub": "101",
+    "breakLimit": "1|rare",
+    "set": "21"
+  },
+  "9484": {
+    "name": {
+      "en": "Etheric Boots of Augmentation",
+      "jp": "増強のエーテルブーツ",
+      "kr": "증강의 에테르 신발",
+      "zh": "以太加强鞋子"
+    },
+    "grade": "unique",
+    "star": 1,
+    "icon": "TI_Equipment_Shoes_01",
+    "craftable": false,
+    "main": ["6004", "6028"],
+    "sub": "101",
+    "breakLimit": "1|unique",
+    "set": "21"
+  },
+  "9485": {
+    "name": {
+      "en": "Ordinary Boots of Augmentation",
+      "jp": "増強の普及型ブーツ",
+      "kr": "증강의 보급형 신발",
+      "zh": "普通加强鞋子"
+    },
+    "grade": "normal",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6005", "6029"],
+    "sub": "102",
+    "breakLimit": "2|normal",
+    "set": "21"
+  },
+  "9486": {
+    "name": {
+      "en": "Fine Boots of Augmentation",
+      "jp": "増強の高級型ブーツ",
+      "kr": "증강의 고급형 신발",
+      "zh": "上等加强鞋子"
+    },
+    "grade": "magic",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6006", "6030"],
+    "sub": "102",
+    "breakLimit": "2|magic",
+    "set": "21"
+  },
+  "9487": {
+    "name": {
+      "en": "Steel Boots of Augmentation",
+      "jp": "増強の鋼鉄ブーツ",
+      "kr": "증강의 강철 신발",
+      "zh": "钢铁加强鞋子"
+    },
+    "grade": "rare",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6007", "6031"],
+    "sub": "102",
+    "breakLimit": "2|rare",
+    "set": "21"
+  },
+  "9488": {
+    "name": {
+      "en": "Etheric Boots of Augmentation",
+      "jp": "増強のエーテルブーツ",
+      "kr": "증강의 에테르 신발",
+      "zh": "以太加强鞋子"
+    },
+    "grade": "unique",
+    "star": 2,
+    "icon": "TI_Equipment_Shoes_02",
+    "craftable": false,
+    "main": ["6008", "6032"],
+    "sub": "102",
+    "breakLimit": "2|unique",
+    "set": "21"
+  },
+  "9489": {
+    "name": {
+      "en": "Ordinary Boots of Augmentation",
+      "jp": "増強の普及型ブーツ",
+      "kr": "증강의 보급형 신발",
+      "zh": "普通加强鞋子"
+    },
+    "grade": "normal",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6009", "6033"],
+    "sub": "103",
+    "breakLimit": "3|normal",
+    "set": "21"
+  },
+  "9490": {
+    "name": {
+      "en": "Fine Boots of Augmentation",
+      "jp": "増強の高級型ブーツ",
+      "kr": "증강의 고급형 신발",
+      "zh": "上等加强鞋子"
+    },
+    "grade": "magic",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6010", "6034"],
+    "sub": "103",
+    "breakLimit": "3|magic",
+    "set": "21"
+  },
+  "9491": {
+    "name": {
+      "en": "Steel Boots of Augmentation",
+      "jp": "増強の鋼鉄ブーツ",
+      "kr": "증강의 강철 신발",
+      "zh": "钢铁加强鞋子"
+    },
+    "grade": "rare",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6011", "6035"],
+    "sub": "103",
+    "breakLimit": "3|rare",
+    "set": "21"
+  },
+  "9492": {
+    "name": {
+      "en": "Etheric Boots of Augmentation",
+      "jp": "増強のエーテルブーツ",
+      "kr": "증강의 에테르 신발",
+      "zh": "以太加强鞋子"
+    },
+    "grade": "unique",
+    "star": 3,
+    "icon": "TI_Equipment_Shoes_03",
+    "craftable": false,
+    "main": ["6012", "6036"],
+    "sub": "103",
+    "breakLimit": "3|unique",
+    "set": "21"
+  },
+  "9493": {
+    "name": {
+      "en": "Ordinary Boots of Augmentation",
+      "jp": "増強の普及型ブーツ",
+      "kr": "증강의 보급형 신발",
+      "zh": "普通加强鞋子"
+    },
+    "grade": "normal",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6013", "6037"],
+    "sub": "104",
+    "breakLimit": "4|normal",
+    "set": "21"
+  },
+  "9494": {
+    "name": {
+      "en": "Fine Boots of Augmentation",
+      "jp": "増強の高級型ブーツ",
+      "kr": "증강의 고급형 신발",
+      "zh": "上等加强鞋子"
+    },
+    "grade": "magic",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6014", "6038"],
+    "sub": "104",
+    "breakLimit": "4|magic",
+    "set": "21"
+  },
+  "9495": {
+    "name": {
+      "en": "Steel Boots of Augmentation",
+      "jp": "増強の鋼鉄ブーツ",
+      "kr": "증강의 강철 신발",
+      "zh": "钢铁加强鞋子"
+    },
+    "grade": "rare",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6015", "6039"],
+    "sub": "104",
+    "breakLimit": "4|rare",
+    "set": "21"
+  },
+  "9496": {
+    "name": {
+      "en": "Etheric Boots of Augmentation",
+      "jp": "増強のエーテルブーツ",
+      "kr": "증강의 에테르 신발",
+      "zh": "以太加强鞋子"
+    },
+    "grade": "unique",
+    "star": 4,
+    "icon": "TI_Equipment_Shoes_04",
+    "craftable": false,
+    "main": ["6016", "6040"],
+    "sub": "104",
+    "breakLimit": "4|unique",
+    "set": "21"
+  },
+  "9497": {
+    "name": {
+      "en": "Ordinary Boots of Augmentation",
+      "jp": "増強の普及型ブーツ",
+      "kr": "증강의 보급형 신발",
+      "zh": "普通加强鞋子"
+    },
+    "grade": "normal",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6017", "6041"],
+    "sub": "105",
+    "breakLimit": "5|normal",
+    "set": "21"
+  },
+  "9498": {
+    "name": {
+      "en": "Fine Boots of Augmentation",
+      "jp": "増強の高級型ブーツ",
+      "kr": "증강의 고급형 신발",
+      "zh": "上等加强鞋子"
+    },
+    "grade": "magic",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6018", "6042"],
+    "sub": "105",
+    "breakLimit": "5|magic",
+    "set": "21"
+  },
+  "9499": {
+    "name": {
+      "en": "Steel Boots of Augmentation",
+      "jp": "増強の鋼鉄ブーツ",
+      "kr": "증강의 강철 신발",
+      "zh": "钢铁加强鞋子"
+    },
+    "grade": "rare",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6019", "6043"],
+    "sub": "105",
+    "breakLimit": "5|rare",
+    "set": "21"
+  },
+  "9500": {
+    "name": {
+      "en": "Etheric Boots of Augmentation",
+      "jp": "増強のエーテルブーツ",
+      "kr": "증강의 에테르 신발",
+      "zh": "以太加强鞋子"
+    },
+    "grade": "unique",
+    "star": 5,
+    "icon": "TI_Equipment_Shoes_05",
+    "craftable": false,
+    "main": ["6020", "6044"],
+    "sub": "105",
+    "breakLimit": "5|unique",
+    "set": "21"
+  },
+  "9501": {
+    "name": {
+      "en": "Ordinary Boots of Augmentation",
+      "jp": "増強の普及型ブーツ",
+      "kr": "증강의 보급형 신발",
+      "zh": "普通加强鞋子"
+    },
+    "grade": "normal",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6021", "6045"],
+    "sub": "106",
+    "breakLimit": "6|normal",
+    "set": "21"
+  },
+  "9502": {
+    "name": {
+      "en": "Fine Boots of Augmentation",
+      "jp": "増強の高級型ブーツ",
+      "kr": "증강의 고급형 신발",
+      "zh": "上等加强鞋子"
+    },
+    "grade": "magic",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6022", "6046"],
+    "sub": "106",
+    "breakLimit": "6|magic",
+    "set": "21"
+  },
+  "9503": {
+    "name": {
+      "en": "Steel Boots of Augmentation",
+      "jp": "増強の鋼鉄ブーツ",
+      "kr": "증강의 강철 신발",
+      "zh": "钢铁加强鞋子"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6023", "6047"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "21"
+  },
+  "9504": {
+    "name": {
+      "en": "Etheric Boots of Augmentation",
+      "jp": "増強のエーテルブーツ",
+      "kr": "증강의 에테르 신발",
+      "zh": "以太加强鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": true,
+    "main": ["6024", "6048"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "21"
+  },
+  "9506": {
+    "name": {
+      "en": "Etheric Boots of Attack",
+      "jp": "攻撃のエーテルブーツ",
+      "kr": "공격의 에테르 신발",
+      "zh": "以太攻击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6049", "6050"],
+    "sub": "106",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94301": {
+    "name": {
+      "en": "Etheric Boots of Attack",
+      "jp": "攻撃のエーテルブーツ",
+      "kr": "공격의 에테르 신발",
+      "zh": "以太攻击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12001",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94302": {
+    "name": {
+      "en": "Etheric Boots of Defense",
+      "jp": "防御のエーテルブーツ",
+      "kr": "방어의 에테르 신발",
+      "zh": "以太防御鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12002",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "94303": {
+    "name": {
+      "en": "Etheric Boots of Life",
+      "jp": "生命のエーテルブーツ",
+      "kr": "생명의 에테르 신발",
+      "zh": "以太生命鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12003",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "94304": {
+    "name": {
+      "en": "Etheric Boots of Critical Hit",
+      "jp": "会心のエーテルブーツ",
+      "kr": "치명의 에테르 신발",
+      "zh": "以太暴击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12004",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "94305": {
+    "name": {
+      "en": "Etheric Boots of Effectiveness",
+      "jp": "効果命中のエーテルブーツ",
+      "kr": "적중의 에테르 신발",
+      "zh": "以太效果命中鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12005",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "94306": {
+    "name": {
+      "en": "Etheric Boots of Resilience",
+      "jp": "抵抗のエーテルブーツ",
+      "kr": "저항의 에테르 신발",
+      "zh": "以太抵抗鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12006",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "94307": {
+    "name": {
+      "en": "Etheric Boots of Counterattack",
+      "jp": "反撃のエーテルブーツ",
+      "kr": "반격의 에테르 신발",
+      "zh": "以太反击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12007",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "94308": {
+    "name": {
+      "en": "Etheric Boots of Fortification",
+      "jp": "鉄壁のエーテルブーツ",
+      "kr": "개전 방벽의 에테르 신발",
+      "zh": "以太开战防壁鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12008",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "94309": {
+    "name": {
+      "en": "Etheric Boots of Mitigation",
+      "jp": "無力化のエーテルブーツ",
+      "kr": "무력화의 에테르 신발",
+      "zh": "以太失效鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12009",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "94310": {
+    "name": {
+      "en": "Etheric Boots of Lifesteal",
+      "jp": "吸収のエーテルブーツ",
+      "kr": "흡혈의 에테르 신발",
+      "zh": "以太吸血鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12010",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "94311": {
+    "name": {
+      "en": "Etheric Boots of Penetration",
+      "jp": "貫通のエーテルブーツ",
+      "kr": "관통의 에테르 신발",
+      "zh": "以太穿透鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12011",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "94312": {
+    "name": {
+      "en": "Etheric Boots of Critical Strike",
+      "jp": "極大化のエーテルブーツ",
+      "kr": "극대화의 에테르 신발",
+      "zh": "以太暴伤鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12012",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "94313": {
+    "name": {
+      "en": "Etheric Boots of Speed",
+      "jp": "速度のエーテルブーツ",
+      "kr": "속도의 에테르 신발",
+      "zh": "以太速度鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12013",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "94314": {
+    "name": {
+      "en": "Etheric Boots of Bursting",
+      "jp": "炸裂のエーテルブーツ",
+      "kr": "버스트의 에테르 신발",
+      "zh": "以太爆发鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12014",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "94315": {
+    "name": {
+      "en": "Etheric Boots of Revenge",
+      "jp": "復讐のエーテルブーツ",
+      "kr": "복수의 에테르 신발",
+      "zh": "以太复仇鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12015",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "94316": {
+    "name": {
+      "en": "Etheric Boots of Patience",
+      "jp": "忍耐のエーテルブーツ",
+      "kr": "인내의 에테르 신발",
+      "zh": "以太忍耐鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12016",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "94318": {
+    "name": {
+      "en": "Etheric Boots of Immunity",
+      "jp": "免疫のエーテルブーツ",
+      "kr": "면역의 에테르 신발",
+      "zh": "以太免疫鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12017",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "94319": {
+    "name": {
+      "en": "Etheric Boots of Swiftness",
+      "jp": "機敏のエーテルブーツ",
+      "kr": "기민의 에테르 신발",
+      "zh": "以太敏捷鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12018",
+    "breakLimit": "6|unique",
+    "set": "19"
+  },
+  "94701": {
+    "name": {
+      "en": "Etheric Boots of Attack",
+      "jp": "攻撃のエーテルブーツ",
+      "kr": "공격의 에테르 신발",
+      "zh": "以太攻击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "1"
+  },
+  "94702": {
+    "name": {
+      "en": "Etheric Boots of Defense",
+      "jp": "防御のエーテルブーツ",
+      "kr": "방어의 에테르 신발",
+      "zh": "以太防御鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "2"
+  },
+  "94703": {
+    "name": {
+      "en": "Etheric Boots of Life",
+      "jp": "生命のエーテルブーツ",
+      "kr": "생명의 에테르 신발",
+      "zh": "以太生命鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "3"
+  },
+  "94704": {
+    "name": {
+      "en": "Etheric Boots of Critical Hit",
+      "jp": "会心のエーテルブーツ",
+      "kr": "치명의 에테르 신발",
+      "zh": "以太暴击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "4"
+  },
+  "94705": {
+    "name": {
+      "en": "Etheric Boots of Effectiveness",
+      "jp": "効果命中のエーテルブーツ",
+      "kr": "적중의 에테르 신발",
+      "zh": "以太效果命中鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "5"
+  },
+  "94706": {
+    "name": {
+      "en": "Etheric Boots of Resilience",
+      "jp": "抵抗のエーテルブーツ",
+      "kr": "저항의 에테르 신발",
+      "zh": "以太抵抗鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "6"
+  },
+  "94707": {
+    "name": {
+      "en": "Etheric Boots of Counterattack",
+      "jp": "反撃のエーテルブーツ",
+      "kr": "반격의 에테르 신발",
+      "zh": "以太反击鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "7"
+  },
+  "94708": {
+    "name": {
+      "en": "Etheric Boots of Fortification",
+      "jp": "鉄壁のエーテルブーツ",
+      "kr": "개전 방벽의 에테르 신발",
+      "zh": "以太开战防壁鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "8"
+  },
+  "94709": {
+    "name": {
+      "en": "Etheric Boots of Mitigation",
+      "jp": "無力化のエーテルブーツ",
+      "kr": "무력화의 에테르 신발",
+      "zh": "以太失效鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "9"
+  },
+  "94710": {
+    "name": {
+      "en": "Etheric Boots of Lifesteal",
+      "jp": "吸収のエーテルブーツ",
+      "kr": "흡혈의 에테르 신발",
+      "zh": "以太吸血鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "10"
+  },
+  "94711": {
+    "name": {
+      "en": "Etheric Boots of Penetration",
+      "jp": "貫通のエーテルブーツ",
+      "kr": "관통의 에테르 신발",
+      "zh": "以太穿透鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "11"
+  },
+  "94712": {
+    "name": {
+      "en": "Etheric Boots of Critical Strike",
+      "jp": "極大化のエーテルブーツ",
+      "kr": "극대화의 에테르 신발",
+      "zh": "以太暴伤鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "12"
+  },
+  "94713": {
+    "name": {
+      "en": "Etheric Boots of Speed",
+      "jp": "速度のエーテルブーツ",
+      "kr": "속도의 에테르 신발",
+      "zh": "以太速度鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "13"
+  },
+  "94714": {
+    "name": {
+      "en": "Etheric Boots of Bursting",
+      "jp": "炸裂のエーテルブーツ",
+      "kr": "버스트의 에테르 신발",
+      "zh": "以太爆发鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "14"
+  },
+  "94715": {
+    "name": {
+      "en": "Etheric Boots of Revenge",
+      "jp": "復讐のエーテルブーツ",
+      "kr": "복수의 에테르 신발",
+      "zh": "以太复仇鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "15"
+  },
+  "94716": {
+    "name": {
+      "en": "Etheric Boots of Patience",
+      "jp": "忍耐のエーテルブーツ",
+      "kr": "인내의 에테르 신발",
+      "zh": "以太忍耐鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "16"
+  },
+  "94717": {
+    "name": {
+      "en": "Etheric Boots of Immunity",
+      "jp": "免疫のエーテルブーツ",
+      "kr": "면역의 에테르 신발",
+      "zh": "以太免疫鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "18"
+  },
+  "94718": {
+    "name": {
+      "en": "Etheric Boots of Swiftness",
+      "jp": "機敏のエーテルブーツ",
+      "kr": "기민의 에테르 신발",
+      "zh": "以太敏捷鞋子"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Shoes_06",
+    "craftable": false,
+    "main": ["6024", "6048"],
+    "sub": "12019",
+    "breakLimit": "6|unique",
+    "set": "19"
+  }
+}

@@ -1,0 +1,851 @@
+{
+  "1": {
+    "name": {
+      "en": "Attack Set",
+      "jp": "攻撃セット",
+      "kr": "공격 세트",
+      "zh": "攻击套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_01",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "atk",
+          "value": "30%"
+        },
+        "4p": {
+          "stat": "atk",
+          "value": "20%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "atk",
+          "value": "35%"
+        },
+        "4p": {
+          "stat": "atk",
+          "value": "25%"
+        }
+      }
+    ]
+  },
+  "2": {
+    "name": {
+      "en": "Defense Set",
+      "jp": "防御セット",
+      "kr": "방어 세트",
+      "zh": "防御套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_02",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "def",
+          "value": "25%"
+        },
+        "4p": {
+          "stat": "def",
+          "value": "15%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "def",
+          "value": "30%"
+        },
+        "4p": {
+          "stat": "def",
+          "value": "20%"
+        }
+      }
+    ]
+  },
+  "3": {
+    "name": {
+      "en": "Life Set",
+      "jp": "生命セット",
+      "kr": "생명 세트",
+      "zh": "生命套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_03",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "hp",
+          "value": "30%"
+        },
+        "4p": {
+          "stat": "hp",
+          "value": "20%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "hp",
+          "value": "35%"
+        },
+        "4p": {
+          "stat": "hp",
+          "value": "25%"
+        }
+      }
+    ]
+  },
+  "4": {
+    "name": {
+      "en": "Critical Hit Set",
+      "jp": "会心セット",
+      "kr": "치명 세트",
+      "zh": "暴击套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_13",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "critical_rate",
+          "value": "15%"
+        },
+        "4p": {
+          "stat": "critical_rate",
+          "value": "10%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "critical_rate",
+          "value": "18%"
+        },
+        "4p": {
+          "stat": "critical_rate",
+          "value": "12%"
+        }
+      }
+    ]
+  },
+  "5": {
+    "name": {
+      "en": "Effectiveness Set",
+      "jp": "効果命中セット",
+      "kr": "적중 세트",
+      "zh": "效果命中套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_05",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "buff_chance",
+          "value": "18%"
+        },
+        "4p": {
+          "stat": "buff_chance",
+          "value": "12%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "buff_chance",
+          "value": "22%"
+        },
+        "4p": {
+          "stat": "buff_chance",
+          "value": "16%"
+        }
+      }
+    ]
+  },
+  "6": {
+    "name": {
+      "en": "Resilience Set",
+      "jp": "抵抗セット",
+      "kr": "저항 세트",
+      "zh": "抵抗套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_06",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "buff_resist",
+          "value": "18%"
+        },
+        "4p": {
+          "stat": "buff_resist",
+          "value": "12%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "buff_resist",
+          "value": "22%"
+        },
+        "4p": {
+          "stat": "buff_resist",
+          "value": "16%"
+        }
+      }
+    ]
+  },
+  "7": {
+    "name": {
+      "en": "Counterattack Set",
+      "jp": "反撃セット",
+      "kr": "반격 세트",
+      "zh": "反击套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_07",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "counter_rate",
+          "value": "12%"
+        },
+        "4p": {
+          "stat": "counter_rate",
+          "value": "8%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "counter_rate",
+          "value": "15%"
+        },
+        "4p": {
+          "stat": "counter_rate",
+          "value": "10%"
+        }
+      }
+    ]
+  },
+  "8": {
+    "name": {
+      "en": "Fortification set",
+      "jp": "鉄壁セット",
+      "kr": "개전 방벽 세트",
+      "zh": "开战防壁"
+    },
+    "icon": "TI_Icon_Set_Enchant_23",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_23_GROUP_1",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": 400
+            },
+            {
+              "type": "stat",
+              "stat": "speed",
+              "mode": "rate",
+              "value": -300
+            }
+          ],
+          "desc": {
+            "en": "damage taken decreases by 40% for the first 1 incoming attack (Removed when hit/Irremovable)\\nDecreases the caster's Speed for 1 turn (Ignores Immunity/Irremovable)",
+            "jp": "最初の1回の攻撃に対して、受けるダメージDOWN 40% (被弾時解除/解除不可) \\n自身のスピードDOWN 1ターン (免疫効果無視/解除不可)",
+            "kr": "최초 1회의 공격에 대한 받는 피해 감소 -40%(피격 시 해제/해제 불가)\\n자신 속도 감소 1턴(면역 무시/해제 불가)",
+            "zh": "首次受到的1次攻击所受伤害-40%（受到攻击时解除/不可解除）\\n自身速度降低1回合（无视免疫/不可解除）"
+          }
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_23_GROUP_2",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": 400
+            },
+            {
+              "type": "stat",
+              "stat": "speed",
+              "mode": "rate",
+              "value": -300
+            }
+          ],
+          "desc": {
+            "en": "damage taken decreases by 40% for the first 2 incoming attacks (Removed when hit/Irremovable)\\nDecreases the caster's Speed for 1 turn (Ignores Immunity/Irremovable)",
+            "jp": "最初の2回の攻撃に対して、受けるダメージDOWN 40% (被弾時解除/解除不可) \\n自身のスピードDOWN 1ターン (免疫効果無視/解除不可)",
+            "kr": "최초 2회의 공격에 대한 받는 피해 감소 -40%(피격 시 해제/해제 불가)\\n자신 속도 감소 1턴(면역 무시/해제 불가)",
+            "zh": "首次受到的2次攻击所受伤害-40%（受到攻击时解除/不可解除）\\n自身速度降低1回合（无视免疫/不可解除）"
+          }
+        },
+        "4p": null
+      }
+    ]
+  },
+  "9": {
+    "name": {
+      "en": "Mitigation set",
+      "jp": "無力化セット",
+      "kr": "무력화 세트",
+      "zh": "失效套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_24",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "e_cri_dmg_reduce",
+          "value": "25%"
+        },
+        "4p": {
+          "stat": "e_cri_dmg_reduce",
+          "value": "20%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "e_cri_dmg_reduce",
+          "value": "38%"
+        },
+        "4p": {
+          "stat": "e_cri_dmg_reduce",
+          "value": "27%"
+        }
+      }
+    ]
+  },
+  "10": {
+    "name": {
+      "en": "Lifesteal Set",
+      "jp": "吸収セット",
+      "kr": "흡혈 세트",
+      "zh": "吸血套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_10",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "vampiric",
+          "value": "10%"
+        },
+        "4p": {
+          "stat": "vampiric",
+          "value": "5%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "vampiric",
+          "value": "12%"
+        },
+        "4p": {
+          "stat": "vampiric",
+          "value": "7%"
+        }
+      }
+    ]
+  },
+  "11": {
+    "name": {
+      "en": "Penetration Set",
+      "jp": "貫通セット",
+      "kr": "관통 세트",
+      "zh": "穿透套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_11",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "stat": "pierce_power_rate",
+          "value": "20%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "pierce_power_rate",
+          "value": "11%"
+        },
+        "4p": {
+          "stat": "pierce_power_rate",
+          "value": "9%"
+        }
+      }
+    ]
+  },
+  "12": {
+    "name": {
+      "en": "Critical Strike Set",
+      "jp": "極大化セット",
+      "kr": "극대화 세트",
+      "zh": "暴伤套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_04",
+    "tiers": [
+      {
+        "2p": {
+          "stat": "critical_dmg_rate",
+          "value": "20%"
+        },
+        "4p": {
+          "stat": "critical_dmg_rate",
+          "value": "15%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "critical_dmg_rate",
+          "value": "33%"
+        },
+        "4p": {
+          "stat": "critical_dmg_rate",
+          "value": "22%"
+        }
+      }
+    ]
+  },
+  "13": {
+    "name": {
+      "en": "Speed Set",
+      "jp": "速度セット",
+      "kr": "속도 세트",
+      "zh": "速度套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_15",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "stat": "speed",
+          "value": "25%"
+        }
+      },
+      {
+        "2p": {
+          "stat": "speed",
+          "value": "13%"
+        },
+        "4p": {
+          "stat": "speed",
+          "value": "12%"
+        }
+      }
+    ]
+  },
+  "14": {
+    "name": {
+      "en": "Bursting Set",
+      "jp": "炸裂セット",
+      "kr": "버스트 세트",
+      "zh": "爆发套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_14",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "stat": "enter_ap",
+          "value": "25"
+        }
+      },
+      {
+        "2p": {
+          "stat": "enter_ap",
+          "value": "15"
+        },
+        "4p": {
+          "stat": "enter_ap",
+          "value": "10"
+        }
+      }
+    ]
+  },
+  "15": {
+    "name": {
+      "en": "Revenge Set",
+      "jp": "復讐セット",
+      "kr": "복수 세트",
+      "zh": "复仇套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_16",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_15",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "atk",
+              "mode": "rate",
+              "value": 1600
+            }
+          ],
+          "desc": {
+            "en": "Increases Attack proportional to missing Health",
+            "jp": "自分の残りHPが低いほど、攻撃力がUPする。",
+            "kr": "잃은 체력 비례 공격력 증가",
+            "zh": "根据损失的生命值等比提升攻击力"
+          }
+        }
+      },
+      {
+        "2p": null,
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_15",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "atk",
+              "mode": "rate",
+              "value": 1600
+            }
+          ],
+          "desc": {
+            "en": "Increases Attack proportional to missing Health (Maximum efficiency at 50% Health)",
+            "jp": "自分の残りHPが低いほど、\\n攻撃力がUPする。\\n(残りHP50%時に効果が最大になる)",
+            "kr": "잃은 체력 비례 공격력 증가 (체력 50%에서 최대 효율)",
+            "zh": "根据已损失生命值提升攻击力(生命值50%时达到最大效率)"
+          }
+        }
+      }
+    ]
+  },
+  "16": {
+    "name": {
+      "en": "Patience Set",
+      "jp": "忍耐セット",
+      "kr": "인내 세트",
+      "zh": "忍耐套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_17",
+    "tiers": [
+      {
+        "2p": null,
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_16",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "def",
+              "mode": "rate",
+              "value": 1600
+            }
+          ],
+          "desc": {
+            "en": "Increases Defense proportional to missing Health",
+            "jp": "自分の残りHPが低いほど、防御力がUPする。",
+            "kr": "잃은 체력 비례 방어력 증가",
+            "zh": "根据损失的生命值等比提升防御力"
+          }
+        }
+      },
+      {
+        "2p": null,
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_16",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "def",
+              "mode": "rate",
+              "value": 1600
+            }
+          ],
+          "desc": {
+            "en": "Increases Defense proportional to missing Health (Maximum efficiency at 50% Health)",
+            "jp": "自分の残りHPが低いほど、\\n防御力がUPする。\\n(残りHP50%時に効果が最大になる)",
+            "kr": "잃은 체력 비례 방어력 증가 (체력 50%에서 최대 효율)",
+            "zh": "根据已损失生命值提升防御力(生命值50%时达到最大效率)"
+          }
+        }
+      }
+    ]
+  },
+  "17": {
+    "name": {
+      "en": "Pulverization Set",
+      "jp": "粉砕セット",
+      "kr": "분쇄 세트",
+      "zh": "粉碎套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_18",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_17",
+          "effects": [
+            {
+              "type": "dmg_target_break",
+              "mode": "rate",
+              "value": 350
+            }
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with Break by 35%",
+            "jp": "ブレイク状態の対象に与える\\nダメージが+35％UPする。",
+            "kr": "브레이크 상태의 대상에게 입히는 피해 +35%",
+            "zh": "对处于力竭状态的目标造成的伤害+35%"
+          }
+        },
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_17_1",
+          "effects": [
+            {
+              "type": "dmg_target_break",
+              "mode": "rate",
+              "value": 250
+            }
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with Break by 25%",
+            "jp": "ブレイク状態の対象に与える\\nダメージが+25％UPする。",
+            "kr": "브레이크 상태의 대상에게 입히는 피해 +25%",
+            "zh": "对处于力竭状态的目标造成的伤害+25%"
+          }
+        }
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_17",
+          "effects": [
+            {
+              "type": "dmg_target_break",
+              "mode": "rate",
+              "value": 350
+            }
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with Break by 70%",
+            "jp": "ブレイク状態の対象に\\n与えるダメージが+70％UPする。",
+            "kr": "브레이크 상태의 대상에게 입히는 피해 +70%",
+            "zh": "对处于力竭状态的目标造成的伤害+70%"
+          }
+        },
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_17",
+          "effects": [
+            {
+              "type": "dmg_target_break",
+              "mode": "rate",
+              "value": 350
+            }
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with Break by 50%",
+            "jp": "ブレイク状態の対象に与える\\nダメージが+50％UPする。",
+            "kr": "브레이크 상태의 대상에게 입히는 피해 +50%",
+            "zh": "对处于力竭状态的目标造成的伤害+50%"
+          }
+        }
+      }
+    ]
+  },
+  "18": {
+    "name": {
+      "en": "Immunity Set",
+      "jp": "免疫セット",
+      "kr": "면역 세트",
+      "zh": "免疫套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_19",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_18",
+          "effects": [
+            {
+              "type": "immune",
+              "mode": "none",
+              "value": 0
+            }
+          ],
+          "desc": {
+            "en": "Gain Immunity to Debuffs for 1 turn at the start of battle",
+            "jp": "戦闘開始後、弱体効果免疫を1ターン間付与する。",
+            "kr": "전투 시작 후 1턴간 약화 효과 면역",
+            "zh": "开始战斗后，对弱化效果免疫，持续1回合"
+          }
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_18",
+          "effects": [
+            {
+              "type": "immune",
+              "mode": "none",
+              "value": 0
+            }
+          ],
+          "desc": {
+            "en": "Gain Immunity to Debuffs for 1 turn at the start of battle",
+            "jp": "戦闘開始後、弱体効果免疫を1ターン間付与する。",
+            "kr": "전투 시작 후 1턴간 약화 효과 면역",
+            "zh": "开始战斗后，对弱化效果免疫，持续1回合"
+          }
+        },
+        "4p": {
+          "buff": "BID_ITEM_UO_SET_18_1",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": 300
+            }
+          ],
+          "desc": {
+            "en": "Permanently reduces damage taken by 30% (Irremovable)",
+            "jp": "常に受けるダメージが\\n30%DOWNする。(解除不可)",
+            "kr": "상시 피해 감소 +30% (해제 불가)",
+            "zh": "常驻伤害减免+30%(无法解除)"
+          }
+        }
+      }
+    ]
+  },
+  "19": {
+    "name": {
+      "en": "Swiftness Set",
+      "jp": "機敏セット",
+      "kr": "기민 세트",
+      "zh": "敏捷套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_20",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_19",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "speed",
+              "mode": "rate",
+              "value": 1000
+            }
+          ],
+          "desc": {
+            "en": "Increases Speed proportional to missing Health",
+            "jp": "自分の残りHPが低いほど、スピードがUPする。",
+            "kr": "잃은 체력 비례 속도 증가",
+            "zh": "根据损失的生命值等比提升速度"
+          }
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_19",
+          "effects": [
+            {
+              "type": "stat_owner_lost_hp_rate",
+              "stat": "speed",
+              "mode": "rate",
+              "value": 1000
+            }
+          ],
+          "desc": {
+            "en": "Increases Speed proportional to missing Health (Maximum efficiency at 50% Health)",
+            "jp": "自分の残りHPが低いほど、\\nスピードがUPする。\\n(残りHP50%時に効果が最大になる)",
+            "kr": "잃은 체력 비례 속도 증가 (체력 50%에서 최대 효율)",
+            "zh": "根据已损失生命值提升速度(生命值50%时达到最大效率)"
+          }
+        },
+        "4p": null
+      }
+    ]
+  },
+  "20": {
+    "name": {
+      "en": "Weakness Set",
+      "jp": "弱点セット",
+      "kr": "약점 세트",
+      "zh": "弱点套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_21",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_20",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": -250
+            }
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with a debuff by 25%",
+            "jp": "弱体効果がある対象に与える\\nダメージが+25%UPする。",
+            "kr": "약화 효과를 지닌 대상에게 입히는 피해 +25%",
+            "zh": "对附带弱化效果的目标造成的伤害+25%"
+          }
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_20",
+          "effects": [
+            {
+              "type": "dmg_reduce",
+              "mode": "rate",
+              "value": -250
+            }
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with a debuff by 35%",
+            "jp": "弱体効果がある対象に与える\\nダメージが+35%UPする。",
+            "kr": "약화 효과를 지닌 대상에게 입히는 피해 +35%",
+            "zh": "对附带弱化效果的目标造成的伤害+35%"
+          }
+        },
+        "4p": null
+      }
+    ]
+  },
+  "21": {
+    "name": {
+      "en": "Augmentation Set",
+      "jp": "増強セット",
+      "kr": "증강 세트",
+      "zh": "加强套装"
+    },
+    "icon": "TI_Icon_Set_Enchant_22",
+    "tiers": [
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_21",
+          "effects": [
+            {
+              "type": "dmg",
+              "mode": "rate",
+              "value": 200
+            }
+          ],
+          "desc": {
+            "en": "Increases damage dealt while granted a buff by 20%",
+            "jp": "自分に強化効果がある場合、\\n与えるダメージが+20%UPする。",
+            "kr": "강화 효과를 지닌 상태에서 입히는 피해 +20%",
+            "zh": "附带强化效果时造成的伤害+20%"
+          }
+        },
+        "4p": null
+      },
+      {
+        "2p": {
+          "buff": "BID_ITEM_UO_SET_21",
+          "effects": [
+            {
+              "type": "dmg",
+              "mode": "rate",
+              "value": 200
+            }
+          ],
+          "desc": {
+            "en": "Increases damage dealt while granted a buff by 30%",
+            "jp": "自分に強化効果がある場合、\\n与えるダメージが+30%UPする。",
+            "kr": "강화 효과를 지닌 상태에서 입히는 피해 +30%",
+            "zh": "在附带强化效果状态下造成的伤害+30%"
+          }
+        },
+        "4p": null
+      }
+    ]
+  }
+}

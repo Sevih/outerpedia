@@ -1,0 +1,24 @@
+{
+  "Speed": {
+    "Weapon": [
+      {
+        "name": "Rampaging Caracal",
+        "mainStat": "ATK%"
+      }
+    ],
+    "Amulet": [
+      {
+        "name": "Absolute Music",
+        "mainStat": "SPD"
+      }
+    ],
+    "Set": [
+      "s4"
+    ],
+    "SubstatPrio": "$sdps",
+    "Note": "",
+    "Talisman": [
+      "$CPdps"
+    ]
+  }
+}
