@@ -148,6 +148,17 @@ git commit -m "data: patch <version> — <résumé>"
 git push                                 # 3. sur une branche → PR vers main
 ```
 
+> Première publication d'une branche : `git push -u origin <branche>`
+> (ou une fois pour toutes : `git config --global push.autoSetupRemote true`).
+>
+> **Ne PAS lancer `pnpm build` en local** : le build de prod est le travail de
+> la CI. En local, les types générés du dev (`.next/dev/types`, qui connaissent
+> les pages dev-only comme `/admin`) entrent en conflit avec ceux du build
+> (`.next/types`) → échec garanti, et le `.next/types` orphelin fait ensuite
+> échouer le typecheck du pre-push (remède : supprimer `.next/types`).
+> Si un build local est vraiment nécessaire : stopper le dev server, puis
+> `pnpm clean && pnpm build`.
+
 Ce qui se passe tout seul, dans l'ordre :
 
 1. **Au commit** (lefthook `pre-commit`) : prettier + eslint sur les fichiers
